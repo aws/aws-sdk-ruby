@@ -351,9 +351,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is used with the Amazon GameLift Servers FleetIQ and
-    # game server groups.**
-    #
     # Filters which game servers may be claimed when calling
     # `ClaimGameServer`.
     #
@@ -459,7 +456,14 @@ module Aws::GameLift
     #
     # @!attribute [rw] compute_status
     #   Current status of the compute. A compute must have an `ACTIVE`
-    #   status to host game sessions.
+    #   status to host game sessions. Valid values include `PENDING`,
+    #   `ACTIVE`, `TERMINATING`, and `IMPAIRED`.
+    #
+    #   <note markdown="1"> While the ComputeStatus enum type is valid for Container based
+    #   servers, the result may also include other non-enumerated string
+    #   values such as "Active" for fleets which are not Container-based.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -5966,9 +5970,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is used with the Amazon GameLift Servers FleetIQ and
-    # game server groups.**
-    #
     # Properties describing a game server that is running on an instance in
     # a game server group.
     #
@@ -6323,9 +6324,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is used with the Amazon GameLift Servers FleetIQ and
-    # game server groups.**
-    #
     # Properties that describe a game server group resource. A game server
     # group manages certain properties related to a corresponding Amazon EC2
     # Auto Scaling group.
@@ -6471,9 +6469,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is used with the Amazon GameLift Servers FleetIQ and
-    # game server groups.**
-    #
     # Configuration settings for intelligent automatic scaling that uses
     # target tracking. These settings are used to add an Auto Scaling policy
     # when creating the corresponding Auto Scaling group. After the Auto
@@ -6508,9 +6503,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is used with the Amazon GameLift Servers FleetIQ and
-    # game server groups.**
-    #
     # Additional properties, including status, that describe an EC2 instance
     # in a game server group. Instance configurations are set with game
     # server group properties (see `DescribeGameServerGroup` and with the
@@ -7605,9 +7597,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is used with the Amazon GameLift Servers FleetIQ and
-    # game server groups.**
-    #
     # An allowed instance type for a game server group. All game server
     # groups must have at least two instance types defined for it. Amazon
     # GameLift Servers FleetIQ periodically evaluates each defined instance
@@ -7751,9 +7740,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is used with the Amazon GameLift Servers FleetIQ and
-    # game server groups.**
-    #
     # An Amazon Elastic Compute Cloud launch template that contains
     # configuration settings and game server code to be deployed to all
     # instances in a game server group. The launch template is specified
@@ -11221,9 +11207,6 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # **This data type is used with the Amazon GameLift Servers FleetIQ and
-    # game server groups.**
-    #
     # Settings for a target-based scaling policy as part of a
     # [GameServerGroupAutoScalingPolicy][1] . These settings are used to
     # create a target-based policy that tracks the Amazon GameLift Servers

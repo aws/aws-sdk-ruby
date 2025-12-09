@@ -1098,10 +1098,10 @@ module Aws::CloudTrail
     #   account.
     #
     # @option params [String] :kms_key_id
-    #   Specifies the KMS key ID to use to encrypt the logs delivered by
-    #   CloudTrail. The value can be an alias name prefixed by `alias/`, a
-    #   fully specified ARN to an alias, a fully specified ARN to a key, or a
-    #   globally unique identifier.
+    #   Specifies the KMS key ID to use to encrypt the logs and digest files
+    #   delivered by CloudTrail. The value can be an alias name prefixed by
+    #   `alias/`, a fully specified ARN to an alias, a fully specified ARN to
+    #   a key, or a globally unique identifier.
     #
     #   CloudTrail also supports KMS multi-Region keys. For more information
     #   about multi-Region keys, see [Using multi-Region keys][1] in the *Key
@@ -1313,6 +1313,24 @@ module Aws::CloudTrail
     # which the trail was created. `DeleteTrail` cannot be called on the
     # shadow trails (replicated trails in other Regions) of a trail that is
     # enabled in all Regions.
+    #
+    # While deleting a CloudTrail trail is an irreversible action,
+    # CloudTrail does not delete log files in the Amazon S3 bucket for that
+    # trail, the Amazon S3 bucket itself, or the CloudWatchlog group to
+    # which the trail delivers events. Deleting a multi-Region trail will
+    # stop logging of events in all Amazon Web Services Regions enabled in
+    # your Amazon Web Services account. Deleting a single-Region trail will
+    # stop logging of events in that Region only. It will not stop logging
+    # of events in other Regions even if the trails in those other Regions
+    # have identical names to the deleted trail.
+    #
+    #  For information about account closure and deletion of CloudTrail
+    # trails, see
+    # [https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-account-closure.html][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-account-closure.html
     #
     # @option params [required, String] :name
     #   Specifies the name or the CloudTrail ARN of the trail to be deleted.
@@ -1796,8 +1814,13 @@ module Aws::CloudTrail
     end
 
     # Retrieves the current event configuration settings for the specified
-    # event data store, including details about maximum event size and
-    # context key selectors configured for the event data store.
+    # event data store or trail. The response includes maximum event size
+    # configuration, the context key selectors configured for the event data
+    # store, and any aggregation settings configured for the trail.
+    #
+    # @option params [String] :trail_name
+    #   The name of the trail for which you want to retrieve event
+    #   configuration settings.
     #
     # @option params [String] :event_data_store
     #   The Amazon Resource Name (ARN) or ID suffix of the ARN of the event
@@ -1806,24 +1829,32 @@ module Aws::CloudTrail
     #
     # @return [Types::GetEventConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetEventConfigurationResponse#trail_arn #trail_arn} => String
     #   * {Types::GetEventConfigurationResponse#event_data_store_arn #event_data_store_arn} => String
     #   * {Types::GetEventConfigurationResponse#max_event_size #max_event_size} => String
     #   * {Types::GetEventConfigurationResponse#context_key_selectors #context_key_selectors} => Array&lt;Types::ContextKeySelector&gt;
+    #   * {Types::GetEventConfigurationResponse#aggregation_configurations #aggregation_configurations} => Array&lt;Types::AggregationConfiguration&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_event_configuration({
+    #     trail_name: "String",
     #     event_data_store: "String",
     #   })
     #
     # @example Response structure
     #
+    #   resp.trail_arn #=> String
     #   resp.event_data_store_arn #=> String
     #   resp.max_event_size #=> String, one of "Standard", "Large"
     #   resp.context_key_selectors #=> Array
     #   resp.context_key_selectors[0].type #=> String, one of "TagContext", "RequestContext"
     #   resp.context_key_selectors[0].equals #=> Array
     #   resp.context_key_selectors[0].equals[0] #=> String
+    #   resp.aggregation_configurations #=> Array
+    #   resp.aggregation_configurations[0].templates #=> Array
+    #   resp.aggregation_configurations[0].templates[0] #=> String, one of "API_ACTIVITY", "RESOURCE_ACCESS", "USER_ACTIONS"
+    #   resp.aggregation_configurations[0].event_category #=> String, one of "Data"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventConfiguration AWS API Documentation
     #
@@ -2064,10 +2095,10 @@ module Aws::CloudTrail
 
     # Describes the settings for the Insights event selectors that you
     # configured for your trail or event data store. `GetInsightSelectors`
-    # shows if CloudTrail Insights event logging is enabled on the trail or
-    # event data store, and if it is, which Insights types are enabled. If
-    # you run `GetInsightSelectors` on a trail or event data store that does
-    # not have Insights events enabled, the operation throws the exception
+    # shows if CloudTrail Insights logging is enabled and which Insights
+    # types are configured with corresponding event categories. If you run
+    # `GetInsightSelectors` on a trail or event data store that does not
+    # have Insights events enabled, the operation throws the exception
     # `InsightNotEnabledException`
     #
     # Specify either the `EventDataStore` parameter to get Insights event
@@ -2129,6 +2160,8 @@ module Aws::CloudTrail
     #   resp.trail_arn #=> String
     #   resp.insight_selectors #=> Array
     #   resp.insight_selectors[0].insight_type #=> String, one of "ApiCallRateInsight", "ApiErrorRateInsight"
+    #   resp.insight_selectors[0].event_categories #=> Array
+    #   resp.insight_selectors[0].event_categories[0] #=> String, one of "Management", "Data"
     #   resp.event_data_store_arn #=> String
     #   resp.insights_destination #=> String
     #
@@ -2610,6 +2643,106 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Returns Insights events generated on a trail that logs data events.
+    # You can list Insights events that occurred in a Region within the last
+    # 90 days.
+    #
+    # ListInsightsData supports the following Dimensions for Insights
+    # events:
+    #
+    # * Event ID
+    #
+    # * Event name
+    #
+    # * Event source
+    #
+    # All dimensions are optional. The default number of results returned is
+    # 50, with a maximum of 50 possible. The response includes a token that
+    # you can use to get the next page of results.
+    #
+    # The rate of ListInsightsData requests is limited to two per second,
+    # per account, per Region. If this limit is exceeded, a throttling error
+    # occurs.
+    #
+    # @option params [required, String] :insight_source
+    #   The Amazon Resource Name(ARN) of the trail for which you want to
+    #   retrieve Insights events.
+    #
+    # @option params [required, String] :data_type
+    #   Specifies the category of events returned. To fetch Insights events,
+    #   specify `InsightsEvents` as the value of `DataType`
+    #
+    # @option params [Hash<String,String>] :dimensions
+    #   Contains a map of dimensions. Currently the map can contain only one
+    #   item.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   Specifies that only events that occur after or at the specified time
+    #   are returned. If the specified start time is after the specified end
+    #   time, an error is returned.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   Specifies that only events that occur before or at the specified time
+    #   are returned. If the specified end time is before the specified start
+    #   time, an error is returned.
+    #
+    # @option params [Integer] :max_results
+    #   The number of events to return. Possible values are 1 through 50. The
+    #   default is 50.
+    #
+    # @option params [String] :next_token
+    #   The token to use to get the next page of results after a previous API
+    #   call. This token must be passed in with the same parameters that were
+    #   specified in the original call. For example, if the original call
+    #   specified a EventName as a dimension with `PutObject` as a value, the
+    #   call with NextToken should include those same parameters.
+    #
+    # @return [Types::ListInsightsDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInsightsDataResponse#events #events} => Array&lt;Types::Event&gt;
+    #   * {Types::ListInsightsDataResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_insights_data({
+    #     insight_source: "ResourceArn", # required
+    #     data_type: "InsightsEvents", # required, accepts InsightsEvents
+    #     dimensions: {
+    #       "EventId" => "ListInsightsDataDimensionValue",
+    #     },
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.events #=> Array
+    #   resp.events[0].event_id #=> String
+    #   resp.events[0].event_name #=> String
+    #   resp.events[0].read_only #=> String
+    #   resp.events[0].access_key_id #=> String
+    #   resp.events[0].event_time #=> Time
+    #   resp.events[0].event_source #=> String
+    #   resp.events[0].username #=> String
+    #   resp.events[0].resources #=> Array
+    #   resp.events[0].resources[0].resource_type #=> String
+    #   resp.events[0].resources[0].resource_name #=> String
+    #   resp.events[0].cloud_trail_event #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListInsightsData AWS API Documentation
+    #
+    # @overload list_insights_data(params = {})
+    # @param [Hash] params ({})
+    def list_insights_data(params = {}, options = {})
+      req = build_request(:list_insights_data, params)
+      req.send_request(options)
+    end
+
     # Returns Insights metrics data for trails that have enabled Insights.
     # The request must include the `EventSource`, `EventName`, and
     # `InsightType` parameters.
@@ -2629,9 +2762,28 @@ module Aws::CloudTrail
     # * Data points with a period of 3600 seconds (1 hour) are available for
     #   90 days.
     #
-    # Access to the `ListInsightsMetricData` API operation is linked to the
-    # `cloudtrail:LookupEvents` action. To use this operation, you must have
-    # permissions to perform the `cloudtrail:LookupEvents` action.
+    # To use `ListInsightsMetricData` operation, you must have the following
+    # permissions:
+    #
+    # * If `ListInsightsMetricData` is invoked with `TrailName` parameter,
+    #   access to the `ListInsightsMetricData` API operation is linked to
+    #   the `cloudtrail:LookupEvents` action and
+    #   `cloudtrail:ListInsightsData`. To use this operation, you must have
+    #   permissions to perform the `cloudtrail:LookupEvents` and
+    #   `cloudtrail:ListInsightsData` action on the specific trail.
+    #
+    # * If `ListInsightsMetricData` is invoked without `TrailName`
+    #   parameter, access to the `ListInsightsMetricData` API operation is
+    #   linked to the `cloudtrail:LookupEvents` action only. To use this
+    #   operation, you must have permissions to perform the
+    #   `cloudtrail:LookupEvents` action.
+    #
+    # @option params [String] :trail_name
+    #   The Amazon Resource Name(ARN) or name of the trail for which you want
+    #   to retrieve Insights metrics data. This parameter should only be
+    #   provided to fetch Insights metrics data generated on trails logging
+    #   data events. This parameter is not required for Insights metric data
+    #   generated on trails logging management events.
     #
     # @option params [required, String] :event_source
     #   The Amazon Web Services service to which the request was made, such as
@@ -2692,6 +2844,7 @@ module Aws::CloudTrail
     #
     # @return [Types::ListInsightsMetricDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::ListInsightsMetricDataResponse#trail_arn #trail_arn} => String
     #   * {Types::ListInsightsMetricDataResponse#event_source #event_source} => String
     #   * {Types::ListInsightsMetricDataResponse#event_name #event_name} => String
     #   * {Types::ListInsightsMetricDataResponse#insight_type #insight_type} => String
@@ -2705,6 +2858,7 @@ module Aws::CloudTrail
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_insights_metric_data({
+    #     trail_name: "String",
     #     event_source: "EventSource", # required
     #     event_name: "EventName", # required
     #     insight_type: "ApiCallRateInsight", # required, accepts ApiCallRateInsight, ApiErrorRateInsight
@@ -2719,6 +2873,7 @@ module Aws::CloudTrail
     #
     # @example Response structure
     #
+    #   resp.trail_arn #=> String
     #   resp.event_source #=> String
     #   resp.event_name #=> String
     #   resp.insight_type #=> String, one of "ApiCallRateInsight", "ApiErrorRateInsight"
@@ -3083,49 +3238,72 @@ module Aws::CloudTrail
     end
 
     # Updates the event configuration settings for the specified event data
-    # store. You can update the maximum event size and context key
-    # selectors.
+    # store or trail. This operation supports updating the maximum event
+    # size, adding or modifying context key selectors for event data store,
+    # and configuring aggregation settings for the trail.
+    #
+    # @option params [String] :trail_name
+    #   The name of the trail for which you want to update event configuration
+    #   settings.
     #
     # @option params [String] :event_data_store
     #   The Amazon Resource Name (ARN) or ID suffix of the ARN of the event
-    #   data store for which you want to update event configuration settings.
+    #   data store for which event configuration settings are updated.
     #
-    # @option params [required, String] :max_event_size
+    # @option params [String] :max_event_size
     #   The maximum allowed size for events to be stored in the specified
     #   event data store. If you are using context key selectors, MaxEventSize
     #   must be set to Large.
     #
-    # @option params [required, Array<Types::ContextKeySelector>] :context_key_selectors
+    # @option params [Array<Types::ContextKeySelector>] :context_key_selectors
     #   A list of context key selectors that will be included to provide
     #   enriched event data.
     #
+    # @option params [Array<Types::AggregationConfiguration>] :aggregation_configurations
+    #   The list of aggregation configurations that you want to configure for
+    #   the trail.
+    #
     # @return [Types::PutEventConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::PutEventConfigurationResponse#trail_arn #trail_arn} => String
     #   * {Types::PutEventConfigurationResponse#event_data_store_arn #event_data_store_arn} => String
     #   * {Types::PutEventConfigurationResponse#max_event_size #max_event_size} => String
     #   * {Types::PutEventConfigurationResponse#context_key_selectors #context_key_selectors} => Array&lt;Types::ContextKeySelector&gt;
+    #   * {Types::PutEventConfigurationResponse#aggregation_configurations #aggregation_configurations} => Array&lt;Types::AggregationConfiguration&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_event_configuration({
+    #     trail_name: "String",
     #     event_data_store: "String",
-    #     max_event_size: "Standard", # required, accepts Standard, Large
-    #     context_key_selectors: [ # required
+    #     max_event_size: "Standard", # accepts Standard, Large
+    #     context_key_selectors: [
     #       {
     #         type: "TagContext", # required, accepts TagContext, RequestContext
     #         equals: ["OperatorTargetListMember"], # required
+    #       },
+    #     ],
+    #     aggregation_configurations: [
+    #       {
+    #         templates: ["API_ACTIVITY"], # required, accepts API_ACTIVITY, RESOURCE_ACCESS, USER_ACTIONS
+    #         event_category: "Data", # required, accepts Data
     #       },
     #     ],
     #   })
     #
     # @example Response structure
     #
+    #   resp.trail_arn #=> String
     #   resp.event_data_store_arn #=> String
     #   resp.max_event_size #=> String, one of "Standard", "Large"
     #   resp.context_key_selectors #=> Array
     #   resp.context_key_selectors[0].type #=> String, one of "TagContext", "RequestContext"
     #   resp.context_key_selectors[0].equals #=> Array
     #   resp.context_key_selectors[0].equals[0] #=> String
+    #   resp.aggregation_configurations #=> Array
+    #   resp.aggregation_configurations[0].templates #=> Array
+    #   resp.aggregation_configurations[0].templates[0] #=> String, one of "API_ACTIVITY", "RESOURCE_ACCESS", "USER_ACTIONS"
+    #   resp.aggregation_configurations[0].event_category #=> String, one of "Data"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventConfiguration AWS API Documentation
     #
@@ -3346,12 +3524,18 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Lets you enable Insights event logging by specifying the Insights
-    # selectors that you want to enable on an existing trail or event data
-    # store. You also use `PutInsightSelectors` to turn off Insights event
-    # logging, by passing an empty list of Insights types. The valid
-    # Insights event types are `ApiErrorRateInsight` and
-    # `ApiCallRateInsight`.
+    # Lets you enable Insights event logging on specific event categories by
+    # specifying the Insights selectors that you want to enable on an
+    # existing trail or event data store. You also use `PutInsightSelectors`
+    # to turn off Insights event logging, by passing an empty list of
+    # Insights types. The valid Insights event types are
+    # `ApiErrorRateInsight` and `ApiCallRateInsight`, and valid
+    # EventCategories are `Management` and `Data`.
+    #
+    # <note markdown="1"> Insights on data events are not supported on event data stores. For
+    # event data stores, you can only enable Insights on management events.
+    #
+    #  </note>
     #
     # To enable Insights on an event data store, you must specify the ARNs
     # (or ID suffix of the ARNs) for the source event data store
@@ -3365,6 +3549,16 @@ module Aws::CloudTrail
     # To log Insights events for a trail, you must specify the name
     # (`TrailName`) of the CloudTrail trail for which you want to change or
     # add Insights selectors.
+    #
+    # * For Management events Insights: To log CloudTrail Insights on the
+    #   API call rate, the trail or event data store must log `write`
+    #   management events. To log CloudTrail Insights on the API error rate,
+    #   the trail or event data store must log `read` or `write` management
+    #   events.
+    #
+    # * For Data events Insights: To log CloudTrail Insights on the API call
+    #   rate or API error rate, the trail must log `read` or `write` data
+    #   events. Data events Insights are not supported on event data store.
     #
     # To log CloudTrail Insights events on API call volume, the trail or
     # event data store must log `write` management events. To log CloudTrail
@@ -3389,17 +3583,19 @@ module Aws::CloudTrail
     #   `InsightsDestination` parameters.
     #
     # @option params [required, Array<Types::InsightSelector>] :insight_selectors
-    #   A JSON string that contains the Insights types you want to log on a
-    #   trail or event data store. `ApiCallRateInsight` and
-    #   `ApiErrorRateInsight` are valid Insight types.
+    #   Contains the Insights types you want to log on a specific category of
+    #   events on a trail or event data store. `ApiCallRateInsight` and
+    #   `ApiErrorRateInsight` are valid Insight types.The EventCategory field
+    #   can specify `Management` or `Data` events or both. For event data
+    #   store, you can log Insights for management events only.
     #
     #   The `ApiCallRateInsight` Insights type analyzes write-only management
-    #   API calls that are aggregated per minute against a baseline API call
-    #   volume.
+    #   API calls or read and write data API calls that are aggregated per
+    #   minute against a baseline API call volume.
     #
-    #   The `ApiErrorRateInsight` Insights type analyzes management API calls
-    #   that result in error codes. The error is shown if the API call is
-    #   unsuccessful.
+    #   The `ApiErrorRateInsight` Insights type analyzes management and data
+    #   API calls that result in error codes. The error is shown if the API
+    #   call is unsuccessful.
     #
     # @option params [String] :event_data_store
     #   The ARN (or ID suffix of the ARN) of the source event data store for
@@ -3431,6 +3627,7 @@ module Aws::CloudTrail
     #     insight_selectors: [ # required
     #       {
     #         insight_type: "ApiCallRateInsight", # accepts ApiCallRateInsight, ApiErrorRateInsight
+    #         event_categories: ["Management"], # accepts Management, Data
     #       },
     #     ],
     #     event_data_store: "EventDataStoreArn",
@@ -3442,6 +3639,8 @@ module Aws::CloudTrail
     #   resp.trail_arn #=> String
     #   resp.insight_selectors #=> Array
     #   resp.insight_selectors[0].insight_type #=> String, one of "ApiCallRateInsight", "ApiErrorRateInsight"
+    #   resp.insight_selectors[0].event_categories #=> Array
+    #   resp.insight_selectors[0].event_categories[0] #=> String, one of "Management", "Data"
     #   resp.event_data_store_arn #=> String
     #   resp.insights_destination #=> String
     #
@@ -4569,10 +4768,10 @@ module Aws::CloudTrail
     #   account.
     #
     # @option params [String] :kms_key_id
-    #   Specifies the KMS key ID to use to encrypt the logs delivered by
-    #   CloudTrail. The value can be an alias name prefixed by "alias/", a
-    #   fully specified ARN to an alias, a fully specified ARN to a key, or a
-    #   globally unique identifier.
+    #   Specifies the KMS key ID to use to encrypt the logs and digest files
+    #   delivered by CloudTrail. The value can be an alias name prefixed by
+    #   "alias/", a fully specified ARN to an alias, a fully specified ARN
+    #   to a key, or a globally unique identifier.
     #
     #   CloudTrail also supports KMS multi-Region keys. For more information
     #   about multi-Region keys, see [Using multi-Region keys][1] in the *Key
@@ -4685,7 +4884,7 @@ module Aws::CloudTrail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.111.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

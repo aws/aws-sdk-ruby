@@ -306,9 +306,11 @@ module Aws::EMRServerless
 
     IdentityCenterConfiguration.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: IdentityCenterInstanceArn, location_name: "identityCenterInstanceArn"))
     IdentityCenterConfiguration.add_member(:identity_center_application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, location_name: "identityCenterApplicationArn"))
+    IdentityCenterConfiguration.add_member(:user_background_sessions_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "userBackgroundSessionsEnabled"))
     IdentityCenterConfiguration.struct_class = Types::IdentityCenterConfiguration
 
     IdentityCenterConfigurationInput.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: IdentityCenterInstanceArn, location_name: "identityCenterInstanceArn"))
+    IdentityCenterConfigurationInput.add_member(:user_background_sessions_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "userBackgroundSessionsEnabled"))
     IdentityCenterConfigurationInput.struct_class = Types::IdentityCenterConfigurationInput
 
     ImageConfiguration.add_member(:image_uri, Shapes::ShapeRef.new(shape: ImageUri, required: true, location_name: "imageUri"))

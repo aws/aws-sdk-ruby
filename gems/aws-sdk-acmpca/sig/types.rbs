@@ -65,8 +65,8 @@ module Aws::ACMPCA
     end
 
     class CertificateAuthorityConfiguration
-      attr_accessor key_algorithm: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1" | "SM2")
-      attr_accessor signing_algorithm: ("SHA256WITHECDSA" | "SHA384WITHECDSA" | "SHA512WITHECDSA" | "SHA256WITHRSA" | "SHA384WITHRSA" | "SHA512WITHRSA" | "SM3WITHSM2")
+      attr_accessor key_algorithm: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1" | "ML_DSA_44" | "ML_DSA_65" | "ML_DSA_87" | "SM2")
+      attr_accessor signing_algorithm: ("SHA256WITHECDSA" | "SHA384WITHECDSA" | "SHA512WITHECDSA" | "SHA256WITHRSA" | "SHA384WITHRSA" | "SHA512WITHRSA" | "SM3WITHSM2" | "ML_DSA_44" | "ML_DSA_65" | "ML_DSA_87")
       attr_accessor subject: Types::ASN1Subject
       attr_accessor csr_extensions: Types::CsrExtensions
       SENSITIVE: []
@@ -319,7 +319,7 @@ module Aws::ACMPCA
       attr_accessor api_passthrough: Types::ApiPassthrough
       attr_accessor certificate_authority_arn: ::String
       attr_accessor csr: ::String
-      attr_accessor signing_algorithm: ("SHA256WITHECDSA" | "SHA384WITHECDSA" | "SHA512WITHECDSA" | "SHA256WITHRSA" | "SHA384WITHRSA" | "SHA512WITHRSA" | "SM3WITHSM2")
+      attr_accessor signing_algorithm: ("SHA256WITHECDSA" | "SHA384WITHECDSA" | "SHA512WITHECDSA" | "SHA256WITHRSA" | "SHA384WITHRSA" | "SHA512WITHRSA" | "SM3WITHSM2" | "ML_DSA_44" | "ML_DSA_65" | "ML_DSA_87")
       attr_accessor template_arn: ::String
       attr_accessor validity: Types::Validity
       attr_accessor validity_not_before: Types::Validity

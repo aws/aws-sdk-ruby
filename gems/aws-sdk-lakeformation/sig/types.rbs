@@ -178,6 +178,7 @@ module Aws::LakeFormation
       attr_accessor instance_arn: ::String
       attr_accessor external_filtering: Types::ExternalFilteringConfiguration
       attr_accessor share_recipients: ::Array[Types::DataLakePrincipal]
+      attr_accessor service_integrations: ::Array[Types::ServiceIntegrationUnion]
       SENSITIVE: []
     end
 
@@ -332,6 +333,7 @@ module Aws::LakeFormation
       attr_accessor application_arn: ::String
       attr_accessor external_filtering: Types::ExternalFilteringConfiguration
       attr_accessor share_recipients: ::Array[Types::DataLakePrincipal]
+      attr_accessor service_integrations: ::Array[Types::ServiceIntegrationUnion]
       attr_accessor resource_share: ::String
       SENSITIVE: []
     end
@@ -869,6 +871,22 @@ module Aws::LakeFormation
       SENSITIVE: []
     end
 
+    class RedshiftConnect
+      attr_accessor authorization: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class RedshiftScopeUnion
+      attr_accessor redshift_connect: Types::RedshiftConnect
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RedshiftConnect < RedshiftScopeUnion
+      end
+      class Unknown < RedshiftScopeUnion
+      end
+    end
+
     class RegisterResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor use_service_linked_role: bool
@@ -972,6 +990,17 @@ module Aws::LakeFormation
       attr_accessor next_token: ::String
       attr_accessor table_list: ::Array[Types::TaggedTable]
       SENSITIVE: []
+    end
+
+    class ServiceIntegrationUnion
+      attr_accessor redshift: ::Array[Types::RedshiftScopeUnion]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Redshift < ServiceIntegrationUnion
+      end
+      class Unknown < ServiceIntegrationUnion
+      end
     end
 
     class StartQueryPlanningRequest
@@ -1111,6 +1140,7 @@ module Aws::LakeFormation
     class UpdateLakeFormationIdentityCenterConfigurationRequest
       attr_accessor catalog_id: ::String
       attr_accessor share_recipients: ::Array[Types::DataLakePrincipal]
+      attr_accessor service_integrations: ::Array[Types::ServiceIntegrationUnion]
       attr_accessor application_status: ("ENABLED" | "DISABLED")
       attr_accessor external_filtering: Types::ExternalFilteringConfiguration
       SENSITIVE: []

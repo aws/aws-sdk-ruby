@@ -192,25 +192,12 @@ module Aws::RDS
       data[:tag_list]
     end
 
-    # Reserved for future use.
-    # @return [String]
-    def db_system_id
-      data[:db_system_id]
-    end
-
     # The storage type associated with the DB cluster snapshot.
     #
     # This setting is only for Aurora DB clusters.
     # @return [String]
     def storage_type
       data[:storage_type]
-    end
-
-    # The resource ID of the DB cluster that this DB cluster snapshot was
-    # created from.
-    # @return [String]
-    def db_cluster_resource_id
-      data[:db_cluster_resource_id]
     end
 
     # The storage throughput for the DB cluster snapshot. The throughput is
@@ -221,6 +208,19 @@ module Aws::RDS
     # @return [Integer]
     def storage_throughput
       data[:storage_throughput]
+    end
+
+    # The resource ID of the DB cluster that this DB cluster snapshot was
+    # created from.
+    # @return [String]
+    def db_cluster_resource_id
+      data[:db_cluster_resource_id]
+    end
+
+    # Reserved for future use.
+    # @return [String]
+    def db_system_id
+      data[:db_system_id]
     end
 
     # @!endgroup
@@ -396,7 +396,7 @@ module Aws::RDS
     #   dbclustersnapshot = db_cluster_snapshot.copy({
     #     target_db_cluster_snapshot_identifier: "String", # required
     #     kms_key_id: "String",
-    #     pre_signed_url: "String",
+    #     pre_signed_url: "SensitiveString",
     #     copy_tags: false,
     #     tags: [
     #       {
@@ -589,12 +589,12 @@ module Aws::RDS
     #     storage_type: "String",
     #     iops: 1,
     #     publicly_accessible: false,
+    #     network_type: "String",
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
     #       seconds_until_auto_pause: 1,
     #     },
-    #     network_type: "String",
     #     rds_custom_cluster_configuration: {
     #       interconnect_subnet_id: "String",
     #       transit_gateway_multicast_domain_id: "String",
@@ -606,6 +606,17 @@ module Aws::RDS
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :availability_zones
@@ -957,16 +968,6 @@ module Aws::RDS
     #     attached to it, the DB cluster is public.
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
-    # @option options [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
-    #   Contains the scaling configuration of an Aurora Serverless v2 DB
-    #   cluster.
-    #
-    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
-    #   the *Amazon Aurora User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     # @option options [String] :network_type
     #   The network type of the DB cluster.
     #
@@ -988,6 +989,16 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    # @option options [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     # @option options [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
     #   Reserved for future use.
     # @option options [Integer] :monitoring_interval
@@ -1074,6 +1085,14 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   ^
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(snapshot_identifier: @snapshot_id)

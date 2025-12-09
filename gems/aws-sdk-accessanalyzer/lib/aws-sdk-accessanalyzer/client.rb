@@ -1345,6 +1345,10 @@ module Aws::AccessAnalyzer
 
     # Retrieves information about a resource that was analyzed.
     #
+    # <note markdown="1"> This action is supported only for external access analyzers.
+    #
+    #  </note>
+    #
     # @option params [required, String] :analyzer_arn
     #   The [ARN of the analyzer][1] to retrieve information from.
     #
@@ -1495,6 +1499,11 @@ module Aws::AccessAnalyzer
     # GetFindingV2 both use `access-analyzer:GetFinding` in the `Action`
     # element of an IAM policy statement. You must have permission to
     # perform the `access-analyzer:GetFinding` action.
+    #
+    # <note markdown="1"> GetFinding is supported only for external access analyzers. You must
+    # use GetFindingV2 for internal and unused access analyzers.
+    #
+    #  </note>
     #
     # @option params [required, String] :analyzer_arn
     #   The [ARN of the analyzer][1] that generated the finding.
@@ -1829,6 +1838,7 @@ module Aws::AccessAnalyzer
     #   resp.findings_statistics[0].external_access_findings_statistics.resource_type_statistics #=> Hash
     #   resp.findings_statistics[0].external_access_findings_statistics.resource_type_statistics["ResourceType"].total_active_public #=> Integer
     #   resp.findings_statistics[0].external_access_findings_statistics.resource_type_statistics["ResourceType"].total_active_cross_account #=> Integer
+    #   resp.findings_statistics[0].external_access_findings_statistics.resource_type_statistics["ResourceType"].total_active_errors #=> Integer
     #   resp.findings_statistics[0].external_access_findings_statistics.total_active_findings #=> Integer
     #   resp.findings_statistics[0].external_access_findings_statistics.total_archived_findings #=> Integer
     #   resp.findings_statistics[0].external_access_findings_statistics.total_resolved_findings #=> Integer
@@ -2237,6 +2247,11 @@ module Aws::AccessAnalyzer
     # findings, see [IAM Access Analyzer filter keys][1] in the **IAM User
     # Guide**.
     #
+    # <note markdown="1"> ListFindings is supported only for external access analyzers. You must
+    # use ListFindingsV2 for internal and unused access analyzers.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html
@@ -2547,6 +2562,10 @@ module Aws::AccessAnalyzer
     # Immediately starts a scan of the policies applied to the specified
     # resource.
     #
+    # <note markdown="1"> This action is supported only for external access analyzers.
+    #
+    #  </note>
+    #
     # @option params [required, String] :analyzer_arn
     #   The [ARN of the analyzer][1] to use to scan the policies applied to
     #   the specified resource.
@@ -2637,6 +2656,10 @@ module Aws::AccessAnalyzer
     end
 
     # Modifies the configuration of an existing analyzer.
+    #
+    # <note markdown="1"> This action is not supported for external access analyzers.
+    #
+    #  </note>
     #
     # @option params [required, String] :analyzer_name
     #   The name of the analyzer to modify.
@@ -2913,7 +2936,7 @@ module Aws::AccessAnalyzer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-accessanalyzer'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

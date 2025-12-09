@@ -13,22 +13,22 @@ module Aws::CloudFrontKeyValueStore
   # @!attribute kvs_arn
   #   The ARN of the Key Value Store
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute region
   #   The AWS region used to dispatch the request.
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute use_fips
   #   When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute endpoint
   #   Override the endpoint used to send this request
   #
-  #   @return [String]
+  #   @return [string]
   #
   EndpointParameters = Struct.new(
     :kvs_arn,

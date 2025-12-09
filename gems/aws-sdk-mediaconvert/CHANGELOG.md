@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.174.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.173.0 (2025-11-13)
+------------------
+
+* Feature - Lowers minimum duration for black video generator. Adds support for embedding and signing C2PA content credentials in DASH and CMAF HLS outputs.
+
+1.172.0 (2025-10-31)
+------------------
+
+* Feature - Adds SlowPalPitchCorrection to audio pitch correction settings. Enables opacity for VideoOverlays. Adds REMUX_ALL option to enable multi-rendition passthrough to VideoSelector for allow listed accounts.
+
+1.171.0 (2025-10-21)
+------------------
+
+* Feature - This release adds the ability to set resolution for the black video generator and also adds the StartJobsQuery and GetJobsQueryResults APIs which allow asynchronous search of job history using new filters.
+
 1.170.0 (2025-08-26)
 ------------------
 

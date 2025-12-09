@@ -244,6 +244,12 @@ module Aws::CloudFormation
       data[:detailed_status]
     end
 
+    # Information about the most recent operations performed on this stack.
+    # @return [Array<Types::OperationEntry>]
+    def last_operations
+      data[:last_operations]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -612,22 +618,15 @@ module Aws::CloudFormation
     #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
     #   [12]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
     # @option options [Array<String>] :resource_types
-    #   The template resource types that you have permissions to work with for
-    #   this create stack action, such as `AWS::EC2::Instance`, `AWS::EC2::*`,
-    #   or `Custom::MyCustomInstance`. Use the following syntax to describe
-    #   template resource types: `AWS::*` (for all Amazon Web Services
-    #   resources), `Custom::*` (for all custom resources),
-    #   `Custom::logical_ID ` (for a specific custom resource),
-    #   `AWS::service_name::*` (for all resources of a particular Amazon Web
-    #   Services service), and `AWS::service_name::resource_logical_ID ` (for
-    #   a specific Amazon Web Services resource).
+    #   Specifies which resource types you can work with, such as
+    #   `AWS::EC2::Instance` or `Custom::MyCustomInstance`.
     #
     #   If the list of resource types doesn't include a resource that you're
     #   creating, the stack creation fails. By default, CloudFormation grants
     #   permissions to all resource types. IAM uses this parameter for
     #   CloudFormation-specific condition keys in IAM policies. For more
-    #   information, see [Control access with Identity and Access
-    #   Management][1].
+    #   information, see [Control CloudFormation access with Identity and
+    #   Access Management][1].
     #
     #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
     #   specified.
@@ -860,9 +859,19 @@ module Aws::CloudFormation
     #   Reuse the existing template that is associated with the stack that you
     #   are updating.
     #
+    #   When using templates with the `AWS::LanguageExtensions` transform,
+    #   provide the template instead of using `UsePreviousTemplate` to ensure
+    #   new parameter values and Systems Manager parameter updates are applied
+    #   correctly. For more information, see [AWS::LanguageExtensions
+    #   transform][1].
+    #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
     #   `true`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/transform-aws-languageextensions.html
     # @option options [String] :stack_policy_during_update_body
     #   Structure that contains the temporary overriding stack policy body.
     #   You can specify either the `StackPolicyDuringUpdateBody` or the
@@ -987,16 +996,15 @@ module Aws::CloudFormation
     #   [11]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html
     #   [12]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html
     # @option options [Array<String>] :resource_types
-    #   The template resource types that you have permissions to work with for
-    #   this update stack action, such as `AWS::EC2::Instance`, `AWS::EC2::*`,
-    #   or `Custom::MyCustomInstance`.
+    #   Specifies which resource types you can work with, such as
+    #   `AWS::EC2::Instance` or `Custom::MyCustomInstance`.
     #
     #   If the list of resource types doesn't include a resource that you're
     #   updating, the stack update fails. By default, CloudFormation grants
     #   permissions to all resource types. IAM uses this parameter for
     #   CloudFormation-specific condition keys in IAM policies. For more
-    #   information, see [Control access with Identity and Access
-    #   Management][1].
+    #   information, see [Control CloudFormation access with Identity and
+    #   Access Management][1].
     #
     #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
     #   specified.

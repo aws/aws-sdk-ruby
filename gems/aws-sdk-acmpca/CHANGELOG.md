@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.103.0 (2025-11-10)
+------------------
+
+* Feature - Private Certificate Authority service now supports ML-DSA key algorithms.
+
+1.102.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.101.0 (2025-10-16)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.100.0 (2025-08-27)
 ------------------
 

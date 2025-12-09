@@ -697,6 +697,7 @@ module Aws::EMRServerless
     #     },
     #     identity_center_configuration: {
     #       identity_center_instance_arn: "IdentityCenterInstanceArn",
+    #       user_background_sessions_enabled: false,
     #     },
     #   })
     #
@@ -811,6 +812,7 @@ module Aws::EMRServerless
     #   resp.application.scheduler_configuration.max_concurrent_runs #=> Integer
     #   resp.application.identity_center_configuration.identity_center_instance_arn #=> String
     #   resp.application.identity_center_configuration.identity_center_application_arn #=> String
+    #   resp.application.identity_center_configuration.user_background_sessions_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetApplication AWS API Documentation
     #
@@ -1605,6 +1607,7 @@ module Aws::EMRServerless
     #     },
     #     identity_center_configuration: {
     #       identity_center_instance_arn: "IdentityCenterInstanceArn",
+    #       user_background_sessions_enabled: false,
     #     },
     #   })
     #
@@ -1666,6 +1669,7 @@ module Aws::EMRServerless
     #   resp.application.scheduler_configuration.max_concurrent_runs #=> Integer
     #   resp.application.identity_center_configuration.identity_center_instance_arn #=> String
     #   resp.application.identity_center_configuration.identity_center_application_arn #=> String
+    #   resp.application.identity_center_configuration.user_background_sessions_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplication AWS API Documentation
     #
@@ -1694,7 +1698,7 @@ module Aws::EMRServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

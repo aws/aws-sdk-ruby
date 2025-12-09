@@ -34,12 +34,14 @@ module Aws::WorkSpacesWeb
     AssociateUserSettingsRequest = Shapes::StructureShape.new(name: 'AssociateUserSettingsRequest')
     AssociateUserSettingsResponse = Shapes::StructureShape.new(name: 'AssociateUserSettingsResponse')
     AuthenticationType = Shapes::StringShape.new(name: 'AuthenticationType')
+    BlockedCategories = Shapes::ListShape.new(name: 'BlockedCategories')
     BrowserPolicy = Shapes::StringShape.new(name: 'BrowserPolicy')
     BrowserSettings = Shapes::StructureShape.new(name: 'BrowserSettings')
     BrowserSettingsList = Shapes::ListShape.new(name: 'BrowserSettingsList')
     BrowserSettingsSummary = Shapes::StructureShape.new(name: 'BrowserSettingsSummary')
     BrowserType = Shapes::StringShape.new(name: 'BrowserType')
     BuiltInPatternId = Shapes::StringShape.new(name: 'BuiltInPatternId')
+    Category = Shapes::StringShape.new(name: 'Category')
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
     CertificateAuthorityBody = Shapes::BlobShape.new(name: 'CertificateAuthorityBody')
     CertificateList = Shapes::ListShape.new(name: 'CertificateList')
@@ -298,6 +300,8 @@ module Aws::WorkSpacesWeb
     UpdateUserAccessLoggingSettingsResponse = Shapes::StructureShape.new(name: 'UpdateUserAccessLoggingSettingsResponse')
     UpdateUserSettingsRequest = Shapes::StructureShape.new(name: 'UpdateUserSettingsRequest')
     UpdateUserSettingsResponse = Shapes::StructureShape.new(name: 'UpdateUserSettingsResponse')
+    UrlPattern = Shapes::StringShape.new(name: 'UrlPattern')
+    UrlPatternList = Shapes::ListShape.new(name: 'UrlPatternList')
     UserAccessLoggingSettings = Shapes::StructureShape.new(name: 'UserAccessLoggingSettings')
     UserAccessLoggingSettingsList = Shapes::ListShape.new(name: 'UserAccessLoggingSettingsList')
     UserAccessLoggingSettingsSummary = Shapes::StructureShape.new(name: 'UserAccessLoggingSettingsSummary')
@@ -311,6 +315,7 @@ module Aws::WorkSpacesWeb
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     VisualMode = Shapes::StringShape.new(name: 'VisualMode')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
+    WebContentFilteringPolicy = Shapes::StructureShape.new(name: 'WebContentFilteringPolicy')
     keyArn = Shapes::StringShape.new(name: 'keyArn')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
@@ -382,11 +387,14 @@ module Aws::WorkSpacesWeb
     AssociateUserSettingsResponse.add_member(:user_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "userSettingsArn"))
     AssociateUserSettingsResponse.struct_class = Types::AssociateUserSettingsResponse
 
+    BlockedCategories.member = Shapes::ShapeRef.new(shape: Category)
+
     BrowserSettings.add_member(:browser_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "browserSettingsArn"))
     BrowserSettings.add_member(:associated_portal_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "associatedPortalArns"))
     BrowserSettings.add_member(:browser_policy, Shapes::ShapeRef.new(shape: BrowserPolicy, location_name: "browserPolicy"))
     BrowserSettings.add_member(:customer_managed_key, Shapes::ShapeRef.new(shape: keyArn, location_name: "customerManagedKey"))
     BrowserSettings.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
+    BrowserSettings.add_member(:web_content_filtering_policy, Shapes::ShapeRef.new(shape: WebContentFilteringPolicy, location_name: "webContentFilteringPolicy"))
     BrowserSettings.struct_class = Types::BrowserSettings
 
     BrowserSettingsList.member = Shapes::ShapeRef.new(shape: BrowserSettingsSummary)
@@ -434,8 +442,9 @@ module Aws::WorkSpacesWeb
     CreateBrowserSettingsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateBrowserSettingsRequest.add_member(:customer_managed_key, Shapes::ShapeRef.new(shape: keyArn, location_name: "customerManagedKey"))
     CreateBrowserSettingsRequest.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
-    CreateBrowserSettingsRequest.add_member(:browser_policy, Shapes::ShapeRef.new(shape: BrowserPolicy, required: true, location_name: "browserPolicy"))
+    CreateBrowserSettingsRequest.add_member(:browser_policy, Shapes::ShapeRef.new(shape: BrowserPolicy, location_name: "browserPolicy"))
     CreateBrowserSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateBrowserSettingsRequest.add_member(:web_content_filtering_policy, Shapes::ShapeRef.new(shape: WebContentFilteringPolicy, location_name: "webContentFilteringPolicy"))
     CreateBrowserSettingsRequest.struct_class = Types::CreateBrowserSettingsRequest
 
     CreateBrowserSettingsResponse.add_member(:browser_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "browserSettingsArn"))
@@ -1116,6 +1125,7 @@ module Aws::WorkSpacesWeb
     UpdateBrowserSettingsRequest.add_member(:browser_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "browserSettingsArn"))
     UpdateBrowserSettingsRequest.add_member(:browser_policy, Shapes::ShapeRef.new(shape: BrowserPolicy, location_name: "browserPolicy"))
     UpdateBrowserSettingsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    UpdateBrowserSettingsRequest.add_member(:web_content_filtering_policy, Shapes::ShapeRef.new(shape: WebContentFilteringPolicy, location_name: "webContentFilteringPolicy"))
     UpdateBrowserSettingsRequest.struct_class = Types::UpdateBrowserSettingsRequest
 
     UpdateBrowserSettingsResponse.add_member(:browser_settings, Shapes::ShapeRef.new(shape: BrowserSettings, required: true, location_name: "browserSettings"))
@@ -1214,6 +1224,8 @@ module Aws::WorkSpacesWeb
     UpdateUserSettingsResponse.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettings, required: true, location_name: "userSettings"))
     UpdateUserSettingsResponse.struct_class = Types::UpdateUserSettingsResponse
 
+    UrlPatternList.member = Shapes::ShapeRef.new(shape: UrlPattern)
+
     UserAccessLoggingSettings.add_member(:user_access_logging_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "userAccessLoggingSettingsArn"))
     UserAccessLoggingSettings.add_member(:associated_portal_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "associatedPortalArns"))
     UserAccessLoggingSettings.add_member(:kinesis_stream_arn, Shapes::ShapeRef.new(shape: KinesisStreamArn, location_name: "kinesisStreamArn"))
@@ -1266,6 +1278,11 @@ module Aws::WorkSpacesWeb
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
+
+    WebContentFilteringPolicy.add_member(:blocked_categories, Shapes::ShapeRef.new(shape: BlockedCategories, location_name: "blockedCategories"))
+    WebContentFilteringPolicy.add_member(:allowed_urls, Shapes::ShapeRef.new(shape: UrlPatternList, location_name: "allowedUrls"))
+    WebContentFilteringPolicy.add_member(:blocked_urls, Shapes::ShapeRef.new(shape: UrlPatternList, location_name: "blockedUrls"))
+    WebContentFilteringPolicy.struct_class = Types::WebContentFilteringPolicy
 
 
     # @api private

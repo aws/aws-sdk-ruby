@@ -5453,6 +5453,10 @@ module Aws::WorkSpaces
     #   The IP address of the WorkSpace.
     #   @return [String]
     #
+    # @!attribute [rw] ipv_6_address
+    #   The IPv6 address of the WorkSpace.
+    #   @return [String]
+    #
     # @!attribute [rw] state
     #   The operational state of the WorkSpace.
     #
@@ -5582,6 +5586,7 @@ module Aws::WorkSpaces
       :directory_id,
       :user_name,
       :ip_address,
+      :ipv_6_address,
       :state,
       :bundle_id,
       :subnet_id,
@@ -5875,6 +5880,10 @@ module Aws::WorkSpaces
     #   The IP addresses of the DNS servers for the directory.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] dns_ipv_6_addresses
+    #   The IPv6 addresses of the DNS servers for the directory.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] customer_user_name
     #   The user name for the service account.
     #   @return [String]
@@ -6000,6 +6009,7 @@ module Aws::WorkSpaces
       :registration_code,
       :subnet_ids,
       :dns_ip_addresses,
+      :dns_ipv_6_addresses,
       :customer_user_name,
       :iam_role_id,
       :directory_type,
@@ -6262,6 +6272,10 @@ module Aws::WorkSpaces
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] ipv_6_address
+    #   The IPv6 address for the WorkSpace.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceRequest AWS API Documentation
     #
     class WorkspaceRequest < Struct.new(
@@ -6273,7 +6287,8 @@ module Aws::WorkSpaces
       :root_volume_encryption_enabled,
       :workspace_properties,
       :tags,
-      :workspace_name)
+      :workspace_name,
+      :ipv_6_address)
       SENSITIVE = []
       include Aws::Structure
     end

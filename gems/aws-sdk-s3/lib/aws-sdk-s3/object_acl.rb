@@ -42,7 +42,7 @@ module Aws::S3
       @object_key
     end
 
-    # Container for the bucket owner's display name and ID.
+    # Container for the bucket owner's ID.
     # @return [Types::Owner]
     def owner
       data[:owner]

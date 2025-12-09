@@ -947,6 +947,15 @@ module Aws::SecretsManager
     #   Specifies whether to overwrite a secret with the same name in the
     #   destination Region. By default, secrets aren't overwritten.
     #
+    # @option params [String] :type
+    #   The exact string that identifies the partner that holds the external
+    #   secret. For more information, see [Using Secrets Manager managed
+    #   external secrets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/managed-external-secrets.html
+    #
     # @return [Types::CreateSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSecretResponse#arn #arn} => String
@@ -996,6 +1005,7 @@ module Aws::SecretsManager
     #       },
     #     ],
     #     force_overwrite_replica_secret: false,
+    #     type: "MedeaTypeType",
     #   })
     #
     # @example Response structure
@@ -1257,11 +1267,14 @@ module Aws::SecretsManager
     #
     #   * {Types::DescribeSecretResponse#arn #arn} => String
     #   * {Types::DescribeSecretResponse#name #name} => String
+    #   * {Types::DescribeSecretResponse#type #type} => String
     #   * {Types::DescribeSecretResponse#description #description} => String
     #   * {Types::DescribeSecretResponse#kms_key_id #kms_key_id} => String
     #   * {Types::DescribeSecretResponse#rotation_enabled #rotation_enabled} => Boolean
     #   * {Types::DescribeSecretResponse#rotation_lambda_arn #rotation_lambda_arn} => String
     #   * {Types::DescribeSecretResponse#rotation_rules #rotation_rules} => Types::RotationRulesType
+    #   * {Types::DescribeSecretResponse#external_secret_rotation_metadata #external_secret_rotation_metadata} => Array&lt;Types::ExternalSecretRotationMetadataItem&gt;
+    #   * {Types::DescribeSecretResponse#external_secret_rotation_role_arn #external_secret_rotation_role_arn} => String
     #   * {Types::DescribeSecretResponse#last_rotated_date #last_rotated_date} => Time
     #   * {Types::DescribeSecretResponse#last_changed_date #last_changed_date} => Time
     #   * {Types::DescribeSecretResponse#last_accessed_date #last_accessed_date} => Time
@@ -1330,6 +1343,7 @@ module Aws::SecretsManager
     #
     #   resp.arn #=> String
     #   resp.name #=> String
+    #   resp.type #=> String
     #   resp.description #=> String
     #   resp.kms_key_id #=> String
     #   resp.rotation_enabled #=> Boolean
@@ -1337,6 +1351,10 @@ module Aws::SecretsManager
     #   resp.rotation_rules.automatically_after_days #=> Integer
     #   resp.rotation_rules.duration #=> String
     #   resp.rotation_rules.schedule_expression #=> String
+    #   resp.external_secret_rotation_metadata #=> Array
+    #   resp.external_secret_rotation_metadata[0].key #=> String
+    #   resp.external_secret_rotation_metadata[0].value #=> String
+    #   resp.external_secret_rotation_role_arn #=> String
     #   resp.last_rotated_date #=> Time
     #   resp.last_changed_date #=> Time
     #   resp.last_accessed_date #=> Time
@@ -1916,6 +1934,7 @@ module Aws::SecretsManager
     #   resp.secret_list #=> Array
     #   resp.secret_list[0].arn #=> String
     #   resp.secret_list[0].name #=> String
+    #   resp.secret_list[0].type #=> String
     #   resp.secret_list[0].description #=> String
     #   resp.secret_list[0].kms_key_id #=> String
     #   resp.secret_list[0].rotation_enabled #=> Boolean
@@ -1923,6 +1942,10 @@ module Aws::SecretsManager
     #   resp.secret_list[0].rotation_rules.automatically_after_days #=> Integer
     #   resp.secret_list[0].rotation_rules.duration #=> String
     #   resp.secret_list[0].rotation_rules.schedule_expression #=> String
+    #   resp.secret_list[0].external_secret_rotation_metadata #=> Array
+    #   resp.secret_list[0].external_secret_rotation_metadata[0].key #=> String
+    #   resp.secret_list[0].external_secret_rotation_metadata[0].value #=> String
+    #   resp.secret_list[0].external_secret_rotation_role_arn #=> String
     #   resp.secret_list[0].last_rotated_date #=> Time
     #   resp.secret_list[0].last_changed_date #=> Time
     #   resp.secret_list[0].last_accessed_date #=> Time
@@ -2056,18 +2079,17 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
-    # Creates a new version with a new encrypted secret value and attaches
-    # it to the secret. The version can contain a new `SecretString` value
-    # or a new `SecretBinary` value.
+    # Creates a new version of your secret by creating a new encrypted value
+    # and attaching it to the secret. version can contain a new
+    # `SecretString` value or a new `SecretBinary` value.
     #
-    # We recommend you avoid calling `PutSecretValue` at a sustained rate of
-    # more than once every 10 minutes. When you update the secret value,
-    # Secrets Manager creates a new version of the secret. Secrets Manager
-    # removes outdated versions when there are more than 100, but it does
-    # not remove versions created less than 24 hours ago. If you call
-    # `PutSecretValue` more than once every 10 minutes, you create more
-    # versions than Secrets Manager removes, and you will reach the quota
-    # for secret versions.
+    # Do not call `PutSecretValue` at a sustained rate of more than once
+    # every 10 minutes. When you update the secret value, Secrets Manager
+    # creates a new version of the secret. Secrets Manager keeps 100 of the
+    # most recent versions, but it keeps *all* secret versions created in
+    # the last 24 hours. If you call `PutSecretValue` more than once every
+    # 10 minutes, you will create more versions than Secrets Manager
+    # removes, and you will reach the quota for secret versions.
     #
     # You can specify the staging labels to attach to the new version in
     # `VersionStages`. If you don't include `VersionStages`, then Secrets
@@ -2207,12 +2229,14 @@ module Aws::SecretsManager
     #   automatically moves the staging label `AWSCURRENT` to this version.
     #
     # @option params [String] :rotation_token
-    #   A unique identifier that indicates the source of the request. For
-    #   cross-account rotation (when you rotate a secret in one account by
-    #   using a Lambda rotation function in another account) and the Lambda
-    #   rotation function assumes an IAM role to call Secrets Manager, Secrets
-    #   Manager validates the identity with the rotation token. For more
-    #   information, see [How rotation works][1].
+    #   A unique identifier that indicates the source of the request. Required
+    #   for secret rotations using an IAM assumed role or cross-account
+    #   rotation, in which you rotate a secret in one account by using a
+    #   Lambda rotation function in another account. In both cases, the
+    #   rotation function assumes an IAM role to call Secrets Manager, and
+    #   then Secrets Manager validates the identity using the token. For more
+    #   information, see [How rotation works][1] and [Rotation by Lambda
+    #   functions][2].
     #
     #   Sensitive: This field contains sensitive information, so the service
     #   does not include it in CloudTrail log entries. If you create your own
@@ -2222,6 +2246,7 @@ module Aws::SecretsManager
     #
     #
     #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html
+    #   [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_lambda
     #
     # @return [Types::PutSecretValueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2596,22 +2621,62 @@ module Aws::SecretsManager
     # @option params [Types::RotationRulesType] :rotation_rules
     #   A structure that defines the rotation configuration for this secret.
     #
+    #   When changing an existing rotation schedule and setting
+    #   `RotateImmediately` to `false`:
+    #
+    #    * If using `AutomaticallyAfterDays` or a `ScheduleExpression` with
+    #     `rate()`, the previously scheduled rotation might still occur.
+    #
+    #   * To prevent unintended rotations, use a `ScheduleExpression` with
+    #     `cron()` for granular control over rotation windows.
+    #
+    # @option params [Array<Types::ExternalSecretRotationMetadataItem>] :external_secret_rotation_metadata
+    #   The metadata needed to successfully rotate a managed external secret.
+    #   A list of key value pairs in JSON format specified by the partner. For
+    #   more information about the required information, see [Using Secrets
+    #   Manager managed external secrets][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/managed-external-secrets.html
+    #
+    # @option params [String] :external_secret_rotation_role_arn
+    #   The Amazon Resource Name (ARN) of the role that allows Secrets Manager
+    #   to rotate a secret held by a third-party partner. For more
+    #   information, see [Security and permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-security.html
+    #
     # @option params [Boolean] :rotate_immediately
     #   Specifies whether to rotate the secret immediately or wait until the
     #   next scheduled rotation window. The rotation schedule is defined in
     #   RotateSecretRequest$RotationRules.
     #
-    #   For secrets that use a Lambda rotation function to rotate, if you
-    #   don't immediately rotate the secret, Secrets Manager tests the
+    #   The default for `RotateImmediately` is `true`. If you don't specify
+    #   this value, Secrets Manager rotates the secret immediately.
+    #
+    #   If you set `RotateImmediately` to `false`, Secrets Manager tests the
     #   rotation configuration by running the [ `testSecret` step][1] of the
-    #   Lambda rotation function. The test creates an `AWSPENDING` version of
+    #   Lambda rotation function. This test creates an `AWSPENDING` version of
     #   the secret and then removes it.
     #
-    #   By default, Secrets Manager rotates the secret immediately.
+    #   When changing an existing rotation schedule and setting
+    #   `RotateImmediately` to `false`:
+    #
+    #   * If using `AutomaticallyAfterDays` or a `ScheduleExpression` with
+    #     `rate()`, the previously scheduled rotation might still occur.
+    #
+    #   * To prevent unintended rotations, use a `ScheduleExpression` with
+    #     `cron()` for granular control over rotation windows.
+    #
+    #   Rotation is an asynchronous process. For more information, see [How
+    #   rotation works][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_lambda-functions.html#rotate-secrets_lambda-functions-code
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html
     #
     # @return [Types::RotateSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2669,6 +2734,13 @@ module Aws::SecretsManager
     #       duration: "DurationType",
     #       schedule_expression: "ScheduleExpressionType",
     #     },
+    #     external_secret_rotation_metadata: [
+    #       {
+    #         key: "ExternalSecretRotationMetadataItemKeyType",
+    #         value: "ExternalSecretRotationMetadataItemValueType",
+    #       },
+    #     ],
+    #     external_secret_rotation_role_arn: "RoleARNType",
     #     rotate_immediately: false,
     #   })
     #
@@ -2710,7 +2782,9 @@ module Aws::SecretsManager
     # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
-    #   The ARN of the primary secret.
+    #   The name of the secret or the replica ARN. The replica ARN is the same
+    #   as the original primary secret ARN expect the Region is changed to the
+    #   replica Region.
     #
     # @return [Types::StopReplicationToReplicaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3079,6 +3153,15 @@ module Aws::SecretsManager
     #   log entries, you must also avoid logging the information in this
     #   field.
     #
+    # @option params [String] :type
+    #   The exact string that identifies the third-party partner that holds
+    #   the external secret. For more information, see [Managed external
+    #   secret partners][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-partners.html
+    #
     # @return [Types::UpdateSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSecretResponse#arn #arn} => String
@@ -3144,6 +3227,7 @@ module Aws::SecretsManager
     #     kms_key_id: "KmsKeyIdType",
     #     secret_binary: "data",
     #     secret_string: "SecretStringType",
+    #     type: "MedeaTypeType",
     #   })
     #
     # @example Response structure
@@ -3424,7 +3508,7 @@ module Aws::SecretsManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.120.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

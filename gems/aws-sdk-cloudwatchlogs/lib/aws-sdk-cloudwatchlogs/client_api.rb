@@ -21,10 +21,13 @@ module Aws::CloudWatchLogs
     AccountPolicies = Shapes::ListShape.new(name: 'AccountPolicies')
     AccountPolicy = Shapes::StructureShape.new(name: 'AccountPolicy')
     AccountPolicyDocument = Shapes::StringShape.new(name: 'AccountPolicyDocument')
+    ActionStatus = Shapes::StringShape.new(name: 'ActionStatus')
     AddKeyEntries = Shapes::ListShape.new(name: 'AddKeyEntries')
     AddKeyEntry = Shapes::StructureShape.new(name: 'AddKeyEntry')
     AddKeyValue = Shapes::StringShape.new(name: 'AddKeyValue')
     AddKeys = Shapes::StructureShape.new(name: 'AddKeys')
+    AggregateLogGroupSummaries = Shapes::ListShape.new(name: 'AggregateLogGroupSummaries')
+    AggregateLogGroupSummary = Shapes::StructureShape.new(name: 'AggregateLogGroupSummary')
     AllowedActionForAllowVendedLogsDeliveryForResource = Shapes::StringShape.new(name: 'AllowedActionForAllowVendedLogsDeliveryForResource')
     AllowedFieldDelimiters = Shapes::ListShape.new(name: 'AllowedFieldDelimiters')
     AllowedFields = Shapes::ListShape.new(name: 'AllowedFields')
@@ -40,6 +43,8 @@ module Aws::CloudWatchLogs
     ApplyOnTransformedLogs = Shapes::BooleanShape.new(name: 'ApplyOnTransformedLogs')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociateKmsKeyRequest = Shapes::StructureShape.new(name: 'AssociateKmsKeyRequest')
+    AssociateSourceToS3TableIntegrationRequest = Shapes::StructureShape.new(name: 'AssociateSourceToS3TableIntegrationRequest')
+    AssociateSourceToS3TableIntegrationResponse = Shapes::StructureShape.new(name: 'AssociateSourceToS3TableIntegrationResponse')
     Baseline = Shapes::BooleanShape.new(name: 'Baseline')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CSV = Shapes::StructureShape.new(name: 'CSV')
@@ -64,11 +69,19 @@ module Aws::CloudWatchLogs
     CreateLogAnomalyDetectorResponse = Shapes::StructureShape.new(name: 'CreateLogAnomalyDetectorResponse')
     CreateLogGroupRequest = Shapes::StructureShape.new(name: 'CreateLogGroupRequest')
     CreateLogStreamRequest = Shapes::StructureShape.new(name: 'CreateLogStreamRequest')
+    CreateScheduledQueryRequest = Shapes::StructureShape.new(name: 'CreateScheduledQueryRequest')
+    CreateScheduledQueryResponse = Shapes::StructureShape.new(name: 'CreateScheduledQueryResponse')
     DashboardViewerPrincipals = Shapes::ListShape.new(name: 'DashboardViewerPrincipals')
     Data = Shapes::BlobShape.new(name: 'Data')
     DataAlreadyAcceptedException = Shapes::StructureShape.new(name: 'DataAlreadyAcceptedException')
     DataProtectionPolicyDocument = Shapes::StringShape.new(name: 'DataProtectionPolicyDocument')
     DataProtectionStatus = Shapes::StringShape.new(name: 'DataProtectionStatus')
+    DataSource = Shapes::StructureShape.new(name: 'DataSource')
+    DataSourceFilter = Shapes::StructureShape.new(name: 'DataSourceFilter')
+    DataSourceFilters = Shapes::ListShape.new(name: 'DataSourceFilters')
+    DataSourceName = Shapes::StringShape.new(name: 'DataSourceName')
+    DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
+    DataType = Shapes::StringShape.new(name: 'DataType')
     DateTimeConverter = Shapes::StructureShape.new(name: 'DateTimeConverter')
     Days = Shapes::IntegerShape.new(name: 'Days')
     DefaultValue = Shapes::FloatShape.new(name: 'DefaultValue')
@@ -92,9 +105,12 @@ module Aws::CloudWatchLogs
     DeleteQueryDefinitionResponse = Shapes::StructureShape.new(name: 'DeleteQueryDefinitionResponse')
     DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     DeleteRetentionPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRetentionPolicyRequest')
+    DeleteScheduledQueryRequest = Shapes::StructureShape.new(name: 'DeleteScheduledQueryRequest')
+    DeleteScheduledQueryResponse = Shapes::StructureShape.new(name: 'DeleteScheduledQueryResponse')
     DeleteSubscriptionFilterRequest = Shapes::StructureShape.new(name: 'DeleteSubscriptionFilterRequest')
     DeleteTransformerRequest = Shapes::StructureShape.new(name: 'DeleteTransformerRequest')
     DeleteWithKeys = Shapes::ListShape.new(name: 'DeleteWithKeys')
+    DeletionProtectionEnabled = Shapes::BooleanShape.new(name: 'DeletionProtectionEnabled')
     Delimiter = Shapes::StringShape.new(name: 'Delimiter')
     Deliveries = Shapes::ListShape.new(name: 'Deliveries')
     Delivery = Shapes::StructureShape.new(name: 'Delivery')
@@ -151,6 +167,7 @@ module Aws::CloudWatchLogs
     Description = Shapes::StringShape.new(name: 'Description')
     Destination = Shapes::StructureShape.new(name: 'Destination')
     DestinationArn = Shapes::StringShape.new(name: 'DestinationArn')
+    DestinationConfiguration = Shapes::StructureShape.new(name: 'DestinationConfiguration')
     DestinationField = Shapes::StringShape.new(name: 'DestinationField')
     DestinationName = Shapes::StringShape.new(name: 'DestinationName')
     Destinations = Shapes::ListShape.new(name: 'Destinations')
@@ -160,6 +177,8 @@ module Aws::CloudWatchLogs
     DimensionsKey = Shapes::StringShape.new(name: 'DimensionsKey')
     DimensionsValue = Shapes::StringShape.new(name: 'DimensionsValue')
     DisassociateKmsKeyRequest = Shapes::StructureShape.new(name: 'DisassociateKmsKeyRequest')
+    DisassociateSourceFromS3TableIntegrationRequest = Shapes::StructureShape.new(name: 'DisassociateSourceFromS3TableIntegrationRequest')
+    DisassociateSourceFromS3TableIntegrationResponse = Shapes::StructureShape.new(name: 'DisassociateSourceFromS3TableIntegrationResponse')
     Distribution = Shapes::StringShape.new(name: 'Distribution')
     DynamicTokenPosition = Shapes::IntegerShape.new(name: 'DynamicTokenPosition')
     EmitSystemFields = Shapes::ListShape.new(name: 'EmitSystemFields')
@@ -180,6 +199,8 @@ module Aws::CloudWatchLogs
     EventNumber = Shapes::IntegerShape.new(name: 'EventNumber')
     EventSource = Shapes::StringShape.new(name: 'EventSource')
     EventsLimit = Shapes::IntegerShape.new(name: 'EventsLimit')
+    ExecutionStatus = Shapes::StringShape.new(name: 'ExecutionStatus')
+    ExecutionStatusList = Shapes::ListShape.new(name: 'ExecutionStatusList')
     ExpectedRevisionId = Shapes::StringShape.new(name: 'ExpectedRevisionId')
     ExportDestinationBucket = Shapes::StringShape.new(name: 'ExportDestinationBucket')
     ExportDestinationPrefix = Shapes::StringShape.new(name: 'ExportDestinationPrefix')
@@ -197,6 +218,7 @@ module Aws::CloudWatchLogs
     FieldHeader = Shapes::StringShape.new(name: 'FieldHeader')
     FieldIndex = Shapes::StructureShape.new(name: 'FieldIndex')
     FieldIndexName = Shapes::StringShape.new(name: 'FieldIndexName')
+    FieldIndexNames = Shapes::ListShape.new(name: 'FieldIndexNames')
     FieldIndexes = Shapes::ListShape.new(name: 'FieldIndexes')
     FieldSelectionCriteria = Shapes::StringShape.new(name: 'FieldSelectionCriteria')
     FieldsData = Shapes::StructureShape.new(name: 'FieldsData')
@@ -228,6 +250,8 @@ module Aws::CloudWatchLogs
     GetLogAnomalyDetectorResponse = Shapes::StructureShape.new(name: 'GetLogAnomalyDetectorResponse')
     GetLogEventsRequest = Shapes::StructureShape.new(name: 'GetLogEventsRequest')
     GetLogEventsResponse = Shapes::StructureShape.new(name: 'GetLogEventsResponse')
+    GetLogFieldsRequest = Shapes::StructureShape.new(name: 'GetLogFieldsRequest')
+    GetLogFieldsResponse = Shapes::StructureShape.new(name: 'GetLogFieldsResponse')
     GetLogGroupFieldsRequest = Shapes::StructureShape.new(name: 'GetLogGroupFieldsRequest')
     GetLogGroupFieldsResponse = Shapes::StructureShape.new(name: 'GetLogGroupFieldsResponse')
     GetLogObjectRequest = Shapes::StructureShape.new(name: 'GetLogObjectRequest')
@@ -237,15 +261,25 @@ module Aws::CloudWatchLogs
     GetLogRecordResponse = Shapes::StructureShape.new(name: 'GetLogRecordResponse')
     GetQueryResultsRequest = Shapes::StructureShape.new(name: 'GetQueryResultsRequest')
     GetQueryResultsResponse = Shapes::StructureShape.new(name: 'GetQueryResultsResponse')
+    GetScheduledQueryHistoryMaxResults = Shapes::IntegerShape.new(name: 'GetScheduledQueryHistoryMaxResults')
+    GetScheduledQueryHistoryRequest = Shapes::StructureShape.new(name: 'GetScheduledQueryHistoryRequest')
+    GetScheduledQueryHistoryResponse = Shapes::StructureShape.new(name: 'GetScheduledQueryHistoryResponse')
+    GetScheduledQueryRequest = Shapes::StructureShape.new(name: 'GetScheduledQueryRequest')
+    GetScheduledQueryResponse = Shapes::StructureShape.new(name: 'GetScheduledQueryResponse')
     GetTransformerRequest = Shapes::StructureShape.new(name: 'GetTransformerRequest')
     GetTransformerResponse = Shapes::StructureShape.new(name: 'GetTransformerResponse')
     Grok = Shapes::StructureShape.new(name: 'Grok')
     GrokMatch = Shapes::StringShape.new(name: 'GrokMatch')
+    GroupingIdentifier = Shapes::StructureShape.new(name: 'GroupingIdentifier')
+    GroupingIdentifierKey = Shapes::StringShape.new(name: 'GroupingIdentifierKey')
+    GroupingIdentifierValue = Shapes::StringShape.new(name: 'GroupingIdentifierValue')
+    GroupingIdentifiers = Shapes::ListShape.new(name: 'GroupingIdentifiers')
     Histogram = Shapes::MapShape.new(name: 'Histogram')
     IncludeLinkedAccounts = Shapes::BooleanShape.new(name: 'IncludeLinkedAccounts')
     IndexPolicies = Shapes::ListShape.new(name: 'IndexPolicies')
     IndexPolicy = Shapes::StructureShape.new(name: 'IndexPolicy')
     IndexSource = Shapes::StringShape.new(name: 'IndexSource')
+    IndexType = Shapes::StringShape.new(name: 'IndexType')
     InferredTokenName = Shapes::StringShape.new(name: 'InferredTokenName')
     InheritedProperties = Shapes::ListShape.new(name: 'InheritedProperties')
     InheritedProperty = Shapes::StringShape.new(name: 'InheritedProperty')
@@ -262,6 +296,7 @@ module Aws::CloudWatchLogs
     IntegrationSummary = Shapes::StructureShape.new(name: 'IntegrationSummary')
     IntegrationType = Shapes::StringShape.new(name: 'IntegrationType')
     Interleaved = Shapes::BooleanShape.new(name: 'Interleaved')
+    InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InternalStreamingException = Shapes::StructureShape.new(name: 'InternalStreamingException')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
@@ -272,6 +307,9 @@ module Aws::CloudWatchLogs
     KeyValueDelimiter = Shapes::StringShape.new(name: 'KeyValueDelimiter')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListAggregateLogGroupSummariesGroupBy = Shapes::StringShape.new(name: 'ListAggregateLogGroupSummariesGroupBy')
+    ListAggregateLogGroupSummariesRequest = Shapes::StructureShape.new(name: 'ListAggregateLogGroupSummariesRequest')
+    ListAggregateLogGroupSummariesResponse = Shapes::StructureShape.new(name: 'ListAggregateLogGroupSummariesResponse')
     ListAnomaliesLimit = Shapes::IntegerShape.new(name: 'ListAnomaliesLimit')
     ListAnomaliesRequest = Shapes::StructureShape.new(name: 'ListAnomaliesRequest')
     ListAnomaliesResponse = Shapes::StructureShape.new(name: 'ListAnomaliesResponse')
@@ -285,7 +323,14 @@ module Aws::CloudWatchLogs
     ListLogGroupsForQueryRequest = Shapes::StructureShape.new(name: 'ListLogGroupsForQueryRequest')
     ListLogGroupsForQueryResponse = Shapes::StructureShape.new(name: 'ListLogGroupsForQueryResponse')
     ListLogGroupsRequest = Shapes::StructureShape.new(name: 'ListLogGroupsRequest')
+    ListLogGroupsRequestLimit = Shapes::IntegerShape.new(name: 'ListLogGroupsRequestLimit')
     ListLogGroupsResponse = Shapes::StructureShape.new(name: 'ListLogGroupsResponse')
+    ListScheduledQueriesMaxResults = Shapes::IntegerShape.new(name: 'ListScheduledQueriesMaxResults')
+    ListScheduledQueriesRequest = Shapes::StructureShape.new(name: 'ListScheduledQueriesRequest')
+    ListScheduledQueriesResponse = Shapes::StructureShape.new(name: 'ListScheduledQueriesResponse')
+    ListSourcesForS3TableIntegrationMaxResults = Shapes::IntegerShape.new(name: 'ListSourcesForS3TableIntegrationMaxResults')
+    ListSourcesForS3TableIntegrationRequest = Shapes::StructureShape.new(name: 'ListSourcesForS3TableIntegrationRequest')
+    ListSourcesForS3TableIntegrationResponse = Shapes::StructureShape.new(name: 'ListSourcesForS3TableIntegrationResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTagsLogGroupRequest = Shapes::StructureShape.new(name: 'ListTagsLogGroupRequest')
@@ -299,10 +344,15 @@ module Aws::CloudWatchLogs
     Locale = Shapes::StringShape.new(name: 'Locale')
     LogEvent = Shapes::StructureShape.new(name: 'LogEvent')
     LogEventIndex = Shapes::IntegerShape.new(name: 'LogEventIndex')
+    LogFieldName = Shapes::StringShape.new(name: 'LogFieldName')
+    LogFieldType = Shapes::StructureShape.new(name: 'LogFieldType')
+    LogFieldsList = Shapes::ListShape.new(name: 'LogFieldsList')
+    LogFieldsListItem = Shapes::StructureShape.new(name: 'LogFieldsListItem')
     LogGroup = Shapes::StructureShape.new(name: 'LogGroup')
     LogGroupArn = Shapes::StringShape.new(name: 'LogGroupArn')
     LogGroupArnList = Shapes::ListShape.new(name: 'LogGroupArnList')
     LogGroupClass = Shapes::StringShape.new(name: 'LogGroupClass')
+    LogGroupCount = Shapes::IntegerShape.new(name: 'LogGroupCount')
     LogGroupField = Shapes::StructureShape.new(name: 'LogGroupField')
     LogGroupFieldList = Shapes::ListShape.new(name: 'LogGroupFieldList')
     LogGroupIdentifier = Shapes::StringShape.new(name: 'LogGroupIdentifier')
@@ -327,6 +377,7 @@ module Aws::CloudWatchLogs
     LowerCaseString = Shapes::StructureShape.new(name: 'LowerCaseString')
     LowerCaseStringWithKeys = Shapes::ListShape.new(name: 'LowerCaseStringWithKeys')
     MalformedQueryException = Shapes::StructureShape.new(name: 'MalformedQueryException')
+    MappingVersion = Shapes::StringShape.new(name: 'MappingVersion')
     MatchPattern = Shapes::StringShape.new(name: 'MatchPattern')
     MatchPatterns = Shapes::ListShape.new(name: 'MatchPatterns')
     Message = Shapes::StringShape.new(name: 'Message')
@@ -412,6 +463,7 @@ module Aws::CloudWatchLogs
     PutIntegrationResponse = Shapes::StructureShape.new(name: 'PutIntegrationResponse')
     PutLogEventsRequest = Shapes::StructureShape.new(name: 'PutLogEventsRequest')
     PutLogEventsResponse = Shapes::StructureShape.new(name: 'PutLogEventsResponse')
+    PutLogGroupDeletionProtectionRequest = Shapes::StructureShape.new(name: 'PutLogGroupDeletionProtectionRequest')
     PutMetricFilterRequest = Shapes::StructureShape.new(name: 'PutMetricFilterRequest')
     PutQueryDefinitionRequest = Shapes::StructureShape.new(name: 'PutQueryDefinitionRequest')
     PutQueryDefinitionResponse = Shapes::StructureShape.new(name: 'PutQueryDefinitionResponse')
@@ -458,7 +510,26 @@ module Aws::CloudWatchLogs
     ResultField = Shapes::StructureShape.new(name: 'ResultField')
     ResultRows = Shapes::ListShape.new(name: 'ResultRows')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    S3Configuration = Shapes::StructureShape.new(name: 'S3Configuration')
     S3DeliveryConfiguration = Shapes::StructureShape.new(name: 'S3DeliveryConfiguration')
+    S3TableIntegrationSource = Shapes::StructureShape.new(name: 'S3TableIntegrationSource')
+    S3TableIntegrationSourceIdentifier = Shapes::StringShape.new(name: 'S3TableIntegrationSourceIdentifier')
+    S3TableIntegrationSourceStatus = Shapes::StringShape.new(name: 'S3TableIntegrationSourceStatus')
+    S3TableIntegrationSourceStatusReason = Shapes::StringShape.new(name: 'S3TableIntegrationSourceStatusReason')
+    S3TableIntegrationSources = Shapes::ListShape.new(name: 'S3TableIntegrationSources')
+    S3Uri = Shapes::StringShape.new(name: 'S3Uri')
+    ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
+    ScheduleTimezone = Shapes::StringShape.new(name: 'ScheduleTimezone')
+    ScheduledQueryDescription = Shapes::StringShape.new(name: 'ScheduledQueryDescription')
+    ScheduledQueryDestination = Shapes::StructureShape.new(name: 'ScheduledQueryDestination')
+    ScheduledQueryDestinationList = Shapes::ListShape.new(name: 'ScheduledQueryDestinationList')
+    ScheduledQueryDestinationType = Shapes::StringShape.new(name: 'ScheduledQueryDestinationType')
+    ScheduledQueryIdentifier = Shapes::StringShape.new(name: 'ScheduledQueryIdentifier')
+    ScheduledQueryLogGroupIdentifiers = Shapes::ListShape.new(name: 'ScheduledQueryLogGroupIdentifiers')
+    ScheduledQueryName = Shapes::StringShape.new(name: 'ScheduledQueryName')
+    ScheduledQueryState = Shapes::StringShape.new(name: 'ScheduledQueryState')
+    ScheduledQuerySummary = Shapes::StructureShape.new(name: 'ScheduledQuerySummary')
+    ScheduledQuerySummaryList = Shapes::ListShape.new(name: 'ScheduledQuerySummaryList')
     Scope = Shapes::StringShape.new(name: 'Scope')
     SearchedLogStream = Shapes::StructureShape.new(name: 'SearchedLogStream')
     SearchedLogStreams = Shapes::ListShape.new(name: 'SearchedLogStreams')
@@ -484,11 +555,13 @@ module Aws::CloudWatchLogs
     StartLiveTailResponseStream = Shapes::StructureShape.new(name: 'StartLiveTailResponseStream')
     StartQueryRequest = Shapes::StructureShape.new(name: 'StartQueryRequest')
     StartQueryResponse = Shapes::StructureShape.new(name: 'StartQueryResponse')
+    StartTimeOffset = Shapes::IntegerShape.new(name: 'StartTimeOffset')
     State = Shapes::StringShape.new(name: 'State')
     StatsValue = Shapes::FloatShape.new(name: 'StatsValue')
     StopQueryRequest = Shapes::StructureShape.new(name: 'StopQueryRequest')
     StopQueryResponse = Shapes::StructureShape.new(name: 'StopQueryResponse')
     StoredBytes = Shapes::IntegerShape.new(name: 'StoredBytes')
+    String = Shapes::StringShape.new(name: 'String')
     SubscriptionFilter = Shapes::StructureShape.new(name: 'SubscriptionFilter')
     SubscriptionFilters = Shapes::ListShape.new(name: 'SubscriptionFilters')
     SubstituteString = Shapes::StructureShape.new(name: 'SubstituteString')
@@ -527,6 +600,8 @@ module Aws::CloudWatchLogs
     TransformedEventMessage = Shapes::StringShape.new(name: 'TransformedEventMessage')
     TransformedLogRecord = Shapes::StructureShape.new(name: 'TransformedLogRecord')
     TransformedLogs = Shapes::ListShape.new(name: 'TransformedLogs')
+    TriggerHistoryRecord = Shapes::StructureShape.new(name: 'TriggerHistoryRecord')
+    TriggerHistoryRecordList = Shapes::ListShape.new(name: 'TriggerHistoryRecordList')
     TrimString = Shapes::StructureShape.new(name: 'TrimString')
     TrimStringWithKeys = Shapes::ListShape.new(name: 'TrimStringWithKeys')
     Type = Shapes::StringShape.new(name: 'Type')
@@ -541,6 +616,8 @@ module Aws::CloudWatchLogs
     UpdateDeliveryConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateDeliveryConfigurationRequest')
     UpdateDeliveryConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateDeliveryConfigurationResponse')
     UpdateLogAnomalyDetectorRequest = Shapes::StructureShape.new(name: 'UpdateLogAnomalyDetectorRequest')
+    UpdateScheduledQueryRequest = Shapes::StructureShape.new(name: 'UpdateScheduledQueryRequest')
+    UpdateScheduledQueryResponse = Shapes::StructureShape.new(name: 'UpdateScheduledQueryResponse')
     UpperCaseString = Shapes::StructureShape.new(name: 'UpperCaseString')
     UpperCaseStringWithKeys = Shapes::ListShape.new(name: 'UpperCaseStringWithKeys')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -572,6 +649,12 @@ module Aws::CloudWatchLogs
 
     AddKeys.add_member(:entries, Shapes::ShapeRef.new(shape: AddKeyEntries, required: true, location_name: "entries"))
     AddKeys.struct_class = Types::AddKeys
+
+    AggregateLogGroupSummaries.member = Shapes::ShapeRef.new(shape: AggregateLogGroupSummary)
+
+    AggregateLogGroupSummary.add_member(:log_group_count, Shapes::ShapeRef.new(shape: LogGroupCount, location_name: "logGroupCount"))
+    AggregateLogGroupSummary.add_member(:grouping_identifiers, Shapes::ShapeRef.new(shape: GroupingIdentifiers, location_name: "groupingIdentifiers"))
+    AggregateLogGroupSummary.struct_class = Types::AggregateLogGroupSummary
 
     AllowedFieldDelimiters.member = Shapes::ShapeRef.new(shape: FieldDelimiter)
 
@@ -618,6 +701,13 @@ module Aws::CloudWatchLogs
     AssociateKmsKeyRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, required: true, location_name: "kmsKeyId"))
     AssociateKmsKeyRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier"))
     AssociateKmsKeyRequest.struct_class = Types::AssociateKmsKeyRequest
+
+    AssociateSourceToS3TableIntegrationRequest.add_member(:integration_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "integrationArn"))
+    AssociateSourceToS3TableIntegrationRequest.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "dataSource"))
+    AssociateSourceToS3TableIntegrationRequest.struct_class = Types::AssociateSourceToS3TableIntegrationRequest
+
+    AssociateSourceToS3TableIntegrationResponse.add_member(:identifier, Shapes::ShapeRef.new(shape: S3TableIntegrationSourceIdentifier, location_name: "identifier"))
+    AssociateSourceToS3TableIntegrationResponse.struct_class = Types::AssociateSourceToS3TableIntegrationResponse
 
     CSV.add_member(:quote_character, Shapes::ShapeRef.new(shape: QuoteCharacter, location_name: "quoteCharacter"))
     CSV.add_member(:delimiter, Shapes::ShapeRef.new(shape: Delimiter, location_name: "delimiter"))
@@ -700,16 +790,47 @@ module Aws::CloudWatchLogs
     CreateLogGroupRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     CreateLogGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateLogGroupRequest.add_member(:log_group_class, Shapes::ShapeRef.new(shape: LogGroupClass, location_name: "logGroupClass"))
+    CreateLogGroupRequest.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "deletionProtectionEnabled"))
     CreateLogGroupRequest.struct_class = Types::CreateLogGroupRequest
 
     CreateLogStreamRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     CreateLogStreamRequest.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: LogStreamName, required: true, location_name: "logStreamName"))
     CreateLogStreamRequest.struct_class = Types::CreateLogStreamRequest
 
+    CreateScheduledQueryRequest.add_member(:name, Shapes::ShapeRef.new(shape: ScheduledQueryName, required: true, location_name: "name"))
+    CreateScheduledQueryRequest.add_member(:description, Shapes::ShapeRef.new(shape: ScheduledQueryDescription, location_name: "description"))
+    CreateScheduledQueryRequest.add_member(:query_language, Shapes::ShapeRef.new(shape: QueryLanguage, required: true, location_name: "queryLanguage"))
+    CreateScheduledQueryRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "queryString"))
+    CreateScheduledQueryRequest.add_member(:log_group_identifiers, Shapes::ShapeRef.new(shape: ScheduledQueryLogGroupIdentifiers, location_name: "logGroupIdentifiers"))
+    CreateScheduledQueryRequest.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, required: true, location_name: "scheduleExpression"))
+    CreateScheduledQueryRequest.add_member(:timezone, Shapes::ShapeRef.new(shape: ScheduleTimezone, location_name: "timezone"))
+    CreateScheduledQueryRequest.add_member(:start_time_offset, Shapes::ShapeRef.new(shape: StartTimeOffset, location_name: "startTimeOffset"))
+    CreateScheduledQueryRequest.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, location_name: "destinationConfiguration"))
+    CreateScheduledQueryRequest.add_member(:schedule_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "scheduleStartTime"))
+    CreateScheduledQueryRequest.add_member(:schedule_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "scheduleEndTime"))
+    CreateScheduledQueryRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "executionRoleArn"))
+    CreateScheduledQueryRequest.add_member(:state, Shapes::ShapeRef.new(shape: ScheduledQueryState, location_name: "state"))
+    CreateScheduledQueryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateScheduledQueryRequest.struct_class = Types::CreateScheduledQueryRequest
+
+    CreateScheduledQueryResponse.add_member(:scheduled_query_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "scheduledQueryArn"))
+    CreateScheduledQueryResponse.add_member(:state, Shapes::ShapeRef.new(shape: ScheduledQueryState, location_name: "state"))
+    CreateScheduledQueryResponse.struct_class = Types::CreateScheduledQueryResponse
+
     DashboardViewerPrincipals.member = Shapes::ShapeRef.new(shape: Arn)
 
     DataAlreadyAcceptedException.add_member(:expected_sequence_token, Shapes::ShapeRef.new(shape: SequenceToken, location_name: "expectedSequenceToken"))
     DataAlreadyAcceptedException.struct_class = Types::DataAlreadyAcceptedException
+
+    DataSource.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, required: true, location_name: "name"))
+    DataSource.add_member(:type, Shapes::ShapeRef.new(shape: DataSourceType, location_name: "type"))
+    DataSource.struct_class = Types::DataSource
+
+    DataSourceFilter.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, required: true, location_name: "name"))
+    DataSourceFilter.add_member(:type, Shapes::ShapeRef.new(shape: DataSourceType, location_name: "type"))
+    DataSourceFilter.struct_class = Types::DataSourceFilter
+
+    DataSourceFilters.member = Shapes::ShapeRef.new(shape: DataSourceFilter)
 
     DateTimeConverter.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "source"))
     DateTimeConverter.add_member(:target, Shapes::ShapeRef.new(shape: Target, required: true, location_name: "target"))
@@ -783,6 +904,11 @@ module Aws::CloudWatchLogs
 
     DeleteRetentionPolicyRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     DeleteRetentionPolicyRequest.struct_class = Types::DeleteRetentionPolicyRequest
+
+    DeleteScheduledQueryRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ScheduledQueryIdentifier, required: true, location_name: "identifier"))
+    DeleteScheduledQueryRequest.struct_class = Types::DeleteScheduledQueryRequest
+
+    DeleteScheduledQueryResponse.struct_class = Types::DeleteScheduledQueryResponse
 
     DeleteSubscriptionFilterRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     DeleteSubscriptionFilterRequest.add_member(:filter_name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "filterName"))
@@ -1006,6 +1132,9 @@ module Aws::CloudWatchLogs
     Destination.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     Destination.struct_class = Types::Destination
 
+    DestinationConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3Configuration, required: true, location_name: "s3Configuration"))
+    DestinationConfiguration.struct_class = Types::DestinationConfiguration
+
     Destinations.member = Shapes::ShapeRef.new(shape: Destination)
 
     Dimensions.key = Shapes::ShapeRef.new(shape: DimensionsKey)
@@ -1014,6 +1143,12 @@ module Aws::CloudWatchLogs
     DisassociateKmsKeyRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
     DisassociateKmsKeyRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "resourceIdentifier"))
     DisassociateKmsKeyRequest.struct_class = Types::DisassociateKmsKeyRequest
+
+    DisassociateSourceFromS3TableIntegrationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: S3TableIntegrationSourceIdentifier, required: true, location_name: "identifier"))
+    DisassociateSourceFromS3TableIntegrationRequest.struct_class = Types::DisassociateSourceFromS3TableIntegrationRequest
+
+    DisassociateSourceFromS3TableIntegrationResponse.add_member(:identifier, Shapes::ShapeRef.new(shape: S3TableIntegrationSourceIdentifier, location_name: "identifier"))
+    DisassociateSourceFromS3TableIntegrationResponse.struct_class = Types::DisassociateSourceFromS3TableIntegrationResponse
 
     EmitSystemFields.member = Shapes::ShapeRef.new(shape: SystemField)
 
@@ -1029,6 +1164,8 @@ module Aws::CloudWatchLogs
 
     Enumerations.key = Shapes::ShapeRef.new(shape: TokenString)
     Enumerations.value = Shapes::ShapeRef.new(shape: TokenValue)
+
+    ExecutionStatusList.member = Shapes::ShapeRef.new(shape: ExecutionStatus)
 
     ExportTask.add_member(:task_id, Shapes::ShapeRef.new(shape: ExportTaskId, location_name: "taskId"))
     ExportTask.add_member(:task_name, Shapes::ShapeRef.new(shape: ExportTaskName, location_name: "taskName"))
@@ -1059,7 +1196,10 @@ module Aws::CloudWatchLogs
     FieldIndex.add_member(:last_scan_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastScanTime"))
     FieldIndex.add_member(:first_event_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "firstEventTime"))
     FieldIndex.add_member(:last_event_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastEventTime"))
+    FieldIndex.add_member(:type, Shapes::ShapeRef.new(shape: IndexType, location_name: "type"))
     FieldIndex.struct_class = Types::FieldIndex
+
+    FieldIndexNames.member = Shapes::ShapeRef.new(shape: FieldIndexName)
 
     FieldIndexes.member = Shapes::ShapeRef.new(shape: FieldIndex)
 
@@ -1164,6 +1304,13 @@ module Aws::CloudWatchLogs
     GetLogEventsResponse.add_member(:next_backward_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextBackwardToken"))
     GetLogEventsResponse.struct_class = Types::GetLogEventsResponse
 
+    GetLogFieldsRequest.add_member(:data_source_name, Shapes::ShapeRef.new(shape: DataSourceName, required: true, location_name: "dataSourceName"))
+    GetLogFieldsRequest.add_member(:data_source_type, Shapes::ShapeRef.new(shape: DataSourceType, required: true, location_name: "dataSourceType"))
+    GetLogFieldsRequest.struct_class = Types::GetLogFieldsRequest
+
+    GetLogFieldsResponse.add_member(:log_fields, Shapes::ShapeRef.new(shape: LogFieldsList, location_name: "logFields"))
+    GetLogFieldsResponse.struct_class = Types::GetLogFieldsResponse
+
     GetLogGroupFieldsRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
     GetLogGroupFieldsRequest.add_member(:time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "time"))
     GetLogGroupFieldsRequest.add_member(:log_group_identifier, Shapes::ShapeRef.new(shape: LogGroupIdentifier, location_name: "logGroupIdentifier"))
@@ -1200,6 +1347,43 @@ module Aws::CloudWatchLogs
     GetQueryResultsResponse.add_member(:encryption_key, Shapes::ShapeRef.new(shape: EncryptionKey, location_name: "encryptionKey"))
     GetQueryResultsResponse.struct_class = Types::GetQueryResultsResponse
 
+    GetScheduledQueryHistoryRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ScheduledQueryIdentifier, required: true, location_name: "identifier"))
+    GetScheduledQueryHistoryRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
+    GetScheduledQueryHistoryRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTime"))
+    GetScheduledQueryHistoryRequest.add_member(:execution_statuses, Shapes::ShapeRef.new(shape: ExecutionStatusList, location_name: "executionStatuses"))
+    GetScheduledQueryHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetScheduledQueryHistoryMaxResults, location_name: "maxResults"))
+    GetScheduledQueryHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetScheduledQueryHistoryRequest.struct_class = Types::GetScheduledQueryHistoryRequest
+
+    GetScheduledQueryHistoryResponse.add_member(:name, Shapes::ShapeRef.new(shape: ScheduledQueryName, location_name: "name"))
+    GetScheduledQueryHistoryResponse.add_member(:scheduled_query_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "scheduledQueryArn"))
+    GetScheduledQueryHistoryResponse.add_member(:trigger_history, Shapes::ShapeRef.new(shape: TriggerHistoryRecordList, location_name: "triggerHistory"))
+    GetScheduledQueryHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetScheduledQueryHistoryResponse.struct_class = Types::GetScheduledQueryHistoryResponse
+
+    GetScheduledQueryRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ScheduledQueryIdentifier, required: true, location_name: "identifier"))
+    GetScheduledQueryRequest.struct_class = Types::GetScheduledQueryRequest
+
+    GetScheduledQueryResponse.add_member(:scheduled_query_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "scheduledQueryArn"))
+    GetScheduledQueryResponse.add_member(:name, Shapes::ShapeRef.new(shape: ScheduledQueryName, location_name: "name"))
+    GetScheduledQueryResponse.add_member(:description, Shapes::ShapeRef.new(shape: ScheduledQueryDescription, location_name: "description"))
+    GetScheduledQueryResponse.add_member(:query_language, Shapes::ShapeRef.new(shape: QueryLanguage, location_name: "queryLanguage"))
+    GetScheduledQueryResponse.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, location_name: "queryString"))
+    GetScheduledQueryResponse.add_member(:log_group_identifiers, Shapes::ShapeRef.new(shape: ScheduledQueryLogGroupIdentifiers, location_name: "logGroupIdentifiers"))
+    GetScheduledQueryResponse.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "scheduleExpression"))
+    GetScheduledQueryResponse.add_member(:timezone, Shapes::ShapeRef.new(shape: ScheduleTimezone, location_name: "timezone"))
+    GetScheduledQueryResponse.add_member(:start_time_offset, Shapes::ShapeRef.new(shape: StartTimeOffset, location_name: "startTimeOffset"))
+    GetScheduledQueryResponse.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, location_name: "destinationConfiguration"))
+    GetScheduledQueryResponse.add_member(:state, Shapes::ShapeRef.new(shape: ScheduledQueryState, location_name: "state"))
+    GetScheduledQueryResponse.add_member(:last_triggered_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastTriggeredTime"))
+    GetScheduledQueryResponse.add_member(:last_execution_status, Shapes::ShapeRef.new(shape: ExecutionStatus, location_name: "lastExecutionStatus"))
+    GetScheduledQueryResponse.add_member(:schedule_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "scheduleStartTime"))
+    GetScheduledQueryResponse.add_member(:schedule_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "scheduleEndTime"))
+    GetScheduledQueryResponse.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "executionRoleArn"))
+    GetScheduledQueryResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
+    GetScheduledQueryResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedTime"))
+    GetScheduledQueryResponse.struct_class = Types::GetScheduledQueryResponse
+
     GetTransformerRequest.add_member(:log_group_identifier, Shapes::ShapeRef.new(shape: LogGroupIdentifier, required: true, location_name: "logGroupIdentifier"))
     GetTransformerRequest.struct_class = Types::GetTransformerRequest
 
@@ -1212,6 +1396,12 @@ module Aws::CloudWatchLogs
     Grok.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     Grok.add_member(:match, Shapes::ShapeRef.new(shape: GrokMatch, required: true, location_name: "match"))
     Grok.struct_class = Types::Grok
+
+    GroupingIdentifier.add_member(:key, Shapes::ShapeRef.new(shape: GroupingIdentifierKey, location_name: "key"))
+    GroupingIdentifier.add_member(:value, Shapes::ShapeRef.new(shape: GroupingIdentifierValue, location_name: "value"))
+    GroupingIdentifier.struct_class = Types::GroupingIdentifier
+
+    GroupingIdentifiers.member = Shapes::ShapeRef.new(shape: GroupingIdentifier)
 
     Histogram.key = Shapes::ShapeRef.new(shape: Time)
     Histogram.value = Shapes::ShapeRef.new(shape: Count)
@@ -1248,6 +1438,8 @@ module Aws::CloudWatchLogs
     IntegrationSummary.add_member(:integration_status, Shapes::ShapeRef.new(shape: IntegrationStatus, location_name: "integrationStatus"))
     IntegrationSummary.struct_class = Types::IntegrationSummary
 
+    InternalServerException.struct_class = Types::InternalServerException
+
     InternalStreamingException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     InternalStreamingException.struct_class = Types::InternalStreamingException
 
@@ -1259,6 +1451,20 @@ module Aws::CloudWatchLogs
     InvalidSequenceTokenException.struct_class = Types::InvalidSequenceTokenException
 
     LimitExceededException.struct_class = Types::LimitExceededException
+
+    ListAggregateLogGroupSummariesRequest.add_member(:account_identifiers, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIdentifiers"))
+    ListAggregateLogGroupSummariesRequest.add_member(:include_linked_accounts, Shapes::ShapeRef.new(shape: IncludeLinkedAccounts, location_name: "includeLinkedAccounts"))
+    ListAggregateLogGroupSummariesRequest.add_member(:log_group_class, Shapes::ShapeRef.new(shape: LogGroupClass, location_name: "logGroupClass"))
+    ListAggregateLogGroupSummariesRequest.add_member(:log_group_name_pattern, Shapes::ShapeRef.new(shape: LogGroupNameRegexPattern, location_name: "logGroupNamePattern"))
+    ListAggregateLogGroupSummariesRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceFilters, location_name: "dataSources"))
+    ListAggregateLogGroupSummariesRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: ListAggregateLogGroupSummariesGroupBy, required: true, location_name: "groupBy"))
+    ListAggregateLogGroupSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAggregateLogGroupSummariesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: ListLogGroupsRequestLimit, location_name: "limit"))
+    ListAggregateLogGroupSummariesRequest.struct_class = Types::ListAggregateLogGroupSummariesRequest
+
+    ListAggregateLogGroupSummariesResponse.add_member(:aggregate_log_group_summaries, Shapes::ShapeRef.new(shape: AggregateLogGroupSummaries, location_name: "aggregateLogGroupSummaries"))
+    ListAggregateLogGroupSummariesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAggregateLogGroupSummariesResponse.struct_class = Types::ListAggregateLogGroupSummariesResponse
 
     ListAnomaliesRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: AnomalyDetectorArn, location_name: "anomalyDetectorArn"))
     ListAnomaliesRequest.add_member(:suppression_state, Shapes::ShapeRef.new(shape: SuppressionState, location_name: "suppressionState"))
@@ -1302,11 +1508,31 @@ module Aws::CloudWatchLogs
     ListLogGroupsRequest.add_member(:account_identifiers, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIdentifiers"))
     ListLogGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListLogGroupsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: ListLimit, location_name: "limit"))
+    ListLogGroupsRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceFilters, location_name: "dataSources"))
+    ListLogGroupsRequest.add_member(:field_index_names, Shapes::ShapeRef.new(shape: FieldIndexNames, location_name: "fieldIndexNames"))
     ListLogGroupsRequest.struct_class = Types::ListLogGroupsRequest
 
     ListLogGroupsResponse.add_member(:log_groups, Shapes::ShapeRef.new(shape: LogGroupSummaries, location_name: "logGroups"))
     ListLogGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListLogGroupsResponse.struct_class = Types::ListLogGroupsResponse
+
+    ListScheduledQueriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListScheduledQueriesMaxResults, location_name: "maxResults"))
+    ListScheduledQueriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListScheduledQueriesRequest.add_member(:state, Shapes::ShapeRef.new(shape: ScheduledQueryState, location_name: "state"))
+    ListScheduledQueriesRequest.struct_class = Types::ListScheduledQueriesRequest
+
+    ListScheduledQueriesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListScheduledQueriesResponse.add_member(:scheduled_queries, Shapes::ShapeRef.new(shape: ScheduledQuerySummaryList, location_name: "scheduledQueries"))
+    ListScheduledQueriesResponse.struct_class = Types::ListScheduledQueriesResponse
+
+    ListSourcesForS3TableIntegrationRequest.add_member(:integration_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "integrationArn"))
+    ListSourcesForS3TableIntegrationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListSourcesForS3TableIntegrationMaxResults, location_name: "maxResults"))
+    ListSourcesForS3TableIntegrationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListSourcesForS3TableIntegrationRequest.struct_class = Types::ListSourcesForS3TableIntegrationRequest
+
+    ListSourcesForS3TableIntegrationResponse.add_member(:sources, Shapes::ShapeRef.new(shape: S3TableIntegrationSources, location_name: "sources"))
+    ListSourcesForS3TableIntegrationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListSourcesForS3TableIntegrationResponse.struct_class = Types::ListSourcesForS3TableIntegrationResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -1356,6 +1582,17 @@ module Aws::CloudWatchLogs
     LogEvent.add_member(:message, Shapes::ShapeRef.new(shape: EventMessage, location_name: "message"))
     LogEvent.struct_class = Types::LogEvent
 
+    LogFieldType.add_member(:type, Shapes::ShapeRef.new(shape: DataType, location_name: "type"))
+    LogFieldType.add_member(:element, Shapes::ShapeRef.new(shape: LogFieldType, location_name: "element"))
+    LogFieldType.add_member(:fields, Shapes::ShapeRef.new(shape: LogFieldsList, location_name: "fields"))
+    LogFieldType.struct_class = Types::LogFieldType
+
+    LogFieldsList.member = Shapes::ShapeRef.new(shape: LogFieldsListItem)
+
+    LogFieldsListItem.add_member(:log_field_name, Shapes::ShapeRef.new(shape: LogFieldName, location_name: "logFieldName"))
+    LogFieldsListItem.add_member(:log_field_type, Shapes::ShapeRef.new(shape: LogFieldType, location_name: "logFieldType"))
+    LogFieldsListItem.struct_class = Types::LogFieldsListItem
+
     LogGroup.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
     LogGroup.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     LogGroup.add_member(:retention_in_days, Shapes::ShapeRef.new(shape: Days, location_name: "retentionInDays"))
@@ -1367,6 +1604,7 @@ module Aws::CloudWatchLogs
     LogGroup.add_member(:inherited_properties, Shapes::ShapeRef.new(shape: InheritedProperties, location_name: "inheritedProperties"))
     LogGroup.add_member(:log_group_class, Shapes::ShapeRef.new(shape: LogGroupClass, location_name: "logGroupClass"))
     LogGroup.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "logGroupArn"))
+    LogGroup.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "deletionProtectionEnabled"))
     LogGroup.struct_class = Types::LogGroup
 
     LogGroupArnList.member = Shapes::ShapeRef.new(shape: LogGroupArn)
@@ -1550,6 +1788,7 @@ module Aws::CloudWatchLogs
     ParseToOCSF.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     ParseToOCSF.add_member(:event_source, Shapes::ShapeRef.new(shape: EventSource, required: true, location_name: "eventSource"))
     ParseToOCSF.add_member(:ocsf_version, Shapes::ShapeRef.new(shape: OCSFVersion, required: true, location_name: "ocsfVersion"))
+    ParseToOCSF.add_member(:mapping_version, Shapes::ShapeRef.new(shape: MappingVersion, location_name: "mappingVersion"))
     ParseToOCSF.struct_class = Types::ParseToOCSF
 
     ParseVPC.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
@@ -1683,6 +1922,10 @@ module Aws::CloudWatchLogs
     PutLogEventsResponse.add_member(:rejected_log_events_info, Shapes::ShapeRef.new(shape: RejectedLogEventsInfo, location_name: "rejectedLogEventsInfo"))
     PutLogEventsResponse.add_member(:rejected_entity_info, Shapes::ShapeRef.new(shape: RejectedEntityInfo, location_name: "rejectedEntityInfo"))
     PutLogEventsResponse.struct_class = Types::PutLogEventsResponse
+
+    PutLogGroupDeletionProtectionRequest.add_member(:log_group_identifier, Shapes::ShapeRef.new(shape: LogGroupIdentifier, required: true, location_name: "logGroupIdentifier"))
+    PutLogGroupDeletionProtectionRequest.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, required: true, location_name: "deletionProtectionEnabled"))
+    PutLogGroupDeletionProtectionRequest.struct_class = Types::PutLogGroupDeletionProtectionRequest
 
     PutMetricFilterRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     PutMetricFilterRequest.add_member(:filter_name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "filterName"))
@@ -1825,9 +2068,47 @@ module Aws::CloudWatchLogs
 
     ResultRows.member = Shapes::ShapeRef.new(shape: ResultField)
 
+    S3Configuration.add_member(:destination_identifier, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "destinationIdentifier"))
+    S3Configuration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    S3Configuration.struct_class = Types::S3Configuration
+
     S3DeliveryConfiguration.add_member(:suffix_path, Shapes::ShapeRef.new(shape: DeliverySuffixPath, location_name: "suffixPath"))
     S3DeliveryConfiguration.add_member(:enable_hive_compatible_path, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableHiveCompatiblePath", metadata: {"box" => true}))
     S3DeliveryConfiguration.struct_class = Types::S3DeliveryConfiguration
+
+    S3TableIntegrationSource.add_member(:identifier, Shapes::ShapeRef.new(shape: S3TableIntegrationSourceIdentifier, location_name: "identifier"))
+    S3TableIntegrationSource.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))
+    S3TableIntegrationSource.add_member(:status, Shapes::ShapeRef.new(shape: S3TableIntegrationSourceStatus, location_name: "status"))
+    S3TableIntegrationSource.add_member(:status_reason, Shapes::ShapeRef.new(shape: S3TableIntegrationSourceStatusReason, location_name: "statusReason"))
+    S3TableIntegrationSource.add_member(:created_time_stamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimeStamp"))
+    S3TableIntegrationSource.struct_class = Types::S3TableIntegrationSource
+
+    S3TableIntegrationSources.member = Shapes::ShapeRef.new(shape: S3TableIntegrationSource)
+
+    ScheduledQueryDestination.add_member(:destination_type, Shapes::ShapeRef.new(shape: ScheduledQueryDestinationType, location_name: "destinationType"))
+    ScheduledQueryDestination.add_member(:destination_identifier, Shapes::ShapeRef.new(shape: String, location_name: "destinationIdentifier"))
+    ScheduledQueryDestination.add_member(:status, Shapes::ShapeRef.new(shape: ActionStatus, location_name: "status"))
+    ScheduledQueryDestination.add_member(:processed_identifier, Shapes::ShapeRef.new(shape: String, location_name: "processedIdentifier"))
+    ScheduledQueryDestination.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    ScheduledQueryDestination.struct_class = Types::ScheduledQueryDestination
+
+    ScheduledQueryDestinationList.member = Shapes::ShapeRef.new(shape: ScheduledQueryDestination)
+
+    ScheduledQueryLogGroupIdentifiers.member = Shapes::ShapeRef.new(shape: LogGroupIdentifier)
+
+    ScheduledQuerySummary.add_member(:scheduled_query_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "scheduledQueryArn"))
+    ScheduledQuerySummary.add_member(:name, Shapes::ShapeRef.new(shape: ScheduledQueryName, location_name: "name"))
+    ScheduledQuerySummary.add_member(:state, Shapes::ShapeRef.new(shape: ScheduledQueryState, location_name: "state"))
+    ScheduledQuerySummary.add_member(:last_triggered_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastTriggeredTime"))
+    ScheduledQuerySummary.add_member(:last_execution_status, Shapes::ShapeRef.new(shape: ExecutionStatus, location_name: "lastExecutionStatus"))
+    ScheduledQuerySummary.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "scheduleExpression"))
+    ScheduledQuerySummary.add_member(:timezone, Shapes::ShapeRef.new(shape: ScheduleTimezone, location_name: "timezone"))
+    ScheduledQuerySummary.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, location_name: "destinationConfiguration"))
+    ScheduledQuerySummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
+    ScheduledQuerySummary.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedTime"))
+    ScheduledQuerySummary.struct_class = Types::ScheduledQuerySummary
+
+    ScheduledQuerySummaryList.member = Shapes::ShapeRef.new(shape: ScheduledQuerySummary)
 
     SearchedLogStream.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: LogStreamName, location_name: "logStreamName"))
     SearchedLogStream.add_member(:searched_completely, Shapes::ShapeRef.new(shape: LogStreamSearchedCompletely, location_name: "searchedCompletely"))
@@ -1962,6 +2243,15 @@ module Aws::CloudWatchLogs
 
     TransformedLogs.member = Shapes::ShapeRef.new(shape: TransformedLogRecord)
 
+    TriggerHistoryRecord.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "queryId"))
+    TriggerHistoryRecord.add_member(:execution_status, Shapes::ShapeRef.new(shape: ExecutionStatus, location_name: "executionStatus"))
+    TriggerHistoryRecord.add_member(:triggered_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "triggeredTimestamp"))
+    TriggerHistoryRecord.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    TriggerHistoryRecord.add_member(:destinations, Shapes::ShapeRef.new(shape: ScheduledQueryDestinationList, location_name: "destinations"))
+    TriggerHistoryRecord.struct_class = Types::TriggerHistoryRecord
+
+    TriggerHistoryRecordList.member = Shapes::ShapeRef.new(shape: TriggerHistoryRecord)
+
     TrimString.add_member(:with_keys, Shapes::ShapeRef.new(shape: TrimStringWithKeys, required: true, location_name: "withKeys"))
     TrimString.struct_class = Types::TrimString
 
@@ -2009,6 +2299,41 @@ module Aws::CloudWatchLogs
     UpdateLogAnomalyDetectorRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     UpdateLogAnomalyDetectorRequest.struct_class = Types::UpdateLogAnomalyDetectorRequest
 
+    UpdateScheduledQueryRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ScheduledQueryIdentifier, required: true, location_name: "identifier"))
+    UpdateScheduledQueryRequest.add_member(:description, Shapes::ShapeRef.new(shape: ScheduledQueryDescription, location_name: "description"))
+    UpdateScheduledQueryRequest.add_member(:query_language, Shapes::ShapeRef.new(shape: QueryLanguage, required: true, location_name: "queryLanguage"))
+    UpdateScheduledQueryRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "queryString"))
+    UpdateScheduledQueryRequest.add_member(:log_group_identifiers, Shapes::ShapeRef.new(shape: ScheduledQueryLogGroupIdentifiers, location_name: "logGroupIdentifiers"))
+    UpdateScheduledQueryRequest.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, required: true, location_name: "scheduleExpression"))
+    UpdateScheduledQueryRequest.add_member(:timezone, Shapes::ShapeRef.new(shape: ScheduleTimezone, location_name: "timezone"))
+    UpdateScheduledQueryRequest.add_member(:start_time_offset, Shapes::ShapeRef.new(shape: StartTimeOffset, location_name: "startTimeOffset"))
+    UpdateScheduledQueryRequest.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, location_name: "destinationConfiguration"))
+    UpdateScheduledQueryRequest.add_member(:schedule_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "scheduleStartTime"))
+    UpdateScheduledQueryRequest.add_member(:schedule_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "scheduleEndTime"))
+    UpdateScheduledQueryRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "executionRoleArn"))
+    UpdateScheduledQueryRequest.add_member(:state, Shapes::ShapeRef.new(shape: ScheduledQueryState, location_name: "state"))
+    UpdateScheduledQueryRequest.struct_class = Types::UpdateScheduledQueryRequest
+
+    UpdateScheduledQueryResponse.add_member(:scheduled_query_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "scheduledQueryArn"))
+    UpdateScheduledQueryResponse.add_member(:name, Shapes::ShapeRef.new(shape: ScheduledQueryName, location_name: "name"))
+    UpdateScheduledQueryResponse.add_member(:description, Shapes::ShapeRef.new(shape: ScheduledQueryDescription, location_name: "description"))
+    UpdateScheduledQueryResponse.add_member(:query_language, Shapes::ShapeRef.new(shape: QueryLanguage, location_name: "queryLanguage"))
+    UpdateScheduledQueryResponse.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, location_name: "queryString"))
+    UpdateScheduledQueryResponse.add_member(:log_group_identifiers, Shapes::ShapeRef.new(shape: ScheduledQueryLogGroupIdentifiers, location_name: "logGroupIdentifiers"))
+    UpdateScheduledQueryResponse.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "scheduleExpression"))
+    UpdateScheduledQueryResponse.add_member(:timezone, Shapes::ShapeRef.new(shape: ScheduleTimezone, location_name: "timezone"))
+    UpdateScheduledQueryResponse.add_member(:start_time_offset, Shapes::ShapeRef.new(shape: StartTimeOffset, location_name: "startTimeOffset"))
+    UpdateScheduledQueryResponse.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, location_name: "destinationConfiguration"))
+    UpdateScheduledQueryResponse.add_member(:state, Shapes::ShapeRef.new(shape: ScheduledQueryState, location_name: "state"))
+    UpdateScheduledQueryResponse.add_member(:last_triggered_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastTriggeredTime"))
+    UpdateScheduledQueryResponse.add_member(:last_execution_status, Shapes::ShapeRef.new(shape: ExecutionStatus, location_name: "lastExecutionStatus"))
+    UpdateScheduledQueryResponse.add_member(:schedule_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "scheduleStartTime"))
+    UpdateScheduledQueryResponse.add_member(:schedule_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "scheduleEndTime"))
+    UpdateScheduledQueryResponse.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "executionRoleArn"))
+    UpdateScheduledQueryResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
+    UpdateScheduledQueryResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedTime"))
+    UpdateScheduledQueryResponse.struct_class = Types::UpdateScheduledQueryResponse
+
     UpperCaseString.add_member(:with_keys, Shapes::ShapeRef.new(shape: UpperCaseStringWithKeys, required: true, location_name: "withKeys"))
     UpperCaseString.struct_class = Types::UpperCaseString
 
@@ -2046,6 +2371,19 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:associate_source_to_s3_table_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateSourceToS3TableIntegration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateSourceToS3TableIntegrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateSourceToS3TableIntegrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:cancel_export_task, Seahorse::Model::Operation.new.tap do |o|
@@ -2125,6 +2463,21 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:create_scheduled_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateScheduledQuery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateScheduledQueryRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateScheduledQueryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:delete_account_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -2264,6 +2617,7 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:delete_log_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -2276,6 +2630,7 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:delete_metric_filter, Seahorse::Model::Operation.new.tap do |o|
@@ -2323,6 +2678,19 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:delete_scheduled_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteScheduledQuery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteScheduledQueryRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteScheduledQueryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:delete_subscription_filter, Seahorse::Model::Operation.new.tap do |o|
@@ -2596,6 +2964,19 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:disassociate_source_from_s3_table_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateSourceFromS3TableIntegration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateSourceFromS3TableIntegrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateSourceFromS3TableIntegrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:filter_log_events, Seahorse::Model::Operation.new.tap do |o|
         o.name = "FilterLogEvents"
         o.http_method = "POST"
@@ -2715,6 +3096,18 @@ module Aws::CloudWatchLogs
         )
       end)
 
+      api.add_operation(:get_log_fields, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLogFields"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLogFieldsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLogFieldsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:get_log_group_fields, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetLogGroupFields"
         o.http_method = "POST"
@@ -2766,6 +3159,38 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:get_scheduled_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetScheduledQuery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetScheduledQueryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetScheduledQueryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_scheduled_query_history, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetScheduledQueryHistory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetScheduledQueryHistoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetScheduledQueryHistoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_transformer, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTransformer"
         o.http_method = "POST"
@@ -2776,6 +3201,17 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+      end)
+
+      api.add_operation(:list_aggregate_log_group_summaries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAggregateLogGroupSummaries"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAggregateLogGroupSummariesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAggregateLogGroupSummariesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:list_anomalies, Seahorse::Model::Operation.new.tap do |o|
@@ -2844,6 +3280,43 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_scheduled_queries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListScheduledQueries"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListScheduledQueriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListScheduledQueriesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_sources_for_s3_table_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSourcesForS3TableIntegration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSourcesForS3TableIntegrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSourcesForS3TableIntegrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2998,6 +3471,20 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: UnrecognizedClientException)
+      end)
+
+      api.add_operation(:put_log_group_deletion_protection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutLogGroupDeletionProtection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutLogGroupDeletionProtectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
       end)
 
       api.add_operation(:put_metric_filter, Seahorse::Model::Operation.new.tap do |o|
@@ -3220,6 +3707,19 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
+      end)
+
+      api.add_operation(:update_scheduled_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateScheduledQuery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateScheduledQueryRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateScheduledQueryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
     end
 

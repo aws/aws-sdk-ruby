@@ -485,6 +485,14 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-xks-keystore.html#xks-requirements
     #   @return [String]
     #
+    # @!attribute [rw] xks_proxy_vpc_endpoint_service_owner
+    #   Specifies the Amazon Web Services account ID that owns the Amazon
+    #   VPC service endpoint for the interface that is used to communicate
+    #   with your external key store proxy (XKS proxy). This parameter is
+    #   optional. If not provided, the Amazon Web Services account ID
+    #   calling the action will be used.
+    #   @return [String]
+    #
     # @!attribute [rw] xks_proxy_authentication_credential
     #   Specifies an authentication credential for the external key store
     #   proxy (XKS proxy). This parameter is required for all custom key
@@ -549,6 +557,7 @@ module Aws::KMS
       :xks_proxy_uri_endpoint,
       :xks_proxy_uri_path,
       :xks_proxy_vpc_endpoint_service_name,
+      :xks_proxy_vpc_endpoint_service_owner,
       :xks_proxy_authentication_credential,
       :xks_proxy_connectivity)
       SENSITIVE = [:key_store_password]
@@ -863,7 +872,7 @@ module Aws::KMS
     #   * For asymmetric KMS keys with RSA key pairs, specify
     #     `ENCRYPT_DECRYPT` or `SIGN_VERIFY`.
     #
-    #   * For asymmetric KMS keys with NIST-recommended elliptic curve key
+    #   * For asymmetric KMS keys with NIST-standard elliptic curve key
     #     pairs, specify `SIGN_VERIFY` or `KEY_AGREEMENT`.
     #
     #   * For asymmetric KMS keys with `ECC_SECG_P256K1` key pairs, specify
@@ -938,7 +947,7 @@ module Aws::KMS
     #     * `RSA_3072`
     #
     #     * `RSA_4096`
-    #   * Asymmetric NIST-recommended elliptic curve key pairs (signing and
+    #   * Asymmetric NIST-standard elliptic curve key pairs (signing and
     #     verification -or- deriving shared secrets)
     #
     #     * `ECC_NIST_P256` (secp256r1)
@@ -946,6 +955,19 @@ module Aws::KMS
     #     * `ECC_NIST_P384` (secp384r1)
     #
     #     * `ECC_NIST_P521` (secp521r1)
+    #
+    #     * `ECC_NIST_EDWARDS25519` (ed25519) - signing and verification
+    #       only
+    #
+    #       * **Note:** For ECC\_NIST\_EDWARDS25519 KMS keys, the
+    #         ED25519\_SHA\_512 signing algorithm requires [
+    #         `MessageType:RAW`
+    #         ](kms/latest/APIReference/API_Sign.html#KMS-Sign-request-MessageType),
+    #         while ED25519\_PH\_SHA\_512 requires [ `MessageType:DIGEST`
+    #         ](kms/latest/APIReference/API_Sign.html#KMS-Sign-request-MessageType).
+    #         These message types cannot be used interchangeably.
+    #
+    #       ^
     #   * Other asymmetric elliptic curve key pairs (signing and
     #     verification)
     #
@@ -1841,7 +1863,7 @@ module Aws::KMS
     end
 
     # @!attribute [rw] key_id
-    #   Identifies an asymmetric NIST-recommended ECC or SM2 (China Regions
+    #   Identifies an asymmetric NIST-standard ECC or SM2 (China Regions
     #   only) KMS key. KMS uses the private key in the specified key pair to
     #   derive the shared secret. The key usage of the KMS key must be
     #   `KEY_AGREEMENT`. To find the `KeyUsage` of a KMS key, use the
@@ -1873,7 +1895,7 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] public_key
-    #   Specifies the public key in your peer's NIST-recommended elliptic
+    #   Specifies the public key in your peer's NIST-standard elliptic
     #   curve (ECC) or SM2 (China Regions only) key pair.
     #
     #   The public key must be a DER-encoded X.509 public key, also known as
@@ -3971,6 +3993,13 @@ module Aws::KMS
     #   the parameter defaults to `NEW_KEY_MATERIAL`. After the first key
     #   material is imported, if this parameter is omitted then the
     #   parameter defaults to `EXISTING_KEY_MATERIAL`.
+    #
+    #   For multi-Region keys, you must first import new key material into
+    #   the primary Region key. You should use the `NEW_KEY_MATERIAL` import
+    #   type when importing key material into the primary Region key. Then,
+    #   you can import the same key material into the replica Region key.
+    #   The import type for the replica Region key should be
+    #   `EXISTING_KEY_MATERIAL`.
     #   @return [String]
     #
     # @!attribute [rw] key_material_description
@@ -4554,12 +4583,11 @@ module Aws::KMS
     #
     # @!attribute [rw] current_key_material_id
     #   Identifies the current key material. This value is present for
-    #   symmetric encryption keys with `AWS_KMS` origin and single-Region,
-    #   symmetric encryption keys with `EXTERNAL` origin. These KMS keys
-    #   support automatic or on-demand key rotation and can have multiple
-    #   key materials associated with them. KMS uses the current key
-    #   material for both encryption and decryption, and the non-current key
-    #   material for decryption operations only.
+    #   symmetric encryption keys with `AWS_KMS` or `EXTERNAL` origin. These
+    #   KMS keys support automatic or on-demand key rotation and can have
+    #   multiple key materials associated with them. KMS uses the current
+    #   key material for both encryption and decryption, and the non-current
+    #   key material for decryption operations only.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KeyMetadata AWS API Documentation
@@ -5979,15 +6007,24 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] key_material_state
-    #   There are three possible values for this field: `CURRENT`,
-    #   `NON_CURRENT` and `PENDING_ROTATION`. KMS uses `CURRENT` key
-    #   material for both encryption and decryption and `NON_CURRENT` key
-    #   material only for decryption. `PENDING_ROTATION` identifies key
-    #   material that has been imported for on-demand key rotation but the
-    #   rotation hasn't completed. Key material in `PENDING_ROTATION` is
-    #   not permanently associated with the KMS key. You can delete this key
-    #   material and import different key material in its place. The
-    #   `PENDING_ROTATION` value is only used in symmetric encryption keys
+    #   There are four possible values for this field: `CURRENT`,
+    #   `NON_CURRENT`, `PENDING_MULTI_REGION_IMPORT_AND_ROTATION` and
+    #   `PENDING_ROTATION`. KMS uses `CURRENT` key material for both
+    #   encryption and decryption and `NON_CURRENT` key material only for
+    #   decryption. `PENDING_ROTATION` identifies key material that has been
+    #   imported for on-demand key rotation but the rotation hasn't
+    #   completed. The key material state
+    #   `PENDING_MULTI_REGION_IMPORT_AND_ROTATION` is unique to
+    #   multi-region, symmetric encryption keys with imported key material.
+    #   It indicates key material that has been imported into the primary
+    #   Region key but not all of the replica Region keys. When this key
+    #   material is imported in to all of the replica Region keys, the key
+    #   material state will change to `PENDING_ROTATION`. Key material in
+    #   `PENDING_MULTI_REGION_IMPORT_AND_ROTATION` or `PENDING_ROTATION`
+    #   state is not permanently associated with the KMS key. You can delete
+    #   this key material and import different key material in its place.
+    #   The `PENDING_MULTI_REGION_IMPORT_AND_ROTATION` and
+    #   `PENDING_ROTATION` values are only used in symmetric encryption keys
     #   with imported key material. The other values, `CURRENT` and
     #   `NON_CURRENT`, are used for all KMS keys that support automatic or
     #   on-demand key rotation.
@@ -6188,6 +6225,13 @@ module Aws::KMS
     #   `Message` parameter is a message digest. If you use the `DIGEST`
     #   value with an unhashed message, the security of the signing
     #   operation can be compromised.
+    #
+    #   When using ECC\_NIST\_EDWARDS25519 KMS keys:
+    #
+    #   * ED25519\_SHA\_512 signing algorithm requires KMS `MessageType:RAW`
+    #
+    #   * ED25519\_PH\_SHA\_512 signing algorithm requires KMS
+    #     `MessageType:DIGEST`
     #
     #   When the value of `MessageType` is `DIGEST`, the length of the
     #   `Message` value must match the length of hashed messages for the
@@ -6596,6 +6640,16 @@ module Aws::KMS
     #   To change this value, the external key store must be disconnected.
     #   @return [String]
     #
+    # @!attribute [rw] xks_proxy_vpc_endpoint_service_owner
+    #   Changes the Amazon Web Services account ID that KMS uses to identify
+    #   the Amazon VPC endpoint service for your external key store proxy
+    #   (XKS proxy). This parameter is optional. If not specified, the
+    #   current Amazon Web Services account ID for the VPC endpoint service
+    #   will not be updated.
+    #
+    #   To change this value, the external key store must be disconnected.
+    #   @return [String]
+    #
     # @!attribute [rw] xks_proxy_authentication_credential
     #   Changes the credentials that KMS uses to sign requests to the
     #   external key store proxy (XKS proxy). This parameter is valid only
@@ -6643,6 +6697,7 @@ module Aws::KMS
       :xks_proxy_uri_endpoint,
       :xks_proxy_uri_path,
       :xks_proxy_vpc_endpoint_service_name,
+      :xks_proxy_vpc_endpoint_service_owner,
       :xks_proxy_authentication_credential,
       :xks_proxy_connectivity)
       SENSITIVE = [:key_store_password]
@@ -6871,6 +6926,13 @@ module Aws::KMS
     #   `Message` parameter is a message digest. If you use the `DIGEST`
     #   value with an unhashed message, the security of the signing
     #   operation can be compromised.
+    #
+    #   When using ECC\_NIST\_EDWARDS25519 KMS keys:
+    #
+    #   * ED25519\_SHA\_512 signing algorithm requires KMS `MessageType:RAW`
+    #
+    #   * ED25519\_PH\_SHA\_512 signing algorithm requires KMS
+    #     `MessageType:DIGEST`
     #
     #   When the value of `MessageType` is `DIGEST`, the length of the
     #   `Message` value must match the length of hashed messages for the
@@ -7141,6 +7203,13 @@ module Aws::KMS
     #   with KMS.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_endpoint_service_owner
+    #   The Amazon Web Services account ID that owns the Amazon VPC endpoint
+    #   service used to communicate with the external key store proxy (XKS).
+    #   This field appears only when the XKS uses an VPC endpoint service to
+    #   communicate with KMS.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/XksProxyConfigurationType AWS API Documentation
     #
     class XksProxyConfigurationType < Struct.new(
@@ -7148,7 +7217,8 @@ module Aws::KMS
       :access_key_id,
       :uri_endpoint,
       :uri_path,
-      :vpc_endpoint_service_name)
+      :vpc_endpoint_service_name,
+      :vpc_endpoint_service_owner)
       SENSITIVE = [:access_key_id]
       include Aws::Structure
     end

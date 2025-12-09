@@ -3794,15 +3794,26 @@ module Aws::SSM
     #     This type of OpsItem is used for default OpsItems created by
     #     OpsCenter.
     #
+    #   * `/aws/insight`
+    #
+    #     This type of OpsItem is used by OpsCenter for aggregating and
+    #     reporting on duplicate OpsItems.
+    #
     #   * `/aws/changerequest`
     #
     #     This type of OpsItem is used by Change Manager for reviewing and
     #     approving or rejecting change requests.
     #
-    #   * `/aws/insight`
+    #     Amazon Web Services Systems Manager Change Manager will no longer
+    #     be open to new customers starting November 7, 2025. If you would
+    #     like to use Change Manager, sign up prior to that date. Existing
+    #     customers can continue to use the service as normal. For more
+    #     information, see [Amazon Web Services Systems Manager Change
+    #     Manager availability change][1].
     #
-    #     This type of OpsItem is used by OpsCenter for aggregating and
-    #     reporting on duplicate OpsItems.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html
     #   @return [String]
     #
     # @!attribute [rw] operational_data
@@ -13625,6 +13636,19 @@ module Aws::SSM
     #
     class ModifyDocumentPermissionResponse < Aws::EmptyStructure; end
 
+    # The requested operation is no longer supported by Systems Manager.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/NoLongerSupportedException AWS API Documentation
+    #
+    class NoLongerSupportedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about an individual managed node.
     #
     # @!attribute [rw] capture_time
@@ -15674,6 +15698,11 @@ module Aws::SSM
     #   For example, a value of `7` means that patches are approved seven
     #   days after they are released.
     #
+    #   Patch Manager evaluates patch release dates using Coordinated
+    #   Universal Time (UTC). If the day represented by `7` is `2025-11-16`,
+    #   patches released between `2025-11-16T00:00:00Z` and
+    #   `2025-11-16T23:59:59Z` will be included in the approval.
+    #
     #   This parameter is marked as `Required: No`, but your request must
     #   include a value for either `ApproveAfterDays` or `ApproveUntilDate`.
     #
@@ -15696,7 +15725,12 @@ module Aws::SSM
     #   The cutoff date for auto approval of released patches. Any patches
     #   released on or before this date are installed automatically.
     #
-    #   Enter dates in the format `YYYY-MM-DD`. For example, `2024-12-31`.
+    #   Enter dates in the format `YYYY-MM-DD`. For example, `2025-11-16`.
+    #
+    #   Patch Manager evaluates patch release dates using Coordinated
+    #   Universal Time (UTC). If you enter the date `2025-11-16`, patches
+    #   released between `2025-11-16T00:00:00Z` and `2025-11-16T23:59:59Z`
+    #   will be included in the approval.
     #
     #   This parameter is marked as `Required: No`, but your request must
     #   include a value for either `ApproveUntilDate` or `ApproveAfterDays`.

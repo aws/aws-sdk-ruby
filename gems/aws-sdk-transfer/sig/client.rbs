@@ -144,7 +144,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#create_connector-instance_method
       def create_connector: (
-                              url: ::String,
+                              ?url: ::String,
                               ?as_2_config: {
                                 local_profile_id: ::String?,
                                 partner_profile_id: ::String?,
@@ -170,7 +170,13 @@ module Aws
                                 trusted_host_keys: Array[::String]?,
                                 max_concurrent_connections: ::Integer?
                               },
-                              ?security_policy_name: ::String
+                              ?security_policy_name: ::String,
+                              ?egress_config: {
+                                vpc_lattice: {
+                                  resource_configuration_arn: ::String,
+                                  port_number: ::Integer?
+                                }?
+                              }
                             ) -> _CreateConnectorResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectorResponseSuccess
 
@@ -313,7 +319,14 @@ module Aws
                                 value: ::String
                               },
                             ],
-                            ?web_app_endpoint_policy: ("FIPS" | "STANDARD")
+                            ?web_app_endpoint_policy: ("FIPS" | "STANDARD"),
+                            ?endpoint_details: {
+                              vpc: {
+                                subnet_ids: Array[::String]?,
+                                vpc_id: ::String?,
+                                security_group_ids: Array[::String]?
+                              }?
+                            }
                           ) -> _CreateWebAppResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWebAppResponseSuccess
 
@@ -1116,7 +1129,13 @@ module Aws
                                 trusted_host_keys: Array[::String]?,
                                 max_concurrent_connections: ::Integer?
                               },
-                              ?security_policy_name: ::String
+                              ?security_policy_name: ::String,
+                              ?egress_config: {
+                                vpc_lattice: {
+                                  resource_configuration_arn: ::String?,
+                                  port_number: ::Integer?
+                                }?
+                              }
                             ) -> _UpdateConnectorResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectorResponseSuccess
 
@@ -1197,7 +1216,8 @@ module Aws
                            ?s3_storage_options: {
                              directory_listing_optimization: ("ENABLED" | "DISABLED")?
                            },
-                           ?ip_address_type: ("IPV4" | "DUALSTACK")
+                           ?ip_address_type: ("IPV4" | "DUALSTACK"),
+                           ?identity_provider_type: ("SERVICE_MANAGED" | "API_GATEWAY" | "AWS_DIRECTORY_SERVICE" | "AWS_LAMBDA")
                          ) -> _UpdateServerResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServerResponseSuccess
 
@@ -1244,6 +1264,11 @@ module Aws
                             ?access_endpoint: ::String,
                             ?web_app_units: {
                               provisioned: ::Integer?
+                            },
+                            ?endpoint_details: {
+                              vpc: {
+                                subnet_ids: Array[::String]?
+                              }?
                             }
                           ) -> _UpdateWebAppResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWebAppResponseSuccess

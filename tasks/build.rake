@@ -80,3 +80,21 @@ task 'build:aws-sdk-ssooidc' => 'require-build-tools' do
     spec_writer.write_files(generator.spec_files)
   end
 end
+
+# Aws::Signin is generated directly into the `aws-sdk-core` gem.
+# Only building source, but not gemspecs, version file, etc.
+task 'build:aws-sdk-signin' => 'require-build-tools' do
+  signin = BuildTools::Services.service('signin')
+  generator = AwsSdkCodeGenerator::CodeBuilder.new(
+    aws_sdk_core_lib_path: $CORE_LIB,
+    service: signin,
+    client_examples: BuildTools.load_client_examples('signin'),
+    )
+  files = generator.source_files(prefix: 'aws-sdk-signin')
+  writer = BuildTools::FileWriter.new(directory: "#{$GEMS_DIR}/aws-sdk-core/lib")
+  writer.write_files(files)
+  unless signin.legacy_endpoints?
+    spec_writer = BuildTools::FileWriter.new(directory: "#{$GEMS_DIR}/aws-sdk-core/spec/aws/signin")
+    spec_writer.write_files(generator.spec_files)
+  end
+end

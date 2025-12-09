@@ -779,7 +779,7 @@ module Aws::WorkSpacesWeb
     # @option params [Hash<String,String>] :additional_encryption_context
     #   Additional encryption context of the browser settings.
     #
-    # @option params [required, String] :browser_policy
+    # @option params [String] :browser_policy
     #   A JSON string containing Chrome Enterprise policies that will be
     #   applied to all streaming sessions.
     #
@@ -795,6 +795,11 @@ module Aws::WorkSpacesWeb
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [Types::WebContentFilteringPolicy] :web_content_filtering_policy
+    #   The policy that specifies which URLs end users are allowed to access
+    #   or which URLs or domain categories they are restricted from accessing
+    #   for enhanced security.
     #
     # @return [Types::CreateBrowserSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -813,8 +818,13 @@ module Aws::WorkSpacesWeb
     #     additional_encryption_context: {
     #       "StringType" => "StringType",
     #     },
-    #     browser_policy: "BrowserPolicy", # required
+    #     browser_policy: "BrowserPolicy",
     #     client_token: "ClientToken",
+    #     web_content_filtering_policy: {
+    #       blocked_categories: ["Cults"], # accepts Cults, Gambling, Nudity, Pornography, SexEducation, Tasteless, Violence, DownloadSites, ImageSharing, PeerToPeer, StreamingMediaAndDownloads, GenerativeAI, CriminalActivity, Hacking, HateAndIntolerance, IllegalDrug, IllegalSoftware, SchoolCheating, SelfHarm, Weapons, Chat, Games, InstantMessaging, ProfessionalNetwork, SocialNetworking, WebBasedEmail, ParkedDomains
+    #       allowed_urls: ["UrlPattern"],
+    #       blocked_urls: ["UrlPattern"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -1397,7 +1407,7 @@ module Aws::WorkSpacesWeb
     #     event_filter: { # required
     #       all: {
     #       },
-    #       include: ["WebsiteInteract"], # accepts WebsiteInteract, FileDownloadFromSecureBrowserToRemoteDisk, FileTransferFromRemoteToLocalDisk, FileTransferFromLocalToRemoteDisk, FileUploadFromRemoteDiskToSecureBrowser, ContentPasteToWebsite, ContentTransferFromLocalToRemoteClipboard, ContentCopyFromWebsite, UrlLoad, TabOpen, TabClose, PrintJobSubmit, SessionConnect, SessionStart, SessionDisconnect, SessionEnd
+    #       include: ["WebsiteInteract"], # accepts WebsiteInteract, FileDownloadFromSecureBrowserToRemoteDisk, FileTransferFromRemoteToLocalDisk, FileTransferFromLocalToRemoteDisk, FileUploadFromRemoteDiskToSecureBrowser, ContentPasteToWebsite, ContentTransferFromLocalToRemoteClipboard, ContentCopyFromWebsite, UrlLoad, TabOpen, TabClose, PrintJobSubmit, SessionConnect, SessionStart, SessionDisconnect, SessionEnd, UrlBlockByContentFilter
     #     },
     #     log_configuration: { # required
     #       s3: {
@@ -2152,6 +2162,12 @@ module Aws::WorkSpacesWeb
     #   resp.browser_settings.customer_managed_key #=> String
     #   resp.browser_settings.additional_encryption_context #=> Hash
     #   resp.browser_settings.additional_encryption_context["StringType"] #=> String
+    #   resp.browser_settings.web_content_filtering_policy.blocked_categories #=> Array
+    #   resp.browser_settings.web_content_filtering_policy.blocked_categories[0] #=> String, one of "Cults", "Gambling", "Nudity", "Pornography", "SexEducation", "Tasteless", "Violence", "DownloadSites", "ImageSharing", "PeerToPeer", "StreamingMediaAndDownloads", "GenerativeAI", "CriminalActivity", "Hacking", "HateAndIntolerance", "IllegalDrug", "IllegalSoftware", "SchoolCheating", "SelfHarm", "Weapons", "Chat", "Games", "InstantMessaging", "ProfessionalNetwork", "SocialNetworking", "WebBasedEmail", "ParkedDomains"
+    #   resp.browser_settings.web_content_filtering_policy.allowed_urls #=> Array
+    #   resp.browser_settings.web_content_filtering_policy.allowed_urls[0] #=> String
+    #   resp.browser_settings.web_content_filtering_policy.blocked_urls #=> Array
+    #   resp.browser_settings.web_content_filtering_policy.blocked_urls[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetBrowserSettings AWS API Documentation
     #
@@ -2531,7 +2547,7 @@ module Aws::WorkSpacesWeb
     #
     #   resp.session_logger.session_logger_arn #=> String
     #   resp.session_logger.event_filter.include #=> Array
-    #   resp.session_logger.event_filter.include[0] #=> String, one of "WebsiteInteract", "FileDownloadFromSecureBrowserToRemoteDisk", "FileTransferFromRemoteToLocalDisk", "FileTransferFromLocalToRemoteDisk", "FileUploadFromRemoteDiskToSecureBrowser", "ContentPasteToWebsite", "ContentTransferFromLocalToRemoteClipboard", "ContentCopyFromWebsite", "UrlLoad", "TabOpen", "TabClose", "PrintJobSubmit", "SessionConnect", "SessionStart", "SessionDisconnect", "SessionEnd"
+    #   resp.session_logger.event_filter.include[0] #=> String, one of "WebsiteInteract", "FileDownloadFromSecureBrowserToRemoteDisk", "FileTransferFromRemoteToLocalDisk", "FileTransferFromLocalToRemoteDisk", "FileUploadFromRemoteDiskToSecureBrowser", "ContentPasteToWebsite", "ContentTransferFromLocalToRemoteClipboard", "ContentCopyFromWebsite", "UrlLoad", "TabOpen", "TabClose", "PrintJobSubmit", "SessionConnect", "SessionStart", "SessionDisconnect", "SessionEnd", "UrlBlockByContentFilter"
     #   resp.session_logger.log_configuration.s3.bucket #=> String
     #   resp.session_logger.log_configuration.s3.key_prefix #=> String
     #   resp.session_logger.log_configuration.s3.bucket_owner #=> String
@@ -3454,6 +3470,11 @@ module Aws::WorkSpacesWeb
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::WebContentFilteringPolicy] :web_content_filtering_policy
+    #   The policy that specifies which URLs end users are allowed to access
+    #   or which URLs or domain categories they are restricted from accessing
+    #   for enhanced security.
+    #
     # @return [Types::UpdateBrowserSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBrowserSettingsResponse#browser_settings #browser_settings} => Types::BrowserSettings
@@ -3464,6 +3485,11 @@ module Aws::WorkSpacesWeb
     #     browser_settings_arn: "ARN", # required
     #     browser_policy: "BrowserPolicy",
     #     client_token: "ClientToken",
+    #     web_content_filtering_policy: {
+    #       blocked_categories: ["Cults"], # accepts Cults, Gambling, Nudity, Pornography, SexEducation, Tasteless, Violence, DownloadSites, ImageSharing, PeerToPeer, StreamingMediaAndDownloads, GenerativeAI, CriminalActivity, Hacking, HateAndIntolerance, IllegalDrug, IllegalSoftware, SchoolCheating, SelfHarm, Weapons, Chat, Games, InstantMessaging, ProfessionalNetwork, SocialNetworking, WebBasedEmail, ParkedDomains
+    #       allowed_urls: ["UrlPattern"],
+    #       blocked_urls: ["UrlPattern"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -3475,6 +3501,12 @@ module Aws::WorkSpacesWeb
     #   resp.browser_settings.customer_managed_key #=> String
     #   resp.browser_settings.additional_encryption_context #=> Hash
     #   resp.browser_settings.additional_encryption_context["StringType"] #=> String
+    #   resp.browser_settings.web_content_filtering_policy.blocked_categories #=> Array
+    #   resp.browser_settings.web_content_filtering_policy.blocked_categories[0] #=> String, one of "Cults", "Gambling", "Nudity", "Pornography", "SexEducation", "Tasteless", "Violence", "DownloadSites", "ImageSharing", "PeerToPeer", "StreamingMediaAndDownloads", "GenerativeAI", "CriminalActivity", "Hacking", "HateAndIntolerance", "IllegalDrug", "IllegalSoftware", "SchoolCheating", "SelfHarm", "Weapons", "Chat", "Games", "InstantMessaging", "ProfessionalNetwork", "SocialNetworking", "WebBasedEmail", "ParkedDomains"
+    #   resp.browser_settings.web_content_filtering_policy.allowed_urls #=> Array
+    #   resp.browser_settings.web_content_filtering_policy.allowed_urls[0] #=> String
+    #   resp.browser_settings.web_content_filtering_policy.blocked_urls #=> Array
+    #   resp.browser_settings.web_content_filtering_policy.blocked_urls[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateBrowserSettings AWS API Documentation
     #
@@ -4035,7 +4067,7 @@ module Aws::WorkSpacesWeb
     #     event_filter: {
     #       all: {
     #       },
-    #       include: ["WebsiteInteract"], # accepts WebsiteInteract, FileDownloadFromSecureBrowserToRemoteDisk, FileTransferFromRemoteToLocalDisk, FileTransferFromLocalToRemoteDisk, FileUploadFromRemoteDiskToSecureBrowser, ContentPasteToWebsite, ContentTransferFromLocalToRemoteClipboard, ContentCopyFromWebsite, UrlLoad, TabOpen, TabClose, PrintJobSubmit, SessionConnect, SessionStart, SessionDisconnect, SessionEnd
+    #       include: ["WebsiteInteract"], # accepts WebsiteInteract, FileDownloadFromSecureBrowserToRemoteDisk, FileTransferFromRemoteToLocalDisk, FileTransferFromLocalToRemoteDisk, FileUploadFromRemoteDiskToSecureBrowser, ContentPasteToWebsite, ContentTransferFromLocalToRemoteClipboard, ContentCopyFromWebsite, UrlLoad, TabOpen, TabClose, PrintJobSubmit, SessionConnect, SessionStart, SessionDisconnect, SessionEnd, UrlBlockByContentFilter
     #     },
     #     log_configuration: {
     #       s3: {
@@ -4053,7 +4085,7 @@ module Aws::WorkSpacesWeb
     #
     #   resp.session_logger.session_logger_arn #=> String
     #   resp.session_logger.event_filter.include #=> Array
-    #   resp.session_logger.event_filter.include[0] #=> String, one of "WebsiteInteract", "FileDownloadFromSecureBrowserToRemoteDisk", "FileTransferFromRemoteToLocalDisk", "FileTransferFromLocalToRemoteDisk", "FileUploadFromRemoteDiskToSecureBrowser", "ContentPasteToWebsite", "ContentTransferFromLocalToRemoteClipboard", "ContentCopyFromWebsite", "UrlLoad", "TabOpen", "TabClose", "PrintJobSubmit", "SessionConnect", "SessionStart", "SessionDisconnect", "SessionEnd"
+    #   resp.session_logger.event_filter.include[0] #=> String, one of "WebsiteInteract", "FileDownloadFromSecureBrowserToRemoteDisk", "FileTransferFromRemoteToLocalDisk", "FileTransferFromLocalToRemoteDisk", "FileUploadFromRemoteDiskToSecureBrowser", "ContentPasteToWebsite", "ContentTransferFromLocalToRemoteClipboard", "ContentCopyFromWebsite", "UrlLoad", "TabOpen", "TabClose", "PrintJobSubmit", "SessionConnect", "SessionStart", "SessionDisconnect", "SessionEnd", "UrlBlockByContentFilter"
     #   resp.session_logger.log_configuration.s3.bucket #=> String
     #   resp.session_logger.log_configuration.s3.key_prefix #=> String
     #   resp.session_logger.log_configuration.s3.bucket_owner #=> String
@@ -4337,7 +4369,7 @@ module Aws::WorkSpacesWeb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspacesweb'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

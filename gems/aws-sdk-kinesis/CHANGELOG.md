@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.92.0 (2025-11-20)
+------------------
+
+* Feature - Kinesis Data Streams now supports up to 50 Enhance Fan-out consumers for On-demand Advantage Streams. On-demand Standard and Provisioned streams will continue with the existing limit of 20 consumers for Enhanced Fan-out.
+
+1.91.0 (2025-11-03)
+------------------
+
+* Feature - Adds support for MinimumThroughputBillingCommitment with new UpdateAccountSettings API. Adds support to configure warm throughput for on-demand streams in new UpdateStreamWarmThroughput API and existing CreateStream API and UpdateStreamMode API.
+
+1.90.0 (2025-10-31)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.89.0 (2025-10-27)
+------------------
+
+* Feature - Adds support for record sizes up to 10MiB and introduces new UpdateMaxRecordSize API to modify stream record size limits. Adds record size parameters to existing CreateStream and DescribeStreamSummary APIs for request and response payloads respectively.
+
+1.88.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.87.0 (2025-08-28)
 ------------------
 

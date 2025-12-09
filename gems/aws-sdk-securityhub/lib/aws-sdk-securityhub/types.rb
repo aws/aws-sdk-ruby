@@ -3102,8 +3102,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] security_groups
-    #   The security groups to assign to the instances in the Auto Scaling
-    #   group.
+    #   The security groups to assign to the instances in the Amazon EC2
+    #   Auto Scaling group.
     #   @return [Array<String>]
     #
     # @!attribute [rw] spot_price
@@ -4515,8 +4515,8 @@ module Aws::SecurityHub
     end
 
     # A complex type that describes the Amazon S3 bucket, HTTP server (for
-    # example, a web server), Elemental MediaStore, or other server from
-    # which CloudFront gets your files.
+    # example, a web server), or other server from which CloudFront gets
+    # your files.
     #
     # @!attribute [rw] domain_name
     #   Amazon S3 origins: The DNS name of the S3 bucket from which you want
@@ -9792,8 +9792,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] health_check_grace_period_seconds
     #   After a task starts, the amount of time in seconds that the Amazon
-    #   ECS service scheduler ignores unhealthy Elastic Load Balancing
-    #   target health checks.
+    #   ECS service scheduler ignores unhealthy ELB target health checks.
     #   @return [Integer]
     #
     # @!attribute [rw] launch_type
@@ -9840,7 +9839,7 @@ module Aws::SecurityHub
     # @!attribute [rw] role
     #   The ARN of the IAM role that is associated with the service. The
     #   role allows the Amazon ECS container agent to register container
-    #   instances with an Elastic Load Balancing load balancer.
+    #   instances with an ELB load balancer.
     #   @return [String]
     #
     # @!attribute [rw] scheduling_strategy
@@ -9934,8 +9933,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] target_group_arn
-    #   The ARN of the Elastic Load Balancing target group or groups
-    #   associated with a service or task set.
+    #   The ARN of the ELB target group or groups associated with a service
+    #   or task set.
     #
     #   Only specified when using an Application Load Balancer or a Network
     #   Load Balancer. For a Classic Load Balancer, the target group ARN is
@@ -22577,6 +22576,21 @@ module Aws::SecurityHub
     #   Enables filtering based on map field values.
     #   @return [Array<Types::OcsfMapFilter>]
     #
+    # @!attribute [rw] ip_filters
+    #   A list of IP address filters that allowing you to filter findings
+    #   based on IP address properties.
+    #   @return [Array<Types::OcsfIpFilter>]
+    #
+    # @!attribute [rw] nested_composite_filters
+    #   Provides an additional level of filtering, creating a three-layer
+    #   nested structure. The first layer is a `CompositeFilters` array with
+    #   a `CompositeOperator` (`AND`/`OR`). The second layer is a
+    #   `CompositeFilter` object that contains direct filters and
+    #   `NestedCompositeFilters`. The third layer is
+    #   `NestedCompositeFilters`, which contains additional filter
+    #   conditions.
+    #   @return [Array<Types::CompositeFilter>]
+    #
     # @!attribute [rw] operator
     #   The logical operator used to combine multiple filter conditions.
     #   @return [String]
@@ -22589,6 +22603,8 @@ module Aws::SecurityHub
       :boolean_filters,
       :number_filters,
       :map_filters,
+      :ip_filters,
+      :nested_composite_filters,
       :operator)
       SENSITIVE = []
       include Aws::Structure
@@ -22794,42 +22810,6 @@ module Aws::SecurityHub
     class ConflictException < Struct.new(
       :message,
       :code)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] auth_code
-    #   The authCode retrieved from authUrl to complete the OAuth 2.0
-    #   authorization code flow.
-    #   @return [String]
-    #
-    # @!attribute [rw] auth_state
-    #   The authState retrieved from authUrl to complete the OAuth 2.0
-    #   authorization code flow.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ConnectorRegistrationsV2Request AWS API Documentation
-    #
-    class ConnectorRegistrationsV2Request < Struct.new(
-      :auth_code,
-      :auth_state)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] connector_arn
-    #   The Amazon Resource Name (ARN) of the connectorV2.
-    #   @return [String]
-    #
-    # @!attribute [rw] connector_id
-    #   The UUID of the connectorV2 to identify connectorV2 resource.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ConnectorRegistrationsV2Response AWS API Documentation
-    #
-    class ConnectorRegistrationsV2Response < Struct.new(
-      :connector_arn,
-      :connector_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23337,12 +23317,17 @@ module Aws::SecurityHub
     #   The Url provide to customers for OAuth auth code flow.
     #   @return [String]
     #
+    # @!attribute [rw] connector_status
+    #   The current status of the connectorV2.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateConnectorV2Response AWS API Documentation
     #
     class CreateConnectorV2Response < Struct.new(
       :connector_arn,
       :connector_id,
-      :auth_url)
+      :auth_url,
+      :connector_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23513,12 +23498,19 @@ module Aws::SecurityHub
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] mode
+    #   The mode for ticket creation. When set to DRYRUN, the ticket is
+    #   created using a Security Hub owned template test finding to verify
+    #   the integration is working correctly.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateTicketV2Request AWS API Documentation
     #
     class CreateTicketV2Request < Struct.new(
       :connector_id,
       :finding_metadata_uid,
-      :client_token)
+      :client_token,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25008,6 +25000,73 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # A filter structure that contains a logical combination of string
+    # filters and nested composite filters for findings trend data.
+    #
+    # @!attribute [rw] string_filters
+    #   A list of string filters that apply to findings trend data fields.
+    #   @return [Array<Types::FindingsTrendsStringFilter>]
+    #
+    # @!attribute [rw] nested_composite_filters
+    #   A list of nested composite filters that you can use to create
+    #   complex filter conditions for findings trend data.
+    #   @return [Array<Types::FindingsTrendsCompositeFilter>]
+    #
+    # @!attribute [rw] operator
+    #   The logical operator (AND, OR) to apply between the string filters
+    #   and nested composite filters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingsTrendsCompositeFilter AWS API Documentation
+    #
+    class FindingsTrendsCompositeFilter < Struct.new(
+      :string_filters,
+      :nested_composite_filters,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structure that defines filters to apply to findings trend data
+    # queries.
+    #
+    # @!attribute [rw] composite_filters
+    #   A list of composite filters to apply to the findings trend data.
+    #   @return [Array<Types::FindingsTrendsCompositeFilter>]
+    #
+    # @!attribute [rw] composite_operator
+    #   The logical operator (AND, OR) to apply between multiple composite
+    #   filters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingsTrendsFilters AWS API Documentation
+    #
+    class FindingsTrendsFilters < Struct.new(
+      :composite_filters,
+      :composite_operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter for string-based fields in findings trend data.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the findings field to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A string filter for filtering Security Hub findings.
+    #   @return [Types::StringFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingsTrendsStringFilter AWS API Documentation
+    #
+    class FindingsTrendsStringFilter < Struct.new(
+      :field_name,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the behavior of the firewall.
     #
     # @!attribute [rw] stateful_rule_group_references
@@ -25761,6 +25820,66 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] filters
+    #   The filters to apply to the findings trend data.
+    #   @return [Types::FindingsTrendsFilters]
+    #
+    # @!attribute [rw] start_time
+    #   The starting timestamp for the time period to analyze findings
+    #   trends, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The ending timestamp for the time period to analyze findings trends,
+    #   in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use for paginating results. This value is returned in
+    #   the response if more results are available.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of trend data points to return in a single
+    #   response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingsTrendsV2Request AWS API Documentation
+    #
+    class GetFindingsTrendsV2Request < Struct.new(
+      :filters,
+      :start_time,
+      :end_time,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] granularity
+    #   The time interval granularity for the returned trend data.
+    #   @return [String]
+    #
+    # @!attribute [rw] trends_metrics
+    #   The collection of time-series trend metrics, including counts of
+    #   findings by severity across the specified time period.
+    #   @return [Array<Types::TrendsMetricsResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use for retrieving the next page of results, if more
+    #   trend data is available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingsTrendsV2Response AWS API Documentation
+    #
+    class GetFindingsTrendsV2Response < Struct.new(
+      :granularity,
+      :trends_metrics,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
     #   The finding attributes used to define a condition to filter the
     #   returned OCSF findings. You can filter up to 10 composite filters.
     #   For each filter type inside of a composite filter, you can provide
@@ -25983,6 +26102,67 @@ module Aws::SecurityHub
     #
     class GetResourcesStatisticsV2Response < Struct.new(
       :group_by_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   The filters to apply to the resources trend data.
+    #   @return [Types::ResourcesTrendsFilters]
+    #
+    # @!attribute [rw] start_time
+    #   The starting timestamp for the time period to analyze resources
+    #   trends, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The ending timestamp for the time period to analyze resources
+    #   trends, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use for paginating results. This value is returned in
+    #   the response if more results are available.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of trend data points to return in a single
+    #   response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetResourcesTrendsV2Request AWS API Documentation
+    #
+    class GetResourcesTrendsV2Request < Struct.new(
+      :filters,
+      :start_time,
+      :end_time,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] granularity
+    #   The time interval granularity for the returned trend data (such as
+    #   DAILY or WEEKLY).
+    #   @return [String]
+    #
+    # @!attribute [rw] trends_metrics
+    #   The collection of time-series trend metrics, including counts of
+    #   resources across the specified time period.
+    #   @return [Array<Types::ResourcesTrendsMetricsResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use for retrieving the next page of results, if more
+    #   trend data is available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetResourcesTrendsV2Response AWS API Documentation
+    #
+    class GetResourcesTrendsV2Response < Struct.new(
+      :granularity,
+      :trends_metrics,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28109,6 +28289,25 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The structure for filtering findings based on IP address attributes.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the IP address field to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   The IP filter for querying findings.
+    #   @return [Types::IpFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/OcsfIpFilter AWS API Documentation
+    #
+    class OcsfIpFilter < Struct.new(
+      :field_name,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Enables filtering of security findings based on map field values in
     # OCSF.
     #
@@ -28861,16 +29060,23 @@ module Aws::SecurityHub
     #   integration.
     #   @return [Types::JiraCloudUpdateConfiguration]
     #
+    # @!attribute [rw] service_now
+    #   The parameters required to update the configuration for a ServiceNow
+    #   integration.
+    #   @return [Types::ServiceNowUpdateConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProviderUpdateConfiguration AWS API Documentation
     #
     class ProviderUpdateConfiguration < Struct.new(
       :jira_cloud,
+      :service_now,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class JiraCloud < ProviderUpdateConfiguration; end
+      class ServiceNow < ProviderUpdateConfiguration; end
       class Unknown < ProviderUpdateConfiguration; end
     end
 
@@ -28947,6 +29153,42 @@ module Aws::SecurityHub
     class Record < Struct.new(
       :json_path,
       :record_index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] auth_code
+    #   The authCode retrieved from authUrl to complete the OAuth 2.0
+    #   authorization code flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_state
+    #   The authState retrieved from authUrl to complete the OAuth 2.0
+    #   authorization code flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RegisterConnectorV2Request AWS API Documentation
+    #
+    class RegisterConnectorV2Request < Struct.new(
+      :auth_code,
+      :auth_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connectorV2.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_id
+    #   The UUID of the connectorV2 to identify connectorV2 resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RegisterConnectorV2Response AWS API Documentation
+    #
+    class RegisterConnectorV2Response < Struct.new(
+      :connector_arn,
+      :connector_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29757,8 +29999,8 @@ module Aws::SecurityHub
     # Provides comprehensive details about an Amazon Web Services resource
     # and its associated security findings.
     #
-    # @!attribute [rw] resource_arn
-    #   Specifies the ARN that uniquely identifies a resource.
+    # @!attribute [rw] resource_guid
+    #   The global identifier used to identify a resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -29808,7 +30050,7 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceResult AWS API Documentation
     #
     class ResourceResult < Struct.new(
-      :resource_arn,
+      :resource_guid,
       :resource_id,
       :account_id,
       :region,
@@ -29913,6 +30155,16 @@ module Aws::SecurityHub
     #   Enables filtering based on map-based field values.
     #   @return [Array<Types::ResourcesMapFilter>]
     #
+    # @!attribute [rw] nested_composite_filters
+    #   Provides an additional level of filtering, creating a three-layer
+    #   nested structure. The first layer is a `CompositeFilters` array with
+    #   a `CompositeOperator` (`AND`/`OR`). The second layer is a
+    #   `CompositeFilter` object that contains direct filters and
+    #   `NestedCompositeFilters`. The third layer is
+    #   `NestedCompositeFilters`, which contains additional filter
+    #   conditions.
+    #   @return [Array<Types::ResourcesCompositeFilter>]
+    #
     # @!attribute [rw] operator
     #   The logical operator used to combine multiple filter conditions.
     #   @return [String]
@@ -29924,7 +30176,22 @@ module Aws::SecurityHub
       :date_filters,
       :number_filters,
       :map_filters,
+      :nested_composite_filters,
       :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains counts of resources for trend analysis.
+    #
+    # @!attribute [rw] all_resources
+    #   The total count of all resources for the given time interval.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourcesCount AWS API Documentation
+    #
+    class ResourcesCount < Struct.new(
+      :all_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30028,6 +30295,112 @@ module Aws::SecurityHub
     class ResourcesStringFilter < Struct.new(
       :field_name,
       :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter structure that contains a logical combination of string
+    # filters and nested composite filters for resources trend data.
+    #
+    # @!attribute [rw] string_filters
+    #   A list of string filters that apply to resources trend data fields.
+    #   @return [Array<Types::ResourcesTrendsStringFilter>]
+    #
+    # @!attribute [rw] nested_composite_filters
+    #   A list of nested composite filters that you can use to create
+    #   complex filter conditions for resources trend data.
+    #   @return [Array<Types::ResourcesTrendsCompositeFilter>]
+    #
+    # @!attribute [rw] operator
+    #   The logical operator (AND, OR) to apply between the string filters
+    #   and nested composite filters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourcesTrendsCompositeFilter AWS API Documentation
+    #
+    class ResourcesTrendsCompositeFilter < Struct.new(
+      :string_filters,
+      :nested_composite_filters,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structure that defines filters to apply to resources trend data
+    # queries.
+    #
+    # @!attribute [rw] composite_filters
+    #   A list of composite filters to apply to the resources trend data.
+    #   @return [Array<Types::ResourcesTrendsCompositeFilter>]
+    #
+    # @!attribute [rw] composite_operator
+    #   The logical operator (AND, OR) to apply between multiple composite
+    #   filters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourcesTrendsFilters AWS API Documentation
+    #
+    class ResourcesTrendsFilters < Struct.new(
+      :composite_filters,
+      :composite_operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the resource trend metrics data for a specific time point in
+    # the requested time period.
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp for this data point in the resources trend metrics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] trends_values
+    #   The resource trend metric values associated with this timestamp,
+    #   including resource counts.
+    #   @return [Types::ResourcesTrendsValues]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourcesTrendsMetricsResult AWS API Documentation
+    #
+    class ResourcesTrendsMetricsResult < Struct.new(
+      :timestamp,
+      :trends_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter for string-based fields in resources trend data, such as
+    # resource type or account ID.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the resources field to filter on, such as resourceType,
+    #   accountId, or region.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   A string filter for filtering Security Hub findings.
+    #   @return [Types::StringFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourcesTrendsStringFilter AWS API Documentation
+    #
+    class ResourcesTrendsStringFilter < Struct.new(
+      :field_name,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the aggregated resource count values for a specific point in
+    # the resources trend timeline.
+    #
+    # @!attribute [rw] resources_count
+    #   The resource count statistics for this data point in the trend
+    #   timeline.
+    #   @return [Types::ResourcesCount]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourcesTrendsValues AWS API Documentation
+    #
+    class ResourcesTrendsValues < Struct.new(
+      :resources_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30964,19 +31337,20 @@ module Aws::SecurityHub
     #   The instanceName of ServiceNow ITSM.
     #   @return [String]
     #
-    # @!attribute [rw] client_id
-    #   The clientId of ServiceNow ITSM.
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that contains the ServiceNow credentials.
     #   @return [String]
     #
     # @!attribute [rw] auth_status
-    #   The status of the authorization between Jira Cloud and the service.
+    #   The status of the authorization between ServiceNow and the service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ServiceNowDetail AWS API Documentation
     #
     class ServiceNowDetail < Struct.new(
       :instance_name,
-      :client_id,
+      :secret_arn,
       :auth_status)
       SENSITIVE = []
       include Aws::Structure
@@ -30989,21 +31363,50 @@ module Aws::SecurityHub
     #   The instance name of ServiceNow ITSM.
     #   @return [String]
     #
-    # @!attribute [rw] client_id
-    #   The client ID of ServiceNow ITSM.
-    #   @return [String]
-    #
-    # @!attribute [rw] client_secret
-    #   The client secret of ServiceNow ITSM.
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that contains the ServiceNow credentials.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ServiceNowProviderConfiguration AWS API Documentation
     #
     class ServiceNowProviderConfiguration < Struct.new(
       :instance_name,
-      :client_id,
-      :client_secret)
-      SENSITIVE = [:client_secret]
+      :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The parameters used to modify an existing ServiceNow integration.
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that contains the ServiceNow credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ServiceNowUpdateConfiguration AWS API Documentation
+    #
+    class ServiceNowUpdateConfiguration < Struct.new(
+      :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because it would exceed the service quota
+    # limit.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message,
+      :code)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -31090,6 +31493,64 @@ module Aws::SecurityHub
       :label,
       :normalized,
       :original)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains counts of findings grouped by severity level for trend
+    # analysis.
+    #
+    # @!attribute [rw] unknown
+    #   The count of findings with Unknown severity level at this point in
+    #   the trend timeline.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] informational
+    #   The count of findings with Informational severity level at this
+    #   point in the trend timeline.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] low
+    #   The count of findings with Low severity level at this point in the
+    #   trend timeline.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] medium
+    #   The count of findings with Medium severity level at this point in
+    #   the trend timeline.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] high
+    #   The count of findings with High severity level at this point in the
+    #   trend timeline.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] critical
+    #   The count of findings with Critical severity level at this point in
+    #   the trend timeline.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fatal
+    #   The count of findings with Fatal severity level at this point in the
+    #   trend timeline.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] other
+    #   The count of findings with severity levels not fitting into the
+    #   standard categories at this point in the trend timeline.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SeverityTrendsCount AWS API Documentation
+    #
+    class SeverityTrendsCount < Struct.new(
+      :unknown,
+      :informational,
+      :low,
+      :medium,
+      :high,
+      :critical,
+      :fatal,
+      :other)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32299,6 +32760,43 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Contains the findings trend metrics data for a specific time point in
+    # the requested time period.
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp for this data point in the findings trend metrics.
+    #   @return [Time]
+    #
+    # @!attribute [rw] trends_values
+    #   The finding trend metric values associated with this timestamp,
+    #   including severity counts.
+    #   @return [Types::TrendsValues]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/TrendsMetricsResult AWS API Documentation
+    #
+    class TrendsMetricsResult < Struct.new(
+      :timestamp,
+      :trends_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the aggregated finding values for a specific point in the
+    # findings trend timeline.
+    #
+    # @!attribute [rw] severity_trends
+    #   The count of findings organized by severity level for this data
+    #   point in the trend timeline.
+    #   @return [Types::SeverityTrendsCount]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/TrendsValues AWS API Documentation
+    #
+    class TrendsValues < Struct.new(
+      :severity_trends)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of objects containing `RuleArn`, `ErrorCode`, and
     # `ErrorMessage`. This parameter tells you which automation rules the
     # request didn't process and why.
@@ -32367,7 +32865,9 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   The error code for the unprocessed security control.
+    #   The error code for the unprocessed security control. The `NOT_FOUND`
+    #   value has been deprecated and replaced by the `RESOURCE_NOT_FOUND`
+    #   value.
     #   @return [String]
     #
     # @!attribute [rw] error_reason
@@ -32408,6 +32908,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] error_code
     #   The error code for the unprocessed standard and control association.
+    #   The `NOT_FOUND` value has been deprecated and replaced by the
+    #   `RESOURCE_NOT_FOUND` value.
     #   @return [String]
     #
     # @!attribute [rw] error_reason
@@ -32444,7 +32946,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] error_code
     #   The error code for the unprocessed update of the control's
-    #   enablement status in the specified standard.
+    #   enablement status in the specified standard. The `NOT_FOUND` value
+    #   has been deprecated and replaced by the `RESOURCE_NOT_FOUND` value.
     #   @return [String]
     #
     # @!attribute [rw] error_reason
@@ -32783,10 +33286,6 @@ module Aws::SecurityHub
     #   The UUID of the connectorV2 to identify connectorV2 resource.
     #   @return [String]
     #
-    # @!attribute [rw] client_secret
-    #   The clientSecret of ServiceNow.
-    #   @return [String]
-    #
     # @!attribute [rw] description
     #   The description of the connectorV2.
     #   @return [String]
@@ -32799,10 +33298,9 @@ module Aws::SecurityHub
     #
     class UpdateConnectorV2Request < Struct.new(
       :connector_id,
-      :client_secret,
       :description,
       :provider)
-      SENSITIVE = [:client_secret]
+      SENSITIVE = []
       include Aws::Structure
     end
 

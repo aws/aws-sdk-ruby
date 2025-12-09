@@ -37,6 +37,8 @@ module Aws::NetworkManager
     AttachmentErrorList = Shapes::ListShape.new(name: 'AttachmentErrorList')
     AttachmentId = Shapes::StringShape.new(name: 'AttachmentId')
     AttachmentList = Shapes::ListShape.new(name: 'AttachmentList')
+    AttachmentRoutingPolicyAssociationSummary = Shapes::StructureShape.new(name: 'AttachmentRoutingPolicyAssociationSummary')
+    AttachmentRoutingPolicyAssociationsList = Shapes::ListShape.new(name: 'AttachmentRoutingPolicyAssociationsList')
     AttachmentState = Shapes::StringShape.new(name: 'AttachmentState')
     AttachmentType = Shapes::StringShape.new(name: 'AttachmentType')
     Bandwidth = Shapes::StructureShape.new(name: 'Bandwidth')
@@ -98,6 +100,8 @@ module Aws::NetworkManager
     CoreNetworkPolicyException = Shapes::StructureShape.new(name: 'CoreNetworkPolicyException')
     CoreNetworkPolicyVersion = Shapes::StructureShape.new(name: 'CoreNetworkPolicyVersion')
     CoreNetworkPolicyVersionList = Shapes::ListShape.new(name: 'CoreNetworkPolicyVersionList')
+    CoreNetworkRoutingInformation = Shapes::StructureShape.new(name: 'CoreNetworkRoutingInformation')
+    CoreNetworkRoutingInformationList = Shapes::ListShape.new(name: 'CoreNetworkRoutingInformationList')
     CoreNetworkSegment = Shapes::StructureShape.new(name: 'CoreNetworkSegment')
     CoreNetworkSegmentEdgeIdentifier = Shapes::StructureShape.new(name: 'CoreNetworkSegmentEdgeIdentifier')
     CoreNetworkSegmentList = Shapes::ListShape.new(name: 'CoreNetworkSegmentList')
@@ -110,6 +114,8 @@ module Aws::NetworkManager
     CreateConnectPeerResponse = Shapes::StructureShape.new(name: 'CreateConnectPeerResponse')
     CreateConnectionRequest = Shapes::StructureShape.new(name: 'CreateConnectionRequest')
     CreateConnectionResponse = Shapes::StructureShape.new(name: 'CreateConnectionResponse')
+    CreateCoreNetworkPrefixListAssociationRequest = Shapes::StructureShape.new(name: 'CreateCoreNetworkPrefixListAssociationRequest')
+    CreateCoreNetworkPrefixListAssociationResponse = Shapes::StructureShape.new(name: 'CreateCoreNetworkPrefixListAssociationResponse')
     CreateCoreNetworkRequest = Shapes::StructureShape.new(name: 'CreateCoreNetworkRequest')
     CreateCoreNetworkResponse = Shapes::StructureShape.new(name: 'CreateCoreNetworkResponse')
     CreateDeviceRequest = Shapes::StructureShape.new(name: 'CreateDeviceRequest')
@@ -144,6 +150,8 @@ module Aws::NetworkManager
     DeleteConnectionResponse = Shapes::StructureShape.new(name: 'DeleteConnectionResponse')
     DeleteCoreNetworkPolicyVersionRequest = Shapes::StructureShape.new(name: 'DeleteCoreNetworkPolicyVersionRequest')
     DeleteCoreNetworkPolicyVersionResponse = Shapes::StructureShape.new(name: 'DeleteCoreNetworkPolicyVersionResponse')
+    DeleteCoreNetworkPrefixListAssociationRequest = Shapes::StructureShape.new(name: 'DeleteCoreNetworkPrefixListAssociationRequest')
+    DeleteCoreNetworkPrefixListAssociationResponse = Shapes::StructureShape.new(name: 'DeleteCoreNetworkPrefixListAssociationResponse')
     DeleteCoreNetworkRequest = Shapes::StructureShape.new(name: 'DeleteCoreNetworkRequest')
     DeleteCoreNetworkResponse = Shapes::StructureShape.new(name: 'DeleteCoreNetworkResponse')
     DeleteDeviceRequest = Shapes::StructureShape.new(name: 'DeleteDeviceRequest')
@@ -264,12 +272,18 @@ module Aws::NetworkManager
     LinkIdList = Shapes::ListShape.new(name: 'LinkIdList')
     LinkList = Shapes::ListShape.new(name: 'LinkList')
     LinkState = Shapes::StringShape.new(name: 'LinkState')
+    ListAttachmentRoutingPolicyAssociationsRequest = Shapes::StructureShape.new(name: 'ListAttachmentRoutingPolicyAssociationsRequest')
+    ListAttachmentRoutingPolicyAssociationsResponse = Shapes::StructureShape.new(name: 'ListAttachmentRoutingPolicyAssociationsResponse')
     ListAttachmentsRequest = Shapes::StructureShape.new(name: 'ListAttachmentsRequest')
     ListAttachmentsResponse = Shapes::StructureShape.new(name: 'ListAttachmentsResponse')
     ListConnectPeersRequest = Shapes::StructureShape.new(name: 'ListConnectPeersRequest')
     ListConnectPeersResponse = Shapes::StructureShape.new(name: 'ListConnectPeersResponse')
     ListCoreNetworkPolicyVersionsRequest = Shapes::StructureShape.new(name: 'ListCoreNetworkPolicyVersionsRequest')
     ListCoreNetworkPolicyVersionsResponse = Shapes::StructureShape.new(name: 'ListCoreNetworkPolicyVersionsResponse')
+    ListCoreNetworkPrefixListAssociationsRequest = Shapes::StructureShape.new(name: 'ListCoreNetworkPrefixListAssociationsRequest')
+    ListCoreNetworkPrefixListAssociationsResponse = Shapes::StructureShape.new(name: 'ListCoreNetworkPrefixListAssociationsResponse')
+    ListCoreNetworkRoutingInformationRequest = Shapes::StructureShape.new(name: 'ListCoreNetworkRoutingInformationRequest')
+    ListCoreNetworkRoutingInformationResponse = Shapes::StructureShape.new(name: 'ListCoreNetworkRoutingInformationResponse')
     ListCoreNetworksRequest = Shapes::StructureShape.new(name: 'ListCoreNetworksRequest')
     ListCoreNetworksResponse = Shapes::StructureShape.new(name: 'ListCoreNetworksResponse')
     ListOrganizationServiceAccessStatusRequest = Shapes::StructureShape.new(name: 'ListOrganizationServiceAccessStatusRequest')
@@ -311,8 +325,13 @@ module Aws::NetworkManager
     PeeringState = Shapes::StringShape.new(name: 'PeeringState')
     PeeringType = Shapes::StringShape.new(name: 'PeeringType')
     PermissionsErrorContext = Shapes::StructureShape.new(name: 'PermissionsErrorContext')
+    PrefixListArn = Shapes::StringShape.new(name: 'PrefixListArn')
+    PrefixListAssociation = Shapes::StructureShape.new(name: 'PrefixListAssociation')
+    PrefixListAssociationList = Shapes::ListShape.new(name: 'PrefixListAssociationList')
     ProposedNetworkFunctionGroupChange = Shapes::StructureShape.new(name: 'ProposedNetworkFunctionGroupChange')
     ProposedSegmentChange = Shapes::StructureShape.new(name: 'ProposedSegmentChange')
+    PutAttachmentRoutingPolicyLabelRequest = Shapes::StructureShape.new(name: 'PutAttachmentRoutingPolicyLabelRequest')
+    PutAttachmentRoutingPolicyLabelResponse = Shapes::StructureShape.new(name: 'PutAttachmentRoutingPolicyLabelResponse')
     PutCoreNetworkPolicyRequest = Shapes::StructureShape.new(name: 'PutCoreNetworkPolicyRequest')
     PutCoreNetworkPolicyResponse = Shapes::StructureShape.new(name: 'PutCoreNetworkPolicyResponse')
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
@@ -326,6 +345,8 @@ module Aws::NetworkManager
     RejectAttachmentResponse = Shapes::StructureShape.new(name: 'RejectAttachmentResponse')
     Relationship = Shapes::StructureShape.new(name: 'Relationship')
     RelationshipList = Shapes::ListShape.new(name: 'RelationshipList')
+    RemoveAttachmentRoutingPolicyLabelRequest = Shapes::StructureShape.new(name: 'RemoveAttachmentRoutingPolicyLabelRequest')
+    RemoveAttachmentRoutingPolicyLabelResponse = Shapes::StructureShape.new(name: 'RemoveAttachmentRoutingPolicyLabelResponse')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourcePolicyDocument = Shapes::StringShape.new(name: 'ResourcePolicyDocument')
@@ -346,6 +367,10 @@ module Aws::NetworkManager
     RouteTableType = Shapes::StringShape.new(name: 'RouteTableType')
     RouteType = Shapes::StringShape.new(name: 'RouteType')
     RouteTypeList = Shapes::ListShape.new(name: 'RouteTypeList')
+    RoutingInformationNextHop = Shapes::StructureShape.new(name: 'RoutingInformationNextHop')
+    RoutingPolicyAssociationDetail = Shapes::StructureShape.new(name: 'RoutingPolicyAssociationDetail')
+    RoutingPolicyAssociationDetailsList = Shapes::ListShape.new(name: 'RoutingPolicyAssociationDetailsList')
+    RoutingPolicyDirection = Shapes::StringShape.new(name: 'RoutingPolicyDirection')
     SLRDeploymentStatus = Shapes::StringShape.new(name: 'SLRDeploymentStatus')
     SegmentActionServiceInsertion = Shapes::StringShape.new(name: 'SegmentActionServiceInsertion')
     SendViaMode = Shapes::StringShape.new(name: 'SendViaMode')
@@ -510,6 +535,14 @@ module Aws::NetworkManager
 
     AttachmentList.member = Shapes::ShapeRef.new(shape: Attachment)
 
+    AttachmentRoutingPolicyAssociationSummary.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, location_name: "AttachmentId"))
+    AttachmentRoutingPolicyAssociationSummary.add_member(:pending_routing_policies, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "PendingRoutingPolicies"))
+    AttachmentRoutingPolicyAssociationSummary.add_member(:associated_routing_policies, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "AssociatedRoutingPolicies"))
+    AttachmentRoutingPolicyAssociationSummary.add_member(:routing_policy_label, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "RoutingPolicyLabel"))
+    AttachmentRoutingPolicyAssociationSummary.struct_class = Types::AttachmentRoutingPolicyAssociationSummary
+
+    AttachmentRoutingPolicyAssociationsList.member = Shapes::ShapeRef.new(shape: AttachmentRoutingPolicyAssociationSummary)
+
     Bandwidth.add_member(:upload_speed, Shapes::ShapeRef.new(shape: Integer, location_name: "UploadSpeed"))
     Bandwidth.add_member(:download_speed, Shapes::ShapeRef.new(shape: Integer, location_name: "DownloadSpeed"))
     Bandwidth.struct_class = Types::Bandwidth
@@ -643,10 +676,13 @@ module Aws::NetworkManager
     CoreNetworkChangeEventList.member = Shapes::ShapeRef.new(shape: CoreNetworkChangeEvent)
 
     CoreNetworkChangeEventValues.add_member(:edge_location, Shapes::ShapeRef.new(shape: ExternalRegionCode, location_name: "EdgeLocation"))
+    CoreNetworkChangeEventValues.add_member(:peer_edge_location, Shapes::ShapeRef.new(shape: ExternalRegionCode, location_name: "PeerEdgeLocation", metadata: {"box" => true}))
+    CoreNetworkChangeEventValues.add_member(:routing_policy_direction, Shapes::ShapeRef.new(shape: RoutingPolicyDirection, location_name: "RoutingPolicyDirection", metadata: {"box" => true}))
     CoreNetworkChangeEventValues.add_member(:segment_name, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "SegmentName"))
     CoreNetworkChangeEventValues.add_member(:network_function_group_name, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "NetworkFunctionGroupName"))
     CoreNetworkChangeEventValues.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, location_name: "AttachmentId"))
     CoreNetworkChangeEventValues.add_member(:cidr, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Cidr"))
+    CoreNetworkChangeEventValues.add_member(:routing_policy_association_details, Shapes::ShapeRef.new(shape: RoutingPolicyAssociationDetailsList, location_name: "RoutingPolicyAssociationDetails", metadata: {"box" => true}))
     CoreNetworkChangeEventValues.struct_class = Types::CoreNetworkChangeEventValues
 
     CoreNetworkChangeList.member = Shapes::ShapeRef.new(shape: CoreNetworkChange)
@@ -663,6 +699,11 @@ module Aws::NetworkManager
     CoreNetworkChangeValues.add_member(:vpn_ecmp_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "VpnEcmpSupport"))
     CoreNetworkChangeValues.add_member(:dns_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "DnsSupport"))
     CoreNetworkChangeValues.add_member(:security_group_referencing_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "SecurityGroupReferencingSupport"))
+    CoreNetworkChangeValues.add_member(:routing_policy_direction, Shapes::ShapeRef.new(shape: RoutingPolicyDirection, location_name: "RoutingPolicyDirection", metadata: {"box" => true}))
+    CoreNetworkChangeValues.add_member(:routing_policy, Shapes::ShapeRef.new(shape: CoreNetworkPolicyDocument, location_name: "RoutingPolicy", metadata: {"box" => true}))
+    CoreNetworkChangeValues.add_member(:peer_edge_locations, Shapes::ShapeRef.new(shape: ExternalRegionCodeList, location_name: "PeerEdgeLocations", metadata: {"box" => true}))
+    CoreNetworkChangeValues.add_member(:attachment_id, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "AttachmentId", metadata: {"box" => true}))
+    CoreNetworkChangeValues.add_member(:routing_policy_association_details, Shapes::ShapeRef.new(shape: RoutingPolicyAssociationDetailsList, location_name: "RoutingPolicyAssociationDetails", metadata: {"box" => true}))
     CoreNetworkChangeValues.struct_class = Types::CoreNetworkChangeValues
 
     CoreNetworkEdge.add_member(:edge_location, Shapes::ShapeRef.new(shape: ExternalRegionCode, location_name: "EdgeLocation"))
@@ -715,6 +756,16 @@ module Aws::NetworkManager
 
     CoreNetworkPolicyVersionList.member = Shapes::ShapeRef.new(shape: CoreNetworkPolicyVersion)
 
+    CoreNetworkRoutingInformation.add_member(:prefix, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Prefix"))
+    CoreNetworkRoutingInformation.add_member(:next_hop, Shapes::ShapeRef.new(shape: RoutingInformationNextHop, location_name: "NextHop"))
+    CoreNetworkRoutingInformation.add_member(:local_preference, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "LocalPreference"))
+    CoreNetworkRoutingInformation.add_member(:med, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Med"))
+    CoreNetworkRoutingInformation.add_member(:as_path, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "AsPath"))
+    CoreNetworkRoutingInformation.add_member(:communities, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "Communities"))
+    CoreNetworkRoutingInformation.struct_class = Types::CoreNetworkRoutingInformation
+
+    CoreNetworkRoutingInformationList.member = Shapes::ShapeRef.new(shape: CoreNetworkRoutingInformation)
+
     CoreNetworkSegment.add_member(:name, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Name"))
     CoreNetworkSegment.add_member(:edge_locations, Shapes::ShapeRef.new(shape: ExternalRegionCodeList, location_name: "EdgeLocations"))
     CoreNetworkSegment.add_member(:shared_segments, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "SharedSegments"))
@@ -741,6 +792,7 @@ module Aws::NetworkManager
     CreateConnectAttachmentRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location_name: "CoreNetworkId"))
     CreateConnectAttachmentRequest.add_member(:edge_location, Shapes::ShapeRef.new(shape: ExternalRegionCode, required: true, location_name: "EdgeLocation"))
     CreateConnectAttachmentRequest.add_member(:transport_attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, required: true, location_name: "TransportAttachmentId"))
+    CreateConnectAttachmentRequest.add_member(:routing_policy_label, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "RoutingPolicyLabel"))
     CreateConnectAttachmentRequest.add_member(:options, Shapes::ShapeRef.new(shape: ConnectAttachmentOptions, required: true, location_name: "Options"))
     CreateConnectAttachmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateConnectAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
@@ -774,6 +826,17 @@ module Aws::NetworkManager
     CreateConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: Connection, location_name: "Connection"))
     CreateConnectionResponse.struct_class = Types::CreateConnectionResponse
 
+    CreateCoreNetworkPrefixListAssociationRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location_name: "CoreNetworkId"))
+    CreateCoreNetworkPrefixListAssociationRequest.add_member(:prefix_list_arn, Shapes::ShapeRef.new(shape: PrefixListArn, required: true, location_name: "PrefixListArn"))
+    CreateCoreNetworkPrefixListAssociationRequest.add_member(:prefix_list_alias, Shapes::ShapeRef.new(shape: ConstrainedString, required: true, location_name: "PrefixListAlias"))
+    CreateCoreNetworkPrefixListAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateCoreNetworkPrefixListAssociationRequest.struct_class = Types::CreateCoreNetworkPrefixListAssociationRequest
+
+    CreateCoreNetworkPrefixListAssociationResponse.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, location_name: "CoreNetworkId"))
+    CreateCoreNetworkPrefixListAssociationResponse.add_member(:prefix_list_arn, Shapes::ShapeRef.new(shape: PrefixListArn, location_name: "PrefixListArn"))
+    CreateCoreNetworkPrefixListAssociationResponse.add_member(:prefix_list_alias, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "PrefixListAlias"))
+    CreateCoreNetworkPrefixListAssociationResponse.struct_class = Types::CreateCoreNetworkPrefixListAssociationResponse
+
     CreateCoreNetworkRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: GlobalNetworkId, required: true, location_name: "GlobalNetworkId"))
     CreateCoreNetworkRequest.add_member(:description, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Description"))
     CreateCoreNetworkRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -801,6 +864,7 @@ module Aws::NetworkManager
 
     CreateDirectConnectGatewayAttachmentRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location_name: "CoreNetworkId"))
     CreateDirectConnectGatewayAttachmentRequest.add_member(:direct_connect_gateway_arn, Shapes::ShapeRef.new(shape: DirectConnectGatewayArn, required: true, location_name: "DirectConnectGatewayArn"))
+    CreateDirectConnectGatewayAttachmentRequest.add_member(:routing_policy_label, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "RoutingPolicyLabel"))
     CreateDirectConnectGatewayAttachmentRequest.add_member(:edge_locations, Shapes::ShapeRef.new(shape: ExternalRegionCodeList, required: true, location_name: "EdgeLocations"))
     CreateDirectConnectGatewayAttachmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDirectConnectGatewayAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
@@ -839,6 +903,7 @@ module Aws::NetworkManager
 
     CreateSiteToSiteVpnAttachmentRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location_name: "CoreNetworkId"))
     CreateSiteToSiteVpnAttachmentRequest.add_member(:vpn_connection_arn, Shapes::ShapeRef.new(shape: VpnConnectionArn, required: true, location_name: "VpnConnectionArn"))
+    CreateSiteToSiteVpnAttachmentRequest.add_member(:routing_policy_label, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "RoutingPolicyLabel"))
     CreateSiteToSiteVpnAttachmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateSiteToSiteVpnAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateSiteToSiteVpnAttachmentRequest.struct_class = Types::CreateSiteToSiteVpnAttachmentRequest
@@ -857,6 +922,7 @@ module Aws::NetworkManager
 
     CreateTransitGatewayRouteTableAttachmentRequest.add_member(:peering_id, Shapes::ShapeRef.new(shape: PeeringId, required: true, location_name: "PeeringId"))
     CreateTransitGatewayRouteTableAttachmentRequest.add_member(:transit_gateway_route_table_arn, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableArn, required: true, location_name: "TransitGatewayRouteTableArn"))
+    CreateTransitGatewayRouteTableAttachmentRequest.add_member(:routing_policy_label, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "RoutingPolicyLabel"))
     CreateTransitGatewayRouteTableAttachmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateTransitGatewayRouteTableAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateTransitGatewayRouteTableAttachmentRequest.struct_class = Types::CreateTransitGatewayRouteTableAttachmentRequest
@@ -868,6 +934,7 @@ module Aws::NetworkManager
     CreateVpcAttachmentRequest.add_member(:vpc_arn, Shapes::ShapeRef.new(shape: VpcArn, required: true, location_name: "VpcArn"))
     CreateVpcAttachmentRequest.add_member(:subnet_arns, Shapes::ShapeRef.new(shape: SubnetArnList, required: true, location_name: "SubnetArns"))
     CreateVpcAttachmentRequest.add_member(:options, Shapes::ShapeRef.new(shape: VpcOptions, location_name: "Options"))
+    CreateVpcAttachmentRequest.add_member(:routing_policy_label, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "RoutingPolicyLabel"))
     CreateVpcAttachmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateVpcAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateVpcAttachmentRequest.struct_class = Types::CreateVpcAttachmentRequest
@@ -911,6 +978,14 @@ module Aws::NetworkManager
 
     DeleteCoreNetworkPolicyVersionResponse.add_member(:core_network_policy, Shapes::ShapeRef.new(shape: CoreNetworkPolicy, location_name: "CoreNetworkPolicy"))
     DeleteCoreNetworkPolicyVersionResponse.struct_class = Types::DeleteCoreNetworkPolicyVersionResponse
+
+    DeleteCoreNetworkPrefixListAssociationRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location: "uri", location_name: "coreNetworkId"))
+    DeleteCoreNetworkPrefixListAssociationRequest.add_member(:prefix_list_arn, Shapes::ShapeRef.new(shape: PrefixListArn, required: true, location: "uri", location_name: "prefixListArn"))
+    DeleteCoreNetworkPrefixListAssociationRequest.struct_class = Types::DeleteCoreNetworkPrefixListAssociationRequest
+
+    DeleteCoreNetworkPrefixListAssociationResponse.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, location_name: "CoreNetworkId"))
+    DeleteCoreNetworkPrefixListAssociationResponse.add_member(:prefix_list_arn, Shapes::ShapeRef.new(shape: PrefixListArn, location_name: "PrefixListArn"))
+    DeleteCoreNetworkPrefixListAssociationResponse.struct_class = Types::DeleteCoreNetworkPrefixListAssociationResponse
 
     DeleteCoreNetworkRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location: "uri", location_name: "coreNetworkId"))
     DeleteCoreNetworkRequest.struct_class = Types::DeleteCoreNetworkRequest
@@ -1349,6 +1424,16 @@ module Aws::NetworkManager
 
     LinkList.member = Shapes::ShapeRef.new(shape: Link)
 
+    ListAttachmentRoutingPolicyAssociationsRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location: "uri", location_name: "coreNetworkId"))
+    ListAttachmentRoutingPolicyAssociationsRequest.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, location: "querystring", location_name: "attachmentId"))
+    ListAttachmentRoutingPolicyAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAttachmentRoutingPolicyAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListAttachmentRoutingPolicyAssociationsRequest.struct_class = Types::ListAttachmentRoutingPolicyAssociationsRequest
+
+    ListAttachmentRoutingPolicyAssociationsResponse.add_member(:attachment_routing_policy_associations, Shapes::ShapeRef.new(shape: AttachmentRoutingPolicyAssociationsList, location_name: "AttachmentRoutingPolicyAssociations"))
+    ListAttachmentRoutingPolicyAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAttachmentRoutingPolicyAssociationsResponse.struct_class = Types::ListAttachmentRoutingPolicyAssociationsResponse
+
     ListAttachmentsRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, location: "querystring", location_name: "coreNetworkId"))
     ListAttachmentsRequest.add_member(:attachment_type, Shapes::ShapeRef.new(shape: AttachmentType, location: "querystring", location_name: "attachmentType"))
     ListAttachmentsRequest.add_member(:edge_location, Shapes::ShapeRef.new(shape: ExternalRegionCode, location: "querystring", location_name: "edgeLocation"))
@@ -1379,6 +1464,32 @@ module Aws::NetworkManager
     ListCoreNetworkPolicyVersionsResponse.add_member(:core_network_policy_versions, Shapes::ShapeRef.new(shape: CoreNetworkPolicyVersionList, location_name: "CoreNetworkPolicyVersions"))
     ListCoreNetworkPolicyVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListCoreNetworkPolicyVersionsResponse.struct_class = Types::ListCoreNetworkPolicyVersionsResponse
+
+    ListCoreNetworkPrefixListAssociationsRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location: "uri", location_name: "coreNetworkId"))
+    ListCoreNetworkPrefixListAssociationsRequest.add_member(:prefix_list_arn, Shapes::ShapeRef.new(shape: PrefixListArn, location: "querystring", location_name: "prefixListArn"))
+    ListCoreNetworkPrefixListAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListCoreNetworkPrefixListAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListCoreNetworkPrefixListAssociationsRequest.struct_class = Types::ListCoreNetworkPrefixListAssociationsRequest
+
+    ListCoreNetworkPrefixListAssociationsResponse.add_member(:prefix_list_associations, Shapes::ShapeRef.new(shape: PrefixListAssociationList, location_name: "PrefixListAssociations"))
+    ListCoreNetworkPrefixListAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListCoreNetworkPrefixListAssociationsResponse.struct_class = Types::ListCoreNetworkPrefixListAssociationsResponse
+
+    ListCoreNetworkRoutingInformationRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location: "uri", location_name: "coreNetworkId"))
+    ListCoreNetworkRoutingInformationRequest.add_member(:segment_name, Shapes::ShapeRef.new(shape: ConstrainedString, required: true, location_name: "SegmentName"))
+    ListCoreNetworkRoutingInformationRequest.add_member(:edge_location, Shapes::ShapeRef.new(shape: ExternalRegionCode, required: true, location_name: "EdgeLocation"))
+    ListCoreNetworkRoutingInformationRequest.add_member(:next_hop_filters, Shapes::ShapeRef.new(shape: FilterMap, location_name: "NextHopFilters"))
+    ListCoreNetworkRoutingInformationRequest.add_member(:local_preference_matches, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "LocalPreferenceMatches"))
+    ListCoreNetworkRoutingInformationRequest.add_member(:exact_as_path_matches, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "ExactAsPathMatches"))
+    ListCoreNetworkRoutingInformationRequest.add_member(:med_matches, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "MedMatches"))
+    ListCoreNetworkRoutingInformationRequest.add_member(:community_matches, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "CommunityMatches"))
+    ListCoreNetworkRoutingInformationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListCoreNetworkRoutingInformationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListCoreNetworkRoutingInformationRequest.struct_class = Types::ListCoreNetworkRoutingInformationRequest
+
+    ListCoreNetworkRoutingInformationResponse.add_member(:core_network_routing_information, Shapes::ShapeRef.new(shape: CoreNetworkRoutingInformationList, location_name: "CoreNetworkRoutingInformation"))
+    ListCoreNetworkRoutingInformationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListCoreNetworkRoutingInformationResponse.struct_class = Types::ListCoreNetworkRoutingInformationResponse
 
     ListCoreNetworksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListCoreNetworksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -1529,6 +1640,13 @@ module Aws::NetworkManager
     PermissionsErrorContext.add_member(:missing_permission, Shapes::ShapeRef.new(shape: ServerSideString, location_name: "MissingPermission"))
     PermissionsErrorContext.struct_class = Types::PermissionsErrorContext
 
+    PrefixListAssociation.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, location_name: "CoreNetworkId"))
+    PrefixListAssociation.add_member(:prefix_list_arn, Shapes::ShapeRef.new(shape: PrefixListArn, location_name: "PrefixListArn"))
+    PrefixListAssociation.add_member(:prefix_list_alias, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "PrefixListAlias"))
+    PrefixListAssociation.struct_class = Types::PrefixListAssociation
+
+    PrefixListAssociationList.member = Shapes::ShapeRef.new(shape: PrefixListAssociation)
+
     ProposedNetworkFunctionGroupChange.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ProposedNetworkFunctionGroupChange.add_member(:attachment_policy_rule_number, Shapes::ShapeRef.new(shape: Integer, location_name: "AttachmentPolicyRuleNumber"))
     ProposedNetworkFunctionGroupChange.add_member(:network_function_group_name, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "NetworkFunctionGroupName"))
@@ -1538,6 +1656,17 @@ module Aws::NetworkManager
     ProposedSegmentChange.add_member(:attachment_policy_rule_number, Shapes::ShapeRef.new(shape: Integer, location_name: "AttachmentPolicyRuleNumber"))
     ProposedSegmentChange.add_member(:segment_name, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "SegmentName"))
     ProposedSegmentChange.struct_class = Types::ProposedSegmentChange
+
+    PutAttachmentRoutingPolicyLabelRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location_name: "CoreNetworkId"))
+    PutAttachmentRoutingPolicyLabelRequest.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, required: true, location_name: "AttachmentId"))
+    PutAttachmentRoutingPolicyLabelRequest.add_member(:routing_policy_label, Shapes::ShapeRef.new(shape: ConstrainedString, required: true, location_name: "RoutingPolicyLabel"))
+    PutAttachmentRoutingPolicyLabelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    PutAttachmentRoutingPolicyLabelRequest.struct_class = Types::PutAttachmentRoutingPolicyLabelRequest
+
+    PutAttachmentRoutingPolicyLabelResponse.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, location_name: "CoreNetworkId"))
+    PutAttachmentRoutingPolicyLabelResponse.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, location_name: "AttachmentId"))
+    PutAttachmentRoutingPolicyLabelResponse.add_member(:routing_policy_label, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "RoutingPolicyLabel"))
+    PutAttachmentRoutingPolicyLabelResponse.struct_class = Types::PutAttachmentRoutingPolicyLabelResponse
 
     PutCoreNetworkPolicyRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location: "uri", location_name: "coreNetworkId"))
     PutCoreNetworkPolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: CoreNetworkPolicyDocument, required: true, location_name: "PolicyDocument", metadata: {"jsonvalue" => true}))
@@ -1576,6 +1705,15 @@ module Aws::NetworkManager
     Relationship.struct_class = Types::Relationship
 
     RelationshipList.member = Shapes::ShapeRef.new(shape: Relationship)
+
+    RemoveAttachmentRoutingPolicyLabelRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location: "uri", location_name: "coreNetworkId"))
+    RemoveAttachmentRoutingPolicyLabelRequest.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, required: true, location: "uri", location_name: "attachmentId"))
+    RemoveAttachmentRoutingPolicyLabelRequest.struct_class = Types::RemoveAttachmentRoutingPolicyLabelRequest
+
+    RemoveAttachmentRoutingPolicyLabelResponse.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, location_name: "CoreNetworkId"))
+    RemoveAttachmentRoutingPolicyLabelResponse.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, location_name: "AttachmentId"))
+    RemoveAttachmentRoutingPolicyLabelResponse.add_member(:routing_policy_label, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "RoutingPolicyLabel"))
+    RemoveAttachmentRoutingPolicyLabelResponse.struct_class = Types::RemoveAttachmentRoutingPolicyLabelResponse
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ServerSideString, required: true, location_name: "Message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ServerSideString, required: true, location_name: "ResourceId"))
@@ -1629,6 +1767,20 @@ module Aws::NetworkManager
     RouteTableIdentifier.struct_class = Types::RouteTableIdentifier
 
     RouteTypeList.member = Shapes::ShapeRef.new(shape: RouteType)
+
+    RoutingInformationNextHop.add_member(:ip_address, Shapes::ShapeRef.new(shape: IPAddress, location_name: "IpAddress"))
+    RoutingInformationNextHop.add_member(:core_network_attachment_id, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "CoreNetworkAttachmentId"))
+    RoutingInformationNextHop.add_member(:resource_id, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "ResourceId"))
+    RoutingInformationNextHop.add_member(:resource_type, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "ResourceType"))
+    RoutingInformationNextHop.add_member(:segment_name, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "SegmentName"))
+    RoutingInformationNextHop.add_member(:edge_location, Shapes::ShapeRef.new(shape: ExternalRegionCode, location_name: "EdgeLocation"))
+    RoutingInformationNextHop.struct_class = Types::RoutingInformationNextHop
+
+    RoutingPolicyAssociationDetail.add_member(:routing_policy_names, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "RoutingPolicyNames"))
+    RoutingPolicyAssociationDetail.add_member(:shared_segments, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "SharedSegments", metadata: {"box" => true}))
+    RoutingPolicyAssociationDetail.struct_class = Types::RoutingPolicyAssociationDetail
+
+    RoutingPolicyAssociationDetailsList.member = Shapes::ShapeRef.new(shape: RoutingPolicyAssociationDetail)
 
     ServiceInsertionAction.add_member(:action, Shapes::ShapeRef.new(shape: SegmentActionServiceInsertion, location_name: "Action"))
     ServiceInsertionAction.add_member(:mode, Shapes::ShapeRef.new(shape: SendViaMode, location_name: "Mode"))
@@ -2012,6 +2164,21 @@ module Aws::NetworkManager
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_core_network_prefix_list_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCoreNetworkPrefixListAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/prefix-list"
+        o.input = Shapes::ShapeRef.new(shape: CreateCoreNetworkPrefixListAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCoreNetworkPrefixListAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_device, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDevice"
         o.http_method = "POST"
@@ -2209,6 +2376,21 @@ module Aws::NetworkManager
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_core_network_prefix_list_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCoreNetworkPrefixListAssociation"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prefix-list/{prefixListArn}/core-network/{coreNetworkId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCoreNetworkPrefixListAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCoreNetworkPrefixListAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:delete_device, Seahorse::Model::Operation.new.tap do |o|
@@ -2839,6 +3021,25 @@ module Aws::NetworkManager
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:list_attachment_routing_policy_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAttachmentRoutingPolicyAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/routing-policy-label/core-network/{coreNetworkId}"
+        o.input = Shapes::ShapeRef.new(shape: ListAttachmentRoutingPolicyAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAttachmentRoutingPolicyAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_attachments, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAttachments"
         o.http_method = "GET"
@@ -2881,6 +3082,44 @@ module Aws::NetworkManager
         o.http_request_uri = "/core-networks/{coreNetworkId}/core-network-policy-versions"
         o.input = Shapes::ShapeRef.new(shape: ListCoreNetworkPolicyVersionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCoreNetworkPolicyVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_core_network_prefix_list_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCoreNetworkPrefixListAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/prefix-list/core-network/{coreNetworkId}"
+        o.input = Shapes::ShapeRef.new(shape: ListCoreNetworkPrefixListAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCoreNetworkPrefixListAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_core_network_routing_information, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCoreNetworkRoutingInformation"
+        o.http_method = "POST"
+        o.http_request_uri = "/core-networks/{coreNetworkId}/core-network-routing-information"
+        o.input = Shapes::ShapeRef.new(shape: ListCoreNetworkRoutingInformationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCoreNetworkRoutingInformationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2951,6 +3190,21 @@ module Aws::NetworkManager
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:put_attachment_routing_policy_label, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAttachmentRoutingPolicyLabel"
+        o.http_method = "POST"
+        o.http_request_uri = "/routing-policy-label"
+        o.input = Shapes::ShapeRef.new(shape: PutAttachmentRoutingPolicyLabelRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAttachmentRoutingPolicyLabelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:put_core_network_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutCoreNetworkPolicy"
         o.http_method = "POST"
@@ -3001,6 +3255,21 @@ module Aws::NetworkManager
         o.input = Shapes::ShapeRef.new(shape: RejectAttachmentRequest)
         o.output = Shapes::ShapeRef.new(shape: RejectAttachmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:remove_attachment_routing_policy_label, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveAttachmentRoutingPolicyLabel"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/routing-policy-label/core-network/{coreNetworkId}/attachment/{attachmentId}"
+        o.input = Shapes::ShapeRef.new(shape: RemoveAttachmentRoutingPolicyLabelRequest)
+        o.output = Shapes::ShapeRef.new(shape: RemoveAttachmentRoutingPolicyLabelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

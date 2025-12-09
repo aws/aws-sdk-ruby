@@ -38,6 +38,19 @@ module Aws::Invoicing
       SENSITIVE: []
     end
 
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class Contact
+      attr_accessor name: ::String
+      attr_accessor email: ::String
+      SENSITIVE: []
+    end
+
     class CreateInvoiceUnitRequest
       attr_accessor name: ::String
       attr_accessor invoice_receiver: ::String
@@ -50,6 +63,30 @@ module Aws::Invoicing
 
     class CreateInvoiceUnitResponse
       attr_accessor invoice_unit_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProcurementPortalPreferenceRequest
+      attr_accessor procurement_portal_name: ("SAP_BUSINESS_NETWORK" | "COUPA")
+      attr_accessor buyer_domain: ("NetworkID")
+      attr_accessor buyer_identifier: ::String
+      attr_accessor supplier_domain: ("NetworkID")
+      attr_accessor supplier_identifier: ::String
+      attr_accessor selector: Types::ProcurementPortalPreferenceSelector
+      attr_accessor procurement_portal_shared_secret: ::String
+      attr_accessor procurement_portal_instance_endpoint: ::String
+      attr_accessor test_env_preference: Types::TestEnvPreferenceInput
+      attr_accessor einvoice_delivery_enabled: bool
+      attr_accessor einvoice_delivery_preference: Types::EinvoiceDeliveryPreference
+      attr_accessor purchase_order_retrieval_enabled: bool
+      attr_accessor contacts: ::Array[Types::Contact]
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      attr_accessor client_token: ::String
+      SENSITIVE: [:procurement_portal_shared_secret]
+    end
+
+    class CreateProcurementPortalPreferenceResponse
+      attr_accessor procurement_portal_preference_arn: ::String
       SENSITIVE: []
     end
 
@@ -76,6 +113,16 @@ module Aws::Invoicing
       SENSITIVE: []
     end
 
+    class DeleteProcurementPortalPreferenceRequest
+      attr_accessor procurement_portal_preference_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProcurementPortalPreferenceResponse
+      attr_accessor procurement_portal_preference_arn: ::String
+      SENSITIVE: []
+    end
+
     class DiscountsBreakdown
       attr_accessor breakdown: ::Array[Types::DiscountsBreakdownAmount]
       attr_accessor total_amount: ::String
@@ -86,6 +133,16 @@ module Aws::Invoicing
       attr_accessor description: ::String
       attr_accessor amount: ::String
       attr_accessor rate: ::String
+      SENSITIVE: []
+    end
+
+    class EinvoiceDeliveryPreference
+      attr_accessor einvoice_delivery_document_types: ::Array[("AWS_CLOUD_INVOICE" | "AWS_CLOUD_CREDIT_MEMO" | "AWS_MARKETPLACE_INVOICE" | "AWS_MARKETPLACE_CREDIT_MEMO" | "AWS_REQUEST_FOR_PAYMENT")]
+      attr_accessor einvoice_delivery_attachment_types: ::Array[("INVOICE_PDF" | "RFP_PDF")]
+      attr_accessor protocol: ("CXML")
+      attr_accessor purchase_order_data_sources: ::Array[Types::PurchaseOrderDataSource]
+      attr_accessor connection_testing_method: ("PROD_ENV_DOLLAR_TEST" | "TEST_ENV_REPLAY_TEST")
+      attr_accessor einvoice_delivery_activation_date: ::Time
       SENSITIVE: []
     end
 
@@ -111,6 +168,17 @@ module Aws::Invoicing
       attr_accessor names: ::Array[::String]
       attr_accessor invoice_receivers: ::Array[::String]
       attr_accessor accounts: ::Array[::String]
+      attr_accessor bill_source_accounts: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetInvoicePDFRequest
+      attr_accessor invoice_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetInvoicePDFResponse
+      attr_accessor invoice_pdf: Types::InvoicePDF
       SENSITIVE: []
     end
 
@@ -131,6 +199,16 @@ module Aws::Invoicing
       SENSITIVE: []
     end
 
+    class GetProcurementPortalPreferenceRequest
+      attr_accessor procurement_portal_preference_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetProcurementPortalPreferenceResponse
+      attr_accessor procurement_portal_preference: Types::ProcurementPortalPreference
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor retry_after_seconds: ::Integer
       attr_accessor message: ::String
@@ -143,6 +221,14 @@ module Aws::Invoicing
       attr_accessor currency_code: ::String
       attr_accessor amount_breakdown: Types::AmountBreakdown
       attr_accessor currency_exchange_details: Types::CurrencyExchangeDetails
+      SENSITIVE: []
+    end
+
+    class InvoicePDF
+      attr_accessor invoice_id: ::String
+      attr_accessor document_url: ::String
+      attr_accessor document_url_expiration_date: ::Time
+      attr_accessor supplemental_documents: ::Array[Types::SupplementalDocument]
       SENSITIVE: []
     end
 
@@ -198,6 +284,7 @@ module Aws::Invoicing
 
     class InvoiceUnitRule
       attr_accessor linked_accounts: ::Array[::String]
+      attr_accessor bill_source_accounts: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -229,6 +316,18 @@ module Aws::Invoicing
       SENSITIVE: []
     end
 
+    class ListProcurementPortalPreferencesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProcurementPortalPreferencesResponse
+      attr_accessor procurement_portal_preferences: ::Array[Types::ProcurementPortalPreferenceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -236,6 +335,84 @@ module Aws::Invoicing
 
     class ListTagsForResourceResponse
       attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      SENSITIVE: []
+    end
+
+    class ProcurementPortalPreference
+      attr_accessor aws_account_id: ::String
+      attr_accessor procurement_portal_preference_arn: ::String
+      attr_accessor procurement_portal_name: ("SAP_BUSINESS_NETWORK" | "COUPA")
+      attr_accessor buyer_domain: ("NetworkID")
+      attr_accessor buyer_identifier: ::String
+      attr_accessor supplier_domain: ("NetworkID")
+      attr_accessor supplier_identifier: ::String
+      attr_accessor selector: Types::ProcurementPortalPreferenceSelector
+      attr_accessor procurement_portal_shared_secret: ::String
+      attr_accessor procurement_portal_instance_endpoint: ::String
+      attr_accessor purchase_order_retrieval_endpoint: ::String
+      attr_accessor test_env_preference: Types::TestEnvPreference
+      attr_accessor einvoice_delivery_enabled: bool
+      attr_accessor einvoice_delivery_preference: Types::EinvoiceDeliveryPreference
+      attr_accessor purchase_order_retrieval_enabled: bool
+      attr_accessor contacts: ::Array[Types::Contact]
+      attr_accessor einvoice_delivery_preference_status: ("PENDING_VERIFICATION" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
+      attr_accessor einvoice_delivery_preference_status_reason: ::String
+      attr_accessor purchase_order_retrieval_preference_status: ("PENDING_VERIFICATION" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
+      attr_accessor purchase_order_retrieval_preference_status_reason: ::String
+      attr_accessor version: ::Integer
+      attr_accessor create_date: ::Time
+      attr_accessor last_update_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ProcurementPortalPreferenceSelector
+      attr_accessor invoice_unit_arns: ::Array[::String]
+      attr_accessor seller_of_records: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ProcurementPortalPreferenceSummary
+      attr_accessor aws_account_id: ::String
+      attr_accessor procurement_portal_preference_arn: ::String
+      attr_accessor procurement_portal_name: ("SAP_BUSINESS_NETWORK" | "COUPA")
+      attr_accessor buyer_domain: ("NetworkID")
+      attr_accessor buyer_identifier: ::String
+      attr_accessor supplier_domain: ("NetworkID")
+      attr_accessor supplier_identifier: ::String
+      attr_accessor selector: Types::ProcurementPortalPreferenceSelector
+      attr_accessor einvoice_delivery_enabled: bool
+      attr_accessor purchase_order_retrieval_enabled: bool
+      attr_accessor einvoice_delivery_preference_status: ("PENDING_VERIFICATION" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
+      attr_accessor einvoice_delivery_preference_status_reason: ::String
+      attr_accessor purchase_order_retrieval_preference_status: ("PENDING_VERIFICATION" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
+      attr_accessor purchase_order_retrieval_preference_status_reason: ::String
+      attr_accessor version: ::Integer
+      attr_accessor create_date: ::Time
+      attr_accessor last_update_date: ::Time
+      SENSITIVE: []
+    end
+
+    class PurchaseOrderDataSource
+      attr_accessor einvoice_delivery_document_type: ("AWS_CLOUD_INVOICE" | "AWS_CLOUD_CREDIT_MEMO" | "AWS_MARKETPLACE_INVOICE" | "AWS_MARKETPLACE_CREDIT_MEMO" | "AWS_REQUEST_FOR_PAYMENT")
+      attr_accessor purchase_order_data_source_type: ("ASSOCIATED_PURCHASE_ORDER_REQUIRED" | "PURCHASE_ORDER_NOT_REQUIRED")
+      SENSITIVE: []
+    end
+
+    class PutProcurementPortalPreferenceRequest
+      attr_accessor procurement_portal_preference_arn: ::String
+      attr_accessor selector: Types::ProcurementPortalPreferenceSelector
+      attr_accessor procurement_portal_shared_secret: ::String
+      attr_accessor procurement_portal_instance_endpoint: ::String
+      attr_accessor test_env_preference: Types::TestEnvPreferenceInput
+      attr_accessor einvoice_delivery_enabled: bool
+      attr_accessor einvoice_delivery_preference: Types::EinvoiceDeliveryPreference
+      attr_accessor purchase_order_retrieval_enabled: bool
+      attr_accessor contacts: ::Array[Types::Contact]
+      SENSITIVE: [:procurement_portal_shared_secret]
+    end
+
+    class PutProcurementPortalPreferenceResponse
+      attr_accessor procurement_portal_preference_arn: ::String
       SENSITIVE: []
     end
 
@@ -269,6 +446,12 @@ module Aws::Invoicing
       SENSITIVE: []
     end
 
+    class SupplementalDocument
+      attr_accessor document_url: ::String
+      attr_accessor document_url_expiration_date: ::Time
+      SENSITIVE: []
+    end
+
     class TagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor resource_tags: ::Array[Types::ResourceTag]
@@ -288,6 +471,27 @@ module Aws::Invoicing
       attr_accessor description: ::String
       attr_accessor amount: ::String
       attr_accessor rate: ::String
+      SENSITIVE: []
+    end
+
+    class TestEnvPreference
+      attr_accessor buyer_domain: ("NetworkID")
+      attr_accessor buyer_identifier: ::String
+      attr_accessor supplier_domain: ("NetworkID")
+      attr_accessor supplier_identifier: ::String
+      attr_accessor procurement_portal_shared_secret: ::String
+      attr_accessor procurement_portal_instance_endpoint: ::String
+      attr_accessor purchase_order_retrieval_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class TestEnvPreferenceInput
+      attr_accessor buyer_domain: ("NetworkID")
+      attr_accessor buyer_identifier: ::String
+      attr_accessor supplier_domain: ("NetworkID")
+      attr_accessor supplier_identifier: ::String
+      attr_accessor procurement_portal_shared_secret: ::String
+      attr_accessor procurement_portal_instance_endpoint: ::String
       SENSITIVE: []
     end
 
@@ -315,6 +519,20 @@ module Aws::Invoicing
 
     class UpdateInvoiceUnitResponse
       attr_accessor invoice_unit_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProcurementPortalPreferenceStatusRequest
+      attr_accessor procurement_portal_preference_arn: ::String
+      attr_accessor einvoice_delivery_preference_status: ("PENDING_VERIFICATION" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
+      attr_accessor einvoice_delivery_preference_status_reason: ::String
+      attr_accessor purchase_order_retrieval_preference_status: ("PENDING_VERIFICATION" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED")
+      attr_accessor purchase_order_retrieval_preference_status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProcurementPortalPreferenceStatusResponse
+      attr_accessor procurement_portal_preference_arn: ::String
       SENSITIVE: []
     end
 

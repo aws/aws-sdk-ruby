@@ -17,6 +17,7 @@ module Aws::BedrockRuntime
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AnyToolChoice = Shapes::StructureShape.new(name: 'AnyToolChoice')
+    AppliedGuardrailDetails = Shapes::StructureShape.new(name: 'AppliedGuardrailDetails')
     ApplyGuardrailRequest = Shapes::StructureShape.new(name: 'ApplyGuardrailRequest')
     ApplyGuardrailResponse = Shapes::StructureShape.new(name: 'ApplyGuardrailResponse')
     AsyncInvokeArn = Shapes::StringShape.new(name: 'AsyncInvokeArn')
@@ -28,6 +29,10 @@ module Aws::BedrockRuntime
     AsyncInvokeStatus = Shapes::StringShape.new(name: 'AsyncInvokeStatus')
     AsyncInvokeSummaries = Shapes::ListShape.new(name: 'AsyncInvokeSummaries')
     AsyncInvokeSummary = Shapes::StructureShape.new(name: 'AsyncInvokeSummary')
+    AudioBlock = Shapes::StructureShape.new(name: 'AudioBlock')
+    AudioFormat = Shapes::StringShape.new(name: 'AudioFormat')
+    AudioSource = Shapes::UnionShape.new(name: 'AudioSource')
+    AudioSourceBytesBlob = Shapes::BlobShape.new(name: 'AudioSourceBytesBlob')
     AutoToolChoice = Shapes::StructureShape.new(name: 'AutoToolChoice')
     AutomatedReasoningRuleIdentifier = Shapes::StringShape.new(name: 'AutomatedReasoningRuleIdentifier')
     BidirectionalInputPayloadPart = Shapes::StructureShape.new(name: 'BidirectionalInputPayloadPart')
@@ -98,10 +103,12 @@ module Aws::BedrockRuntime
     DocumentPageLocationStartInteger = Shapes::IntegerShape.new(name: 'DocumentPageLocationStartInteger')
     DocumentSource = Shapes::UnionShape.new(name: 'DocumentSource')
     DocumentSourceBytesBlob = Shapes::BlobShape.new(name: 'DocumentSourceBytesBlob')
+    ErrorBlock = Shapes::StructureShape.new(name: 'ErrorBlock')
     FoundationModelVersionIdentifier = Shapes::StringShape.new(name: 'FoundationModelVersionIdentifier')
     GetAsyncInvokeRequest = Shapes::StructureShape.new(name: 'GetAsyncInvokeRequest')
     GetAsyncInvokeResponse = Shapes::StructureShape.new(name: 'GetAsyncInvokeResponse')
     GuardrailAction = Shapes::StringShape.new(name: 'GuardrailAction')
+    GuardrailArn = Shapes::StringShape.new(name: 'GuardrailArn')
     GuardrailAssessment = Shapes::StructureShape.new(name: 'GuardrailAssessment')
     GuardrailAssessmentList = Shapes::ListShape.new(name: 'GuardrailAssessmentList')
     GuardrailAssessmentListMap = Shapes::MapShape.new(name: 'GuardrailAssessmentListMap')
@@ -170,6 +177,7 @@ module Aws::BedrockRuntime
     GuardrailCoverage = Shapes::StructureShape.new(name: 'GuardrailCoverage')
     GuardrailCustomWord = Shapes::StructureShape.new(name: 'GuardrailCustomWord')
     GuardrailCustomWordList = Shapes::ListShape.new(name: 'GuardrailCustomWordList')
+    GuardrailId = Shapes::StringShape.new(name: 'GuardrailId')
     GuardrailIdentifier = Shapes::StringShape.new(name: 'GuardrailIdentifier')
     GuardrailImageBlock = Shapes::StructureShape.new(name: 'GuardrailImageBlock')
     GuardrailImageCoverage = Shapes::StructureShape.new(name: 'GuardrailImageCoverage')
@@ -180,10 +188,13 @@ module Aws::BedrockRuntime
     GuardrailManagedWord = Shapes::StructureShape.new(name: 'GuardrailManagedWord')
     GuardrailManagedWordList = Shapes::ListShape.new(name: 'GuardrailManagedWordList')
     GuardrailManagedWordType = Shapes::StringShape.new(name: 'GuardrailManagedWordType')
+    GuardrailOrigin = Shapes::StringShape.new(name: 'GuardrailOrigin')
+    GuardrailOriginList = Shapes::ListShape.new(name: 'GuardrailOriginList')
     GuardrailOutputContent = Shapes::StructureShape.new(name: 'GuardrailOutputContent')
     GuardrailOutputContentList = Shapes::ListShape.new(name: 'GuardrailOutputContentList')
     GuardrailOutputScope = Shapes::StringShape.new(name: 'GuardrailOutputScope')
     GuardrailOutputText = Shapes::StringShape.new(name: 'GuardrailOutputText')
+    GuardrailOwnership = Shapes::StringShape.new(name: 'GuardrailOwnership')
     GuardrailPiiEntityFilter = Shapes::StructureShape.new(name: 'GuardrailPiiEntityFilter')
     GuardrailPiiEntityFilterList = Shapes::ListShape.new(name: 'GuardrailPiiEntityFilterList')
     GuardrailPiiEntityType = Shapes::StringShape.new(name: 'GuardrailPiiEntityType')
@@ -212,6 +223,8 @@ module Aws::BedrockRuntime
     GuardrailWordPolicyAssessment = Shapes::StructureShape.new(name: 'GuardrailWordPolicyAssessment')
     GuardrailWordPolicyUnitsProcessed = Shapes::IntegerShape.new(name: 'GuardrailWordPolicyUnitsProcessed')
     ImageBlock = Shapes::StructureShape.new(name: 'ImageBlock')
+    ImageBlockDelta = Shapes::StructureShape.new(name: 'ImageBlockDelta')
+    ImageBlockStart = Shapes::StructureShape.new(name: 'ImageBlockStart')
     ImageFormat = Shapes::StringShape.new(name: 'ImageFormat')
     ImageSource = Shapes::UnionShape.new(name: 'ImageSource')
     ImageSourceBytesBlob = Shapes::BlobShape.new(name: 'ImageSourceBytesBlob')
@@ -273,7 +286,16 @@ module Aws::BedrockRuntime
     ResponseStream = Shapes::StructureShape.new(name: 'ResponseStream')
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
+    SearchResultBlock = Shapes::StructureShape.new(name: 'SearchResultBlock')
+    SearchResultContentBlock = Shapes::StructureShape.new(name: 'SearchResultContentBlock')
+    SearchResultContentBlocks = Shapes::ListShape.new(name: 'SearchResultContentBlocks')
+    SearchResultLocation = Shapes::StructureShape.new(name: 'SearchResultLocation')
+    SearchResultLocationEndInteger = Shapes::IntegerShape.new(name: 'SearchResultLocationEndInteger')
+    SearchResultLocationSearchResultIndexInteger = Shapes::IntegerShape.new(name: 'SearchResultLocationSearchResultIndexInteger')
+    SearchResultLocationStartInteger = Shapes::IntegerShape.new(name: 'SearchResultLocationStartInteger')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    ServiceTier = Shapes::StructureShape.new(name: 'ServiceTier')
+    ServiceTierType = Shapes::StringShape.new(name: 'ServiceTierType')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SortAsyncInvocationBy = Shapes::StringShape.new(name: 'SortAsyncInvocationBy')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
@@ -285,6 +307,7 @@ module Aws::BedrockRuntime
     String = Shapes::StringShape.new(name: 'String')
     SystemContentBlock = Shapes::UnionShape.new(name: 'SystemContentBlock')
     SystemContentBlocks = Shapes::ListShape.new(name: 'SystemContentBlocks')
+    SystemTool = Shapes::StructureShape.new(name: 'SystemTool')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagList = Shapes::ListShape.new(name: 'TagList')
@@ -306,6 +329,9 @@ module Aws::BedrockRuntime
     ToolInputSchema = Shapes::UnionShape.new(name: 'ToolInputSchema')
     ToolName = Shapes::StringShape.new(name: 'ToolName')
     ToolResultBlock = Shapes::StructureShape.new(name: 'ToolResultBlock')
+    ToolResultBlockDelta = Shapes::UnionShape.new(name: 'ToolResultBlockDelta')
+    ToolResultBlockStart = Shapes::StructureShape.new(name: 'ToolResultBlockStart')
+    ToolResultBlocksDelta = Shapes::ListShape.new(name: 'ToolResultBlocksDelta')
     ToolResultContentBlock = Shapes::UnionShape.new(name: 'ToolResultContentBlock')
     ToolResultContentBlocks = Shapes::ListShape.new(name: 'ToolResultContentBlocks')
     ToolResultStatus = Shapes::StringShape.new(name: 'ToolResultStatus')
@@ -314,17 +340,26 @@ module Aws::BedrockRuntime
     ToolUseBlockDelta = Shapes::StructureShape.new(name: 'ToolUseBlockDelta')
     ToolUseBlockStart = Shapes::StructureShape.new(name: 'ToolUseBlockStart')
     ToolUseId = Shapes::StringShape.new(name: 'ToolUseId')
+    ToolUseType = Shapes::StringShape.new(name: 'ToolUseType')
     Trace = Shapes::StringShape.new(name: 'Trace')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     VideoBlock = Shapes::StructureShape.new(name: 'VideoBlock')
     VideoFormat = Shapes::StringShape.new(name: 'VideoFormat')
     VideoSource = Shapes::UnionShape.new(name: 'VideoSource')
     VideoSourceBytesBlob = Shapes::BlobShape.new(name: 'VideoSourceBytesBlob')
+    WebLocation = Shapes::StructureShape.new(name: 'WebLocation')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AnyToolChoice.struct_class = Types::AnyToolChoice
+
+    AppliedGuardrailDetails.add_member(:guardrail_id, Shapes::ShapeRef.new(shape: GuardrailId, location_name: "guardrailId"))
+    AppliedGuardrailDetails.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailVersion, location_name: "guardrailVersion"))
+    AppliedGuardrailDetails.add_member(:guardrail_arn, Shapes::ShapeRef.new(shape: GuardrailArn, location_name: "guardrailArn"))
+    AppliedGuardrailDetails.add_member(:guardrail_origin, Shapes::ShapeRef.new(shape: GuardrailOriginList, location_name: "guardrailOrigin"))
+    AppliedGuardrailDetails.add_member(:guardrail_ownership, Shapes::ShapeRef.new(shape: GuardrailOwnership, location_name: "guardrailOwnership"))
+    AppliedGuardrailDetails.struct_class = Types::AppliedGuardrailDetails
 
     ApplyGuardrailRequest.add_member(:guardrail_identifier, Shapes::ShapeRef.new(shape: GuardrailIdentifier, required: true, location: "uri", location_name: "guardrailIdentifier"))
     ApplyGuardrailRequest.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailVersion, required: true, location: "uri", location_name: "guardrailVersion"))
@@ -365,6 +400,19 @@ module Aws::BedrockRuntime
     AsyncInvokeSummary.add_member(:output_data_config, Shapes::ShapeRef.new(shape: AsyncInvokeOutputDataConfig, required: true, location_name: "outputDataConfig"))
     AsyncInvokeSummary.struct_class = Types::AsyncInvokeSummary
 
+    AudioBlock.add_member(:format, Shapes::ShapeRef.new(shape: AudioFormat, required: true, location_name: "format"))
+    AudioBlock.add_member(:source, Shapes::ShapeRef.new(shape: AudioSource, required: true, location_name: "source"))
+    AudioBlock.add_member(:error, Shapes::ShapeRef.new(shape: ErrorBlock, location_name: "error"))
+    AudioBlock.struct_class = Types::AudioBlock
+
+    AudioSource.add_member(:bytes, Shapes::ShapeRef.new(shape: AudioSourceBytesBlob, location_name: "bytes"))
+    AudioSource.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "s3Location"))
+    AudioSource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AudioSource.add_member_subclass(:bytes, Types::AudioSource::Bytes)
+    AudioSource.add_member_subclass(:s3_location, Types::AudioSource::S3Location)
+    AudioSource.add_member_subclass(:unknown, Types::AudioSource::Unknown)
+    AudioSource.struct_class = Types::AudioSource
+
     AutoToolChoice.struct_class = Types::AutoToolChoice
 
     BidirectionalInputPayloadPart.add_member(:bytes, Shapes::ShapeRef.new(shape: PartBody, location_name: "bytes"))
@@ -377,6 +425,7 @@ module Aws::BedrockRuntime
     CachePointBlock.struct_class = Types::CachePointBlock
 
     Citation.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
+    Citation.add_member(:source, Shapes::ShapeRef.new(shape: String, location_name: "source"))
     Citation.add_member(:source_content, Shapes::ShapeRef.new(shape: CitationSourceContentList, location_name: "sourceContent"))
     Citation.add_member(:location, Shapes::ShapeRef.new(shape: CitationLocation, location_name: "location"))
     Citation.struct_class = Types::Citation
@@ -389,13 +438,17 @@ module Aws::BedrockRuntime
 
     CitationGeneratedContentList.member = Shapes::ShapeRef.new(shape: CitationGeneratedContent)
 
+    CitationLocation.add_member(:web, Shapes::ShapeRef.new(shape: WebLocation, location_name: "web"))
     CitationLocation.add_member(:document_char, Shapes::ShapeRef.new(shape: DocumentCharLocation, location_name: "documentChar"))
     CitationLocation.add_member(:document_page, Shapes::ShapeRef.new(shape: DocumentPageLocation, location_name: "documentPage"))
     CitationLocation.add_member(:document_chunk, Shapes::ShapeRef.new(shape: DocumentChunkLocation, location_name: "documentChunk"))
+    CitationLocation.add_member(:search_result_location, Shapes::ShapeRef.new(shape: SearchResultLocation, location_name: "searchResultLocation"))
     CitationLocation.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CitationLocation.add_member_subclass(:web, Types::CitationLocation::Web)
     CitationLocation.add_member_subclass(:document_char, Types::CitationLocation::DocumentChar)
     CitationLocation.add_member_subclass(:document_page, Types::CitationLocation::DocumentPage)
     CitationLocation.add_member_subclass(:document_chunk, Types::CitationLocation::DocumentChunk)
+    CitationLocation.add_member_subclass(:search_result_location, Types::CitationLocation::SearchResultLocation)
     CitationLocation.add_member_subclass(:unknown, Types::CitationLocation::Unknown)
     CitationLocation.struct_class = Types::CitationLocation
 
@@ -422,6 +475,7 @@ module Aws::BedrockRuntime
     CitationsContentBlock.struct_class = Types::CitationsContentBlock
 
     CitationsDelta.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
+    CitationsDelta.add_member(:source, Shapes::ShapeRef.new(shape: String, location_name: "source"))
     CitationsDelta.add_member(:source_content, Shapes::ShapeRef.new(shape: CitationSourceContentListDelta, location_name: "sourceContent"))
     CitationsDelta.add_member(:location, Shapes::ShapeRef.new(shape: CitationLocation, location_name: "location"))
     CitationsDelta.struct_class = Types::CitationsDelta
@@ -433,35 +487,43 @@ module Aws::BedrockRuntime
     ContentBlock.add_member(:image, Shapes::ShapeRef.new(shape: ImageBlock, location_name: "image"))
     ContentBlock.add_member(:document, Shapes::ShapeRef.new(shape: DocumentBlock, location_name: "document"))
     ContentBlock.add_member(:video, Shapes::ShapeRef.new(shape: VideoBlock, location_name: "video"))
+    ContentBlock.add_member(:audio, Shapes::ShapeRef.new(shape: AudioBlock, location_name: "audio"))
     ContentBlock.add_member(:tool_use, Shapes::ShapeRef.new(shape: ToolUseBlock, location_name: "toolUse"))
     ContentBlock.add_member(:tool_result, Shapes::ShapeRef.new(shape: ToolResultBlock, location_name: "toolResult"))
     ContentBlock.add_member(:guard_content, Shapes::ShapeRef.new(shape: GuardrailConverseContentBlock, location_name: "guardContent"))
     ContentBlock.add_member(:cache_point, Shapes::ShapeRef.new(shape: CachePointBlock, location_name: "cachePoint"))
     ContentBlock.add_member(:reasoning_content, Shapes::ShapeRef.new(shape: ReasoningContentBlock, location_name: "reasoningContent"))
     ContentBlock.add_member(:citations_content, Shapes::ShapeRef.new(shape: CitationsContentBlock, location_name: "citationsContent"))
+    ContentBlock.add_member(:search_result, Shapes::ShapeRef.new(shape: SearchResultBlock, location_name: "searchResult"))
     ContentBlock.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ContentBlock.add_member_subclass(:text, Types::ContentBlock::Text)
     ContentBlock.add_member_subclass(:image, Types::ContentBlock::Image)
     ContentBlock.add_member_subclass(:document, Types::ContentBlock::Document)
     ContentBlock.add_member_subclass(:video, Types::ContentBlock::Video)
+    ContentBlock.add_member_subclass(:audio, Types::ContentBlock::Audio)
     ContentBlock.add_member_subclass(:tool_use, Types::ContentBlock::ToolUse)
     ContentBlock.add_member_subclass(:tool_result, Types::ContentBlock::ToolResult)
     ContentBlock.add_member_subclass(:guard_content, Types::ContentBlock::GuardContent)
     ContentBlock.add_member_subclass(:cache_point, Types::ContentBlock::CachePoint)
     ContentBlock.add_member_subclass(:reasoning_content, Types::ContentBlock::ReasoningContent)
     ContentBlock.add_member_subclass(:citations_content, Types::ContentBlock::CitationsContent)
+    ContentBlock.add_member_subclass(:search_result, Types::ContentBlock::SearchResult)
     ContentBlock.add_member_subclass(:unknown, Types::ContentBlock::Unknown)
     ContentBlock.struct_class = Types::ContentBlock
 
     ContentBlockDelta.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
     ContentBlockDelta.add_member(:tool_use, Shapes::ShapeRef.new(shape: ToolUseBlockDelta, location_name: "toolUse"))
+    ContentBlockDelta.add_member(:tool_result, Shapes::ShapeRef.new(shape: ToolResultBlocksDelta, location_name: "toolResult"))
     ContentBlockDelta.add_member(:reasoning_content, Shapes::ShapeRef.new(shape: ReasoningContentBlockDelta, location_name: "reasoningContent"))
     ContentBlockDelta.add_member(:citation, Shapes::ShapeRef.new(shape: CitationsDelta, location_name: "citation"))
+    ContentBlockDelta.add_member(:image, Shapes::ShapeRef.new(shape: ImageBlockDelta, location_name: "image"))
     ContentBlockDelta.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ContentBlockDelta.add_member_subclass(:text, Types::ContentBlockDelta::Text)
     ContentBlockDelta.add_member_subclass(:tool_use, Types::ContentBlockDelta::ToolUse)
+    ContentBlockDelta.add_member_subclass(:tool_result, Types::ContentBlockDelta::ToolResult)
     ContentBlockDelta.add_member_subclass(:reasoning_content, Types::ContentBlockDelta::ReasoningContent)
     ContentBlockDelta.add_member_subclass(:citation, Types::ContentBlockDelta::Citation)
+    ContentBlockDelta.add_member_subclass(:image, Types::ContentBlockDelta::Image)
     ContentBlockDelta.add_member_subclass(:unknown, Types::ContentBlockDelta::Unknown)
     ContentBlockDelta.struct_class = Types::ContentBlockDelta
 
@@ -470,8 +532,12 @@ module Aws::BedrockRuntime
     ContentBlockDeltaEvent.struct_class = Types::ContentBlockDeltaEvent
 
     ContentBlockStart.add_member(:tool_use, Shapes::ShapeRef.new(shape: ToolUseBlockStart, location_name: "toolUse"))
+    ContentBlockStart.add_member(:tool_result, Shapes::ShapeRef.new(shape: ToolResultBlockStart, location_name: "toolResult"))
+    ContentBlockStart.add_member(:image, Shapes::ShapeRef.new(shape: ImageBlockStart, location_name: "image"))
     ContentBlockStart.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ContentBlockStart.add_member_subclass(:tool_use, Types::ContentBlockStart::ToolUse)
+    ContentBlockStart.add_member_subclass(:tool_result, Types::ContentBlockStart::ToolResult)
+    ContentBlockStart.add_member_subclass(:image, Types::ContentBlockStart::Image)
     ContentBlockStart.add_member_subclass(:unknown, Types::ContentBlockStart::Unknown)
     ContentBlockStart.struct_class = Types::ContentBlockStart
 
@@ -504,6 +570,7 @@ module Aws::BedrockRuntime
     ConverseRequest.add_member(:additional_model_response_field_paths, Shapes::ShapeRef.new(shape: ConverseRequestAdditionalModelResponseFieldPathsList, location_name: "additionalModelResponseFieldPaths"))
     ConverseRequest.add_member(:request_metadata, Shapes::ShapeRef.new(shape: RequestMetadata, location_name: "requestMetadata"))
     ConverseRequest.add_member(:performance_config, Shapes::ShapeRef.new(shape: PerformanceConfiguration, location_name: "performanceConfig"))
+    ConverseRequest.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTier, location_name: "serviceTier"))
     ConverseRequest.struct_class = Types::ConverseRequest
 
     ConverseRequestAdditionalModelResponseFieldPathsList.member = Shapes::ShapeRef.new(shape: ConverseRequestAdditionalModelResponseFieldPathsListMemberString)
@@ -515,12 +582,14 @@ module Aws::BedrockRuntime
     ConverseResponse.add_member(:additional_model_response_fields, Shapes::ShapeRef.new(shape: Document, location_name: "additionalModelResponseFields"))
     ConverseResponse.add_member(:trace, Shapes::ShapeRef.new(shape: ConverseTrace, location_name: "trace"))
     ConverseResponse.add_member(:performance_config, Shapes::ShapeRef.new(shape: PerformanceConfiguration, location_name: "performanceConfig"))
+    ConverseResponse.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTier, location_name: "serviceTier"))
     ConverseResponse.struct_class = Types::ConverseResponse
 
     ConverseStreamMetadataEvent.add_member(:usage, Shapes::ShapeRef.new(shape: TokenUsage, required: true, location_name: "usage"))
     ConverseStreamMetadataEvent.add_member(:metrics, Shapes::ShapeRef.new(shape: ConverseStreamMetrics, required: true, location_name: "metrics"))
     ConverseStreamMetadataEvent.add_member(:trace, Shapes::ShapeRef.new(shape: ConverseStreamTrace, location_name: "trace"))
     ConverseStreamMetadataEvent.add_member(:performance_config, Shapes::ShapeRef.new(shape: PerformanceConfiguration, location_name: "performanceConfig"))
+    ConverseStreamMetadataEvent.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTier, location_name: "serviceTier"))
     ConverseStreamMetadataEvent.struct_class = Types::ConverseStreamMetadataEvent
 
     ConverseStreamMetrics.add_member(:latency_ms, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "latencyMs"))
@@ -550,6 +619,7 @@ module Aws::BedrockRuntime
     ConverseStreamRequest.add_member(:additional_model_response_field_paths, Shapes::ShapeRef.new(shape: ConverseStreamRequestAdditionalModelResponseFieldPathsList, location_name: "additionalModelResponseFieldPaths"))
     ConverseStreamRequest.add_member(:request_metadata, Shapes::ShapeRef.new(shape: RequestMetadata, location_name: "requestMetadata"))
     ConverseStreamRequest.add_member(:performance_config, Shapes::ShapeRef.new(shape: PerformanceConfiguration, location_name: "performanceConfig"))
+    ConverseStreamRequest.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTier, location_name: "serviceTier"))
     ConverseStreamRequest.struct_class = Types::ConverseStreamRequest
 
     ConverseStreamRequestAdditionalModelResponseFieldPathsList.member = Shapes::ShapeRef.new(shape: ConverseStreamRequestAdditionalModelResponseFieldPathsListMemberString)
@@ -565,6 +635,8 @@ module Aws::BedrockRuntime
 
     ConverseTokensRequest.add_member(:messages, Shapes::ShapeRef.new(shape: Messages, location_name: "messages"))
     ConverseTokensRequest.add_member(:system, Shapes::ShapeRef.new(shape: SystemContentBlocks, location_name: "system"))
+    ConverseTokensRequest.add_member(:tool_config, Shapes::ShapeRef.new(shape: ToolConfiguration, location_name: "toolConfig"))
+    ConverseTokensRequest.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: Document, location_name: "additionalModelRequestFields"))
     ConverseTokensRequest.struct_class = Types::ConverseTokensRequest
 
     ConverseTrace.add_member(:guardrail, Shapes::ShapeRef.new(shape: GuardrailTraceAssessment, location_name: "guardrail"))
@@ -628,6 +700,9 @@ module Aws::BedrockRuntime
     DocumentSource.add_member_subclass(:unknown, Types::DocumentSource::Unknown)
     DocumentSource.struct_class = Types::DocumentSource
 
+    ErrorBlock.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ErrorBlock.struct_class = Types::ErrorBlock
+
     GetAsyncInvokeRequest.add_member(:invocation_arn, Shapes::ShapeRef.new(shape: InvocationArn, required: true, location: "uri", location_name: "invocationArn"))
     GetAsyncInvokeRequest.struct_class = Types::GetAsyncInvokeRequest
 
@@ -649,6 +724,7 @@ module Aws::BedrockRuntime
     GuardrailAssessment.add_member(:contextual_grounding_policy, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingPolicyAssessment, location_name: "contextualGroundingPolicy"))
     GuardrailAssessment.add_member(:automated_reasoning_policy, Shapes::ShapeRef.new(shape: GuardrailAutomatedReasoningPolicyAssessment, location_name: "automatedReasoningPolicy"))
     GuardrailAssessment.add_member(:invocation_metrics, Shapes::ShapeRef.new(shape: GuardrailInvocationMetrics, location_name: "invocationMetrics"))
+    GuardrailAssessment.add_member(:applied_guardrail_details, Shapes::ShapeRef.new(shape: AppliedGuardrailDetails, location_name: "appliedGuardrailDetails"))
     GuardrailAssessment.struct_class = Types::GuardrailAssessment
 
     GuardrailAssessmentList.member = Shapes::ShapeRef.new(shape: GuardrailAssessment)
@@ -753,8 +829,8 @@ module Aws::BedrockRuntime
     GuardrailAutomatedReasoningValidFinding.add_member(:logic_warning, Shapes::ShapeRef.new(shape: GuardrailAutomatedReasoningLogicWarning, location_name: "logicWarning"))
     GuardrailAutomatedReasoningValidFinding.struct_class = Types::GuardrailAutomatedReasoningValidFinding
 
-    GuardrailConfiguration.add_member(:guardrail_identifier, Shapes::ShapeRef.new(shape: GuardrailIdentifier, required: true, location_name: "guardrailIdentifier"))
-    GuardrailConfiguration.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailVersion, required: true, location_name: "guardrailVersion"))
+    GuardrailConfiguration.add_member(:guardrail_identifier, Shapes::ShapeRef.new(shape: GuardrailIdentifier, location_name: "guardrailIdentifier"))
+    GuardrailConfiguration.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailVersion, location_name: "guardrailVersion"))
     GuardrailConfiguration.add_member(:trace, Shapes::ShapeRef.new(shape: GuardrailTrace, location_name: "trace"))
     GuardrailConfiguration.struct_class = Types::GuardrailConfiguration
 
@@ -856,6 +932,8 @@ module Aws::BedrockRuntime
 
     GuardrailManagedWordList.member = Shapes::ShapeRef.new(shape: GuardrailManagedWord)
 
+    GuardrailOriginList.member = Shapes::ShapeRef.new(shape: GuardrailOrigin)
+
     GuardrailOutputContent.add_member(:text, Shapes::ShapeRef.new(shape: GuardrailOutputText, location_name: "text"))
     GuardrailOutputContent.struct_class = Types::GuardrailOutputContent
 
@@ -882,8 +960,8 @@ module Aws::BedrockRuntime
     GuardrailSensitiveInformationPolicyAssessment.add_member(:regexes, Shapes::ShapeRef.new(shape: GuardrailRegexFilterList, required: true, location_name: "regexes"))
     GuardrailSensitiveInformationPolicyAssessment.struct_class = Types::GuardrailSensitiveInformationPolicyAssessment
 
-    GuardrailStreamConfiguration.add_member(:guardrail_identifier, Shapes::ShapeRef.new(shape: GuardrailIdentifier, required: true, location_name: "guardrailIdentifier"))
-    GuardrailStreamConfiguration.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailVersion, required: true, location_name: "guardrailVersion"))
+    GuardrailStreamConfiguration.add_member(:guardrail_identifier, Shapes::ShapeRef.new(shape: GuardrailIdentifier, location_name: "guardrailIdentifier"))
+    GuardrailStreamConfiguration.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailVersion, location_name: "guardrailVersion"))
     GuardrailStreamConfiguration.add_member(:trace, Shapes::ShapeRef.new(shape: GuardrailTrace, location_name: "trace"))
     GuardrailStreamConfiguration.add_member(:stream_processing_mode, Shapes::ShapeRef.new(shape: GuardrailStreamProcessingMode, location_name: "streamProcessingMode"))
     GuardrailStreamConfiguration.struct_class = Types::GuardrailStreamConfiguration
@@ -930,7 +1008,15 @@ module Aws::BedrockRuntime
 
     ImageBlock.add_member(:format, Shapes::ShapeRef.new(shape: ImageFormat, required: true, location_name: "format"))
     ImageBlock.add_member(:source, Shapes::ShapeRef.new(shape: ImageSource, required: true, location_name: "source"))
+    ImageBlock.add_member(:error, Shapes::ShapeRef.new(shape: ErrorBlock, location_name: "error"))
     ImageBlock.struct_class = Types::ImageBlock
+
+    ImageBlockDelta.add_member(:source, Shapes::ShapeRef.new(shape: ImageSource, location_name: "source"))
+    ImageBlockDelta.add_member(:error, Shapes::ShapeRef.new(shape: ErrorBlock, location_name: "error"))
+    ImageBlockDelta.struct_class = Types::ImageBlockDelta
+
+    ImageBlockStart.add_member(:format, Shapes::ShapeRef.new(shape: ImageFormat, required: true, location_name: "format"))
+    ImageBlockStart.struct_class = Types::ImageBlockStart
 
     ImageSource.add_member(:bytes, Shapes::ShapeRef.new(shape: ImageSourceBytesBlob, location_name: "bytes"))
     ImageSource.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "s3Location"))
@@ -959,6 +1045,7 @@ module Aws::BedrockRuntime
     InvokeModelRequest.add_member(:guardrail_identifier, Shapes::ShapeRef.new(shape: GuardrailIdentifier, location: "header", location_name: "X-Amzn-Bedrock-GuardrailIdentifier"))
     InvokeModelRequest.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailVersion, location: "header", location_name: "X-Amzn-Bedrock-GuardrailVersion"))
     InvokeModelRequest.add_member(:performance_config_latency, Shapes::ShapeRef.new(shape: PerformanceConfigLatency, location: "header", location_name: "X-Amzn-Bedrock-PerformanceConfig-Latency"))
+    InvokeModelRequest.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTierType, location: "header", location_name: "X-Amzn-Bedrock-Service-Tier"))
     InvokeModelRequest.struct_class = Types::InvokeModelRequest
     InvokeModelRequest[:payload] = :body
     InvokeModelRequest[:payload_member] = InvokeModelRequest.member(:body)
@@ -966,6 +1053,7 @@ module Aws::BedrockRuntime
     InvokeModelResponse.add_member(:body, Shapes::ShapeRef.new(shape: Body, required: true, location_name: "body"))
     InvokeModelResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: MimeType, required: true, location: "header", location_name: "Content-Type"))
     InvokeModelResponse.add_member(:performance_config_latency, Shapes::ShapeRef.new(shape: PerformanceConfigLatency, location: "header", location_name: "X-Amzn-Bedrock-PerformanceConfig-Latency"))
+    InvokeModelResponse.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTierType, location: "header", location_name: "X-Amzn-Bedrock-Service-Tier"))
     InvokeModelResponse.struct_class = Types::InvokeModelResponse
     InvokeModelResponse[:payload] = :body
     InvokeModelResponse[:payload_member] = InvokeModelResponse.member(:body)
@@ -1004,6 +1092,7 @@ module Aws::BedrockRuntime
     InvokeModelWithResponseStreamRequest.add_member(:guardrail_identifier, Shapes::ShapeRef.new(shape: GuardrailIdentifier, location: "header", location_name: "X-Amzn-Bedrock-GuardrailIdentifier"))
     InvokeModelWithResponseStreamRequest.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailVersion, location: "header", location_name: "X-Amzn-Bedrock-GuardrailVersion"))
     InvokeModelWithResponseStreamRequest.add_member(:performance_config_latency, Shapes::ShapeRef.new(shape: PerformanceConfigLatency, location: "header", location_name: "X-Amzn-Bedrock-PerformanceConfig-Latency"))
+    InvokeModelWithResponseStreamRequest.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTierType, location: "header", location_name: "X-Amzn-Bedrock-Service-Tier"))
     InvokeModelWithResponseStreamRequest.struct_class = Types::InvokeModelWithResponseStreamRequest
     InvokeModelWithResponseStreamRequest[:payload] = :body
     InvokeModelWithResponseStreamRequest[:payload_member] = InvokeModelWithResponseStreamRequest.member(:body)
@@ -1011,6 +1100,7 @@ module Aws::BedrockRuntime
     InvokeModelWithResponseStreamResponse.add_member(:body, Shapes::ShapeRef.new(shape: ResponseStream, required: true, eventstream: true, location_name: "body"))
     InvokeModelWithResponseStreamResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: MimeType, required: true, location: "header", location_name: "X-Amzn-Bedrock-Content-Type"))
     InvokeModelWithResponseStreamResponse.add_member(:performance_config_latency, Shapes::ShapeRef.new(shape: PerformanceConfigLatency, location: "header", location_name: "X-Amzn-Bedrock-PerformanceConfig-Latency"))
+    InvokeModelWithResponseStreamResponse.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTierType, location: "header", location_name: "X-Amzn-Bedrock-Service-Tier"))
     InvokeModelWithResponseStreamResponse.struct_class = Types::InvokeModelWithResponseStreamResponse
     InvokeModelWithResponseStreamResponse[:payload] = :body
     InvokeModelWithResponseStreamResponse[:payload_member] = InvokeModelWithResponseStreamResponse.member(:body)
@@ -1118,8 +1208,27 @@ module Aws::BedrockRuntime
     S3Location.add_member(:bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "bucketOwner"))
     S3Location.struct_class = Types::S3Location
 
+    SearchResultBlock.add_member(:source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "source"))
+    SearchResultBlock.add_member(:title, Shapes::ShapeRef.new(shape: String, required: true, location_name: "title"))
+    SearchResultBlock.add_member(:content, Shapes::ShapeRef.new(shape: SearchResultContentBlocks, required: true, location_name: "content"))
+    SearchResultBlock.add_member(:citations, Shapes::ShapeRef.new(shape: CitationsConfig, location_name: "citations"))
+    SearchResultBlock.struct_class = Types::SearchResultBlock
+
+    SearchResultContentBlock.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "text"))
+    SearchResultContentBlock.struct_class = Types::SearchResultContentBlock
+
+    SearchResultContentBlocks.member = Shapes::ShapeRef.new(shape: SearchResultContentBlock)
+
+    SearchResultLocation.add_member(:search_result_index, Shapes::ShapeRef.new(shape: SearchResultLocationSearchResultIndexInteger, location_name: "searchResultIndex"))
+    SearchResultLocation.add_member(:start, Shapes::ShapeRef.new(shape: SearchResultLocationStartInteger, location_name: "start"))
+    SearchResultLocation.add_member(:end, Shapes::ShapeRef.new(shape: SearchResultLocationEndInteger, location_name: "end"))
+    SearchResultLocation.struct_class = Types::SearchResultLocation
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    ServiceTier.add_member(:type, Shapes::ShapeRef.new(shape: ServiceTierType, required: true, location_name: "type"))
+    ServiceTier.struct_class = Types::ServiceTier
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
@@ -1149,6 +1258,9 @@ module Aws::BedrockRuntime
 
     SystemContentBlocks.member = Shapes::ShapeRef.new(shape: SystemContentBlock)
 
+    SystemTool.add_member(:name, Shapes::ShapeRef.new(shape: ToolName, required: true, location_name: "name"))
+    SystemTool.struct_class = Types::SystemTool
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "value"))
     Tag.struct_class = Types::Tag
@@ -1166,9 +1278,11 @@ module Aws::BedrockRuntime
     TokenUsage.struct_class = Types::TokenUsage
 
     Tool.add_member(:tool_spec, Shapes::ShapeRef.new(shape: ToolSpecification, location_name: "toolSpec"))
+    Tool.add_member(:system_tool, Shapes::ShapeRef.new(shape: SystemTool, location_name: "systemTool"))
     Tool.add_member(:cache_point, Shapes::ShapeRef.new(shape: CachePointBlock, location_name: "cachePoint"))
     Tool.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Tool.add_member_subclass(:tool_spec, Types::Tool::ToolSpec)
+    Tool.add_member_subclass(:system_tool, Types::Tool::SystemTool)
     Tool.add_member_subclass(:cache_point, Types::Tool::CachePoint)
     Tool.add_member_subclass(:unknown, Types::Tool::Unknown)
     Tool.struct_class = Types::Tool
@@ -1198,19 +1312,37 @@ module Aws::BedrockRuntime
     ToolResultBlock.add_member(:tool_use_id, Shapes::ShapeRef.new(shape: ToolUseId, required: true, location_name: "toolUseId"))
     ToolResultBlock.add_member(:content, Shapes::ShapeRef.new(shape: ToolResultContentBlocks, required: true, location_name: "content"))
     ToolResultBlock.add_member(:status, Shapes::ShapeRef.new(shape: ToolResultStatus, location_name: "status"))
+    ToolResultBlock.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
     ToolResultBlock.struct_class = Types::ToolResultBlock
+
+    ToolResultBlockDelta.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
+    ToolResultBlockDelta.add_member(:json, Shapes::ShapeRef.new(shape: Document, location_name: "json"))
+    ToolResultBlockDelta.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ToolResultBlockDelta.add_member_subclass(:text, Types::ToolResultBlockDelta::Text)
+    ToolResultBlockDelta.add_member_subclass(:json, Types::ToolResultBlockDelta::Json)
+    ToolResultBlockDelta.add_member_subclass(:unknown, Types::ToolResultBlockDelta::Unknown)
+    ToolResultBlockDelta.struct_class = Types::ToolResultBlockDelta
+
+    ToolResultBlockStart.add_member(:tool_use_id, Shapes::ShapeRef.new(shape: ToolUseId, required: true, location_name: "toolUseId"))
+    ToolResultBlockStart.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    ToolResultBlockStart.add_member(:status, Shapes::ShapeRef.new(shape: ToolResultStatus, location_name: "status"))
+    ToolResultBlockStart.struct_class = Types::ToolResultBlockStart
+
+    ToolResultBlocksDelta.member = Shapes::ShapeRef.new(shape: ToolResultBlockDelta)
 
     ToolResultContentBlock.add_member(:json, Shapes::ShapeRef.new(shape: Document, location_name: "json"))
     ToolResultContentBlock.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
     ToolResultContentBlock.add_member(:image, Shapes::ShapeRef.new(shape: ImageBlock, location_name: "image"))
     ToolResultContentBlock.add_member(:document, Shapes::ShapeRef.new(shape: DocumentBlock, location_name: "document"))
     ToolResultContentBlock.add_member(:video, Shapes::ShapeRef.new(shape: VideoBlock, location_name: "video"))
+    ToolResultContentBlock.add_member(:search_result, Shapes::ShapeRef.new(shape: SearchResultBlock, location_name: "searchResult"))
     ToolResultContentBlock.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ToolResultContentBlock.add_member_subclass(:json, Types::ToolResultContentBlock::Json)
     ToolResultContentBlock.add_member_subclass(:text, Types::ToolResultContentBlock::Text)
     ToolResultContentBlock.add_member_subclass(:image, Types::ToolResultContentBlock::Image)
     ToolResultContentBlock.add_member_subclass(:document, Types::ToolResultContentBlock::Document)
     ToolResultContentBlock.add_member_subclass(:video, Types::ToolResultContentBlock::Video)
+    ToolResultContentBlock.add_member_subclass(:search_result, Types::ToolResultContentBlock::SearchResult)
     ToolResultContentBlock.add_member_subclass(:unknown, Types::ToolResultContentBlock::Unknown)
     ToolResultContentBlock.struct_class = Types::ToolResultContentBlock
 
@@ -1224,6 +1356,7 @@ module Aws::BedrockRuntime
     ToolUseBlock.add_member(:tool_use_id, Shapes::ShapeRef.new(shape: ToolUseId, required: true, location_name: "toolUseId"))
     ToolUseBlock.add_member(:name, Shapes::ShapeRef.new(shape: ToolName, required: true, location_name: "name"))
     ToolUseBlock.add_member(:input, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "input"))
+    ToolUseBlock.add_member(:type, Shapes::ShapeRef.new(shape: ToolUseType, location_name: "type"))
     ToolUseBlock.struct_class = Types::ToolUseBlock
 
     ToolUseBlockDelta.add_member(:input, Shapes::ShapeRef.new(shape: String, required: true, location_name: "input"))
@@ -1231,6 +1364,7 @@ module Aws::BedrockRuntime
 
     ToolUseBlockStart.add_member(:tool_use_id, Shapes::ShapeRef.new(shape: ToolUseId, required: true, location_name: "toolUseId"))
     ToolUseBlockStart.add_member(:name, Shapes::ShapeRef.new(shape: ToolName, required: true, location_name: "name"))
+    ToolUseBlockStart.add_member(:type, Shapes::ShapeRef.new(shape: ToolUseType, location_name: "type"))
     ToolUseBlockStart.struct_class = Types::ToolUseBlockStart
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
@@ -1247,6 +1381,10 @@ module Aws::BedrockRuntime
     VideoSource.add_member_subclass(:s3_location, Types::VideoSource::S3Location)
     VideoSource.add_member_subclass(:unknown, Types::VideoSource::Unknown)
     VideoSource.struct_class = Types::VideoSource
+
+    WebLocation.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "url"))
+    WebLocation.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "domain"))
+    WebLocation.struct_class = Types::WebLocation
 
 
     # @api private
@@ -1278,6 +1416,7 @@ module Aws::BedrockRuntime
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)

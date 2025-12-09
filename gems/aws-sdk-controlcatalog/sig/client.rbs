@@ -129,7 +129,7 @@ module Aws
                                    ?filter: {
                                      control_arns: Array[::String]?,
                                      common_control_arns: Array[::String]?,
-                                     mapping_types: Array[("FRAMEWORK" | "COMMON_CONTROL")]?
+                                     mapping_types: Array[("FRAMEWORK" | "COMMON_CONTROL" | "RELATED_CONTROL")]?
                                    }
                                  ) -> _ListControlMappingsResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListControlMappingsResponseSuccess

@@ -69,6 +69,15 @@ module Aws::Lightsail
     BucketAccessLogPrefix = Shapes::StringShape.new(name: 'BucketAccessLogPrefix')
     BucketBundle = Shapes::StructureShape.new(name: 'BucketBundle')
     BucketBundleList = Shapes::ListShape.new(name: 'BucketBundleList')
+    BucketCorsAllowedHeaders = Shapes::ListShape.new(name: 'BucketCorsAllowedHeaders')
+    BucketCorsAllowedMethod = Shapes::StringShape.new(name: 'BucketCorsAllowedMethod')
+    BucketCorsAllowedMethods = Shapes::ListShape.new(name: 'BucketCorsAllowedMethods')
+    BucketCorsAllowedOrigins = Shapes::ListShape.new(name: 'BucketCorsAllowedOrigins')
+    BucketCorsConfig = Shapes::StructureShape.new(name: 'BucketCorsConfig')
+    BucketCorsExposeHeaders = Shapes::ListShape.new(name: 'BucketCorsExposeHeaders')
+    BucketCorsRule = Shapes::StructureShape.new(name: 'BucketCorsRule')
+    BucketCorsRuleId = Shapes::StringShape.new(name: 'BucketCorsRuleId')
+    BucketCorsRules = Shapes::ListShape.new(name: 'BucketCorsRules')
     BucketList = Shapes::ListShape.new(name: 'BucketList')
     BucketMetricName = Shapes::StringShape.new(name: 'BucketMetricName')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
@@ -866,6 +875,7 @@ module Aws::Lightsail
     Bucket.add_member(:resources_receiving_access, Shapes::ShapeRef.new(shape: AccessReceiverList, location_name: "resourcesReceivingAccess"))
     Bucket.add_member(:state, Shapes::ShapeRef.new(shape: BucketState, location_name: "state"))
     Bucket.add_member(:access_log_config, Shapes::ShapeRef.new(shape: BucketAccessLogConfig, location_name: "accessLogConfig"))
+    Bucket.add_member(:cors, Shapes::ShapeRef.new(shape: BucketCorsConfig, location_name: "cors"))
     Bucket.struct_class = Types::Bucket
 
     BucketAccessLogConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "enabled"))
@@ -882,6 +892,27 @@ module Aws::Lightsail
     BucketBundle.struct_class = Types::BucketBundle
 
     BucketBundleList.member = Shapes::ShapeRef.new(shape: BucketBundle)
+
+    BucketCorsAllowedHeaders.member = Shapes::ShapeRef.new(shape: string)
+
+    BucketCorsAllowedMethods.member = Shapes::ShapeRef.new(shape: BucketCorsAllowedMethod)
+
+    BucketCorsAllowedOrigins.member = Shapes::ShapeRef.new(shape: string)
+
+    BucketCorsConfig.add_member(:rules, Shapes::ShapeRef.new(shape: BucketCorsRules, location_name: "rules"))
+    BucketCorsConfig.struct_class = Types::BucketCorsConfig
+
+    BucketCorsExposeHeaders.member = Shapes::ShapeRef.new(shape: string)
+
+    BucketCorsRule.add_member(:id, Shapes::ShapeRef.new(shape: BucketCorsRuleId, location_name: "id"))
+    BucketCorsRule.add_member(:allowed_methods, Shapes::ShapeRef.new(shape: BucketCorsAllowedMethods, required: true, location_name: "allowedMethods"))
+    BucketCorsRule.add_member(:allowed_origins, Shapes::ShapeRef.new(shape: BucketCorsAllowedOrigins, required: true, location_name: "allowedOrigins"))
+    BucketCorsRule.add_member(:allowed_headers, Shapes::ShapeRef.new(shape: BucketCorsAllowedHeaders, location_name: "allowedHeaders"))
+    BucketCorsRule.add_member(:expose_headers, Shapes::ShapeRef.new(shape: BucketCorsExposeHeaders, location_name: "exposeHeaders"))
+    BucketCorsRule.add_member(:max_age_seconds, Shapes::ShapeRef.new(shape: integer, location_name: "maxAgeSeconds"))
+    BucketCorsRule.struct_class = Types::BucketCorsRule
+
+    BucketCorsRules.member = Shapes::ShapeRef.new(shape: BucketCorsRule)
 
     BucketList.member = Shapes::ShapeRef.new(shape: Bucket)
 
@@ -1784,6 +1815,7 @@ module Aws::Lightsail
     GetBucketsRequest.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, location_name: "bucketName"))
     GetBucketsRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
     GetBucketsRequest.add_member(:include_connected_resources, Shapes::ShapeRef.new(shape: boolean, location_name: "includeConnectedResources"))
+    GetBucketsRequest.add_member(:include_cors, Shapes::ShapeRef.new(shape: boolean, location_name: "includeCors"))
     GetBucketsRequest.struct_class = Types::GetBucketsRequest
 
     GetBucketsResult.add_member(:buckets, Shapes::ShapeRef.new(shape: BucketList, location_name: "buckets"))
@@ -3046,6 +3078,7 @@ module Aws::Lightsail
     UpdateBucketRequest.add_member(:versioning, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "versioning"))
     UpdateBucketRequest.add_member(:readonly_access_accounts, Shapes::ShapeRef.new(shape: PartnerIdList, location_name: "readonlyAccessAccounts"))
     UpdateBucketRequest.add_member(:access_log_config, Shapes::ShapeRef.new(shape: BucketAccessLogConfig, location_name: "accessLogConfig"))
+    UpdateBucketRequest.add_member(:cors, Shapes::ShapeRef.new(shape: BucketCorsConfig, location_name: "cors"))
     UpdateBucketRequest.struct_class = Types::UpdateBucketRequest
 
     UpdateBucketResult.add_member(:bucket, Shapes::ShapeRef.new(shape: Bucket, location_name: "bucket"))

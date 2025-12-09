@@ -126,6 +126,10 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] asset_permissions
+    #   The asset permissions of the accept subscription request.
+    #   @return [Array<Types::AssetPermission>]
+    #
     # @!attribute [rw] asset_scopes
     #   The asset scopes of the accept subscription request.
     #   @return [Array<Types::AcceptedAssetScope>]
@@ -148,6 +152,7 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AcceptSubscriptionRequestInput AWS API Documentation
     #
     class AcceptSubscriptionRequestInput < Struct.new(
+      :asset_permissions,
       :asset_scopes,
       :decision_comment,
       :domain_identifier,
@@ -594,6 +599,78 @@ module Aws::DataZone
     #
     class AllUsersGrantFilter < Aws::EmptyStructure; end
 
+    # The Amazon Q properties of the connection.
+    #
+    # @!attribute [rw] auth_mode
+    #   The authentication mode of the connection's Amazon Q properties.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_enabled
+    #   Specifies whether Amazon Q is enabled for the connection.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] profile_arn
+    #   The profile ARN of the connection's Amazon Q properties.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AmazonQPropertiesInput AWS API Documentation
+    #
+    class AmazonQPropertiesInput < Struct.new(
+      :auth_mode,
+      :is_enabled,
+      :profile_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Q properties of the connection.
+    #
+    # @!attribute [rw] auth_mode
+    #   The authentication mode of the connection's Amazon Q properties.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_enabled
+    #   Specifies whether Amazon Q is enabled for the connection.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] profile_arn
+    #   The profile ARN of the connection's Amazon Q properties.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AmazonQPropertiesOutput AWS API Documentation
+    #
+    class AmazonQPropertiesOutput < Struct.new(
+      :auth_mode,
+      :is_enabled,
+      :profile_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Q properties of the connection.
+    #
+    # @!attribute [rw] auth_mode
+    #   The authentication mode of the connection's Amazon Q properties.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_enabled
+    #   Specifies whether Amazon Q is enabled for the connection.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] profile_arn
+    #   The profile ARN of the connection's Amazon Q properties.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AmazonQPropertiesPatch AWS API Documentation
+    #
+    class AmazonQPropertiesPatch < Struct.new(
+      :auth_mode,
+      :is_enabled,
+      :profile_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration details of the asset filter.
     #
     # @note AssetFilterConfiguration is a union - when making an API calls you must set exactly one of the members.
@@ -1015,6 +1092,25 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The asset permissions.
+    #
+    # @!attribute [rw] asset_id
+    #   The asset ID as part of the asset permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   The details as part of the asset permissions.
+    #   @return [Types::Permissions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssetPermission AWS API Documentation
+    #
+    class AssetPermission < Struct.new(
+      :asset_id,
+      :permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The revision of an inventory asset.
     #
     # @!attribute [rw] created_at
@@ -1292,6 +1388,49 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The attribute error.
+    #
+    # @!attribute [rw] attribute_identifier
+    #   The attribute ID as part of the attribute error.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The code generated as part of the attribute error.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message generated as part of the attribute error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AttributeError AWS API Documentation
+    #
+    class AttributeError < Struct.new(
+      :attribute_identifier,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The attribute input.
+    #
+    # @!attribute [rw] attribute_identifier
+    #   The ID of the attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] forms
+    #   The metadata forms as part of the attribute input.
+    #   @return [Array<Types::FormInput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AttributeInput AWS API Documentation
+    #
+    class AttributeInput < Struct.new(
+      :attribute_identifier,
+      :forms)
+      SENSITIVE = [:forms]
+      include Aws::Structure
+    end
+
     # The authentication configuration of a connection.
     #
     # @!attribute [rw] authentication_type
@@ -1482,6 +1621,144 @@ module Aws::DataZone
     class BasicAuthenticationCredentials < Struct.new(
       :password,
       :user_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The results of the BatchGetAttribute action.
+    #
+    # @!attribute [rw] attribute_identifier
+    #   The attribute ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] forms
+    #   The metadata forms that are part of the results of the
+    #   BatchGetAttribute action.
+    #   @return [Array<Types::FormOutput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/BatchGetAttributeOutput AWS API Documentation
+    #
+    class BatchGetAttributeOutput < Struct.new(
+      :attribute_identifier,
+      :forms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attribute_identifiers
+    #   The attribute identifier.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The domain ID where you want to get the attribute metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The entity ID for which you want to get attribute metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_revision
+    #   The entity revision for which you want to get attribute metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The entity type for which you want to get attribute metadata.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/BatchGetAttributesMetadataInput AWS API Documentation
+    #
+    class BatchGetAttributesMetadataInput < Struct.new(
+      :attribute_identifiers,
+      :domain_identifier,
+      :entity_identifier,
+      :entity_revision,
+      :entity_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   The results of the BatchGetAttributesMetadata action.
+    #   @return [Array<Types::BatchGetAttributeOutput>]
+    #
+    # @!attribute [rw] errors
+    #   The errors generated when the BatchGetAttributesMetadata action is
+    #   invoked.
+    #   @return [Array<Types::AttributeError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/BatchGetAttributesMetadataOutput AWS API Documentation
+    #
+    class BatchGetAttributesMetadataOutput < Struct.new(
+      :attributes,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The results of the BatchPutAttribute action.
+    #
+    # @!attribute [rw] attribute_identifier
+    #   The attribute ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/BatchPutAttributeOutput AWS API Documentation
+    #
+    class BatchPutAttributeOutput < Struct.new(
+      :attribute_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   The attributes of the metadata.
+    #   @return [Array<Types::AttributeInput>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The domain ID where you want to write the attribute metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The entity ID for which you want to write the attribute metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The entity type for which you want to write the attribute metadata.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/BatchPutAttributesMetadataInput AWS API Documentation
+    #
+    class BatchPutAttributesMetadataInput < Struct.new(
+      :attributes,
+      :client_token,
+      :domain_identifier,
+      :entity_identifier,
+      :entity_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   The results of the BatchPutAttributeMetadata action.
+    #   @return [Array<Types::BatchPutAttributeOutput>]
+    #
+    # @!attribute [rw] errors
+    #   The errors generated when the BatchPutAttributeMetadata action is
+    #   invoked.
+    #   @return [Array<Types::AttributeError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/BatchPutAttributesMetadataOutput AWS API Documentation
+    #
+    class BatchPutAttributesMetadataOutput < Struct.new(
+      :attributes,
+      :errors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1728,6 +2005,10 @@ module Aws::DataZone
     #
     # @note ConnectionPropertiesInput is a union - when making an API calls you must set exactly one of the members.
     #
+    # @!attribute [rw] amazon_q_properties
+    #   The Amazon Q properties of the connection.
+    #   @return [Types::AmazonQPropertiesInput]
+    #
     # @!attribute [rw] athena_properties
     #   The Amazon Athena properties of a connection.
     #   @return [Types::AthenaPropertiesInput]
@@ -1743,6 +2024,10 @@ module Aws::DataZone
     # @!attribute [rw] iam_properties
     #   The IAM properties of a connection.
     #   @return [Types::IamPropertiesInput]
+    #
+    # @!attribute [rw] mlflow_properties
+    #   The MLflow properties of a connection.
+    #   @return [Types::MlflowPropertiesInput]
     #
     # @!attribute [rw] redshift_properties
     #   The Amazon Redshift properties of a connection.
@@ -1763,10 +2048,12 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ConnectionPropertiesInput AWS API Documentation
     #
     class ConnectionPropertiesInput < Struct.new(
+      :amazon_q_properties,
       :athena_properties,
       :glue_properties,
       :hyper_pod_properties,
       :iam_properties,
+      :mlflow_properties,
       :redshift_properties,
       :s3_properties,
       :spark_emr_properties,
@@ -1776,10 +2063,12 @@ module Aws::DataZone
       include Aws::Structure
       include Aws::Structure::Union
 
+      class AmazonQProperties < ConnectionPropertiesInput; end
       class AthenaProperties < ConnectionPropertiesInput; end
       class GlueProperties < ConnectionPropertiesInput; end
       class HyperPodProperties < ConnectionPropertiesInput; end
       class IamProperties < ConnectionPropertiesInput; end
+      class MlflowProperties < ConnectionPropertiesInput; end
       class RedshiftProperties < ConnectionPropertiesInput; end
       class S3Properties < ConnectionPropertiesInput; end
       class SparkEmrProperties < ConnectionPropertiesInput; end
@@ -1790,6 +2079,10 @@ module Aws::DataZone
     # The properties of a connection.
     #
     # @note ConnectionPropertiesOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConnectionPropertiesOutput corresponding to the set member.
+    #
+    # @!attribute [rw] amazon_q_properties
+    #   The Amazon Q properties of the connection.
+    #   @return [Types::AmazonQPropertiesOutput]
     #
     # @!attribute [rw] athena_properties
     #   The Amazon Athena properties of a connection.
@@ -1806,6 +2099,10 @@ module Aws::DataZone
     # @!attribute [rw] iam_properties
     #   The IAM properties of a connection.
     #   @return [Types::IamPropertiesOutput]
+    #
+    # @!attribute [rw] mlflow_properties
+    #   The MLflow properties of a connection.
+    #   @return [Types::MlflowPropertiesOutput]
     #
     # @!attribute [rw] redshift_properties
     #   The Amazon Redshift properties of a connection.
@@ -1826,10 +2123,12 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ConnectionPropertiesOutput AWS API Documentation
     #
     class ConnectionPropertiesOutput < Struct.new(
+      :amazon_q_properties,
       :athena_properties,
       :glue_properties,
       :hyper_pod_properties,
       :iam_properties,
+      :mlflow_properties,
       :redshift_properties,
       :s3_properties,
       :spark_emr_properties,
@@ -1839,10 +2138,12 @@ module Aws::DataZone
       include Aws::Structure
       include Aws::Structure::Union
 
+      class AmazonQProperties < ConnectionPropertiesOutput; end
       class AthenaProperties < ConnectionPropertiesOutput; end
       class GlueProperties < ConnectionPropertiesOutput; end
       class HyperPodProperties < ConnectionPropertiesOutput; end
       class IamProperties < ConnectionPropertiesOutput; end
+      class MlflowProperties < ConnectionPropertiesOutput; end
       class RedshiftProperties < ConnectionPropertiesOutput; end
       class S3Properties < ConnectionPropertiesOutput; end
       class SparkEmrProperties < ConnectionPropertiesOutput; end
@@ -1853,6 +2154,10 @@ module Aws::DataZone
     # The connection properties patch.
     #
     # @note ConnectionPropertiesPatch is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] amazon_q_properties
+    #   The Amazon Q properties of the connection.
+    #   @return [Types::AmazonQPropertiesPatch]
     #
     # @!attribute [rw] athena_properties
     #   The Amazon Athena properties of a connection properties patch.
@@ -1866,6 +2171,10 @@ module Aws::DataZone
     # @!attribute [rw] iam_properties
     #   The IAM properties of a connection properties patch.
     #   @return [Types::IamPropertiesPatch]
+    #
+    # @!attribute [rw] mlflow_properties
+    #   The MLflow properties of a connection.
+    #   @return [Types::MlflowPropertiesPatch]
     #
     # @!attribute [rw] redshift_properties
     #   The Amazon Redshift properties of a connection properties patch.
@@ -1882,9 +2191,11 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ConnectionPropertiesPatch AWS API Documentation
     #
     class ConnectionPropertiesPatch < Struct.new(
+      :amazon_q_properties,
       :athena_properties,
       :glue_properties,
       :iam_properties,
+      :mlflow_properties,
       :redshift_properties,
       :s3_properties,
       :spark_emr_properties,
@@ -1893,9 +2204,11 @@ module Aws::DataZone
       include Aws::Structure
       include Aws::Structure::Union
 
+      class AmazonQProperties < ConnectionPropertiesPatch; end
       class AthenaProperties < ConnectionPropertiesPatch; end
       class GlueProperties < ConnectionPropertiesPatch; end
       class IamProperties < ConnectionPropertiesPatch; end
+      class MlflowProperties < ConnectionPropertiesPatch; end
       class RedshiftProperties < ConnectionPropertiesPatch; end
       class S3Properties < ConnectionPropertiesPatch; end
       class SparkEmrProperties < ConnectionPropertiesPatch; end
@@ -1936,6 +2249,10 @@ module Aws::DataZone
     #   The connection props.
     #   @return [Types::ConnectionPropertiesOutput]
     #
+    # @!attribute [rw] scope
+    #   The scope of the connection.
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   The connection type.
     #   @return [String]
@@ -1951,6 +2268,7 @@ module Aws::DataZone
       :physical_endpoints,
       :project_id,
       :props,
+      :scope,
       :type)
       SENSITIVE = []
       include Aws::Structure
@@ -2651,6 +2969,10 @@ module Aws::DataZone
     #   The ID of the domain where the connection is created.
     #   @return [String]
     #
+    # @!attribute [rw] enable_trusted_identity_propagation
+    #   Specifies whether the trusted identity propagation is enabled.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] environment_identifier
     #   The ID of the environment where the connection is created.
     #   @return [String]
@@ -2663,6 +2985,10 @@ module Aws::DataZone
     #   The connection props.
     #   @return [Types::ConnectionPropertiesInput]
     #
+    # @!attribute [rw] scope
+    #   The scope of the connection.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateConnectionInput AWS API Documentation
     #
     class CreateConnectionInput < Struct.new(
@@ -2670,9 +2996,11 @@ module Aws::DataZone
       :client_token,
       :description,
       :domain_identifier,
+      :enable_trusted_identity_propagation,
       :environment_identifier,
       :name,
-      :props)
+      :props,
+      :scope)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -2713,6 +3041,10 @@ module Aws::DataZone
     #   The connection props.
     #   @return [Types::ConnectionPropertiesOutput]
     #
+    # @!attribute [rw] scope
+    #   The scope of the connection.
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   The connection type.
     #   @return [String]
@@ -2729,6 +3061,7 @@ module Aws::DataZone
       :physical_endpoints,
       :project_id,
       :props,
+      :scope,
       :type)
       SENSITIVE = [:description]
       include Aws::Structure
@@ -4413,6 +4746,10 @@ module Aws::DataZone
     #   The ID of the project profile.
     #   @return [String]
     #
+    # @!attribute [rw] resource_tags
+    #   The resource tags of the project.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] user_parameters
     #   The user parameters of the project.
     #   @return [Array<Types::EnvironmentConfigurationUserParameter>]
@@ -4426,6 +4763,7 @@ module Aws::DataZone
       :glossary_terms,
       :name,
       :project_profile_id,
+      :resource_tags,
       :user_parameters)
       SENSITIVE = [:description, :name]
       include Aws::Structure
@@ -4517,6 +4855,10 @@ module Aws::DataZone
     #   The status of the Amazon DataZone project that was created.
     #   @return [String]
     #
+    # @!attribute [rw] resource_tags
+    #   The resource tags of the project.
+    #   @return [Array<Types::ResourceTag>]
+    #
     # @!attribute [rw] user_parameters
     #   The user parameters of the project.
     #   @return [Array<Types::EnvironmentConfigurationUserParameter>]
@@ -4537,6 +4879,7 @@ module Aws::DataZone
       :name,
       :project_profile_id,
       :project_status,
+      :resource_tags,
       :user_parameters)
       SENSITIVE = [:description, :name]
       include Aws::Structure
@@ -4556,6 +4899,10 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] allow_custom_project_resource_tags
+    #   Specifies whether custom project resource tags are supported.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] description
     #   A description of a project profile.
     #   @return [String]
@@ -4576,6 +4923,15 @@ module Aws::DataZone
     #   Project profile name.
     #   @return [String]
     #
+    # @!attribute [rw] project_resource_tags
+    #   The resource tags of the project profile.
+    #   @return [Array<Types::ResourceTagParameter>]
+    #
+    # @!attribute [rw] project_resource_tags_description
+    #   Field viewable through the UI that provides a project user with the
+    #   allowed resource tag specifications.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   Project profile status.
     #   @return [String]
@@ -4583,16 +4939,23 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateProjectProfileInput AWS API Documentation
     #
     class CreateProjectProfileInput < Struct.new(
+      :allow_custom_project_resource_tags,
       :description,
       :domain_identifier,
       :domain_unit_identifier,
       :environment_configurations,
       :name,
+      :project_resource_tags,
+      :project_resource_tags_description,
       :status)
-      SENSITIVE = [:description, :name]
+      SENSITIVE = [:description, :name, :project_resource_tags_description]
       include Aws::Structure
     end
 
+    # @!attribute [rw] allow_custom_project_resource_tags
+    #   Specifies whether custom project resource tags are supported.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] created_at
     #   A timestamp at which a project profile is created.
     #   @return [Time]
@@ -4629,6 +4992,15 @@ module Aws::DataZone
     #   Project profile name.
     #   @return [String]
     #
+    # @!attribute [rw] project_resource_tags
+    #   The resource tags of the project profile.
+    #   @return [Array<Types::ResourceTagParameter>]
+    #
+    # @!attribute [rw] project_resource_tags_description
+    #   Field viewable through the UI that provides a project user with the
+    #   allowed resource tag specifications.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   Project profile status.
     #   @return [String]
@@ -4636,6 +5008,7 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateProjectProfileOutput AWS API Documentation
     #
     class CreateProjectProfileOutput < Struct.new(
+      :allow_custom_project_resource_tags,
       :created_at,
       :created_by,
       :description,
@@ -4645,8 +5018,10 @@ module Aws::DataZone
       :id,
       :last_updated_at,
       :name,
+      :project_resource_tags,
+      :project_resource_tags_description,
       :status)
-      SENSITIVE = [:description, :name]
+      SENSITIVE = [:description, :name, :project_resource_tags_description]
       include Aws::Structure
     end
 
@@ -4824,6 +5199,10 @@ module Aws::DataZone
     #   is created.
     #   @return [String]
     #
+    # @!attribute [rw] environment_id
+    #   The environment ID for which subscription grant is created.
+    #   @return [String]
+    #
     # @!attribute [rw] granted_entity
     #   The entity to which the subscription is granted.
     #   @return [Types::GrantedEntity]
@@ -4860,6 +5239,7 @@ module Aws::DataZone
       :created_at,
       :created_by,
       :domain_id,
+      :environment_id,
       :granted_entity,
       :id,
       :status,
@@ -4871,6 +5251,14 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] asset_permissions
+    #   The asset permissions of the subscription request.
+    #   @return [Array<Types::AssetPermission>]
+    #
+    # @!attribute [rw] asset_scopes
+    #   The asset scopes of the subscription request.
+    #   @return [Array<Types::AcceptedAssetScope>]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that is provided to ensure the
     #   idempotency of the request.
@@ -4905,6 +5293,8 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateSubscriptionRequestInput AWS API Documentation
     #
     class CreateSubscriptionRequestInput < Struct.new(
+      :asset_permissions,
+      :asset_scopes,
       :client_token,
       :domain_identifier,
       :metadata_forms,
@@ -5175,7 +5565,7 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] details
-    #   The details of the user profile in Amazon DataZone.
+    #   The user profile details.
     #   @return [Types::UserProfileDetails]
     #
     # @!attribute [rw] domain_id
@@ -6560,6 +6950,11 @@ module Aws::DataZone
     #   is deleted.
     #   @return [String]
     #
+    # @!attribute [rw] environment_id
+    #   The ID of the environment in which the subscription grant is
+    #   deleted.
+    #   @return [String]
+    #
     # @!attribute [rw] granted_entity
     #   The entity to which the subscription is deleted.
     #   @return [Types::GrantedEntity]
@@ -6599,6 +6994,7 @@ module Aws::DataZone
       :created_at,
       :created_by,
       :domain_id,
+      :environment_id,
       :granted_entity,
       :id,
       :status,
@@ -7052,6 +7448,35 @@ module Aws::DataZone
     #
     class DomainUnitUserProperties < Struct.new(
       :user_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The encryption configuration details.
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key to use for encryption.
+    #   This field is required only when `sseAlgorithm` is set to `aws:kms`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sse_algorithm
+    #   The server-side encryption algorithm to use. Valid values are AES256
+    #   for S3-managed encryption keys, or aws:kms for Amazon Web Services
+    #   KMS-managed encryption keys. If you choose SSE-KMS encryption you
+    #   must grant the S3 Tables maintenance principal access to your KMS
+    #   key. For more information, see [Permissions requirements for S3
+    #   Tables SSE-KMS encryption][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/EncryptionConfiguration AWS API Documentation
+    #
+    class EncryptionConfiguration < Struct.new(
+      :kms_key_arn,
+      :sse_algorithm)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8336,6 +8761,10 @@ module Aws::DataZone
     #   Connection props.
     #   @return [Types::ConnectionPropertiesOutput]
     #
+    # @!attribute [rw] scope
+    #   The scope of the connection.
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   The type of the connection.
     #   @return [String]
@@ -8354,8 +8783,63 @@ module Aws::DataZone
       :physical_endpoints,
       :project_id,
       :props,
+      :scope,
       :type)
       SENSITIVE = [:connection_credentials, :description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where you want to get the data export
+    #   configuration details.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDataExportConfigurationInput AWS API Documentation
+    #
+    class GetDataExportConfigurationInput < Struct.new(
+      :domain_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The timestamp at which the data export configuration report was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration as part of the data export
+    #   configuration details.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] is_export_enabled
+    #   Specifies whether the export is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] s3_table_bucket_arn
+    #   The Amazon S3 table bucket ARN as part of the data export
+    #   configuration details.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the data export configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp at which the data export configuration report was
+    #   updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDataExportConfigurationOutput AWS API Documentation
+    #
+    class GetDataExportConfigurationOutput < Struct.new(
+      :created_at,
+      :encryption_configuration,
+      :is_export_enabled,
+      :s3_table_bucket_arn,
+      :status,
+      :updated_at)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10043,11 +10527,16 @@ module Aws::DataZone
     #   The identifier of the metadata generation run.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the metadata generation run.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetMetadataGenerationRunInput AWS API Documentation
     #
     class GetMetadataGenerationRunInput < Struct.new(
       :domain_identifier,
-      :identifier)
+      :identifier,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10086,6 +10575,15 @@ module Aws::DataZone
     #   The type of metadata generation run.
     #   @return [String]
     #
+    # @!attribute [rw] type_stats
+    #   The type stats included in the metadata generation run output
+    #   details.
+    #   @return [Array<Types::MetadataGenerationRunTypeStat>]
+    #
+    # @!attribute [rw] types
+    #   The types of the metadata generation run.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetMetadataGenerationRunOutput AWS API Documentation
     #
     class GetMetadataGenerationRunOutput < Struct.new(
@@ -10096,7 +10594,9 @@ module Aws::DataZone
       :owning_project_id,
       :status,
       :target,
-      :type)
+      :type,
+      :type_stats,
+      :types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10171,6 +10671,10 @@ module Aws::DataZone
     #   The status of the project.
     #   @return [String]
     #
+    # @!attribute [rw] resource_tags
+    #   The resource tags of the project.
+    #   @return [Array<Types::ResourceTag>]
+    #
     # @!attribute [rw] user_parameters
     #   The user parameters of a project.
     #   @return [Array<Types::EnvironmentConfigurationUserParameter>]
@@ -10191,6 +10695,7 @@ module Aws::DataZone
       :name,
       :project_profile_id,
       :project_status,
+      :resource_tags,
       :user_parameters)
       SENSITIVE = [:description, :name]
       include Aws::Structure
@@ -10213,6 +10718,10 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] allow_custom_project_resource_tags
+    #   Specifies whether custom project resource tags are supported.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] created_at
     #   The timestamp of when the project profile was created.
     #   @return [Time]
@@ -10249,6 +10758,15 @@ module Aws::DataZone
     #   The name of the project profile.
     #   @return [String]
     #
+    # @!attribute [rw] project_resource_tags
+    #   The resource tags of the project profile.
+    #   @return [Array<Types::ResourceTagParameter>]
+    #
+    # @!attribute [rw] project_resource_tags_description
+    #   Field viewable through the UI that provides a project user with the
+    #   allowed resource tag specifications.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The status of the project profile.
     #   @return [String]
@@ -10256,6 +10774,7 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetProjectProfileOutput AWS API Documentation
     #
     class GetProjectProfileOutput < Struct.new(
+      :allow_custom_project_resource_tags,
       :created_at,
       :created_by,
       :description,
@@ -10265,8 +10784,10 @@ module Aws::DataZone
       :id,
       :last_updated_at,
       :name,
+      :project_resource_tags,
+      :project_resource_tags_description,
       :status)
-      SENSITIVE = [:description, :name]
+      SENSITIVE = [:description, :name, :project_resource_tags_description]
       include Aws::Structure
     end
 
@@ -10404,6 +10925,10 @@ module Aws::DataZone
     #   exists.
     #   @return [String]
     #
+    # @!attribute [rw] environment_id
+    #   The environment ID of the subscription grant.
+    #   @return [String]
+    #
     # @!attribute [rw] granted_entity
     #   The entity to which the subscription is granted.
     #   @return [Types::GrantedEntity]
@@ -10439,6 +10964,7 @@ module Aws::DataZone
       :created_at,
       :created_by,
       :domain_id,
+      :environment_id,
       :granted_entity,
       :id,
       :status,
@@ -10831,7 +11357,7 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] details
-    #   The details of the user profile in Amazon DataZone.
+    #   The user profile details.
     #   @return [Types::UserProfileDetails]
     #
     # @!attribute [rw] domain_id
@@ -10943,6 +11469,20 @@ module Aws::DataZone
     #
     class GlossaryItemAdditionalAttributes < Struct.new(
       :match_rationale)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The enforcement details of a glossary term.
+    #
+    # @!attribute [rw] required_glossary_term_ids
+    #   The ID of the required glossary term.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GlossaryTermEnforcementDetail AWS API Documentation
+    #
+    class GlossaryTermEnforcementDetail < Struct.new(
+      :required_glossary_term_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11649,14 +12189,14 @@ module Aws::DataZone
       include Aws::Structure
     end
 
-    # The details of an IAM user profile in Amazon DataZone.
+    # The details of the IAM user profile.
     #
     # @!attribute [rw] arn
-    #   The ARN of an IAM user profile in Amazon DataZone.
+    #   The ARN of the IAM user.
     #   @return [String]
     #
     # @!attribute [rw] principal_id
-    #   Principal ID of the IAM user.
+    #   The principal ID as part of the IAM user profile details.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/IamUserProfileDetails AWS API Documentation
@@ -12485,6 +13025,10 @@ module Aws::DataZone
     #   The ID of the project where you want to list connections.
     #   @return [String]
     #
+    # @!attribute [rw] scope
+    #   The scope of the connection.
+    #   @return [String]
+    #
     # @!attribute [rw] sort_by
     #   Specifies how you want to sort the listed connections.
     #   @return [String]
@@ -12506,6 +13050,7 @@ module Aws::DataZone
       :name,
       :next_token,
       :project_identifier,
+      :scope,
       :sort_by,
       :sort_order,
       :type)
@@ -13598,6 +14143,10 @@ module Aws::DataZone
     #   The status of the metadata generation runs.
     #   @return [String]
     #
+    # @!attribute [rw] target_identifier
+    #   The target ID for which you want to list metadata generation runs.
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   The type of the metadata generation runs.
     #   @return [String]
@@ -13609,6 +14158,7 @@ module Aws::DataZone
       :max_results,
       :next_token,
       :status,
+      :target_identifier,
       :type)
       SENSITIVE = []
       include Aws::Structure
@@ -14108,8 +14658,16 @@ module Aws::DataZone
     #   grants.
     #   @return [String]
     #
+    # @!attribute [rw] owning_group_id
+    #   The ID of the owning group.
+    #   @return [String]
+    #
     # @!attribute [rw] owning_project_id
     #   The ID of the owning project of the subscription grants.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_user_id
+    #   The ID of the owning user.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -14139,7 +14697,9 @@ module Aws::DataZone
       :environment_id,
       :max_results,
       :next_token,
+      :owning_group_id,
       :owning_project_id,
+      :owning_user_id,
       :sort_by,
       :sort_order,
       :subscribed_listing_id,
@@ -14199,8 +14759,16 @@ module Aws::DataZone
     #   subscription requests.
     #   @return [String]
     #
+    # @!attribute [rw] owning_group_id
+    #   The ID of the owning group.
+    #   @return [String]
+    #
     # @!attribute [rw] owning_project_id
     #   The identifier of the project for the subscription requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_user_id
+    #   The ID of the owning user.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -14231,7 +14799,9 @@ module Aws::DataZone
       :domain_identifier,
       :max_results,
       :next_token,
+      :owning_group_id,
       :owning_project_id,
+      :owning_user_id,
       :sort_by,
       :sort_order,
       :status,
@@ -14362,8 +14932,16 @@ module Aws::DataZone
     #   `ListSubscriptions` to list the next set of subscriptions.
     #   @return [String]
     #
+    # @!attribute [rw] owning_group_id
+    #   The ID of the owning group.
+    #   @return [String]
+    #
     # @!attribute [rw] owning_project_id
     #   The identifier of the owning project.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_user_id
+    #   The ID of the owning user.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -14401,7 +14979,9 @@ module Aws::DataZone
       :domain_identifier,
       :max_results,
       :next_token,
+      :owning_group_id,
       :owning_project_id,
+      :owning_user_id,
       :sort_by,
       :sort_order,
       :status,
@@ -14657,6 +15237,25 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The managed endpoint credentials of the EMR on EKS cluster.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the managed endpoint credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] token
+    #   The ARN of the managed endpoint credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ManagedEndpointCredentials AWS API Documentation
+    #
+    class ManagedEndpointCredentials < Struct.new(
+      :id,
+      :token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The offset of a matched term.
     #
     # @!attribute [rw] end_offset
@@ -14846,6 +15445,10 @@ module Aws::DataZone
     #   The type of the metadata generation run.
     #   @return [String]
     #
+    # @!attribute [rw] types
+    #   The types of the metadata generation run.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/MetadataGenerationRunItem AWS API Documentation
     #
     class MetadataGenerationRunItem < Struct.new(
@@ -14856,7 +15459,8 @@ module Aws::DataZone
       :owning_project_id,
       :status,
       :target,
-      :type)
+      :type,
+      :types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14881,6 +15485,75 @@ module Aws::DataZone
       :identifier,
       :revision,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The statistics of the metadata generation run type.
+    #
+    # @!attribute [rw] error_message
+    #   The error message displayed if the action fails to run.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the metadata generation run type statistics.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the metadata generation run type statistics.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/MetadataGenerationRunTypeStat AWS API Documentation
+    #
+    class MetadataGenerationRunTypeStat < Struct.new(
+      :error_message,
+      :status,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The MLflow properties of a connection.
+    #
+    # @!attribute [rw] tracking_server_arn
+    #   The tracking server ARN as part of the MLflow properties of a
+    #   connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/MlflowPropertiesInput AWS API Documentation
+    #
+    class MlflowPropertiesInput < Struct.new(
+      :tracking_server_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The MLflow properties of a connection.
+    #
+    # @!attribute [rw] tracking_server_arn
+    #   The tracking server ARN as part of the MLflow properties of a
+    #   connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/MlflowPropertiesOutput AWS API Documentation
+    #
+    class MlflowPropertiesOutput < Struct.new(
+      :tracking_server_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The MLflow properties of a connection.
+    #
+    # @!attribute [rw] tracking_server_arn
+    #   The tracking server ARN as part of the MLflow properties of a
+    #   connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/MlflowPropertiesPatch AWS API Documentation
+    #
+    class MlflowPropertiesPatch < Struct.new(
+      :tracking_server_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15305,6 +15978,29 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The asset permissions.
+    #
+    # @note Permissions is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Permissions is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Permissions corresponding to the set member.
+    #
+    # @!attribute [rw] s3
+    #   The S3 details of the asset permissions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/Permissions AWS API Documentation
+    #
+    class Permissions < Struct.new(
+      :s3,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3 < Permissions; end
+      class Unknown < Permissions; end
+    end
+
     # Physical connection requirements of a connection.
     #
     # @!attribute [rw] availability_zone
@@ -15344,6 +16040,11 @@ module Aws::DataZone
     #   The location of a connection.
     #   @return [Types::AwsLocation]
     #
+    # @!attribute [rw] enable_trusted_identity_propagation
+    #   Specified whether trusted identity propagation for the connection is
+    #   enabled.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] glue_connection
     #   The Amazon Web Services Glue connection.
     #   @return [Types::GlueConnection]
@@ -15372,6 +16073,7 @@ module Aws::DataZone
     #
     class PhysicalEndpoint < Struct.new(
       :aws_location,
+      :enable_trusted_identity_propagation,
       :glue_connection,
       :glue_connection_name,
       :host,
@@ -15951,6 +16653,52 @@ module Aws::DataZone
       class CloudFormation < ProvisioningProperties; end
       class Unknown < ProvisioningProperties; end
     end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The domain ID where you want to create data export configuration
+    #   details.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_export
+    #   Specifies that the export is to be enabled as part of creating data
+    #   export configuration details.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration as part of creating data export
+    #   configuration details.
+    #
+    #   The KMS key provided here as part of encryptionConfiguration must
+    #   have the required permissions as described in [KMS permissions for
+    #   exporting asset metadata in Amazon SageMaker Unified Studio][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker-unified-studio/latest/adminguide/sagemaker-unified-studio-export-asset-metadata-kms-permissions.html
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/PutDataExportConfigurationInput AWS API Documentation
+    #
+    class PutDataExportConfigurationInput < Struct.new(
+      :client_token,
+      :domain_identifier,
+      :enable_export,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/PutDataExportConfigurationOutput AWS API Documentation
+    #
+    class PutDataExportConfigurationOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] domain_identifier
     #   The identifier of the Amazon DataZone domain.
@@ -16887,6 +17635,55 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The resource tag of the project.
+    #
+    # @!attribute [rw] key
+    #   The key of the resource tag of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source of the resource tag of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the resource tag of the project.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ResourceTag AWS API Documentation
+    #
+    class ResourceTag < Struct.new(
+      :key,
+      :source,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resource tag parameter of the project profile.
+    #
+    # @!attribute [rw] is_value_editable
+    #   Specifies whether the value of the resource tag parameter of the
+    #   project profile is editable at the project level.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] key
+    #   The key of the resource tag parameter of the project profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the resource tag parameter key of the project profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ResourceTagParameter AWS API Documentation
+    #
+    class ResourceTagParameter < Struct.new(
+      :is_value_editable,
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] domain_identifier
     #   The identifier of the Amazon DataZone domain where you want to
     #   revoke a subscription.
@@ -17125,6 +17922,11 @@ module Aws::DataZone
     #
     # @note RuleDetail is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RuleDetail corresponding to the set member.
     #
+    # @!attribute [rw] glossary_term_enforcement_detail
+    #   The enforcement details of a glossary term that's part of the
+    #   metadata rule.
+    #   @return [Types::GlossaryTermEnforcementDetail]
+    #
     # @!attribute [rw] metadata_form_enforcement_detail
     #   The enforcement detail of the metadata form.
     #   @return [Types::MetadataFormEnforcementDetail]
@@ -17132,12 +17934,14 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/RuleDetail AWS API Documentation
     #
     class RuleDetail < Struct.new(
+      :glossary_term_enforcement_detail,
       :metadata_form_enforcement_detail,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
+      class GlossaryTermEnforcementDetail < RuleDetail; end
       class MetadataFormEnforcementDetail < RuleDetail; end
       class Unknown < RuleDetail; end
     end
@@ -18062,6 +18866,10 @@ module Aws::DataZone
     #   The log URI of the Spark EMR.
     #   @return [String]
     #
+    # @!attribute [rw] managed_endpoint_arn
+    #   The managed endpoint ARN of the EMR on EKS cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] python_virtual_env
     #   The Python virtual env of the Spark EMR.
     #   @return [String]
@@ -18081,6 +18889,7 @@ module Aws::DataZone
       :instance_profile_arn,
       :java_virtual_env,
       :log_uri,
+      :managed_endpoint_arn,
       :python_virtual_env,
       :runtime_role,
       :trusted_certificates_s3_uri)
@@ -18089,6 +18898,10 @@ module Aws::DataZone
     end
 
     # The Spark EMR properties.
+    #
+    # @!attribute [rw] certificate_data
+    #   The certificate data of the EMR on EKS cluster.
+    #   @return [String]
     #
     # @!attribute [rw] compute_arn
     #   The compute ARN of the Spark EMR.
@@ -18122,6 +18935,14 @@ module Aws::DataZone
     #   The log URI of the Spark EMR.
     #   @return [String]
     #
+    # @!attribute [rw] managed_endpoint_arn
+    #   The managed endpoint ARN of the EMR on EKS cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_endpoint_credentials
+    #   The managed endpoint credentials of the EMR on EKS cluster.
+    #   @return [Types::ManagedEndpointCredentials]
+    #
     # @!attribute [rw] python_virtual_env
     #   The Python virtual env of the Spark EMR.
     #   @return [String]
@@ -18137,6 +18958,7 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SparkEmrPropertiesOutput AWS API Documentation
     #
     class SparkEmrPropertiesOutput < Struct.new(
+      :certificate_data,
       :compute_arn,
       :credentials,
       :credentials_expiration,
@@ -18145,10 +18967,12 @@ module Aws::DataZone
       :java_virtual_env,
       :livy_endpoint,
       :log_uri,
+      :managed_endpoint_arn,
+      :managed_endpoint_credentials,
       :python_virtual_env,
       :runtime_role,
       :trusted_certificates_s3_uri)
-      SENSITIVE = [:credentials]
+      SENSITIVE = [:credentials, :managed_endpoint_credentials]
       include Aws::Structure
     end
 
@@ -18170,6 +18994,10 @@ module Aws::DataZone
     #   The log URI in the Spark EMR properties patch.
     #   @return [String]
     #
+    # @!attribute [rw] managed_endpoint_arn
+    #   The managed endpoint ARN of the EMR on EKS cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] python_virtual_env
     #   The Python virtual env in the Spark EMR properties patch.
     #   @return [String]
@@ -18189,6 +19017,7 @@ module Aws::DataZone
       :instance_profile_arn,
       :java_virtual_env,
       :log_uri,
+      :managed_endpoint_arn,
       :python_virtual_env,
       :runtime_role,
       :trusted_certificates_s3_uri)
@@ -18320,21 +19149,18 @@ module Aws::DataZone
       include Aws::Structure
     end
 
-    # The single sign-on details of the user profile.
+    # The SSO user profile detail.
     #
     # @!attribute [rw] first_name
-    #   The first name included in the single sign-on details of the user
-    #   profile.
+    #   The first name as part of the SSO user profile detail.
     #   @return [String]
     #
     # @!attribute [rw] last_name
-    #   The last name included in the single sign-on details of the user
-    #   profile.
+    #   The last name as part of the SSO user profile detail.
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The username included in the single sign-on details of the user
-    #   profile.
+    #   The username as part of the SSO user profile detail.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SsoUserProfileDetails AWS API Documentation
@@ -18474,6 +19300,10 @@ module Aws::DataZone
     #   The type of the metadata generation run.
     #   @return [String]
     #
+    # @!attribute [rw] types
+    #   The types of the metadata generation run.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartMetadataGenerationRunInput AWS API Documentation
     #
     class StartMetadataGenerationRunInput < Struct.new(
@@ -18481,7 +19311,8 @@ module Aws::DataZone
       :domain_identifier,
       :owning_project_identifier,
       :target,
-      :type)
+      :type,
+      :types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18516,6 +19347,10 @@ module Aws::DataZone
     #   The type of the metadata generation run.
     #   @return [String]
     #
+    # @!attribute [rw] types
+    #   The types of the metadata generation run.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartMetadataGenerationRunOutput AWS API Documentation
     #
     class StartMetadataGenerationRunOutput < Struct.new(
@@ -18525,7 +19360,8 @@ module Aws::DataZone
       :id,
       :owning_project_id,
       :status,
-      :type)
+      :type,
+      :types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18561,6 +19397,10 @@ module Aws::DataZone
     #   created.
     #   @return [Time]
     #
+    # @!attribute [rw] permissions
+    #   The asset permissions.
+    #   @return [Types::Permissions]
+    #
     # @!attribute [rw] status
     #   The status of the asset for which the subscription grant is created.
     #   @return [String]
@@ -18579,6 +19419,7 @@ module Aws::DataZone
       :failure_cause,
       :failure_timestamp,
       :granted_timestamp,
+      :permissions,
       :status,
       :target_name)
       SENSITIVE = []
@@ -18617,6 +19458,10 @@ module Aws::DataZone
     #   subscription grant is created.
     #   @return [Array<Types::DetailedGlossaryTerm>]
     #
+    # @!attribute [rw] permissions
+    #   The asset permissions.
+    #   @return [Types::Permissions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SubscribedAssetListing AWS API Documentation
     #
     class SubscribedAssetListing < Struct.new(
@@ -18625,7 +19470,41 @@ module Aws::DataZone
       :entity_revision,
       :entity_type,
       :forms,
-      :glossary_terms)
+      :glossary_terms,
+      :permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The group that subscribes to the asset.
+    #
+    # @!attribute [rw] id
+    #   The ID of the subscribed group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the subscribed group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SubscribedGroup AWS API Documentation
+    #
+    class SubscribedGroup < Struct.new(
+      :id,
+      :name)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # The details of the subscribed group.
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the subscribed group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SubscribedGroupInput AWS API Documentation
+    #
+    class SubscribedGroupInput < Struct.new(
+      :identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18727,20 +19606,32 @@ module Aws::DataZone
     #
     # @note SubscribedPrincipal is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SubscribedPrincipal corresponding to the set member.
     #
+    # @!attribute [rw] group
+    #   The subscribed group.
+    #   @return [Types::SubscribedGroup]
+    #
     # @!attribute [rw] project
     #   The project that has the subscription grant.
     #   @return [Types::SubscribedProject]
     #
+    # @!attribute [rw] user
+    #   The subscribed user.
+    #   @return [Types::SubscribedUser]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SubscribedPrincipal AWS API Documentation
     #
     class SubscribedPrincipal < Struct.new(
+      :group,
       :project,
+      :user,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
+      class Group < SubscribedPrincipal; end
       class Project < SubscribedPrincipal; end
+      class User < SubscribedPrincipal; end
       class Unknown < SubscribedPrincipal; end
     end
 
@@ -18748,20 +19639,32 @@ module Aws::DataZone
     #
     # @note SubscribedPrincipalInput is a union - when making an API calls you must set exactly one of the members.
     #
+    # @!attribute [rw] group
+    #   The subscribed group.
+    #   @return [Types::SubscribedGroupInput]
+    #
     # @!attribute [rw] project
     #   The project that is to be given a subscription grant.
     #   @return [Types::SubscribedProjectInput]
     #
+    # @!attribute [rw] user
+    #   The subscribed user.
+    #   @return [Types::SubscribedUserInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SubscribedPrincipalInput AWS API Documentation
     #
     class SubscribedPrincipalInput < Struct.new(
+      :group,
       :project,
+      :user,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
+      class Group < SubscribedPrincipalInput; end
       class Project < SubscribedPrincipalInput; end
+      class User < SubscribedPrincipalInput; end
       class Unknown < SubscribedPrincipalInput; end
     end
 
@@ -18838,6 +19741,39 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The subscribed user.
+    #
+    # @!attribute [rw] details
+    #   The subscribed user details.
+    #   @return [Types::UserProfileDetails]
+    #
+    # @!attribute [rw] id
+    #   The ID of the subscribed user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SubscribedUser AWS API Documentation
+    #
+    class SubscribedUser < Struct.new(
+      :details,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The subscribed user.
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the subscribed user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SubscribedUserInput AWS API Documentation
+    #
+    class SubscribedUserInput < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of the subscription grant.
     #
     # @!attribute [rw] assets
@@ -18855,6 +19791,10 @@ module Aws::DataZone
     # @!attribute [rw] domain_id
     #   The identifier of the Amazon DataZone domain in which a subscription
     #   grant exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   The environment ID of the subscription grant.
     #   @return [String]
     #
     # @!attribute [rw] granted_entity
@@ -18892,6 +19832,7 @@ module Aws::DataZone
       :created_at,
       :created_by,
       :domain_id,
+      :environment_id,
       :granted_entity,
       :id,
       :status,
@@ -19681,6 +20622,10 @@ module Aws::DataZone
     #   The connection props.
     #   @return [Types::ConnectionPropertiesOutput]
     #
+    # @!attribute [rw] scope
+    #   The scope of the connection.
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   The connection type.
     #   @return [String]
@@ -19697,6 +20642,7 @@ module Aws::DataZone
       :physical_endpoints,
       :project_id,
       :props,
+      :scope,
       :type)
       SENSITIVE = [:description]
       include Aws::Structure
@@ -20837,6 +21783,10 @@ module Aws::DataZone
     #   `latest`.
     #   @return [String]
     #
+    # @!attribute [rw] resource_tags
+    #   The resource tags of the project.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] user_parameters
     #   The user parameters of the project.
     #   @return [Array<Types::EnvironmentConfigurationUserParameter>]
@@ -20852,6 +21802,7 @@ module Aws::DataZone
       :identifier,
       :name,
       :project_profile_version,
+      :resource_tags,
       :user_parameters)
       SENSITIVE = [:description, :name]
       include Aws::Structure
@@ -20911,6 +21862,10 @@ module Aws::DataZone
     #   The status of the project.
     #   @return [String]
     #
+    # @!attribute [rw] resource_tags
+    #   The resource tags of the project.
+    #   @return [Array<Types::ResourceTag>]
+    #
     # @!attribute [rw] user_parameters
     #   The user parameters of the project.
     #   @return [Array<Types::EnvironmentConfigurationUserParameter>]
@@ -20931,11 +21886,16 @@ module Aws::DataZone
       :name,
       :project_profile_id,
       :project_status,
+      :resource_tags,
       :user_parameters)
       SENSITIVE = [:description, :name]
       include Aws::Structure
     end
 
+    # @!attribute [rw] allow_custom_project_resource_tags
+    #   Specifies whether custom project resource tags are supported.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] description
     #   The description of a project profile.
     #   @return [String]
@@ -20960,6 +21920,15 @@ module Aws::DataZone
     #   The name of a project profile.
     #   @return [String]
     #
+    # @!attribute [rw] project_resource_tags
+    #   The resource tags of the project profile.
+    #   @return [Array<Types::ResourceTagParameter>]
+    #
+    # @!attribute [rw] project_resource_tags_description
+    #   Field viewable through the UI that provides a project user with the
+    #   allowed resource tag specifications.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The status of a project profile.
     #   @return [String]
@@ -20967,17 +21936,24 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateProjectProfileInput AWS API Documentation
     #
     class UpdateProjectProfileInput < Struct.new(
+      :allow_custom_project_resource_tags,
       :description,
       :domain_identifier,
       :domain_unit_identifier,
       :environment_configurations,
       :identifier,
       :name,
+      :project_resource_tags,
+      :project_resource_tags_description,
       :status)
-      SENSITIVE = [:description, :name]
+      SENSITIVE = [:description, :name, :project_resource_tags_description]
       include Aws::Structure
     end
 
+    # @!attribute [rw] allow_custom_project_resource_tags
+    #   Specifies whether custom project resource tags are supported.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] created_at
     #   The timestamp at which a project profile is created.
     #   @return [Time]
@@ -21014,6 +21990,15 @@ module Aws::DataZone
     #   The name of the project profile.
     #   @return [String]
     #
+    # @!attribute [rw] project_resource_tags
+    #   The resource tags of the project profile.
+    #   @return [Array<Types::ResourceTagParameter>]
+    #
+    # @!attribute [rw] project_resource_tags_description
+    #   Field viewable through the UI that provides a project user with the
+    #   allowed resource tag specifications.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The status of the project profile.
     #   @return [String]
@@ -21021,6 +22006,7 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateProjectProfileOutput AWS API Documentation
     #
     class UpdateProjectProfileOutput < Struct.new(
+      :allow_custom_project_resource_tags,
       :created_at,
       :created_by,
       :description,
@@ -21030,10 +22016,48 @@ module Aws::DataZone
       :id,
       :last_updated_at,
       :name,
+      :project_resource_tags,
+      :project_resource_tags_description,
       :status)
-      SENSITIVE = [:description, :name]
+      SENSITIVE = [:description, :name, :project_resource_tags_description]
       include Aws::Structure
     end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_owner
+    #   The current owner of the root domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where the root domain unit owner is to be
+    #   updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_owner
+    #   The new owner of the root domain unit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateRootDomainUnitOwnerInput AWS API Documentation
+    #
+    class UpdateRootDomainUnitOwnerInput < Struct.new(
+      :client_token,
+      :current_owner,
+      :domain_identifier,
+      :new_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateRootDomainUnitOwnerOutput AWS API Documentation
+    #
+    class UpdateRootDomainUnitOwnerOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] description
     #   The description of the rule.
@@ -21211,6 +22235,11 @@ module Aws::DataZone
     #   grant status is to be updated.
     #   @return [String]
     #
+    # @!attribute [rw] environment_id
+    #   The ID of the environment in which the subscription grant is
+    #   updated.
+    #   @return [String]
+    #
     # @!attribute [rw] granted_entity
     #   The granted entity to be updated as part of the
     #   `UpdateSubscriptionGrantStatus` action.
@@ -21250,6 +22279,7 @@ module Aws::DataZone
       :created_at,
       :created_by,
       :domain_id,
+      :environment_id,
       :granted_entity,
       :id,
       :status,
@@ -21545,7 +22575,7 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] details
-    #   The details of the user profile in Amazon DataZone.
+    #   The results of the UpdateUserProfile action.
     #   @return [Types::UserProfileDetails]
     #
     # @!attribute [rw] domain_id
@@ -21635,16 +22665,16 @@ module Aws::DataZone
       class Unknown < UserPolicyGrantPrincipal; end
     end
 
-    # The details of the user profile in Amazon DataZone.
+    # The user profile details.
     #
     # @note UserProfileDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of UserProfileDetails corresponding to the set member.
     #
     # @!attribute [rw] iam
-    #   The IAM details included in the user profile details.
+    #   The IAM details of the user profile.
     #   @return [Types::IamUserProfileDetails]
     #
     # @!attribute [rw] sso
-    #   The single sign-on details included in the user profile details.
+    #   The SSO details of the user profile.
     #   @return [Types::SsoUserProfileDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UserProfileDetails AWS API Documentation

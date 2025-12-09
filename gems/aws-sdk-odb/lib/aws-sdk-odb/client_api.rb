@@ -18,6 +18,9 @@ module Aws::Odb
     AcceptMarketplaceRegistrationOutput = Shapes::StructureShape.new(name: 'AcceptMarketplaceRegistrationOutput')
     Access = Shapes::StringShape.new(name: 'Access')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AssociateIamRoleToResourceInput = Shapes::StructureShape.new(name: 'AssociateIamRoleToResourceInput')
+    AssociateIamRoleToResourceInputResourceArnString = Shapes::StringShape.new(name: 'AssociateIamRoleToResourceInputResourceArnString')
+    AssociateIamRoleToResourceOutput = Shapes::StructureShape.new(name: 'AssociateIamRoleToResourceOutput')
     AutonomousVirtualMachineList = Shapes::ListShape.new(name: 'AutonomousVirtualMachineList')
     AutonomousVirtualMachineSummary = Shapes::StructureShape.new(name: 'AutonomousVirtualMachineSummary')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -76,6 +79,8 @@ module Aws::Odb
     CreateOdbPeeringConnectionInput = Shapes::StructureShape.new(name: 'CreateOdbPeeringConnectionInput')
     CreateOdbPeeringConnectionInputClientTokenString = Shapes::StringShape.new(name: 'CreateOdbPeeringConnectionInputClientTokenString')
     CreateOdbPeeringConnectionOutput = Shapes::StructureShape.new(name: 'CreateOdbPeeringConnectionOutput')
+    CrossRegionS3RestoreSourcesAccess = Shapes::StructureShape.new(name: 'CrossRegionS3RestoreSourcesAccess')
+    CrossRegionS3RestoreSourcesAccessList = Shapes::ListShape.new(name: 'CrossRegionS3RestoreSourcesAccessList')
     CustomerContact = Shapes::StructureShape.new(name: 'CustomerContact')
     CustomerContactEmailString = Shapes::StringShape.new(name: 'CustomerContactEmailString')
     CustomerContacts = Shapes::ListShape.new(name: 'CustomerContacts')
@@ -107,6 +112,9 @@ module Aws::Odb
     DeleteOdbNetworkOutput = Shapes::StructureShape.new(name: 'DeleteOdbNetworkOutput')
     DeleteOdbPeeringConnectionInput = Shapes::StructureShape.new(name: 'DeleteOdbPeeringConnectionInput')
     DeleteOdbPeeringConnectionOutput = Shapes::StructureShape.new(name: 'DeleteOdbPeeringConnectionOutput')
+    DisassociateIamRoleFromResourceInput = Shapes::StructureShape.new(name: 'DisassociateIamRoleFromResourceInput')
+    DisassociateIamRoleFromResourceInputResourceArnString = Shapes::StringShape.new(name: 'DisassociateIamRoleFromResourceInputResourceArnString')
+    DisassociateIamRoleFromResourceOutput = Shapes::StructureShape.new(name: 'DisassociateIamRoleFromResourceOutput')
     DiskRedundancy = Shapes::StringShape.new(name: 'DiskRedundancy')
     Double = Shapes::FloatShape.new(name: 'Double')
     ExadataIormConfig = Shapes::StructureShape.new(name: 'ExadataIormConfig')
@@ -132,11 +140,15 @@ module Aws::Odb
     GiVersionList = Shapes::ListShape.new(name: 'GiVersionList')
     GiVersionSummary = Shapes::StructureShape.new(name: 'GiVersionSummary')
     HoursOfDay = Shapes::ListShape.new(name: 'HoursOfDay')
+    IamRole = Shapes::StructureShape.new(name: 'IamRole')
+    IamRoleList = Shapes::ListShape.new(name: 'IamRoleList')
+    IamRoleStatus = Shapes::StringShape.new(name: 'IamRoleStatus')
     InitializeServiceInput = Shapes::StructureShape.new(name: 'InitializeServiceInput')
     InitializeServiceOutput = Shapes::StructureShape.new(name: 'InitializeServiceOutput')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IormLifecycleState = Shapes::StringShape.new(name: 'IormLifecycleState')
+    KmsAccess = Shapes::StructureShape.new(name: 'KmsAccess')
     LicenseModel = Shapes::StringShape.new(name: 'LicenseModel')
     ListAutonomousVirtualMachinesInput = Shapes::StructureShape.new(name: 'ListAutonomousVirtualMachinesInput')
     ListAutonomousVirtualMachinesInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAutonomousVirtualMachinesInputMaxResultsInteger')
@@ -202,6 +214,7 @@ module Aws::Odb
     OciDnsForwardingConfig = Shapes::StructureShape.new(name: 'OciDnsForwardingConfig')
     OciDnsForwardingConfigDomainNameString = Shapes::StringShape.new(name: 'OciDnsForwardingConfigDomainNameString')
     OciDnsForwardingConfigList = Shapes::ListShape.new(name: 'OciDnsForwardingConfigList')
+    OciIdentityDomain = Shapes::StructureShape.new(name: 'OciIdentityDomain')
     OciOnboardingStatus = Shapes::StringShape.new(name: 'OciOnboardingStatus')
     OdbNetwork = Shapes::StructureShape.new(name: 'OdbNetwork')
     OdbNetworkAvailabilityZoneIdString = Shapes::StringShape.new(name: 'OdbNetworkAvailabilityZoneIdString')
@@ -226,6 +239,8 @@ module Aws::Odb
     OdbPeeringConnectionList = Shapes::ListShape.new(name: 'OdbPeeringConnectionList')
     OdbPeeringConnectionSummary = Shapes::StructureShape.new(name: 'OdbPeeringConnectionSummary')
     PatchingModeType = Shapes::StringShape.new(name: 'PatchingModeType')
+    PeeredCidr = Shapes::StringShape.new(name: 'PeeredCidr')
+    PeeredCidrList = Shapes::ListShape.new(name: 'PeeredCidrList')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PreferenceType = Shapes::StringShape.new(name: 'PreferenceType')
     RebootDbNodeInput = Shapes::StructureShape.new(name: 'RebootDbNodeInput')
@@ -238,6 +253,7 @@ module Aws::Odb
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceStatus = Shapes::StringShape.new(name: 'ResourceStatus')
     ResponseTagMap = Shapes::MapShape.new(name: 'ResponseTagMap')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3Access = Shapes::StructureShape.new(name: 'S3Access')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     SensitiveStringList = Shapes::ListShape.new(name: 'SensitiveStringList')
@@ -250,6 +266,8 @@ module Aws::Odb
     StopDbNodeOutput = Shapes::StructureShape.new(name: 'StopDbNodeOutput')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    StsAccess = Shapes::StructureShape.new(name: 'StsAccess')
+    SupportedAwsIntegration = Shapes::StringShape.new(name: 'SupportedAwsIntegration')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     SystemVersionList = Shapes::ListShape.new(name: 'SystemVersionList')
     SystemVersionSummary = Shapes::StructureShape.new(name: 'SystemVersionSummary')
@@ -265,6 +283,8 @@ module Aws::Odb
     UpdateCloudExadataInfrastructureOutput = Shapes::StructureShape.new(name: 'UpdateCloudExadataInfrastructureOutput')
     UpdateOdbNetworkInput = Shapes::StructureShape.new(name: 'UpdateOdbNetworkInput')
     UpdateOdbNetworkOutput = Shapes::StructureShape.new(name: 'UpdateOdbNetworkOutput')
+    UpdateOdbPeeringConnectionInput = Shapes::StructureShape.new(name: 'UpdateOdbPeeringConnectionInput')
+    UpdateOdbPeeringConnectionOutput = Shapes::StructureShape.new(name: 'UpdateOdbPeeringConnectionOutput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -280,6 +300,13 @@ module Aws::Odb
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AssociateIamRoleToResourceInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "iamRoleArn"))
+    AssociateIamRoleToResourceInput.add_member(:aws_integration, Shapes::ShapeRef.new(shape: SupportedAwsIntegration, required: true, location_name: "awsIntegration"))
+    AssociateIamRoleToResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AssociateIamRoleToResourceInputResourceArnString, required: true, location_name: "resourceArn"))
+    AssociateIamRoleToResourceInput.struct_class = Types::AssociateIamRoleToResourceInput
+
+    AssociateIamRoleToResourceOutput.struct_class = Types::AssociateIamRoleToResourceOutput
 
     AutonomousVirtualMachineList.member = Shapes::ShapeRef.new(shape: AutonomousVirtualMachineSummary)
 
@@ -539,6 +566,7 @@ module Aws::Odb
     CloudVmCluster.add_member(:odb_network_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, location_name: "odbNetworkId"))
     CloudVmCluster.add_member(:percent_progress, Shapes::ShapeRef.new(shape: Float, location_name: "percentProgress"))
     CloudVmCluster.add_member(:compute_model, Shapes::ShapeRef.new(shape: ComputeModel, location_name: "computeModel"))
+    CloudVmCluster.add_member(:iam_roles, Shapes::ShapeRef.new(shape: IamRoleList, location_name: "iamRoles"))
     CloudVmCluster.struct_class = Types::CloudVmCluster
 
     CloudVmClusterList.member = Shapes::ShapeRef.new(shape: CloudVmClusterSummary)
@@ -583,6 +611,7 @@ module Aws::Odb
     CloudVmClusterSummary.add_member(:odb_network_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, location_name: "odbNetworkId"))
     CloudVmClusterSummary.add_member(:percent_progress, Shapes::ShapeRef.new(shape: Float, location_name: "percentProgress"))
     CloudVmClusterSummary.add_member(:compute_model, Shapes::ShapeRef.new(shape: ComputeModel, location_name: "computeModel"))
+    CloudVmClusterSummary.add_member(:iam_roles, Shapes::ShapeRef.new(shape: IamRoleList, location_name: "iamRoles"))
     CloudVmClusterSummary.struct_class = Types::CloudVmClusterSummary
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -674,7 +703,12 @@ module Aws::Odb
     CreateOdbNetworkInput.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateOdbNetworkInputClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateOdbNetworkInput.add_member(:s3_access, Shapes::ShapeRef.new(shape: Access, location_name: "s3Access"))
     CreateOdbNetworkInput.add_member(:zero_etl_access, Shapes::ShapeRef.new(shape: Access, location_name: "zeroEtlAccess"))
+    CreateOdbNetworkInput.add_member(:sts_access, Shapes::ShapeRef.new(shape: Access, location_name: "stsAccess"))
+    CreateOdbNetworkInput.add_member(:kms_access, Shapes::ShapeRef.new(shape: Access, location_name: "kmsAccess"))
     CreateOdbNetworkInput.add_member(:s3_policy_document, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "s3PolicyDocument"))
+    CreateOdbNetworkInput.add_member(:sts_policy_document, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "stsPolicyDocument"))
+    CreateOdbNetworkInput.add_member(:kms_policy_document, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "kmsPolicyDocument"))
+    CreateOdbNetworkInput.add_member(:cross_region_s3_restore_sources_to_enable, Shapes::ShapeRef.new(shape: StringList, location_name: "crossRegionS3RestoreSourcesToEnable"))
     CreateOdbNetworkInput.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
     CreateOdbNetworkInput.struct_class = Types::CreateOdbNetworkInput
 
@@ -687,6 +721,7 @@ module Aws::Odb
     CreateOdbPeeringConnectionInput.add_member(:odb_network_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "odbNetworkId"))
     CreateOdbPeeringConnectionInput.add_member(:peer_network_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "peerNetworkId"))
     CreateOdbPeeringConnectionInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceDisplayName, location_name: "displayName"))
+    CreateOdbPeeringConnectionInput.add_member(:peer_network_cidrs_to_be_added, Shapes::ShapeRef.new(shape: PeeredCidrList, location_name: "peerNetworkCidrsToBeAdded"))
     CreateOdbPeeringConnectionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateOdbPeeringConnectionInputClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateOdbPeeringConnectionInput.add_member(:tags, Shapes::ShapeRef.new(shape: RequestTagMap, location_name: "tags"))
     CreateOdbPeeringConnectionInput.struct_class = Types::CreateOdbPeeringConnectionInput
@@ -696,6 +731,13 @@ module Aws::Odb
     CreateOdbPeeringConnectionOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     CreateOdbPeeringConnectionOutput.add_member(:odb_peering_connection_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "odbPeeringConnectionId"))
     CreateOdbPeeringConnectionOutput.struct_class = Types::CreateOdbPeeringConnectionOutput
+
+    CrossRegionS3RestoreSourcesAccess.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))
+    CrossRegionS3RestoreSourcesAccess.add_member(:ipv4_addresses, Shapes::ShapeRef.new(shape: StringList, location_name: "ipv4Addresses"))
+    CrossRegionS3RestoreSourcesAccess.add_member(:status, Shapes::ShapeRef.new(shape: ManagedResourceStatus, location_name: "status"))
+    CrossRegionS3RestoreSourcesAccess.struct_class = Types::CrossRegionS3RestoreSourcesAccess
+
+    CrossRegionS3RestoreSourcesAccessList.member = Shapes::ShapeRef.new(shape: CrossRegionS3RestoreSourcesAccess)
 
     CustomerContact.add_member(:email, Shapes::ShapeRef.new(shape: CustomerContactEmailString, location_name: "email"))
     CustomerContact.struct_class = Types::CustomerContact
@@ -885,6 +927,13 @@ module Aws::Odb
 
     DeleteOdbPeeringConnectionOutput.struct_class = Types::DeleteOdbPeeringConnectionOutput
 
+    DisassociateIamRoleFromResourceInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "iamRoleArn"))
+    DisassociateIamRoleFromResourceInput.add_member(:aws_integration, Shapes::ShapeRef.new(shape: SupportedAwsIntegration, required: true, location_name: "awsIntegration"))
+    DisassociateIamRoleFromResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: DisassociateIamRoleFromResourceInputResourceArnString, required: true, location_name: "resourceArn"))
+    DisassociateIamRoleFromResourceInput.struct_class = Types::DisassociateIamRoleFromResourceInput
+
+    DisassociateIamRoleFromResourceOutput.struct_class = Types::DisassociateIamRoleFromResourceOutput
+
     ExadataIormConfig.add_member(:db_plans, Shapes::ShapeRef.new(shape: DbIormConfigList, location_name: "dbPlans"))
     ExadataIormConfig.add_member(:lifecycle_details, Shapes::ShapeRef.new(shape: String, location_name: "lifecycleDetails"))
     ExadataIormConfig.add_member(:lifecycle_state, Shapes::ShapeRef.new(shape: IormLifecycleState, location_name: "lifecycleState"))
@@ -935,6 +984,7 @@ module Aws::Odb
     GetOciOnboardingStatusOutput.add_member(:status, Shapes::ShapeRef.new(shape: OciOnboardingStatus, location_name: "status"))
     GetOciOnboardingStatusOutput.add_member(:existing_tenancy_activation_link, Shapes::ShapeRef.new(shape: String, location_name: "existingTenancyActivationLink"))
     GetOciOnboardingStatusOutput.add_member(:new_tenancy_activation_link, Shapes::ShapeRef.new(shape: String, location_name: "newTenancyActivationLink"))
+    GetOciOnboardingStatusOutput.add_member(:oci_identity_domain, Shapes::ShapeRef.new(shape: OciIdentityDomain, location_name: "ociIdentityDomain"))
     GetOciOnboardingStatusOutput.struct_class = Types::GetOciOnboardingStatusOutput
 
     GetOdbNetworkInput.add_member(:odb_network_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "odbNetworkId"))
@@ -956,6 +1006,15 @@ module Aws::Odb
 
     HoursOfDay.member = Shapes::ShapeRef.new(shape: Integer)
 
+    IamRole.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "iamRoleArn"))
+    IamRole.add_member(:status, Shapes::ShapeRef.new(shape: IamRoleStatus, location_name: "status"))
+    IamRole.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    IamRole.add_member(:aws_integration, Shapes::ShapeRef.new(shape: SupportedAwsIntegration, location_name: "awsIntegration"))
+    IamRole.struct_class = Types::IamRole
+
+    IamRoleList.member = Shapes::ShapeRef.new(shape: IamRole)
+
+    InitializeServiceInput.add_member(:oci_identity_domain, Shapes::ShapeRef.new(shape: Boolean, location_name: "ociIdentityDomain"))
     InitializeServiceInput.struct_class = Types::InitializeServiceInput
 
     InitializeServiceOutput.struct_class = Types::InitializeServiceOutput
@@ -963,6 +1022,12 @@ module Aws::Odb
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "retryAfterSeconds"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    KmsAccess.add_member(:status, Shapes::ShapeRef.new(shape: ManagedResourceStatus, location_name: "status"))
+    KmsAccess.add_member(:ipv4_addresses, Shapes::ShapeRef.new(shape: StringList, location_name: "ipv4Addresses"))
+    KmsAccess.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, location_name: "domainName"))
+    KmsAccess.add_member(:kms_policy_document, Shapes::ShapeRef.new(shape: String, location_name: "kmsPolicyDocument"))
+    KmsAccess.struct_class = Types::KmsAccess
 
     ListAutonomousVirtualMachinesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAutonomousVirtualMachinesInputMaxResultsInteger, location_name: "maxResults"))
     ListAutonomousVirtualMachinesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListAutonomousVirtualMachinesInputNextTokenString, location_name: "nextToken"))
@@ -1092,6 +1157,9 @@ module Aws::Odb
     ManagedServices.add_member(:managed_s3_backup_access, Shapes::ShapeRef.new(shape: ManagedS3BackupAccess, location_name: "managedS3BackupAccess"))
     ManagedServices.add_member(:zero_etl_access, Shapes::ShapeRef.new(shape: ZeroEtlAccess, location_name: "zeroEtlAccess"))
     ManagedServices.add_member(:s3_access, Shapes::ShapeRef.new(shape: S3Access, location_name: "s3Access"))
+    ManagedServices.add_member(:sts_access, Shapes::ShapeRef.new(shape: StsAccess, location_name: "stsAccess"))
+    ManagedServices.add_member(:kms_access, Shapes::ShapeRef.new(shape: KmsAccess, location_name: "kmsAccess"))
+    ManagedServices.add_member(:cross_region_s3_restore_sources_access, Shapes::ShapeRef.new(shape: CrossRegionS3RestoreSourcesAccessList, location_name: "crossRegionS3RestoreSourcesAccess"))
     ManagedServices.struct_class = Types::ManagedServices
 
     Month.add_member(:name, Shapes::ShapeRef.new(shape: MonthName, location_name: "name"))
@@ -1104,6 +1172,14 @@ module Aws::Odb
     OciDnsForwardingConfig.struct_class = Types::OciDnsForwardingConfig
 
     OciDnsForwardingConfigList.member = Shapes::ShapeRef.new(shape: OciDnsForwardingConfig)
+
+    OciIdentityDomain.add_member(:oci_identity_domain_id, Shapes::ShapeRef.new(shape: String, location_name: "ociIdentityDomainId"))
+    OciIdentityDomain.add_member(:oci_identity_domain_resource_url, Shapes::ShapeRef.new(shape: String, location_name: "ociIdentityDomainResourceUrl"))
+    OciIdentityDomain.add_member(:oci_identity_domain_url, Shapes::ShapeRef.new(shape: String, location_name: "ociIdentityDomainUrl"))
+    OciIdentityDomain.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    OciIdentityDomain.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    OciIdentityDomain.add_member(:account_setup_cloud_formation_url, Shapes::ShapeRef.new(shape: String, location_name: "accountSetupCloudFormationUrl"))
+    OciIdentityDomain.struct_class = Types::OciIdentityDomain
 
     OdbNetwork.add_member(:odb_network_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "odbNetworkId"))
     OdbNetwork.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
@@ -1161,6 +1237,7 @@ module Aws::Odb
     OdbPeeringConnection.add_member(:odb_network_arn, Shapes::ShapeRef.new(shape: String, location_name: "odbNetworkArn"))
     OdbPeeringConnection.add_member(:peer_network_arn, Shapes::ShapeRef.new(shape: String, location_name: "peerNetworkArn"))
     OdbPeeringConnection.add_member(:odb_peering_connection_type, Shapes::ShapeRef.new(shape: String, location_name: "odbPeeringConnectionType"))
+    OdbPeeringConnection.add_member(:peer_network_cidrs, Shapes::ShapeRef.new(shape: PeeredCidrList, location_name: "peerNetworkCidrs"))
     OdbPeeringConnection.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     OdbPeeringConnection.add_member(:percent_progress, Shapes::ShapeRef.new(shape: Float, location_name: "percentProgress"))
     OdbPeeringConnection.struct_class = Types::OdbPeeringConnection
@@ -1175,9 +1252,12 @@ module Aws::Odb
     OdbPeeringConnectionSummary.add_member(:odb_network_arn, Shapes::ShapeRef.new(shape: String, location_name: "odbNetworkArn"))
     OdbPeeringConnectionSummary.add_member(:peer_network_arn, Shapes::ShapeRef.new(shape: String, location_name: "peerNetworkArn"))
     OdbPeeringConnectionSummary.add_member(:odb_peering_connection_type, Shapes::ShapeRef.new(shape: String, location_name: "odbPeeringConnectionType"))
+    OdbPeeringConnectionSummary.add_member(:peer_network_cidrs, Shapes::ShapeRef.new(shape: PeeredCidrList, location_name: "peerNetworkCidrs"))
     OdbPeeringConnectionSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     OdbPeeringConnectionSummary.add_member(:percent_progress, Shapes::ShapeRef.new(shape: Float, location_name: "percentProgress"))
     OdbPeeringConnectionSummary.struct_class = Types::OdbPeeringConnectionSummary
+
+    PeeredCidrList.member = Shapes::ShapeRef.new(shape: PeeredCidr)
 
     RebootDbNodeInput.add_member(:cloud_vm_cluster_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "cloudVmClusterId"))
     RebootDbNodeInput.add_member(:db_node_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "dbNodeId"))
@@ -1237,6 +1317,12 @@ module Aws::Odb
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
+    StsAccess.add_member(:status, Shapes::ShapeRef.new(shape: ManagedResourceStatus, location_name: "status"))
+    StsAccess.add_member(:ipv4_addresses, Shapes::ShapeRef.new(shape: StringList, location_name: "ipv4Addresses"))
+    StsAccess.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, location_name: "domainName"))
+    StsAccess.add_member(:sts_policy_document, Shapes::ShapeRef.new(shape: String, location_name: "stsPolicyDocument"))
+    StsAccess.struct_class = Types::StsAccess
+
     SystemVersionList.member = Shapes::ShapeRef.new(shape: SystemVersionSummary)
 
     SystemVersionSummary.add_member(:gi_version, Shapes::ShapeRef.new(shape: String, location_name: "giVersion"))
@@ -1278,7 +1364,13 @@ module Aws::Odb
     UpdateOdbNetworkInput.add_member(:peered_cidrs_to_be_removed, Shapes::ShapeRef.new(shape: StringList, location_name: "peeredCidrsToBeRemoved"))
     UpdateOdbNetworkInput.add_member(:s3_access, Shapes::ShapeRef.new(shape: Access, location_name: "s3Access"))
     UpdateOdbNetworkInput.add_member(:zero_etl_access, Shapes::ShapeRef.new(shape: Access, location_name: "zeroEtlAccess"))
+    UpdateOdbNetworkInput.add_member(:sts_access, Shapes::ShapeRef.new(shape: Access, location_name: "stsAccess"))
+    UpdateOdbNetworkInput.add_member(:kms_access, Shapes::ShapeRef.new(shape: Access, location_name: "kmsAccess"))
     UpdateOdbNetworkInput.add_member(:s3_policy_document, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "s3PolicyDocument"))
+    UpdateOdbNetworkInput.add_member(:sts_policy_document, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "stsPolicyDocument"))
+    UpdateOdbNetworkInput.add_member(:kms_policy_document, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "kmsPolicyDocument"))
+    UpdateOdbNetworkInput.add_member(:cross_region_s3_restore_sources_to_enable, Shapes::ShapeRef.new(shape: StringList, location_name: "crossRegionS3RestoreSourcesToEnable"))
+    UpdateOdbNetworkInput.add_member(:cross_region_s3_restore_sources_to_disable, Shapes::ShapeRef.new(shape: StringList, location_name: "crossRegionS3RestoreSourcesToDisable"))
     UpdateOdbNetworkInput.struct_class = Types::UpdateOdbNetworkInput
 
     UpdateOdbNetworkOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
@@ -1286,6 +1378,18 @@ module Aws::Odb
     UpdateOdbNetworkOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     UpdateOdbNetworkOutput.add_member(:odb_network_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "odbNetworkId"))
     UpdateOdbNetworkOutput.struct_class = Types::UpdateOdbNetworkOutput
+
+    UpdateOdbPeeringConnectionInput.add_member(:odb_peering_connection_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "odbPeeringConnectionId"))
+    UpdateOdbPeeringConnectionInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceDisplayName, location_name: "displayName"))
+    UpdateOdbPeeringConnectionInput.add_member(:peer_network_cidrs_to_be_added, Shapes::ShapeRef.new(shape: PeeredCidrList, location_name: "peerNetworkCidrsToBeAdded"))
+    UpdateOdbPeeringConnectionInput.add_member(:peer_network_cidrs_to_be_removed, Shapes::ShapeRef.new(shape: PeeredCidrList, location_name: "peerNetworkCidrsToBeRemoved"))
+    UpdateOdbPeeringConnectionInput.struct_class = Types::UpdateOdbPeeringConnectionInput
+
+    UpdateOdbPeeringConnectionOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    UpdateOdbPeeringConnectionOutput.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    UpdateOdbPeeringConnectionOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    UpdateOdbPeeringConnectionOutput.add_member(:odb_peering_connection_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "odbPeeringConnectionId"))
+    UpdateOdbPeeringConnectionOutput.struct_class = Types::UpdateOdbPeeringConnectionOutput
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, required: true, location_name: "reason"))
@@ -1336,6 +1440,20 @@ module Aws::Odb
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:associate_iam_role_to_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateIamRoleToResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateIamRoleToResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: AssociateIamRoleToResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:create_cloud_autonomous_vm_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -1471,6 +1589,20 @@ module Aws::Odb
         o.output = Shapes::ShapeRef.new(shape: DeleteOdbPeeringConnectionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:disassociate_iam_role_from_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateIamRoleFromResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateIamRoleFromResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateIamRoleFromResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1896,6 +2028,20 @@ module Aws::Odb
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateOdbNetworkInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateOdbNetworkOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_odb_peering_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateOdbPeeringConnection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateOdbPeeringConnectionInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateOdbPeeringConnectionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

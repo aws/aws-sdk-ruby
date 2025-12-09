@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2025-11-17)
+------------------
+
+* Feature - Added support for the managed Slurm REST API endpoint
+
+1.34.0 (2025-10-22)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.33.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2025-10-01)
+------------------
+
+* Feature - Added the UpdateCluster API action to modify cluster configurations, and Slurm custom settings for queues.
+
 1.31.0 (2025-09-17)
 ------------------
 

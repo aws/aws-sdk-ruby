@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.207.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.206.0 (2025-11-06)
+------------------
+
+* Feature - Provides NoLongerSupportedException error message
+
+1.205.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.204.0 (2025-10-16)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.203.0 (2025-09-23)
 ------------------
 

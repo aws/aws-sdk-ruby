@@ -10,10 +10,39 @@
 module Aws::ApiGatewayV2
   module Types
 
+    # Represents a domain name and certificate for a portal.
+    #
+    # @!attribute [rw] certificate_arn
+    #   The certificate ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name.
+    #   @return [String]
+    #
+    class ACMManaged < Struct.new(
+      :certificate_arn,
+      :domain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] message
     #   @return [String]
     #
     class AccessDeniedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The error message.
+    #
+    # @!attribute [rw] message
+    #   The message.
+    #   @return [String]
+    #
+    class AccessDeniedExceptionResponseContent < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -214,6 +243,24 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # Represents an authorization configuration for a portal.
+    #
+    # @!attribute [rw] cognito_config
+    #   The Amazon Cognito configuration.
+    #   @return [Types::CognitoConfig]
+    #
+    # @!attribute [rw] none
+    #   Provide no authorization for your portal. This makes your portal
+    #   publicly accesible on the web.
+    #   @return [Types::None]
+    #
+    class Authorization < Struct.new(
+      :cognito_config,
+      :none)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents an authorizer.
     #
     # @!attribute [rw] authorizer_credentials_arn
@@ -242,18 +289,16 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] authorizer_uri
-    #   The authorizer's Uniform Resource Identifier (URI). For REQUEST
+    #   The authorizer's Uniform Resource Identifier (URI). ForREQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
     #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\{account\_id}*:function:*\{lambda\_function\_name}*/invocations.
     #   In general, the URI has this form:
-    #   arn:aws:apigateway:*\{region}*:lambda:path/*\{service\_api}* , where
-    #   <replaceable />
-    #
-    #   \{region} is the same as the region hosting the Lambda function,
-    #   path indicates that the remaining substring in the URI should be
-    #   treated as the path to the resource, including the initial /. For
-    #   Lambda functions, this is usually of the form
+    #   arn:aws:apigateway:*\{region}*:lambda:path/*\{service\_api}*
+    #   replaceable/>\{region} is the same as the region hosting the Lambda
+    #   function, path indicates that the remaining substring in the URI
+    #   should be treated as the path to the resource, including the initial
+    #   /. For Lambda functions, this is usually of the form
     #   /2015-03-31/functions/\[FunctionARN\]/invocations. Supported only
     #   for REQUEST authorizers.
     #   @return [String]
@@ -277,7 +322,8 @@ module Aws::ApiGatewayV2
     #   Otherwise, it returns a 401 Unauthorized response without calling
     #   the Lambda function. For HTTP APIs, identity sources are also used
     #   as the cache key when caching is enabled. To learn more, see
-    #   [Working with AWS Lambda authorizers for HTTP APIs][1].
+    #   [Working with Amazon Web Services Lambda authorizers for HTTP
+    #   APIs][1].
     #
     #   For JWT, a single entry that specifies where to extract the JSON Web
     #   Token (JWT) from inbound requests. Currently only header-based and
@@ -305,8 +351,8 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] authorizer_payload_format_version
     #   Specifies the format of the payload sent to an HTTP API Lambda
     #   authorizer. Required for HTTP API Lambda authorizers. Supported
-    #   values are 1.0 and 2.0. To learn more, see [Working with AWS Lambda
-    #   authorizers for HTTP APIs][1].
+    #   values are 1.0 and 2.0. To learn more, see [Working with Amazon Web
+    #   Services Lambda authorizers for HTTP APIs][1].
     #
     #
     #
@@ -317,7 +363,8 @@ module Aws::ApiGatewayV2
     #   Specifies whether a Lambda authorizer returns a response in a simple
     #   format. If enabled, the Lambda authorizer can return a boolean value
     #   instead of an IAM policy. Supported only for HTTP APIs. To learn
-    #   more, see [Working with AWS Lambda authorizers for HTTP APIs][1]
+    #   more, see [Working with Amazon Web Services Lambda authorizers for
+    #   HTTP APIs][1].
     #
     #
     #
@@ -371,6 +418,41 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # The response content for bad request exception.
+    #
+    # @!attribute [rw] message
+    #   The message of the bad request exception response content.
+    #   @return [String]
+    #
+    class BadRequestExceptionResponseContent < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for using Amazon Cognito user pools to control
+    # access to your portal.
+    #
+    # @!attribute [rw] app_client_id
+    #   The app client ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_pool_arn
+    #   The user pool ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_pool_domain
+    #   The user pool domain.
+    #   @return [String]
+    #
+    class CognitoConfig < Struct.new(
+      :app_client_id,
+      :user_pool_arn,
+      :user_pool_domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The requested operation would cause a conflict with the current state
     # of a service resource associated with the request. Resolve the
     # conflict before retrying this request. See the accompanying error
@@ -381,6 +463,18 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resource identifier.
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    class ConflictExceptionResponseContent < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -461,8 +555,9 @@ module Aws::ApiGatewayV2
     #   to assume, use the role's Amazon Resource Name (ARN). To require
     #   that the caller's identity be passed through from the request,
     #   specify arn:aws:iam::*:user/*. To use resource-based permissions
-    #   on supported AWS services, specify null. Currently, this property is
-    #   not used for HTTP integrations. Supported only for HTTP APIs.
+    #   on supported Amazon Web Services services, specify null. Currently,
+    #   this property is not used for HTTP integrations. Supported only for
+    #   HTTP APIs.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -475,6 +570,11 @@ module Aws::ApiGatewayV2
     #   @return [Boolean]
     #
     # @!attribute [rw] disable_execute_api_endpoint
+    #   Specifies whether clients can invoke your API by using the default
+    #   execute-api endpoint. By default, clients can invoke your API with
+    #   the default https://\{api\_id}.execute-api.\{region}.amazonaws.com
+    #   endpoint. To require that clients use a custom domain name to invoke
+    #   your API, disable the default endpoint.
     #   @return [Boolean]
     #
     # @!attribute [rw] name
@@ -845,13 +945,11 @@ module Aws::ApiGatewayV2
     #   example,
     #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\{account\_id}*:function:*\{lambda\_function\_name}*/invocations.
     #   In general, the URI has this form:
-    #   arn:aws:apigateway:*\{region}*:lambda:path/*\{service\_api}* , where
-    #   <replaceable />
-    #
-    #   \{region} is the same as the region hosting the Lambda function,
-    #   path indicates that the remaining substring in the URI should be
-    #   treated as the path to the resource, including the initial /. For
-    #   Lambda functions, this is usually of the form
+    #   arn:aws:apigateway:*\{region}*:lambda:path/*\{service\_api}*
+    #   replaceable/>\{region} is the same as the region hosting the Lambda
+    #   function, path indicates that the remaining substring in the URI
+    #   should be treated as the path to the resource, including the initial
+    #   /. For Lambda functions, this is usually of the form
     #   /2015-03-31/functions/\[FunctionARN\]/invocations. Supported only
     #   for REQUEST authorizers.
     #   @return [String]
@@ -875,7 +973,8 @@ module Aws::ApiGatewayV2
     #   Otherwise, it returns a 401 Unauthorized response without calling
     #   the Lambda function. For HTTP APIs, identity sources are also used
     #   as the cache key when caching is enabled. To learn more, see
-    #   [Working with AWS Lambda authorizers for HTTP APIs][1].
+    #   [Working with Amazon Web Services Lambda authorizers for HTTP
+    #   APIs][1].
     #
     #   For JWT, a single entry that specifies where to extract the JSON Web
     #   Token (JWT) from inbound requests. Currently only header-based and
@@ -903,8 +1002,8 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] authorizer_payload_format_version
     #   Specifies the format of the payload sent to an HTTP API Lambda
     #   authorizer. Required for HTTP API Lambda authorizers. Supported
-    #   values are 1.0 and 2.0. To learn more, see [Working with AWS Lambda
-    #   authorizers for HTTP APIs][1].
+    #   values are 1.0 and 2.0. To learn more, see [Working with Amazon Web
+    #   Services Lambda authorizers for HTTP APIs][1].
     #
     #
     #
@@ -916,7 +1015,8 @@ module Aws::ApiGatewayV2
     #   format. By default, a Lambda authorizer must return an IAM policy.
     #   If enabled, the Lambda authorizer can return a boolean value instead
     #   of an IAM policy. Supported only for HTTP APIs. To learn more, see
-    #   [Working with AWS Lambda authorizers for HTTP APIs][1]
+    #   [Working with Amazon Web Services Lambda authorizers for HTTP
+    #   APIs][1].
     #
     #
     #
@@ -1098,8 +1198,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] stage_name
-    #   The name of the Stage resource for the Deployment resource to
-    #   create.
+    #   The name of an existing stage to associate with the deployment.
     #   @return [String]
     #
     class CreateDeploymentInput < Struct.new(
@@ -1176,6 +1275,7 @@ module Aws::ApiGatewayV2
     #   @return [Types::MutualTlsAuthenticationInput]
     #
     # @!attribute [rw] routing_mode
+    #   The routing mode API Gateway uses to route traffic to your APIs.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1207,6 +1307,7 @@ module Aws::ApiGatewayV2
     #   @return [Types::MutualTlsAuthenticationInput]
     #
     # @!attribute [rw] routing_mode
+    #   The routing mode API Gateway uses to route traffic to your APIs.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1251,6 +1352,7 @@ module Aws::ApiGatewayV2
     #   @return [Types::MutualTlsAuthentication]
     #
     # @!attribute [rw] routing_mode
+    #   The routing mode API Gateway uses to route traffic to your APIs.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1302,11 +1404,13 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] credentials_arn
     #   Specifies the credentials required for the integration, if any. For
-    #   AWS integrations, three options are available. To specify an IAM
-    #   Role for API Gateway to assume, use the role's Amazon Resource Name
-    #   (ARN). To require that the caller's identity be passed through from
-    #   the request, specify the string arn:aws:iam::*:user/*. To use
-    #   resource-based permissions on supported AWS services, specify null.
+    #   Amazon Web Services integrations, three options are available. To
+    #   specify an IAM Role for API Gateway to assume, use the role's
+    #   Amazon Resource Name (ARN). To require that the caller's identity
+    #   be passed through from the request, specify the string
+    #   arn:aws:iam::*:user/*. To use resource-based permissions on
+    #   supported Amazon Web Services services, don't specify this
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1314,13 +1418,15 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] integration_method
-    #   Specifies the integration's HTTP method type.
+    #   Specifies the integration's HTTP method type. For WebSocket APIs,
+    #   if you use a Lambda integration, you must set the integration method
+    #   to POST.
     #   @return [String]
     #
     # @!attribute [rw] integration_subtype
     #   Supported only for HTTP API AWS\_PROXY integrations. Specifies the
-    #   AWS service action to invoke. To learn more, see [Integration
-    #   subtype reference][1].
+    #   Amazon Web Services service action to invoke. To learn more, see
+    #   [Integration subtype reference][1].
     #
     #
     #
@@ -1330,15 +1436,16 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] integration_type
     #   The integration type of an integration. One of the following:
     #
-    #   AWS: for integrating the route or method request with an AWS service
-    #   action, including the Lambda function-invoking action. With the
-    #   Lambda function-invoking action, this is referred to as the Lambda
-    #   custom integration. With any other AWS service action, this is known
-    #   as AWS integration. Supported only for WebSocket APIs.
+    #   AWS: for integrating the route or method request with an Amazon Web
+    #   Services service action, including the Lambda function-invoking
+    #   action. With the Lambda function-invoking action, this is referred
+    #   to as the Lambda custom integration. With any other Amazon Web
+    #   Services service action, this is known as Amazon Web Services
+    #   integration. Supported only for WebSocket APIs.
     #
     #   AWS\_PROXY: for integrating the route or method request with a
-    #   Lambda function or other AWS service action. This integration is
-    #   also referred to as a Lambda proxy integration.
+    #   Lambda function or other Amazon Web Services service action. This
+    #   integration is also referred to as a Lambda proxy integration.
     #
     #   HTTP: for integrating the route or method request with an HTTP
     #   endpoint. This integration is also referred to as the HTTP custom
@@ -1361,11 +1468,12 @@ module Aws::ApiGatewayV2
     #
     #   For an HTTP API private integration, specify the ARN of an
     #   Application Load Balancer listener, Network Load Balancer listener,
-    #   or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map
-    #   service, API Gateway uses DiscoverInstances to identify resources.
-    #   You can use query parameters to target specific resources. To learn
-    #   more, see [DiscoverInstances][1]. For private integrations, all
-    #   resources must be owned by the same AWS account.
+    #   or Amazon Web Services Cloud Map service. If you specify the ARN of
+    #   an Amazon Web Services Cloud Map service, API Gateway uses
+    #   DiscoverInstances to identify resources. You can use query
+    #   parameters to target specific resources. To learn more, see
+    #   [DiscoverInstances][1]. For private integrations, all resources must
+    #   be owned by the same Amazon Web Services account.
     #
     #
     #
@@ -1393,7 +1501,14 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] payload_format_version
     #   Specifies the format of the payload sent to an integration. Required
-    #   for HTTP APIs.
+    #   for HTTP APIs. For HTTP APIs, supported values for Lambda proxy
+    #   integrations are 1.0 and 2.0. For all other integrations, 1.0 is the
+    #   only supported value. To learn more, see [Working with Amazon Web
+    #   Services Lambda proxy integrations for HTTP APIs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -1411,15 +1526,15 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying parameters that
     #   are passed to AWS\_PROXY integrations. You can provide static
     #   values, or map request data, stage variables, or context variables
-    #   that are evaluated at runtime. To learn more, see [Working with AWS
-    #   service integrations for HTTP APIs][1].
+    #   that are evaluated at runtime. To learn more, see [Working with
+    #   Amazon Web Services service integrations for HTTP APIs][1].
     #
     #   For HTTP API integrations without a specified integrationSubtype
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
-    #   where action can be append, overwrite or remove. For values, you can
+    #   &lt;action>:&lt;header\|querystring\|path>.&lt;location> where
+    #   action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
     #   [Transforming API requests and responses][2].
@@ -1436,12 +1551,12 @@ module Aws::ApiGatewayV2
     #   returning the response to clients. Specify a key-value map from a
     #   selection key to response parameters. The selection key must be a
     #   valid HTTP status code within the range of 200-599. Response
-    #   parameters are a key-value map. The key must match pattern
-    #   &lt;action&gt;:&lt;header&gt;.&lt;location&gt; or
-    #   overwrite.statuscode. The action can be append, overwrite or remove.
-    #   The value can be a static value, or map to response data, stage
-    #   variables, or context variables that are evaluated at runtime. To
-    #   learn more, see [Transforming API requests and responses][1].
+    #   parameters are a key-value map. The key must match the pattern
+    #   &lt;action>:&lt;header>.&lt;location> or overwrite.statuscode. The
+    #   action can be append, overwrite or remove. The value can be a static
+    #   value, or map to response data, stage variables, or context
+    #   variables that are evaluated at runtime. To learn more, see
+    #   [Transforming API requests and responses][1].
     #
     #
     #
@@ -1559,15 +1674,15 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying parameters that
     #   are passed to AWS\_PROXY integrations. You can provide static
     #   values, or map request data, stage variables, or context variables
-    #   that are evaluated at runtime. To learn more, see [Working with AWS
-    #   service integrations for HTTP APIs][1].
+    #   that are evaluated at runtime. To learn more, see [Working with
+    #   Amazon Web Services service integrations for HTTP APIs][1].
     #
     #   For HTTP API integrations without a specified integrationSubtype
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
-    #   where action can be append, overwrite or remove. For values, you can
+    #   &lt;action>:&lt;header\|querystring\|path>.&lt;location> where
+    #   action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
     #   [Transforming API requests and responses][2].
@@ -1709,15 +1824,15 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying parameters that
     #   are passed to AWS\_PROXY integrations. You can provide static
     #   values, or map request data, stage variables, or context variables
-    #   that are evaluated at runtime. To learn more, see [Working with AWS
-    #   service integrations for HTTP APIs][1].
+    #   that are evaluated at runtime. To learn more, see [Working with
+    #   Amazon Web Services service integrations for HTTP APIs][1].
     #
     #   For HTTP API integrations without a specified integrationSubtype
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
-    #   where action can be append, overwrite or remove. For values, you can
+    #   &lt;action>:&lt;header\|querystring\|path>.&lt;location> where
+    #   action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
     #   [Transforming API requests and responses][2].
@@ -1881,15 +1996,15 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying parameters that
     #   are passed to AWS\_PROXY integrations. You can provide static
     #   values, or map request data, stage variables, or context variables
-    #   that are evaluated at runtime. To learn more, see [Working with AWS
-    #   service integrations for HTTP APIs][1].
+    #   that are evaluated at runtime. To learn more, see [Working with
+    #   Amazon Web Services service integrations for HTTP APIs][1].
     #
     #   For HTTP API integrations without a specified integrationSubtype
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
-    #   where action can be append, overwrite or remove. For values, you can
+    #   &lt;action>:&lt;header\|querystring\|path>.&lt;location> where
+    #   action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
     #   [Transforming API requests and responses][2].
@@ -1962,15 +2077,15 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying parameters that
     #   are passed to AWS\_PROXY integrations. You can provide static
     #   values, or map request data, stage variables, or context variables
-    #   that are evaluated at runtime. To learn more, see [Working with AWS
-    #   service integrations for HTTP APIs][1].
+    #   that are evaluated at runtime. To learn more, see [Working with
+    #   Amazon Web Services service integrations for HTTP APIs][1].
     #
     #   For HTTP API integrations without a specified integrationSubtype
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
-    #   where action can be append, overwrite or remove. For values, you can
+    #   &lt;action>:&lt;header\|querystring\|path>.&lt;location> where
+    #   action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
     #   [Transforming API requests and responses][2].
@@ -2094,6 +2209,560 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    class CreatePortalProductRequest < Struct.new(
+      :description,
+      :display_name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Creates a portal product.
+    #
+    # @!attribute [rw] description
+    #   A description of the portal product.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The name of the portal product as it appears in a published portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    class CreatePortalProductRequestContent < Struct.new(
+      :description,
+      :display_name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   @return [String]
+    #
+    # @!attribute [rw] display_order
+    #   The display order.
+    #   @return [Types::DisplayOrder]
+    #
+    # @!attribute [rw] last_modified
+    #   @return [Time]
+    #
+    # @!attribute [rw] portal_product_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    class CreatePortalProductResponse < Struct.new(
+      :description,
+      :display_name,
+      :display_order,
+      :last_modified,
+      :portal_product_arn,
+      :portal_product_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Creates a portal product.
+    #
+    # @!attribute [rw] description
+    #   A description of the portal product.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name for the portal product.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_order
+    #   The visual ordering of the product pages and product REST endpoint
+    #   pages in a published portal.
+    #   @return [Types::DisplayOrder]
+    #
+    # @!attribute [rw] last_modified
+    #   The timestamp when the portal product was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] portal_product_arn
+    #   The ARN of the portal product.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_product_id
+    #   The portal product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    class CreatePortalProductResponseContent < Struct.new(
+      :description,
+      :display_name,
+      :display_order,
+      :last_modified,
+      :portal_product_arn,
+      :portal_product_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorization
+    #   Represents an authorization configuration for a portal.
+    #   @return [Types::Authorization]
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   Represents an endpoint configuration.
+    #   @return [Types::EndpointConfigurationRequest]
+    #
+    # @!attribute [rw] included_portal_product_arns
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] logo_uri
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_content
+    #   Contains the content that is visible to portal consumers including
+    #   the themes, display names, and description.
+    #   @return [Types::PortalContent]
+    #
+    # @!attribute [rw] rum_app_monitor_name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    class CreatePortalRequest < Struct.new(
+      :authorization,
+      :endpoint_configuration,
+      :included_portal_product_arns,
+      :logo_uri,
+      :portal_content,
+      :rum_app_monitor_name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Creates a portal.
+    #
+    # @!attribute [rw] authorization
+    #   The authentication configuration for the portal.
+    #   @return [Types::Authorization]
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   The domain configuration for the portal. Use a default domain
+    #   provided by API Gateway or provide a fully-qualified domain name
+    #   that you own.
+    #   @return [Types::EndpointConfigurationRequest]
+    #
+    # @!attribute [rw] included_portal_product_arns
+    #   The ARNs of the portal products included in the portal.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] logo_uri
+    #   The URI for the portal logo image that is displayed in the portal
+    #   header.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_content
+    #   The content of the portal.
+    #   @return [Types::PortalContent]
+    #
+    # @!attribute [rw] rum_app_monitor_name
+    #   The name of the Amazon CloudWatch RUM app monitor for the portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    class CreatePortalRequestContent < Struct.new(
+      :authorization,
+      :endpoint_configuration,
+      :included_portal_product_arns,
+      :logo_uri,
+      :portal_content,
+      :rum_app_monitor_name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorization
+    #   Represents an authorization configuration for a portal.
+    #   @return [Types::Authorization]
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   Represents an endpoint configuration.
+    #   @return [Types::EndpointConfigurationResponse]
+    #
+    # @!attribute [rw] included_portal_product_arns
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] last_modified
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_published
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_published_description
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_content
+    #   Contains the content that is visible to portal consumers including
+    #   the themes, display names, and description.
+    #   @return [Types::PortalContent]
+    #
+    # @!attribute [rw] portal_id
+    #   @return [String]
+    #
+    # @!attribute [rw] publish_status
+    #   Represents a publish status.
+    #   @return [String]
+    #
+    # @!attribute [rw] rum_app_monitor_name
+    #   @return [String]
+    #
+    # @!attribute [rw] status_exception
+    #   Represents a StatusException.
+    #   @return [Types::StatusException]
+    #
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    class CreatePortalResponse < Struct.new(
+      :authorization,
+      :endpoint_configuration,
+      :included_portal_product_arns,
+      :last_modified,
+      :last_published,
+      :last_published_description,
+      :portal_arn,
+      :portal_content,
+      :portal_id,
+      :publish_status,
+      :rum_app_monitor_name,
+      :status_exception,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Creates a portal.
+    #
+    # @!attribute [rw] authorization
+    #   The authorization for the portal. Supports Cognito-based user
+    #   authentication or no authentication.
+    #   @return [Types::Authorization]
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   The endpoint configuration.
+    #   @return [Types::EndpointConfigurationResponse]
+    #
+    # @!attribute [rw] included_portal_product_arns
+    #   The ARNs of the portal products included in the portal.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] last_modified
+    #   The timestamp when the portal configuration was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_published
+    #   The timestamp when the portal was last published.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_published_description
+    #   A user-written description of the changes made in the last published
+    #   version of the portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_arn
+    #   The ARN of the portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_content
+    #   The name, description, and theme for the portal.
+    #   @return [Types::PortalContent]
+    #
+    # @!attribute [rw] portal_id
+    #   The portal identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] publish_status
+    #   The current publishing status of the portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] rum_app_monitor_name
+    #   The name of the Amazon CloudWatch RUM app monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_exception
+    #   Error information for failed portal operations. Contains details
+    #   about any issues encountered during portal creation or publishing.
+    #   @return [Types::StatusException]
+    #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    class CreatePortalResponseContent < Struct.new(
+      :authorization,
+      :endpoint_configuration,
+      :included_portal_product_arns,
+      :last_modified,
+      :last_published,
+      :last_published_description,
+      :portal_arn,
+      :portal_content,
+      :portal_id,
+      :publish_status,
+      :rum_app_monitor_name,
+      :status_exception,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_content
+    #   The content of the product page.
+    #   @return [Types::DisplayContent]
+    #
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    class CreateProductPageRequest < Struct.new(
+      :display_content,
+      :portal_product_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Creates a product page.
+    #
+    # @!attribute [rw] display_content
+    #   The content of the product page.
+    #   @return [Types::DisplayContent]
+    #
+    class CreateProductPageRequestContent < Struct.new(
+      :display_content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_content
+    #   The content of the product page.
+    #   @return [Types::DisplayContent]
+    #
+    # @!attribute [rw] last_modified
+    #   @return [Time]
+    #
+    # @!attribute [rw] product_page_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] product_page_id
+    #   @return [String]
+    #
+    class CreateProductPageResponse < Struct.new(
+      :display_content,
+      :last_modified,
+      :product_page_arn,
+      :product_page_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Creates a product page.
+    #
+    # @!attribute [rw] display_content
+    #   The content of the product page.
+    #   @return [Types::DisplayContent]
+    #
+    # @!attribute [rw] last_modified
+    #   The timestamp when the product page was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] product_page_arn
+    #   The ARN of the product page.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_page_id
+    #   The product page identifier.
+    #   @return [String]
+    #
+    class CreateProductPageResponseContent < Struct.new(
+      :display_content,
+      :last_modified,
+      :product_page_arn,
+      :product_page_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_content
+    #   Represents the endpoint display content.
+    #   @return [Types::EndpointDisplayContent]
+    #
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    # @!attribute [rw] rest_endpoint_identifier
+    #   The REST API endpoint identifier.
+    #   @return [Types::RestEndpointIdentifier]
+    #
+    # @!attribute [rw] try_it_state
+    #   Represents the try it state for a product REST endpoint page.
+    #   @return [String]
+    #
+    class CreateProductRestEndpointPageRequest < Struct.new(
+      :display_content,
+      :portal_product_id,
+      :rest_endpoint_identifier,
+      :try_it_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Creates a product REST endpoint page.
+    #
+    # @!attribute [rw] display_content
+    #   The content of the product REST endpoint page.
+    #   @return [Types::EndpointDisplayContent]
+    #
+    # @!attribute [rw] rest_endpoint_identifier
+    #   The REST endpoint identifier.
+    #   @return [Types::RestEndpointIdentifier]
+    #
+    # @!attribute [rw] try_it_state
+    #   The try it state of the product REST endpoint page.
+    #   @return [String]
+    #
+    class CreateProductRestEndpointPageRequestContent < Struct.new(
+      :display_content,
+      :rest_endpoint_identifier,
+      :try_it_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_content
+    #   The product REST endpoint page.
+    #   @return [Types::EndpointDisplayContentResponse]
+    #
+    # @!attribute [rw] last_modified
+    #   @return [Time]
+    #
+    # @!attribute [rw] product_rest_endpoint_page_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] product_rest_endpoint_page_id
+    #   @return [String]
+    #
+    # @!attribute [rw] rest_endpoint_identifier
+    #   The REST API endpoint identifier.
+    #   @return [Types::RestEndpointIdentifier]
+    #
+    # @!attribute [rw] status
+    #   The status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_exception
+    #   Represents a StatusException.
+    #   @return [Types::StatusException]
+    #
+    # @!attribute [rw] try_it_state
+    #   Represents the try it state for a product REST endpoint page.
+    #   @return [String]
+    #
+    class CreateProductRestEndpointPageResponse < Struct.new(
+      :display_content,
+      :last_modified,
+      :product_rest_endpoint_page_arn,
+      :product_rest_endpoint_page_id,
+      :rest_endpoint_identifier,
+      :status,
+      :status_exception,
+      :try_it_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Creates a product REST endpoint page.
+    #
+    # @!attribute [rw] display_content
+    #   The display content.
+    #   @return [Types::EndpointDisplayContentResponse]
+    #
+    # @!attribute [rw] last_modified
+    #   The timestamp when the product REST endpoint page was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] product_rest_endpoint_page_arn
+    #   The ARN of the product REST endpoint page.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_rest_endpoint_page_id
+    #   The product REST endpoint page identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] rest_endpoint_identifier
+    #   The REST endpoint identifier.
+    #   @return [Types::RestEndpointIdentifier]
+    #
+    # @!attribute [rw] status
+    #   The status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_exception
+    #   The status exception information.
+    #   @return [Types::StatusException]
+    #
+    # @!attribute [rw] try_it_state
+    #   The try it state.
+    #   @return [String]
+    #
+    class CreateProductRestEndpointPageResponseContent < Struct.new(
+      :display_content,
+      :last_modified,
+      :product_rest_endpoint_page_arn,
+      :product_rest_endpoint_page_id,
+      :rest_endpoint_identifier,
+      :status,
+      :status_exception,
+      :try_it_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input parameters for a CreateRoute request.
     #
     # @!attribute [rw] api_key_required
@@ -2107,11 +2776,11 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] authorization_type
     #   The authorization type for the route. For WebSocket APIs, valid
-    #   values are NONE for open access, AWS\_IAM for using AWS IAM
-    #   permissions, and CUSTOM for using a Lambda authorizer For HTTP APIs,
-    #   valid values are NONE for open access, JWT for using JSON Web
-    #   Tokens, AWS\_IAM for using AWS IAM permissions, and CUSTOM for using
-    #   a Lambda authorizer.
+    #   values are NONE for open access, AWS\_IAM for using Amazon Web
+    #   Services IAM permissions, and CUSTOM for using a Lambda authorizer.
+    #   For HTTP APIs, valid values are NONE for open access, JWT for using
+    #   JSON Web Tokens, AWS\_IAM for using Amazon Web Services IAM
+    #   permissions, and CUSTOM for using a Lambda authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -2139,7 +2808,9 @@ module Aws::ApiGatewayV2
     #   @return [Hash<String,Types::ParameterConstraints>]
     #
     # @!attribute [rw] route_key
-    #   The route key for the route.
+    #   The route key for the route. For HTTP APIs, the route key can be
+    #   either $default, or a combination of an HTTP method and resource
+    #   path, for example, GET /pets.
     #   @return [String]
     #
     # @!attribute [rw] route_response_selection_expression
@@ -2187,10 +2858,11 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] authorization_type
     #   The authorization type. For WebSocket APIs, valid values are NONE
-    #   for open access, AWS\_IAM for using AWS IAM permissions, and CUSTOM
-    #   for using a Lambda authorizer. For HTTP APIs, valid values are NONE
-    #   for open access, JWT for using JSON Web Tokens, AWS\_IAM for using
-    #   AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
+    #   for open access, AWS\_IAM for using Amazon Web Services IAM
+    #   permissions, and CUSTOM for using a Lambda authorizer. For HTTP
+    #   APIs, valid values are NONE for open access, JWT for using JSON Web
+    #   Tokens, AWS\_IAM for using Amazon Web Services IAM permissions, and
+    #   CUSTOM for using a Lambda authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -2279,10 +2951,11 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] authorization_type
     #   The authorization type. For WebSocket APIs, valid values are NONE
-    #   for open access, AWS\_IAM for using AWS IAM permissions, and CUSTOM
-    #   for using a Lambda authorizer. For HTTP APIs, valid values are NONE
-    #   for open access, JWT for using JSON Web Tokens, AWS\_IAM for using
-    #   AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
+    #   for open access, AWS\_IAM for using Amazon Web Services IAM
+    #   permissions, and CUSTOM for using a Lambda authorizer. For HTTP
+    #   APIs, valid values are NONE for open access, JWT for using JSON Web
+    #   Tokens, AWS\_IAM for using Amazon Web Services IAM permissions, and
+    #   CUSTOM for using a Lambda authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -2484,7 +3157,9 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] priority
-    #   Represents the priority of the routing rule.
+    #   The order in which API Gateway evaluates a rule. Priority is
+    #   evaluated from the lowest value to the highest value. Rules can't
+    #   have the same priority. Priority values 1-1,000,000 are supported.
     #   @return [Integer]
     #
     class CreateRoutingRuleRequest < Struct.new(
@@ -2504,7 +3179,9 @@ module Aws::ApiGatewayV2
     #   @return [Array<Types::RoutingRuleCondition>]
     #
     # @!attribute [rw] priority
-    #   Represents the priority of the routing rule.
+    #   The order in which API Gateway evaluates a rule. Priority is
+    #   evaluated from the lowest value to the highest value. Rules can't
+    #   have the same priority. Priority values 1-1,000,000 are supported.
     #   @return [Integer]
     #
     # @!attribute [rw] routing_rule_arn
@@ -2816,6 +3493,43 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # Represents custom colors for a published portal.
+    #
+    # @!attribute [rw] accent_color
+    #   Represents the accent color.
+    #   @return [String]
+    #
+    # @!attribute [rw] background_color
+    #   Represents the background color.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_validation_color
+    #   The errorValidationColor.
+    #   @return [String]
+    #
+    # @!attribute [rw] header_color
+    #   Represents the header color.
+    #   @return [String]
+    #
+    # @!attribute [rw] navigation_color
+    #   Represents the navigation color.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_color
+    #   Represents the text color.
+    #   @return [String]
+    #
+    class CustomColors < Struct.new(
+      :accent_color,
+      :background_color,
+      :error_validation_color,
+      :header_color,
+      :navigation_color,
+      :text_color)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] api_id
     #   @return [String]
     #
@@ -2934,6 +3648,59 @@ module Aws::ApiGatewayV2
     class DeleteModelRequest < Struct.new(
       :api_id,
       :model_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    class DeletePortalProductRequest < Struct.new(
+      :portal_product_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    class DeletePortalProductSharingPolicyRequest < Struct.new(
+      :portal_product_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] portal_id
+    #   @return [String]
+    #
+    class DeletePortalRequest < Struct.new(
+      :portal_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    # @!attribute [rw] product_page_id
+    #   @return [String]
+    #
+    class DeleteProductPageRequest < Struct.new(
+      :portal_product_id,
+      :product_page_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    # @!attribute [rw] product_rest_endpoint_page_id
+    #   @return [String]
+    #
+    class DeleteProductRestEndpointPageRequest < Struct.new(
+      :portal_product_id,
+      :product_rest_endpoint_page_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3103,6 +3870,82 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] portal_id
+    #   @return [String]
+    #
+    class DisablePortalRequest < Struct.new(
+      :portal_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The content of the product page.
+    #
+    # @!attribute [rw] body
+    #   The body.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title.
+    #   @return [String]
+    #
+    class DisplayContent < Struct.new(
+      :body,
+      :title)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains any values that override the default configuration generated
+    # from API Gateway.
+    #
+    # @!attribute [rw] body
+    #   By default, this is the documentation of your REST API from API
+    #   Gateway. You can provide custom documentation to override this
+    #   value.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The URL for your REST API. By default, API Gateway uses the default
+    #   execute API endpoint. You can provide a custom domain to override
+    #   this value.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_name
+    #   The operation name of the product REST endpoint.
+    #   @return [String]
+    #
+    class DisplayContentOverrides < Struct.new(
+      :body,
+      :endpoint,
+      :operation_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The display order.
+    #
+    # @!attribute [rw] contents
+    #   Represents a list of sections which include section name and list of
+    #   product REST endpoints for a product.
+    #   @return [Array<Types::Section>]
+    #
+    # @!attribute [rw] overview_page_arn
+    #   The ARN of the overview page.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_page_arns
+    #   The product page ARNs.
+    #   @return [Array<String>]
+    #
+    class DisplayOrder < Struct.new(
+      :contents,
+      :overview_page_arn,
+      :product_page_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a domain name.
     #
     # @!attribute [rw] api_mapping_selection_expression
@@ -3114,7 +3957,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] domain_name_arn
-    #   Represents an Amazon Resource Name (ARN).
+    #   The ARN of the DomainName resource.
     #   @return [String]
     #
     # @!attribute [rw] domain_name_configurations
@@ -3127,6 +3970,7 @@ module Aws::ApiGatewayV2
     #   @return [Types::MutualTlsAuthentication]
     #
     # @!attribute [rw] routing_mode
+    #   The routing mode API Gateway uses to route traffic to your APIs.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3152,9 +3996,9 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] certificate_arn
-    #   An AWS-managed certificate that will be used by the edge-optimized
-    #   endpoint for this domain name. AWS Certificate Manager is the only
-    #   supported source.
+    #   An Amazon Web Services-managed certificate that will be used by the
+    #   edge-optimized endpoint for this domain name. Amazon Web Services
+    #   Certificate Manager is the only supported source.
     #   @return [String]
     #
     # @!attribute [rw] certificate_name
@@ -3168,11 +4012,11 @@ module Aws::ApiGatewayV2
     #   @return [Time]
     #
     # @!attribute [rw] domain_name_status
-    #   The status of the domain name migration. The valid values are
-    #   AVAILABLE, UPDATING, PENDING\_CERTIFICATE\_REIMPORT, and
-    #   PENDING\_OWNERSHIP\_VERIFICATION. If the status is UPDATING, the
-    #   domain cannot be modified further until the existing operation is
-    #   complete. If it is AVAILABLE, the domain can be updated.
+    #   Identifies the status of a domain name migration. Statuses can have
+    #   a value of AVAILABLE, UPDATING, PENDING\_CERTIFICATE\_REIMPORT, or
+    #   PENDING\_OWNERSHIP VERIFICATION. A domain can be modified if its
+    #   status is AVAILABLE. If the domain's status is UPDATING, you must
+    #   wait until the current operation is complete.
     #   @return [String]
     #
     # @!attribute [rw] domain_name_status_message
@@ -3201,10 +4045,11 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] ownership_verification_certificate_arn
-    #   The ARN of the public certificate issued by ACM to validate
-    #   ownership of your custom domain. Only required when configuring
-    #   mutual TLS and using an ACM imported or private CA certificate ARN
-    #   as the regionalCertificateArn
+    #   The Amazon resource name (ARN) for the public certificate issued by
+    #   Certificate Manager. This ARN is used to validate custom domain
+    #   ownership. It's required only if you configure mutual TLS and use
+    #   either an ACM-imported or a private CA certificate ARN as the
+    #   regionalCertificateArn.
     #   @return [String]
     #
     class DomainNameConfiguration < Struct.new(
@@ -3237,6 +4082,92 @@ module Aws::ApiGatewayV2
     class DomainNames < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents an endpoint configuration.
+    #
+    # @!attribute [rw] acm_managed
+    #   Represents a domain name and certificate for a portal.
+    #   @return [Types::ACMManaged]
+    #
+    # @!attribute [rw] none
+    #   Use the default portal domain name that is generated and managed by
+    #   API Gateway.
+    #   @return [Types::None]
+    #
+    class EndpointConfigurationRequest < Struct.new(
+      :acm_managed,
+      :none)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents an endpoint configuration.
+    #
+    # @!attribute [rw] certificate_arn
+    #   The ARN of the ACM certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_default_domain_name
+    #   The portal default domain name. This domain name is generated and
+    #   managed by API Gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_domain_hosted_zone_id
+    #   The portal domain hosted zone identifier.
+    #   @return [String]
+    #
+    class EndpointConfigurationResponse < Struct.new(
+      :certificate_arn,
+      :domain_name,
+      :portal_default_domain_name,
+      :portal_domain_hosted_zone_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the endpoint display content.
+    #
+    # @!attribute [rw] none
+    #   If your product REST endpoint contains no overrides, the none object
+    #   is returned.
+    #   @return [Types::None]
+    #
+    # @!attribute [rw] overrides
+    #   The overrides for endpoint display content.
+    #   @return [Types::DisplayContentOverrides]
+    #
+    class EndpointDisplayContent < Struct.new(
+      :none,
+      :overrides)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The product REST endpoint page.
+    #
+    # @!attribute [rw] body
+    #   The API documentation.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The URL to invoke your REST API.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_name
+    #   The operation name.
+    #   @return [String]
+    #
+    class EndpointDisplayContentResponse < Struct.new(
+      :body,
+      :endpoint,
+      :operation_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3743,6 +4674,7 @@ module Aws::ApiGatewayV2
     #   @return [Types::MutualTlsAuthentication]
     #
     # @!attribute [rw] routing_mode
+    #   The routing mode API Gateway uses to route traffic to your APIs.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3879,15 +4811,15 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying parameters that
     #   are passed to AWS\_PROXY integrations. You can provide static
     #   values, or map request data, stage variables, or context variables
-    #   that are evaluated at runtime. To learn more, see [Working with AWS
-    #   service integrations for HTTP APIs][1].
+    #   that are evaluated at runtime. To learn more, see [Working with
+    #   Amazon Web Services service integrations for HTTP APIs][1].
     #
     #   For HTTP API integrations without a specified integrationSubtype
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
-    #   where action can be append, overwrite or remove. For values, you can
+    #   &lt;action>:&lt;header\|querystring\|path>.&lt;location> where
+    #   action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
     #   [Transforming API requests and responses][2].
@@ -4006,15 +4938,15 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying parameters that
     #   are passed to AWS\_PROXY integrations. You can provide static
     #   values, or map request data, stage variables, or context variables
-    #   that are evaluated at runtime. To learn more, see [Working with AWS
-    #   service integrations for HTTP APIs][1].
+    #   that are evaluated at runtime. To learn more, see [Working with
+    #   Amazon Web Services service integrations for HTTP APIs][1].
     #
     #   For HTTP API integrations without a specified integrationSubtype
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
-    #   where action can be append, overwrite or remove. For values, you can
+    #   &lt;action>:&lt;header\|querystring\|path>.&lt;location> where
+    #   action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
     #   [Transforming API requests and responses][2].
@@ -4216,6 +5148,479 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_account_id
+    #   @return [String]
+    #
+    class GetPortalProductRequest < Struct.new(
+      :portal_product_id,
+      :resource_owner_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   @return [String]
+    #
+    # @!attribute [rw] display_order
+    #   The display order.
+    #   @return [Types::DisplayOrder]
+    #
+    # @!attribute [rw] last_modified
+    #   @return [Time]
+    #
+    # @!attribute [rw] portal_product_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    class GetPortalProductResponse < Struct.new(
+      :description,
+      :display_name,
+      :display_order,
+      :last_modified,
+      :portal_product_arn,
+      :portal_product_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Gets a portal product.
+    #
+    # @!attribute [rw] description
+    #   The description of a portal product.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_order
+    #   The display order.
+    #   @return [Types::DisplayOrder]
+    #
+    # @!attribute [rw] last_modified
+    #   The timestamp when the portal product was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] portal_product_arn
+    #   The ARN of the portal product.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_product_id
+    #   The portal product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    class GetPortalProductResponseContent < Struct.new(
+      :description,
+      :display_name,
+      :display_order,
+      :last_modified,
+      :portal_product_arn,
+      :portal_product_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    class GetPortalProductSharingPolicyRequest < Struct.new(
+      :portal_product_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_document
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    class GetPortalProductSharingPolicyResponse < Struct.new(
+      :policy_document,
+      :portal_product_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Gets a product sharing policy.
+    #
+    # @!attribute [rw] policy_document
+    #   The product sharing policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_product_id
+    #   The portal product identifier.
+    #   @return [String]
+    #
+    class GetPortalProductSharingPolicyResponseContent < Struct.new(
+      :policy_document,
+      :portal_product_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] portal_id
+    #   @return [String]
+    #
+    class GetPortalRequest < Struct.new(
+      :portal_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorization
+    #   Represents an authorization configuration for a portal.
+    #   @return [Types::Authorization]
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   Represents an endpoint configuration.
+    #   @return [Types::EndpointConfigurationResponse]
+    #
+    # @!attribute [rw] included_portal_product_arns
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] last_modified
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_published
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_published_description
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_content
+    #   Contains the content that is visible to portal consumers including
+    #   the themes, display names, and description.
+    #   @return [Types::PortalContent]
+    #
+    # @!attribute [rw] portal_id
+    #   @return [String]
+    #
+    # @!attribute [rw] preview
+    #   Contains the preview status and preview URL.
+    #   @return [Types::Preview]
+    #
+    # @!attribute [rw] publish_status
+    #   Represents a publish status.
+    #   @return [String]
+    #
+    # @!attribute [rw] rum_app_monitor_name
+    #   @return [String]
+    #
+    # @!attribute [rw] status_exception
+    #   Represents a StatusException.
+    #   @return [Types::StatusException]
+    #
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    class GetPortalResponse < Struct.new(
+      :authorization,
+      :endpoint_configuration,
+      :included_portal_product_arns,
+      :last_modified,
+      :last_published,
+      :last_published_description,
+      :portal_arn,
+      :portal_content,
+      :portal_id,
+      :preview,
+      :publish_status,
+      :rum_app_monitor_name,
+      :status_exception,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Gets a portal.
+    #
+    # @!attribute [rw] authorization
+    #   The authorization for the portal.
+    #   @return [Types::Authorization]
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   The endpoint configuration.
+    #   @return [Types::EndpointConfigurationResponse]
+    #
+    # @!attribute [rw] included_portal_product_arns
+    #   The ARNs of the portal products included in the portal.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] last_modified
+    #   The timestamp when the portal was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_published
+    #   The timestamp when the portal was last published.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_published_description
+    #   The publish description used when the portal was last published.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_arn
+    #   The ARN of the portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_content
+    #   Contains the content that is visible to portal consumers including
+    #   the themes, display names, and description.
+    #   @return [Types::PortalContent]
+    #
+    # @!attribute [rw] portal_id
+    #   The portal identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] preview
+    #   Represents the preview endpoint and the any possible error messages
+    #   during preview generation.
+    #   @return [Types::Preview]
+    #
+    # @!attribute [rw] publish_status
+    #   The publish status of a portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] rum_app_monitor_name
+    #   The CloudWatch RUM app monitor name.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_exception
+    #   The status exception information.
+    #   @return [Types::StatusException]
+    #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    class GetPortalResponseContent < Struct.new(
+      :authorization,
+      :endpoint_configuration,
+      :included_portal_product_arns,
+      :last_modified,
+      :last_published,
+      :last_published_description,
+      :portal_arn,
+      :portal_content,
+      :portal_id,
+      :preview,
+      :publish_status,
+      :rum_app_monitor_name,
+      :status_exception,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    # @!attribute [rw] product_page_id
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_account_id
+    #   @return [String]
+    #
+    class GetProductPageRequest < Struct.new(
+      :portal_product_id,
+      :product_page_id,
+      :resource_owner_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_content
+    #   The content of the product page.
+    #   @return [Types::DisplayContent]
+    #
+    # @!attribute [rw] last_modified
+    #   @return [Time]
+    #
+    # @!attribute [rw] product_page_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] product_page_id
+    #   @return [String]
+    #
+    class GetProductPageResponse < Struct.new(
+      :display_content,
+      :last_modified,
+      :product_page_arn,
+      :product_page_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Gets a product page.
+    #
+    # @!attribute [rw] display_content
+    #   The content of the product page.
+    #   @return [Types::DisplayContent]
+    #
+    # @!attribute [rw] last_modified
+    #   The timestamp when the product page was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] product_page_arn
+    #   The ARN of the product page.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_page_id
+    #   The product page identifier.
+    #   @return [String]
+    #
+    class GetProductPageResponseContent < Struct.new(
+      :display_content,
+      :last_modified,
+      :product_page_arn,
+      :product_page_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] include_raw_display_content
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    # @!attribute [rw] product_rest_endpoint_page_id
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_account_id
+    #   @return [String]
+    #
+    class GetProductRestEndpointPageRequest < Struct.new(
+      :include_raw_display_content,
+      :portal_product_id,
+      :product_rest_endpoint_page_id,
+      :resource_owner_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_content
+    #   The product REST endpoint page.
+    #   @return [Types::EndpointDisplayContentResponse]
+    #
+    # @!attribute [rw] last_modified
+    #   @return [Time]
+    #
+    # @!attribute [rw] product_rest_endpoint_page_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] product_rest_endpoint_page_id
+    #   @return [String]
+    #
+    # @!attribute [rw] raw_display_content
+    #   @return [String]
+    #
+    # @!attribute [rw] rest_endpoint_identifier
+    #   The REST API endpoint identifier.
+    #   @return [Types::RestEndpointIdentifier]
+    #
+    # @!attribute [rw] status
+    #   The status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_exception
+    #   Represents a StatusException.
+    #   @return [Types::StatusException]
+    #
+    # @!attribute [rw] try_it_state
+    #   Represents the try it state for a product REST endpoint page.
+    #   @return [String]
+    #
+    class GetProductRestEndpointPageResponse < Struct.new(
+      :display_content,
+      :last_modified,
+      :product_rest_endpoint_page_arn,
+      :product_rest_endpoint_page_id,
+      :raw_display_content,
+      :rest_endpoint_identifier,
+      :status,
+      :status_exception,
+      :try_it_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Gets a product REST endpoint page.
+    #
+    # @!attribute [rw] display_content
+    #   The content of the product REST endpoint page.
+    #   @return [Types::EndpointDisplayContentResponse]
+    #
+    # @!attribute [rw] last_modified
+    #   The timestamp when the product REST endpoint page was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] product_rest_endpoint_page_arn
+    #   The ARN of the product REST endpoint page.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_rest_endpoint_page_id
+    #   The product REST endpoint page identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] raw_display_content
+    #   The raw display content of the product REST endpoint page.
+    #   @return [String]
+    #
+    # @!attribute [rw] rest_endpoint_identifier
+    #   The REST endpoint identifier.
+    #   @return [Types::RestEndpointIdentifier]
+    #
+    # @!attribute [rw] status
+    #   The status of the product REST endpoint page.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_exception
+    #   The status exception information.
+    #   @return [Types::StatusException]
+    #
+    # @!attribute [rw] try_it_state
+    #   The try it state.
+    #   @return [String]
+    #
+    class GetProductRestEndpointPageResponseContent < Struct.new(
+      :display_content,
+      :last_modified,
+      :product_rest_endpoint_page_arn,
+      :product_rest_endpoint_page_id,
+      :raw_display_content,
+      :rest_endpoint_identifier,
+      :status,
+      :status_exception,
+      :try_it_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] api_id
     #   @return [String]
     #
@@ -4249,10 +5654,11 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] authorization_type
     #   The authorization type. For WebSocket APIs, valid values are NONE
-    #   for open access, AWS\_IAM for using AWS IAM permissions, and CUSTOM
-    #   for using a Lambda authorizer. For HTTP APIs, valid values are NONE
-    #   for open access, JWT for using JSON Web Tokens, AWS\_IAM for using
-    #   AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
+    #   for open access, AWS\_IAM for using Amazon Web Services IAM
+    #   permissions, and CUSTOM for using a Lambda authorizer. For HTTP
+    #   APIs, valid values are NONE for open access, JWT for using JSON Web
+    #   Tokens, AWS\_IAM for using Amazon Web Services IAM permissions, and
+    #   CUSTOM for using a Lambda authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -4490,7 +5896,9 @@ module Aws::ApiGatewayV2
     #   @return [Array<Types::RoutingRuleCondition>]
     #
     # @!attribute [rw] priority
-    #   Represents the priority of the routing rule.
+    #   The order in which API Gateway evaluates a rule. Priority is
+    #   evaluated from the lowest value to the highest value. Rules can't
+    #   have the same priority. Priority values 1-1,000,000 are supported.
     #   @return [Integer]
     #
     # @!attribute [rw] routing_rule_arn
@@ -4754,6 +6162,33 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # The identifier parts of a product REST endpoint.
+    #
+    # @!attribute [rw] method
+    #   The method of the product REST endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The path of the product REST endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] rest_api_id
+    #   The REST API ID of the product REST endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The stage of the product REST endpoint.
+    #   @return [String]
+    #
+    class IdentifierParts < Struct.new(
+      :method,
+      :path,
+      :rest_api_id,
+      :stage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input to ImportAPI. Supported only for HTTP APIs.
     #
     # @!attribute [rw] body
@@ -4921,11 +6356,13 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] credentials_arn
     #   Specifies the credentials required for the integration, if any. For
-    #   AWS integrations, three options are available. To specify an IAM
-    #   Role for API Gateway to assume, use the role's Amazon Resource Name
-    #   (ARN). To require that the caller's identity be passed through from
-    #   the request, specify the string arn:aws:iam::*:user/*. To use
-    #   resource-based permissions on supported AWS services, specify null.
+    #   Amazon Web Services integrations, three options are available. To
+    #   specify an IAM Role for API Gateway to assume, use the role's
+    #   Amazon Resource Name (ARN). To require that the caller's identity
+    #   be passed through from the request, specify the string
+    #   arn:aws:iam::*:user/*. To use resource-based permissions on
+    #   supported Amazon Web Services services, don't specify this
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4952,8 +6389,8 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] integration_subtype
     #   Supported only for HTTP API AWS\_PROXY integrations. Specifies the
-    #   AWS service action to invoke. To learn more, see [Integration
-    #   subtype reference][1].
+    #   Amazon Web Services service action to invoke. To learn more, see
+    #   [Integration subtype reference][1].
     #
     #
     #
@@ -4963,15 +6400,16 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] integration_type
     #   The integration type of an integration. One of the following:
     #
-    #   AWS: for integrating the route or method request with an AWS service
-    #   action, including the Lambda function-invoking action. With the
-    #   Lambda function-invoking action, this is referred to as the Lambda
-    #   custom integration. With any other AWS service action, this is known
-    #   as AWS integration. Supported only for WebSocket APIs.
+    #   AWS: for integrating the route or method request with an Amazon Web
+    #   Services service action, including the Lambda function-invoking
+    #   action. With the Lambda function-invoking action, this is referred
+    #   to as the Lambda custom integration. With any other Amazon Web
+    #   Services service action, this is known as Amazon Web Services
+    #   integration. Supported only for WebSocket APIs.
     #
     #   AWS\_PROXY: for integrating the route or method request with a
-    #   Lambda function or other AWS service action. This integration is
-    #   also referred to as a Lambda proxy integration.
+    #   Lambda function or other Amazon Web Services service action. This
+    #   integration is also referred to as a Lambda proxy integration.
     #
     #   HTTP: for integrating the route or method request with an HTTP
     #   endpoint. This integration is also referred to as the HTTP custom
@@ -4993,11 +6431,12 @@ module Aws::ApiGatewayV2
     #
     #   For an HTTP API private integration, specify the ARN of an
     #   Application Load Balancer listener, Network Load Balancer listener,
-    #   or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map
-    #   service, API Gateway uses DiscoverInstances to identify resources.
-    #   You can use query parameters to target specific resources. To learn
-    #   more, see [DiscoverInstances][1]. For private integrations, all
-    #   resources must be owned by the same AWS account.
+    #   or Amazon Web Services Cloud Map service. If you specify the ARN of
+    #   an Amazon Web Services Cloud Map service, API Gateway uses
+    #   DiscoverInstances to identify resources. You can use query
+    #   parameters to target specific resources. To learn more, see
+    #   [DiscoverInstances][1]. For private integrations, all resources must
+    #   be owned by the same Amazon Web Services account.
     #
     #
     #
@@ -5025,7 +6464,14 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] payload_format_version
     #   Specifies the format of the payload sent to an integration. Required
-    #   for HTTP APIs.
+    #   for HTTP APIs. For HTTP APIs, supported values for Lambda proxy
+    #   integrations are 1.0 and 2.0. For all other integrations, 1.0 is the
+    #   only supported value. To learn more, see [Working with Amazon Web
+    #   Services Lambda proxy integrations for HTTP APIs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -5043,17 +6489,17 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying parameters that
     #   are passed to AWS\_PROXY integrations. You can provide static
     #   values, or map request data, stage variables, or context variables
-    #   that are evaluated at runtime. To learn more, see [Working with AWS
-    #   service integrations for HTTP APIs][1].
+    #   that are evaluated at runtime. To learn more, see [Working with
+    #   Amazon Web Services service integrations for HTTP APIs][1].
     #
-    #   For HTTP API itegrations, without a specified integrationSubtype
+    #   For HTTP API integrations without a specified integrationSubtype
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to backend integrations. The key
     #   should follow the pattern
-    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;.
-    #   The action can be append, overwrite or remove. For values, you can
-    #   provide static values, or map request data, stage variables, or
-    #   context variables that are evaluated at runtime. To learn more, see
+    #   &lt;action>:&lt;header\|querystring\|path>.&lt;location>. The action
+    #   can be append, overwrite or remove. For values, you can provide
+    #   static values, or map request data, stage variables, or context
+    #   variables that are evaluated at runtime. To learn more, see
     #   [Transforming API requests and responses][2].
     #
     #
@@ -5068,12 +6514,12 @@ module Aws::ApiGatewayV2
     #   returning the response to clients. Specify a key-value map from a
     #   selection key to response parameters. The selection key must be a
     #   valid HTTP status code within the range of 200-599. Response
-    #   parameters are a key-value map. The key must match pattern
-    #   &lt;action&gt;:&lt;header&gt;.&lt;location&gt; or
-    #   overwrite.statuscode. The action can be append, overwrite or remove.
-    #   The value can be a static value, or map to response data, stage
-    #   variables, or context variables that are evaluated at runtime. To
-    #   learn more, see [Transforming API requests and responses][1].
+    #   parameters are a key-value map. The key must match the pattern
+    #   &lt;action>:&lt;header>.&lt;location> or overwrite.statuscode. The
+    #   action can be append, overwrite or remove. The value can be a static
+    #   value, or map to response data, stage variables, or context
+    #   variables that are evaluated at runtime. To learn more, see
+    #   [Transforming API requests and responses][1].
     #
     #
     #
@@ -5237,7 +6683,8 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] audience
     #   A list of the intended recipients of the JWT. A valid JWT must
     #   provide an aud that matches at least one entry in this list. See
-    #   [RFC 7519][1]. Supported only for HTTP APIs.
+    #   [RFC 7519][1]. Required for the JWT authorizer type. Supported only
+    #   for HTTP APIs.
     #
     #
     #
@@ -5273,6 +6720,219 @@ module Aws::ApiGatewayV2
     class LimitExceededException < Struct.new(
       :limit_type,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response content for limit exceeded exception.
+    #
+    # @!attribute [rw] limit_type
+    #   The limit type of the limit exceeded exception response content.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message of the limit exceeded exception response content.
+    #   @return [String]
+    #
+    class LimitExceededExceptionResponseContent < Struct.new(
+      :limit_type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   @return [String]
+    #
+    class ListPortalProductsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :resource_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   @return [Array<Types::PortalProductSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    class ListPortalProductsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Lists portal products.
+    #
+    # @!attribute [rw] items
+    #   The elements from this collection.
+    #   @return [Array<Types::PortalProductSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The next page of elements from this collection. Not valid for the
+    #   last element of the collection.
+    #   @return [String]
+    #
+    class ListPortalProductsResponseContent < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    class ListPortalsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   @return [Array<Types::PortalSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    class ListPortalsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Lists portals.
+    #
+    # @!attribute [rw] items
+    #   The elements from this collection.
+    #   @return [Array<Types::PortalSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The next page of elements from this collection. Not valid for the
+    #   last element of the collection.
+    #   @return [String]
+    #
+    class ListPortalsResponseContent < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_account_id
+    #   @return [String]
+    #
+    class ListProductPagesRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :portal_product_id,
+      :resource_owner_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   @return [Array<Types::ProductPageSummaryNoBody>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    class ListProductPagesResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Lists product pages.
+    #
+    # @!attribute [rw] items
+    #   The elements from this collection.
+    #   @return [Array<Types::ProductPageSummaryNoBody>]
+    #
+    # @!attribute [rw] next_token
+    #   The next page of elements from this collection. Not valid for the
+    #   last element of the collection.
+    #   @return [String]
+    #
+    class ListProductPagesResponseContent < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_account_id
+    #   @return [String]
+    #
+    class ListProductRestEndpointPagesRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :portal_product_id,
+      :resource_owner_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   @return [Array<Types::ProductRestEndpointPageSummaryNoBody>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    class ListProductRestEndpointPagesResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Lists the product rest endpoint pages in a portal product.
+    #
+    # @!attribute [rw] items
+    #   The elements from this collection.
+    #   @return [Array<Types::ProductRestEndpointPageSummaryNoBody>]
+    #
+    # @!attribute [rw] next_token
+    #   The next page of elements from this collection. Not valid for the
+    #   last element of the collection.
+    #   @return [String]
+    #
+    class ListProductRestEndpointPagesResponseContent < Struct.new(
+      :items,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5402,6 +7062,12 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # The none option.
+    #
+    # @api private
+    #
+    class None < Aws::EmptyStructure; end
+
     # The resource specified in the request was not found. See the message
     # field for more information.
     #
@@ -5414,6 +7080,23 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     class NotFoundException < Struct.new(
+      :message,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response content for not found exception.
+    #
+    # @!attribute [rw] message
+    #   The message of the not found exception response content.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type of the not found exception response content.
+    #   @return [String]
+    #
+    class NotFoundExceptionResponseContent < Struct.new(
       :message,
       :resource_type)
       SENSITIVE = []
@@ -5433,6 +7116,332 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # Contains the content that is visible to portal consumers including the
+    # themes, display names, and description.
+    #
+    # @!attribute [rw] description
+    #   A description of the portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name for the portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme
+    #   The theme for the portal.
+    #   @return [Types::PortalTheme]
+    #
+    class PortalContent < Struct.new(
+      :description,
+      :display_name,
+      :theme)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a portal product.
+    #
+    # @!attribute [rw] description
+    #   The description.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of a portal product.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified
+    #   The timestamp when the portal product was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] portal_product_arn
+    #   The ARN of a portal product.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_product_id
+    #   The portal product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    class PortalProductSummary < Struct.new(
+      :description,
+      :display_name,
+      :last_modified,
+      :portal_product_arn,
+      :portal_product_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a portal summary.
+    #
+    # @!attribute [rw] authorization
+    #   The authorization of the portal.
+    #   @return [Types::Authorization]
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   The endpoint configuration of the portal.
+    #   @return [Types::EndpointConfigurationResponse]
+    #
+    # @!attribute [rw] included_portal_product_arns
+    #   The ARNs of the portal products included in the portal.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] last_modified
+    #   The timestamp when the portal was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_published
+    #   The timestamp when the portal was last published.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_published_description
+    #   The description of the portal the last time it was published.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_arn
+    #   The ARN of the portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_content
+    #   Contains the content that is visible to portal consumers including
+    #   the themes, display names, and description.
+    #   @return [Types::PortalContent]
+    #
+    # @!attribute [rw] portal_id
+    #   The portal identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] preview
+    #   Represents the preview endpoint and the any possible error messages
+    #   during preview generation.
+    #   @return [Types::Preview]
+    #
+    # @!attribute [rw] publish_status
+    #   The publish status.
+    #   @return [String]
+    #
+    # @!attribute [rw] rum_app_monitor_name
+    #   The CloudWatch RUM app monitor name.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_exception
+    #   The status exception information.
+    #   @return [Types::StatusException]
+    #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    class PortalSummary < Struct.new(
+      :authorization,
+      :endpoint_configuration,
+      :included_portal_product_arns,
+      :last_modified,
+      :last_published,
+      :last_published_description,
+      :portal_arn,
+      :portal_content,
+      :portal_id,
+      :preview,
+      :publish_status,
+      :rum_app_monitor_name,
+      :status_exception,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the theme for a portal.
+    #
+    # @!attribute [rw] custom_colors
+    #   Defines custom color values.
+    #   @return [Types::CustomColors]
+    #
+    # @!attribute [rw] logo_last_uploaded
+    #   The timestamp when the logo was last uploaded.
+    #   @return [Time]
+    #
+    class PortalTheme < Struct.new(
+      :custom_colors,
+      :logo_last_uploaded)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the preview status and preview URL.
+    #
+    # @!attribute [rw] preview_status
+    #   The status of the preview.
+    #   @return [String]
+    #
+    # @!attribute [rw] preview_url
+    #   The URL of the preview.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_exception
+    #   The status exception information.
+    #   @return [Types::StatusException]
+    #
+    class Preview < Struct.new(
+      :preview_status,
+      :preview_url,
+      :status_exception)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] portal_id
+    #   @return [String]
+    #
+    class PreviewPortalRequest < Struct.new(
+      :portal_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class PreviewPortalResponse < Aws::EmptyStructure; end
+
+    # Represents a product page summary without listing any page content.
+    #
+    # @!attribute [rw] last_modified
+    #   The timestamp when the product page was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] page_title
+    #   The page title.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_page_arn
+    #   The ARN of the product page.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_page_id
+    #   The product page identifier.
+    #   @return [String]
+    #
+    class ProductPageSummaryNoBody < Struct.new(
+      :last_modified,
+      :page_title,
+      :product_page_arn,
+      :product_page_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a product REST endpoint page, without providing the page
+    # content.
+    #
+    # @!attribute [rw] endpoint
+    #   The endpoint of the product REST endpoint page.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified
+    #   The timestamp when the product REST endpoint page was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] operation_name
+    #   The operation name of the product REST endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_rest_endpoint_page_arn
+    #   The ARN of the product REST endpoint page.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_rest_endpoint_page_id
+    #   The product REST endpoint page identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] rest_endpoint_identifier
+    #   The REST endpoint identifier.
+    #   @return [Types::RestEndpointIdentifier]
+    #
+    # @!attribute [rw] status
+    #   The status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_exception
+    #   The status exception information.
+    #   @return [Types::StatusException]
+    #
+    # @!attribute [rw] try_it_state
+    #   The try it state of a product REST endpoint page.
+    #   @return [String]
+    #
+    class ProductRestEndpointPageSummaryNoBody < Struct.new(
+      :endpoint,
+      :last_modified,
+      :operation_name,
+      :product_rest_endpoint_page_arn,
+      :product_rest_endpoint_page_id,
+      :rest_endpoint_identifier,
+      :status,
+      :status_exception,
+      :try_it_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_id
+    #   @return [String]
+    #
+    class PublishPortalRequest < Struct.new(
+      :description,
+      :portal_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Publish a portal.
+    #
+    # @!attribute [rw] description
+    #   The description of the portal. When the portal is published, this
+    #   description becomes the last published description.
+    #   @return [String]
+    #
+    class PublishPortalRequestContent < Struct.new(
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class PublishPortalResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] policy_document
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    class PutPortalProductSharingPolicyRequest < Struct.new(
+      :policy_document,
+      :portal_product_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request content.
+    #
+    # @!attribute [rw] policy_document
+    #   The product sharing policy.
+    #   @return [String]
+    #
+    class PutPortalProductSharingPolicyRequestContent < Struct.new(
+      :policy_document)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class PutPortalProductSharingPolicyResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] actions
     #   @return [Array<Types::RoutingRuleAction>]
     #
@@ -5446,7 +7455,9 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] priority
-    #   Represents the priority of the routing rule.
+    #   The order in which API Gateway evaluates a rule. Priority is
+    #   evaluated from the lowest value to the highest value. Rules can't
+    #   have the same priority. Priority values 1-1,000,000 are supported.
     #   @return [Integer]
     #
     # @!attribute [rw] routing_rule_id
@@ -5470,7 +7481,9 @@ module Aws::ApiGatewayV2
     #   @return [Array<Types::RoutingRuleCondition>]
     #
     # @!attribute [rw] priority
-    #   Represents the priority of the routing rule.
+    #   The order in which API Gateway evaluates a rule. Priority is
+    #   evaluated from the lowest value to the highest value. Rules can't
+    #   have the same priority. Priority values 1-1,000,000 are supported.
     #   @return [Integer]
     #
     # @!attribute [rw] routing_rule_arn
@@ -5623,6 +7636,18 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # The REST API endpoint identifier.
+    #
+    # @!attribute [rw] identifier_parts
+    #   The identifier parts of the REST endpoint identifier.
+    #   @return [Types::IdentifierParts]
+    #
+    class RestEndpointIdentifier < Struct.new(
+      :identifier_parts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a route.
     #
     # @!attribute [rw] api_gateway_managed
@@ -5650,11 +7675,11 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] authorization_type
     #   The authorization type for the route. For WebSocket APIs, valid
-    #   values are NONE for open access, AWS\_IAM for using AWS IAM
-    #   permissions, and CUSTOM for using a Lambda authorizer For HTTP APIs,
-    #   valid values are NONE for open access, JWT for using JSON Web
-    #   Tokens, AWS\_IAM for using AWS IAM permissions, and CUSTOM for using
-    #   a Lambda authorizer.
+    #   values are NONE for open access, AWS\_IAM for using Amazon Web
+    #   Services IAM permissions, and CUSTOM for using a Lambda authorizer.
+    #   For HTTP APIs, valid values are NONE for open access, JWT for using
+    #   JSON Web Tokens, AWS\_IAM for using Amazon Web Services IAM
+    #   permissions, and CUSTOM for using a Lambda authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -5686,7 +7711,9 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] route_key
-    #   The route key for the route.
+    #   The route key for the route. For HTTP APIs, the route key can be
+    #   either $default, or a combination of an HTTP method and resource
+    #   path, for example, GET /pets.
     #   @return [String]
     #
     # @!attribute [rw] route_response_selection_expression
@@ -5824,17 +7851,22 @@ module Aws::ApiGatewayV2
     # Represents a routing rule.
     #
     # @!attribute [rw] actions
+    #   The resulting action based on matching a routing rules condition.
+    #   Only InvokeApi is supported.
     #   @return [Array<Types::RoutingRuleAction>]
     #
     # @!attribute [rw] conditions
+    #   The conditions of the routing rule.
     #   @return [Array<Types::RoutingRuleCondition>]
     #
     # @!attribute [rw] priority
-    #   Represents the priority of the routing rule.
+    #   The order in which API Gateway evaluates a rule. Priority is
+    #   evaluated from the lowest value to the highest value. Rules can't
+    #   have the same priority. Priority values 1-1,000,000 are supported.
     #   @return [Integer]
     #
     # @!attribute [rw] routing_rule_arn
-    #   Represents an Amazon Resource Name (ARN).
+    #   The ARN of the routing rule.
     #   @return [String]
     #
     # @!attribute [rw] routing_rule_id
@@ -5868,8 +7900,7 @@ module Aws::ApiGatewayV2
     # Represents an InvokeApi action.
     #
     # @!attribute [rw] api_id
-    #   Action to invoke a stage of a target API. Only REST APIs are
-    #   supported.
+    #   The API identifier of the target API.
     #   @return [String]
     #
     # @!attribute [rw] stage
@@ -5900,7 +7931,7 @@ module Aws::ApiGatewayV2
     #   @return [Types::RoutingRuleMatchBasePaths]
     #
     # @!attribute [rw] match_headers
-    #   The header to be matched.
+    #   The headers to be matched.
     #   @return [Types::RoutingRuleMatchHeaders]
     #
     class RoutingRuleCondition < Struct.new(
@@ -5913,11 +7944,12 @@ module Aws::ApiGatewayV2
     # Represents the input parameters for an RoutingRule request.
     #
     # @!attribute [rw] actions
-    #   The elements from this collection.
+    #   The resulting action based on matching a routing rules condition.
+    #   Only InvokeApi is supported.
     #   @return [Array<Types::RoutingRuleAction>]
     #
     # @!attribute [rw] conditions
-    #   The elements from this collection.
+    #   The conditions of the routing rule.
     #   @return [Array<Types::RoutingRuleCondition>]
     #
     # @!attribute [rw] priority
@@ -5937,7 +7969,7 @@ module Aws::ApiGatewayV2
     # Represents a MatchBasePaths condition.
     #
     # @!attribute [rw] any_of
-    #   The elements from this collection.
+    #   The string of the case sensitive base path to be matched.
     #   @return [Array<String>]
     #
     class RoutingRuleMatchBasePaths < Struct.new(
@@ -5952,14 +7984,14 @@ module Aws::ApiGatewayV2
     #   The case insensitive header name to be matched. The header name must
     #   be less than 40 characters and the only allowed characters are a-z,
     #   A-Z, 0-9, and the following special characters:
-    #   *?-!#$%&'.^\_`\|~.
+    #   *?-!#$%&amp;'.^\_`\|~.
     #   @return [String]
     #
     # @!attribute [rw] value_glob
     #   The case sensitive header glob value to be matched against entire
     #   header value. The header glob value must be less than 128 characters
     #   and the only allowed characters are a-z, A-Z, 0-9, and the following
-    #   special characters: *?-!#$%&'.^\_`\|~. Wildcard matching is
+    #   special characters: *?-!#$%&amp;'.^\_`\|~. Wildcard matching is
     #   supported for header glob values but must be for *prefix-match,
     #   suffix-match*, or *infix*-match.
     #   @return [String]
@@ -5974,7 +8006,9 @@ module Aws::ApiGatewayV2
     # Represents a MatchHeaders condition.
     #
     # @!attribute [rw] any_of
-    #   The elements from this collection.
+    #   The header name and header value glob to be matched. The
+    #   matchHeaders condition is matched if any of the header name and
+    #   header value globs are matched.
     #   @return [Array<Types::RoutingRuleMatchHeaderValue>]
     #
     class RoutingRuleMatchHeaders < Struct.new(
@@ -5991,12 +8025,29 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] routing_rules
-    #   The elements from this collection.
     #   @return [Array<Types::RoutingRule>]
     #
     class RoutingRules < Struct.new(
       :next_token,
       :routing_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the section name and list of product REST endpoints for a
+    # product.
+    #
+    # @!attribute [rw] product_rest_endpoint_page_arns
+    #   The ARNs of the product REST endpoint pages in a portal product.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] section_name
+    #   The section name.
+    #   @return [String]
+    #
+    class Section < Struct.new(
+      :product_rest_endpoint_page_arns,
+      :section_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6102,6 +8153,23 @@ module Aws::ApiGatewayV2
     class Stages < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a StatusException.
+    #
+    # @!attribute [rw] exception
+    #   The exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    class StatusException < Struct.new(
+      :exception,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6232,10 +8300,11 @@ module Aws::ApiGatewayV2
     #   to assume, use the role's Amazon Resource Name (ARN). To require
     #   that the caller's identity be passed through from the request,
     #   specify arn:aws:iam::*:user/*. To use resource-based permissions
-    #   on supported AWS services, specify null. Currently, this property is
-    #   not used for HTTP integrations. If provided, this value replaces the
-    #   credentials associated with the quick create integration. Supported
-    #   only for HTTP APIs.
+    #   on supported Amazon Web Services services, don't specify this
+    #   parameter. Currently, this property is not used for HTTP
+    #   integrations. If provided, this value replaces the credentials
+    #   associated with the quick create integration. Supported only for
+    #   HTTP APIs.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -6248,12 +8317,17 @@ module Aws::ApiGatewayV2
     #   @return [Boolean]
     #
     # @!attribute [rw] disable_execute_api_endpoint
+    #   Specifies whether clients can invoke your API by using the default
+    #   execute-api endpoint. By default, clients can invoke your API with
+    #   the default https://\{api\_id}.execute-api.\{region}.amazonaws.com
+    #   endpoint. To require that clients use a custom domain name to invoke
+    #   your API, disable the default execute-api endpoint.
     #   @return [Boolean]
     #
     # @!attribute [rw] ip_address_type
     #   The IP address types that can invoke the API. Use ipv4 to allow only
     #   IPv4 addresses to invoke your API, or use dualstack to allow both
-    #   IPv4 and IPv6 addresses to invoke your domain name.
+    #   IPv4 and IPv6 addresses to invoke your API.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -6586,7 +8660,8 @@ module Aws::ApiGatewayV2
     #   Specifies the required credentials as an IAM role for API Gateway to
     #   invoke the authorizer. To specify an IAM role for API Gateway to
     #   assume, use the role's Amazon Resource Name (ARN). To use
-    #   resource-based permissions on the Lambda function, specify null.
+    #   resource-based permissions on the Lambda function, don't specify
+    #   this parameter.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
@@ -6608,13 +8683,11 @@ module Aws::ApiGatewayV2
     #   example,
     #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\{account\_id}*:function:*\{lambda\_function\_name}*/invocations.
     #   In general, the URI has this form:
-    #   arn:aws:apigateway:*\{region}*:lambda:path/*\{service\_api}* , where
-    #   <replaceable />
-    #
-    #   \{region} is the same as the region hosting the Lambda function,
-    #   path indicates that the remaining substring in the URI should be
-    #   treated as the path to the resource, including the initial /. For
-    #   Lambda functions, this is usually of the form
+    #   arn:aws:apigateway:*\{region}*:lambda:path/*\{service\_api}*
+    #   replaceable/>\{region} is the same as the region hosting the Lambda
+    #   function, path indicates that the remaining substring in the URI
+    #   should be treated as the path to the resource, including the initial
+    #   /. For Lambda functions, this is usually of the form
     #   /2015-03-31/functions/\[FunctionARN\]/invocations. Supported only
     #   for REQUEST authorizers.
     #   @return [String]
@@ -6638,7 +8711,8 @@ module Aws::ApiGatewayV2
     #   Otherwise, it returns a 401 Unauthorized response without calling
     #   the Lambda function. For HTTP APIs, identity sources are also used
     #   as the cache key when caching is enabled. To learn more, see
-    #   [Working with AWS Lambda authorizers for HTTP APIs][1].
+    #   [Working with Amazon Web Services Lambda authorizers for HTTP
+    #   APIs][1].
     #
     #   For JWT, a single entry that specifies where to extract the JSON Web
     #   Token (JWT) from inbound requests. Currently only header-based and
@@ -6666,8 +8740,8 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] authorizer_payload_format_version
     #   Specifies the format of the payload sent to an HTTP API Lambda
     #   authorizer. Required for HTTP API Lambda authorizers. Supported
-    #   values are 1.0 and 2.0. To learn more, see [Working with AWS Lambda
-    #   authorizers for HTTP APIs][1].
+    #   values are 1.0 and 2.0. To learn more, see [Working with Amazon Web
+    #   Services Lambda authorizers for HTTP APIs][1].
     #
     #
     #
@@ -6679,7 +8753,8 @@ module Aws::ApiGatewayV2
     #   format. By default, a Lambda authorizer must return an IAM policy.
     #   If enabled, the Lambda authorizer can return a boolean value instead
     #   of an IAM policy. Supported only for HTTP APIs. To learn more, see
-    #   [Working with AWS Lambda authorizers for HTTP APIs][1]
+    #   [Working with Amazon Web Services Lambda authorizers for HTTP
+    #   APIs][1].
     #
     #
     #
@@ -6932,6 +9007,7 @@ module Aws::ApiGatewayV2
     #   @return [Types::MutualTlsAuthenticationInput]
     #
     # @!attribute [rw] routing_mode
+    #   The routing mode API Gateway uses to route traffic to your APIs.
     #   @return [String]
     #
     class UpdateDomainNameInput < Struct.new(
@@ -6956,6 +9032,7 @@ module Aws::ApiGatewayV2
     #   @return [Types::MutualTlsAuthenticationInput]
     #
     # @!attribute [rw] routing_mode
+    #   The routing mode API Gateway uses to route traffic to your APIs.
     #   @return [String]
     #
     class UpdateDomainNameRequest < Struct.new(
@@ -6995,6 +9072,7 @@ module Aws::ApiGatewayV2
     #   @return [Types::MutualTlsAuthentication]
     #
     # @!attribute [rw] routing_mode
+    #   The routing mode API Gateway uses to route traffic to your APIs.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -7046,11 +9124,13 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] credentials_arn
     #   Specifies the credentials required for the integration, if any. For
-    #   AWS integrations, three options are available. To specify an IAM
-    #   Role for API Gateway to assume, use the role's Amazon Resource Name
-    #   (ARN). To require that the caller's identity be passed through from
-    #   the request, specify the string arn:aws:iam::*:user/*. To use
-    #   resource-based permissions on supported AWS services, specify null.
+    #   Amazon Web Services integrations, three options are available. To
+    #   specify an IAM Role for API Gateway to assume, use the role's
+    #   Amazon Resource Name (ARN). To require that the caller's identity
+    #   be passed through from the request, specify the string
+    #   arn:aws:iam::*:user/*. To use resource-based permissions on
+    #   supported Amazon Web Services services, don't specify this
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -7058,13 +9138,15 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] integration_method
-    #   Specifies the integration's HTTP method type.
+    #   Specifies the integration's HTTP method type. For WebSocket APIs,
+    #   if you use a Lambda integration, you must set the integration method
+    #   to POST.
     #   @return [String]
     #
     # @!attribute [rw] integration_subtype
     #   Supported only for HTTP API AWS\_PROXY integrations. Specifies the
-    #   AWS service action to invoke. To learn more, see [Integration
-    #   subtype reference][1].
+    #   Amazon Web Services service action to invoke. To learn more, see
+    #   [Integration subtype reference][1].
     #
     #
     #
@@ -7074,15 +9156,16 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] integration_type
     #   The integration type of an integration. One of the following:
     #
-    #   AWS: for integrating the route or method request with an AWS service
-    #   action, including the Lambda function-invoking action. With the
-    #   Lambda function-invoking action, this is referred to as the Lambda
-    #   custom integration. With any other AWS service action, this is known
-    #   as AWS integration. Supported only for WebSocket APIs.
+    #   AWS: for integrating the route or method request with an Amazon Web
+    #   Services service action, including the Lambda function-invoking
+    #   action. With the Lambda function-invoking action, this is referred
+    #   to as the Lambda custom integration. With any other Amazon Web
+    #   Services service action, this is known as Amazon Web Services
+    #   integration. Supported only for WebSocket APIs.
     #
     #   AWS\_PROXY: for integrating the route or method request with a
-    #   Lambda function or other AWS service action. This integration is
-    #   also referred to as a Lambda proxy integration.
+    #   Lambda function or other Amazon Web Services service action. This
+    #   integration is also referred to as a Lambda proxy integration.
     #
     #   HTTP: for integrating the route or method request with an HTTP
     #   endpoint. This integration is also referred to as the HTTP custom
@@ -7105,11 +9188,12 @@ module Aws::ApiGatewayV2
     #
     #   For an HTTP API private integration, specify the ARN of an
     #   Application Load Balancer listener, Network Load Balancer listener,
-    #   or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map
-    #   service, API Gateway uses DiscoverInstances to identify resources.
-    #   You can use query parameters to target specific resources. To learn
-    #   more, see [DiscoverInstances][1]. For private integrations, all
-    #   resources must be owned by the same AWS account.
+    #   or Amazon Web Services Cloud Map service. If you specify the ARN of
+    #   an Amazon Web Services Cloud Map service, API Gateway uses
+    #   DiscoverInstances to identify resources. You can use query
+    #   parameters to target specific resources. To learn more, see
+    #   [DiscoverInstances][1]. For private integrations, all resources must
+    #   be owned by the same Amazon Web Services account.
     #
     #
     #
@@ -7137,7 +9221,14 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] payload_format_version
     #   Specifies the format of the payload sent to an integration. Required
-    #   for HTTP APIs.
+    #   for HTTP APIs. For HTTP APIs, supported values for Lambda proxy
+    #   integrations are 1.0 and 2.0. For all other integrations, 1.0 is the
+    #   only supported value. To learn more, see [Working with Amazon Web
+    #   Services Lambda proxy integrations for HTTP APIs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -7155,15 +9246,15 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying parameters that
     #   are passed to AWS\_PROXY integrations. You can provide static
     #   values, or map request data, stage variables, or context variables
-    #   that are evaluated at runtime. To learn more, see [Working with AWS
-    #   service integrations for HTTP APIs][1].
+    #   that are evaluated at runtime. To learn more, see [Working with
+    #   Amazon Web Services service integrations for HTTP APIs][1].
     #
-    #   For HTTP API integrations, without a specified integrationSubtype
+    #   For HTTP API integrations without a specified integrationSubtype
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
-    #   where action can be append, overwrite or remove. For values, you can
+    #   &lt;action>:&lt;header\|querystring\|path>.&lt;location> where
+    #   action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
     #   [Transforming API requests and responses][2].
@@ -7171,7 +9262,7 @@ module Aws::ApiGatewayV2
     #
     #
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html
-    #   [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.
+    #   [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] response_parameters
@@ -7180,12 +9271,12 @@ module Aws::ApiGatewayV2
     #   returning the response to clients. Specify a key-value map from a
     #   selection key to response parameters. The selection key must be a
     #   valid HTTP status code within the range of 200-599. Response
-    #   parameters are a key-value map. The key must match pattern
-    #   &lt;action&gt;:&lt;header&gt;.&lt;location&gt; or
-    #   overwrite.statuscode. The action can be append, overwrite or remove.
-    #   The value can be a static value, or map to response data, stage
-    #   variables, or context variables that are evaluated at runtime. To
-    #   learn more, see [Transforming API requests and responses][1].
+    #   parameters are a key-value map. The key must match the pattern
+    #   &lt;action>:&lt;header>.&lt;location> or overwrite.statuscode. The
+    #   action can be append, overwrite or remove. The value can be a static
+    #   value, or map to response data, stage variables, or context
+    #   variables that are evaluated at runtime. To learn more, see
+    #   [Transforming API requests and responses][1].
     #
     #
     #
@@ -7306,15 +9397,15 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying parameters that
     #   are passed to AWS\_PROXY integrations. You can provide static
     #   values, or map request data, stage variables, or context variables
-    #   that are evaluated at runtime. To learn more, see [Working with AWS
-    #   service integrations for HTTP APIs][1].
+    #   that are evaluated at runtime. To learn more, see [Working with
+    #   Amazon Web Services service integrations for HTTP APIs][1].
     #
     #   For HTTP API integrations without a specified integrationSubtype
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
-    #   where action can be append, overwrite or remove. For values, you can
+    #   &lt;action>:&lt;header\|querystring\|path>.&lt;location> where
+    #   action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
     #   [Transforming API requests and responses][2].
@@ -7457,15 +9548,15 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying parameters that
     #   are passed to AWS\_PROXY integrations. You can provide static
     #   values, or map request data, stage variables, or context variables
-    #   that are evaluated at runtime. To learn more, see [Working with AWS
-    #   service integrations for HTTP APIs][1].
+    #   that are evaluated at runtime. To learn more, see [Working with
+    #   Amazon Web Services service integrations for HTTP APIs][1].
     #
     #   For HTTP API integrations without a specified integrationSubtype
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
-    #   where action can be append, overwrite or remove. For values, you can
+    #   &lt;action>:&lt;header\|querystring\|path>.&lt;location> where
+    #   action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
     #   [Transforming API requests and responses][2].
@@ -7633,15 +9724,15 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying parameters that
     #   are passed to AWS\_PROXY integrations. You can provide static
     #   values, or map request data, stage variables, or context variables
-    #   that are evaluated at runtime. To learn more, see [Working with AWS
-    #   service integrations for HTTP APIs][1].
+    #   that are evaluated at runtime. To learn more, see [Working with
+    #   Amazon Web Services service integrations for HTTP APIs][1].
     #
     #   For HTTP API integrations without a specified integrationSubtype
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
-    #   where action can be append, overwrite or remove. For values, you can
+    #   &lt;action>:&lt;header\|querystring\|path>.&lt;location> where
+    #   action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
     #   [Transforming API requests and responses][2].
@@ -7715,15 +9806,15 @@ module Aws::ApiGatewayV2
     #   request parameters are a key-value map specifying parameters that
     #   are passed to AWS\_PROXY integrations. You can provide static
     #   values, or map request data, stage variables, or context variables
-    #   that are evaluated at runtime. To learn more, see [Working with AWS
-    #   service integrations for HTTP APIs][1].
+    #   that are evaluated at runtime. To learn more, see [Working with
+    #   Amazon Web Services service integrations for HTTP APIs][1].
     #
     #   For HTTP API integrations without a specified integrationSubtype
     #   request parameters are a key-value map specifying how to transform
     #   HTTP requests before sending them to the backend. The key should
     #   follow the pattern
-    #   &lt;action&gt;:&lt;header\|querystring\|path&gt;.&lt;location&gt;
-    #   where action can be append, overwrite or remove. For values, you can
+    #   &lt;action>:&lt;header\|querystring\|path>.&lt;location> where
+    #   action can be append, overwrite or remove. For values, you can
     #   provide static values, or map request data, stage variables, or
     #   context variables that are evaluated at runtime. To learn more, see
     #   [Transforming API requests and responses][2].
@@ -7852,6 +9943,561 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   @return [String]
+    #
+    # @!attribute [rw] display_order
+    #   The display order.
+    #   @return [Types::DisplayOrder]
+    #
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    class UpdatePortalProductRequest < Struct.new(
+      :description,
+      :display_name,
+      :display_order,
+      :portal_product_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates a portal product.
+    #
+    # @!attribute [rw] description
+    #   The description.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The displayName.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_order
+    #   The display order.
+    #   @return [Types::DisplayOrder]
+    #
+    class UpdatePortalProductRequestContent < Struct.new(
+      :description,
+      :display_name,
+      :display_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   @return [String]
+    #
+    # @!attribute [rw] display_order
+    #   The display order.
+    #   @return [Types::DisplayOrder]
+    #
+    # @!attribute [rw] last_modified
+    #   @return [Time]
+    #
+    # @!attribute [rw] portal_product_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    class UpdatePortalProductResponse < Struct.new(
+      :description,
+      :display_name,
+      :display_order,
+      :last_modified,
+      :portal_product_arn,
+      :portal_product_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates a portal product.
+    #
+    # @!attribute [rw] description
+    #   The description of the portal product.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of a portal product.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_order
+    #   The display order that the portal products will appear in a portal.
+    #   @return [Types::DisplayOrder]
+    #
+    # @!attribute [rw] last_modified
+    #   The timestamp when the portal product was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] portal_product_arn
+    #   The ARN of the portal product.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_product_id
+    #   The portal product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    class UpdatePortalProductResponseContent < Struct.new(
+      :description,
+      :display_name,
+      :display_order,
+      :last_modified,
+      :portal_product_arn,
+      :portal_product_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorization
+    #   Represents an authorization configuration for a portal.
+    #   @return [Types::Authorization]
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   Represents an endpoint configuration.
+    #   @return [Types::EndpointConfigurationRequest]
+    #
+    # @!attribute [rw] included_portal_product_arns
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] logo_uri
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_content
+    #   Contains the content that is visible to portal consumers including
+    #   the themes, display names, and description.
+    #   @return [Types::PortalContent]
+    #
+    # @!attribute [rw] portal_id
+    #   @return [String]
+    #
+    # @!attribute [rw] rum_app_monitor_name
+    #   @return [String]
+    #
+    class UpdatePortalRequest < Struct.new(
+      :authorization,
+      :endpoint_configuration,
+      :included_portal_product_arns,
+      :logo_uri,
+      :portal_content,
+      :portal_id,
+      :rum_app_monitor_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates a portal.
+    #
+    # @!attribute [rw] authorization
+    #   The authorization of the portal.
+    #   @return [Types::Authorization]
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   Represents an endpoint configuration.
+    #   @return [Types::EndpointConfigurationRequest]
+    #
+    # @!attribute [rw] included_portal_product_arns
+    #   The ARNs of the portal products included in the portal.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] logo_uri
+    #   The logo URI.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_content
+    #   Contains the content that is visible to portal consumers including
+    #   the themes, display names, and description.
+    #   @return [Types::PortalContent]
+    #
+    # @!attribute [rw] rum_app_monitor_name
+    #   The CloudWatch RUM app monitor name.
+    #   @return [String]
+    #
+    class UpdatePortalRequestContent < Struct.new(
+      :authorization,
+      :endpoint_configuration,
+      :included_portal_product_arns,
+      :logo_uri,
+      :portal_content,
+      :rum_app_monitor_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorization
+    #   Represents an authorization configuration for a portal.
+    #   @return [Types::Authorization]
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   Represents an endpoint configuration.
+    #   @return [Types::EndpointConfigurationResponse]
+    #
+    # @!attribute [rw] included_portal_product_arns
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] last_modified
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_published
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_published_description
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_content
+    #   Contains the content that is visible to portal consumers including
+    #   the themes, display names, and description.
+    #   @return [Types::PortalContent]
+    #
+    # @!attribute [rw] portal_id
+    #   @return [String]
+    #
+    # @!attribute [rw] preview
+    #   Contains the preview status and preview URL.
+    #   @return [Types::Preview]
+    #
+    # @!attribute [rw] publish_status
+    #   Represents a publish status.
+    #   @return [String]
+    #
+    # @!attribute [rw] rum_app_monitor_name
+    #   @return [String]
+    #
+    # @!attribute [rw] status_exception
+    #   Represents a StatusException.
+    #   @return [Types::StatusException]
+    #
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    class UpdatePortalResponse < Struct.new(
+      :authorization,
+      :endpoint_configuration,
+      :included_portal_product_arns,
+      :last_modified,
+      :last_published,
+      :last_published_description,
+      :portal_arn,
+      :portal_content,
+      :portal_id,
+      :preview,
+      :publish_status,
+      :rum_app_monitor_name,
+      :status_exception,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates a portal.
+    #
+    # @!attribute [rw] authorization
+    #   The authorization for the portal.
+    #   @return [Types::Authorization]
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   The endpoint configuration.
+    #   @return [Types::EndpointConfigurationResponse]
+    #
+    # @!attribute [rw] included_portal_product_arns
+    #   The ARNs of the portal products included in the portal.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] last_modified
+    #   The timestamp when the portal was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_published
+    #   The timestamp when the portal was last published.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_published_description
+    #   The description associated with the last time the portal was
+    #   published.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_arn
+    #   The ARN of the portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] portal_content
+    #   Contains the content that is visible to portal consumers including
+    #   the themes, display names, and description.
+    #   @return [Types::PortalContent]
+    #
+    # @!attribute [rw] portal_id
+    #   The portal identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] preview
+    #   Represents the preview endpoint and the any possible error messages
+    #   during preview generation.
+    #   @return [Types::Preview]
+    #
+    # @!attribute [rw] publish_status
+    #   The publishStatus.
+    #   @return [String]
+    #
+    # @!attribute [rw] rum_app_monitor_name
+    #   The CloudWatch RUM app monitor name.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_exception
+    #   The status exception information.
+    #   @return [Types::StatusException]
+    #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    class UpdatePortalResponseContent < Struct.new(
+      :authorization,
+      :endpoint_configuration,
+      :included_portal_product_arns,
+      :last_modified,
+      :last_published,
+      :last_published_description,
+      :portal_arn,
+      :portal_content,
+      :portal_id,
+      :preview,
+      :publish_status,
+      :rum_app_monitor_name,
+      :status_exception,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_content
+    #   The content of the product page.
+    #   @return [Types::DisplayContent]
+    #
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    # @!attribute [rw] product_page_id
+    #   @return [String]
+    #
+    class UpdateProductPageRequest < Struct.new(
+      :display_content,
+      :portal_product_id,
+      :product_page_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Update a product page.
+    #
+    # @!attribute [rw] display_content
+    #   The content of the product page.
+    #   @return [Types::DisplayContent]
+    #
+    class UpdateProductPageRequestContent < Struct.new(
+      :display_content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_content
+    #   The content of the product page.
+    #   @return [Types::DisplayContent]
+    #
+    # @!attribute [rw] last_modified
+    #   @return [Time]
+    #
+    # @!attribute [rw] product_page_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] product_page_id
+    #   @return [String]
+    #
+    class UpdateProductPageResponse < Struct.new(
+      :display_content,
+      :last_modified,
+      :product_page_arn,
+      :product_page_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates a product page.
+    #
+    # @!attribute [rw] display_content
+    #   The content of the product page.
+    #   @return [Types::DisplayContent]
+    #
+    # @!attribute [rw] last_modified
+    #   The timestamp when the product page was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] product_page_arn
+    #   The ARN of the product page.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_page_id
+    #   The product page identifier.
+    #   @return [String]
+    #
+    class UpdateProductPageResponseContent < Struct.new(
+      :display_content,
+      :last_modified,
+      :product_page_arn,
+      :product_page_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_content
+    #   Represents the endpoint display content.
+    #   @return [Types::EndpointDisplayContent]
+    #
+    # @!attribute [rw] portal_product_id
+    #   @return [String]
+    #
+    # @!attribute [rw] product_rest_endpoint_page_id
+    #   @return [String]
+    #
+    # @!attribute [rw] try_it_state
+    #   Represents the try it state for a product REST endpoint page.
+    #   @return [String]
+    #
+    class UpdateProductRestEndpointPageRequest < Struct.new(
+      :display_content,
+      :portal_product_id,
+      :product_rest_endpoint_page_id,
+      :try_it_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates a product REST endpoint page.
+    #
+    # @!attribute [rw] display_content
+    #   The display content.
+    #   @return [Types::EndpointDisplayContent]
+    #
+    # @!attribute [rw] try_it_state
+    #   The try it state of a product REST endpoint page.
+    #   @return [String]
+    #
+    class UpdateProductRestEndpointPageRequestContent < Struct.new(
+      :display_content,
+      :try_it_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_content
+    #   The product REST endpoint page.
+    #   @return [Types::EndpointDisplayContentResponse]
+    #
+    # @!attribute [rw] last_modified
+    #   @return [Time]
+    #
+    # @!attribute [rw] product_rest_endpoint_page_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] product_rest_endpoint_page_id
+    #   @return [String]
+    #
+    # @!attribute [rw] rest_endpoint_identifier
+    #   The REST API endpoint identifier.
+    #   @return [Types::RestEndpointIdentifier]
+    #
+    # @!attribute [rw] status
+    #   The status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_exception
+    #   Represents a StatusException.
+    #   @return [Types::StatusException]
+    #
+    # @!attribute [rw] try_it_state
+    #   Represents the try it state for a product REST endpoint page.
+    #   @return [String]
+    #
+    class UpdateProductRestEndpointPageResponse < Struct.new(
+      :display_content,
+      :last_modified,
+      :product_rest_endpoint_page_arn,
+      :product_rest_endpoint_page_id,
+      :rest_endpoint_identifier,
+      :status,
+      :status_exception,
+      :try_it_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Update a product REST endpoint page.
+    #
+    # @!attribute [rw] display_content
+    #   The content of the product REST endpoint page.
+    #   @return [Types::EndpointDisplayContentResponse]
+    #
+    # @!attribute [rw] last_modified
+    #   The timestamp when the product REST endpoint page was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] product_rest_endpoint_page_arn
+    #   The ARN of the product REST endpoint page.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_rest_endpoint_page_id
+    #   The product REST endpoint page identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] rest_endpoint_identifier
+    #   The REST endpoint identifier.
+    #   @return [Types::RestEndpointIdentifier]
+    #
+    # @!attribute [rw] status
+    #   The status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_exception
+    #   The status exception information.
+    #   @return [Types::StatusException]
+    #
+    # @!attribute [rw] try_it_state
+    #   The try it state of a product REST endpoint page.
+    #   @return [String]
+    #
+    class UpdateProductRestEndpointPageResponseContent < Struct.new(
+      :display_content,
+      :last_modified,
+      :product_rest_endpoint_page_arn,
+      :product_rest_endpoint_page_id,
+      :rest_endpoint_identifier,
+      :status,
+      :status_exception,
+      :try_it_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input parameters for an UpdateRoute request.
     #
     # @!attribute [rw] api_key_required
@@ -7865,11 +10511,11 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] authorization_type
     #   The authorization type for the route. For WebSocket APIs, valid
-    #   values are NONE for open access, AWS\_IAM for using AWS IAM
-    #   permissions, and CUSTOM for using a Lambda authorizer For HTTP APIs,
-    #   valid values are NONE for open access, JWT for using JSON Web
-    #   Tokens, AWS\_IAM for using AWS IAM permissions, and CUSTOM for using
-    #   a Lambda authorizer.
+    #   values are NONE for open access, AWS\_IAM for using Amazon Web
+    #   Services IAM permissions, and CUSTOM for using a Lambda authorizer.
+    #   For HTTP APIs, valid values are NONE for open access, JWT for using
+    #   JSON Web Tokens, AWS\_IAM for using Amazon Web Services IAM
+    #   permissions, and CUSTOM for using a Lambda authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -7897,7 +10543,9 @@ module Aws::ApiGatewayV2
     #   @return [Hash<String,Types::ParameterConstraints>]
     #
     # @!attribute [rw] route_key
-    #   The route key for the route.
+    #   The route key for the route. For HTTP APIs, the route key can be
+    #   either $default, or a combination of an HTTP method and resource
+    #   path, for example, GET /pets.
     #   @return [String]
     #
     # @!attribute [rw] route_response_selection_expression
@@ -7945,10 +10593,11 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] authorization_type
     #   The authorization type. For WebSocket APIs, valid values are NONE
-    #   for open access, AWS\_IAM for using AWS IAM permissions, and CUSTOM
-    #   for using a Lambda authorizer. For HTTP APIs, valid values are NONE
-    #   for open access, JWT for using JSON Web Tokens, AWS\_IAM for using
-    #   AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
+    #   for open access, AWS\_IAM for using Amazon Web Services IAM
+    #   permissions, and CUSTOM for using a Lambda authorizer. For HTTP
+    #   APIs, valid values are NONE for open access, JWT for using JSON Web
+    #   Tokens, AWS\_IAM for using Amazon Web Services IAM permissions, and
+    #   CUSTOM for using a Lambda authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -8041,10 +10690,11 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] authorization_type
     #   The authorization type. For WebSocket APIs, valid values are NONE
-    #   for open access, AWS\_IAM for using AWS IAM permissions, and CUSTOM
-    #   for using a Lambda authorizer. For HTTP APIs, valid values are NONE
-    #   for open access, JWT for using JSON Web Tokens, AWS\_IAM for using
-    #   AWS IAM permissions, and CUSTOM for using a Lambda authorizer.
+    #   for open access, AWS\_IAM for using Amazon Web Services IAM
+    #   permissions, and CUSTOM for using a Lambda authorizer. For HTTP
+    #   APIs, valid values are NONE for open access, JWT for using JSON Web
+    #   Tokens, AWS\_IAM for using Amazon Web Services IAM permissions, and
+    #   CUSTOM for using a Lambda authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id

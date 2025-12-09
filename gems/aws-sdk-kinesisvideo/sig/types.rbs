@@ -65,6 +65,7 @@ module Aws::KinesisVideo
       attr_accessor kms_key_id: ::String
       attr_accessor data_retention_in_hours: ::Integer
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor stream_storage_configuration: Types::StreamStorageConfiguration
       SENSITIVE: []
     end
 
@@ -191,6 +192,19 @@ module Aws::KinesisVideo
 
     class DescribeStreamOutput
       attr_accessor stream_info: Types::StreamInfo
+      SENSITIVE: []
+    end
+
+    class DescribeStreamStorageConfigurationInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStreamStorageConfigurationOutput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_storage_configuration: Types::StreamStorageConfiguration
       SENSITIVE: []
     end
 
@@ -486,6 +500,11 @@ module Aws::KinesisVideo
       SENSITIVE: []
     end
 
+    class StreamStorageConfiguration
+      attr_accessor default_storage_tier: ("HOT" | "WARM")
+      SENSITIVE: []
+    end
+
     class Tag
       attr_accessor key: ::String
       attr_accessor value: ::String
@@ -596,6 +615,17 @@ module Aws::KinesisVideo
     end
 
     class UpdateStreamOutput < Aws::EmptyStructure
+    end
+
+    class UpdateStreamStorageConfigurationInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor current_version: ::String
+      attr_accessor stream_storage_configuration: Types::StreamStorageConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateStreamStorageConfigurationOutput < Aws::EmptyStructure
     end
 
     class UploaderConfig

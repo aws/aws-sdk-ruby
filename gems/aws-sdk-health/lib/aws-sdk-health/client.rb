@@ -882,6 +882,7 @@ module Aws::Health
     #
     #   resp = client.describe_event_aggregates({
     #     filter: {
+    #       actionabilities: ["ACTION_REQUIRED"], # accepts ACTION_REQUIRED, ACTION_MAY_BE_REQUIRED, INFORMATIONAL
     #       event_arns: ["eventArn"],
     #       event_type_codes: ["eventType"],
     #       services: ["service"],
@@ -914,6 +915,7 @@ module Aws::Health
     #         },
     #       ],
     #       event_status_codes: ["open"], # accepts open, closed, upcoming
+    #       personas: ["OPERATIONS"], # accepts OPERATIONS, SECURITY, BILLING
     #     },
     #     aggregate_field: "eventTypeCategory", # required, accepts eventTypeCategory
     #     max_results: 1,
@@ -995,6 +997,9 @@ module Aws::Health
     #   resp.successful_set[0].event.last_updated_time #=> Time
     #   resp.successful_set[0].event.status_code #=> String, one of "open", "closed", "upcoming"
     #   resp.successful_set[0].event.event_scope_code #=> String, one of "PUBLIC", "ACCOUNT_SPECIFIC", "NONE"
+    #   resp.successful_set[0].event.actionability #=> String, one of "ACTION_REQUIRED", "ACTION_MAY_BE_REQUIRED", "INFORMATIONAL"
+    #   resp.successful_set[0].event.personas #=> Array
+    #   resp.successful_set[0].event.personas[0] #=> String, one of "OPERATIONS", "SECURITY", "BILLING"
     #   resp.successful_set[0].event_description.latest_description #=> String
     #   resp.successful_set[0].event_metadata #=> Hash
     #   resp.successful_set[0].event_metadata["metadataKey"] #=> String
@@ -1099,6 +1104,9 @@ module Aws::Health
     #   resp.successful_set[0].event.last_updated_time #=> Time
     #   resp.successful_set[0].event.status_code #=> String, one of "open", "closed", "upcoming"
     #   resp.successful_set[0].event.event_scope_code #=> String, one of "PUBLIC", "ACCOUNT_SPECIFIC", "NONE"
+    #   resp.successful_set[0].event.actionability #=> String, one of "ACTION_REQUIRED", "ACTION_MAY_BE_REQUIRED", "INFORMATIONAL"
+    #   resp.successful_set[0].event.personas #=> Array
+    #   resp.successful_set[0].event.personas[0] #=> String, one of "OPERATIONS", "SECURITY", "BILLING"
     #   resp.successful_set[0].event_description.latest_description #=> String
     #   resp.successful_set[0].event_metadata #=> Hash
     #   resp.successful_set[0].event_metadata["metadataKey"] #=> String
@@ -1171,6 +1179,8 @@ module Aws::Health
     #       event_type_codes: ["eventTypeCode"],
     #       services: ["service"],
     #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
+    #       actionabilities: ["ACTION_REQUIRED"], # accepts ACTION_REQUIRED, ACTION_MAY_BE_REQUIRED, INFORMATIONAL
+    #       personas: ["OPERATIONS"], # accepts OPERATIONS, SECURITY, BILLING
     #     },
     #     locale: "locale",
     #     next_token: "nextToken",
@@ -1183,6 +1193,9 @@ module Aws::Health
     #   resp.event_types[0].service #=> String
     #   resp.event_types[0].code #=> String
     #   resp.event_types[0].category #=> String, one of "issue", "accountNotification", "scheduledChange", "investigation"
+    #   resp.event_types[0].actionability #=> String, one of "ACTION_REQUIRED", "ACTION_MAY_BE_REQUIRED", "INFORMATIONAL"
+    #   resp.event_types[0].personas #=> Array
+    #   resp.event_types[0].personas[0] #=> String, one of "OPERATIONS", "SECURITY", "BILLING"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventTypes AWS API Documentation
@@ -1253,6 +1266,7 @@ module Aws::Health
     #
     #   resp = client.describe_events({
     #     filter: {
+    #       actionabilities: ["ACTION_REQUIRED"], # accepts ACTION_REQUIRED, ACTION_MAY_BE_REQUIRED, INFORMATIONAL
     #       event_arns: ["eventArn"],
     #       event_type_codes: ["eventType"],
     #       services: ["service"],
@@ -1285,6 +1299,7 @@ module Aws::Health
     #         },
     #       ],
     #       event_status_codes: ["open"], # accepts open, closed, upcoming
+    #       personas: ["OPERATIONS"], # accepts OPERATIONS, SECURITY, BILLING
     #     },
     #     next_token: "nextToken",
     #     max_results: 1,
@@ -1305,6 +1320,9 @@ module Aws::Health
     #   resp.events[0].last_updated_time #=> Time
     #   resp.events[0].status_code #=> String, one of "open", "closed", "upcoming"
     #   resp.events[0].event_scope_code #=> String, one of "PUBLIC", "ACCOUNT_SPECIFIC", "NONE"
+    #   resp.events[0].actionability #=> String, one of "ACTION_REQUIRED", "ACTION_MAY_BE_REQUIRED", "INFORMATIONAL"
+    #   resp.events[0].personas #=> Array
+    #   resp.events[0].personas[0] #=> String, one of "OPERATIONS", "SECURITY", "BILLING"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEvents AWS API Documentation
@@ -1383,6 +1401,7 @@ module Aws::Health
     #
     #   resp = client.describe_events_for_organization({
     #     filter: {
+    #       actionabilities: ["ACTION_REQUIRED"], # accepts ACTION_REQUIRED, ACTION_MAY_BE_REQUIRED, INFORMATIONAL
     #       event_type_codes: ["eventType"],
     #       aws_account_ids: ["accountId"],
     #       services: ["service"],
@@ -1403,6 +1422,7 @@ module Aws::Health
     #       entity_values: ["entityValue"],
     #       event_type_categories: ["issue"], # accepts issue, accountNotification, scheduledChange, investigation
     #       event_status_codes: ["open"], # accepts open, closed, upcoming
+    #       personas: ["OPERATIONS"], # accepts OPERATIONS, SECURITY, BILLING
     #     },
     #     next_token: "nextToken",
     #     max_results: 1,
@@ -1422,6 +1442,9 @@ module Aws::Health
     #   resp.events[0].end_time #=> Time
     #   resp.events[0].last_updated_time #=> Time
     #   resp.events[0].status_code #=> String, one of "open", "closed", "upcoming"
+    #   resp.events[0].actionability #=> String, one of "ACTION_REQUIRED", "ACTION_MAY_BE_REQUIRED", "INFORMATIONAL"
+    #   resp.events[0].personas #=> Array
+    #   resp.events[0].personas[0] #=> String, one of "OPERATIONS", "SECURITY", "BILLING"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventsForOrganization AWS API Documentation
@@ -1553,7 +1576,7 @@ module Aws::Health
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-health'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

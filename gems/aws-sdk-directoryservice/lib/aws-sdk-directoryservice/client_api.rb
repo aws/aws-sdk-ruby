@@ -80,6 +80,8 @@ module Aws::DirectoryService
     CertificatesInfo = Shapes::ListShape.new(name: 'CertificatesInfo')
     CidrIp = Shapes::StringShape.new(name: 'CidrIp')
     CidrIps = Shapes::ListShape.new(name: 'CidrIps')
+    CidrIpv6 = Shapes::StringShape.new(name: 'CidrIpv6')
+    CidrIpv6s = Shapes::ListShape.new(name: 'CidrIpv6s')
     ClientAuthenticationSettingInfo = Shapes::StructureShape.new(name: 'ClientAuthenticationSettingInfo')
     ClientAuthenticationSettingsInfo = Shapes::ListShape.new(name: 'ClientAuthenticationSettingsInfo')
     ClientAuthenticationStatus = Shapes::StringShape.new(name: 'ClientAuthenticationStatus')
@@ -201,6 +203,7 @@ module Aws::DirectoryService
     DirectoryNotSharedException = Shapes::StructureShape.new(name: 'DirectoryNotSharedException')
     DirectoryShortName = Shapes::StringShape.new(name: 'DirectoryShortName')
     DirectorySize = Shapes::StringShape.new(name: 'DirectorySize')
+    DirectorySizeUpdateSettings = Shapes::StructureShape.new(name: 'DirectorySizeUpdateSettings')
     DirectoryStage = Shapes::StringShape.new(name: 'DirectoryStage')
     DirectoryType = Shapes::StringShape.new(name: 'DirectoryType')
     DirectoryUnavailableException = Shapes::StructureShape.new(name: 'DirectoryUnavailableException')
@@ -220,6 +223,7 @@ module Aws::DirectoryService
     DisableSsoRequest = Shapes::StructureShape.new(name: 'DisableSsoRequest')
     DisableSsoResult = Shapes::StructureShape.new(name: 'DisableSsoResult')
     DnsIpAddrs = Shapes::ListShape.new(name: 'DnsIpAddrs')
+    DnsIpv6Addrs = Shapes::ListShape.new(name: 'DnsIpv6Addrs')
     DomainController = Shapes::StructureShape.new(name: 'DomainController')
     DomainControllerId = Shapes::StringShape.new(name: 'DomainControllerId')
     DomainControllerIds = Shapes::ListShape.new(name: 'DomainControllerIds')
@@ -277,6 +281,8 @@ module Aws::DirectoryService
     IpRouteStatusReason = Shapes::StringShape.new(name: 'IpRouteStatusReason')
     IpRoutes = Shapes::ListShape.new(name: 'IpRoutes')
     IpRoutesInfo = Shapes::ListShape.new(name: 'IpRoutesInfo')
+    IpV6Addrs = Shapes::ListShape.new(name: 'IpV6Addrs')
+    Ipv6Addr = Shapes::StringShape.new(name: 'Ipv6Addr')
     LDAPSSettingInfo = Shapes::StructureShape.new(name: 'LDAPSSettingInfo')
     LDAPSSettingsInfo = Shapes::ListShape.new(name: 'LDAPSSettingsInfo')
     LDAPSStatus = Shapes::StringShape.new(name: 'LDAPSStatus')
@@ -303,6 +309,8 @@ module Aws::DirectoryService
     LogSubscription = Shapes::StructureShape.new(name: 'LogSubscription')
     LogSubscriptions = Shapes::ListShape.new(name: 'LogSubscriptions')
     ManualSnapshotsLimitReached = Shapes::BooleanShape.new(name: 'ManualSnapshotsLimitReached')
+    NetworkType = Shapes::StringShape.new(name: 'NetworkType')
+    NetworkUpdateSettings = Shapes::StructureShape.new(name: 'NetworkUpdateSettings')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NoAvailableCertificateException = Shapes::StructureShape.new(name: 'NoAvailableCertificateException')
     Notes = Shapes::StringShape.new(name: 'Notes')
@@ -597,6 +605,8 @@ module Aws::DirectoryService
 
     CidrIps.member = Shapes::ShapeRef.new(shape: CidrIp)
 
+    CidrIpv6s.member = Shapes::ShapeRef.new(shape: CidrIpv6)
+
     ClientAuthenticationSettingInfo.add_member(:type, Shapes::ShapeRef.new(shape: ClientAuthenticationType, location_name: "Type"))
     ClientAuthenticationSettingInfo.add_member(:status, Shapes::ShapeRef.new(shape: ClientAuthenticationStatus, location_name: "Status"))
     ClientAuthenticationSettingInfo.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
@@ -618,6 +628,7 @@ module Aws::DirectoryService
 
     ConditionalForwarder.add_member(:remote_domain_name, Shapes::ShapeRef.new(shape: RemoteDomainName, location_name: "RemoteDomainName"))
     ConditionalForwarder.add_member(:dns_ip_addrs, Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: "DnsIpAddrs"))
+    ConditionalForwarder.add_member(:dns_ipv_6_addrs, Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: "DnsIpv6Addrs"))
     ConditionalForwarder.add_member(:replication_scope, Shapes::ShapeRef.new(shape: ReplicationScope, location_name: "ReplicationScope"))
     ConditionalForwarder.struct_class = Types::ConditionalForwarder
 
@@ -630,6 +641,7 @@ module Aws::DirectoryService
     ConnectDirectoryRequest.add_member(:size, Shapes::ShapeRef.new(shape: DirectorySize, required: true, location_name: "Size"))
     ConnectDirectoryRequest.add_member(:connect_settings, Shapes::ShapeRef.new(shape: DirectoryConnectSettings, required: true, location_name: "ConnectSettings"))
     ConnectDirectoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ConnectDirectoryRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     ConnectDirectoryRequest.struct_class = Types::ConnectDirectoryRequest
 
     ConnectDirectoryResult.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
@@ -655,7 +667,8 @@ module Aws::DirectoryService
 
     CreateConditionalForwarderRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     CreateConditionalForwarderRequest.add_member(:remote_domain_name, Shapes::ShapeRef.new(shape: RemoteDomainName, required: true, location_name: "RemoteDomainName"))
-    CreateConditionalForwarderRequest.add_member(:dns_ip_addrs, Shapes::ShapeRef.new(shape: DnsIpAddrs, required: true, location_name: "DnsIpAddrs"))
+    CreateConditionalForwarderRequest.add_member(:dns_ip_addrs, Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: "DnsIpAddrs"))
+    CreateConditionalForwarderRequest.add_member(:dns_ipv_6_addrs, Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: "DnsIpv6Addrs"))
     CreateConditionalForwarderRequest.struct_class = Types::CreateConditionalForwarderRequest
 
     CreateConditionalForwarderResult.struct_class = Types::CreateConditionalForwarderResult
@@ -667,6 +680,7 @@ module Aws::DirectoryService
     CreateDirectoryRequest.add_member(:size, Shapes::ShapeRef.new(shape: DirectorySize, required: true, location_name: "Size"))
     CreateDirectoryRequest.add_member(:vpc_settings, Shapes::ShapeRef.new(shape: DirectoryVpcSettings, location_name: "VpcSettings"))
     CreateDirectoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateDirectoryRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     CreateDirectoryRequest.struct_class = Types::CreateDirectoryRequest
 
     CreateDirectoryResult.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
@@ -693,6 +707,7 @@ module Aws::DirectoryService
     CreateMicrosoftADRequest.add_member(:vpc_settings, Shapes::ShapeRef.new(shape: DirectoryVpcSettings, required: true, location_name: "VpcSettings"))
     CreateMicrosoftADRequest.add_member(:edition, Shapes::ShapeRef.new(shape: DirectoryEdition, location_name: "Edition"))
     CreateMicrosoftADRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateMicrosoftADRequest.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     CreateMicrosoftADRequest.struct_class = Types::CreateMicrosoftADRequest
 
     CreateMicrosoftADResult.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
@@ -711,6 +726,7 @@ module Aws::DirectoryService
     CreateTrustRequest.add_member(:trust_direction, Shapes::ShapeRef.new(shape: TrustDirection, required: true, location_name: "TrustDirection"))
     CreateTrustRequest.add_member(:trust_type, Shapes::ShapeRef.new(shape: TrustType, location_name: "TrustType"))
     CreateTrustRequest.add_member(:conditional_forwarder_ip_addrs, Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: "ConditionalForwarderIpAddrs"))
+    CreateTrustRequest.add_member(:conditional_forwarder_ipv_6_addrs, Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: "ConditionalForwarderIpv6Addrs"))
     CreateTrustRequest.add_member(:selective_auth, Shapes::ShapeRef.new(shape: SelectiveAuth, location_name: "SelectiveAuth"))
     CreateTrustRequest.struct_class = Types::CreateTrustRequest
 
@@ -931,7 +947,8 @@ module Aws::DirectoryService
 
     DirectoryConnectSettings.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
     DirectoryConnectSettings.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "SubnetIds"))
-    DirectoryConnectSettings.add_member(:customer_dns_ips, Shapes::ShapeRef.new(shape: DnsIpAddrs, required: true, location_name: "CustomerDnsIps"))
+    DirectoryConnectSettings.add_member(:customer_dns_ips, Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: "CustomerDnsIps"))
+    DirectoryConnectSettings.add_member(:customer_dns_ips_v6, Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: "CustomerDnsIpsV6"))
     DirectoryConnectSettings.add_member(:customer_user_name, Shapes::ShapeRef.new(shape: UserName, required: true, location_name: "CustomerUserName"))
     DirectoryConnectSettings.struct_class = Types::DirectoryConnectSettings
 
@@ -941,6 +958,7 @@ module Aws::DirectoryService
     DirectoryConnectSettingsDescription.add_member(:security_group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "SecurityGroupId"))
     DirectoryConnectSettingsDescription.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
     DirectoryConnectSettingsDescription.add_member(:connect_ips, Shapes::ShapeRef.new(shape: IpAddrs, location_name: "ConnectIps"))
+    DirectoryConnectSettingsDescription.add_member(:connect_ips_v6, Shapes::ShapeRef.new(shape: IpV6Addrs, location_name: "ConnectIpsV6"))
     DirectoryConnectSettingsDescription.struct_class = Types::DirectoryConnectSettingsDescription
 
     DirectoryDescription.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
@@ -952,6 +970,7 @@ module Aws::DirectoryService
     DirectoryDescription.add_member(:access_url, Shapes::ShapeRef.new(shape: AccessUrl, location_name: "AccessUrl"))
     DirectoryDescription.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     DirectoryDescription.add_member(:dns_ip_addrs, Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: "DnsIpAddrs"))
+    DirectoryDescription.add_member(:dns_ipv_6_addrs, Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: "DnsIpv6Addrs"))
     DirectoryDescription.add_member(:stage, Shapes::ShapeRef.new(shape: DirectoryStage, location_name: "Stage"))
     DirectoryDescription.add_member(:share_status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "ShareStatus"))
     DirectoryDescription.add_member(:share_method, Shapes::ShapeRef.new(shape: ShareMethod, location_name: "ShareMethod"))
@@ -970,6 +989,7 @@ module Aws::DirectoryService
     DirectoryDescription.add_member(:regions_info, Shapes::ShapeRef.new(shape: RegionsInfo, location_name: "RegionsInfo"))
     DirectoryDescription.add_member(:os_version, Shapes::ShapeRef.new(shape: OSVersion, location_name: "OsVersion"))
     DirectoryDescription.add_member(:hybrid_settings, Shapes::ShapeRef.new(shape: HybridSettingsDescription, location_name: "HybridSettings"))
+    DirectoryDescription.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     DirectoryDescription.struct_class = Types::DirectoryDescription
 
     DirectoryDescriptions.member = Shapes::ShapeRef.new(shape: DirectoryDescription)
@@ -1002,6 +1022,9 @@ module Aws::DirectoryService
     DirectoryNotSharedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     DirectoryNotSharedException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
     DirectoryNotSharedException.struct_class = Types::DirectoryNotSharedException
+
+    DirectorySizeUpdateSettings.add_member(:directory_size, Shapes::ShapeRef.new(shape: DirectorySize, location_name: "DirectorySize"))
+    DirectorySizeUpdateSettings.struct_class = Types::DirectorySizeUpdateSettings
 
     DirectoryUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     DirectoryUnavailableException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
@@ -1057,9 +1080,12 @@ module Aws::DirectoryService
 
     DnsIpAddrs.member = Shapes::ShapeRef.new(shape: IpAddr)
 
+    DnsIpv6Addrs.member = Shapes::ShapeRef.new(shape: Ipv6Addr)
+
     DomainController.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     DomainController.add_member(:domain_controller_id, Shapes::ShapeRef.new(shape: DomainControllerId, location_name: "DomainControllerId"))
     DomainController.add_member(:dns_ip_addr, Shapes::ShapeRef.new(shape: IpAddr, location_name: "DnsIpAddr"))
+    DomainController.add_member(:dns_ipv_6_addr, Shapes::ShapeRef.new(shape: Ipv6Addr, location_name: "DnsIpv6Addr"))
     DomainController.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     DomainController.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
     DomainController.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
@@ -1215,11 +1241,13 @@ module Aws::DirectoryService
     IpAddrs.member = Shapes::ShapeRef.new(shape: IpAddr)
 
     IpRoute.add_member(:cidr_ip, Shapes::ShapeRef.new(shape: CidrIp, location_name: "CidrIp"))
+    IpRoute.add_member(:cidr_ipv_6, Shapes::ShapeRef.new(shape: CidrIpv6, location_name: "CidrIpv6"))
     IpRoute.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     IpRoute.struct_class = Types::IpRoute
 
     IpRouteInfo.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     IpRouteInfo.add_member(:cidr_ip, Shapes::ShapeRef.new(shape: CidrIp, location_name: "CidrIp"))
+    IpRouteInfo.add_member(:cidr_ipv_6, Shapes::ShapeRef.new(shape: CidrIpv6, location_name: "CidrIpv6"))
     IpRouteInfo.add_member(:ip_route_status_msg, Shapes::ShapeRef.new(shape: IpRouteStatusMsg, location_name: "IpRouteStatusMsg"))
     IpRouteInfo.add_member(:added_date_time, Shapes::ShapeRef.new(shape: AddedDateTime, location_name: "AddedDateTime"))
     IpRouteInfo.add_member(:ip_route_status_reason, Shapes::ShapeRef.new(shape: IpRouteStatusReason, location_name: "IpRouteStatusReason"))
@@ -1233,6 +1261,8 @@ module Aws::DirectoryService
     IpRoutes.member = Shapes::ShapeRef.new(shape: IpRoute)
 
     IpRoutesInfo.member = Shapes::ShapeRef.new(shape: IpRouteInfo)
+
+    IpV6Addrs.member = Shapes::ShapeRef.new(shape: Ipv6Addr)
 
     LDAPSSettingInfo.add_member(:ldaps_status, Shapes::ShapeRef.new(shape: LDAPSStatus, location_name: "LDAPSStatus"))
     LDAPSSettingInfo.add_member(:ldaps_status_reason, Shapes::ShapeRef.new(shape: LDAPSStatusReason, location_name: "LDAPSStatusReason"))
@@ -1302,6 +1332,10 @@ module Aws::DirectoryService
 
     LogSubscriptions.member = Shapes::ShapeRef.new(shape: LogSubscription)
 
+    NetworkUpdateSettings.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
+    NetworkUpdateSettings.add_member(:customer_dns_ips_v6, Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: "CustomerDnsIpsV6"))
+    NetworkUpdateSettings.struct_class = Types::NetworkUpdateSettings
+
     NoAvailableCertificateException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     NoAvailableCertificateException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
     NoAvailableCertificateException.struct_class = Types::NoAvailableCertificateException
@@ -1316,12 +1350,15 @@ module Aws::DirectoryService
     OwnerDirectoryDescription.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     OwnerDirectoryDescription.add_member(:account_id, Shapes::ShapeRef.new(shape: CustomerId, location_name: "AccountId"))
     OwnerDirectoryDescription.add_member(:dns_ip_addrs, Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: "DnsIpAddrs"))
+    OwnerDirectoryDescription.add_member(:dns_ipv_6_addrs, Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: "DnsIpv6Addrs"))
     OwnerDirectoryDescription.add_member(:vpc_settings, Shapes::ShapeRef.new(shape: DirectoryVpcSettingsDescription, location_name: "VpcSettings"))
     OwnerDirectoryDescription.add_member(:radius_settings, Shapes::ShapeRef.new(shape: RadiusSettings, location_name: "RadiusSettings"))
     OwnerDirectoryDescription.add_member(:radius_status, Shapes::ShapeRef.new(shape: RadiusStatus, location_name: "RadiusStatus"))
+    OwnerDirectoryDescription.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "NetworkType"))
     OwnerDirectoryDescription.struct_class = Types::OwnerDirectoryDescription
 
     RadiusSettings.add_member(:radius_servers, Shapes::ShapeRef.new(shape: Servers, location_name: "RadiusServers"))
+    RadiusSettings.add_member(:radius_servers_ipv_6, Shapes::ShapeRef.new(shape: Servers, location_name: "RadiusServersIpv6"))
     RadiusSettings.add_member(:radius_port, Shapes::ShapeRef.new(shape: PortNumber, location_name: "RadiusPort"))
     RadiusSettings.add_member(:radius_timeout, Shapes::ShapeRef.new(shape: RadiusTimeout, location_name: "RadiusTimeout"))
     RadiusSettings.add_member(:radius_retries, Shapes::ShapeRef.new(shape: RadiusRetries, location_name: "RadiusRetries"))
@@ -1376,7 +1413,8 @@ module Aws::DirectoryService
     RemoteDomainNames.member = Shapes::ShapeRef.new(shape: RemoteDomainName)
 
     RemoveIpRoutesRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
-    RemoveIpRoutesRequest.add_member(:cidr_ips, Shapes::ShapeRef.new(shape: CidrIps, required: true, location_name: "CidrIps"))
+    RemoveIpRoutesRequest.add_member(:cidr_ips, Shapes::ShapeRef.new(shape: CidrIps, location_name: "CidrIps"))
+    RemoveIpRoutesRequest.add_member(:cidr_ipv_6s, Shapes::ShapeRef.new(shape: CidrIpv6s, location_name: "CidrIpv6s"))
     RemoveIpRoutesRequest.struct_class = Types::RemoveIpRoutesRequest
 
     RemoveIpRoutesResult.struct_class = Types::RemoveIpRoutesResult
@@ -1567,7 +1605,8 @@ module Aws::DirectoryService
 
     UpdateConditionalForwarderRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     UpdateConditionalForwarderRequest.add_member(:remote_domain_name, Shapes::ShapeRef.new(shape: RemoteDomainName, required: true, location_name: "RemoteDomainName"))
-    UpdateConditionalForwarderRequest.add_member(:dns_ip_addrs, Shapes::ShapeRef.new(shape: DnsIpAddrs, required: true, location_name: "DnsIpAddrs"))
+    UpdateConditionalForwarderRequest.add_member(:dns_ip_addrs, Shapes::ShapeRef.new(shape: DnsIpAddrs, location_name: "DnsIpAddrs"))
+    UpdateConditionalForwarderRequest.add_member(:dns_ipv_6_addrs, Shapes::ShapeRef.new(shape: DnsIpv6Addrs, location_name: "DnsIpv6Addrs"))
     UpdateConditionalForwarderRequest.struct_class = Types::UpdateConditionalForwarderRequest
 
     UpdateConditionalForwarderResult.struct_class = Types::UpdateConditionalForwarderResult
@@ -1575,6 +1614,8 @@ module Aws::DirectoryService
     UpdateDirectorySetupRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     UpdateDirectorySetupRequest.add_member(:update_type, Shapes::ShapeRef.new(shape: UpdateType, required: true, location_name: "UpdateType"))
     UpdateDirectorySetupRequest.add_member(:os_update_settings, Shapes::ShapeRef.new(shape: OSUpdateSettings, location_name: "OSUpdateSettings"))
+    UpdateDirectorySetupRequest.add_member(:directory_size_update_settings, Shapes::ShapeRef.new(shape: DirectorySizeUpdateSettings, location_name: "DirectorySizeUpdateSettings"))
+    UpdateDirectorySetupRequest.add_member(:network_update_settings, Shapes::ShapeRef.new(shape: NetworkUpdateSettings, location_name: "NetworkUpdateSettings"))
     UpdateDirectorySetupRequest.add_member(:create_snapshot_before_update, Shapes::ShapeRef.new(shape: CreateSnapshotBeforeUpdate, location_name: "CreateSnapshotBeforeUpdate", metadata: {"box" => true}))
     UpdateDirectorySetupRequest.struct_class = Types::UpdateDirectorySetupRequest
 

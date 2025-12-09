@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2025-12-02)
+------------------
+
+* Feature - Adding support for extended threat detection for Amazon EC2 and Amazon ECS. Adding support for wild card suppression rules.
+
+1.135.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.134.0 (2025-11-19)
+------------------
+
+* Feature - Add support for scanning and viewing scan results for backup resource types
+
+1.133.0 (2025-11-17)
+------------------
+
+* Feature - Add S3 On-Demand Object Scanning
+
+1.132.0 (2025-11-10)
+------------------
+
+* Feature - Include tags filed in CreatePublishingDestinationRequest and DescribePublishingDestinationResponse.
+
+1.131.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.130.0 (2025-10-15)
+------------------
+
+* Feature - Added default pagination value for ListMalwareProtectionPlans API and updated UpdateFindingsFeedback API
+
+1.129.0 (2025-10-02)
+------------------
+
+* Feature - Updated descriptions for the Location parameter in CreateTrustedEntitySet and CreateThreatEntitySet.
+
 1.128.0 (2025-09-11)
 ------------------
 

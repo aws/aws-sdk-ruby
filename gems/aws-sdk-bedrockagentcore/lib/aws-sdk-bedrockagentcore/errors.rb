@@ -29,6 +29,7 @@ module Aws::BedrockAgentCore
   # ## Error Classes
   # * {AccessDeniedException}
   # * {ConflictException}
+  # * {DuplicateIdException}
   # * {InternalServerException}
   # * {InvalidInputException}
   # * {ResourceNotFoundException}
@@ -66,6 +67,21 @@ module Aws::BedrockAgentCore
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::BedrockAgentCore::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class DuplicateIdException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::BedrockAgentCore::Types::DuplicateIdException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

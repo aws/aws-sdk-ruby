@@ -387,7 +387,7 @@ module Aws
       def create_workflow: (
                              ?name: ::String,
                              ?description: ::String,
-                             ?engine: ("WDL" | "NEXTFLOW" | "CWL"),
+                             ?engine: ("WDL" | "NEXTFLOW" | "CWL" | "WDL_LENIENT"),
                              ?definition_zip: ::String,
                              ?definition_uri: ::String,
                              ?main: ::String,
@@ -451,7 +451,7 @@ module Aws
                                      ?definition_uri: ::String,
                                      ?accelerators: ("GPU"),
                                      ?description: ::String,
-                                     ?engine: ("WDL" | "NEXTFLOW" | "CWL"),
+                                     ?engine: ("WDL" | "NEXTFLOW" | "CWL" | "WDL_LENIENT"),
                                      ?main: ::String,
                                      ?parameter_template: Hash[::String, {
                                          description: ::String?,
@@ -1042,7 +1042,7 @@ module Aws
         def type: () -> ("PRIVATE" | "READY2RUN")
         def name: () -> ::String
         def description: () -> ::String
-        def engine: () -> ("WDL" | "NEXTFLOW" | "CWL")
+        def engine: () -> ("WDL" | "NEXTFLOW" | "CWL" | "WDL_LENIENT")
         def definition: () -> ::String
         def main: () -> ::String
         def digest: () -> ::String
@@ -1079,7 +1079,7 @@ module Aws
         def description: () -> ::String
         def definition: () -> ::String
         def digest: () -> ::String
-        def engine: () -> ("WDL" | "NEXTFLOW" | "CWL")
+        def engine: () -> ("WDL" | "NEXTFLOW" | "CWL" | "WDL_LENIENT")
         def main: () -> ::String
         def metadata: () -> ::Hash[::String, ::String]
         def parameter_template: () -> ::Hash[::String, Types::WorkflowParameter]

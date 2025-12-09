@@ -100,10 +100,11 @@ module Aws::GameLiftStreams
       attr_accessor location_states: ::Array[Types::LocationState]
       attr_accessor stream_class: ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022")
       attr_accessor id: ::String
-      attr_accessor status: ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING")
+      attr_accessor status: ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING" | "EXPIRED")
       attr_accessor status_reason: ("internalError" | "noAvailableInstances")
       attr_accessor last_updated_at: ::Time
       attr_accessor created_at: ::Time
+      attr_accessor expires_at: ::Time
       attr_accessor associated_applications: ::Array[::String]
       SENSITIVE: []
     end
@@ -201,10 +202,11 @@ module Aws::GameLiftStreams
       attr_accessor location_states: ::Array[Types::LocationState]
       attr_accessor stream_class: ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022")
       attr_accessor id: ::String
-      attr_accessor status: ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING")
+      attr_accessor status: ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING" | "EXPIRED")
       attr_accessor status_reason: ("internalError" | "noAvailableInstances")
       attr_accessor last_updated_at: ::Time
       attr_accessor created_at: ::Time
+      attr_accessor expires_at: ::Time
       attr_accessor associated_applications: ::Array[::String]
       SENSITIVE: []
     end
@@ -221,7 +223,7 @@ module Aws::GameLiftStreams
       attr_accessor stream_group_id: ::String
       attr_accessor user_id: ::String
       attr_accessor status: ("ACTIVATING" | "ACTIVE" | "CONNECTED" | "PENDING_CLIENT_RECONNECTION" | "RECONNECTING" | "TERMINATING" | "TERMINATED" | "ERROR")
-      attr_accessor status_reason: ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError")
+      attr_accessor status_reason: ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
       attr_accessor protocol: ("WebRTC")
       attr_accessor location: ::String
       attr_accessor signal_request: ::String
@@ -375,7 +377,7 @@ module Aws::GameLiftStreams
       attr_accessor stream_group_id: ::String
       attr_accessor user_id: ::String
       attr_accessor status: ("ACTIVATING" | "ACTIVE" | "CONNECTED" | "PENDING_CLIENT_RECONNECTION" | "RECONNECTING" | "TERMINATING" | "TERMINATED" | "ERROR")
-      attr_accessor status_reason: ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError")
+      attr_accessor status_reason: ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
       attr_accessor protocol: ("WebRTC")
       attr_accessor location: ::String
       attr_accessor signal_request: ::String
@@ -399,9 +401,10 @@ module Aws::GameLiftStreams
       attr_accessor description: ::String
       attr_accessor default_application: Types::DefaultApplication
       attr_accessor stream_class: ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022")
-      attr_accessor status: ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING")
+      attr_accessor status: ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING" | "EXPIRED")
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
+      attr_accessor expires_at: ::Time
       SENSITIVE: []
     end
 
@@ -488,10 +491,11 @@ module Aws::GameLiftStreams
       attr_accessor location_states: ::Array[Types::LocationState]
       attr_accessor stream_class: ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022")
       attr_accessor id: ::String
-      attr_accessor status: ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING")
+      attr_accessor status: ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING" | "EXPIRED")
       attr_accessor status_reason: ("internalError" | "noAvailableInstances")
       attr_accessor last_updated_at: ::Time
       attr_accessor created_at: ::Time
+      attr_accessor expires_at: ::Time
       attr_accessor associated_applications: ::Array[::String]
       SENSITIVE: []
     end

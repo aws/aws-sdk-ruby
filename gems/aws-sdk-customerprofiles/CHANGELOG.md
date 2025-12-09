@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2025-12-01)
+------------------
+
+* Feature - This release introduces, CRUD APIs for the DomainObjectType and Recommender resources, APIs to offer statistical insights on Object Type Attributes, Changes to SegmentDefinition APIs to support SQL queries to create Segments, and Changes to Domain APIs to support Data Store.
+
+1.75.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.74.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2025-10-16)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.72.0 (2025-09-30)
+------------------
+
+* Feature - This release introduces ListProfileHistoryRecords and GetProfileHistoryRecord APIs for comprehensive profile history tracking with complete audit trails of creation, updates, merges, deletions, and data ingestion events.
+
 1.71.0 (2025-08-26)
 ------------------
 

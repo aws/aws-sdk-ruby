@@ -19,6 +19,7 @@ module Aws::DeviceFarm
     AccountsCleanup = Shapes::BooleanShape.new(name: 'AccountsCleanup')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AmazonResourceNames = Shapes::ListShape.new(name: 'AmazonResourceNames')
+    AmazonRoleResourceName = Shapes::StringShape.new(name: 'AmazonRoleResourceName')
     AndroidPaths = Shapes::ListShape.new(name: 'AndroidPaths')
     AppPackagesCleanup = Shapes::BooleanShape.new(name: 'AppPackagesCleanup')
     ArgumentException = Shapes::StructureShape.new(name: 'ArgumentException')
@@ -26,11 +27,11 @@ module Aws::DeviceFarm
     ArtifactCategory = Shapes::StringShape.new(name: 'ArtifactCategory')
     ArtifactType = Shapes::StringShape.new(name: 'ArtifactType')
     Artifacts = Shapes::ListShape.new(name: 'Artifacts')
+    AuxiliaryAppArnList = Shapes::ListShape.new(name: 'AuxiliaryAppArnList')
     BillingMethod = Shapes::StringShape.new(name: 'BillingMethod')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CPU = Shapes::StructureShape.new(name: 'CPU')
     CannotDeleteException = Shapes::StructureShape.new(name: 'CannotDeleteException')
-    ClientId = Shapes::StringShape.new(name: 'ClientId')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     Counters = Shapes::StructureShape.new(name: 'Counters')
     CreateDevicePoolRequest = Shapes::StructureShape.new(name: 'CreateDevicePoolRequest')
@@ -99,6 +100,10 @@ module Aws::DeviceFarm
     DeviceSelectionResult = Shapes::StructureShape.new(name: 'DeviceSelectionResult')
     Devices = Shapes::ListShape.new(name: 'Devices')
     Double = Shapes::FloatShape.new(name: 'Double')
+    EnvironmentVariable = Shapes::StructureShape.new(name: 'EnvironmentVariable')
+    EnvironmentVariableName = Shapes::StringShape.new(name: 'EnvironmentVariableName')
+    EnvironmentVariableValue = Shapes::StringShape.new(name: 'EnvironmentVariableValue')
+    EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     ExecutionConfiguration = Shapes::StructureShape.new(name: 'ExecutionConfiguration')
     ExecutionResult = Shapes::StringShape.new(name: 'ExecutionResult')
@@ -141,7 +146,6 @@ module Aws::DeviceFarm
     GetUploadResult = Shapes::StructureShape.new(name: 'GetUploadResult')
     GetVPCEConfigurationRequest = Shapes::StructureShape.new(name: 'GetVPCEConfigurationRequest')
     GetVPCEConfigurationResult = Shapes::StructureShape.new(name: 'GetVPCEConfigurationResult')
-    HostAddress = Shapes::StringShape.new(name: 'HostAddress')
     IdempotencyException = Shapes::StructureShape.new(name: 'IdempotencyException')
     IncompatibilityMessage = Shapes::StructureShape.new(name: 'IncompatibilityMessage')
     IncompatibilityMessages = Shapes::ListShape.new(name: 'IncompatibilityMessages')
@@ -249,6 +253,7 @@ module Aws::DeviceFarm
     RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
     RecurringChargeFrequency = Shapes::StringShape.new(name: 'RecurringChargeFrequency')
     RecurringCharges = Shapes::ListShape.new(name: 'RecurringCharges')
+    RemoteAccessEndpoints = Shapes::StructureShape.new(name: 'RemoteAccessEndpoints')
     RemoteAccessSession = Shapes::StructureShape.new(name: 'RemoteAccessSession')
     RemoteAccessSessions = Shapes::ListShape.new(name: 'RemoteAccessSessions')
     RenewOfferingRequest = Shapes::StructureShape.new(name: 'RenewOfferingRequest')
@@ -276,7 +281,6 @@ module Aws::DeviceFarm
     ServiceAccountException = Shapes::StructureShape.new(name: 'ServiceAccountException')
     ServiceDnsName = Shapes::StringShape.new(name: 'ServiceDnsName')
     SkipAppResign = Shapes::BooleanShape.new(name: 'SkipAppResign')
-    SshPublicKey = Shapes::StringShape.new(name: 'SshPublicKey')
     StopJobRequest = Shapes::StructureShape.new(name: 'StopJobRequest')
     StopJobResult = Shapes::StructureShape.new(name: 'StopJobResult')
     StopRemoteAccessSessionRequest = Shapes::StructureShape.new(name: 'StopRemoteAccessSessionRequest')
@@ -380,6 +384,8 @@ module Aws::DeviceFarm
 
     Artifacts.member = Shapes::ShapeRef.new(shape: Artifact)
 
+    AuxiliaryAppArnList.member = Shapes::ShapeRef.new(shape: AmazonResourceName)
+
     CPU.add_member(:frequency, Shapes::ShapeRef.new(shape: String, location_name: "frequency"))
     CPU.add_member(:architecture, Shapes::ShapeRef.new(shape: String, location_name: "architecture"))
     CPU.add_member(:clock, Shapes::ShapeRef.new(shape: Double, location_name: "clock"))
@@ -437,11 +443,14 @@ module Aws::DeviceFarm
     CreateProjectRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateProjectRequest.add_member(:default_job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "defaultJobTimeoutMinutes"))
     CreateProjectRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    CreateProjectRequest.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
+    CreateProjectRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: AmazonRoleResourceName, location_name: "executionRoleArn"))
     CreateProjectRequest.struct_class = Types::CreateProjectRequest
 
     CreateProjectResult.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
     CreateProjectResult.struct_class = Types::CreateProjectResult
 
+    CreateRemoteAccessSessionConfiguration.add_member(:auxiliary_apps, Shapes::ShapeRef.new(shape: AuxiliaryAppArnList, location_name: "auxiliaryApps"))
     CreateRemoteAccessSessionConfiguration.add_member(:billing_method, Shapes::ShapeRef.new(shape: BillingMethod, location_name: "billingMethod"))
     CreateRemoteAccessSessionConfiguration.add_member(:vpce_configuration_arns, Shapes::ShapeRef.new(shape: AmazonResourceNames, location_name: "vpceConfigurationArns"))
     CreateRemoteAccessSessionConfiguration.add_member(:device_proxy, Shapes::ShapeRef.new(shape: DeviceProxy, location_name: "deviceProxy"))
@@ -449,15 +458,11 @@ module Aws::DeviceFarm
 
     CreateRemoteAccessSessionRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "projectArn"))
     CreateRemoteAccessSessionRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "deviceArn"))
+    CreateRemoteAccessSessionRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "appArn"))
     CreateRemoteAccessSessionRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "instanceArn"))
-    CreateRemoteAccessSessionRequest.add_member(:ssh_public_key, Shapes::ShapeRef.new(shape: SshPublicKey, location_name: "sshPublicKey"))
-    CreateRemoteAccessSessionRequest.add_member(:remote_debug_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "remoteDebugEnabled"))
-    CreateRemoteAccessSessionRequest.add_member(:remote_record_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "remoteRecordEnabled"))
-    CreateRemoteAccessSessionRequest.add_member(:remote_record_app_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "remoteRecordAppArn"))
     CreateRemoteAccessSessionRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
-    CreateRemoteAccessSessionRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, location_name: "clientId"))
     CreateRemoteAccessSessionRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CreateRemoteAccessSessionConfiguration, location_name: "configuration"))
-    CreateRemoteAccessSessionRequest.add_member(:interaction_mode, Shapes::ShapeRef.new(shape: InteractionMode, location_name: "interactionMode"))
+    CreateRemoteAccessSessionRequest.add_member(:interaction_mode, Shapes::ShapeRef.new(shape: InteractionMode, deprecated: true, location_name: "interactionMode", metadata: {"deprecatedMessage" => "Changing the interactive mode of Remote Access sessions is no longer available.", "deprecatedSince" => "2019-09-09"}))
     CreateRemoteAccessSessionRequest.add_member(:skip_app_resign, Shapes::ShapeRef.new(shape: Boolean, location_name: "skipAppResign"))
     CreateRemoteAccessSessionRequest.struct_class = Types::CreateRemoteAccessSessionRequest
 
@@ -564,7 +569,7 @@ module Aws::DeviceFarm
     Device.add_member(:carrier, Shapes::ShapeRef.new(shape: String, location_name: "carrier"))
     Device.add_member(:radio, Shapes::ShapeRef.new(shape: String, location_name: "radio"))
     Device.add_member(:remote_access_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "remoteAccessEnabled"))
-    Device.add_member(:remote_debug_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "remoteDebugEnabled"))
+    Device.add_member(:remote_debug_enabled, Shapes::ShapeRef.new(shape: Boolean, deprecated: true, location_name: "remoteDebugEnabled", metadata: {"deprecatedMessage" => "Direct Device Access is no longer available.", "deprecatedSince" => "2019-09-09"}))
     Device.add_member(:fleet_type, Shapes::ShapeRef.new(shape: String, location_name: "fleetType"))
     Device.add_member(:fleet_name, Shapes::ShapeRef.new(shape: String, location_name: "fleetName"))
     Device.add_member(:instances, Shapes::ShapeRef.new(shape: DeviceInstances, location_name: "instances"))
@@ -628,6 +633,12 @@ module Aws::DeviceFarm
     DeviceSelectionResult.struct_class = Types::DeviceSelectionResult
 
     Devices.member = Shapes::ShapeRef.new(shape: Device)
+
+    EnvironmentVariable.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentVariableName, required: true, location_name: "name"))
+    EnvironmentVariable.add_member(:value, Shapes::ShapeRef.new(shape: EnvironmentVariableValue, required: true, location_name: "value"))
+    EnvironmentVariable.struct_class = Types::EnvironmentVariable
+
+    EnvironmentVariables.member = Shapes::ShapeRef.new(shape: EnvironmentVariable)
 
     ExecutionConfiguration.add_member(:job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "jobTimeoutMinutes"))
     ExecutionConfiguration.add_member(:accounts_cleanup, Shapes::ShapeRef.new(shape: AccountsCleanup, location_name: "accountsCleanup"))
@@ -1100,6 +1111,8 @@ module Aws::DeviceFarm
     Project.add_member(:default_job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "defaultJobTimeoutMinutes"))
     Project.add_member(:created, Shapes::ShapeRef.new(shape: DateTime, location_name: "created"))
     Project.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    Project.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
+    Project.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: AmazonRoleResourceName, location_name: "executionRoleArn"))
     Project.struct_class = Types::Project
 
     Projects.member = Shapes::ShapeRef.new(shape: Project)
@@ -1127,6 +1140,10 @@ module Aws::DeviceFarm
 
     RecurringCharges.member = Shapes::ShapeRef.new(shape: RecurringCharge)
 
+    RemoteAccessEndpoints.add_member(:remote_driver_endpoint, Shapes::ShapeRef.new(shape: SensitiveURL, location_name: "remoteDriverEndpoint"))
+    RemoteAccessEndpoints.add_member(:interactive_endpoint, Shapes::ShapeRef.new(shape: SensitiveURL, location_name: "interactiveEndpoint"))
+    RemoteAccessEndpoints.struct_class = Types::RemoteAccessEndpoints
+
     RemoteAccessSession.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
     RemoteAccessSession.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     RemoteAccessSession.add_member(:created, Shapes::ShapeRef.new(shape: DateTime, location_name: "created"))
@@ -1137,19 +1154,16 @@ module Aws::DeviceFarm
     RemoteAccessSession.add_member(:stopped, Shapes::ShapeRef.new(shape: DateTime, location_name: "stopped"))
     RemoteAccessSession.add_member(:device, Shapes::ShapeRef.new(shape: Device, location_name: "device"))
     RemoteAccessSession.add_member(:instance_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "instanceArn"))
-    RemoteAccessSession.add_member(:remote_debug_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "remoteDebugEnabled"))
-    RemoteAccessSession.add_member(:remote_record_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "remoteRecordEnabled"))
-    RemoteAccessSession.add_member(:remote_record_app_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "remoteRecordAppArn"))
-    RemoteAccessSession.add_member(:host_address, Shapes::ShapeRef.new(shape: HostAddress, location_name: "hostAddress"))
-    RemoteAccessSession.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, location_name: "clientId"))
     RemoteAccessSession.add_member(:billing_method, Shapes::ShapeRef.new(shape: BillingMethod, location_name: "billingMethod"))
     RemoteAccessSession.add_member(:device_minutes, Shapes::ShapeRef.new(shape: DeviceMinutes, location_name: "deviceMinutes"))
-    RemoteAccessSession.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
+    RemoteAccessSession.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "endpoint", metadata: {"deprecatedMessage" => "This field is deprecated, and is replaced by the new endpoints.interactiveEndpoint field.", "deprecatedSince" => "2025-11-17"}))
     RemoteAccessSession.add_member(:device_udid, Shapes::ShapeRef.new(shape: String, location_name: "deviceUdid"))
-    RemoteAccessSession.add_member(:interaction_mode, Shapes::ShapeRef.new(shape: InteractionMode, location_name: "interactionMode"))
+    RemoteAccessSession.add_member(:interaction_mode, Shapes::ShapeRef.new(shape: InteractionMode, deprecated: true, location_name: "interactionMode", metadata: {"deprecatedMessage" => "Changing the interactive mode of Remote Access sessions is no longer available.", "deprecatedSince" => "2019-09-09"}))
     RemoteAccessSession.add_member(:skip_app_resign, Shapes::ShapeRef.new(shape: SkipAppResign, location_name: "skipAppResign"))
     RemoteAccessSession.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     RemoteAccessSession.add_member(:device_proxy, Shapes::ShapeRef.new(shape: DeviceProxy, location_name: "deviceProxy"))
+    RemoteAccessSession.add_member(:app_upload, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "appUpload"))
+    RemoteAccessSession.add_member(:endpoints, Shapes::ShapeRef.new(shape: RemoteAccessEndpoints, location_name: "endpoints"))
     RemoteAccessSession.struct_class = Types::RemoteAccessSession
 
     RemoteAccessSessions.member = Shapes::ShapeRef.new(shape: RemoteAccessSession)
@@ -1205,6 +1219,8 @@ module Aws::DeviceFarm
     Run.add_member(:test_spec_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "testSpecArn"))
     Run.add_member(:device_selection_result, Shapes::ShapeRef.new(shape: DeviceSelectionResult, location_name: "deviceSelectionResult"))
     Run.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    Run.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: AmazonRoleResourceName, location_name: "executionRoleArn"))
+    Run.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
     Run.struct_class = Types::Run
 
     Runs.member = Shapes::ShapeRef.new(shape: Run)
@@ -1226,6 +1242,8 @@ module Aws::DeviceFarm
     ScheduleRunConfiguration.add_member(:radios, Shapes::ShapeRef.new(shape: Radios, location_name: "radios"))
     ScheduleRunConfiguration.add_member(:auxiliary_apps, Shapes::ShapeRef.new(shape: AmazonResourceNames, location_name: "auxiliaryApps"))
     ScheduleRunConfiguration.add_member(:billing_method, Shapes::ShapeRef.new(shape: BillingMethod, location_name: "billingMethod"))
+    ScheduleRunConfiguration.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
+    ScheduleRunConfiguration.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: AmazonRoleResourceName, location_name: "executionRoleArn"))
     ScheduleRunConfiguration.struct_class = Types::ScheduleRunConfiguration
 
     ScheduleRunRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "projectArn"))
@@ -1442,6 +1460,8 @@ module Aws::DeviceFarm
     UpdateProjectRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     UpdateProjectRequest.add_member(:default_job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "defaultJobTimeoutMinutes"))
     UpdateProjectRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    UpdateProjectRequest.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
+    UpdateProjectRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: AmazonRoleResourceName, location_name: "executionRoleArn"))
     UpdateProjectRequest.struct_class = Types::UpdateProjectRequest
 
     UpdateProjectResult.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))

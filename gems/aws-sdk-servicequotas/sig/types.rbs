@@ -78,6 +78,18 @@ module Aws::ServiceQuotas
       SENSITIVE: []
     end
 
+    class GetAutoManagementConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetAutoManagementConfigurationResponse
+      attr_accessor opt_in_level: ("ACCOUNT")
+      attr_accessor opt_in_type: ("NotifyOnly" | "NotifyAndAdjust")
+      attr_accessor notification_arn: ::String
+      attr_accessor opt_in_status: ("ENABLED" | "DISABLED")
+      attr_accessor exclusion_list: ::Hash[::String, ::Array[Types::QuotaInfo]]
+      SENSITIVE: []
+    end
+
     class GetRequestedServiceQuotaChangeRequest
       attr_accessor request_id: ::String
       SENSITIVE: []
@@ -270,6 +282,12 @@ module Aws::ServiceQuotas
       SENSITIVE: []
     end
 
+    class QuotaInfo
+      attr_accessor quota_code: ::String
+      attr_accessor quota_name: ::String
+      SENSITIVE: []
+    end
+
     class QuotaPeriod
       attr_accessor period_value: ::Integer
       attr_accessor period_unit: ("MICROSECOND" | "MILLISECOND" | "SECOND" | "MINUTE" | "HOUR" | "DAY" | "WEEK")
@@ -362,6 +380,23 @@ module Aws::ServiceQuotas
       SENSITIVE: []
     end
 
+    class StartAutoManagementRequest
+      attr_accessor opt_in_level: ("ACCOUNT")
+      attr_accessor opt_in_type: ("NotifyOnly" | "NotifyAndAdjust")
+      attr_accessor notification_arn: ::String
+      attr_accessor exclusion_list: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class StartAutoManagementResponse < Aws::EmptyStructure
+    end
+
+    class StopAutoManagementRequest < Aws::EmptyStructure
+    end
+
+    class StopAutoManagementResponse < Aws::EmptyStructure
+    end
+
     class Tag
       attr_accessor key: ::String
       attr_accessor value: ::String
@@ -404,6 +439,16 @@ module Aws::ServiceQuotas
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAutoManagementRequest
+      attr_accessor opt_in_type: ("NotifyOnly" | "NotifyAndAdjust")
+      attr_accessor notification_arn: ::String
+      attr_accessor exclusion_list: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class UpdateAutoManagementResponse < Aws::EmptyStructure
     end
   end
 end

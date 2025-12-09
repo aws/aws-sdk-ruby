@@ -167,7 +167,8 @@ module Aws
                                 key: ::String,
                                 value: ::String
                               },
-                            ]
+                            ],
+                            ?media_placement_network_type: ("Ipv4Only" | "DualStack")
                           ) -> _CreateMeetingResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMeetingResponseSuccess
 
@@ -219,7 +220,8 @@ module Aws
                                                key: ::String,
                                                value: ::String
                                              },
-                                           ]
+                                           ],
+                                           ?media_placement_network_type: ("Ipv4Only" | "DualStack")
                                          ) -> _CreateMeetingWithAttendeesResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMeetingWithAttendeesResponseSuccess
 

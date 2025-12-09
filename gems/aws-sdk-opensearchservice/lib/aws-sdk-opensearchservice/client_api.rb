@@ -112,6 +112,8 @@ module Aws::OpenSearchService
     CreateApplicationResponse = Shapes::StructureShape.new(name: 'CreateApplicationResponse')
     CreateDomainRequest = Shapes::StructureShape.new(name: 'CreateDomainRequest')
     CreateDomainResponse = Shapes::StructureShape.new(name: 'CreateDomainResponse')
+    CreateIndexRequest = Shapes::StructureShape.new(name: 'CreateIndexRequest')
+    CreateIndexResponse = Shapes::StructureShape.new(name: 'CreateIndexResponse')
     CreateOutboundConnectionRequest = Shapes::StructureShape.new(name: 'CreateOutboundConnectionRequest')
     CreateOutboundConnectionResponse = Shapes::StructureShape.new(name: 'CreateOutboundConnectionResponse')
     CreatePackageRequest = Shapes::StructureShape.new(name: 'CreatePackageRequest')
@@ -137,6 +139,8 @@ module Aws::OpenSearchService
     DeleteDomainResponse = Shapes::StructureShape.new(name: 'DeleteDomainResponse')
     DeleteInboundConnectionRequest = Shapes::StructureShape.new(name: 'DeleteInboundConnectionRequest')
     DeleteInboundConnectionResponse = Shapes::StructureShape.new(name: 'DeleteInboundConnectionResponse')
+    DeleteIndexRequest = Shapes::StructureShape.new(name: 'DeleteIndexRequest')
+    DeleteIndexResponse = Shapes::StructureShape.new(name: 'DeleteIndexResponse')
     DeleteOutboundConnectionRequest = Shapes::StructureShape.new(name: 'DeleteOutboundConnectionRequest')
     DeleteOutboundConnectionResponse = Shapes::StructureShape.new(name: 'DeleteOutboundConnectionResponse')
     DeletePackageRequest = Shapes::StructureShape.new(name: 'DeletePackageRequest')
@@ -249,10 +253,14 @@ module Aws::OpenSearchService
     GetCompatibleVersionsResponse = Shapes::StructureShape.new(name: 'GetCompatibleVersionsResponse')
     GetDataSourceRequest = Shapes::StructureShape.new(name: 'GetDataSourceRequest')
     GetDataSourceResponse = Shapes::StructureShape.new(name: 'GetDataSourceResponse')
+    GetDefaultApplicationSettingRequest = Shapes::StructureShape.new(name: 'GetDefaultApplicationSettingRequest')
+    GetDefaultApplicationSettingResponse = Shapes::StructureShape.new(name: 'GetDefaultApplicationSettingResponse')
     GetDirectQueryDataSourceRequest = Shapes::StructureShape.new(name: 'GetDirectQueryDataSourceRequest')
     GetDirectQueryDataSourceResponse = Shapes::StructureShape.new(name: 'GetDirectQueryDataSourceResponse')
     GetDomainMaintenanceStatusRequest = Shapes::StructureShape.new(name: 'GetDomainMaintenanceStatusRequest')
     GetDomainMaintenanceStatusResponse = Shapes::StructureShape.new(name: 'GetDomainMaintenanceStatusResponse')
+    GetIndexRequest = Shapes::StructureShape.new(name: 'GetIndexRequest')
+    GetIndexResponse = Shapes::StructureShape.new(name: 'GetIndexResponse')
     GetPackageVersionHistoryRequest = Shapes::StructureShape.new(name: 'GetPackageVersionHistoryRequest')
     GetPackageVersionHistoryResponse = Shapes::StructureShape.new(name: 'GetPackageVersionHistoryResponse')
     GetUpgradeHistoryRequest = Shapes::StructureShape.new(name: 'GetUpgradeHistoryRequest')
@@ -280,6 +288,9 @@ module Aws::OpenSearchService
     InboundConnectionStatus = Shapes::StructureShape.new(name: 'InboundConnectionStatus')
     InboundConnectionStatusCode = Shapes::StringShape.new(name: 'InboundConnectionStatusCode')
     InboundConnections = Shapes::ListShape.new(name: 'InboundConnections')
+    IndexName = Shapes::StringShape.new(name: 'IndexName')
+    IndexSchema = Shapes::DocumentShape.new(name: 'IndexSchema', document: true)
+    IndexStatus = Shapes::StringShape.new(name: 'IndexStatus')
     InitiatedBy = Shapes::StringShape.new(name: 'InitiatedBy')
     InstanceCount = Shapes::IntegerShape.new(name: 'InstanceCount')
     InstanceCountLimits = Shapes::StructureShape.new(name: 'InstanceCountLimits')
@@ -416,6 +427,8 @@ module Aws::OpenSearchService
     PropertyValueType = Shapes::StringShape.new(name: 'PropertyValueType')
     PurchaseReservedInstanceOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseReservedInstanceOfferingRequest')
     PurchaseReservedInstanceOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseReservedInstanceOfferingResponse')
+    PutDefaultApplicationSettingRequest = Shapes::StructureShape.new(name: 'PutDefaultApplicationSettingRequest')
+    PutDefaultApplicationSettingResponse = Shapes::StructureShape.new(name: 'PutDefaultApplicationSettingResponse')
     RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
     RecurringChargeList = Shapes::ListShape.new(name: 'RecurringChargeList')
     ReferencePath = Shapes::StringShape.new(name: 'ReferencePath')
@@ -457,6 +470,7 @@ module Aws::OpenSearchService
     ScheduledAutoTuneSeverityType = Shapes::StringShape.new(name: 'ScheduledAutoTuneSeverityType')
     ScheduledBy = Shapes::StringShape.new(name: 'ScheduledBy')
     SecurityLakeDirectQueryDataSource = Shapes::StructureShape.new(name: 'SecurityLakeDirectQueryDataSource')
+    ServerlessVectorAcceleration = Shapes::StructureShape.new(name: 'ServerlessVectorAcceleration')
     ServiceSoftwareOptions = Shapes::StructureShape.new(name: 'ServiceSoftwareOptions')
     ServiceUrl = Shapes::StringShape.new(name: 'ServiceUrl')
     SkipUnavailableStatus = Shapes::StringShape.new(name: 'SkipUnavailableStatus')
@@ -489,6 +503,7 @@ module Aws::OpenSearchService
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeUnit = Shapes::StringShape.new(name: 'TimeUnit')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TotalNumberOfStages = Shapes::IntegerShape.new(name: 'TotalNumberOfStages')
@@ -502,6 +517,8 @@ module Aws::OpenSearchService
     UpdateDirectQueryDataSourceResponse = Shapes::StructureShape.new(name: 'UpdateDirectQueryDataSourceResponse')
     UpdateDomainConfigRequest = Shapes::StructureShape.new(name: 'UpdateDomainConfigRequest')
     UpdateDomainConfigResponse = Shapes::StructureShape.new(name: 'UpdateDomainConfigResponse')
+    UpdateIndexRequest = Shapes::StructureShape.new(name: 'UpdateIndexRequest')
+    UpdateIndexResponse = Shapes::StructureShape.new(name: 'UpdateIndexResponse')
     UpdatePackageRequest = Shapes::StructureShape.new(name: 'UpdatePackageRequest')
     UpdatePackageResponse = Shapes::StructureShape.new(name: 'UpdatePackageResponse')
     UpdatePackageScopeRequest = Shapes::StructureShape.new(name: 'UpdatePackageScopeRequest')
@@ -550,10 +567,12 @@ module Aws::OpenSearchService
 
     AIMLOptionsInput.add_member(:natural_language_query_generation_options, Shapes::ShapeRef.new(shape: NaturalLanguageQueryGenerationOptionsInput, location_name: "NaturalLanguageQueryGenerationOptions"))
     AIMLOptionsInput.add_member(:s3_vectors_engine, Shapes::ShapeRef.new(shape: S3VectorsEngine, location_name: "S3VectorsEngine"))
+    AIMLOptionsInput.add_member(:serverless_vector_acceleration, Shapes::ShapeRef.new(shape: ServerlessVectorAcceleration, location_name: "ServerlessVectorAcceleration"))
     AIMLOptionsInput.struct_class = Types::AIMLOptionsInput
 
     AIMLOptionsOutput.add_member(:natural_language_query_generation_options, Shapes::ShapeRef.new(shape: NaturalLanguageQueryGenerationOptionsOutput, location_name: "NaturalLanguageQueryGenerationOptions"))
     AIMLOptionsOutput.add_member(:s3_vectors_engine, Shapes::ShapeRef.new(shape: S3VectorsEngine, location_name: "S3VectorsEngine"))
+    AIMLOptionsOutput.add_member(:serverless_vector_acceleration, Shapes::ShapeRef.new(shape: ServerlessVectorAcceleration, location_name: "ServerlessVectorAcceleration"))
     AIMLOptionsOutput.struct_class = Types::AIMLOptionsOutput
 
     AIMLOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: AIMLOptionsOutput, location_name: "Options"))
@@ -884,6 +903,14 @@ module Aws::OpenSearchService
     CreateDomainResponse.add_member(:domain_status, Shapes::ShapeRef.new(shape: DomainStatus, location_name: "DomainStatus"))
     CreateDomainResponse.struct_class = Types::CreateDomainResponse
 
+    CreateIndexRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    CreateIndexRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
+    CreateIndexRequest.add_member(:index_schema, Shapes::ShapeRef.new(shape: IndexSchema, required: true, location_name: "IndexSchema"))
+    CreateIndexRequest.struct_class = Types::CreateIndexRequest
+
+    CreateIndexResponse.add_member(:status, Shapes::ShapeRef.new(shape: IndexStatus, required: true, location_name: "Status"))
+    CreateIndexResponse.struct_class = Types::CreateIndexResponse
+
     CreateOutboundConnectionRequest.add_member(:local_domain_info, Shapes::ShapeRef.new(shape: DomainInformationContainer, required: true, location_name: "LocalDomainInfo"))
     CreateOutboundConnectionRequest.add_member(:remote_domain_info, Shapes::ShapeRef.new(shape: DomainInformationContainer, required: true, location_name: "RemoteDomainInfo"))
     CreateOutboundConnectionRequest.add_member(:connection_alias, Shapes::ShapeRef.new(shape: ConnectionAlias, required: true, location_name: "ConnectionAlias"))
@@ -970,6 +997,13 @@ module Aws::OpenSearchService
 
     DeleteInboundConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: InboundConnection, location_name: "Connection"))
     DeleteInboundConnectionResponse.struct_class = Types::DeleteInboundConnectionResponse
+
+    DeleteIndexRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    DeleteIndexRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location: "uri", location_name: "IndexName"))
+    DeleteIndexRequest.struct_class = Types::DeleteIndexRequest
+
+    DeleteIndexResponse.add_member(:status, Shapes::ShapeRef.new(shape: IndexStatus, required: true, location_name: "Status"))
+    DeleteIndexResponse.struct_class = Types::DeleteIndexResponse
 
     DeleteOutboundConnectionRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location: "uri", location_name: "ConnectionId"))
     DeleteOutboundConnectionRequest.struct_class = Types::DeleteOutboundConnectionRequest
@@ -1370,6 +1404,11 @@ module Aws::OpenSearchService
     GetDataSourceResponse.add_member(:status, Shapes::ShapeRef.new(shape: DataSourceStatus, location_name: "Status"))
     GetDataSourceResponse.struct_class = Types::GetDataSourceResponse
 
+    GetDefaultApplicationSettingRequest.struct_class = Types::GetDefaultApplicationSettingRequest
+
+    GetDefaultApplicationSettingResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "applicationArn"))
+    GetDefaultApplicationSettingResponse.struct_class = Types::GetDefaultApplicationSettingResponse
+
     GetDirectQueryDataSourceRequest.add_member(:data_source_name, Shapes::ShapeRef.new(shape: DirectQueryDataSourceName, required: true, location: "uri", location_name: "DataSourceName"))
     GetDirectQueryDataSourceRequest.struct_class = Types::GetDirectQueryDataSourceRequest
 
@@ -1391,6 +1430,13 @@ module Aws::OpenSearchService
     GetDomainMaintenanceStatusResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "CreatedAt"))
     GetDomainMaintenanceStatusResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "UpdatedAt"))
     GetDomainMaintenanceStatusResponse.struct_class = Types::GetDomainMaintenanceStatusResponse
+
+    GetIndexRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    GetIndexRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location: "uri", location_name: "IndexName"))
+    GetIndexRequest.struct_class = Types::GetIndexRequest
+
+    GetIndexResponse.add_member(:index_schema, Shapes::ShapeRef.new(shape: IndexSchema, required: true, location_name: "IndexSchema"))
+    GetIndexResponse.struct_class = Types::GetIndexResponse
 
     GetPackageVersionHistoryRequest.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, required: true, location: "uri", location_name: "PackageID"))
     GetPackageVersionHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1805,6 +1851,13 @@ module Aws::OpenSearchService
     PurchaseReservedInstanceOfferingResponse.add_member(:reservation_name, Shapes::ShapeRef.new(shape: ReservationToken, location_name: "ReservationName"))
     PurchaseReservedInstanceOfferingResponse.struct_class = Types::PurchaseReservedInstanceOfferingResponse
 
+    PutDefaultApplicationSettingRequest.add_member(:application_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "applicationArn"))
+    PutDefaultApplicationSettingRequest.add_member(:set_as_default, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "setAsDefault"))
+    PutDefaultApplicationSettingRequest.struct_class = Types::PutDefaultApplicationSettingRequest
+
+    PutDefaultApplicationSettingResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "applicationArn"))
+    PutDefaultApplicationSettingResponse.struct_class = Types::PutDefaultApplicationSettingResponse
+
     RecurringCharge.add_member(:recurring_charge_amount, Shapes::ShapeRef.new(shape: Double, location_name: "RecurringChargeAmount"))
     RecurringCharge.add_member(:recurring_charge_frequency, Shapes::ShapeRef.new(shape: String, location_name: "RecurringChargeFrequency"))
     RecurringCharge.struct_class = Types::RecurringCharge
@@ -1910,6 +1963,9 @@ module Aws::OpenSearchService
     SecurityLakeDirectQueryDataSource.add_member(:role_arn, Shapes::ShapeRef.new(shape: DirectQueryDataSourceRoleArn, required: true, location_name: "RoleArn"))
     SecurityLakeDirectQueryDataSource.struct_class = Types::SecurityLakeDirectQueryDataSource
 
+    ServerlessVectorAcceleration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    ServerlessVectorAcceleration.struct_class = Types::ServerlessVectorAcceleration
+
     ServiceSoftwareOptions.add_member(:current_version, Shapes::ShapeRef.new(shape: String, location_name: "CurrentVersion"))
     ServiceSoftwareOptions.add_member(:new_version, Shapes::ShapeRef.new(shape: String, location_name: "NewVersion"))
     ServiceSoftwareOptions.add_member(:update_available, Shapes::ShapeRef.new(shape: Boolean, location_name: "UpdateAvailable"))
@@ -1976,6 +2032,8 @@ module Aws::OpenSearchService
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
 
+    ThrottlingException.struct_class = Types::ThrottlingException
+
     UpdateApplicationRequest.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "id"))
     UpdateApplicationRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSources, location_name: "dataSources"))
     UpdateApplicationRequest.add_member(:app_configs, Shapes::ShapeRef.new(shape: AppConfigs, location_name: "appConfigs"))
@@ -2037,6 +2095,14 @@ module Aws::OpenSearchService
     UpdateDomainConfigResponse.add_member(:dry_run_results, Shapes::ShapeRef.new(shape: DryRunResults, location_name: "DryRunResults"))
     UpdateDomainConfigResponse.add_member(:dry_run_progress_status, Shapes::ShapeRef.new(shape: DryRunProgressStatus, location_name: "DryRunProgressStatus"))
     UpdateDomainConfigResponse.struct_class = Types::UpdateDomainConfigResponse
+
+    UpdateIndexRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    UpdateIndexRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location: "uri", location_name: "IndexName"))
+    UpdateIndexRequest.add_member(:index_schema, Shapes::ShapeRef.new(shape: IndexSchema, required: true, location_name: "IndexSchema"))
+    UpdateIndexRequest.struct_class = Types::UpdateIndexRequest
+
+    UpdateIndexResponse.add_member(:status, Shapes::ShapeRef.new(shape: IndexStatus, required: true, location_name: "Status"))
+    UpdateIndexResponse.struct_class = Types::UpdateIndexResponse
 
     UpdatePackageRequest.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, required: true, location_name: "PackageID"))
     UpdatePackageRequest.add_member(:package_source, Shapes::ShapeRef.new(shape: PackageSource, required: true, location_name: "PackageSource"))
@@ -2336,6 +2402,22 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:create_index, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateIndex"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/index"
+        o.input = Shapes::ShapeRef.new(shape: CreateIndexRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateIndexResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_outbound_connection, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateOutboundConnection"
         o.http_method = "POST"
@@ -2439,6 +2521,21 @@ module Aws::OpenSearchService
         o.output = Shapes::ShapeRef.new(shape: DeleteInboundConnectionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+      end)
+
+      api.add_operation(:delete_index, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteIndex"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/index/{IndexName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteIndexRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteIndexResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_outbound_connection, Seahorse::Model::Operation.new.tap do |o|
@@ -2764,6 +2861,18 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: DependencyFailureException)
       end)
 
+      api.add_operation(:get_default_application_setting, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDefaultApplicationSetting"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-01-01/opensearch/defaultApplicationSetting"
+        o.input = Shapes::ShapeRef.new(shape: GetDefaultApplicationSettingRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDefaultApplicationSettingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:get_direct_query_data_source, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetDirectQueryDataSource"
         o.http_method = "GET"
@@ -2788,6 +2897,21 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+      end)
+
+      api.add_operation(:get_index, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIndex"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/index/{IndexName}"
+        o.input = Shapes::ShapeRef.new(shape: GetIndexRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetIndexResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_package_version_history, Seahorse::Model::Operation.new.tap do |o|
@@ -3071,6 +3195,18 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
+      api.add_operation(:put_default_application_setting, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutDefaultApplicationSetting"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2021-01-01/opensearch/defaultApplicationSetting"
+        o.input = Shapes::ShapeRef.new(shape: PutDefaultApplicationSettingRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutDefaultApplicationSettingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:reject_inbound_connection, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RejectInboundConnection"
         o.http_method = "PUT"
@@ -3184,6 +3320,21 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_index, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateIndex"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/index/{IndexName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateIndexRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateIndexResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_package, Seahorse::Model::Operation.new.tap do |o|

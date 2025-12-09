@@ -324,6 +324,11 @@ module Aws::OpenSearchServerless
     #   Details about an OpenSearch Serverless collection.
     #   @return [String]
     #
+    # @!attribute [rw] vector_options
+    #   Configuration options for vector search capabilities in the
+    #   collection.
+    #   @return [Types::VectorOptions]
+    #
     # @!attribute [rw] created_date
     #   The Epoch time when the collection was created.
     #   @return [Integer]
@@ -367,6 +372,7 @@ module Aws::OpenSearchServerless
       :arn,
       :kms_key_arn,
       :standby_replicas,
+      :vector_options,
       :created_date,
       :last_modified_date,
       :collection_endpoint,
@@ -558,6 +564,11 @@ module Aws::OpenSearchServerless
     #   Creates details about an OpenSearch Serverless collection.
     #   @return [String]
     #
+    # @!attribute [rw] vector_options
+    #   Configuration options for vector search capabilities in the
+    #   collection.
+    #   @return [Types::VectorOptions]
+    #
     # @!attribute [rw] created_date
     #   The Epoch time when the collection was created.
     #   @return [Integer]
@@ -577,6 +588,7 @@ module Aws::OpenSearchServerless
       :arn,
       :kms_key_arn,
       :standby_replicas,
+      :vector_options,
       :created_date,
       :last_modified_date)
       SENSITIVE = []
@@ -604,6 +616,11 @@ module Aws::OpenSearchServerless
     #   Indicates whether standby replicas should be used for a collection.
     #   @return [String]
     #
+    # @!attribute [rw] vector_options
+    #   Configuration options for vector search capabilities in the
+    #   collection.
+    #   @return [Types::VectorOptions]
+    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -620,6 +637,7 @@ module Aws::OpenSearchServerless
       :description,
       :tags,
       :standby_replicas,
+      :vector_options,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2930,6 +2948,22 @@ module Aws::OpenSearchServerless
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration options for vector search capabilities in an OpenSearch
+    # Serverless collection.
+    #
+    # @!attribute [rw] serverless_vector_acceleration
+    #   Specifies whether serverless vector acceleration is enabled for the
+    #   collection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/VectorOptions AWS API Documentation
+    #
+    class VectorOptions < Struct.new(
+      :serverless_vector_acceleration)
       SENSITIVE = []
       include Aws::Structure
     end

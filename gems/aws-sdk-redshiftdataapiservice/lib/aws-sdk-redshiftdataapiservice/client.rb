@@ -526,6 +526,44 @@ module Aws::RedshiftDataAPIService
     #
     # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
     #
+    # @option params [required, Array<String>] :sqls
+    #   One or more SQL statements to run. The SQL statements are run as a
+    #   single transaction. They run serially in the order of the array.
+    #   Subsequent SQL statements don't start until the previous statement in
+    #   the array completes. If any SQL statement fails, then because they are
+    #   run as one transaction, all work is rolled back.
+    #
+    # @option params [String] :cluster_identifier
+    #   The cluster identifier. This parameter is required when connecting to
+    #   a cluster and authenticating using either Secrets Manager or temporary
+    #   credentials.
+    #
+    # @option params [String] :secret_arn
+    #   The name or ARN of the secret that enables access to the database.
+    #   This parameter is required when authenticating using Secrets Manager.
+    #
+    # @option params [String] :db_user
+    #   The database user name. This parameter is required when connecting to
+    #   a cluster as a database user and authenticating using temporary
+    #   credentials.
+    #
+    # @option params [String] :database
+    #   The name of the database. This parameter is required when
+    #   authenticating using either Secrets Manager or temporary credentials.
+    #
+    # @option params [Boolean] :with_event
+    #   A value that indicates whether to send an event to the Amazon
+    #   EventBridge event bus after the SQL statements run.
+    #
+    # @option params [String] :statement_name
+    #   The name of the SQL statements. You can name the SQL statements when
+    #   you create them to identify the query.
+    #
+    # @option params [String] :workgroup_name
+    #   The serverless workgroup name or Amazon Resource Name (ARN). This
+    #   parameter is required when connecting to a serverless workgroup and
+    #   authenticating using either Secrets Manager or temporary credentials.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -533,97 +571,59 @@ module Aws::RedshiftDataAPIService
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [String] :cluster_identifier
-    #   The cluster identifier. This parameter is required when connecting to
-    #   a cluster and authenticating using either Secrets Manager or temporary
-    #   credentials.
-    #
-    # @option params [String] :database
-    #   The name of the database. This parameter is required when
-    #   authenticating using either Secrets Manager or temporary credentials.
-    #
-    # @option params [String] :db_user
-    #   The database user name. This parameter is required when connecting to
-    #   a cluster as a database user and authenticating using temporary
-    #   credentials.
-    #
     # @option params [String] :result_format
     #   The data format of the result of the SQL statement. If no format is
     #   specified, the default is JSON.
-    #
-    # @option params [String] :secret_arn
-    #   The name or ARN of the secret that enables access to the database.
-    #   This parameter is required when authenticating using Secrets Manager.
-    #
-    # @option params [String] :session_id
-    #   The session identifier of the query.
     #
     # @option params [Integer] :session_keep_alive_seconds
     #   The number of seconds to keep the session alive after the query
     #   finishes. The maximum time a session can keep alive is 24 hours. After
     #   24 hours, the session is forced closed and the query is terminated.
     #
-    # @option params [required, Array<String>] :sqls
-    #   One or more SQL statements to run.      The SQL statements are run as
-    #   a single transaction. They run serially in the order of the array.
-    #   Subsequent SQL statements don't start until the previous statement in
-    #   the array completes. If any SQL statement fails, then because they are
-    #   run as one transaction, all work is rolled back.</p>
-    #
-    # @option params [String] :statement_name
-    #   The name of the SQL statements. You can name the SQL statements when
-    #   you create them to identify the query.
-    #
-    # @option params [Boolean] :with_event
-    #   A value that indicates whether to send an event to the Amazon
-    #   EventBridge event bus after the SQL statements run.
-    #
-    # @option params [String] :workgroup_name
-    #   The serverless workgroup name or Amazon Resource Name (ARN). This
-    #   parameter is required when connecting to a serverless workgroup and
-    #   authenticating using either Secrets Manager or temporary credentials.
+    # @option params [String] :session_id
+    #   The session identifier of the query.
     #
     # @return [Types::BatchExecuteStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::BatchExecuteStatementOutput#cluster_identifier #cluster_identifier} => String
-    #   * {Types::BatchExecuteStatementOutput#created_at #created_at} => Time
-    #   * {Types::BatchExecuteStatementOutput#database #database} => String
-    #   * {Types::BatchExecuteStatementOutput#db_groups #db_groups} => Array&lt;String&gt;
-    #   * {Types::BatchExecuteStatementOutput#db_user #db_user} => String
     #   * {Types::BatchExecuteStatementOutput#id #id} => String
+    #   * {Types::BatchExecuteStatementOutput#created_at #created_at} => Time
+    #   * {Types::BatchExecuteStatementOutput#cluster_identifier #cluster_identifier} => String
+    #   * {Types::BatchExecuteStatementOutput#db_user #db_user} => String
+    #   * {Types::BatchExecuteStatementOutput#db_groups #db_groups} => Array&lt;String&gt;
+    #   * {Types::BatchExecuteStatementOutput#database #database} => String
     #   * {Types::BatchExecuteStatementOutput#secret_arn #secret_arn} => String
-    #   * {Types::BatchExecuteStatementOutput#session_id #session_id} => String
     #   * {Types::BatchExecuteStatementOutput#workgroup_name #workgroup_name} => String
+    #   * {Types::BatchExecuteStatementOutput#session_id #session_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_execute_statement({
-    #     client_token: "ClientToken",
-    #     cluster_identifier: "ClusterIdentifierString",
-    #     database: "String",
-    #     db_user: "String",
-    #     result_format: "JSON", # accepts JSON, CSV
-    #     secret_arn: "SecretArn",
-    #     session_id: "UUID",
-    #     session_keep_alive_seconds: 1,
     #     sqls: ["StatementString"], # required
-    #     statement_name: "StatementNameString",
+    #     cluster_identifier: "ClusterIdentifierString",
+    #     secret_arn: "SecretArn",
+    #     db_user: "String",
+    #     database: "String",
     #     with_event: false,
+    #     statement_name: "StatementNameString",
     #     workgroup_name: "WorkgroupNameString",
+    #     client_token: "ClientToken",
+    #     result_format: "JSON", # accepts JSON, CSV
+    #     session_keep_alive_seconds: 1,
+    #     session_id: "UUID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.cluster_identifier #=> String
+    #   resp.id #=> String
     #   resp.created_at #=> Time
-    #   resp.database #=> String
+    #   resp.cluster_identifier #=> String
+    #   resp.db_user #=> String
     #   resp.db_groups #=> Array
     #   resp.db_groups[0] #=> String
-    #   resp.db_user #=> String
-    #   resp.id #=> String
+    #   resp.database #=> String
     #   resp.secret_arn #=> String
-    #   resp.session_id #=> String
     #   resp.workgroup_name #=> String
+    #   resp.session_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/BatchExecuteStatement AWS API Documentation
     #
@@ -697,27 +697,27 @@ module Aws::RedshiftDataAPIService
     #
     # @return [Types::DescribeStatementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeStatementResponse#cluster_identifier #cluster_identifier} => String
-    #   * {Types::DescribeStatementResponse#created_at #created_at} => Time
-    #   * {Types::DescribeStatementResponse#database #database} => String
+    #   * {Types::DescribeStatementResponse#id #id} => String
+    #   * {Types::DescribeStatementResponse#secret_arn #secret_arn} => String
     #   * {Types::DescribeStatementResponse#db_user #db_user} => String
+    #   * {Types::DescribeStatementResponse#database #database} => String
+    #   * {Types::DescribeStatementResponse#cluster_identifier #cluster_identifier} => String
     #   * {Types::DescribeStatementResponse#duration #duration} => Integer
     #   * {Types::DescribeStatementResponse#error #error} => String
-    #   * {Types::DescribeStatementResponse#has_result_set #has_result_set} => Boolean
-    #   * {Types::DescribeStatementResponse#id #id} => String
-    #   * {Types::DescribeStatementResponse#query_parameters #query_parameters} => Array&lt;Types::SqlParameter&gt;
-    #   * {Types::DescribeStatementResponse#query_string #query_string} => String
+    #   * {Types::DescribeStatementResponse#status #status} => String
+    #   * {Types::DescribeStatementResponse#created_at #created_at} => Time
+    #   * {Types::DescribeStatementResponse#updated_at #updated_at} => Time
     #   * {Types::DescribeStatementResponse#redshift_pid #redshift_pid} => Integer
-    #   * {Types::DescribeStatementResponse#redshift_query_id #redshift_query_id} => Integer
-    #   * {Types::DescribeStatementResponse#result_format #result_format} => String
+    #   * {Types::DescribeStatementResponse#has_result_set #has_result_set} => Boolean
+    #   * {Types::DescribeStatementResponse#query_string #query_string} => String
     #   * {Types::DescribeStatementResponse#result_rows #result_rows} => Integer
     #   * {Types::DescribeStatementResponse#result_size #result_size} => Integer
-    #   * {Types::DescribeStatementResponse#secret_arn #secret_arn} => String
-    #   * {Types::DescribeStatementResponse#session_id #session_id} => String
-    #   * {Types::DescribeStatementResponse#status #status} => String
+    #   * {Types::DescribeStatementResponse#redshift_query_id #redshift_query_id} => Integer
+    #   * {Types::DescribeStatementResponse#query_parameters #query_parameters} => Array&lt;Types::SqlParameter&gt;
     #   * {Types::DescribeStatementResponse#sub_statements #sub_statements} => Array&lt;Types::SubStatementData&gt;
-    #   * {Types::DescribeStatementResponse#updated_at #updated_at} => Time
     #   * {Types::DescribeStatementResponse#workgroup_name #workgroup_name} => String
+    #   * {Types::DescribeStatementResponse#result_format #result_format} => String
+    #   * {Types::DescribeStatementResponse#session_id #session_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -727,40 +727,40 @@ module Aws::RedshiftDataAPIService
     #
     # @example Response structure
     #
-    #   resp.cluster_identifier #=> String
-    #   resp.created_at #=> Time
-    #   resp.database #=> String
+    #   resp.id #=> String
+    #   resp.secret_arn #=> String
     #   resp.db_user #=> String
+    #   resp.database #=> String
+    #   resp.cluster_identifier #=> String
     #   resp.duration #=> Integer
     #   resp.error #=> String
+    #   resp.status #=> String, one of "SUBMITTED", "PICKED", "STARTED", "FINISHED", "ABORTED", "FAILED", "ALL"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.redshift_pid #=> Integer
     #   resp.has_result_set #=> Boolean
-    #   resp.id #=> String
+    #   resp.query_string #=> String
+    #   resp.result_rows #=> Integer
+    #   resp.result_size #=> Integer
+    #   resp.redshift_query_id #=> Integer
     #   resp.query_parameters #=> Array
     #   resp.query_parameters[0].name #=> String
     #   resp.query_parameters[0].value #=> String
-    #   resp.query_string #=> String
-    #   resp.redshift_pid #=> Integer
-    #   resp.redshift_query_id #=> Integer
-    #   resp.result_format #=> String, one of "JSON", "CSV"
-    #   resp.result_rows #=> Integer
-    #   resp.result_size #=> Integer
-    #   resp.secret_arn #=> String
-    #   resp.session_id #=> String
-    #   resp.status #=> String, one of "SUBMITTED", "PICKED", "STARTED", "FINISHED", "ABORTED", "FAILED", "ALL"
     #   resp.sub_statements #=> Array
-    #   resp.sub_statements[0].created_at #=> Time
+    #   resp.sub_statements[0].id #=> String
     #   resp.sub_statements[0].duration #=> Integer
     #   resp.sub_statements[0].error #=> String
-    #   resp.sub_statements[0].has_result_set #=> Boolean
-    #   resp.sub_statements[0].id #=> String
+    #   resp.sub_statements[0].status #=> String, one of "SUBMITTED", "PICKED", "STARTED", "FINISHED", "ABORTED", "FAILED"
+    #   resp.sub_statements[0].created_at #=> Time
+    #   resp.sub_statements[0].updated_at #=> Time
     #   resp.sub_statements[0].query_string #=> String
-    #   resp.sub_statements[0].redshift_query_id #=> Integer
     #   resp.sub_statements[0].result_rows #=> Integer
     #   resp.sub_statements[0].result_size #=> Integer
-    #   resp.sub_statements[0].status #=> String, one of "SUBMITTED", "PICKED", "STARTED", "FINISHED", "ABORTED", "FAILED"
-    #   resp.sub_statements[0].updated_at #=> Time
-    #   resp.updated_at #=> Time
+    #   resp.sub_statements[0].redshift_query_id #=> Integer
+    #   resp.sub_statements[0].has_result_set #=> Boolean
     #   resp.workgroup_name #=> String
+    #   resp.result_format #=> String, one of "JSON", "CSV"
+    #   resp.session_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/DescribeStatement AWS API Documentation
     #
@@ -819,24 +819,32 @@ module Aws::RedshiftDataAPIService
     #   a cluster and authenticating using either Secrets Manager or temporary
     #   credentials.
     #
-    # @option params [String] :connected_database
-    #   A database name. The connected database is specified when you connect
-    #   with your authentication credentials.
-    #
-    # @option params [required, String] :database
-    #   The name of the database that contains the tables to be described. If
-    #   `ConnectedDatabase` is not specified, this is also the database to
-    #   connect to with your authentication credentials.
+    # @option params [String] :secret_arn
+    #   The name or ARN of the secret that enables access to the database.
+    #   This parameter is required when authenticating using Secrets Manager.
     #
     # @option params [String] :db_user
     #   The database user name. This parameter is required when connecting to
     #   a cluster as a database user and authenticating using temporary
     #   credentials.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of tables to return in the response. If more tables
-    #   exist than fit in one response, then `NextToken` is returned to page
-    #   through the results.
+    # @option params [required, String] :database
+    #   The name of the database that contains the tables to be described. If
+    #   `ConnectedDatabase` is not specified, this is also the database to
+    #   connect to with your authentication credentials.
+    #
+    # @option params [String] :connected_database
+    #   A database name. The connected database is specified when you connect
+    #   with your authentication credentials.
+    #
+    # @option params [String] :schema
+    #   The schema that contains the table. If no schema is specified, then
+    #   matching tables for all schemas are returned.
+    #
+    # @option params [String] :table
+    #   The table name. If no table is specified, then all tables for all
+    #   matching schemas are returned. If no table and no schema is specified,
+    #   then all tables for all schemas in the database are returned
     #
     # @option params [String] :next_token
     #   A value that indicates the starting point for the next set of response
@@ -846,18 +854,10 @@ module Aws::RedshiftDataAPIService
     #   command. If the NextToken field is empty, all response records have
     #   been retrieved for the request.
     #
-    # @option params [String] :schema
-    #   The schema that contains the table. If no schema is specified, then
-    #   matching tables for all schemas are returned.
-    #
-    # @option params [String] :secret_arn
-    #   The name or ARN of the secret that enables access to the database.
-    #   This parameter is required when authenticating using Secrets Manager.
-    #
-    # @option params [String] :table
-    #   The table name. If no table is specified, then all tables for all
-    #   matching schemas are returned. If no table and no schema is specified,
-    #   then all tables for all schemas in the database are returned
+    # @option params [Integer] :max_results
+    #   The maximum number of tables to return in the response. If more tables
+    #   exist than fit in one response, then `NextToken` is returned to page
+    #   through the results.
     #
     # @option params [String] :workgroup_name
     #   The serverless workgroup name or Amazon Resource Name (ARN). This
@@ -866,9 +866,9 @@ module Aws::RedshiftDataAPIService
     #
     # @return [Types::DescribeTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::DescribeTableResponse#table_name #table_name} => String
     #   * {Types::DescribeTableResponse#column_list #column_list} => Array&lt;Types::ColumnMetadata&gt;
     #   * {Types::DescribeTableResponse#next_token #next_token} => String
-    #   * {Types::DescribeTableResponse#table_name #table_name} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -876,26 +876,25 @@ module Aws::RedshiftDataAPIService
     #
     #   resp = client.describe_table({
     #     cluster_identifier: "ClusterIdentifierString",
-    #     connected_database: "String",
-    #     database: "String", # required
-    #     db_user: "String",
-    #     max_results: 1,
-    #     next_token: "String",
-    #     schema: "String",
     #     secret_arn: "SecretArn",
+    #     db_user: "String",
+    #     database: "String", # required
+    #     connected_database: "String",
+    #     schema: "String",
     #     table: "String",
+    #     next_token: "String",
+    #     max_results: 1,
     #     workgroup_name: "WorkgroupNameString",
     #   })
     #
     # @example Response structure
     #
+    #   resp.table_name #=> String
     #   resp.column_list #=> Array
-    #   resp.column_list[0].column_default #=> String
     #   resp.column_list[0].is_case_sensitive #=> Boolean
     #   resp.column_list[0].is_currency #=> Boolean
     #   resp.column_list[0].is_signed #=> Boolean
     #   resp.column_list[0].label #=> String
-    #   resp.column_list[0].length #=> Integer
     #   resp.column_list[0].name #=> String
     #   resp.column_list[0].nullable #=> Integer
     #   resp.column_list[0].precision #=> Integer
@@ -903,8 +902,9 @@ module Aws::RedshiftDataAPIService
     #   resp.column_list[0].schema_name #=> String
     #   resp.column_list[0].table_name #=> String
     #   resp.column_list[0].type_name #=> String
+    #   resp.column_list[0].length #=> Integer
+    #   resp.column_list[0].column_default #=> String
     #   resp.next_token #=> String
-    #   resp.table_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/DescribeTable AWS API Documentation
     #
@@ -958,6 +958,43 @@ module Aws::RedshiftDataAPIService
     #
     # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
     #
+    # @option params [required, String] :sql
+    #   The SQL statement text to run.
+    #
+    # @option params [String] :cluster_identifier
+    #   The cluster identifier. This parameter is required when connecting to
+    #   a cluster and authenticating using either Secrets Manager or temporary
+    #   credentials.
+    #
+    # @option params [String] :secret_arn
+    #   The name or ARN of the secret that enables access to the database.
+    #   This parameter is required when authenticating using Secrets Manager.
+    #
+    # @option params [String] :db_user
+    #   The database user name. This parameter is required when connecting to
+    #   a cluster as a database user and authenticating using temporary
+    #   credentials.
+    #
+    # @option params [String] :database
+    #   The name of the database. This parameter is required when
+    #   authenticating using either Secrets Manager or temporary credentials.
+    #
+    # @option params [Boolean] :with_event
+    #   A value that indicates whether to send an event to the Amazon
+    #   EventBridge event bus after the SQL statement runs.
+    #
+    # @option params [String] :statement_name
+    #   The name of the SQL statement. You can name the SQL statement when you
+    #   create it to identify the query.
+    #
+    # @option params [Array<Types::SqlParameter>] :parameters
+    #   The parameters for the SQL statement.
+    #
+    # @option params [String] :workgroup_name
+    #   The serverless workgroup name or Amazon Resource Name (ARN). This
+    #   parameter is required when connecting to a serverless workgroup and
+    #   authenticating using either Secrets Manager or temporary credentials.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -965,102 +1002,65 @@ module Aws::RedshiftDataAPIService
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [String] :cluster_identifier
-    #   The cluster identifier. This parameter is required when connecting to
-    #   a cluster and authenticating using either Secrets Manager or temporary
-    #   credentials.
-    #
-    # @option params [String] :database
-    #   The name of the database. This parameter is required when
-    #   authenticating using either Secrets Manager or temporary credentials.
-    #
-    # @option params [String] :db_user
-    #   The database user name. This parameter is required when connecting to
-    #   a cluster as a database user and authenticating using temporary
-    #   credentials.
-    #
-    # @option params [Array<Types::SqlParameter>] :parameters
-    #   The parameters for the SQL statement.
-    #
     # @option params [String] :result_format
     #   The data format of the result of the SQL statement. If no format is
     #   specified, the default is JSON.
-    #
-    # @option params [String] :secret_arn
-    #   The name or ARN of the secret that enables access to the database.
-    #   This parameter is required when authenticating using Secrets Manager.
-    #
-    # @option params [String] :session_id
-    #   The session identifier of the query.
     #
     # @option params [Integer] :session_keep_alive_seconds
     #   The number of seconds to keep the session alive after the query
     #   finishes. The maximum time a session can keep alive is 24 hours. After
     #   24 hours, the session is forced closed and the query is terminated.
     #
-    # @option params [required, String] :sql
-    #   The SQL statement text to run.
-    #
-    # @option params [String] :statement_name
-    #   The name of the SQL statement. You can name the SQL statement when you
-    #   create it to identify the query.
-    #
-    # @option params [Boolean] :with_event
-    #   A value that indicates whether to send an event to the Amazon
-    #   EventBridge event bus after the SQL statement runs.
-    #
-    # @option params [String] :workgroup_name
-    #   The serverless workgroup name or Amazon Resource Name (ARN). This
-    #   parameter is required when connecting to a serverless workgroup and
-    #   authenticating using either Secrets Manager or temporary credentials.
+    # @option params [String] :session_id
+    #   The session identifier of the query.
     #
     # @return [Types::ExecuteStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ExecuteStatementOutput#cluster_identifier #cluster_identifier} => String
-    #   * {Types::ExecuteStatementOutput#created_at #created_at} => Time
-    #   * {Types::ExecuteStatementOutput#database #database} => String
-    #   * {Types::ExecuteStatementOutput#db_groups #db_groups} => Array&lt;String&gt;
-    #   * {Types::ExecuteStatementOutput#db_user #db_user} => String
     #   * {Types::ExecuteStatementOutput#id #id} => String
+    #   * {Types::ExecuteStatementOutput#created_at #created_at} => Time
+    #   * {Types::ExecuteStatementOutput#cluster_identifier #cluster_identifier} => String
+    #   * {Types::ExecuteStatementOutput#db_user #db_user} => String
+    #   * {Types::ExecuteStatementOutput#db_groups #db_groups} => Array&lt;String&gt;
+    #   * {Types::ExecuteStatementOutput#database #database} => String
     #   * {Types::ExecuteStatementOutput#secret_arn #secret_arn} => String
-    #   * {Types::ExecuteStatementOutput#session_id #session_id} => String
     #   * {Types::ExecuteStatementOutput#workgroup_name #workgroup_name} => String
+    #   * {Types::ExecuteStatementOutput#session_id #session_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.execute_statement({
-    #     client_token: "ClientToken",
+    #     sql: "StatementString", # required
     #     cluster_identifier: "ClusterIdentifierString",
-    #     database: "String",
+    #     secret_arn: "SecretArn",
     #     db_user: "String",
+    #     database: "String",
+    #     with_event: false,
+    #     statement_name: "StatementNameString",
     #     parameters: [
     #       {
     #         name: "ParameterName", # required
     #         value: "ParameterValue", # required
     #       },
     #     ],
-    #     result_format: "JSON", # accepts JSON, CSV
-    #     secret_arn: "SecretArn",
-    #     session_id: "UUID",
-    #     session_keep_alive_seconds: 1,
-    #     sql: "StatementString", # required
-    #     statement_name: "StatementNameString",
-    #     with_event: false,
     #     workgroup_name: "WorkgroupNameString",
+    #     client_token: "ClientToken",
+    #     result_format: "JSON", # accepts JSON, CSV
+    #     session_keep_alive_seconds: 1,
+    #     session_id: "UUID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.cluster_identifier #=> String
+    #   resp.id #=> String
     #   resp.created_at #=> Time
-    #   resp.database #=> String
+    #   resp.cluster_identifier #=> String
+    #   resp.db_user #=> String
     #   resp.db_groups #=> Array
     #   resp.db_groups[0] #=> String
-    #   resp.db_user #=> String
-    #   resp.id #=> String
+    #   resp.database #=> String
     #   resp.secret_arn #=> String
-    #   resp.session_id #=> String
     #   resp.workgroup_name #=> String
+    #   resp.session_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ExecuteStatement AWS API Documentation
     #
@@ -1104,10 +1104,10 @@ module Aws::RedshiftDataAPIService
     #
     # @return [Types::GetStatementResultResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetStatementResultResponse#column_metadata #column_metadata} => Array&lt;Types::ColumnMetadata&gt;
-    #   * {Types::GetStatementResultResponse#next_token #next_token} => String
     #   * {Types::GetStatementResultResponse#records #records} => Array&lt;Array&lt;Types::Field&gt;&gt;
+    #   * {Types::GetStatementResultResponse#column_metadata #column_metadata} => Array&lt;Types::ColumnMetadata&gt;
     #   * {Types::GetStatementResultResponse#total_num_rows #total_num_rows} => Integer
+    #   * {Types::GetStatementResultResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1120,13 +1120,19 @@ module Aws::RedshiftDataAPIService
     #
     # @example Response structure
     #
+    #   resp.records #=> Array
+    #   resp.records[0] #=> Array
+    #   resp.records[0][0].is_null #=> Boolean
+    #   resp.records[0][0].boolean_value #=> Boolean
+    #   resp.records[0][0].long_value #=> Integer
+    #   resp.records[0][0].double_value #=> Float
+    #   resp.records[0][0].string_value #=> String
+    #   resp.records[0][0].blob_value #=> String
     #   resp.column_metadata #=> Array
-    #   resp.column_metadata[0].column_default #=> String
     #   resp.column_metadata[0].is_case_sensitive #=> Boolean
     #   resp.column_metadata[0].is_currency #=> Boolean
     #   resp.column_metadata[0].is_signed #=> Boolean
     #   resp.column_metadata[0].label #=> String
-    #   resp.column_metadata[0].length #=> Integer
     #   resp.column_metadata[0].name #=> String
     #   resp.column_metadata[0].nullable #=> Integer
     #   resp.column_metadata[0].precision #=> Integer
@@ -1134,16 +1140,10 @@ module Aws::RedshiftDataAPIService
     #   resp.column_metadata[0].schema_name #=> String
     #   resp.column_metadata[0].table_name #=> String
     #   resp.column_metadata[0].type_name #=> String
-    #   resp.next_token #=> String
-    #   resp.records #=> Array
-    #   resp.records[0] #=> Array
-    #   resp.records[0][0].blob_value #=> String
-    #   resp.records[0][0].boolean_value #=> Boolean
-    #   resp.records[0][0].double_value #=> Float
-    #   resp.records[0][0].is_null #=> Boolean
-    #   resp.records[0][0].long_value #=> Integer
-    #   resp.records[0][0].string_value #=> String
+    #   resp.column_metadata[0].length #=> Integer
+    #   resp.column_metadata[0].column_default #=> String
     #   resp.total_num_rows #=> Integer
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/GetStatementResult AWS API Documentation
     #
@@ -1186,11 +1186,11 @@ module Aws::RedshiftDataAPIService
     #
     # @return [Types::GetStatementResultV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetStatementResultV2Response#column_metadata #column_metadata} => Array&lt;Types::ColumnMetadata&gt;
-    #   * {Types::GetStatementResultV2Response#next_token #next_token} => String
     #   * {Types::GetStatementResultV2Response#records #records} => Array&lt;Types::QueryRecords&gt;
-    #   * {Types::GetStatementResultV2Response#result_format #result_format} => String
+    #   * {Types::GetStatementResultV2Response#column_metadata #column_metadata} => Array&lt;Types::ColumnMetadata&gt;
     #   * {Types::GetStatementResultV2Response#total_num_rows #total_num_rows} => Integer
+    #   * {Types::GetStatementResultV2Response#result_format #result_format} => String
+    #   * {Types::GetStatementResultV2Response#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1203,13 +1203,13 @@ module Aws::RedshiftDataAPIService
     #
     # @example Response structure
     #
+    #   resp.records #=> Array
+    #   resp.records[0].csv_records #=> String
     #   resp.column_metadata #=> Array
-    #   resp.column_metadata[0].column_default #=> String
     #   resp.column_metadata[0].is_case_sensitive #=> Boolean
     #   resp.column_metadata[0].is_currency #=> Boolean
     #   resp.column_metadata[0].is_signed #=> Boolean
     #   resp.column_metadata[0].label #=> String
-    #   resp.column_metadata[0].length #=> Integer
     #   resp.column_metadata[0].name #=> String
     #   resp.column_metadata[0].nullable #=> Integer
     #   resp.column_metadata[0].precision #=> Integer
@@ -1217,11 +1217,11 @@ module Aws::RedshiftDataAPIService
     #   resp.column_metadata[0].schema_name #=> String
     #   resp.column_metadata[0].table_name #=> String
     #   resp.column_metadata[0].type_name #=> String
-    #   resp.next_token #=> String
-    #   resp.records #=> Array
-    #   resp.records[0].csv_records #=> String
-    #   resp.result_format #=> String, one of "JSON", "CSV"
+    #   resp.column_metadata[0].length #=> Integer
+    #   resp.column_metadata[0].column_default #=> String
     #   resp.total_num_rows #=> Integer
+    #   resp.result_format #=> String, one of "JSON", "CSV"
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/GetStatementResultV2 AWS API Documentation
     #
@@ -1283,15 +1283,14 @@ module Aws::RedshiftDataAPIService
     #   The name of the database. This parameter is required when
     #   authenticating using either Secrets Manager or temporary credentials.
     #
+    # @option params [String] :secret_arn
+    #   The name or ARN of the secret that enables access to the database.
+    #   This parameter is required when authenticating using Secrets Manager.
+    #
     # @option params [String] :db_user
     #   The database user name. This parameter is required when connecting to
     #   a cluster as a database user and authenticating using temporary
     #   credentials.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of databases to return in the response. If more
-    #   databases exist than fit in one response, then `NextToken` is returned
-    #   to page through the results.
     #
     # @option params [String] :next_token
     #   A value that indicates the starting point for the next set of response
@@ -1301,9 +1300,10 @@ module Aws::RedshiftDataAPIService
     #   command. If the NextToken field is empty, all response records have
     #   been retrieved for the request.
     #
-    # @option params [String] :secret_arn
-    #   The name or ARN of the secret that enables access to the database.
-    #   This parameter is required when authenticating using Secrets Manager.
+    # @option params [Integer] :max_results
+    #   The maximum number of databases to return in the response. If more
+    #   databases exist than fit in one response, then `NextToken` is returned
+    #   to page through the results.
     #
     # @option params [String] :workgroup_name
     #   The serverless workgroup name or Amazon Resource Name (ARN). This
@@ -1322,10 +1322,10 @@ module Aws::RedshiftDataAPIService
     #   resp = client.list_databases({
     #     cluster_identifier: "ClusterIdentifierString",
     #     database: "String", # required
-    #     db_user: "String",
-    #     max_results: 1,
-    #     next_token: "String",
     #     secret_arn: "SecretArn",
+    #     db_user: "String",
+    #     next_token: "String",
+    #     max_results: 1,
     #     workgroup_name: "WorkgroupNameString",
     #   })
     #
@@ -1391,24 +1391,29 @@ module Aws::RedshiftDataAPIService
     #   a cluster and authenticating using either Secrets Manager or temporary
     #   credentials.
     #
-    # @option params [String] :connected_database
-    #   A database name. The connected database is specified when you connect
-    #   with your authentication credentials.
-    #
-    # @option params [required, String] :database
-    #   The name of the database that contains the schemas to list. If
-    #   `ConnectedDatabase` is not specified, this is also the database to
-    #   connect to with your authentication credentials.
+    # @option params [String] :secret_arn
+    #   The name or ARN of the secret that enables access to the database.
+    #   This parameter is required when authenticating using Secrets Manager.
     #
     # @option params [String] :db_user
     #   The database user name. This parameter is required when connecting to
     #   a cluster as a database user and authenticating using temporary
     #   credentials.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of schemas to return in the response. If more
-    #   schemas exist than fit in one response, then `NextToken` is returned
-    #   to page through the results.
+    # @option params [required, String] :database
+    #   The name of the database that contains the schemas to list. If
+    #   `ConnectedDatabase` is not specified, this is also the database to
+    #   connect to with your authentication credentials.
+    #
+    # @option params [String] :connected_database
+    #   A database name. The connected database is specified when you connect
+    #   with your authentication credentials.
+    #
+    # @option params [String] :schema_pattern
+    #   A pattern to filter results by schema name. Within a schema pattern,
+    #   "%" means match any substring of 0 or more characters and "\_"
+    #   means match any one character. Only schema name entries matching the
+    #   search pattern are returned.
     #
     # @option params [String] :next_token
     #   A value that indicates the starting point for the next set of response
@@ -1418,15 +1423,10 @@ module Aws::RedshiftDataAPIService
     #   command. If the NextToken field is empty, all response records have
     #   been retrieved for the request.
     #
-    # @option params [String] :schema_pattern
-    #   A pattern to filter results by schema name. Within a schema pattern,
-    #   "%" means match any substring of 0 or more characters and "\_"
-    #   means match any one character. Only schema name entries matching the
-    #   search pattern are returned.
-    #
-    # @option params [String] :secret_arn
-    #   The name or ARN of the secret that enables access to the database.
-    #   This parameter is required when authenticating using Secrets Manager.
+    # @option params [Integer] :max_results
+    #   The maximum number of schemas to return in the response. If more
+    #   schemas exist than fit in one response, then `NextToken` is returned
+    #   to page through the results.
     #
     # @option params [String] :workgroup_name
     #   The serverless workgroup name or Amazon Resource Name (ARN). This
@@ -1435,8 +1435,8 @@ module Aws::RedshiftDataAPIService
     #
     # @return [Types::ListSchemasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListSchemasResponse#next_token #next_token} => String
     #   * {Types::ListSchemasResponse#schemas #schemas} => Array&lt;String&gt;
+    #   * {Types::ListSchemasResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1444,21 +1444,21 @@ module Aws::RedshiftDataAPIService
     #
     #   resp = client.list_schemas({
     #     cluster_identifier: "ClusterIdentifierString",
-    #     connected_database: "String",
-    #     database: "String", # required
-    #     db_user: "String",
-    #     max_results: 1,
-    #     next_token: "String",
-    #     schema_pattern: "String",
     #     secret_arn: "SecretArn",
+    #     db_user: "String",
+    #     database: "String", # required
+    #     connected_database: "String",
+    #     schema_pattern: "String",
+    #     next_token: "String",
+    #     max_results: 1,
     #     workgroup_name: "WorkgroupNameString",
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.schemas #=> Array
     #   resp.schemas[0] #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ListSchemas AWS API Documentation
     #
@@ -1487,20 +1487,6 @@ module Aws::RedshiftDataAPIService
     # [1]: https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-overview.html
     # [2]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
     #
-    # @option params [String] :cluster_identifier
-    #   The cluster identifier. Only statements that ran on this cluster are
-    #   returned. When providing `ClusterIdentifier`, then `WorkgroupName`
-    #   can't be specified.
-    #
-    # @option params [String] :database
-    #   The name of the database when listing statements run against a
-    #   `ClusterIdentifier` or `WorkgroupName`.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of SQL statements to return in the response. If
-    #   more SQL statements exist than fit in one response, then `NextToken`
-    #   is returned to page through the results.
-    #
     # @option params [String] :next_token
     #   A value that indicates the starting point for the next set of response
     #   records in a subsequent request. If a value is returned in a response,
@@ -1509,11 +1495,10 @@ module Aws::RedshiftDataAPIService
     #   command. If the NextToken field is empty, all response records have
     #   been retrieved for the request.
     #
-    # @option params [Boolean] :role_level
-    #   A value that filters which statements to return in the response. If
-    #   true, all statements run by the caller's IAM role are returned. If
-    #   false, only statements run by the caller's IAM role in the current
-    #   IAM session are returned. The default is true.
+    # @option params [Integer] :max_results
+    #   The maximum number of SQL statements to return in the response. If
+    #   more SQL statements exist than fit in one response, then `NextToken`
+    #   is returned to page through the results.
     #
     # @option params [String] :statement_name
     #   The name of the SQL statement specified as input to
@@ -1543,6 +1528,21 @@ module Aws::RedshiftDataAPIService
     #
     #   * SUBMITTED - The query was submitted, but not yet processed.
     #
+    # @option params [Boolean] :role_level
+    #   A value that filters which statements to return in the response. If
+    #   true, all statements run by the caller's IAM role are returned. If
+    #   false, only statements run by the caller's IAM role in the current
+    #   IAM session are returned. The default is true.
+    #
+    # @option params [String] :database
+    #   The name of the database when listing statements run against a
+    #   `ClusterIdentifier` or `WorkgroupName`.
+    #
+    # @option params [String] :cluster_identifier
+    #   The cluster identifier. Only statements that ran on this cluster are
+    #   returned. When providing `ClusterIdentifier`, then `WorkgroupName`
+    #   can't be specified.
+    #
     # @option params [String] :workgroup_name
     #   The serverless workgroup name or Amazon Resource Name (ARN). Only
     #   statements that ran on this workgroup are returned. When providing
@@ -1550,43 +1550,43 @@ module Aws::RedshiftDataAPIService
     #
     # @return [Types::ListStatementsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListStatementsResponse#next_token #next_token} => String
     #   * {Types::ListStatementsResponse#statements #statements} => Array&lt;Types::StatementData&gt;
+    #   * {Types::ListStatementsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_statements({
-    #     cluster_identifier: "ClusterIdentifierString",
-    #     database: "String",
-    #     max_results: 1,
     #     next_token: "String",
-    #     role_level: false,
+    #     max_results: 1,
     #     statement_name: "StatementNameString",
     #     status: "SUBMITTED", # accepts SUBMITTED, PICKED, STARTED, FINISHED, ABORTED, FAILED, ALL
+    #     role_level: false,
+    #     database: "String",
+    #     cluster_identifier: "ClusterIdentifierString",
     #     workgroup_name: "WorkgroupNameString",
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.statements #=> Array
-    #   resp.statements[0].created_at #=> Time
     #   resp.statements[0].id #=> String
-    #   resp.statements[0].is_batch_statement #=> Boolean
-    #   resp.statements[0].query_parameters #=> Array
-    #   resp.statements[0].query_parameters[0].name #=> String
-    #   resp.statements[0].query_parameters[0].value #=> String
     #   resp.statements[0].query_string #=> String
     #   resp.statements[0].query_strings #=> Array
     #   resp.statements[0].query_strings[0] #=> String
-    #   resp.statements[0].result_format #=> String, one of "JSON", "CSV"
     #   resp.statements[0].secret_arn #=> String
-    #   resp.statements[0].session_id #=> String
-    #   resp.statements[0].statement_name #=> String
     #   resp.statements[0].status #=> String, one of "SUBMITTED", "PICKED", "STARTED", "FINISHED", "ABORTED", "FAILED", "ALL"
+    #   resp.statements[0].statement_name #=> String
+    #   resp.statements[0].created_at #=> Time
     #   resp.statements[0].updated_at #=> Time
+    #   resp.statements[0].query_parameters #=> Array
+    #   resp.statements[0].query_parameters[0].name #=> String
+    #   resp.statements[0].query_parameters[0].value #=> String
+    #   resp.statements[0].is_batch_statement #=> Boolean
+    #   resp.statements[0].result_format #=> String, one of "JSON", "CSV"
+    #   resp.statements[0].session_id #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ListStatements AWS API Documentation
     #
@@ -1646,32 +1646,23 @@ module Aws::RedshiftDataAPIService
     #   a cluster and authenticating using either Secrets Manager or temporary
     #   credentials.
     #
-    # @option params [String] :connected_database
-    #   A database name. The connected database is specified when you connect
-    #   with your authentication credentials.
-    #
-    # @option params [required, String] :database
-    #   The name of the database that contains the tables to list. If
-    #   `ConnectedDatabase` is not specified, this is also the database to
-    #   connect to with your authentication credentials.
+    # @option params [String] :secret_arn
+    #   The name or ARN of the secret that enables access to the database.
+    #   This parameter is required when authenticating using Secrets Manager.
     #
     # @option params [String] :db_user
     #   The database user name. This parameter is required when connecting to
     #   a cluster as a database user and authenticating using temporary
     #   credentials.
     #
-    # @option params [Integer] :max_results
-    #   The maximum number of tables to return in the response. If more tables
-    #   exist than fit in one response, then `NextToken` is returned to page
-    #   through the results.
+    # @option params [required, String] :database
+    #   The name of the database that contains the tables to list. If
+    #   `ConnectedDatabase` is not specified, this is also the database to
+    #   connect to with your authentication credentials.
     #
-    # @option params [String] :next_token
-    #   A value that indicates the starting point for the next set of response
-    #   records in a subsequent request. If a value is returned in a response,
-    #   you can retrieve the next set of records by providing this returned
-    #   NextToken value in the next NextToken parameter and retrying the
-    #   command. If the NextToken field is empty, all response records have
-    #   been retrieved for the request.
+    # @option params [String] :connected_database
+    #   A database name. The connected database is specified when you connect
+    #   with your authentication credentials.
     #
     # @option params [String] :schema_pattern
     #   A pattern to filter results by schema name. Within a schema pattern,
@@ -1682,10 +1673,6 @@ module Aws::RedshiftDataAPIService
     #   `SchemaPattern` or `TablePattern` are specified, then all tables are
     #   returned.
     #
-    # @option params [String] :secret_arn
-    #   The name or ARN of the secret that enables access to the database.
-    #   This parameter is required when authenticating using Secrets Manager.
-    #
     # @option params [String] :table_pattern
     #   A pattern to filter results by table name. Within a table pattern,
     #   "%" means match any substring of 0 or more characters and "\_"
@@ -1695,6 +1682,19 @@ module Aws::RedshiftDataAPIService
     #   `SchemaPattern` or `TablePattern` are specified, then all tables are
     #   returned.
     #
+    # @option params [String] :next_token
+    #   A value that indicates the starting point for the next set of response
+    #   records in a subsequent request. If a value is returned in a response,
+    #   you can retrieve the next set of records by providing this returned
+    #   NextToken value in the next NextToken parameter and retrying the
+    #   command. If the NextToken field is empty, all response records have
+    #   been retrieved for the request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of tables to return in the response. If more tables
+    #   exist than fit in one response, then `NextToken` is returned to page
+    #   through the results.
+    #
     # @option params [String] :workgroup_name
     #   The serverless workgroup name or Amazon Resource Name (ARN). This
     #   parameter is required when connecting to a serverless workgroup and
@@ -1702,8 +1702,8 @@ module Aws::RedshiftDataAPIService
     #
     # @return [Types::ListTablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListTablesResponse#next_token #next_token} => String
     #   * {Types::ListTablesResponse#tables #tables} => Array&lt;Types::TableMember&gt;
+    #   * {Types::ListTablesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1711,24 +1711,24 @@ module Aws::RedshiftDataAPIService
     #
     #   resp = client.list_tables({
     #     cluster_identifier: "ClusterIdentifierString",
-    #     connected_database: "String",
-    #     database: "String", # required
-    #     db_user: "String",
-    #     max_results: 1,
-    #     next_token: "String",
-    #     schema_pattern: "String",
     #     secret_arn: "SecretArn",
+    #     db_user: "String",
+    #     database: "String", # required
+    #     connected_database: "String",
+    #     schema_pattern: "String",
     #     table_pattern: "String",
+    #     next_token: "String",
+    #     max_results: 1,
     #     workgroup_name: "WorkgroupNameString",
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.tables #=> Array
     #   resp.tables[0].name #=> String
-    #   resp.tables[0].schema #=> String
     #   resp.tables[0].type #=> String
+    #   resp.tables[0].schema #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/ListTables AWS API Documentation
     #
@@ -1757,7 +1757,7 @@ module Aws::RedshiftDataAPIService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshiftdataapiservice'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

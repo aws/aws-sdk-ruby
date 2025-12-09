@@ -487,11 +487,12 @@ module Aws::PaymentCryptography
     # Services Payment Cryptography key, enabling the key to be used for
     # cryptographic operations in additional Amazon Web Services Regions.
     #
-    # Multi-region keys allow you to use the same key material across
-    # multiple Amazon Web Services Regions, providing lower latency for
-    # applications distributed across regions. When you add Replication
-    # Regions, Amazon Web Services Payment Cryptography securely replicates
-    # the key material to the specified Amazon Web Services Regions.
+    # [Multi-Region key replication][1] allow you to use the same key
+    # material across multiple Amazon Web Services Regions, providing lower
+    # latency for applications distributed across regions. When you add
+    # Replication Regions, Amazon Web Services Payment Cryptography securely
+    # replicates the key material to the specified Amazon Web Services
+    # Regions.
     #
     # The key must be in an active state to add Replication Regions. You can
     # add multiple regions in a single operation, and the key will be
@@ -502,17 +503,18 @@ module Aws::PaymentCryptography
     #
     # **Related operations:**
     #
-    # * [RemoveKeyReplicationRegions][1]
+    # * [RemoveKeyReplicationRegions][2]
     #
-    # * [EnableDefaultKeyReplicationRegions][2]
+    # * [EnableDefaultKeyReplicationRegions][3]
     #
-    # * [GetDefaultKeyReplicationRegions][3]
+    # * [GetDefaultKeyReplicationRegions][4]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_RemoveKeyReplicationRegions.html
-    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html
-    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_RemoveKeyReplicationRegions.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html
     #
     # @option params [required, String] :key_identifier
     #   The key identifier (ARN or alias) of the key for which to add
@@ -1014,14 +1016,15 @@ module Aws::PaymentCryptography
       req.send_request(options)
     end
 
-    # Disables multi-region key replication settings for the specified
-    # Amazon Web Services Regions in your account, preventing new keys from
-    # being automatically replicated to those regions.
+    # Disables [Multi-Region key replication][1] settings for the specified
+    # Amazon Web Services Regions in your Amazon Web Services account,
+    # preventing new keys from being automatically replicated to those
+    # regions.
     #
-    # After disabling default replication for specific regions, new keys
-    # created in your account will not be automatically replicated to those
-    # regions. You can still manually add replication to those regions for
-    # individual keys using the AddKeyReplicationRegions operation.
+    # After disabling Multi-Region key replication for specific regions, new
+    # keys created in your account will not be automatically replicated to
+    # those regions. You can still manually add replication to those regions
+    # for individual keys using the [AddKeyReplicationRegions][2] operation.
     #
     # This operation does not affect existing keys or their current
     # replication configuration.
@@ -1031,14 +1034,16 @@ module Aws::PaymentCryptography
     #
     # **Related operations:**
     #
-    # * [EnableDefaultKeyReplicationRegions][1]
+    # * [EnableDefaultKeyReplicationRegions][3]
     #
-    # * [GetDefaultKeyReplicationRegions][2]
+    # * [GetDefaultKeyReplicationRegions][4]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html
-    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_AddKeyReplicationRegions.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html
     #
     # @option params [required, Array<String>] :replication_regions
     #   The list of Amazon Web Services Regions to remove from the account's
@@ -1072,11 +1077,11 @@ module Aws::PaymentCryptography
       req.send_request(options)
     end
 
-    # Enables multi-region key replication settings for your account,
-    # causing new keys to be automatically replicated to the specified
-    # Amazon Web Services Regions when created.
+    # Enables [Multi-Region key replication][1] settings for your Amazon Web
+    # Services account, causing new keys to be automatically replicated to
+    # the specified Amazon Web Services Regions when created.
     #
-    # When default Replication Regions are enabled, any new keys created in
+    # When Multi-Region key replication are enabled, any new keys created in
     # your account will automatically be replicated to these regions unless
     # you explicitly override this behavior during key creation. This
     # simplifies key management for applications that operate across
@@ -1090,21 +1095,27 @@ module Aws::PaymentCryptography
     #
     # **Related operations:**
     #
-    # * [DisableDefaultKeyReplicationRegions][1]
+    # * [DisableDefaultKeyReplicationRegions][2]
     #
-    # * [GetDefaultKeyReplicationRegions][2]
+    # * [GetDefaultKeyReplicationRegions][3]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html
-    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html
     #
     # @option params [required, Array<String>] :replication_regions
     #   The list of Amazon Web Services Regions to enable as default
-    #   replication regions for the account.
+    #   replication regions for the Amazon Web Services account for
+    #   [Multi-Region key replication][1].
     #
     #   New keys created in this account will automatically be replicated to
     #   these regions unless explicitly overridden during key creation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
     #
     # @return [Types::EnableDefaultKeyReplicationRegionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1520,16 +1531,16 @@ module Aws::PaymentCryptography
       req.send_request(options)
     end
 
-    # Used to retrieve the public key for a keypair.
+    # Creates a certificate signing request (CSR) from a key pair.
     #
     # @option params [required, String] :key_identifier
     #   Asymmetric key used for generating the certificate signing request
     #
     # @option params [required, String] :signing_algorithm
-    #   Algorithm used to generate the certificate signing request
+    #   The cryptographic algorithm used to sign your CSR.
     #
     # @option params [required, Types::CertificateSubjectType] :certificate_subject
-    #   Certificate subject data
+    #   The metadata used to create the CSR.
     #
     # @return [Types::GetCertificateSigningRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1564,27 +1575,29 @@ module Aws::PaymentCryptography
       req.send_request(options)
     end
 
-    # Retrieves the list of regions where default key replication is
-    # currently enabled for your account.
+    # Retrieves the list of Amazon Web Services Regions where [Multi-Region
+    # key replication][1] is currently enabled for your Amazon Web Services
+    # account.
     #
-    # This operation returns the current configuration of default
-    # Replication Regions. New keys created in your account will be
-    # automatically replicated to these regions unless explicitly overridden
-    # during key creation.
+    # This operation returns the current Multi-Region key replication
+    # configuration. New keys created in your account will be automatically
+    # replicated to these regions unless explicitly overridden during key
+    # creation.
     #
     # **Cross-account use:** This operation can't be used across different
     # Amazon Web Services accounts.
     #
     # **Related operations:**
     #
-    # * [EnableDefaultKeyReplicationRegions][1]
+    # * [EnableDefaultKeyReplicationRegions][2]
     #
-    # * [DisableDefaultKeyReplicationRegions][2]
+    # * [DisableDefaultKeyReplicationRegions][3]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html
-    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_EnableDefaultKeyReplicationRegions.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html
     #
     # @return [Types::GetDefaultKeyReplicationRegionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2524,7 +2537,8 @@ module Aws::PaymentCryptography
     # When you remove Replication Regions, the key material is securely
     # deleted from those regions and can no longer be used for cryptographic
     # operations there. This operation is irreversible for the specified
-    # Amazon Web Services Regions.
+    # Amazon Web Services Regions. For more information, see [Multi-Region
+    # key replication][1].
     #
     # Ensure that no active cryptographic operations or applications depend
     # on the key in the regions you're removing before performing this
@@ -2535,14 +2549,15 @@ module Aws::PaymentCryptography
     #
     # **Related operations:**
     #
-    # * [AddKeyReplicationRegions][1]
+    # * [AddKeyReplicationRegions][2]
     #
-    # * [DisableDefaultKeyReplicationRegions][2]
+    # * [DisableDefaultKeyReplicationRegions][3]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_AddKeyReplicationRegions.html
-    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_AddKeyReplicationRegions.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisableDefaultKeyReplicationRegions.html
     #
     # @option params [required, String] :key_identifier
     #   The key identifier (ARN or alias) of the key from which to remove
@@ -3055,7 +3070,7 @@ module Aws::PaymentCryptography
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-paymentcryptography'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

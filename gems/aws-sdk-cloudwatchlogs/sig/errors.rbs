@@ -18,6 +18,8 @@ module Aws
       class DataAlreadyAcceptedException < ::Aws::Errors::ServiceError
         def expected_sequence_token: () -> ::String
       end
+      class InternalServerException < ::Aws::Errors::ServiceError
+      end
       class InternalStreamingException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

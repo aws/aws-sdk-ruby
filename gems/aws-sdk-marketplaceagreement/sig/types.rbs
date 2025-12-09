@@ -9,41 +9,44 @@ module Aws::MarketplaceAgreement
   module Types
 
     class AcceptedTerm
-      attr_accessor byol_pricing_term: Types::ByolPricingTerm
-      attr_accessor configurable_upfront_pricing_term: Types::ConfigurableUpfrontPricingTerm
-      attr_accessor fixed_upfront_pricing_term: Types::FixedUpfrontPricingTerm
-      attr_accessor free_trial_pricing_term: Types::FreeTrialPricingTerm
       attr_accessor legal_term: Types::LegalTerm
-      attr_accessor payment_schedule_term: Types::PaymentScheduleTerm
-      attr_accessor recurring_payment_term: Types::RecurringPaymentTerm
-      attr_accessor renewal_term: Types::RenewalTerm
       attr_accessor support_term: Types::SupportTerm
+      attr_accessor renewal_term: Types::RenewalTerm
       attr_accessor usage_based_pricing_term: Types::UsageBasedPricingTerm
+      attr_accessor configurable_upfront_pricing_term: Types::ConfigurableUpfrontPricingTerm
+      attr_accessor byol_pricing_term: Types::ByolPricingTerm
+      attr_accessor recurring_payment_term: Types::RecurringPaymentTerm
       attr_accessor validity_term: Types::ValidityTerm
+      attr_accessor payment_schedule_term: Types::PaymentScheduleTerm
+      attr_accessor free_trial_pricing_term: Types::FreeTrialPricingTerm
+      attr_accessor fixed_upfront_pricing_term: Types::FixedUpfrontPricingTerm
+      attr_accessor variable_payment_term: Types::VariablePaymentTerm
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class ByolPricingTerm < AcceptedTerm
-      end
-      class ConfigurableUpfrontPricingTerm < AcceptedTerm
-      end
-      class FixedUpfrontPricingTerm < AcceptedTerm
-      end
-      class FreeTrialPricingTerm < AcceptedTerm
-      end
       class LegalTerm < AcceptedTerm
-      end
-      class PaymentScheduleTerm < AcceptedTerm
-      end
-      class RecurringPaymentTerm < AcceptedTerm
-      end
-      class RenewalTerm < AcceptedTerm
       end
       class SupportTerm < AcceptedTerm
       end
+      class RenewalTerm < AcceptedTerm
+      end
       class UsageBasedPricingTerm < AcceptedTerm
       end
+      class ConfigurableUpfrontPricingTerm < AcceptedTerm
+      end
+      class ByolPricingTerm < AcceptedTerm
+      end
+      class RecurringPaymentTerm < AcceptedTerm
+      end
       class ValidityTerm < AcceptedTerm
+      end
+      class PaymentScheduleTerm < AcceptedTerm
+      end
+      class FreeTrialPricingTerm < AcceptedTerm
+      end
+      class FixedUpfrontPricingTerm < AcceptedTerm
+      end
+      class VariablePaymentTerm < AcceptedTerm
       end
       class Unknown < AcceptedTerm
       end
@@ -55,20 +58,20 @@ module Aws::MarketplaceAgreement
     end
 
     class AccessDeniedException
-      attr_accessor message: ::String
       attr_accessor request_id: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
     class AgreementViewSummary
-      attr_accessor acceptance_time: ::Time
-      attr_accessor acceptor: Types::Acceptor
       attr_accessor agreement_id: ::String
-      attr_accessor agreement_type: ::String
-      attr_accessor end_time: ::Time
-      attr_accessor proposal_summary: Types::ProposalSummary
-      attr_accessor proposer: Types::Proposer
+      attr_accessor acceptance_time: ::Time
       attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor agreement_type: ::String
+      attr_accessor acceptor: Types::Acceptor
+      attr_accessor proposer: Types::Proposer
+      attr_accessor proposal_summary: Types::ProposalSummary
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "CANCELLED" | "EXPIRED" | "RENEWED" | "REPLACED" | "ROLLED_BACK" | "SUPERSEDED" | "TERMINATED")
       SENSITIVE: []
     end
@@ -79,23 +82,23 @@ module Aws::MarketplaceAgreement
     end
 
     class ConfigurableUpfrontPricingTerm
-      attr_accessor configuration: Types::ConfigurableUpfrontPricingTermConfiguration
+      attr_accessor type: ::String
       attr_accessor currency_code: ::String
       attr_accessor rate_cards: ::Array[Types::ConfigurableUpfrontRateCardItem]
-      attr_accessor type: ::String
+      attr_accessor configuration: Types::ConfigurableUpfrontPricingTermConfiguration
       SENSITIVE: []
     end
 
     class ConfigurableUpfrontPricingTermConfiguration
-      attr_accessor dimensions: ::Array[Types::Dimension]
       attr_accessor selector_value: ::String
+      attr_accessor dimensions: ::Array[Types::Dimension]
       SENSITIVE: []
     end
 
     class ConfigurableUpfrontRateCardItem
+      attr_accessor selector: Types::Selector
       attr_accessor constraints: Types::Constraints
       attr_accessor rate_card: ::Array[Types::RateCardItem]
-      attr_accessor selector: Types::Selector
       SENSITIVE: []
     end
 
@@ -111,15 +114,15 @@ module Aws::MarketplaceAgreement
     end
 
     class DescribeAgreementOutput
-      attr_accessor acceptance_time: ::Time
-      attr_accessor acceptor: Types::Acceptor
       attr_accessor agreement_id: ::String
-      attr_accessor agreement_type: ::String
-      attr_accessor end_time: ::Time
-      attr_accessor estimated_charges: Types::EstimatedCharges
-      attr_accessor proposal_summary: Types::ProposalSummary
+      attr_accessor acceptor: Types::Acceptor
       attr_accessor proposer: Types::Proposer
       attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor acceptance_time: ::Time
+      attr_accessor agreement_type: ::String
+      attr_accessor estimated_charges: Types::EstimatedCharges
+      attr_accessor proposal_summary: Types::ProposalSummary
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "CANCELLED" | "EXPIRED" | "RENEWED" | "REPLACED" | "ROLLED_BACK" | "SUPERSEDED" | "TERMINATED")
       SENSITIVE: []
     end
@@ -138,8 +141,8 @@ module Aws::MarketplaceAgreement
     end
 
     class EstimatedCharges
-      attr_accessor agreement_value: ::String
       attr_accessor currency_code: ::String
+      attr_accessor agreement_value: ::String
       SENSITIVE: []
     end
 
@@ -150,18 +153,18 @@ module Aws::MarketplaceAgreement
     end
 
     class FixedUpfrontPricingTerm
+      attr_accessor type: ::String
       attr_accessor currency_code: ::String
       attr_accessor duration: ::String
-      attr_accessor grants: ::Array[Types::GrantItem]
       attr_accessor price: ::String
-      attr_accessor type: ::String
+      attr_accessor grants: ::Array[Types::GrantItem]
       SENSITIVE: []
     end
 
     class FreeTrialPricingTerm
+      attr_accessor type: ::String
       attr_accessor duration: ::String
       attr_accessor grants: ::Array[Types::GrantItem]
-      attr_accessor type: ::String
       SENSITIVE: []
     end
 
@@ -185,27 +188,28 @@ module Aws::MarketplaceAgreement
     end
 
     class InternalServerException
-      attr_accessor message: ::String
       attr_accessor request_id: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
     class LegalTerm
-      attr_accessor documents: ::Array[Types::DocumentItem]
       attr_accessor type: ::String
+      attr_accessor documents: ::Array[Types::DocumentItem]
       SENSITIVE: []
     end
 
     class PaymentScheduleTerm
+      attr_accessor type: ::String
       attr_accessor currency_code: ::String
       attr_accessor schedule: ::Array[Types::ScheduleItem]
-      attr_accessor type: ::String
       SENSITIVE: []
     end
 
     class ProposalSummary
-      attr_accessor offer_id: ::String
       attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor offer_id: ::String
+      attr_accessor offer_set_id: ::String
       SENSITIVE: []
     end
 
@@ -221,16 +225,16 @@ module Aws::MarketplaceAgreement
     end
 
     class RecurringPaymentTerm
-      attr_accessor billing_period: ::String
-      attr_accessor currency_code: ::String
-      attr_accessor price: ::String
       attr_accessor type: ::String
+      attr_accessor currency_code: ::String
+      attr_accessor billing_period: ::String
+      attr_accessor price: ::String
       SENSITIVE: []
     end
 
     class RenewalTerm
-      attr_accessor configuration: Types::RenewalTermConfiguration
       attr_accessor type: ::String
+      attr_accessor configuration: Types::RenewalTermConfiguration
       SENSITIVE: []
     end
 
@@ -246,25 +250,25 @@ module Aws::MarketplaceAgreement
     end
 
     class ResourceNotFoundException
-      attr_accessor message: ::String
       attr_accessor request_id: ::String
+      attr_accessor message: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ("Agreement")
       SENSITIVE: []
     end
 
     class ScheduleItem
-      attr_accessor charge_amount: ::String
       attr_accessor charge_date: ::Time
+      attr_accessor charge_amount: ::String
       SENSITIVE: []
     end
 
     class SearchAgreementsInput
       attr_accessor catalog: ::String
       attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor sort: Types::Sort
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor sort: Types::Sort
       SENSITIVE: []
     end
 
@@ -287,21 +291,21 @@ module Aws::MarketplaceAgreement
     end
 
     class SupportTerm
-      attr_accessor refund_policy: ::String
       attr_accessor type: ::String
+      attr_accessor refund_policy: ::String
       SENSITIVE: []
     end
 
     class ThrottlingException
-      attr_accessor message: ::String
       attr_accessor request_id: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
     class UsageBasedPricingTerm
+      attr_accessor type: ::String
       attr_accessor currency_code: ::String
       attr_accessor rate_cards: ::Array[Types::UsageBasedRateCardItem]
-      attr_accessor type: ::String
       SENSITIVE: []
     end
 
@@ -311,24 +315,38 @@ module Aws::MarketplaceAgreement
     end
 
     class ValidationException
-      attr_accessor fields: ::Array[Types::ValidationExceptionField]
+      attr_accessor request_id: ::String
       attr_accessor message: ::String
       attr_accessor reason: ("INVALID_AGREEMENT_ID" | "MISSING_AGREEMENT_ID" | "INVALID_CATALOG" | "INVALID_FILTER_NAME" | "INVALID_FILTER_VALUES" | "INVALID_SORT_BY" | "INVALID_SORT_ORDER" | "INVALID_NEXT_TOKEN" | "INVALID_MAX_RESULTS" | "UNSUPPORTED_FILTERS" | "OTHER")
-      attr_accessor request_id: ::String
+      attr_accessor fields: ::Array[Types::ValidationExceptionField]
       SENSITIVE: []
     end
 
     class ValidationExceptionField
-      attr_accessor message: ::String
       attr_accessor name: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
     class ValidityTerm
-      attr_accessor agreement_duration: ::String
-      attr_accessor agreement_end_date: ::Time
-      attr_accessor agreement_start_date: ::Time
       attr_accessor type: ::String
+      attr_accessor agreement_duration: ::String
+      attr_accessor agreement_start_date: ::Time
+      attr_accessor agreement_end_date: ::Time
+      SENSITIVE: []
+    end
+
+    class VariablePaymentTerm
+      attr_accessor type: ::String
+      attr_accessor currency_code: ::String
+      attr_accessor max_total_charge_amount: ::String
+      attr_accessor configuration: Types::VariablePaymentTermConfiguration
+      SENSITIVE: []
+    end
+
+    class VariablePaymentTermConfiguration
+      attr_accessor payment_request_approval_strategy: ("AUTO_APPROVE_ON_EXPIRATION" | "WAIT_FOR_APPROVAL")
+      attr_accessor expiration_duration: ::String
       SENSITIVE: []
     end
   end

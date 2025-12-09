@@ -115,6 +115,7 @@ module Aws::WorkSpacesWeb
       attr_accessor browser_policy: ::String
       attr_accessor customer_managed_key: ::String
       attr_accessor additional_encryption_context: ::Hash[::String, ::String]
+      attr_accessor web_content_filtering_policy: Types::WebContentFilteringPolicy
       SENSITIVE: [:browser_policy]
     end
 
@@ -168,6 +169,7 @@ module Aws::WorkSpacesWeb
       attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       attr_accessor browser_policy: ::String
       attr_accessor client_token: ::String
+      attr_accessor web_content_filtering_policy: Types::WebContentFilteringPolicy
       SENSITIVE: [:browser_policy]
     end
 
@@ -492,7 +494,7 @@ module Aws::WorkSpacesWeb
 
     class EventFilter
       attr_accessor all: Types::Unit
-      attr_accessor include: ::Array[("WebsiteInteract" | "FileDownloadFromSecureBrowserToRemoteDisk" | "FileTransferFromRemoteToLocalDisk" | "FileTransferFromLocalToRemoteDisk" | "FileUploadFromRemoteDiskToSecureBrowser" | "ContentPasteToWebsite" | "ContentTransferFromLocalToRemoteClipboard" | "ContentCopyFromWebsite" | "UrlLoad" | "TabOpen" | "TabClose" | "PrintJobSubmit" | "SessionConnect" | "SessionStart" | "SessionDisconnect" | "SessionEnd")]
+      attr_accessor include: ::Array[("WebsiteInteract" | "FileDownloadFromSecureBrowserToRemoteDisk" | "FileTransferFromRemoteToLocalDisk" | "FileTransferFromLocalToRemoteDisk" | "FileUploadFromRemoteDiskToSecureBrowser" | "ContentPasteToWebsite" | "ContentTransferFromLocalToRemoteClipboard" | "ContentCopyFromWebsite" | "UrlLoad" | "TabOpen" | "TabClose" | "PrintJobSubmit" | "SessionConnect" | "SessionStart" | "SessionDisconnect" | "SessionEnd" | "UrlBlockByContentFilter")]
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1078,6 +1080,7 @@ module Aws::WorkSpacesWeb
       attr_accessor browser_settings_arn: ::String
       attr_accessor browser_policy: ::String
       attr_accessor client_token: ::String
+      attr_accessor web_content_filtering_policy: Types::WebContentFilteringPolicy
       SENSITIVE: [:browser_policy]
     end
 
@@ -1271,6 +1274,13 @@ module Aws::WorkSpacesWeb
     class ValidationExceptionField
       attr_accessor name: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WebContentFilteringPolicy
+      attr_accessor blocked_categories: ::Array[("Cults" | "Gambling" | "Nudity" | "Pornography" | "SexEducation" | "Tasteless" | "Violence" | "DownloadSites" | "ImageSharing" | "PeerToPeer" | "StreamingMediaAndDownloads" | "GenerativeAI" | "CriminalActivity" | "Hacking" | "HateAndIntolerance" | "IllegalDrug" | "IllegalSoftware" | "SchoolCheating" | "SelfHarm" | "Weapons" | "Chat" | "Games" | "InstantMessaging" | "ProfessionalNetwork" | "SocialNetworking" | "WebBasedEmail" | "ParkedDomains")]
+      attr_accessor allowed_urls: ::Array[::String]
+      attr_accessor blocked_urls: ::Array[::String]
       SENSITIVE: []
     end
   end

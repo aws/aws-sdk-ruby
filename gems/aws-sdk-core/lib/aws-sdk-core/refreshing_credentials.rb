@@ -3,13 +3,11 @@
 module Aws
   # Base class used credential classes that can be refreshed. This
   # provides basic refresh logic in a thread-safe manner. Classes mixing in
-  # this module are expected to implement a #refresh method that populates
+  # this module are expected to implement a `#refresh` method that populates
   # the following instance variables:
   #
-  # * `@access_key_id`
-  # * `@secret_access_key`
-  # * `@session_token`
-  # * `@expiration`
+  # * `@credentials` ({Credentials})
+  # * `@expiration` (Time)
   #
   module RefreshingCredentials
     SYNC_EXPIRATION_LENGTH = 300 # 5 minutes
@@ -17,6 +15,9 @@ module Aws
 
     CLIENT_EXCLUDE_OPTIONS = Set.new([:before_refresh]).freeze
 
+    # @param [Hash] options
+    # @option options [Proc] :before_refresh A Proc called before credentials are refreshed.
+    #   It accepts `self` as the only argument.
     def initialize(options = {})
       @mutex = Mutex.new
       @before_refresh = options.delete(:before_refresh) if options.is_a?(Hash)

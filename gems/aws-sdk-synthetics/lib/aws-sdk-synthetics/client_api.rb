@@ -25,6 +25,8 @@ module Aws::Synthetics
     BaseScreenshotIgnoreCoordinates = Shapes::ListShape.new(name: 'BaseScreenshotIgnoreCoordinates')
     BaseScreenshots = Shapes::ListShape.new(name: 'BaseScreenshots')
     Blob = Shapes::BlobShape.new(name: 'Blob')
+    BlueprintType = Shapes::StringShape.new(name: 'BlueprintType')
+    BlueprintTypes = Shapes::ListShape.new(name: 'BlueprintTypes')
     BrowserConfig = Shapes::StructureShape.new(name: 'BrowserConfig')
     BrowserConfigs = Shapes::ListShape.new(name: 'BrowserConfigs')
     BrowserType = Shapes::StringShape.new(name: 'BrowserType')
@@ -196,6 +198,8 @@ module Aws::Synthetics
 
     BaseScreenshots.member = Shapes::ShapeRef.new(shape: BaseScreenshot)
 
+    BlueprintTypes.member = Shapes::ShapeRef.new(shape: BlueprintType)
+
     BrowserConfig.add_member(:browser_type, Shapes::ShapeRef.new(shape: BrowserType, location_name: "BrowserType"))
     BrowserConfig.struct_class = Types::BrowserConfig
 
@@ -233,12 +237,14 @@ module Aws::Synthetics
     CanaryCodeInput.add_member(:s3_key, Shapes::ShapeRef.new(shape: String, location_name: "S3Key"))
     CanaryCodeInput.add_member(:s3_version, Shapes::ShapeRef.new(shape: String, location_name: "S3Version"))
     CanaryCodeInput.add_member(:zip_file, Shapes::ShapeRef.new(shape: Blob, location_name: "ZipFile"))
-    CanaryCodeInput.add_member(:handler, Shapes::ShapeRef.new(shape: CodeHandler, required: true, location_name: "Handler"))
+    CanaryCodeInput.add_member(:handler, Shapes::ShapeRef.new(shape: CodeHandler, location_name: "Handler"))
+    CanaryCodeInput.add_member(:blueprint_types, Shapes::ShapeRef.new(shape: BlueprintTypes, location_name: "BlueprintTypes"))
     CanaryCodeInput.add_member(:dependencies, Shapes::ShapeRef.new(shape: Dependencies, location_name: "Dependencies"))
     CanaryCodeInput.struct_class = Types::CanaryCodeInput
 
     CanaryCodeOutput.add_member(:source_location_arn, Shapes::ShapeRef.new(shape: String, location_name: "SourceLocationArn"))
     CanaryCodeOutput.add_member(:handler, Shapes::ShapeRef.new(shape: String, location_name: "Handler"))
+    CanaryCodeOutput.add_member(:blueprint_types, Shapes::ShapeRef.new(shape: BlueprintTypes, location_name: "BlueprintTypes"))
     CanaryCodeOutput.add_member(:dependencies, Shapes::ShapeRef.new(shape: Dependencies, location_name: "Dependencies"))
     CanaryCodeOutput.struct_class = Types::CanaryCodeOutput
 

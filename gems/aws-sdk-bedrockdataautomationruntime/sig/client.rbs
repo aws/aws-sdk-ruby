@@ -85,12 +85,45 @@ module Aws
         def error_type: () -> ::String
         def error_message: () -> ::String
         def output_configuration: () -> Types::OutputConfiguration
+        def job_submission_time: () -> ::Time
+        def job_completion_time: () -> ::Time
+        def job_duration_in_seconds: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomationRuntime/Client.html#get_data_automation_status-instance_method
       def get_data_automation_status: (
                                         invocation_arn: ::String
                                       ) -> _GetDataAutomationStatusResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataAutomationStatusResponseSuccess
+
+      interface _InvokeDataAutomationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeDataAutomationResponse]
+        def semantic_modality: () -> ("DOCUMENT" | "IMAGE" | "AUDIO" | "VIDEO")
+        def output_segments: () -> ::Array[Types::OutputSegment]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomationRuntime/Client.html#invoke_data_automation-instance_method
+      def invoke_data_automation: (
+                                    input_configuration: {
+                                      bytes: ::String?,
+                                      s3_uri: ::String?
+                                    },
+                                    ?data_automation_configuration: {
+                                      data_automation_project_arn: ::String,
+                                      stage: ("LIVE" | "DEVELOPMENT")?
+                                    },
+                                    ?blueprints: Array[
+                                      {
+                                        blueprint_arn: ::String,
+                                        version: ::String?,
+                                        stage: ("DEVELOPMENT" | "LIVE")?
+                                      },
+                                    ],
+                                    data_automation_profile_arn: ::String,
+                                    ?encryption_configuration: {
+                                      kms_key_id: ::String,
+                                      kms_encryption_context: Hash[::String, ::String]?
+                                    }
+                                  ) -> _InvokeDataAutomationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeDataAutomationResponseSuccess
 
       interface _InvokeDataAutomationAsyncResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::InvokeDataAutomationAsyncResponse]

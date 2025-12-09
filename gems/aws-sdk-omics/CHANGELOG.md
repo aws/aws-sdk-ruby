@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.58.0 (2025-10-31)
+------------------
+
+* Feature - Added WDL_LENIENT engine type that enables implicit typecasting of variable values to its compatible declared types
+
+1.57.0 (2025-10-23)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.56.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.55.0 (2025-08-28)
 ------------------
 

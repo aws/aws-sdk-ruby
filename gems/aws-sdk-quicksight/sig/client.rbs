@@ -925,6 +925,82 @@ module Aws
                                        ) -> _CreateAccountSubscriptionResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccountSubscriptionResponseSuccess
 
+      interface _CreateActionConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateActionConnectorResponse]
+        def arn: () -> ::String
+        def creation_status: () -> ("CREATION_IN_PROGRESS" | "CREATION_SUCCESSFUL" | "CREATION_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED" | "DELETED")
+        def action_connector_id: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#create_action_connector-instance_method
+      def create_action_connector: (
+                                     aws_account_id: ::String,
+                                     action_connector_id: ::String,
+                                     name: ::String,
+                                     type: ("GENERIC_HTTP" | "SERVICENOW_NOW_PLATFORM" | "SALESFORCE_CRM" | "MICROSOFT_OUTLOOK" | "PAGERDUTY_ADVANCE" | "JIRA_CLOUD" | "ATLASSIAN_CONFLUENCE" | "AMAZON_S3" | "AMAZON_BEDROCK_AGENT_RUNTIME" | "AMAZON_BEDROCK_RUNTIME" | "AMAZON_BEDROCK_DATA_AUTOMATION_RUNTIME" | "AMAZON_TEXTRACT" | "AMAZON_COMPREHEND" | "AMAZON_COMPREHEND_MEDICAL" | "MICROSOFT_ONEDRIVE" | "MICROSOFT_SHAREPOINT" | "MICROSOFT_TEAMS" | "SAP_BUSINESSPARTNER" | "SAP_PRODUCTMASTERDATA" | "SAP_PHYSICALINVENTORY" | "SAP_BILLOFMATERIALS" | "SAP_MATERIALSTOCK" | "ZENDESK_SUITE" | "SMARTSHEET" | "SLACK" | "ASANA" | "BAMBOO_HR"),
+                                     authentication_config: {
+                                       authentication_type: ("BASIC" | "API_KEY" | "OAUTH2_CLIENT_CREDENTIALS" | "NONE" | "IAM" | "OAUTH2_AUTHORIZATION_CODE"),
+                                       authentication_metadata: {
+                                         authorization_code_grant_metadata: {
+                                           base_endpoint: ::String,
+                                           redirect_url: ::String,
+                                           authorization_code_grant_credentials_source: ("PLAIN_CREDENTIALS")?,
+                                           authorization_code_grant_credentials_details: {
+                                             authorization_code_grant_details: {
+                                               client_id: ::String,
+                                               client_secret: ::String,
+                                               token_endpoint: ::String,
+                                               authorization_endpoint: ::String
+                                             }?
+                                           }?
+                                         }?,
+                                         client_credentials_grant_metadata: {
+                                           base_endpoint: ::String,
+                                           client_credentials_source: ("PLAIN_CREDENTIALS")?,
+                                           client_credentials_details: {
+                                             client_credentials_grant_details: {
+                                               client_id: ::String,
+                                               client_secret: ::String,
+                                               token_endpoint: ::String
+                                             }?
+                                           }?
+                                         }?,
+                                         basic_auth_connection_metadata: {
+                                           base_endpoint: ::String,
+                                           username: ::String,
+                                           password: ::String
+                                         }?,
+                                         api_key_connection_metadata: {
+                                           base_endpoint: ::String,
+                                           api_key: ::String,
+                                           email: ::String?
+                                         }?,
+                                         none_connection_metadata: {
+                                           base_endpoint: ::String
+                                         }?,
+                                         iam_connection_metadata: {
+                                           role_arn: ::String
+                                         }?
+                                       }
+                                     },
+                                     ?description: ::String,
+                                     ?permissions: Array[
+                                       {
+                                         principal: ::String,
+                                         actions: Array[::String]
+                                       },
+                                     ],
+                                     ?vpc_connection_arn: ::String,
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ]
+                                   ) -> _CreateActionConnectorResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateActionConnectorResponseSuccess
+
       interface _CreateAnalysisResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateAnalysisResponse]
         def arn: () -> ::String
@@ -35483,7 +35559,26 @@ module Aws
                                                column_index: ::Integer?,
                                                column_span: ::Integer,
                                                row_index: ::Integer?,
-                                               row_span: ::Integer
+                                               row_span: ::Integer,
+                                               border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               selected_border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               background_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?
+                                               }?,
+                                               loading_animation: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -35513,11 +35608,13 @@ module Aws
                                                ]?,
                                                border_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
-                                                 color: ::String?
+                                                 color: ::String?,
+                                                 width: ::String?
                                                }?,
                                                selected_border_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
-                                                 color: ::String?
+                                                 color: ::String?,
+                                                 width: ::String?
                                                }?,
                                                background_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
@@ -35525,7 +35622,9 @@ module Aws
                                                }?,
                                                loading_animation: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?
-                                               }?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -35559,11 +35658,13 @@ module Aws
                                                        ]?,
                                                        border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        selected_border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        background_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
@@ -35571,7 +35672,9 @@ module Aws
                                                        }?,
                                                        loading_animation: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?
-                                                       }?
+                                                       }?,
+                                                       border_radius: ::String?,
+                                                       padding: ::String?
                                                      },
                                                    ]
                                                  }
@@ -35612,11 +35715,13 @@ module Aws
                                                          ]?,
                                                          border_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
-                                                           color: ::String?
+                                                           color: ::String?,
+                                                           width: ::String?
                                                          }?,
                                                          selected_border_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
-                                                           color: ::String?
+                                                           color: ::String?,
+                                                           width: ::String?
                                                          }?,
                                                          background_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
@@ -35624,7 +35729,9 @@ module Aws
                                                          }?,
                                                          loading_animation: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?
-                                                         }?
+                                                         }?,
+                                                         border_radius: ::String?,
+                                                         padding: ::String?
                                                        },
                                                      ]
                                                    }
@@ -35742,11 +35849,13 @@ module Aws
                                                        ]?,
                                                        border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        selected_border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        background_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
@@ -35754,7 +35863,9 @@ module Aws
                                                        }?,
                                                        loading_animation: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?
-                                                       }?
+                                                       }?,
+                                                       border_radius: ::String?,
+                                                       padding: ::String?
                                                      },
                                                    ]
                                                  }
@@ -35797,7 +35908,26 @@ module Aws
                                                column_index: ::Integer?,
                                                column_span: ::Integer,
                                                row_index: ::Integer?,
-                                               row_span: ::Integer
+                                               row_span: ::Integer,
+                                               border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               selected_border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               background_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?
+                                               }?,
+                                               loading_animation: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -38313,6 +38443,24 @@ module Aws
                                   background: ::String?
                                 }?
                               }?,
+                              contextual_accent_palette: {
+                                connection: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                visualization: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                insight: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                automation: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?
+                              }?,
                               brand_element_style: {
                                 navbar_style: {
                                   global_navbar: {
@@ -38392,7 +38540,19 @@ module Aws
                                          export_to_excel_in_scheduled_reports: ("DENY")?,
                                          include_content_in_scheduled_reports_email: ("DENY")?,
                                          dashboard: ("DENY")?,
-                                         analysis: ("DENY")?
+                                         analysis: ("DENY")?,
+                                         automate: ("DENY")?,
+                                         flow: ("DENY")?,
+                                         publish_without_approval: ("DENY")?,
+                                         use_bedrock_models: ("DENY")?,
+                                         perform_flow_ui_task: ("DENY")?,
+                                         use_agent_web_search: ("DENY")?,
+                                         knowledge_base: ("DENY")?,
+                                         action: ("DENY")?,
+                                         space: ("DENY")?,
+                                         chat_agent: ("DENY")?,
+                                         create_chat_agents: ("DENY")?,
+                                         research: ("DENY")?
                                        },
                                        ?tags: Array[
                                          {
@@ -38504,6 +38664,9 @@ module Aws
                                   availability_status: ("ENABLED" | "DISABLED")?
                                 }?,
                                 data_qa_enabled_option: {
+                                  availability_status: ("ENABLED" | "DISABLED")?
+                                }?,
+                                quick_suite_actions_option: {
                                   availability_status: ("ENABLED" | "DISABLED")?
                                 }?,
                                 executive_summary_option: {
@@ -73009,7 +73172,26 @@ module Aws
                                                 column_index: ::Integer?,
                                                 column_span: ::Integer,
                                                 row_index: ::Integer?,
-                                                row_span: ::Integer
+                                                row_span: ::Integer,
+                                                border_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?,
+                                                  width: ::String?
+                                                }?,
+                                                selected_border_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?,
+                                                  width: ::String?
+                                                }?,
+                                                background_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?
+                                                }?,
+                                                loading_animation: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?
+                                                }?,
+                                                border_radius: ::String?,
+                                                padding: ::String?
                                               },
                                             ],
                                             canvas_size_options: {
@@ -73039,11 +73221,13 @@ module Aws
                                                 ]?,
                                                 border_style: {
                                                   visibility: ("HIDDEN" | "VISIBLE")?,
-                                                  color: ::String?
+                                                  color: ::String?,
+                                                  width: ::String?
                                                 }?,
                                                 selected_border_style: {
                                                   visibility: ("HIDDEN" | "VISIBLE")?,
-                                                  color: ::String?
+                                                  color: ::String?,
+                                                  width: ::String?
                                                 }?,
                                                 background_style: {
                                                   visibility: ("HIDDEN" | "VISIBLE")?,
@@ -73051,7 +73235,9 @@ module Aws
                                                 }?,
                                                 loading_animation: {
                                                   visibility: ("HIDDEN" | "VISIBLE")?
-                                                }?
+                                                }?,
+                                                border_radius: ::String?,
+                                                padding: ::String?
                                               },
                                             ],
                                             canvas_size_options: {
@@ -73085,11 +73271,13 @@ module Aws
                                                         ]?,
                                                         border_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
-                                                          color: ::String?
+                                                          color: ::String?,
+                                                          width: ::String?
                                                         }?,
                                                         selected_border_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
-                                                          color: ::String?
+                                                          color: ::String?,
+                                                          width: ::String?
                                                         }?,
                                                         background_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
@@ -73097,7 +73285,9 @@ module Aws
                                                         }?,
                                                         loading_animation: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?
-                                                        }?
+                                                        }?,
+                                                        border_radius: ::String?,
+                                                        padding: ::String?
                                                       },
                                                     ]
                                                   }
@@ -73138,11 +73328,13 @@ module Aws
                                                           ]?,
                                                           border_style: {
                                                             visibility: ("HIDDEN" | "VISIBLE")?,
-                                                            color: ::String?
+                                                            color: ::String?,
+                                                            width: ::String?
                                                           }?,
                                                           selected_border_style: {
                                                             visibility: ("HIDDEN" | "VISIBLE")?,
-                                                            color: ::String?
+                                                            color: ::String?,
+                                                            width: ::String?
                                                           }?,
                                                           background_style: {
                                                             visibility: ("HIDDEN" | "VISIBLE")?,
@@ -73150,7 +73342,9 @@ module Aws
                                                           }?,
                                                           loading_animation: {
                                                             visibility: ("HIDDEN" | "VISIBLE")?
-                                                          }?
+                                                          }?,
+                                                          border_radius: ::String?,
+                                                          padding: ::String?
                                                         },
                                                       ]
                                                     }
@@ -73268,11 +73462,13 @@ module Aws
                                                         ]?,
                                                         border_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
-                                                          color: ::String?
+                                                          color: ::String?,
+                                                          width: ::String?
                                                         }?,
                                                         selected_border_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
-                                                          color: ::String?
+                                                          color: ::String?,
+                                                          width: ::String?
                                                         }?,
                                                         background_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
@@ -73280,7 +73476,9 @@ module Aws
                                                         }?,
                                                         loading_animation: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?
-                                                        }?
+                                                        }?,
+                                                        border_radius: ::String?,
+                                                        padding: ::String?
                                                       },
                                                     ]
                                                   }
@@ -73323,7 +73521,26 @@ module Aws
                                                 column_index: ::Integer?,
                                                 column_span: ::Integer,
                                                 row_index: ::Integer?,
-                                                row_span: ::Integer
+                                                row_span: ::Integer,
+                                                border_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?,
+                                                  width: ::String?
+                                                }?,
+                                                selected_border_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?,
+                                                  width: ::String?
+                                                }?,
+                                                background_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?
+                                                }?,
+                                                loading_animation: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?
+                                                }?,
+                                                border_radius: ::String?,
+                                                padding: ::String?
                                               },
                                             ],
                                             canvas_size_options: {
@@ -75816,6 +76033,7 @@ module Aws
                                    input_columns: Array[
                                      {
                                        name: ::String,
+                                       id: ::String?,
                                        type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
                                        sub_type: ("FLOAT" | "FIXED")?
                                      },
@@ -75828,6 +76046,7 @@ module Aws
                                    columns: Array[
                                      {
                                        name: ::String,
+                                       id: ::String?,
                                        type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
                                        sub_type: ("FLOAT" | "FIXED")?
                                      },
@@ -75840,11 +76059,30 @@ module Aws
                                      start_from_row: ::Integer?,
                                      contains_header: bool?,
                                      text_qualifier: ("DOUBLE_QUOTE" | "SINGLE_QUOTE")?,
-                                     delimiter: ::String?
+                                     delimiter: ::String?,
+                                     custom_cell_address_range: ::String?
                                    }?,
                                    input_columns: Array[
                                      {
                                        name: ::String,
+                                       id: ::String?,
+                                       type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
+                                       sub_type: ("FLOAT" | "FIXED")?
+                                     },
+                                   ]
+                                 }?,
+                                 saa_s_table: {
+                                   data_source_arn: ::String,
+                                   table_path: Array[
+                                     {
+                                       name: ::String?,
+                                       id: ::String?
+                                     },
+                                   ],
+                                   input_columns: Array[
+                                     {
+                                       name: ::String,
+                                       id: ::String?,
                                        type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
                                        sub_type: ("FLOAT" | "FIXED")?
                                      },
@@ -75856,12 +76094,85 @@ module Aws
                                  data_transforms: Array[
                                    {
                                      project_operation: {
+                                       alias: ::String?,
+                                       source: {
+                                         transform_operation_id: ::String,
+                                         column_id_mappings: Array[
+                                           {
+                                             source_column_id: ::String,
+                                             target_column_id: ::String
+                                           },
+                                         ]?
+                                       }?,
                                        projected_columns: Array[::String]
                                      }?,
                                      filter_operation: {
-                                       condition_expression: ::String
+                                       condition_expression: ::String?,
+                                       string_filter_condition: {
+                                         column_name: ::String?,
+                                         comparison_filter_condition: {
+                                           operator: ("EQUALS" | "DOES_NOT_EQUAL" | "CONTAINS" | "DOES_NOT_CONTAIN" | "STARTS_WITH" | "ENDS_WITH"),
+                                           value: {
+                                             static_value: ::String?
+                                           }?
+                                         }?,
+                                         list_filter_condition: {
+                                           operator: ("INCLUDE" | "EXCLUDE"),
+                                           values: {
+                                             static_values: Array[::String]?
+                                           }?
+                                         }?
+                                       }?,
+                                       numeric_filter_condition: {
+                                         column_name: ::String?,
+                                         comparison_filter_condition: {
+                                           operator: ("EQUALS" | "DOES_NOT_EQUAL" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS_TO" | "LESS_THAN" | "LESS_THAN_OR_EQUALS_TO"),
+                                           value: {
+                                             static_value: ::Float?
+                                           }?
+                                         }?,
+                                         range_filter_condition: {
+                                           range_minimum: {
+                                             static_value: ::Float?
+                                           }?,
+                                           range_maximum: {
+                                             static_value: ::Float?
+                                           }?,
+                                           include_minimum: bool?,
+                                           include_maximum: bool?
+                                         }?
+                                       }?,
+                                       date_filter_condition: {
+                                         column_name: ::String?,
+                                         comparison_filter_condition: {
+                                           operator: ("BEFORE" | "BEFORE_OR_EQUALS_TO" | "AFTER" | "AFTER_OR_EQUALS_TO"),
+                                           value: {
+                                             static_value: ::Time?
+                                           }?
+                                         }?,
+                                         range_filter_condition: {
+                                           range_minimum: {
+                                             static_value: ::Time?
+                                           }?,
+                                           range_maximum: {
+                                             static_value: ::Time?
+                                           }?,
+                                           include_minimum: bool?,
+                                           include_maximum: bool?
+                                         }?
+                                       }?
                                      }?,
                                      create_columns_operation: {
+                                       alias: ::String?,
+                                       source: {
+                                         transform_operation_id: ::String,
+                                         column_id_mappings: Array[
+                                           {
+                                             source_column_id: ::String,
+                                             target_column_id: ::String
+                                           },
+                                         ]?
+                                       }?,
                                        columns: Array[
                                          {
                                            column_name: ::String,
@@ -76026,7 +76337,366 @@ module Aws
                                  },
                                ]?
                              },
-                             ?use_as: ("RLS_RULES")
+                             ?use_as: ("RLS_RULES"),
+                             ?data_prep_configuration: {
+                               source_table_map: Hash[::String, {
+                                   physical_table_id: ::String?,
+                                   data_set: {
+                                     data_set_arn: ::String,
+                                     input_columns: Array[
+                                       {
+                                         name: ::String,
+                                         id: ::String?,
+                                         type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
+                                         sub_type: ("FLOAT" | "FIXED")?
+                                       },
+                                     ]
+                                   }?
+                                 }],
+                               transform_step_map: Hash[::String, {
+                                   import_table_step: {
+                                     alias: ::String,
+                                     source: {
+                                       source_table_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     }
+                                   }?,
+                                   project_step: {
+                                     alias: ::String?,
+                                     source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     }?,
+                                     projected_columns: Array[::String]
+                                   }?,
+                                   filters_step: {
+                                     alias: ::String,
+                                     source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     },
+                                     filter_operations: Array[
+                                       {
+                                         condition_expression: ::String?,
+                                         string_filter_condition: {
+                                           column_name: ::String?,
+                                           comparison_filter_condition: {
+                                             operator: ("EQUALS" | "DOES_NOT_EQUAL" | "CONTAINS" | "DOES_NOT_CONTAIN" | "STARTS_WITH" | "ENDS_WITH"),
+                                             value: {
+                                               static_value: ::String?
+                                             }?
+                                           }?,
+                                           list_filter_condition: {
+                                             operator: ("INCLUDE" | "EXCLUDE"),
+                                             values: {
+                                               static_values: Array[::String]?
+                                             }?
+                                           }?
+                                         }?,
+                                         numeric_filter_condition: {
+                                           column_name: ::String?,
+                                           comparison_filter_condition: {
+                                             operator: ("EQUALS" | "DOES_NOT_EQUAL" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS_TO" | "LESS_THAN" | "LESS_THAN_OR_EQUALS_TO"),
+                                             value: {
+                                               static_value: ::Float?
+                                             }?
+                                           }?,
+                                           range_filter_condition: {
+                                             range_minimum: {
+                                               static_value: ::Float?
+                                             }?,
+                                             range_maximum: {
+                                               static_value: ::Float?
+                                             }?,
+                                             include_minimum: bool?,
+                                             include_maximum: bool?
+                                           }?
+                                         }?,
+                                         date_filter_condition: {
+                                           column_name: ::String?,
+                                           comparison_filter_condition: {
+                                             operator: ("BEFORE" | "BEFORE_OR_EQUALS_TO" | "AFTER" | "AFTER_OR_EQUALS_TO"),
+                                             value: {
+                                               static_value: ::Time?
+                                             }?
+                                           }?,
+                                           range_filter_condition: {
+                                             range_minimum: {
+                                               static_value: ::Time?
+                                             }?,
+                                             range_maximum: {
+                                               static_value: ::Time?
+                                             }?,
+                                             include_minimum: bool?,
+                                             include_maximum: bool?
+                                           }?
+                                         }?
+                                       },
+                                     ]
+                                   }?,
+                                   create_columns_step: {
+                                     alias: ::String?,
+                                     source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     }?,
+                                     columns: Array[
+                                       {
+                                         column_name: ::String,
+                                         column_id: ::String,
+                                         expression: ::String
+                                       },
+                                     ]
+                                   }?,
+                                   rename_columns_step: {
+                                     alias: ::String,
+                                     source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     },
+                                     rename_column_operations: Array[
+                                       {
+                                         column_name: ::String,
+                                         new_column_name: ::String
+                                       },
+                                     ]
+                                   }?,
+                                   cast_column_types_step: {
+                                     alias: ::String,
+                                     source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     },
+                                     cast_column_type_operations: Array[
+                                       {
+                                         column_name: ::String,
+                                         new_column_type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME"),
+                                         sub_type: ("FLOAT" | "FIXED")?,
+                                         format: ::String?
+                                       },
+                                     ]
+                                   }?,
+                                   join_step: {
+                                     alias: ::String,
+                                     left_operand: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     },
+                                     right_operand: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     },
+                                     type: ("INNER" | "OUTER" | "LEFT" | "RIGHT"),
+                                     on_clause: ::String,
+                                     left_operand_properties: {
+                                       output_column_name_overrides: Array[
+                                         {
+                                           source_column_name: ::String?,
+                                           output_column_name: ::String
+                                         },
+                                       ]
+                                     }?,
+                                     right_operand_properties: {
+                                       output_column_name_overrides: Array[
+                                         {
+                                           source_column_name: ::String?,
+                                           output_column_name: ::String
+                                         },
+                                       ]
+                                     }?
+                                   }?,
+                                   aggregate_step: {
+                                     alias: ::String,
+                                     source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     },
+                                     group_by_column_names: Array[::String]?,
+                                     aggregations: Array[
+                                       {
+                                         aggregation_function: {
+                                           simple_aggregation: {
+                                             input_column_name: ::String?,
+                                             function_type: ("COUNT" | "DISTINCT_COUNT" | "SUM" | "AVERAGE" | "MAX" | "MIN")
+                                           }?,
+                                           list_aggregation: {
+                                             input_column_name: ::String?,
+                                             separator: ::String,
+                                             distinct: bool
+                                           }?
+                                         },
+                                         new_column_name: ::String,
+                                         new_column_id: ::String
+                                       },
+                                     ]
+                                   }?,
+                                   pivot_step: {
+                                     alias: ::String,
+                                     source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     },
+                                     group_by_column_names: Array[::String]?,
+                                     value_column_configuration: {
+                                       aggregation_function: {
+                                         simple_aggregation: {
+                                           input_column_name: ::String?,
+                                           function_type: ("COUNT" | "DISTINCT_COUNT" | "SUM" | "AVERAGE" | "MAX" | "MIN")
+                                         }?,
+                                         list_aggregation: {
+                                           input_column_name: ::String?,
+                                           separator: ::String,
+                                           distinct: bool
+                                         }?
+                                       }?
+                                     },
+                                     pivot_configuration: {
+                                       label_column_name: ::String?,
+                                       pivoted_labels: Array[
+                                         {
+                                           label_name: ::String,
+                                           new_column_name: ::String,
+                                           new_column_id: ::String
+                                         },
+                                       ]
+                                     }
+                                   }?,
+                                   unpivot_step: {
+                                     alias: ::String,
+                                     source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     },
+                                     columns_to_unpivot: Array[
+                                       {
+                                         column_name: ::String?,
+                                         new_value: ::String?
+                                       },
+                                     ],
+                                     unpivoted_label_column_name: ::String,
+                                     unpivoted_label_column_id: ::String,
+                                     unpivoted_value_column_name: ::String,
+                                     unpivoted_value_column_id: ::String
+                                   }?,
+                                   append_step: {
+                                     alias: ::String,
+                                     first_source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     }?,
+                                     second_source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     }?,
+                                     appended_columns: Array[
+                                       {
+                                         column_name: ::String,
+                                         new_column_id: ::String
+                                       },
+                                     ]
+                                   }?
+                                 }],
+                               destination_table_map: Hash[::String, {
+                                   alias: ::String,
+                                   source: {
+                                     transform_operation_id: ::String
+                                   }
+                                 }]
+                             },
+                             ?semantic_model_configuration: {
+                               table_map: Hash[::String, {
+                                   alias: ::String,
+                                   destination_table_id: ::String,
+                                   row_level_permission_configuration: {
+                                     tag_configuration: {
+                                       status: ("ENABLED" | "DISABLED")?,
+                                       tag_rules: Array[
+                                         {
+                                           tag_key: ::String,
+                                           column_name: ::String,
+                                           tag_multi_value_delimiter: ::String?,
+                                           match_all_value: ::String?
+                                         },
+                                       ],
+                                       tag_rule_configurations: Array[
+                                         Array[::String],
+                                       ]?
+                                     }?,
+                                     row_level_permission_data_set: {
+                                       namespace: ::String?,
+                                       arn: ::String,
+                                       permission_policy: ("GRANT_ACCESS" | "DENY_ACCESS"),
+                                       format_version: ("VERSION_1" | "VERSION_2")?,
+                                       status: ("ENABLED" | "DISABLED")?
+                                     }?
+                                   }?
+                                 }]?
+                             }
                            ) -> _CreateDataSetResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataSetResponseSuccess
 
@@ -76043,7 +76713,7 @@ module Aws
                                 aws_account_id: ::String,
                                 data_source_id: ::String,
                                 name: ::String,
-                                type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY" | "GOOGLESHEETS"),
+                                type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY" | "GOOGLESHEETS" | "GOOGLE_DRIVE" | "CONFLUENCE" | "SHAREPOINT" | "ONE_DRIVE" | "WEB_CRAWLER" | "S3_KNOWLEDGE_BASE" | "QBUSINESS"),
                                 ?data_source_parameters: {
                                   amazon_elasticsearch_parameters: {
                                     domain: ::String
@@ -76122,6 +76792,11 @@ module Aws
                                       key: ::String
                                     },
                                     role_arn: ::String?
+                                  }?,
+                                  s3_knowledge_base_parameters: {
+                                    role_arn: ::String?,
+                                    bucket_url: ::String,
+                                    metadata_files_location: ::String?
                                   }?,
                                   service_now_parameters: {
                                     site_base_url: ::String
@@ -76204,6 +76879,22 @@ module Aws
                                   }?,
                                   custom_connection_parameters: {
                                     connection_type: ::String?
+                                  }?,
+                                  web_crawler_parameters: {
+                                    web_crawler_auth_type: ("NO_AUTH" | "BASIC_AUTH" | "FORM" | "SAML"),
+                                    username_field_xpath: ::String?,
+                                    password_field_xpath: ::String?,
+                                    username_button_xpath: ::String?,
+                                    password_button_xpath: ::String?,
+                                    login_page_url: ::String?,
+                                    web_proxy_host_name: ::String?,
+                                    web_proxy_port_number: ::Integer?
+                                  }?,
+                                  confluence_parameters: {
+                                    confluence_url: ::String
+                                  }?,
+                                  q_business_parameters: {
+                                    application_arn: ::String
                                   }?
                                 },
                                 ?credentials: {
@@ -76290,6 +76981,11 @@ module Aws
                                           },
                                           role_arn: ::String?
                                         }?,
+                                        s3_knowledge_base_parameters: {
+                                          role_arn: ::String?,
+                                          bucket_url: ::String,
+                                          metadata_files_location: ::String?
+                                        }?,
                                         service_now_parameters: {
                                           site_base_url: ::String
                                         }?,
@@ -76371,12 +77067,32 @@ module Aws
                                         }?,
                                         custom_connection_parameters: {
                                           connection_type: ::String?
+                                        }?,
+                                        web_crawler_parameters: {
+                                          web_crawler_auth_type: ("NO_AUTH" | "BASIC_AUTH" | "FORM" | "SAML"),
+                                          username_field_xpath: ::String?,
+                                          password_field_xpath: ::String?,
+                                          username_button_xpath: ::String?,
+                                          password_button_xpath: ::String?,
+                                          login_page_url: ::String?,
+                                          web_proxy_host_name: ::String?,
+                                          web_proxy_port_number: ::Integer?
+                                        }?,
+                                        confluence_parameters: {
+                                          confluence_url: ::String
+                                        }?,
+                                        q_business_parameters: {
+                                          application_arn: ::String
                                         }?
                                       },
                                     ]?
                                   }?,
                                   copy_source_arn: ::String?,
-                                  secret_arn: ::String?
+                                  secret_arn: ::String?,
+                                  web_proxy_credentials: {
+                                    web_proxy_username: ::String,
+                                    web_proxy_password: ::String
+                                  }?
                                 },
                                 ?permissions: Array[
                                   {
@@ -111134,7 +111850,26 @@ module Aws
                                                column_index: ::Integer?,
                                                column_span: ::Integer,
                                                row_index: ::Integer?,
-                                               row_span: ::Integer
+                                               row_span: ::Integer,
+                                               border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               selected_border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               background_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?
+                                               }?,
+                                               loading_animation: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -111164,11 +111899,13 @@ module Aws
                                                ]?,
                                                border_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
-                                                 color: ::String?
+                                                 color: ::String?,
+                                                 width: ::String?
                                                }?,
                                                selected_border_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
-                                                 color: ::String?
+                                                 color: ::String?,
+                                                 width: ::String?
                                                }?,
                                                background_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
@@ -111176,7 +111913,9 @@ module Aws
                                                }?,
                                                loading_animation: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?
-                                               }?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -111210,11 +111949,13 @@ module Aws
                                                        ]?,
                                                        border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        selected_border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        background_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
@@ -111222,7 +111963,9 @@ module Aws
                                                        }?,
                                                        loading_animation: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?
-                                                       }?
+                                                       }?,
+                                                       border_radius: ::String?,
+                                                       padding: ::String?
                                                      },
                                                    ]
                                                  }
@@ -111263,11 +112006,13 @@ module Aws
                                                          ]?,
                                                          border_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
-                                                           color: ::String?
+                                                           color: ::String?,
+                                                           width: ::String?
                                                          }?,
                                                          selected_border_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
-                                                           color: ::String?
+                                                           color: ::String?,
+                                                           width: ::String?
                                                          }?,
                                                          background_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
@@ -111275,7 +112020,9 @@ module Aws
                                                          }?,
                                                          loading_animation: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?
-                                                         }?
+                                                         }?,
+                                                         border_radius: ::String?,
+                                                         padding: ::String?
                                                        },
                                                      ]
                                                    }
@@ -111393,11 +112140,13 @@ module Aws
                                                        ]?,
                                                        border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        selected_border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        background_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
@@ -111405,7 +112154,9 @@ module Aws
                                                        }?,
                                                        loading_animation: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?
-                                                       }?
+                                                       }?,
+                                                       border_radius: ::String?,
+                                                       padding: ::String?
                                                      },
                                                    ]
                                                  }
@@ -111448,7 +112199,26 @@ module Aws
                                                column_index: ::Integer?,
                                                column_span: ::Integer,
                                                row_index: ::Integer?,
-                                               row_span: ::Integer
+                                               row_span: ::Integer,
+                                               border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               selected_border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               background_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?
+                                               }?,
+                                               loading_animation: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -113968,9 +114738,14 @@ module Aws
                             }?,
                             sheet: {
                               tile: {
+                                background_color: ::String?,
                                 border: {
-                                  show: bool?
-                                }?
+                                  color: ::String?,
+                                  show: bool?,
+                                  width: ::String?
+                                }?,
+                                border_radius: ::String?,
+                                padding: ::String?
                               }?,
                               tile_layout: {
                                 gutter: {
@@ -113979,6 +114754,10 @@ module Aws
                                 margin: {
                                   show: bool?
                                 }?
+                              }?,
+                              background: {
+                                color: ::String?,
+                                gradient: ::String?
                               }?
                             }?,
                             typography: {
@@ -113986,7 +114765,106 @@ module Aws
                                 {
                                   font_family: ::String?
                                 },
-                              ]?
+                              ]?,
+                              axis_title_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              axis_label_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              legend_title_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              legend_value_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              data_label_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              visual_title_font_configuration: {
+                                font_configuration: {
+                                  font_size: {
+                                    relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                    absolute: ::String?
+                                  }?,
+                                  font_decoration: ("UNDERLINE" | "NONE")?,
+                                  font_color: ::String?,
+                                  font_weight: {
+                                    name: ("NORMAL" | "BOLD")?
+                                  }?,
+                                  font_style: ("NORMAL" | "ITALIC")?,
+                                  font_family: ::String?
+                                }?,
+                                text_alignment: ("LEFT" | "CENTER" | "RIGHT" | "AUTO")?,
+                                text_transform: ("CAPITALIZE")?
+                              }?,
+                              visual_subtitle_font_configuration: {
+                                font_configuration: {
+                                  font_size: {
+                                    relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                    absolute: ::String?
+                                  }?,
+                                  font_decoration: ("UNDERLINE" | "NONE")?,
+                                  font_color: ::String?,
+                                  font_weight: {
+                                    name: ("NORMAL" | "BOLD")?
+                                  }?,
+                                  font_style: ("NORMAL" | "ITALIC")?,
+                                  font_family: ::String?
+                                }?,
+                                text_alignment: ("LEFT" | "CENTER" | "RIGHT" | "AUTO")?,
+                                text_transform: ("CAPITALIZE")?
+                              }?
                             }?
                           },
                           ?permissions: Array[
@@ -114352,6 +115230,20 @@ module Aws
                                          aws_account_id: ::String
                                        ) -> _DeleteAccountSubscriptionResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccountSubscriptionResponseSuccess
+
+      interface _DeleteActionConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteActionConnectorResponse]
+        def arn: () -> ::String
+        def action_connector_id: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#delete_action_connector-instance_method
+      def delete_action_connector: (
+                                     aws_account_id: ::String,
+                                     action_connector_id: ::String
+                                   ) -> _DeleteActionConnectorResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteActionConnectorResponseSuccess
 
       interface _DeleteAnalysisResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAnalysisResponse]
@@ -114805,6 +115697,34 @@ module Aws
                                            aws_account_id: ::String
                                          ) -> _DescribeAccountSubscriptionResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountSubscriptionResponseSuccess
+
+      interface _DescribeActionConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeActionConnectorResponse]
+        def action_connector: () -> Types::ActionConnector
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_action_connector-instance_method
+      def describe_action_connector: (
+                                       aws_account_id: ::String,
+                                       action_connector_id: ::String
+                                     ) -> _DescribeActionConnectorResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeActionConnectorResponseSuccess
+
+      interface _DescribeActionConnectorPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeActionConnectorPermissionsResponse]
+        def arn: () -> ::String
+        def action_connector_id: () -> ::String
+        def permissions: () -> ::Array[Types::ResourcePermission]
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_action_connector_permissions-instance_method
+      def describe_action_connector_permissions: (
+                                                   aws_account_id: ::String,
+                                                   action_connector_id: ::String
+                                                 ) -> _DescribeActionConnectorPermissionsResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeActionConnectorPermissionsResponseSuccess
 
       interface _DescribeAnalysisResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAnalysisResponse]
@@ -115681,6 +116601,8 @@ module Aws
                                                       }?,
                                                       generative_qn_a: {
                                                         initial_topic_id: ::String?
+                                                      }?,
+                                                      quick_chat: {
                                                       }?
                                                     },
                                                     ?allowed_domains: Array[::String]
@@ -115772,6 +116694,8 @@ module Aws
                                                                     }?,
                                                                     generative_qn_a: {
                                                                       initial_topic_id: ::String?
+                                                                    }?,
+                                                                    quick_chat: {
                                                                     }?
                                                                   },
                                                                   ?allowed_domains: Array[::String]
@@ -115799,6 +116723,42 @@ module Aws
                                    ) -> _GetDashboardEmbedUrlResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDashboardEmbedUrlResponseSuccess
 
+      interface _GetFlowMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFlowMetadataOutput]
+        def arn: () -> ::String
+        def flow_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def publish_state: () -> ("PUBLISHED" | "DRAFT" | "PENDING_APPROVAL")
+        def user_count: () -> ::Integer
+        def run_count: () -> ::Integer
+        def created_time: () -> ::Time
+        def last_updated_time: () -> ::Time
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#get_flow_metadata-instance_method
+      def get_flow_metadata: (
+                               aws_account_id: ::String,
+                               flow_id: ::String
+                             ) -> _GetFlowMetadataResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFlowMetadataResponseSuccess
+
+      interface _GetFlowPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFlowPermissionsOutput]
+        def arn: () -> ::String
+        def flow_id: () -> ::String
+        def permissions: () -> ::Array[Types::Permission]
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#get_flow_permissions-instance_method
+      def get_flow_permissions: (
+                                  aws_account_id: ::String,
+                                  flow_id: ::String
+                                ) -> _GetFlowPermissionsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFlowPermissionsResponseSuccess
+
       interface _GetSessionEmbedUrlResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionEmbedUrlResponse]
         def embed_url: () -> ::String
@@ -115813,6 +116773,21 @@ module Aws
                                    ?user_arn: ::String
                                  ) -> _GetSessionEmbedUrlResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSessionEmbedUrlResponseSuccess
+
+      interface _ListActionConnectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListActionConnectorsResponse]
+        def action_connector_summaries: () -> ::Array[Types::ActionConnectorSummary]
+        def next_token: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#list_action_connectors-instance_method
+      def list_action_connectors: (
+                                    aws_account_id: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListActionConnectorsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListActionConnectorsResponseSuccess
 
       interface _ListAnalysesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAnalysesResponse]
@@ -115947,6 +116922,21 @@ module Aws
                                ?max_results: ::Integer
                              ) -> _ListDataSourcesResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataSourcesResponseSuccess
+
+      interface _ListFlowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFlowsOutput]
+        def flow_summary_list: () -> ::Array[Types::FlowSummary]
+        def next_token: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#list_flows-instance_method
+      def list_flows: (
+                        aws_account_id: ::String,
+                        ?next_token: ::String,
+                        ?max_results: ::Integer
+                      ) -> _ListFlowsResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlowsResponseSuccess
 
       interface _ListFolderMembersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFolderMembersResponse]
@@ -116429,6 +117419,28 @@ module Aws
                             ) -> _RestoreAnalysisResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreAnalysisResponseSuccess
 
+      interface _SearchActionConnectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchActionConnectorsResponse]
+        def next_token: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+        def action_connector_summaries: () -> ::Array[Types::ActionConnectorSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#search_action_connectors-instance_method
+      def search_action_connectors: (
+                                      aws_account_id: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String,
+                                      filters: Array[
+                                        {
+                                          name: ("ACTION_CONNECTOR_NAME" | "ACTION_CONNECTOR_TYPE" | "QUICKSIGHT_OWNER" | "QUICKSIGHT_VIEWER_OR_OWNER" | "DIRECT_QUICKSIGHT_SOLE_OWNER" | "DIRECT_QUICKSIGHT_OWNER" | "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"),
+                                          operator: ("StringEquals" | "StringLike"),
+                                          value: ::String
+                                        },
+                                      ]
+                                    ) -> _SearchActionConnectorsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchActionConnectorsResponseSuccess
+
       interface _SearchAnalysesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchAnalysesResponse]
         def analysis_summary_list: () -> ::Array[Types::AnalysisSummary]
@@ -116516,6 +117528,28 @@ module Aws
                                  ?max_results: ::Integer
                                ) -> _SearchDataSourcesResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchDataSourcesResponseSuccess
+
+      interface _SearchFlowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchFlowsOutput]
+        def flow_summary_list: () -> ::Array[Types::FlowSummary]
+        def next_token: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#search_flows-instance_method
+      def search_flows: (
+                          aws_account_id: ::String,
+                          filters: Array[
+                            {
+                              name: ("assetName" | "assetDescription" | "DIRECT_QUICKSIGHT_OWNER" | "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER" | "DIRECT_QUICKSIGHT_SOLE_OWNER"),
+                              operator: ("StringEquals" | "StringLike"),
+                              value: ::String
+                            },
+                          ],
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _SearchFlowsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchFlowsResponseSuccess
 
       interface _SearchFoldersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchFoldersResponse]
@@ -116780,6 +117814,11 @@ module Aws
                                                      },
                                                      role_arn: ::String?
                                                    }?,
+                                                   s3_knowledge_base_parameters: {
+                                                     role_arn: ::String?,
+                                                     bucket_url: ::String,
+                                                     metadata_files_location: ::String?
+                                                   }?,
                                                    service_now_parameters: {
                                                      site_base_url: ::String
                                                    }?,
@@ -116861,6 +117900,22 @@ module Aws
                                                    }?,
                                                    custom_connection_parameters: {
                                                      connection_type: ::String?
+                                                   }?,
+                                                   web_crawler_parameters: {
+                                                     web_crawler_auth_type: ("NO_AUTH" | "BASIC_AUTH" | "FORM" | "SAML"),
+                                                     username_field_xpath: ::String?,
+                                                     password_field_xpath: ::String?,
+                                                     username_button_xpath: ::String?,
+                                                     password_button_xpath: ::String?,
+                                                     login_page_url: ::String?,
+                                                     web_proxy_host_name: ::String?,
+                                                     web_proxy_port_number: ::Integer?
+                                                   }?,
+                                                   confluence_parameters: {
+                                                     confluence_url: ::String
+                                                   }?,
+                                                   q_business_parameters: {
+                                                     application_arn: ::String
                                                    }?
                                                  }?,
                                                  vpc_connection_properties: {
@@ -117243,6 +118298,96 @@ module Aws
                                      ?termination_protection_enabled: bool
                                    ) -> _UpdateAccountSettingsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccountSettingsResponseSuccess
+
+      interface _UpdateActionConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateActionConnectorResponse]
+        def arn: () -> ::String
+        def action_connector_id: () -> ::String
+        def request_id: () -> ::String
+        def update_status: () -> ("CREATION_IN_PROGRESS" | "CREATION_SUCCESSFUL" | "CREATION_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED" | "DELETED")
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_action_connector-instance_method
+      def update_action_connector: (
+                                     aws_account_id: ::String,
+                                     action_connector_id: ::String,
+                                     name: ::String,
+                                     authentication_config: {
+                                       authentication_type: ("BASIC" | "API_KEY" | "OAUTH2_CLIENT_CREDENTIALS" | "NONE" | "IAM" | "OAUTH2_AUTHORIZATION_CODE"),
+                                       authentication_metadata: {
+                                         authorization_code_grant_metadata: {
+                                           base_endpoint: ::String,
+                                           redirect_url: ::String,
+                                           authorization_code_grant_credentials_source: ("PLAIN_CREDENTIALS")?,
+                                           authorization_code_grant_credentials_details: {
+                                             authorization_code_grant_details: {
+                                               client_id: ::String,
+                                               client_secret: ::String,
+                                               token_endpoint: ::String,
+                                               authorization_endpoint: ::String
+                                             }?
+                                           }?
+                                         }?,
+                                         client_credentials_grant_metadata: {
+                                           base_endpoint: ::String,
+                                           client_credentials_source: ("PLAIN_CREDENTIALS")?,
+                                           client_credentials_details: {
+                                             client_credentials_grant_details: {
+                                               client_id: ::String,
+                                               client_secret: ::String,
+                                               token_endpoint: ::String
+                                             }?
+                                           }?
+                                         }?,
+                                         basic_auth_connection_metadata: {
+                                           base_endpoint: ::String,
+                                           username: ::String,
+                                           password: ::String
+                                         }?,
+                                         api_key_connection_metadata: {
+                                           base_endpoint: ::String,
+                                           api_key: ::String,
+                                           email: ::String?
+                                         }?,
+                                         none_connection_metadata: {
+                                           base_endpoint: ::String
+                                         }?,
+                                         iam_connection_metadata: {
+                                           role_arn: ::String
+                                         }?
+                                       }
+                                     },
+                                     ?description: ::String,
+                                     ?vpc_connection_arn: ::String
+                                   ) -> _UpdateActionConnectorResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateActionConnectorResponseSuccess
+
+      interface _UpdateActionConnectorPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateActionConnectorPermissionsResponse]
+        def arn: () -> ::String
+        def action_connector_id: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+        def permissions: () -> ::Array[Types::ResourcePermission]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_action_connector_permissions-instance_method
+      def update_action_connector_permissions: (
+                                                 aws_account_id: ::String,
+                                                 action_connector_id: ::String,
+                                                 ?grant_permissions: Array[
+                                                   {
+                                                     principal: ::String,
+                                                     actions: Array[::String]
+                                                   },
+                                                 ],
+                                                 ?revoke_permissions: Array[
+                                                   {
+                                                     principal: ::String,
+                                                     actions: Array[::String]
+                                                   },
+                                                 ]
+                                               ) -> _UpdateActionConnectorPermissionsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateActionConnectorPermissionsResponseSuccess
 
       interface _UpdateAnalysisResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAnalysisResponse]
@@ -151790,7 +152935,26 @@ module Aws
                                                column_index: ::Integer?,
                                                column_span: ::Integer,
                                                row_index: ::Integer?,
-                                               row_span: ::Integer
+                                               row_span: ::Integer,
+                                               border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               selected_border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               background_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?
+                                               }?,
+                                               loading_animation: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -151820,11 +152984,13 @@ module Aws
                                                ]?,
                                                border_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
-                                                 color: ::String?
+                                                 color: ::String?,
+                                                 width: ::String?
                                                }?,
                                                selected_border_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
-                                                 color: ::String?
+                                                 color: ::String?,
+                                                 width: ::String?
                                                }?,
                                                background_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
@@ -151832,7 +152998,9 @@ module Aws
                                                }?,
                                                loading_animation: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?
-                                               }?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -151866,11 +153034,13 @@ module Aws
                                                        ]?,
                                                        border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        selected_border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        background_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
@@ -151878,7 +153048,9 @@ module Aws
                                                        }?,
                                                        loading_animation: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?
-                                                       }?
+                                                       }?,
+                                                       border_radius: ::String?,
+                                                       padding: ::String?
                                                      },
                                                    ]
                                                  }
@@ -151919,11 +153091,13 @@ module Aws
                                                          ]?,
                                                          border_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
-                                                           color: ::String?
+                                                           color: ::String?,
+                                                           width: ::String?
                                                          }?,
                                                          selected_border_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
-                                                           color: ::String?
+                                                           color: ::String?,
+                                                           width: ::String?
                                                          }?,
                                                          background_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
@@ -151931,7 +153105,9 @@ module Aws
                                                          }?,
                                                          loading_animation: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?
-                                                         }?
+                                                         }?,
+                                                         border_radius: ::String?,
+                                                         padding: ::String?
                                                        },
                                                      ]
                                                    }
@@ -152049,11 +153225,13 @@ module Aws
                                                        ]?,
                                                        border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        selected_border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        background_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
@@ -152061,7 +153239,9 @@ module Aws
                                                        }?,
                                                        loading_animation: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?
-                                                       }?
+                                                       }?,
+                                                       border_radius: ::String?,
+                                                       padding: ::String?
                                                      },
                                                    ]
                                                  }
@@ -152104,7 +153284,26 @@ module Aws
                                                column_index: ::Integer?,
                                                column_span: ::Integer,
                                                row_index: ::Integer?,
-                                               row_span: ::Integer
+                                               row_span: ::Integer,
+                                               border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               selected_border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               background_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?
+                                               }?,
+                                               loading_animation: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -154658,6 +155857,24 @@ module Aws
                                   background: ::String?
                                 }?
                               }?,
+                              contextual_accent_palette: {
+                                connection: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                visualization: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                insight: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?,
+                                automation: {
+                                  foreground: ::String?,
+                                  background: ::String?
+                                }?
+                              }?,
                               brand_element_style: {
                                 navbar_style: {
                                   global_navbar: {
@@ -154756,7 +155973,19 @@ module Aws
                                          export_to_excel_in_scheduled_reports: ("DENY")?,
                                          include_content_in_scheduled_reports_email: ("DENY")?,
                                          dashboard: ("DENY")?,
-                                         analysis: ("DENY")?
+                                         analysis: ("DENY")?,
+                                         automate: ("DENY")?,
+                                         flow: ("DENY")?,
+                                         publish_without_approval: ("DENY")?,
+                                         use_bedrock_models: ("DENY")?,
+                                         perform_flow_ui_task: ("DENY")?,
+                                         use_agent_web_search: ("DENY")?,
+                                         knowledge_base: ("DENY")?,
+                                         action: ("DENY")?,
+                                         space: ("DENY")?,
+                                         chat_agent: ("DENY")?,
+                                         create_chat_agents: ("DENY")?,
+                                         research: ("DENY")?
                                        }
                                      ) -> _UpdateCustomPermissionsResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCustomPermissionsResponseSuccess
@@ -154850,6 +156079,9 @@ module Aws
                                   availability_status: ("ENABLED" | "DISABLED")?
                                 }?,
                                 data_qa_enabled_option: {
+                                  availability_status: ("ENABLED" | "DISABLED")?
+                                }?,
+                                quick_suite_actions_option: {
                                   availability_status: ("ENABLED" | "DISABLED")?
                                 }?,
                                 executive_summary_option: {
@@ -189355,7 +190587,26 @@ module Aws
                                                 column_index: ::Integer?,
                                                 column_span: ::Integer,
                                                 row_index: ::Integer?,
-                                                row_span: ::Integer
+                                                row_span: ::Integer,
+                                                border_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?,
+                                                  width: ::String?
+                                                }?,
+                                                selected_border_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?,
+                                                  width: ::String?
+                                                }?,
+                                                background_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?
+                                                }?,
+                                                loading_animation: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?
+                                                }?,
+                                                border_radius: ::String?,
+                                                padding: ::String?
                                               },
                                             ],
                                             canvas_size_options: {
@@ -189385,11 +190636,13 @@ module Aws
                                                 ]?,
                                                 border_style: {
                                                   visibility: ("HIDDEN" | "VISIBLE")?,
-                                                  color: ::String?
+                                                  color: ::String?,
+                                                  width: ::String?
                                                 }?,
                                                 selected_border_style: {
                                                   visibility: ("HIDDEN" | "VISIBLE")?,
-                                                  color: ::String?
+                                                  color: ::String?,
+                                                  width: ::String?
                                                 }?,
                                                 background_style: {
                                                   visibility: ("HIDDEN" | "VISIBLE")?,
@@ -189397,7 +190650,9 @@ module Aws
                                                 }?,
                                                 loading_animation: {
                                                   visibility: ("HIDDEN" | "VISIBLE")?
-                                                }?
+                                                }?,
+                                                border_radius: ::String?,
+                                                padding: ::String?
                                               },
                                             ],
                                             canvas_size_options: {
@@ -189431,11 +190686,13 @@ module Aws
                                                         ]?,
                                                         border_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
-                                                          color: ::String?
+                                                          color: ::String?,
+                                                          width: ::String?
                                                         }?,
                                                         selected_border_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
-                                                          color: ::String?
+                                                          color: ::String?,
+                                                          width: ::String?
                                                         }?,
                                                         background_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
@@ -189443,7 +190700,9 @@ module Aws
                                                         }?,
                                                         loading_animation: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?
-                                                        }?
+                                                        }?,
+                                                        border_radius: ::String?,
+                                                        padding: ::String?
                                                       },
                                                     ]
                                                   }
@@ -189484,11 +190743,13 @@ module Aws
                                                           ]?,
                                                           border_style: {
                                                             visibility: ("HIDDEN" | "VISIBLE")?,
-                                                            color: ::String?
+                                                            color: ::String?,
+                                                            width: ::String?
                                                           }?,
                                                           selected_border_style: {
                                                             visibility: ("HIDDEN" | "VISIBLE")?,
-                                                            color: ::String?
+                                                            color: ::String?,
+                                                            width: ::String?
                                                           }?,
                                                           background_style: {
                                                             visibility: ("HIDDEN" | "VISIBLE")?,
@@ -189496,7 +190757,9 @@ module Aws
                                                           }?,
                                                           loading_animation: {
                                                             visibility: ("HIDDEN" | "VISIBLE")?
-                                                          }?
+                                                          }?,
+                                                          border_radius: ::String?,
+                                                          padding: ::String?
                                                         },
                                                       ]
                                                     }
@@ -189614,11 +190877,13 @@ module Aws
                                                         ]?,
                                                         border_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
-                                                          color: ::String?
+                                                          color: ::String?,
+                                                          width: ::String?
                                                         }?,
                                                         selected_border_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
-                                                          color: ::String?
+                                                          color: ::String?,
+                                                          width: ::String?
                                                         }?,
                                                         background_style: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?,
@@ -189626,7 +190891,9 @@ module Aws
                                                         }?,
                                                         loading_animation: {
                                                           visibility: ("HIDDEN" | "VISIBLE")?
-                                                        }?
+                                                        }?,
+                                                        border_radius: ::String?,
+                                                        padding: ::String?
                                                       },
                                                     ]
                                                   }
@@ -189669,7 +190936,26 @@ module Aws
                                                 column_index: ::Integer?,
                                                 column_span: ::Integer,
                                                 row_index: ::Integer?,
-                                                row_span: ::Integer
+                                                row_span: ::Integer,
+                                                border_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?,
+                                                  width: ::String?
+                                                }?,
+                                                selected_border_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?,
+                                                  width: ::String?
+                                                }?,
+                                                background_style: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  color: ::String?
+                                                }?,
+                                                loading_animation: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?
+                                                }?,
+                                                border_radius: ::String?,
+                                                padding: ::String?
                                               },
                                             ],
                                             canvas_size_options: {
@@ -192235,6 +193521,7 @@ module Aws
                                    input_columns: Array[
                                      {
                                        name: ::String,
+                                       id: ::String?,
                                        type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
                                        sub_type: ("FLOAT" | "FIXED")?
                                      },
@@ -192247,6 +193534,7 @@ module Aws
                                    columns: Array[
                                      {
                                        name: ::String,
+                                       id: ::String?,
                                        type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
                                        sub_type: ("FLOAT" | "FIXED")?
                                      },
@@ -192259,11 +193547,30 @@ module Aws
                                      start_from_row: ::Integer?,
                                      contains_header: bool?,
                                      text_qualifier: ("DOUBLE_QUOTE" | "SINGLE_QUOTE")?,
-                                     delimiter: ::String?
+                                     delimiter: ::String?,
+                                     custom_cell_address_range: ::String?
                                    }?,
                                    input_columns: Array[
                                      {
                                        name: ::String,
+                                       id: ::String?,
+                                       type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
+                                       sub_type: ("FLOAT" | "FIXED")?
+                                     },
+                                   ]
+                                 }?,
+                                 saa_s_table: {
+                                   data_source_arn: ::String,
+                                   table_path: Array[
+                                     {
+                                       name: ::String?,
+                                       id: ::String?
+                                     },
+                                   ],
+                                   input_columns: Array[
+                                     {
+                                       name: ::String,
+                                       id: ::String?,
                                        type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
                                        sub_type: ("FLOAT" | "FIXED")?
                                      },
@@ -192275,12 +193582,85 @@ module Aws
                                  data_transforms: Array[
                                    {
                                      project_operation: {
+                                       alias: ::String?,
+                                       source: {
+                                         transform_operation_id: ::String,
+                                         column_id_mappings: Array[
+                                           {
+                                             source_column_id: ::String,
+                                             target_column_id: ::String
+                                           },
+                                         ]?
+                                       }?,
                                        projected_columns: Array[::String]
                                      }?,
                                      filter_operation: {
-                                       condition_expression: ::String
+                                       condition_expression: ::String?,
+                                       string_filter_condition: {
+                                         column_name: ::String?,
+                                         comparison_filter_condition: {
+                                           operator: ("EQUALS" | "DOES_NOT_EQUAL" | "CONTAINS" | "DOES_NOT_CONTAIN" | "STARTS_WITH" | "ENDS_WITH"),
+                                           value: {
+                                             static_value: ::String?
+                                           }?
+                                         }?,
+                                         list_filter_condition: {
+                                           operator: ("INCLUDE" | "EXCLUDE"),
+                                           values: {
+                                             static_values: Array[::String]?
+                                           }?
+                                         }?
+                                       }?,
+                                       numeric_filter_condition: {
+                                         column_name: ::String?,
+                                         comparison_filter_condition: {
+                                           operator: ("EQUALS" | "DOES_NOT_EQUAL" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS_TO" | "LESS_THAN" | "LESS_THAN_OR_EQUALS_TO"),
+                                           value: {
+                                             static_value: ::Float?
+                                           }?
+                                         }?,
+                                         range_filter_condition: {
+                                           range_minimum: {
+                                             static_value: ::Float?
+                                           }?,
+                                           range_maximum: {
+                                             static_value: ::Float?
+                                           }?,
+                                           include_minimum: bool?,
+                                           include_maximum: bool?
+                                         }?
+                                       }?,
+                                       date_filter_condition: {
+                                         column_name: ::String?,
+                                         comparison_filter_condition: {
+                                           operator: ("BEFORE" | "BEFORE_OR_EQUALS_TO" | "AFTER" | "AFTER_OR_EQUALS_TO"),
+                                           value: {
+                                             static_value: ::Time?
+                                           }?
+                                         }?,
+                                         range_filter_condition: {
+                                           range_minimum: {
+                                             static_value: ::Time?
+                                           }?,
+                                           range_maximum: {
+                                             static_value: ::Time?
+                                           }?,
+                                           include_minimum: bool?,
+                                           include_maximum: bool?
+                                         }?
+                                       }?
                                      }?,
                                      create_columns_operation: {
+                                       alias: ::String?,
+                                       source: {
+                                         transform_operation_id: ::String,
+                                         column_id_mappings: Array[
+                                           {
+                                             source_column_id: ::String,
+                                             target_column_id: ::String
+                                           },
+                                         ]?
+                                       }?,
                                        columns: Array[
                                          {
                                            column_name: ::String,
@@ -192431,6 +193811,365 @@ module Aws
                                    column_names: Array[::String]
                                  },
                                ]?
+                             },
+                             ?data_prep_configuration: {
+                               source_table_map: Hash[::String, {
+                                   physical_table_id: ::String?,
+                                   data_set: {
+                                     data_set_arn: ::String,
+                                     input_columns: Array[
+                                       {
+                                         name: ::String,
+                                         id: ::String?,
+                                         type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON"),
+                                         sub_type: ("FLOAT" | "FIXED")?
+                                       },
+                                     ]
+                                   }?
+                                 }],
+                               transform_step_map: Hash[::String, {
+                                   import_table_step: {
+                                     alias: ::String,
+                                     source: {
+                                       source_table_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     }
+                                   }?,
+                                   project_step: {
+                                     alias: ::String?,
+                                     source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     }?,
+                                     projected_columns: Array[::String]
+                                   }?,
+                                   filters_step: {
+                                     alias: ::String,
+                                     source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     },
+                                     filter_operations: Array[
+                                       {
+                                         condition_expression: ::String?,
+                                         string_filter_condition: {
+                                           column_name: ::String?,
+                                           comparison_filter_condition: {
+                                             operator: ("EQUALS" | "DOES_NOT_EQUAL" | "CONTAINS" | "DOES_NOT_CONTAIN" | "STARTS_WITH" | "ENDS_WITH"),
+                                             value: {
+                                               static_value: ::String?
+                                             }?
+                                           }?,
+                                           list_filter_condition: {
+                                             operator: ("INCLUDE" | "EXCLUDE"),
+                                             values: {
+                                               static_values: Array[::String]?
+                                             }?
+                                           }?
+                                         }?,
+                                         numeric_filter_condition: {
+                                           column_name: ::String?,
+                                           comparison_filter_condition: {
+                                             operator: ("EQUALS" | "DOES_NOT_EQUAL" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS_TO" | "LESS_THAN" | "LESS_THAN_OR_EQUALS_TO"),
+                                             value: {
+                                               static_value: ::Float?
+                                             }?
+                                           }?,
+                                           range_filter_condition: {
+                                             range_minimum: {
+                                               static_value: ::Float?
+                                             }?,
+                                             range_maximum: {
+                                               static_value: ::Float?
+                                             }?,
+                                             include_minimum: bool?,
+                                             include_maximum: bool?
+                                           }?
+                                         }?,
+                                         date_filter_condition: {
+                                           column_name: ::String?,
+                                           comparison_filter_condition: {
+                                             operator: ("BEFORE" | "BEFORE_OR_EQUALS_TO" | "AFTER" | "AFTER_OR_EQUALS_TO"),
+                                             value: {
+                                               static_value: ::Time?
+                                             }?
+                                           }?,
+                                           range_filter_condition: {
+                                             range_minimum: {
+                                               static_value: ::Time?
+                                             }?,
+                                             range_maximum: {
+                                               static_value: ::Time?
+                                             }?,
+                                             include_minimum: bool?,
+                                             include_maximum: bool?
+                                           }?
+                                         }?
+                                       },
+                                     ]
+                                   }?,
+                                   create_columns_step: {
+                                     alias: ::String?,
+                                     source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     }?,
+                                     columns: Array[
+                                       {
+                                         column_name: ::String,
+                                         column_id: ::String,
+                                         expression: ::String
+                                       },
+                                     ]
+                                   }?,
+                                   rename_columns_step: {
+                                     alias: ::String,
+                                     source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     },
+                                     rename_column_operations: Array[
+                                       {
+                                         column_name: ::String,
+                                         new_column_name: ::String
+                                       },
+                                     ]
+                                   }?,
+                                   cast_column_types_step: {
+                                     alias: ::String,
+                                     source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     },
+                                     cast_column_type_operations: Array[
+                                       {
+                                         column_name: ::String,
+                                         new_column_type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME"),
+                                         sub_type: ("FLOAT" | "FIXED")?,
+                                         format: ::String?
+                                       },
+                                     ]
+                                   }?,
+                                   join_step: {
+                                     alias: ::String,
+                                     left_operand: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     },
+                                     right_operand: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     },
+                                     type: ("INNER" | "OUTER" | "LEFT" | "RIGHT"),
+                                     on_clause: ::String,
+                                     left_operand_properties: {
+                                       output_column_name_overrides: Array[
+                                         {
+                                           source_column_name: ::String?,
+                                           output_column_name: ::String
+                                         },
+                                       ]
+                                     }?,
+                                     right_operand_properties: {
+                                       output_column_name_overrides: Array[
+                                         {
+                                           source_column_name: ::String?,
+                                           output_column_name: ::String
+                                         },
+                                       ]
+                                     }?
+                                   }?,
+                                   aggregate_step: {
+                                     alias: ::String,
+                                     source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     },
+                                     group_by_column_names: Array[::String]?,
+                                     aggregations: Array[
+                                       {
+                                         aggregation_function: {
+                                           simple_aggregation: {
+                                             input_column_name: ::String?,
+                                             function_type: ("COUNT" | "DISTINCT_COUNT" | "SUM" | "AVERAGE" | "MAX" | "MIN")
+                                           }?,
+                                           list_aggregation: {
+                                             input_column_name: ::String?,
+                                             separator: ::String,
+                                             distinct: bool
+                                           }?
+                                         },
+                                         new_column_name: ::String,
+                                         new_column_id: ::String
+                                       },
+                                     ]
+                                   }?,
+                                   pivot_step: {
+                                     alias: ::String,
+                                     source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     },
+                                     group_by_column_names: Array[::String]?,
+                                     value_column_configuration: {
+                                       aggregation_function: {
+                                         simple_aggregation: {
+                                           input_column_name: ::String?,
+                                           function_type: ("COUNT" | "DISTINCT_COUNT" | "SUM" | "AVERAGE" | "MAX" | "MIN")
+                                         }?,
+                                         list_aggregation: {
+                                           input_column_name: ::String?,
+                                           separator: ::String,
+                                           distinct: bool
+                                         }?
+                                       }?
+                                     },
+                                     pivot_configuration: {
+                                       label_column_name: ::String?,
+                                       pivoted_labels: Array[
+                                         {
+                                           label_name: ::String,
+                                           new_column_name: ::String,
+                                           new_column_id: ::String
+                                         },
+                                       ]
+                                     }
+                                   }?,
+                                   unpivot_step: {
+                                     alias: ::String,
+                                     source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     },
+                                     columns_to_unpivot: Array[
+                                       {
+                                         column_name: ::String?,
+                                         new_value: ::String?
+                                       },
+                                     ],
+                                     unpivoted_label_column_name: ::String,
+                                     unpivoted_label_column_id: ::String,
+                                     unpivoted_value_column_name: ::String,
+                                     unpivoted_value_column_id: ::String
+                                   }?,
+                                   append_step: {
+                                     alias: ::String,
+                                     first_source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     }?,
+                                     second_source: {
+                                       transform_operation_id: ::String,
+                                       column_id_mappings: Array[
+                                         {
+                                           source_column_id: ::String,
+                                           target_column_id: ::String
+                                         },
+                                       ]?
+                                     }?,
+                                     appended_columns: Array[
+                                       {
+                                         column_name: ::String,
+                                         new_column_id: ::String
+                                       },
+                                     ]
+                                   }?
+                                 }],
+                               destination_table_map: Hash[::String, {
+                                   alias: ::String,
+                                   source: {
+                                     transform_operation_id: ::String
+                                   }
+                                 }]
+                             },
+                             ?semantic_model_configuration: {
+                               table_map: Hash[::String, {
+                                   alias: ::String,
+                                   destination_table_id: ::String,
+                                   row_level_permission_configuration: {
+                                     tag_configuration: {
+                                       status: ("ENABLED" | "DISABLED")?,
+                                       tag_rules: Array[
+                                         {
+                                           tag_key: ::String,
+                                           column_name: ::String,
+                                           tag_multi_value_delimiter: ::String?,
+                                           match_all_value: ::String?
+                                         },
+                                       ],
+                                       tag_rule_configurations: Array[
+                                         Array[::String],
+                                       ]?
+                                     }?,
+                                     row_level_permission_data_set: {
+                                       namespace: ::String?,
+                                       arn: ::String,
+                                       permission_policy: ("GRANT_ACCESS" | "DENY_ACCESS"),
+                                       format_version: ("VERSION_1" | "VERSION_2")?,
+                                       status: ("ENABLED" | "DISABLED")?
+                                     }?
+                                   }?
+                                 }]?
                              }
                            ) -> _UpdateDataSetResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataSetResponseSuccess
@@ -192553,6 +194292,11 @@ module Aws
                                     },
                                     role_arn: ::String?
                                   }?,
+                                  s3_knowledge_base_parameters: {
+                                    role_arn: ::String?,
+                                    bucket_url: ::String,
+                                    metadata_files_location: ::String?
+                                  }?,
                                   service_now_parameters: {
                                     site_base_url: ::String
                                   }?,
@@ -192634,6 +194378,22 @@ module Aws
                                   }?,
                                   custom_connection_parameters: {
                                     connection_type: ::String?
+                                  }?,
+                                  web_crawler_parameters: {
+                                    web_crawler_auth_type: ("NO_AUTH" | "BASIC_AUTH" | "FORM" | "SAML"),
+                                    username_field_xpath: ::String?,
+                                    password_field_xpath: ::String?,
+                                    username_button_xpath: ::String?,
+                                    password_button_xpath: ::String?,
+                                    login_page_url: ::String?,
+                                    web_proxy_host_name: ::String?,
+                                    web_proxy_port_number: ::Integer?
+                                  }?,
+                                  confluence_parameters: {
+                                    confluence_url: ::String
+                                  }?,
+                                  q_business_parameters: {
+                                    application_arn: ::String
                                   }?
                                 },
                                 ?credentials: {
@@ -192720,6 +194480,11 @@ module Aws
                                           },
                                           role_arn: ::String?
                                         }?,
+                                        s3_knowledge_base_parameters: {
+                                          role_arn: ::String?,
+                                          bucket_url: ::String,
+                                          metadata_files_location: ::String?
+                                        }?,
                                         service_now_parameters: {
                                           site_base_url: ::String
                                         }?,
@@ -192801,12 +194566,32 @@ module Aws
                                         }?,
                                         custom_connection_parameters: {
                                           connection_type: ::String?
+                                        }?,
+                                        web_crawler_parameters: {
+                                          web_crawler_auth_type: ("NO_AUTH" | "BASIC_AUTH" | "FORM" | "SAML"),
+                                          username_field_xpath: ::String?,
+                                          password_field_xpath: ::String?,
+                                          username_button_xpath: ::String?,
+                                          password_button_xpath: ::String?,
+                                          login_page_url: ::String?,
+                                          web_proxy_host_name: ::String?,
+                                          web_proxy_port_number: ::Integer?
+                                        }?,
+                                        confluence_parameters: {
+                                          confluence_url: ::String
+                                        }?,
+                                        q_business_parameters: {
+                                          application_arn: ::String
                                         }?
                                       },
                                     ]?
                                   }?,
                                   copy_source_arn: ::String?,
-                                  secret_arn: ::String?
+                                  secret_arn: ::String?,
+                                  web_proxy_credentials: {
+                                    web_proxy_username: ::String,
+                                    web_proxy_password: ::String
+                                  }?
                                 },
                                 ?vpc_connection_properties: {
                                   vpc_connection_arn: ::String
@@ -192855,6 +194640,33 @@ module Aws
                                                    application_id: ::String
                                                  ) -> _UpdateDefaultQBusinessApplicationResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDefaultQBusinessApplicationResponseSuccess
+
+      interface _UpdateFlowPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFlowPermissionsOutput]
+        def status: () -> ::Integer
+        def arn: () -> ::String
+        def permissions: () -> ::Array[Types::Permission]
+        def request_id: () -> ::String
+        def flow_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_flow_permissions-instance_method
+      def update_flow_permissions: (
+                                     aws_account_id: ::String,
+                                     flow_id: ::String,
+                                     ?grant_permissions: Array[
+                                       {
+                                         actions: Array[::String],
+                                         principal: ::String
+                                       },
+                                     ],
+                                     ?revoke_permissions: Array[
+                                       {
+                                         actions: Array[::String],
+                                         principal: ::String
+                                       },
+                                     ]
+                                   ) -> _UpdateFlowPermissionsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFlowPermissionsResponseSuccess
 
       interface _UpdateFolderResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFolderResponse]
@@ -227616,7 +229428,26 @@ module Aws
                                                column_index: ::Integer?,
                                                column_span: ::Integer,
                                                row_index: ::Integer?,
-                                               row_span: ::Integer
+                                               row_span: ::Integer,
+                                               border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               selected_border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               background_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?
+                                               }?,
+                                               loading_animation: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -227646,11 +229477,13 @@ module Aws
                                                ]?,
                                                border_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
-                                                 color: ::String?
+                                                 color: ::String?,
+                                                 width: ::String?
                                                }?,
                                                selected_border_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
-                                                 color: ::String?
+                                                 color: ::String?,
+                                                 width: ::String?
                                                }?,
                                                background_style: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?,
@@ -227658,7 +229491,9 @@ module Aws
                                                }?,
                                                loading_animation: {
                                                  visibility: ("HIDDEN" | "VISIBLE")?
-                                               }?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -227692,11 +229527,13 @@ module Aws
                                                        ]?,
                                                        border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        selected_border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        background_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
@@ -227704,7 +229541,9 @@ module Aws
                                                        }?,
                                                        loading_animation: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?
-                                                       }?
+                                                       }?,
+                                                       border_radius: ::String?,
+                                                       padding: ::String?
                                                      },
                                                    ]
                                                  }
@@ -227745,11 +229584,13 @@ module Aws
                                                          ]?,
                                                          border_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
-                                                           color: ::String?
+                                                           color: ::String?,
+                                                           width: ::String?
                                                          }?,
                                                          selected_border_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
-                                                           color: ::String?
+                                                           color: ::String?,
+                                                           width: ::String?
                                                          }?,
                                                          background_style: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?,
@@ -227757,7 +229598,9 @@ module Aws
                                                          }?,
                                                          loading_animation: {
                                                            visibility: ("HIDDEN" | "VISIBLE")?
-                                                         }?
+                                                         }?,
+                                                         border_radius: ::String?,
+                                                         padding: ::String?
                                                        },
                                                      ]
                                                    }
@@ -227875,11 +229718,13 @@ module Aws
                                                        ]?,
                                                        border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        selected_border_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
-                                                         color: ::String?
+                                                         color: ::String?,
+                                                         width: ::String?
                                                        }?,
                                                        background_style: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?,
@@ -227887,7 +229732,9 @@ module Aws
                                                        }?,
                                                        loading_animation: {
                                                          visibility: ("HIDDEN" | "VISIBLE")?
-                                                       }?
+                                                       }?,
+                                                       border_radius: ::String?,
+                                                       padding: ::String?
                                                      },
                                                    ]
                                                  }
@@ -227930,7 +229777,26 @@ module Aws
                                                column_index: ::Integer?,
                                                column_span: ::Integer,
                                                row_index: ::Integer?,
-                                               row_span: ::Integer
+                                               row_span: ::Integer,
+                                               border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               selected_border_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?,
+                                                 width: ::String?
+                                               }?,
+                                               background_style: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 color: ::String?
+                                               }?,
+                                               loading_animation: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?,
+                                               border_radius: ::String?,
+                                               padding: ::String?
                                              },
                                            ],
                                            canvas_size_options: {
@@ -230477,9 +232343,14 @@ module Aws
                             }?,
                             sheet: {
                               tile: {
+                                background_color: ::String?,
                                 border: {
-                                  show: bool?
-                                }?
+                                  color: ::String?,
+                                  show: bool?,
+                                  width: ::String?
+                                }?,
+                                border_radius: ::String?,
+                                padding: ::String?
                               }?,
                               tile_layout: {
                                 gutter: {
@@ -230488,6 +232359,10 @@ module Aws
                                 margin: {
                                   show: bool?
                                 }?
+                              }?,
+                              background: {
+                                color: ::String?,
+                                gradient: ::String?
                               }?
                             }?,
                             typography: {
@@ -230495,7 +232370,106 @@ module Aws
                                 {
                                   font_family: ::String?
                                 },
-                              ]?
+                              ]?,
+                              axis_title_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              axis_label_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              legend_title_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              legend_value_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              data_label_font_configuration: {
+                                font_size: {
+                                  relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                  absolute: ::String?
+                                }?,
+                                font_decoration: ("UNDERLINE" | "NONE")?,
+                                font_color: ::String?,
+                                font_weight: {
+                                  name: ("NORMAL" | "BOLD")?
+                                }?,
+                                font_style: ("NORMAL" | "ITALIC")?,
+                                font_family: ::String?
+                              }?,
+                              visual_title_font_configuration: {
+                                font_configuration: {
+                                  font_size: {
+                                    relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                    absolute: ::String?
+                                  }?,
+                                  font_decoration: ("UNDERLINE" | "NONE")?,
+                                  font_color: ::String?,
+                                  font_weight: {
+                                    name: ("NORMAL" | "BOLD")?
+                                  }?,
+                                  font_style: ("NORMAL" | "ITALIC")?,
+                                  font_family: ::String?
+                                }?,
+                                text_alignment: ("LEFT" | "CENTER" | "RIGHT" | "AUTO")?,
+                                text_transform: ("CAPITALIZE")?
+                              }?,
+                              visual_subtitle_font_configuration: {
+                                font_configuration: {
+                                  font_size: {
+                                    relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                    absolute: ::String?
+                                  }?,
+                                  font_decoration: ("UNDERLINE" | "NONE")?,
+                                  font_color: ::String?,
+                                  font_weight: {
+                                    name: ("NORMAL" | "BOLD")?
+                                  }?,
+                                  font_style: ("NORMAL" | "ITALIC")?,
+                                  font_family: ::String?
+                                }?,
+                                text_alignment: ("LEFT" | "CENTER" | "RIGHT" | "AUTO")?,
+                                text_transform: ("CAPITALIZE")?
+                              }?
                             }?
                           }
                         ) -> _UpdateThemeResponseSuccess

@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.134.0 (2025-12-02)
+------------------
+
+* Feature - CloudWatch Logs adds managed S3 Tables integration to access logs using other analytical tools, as well as facets and field indexing to simplify log analytics in CloudWatch Logs Insights.
+
+1.133.0 (2025-11-24)
+------------------
+
+* Feature - New CloudWatch Logs feature - LogGroup Deletion Protection, a capability that allows customers to safeguard their critical CloudWatch log groups from accidental or unintended deletion.
+
+1.132.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.131.0 (2025-11-19)
+------------------
+
+* Feature - Adding support for ocsf version 1.5, add optional parameter MappingVersion
+
+1.130.0 (2025-11-18)
+------------------
+
+* Feature - CloudWatch Logs updates: Added capability to setup a recurring schedule for log insights queries. Logs introduced Scheduled Queries (managed through Create/Update/Get/Delete/List/History Scheduled Query APIs). For more information, see CloudWatch Logs API documentation.
+
+1.129.0 (2025-10-31)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.128.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.127.0 (2025-09-16)
 ------------------
 

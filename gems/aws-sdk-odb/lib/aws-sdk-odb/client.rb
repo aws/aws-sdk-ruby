@@ -508,6 +508,41 @@ module Aws::Odb
       req.send_request(options)
     end
 
+    # Associates an Amazon Web Services Identity and Access Management (IAM)
+    # service role with a specified resource to enable Amazon Web Services
+    # service integration.
+    #
+    # @option params [required, String] :iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM service role to associate
+    #   with the resource.
+    #
+    # @option params [required, String] :aws_integration
+    #   The Amazon Web Services integration configuration settings for the IAM
+    #   service role association.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the target resource to associate
+    #   with the IAM service role.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_iam_role_to_resource({
+    #     iam_role_arn: "RoleArn", # required
+    #     aws_integration: "KmsTde", # required, accepts KmsTde
+    #     resource_arn: "AssociateIamRoleToResourceInputResourceArnString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/AssociateIamRoleToResource AWS API Documentation
+    #
+    # @overload associate_iam_role_to_resource(params = {})
+    # @param [Hash] params ({})
+    def associate_iam_role_to_resource(params = {}, options = {})
+      req = build_request(:associate_iam_role_to_resource, params)
+      req.send_request(options)
+    end
+
     # Creates a new Autonomous VM cluster in the specified Exadata
     # infrastructure.
     #
@@ -1016,8 +1051,28 @@ module Aws::Odb
     # @option params [String] :zero_etl_access
     #   Specifies the configuration for Zero-ETL access from the ODB network.
     #
+    # @option params [String] :sts_access
+    #   The Amazon Web Services Security Token Service (STS) access
+    #   configuration for the ODB network.
+    #
+    # @option params [String] :kms_access
+    #   The Amazon Web Services Key Management Service (KMS) access
+    #   configuration for the ODB network.
+    #
     # @option params [String] :s3_policy_document
     #   Specifies the endpoint policy for Amazon S3 access from the ODB
+    #   network.
+    #
+    # @option params [String] :sts_policy_document
+    #   The STS policy document that defines permissions for token service
+    #   usage within the ODB network.
+    #
+    # @option params [String] :kms_policy_document
+    #   The KMS policy document that defines permissions for key usage within
+    #   the ODB network.
+    #
+    # @option params [Array<String>] :cross_region_s3_restore_sources_to_enable
+    #   The cross-Region Amazon S3 restore sources to enable for the ODB
     #   network.
     #
     # @option params [Hash<String,String>] :tags
@@ -1043,7 +1098,12 @@ module Aws::Odb
     #     client_token: "CreateOdbNetworkInputClientTokenString",
     #     s3_access: "ENABLED", # accepts ENABLED, DISABLED
     #     zero_etl_access: "ENABLED", # accepts ENABLED, DISABLED
+    #     sts_access: "ENABLED", # accepts ENABLED, DISABLED
+    #     kms_access: "ENABLED", # accepts ENABLED, DISABLED
     #     s3_policy_document: "PolicyDocument",
+    #     sts_policy_document: "PolicyDocument",
+    #     kms_policy_document: "PolicyDocument",
+    #     cross_region_s3_restore_sources_to_enable: ["String"],
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1065,8 +1125,7 @@ module Aws::Odb
       req.send_request(options)
     end
 
-    # Creates a peering connection between an ODB network and either another
-    # ODB network or a customer-owned VPC.
+    # Creates a peering connection between an ODB network and a VPC.
     #
     # A peering connection enables private connectivity between the networks
     # for application-tier communication.
@@ -1081,6 +1140,11 @@ module Aws::Odb
     #
     # @option params [String] :display_name
     #   The display name for the ODB peering connection.
+    #
+    # @option params [Array<String>] :peer_network_cidrs_to_be_added
+    #   A list of CIDR blocks to add to the peering connection. These CIDR
+    #   blocks define the IP address ranges that can communicate through the
+    #   peering connection.
     #
     # @option params [String] :client_token
     #   The client token for the ODB peering connection request.
@@ -1110,6 +1174,7 @@ module Aws::Odb
     #     odb_network_id: "ResourceIdOrArn", # required
     #     peer_network_id: "ResourceIdOrArn", # required
     #     display_name: "ResourceDisplayName",
+    #     peer_network_cidrs_to_be_added: ["PeeredCidr"],
     #     client_token: "CreateOdbPeeringConnectionInputClientTokenString",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1249,6 +1314,41 @@ module Aws::Odb
     # @param [Hash] params ({})
     def delete_odb_peering_connection(params = {}, options = {})
       req = build_request(:delete_odb_peering_connection, params)
+      req.send_request(options)
+    end
+
+    # Disassociates an Amazon Web Services Identity and Access Management
+    # (IAM) service role from a specified resource to disable Amazon Web
+    # Services service integration.
+    #
+    # @option params [required, String] :iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM service role to disassociate
+    #   from the resource.
+    #
+    # @option params [required, String] :aws_integration
+    #   The Amazon Web Services integration configuration settings for the IAM
+    #   service role disassociation.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the target resource to disassociate
+    #   from the IAM service role.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_iam_role_from_resource({
+    #     iam_role_arn: "RoleArn", # required
+    #     aws_integration: "KmsTde", # required, accepts KmsTde
+    #     resource_arn: "DisassociateIamRoleFromResourceInputResourceArnString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/DisassociateIamRoleFromResource AWS API Documentation
+    #
+    # @overload disassociate_iam_role_from_resource(params = {})
+    # @param [Hash] params ({})
+    def disassociate_iam_role_from_resource(params = {}, options = {})
+      req = build_request(:disassociate_iam_role_from_resource, params)
       req.send_request(options)
     end
 
@@ -1533,6 +1633,11 @@ module Aws::Odb
     #   resp.cloud_vm_cluster.odb_network_id #=> String
     #   resp.cloud_vm_cluster.percent_progress #=> Float
     #   resp.cloud_vm_cluster.compute_model #=> String, one of "ECPU", "OCPU"
+    #   resp.cloud_vm_cluster.iam_roles #=> Array
+    #   resp.cloud_vm_cluster.iam_roles[0].iam_role_arn #=> String
+    #   resp.cloud_vm_cluster.iam_roles[0].status #=> String, one of "ASSOCIATING", "DISASSOCIATING", "FAILED", "CONNECTED", "DISCONNECTED", "PARTIALLY_CONNECTED", "UNKNOWN"
+    #   resp.cloud_vm_cluster.iam_roles[0].status_reason #=> String
+    #   resp.cloud_vm_cluster.iam_roles[0].aws_integration #=> String, one of "KmsTde"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/GetCloudVmCluster AWS API Documentation
     #
@@ -1669,12 +1774,19 @@ module Aws::Odb
     #   * {Types::GetOciOnboardingStatusOutput#status #status} => String
     #   * {Types::GetOciOnboardingStatusOutput#existing_tenancy_activation_link #existing_tenancy_activation_link} => String
     #   * {Types::GetOciOnboardingStatusOutput#new_tenancy_activation_link #new_tenancy_activation_link} => String
+    #   * {Types::GetOciOnboardingStatusOutput#oci_identity_domain #oci_identity_domain} => Types::OciIdentityDomain
     #
     # @example Response structure
     #
     #   resp.status #=> String, one of "NOT_STARTED", "PENDING_LINK_GENERATION", "PENDING_CUSTOMER_ACTION", "PENDING_INITIALIZATION", "ACTIVATING", "ACTIVE_IN_HOME_REGION", "ACTIVE", "ACTIVE_LIMITED", "FAILED", "PUBLIC_OFFER_UNSUPPORTED", "SUSPENDED", "CANCELED"
     #   resp.existing_tenancy_activation_link #=> String
     #   resp.new_tenancy_activation_link #=> String
+    #   resp.oci_identity_domain.oci_identity_domain_id #=> String
+    #   resp.oci_identity_domain.oci_identity_domain_resource_url #=> String
+    #   resp.oci_identity_domain.oci_identity_domain_url #=> String
+    #   resp.oci_identity_domain.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.oci_identity_domain.status_reason #=> String
+    #   resp.oci_identity_domain.account_setup_cloud_formation_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/GetOciOnboardingStatus AWS API Documentation
     #
@@ -1741,6 +1853,21 @@ module Aws::Odb
     #   resp.odb_network.managed_services.s3_access.ipv4_addresses[0] #=> String
     #   resp.odb_network.managed_services.s3_access.domain_name #=> String
     #   resp.odb_network.managed_services.s3_access.s3_policy_document #=> String
+    #   resp.odb_network.managed_services.sts_access.status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING"
+    #   resp.odb_network.managed_services.sts_access.ipv4_addresses #=> Array
+    #   resp.odb_network.managed_services.sts_access.ipv4_addresses[0] #=> String
+    #   resp.odb_network.managed_services.sts_access.domain_name #=> String
+    #   resp.odb_network.managed_services.sts_access.sts_policy_document #=> String
+    #   resp.odb_network.managed_services.kms_access.status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING"
+    #   resp.odb_network.managed_services.kms_access.ipv4_addresses #=> Array
+    #   resp.odb_network.managed_services.kms_access.ipv4_addresses[0] #=> String
+    #   resp.odb_network.managed_services.kms_access.domain_name #=> String
+    #   resp.odb_network.managed_services.kms_access.kms_policy_document #=> String
+    #   resp.odb_network.managed_services.cross_region_s3_restore_sources_access #=> Array
+    #   resp.odb_network.managed_services.cross_region_s3_restore_sources_access[0].region #=> String
+    #   resp.odb_network.managed_services.cross_region_s3_restore_sources_access[0].ipv4_addresses #=> Array
+    #   resp.odb_network.managed_services.cross_region_s3_restore_sources_access[0].ipv4_addresses[0] #=> String
+    #   resp.odb_network.managed_services.cross_region_s3_restore_sources_access[0].status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/GetOdbNetwork AWS API Documentation
     #
@@ -1777,6 +1904,8 @@ module Aws::Odb
     #   resp.odb_peering_connection.odb_network_arn #=> String
     #   resp.odb_peering_connection.peer_network_arn #=> String
     #   resp.odb_peering_connection.odb_peering_connection_type #=> String
+    #   resp.odb_peering_connection.peer_network_cidrs #=> Array
+    #   resp.odb_peering_connection.peer_network_cidrs[0] #=> String
     #   resp.odb_peering_connection.created_at #=> Time
     #   resp.odb_peering_connection.percent_progress #=> Float
     #
@@ -1791,7 +1920,17 @@ module Aws::Odb
 
     # Initializes the ODB service for the first time in an account.
     #
+    # @option params [Boolean] :oci_identity_domain
+    #   The Oracle Cloud Infrastructure (OCI) identity domain configuration
+    #   for service initialization.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.initialize_service({
+    #     oci_identity_domain: false,
+    #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/InitializeService AWS API Documentation
     #
@@ -2144,6 +2283,11 @@ module Aws::Odb
     #   resp.cloud_vm_clusters[0].odb_network_id #=> String
     #   resp.cloud_vm_clusters[0].percent_progress #=> Float
     #   resp.cloud_vm_clusters[0].compute_model #=> String, one of "ECPU", "OCPU"
+    #   resp.cloud_vm_clusters[0].iam_roles #=> Array
+    #   resp.cloud_vm_clusters[0].iam_roles[0].iam_role_arn #=> String
+    #   resp.cloud_vm_clusters[0].iam_roles[0].status #=> String, one of "ASSOCIATING", "DISASSOCIATING", "FAILED", "CONNECTED", "DISCONNECTED", "PARTIALLY_CONNECTED", "UNKNOWN"
+    #   resp.cloud_vm_clusters[0].iam_roles[0].status_reason #=> String
+    #   resp.cloud_vm_clusters[0].iam_roles[0].aws_integration #=> String, one of "KmsTde"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListCloudVmClusters AWS API Documentation
     #
@@ -2492,6 +2636,21 @@ module Aws::Odb
     #   resp.odb_networks[0].managed_services.s3_access.ipv4_addresses[0] #=> String
     #   resp.odb_networks[0].managed_services.s3_access.domain_name #=> String
     #   resp.odb_networks[0].managed_services.s3_access.s3_policy_document #=> String
+    #   resp.odb_networks[0].managed_services.sts_access.status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING"
+    #   resp.odb_networks[0].managed_services.sts_access.ipv4_addresses #=> Array
+    #   resp.odb_networks[0].managed_services.sts_access.ipv4_addresses[0] #=> String
+    #   resp.odb_networks[0].managed_services.sts_access.domain_name #=> String
+    #   resp.odb_networks[0].managed_services.sts_access.sts_policy_document #=> String
+    #   resp.odb_networks[0].managed_services.kms_access.status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING"
+    #   resp.odb_networks[0].managed_services.kms_access.ipv4_addresses #=> Array
+    #   resp.odb_networks[0].managed_services.kms_access.ipv4_addresses[0] #=> String
+    #   resp.odb_networks[0].managed_services.kms_access.domain_name #=> String
+    #   resp.odb_networks[0].managed_services.kms_access.kms_policy_document #=> String
+    #   resp.odb_networks[0].managed_services.cross_region_s3_restore_sources_access #=> Array
+    #   resp.odb_networks[0].managed_services.cross_region_s3_restore_sources_access[0].region #=> String
+    #   resp.odb_networks[0].managed_services.cross_region_s3_restore_sources_access[0].ipv4_addresses #=> Array
+    #   resp.odb_networks[0].managed_services.cross_region_s3_restore_sources_access[0].ipv4_addresses[0] #=> String
+    #   resp.odb_networks[0].managed_services.cross_region_s3_restore_sources_access[0].status #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListOdbNetworks AWS API Documentation
     #
@@ -2552,6 +2711,8 @@ module Aws::Odb
     #   resp.odb_peering_connections[0].odb_network_arn #=> String
     #   resp.odb_peering_connections[0].peer_network_arn #=> String
     #   resp.odb_peering_connections[0].odb_peering_connection_type #=> String
+    #   resp.odb_peering_connections[0].peer_network_cidrs #=> Array
+    #   resp.odb_peering_connections[0].peer_network_cidrs[0] #=> String
     #   resp.odb_peering_connections[0].created_at #=> Time
     #   resp.odb_peering_connections[0].percent_progress #=> Float
     #
@@ -2894,9 +3055,33 @@ module Aws::Odb
     #   Specifies the updated configuration for Zero-ETL access from the ODB
     #   network.
     #
+    # @option params [String] :sts_access
+    #   The Amazon Web Services Security Token Service (STS) access
+    #   configuration for the ODB network.
+    #
+    # @option params [String] :kms_access
+    #   The Amazon Web Services Key Management Service (KMS) access
+    #   configuration for the ODB network.
+    #
     # @option params [String] :s3_policy_document
     #   Specifies the updated endpoint policy for Amazon S3 access from the
     #   ODB network.
+    #
+    # @option params [String] :sts_policy_document
+    #   The STS policy document that defines permissions for token service
+    #   usage within the ODB network.
+    #
+    # @option params [String] :kms_policy_document
+    #   The KMS policy document that defines permissions for key usage within
+    #   the ODB network.
+    #
+    # @option params [Array<String>] :cross_region_s3_restore_sources_to_enable
+    #   The cross-Region Amazon S3 restore sources to enable for the ODB
+    #   network.
+    #
+    # @option params [Array<String>] :cross_region_s3_restore_sources_to_disable
+    #   The cross-Region Amazon S3 restore sources to disable for the ODB
+    #   network.
     #
     # @return [Types::UpdateOdbNetworkOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2914,7 +3099,13 @@ module Aws::Odb
     #     peered_cidrs_to_be_removed: ["String"],
     #     s3_access: "ENABLED", # accepts ENABLED, DISABLED
     #     zero_etl_access: "ENABLED", # accepts ENABLED, DISABLED
+    #     sts_access: "ENABLED", # accepts ENABLED, DISABLED
+    #     kms_access: "ENABLED", # accepts ENABLED, DISABLED
     #     s3_policy_document: "PolicyDocument",
+    #     sts_policy_document: "PolicyDocument",
+    #     kms_policy_document: "PolicyDocument",
+    #     cross_region_s3_restore_sources_to_enable: ["String"],
+    #     cross_region_s3_restore_sources_to_disable: ["String"],
     #   })
     #
     # @example Response structure
@@ -2930,6 +3121,59 @@ module Aws::Odb
     # @param [Hash] params ({})
     def update_odb_network(params = {}, options = {})
       req = build_request(:update_odb_network, params)
+      req.send_request(options)
+    end
+
+    # Modifies the settings of an Oracle Database@Amazon Web Services
+    # peering connection. You can update the display name and add or remove
+    # CIDR blocks from the peering connection.
+    #
+    # @option params [required, String] :odb_peering_connection_id
+    #   The identifier of the Oracle Database@Amazon Web Services peering
+    #   connection to update.
+    #
+    # @option params [String] :display_name
+    #   A new display name for the peering connection.
+    #
+    # @option params [Array<String>] :peer_network_cidrs_to_be_added
+    #   A list of CIDR blocks to add to the peering connection. These CIDR
+    #   blocks define the IP address ranges that can communicate through the
+    #   peering connection. The CIDR blocks must not overlap with existing
+    #   CIDR blocks in the Oracle Database@Amazon Web Services network.
+    #
+    # @option params [Array<String>] :peer_network_cidrs_to_be_removed
+    #   A list of CIDR blocks to remove from the peering connection. The CIDR
+    #   blocks must currently exist in the peering connection.
+    #
+    # @return [Types::UpdateOdbPeeringConnectionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateOdbPeeringConnectionOutput#display_name #display_name} => String
+    #   * {Types::UpdateOdbPeeringConnectionOutput#status #status} => String
+    #   * {Types::UpdateOdbPeeringConnectionOutput#status_reason #status_reason} => String
+    #   * {Types::UpdateOdbPeeringConnectionOutput#odb_peering_connection_id #odb_peering_connection_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_odb_peering_connection({
+    #     odb_peering_connection_id: "ResourceIdOrArn", # required
+    #     display_name: "ResourceDisplayName",
+    #     peer_network_cidrs_to_be_added: ["PeeredCidr"],
+    #     peer_network_cidrs_to_be_removed: ["PeeredCidr"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.display_name #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.status_reason #=> String
+    #   resp.odb_peering_connection_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateOdbPeeringConnection AWS API Documentation
+    #
+    # @overload update_odb_peering_connection(params = {})
+    # @param [Hash] params ({})
+    def update_odb_peering_connection(params = {}, options = {})
+      req = build_request(:update_odb_peering_connection, params)
       req.send_request(options)
     end
 
@@ -2951,7 +3195,7 @@ module Aws::Odb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-odb'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

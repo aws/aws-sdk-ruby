@@ -564,8 +564,8 @@ module Aws::CostOptimizationHub
     #   resp.cost_calculation_lookback_period_in_days #=> Integer
     #   resp.estimated_savings_percentage #=> Float
     #   resp.estimated_savings_over_cost_calculation_lookback_period #=> Float
-    #   resp.current_resource_type #=> String, one of "Ec2Instance", "LambdaFunction", "EbsVolume", "EcsService", "Ec2AutoScalingGroup", "Ec2InstanceSavingsPlans", "ComputeSavingsPlans", "SageMakerSavingsPlans", "Ec2ReservedInstances", "RdsReservedInstances", "OpenSearchReservedInstances", "RedshiftReservedInstances", "ElastiCacheReservedInstances", "RdsDbInstanceStorage", "RdsDbInstance", "AuroraDbClusterStorage", "DynamoDbReservedCapacity", "MemoryDbReservedInstances"
-    #   resp.recommended_resource_type #=> String, one of "Ec2Instance", "LambdaFunction", "EbsVolume", "EcsService", "Ec2AutoScalingGroup", "Ec2InstanceSavingsPlans", "ComputeSavingsPlans", "SageMakerSavingsPlans", "Ec2ReservedInstances", "RdsReservedInstances", "OpenSearchReservedInstances", "RedshiftReservedInstances", "ElastiCacheReservedInstances", "RdsDbInstanceStorage", "RdsDbInstance", "AuroraDbClusterStorage", "DynamoDbReservedCapacity", "MemoryDbReservedInstances"
+    #   resp.current_resource_type #=> String, one of "Ec2Instance", "LambdaFunction", "EbsVolume", "EcsService", "Ec2AutoScalingGroup", "Ec2InstanceSavingsPlans", "ComputeSavingsPlans", "SageMakerSavingsPlans", "Ec2ReservedInstances", "RdsReservedInstances", "OpenSearchReservedInstances", "RedshiftReservedInstances", "ElastiCacheReservedInstances", "RdsDbInstanceStorage", "RdsDbInstance", "AuroraDbClusterStorage", "DynamoDbReservedCapacity", "MemoryDbReservedInstances", "NatGateway"
+    #   resp.recommended_resource_type #=> String, one of "Ec2Instance", "LambdaFunction", "EbsVolume", "EcsService", "Ec2AutoScalingGroup", "Ec2InstanceSavingsPlans", "ComputeSavingsPlans", "SageMakerSavingsPlans", "Ec2ReservedInstances", "RdsReservedInstances", "OpenSearchReservedInstances", "RedshiftReservedInstances", "ElastiCacheReservedInstances", "RdsDbInstanceStorage", "RdsDbInstance", "AuroraDbClusterStorage", "DynamoDbReservedCapacity", "MemoryDbReservedInstances", "NatGateway"
     #   resp.region #=> String
     #   resp.source #=> String, one of "ComputeOptimizer", "CostExplorer"
     #   resp.last_refresh_timestamp #=> Time
@@ -843,6 +843,21 @@ module Aws::CostOptimizationHub
     #   resp.current_resource_details.memory_db_reserved_instances.cost_calculation.pricing.monthly_reservation_eligible_cost #=> Float
     #   resp.current_resource_details.memory_db_reserved_instances.cost_calculation.pricing.savings_percentage #=> Float
     #   resp.current_resource_details.memory_db_reserved_instances.cost_calculation.pricing.estimated_monthly_amortized_reservation_cost #=> Float
+    #   resp.current_resource_details.nat_gateway.configuration.active_connection_count #=> Integer
+    #   resp.current_resource_details.nat_gateway.configuration.packets_in_from_source #=> Integer
+    #   resp.current_resource_details.nat_gateway.configuration.packets_in_from_destination #=> Integer
+    #   resp.current_resource_details.nat_gateway.cost_calculation.usages #=> Array
+    #   resp.current_resource_details.nat_gateway.cost_calculation.usages[0].usage_type #=> String
+    #   resp.current_resource_details.nat_gateway.cost_calculation.usages[0].usage_amount #=> Float
+    #   resp.current_resource_details.nat_gateway.cost_calculation.usages[0].operation #=> String
+    #   resp.current_resource_details.nat_gateway.cost_calculation.usages[0].product_code #=> String
+    #   resp.current_resource_details.nat_gateway.cost_calculation.usages[0].unit #=> String
+    #   resp.current_resource_details.nat_gateway.cost_calculation.pricing.estimated_cost_before_discounts #=> Float
+    #   resp.current_resource_details.nat_gateway.cost_calculation.pricing.estimated_net_unused_amortized_commitments #=> Float
+    #   resp.current_resource_details.nat_gateway.cost_calculation.pricing.estimated_discounts.savings_plans_discount #=> Float
+    #   resp.current_resource_details.nat_gateway.cost_calculation.pricing.estimated_discounts.reserved_instances_discount #=> Float
+    #   resp.current_resource_details.nat_gateway.cost_calculation.pricing.estimated_discounts.other_discount #=> Float
+    #   resp.current_resource_details.nat_gateway.cost_calculation.pricing.estimated_cost_after_discounts #=> Float
     #   resp.recommended_resource_details.lambda_function.configuration.compute.v_cpu #=> Float
     #   resp.recommended_resource_details.lambda_function.configuration.compute.memory_size_in_mb #=> Integer
     #   resp.recommended_resource_details.lambda_function.configuration.compute.architecture #=> String
@@ -1111,6 +1126,21 @@ module Aws::CostOptimizationHub
     #   resp.recommended_resource_details.memory_db_reserved_instances.cost_calculation.pricing.monthly_reservation_eligible_cost #=> Float
     #   resp.recommended_resource_details.memory_db_reserved_instances.cost_calculation.pricing.savings_percentage #=> Float
     #   resp.recommended_resource_details.memory_db_reserved_instances.cost_calculation.pricing.estimated_monthly_amortized_reservation_cost #=> Float
+    #   resp.recommended_resource_details.nat_gateway.configuration.active_connection_count #=> Integer
+    #   resp.recommended_resource_details.nat_gateway.configuration.packets_in_from_source #=> Integer
+    #   resp.recommended_resource_details.nat_gateway.configuration.packets_in_from_destination #=> Integer
+    #   resp.recommended_resource_details.nat_gateway.cost_calculation.usages #=> Array
+    #   resp.recommended_resource_details.nat_gateway.cost_calculation.usages[0].usage_type #=> String
+    #   resp.recommended_resource_details.nat_gateway.cost_calculation.usages[0].usage_amount #=> Float
+    #   resp.recommended_resource_details.nat_gateway.cost_calculation.usages[0].operation #=> String
+    #   resp.recommended_resource_details.nat_gateway.cost_calculation.usages[0].product_code #=> String
+    #   resp.recommended_resource_details.nat_gateway.cost_calculation.usages[0].unit #=> String
+    #   resp.recommended_resource_details.nat_gateway.cost_calculation.pricing.estimated_cost_before_discounts #=> Float
+    #   resp.recommended_resource_details.nat_gateway.cost_calculation.pricing.estimated_net_unused_amortized_commitments #=> Float
+    #   resp.recommended_resource_details.nat_gateway.cost_calculation.pricing.estimated_discounts.savings_plans_discount #=> Float
+    #   resp.recommended_resource_details.nat_gateway.cost_calculation.pricing.estimated_discounts.reserved_instances_discount #=> Float
+    #   resp.recommended_resource_details.nat_gateway.cost_calculation.pricing.estimated_discounts.other_discount #=> Float
+    #   resp.recommended_resource_details.nat_gateway.cost_calculation.pricing.estimated_cost_after_discounts #=> Float
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -1121,6 +1151,94 @@ module Aws::CostOptimizationHub
     # @param [Hash] params ({})
     def get_recommendation(params = {}, options = {})
       req = build_request(:get_recommendation, params)
+      req.send_request(options)
+    end
+
+    # Returns cost efficiency metrics aggregated over time and optionally
+    # grouped by a specified dimension. The metrics provide insights into
+    # your cost optimization progress by tracking estimated savings,
+    # spending, and measures how effectively you're optimizing your Cloud
+    # resources.
+    #
+    # The operation supports both daily and monthly time granularities and
+    # allows grouping results by account ID, Amazon Web Services Region.
+    # Results are returned as time-series data, enabling you to analyze
+    # trends in your cost optimization performance over the specified time
+    # period.
+    #
+    # @option params [String] :group_by
+    #   The dimension by which to group the cost efficiency metrics. Valid
+    #   values include account ID, Amazon Web Services Region. When no
+    #   grouping is specified, metrics are aggregated across all resources in
+    #   the specified time period.
+    #
+    # @option params [required, String] :granularity
+    #   The time granularity for the cost efficiency metrics. Specify `Daily`
+    #   for metrics aggregated by day, or `Monthly` for metrics aggregated by
+    #   month.
+    #
+    # @option params [required, Types::TimePeriod] :time_period
+    #   The time period for which to retrieve the cost efficiency metrics. The
+    #   start date is inclusive and the end date is exclusive. Dates can be
+    #   specified in either YYYY-MM-DD format or YYYY-MM format depending on
+    #   the desired granularity.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of groups to return in the response. Valid values
+    #   range from 0 to 1000. Use in conjunction with `nextToken` to paginate
+    #   through results when the total number of groups exceeds this limit.
+    #
+    # @option params [Types::OrderBy] :order_by
+    #   The ordering specification for the results. Defines which dimension to
+    #   sort by and whether to sort in ascending or descending order.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results. This value is returned
+    #   in the response when the number of groups exceeds the specified
+    #   `maxResults` value.
+    #
+    # @return [Types::ListEfficiencyMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEfficiencyMetricsResponse#efficiency_metrics_by_group #efficiency_metrics_by_group} => Array&lt;Types::EfficiencyMetricsByGroup&gt;
+    #   * {Types::ListEfficiencyMetricsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_efficiency_metrics({
+    #     group_by: "String",
+    #     granularity: "Daily", # required, accepts Daily, Monthly
+    #     time_period: { # required
+    #       start: "String", # required
+    #       end: "String", # required
+    #     },
+    #     max_results: 1,
+    #     order_by: {
+    #       dimension: "String",
+    #       order: "Asc", # accepts Asc, Desc
+    #     },
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.efficiency_metrics_by_group #=> Array
+    #   resp.efficiency_metrics_by_group[0].metrics_by_time #=> Array
+    #   resp.efficiency_metrics_by_group[0].metrics_by_time[0].score #=> Float
+    #   resp.efficiency_metrics_by_group[0].metrics_by_time[0].savings #=> Float
+    #   resp.efficiency_metrics_by_group[0].metrics_by_time[0].spend #=> Float
+    #   resp.efficiency_metrics_by_group[0].metrics_by_time[0].timestamp #=> String
+    #   resp.efficiency_metrics_by_group[0].group #=> String
+    #   resp.efficiency_metrics_by_group[0].message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cost-optimization-hub-2022-07-26/ListEfficiencyMetrics AWS API Documentation
+    #
+    # @overload list_efficiency_metrics(params = {})
+    # @param [Hash] params ({})
+    def list_efficiency_metrics(params = {}, options = {})
+      req = build_request(:list_efficiency_metrics, params)
       req.send_request(options)
     end
 
@@ -1222,7 +1340,7 @@ module Aws::CostOptimizationHub
     #       implementation_efforts: ["VeryLow"], # accepts VeryLow, Low, Medium, High, VeryHigh
     #       account_ids: ["AccountId"],
     #       regions: ["String"],
-    #       resource_types: ["Ec2Instance"], # accepts Ec2Instance, LambdaFunction, EbsVolume, EcsService, Ec2AutoScalingGroup, Ec2InstanceSavingsPlans, ComputeSavingsPlans, SageMakerSavingsPlans, Ec2ReservedInstances, RdsReservedInstances, OpenSearchReservedInstances, RedshiftReservedInstances, ElastiCacheReservedInstances, RdsDbInstanceStorage, RdsDbInstance, AuroraDbClusterStorage, DynamoDbReservedCapacity, MemoryDbReservedInstances
+    #       resource_types: ["Ec2Instance"], # accepts Ec2Instance, LambdaFunction, EbsVolume, EcsService, Ec2AutoScalingGroup, Ec2InstanceSavingsPlans, ComputeSavingsPlans, SageMakerSavingsPlans, Ec2ReservedInstances, RdsReservedInstances, OpenSearchReservedInstances, RedshiftReservedInstances, ElastiCacheReservedInstances, RdsDbInstanceStorage, RdsDbInstance, AuroraDbClusterStorage, DynamoDbReservedCapacity, MemoryDbReservedInstances, NatGateway
     #       action_types: ["Rightsize"], # accepts Rightsize, Stop, Upgrade, PurchaseSavingsPlans, PurchaseReservedInstances, MigrateToGraviton, Delete, ScaleIn
     #       tags: [
     #         {
@@ -1296,7 +1414,7 @@ module Aws::CostOptimizationHub
     #       implementation_efforts: ["VeryLow"], # accepts VeryLow, Low, Medium, High, VeryHigh
     #       account_ids: ["AccountId"],
     #       regions: ["String"],
-    #       resource_types: ["Ec2Instance"], # accepts Ec2Instance, LambdaFunction, EbsVolume, EcsService, Ec2AutoScalingGroup, Ec2InstanceSavingsPlans, ComputeSavingsPlans, SageMakerSavingsPlans, Ec2ReservedInstances, RdsReservedInstances, OpenSearchReservedInstances, RedshiftReservedInstances, ElastiCacheReservedInstances, RdsDbInstanceStorage, RdsDbInstance, AuroraDbClusterStorage, DynamoDbReservedCapacity, MemoryDbReservedInstances
+    #       resource_types: ["Ec2Instance"], # accepts Ec2Instance, LambdaFunction, EbsVolume, EcsService, Ec2AutoScalingGroup, Ec2InstanceSavingsPlans, ComputeSavingsPlans, SageMakerSavingsPlans, Ec2ReservedInstances, RdsReservedInstances, OpenSearchReservedInstances, RedshiftReservedInstances, ElastiCacheReservedInstances, RdsDbInstanceStorage, RdsDbInstance, AuroraDbClusterStorage, DynamoDbReservedCapacity, MemoryDbReservedInstances, NatGateway
     #       action_types: ["Rightsize"], # accepts Rightsize, Stop, Upgrade, PurchaseSavingsPlans, PurchaseReservedInstances, MigrateToGraviton, Delete, ScaleIn
     #       tags: [
     #         {
@@ -1357,9 +1475,8 @@ module Aws::CostOptimizationHub
     # Updates the enrollment (opt in and opt out) status of an account to
     # the Cost Optimization Hub service.
     #
-    # If the account is a management account or delegated administrator of
-    # an organization, this action can also be used to enroll member
-    # accounts of the organization.
+    # If the account is a management account of an organization, this action
+    # can also be used to enroll member accounts of the organization.
     #
     # You must have the appropriate permissions to opt in to Cost
     # Optimization Hub and to view its recommendations. When you opt in,
@@ -1463,7 +1580,7 @@ module Aws::CostOptimizationHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-costoptimizationhub'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

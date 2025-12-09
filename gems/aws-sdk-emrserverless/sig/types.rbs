@@ -182,11 +182,13 @@ module Aws::EMRServerless
     class IdentityCenterConfiguration
       attr_accessor identity_center_instance_arn: ::String
       attr_accessor identity_center_application_arn: ::String
+      attr_accessor user_background_sessions_enabled: bool
       SENSITIVE: []
     end
 
     class IdentityCenterConfigurationInput
       attr_accessor identity_center_instance_arn: ::String
+      attr_accessor user_background_sessions_enabled: bool
       SENSITIVE: []
     end
 

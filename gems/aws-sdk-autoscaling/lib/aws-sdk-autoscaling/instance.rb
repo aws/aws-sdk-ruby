@@ -99,6 +99,28 @@ module Aws::AutoScaling
       data[:launch_template]
     end
 
+    # The ID of the Amazon Machine Image (AMI) associated with the instance.
+    # This field shows the current AMI ID of the instance's root volume. It
+    # may differ from the original AMI used when the instance was first
+    # launched.
+    #
+    # This field appears for:
+    #
+    # * Instances with root volume replacements through Instance Refresh
+    #
+    # * Instances launched with AMI overrides
+    #
+    # This field won't appear for:
+    #
+    # * Existing instances launched from Launch Templates without overrides
+    #
+    # * Existing instances that didn’t have their root volume replaced
+    #   through Instance Refresh
+    # @return [String]
+    def image_id
+      data[:image_id]
+    end
+
     # Indicates whether the instance is protected from termination by Amazon
     # EC2 Auto Scaling when scaling in.
     # @return [Boolean]

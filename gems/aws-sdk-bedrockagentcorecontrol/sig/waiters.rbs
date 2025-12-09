@@ -18,6 +18,59 @@ module Aws
                   ) -> Client::_GetMemoryResponseSuccess
                 | (Hash[Symbol, untyped]) -> Client::_GetMemoryResponseSuccess
       end
+
+      class PolicyActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    policy_engine_id: ::String,
+                    policy_id: ::String
+                  ) -> Client::_GetPolicyResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetPolicyResponseSuccess
+      end
+
+      class PolicyDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    policy_engine_id: ::String,
+                    policy_id: ::String
+                  ) -> Client::_GetPolicyResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetPolicyResponseSuccess
+      end
+
+      class PolicyEngineActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    policy_engine_id: ::String
+                  ) -> Client::_GetPolicyEngineResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetPolicyEngineResponseSuccess
+      end
+
+      class PolicyEngineDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    policy_engine_id: ::String
+                  ) -> Client::_GetPolicyEngineResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetPolicyEngineResponseSuccess
+      end
+
+      class PolicyGenerationCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    policy_generation_id: ::String,
+                    policy_engine_id: ::String
+                  ) -> Client::_GetPolicyGenerationResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetPolicyGenerationResponseSuccess
+      end
     end
   end
 end

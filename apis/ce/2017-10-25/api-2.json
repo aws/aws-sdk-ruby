@@ -188,7 +188,8 @@
         {"shape":"DataUnavailableException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"RequestChangedException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"BillingViewHealthStatusException"}
       ]
     },
     "GetCostAndUsageComparisons":{
@@ -203,7 +204,8 @@
         {"shape":"DataUnavailableException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"LimitExceededException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"BillingViewHealthStatusException"}
       ]
     },
     "GetCostAndUsageWithResources":{
@@ -220,7 +222,8 @@
         {"shape":"BillExpirationException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"RequestChangedException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"BillingViewHealthStatusException"}
       ]
     },
     "GetCostCategories":{
@@ -237,7 +240,8 @@
         {"shape":"DataUnavailableException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"RequestChangedException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"BillingViewHealthStatusException"}
       ]
     },
     "GetCostComparisonDrivers":{
@@ -252,7 +256,8 @@
         {"shape":"DataUnavailableException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"LimitExceededException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"BillingViewHealthStatusException"}
       ]
     },
     "GetCostForecast":{
@@ -266,7 +271,8 @@
       "errors":[
         {"shape":"LimitExceededException"},
         {"shape":"DataUnavailableException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"BillingViewHealthStatusException"}
       ]
     },
     "GetDimensionValues":{
@@ -283,7 +289,8 @@
         {"shape":"DataUnavailableException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"RequestChangedException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"BillingViewHealthStatusException"}
       ]
     },
     "GetReservationCoverage":{
@@ -422,7 +429,8 @@
         {"shape":"DataUnavailableException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"RequestChangedException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"BillingViewHealthStatusException"}
       ]
     },
     "GetUsageForecast":{
@@ -437,7 +445,8 @@
         {"shape":"LimitExceededException"},
         {"shape":"DataUnavailableException"},
         {"shape":"UnresolvableUsageUnitException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"BillingViewHealthStatusException"}
       ]
     },
     "ListCommitmentPurchaseAnalyses":{
@@ -490,6 +499,19 @@
       "output":{"shape":"ListCostCategoryDefinitionsResponse"},
       "errors":[
         {"shape":"LimitExceededException"}
+      ]
+    },
+    "ListCostCategoryResourceAssociations":{
+      "name":"ListCostCategoryResourceAssociations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListCostCategoryResourceAssociationsRequest"},
+      "output":{"shape":"ListCostCategoryResourceAssociationsResponse"},
+      "errors":[
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceNotFoundException"}
       ]
     },
     "ListSavingsPlansPurchaseRecommendationGeneration":{
@@ -880,6 +902,13 @@
       "min":20,
       "pattern":"^arn:aws[a-z-]*:(billing)::[0-9]{12}:billingview/[-a-zA-Z0-9/:_+=.-@]{1,43}$"
     },
+    "BillingViewHealthStatusException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
+    },
     "CommitmentPurchaseAnalysisConfiguration":{
       "type":"structure",
       "members":{
@@ -1083,12 +1112,25 @@
         "NumberOfRules":{"shape":"NonNegativeInteger"},
         "ProcessingStatus":{"shape":"CostCategoryProcessingStatusList"},
         "Values":{"shape":"CostCategoryValuesList"},
-        "DefaultValue":{"shape":"CostCategoryValue"}
+        "DefaultValue":{"shape":"CostCategoryValue"},
+        "SupportedResourceTypes":{"shape":"ResourceTypes"}
       }
     },
     "CostCategoryReferencesList":{
       "type":"list",
       "member":{"shape":"CostCategoryReference"}
+    },
+    "CostCategoryResourceAssociation":{
+      "type":"structure",
+      "members":{
+        "ResourceArn":{"shape":"GenericArn"},
+        "CostCategoryName":{"shape":"CostCategoryName"},
+        "CostCategoryArn":{"shape":"Arn"}
+      }
+    },
+    "CostCategoryResourceAssociations":{
+      "type":"list",
+      "member":{"shape":"CostCategoryResourceAssociation"}
     },
     "CostCategoryRule":{
       "type":"structure",
@@ -1426,6 +1468,7 @@
         "AZ",
         "INSTANCE_TYPE",
         "LINKED_ACCOUNT",
+        "PAYER_ACCOUNT",
         "LINKED_ACCOUNT_NAME",
         "OPERATION",
         "PURCHASE_TYPE",
@@ -1662,6 +1705,12 @@
     "GenerationSummaryList":{
       "type":"list",
       "member":{"shape":"GenerationSummary"}
+    },
+    "GenericArn":{
+      "type":"string",
+      "max":2048,
+      "min":20,
+      "pattern":"arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+"
     },
     "GenericBoolean":{"type":"boolean"},
     "GenericDouble":{"type":"double"},
@@ -2377,13 +2426,32 @@
         "MaxResults":{
           "shape":"CostCategoryMaxResults",
           "box":true
-        }
+        },
+        "SupportedResourceTypes":{"shape":"ResourceTypesFilterInput"}
       }
     },
     "ListCostCategoryDefinitionsResponse":{
       "type":"structure",
       "members":{
         "CostCategoryReferences":{"shape":"CostCategoryReferencesList"},
+        "NextToken":{"shape":"NextPageToken"}
+      }
+    },
+    "ListCostCategoryResourceAssociationsRequest":{
+      "type":"structure",
+      "members":{
+        "CostCategoryArn":{"shape":"Arn"},
+        "NextToken":{"shape":"NextPageToken"},
+        "MaxResults":{
+          "shape":"CostCategoryMaxResults",
+          "box":true
+        }
+      }
+    },
+    "ListCostCategoryResourceAssociationsResponse":{
+      "type":"structure",
+      "members":{
+        "CostCategoryResourceAssociations":{"shape":"CostCategoryResourceAssociations"},
         "NextToken":{"shape":"NextPageToken"}
       }
     },
@@ -2507,7 +2575,12 @@
     },
     "MonitorDimension":{
       "type":"string",
-      "enum":["SERVICE"]
+      "enum":[
+        "SERVICE",
+        "LINKED_ACCOUNT",
+        "TAG",
+        "COST_CATEGORY"
+      ]
     },
     "MonitorType":{
       "type":"string",
@@ -2886,6 +2959,20 @@
       "max":256,
       "min":0,
       "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "ResourceType":{
+      "type":"string",
+      "pattern":"^[-a-zA-Z0-9/_]+:[-a-zA-Z0-9/_]+"
+    },
+    "ResourceTypes":{
+      "type":"list",
+      "member":{"shape":"ResourceType"}
+    },
+    "ResourceTypesFilterInput":{
+      "type":"list",
+      "member":{"shape":"ResourceType"},
+      "max":5,
+      "min":0
     },
     "ResourceUtilization":{
       "type":"structure",
@@ -3352,7 +3439,8 @@
       "enum":[
         "COMPUTE_SP",
         "EC2_INSTANCE_SP",
-        "SAGEMAKER_SP"
+        "SAGEMAKER_SP",
+        "DATABASE_SP"
       ]
     },
     "TagKey":{

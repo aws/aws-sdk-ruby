@@ -174,7 +174,8 @@ module Aws
                                   max_concurrent_runs: ::Integer?
                                 },
                                 ?identity_center_configuration: {
-                                  identity_center_instance_arn: ::String?
+                                  identity_center_instance_arn: ::String?,
+                                  user_background_sessions_enabled: bool?
                                 }
                               ) -> _CreateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
@@ -461,7 +462,8 @@ module Aws
                                   max_concurrent_runs: ::Integer?
                                 },
                                 ?identity_center_configuration: {
-                                  identity_center_instance_arn: ::String?
+                                  identity_center_instance_arn: ::String?,
+                                  user_background_sessions_enabled: bool?
                                 }
                               ) -> _UpdateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess

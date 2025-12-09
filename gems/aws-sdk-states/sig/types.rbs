@@ -480,7 +480,15 @@ module Aws::States
       attr_accessor request: Types::InspectionDataRequest
       attr_accessor response: Types::InspectionDataResponse
       attr_accessor variables: ::String
-      SENSITIVE: [:input, :after_arguments, :after_input_path, :after_parameters, :result, :after_result_selector, :after_result_path, :variables]
+      attr_accessor error_details: Types::InspectionErrorDetails
+      attr_accessor after_items_path: ::String
+      attr_accessor after_item_selector: ::String
+      attr_accessor after_item_batcher: ::String
+      attr_accessor after_items_pointer: ::String
+      attr_accessor tolerated_failure_count: ::Integer
+      attr_accessor tolerated_failure_percentage: ::Float
+      attr_accessor max_concurrency: ::Integer
+      SENSITIVE: [:input, :after_arguments, :after_input_path, :after_parameters, :result, :after_result_selector, :after_result_path, :variables, :after_items_path, :after_item_selector, :after_item_batcher, :after_items_pointer, :tolerated_failure_count, :tolerated_failure_percentage, :max_concurrency]
     end
 
     class InspectionDataRequest
@@ -499,6 +507,13 @@ module Aws::States
       attr_accessor headers: ::String
       attr_accessor body: ::String
       SENSITIVE: []
+    end
+
+    class InspectionErrorDetails
+      attr_accessor catch_index: ::Integer
+      attr_accessor retry_index: ::Integer
+      attr_accessor retry_backoff_interval_seconds: ::Integer
+      SENSITIVE: [:catch_index, :retry_index, :retry_backoff_interval_seconds]
     end
 
     class InvalidArn
@@ -770,6 +785,19 @@ module Aws::States
     class MissingRequiredParameter
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class MockErrorOutput
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      SENSITIVE: [:error, :cause]
+    end
+
+    class MockInput
+      attr_accessor result: ::String
+      attr_accessor error_output: Types::MockErrorOutput
+      attr_accessor field_validation_mode: ("STRICT" | "PRESENT" | "NONE")
+      SENSITIVE: [:result]
     end
 
     class PublishStateMachineVersionInput
@@ -1049,6 +1077,14 @@ module Aws::States
       SENSITIVE: [:error, :cause]
     end
 
+    class TestStateConfiguration
+      attr_accessor retrier_retry_count: ::Integer
+      attr_accessor error_caused_by_state: ::String
+      attr_accessor map_iteration_failure_count: ::Integer
+      attr_accessor map_item_reader_data: ::String
+      SENSITIVE: [:error_caused_by_state, :map_item_reader_data]
+    end
+
     class TestStateInput
       attr_accessor definition: ::String
       attr_accessor role_arn: ::String
@@ -1056,7 +1092,11 @@ module Aws::States
       attr_accessor inspection_level: ("INFO" | "DEBUG" | "TRACE")
       attr_accessor reveal_secrets: bool
       attr_accessor variables: ::String
-      SENSITIVE: [:definition, :input, :variables]
+      attr_accessor state_name: ::String
+      attr_accessor mock: Types::MockInput
+      attr_accessor context: ::String
+      attr_accessor state_configuration: Types::TestStateConfiguration
+      SENSITIVE: [:definition, :input, :variables, :state_name, :context]
     end
 
     class TestStateOutput

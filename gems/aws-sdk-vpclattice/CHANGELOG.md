@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2025-11-07)
+------------------
+
+* Feature - Amazon VPC Lattice now supports custom domain name for resource configurations
+
+1.39.0 (2025-10-24)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.38.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.37.0 (2025-09-29)
+------------------
+
+* Feature - Adds support for specifying the number of IPv4 addresses in each ENI for the resource gateway for VPC Lattice.
+
 1.36.0 (2025-08-27)
 ------------------
 

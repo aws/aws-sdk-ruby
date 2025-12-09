@@ -41,6 +41,7 @@ module Aws::BedrockAgentRuntime
     AgentCollaboratorOutputPayload = Shapes::StructureShape.new(name: 'AgentCollaboratorOutputPayload')
     AgentCollaboratorPayloadString = Shapes::StringShape.new(name: 'AgentCollaboratorPayloadString')
     AgentId = Shapes::StringShape.new(name: 'AgentId')
+    AgentTraces = Shapes::ListShape.new(name: 'AgentTraces')
     AgentVersion = Shapes::StringShape.new(name: 'AgentVersion')
     AnalyzePromptEvent = Shapes::StructureShape.new(name: 'AnalyzePromptEvent')
     ApiContentMap = Shapes::MapShape.new(name: 'ApiContentMap')
@@ -52,6 +53,8 @@ module Aws::BedrockAgentRuntime
     ApiResult = Shapes::StructureShape.new(name: 'ApiResult')
     AttributeType = Shapes::StringShape.new(name: 'AttributeType')
     Attribution = Shapes::StructureShape.new(name: 'Attribution')
+    AudioSegment = Shapes::StructureShape.new(name: 'AudioSegment')
+    AudioSegmentS3UriString = Shapes::StringShape.new(name: 'AudioSegmentS3UriString')
     BadGatewayException = Shapes::StructureShape.new(name: 'BadGatewayException')
     BasePromptTemplate = Shapes::StringShape.new(name: 'BasePromptTemplate')
     BedrockModelArn = Shapes::StringShape.new(name: 'BedrockModelArn')
@@ -135,6 +138,7 @@ module Aws::BedrockAgentRuntime
     FlowAliasIdentifier = Shapes::StringShape.new(name: 'FlowAliasIdentifier')
     FlowCompletionEvent = Shapes::StructureShape.new(name: 'FlowCompletionEvent')
     FlowCompletionReason = Shapes::StringShape.new(name: 'FlowCompletionReason')
+    FlowControlNodeType = Shapes::StringShape.new(name: 'FlowControlNodeType')
     FlowErrorCode = Shapes::StringShape.new(name: 'FlowErrorCode')
     FlowExecutionContent = Shapes::UnionShape.new(name: 'FlowExecutionContent')
     FlowExecutionError = Shapes::StructureShape.new(name: 'FlowExecutionError')
@@ -161,6 +165,11 @@ module Aws::BedrockAgentRuntime
     FlowInputs = Shapes::ListShape.new(name: 'FlowInputs')
     FlowMultiTurnInputContent = Shapes::UnionShape.new(name: 'FlowMultiTurnInputContent')
     FlowMultiTurnInputRequestEvent = Shapes::StructureShape.new(name: 'FlowMultiTurnInputRequestEvent')
+    FlowNodeIODataType = Shapes::StringShape.new(name: 'FlowNodeIODataType')
+    FlowNodeInputCategory = Shapes::StringShape.new(name: 'FlowNodeInputCategory')
+    FlowNodeInputExpression = Shapes::StringShape.new(name: 'FlowNodeInputExpression')
+    FlowNodeInputName = Shapes::StringShape.new(name: 'FlowNodeInputName')
+    FlowNodeOutputName = Shapes::StringShape.new(name: 'FlowNodeOutputName')
     FlowOutputContent = Shapes::UnionShape.new(name: 'FlowOutputContent')
     FlowOutputEvent = Shapes::StructureShape.new(name: 'FlowOutputEvent')
     FlowOutputField = Shapes::StructureShape.new(name: 'FlowOutputField')
@@ -170,16 +179,22 @@ module Aws::BedrockAgentRuntime
     FlowTraceCondition = Shapes::StructureShape.new(name: 'FlowTraceCondition')
     FlowTraceConditionNodeResultEvent = Shapes::StructureShape.new(name: 'FlowTraceConditionNodeResultEvent')
     FlowTraceConditions = Shapes::ListShape.new(name: 'FlowTraceConditions')
+    FlowTraceDependencyEvent = Shapes::StructureShape.new(name: 'FlowTraceDependencyEvent')
     FlowTraceEvent = Shapes::StructureShape.new(name: 'FlowTraceEvent')
     FlowTraceNodeActionEvent = Shapes::StructureShape.new(name: 'FlowTraceNodeActionEvent')
     FlowTraceNodeInputContent = Shapes::UnionShape.new(name: 'FlowTraceNodeInputContent')
     FlowTraceNodeInputEvent = Shapes::StructureShape.new(name: 'FlowTraceNodeInputEvent')
+    FlowTraceNodeInputExecutionChain = Shapes::ListShape.new(name: 'FlowTraceNodeInputExecutionChain')
+    FlowTraceNodeInputExecutionChainItem = Shapes::StructureShape.new(name: 'FlowTraceNodeInputExecutionChainItem')
     FlowTraceNodeInputField = Shapes::StructureShape.new(name: 'FlowTraceNodeInputField')
     FlowTraceNodeInputFields = Shapes::ListShape.new(name: 'FlowTraceNodeInputFields')
+    FlowTraceNodeInputSource = Shapes::StructureShape.new(name: 'FlowTraceNodeInputSource')
     FlowTraceNodeOutputContent = Shapes::UnionShape.new(name: 'FlowTraceNodeOutputContent')
     FlowTraceNodeOutputEvent = Shapes::StructureShape.new(name: 'FlowTraceNodeOutputEvent')
     FlowTraceNodeOutputField = Shapes::StructureShape.new(name: 'FlowTraceNodeOutputField')
     FlowTraceNodeOutputFields = Shapes::ListShape.new(name: 'FlowTraceNodeOutputFields')
+    FlowTraceNodeOutputNext = Shapes::StructureShape.new(name: 'FlowTraceNodeOutputNext')
+    FlowTraceNodeOutputNextList = Shapes::ListShape.new(name: 'FlowTraceNodeOutputNextList')
     Function = Shapes::StringShape.new(name: 'Function')
     FunctionDefinition = Shapes::StructureShape.new(name: 'FunctionDefinition')
     FunctionDescription = Shapes::StringShape.new(name: 'FunctionDescription')
@@ -265,6 +280,9 @@ module Aws::BedrockAgentRuntime
     InlineSessionState = Shapes::StructureShape.new(name: 'InlineSessionState')
     InputFile = Shapes::StructureShape.new(name: 'InputFile')
     InputFiles = Shapes::ListShape.new(name: 'InputFiles')
+    InputImage = Shapes::StructureShape.new(name: 'InputImage')
+    InputImageFormat = Shapes::StringShape.new(name: 'InputImageFormat')
+    InputImageInlineContentBlob = Shapes::BlobShape.new(name: 'InputImageInlineContentBlob')
     InputPrompt = Shapes::UnionShape.new(name: 'InputPrompt')
     InputQueryType = Shapes::StringShape.new(name: 'InputQueryType')
     InputText = Shapes::StringShape.new(name: 'InputText')
@@ -301,6 +319,7 @@ module Aws::BedrockAgentRuntime
     KnowledgeBaseLookupOutput = Shapes::StructureShape.new(name: 'KnowledgeBaseLookupOutput')
     KnowledgeBaseQuery = Shapes::StructureShape.new(name: 'KnowledgeBaseQuery')
     KnowledgeBaseQueryTextString = Shapes::StringShape.new(name: 'KnowledgeBaseQueryTextString')
+    KnowledgeBaseQueryType = Shapes::StringShape.new(name: 'KnowledgeBaseQueryType')
     KnowledgeBaseRetrievalConfiguration = Shapes::StructureShape.new(name: 'KnowledgeBaseRetrievalConfiguration')
     KnowledgeBaseRetrievalResult = Shapes::StructureShape.new(name: 'KnowledgeBaseRetrievalResult')
     KnowledgeBaseRetrievalResults = Shapes::ListShape.new(name: 'KnowledgeBaseRetrievalResults')
@@ -346,18 +365,26 @@ module Aws::BedrockAgentRuntime
     ModelPerformanceConfiguration = Shapes::StructureShape.new(name: 'ModelPerformanceConfiguration')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NodeActionEvent = Shapes::StructureShape.new(name: 'NodeActionEvent')
+    NodeDependencyEvent = Shapes::StructureShape.new(name: 'NodeDependencyEvent')
     NodeErrorCode = Shapes::StringShape.new(name: 'NodeErrorCode')
     NodeExecutionContent = Shapes::UnionShape.new(name: 'NodeExecutionContent')
     NodeFailureEvent = Shapes::StructureShape.new(name: 'NodeFailureEvent')
     NodeInputEvent = Shapes::StructureShape.new(name: 'NodeInputEvent')
+    NodeInputExecutionChain = Shapes::ListShape.new(name: 'NodeInputExecutionChain')
+    NodeInputExecutionChainItem = Shapes::StructureShape.new(name: 'NodeInputExecutionChainItem')
     NodeInputField = Shapes::StructureShape.new(name: 'NodeInputField')
     NodeInputFields = Shapes::ListShape.new(name: 'NodeInputFields')
     NodeInputName = Shapes::StringShape.new(name: 'NodeInputName')
+    NodeInputSource = Shapes::StructureShape.new(name: 'NodeInputSource')
     NodeName = Shapes::StringShape.new(name: 'NodeName')
     NodeOutputEvent = Shapes::StructureShape.new(name: 'NodeOutputEvent')
     NodeOutputField = Shapes::StructureShape.new(name: 'NodeOutputField')
     NodeOutputFields = Shapes::ListShape.new(name: 'NodeOutputFields')
     NodeOutputName = Shapes::StringShape.new(name: 'NodeOutputName')
+    NodeOutputNext = Shapes::StructureShape.new(name: 'NodeOutputNext')
+    NodeOutputNextList = Shapes::ListShape.new(name: 'NodeOutputNextList')
+    NodeTraceElements = Shapes::UnionShape.new(name: 'NodeTraceElements')
     NodeType = Shapes::StringShape.new(name: 'NodeType')
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
     Observation = Shapes::StructureShape.new(name: 'Observation')
@@ -547,6 +574,7 @@ module Aws::BedrockAgentRuntime
     TopK = Shapes::IntegerShape.new(name: 'TopK')
     TopP = Shapes::FloatShape.new(name: 'TopP')
     Trace = Shapes::UnionShape.new(name: 'Trace')
+    TraceElements = Shapes::UnionShape.new(name: 'TraceElements')
     TraceId = Shapes::StringShape.new(name: 'TraceId')
     TraceKnowledgeBaseId = Shapes::StringShape.new(name: 'TraceKnowledgeBaseId')
     TracePart = Shapes::StructureShape.new(name: 'TracePart')
@@ -566,6 +594,8 @@ module Aws::BedrockAgentRuntime
     VectorSearchRerankingConfigurationType = Shapes::StringShape.new(name: 'VectorSearchRerankingConfigurationType')
     Verb = Shapes::StringShape.new(name: 'Verb')
     Version = Shapes::StringShape.new(name: 'Version')
+    VideoSegment = Shapes::StructureShape.new(name: 'VideoSegment')
+    VideoSegmentS3UriString = Shapes::StringShape.new(name: 'VideoSegmentS3UriString')
 
     APISchema.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
     APISchema.add_member(:s3, Shapes::ShapeRef.new(shape: S3Identifier, location_name: "s3"))
@@ -638,6 +668,8 @@ module Aws::BedrockAgentRuntime
     AgentCollaboratorOutputPayload.add_member(:type, Shapes::ShapeRef.new(shape: PayloadType, location_name: "type"))
     AgentCollaboratorOutputPayload.struct_class = Types::AgentCollaboratorOutputPayload
 
+    AgentTraces.member = Shapes::ShapeRef.new(shape: TracePart, event: true)
+
     AnalyzePromptEvent.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     AnalyzePromptEvent.struct_class = Types::AnalyzePromptEvent
 
@@ -676,6 +708,10 @@ module Aws::BedrockAgentRuntime
 
     Attribution.add_member(:citations, Shapes::ShapeRef.new(shape: Citations, location_name: "citations"))
     Attribution.struct_class = Types::Attribution
+
+    AudioSegment.add_member(:s3_uri, Shapes::ShapeRef.new(shape: AudioSegmentS3UriString, required: true, location_name: "s3Uri"))
+    AudioSegment.add_member(:transcription, Shapes::ShapeRef.new(shape: String, location_name: "transcription"))
+    AudioSegment.struct_class = Types::AudioSegment
 
     BadGatewayException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     BadGatewayException.add_member(:resource_name, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "resourceName"))
@@ -914,6 +950,8 @@ module Aws::BedrockAgentRuntime
     FlowExecutionEvent.add_member(:flow_failure_event, Shapes::ShapeRef.new(shape: FlowFailureEvent, location_name: "flowFailureEvent"))
     FlowExecutionEvent.add_member(:flow_input_event, Shapes::ShapeRef.new(shape: FlowExecutionInputEvent, location_name: "flowInputEvent"))
     FlowExecutionEvent.add_member(:flow_output_event, Shapes::ShapeRef.new(shape: FlowExecutionOutputEvent, location_name: "flowOutputEvent"))
+    FlowExecutionEvent.add_member(:node_action_event, Shapes::ShapeRef.new(shape: NodeActionEvent, location_name: "nodeActionEvent"))
+    FlowExecutionEvent.add_member(:node_dependency_event, Shapes::ShapeRef.new(shape: NodeDependencyEvent, location_name: "nodeDependencyEvent"))
     FlowExecutionEvent.add_member(:node_failure_event, Shapes::ShapeRef.new(shape: NodeFailureEvent, location_name: "nodeFailureEvent"))
     FlowExecutionEvent.add_member(:node_input_event, Shapes::ShapeRef.new(shape: NodeInputEvent, location_name: "nodeInputEvent"))
     FlowExecutionEvent.add_member(:node_output_event, Shapes::ShapeRef.new(shape: NodeOutputEvent, location_name: "nodeOutputEvent"))
@@ -922,6 +960,8 @@ module Aws::BedrockAgentRuntime
     FlowExecutionEvent.add_member_subclass(:flow_failure_event, Types::FlowExecutionEvent::FlowFailureEvent)
     FlowExecutionEvent.add_member_subclass(:flow_input_event, Types::FlowExecutionEvent::FlowInputEvent)
     FlowExecutionEvent.add_member_subclass(:flow_output_event, Types::FlowExecutionEvent::FlowOutputEvent)
+    FlowExecutionEvent.add_member_subclass(:node_action_event, Types::FlowExecutionEvent::NodeActionEvent)
+    FlowExecutionEvent.add_member_subclass(:node_dependency_event, Types::FlowExecutionEvent::NodeDependencyEvent)
     FlowExecutionEvent.add_member_subclass(:node_failure_event, Types::FlowExecutionEvent::NodeFailureEvent)
     FlowExecutionEvent.add_member_subclass(:node_input_event, Types::FlowExecutionEvent::NodeInputEvent)
     FlowExecutionEvent.add_member_subclass(:node_output_event, Types::FlowExecutionEvent::NodeOutputEvent)
@@ -1021,11 +1061,13 @@ module Aws::BedrockAgentRuntime
 
     FlowTrace.add_member(:condition_node_result_trace, Shapes::ShapeRef.new(shape: FlowTraceConditionNodeResultEvent, location_name: "conditionNodeResultTrace"))
     FlowTrace.add_member(:node_action_trace, Shapes::ShapeRef.new(shape: FlowTraceNodeActionEvent, location_name: "nodeActionTrace"))
+    FlowTrace.add_member(:node_dependency_trace, Shapes::ShapeRef.new(shape: FlowTraceDependencyEvent, location_name: "nodeDependencyTrace"))
     FlowTrace.add_member(:node_input_trace, Shapes::ShapeRef.new(shape: FlowTraceNodeInputEvent, location_name: "nodeInputTrace"))
     FlowTrace.add_member(:node_output_trace, Shapes::ShapeRef.new(shape: FlowTraceNodeOutputEvent, location_name: "nodeOutputTrace"))
     FlowTrace.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     FlowTrace.add_member_subclass(:condition_node_result_trace, Types::FlowTrace::ConditionNodeResultTrace)
     FlowTrace.add_member_subclass(:node_action_trace, Types::FlowTrace::NodeActionTrace)
+    FlowTrace.add_member_subclass(:node_dependency_trace, Types::FlowTrace::NodeDependencyTrace)
     FlowTrace.add_member_subclass(:node_input_trace, Types::FlowTrace::NodeInputTrace)
     FlowTrace.add_member_subclass(:node_output_trace, Types::FlowTrace::NodeOutputTrace)
     FlowTrace.add_member_subclass(:unknown, Types::FlowTrace::Unknown)
@@ -1041,11 +1083,18 @@ module Aws::BedrockAgentRuntime
 
     FlowTraceConditions.member = Shapes::ShapeRef.new(shape: FlowTraceCondition)
 
+    FlowTraceDependencyEvent.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    FlowTraceDependencyEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "timestamp"))
+    FlowTraceDependencyEvent.add_member(:trace_elements, Shapes::ShapeRef.new(shape: TraceElements, required: true, location_name: "traceElements"))
+    FlowTraceDependencyEvent.struct_class = Types::FlowTraceDependencyEvent
+
     FlowTraceEvent.add_member(:trace, Shapes::ShapeRef.new(shape: FlowTrace, required: true, location_name: "trace"))
     FlowTraceEvent.struct_class = Types::FlowTraceEvent
 
     FlowTraceNodeActionEvent.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
     FlowTraceNodeActionEvent.add_member(:operation_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "operationName"))
+    FlowTraceNodeActionEvent.add_member(:operation_request, Shapes::ShapeRef.new(shape: Document, location_name: "operationRequest"))
+    FlowTraceNodeActionEvent.add_member(:operation_response, Shapes::ShapeRef.new(shape: Document, location_name: "operationResponse"))
     FlowTraceNodeActionEvent.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "requestId"))
     FlowTraceNodeActionEvent.add_member(:service_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceName"))
     FlowTraceNodeActionEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "timestamp"))
@@ -1062,11 +1111,27 @@ module Aws::BedrockAgentRuntime
     FlowTraceNodeInputEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "timestamp"))
     FlowTraceNodeInputEvent.struct_class = Types::FlowTraceNodeInputEvent
 
+    FlowTraceNodeInputExecutionChain.member = Shapes::ShapeRef.new(shape: FlowTraceNodeInputExecutionChainItem)
+
+    FlowTraceNodeInputExecutionChainItem.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "index"))
+    FlowTraceNodeInputExecutionChainItem.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    FlowTraceNodeInputExecutionChainItem.add_member(:type, Shapes::ShapeRef.new(shape: FlowControlNodeType, required: true, location_name: "type"))
+    FlowTraceNodeInputExecutionChainItem.struct_class = Types::FlowTraceNodeInputExecutionChainItem
+
+    FlowTraceNodeInputField.add_member(:category, Shapes::ShapeRef.new(shape: FlowNodeInputCategory, location_name: "category"))
     FlowTraceNodeInputField.add_member(:content, Shapes::ShapeRef.new(shape: FlowTraceNodeInputContent, required: true, location_name: "content"))
+    FlowTraceNodeInputField.add_member(:execution_chain, Shapes::ShapeRef.new(shape: FlowTraceNodeInputExecutionChain, location_name: "executionChain"))
     FlowTraceNodeInputField.add_member(:node_input_name, Shapes::ShapeRef.new(shape: NodeInputName, required: true, location_name: "nodeInputName"))
+    FlowTraceNodeInputField.add_member(:source, Shapes::ShapeRef.new(shape: FlowTraceNodeInputSource, location_name: "source"))
+    FlowTraceNodeInputField.add_member(:type, Shapes::ShapeRef.new(shape: FlowNodeIODataType, location_name: "type"))
     FlowTraceNodeInputField.struct_class = Types::FlowTraceNodeInputField
 
     FlowTraceNodeInputFields.member = Shapes::ShapeRef.new(shape: FlowTraceNodeInputField)
+
+    FlowTraceNodeInputSource.add_member(:expression, Shapes::ShapeRef.new(shape: FlowNodeInputExpression, required: true, location_name: "expression"))
+    FlowTraceNodeInputSource.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    FlowTraceNodeInputSource.add_member(:output_field_name, Shapes::ShapeRef.new(shape: FlowNodeOutputName, required: true, location_name: "outputFieldName"))
+    FlowTraceNodeInputSource.struct_class = Types::FlowTraceNodeInputSource
 
     FlowTraceNodeOutputContent.add_member(:document, Shapes::ShapeRef.new(shape: Document, location_name: "document"))
     FlowTraceNodeOutputContent.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1080,10 +1145,18 @@ module Aws::BedrockAgentRuntime
     FlowTraceNodeOutputEvent.struct_class = Types::FlowTraceNodeOutputEvent
 
     FlowTraceNodeOutputField.add_member(:content, Shapes::ShapeRef.new(shape: FlowTraceNodeOutputContent, required: true, location_name: "content"))
+    FlowTraceNodeOutputField.add_member(:next, Shapes::ShapeRef.new(shape: FlowTraceNodeOutputNextList, location_name: "next"))
     FlowTraceNodeOutputField.add_member(:node_output_name, Shapes::ShapeRef.new(shape: NodeOutputName, required: true, location_name: "nodeOutputName"))
+    FlowTraceNodeOutputField.add_member(:type, Shapes::ShapeRef.new(shape: FlowNodeIODataType, location_name: "type"))
     FlowTraceNodeOutputField.struct_class = Types::FlowTraceNodeOutputField
 
     FlowTraceNodeOutputFields.member = Shapes::ShapeRef.new(shape: FlowTraceNodeOutputField)
+
+    FlowTraceNodeOutputNext.add_member(:input_field_name, Shapes::ShapeRef.new(shape: FlowNodeInputName, required: true, location_name: "inputFieldName"))
+    FlowTraceNodeOutputNext.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    FlowTraceNodeOutputNext.struct_class = Types::FlowTraceNodeOutputNext
+
+    FlowTraceNodeOutputNextList.member = Shapes::ShapeRef.new(shape: FlowTraceNodeOutputNext)
 
     FunctionDefinition.add_member(:description, Shapes::ShapeRef.new(shape: FunctionDescription, location_name: "description"))
     FunctionDefinition.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
@@ -1376,6 +1449,10 @@ module Aws::BedrockAgentRuntime
 
     InputFiles.member = Shapes::ShapeRef.new(shape: InputFile)
 
+    InputImage.add_member(:format, Shapes::ShapeRef.new(shape: InputImageFormat, required: true, location_name: "format"))
+    InputImage.add_member(:inline_content, Shapes::ShapeRef.new(shape: InputImageInlineContentBlob, required: true, location_name: "inlineContent"))
+    InputImage.struct_class = Types::InputImage
+
     InputPrompt.add_member(:text_prompt, Shapes::ShapeRef.new(shape: TextPrompt, location_name: "textPrompt"))
     InputPrompt.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     InputPrompt.add_member_subclass(:text_prompt, Types::InputPrompt::TextPrompt)
@@ -1526,7 +1603,9 @@ module Aws::BedrockAgentRuntime
     KnowledgeBaseLookupOutput.add_member(:retrieved_references, Shapes::ShapeRef.new(shape: RetrievedReferences, location_name: "retrievedReferences"))
     KnowledgeBaseLookupOutput.struct_class = Types::KnowledgeBaseLookupOutput
 
-    KnowledgeBaseQuery.add_member(:text, Shapes::ShapeRef.new(shape: KnowledgeBaseQueryTextString, required: true, location_name: "text"))
+    KnowledgeBaseQuery.add_member(:image, Shapes::ShapeRef.new(shape: InputImage, location_name: "image"))
+    KnowledgeBaseQuery.add_member(:text, Shapes::ShapeRef.new(shape: KnowledgeBaseQueryTextString, location_name: "text"))
+    KnowledgeBaseQuery.add_member(:type, Shapes::ShapeRef.new(shape: KnowledgeBaseQueryType, location_name: "type"))
     KnowledgeBaseQuery.struct_class = Types::KnowledgeBaseQuery
 
     KnowledgeBaseRetrievalConfiguration.add_member(:vector_search_configuration, Shapes::ShapeRef.new(shape: KnowledgeBaseVectorSearchConfiguration, required: true, location_name: "vectorSearchConfiguration"))
@@ -1667,6 +1746,20 @@ module Aws::BedrockAgentRuntime
     ModelPerformanceConfiguration.add_member(:performance_config, Shapes::ShapeRef.new(shape: PerformanceConfiguration, location_name: "performanceConfig"))
     ModelPerformanceConfiguration.struct_class = Types::ModelPerformanceConfiguration
 
+    NodeActionEvent.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    NodeActionEvent.add_member(:operation_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "operationName"))
+    NodeActionEvent.add_member(:operation_request, Shapes::ShapeRef.new(shape: Document, location_name: "operationRequest"))
+    NodeActionEvent.add_member(:operation_response, Shapes::ShapeRef.new(shape: Document, location_name: "operationResponse"))
+    NodeActionEvent.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "requestId"))
+    NodeActionEvent.add_member(:service_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceName"))
+    NodeActionEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "timestamp"))
+    NodeActionEvent.struct_class = Types::NodeActionEvent
+
+    NodeDependencyEvent.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    NodeDependencyEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "timestamp"))
+    NodeDependencyEvent.add_member(:trace_elements, Shapes::ShapeRef.new(shape: NodeTraceElements, required: true, location_name: "traceElements"))
+    NodeDependencyEvent.struct_class = Types::NodeDependencyEvent
+
     NodeExecutionContent.add_member(:document, Shapes::ShapeRef.new(shape: Document, location_name: "document"))
     NodeExecutionContent.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     NodeExecutionContent.add_member_subclass(:document, Types::NodeExecutionContent::Document)
@@ -1684,11 +1777,27 @@ module Aws::BedrockAgentRuntime
     NodeInputEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "timestamp"))
     NodeInputEvent.struct_class = Types::NodeInputEvent
 
+    NodeInputExecutionChain.member = Shapes::ShapeRef.new(shape: NodeInputExecutionChainItem)
+
+    NodeInputExecutionChainItem.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "index"))
+    NodeInputExecutionChainItem.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    NodeInputExecutionChainItem.add_member(:type, Shapes::ShapeRef.new(shape: FlowControlNodeType, required: true, location_name: "type"))
+    NodeInputExecutionChainItem.struct_class = Types::NodeInputExecutionChainItem
+
+    NodeInputField.add_member(:category, Shapes::ShapeRef.new(shape: FlowNodeInputCategory, location_name: "category"))
     NodeInputField.add_member(:content, Shapes::ShapeRef.new(shape: NodeExecutionContent, required: true, location_name: "content"))
+    NodeInputField.add_member(:execution_chain, Shapes::ShapeRef.new(shape: NodeInputExecutionChain, location_name: "executionChain"))
     NodeInputField.add_member(:name, Shapes::ShapeRef.new(shape: NodeInputName, required: true, location_name: "name"))
+    NodeInputField.add_member(:source, Shapes::ShapeRef.new(shape: NodeInputSource, location_name: "source"))
+    NodeInputField.add_member(:type, Shapes::ShapeRef.new(shape: FlowNodeIODataType, location_name: "type"))
     NodeInputField.struct_class = Types::NodeInputField
 
     NodeInputFields.member = Shapes::ShapeRef.new(shape: NodeInputField)
+
+    NodeInputSource.add_member(:expression, Shapes::ShapeRef.new(shape: FlowNodeInputExpression, required: true, location_name: "expression"))
+    NodeInputSource.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    NodeInputSource.add_member(:output_field_name, Shapes::ShapeRef.new(shape: FlowNodeOutputName, required: true, location_name: "outputFieldName"))
+    NodeInputSource.struct_class = Types::NodeInputSource
 
     NodeOutputEvent.add_member(:fields, Shapes::ShapeRef.new(shape: NodeOutputFields, required: true, location_name: "fields"))
     NodeOutputEvent.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
@@ -1697,9 +1806,23 @@ module Aws::BedrockAgentRuntime
 
     NodeOutputField.add_member(:content, Shapes::ShapeRef.new(shape: NodeExecutionContent, required: true, location_name: "content"))
     NodeOutputField.add_member(:name, Shapes::ShapeRef.new(shape: NodeOutputName, required: true, location_name: "name"))
+    NodeOutputField.add_member(:next, Shapes::ShapeRef.new(shape: NodeOutputNextList, location_name: "next"))
+    NodeOutputField.add_member(:type, Shapes::ShapeRef.new(shape: FlowNodeIODataType, location_name: "type"))
     NodeOutputField.struct_class = Types::NodeOutputField
 
     NodeOutputFields.member = Shapes::ShapeRef.new(shape: NodeOutputField)
+
+    NodeOutputNext.add_member(:input_field_name, Shapes::ShapeRef.new(shape: FlowNodeInputName, required: true, location_name: "inputFieldName"))
+    NodeOutputNext.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "nodeName"))
+    NodeOutputNext.struct_class = Types::NodeOutputNext
+
+    NodeOutputNextList.member = Shapes::ShapeRef.new(shape: NodeOutputNext)
+
+    NodeTraceElements.add_member(:agent_traces, Shapes::ShapeRef.new(shape: AgentTraces, location_name: "agentTraces"))
+    NodeTraceElements.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    NodeTraceElements.add_member_subclass(:agent_traces, Types::NodeTraceElements::AgentTraces)
+    NodeTraceElements.add_member_subclass(:unknown, Types::NodeTraceElements::Unknown)
+    NodeTraceElements.struct_class = Types::NodeTraceElements
 
     Observation.add_member(:action_group_invocation_output, Shapes::ShapeRef.new(shape: ActionGroupInvocationOutput, location_name: "actionGroupInvocationOutput"))
     Observation.add_member(:agent_collaborator_invocation_output, Shapes::ShapeRef.new(shape: AgentCollaboratorInvocationOutput, location_name: "agentCollaboratorInvocationOutput"))
@@ -2020,10 +2143,12 @@ module Aws::BedrockAgentRuntime
     RetrievalResultConfluenceLocation.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "url"))
     RetrievalResultConfluenceLocation.struct_class = Types::RetrievalResultConfluenceLocation
 
+    RetrievalResultContent.add_member(:audio, Shapes::ShapeRef.new(shape: AudioSegment, location_name: "audio"))
     RetrievalResultContent.add_member(:byte_content, Shapes::ShapeRef.new(shape: String, location_name: "byteContent"))
     RetrievalResultContent.add_member(:row, Shapes::ShapeRef.new(shape: RetrievalResultContentRow, location_name: "row"))
     RetrievalResultContent.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
     RetrievalResultContent.add_member(:type, Shapes::ShapeRef.new(shape: RetrievalResultContentType, location_name: "type"))
+    RetrievalResultContent.add_member(:video, Shapes::ShapeRef.new(shape: VideoSegment, location_name: "video"))
     RetrievalResultContent.struct_class = Types::RetrievalResultContent
 
     RetrievalResultContentColumn.add_member(:column_name, Shapes::ShapeRef.new(shape: String, location_name: "columnName"))
@@ -2295,6 +2420,12 @@ module Aws::BedrockAgentRuntime
     Trace.add_member_subclass(:unknown, Types::Trace::Unknown)
     Trace.struct_class = Types::Trace
 
+    TraceElements.add_member(:agent_traces, Shapes::ShapeRef.new(shape: AgentTraces, location_name: "agentTraces"))
+    TraceElements.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TraceElements.add_member_subclass(:agent_traces, Types::TraceElements::AgentTraces)
+    TraceElements.add_member_subclass(:unknown, Types::TraceElements::Unknown)
+    TraceElements.struct_class = Types::TraceElements
+
     TracePart.add_member(:agent_alias_id, Shapes::ShapeRef.new(shape: AgentAliasId, location_name: "agentAliasId"))
     TracePart.add_member(:agent_id, Shapes::ShapeRef.new(shape: AgentId, location_name: "agentId"))
     TracePart.add_member(:agent_version, Shapes::ShapeRef.new(shape: AgentVersion, location_name: "agentVersion"))
@@ -2345,6 +2476,10 @@ module Aws::BedrockAgentRuntime
     VectorSearchRerankingConfiguration.add_member(:bedrock_reranking_configuration, Shapes::ShapeRef.new(shape: VectorSearchBedrockRerankingConfiguration, location_name: "bedrockRerankingConfiguration"))
     VectorSearchRerankingConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: VectorSearchRerankingConfigurationType, required: true, location_name: "type"))
     VectorSearchRerankingConfiguration.struct_class = Types::VectorSearchRerankingConfiguration
+
+    VideoSegment.add_member(:s3_uri, Shapes::ShapeRef.new(shape: VideoSegmentS3UriString, required: true, location_name: "s3Uri"))
+    VideoSegment.add_member(:summary, Shapes::ShapeRef.new(shape: String, location_name: "summary"))
+    VideoSegment.struct_class = Types::VideoSegment
 
 
     # @api private

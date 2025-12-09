@@ -1711,6 +1711,7 @@ module Aws::Proton
         o.name = "AcceptEnvironmentAccountConnection"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: AcceptEnvironmentAccountConnectionInput)
         o.output = Shapes::ShapeRef.new(shape: AcceptEnvironmentAccountConnectionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1725,6 +1726,7 @@ module Aws::Proton
         o.name = "CancelComponentDeployment"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CancelComponentDeploymentInput)
         o.output = Shapes::ShapeRef.new(shape: CancelComponentDeploymentOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1739,6 +1741,7 @@ module Aws::Proton
         o.name = "CancelEnvironmentDeployment"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CancelEnvironmentDeploymentInput)
         o.output = Shapes::ShapeRef.new(shape: CancelEnvironmentDeploymentOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1753,6 +1756,7 @@ module Aws::Proton
         o.name = "CancelServiceInstanceDeployment"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CancelServiceInstanceDeploymentInput)
         o.output = Shapes::ShapeRef.new(shape: CancelServiceInstanceDeploymentOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1767,6 +1771,7 @@ module Aws::Proton
         o.name = "CancelServicePipelineDeployment"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CancelServicePipelineDeploymentInput)
         o.output = Shapes::ShapeRef.new(shape: CancelServicePipelineDeploymentOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1781,6 +1786,7 @@ module Aws::Proton
         o.name = "CreateComponent"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateComponentInput)
         o.output = Shapes::ShapeRef.new(shape: CreateComponentOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1796,6 +1802,7 @@ module Aws::Proton
         o.name = "CreateEnvironment"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateEnvironmentInput)
         o.output = Shapes::ShapeRef.new(shape: CreateEnvironmentOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1811,6 +1818,7 @@ module Aws::Proton
         o.name = "CreateEnvironmentAccountConnection"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateEnvironmentAccountConnectionInput)
         o.output = Shapes::ShapeRef.new(shape: CreateEnvironmentAccountConnectionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1825,6 +1833,7 @@ module Aws::Proton
         o.name = "CreateEnvironmentTemplate"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateEnvironmentTemplateInput)
         o.output = Shapes::ShapeRef.new(shape: CreateEnvironmentTemplateOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1839,6 +1848,7 @@ module Aws::Proton
         o.name = "CreateEnvironmentTemplateVersion"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateEnvironmentTemplateVersionInput)
         o.output = Shapes::ShapeRef.new(shape: CreateEnvironmentTemplateVersionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1854,6 +1864,7 @@ module Aws::Proton
         o.name = "CreateRepository"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateRepositoryInput)
         o.output = Shapes::ShapeRef.new(shape: CreateRepositoryOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1868,6 +1879,7 @@ module Aws::Proton
         o.name = "CreateService"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateServiceInput)
         o.output = Shapes::ShapeRef.new(shape: CreateServiceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1883,6 +1895,7 @@ module Aws::Proton
         o.name = "CreateServiceInstance"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateServiceInstanceInput)
         o.output = Shapes::ShapeRef.new(shape: CreateServiceInstanceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1897,6 +1910,7 @@ module Aws::Proton
         o.name = "CreateServiceSyncConfig"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateServiceSyncConfigInput)
         o.output = Shapes::ShapeRef.new(shape: CreateServiceSyncConfigOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1911,6 +1925,7 @@ module Aws::Proton
         o.name = "CreateServiceTemplate"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateServiceTemplateInput)
         o.output = Shapes::ShapeRef.new(shape: CreateServiceTemplateOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1925,6 +1940,7 @@ module Aws::Proton
         o.name = "CreateServiceTemplateVersion"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateServiceTemplateVersionInput)
         o.output = Shapes::ShapeRef.new(shape: CreateServiceTemplateVersionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1940,6 +1956,7 @@ module Aws::Proton
         o.name = "CreateTemplateSyncConfig"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateTemplateSyncConfigInput)
         o.output = Shapes::ShapeRef.new(shape: CreateTemplateSyncConfigOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -1954,6 +1971,7 @@ module Aws::Proton
         o.name = "DeleteComponent"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteComponentInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteComponentOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1968,6 +1986,7 @@ module Aws::Proton
         o.name = "DeleteDeployment"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteDeploymentInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteDeploymentOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1981,6 +2000,7 @@ module Aws::Proton
         o.name = "DeleteEnvironment"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteEnvironmentInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteEnvironmentOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1995,6 +2015,7 @@ module Aws::Proton
         o.name = "DeleteEnvironmentAccountConnection"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteEnvironmentAccountConnectionInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteEnvironmentAccountConnectionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2009,6 +2030,7 @@ module Aws::Proton
         o.name = "DeleteEnvironmentTemplate"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteEnvironmentTemplateInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteEnvironmentTemplateOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2023,6 +2045,7 @@ module Aws::Proton
         o.name = "DeleteEnvironmentTemplateVersion"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteEnvironmentTemplateVersionInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteEnvironmentTemplateVersionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2037,6 +2060,7 @@ module Aws::Proton
         o.name = "DeleteRepository"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteRepositoryInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteRepositoryOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2051,6 +2075,7 @@ module Aws::Proton
         o.name = "DeleteService"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteServiceInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteServiceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2065,6 +2090,7 @@ module Aws::Proton
         o.name = "DeleteServiceSyncConfig"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteServiceSyncConfigInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteServiceSyncConfigOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2079,6 +2105,7 @@ module Aws::Proton
         o.name = "DeleteServiceTemplate"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteServiceTemplateInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteServiceTemplateOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2093,6 +2120,7 @@ module Aws::Proton
         o.name = "DeleteServiceTemplateVersion"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteServiceTemplateVersionInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteServiceTemplateVersionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2107,6 +2135,7 @@ module Aws::Proton
         o.name = "DeleteTemplateSyncConfig"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteTemplateSyncConfigInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteTemplateSyncConfigOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2121,6 +2150,7 @@ module Aws::Proton
         o.name = "GetAccountSettings"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetAccountSettingsInput)
         o.output = Shapes::ShapeRef.new(shape: GetAccountSettingsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2134,6 +2164,7 @@ module Aws::Proton
         o.name = "GetComponent"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetComponentInput)
         o.output = Shapes::ShapeRef.new(shape: GetComponentOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2147,6 +2178,7 @@ module Aws::Proton
         o.name = "GetDeployment"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetDeploymentInput)
         o.output = Shapes::ShapeRef.new(shape: GetDeploymentOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2160,6 +2192,7 @@ module Aws::Proton
         o.name = "GetEnvironment"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetEnvironmentInput)
         o.output = Shapes::ShapeRef.new(shape: GetEnvironmentOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2173,6 +2206,7 @@ module Aws::Proton
         o.name = "GetEnvironmentAccountConnection"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetEnvironmentAccountConnectionInput)
         o.output = Shapes::ShapeRef.new(shape: GetEnvironmentAccountConnectionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2186,6 +2220,7 @@ module Aws::Proton
         o.name = "GetEnvironmentTemplate"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetEnvironmentTemplateInput)
         o.output = Shapes::ShapeRef.new(shape: GetEnvironmentTemplateOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2199,6 +2234,7 @@ module Aws::Proton
         o.name = "GetEnvironmentTemplateVersion"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetEnvironmentTemplateVersionInput)
         o.output = Shapes::ShapeRef.new(shape: GetEnvironmentTemplateVersionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2212,6 +2248,7 @@ module Aws::Proton
         o.name = "GetRepository"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetRepositoryInput)
         o.output = Shapes::ShapeRef.new(shape: GetRepositoryOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2225,6 +2262,7 @@ module Aws::Proton
         o.name = "GetRepositorySyncStatus"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetRepositorySyncStatusInput)
         o.output = Shapes::ShapeRef.new(shape: GetRepositorySyncStatusOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2238,6 +2276,7 @@ module Aws::Proton
         o.name = "GetResourcesSummary"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetResourcesSummaryInput)
         o.output = Shapes::ShapeRef.new(shape: GetResourcesSummaryOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2250,6 +2289,7 @@ module Aws::Proton
         o.name = "GetService"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetServiceInput)
         o.output = Shapes::ShapeRef.new(shape: GetServiceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2263,6 +2303,7 @@ module Aws::Proton
         o.name = "GetServiceInstance"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetServiceInstanceInput)
         o.output = Shapes::ShapeRef.new(shape: GetServiceInstanceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2276,6 +2317,7 @@ module Aws::Proton
         o.name = "GetServiceInstanceSyncStatus"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetServiceInstanceSyncStatusInput)
         o.output = Shapes::ShapeRef.new(shape: GetServiceInstanceSyncStatusOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2289,6 +2331,7 @@ module Aws::Proton
         o.name = "GetServiceSyncBlockerSummary"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetServiceSyncBlockerSummaryInput)
         o.output = Shapes::ShapeRef.new(shape: GetServiceSyncBlockerSummaryOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2302,6 +2345,7 @@ module Aws::Proton
         o.name = "GetServiceSyncConfig"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetServiceSyncConfigInput)
         o.output = Shapes::ShapeRef.new(shape: GetServiceSyncConfigOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2315,6 +2359,7 @@ module Aws::Proton
         o.name = "GetServiceTemplate"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetServiceTemplateInput)
         o.output = Shapes::ShapeRef.new(shape: GetServiceTemplateOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2328,6 +2373,7 @@ module Aws::Proton
         o.name = "GetServiceTemplateVersion"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetServiceTemplateVersionInput)
         o.output = Shapes::ShapeRef.new(shape: GetServiceTemplateVersionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2341,6 +2387,7 @@ module Aws::Proton
         o.name = "GetTemplateSyncConfig"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetTemplateSyncConfigInput)
         o.output = Shapes::ShapeRef.new(shape: GetTemplateSyncConfigOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2354,6 +2401,7 @@ module Aws::Proton
         o.name = "GetTemplateSyncStatus"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetTemplateSyncStatusInput)
         o.output = Shapes::ShapeRef.new(shape: GetTemplateSyncStatusOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2367,6 +2415,7 @@ module Aws::Proton
         o.name = "ListComponentOutputs"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListComponentOutputsInput)
         o.output = Shapes::ShapeRef.new(shape: ListComponentOutputsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2385,6 +2434,7 @@ module Aws::Proton
         o.name = "ListComponentProvisionedResources"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListComponentProvisionedResourcesInput)
         o.output = Shapes::ShapeRef.new(shape: ListComponentProvisionedResourcesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2403,6 +2453,7 @@ module Aws::Proton
         o.name = "ListComponents"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListComponentsInput)
         o.output = Shapes::ShapeRef.new(shape: ListComponentsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2421,6 +2472,7 @@ module Aws::Proton
         o.name = "ListDeployments"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListDeploymentsInput)
         o.output = Shapes::ShapeRef.new(shape: ListDeploymentsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2440,6 +2492,7 @@ module Aws::Proton
         o.name = "ListEnvironmentAccountConnections"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListEnvironmentAccountConnectionsInput)
         o.output = Shapes::ShapeRef.new(shape: ListEnvironmentAccountConnectionsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2458,6 +2511,7 @@ module Aws::Proton
         o.name = "ListEnvironmentOutputs"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListEnvironmentOutputsInput)
         o.output = Shapes::ShapeRef.new(shape: ListEnvironmentOutputsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2476,6 +2530,7 @@ module Aws::Proton
         o.name = "ListEnvironmentProvisionedResources"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListEnvironmentProvisionedResourcesInput)
         o.output = Shapes::ShapeRef.new(shape: ListEnvironmentProvisionedResourcesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2494,6 +2549,7 @@ module Aws::Proton
         o.name = "ListEnvironmentTemplateVersions"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListEnvironmentTemplateVersionsInput)
         o.output = Shapes::ShapeRef.new(shape: ListEnvironmentTemplateVersionsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2513,6 +2569,7 @@ module Aws::Proton
         o.name = "ListEnvironmentTemplates"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListEnvironmentTemplatesInput)
         o.output = Shapes::ShapeRef.new(shape: ListEnvironmentTemplatesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2531,6 +2588,7 @@ module Aws::Proton
         o.name = "ListEnvironments"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListEnvironmentsInput)
         o.output = Shapes::ShapeRef.new(shape: ListEnvironmentsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2550,6 +2608,7 @@ module Aws::Proton
         o.name = "ListRepositories"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListRepositoriesInput)
         o.output = Shapes::ShapeRef.new(shape: ListRepositoriesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2569,6 +2628,7 @@ module Aws::Proton
         o.name = "ListRepositorySyncDefinitions"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListRepositorySyncDefinitionsInput)
         o.output = Shapes::ShapeRef.new(shape: ListRepositorySyncDefinitionsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2586,6 +2646,7 @@ module Aws::Proton
         o.name = "ListServiceInstanceOutputs"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListServiceInstanceOutputsInput)
         o.output = Shapes::ShapeRef.new(shape: ListServiceInstanceOutputsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2604,6 +2665,7 @@ module Aws::Proton
         o.name = "ListServiceInstanceProvisionedResources"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListServiceInstanceProvisionedResourcesInput)
         o.output = Shapes::ShapeRef.new(shape: ListServiceInstanceProvisionedResourcesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2622,6 +2684,7 @@ module Aws::Proton
         o.name = "ListServiceInstances"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListServiceInstancesInput)
         o.output = Shapes::ShapeRef.new(shape: ListServiceInstancesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2641,6 +2704,7 @@ module Aws::Proton
         o.name = "ListServicePipelineOutputs"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListServicePipelineOutputsInput)
         o.output = Shapes::ShapeRef.new(shape: ListServicePipelineOutputsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2659,6 +2723,7 @@ module Aws::Proton
         o.name = "ListServicePipelineProvisionedResources"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListServicePipelineProvisionedResourcesInput)
         o.output = Shapes::ShapeRef.new(shape: ListServicePipelineProvisionedResourcesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2677,6 +2742,7 @@ module Aws::Proton
         o.name = "ListServiceTemplateVersions"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListServiceTemplateVersionsInput)
         o.output = Shapes::ShapeRef.new(shape: ListServiceTemplateVersionsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2696,6 +2762,7 @@ module Aws::Proton
         o.name = "ListServiceTemplates"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListServiceTemplatesInput)
         o.output = Shapes::ShapeRef.new(shape: ListServiceTemplatesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2714,6 +2781,7 @@ module Aws::Proton
         o.name = "ListServices"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListServicesInput)
         o.output = Shapes::ShapeRef.new(shape: ListServicesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2732,6 +2800,7 @@ module Aws::Proton
         o.name = "ListTagsForResource"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2751,6 +2820,7 @@ module Aws::Proton
         o.name = "NotifyResourceDeploymentStatusChange"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: NotifyResourceDeploymentStatusChangeInput)
         o.output = Shapes::ShapeRef.new(shape: NotifyResourceDeploymentStatusChangeOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -2766,6 +2836,7 @@ module Aws::Proton
         o.name = "RejectEnvironmentAccountConnection"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: RejectEnvironmentAccountConnectionInput)
         o.output = Shapes::ShapeRef.new(shape: RejectEnvironmentAccountConnectionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2780,6 +2851,7 @@ module Aws::Proton
         o.name = "TagResource"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
         o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2794,6 +2866,7 @@ module Aws::Proton
         o.name = "UntagResource"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2808,6 +2881,7 @@ module Aws::Proton
         o.name = "UpdateAccountSettings"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateAccountSettingsInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateAccountSettingsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2821,6 +2895,7 @@ module Aws::Proton
         o.name = "UpdateComponent"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateComponentInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateComponentOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -2836,6 +2911,7 @@ module Aws::Proton
         o.name = "UpdateEnvironment"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateEnvironmentInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateEnvironmentOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2850,6 +2926,7 @@ module Aws::Proton
         o.name = "UpdateEnvironmentAccountConnection"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateEnvironmentAccountConnectionInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateEnvironmentAccountConnectionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2864,6 +2941,7 @@ module Aws::Proton
         o.name = "UpdateEnvironmentTemplate"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateEnvironmentTemplateInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateEnvironmentTemplateOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2878,6 +2956,7 @@ module Aws::Proton
         o.name = "UpdateEnvironmentTemplateVersion"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateEnvironmentTemplateVersionInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateEnvironmentTemplateVersionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2892,6 +2971,7 @@ module Aws::Proton
         o.name = "UpdateService"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateServiceInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateServiceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -2907,6 +2987,7 @@ module Aws::Proton
         o.name = "UpdateServiceInstance"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateServiceInstanceInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateServiceInstanceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2921,6 +3002,7 @@ module Aws::Proton
         o.name = "UpdateServicePipeline"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateServicePipelineInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateServicePipelineOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2935,6 +3017,7 @@ module Aws::Proton
         o.name = "UpdateServiceSyncBlocker"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateServiceSyncBlockerInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateServiceSyncBlockerOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2949,6 +3032,7 @@ module Aws::Proton
         o.name = "UpdateServiceSyncConfig"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateServiceSyncConfigInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateServiceSyncConfigOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2963,6 +3047,7 @@ module Aws::Proton
         o.name = "UpdateServiceTemplate"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateServiceTemplateInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateServiceTemplateOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2977,6 +3062,7 @@ module Aws::Proton
         o.name = "UpdateServiceTemplateVersion"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateServiceTemplateVersionInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateServiceTemplateVersionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -2991,6 +3077,7 @@ module Aws::Proton
         o.name = "UpdateTemplateSyncConfig"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateTemplateSyncConfigInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateTemplateSyncConfigOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

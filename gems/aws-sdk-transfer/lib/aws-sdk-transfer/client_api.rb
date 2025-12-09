@@ -38,10 +38,15 @@ module Aws::Transfer
     CertificateUsageType = Shapes::StringShape.new(name: 'CertificateUsageType')
     CompressionEnum = Shapes::StringShape.new(name: 'CompressionEnum')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectorEgressConfig = Shapes::UnionShape.new(name: 'ConnectorEgressConfig')
+    ConnectorEgressType = Shapes::StringShape.new(name: 'ConnectorEgressType')
+    ConnectorErrorMessage = Shapes::StringShape.new(name: 'ConnectorErrorMessage')
     ConnectorFileTransferResult = Shapes::StructureShape.new(name: 'ConnectorFileTransferResult')
     ConnectorFileTransferResults = Shapes::ListShape.new(name: 'ConnectorFileTransferResults')
     ConnectorId = Shapes::StringShape.new(name: 'ConnectorId')
     ConnectorSecurityPolicyName = Shapes::StringShape.new(name: 'ConnectorSecurityPolicyName')
+    ConnectorStatus = Shapes::StringShape.new(name: 'ConnectorStatus')
+    ConnectorVpcLatticeEgressConfig = Shapes::StructureShape.new(name: 'ConnectorVpcLatticeEgressConfig')
     CopyStepDetails = Shapes::StructureShape.new(name: 'CopyStepDetails')
     CreateAccessRequest = Shapes::StructureShape.new(name: 'CreateAccessRequest')
     CreateAccessResponse = Shapes::StructureShape.new(name: 'CreateAccessResponse')
@@ -110,6 +115,8 @@ module Aws::Transfer
     DescribedAgreement = Shapes::StructureShape.new(name: 'DescribedAgreement')
     DescribedCertificate = Shapes::StructureShape.new(name: 'DescribedCertificate')
     DescribedConnector = Shapes::StructureShape.new(name: 'DescribedConnector')
+    DescribedConnectorEgressConfig = Shapes::UnionShape.new(name: 'DescribedConnectorEgressConfig')
+    DescribedConnectorVpcLatticeEgressConfig = Shapes::StructureShape.new(name: 'DescribedConnectorVpcLatticeEgressConfig')
     DescribedExecution = Shapes::StructureShape.new(name: 'DescribedExecution')
     DescribedHostKey = Shapes::StructureShape.new(name: 'DescribedHostKey')
     DescribedIdentityCenterConfig = Shapes::StructureShape.new(name: 'DescribedIdentityCenterConfig')
@@ -119,7 +126,9 @@ module Aws::Transfer
     DescribedUser = Shapes::StructureShape.new(name: 'DescribedUser')
     DescribedWebApp = Shapes::StructureShape.new(name: 'DescribedWebApp')
     DescribedWebAppCustomization = Shapes::StructureShape.new(name: 'DescribedWebAppCustomization')
+    DescribedWebAppEndpointDetails = Shapes::UnionShape.new(name: 'DescribedWebAppEndpointDetails')
     DescribedWebAppIdentityProviderDetails = Shapes::UnionShape.new(name: 'DescribedWebAppIdentityProviderDetails')
+    DescribedWebAppVpcConfig = Shapes::StructureShape.new(name: 'DescribedWebAppVpcConfig')
     DescribedWorkflow = Shapes::StructureShape.new(name: 'DescribedWorkflow')
     Description = Shapes::StringShape.new(name: 'Description')
     DirectoryId = Shapes::StringShape.new(name: 'DirectoryId')
@@ -302,6 +311,7 @@ module Aws::Transfer
     SftpConnectorHostKey = Shapes::StringShape.new(name: 'SftpConnectorHostKey')
     SftpConnectorTrustedHostKey = Shapes::StringShape.new(name: 'SftpConnectorTrustedHostKey')
     SftpConnectorTrustedHostKeyList = Shapes::ListShape.new(name: 'SftpConnectorTrustedHostKeyList')
+    SftpPort = Shapes::IntegerShape.new(name: 'SftpPort')
     SigningAlg = Shapes::StringShape.new(name: 'SigningAlg')
     SourceFileLocation = Shapes::StringShape.new(name: 'SourceFileLocation')
     SourceIp = Shapes::StringShape.new(name: 'SourceIp')
@@ -349,8 +359,10 @@ module Aws::Transfer
     UpdateAgreementResponse = Shapes::StructureShape.new(name: 'UpdateAgreementResponse')
     UpdateCertificateRequest = Shapes::StructureShape.new(name: 'UpdateCertificateRequest')
     UpdateCertificateResponse = Shapes::StructureShape.new(name: 'UpdateCertificateResponse')
+    UpdateConnectorEgressConfig = Shapes::UnionShape.new(name: 'UpdateConnectorEgressConfig')
     UpdateConnectorRequest = Shapes::StructureShape.new(name: 'UpdateConnectorRequest')
     UpdateConnectorResponse = Shapes::StructureShape.new(name: 'UpdateConnectorResponse')
+    UpdateConnectorVpcLatticeEgressConfig = Shapes::StructureShape.new(name: 'UpdateConnectorVpcLatticeEgressConfig')
     UpdateHostKeyRequest = Shapes::StructureShape.new(name: 'UpdateHostKeyRequest')
     UpdateHostKeyResponse = Shapes::StructureShape.new(name: 'UpdateHostKeyResponse')
     UpdateProfileRequest = Shapes::StructureShape.new(name: 'UpdateProfileRequest')
@@ -361,10 +373,12 @@ module Aws::Transfer
     UpdateUserResponse = Shapes::StructureShape.new(name: 'UpdateUserResponse')
     UpdateWebAppCustomizationRequest = Shapes::StructureShape.new(name: 'UpdateWebAppCustomizationRequest')
     UpdateWebAppCustomizationResponse = Shapes::StructureShape.new(name: 'UpdateWebAppCustomizationResponse')
+    UpdateWebAppEndpointDetails = Shapes::UnionShape.new(name: 'UpdateWebAppEndpointDetails')
     UpdateWebAppIdentityCenterConfig = Shapes::StructureShape.new(name: 'UpdateWebAppIdentityCenterConfig')
     UpdateWebAppIdentityProviderDetails = Shapes::UnionShape.new(name: 'UpdateWebAppIdentityProviderDetails')
     UpdateWebAppRequest = Shapes::StructureShape.new(name: 'UpdateWebAppRequest')
     UpdateWebAppResponse = Shapes::StructureShape.new(name: 'UpdateWebAppResponse')
+    UpdateWebAppVpcConfig = Shapes::StructureShape.new(name: 'UpdateWebAppVpcConfig')
     Url = Shapes::StringShape.new(name: 'Url')
     UserCount = Shapes::IntegerShape.new(name: 'UserCount')
     UserDetails = Shapes::StructureShape.new(name: 'UserDetails')
@@ -372,9 +386,12 @@ module Aws::Transfer
     UserPassword = Shapes::StringShape.new(name: 'UserPassword')
     VpcEndpointId = Shapes::StringShape.new(name: 'VpcEndpointId')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
+    VpcLatticeResourceConfigurationArn = Shapes::StringShape.new(name: 'VpcLatticeResourceConfigurationArn')
     WebAppAccessEndpoint = Shapes::StringShape.new(name: 'WebAppAccessEndpoint')
     WebAppEndpoint = Shapes::StringShape.new(name: 'WebAppEndpoint')
+    WebAppEndpointDetails = Shapes::UnionShape.new(name: 'WebAppEndpointDetails')
     WebAppEndpointPolicy = Shapes::StringShape.new(name: 'WebAppEndpointPolicy')
+    WebAppEndpointType = Shapes::StringShape.new(name: 'WebAppEndpointType')
     WebAppFaviconFile = Shapes::BlobShape.new(name: 'WebAppFaviconFile')
     WebAppId = Shapes::StringShape.new(name: 'WebAppId')
     WebAppIdentityProviderDetails = Shapes::UnionShape.new(name: 'WebAppIdentityProviderDetails')
@@ -382,6 +399,7 @@ module Aws::Transfer
     WebAppTitle = Shapes::StringShape.new(name: 'WebAppTitle')
     WebAppUnitCount = Shapes::IntegerShape.new(name: 'WebAppUnitCount')
     WebAppUnits = Shapes::UnionShape.new(name: 'WebAppUnits')
+    WebAppVpcConfig = Shapes::StructureShape.new(name: 'WebAppVpcConfig')
     WorkflowDescription = Shapes::StringShape.new(name: 'WorkflowDescription')
     WorkflowDetail = Shapes::StructureShape.new(name: 'WorkflowDetail')
     WorkflowDetails = Shapes::StructureShape.new(name: 'WorkflowDetails')
@@ -415,6 +433,12 @@ module Aws::Transfer
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
+    ConnectorEgressConfig.add_member(:vpc_lattice, Shapes::ShapeRef.new(shape: ConnectorVpcLatticeEgressConfig, location_name: "VpcLattice"))
+    ConnectorEgressConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ConnectorEgressConfig.add_member_subclass(:vpc_lattice, Types::ConnectorEgressConfig::VpcLattice)
+    ConnectorEgressConfig.add_member_subclass(:unknown, Types::ConnectorEgressConfig::Unknown)
+    ConnectorEgressConfig.struct_class = Types::ConnectorEgressConfig
+
     ConnectorFileTransferResult.add_member(:file_path, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "FilePath"))
     ConnectorFileTransferResult.add_member(:status_code, Shapes::ShapeRef.new(shape: TransferTableStatus, required: true, location_name: "StatusCode"))
     ConnectorFileTransferResult.add_member(:failure_code, Shapes::ShapeRef.new(shape: FailureCode, location_name: "FailureCode"))
@@ -422,6 +446,10 @@ module Aws::Transfer
     ConnectorFileTransferResult.struct_class = Types::ConnectorFileTransferResult
 
     ConnectorFileTransferResults.member = Shapes::ShapeRef.new(shape: ConnectorFileTransferResult)
+
+    ConnectorVpcLatticeEgressConfig.add_member(:resource_configuration_arn, Shapes::ShapeRef.new(shape: VpcLatticeResourceConfigurationArn, required: true, location_name: "ResourceConfigurationArn"))
+    ConnectorVpcLatticeEgressConfig.add_member(:port_number, Shapes::ShapeRef.new(shape: SftpPort, location_name: "PortNumber"))
+    ConnectorVpcLatticeEgressConfig.struct_class = Types::ConnectorVpcLatticeEgressConfig
 
     CopyStepDetails.add_member(:name, Shapes::ShapeRef.new(shape: WorkflowStepName, location_name: "Name"))
     CopyStepDetails.add_member(:destination_file_location, Shapes::ShapeRef.new(shape: InputFileLocation, location_name: "DestinationFileLocation"))
@@ -459,13 +487,14 @@ module Aws::Transfer
     CreateAgreementResponse.add_member(:agreement_id, Shapes::ShapeRef.new(shape: AgreementId, required: true, location_name: "AgreementId"))
     CreateAgreementResponse.struct_class = Types::CreateAgreementResponse
 
-    CreateConnectorRequest.add_member(:url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "Url"))
+    CreateConnectorRequest.add_member(:url, Shapes::ShapeRef.new(shape: Url, location_name: "Url"))
     CreateConnectorRequest.add_member(:as_2_config, Shapes::ShapeRef.new(shape: As2ConnectorConfig, location_name: "As2Config"))
     CreateConnectorRequest.add_member(:access_role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "AccessRole"))
     CreateConnectorRequest.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
     CreateConnectorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateConnectorRequest.add_member(:sftp_config, Shapes::ShapeRef.new(shape: SftpConnectorConfig, location_name: "SftpConfig"))
     CreateConnectorRequest.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: ConnectorSecurityPolicyName, location_name: "SecurityPolicyName"))
+    CreateConnectorRequest.add_member(:egress_config, Shapes::ShapeRef.new(shape: ConnectorEgressConfig, location_name: "EgressConfig"))
     CreateConnectorRequest.struct_class = Types::CreateConnectorRequest
 
     CreateConnectorResponse.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
@@ -524,6 +553,7 @@ module Aws::Transfer
     CreateWebAppRequest.add_member(:web_app_units, Shapes::ShapeRef.new(shape: WebAppUnits, location_name: "WebAppUnits"))
     CreateWebAppRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateWebAppRequest.add_member(:web_app_endpoint_policy, Shapes::ShapeRef.new(shape: WebAppEndpointPolicy, location_name: "WebAppEndpointPolicy"))
+    CreateWebAppRequest.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: WebAppEndpointDetails, location_name: "EndpointDetails"))
     CreateWebAppRequest.struct_class = Types::CreateWebAppRequest
 
     CreateWebAppResponse.add_member(:web_app_id, Shapes::ShapeRef.new(shape: WebAppId, required: true, location_name: "WebAppId"))
@@ -740,7 +770,21 @@ module Aws::Transfer
     DescribedConnector.add_member(:sftp_config, Shapes::ShapeRef.new(shape: SftpConnectorConfig, location_name: "SftpConfig"))
     DescribedConnector.add_member(:service_managed_egress_ip_addresses, Shapes::ShapeRef.new(shape: ServiceManagedEgressIpAddresses, location_name: "ServiceManagedEgressIpAddresses"))
     DescribedConnector.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: ConnectorSecurityPolicyName, location_name: "SecurityPolicyName"))
+    DescribedConnector.add_member(:egress_config, Shapes::ShapeRef.new(shape: DescribedConnectorEgressConfig, location_name: "EgressConfig"))
+    DescribedConnector.add_member(:egress_type, Shapes::ShapeRef.new(shape: ConnectorEgressType, required: true, location_name: "EgressType"))
+    DescribedConnector.add_member(:error_message, Shapes::ShapeRef.new(shape: ConnectorErrorMessage, location_name: "ErrorMessage"))
+    DescribedConnector.add_member(:status, Shapes::ShapeRef.new(shape: ConnectorStatus, required: true, location_name: "Status"))
     DescribedConnector.struct_class = Types::DescribedConnector
+
+    DescribedConnectorEgressConfig.add_member(:vpc_lattice, Shapes::ShapeRef.new(shape: DescribedConnectorVpcLatticeEgressConfig, location_name: "VpcLattice"))
+    DescribedConnectorEgressConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DescribedConnectorEgressConfig.add_member_subclass(:vpc_lattice, Types::DescribedConnectorEgressConfig::VpcLattice)
+    DescribedConnectorEgressConfig.add_member_subclass(:unknown, Types::DescribedConnectorEgressConfig::Unknown)
+    DescribedConnectorEgressConfig.struct_class = Types::DescribedConnectorEgressConfig
+
+    DescribedConnectorVpcLatticeEgressConfig.add_member(:resource_configuration_arn, Shapes::ShapeRef.new(shape: VpcLatticeResourceConfigurationArn, required: true, location_name: "ResourceConfigurationArn"))
+    DescribedConnectorVpcLatticeEgressConfig.add_member(:port_number, Shapes::ShapeRef.new(shape: SftpPort, location_name: "PortNumber"))
+    DescribedConnectorVpcLatticeEgressConfig.struct_class = Types::DescribedConnectorVpcLatticeEgressConfig
 
     DescribedExecution.add_member(:execution_id, Shapes::ShapeRef.new(shape: ExecutionId, location_name: "ExecutionId"))
     DescribedExecution.add_member(:initial_file_location, Shapes::ShapeRef.new(shape: FileLocation, location_name: "InitialFileLocation"))
@@ -830,6 +874,8 @@ module Aws::Transfer
     DescribedWebApp.add_member(:web_app_units, Shapes::ShapeRef.new(shape: WebAppUnits, location_name: "WebAppUnits"))
     DescribedWebApp.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribedWebApp.add_member(:web_app_endpoint_policy, Shapes::ShapeRef.new(shape: WebAppEndpointPolicy, location_name: "WebAppEndpointPolicy"))
+    DescribedWebApp.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: WebAppEndpointType, location_name: "EndpointType"))
+    DescribedWebApp.add_member(:described_endpoint_details, Shapes::ShapeRef.new(shape: DescribedWebAppEndpointDetails, location_name: "DescribedEndpointDetails"))
     DescribedWebApp.struct_class = Types::DescribedWebApp
 
     DescribedWebAppCustomization.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
@@ -839,11 +885,22 @@ module Aws::Transfer
     DescribedWebAppCustomization.add_member(:favicon_file, Shapes::ShapeRef.new(shape: WebAppFaviconFile, location_name: "FaviconFile"))
     DescribedWebAppCustomization.struct_class = Types::DescribedWebAppCustomization
 
+    DescribedWebAppEndpointDetails.add_member(:vpc, Shapes::ShapeRef.new(shape: DescribedWebAppVpcConfig, location_name: "Vpc"))
+    DescribedWebAppEndpointDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DescribedWebAppEndpointDetails.add_member_subclass(:vpc, Types::DescribedWebAppEndpointDetails::Vpc)
+    DescribedWebAppEndpointDetails.add_member_subclass(:unknown, Types::DescribedWebAppEndpointDetails::Unknown)
+    DescribedWebAppEndpointDetails.struct_class = Types::DescribedWebAppEndpointDetails
+
     DescribedWebAppIdentityProviderDetails.add_member(:identity_center_config, Shapes::ShapeRef.new(shape: DescribedIdentityCenterConfig, location_name: "IdentityCenterConfig"))
     DescribedWebAppIdentityProviderDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     DescribedWebAppIdentityProviderDetails.add_member_subclass(:identity_center_config, Types::DescribedWebAppIdentityProviderDetails::IdentityCenterConfig)
     DescribedWebAppIdentityProviderDetails.add_member_subclass(:unknown, Types::DescribedWebAppIdentityProviderDetails::Unknown)
     DescribedWebAppIdentityProviderDetails.struct_class = Types::DescribedWebAppIdentityProviderDetails
+
+    DescribedWebAppVpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
+    DescribedWebAppVpcConfig.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
+    DescribedWebAppVpcConfig.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
+    DescribedWebAppVpcConfig.struct_class = Types::DescribedWebAppVpcConfig
 
     DescribedWorkflow.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
     DescribedWorkflow.add_member(:description, Shapes::ShapeRef.new(shape: WorkflowDescription, location_name: "Description"))
@@ -1165,6 +1222,7 @@ module Aws::Transfer
     ListedWebApp.add_member(:web_app_id, Shapes::ShapeRef.new(shape: WebAppId, required: true, location_name: "WebAppId"))
     ListedWebApp.add_member(:access_endpoint, Shapes::ShapeRef.new(shape: WebAppAccessEndpoint, location_name: "AccessEndpoint"))
     ListedWebApp.add_member(:web_app_endpoint, Shapes::ShapeRef.new(shape: WebAppEndpoint, location_name: "WebAppEndpoint"))
+    ListedWebApp.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: WebAppEndpointType, location_name: "EndpointType"))
     ListedWebApp.struct_class = Types::ListedWebApp
 
     ListedWebApps.member = Shapes::ShapeRef.new(shape: ListedWebApp)
@@ -1399,6 +1457,12 @@ module Aws::Transfer
     UpdateCertificateResponse.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location_name: "CertificateId"))
     UpdateCertificateResponse.struct_class = Types::UpdateCertificateResponse
 
+    UpdateConnectorEgressConfig.add_member(:vpc_lattice, Shapes::ShapeRef.new(shape: UpdateConnectorVpcLatticeEgressConfig, location_name: "VpcLattice"))
+    UpdateConnectorEgressConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    UpdateConnectorEgressConfig.add_member_subclass(:vpc_lattice, Types::UpdateConnectorEgressConfig::VpcLattice)
+    UpdateConnectorEgressConfig.add_member_subclass(:unknown, Types::UpdateConnectorEgressConfig::Unknown)
+    UpdateConnectorEgressConfig.struct_class = Types::UpdateConnectorEgressConfig
+
     UpdateConnectorRequest.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
     UpdateConnectorRequest.add_member(:url, Shapes::ShapeRef.new(shape: Url, location_name: "Url"))
     UpdateConnectorRequest.add_member(:as_2_config, Shapes::ShapeRef.new(shape: As2ConnectorConfig, location_name: "As2Config"))
@@ -1406,10 +1470,15 @@ module Aws::Transfer
     UpdateConnectorRequest.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
     UpdateConnectorRequest.add_member(:sftp_config, Shapes::ShapeRef.new(shape: SftpConnectorConfig, location_name: "SftpConfig"))
     UpdateConnectorRequest.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: ConnectorSecurityPolicyName, location_name: "SecurityPolicyName"))
+    UpdateConnectorRequest.add_member(:egress_config, Shapes::ShapeRef.new(shape: UpdateConnectorEgressConfig, location_name: "EgressConfig"))
     UpdateConnectorRequest.struct_class = Types::UpdateConnectorRequest
 
     UpdateConnectorResponse.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
     UpdateConnectorResponse.struct_class = Types::UpdateConnectorResponse
+
+    UpdateConnectorVpcLatticeEgressConfig.add_member(:resource_configuration_arn, Shapes::ShapeRef.new(shape: VpcLatticeResourceConfigurationArn, location_name: "ResourceConfigurationArn"))
+    UpdateConnectorVpcLatticeEgressConfig.add_member(:port_number, Shapes::ShapeRef.new(shape: SftpPort, location_name: "PortNumber"))
+    UpdateConnectorVpcLatticeEgressConfig.struct_class = Types::UpdateConnectorVpcLatticeEgressConfig
 
     UpdateHostKeyRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     UpdateHostKeyRequest.add_member(:host_key_id, Shapes::ShapeRef.new(shape: HostKeyId, required: true, location_name: "HostKeyId"))
@@ -1443,6 +1512,7 @@ module Aws::Transfer
     UpdateServerRequest.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
     UpdateServerRequest.add_member(:s3_storage_options, Shapes::ShapeRef.new(shape: S3StorageOptions, location_name: "S3StorageOptions"))
     UpdateServerRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
+    UpdateServerRequest.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "IdentityProviderType"))
     UpdateServerRequest.struct_class = Types::UpdateServerRequest
 
     UpdateServerResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
@@ -1471,6 +1541,12 @@ module Aws::Transfer
     UpdateWebAppCustomizationResponse.add_member(:web_app_id, Shapes::ShapeRef.new(shape: WebAppId, required: true, location_name: "WebAppId"))
     UpdateWebAppCustomizationResponse.struct_class = Types::UpdateWebAppCustomizationResponse
 
+    UpdateWebAppEndpointDetails.add_member(:vpc, Shapes::ShapeRef.new(shape: UpdateWebAppVpcConfig, location_name: "Vpc"))
+    UpdateWebAppEndpointDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    UpdateWebAppEndpointDetails.add_member_subclass(:vpc, Types::UpdateWebAppEndpointDetails::Vpc)
+    UpdateWebAppEndpointDetails.add_member_subclass(:unknown, Types::UpdateWebAppEndpointDetails::Unknown)
+    UpdateWebAppEndpointDetails.struct_class = Types::UpdateWebAppEndpointDetails
+
     UpdateWebAppIdentityCenterConfig.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
     UpdateWebAppIdentityCenterConfig.struct_class = Types::UpdateWebAppIdentityCenterConfig
 
@@ -1484,15 +1560,25 @@ module Aws::Transfer
     UpdateWebAppRequest.add_member(:identity_provider_details, Shapes::ShapeRef.new(shape: UpdateWebAppIdentityProviderDetails, location_name: "IdentityProviderDetails"))
     UpdateWebAppRequest.add_member(:access_endpoint, Shapes::ShapeRef.new(shape: WebAppAccessEndpoint, location_name: "AccessEndpoint"))
     UpdateWebAppRequest.add_member(:web_app_units, Shapes::ShapeRef.new(shape: WebAppUnits, location_name: "WebAppUnits"))
+    UpdateWebAppRequest.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: UpdateWebAppEndpointDetails, location_name: "EndpointDetails"))
     UpdateWebAppRequest.struct_class = Types::UpdateWebAppRequest
 
     UpdateWebAppResponse.add_member(:web_app_id, Shapes::ShapeRef.new(shape: WebAppId, required: true, location_name: "WebAppId"))
     UpdateWebAppResponse.struct_class = Types::UpdateWebAppResponse
 
+    UpdateWebAppVpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
+    UpdateWebAppVpcConfig.struct_class = Types::UpdateWebAppVpcConfig
+
     UserDetails.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, required: true, location_name: "UserName"))
     UserDetails.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     UserDetails.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "SessionId"))
     UserDetails.struct_class = Types::UserDetails
+
+    WebAppEndpointDetails.add_member(:vpc, Shapes::ShapeRef.new(shape: WebAppVpcConfig, location_name: "Vpc"))
+    WebAppEndpointDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    WebAppEndpointDetails.add_member_subclass(:vpc, Types::WebAppEndpointDetails::Vpc)
+    WebAppEndpointDetails.add_member_subclass(:unknown, Types::WebAppEndpointDetails::Unknown)
+    WebAppEndpointDetails.struct_class = Types::WebAppEndpointDetails
 
     WebAppIdentityProviderDetails.add_member(:identity_center_config, Shapes::ShapeRef.new(shape: IdentityCenterConfig, location_name: "IdentityCenterConfig"))
     WebAppIdentityProviderDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1505,6 +1591,11 @@ module Aws::Transfer
     WebAppUnits.add_member_subclass(:provisioned, Types::WebAppUnits::Provisioned)
     WebAppUnits.add_member_subclass(:unknown, Types::WebAppUnits::Unknown)
     WebAppUnits.struct_class = Types::WebAppUnits
+
+    WebAppVpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
+    WebAppVpcConfig.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
+    WebAppVpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
+    WebAppVpcConfig.struct_class = Types::WebAppVpcConfig
 
     WorkflowDetail.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "WorkflowId"))
     WorkflowDetail.add_member(:execution_role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "ExecutionRole"))

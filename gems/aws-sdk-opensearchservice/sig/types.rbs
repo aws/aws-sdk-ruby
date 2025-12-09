@@ -11,12 +11,14 @@ module Aws::OpenSearchService
     class AIMLOptionsInput
       attr_accessor natural_language_query_generation_options: Types::NaturalLanguageQueryGenerationOptionsInput
       attr_accessor s3_vectors_engine: Types::S3VectorsEngine
+      attr_accessor serverless_vector_acceleration: Types::ServerlessVectorAcceleration
       SENSITIVE: []
     end
 
     class AIMLOptionsOutput
       attr_accessor natural_language_query_generation_options: Types::NaturalLanguageQueryGenerationOptionsOutput
       attr_accessor s3_vectors_engine: Types::S3VectorsEngine
+      attr_accessor serverless_vector_acceleration: Types::ServerlessVectorAcceleration
       SENSITIVE: []
     end
 
@@ -431,6 +433,18 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class CreateIndexRequest
+      attr_accessor domain_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor index_schema: untyped
+      SENSITIVE: []
+    end
+
+    class CreateIndexResponse
+      attr_accessor status: ("CREATED" | "UPDATED" | "DELETED")
+      SENSITIVE: []
+    end
+
     class CreateOutboundConnectionRequest
       attr_accessor local_domain_info: Types::DomainInformationContainer
       attr_accessor remote_domain_info: Types::DomainInformationContainer
@@ -551,6 +565,17 @@ module Aws::OpenSearchService
 
     class DeleteInboundConnectionResponse
       attr_accessor connection: Types::InboundConnection
+      SENSITIVE: []
+    end
+
+    class DeleteIndexRequest
+      attr_accessor domain_name: ::String
+      attr_accessor index_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIndexResponse
+      attr_accessor status: ("CREATED" | "UPDATED" | "DELETED")
       SENSITIVE: []
     end
 
@@ -1066,6 +1091,14 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class GetDefaultApplicationSettingRequest < Aws::EmptyStructure
+    end
+
+    class GetDefaultApplicationSettingResponse
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
     class GetDirectQueryDataSourceRequest
       attr_accessor data_source_name: ::String
       SENSITIVE: []
@@ -1093,6 +1126,17 @@ module Aws::OpenSearchService
       attr_accessor action: ("REBOOT_NODE" | "RESTART_SEARCH_PROCESS" | "RESTART_DASHBOARD")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetIndexRequest
+      attr_accessor domain_name: ::String
+      attr_accessor index_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetIndexResponse
+      attr_accessor index_schema: untyped
       SENSITIVE: []
     end
 
@@ -1637,6 +1681,17 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class PutDefaultApplicationSettingRequest
+      attr_accessor application_arn: ::String
+      attr_accessor set_as_default: bool
+      SENSITIVE: []
+    end
+
+    class PutDefaultApplicationSettingResponse
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
     class RecurringCharge
       attr_accessor recurring_charge_amount: ::Float
       attr_accessor recurring_charge_frequency: ::String
@@ -1767,6 +1822,11 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class ServerlessVectorAcceleration
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
     class ServiceSoftwareOptions
       attr_accessor current_version: ::String
       attr_accessor new_version: ::String
@@ -1849,6 +1909,9 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class ThrottlingException < Aws::EmptyStructure
+    end
+
     class UpdateApplicationRequest
       attr_accessor id: ::String
       attr_accessor data_sources: ::Array[Types::DataSource]
@@ -1924,6 +1987,18 @@ module Aws::OpenSearchService
       attr_accessor domain_config: Types::DomainConfig
       attr_accessor dry_run_results: Types::DryRunResults
       attr_accessor dry_run_progress_status: Types::DryRunProgressStatus
+      SENSITIVE: []
+    end
+
+    class UpdateIndexRequest
+      attr_accessor domain_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor index_schema: untyped
+      SENSITIVE: []
+    end
+
+    class UpdateIndexResponse
+      attr_accessor status: ("CREATED" | "UPDATED" | "DELETED")
       SENSITIVE: []
     end
 

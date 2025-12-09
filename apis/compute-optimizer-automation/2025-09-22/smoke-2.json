@@ -1,0 +1,20 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "StartAutomationEvent",
+    "operationName" : "StartAutomationEvent",
+    "input" : {
+      "recommendedActionId" : "DummyId123456789"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "uri" : "https://aco-automation.us-east-1.amazonaws.com",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

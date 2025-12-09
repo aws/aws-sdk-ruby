@@ -11,6 +11,7 @@ module Aws::IdentityStore
     class AccessDeniedException
       attr_accessor message: ::String
       attr_accessor request_id: ::String
+      attr_accessor reason: ("KMS_ACCESS_DENIED")
       SENSITIVE: []
     end
 
@@ -94,12 +95,16 @@ module Aws::IdentityStore
       attr_accessor preferred_language: ::String
       attr_accessor locale: ::String
       attr_accessor timezone: ::String
-      SENSITIVE: [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone]
+      attr_accessor photos: ::Array[Types::Photo]
+      attr_accessor website: ::String
+      attr_accessor birthdate: ::String
+      attr_accessor extensions: ::Hash[::String, untyped]
+      SENSITIVE: [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone, :website, :birthdate]
     end
 
     class CreateUserResponse
-      attr_accessor user_id: ::String
       attr_accessor identity_store_id: ::String
+      attr_accessor user_id: ::String
       SENSITIVE: []
     end
 
@@ -141,6 +146,10 @@ module Aws::IdentityStore
       attr_accessor membership_id: ::String
       attr_accessor group_id: ::String
       attr_accessor member_id: Types::MemberId
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor updated_by: ::String
       SENSITIVE: []
     end
 
@@ -155,6 +164,10 @@ module Aws::IdentityStore
       attr_accessor display_name: ::String
       attr_accessor external_ids: ::Array[Types::ExternalId]
       attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor updated_by: ::String
       attr_accessor identity_store_id: ::String
       SENSITIVE: [:display_name, :description]
     end
@@ -162,12 +175,14 @@ module Aws::IdentityStore
     class DescribeUserRequest
       attr_accessor identity_store_id: ::String
       attr_accessor user_id: ::String
+      attr_accessor extensions: ::Array[::String]
       SENSITIVE: []
     end
 
     class DescribeUserResponse
-      attr_accessor user_name: ::String
+      attr_accessor identity_store_id: ::String
       attr_accessor user_id: ::String
+      attr_accessor user_name: ::String
       attr_accessor external_ids: ::Array[Types::ExternalId]
       attr_accessor name: Types::Name
       attr_accessor display_name: ::String
@@ -181,8 +196,16 @@ module Aws::IdentityStore
       attr_accessor preferred_language: ::String
       attr_accessor locale: ::String
       attr_accessor timezone: ::String
-      attr_accessor identity_store_id: ::String
-      SENSITIVE: [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone]
+      attr_accessor user_status: ("ENABLED" | "DISABLED")
+      attr_accessor photos: ::Array[Types::Photo]
+      attr_accessor website: ::String
+      attr_accessor birthdate: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      attr_accessor extensions: ::Hash[::String, untyped]
+      SENSITIVE: [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone, :website, :birthdate]
     end
 
     class Email
@@ -236,8 +259,8 @@ module Aws::IdentityStore
     end
 
     class GetUserIdResponse
-      attr_accessor user_id: ::String
       attr_accessor identity_store_id: ::String
+      attr_accessor user_id: ::String
       SENSITIVE: []
     end
 
@@ -246,6 +269,10 @@ module Aws::IdentityStore
       attr_accessor display_name: ::String
       attr_accessor external_ids: ::Array[Types::ExternalId]
       attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor updated_by: ::String
       attr_accessor identity_store_id: ::String
       SENSITIVE: [:display_name, :description]
     end
@@ -255,6 +282,10 @@ module Aws::IdentityStore
       attr_accessor membership_id: ::String
       attr_accessor group_id: ::String
       attr_accessor member_id: Types::MemberId
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor updated_by: ::String
       SENSITIVE: []
     end
 
@@ -328,6 +359,7 @@ module Aws::IdentityStore
 
     class ListUsersRequest
       attr_accessor identity_store_id: ::String
+      attr_accessor extensions: ::Array[::String]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor filters: ::Array[Types::Filter]
@@ -368,9 +400,18 @@ module Aws::IdentityStore
       SENSITIVE: [:value, :type, :primary]
     end
 
+    class Photo
+      attr_accessor value: ::String
+      attr_accessor type: ::String
+      attr_accessor display: ::String
+      attr_accessor primary: bool
+      SENSITIVE: [:value, :type, :display, :primary]
+    end
+
     class ResourceNotFoundException
-      attr_accessor resource_type: ("GROUP" | "USER" | "IDENTITY_STORE" | "GROUP_MEMBERSHIP")
+      attr_accessor resource_type: ("GROUP" | "USER" | "IDENTITY_STORE" | "GROUP_MEMBERSHIP" | "RESOURCE_POLICY")
       attr_accessor resource_id: ::String
+      attr_accessor reason: ("KMS_KEY_NOT_FOUND")
       attr_accessor message: ::String
       attr_accessor request_id: ::String
       SENSITIVE: []
@@ -386,6 +427,7 @@ module Aws::IdentityStore
       attr_accessor message: ::String
       attr_accessor request_id: ::String
       attr_accessor retry_after_seconds: ::Integer
+      attr_accessor reason: ("KMS_THROTTLING")
       SENSITIVE: []
     end
 
@@ -416,8 +458,9 @@ module Aws::IdentityStore
     end
 
     class User
-      attr_accessor user_name: ::String
+      attr_accessor identity_store_id: ::String
       attr_accessor user_id: ::String
+      attr_accessor user_name: ::String
       attr_accessor external_ids: ::Array[Types::ExternalId]
       attr_accessor name: Types::Name
       attr_accessor display_name: ::String
@@ -431,13 +474,22 @@ module Aws::IdentityStore
       attr_accessor preferred_language: ::String
       attr_accessor locale: ::String
       attr_accessor timezone: ::String
-      attr_accessor identity_store_id: ::String
-      SENSITIVE: [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone]
+      attr_accessor user_status: ("ENABLED" | "DISABLED")
+      attr_accessor photos: ::Array[Types::Photo]
+      attr_accessor website: ::String
+      attr_accessor birthdate: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      attr_accessor extensions: ::Hash[::String, untyped]
+      SENSITIVE: [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone, :website, :birthdate]
     end
 
     class ValidationException
       attr_accessor message: ::String
       attr_accessor request_id: ::String
+      attr_accessor reason: ("KMS_INVALID_ARN" | "KMS_INVALID_KEY_USAGE" | "KMS_INVALID_STATE" | "KMS_DISABLED")
       SENSITIVE: []
     end
   end

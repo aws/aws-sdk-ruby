@@ -99,6 +99,7 @@ module Aws::OpenSearchServerless
       attr_accessor arn: ::String
       attr_accessor kms_key_arn: ::String
       attr_accessor standby_replicas: ("ENABLED" | "DISABLED")
+      attr_accessor vector_options: Types::VectorOptions
       attr_accessor created_date: ::Integer
       attr_accessor last_modified_date: ::Integer
       attr_accessor collection_endpoint: ::String
@@ -159,6 +160,7 @@ module Aws::OpenSearchServerless
       attr_accessor arn: ::String
       attr_accessor kms_key_arn: ::String
       attr_accessor standby_replicas: ("ENABLED" | "DISABLED")
+      attr_accessor vector_options: Types::VectorOptions
       attr_accessor created_date: ::Integer
       attr_accessor last_modified_date: ::Integer
       SENSITIVE: []
@@ -170,6 +172,7 @@ module Aws::OpenSearchServerless
       attr_accessor description: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor standby_replicas: ("ENABLED" | "DISABLED")
+      attr_accessor vector_options: Types::VectorOptions
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -835,6 +838,11 @@ module Aws::OpenSearchServerless
 
     class ValidationException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VectorOptions
+      attr_accessor serverless_vector_acceleration: ("ENABLED" | "DISABLED" | "ALLOWED")
       SENSITIVE: []
     end
 

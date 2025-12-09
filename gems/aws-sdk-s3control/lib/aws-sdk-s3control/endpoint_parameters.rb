@@ -13,62 +13,62 @@ module Aws::S3Control
   # @!attribute region
   #   The AWS region used to dispatch the request.
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute use_fips
   #   When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute use_dual_stack
   #   When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute endpoint
   #   Override the endpoint used to send this request
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute account_id
   #   The Account ID used to send the request. This is an optional parameter that will be set automatically for operations that require it.
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute requires_account_id
   #   Internal parameter for operations that require account id host prefix.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute outpost_id
   #   The Outpost ID.  Some operations have an optional OutpostId which should be used in endpoint construction.
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute bucket
   #   The S3 bucket used to send the request. This is an optional parameter that will be set automatically for operations that are scoped to an S3 bucket.
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute access_point_name
   #   The S3 AccessPointName used to send the request. This is an optional parameter that will be set automatically for operations that are scoped to an S3 AccessPoint.
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute use_arn_region
   #   When an Access Point ARN is provided and this flag is enabled, the SDK MUST use the ARN&#39;s region when constructing the endpoint instead of the client&#39;s configured region.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute resource_arn
   #   The resource ARN included in the request.  Only set on TagResource, UntagResourceand ListTagsForResource
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute use_s3_express_control_endpoint
   #   Internal parameter to indicate whether S3Express operation should use control plane, (ex. ListDirectoryAccessPoints)
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   EndpointParameters = Struct.new(
     :region,

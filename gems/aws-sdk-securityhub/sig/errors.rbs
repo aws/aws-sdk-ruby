@@ -51,6 +51,10 @@ module Aws
         def message: () -> ::String
         def code: () -> ::String
       end
+      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
       class ThrottlingException < ::Aws::Errors::ServiceError
         def message: () -> ::String
         def code: () -> ::String

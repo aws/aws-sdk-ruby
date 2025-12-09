@@ -874,6 +874,7 @@ module Aws::IoTWireless
       attr_accessor id: ::String
       attr_accessor arn: ::String
       attr_accessor destination_name: ::String
+      attr_accessor positioning: ("Enabled" | "Disabled")
       attr_accessor sidewalk: Types::SidewalkGetStartImportInfo
       attr_accessor creation_time: ::Time
       attr_accessor status: ("INITIALIZING" | "INITIALIZED" | "PENDING" | "COMPLETE" | "FAILED" | "DELETING")
@@ -1108,6 +1109,8 @@ module Aws::IoTWireless
     class ListDevicesForWirelessDeviceImportTaskResponse
       attr_accessor next_token: ::String
       attr_accessor destination_name: ::String
+      attr_accessor positioning: ("Enabled" | "Disabled")
+      attr_accessor sidewalk: Types::SidewalkListDevicesForImportInfo
       attr_accessor imported_wireless_device_list: ::Array[Types::ImportedWirelessDevice]
       SENSITIVE: []
     end
@@ -1774,6 +1777,8 @@ module Aws::IoTWireless
 
     class SidewalkCreateWirelessDevice
       attr_accessor device_profile_id: ::String
+      attr_accessor positioning: Types::SidewalkPositioning
+      attr_accessor sidewalk_manufacturing_sn: ::String
       SENSITIVE: []
     end
 
@@ -1786,6 +1791,7 @@ module Aws::IoTWireless
       attr_accessor device_profile_id: ::String
       attr_accessor certificate_id: ::String
       attr_accessor status: ("PROVISIONED" | "REGISTERED" | "ACTIVATED" | "UNKNOWN")
+      attr_accessor positioning: Types::SidewalkPositioning
       SENSITIVE: []
     end
 
@@ -1812,6 +1818,7 @@ module Aws::IoTWireless
     class SidewalkGetStartImportInfo
       attr_accessor device_creation_file_list: ::Array[::String]
       attr_accessor role: ::String
+      attr_accessor positioning: Types::SidewalkPositioning
       SENSITIVE: []
     end
 
@@ -1822,6 +1829,17 @@ module Aws::IoTWireless
       attr_accessor device_certificates: ::Array[Types::CertificateList]
       attr_accessor device_profile_id: ::String
       attr_accessor status: ("PROVISIONED" | "REGISTERED" | "ACTIVATED" | "UNKNOWN")
+      attr_accessor positioning: Types::SidewalkPositioning
+      SENSITIVE: []
+    end
+
+    class SidewalkListDevicesForImportInfo
+      attr_accessor positioning: Types::SidewalkPositioning
+      SENSITIVE: []
+    end
+
+    class SidewalkPositioning
+      attr_accessor destination_name: ::String
       SENSITIVE: []
     end
 
@@ -1839,12 +1857,14 @@ module Aws::IoTWireless
 
     class SidewalkSingleStartImportInfo
       attr_accessor sidewalk_manufacturing_sn: ::String
+      attr_accessor positioning: Types::SidewalkPositioning
       SENSITIVE: []
     end
 
     class SidewalkStartImportInfo
       attr_accessor device_creation_file: ::String
       attr_accessor role: ::String
+      attr_accessor positioning: Types::SidewalkPositioning
       SENSITIVE: []
     end
 
@@ -1855,6 +1875,11 @@ module Aws::IoTWireless
 
     class SidewalkUpdateImportInfo
       attr_accessor device_creation_file: ::String
+      SENSITIVE: []
+    end
+
+    class SidewalkUpdateWirelessDevice
+      attr_accessor positioning: Types::SidewalkPositioning
       SENSITIVE: []
     end
 
@@ -1901,6 +1926,7 @@ module Aws::IoTWireless
       attr_accessor client_request_token: ::String
       attr_accessor device_name: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor positioning: ("Enabled" | "Disabled")
       attr_accessor sidewalk: Types::SidewalkSingleStartImportInfo
       SENSITIVE: []
     end
@@ -1915,6 +1941,7 @@ module Aws::IoTWireless
       attr_accessor destination_name: ::String
       attr_accessor client_request_token: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor positioning: ("Enabled" | "Disabled")
       attr_accessor sidewalk: Types::SidewalkStartImportInfo
       SENSITIVE: []
     end
@@ -2199,6 +2226,7 @@ module Aws::IoTWireless
       attr_accessor description: ::String
       attr_accessor lo_ra_wan: Types::LoRaWANUpdateDevice
       attr_accessor positioning: ("Enabled" | "Disabled")
+      attr_accessor sidewalk: Types::SidewalkUpdateWirelessDevice
       SENSITIVE: []
     end
 
@@ -2280,6 +2308,7 @@ module Aws::IoTWireless
       attr_accessor id: ::String
       attr_accessor arn: ::String
       attr_accessor destination_name: ::String
+      attr_accessor positioning: ("Enabled" | "Disabled")
       attr_accessor sidewalk: Types::SidewalkGetStartImportInfo
       attr_accessor creation_time: ::Time
       attr_accessor status: ("INITIALIZING" | "INITIALIZED" | "PENDING" | "COMPLETE" | "FAILED" | "DELETING")
@@ -2310,6 +2339,7 @@ module Aws::IoTWireless
       attr_accessor fuota_device_status: ("Initial" | "Package_Not_Supported" | "FragAlgo_unsupported" | "Not_enough_memory" | "FragIndex_unsupported" | "Wrong_descriptor" | "SessionCnt_replay" | "MissingFrag" | "MemoryError" | "MICError" | "Successful" | "Device_exist_in_conflict_fuota_task")
       attr_accessor multicast_device_status: ::String
       attr_accessor mc_group_id: ::Integer
+      attr_accessor positioning: ("Enabled" | "Disabled")
       SENSITIVE: []
     end
 

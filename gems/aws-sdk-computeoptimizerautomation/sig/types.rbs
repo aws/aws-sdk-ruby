@@ -1,0 +1,684 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ComputeOptimizerAutomation
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountInfo
+      attr_accessor account_id: ::String
+      attr_accessor status: ("Active" | "Inactive" | "Pending" | "Failed")
+      attr_accessor organization_rule_mode: ("AnyAllowed" | "NoneAllowed")
+      attr_accessor status_reason: ::String
+      attr_accessor last_updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class AssociateAccountsRequest
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateAccountsResponse
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor errors: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AutomationEvent
+      attr_accessor event_id: ::String
+      attr_accessor event_description: ::String
+      attr_accessor event_type: ("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")
+      attr_accessor event_status: ("Ready" | "InProgress" | "Complete" | "Failed" | "Cancelled" | "RollbackReady" | "RollbackInProgress" | "RollbackComplete" | "RollbackFailed")
+      attr_accessor event_status_reason: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor recommended_action_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor region: ::String
+      attr_accessor rule_id: ::String
+      attr_accessor resource_type: ("EbsVolume")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor completed_timestamp: ::Time
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings
+      SENSITIVE: []
+    end
+
+    class AutomationEventFilter
+      attr_accessor name: ("AccountId" | "ResourceType" | "EventType" | "EventStatus")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AutomationEventStep
+      attr_accessor event_id: ::String
+      attr_accessor step_id: ::String
+      attr_accessor step_type: ("CreateEbsSnapshot" | "DeleteEbsVolume" | "ModifyEbsVolume" | "CreateEbsVolume")
+      attr_accessor step_status: ("Ready" | "InProgress" | "Complete" | "Failed")
+      attr_accessor resource_id: ::String
+      attr_accessor start_timestamp: ::Time
+      attr_accessor completed_timestamp: ::Time
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings
+      SENSITIVE: []
+    end
+
+    class AutomationEventSummary
+      attr_accessor key: ::String
+      attr_accessor dimensions: ::Array[Types::SummaryDimension]
+      attr_accessor time_period: Types::TimePeriod
+      attr_accessor total: Types::SummaryTotals
+      SENSITIVE: []
+    end
+
+    class AutomationRule
+      attr_accessor rule_arn: ::String
+      attr_accessor rule_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor rule_type: ("OrganizationRule" | "AccountRule")
+      attr_accessor rule_revision: ::Integer
+      attr_accessor account_id: ::String
+      attr_accessor organization_configuration: Types::OrganizationConfiguration
+      attr_accessor priority: ::String
+      attr_accessor recommended_action_types: ::Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")]
+      attr_accessor schedule: Types::Schedule
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateAutomationRuleRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor rule_type: ("OrganizationRule" | "AccountRule")
+      attr_accessor organization_configuration: Types::OrganizationConfiguration
+      attr_accessor priority: ::String
+      attr_accessor recommended_action_types: ::Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")]
+      attr_accessor criteria: Types::Criteria
+      attr_accessor schedule: Types::Schedule
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAutomationRuleResponse
+      attr_accessor rule_arn: ::String
+      attr_accessor rule_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor rule_type: ("OrganizationRule" | "AccountRule")
+      attr_accessor rule_revision: ::Integer
+      attr_accessor organization_configuration: Types::OrganizationConfiguration
+      attr_accessor priority: ::String
+      attr_accessor recommended_action_types: ::Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")]
+      attr_accessor criteria: Types::Criteria
+      attr_accessor schedule: Types::Schedule
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class Criteria
+      attr_accessor region: ::Array[Types::StringCriteriaCondition]
+      attr_accessor resource_arn: ::Array[Types::StringCriteriaCondition]
+      attr_accessor ebs_volume_type: ::Array[Types::StringCriteriaCondition]
+      attr_accessor ebs_volume_size_in_gib: ::Array[Types::IntegerCriteriaCondition]
+      attr_accessor estimated_monthly_savings: ::Array[Types::DoubleCriteriaCondition]
+      attr_accessor resource_tag: ::Array[Types::ResourceTagsCriteriaCondition]
+      attr_accessor look_back_period_in_days: ::Array[Types::IntegerCriteriaCondition]
+      attr_accessor restart_needed: ::Array[Types::StringCriteriaCondition]
+      SENSITIVE: []
+    end
+
+    class DeleteAutomationRuleRequest
+      attr_accessor rule_arn: ::String
+      attr_accessor rule_revision: ::Integer
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAutomationRuleResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateAccountsRequest
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateAccountsResponse
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor errors: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DoubleCriteriaCondition
+      attr_accessor comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")
+      attr_accessor values: ::Array[::Float]
+      SENSITIVE: []
+    end
+
+    class EbsVolume
+      attr_accessor configuration: Types::EbsVolumeConfiguration
+      SENSITIVE: []
+    end
+
+    class EbsVolumeConfiguration
+      attr_accessor type: ::String
+      attr_accessor size_in_gib: ::Integer
+      attr_accessor iops: ::Integer
+      attr_accessor throughput: ::Integer
+      SENSITIVE: []
+    end
+
+    class EstimatedMonthlySavings
+      attr_accessor currency: ::String
+      attr_accessor before_discount_savings: ::Float
+      attr_accessor after_discount_savings: ::Float
+      attr_accessor savings_estimation_mode: ("BeforeDiscount" | "AfterDiscount")
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ("Name" | "RecommendedActionType" | "Status" | "RuleType" | "OrganizationConfigurationRuleApplyOrder" | "AccountId")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetAutomationEventRequest
+      attr_accessor event_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAutomationEventResponse
+      attr_accessor event_id: ::String
+      attr_accessor event_description: ::String
+      attr_accessor event_type: ("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")
+      attr_accessor event_status: ("Ready" | "InProgress" | "Complete" | "Failed" | "Cancelled" | "RollbackReady" | "RollbackInProgress" | "RollbackComplete" | "RollbackFailed")
+      attr_accessor event_status_reason: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor recommended_action_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor region: ::String
+      attr_accessor rule_id: ::String
+      attr_accessor resource_type: ("EbsVolume")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor completed_timestamp: ::Time
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings
+      SENSITIVE: []
+    end
+
+    class GetAutomationRuleRequest
+      attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetAutomationRuleResponse
+      attr_accessor rule_arn: ::String
+      attr_accessor rule_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor rule_type: ("OrganizationRule" | "AccountRule")
+      attr_accessor rule_revision: ::Integer
+      attr_accessor account_id: ::String
+      attr_accessor organization_configuration: Types::OrganizationConfiguration
+      attr_accessor priority: ::String
+      attr_accessor recommended_action_types: ::Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")]
+      attr_accessor criteria: Types::Criteria
+      attr_accessor schedule: Types::Schedule
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class GetEnrollmentConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetEnrollmentConfigurationResponse
+      attr_accessor status: ("Active" | "Inactive" | "Pending" | "Failed")
+      attr_accessor status_reason: ::String
+      attr_accessor organization_rule_mode: ("AnyAllowed" | "NoneAllowed")
+      attr_accessor last_updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class IdempotencyTokenInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IdempotentParameterMismatchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IntegerCriteriaCondition
+      attr_accessor comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")
+      attr_accessor values: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterValueException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountsResponse
+      attr_accessor accounts: ::Array[Types::AccountInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutomationEventStepsRequest
+      attr_accessor event_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutomationEventStepsResponse
+      attr_accessor automation_event_steps: ::Array[Types::AutomationEventStep]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutomationEventSummariesRequest
+      attr_accessor filters: ::Array[Types::AutomationEventFilter]
+      attr_accessor start_date_inclusive: ::String
+      attr_accessor end_date_exclusive: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutomationEventSummariesResponse
+      attr_accessor automation_event_summaries: ::Array[Types::AutomationEventSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutomationEventsRequest
+      attr_accessor filters: ::Array[Types::AutomationEventFilter]
+      attr_accessor start_time_inclusive: ::Time
+      attr_accessor end_time_exclusive: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutomationEventsResponse
+      attr_accessor automation_events: ::Array[Types::AutomationEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutomationRulePreviewRequest
+      attr_accessor rule_type: ("OrganizationRule" | "AccountRule")
+      attr_accessor organization_scope: Types::OrganizationScope
+      attr_accessor recommended_action_types: ::Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")]
+      attr_accessor criteria: Types::Criteria
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutomationRulePreviewResponse
+      attr_accessor preview_results: ::Array[Types::PreviewResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutomationRulePreviewSummariesRequest
+      attr_accessor rule_type: ("OrganizationRule" | "AccountRule")
+      attr_accessor organization_scope: Types::OrganizationScope
+      attr_accessor recommended_action_types: ::Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")]
+      attr_accessor criteria: Types::Criteria
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutomationRulePreviewSummariesResponse
+      attr_accessor preview_result_summaries: ::Array[Types::PreviewResultSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutomationRulesRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutomationRulesResponse
+      attr_accessor automation_rules: ::Array[Types::AutomationRule]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommendedActionSummariesRequest
+      attr_accessor filters: ::Array[Types::RecommendedActionFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommendedActionSummariesResponse
+      attr_accessor recommended_action_summaries: ::Array[Types::RecommendedActionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommendedActionsRequest
+      attr_accessor filters: ::Array[Types::RecommendedActionFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommendedActionsResponse
+      attr_accessor recommended_actions: ::Array[Types::RecommendedAction]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class NotManagementAccountException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OptInRequiredException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OrganizationConfiguration
+      attr_accessor rule_apply_order: ("BeforeAccountRules" | "AfterAccountRules")
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class OrganizationScope
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PreviewResult
+      attr_accessor recommended_action_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor region: ::String
+      attr_accessor resource_type: ("EbsVolume")
+      attr_accessor look_back_period_in_days: ::Integer
+      attr_accessor recommended_action_type: ("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")
+      attr_accessor current_resource_summary: ::String
+      attr_accessor current_resource_details: Types::ResourceDetails
+      attr_accessor recommended_resource_summary: ::String
+      attr_accessor recommended_resource_details: Types::ResourceDetails
+      attr_accessor restart_needed: bool
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings
+      attr_accessor resource_tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PreviewResultSummary
+      attr_accessor key: ::String
+      attr_accessor total: Types::RulePreviewTotal
+      SENSITIVE: []
+    end
+
+    class RecommendedAction
+      attr_accessor recommended_action_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor region: ::String
+      attr_accessor resource_type: ("EbsVolume")
+      attr_accessor look_back_period_in_days: ::Integer
+      attr_accessor recommended_action_type: ("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")
+      attr_accessor current_resource_summary: ::String
+      attr_accessor current_resource_details: Types::ResourceDetails
+      attr_accessor recommended_resource_summary: ::String
+      attr_accessor recommended_resource_details: Types::ResourceDetails
+      attr_accessor restart_needed: bool
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings
+      attr_accessor resource_tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class RecommendedActionFilter
+      attr_accessor name: ("ResourceType" | "RecommendedActionType" | "ResourceId" | "LookBackPeriodInDays" | "CurrentResourceDetailsEbsVolumeType" | "ResourceTagsKey" | "ResourceTagsValue" | "AccountId" | "RestartNeeded")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RecommendedActionSummary
+      attr_accessor key: ::String
+      attr_accessor total: Types::RecommendedActionTotal
+      SENSITIVE: []
+    end
+
+    class RecommendedActionTotal
+      attr_accessor recommended_action_count: ::Integer
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings
+      SENSITIVE: []
+    end
+
+    class ResourceDetails
+      attr_accessor ebs_volume: Types::EbsVolume
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class EbsVolume < ResourceDetails
+      end
+      class Unknown < ResourceDetails
+      end
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceTagsCriteriaCondition
+      attr_accessor comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RollbackAutomationEventRequest
+      attr_accessor event_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class RollbackAutomationEventResponse
+      attr_accessor event_id: ::String
+      attr_accessor event_status: ("Ready" | "InProgress" | "Complete" | "Failed" | "Cancelled" | "RollbackReady" | "RollbackInProgress" | "RollbackComplete" | "RollbackFailed")
+      SENSITIVE: []
+    end
+
+    class RulePreviewTotal
+      attr_accessor recommended_action_count: ::Integer
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings
+      SENSITIVE: []
+    end
+
+    class Schedule
+      attr_accessor schedule_expression: ::String
+      attr_accessor schedule_expression_timezone: ::String
+      attr_accessor execution_window_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartAutomationEventRequest
+      attr_accessor recommended_action_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartAutomationEventResponse
+      attr_accessor recommended_action_id: ::String
+      attr_accessor event_id: ::String
+      attr_accessor event_status: ("Ready" | "InProgress" | "Complete" | "Failed" | "Cancelled" | "RollbackReady" | "RollbackInProgress" | "RollbackComplete" | "RollbackFailed")
+      SENSITIVE: []
+    end
+
+    class StringCriteriaCondition
+      attr_accessor comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SummaryDimension
+      attr_accessor key: ("EventStatus")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SummaryTotals
+      attr_accessor automation_event_count: ::Integer
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor rule_revision: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimePeriod
+      attr_accessor start_time_inclusive: ::Time
+      attr_accessor end_time_exclusive: ::Time
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor rule_revision: ::Integer
+      attr_accessor tag_keys: ::Array[::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAutomationRuleRequest
+      attr_accessor rule_arn: ::String
+      attr_accessor rule_revision: ::Integer
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor rule_type: ("OrganizationRule" | "AccountRule")
+      attr_accessor organization_configuration: Types::OrganizationConfiguration
+      attr_accessor priority: ::String
+      attr_accessor recommended_action_types: ::Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")]
+      attr_accessor criteria: Types::Criteria
+      attr_accessor schedule: Types::Schedule
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAutomationRuleResponse
+      attr_accessor rule_arn: ::String
+      attr_accessor rule_revision: ::Integer
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor rule_type: ("OrganizationRule" | "AccountRule")
+      attr_accessor organization_configuration: Types::OrganizationConfiguration
+      attr_accessor priority: ::String
+      attr_accessor recommended_action_types: ::Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")]
+      attr_accessor criteria: Types::Criteria
+      attr_accessor schedule: Types::Schedule
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateEnrollmentConfigurationRequest
+      attr_accessor status: ("Active" | "Inactive" | "Pending" | "Failed")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEnrollmentConfigurationResponse
+      attr_accessor status: ("Active" | "Inactive" | "Pending" | "Failed")
+      attr_accessor status_reason: ::String
+      attr_accessor last_updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+  end
+end

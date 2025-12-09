@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2025-12-01)
+------------------
+
+* Feature - This release added support for new WhatsApp channel and Journey type outbound campaign
+
+1.17.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2025-11-19)
+------------------
+
+* Feature - This release added support for ring timer configuration for campaign calls.
+
+1.15.0 (2025-10-22)
+------------------
+
+* Feature - Updated Amazon Connect Outbound Campaigns V2 SDK to support Preview Outbound Mode
+
+1.14.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.13.0 (2025-08-26)
 ------------------
 

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.64.0 (2025-11-12)
+------------------
+
+* Feature - Add VPC source configuration support enabling Amazon Managed Service for Prometheus Collector to collect metrics from MSK clusters.
+
+1.63.0 (2025-10-30)
+------------------
+
+* Feature - Add Anomaly Detection APIs for Amazon Managed Prometheus
+
+1.62.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.61.0 (2025-10-17)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.60.0 (2025-09-11)
 ------------------
 

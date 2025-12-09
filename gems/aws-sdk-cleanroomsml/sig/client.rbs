@@ -480,7 +480,9 @@ module Aws
         def status_details: () -> Types::StatusDetails
         def retention_in_days: () -> ::Integer
         def number_of_records: () -> ::Integer
+        def privacy_budgets: () -> Types::PrivacyBudgets
         def description: () -> ::String
+        def synthetic_data_configuration: () -> Types::SyntheticDataConfiguration
         def create_time: () -> ::Time
         def update_time: () -> ::Time
         def creator_account_id: () -> ::String
@@ -621,7 +623,9 @@ module Aws
         def status_details: () -> Types::StatusDetails
         def retention_in_days: () -> ::Integer
         def number_of_records: () -> ::Integer
+        def privacy_budgets: () -> Types::PrivacyBudgets
         def description: () -> ::String
+        def synthetic_data_configuration: () -> Types::SyntheticDataConfiguration
         def create_time: () -> ::Time
         def update_time: () -> ::Time
         def input_channel: () -> Types::InputChannel

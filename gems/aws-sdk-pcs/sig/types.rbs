@@ -14,14 +14,14 @@ module Aws::PCS
     end
 
     class Accounting
-      attr_accessor mode: ("STANDARD" | "NONE")
       attr_accessor default_purge_time_in_days: ::Integer
+      attr_accessor mode: ("STANDARD" | "NONE")
       SENSITIVE: []
     end
 
     class AccountingRequest
-      attr_accessor mode: ("STANDARD" | "NONE")
       attr_accessor default_purge_time_in_days: ::Integer
+      attr_accessor mode: ("STANDARD" | "NONE")
       SENSITIVE: []
     end
 
@@ -45,7 +45,9 @@ module Aws::PCS
       attr_accessor scale_down_idle_time_in_seconds: ::Integer
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
       attr_accessor auth_key: Types::SlurmAuthKey
+      attr_accessor jwt_auth: Types::JwtAuth
       attr_accessor accounting: Types::Accounting
+      attr_accessor slurm_rest: Types::SlurmRest
       SENSITIVE: []
     end
 
@@ -53,6 +55,7 @@ module Aws::PCS
       attr_accessor scale_down_idle_time_in_seconds: ::Integer
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
       attr_accessor accounting: Types::AccountingRequest
+      attr_accessor slurm_rest: Types::SlurmRestRequest
       SENSITIVE: []
     end
 
@@ -162,6 +165,7 @@ module Aws::PCS
       attr_accessor cluster_identifier: ::String
       attr_accessor queue_name: ::String
       attr_accessor compute_node_group_configurations: ::Array[Types::ComputeNodeGroupConfiguration]
+      attr_accessor slurm_configuration: Types::QueueSlurmConfigurationRequest
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -208,7 +212,7 @@ module Aws::PCS
     end
 
     class Endpoint
-      attr_accessor type: ("SLURMCTLD" | "SLURMDBD")
+      attr_accessor type: ("SLURMCTLD" | "SLURMDBD" | "SLURMRESTD")
       attr_accessor private_ip_address: ::String
       attr_accessor public_ip_address: ::String
       attr_accessor ipv6_address: ::String
@@ -261,6 +265,17 @@ module Aws::PCS
 
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JwtAuth
+      attr_accessor jwt_key: Types::JwtKey
+      SENSITIVE: []
+    end
+
+    class JwtKey
+      attr_accessor secret_arn: ::String
+      attr_accessor secret_version: ::String
       SENSITIVE: []
     end
 
@@ -335,7 +350,18 @@ module Aws::PCS
       attr_accessor modified_at: ::Time
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED" | "SUSPENDING" | "SUSPENDED")
       attr_accessor compute_node_group_configurations: ::Array[Types::ComputeNodeGroupConfiguration]
+      attr_accessor slurm_configuration: Types::QueueSlurmConfiguration
       attr_accessor error_info: ::Array[Types::ErrorInfo]
+      SENSITIVE: []
+    end
+
+    class QueueSlurmConfiguration
+      attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      SENSITIVE: []
+    end
+
+    class QueueSlurmConfigurationRequest
+      attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
       SENSITIVE: []
     end
 
@@ -415,6 +441,16 @@ module Aws::PCS
       SENSITIVE: []
     end
 
+    class SlurmRest
+      attr_accessor mode: ("STANDARD" | "NONE")
+      SENSITIVE: []
+    end
+
+    class SlurmRestRequest
+      attr_accessor mode: ("STANDARD" | "NONE")
+      SENSITIVE: []
+    end
+
     class SpotOptions
       attr_accessor allocation_strategy: ("lowest-price" | "capacity-optimized" | "price-capacity-optimized")
       SENSITIVE: []
@@ -426,6 +462,9 @@ module Aws::PCS
       SENSITIVE: []
     end
 
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
     class ThrottlingException
       attr_accessor message: ::String
       attr_accessor retry_after_seconds: ::Integer
@@ -435,6 +474,35 @@ module Aws::PCS
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAccountingRequest
+      attr_accessor default_purge_time_in_days: ::Integer
+      attr_accessor mode: ("STANDARD" | "NONE")
+      SENSITIVE: []
+    end
+
+    class UpdateClusterRequest
+      attr_accessor cluster_identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor slurm_configuration: Types::UpdateClusterSlurmConfigurationRequest
+      SENSITIVE: []
+    end
+
+    class UpdateClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class UpdateClusterSlurmConfigurationRequest
+      attr_accessor scale_down_idle_time_in_seconds: ::Integer
+      attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      attr_accessor accounting: Types::UpdateAccountingRequest
+      attr_accessor slurm_rest: Types::UpdateSlurmRestRequest
       SENSITIVE: []
     end
 
@@ -467,12 +535,23 @@ module Aws::PCS
       attr_accessor cluster_identifier: ::String
       attr_accessor queue_identifier: ::String
       attr_accessor compute_node_group_configurations: ::Array[Types::ComputeNodeGroupConfiguration]
+      attr_accessor slurm_configuration: Types::UpdateQueueSlurmConfigurationRequest
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
     class UpdateQueueResponse
       attr_accessor queue: Types::Queue
+      SENSITIVE: []
+    end
+
+    class UpdateQueueSlurmConfigurationRequest
+      attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      SENSITIVE: []
+    end
+
+    class UpdateSlurmRestRequest
+      attr_accessor mode: ("STANDARD" | "NONE")
       SENSITIVE: []
     end
 

@@ -873,7 +873,13 @@ module Aws::APIGateway
     #
     # @!attribute [rw] security_policy
     #   The Transport Layer Security (TLS) version + cipher suite for this
-    #   DomainName. The valid values are `TLS_1_0` and `TLS_1_2`.
+    #   DomainName.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_access_mode
+    #   The endpoint access mode of the DomainName. Only available for
+    #   DomainNames that use security policies that start with
+    #   `SecurityPolicy_`.
     #   @return [String]
     #
     # @!attribute [rw] mutual_tls_authentication
@@ -914,6 +920,7 @@ module Aws::APIGateway
       :endpoint_configuration,
       :tags,
       :security_policy,
+      :endpoint_access_mode,
       :mutual_tls_authentication,
       :ownership_verification_certificate_arn,
       :policy,
@@ -1071,6 +1078,16 @@ module Aws::APIGateway
     #   your API, disable the default endpoint
     #   @return [Boolean]
     #
+    # @!attribute [rw] security_policy
+    #   The Transport Layer Security (TLS) version + cipher suite for this
+    #   RestApi.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_access_mode
+    #   The endpoint access mode of the RestApi. Only available for RestApis
+    #   that use security policies that start with `SecurityPolicy_`.
+    #   @return [String]
+    #
     class CreateRestApiRequest < Struct.new(
       :name,
       :description,
@@ -1082,7 +1099,9 @@ module Aws::APIGateway
       :endpoint_configuration,
       :policy,
       :tags,
-      :disable_execute_api_endpoint)
+      :disable_execute_api_endpoint,
+      :security_policy,
+      :endpoint_access_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1985,7 +2004,11 @@ module Aws::APIGateway
     #
     # @!attribute [rw] security_policy
     #   The Transport Layer Security (TLS) version + cipher suite for this
-    #   DomainName. The valid values are `TLS_1_0` and `TLS_1_2`.
+    #   DomainName.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_access_mode
+    #   The endpoint access mode of the DomainName.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2044,6 +2067,7 @@ module Aws::APIGateway
       :domain_name_status,
       :domain_name_status_message,
       :security_policy,
+      :endpoint_access_mode,
       :tags,
       :mutual_tls_authentication,
       :ownership_verification_certificate_arn,
@@ -3626,6 +3650,14 @@ module Aws::APIGateway
     #   Specifies the TLS configuration for an integration.
     #   @return [Types::TlsConfig]
     #
+    # @!attribute [rw] response_transfer_mode
+    #   The response transfer mode of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_target
+    #   The ALB or NLB listener to send the request to.
+    #   @return [String]
+    #
     class Integration < Struct.new(
       :type,
       :http_method,
@@ -3641,7 +3673,9 @@ module Aws::APIGateway
       :cache_namespace,
       :cache_key_parameters,
       :integration_responses,
-      :tls_config)
+      :tls_config,
+      :response_transfer_mode,
+      :integration_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4306,6 +4340,14 @@ module Aws::APIGateway
     #   Specifies the TLS configuration for an integration.
     #   @return [Types::TlsConfig]
     #
+    # @!attribute [rw] response_transfer_mode
+    #   The response transfer mode of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_target
+    #   The ALB or NLB listener to send the request to.
+    #   @return [String]
+    #
     class PutIntegrationRequest < Struct.new(
       :rest_api_id,
       :resource_id,
@@ -4323,7 +4365,9 @@ module Aws::APIGateway
       :cache_key_parameters,
       :content_handling,
       :timeout_in_millis,
-      :tls_config)
+      :tls_config,
+      :response_transfer_mode,
+      :integration_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4789,6 +4833,24 @@ module Aws::APIGateway
     #   The API's root resource ID.
     #   @return [String]
     #
+    # @!attribute [rw] security_policy
+    #   The Transport Layer Security (TLS) version + cipher suite for this
+    #   RestApi.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_access_mode
+    #   The endpoint access mode of the RestApi.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_status
+    #   The ApiStatus of the RestApi.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_status_message
+    #   The status message of the RestApi. When the status message is
+    #   `UPDATING` you can still invoke it.
+    #   @return [String]
+    #
     class RestApi < Struct.new(
       :id,
       :name,
@@ -4803,7 +4865,11 @@ module Aws::APIGateway
       :policy,
       :tags,
       :disable_execute_api_endpoint,
-      :root_resource_id)
+      :root_resource_id,
+      :security_policy,
+      :endpoint_access_mode,
+      :api_status,
+      :api_status_message)
       SENSITIVE = []
       include Aws::Structure
     end

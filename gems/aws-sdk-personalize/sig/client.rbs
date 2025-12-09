@@ -103,7 +103,8 @@ module Aws
                                         },
                                         role_arn: ::String,
                                         ?batch_inference_job_config: {
-                                          item_exploration_config: Hash[::String, ::String]?
+                                          item_exploration_config: Hash[::String, ::String]?,
+                                          ranking_influence: Hash[("POPULARITY" | "FRESHNESS"), ::Float]?
                                         },
                                         ?tags: Array[
                                           {
@@ -164,7 +165,8 @@ module Aws
                              ?campaign_config: {
                                item_exploration_config: Hash[::String, ::String]?,
                                enable_metadata_with_recommendations: bool?,
-                               sync_with_latest_solution_version: bool?
+                               sync_with_latest_solution_version: bool?,
+                               ranking_influence: Hash[("POPULARITY" | "FRESHNESS"), ::Float]?
                              },
                              ?tags: Array[
                                {
@@ -271,7 +273,7 @@ module Aws
                                        data_source: {
                                          data_location: ::String?
                                        },
-                                       role_arn: ::String,
+                                       ?role_arn: ::String,
                                        ?tags: Array[
                                          {
                                            tag_key: ::String,
@@ -357,7 +359,8 @@ module Aws
                                   item_exploration_config: Hash[::String, ::String]?,
                                   min_recommendation_requests_per_second: ::Integer?,
                                   training_data_config: {
-                                    excluded_dataset_columns: Hash[::String, Array[::String]]?
+                                    excluded_dataset_columns: Hash[::String, Array[::String]]?,
+                                    included_dataset_columns: Hash[::String, Array[::String]]?
                                   }?,
                                   enable_metadata_with_recommendations: bool?
                                 },
@@ -392,6 +395,7 @@ module Aws
                              ?perform_hpo: bool,
                              ?perform_auto_ml: bool,
                              ?perform_auto_training: bool,
+                             ?perform_incremental_update: bool,
                              ?recipe_arn: ::String,
                              dataset_group_arn: ::String,
                              ?event_type: ::String,
@@ -450,7 +454,8 @@ module Aws
                                  objective_sensitivity: ("LOW" | "MEDIUM" | "HIGH" | "OFF")?
                                }?,
                                training_data_config: {
-                                 excluded_dataset_columns: Hash[::String, Array[::String]]?
+                                 excluded_dataset_columns: Hash[::String, Array[::String]]?,
+                                 included_dataset_columns: Hash[::String, Array[::String]]?
                                }?,
                                auto_training_config: {
                                  scheduling_expression: ::String?
@@ -1021,7 +1026,8 @@ module Aws
                              ?campaign_config: {
                                item_exploration_config: Hash[::String, ::String]?,
                                enable_metadata_with_recommendations: bool?,
-                               sync_with_latest_solution_version: bool?
+                               sync_with_latest_solution_version: bool?,
+                               ranking_influence: Hash[("POPULARITY" | "FRESHNESS"), ::Float]?
                              }
                            ) -> _UpdateCampaignResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCampaignResponseSuccess
@@ -1073,7 +1079,8 @@ module Aws
                                   item_exploration_config: Hash[::String, ::String]?,
                                   min_recommendation_requests_per_second: ::Integer?,
                                   training_data_config: {
-                                    excluded_dataset_columns: Hash[::String, Array[::String]]?
+                                    excluded_dataset_columns: Hash[::String, Array[::String]]?,
+                                    included_dataset_columns: Hash[::String, Array[::String]]?
                                   }?,
                                   enable_metadata_with_recommendations: bool?
                                 }
@@ -1088,6 +1095,7 @@ module Aws
       def update_solution: (
                              solution_arn: ::String,
                              ?perform_auto_training: bool,
+                             ?perform_incremental_update: bool,
                              ?solution_update_config: {
                                auto_training_config: {
                                  scheduling_expression: ::String?

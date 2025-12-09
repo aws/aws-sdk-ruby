@@ -1,0 +1,697 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ComputeOptimizerAutomation
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateAccountsResponse]
+        def account_ids: () -> ::Array[::String]
+        def errors: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#associate_accounts-instance_method
+      def associate_accounts: (
+                                account_ids: Array[::String],
+                                ?client_token: ::String
+                              ) -> _AssociateAccountsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateAccountsResponseSuccess
+
+      interface _CreateAutomationRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAutomationRuleResponse]
+        def rule_arn: () -> ::String
+        def rule_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def rule_type: () -> ("OrganizationRule" | "AccountRule")
+        def rule_revision: () -> ::Integer
+        def organization_configuration: () -> Types::OrganizationConfiguration
+        def priority: () -> ::String
+        def recommended_action_types: () -> ::Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")]
+        def criteria: () -> Types::Criteria
+        def schedule: () -> Types::Schedule
+        def status: () -> ("Active" | "Inactive")
+        def tags: () -> ::Array[Types::Tag]
+        def created_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#create_automation_rule-instance_method
+      def create_automation_rule: (
+                                    name: ::String,
+                                    ?description: ::String,
+                                    rule_type: ("OrganizationRule" | "AccountRule"),
+                                    ?organization_configuration: {
+                                      rule_apply_order: ("BeforeAccountRules" | "AfterAccountRules")?,
+                                      account_ids: Array[::String]?
+                                    },
+                                    ?priority: ::String,
+                                    recommended_action_types: Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")],
+                                    ?criteria: {
+                                      region: Array[
+                                        {
+                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                          values: Array[::String]?
+                                        },
+                                      ]?,
+                                      resource_arn: Array[
+                                        {
+                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                          values: Array[::String]?
+                                        },
+                                      ]?,
+                                      ebs_volume_type: Array[
+                                        {
+                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                          values: Array[::String]?
+                                        },
+                                      ]?,
+                                      ebs_volume_size_in_gib: Array[
+                                        {
+                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                          values: Array[::Integer]?
+                                        },
+                                      ]?,
+                                      estimated_monthly_savings: Array[
+                                        {
+                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                          values: Array[::Float]?
+                                        },
+                                      ]?,
+                                      resource_tag: Array[
+                                        {
+                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                          key: ::String?,
+                                          values: Array[::String]?
+                                        },
+                                      ]?,
+                                      look_back_period_in_days: Array[
+                                        {
+                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                          values: Array[::Integer]?
+                                        },
+                                      ]?,
+                                      restart_needed: Array[
+                                        {
+                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                          values: Array[::String]?
+                                        },
+                                      ]?
+                                    },
+                                    schedule: {
+                                      schedule_expression: ::String?,
+                                      schedule_expression_timezone: ::String?,
+                                      execution_window_in_minutes: ::Integer?
+                                    },
+                                    status: ("Active" | "Inactive"),
+                                    ?tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String
+                                      },
+                                    ],
+                                    ?client_token: ::String
+                                  ) -> _CreateAutomationRuleResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAutomationRuleResponseSuccess
+
+      interface _DeleteAutomationRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAutomationRuleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#delete_automation_rule-instance_method
+      def delete_automation_rule: (
+                                    rule_arn: ::String,
+                                    rule_revision: ::Integer,
+                                    ?client_token: ::String
+                                  ) -> _DeleteAutomationRuleResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAutomationRuleResponseSuccess
+
+      interface _DisassociateAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateAccountsResponse]
+        def account_ids: () -> ::Array[::String]
+        def errors: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#disassociate_accounts-instance_method
+      def disassociate_accounts: (
+                                   account_ids: Array[::String],
+                                   ?client_token: ::String
+                                 ) -> _DisassociateAccountsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateAccountsResponseSuccess
+
+      interface _GetAutomationEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAutomationEventResponse]
+        def event_id: () -> ::String
+        def event_description: () -> ::String
+        def event_type: () -> ("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")
+        def event_status: () -> ("Ready" | "InProgress" | "Complete" | "Failed" | "Cancelled" | "RollbackReady" | "RollbackInProgress" | "RollbackComplete" | "RollbackFailed")
+        def event_status_reason: () -> ::String
+        def resource_arn: () -> ::String
+        def resource_id: () -> ::String
+        def recommended_action_id: () -> ::String
+        def account_id: () -> ::String
+        def region: () -> ::String
+        def rule_id: () -> ::String
+        def resource_type: () -> ("EbsVolume")
+        def created_timestamp: () -> ::Time
+        def completed_timestamp: () -> ::Time
+        def estimated_monthly_savings: () -> Types::EstimatedMonthlySavings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#get_automation_event-instance_method
+      def get_automation_event: (
+                                  event_id: ::String
+                                ) -> _GetAutomationEventResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAutomationEventResponseSuccess
+
+      interface _GetAutomationRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAutomationRuleResponse]
+        def rule_arn: () -> ::String
+        def rule_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def rule_type: () -> ("OrganizationRule" | "AccountRule")
+        def rule_revision: () -> ::Integer
+        def account_id: () -> ::String
+        def organization_configuration: () -> Types::OrganizationConfiguration
+        def priority: () -> ::String
+        def recommended_action_types: () -> ::Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")]
+        def criteria: () -> Types::Criteria
+        def schedule: () -> Types::Schedule
+        def status: () -> ("Active" | "Inactive")
+        def tags: () -> ::Array[Types::Tag]
+        def created_timestamp: () -> ::Time
+        def last_updated_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#get_automation_rule-instance_method
+      def get_automation_rule: (
+                                 rule_arn: ::String
+                               ) -> _GetAutomationRuleResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAutomationRuleResponseSuccess
+
+      interface _GetEnrollmentConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnrollmentConfigurationResponse]
+        def status: () -> ("Active" | "Inactive" | "Pending" | "Failed")
+        def status_reason: () -> ::String
+        def organization_rule_mode: () -> ("AnyAllowed" | "NoneAllowed")
+        def last_updated_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#get_enrollment_configuration-instance_method
+      def get_enrollment_configuration: (
+                                        ) -> _GetEnrollmentConfigurationResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnrollmentConfigurationResponseSuccess
+
+      interface _ListAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccountsResponse]
+        def accounts: () -> ::Array[Types::AccountInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#list_accounts-instance_method
+      def list_accounts: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListAccountsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccountsResponseSuccess
+
+      interface _ListAutomationEventStepsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAutomationEventStepsResponse]
+        def automation_event_steps: () -> ::Array[Types::AutomationEventStep]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#list_automation_event_steps-instance_method
+      def list_automation_event_steps: (
+                                         event_id: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListAutomationEventStepsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAutomationEventStepsResponseSuccess
+
+      interface _ListAutomationEventSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAutomationEventSummariesResponse]
+        def automation_event_summaries: () -> ::Array[Types::AutomationEventSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#list_automation_event_summaries-instance_method
+      def list_automation_event_summaries: (
+                                             ?filters: Array[
+                                               {
+                                                 name: ("AccountId" | "ResourceType" | "EventType" | "EventStatus"),
+                                                 values: Array[::String]
+                                               },
+                                             ],
+                                             ?start_date_inclusive: ::String,
+                                             ?end_date_exclusive: ::String,
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _ListAutomationEventSummariesResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAutomationEventSummariesResponseSuccess
+
+      interface _ListAutomationEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAutomationEventsResponse]
+        def automation_events: () -> ::Array[Types::AutomationEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#list_automation_events-instance_method
+      def list_automation_events: (
+                                    ?filters: Array[
+                                      {
+                                        name: ("AccountId" | "ResourceType" | "EventType" | "EventStatus"),
+                                        values: Array[::String]
+                                      },
+                                    ],
+                                    ?start_time_inclusive: ::Time,
+                                    ?end_time_exclusive: ::Time,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListAutomationEventsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAutomationEventsResponseSuccess
+
+      interface _ListAutomationRulePreviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAutomationRulePreviewResponse]
+        def preview_results: () -> ::Array[Types::PreviewResult]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#list_automation_rule_preview-instance_method
+      def list_automation_rule_preview: (
+                                          rule_type: ("OrganizationRule" | "AccountRule"),
+                                          ?organization_scope: {
+                                            account_ids: Array[::String]?
+                                          },
+                                          recommended_action_types: Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")],
+                                          ?criteria: {
+                                            region: Array[
+                                              {
+                                                comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                                values: Array[::String]?
+                                              },
+                                            ]?,
+                                            resource_arn: Array[
+                                              {
+                                                comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                                values: Array[::String]?
+                                              },
+                                            ]?,
+                                            ebs_volume_type: Array[
+                                              {
+                                                comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                                values: Array[::String]?
+                                              },
+                                            ]?,
+                                            ebs_volume_size_in_gib: Array[
+                                              {
+                                                comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                                values: Array[::Integer]?
+                                              },
+                                            ]?,
+                                            estimated_monthly_savings: Array[
+                                              {
+                                                comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                                values: Array[::Float]?
+                                              },
+                                            ]?,
+                                            resource_tag: Array[
+                                              {
+                                                comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                                key: ::String?,
+                                                values: Array[::String]?
+                                              },
+                                            ]?,
+                                            look_back_period_in_days: Array[
+                                              {
+                                                comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                                values: Array[::Integer]?
+                                              },
+                                            ]?,
+                                            restart_needed: Array[
+                                              {
+                                                comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                                values: Array[::String]?
+                                              },
+                                            ]?
+                                          },
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListAutomationRulePreviewResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAutomationRulePreviewResponseSuccess
+
+      interface _ListAutomationRulePreviewSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAutomationRulePreviewSummariesResponse]
+        def preview_result_summaries: () -> ::Array[Types::PreviewResultSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#list_automation_rule_preview_summaries-instance_method
+      def list_automation_rule_preview_summaries: (
+                                                    rule_type: ("OrganizationRule" | "AccountRule"),
+                                                    ?organization_scope: {
+                                                      account_ids: Array[::String]?
+                                                    },
+                                                    recommended_action_types: Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")],
+                                                    ?criteria: {
+                                                      region: Array[
+                                                        {
+                                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                                          values: Array[::String]?
+                                                        },
+                                                      ]?,
+                                                      resource_arn: Array[
+                                                        {
+                                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                                          values: Array[::String]?
+                                                        },
+                                                      ]?,
+                                                      ebs_volume_type: Array[
+                                                        {
+                                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                                          values: Array[::String]?
+                                                        },
+                                                      ]?,
+                                                      ebs_volume_size_in_gib: Array[
+                                                        {
+                                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                                          values: Array[::Integer]?
+                                                        },
+                                                      ]?,
+                                                      estimated_monthly_savings: Array[
+                                                        {
+                                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                                          values: Array[::Float]?
+                                                        },
+                                                      ]?,
+                                                      resource_tag: Array[
+                                                        {
+                                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                                          key: ::String?,
+                                                          values: Array[::String]?
+                                                        },
+                                                      ]?,
+                                                      look_back_period_in_days: Array[
+                                                        {
+                                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                                          values: Array[::Integer]?
+                                                        },
+                                                      ]?,
+                                                      restart_needed: Array[
+                                                        {
+                                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                                          values: Array[::String]?
+                                                        },
+                                                      ]?
+                                                    },
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String
+                                                  ) -> _ListAutomationRulePreviewSummariesResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAutomationRulePreviewSummariesResponseSuccess
+
+      interface _ListAutomationRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAutomationRulesResponse]
+        def automation_rules: () -> ::Array[Types::AutomationRule]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#list_automation_rules-instance_method
+      def list_automation_rules: (
+                                   ?filters: Array[
+                                     {
+                                       name: ("Name" | "RecommendedActionType" | "Status" | "RuleType" | "OrganizationConfigurationRuleApplyOrder" | "AccountId"),
+                                       values: Array[::String]
+                                     },
+                                   ],
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListAutomationRulesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAutomationRulesResponseSuccess
+
+      interface _ListRecommendedActionSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommendedActionSummariesResponse]
+        def recommended_action_summaries: () -> ::Array[Types::RecommendedActionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#list_recommended_action_summaries-instance_method
+      def list_recommended_action_summaries: (
+                                               ?filters: Array[
+                                                 {
+                                                   name: ("ResourceType" | "RecommendedActionType" | "ResourceId" | "LookBackPeriodInDays" | "CurrentResourceDetailsEbsVolumeType" | "ResourceTagsKey" | "ResourceTagsValue" | "AccountId" | "RestartNeeded"),
+                                                   values: Array[::String]
+                                                 },
+                                               ],
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _ListRecommendedActionSummariesResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendedActionSummariesResponseSuccess
+
+      interface _ListRecommendedActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommendedActionsResponse]
+        def recommended_actions: () -> ::Array[Types::RecommendedAction]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#list_recommended_actions-instance_method
+      def list_recommended_actions: (
+                                      ?filters: Array[
+                                        {
+                                          name: ("ResourceType" | "RecommendedActionType" | "ResourceId" | "LookBackPeriodInDays" | "CurrentResourceDetailsEbsVolumeType" | "ResourceTagsKey" | "ResourceTagsValue" | "AccountId" | "RestartNeeded"),
+                                          values: Array[::String]
+                                        },
+                                      ],
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListRecommendedActionsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendedActionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RollbackAutomationEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RollbackAutomationEventResponse]
+        def event_id: () -> ::String
+        def event_status: () -> ("Ready" | "InProgress" | "Complete" | "Failed" | "Cancelled" | "RollbackReady" | "RollbackInProgress" | "RollbackComplete" | "RollbackFailed")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#rollback_automation_event-instance_method
+      def rollback_automation_event: (
+                                       event_id: ::String,
+                                       ?client_token: ::String
+                                     ) -> _RollbackAutomationEventResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RollbackAutomationEventResponseSuccess
+
+      interface _StartAutomationEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAutomationEventResponse]
+        def recommended_action_id: () -> ::String
+        def event_id: () -> ::String
+        def event_status: () -> ("Ready" | "InProgress" | "Complete" | "Failed" | "Cancelled" | "RollbackReady" | "RollbackInProgress" | "RollbackComplete" | "RollbackFailed")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#start_automation_event-instance_method
+      def start_automation_event: (
+                                    recommended_action_id: ::String,
+                                    ?client_token: ::String
+                                  ) -> _StartAutomationEventResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAutomationEventResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          rule_revision: ::Integer,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ],
+                          ?client_token: ::String
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            rule_revision: ::Integer,
+                            tag_keys: Array[::String],
+                            ?client_token: ::String
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAutomationRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAutomationRuleResponse]
+        def rule_arn: () -> ::String
+        def rule_revision: () -> ::Integer
+        def name: () -> ::String
+        def description: () -> ::String
+        def rule_type: () -> ("OrganizationRule" | "AccountRule")
+        def organization_configuration: () -> Types::OrganizationConfiguration
+        def priority: () -> ::String
+        def recommended_action_types: () -> ::Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")]
+        def criteria: () -> Types::Criteria
+        def schedule: () -> Types::Schedule
+        def status: () -> ("Active" | "Inactive")
+        def created_timestamp: () -> ::Time
+        def last_updated_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#update_automation_rule-instance_method
+      def update_automation_rule: (
+                                    rule_arn: ::String,
+                                    rule_revision: ::Integer,
+                                    ?name: ::String,
+                                    ?description: ::String,
+                                    ?rule_type: ("OrganizationRule" | "AccountRule"),
+                                    ?organization_configuration: {
+                                      rule_apply_order: ("BeforeAccountRules" | "AfterAccountRules")?,
+                                      account_ids: Array[::String]?
+                                    },
+                                    ?priority: ::String,
+                                    ?recommended_action_types: Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")],
+                                    ?criteria: {
+                                      region: Array[
+                                        {
+                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                          values: Array[::String]?
+                                        },
+                                      ]?,
+                                      resource_arn: Array[
+                                        {
+                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                          values: Array[::String]?
+                                        },
+                                      ]?,
+                                      ebs_volume_type: Array[
+                                        {
+                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                          values: Array[::String]?
+                                        },
+                                      ]?,
+                                      ebs_volume_size_in_gib: Array[
+                                        {
+                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                          values: Array[::Integer]?
+                                        },
+                                      ]?,
+                                      estimated_monthly_savings: Array[
+                                        {
+                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                          values: Array[::Float]?
+                                        },
+                                      ]?,
+                                      resource_tag: Array[
+                                        {
+                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                          key: ::String?,
+                                          values: Array[::String]?
+                                        },
+                                      ]?,
+                                      look_back_period_in_days: Array[
+                                        {
+                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                          values: Array[::Integer]?
+                                        },
+                                      ]?,
+                                      restart_needed: Array[
+                                        {
+                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+                                          values: Array[::String]?
+                                        },
+                                      ]?
+                                    },
+                                    ?schedule: {
+                                      schedule_expression: ::String?,
+                                      schedule_expression_timezone: ::String?,
+                                      execution_window_in_minutes: ::Integer?
+                                    },
+                                    ?status: ("Active" | "Inactive"),
+                                    ?client_token: ::String
+                                  ) -> _UpdateAutomationRuleResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAutomationRuleResponseSuccess
+
+      interface _UpdateEnrollmentConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnrollmentConfigurationResponse]
+        def status: () -> ("Active" | "Inactive" | "Pending" | "Failed")
+        def status_reason: () -> ::String
+        def last_updated_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ComputeOptimizerAutomation/Client.html#update_enrollment_configuration-instance_method
+      def update_enrollment_configuration: (
+                                             status: ("Active" | "Inactive" | "Pending" | "Failed"),
+                                             ?client_token: ::String
+                                           ) -> _UpdateEnrollmentConfigurationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnrollmentConfigurationResponseSuccess
+    end
+  end
+end
+

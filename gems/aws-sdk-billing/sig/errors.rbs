@@ -14,6 +14,9 @@ module Aws
       class AccessDeniedException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class BillingViewHealthStatusException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ConflictException < ::Aws::Errors::ServiceError
         def message: () -> ::String
         def resource_id: () -> ::String

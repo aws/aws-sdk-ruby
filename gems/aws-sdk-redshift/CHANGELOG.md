@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2025-11-21)
+------------------
+
+* Feature - Added support for Amazon Redshift Federated Permissions and AWS IAM Identity Center trusted identity propagation.
+
+1.150.0 (2025-11-12)
+------------------
+
+* Feature - Added GetIdentityCenterAuthToken API to retrieve encrypted authentication tokens for Identity Center integrated applications. This API enables programmatic access to secure Identity Center tokens with proper error handling and parameter validation across supported SDK languages.
+
+1.149.0 (2025-10-31)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.148.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.147.0 (2025-09-26)
+------------------
+
+* Feature - Support tagging and tag propagation to IAM Identity Center for Redshift Idc Applications
+
 1.146.0 (2025-08-27)
 ------------------
 

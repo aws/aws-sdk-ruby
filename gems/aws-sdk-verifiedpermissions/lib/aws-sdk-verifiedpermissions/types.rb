@@ -61,7 +61,7 @@ module Aws::VerifiedPermissions
     # an authorization decision is made.
     #
     # This data type is used as a member of the [ContextDefinition][1]
-    # structure which is uses as a request parameter for the
+    # structure which is used as a request parameter for the
     # [IsAuthorized][2], [BatchIsAuthorized][3], and
     # [IsAuthorizedWithToken][4] operations.
     #
@@ -83,14 +83,14 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#boolean
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-bool
     #   @return [Boolean]
     #
     # @!attribute [rw] entity_identifier
     #   An attribute value of type [EntityIdentifier][1].
     #
-    #   Example: `"entityIdentifier": { "entityId": "<id>", "entityType":
-    #   "<entity type>"}`
+    #   Example: `{"entityIdentifier": { "entityId": "alice", "entityType":
+    #   "User"} }`
     #
     #
     #
@@ -104,7 +104,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#long
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-long
     #   @return [Integer]
     #
     # @!attribute [rw] string
@@ -114,7 +114,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#string
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-string
     #   @return [String]
     #
     # @!attribute [rw] set
@@ -124,7 +124,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#set
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-set
     #   @return [Array<Types::AttributeValue>]
     #
     # @!attribute [rw] record
@@ -134,7 +134,7 @@ module Aws::VerifiedPermissions
     #
     #
     #
-    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#record
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-record
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] ipaddr
@@ -606,6 +606,155 @@ module Aws::VerifiedPermissions
       :errors)
       SENSITIVE = [:errors]
       include Aws::Structure
+    end
+
+    # The value of an entity's Cedar tag.
+    #
+    # This data type is used as a member of the [EntityItem][1] structure
+    # that forms the body of the `Entities` request parameter for the
+    # [IsAuthorized][2], [BatchIsAuthorized][3], [IsAuthorizedWithToken][4],
+    # and [BatchIsAuthorizedWithToken][5] operations.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntityItem.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html
+    # [3]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html
+    # [4]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
+    # [5]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorizedWithToken.html
+    #
+    # @note CedarTagValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] boolean
+    #   A Cedar tag value of [Boolean][1] type.
+    #
+    #   Example: `{"boolean": false}`
+    #
+    #
+    #
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-bool
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] entity_identifier
+    #   A Cedar tag value of type [EntityIdentifier][1].
+    #
+    #   Example: `{"entityIdentifier": { "entityId": "alice", "entityType":
+    #   "User"} }`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntityIdentifier.html
+    #   @return [Types::EntityIdentifier]
+    #
+    # @!attribute [rw] long
+    #   A Cedar tag value of [Long][1] type.
+    #
+    #   Example: `{"long": 0}`
+    #
+    #
+    #
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-long
+    #   @return [Integer]
+    #
+    # @!attribute [rw] string
+    #   A Cedar tag value of [String][1] type.
+    #
+    #   Example: `{"string": "abc"}`
+    #
+    #
+    #
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-string
+    #   @return [String]
+    #
+    # @!attribute [rw] set
+    #   A Cedar tag value of [Set][1] type.
+    #
+    #   Example: `{"set": [ { "string": "abc" } ] }`
+    #
+    #
+    #
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-set
+    #   @return [Array<Types::CedarTagValue>]
+    #
+    # @!attribute [rw] record
+    #   A Cedar tag value of [Record][1] type.
+    #
+    #   Example: `{"record": { "keyName": {} } }`
+    #
+    #
+    #
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-record
+    #   @return [Hash<String,Types::CedarTagValue>]
+    #
+    # @!attribute [rw] ipaddr
+    #   A Cedar tag value of [ipaddr][1] type.
+    #
+    #   Example: `{"ip": "10.50.0.0/24"}`
+    #
+    #
+    #
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-ipaddr
+    #   @return [String]
+    #
+    # @!attribute [rw] decimal
+    #   A Cedar tag value of [decimal][1] type.
+    #
+    #   Example: `{"decimal": "-2.0"}`
+    #
+    #
+    #
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-decimal
+    #   @return [String]
+    #
+    # @!attribute [rw] datetime
+    #   A Cedar tag value of [datetime][1] type.
+    #
+    #   Example: `{"datetime": "2025-11-04T11:35:00.000+0100"}`
+    #
+    #
+    #
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-datetime
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   A Cedar tag value of [duration][1] type.
+    #
+    #   Example: `{"duration": "-1d12h"}`
+    #
+    #
+    #
+    #   [1]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-duration
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CedarTagValue AWS API Documentation
+    #
+    class CedarTagValue < Struct.new(
+      :boolean,
+      :entity_identifier,
+      :long,
+      :string,
+      :set,
+      :record,
+      :ipaddr,
+      :decimal,
+      :datetime,
+      :duration,
+      :unknown)
+      SENSITIVE = [:boolean, :long, :string, :ipaddr, :decimal, :datetime, :duration]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Boolean < CedarTagValue; end
+      class EntityIdentifier < CedarTagValue; end
+      class Long < CedarTagValue; end
+      class String < CedarTagValue; end
+      class Set < CedarTagValue; end
+      class Record < CedarTagValue; end
+      class Ipaddr < CedarTagValue; end
+      class Decimal < CedarTagValue; end
+      class Datetime < CedarTagValue; end
+      class Duration < CedarTagValue; end
+      class Unknown < CedarTagValue; end
     end
 
     # The type of entity that a policy store maps to groups from an Amazon
@@ -1689,12 +1838,17 @@ module Aws::VerifiedPermissions
     #   and eight parents of parents.
     #   @return [Array<Types::EntityIdentifier>]
     #
+    # @!attribute [rw] tags
+    #   A list of cedar tags for the entity.
+    #   @return [Hash<String,Types::CedarTagValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/EntityItem AWS API Documentation
     #
     class EntityItem < Struct.new(
       :identifier,
       :attributes,
-      :parents)
+      :parents,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

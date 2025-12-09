@@ -494,10 +494,15 @@ module Aws::PinpointSMSVoiceV2
     #
     # @option params [required, String] :pool_id
     #   The pool to update with the new Identity. This value can be either the
-    #   PoolId or PoolArn, and you can find these values using DescribePools.
+    #   PoolId or PoolArn, and you can find these values using
+    #   [DescribePools][1].
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS; resource then you
+    #   must use the full Amazon Resource Name(ARN).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribePools.html
     #
     # @option params [required, String] :origination_identity
     #   The origination identity to use, such as PhoneNumberId,
@@ -506,8 +511,8 @@ module Aws::PinpointSMSVoiceV2
     #   PhoneNumberArn, while DescribeSenderIds can be used to get the values
     #   for SenderId and SenderIdArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [required, String] :iso_country_code
     #   The new two-character code, in ISO 3166-1 alpha-2 format, for the
@@ -595,6 +600,76 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def associate_protect_configuration(params = {}, options = {})
       req = build_request(:associate_protect_configuration, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a destination phone number, including
+    # whether the number type and whether it is valid, the carrier, and
+    # more.
+    #
+    # @option params [required, String] :phone_number
+    #   The phone number that you want to retrieve information about. You can
+    #   provide the phone number in various formats including special
+    #   characters such as parentheses, brackets, spaces, hyphens, periods,
+    #   and commas. The service automatically converts the input to E164
+    #   format for processing.
+    #
+    # @return [Types::CarrierLookupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CarrierLookupResult#e164_phone_number #e164_phone_number} => String
+    #   * {Types::CarrierLookupResult#dialing_country_code #dialing_country_code} => String
+    #   * {Types::CarrierLookupResult#iso_country_code #iso_country_code} => String
+    #   * {Types::CarrierLookupResult#country #country} => String
+    #   * {Types::CarrierLookupResult#mcc #mcc} => String
+    #   * {Types::CarrierLookupResult#mnc #mnc} => String
+    #   * {Types::CarrierLookupResult#carrier #carrier} => String
+    #   * {Types::CarrierLookupResult#phone_number_type #phone_number_type} => String
+    #
+    #
+    # @example Example: Use CarrierLookup
+    #
+    #   # Call the CarrierLookup operation to get information about a customer provided phone number, including if the number is
+    #   # valid. The service accepts phone numbers with various formatting characters and returns the number in E164 format.
+    #
+    #   resp = client.carrier_lookup({
+    #     phone_number: "+1 (555) 555-5333", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     carrier: "ExampleCorp Mobile", 
+    #     country: "United States", 
+    #     dialing_country_code: "1", 
+    #     e164_phone_number: "+15555555333", 
+    #     iso_country_code: "US", 
+    #     mcc: "310", 
+    #     mnc: "260", 
+    #     phone_number_type: "MOBILE", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.carrier_lookup({
+    #     phone_number: "CarrierLookupInputPhoneNumberType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.e164_phone_number #=> String
+    #   resp.dialing_country_code #=> String
+    #   resp.iso_country_code #=> String
+    #   resp.country #=> String
+    #   resp.mcc #=> String
+    #   resp.mnc #=> String
+    #   resp.carrier #=> String
+    #   resp.phone_number_type #=> String, one of "MOBILE", "LANDLINE", "OTHER", "INVALID"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CarrierLookup AWS API Documentation
+    #
+    # @overload carrier_lookup(params = {})
+    # @param [Hash] params ({})
+    def carrier_lookup(params = {}, options = {})
+      req = build_request(:carrier_lookup, params)
       req.send_request(options)
     end
 
@@ -690,8 +765,7 @@ module Aws::PinpointSMSVoiceV2
     #
     # @option params [required, Array<String>] :matching_event_types
     #   An array of event types that determine which events to log. If "ALL"
-    #   is used, then AWS End User Messaging SMS and Voice logs every event
-    #   type.
+    #   is used, then End User MessagingSMS logs every event type.
     #
     #   <note markdown="1"> The `TEXT_SENT` event type is not supported.
     #
@@ -776,8 +850,8 @@ module Aws::PinpointSMSVoiceV2
     # with the keyword "STOP," an entry for the phone number is added to
     # the opt-out list. In addition to STOP, your recipients can use any
     # supported opt-out keyword, such as CANCEL or OPTOUT. For a list of
-    # supported opt-out keywords, see [ SMS opt out ][1] in the *AWS End
-    # User Messaging SMS User Guide*.
+    # supported opt-out keywords, see [ SMS opt out ][1] in the End User
+    # MessagingSMS User Guide.
     #
     #
     #
@@ -854,19 +928,21 @@ module Aws::PinpointSMSVoiceV2
     # @option params [required, String] :origination_identity
     #   The origination identity to use such as a PhoneNumberId,
     #   PhoneNumberArn, SenderId or SenderIdArn. You can use
-    #   DescribePhoneNumbers to find the values for PhoneNumberId and
-    #   PhoneNumberArn while DescribeSenderIds can be used to get the values
-    #   for SenderId and SenderIdArn.
+    #   [DescribePhoneNumbers][1] to find the values for PhoneNumberId and
+    #   PhoneNumberArn, and use [DescribeSenderIds][2] can be used to get the
+    #   values for SenderId and SenderIdArn.
     #
     #   After the pool is created you can add more origination identities to
-    #   the pool by using [AssociateOriginationIdentity][1].
+    #   the pool by using [AssociateOriginationIdentity][3].
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_AssociateOriginationIdentity.html
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribePhoneNumbers.html
+    #   [2]: https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_DescribeSenderIds.html
+    #   [3]: https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_AssociateOriginationIdentity.html
     #
     # @option params [required, String] :iso_country_code
     #   The new two-character code, in ISO 3166-1 alpha-2 format, for the
@@ -880,7 +956,11 @@ module Aws::PinpointSMSVoiceV2
     #
     # @option params [Boolean] :deletion_protection_enabled
     #   By default this is set to false. When set to true the pool can't be
-    #   deleted. You can change this value using the UpdatePool action.
+    #   deleted. You can change this value using the [UpdatePool][1] action.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_UpdatePool.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   An array of tags (key and value pairs) associated with the pool.
@@ -1529,8 +1609,8 @@ module Aws::PinpointSMSVoiceV2
     # number or pool. It is also a specific word or phrase that an end user
     # can send to your number to elicit a response, such as an informational
     # message or a special offer. When your number receives a message that
-    # begins with a keyword, AWS End User Messaging SMS and Voice responds
-    # with a customizable message.
+    # begins with a keyword, End User MessagingSMS responds with a
+    # customizable message.
     #
     # Keywords "HELP" and "STOP" can't be deleted or modified.
     #
@@ -1540,8 +1620,8 @@ module Aws::PinpointSMSVoiceV2
     #   find the values for PhoneNumberId and PhoneNumberArn and DescribePools
     #   to find the values of PoolId and PoolArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [required, String] :keyword
     #   The keyword to delete.
@@ -1617,8 +1697,8 @@ module Aws::PinpointSMSVoiceV2
     #   can use DescribeOptOutLists to find the values for OptOutListName and
     #   OptOutListArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @return [Types::DeleteOptOutListResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1658,8 +1738,8 @@ module Aws::PinpointSMSVoiceV2
     # @option params [required, String] :opt_out_list_name
     #   The OptOutListName or OptOutListArn to remove the phone number from.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [required, String] :opted_out_number
     #   The phone number, in E.164 format, to remove from the OptOutList.
@@ -1710,8 +1790,8 @@ module Aws::PinpointSMSVoiceV2
     #   The PoolId or PoolArn of the pool to delete. You can use DescribePools
     #   to find the values for PoolId and PoolArn .
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @return [Types::DeletePoolResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1966,13 +2046,13 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
-    # Deletes the resource-based policy document attached to the AWS End
-    # User Messaging SMS and Voice resource. A shared resource can be a
-    # Pool, Opt-out list, Sender Id, or Phone number.
+    # Deletes the resource-based policy document attached to the End User
+    # MessagingSMS resource. A shared resource can be a Pool, Opt-out list,
+    # Sender Id, or Phone number.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and
-    #   Voice resource you're deleting the resource-based policy from.
+    #   The Amazon Resource Name (ARN) of the End User MessagingSMS resource
+    #   you're deleting the resource-based policy from.
     #
     # @return [Types::DeleteResourcePolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2005,7 +2085,7 @@ module Aws::PinpointSMSVoiceV2
     # text messages. Deleting a spend limit override will set the
     # `EnforcedLimit` to equal the `MaxLimit`, which is controlled by Amazon
     # Web Services. For more information on spend limits (quotas) see
-    # [Quotas ][1] in the *AWS End User Messaging SMS User Guide*.
+    # [Quotas ][1] in the *End User MessagingSMS User Guide*.
     #
     #
     #
@@ -2066,7 +2146,7 @@ module Aws::PinpointSMSVoiceV2
     # voice messages. Deleting a spend limit override sets the
     # `EnforcedLimit` equal to the `MaxLimit`, which is controlled by Amazon
     # Web Services. For more information on spending limits (quotas) see
-    # [Quotas ][1] in the *AWS End User Messaging SMS User Guide*.
+    # [Quotas ][1] in the *End User MessagingSMS User Guide*.
     #
     #
     #
@@ -2136,16 +2216,16 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
-    # Describes the current AWS End User Messaging SMS and Voice SMS Voice
-    # V2 resource quotas for your account. The description for a quota
-    # includes the quota name, current usage toward that quota, and the
-    # quota's maximum value.
+    # Describes the current End User MessagingSMS SMS Voice V2 resource
+    # quotas for your account. The description for a quota includes the
+    # quota name, current usage toward that quota, and the quota's maximum
+    # value.
     #
     # When you establish an Amazon Web Services account, the account has
     # initial quotas on the maximum number of configuration sets, opt-out
     # lists, phone numbers, and pools that you can create in a given Region.
-    # For more information see [Quotas ][1] in the *AWS End User Messaging
-    # SMS User Guide*.
+    # For more information see [Quotas ][1] in the *End User MessagingSMS
+    # User Guide*.
     #
     #
     #
@@ -2274,8 +2354,8 @@ module Aws::PinpointSMSVoiceV2
     # number or pool. It is also a specific word or phrase that an end user
     # can send to your number to elicit a response, such as an informational
     # message or a special offer. When your number receives a message that
-    # begins with a keyword, AWS End User Messaging SMS and Voice responds
-    # with a customizable message.
+    # begins with a keyword, End User MessagingSMS responds with a
+    # customizable message.
     #
     # If you specify a keyword that isn't valid, an error is returned.
     #
@@ -2286,8 +2366,8 @@ module Aws::PinpointSMSVoiceV2
     #   PhoneNumberArn while DescribeSenderIds can be used to get the values
     #   for SenderId and SenderIdArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [Array<String>] :keywords
     #   An array of keywords to search for.
@@ -2361,8 +2441,8 @@ module Aws::PinpointSMSVoiceV2
     #   The OptOutLists to show the details of. This is an array of strings
     #   that can be either the OptOutListName or OptOutListArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [String] :next_token
     #   The token to be used for the next set of paginated results. You don't
@@ -2428,8 +2508,8 @@ module Aws::PinpointSMSVoiceV2
     #   DescribeOptOutLists to find the values for OptOutListName and
     #   OptOutListArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [Array<String>] :opted_out_numbers
     #   An array of phone numbers to search for in the OptOutList.
@@ -2507,8 +2587,8 @@ module Aws::PinpointSMSVoiceV2
     #   is an array of strings that can be either the PhoneNumberId or
     #   PhoneNumberArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [Array<Types::PhoneNumberFilter>] :filters
     #   An array of PhoneNumberFilter objects to filter the results.
@@ -2601,8 +2681,8 @@ module Aws::PinpointSMSVoiceV2
     #   The unique identifier of pools to find. This is an array of strings
     #   that can be either the PoolId or PoolArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [Array<Types::PoolFilter>] :filters
     #   An array of PoolFilter objects to filter the results.
@@ -3191,8 +3271,8 @@ module Aws::PinpointSMSVoiceV2
     # @option params [Array<Types::SenderIdAndCountry>] :sender_ids
     #   An array of SenderIdAndCountry objects to search for.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [Array<Types::SenderIdFilter>] :filters
     #   An array of SenderIdFilter objects to filter the results.
@@ -3265,8 +3345,8 @@ module Aws::PinpointSMSVoiceV2
     # When you establish an Amazon Web Services account, the account has
     # initial monthly spend limit in a given Region. For more information on
     # increasing your monthly spend limit, see [ Requesting increases to
-    # your monthly SMS, MMS, or Voice spending quota ][1] in the *AWS End
-    # User Messaging SMS User Guide*.
+    # your monthly SMS, MMS, or Voice spending quota ][1] in the *End User
+    # MessagingSMS User Guide*.
     #
     #
     #
@@ -3380,8 +3460,8 @@ module Aws::PinpointSMSVoiceV2
     #   The unique identifier for the pool to disassociate with the
     #   origination identity. This value can be either the PoolId or PoolArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [required, String] :origination_identity
     #   The origination identity to use such as a PhoneNumberId,
@@ -3390,8 +3470,8 @@ module Aws::PinpointSMSVoiceV2
     #   PhoneNumberArn, or use DescribeSenderIds to get the values for
     #   SenderId and SenderIdArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [required, String] :iso_country_code
     #   The two-character code, in ISO 3166-1 alpha-2 format, for the country
@@ -3564,12 +3644,12 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # Retrieves the JSON text of the resource-based policy document attached
-    # to the AWS End User Messaging SMS and Voice resource. A shared
-    # resource can be a Pool, Opt-out list, Sender Id, or Phone number.
+    # to the End User MessagingSMS resource. A shared resource can be a
+    # Pool, Opt-out list, Sender Id, or Phone number.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and
-    #   Voice resource attached to the resource-based policy.
+    #   The Amazon Resource Name (ARN) of the End User MessagingSMS resource
+    #   attached to the resource-based policy.
     #
     # @return [Types::GetResourcePolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3607,8 +3687,8 @@ module Aws::PinpointSMSVoiceV2
     #   The unique identifier for the pool. This value can be either the
     #   PoolId or PoolArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [Array<Types::PoolOriginationIdentitiesFilter>] :filters
     #   An array of PoolOriginationIdentitiesFilter objects to filter the
@@ -3829,8 +3909,8 @@ module Aws::PinpointSMSVoiceV2
     # number or pool. It is also a specific word or phrase that an end user
     # can send to your number to elicit a response, such as an informational
     # message or a special offer. When your number receives a message that
-    # begins with a keyword, AWS End User Messaging SMS and Voice responds
-    # with a customizable message.
+    # begins with a keyword, End User MessagingSMS responds with a
+    # customizable message.
     #
     # If you specify a keyword that isn't valid, an error is returned.
     #
@@ -3841,8 +3921,8 @@ module Aws::PinpointSMSVoiceV2
     #   PhoneNumberArn while DescribeSenderIds can be used to get the values
     #   for SenderId and SenderIdArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [required, String] :keyword
     #   The new keyword to add.
@@ -3942,8 +4022,8 @@ module Aws::PinpointSMSVoiceV2
     # @option params [required, String] :opt_out_list_name
     #   The OptOutListName or OptOutListArn to add the phone number to.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [required, String] :opted_out_number
     #   The phone number to add to the OptOutList in E.164 format.
@@ -4103,20 +4183,20 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
-    # Attaches a resource-based policy to a AWS End User Messaging SMS and
-    # Voice resource(phone number, sender Id, phone poll, or opt-out list)
-    # that is used for sharing the resource. A shared resource can be a
-    # Pool, Opt-out list, Sender Id, or Phone number. For more information
-    # about resource-based policies, see [Working with shared resources][1]
-    # in the *AWS End User Messaging SMS User Guide*.
+    # Attaches a resource-based policy to a End User MessagingSMS
+    # resource(phone number, sender Id, phone poll, or opt-out list) that is
+    # used for sharing the resource. A shared resource can be a Pool,
+    # Opt-out list, Sender Id, or Phone number. For more information about
+    # resource-based policies, see [Working with shared resources][1] in the
+    # *End User MessagingSMS User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/shared-resources.html
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and
-    #   Voice resource to attach the resource-based policy to.
+    #   The Amazon Resource Name (ARN) of the End User MessagingSMS resource
+    #   to attach the resource-based policy to.
     #
     # @option params [required, String] :policy
     #   The JSON formatted resource-based policy to attach.
@@ -4160,8 +4240,8 @@ module Aws::PinpointSMSVoiceV2
     #   You can use DescribePhoneNumbers to get the values for PhoneNumberId
     #   and PhoneNumberArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @return [Types::ReleasePhoneNumberResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4265,7 +4345,7 @@ module Aws::PinpointSMSVoiceV2
 
     # Request an origination phone number for use in your account. For more
     # information on phone number request see [Request a phone number][1] in
-    # the *AWS End User Messaging SMS User Guide*.
+    # the *End User MessagingSMS User Guide*.
     #
     #
     #
@@ -4294,15 +4374,15 @@ module Aws::PinpointSMSVoiceV2
     #   The name of the OptOutList to associate with the phone number. You can
     #   use the OptOutListName or OptOutListArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [String] :pool_id
     #   The pool to associated with the phone number. You can use the PoolId
     #   or PoolArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [String] :registration_id
     #   Use this field to attach your phone number for an external
@@ -4317,7 +4397,7 @@ module Aws::PinpointSMSVoiceV2
     #   can't be deleted.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   An array of tags (key and value pairs) associate with the requested
+    #   An array of tags (key and value pairs) to associate with the requested
     #   phone number.
     #
     # @option params [String] :client_token
@@ -4510,8 +4590,8 @@ module Aws::PinpointSMSVoiceV2
     #   PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn,
     #   PoolId, or PoolArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [String] :configuration_set_name
     #   The name of the configuration set to use. This can be either the
@@ -4576,8 +4656,8 @@ module Aws::PinpointSMSVoiceV2
     #   PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn,
     #   PoolId, or PoolArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [String] :message_body
     #   The text body of the message.
@@ -4670,8 +4750,7 @@ module Aws::PinpointSMSVoiceV2
     # Your MPS limit depends on the destination country of your messages, as
     # well as the type of phone number (origination number) that you use to
     # send the message. For more information about MPS, see [Message Parts
-    # per Second (MPS) limits][1] in the *AWS End User Messaging SMS User
-    # Guide*.
+    # per Second (MPS) limits][1] in the *End User MessagingSMS User Guide*.
     #
     #
     #
@@ -4685,8 +4764,8 @@ module Aws::PinpointSMSVoiceV2
     #   PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn,
     #   PoolId, or PoolArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [String] :message_body
     #   The body of the text message.
@@ -4749,8 +4828,8 @@ module Aws::PinpointSMSVoiceV2
     #   The Message Parts per Second (MPS) limit when using `DryRun` is five.
     #   If your origination identity has a lower MPS limit then the lower MPS
     #   limit is used. For more information about MPS limits, see [Message
-    #   Parts per Second (MPS) limits][1] in the *AWS End User Messaging SMS
-    #   User Guide*..
+    #   Parts per Second (MPS) limits][1] in the *End User MessagingSMS User
+    #   Guide*..
     #
     #
     #
@@ -4818,8 +4897,8 @@ module Aws::PinpointSMSVoiceV2
     #   The origination identity to use for the voice call. This can be the
     #   PhoneNumber, PhoneNumberId, PhoneNumberArn, PoolId, or PoolArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [String] :message_body
     #   The text to convert to a voice message.
@@ -5209,7 +5288,7 @@ module Aws::PinpointSMSVoiceV2
     # When you specify an existing tag key, the value is overwritten with
     # the new value. Each tag consists of a key and an optional value. Tag
     # keys must be unique per resource. For more information about tags, see
-    # [Tags ][1] in the *AWS End User Messaging SMS User Guide*.
+    # [Tags ][1] in the *End User MessagingSMS User Guide*.
     #
     #
     #
@@ -5246,8 +5325,8 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # Removes the association of the specified tags from a resource. For
-    # more information on tags see [Tags ][1] in the *AWS End User Messaging
-    # SMS User Guide*.
+    # more information on tags see [Tags ][1] in the *End User MessagingSMS
+    # User Guide*.
     #
     #
     #
@@ -5377,8 +5456,8 @@ module Aws::PinpointSMSVoiceV2
     #   The unique identifier of the phone number. Valid values for this field
     #   can be either the PhoneNumberId or PhoneNumberArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [Boolean] :two_way_enabled
     #   By default this is set to false. When set to true you can receive
@@ -5392,17 +5471,17 @@ module Aws::PinpointSMSVoiceV2
     #   inbound SMS messages.
     #
     # @option params [Boolean] :self_managed_opt_outs_enabled
-    #   By default this is set to false. When an end recipient sends a message
-    #   that begins with HELP or STOP to one of your dedicated numbers, AWS
-    #   End User Messaging SMS and Voice automatically replies with a
+    #   By default this is set to false. When set to false and an end
+    #   recipient sends a message that begins with HELP or STOP to one of your
+    #   dedicated numbers, End User MessagingSMS automatically replies with a
     #   customizable message and adds the end recipient to the OptOutList.
     #   When set to true you're responsible for responding to HELP and STOP
     #   requests. You're also responsible for tracking and honoring opt-out
     #   requests.
     #
     # @option params [String] :opt_out_list_name
-    #   The OptOutList to add the phone number to. Valid values for this field
-    #   can be either the OutOutListName or OutOutListArn.
+    #   The OptOutList to add the phone number to. You can use either the opt
+    #   out list name or the opt out list ARN.
     #
     # @option params [Boolean] :international_sending_enabled
     #   By default this is set to false. When set to true the international
@@ -5486,8 +5565,8 @@ module Aws::PinpointSMSVoiceV2
     #   The unique identifier of the pool to update. Valid values are either
     #   the PoolId or PoolArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [Boolean] :two_way_enabled
     #   By default this is set to false. When set to true you can receive
@@ -5501,9 +5580,9 @@ module Aws::PinpointSMSVoiceV2
     #   inbound SMS messages.
     #
     # @option params [Boolean] :self_managed_opt_outs_enabled
-    #   By default this is set to false. When an end recipient sends a message
-    #   that begins with HELP or STOP to one of your dedicated numbers, AWS
-    #   End User Messaging SMS and Voice automatically replies with a
+    #   By default this is set to false. When set to false and an end
+    #   recipient sends a message that begins with HELP or STOP to one of your
+    #   dedicated numbers, End User MessagingSMS automatically replies with a
     #   customizable message and adds the end recipient to the OptOutList.
     #   When set to true you're responsible for responding to HELP and STOP
     #   requests. You're also responsible for tracking and honoring opt-out
@@ -5513,8 +5592,8 @@ module Aws::PinpointSMSVoiceV2
     #   The OptOutList to associate with the pool. Valid values are either
     #   OptOutListName or OptOutListArn.
     #
-    #   If you are using a shared AWS End User Messaging SMS and Voice
-    #   resource then you must use the full Amazon Resource Name(ARN).
+    #   If you are using a shared End User MessagingSMS resource then you must
+    #   use the full Amazon Resource Name(ARN).
     #
     # @option params [Boolean] :shared_routes_enabled
     #   Indicates whether shared routes are enabled for the pool.
@@ -5631,7 +5710,7 @@ module Aws::PinpointSMSVoiceV2
     #   contain the details for the requested NumberCapability. The Key is the
     #   two-letter ISO country code. For a list of supported ISO country
     #   codes, see [Supported countries and regions (SMS channel)][1] in the
-    #   AWS End User Messaging SMS User Guide.
+    #   End User MessagingSMS User Guide.
     #
     #   For example, to set the United States as allowed and Canada as
     #   blocked, the `CountryRuleSetUpdates` would be formatted as:
@@ -5792,7 +5871,7 @@ module Aws::PinpointSMSVoiceV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pinpointsmsvoicev2'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

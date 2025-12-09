@@ -598,6 +598,11 @@ module Aws::ChimeSDKVoice
     #     of agent migration.
     #   @return [String]
     #
+    # @!attribute [rw] network_type
+    #   The type of network for the Voice Connector. Either IPv4 only or
+    #   dual-stack (IPv4 and IPv6).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/CreateVoiceConnectorRequest AWS API Documentation
     #
     class CreateVoiceConnectorRequest < Struct.new(
@@ -605,7 +610,8 @@ module Aws::ChimeSDKVoice
       :aws_region,
       :require_encryption,
       :tags,
-      :integration_type)
+      :integration_type,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4086,6 +4092,11 @@ module Aws::ChimeSDKVoice
     #   The connectors for use with Amazon Connect.
     #   @return [String]
     #
+    # @!attribute [rw] network_type
+    #   The type of network of the Voice Connector. Either IPv4 only or
+    #   dual-stack (IPv4 and IPv6).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-voice-2022-08-03/VoiceConnector AWS API Documentation
     #
     class VoiceConnector < Struct.new(
@@ -4097,7 +4108,8 @@ module Aws::ChimeSDKVoice
       :created_timestamp,
       :updated_timestamp,
       :voice_connector_arn,
-      :integration_type)
+      :integration_type,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end

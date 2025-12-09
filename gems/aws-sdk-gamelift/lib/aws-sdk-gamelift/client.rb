@@ -483,6 +483,9 @@ module Aws::GameLift
 
     # @!group API Operations
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Registers a player's acceptance or rejection of a proposed FlexMatch
     # match. A matchmaking configuration may require player acceptance; if
     # so, then matches built with that configuration cannot be completed
@@ -552,8 +555,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the Amazon GameLift Servers FleetIQ
-    # solution and game server groups.**
+    # **This API works with the following fleet types:** EC2 (FleetIQ)
     #
     # Locates an available game server and temporarily reserves it to host
     # gameplay and players. This operation is called from a game client or
@@ -656,6 +658,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Creates an alias for a fleet. In most situations, you can use an alias
     # ID in place of a fleet ID. An alias provides a level of abstraction
     # for a fleet that is useful when redirecting player traffic from one
@@ -747,6 +752,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere
+    #
     # Creates a new Amazon GameLift Servers build resource for your game
     # server binary files. Combine game server binaries into a zip file for
     # use with Amazon GameLift Servers.
@@ -884,7 +891,7 @@ module Aws::GameLift
     #       role_arn: "NonEmptyString",
     #       object_version: "NonEmptyString",
     #     },
-    #     operating_system: "WINDOWS_2012", # accepts WINDOWS_2012, AMAZON_LINUX, AMAZON_LINUX_2, WINDOWS_2016, AMAZON_LINUX_2023
+    #     operating_system: "WINDOWS_2012", # accepts WINDOWS_2012, AMAZON_LINUX, AMAZON_LINUX_2, WINDOWS_2016, AMAZON_LINUX_2023, WINDOWS_2022
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -902,7 +909,7 @@ module Aws::GameLift
     #   resp.build.version #=> String
     #   resp.build.status #=> String, one of "INITIALIZED", "READY", "FAILED"
     #   resp.build.size_on_disk #=> Integer
-    #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023"
+    #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023", "WINDOWS_2022"
     #   resp.build.creation_time #=> Time
     #   resp.build.server_sdk_version #=> String
     #   resp.upload_credentials.access_key_id #=> String
@@ -922,6 +929,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** Container
+    #
     # Creates a managed fleet of Amazon Elastic Compute Cloud (Amazon EC2)
     # instances to host your containerized game servers. Use this operation
     # to define how to deploy a container architecture onto each fleet
@@ -992,12 +1001,26 @@ module Aws::GameLift
     #
     # You can update most of the properties of a fleet, including container
     # group definitions, and deploy the update across all fleet instances.
-    # Use a fleet update to deploy a new game server version update across
-    # the container fleet.
+    # Use [UpdateContainerFleet][2] to deploy a new game server version
+    # update across the container fleet.
+    #
+    # <note markdown="1"> A managed fleet's runtime environment depends on the Amazon Machine
+    # Image (AMI) version it uses. When a new fleet is created, Amazon
+    # GameLift Servers assigns the latest available AMI version to the
+    # fleet, and all compute instances in that fleet are deployed with that
+    # version. To update the AMI version, you must create a new fleet. As a
+    # best practice, we recommend replacing your managed fleets every 30
+    # days to maintain a secure and up-to-date runtime environment for your
+    # hosted game servers. For guidance, see [ Security best practices for
+    # Amazon GameLift Servers][3].
+    #
+    #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-all.html#fleets-creation-workflow
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateContainerFleet.html
+    # [3]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/security-best-practices.html
     #
     # @option params [required, String] :fleet_role_arn
     #   The unique identifier for an Identity and Access Management (IAM) role
@@ -1323,6 +1346,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** Container
+    #
     # Creates a `ContainerGroupDefinition` that describes a set of
     # containers for hosting your game server with Amazon GameLift Servers
     # managed containers hosting. An Amazon GameLift Servers container group
@@ -1674,9 +1699,11 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Creates a fleet of compute resources to host your game servers. Use
-    # this operation to set up the following types of fleets based on
-    # compute type:
+    # this operation to set up a fleet for the following compute types:
     #
     # **Managed EC2 fleet**
     #
@@ -1715,6 +1742,18 @@ module Aws::GameLift
     # When the fleet status is ACTIVE, you can adjust capacity settings and
     # turn autoscaling on/off for each location.
     #
+    # <note markdown="1"> A managed fleet's runtime environment depends on the Amazon Machine
+    # Image (AMI) version it uses. When a new fleet is created, Amazon
+    # GameLift Servers assigns the latest available AMI version to the
+    # fleet, and all compute instances in that fleet are deployed with that
+    # version. To update the AMI version, you must create a new fleet. As a
+    # best practice, we recommend replacing your managed fleets every 30
+    # days to maintain a secure and up-to-date runtime environment for your
+    # hosted game servers. For guidance, see [ Security best practices for
+    # Amazon GameLift Servers][2].
+    #
+    #  </note>
+    #
     # **Anywhere fleet**
     #
     # An Anywhere fleet represents compute resources that are not owned or
@@ -1736,17 +1775,18 @@ module Aws::GameLift
     #
     # **Learn more**
     #
-    # [Setting up fleets][2]
+    # [Setting up fleets][3]
     #
-    # [Debug fleet creation issues][3]
+    # [Debug fleet creation issues][4]
     #
-    # [Multi-location fleets][2]
+    # [Multi-location fleets][3]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-all.html#fleets-creation-workflow
-    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
-    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation
+    # [2]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/security-best-practices.html
+    # [3]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+    # [4]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation
     #
     # @option params [required, String] :name
     #   A descriptive label that is associated with a fleet. Fleet names do
@@ -2069,7 +2109,7 @@ module Aws::GameLift
     #   resp.fleet_attributes.log_paths #=> Array
     #   resp.fleet_attributes.log_paths[0] #=> String
     #   resp.fleet_attributes.new_game_session_protection_policy #=> String, one of "NoProtection", "FullProtection"
-    #   resp.fleet_attributes.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023"
+    #   resp.fleet_attributes.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023", "WINDOWS_2022"
     #   resp.fleet_attributes.resource_creation_limit_policy.new_game_sessions_per_creator #=> Integer
     #   resp.fleet_attributes.resource_creation_limit_policy.policy_period_in_minutes #=> Integer
     #   resp.fleet_attributes.metric_groups #=> Array
@@ -2094,6 +2134,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Container
+    #
     # Adds remote locations to an EC2 and begins populating the new
     # locations with instances. The new instances conform to the fleet's
     # instance type, auto-scaling, and other configuration settings.
@@ -2172,8 +2214,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the Amazon GameLift Servers FleetIQ
-    # solution and game server groups.**
+    # **This API works with the following fleet types:** EC2 (FleetIQ)
     #
     # Creates a Amazon GameLift Servers FleetIQ game server group for
     # managing game hosting on a collection of Amazon Elastic Compute Cloud
@@ -2419,6 +2460,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Creates a multiplayer game session for players in a specific fleet
     # location. This operation prompts an available server process to start
     # a game session and retrieves connection information for the new game
@@ -2610,6 +2654,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Creates a placement queue that processes requests for new game
     # sessions. A queue uses FleetIQ algorithms to locate the best available
     # placement locations for a new game session, and then prompts the game
@@ -2819,6 +2866,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** Anywhere
+    #
     # Creates a custom location for use in an Anywhere fleet.
     #
     # @option params [required, String] :location_name
@@ -2868,6 +2917,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Defines a new matchmaking configuration for use with FlexMatch.
     # Whether your are using FlexMatch with Amazon GameLift Servers hosting
     # or as a standalone matchmaking service, the matchmaking configuration
@@ -3093,6 +3145,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Creates a new rule set for FlexMatch matchmaking. A rule set describes
     # the type of match to create, such as the number and size of teams. It
     # also sets the parameters for acceptable player matches, such as
@@ -3177,6 +3232,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Reserves an open player slot in a game session for a player. New
     # player sessions can be created in any game session with an open slot
     # that is in `ACTIVE` status and has a player creation policy of
@@ -3252,6 +3310,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Reserves open slots in a game session for a group of players. New
     # player sessions can be created in any game session with an open slot
     # that is in `ACTIVE` status and has a player creation policy of
@@ -3333,6 +3394,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere
+    #
     # Creates a new script record for your Amazon GameLift Servers Realtime
     # script. Realtime scripts are JavaScript that provide configuration
     # settings and optional custom game logic for your game. The script is
@@ -3480,6 +3543,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Requests authorization to create or delete a peer connection between
     # the VPC for your Amazon GameLift Servers fleet and a virtual private
     # cloud (VPC) in your Amazon Web Services account. VPC peering enables
@@ -3571,6 +3636,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Establishes a VPC peering connection between a virtual private cloud
     # (VPC) in an Amazon Web Services account with the VPC for your Amazon
     # GameLift Servers fleet. VPC peering enables the game servers on your
@@ -3653,6 +3720,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Deletes an alias. This operation removes all record of the alias. Game
     # clients attempting to access a server process using the deleted alias
     # receive an error. To delete an alias, specify the alias ID to be
@@ -3687,6 +3757,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Deletes a build. This operation permanently deletes the build resource
     # and any uploaded build files. Deleting a build does not affect the
     # status of any active fleets using the build, but you can no longer
@@ -3726,6 +3798,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** Container
+    #
     # Deletes all resources and information related to a container fleet and
     # shuts down currently running fleet instances, including those in
     # remote locations. The container fleet must be in `ACTIVE` status to be
@@ -3763,9 +3837,11 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Deletes a container group definition.
+    # **This API works with the following fleet types:** Container
     #
     # **Request options:**
+    #
+    # Deletes a container group definition.
     #
     # * Delete an entire container group definition, including all versions.
     #   Specify the container group definition name, or use an ARN value
@@ -3834,6 +3910,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Deletes all resources and information related to a fleet and shuts
     # down any currently running fleet instances, including those in remote
     # locations.
@@ -3880,6 +3959,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Container
+    #
     # Removes locations from a multi-location fleet. When deleting a
     # location, all game server process and all instances that are still
     # active in the location are shut down.
@@ -3938,8 +4019,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the Amazon GameLift Servers FleetIQ
-    # solution and game server groups.**
+    # **This API works with the following fleet types:** EC2 (FleetIQ)
     #
     # Terminates a game server group and permanently deletes the game server
     # group record. You have several options for how these resources are
@@ -4033,6 +4113,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Deletes a game session queue. Once a queue is successfully deleted,
     # unfulfilled [StartGameSessionPlacement][1] requests that reference the
     # queue will fail. To delete a queue, specify the queue name.
@@ -4063,6 +4146,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** Anywhere
+    #
     # Deletes a custom location.
     #
     # Before deleting a custom location, review any fleets currently using
@@ -4093,6 +4178,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Permanently removes a FlexMatch matchmaking configuration. To delete,
     # specify the configuration name. A matchmaking configuration cannot be
     # deleted if it is being used in any active matchmaking tickets.
@@ -4118,6 +4206,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Deletes an existing matchmaking rule set. To delete the rule set,
     # provide the rule set name. Rule sets cannot be deleted if they are
     # currently being used by a matchmaking configuration.
@@ -4154,6 +4245,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Deletes a fleet scaling policy. Once deleted, the policy is no longer
     # in force and Amazon GameLift Servers removes all record of it. To
     # delete a scaling policy, specify both the scaling policy name and the
@@ -4192,6 +4285,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Deletes a Realtime script. This operation permanently deletes the
     # script record. If script files were uploaded, they are also deleted
     # (files stored in an S3 bucket are not deleted).
@@ -4236,6 +4331,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Cancels a pending VPC peering authorization for the specified VPC. If
     # you need to delete an existing VPC peering connection, use
     # [DeleteVpcPeeringConnection][1].
@@ -4285,6 +4382,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Removes a VPC peering connection. To delete the connection, you must
     # have a valid authorization for the VPC peering connection that you
     # want to delete..
@@ -4328,6 +4427,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** Anywhere
+    #
     # Removes a compute resource from an Anywhere fleet. Deregistered
     # computes can no longer host game sessions through Amazon GameLift
     # Servers. Use this operation with an Anywhere fleet that doesn't use
@@ -4363,8 +4464,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the Amazon GameLift Servers FleetIQ
-    # solution and game server groups.**
+    # **This API works with the following fleet types:** EC2 (FleetIQ)
     #
     # Removes the game server from a game server group. As a result of this
     # operation, the deregistered game server can no longer be claimed and
@@ -4408,6 +4508,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Retrieves properties for an alias. This operation returns all alias
     # metadata and settings. To get an alias's target fleet ID only, use
     # `ResolveAlias`.
@@ -4458,6 +4561,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Retrieves properties for a custom game build. To request a build
     # resource, specify a build ID. If successful, an object containing the
     # build properties is returned.
@@ -4495,7 +4600,7 @@ module Aws::GameLift
     #   resp.build.version #=> String
     #   resp.build.status #=> String, one of "INITIALIZED", "READY", "FAILED"
     #   resp.build.size_on_disk #=> Integer
-    #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023"
+    #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023", "WINDOWS_2022"
     #   resp.build.creation_time #=> Time
     #   resp.build.server_sdk_version #=> String
     #
@@ -4508,6 +4613,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Retrieves properties for a specific compute resource in an Amazon
     # GameLift Servers fleet. You can list all computes in a fleet by
     # calling [ListCompute][1].
@@ -4580,7 +4688,7 @@ module Aws::GameLift
     #   resp.compute.compute_status #=> String, one of "PENDING", "ACTIVE", "TERMINATING", "IMPAIRED"
     #   resp.compute.location #=> String
     #   resp.compute.creation_time #=> Time
-    #   resp.compute.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023"
+    #   resp.compute.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023", "WINDOWS_2022"
     #   resp.compute.type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "m6g.medium", "m6g.large", "m6g.xlarge", "m6g.2xlarge", "m6g.4xlarge", "m6g.8xlarge", "m6g.12xlarge", "m6g.16xlarge", "c6g.medium", "c6g.large", "c6g.xlarge", "c6g.2xlarge", "c6g.4xlarge", "c6g.8xlarge", "c6g.12xlarge", "c6g.16xlarge", "r6g.medium", "r6g.large", "r6g.xlarge", "r6g.2xlarge", "r6g.4xlarge", "r6g.8xlarge", "r6g.12xlarge", "r6g.16xlarge", "c6gn.medium", "c6gn.large", "c6gn.xlarge", "c6gn.2xlarge", "c6gn.4xlarge", "c6gn.8xlarge", "c6gn.12xlarge", "c6gn.16xlarge", "c7g.medium", "c7g.large", "c7g.xlarge", "c7g.2xlarge", "c7g.4xlarge", "c7g.8xlarge", "c7g.12xlarge", "c7g.16xlarge", "r7g.medium", "r7g.large", "r7g.xlarge", "r7g.2xlarge", "r7g.4xlarge", "r7g.8xlarge", "r7g.12xlarge", "r7g.16xlarge", "m7g.medium", "m7g.large", "m7g.xlarge", "m7g.2xlarge", "m7g.4xlarge", "m7g.8xlarge", "m7g.12xlarge", "m7g.16xlarge", "g5g.xlarge", "g5g.2xlarge", "g5g.4xlarge", "g5g.8xlarge", "g5g.16xlarge", "r6i.large", "r6i.xlarge", "r6i.2xlarge", "r6i.4xlarge", "r6i.8xlarge", "r6i.12xlarge", "r6i.16xlarge", "c6gd.medium", "c6gd.large", "c6gd.xlarge", "c6gd.2xlarge", "c6gd.4xlarge", "c6gd.8xlarge", "c6gd.12xlarge", "c6gd.16xlarge", "c6in.large", "c6in.xlarge", "c6in.2xlarge", "c6in.4xlarge", "c6in.8xlarge", "c6in.12xlarge", "c6in.16xlarge", "c7a.medium", "c7a.large", "c7a.xlarge", "c7a.2xlarge", "c7a.4xlarge", "c7a.8xlarge", "c7a.12xlarge", "c7a.16xlarge", "c7gd.medium", "c7gd.large", "c7gd.xlarge", "c7gd.2xlarge", "c7gd.4xlarge", "c7gd.8xlarge", "c7gd.12xlarge", "c7gd.16xlarge", "c7gn.medium", "c7gn.large", "c7gn.xlarge", "c7gn.2xlarge", "c7gn.4xlarge", "c7gn.8xlarge", "c7gn.12xlarge", "c7gn.16xlarge", "c7i.large", "c7i.xlarge", "c7i.2xlarge", "c7i.4xlarge", "c7i.8xlarge", "c7i.12xlarge", "c7i.16xlarge", "m6a.large", "m6a.xlarge", "m6a.2xlarge", "m6a.4xlarge", "m6a.8xlarge", "m6a.12xlarge", "m6a.16xlarge", "m6gd.medium", "m6gd.large", "m6gd.xlarge", "m6gd.2xlarge", "m6gd.4xlarge", "m6gd.8xlarge", "m6gd.12xlarge", "m6gd.16xlarge", "m6i.large", "m6i.xlarge", "m6i.2xlarge", "m6i.4xlarge", "m6i.8xlarge", "m6i.12xlarge", "m6i.16xlarge", "m7a.medium", "m7a.large", "m7a.xlarge", "m7a.2xlarge", "m7a.4xlarge", "m7a.8xlarge", "m7a.12xlarge", "m7a.16xlarge", "m7gd.medium", "m7gd.large", "m7gd.xlarge", "m7gd.2xlarge", "m7gd.4xlarge", "m7gd.8xlarge", "m7gd.12xlarge", "m7gd.16xlarge", "m7i.large", "m7i.xlarge", "m7i.2xlarge", "m7i.4xlarge", "m7i.8xlarge", "m7i.12xlarge", "m7i.16xlarge", "r6gd.medium", "r6gd.large", "r6gd.xlarge", "r6gd.2xlarge", "r6gd.4xlarge", "r6gd.8xlarge", "r6gd.12xlarge", "r6gd.16xlarge", "r7a.medium", "r7a.large", "r7a.xlarge", "r7a.2xlarge", "r7a.4xlarge", "r7a.8xlarge", "r7a.12xlarge", "r7a.16xlarge", "r7gd.medium", "r7gd.large", "r7gd.xlarge", "r7gd.2xlarge", "r7gd.4xlarge", "r7gd.8xlarge", "r7gd.12xlarge", "r7gd.16xlarge", "r7i.large", "r7i.xlarge", "r7i.2xlarge", "r7i.4xlarge", "r7i.8xlarge", "r7i.12xlarge", "r7i.16xlarge", "r7i.24xlarge", "r7i.48xlarge", "c5ad.large", "c5ad.xlarge", "c5ad.2xlarge", "c5ad.4xlarge", "c5ad.8xlarge", "c5ad.12xlarge", "c5ad.16xlarge", "c5ad.24xlarge", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "c6id.large", "c6id.xlarge", "c6id.2xlarge", "c6id.4xlarge", "c6id.8xlarge", "c6id.12xlarge", "c6id.16xlarge", "c6id.24xlarge", "c6id.32xlarge", "c8g.medium", "c8g.large", "c8g.xlarge", "c8g.2xlarge", "c8g.4xlarge", "c8g.8xlarge", "c8g.12xlarge", "c8g.16xlarge", "c8g.24xlarge", "c8g.48xlarge", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "m6id.large", "m6id.xlarge", "m6id.2xlarge", "m6id.4xlarge", "m6id.8xlarge", "m6id.12xlarge", "m6id.16xlarge", "m6id.24xlarge", "m6id.32xlarge", "m6idn.large", "m6idn.xlarge", "m6idn.2xlarge", "m6idn.4xlarge", "m6idn.8xlarge", "m6idn.12xlarge", "m6idn.16xlarge", "m6idn.24xlarge", "m6idn.32xlarge", "m6in.large", "m6in.xlarge", "m6in.2xlarge", "m6in.4xlarge", "m6in.8xlarge", "m6in.12xlarge", "m6in.16xlarge", "m6in.24xlarge", "m6in.32xlarge", "m8g.medium", "m8g.large", "m8g.xlarge", "m8g.2xlarge", "m8g.4xlarge", "m8g.8xlarge", "m8g.12xlarge", "m8g.16xlarge", "m8g.24xlarge", "m8g.48xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge", "r6a.large", "r6a.xlarge", "r6a.2xlarge", "r6a.4xlarge", "r6a.8xlarge", "r6a.12xlarge", "r6a.16xlarge", "r6a.24xlarge", "r6a.32xlarge", "r6a.48xlarge", "r6id.large", "r6id.xlarge", "r6id.2xlarge", "r6id.4xlarge", "r6id.8xlarge", "r6id.12xlarge", "r6id.16xlarge", "r6id.24xlarge", "r6id.32xlarge", "r6idn.large", "r6idn.xlarge", "r6idn.2xlarge", "r6idn.4xlarge", "r6idn.8xlarge", "r6idn.12xlarge", "r6idn.16xlarge", "r6idn.24xlarge", "r6idn.32xlarge", "r6in.large", "r6in.xlarge", "r6in.2xlarge", "r6in.4xlarge", "r6in.8xlarge", "r6in.12xlarge", "r6in.16xlarge", "r6in.24xlarge", "r6in.32xlarge", "r8g.medium", "r8g.large", "r8g.xlarge", "r8g.2xlarge", "r8g.4xlarge", "r8g.8xlarge", "r8g.12xlarge", "r8g.16xlarge", "r8g.24xlarge", "r8g.48xlarge", "m4.16xlarge", "c6a.32xlarge", "c6a.48xlarge", "c6i.32xlarge", "r6i.24xlarge", "r6i.32xlarge", "c6in.24xlarge", "c6in.32xlarge", "c7a.24xlarge", "c7a.32xlarge", "c7a.48xlarge", "c7i.24xlarge", "c7i.48xlarge", "m6a.24xlarge", "m6a.32xlarge", "m6a.48xlarge", "m6i.24xlarge", "m6i.32xlarge", "m7a.24xlarge", "m7a.32xlarge", "m7a.48xlarge", "m7i.24xlarge", "m7i.48xlarge", "r7a.24xlarge", "r7a.32xlarge", "r7a.48xlarge"
     #   resp.compute.game_lift_service_sdk_endpoint #=> String
     #   resp.compute.game_lift_agent_endpoint #=> String
@@ -4599,6 +4707,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** Container
+    #
     # Retrieves the properties for a container fleet. When requesting
     # attributes for multiple fleets, use the pagination parameters to
     # retrieve results as a set of sequential pages.
@@ -4681,6 +4791,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** Container
+    #
     # Retrieves the properties of a container group definition, including
     # all container definitions in the group.
     #
@@ -4795,6 +4907,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Retrieves the instance limits and current utilization for an Amazon
     # Web Services Region or location. Instance limits control the number of
     # instances, per instance type, per location, that your Amazon Web
@@ -4894,6 +5008,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Retrieves core fleet-wide properties for fleets in an Amazon Web
     # Services Region. Properties include the computing hardware and
     # deployment configuration for instances in the fleet.
@@ -4979,7 +5096,7 @@ module Aws::GameLift
     #   resp.fleet_attributes[0].log_paths #=> Array
     #   resp.fleet_attributes[0].log_paths[0] #=> String
     #   resp.fleet_attributes[0].new_game_session_protection_policy #=> String, one of "NoProtection", "FullProtection"
-    #   resp.fleet_attributes[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023"
+    #   resp.fleet_attributes[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023", "WINDOWS_2022"
     #   resp.fleet_attributes[0].resource_creation_limit_policy.new_game_sessions_per_creator #=> Integer
     #   resp.fleet_attributes[0].resource_creation_limit_policy.policy_period_in_minutes #=> Integer
     #   resp.fleet_attributes[0].metric_groups #=> Array
@@ -5002,6 +5119,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Container
+    #
     # Retrieves the resource capacity settings for one or more fleets. For a
     # container fleet, this operation also returns counts for game server
     # container groups.
@@ -5107,6 +5226,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** Container
+    #
     # Retrieves information about a managed container fleet deployment.
     #
     # **Request options**
@@ -5165,6 +5286,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Retrieves entries from a fleet's event log. Fleet events are
     # initiated by changes in status, such as during fleet creation and
     # termination, changes in capacity, etc. If a fleet has multiple
@@ -5250,6 +5374,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Container
+    #
     # Retrieves information on a fleet's remote locations, including
     # life-cycle status and any suspended fleet activity.
     #
@@ -5341,6 +5467,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Container
+    #
     # Retrieves the resource capacity settings for a fleet location. The
     # data returned includes the current capacity (number of EC2 instances)
     # and some scaling settings for the requested fleet location. For a
@@ -5417,6 +5545,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Retrieves current usage data for a fleet location. Utilization data
     # provides a snapshot of current game hosting activity at the requested
     # location. Use this operation to retrieve utilization information for a
@@ -5481,6 +5612,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Container
+    #
     # Retrieves a fleet's inbound connection permissions. Connection
     # permissions specify IP addresses and port settings that incoming
     # traffic can use to access server processes in the fleet. Game server
@@ -5553,6 +5686,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Container
+    #
     # Retrieves utilization statistics for one or more fleets. Utilization
     # data provides a snapshot of how the fleet's hosting resources are
     # currently being used. For fleets with remote locations, this operation
@@ -5649,8 +5784,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the Amazon GameLift Servers FleetIQ
-    # solution and game server groups.**
+    # **This API works with the following fleet types:** EC2 (FleetIQ)
     #
     # Retrieves information for a registered game server. Information
     # includes game server status, health check info, and the instance that
@@ -5709,8 +5843,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the Amazon GameLift Servers FleetIQ
-    # solution and game server groups.**
+    # **This API works with the following fleet types:** EC2 (FleetIQ)
     #
     # Retrieves information on a game server group. This operation returns
     # only properties related to Amazon GameLift Servers FleetIQ. To view or
@@ -5770,8 +5903,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the Amazon GameLift Servers FleetIQ
-    # solution and game server groups.**
+    # **This API works with the following fleet types:** EC2 (FleetIQ)
     #
     # Retrieves status information about the Amazon EC2 instances associated
     # with a Amazon GameLift Servers FleetIQ game server group. Use this
@@ -5851,6 +5983,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Retrieves additional game session properties, including the game
     # session protection policy in force, a set of one or more game sessions
     # in a specific fleet location. You can optionally filter the results by
@@ -5977,6 +6112,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Retrieves information, including current status, about a game session
     # placement request.
     #
@@ -6043,6 +6181,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Retrieves the properties for one or more game session queues. When
     # requesting multiple queues, use the pagination parameters to retrieve
     # results as a set of sequential pages. When specifying a list of
@@ -6118,6 +6259,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Retrieves a set of one or more game sessions in a specific fleet
     # location. You can optionally filter the results by current game
     # session status.
@@ -6252,6 +6396,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Retrieves information about the EC2 instances in an Amazon GameLift
     # Servers managed fleet, including instance ID, connection data, and
     # status. You can use this operation with a multi-location fleet to get
@@ -6347,7 +6493,7 @@ module Aws::GameLift
     #   resp.instances[0].instance_id #=> String
     #   resp.instances[0].ip_address #=> String
     #   resp.instances[0].dns_name #=> String
-    #   resp.instances[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023"
+    #   resp.instances[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023", "WINDOWS_2022"
     #   resp.instances[0].type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "m6g.medium", "m6g.large", "m6g.xlarge", "m6g.2xlarge", "m6g.4xlarge", "m6g.8xlarge", "m6g.12xlarge", "m6g.16xlarge", "c6g.medium", "c6g.large", "c6g.xlarge", "c6g.2xlarge", "c6g.4xlarge", "c6g.8xlarge", "c6g.12xlarge", "c6g.16xlarge", "r6g.medium", "r6g.large", "r6g.xlarge", "r6g.2xlarge", "r6g.4xlarge", "r6g.8xlarge", "r6g.12xlarge", "r6g.16xlarge", "c6gn.medium", "c6gn.large", "c6gn.xlarge", "c6gn.2xlarge", "c6gn.4xlarge", "c6gn.8xlarge", "c6gn.12xlarge", "c6gn.16xlarge", "c7g.medium", "c7g.large", "c7g.xlarge", "c7g.2xlarge", "c7g.4xlarge", "c7g.8xlarge", "c7g.12xlarge", "c7g.16xlarge", "r7g.medium", "r7g.large", "r7g.xlarge", "r7g.2xlarge", "r7g.4xlarge", "r7g.8xlarge", "r7g.12xlarge", "r7g.16xlarge", "m7g.medium", "m7g.large", "m7g.xlarge", "m7g.2xlarge", "m7g.4xlarge", "m7g.8xlarge", "m7g.12xlarge", "m7g.16xlarge", "g5g.xlarge", "g5g.2xlarge", "g5g.4xlarge", "g5g.8xlarge", "g5g.16xlarge", "r6i.large", "r6i.xlarge", "r6i.2xlarge", "r6i.4xlarge", "r6i.8xlarge", "r6i.12xlarge", "r6i.16xlarge", "c6gd.medium", "c6gd.large", "c6gd.xlarge", "c6gd.2xlarge", "c6gd.4xlarge", "c6gd.8xlarge", "c6gd.12xlarge", "c6gd.16xlarge", "c6in.large", "c6in.xlarge", "c6in.2xlarge", "c6in.4xlarge", "c6in.8xlarge", "c6in.12xlarge", "c6in.16xlarge", "c7a.medium", "c7a.large", "c7a.xlarge", "c7a.2xlarge", "c7a.4xlarge", "c7a.8xlarge", "c7a.12xlarge", "c7a.16xlarge", "c7gd.medium", "c7gd.large", "c7gd.xlarge", "c7gd.2xlarge", "c7gd.4xlarge", "c7gd.8xlarge", "c7gd.12xlarge", "c7gd.16xlarge", "c7gn.medium", "c7gn.large", "c7gn.xlarge", "c7gn.2xlarge", "c7gn.4xlarge", "c7gn.8xlarge", "c7gn.12xlarge", "c7gn.16xlarge", "c7i.large", "c7i.xlarge", "c7i.2xlarge", "c7i.4xlarge", "c7i.8xlarge", "c7i.12xlarge", "c7i.16xlarge", "m6a.large", "m6a.xlarge", "m6a.2xlarge", "m6a.4xlarge", "m6a.8xlarge", "m6a.12xlarge", "m6a.16xlarge", "m6gd.medium", "m6gd.large", "m6gd.xlarge", "m6gd.2xlarge", "m6gd.4xlarge", "m6gd.8xlarge", "m6gd.12xlarge", "m6gd.16xlarge", "m6i.large", "m6i.xlarge", "m6i.2xlarge", "m6i.4xlarge", "m6i.8xlarge", "m6i.12xlarge", "m6i.16xlarge", "m7a.medium", "m7a.large", "m7a.xlarge", "m7a.2xlarge", "m7a.4xlarge", "m7a.8xlarge", "m7a.12xlarge", "m7a.16xlarge", "m7gd.medium", "m7gd.large", "m7gd.xlarge", "m7gd.2xlarge", "m7gd.4xlarge", "m7gd.8xlarge", "m7gd.12xlarge", "m7gd.16xlarge", "m7i.large", "m7i.xlarge", "m7i.2xlarge", "m7i.4xlarge", "m7i.8xlarge", "m7i.12xlarge", "m7i.16xlarge", "r6gd.medium", "r6gd.large", "r6gd.xlarge", "r6gd.2xlarge", "r6gd.4xlarge", "r6gd.8xlarge", "r6gd.12xlarge", "r6gd.16xlarge", "r7a.medium", "r7a.large", "r7a.xlarge", "r7a.2xlarge", "r7a.4xlarge", "r7a.8xlarge", "r7a.12xlarge", "r7a.16xlarge", "r7gd.medium", "r7gd.large", "r7gd.xlarge", "r7gd.2xlarge", "r7gd.4xlarge", "r7gd.8xlarge", "r7gd.12xlarge", "r7gd.16xlarge", "r7i.large", "r7i.xlarge", "r7i.2xlarge", "r7i.4xlarge", "r7i.8xlarge", "r7i.12xlarge", "r7i.16xlarge", "r7i.24xlarge", "r7i.48xlarge", "c5ad.large", "c5ad.xlarge", "c5ad.2xlarge", "c5ad.4xlarge", "c5ad.8xlarge", "c5ad.12xlarge", "c5ad.16xlarge", "c5ad.24xlarge", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "c6id.large", "c6id.xlarge", "c6id.2xlarge", "c6id.4xlarge", "c6id.8xlarge", "c6id.12xlarge", "c6id.16xlarge", "c6id.24xlarge", "c6id.32xlarge", "c8g.medium", "c8g.large", "c8g.xlarge", "c8g.2xlarge", "c8g.4xlarge", "c8g.8xlarge", "c8g.12xlarge", "c8g.16xlarge", "c8g.24xlarge", "c8g.48xlarge", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "m6id.large", "m6id.xlarge", "m6id.2xlarge", "m6id.4xlarge", "m6id.8xlarge", "m6id.12xlarge", "m6id.16xlarge", "m6id.24xlarge", "m6id.32xlarge", "m6idn.large", "m6idn.xlarge", "m6idn.2xlarge", "m6idn.4xlarge", "m6idn.8xlarge", "m6idn.12xlarge", "m6idn.16xlarge", "m6idn.24xlarge", "m6idn.32xlarge", "m6in.large", "m6in.xlarge", "m6in.2xlarge", "m6in.4xlarge", "m6in.8xlarge", "m6in.12xlarge", "m6in.16xlarge", "m6in.24xlarge", "m6in.32xlarge", "m8g.medium", "m8g.large", "m8g.xlarge", "m8g.2xlarge", "m8g.4xlarge", "m8g.8xlarge", "m8g.12xlarge", "m8g.16xlarge", "m8g.24xlarge", "m8g.48xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge", "r6a.large", "r6a.xlarge", "r6a.2xlarge", "r6a.4xlarge", "r6a.8xlarge", "r6a.12xlarge", "r6a.16xlarge", "r6a.24xlarge", "r6a.32xlarge", "r6a.48xlarge", "r6id.large", "r6id.xlarge", "r6id.2xlarge", "r6id.4xlarge", "r6id.8xlarge", "r6id.12xlarge", "r6id.16xlarge", "r6id.24xlarge", "r6id.32xlarge", "r6idn.large", "r6idn.xlarge", "r6idn.2xlarge", "r6idn.4xlarge", "r6idn.8xlarge", "r6idn.12xlarge", "r6idn.16xlarge", "r6idn.24xlarge", "r6idn.32xlarge", "r6in.large", "r6in.xlarge", "r6in.2xlarge", "r6in.4xlarge", "r6in.8xlarge", "r6in.12xlarge", "r6in.16xlarge", "r6in.24xlarge", "r6in.32xlarge", "r8g.medium", "r8g.large", "r8g.xlarge", "r8g.2xlarge", "r8g.4xlarge", "r8g.8xlarge", "r8g.12xlarge", "r8g.16xlarge", "r8g.24xlarge", "r8g.48xlarge", "m4.16xlarge", "c6a.32xlarge", "c6a.48xlarge", "c6i.32xlarge", "r6i.24xlarge", "r6i.32xlarge", "c6in.24xlarge", "c6in.32xlarge", "c7a.24xlarge", "c7a.32xlarge", "c7a.48xlarge", "c7i.24xlarge", "c7i.48xlarge", "m6a.24xlarge", "m6a.32xlarge", "m6a.48xlarge", "m6i.24xlarge", "m6i.32xlarge", "m7a.24xlarge", "m7a.32xlarge", "m7a.48xlarge", "m7i.24xlarge", "m7i.48xlarge", "r7a.24xlarge", "r7a.32xlarge", "r7a.48xlarge"
     #   resp.instances[0].status #=> String, one of "PENDING", "ACTIVE", "TERMINATING"
     #   resp.instances[0].creation_time #=> Time
@@ -6363,6 +6509,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Retrieves one or more matchmaking tickets. Use this operation to
     # retrieve ticket information, including--after a successful match is
     # made--connection information for the resulting new game session.
@@ -6440,6 +6589,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Retrieves the details of FlexMatch matchmaking configurations.
     #
     # This operation offers the following options: (1) retrieve all
@@ -6532,6 +6684,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Retrieves the details for FlexMatch matchmaking rule sets. You can
     # request all existing rule sets for the Region, or provide a list of
     # one or more rule set names. When requesting multiple items, use the
@@ -6597,6 +6752,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Retrieves properties for one or more player sessions.
     #
     # This action can be used in the following ways:
@@ -6715,11 +6873,13 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Retrieves a fleet's runtime configuration settings. The runtime
     # configuration determines which server processes run, and how, on
     # computes in the fleet. For managed EC2 fleets, the runtime
     # configuration describes server processes that run on each fleet
-    # instance. can update a fleet's runtime configuration at any time
+    # instance. You can update a fleet's runtime configuration at any time
     # using [UpdateRuntimeConfiguration][1].
     #
     # To get the current runtime configuration for a fleet, provide the
@@ -6773,6 +6933,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Retrieves all scaling policies applied to a fleet.
     #
     # To get a fleet's scaling policies, specify the fleet ID. You can
@@ -6869,6 +7031,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Retrieves properties for a Realtime script.
     #
     # To request a script record, specify the script ID. If successful, an
@@ -6923,6 +7087,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Retrieves valid VPC peering authorizations that are pending for the
     # Amazon Web Services account. This operation returns all VPC peering
     # authorizations and requests for peering. This includes those initiated
@@ -6958,6 +7124,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Retrieves information on VPC peering connections. Use this operation
     # to get peering information for all fleets or for one specific fleet
     # ID.
@@ -7012,6 +7180,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Container
+    #
     # Requests authorization to remotely connect to a hosting resource in a
     # Amazon GameLift Servers managed fleet. This operation is not used with
     # Amazon GameLift Servers Anywhere fleets.
@@ -7099,6 +7269,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Requests an authentication token from Amazon GameLift Servers for a
     # compute resource in an Amazon GameLift Servers fleet. Game servers
     # that are running on the compute use this token to communicate with the
@@ -7176,6 +7349,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Retrieves the location of stored game session logs for a specified
     # game session on Amazon GameLift Servers managed fleets. When a game
     # session is terminated, Amazon GameLift Servers automatically stores
@@ -7220,6 +7395,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Requests authorization to remotely connect to an instance in an Amazon
     # GameLift Servers managed fleet. Use this operation to connect to
     # instances with game servers that use Amazon GameLift Servers server
@@ -7294,7 +7471,7 @@ module Aws::GameLift
     #   resp.instance_access.fleet_id #=> String
     #   resp.instance_access.instance_id #=> String
     #   resp.instance_access.ip_address #=> String
-    #   resp.instance_access.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023"
+    #   resp.instance_access.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023", "WINDOWS_2022"
     #   resp.instance_access.credentials.user_name #=> String
     #   resp.instance_access.credentials.secret #=> String
     #
@@ -7307,6 +7484,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Retrieves all aliases for this Amazon Web Services account. You can
     # filter the result set by alias name and/or routing strategy type. Use
     # the pagination parameters to retrieve results in sequential pages.
@@ -7395,11 +7575,12 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Retrieves build resources for all builds associated with the Amazon
     # Web Services account in use. You can limit results to builds that are
     # in a specific status by using the `Status` parameter. Use the
-    # pagination parameters to retrieve results in a set of sequential
-    # pages.
+    # pagination parameters to retrieve results in
     #
     # <note markdown="1"> Build resources are not listed in any particular order.
     #
@@ -7467,7 +7648,7 @@ module Aws::GameLift
     #   resp.builds[0].version #=> String
     #   resp.builds[0].status #=> String, one of "INITIALIZED", "READY", "FAILED"
     #   resp.builds[0].size_on_disk #=> Integer
-    #   resp.builds[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023"
+    #   resp.builds[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023", "WINDOWS_2022"
     #   resp.builds[0].creation_time #=> Time
     #   resp.builds[0].server_sdk_version #=> String
     #   resp.next_token #=> String
@@ -7481,6 +7662,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Retrieves information on the compute resources in an Amazon GameLift
     # Servers fleet. Use the pagination parameters to retrieve results in a
     # set of sequential pages.
@@ -7571,7 +7755,7 @@ module Aws::GameLift
     #   resp.compute_list[0].compute_status #=> String, one of "PENDING", "ACTIVE", "TERMINATING", "IMPAIRED"
     #   resp.compute_list[0].location #=> String
     #   resp.compute_list[0].creation_time #=> Time
-    #   resp.compute_list[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023"
+    #   resp.compute_list[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023", "WINDOWS_2022"
     #   resp.compute_list[0].type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "m6g.medium", "m6g.large", "m6g.xlarge", "m6g.2xlarge", "m6g.4xlarge", "m6g.8xlarge", "m6g.12xlarge", "m6g.16xlarge", "c6g.medium", "c6g.large", "c6g.xlarge", "c6g.2xlarge", "c6g.4xlarge", "c6g.8xlarge", "c6g.12xlarge", "c6g.16xlarge", "r6g.medium", "r6g.large", "r6g.xlarge", "r6g.2xlarge", "r6g.4xlarge", "r6g.8xlarge", "r6g.12xlarge", "r6g.16xlarge", "c6gn.medium", "c6gn.large", "c6gn.xlarge", "c6gn.2xlarge", "c6gn.4xlarge", "c6gn.8xlarge", "c6gn.12xlarge", "c6gn.16xlarge", "c7g.medium", "c7g.large", "c7g.xlarge", "c7g.2xlarge", "c7g.4xlarge", "c7g.8xlarge", "c7g.12xlarge", "c7g.16xlarge", "r7g.medium", "r7g.large", "r7g.xlarge", "r7g.2xlarge", "r7g.4xlarge", "r7g.8xlarge", "r7g.12xlarge", "r7g.16xlarge", "m7g.medium", "m7g.large", "m7g.xlarge", "m7g.2xlarge", "m7g.4xlarge", "m7g.8xlarge", "m7g.12xlarge", "m7g.16xlarge", "g5g.xlarge", "g5g.2xlarge", "g5g.4xlarge", "g5g.8xlarge", "g5g.16xlarge", "r6i.large", "r6i.xlarge", "r6i.2xlarge", "r6i.4xlarge", "r6i.8xlarge", "r6i.12xlarge", "r6i.16xlarge", "c6gd.medium", "c6gd.large", "c6gd.xlarge", "c6gd.2xlarge", "c6gd.4xlarge", "c6gd.8xlarge", "c6gd.12xlarge", "c6gd.16xlarge", "c6in.large", "c6in.xlarge", "c6in.2xlarge", "c6in.4xlarge", "c6in.8xlarge", "c6in.12xlarge", "c6in.16xlarge", "c7a.medium", "c7a.large", "c7a.xlarge", "c7a.2xlarge", "c7a.4xlarge", "c7a.8xlarge", "c7a.12xlarge", "c7a.16xlarge", "c7gd.medium", "c7gd.large", "c7gd.xlarge", "c7gd.2xlarge", "c7gd.4xlarge", "c7gd.8xlarge", "c7gd.12xlarge", "c7gd.16xlarge", "c7gn.medium", "c7gn.large", "c7gn.xlarge", "c7gn.2xlarge", "c7gn.4xlarge", "c7gn.8xlarge", "c7gn.12xlarge", "c7gn.16xlarge", "c7i.large", "c7i.xlarge", "c7i.2xlarge", "c7i.4xlarge", "c7i.8xlarge", "c7i.12xlarge", "c7i.16xlarge", "m6a.large", "m6a.xlarge", "m6a.2xlarge", "m6a.4xlarge", "m6a.8xlarge", "m6a.12xlarge", "m6a.16xlarge", "m6gd.medium", "m6gd.large", "m6gd.xlarge", "m6gd.2xlarge", "m6gd.4xlarge", "m6gd.8xlarge", "m6gd.12xlarge", "m6gd.16xlarge", "m6i.large", "m6i.xlarge", "m6i.2xlarge", "m6i.4xlarge", "m6i.8xlarge", "m6i.12xlarge", "m6i.16xlarge", "m7a.medium", "m7a.large", "m7a.xlarge", "m7a.2xlarge", "m7a.4xlarge", "m7a.8xlarge", "m7a.12xlarge", "m7a.16xlarge", "m7gd.medium", "m7gd.large", "m7gd.xlarge", "m7gd.2xlarge", "m7gd.4xlarge", "m7gd.8xlarge", "m7gd.12xlarge", "m7gd.16xlarge", "m7i.large", "m7i.xlarge", "m7i.2xlarge", "m7i.4xlarge", "m7i.8xlarge", "m7i.12xlarge", "m7i.16xlarge", "r6gd.medium", "r6gd.large", "r6gd.xlarge", "r6gd.2xlarge", "r6gd.4xlarge", "r6gd.8xlarge", "r6gd.12xlarge", "r6gd.16xlarge", "r7a.medium", "r7a.large", "r7a.xlarge", "r7a.2xlarge", "r7a.4xlarge", "r7a.8xlarge", "r7a.12xlarge", "r7a.16xlarge", "r7gd.medium", "r7gd.large", "r7gd.xlarge", "r7gd.2xlarge", "r7gd.4xlarge", "r7gd.8xlarge", "r7gd.12xlarge", "r7gd.16xlarge", "r7i.large", "r7i.xlarge", "r7i.2xlarge", "r7i.4xlarge", "r7i.8xlarge", "r7i.12xlarge", "r7i.16xlarge", "r7i.24xlarge", "r7i.48xlarge", "c5ad.large", "c5ad.xlarge", "c5ad.2xlarge", "c5ad.4xlarge", "c5ad.8xlarge", "c5ad.12xlarge", "c5ad.16xlarge", "c5ad.24xlarge", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "c6id.large", "c6id.xlarge", "c6id.2xlarge", "c6id.4xlarge", "c6id.8xlarge", "c6id.12xlarge", "c6id.16xlarge", "c6id.24xlarge", "c6id.32xlarge", "c8g.medium", "c8g.large", "c8g.xlarge", "c8g.2xlarge", "c8g.4xlarge", "c8g.8xlarge", "c8g.12xlarge", "c8g.16xlarge", "c8g.24xlarge", "c8g.48xlarge", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "m6id.large", "m6id.xlarge", "m6id.2xlarge", "m6id.4xlarge", "m6id.8xlarge", "m6id.12xlarge", "m6id.16xlarge", "m6id.24xlarge", "m6id.32xlarge", "m6idn.large", "m6idn.xlarge", "m6idn.2xlarge", "m6idn.4xlarge", "m6idn.8xlarge", "m6idn.12xlarge", "m6idn.16xlarge", "m6idn.24xlarge", "m6idn.32xlarge", "m6in.large", "m6in.xlarge", "m6in.2xlarge", "m6in.4xlarge", "m6in.8xlarge", "m6in.12xlarge", "m6in.16xlarge", "m6in.24xlarge", "m6in.32xlarge", "m8g.medium", "m8g.large", "m8g.xlarge", "m8g.2xlarge", "m8g.4xlarge", "m8g.8xlarge", "m8g.12xlarge", "m8g.16xlarge", "m8g.24xlarge", "m8g.48xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge", "r6a.large", "r6a.xlarge", "r6a.2xlarge", "r6a.4xlarge", "r6a.8xlarge", "r6a.12xlarge", "r6a.16xlarge", "r6a.24xlarge", "r6a.32xlarge", "r6a.48xlarge", "r6id.large", "r6id.xlarge", "r6id.2xlarge", "r6id.4xlarge", "r6id.8xlarge", "r6id.12xlarge", "r6id.16xlarge", "r6id.24xlarge", "r6id.32xlarge", "r6idn.large", "r6idn.xlarge", "r6idn.2xlarge", "r6idn.4xlarge", "r6idn.8xlarge", "r6idn.12xlarge", "r6idn.16xlarge", "r6idn.24xlarge", "r6idn.32xlarge", "r6in.large", "r6in.xlarge", "r6in.2xlarge", "r6in.4xlarge", "r6in.8xlarge", "r6in.12xlarge", "r6in.16xlarge", "r6in.24xlarge", "r6in.32xlarge", "r8g.medium", "r8g.large", "r8g.xlarge", "r8g.2xlarge", "r8g.4xlarge", "r8g.8xlarge", "r8g.12xlarge", "r8g.16xlarge", "r8g.24xlarge", "r8g.48xlarge", "m4.16xlarge", "c6a.32xlarge", "c6a.48xlarge", "c6i.32xlarge", "r6i.24xlarge", "r6i.32xlarge", "c6in.24xlarge", "c6in.32xlarge", "c7a.24xlarge", "c7a.32xlarge", "c7a.48xlarge", "c7i.24xlarge", "c7i.48xlarge", "m6a.24xlarge", "m6a.32xlarge", "m6a.48xlarge", "m6i.24xlarge", "m6i.32xlarge", "m7a.24xlarge", "m7a.32xlarge", "m7a.48xlarge", "m7i.24xlarge", "m7i.48xlarge", "r7a.24xlarge", "r7a.32xlarge", "r7a.48xlarge"
     #   resp.compute_list[0].game_lift_service_sdk_endpoint #=> String
     #   resp.compute_list[0].game_lift_agent_endpoint #=> String
@@ -7591,6 +7775,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** Container
+    #
     # Retrieves a collection of container fleet resources in an Amazon Web
     # Services Region. For fleets that have multiple locations, this
     # operation retrieves fleets based on their home Region only.
@@ -7697,6 +7883,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** Container
+    #
     # Retrieves all versions of a container group definition. Use the
     # pagination parameters to retrieve results in a set of sequential
     # pages.
@@ -7828,6 +8016,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** Container
+    #
     # Retrieves container group definitions for the Amazon Web Services
     # account and Amazon Web Services Region. Use the pagination parameters
     # to retrieve results in a set of sequential pages.
@@ -7959,6 +8149,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** Container
+    #
     # Retrieves a collection of container fleet deployments in an Amazon Web
     # Services Region. Use the pagination parameters to retrieve results as
     # a set of sequential pages.
@@ -8035,6 +8227,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Retrieves a collection of fleet resources in an Amazon Web Services
     # Region. You can filter the result set to find only those fleets that
     # are deployed with a specific build or script. For fleets that have
@@ -8114,6 +8309,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2 (FleetIQ)
+    #
     # Lists a game server groups.
     #
     # @option params [Integer] :limit
@@ -8166,8 +8363,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the Amazon GameLift Servers FleetIQ
-    # solution and game server groups.**
+    # **This API works with the following fleet types:** EC2 (FleetIQ)
     #
     # Retrieves information on all game servers that are currently active in
     # a specified game server group. You can opt to sort the list by game
@@ -8244,6 +8440,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** Anywhere
+    #
     # Lists all custom and Amazon Web Services locations where Amazon
     # GameLift Servers can host game servers.
     #
@@ -8312,6 +8510,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Retrieves script records for all Realtime scripts that are associated
     # with the Amazon Web Services account in use.
     #
@@ -8376,6 +8576,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Retrieves all tags assigned to a Amazon GameLift Servers resource. Use
     # resource tags to organize Amazon Web Services resources for a range of
     # purposes. This operation handles the permissions necessary to manage
@@ -8437,6 +8640,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Creates or updates a scaling policy for a fleet. Scaling policies are
     # used to automatically scale a fleet's hosting capacity to meet player
     # demand. An active scaling policy instructs Amazon GameLift Servers to
@@ -8648,6 +8853,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** Anywhere, Container
+    #
     # Registers a compute resource in an Amazon GameLift Servers Anywhere
     # fleet.
     #
@@ -8738,7 +8945,7 @@ module Aws::GameLift
     #   resp.compute.compute_status #=> String, one of "PENDING", "ACTIVE", "TERMINATING", "IMPAIRED"
     #   resp.compute.location #=> String
     #   resp.compute.creation_time #=> Time
-    #   resp.compute.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023"
+    #   resp.compute.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023", "WINDOWS_2022"
     #   resp.compute.type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.12xlarge", "c5.18xlarge", "c5.24xlarge", "c5a.large", "c5a.xlarge", "c5a.2xlarge", "c5a.4xlarge", "c5a.8xlarge", "c5a.12xlarge", "c5a.16xlarge", "c5a.24xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "r5.large", "r5.xlarge", "r5.2xlarge", "r5.4xlarge", "r5.8xlarge", "r5.12xlarge", "r5.16xlarge", "r5.24xlarge", "r5a.large", "r5a.xlarge", "r5a.2xlarge", "r5a.4xlarge", "r5a.8xlarge", "r5a.12xlarge", "r5a.16xlarge", "r5a.24xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.8xlarge", "m5.12xlarge", "m5.16xlarge", "m5.24xlarge", "m5a.large", "m5a.xlarge", "m5a.2xlarge", "m5a.4xlarge", "m5a.8xlarge", "m5a.12xlarge", "m5a.16xlarge", "m5a.24xlarge", "c5d.large", "c5d.xlarge", "c5d.2xlarge", "c5d.4xlarge", "c5d.9xlarge", "c5d.12xlarge", "c5d.18xlarge", "c5d.24xlarge", "c6a.large", "c6a.xlarge", "c6a.2xlarge", "c6a.4xlarge", "c6a.8xlarge", "c6a.12xlarge", "c6a.16xlarge", "c6a.24xlarge", "c6i.large", "c6i.xlarge", "c6i.2xlarge", "c6i.4xlarge", "c6i.8xlarge", "c6i.12xlarge", "c6i.16xlarge", "c6i.24xlarge", "r5d.large", "r5d.xlarge", "r5d.2xlarge", "r5d.4xlarge", "r5d.8xlarge", "r5d.12xlarge", "r5d.16xlarge", "r5d.24xlarge", "m6g.medium", "m6g.large", "m6g.xlarge", "m6g.2xlarge", "m6g.4xlarge", "m6g.8xlarge", "m6g.12xlarge", "m6g.16xlarge", "c6g.medium", "c6g.large", "c6g.xlarge", "c6g.2xlarge", "c6g.4xlarge", "c6g.8xlarge", "c6g.12xlarge", "c6g.16xlarge", "r6g.medium", "r6g.large", "r6g.xlarge", "r6g.2xlarge", "r6g.4xlarge", "r6g.8xlarge", "r6g.12xlarge", "r6g.16xlarge", "c6gn.medium", "c6gn.large", "c6gn.xlarge", "c6gn.2xlarge", "c6gn.4xlarge", "c6gn.8xlarge", "c6gn.12xlarge", "c6gn.16xlarge", "c7g.medium", "c7g.large", "c7g.xlarge", "c7g.2xlarge", "c7g.4xlarge", "c7g.8xlarge", "c7g.12xlarge", "c7g.16xlarge", "r7g.medium", "r7g.large", "r7g.xlarge", "r7g.2xlarge", "r7g.4xlarge", "r7g.8xlarge", "r7g.12xlarge", "r7g.16xlarge", "m7g.medium", "m7g.large", "m7g.xlarge", "m7g.2xlarge", "m7g.4xlarge", "m7g.8xlarge", "m7g.12xlarge", "m7g.16xlarge", "g5g.xlarge", "g5g.2xlarge", "g5g.4xlarge", "g5g.8xlarge", "g5g.16xlarge", "r6i.large", "r6i.xlarge", "r6i.2xlarge", "r6i.4xlarge", "r6i.8xlarge", "r6i.12xlarge", "r6i.16xlarge", "c6gd.medium", "c6gd.large", "c6gd.xlarge", "c6gd.2xlarge", "c6gd.4xlarge", "c6gd.8xlarge", "c6gd.12xlarge", "c6gd.16xlarge", "c6in.large", "c6in.xlarge", "c6in.2xlarge", "c6in.4xlarge", "c6in.8xlarge", "c6in.12xlarge", "c6in.16xlarge", "c7a.medium", "c7a.large", "c7a.xlarge", "c7a.2xlarge", "c7a.4xlarge", "c7a.8xlarge", "c7a.12xlarge", "c7a.16xlarge", "c7gd.medium", "c7gd.large", "c7gd.xlarge", "c7gd.2xlarge", "c7gd.4xlarge", "c7gd.8xlarge", "c7gd.12xlarge", "c7gd.16xlarge", "c7gn.medium", "c7gn.large", "c7gn.xlarge", "c7gn.2xlarge", "c7gn.4xlarge", "c7gn.8xlarge", "c7gn.12xlarge", "c7gn.16xlarge", "c7i.large", "c7i.xlarge", "c7i.2xlarge", "c7i.4xlarge", "c7i.8xlarge", "c7i.12xlarge", "c7i.16xlarge", "m6a.large", "m6a.xlarge", "m6a.2xlarge", "m6a.4xlarge", "m6a.8xlarge", "m6a.12xlarge", "m6a.16xlarge", "m6gd.medium", "m6gd.large", "m6gd.xlarge", "m6gd.2xlarge", "m6gd.4xlarge", "m6gd.8xlarge", "m6gd.12xlarge", "m6gd.16xlarge", "m6i.large", "m6i.xlarge", "m6i.2xlarge", "m6i.4xlarge", "m6i.8xlarge", "m6i.12xlarge", "m6i.16xlarge", "m7a.medium", "m7a.large", "m7a.xlarge", "m7a.2xlarge", "m7a.4xlarge", "m7a.8xlarge", "m7a.12xlarge", "m7a.16xlarge", "m7gd.medium", "m7gd.large", "m7gd.xlarge", "m7gd.2xlarge", "m7gd.4xlarge", "m7gd.8xlarge", "m7gd.12xlarge", "m7gd.16xlarge", "m7i.large", "m7i.xlarge", "m7i.2xlarge", "m7i.4xlarge", "m7i.8xlarge", "m7i.12xlarge", "m7i.16xlarge", "r6gd.medium", "r6gd.large", "r6gd.xlarge", "r6gd.2xlarge", "r6gd.4xlarge", "r6gd.8xlarge", "r6gd.12xlarge", "r6gd.16xlarge", "r7a.medium", "r7a.large", "r7a.xlarge", "r7a.2xlarge", "r7a.4xlarge", "r7a.8xlarge", "r7a.12xlarge", "r7a.16xlarge", "r7gd.medium", "r7gd.large", "r7gd.xlarge", "r7gd.2xlarge", "r7gd.4xlarge", "r7gd.8xlarge", "r7gd.12xlarge", "r7gd.16xlarge", "r7i.large", "r7i.xlarge", "r7i.2xlarge", "r7i.4xlarge", "r7i.8xlarge", "r7i.12xlarge", "r7i.16xlarge", "r7i.24xlarge", "r7i.48xlarge", "c5ad.large", "c5ad.xlarge", "c5ad.2xlarge", "c5ad.4xlarge", "c5ad.8xlarge", "c5ad.12xlarge", "c5ad.16xlarge", "c5ad.24xlarge", "c5n.large", "c5n.xlarge", "c5n.2xlarge", "c5n.4xlarge", "c5n.9xlarge", "c5n.18xlarge", "r5ad.large", "r5ad.xlarge", "r5ad.2xlarge", "r5ad.4xlarge", "r5ad.8xlarge", "r5ad.12xlarge", "r5ad.16xlarge", "r5ad.24xlarge", "c6id.large", "c6id.xlarge", "c6id.2xlarge", "c6id.4xlarge", "c6id.8xlarge", "c6id.12xlarge", "c6id.16xlarge", "c6id.24xlarge", "c6id.32xlarge", "c8g.medium", "c8g.large", "c8g.xlarge", "c8g.2xlarge", "c8g.4xlarge", "c8g.8xlarge", "c8g.12xlarge", "c8g.16xlarge", "c8g.24xlarge", "c8g.48xlarge", "m5ad.large", "m5ad.xlarge", "m5ad.2xlarge", "m5ad.4xlarge", "m5ad.8xlarge", "m5ad.12xlarge", "m5ad.16xlarge", "m5ad.24xlarge", "m5d.large", "m5d.xlarge", "m5d.2xlarge", "m5d.4xlarge", "m5d.8xlarge", "m5d.12xlarge", "m5d.16xlarge", "m5d.24xlarge", "m5dn.large", "m5dn.xlarge", "m5dn.2xlarge", "m5dn.4xlarge", "m5dn.8xlarge", "m5dn.12xlarge", "m5dn.16xlarge", "m5dn.24xlarge", "m5n.large", "m5n.xlarge", "m5n.2xlarge", "m5n.4xlarge", "m5n.8xlarge", "m5n.12xlarge", "m5n.16xlarge", "m5n.24xlarge", "m6id.large", "m6id.xlarge", "m6id.2xlarge", "m6id.4xlarge", "m6id.8xlarge", "m6id.12xlarge", "m6id.16xlarge", "m6id.24xlarge", "m6id.32xlarge", "m6idn.large", "m6idn.xlarge", "m6idn.2xlarge", "m6idn.4xlarge", "m6idn.8xlarge", "m6idn.12xlarge", "m6idn.16xlarge", "m6idn.24xlarge", "m6idn.32xlarge", "m6in.large", "m6in.xlarge", "m6in.2xlarge", "m6in.4xlarge", "m6in.8xlarge", "m6in.12xlarge", "m6in.16xlarge", "m6in.24xlarge", "m6in.32xlarge", "m8g.medium", "m8g.large", "m8g.xlarge", "m8g.2xlarge", "m8g.4xlarge", "m8g.8xlarge", "m8g.12xlarge", "m8g.16xlarge", "m8g.24xlarge", "m8g.48xlarge", "r5dn.large", "r5dn.xlarge", "r5dn.2xlarge", "r5dn.4xlarge", "r5dn.8xlarge", "r5dn.12xlarge", "r5dn.16xlarge", "r5dn.24xlarge", "r5n.large", "r5n.xlarge", "r5n.2xlarge", "r5n.4xlarge", "r5n.8xlarge", "r5n.12xlarge", "r5n.16xlarge", "r5n.24xlarge", "r6a.large", "r6a.xlarge", "r6a.2xlarge", "r6a.4xlarge", "r6a.8xlarge", "r6a.12xlarge", "r6a.16xlarge", "r6a.24xlarge", "r6a.32xlarge", "r6a.48xlarge", "r6id.large", "r6id.xlarge", "r6id.2xlarge", "r6id.4xlarge", "r6id.8xlarge", "r6id.12xlarge", "r6id.16xlarge", "r6id.24xlarge", "r6id.32xlarge", "r6idn.large", "r6idn.xlarge", "r6idn.2xlarge", "r6idn.4xlarge", "r6idn.8xlarge", "r6idn.12xlarge", "r6idn.16xlarge", "r6idn.24xlarge", "r6idn.32xlarge", "r6in.large", "r6in.xlarge", "r6in.2xlarge", "r6in.4xlarge", "r6in.8xlarge", "r6in.12xlarge", "r6in.16xlarge", "r6in.24xlarge", "r6in.32xlarge", "r8g.medium", "r8g.large", "r8g.xlarge", "r8g.2xlarge", "r8g.4xlarge", "r8g.8xlarge", "r8g.12xlarge", "r8g.16xlarge", "r8g.24xlarge", "r8g.48xlarge", "m4.16xlarge", "c6a.32xlarge", "c6a.48xlarge", "c6i.32xlarge", "r6i.24xlarge", "r6i.32xlarge", "c6in.24xlarge", "c6in.32xlarge", "c7a.24xlarge", "c7a.32xlarge", "c7a.48xlarge", "c7i.24xlarge", "c7i.48xlarge", "m6a.24xlarge", "m6a.32xlarge", "m6a.48xlarge", "m6i.24xlarge", "m6i.32xlarge", "m7a.24xlarge", "m7a.32xlarge", "m7a.48xlarge", "m7i.24xlarge", "m7i.48xlarge", "r7a.24xlarge", "r7a.32xlarge", "r7a.48xlarge"
     #   resp.compute.game_lift_service_sdk_endpoint #=> String
     #   resp.compute.game_lift_agent_endpoint #=> String
@@ -8757,8 +8964,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the Amazon GameLift Servers FleetIQ
-    # solution and game server groups.**
+    # **This API works with the following fleet types:** EC2 (FleetIQ)
     #
     # Creates a new game server resource and notifies Amazon GameLift
     # Servers FleetIQ that the game server is ready to host gameplay and
@@ -8846,6 +9052,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Retrieves a fresh set of credentials for use when uploading a new set
     # of game build files to Amazon GameLift Servers's Amazon S3. This is
     # done as part of the build creation process; see [CreateBuild][1].
@@ -8901,6 +9109,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Attempts to retrieve a fleet ID that is associated with an alias.
     # Specify a unique alias identifier.
     #
@@ -8945,8 +9156,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the Amazon GameLift Servers FleetIQ
-    # solution and game server groups.**
+    # **This API works with the following fleet types:** EC2 (FleetIQ)
     #
     # Reinstates activity on a game server group after it has been
     # suspended. A game server group might be suspended by the
@@ -9015,6 +9225,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Retrieves all active game sessions that match a set of search criteria
     # and sorts them into a specified order.
     #
@@ -9250,6 +9463,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Container
+    #
     # Resumes certain types of activity on fleet instances that were
     # suspended with [StopFleetActions][1]. For multi-location fleets, fleet
     # actions are managed separately for each location. Currently, this
@@ -9316,6 +9531,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Makes a request to start a new game session using a game session
     # queue. When processing a placement request, Amazon GameLift Servers
     # looks for the best possible available resource to host the game
@@ -9539,6 +9757,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Finds new players to fill open slots in currently running game
     # sessions. The backfill match process is essentially identical to the
     # process of forming new matches. Backfill requests use the same
@@ -9688,6 +9909,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Uses FlexMatch to create a game match for a group of players based on
     # custom matchmaking rules. With games that use Amazon GameLift Servers
     # managed hosting, this operation also triggers Amazon GameLift Servers
@@ -9802,6 +10026,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Container
+    #
     # Suspends certain types of activity in a fleet location. Currently,
     # this operation is used to stop auto-scaling activity. For
     # multi-location fleets, fleet actions are managed separately for each
@@ -9875,6 +10101,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Cancels a game session placement that's in `PENDING` status. To stop
     # a placement, provide the placement ID value.
     #
@@ -9945,6 +10174,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Cancels a matchmaking ticket or match backfill ticket that is
     # currently being processed. To stop the matchmaking operation, specify
     # the ticket ID. If successful, work on the ticket is stopped, and the
@@ -9989,8 +10221,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the Amazon GameLift Servers FleetIQ
-    # solution and game server groups.**
+    # **This API works with the following fleet types:** EC2 (FleetIQ)
     #
     # Temporarily stops activity on a game server group without terminating
     # instances or the game server group. You can restart activity by
@@ -10067,6 +10298,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Assigns a tag to an Amazon GameLift Servers resource. You can use tags
     # to organize resources, create IAM permissions policies to manage
     # access to groups of resources, customize Amazon Web Services cost
@@ -10140,6 +10374,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Ends a game session that's currently in progress. Use this action to
     # terminate any game session that isn't in `ERROR` status. Terminating
     # a game session is the most efficient way to free up a server process
@@ -10271,6 +10508,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Removes a tag assigned to a Amazon GameLift Servers resource. You can
     # use resource tags to organize Amazon Web Services resources for a
     # range of purposes. This operation handles the permissions necessary to
@@ -10332,10 +10572,14 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Updates properties for an alias. Specify the unique identifier of the
-    # alias to be updated and the new property values. When reassigning an
-    # alias to a new fleet, provide an updated routing strategy. If
-    # successful, the updated alias record is returned.
+    # alias to be updated and the new property values.
+    #
+    # When reassigning an alias to a new fleet, provide an updated routing
+    # strategy. If successful, the updated alias record is returned.
     #
     # **Related actions**
     #
@@ -10398,6 +10642,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Updates metadata in a build resource, including the build name and
     # version. To update the metadata, specify the build ID to update and
     # provide the new values. If successful, a build object containing the
@@ -10446,7 +10692,7 @@ module Aws::GameLift
     #   resp.build.version #=> String
     #   resp.build.status #=> String, one of "INITIALIZED", "READY", "FAILED"
     #   resp.build.size_on_disk #=> Integer
-    #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023"
+    #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX", "AMAZON_LINUX_2", "WINDOWS_2016", "AMAZON_LINUX_2023", "WINDOWS_2022"
     #   resp.build.creation_time #=> Time
     #   resp.build.server_sdk_version #=> String
     #
@@ -10459,10 +10705,21 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** Container
+    #
     # Updates the properties of a managed container fleet. Depending on the
     # properties being updated, this operation might initiate a fleet
     # deployment. You can track deployments for a fleet using
     # [https://docs.aws.amazon.com/gamelift/latest/apireference/API\_DescribeFleetDeployment.html][1].
+    #
+    # <note markdown="1"> A managed fleet's runtime environment, which depends on the fleet's
+    # Amazon Machine Image \{AMI} version, can't be updated. You must
+    # create a new fleet. As a best practice, we recommend replacing your
+    # managed fleets every 30 days to maintain a secure and up-to-date
+    # runtime environment for your hosted game servers. For guidance, see [
+    # Security best practices for Amazon GameLift Servers][2].
+    #
+    #  </note>
     #
     # **Request options**
     #
@@ -10507,6 +10764,7 @@ module Aws::GameLift
     #
     #
     # [1]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetDeployment.html
+    # [2]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/security-best-practices.html
     #
     # @option params [required, String] :fleet_id
     #   A unique identifier for the container fleet to update. You can use
@@ -10699,6 +10957,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** Container
+    #
     # Updates properties in an existing container group definition. This
     # operation doesn't replace the definition. Instead, it creates a new
     # version of the definition and saves it separately. You can access all
@@ -10959,6 +11219,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Updates a fleet's mutable attributes, such as game session protection
     # and resource creation limits.
     #
@@ -10966,13 +11229,23 @@ module Aws::GameLift
     # values that you want to change. If successful, Amazon GameLift Servers
     # returns the identifiers for the updated fleet.
     #
+    # <note markdown="1"> A managed fleet's runtime environment, which depends on the fleet's
+    # Amazon Machine Image \{AMI} version, can't be updated. You must
+    # create a new fleet. As a best practice, we recommend replacing your
+    # managed fleets every 30 days to maintain a secure and up-to-date
+    # runtime environment for your hosted game servers. For guidance, see [
+    # Security best practices for Amazon GameLift Servers][1].
+    #
+    #  </note>
+    #
     # **Learn more**
     #
-    # [Setting up Amazon GameLift Servers fleets][1]
+    # [Setting up Amazon GameLift Servers fleets][2]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+    # [1]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/security-best-practices.html
+    # [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
     #
     # @option params [required, String] :fleet_id
     #   A unique identifier for the fleet to update attribute metadata for.
@@ -11051,6 +11324,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Container
+    #
     # Updates capacity settings for a managed EC2 fleet or managed container
     # fleet. For these fleets, you adjust capacity by changing the number of
     # instances in the fleet. Fleet capacity determines the number of game
@@ -11155,6 +11430,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Container
+    #
     # Updates permissions that allow inbound traffic to connect to game
     # sessions in the fleet.
     #
@@ -11229,8 +11506,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the Amazon GameLift Servers FleetIQ
-    # solution and game server groups.**
+    # **This API works with the following fleet types:** EC2 (FleetIQ)
     #
     # Updates information about a registered game server to help Amazon
     # GameLift Servers FleetIQ track game server availability. This
@@ -11328,8 +11604,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # **This operation is used with the Amazon GameLift Servers FleetIQ
-    # solution and game server groups.**
+    # **This API works with the following fleet types:** EC2 (FleetIQ)
     #
     # Updates Amazon GameLift Servers FleetIQ-specific properties for a game
     # server group. Many Auto Scaling group properties are updated on the
@@ -11460,6 +11735,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Updates the mutable properties of a game session.
     #
     # To update a game session, specify the game session ID and the values
@@ -11562,6 +11840,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Updates the configuration of a game session queue, which determines
     # how the queue processes new game session requests. To update settings,
     # specify the queue name to be updated and provide the new settings.
@@ -11687,6 +11968,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Updates settings for a FlexMatch matchmaking configuration. These
     # changes affect all matches and game sessions that are created after
     # the update. To update settings, specify the configuration name to be
@@ -11872,6 +12156,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Updates the runtime configuration for the specified fleet. The runtime
     # configuration tells Amazon GameLift Servers how to launch server
     # processes on computes in managed EC2 and Anywhere fleets. You can
@@ -11948,6 +12234,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2
+    #
     # Updates Realtime script metadata and content.
     #
     # To update script metadata, specify the script ID and provide updated
@@ -12050,6 +12338,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
+    # **This API works with the following fleet types:** EC2, Anywhere,
+    # Container
+    #
     # Validates the syntax of a matchmaking rule or rule set. This operation
     # checks that the rule set is using syntactically correct JSON and that
     # it conforms to allowed property expressions. To validate syntax,
@@ -12110,7 +12401,7 @@ module Aws::GameLift
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,0 +1,403 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PartnerCentralChannel
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptChannelHandshakeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptChannelHandshakeResponse]
+        def channel_handshake_detail: () -> Types::AcceptChannelHandshakeDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#accept_channel_handshake-instance_method
+      def accept_channel_handshake: (
+                                      catalog: ::String,
+                                      identifier: ::String
+                                    ) -> _AcceptChannelHandshakeResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptChannelHandshakeResponseSuccess
+
+      interface _CancelChannelHandshakeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelChannelHandshakeResponse]
+        def channel_handshake_detail: () -> Types::CancelChannelHandshakeDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#cancel_channel_handshake-instance_method
+      def cancel_channel_handshake: (
+                                      catalog: ::String,
+                                      identifier: ::String
+                                    ) -> _CancelChannelHandshakeResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelChannelHandshakeResponseSuccess
+
+      interface _CreateChannelHandshakeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelHandshakeResponse]
+        def channel_handshake_detail: () -> Types::CreateChannelHandshakeDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#create_channel_handshake-instance_method
+      def create_channel_handshake: (
+                                      handshake_type: ("START_SERVICE_PERIOD" | "REVOKE_SERVICE_PERIOD" | "PROGRAM_MANAGEMENT_ACCOUNT"),
+                                      catalog: ::String,
+                                      associated_resource_identifier: ::String,
+                                      ?payload: {
+                                        start_service_period_payload: {
+                                          program_management_account_identifier: ::String,
+                                          note: ::String?,
+                                          service_period_type: ("MINIMUM_NOTICE_PERIOD" | "FIXED_COMMITMENT_PERIOD"),
+                                          minimum_notice_days: ::String?,
+                                          end_date: ::Time?
+                                        }?,
+                                        revoke_service_period_payload: {
+                                          program_management_account_identifier: ::String,
+                                          note: ::String?
+                                        }?
+                                      },
+                                      ?client_token: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        },
+                                      ]
+                                    ) -> _CreateChannelHandshakeResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelHandshakeResponseSuccess
+
+      interface _CreateProgramManagementAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProgramManagementAccountResponse]
+        def program_management_account_detail: () -> Types::CreateProgramManagementAccountDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#create_program_management_account-instance_method
+      def create_program_management_account: (
+                                               catalog: ::String,
+                                               program: ("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER"),
+                                               display_name: ::String,
+                                               account_id: ::String,
+                                               ?client_token: ::String,
+                                               ?tags: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String
+                                                 },
+                                               ]
+                                             ) -> _CreateProgramManagementAccountResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProgramManagementAccountResponseSuccess
+
+      interface _CreateRelationshipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRelationshipResponse]
+        def relationship_detail: () -> Types::CreateRelationshipDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#create_relationship-instance_method
+      def create_relationship: (
+                                 catalog: ::String,
+                                 association_type: ("DOWNSTREAM_SELLER" | "END_CUSTOMER" | "INTERNAL"),
+                                 program_management_account_identifier: ::String,
+                                 associated_account_id: ::String,
+                                 display_name: ::String,
+                                 ?resale_account_model: ("DISTRIBUTOR" | "END_CUSTOMER" | "SOLUTION_PROVIDER"),
+                                 sector: ("COMMERCIAL" | "GOVERNMENT" | "GOVERNMENT_EXCEPTION"),
+                                 ?client_token: ::String,
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ],
+                                 ?requested_support_plan: {
+                                   resold_business: {
+                                     coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY")
+                                   }?,
+                                   resold_enterprise: {
+                                     coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
+                                     tam_location: ::String,
+                                     charge_account_id: ::String?
+                                   }?,
+                                   partner_led_support: {
+                                     coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
+                                     provider: ("DISTRIBUTOR" | "DISTRIBUTION_SELLER")?,
+                                     tam_location: ::String
+                                   }?
+                                 }
+                               ) -> _CreateRelationshipResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRelationshipResponseSuccess
+
+      interface _DeleteProgramManagementAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProgramManagementAccountResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#delete_program_management_account-instance_method
+      def delete_program_management_account: (
+                                               catalog: ::String,
+                                               identifier: ::String,
+                                               ?client_token: ::String
+                                             ) -> _DeleteProgramManagementAccountResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProgramManagementAccountResponseSuccess
+
+      interface _DeleteRelationshipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRelationshipResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#delete_relationship-instance_method
+      def delete_relationship: (
+                                 catalog: ::String,
+                                 identifier: ::String,
+                                 program_management_account_identifier: ::String,
+                                 ?client_token: ::String
+                               ) -> _DeleteRelationshipResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRelationshipResponseSuccess
+
+      interface _GetRelationshipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRelationshipResponse]
+        def relationship_detail: () -> Types::RelationshipDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#get_relationship-instance_method
+      def get_relationship: (
+                              catalog: ::String,
+                              program_management_account_identifier: ::String,
+                              identifier: ::String
+                            ) -> _GetRelationshipResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRelationshipResponseSuccess
+
+      interface _ListChannelHandshakesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelHandshakesResponse]
+        def items: () -> ::Array[Types::ChannelHandshakeSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#list_channel_handshakes-instance_method
+      def list_channel_handshakes: (
+                                     handshake_type: ("START_SERVICE_PERIOD" | "REVOKE_SERVICE_PERIOD" | "PROGRAM_MANAGEMENT_ACCOUNT"),
+                                     catalog: ::String,
+                                     participant_type: ("SENDER" | "RECEIVER"),
+                                     ?max_results: ::Integer,
+                                     ?statuses: Array[("PENDING" | "ACCEPTED" | "REJECTED" | "CANCELED" | "EXPIRED")],
+                                     ?associated_resource_identifiers: Array[::String],
+                                     ?handshake_type_filters: {
+                                       start_service_period_type_filters: {
+                                         service_period_types: Array[("MINIMUM_NOTICE_PERIOD" | "FIXED_COMMITMENT_PERIOD")]?
+                                       }?,
+                                       revoke_service_period_type_filters: {
+                                         service_period_types: Array[("MINIMUM_NOTICE_PERIOD" | "FIXED_COMMITMENT_PERIOD")]?
+                                       }?,
+                                       program_management_account_type_filters: {
+                                         programs: Array[("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER")]?
+                                       }?
+                                     },
+                                     ?handshake_type_sort: {
+                                       start_service_period_type_sort: {
+                                         sort_order: ("Ascending" | "Descending"),
+                                         sort_by: ("UpdatedAt")
+                                       }?,
+                                       revoke_service_period_type_sort: {
+                                         sort_order: ("Ascending" | "Descending"),
+                                         sort_by: ("UpdatedAt")
+                                       }?,
+                                       program_management_account_type_sort: {
+                                         sort_order: ("Ascending" | "Descending"),
+                                         sort_by: ("UpdatedAt")
+                                       }?
+                                     },
+                                     ?next_token: ::String
+                                   ) -> _ListChannelHandshakesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelHandshakesResponseSuccess
+
+      interface _ListProgramManagementAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProgramManagementAccountsResponse]
+        def items: () -> ::Array[Types::ProgramManagementAccountSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#list_program_management_accounts-instance_method
+      def list_program_management_accounts: (
+                                              catalog: ::String,
+                                              ?max_results: ::Integer,
+                                              ?display_names: Array[::String],
+                                              ?programs: Array[("SOLUTION_PROVIDER" | "DISTRIBUTION" | "DISTRIBUTION_SELLER")],
+                                              ?account_ids: Array[::String],
+                                              ?statuses: Array[("PENDING" | "ACTIVE" | "INACTIVE")],
+                                              ?sort: {
+                                                sort_order: ("Ascending" | "Descending"),
+                                                sort_by: ("UpdatedAt")
+                                              },
+                                              ?next_token: ::String
+                                            ) -> _ListProgramManagementAccountsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProgramManagementAccountsResponseSuccess
+
+      interface _ListRelationshipsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRelationshipsResponse]
+        def items: () -> ::Array[Types::RelationshipSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#list_relationships-instance_method
+      def list_relationships: (
+                                catalog: ::String,
+                                ?max_results: ::Integer,
+                                ?associated_account_ids: Array[::String],
+                                ?association_types: Array[("DOWNSTREAM_SELLER" | "END_CUSTOMER" | "INTERNAL")],
+                                ?display_names: Array[::String],
+                                ?program_management_account_identifiers: Array[::String],
+                                ?sort: {
+                                  sort_order: ("Ascending" | "Descending"),
+                                  sort_by: ("UpdatedAt")
+                                },
+                                ?next_token: ::String
+                              ) -> _ListRelationshipsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRelationshipsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RejectChannelHandshakeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectChannelHandshakeResponse]
+        def channel_handshake_detail: () -> Types::RejectChannelHandshakeDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#reject_channel_handshake-instance_method
+      def reject_channel_handshake: (
+                                      catalog: ::String,
+                                      identifier: ::String
+                                    ) -> _RejectChannelHandshakeResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectChannelHandshakeResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateProgramManagementAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProgramManagementAccountResponse]
+        def program_management_account_detail: () -> Types::UpdateProgramManagementAccountDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#update_program_management_account-instance_method
+      def update_program_management_account: (
+                                               catalog: ::String,
+                                               identifier: ::String,
+                                               ?revision: ::String,
+                                               ?display_name: ::String
+                                             ) -> _UpdateProgramManagementAccountResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProgramManagementAccountResponseSuccess
+
+      interface _UpdateRelationshipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRelationshipResponse]
+        def relationship_detail: () -> Types::UpdateRelationshipDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PartnerCentralChannel/Client.html#update_relationship-instance_method
+      def update_relationship: (
+                                 catalog: ::String,
+                                 identifier: ::String,
+                                 program_management_account_identifier: ::String,
+                                 ?revision: ::String,
+                                 ?display_name: ::String,
+                                 ?requested_support_plan: {
+                                   resold_business: {
+                                     coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY")
+                                   }?,
+                                   resold_enterprise: {
+                                     coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
+                                     tam_location: ::String,
+                                     charge_account_id: ::String?
+                                   }?,
+                                   partner_led_support: {
+                                     coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
+                                     provider: ("DISTRIBUTOR" | "DISTRIBUTION_SELLER")?,
+                                     tam_location: ::String
+                                   }?
+                                 }
+                               ) -> _UpdateRelationshipResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRelationshipResponseSuccess
+    end
+  end
+end
+

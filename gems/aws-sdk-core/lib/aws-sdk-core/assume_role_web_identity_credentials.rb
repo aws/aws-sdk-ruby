@@ -9,11 +9,11 @@ module Aws
   # {Aws::STS::Client#assume_role_with_web_identity}.
   #
   #     role_credentials = Aws::AssumeRoleWebIdentityCredentials.new(
-  #       client: Aws::STS::Client.new(...),
+  #       client: Aws::STS::Client.new(sts_options),
   #       role_arn: "linked::account::arn",
   #       web_identity_token_file: "/path/to/token/file",
   #       role_session_name: "session-name"
-  #       ...
+  #       # ...
   #     )
   #     ec2 = Aws::EC2::Client.new(credentials: role_credentials)
   #

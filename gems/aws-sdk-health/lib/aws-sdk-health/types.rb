@@ -76,7 +76,8 @@ module Aws::Health
     #
     # @!attribute [rw] status_code
     #   The most recent status of the entity affected by the event. The
-    #   possible values are `IMPAIRED`, `UNIMPAIRED`, and `UNKNOWN`.
+    #   possible values are `IMPAIRED`, `UNIMPAIRED`, `UNKNOWN`, `PENDING`,
+    #   and `RESOLVED`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -944,6 +945,26 @@ module Aws::Health
     #     you specified in the request is invalid or doesn't exist.
     #   @return [String]
     #
+    # @!attribute [rw] actionability
+    #   The actionability classification of the event. Possible values are
+    #   `ACTION_REQUIRED`, `ACTION_MAY_BE_REQUIRED` and `INFORMATIONAL`.
+    #   Events with `ACTION_REQUIRED` actionability require customer action
+    #   to resolve or mitigate the event. Events with
+    #   `ACTION_MAY_BE_REQUIRED` actionability indicates that the current
+    #   status is unknown or conditional and inspection is needed to
+    #   determine if action is required. Events with `INFORMATIONAL`
+    #   actionability are provided for awareness and do not require
+    #   immediate action.
+    #   @return [String]
+    #
+    # @!attribute [rw] personas
+    #   A list of persona classifications that indicate the target audience
+    #   for the event. Possible values are `OPERATIONS`, `SECURITY`, and
+    #   `BILLING`. Events can be associated with multiple personas to
+    #   indicate relevance to different teams or roles within an
+    #   organization.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/Event AWS API Documentation
     #
     class Event < Struct.new(
@@ -957,7 +978,9 @@ module Aws::Health
       :end_time,
       :last_updated_time,
       :status_code,
-      :event_scope_code)
+      :event_scope_code,
+      :actionability,
+      :personas)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1113,6 +1136,13 @@ module Aws::Health
     # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEvents.html
     # [2]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventAggregates.html
     #
+    # @!attribute [rw] actionabilities
+    #   A list of actionability values to filter events. Use this to filter
+    #   events based on whether they require action (`ACTION_REQUIRED`), may
+    #   require action (`ACTION_MAY_BE_REQUIRED`) or are informational
+    #   (`INFORMATIONAL`).
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] event_arns
     #   A list of event ARNs (unique identifiers). For example:
     #   `"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456",
@@ -1176,9 +1206,16 @@ module Aws::Health
     #   A list of event status codes.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] personas
+    #   A list of persona values to filter events. Use this to filter events
+    #   based on their target audience: `OPERATIONS`, `SECURITY`, or
+    #   `BILLING`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventFilter AWS API Documentation
     #
     class EventFilter < Struct.new(
+      :actionabilities,
       :event_arns,
       :event_type_codes,
       :services,
@@ -1191,7 +1228,8 @@ module Aws::Health
       :entity_values,
       :event_type_categories,
       :tags,
-      :event_status_codes)
+      :event_status_codes,
+      :personas)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1233,12 +1271,34 @@ module Aws::Health
     #   `investigation` value isn't supported at this time.
     #   @return [String]
     #
+    # @!attribute [rw] actionability
+    #   The actionability classification of the event. Possible values are
+    #   `ACTION_REQUIRED`, `ACTION_MAY_BE_REQUIRED` and `INFORMATIONAL`.
+    #   Events with `ACTION_REQUIRED` actionability require customer action
+    #   to resolve or mitigate the event. Events with
+    #   `ACTION_MAY_BE_REQUIRED` actionability indicates that the current
+    #   status is unknown or conditional and inspection is needed to
+    #   determine if action is required. Events with `INFORMATIONAL`
+    #   actionability are provided for awareness and do not require
+    #   immediate action.
+    #   @return [String]
+    #
+    # @!attribute [rw] personas
+    #   A list of persona classifications that indicate the target audience
+    #   for the event. Possible values are `OPERATIONS`, `SECURITY`, and
+    #   `BILLING`. Events can be associated with multiple personas to
+    #   indicate relevance to different teams or roles within an
+    #   organization.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventType AWS API Documentation
     #
     class EventType < Struct.new(
       :service,
       :code,
-      :category)
+      :category,
+      :actionability,
+      :personas)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1265,12 +1325,25 @@ module Aws::Health
     #   `investigation` value isn't supported at this time.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] actionabilities
+    #   A list of actionability values to filter event types. Possible
+    #   values are `ACTION_REQUIRED`, `ACTION_MAY_BE_REQUIRED` and
+    #   `INFORMATIONAL`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] personas
+    #   A list of persona classifications to filter event types. Possible
+    #   values are `OPERATIONS`, `SECURITY`, and `BILLING`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventTypeFilter AWS API Documentation
     #
     class EventTypeFilter < Struct.new(
       :event_type_codes,
       :services,
-      :event_type_categories)
+      :event_type_categories,
+      :actionabilities,
+      :personas)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1447,6 +1520,26 @@ module Aws::Health
     #   `closed`, and `upcoming`.
     #   @return [String]
     #
+    # @!attribute [rw] actionability
+    #   The actionability classification of the event. Possible values are
+    #   `ACTION_REQUIRED`, `ACTION_MAY_BE_REQUIRED` and `INFORMATIONAL`.
+    #   Events with `ACTION_REQUIRED` actionability require customer action
+    #   to resolve or mitigate the event. Events with
+    #   `ACTION_MAY_BE_REQUIRED` actionability indicates that the current
+    #   status is unknown or conditional and inspection is needed to
+    #   determine if action is required. Events with `INFORMATIONAL`
+    #   actionability are provided for awareness and do not require
+    #   immediate action.
+    #   @return [String]
+    #
+    # @!attribute [rw] personas
+    #   A list of persona classifications that indicate the target audience
+    #   for the event. Possible values are `OPERATIONS`, `SECURITY`, and
+    #   `BILLING`. Events can be associated with multiple personas to
+    #   indicate relevance to different teams or roles within an
+    #   organization.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/OrganizationEvent AWS API Documentation
     #
     class OrganizationEvent < Struct.new(
@@ -1459,7 +1552,9 @@ module Aws::Health
       :start_time,
       :end_time,
       :last_updated_time,
-      :status_code)
+      :status_code,
+      :actionability,
+      :personas)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1602,6 +1697,13 @@ module Aws::Health
     #
     # [1]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html
     #
+    # @!attribute [rw] actionabilities
+    #   A list of actionability values to filter events. Use this to filter
+    #   events based on whether they require action (`ACTION_REQUIRED`), may
+    #   require action (`ACTION_MAY_BE_REQUIRED`) or are informational
+    #   (`INFORMATIONAL`).
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] event_type_codes
     #   A list of unique identifiers for event types. For example,
     #   `"AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED".`
@@ -1685,9 +1787,16 @@ module Aws::Health
     #   A list of event status codes.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] personas
+    #   A list of persona values to filter events. Use this to filter events
+    #   based on their target audience: `OPERATIONS`, `SECURITY`, or
+    #   `BILLING`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/OrganizationEventFilter AWS API Documentation
     #
     class OrganizationEventFilter < Struct.new(
+      :actionabilities,
       :event_type_codes,
       :aws_account_ids,
       :services,
@@ -1698,7 +1807,8 @@ module Aws::Health
       :entity_arns,
       :entity_values,
       :event_type_categories,
-      :event_status_codes)
+      :event_status_codes,
+      :personas)
       SENSITIVE = []
       include Aws::Structure
     end

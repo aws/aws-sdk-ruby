@@ -8,7 +8,7 @@
     "CreateProfile": "<p>Creates the local or partner profile to use for AS2 transfers.</p>",
     "CreateServer": "<p>Instantiates an auto-scaling virtual server based on the selected file transfer protocol in Amazon Web Services. When you make updates to your file transfer protocol-enabled server or when you work with users, use the service-generated <code>ServerId</code> property that is assigned to the newly created server.</p>",
     "CreateUser": "<p>Creates a user and associates them with an existing file transfer protocol-enabled server. You can only create and associate users with servers that have the <code>IdentityProviderType</code> set to <code>SERVICE_MANAGED</code>. Using parameters for <code>CreateUser</code>, you can specify the user name, set the home directory, store the user's public key, and assign the user's Identity and Access Management (IAM) role. You can also optionally add a session policy, and assign metadata with tags that can be used to group and search for users.</p>",
-    "CreateWebApp": "<p>Creates a web app based on specified parameters, and returns the ID for the new web app.</p>",
+    "CreateWebApp": "<p>Creates a web app based on specified parameters, and returns the ID for the new web app. You can configure the web app to be publicly accessible or hosted within a VPC.</p> <p>For more information about using VPC endpoints with Transfer Family, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html\">Create a Transfer Family web app in a VPC</a>.</p>",
     "CreateWorkflow": "<p> Allows you to create a workflow with specified steps and step details the workflow invokes after file transfer completes. After creating a workflow, you can associate the workflow created with any transfer servers by specifying the <code>workflow-details</code> field in <code>CreateServer</code> and <code>UpdateServer</code> operations. </p>",
     "DeleteAccess": "<p>Allows you to delete the access specified in the <code>ServerID</code> and <code>ExternalID</code> parameters.</p>",
     "DeleteAgreement": "<p>Delete the agreement that's specified in the provided <code>AgreementId</code>.</p>",
@@ -24,7 +24,7 @@
     "DeleteWorkflow": "<p>Deletes the specified workflow.</p>",
     "DescribeAccess": "<p>Describes the access that is assigned to the specific file transfer protocol-enabled server, as identified by its <code>ServerId</code> property and its <code>ExternalId</code>.</p> <p>The response from this call returns the properties of the access that is associated with the <code>ServerId</code> value that was specified.</p>",
     "DescribeAgreement": "<p>Describes the agreement that's identified by the <code>AgreementId</code>.</p>",
-    "DescribeCertificate": "<p>Describes the certificate that's identified by the <code>CertificateId</code>.</p>",
+    "DescribeCertificate": "<p>Describes the certificate that's identified by the <code>CertificateId</code>.</p> <note> <p>Transfer Family automatically publishes a Amazon CloudWatch metric called <code>DaysUntilExpiry</code> for imported certificates. This metric tracks the number of days until the certificate expires based on the <code>InactiveDate</code>. The metric is available in the <code>AWS/Transfer</code> namespace and includes the <code>CertificateId</code> as a dimension.</p> </note>",
     "DescribeConnector": "<p>Describes the connector that's identified by the <code>ConnectorId.</code> </p>",
     "DescribeExecution": "<p>You can use <code>DescribeExecution</code> to check the details of the execution of the specified workflow.</p> <note> <p>This API call only returns details for in-progress workflows.</p> <p> If you provide an ID for an execution that is not in progress, or if the execution doesn't match the specified workflow ID, you receive a <code>ResourceNotFound</code> exception.</p> </note>",
     "DescribeHostKey": "<p>Returns the details of the host key that's specified by the <code>HostKeyId</code> and <code>ServerId</code>.</p>",
@@ -32,10 +32,10 @@
     "DescribeSecurityPolicy": "<p>Describes the security policy that is attached to your server or SFTP connector. The response contains a description of the security policy's properties. For more information about security policies, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html\">Working with security policies for servers</a> or <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html\">Working with security policies for SFTP connectors</a>.</p>",
     "DescribeServer": "<p>Describes a file transfer protocol-enabled server that you specify by passing the <code>ServerId</code> parameter.</p> <p>The response contains a description of a server's properties. When you set <code>EndpointType</code> to VPC, the response will contain the <code>EndpointDetails</code>.</p>",
     "DescribeUser": "<p>Describes the user assigned to the specific file transfer protocol-enabled server, as identified by its <code>ServerId</code> property.</p> <p>The response from this call returns the properties of the user associated with the <code>ServerId</code> value that was specified.</p>",
-    "DescribeWebApp": "<p>Describes the web app that's identified by <code>WebAppId</code>.</p>",
+    "DescribeWebApp": "<p>Describes the web app that's identified by <code>WebAppId</code>. The response includes endpoint configuration details such as whether the web app is publicly accessible or VPC hosted.</p> <p>For more information about using VPC endpoints with Transfer Family, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html\">Create a Transfer Family web app in a VPC</a>.</p>",
     "DescribeWebAppCustomization": "<p>Describes the web app customization object that's identified by <code>WebAppId</code>.</p>",
     "DescribeWorkflow": "<p>Describes the specified workflow.</p>",
-    "ImportCertificate": "<p>Imports the signing and encryption certificates that you need to create local (AS2) profiles and partner profiles.</p> <p>You can import both the certificate and its chain in the <code>Certificate</code> parameter.</p> <note> <p>If you use the <code>Certificate</code> parameter to upload both the certificate and its chain, don't use the <code>CertificateChain</code> parameter.</p> </note>",
+    "ImportCertificate": "<p>Imports the signing and encryption certificates that you need to create local (AS2) profiles and partner profiles.</p> <p>You can import both the certificate and its chain in the <code>Certificate</code> parameter.</p> <p>After importing a certificate, Transfer Family automatically creates a Amazon CloudWatch metric called <code>DaysUntilExpiry</code> that tracks the number of days until the certificate expires. The metric is based on the <code>InactiveDate</code> parameter and is published daily in the <code>AWS/Transfer</code> namespace.</p> <important> <p>It can take up to a full day after importing a certificate for Transfer Family to emit the <code>DaysUntilExpiry</code> metric to your account.</p> </important> <note> <p>If you use the <code>Certificate</code> parameter to upload both the certificate and its chain, don't use the <code>CertificateChain</code> parameter.</p> </note> <p> <b>CloudWatch monitoring</b> </p> <p>The <code>DaysUntilExpiry</code> metric includes the following specifications:</p> <ul> <li> <p> <b>Units:</b> Count (days)</p> </li> <li> <p> <b>Dimensions:</b> <code>CertificateId</code> (always present), <code>Description</code> (if provided during certificate import)</p> </li> <li> <p> <b>Statistics:</b> Minimum, Maximum, Average</p> </li> <li> <p> <b>Frequency:</b> Published daily</p> </li> </ul>",
     "ImportHostKey": "<p>Adds a host key to the server that's specified by the <code>ServerId</code> parameter.</p>",
     "ImportSshPublicKey": "<p>Adds a Secure Shell (SSH) public key to a Transfer Family user identified by a <code>UserName</code> value assigned to the specific file transfer protocol-enabled server, identified by <code>ServerId</code>.</p> <p>The response returns the <code>UserName</code> value, the <code>ServerId</code> value, and the name of the <code>SshPublicKeyId</code>.</p>",
     "ListAccesses": "<p>Lists the details for all the accesses you have on your server.</p>",
@@ -50,7 +50,7 @@
     "ListServers": "<p>Lists the file transfer protocol-enabled servers that are associated with your Amazon Web Services account.</p>",
     "ListTagsForResource": "<p>Lists all of the tags associated with the Amazon Resource Name (ARN) that you specify. The resource can be a user, server, or role.</p>",
     "ListUsers": "<p>Lists the users for a file transfer protocol-enabled server that you specify by passing the <code>ServerId</code> parameter.</p>",
-    "ListWebApps": "<p>Lists all web apps associated with your Amazon Web Services account for your current region.</p>",
+    "ListWebApps": "<p>Lists all web apps associated with your Amazon Web Services account for your current region. The response includes the endpoint type for each web app, showing whether it is publicly accessible or VPC hosted.</p> <p>For more information about using VPC endpoints with Transfer Family, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html\">Create a Transfer Family web app in a VPC</a>.</p>",
     "ListWorkflows": "<p>Lists all workflows associated with your Amazon Web Services account for your current region.</p>",
     "SendWorkflowStepState": "<p>Sends a callback for asynchronous custom steps.</p> <p> The <code>ExecutionId</code>, <code>WorkflowId</code>, and <code>Token</code> are passed to the target resource during execution of a custom step of a workflow. You must include those with their callback as well as providing a status. </p>",
     "StartDirectoryListing": "<p>Retrieves a list of the contents of a directory from a remote SFTP server. You specify the connector ID, the output path, and the remote directory path. You can also specify the optional <code>MaxItems</code> value to control the maximum number of items that are listed from the remote directory. This API returns a list of all files and directories in the remote directory (up to the maximum value), but does not return files or folders in sub-directories. That is, it only returns a list of files and directories one-level deep.</p> <p>After you receive the listing file, you can provide the files that you want to transfer to the <code>RetrieveFilePaths</code> parameter of the <code>StartFileTransfer</code> API call.</p> <p>The naming convention for the output file is <code> <i>connector-ID</i>-<i>listing-ID</i>.json</code>. The output file contains the following information:</p> <ul> <li> <p> <code>filePath</code>: the complete path of a remote file, relative to the directory of the listing request for your SFTP connector on the remote server.</p> </li> <li> <p> <code>modifiedTimestamp</code>: the last time the file was modified, in UTC time format. This field is optional. If the remote file attributes don't contain a timestamp, it is omitted from the file listing.</p> </li> <li> <p> <code>size</code>: the size of the file, in bytes. This field is optional. If the remote file attributes don't contain a file size, it is omitted from the file listing.</p> </li> <li> <p> <code>path</code>: the complete path of a remote directory, relative to the directory of the listing request for your SFTP connector on the remote server.</p> </li> <li> <p> <code>truncated</code>: a flag indicating whether the list output contains all of the items contained in the remote directory or not. If your <code>Truncated</code> output value is true, you can increase the value provided in the optional <code>max-items</code> input attribute to be able to list more items (up to the maximum allowed list size of 10,000 items).</p> </li> </ul>",
@@ -71,14 +71,13 @@
     "UpdateProfile": "<p>Updates some of the parameters for an existing profile. Provide the <code>ProfileId</code> for the profile that you want to update, along with the new values for the parameters to update.</p>",
     "UpdateServer": "<p>Updates the file transfer protocol-enabled server's properties after that server has been created.</p> <p>The <code>UpdateServer</code> call returns the <code>ServerId</code> of the server you updated.</p>",
     "UpdateUser": "<p>Assigns new properties to a user. Parameters you pass modify any or all of the following: the home directory, role, and policy for the <code>UserName</code> and <code>ServerId</code> you specify.</p> <p>The response returns the <code>ServerId</code> and the <code>UserName</code> for the updated user.</p> <p>In the console, you can select <i>Restricted</i> when you create or update a user. This ensures that the user can't access anything outside of their home directory. The programmatic way to configure this behavior is to update the user. Set their <code>HomeDirectoryType</code> to <code>LOGICAL</code>, and specify <code>HomeDirectoryMappings</code> with <code>Entry</code> as root (<code>/</code>) and <code>Target</code> as their home directory.</p> <p>For example, if the user's home directory is <code>/test/admin-user</code>, the following command updates the user so that their configuration in the console shows the <i>Restricted</i> flag as selected.</p> <p> <code> aws transfer update-user --server-id &lt;server-id&gt; --user-name admin-user --home-directory-type LOGICAL --home-directory-mappings \"[{\\\"Entry\\\":\\\"/\\\", \\\"Target\\\":\\\"/test/admin-user\\\"}]\"</code> </p>",
-    "UpdateWebApp": "<p>Assigns new properties to a web app. You can modify the access point, identity provider details, and the web app units.</p>",
+    "UpdateWebApp": "<p>Assigns new properties to a web app. You can modify the access point, identity provider details, endpoint configuration, and the web app units.</p> <p>For more information about using VPC endpoints with Transfer Family, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html\">Create a Transfer Family web app in a VPC</a>.</p>",
     "UpdateWebAppCustomization": "<p>Assigns new customization properties to a web app. You can modify the icon file, logo file, and title.</p>"
   },
   "shapes": {
     "AccessDeniedException": {
       "base": "<p>You do not have sufficient access to perform this action.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "AddressAllocationId": {
       "base": null,
@@ -276,7 +275,24 @@
     },
     "ConflictException": {
       "base": "<p>This exception is thrown when the <code>UpdateServer</code> is called for a file transfer protocol-enabled server that has VPC as the endpoint type and the server's <code>VpcEndpointID</code> is not in the available state.</p>",
+      "refs": {}
+    },
+    "ConnectorEgressConfig": {
+      "base": "<p>Configuration structure that defines how traffic is routed from the connector to the SFTP server. Contains VPC Lattice settings when using VPC_LATTICE egress type for private connectivity through customer VPCs.</p>",
       "refs": {
+        "CreateConnectorRequest$EgressConfig": "<p>Specifies the egress configuration for the connector, which determines how traffic is routed from the connector to the SFTP server. When set to VPC, enables routing through customer VPCs using VPC_LATTICE for private connectivity.</p>"
+      }
+    },
+    "ConnectorEgressType": {
+      "base": null,
+      "refs": {
+        "DescribedConnector$EgressType": "<p>Type of egress configuration for the connector. SERVICE_MANAGED uses Transfer Family managed NAT gateways, while VPC_LATTICE routes traffic through customer VPCs using VPC Lattice.</p>"
+      }
+    },
+    "ConnectorErrorMessage": {
+      "base": null,
+      "refs": {
+        "DescribedConnector$ErrorMessage": "<p>Error message providing details when the connector is in ERRORED status. Contains information to help troubleshoot connector creation or operation failures.</p>"
       }
     },
     "ConnectorFileTransferResult": {
@@ -318,6 +334,18 @@
         "UpdateConnectorRequest$SecurityPolicyName": "<p>Specifies the name of the security policy for the connector.</p>"
       }
     },
+    "ConnectorStatus": {
+      "base": null,
+      "refs": {
+        "DescribedConnector$Status": "<p>Current status of the connector. PENDING indicates creation/update in progress, ACTIVE means ready for operations, and ERRORED indicates a failure requiring attention.</p>"
+      }
+    },
+    "ConnectorVpcLatticeEgressConfig": {
+      "base": "<p>VPC_LATTICE egress configuration that specifies the Resource Configuration ARN and port for connecting to SFTP servers through customer VPCs. Requires a valid Resource Configuration with appropriate network access.</p>",
+      "refs": {
+        "ConnectorEgressConfig$VpcLattice": "<p>VPC_LATTICE configuration for routing connector traffic through customer VPCs. Enables private connectivity to SFTP servers without requiring public internet access or complex network configurations.</p>"
+      }
+    },
     "CopyStepDetails": {
       "base": "<p>Each step type has its own <code>StepDetails</code> structure.</p>",
       "refs": {
@@ -326,83 +354,67 @@
     },
     "CreateAccessRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateAccessResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateAgreementRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateAgreementResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateConnectorRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateConnectorResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateProfileRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateProfileResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateServerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateServerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateUserRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateUserResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateWebAppRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateWebAppResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateWorkflowRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateWorkflowResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CustomDirectoriesType": {
       "base": "<p>Contains Amazon S3 locations for storing specific types of AS2 message files.</p>",
@@ -452,28 +464,23 @@
     },
     "DeleteAccessRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteAgreementRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteCertificateRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteConnectorRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteHostKeyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteId": {
       "base": null,
@@ -483,18 +490,15 @@
     },
     "DeleteProfileRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteServerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteSshPublicKeyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteStepDetails": {
       "base": "<p>The name of the step, used to identify the delete step.</p>",
@@ -504,153 +508,123 @@
     },
     "DeleteUserRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteWebAppCustomizationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteWebAppRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteWorkflowRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeAccessRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeAccessResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeAgreementRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeAgreementResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeCertificateRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeCertificateResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeConnectorRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeConnectorResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeExecutionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeExecutionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeHostKeyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeHostKeyResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeProfileRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeProfileResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeSecurityPolicyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeSecurityPolicyResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeServerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeServerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeUserRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeUserResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeWebAppCustomizationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeWebAppCustomizationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeWebAppRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeWebAppResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeWorkflowRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribeWorkflowResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DescribedAccess": {
       "base": "<p>Describes the properties of the access that was specified.</p>",
@@ -674,6 +648,18 @@
       "base": "<p>Describes the parameters for the connector, as identified by the <code>ConnectorId</code>.</p>",
       "refs": {
         "DescribeConnectorResponse$Connector": "<p>The structure that contains the details of the connector.</p>"
+      }
+    },
+    "DescribedConnectorEgressConfig": {
+      "base": "<p>Response structure containing the current egress configuration details for the connector. Shows how traffic is currently routed from the connector to the SFTP server.</p>",
+      "refs": {
+        "DescribedConnector$EgressConfig": "<p>Current egress configuration of the connector, showing how traffic is routed to the SFTP server. Contains VPC Lattice settings when using VPC_LATTICE egress type.</p> <p>When using the VPC_LATTICE egress type, Transfer Family uses a managed Service Network to simplify the resource sharing process.</p>"
+      }
+    },
+    "DescribedConnectorVpcLatticeEgressConfig": {
+      "base": "<p>VPC_LATTICE egress configuration details in the response, containing the Resource Configuration ARN and port number currently configured for the connector.</p>",
+      "refs": {
+        "DescribedConnectorEgressConfig$VpcLattice": "<p>VPC_LATTICE configuration details in the response, showing the current Resource Configuration ARN and port settings for VPC-based connectivity.</p>"
       }
     },
     "DescribedExecution": {
@@ -730,10 +716,22 @@
         "DescribeWebAppCustomizationResponse$WebAppCustomization": "<p>Returns a structure that contains the details of the web app customizations.</p>"
       }
     },
+    "DescribedWebAppEndpointDetails": {
+      "base": "<p>Contains the endpoint configuration details for a web app, including VPC configuration when the endpoint is hosted within a VPC.</p>",
+      "refs": {
+        "DescribedWebApp$DescribedEndpointDetails": "<p>The endpoint configuration details for the web app, including VPC settings if the endpoint is hosted within a VPC.</p>"
+      }
+    },
     "DescribedWebAppIdentityProviderDetails": {
       "base": "<p>Returns a structure that contains the identity provider details for your web app.</p>",
       "refs": {
         "DescribedWebApp$DescribedIdentityProviderDetails": "<p>A structure that contains the details for the identity provider used by the web app.</p>"
+      }
+    },
+    "DescribedWebAppVpcConfig": {
+      "base": "<p>Contains the VPC configuration details for a web app endpoint, including the VPC identifier, subnet IDs, and VPC endpoint ID used for hosting the endpoint.</p>",
+      "refs": {
+        "DescribedWebAppEndpointDetails$Vpc": "<p>The VPC configuration details when the web app endpoint is hosted within a VPC. This includes the VPC ID, subnet IDs, and VPC endpoint ID.</p>"
       }
     },
     "DescribedWorkflow": {
@@ -764,7 +762,7 @@
     "DirectoryListingOptimization": {
       "base": "<p>Indicates whether optimization to directory listing on S3 servers is used. Disabled by default for compatibility.</p>",
       "refs": {
-        "S3StorageOptions$DirectoryListingOptimization": "<p>Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default.</p> <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code> <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>"
+        "S3StorageOptions$DirectoryListingOptimization": "<p>Specifies whether or not performance for your Amazon S3 directories is optimized.</p> <ul> <li> <p>If using the console, this is enabled by default.</p> </li> <li> <p>If using the API or CLI, this is disabled by default.</p> </li> </ul> <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code> <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>"
       }
     },
     "Domain": {
@@ -1070,38 +1068,33 @@
       "refs": {
         "CreateServerRequest$IdentityProviderType": "<p>The mode of authentication for a server. The default value is <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within the Transfer Family service.</p> <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to provide a Directory ID by using the <code>IdentityProviderDetails</code> parameter.</p> <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The <code>API_GATEWAY</code> setting requires you to provide an Amazon API Gateway endpoint URL to call for authentication by using the <code>IdentityProviderDetails</code> parameter.</p> <p>Use the <code>AWS_LAMBDA</code> value to directly use an Lambda function as your identity provider. If you choose this value, you must specify the ARN for the Lambda function in the <code>Function</code> parameter for the <code>IdentityProviderDetails</code> data type.</p>",
         "DescribedServer$IdentityProviderType": "<p>The mode of authentication for a server. The default value is <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within the Transfer Family service.</p> <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to provide a Directory ID by using the <code>IdentityProviderDetails</code> parameter.</p> <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The <code>API_GATEWAY</code> setting requires you to provide an Amazon API Gateway endpoint URL to call for authentication by using the <code>IdentityProviderDetails</code> parameter.</p> <p>Use the <code>AWS_LAMBDA</code> value to directly use an Lambda function as your identity provider. If you choose this value, you must specify the ARN for the Lambda function in the <code>Function</code> parameter for the <code>IdentityProviderDetails</code> data type.</p>",
-        "ListedServer$IdentityProviderType": "<p>The mode of authentication for a server. The default value is <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within the Transfer Family service.</p> <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to provide a Directory ID by using the <code>IdentityProviderDetails</code> parameter.</p> <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The <code>API_GATEWAY</code> setting requires you to provide an Amazon API Gateway endpoint URL to call for authentication by using the <code>IdentityProviderDetails</code> parameter.</p> <p>Use the <code>AWS_LAMBDA</code> value to directly use an Lambda function as your identity provider. If you choose this value, you must specify the ARN for the Lambda function in the <code>Function</code> parameter for the <code>IdentityProviderDetails</code> data type.</p>"
+        "ListedServer$IdentityProviderType": "<p>The mode of authentication for a server. The default value is <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within the Transfer Family service.</p> <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to provide a Directory ID by using the <code>IdentityProviderDetails</code> parameter.</p> <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The <code>API_GATEWAY</code> setting requires you to provide an Amazon API Gateway endpoint URL to call for authentication by using the <code>IdentityProviderDetails</code> parameter.</p> <p>Use the <code>AWS_LAMBDA</code> value to directly use an Lambda function as your identity provider. If you choose this value, you must specify the ARN for the Lambda function in the <code>Function</code> parameter for the <code>IdentityProviderDetails</code> data type.</p>",
+        "UpdateServerRequest$IdentityProviderType": "<p>The mode of authentication for a server. The default value is <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within the Transfer Family service.</p> <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to provide a Directory ID by using the <code>IdentityProviderDetails</code> parameter.</p> <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The <code>API_GATEWAY</code> setting requires you to provide an Amazon API Gateway endpoint URL to call for authentication by using the <code>IdentityProviderDetails</code> parameter.</p> <p>Use the <code>AWS_LAMBDA</code> value to directly use an Lambda function as your identity provider. If you choose this value, you must specify the ARN for the Lambda function in the <code>Function</code> parameter for the <code>IdentityProviderDetails</code> data type.</p>"
       }
     },
     "ImportCertificateRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ImportCertificateResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ImportHostKeyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ImportHostKeyResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ImportSshPublicKeyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ImportSshPublicKeyResponse": {
       "base": "<p>Identifies the user, the server they belong to, and the identifier of the SSH public key associated with that user. A user can have more than one key on each server that they are associated with.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "InputFileLocation": {
       "base": "<p>Specifies the location for the file that's being processed.</p>",
@@ -1112,18 +1105,15 @@
     },
     "InternalServiceError": {
       "base": "<p>This exception is thrown when an error occurs in the Transfer Family service.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "InvalidNextTokenException": {
       "base": "<p>The <code>NextToken</code> parameter that was passed is invalid.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "InvalidRequestException": {
       "base": "<p>This exception is thrown when the client submits a malformed request.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "IpAddressType": {
       "base": null,
@@ -1135,143 +1125,115 @@
     },
     "ListAccessesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListAccessesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListAgreementsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListAgreementsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListCertificatesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListCertificatesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListConnectorsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListConnectorsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListExecutionsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListExecutionsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListFileTransferResultsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListFileTransferResultsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListHostKeysRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListHostKeysResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListProfilesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListProfilesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListSecurityPoliciesRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListSecurityPoliciesResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListServersRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListServersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListTagsForResourceRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListTagsForResourceResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListUsersRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListUsersResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListWebAppsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListWebAppsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListWorkflowsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListWorkflowsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListedAccess": {
       "base": "<p>Lists the properties for one or more specified associated accesses.</p>",
@@ -1444,7 +1406,7 @@
     "MaxConcurrentConnections": {
       "base": "<p>The number of concurrent connections that the connector will create to the remote server.</p>",
       "refs": {
-        "SftpConnectorConfig$MaxConcurrentConnections": "<p>Specify the number of concurrent connections that your connector creates to the remote server. The default value is <code>5</code> (this is also the maximum value allowed).</p> <p>This parameter specifies the number of active connections that your connector can establish with the remote server at the same time. Increasing this value can enhance connector performance when transferring large file batches by enabling parallel operations.</p>"
+        "SftpConnectorConfig$MaxConcurrentConnections": "<p>Specify the number of concurrent connections that your connector creates to the remote server. The default value is <code>1</code>. The maximum values is <code>5</code>.</p> <note> <p>If you are using the Amazon Web Services Management Console, the default value is <code>5</code>.</p> </note> <p>This parameter specifies the number of active connections that your connector can establish with the remote server at the same time. Increasing this value can enhance connector performance when transferring large file batches by enabling parallel operations.</p>"
       }
     },
     "MaxItems": {
@@ -1579,7 +1541,7 @@
     "PassiveIp": {
       "base": null,
       "refs": {
-        "ProtocolDetails$PassiveIp": "<p> Indicates passive mode, for FTP and FTPS protocols. Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer. For example: </p> <p> <code>aws transfer update-server --protocol-details PassiveIp=0.0.0.0</code> </p> <p>Replace <code>0.0.0.0</code> in the example above with the actual IP address you want to use.</p> <note> <p> If you change the <code>PassiveIp</code> value, you must stop and then restart your Transfer Family server for the change to take effect. For details on using passive mode (PASV) in a NAT environment, see <a href=\"http://aws.amazon.com/blogs/storage/configuring-your-ftps-server-behind-a-firewall-or-nat-with-aws-transfer-family/\">Configuring your FTPS server behind a firewall or NAT with Transfer Family</a>. </p> </note> <p> <i>Special values</i> </p> <p>The <code>AUTO</code> and <code>0.0.0.0</code> are special values for the <code>PassiveIp</code> parameter. The value <code>PassiveIp=AUTO</code> is assigned by default to FTP and FTPS type servers. In this case, the server automatically responds with one of the endpoint IPs within the PASV response. <code>PassiveIp=0.0.0.0</code> has a more unique application for its usage. For example, if you have a High Availability (HA) Network Load Balancer (NLB) environment, where you have 3 subnets, you can only specify a single IP address using the <code>PassiveIp</code> parameter. This reduces the effectiveness of having High Availability. In this case, you can specify <code>PassiveIp=0.0.0.0</code>. This tells the client to use the same IP address as the Control connection and utilize all AZs for their connections. Note, however, that not all FTP clients support the <code>PassiveIp=0.0.0.0</code> response. FileZilla and WinSCP do support it. If you are using other clients, check to see if your client supports the <code>PassiveIp=0.0.0.0</code> response.</p>"
+        "ProtocolDetails$PassiveIp": "<p> Indicates passive mode, for FTP and FTPS protocols. Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer. For example: </p> <p> <code>aws transfer update-server --protocol-details PassiveIp=0.0.0.0</code> </p> <p>Replace <code>0.0.0.0</code> in the example above with the actual IP address you want to use.</p> <note> <p> If you change the <code>PassiveIp</code> value, you must stop and then restart your Transfer Family server for the change to take effect. For details on using passive mode (PASV) in a NAT environment, see <a href=\"http://aws.amazon.com/blogs/storage/configuring-your-ftps-server-behind-a-firewall-or-nat-with-aws-transfer-family/\">Configuring your FTPS server behind a firewall or NAT with Transfer Family</a>. </p> <p>Additionally, avoid placing Network Load Balancers (NLBs) or NAT gateways in front of Transfer Family servers. This configuration increases costs and can cause performance issues. When NLBs or NATs are in the communication path, Transfer Family cannot accurately recognize client IP addresses, which impacts connection sharding and limits FTPS servers to only 300 simultaneous connections instead of 10,000. If you must use an NLB, use port 21 for health checks and enable TLS session resumption by setting <code>TlsSessionResumptionMode = ENFORCED</code>. For optimal performance, migrate to VPC endpoints with Elastic IP addresses instead of using NLBs. For more details, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations\"> Avoid placing NLBs and NATs in front of Transfer Family</a>. </p> </note> <p> <i>Special values</i> </p> <p>The <code>AUTO</code> and <code>0.0.0.0</code> are special values for the <code>PassiveIp</code> parameter. The value <code>PassiveIp=AUTO</code> is assigned by default to FTP and FTPS type servers. In this case, the server automatically responds with one of the endpoint IPs within the PASV response. <code>PassiveIp=0.0.0.0</code> has a more unique application for its usage. For example, if you have a High Availability (HA) Network Load Balancer (NLB) environment, where you have 3 subnets, you can only specify a single IP address using the <code>PassiveIp</code> parameter. This reduces the effectiveness of having High Availability. In this case, you can specify <code>PassiveIp=0.0.0.0</code>. This tells the client to use the same IP address as the Control connection and utilize all AZs for their connections. Note, however, that not all FTP clients support the <code>PassiveIp=0.0.0.0</code> response. FileZilla and WinSCP do support it. If you are using other clients, check to see if your client supports the <code>PassiveIp=0.0.0.0</code> response.</p>"
       }
     },
     "Policy": {
@@ -1690,9 +1652,9 @@
     "ProtocolDetails": {
       "base": "<p> The protocol settings that are configured for your server. </p>",
       "refs": {
-        "CreateServerRequest$ProtocolDetails": "<p>The protocol settings that are configured for your server.</p> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>",
-        "DescribedServer$ProtocolDetails": "<p>The protocol settings that are configured for your server.</p> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>",
-        "UpdateServerRequest$ProtocolDetails": "<p>The protocol settings that are configured for your server.</p> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>"
+        "CreateServerRequest$ProtocolDetails": "<p>The protocol settings that are configured for your server.</p> <note> <p>Avoid placing Network Load Balancers (NLBs) or NAT gateways in front of Transfer Family servers, as this increases costs and can cause performance issues, including reduced connection limits for FTPS. For more details, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations\"> Avoid placing NLBs and NATs in front of Transfer Family</a>.</p> </note> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>",
+        "DescribedServer$ProtocolDetails": "<p>The protocol settings that are configured for your server.</p> <note> <p>Avoid placing Network Load Balancers (NLBs) or NAT gateways in front of Transfer Family servers, as this increases costs and can cause performance issues, including reduced connection limits for FTPS. For more details, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations\"> Avoid placing NLBs and NATs in front of Transfer Family</a>.</p> </note> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>",
+        "UpdateServerRequest$ProtocolDetails": "<p>The protocol settings that are configured for your server.</p> <note> <p>Avoid placing Network Load Balancers (NLBs) or NAT gateways in front of Transfer Family servers, as this increases costs and can cause performance issues, including reduced connection limits for FTPS. For more details, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations\"> Avoid placing NLBs and NATs in front of Transfer Family</a>.</p> </note> <ul> <li> <p> To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. </p> </li> <li> <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> call.</p> </li> <li> <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the <code>TlsSessionResumptionMode</code> parameter.</p> </li> <li> <p> <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p> </li> </ul>"
       }
     },
     "Protocols": {
@@ -1712,13 +1674,11 @@
     },
     "ResourceExistsException": {
       "base": "<p>The requested resource does not exist, or exists in a region other than the one specified for the command.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ResourceNotFoundException": {
       "base": "<p>This exception is thrown when a resource is not found by the Amazon Web ServicesTransfer Family service.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "ResourceType": {
       "base": null,
@@ -1804,9 +1764,9 @@
     "S3StorageOptions": {
       "base": "<p>The Amazon S3 storage options that are configured for your server.</p>",
       "refs": {
-        "CreateServerRequest$S3StorageOptions": "<p>Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default.</p> <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code> <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>",
-        "DescribedServer$S3StorageOptions": "<p>Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default.</p> <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code> <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>",
-        "UpdateServerRequest$S3StorageOptions": "<p>Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default.</p> <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code> <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>"
+        "CreateServerRequest$S3StorageOptions": "<p>Specifies whether or not performance for your Amazon S3 directories is optimized.</p> <ul> <li> <p>If using the console, this is enabled by default.</p> </li> <li> <p>If using the API or CLI, this is disabled by default.</p> </li> </ul> <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code> <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>",
+        "DescribedServer$S3StorageOptions": "<p>Specifies whether or not performance for your Amazon S3 directories is optimized.</p> <ul> <li> <p>If using the console, this is enabled by default.</p> </li> <li> <p>If using the API or CLI, this is disabled by default.</p> </li> </ul> <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code> <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>",
+        "UpdateServerRequest$S3StorageOptions": "<p>Specifies whether or not performance for your Amazon S3 directories is optimized.</p> <ul> <li> <p>If using the console, this is enabled by default.</p> </li> <li> <p>If using the API or CLI, this is disabled by default.</p> </li> </ul> <p>By default, home directory mappings have a <code>TYPE</code> of <code>DIRECTORY</code>. If you enable this option, you would then need to explicitly set the <code>HomeDirectoryMapEntry</code> <code>Type</code> to <code>FILE</code> if you want a mapping to have a file target.</p>"
       }
     },
     "S3Tag": {
@@ -1860,7 +1820,8 @@
     "SecurityGroupIds": {
       "base": null,
       "refs": {
-        "EndpointDetails$SecurityGroupIds": "<p>A list of security groups IDs that are available to attach to your server's endpoint.</p> <note> <p>This property can only be set when <code>EndpointType</code> is set to <code>VPC</code>.</p> <p>You can edit the <code>SecurityGroupIds</code> property in the <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateServer.html\">UpdateServer</a> API only if you are changing the <code>EndpointType</code> from <code>PUBLIC</code> or <code>VPC_ENDPOINT</code> to <code>VPC</code>. To change security groups associated with your server's VPC endpoint after creation, use the Amazon EC2 <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVpcEndpoint.html\">ModifyVpcEndpoint</a> API.</p> </note>"
+        "EndpointDetails$SecurityGroupIds": "<p>A list of security groups IDs that are available to attach to your server's endpoint.</p> <note> <p>While <code>SecurityGroupIds</code> appears in the response syntax for consistency with <code>CreateServer</code> and <code>UpdateServer</code> operations, this field is not populated in <code>DescribeServer</code> responses. Security groups are managed at the VPC endpoint level and can be modified outside of the Transfer Family service. To retrieve current security group information, use the EC2 <code>DescribeVpcEndpoints</code> API with the <code>VpcEndpointId</code> returned in the response.</p> <p>This property can only be set when <code>EndpointType</code> is set to <code>VPC</code>.</p> <p>You can edit the <code>SecurityGroupIds</code> property in the <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateServer.html\">UpdateServer</a> API only if you are changing the <code>EndpointType</code> from <code>PUBLIC</code> or <code>VPC_ENDPOINT</code> to <code>VPC</code>. To change security groups associated with your server's VPC endpoint after creation, use the Amazon EC2 <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVpcEndpoint.html\">ModifyVpcEndpoint</a> API.</p> </note>",
+        "WebAppVpcConfig$SecurityGroupIds": "<p>The list of security group IDs that control access to the web app endpoint. These security groups determine which sources can access the endpoint based on IP addresses and port configurations.</p>"
       }
     },
     "SecurityPolicyName": {
@@ -1916,13 +1877,11 @@
     },
     "SendWorkflowStepStateRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "SendWorkflowStepStateResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ServerId": {
       "base": null,
@@ -2005,8 +1964,7 @@
     },
     "ServiceUnavailableException": {
       "base": "<p>The request has failed because the Amazon Web ServicesTransfer Family service is not available.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "SessionId": {
       "base": null,
@@ -2055,7 +2013,15 @@
     "SftpConnectorTrustedHostKeyList": {
       "base": null,
       "refs": {
-        "SftpConnectorConfig$TrustedHostKeys": "<p>The public portion of the host key, or keys, that are used to identify the external server to which you are connecting. You can use the <code>ssh-keyscan</code> command against the SFTP server to retrieve the necessary key.</p> <note> <p> <code>TrustedHostKeys</code> is optional for <code>CreateConnector</code>. If not provided, you can use <code>TestConnection</code> to retrieve the server host key during the initial connection attempt, and subsequently update the connector with the observed host key.</p> </note> <p>The three standard SSH public key format elements are <code>&lt;key type&gt;</code>, <code>&lt;body base64&gt;</code>, and an optional <code>&lt;comment&gt;</code>, with spaces between each element. Specify only the <code>&lt;key type&gt;</code> and <code>&lt;body base64&gt;</code>: do not enter the <code>&lt;comment&gt;</code> portion of the key.</p> <p>For the trusted host key, Transfer Family accepts RSA and ECDSA keys.</p> <ul> <li> <p>For RSA keys, the <code>&lt;key type&gt;</code> string is <code>ssh-rsa</code>.</p> </li> <li> <p>For ECDSA keys, the <code>&lt;key type&gt;</code> string is either <code>ecdsa-sha2-nistp256</code>, <code>ecdsa-sha2-nistp384</code>, or <code>ecdsa-sha2-nistp521</code>, depending on the size of the key you generated.</p> </li> </ul> <p>Run this command to retrieve the SFTP server host key, where your SFTP server name is <code>ftp.host.com</code>.</p> <p> <code>ssh-keyscan ftp.host.com</code> </p> <p>This prints the public host key to standard output.</p> <p> <code>ftp.host.com ssh-rsa AAAAB3Nza...&lt;long-string-for-public-key</code> </p> <p>Copy and paste this string into the <code>TrustedHostKeys</code> field for the <code>create-connector</code> command or into the <b>Trusted host keys</b> field in the console.</p>"
+        "SftpConnectorConfig$TrustedHostKeys": "<p>The public portion of the host key, or keys, that are used to identify the external server to which you are connecting. You can use the <code>ssh-keyscan</code> command against the SFTP server to retrieve the necessary key.</p> <note> <p> <code>TrustedHostKeys</code> is optional for <code>CreateConnector</code>. If not provided, you can use <code>TestConnection</code> to retrieve the server host key during the initial connection attempt, and subsequently update the connector with the observed host key.</p> </note> <p>When creating connectors with egress config (VPC_LATTICE type connectors), since host name is not something we can verify, the only accepted trusted host key format is <code>key-type key-body</code> without the host name. For example: <code>ssh-rsa AAAAB3Nza...&lt;long-string-for-public-key&gt;</code> </p> <p>The three standard SSH public key format elements are <code>&lt;key type&gt;</code>, <code>&lt;body base64&gt;</code>, and an optional <code>&lt;comment&gt;</code>, with spaces between each element. Specify only the <code>&lt;key type&gt;</code> and <code>&lt;body base64&gt;</code>: do not enter the <code>&lt;comment&gt;</code> portion of the key.</p> <p>For the trusted host key, Transfer Family accepts RSA and ECDSA keys.</p> <ul> <li> <p>For RSA keys, the <code>&lt;key type&gt;</code> string is <code>ssh-rsa</code>.</p> </li> <li> <p>For ECDSA keys, the <code>&lt;key type&gt;</code> string is either <code>ecdsa-sha2-nistp256</code>, <code>ecdsa-sha2-nistp384</code>, or <code>ecdsa-sha2-nistp521</code>, depending on the size of the key you generated.</p> </li> </ul> <p>Run this command to retrieve the SFTP server host key, where your SFTP server name is <code>ftp.host.com</code>.</p> <p> <code>ssh-keyscan ftp.host.com</code> </p> <p>This prints the public host key to standard output.</p> <p> <code>ftp.host.com ssh-rsa AAAAB3Nza...&lt;long-string-for-public-key&gt;</code> </p> <p>Copy and paste this string into the <code>TrustedHostKeys</code> field for the <code>create-connector</code> command or into the <b>Trusted host keys</b> field in the console.</p> <p>For VPC Lattice type connectors (VPC_LATTICE), remove the hostname from the key and use only the <code>key-type key-body</code> format. In this example, it should be: <code>ssh-rsa AAAAB3Nza...&lt;long-string-for-public-key&gt;</code> </p>"
+      }
+    },
+    "SftpPort": {
+      "base": null,
+      "refs": {
+        "ConnectorVpcLatticeEgressConfig$PortNumber": "<p>Port number for connecting to the SFTP server through VPC_LATTICE. Defaults to 22 if not specified. Must match the port on which the target SFTP server is listening.</p>",
+        "DescribedConnectorVpcLatticeEgressConfig$PortNumber": "<p>Port number currently configured for SFTP connections through VPC_LATTICE. Shows the port on which the connector attempts to connect to the target SFTP server.</p>",
+        "UpdateConnectorVpcLatticeEgressConfig$PortNumber": "<p>Updated port number for SFTP connections through VPC_LATTICE. Change this if the target SFTP server port has been modified or if connecting to a different server endpoint.</p>"
       }
     },
     "SigningAlg": {
@@ -2116,48 +2082,39 @@
     },
     "StartDirectoryListingRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartDirectoryListingResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartFileTransferRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartFileTransferResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartRemoteDeleteRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartRemoteDeleteResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartRemoteMoveRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartRemoteMoveResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartServerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "State": {
       "base": "<p>Describes the condition of a file transfer protocol-enabled server with respect to its ability to perform file operations. There are six possible states: <code>OFFLINE</code>, <code>ONLINE</code>, <code>STARTING</code>, <code>STOPPING</code>, <code>START_FAILED</code>, and <code>STOP_FAILED</code>.</p> <p> <code>OFFLINE</code> indicates that the server exists, but that it is not available for file operations. <code>ONLINE</code> indicates that the server is available to perform file operations. <code>STARTING</code> indicates that the server's was instantiated, but the server is not yet available to perform file operations. Under normal conditions, it can take a couple of minutes for the server to be completely operational. Both <code>START_FAILED</code> and <code>STOP_FAILED</code> are error conditions.</p>",
@@ -2186,8 +2143,7 @@
     },
     "StopServerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StructuredLogDestinations": {
       "base": null,
@@ -2206,7 +2162,10 @@
     "SubnetIds": {
       "base": null,
       "refs": {
-        "EndpointDetails$SubnetIds": "<p>A list of subnet IDs that are required to host your server endpoint in your VPC.</p> <note> <p>This property can only be set when <code>EndpointType</code> is set to <code>VPC</code>.</p> </note>"
+        "DescribedWebAppVpcConfig$SubnetIds": "<p>The list of subnet IDs within the VPC where the web app endpoint is deployed. These subnets must be in the same VPC and provide network connectivity for the endpoint.</p>",
+        "EndpointDetails$SubnetIds": "<p>A list of subnet IDs that are required to host your server endpoint in your VPC.</p> <note> <p>This property can only be set when <code>EndpointType</code> is set to <code>VPC</code>.</p> </note>",
+        "UpdateWebAppVpcConfig$SubnetIds": "<p>The list of subnet IDs within the VPC where the web app endpoint should be deployed during the update operation.</p>",
+        "WebAppVpcConfig$SubnetIds": "<p>The list of subnet IDs within the VPC where the web app endpoint will be deployed. These subnets must be in the same VPC specified in the VpcId parameter.</p>"
       }
     },
     "Tag": {
@@ -2230,8 +2189,7 @@
     },
     "TagResourceRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "TagStepDetails": {
       "base": "<p>Each step type has its own <code>StepDetails</code> structure.</p> <p>The key/value pairs used to tag a file during the execution of a workflow step.</p>",
@@ -2272,28 +2230,23 @@
     },
     "TestConnectionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "TestConnectionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "TestIdentityProviderRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "TestIdentityProviderResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ThrottlingException": {
       "base": "<p>The request was denied due to request throttling.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "TlsSessionResumptionMode": {
       "base": null,
@@ -2316,97 +2269,96 @@
     },
     "UntagResourceRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateAccessRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateAccessResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateAgreementRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateAgreementResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateCertificateRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateCertificateResponse": {
       "base": null,
+      "refs": {}
+    },
+    "UpdateConnectorEgressConfig": {
+      "base": "<p>Structure for updating the egress configuration of an existing connector. Allows modification of how traffic is routed from the connector to the SFTP server, including VPC_LATTICE settings.</p>",
       "refs": {
+        "UpdateConnectorRequest$EgressConfig": "<p>Updates the egress configuration for the connector, allowing you to modify how traffic is routed from the connector to the SFTP server. Changes to VPC configuration may require connector restart.</p>"
       }
     },
     "UpdateConnectorRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateConnectorResponse": {
       "base": null,
+      "refs": {}
+    },
+    "UpdateConnectorVpcLatticeEgressConfig": {
+      "base": "<p>VPC_LATTICE egress configuration updates for modifying how the connector routes traffic through customer VPCs. Changes to these settings may require connector restart to take effect.</p>",
       "refs": {
+        "UpdateConnectorEgressConfig$VpcLattice": "<p>VPC_LATTICE configuration updates for the connector. Use this to modify the Resource Configuration ARN or port number for VPC-based connectivity.</p>"
       }
     },
     "UpdateHostKeyRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateHostKeyResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateProfileRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateProfileResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateServerRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateServerResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateUserRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateUserResponse": {
       "base": "<p> <code>UpdateUserResponse</code> returns the user name and identifier for the request to update a user's properties.</p>",
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateWebAppCustomizationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateWebAppCustomizationResponse": {
       "base": null,
+      "refs": {}
+    },
+    "UpdateWebAppEndpointDetails": {
+      "base": "<p>Contains the endpoint configuration details for updating a web app, including VPC settings for endpoints hosted within a VPC.</p>",
       "refs": {
+        "UpdateWebAppRequest$EndpointDetails": "<p>The updated endpoint configuration for the web app. You can modify the endpoint type and VPC configuration settings.</p>"
       }
     },
     "UpdateWebAppIdentityCenterConfig": {
@@ -2423,23 +2375,27 @@
     },
     "UpdateWebAppRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateWebAppResponse": {
       "base": null,
+      "refs": {}
+    },
+    "UpdateWebAppVpcConfig": {
+      "base": "<p>Contains the VPC configuration settings for updating a web app endpoint, including the subnet IDs where the endpoint should be deployed.</p>",
       "refs": {
+        "UpdateWebAppEndpointDetails$Vpc": "<p>The VPC configuration details for updating a web app endpoint hosted within a VPC. This includes the subnet IDs for endpoint deployment.</p>"
       }
     },
     "Url": {
       "base": null,
       "refs": {
-        "CreateConnectorRequest$Url": "<p>The URL of the partner's AS2 or SFTP endpoint.</p>",
-        "DescribedConnector$Url": "<p>The URL of the partner's AS2 or SFTP endpoint.</p>",
+        "CreateConnectorRequest$Url": "<p>The URL of the partner's AS2 or SFTP endpoint.</p> <p>When creating AS2 connectors or service-managed SFTP connectors (connectors without egress configuration), you must provide a URL to specify the remote server endpoint. For VPC Lattice type connectors, the URL must be null.</p>",
+        "DescribedConnector$Url": "<p>The URL of the partner's AS2 or SFTP endpoint.</p> <p>When creating AS2 connectors or service-managed SFTP connectors (connectors without egress configuration), you must provide a URL to specify the remote server endpoint. For VPC Lattice type connectors, the URL must be null.</p>",
         "IdentityProviderDetails$Url": "<p>Provides the location of the service endpoint used to authenticate users.</p>",
-        "ListedConnector$Url": "<p>The URL of the partner's AS2 or SFTP endpoint.</p>",
+        "ListedConnector$Url": "<p>The URL of the partner's AS2 or SFTP endpoint.</p> <p>When creating AS2 connectors or service-managed SFTP connectors (connectors without egress configuration), you must provide a URL to specify the remote server endpoint. For VPC Lattice type connectors, the URL must be null.</p>",
         "TestIdentityProviderResponse$Url": "<p>The endpoint of the service used to authenticate a user.</p>",
-        "UpdateConnectorRequest$Url": "<p>The URL of the partner's AS2 or SFTP endpoint.</p>"
+        "UpdateConnectorRequest$Url": "<p>The URL of the partner's AS2 or SFTP endpoint.</p> <p>When creating AS2 connectors or service-managed SFTP connectors (connectors without egress configuration), you must provide a URL to specify the remote server endpoint. For VPC Lattice type connectors, the URL must be null.</p>"
       }
     },
     "UserCount": {
@@ -2482,13 +2438,24 @@
     "VpcEndpointId": {
       "base": null,
       "refs": {
+        "DescribedWebAppVpcConfig$VpcEndpointId": "<p>The identifier of the VPC endpoint created for the web app.</p>",
         "EndpointDetails$VpcEndpointId": "<p>The identifier of the VPC endpoint.</p> <note> <p>This property can only be set when <code>EndpointType</code> is set to <code>VPC_ENDPOINT</code>.</p> <p>For more information, see https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.</p> </note>"
       }
     },
     "VpcId": {
       "base": null,
       "refs": {
-        "EndpointDetails$VpcId": "<p>The VPC identifier of the VPC in which a server's endpoint will be hosted.</p> <note> <p>This property can only be set when <code>EndpointType</code> is set to <code>VPC</code>.</p> </note>"
+        "DescribedWebAppVpcConfig$VpcId": "<p>The identifier of the VPC where the web app endpoint is hosted.</p>",
+        "EndpointDetails$VpcId": "<p>The VPC identifier of the VPC in which a server's endpoint will be hosted.</p> <note> <p>This property can only be set when <code>EndpointType</code> is set to <code>VPC</code>.</p> </note>",
+        "WebAppVpcConfig$VpcId": "<p>The identifier of the VPC where the web app endpoint will be hosted.</p>"
+      }
+    },
+    "VpcLatticeResourceConfigurationArn": {
+      "base": null,
+      "refs": {
+        "ConnectorVpcLatticeEgressConfig$ResourceConfigurationArn": "<p>ARN of the VPC_LATTICE Resource Configuration that defines the target SFTP server location. Must point to a valid Resource Configuration in the customer's VPC with appropriate network connectivity to the SFTP server.</p>",
+        "DescribedConnectorVpcLatticeEgressConfig$ResourceConfigurationArn": "<p>ARN of the VPC_LATTICE Resource Configuration currently used by the connector. This Resource Configuration defines the network path to the SFTP server through the customer's VPC.</p>",
+        "UpdateConnectorVpcLatticeEgressConfig$ResourceConfigurationArn": "<p>Updated ARN of the VPC_LATTICE Resource Configuration. Use this to change the target SFTP server location or modify the network path through the customer's VPC infrastructure.</p>"
       }
     },
     "WebAppAccessEndpoint": {
@@ -2507,11 +2474,24 @@
         "ListedWebApp$WebAppEndpoint": "<p>The <code>WebAppEndpoint</code> is the unique URL for your Transfer Family web app. This is the value that you use when you configure <b>Origins</b> on CloudFront.</p>"
       }
     },
+    "WebAppEndpointDetails": {
+      "base": "<p>Contains the endpoint configuration for a web app, including VPC settings when the endpoint is hosted within a VPC.</p>",
+      "refs": {
+        "CreateWebAppRequest$EndpointDetails": "<p>The endpoint configuration for the web app. You can specify whether the web app endpoint is publicly accessible or hosted within a VPC.</p>"
+      }
+    },
     "WebAppEndpointPolicy": {
       "base": null,
       "refs": {
         "CreateWebAppRequest$WebAppEndpointPolicy": "<p> Setting for the type of endpoint policy for the web app. The default value is <code>STANDARD</code>. </p> <p>If you are creating the web app in an Amazon Web Services GovCloud (US) Region, you can set this parameter to <code>FIPS</code>.</p>",
         "DescribedWebApp$WebAppEndpointPolicy": "<p> Setting for the type of endpoint policy for the web app. The default value is <code>STANDARD</code>. </p> <p>If your web app was created in an Amazon Web Services GovCloud (US) Region, the value of this parameter can be <code>FIPS</code>, which indicates the web app endpoint is FIPS-compliant.</p>"
+      }
+    },
+    "WebAppEndpointType": {
+      "base": null,
+      "refs": {
+        "DescribedWebApp$EndpointType": "<p>The type of endpoint hosting the web app. Valid values are <code>PUBLIC</code> for publicly accessible endpoints and <code>VPC</code> for VPC-hosted endpoints that provide network isolation.</p>",
+        "ListedWebApp$EndpointType": "<p>The type of endpoint hosting the web app. Valid values are <code>PUBLIC</code> for publicly accessible endpoints and <code>VPC</code> for VPC-hosted endpoints.</p>"
       }
     },
     "WebAppFaviconFile": {
@@ -2570,6 +2550,12 @@
         "CreateWebAppRequest$WebAppUnits": "<p>A union that contains the value for number of concurrent connections or the user sessions on your web app.</p>",
         "DescribedWebApp$WebAppUnits": "<p>A union that contains the value for number of concurrent connections or the user sessions on your web app.</p>",
         "UpdateWebAppRequest$WebAppUnits": "<p>A union that contains the value for number of concurrent connections or the user sessions on your web app.</p>"
+      }
+    },
+    "WebAppVpcConfig": {
+      "base": "<p>Contains the VPC configuration settings for hosting a web app endpoint, including the VPC ID, subnet IDs, and security group IDs for access control.</p>",
+      "refs": {
+        "WebAppEndpointDetails$Vpc": "<p>The VPC configuration for hosting the web app endpoint within a VPC.</p>"
       }
     },
     "WorkflowDescription": {

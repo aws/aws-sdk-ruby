@@ -1464,6 +1464,16 @@ module Aws::BCMPricingCalculator
     #   An error message if the bill scenario creation or processing failed.
     #   @return [String]
     #
+    # @!attribute [rw] group_sharing_preference
+    #   The setting for the reserved instance and savings plan group sharing
+    #   used in this estimate.
+    #   @return [String]
+    #
+    # @!attribute [rw] cost_category_group_sharing_preference_arn
+    #   The arn of the cost category used in the reserved and prioritized
+    #   group sharing.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/BillScenarioSummary AWS API Documentation
     #
     class BillScenarioSummary < Struct.new(
@@ -1473,7 +1483,9 @@ module Aws::BCMPricingCalculator
       :status,
       :created_at,
       :expires_at,
-      :failure_message)
+      :failure_message,
+      :group_sharing_preference,
+      :cost_category_group_sharing_preference_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1704,6 +1716,21 @@ module Aws::BCMPricingCalculator
     #   becomes inaccessible after expiration.
     #   @return [Time]
     #
+    # @!attribute [rw] group_sharing_preference
+    #   The setting for the reserved instance and savings plan group sharing
+    #   used in this estimate.
+    #   @return [String]
+    #
+    # @!attribute [rw] cost_category_group_sharing_preference_arn
+    #   The arn of the cost category used in the reserved and prioritized
+    #   group sharing.
+    #   @return [String]
+    #
+    # @!attribute [rw] cost_category_group_sharing_preference_effective_date
+    #   Timestamp of the effective date of the cost category used in the
+    #   group sharing settings.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/CreateBillEstimateResponse AWS API Documentation
     #
     class CreateBillEstimateResponse < Struct.new(
@@ -1714,7 +1741,10 @@ module Aws::BCMPricingCalculator
       :bill_interval,
       :cost_summary,
       :created_at,
-      :expires_at)
+      :expires_at,
+      :group_sharing_preference,
+      :cost_category_group_sharing_preference_arn,
+      :cost_category_group_sharing_preference_effective_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1735,12 +1765,24 @@ module Aws::BCMPricingCalculator
     #   The tags to apply to the bill scenario.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] group_sharing_preference
+    #   The setting for the reserved instance and savings plan group sharing
+    #   used in this estimate.
+    #   @return [String]
+    #
+    # @!attribute [rw] cost_category_group_sharing_preference_arn
+    #   The arn of the cost category used in the reserved and prioritized
+    #   group sharing.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/CreateBillScenarioRequest AWS API Documentation
     #
     class CreateBillScenarioRequest < Struct.new(
       :name,
       :client_token,
-      :tags)
+      :tags,
+      :group_sharing_preference,
+      :cost_category_group_sharing_preference_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1773,6 +1815,16 @@ module Aws::BCMPricingCalculator
     #   An error message if the bill scenario creation failed.
     #   @return [String]
     #
+    # @!attribute [rw] group_sharing_preference
+    #   The setting for the reserved instance and savings plan group sharing
+    #   used in this estimate.
+    #   @return [String]
+    #
+    # @!attribute [rw] cost_category_group_sharing_preference_arn
+    #   The arn of the cost category used in the reserved and prioritized
+    #   group sharing.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/CreateBillScenarioResponse AWS API Documentation
     #
     class CreateBillScenarioResponse < Struct.new(
@@ -1782,7 +1834,9 @@ module Aws::BCMPricingCalculator
       :status,
       :created_at,
       :expires_at,
-      :failure_message)
+      :failure_message,
+      :group_sharing_preference,
+      :cost_category_group_sharing_preference_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2064,6 +2118,21 @@ module Aws::BCMPricingCalculator
     #   The timestamp when the bill estimate will expire.
     #   @return [Time]
     #
+    # @!attribute [rw] group_sharing_preference
+    #   The setting for the reserved instance and savings plan group sharing
+    #   used in this estimate.
+    #   @return [String]
+    #
+    # @!attribute [rw] cost_category_group_sharing_preference_arn
+    #   The arn of the cost category used in the reserved and prioritized
+    #   group sharing.
+    #   @return [String]
+    #
+    # @!attribute [rw] cost_category_group_sharing_preference_effective_date
+    #   Timestamp of the effective date of the cost category used in the
+    #   group sharing settings.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/GetBillEstimateResponse AWS API Documentation
     #
     class GetBillEstimateResponse < Struct.new(
@@ -2074,7 +2143,10 @@ module Aws::BCMPricingCalculator
       :bill_interval,
       :cost_summary,
       :created_at,
-      :expires_at)
+      :expires_at,
+      :group_sharing_preference,
+      :cost_category_group_sharing_preference_arn,
+      :cost_category_group_sharing_preference_effective_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2119,6 +2191,16 @@ module Aws::BCMPricingCalculator
     #   An error message if the bill scenario retrieval failed.
     #   @return [String]
     #
+    # @!attribute [rw] group_sharing_preference
+    #   The setting for the reserved instance and savings plan group sharing
+    #   used in this estimate.
+    #   @return [String]
+    #
+    # @!attribute [rw] cost_category_group_sharing_preference_arn
+    #   The arn of the cost category used in the reserved and prioritized
+    #   group sharing.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/GetBillScenarioResponse AWS API Documentation
     #
     class GetBillScenarioResponse < Struct.new(
@@ -2128,7 +2210,9 @@ module Aws::BCMPricingCalculator
       :status,
       :created_at,
       :expires_at,
-      :failure_message)
+      :failure_message,
+      :group_sharing_preference,
+      :cost_category_group_sharing_preference_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3102,6 +3186,21 @@ module Aws::BCMPricingCalculator
     #   The updated expiration timestamp for the bill estimate.
     #   @return [Time]
     #
+    # @!attribute [rw] group_sharing_preference
+    #   The setting for the reserved instance and savings plan group sharing
+    #   used in this estimate.
+    #   @return [String]
+    #
+    # @!attribute [rw] cost_category_group_sharing_preference_arn
+    #   The arn of the cost category used in the reserved and prioritized
+    #   group sharing.
+    #   @return [String]
+    #
+    # @!attribute [rw] cost_category_group_sharing_preference_effective_date
+    #   Timestamp of the effective date of the cost category used in the
+    #   group sharing settings.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/UpdateBillEstimateResponse AWS API Documentation
     #
     class UpdateBillEstimateResponse < Struct.new(
@@ -3112,7 +3211,10 @@ module Aws::BCMPricingCalculator
       :bill_interval,
       :cost_summary,
       :created_at,
-      :expires_at)
+      :expires_at,
+      :group_sharing_preference,
+      :cost_category_group_sharing_preference_arn,
+      :cost_category_group_sharing_preference_effective_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3129,12 +3231,24 @@ module Aws::BCMPricingCalculator
     #   The new expiration date for the bill scenario.
     #   @return [Time]
     #
+    # @!attribute [rw] group_sharing_preference
+    #   The setting for the reserved instance and savings plan group sharing
+    #   used in this estimate.
+    #   @return [String]
+    #
+    # @!attribute [rw] cost_category_group_sharing_preference_arn
+    #   The arn of the cost category used in the reserved and prioritized
+    #   group sharing.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/UpdateBillScenarioRequest AWS API Documentation
     #
     class UpdateBillScenarioRequest < Struct.new(
       :identifier,
       :name,
-      :expires_at)
+      :expires_at,
+      :group_sharing_preference,
+      :cost_category_group_sharing_preference_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3167,6 +3281,16 @@ module Aws::BCMPricingCalculator
     #   An error message if the bill scenario update failed.
     #   @return [String]
     #
+    # @!attribute [rw] group_sharing_preference
+    #   The setting for the reserved instance and savings plan group sharing
+    #   used in this estimate.
+    #   @return [String]
+    #
+    # @!attribute [rw] cost_category_group_sharing_preference_arn
+    #   The arn of the cost category used in the reserved and prioritized
+    #   group sharing.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bcm-pricing-calculator-2024-06-19/UpdateBillScenarioResponse AWS API Documentation
     #
     class UpdateBillScenarioResponse < Struct.new(
@@ -3176,7 +3300,9 @@ module Aws::BCMPricingCalculator
       :status,
       :created_at,
       :expires_at,
-      :failure_message)
+      :failure_message,
+      :group_sharing_preference,
+      :cost_category_group_sharing_preference_arn)
       SENSITIVE = []
       include Aws::Structure
     end

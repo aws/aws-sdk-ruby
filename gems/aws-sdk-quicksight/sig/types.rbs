@@ -8,6 +8,13 @@
 module Aws::QuickSight
   module Types
 
+    class APIKeyConnectionMetadata
+      attr_accessor base_endpoint: ::String
+      attr_accessor api_key: ::String
+      attr_accessor email: ::String
+      SENSITIVE: [:api_key, :email]
+    end
+
     class AccessDeniedException
       attr_accessor message: ::String
       attr_accessor request_id: ::String
@@ -40,6 +47,47 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ActionConnector
+      attr_accessor arn: ::String
+      attr_accessor action_connector_id: ::String
+      attr_accessor type: ("GENERIC_HTTP" | "SERVICENOW_NOW_PLATFORM" | "SALESFORCE_CRM" | "MICROSOFT_OUTLOOK" | "PAGERDUTY_ADVANCE" | "JIRA_CLOUD" | "ATLASSIAN_CONFLUENCE" | "AMAZON_S3" | "AMAZON_BEDROCK_AGENT_RUNTIME" | "AMAZON_BEDROCK_RUNTIME" | "AMAZON_BEDROCK_DATA_AUTOMATION_RUNTIME" | "AMAZON_TEXTRACT" | "AMAZON_COMPREHEND" | "AMAZON_COMPREHEND_MEDICAL" | "MICROSOFT_ONEDRIVE" | "MICROSOFT_SHAREPOINT" | "MICROSOFT_TEAMS" | "SAP_BUSINESSPARTNER" | "SAP_PRODUCTMASTERDATA" | "SAP_PHYSICALINVENTORY" | "SAP_BILLOFMATERIALS" | "SAP_MATERIALSTOCK" | "ZENDESK_SUITE" | "SMARTSHEET" | "SLACK" | "ASANA" | "BAMBOO_HR")
+      attr_accessor name: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor status: ("CREATION_IN_PROGRESS" | "CREATION_SUCCESSFUL" | "CREATION_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED" | "DELETED")
+      attr_accessor error: Types::ActionConnectorError
+      attr_accessor description: ::String
+      attr_accessor authentication_config: Types::ReadAuthConfig
+      attr_accessor enabled_actions: ::Array[::String]
+      attr_accessor vpc_connection_arn: ::String
+      SENSITIVE: [:name, :description]
+    end
+
+    class ActionConnectorError
+      attr_accessor message: ::String
+      attr_accessor type: ("INTERNAL_FAILURE")
+      SENSITIVE: []
+    end
+
+    class ActionConnectorSearchFilter
+      attr_accessor name: ("ACTION_CONNECTOR_NAME" | "ACTION_CONNECTOR_TYPE" | "QUICKSIGHT_OWNER" | "QUICKSIGHT_VIEWER_OR_OWNER" | "DIRECT_QUICKSIGHT_SOLE_OWNER" | "DIRECT_QUICKSIGHT_OWNER" | "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER")
+      attr_accessor operator: ("StringEquals" | "StringLike")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ActionConnectorSummary
+      attr_accessor arn: ::String
+      attr_accessor action_connector_id: ::String
+      attr_accessor type: ("GENERIC_HTTP" | "SERVICENOW_NOW_PLATFORM" | "SALESFORCE_CRM" | "MICROSOFT_OUTLOOK" | "PAGERDUTY_ADVANCE" | "JIRA_CLOUD" | "ATLASSIAN_CONFLUENCE" | "AMAZON_S3" | "AMAZON_BEDROCK_AGENT_RUNTIME" | "AMAZON_BEDROCK_RUNTIME" | "AMAZON_BEDROCK_DATA_AUTOMATION_RUNTIME" | "AMAZON_TEXTRACT" | "AMAZON_COMPREHEND" | "AMAZON_COMPREHEND_MEDICAL" | "MICROSOFT_ONEDRIVE" | "MICROSOFT_SHAREPOINT" | "MICROSOFT_TEAMS" | "SAP_BUSINESSPARTNER" | "SAP_PRODUCTMASTERDATA" | "SAP_PHYSICALINVENTORY" | "SAP_BILLOFMATERIALS" | "SAP_MATERIALSTOCK" | "ZENDESK_SUITE" | "SMARTSHEET" | "SLACK" | "ASANA" | "BAMBOO_HR")
+      attr_accessor name: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor status: ("CREATION_IN_PROGRESS" | "CREATION_SUCCESSFUL" | "CREATION_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED" | "DELETED")
+      attr_accessor error: Types::ActionConnectorError
+      SENSITIVE: [:name]
+    end
+
     class ActiveIAMPolicyAssignment
       attr_accessor assignment_name: ::String
       attr_accessor policy_arn: ::String
@@ -56,6 +104,21 @@ module Aws::QuickSight
       attr_accessor aggregation_function_parameters: ::Hash[::String, ::String]
       attr_accessor period: ("SECOND" | "MINUTE" | "HOUR" | "DAY" | "WEEK" | "MONTH" | "QUARTER" | "YEAR")
       attr_accessor period_field: ::String
+      SENSITIVE: []
+    end
+
+    class AggregateOperation
+      attr_accessor alias: ::String
+      attr_accessor source: Types::TransformOperationSource
+      attr_accessor group_by_column_names: ::Array[::String]
+      attr_accessor aggregations: ::Array[Types::Aggregation]
+      SENSITIVE: []
+    end
+
+    class Aggregation
+      attr_accessor aggregation_function: Types::DataPrepAggregationFunction
+      attr_accessor new_column_name: ::String
+      attr_accessor new_column_id: ::String
       SENSITIVE: []
     end
 
@@ -228,8 +291,23 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class AppendOperation
+      attr_accessor alias: ::String
+      attr_accessor first_source: Types::TransformOperationSource
+      attr_accessor second_source: Types::TransformOperationSource
+      attr_accessor appended_columns: ::Array[Types::AppendedColumn]
+      SENSITIVE: []
+    end
+
+    class AppendedColumn
+      attr_accessor column_name: ::String
+      attr_accessor new_column_id: ::String
+      SENSITIVE: []
+    end
+
     class ApplicationTheme
       attr_accessor brand_color_palette: Types::BrandColorPalette
+      attr_accessor contextual_accent_palette: Types::ContextualAccentPalette
       attr_accessor brand_element_style: Types::BrandElementStyle
       SENSITIVE: []
     end
@@ -628,6 +706,65 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class AuthConfig
+      attr_accessor authentication_type: ("BASIC" | "API_KEY" | "OAUTH2_CLIENT_CREDENTIALS" | "NONE" | "IAM" | "OAUTH2_AUTHORIZATION_CODE")
+      attr_accessor authentication_metadata: Types::AuthenticationMetadata
+      SENSITIVE: []
+    end
+
+    class AuthenticationMetadata
+      attr_accessor authorization_code_grant_metadata: Types::AuthorizationCodeGrantMetadata
+      attr_accessor client_credentials_grant_metadata: Types::ClientCredentialsGrantMetadata
+      attr_accessor basic_auth_connection_metadata: Types::BasicAuthConnectionMetadata
+      attr_accessor api_key_connection_metadata: Types::APIKeyConnectionMetadata
+      attr_accessor none_connection_metadata: Types::NoneConnectionMetadata
+      attr_accessor iam_connection_metadata: Types::IAMConnectionMetadata
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AuthorizationCodeGrantMetadata < AuthenticationMetadata
+      end
+      class ClientCredentialsGrantMetadata < AuthenticationMetadata
+      end
+      class BasicAuthConnectionMetadata < AuthenticationMetadata
+      end
+      class ApiKeyConnectionMetadata < AuthenticationMetadata
+      end
+      class NoneConnectionMetadata < AuthenticationMetadata
+      end
+      class IamConnectionMetadata < AuthenticationMetadata
+      end
+      class Unknown < AuthenticationMetadata
+      end
+    end
+
+    class AuthorizationCodeGrantCredentialsDetails
+      attr_accessor authorization_code_grant_details: Types::AuthorizationCodeGrantDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AuthorizationCodeGrantDetails < AuthorizationCodeGrantCredentialsDetails
+      end
+      class Unknown < AuthorizationCodeGrantCredentialsDetails
+      end
+    end
+
+    class AuthorizationCodeGrantDetails
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor token_endpoint: ::String
+      attr_accessor authorization_endpoint: ::String
+      SENSITIVE: [:client_secret]
+    end
+
+    class AuthorizationCodeGrantMetadata
+      attr_accessor base_endpoint: ::String
+      attr_accessor redirect_url: ::String
+      attr_accessor authorization_code_grant_credentials_source: ("PLAIN_CREDENTIALS")
+      attr_accessor authorization_code_grant_credentials_details: Types::AuthorizationCodeGrantCredentialsDetails
+      SENSITIVE: []
+    end
+
     class AuthorizedTargetsByService
       attr_accessor service: ("REDSHIFT" | "QBUSINESS" | "ATHENA")
       attr_accessor authorized_targets: ::Array[::String]
@@ -761,6 +898,13 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class BasicAuthConnectionMetadata
+      attr_accessor base_endpoint: ::String
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:username, :password]
+    end
+
     class BatchCreateTopicReviewedAnswerRequest
       attr_accessor aws_account_id: ::String
       attr_accessor topic_id: ::String
@@ -864,7 +1008,9 @@ module Aws::QuickSight
     end
 
     class BorderStyle
+      attr_accessor color: ::String
       attr_accessor show: bool
+      attr_accessor width: ::String
       SENSITIVE: []
     end
 
@@ -1035,6 +1181,18 @@ module Aws::QuickSight
       attr_accessor include_content_in_scheduled_reports_email: ("DENY")
       attr_accessor dashboard: ("DENY")
       attr_accessor analysis: ("DENY")
+      attr_accessor automate: ("DENY")
+      attr_accessor flow: ("DENY")
+      attr_accessor publish_without_approval: ("DENY")
+      attr_accessor use_bedrock_models: ("DENY")
+      attr_accessor perform_flow_ui_task: ("DENY")
+      attr_accessor use_agent_web_search: ("DENY")
+      attr_accessor knowledge_base: ("DENY")
+      attr_accessor action: ("DENY")
+      attr_accessor space: ("DENY")
+      attr_accessor chat_agent: ("DENY")
+      attr_accessor create_chat_agents: ("DENY")
+      attr_accessor research: ("DENY")
       SENSITIVE: []
     end
 
@@ -1054,6 +1212,13 @@ module Aws::QuickSight
       attr_accessor new_column_type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME")
       attr_accessor sub_type: ("FLOAT" | "FIXED")
       attr_accessor format: ::String
+      SENSITIVE: []
+    end
+
+    class CastColumnTypesOperation
+      attr_accessor alias: ::String
+      attr_accessor source: Types::TransformOperationSource
+      attr_accessor cast_column_type_operations: ::Array[Types::CastColumnTypeOperation]
       SENSITIVE: []
     end
 
@@ -1111,6 +1276,31 @@ module Aws::QuickSight
       attr_accessor visibility: ("HIDDEN" | "VISIBLE")
       attr_accessor sort_icon_visibility: ("HIDDEN" | "VISIBLE")
       attr_accessor axis_label_options: ::Array[Types::AxisLabelOptions]
+      SENSITIVE: []
+    end
+
+    class ClientCredentialsDetails
+      attr_accessor client_credentials_grant_details: Types::ClientCredentialsGrantDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ClientCredentialsGrantDetails < ClientCredentialsDetails
+      end
+      class Unknown < ClientCredentialsDetails
+      end
+    end
+
+    class ClientCredentialsGrantDetails
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor token_endpoint: ::String
+      SENSITIVE: [:client_secret]
+    end
+
+    class ClientCredentialsGrantMetadata
+      attr_accessor base_endpoint: ::String
+      attr_accessor client_credentials_source: ("PLAIN_CREDENTIALS")
+      attr_accessor client_credentials_details: Types::ClientCredentialsDetails
       SENSITIVE: []
     end
 
@@ -1212,6 +1402,12 @@ module Aws::QuickSight
     class ColumnTag
       attr_accessor column_geographic_role: ("COUNTRY" | "STATE" | "COUNTY" | "CITY" | "POSTCODE" | "LONGITUDE" | "LATITUDE")
       attr_accessor column_description: Types::ColumnDescription
+      SENSITIVE: []
+    end
+
+    class ColumnToUnpivot
+      attr_accessor column_name: ::String
+      attr_accessor new_value: ::String
       SENSITIVE: []
     end
 
@@ -1372,8 +1568,21 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ConfluenceParameters
+      attr_accessor confluence_url: ::String
+      SENSITIVE: []
+    end
+
     class ContextMenuOption
       attr_accessor availability_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ContextualAccentPalette
+      attr_accessor connection: Types::Palette
+      attr_accessor visualization: Types::Palette
+      attr_accessor insight: Types::Palette
+      attr_accessor automation: Types::Palette
       SENSITIVE: []
     end
 
@@ -1442,6 +1651,28 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class CreateActionConnectorRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor action_connector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("GENERIC_HTTP" | "SERVICENOW_NOW_PLATFORM" | "SALESFORCE_CRM" | "MICROSOFT_OUTLOOK" | "PAGERDUTY_ADVANCE" | "JIRA_CLOUD" | "ATLASSIAN_CONFLUENCE" | "AMAZON_S3" | "AMAZON_BEDROCK_AGENT_RUNTIME" | "AMAZON_BEDROCK_RUNTIME" | "AMAZON_BEDROCK_DATA_AUTOMATION_RUNTIME" | "AMAZON_TEXTRACT" | "AMAZON_COMPREHEND" | "AMAZON_COMPREHEND_MEDICAL" | "MICROSOFT_ONEDRIVE" | "MICROSOFT_SHAREPOINT" | "MICROSOFT_TEAMS" | "SAP_BUSINESSPARTNER" | "SAP_PRODUCTMASTERDATA" | "SAP_PHYSICALINVENTORY" | "SAP_BILLOFMATERIALS" | "SAP_MATERIALSTOCK" | "ZENDESK_SUITE" | "SMARTSHEET" | "SLACK" | "ASANA" | "BAMBOO_HR")
+      attr_accessor authentication_config: Types::AuthConfig
+      attr_accessor description: ::String
+      attr_accessor permissions: ::Array[Types::ResourcePermission]
+      attr_accessor vpc_connection_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:name, :description]
+    end
+
+    class CreateActionConnectorResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_status: ("CREATION_IN_PROGRESS" | "CREATION_SUCCESSFUL" | "CREATION_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED" | "DELETED")
+      attr_accessor action_connector_id: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
     class CreateAnalysisRequest
       attr_accessor aws_account_id: ::String
       attr_accessor analysis_id: ::String
@@ -1482,6 +1713,8 @@ module Aws::QuickSight
     end
 
     class CreateColumnsOperation
+      attr_accessor alias: ::String
+      attr_accessor source: Types::TransformOperationSource
       attr_accessor columns: ::Array[Types::CalculatedColumn]
       SENSITIVE: []
     end
@@ -1549,6 +1782,8 @@ module Aws::QuickSight
       attr_accessor folder_arns: ::Array[::String]
       attr_accessor performance_configuration: Types::PerformanceConfiguration
       attr_accessor use_as: ("RLS_RULES")
+      attr_accessor data_prep_configuration: Types::DataPrepConfiguration
+      attr_accessor semantic_model_configuration: Types::SemanticModelConfiguration
       SENSITIVE: []
     end
 
@@ -1566,7 +1801,7 @@ module Aws::QuickSight
       attr_accessor aws_account_id: ::String
       attr_accessor data_source_id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY" | "GOOGLESHEETS")
+      attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY" | "GOOGLESHEETS" | "GOOGLE_DRIVE" | "CONFLUENCE" | "SHAREPOINT" | "ONE_DRIVE" | "WEB_CRAWLER" | "S3_KNOWLEDGE_BASE" | "QBUSINESS")
       attr_accessor data_source_parameters: Types::DataSourceParameters
       attr_accessor credentials: Types::DataSourceCredentials
       attr_accessor permissions: ::Array[Types::ResourcePermission]
@@ -2000,7 +2235,7 @@ module Aws::QuickSight
       attr_accessor name: ::String
       attr_accessor sql_query: ::String
       attr_accessor columns: ::Array[Types::InputColumn]
-      SENSITIVE: []
+      SENSITIVE: [:sql_query]
     end
 
     class CustomValuesConfiguration
@@ -2047,6 +2282,7 @@ module Aws::QuickSight
       attr_accessor data_point_menu_label_option: Types::DataPointMenuLabelOption
       attr_accessor data_point_tooltip_option: Types::DataPointTooltipOption
       attr_accessor data_qa_enabled_option: Types::DataQAEnabledOption
+      attr_accessor quick_suite_actions_option: Types::QuickSuiteActionsOption
       attr_accessor executive_summary_option: Types::ExecutiveSummaryOption
       attr_accessor data_stories_sharing_option: Types::DataStoriesSharingOption
       SENSITIVE: []
@@ -2246,6 +2482,32 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DataPrepAggregationFunction
+      attr_accessor simple_aggregation: Types::DataPrepSimpleAggregationFunction
+      attr_accessor list_aggregation: Types::DataPrepListAggregationFunction
+      SENSITIVE: []
+    end
+
+    class DataPrepConfiguration
+      attr_accessor source_table_map: ::Hash[::String, Types::SourceTable]
+      attr_accessor transform_step_map: ::Hash[::String, Types::TransformStep]
+      attr_accessor destination_table_map: ::Hash[::String, Types::DestinationTable]
+      SENSITIVE: []
+    end
+
+    class DataPrepListAggregationFunction
+      attr_accessor input_column_name: ::String
+      attr_accessor separator: ::String
+      attr_accessor distinct: bool
+      SENSITIVE: []
+    end
+
+    class DataPrepSimpleAggregationFunction
+      attr_accessor input_column_name: ::String
+      attr_accessor function_type: ("COUNT" | "DISTINCT_COUNT" | "SUM" | "AVERAGE" | "MAX" | "MIN")
+      SENSITIVE: []
+    end
+
     class DataQAEnabledOption
       attr_accessor availability_status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
@@ -2276,6 +2538,14 @@ module Aws::QuickSight
       attr_accessor dataset_parameters: ::Array[Types::DatasetParameter]
       attr_accessor performance_configuration: Types::PerformanceConfiguration
       attr_accessor use_as: ("RLS_RULES")
+      attr_accessor data_prep_configuration: Types::DataPrepConfiguration
+      attr_accessor semantic_model_configuration: Types::SemanticModelConfiguration
+      SENSITIVE: []
+    end
+
+    class DataSetColumnIdMapping
+      attr_accessor source_column_id: ::String
+      attr_accessor target_column_id: ::String
       SENSITIVE: []
     end
 
@@ -2286,9 +2556,61 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DataSetDateComparisonFilterCondition
+      attr_accessor operator: ("BEFORE" | "BEFORE_OR_EQUALS_TO" | "AFTER" | "AFTER_OR_EQUALS_TO")
+      attr_accessor value: Types::DataSetDateFilterValue
+      SENSITIVE: []
+    end
+
+    class DataSetDateFilterCondition
+      attr_accessor column_name: ::String
+      attr_accessor comparison_filter_condition: Types::DataSetDateComparisonFilterCondition
+      attr_accessor range_filter_condition: Types::DataSetDateRangeFilterCondition
+      SENSITIVE: []
+    end
+
+    class DataSetDateFilterValue
+      attr_accessor static_value: ::Time
+      SENSITIVE: [:static_value]
+    end
+
+    class DataSetDateRangeFilterCondition
+      attr_accessor range_minimum: Types::DataSetDateFilterValue
+      attr_accessor range_maximum: Types::DataSetDateFilterValue
+      attr_accessor include_minimum: bool
+      attr_accessor include_maximum: bool
+      SENSITIVE: []
+    end
+
     class DataSetIdentifierDeclaration
       attr_accessor identifier: ::String
       attr_accessor data_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DataSetNumericComparisonFilterCondition
+      attr_accessor operator: ("EQUALS" | "DOES_NOT_EQUAL" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS_TO" | "LESS_THAN" | "LESS_THAN_OR_EQUALS_TO")
+      attr_accessor value: Types::DataSetNumericFilterValue
+      SENSITIVE: []
+    end
+
+    class DataSetNumericFilterCondition
+      attr_accessor column_name: ::String
+      attr_accessor comparison_filter_condition: Types::DataSetNumericComparisonFilterCondition
+      attr_accessor range_filter_condition: Types::DataSetNumericRangeFilterCondition
+      SENSITIVE: []
+    end
+
+    class DataSetNumericFilterValue
+      attr_accessor static_value: ::Float
+      SENSITIVE: [:static_value]
+    end
+
+    class DataSetNumericRangeFilterCondition
+      attr_accessor range_minimum: Types::DataSetNumericFilterValue
+      attr_accessor range_maximum: Types::DataSetNumericFilterValue
+      attr_accessor include_minimum: bool
+      attr_accessor include_maximum: bool
       SENSITIVE: []
     end
 
@@ -2316,6 +2638,35 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DataSetStringComparisonFilterCondition
+      attr_accessor operator: ("EQUALS" | "DOES_NOT_EQUAL" | "CONTAINS" | "DOES_NOT_CONTAIN" | "STARTS_WITH" | "ENDS_WITH")
+      attr_accessor value: Types::DataSetStringFilterValue
+      SENSITIVE: []
+    end
+
+    class DataSetStringFilterCondition
+      attr_accessor column_name: ::String
+      attr_accessor comparison_filter_condition: Types::DataSetStringComparisonFilterCondition
+      attr_accessor list_filter_condition: Types::DataSetStringListFilterCondition
+      SENSITIVE: []
+    end
+
+    class DataSetStringFilterValue
+      attr_accessor static_value: ::String
+      SENSITIVE: [:static_value]
+    end
+
+    class DataSetStringListFilterCondition
+      attr_accessor operator: ("INCLUDE" | "EXCLUDE")
+      attr_accessor values: Types::DataSetStringListFilterValue
+      SENSITIVE: []
+    end
+
+    class DataSetStringListFilterValue
+      attr_accessor static_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class DataSetSummary
       attr_accessor arn: ::String
       attr_accessor data_set_id: ::String
@@ -2324,6 +2675,7 @@ module Aws::QuickSight
       attr_accessor last_updated_time: ::Time
       attr_accessor import_mode: ("SPICE" | "DIRECT_QUERY")
       attr_accessor row_level_permission_data_set: Types::RowLevelPermissionDataSet
+      attr_accessor row_level_permission_data_set_map: ::Hash[::String, Types::RowLevelPermissionDataSet]
       attr_accessor row_level_permission_tag_configuration_applied: bool
       attr_accessor column_level_permission_rules_applied: bool
       attr_accessor use_as: ("RLS_RULES")
@@ -2340,7 +2692,7 @@ module Aws::QuickSight
       attr_accessor arn: ::String
       attr_accessor data_source_id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY" | "GOOGLESHEETS")
+      attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY" | "GOOGLESHEETS" | "GOOGLE_DRIVE" | "CONFLUENCE" | "SHAREPOINT" | "ONE_DRIVE" | "WEB_CRAWLER" | "S3_KNOWLEDGE_BASE" | "QBUSINESS")
       attr_accessor status: ("CREATION_IN_PROGRESS" | "CREATION_SUCCESSFUL" | "CREATION_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED" | "DELETED")
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time
@@ -2357,6 +2709,7 @@ module Aws::QuickSight
       attr_accessor credential_pair: Types::CredentialPair
       attr_accessor copy_source_arn: ::String
       attr_accessor secret_arn: ::String
+      attr_accessor web_proxy_credentials: Types::WebProxyCredentials
       SENSITIVE: []
     end
 
@@ -2381,6 +2734,7 @@ module Aws::QuickSight
       attr_accessor rds_parameters: Types::RdsParameters
       attr_accessor redshift_parameters: Types::RedshiftParameters
       attr_accessor s3_parameters: Types::S3Parameters
+      attr_accessor s3_knowledge_base_parameters: Types::S3KnowledgeBaseParameters
       attr_accessor service_now_parameters: Types::ServiceNowParameters
       attr_accessor snowflake_parameters: Types::SnowflakeParameters
       attr_accessor spark_parameters: Types::SparkParameters
@@ -2395,6 +2749,9 @@ module Aws::QuickSight
       attr_accessor big_query_parameters: Types::BigQueryParameters
       attr_accessor impala_parameters: Types::ImpalaParameters
       attr_accessor custom_connection_parameters: Types::CustomConnectionParameters
+      attr_accessor web_crawler_parameters: Types::WebCrawlerParameters
+      attr_accessor confluence_parameters: Types::ConfluenceParameters
+      attr_accessor q_business_parameters: Types::QBusinessParameters
       SENSITIVE: []
     end
 
@@ -2409,7 +2766,7 @@ module Aws::QuickSight
       attr_accessor arn: ::String
       attr_accessor data_source_id: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY" | "GOOGLESHEETS")
+      attr_accessor type: ("ADOBE_ANALYTICS" | "AMAZON_ELASTICSEARCH" | "ATHENA" | "AURORA" | "AURORA_POSTGRESQL" | "AWS_IOT_ANALYTICS" | "GITHUB" | "JIRA" | "MARIADB" | "MYSQL" | "ORACLE" | "POSTGRESQL" | "PRESTO" | "REDSHIFT" | "S3" | "SALESFORCE" | "SERVICENOW" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "TWITTER" | "TIMESTREAM" | "AMAZON_OPENSEARCH" | "EXASOL" | "DATABRICKS" | "STARBURST" | "TRINO" | "BIGQUERY" | "GOOGLESHEETS" | "GOOGLE_DRIVE" | "CONFLUENCE" | "SHAREPOINT" | "ONE_DRIVE" | "WEB_CRAWLER" | "S3_KNOWLEDGE_BASE" | "QBUSINESS")
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time
       SENSITIVE: []
@@ -2716,6 +3073,20 @@ module Aws::QuickSight
     end
 
     class DeleteAccountSubscriptionResponse
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteActionConnectorRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor action_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteActionConnectorResponse
+      attr_accessor arn: ::String
+      attr_accessor action_connector_id: ::String
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
       SENSITIVE: []
@@ -3171,6 +3542,34 @@ module Aws::QuickSight
       attr_accessor account_info: Types::AccountInfo
       attr_accessor status: ::Integer
       attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeActionConnectorPermissionsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor action_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeActionConnectorPermissionsResponse
+      attr_accessor arn: ::String
+      attr_accessor action_connector_id: ::String
+      attr_accessor permissions: ::Array[Types::ResourcePermission]
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeActionConnectorRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor action_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeActionConnectorResponse
+      attr_accessor action_connector: Types::ActionConnector
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
       SENSITIVE: []
     end
 
@@ -3924,6 +4323,17 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DestinationTable
+      attr_accessor alias: ::String
+      attr_accessor source: Types::DestinationTableSource
+      SENSITIVE: []
+    end
+
+    class DestinationTableSource
+      attr_accessor transform_operation_id: ::String
+      SENSITIVE: []
+    end
+
     class DimensionField
       attr_accessor numerical_dimension_field: Types::NumericalDimensionField
       attr_accessor categorical_dimension_field: Types::CategoricalDimensionField
@@ -4247,6 +4657,9 @@ module Aws::QuickSight
 
     class FilterOperation
       attr_accessor condition_expression: ::String
+      attr_accessor string_filter_condition: Types::DataSetStringFilterCondition
+      attr_accessor numeric_filter_condition: Types::DataSetNumericFilterCondition
+      attr_accessor date_filter_condition: Types::DataSetDateFilterCondition
       SENSITIVE: [:condition_expression]
     end
 
@@ -4308,6 +4721,30 @@ module Aws::QuickSight
       attr_accessor title: ::String
       attr_accessor source_filter_id: ::String
       attr_accessor display_options: Types::TextFieldControlDisplayOptions
+      SENSITIVE: []
+    end
+
+    class FiltersOperation
+      attr_accessor alias: ::String
+      attr_accessor source: Types::TransformOperationSource
+      attr_accessor filter_operations: ::Array[Types::FilterOperation]
+      SENSITIVE: []
+    end
+
+    class FlowSummary
+      attr_accessor arn: ::String
+      attr_accessor flow_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor last_updated_by: ::String
+      attr_accessor publish_state: ("PUBLISHED" | "DRAFT" | "PENDING_APPROVAL")
+      attr_accessor run_count: ::Integer
+      attr_accessor user_count: ::Integer
+      attr_accessor last_published_by: ::String
+      attr_accessor last_published_at: ::Time
       SENSITIVE: []
     end
 
@@ -4431,6 +4868,8 @@ module Aws::QuickSight
       attr_accessor selected_border_style: Types::FreeFormLayoutElementBorderStyle
       attr_accessor background_style: Types::FreeFormLayoutElementBackgroundStyle
       attr_accessor loading_animation: Types::LoadingAnimation
+      attr_accessor border_radius: ::String
+      attr_accessor padding: ::String
       SENSITIVE: []
     end
 
@@ -4443,6 +4882,7 @@ module Aws::QuickSight
     class FreeFormLayoutElementBorderStyle
       attr_accessor visibility: ("HIDDEN" | "VISIBLE")
       attr_accessor color: ::String
+      attr_accessor width: ::String
       SENSITIVE: []
     end
 
@@ -4922,6 +5362,42 @@ module Aws::QuickSight
       SENSITIVE: [:embed_url]
     end
 
+    class GetFlowMetadataInput
+      attr_accessor aws_account_id: ::String
+      attr_accessor flow_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFlowMetadataOutput
+      attr_accessor arn: ::String
+      attr_accessor flow_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor publish_state: ("PUBLISHED" | "DRAFT" | "PENDING_APPROVAL")
+      attr_accessor user_count: ::Integer
+      attr_accessor run_count: ::Integer
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetFlowPermissionsInput
+      attr_accessor aws_account_id: ::String
+      attr_accessor flow_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFlowPermissionsOutput
+      attr_accessor arn: ::String
+      attr_accessor flow_id: ::String
+      attr_accessor permissions: ::Array[Types::Permission]
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
     class GetSessionEmbedUrlRequest
       attr_accessor aws_account_id: ::String
       attr_accessor entry_point: ::String
@@ -4973,6 +5449,25 @@ module Aws::QuickSight
       attr_accessor column_span: ::Integer
       attr_accessor row_index: ::Integer
       attr_accessor row_span: ::Integer
+      attr_accessor border_style: Types::GridLayoutElementBorderStyle
+      attr_accessor selected_border_style: Types::GridLayoutElementBorderStyle
+      attr_accessor background_style: Types::GridLayoutElementBackgroundStyle
+      attr_accessor loading_animation: Types::LoadingAnimation
+      attr_accessor border_radius: ::String
+      attr_accessor padding: ::String
+      SENSITIVE: []
+    end
+
+    class GridLayoutElementBackgroundStyle
+      attr_accessor visibility: ("HIDDEN" | "VISIBLE")
+      attr_accessor color: ::String
+      SENSITIVE: []
+    end
+
+    class GridLayoutElementBorderStyle
+      attr_accessor visibility: ("HIDDEN" | "VISIBLE")
+      attr_accessor color: ::String
+      attr_accessor width: ::String
       SENSITIVE: []
     end
 
@@ -5111,6 +5606,11 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class IAMConnectionMetadata
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
     class IAMPolicyAssignment
       attr_accessor aws_account_id: ::String
       attr_accessor assignment_id: ::String
@@ -5220,6 +5720,18 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ImportTableOperation
+      attr_accessor alias: ::String
+      attr_accessor source: Types::ImportTableOperationSource
+      SENSITIVE: []
+    end
+
+    class ImportTableOperationSource
+      attr_accessor source_table_id: ::String
+      attr_accessor column_id_mappings: ::Array[Types::DataSetColumnIdMapping]
+      SENSITIVE: []
+    end
+
     class IncrementalRefresh
       attr_accessor lookback_window: Types::LookbackWindow
       SENSITIVE: []
@@ -5247,6 +5759,7 @@ module Aws::QuickSight
 
     class InputColumn
       attr_accessor name: ::String
+      attr_accessor id: ::String
       attr_accessor type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON")
       attr_accessor sub_type: ("FLOAT" | "FIXED")
       SENSITIVE: []
@@ -5321,6 +5834,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class InvalidDataSetParameterValueException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
     class InvalidNextTokenException
       attr_accessor message: ::String
       attr_accessor request_id: ::String
@@ -5369,6 +5888,22 @@ module Aws::QuickSight
     class JoinKeyProperties
       attr_accessor unique_key: bool
       SENSITIVE: []
+    end
+
+    class JoinOperandProperties
+      attr_accessor output_column_name_overrides: ::Array[Types::OutputColumnNameOverride]
+      SENSITIVE: []
+    end
+
+    class JoinOperation
+      attr_accessor alias: ::String
+      attr_accessor left_operand: Types::TransformOperationSource
+      attr_accessor right_operand: Types::TransformOperationSource
+      attr_accessor type: ("INNER" | "OUTER" | "LEFT" | "RIGHT")
+      attr_accessor on_clause: ::String
+      attr_accessor left_operand_properties: Types::JoinOperandProperties
+      attr_accessor right_operand_properties: Types::JoinOperandProperties
+      SENSITIVE: [:on_clause]
     end
 
     class KPIActualValueConditionalFormatting
@@ -5631,6 +6166,21 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ListActionConnectorsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListActionConnectorsResponse
+      attr_accessor action_connector_summaries: ::Array[Types::ActionConnectorSummary]
+      attr_accessor next_token: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
     class ListAnalysesRequest
       attr_accessor aws_account_id: ::String
       attr_accessor next_token: ::String
@@ -5777,6 +6327,21 @@ module Aws::QuickSight
 
     class ListDataSourcesResponse
       attr_accessor data_sources: ::Array[Types::DataSource]
+      attr_accessor next_token: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFlowsInput
+      attr_accessor aws_account_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFlowsOutput
+      attr_accessor flow_summary_list: ::Array[Types::FlowSummary]
       attr_accessor next_token: ::String
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
@@ -6392,6 +6957,11 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class NoneConnectionMetadata
+      attr_accessor base_endpoint: ::String
+      SENSITIVE: []
+    end
+
     class NullValueFormatConfiguration
       attr_accessor null_string: ::String
       SENSITIVE: [:null_string]
@@ -6511,10 +7081,17 @@ module Aws::QuickSight
 
     class OutputColumn
       attr_accessor name: ::String
+      attr_accessor id: ::String
       attr_accessor description: ::String
       attr_accessor type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME")
       attr_accessor sub_type: ("FLOAT" | "FIXED")
       SENSITIVE: [:description]
+    end
+
+    class OutputColumnNameOverride
+      attr_accessor source_column_name: ::String
+      attr_accessor output_column_name: ::String
+      SENSITIVE: []
     end
 
     class OverrideDatasetParameterOperation
@@ -6647,6 +7224,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ParentDataSet
+      attr_accessor data_set_arn: ::String
+      attr_accessor input_columns: ::Array[Types::InputColumn]
+      SENSITIVE: []
+    end
+
     class PercentVisibleRange
       attr_accessor from: ::Float
       attr_accessor to: ::Float
@@ -6690,10 +7273,17 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class Permission
+      attr_accessor actions: ::Array[::String]
+      attr_accessor principal: ::String
+      SENSITIVE: []
+    end
+
     class PhysicalTable
       attr_accessor relational_table: Types::RelationalTable
       attr_accessor custom_sql: Types::CustomSql
       attr_accessor s3_source: Types::S3Source
+      attr_accessor saa_s_table: Types::SaaSTable
       SENSITIVE: []
     end
 
@@ -6744,9 +7334,24 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class PivotConfiguration
+      attr_accessor label_column_name: ::String
+      attr_accessor pivoted_labels: ::Array[Types::PivotedLabel]
+      SENSITIVE: []
+    end
+
     class PivotFieldSortOptions
       attr_accessor field_id: ::String
       attr_accessor sort_by: Types::PivotTableSortBy
+      SENSITIVE: []
+    end
+
+    class PivotOperation
+      attr_accessor alias: ::String
+      attr_accessor source: Types::TransformOperationSource
+      attr_accessor group_by_column_names: ::Array[::String]
+      attr_accessor value_column_configuration: Types::ValueColumnConfiguration
+      attr_accessor pivot_configuration: Types::PivotConfiguration
       SENSITIVE: []
     end
 
@@ -6905,6 +7510,13 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class PivotedLabel
+      attr_accessor label_name: ::String
+      attr_accessor new_column_name: ::String
+      attr_accessor new_column_id: ::String
+      SENSITIVE: []
+    end
+
     class PluginVisual
       attr_accessor visual_id: ::String
       attr_accessor plugin_arn: ::String
@@ -7008,6 +7620,8 @@ module Aws::QuickSight
     end
 
     class ProjectOperation
+      attr_accessor alias: ::String
+      attr_accessor source: Types::TransformOperationSource
       attr_accessor projected_columns: ::Array[::String]
       SENSITIVE: []
     end
@@ -7032,6 +7646,11 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class QBusinessParameters
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
     class QDataKey
       attr_accessor q_data_key_arn: ::String
       attr_accessor q_data_key_type: ("AWS_OWNED" | "CMK")
@@ -7052,6 +7671,11 @@ module Aws::QuickSight
     class QuickSightUserNotFoundException
       attr_accessor message: ::String
       attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class QuickSuiteActionsOption
+      attr_accessor availability_status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -7130,6 +7754,111 @@ module Aws::QuickSight
     class RdsParameters
       attr_accessor instance_id: ::String
       attr_accessor database: ::String
+      SENSITIVE: []
+    end
+
+    class ReadAPIKeyConnectionMetadata
+      attr_accessor base_endpoint: ::String
+      attr_accessor email: ::String
+      SENSITIVE: [:email]
+    end
+
+    class ReadAuthConfig
+      attr_accessor authentication_type: ("BASIC" | "API_KEY" | "OAUTH2_CLIENT_CREDENTIALS" | "NONE" | "IAM" | "OAUTH2_AUTHORIZATION_CODE")
+      attr_accessor authentication_metadata: Types::ReadAuthenticationMetadata
+      SENSITIVE: []
+    end
+
+    class ReadAuthenticationMetadata
+      attr_accessor authorization_code_grant_metadata: Types::ReadAuthorizationCodeGrantMetadata
+      attr_accessor client_credentials_grant_metadata: Types::ReadClientCredentialsGrantMetadata
+      attr_accessor basic_auth_connection_metadata: Types::ReadBasicAuthConnectionMetadata
+      attr_accessor api_key_connection_metadata: Types::ReadAPIKeyConnectionMetadata
+      attr_accessor none_connection_metadata: Types::ReadNoneConnectionMetadata
+      attr_accessor iam_connection_metadata: Types::ReadIamConnectionMetadata
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AuthorizationCodeGrantMetadata < ReadAuthenticationMetadata
+      end
+      class ClientCredentialsGrantMetadata < ReadAuthenticationMetadata
+      end
+      class BasicAuthConnectionMetadata < ReadAuthenticationMetadata
+      end
+      class ApiKeyConnectionMetadata < ReadAuthenticationMetadata
+      end
+      class NoneConnectionMetadata < ReadAuthenticationMetadata
+      end
+      class IamConnectionMetadata < ReadAuthenticationMetadata
+      end
+      class Unknown < ReadAuthenticationMetadata
+      end
+    end
+
+    class ReadAuthorizationCodeGrantCredentialsDetails
+      attr_accessor read_authorization_code_grant_details: Types::ReadAuthorizationCodeGrantDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ReadAuthorizationCodeGrantDetails < ReadAuthorizationCodeGrantCredentialsDetails
+      end
+      class Unknown < ReadAuthorizationCodeGrantCredentialsDetails
+      end
+    end
+
+    class ReadAuthorizationCodeGrantDetails
+      attr_accessor client_id: ::String
+      attr_accessor token_endpoint: ::String
+      attr_accessor authorization_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class ReadAuthorizationCodeGrantMetadata
+      attr_accessor base_endpoint: ::String
+      attr_accessor redirect_url: ::String
+      attr_accessor read_authorization_code_grant_credentials_details: Types::ReadAuthorizationCodeGrantCredentialsDetails
+      attr_accessor authorization_code_grant_credentials_source: ("PLAIN_CREDENTIALS")
+      SENSITIVE: []
+    end
+
+    class ReadBasicAuthConnectionMetadata
+      attr_accessor base_endpoint: ::String
+      attr_accessor username: ::String
+      SENSITIVE: [:username]
+    end
+
+    class ReadClientCredentialsDetails
+      attr_accessor read_client_credentials_grant_details: Types::ReadClientCredentialsGrantDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ReadClientCredentialsGrantDetails < ReadClientCredentialsDetails
+      end
+      class Unknown < ReadClientCredentialsDetails
+      end
+    end
+
+    class ReadClientCredentialsGrantDetails
+      attr_accessor client_id: ::String
+      attr_accessor token_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class ReadClientCredentialsGrantMetadata
+      attr_accessor base_endpoint: ::String
+      attr_accessor read_client_credentials_details: Types::ReadClientCredentialsDetails
+      attr_accessor client_credentials_source: ("PLAIN_CREDENTIALS")
+      SENSITIVE: []
+    end
+
+    class ReadIamConnectionMetadata
+      attr_accessor role_arn: ::String
+      attr_accessor source_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ReadNoneConnectionMetadata
+      attr_accessor base_endpoint: ::String
       SENSITIVE: []
     end
 
@@ -7312,6 +8041,7 @@ module Aws::QuickSight
       attr_accessor q_search_bar: Types::RegisteredUserQSearchBarEmbeddingConfiguration
       attr_accessor dashboard_visual: Types::RegisteredUserDashboardVisualEmbeddingConfiguration
       attr_accessor generative_qn_a: Types::RegisteredUserGenerativeQnAEmbeddingConfiguration
+      attr_accessor quick_chat: Types::RegisteredUserQuickChatEmbeddingConfiguration
       SENSITIVE: []
     end
 
@@ -7323,6 +8053,9 @@ module Aws::QuickSight
     class RegisteredUserQSearchBarEmbeddingConfiguration
       attr_accessor initial_topic_id: ::String
       SENSITIVE: []
+    end
+
+    class RegisteredUserQuickChatEmbeddingConfiguration < Aws::EmptyStructure
     end
 
     class RegisteredUserQuickSightConsoleEmbeddingConfiguration
@@ -7365,6 +8098,13 @@ module Aws::QuickSight
     class RenameColumnOperation
       attr_accessor column_name: ::String
       attr_accessor new_column_name: ::String
+      SENSITIVE: []
+    end
+
+    class RenameColumnsOperation
+      attr_accessor alias: ::String
+      attr_accessor source: Types::TransformOperationSource
+      attr_accessor rename_column_operations: ::Array[Types::RenameColumnOperation]
       SENSITIVE: []
     end
 
@@ -7431,6 +8171,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class RowLevelPermissionConfiguration
+      attr_accessor tag_configuration: Types::RowLevelPermissionTagConfiguration
+      attr_accessor row_level_permission_data_set: Types::RowLevelPermissionDataSet
+      SENSITIVE: []
+    end
+
     class RowLevelPermissionDataSet
       attr_accessor namespace: ::String
       attr_accessor arn: ::String
@@ -7462,6 +8208,13 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class S3KnowledgeBaseParameters
+      attr_accessor role_arn: ::String
+      attr_accessor bucket_url: ::String
+      attr_accessor metadata_files_location: ::String
+      SENSITIVE: []
+    end
+
     class S3Parameters
       attr_accessor manifest_file_location: Types::ManifestFileLocation
       attr_accessor role_arn: ::String
@@ -7471,6 +8224,13 @@ module Aws::QuickSight
     class S3Source
       attr_accessor data_source_arn: ::String
       attr_accessor upload_settings: Types::UploadSettings
+      attr_accessor input_columns: ::Array[Types::InputColumn]
+      SENSITIVE: []
+    end
+
+    class SaaSTable
+      attr_accessor data_source_arn: ::String
+      attr_accessor table_path: ::Array[Types::TablePathElement]
       attr_accessor input_columns: ::Array[Types::InputColumn]
       SENSITIVE: []
     end
@@ -7590,6 +8350,22 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class SearchActionConnectorsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::ActionConnectorSearchFilter]
+      SENSITIVE: []
+    end
+
+    class SearchActionConnectorsResponse
+      attr_accessor next_token: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      attr_accessor action_connector_summaries: ::Array[Types::ActionConnectorSummary]
+      SENSITIVE: []
+    end
+
     class SearchAnalysesRequest
       attr_accessor aws_account_id: ::String
       attr_accessor filters: ::Array[Types::AnalysisSearchFilter]
@@ -7651,6 +8427,29 @@ module Aws::QuickSight
       attr_accessor next_token: ::String
       attr_accessor status: ::Integer
       attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class SearchFlowsFilter
+      attr_accessor name: ("assetName" | "assetDescription" | "DIRECT_QUICKSIGHT_OWNER" | "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER" | "DIRECT_QUICKSIGHT_SOLE_OWNER")
+      attr_accessor operator: ("StringEquals" | "StringLike")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SearchFlowsInput
+      attr_accessor aws_account_id: ::String
+      attr_accessor filters: ::Array[Types::SearchFlowsFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchFlowsOutput
+      attr_accessor flow_summary_list: ::Array[Types::FlowSummary]
+      attr_accessor next_token: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
       SENSITIVE: []
     end
 
@@ -7761,6 +8560,18 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class SemanticModelConfiguration
+      attr_accessor table_map: ::Hash[::String, Types::SemanticTable]
+      SENSITIVE: []
+    end
+
+    class SemanticTable
+      attr_accessor alias: ::String
+      attr_accessor destination_table_id: ::String
+      attr_accessor row_level_permission_configuration: Types::RowLevelPermissionConfiguration
+      SENSITIVE: []
+    end
+
     class SemanticType
       attr_accessor type_name: ::String
       attr_accessor sub_type_name: ::String
@@ -7815,6 +8626,12 @@ module Aws::QuickSight
       attr_accessor sheet_id: ::String
       attr_accessor name: ::String
       attr_accessor images: ::Array[Types::SheetImage]
+      SENSITIVE: []
+    end
+
+    class SheetBackgroundStyle
+      attr_accessor color: ::String
+      attr_accessor gradient: ::String
       SENSITIVE: []
     end
 
@@ -7912,6 +8729,7 @@ module Aws::QuickSight
     class SheetStyle
       attr_accessor tile: Types::TileStyle
       attr_accessor tile_layout: Types::TileLayoutStyle
+      attr_accessor background: Types::SheetBackgroundStyle
       SENSITIVE: []
     end
 
@@ -8072,6 +8890,12 @@ module Aws::QuickSight
       attr_accessor authentication_type: ("PASSWORD" | "TOKEN" | "X509")
       attr_accessor database_access_control_role: ::String
       attr_accessor o_auth_parameters: Types::OAuthParameters
+      SENSITIVE: []
+    end
+
+    class SourceTable
+      attr_accessor physical_table_id: ::String
+      attr_accessor data_set: Types::ParentDataSet
       SENSITIVE: []
     end
 
@@ -8424,6 +9248,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class TablePathElement
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
     class TablePinnedFieldOptions
       attr_accessor pinned_left_fields: ::Array[::String]
       SENSITIVE: []
@@ -8714,7 +9544,10 @@ module Aws::QuickSight
     end
 
     class TileStyle
+      attr_accessor background_color: ::String
       attr_accessor border: Types::BorderStyle
+      attr_accessor border_radius: ::String
+      attr_accessor padding: ::String
       SENSITIVE: []
     end
 
@@ -9145,6 +9978,27 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class TransformOperationSource
+      attr_accessor transform_operation_id: ::String
+      attr_accessor column_id_mappings: ::Array[Types::DataSetColumnIdMapping]
+      SENSITIVE: []
+    end
+
+    class TransformStep
+      attr_accessor import_table_step: Types::ImportTableOperation
+      attr_accessor project_step: Types::ProjectOperation
+      attr_accessor filters_step: Types::FiltersOperation
+      attr_accessor create_columns_step: Types::CreateColumnsOperation
+      attr_accessor rename_columns_step: Types::RenameColumnsOperation
+      attr_accessor cast_column_types_step: Types::CastColumnTypesOperation
+      attr_accessor join_step: Types::JoinOperation
+      attr_accessor aggregate_step: Types::AggregateOperation
+      attr_accessor pivot_step: Types::PivotOperation
+      attr_accessor unpivot_step: Types::UnpivotOperation
+      attr_accessor append_step: Types::AppendOperation
+      SENSITIVE: []
+    end
+
     class TransposedTableOption
       attr_accessor column_index: ::Integer
       attr_accessor column_width: ::String
@@ -9215,6 +10069,13 @@ module Aws::QuickSight
 
     class Typography
       attr_accessor font_families: ::Array[Types::Font]
+      attr_accessor axis_title_font_configuration: Types::FontConfiguration
+      attr_accessor axis_label_font_configuration: Types::FontConfiguration
+      attr_accessor legend_title_font_configuration: Types::FontConfiguration
+      attr_accessor legend_value_font_configuration: Types::FontConfiguration
+      attr_accessor data_label_font_configuration: Types::FontConfiguration
+      attr_accessor visual_title_font_configuration: Types::VisualTitleFontConfiguration
+      attr_accessor visual_subtitle_font_configuration: Types::VisualSubtitleFontConfiguration
       SENSITIVE: []
     end
 
@@ -9254,6 +10115,17 @@ module Aws::QuickSight
       attr_accessor computation_id: ::String
       attr_accessor name: ::String
       attr_accessor category: Types::DimensionField
+      SENSITIVE: []
+    end
+
+    class UnpivotOperation
+      attr_accessor alias: ::String
+      attr_accessor source: Types::TransformOperationSource
+      attr_accessor columns_to_unpivot: ::Array[Types::ColumnToUnpivot]
+      attr_accessor unpivoted_label_column_name: ::String
+      attr_accessor unpivoted_label_column_id: ::String
+      attr_accessor unpivoted_value_column_name: ::String
+      attr_accessor unpivoted_value_column_id: ::String
       SENSITIVE: []
     end
 
@@ -9326,6 +10198,42 @@ module Aws::QuickSight
 
     class UpdateAccountSettingsResponse
       attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateActionConnectorPermissionsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor action_connector_id: ::String
+      attr_accessor grant_permissions: ::Array[Types::ResourcePermission]
+      attr_accessor revoke_permissions: ::Array[Types::ResourcePermission]
+      SENSITIVE: []
+    end
+
+    class UpdateActionConnectorPermissionsResponse
+      attr_accessor arn: ::String
+      attr_accessor action_connector_id: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      attr_accessor permissions: ::Array[Types::ResourcePermission]
+      SENSITIVE: []
+    end
+
+    class UpdateActionConnectorRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor action_connector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor authentication_config: Types::AuthConfig
+      attr_accessor description: ::String
+      attr_accessor vpc_connection_arn: ::String
+      SENSITIVE: [:name, :description]
+    end
+
+    class UpdateActionConnectorResponse
+      attr_accessor arn: ::String
+      attr_accessor action_connector_id: ::String
+      attr_accessor request_id: ::String
+      attr_accessor update_status: ("CREATION_IN_PROGRESS" | "CREATION_SUCCESSFUL" | "CREATION_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED" | "DELETED")
       attr_accessor status: ::Integer
       SENSITIVE: []
     end
@@ -9551,6 +10459,8 @@ module Aws::QuickSight
       attr_accessor data_set_usage_configuration: Types::DataSetUsageConfiguration
       attr_accessor dataset_parameters: ::Array[Types::DatasetParameter]
       attr_accessor performance_configuration: Types::PerformanceConfiguration
+      attr_accessor data_prep_configuration: Types::DataPrepConfiguration
+      attr_accessor semantic_model_configuration: Types::SemanticModelConfiguration
       SENSITIVE: []
     end
 
@@ -9610,6 +10520,23 @@ module Aws::QuickSight
     class UpdateDefaultQBusinessApplicationResponse
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateFlowPermissionsInput
+      attr_accessor aws_account_id: ::String
+      attr_accessor flow_id: ::String
+      attr_accessor grant_permissions: ::Array[Types::Permission]
+      attr_accessor revoke_permissions: ::Array[Types::Permission]
+      SENSITIVE: []
+    end
+
+    class UpdateFlowPermissionsOutput
+      attr_accessor status: ::Integer
+      attr_accessor arn: ::String
+      attr_accessor permissions: ::Array[Types::Permission]
+      attr_accessor request_id: ::String
+      attr_accessor flow_id: ::String
       SENSITIVE: []
     end
 
@@ -10020,6 +10947,7 @@ module Aws::QuickSight
       attr_accessor contains_header: bool
       attr_accessor text_qualifier: ("DOUBLE_QUOTE" | "SINGLE_QUOTE")
       attr_accessor delimiter: ::String
+      attr_accessor custom_cell_address_range: ::String
       SENSITIVE: []
     end
 
@@ -10072,6 +11000,11 @@ module Aws::QuickSight
 
     class ValidationStrategy
       attr_accessor mode: ("STRICT" | "LENIENT")
+      SENSITIVE: []
+    end
+
+    class ValueColumnConfiguration
+      attr_accessor aggregation_function: Types::DataPrepAggregationFunction
       SENSITIVE: []
     end
 
@@ -10163,9 +11096,23 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class VisualSubtitleFontConfiguration
+      attr_accessor font_configuration: Types::FontConfiguration
+      attr_accessor text_alignment: ("LEFT" | "CENTER" | "RIGHT" | "AUTO")
+      attr_accessor text_transform: ("CAPITALIZE")
+      SENSITIVE: []
+    end
+
     class VisualSubtitleLabelOptions
       attr_accessor visibility: ("HIDDEN" | "VISIBLE")
       attr_accessor format_text: Types::LongFormatText
+      SENSITIVE: []
+    end
+
+    class VisualTitleFontConfiguration
+      attr_accessor font_configuration: Types::FontConfiguration
+      attr_accessor text_alignment: ("LEFT" | "CENTER" | "RIGHT" | "AUTO")
+      attr_accessor text_transform: ("CAPITALIZE")
       SENSITIVE: []
     end
 
@@ -10239,6 +11186,24 @@ module Aws::QuickSight
       attr_accessor actions: ::Array[Types::VisualCustomAction]
       attr_accessor column_hierarchies: ::Array[Types::ColumnHierarchy]
       attr_accessor visual_content_alt_text: ::String
+      SENSITIVE: []
+    end
+
+    class WebCrawlerParameters
+      attr_accessor web_crawler_auth_type: ("NO_AUTH" | "BASIC_AUTH" | "FORM" | "SAML")
+      attr_accessor username_field_xpath: ::String
+      attr_accessor password_field_xpath: ::String
+      attr_accessor username_button_xpath: ::String
+      attr_accessor password_button_xpath: ::String
+      attr_accessor login_page_url: ::String
+      attr_accessor web_proxy_host_name: ::String
+      attr_accessor web_proxy_port_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class WebProxyCredentials
+      attr_accessor web_proxy_username: ::String
+      attr_accessor web_proxy_password: ::String
       SENSITIVE: []
     end
 

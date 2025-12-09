@@ -109,10 +109,18 @@ module Aws::NetworkManager
     end
 
     class AttachmentError
-      attr_accessor code: ("VPC_NOT_FOUND" | "SUBNET_NOT_FOUND" | "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE" | "SUBNET_NO_FREE_ADDRESSES" | "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE" | "SUBNET_NO_IPV6_CIDRS" | "VPN_CONNECTION_NOT_FOUND" | "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED" | "DIRECT_CONNECT_GATEWAY_NOT_FOUND" | "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS" | "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF")
+      attr_accessor code: ("VPC_NOT_FOUND" | "SUBNET_NOT_FOUND" | "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE" | "SUBNET_NO_FREE_ADDRESSES" | "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE" | "SUBNET_NO_IPV6_CIDRS" | "VPN_CONNECTION_NOT_FOUND" | "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED" | "DIRECT_CONNECT_GATEWAY_NOT_FOUND" | "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS" | "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF" | "VPN_EXISTING_ASSOCIATIONS" | "VPC_UNSUPPORTED_FEATURES")
       attr_accessor message: ::String
       attr_accessor resource_arn: ::String
       attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class AttachmentRoutingPolicyAssociationSummary
+      attr_accessor attachment_id: ::String
+      attr_accessor pending_routing_policies: ::Array[::String]
+      attr_accessor associated_routing_policies: ::Array[::String]
+      attr_accessor routing_policy_label: ::String
       SENSITIVE: []
     end
 
@@ -243,7 +251,7 @@ module Aws::NetworkManager
     end
 
     class CoreNetworkChange
-      attr_accessor type: ("CORE_NETWORK_SEGMENT" | "NETWORK_FUNCTION_GROUP" | "CORE_NETWORK_EDGE" | "ATTACHMENT_MAPPING" | "ATTACHMENT_ROUTE_PROPAGATION" | "ATTACHMENT_ROUTE_STATIC" | "CORE_NETWORK_CONFIGURATION" | "SEGMENTS_CONFIGURATION" | "SEGMENT_ACTIONS_CONFIGURATION" | "ATTACHMENT_POLICIES_CONFIGURATION")
+      attr_accessor type: ("CORE_NETWORK_SEGMENT" | "NETWORK_FUNCTION_GROUP" | "CORE_NETWORK_EDGE" | "ATTACHMENT_MAPPING" | "ATTACHMENT_ROUTE_PROPAGATION" | "ATTACHMENT_ROUTE_STATIC" | "ROUTING_POLICY" | "ROUTING_POLICY_SEGMENT_ASSOCIATION" | "ROUTING_POLICY_EDGE_ASSOCIATION" | "ROUTING_POLICY_ATTACHMENT_ASSOCIATION" | "CORE_NETWORK_CONFIGURATION" | "SEGMENTS_CONFIGURATION" | "SEGMENT_ACTIONS_CONFIGURATION" | "ATTACHMENT_POLICIES_CONFIGURATION")
       attr_accessor action: ("ADD" | "MODIFY" | "REMOVE")
       attr_accessor identifier: ::String
       attr_accessor previous_values: Types::CoreNetworkChangeValues
@@ -253,7 +261,7 @@ module Aws::NetworkManager
     end
 
     class CoreNetworkChangeEvent
-      attr_accessor type: ("CORE_NETWORK_SEGMENT" | "NETWORK_FUNCTION_GROUP" | "CORE_NETWORK_EDGE" | "ATTACHMENT_MAPPING" | "ATTACHMENT_ROUTE_PROPAGATION" | "ATTACHMENT_ROUTE_STATIC" | "CORE_NETWORK_CONFIGURATION" | "SEGMENTS_CONFIGURATION" | "SEGMENT_ACTIONS_CONFIGURATION" | "ATTACHMENT_POLICIES_CONFIGURATION")
+      attr_accessor type: ("CORE_NETWORK_SEGMENT" | "NETWORK_FUNCTION_GROUP" | "CORE_NETWORK_EDGE" | "ATTACHMENT_MAPPING" | "ATTACHMENT_ROUTE_PROPAGATION" | "ATTACHMENT_ROUTE_STATIC" | "ROUTING_POLICY" | "ROUTING_POLICY_SEGMENT_ASSOCIATION" | "ROUTING_POLICY_EDGE_ASSOCIATION" | "ROUTING_POLICY_ATTACHMENT_ASSOCIATION" | "CORE_NETWORK_CONFIGURATION" | "SEGMENTS_CONFIGURATION" | "SEGMENT_ACTIONS_CONFIGURATION" | "ATTACHMENT_POLICIES_CONFIGURATION")
       attr_accessor action: ("ADD" | "MODIFY" | "REMOVE")
       attr_accessor identifier_path: ::String
       attr_accessor event_time: ::Time
@@ -264,10 +272,13 @@ module Aws::NetworkManager
 
     class CoreNetworkChangeEventValues
       attr_accessor edge_location: ::String
+      attr_accessor peer_edge_location: ::String
+      attr_accessor routing_policy_direction: ("inbound" | "outbound")
       attr_accessor segment_name: ::String
       attr_accessor network_function_group_name: ::String
       attr_accessor attachment_id: ::String
       attr_accessor cidr: ::String
+      attr_accessor routing_policy_association_details: ::Array[Types::RoutingPolicyAssociationDetail]
       SENSITIVE: []
     end
 
@@ -284,6 +295,11 @@ module Aws::NetworkManager
       attr_accessor vpn_ecmp_support: bool
       attr_accessor dns_support: bool
       attr_accessor security_group_referencing_support: bool
+      attr_accessor routing_policy_direction: ("inbound" | "outbound")
+      attr_accessor routing_policy: ::String
+      attr_accessor peer_edge_locations: ::Array[::String]
+      attr_accessor attachment_id: ::String
+      attr_accessor routing_policy_association_details: ::Array[Types::RoutingPolicyAssociationDetail]
       SENSITIVE: []
     end
 
@@ -343,6 +359,16 @@ module Aws::NetworkManager
       SENSITIVE: []
     end
 
+    class CoreNetworkRoutingInformation
+      attr_accessor prefix: ::String
+      attr_accessor next_hop: Types::RoutingInformationNextHop
+      attr_accessor local_preference: ::String
+      attr_accessor med: ::String
+      attr_accessor as_path: ::Array[::String]
+      attr_accessor communities: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class CoreNetworkSegment
       attr_accessor name: ::String
       attr_accessor edge_locations: ::Array[::String]
@@ -372,6 +398,7 @@ module Aws::NetworkManager
       attr_accessor core_network_id: ::String
       attr_accessor edge_location: ::String
       attr_accessor transport_attachment_id: ::String
+      attr_accessor routing_policy_label: ::String
       attr_accessor options: Types::ConnectAttachmentOptions
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor client_token: ::String
@@ -416,6 +443,21 @@ module Aws::NetworkManager
       SENSITIVE: []
     end
 
+    class CreateCoreNetworkPrefixListAssociationRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor prefix_list_arn: ::String
+      attr_accessor prefix_list_alias: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCoreNetworkPrefixListAssociationResponse
+      attr_accessor core_network_id: ::String
+      attr_accessor prefix_list_arn: ::String
+      attr_accessor prefix_list_alias: ::String
+      SENSITIVE: []
+    end
+
     class CreateCoreNetworkRequest
       attr_accessor global_network_id: ::String
       attr_accessor description: ::String
@@ -452,6 +494,7 @@ module Aws::NetworkManager
     class CreateDirectConnectGatewayAttachmentRequest
       attr_accessor core_network_id: ::String
       attr_accessor direct_connect_gateway_arn: ::String
+      attr_accessor routing_policy_label: ::String
       attr_accessor edge_locations: ::Array[::String]
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor client_token: ::String
@@ -506,6 +549,7 @@ module Aws::NetworkManager
     class CreateSiteToSiteVpnAttachmentRequest
       attr_accessor core_network_id: ::String
       attr_accessor vpn_connection_arn: ::String
+      attr_accessor routing_policy_label: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -532,6 +576,7 @@ module Aws::NetworkManager
     class CreateTransitGatewayRouteTableAttachmentRequest
       attr_accessor peering_id: ::String
       attr_accessor transit_gateway_route_table_arn: ::String
+      attr_accessor routing_policy_label: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -547,6 +592,7 @@ module Aws::NetworkManager
       attr_accessor vpc_arn: ::String
       attr_accessor subnet_arns: ::Array[::String]
       attr_accessor options: Types::VpcOptions
+      attr_accessor routing_policy_label: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor client_token: ::String
       SENSITIVE: []
@@ -605,6 +651,18 @@ module Aws::NetworkManager
 
     class DeleteCoreNetworkPolicyVersionResponse
       attr_accessor core_network_policy: Types::CoreNetworkPolicy
+      SENSITIVE: []
+    end
+
+    class DeleteCoreNetworkPrefixListAssociationRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor prefix_list_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCoreNetworkPrefixListAssociationResponse
+      attr_accessor core_network_id: ::String
+      attr_accessor prefix_list_arn: ::String
       SENSITIVE: []
     end
 
@@ -1193,6 +1251,20 @@ module Aws::NetworkManager
       SENSITIVE: []
     end
 
+    class ListAttachmentRoutingPolicyAssociationsRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor attachment_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAttachmentRoutingPolicyAssociationsResponse
+      attr_accessor attachment_routing_policy_associations: ::Array[Types::AttachmentRoutingPolicyAssociationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListAttachmentsRequest
       attr_accessor core_network_id: ::String
       attr_accessor attachment_type: ("CONNECT" | "SITE_TO_SITE_VPN" | "VPC" | "DIRECT_CONNECT_GATEWAY" | "TRANSIT_GATEWAY_ROUTE_TABLE")
@@ -1232,6 +1304,40 @@ module Aws::NetworkManager
 
     class ListCoreNetworkPolicyVersionsResponse
       attr_accessor core_network_policy_versions: ::Array[Types::CoreNetworkPolicyVersion]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCoreNetworkPrefixListAssociationsRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor prefix_list_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCoreNetworkPrefixListAssociationsResponse
+      attr_accessor prefix_list_associations: ::Array[Types::PrefixListAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCoreNetworkRoutingInformationRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor segment_name: ::String
+      attr_accessor edge_location: ::String
+      attr_accessor next_hop_filters: ::Hash[::String, ::Array[::String]]
+      attr_accessor local_preference_matches: ::Array[::String]
+      attr_accessor exact_as_path_matches: ::Array[::String]
+      attr_accessor med_matches: ::Array[::String]
+      attr_accessor community_matches: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCoreNetworkRoutingInformationResponse
+      attr_accessor core_network_routing_information: ::Array[Types::CoreNetworkRoutingInformation]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1406,6 +1512,13 @@ module Aws::NetworkManager
       SENSITIVE: []
     end
 
+    class PrefixListAssociation
+      attr_accessor core_network_id: ::String
+      attr_accessor prefix_list_arn: ::String
+      attr_accessor prefix_list_alias: ::String
+      SENSITIVE: []
+    end
+
     class ProposedNetworkFunctionGroupChange
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor attachment_policy_rule_number: ::Integer
@@ -1417,6 +1530,21 @@ module Aws::NetworkManager
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor attachment_policy_rule_number: ::Integer
       attr_accessor segment_name: ::String
+      SENSITIVE: []
+    end
+
+    class PutAttachmentRoutingPolicyLabelRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor attachment_id: ::String
+      attr_accessor routing_policy_label: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class PutAttachmentRoutingPolicyLabelResponse
+      attr_accessor core_network_id: ::String
+      attr_accessor attachment_id: ::String
+      attr_accessor routing_policy_label: ::String
       SENSITIVE: []
     end
 
@@ -1467,6 +1595,19 @@ module Aws::NetworkManager
     class Relationship
       attr_accessor from: ::String
       attr_accessor to: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveAttachmentRoutingPolicyLabelRequest
+      attr_accessor core_network_id: ::String
+      attr_accessor attachment_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveAttachmentRoutingPolicyLabelResponse
+      attr_accessor core_network_id: ::String
+      attr_accessor attachment_id: ::String
+      attr_accessor routing_policy_label: ::String
       SENSITIVE: []
     end
 
@@ -1534,6 +1675,22 @@ module Aws::NetworkManager
       attr_accessor transit_gateway_route_table_arn: ::String
       attr_accessor core_network_segment_edge: Types::CoreNetworkSegmentEdgeIdentifier
       attr_accessor core_network_network_function_group: Types::CoreNetworkNetworkFunctionGroupIdentifier
+      SENSITIVE: []
+    end
+
+    class RoutingInformationNextHop
+      attr_accessor ip_address: ::String
+      attr_accessor core_network_attachment_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor segment_name: ::String
+      attr_accessor edge_location: ::String
+      SENSITIVE: []
+    end
+
+    class RoutingPolicyAssociationDetail
+      attr_accessor routing_policy_names: ::Array[::String]
+      attr_accessor shared_segments: ::Array[::String]
       SENSITIVE: []
     end
 

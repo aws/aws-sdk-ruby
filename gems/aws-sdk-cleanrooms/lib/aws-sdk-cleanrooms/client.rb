@@ -534,6 +534,12 @@ module Aws::CleanRooms
     #   resp.collaboration_analysis_templates[0].validations[0].reasons #=> Array
     #   resp.collaboration_analysis_templates[0].validations[0].reasons[0].message #=> String
     #   resp.collaboration_analysis_templates[0].error_message_configuration.type #=> String, one of "DETAILED"
+    #   resp.collaboration_analysis_templates[0].synthetic_data_parameters.ml_synthetic_data_parameters.epsilon #=> Float
+    #   resp.collaboration_analysis_templates[0].synthetic_data_parameters.ml_synthetic_data_parameters.max_membership_inference_attack_score #=> Float
+    #   resp.collaboration_analysis_templates[0].synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping #=> Array
+    #   resp.collaboration_analysis_templates[0].synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping[0].column_name #=> String
+    #   resp.collaboration_analysis_templates[0].synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping[0].column_type #=> String, one of "CATEGORICAL", "NUMERICAL"
+    #   resp.collaboration_analysis_templates[0].synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping[0].is_predictive_value #=> Boolean
     #   resp.errors #=> Array
     #   resp.errors[0].arn #=> String
     #   resp.errors[0].code #=> String
@@ -600,6 +606,7 @@ module Aws::CleanRooms
     #   resp.schemas[0].schema_status_details[0].configurations #=> Array
     #   resp.schemas[0].schema_status_details[0].configurations[0] #=> String, one of "DIFFERENTIAL_PRIVACY"
     #   resp.schemas[0].schema_status_details[0].analysis_type #=> String, one of "DIRECT_ANALYSIS", "ADDITIONAL_ANALYSIS"
+    #   resp.schemas[0].resource_arn #=> String
     #   resp.schemas[0].schema_type_properties.id_mapping_table.id_mapping_table_input_source #=> Array
     #   resp.schemas[0].schema_type_properties.id_mapping_table.id_mapping_table_input_source[0].id_namespace_association_id #=> String
     #   resp.schemas[0].schema_type_properties.id_mapping_table.id_mapping_table_input_source[0].type #=> String, one of "SOURCE", "TARGET"
@@ -802,6 +809,10 @@ module Aws::CleanRooms
     #   including sensitive information. Recommended for faster
     #   troubleshooting in development and testing environments.
     #
+    # @option params [Types::SyntheticDataParameters] :synthetic_data_parameters
+    #   The parameters for generating synthetic data when running the analysis
+    #   template.
+    #
     # @return [Types::CreateAnalysisTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAnalysisTemplateOutput#analysis_template #analysis_template} => Types::AnalysisTemplate
@@ -849,6 +860,21 @@ module Aws::CleanRooms
     #     error_message_configuration: {
     #       type: "DETAILED", # required, accepts DETAILED
     #     },
+    #     synthetic_data_parameters: {
+    #       ml_synthetic_data_parameters: {
+    #         epsilon: 1.0, # required
+    #         max_membership_inference_attack_score: 1.0, # required
+    #         column_classification: { # required
+    #           column_mapping: [ # required
+    #             {
+    #               column_name: "SyntheticDataColumnName", # required
+    #               column_type: "CATEGORICAL", # required, accepts CATEGORICAL, NUMERICAL
+    #               is_predictive_value: false, # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -886,6 +912,12 @@ module Aws::CleanRooms
     #   resp.analysis_template.validations[0].reasons #=> Array
     #   resp.analysis_template.validations[0].reasons[0].message #=> String
     #   resp.analysis_template.error_message_configuration.type #=> String, one of "DETAILED"
+    #   resp.analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.epsilon #=> Float
+    #   resp.analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.max_membership_inference_attack_score #=> Float
+    #   resp.analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping #=> Array
+    #   resp.analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping[0].column_name #=> String
+    #   resp.analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping[0].column_type #=> String, one of "CATEGORICAL", "NUMERICAL"
+    #   resp.analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping[0].is_predictive_value #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateAnalysisTemplate AWS API Documentation
     #
@@ -963,6 +995,13 @@ module Aws::CleanRooms
     #   The types of change requests that are automatically approved for this
     #   collaboration.
     #
+    # @option params [Array<String>] :allowed_result_regions
+    #   The Amazon Web Services Regions where collaboration query results can
+    #   be stored. When specified, results can only be written to these
+    #   Regions. This parameter enables you to meet your compliance and data
+    #   governance requirements, and implement regional data governance
+    #   policies.
+    #
     # @return [Types::CreateCollaborationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCollaborationOutput#collaboration #collaboration} => Types::Collaboration
@@ -987,6 +1026,9 @@ module Aws::CleanRooms
     #               is_responsible: false, # required
     #             },
     #             model_inference: {
+    #               is_responsible: false, # required
+    #             },
+    #             synthetic_data_generation: {
     #               is_responsible: false, # required
     #             },
     #           },
@@ -1025,6 +1067,9 @@ module Aws::CleanRooms
     #         model_inference: {
     #           is_responsible: false, # required
     #         },
+    #         synthetic_data_generation: {
+    #           is_responsible: false, # required
+    #         },
     #       },
     #       job_compute: {
     #         is_responsible: false, # required
@@ -1032,6 +1077,7 @@ module Aws::CleanRooms
     #     },
     #     analytics_engine: "SPARK", # accepts SPARK, CLEAN_ROOMS_SQL
     #     auto_approved_change_request_types: ["ADD_MEMBER"], # accepts ADD_MEMBER
+    #     allowed_result_regions: ["us-west-1"], # accepts us-west-1, us-west-2, us-east-1, us-east-2, af-south-1, ap-east-1, ap-east-2, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-5, ap-southeast-4, ap-southeast-7, ap-south-1, ap-northeast-3, ap-northeast-1, ap-northeast-2, ca-central-1, ca-west-1, eu-south-1, eu-west-3, eu-south-2, eu-central-2, eu-central-1, eu-north-1, eu-west-1, eu-west-2, me-south-1, me-central-1, il-central-1, sa-east-1, mx-central-1
     #   })
     #
     # @example Response structure
@@ -1056,6 +1102,8 @@ module Aws::CleanRooms
     #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #   resp.collaboration.auto_approved_change_types #=> Array
     #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER"
+    #   resp.collaboration.allowed_result_regions #=> Array
+    #   resp.collaboration.allowed_result_regions[0] #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaboration AWS API Documentation
     #
@@ -1252,6 +1300,7 @@ module Aws::CleanRooms
     #     description: "TableDescription",
     #     table_reference: { # required
     #       glue: {
+    #         region: "us-west-1", # accepts us-west-1, us-west-2, us-east-1, us-east-2, af-south-1, ap-east-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-5, ap-southeast-4, ap-southeast-7, ap-south-1, ap-northeast-3, ap-northeast-1, ap-northeast-2, ca-central-1, ca-west-1, eu-south-1, eu-west-3, eu-south-2, eu-central-2, eu-central-1, eu-north-1, eu-west-1, eu-west-2, me-south-1, me-central-1, il-central-1, sa-east-1, mx-central-1, ap-east-2
     #         table_name: "GlueTableName", # required
     #         database_name: "GlueDatabaseName", # required
     #       },
@@ -1271,6 +1320,7 @@ module Aws::CleanRooms
     #         },
     #       },
     #       athena: {
+    #         region: "us-west-1", # accepts us-west-1, us-west-2, us-east-1, us-east-2, af-south-1, ap-east-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-5, ap-southeast-4, ap-southeast-7, ap-south-1, ap-northeast-3, ap-northeast-1, ap-northeast-2, ca-central-1, ca-west-1, eu-south-1, eu-west-3, eu-south-2, eu-central-2, eu-central-1, eu-north-1, eu-west-1, eu-west-2, me-south-1, me-central-1, il-central-1, sa-east-1, mx-central-1, ap-east-2
     #         work_group: "AthenaWorkGroup", # required
     #         output_location: "AthenaOutputLocation",
     #         database_name: "AthenaDatabaseName", # required
@@ -1291,6 +1341,7 @@ module Aws::CleanRooms
     #   resp.configured_table.arn #=> String
     #   resp.configured_table.name #=> String
     #   resp.configured_table.description #=> String
+    #   resp.configured_table.table_reference.glue.region #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"
     #   resp.configured_table.table_reference.glue.table_name #=> String
     #   resp.configured_table.table_reference.glue.database_name #=> String
     #   resp.configured_table.table_reference.snowflake.secret_arn #=> String
@@ -1301,6 +1352,7 @@ module Aws::CleanRooms
     #   resp.configured_table.table_reference.snowflake.table_schema.v1 #=> Array
     #   resp.configured_table.table_reference.snowflake.table_schema.v1[0].column_name #=> String
     #   resp.configured_table.table_reference.snowflake.table_schema.v1[0].column_type #=> String
+    #   resp.configured_table.table_reference.athena.region #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"
     #   resp.configured_table.table_reference.athena.work_group #=> String
     #   resp.configured_table.table_reference.athena.output_location #=> String
     #   resp.configured_table.table_reference.athena.database_name #=> String
@@ -1383,7 +1435,7 @@ module Aws::CleanRooms
     #           differential_privacy: {
     #             columns: [ # required
     #               {
-    #                 name: "String", # required
+    #                 name: "ColumnName", # required
     #               },
     #             ],
     #           },
@@ -1829,6 +1881,9 @@ module Aws::CleanRooms
     #         model_inference: {
     #           is_responsible: false, # required
     #         },
+    #         synthetic_data_generation: {
+    #           is_responsible: false, # required
+    #         },
     #       },
     #       job_compute: {
     #         is_responsible: false, # required
@@ -1865,6 +1920,7 @@ module Aws::CleanRooms
     #   resp.membership.payment_configuration.query_compute.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
+    #   resp.membership.payment_configuration.machine_learning.synthetic_data_generation.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.job_compute.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateMembership AWS API Documentation
@@ -1886,7 +1942,7 @@ module Aws::CleanRooms
     #   The privacy budget template is created in the collaboration that this
     #   membership belongs to. Accepts a membership ID.
     #
-    # @option params [required, String] :auto_refresh
+    # @option params [String] :auto_refresh
     #   How often the privacy budget refreshes.
     #
     #   If you plan to regularly bring new data into the collaboration, you
@@ -1916,12 +1972,22 @@ module Aws::CleanRooms
     #
     #   resp = client.create_privacy_budget_template({
     #     membership_identifier: "MembershipIdentifier", # required
-    #     auto_refresh: "CALENDAR_MONTH", # required, accepts CALENDAR_MONTH, NONE
-    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY
+    #     auto_refresh: "CALENDAR_MONTH", # accepts CALENDAR_MONTH, NONE
+    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY, ACCESS_BUDGET
     #     parameters: { # required
     #       differential_privacy: {
     #         epsilon: 1, # required
     #         users_noise_per_query: 1, # required
+    #       },
+    #       access_budget: {
+    #         budget_parameters: [ # required
+    #           {
+    #             type: "CALENDAR_DAY", # required, accepts CALENDAR_DAY, CALENDAR_MONTH, CALENDAR_WEEK, LIFETIME
+    #             budget: 1, # required
+    #             auto_refresh: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         ],
+    #         resource_arn: "BudgetedResourceArn", # required
     #       },
     #     },
     #     tags: {
@@ -1939,10 +2005,15 @@ module Aws::CleanRooms
     #   resp.privacy_budget_template.collaboration_arn #=> String
     #   resp.privacy_budget_template.create_time #=> Time
     #   resp.privacy_budget_template.update_time #=> Time
-    #   resp.privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"
     #   resp.privacy_budget_template.auto_refresh #=> String, one of "CALENDAR_MONTH", "NONE"
     #   resp.privacy_budget_template.parameters.differential_privacy.epsilon #=> Integer
     #   resp.privacy_budget_template.parameters.differential_privacy.users_noise_per_query #=> Integer
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters #=> Array
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters[0].type #=> String, one of "CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters[0].budget #=> Integer
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters[0].auto_refresh #=> String, one of "ENABLED", "DISABLED"
+    #   resp.privacy_budget_template.parameters.access_budget.resource_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreatePrivacyBudgetTemplate AWS API Documentation
     #
@@ -2331,6 +2402,12 @@ module Aws::CleanRooms
     #   resp.analysis_template.validations[0].reasons #=> Array
     #   resp.analysis_template.validations[0].reasons[0].message #=> String
     #   resp.analysis_template.error_message_configuration.type #=> String, one of "DETAILED"
+    #   resp.analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.epsilon #=> Float
+    #   resp.analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.max_membership_inference_attack_score #=> Float
+    #   resp.analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping #=> Array
+    #   resp.analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping[0].column_name #=> String
+    #   resp.analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping[0].column_type #=> String, one of "CATEGORICAL", "NUMERICAL"
+    #   resp.analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping[0].is_predictive_value #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetAnalysisTemplate AWS API Documentation
     #
@@ -2378,6 +2455,8 @@ module Aws::CleanRooms
     #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #   resp.collaboration.auto_approved_change_types #=> Array
     #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER"
+    #   resp.collaboration.allowed_result_regions #=> Array
+    #   resp.collaboration.allowed_result_regions[0] #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaboration AWS API Documentation
     #
@@ -2443,6 +2522,12 @@ module Aws::CleanRooms
     #   resp.collaboration_analysis_template.validations[0].reasons #=> Array
     #   resp.collaboration_analysis_template.validations[0].reasons[0].message #=> String
     #   resp.collaboration_analysis_template.error_message_configuration.type #=> String, one of "DETAILED"
+    #   resp.collaboration_analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.epsilon #=> Float
+    #   resp.collaboration_analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.max_membership_inference_attack_score #=> Float
+    #   resp.collaboration_analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping #=> Array
+    #   resp.collaboration_analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping[0].column_name #=> String
+    #   resp.collaboration_analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping[0].column_type #=> String, one of "CATEGORICAL", "NUMERICAL"
+    #   resp.collaboration_analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping[0].is_predictive_value #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationAnalysisTemplate AWS API Documentation
     #
@@ -2619,10 +2704,15 @@ module Aws::CleanRooms
     #   resp.collaboration_privacy_budget_template.creator_account_id #=> String
     #   resp.collaboration_privacy_budget_template.create_time #=> Time
     #   resp.collaboration_privacy_budget_template.update_time #=> Time
-    #   resp.collaboration_privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.collaboration_privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"
     #   resp.collaboration_privacy_budget_template.auto_refresh #=> String, one of "CALENDAR_MONTH", "NONE"
     #   resp.collaboration_privacy_budget_template.parameters.differential_privacy.epsilon #=> Integer
     #   resp.collaboration_privacy_budget_template.parameters.differential_privacy.users_noise_per_query #=> Integer
+    #   resp.collaboration_privacy_budget_template.parameters.access_budget.budget_parameters #=> Array
+    #   resp.collaboration_privacy_budget_template.parameters.access_budget.budget_parameters[0].type #=> String, one of "CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"
+    #   resp.collaboration_privacy_budget_template.parameters.access_budget.budget_parameters[0].budget #=> Integer
+    #   resp.collaboration_privacy_budget_template.parameters.access_budget.budget_parameters[0].auto_refresh #=> String, one of "ENABLED", "DISABLED"
+    #   resp.collaboration_privacy_budget_template.parameters.access_budget.resource_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationPrivacyBudgetTemplate AWS API Documentation
     #
@@ -2699,6 +2789,7 @@ module Aws::CleanRooms
     #   resp.configured_table.arn #=> String
     #   resp.configured_table.name #=> String
     #   resp.configured_table.description #=> String
+    #   resp.configured_table.table_reference.glue.region #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"
     #   resp.configured_table.table_reference.glue.table_name #=> String
     #   resp.configured_table.table_reference.glue.database_name #=> String
     #   resp.configured_table.table_reference.snowflake.secret_arn #=> String
@@ -2709,6 +2800,7 @@ module Aws::CleanRooms
     #   resp.configured_table.table_reference.snowflake.table_schema.v1 #=> Array
     #   resp.configured_table.table_reference.snowflake.table_schema.v1[0].column_name #=> String
     #   resp.configured_table.table_reference.snowflake.table_schema.v1[0].column_type #=> String
+    #   resp.configured_table.table_reference.athena.region #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"
     #   resp.configured_table.table_reference.athena.work_group #=> String
     #   resp.configured_table.table_reference.athena.output_location #=> String
     #   resp.configured_table.table_reference.athena.database_name #=> String
@@ -3047,6 +3139,7 @@ module Aws::CleanRooms
     #   resp.membership.payment_configuration.query_compute.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
+    #   resp.membership.payment_configuration.machine_learning.synthetic_data_generation.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.job_compute.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetMembership AWS API Documentation
@@ -3089,10 +3182,15 @@ module Aws::CleanRooms
     #   resp.privacy_budget_template.collaboration_arn #=> String
     #   resp.privacy_budget_template.create_time #=> Time
     #   resp.privacy_budget_template.update_time #=> Time
-    #   resp.privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"
     #   resp.privacy_budget_template.auto_refresh #=> String, one of "CALENDAR_MONTH", "NONE"
     #   resp.privacy_budget_template.parameters.differential_privacy.epsilon #=> Integer
     #   resp.privacy_budget_template.parameters.differential_privacy.users_noise_per_query #=> Integer
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters #=> Array
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters[0].type #=> String, one of "CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters[0].budget #=> Integer
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters[0].auto_refresh #=> String, one of "ENABLED", "DISABLED"
+    #   resp.privacy_budget_template.parameters.access_budget.resource_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetPrivacyBudgetTemplate AWS API Documentation
     #
@@ -3211,6 +3309,8 @@ module Aws::CleanRooms
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].max_column_value #=> Float
     #   resp.protected_query.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
     #   resp.protected_query.compute_configuration.worker.number #=> Integer
+    #   resp.protected_query.compute_configuration.worker.properties.spark #=> Hash
+    #   resp.protected_query.compute_configuration.worker.properties.spark["SparkPropertyKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetProtectedQuery AWS API Documentation
     #
@@ -3271,6 +3371,7 @@ module Aws::CleanRooms
     #   resp.schema.schema_status_details[0].configurations #=> Array
     #   resp.schema.schema_status_details[0].configurations[0] #=> String, one of "DIFFERENTIAL_PRIVACY"
     #   resp.schema.schema_status_details[0].analysis_type #=> String, one of "DIRECT_ANALYSIS", "ADDITIONAL_ANALYSIS"
+    #   resp.schema.resource_arn #=> String
     #   resp.schema.schema_type_properties.id_mapping_table.id_mapping_table_input_source #=> Array
     #   resp.schema.schema_type_properties.id_mapping_table.id_mapping_table_input_source[0].id_namespace_association_id #=> String
     #   resp.schema.schema_type_properties.id_mapping_table.id_mapping_table_input_source[0].type #=> String, one of "SOURCE", "TARGET"
@@ -3469,6 +3570,7 @@ module Aws::CleanRooms
     #   resp.analysis_template_summaries[0].collaboration_arn #=> String
     #   resp.analysis_template_summaries[0].collaboration_id #=> String
     #   resp.analysis_template_summaries[0].description #=> String
+    #   resp.analysis_template_summaries[0].is_synthetic_data #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListAnalysisTemplates AWS API Documentation
     #
@@ -3522,6 +3624,7 @@ module Aws::CleanRooms
     #   resp.collaboration_analysis_template_summaries[0].collaboration_id #=> String
     #   resp.collaboration_analysis_template_summaries[0].creator_account_id #=> String
     #   resp.collaboration_analysis_template_summaries[0].description #=> String
+    #   resp.collaboration_analysis_template_summaries[0].is_synthetic_data #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationAnalysisTemplates AWS API Documentation
     #
@@ -3740,7 +3843,7 @@ module Aws::CleanRooms
     #   resp.collaboration_privacy_budget_template_summaries[0].collaboration_id #=> String
     #   resp.collaboration_privacy_budget_template_summaries[0].collaboration_arn #=> String
     #   resp.collaboration_privacy_budget_template_summaries[0].creator_account_id #=> String
-    #   resp.collaboration_privacy_budget_template_summaries[0].privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.collaboration_privacy_budget_template_summaries[0].privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"
     #   resp.collaboration_privacy_budget_template_summaries[0].create_time #=> Time
     #   resp.collaboration_privacy_budget_template_summaries[0].update_time #=> Time
     #
@@ -3772,6 +3875,10 @@ module Aws::CleanRooms
     # @option params [String] :next_token
     #   The pagination token that's used to fetch the next set of results.
     #
+    # @option params [String] :access_budget_resource_arn
+    #   The Amazon Resource Name (ARN) of the Configured Table Association
+    #   (ConfiguredTableAssociation) used to filter privacy budgets.
+    #
     # @return [Types::ListCollaborationPrivacyBudgetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCollaborationPrivacyBudgetsOutput#collaboration_privacy_budget_summaries #collaboration_privacy_budget_summaries} => Array&lt;Types::CollaborationPrivacyBudgetSummary&gt;
@@ -3783,9 +3890,10 @@ module Aws::CleanRooms
     #
     #   resp = client.list_collaboration_privacy_budgets({
     #     collaboration_identifier: "CollaborationIdentifier", # required
-    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY
+    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY, ACCESS_BUDGET
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     access_budget_resource_arn: "BudgetedResourceArn",
     #   })
     #
     # @example Response structure
@@ -3797,7 +3905,7 @@ module Aws::CleanRooms
     #   resp.collaboration_privacy_budget_summaries[0].collaboration_id #=> String
     #   resp.collaboration_privacy_budget_summaries[0].collaboration_arn #=> String
     #   resp.collaboration_privacy_budget_summaries[0].creator_account_id #=> String
-    #   resp.collaboration_privacy_budget_summaries[0].type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.collaboration_privacy_budget_summaries[0].type #=> String, one of "DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"
     #   resp.collaboration_privacy_budget_summaries[0].create_time #=> Time
     #   resp.collaboration_privacy_budget_summaries[0].update_time #=> Time
     #   resp.collaboration_privacy_budget_summaries[0].budget.differential_privacy.aggregations #=> Array
@@ -3805,6 +3913,15 @@ module Aws::CleanRooms
     #   resp.collaboration_privacy_budget_summaries[0].budget.differential_privacy.aggregations[0].max_count #=> Integer
     #   resp.collaboration_privacy_budget_summaries[0].budget.differential_privacy.aggregations[0].remaining_count #=> Integer
     #   resp.collaboration_privacy_budget_summaries[0].budget.differential_privacy.epsilon #=> Integer
+    #   resp.collaboration_privacy_budget_summaries[0].budget.access_budget.resource_arn #=> String
+    #   resp.collaboration_privacy_budget_summaries[0].budget.access_budget.details #=> Array
+    #   resp.collaboration_privacy_budget_summaries[0].budget.access_budget.details[0].start_time #=> Time
+    #   resp.collaboration_privacy_budget_summaries[0].budget.access_budget.details[0].end_time #=> Time
+    #   resp.collaboration_privacy_budget_summaries[0].budget.access_budget.details[0].remaining_budget #=> Integer
+    #   resp.collaboration_privacy_budget_summaries[0].budget.access_budget.details[0].budget #=> Integer
+    #   resp.collaboration_privacy_budget_summaries[0].budget.access_budget.details[0].budget_type #=> String, one of "CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"
+    #   resp.collaboration_privacy_budget_summaries[0].budget.access_budget.details[0].auto_refresh #=> String, one of "ENABLED", "DISABLED"
+    #   resp.collaboration_privacy_budget_summaries[0].budget.access_budget.aggregate_remaining_budget #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgets AWS API Documentation
@@ -4188,6 +4305,7 @@ module Aws::CleanRooms
     #   resp.member_summaries[0].payment_configuration.query_compute.is_responsible #=> Boolean
     #   resp.member_summaries[0].payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
     #   resp.member_summaries[0].payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
+    #   resp.member_summaries[0].payment_configuration.machine_learning.synthetic_data_generation.is_responsible #=> Boolean
     #   resp.member_summaries[0].payment_configuration.job_compute.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListMembers AWS API Documentation
@@ -4249,6 +4367,7 @@ module Aws::CleanRooms
     #   resp.membership_summaries[0].payment_configuration.query_compute.is_responsible #=> Boolean
     #   resp.membership_summaries[0].payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
     #   resp.membership_summaries[0].payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
+    #   resp.membership_summaries[0].payment_configuration.machine_learning.synthetic_data_generation.is_responsible #=> Boolean
     #   resp.membership_summaries[0].payment_configuration.job_compute.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListMemberships AWS API Documentation
@@ -4302,7 +4421,7 @@ module Aws::CleanRooms
     #   resp.privacy_budget_template_summaries[0].membership_arn #=> String
     #   resp.privacy_budget_template_summaries[0].collaboration_id #=> String
     #   resp.privacy_budget_template_summaries[0].collaboration_arn #=> String
-    #   resp.privacy_budget_template_summaries[0].privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.privacy_budget_template_summaries[0].privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"
     #   resp.privacy_budget_template_summaries[0].create_time #=> Time
     #   resp.privacy_budget_template_summaries[0].update_time #=> Time
     #
@@ -4335,6 +4454,10 @@ module Aws::CleanRooms
     #   service might return a `nextToken` even if the `maxResults` value
     #   has not been met.
     #
+    # @option params [String] :access_budget_resource_arn
+    #   The Amazon Resource Name (ARN) of the access budget resource to filter
+    #   privacy budgets by.
+    #
     # @return [Types::ListPrivacyBudgetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListPrivacyBudgetsOutput#privacy_budget_summaries #privacy_budget_summaries} => Array&lt;Types::PrivacyBudgetSummary&gt;
@@ -4346,9 +4469,10 @@ module Aws::CleanRooms
     #
     #   resp = client.list_privacy_budgets({
     #     membership_identifier: "MembershipIdentifier", # required
-    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY
+    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY, ACCESS_BUDGET
     #     next_token: "PaginationToken",
     #     max_results: 1,
+    #     access_budget_resource_arn: "BudgetedResourceArn",
     #   })
     #
     # @example Response structure
@@ -4361,7 +4485,7 @@ module Aws::CleanRooms
     #   resp.privacy_budget_summaries[0].membership_arn #=> String
     #   resp.privacy_budget_summaries[0].collaboration_id #=> String
     #   resp.privacy_budget_summaries[0].collaboration_arn #=> String
-    #   resp.privacy_budget_summaries[0].type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.privacy_budget_summaries[0].type #=> String, one of "DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"
     #   resp.privacy_budget_summaries[0].create_time #=> Time
     #   resp.privacy_budget_summaries[0].update_time #=> Time
     #   resp.privacy_budget_summaries[0].budget.differential_privacy.aggregations #=> Array
@@ -4369,6 +4493,15 @@ module Aws::CleanRooms
     #   resp.privacy_budget_summaries[0].budget.differential_privacy.aggregations[0].max_count #=> Integer
     #   resp.privacy_budget_summaries[0].budget.differential_privacy.aggregations[0].remaining_count #=> Integer
     #   resp.privacy_budget_summaries[0].budget.differential_privacy.epsilon #=> Integer
+    #   resp.privacy_budget_summaries[0].budget.access_budget.resource_arn #=> String
+    #   resp.privacy_budget_summaries[0].budget.access_budget.details #=> Array
+    #   resp.privacy_budget_summaries[0].budget.access_budget.details[0].start_time #=> Time
+    #   resp.privacy_budget_summaries[0].budget.access_budget.details[0].end_time #=> Time
+    #   resp.privacy_budget_summaries[0].budget.access_budget.details[0].remaining_budget #=> Integer
+    #   resp.privacy_budget_summaries[0].budget.access_budget.details[0].budget #=> Integer
+    #   resp.privacy_budget_summaries[0].budget.access_budget.details[0].budget_type #=> String, one of "CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"
+    #   resp.privacy_budget_summaries[0].budget.access_budget.details[0].auto_refresh #=> String, one of "ENABLED", "DISABLED"
+    #   resp.privacy_budget_summaries[0].budget.access_budget.aggregate_remaining_budget #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgets AWS API Documentation
@@ -4539,6 +4672,7 @@ module Aws::CleanRooms
     #   resp.schema_summaries[0].analysis_rule_types #=> Array
     #   resp.schema_summaries[0].analysis_rule_types[0] #=> String, one of "AGGREGATION", "LIST", "CUSTOM", "ID_MAPPING_TABLE"
     #   resp.schema_summaries[0].analysis_method #=> String, one of "DIRECT_QUERY", "DIRECT_JOB", "MULTIPLE"
+    #   resp.schema_summaries[0].resource_arn #=> String
     #   resp.schema_summaries[0].selected_analysis_methods #=> Array
     #   resp.schema_summaries[0].selected_analysis_methods[0] #=> String, one of "DIRECT_QUERY", "DIRECT_JOB"
     #   resp.next_token #=> String
@@ -4709,7 +4843,7 @@ module Aws::CleanRooms
     #     type: "PYSPARK", # required, accepts PYSPARK
     #     membership_identifier: "MembershipIdentifier", # required
     #     job_parameters: { # required
-    #       analysis_template_arn: "AnalysisTemplateArn",
+    #       analysis_template_arn: "AnalysisTemplateArn", # required
     #     },
     #     result_configuration: {
     #       output_configuration: { # required
@@ -4822,6 +4956,11 @@ module Aws::CleanRooms
     #       worker: {
     #         type: "CR.1X", # accepts CR.1X, CR.4X
     #         number: 1,
+    #         properties: {
+    #           spark: {
+    #             "SparkPropertyKey" => "SparkPropertyValue",
+    #           },
+    #         },
     #       },
     #     },
     #   })
@@ -4866,6 +5005,8 @@ module Aws::CleanRooms
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].max_column_value #=> Float
     #   resp.protected_query.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
     #   resp.protected_query.compute_configuration.worker.number #=> Integer
+    #   resp.protected_query.compute_configuration.worker.properties.spark #=> Hash
+    #   resp.protected_query.compute_configuration.worker.properties.spark["SparkPropertyKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/StartProtectedQuery AWS API Documentation
     #
@@ -4990,6 +5131,12 @@ module Aws::CleanRooms
     #   resp.analysis_template.validations[0].reasons #=> Array
     #   resp.analysis_template.validations[0].reasons[0].message #=> String
     #   resp.analysis_template.error_message_configuration.type #=> String, one of "DETAILED"
+    #   resp.analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.epsilon #=> Float
+    #   resp.analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.max_membership_inference_attack_score #=> Float
+    #   resp.analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping #=> Array
+    #   resp.analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping[0].column_name #=> String
+    #   resp.analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping[0].column_type #=> String, one of "CATEGORICAL", "NUMERICAL"
+    #   resp.analysis_template.synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping[0].is_predictive_value #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateAnalysisTemplate AWS API Documentation
     #
@@ -5056,6 +5203,8 @@ module Aws::CleanRooms
     #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #   resp.collaboration.auto_approved_change_types #=> Array
     #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER"
+    #   resp.collaboration.allowed_result_regions #=> Array
+    #   resp.collaboration.allowed_result_regions[0] #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateCollaboration AWS API Documentation
     #
@@ -5164,6 +5313,7 @@ module Aws::CleanRooms
     #     description: "TableDescription",
     #     table_reference: {
     #       glue: {
+    #         region: "us-west-1", # accepts us-west-1, us-west-2, us-east-1, us-east-2, af-south-1, ap-east-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-5, ap-southeast-4, ap-southeast-7, ap-south-1, ap-northeast-3, ap-northeast-1, ap-northeast-2, ca-central-1, ca-west-1, eu-south-1, eu-west-3, eu-south-2, eu-central-2, eu-central-1, eu-north-1, eu-west-1, eu-west-2, me-south-1, me-central-1, il-central-1, sa-east-1, mx-central-1, ap-east-2
     #         table_name: "GlueTableName", # required
     #         database_name: "GlueDatabaseName", # required
     #       },
@@ -5183,6 +5333,7 @@ module Aws::CleanRooms
     #         },
     #       },
     #       athena: {
+    #         region: "us-west-1", # accepts us-west-1, us-west-2, us-east-1, us-east-2, af-south-1, ap-east-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-5, ap-southeast-4, ap-southeast-7, ap-south-1, ap-northeast-3, ap-northeast-1, ap-northeast-2, ca-central-1, ca-west-1, eu-south-1, eu-west-3, eu-south-2, eu-central-2, eu-central-1, eu-north-1, eu-west-1, eu-west-2, me-south-1, me-central-1, il-central-1, sa-east-1, mx-central-1, ap-east-2
     #         work_group: "AthenaWorkGroup", # required
     #         output_location: "AthenaOutputLocation",
     #         database_name: "AthenaDatabaseName", # required
@@ -5200,6 +5351,7 @@ module Aws::CleanRooms
     #   resp.configured_table.arn #=> String
     #   resp.configured_table.name #=> String
     #   resp.configured_table.description #=> String
+    #   resp.configured_table.table_reference.glue.region #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"
     #   resp.configured_table.table_reference.glue.table_name #=> String
     #   resp.configured_table.table_reference.glue.database_name #=> String
     #   resp.configured_table.table_reference.snowflake.secret_arn #=> String
@@ -5210,6 +5362,7 @@ module Aws::CleanRooms
     #   resp.configured_table.table_reference.snowflake.table_schema.v1 #=> Array
     #   resp.configured_table.table_reference.snowflake.table_schema.v1[0].column_name #=> String
     #   resp.configured_table.table_reference.snowflake.table_schema.v1[0].column_type #=> String
+    #   resp.configured_table.table_reference.athena.region #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1", "ap-east-2"
     #   resp.configured_table.table_reference.athena.work_group #=> String
     #   resp.configured_table.table_reference.athena.output_location #=> String
     #   resp.configured_table.table_reference.athena.database_name #=> String
@@ -5293,7 +5446,7 @@ module Aws::CleanRooms
     #           differential_privacy: {
     #             columns: [ # required
     #               {
-    #                 name: "String", # required
+    #                 name: "ColumnName", # required
     #               },
     #             ],
     #           },
@@ -5689,6 +5842,7 @@ module Aws::CleanRooms
     #   resp.membership.payment_configuration.query_compute.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.machine_learning.model_training.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
+    #   resp.membership.payment_configuration.machine_learning.synthetic_data_generation.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.job_compute.is_responsible #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateMembership AWS API Documentation
@@ -5727,11 +5881,20 @@ module Aws::CleanRooms
     #   resp = client.update_privacy_budget_template({
     #     membership_identifier: "MembershipIdentifier", # required
     #     privacy_budget_template_identifier: "PrivacyBudgetTemplateIdentifier", # required
-    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY
+    #     privacy_budget_type: "DIFFERENTIAL_PRIVACY", # required, accepts DIFFERENTIAL_PRIVACY, ACCESS_BUDGET
     #     parameters: {
     #       differential_privacy: {
     #         epsilon: 1,
     #         users_noise_per_query: 1,
+    #       },
+    #       access_budget: {
+    #         budget_parameters: [ # required
+    #           {
+    #             type: "CALENDAR_DAY", # required, accepts CALENDAR_DAY, CALENDAR_MONTH, CALENDAR_WEEK, LIFETIME
+    #             budget: 1, # required
+    #             auto_refresh: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         ],
     #       },
     #     },
     #   })
@@ -5746,10 +5909,15 @@ module Aws::CleanRooms
     #   resp.privacy_budget_template.collaboration_arn #=> String
     #   resp.privacy_budget_template.create_time #=> Time
     #   resp.privacy_budget_template.update_time #=> Time
-    #   resp.privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY"
+    #   resp.privacy_budget_template.privacy_budget_type #=> String, one of "DIFFERENTIAL_PRIVACY", "ACCESS_BUDGET"
     #   resp.privacy_budget_template.auto_refresh #=> String, one of "CALENDAR_MONTH", "NONE"
     #   resp.privacy_budget_template.parameters.differential_privacy.epsilon #=> Integer
     #   resp.privacy_budget_template.parameters.differential_privacy.users_noise_per_query #=> Integer
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters #=> Array
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters[0].type #=> String, one of "CALENDAR_DAY", "CALENDAR_MONTH", "CALENDAR_WEEK", "LIFETIME"
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters[0].budget #=> Integer
+    #   resp.privacy_budget_template.parameters.access_budget.budget_parameters[0].auto_refresh #=> String, one of "ENABLED", "DISABLED"
+    #   resp.privacy_budget_template.parameters.access_budget.resource_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdatePrivacyBudgetTemplate AWS API Documentation
     #
@@ -5878,6 +6046,8 @@ module Aws::CleanRooms
     #   resp.protected_query.differential_privacy.sensitivity_parameters[0].max_column_value #=> Float
     #   resp.protected_query.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
     #   resp.protected_query.compute_configuration.worker.number #=> Integer
+    #   resp.protected_query.compute_configuration.worker.properties.spark #=> Hash
+    #   resp.protected_query.compute_configuration.worker.properties.spark["SparkPropertyKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateProtectedQuery AWS API Documentation
     #
@@ -5906,7 +6076,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

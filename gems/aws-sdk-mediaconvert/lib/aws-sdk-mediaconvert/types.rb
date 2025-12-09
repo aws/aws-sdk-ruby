@@ -546,6 +546,10 @@ module Aws::MediaConvert
     #   you need to comply with a loudness standard.
     #   @return [Types::AudioNormalizationSettings]
     #
+    # @!attribute [rw] audio_pitch_correction_settings
+    #   Settings for audio pitch correction during framerate conversion.
+    #   @return [Types::AudioPitchCorrectionSettings]
+    #
     # @!attribute [rw] audio_source_name
     #   Specifies which audio data to use from each input. In the simplest
     #   case, specify an "Audio Selector":#inputs-audio\_selector by name
@@ -597,11 +601,16 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   Indicates the language of the audio output track. The ISO 639
-    #   language specified in the 'Language Code' drop down will be used
-    #   when 'Follow Input Language Code' is not selected or when 'Follow
-    #   Input Language Code' is selected but there is no ISO 639 language
-    #   code specified by the input.
+    #   Specify the language for your output audio track. To follow the
+    #   input language: Leave blank. When you do, also set Language code
+    #   control to Follow input. If no input language is detected
+    #   MediaConvert will not write an output language code. To follow the
+    #   input langauge, but fall back to a specified language code if there
+    #   is no input language to follow: Enter an ISO 639-2 three-letter
+    #   language code in all capital letters. When you do, also set Language
+    #   code control to Follow input. To specify the language code: Enter an
+    #   ISO 639 three-letter language code in all capital letters. When you
+    #   do, also set Language code control to Use configured.
     #   @return [String]
     #
     # @!attribute [rw] language_code_control
@@ -630,6 +639,7 @@ module Aws::MediaConvert
     class AudioDescription < Struct.new(
       :audio_channel_tagging_settings,
       :audio_normalization_settings,
+      :audio_pitch_correction_settings,
       :audio_source_name,
       :audio_type,
       :audio_type_control,
@@ -710,6 +720,26 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Settings for audio pitch correction during framerate conversion.
+    #
+    # @!attribute [rw] slow_pal_pitch_correction
+    #   Use Slow PAL pitch correction to compensate for audio pitch changes
+    #   during slow PAL frame rate conversion. This setting only applies
+    #   when Slow PAL is enabled in your output video codec settings. To
+    #   automatically apply audio pitch correction: Choose Enabled.
+    #   MediaConvert automatically applies a pitch correction to your output
+    #   to match the original content's audio pitch. To not apply audio
+    #   pitch correction: Keep the default value, Disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AudioPitchCorrectionSettings AWS API Documentation
+    #
+    class AudioPitchCorrectionSettings < Struct.new(
+      :slow_pal_pitch_correction)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the media file's audio track.
     #
     # @!attribute [rw] bit_depth
@@ -725,7 +755,8 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] frame_rate
-    #   The frame rate of the video or audio track.
+    #   The frame rate of the video or audio track, expressed as a fraction
+    #   with numerator and denominator values.
     #   @return [Types::FrameRate]
     #
     # @!attribute [rw] language_code
@@ -808,9 +839,8 @@ module Aws::MediaConvert
     #   @return [Types::HlsRenditionGroupSettings]
     #
     # @!attribute [rw] language_code
-    #   Specify the language to select from your audio input. In the
-    #   MediaConvert console choose from a list of languages. In your JSON
-    #   job settings choose from an ISO 639-2 three-letter code listed at
+    #   Specify the language, using an ISO 639-2 three-letter code in all
+    #   capital letters. You can find a list of codes at:
     #   https://www.loc.gov/standards/iso639-2/php/code\_list.php
     #   @return [String]
     #
@@ -849,24 +879,48 @@ module Aws::MediaConvert
     #   Identifier (PID) values for MPEG Transport Stream inputs. Use this
     #   when you know the exact PID values of your audio streams. Track:
     #   Default. Select audio by track number. This is the most common
-    #   option and works with most input container formats. Language code:
-    #   Select audio by language using ISO 639-2 or ISO 639-3 three-letter
-    #   language codes. Use this when your source has embedded language
-    #   metadata and you want to select tracks based on their language. HLS
-    #   rendition group: Select audio from an HLS rendition group. Use this
-    #   when your input is an HLS package with multiple audio renditions and
-    #   you want to select specific rendition groups. All PCM: Select all
-    #   uncompressed PCM audio tracks from your input automatically. This is
-    #   useful when you want to include all PCM audio tracks without
-    #   specifying individual track numbers.
+    #   option and works with most input container formats. If more types of
+    #   audio data get recognized in the future, these numberings may shift,
+    #   but the numberings used for Stream mode will not. Language code:
+    #   Select audio by language using an ISO 639-2 or ISO 639-3
+    #   three-letter code in all capital letters. Use this when your source
+    #   has embedded language metadata and you want to select tracks based
+    #   on their language. HLS rendition group: Select audio from an HLS
+    #   rendition group. Use this when your input is an HLS package with
+    #   multiple audio renditions and you want to select specific rendition
+    #   groups. All PCM: Select all uncompressed PCM audio tracks from your
+    #   input automatically. This is useful when you want to include all PCM
+    #   audio tracks without specifying individual track numbers. Stream:
+    #   Select audio by stream number. Stream numbers include all tracks in
+    #   the source file, regardless of type, and correspond to either the
+    #   order of tracks in the file, or if applicable, the stream number
+    #   metadata of the track. Although all tracks count toward these stream
+    #   numbers, in this audio selector context, only the stream number of a
+    #   track containing audio data may be used. If your source file
+    #   contains a track which is not recognized by the service, then the
+    #   corresponding stream number will still be reserved for future use.
+    #   If more types of audio data get recognized in the future, these
+    #   numberings will not shift.
     #   @return [String]
+    #
+    # @!attribute [rw] streams
+    #   Identify a track from the input audio to include in this selector by
+    #   entering the stream index number. These numberings count all tracks
+    #   in the input file, but only a track containing audio data may be
+    #   used here. To include several tracks in a single audio selector,
+    #   specify multiple tracks as follows. Using the console, enter a
+    #   comma-separated list. For example, type "1,2,3" to include tracks
+    #   1 through 3.
+    #   @return [Array<Integer>]
     #
     # @!attribute [rw] tracks
     #   Identify a track from the input audio to include in this selector by
-    #   entering the track index number. To include several tracks in a
-    #   single audio selector, specify multiple tracks as follows. Using the
-    #   console, enter a comma-separated list. For example, type "1,2,3"
-    #   to include tracks 1 through 3.
+    #   entering the track index number. These numberings include only
+    #   tracks recognized as audio. If the service recognizes more types of
+    #   audio tracks in the future, these numberings may shift. To include
+    #   several tracks in a single audio selector, specify multiple tracks
+    #   as follows. Using the console, enter a comma-separated list. For
+    #   example, type "1,2,3" to include tracks 1 through 3.
     #   @return [Array<Integer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AudioSelector AWS API Documentation
@@ -883,6 +937,7 @@ module Aws::MediaConvert
       :program_selection,
       :remix_settings,
       :selector_type,
+      :streams,
       :tracks)
       SENSITIVE = []
       include Aws::Structure
@@ -1233,7 +1288,8 @@ module Aws::MediaConvert
     #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
     #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
     #   Quality-Defined Variable Bitrate. This option is only available when
-    #   your output uses the QVBR rate control mode.
+    #   your output uses the QVBR rate control mode. * SHOT\_CHANGE: Shot
+    #   Changes
     #   @return [Array<String>]
     #
     # @!attribute [rw] qvbr_settings
@@ -1423,7 +1479,8 @@ module Aws::MediaConvert
     #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
     #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
     #   Quality-Defined Variable Bitrate. This option is only available when
-    #   your output uses the QVBR rate control mode.
+    #   your output uses the QVBR rate control mode. * SHOT\_CHANGE: Shot
+    #   Changes
     #   @return [Array<String>]
     #
     # @!attribute [rw] scan_type_conversion_mode
@@ -2369,13 +2426,16 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] dash_manifest_style
     #   Specify how MediaConvert writes SegmentTimeline in your output DASH
-    #   manifest. To write a SegmentTimeline in each video Representation:
-    #   Keep the default value, Basic. To write a common SegmentTimeline in
-    #   the video AdaptationSet: Choose Compact. Note that MediaConvert will
-    #   still write a SegmentTimeline in any Representation that does not
-    #   share a common timeline. To write a video AdaptationSet for each
-    #   different output framerate, and a common SegmentTimeline in each
-    #   AdaptationSet: Choose Distinct.
+    #   manifest. To write a SegmentTimeline for outputs that you also
+    #   specify a Name modifier for: Keep the default value, Basic. Note
+    #   that if you do not specify a name modifier for an output,
+    #   MediaConvert will not write a SegmentTimeline for it. To write a
+    #   common SegmentTimeline in the video AdaptationSet: Choose Compact.
+    #   Note that MediaConvert will still write a SegmentTimeline in any
+    #   Representation that does not share a common timeline. To write a
+    #   video AdaptationSet for each different output framerate, and a
+    #   common SegmentTimeline in each AdaptationSet: Choose Distinct. To
+    #   write a SegmentTimeline in each AdaptationSet: Choose Full.
     #   @return [String]
     #
     # @!attribute [rw] destination
@@ -2742,6 +2802,23 @@ module Aws::MediaConvert
     #   output group, you must explicitly choose a value for this setting.
     #   @return [String]
     #
+    # @!attribute [rw] c2pa_manifest
+    #   When enabled, a C2PA compliant manifest will be generated, signed
+    #   and embeded in the output. For more information on C2PA, see
+    #   https://c2pa.org/specifications/specifications/2.1/index.html
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_secret
+    #   Specify the name or ARN of the AWS Secrets Manager secret that
+    #   contains your C2PA public certificate chain in PEM format. Provide a
+    #   valid secret name or ARN. Note that your MediaConvert service role
+    #   must allow access to this secret. The public certificate chain is
+    #   added to the COSE header (x5chain) for signature validation. Include
+    #   the signer's certificate and all intermediate certificates. Do not
+    #   include the root certificate. For details on COSE, see:
+    #   https://opensource.contentauthenticity.org/docs/manifest/signing-manifests
+    #   @return [String]
+    #
     # @!attribute [rw] descriptive_video_service_flag
     #   Specify whether to flag this audio track as descriptive video
     #   service (DVS) in your HLS parent manifest. When you choose Flag,
@@ -2799,6 +2876,12 @@ module Aws::MediaConvert
     #   you don't want those SCTE-35 markers in this output.
     #   @return [String]
     #
+    # @!attribute [rw] signing_kms_key
+    #   Specify the ID or ARN of the AWS KMS key used to sign the C2PA
+    #   manifest in your MP4 output. Provide a valid KMS key ARN. Note that
+    #   your MediaConvert service role must allow access to this key.
+    #   @return [String]
+    #
     # @!attribute [rw] timed_metadata
     #   To include ID3 metadata in this output: Set ID3 metadata to
     #   Passthrough. Specify this ID3 metadata in Custom ID3 metadata
@@ -2838,16 +2921,112 @@ module Aws::MediaConvert
       :audio_group_id,
       :audio_rendition_sets,
       :audio_track_type,
+      :c2pa_manifest,
+      :certificate_secret,
       :descriptive_video_service_flag,
       :i_frame_only_manifest,
       :klv_metadata,
       :manifest_metadata_signaling,
       :scte_35_esam,
       :scte_35_source,
+      :signing_kms_key,
       :timed_metadata,
       :timed_metadata_box_version,
       :timed_metadata_scheme_id_uri,
       :timed_metadata_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Codec-specific parameters parsed from the video essence headers. This
+    # information provides detailed technical specifications about how the
+    # video was encoded, including profile settings, resolution details, and
+    # color space information that can help you understand the source video
+    # characteristics and make informed encoding decisions.
+    #
+    # @!attribute [rw] bit_depth
+    #   The number of bits used per color component in the video essence
+    #   such as 8, 10, or 12 bits. Standard range (SDR) video typically uses
+    #   8-bit, while 10-bit is common for high dynamic range (HDR).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] chroma_subsampling
+    #   The chroma subsampling format used in the video encoding, such as
+    #   "4:2:0" or "4:4:4". This describes how color information is
+    #   sampled relative to brightness information. Different subsampling
+    #   ratios affect video quality and file size, with "4:4:4" providing
+    #   the highest color fidelity and "4:2:0" being most common for
+    #   standard video.
+    #   @return [String]
+    #
+    # @!attribute [rw] coded_frame_rate
+    #   The frame rate of the video or audio track, expressed as a fraction
+    #   with numerator and denominator values.
+    #   @return [Types::FrameRate]
+    #
+    # @!attribute [rw] color_primaries
+    #   The color space primaries of the video track, defining the red,
+    #   green, and blue color coordinates used for the video. This
+    #   information helps ensure accurate color reproduction during playback
+    #   and transcoding.
+    #   @return [String]
+    #
+    # @!attribute [rw] height
+    #   The height in pixels as coded by the codec. This represents the
+    #   actual encoded video height as specified in the video stream
+    #   headers.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] level
+    #   The codec level or tier that specifies the maximum processing
+    #   requirements and capabilities. Levels define constraints such as
+    #   maximum bit rate, frame rate, and resolution.
+    #   @return [String]
+    #
+    # @!attribute [rw] matrix_coefficients
+    #   The color space matrix coefficients of the video track, defining how
+    #   RGB color values are converted to and from YUV color space. This
+    #   affects color accuracy during encoding and decoding processes.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile
+    #   The codec profile used to encode the video. Profiles define specific
+    #   feature sets and capabilities within a codec standard. For example,
+    #   H.264 profiles include Baseline, Main, and High, each supporting
+    #   different encoding features and complexity levels.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_type
+    #   The scanning method specified in the video essence, indicating
+    #   whether the video uses progressive or interlaced scanning.
+    #   @return [String]
+    #
+    # @!attribute [rw] transfer_characteristics
+    #   The color space transfer characteristics of the video track,
+    #   defining the relationship between linear light values and the
+    #   encoded signal values. This affects brightness and contrast
+    #   reproduction.
+    #   @return [String]
+    #
+    # @!attribute [rw] width
+    #   The width in pixels as coded by the codec. This represents the
+    #   actual encoded video width as specified in the video stream headers.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CodecMetadata AWS API Documentation
+    #
+    class CodecMetadata < Struct.new(
+      :bit_depth,
+      :chroma_subsampling,
+      :coded_frame_rate,
+      :color_primaries,
+      :height,
+      :level,
+      :matrix_coefficients,
+      :profile,
+      :scan_type,
+      :transfer_characteristics,
+      :width)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3169,10 +3348,12 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] job_engine_version
     #   Use Job engine versions to run jobs for your production workflow on
-    #   one version, while you test and validate the latest version. To
-    #   specify a Job engine version: Enter a date in a YYYY-MM-DD format.
-    #   For a list of valid Job engine versions, submit a ListVersions
-    #   request. To not specify a Job engine version: Leave blank.
+    #   one version, while you test and validate the latest version. Job
+    #   engine versions represent periodically grouped MediaConvert releases
+    #   with new features, updates, improvements, and fixes. Job engine
+    #   versions are in a YYYY-MM-DD format. Note that the Job engine
+    #   version feature is not publicly available at this time. To request
+    #   access, contact AWS support.
     #   @return [String]
     #
     # @!attribute [rw] job_template
@@ -3628,13 +3809,16 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] dash_manifest_style
     #   Specify how MediaConvert writes SegmentTimeline in your output DASH
-    #   manifest. To write a SegmentTimeline in each video Representation:
-    #   Keep the default value, Basic. To write a common SegmentTimeline in
-    #   the video AdaptationSet: Choose Compact. Note that MediaConvert will
-    #   still write a SegmentTimeline in any Representation that does not
-    #   share a common timeline. To write a video AdaptationSet for each
-    #   different output framerate, and a common SegmentTimeline in each
-    #   AdaptationSet: Choose Distinct.
+    #   manifest. To write a SegmentTimeline for outputs that you also
+    #   specify a Name modifier for: Keep the default value, Basic. Note
+    #   that if you do not specify a name modifier for an output,
+    #   MediaConvert will not write a SegmentTimeline for it. To write a
+    #   common SegmentTimeline in the video AdaptationSet: Choose Compact.
+    #   Note that MediaConvert will still write a SegmentTimeline in any
+    #   Representation that does not share a common timeline. To write a
+    #   video AdaptationSet for each different output framerate, and a
+    #   common SegmentTimeline in each AdaptationSet: Choose Distinct. To
+    #   write a SegmentTimeline in each AdaptationSet: Choose Full.
     #   @return [String]
     #
     # @!attribute [rw] destination
@@ -4638,9 +4822,8 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   Specify the language to select from your audio input. In the
-    #   MediaConvert console choose from a list of languages. In your JSON
-    #   job settings choose from an ISO 639-2 three-letter code listed at
+    #   Specify the language, using an ISO 639-2 three-letter code in all
+    #   capital letters. You can find a list of codes at:
     #   https://www.loc.gov/standards/iso639-2/php/code\_list.php
     #   @return [String]
     #
@@ -5521,7 +5704,8 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # The frame rate of the video or audio track.
+    # The frame rate of the video or audio track, expressed as a fraction
+    # with numerator and denominator values.
     #
     # @!attribute [rw] denominator
     #   The denominator, or bottom number, in the fractional frame rate. For
@@ -5601,6 +5785,49 @@ module Aws::MediaConvert
     #
     class GetJobTemplateResponse < Struct.new(
       :job_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Retrieve a JSON array of up to twenty of your most recent jobs matched
+    # by a jobs query.
+    #
+    # @!attribute [rw] id
+    #   The ID of the jobs query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetJobsQueryResultsRequest AWS API Documentation
+    #
+    class GetJobsQueryResultsRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # If the jobs query completed successfully, then a JSON array of jobs
+    # will be included in this response. To retrieve the twenty next most
+    # recent jobs matched by your jobs query, call the StartJobsQuery using
+    # the nextToken string returned in this response.
+    #
+    # @!attribute [rw] jobs
+    #   List of jobs.
+    #   @return [Array<Types::Job>]
+    #
+    # @!attribute [rw] next_token
+    #   Use this string to request the next batch of jobs via the
+    #   StartJobsQuery API.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the jobs query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetJobsQueryResultsResponse AWS API Documentation
+    #
+    class GetJobsQueryResultsResponse < Struct.new(
+      :jobs,
+      :next_token,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6115,7 +6342,8 @@ module Aws::MediaConvert
     #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
     #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
     #   Quality-Defined Variable Bitrate. This option is only available when
-    #   your output uses the QVBR rate control mode.
+    #   your output uses the QVBR rate control mode. * SHOT\_CHANGE: Shot
+    #   Changes
     #   @return [Array<String>]
     #
     # @!attribute [rw] quality_tuning_level
@@ -6712,7 +6940,8 @@ module Aws::MediaConvert
     #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
     #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
     #   Quality-Defined Variable Bitrate. This option is only available when
-    #   your output uses the QVBR rate control mode.
+    #   your output uses the QVBR rate control mode. * SHOT\_CHANGE: Shot
+    #   Changes
     #   @return [Array<String>]
     #
     # @!attribute [rw] quality_tuning_level
@@ -7082,13 +7311,15 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] custom_language_code
-    #   Specify the language for this captions channel, using the ISO 639-2
-    #   or ISO 639-3 three-letter language code
+    #   Specify the language, using an ISO 639-2 three-letter code in all
+    #   capital letters. You can find a list of codes at:
+    #   https://www.loc.gov/standards/iso639-2/php/code\_list.php
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   Specify the language, using the ISO 639-2 three-letter code listed
-    #   at https://www.loc.gov/standards/iso639-2/php/code\_list.php.
+    #   Specify the language, using an ISO 639-2 three-letter code in all
+    #   capital letters. You can find a list of codes at:
+    #   https://www.loc.gov/standards/iso639-2/php/code\_list.php
     #   @return [String]
     #
     # @!attribute [rw] language_description
@@ -7526,8 +7757,9 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] rendition_language_code
-    #   Optional. Specify ISO 639-2 or ISO 639-3 code in the language
-    #   property
+    #   Optionally specify the language, using an ISO 639-2 or ISO 639-3
+    #   three-letter code in all capital letters. You can find a list of
+    #   codes at: https://www.loc.gov/standards/iso639-2/php/code\_list.php
     #   @return [String]
     #
     # @!attribute [rw] rendition_name
@@ -7727,7 +7959,7 @@ module Aws::MediaConvert
     #   to your output HLS or DASH manifest. For HLS manifests, MediaConvert
     #   adds the following accessibility attributes under EXT-X-MEDIA for
     #   this track:
-    #   CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound"
+    #   CHARACTERISTICS="public.accessibility.transcribes-spoken-dialog,public.accessibility.describes-music-and-sound"
     #   and AUTOSELECT="YES". For DASH manifests, MediaConvert adds the
     #   following in the adaptation set for this track: <Accessibility
     #   schemeIdUri="urn:mpeg:dash:role:2011" value="caption" />
@@ -8434,7 +8666,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] duration
     #   Specify the duration, in milliseconds, for your video generator
-    #   input. Enter an integer from 50 to 86400000.
+    #   input. Enter an integer from 1 to 86400000.
     #   @return [Integer]
     #
     # @!attribute [rw] framerate_denominator
@@ -8453,9 +8685,27 @@ module Aws::MediaConvert
     #   denominator blank.
     #   @return [Integer]
     #
+    # @!attribute [rw] height
+    #   Specify the height, in pixels, for your video generator input. This
+    #   is useful for positioning when you include one or more video
+    #   overlays for this input. To use the default resolution 540x360:
+    #   Leave both width and height blank. To specify a height: Enter an
+    #   even integer from 32 to 8192. When you do, you must also specify a
+    #   value for width.
+    #   @return [Integer]
+    #
     # @!attribute [rw] sample_rate
     #   Specify the audio sample rate, in Hz, for the silent audio in your
     #   video generator input. Enter an integer from 32000 to 48000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] width
+    #   Specify the width, in pixels, for your video generator input. This
+    #   is useful for positioning when you include one or more video
+    #   overlays for this input. To use the default resolution 540x360:
+    #   Leave both width and height blank. To specify a width: Enter an even
+    #   integer from 32 to 8192. When you do, you must also specify a value
+    #   for height.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InputVideoGenerator AWS API Documentation
@@ -8465,7 +8715,9 @@ module Aws::MediaConvert
       :duration,
       :framerate_denominator,
       :framerate_numerator,
-      :sample_rate)
+      :height,
+      :sample_rate,
+      :width)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8816,7 +9068,11 @@ module Aws::MediaConvert
     # @!attribute [rw] version
     #   Use Job engine versions to run jobs for your production workflow on
     #   one version, while you test and validate the latest version. Job
-    #   engine versions are in a YYYY-MM-DD format.
+    #   engine versions represent periodically grouped MediaConvert releases
+    #   with new features, updates, improvements, and fixes. Job engine
+    #   versions are in a YYYY-MM-DD format. Note that the Job engine
+    #   version feature is not publicly available at this time. To request
+    #   access, contact AWS support.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/JobEngineVersion AWS API Documentation
@@ -9197,6 +9453,42 @@ module Aws::MediaConvert
       :output_groups,
       :timecode_config,
       :timed_metadata_insertion)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provide one or more JobsQueryFilter objects, each containing a Key
+    # with an associated Values array. Note that MediaConvert queries jobs
+    # using OR logic.
+    #
+    # @!attribute [rw] key
+    #   Specify job details to filter for while performing a jobs query. You
+    #   specify these filters as part of a key-value pair within the
+    #   JobsQueryFilter array. The following list describes which keys are
+    #   available and their possible values: * queue - Your Queue's name
+    #   or ARN. * status - Your job's status. (SUBMITTED \| PROGRESSING \|
+    #   COMPLETE \| CANCELED \| ERROR) * fileInput - Your input file URL,
+    #   or partial input file name. * jobEngineVersionRequested - The Job
+    #   engine version that you requested for your job. Valid versions are
+    #   in a YYYY-MM-DD format. * jobEngineVersionUsed - The Job engine
+    #   version that your job used. This may differ from the version that
+    #   you requested. Valid versions are in a YYYY-MM-DD format. *
+    #   audioCodec - Your output's audio codec. (AAC \| MP2 \| MP3 \| WAV
+    #   \| AIFF \| AC3\| EAC3 \| EAC3\_ATMOS \| VORBIS \| OPUS \|
+    #   PASSTHROUGH \| FLAC) * videoCodec - Your output's video codec.
+    #   (AV1 \| AVC\_INTRA \| FRAME\_CAPTURE \| H\_264 \| H\_265 \| MPEG2 \|
+    #   PASSTHROUGH \| PRORES \| UNCOMPRESSED \| VC3 \| VP8 \| VP9 \| XAVC)
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   A list of values associated with a JobsQueryFilterKey.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/JobsQueryFilter AWS API Documentation
+    #
+    class JobsQueryFilter < Struct.new(
+      :key,
+      :values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9607,7 +9899,9 @@ module Aws::MediaConvert
     end
 
     # Retrieve a JSON array of all available Job engine versions and the
-    # date they expire. Job engine versions are in YYYY-MM-DD format.
+    # date they expire. Job engine versions are in YYYY-MM-DD format. Note
+    # that the Job engine version feature is not publicly available at this
+    # time. To request access, contact AWS support.
     #
     # @!attribute [rw] max_results
     #   Optional. Number of valid Job engine versions, up to twenty, that
@@ -10665,14 +10959,31 @@ module Aws::MediaConvert
     #   output audio codec.
     #   @return [String]
     #
+    # @!attribute [rw] c2pa_manifest
+    #   When enabled, a C2PA compliant manifest will be generated, signed
+    #   and embeded in the output. For more information on C2PA, see
+    #   https://c2pa.org/specifications/specifications/2.1/index.html
+    #   @return [String]
+    #
     # @!attribute [rw] caption_container_type
     #   Use this setting only in DASH output groups that include sidecar
-    #   TTML or IMSC captions. You specify sidecar captions in a separate
-    #   output from your audio and video. Choose Raw for captions in a
-    #   single XML file in a raw container. Choose Fragmented MPEG-4 for
-    #   captions in XML format contained within fragmented MP4 files. This
-    #   set of fragmented MP4 files is separate from your video and audio
-    #   fragmented MP4 files.
+    #   TTML, IMSC or WEBVTT captions. You specify sidecar captions in a
+    #   separate output from your audio and video. Choose Raw for captions
+    #   in a single XML file in a raw container. Choose Fragmented MPEG-4
+    #   for captions in XML format contained within fragmented MP4 files.
+    #   This set of fragmented MP4 files is separate from your video and
+    #   audio fragmented MP4 files.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_secret
+    #   Specify the name or ARN of the AWS Secrets Manager secret that
+    #   contains your C2PA public certificate chain in PEM format. Provide a
+    #   valid secret name or ARN. Note that your MediaConvert service role
+    #   must allow access to this secret. The public certificate chain is
+    #   added to the COSE header (x5chain) for signature validation. Include
+    #   the signer's certificate and all intermediate certificates. Do not
+    #   include the root certificate. For details on COSE, see:
+    #   https://opensource.contentauthenticity.org/docs/manifest/signing-manifests
     #   @return [String]
     #
     # @!attribute [rw] klv_metadata
@@ -10709,6 +11020,12 @@ module Aws::MediaConvert
     #   video file. Choose Passthrough if you want SCTE-35 markers that
     #   appear in your input to also appear in this output. Choose None if
     #   you don't want those SCTE-35 markers in this output.
+    #   @return [String]
+    #
+    # @!attribute [rw] signing_kms_key
+    #   Specify the ID or ARN of the AWS KMS key used to sign the C2PA
+    #   manifest in your MP4 output. Provide a valid KMS key ARN. Note that
+    #   your MediaConvert service role must allow access to this key.
     #   @return [String]
     #
     # @!attribute [rw] timed_metadata
@@ -10748,11 +11065,14 @@ module Aws::MediaConvert
     class MpdSettings < Struct.new(
       :accessibility_caption_hints,
       :audio_duration,
+      :c2pa_manifest,
       :caption_container_type,
+      :certificate_secret,
       :klv_metadata,
       :manifest_metadata_signaling,
       :scte_35_esam,
       :scte_35_source,
+      :signing_kms_key,
       :timed_metadata,
       :timed_metadata_box_version,
       :timed_metadata_scheme_id_uri,
@@ -10984,7 +11304,8 @@ module Aws::MediaConvert
     #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
     #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
     #   Quality-Defined Variable Bitrate. This option is only available when
-    #   your output uses the QVBR rate control mode.
+    #   your output uses the QVBR rate control mode. * SHOT\_CHANGE: Shot
+    #   Changes
     #   @return [Array<String>]
     #
     # @!attribute [rw] quality_tuning_level
@@ -11915,7 +12236,8 @@ module Aws::MediaConvert
     #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
     #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
     #   Quality-Defined Variable Bitrate. This option is only available when
-    #   your output uses the QVBR rate control mode.
+    #   your output uses the QVBR rate control mode. * SHOT\_CHANGE: Shot
+    #   Changes
     #   @return [Array<String>]
     #
     # @!attribute [rw] type
@@ -11965,6 +12287,41 @@ module Aws::MediaConvert
     #
     class PartnerWatermarking < Struct.new(
       :nexguard_file_marker_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Optional settings when you set Codec to the value Passthrough.
+    #
+    # @!attribute [rw] frame_control
+    #   Choose how MediaConvert handles start and end times for input
+    #   clipping with video passthrough. Your input video codec must be
+    #   H.264 or H.265 to use IFRAME. To clip at the nearest IDR-frame:
+    #   Choose Nearest IDR. If an IDR-frame is not found at the frame that
+    #   you specify, MediaConvert uses the next compatible IDR-frame. Note
+    #   that your output may be shorter than your input clip duration. To
+    #   clip at the nearest I-frame: Choose Nearest I-frame. If an I-frame
+    #   is not found at the frame that you specify, MediaConvert uses the
+    #   next compatible I-frame. Note that your output may be shorter than
+    #   your input clip duration. We only recommend this setting for special
+    #   workflows, and when you choose this setting your output may not be
+    #   compatible with most players.
+    #   @return [String]
+    #
+    # @!attribute [rw] video_selector_mode
+    #   AUTO will select the highest bitrate input in the video selector
+    #   source. REMUX\_ALL will passthrough all the selected streams in the
+    #   video selector source. When selecting streams from multiple
+    #   renditions (i.e. using Stream video selector type): REMUX\_ALL will
+    #   only remux all streams selected, and AUTO will use the highest
+    #   bitrate video stream among the selected streams as source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/PassthroughSettings AWS API Documentation
+    #
+    class PassthroughSettings < Struct.new(
+      :frame_control,
+      :video_selector_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12288,7 +12645,8 @@ module Aws::MediaConvert
     #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
     #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
     #   Quality-Defined Variable Bitrate. This option is only available when
-    #   your output uses the QVBR rate control mode.
+    #   your output uses the QVBR rate control mode. * SHOT\_CHANGE: Shot
+    #   Changes
     #   @return [Array<String>]
     #
     # @!attribute [rw] scan_type_conversion_mode
@@ -12937,6 +13295,17 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # If your output group type is HLS, DASH, or Microsoft Smooth, use these
     # settings when doing DRM encryption with a SPEKE-compliant key
     # provider. If your output group type is CMAF, use the
@@ -13063,6 +13432,57 @@ module Aws::MediaConvert
     #
     class SrtDestinationSettings < Struct.new(
       :style_passthrough)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Start an asynchronous jobs query using the provided filters. To
+    # receive the list of jobs that match your query, call the
+    # GetJobsQueryResults API using the query ID returned by this API.
+    #
+    # @!attribute [rw] filter_list
+    #   Optional. Provide an array of JobsQueryFilters for your
+    #   StartJobsQuery request.
+    #   @return [Array<Types::JobsQueryFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   Optional. Number of jobs, up to twenty, that will be included in the
+    #   jobs query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Use this string to request the next batch of jobs matched by a jobs
+    #   query.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   Optional. When you request lists of resources, you can specify
+    #   whether they are sorted in ASCENDING or DESCENDING order. Default
+    #   varies by resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/StartJobsQueryRequest AWS API Documentation
+    #
+    class StartJobsQueryRequest < Struct.new(
+      :filter_list,
+      :max_results,
+      :next_token,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Successful requests return an ID that corresponds to an asynchronous
+    # jobs query.
+    #
+    # @!attribute [rw] id
+    #   The ID of the jobs query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/StartJobsQueryResponse AWS API Documentation
+    #
+    class StartJobsQueryResponse < Struct.new(
+      :id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13392,6 +13812,21 @@ module Aws::MediaConvert
     # your caption source is IMSC 1.1 in a separate xml file, use
     # FileSourceSettings instead of TrackSourceSettings.
     #
+    # @!attribute [rw] stream_number
+    #   Use this setting to select a single captions track from a source.
+    #   Stream numbers include all tracks in the source file, regardless of
+    #   type, and correspond to either the order of tracks in the file, or
+    #   if applicable, the stream number metadata of the track. Although all
+    #   tracks count toward these stream numbers, in this caption selector
+    #   context, only the stream number of a track containing caption data
+    #   may be used. To include more than one captions track in your job
+    #   outputs, create multiple input captions selectors. Specify one
+    #   stream per selector. If your source file contains a track which is
+    #   not recognized by the service, then the corresponding stream number
+    #   will still be reserved for future use. If more types of caption data
+    #   get recognized in the future, these numberings will not shift.
+    #   @return [Integer]
+    #
     # @!attribute [rw] track_number
     #   Use this setting to select a single captions track from a source.
     #   Track numbers correspond to the order in the captions source file.
@@ -13399,12 +13834,15 @@ module Aws::MediaConvert
     #   captions appear in the CPL. For example, use 1 to select the
     #   captions asset that is listed first in the CPL. To include more than
     #   one captions track in your job outputs, create multiple input
-    #   captions selectors. Specify one track per selector.
+    #   captions selectors. Specify one track per selector. If more types of
+    #   caption data get recognized in the future, these numberings may
+    #   shift, but the numberings used for streamNumber will not.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TrackSourceSettings AWS API Documentation
     #
     class TrackSourceSettings < Struct.new(
+      :stream_number,
       :track_number)
       SENSITIVE = []
       include Aws::Structure
@@ -13944,6 +14382,10 @@ module Aws::MediaConvert
     #   Required when you set Codec to the value MPEG2.
     #   @return [Types::Mpeg2Settings]
     #
+    # @!attribute [rw] passthrough_settings
+    #   Optional settings when you set Codec to the value Passthrough.
+    #   @return [Types::PassthroughSettings]
+    #
     # @!attribute [rw] prores_settings
     #   Required when you set Codec to the value PRORES.
     #   @return [Types::ProresSettings]
@@ -13980,6 +14422,7 @@ module Aws::MediaConvert
       :h264_settings,
       :h265_settings,
       :mpeg_2_settings,
+      :passthrough_settings,
       :prores_settings,
       :uncompressed_settings,
       :vc_3_settings,
@@ -14415,6 +14858,12 @@ module Aws::MediaConvert
     #   enter a value for Height and leave Width blank.
     #   @return [Integer]
     #
+    # @!attribute [rw] opacity
+    #   Use Opacity to specify how much of the underlying video shows
+    #   through the overlay video. 0 is transparent and 100 is fully opaque.
+    #   Default is 100.
+    #   @return [Integer]
+    #
     # @!attribute [rw] unit
     #   Specify the Unit type to use when you enter a value for X position,
     #   Y position, Width, or Height. You can choose Pixels or Percentage.
@@ -14465,6 +14914,7 @@ module Aws::MediaConvert
     #
     class VideoOverlayPosition < Struct.new(
       :height,
+      :opacity,
       :unit,
       :width,
       :x_position,
@@ -14477,7 +14927,7 @@ module Aws::MediaConvert
     # Transitions to reposition or resize your overlay over time. To use the
     # same position and size for the duration of your video overlay: Leave
     # blank. To specify a Transition: Enter a value for Start timecode, End
-    # Timecode, X Position, Y Position, Width, or Height.
+    # Timecode, X Position, Y Position, Width, Height, or Opacity
     #
     # @!attribute [rw] end_position
     #   Specify the ending position for this transition, relative to the
@@ -14581,19 +15031,34 @@ module Aws::MediaConvert
     # Details about the media file's video track.
     #
     # @!attribute [rw] bit_depth
-    #   The bit depth of the video track.
+    #   The number of bits used per color component such as 8, 10, or 12
+    #   bits. Standard range (SDR) video typically uses 8-bit, while 10-bit
+    #   is common for high dynamic range (HDR).
     #   @return [Integer]
     #
     # @!attribute [rw] bit_rate
     #   The bit rate of the video track, in bits per second.
     #   @return [Integer]
     #
+    # @!attribute [rw] codec_metadata
+    #   Codec-specific parameters parsed from the video essence headers.
+    #   This information provides detailed technical specifications about
+    #   how the video was encoded, including profile settings, resolution
+    #   details, and color space information that can help you understand
+    #   the source video characteristics and make informed encoding
+    #   decisions.
+    #   @return [Types::CodecMetadata]
+    #
     # @!attribute [rw] color_primaries
-    #   The color space color primaries of the video track.
+    #   The color space primaries of the video track, defining the red,
+    #   green, and blue color coordinates used for the video. This
+    #   information helps ensure accurate color reproduction during playback
+    #   and transcoding.
     #   @return [String]
     #
     # @!attribute [rw] frame_rate
-    #   The frame rate of the video or audio track.
+    #   The frame rate of the video or audio track, expressed as a fraction
+    #   with numerator and denominator values.
     #   @return [Types::FrameRate]
     #
     # @!attribute [rw] height
@@ -14601,11 +15066,16 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] matrix_coefficients
-    #   The color space matrix coefficients of the video track.
+    #   The color space matrix coefficients of the video track, defining how
+    #   RGB color values are converted to and from YUV color space. This
+    #   affects color accuracy during encoding and decoding processes.
     #   @return [String]
     #
     # @!attribute [rw] transfer_characteristics
-    #   The color space transfer characteristics of the video track.
+    #   The color space transfer characteristics of the video track,
+    #   defining the relationship between linear light values and the
+    #   encoded signal values. This affects brightness and contrast
+    #   reproduction.
     #   @return [String]
     #
     # @!attribute [rw] width
@@ -14617,6 +15087,7 @@ module Aws::MediaConvert
     class VideoProperties < Struct.new(
       :bit_depth,
       :bit_rate,
+      :codec_metadata,
       :color_primaries,
       :frame_rate,
       :height,
@@ -14764,8 +15235,14 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] streams
-    #   Specify a stream for MediaConvert to use from your HLS input. Enter
-    #   an integer corresponding to the stream order in your HLS manifest.
+    #   Specify one or more video streams for MediaConvert to use from your
+    #   HLS input. Enter an integer corresponding to the stream number, with
+    #   the first stream in your HLS multivariant playlist starting at 1.For
+    #   re-encoding workflows, MediaConvert uses the video stream that you
+    #   select with the highest bitrate as the input.For video passthrough
+    #   workflows, you specify whether to passthrough a single video stream
+    #   or multiple video streams under Video selector source in the output
+    #   video encoding settings.
     #   @return [Array<Integer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoSelector AWS API Documentation
@@ -15151,7 +15628,7 @@ module Aws::MediaConvert
     #   attributes to your output HLS or DASH manifest. For HLS manifests,
     #   MediaConvert adds the following accessibility attributes under
     #   EXT-X-MEDIA for this track:
-    #   CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound"
+    #   CHARACTERISTICS="public.accessibility.transcribes-spoken-dialog,public.accessibility.describes-music-and-sound"
     #   and AUTOSELECT="YES". For DASH manifests, MediaConvert adds the
     #   following in the adaptation set for this track: <Accessibility
     #   schemeIdUri="urn:mpeg:dash:role:2011" value="caption" />
@@ -15207,8 +15684,9 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] rendition_language_code
-    #   Optional. Specify ISO 639-2 or ISO 639-3 code in the language
-    #   property
+    #   Optionally specify the language, using an ISO 639-2 or ISO 639-3
+    #   three-letter code in all capital letters. You can find a list of
+    #   codes at: https://www.loc.gov/standards/iso639-2/php/code\_list.php
     #   @return [String]
     #
     # @!attribute [rw] rendition_name
@@ -15546,7 +16024,8 @@ module Aws::MediaConvert
     #   Measure * PSNR\_HVS: Peak Signal-to-Noise Ratio, Human Visual
     #   System * VMAF: Video Multi-Method Assessment Fusion * QVBR:
     #   Quality-Defined Variable Bitrate. This option is only available when
-    #   your output uses the QVBR rate control mode.
+    #   your output uses the QVBR rate control mode. * SHOT\_CHANGE: Shot
+    #   Changes
     #   @return [Array<String>]
     #
     # @!attribute [rw] profile

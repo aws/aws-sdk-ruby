@@ -1,0 +1,411 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::NovaAct
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ActError
+      attr_accessor message: ::String
+      attr_accessor type: ::String
+      SENSITIVE: [:message]
+    end
+
+    class ActSummary
+      attr_accessor workflow_run_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor act_id: ::String
+      attr_accessor status: ("RUNNING" | "PENDING_CLIENT_ACTION" | "PENDING_HUMAN_ACTION" | "SUCCEEDED" | "FAILED" | "TIMED_OUT")
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor trace_location: Types::TraceLocation
+      SENSITIVE: []
+    end
+
+    class Call
+      attr_accessor call_id: ::String
+      attr_accessor input: untyped
+      attr_accessor name: ::String
+      SENSITIVE: [:input]
+    end
+
+    class CallResult
+      attr_accessor call_id: ::String
+      attr_accessor content: ::Array[Types::CallResultContent]
+      SENSITIVE: []
+    end
+
+    class CallResultContent
+      attr_accessor text: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < CallResultContent
+      end
+      class Unknown < CallResultContent
+      end
+    end
+
+    class ClientInfo
+      attr_accessor compatibility_version: ::Integer
+      attr_accessor sdk_version: ::String
+      SENSITIVE: []
+    end
+
+    class CompatibilityInformation
+      attr_accessor client_compatibility_version: ::Integer
+      attr_accessor supported_model_ids: ::Array[::String]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateActRequest
+      attr_accessor workflow_definition_name: ::String
+      attr_accessor workflow_run_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor task: ::String
+      attr_accessor tool_specs: ::Array[Types::ToolSpec]
+      attr_accessor client_token: ::String
+      SENSITIVE: [:task]
+    end
+
+    class CreateActResponse
+      attr_accessor act_id: ::String
+      attr_accessor status: ("RUNNING" | "PENDING_CLIENT_ACTION" | "PENDING_HUMAN_ACTION" | "SUCCEEDED" | "FAILED" | "TIMED_OUT")
+      SENSITIVE: []
+    end
+
+    class CreateSessionRequest
+      attr_accessor workflow_definition_name: ::String
+      attr_accessor workflow_run_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSessionResponse
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkflowDefinitionRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor export_config: Types::WorkflowExportConfig
+      attr_accessor client_token: ::String
+      SENSITIVE: [:description]
+    end
+
+    class CreateWorkflowDefinitionResponse
+      attr_accessor status: ("ACTIVE" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class CreateWorkflowRunRequest
+      attr_accessor workflow_definition_name: ::String
+      attr_accessor model_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor log_group_name: ::String
+      attr_accessor client_info: Types::ClientInfo
+      SENSITIVE: []
+    end
+
+    class CreateWorkflowRunResponse
+      attr_accessor workflow_run_id: ::String
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class DeleteWorkflowDefinitionRequest
+      attr_accessor workflow_definition_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkflowDefinitionResponse
+      attr_accessor status: ("ACTIVE" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class DeleteWorkflowRunRequest
+      attr_accessor workflow_definition_name: ::String
+      attr_accessor workflow_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkflowRunResponse
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class GetWorkflowDefinitionRequest
+      attr_accessor workflow_definition_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkflowDefinitionResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor export_config: Types::WorkflowExportConfig
+      attr_accessor status: ("ACTIVE" | "DELETING")
+      SENSITIVE: [:description]
+    end
+
+    class GetWorkflowRunRequest
+      attr_accessor workflow_definition_name: ::String
+      attr_accessor workflow_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkflowRunResponse
+      attr_accessor workflow_run_arn: ::String
+      attr_accessor workflow_run_id: ::String
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "DELETING")
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor model_id: ::String
+      attr_accessor log_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      attr_accessor reason: ("InvalidModelGeneration" | "RequestTokenLimitExceeded")
+      SENSITIVE: []
+    end
+
+    class InvokeActStepRequest
+      attr_accessor workflow_definition_name: ::String
+      attr_accessor workflow_run_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor act_id: ::String
+      attr_accessor call_results: ::Array[Types::CallResult]
+      attr_accessor previous_step_id: ::String
+      SENSITIVE: []
+    end
+
+    class InvokeActStepResponse
+      attr_accessor calls: ::Array[Types::Call]
+      attr_accessor step_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListActsRequest
+      attr_accessor workflow_definition_name: ::String
+      attr_accessor workflow_run_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class ListActsResponse
+      attr_accessor act_summaries: ::Array[Types::ActSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListModelsRequest
+      attr_accessor client_compatibility_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListModelsResponse
+      attr_accessor model_summaries: ::Array[Types::ModelSummary]
+      attr_accessor model_aliases: ::Array[Types::ModelAlias]
+      attr_accessor compatibility_information: Types::CompatibilityInformation
+      SENSITIVE: []
+    end
+
+    class ListSessionsRequest
+      attr_accessor workflow_definition_name: ::String
+      attr_accessor workflow_run_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class ListSessionsResponse
+      attr_accessor session_summaries: ::Array[Types::SessionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowDefinitionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class ListWorkflowDefinitionsResponse
+      attr_accessor workflow_definition_summaries: ::Array[Types::WorkflowDefinitionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowRunsRequest
+      attr_accessor workflow_definition_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      SENSITIVE: []
+    end
+
+    class ListWorkflowRunsResponse
+      attr_accessor workflow_run_summaries: ::Array[Types::WorkflowRunSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ModelAlias
+      attr_accessor alias_name: ::String
+      attr_accessor latest_model_id: ::String
+      attr_accessor resolved_model_id: ::String
+      SENSITIVE: []
+    end
+
+    class ModelLifecycle
+      attr_accessor status: ("ACTIVE" | "LEGACY" | "DEPRECATED" | "PREVIEW")
+      SENSITIVE: []
+    end
+
+    class ModelSummary
+      attr_accessor model_id: ::String
+      attr_accessor model_lifecycle: Types::ModelLifecycle
+      attr_accessor minimum_compatibility_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class SessionSummary
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ToolInputSchema
+      attr_accessor json: untyped
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Json < ToolInputSchema
+      end
+      class Unknown < ToolInputSchema
+      end
+    end
+
+    class ToolSpec
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor input_schema: Types::ToolInputSchema
+      SENSITIVE: [:description, :input_schema]
+    end
+
+    class TraceLocation
+      attr_accessor location_type: ("S3")
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateActRequest
+      attr_accessor workflow_definition_name: ::String
+      attr_accessor workflow_run_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor act_id: ::String
+      attr_accessor status: ("RUNNING" | "PENDING_CLIENT_ACTION" | "PENDING_HUMAN_ACTION" | "SUCCEEDED" | "FAILED" | "TIMED_OUT")
+      attr_accessor error: Types::ActError
+      SENSITIVE: []
+    end
+
+    class UpdateActResponse < Aws::EmptyStructure
+    end
+
+    class UpdateWorkflowRunRequest
+      attr_accessor workflow_definition_name: ::String
+      attr_accessor workflow_run_id: ::String
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class UpdateWorkflowRunResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("FieldValidationFailed" | "InvalidStatus" | "GuardrailIntervened")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowDefinitionSummary
+      attr_accessor workflow_definition_arn: ::String
+      attr_accessor workflow_definition_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("ACTIVE" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class WorkflowExportConfig
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowRunSummary
+      attr_accessor workflow_run_arn: ::String
+      attr_accessor workflow_run_id: ::String
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "DELETING")
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor trace_location: Types::TraceLocation
+      SENSITIVE: []
+    end
+  end
+end

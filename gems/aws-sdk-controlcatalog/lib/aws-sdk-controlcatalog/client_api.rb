@@ -34,6 +34,7 @@ module Aws::ControlCatalog
     ControlMappings = Shapes::ListShape.new(name: 'ControlMappings')
     ControlParameter = Shapes::StructureShape.new(name: 'ControlParameter')
     ControlParameters = Shapes::ListShape.new(name: 'ControlParameters')
+    ControlRelationType = Shapes::StringShape.new(name: 'ControlRelationType')
     ControlScope = Shapes::StringShape.new(name: 'ControlScope')
     ControlSeverity = Shapes::StringShape.new(name: 'ControlSeverity')
     ControlSummary = Shapes::StructureShape.new(name: 'ControlSummary')
@@ -86,6 +87,7 @@ module Aws::ControlCatalog
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     RegionCode = Shapes::StringShape.new(name: 'RegionCode')
     RegionConfiguration = Shapes::StructureShape.new(name: 'RegionConfiguration')
+    RelatedControlMappingDetails = Shapes::StructureShape.new(name: 'RelatedControlMappingDetails')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     String = Shapes::StringShape.new(name: 'String')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
@@ -262,9 +264,11 @@ module Aws::ControlCatalog
 
     Mapping.add_member(:framework, Shapes::ShapeRef.new(shape: FrameworkMappingDetails, location_name: "Framework"))
     Mapping.add_member(:common_control, Shapes::ShapeRef.new(shape: CommonControlMappingDetails, location_name: "CommonControl"))
+    Mapping.add_member(:related_control, Shapes::ShapeRef.new(shape: RelatedControlMappingDetails, location_name: "RelatedControl"))
     Mapping.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Mapping.add_member_subclass(:framework, Types::Mapping::Framework)
     Mapping.add_member_subclass(:common_control, Types::Mapping::CommonControl)
+    Mapping.add_member_subclass(:related_control, Types::Mapping::RelatedControl)
     Mapping.add_member_subclass(:unknown, Types::Mapping::Unknown)
     Mapping.struct_class = Types::Mapping
 
@@ -291,6 +295,10 @@ module Aws::ControlCatalog
     RegionConfiguration.add_member(:scope, Shapes::ShapeRef.new(shape: ControlScope, required: true, location_name: "Scope"))
     RegionConfiguration.add_member(:deployable_regions, Shapes::ShapeRef.new(shape: DeployableRegions, location_name: "DeployableRegions"))
     RegionConfiguration.struct_class = Types::RegionConfiguration
+
+    RelatedControlMappingDetails.add_member(:control_arn, Shapes::ShapeRef.new(shape: ControlArn, location_name: "ControlArn"))
+    RelatedControlMappingDetails.add_member(:relation_type, Shapes::ShapeRef.new(shape: ControlRelationType, required: true, location_name: "RelationType"))
+    RelatedControlMappingDetails.struct_class = Types::RelatedControlMappingDetails
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException

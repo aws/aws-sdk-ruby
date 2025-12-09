@@ -980,7 +980,7 @@
         "DBInstanceClass":{"shape":"String"},
         "Engine":{"shape":"String"},
         "MasterUsername":{"shape":"String"},
-        "MasterUserPassword":{"shape":"String"},
+        "MasterUserPassword":{"shape":"SensitiveString"},
         "DBSecurityGroups":{"shape":"DBSecurityGroupNameList"},
         "VpcSecurityGroupIds":{"shape":"VpcSecurityGroupIdList"},
         "AvailabilityZone":{"shape":"String"},
@@ -2074,7 +2074,7 @@
         "DBSecurityGroups":{"shape":"DBSecurityGroupNameList"},
         "VpcSecurityGroupIds":{"shape":"VpcSecurityGroupIdList"},
         "ApplyImmediately":{"shape":"Boolean"},
-        "MasterUserPassword":{"shape":"String"},
+        "MasterUserPassword":{"shape":"SensitiveString"},
         "DBParameterGroupName":{"shape":"String"},
         "BackupRetentionPeriod":{"shape":"IntegerOptional"},
         "PreferredBackupWindow":{"shape":"String"},
@@ -2347,7 +2347,7 @@
       "members":{
         "DBInstanceClass":{"shape":"String"},
         "AllocatedStorage":{"shape":"IntegerOptional"},
-        "MasterUserPassword":{"shape":"String"},
+        "MasterUserPassword":{"shape":"SensitiveString"},
         "Port":{"shape":"IntegerOptional"},
         "BackupRetentionPeriod":{"shape":"IntegerOptional"},
         "MultiAZ":{"shape":"BooleanOptional"},
@@ -2689,6 +2689,10 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "SensitiveString":{
+      "type":"string",
+      "sensitive":true
     },
     "SnapshotQuotaExceededFault":{
       "type":"structure",

@@ -848,6 +848,31 @@ module Aws::VerifiedPermissions
     #               entity_id: "EntityId", # required
     #             },
     #           ],
+    #           tags: {
+    #             "String" => {
+    #               boolean: false,
+    #               entity_identifier: {
+    #                 entity_type: "EntityType", # required
+    #                 entity_id: "EntityId", # required
+    #               },
+    #               long: 1,
+    #               string: "StringAttribute",
+    #               set: [
+    #                 {
+    #                   # recursive CedarTagValue
+    #                 },
+    #               ],
+    #               record: {
+    #                 "String" => {
+    #                   # recursive CedarTagValue
+    #                 },
+    #               },
+    #               ipaddr: "IpAddr",
+    #               decimal: "Decimal",
+    #               datetime: "DatetimeAttribute",
+    #               duration: "Duration",
+    #             },
+    #           },
     #         },
     #       ],
     #       cedar_json: "CedarJson",
@@ -1142,6 +1167,31 @@ module Aws::VerifiedPermissions
     #               entity_id: "EntityId", # required
     #             },
     #           ],
+    #           tags: {
+    #             "String" => {
+    #               boolean: false,
+    #               entity_identifier: {
+    #                 entity_type: "EntityType", # required
+    #                 entity_id: "EntityId", # required
+    #               },
+    #               long: 1,
+    #               string: "StringAttribute",
+    #               set: [
+    #                 {
+    #                   # recursive CedarTagValue
+    #                 },
+    #               ],
+    #               record: {
+    #                 "String" => {
+    #                   # recursive CedarTagValue
+    #                 },
+    #               },
+    #               ipaddr: "IpAddr",
+    #               decimal: "Decimal",
+    #               datetime: "DatetimeAttribute",
+    #               duration: "Duration",
+    #             },
+    #           },
     #         },
     #       ],
     #       cedar_json: "CedarJson",
@@ -2547,6 +2597,31 @@ module Aws::VerifiedPermissions
     #               entity_id: "EntityId", # required
     #             },
     #           ],
+    #           tags: {
+    #             "String" => {
+    #               boolean: false,
+    #               entity_identifier: {
+    #                 entity_type: "EntityType", # required
+    #                 entity_id: "EntityId", # required
+    #               },
+    #               long: 1,
+    #               string: "StringAttribute",
+    #               set: [
+    #                 {
+    #                   # recursive CedarTagValue
+    #                 },
+    #               ],
+    #               record: {
+    #                 "String" => {
+    #                   # recursive CedarTagValue
+    #                 },
+    #               },
+    #               ipaddr: "IpAddr",
+    #               decimal: "Decimal",
+    #               datetime: "DatetimeAttribute",
+    #               duration: "Duration",
+    #             },
+    #           },
     #         },
     #       ],
     #       cedar_json: "CedarJson",
@@ -2726,6 +2801,31 @@ module Aws::VerifiedPermissions
     #               entity_id: "EntityId", # required
     #             },
     #           ],
+    #           tags: {
+    #             "String" => {
+    #               boolean: false,
+    #               entity_identifier: {
+    #                 entity_type: "EntityType", # required
+    #                 entity_id: "EntityId", # required
+    #               },
+    #               long: 1,
+    #               string: "StringAttribute",
+    #               set: [
+    #                 {
+    #                   # recursive CedarTagValue
+    #                 },
+    #               ],
+    #               record: {
+    #                 "String" => {
+    #                   # recursive CedarTagValue
+    #                 },
+    #               },
+    #               ipaddr: "IpAddr",
+    #               decimal: "Decimal",
+    #               datetime: "DatetimeAttribute",
+    #               duration: "Duration",
+    #             },
+    #           },
     #         },
     #       ],
     #       cedar_json: "CedarJson",
@@ -4014,7 +4114,7 @@ module Aws::VerifiedPermissions
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

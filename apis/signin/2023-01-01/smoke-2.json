@@ -1,0 +1,25 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "TokenOperationSmokeTest",
+    "operationName" : "CreateOAuth2Token",
+    "input" : {
+      "tokenInput" : {
+        "clientId" : "arn:aws:signin:::devtools/same-device",
+        "grantType" : "authorization_code",
+        "code" : "test-code",
+        "redirectUri" : "https://example.com",
+        "codeVerifier" : "test-code-verifier-1234567890abcdefghijklmnop"
+      }
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

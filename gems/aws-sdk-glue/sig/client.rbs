@@ -865,7 +865,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#create_glue_identity_center_configuration-instance_method
       def create_glue_identity_center_configuration: (
                                                        instance_arn: ::String,
-                                                       ?scopes: Array[::String]
+                                                       ?scopes: Array[::String],
+                                                       ?user_background_sessions_enabled: bool
                                                      ) -> _CreateGlueIdentityCenterConfigurationResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGlueIdentityCenterConfigurationResponseSuccess
 
@@ -911,6 +912,7 @@ module Aws
       interface _CreateIntegrationResourcePropertyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateIntegrationResourcePropertyResponse]
         def resource_arn: () -> ::String
+        def resource_property_arn: () -> ::String
         def source_processing_properties: () -> Types::SourceProcessingProperties
         def target_processing_properties: () -> Types::TargetProcessingProperties
       end
@@ -925,7 +927,13 @@ module Aws
                                                     kms_arn: ::String?,
                                                     connection_name: ::String?,
                                                     event_bus_arn: ::String?
-                                                  }
+                                                  },
+                                                  ?tags: Array[
+                                                    {
+                                                      key: ::String?,
+                                                      value: ::String?
+                                                    },
+                                                  ]
                                                 ) -> _CreateIntegrationResourcePropertyResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIntegrationResourcePropertyResponseSuccess
 
@@ -2870,7 +2878,12 @@ module Aws
                                   view_expanded_text: ::String?
                                 },
                               ]?,
-                              sub_objects: Array[::String]?
+                              view_version_id: ::Integer?,
+                              view_version_token: ::String?,
+                              refresh_seconds: ::Integer?,
+                              last_refresh_type: ("FULL" | "INCREMENTAL")?,
+                              sub_objects: Array[::String]?,
+                              sub_object_version_ids: Array[::Integer]?
                             }?
                           },
                           ?partition_indexes: Array[
@@ -2897,7 +2910,11 @@ module Aws
                                       type: {
                                       },
                                       required: bool,
-                                      doc: ::String?
+                                      doc: ::String?,
+                                      initial_default: {
+                                      }?,
+                                      write_default: {
+                                      }?
                                     },
                                   ]
                                 },
@@ -3052,6 +3069,7 @@ module Aws
                                             function_name: ::String?,
                                             class_name: ::String?,
                                             owner_name: ::String?,
+                                            function_type: ("REGULAR_FUNCTION" | "AGGREGATE_FUNCTION" | "STORED_PROCEDURE")?,
                                             owner_type: ("USER" | "ROLE" | "GROUP")?,
                                             resource_uris: Array[
                                               {
@@ -3225,6 +3243,15 @@ module Aws
                                 integration_identifier: ::String
                               ) -> _DeleteIntegrationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIntegrationResponseSuccess
+
+      interface _DeleteIntegrationResourcePropertyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIntegrationResourcePropertyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#delete_integration_resource_property-instance_method
+      def delete_integration_resource_property: (
+                                                  resource_arn: ::String
+                                                ) -> _DeleteIntegrationResourcePropertyResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIntegrationResourcePropertyResponseSuccess
 
       interface _DeleteIntegrationTablePropertiesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIntegrationTablePropertiesResponse]
@@ -3944,6 +3971,7 @@ module Aws
         def application_arn: () -> ::String
         def instance_arn: () -> ::String
         def scopes: () -> ::Array[::String]
+        def user_background_sessions_enabled: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_glue_identity_center_configuration-instance_method
       def get_glue_identity_center_configuration: (
@@ -3953,6 +3981,7 @@ module Aws
       interface _GetIntegrationResourcePropertyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetIntegrationResourcePropertyResponse]
         def resource_arn: () -> ::String
+        def resource_property_arn: () -> ::String
         def source_processing_properties: () -> Types::SourceProcessingProperties
         def target_processing_properties: () -> Types::TargetProcessingProperties
       end
@@ -4476,6 +4505,11 @@ module Aws
                        name: ::String,
                        ?transaction_id: ::String,
                        ?query_as_of_time: ::Time,
+                       ?audit_context: {
+                         additional_audit_context: ::String?,
+                         requested_columns: Array[::String]?,
+                         all_columns_requested: bool?
+                       },
                        ?include_status_details: bool
                      ) -> _GetTableResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableResponseSuccess
@@ -4538,6 +4572,11 @@ module Aws
                         ?max_results: ::Integer,
                         ?transaction_id: ::String,
                         ?query_as_of_time: ::Time,
+                        ?audit_context: {
+                          additional_audit_context: ::String?,
+                          requested_columns: Array[::String]?,
+                          all_columns_requested: bool?
+                        },
                         ?include_status_details: bool,
                         ?attributes_to_get: Array[("NAME" | "TABLE_TYPE")]
                       ) -> _GetTablesResponseSuccess
@@ -4647,6 +4686,7 @@ module Aws
         def cell_filters: () -> ::Array[Types::ColumnRowFilter]
         def query_authorization_id: () -> ::String
         def is_multi_dialect_view: () -> bool
+        def is_materialized_view: () -> bool
         def resource_arn: () -> ::String
         def is_protected: () -> bool
         def permissions: () -> ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS")]
@@ -4717,6 +4757,7 @@ module Aws
                                         ?catalog_id: ::String,
                                         ?database_name: ::String,
                                         pattern: ::String,
+                                        ?function_type: ("REGULAR_FUNCTION" | "AGGREGATE_FUNCTION" | "STORED_PROCEDURE"),
                                         ?next_token: ::String,
                                         ?max_results: ::Integer
                                       ) -> _GetUserDefinedFunctionsResponseSuccess
@@ -5052,6 +5093,24 @@ module Aws
                            ?data_store_api_version: ::String
                          ) -> _ListEntitiesResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEntitiesResponseSuccess
+
+      interface _ListIntegrationResourcePropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIntegrationResourcePropertiesResponse]
+        def integration_resource_property_list: () -> ::Array[Types::IntegrationResourceProperty]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#list_integration_resource_properties-instance_method
+      def list_integration_resource_properties: (
+                                                  ?marker: ::String,
+                                                  ?filters: Array[
+                                                    {
+                                                      name: ::String?,
+                                                      values: Array[::String]?
+                                                    },
+                                                  ],
+                                                  ?max_records: ::Integer
+                                                ) -> _ListIntegrationResourcePropertiesResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIntegrationResourcePropertiesResponseSuccess
 
       interface _ListJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListJobsResponse]
@@ -6336,13 +6395,15 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#update_glue_identity_center_configuration-instance_method
       def update_glue_identity_center_configuration: (
-                                                       ?scopes: Array[::String]
+                                                       ?scopes: Array[::String],
+                                                       ?user_background_sessions_enabled: bool
                                                      ) -> _UpdateGlueIdentityCenterConfigurationResponseSuccess
                                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGlueIdentityCenterConfigurationResponseSuccess
 
       interface _UpdateIntegrationResourcePropertyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIntegrationResourcePropertyResponse]
         def resource_arn: () -> ::String
+        def resource_property_arn: () -> ::String
         def source_processing_properties: () -> Types::SourceProcessingProperties
         def target_processing_properties: () -> Types::TargetProcessingProperties
       end
@@ -8207,7 +8268,12 @@ module Aws
                                   view_expanded_text: ::String?
                                 },
                               ]?,
-                              sub_objects: Array[::String]?
+                              view_version_id: ::Integer?,
+                              view_version_token: ::String?,
+                              refresh_seconds: ::Integer?,
+                              last_refresh_type: ("FULL" | "INCREMENTAL")?,
+                              sub_objects: Array[::String]?,
+                              sub_object_version_ids: Array[::Integer]?
                             }?
                           },
                           ?skip_archive: bool,
@@ -8231,7 +8297,11 @@ module Aws
                                           type: {
                                           },
                                           required: bool,
-                                          doc: ::String?
+                                          doc: ::String?,
+                                          initial_default: {
+                                          }?,
+                                          write_default: {
+                                          }?
                                         },
                                       ]
                                     },
@@ -8258,7 +8328,15 @@ module Aws
                                       ]
                                     }?,
                                     location: ::String,
-                                    properties: Hash[::String, ::String]?
+                                    properties: Hash[::String, ::String]?,
+                                    action: ("add-schema" | "set-current-schema" | "add-spec" | "set-default-spec" | "add-sort-order" | "set-default-sort-order" | "set-location" | "set-properties" | "remove-properties" | "add-encryption-key" | "remove-encryption-key")?,
+                                    encryption_key: {
+                                      key_id: ::String,
+                                      encrypted_key_metadata: ::String,
+                                      encrypted_by_id: ::String?,
+                                      properties: Hash[::String, ::String]?
+                                    }?,
+                                    key_id: ::String?
                                   },
                                 ]
                               }
@@ -8388,6 +8466,7 @@ module Aws
                                             function_name: ::String?,
                                             class_name: ::String?,
                                             owner_name: ::String?,
+                                            function_type: ("REGULAR_FUNCTION" | "AGGREGATE_FUNCTION" | "STORED_PROCEDURE")?,
                                             owner_type: ("USER" | "ROLE" | "GROUP")?,
                                             resource_uris: Array[
                                               {

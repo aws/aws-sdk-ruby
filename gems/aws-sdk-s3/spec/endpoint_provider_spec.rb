@@ -8235,62 +8235,6 @@ module Aws::S3
       end
     end
 
-    context "dual-stack error" do
-      let(:expected) do
-        {"error" => "S3Express does not support Dual-stack."}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-east-1", bucket: "mybucket--test-ab1--x-s3", use_fips: false, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-
-      it 'produces the correct output from the client when calling get_object' do
-        client = Client.new(
-          region: 'us-east-1',
-          use_dualstack_endpoint: true,
-          s3_us_east_1_regional_endpoint: 'regional',
-          stub_responses: true
-        )
-        expect do
-          client.get_object(
-            bucket: 'mybucket--test-ab1--x-s3',
-            key: 'key',
-          )
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-    end
-
-    context "dual-stack error with AP" do
-      let(:expected) do
-        {"error" => "S3Express does not support Dual-stack."}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-east-1", bucket: "myaccesspoint--test-ab1--xa-s3", use_fips: false, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-
-      it 'produces the correct output from the client when calling get_object' do
-        client = Client.new(
-          region: 'us-east-1',
-          use_dualstack_endpoint: true,
-          s3_us_east_1_regional_endpoint: 'regional',
-          stub_responses: true
-        )
-        expect do
-          client.get_object(
-            bucket: 'myaccesspoint--test-ab1--xa-s3',
-            key: 'key',
-          )
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-    end
-
     context "accelerate error" do
       let(:expected) do
         {"error" => "S3Express does not support S3 Accelerate."}
@@ -8480,6 +8424,743 @@ module Aws::S3
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "Control plane without bucket and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://s3express-control.dualstack.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: true, disable_s3_express_session_auth: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling list_directory_buckets' do
+        client = Client.new(
+          region: 'us-east-1',
+          use_dualstack_endpoint: true,
+          s3_us_east_1_regional_endpoint: 'regional',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.list_directory_buckets(
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "Control plane without bucket, fips and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://s3express-control-fips.dualstack.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", use_fips: true, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: true, disable_s3_express_session_auth: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling list_directory_buckets' do
+        client = Client.new(
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          s3_us_east_1_regional_endpoint: 'regional',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.list_directory_buckets(
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "Data Plane with short AZ and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--usw2-az1--x-s3.s3express-usw2-az1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--usw2-az1--x-s3", use_fips: false, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling get_object' do
+        client = Client.new(
+          region: 'us-west-2',
+          use_dualstack_endpoint: true,
+          s3_us_east_1_regional_endpoint: 'regional',
+          stub_responses: true
+        )
+        client.stub_responses(:create_session, credentials: {
+          access_key_id: 's3-akid',
+          secret_access_key: 's3-secret',
+          session_token: 's3-session',
+          expiration: Time.now + 60 * 5
+        })
+        expect_auth({"name"=>"sigv4", "signingName"=>"s3express"})
+        Aws::S3.express_credentials_cache.clear
+        expect_auth({"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true})
+        resp = client.get_object(
+          bucket: 'mybucket--usw2-az1--x-s3',
+          key: 'key',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "Data Plane with short AZ and FIPS with dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--usw2-az1--x-s3.s3express-fips-usw2-az1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--usw2-az1--x-s3", use_fips: true, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling get_object' do
+        client = Client.new(
+          region: 'us-west-2',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          s3_us_east_1_regional_endpoint: 'regional',
+          stub_responses: true
+        )
+        client.stub_responses(:create_session, credentials: {
+          access_key_id: 's3-akid',
+          secret_access_key: 's3-secret',
+          session_token: 's3-session',
+          expiration: Time.now + 60 * 5
+        })
+        expect_auth({"name"=>"sigv4", "signingName"=>"s3express"})
+        Aws::S3.express_credentials_cache.clear
+        expect_auth({"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true})
+        resp = client.get_object(
+          bucket: 'mybucket--usw2-az1--x-s3',
+          key: 'key',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "Data Plane sigv4 auth with short AZ and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--usw2-az1--x-s3.s3express-usw2-az1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--usw2-az1--x-s3", use_fips: false, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane sigv4 auth with short AZ and FIPS with dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--usw2-az1--x-s3.s3express-fips-usw2-az1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--usw2-az1--x-s3", use_fips: true, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane with zone and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--usw2-az12--x-s3.s3express-usw2-az12.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--usw2-az12--x-s3", use_fips: false, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane with zone and FIPS with dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--usw2-az12--x-s3.s3express-fips-usw2-az12.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--usw2-az12--x-s3", use_fips: true, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane sigv4 auth with zone and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--usw2-az12--x-s3.s3express-usw2-az12.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--usw2-az12--x-s3", use_fips: false, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane sigv4 auth with 9-char zone and FIPS with dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--usw2-az12--x-s3.s3express-fips-usw2-az12.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--usw2-az12--x-s3", use_fips: true, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane with 13-char zone and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--test-zone-ab1--x-s3.s3express-test-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--test-zone-ab1--x-s3", use_fips: false, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane with 13-char zone and FIPS with dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--test-zone-ab1--x-s3.s3express-fips-test-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--test-zone-ab1--x-s3", use_fips: true, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane sigv4 auth with 13-char zone and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--test-zone-ab1--x-s3.s3express-test-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--test-zone-ab1--x-s3", use_fips: false, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane sigv4 auth with 13-char zone and FIPS with dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--test-zone-ab1--x-s3.s3express-fips-test-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--test-zone-ab1--x-s3", use_fips: true, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane with 14-char zone and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--test1-zone-ab1--x-s3.s3express-test1-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--test1-zone-ab1--x-s3", use_fips: false, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane with 14-char zone and FIPS with dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--test1-zone-ab1--x-s3.s3express-fips-test1-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--test1-zone-ab1--x-s3", use_fips: true, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane sigv4 auth with 14-char zone and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--test1-zone-ab1--x-s3.s3express-test1-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--test1-zone-ab1--x-s3", use_fips: false, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane sigv4 auth with 14-char zone and FIPS with dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--test1-zone-ab1--x-s3.s3express-fips-test1-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--test1-zone-ab1--x-s3", use_fips: true, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane with long zone (20 cha) and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--test1-long1-zone-ab1--x-s3.s3express-test1-long1-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--test1-long1-zone-ab1--x-s3", use_fips: false, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane with long zone (20 char) and FIPS with dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--test1-long1-zone-ab1--x-s3.s3express-fips-test1-long1-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--test1-long1-zone-ab1--x-s3", use_fips: true, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane sigv4 auth with long zone (20 char) and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--test1-long1-zone-ab1--x-s3.s3express-test1-long1-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--test1-long1-zone-ab1--x-s3", use_fips: false, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane sigv4 auth with long zone (20 char) and FIPS with dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://mybucket--test1-long1-zone-ab1--x-s3.s3express-fips-test1-long1-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "mybucket--test1-long1-zone-ab1--x-s3", use_fips: true, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Control plane and FIPS with dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://s3express-control-fips.dualstack.us-east-1.amazonaws.com/mybucket--test-ab1--x-s3"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", bucket: "mybucket--test-ab1--x-s3", use_fips: true, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_bucket' do
+        client = Client.new(
+          region: 'us-east-1',
+          use_fips_endpoint: true,
+          use_dualstack_endpoint: true,
+          s3_us_east_1_regional_endpoint: 'regional',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.create_bucket(
+          bucket: 'mybucket--test-ab1--x-s3',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
+      end
+    end
+
+    context "Data plane with zone and dualstack and AP" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--usw2-az1--xa-s3.s3express-usw2-az1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--usw2-az1--xa-s3", use_fips: false, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data plane with zone and FIPS with dualstack and AP" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--usw2-az1--xa-s3.s3express-fips-usw2-az1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--usw2-az1--xa-s3", use_fips: true, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane sigv4 auth with zone and dualstack and AP" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--usw2-az1--xa-s3.s3express-usw2-az1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--usw2-az1--xa-s3", use_fips: false, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane AP sigv4 auth with zone and FIPS with dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--usw2-az1--xa-s3.s3express-fips-usw2-az1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--usw2-az1--xa-s3", use_fips: true, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane with zone (9 char) and AP with dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--usw2-az12--xa-s3.s3express-usw2-az12.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--usw2-az12--xa-s3", use_fips: false, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane with zone (9 char) and FIPS with AP and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--usw2-az12--xa-s3.s3express-fips-usw2-az12.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--usw2-az12--xa-s3", use_fips: true, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane sigv4 auth with (9 char) zone and dualstack with AP" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--usw2-az12--xa-s3.s3express-usw2-az12.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--usw2-az12--xa-s3", use_fips: false, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Access Point sigv4 auth with (9 char) zone and FIPS with dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--usw2-az12--xa-s3.s3express-fips-usw2-az12.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--usw2-az12--xa-s3", use_fips: true, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane with zone (13 char) and AP with dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--test-zone-ab1--xa-s3.s3express-test-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--test-zone-ab1--xa-s3", use_fips: false, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane with zone (13 char) and AP with FIPS and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--test-zone-ab1--xa-s3.s3express-fips-test-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--test-zone-ab1--xa-s3", use_fips: true, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane sigv4 auth with (13 char) zone with AP and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--test-zone-ab1--xa-s3.s3express-test-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--test-zone-ab1--xa-s3", use_fips: false, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane sigv4 auth with (13 char) zone with AP and FIPS and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--test-zone-ab1--xa-s3.s3express-fips-test-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--test-zone-ab1--xa-s3", use_fips: true, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane with (14 char) zone and AP with dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--test1-zone-ab1--xa-s3.s3express-test1-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--test1-zone-ab1--xa-s3", use_fips: false, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane with (14 char) zone and AP with FIPS and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--test1-zone-ab1--xa-s3.s3express-fips-test1-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--test1-zone-ab1--xa-s3", use_fips: true, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane sigv4 auth with (14 char) zone and AP with dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--test1-zone-ab1--xa-s3.s3express-test1-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--test1-zone-ab1--xa-s3", use_fips: false, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane with (14 char) zone and AP with FIPS and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--test1-zone-ab1--xa-s3.s3express-fips-test1-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--test1-zone-ab1--xa-s3", use_fips: true, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane with (20 char) zone and AP with dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--test1-long1-zone-ab1--xa-s3.s3express-test1-long1-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--test1-long1-zone-ab1--xa-s3", use_fips: false, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data Plane with (20 char) zone and AP with FIPS and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4-s3express", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--test1-long1-zone-ab1--xa-s3.s3express-fips-test1-long1-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--test1-long1-zone-ab1--xa-s3", use_fips: true, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data plane AP with sigv4 and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--test1-long1-zone-ab1--xa-s3.s3express-test1-long1-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--test1-long1-zone-ab1--xa-s3", use_fips: false, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Data plane AP sigv4 with fips and dualstack" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-west-2", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://myaccesspoint--test1-long1-zone-ab1--xa-s3.s3express-fips-test1-long1-zone-ab1.dualstack.us-west-2.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", bucket: "myaccesspoint--test1-long1-zone-ab1--xa-s3", use_fips: true, use_dual_stack: true, accelerate: false, disable_s3_express_session_auth: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "Control plane with dualstack and bucket" do
+      let(:expected) do
+        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true}], "backend" => "S3Express"}, "url" => "https://s3express-control.dualstack.us-east-1.amazonaws.com/mybucket--test-ab1--x-s3"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", bucket: "mybucket--test-ab1--x-s3", use_fips: false, use_dual_stack: true, accelerate: false, use_s3_express_control_endpoint: true})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+
+      it 'produces the correct output from the client when calling create_bucket' do
+        client = Client.new(
+          region: 'us-east-1',
+          use_dualstack_endpoint: true,
+          s3_us_east_1_regional_endpoint: 'regional',
+          stub_responses: true
+        )
+        expect_auth({"name" => "sigv4", "signingName" => "s3express", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true})
+        resp = client.create_bucket(
+          bucket: 'mybucket--test-ab1--x-s3',
+        )
+        expected_uri = URI.parse(expected['endpoint']['url'])
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.scheme)
+        expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.path)
       end
     end
 

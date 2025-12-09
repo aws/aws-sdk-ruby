@@ -82,6 +82,126 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # @!attribute [rw] memory_id
+    #   The unique ID of the memory resource where records will be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] records
+    #   A list of memory record creation inputs to be processed in the batch
+    #   operation.
+    #   @return [Array<Types::MemoryRecordCreateInput>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotent processing
+    #   of the batch request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/BatchCreateMemoryRecordsInput AWS API Documentation
+    #
+    class BatchCreateMemoryRecordsInput < Struct.new(
+      :memory_id,
+      :records,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful_records
+    #   A list of memory records that were successfully created during the
+    #   batch operation.
+    #   @return [Array<Types::MemoryRecordOutput>]
+    #
+    # @!attribute [rw] failed_records
+    #   A list of memory records that failed to be created, including error
+    #   details for each failure.
+    #   @return [Array<Types::MemoryRecordOutput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/BatchCreateMemoryRecordsOutput AWS API Documentation
+    #
+    class BatchCreateMemoryRecordsOutput < Struct.new(
+      :successful_records,
+      :failed_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] memory_id
+    #   The unique ID of the memory resource where records will be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] records
+    #   A list of memory record deletion inputs to be processed in the batch
+    #   operation.
+    #   @return [Array<Types::MemoryRecordDeleteInput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/BatchDeleteMemoryRecordsInput AWS API Documentation
+    #
+    class BatchDeleteMemoryRecordsInput < Struct.new(
+      :memory_id,
+      :records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful_records
+    #   A list of memory records that were successfully deleted during the
+    #   batch operation.
+    #   @return [Array<Types::MemoryRecordOutput>]
+    #
+    # @!attribute [rw] failed_records
+    #   A list of memory records that failed to be deleted, including error
+    #   details for each failure.
+    #   @return [Array<Types::MemoryRecordOutput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/BatchDeleteMemoryRecordsOutput AWS API Documentation
+    #
+    class BatchDeleteMemoryRecordsOutput < Struct.new(
+      :successful_records,
+      :failed_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] memory_id
+    #   The unique ID of the memory resource where records will be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] records
+    #   A list of memory record update inputs to be processed in the batch
+    #   operation.
+    #   @return [Array<Types::MemoryRecordUpdateInput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/BatchUpdateMemoryRecordsInput AWS API Documentation
+    #
+    class BatchUpdateMemoryRecordsInput < Struct.new(
+      :memory_id,
+      :records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful_records
+    #   A list of memory records that were successfully updated during the
+    #   batch operation.
+    #   @return [Array<Types::MemoryRecordOutput>]
+    #
+    # @!attribute [rw] failed_records
+    #   A list of memory records that failed to be updated, including error
+    #   details for each failure.
+    #   @return [Array<Types::MemoryRecordOutput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/BatchUpdateMemoryRecordsOutput AWS API Documentation
+    #
+    class BatchUpdateMemoryRecordsOutput < Struct.new(
+      :successful_records,
+      :failed_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a branch in an AgentCore Memory resource.
     # Branches allow for organizing events into different conversation
     # threads or paths.
@@ -284,6 +404,32 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # @!attribute [rw] user_identifier
+    #   The OAuth2.0 token or user ID that was used to generate the workload
+    #   access token used for initiating the user authorization flow to
+    #   retrieve OAuth2.0 tokens.
+    #   @return [Types::UserIdentifier]
+    #
+    # @!attribute [rw] session_uri
+    #   Unique identifier for the user's authentication session for
+    #   retrieving OAuth2 tokens. This ID tracks the authorization flow
+    #   state across multiple requests and responses during the OAuth2
+    #   authentication process.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CompleteResourceTokenAuthRequest AWS API Documentation
+    #
+    class CompleteResourceTokenAuthRequest < Struct.new(
+      :user_identifier,
+      :session_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CompleteResourceTokenAuthResponse AWS API Documentation
+    #
+    class CompleteResourceTokenAuthResponse < Aws::EmptyStructure; end
+
     # The exception that occurs when the request conflicts with the current
     # state of the resource. This can happen when trying to modify a
     # resource that is currently being modified by another request, or when
@@ -378,6 +524,31 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # The contextual information associated with an evaluation, including
+    # span context details that identify the specific traces and sessions
+    # being evaluated within the agent's execution flow.
+    #
+    # @note Context is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Context corresponding to the set member.
+    #
+    # @!attribute [rw] span_context
+    #   The span context information that uniquely identifies the trace and
+    #   span being evaluated, including session ID, trace ID, and span ID
+    #   for precise targeting within the agent's execution flow.
+    #   @return [Types::SpanContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/Context AWS API Documentation
+    #
+    class Context < Struct.new(
+      :span_context,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SpanContext < Context; end
+      class Unknown < Context; end
+    end
+
     # Contains conversational content for an event payload.
     #
     # @!attribute [rw] content
@@ -439,6 +610,10 @@ module Aws::BedrockAgentCore
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] metadata
+    #   The key-value metadata to attach to the event.
+    #   @return [Hash<String,Types::MetadataValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CreateEventInput AWS API Documentation
     #
     class CreateEventInput < Struct.new(
@@ -448,7 +623,8 @@ module Aws::BedrockAgentCore
       :event_timestamp,
       :payload,
       :branch,
-      :client_token)
+      :client_token,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -535,6 +711,216 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # An exception thrown when attempting to create a resource with an
+    # identifier that already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DuplicateIdException AWS API Documentation
+    #
+    class DuplicateIdException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluator_id
+    #   The unique identifier of the evaluator to use for scoring. Can be a
+    #   built-in evaluator (e.g., `Builtin.Helpfulness`,
+    #   `Builtin.Correctness`) or a custom evaluator ARN created through the
+    #   control plane API.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_input
+    #   The input data containing agent session spans to be evaluated.
+    #   Includes a list of spans in OpenTelemetry format from supported
+    #   frameworks like Strands (AgentCore Runtime) or LangGraph with
+    #   OpenInference instrumentation.
+    #   @return [Types::EvaluationInput]
+    #
+    # @!attribute [rw] evaluation_target
+    #   The specific trace or span IDs to evaluate within the provided
+    #   input. Allows targeting evaluation at different levels: individual
+    #   tool calls, single request-response interactions (traces), or entire
+    #   conversation sessions.
+    #   @return [Types::EvaluationTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EvaluateRequest AWS API Documentation
+    #
+    class EvaluateRequest < Struct.new(
+      :evaluator_id,
+      :evaluation_input,
+      :evaluation_target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] evaluation_results
+    #   The detailed evaluation results containing scores, explanations, and
+    #   metadata. Includes the evaluator information, numerical or
+    #   categorical ratings based on the evaluator's rating scale, and
+    #   token usage statistics for the evaluation process.
+    #   @return [Array<Types::EvaluationResultContent>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EvaluateResponse AWS API Documentation
+    #
+    class EvaluateResponse < Struct.new(
+      :evaluation_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input data structure containing agent session spans in
+    # OpenTelemetry format. Supports traces from frameworks like Strands
+    # (AgentCore Runtime) and LangGraph with OpenInference instrumentation
+    # for comprehensive evaluation.
+    #
+    # @note EvaluationInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] session_spans
+    #   The collection of spans representing agent execution traces within a
+    #   session. Each span contains detailed information about tool calls,
+    #   model interactions, and other agent activities that can be evaluated
+    #   for quality and performance.
+    #   @return [Array<Hash,Array,String,Numeric,Boolean>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EvaluationInput AWS API Documentation
+    #
+    class EvaluationInput < Struct.new(
+      :session_spans,
+      :unknown)
+      SENSITIVE = [:session_spans]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SessionSpans < EvaluationInput; end
+      class Unknown < EvaluationInput; end
+    end
+
+    # The comprehensive result of an evaluation containing the score,
+    # explanation, evaluator metadata, and execution details. Provides both
+    # quantitative ratings and qualitative insights about agent performance.
+    #
+    # @!attribute [rw] evaluator_arn
+    #   The Amazon Resource Name (ARN) of the evaluator used to generate
+    #   this result. For custom evaluators, this is the full ARN; for
+    #   built-in evaluators, this follows the pattern
+    #   `Builtin.{EvaluatorName}`.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_id
+    #   The unique identifier of the evaluator that produced this result.
+    #   This matches the `evaluatorId` provided in the evaluation request
+    #   and can be used to identify which evaluator generated specific
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluator_name
+    #   The human-readable name of the evaluator used for this evaluation.
+    #   For built-in evaluators, this is the descriptive name (e.g.,
+    #   "Helpfulness", "Correctness"); for custom evaluators, this is
+    #   the user-defined name.
+    #   @return [String]
+    #
+    # @!attribute [rw] explanation
+    #   The detailed explanation provided by the evaluator describing the
+    #   reasoning behind the assigned score. This qualitative feedback helps
+    #   understand why specific ratings were given and provides actionable
+    #   insights for improvement.
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   The contextual information associated with this evaluation result,
+    #   including span context details that identify the specific traces and
+    #   sessions that were evaluated.
+    #   @return [Types::Context]
+    #
+    # @!attribute [rw] value
+    #   The numerical score assigned by the evaluator according to its
+    #   configured rating scale. For numerical scales, this is a decimal
+    #   value within the defined range. This field is not allowed for
+    #   categorical scales.
+    #   @return [Float]
+    #
+    # @!attribute [rw] label
+    #   The categorical label assigned by the evaluator when using a
+    #   categorical rating scale. This provides a human-readable description
+    #   of the evaluation result (e.g., "Excellent", "Good", "Poor")
+    #   corresponding to the numerical value. For numerical scales, this
+    #   field is optional and provides a natural language explanation of
+    #   what the value means (e.g., value 0.5 = "Somewhat Helpful").
+    #   @return [String]
+    #
+    # @!attribute [rw] token_usage
+    #   The token consumption statistics for this evaluation, including
+    #   input tokens, output tokens, and total tokens used by the underlying
+    #   language model during the evaluation process.
+    #   @return [Types::TokenUsage]
+    #
+    # @!attribute [rw] error_message
+    #   The error message describing what went wrong if the evaluation
+    #   failed. Provides detailed information about evaluation failures to
+    #   help diagnose and resolve issues with evaluator configuration or
+    #   input data.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code indicating the type of failure that occurred during
+    #   evaluation. Used to programmatically identify and handle different
+    #   categories of evaluation errors.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EvaluationResultContent AWS API Documentation
+    #
+    class EvaluationResultContent < Struct.new(
+      :evaluator_arn,
+      :evaluator_id,
+      :evaluator_name,
+      :explanation,
+      :context,
+      :value,
+      :label,
+      :token_usage,
+      :error_message,
+      :error_code)
+      SENSITIVE = [:explanation]
+      include Aws::Structure
+    end
+
+    # The specification of which trace or span IDs to evaluate within the
+    # provided input data. Allows precise targeting of evaluation at
+    # different levels: tool calls, traces, or sessions.
+    #
+    # @note EvaluationTarget is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] span_ids
+    #   The list of specific span IDs to evaluate within the provided
+    #   traces. Used to target evaluation at individual tool calls or
+    #   specific operations within the agent's execution flow.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] trace_ids
+    #   The list of trace IDs to evaluate, representing complete
+    #   request-response interactions. Used to evaluate entire conversation
+    #   turns or specific agent interactions within a session.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EvaluationTarget AWS API Documentation
+    #
+    class EvaluationTarget < Struct.new(
+      :span_ids,
+      :trace_ids,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SpanIds < EvaluationTarget; end
+      class TraceIds < EvaluationTarget; end
+      class Unknown < EvaluationTarget; end
+    end
+
     # Contains information about an event in an AgentCore Memory resource.
     #
     # @!attribute [rw] memory_id
@@ -566,6 +952,10 @@ module Aws::BedrockAgentCore
     #   The branch information for the event.
     #   @return [Types::Branch]
     #
+    # @!attribute [rw] metadata
+    #   Metadata associated with an event.
+    #   @return [Hash<String,Types::MetadataValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/Event AWS API Documentation
     #
     class Event < Struct.new(
@@ -575,7 +965,146 @@ module Aws::BedrockAgentCore
       :event_id,
       :event_timestamp,
       :payload,
-      :branch)
+      :branch,
+      :metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filter expression for retrieving events based on metadata associated
+    # with an event.
+    #
+    # @!attribute [rw] left
+    #   Left operand of the event metadata filter expression.
+    #   @return [Types::LeftExpression]
+    #
+    # @!attribute [rw] operator
+    #   Operator applied to the event metadata filter expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] right
+    #   Right operand of the event metadata filter expression.
+    #   @return [Types::RightExpression]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EventMetadataFilterExpression AWS API Documentation
+    #
+    class EventMetadataFilterExpression < Struct.new(
+      :left,
+      :operator,
+      :right)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the metadata of a memory extraction job such as the message
+    # identifiers that compose this job.
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the extraction job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ExtractionJob AWS API Documentation
+    #
+    class ExtractionJob < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters for querying memory extraction jobs based on various criteria.
+    #
+    # @!attribute [rw] strategy_id
+    #   The memory strategy identifier to filter extraction jobs by. If
+    #   specified, only extraction jobs with this strategy ID are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier of the session. If specified, only extraction
+    #   jobs with this session ID are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] actor_id
+    #   The identifier of the actor. If specified, only extraction jobs with
+    #   this actor ID are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the extraction job. If specified, only extraction jobs
+    #   with this status are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ExtractionJobFilterInput AWS API Documentation
+    #
+    class ExtractionJobFilterInput < Struct.new(
+      :strategy_id,
+      :session_id,
+      :actor_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The list of messages that compose this extraction job.
+    #
+    # @note ExtractionJobMessages is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ExtractionJobMessages corresponding to the set member.
+    #
+    # @!attribute [rw] messages_list
+    #   The list of messages that compose this extraction job.
+    #   @return [Array<Types::MessageMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ExtractionJobMessages AWS API Documentation
+    #
+    class ExtractionJobMessages < Struct.new(
+      :messages_list,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class MessagesList < ExtractionJobMessages; end
+      class Unknown < ExtractionJobMessages; end
+    end
+
+    # Metadata information associated with this extraction job.
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier for the extraction job.
+    #   @return [String]
+    #
+    # @!attribute [rw] messages
+    #   The messages associated with the extraction job.
+    #   @return [Types::ExtractionJobMessages]
+    #
+    # @!attribute [rw] status
+    #   The current status of the extraction job.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The cause of failure, if the job did not complete successfully.
+    #   @return [String]
+    #
+    # @!attribute [rw] strategy_id
+    #   The identifier of the memory strategy for this extraction job.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The identifier of the session for this extraction job.
+    #   @return [String]
+    #
+    # @!attribute [rw] actor_id
+    #   The identifier of the actor for this extraction job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ExtractionJobMetadata AWS API Documentation
+    #
+    class ExtractionJobMetadata < Struct.new(
+      :job_id,
+      :messages,
+      :status,
+      :failure_reason,
+      :strategy_id,
+      :session_id,
+      :actor_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -586,10 +1115,65 @@ module Aws::BedrockAgentCore
     #   The branch filter criteria to apply when listing events.
     #   @return [Types::BranchFilter]
     #
+    # @!attribute [rw] event_metadata
+    #   Event metadata filter criteria to apply when retrieving events.
+    #   @return [Array<Types::EventMetadataFilterExpression>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/FilterInput AWS API Documentation
     #
     class FilterInput < Struct.new(
-      :branch)
+      :branch,
+      :event_metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] runtime_session_id
+    #   The session ID that the AgentCore Runtime agent is using.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_runtime_arn
+    #   The ARN of the AgentCore Runtime agent for which you want to get the
+    #   A2A agent card.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   Optional qualifier to specify an agent alias, such as `prod`code&gt;
+    #   or `dev`. If you don't provide a value, the DEFAULT alias is used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetAgentCardRequest AWS API Documentation
+    #
+    class GetAgentCardRequest < Struct.new(
+      :runtime_session_id,
+      :agent_runtime_arn,
+      :qualifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] runtime_session_id
+    #   The ID of the session associated with the AgentCore Runtime agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_card
+    #   An agent card document that contains metadata and capabilities for
+    #   an AgentCore Runtime agent.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] status_code
+    #   The status code of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetAgentCardResponse AWS API Documentation
+    #
+    class GetAgentCardResponse < Struct.new(
+      :runtime_session_id,
+      :agent_card,
+      :status_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -801,12 +1385,13 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] workload_identity_token
-    #   The identity token of the workload you want to get the API Key of.
+    #   The identity token of the workload from which you want to retrieve
+    #   the API key.
     #   @return [String]
     #
     # @!attribute [rw] resource_credential_provider_name
-    #   The credential provider name of the resource you are retrieving the
-    #   API Key of.
+    #   The credential provider name for the resource from which you are
+    #   retrieving the API key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetResourceApiKeyRequest AWS API Documentation
@@ -819,7 +1404,7 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] api_key
-    #   The API Key associated with the resource requested.
+    #   The API key associated with the resource requested.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetResourceApiKeyResponse AWS API Documentation
@@ -831,36 +1416,53 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] workload_identity_token
-    #   The identity token of the workload you want to retrive the Oauth2
-    #   Token of.
+    #   The identity token of the workload from which you want to retrieve
+    #   the OAuth2 token.
     #   @return [String]
     #
     # @!attribute [rw] resource_credential_provider_name
-    #   Reference to the credential provider
+    #   The name of the resource's credential provider.
     #   @return [String]
     #
     # @!attribute [rw] scopes
-    #   The OAuth scopes requested
+    #   The OAuth scopes being requested.
     #   @return [Array<String>]
     #
     # @!attribute [rw] oauth2_flow
-    #   The type of flow to be performed
+    #   The type of flow to be performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_uri
+    #   Unique identifier for the user's authentication session for
+    #   retrieving OAuth2 tokens. This ID tracks the authorization flow
+    #   state across multiple requests and responses during the OAuth2
+    #   authentication process.
     #   @return [String]
     #
     # @!attribute [rw] resource_oauth_2_return_url
-    #   Callback url to redirect after token retrieval completes. Should be
-    #   one of the provideded urls during WorkloadIdentity creation
+    #   The callback URL to redirect to after the OAuth 2.0 token retrieval
+    #   is complete. This URL must be one of the provided URLs configured
+    #   for the workload identity.
     #   @return [String]
     #
     # @!attribute [rw] force_authentication
-    #   If true, always initiate a new 3LO flow
+    #   Indicates whether to always initiate a new three-legged OAuth (3LO)
+    #   flow, regardless of any existing session.
     #   @return [Boolean]
     #
     # @!attribute [rw] custom_parameters
-    #   Gives the ability to send extra/custom parameters to the resource
-    #   credentials provider during the authorization process. Standard
-    #   OAuth2 flow parameters will not be overriden.
+    #   A map of custom parameters to include in the authorization request
+    #   to the resource credential provider. These parameters are in
+    #   addition to the standard OAuth 2.0 flow parameters, and will not
+    #   override them.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] custom_state
+    #   An opaque string that will be sent back to the callback URL provided
+    #   in resourceOauth2ReturnUrl. This state should be used to protect the
+    #   callback URL of your application against CSRF attacks by ensuring
+    #   the response corresponds to the original request.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetResourceOauth2TokenRequest AWS API Documentation
     #
@@ -869,37 +1471,53 @@ module Aws::BedrockAgentCore
       :resource_credential_provider_name,
       :scopes,
       :oauth2_flow,
+      :session_uri,
       :resource_oauth_2_return_url,
       :force_authentication,
-      :custom_parameters)
-      SENSITIVE = [:workload_identity_token, :custom_parameters]
+      :custom_parameters,
+      :custom_state)
+      SENSITIVE = [:workload_identity_token, :custom_parameters, :custom_state]
       include Aws::Structure
     end
 
     # @!attribute [rw] authorization_url
-    #   The URL for the authorization process, provided if the Access token
-    #   requires user Authorization.
+    #   The URL to initiate the authorization process, provided when the
+    #   access token requires user authorization.
     #   @return [String]
     #
     # @!attribute [rw] access_token
-    #   OAuth2 token ready for use
+    #   The OAuth 2.0 access token to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_uri
+    #   Unique identifier for the user's authorization session for
+    #   retrieving OAuth2 tokens. This matches the sessionId from the
+    #   request and can be used to track the session state.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_status
+    #   Status indicating whether the user's authorization session is in
+    #   progress or has failed. This helps determine the next steps in the
+    #   OAuth2 authentication flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetResourceOauth2TokenResponse AWS API Documentation
     #
     class GetResourceOauth2TokenResponse < Struct.new(
       :authorization_url,
-      :access_token)
-      SENSITIVE = [:access_token]
+      :access_token,
+      :session_uri,
+      :session_status)
+      SENSITIVE = [:authorization_url, :access_token]
       include Aws::Structure
     end
 
     # @!attribute [rw] workload_name
-    #   Unique identifier for the registered agent
+    #   The unique identifier for the registered workload.
     #   @return [String]
     #
     # @!attribute [rw] user_token
-    #   OAuth2 token issued by the user's identity provider
+    #   The OAuth 2.0 token issued by the user's identity provider.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetWorkloadAccessTokenForJWTRequest AWS API Documentation
@@ -912,7 +1530,8 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] workload_access_token
-    #   Opaque token representing both agent and user identity
+    #   An opaque token representing the identity of both the workload and
+    #   the user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetWorkloadAccessTokenForJWTResponse AWS API Documentation
@@ -924,11 +1543,12 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] workload_name
-    #   The name of the worklaod you want to get the access token of.
+    #   The name of the workload from which you want to retrieve the access
+    #   token.
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The user id of the user you are retrieving the access token for.
+    #   The ID of the user for whom you are retrieving the access token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetWorkloadAccessTokenForUserIdRequest AWS API Documentation
@@ -941,7 +1561,7 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] workload_access_token
-    #   The workload access token of the named workload.
+    #   The access token for the specified workload.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetWorkloadAccessTokenForUserIdResponse AWS API Documentation
@@ -953,7 +1573,7 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] workload_name
-    #   Unique identifier for the registered agent
+    #   The unique identifier for the registered workload.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetWorkloadAccessTokenRequest AWS API Documentation
@@ -965,7 +1585,8 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] workload_access_token
-    #   Opaque token representing both agent and user identity
+    #   An opaque token representing the identity of both the workload and
+    #   the user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetWorkloadAccessTokenResponse AWS API Documentation
@@ -1091,6 +1712,11 @@ module Aws::BedrockAgentCore
     #   runtime.
     #   @return [String]
     #
+    # @!attribute [rw] account_id
+    #   The identifier of the Amazon Web Services account for the agent
+    #   runtime resource.
+    #   @return [String]
+    #
     # @!attribute [rw] payload
     #   The input data to send to the agent runtime. The format of this data
     #   depends on the specific agent configuration and must match the
@@ -1113,6 +1739,7 @@ module Aws::BedrockAgentCore
       :baggage,
       :agent_runtime_arn,
       :qualifier,
+      :account_id,
       :payload)
       SENSITIVE = [:payload]
       include Aws::Structure
@@ -1195,6 +1822,14 @@ module Aws::BedrockAgentCore
     #   stopped, the request will fail.
     #   @return [String]
     #
+    # @!attribute [rw] trace_id
+    #   The trace identifier for request tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_parent
+    #   The parent trace information for distributed tracing.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the code interpreter to invoke.
     #   @return [String]
@@ -1212,6 +1847,8 @@ module Aws::BedrockAgentCore
     class InvokeCodeInterpreterRequest < Struct.new(
       :code_interpreter_identifier,
       :session_id,
+      :trace_id,
+      :trace_parent,
       :name,
       :arguments)
       SENSITIVE = []
@@ -1236,14 +1873,35 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Left expression of the event metadata filter.
+    #
+    # @note LeftExpression is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] metadata_key
+    #   Key associated with the metadata in an event.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/LeftExpression AWS API Documentation
+    #
+    class LeftExpression < Struct.new(
+      :metadata_key,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class MetadataKey < LeftExpression; end
+      class Unknown < LeftExpression; end
+    end
+
     # @!attribute [rw] memory_id
     #   The identifier of the AgentCore Memory resource for which to list
     #   actors.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Minimum
-    #   value of 1, maximum value of 100. Default is 20.
+    #   The maximum number of results to return in a single call. The
+    #   default value is 20.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1398,13 +2056,11 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] session_id
-    #   The identifier of the session for which to list events. If
-    #   specified, only events from this session are returned.
+    #   The identifier of the session for which to list events.
     #   @return [String]
     #
     # @!attribute [rw] actor_id
-    #   The identifier of the actor for which to list events. If specified,
-    #   only events from this actor are returned.
+    #   The identifier of the actor for which to list events.
     #   @return [String]
     #
     # @!attribute [rw] include_payloads
@@ -1417,8 +2073,8 @@ module Aws::BedrockAgentCore
     #   @return [Types::FilterInput]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Minimum
-    #   value of 1, maximum value of 100. Default is 20.
+    #   The maximum number of results to return in a single call. The
+    #   default value is 20.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1461,6 +2117,53 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] memory_id
+    #   The unique identifier of the memory to list extraction jobs for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. The
+    #   default value is 20.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter
+    #   Filter criteria to apply when listing extraction jobs.
+    #   @return [Types::ExtractionJobFilterInput]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListMemoryExtractionJobsInput AWS API Documentation
+    #
+    class ListMemoryExtractionJobsInput < Struct.new(
+      :memory_id,
+      :max_results,
+      :filter,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] jobs
+    #   List of extraction job metadata matching the specified criteria.
+    #   @return [Array<Types::ExtractionJobMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   Token to retrieve the next page of results, if available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListMemoryExtractionJobsOutput AWS API Documentation
+    #
+    class ListMemoryExtractionJobsOutput < Struct.new(
+      :jobs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] memory_id
     #   The identifier of the AgentCore Memory resource for which to list
     #   memory records.
     #   @return [String]
@@ -1476,8 +2179,8 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Minimum
-    #   value of 1, maximum value of 100. Default is 20.
+    #   The maximum number of results to return in a single call. The
+    #   default value is 20.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1524,13 +2227,12 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] actor_id
-    #   The identifier of the actor for which to list sessions. If
-    #   specified, only sessions involving this actor are returned.
+    #   The identifier of the actor for which to list sessions.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Minimum
-    #   value of 1, maximum value of 100. Default is 20.
+    #   The maximum number of results to return in a single call. The
+    #   default value is 20.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1590,6 +2292,8 @@ module Aws::BedrockAgentCore
 
     # Contains the content of a memory record.
     #
+    # @note MemoryContent is a union - when making an API calls you must set exactly one of the members.
+    #
     # @note MemoryContent is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MemoryContent corresponding to the set member.
     #
     # @!attribute [rw] text
@@ -1607,6 +2311,33 @@ module Aws::BedrockAgentCore
 
       class Text < MemoryContent; end
       class Unknown < MemoryContent; end
+    end
+
+    # Filters to apply to metadata associated with a memory. Specify the
+    # metadata key and value in the `left` and `right` fields and use the
+    # `operator` field to define the relationship to match.
+    #
+    # @!attribute [rw] left
+    #   Left expression of the event metadata filter.
+    #   @return [Types::LeftExpression]
+    #
+    # @!attribute [rw] operator
+    #   The relationship between the metadata key and value to match when
+    #   applying the metadata filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] right
+    #   Right expression of the `eventMetadata`filter.
+    #   @return [Types::RightExpression]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MemoryMetadataFilterExpression AWS API Documentation
+    #
+    class MemoryMetadataFilterExpression < Struct.new(
+      :left,
+      :operator,
+      :right)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Contains information about a memory record in an AgentCore Memory
@@ -1633,6 +2364,10 @@ module Aws::BedrockAgentCore
     #   The timestamp when the memory record was created.
     #   @return [Time]
     #
+    # @!attribute [rw] metadata
+    #   A map of metadata key-value pairs associated with a memory record.
+    #   @return [Hash<String,Types::MetadataValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MemoryRecord AWS API Documentation
     #
     class MemoryRecord < Struct.new(
@@ -1640,7 +2375,96 @@ module Aws::BedrockAgentCore
       :content,
       :memory_strategy_id,
       :namespaces,
-      :created_at)
+      :created_at,
+      :metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input structure to create a new memory record.
+    #
+    # @!attribute [rw] request_identifier
+    #   A client-provided identifier for tracking this specific record
+    #   creation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespaces
+    #   A list of namespace identifiers that categorize or group the memory
+    #   record.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] content
+    #   The content to be stored within the memory record.
+    #   @return [Types::MemoryContent]
+    #
+    # @!attribute [rw] timestamp
+    #   Time at which the memory record was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] memory_strategy_id
+    #   The ID of the memory strategy that defines how this memory record is
+    #   grouped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MemoryRecordCreateInput AWS API Documentation
+    #
+    class MemoryRecordCreateInput < Struct.new(
+      :request_identifier,
+      :namespaces,
+      :content,
+      :timestamp,
+      :memory_strategy_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input structure to delete an existing memory record.
+    #
+    # @!attribute [rw] memory_record_id
+    #   The unique ID of the memory record to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MemoryRecordDeleteInput AWS API Documentation
+    #
+    class MemoryRecordDeleteInput < Struct.new(
+      :memory_record_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output information returned after processing a memory record
+    # operation.
+    #
+    # @!attribute [rw] memory_record_id
+    #   The unique ID associated to the memory record.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the memory record operation (e.g., SUCCEEDED, FAILED).
+    #   @return [String]
+    #
+    # @!attribute [rw] request_identifier
+    #   The client-provided identifier that was used to track this record
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code returned when the memory record operation fails.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_message
+    #   A human-readable error message describing why the memory record
+    #   operation failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MemoryRecordOutput AWS API Documentation
+    #
+    class MemoryRecordOutput < Struct.new(
+      :memory_record_id,
+      :status,
+      :request_identifier,
+      :error_code,
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1673,6 +2497,10 @@ module Aws::BedrockAgentCore
     #   search query.
     #   @return [Float]
     #
+    # @!attribute [rw] metadata
+    #   A map of metadata key-value pairs associated with a memory record.
+    #   @return [Hash<String,Types::MetadataValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MemoryRecordSummary AWS API Documentation
     #
     class MemoryRecordSummary < Struct.new(
@@ -1681,9 +2509,89 @@ module Aws::BedrockAgentCore
       :memory_strategy_id,
       :namespaces,
       :created_at,
-      :score)
+      :score,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Input structure to update an existing memory record.
+    #
+    # @!attribute [rw] memory_record_id
+    #   The unique ID of the memory record to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   Time at which the memory record was updated
+    #   @return [Time]
+    #
+    # @!attribute [rw] content
+    #   The content to be stored within the memory record.
+    #   @return [Types::MemoryContent]
+    #
+    # @!attribute [rw] namespaces
+    #   The updated list of namespace identifiers for categorizing the
+    #   memory record.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] memory_strategy_id
+    #   The updated ID of the memory strategy that defines how this memory
+    #   record is grouped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MemoryRecordUpdateInput AWS API Documentation
+    #
+    class MemoryRecordUpdateInput < Struct.new(
+      :memory_record_id,
+      :timestamp,
+      :content,
+      :namespaces,
+      :memory_strategy_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata information associated with this message.
+    #
+    # @!attribute [rw] event_id
+    #   The identifier of the event associated with this message.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_index
+    #   The position of this message within that event’s ordered list of
+    #   messages.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MessageMetadata AWS API Documentation
+    #
+    class MessageMetadata < Struct.new(
+      :event_id,
+      :message_index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Value associated with the `eventMetadata` key.
+    #
+    # @note MetadataValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note MetadataValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MetadataValue corresponding to the set member.
+    #
+    # @!attribute [rw] string_value
+    #   Value associated with the `eventMetadata` key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MetadataValue AWS API Documentation
+    #
+    class MetadataValue < Struct.new(
+      :string_value,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class StringValue < MetadataValue; end
+      class Unknown < MetadataValue; end
     end
 
     # Contains the payload content for an event.
@@ -1706,7 +2614,7 @@ module Aws::BedrockAgentCore
       :conversational,
       :blob,
       :unknown)
-      SENSITIVE = []
+      SENSITIVE = [:blob]
       include Aws::Structure
       include Aws::Structure::Union
 
@@ -1771,8 +2679,7 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace to filter memory records by. If specified, only memory
-    #   records in this namespace are searched.
+    #   The namespace to filter memory records by.
     #   @return [String]
     #
     # @!attribute [rw] search_criteria
@@ -1788,8 +2695,8 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a single call. Minimum
-    #   value of 1, maximum value of 100. Default is 20.
+    #   The maximum number of results to return in a single call. The
+    #   default value is 20.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/RetrieveMemoryRecordsInput AWS API Documentation
@@ -1824,6 +2731,27 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Right expression of the `eventMetadata`filter.
+    #
+    # @note RightExpression is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] metadata_value
+    #   Value associated with the key in `eventMetadata`.
+    #   @return [Types::MetadataValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/RightExpression AWS API Documentation
+    #
+    class RightExpression < Struct.new(
+      :metadata_value,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class MetadataValue < RightExpression; end
+      class Unknown < RightExpression; end
+    end
+
     # The exception that occurs when there is an error in the runtime
     # client. This can happen due to network issues, invalid configuration,
     # or other client-side problems. Check the error message for specific
@@ -1855,12 +2783,17 @@ module Aws::BedrockAgentCore
     #   value is used for semantic search ranking.
     #   @return [Integer]
     #
+    # @!attribute [rw] metadata_filters
+    #   Filters to apply to metadata associated with a memory.
+    #   @return [Array<Types::MemoryMetadataFilterExpression>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SearchCriteria AWS API Documentation
     #
     class SearchCriteria < Struct.new(
       :search_query,
       :memory_strategy_id,
-      :top_k)
+      :top_k,
+      :metadata_filters)
       SENSITIVE = [:search_query]
       include Aws::Structure
     end
@@ -1920,6 +2853,47 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # The contextual information that uniquely identifies a span within the
+    # distributed tracing system. Contains session, trace, and span
+    # identifiers used to correlate evaluation results with specific agent
+    # execution points.
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier of the session containing this span. Sessions
+    #   represent complete conversation flows and are detected using
+    #   configurable `SessionTimeoutMinutes` (default 15 minutes).
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_id
+    #   The unique identifier of the trace containing this span. Traces
+    #   represent individual request-response interactions within a session
+    #   and group related spans together.
+    #   @return [String]
+    #
+    # @!attribute [rw] span_id
+    #   The unique identifier of the specific span being referenced. Spans
+    #   represent individual operations like tool calls, model invocations,
+    #   or other discrete actions within the agent's execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SpanContext AWS API Documentation
+    #
+    class SpanContext < Struct.new(
+      :session_id,
+      :trace_id,
+      :span_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trace_id
+    #   The trace identifier for request tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_parent
+    #   The parent trace information for distributed tracing.
+    #   @return [String]
+    #
     # @!attribute [rw] browser_identifier
     #   The unique identifier of the browser to use for this session. This
     #   identifier specifies which browser environment to initialize for the
@@ -1959,6 +2933,8 @@ module Aws::BedrockAgentCore
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StartBrowserSessionRequest AWS API Documentation
     #
     class StartBrowserSessionRequest < Struct.new(
+      :trace_id,
+      :trace_parent,
       :browser_identifier,
       :name,
       :session_timeout_seconds,
@@ -1996,6 +2972,14 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # @!attribute [rw] trace_id
+    #   The trace identifier for request tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_parent
+    #   The parent trace information for distributed tracing.
+    #   @return [String]
+    #
     # @!attribute [rw] code_interpreter_identifier
     #   The unique identifier of the code interpreter to use for this
     #   session. This identifier specifies which code interpreter
@@ -2010,9 +2994,9 @@ module Aws::BedrockAgentCore
     #
     # @!attribute [rw] session_timeout_seconds
     #   The time in seconds after which the session automatically terminates
-    #   if there is no activity. The default value is 3600 seconds (1 hour).
-    #   The minimum allowed value is 60 seconds, and the maximum allowed
-    #   value is 28800 seconds (8 hours).
+    #   if there is no activity. The default value is 900 seconds (15
+    #   minutes). The minimum allowed value is 60 seconds, and the maximum
+    #   allowed value is 28800 seconds (8 hours).
     #   @return [Integer]
     #
     # @!attribute [rw] client_token
@@ -2029,6 +3013,8 @@ module Aws::BedrockAgentCore
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StartCodeInterpreterSessionRequest AWS API Documentation
     #
     class StartCodeInterpreterSessionRequest < Struct.new(
+      :trace_id,
+      :trace_parent,
       :code_interpreter_identifier,
       :name,
       :session_timeout_seconds,
@@ -2059,6 +3045,53 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # @!attribute [rw] memory_id
+    #   The unique identifier of the memory for which to start extraction
+    #   jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] extraction_job
+    #   Extraction job to start in this operation.
+    #   @return [Types::ExtractionJob]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotent processing
+    #   of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StartMemoryExtractionJobInput AWS API Documentation
+    #
+    class StartMemoryExtractionJobInput < Struct.new(
+      :memory_id,
+      :extraction_job,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   Extraction Job ID that was attempted to start.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StartMemoryExtractionJobOutput AWS API Documentation
+    #
+    class StartMemoryExtractionJobOutput < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trace_id
+    #   The trace identifier for request tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_parent
+    #   The parent trace information for distributed tracing.
+    #   @return [String]
+    #
     # @!attribute [rw] browser_identifier
     #   The unique identifier of the browser associated with the session.
     #   @return [String]
@@ -2080,6 +3113,8 @@ module Aws::BedrockAgentCore
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StopBrowserSessionRequest AWS API Documentation
     #
     class StopBrowserSessionRequest < Struct.new(
+      :trace_id,
+      :trace_parent,
       :browser_identifier,
       :session_id,
       :client_token)
@@ -2109,6 +3144,14 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # @!attribute [rw] trace_id
+    #   The trace identifier for request tracking.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_parent
+    #   The parent trace information for distributed tracing.
+    #   @return [String]
+    #
     # @!attribute [rw] code_interpreter_identifier
     #   The unique identifier of the code interpreter associated with the
     #   session.
@@ -2131,6 +3174,8 @@ module Aws::BedrockAgentCore
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StopCodeInterpreterSessionRequest AWS API Documentation
     #
     class StopCodeInterpreterSessionRequest < Struct.new(
+      :trace_id,
+      :trace_parent,
       :code_interpreter_identifier,
       :session_id,
       :client_token)
@@ -2156,6 +3201,58 @@ module Aws::BedrockAgentCore
       :code_interpreter_identifier,
       :session_id,
       :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] runtime_session_id
+    #   The ID of the session that you want to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_runtime_arn
+    #   The ARN of the agent that contains the session that you want to
+    #   stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   Optional qualifier to specify an agent alias, such as `prod`code&gt;
+    #   or `dev`. If you don't provide a value, the DEFAULT alias is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Idempotent token used to identify the request. If you use the same
+    #   token with multiple requests, the same response is returned. Use
+    #   ClientToken to prevent the same request from being processed more
+    #   than once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StopRuntimeSessionRequest AWS API Documentation
+    #
+    class StopRuntimeSessionRequest < Struct.new(
+      :runtime_session_id,
+      :agent_runtime_arn,
+      :qualifier,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] runtime_session_id
+    #   The ID of the session that you requested to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The status code of the request to stop the session.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StopRuntimeSessionResponse AWS API Documentation
+    #
+    class StopRuntimeSessionResponse < Struct.new(
+      :runtime_session_id,
+      :status_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2208,6 +3305,38 @@ module Aws::BedrockAgentCore
     class ThrottlingException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The token consumption statistics for language model operations during
+    # evaluation. Provides detailed breakdown of input, output, and total
+    # tokens used for cost tracking and performance monitoring.
+    #
+    # @!attribute [rw] input_tokens
+    #   The number of tokens consumed for input processing during the
+    #   evaluation. Includes tokens from the evaluation prompt, agent
+    #   traces, and any additional context provided to the evaluator model.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_tokens
+    #   The number of tokens generated by the evaluator model in its
+    #   response. Includes tokens for the score, explanation, and any
+    #   additional output produced during the evaluation process.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_tokens
+    #   The total number of tokens consumed during the evaluation,
+    #   calculated as the sum of input and output tokens. Used for cost
+    #   calculation and rate limiting within the service limits.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/TokenUsage AWS API Documentation
+    #
+    class TokenUsage < Struct.new(
+      :input_tokens,
+      :output_tokens,
+      :total_tokens)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2387,6 +3516,36 @@ module Aws::BedrockAgentCore
       :updated_at)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The OAuth2.0 token or user ID that was used to generate the workload
+    # access token used for initiating the user authorization flow to
+    # retrieve OAuth2.0 tokens.
+    #
+    # @note UserIdentifier is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] user_token
+    #   The OAuth2.0 token issued by the user’s identity provider
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The ID of the user for whom you have retrieved a workload access
+    #   token for
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/UserIdentifier AWS API Documentation
+    #
+    class UserIdentifier < Struct.new(
+      :user_token,
+      :user_id,
+      :unknown)
+      SENSITIVE = [:user_token]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class UserToken < UserIdentifier; end
+      class UserId < UserIdentifier; end
+      class Unknown < UserIdentifier; end
     end
 
     # The exception that occurs when the input fails to satisfy the

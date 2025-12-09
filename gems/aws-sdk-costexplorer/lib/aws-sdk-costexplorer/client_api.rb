@@ -45,6 +45,7 @@ module Aws::CostExplorer
     BackfillLimitExceededException = Shapes::StructureShape.new(name: 'BackfillLimitExceededException')
     BillExpirationException = Shapes::StructureShape.new(name: 'BillExpirationException')
     BillingViewArn = Shapes::StringShape.new(name: 'BillingViewArn')
+    BillingViewHealthStatusException = Shapes::StructureShape.new(name: 'BillingViewHealthStatusException')
     CommitmentPurchaseAnalysisConfiguration = Shapes::StructureShape.new(name: 'CommitmentPurchaseAnalysisConfiguration')
     ComparisonMetricValue = Shapes::StructureShape.new(name: 'ComparisonMetricValue')
     ComparisonMetrics = Shapes::MapShape.new(name: 'ComparisonMetrics')
@@ -73,6 +74,8 @@ module Aws::CostExplorer
     CostCategoryProcessingStatusList = Shapes::ListShape.new(name: 'CostCategoryProcessingStatusList')
     CostCategoryReference = Shapes::StructureShape.new(name: 'CostCategoryReference')
     CostCategoryReferencesList = Shapes::ListShape.new(name: 'CostCategoryReferencesList')
+    CostCategoryResourceAssociation = Shapes::StructureShape.new(name: 'CostCategoryResourceAssociation')
+    CostCategoryResourceAssociations = Shapes::ListShape.new(name: 'CostCategoryResourceAssociations')
     CostCategoryRule = Shapes::StructureShape.new(name: 'CostCategoryRule')
     CostCategoryRuleType = Shapes::StringShape.new(name: 'CostCategoryRuleType')
     CostCategoryRuleVersion = Shapes::StringShape.new(name: 'CostCategoryRuleVersion')
@@ -147,6 +150,7 @@ module Aws::CostExplorer
     GenerationStatus = Shapes::StringShape.new(name: 'GenerationStatus')
     GenerationSummary = Shapes::StructureShape.new(name: 'GenerationSummary')
     GenerationSummaryList = Shapes::ListShape.new(name: 'GenerationSummaryList')
+    GenericArn = Shapes::StringShape.new(name: 'GenericArn')
     GenericBoolean = Shapes::BooleanShape.new(name: 'GenericBoolean')
     GenericDouble = Shapes::FloatShape.new(name: 'GenericDouble')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
@@ -217,6 +221,8 @@ module Aws::CostExplorer
     ListCostAllocationTagsResponse = Shapes::StructureShape.new(name: 'ListCostAllocationTagsResponse')
     ListCostCategoryDefinitionsRequest = Shapes::StructureShape.new(name: 'ListCostCategoryDefinitionsRequest')
     ListCostCategoryDefinitionsResponse = Shapes::StructureShape.new(name: 'ListCostCategoryDefinitionsResponse')
+    ListCostCategoryResourceAssociationsRequest = Shapes::StructureShape.new(name: 'ListCostCategoryResourceAssociationsRequest')
+    ListCostCategoryResourceAssociationsResponse = Shapes::StructureShape.new(name: 'ListCostCategoryResourceAssociationsResponse')
     ListSavingsPlansPurchaseRecommendationGenerationRequest = Shapes::StructureShape.new(name: 'ListSavingsPlansPurchaseRecommendationGenerationRequest')
     ListSavingsPlansPurchaseRecommendationGenerationResponse = Shapes::StructureShape.new(name: 'ListSavingsPlansPurchaseRecommendationGenerationResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -293,6 +299,9 @@ module Aws::CostExplorer
     ResourceTagKeyList = Shapes::ListShape.new(name: 'ResourceTagKeyList')
     ResourceTagList = Shapes::ListShape.new(name: 'ResourceTagList')
     ResourceTagValue = Shapes::StringShape.new(name: 'ResourceTagValue')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
+    ResourceTypesFilterInput = Shapes::ListShape.new(name: 'ResourceTypesFilterInput')
     ResourceUtilization = Shapes::StructureShape.new(name: 'ResourceUtilization')
     ResultByTime = Shapes::StructureShape.new(name: 'ResultByTime')
     ResultsByTime = Shapes::ListShape.new(name: 'ResultsByTime')
@@ -474,6 +483,9 @@ module Aws::CostExplorer
     BillExpirationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     BillExpirationException.struct_class = Types::BillExpirationException
 
+    BillingViewHealthStatusException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BillingViewHealthStatusException.struct_class = Types::BillingViewHealthStatusException
+
     CommitmentPurchaseAnalysisConfiguration.add_member(:savings_plans_purchase_analysis_configuration, Shapes::ShapeRef.new(shape: SavingsPlansPurchaseAnalysisConfiguration, location_name: "SavingsPlansPurchaseAnalysisConfiguration"))
     CommitmentPurchaseAnalysisConfiguration.struct_class = Types::CommitmentPurchaseAnalysisConfiguration
 
@@ -549,9 +561,17 @@ module Aws::CostExplorer
     CostCategoryReference.add_member(:processing_status, Shapes::ShapeRef.new(shape: CostCategoryProcessingStatusList, location_name: "ProcessingStatus"))
     CostCategoryReference.add_member(:values, Shapes::ShapeRef.new(shape: CostCategoryValuesList, location_name: "Values"))
     CostCategoryReference.add_member(:default_value, Shapes::ShapeRef.new(shape: CostCategoryValue, location_name: "DefaultValue"))
+    CostCategoryReference.add_member(:supported_resource_types, Shapes::ShapeRef.new(shape: ResourceTypes, location_name: "SupportedResourceTypes"))
     CostCategoryReference.struct_class = Types::CostCategoryReference
 
     CostCategoryReferencesList.member = Shapes::ShapeRef.new(shape: CostCategoryReference)
+
+    CostCategoryResourceAssociation.add_member(:resource_arn, Shapes::ShapeRef.new(shape: GenericArn, location_name: "ResourceArn"))
+    CostCategoryResourceAssociation.add_member(:cost_category_name, Shapes::ShapeRef.new(shape: CostCategoryName, location_name: "CostCategoryName"))
+    CostCategoryResourceAssociation.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CostCategoryArn"))
+    CostCategoryResourceAssociation.struct_class = Types::CostCategoryResourceAssociation
+
+    CostCategoryResourceAssociations.member = Shapes::ShapeRef.new(shape: CostCategoryResourceAssociation)
 
     CostCategoryRule.add_member(:value, Shapes::ShapeRef.new(shape: CostCategoryValue, location_name: "Value"))
     CostCategoryRule.add_member(:rule, Shapes::ShapeRef.new(shape: Expression, location_name: "Rule"))
@@ -1178,11 +1198,21 @@ module Aws::CostExplorer
     ListCostCategoryDefinitionsRequest.add_member(:effective_on, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveOn"))
     ListCostCategoryDefinitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
     ListCostCategoryDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostCategoryMaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    ListCostCategoryDefinitionsRequest.add_member(:supported_resource_types, Shapes::ShapeRef.new(shape: ResourceTypesFilterInput, location_name: "SupportedResourceTypes"))
     ListCostCategoryDefinitionsRequest.struct_class = Types::ListCostCategoryDefinitionsRequest
 
     ListCostCategoryDefinitionsResponse.add_member(:cost_category_references, Shapes::ShapeRef.new(shape: CostCategoryReferencesList, location_name: "CostCategoryReferences"))
     ListCostCategoryDefinitionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
     ListCostCategoryDefinitionsResponse.struct_class = Types::ListCostCategoryDefinitionsResponse
+
+    ListCostCategoryResourceAssociationsRequest.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CostCategoryArn"))
+    ListCostCategoryResourceAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
+    ListCostCategoryResourceAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostCategoryMaxResults, location_name: "MaxResults", metadata: {"box" => true}))
+    ListCostCategoryResourceAssociationsRequest.struct_class = Types::ListCostCategoryResourceAssociationsRequest
+
+    ListCostCategoryResourceAssociationsResponse.add_member(:cost_category_resource_associations, Shapes::ShapeRef.new(shape: CostCategoryResourceAssociations, location_name: "CostCategoryResourceAssociations"))
+    ListCostCategoryResourceAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
+    ListCostCategoryResourceAssociationsResponse.struct_class = Types::ListCostCategoryResourceAssociationsResponse
 
     ListSavingsPlansPurchaseRecommendationGenerationRequest.add_member(:generation_status, Shapes::ShapeRef.new(shape: GenerationStatus, location_name: "GenerationStatus"))
     ListSavingsPlansPurchaseRecommendationGenerationRequest.add_member(:recommendation_ids, Shapes::ShapeRef.new(shape: RecommendationIdList, location_name: "RecommendationIds"))
@@ -1400,6 +1430,10 @@ module Aws::CostExplorer
     ResourceTagKeyList.member = Shapes::ShapeRef.new(shape: ResourceTagKey)
 
     ResourceTagList.member = Shapes::ShapeRef.new(shape: ResourceTag)
+
+    ResourceTypes.member = Shapes::ShapeRef.new(shape: ResourceType)
+
+    ResourceTypesFilterInput.member = Shapes::ShapeRef.new(shape: ResourceType)
 
     ResourceUtilization.add_member(:ec2_resource_utilization, Shapes::ShapeRef.new(shape: EC2ResourceUtilization, location_name: "EC2ResourceUtilization"))
     ResourceUtilization.struct_class = Types::ResourceUtilization
@@ -1924,6 +1958,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
       end)
 
       api.add_operation(:get_cost_and_usage_comparisons, Seahorse::Model::Operation.new.tap do |o|
@@ -1936,6 +1971,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1956,6 +1992,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
       end)
 
       api.add_operation(:get_cost_categories, Seahorse::Model::Operation.new.tap do |o|
@@ -1970,6 +2007,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
       end)
 
       api.add_operation(:get_cost_comparison_drivers, Seahorse::Model::Operation.new.tap do |o|
@@ -1982,6 +2020,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1999,6 +2038,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
       end)
 
       api.add_operation(:get_dimension_values, Seahorse::Model::Operation.new.tap do |o|
@@ -2013,6 +2053,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
       end)
 
       api.add_operation(:get_reservation_coverage, Seahorse::Model::Operation.new.tap do |o|
@@ -2134,6 +2175,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
       end)
 
       api.add_operation(:get_usage_forecast, Seahorse::Model::Operation.new.tap do |o|
@@ -2146,6 +2188,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: UnresolvableUsageUnitException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
       end)
 
       api.add_operation(:list_commitment_purchase_analyses, Seahorse::Model::Operation.new.tap do |o|
@@ -2198,6 +2241,22 @@ module Aws::CostExplorer
         o.input = Shapes::ShapeRef.new(shape: ListCostCategoryDefinitionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCostCategoryDefinitionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_cost_category_resource_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCostCategoryResourceAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCostCategoryResourceAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCostCategoryResourceAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

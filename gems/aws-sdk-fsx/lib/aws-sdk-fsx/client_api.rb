@@ -70,6 +70,7 @@ module Aws::FSx
     CopySnapshotAndUpdateVolumeResponse = Shapes::StructureShape.new(name: 'CopySnapshotAndUpdateVolumeResponse')
     CopyTagsToDataRepositoryAssociations = Shapes::BooleanShape.new(name: 'CopyTagsToDataRepositoryAssociations')
     CreateAggregateConfiguration = Shapes::StructureShape.new(name: 'CreateAggregateConfiguration')
+    CreateAndAttachS3AccessPointOntapConfiguration = Shapes::StructureShape.new(name: 'CreateAndAttachS3AccessPointOntapConfiguration')
     CreateAndAttachS3AccessPointOpenZFSConfiguration = Shapes::StructureShape.new(name: 'CreateAndAttachS3AccessPointOpenZFSConfiguration')
     CreateAndAttachS3AccessPointRequest = Shapes::StructureShape.new(name: 'CreateAndAttachS3AccessPointRequest')
     CreateAndAttachS3AccessPointResponse = Shapes::StructureShape.new(name: 'CreateAndAttachS3AccessPointResponse')
@@ -107,6 +108,7 @@ module Aws::FSx
     CreateVolumeRequest = Shapes::StructureShape.new(name: 'CreateVolumeRequest')
     CreateVolumeResponse = Shapes::StructureShape.new(name: 'CreateVolumeResponse')
     CreationTime = Shapes::TimestampShape.new(name: 'CreationTime')
+    CustomerSecretsManagerARN = Shapes::StringShape.new(name: 'CustomerSecretsManagerARN')
     DNSName = Shapes::StringShape.new(name: 'DNSName')
     DailyTime = Shapes::StringShape.new(name: 'DailyTime')
     DataCompressionType = Shapes::StringShape.new(name: 'DataCompressionType')
@@ -305,8 +307,13 @@ module Aws::FSx
     OntapDeploymentType = Shapes::StringShape.new(name: 'OntapDeploymentType')
     OntapEndpointIpAddresses = Shapes::ListShape.new(name: 'OntapEndpointIpAddresses')
     OntapFileSystemConfiguration = Shapes::StructureShape.new(name: 'OntapFileSystemConfiguration')
+    OntapFileSystemIdentity = Shapes::StructureShape.new(name: 'OntapFileSystemIdentity')
+    OntapFileSystemUserName = Shapes::StringShape.new(name: 'OntapFileSystemUserName')
+    OntapFileSystemUserType = Shapes::StringShape.new(name: 'OntapFileSystemUserType')
+    OntapUnixFileSystemUser = Shapes::StructureShape.new(name: 'OntapUnixFileSystemUser')
     OntapVolumeConfiguration = Shapes::StructureShape.new(name: 'OntapVolumeConfiguration')
     OntapVolumeType = Shapes::StringShape.new(name: 'OntapVolumeType')
+    OntapWindowsFileSystemUser = Shapes::StructureShape.new(name: 'OntapWindowsFileSystemUser')
     OpenZFSClientConfiguration = Shapes::StructureShape.new(name: 'OpenZFSClientConfiguration')
     OpenZFSClientConfigurations = Shapes::ListShape.new(name: 'OpenZFSClientConfigurations')
     OpenZFSClients = Shapes::StringShape.new(name: 'OpenZFSClients')
@@ -372,6 +379,7 @@ module Aws::FSx
     S3AccessPointAttachmentsFilterValue = Shapes::StringShape.new(name: 'S3AccessPointAttachmentsFilterValue')
     S3AccessPointAttachmentsFilterValues = Shapes::ListShape.new(name: 'S3AccessPointAttachmentsFilterValues')
     S3AccessPointAttachmentsFilters = Shapes::ListShape.new(name: 'S3AccessPointAttachmentsFilters')
+    S3AccessPointOntapConfiguration = Shapes::StructureShape.new(name: 'S3AccessPointOntapConfiguration')
     S3AccessPointOpenZFSConfiguration = Shapes::StructureShape.new(name: 'S3AccessPointOpenZFSConfiguration')
     S3AccessPointVpcConfiguration = Shapes::StructureShape.new(name: 'S3AccessPointVpcConfiguration')
     S3DataRepositoryConfiguration = Shapes::StructureShape.new(name: 'S3DataRepositoryConfiguration')
@@ -503,6 +511,7 @@ module Aws::FSx
     WindowsAuditLogCreateConfiguration = Shapes::StructureShape.new(name: 'WindowsAuditLogCreateConfiguration')
     WindowsDeploymentType = Shapes::StringShape.new(name: 'WindowsDeploymentType')
     WindowsFileSystemConfiguration = Shapes::StructureShape.new(name: 'WindowsFileSystemConfiguration')
+    WindowsFsrmConfiguration = Shapes::StructureShape.new(name: 'WindowsFsrmConfiguration')
 
     AccessPointAlreadyOwnedByYou.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
     AccessPointAlreadyOwnedByYou.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -651,6 +660,10 @@ module Aws::FSx
     CreateAggregateConfiguration.add_member(:constituents_per_aggregate, Shapes::ShapeRef.new(shape: AggregateListMultiplier, location_name: "ConstituentsPerAggregate"))
     CreateAggregateConfiguration.struct_class = Types::CreateAggregateConfiguration
 
+    CreateAndAttachS3AccessPointOntapConfiguration.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
+    CreateAndAttachS3AccessPointOntapConfiguration.add_member(:file_system_identity, Shapes::ShapeRef.new(shape: OntapFileSystemIdentity, required: true, location_name: "FileSystemIdentity"))
+    CreateAndAttachS3AccessPointOntapConfiguration.struct_class = Types::CreateAndAttachS3AccessPointOntapConfiguration
+
     CreateAndAttachS3AccessPointOpenZFSConfiguration.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
     CreateAndAttachS3AccessPointOpenZFSConfiguration.add_member(:file_system_identity, Shapes::ShapeRef.new(shape: OpenZFSFileSystemIdentity, required: true, location_name: "FileSystemIdentity"))
     CreateAndAttachS3AccessPointOpenZFSConfiguration.struct_class = Types::CreateAndAttachS3AccessPointOpenZFSConfiguration
@@ -659,6 +672,7 @@ module Aws::FSx
     CreateAndAttachS3AccessPointRequest.add_member(:name, Shapes::ShapeRef.new(shape: S3AccessPointAttachmentName, required: true, location_name: "Name"))
     CreateAndAttachS3AccessPointRequest.add_member(:type, Shapes::ShapeRef.new(shape: S3AccessPointAttachmentType, required: true, location_name: "Type"))
     CreateAndAttachS3AccessPointRequest.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: CreateAndAttachS3AccessPointOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
+    CreateAndAttachS3AccessPointRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: CreateAndAttachS3AccessPointOntapConfiguration, location_name: "OntapConfiguration"))
     CreateAndAttachS3AccessPointRequest.add_member(:s3_access_point, Shapes::ShapeRef.new(shape: CreateAndAttachS3AccessPointS3Configuration, location_name: "S3AccessPoint"))
     CreateAndAttachS3AccessPointRequest.struct_class = Types::CreateAndAttachS3AccessPointRequest
 
@@ -782,6 +796,7 @@ module Aws::FSx
     CreateFileSystemOntapConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
     CreateFileSystemOntapConfiguration.add_member(:ha_pairs, Shapes::ShapeRef.new(shape: HAPairs, location_name: "HAPairs"))
     CreateFileSystemOntapConfiguration.add_member(:throughput_capacity_per_ha_pair, Shapes::ShapeRef.new(shape: ThroughputCapacityPerHAPair, location_name: "ThroughputCapacityPerHAPair"))
+    CreateFileSystemOntapConfiguration.add_member(:endpoint_ipv_6_address_range, Shapes::ShapeRef.new(shape: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
     CreateFileSystemOntapConfiguration.struct_class = Types::CreateFileSystemOntapConfiguration
 
     CreateFileSystemOpenZFSConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
@@ -831,6 +846,7 @@ module Aws::FSx
     CreateFileSystemWindowsConfiguration.add_member(:aliases, Shapes::ShapeRef.new(shape: AlternateDNSNames, location_name: "Aliases"))
     CreateFileSystemWindowsConfiguration.add_member(:audit_log_configuration, Shapes::ShapeRef.new(shape: WindowsAuditLogCreateConfiguration, location_name: "AuditLogConfiguration"))
     CreateFileSystemWindowsConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    CreateFileSystemWindowsConfiguration.add_member(:fsrm_configuration, Shapes::ShapeRef.new(shape: WindowsFsrmConfiguration, location_name: "FsrmConfiguration"))
     CreateFileSystemWindowsConfiguration.struct_class = Types::CreateFileSystemWindowsConfiguration
 
     CreateOntapVolumeConfiguration.add_member(:junction_path, Shapes::ShapeRef.new(shape: JunctionPath, location_name: "JunctionPath"))
@@ -1338,6 +1354,7 @@ module Aws::FSx
 
     FileSystemEndpoint.add_member(:dns_name, Shapes::ShapeRef.new(shape: DNSName, location_name: "DNSName"))
     FileSystemEndpoint.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: OntapEndpointIpAddresses, location_name: "IpAddresses"))
+    FileSystemEndpoint.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: OntapEndpointIpAddresses, location_name: "Ipv6Addresses"))
     FileSystemEndpoint.struct_class = Types::FileSystemEndpoint
 
     FileSystemEndpoints.add_member(:intercluster, Shapes::ShapeRef.new(shape: FileSystemEndpoint, location_name: "Intercluster"))
@@ -1498,7 +1515,16 @@ module Aws::FSx
     OntapFileSystemConfiguration.add_member(:fsx_admin_password, Shapes::ShapeRef.new(shape: AdminPassword, location_name: "FsxAdminPassword"))
     OntapFileSystemConfiguration.add_member(:ha_pairs, Shapes::ShapeRef.new(shape: HAPairs, location_name: "HAPairs"))
     OntapFileSystemConfiguration.add_member(:throughput_capacity_per_ha_pair, Shapes::ShapeRef.new(shape: ThroughputCapacityPerHAPair, location_name: "ThroughputCapacityPerHAPair"))
+    OntapFileSystemConfiguration.add_member(:endpoint_ipv_6_address_range, Shapes::ShapeRef.new(shape: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
     OntapFileSystemConfiguration.struct_class = Types::OntapFileSystemConfiguration
+
+    OntapFileSystemIdentity.add_member(:type, Shapes::ShapeRef.new(shape: OntapFileSystemUserType, required: true, location_name: "Type"))
+    OntapFileSystemIdentity.add_member(:unix_user, Shapes::ShapeRef.new(shape: OntapUnixFileSystemUser, location_name: "UnixUser"))
+    OntapFileSystemIdentity.add_member(:windows_user, Shapes::ShapeRef.new(shape: OntapWindowsFileSystemUser, location_name: "WindowsUser"))
+    OntapFileSystemIdentity.struct_class = Types::OntapFileSystemIdentity
+
+    OntapUnixFileSystemUser.add_member(:name, Shapes::ShapeRef.new(shape: OntapFileSystemUserName, required: true, location_name: "Name"))
+    OntapUnixFileSystemUser.struct_class = Types::OntapUnixFileSystemUser
 
     OntapVolumeConfiguration.add_member(:flex_cache_endpoint_type, Shapes::ShapeRef.new(shape: FlexCacheEndpointType, location_name: "FlexCacheEndpointType"))
     OntapVolumeConfiguration.add_member(:junction_path, Shapes::ShapeRef.new(shape: JunctionPath, location_name: "JunctionPath"))
@@ -1517,6 +1543,9 @@ module Aws::FSx
     OntapVolumeConfiguration.add_member(:aggregate_configuration, Shapes::ShapeRef.new(shape: AggregateConfiguration, location_name: "AggregateConfiguration"))
     OntapVolumeConfiguration.add_member(:size_in_bytes, Shapes::ShapeRef.new(shape: VolumeCapacityBytes, location_name: "SizeInBytes"))
     OntapVolumeConfiguration.struct_class = Types::OntapVolumeConfiguration
+
+    OntapWindowsFileSystemUser.add_member(:name, Shapes::ShapeRef.new(shape: OntapFileSystemUserName, required: true, location_name: "Name"))
+    OntapWindowsFileSystemUser.struct_class = Types::OntapWindowsFileSystemUser
 
     OpenZFSClientConfiguration.add_member(:clients, Shapes::ShapeRef.new(shape: OpenZFSClients, required: true, location_name: "Clients"))
     OpenZFSClientConfiguration.add_member(:options, Shapes::ShapeRef.new(shape: OpenZFSNfsExportOptions, required: true, location_name: "Options"))
@@ -1651,6 +1680,7 @@ module Aws::FSx
     S3AccessPointAttachment.add_member(:name, Shapes::ShapeRef.new(shape: S3AccessPointAttachmentName, location_name: "Name"))
     S3AccessPointAttachment.add_member(:type, Shapes::ShapeRef.new(shape: S3AccessPointAttachmentType, location_name: "Type"))
     S3AccessPointAttachment.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: S3AccessPointOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
+    S3AccessPointAttachment.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: S3AccessPointOntapConfiguration, location_name: "OntapConfiguration"))
     S3AccessPointAttachment.add_member(:s3_access_point, Shapes::ShapeRef.new(shape: S3AccessPoint, location_name: "S3AccessPoint"))
     S3AccessPointAttachment.struct_class = Types::S3AccessPointAttachment
 
@@ -1668,6 +1698,10 @@ module Aws::FSx
     S3AccessPointAttachmentsFilterValues.member = Shapes::ShapeRef.new(shape: S3AccessPointAttachmentsFilterValue)
 
     S3AccessPointAttachmentsFilters.member = Shapes::ShapeRef.new(shape: S3AccessPointAttachmentsFilter)
+
+    S3AccessPointOntapConfiguration.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
+    S3AccessPointOntapConfiguration.add_member(:file_system_identity, Shapes::ShapeRef.new(shape: OntapFileSystemIdentity, location_name: "FileSystemIdentity"))
+    S3AccessPointOntapConfiguration.struct_class = Types::S3AccessPointOntapConfiguration
 
     S3AccessPointOpenZFSConfiguration.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
     S3AccessPointOpenZFSConfiguration.add_member(:file_system_identity, Shapes::ShapeRef.new(shape: OpenZFSFileSystemIdentity, location_name: "FileSystemIdentity"))
@@ -1687,14 +1721,16 @@ module Aws::FSx
     SelfManagedActiveDirectoryAttributes.add_member(:file_system_administrators_group, Shapes::ShapeRef.new(shape: FileSystemAdministratorsGroupName, location_name: "FileSystemAdministratorsGroup"))
     SelfManagedActiveDirectoryAttributes.add_member(:user_name, Shapes::ShapeRef.new(shape: DirectoryUserName, location_name: "UserName"))
     SelfManagedActiveDirectoryAttributes.add_member(:dns_ips, Shapes::ShapeRef.new(shape: DnsIps, location_name: "DnsIps"))
+    SelfManagedActiveDirectoryAttributes.add_member(:domain_join_service_account_secret, Shapes::ShapeRef.new(shape: CustomerSecretsManagerARN, location_name: "DomainJoinServiceAccountSecret"))
     SelfManagedActiveDirectoryAttributes.struct_class = Types::SelfManagedActiveDirectoryAttributes
 
     SelfManagedActiveDirectoryConfiguration.add_member(:domain_name, Shapes::ShapeRef.new(shape: ActiveDirectoryFullyQualifiedName, required: true, location_name: "DomainName"))
     SelfManagedActiveDirectoryConfiguration.add_member(:organizational_unit_distinguished_name, Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedName, location_name: "OrganizationalUnitDistinguishedName"))
     SelfManagedActiveDirectoryConfiguration.add_member(:file_system_administrators_group, Shapes::ShapeRef.new(shape: FileSystemAdministratorsGroupName, location_name: "FileSystemAdministratorsGroup"))
-    SelfManagedActiveDirectoryConfiguration.add_member(:user_name, Shapes::ShapeRef.new(shape: DirectoryUserName, required: true, location_name: "UserName"))
-    SelfManagedActiveDirectoryConfiguration.add_member(:password, Shapes::ShapeRef.new(shape: DirectoryPassword, required: true, location_name: "Password"))
+    SelfManagedActiveDirectoryConfiguration.add_member(:user_name, Shapes::ShapeRef.new(shape: DirectoryUserName, location_name: "UserName"))
+    SelfManagedActiveDirectoryConfiguration.add_member(:password, Shapes::ShapeRef.new(shape: DirectoryPassword, location_name: "Password"))
     SelfManagedActiveDirectoryConfiguration.add_member(:dns_ips, Shapes::ShapeRef.new(shape: DnsIps, required: true, location_name: "DnsIps"))
+    SelfManagedActiveDirectoryConfiguration.add_member(:domain_join_service_account_secret, Shapes::ShapeRef.new(shape: CustomerSecretsManagerARN, location_name: "DomainJoinServiceAccountSecret"))
     SelfManagedActiveDirectoryConfiguration.struct_class = Types::SelfManagedActiveDirectoryConfiguration
 
     SelfManagedActiveDirectoryConfigurationUpdates.add_member(:user_name, Shapes::ShapeRef.new(shape: DirectoryUserName, location_name: "UserName"))
@@ -1703,6 +1739,7 @@ module Aws::FSx
     SelfManagedActiveDirectoryConfigurationUpdates.add_member(:domain_name, Shapes::ShapeRef.new(shape: ActiveDirectoryFullyQualifiedName, location_name: "DomainName"))
     SelfManagedActiveDirectoryConfigurationUpdates.add_member(:organizational_unit_distinguished_name, Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedName, location_name: "OrganizationalUnitDistinguishedName"))
     SelfManagedActiveDirectoryConfigurationUpdates.add_member(:file_system_administrators_group, Shapes::ShapeRef.new(shape: FileSystemAdministratorsGroupName, location_name: "FileSystemAdministratorsGroup"))
+    SelfManagedActiveDirectoryConfigurationUpdates.add_member(:domain_join_service_account_secret, Shapes::ShapeRef.new(shape: CustomerSecretsManagerARN, location_name: "DomainJoinServiceAccountSecret"))
     SelfManagedActiveDirectoryConfigurationUpdates.struct_class = Types::SelfManagedActiveDirectoryConfigurationUpdates
 
     ServiceLimitExceeded.add_member(:limit, Shapes::ShapeRef.new(shape: ServiceLimit, required: true, location_name: "Limit"))
@@ -1799,6 +1836,7 @@ module Aws::FSx
 
     SvmEndpoint.add_member(:dns_name, Shapes::ShapeRef.new(shape: DNSName, location_name: "DNSName"))
     SvmEndpoint.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: OntapEndpointIpAddresses, location_name: "IpAddresses"))
+    SvmEndpoint.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: OntapEndpointIpAddresses, location_name: "Ipv6Addresses"))
     SvmEndpoint.struct_class = Types::SvmEndpoint
 
     SvmEndpoints.add_member(:iscsi, Shapes::ShapeRef.new(shape: SvmEndpoint, location_name: "Iscsi"))
@@ -1887,6 +1925,7 @@ module Aws::FSx
     UpdateFileSystemOntapConfiguration.add_member(:remove_route_table_ids, Shapes::ShapeRef.new(shape: RouteTableIds, location_name: "RemoveRouteTableIds"))
     UpdateFileSystemOntapConfiguration.add_member(:throughput_capacity_per_ha_pair, Shapes::ShapeRef.new(shape: ThroughputCapacityPerHAPair, location_name: "ThroughputCapacityPerHAPair"))
     UpdateFileSystemOntapConfiguration.add_member(:ha_pairs, Shapes::ShapeRef.new(shape: HAPairs, location_name: "HAPairs"))
+    UpdateFileSystemOntapConfiguration.add_member(:endpoint_ipv_6_address_range, Shapes::ShapeRef.new(shape: Ipv6AddressRange, location_name: "EndpointIpv6AddressRange"))
     UpdateFileSystemOntapConfiguration.struct_class = Types::UpdateFileSystemOntapConfiguration
 
     UpdateFileSystemOpenZFSConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
@@ -1924,6 +1963,7 @@ module Aws::FSx
     UpdateFileSystemWindowsConfiguration.add_member(:self_managed_active_directory_configuration, Shapes::ShapeRef.new(shape: SelfManagedActiveDirectoryConfigurationUpdates, location_name: "SelfManagedActiveDirectoryConfiguration"))
     UpdateFileSystemWindowsConfiguration.add_member(:audit_log_configuration, Shapes::ShapeRef.new(shape: WindowsAuditLogCreateConfiguration, location_name: "AuditLogConfiguration"))
     UpdateFileSystemWindowsConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    UpdateFileSystemWindowsConfiguration.add_member(:fsrm_configuration, Shapes::ShapeRef.new(shape: WindowsFsrmConfiguration, location_name: "FsrmConfiguration"))
     UpdateFileSystemWindowsConfiguration.struct_class = Types::UpdateFileSystemWindowsConfiguration
 
     UpdateOntapVolumeConfiguration.add_member(:junction_path, Shapes::ShapeRef.new(shape: JunctionPath, location_name: "JunctionPath"))
@@ -2047,7 +2087,13 @@ module Aws::FSx
     WindowsFileSystemConfiguration.add_member(:aliases, Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases"))
     WindowsFileSystemConfiguration.add_member(:audit_log_configuration, Shapes::ShapeRef.new(shape: WindowsAuditLogConfiguration, location_name: "AuditLogConfiguration"))
     WindowsFileSystemConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    WindowsFileSystemConfiguration.add_member(:preferred_file_server_ipv_6, Shapes::ShapeRef.new(shape: IpAddress, location_name: "PreferredFileServerIpv6"))
+    WindowsFileSystemConfiguration.add_member(:fsrm_configuration, Shapes::ShapeRef.new(shape: WindowsFsrmConfiguration, location_name: "FsrmConfiguration"))
     WindowsFileSystemConfiguration.struct_class = Types::WindowsFileSystemConfiguration
+
+    WindowsFsrmConfiguration.add_member(:fsrm_service_enabled, Shapes::ShapeRef.new(shape: Flag, required: true, location_name: "FsrmServiceEnabled"))
+    WindowsFsrmConfiguration.add_member(:event_log_destination, Shapes::ShapeRef.new(shape: GeneralARN, location_name: "EventLogDestination"))
+    WindowsFsrmConfiguration.struct_class = Types::WindowsFsrmConfiguration
 
 
     # @api private

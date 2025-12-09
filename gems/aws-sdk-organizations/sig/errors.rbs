@@ -96,6 +96,9 @@ module Aws
         def message: () -> ::String
         def reason: () -> ::String
       end
+      class InvalidResponsibilityTransferTransitionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class MalformedPolicyDocumentException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
@@ -136,6 +139,12 @@ module Aws
         def message: () -> ::String
       end
       class ResourcePolicyNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResponsibilityTransferAlreadyInStatusException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResponsibilityTransferNotFoundException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
       class RootNotFoundException < ::Aws::Errors::ServiceError

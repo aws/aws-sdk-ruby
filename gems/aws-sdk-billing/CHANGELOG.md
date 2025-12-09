@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2025-11-19)
+------------------
+
+* Feature - Added name filtering support to ListBillingViews API through the new names parameter to efficiently filter billing views by name.
+
+1.16.0 (2025-10-24)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.15.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2025-09-26)
+------------------
+
+* Feature - Add ability to combine custom billing views to create new consolidated views.
+
 1.13.0 (2025-08-26)
 ------------------
 

@@ -422,6 +422,33 @@ module Aws::MemoryDB
       SENSITIVE: []
     end
 
+    class DescribeMultiRegionParameterGroupsRequest
+      attr_accessor multi_region_parameter_group_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMultiRegionParameterGroupsResponse
+      attr_accessor next_token: ::String
+      attr_accessor multi_region_parameter_groups: ::Array[Types::MultiRegionParameterGroup]
+      SENSITIVE: []
+    end
+
+    class DescribeMultiRegionParametersRequest
+      attr_accessor multi_region_parameter_group_name: ::String
+      attr_accessor source: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMultiRegionParametersResponse
+      attr_accessor next_token: ::String
+      attr_accessor multi_region_parameters: ::Array[Types::MultiRegionParameter]
+      SENSITIVE: []
+    end
+
     class DescribeParameterGroupsRequest
       attr_accessor parameter_group_name: ::String
       attr_accessor max_results: ::Integer
@@ -681,6 +708,25 @@ module Aws::MemoryDB
     end
 
     class MultiRegionClusterNotFoundFault < Aws::EmptyStructure
+    end
+
+    class MultiRegionParameter
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor description: ::String
+      attr_accessor source: ::String
+      attr_accessor data_type: ::String
+      attr_accessor allowed_values: ::String
+      attr_accessor minimum_engine_version: ::String
+      SENSITIVE: []
+    end
+
+    class MultiRegionParameterGroup
+      attr_accessor name: ::String
+      attr_accessor family: ::String
+      attr_accessor description: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
     end
 
     class MultiRegionParameterGroupNotFoundFault < Aws::EmptyStructure

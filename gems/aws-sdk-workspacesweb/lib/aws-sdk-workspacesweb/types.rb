@@ -323,6 +323,12 @@ module Aws::WorkSpacesWeb
     #   The additional encryption context of the browser settings.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] web_content_filtering_policy
+    #   The policy that specifies which URLs end users are allowed to access
+    #   or which URLs or domain categories they are restricted from
+    #   accessing for enhanced security.
+    #   @return [Types::WebContentFilteringPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/BrowserSettings AWS API Documentation
     #
     class BrowserSettings < Struct.new(
@@ -330,7 +336,8 @@ module Aws::WorkSpacesWeb
       :associated_portal_arns,
       :browser_policy,
       :customer_managed_key,
-      :additional_encryption_context)
+      :additional_encryption_context,
+      :web_content_filtering_policy)
       SENSITIVE = [:browser_policy]
       include Aws::Structure
     end
@@ -524,6 +531,12 @@ module Aws::WorkSpacesWeb
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] web_content_filtering_policy
+    #   The policy that specifies which URLs end users are allowed to access
+    #   or which URLs or domain categories they are restricted from
+    #   accessing for enhanced security.
+    #   @return [Types::WebContentFilteringPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/CreateBrowserSettingsRequest AWS API Documentation
     #
     class CreateBrowserSettingsRequest < Struct.new(
@@ -531,7 +544,8 @@ module Aws::WorkSpacesWeb
       :customer_managed_key,
       :additional_encryption_context,
       :browser_policy,
-      :client_token)
+      :client_token,
+      :web_content_filtering_policy)
       SENSITIVE = [:tags, :browser_policy]
       include Aws::Structure
     end
@@ -3661,12 +3675,19 @@ module Aws::WorkSpacesWeb
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] web_content_filtering_policy
+    #   The policy that specifies which URLs end users are allowed to access
+    #   or which URLs or domain categories they are restricted from
+    #   accessing for enhanced security.
+    #   @return [Types::WebContentFilteringPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateBrowserSettingsRequest AWS API Documentation
     #
     class UpdateBrowserSettingsRequest < Struct.new(
       :browser_settings_arn,
       :browser_policy,
-      :client_token)
+      :client_token,
+      :web_content_filtering_policy)
       SENSITIVE = [:browser_policy]
       include Aws::Structure
     end
@@ -4522,6 +4543,32 @@ module Aws::WorkSpacesWeb
       :name,
       :message)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The policy that specifies which URLs end users are allowed to access
+    # or which URLs or domain categories they are restricted from accessing
+    # for enhanced security.
+    #
+    # @!attribute [rw] blocked_categories
+    #   Categories of websites that are blocked on the end user’s browsers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_urls
+    #   URLs and domains that are always accessible to end users.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] blocked_urls
+    #   URLs and domains that end users cannot access.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/WebContentFilteringPolicy AWS API Documentation
+    #
+    class WebContentFilteringPolicy < Struct.new(
+      :blocked_categories,
+      :allowed_urls,
+      :blocked_urls)
+      SENSITIVE = [:allowed_urls, :blocked_urls]
       include Aws::Structure
     end
 

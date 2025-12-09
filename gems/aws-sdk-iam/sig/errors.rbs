@@ -42,6 +42,12 @@ module Aws
       class EntityTemporarilyUnmodifiableException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class FeatureDisabledException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class FeatureEnabledException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class InvalidAuthenticationCodeException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

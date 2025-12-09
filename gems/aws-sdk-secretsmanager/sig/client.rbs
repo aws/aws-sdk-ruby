@@ -138,7 +138,8 @@ module Aws
                                kms_key_id: ::String?
                              },
                            ],
-                           ?force_overwrite_replica_secret: bool
+                           ?force_overwrite_replica_secret: bool,
+                           ?type: ::String
                          ) -> _CreateSecretResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSecretResponseSuccess
 
@@ -171,11 +172,14 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSecretResponse]
         def arn: () -> ::String
         def name: () -> ::String
+        def type: () -> ::String
         def description: () -> ::String
         def kms_key_id: () -> ::String
         def rotation_enabled: () -> bool
         def rotation_lambda_arn: () -> ::String
         def rotation_rules: () -> Types::RotationRulesType
+        def external_secret_rotation_metadata: () -> ::Array[Types::ExternalSecretRotationMetadataItem]
+        def external_secret_rotation_role_arn: () -> ::String
         def last_rotated_date: () -> ::Time
         def last_changed_date: () -> ::Time
         def last_accessed_date: () -> ::Time
@@ -365,6 +369,13 @@ module Aws
                              duration: ::String?,
                              schedule_expression: ::String?
                            },
+                           ?external_secret_rotation_metadata: Array[
+                             {
+                               key: ::String?,
+                               value: ::String?
+                             },
+                           ],
+                           ?external_secret_rotation_role_arn: ::String,
                            ?rotate_immediately: bool
                          ) -> _RotateSecretResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RotateSecretResponseSuccess
@@ -411,7 +422,8 @@ module Aws
                            ?description: ::String,
                            ?kms_key_id: ::String,
                            ?secret_binary: ::String,
-                           ?secret_string: ::String
+                           ?secret_string: ::String,
+                           ?type: ::String
                          ) -> _UpdateSecretResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSecretResponseSuccess
 

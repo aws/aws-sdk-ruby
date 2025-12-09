@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2025-11-18)
+------------------
+
+* Feature - Amazon MSK adds three new APIs, ListTopics, DescribeTopic, and DescribeTopicPartitions for viewing Kafka topics in your MSK clusters.
+
+1.99.0 (2025-11-10)
+------------------
+
+* Feature - Amazon MSK now supports intelligent rebalancing for MSK Express brokers.
+
+1.98.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.97.0 (2025-10-16)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.96.0 (2025-08-26)
 ------------------
 

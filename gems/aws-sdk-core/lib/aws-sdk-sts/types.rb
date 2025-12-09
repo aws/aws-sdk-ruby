@@ -35,7 +35,7 @@ module Aws::STS
     #   The regex used to validate this parameter is a string of characters
     #   consisting of upper- and lower-case alphanumeric characters with no
     #   spaces. You can also include underscores or any of the following
-    #   characters: =,.@-
+    #   characters: +=,.@-
     #
     #
     #
@@ -240,7 +240,7 @@ module Aws::STS
     #   The regex used to validate this parameter is a string of characters
     #   consisting of upper- and lower-case alphanumeric characters with no
     #   spaces. You can also include underscores or any of the following
-    #   characters: =,.@:/-
+    #   characters: +=,.@:\\/-
     #
     #
     #
@@ -259,7 +259,7 @@ module Aws::STS
     #   The regex used to validate this parameter is a string of characters
     #   consisting of upper- and lower-case alphanumeric characters with no
     #   spaces. You can also include underscores or any of the following
-    #   characters: =,.@-
+    #   characters: +=/:,.@-
     #   @return [String]
     #
     # @!attribute [rw] token_code
@@ -961,8 +961,8 @@ module Aws::STS
     #
     # @!attribute [rw] task_policy_arn
     #   The identity based policy that scopes the session to the privileged
-    #   tasks that can be performed. You can use one of following Amazon Web
-    #   Services managed policies to scope root session actions.
+    #   tasks that can be performed. You must use one of following Amazon
+    #   Web Services managed policies to scope root session actions:
     #
     #   * [IAMAuditRootUserCredentials][1]
     #
@@ -1144,6 +1144,21 @@ module Aws::STS
       include Aws::Structure
     end
 
+    # The trade-in token provided in the request has expired and can no
+    # longer be exchanged for credentials. Request a new token and retry the
+    # operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/ExpiredTradeInTokenException AWS API Documentation
+    #
+    class ExpiredTradeInTokenException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Identifiers for the federated user that is associated with the
     # credentials.
     #
@@ -1235,6 +1250,47 @@ module Aws::STS
       :user_id,
       :account,
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trade_in_token
+    #   The token to exchange for temporary Amazon Web Services credentials.
+    #   This token must be valid and unexpired at the time of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetDelegatedAccessTokenRequest AWS API Documentation
+    #
+    class GetDelegatedAccessTokenRequest < Struct.new(
+      :trade_in_token)
+      SENSITIVE = [:trade_in_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] credentials
+    #   Amazon Web Services credentials for API authentication.
+    #   @return [Types::Credentials]
+    #
+    # @!attribute [rw] packed_policy_size
+    #   The percentage of the maximum policy size that is used by the
+    #   session policy. The policy size is calculated as the sum of all the
+    #   session policies and permission boundaries attached to the session.
+    #   If the packed size exceeds 100%, the request fails.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] assumed_principal
+    #   The Amazon Resource Name (ARN) of the principal that was assumed
+    #   when obtaining the delegated access token. This ARN identifies the
+    #   IAM entity whose permissions are granted by the temporary
+    #   credentials.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetDelegatedAccessTokenResponse AWS API Documentation
+    #
+    class GetDelegatedAccessTokenResponse < Struct.new(
+      :credentials,
+      :packed_policy_size,
+      :assumed_principal)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1522,6 +1578,73 @@ module Aws::STS
       include Aws::Structure
     end
 
+    # @!attribute [rw] audience
+    #   The intended recipient of the web identity token. This value
+    #   populates the `aud` claim in the JWT and should identify the service
+    #   or application that will validate and use the token. The external
+    #   service should verify this claim to ensure the token was intended
+    #   for their use.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] duration_seconds
+    #   The duration, in seconds, for which the JSON Web Token (JWT) will
+    #   remain valid. The value can range from 60 seconds (1 minute) to 3600
+    #   seconds (1 hour). If not specified, the default duration is 300
+    #   seconds (5 minutes). The token is designed to be short-lived and
+    #   should be used for proof of identity, then exchanged for credentials
+    #   or short-lived tokens in the external service.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] signing_algorithm
+    #   The cryptographic algorithm to use for signing the JSON Web Token
+    #   (JWT). Valid values are RS256 (RSA with SHA-256) and ES384 (ECDSA
+    #   using P-384 curve with SHA-384).
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An optional list of tags to include in the JSON Web Token (JWT).
+    #   These tags are added as custom claims to the JWT and can be used by
+    #   the downstream service for authorization decisions.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetWebIdentityTokenRequest AWS API Documentation
+    #
+    class GetWebIdentityTokenRequest < Struct.new(
+      :audience,
+      :duration_seconds,
+      :signing_algorithm,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] web_identity_token
+    #   A signed JSON Web Token (JWT) that represents the caller's Amazon
+    #   Web Services identity. The token contains standard JWT claims such
+    #   as subject, audience, expiration time, and additional identity
+    #   attributes added by STS as custom claims. You can also add your own
+    #   custom claims to the token by passing tags as request parameters to
+    #   the `GetWebIdentityToken` API. The token is signed using the
+    #   specified signing algorithm and can be verified using the
+    #   verification keys available at the issuer's JWKS endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration
+    #   The date and time when the web identity token expires, in UTC. The
+    #   expiration is determined by adding the `DurationSeconds` value to
+    #   the time the token was issued. After this time, the token should no
+    #   longer be considered valid.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetWebIdentityTokenResponse AWS API Documentation
+    #
+    class GetWebIdentityTokenResponse < Struct.new(
+      :web_identity_token,
+      :expiration)
+      SENSITIVE = [:web_identity_token]
+      include Aws::Structure
+    end
+
     # The request could not be fulfilled because the identity provider (IDP)
     # that was asked to verify the incoming identity token could not be
     # reached. This is often a transient error caused by network conditions.
@@ -1589,6 +1712,21 @@ module Aws::STS
       include Aws::Structure
     end
 
+    # The requested token payload size exceeds the maximum allowed size.
+    # Reduce the number of request tags included in the
+    # `GetWebIdentityToken` API call to reduce the token payload size.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/JWTPayloadSizeExceededException AWS API Documentation
+    #
+    class JWTPayloadSizeExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request was rejected because the policy document was malformed.
     # The error message describes the specific error.
     #
@@ -1598,6 +1736,21 @@ module Aws::STS
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/MalformedPolicyDocumentException AWS API Documentation
     #
     class MalformedPolicyDocumentException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The outbound web identity federation feature is not enabled for this
+    # account. To use this feature, you must first enable it through the
+    # Amazon Web Services Management Console or API.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/OutboundWebIdentityFederationDisabledException AWS API Documentation
+    #
+    class OutboundWebIdentityFederationDisabledException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -1686,7 +1839,7 @@ module Aws::STS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html#sts-regions-activate-deactivate
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1694,6 +1847,22 @@ module Aws::STS
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/RegionDisabledException AWS API Documentation
     #
     class RegionDisabledException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The requested token duration would extend the session beyond its
+    # original expiration time. You cannot use this operation to extend the
+    # lifetime of a session beyond what was granted when the session was
+    # originally created.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/SessionDurationEscalationException AWS API Documentation
+    #
+    class SessionDurationEscalationException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure

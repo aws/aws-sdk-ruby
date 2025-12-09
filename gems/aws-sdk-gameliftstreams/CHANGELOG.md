@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2025-10-28)
+------------------
+
+* Feature - Add stream group expiration date and expired status
+
+1.15.0 (2025-10-24)
+------------------
+
+* Feature - Add status reasons for TERMINATED stream sessions
+
+1.14.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2025-10-17)
+------------------
+
+* Feature - Updates documentation to clarify valid application binaries for an Amazon GameLift Streams application and provide descriptions of stream session error status reasons
+
 1.12.0 (2025-08-26)
 ------------------
 

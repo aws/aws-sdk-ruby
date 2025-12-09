@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.244.0 (2025-12-01)
+------------------
+
+* Feature - Add support for Iceberg materialized view in Glue Data Catalog, including updated CreateTable API to support materialized views and new APIs for managing data refresh for materialized views. Add support for Iceberg table encryption keys and struct field defaults.
+
+1.243.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.242.0 (2025-11-20)
+------------------
+
+* Feature - Added FunctionType parameter to Glue GetuserDefinedFunctions.
+
+1.241.0 (2025-11-17)
+------------------
+
+* Feature - Amazon Glue Releasing 2 the new API ListIntegrationResourceProperties and DeleteIntegrationResourceProperty along with minor improvement on existing API(s).
+
+1.240.0 (2025-10-30)
+------------------
+
+* Feature - This release adds the capability to enable User Background Sessions for customers running Trusted Identity Propagation enabled Interactive Sessions on AWS Glue.
+
+1.239.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.238.0 (2025-10-10)
+------------------
+
+* Feature - Addition of AuditContext in GetTable/GetTables Request
+
+1.237.0 (2025-10-06)
+------------------
+
+* Feature - Adds labeling for DataQualityRuleResult for GetDataQualityResult and PublishDataQualityResult APIs
+
 1.236.0 (2025-09-25)
 ------------------
 

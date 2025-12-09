@@ -86,6 +86,11 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class BlockedByOrganizationPolicyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class CompleteLayerUploadRequest
       attr_accessor registry_id: ::String
       attr_accessor repository_name: ::String
@@ -260,6 +265,25 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class DeleteSigningConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class DeleteSigningConfigurationResponse
+      attr_accessor registry_id: ::String
+      attr_accessor signing_configuration: Types::SigningConfiguration
+      SENSITIVE: []
+    end
+
+    class DeregisterPullTimeUpdateExclusionRequest
+      attr_accessor principal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterPullTimeUpdateExclusionResponse
+      attr_accessor principal_arn: ::String
+      SENSITIVE: []
+    end
+
     class DescribeImageReplicationStatusRequest
       attr_accessor repository_name: ::String
       attr_accessor image_id: Types::ImageIdentifier
@@ -293,8 +317,24 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class DescribeImageSigningStatusRequest
+      attr_accessor repository_name: ::String
+      attr_accessor image_id: Types::ImageIdentifier
+      attr_accessor registry_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImageSigningStatusResponse
+      attr_accessor repository_name: ::String
+      attr_accessor image_id: Types::ImageIdentifier
+      attr_accessor registry_id: ::String
+      attr_accessor signing_statuses: ::Array[Types::ImageSigningStatus]
+      SENSITIVE: []
+    end
+
     class DescribeImagesFilter
       attr_accessor tag_status: ("TAGGED" | "UNTAGGED" | "ANY")
+      attr_accessor image_status: ("ACTIVE" | "ARCHIVED" | "ACTIVATING" | "ANY")
       SENSITIVE: []
     end
 
@@ -403,6 +443,16 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class ExclusionAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExclusionNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class GetAccountSettingRequest
       attr_accessor name: ::String
       SENSITIVE: []
@@ -503,6 +553,15 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class GetSigningConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetSigningConfigurationResponse
+      attr_accessor registry_id: ::String
+      attr_accessor signing_configuration: Types::SigningConfiguration
+      SENSITIVE: []
+    end
+
     class Image
       attr_accessor registry_id: ::String
       attr_accessor repository_name: ::String
@@ -513,6 +572,11 @@ module Aws::ECR
     end
 
     class ImageAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImageArchivedException
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -529,6 +593,10 @@ module Aws::ECR
       attr_accessor image_manifest_media_type: ::String
       attr_accessor artifact_media_type: ::String
       attr_accessor last_recorded_pull_time: ::Time
+      attr_accessor subject_manifest_digest: ::String
+      attr_accessor image_status: ("ACTIVE" | "ARCHIVED" | "ACTIVATING")
+      attr_accessor last_archived_at: ::Time
+      attr_accessor last_activated_at: ::Time
       SENSITIVE: []
     end
 
@@ -539,7 +607,7 @@ module Aws::ECR
 
     class ImageFailure
       attr_accessor image_id: Types::ImageIdentifier
-      attr_accessor failure_code: ("InvalidImageDigest" | "InvalidImageTag" | "ImageTagDoesNotMatchDigest" | "ImageNotFound" | "MissingDigestAndTag" | "ImageReferencedByManifestList" | "KmsError" | "UpstreamAccessDenied" | "UpstreamTooManyRequests" | "UpstreamUnavailable")
+      attr_accessor failure_code: ("InvalidImageDigest" | "InvalidImageTag" | "ImageTagDoesNotMatchDigest" | "ImageNotFound" | "MissingDigestAndTag" | "ImageReferencedByManifestList" | "KmsError" | "UpstreamAccessDenied" | "UpstreamTooManyRequests" | "UpstreamUnavailable" | "ImageInaccessible")
       attr_accessor failure_reason: ::String
       SENSITIVE: []
     end
@@ -552,6 +620,16 @@ module Aws::ECR
 
     class ImageNotFoundException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImageReferrer
+      attr_accessor digest: ::String
+      attr_accessor media_type: ::String
+      attr_accessor artifact_type: ::String
+      attr_accessor size: ::Integer
+      attr_accessor annotations: ::Hash[::String, ::String]
+      attr_accessor artifact_status: ("ACTIVE" | "ARCHIVED" | "ACTIVATING")
       SENSITIVE: []
     end
 
@@ -589,13 +667,26 @@ module Aws::ECR
     end
 
     class ImageScanStatus
-      attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "FAILED" | "UNSUPPORTED_IMAGE" | "ACTIVE" | "PENDING" | "SCAN_ELIGIBILITY_EXPIRED" | "FINDINGS_UNAVAILABLE" | "LIMIT_EXCEEDED")
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "FAILED" | "UNSUPPORTED_IMAGE" | "ACTIVE" | "PENDING" | "SCAN_ELIGIBILITY_EXPIRED" | "FINDINGS_UNAVAILABLE" | "LIMIT_EXCEEDED" | "IMAGE_ARCHIVED")
       attr_accessor description: ::String
       SENSITIVE: []
     end
 
     class ImageScanningConfiguration
       attr_accessor scan_on_push: bool
+      SENSITIVE: []
+    end
+
+    class ImageSigningStatus
+      attr_accessor signing_profile_arn: ::String
+      attr_accessor failure_code: ::String
+      attr_accessor failure_reason: ::String
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ImageStorageClassUpdateNotSupportedException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -654,7 +745,7 @@ module Aws::ECR
 
     class Layer
       attr_accessor layer_digest: ::String
-      attr_accessor layer_availability: ("AVAILABLE" | "UNAVAILABLE")
+      attr_accessor layer_availability: ("AVAILABLE" | "UNAVAILABLE" | "ARCHIVED")
       attr_accessor layer_size: ::Integer
       attr_accessor media_type: ::String
       SENSITIVE: []
@@ -713,16 +804,19 @@ module Aws::ECR
       attr_accessor image_pushed_at: ::Time
       attr_accessor action: Types::LifecyclePolicyRuleAction
       attr_accessor applied_rule_priority: ::Integer
+      attr_accessor storage_class: ("ARCHIVE" | "STANDARD")
       SENSITIVE: []
     end
 
     class LifecyclePolicyPreviewSummary
       attr_accessor expiring_image_total_count: ::Integer
+      attr_accessor transitioning_image_total_counts: ::Array[Types::TransitioningImageTotalCount]
       SENSITIVE: []
     end
 
     class LifecyclePolicyRuleAction
-      attr_accessor type: ("EXPIRE")
+      attr_accessor type: ("EXPIRE" | "TRANSITION")
+      attr_accessor target_storage_class: ("ARCHIVE")
       SENSITIVE: []
     end
 
@@ -731,8 +825,31 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class ListImageReferrersFilter
+      attr_accessor artifact_types: ::Array[::String]
+      attr_accessor artifact_status: ("ACTIVE" | "ARCHIVED" | "ACTIVATING" | "ANY")
+      SENSITIVE: []
+    end
+
+    class ListImageReferrersRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor subject_id: Types::SubjectIdentifier
+      attr_accessor filter: Types::ListImageReferrersFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListImageReferrersResponse
+      attr_accessor referrers: ::Array[Types::ImageReferrer]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListImagesFilter
       attr_accessor tag_status: ("TAGGED" | "UNTAGGED" | "ANY")
+      attr_accessor image_status: ("ACTIVE" | "ARCHIVED" | "ACTIVATING" | "ANY")
       SENSITIVE: []
     end
 
@@ -747,6 +864,18 @@ module Aws::ECR
 
     class ListImagesResponse
       attr_accessor image_ids: ::Array[Types::ImageIdentifier]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPullTimeUpdateExclusionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPullTimeUpdateExclusionsResponse
+      attr_accessor pull_time_update_exclusions: ::Array[::String]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -901,6 +1030,16 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class PutSigningConfigurationRequest
+      attr_accessor signing_configuration: Types::SigningConfiguration
+      SENSITIVE: []
+    end
+
+    class PutSigningConfigurationResponse
+      attr_accessor signing_configuration: Types::SigningConfiguration
+      SENSITIVE: []
+    end
+
     class Recommendation
       attr_accessor url: ::String
       attr_accessor text: ::String
@@ -909,6 +1048,17 @@ module Aws::ECR
 
     class ReferencedImagesNotFoundException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterPullTimeUpdateExclusionRequest
+      attr_accessor principal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterPullTimeUpdateExclusionResponse
+      attr_accessor principal_arn: ::String
+      attr_accessor created_at: ::Time
       SENSITIVE: []
     end
 
@@ -1076,6 +1226,28 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class SigningConfiguration
+      attr_accessor rules: ::Array[Types::SigningRule]
+      SENSITIVE: []
+    end
+
+    class SigningConfigurationNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SigningRepositoryFilter
+      attr_accessor filter: ::String
+      attr_accessor filter_type: ("WILDCARD_MATCH")
+      SENSITIVE: []
+    end
+
+    class SigningRule
+      attr_accessor signing_profile_arn: ::String
+      attr_accessor repository_filters: ::Array[Types::SigningRepositoryFilter]
+      SENSITIVE: []
+    end
+
     class StartImageScanRequest
       attr_accessor registry_id: ::String
       attr_accessor repository_name: ::String
@@ -1106,6 +1278,11 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class SubjectIdentifier
+      attr_accessor image_digest: ::String
+      SENSITIVE: []
+    end
+
     class Tag
       attr_accessor key: ::String
       attr_accessor value: ::String
@@ -1133,6 +1310,12 @@ module Aws::ECR
 
     class TooManyTagsException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TransitioningImageTotalCount
+      attr_accessor target_storage_class: ("ARCHIVE")
+      attr_accessor image_total_count: ::Integer
       SENSITIVE: []
     end
 
@@ -1173,6 +1356,22 @@ module Aws::ECR
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateImageStorageClassRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_id: Types::ImageIdentifier
+      attr_accessor target_storage_class: ("STANDARD" | "ARCHIVE")
+      SENSITIVE: []
+    end
+
+    class UpdateImageStorageClassResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_id: Types::ImageIdentifier
+      attr_accessor image_status: ("ACTIVE" | "ARCHIVED" | "ACTIVATING")
+      SENSITIVE: []
     end
 
     class UpdatePullThroughCacheRuleRequest

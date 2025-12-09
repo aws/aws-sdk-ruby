@@ -213,6 +213,9 @@ module Aws
     # Raised when SSO Token is invalid
     class InvalidSSOToken < RuntimeError; end
 
+    # Raised when Login Token is invalid
+    class InvalidLoginToken < RuntimeError; end
+
     # Raised when a client is unable to sign a request because
     # the bearer token is not configured or available
     class MissingBearerTokenError < RuntimeError

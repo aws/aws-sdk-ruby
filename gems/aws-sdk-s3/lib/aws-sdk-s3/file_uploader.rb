@@ -13,8 +13,8 @@ module Aws
       # @option options [Client] :client
       # @option options [Integer] :multipart_threshold (104857600)
       def initialize(options = {})
-        @options = options
         @client = options[:client] || Client.new
+        @executor = options[:executor]
         @multipart_threshold = options[:multipart_threshold] || DEFAULT_MULTIPART_THRESHOLD
       end
 
@@ -36,11 +36,9 @@ module Aws
       # @return [void]
       def upload(source, options = {})
         Aws::Plugins::UserAgent.metric('S3_TRANSFER') do
-          if File.size(source) >= multipart_threshold
-            MultipartFileUploader.new(@options).upload(source, options)
+          if File.size(source) >= @multipart_threshold
+            MultipartFileUploader.new(client: @client, executor: @executor).upload(source, options)
           else
-            # remove multipart parameters not supported by put_object
-            options.delete(:thread_count)
             put_object(source, options)
           end
         end
@@ -48,9 +46,9 @@ module Aws
 
       private
 
-      def open_file(source)
-        if String === source || Pathname === source
-          File.open(source, 'rb') { |file| yield(file) }
+      def open_file(source, &block)
+        if source.is_a?(String) || source.is_a?(Pathname)
+          File.open(source, 'rb', &block)
         else
           yield(source)
         end

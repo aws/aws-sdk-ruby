@@ -1202,6 +1202,38 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # Configuration settings for processing audio content in multimodal
+    # knowledge bases.
+    #
+    # @!attribute [rw] segmentation_configuration
+    #   Configuration for segmenting audio content during processing.
+    #   @return [Types::AudioSegmentationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AudioConfiguration AWS API Documentation
+    #
+    class AudioConfiguration < Struct.new(
+      :segmentation_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for segmenting audio content during multimodal knowledge
+    # base ingestion. Determines how audio files are divided into chunks for
+    # processing.
+    #
+    # @!attribute [rw] fixed_length_duration
+    #   The duration in seconds for each audio segment. Audio files will be
+    #   divided into chunks of this length for processing.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/AudioSegmentationConfiguration AWS API Documentation
+    #
+    class AudioSegmentationConfiguration < Struct.new(
+      :fixed_length_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines tools. The model automatically decides whether to call a tool
     # or to generate text instead. For more information, see [Use a tool to
     # complete an Amazon Bedrock model response][1].
@@ -1252,11 +1284,23 @@ module Aws::BedrockAgent
     #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-supported.html
     #   @return [String]
     #
+    # @!attribute [rw] audio
+    #   Configuration settings for processing audio content in multimodal
+    #   knowledge bases.
+    #   @return [Array<Types::AudioConfiguration>]
+    #
+    # @!attribute [rw] video
+    #   Configuration settings for processing video content in multimodal
+    #   knowledge bases.
+    #   @return [Array<Types::VideoConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/BedrockEmbeddingModelConfiguration AWS API Documentation
     #
     class BedrockEmbeddingModelConfiguration < Struct.new(
       :dimensions,
-      :embedding_data_type)
+      :embedding_data_type,
+      :audio,
+      :video)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6118,7 +6162,8 @@ module Aws::BedrockAgent
     #   The ingestion status of the document. The following statuses are
     #   possible:
     #
-    #   * STARTED – You submitted the ingestion job containing the document.
+    #   * STARTING – You submitted the ingestion job containing the
+    #     document.
     #
     #   * PENDING – The document is waiting to be ingested.
     #
@@ -11609,6 +11654,38 @@ module Aws::BedrockAgent
     class VectorSearchRerankingConfiguration < Struct.new(
       :type,
       :bedrock_reranking_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for processing video content in multimodal
+    # knowledge bases.
+    #
+    # @!attribute [rw] segmentation_configuration
+    #   Configuration for segmenting video content during processing.
+    #   @return [Types::VideoSegmentationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/VideoConfiguration AWS API Documentation
+    #
+    class VideoConfiguration < Struct.new(
+      :segmentation_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for segmenting video content during multimodal knowledge
+    # base ingestion. Determines how video files are divided into chunks for
+    # processing.
+    #
+    # @!attribute [rw] fixed_length_duration
+    #   The duration in seconds for each video segment. Video files will be
+    #   divided into chunks of this length for processing.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/VideoSegmentationConfiguration AWS API Documentation
+    #
+    class VideoSegmentationConfiguration < Struct.new(
+      :fixed_length_duration)
       SENSITIVE = []
       include Aws::Structure
     end

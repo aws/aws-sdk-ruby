@@ -12,7 +12,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class Action
-      attr_accessor type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response")
+      attr_accessor type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response" | "jwt-validation")
       attr_accessor target_group_arn: ::String
       attr_accessor authenticate_oidc_config: Types::AuthenticateOidcActionConfig
       attr_accessor authenticate_cognito_config: Types::AuthenticateCognitoActionConfig
@@ -20,6 +20,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor redirect_config: Types::RedirectActionConfig
       attr_accessor fixed_response_config: Types::FixedResponseActionConfig
       attr_accessor forward_config: Types::ForwardActionConfig
+      attr_accessor jwt_validation_config: Types::JwtValidationActionConfig
       SENSITIVE: []
     end
 
@@ -145,7 +146,7 @@ module Aws::ElasticLoadBalancingV2
 
     class CreateListenerInput
       attr_accessor load_balancer_arn: ::String
-      attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE")
+      attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE" | "QUIC" | "TCP_QUIC")
       attr_accessor port: ::Integer
       attr_accessor ssl_policy: ::String
       attr_accessor certificates: ::Array[Types::Certificate]
@@ -187,6 +188,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor priority: ::Integer
       attr_accessor actions: ::Array[Types::Action]
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor transforms: ::Array[Types::RuleTransform]
       SENSITIVE: []
     end
 
@@ -197,11 +199,11 @@ module Aws::ElasticLoadBalancingV2
 
     class CreateTargetGroupInput
       attr_accessor name: ::String
-      attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE")
+      attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE" | "QUIC" | "TCP_QUIC")
       attr_accessor protocol_version: ::String
       attr_accessor port: ::Integer
       attr_accessor vpc_id: ::String
-      attr_accessor health_check_protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE")
+      attr_accessor health_check_protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE" | "QUIC" | "TCP_QUIC")
       attr_accessor health_check_port: ::String
       attr_accessor health_check_enabled: bool
       attr_accessor health_check_path: ::String
@@ -213,6 +215,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor target_type: ("instance" | "ip" | "lambda" | "alb")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor ip_address_type: ("ipv4" | "ipv6")
+      attr_accessor target_control_port: ::Integer
       SENSITIVE: []
     end
 
@@ -570,12 +573,19 @@ module Aws::ElasticLoadBalancingV2
 
     class HostHeaderConditionConfig
       attr_accessor values: ::Array[::String]
+      attr_accessor regex_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class HostHeaderRewriteConfig
+      attr_accessor rewrites: ::Array[Types::RewriteConfig]
       SENSITIVE: []
     end
 
     class HttpHeaderConditionConfig
       attr_accessor http_header_name: ::String
       attr_accessor values: ::Array[::String]
+      attr_accessor regex_values: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -619,6 +629,20 @@ module Aws::ElasticLoadBalancingV2
       SENSITIVE: []
     end
 
+    class JwtValidationActionAdditionalClaim
+      attr_accessor format: ("single-string" | "string-array" | "space-separated-values")
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class JwtValidationActionConfig
+      attr_accessor jwks_endpoint: ::String
+      attr_accessor issuer: ::String
+      attr_accessor additional_claims: ::Array[Types::JwtValidationActionAdditionalClaim]
+      SENSITIVE: []
+    end
+
     class Limit
       attr_accessor name: ::String
       attr_accessor max: ::String
@@ -629,7 +653,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor listener_arn: ::String
       attr_accessor load_balancer_arn: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE")
+      attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE" | "QUIC" | "TCP_QUIC")
       attr_accessor certificates: ::Array[Types::Certificate]
       attr_accessor ssl_policy: ::String
       attr_accessor default_actions: ::Array[Types::Action]
@@ -742,7 +766,7 @@ module Aws::ElasticLoadBalancingV2
     class ModifyListenerInput
       attr_accessor listener_arn: ::String
       attr_accessor port: ::Integer
-      attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE")
+      attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE" | "QUIC" | "TCP_QUIC")
       attr_accessor ssl_policy: ::String
       attr_accessor certificates: ::Array[Types::Certificate]
       attr_accessor default_actions: ::Array[Types::Action]
@@ -771,6 +795,8 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor rule_arn: ::String
       attr_accessor conditions: ::Array[Types::RuleCondition]
       attr_accessor actions: ::Array[Types::Action]
+      attr_accessor transforms: ::Array[Types::RuleTransform]
+      attr_accessor reset_transforms: bool
       SENSITIVE: []
     end
 
@@ -792,7 +818,7 @@ module Aws::ElasticLoadBalancingV2
 
     class ModifyTargetGroupInput
       attr_accessor target_group_arn: ::String
-      attr_accessor health_check_protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE")
+      attr_accessor health_check_protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE" | "QUIC" | "TCP_QUIC")
       attr_accessor health_check_port: ::String
       attr_accessor health_check_path: ::String
       attr_accessor health_check_enabled: bool
@@ -836,6 +862,7 @@ module Aws::ElasticLoadBalancingV2
 
     class PathPatternConditionConfig
       attr_accessor values: ::Array[::String]
+      attr_accessor regex_values: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -922,12 +949,19 @@ module Aws::ElasticLoadBalancingV2
     class RevocationIdNotFoundException < Aws::EmptyStructure
     end
 
+    class RewriteConfig
+      attr_accessor regex: ::String
+      attr_accessor replace: ::String
+      SENSITIVE: []
+    end
+
     class Rule
       attr_accessor rule_arn: ::String
       attr_accessor priority: ::String
       attr_accessor conditions: ::Array[Types::RuleCondition]
       attr_accessor actions: ::Array[Types::Action]
       attr_accessor is_default: bool
+      attr_accessor transforms: ::Array[Types::RuleTransform]
       SENSITIVE: []
     end
 
@@ -940,6 +974,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor query_string_config: Types::QueryStringConditionConfig
       attr_accessor http_request_method_config: Types::HttpRequestMethodConditionConfig
       attr_accessor source_ip_config: Types::SourceIpConditionConfig
+      attr_accessor regex_values: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -949,6 +984,13 @@ module Aws::ElasticLoadBalancingV2
     class RulePriorityPair
       attr_accessor rule_arn: ::String
       attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class RuleTransform
+      attr_accessor type: ("host-header-rewrite" | "url-rewrite")
+      attr_accessor host_header_rewrite_config: Types::HostHeaderRewriteConfig
+      attr_accessor url_rewrite_config: Types::UrlRewriteConfig
       SENSITIVE: []
     end
 
@@ -1046,16 +1088,17 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor id: ::String
       attr_accessor port: ::Integer
       attr_accessor availability_zone: ::String
+      attr_accessor quic_server_id: ::String
       SENSITIVE: []
     end
 
     class TargetGroup
       attr_accessor target_group_arn: ::String
       attr_accessor target_group_name: ::String
-      attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE")
+      attr_accessor protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE" | "QUIC" | "TCP_QUIC")
       attr_accessor port: ::Integer
       attr_accessor vpc_id: ::String
-      attr_accessor health_check_protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE")
+      attr_accessor health_check_protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE" | "QUIC" | "TCP_QUIC")
       attr_accessor health_check_port: ::String
       attr_accessor health_check_enabled: bool
       attr_accessor health_check_interval_seconds: ::Integer
@@ -1068,6 +1111,7 @@ module Aws::ElasticLoadBalancingV2
       attr_accessor target_type: ("instance" | "ip" | "lambda" | "alb")
       attr_accessor protocol_version: ::String
       attr_accessor ip_address_type: ("ipv4" | "ipv6")
+      attr_accessor target_control_port: ::Integer
       SENSITIVE: []
     end
 
@@ -1182,6 +1226,11 @@ module Aws::ElasticLoadBalancingV2
     end
 
     class UnsupportedProtocolException < Aws::EmptyStructure
+    end
+
+    class UrlRewriteConfig
+      attr_accessor rewrites: ::Array[Types::RewriteConfig]
+      SENSITIVE: []
     end
 
     class ZonalCapacityReservationState

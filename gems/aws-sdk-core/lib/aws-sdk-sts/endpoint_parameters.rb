@@ -13,27 +13,27 @@ module Aws::STS
   # @!attribute region
   #   The AWS region used to dispatch the request.
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute use_dual_stack
   #   When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute use_fips
   #   When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute endpoint
   #   Override the endpoint used to send this request
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute use_global_endpoint
   #   Whether the global endpoint should be used, rather then the regional endpoint for us-east-1.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   EndpointParameters = Struct.new(
     :region,

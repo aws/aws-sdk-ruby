@@ -597,6 +597,17 @@ module Aws::IoTManagedIntegrations
       SENSITIVE: []
     end
 
+    class GetManagedThingCertificateRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetManagedThingCertificateResponse
+      attr_accessor managed_thing_id: ::String
+      attr_accessor certificate_pem: ::String
+      SENSITIVE: []
+    end
+
     class GetManagedThingConnectivityDataRequest
       attr_accessor identifier: ::String
       SENSITIVE: []

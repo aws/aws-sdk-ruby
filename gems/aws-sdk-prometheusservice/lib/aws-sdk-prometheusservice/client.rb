@@ -528,6 +528,102 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
+    # Creates an anomaly detector within a workspace using the Random Cut
+    # Forest algorithm for time-series analysis. The anomaly detector
+    # analyzes Amazon Managed Service for Prometheus metrics to identify
+    # unusual patterns and behaviors.
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace where the anomaly detector will be
+    #   created.
+    #
+    # @option params [required, String] :alias
+    #   A user-friendly name for the anomaly detector.
+    #
+    # @option params [Integer] :evaluation_interval_in_seconds
+    #   The frequency, in seconds, at which the anomaly detector evaluates
+    #   metrics. The default value is 60 seconds.
+    #
+    # @option params [Types::AnomalyDetectorMissingDataAction] :missing_data_action
+    #   Specifies the action to take when data is missing during evaluation.
+    #
+    # @option params [required, Types::AnomalyDetectorConfiguration] :configuration
+    #   The algorithm configuration for the anomaly detector.
+    #
+    # @option params [Hash<String,String>] :labels
+    #   The Amazon Managed Service for Prometheus metric labels to associate
+    #   with the anomaly detector.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The metadata to apply to the anomaly detector to assist with
+    #   categorization and organization.
+    #
+    # @return [Types::CreateAnomalyDetectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAnomalyDetectorResponse#anomaly_detector_id #anomaly_detector_id} => String
+    #   * {Types::CreateAnomalyDetectorResponse#arn #arn} => String
+    #   * {Types::CreateAnomalyDetectorResponse#status #status} => Types::AnomalyDetectorStatus
+    #   * {Types::CreateAnomalyDetectorResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_anomaly_detector({
+    #     workspace_id: "WorkspaceId", # required
+    #     alias: "AnomalyDetectorAlias", # required
+    #     evaluation_interval_in_seconds: 1,
+    #     missing_data_action: {
+    #       mark_as_anomaly: false,
+    #       skip: false,
+    #     },
+    #     configuration: { # required
+    #       random_cut_forest: {
+    #         query: "RandomCutForestQuery", # required
+    #         shingle_size: 1,
+    #         sample_size: 1,
+    #         ignore_near_expected_from_above: {
+    #           amount: 1.0,
+    #           ratio: 1.0,
+    #         },
+    #         ignore_near_expected_from_below: {
+    #           amount: 1.0,
+    #           ratio: 1.0,
+    #         },
+    #       },
+    #     },
+    #     labels: {
+    #       "PrometheusMetricLabelKey" => "PrometheusMetricLabelValue",
+    #     },
+    #     client_token: "IdempotencyToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.anomaly_detector_id #=> String
+    #   resp.arn #=> String
+    #   resp.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
+    #   resp.status.status_reason #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateAnomalyDetector AWS API Documentation
+    #
+    # @overload create_anomaly_detector(params = {})
+    # @param [Hash] params ({})
+    def create_anomaly_detector(params = {}, options = {})
+      req = build_request(:create_anomaly_detector, params)
+      req.send_request(options)
+    end
+
     # The `CreateLoggingConfiguration` operation creates rules and alerting
     # logging configuration for the workspace. Use this operation to set the
     # CloudWatch log group to which the logs will be published to.
@@ -636,6 +732,9 @@ module Aws::PrometheusService
     # with exactly one rules file. A workspace can have multiple rule groups
     # namespaces.
     #
+    # The combined length of a rule group namespace and a rule group name
+    # cannot exceed 721 UTF-8 bytes.
+    #
     # Use this operation only to create new rule groups namespaces. To
     # update an existing rule groups namespace, use
     # `PutRuleGroupsNamespace`.
@@ -707,16 +806,18 @@ module Aws::PrometheusService
     end
 
     # The `CreateScraper` operation creates a scraper to collect metrics. A
-    # scraper pulls metrics from Prometheus-compatible sources within an
-    # Amazon EKS cluster, and sends them to your Amazon Managed Service for
-    # Prometheus workspace. Scrapers are flexible, and can be configured to
-    # control what metrics are collected, the frequency of collection, what
+    # scraper pulls metrics from Prometheus-compatible sources and sends
+    # them to your Amazon Managed Service for Prometheus workspace. You can
+    # configure scrapers to collect metrics from Amazon EKS clusters, Amazon
+    # MSK clusters, or from VPC-based sources that support DNS-based service
+    # discovery. Scrapers are flexible, and can be configured to control
+    # what metrics are collected, the frequency of collection, what
     # transformations are applied to the metrics, and more.
     #
     # An IAM role will be created for you that Amazon Managed Service for
-    # Prometheus uses to access the metrics in your cluster. You must
+    # Prometheus uses to access the metrics in your source. You must
     # configure this role with a policy that allows it to scrape metrics
-    # from your cluster. For more information, see [Configuring your Amazon
+    # from your source. For Amazon EKS sources, see [Configuring your Amazon
     # EKS cluster][1] in the *Amazon Managed Service for Prometheus User
     # Guide*.
     #
@@ -725,8 +826,8 @@ module Aws::PrometheusService
     #
     # When creating a scraper, the service creates a `Network Interface` in
     # each **Availability Zone** that are passed into `CreateScraper`
-    # through subnets. These network interfaces are used to connect to the
-    # Amazon EKS cluster within the VPC for scraping metrics.
+    # through subnets. These network interfaces are used to connect to your
+    # source within the VPC for scraping metrics.
     #
     # <note markdown="1"> For more information about collectors, including what metrics are
     # collected, and how to configure the scraper, see [Using an Amazon Web
@@ -754,7 +855,8 @@ module Aws::PrometheusService
     #   [1]: https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-configuration
     #
     # @option params [required, Types::Source] :source
-    #   The Amazon EKS cluster from which the scraper will collect metrics.
+    #   The Amazon EKS or Amazon Web Services cluster from which the scraper
+    #   will collect metrics.
     #
     # @option params [required, Types::Destination] :destination
     #   The Amazon Managed Service for Prometheus workspace to send metrics
@@ -824,6 +926,46 @@ module Aws::PrometheusService
     #     }, 
     #   }
     #
+    # @example Example: CreateScraper with generic VPC config with mandatory securityGroupIds and subnetIds
+    #
+    #   resp = client.create_scraper({
+    #     alias: "alias", 
+    #     client_token: "token", 
+    #     destination: {
+    #       amp_configuration: {
+    #         workspace_arn: "arn:aws:aps:us-west-2:123456789012:workspace/ws-ogh2u499-ce12-hg89-v6c7-123412341234", 
+    #       }, 
+    #     }, 
+    #     scrape_configuration: {
+    #       configuration_blob: "blob", 
+    #     }, 
+    #     source: {
+    #       vpc_configuration: {
+    #         security_group_ids: [
+    #           "sg-abc123", 
+    #         ], 
+    #         subnet_ids: [
+    #           "subnet-abc123", 
+    #         ], 
+    #       }, 
+    #     }, 
+    #     tags: {
+    #       "exampleTag" => "exampleValue", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:aps:us-west-2:123456789012:scraper/scraper-123", 
+    #     scraper_id: "scraper-123", 
+    #     status: {
+    #       status_code: "CREATING", 
+    #     }, 
+    #     tags: {
+    #       "exampleTag" => "exampleValue", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_scraper({
@@ -835,6 +977,10 @@ module Aws::PrometheusService
     #       eks_configuration: {
     #         cluster_arn: "ClusterArn", # required
     #         security_group_ids: ["SecurityGroupId"],
+    #         subnet_ids: ["SubnetId"], # required
+    #       },
+    #       vpc_configuration: {
+    #         security_group_ids: ["SecurityGroupId"], # required
     #         subnet_ids: ["SubnetId"], # required
     #       },
     #     },
@@ -965,6 +1111,42 @@ module Aws::PrometheusService
     # @param [Hash] params ({})
     def delete_alert_manager_definition(params = {}, options = {})
       req = build_request(:delete_alert_manager_definition, params)
+      req.send_request(options)
+    end
+
+    # Removes an anomaly detector from a workspace. This operation is
+    # idempotent.
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace containing the anomaly detector to
+    #   delete.
+    #
+    # @option params [required, String] :anomaly_detector_id
+    #   The identifier of the anomaly detector to delete.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_anomaly_detector({
+    #     workspace_id: "WorkspaceId", # required
+    #     anomaly_detector_id: "AnomalyDetectorId", # required
+    #     client_token: "IdempotencyToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteAnomalyDetector AWS API Documentation
+    #
+    # @overload delete_anomaly_detector(params = {})
+    # @param [Hash] params ({})
+    def delete_anomaly_detector(params = {}, options = {})
+      req = build_request(:delete_anomaly_detector, params)
       req.send_request(options)
     end
 
@@ -1262,6 +1444,65 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
+    # Retrieves detailed information about a specific anomaly detector,
+    # including its status and configuration.
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace containing the anomaly detector.
+    #
+    # @option params [required, String] :anomaly_detector_id
+    #   The identifier of the anomaly detector to describe.
+    #
+    # @return [Types::DescribeAnomalyDetectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAnomalyDetectorResponse#anomaly_detector #anomaly_detector} => Types::AnomalyDetectorDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_anomaly_detector({
+    #     workspace_id: "WorkspaceId", # required
+    #     anomaly_detector_id: "AnomalyDetectorId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.anomaly_detector.arn #=> String
+    #   resp.anomaly_detector.anomaly_detector_id #=> String
+    #   resp.anomaly_detector.alias #=> String
+    #   resp.anomaly_detector.evaluation_interval_in_seconds #=> Integer
+    #   resp.anomaly_detector.missing_data_action.mark_as_anomaly #=> Boolean
+    #   resp.anomaly_detector.missing_data_action.skip #=> Boolean
+    #   resp.anomaly_detector.configuration.random_cut_forest.query #=> String
+    #   resp.anomaly_detector.configuration.random_cut_forest.shingle_size #=> Integer
+    #   resp.anomaly_detector.configuration.random_cut_forest.sample_size #=> Integer
+    #   resp.anomaly_detector.configuration.random_cut_forest.ignore_near_expected_from_above.amount #=> Float
+    #   resp.anomaly_detector.configuration.random_cut_forest.ignore_near_expected_from_above.ratio #=> Float
+    #   resp.anomaly_detector.configuration.random_cut_forest.ignore_near_expected_from_below.amount #=> Float
+    #   resp.anomaly_detector.configuration.random_cut_forest.ignore_near_expected_from_below.ratio #=> Float
+    #   resp.anomaly_detector.labels #=> Hash
+    #   resp.anomaly_detector.labels["PrometheusMetricLabelKey"] #=> String
+    #   resp.anomaly_detector.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
+    #   resp.anomaly_detector.status.status_reason #=> String
+    #   resp.anomaly_detector.created_at #=> Time
+    #   resp.anomaly_detector.modified_at #=> Time
+    #   resp.anomaly_detector.tags #=> Hash
+    #   resp.anomaly_detector.tags["TagKey"] #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * anomaly_detector_active
+    #   * anomaly_detector_deleted
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeAnomalyDetector AWS API Documentation
+    #
+    # @overload describe_anomaly_detector(params = {})
+    # @param [Hash] params ({})
+    def describe_anomaly_detector(params = {}, options = {})
+      req = build_request(:describe_anomaly_detector, params)
+      req.send_request(options)
+    end
+
     # Returns complete information about the current rules and alerting
     # logging configuration of the workspace.
     #
@@ -1490,6 +1731,10 @@ module Aws::PrometheusService
     #   resp.scraper.source.eks_configuration.security_group_ids[0] #=> String
     #   resp.scraper.source.eks_configuration.subnet_ids #=> Array
     #   resp.scraper.source.eks_configuration.subnet_ids[0] #=> String
+    #   resp.scraper.source.vpc_configuration.security_group_ids #=> Array
+    #   resp.scraper.source.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.scraper.source.vpc_configuration.subnet_ids #=> Array
+    #   resp.scraper.source.vpc_configuration.subnet_ids[0] #=> String
     #   resp.scraper.destination.amp_configuration.workspace_arn #=> String
     #   resp.scraper.role_configuration.source_role_arn #=> String
     #   resp.scraper.role_configuration.target_role_arn #=> String
@@ -1662,6 +1907,62 @@ module Aws::PrometheusService
     # @param [Hash] params ({})
     def get_default_scraper_configuration(params = {}, options = {})
       req = build_request(:get_default_scraper_configuration, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of anomaly detectors for a workspace with
+    # optional filtering by alias.
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace containing the anomaly detectors to
+    #   list.
+    #
+    # @option params [String] :alias
+    #   Filters the results to anomaly detectors with the specified alias.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Valid range
+    #   is 1 to 1000.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to continue retrieving results.
+    #
+    # @return [Types::ListAnomalyDetectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAnomalyDetectorsResponse#anomaly_detectors #anomaly_detectors} => Array&lt;Types::AnomalyDetectorSummary&gt;
+    #   * {Types::ListAnomalyDetectorsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_anomaly_detectors({
+    #     workspace_id: "WorkspaceId", # required
+    #     alias: "AnomalyDetectorAlias",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.anomaly_detectors #=> Array
+    #   resp.anomaly_detectors[0].arn #=> String
+    #   resp.anomaly_detectors[0].anomaly_detector_id #=> String
+    #   resp.anomaly_detectors[0].alias #=> String
+    #   resp.anomaly_detectors[0].status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
+    #   resp.anomaly_detectors[0].status.status_reason #=> String
+    #   resp.anomaly_detectors[0].created_at #=> Time
+    #   resp.anomaly_detectors[0].modified_at #=> Time
+    #   resp.anomaly_detectors[0].tags #=> Hash
+    #   resp.anomaly_detectors[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListAnomalyDetectors AWS API Documentation
+    #
+    # @overload list_anomaly_detectors(params = {})
+    # @param [Hash] params ({})
+    def list_anomaly_detectors(params = {}, options = {})
+      req = build_request(:list_anomaly_detectors, params)
       req.send_request(options)
     end
 
@@ -1920,6 +2221,10 @@ module Aws::PrometheusService
     #   resp.scrapers[0].source.eks_configuration.security_group_ids[0] #=> String
     #   resp.scrapers[0].source.eks_configuration.subnet_ids #=> Array
     #   resp.scrapers[0].source.eks_configuration.subnet_ids[0] #=> String
+    #   resp.scrapers[0].source.vpc_configuration.security_group_ids #=> Array
+    #   resp.scrapers[0].source.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.scrapers[0].source.vpc_configuration.subnet_ids #=> Array
+    #   resp.scrapers[0].source.vpc_configuration.subnet_ids[0] #=> String
     #   resp.scrapers[0].destination.amp_configuration.workspace_arn #=> String
     #   resp.scrapers[0].role_configuration.source_role_arn #=> String
     #   resp.scrapers[0].role_configuration.target_role_arn #=> String
@@ -2080,6 +2385,100 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
+    # When you call `PutAnomalyDetector`, the operation creates a new
+    # anomaly detector if one doesn't exist, or updates an existing one.
+    # Each call to this operation triggers a complete retraining of the
+    # detector, which includes querying the minimum required samples and
+    # backfilling the detector with historical data. This process occurs
+    # regardless of whether you're making a minor change like updating the
+    # evaluation interval or making more substantial modifications. The
+    # operation serves as the single method for creating, updating, and
+    # retraining anomaly detectors.
+    #
+    # @option params [required, String] :workspace_id
+    #   The identifier of the workspace containing the anomaly detector to
+    #   update.
+    #
+    # @option params [required, String] :anomaly_detector_id
+    #   The identifier of the anomaly detector to update.
+    #
+    # @option params [Integer] :evaluation_interval_in_seconds
+    #   The frequency, in seconds, at which the anomaly detector evaluates
+    #   metrics.
+    #
+    # @option params [Types::AnomalyDetectorMissingDataAction] :missing_data_action
+    #   Specifies the action to take when data is missing during evaluation.
+    #
+    # @option params [required, Types::AnomalyDetectorConfiguration] :configuration
+    #   The algorithm configuration for the anomaly detector.
+    #
+    # @option params [Hash<String,String>] :labels
+    #   The Amazon Managed Service for Prometheus metric labels to associate
+    #   with the anomaly detector.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::PutAnomalyDetectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAnomalyDetectorResponse#anomaly_detector_id #anomaly_detector_id} => String
+    #   * {Types::PutAnomalyDetectorResponse#arn #arn} => String
+    #   * {Types::PutAnomalyDetectorResponse#status #status} => Types::AnomalyDetectorStatus
+    #   * {Types::PutAnomalyDetectorResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_anomaly_detector({
+    #     workspace_id: "WorkspaceId", # required
+    #     anomaly_detector_id: "AnomalyDetectorId", # required
+    #     evaluation_interval_in_seconds: 1,
+    #     missing_data_action: {
+    #       mark_as_anomaly: false,
+    #       skip: false,
+    #     },
+    #     configuration: { # required
+    #       random_cut_forest: {
+    #         query: "RandomCutForestQuery", # required
+    #         shingle_size: 1,
+    #         sample_size: 1,
+    #         ignore_near_expected_from_above: {
+    #           amount: 1.0,
+    #           ratio: 1.0,
+    #         },
+    #         ignore_near_expected_from_below: {
+    #           amount: 1.0,
+    #           ratio: 1.0,
+    #         },
+    #       },
+    #     },
+    #     labels: {
+    #       "PrometheusMetricLabelKey" => "PrometheusMetricLabelValue",
+    #     },
+    #     client_token: "IdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.anomaly_detector_id #=> String
+    #   resp.arn #=> String
+    #   resp.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
+    #   resp.status.status_reason #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/PutAnomalyDetector AWS API Documentation
+    #
+    # @overload put_anomaly_detector(params = {})
+    # @param [Hash] params ({})
+    def put_anomaly_detector(params = {}, options = {})
+      req = build_request(:put_anomaly_detector, params)
+      req.send_request(options)
+    end
+
     # Creates or updates a resource-based policy for an Amazon Managed
     # Service for Prometheus workspace. Use resource-based policies to grant
     # permissions to other AWS accounts or services to access your
@@ -2164,6 +2563,9 @@ module Aws::PrometheusService
     # Updates an existing rule groups namespace within a workspace. A rule
     # groups namespace is associated with exactly one rules file. A
     # workspace can have multiple rule groups namespaces.
+    #
+    # The combined length of a rule group namespace and a rule group name
+    # cannot exceed 721 UTF-8 bytes.
     #
     # Use this operation only to update existing rule groups namespaces. To
     # create a new rule groups namespace, use `CreateRuleGroupsNamespace`.
@@ -2681,7 +3083,7 @@ module Aws::PrometheusService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-prometheusservice'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -2747,12 +3149,14 @@ module Aws::PrometheusService
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name       | params                      | :delay   | :max_attempts |
-    # | ----------------- | --------------------------- | -------- | ------------- |
-    # | scraper_active    | {Client#describe_scraper}   | 2        | 60            |
-    # | scraper_deleted   | {Client#describe_scraper}   | 2        | 60            |
-    # | workspace_active  | {Client#describe_workspace} | 2        | 60            |
-    # | workspace_deleted | {Client#describe_workspace} | 2        | 60            |
+    # | waiter_name              | params                             | :delay   | :max_attempts |
+    # | ------------------------ | ---------------------------------- | -------- | ------------- |
+    # | anomaly_detector_active  | {Client#describe_anomaly_detector} | 2        | 60            |
+    # | anomaly_detector_deleted | {Client#describe_anomaly_detector} | 2        | 60            |
+    # | scraper_active           | {Client#describe_scraper}          | 2        | 60            |
+    # | scraper_deleted          | {Client#describe_scraper}          | 2        | 60            |
+    # | workspace_active         | {Client#describe_workspace}        | 2        | 60            |
+    # | workspace_deleted        | {Client#describe_workspace}        | 2        | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -2803,6 +3207,8 @@ module Aws::PrometheusService
 
     def waiters
       {
+        anomaly_detector_active: Waiters::AnomalyDetectorActive,
+        anomaly_detector_deleted: Waiters::AnomalyDetectorDeleted,
         scraper_active: Waiters::ScraperActive,
         scraper_deleted: Waiters::ScraperDeleted,
         workspace_active: Waiters::WorkspaceActive,

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.109.0 (2025-10-23)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.108.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.107.0 (2025-09-30)
+------------------
+
+* Feature - Adding TPS Traffic Shaping to Prefetch Schedules
+
 1.106.0 (2025-08-26)
 ------------------
 

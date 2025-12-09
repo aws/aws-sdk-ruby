@@ -10,6 +10,29 @@
 module Aws::S3
   module Types
 
+    # The ABAC status of the general purpose bucket. When ABAC is enabled
+    # for the general purpose bucket, you can use tags to manage access to
+    # the general purpose buckets as well as for cost tracking purposes.
+    # When ABAC is disabled for the general purpose buckets, you can only
+    # use tags for cost tracking purposes. For more information, see [Using
+    # tags with S3 general purpose buckets][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging.html
+    #
+    # @!attribute [rw] status
+    #   The ABAC status of the general purpose bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbacStatus AWS API Documentation
+    #
+    class AbacStatus < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the days since the initiation of an incomplete multipart
     # upload that Amazon S3 will wait before permanently removing all parts
     # of the upload. For more information, see [ Aborting Incomplete
@@ -355,6 +378,63 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # A bucket-level setting for Amazon S3 general purpose buckets used to
+    # prevent the upload of new objects encrypted with the specified
+    # server-side encryption type. For example, blocking an encryption type
+    # will block `PutObject`, `CopyObject`, `PostObject`, multipart upload,
+    # and replication requests to the bucket for objects with the specified
+    # encryption type. However, you can continue to read and list any
+    # pre-existing objects already encrypted with the specified encryption
+    # type. For more information, see [Blocking or unblocking SSE-C for a
+    # general purpose bucket][1].
+    #
+    # This data type is used with the following actions:
+    #
+    # * [PutBucketEncryption][2]
+    #
+    # * [GetBucketEncryption][3]
+    #
+    # * [DeleteBucketEncryption][4]
+    #
+    # Permissions
+    #
+    # : You must have the `s3:PutEncryptionConfiguration` permission to
+    #   block or unblock an encryption type for a bucket.
+    #
+    #   You must have the `s3:GetEncryptionConfiguration` permission to view
+    #   a bucket's encryption type.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/blocking-unblocking-s3-c-encryption-gpb.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketEncryption.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html
+    #
+    # @!attribute [rw] encryption_type
+    #   The object encryption type that you want to block or unblock for an
+    #   Amazon S3 general purpose bucket.
+    #
+    #   <note markdown="1"> Currently, this parameter only supports blocking or unblocking
+    #   server side encryption with customer-provided keys (SSE-C). For more
+    #   information about SSE-C, see [Using server-side encryption with
+    #   customer-provided keys (SSE-C)][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/BlockedEncryptionTypes AWS API Documentation
+    #
+    class BlockedEncryptionTypes < Struct.new(
+      :encryption_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # In terms of implementation, a Bucket is a resource.
     #
     # @!attribute [rw] name
@@ -680,7 +760,7 @@ module Aws::S3
     #
     # @!attribute [rw] checksum_crc32
     #   The Base64 encoded, 32-bit `CRC32 checksum` of the object. This
-    #   checksum is only be present if the checksum was uploaded with the
+    #   checksum is only present if the checksum was uploaded with the
     #   object. When you use an API operation on an object that was uploaded
     #   using multipart uploads, this value may not be a direct checksum
     #   value of the full object. Instead, it's a calculation based on the
@@ -722,14 +802,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_sha1
-    #   The Base64 encoded, 160-bit `SHA1` digest of the object. This will
-    #   only be present if the object was uploaded with the object. When you
-    #   use the API operation on an object that was uploaded using multipart
-    #   uploads, this value may not be a direct checksum value of the full
-    #   object. Instead, it's a calculation based on the checksum values of
-    #   each individual part. For more information about how checksums are
-    #   calculated with multipart uploads, see [ Checking object
-    #   integrity][1] in the *Amazon S3 User Guide*.
+    #   The Base64 encoded, 160-bit `SHA1` digest of the object. This
+    #   checksum is only present if the checksum was uploaded with the
+    #   object. When you use the API operation on an object that was
+    #   uploaded using multipart uploads, this value may not be a direct
+    #   checksum value of the full object. Instead, it's a calculation
+    #   based on the checksum values of each individual part. For more
+    #   information about how checksums are calculated with multipart
+    #   uploads, see [ Checking object integrity][1] in the *Amazon S3 User
+    #   Guide*.
     #
     #
     #
@@ -737,14 +818,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_sha256
-    #   The Base64 encoded, 256-bit `SHA256` digest of the object. This will
-    #   only be present if the object was uploaded with the object. When you
-    #   use an API operation on an object that was uploaded using multipart
-    #   uploads, this value may not be a direct checksum value of the full
-    #   object. Instead, it's a calculation based on the checksum values of
-    #   each individual part. For more information about how checksums are
-    #   calculated with multipart uploads, see [ Checking object
-    #   integrity][1] in the *Amazon S3 User Guide*.
+    #   The Base64 encoded, 256-bit `SHA256` digest of the object. This
+    #   checksum is only present if the checksum was uploaded with the
+    #   object. When you use an API operation on an object that was uploaded
+    #   using multipart uploads, this value may not be a direct checksum
+    #   value of the full object. Instead, it's a calculation based on the
+    #   checksum values of each individual part. For more information about
+    #   how checksums are calculated with multipart uploads, see [ Checking
+    #   object integrity][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -874,7 +955,7 @@ module Aws::S3
     #
     # @!attribute [rw] checksum_crc32
     #   The Base64 encoded, 32-bit `CRC32 checksum` of the object. This
-    #   checksum is only be present if the checksum was uploaded with the
+    #   checksum is only present if the checksum was uploaded with the
     #   object. When you use an API operation on an object that was uploaded
     #   using multipart uploads, this value may not be a direct checksum
     #   value of the full object. Instead, it's a calculation based on the
@@ -916,14 +997,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_sha1
-    #   The Base64 encoded, 160-bit `SHA1` digest of the object. This will
-    #   only be present if the object was uploaded with the object. When you
-    #   use the API operation on an object that was uploaded using multipart
-    #   uploads, this value may not be a direct checksum value of the full
-    #   object. Instead, it's a calculation based on the checksum values of
-    #   each individual part. For more information about how checksums are
-    #   calculated with multipart uploads, see [ Checking object
-    #   integrity][1] in the *Amazon S3 User Guide*.
+    #   The Base64 encoded, 160-bit `SHA1` digest of the object. This
+    #   checksum is only present if the checksum was uploaded with the
+    #   object. When you use the API operation on an object that was
+    #   uploaded using multipart uploads, this value may not be a direct
+    #   checksum value of the full object. Instead, it's a calculation
+    #   based on the checksum values of each individual part. For more
+    #   information about how checksums are calculated with multipart
+    #   uploads, see [ Checking object integrity][1] in the *Amazon S3 User
+    #   Guide*.
     #
     #
     #
@@ -931,14 +1013,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_sha256
-    #   The Base64 encoded, 256-bit `SHA256` digest of the object. This will
-    #   only be present if the object was uploaded with the object. When you
-    #   use an API operation on an object that was uploaded using multipart
-    #   uploads, this value may not be a direct checksum value of the full
-    #   object. Instead, it's a calculation based on the checksum values of
-    #   each individual part. For more information about how checksums are
-    #   calculated with multipart uploads, see [ Checking object
-    #   integrity][1] in the *Amazon S3 User Guide*.
+    #   The Base64 encoded, 256-bit `SHA256` digest of the object. This
+    #   checksum is only present if the checksum was uploaded with the
+    #   object. When you use an API operation on an object that was uploaded
+    #   using multipart uploads, this value may not be a direct checksum
+    #   value of the full object. Instead, it's a calculation based on the
+    #   checksum values of each individual part. For more information about
+    #   how checksums are calculated with multipart uploads, see [ Checking
+    #   object integrity][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -1915,6 +1997,40 @@ module Aws::S3
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] if_match
+    #   Copies the object if the entity tag (ETag) of the destination object
+    #   matches the specified tag. If the ETag values do not match, the
+    #   operation returns a `412 Precondition Failed` error. If a concurrent
+    #   operation occurs during the upload S3 returns a `409
+    #   ConditionalRequestConflict` response. On a 409 failure you should
+    #   fetch the object's ETag and retry the upload.
+    #
+    #   Expects the ETag value as a string.
+    #
+    #   For more information about conditional requests, see [RFC 7232][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc7232
+    #   @return [String]
+    #
+    # @!attribute [rw] if_none_match
+    #   Copies the object only if the object key name at the destination
+    #   does not already exist in the bucket specified. Otherwise, Amazon S3
+    #   returns a `412 Precondition Failed` error. If a concurrent operation
+    #   occurs during the upload S3 returns a `409
+    #   ConditionalRequestConflict` response. On a 409 failure you should
+    #   retry the upload.
+    #
+    #   Expects the '*' (asterisk) character.
+    #
+    #   For more information about conditional requests, see [RFC 7232][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc7232
+    #   @return [String]
+    #
     # @!attribute [rw] key
     #   The key of the destination object.
     #   @return [String]
@@ -2441,6 +2557,8 @@ module Aws::S3
       :grant_read,
       :grant_read_acp,
       :grant_write_acp,
+      :if_match,
+      :if_none_match,
       :key,
       :metadata,
       :metadata_directive,
@@ -2502,9 +2620,9 @@ module Aws::S3
     #
     # @!attribute [rw] checksum_crc32c
     #   The Base64 encoded, 32-bit `CRC32C` checksum of the object. This
-    #   will only be present if the object was uploaded with the object. For
-    #   more information, see [ Checking object integrity][1] in the *Amazon
-    #   S3 User Guide*.
+    #   checksum is only present if the checksum was uploaded with the
+    #   object. For more information, see [ Checking object integrity][1] in
+    #   the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2525,10 +2643,10 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_sha1
-    #   The Base64 encoded, 160-bit `SHA1` digest of the object. This will
-    #   only be present if the object was uploaded with the object. For more
-    #   information, see [ Checking object integrity][1] in the *Amazon S3
-    #   User Guide*.
+    #   The Base64 encoded, 160-bit `SHA1` digest of the object. This
+    #   checksum is only present if the checksum was uploaded with the
+    #   object. For more information, see [ Checking object integrity][1] in
+    #   the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2536,10 +2654,10 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_sha256
-    #   The Base64 encoded, 256-bit `SHA256` digest of the object. This will
-    #   only be present if the object was uploaded with the object. For more
-    #   information, see [ Checking object integrity][1] in the *Amazon S3
-    #   User Guide*.
+    #   The Base64 encoded, 256-bit `SHA256` digest of the object. This
+    #   checksum is only present if the checksum was uploaded with the
+    #   object. For more information, see [ Checking object integrity][1] in
+    #   the *Amazon S3 User Guide*.
     #
     #
     #
@@ -2702,14 +2820,18 @@ module Aws::S3
     #   creating. Tags are key-value pairs of metadata used to categorize
     #   and organize your buckets, track costs, and control access.
     #
-    #   <note markdown="1"> This parameter is only supported for S3 directory buckets. For more
-    #   information, see [Using tags with directory buckets][1].
+    #   You must have the `s3:TagResource` permission to create a general
+    #   purpose bucket with tags or the `s3express:TagResource` permission
+    #   to create a directory bucket with tags.
     #
-    #    </note>
+    #   When creating buckets with tags, note that tag-based conditions
+    #   using `aws:ResourceTag` and `s3:BucketTag` condition keys are
+    #   applicable only after ABAC is enabled on the bucket. To learn more,
+    #   see [Enabling ABAC in general purpose buckets][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketConfiguration AWS API Documentation
@@ -4659,17 +4781,16 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] if_match
-    #   The `If-Match` header field makes the request method conditional on
-    #   ETags. If the ETag value does not match, the operation returns a
-    #   `412 Precondition Failed` error. If the ETag matches or if the
-    #   object doesn't exist, the operation will return a `204 Success (No
-    #   Content) response`.
+    #   Deletes the object if the ETag (entity tag) value provided during
+    #   the delete operation matches the ETag of the object in S3. If the
+    #   ETag values do not match, the operation returns a `412 Precondition
+    #   Failed` error.
+    #
+    #   Expects the ETag value as a string. `If-Match` does accept a string
+    #   value of an '*' (asterisk) character to denote a match of any
+    #   ETag.
     #
     #   For more information about conditional requests, see [RFC 7232][1].
-    #
-    #   <note markdown="1"> This functionality is only supported for directory buckets.
-    #
-    #    </note>
     #
     #
     #
@@ -6325,6 +6446,36 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @!attribute [rw] abac_status
+    #   The ABAC status of the general purpose bucket.
+    #   @return [Types::AbacStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAbacOutput AWS API Documentation
+    #
+    class GetBucketAbacOutput < Struct.new(
+      :abac_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bucket
+    #   The name of the general purpose bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_bucket_owner
+    #   The Amazon Web Services account ID of the general purpose bucket's
+    #   owner.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAbacRequest AWS API Documentation
+    #
+    class GetBucketAbacRequest < Struct.new(
+      :bucket,
+      :expected_bucket_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] status
     #   The accelerate configuration of the bucket.
     #   @return [String]
@@ -6394,7 +6545,7 @@ module Aws::S3
     end
 
     # @!attribute [rw] owner
-    #   Container for the bucket owner's display name and ID.
+    #   Container for the bucket owner's ID.
     #   @return [Types::Owner]
     #
     # @!attribute [rw] grants
@@ -7369,7 +7520,7 @@ module Aws::S3
     end
 
     # @!attribute [rw] owner
-    #   Container for the bucket owner's display name and ID.
+    #   Container for the bucket owner's ID.
     #   @return [Types::Owner]
     #
     # @!attribute [rw] grants
@@ -8003,9 +8154,9 @@ module Aws::S3
     #
     # @!attribute [rw] checksum_crc32c
     #   The Base64 encoded, 32-bit `CRC32C` checksum of the object. This
-    #   will only be present if the object was uploaded with the object. For
-    #   more information, see [ Checking object integrity][1] in the *Amazon
-    #   S3 User Guide*.
+    #   checksum is only present if the checksum was uploaded with the
+    #   object. For more information, see [ Checking object integrity][1] in
+    #   the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8023,10 +8174,10 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_sha1
-    #   The Base64 encoded, 160-bit `SHA1` digest of the object. This will
-    #   only be present if the object was uploaded with the object. For more
-    #   information, see [ Checking object integrity][1] in the *Amazon S3
-    #   User Guide*.
+    #   The Base64 encoded, 160-bit `SHA1` digest of the object. This
+    #   checksum is only present if the checksum was uploaded with the
+    #   object. For more information, see [ Checking object integrity][1] in
+    #   the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8034,10 +8185,10 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_sha256
-    #   The Base64 encoded, 256-bit `SHA256` digest of the object. This will
-    #   only be present if the object was uploaded with the object. For more
-    #   information, see [ Checking object integrity][1] in the *Amazon S3
-    #   User Guide*.
+    #   The Base64 encoded, 256-bit `SHA256` digest of the object. This
+    #   checksum is only present if the checksum was uploaded with the
+    #   object. For more information, see [ Checking object integrity][1] in
+    #   the *Amazon S3 User Guide*.
     #
     #
     #
@@ -8968,40 +9119,9 @@ module Aws::S3
     # Container for the person being granted permissions.
     #
     # @!attribute [rw] display_name
-    #   Screen name of the grantee.
     #   @return [String]
     #
     # @!attribute [rw] email_address
-    #   Email address of the grantee.
-    #
-    #   <note markdown="1"> Using email addresses to specify a grantee is only supported in the
-    #   following Amazon Web Services Regions:
-    #
-    #    * US East (N. Virginia)
-    #
-    #   * US West (N. California)
-    #
-    #   * US West (Oregon)
-    #
-    #   * Asia Pacific (Singapore)
-    #
-    #   * Asia Pacific (Sydney)
-    #
-    #   * Asia Pacific (Tokyo)
-    #
-    #   * Europe (Ireland)
-    #
-    #   * South America (São Paulo)
-    #
-    #    For a list of all the Amazon S3 supported Regions and endpoints, see
-    #   [Regions and Endpoints][1] in the Amazon Web Services General
-    #   Reference.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -9240,7 +9360,7 @@ module Aws::S3
     #
     # @!attribute [rw] checksum_crc32
     #   The Base64 encoded, 32-bit `CRC32 checksum` of the object. This
-    #   checksum is only be present if the checksum was uploaded with the
+    #   checksum is only present if the checksum was uploaded with the
     #   object. When you use an API operation on an object that was uploaded
     #   using multipart uploads, this value may not be a direct checksum
     #   value of the full object. Instead, it's a calculation based on the
@@ -9279,14 +9399,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_sha1
-    #   The Base64 encoded, 160-bit `SHA1` digest of the object. This will
-    #   only be present if the object was uploaded with the object. When you
-    #   use the API operation on an object that was uploaded using multipart
-    #   uploads, this value may not be a direct checksum value of the full
-    #   object. Instead, it's a calculation based on the checksum values of
-    #   each individual part. For more information about how checksums are
-    #   calculated with multipart uploads, see [ Checking object
-    #   integrity][1] in the *Amazon S3 User Guide*.
+    #   The Base64 encoded, 160-bit `SHA1` digest of the object. This
+    #   checksum is only present if the checksum was uploaded with the
+    #   object. When you use the API operation on an object that was
+    #   uploaded using multipart uploads, this value may not be a direct
+    #   checksum value of the full object. Instead, it's a calculation
+    #   based on the checksum values of each individual part. For more
+    #   information about how checksums are calculated with multipart
+    #   uploads, see [ Checking object integrity][1] in the *Amazon S3 User
+    #   Guide*.
     #
     #
     #
@@ -9294,14 +9415,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_sha256
-    #   The Base64 encoded, 256-bit `SHA256` digest of the object. This will
-    #   only be present if the object was uploaded with the object. When you
-    #   use an API operation on an object that was uploaded using multipart
-    #   uploads, this value may not be a direct checksum value of the full
-    #   object. Instead, it's a calculation based on the checksum values of
-    #   each individual part. For more information about how checksums are
-    #   calculated with multipart uploads, see [ Checking object
-    #   integrity][1] in the *Amazon S3 User Guide*.
+    #   The Base64 encoded, 256-bit `SHA256` digest of the object. This
+    #   checksum is only present if the checksum was uploaded with the
+    #   object. When you use an API operation on an object that was uploaded
+    #   using multipart uploads, this value may not be a direct checksum
+    #   value of the full object. Instead, it's a calculation based on the
+    #   checksum values of each individual part. For more information about
+    #   how checksums are calculated with multipart uploads, see [ Checking
+    #   object integrity][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -9973,8 +10094,6 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   Name of the Principal.
-    #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
@@ -10700,8 +10819,10 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] prefix
-    #   Prefix identifying one or more objects to which the rule applies.
-    #   This is no longer used; use `Filter` instead.
+    #   The general purpose bucket prefix that identifies one or more
+    #   objects to which the rule applies. We recommend using `Filter`
+    #   instead of `Prefix` for new PUTs. Previous configurations where a
+    #   prefix is defined will continue to operate as before.
     #
     #   Replacement must be made for object keys containing special
     #   characters (such as carriage returns) when using XML requests. For
@@ -12494,14 +12615,13 @@ module Aws::S3
     #   Container element that identifies who initiated the multipart
     #   upload. If the initiator is an Amazon Web Services account, this
     #   element provides the same information as the `Owner` element. If the
-    #   initiator is an IAM User, this element provides the user ARN and
-    #   display name.
+    #   initiator is an IAM User, this element provides the user ARN.
     #   @return [Types::Initiator]
     #
     # @!attribute [rw] owner
     #   Container element that identifies the object owner, after the object
     #   is created. If multipart upload is initiated by an IAM user, this
-    #   element provides the parent account ID and display name.
+    #   element provides the parent account ID.
     #
     #   <note markdown="1"> **Directory buckets** - The bucket owner is returned as the object
     #   owner for all the parts.
@@ -13817,44 +13937,9 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # End of support notice: Beginning October 1, 2025, Amazon S3 will stop
-    # returning `DisplayName`. Update your applications to use canonical IDs
-    # (unique identifier for Amazon Web Services accounts), Amazon Web
-    # Services account ID (12 digit identifier) or IAM ARNs (full resource
-    # naming) as a direct replacement of `DisplayName`.
-    #
-    #  This change affects the following Amazon Web Services Regions: US
-    # East
-    # (N. Virginia) Region, US West (N. California) Region, US West (Oregon)
-    # Region, Asia Pacific (Singapore) Region, Asia Pacific (Sydney) Region,
-    # Asia Pacific (Tokyo) Region, Europe (Ireland) Region, and South
-    # America (São Paulo) Region.
-    #
     # Container for the owner's display name and ID.
     #
     # @!attribute [rw] display_name
-    #   Container for the display name of the owner. This value is only
-    #   supported in the following Amazon Web Services Regions:
-    #
-    #   * US East (N. Virginia)
-    #
-    #   * US West (N. California)
-    #
-    #   * US West (Oregon)
-    #
-    #   * Asia Pacific (Singapore)
-    #
-    #   * Asia Pacific (Sydney)
-    #
-    #   * Asia Pacific (Tokyo)
-    #
-    #   * Europe (Ireland)
-    #
-    #   * South America (São Paulo)
-    #
-    #   <note markdown="1"> This functionality is not supported for directory buckets.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -14117,9 +14202,11 @@ module Aws::S3
 
     # The PublicAccessBlock configuration that you want to apply to this
     # Amazon S3 bucket. You can enable the configuration options in any
-    # combination. For more information about when Amazon S3 considers a
-    # bucket or object public, see [The Meaning of "Public"][1] in the
-    # *Amazon S3 User Guide*.
+    # combination. Bucket-level settings work alongside account-level
+    # settings (which may inherit from organization-level policies). For
+    # more information about when Amazon S3 considers a bucket or object
+    # public, see [The Meaning of "Public"][1] in the *Amazon S3 User
+    # Guide*.
     #
     #
     #
@@ -14179,6 +14266,58 @@ module Aws::S3
       :ignore_public_acls,
       :block_public_policy,
       :restrict_public_buckets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bucket
+    #   The name of the general purpose bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_md5
+    #   The MD5 hash of the `PutBucketAbac` request body.
+    #
+    #   For requests made using the Amazon Web Services Command Line
+    #   Interface (CLI) or Amazon Web Services SDKs, this field is
+    #   calculated automatically.
+    #   @return [String]
+    #
+    # @!attribute [rw] checksum_algorithm
+    #   Indicates the algorithm that you want Amazon S3 to use to create the
+    #   checksum. For more information, see [ Checking object integrity][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_bucket_owner
+    #   The Amazon Web Services account ID of the general purpose bucket's
+    #   owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] abac_status
+    #   The ABAC status of the general purpose bucket. When ABAC is enabled
+    #   for the general purpose bucket, you can use tags to manage access to
+    #   the general purpose buckets as well as for cost tracking purposes.
+    #   When ABAC is disabled for the general purpose buckets, you can only
+    #   use tags for cost tracking purposes. For more information, see
+    #   [Using tags with S3 general purpose buckets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging.html
+    #   @return [Types::AbacStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAbacRequest AWS API Documentation
+    #
+    class PutBucketAbacRequest < Struct.new(
+      :bucket,
+      :content_md5,
+      :checksum_algorithm,
+      :expected_bucket_owner,
+      :abac_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15273,7 +15412,17 @@ module Aws::S3
     # @!attribute [rw] mfa
     #   The concatenation of the authentication device's serial number, a
     #   space, and the value that is displayed on your authentication
-    #   device.
+    #   device. The serial number is the number that uniquely identifies the
+    #   MFA device. For physical MFA devices, this is the unique serial
+    #   number that's provided with the device. For virtual MFA devices,
+    #   the serial number is the device ARN. For more information, see
+    #   [Enabling versioning on buckets][1] and [Configuring MFA delete][2]
+    #   in the *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/manage-versioning-examples.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiFactorAuthenticationDelete.html
     #   @return [String]
     #
     # @!attribute [rw] versioning_configuration
@@ -15809,7 +15958,7 @@ module Aws::S3
     #
     # @!attribute [rw] checksum_crc32
     #   The Base64 encoded, 32-bit `CRC32 checksum` of the object. This
-    #   checksum is only be present if the checksum was uploaded with the
+    #   checksum is only present if the checksum was uploaded with the
     #   object. When you use an API operation on an object that was uploaded
     #   using multipart uploads, this value may not be a direct checksum
     #   value of the full object. Instead, it's a calculation based on the
@@ -15852,14 +16001,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_sha1
-    #   The Base64 encoded, 160-bit `SHA1` digest of the object. This will
-    #   only be present if the object was uploaded with the object. When you
-    #   use the API operation on an object that was uploaded using multipart
-    #   uploads, this value may not be a direct checksum value of the full
-    #   object. Instead, it's a calculation based on the checksum values of
-    #   each individual part. For more information about how checksums are
-    #   calculated with multipart uploads, see [ Checking object
-    #   integrity][1] in the *Amazon S3 User Guide*.
+    #   The Base64 encoded, 160-bit `SHA1` digest of the object. This
+    #   checksum is only present if the checksum was uploaded with the
+    #   object. When you use the API operation on an object that was
+    #   uploaded using multipart uploads, this value may not be a direct
+    #   checksum value of the full object. Instead, it's a calculation
+    #   based on the checksum values of each individual part. For more
+    #   information about how checksums are calculated with multipart
+    #   uploads, see [ Checking object integrity][1] in the *Amazon S3 User
+    #   Guide*.
     #
     #
     #
@@ -15867,14 +16017,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_sha256
-    #   The Base64 encoded, 256-bit `SHA256` digest of the object. This will
-    #   only be present if the object was uploaded with the object. When you
-    #   use an API operation on an object that was uploaded using multipart
-    #   uploads, this value may not be a direct checksum value of the full
-    #   object. Instead, it's a calculation based on the checksum values of
-    #   each individual part. For more information about how checksums are
-    #   calculated with multipart uploads, see [ Checking object
-    #   integrity][1] in the *Amazon S3 User Guide*.
+    #   The Base64 encoded, 256-bit `SHA256` digest of the object. This
+    #   checksum is only present if the checksum was uploaded with the
+    #   object. When you use an API operation on an object that was uploaded
+    #   using multipart uploads, this value may not be a direct checksum
+    #   value of the full object. Instead, it's a calculation based on the
+    #   checksum values of each individual part. For more information about
+    #   how checksums are calculated with multipart uploads, see [ Checking
+    #   object integrity][1] in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -16990,21 +17140,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that they will be charged for the
-    #   request. Bucket owners need not specify this parameter in their
-    #   requests. If either the source or destination S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading
-    #   objects from Requester Pays buckets, see [Downloading Objects in
-    #   Requester Pays Buckets][1] in the *Amazon S3 User Guide*.
-    #
-    #   <note markdown="1"> This functionality is not supported for directory buckets.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   Confirms that the requester knows that she or he will be charged for
+    #   the tagging object request. Bucket owners need not specify this
+    #   parameter in their requests.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectTaggingRequest AWS API Documentation
@@ -18690,11 +18828,36 @@ module Aws::S3
     #   [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-import-job
     #   @return [Boolean]
     #
+    # @!attribute [rw] blocked_encryption_types
+    #   A bucket-level setting for Amazon S3 general purpose buckets used to
+    #   prevent the upload of new objects encrypted with the specified
+    #   server-side encryption type. For example, blocking an encryption
+    #   type will block `PutObject`, `CopyObject`, `PostObject`, multipart
+    #   upload, and replication requests to the bucket for objects with the
+    #   specified encryption type. However, you can continue to read and
+    #   list any pre-existing objects already encrypted with the specified
+    #   encryption type. For more information, see [Blocking or unblocking
+    #   SSE-C for a general purpose bucket][1].
+    #
+    #   <note markdown="1"> Currently, this parameter only supports blocking or unblocking
+    #   server-side encryption with customer-provided keys (SSE-C). For more
+    #   information about SSE-C, see [Using server-side encryption with
+    #   customer-provided keys (SSE-C)][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/blocking-unblocking-s3-c-encryption-gpb.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html
+    #   @return [Types::BlockedEncryptionTypes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ServerSideEncryptionRule AWS API Documentation
     #
     class ServerSideEncryptionRule < Struct.new(
       :apply_server_side_encryption_by_default,
-      :bucket_key_enabled)
+      :bucket_key_enabled,
+      :blocked_encryption_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19648,7 +19811,7 @@ module Aws::S3
     #
     # @!attribute [rw] checksum_crc32
     #   The Base64 encoded, 32-bit `CRC32 checksum` of the object. This
-    #   checksum is only be present if the checksum was uploaded with the
+    #   checksum is only present if the checksum was uploaded with the
     #   object. When you use an API operation on an object that was uploaded
     #   using multipart uploads, this value may not be a direct checksum
     #   value of the full object. Instead, it's a calculation based on the
@@ -19689,14 +19852,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_sha1
-    #   The Base64 encoded, 160-bit `SHA1` digest of the object. This will
-    #   only be present if the object was uploaded with the object. When you
-    #   use the API operation on an object that was uploaded using multipart
-    #   uploads, this value may not be a direct checksum value of the full
-    #   object. Instead, it's a calculation based on the checksum values of
-    #   each individual part. For more information about how checksums are
-    #   calculated with multipart uploads, see [ Checking object
-    #   integrity][1] in the *Amazon S3 User Guide*.
+    #   The Base64 encoded, 160-bit `SHA1` digest of the object. This
+    #   checksum is only present if the checksum was uploaded with the
+    #   object. When you use the API operation on an object that was
+    #   uploaded using multipart uploads, this value may not be a direct
+    #   checksum value of the full object. Instead, it's a calculation
+    #   based on the checksum values of each individual part. For more
+    #   information about how checksums are calculated with multipart
+    #   uploads, see [ Checking object integrity][1] in the *Amazon S3 User
+    #   Guide*.
     #
     #
     #
@@ -19704,14 +19868,14 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] checksum_sha256
-    #   The Base64 encoded, 256-bit `SHA256` digest of the object. This will
-    #   only be present if the object was uploaded with the object. When you
-    #   use an API operation on an object that was uploaded using multipart
-    #   uploads, this value may not be a direct checksum value of the full
-    #   object. Instead, it's a calculation based on the checksum values of
-    #   each individual part. For more information about how checksums are
-    #   calculated with multipart uploads, see [ Checking object
-    #   integrity][1] in the *Amazon S3 User Guide*.
+    #   The Base64 encoded, 256-bit `SHA256` digest of the object. This
+    #   checksum is only present if the checksum was uploaded with the
+    #   object. When you use an API operation on an object that was uploaded
+    #   using multipart uploads, this value may not be a direct checksum
+    #   value of the full object. Instead, it's a calculation based on the
+    #   checksum values of each individual part. For more information about
+    #   how checksums are calculated with multipart uploads, see [ Checking
+    #   object integrity][1] in the *Amazon S3 User Guide*.
     #
     #
     #

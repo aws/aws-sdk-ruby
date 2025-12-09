@@ -384,8 +384,8 @@ module Aws
                                  }?
                                },
                                ?pin_data_length: ::Integer,
-                               primary_account_number: ::String,
-                               pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_3" | "ISO_FORMAT_4"),
+                               ?primary_account_number: ::String,
+                               pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_1" | "ISO_FORMAT_3" | "ISO_FORMAT_4"),
                                ?encryption_wrapped_key: {
                                  wrapped_key_material: {
                                    tr_31_key_block: ::String?,
@@ -472,6 +472,35 @@ module Aws
                              }
                            ) -> _ReEncryptDataResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReEncryptDataResponseSuccess
+
+      interface _TranslateKeyMaterialResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TranslateKeyMaterialOutput]
+        def wrapped_key: () -> Types::WrappedWorkingKey
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptographyData/Client.html#translate_key_material-instance_method
+      def translate_key_material: (
+                                    incoming_key_material: {
+                                      diffie_hellman_tr_31_key_block: {
+                                        private_key_identifier: ::String,
+                                        certificate_authority_public_key_identifier: ::String,
+                                        public_key_certificate: ::String,
+                                        derive_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
+                                        key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
+                                        key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
+                                        derivation_data: {
+                                          shared_information: ::String?
+                                        },
+                                        wrapped_key_block: ::String
+                                      }?
+                                    },
+                                    outgoing_key_material: {
+                                      tr_31_key_block: {
+                                        wrapping_key_identifier: ::String
+                                      }?
+                                    },
+                                    ?key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")
+                                  ) -> _TranslateKeyMaterialResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TranslateKeyMaterialResponseSuccess
 
       interface _TranslatePinDataResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TranslatePinDataOutput]
@@ -718,8 +747,8 @@ module Aws
                                }?
                              },
                              encrypted_pin_block: ::String,
-                             primary_account_number: ::String,
-                             pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_3" | "ISO_FORMAT_4"),
+                             ?primary_account_number: ::String,
+                             pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_1" | "ISO_FORMAT_3" | "ISO_FORMAT_4"),
                              ?pin_data_length: ::Integer,
                              ?dukpt_attributes: {
                                key_serial_number: ::String,

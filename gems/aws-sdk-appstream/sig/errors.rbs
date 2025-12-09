@@ -14,6 +14,9 @@ module Aws
       class ConcurrentModificationException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class DryRunOperationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class EntitlementAlreadyExistsException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

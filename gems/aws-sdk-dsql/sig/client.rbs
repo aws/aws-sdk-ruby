@@ -87,6 +87,7 @@ module Aws
         def multi_region_properties: () -> Types::MultiRegionProperties
         def encryption_details: () -> Types::EncryptionDetails
         def deletion_protection_enabled: () -> bool
+        def endpoint: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#create_cluster-instance_method
       def create_cluster: (
@@ -97,7 +98,9 @@ module Aws
                             ?multi_region_properties: {
                               witness_region: ::String?,
                               clusters: Array[::String]?
-                            }
+                            },
+                            ?policy: ::String,
+                            ?bypass_policy_lockout_safety_check: bool
                           ) -> _CreateClusterResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
 
@@ -115,6 +118,18 @@ module Aws
                           ) -> _DeleteClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterResponseSuccess
 
+      interface _DeleteClusterPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterPolicyOutput]
+        def policy_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#delete_cluster_policy-instance_method
+      def delete_cluster_policy: (
+                                   identifier: ::String,
+                                   ?expected_policy_version: ::String,
+                                   ?client_token: ::String
+                                 ) -> _DeleteClusterPolicyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterPolicyResponseSuccess
+
       interface _GetClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetClusterOutput]
         def identifier: () -> ::String
@@ -125,6 +140,7 @@ module Aws
         def multi_region_properties: () -> Types::MultiRegionProperties
         def tags: () -> ::Hash[::String, ::String]
         def encryption_details: () -> Types::EncryptionDetails
+        def endpoint: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#get_cluster-instance_method
       def get_cluster: (
@@ -132,9 +148,21 @@ module Aws
                        ) -> _GetClusterResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClusterResponseSuccess
 
+      interface _GetClusterPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetClusterPolicyOutput]
+        def policy: () -> ::String
+        def policy_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#get_cluster_policy-instance_method
+      def get_cluster_policy: (
+                                identifier: ::String
+                              ) -> _GetClusterPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClusterPolicyResponseSuccess
+
       interface _GetVpcEndpointServiceNameResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetVpcEndpointServiceNameOutput]
         def service_name: () -> ::String
+        def cluster_vpc_endpoint: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#get_vpc_endpoint_service_name-instance_method
       def get_vpc_endpoint_service_name: (
@@ -163,6 +191,20 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutClusterPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutClusterPolicyOutput]
+        def policy_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#put_cluster_policy-instance_method
+      def put_cluster_policy: (
+                                identifier: ::String,
+                                policy: ::String,
+                                ?bypass_policy_lockout_safety_check: bool,
+                                ?expected_policy_version: ::String,
+                                ?client_token: ::String
+                              ) -> _PutClusterPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutClusterPolicyResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#tag_resource-instance_method
       def tag_resource: (

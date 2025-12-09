@@ -68,11 +68,18 @@ module Aws::BillingConductor
     #   billing family.
     #   @return [Boolean]
     #
+    # @!attribute [rw] responsibility_transfer_arn
+    #   The Amazon Resource Name (ARN) that identifies the transfer
+    #   relationship owned by the Bill Transfer account (caller account).
+    #   When specified, the PrimaryAccountId is no longer required.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/AccountGrouping AWS API Documentation
     #
     class AccountGrouping < Struct.new(
       :linked_account_ids,
-      :auto_associate)
+      :auto_associate,
+      :responsibility_transfer_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -430,6 +437,10 @@ module Aws::BillingConductor
     #   (`AutoAssociate`) enabled.
     #   @return [Types::ListBillingGroupAccountGrouping]
     #
+    # @!attribute [rw] billing_group_type
+    #   The type of billing group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/BillingGroupListElement AWS API Documentation
     #
     class BillingGroupListElement < Struct.new(
@@ -443,7 +454,8 @@ module Aws::BillingConductor
       :last_modified_time,
       :status,
       :status_reason,
-      :account_grouping)
+      :account_grouping,
+      :billing_group_type)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -518,8 +530,11 @@ module Aws::BillingConductor
     end
 
     # @!attribute [rw] client_token
-    #   The token that is needed to support idempotency. Idempotency isn't
-    #   currently supported, but will be implemented in a future update.
+    #   A unique, case-sensitive identifier that you specify to ensure
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes no more than one time. With an idempotent request, if the
+    #   original request completes successfully, any subsequent retries
+    #   complete successfully without performing any further actions.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -580,8 +595,11 @@ module Aws::BillingConductor
     end
 
     # @!attribute [rw] client_token
-    #   The token that is needed to support idempotency. Idempotency isn't
-    #   currently supported, but will be implemented in a future update.
+    #   A unique, case-sensitive identifier that you specify to ensure
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes no more than one time. With an idempotent request, if the
+    #   original request completes successfully, any subsequent retries
+    #   complete successfully without performing any further actions.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -620,6 +638,16 @@ module Aws::BillingConductor
     #   be applied to.
     #   @return [String]
     #
+    # @!attribute [rw] computation_rule
+    #   Specifies how the custom line item charges are computed.
+    #   @return [String]
+    #
+    # @!attribute [rw] presentation_details
+    #   Details controlling how the custom line item charges are presented
+    #   in the bill. Contains specifications for which service the charges
+    #   will be shown under.
+    #   @return [Types::PresentationObject]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CreateCustomLineItemInput AWS API Documentation
     #
     class CreateCustomLineItemInput < Struct.new(
@@ -630,7 +658,9 @@ module Aws::BillingConductor
       :billing_period_range,
       :tags,
       :charge_details,
-      :account_id)
+      :account_id,
+      :computation_rule,
+      :presentation_details)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -662,8 +692,11 @@ module Aws::BillingConductor
     end
 
     # @!attribute [rw] client_token
-    #   The token that is needed to support idempotency. Idempotency isn't
-    #   currently supported, but will be implemented in a future update.
+    #   A unique, case-sensitive identifier that you specify to ensure
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes no more than one time. With an idempotent request, if the
+    #   original request completes successfully, any subsequent retries
+    #   complete successfully without performing any further actions.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -713,8 +746,11 @@ module Aws::BillingConductor
     end
 
     # @!attribute [rw] client_token
-    #   The token that's needed to support idempotency. Idempotency isn't
-    #   currently supported, but will be implemented in a future update.
+    #   A unique, case-sensitive identifier that you specify to ensure
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes no more than one time. With an idempotent request, if the
+    #   original request completes successfully, any subsequent retries
+    #   complete successfully without performing any further actions.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -740,6 +776,7 @@ module Aws::BillingConductor
     #
     # @!attribute [rw] modifier_percentage
     #   A percentage modifier that's applied on the public pricing rates.
+    #   Your entry will be rounded to the nearest 2 decimal places.
     #   @return [Float]
     #
     # @!attribute [rw] service
@@ -769,7 +806,7 @@ module Aws::BillingConductor
     #   If the `Scope` attribute is set to `SKU`, this attribute indicates
     #   which usage type the `PricingRule` is modifying. For example,
     #   `USW2-BoxUsage:m2.2xlarge` describes an` M2 High Memory Double Extra
-    #   Large` instance in the US West (Oregon) Region.     </p>
+    #   Large` instance in the US West (Oregon) Region.
     #   @return [String]
     #
     # @!attribute [rw] operation
@@ -948,6 +985,16 @@ module Aws::BillingConductor
     #   be applied to.
     #   @return [String]
     #
+    # @!attribute [rw] computation_rule
+    #   The computation rule that determines how the custom line item
+    #   charges are computed and reflected in the bill.
+    #   @return [String]
+    #
+    # @!attribute [rw] presentation_details
+    #   Configuration details specifying how the custom line item charges
+    #   are presented, including which service the charges are shown under.
+    #   @return [Types::PresentationObject]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CustomLineItemListElement AWS API Documentation
     #
     class CustomLineItemListElement < Struct.new(
@@ -961,7 +1008,9 @@ module Aws::BillingConductor
       :creation_time,
       :last_modified_time,
       :association_size,
-      :account_id)
+      :account_id,
+      :computation_rule,
+      :presentation_details)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -1051,6 +1100,16 @@ module Aws::BillingConductor
     #   be applied to.
     #   @return [String]
     #
+    # @!attribute [rw] computation_rule
+    #   The computation rule for a specific version of a custom line item,
+    #   determining how charges are computed and reflected in the bill.
+    #   @return [String]
+    #
+    # @!attribute [rw] presentation_details
+    #   Presentation configuration for a specific version of a custom line
+    #   item, specifying how charges are displayed in the bill.
+    #   @return [Types::PresentationObject]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CustomLineItemVersionListElement AWS API Documentation
     #
     class CustomLineItemVersionListElement < Struct.new(
@@ -1067,7 +1126,9 @@ module Aws::BillingConductor
       :end_billing_period,
       :arn,
       :start_time,
-      :account_id)
+      :account_id,
+      :computation_rule,
+      :presentation_details)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -1287,8 +1348,8 @@ module Aws::BillingConductor
     # @!attribute [rw] group_by
     #   A list of strings that specify the attributes that are used to break
     #   down costs in the margin summary reports for the billing group. For
-    #   example, you can view your costs by the Amazon Web Service name or
-    #   the billing period.
+    #   example, you can view your costs by the Amazon Web Services service
+    #   name or the billing period.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -1350,7 +1411,8 @@ module Aws::BillingConductor
     # You can use line item filters to include or exclude specific resource
     # values from the billing group's total cost. For example, if you
     # create a custom line item and you want to filter out a value, such as
-    # Savings Plan discounts, you can update `LineItemFilter` to exclude it.
+    # Savings Plans discounts, you can update `LineItemFilter` to exclude
+    # it.
     #
     # @!attribute [rw] attribute
     #   The attribute of the line item filter. This specifies what attribute
@@ -1365,7 +1427,7 @@ module Aws::BillingConductor
     #
     # @!attribute [rw] values
     #   The values of the line item filter. This specifies the values to
-    #   filter on. Currently, you can only exclude Savings Plan discounts.
+    #   filter on. Currently, you can only exclude Savings Plans discounts.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/LineItemFilter AWS API Documentation
@@ -1476,10 +1538,16 @@ module Aws::BillingConductor
     #   billing family.
     #   @return [Boolean]
     #
+    # @!attribute [rw] responsibility_transfer_arn
+    #   The Amazon Resource Name (ARN) that identifies the transfer
+    #   relationship for the billing group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListBillingGroupAccountGrouping AWS API Documentation
     #
     class ListBillingGroupAccountGrouping < Struct.new(
-      :auto_associate)
+      :auto_associate,
+      :responsibility_transfer_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1570,13 +1638,33 @@ module Aws::BillingConductor
     #   billing family.
     #   @return [Boolean]
     #
+    # @!attribute [rw] primary_account_ids
+    #   A list of primary account IDs to filter the billing groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] billing_group_types
+    #   Filter billing groups by their type.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] names
+    #   Filter billing groups by their names.
+    #   @return [Array<Types::StringSearch>]
+    #
+    # @!attribute [rw] responsibility_transfer_arns
+    #   Filter billing groups by their responsibility transfer ARNs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListBillingGroupsFilter AWS API Documentation
     #
     class ListBillingGroupsFilter < Struct.new(
       :arns,
       :pricing_plan,
       :statuses,
-      :auto_associate)
+      :auto_associate,
+      :primary_account_ids,
+      :billing_group_types,
+      :names,
+      :responsibility_transfer_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2243,6 +2331,23 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
+    # An object that defines how custom line item charges are presented in
+    # the bill, containing specifications for service presentation.
+    #
+    # @!attribute [rw] service
+    #   The service under which the custom line item charges will be
+    #   presented. Must be a string between 1 and 128 characters matching
+    #   the pattern "`^[a-zA-Z0-9]+$`".
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/PresentationObject AWS API Documentation
+    #
+    class PresentationObject < Struct.new(
+      :service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A representation of a pricing plan.
     #
     # @!attribute [rw] name
@@ -2346,7 +2451,7 @@ module Aws::BillingConductor
     #   If the `Scope` attribute is set to `SKU`, this attribute indicates
     #   which usage type the `PricingRule` is modifying. For example,
     #   `USW2-BoxUsage:m2.2xlarge` describes an` M2 High Memory Double Extra
-    #   Large` instance in the US West (Oregon) Region.     </p>
+    #   Large` instance in the US West (Oregon) Region.
     #   @return [String]
     #
     # @!attribute [rw] operation
@@ -2437,6 +2542,25 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
+    # A structure that defines string search parameters.
+    #
+    # @!attribute [rw] search_option
+    #   The search option to be applied when performing the string search.
+    #   @return [String]
+    #
+    # @!attribute [rw] search_value
+    #   The value to search for within the specified string field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/StringSearch AWS API Documentation
+    #
+    class StringSearch < Struct.new(
+      :search_option,
+      :search_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to which to add tags.
     #   @return [String]
@@ -2520,10 +2644,17 @@ module Aws::BillingConductor
     #   billing family.
     #   @return [Boolean]
     #
+    # @!attribute [rw] responsibility_transfer_arn
+    #   The Amazon Resource Name (ARN) that identifies the transfer
+    #   relationship. Note: Modifications to the ResponsibilityTransferArn
+    #   are not permitted for existing billing groups.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdateBillingGroupAccountGrouping AWS API Documentation
     #
     class UpdateBillingGroupAccountGrouping < Struct.new(
-      :auto_associate)
+      :auto_associate,
+      :responsibility_transfer_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2858,7 +2989,8 @@ module Aws::BillingConductor
     #   @return [String]
     #
     # @!attribute [rw] modifier_percentage
-    #   The new modifier to show pricing plan rates as a percentage.
+    #   The new modifier to show pricing plan rates as a percentage. Your
+    #   entry will be rounded to the nearest 2 decimal places.
     #   @return [Float]
     #
     # @!attribute [rw] tiering
@@ -2983,7 +3115,7 @@ module Aws::BillingConductor
     end
 
     # The input doesn't match with the constraints specified by Amazon Web
-    # Services.
+    # Services services.
     #
     # @!attribute [rw] message
     #   @return [String]

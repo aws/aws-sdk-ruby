@@ -1160,7 +1160,8 @@ module Aws
       def get_buckets: (
                          ?bucket_name: ::String,
                          ?page_token: ::String,
-                         ?include_connected_resources: bool
+                         ?include_connected_resources: bool,
+                         ?include_cors: bool
                        ) -> _GetBucketsResponseSuccess
                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBucketsResponseSuccess
 
@@ -2140,6 +2141,18 @@ module Aws
                              enabled: bool,
                              destination: ::String?,
                              prefix: ::String?
+                           },
+                           ?cors: {
+                             rules: Array[
+                               {
+                                 id: ::String?,
+                                 allowed_methods: Array[::String],
+                                 allowed_origins: Array[::String],
+                                 allowed_headers: Array[::String]?,
+                                 expose_headers: Array[::String]?,
+                                 max_age_seconds: ::Integer?
+                               },
+                             ]?
                            }
                          ) -> _UpdateBucketResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBucketResponseSuccess

@@ -1355,6 +1355,7 @@ module Aws::Glue
     class CreateGlueIdentityCenterConfigurationRequest
       attr_accessor instance_arn: ::String
       attr_accessor scopes: ::Array[::String]
+      attr_accessor user_background_sessions_enabled: bool
       SENSITIVE: []
     end
 
@@ -1397,11 +1398,13 @@ module Aws::Glue
       attr_accessor resource_arn: ::String
       attr_accessor source_processing_properties: Types::SourceProcessingProperties
       attr_accessor target_processing_properties: Types::TargetProcessingProperties
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
     class CreateIntegrationResourcePropertyResponse
       attr_accessor resource_arn: ::String
+      attr_accessor resource_property_arn: ::String
       attr_accessor source_processing_properties: Types::SourceProcessingProperties
       attr_accessor target_processing_properties: Types::TargetProcessingProperties
       SENSITIVE: []
@@ -1910,6 +1913,7 @@ module Aws::Glue
       attr_accessor evaluated_metrics: ::Hash[::String, ::Float]
       attr_accessor evaluated_rule: ::String
       attr_accessor rule_metrics: ::Hash[::String, ::Float]
+      attr_accessor labels: ::Hash[::String, ::String]
       SENSITIVE: [:description, :evaluation_message, :evaluated_metrics, :evaluated_rule, :rule_metrics]
     end
 
@@ -2148,6 +2152,14 @@ module Aws::Glue
     class DeleteIntegrationRequest
       attr_accessor integration_identifier: ::String
       SENSITIVE: []
+    end
+
+    class DeleteIntegrationResourcePropertyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIntegrationResourcePropertyResponse < Aws::EmptyStructure
     end
 
     class DeleteIntegrationResponse
@@ -3223,6 +3235,7 @@ module Aws::Glue
       attr_accessor application_arn: ::String
       attr_accessor instance_arn: ::String
       attr_accessor scopes: ::Array[::String]
+      attr_accessor user_background_sessions_enabled: bool
       SENSITIVE: []
     end
 
@@ -3233,6 +3246,7 @@ module Aws::Glue
 
     class GetIntegrationResourcePropertyResponse
       attr_accessor resource_arn: ::String
+      attr_accessor resource_property_arn: ::String
       attr_accessor source_processing_properties: Types::SourceProcessingProperties
       attr_accessor target_processing_properties: Types::TargetProcessingProperties
       SENSITIVE: []
@@ -3637,6 +3651,7 @@ module Aws::Glue
       attr_accessor name: ::String
       attr_accessor transaction_id: ::String
       attr_accessor query_as_of_time: ::Time
+      attr_accessor audit_context: Types::AuditContext
       attr_accessor include_status_details: bool
       SENSITIVE: []
     end
@@ -3682,6 +3697,7 @@ module Aws::Glue
       attr_accessor max_results: ::Integer
       attr_accessor transaction_id: ::String
       attr_accessor query_as_of_time: ::Time
+      attr_accessor audit_context: Types::AuditContext
       attr_accessor include_status_details: bool
       attr_accessor attributes_to_get: ::Array[("NAME" | "TABLE_TYPE")]
       SENSITIVE: []
@@ -3788,6 +3804,7 @@ module Aws::Glue
       attr_accessor cell_filters: ::Array[Types::ColumnRowFilter]
       attr_accessor query_authorization_id: ::String
       attr_accessor is_multi_dialect_view: bool
+      attr_accessor is_materialized_view: bool
       attr_accessor resource_arn: ::String
       attr_accessor is_protected: bool
       attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS")]
@@ -3825,6 +3842,7 @@ module Aws::Glue
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
       attr_accessor pattern: ::String
+      attr_accessor function_type: ("REGULAR_FUNCTION" | "AGGREGATE_FUNCTION" | "STORED_PROCEDURE")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -3979,6 +3997,14 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class IcebergEncryptedKey
+      attr_accessor key_id: ::String
+      attr_accessor encrypted_key_metadata: ::String
+      attr_accessor encrypted_by_id: ::String
+      attr_accessor properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class IcebergInput
       attr_accessor metadata_operation: ("CREATE")
       attr_accessor version: ::String
@@ -4078,6 +4104,8 @@ module Aws::Glue
       attr_accessor type: untyped
       attr_accessor required: bool
       attr_accessor doc: ::String
+      attr_accessor initial_default: untyped
+      attr_accessor write_default: untyped
       SENSITIVE: []
     end
 
@@ -4087,6 +4115,9 @@ module Aws::Glue
       attr_accessor sort_order: Types::IcebergSortOrder
       attr_accessor location: ::String
       attr_accessor properties: ::Hash[::String, ::String]
+      attr_accessor action: ("add-schema" | "set-current-schema" | "add-spec" | "set-default-spec" | "add-sort-order" | "set-default-sort-order" | "set-location" | "set-properties" | "remove-properties" | "add-encryption-key" | "remove-encryption-key")
+      attr_accessor encryption_key: Types::IcebergEncryptedKey
+      attr_accessor key_id: ::String
       SENSITIVE: []
     end
 
@@ -4198,6 +4229,20 @@ module Aws::Glue
 
     class IntegrationQuotaExceededFault
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IntegrationResourceProperty
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_property_arn: ::String
+      attr_accessor source_processing_properties: Types::SourceProcessingProperties
+      attr_accessor target_processing_properties: Types::TargetProcessingProperties
+      SENSITIVE: []
+    end
+
+    class IntegrationResourcePropertyFilter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -4696,6 +4741,19 @@ module Aws::Glue
     class ListEntitiesResponse
       attr_accessor entities: ::Array[Types::Entity]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIntegrationResourcePropertiesRequest
+      attr_accessor marker: ::String
+      attr_accessor filters: ::Array[Types::IntegrationResourcePropertyFilter]
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIntegrationResourcePropertiesResponse
+      attr_accessor integration_resource_property_list: ::Array[Types::IntegrationResourceProperty]
+      attr_accessor marker: ::String
       SENSITIVE: []
     end
 
@@ -6508,6 +6566,7 @@ module Aws::Glue
       attr_accessor federated_table: Types::FederatedTable
       attr_accessor view_definition: Types::ViewDefinition
       attr_accessor is_multi_dialect_view: bool
+      attr_accessor is_materialized_view: bool
       attr_accessor status: Types::TableStatus
       SENSITIVE: []
     end
@@ -6985,6 +7044,7 @@ module Aws::Glue
 
     class UpdateGlueIdentityCenterConfigurationRequest
       attr_accessor scopes: ::Array[::String]
+      attr_accessor user_background_sessions_enabled: bool
       SENSITIVE: []
     end
 
@@ -7018,6 +7078,7 @@ module Aws::Glue
 
     class UpdateIntegrationResourcePropertyResponse
       attr_accessor resource_arn: ::String
+      attr_accessor resource_property_arn: ::String
       attr_accessor source_processing_properties: Types::SourceProcessingProperties
       attr_accessor target_processing_properties: Types::TargetProcessingProperties
       SENSITIVE: []
@@ -7254,6 +7315,7 @@ module Aws::Glue
       attr_accessor database_name: ::String
       attr_accessor class_name: ::String
       attr_accessor owner_name: ::String
+      attr_accessor function_type: ("REGULAR_FUNCTION" | "AGGREGATE_FUNCTION" | "STORED_PROCEDURE")
       attr_accessor owner_type: ("USER" | "ROLE" | "GROUP")
       attr_accessor create_time: ::Time
       attr_accessor resource_uris: ::Array[Types::ResourceUri]
@@ -7265,6 +7327,7 @@ module Aws::Glue
       attr_accessor function_name: ::String
       attr_accessor class_name: ::String
       attr_accessor owner_name: ::String
+      attr_accessor function_type: ("REGULAR_FUNCTION" | "AGGREGATE_FUNCTION" | "STORED_PROCEDURE")
       attr_accessor owner_type: ("USER" | "ROLE" | "GROUP")
       attr_accessor resource_uris: ::Array[Types::ResourceUri]
       SENSITIVE: []
@@ -7283,7 +7346,12 @@ module Aws::Glue
     class ViewDefinition
       attr_accessor is_protected: bool
       attr_accessor definer: ::String
+      attr_accessor view_version_id: ::Integer
+      attr_accessor view_version_token: ::String
+      attr_accessor refresh_seconds: ::Integer
+      attr_accessor last_refresh_type: ("FULL" | "INCREMENTAL")
       attr_accessor sub_objects: ::Array[::String]
+      attr_accessor sub_object_version_ids: ::Array[::Integer]
       attr_accessor representations: ::Array[Types::ViewRepresentation]
       SENSITIVE: []
     end
@@ -7292,7 +7360,12 @@ module Aws::Glue
       attr_accessor is_protected: bool
       attr_accessor definer: ::String
       attr_accessor representations: ::Array[Types::ViewRepresentationInput]
+      attr_accessor view_version_id: ::Integer
+      attr_accessor view_version_token: ::String
+      attr_accessor refresh_seconds: ::Integer
+      attr_accessor last_refresh_type: ("FULL" | "INCREMENTAL")
       attr_accessor sub_objects: ::Array[::String]
+      attr_accessor sub_object_version_ids: ::Array[::Integer]
       SENSITIVE: []
     end
 

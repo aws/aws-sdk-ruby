@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2025-11-21)
+------------------
+
+* Feature - Adds support for creating Webapps accessible from a VPC.
+
+1.127.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.126.0 (2025-10-14)
+------------------
+
+* Feature - SFTP connectors now support routing connections via customers' VPC. This enables connections to remote servers that are only accessible in a customer's VPC environment, and to servers that are accessible over the internet but need connections coming from an IP address in a customer VPC's CIDR range.
+
+1.125.0 (2025-09-30)
+------------------
+
+* Feature - Add support for updating server identity provider type
+
 1.124.0 (2025-08-26)
 ------------------
 

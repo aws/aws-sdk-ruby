@@ -366,7 +366,7 @@ module Aws::Omics
     class CreateWorkflowRequest
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor engine: ("WDL" | "NEXTFLOW" | "CWL")
+      attr_accessor engine: ("WDL" | "NEXTFLOW" | "CWL" | "WDL_LENIENT")
       attr_accessor definition_zip: ::String
       attr_accessor definition_uri: ::String
       attr_accessor main: ::String
@@ -403,7 +403,7 @@ module Aws::Omics
       attr_accessor definition_uri: ::String
       attr_accessor accelerators: ("GPU")
       attr_accessor description: ::String
-      attr_accessor engine: ("WDL" | "NEXTFLOW" | "CWL")
+      attr_accessor engine: ("WDL" | "NEXTFLOW" | "CWL" | "WDL_LENIENT")
       attr_accessor main: ::String
       attr_accessor parameter_template: ::Hash[::String, Types::WorkflowParameter]
       attr_accessor request_id: ::String
@@ -1058,7 +1058,7 @@ module Aws::Omics
       attr_accessor type: ("PRIVATE" | "READY2RUN")
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor engine: ("WDL" | "NEXTFLOW" | "CWL")
+      attr_accessor engine: ("WDL" | "NEXTFLOW" | "CWL" | "WDL_LENIENT")
       attr_accessor definition: ::String
       attr_accessor main: ::String
       attr_accessor digest: ::String
@@ -1096,7 +1096,7 @@ module Aws::Omics
       attr_accessor description: ::String
       attr_accessor definition: ::String
       attr_accessor digest: ::String
-      attr_accessor engine: ("WDL" | "NEXTFLOW" | "CWL")
+      attr_accessor engine: ("WDL" | "NEXTFLOW" | "CWL" | "WDL_LENIENT")
       attr_accessor main: ::String
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor parameter_template: ::Hash[::String, Types::WorkflowParameter]

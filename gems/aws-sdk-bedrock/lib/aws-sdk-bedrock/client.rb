@@ -610,6 +610,13 @@ module Aws::Bedrock
     #   and custom variable types used to validate foundation model responses
     #   in your application.
     #
+    # @option params [String] :kms_key_id
+    #   The identifier of the KMS key to use for encrypting the automated
+    #   reasoning policy and its associated artifacts. If you don't specify a
+    #   KMS key, Amazon Bedrock uses an KMS managed key for encryption. For
+    #   enhanced security and control, you can specify a customer managed KMS
+    #   key.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags to associate with the Automated Reasoning policy. Tags
     #   help you organize and manage your policies.
@@ -659,6 +666,7 @@ module Aws::Bedrock
     #         },
     #       ],
     #     },
+    #     kms_key_id: "KmsKeyId",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -2271,7 +2279,7 @@ module Aws::Bedrock
     #     role_arn: "RoleArn", # required
     #     client_request_token: "IdempotencyToken",
     #     base_model_identifier: "BaseModelIdentifier", # required
-    #     customization_type: "FINE_TUNING", # accepts FINE_TUNING, CONTINUED_PRE_TRAINING, DISTILLATION, IMPORTED
+    #     customization_type: "FINE_TUNING", # accepts FINE_TUNING, CONTINUED_PRE_TRAINING, DISTILLATION, REINFORCEMENT_FINE_TUNING, IMPORTED
     #     custom_model_kms_key_id: "KmsKeyId",
     #     job_tags: [
     #       {
@@ -2344,6 +2352,23 @@ module Aws::Bedrock
     #         teacher_model_config: { # required
     #           teacher_model_identifier: "TeacherModelIdentifier", # required
     #           max_response_length_for_inference: 1,
+    #         },
+    #       },
+    #       rft_config: {
+    #         grader_config: {
+    #           lambda_grader: {
+    #             lambda_arn: "LambdaArn", # required
+    #           },
+    #         },
+    #         hyper_parameters: {
+    #           epoch_count: 1,
+    #           batch_size: 1,
+    #           learning_rate: 1.0,
+    #           max_prompt_length: 1,
+    #           training_sample_per_prompt: 1,
+    #           inference_max_tokens: 1,
+    #           reasoning_effort: "low", # accepts low, medium, high
+    #           eval_interval: 1,
     #         },
     #       },
     #     },
@@ -2770,12 +2795,21 @@ module Aws::Bedrock
     #   The Amazon Resource Name (ARN) of the Automated Reasoning policy to
     #   delete.
     #
+    # @option params [Boolean] :force
+    #   Specifies whether to force delete the automated reasoning policy even
+    #   if it has active resources. When `false`, Amazon Bedrock validates if
+    #   all artifacts have been deleted (e.g. policy version, test case, test
+    #   result) for a policy before deletion. When `true`, Amazon Bedrock will
+    #   delete the policy and all its artifacts without validation. Default is
+    #   `false`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_automated_reasoning_policy({
     #     policy_arn: "AutomatedReasoningPolicyArn", # required
+    #     force: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteAutomatedReasoningPolicy AWS API Documentation
@@ -2920,6 +2954,28 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def delete_custom_model_deployment(params = {}, options = {})
       req = build_request(:delete_custom_model_deployment, params)
+      req.send_request(options)
+    end
+
+    # Deletes the account-level enforced guardrail configuration.
+    #
+    # @option params [required, String] :config_id
+    #   Unique ID for the account enforced configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_enforced_guardrail_configuration({
+    #     config_id: "AccountEnforcedGuardrailConfigurationId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteEnforcedGuardrailConfiguration AWS API Documentation
+    #
+    # @overload delete_enforced_guardrail_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_enforced_guardrail_configuration(params = {}, options = {})
+      req = build_request(:delete_enforced_guardrail_configuration, params)
       req.send_request(options)
     end
 
@@ -3210,6 +3266,7 @@ module Aws::Bedrock
     #   * {Types::GetAutomatedReasoningPolicyResponse#policy_id #policy_id} => String
     #   * {Types::GetAutomatedReasoningPolicyResponse#description #description} => String
     #   * {Types::GetAutomatedReasoningPolicyResponse#definition_hash #definition_hash} => String
+    #   * {Types::GetAutomatedReasoningPolicyResponse#kms_key_arn #kms_key_arn} => String
     #   * {Types::GetAutomatedReasoningPolicyResponse#created_at #created_at} => Time
     #   * {Types::GetAutomatedReasoningPolicyResponse#updated_at #updated_at} => Time
     #
@@ -3227,6 +3284,7 @@ module Aws::Bedrock
     #   resp.policy_id #=> String
     #   resp.description #=> String
     #   resp.definition_hash #=> String
+    #   resp.kms_key_arn #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #
@@ -3398,7 +3456,7 @@ module Aws::Bedrock
     #   resp = client.get_automated_reasoning_policy_build_workflow_result_assets({
     #     policy_arn: "AutomatedReasoningPolicyArn", # required
     #     build_workflow_id: "AutomatedReasoningPolicyBuildWorkflowId", # required
-    #     asset_type: "BUILD_LOG", # required, accepts BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION
+    #     asset_type: "BUILD_LOG", # required, accepts BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION, GENERATED_TEST_CASES
     #   })
     #
     # @example Response structure
@@ -3515,6 +3573,10 @@ module Aws::Bedrock
     #   resp.build_workflow_assets.build_log.entries[0].build_steps[0].messages #=> Array
     #   resp.build_workflow_assets.build_log.entries[0].build_steps[0].messages[0].message #=> String
     #   resp.build_workflow_assets.build_log.entries[0].build_steps[0].messages[0].message_type #=> String, one of "INFO", "WARNING", "ERROR"
+    #   resp.build_workflow_assets.generated_test_cases.generated_test_cases #=> Array
+    #   resp.build_workflow_assets.generated_test_cases.generated_test_cases[0].query_content #=> String
+    #   resp.build_workflow_assets.generated_test_cases.generated_test_cases[0].guard_content #=> String
+    #   resp.build_workflow_assets.generated_test_cases.generated_test_cases[0].expected_aggregated_findings_result #=> String, one of "VALID", "INVALID", "SATISFIABLE", "IMPOSSIBLE", "TRANSLATION_AMBIGUOUS", "TOO_COMPLEX", "NO_TRANSLATION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetAutomatedReasoningPolicyBuildWorkflowResultAssets AWS API Documentation
     #
@@ -3810,7 +3872,7 @@ module Aws::Bedrock
     #   resp.job_name #=> String
     #   resp.job_arn #=> String
     #   resp.base_model_arn #=> String
-    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"
+    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "REINFORCEMENT_FINE_TUNING", "IMPORTED"
     #   resp.model_kms_key_arn #=> String
     #   resp.hyper_parameters #=> Hash
     #   resp.hyper_parameters["String"] #=> String
@@ -3840,6 +3902,15 @@ module Aws::Bedrock
     #   resp.creation_time #=> Time
     #   resp.customization_config.distillation_config.teacher_model_config.teacher_model_identifier #=> String
     #   resp.customization_config.distillation_config.teacher_model_config.max_response_length_for_inference #=> Integer
+    #   resp.customization_config.rft_config.grader_config.lambda_grader.lambda_arn #=> String
+    #   resp.customization_config.rft_config.hyper_parameters.epoch_count #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.batch_size #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.learning_rate #=> Float
+    #   resp.customization_config.rft_config.hyper_parameters.max_prompt_length #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.training_sample_per_prompt #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.inference_max_tokens #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.reasoning_effort #=> String, one of "low", "medium", "high"
+    #   resp.customization_config.rft_config.hyper_parameters.eval_interval #=> Integer
     #   resp.model_status #=> String, one of "Active", "Creating", "Failed"
     #   resp.failure_message #=> String
     #
@@ -3883,6 +3954,7 @@ module Aws::Bedrock
     #   * {Types::GetCustomModelDeploymentResponse#created_at #created_at} => Time
     #   * {Types::GetCustomModelDeploymentResponse#status #status} => String
     #   * {Types::GetCustomModelDeploymentResponse#description #description} => String
+    #   * {Types::GetCustomModelDeploymentResponse#update_details #update_details} => Types::CustomModelDeploymentUpdateDetails
     #   * {Types::GetCustomModelDeploymentResponse#failure_message #failure_message} => String
     #   * {Types::GetCustomModelDeploymentResponse#last_updated_at #last_updated_at} => Time
     #
@@ -3900,6 +3972,8 @@ module Aws::Bedrock
     #   resp.created_at #=> Time
     #   resp.status #=> String, one of "Creating", "Active", "Failed"
     #   resp.description #=> String
+    #   resp.update_details.model_arn #=> String
+    #   resp.update_details.update_status #=> String, one of "Updating", "UpdateCompleted", "UpdateFailed"
     #   resp.failure_message #=> String
     #   resp.last_updated_at #=> Time
     #
@@ -4108,7 +4182,7 @@ module Aws::Bedrock
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_foundation_model({
-    #     model_identifier: "ModelIdentifier", # required
+    #     model_identifier: "GetFoundationModelIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -4594,7 +4668,7 @@ module Aws::Bedrock
     #   resp.validation_data_config.validators #=> Array
     #   resp.validation_data_config.validators[0].s3_uri #=> String
     #   resp.output_data_config.s3_uri #=> String
-    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"
+    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "REINFORCEMENT_FINE_TUNING", "IMPORTED"
     #   resp.output_model_kms_key_arn #=> String
     #   resp.training_metrics.training_loss #=> Float
     #   resp.validation_metrics #=> Array
@@ -4605,6 +4679,15 @@ module Aws::Bedrock
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.customization_config.distillation_config.teacher_model_config.teacher_model_identifier #=> String
     #   resp.customization_config.distillation_config.teacher_model_config.max_response_length_for_inference #=> Integer
+    #   resp.customization_config.rft_config.grader_config.lambda_grader.lambda_arn #=> String
+    #   resp.customization_config.rft_config.hyper_parameters.epoch_count #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.batch_size #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.learning_rate #=> Float
+    #   resp.customization_config.rft_config.hyper_parameters.max_prompt_length #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.training_sample_per_prompt #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.inference_max_tokens #=> Integer
+    #   resp.customization_config.rft_config.hyper_parameters.reasoning_effort #=> String, one of "low", "medium", "high"
+    #   resp.customization_config.rft_config.hyper_parameters.eval_interval #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelCustomizationJob AWS API Documentation
     #
@@ -4763,6 +4846,7 @@ module Aws::Bedrock
     #   resp.logging_config.image_data_delivery_enabled #=> Boolean
     #   resp.logging_config.embedding_data_delivery_enabled #=> Boolean
     #   resp.logging_config.video_data_delivery_enabled #=> Boolean
+    #   resp.logging_config.audio_data_delivery_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetModelInvocationLoggingConfiguration AWS API Documentation
     #
@@ -5411,7 +5495,7 @@ module Aws::Bedrock
     #   resp.model_summaries[0].creation_time #=> Time
     #   resp.model_summaries[0].base_model_arn #=> String
     #   resp.model_summaries[0].base_model_name #=> String
-    #   resp.model_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"
+    #   resp.model_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "REINFORCEMENT_FINE_TUNING", "IMPORTED"
     #   resp.model_summaries[0].owner_account_id #=> String
     #   resp.model_summaries[0].model_status #=> String, one of "Active", "Creating", "Failed"
     #
@@ -5421,6 +5505,48 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def list_custom_models(params = {}, options = {})
       req = build_request(:list_custom_models, params)
+      req.send_request(options)
+    end
+
+    # Lists the account-level enforced guardrail configurations.
+    #
+    # @option params [String] :next_token
+    #   Opaque continuation token of previous paginated response.
+    #
+    # @return [Types::ListEnforcedGuardrailsConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEnforcedGuardrailsConfigurationResponse#guardrails_config #guardrails_config} => Array&lt;Types::AccountEnforcedGuardrailOutputConfiguration&gt;
+    #   * {Types::ListEnforcedGuardrailsConfigurationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_enforced_guardrails_configuration({
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.guardrails_config #=> Array
+    #   resp.guardrails_config[0].config_id #=> String
+    #   resp.guardrails_config[0].guardrail_arn #=> String
+    #   resp.guardrails_config[0].guardrail_id #=> String
+    #   resp.guardrails_config[0].input_tags #=> String, one of "HONOR", "IGNORE"
+    #   resp.guardrails_config[0].guardrail_version #=> String
+    #   resp.guardrails_config[0].created_at #=> Time
+    #   resp.guardrails_config[0].created_by #=> String
+    #   resp.guardrails_config[0].updated_at #=> Time
+    #   resp.guardrails_config[0].updated_by #=> String
+    #   resp.guardrails_config[0].owner #=> String, one of "ACCOUNT"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListEnforcedGuardrailsConfiguration AWS API Documentation
+    #
+    # @overload list_enforced_guardrails_configuration(params = {})
+    # @param [Hash] params ({})
+    def list_enforced_guardrails_configuration(params = {}, options = {})
+      req = build_request(:list_enforced_guardrails_configuration, params)
       req.send_request(options)
     end
 
@@ -6077,7 +6203,7 @@ module Aws::Bedrock
     #   resp.model_customization_job_summaries[0].end_time #=> Time
     #   resp.model_customization_job_summaries[0].custom_model_arn #=> String
     #   resp.model_customization_job_summaries[0].custom_model_name #=> String
-    #   resp.model_customization_job_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"
+    #   resp.model_customization_job_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "REINFORCEMENT_FINE_TUNING", "IMPORTED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelCustomizationJobs AWS API Documentation
     #
@@ -6225,7 +6351,7 @@ module Aws::Bedrock
     #
     #   * Failed – This job has failed. Check the failure message for any
     #     further details. For further assistance, reach out to the [Amazon
-    #     Web ServicesSupport Center][3].
+    #     Web Services Support Center][3].
     #
     #   * Stopped – This job was stopped by a user.
     #
@@ -6500,6 +6626,46 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Sets the account-level enforced guardrail configuration.
+    #
+    # @option params [String] :config_id
+    #   Unique ID for the account enforced configuration.
+    #
+    # @option params [required, Types::AccountEnforcedGuardrailInferenceInputConfiguration] :guardrail_inference_config
+    #   Account-level enforced guardrail input configuration.
+    #
+    # @return [Types::PutEnforcedGuardrailConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutEnforcedGuardrailConfigurationResponse#config_id #config_id} => String
+    #   * {Types::PutEnforcedGuardrailConfigurationResponse#updated_at #updated_at} => Time
+    #   * {Types::PutEnforcedGuardrailConfigurationResponse#updated_by #updated_by} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_enforced_guardrail_configuration({
+    #     config_id: "AccountEnforcedGuardrailConfigurationId",
+    #     guardrail_inference_config: { # required
+    #       guardrail_identifier: "GuardrailIdentifier", # required
+    #       guardrail_version: "GuardrailNumericalVersion", # required
+    #       input_tags: "HONOR", # required, accepts HONOR, IGNORE
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.config_id #=> String
+    #   resp.updated_at #=> Time
+    #   resp.updated_by #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/PutEnforcedGuardrailConfiguration AWS API Documentation
+    #
+    # @overload put_enforced_guardrail_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_enforced_guardrail_configuration(params = {}, options = {})
+      req = build_request(:put_enforced_guardrail_configuration, params)
+      req.send_request(options)
+    end
+
     # Set the configuration values for model invocation logging.
     #
     # @option params [required, Types::LoggingConfig] :logging_config
@@ -6527,6 +6693,7 @@ module Aws::Bedrock
     #       image_data_delivery_enabled: false,
     #       embedding_data_delivery_enabled: false,
     #       video_data_delivery_enabled: false,
+    #       audio_data_delivery_enabled: false,
     #     },
     #   })
     #
@@ -7252,6 +7419,42 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Updates a custom model deployment with a new custom model. This allows
+    # you to deploy updated models without creating new deployment
+    # endpoints.
+    #
+    # @option params [required, String] :model_arn
+    #   ARN of the new custom model to deploy. This replaces the currently
+    #   deployed model.
+    #
+    # @option params [required, String] :custom_model_deployment_identifier
+    #   Identifier of the custom model deployment to update with the new
+    #   custom model.
+    #
+    # @return [Types::UpdateCustomModelDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCustomModelDeploymentResponse#custom_model_deployment_arn #custom_model_deployment_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_custom_model_deployment({
+    #     model_arn: "CustomModelArn", # required
+    #     custom_model_deployment_identifier: "CustomModelDeploymentIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_model_deployment_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/UpdateCustomModelDeployment AWS API Documentation
+    #
+    # @overload update_custom_model_deployment(params = {})
+    # @param [Hash] params ({})
+    def update_custom_model_deployment(params = {}, options = {})
+      req = build_request(:update_custom_model_deployment, params)
+      req.send_request(options)
+    end
+
     # Updates a guardrail with the values you specify.
     #
     # * Specify a `name` and optional `description`.
@@ -7609,7 +7812,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

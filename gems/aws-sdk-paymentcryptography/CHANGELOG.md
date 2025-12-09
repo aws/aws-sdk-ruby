@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.46.0 (2025-10-31)
+------------------
+
+* Feature - Allow additional characters in the CertificateSubject for GetCertificateSigningRequest API.
+
+1.45.0 (2025-10-24)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.44.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.43.0 (2025-09-12)
 ------------------
 

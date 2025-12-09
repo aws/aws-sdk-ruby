@@ -69,6 +69,11 @@ module Aws::LicenseManagerUserSubscriptions
     #   Directory.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] domain_ipv_6_list
+    #   A list of domain IPv6 addresses that are used for the Active
+    #   Directory.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] domain_credentials_provider
     #   Points to the `CredentialsProvider` resource that contains
     #   information about the credential provider for user administration.
@@ -84,6 +89,7 @@ module Aws::LicenseManagerUserSubscriptions
     class ActiveDirectorySettings < Struct.new(
       :domain_name,
       :domain_ipv_4_list,
+      :domain_ipv_6_list,
       :domain_credentials_provider,
       :domain_network_settings)
       SENSITIVE = []
@@ -585,12 +591,18 @@ module Aws::LicenseManagerUserSubscriptions
     #   server.
     #   @return [String]
     #
+    # @!attribute [rw] ipv_6_address
+    #   A list of domain IPv6 addresses that are used for the RDS license
+    #   server.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-user-subscriptions-2018-05-10/LicenseServer AWS API Documentation
     #
     class LicenseServer < Struct.new(
       :provisioning_status,
       :health_status,
-      :ipv_4_address)
+      :ipv_4_address,
+      :ipv_6_address)
       SENSITIVE = []
       include Aws::Structure
     end

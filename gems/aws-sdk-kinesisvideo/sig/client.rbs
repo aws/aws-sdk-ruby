@@ -109,7 +109,10 @@ module Aws
                            ?media_type: ::String,
                            ?kms_key_id: ::String,
                            ?data_retention_in_hours: ::Integer,
-                           ?tags: Hash[::String, ::String]
+                           ?tags: Hash[::String, ::String],
+                           ?stream_storage_configuration: {
+                             default_storage_tier: ("HOT" | "WARM")
+                           }
                          ) -> _CreateStreamResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamResponseSuccess
 
@@ -229,6 +232,19 @@ module Aws
                              ?stream_arn: ::String
                            ) -> _DescribeStreamResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStreamResponseSuccess
+
+      interface _DescribeStreamStorageConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStreamStorageConfigurationOutput]
+        def stream_name: () -> ::String
+        def stream_arn: () -> ::String
+        def stream_storage_configuration: () -> Types::StreamStorageConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#describe_stream_storage_configuration-instance_method
+      def describe_stream_storage_configuration: (
+                                                   ?stream_name: ::String,
+                                                   ?stream_arn: ::String
+                                                 ) -> _DescribeStreamStorageConfigurationResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStreamStorageConfigurationResponseSuccess
 
       interface _GetDataEndpointResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataEndpointOutput]
@@ -507,6 +523,20 @@ module Aws
                            ?media_type: ::String
                          ) -> _UpdateStreamResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStreamResponseSuccess
+
+      interface _UpdateStreamStorageConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStreamStorageConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#update_stream_storage_configuration-instance_method
+      def update_stream_storage_configuration: (
+                                                 ?stream_name: ::String,
+                                                 ?stream_arn: ::String,
+                                                 current_version: ::String,
+                                                 stream_storage_configuration: {
+                                                   default_storage_tier: ("HOT" | "WARM")
+                                                 }
+                                               ) -> _UpdateStreamStorageConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStreamStorageConfigurationResponseSuccess
     end
   end
 end

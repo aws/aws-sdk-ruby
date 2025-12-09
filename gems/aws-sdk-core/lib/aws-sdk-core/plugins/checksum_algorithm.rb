@@ -190,7 +190,6 @@ module Aws
               name: "x-amz-checksum-#{algorithm.downcase}",
               request_algorithm_header: request_algorithm_header(context)
             }
-
             context[:http_checksum][:request_algorithm] = request_algorithm
             calculate_request_checksum(context, request_algorithm)
           end
@@ -249,6 +248,7 @@ module Aws
           return unless context.operation.http_checksum
 
           input_member = context.operation.http_checksum['requestAlgorithmMember']
+
           context.params[input_member.to_sym] ||= DEFAULT_CHECKSUM if input_member
         end
 
@@ -271,25 +271,39 @@ module Aws
           context.operation.http_checksum['responseAlgorithms']
         end
 
-        def checksum_required?(context)
-          (http_checksum = context.operation.http_checksum) &&
-            (checksum_required = http_checksum['requestChecksumRequired']) &&
-            (checksum_required && context.config.request_checksum_calculation == 'when_required')
-        end
-
-        def checksum_optional?(context)
-          context.operation.http_checksum &&
-            context.config.request_checksum_calculation != 'when_required'
-        end
-
         def checksum_provided_as_header?(headers)
           headers.any? { |k, _| k.start_with?('x-amz-checksum-') }
         end
 
+        # Determines whether a request checksum should be calculated.
+        # 1. **No existing checksum in header**: Skips if checksum header already present
+        # 2. **Operation support**: Considers model, client configuration and user input.
         def should_calculate_request_checksum?(context)
           !checksum_provided_as_header?(context.http_request.headers) &&
-            request_algorithm_selection(context) &&
-            (checksum_required?(context) || checksum_optional?(context))
+            checksum_applicable?(context)
+        end
+
+        # Checks if checksum calculation should proceed based on operation requirements and client settings.
+        # Returns true when any of these conditions are met:
+        # 1. http checksum's requestChecksumRequired is true
+        # 2. Config for request_checksum_calculation is "when_supported"
+        # 3. Config for request_checksum_calculation is "when_required" AND user provided checksum algorithm
+        def checksum_applicable?(context)
+          http_checksum = context.operation.http_checksum
+          return false unless http_checksum
+
+          return true if http_checksum['requestChecksumRequired']
+
+          return false unless (algorithm_member = http_checksum['requestAlgorithmMember'])
+
+          case context.config.request_checksum_calculation
+          when 'when_supported'
+            true
+          when 'when_required'
+            !context.params[algorithm_member.to_sym].nil?
+          else
+            false
+          end
         end
 
         def choose_request_algorithm!(context)

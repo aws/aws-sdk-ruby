@@ -8,6 +8,23 @@
 module Aws::CleanRoomsML
   module Types
 
+    class AccessBudget
+      attr_accessor resource_arn: ::String
+      attr_accessor details: ::Array[Types::AccessBudgetDetails]
+      attr_accessor aggregate_remaining_budget: ::Integer
+      SENSITIVE: []
+    end
+
+    class AccessBudgetDetails
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor remaining_budget: ::Integer
+      attr_accessor budget: ::Integer
+      attr_accessor budget_type: ("CALENDAR_DAY" | "CALENDAR_MONTH" | "CALENDAR_WEEK" | "LIFETIME")
+      attr_accessor auto_refresh: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class AccessDeniedException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -171,6 +188,11 @@ module Aws::CleanRoomsML
       attr_accessor status: ("CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "ACTIVE" | "DELETE_PENDING" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "INACTIVE" | "CANCEL_PENDING" | "CANCEL_IN_PROGRESS" | "CANCEL_FAILED")
       attr_accessor configured_model_algorithm_association_arn: ::String
       attr_accessor creator_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ColumnClassificationDetails
+      attr_accessor column_mapping: ::Array[Types::SyntheticDataColumnProperties]
       SENSITIVE: []
     end
 
@@ -367,6 +389,11 @@ module Aws::CleanRoomsML
       SENSITIVE: []
     end
 
+    class DataPrivacyScores
+      attr_accessor membership_inference_attack_scores: ::Array[Types::MembershipInferenceAttackScore]
+      SENSITIVE: []
+    end
+
     class DataSource
       attr_accessor glue_data_source: Types::GlueDataSource
       SENSITIVE: []
@@ -524,7 +551,9 @@ module Aws::CleanRoomsML
       attr_accessor status_details: Types::StatusDetails
       attr_accessor retention_in_days: ::Integer
       attr_accessor number_of_records: ::Integer
+      attr_accessor privacy_budgets: Types::PrivacyBudgets
       attr_accessor description: ::String
+      attr_accessor synthetic_data_configuration: Types::SyntheticDataConfiguration
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor creator_account_id: ::String
@@ -665,7 +694,9 @@ module Aws::CleanRoomsML
       attr_accessor status_details: Types::StatusDetails
       attr_accessor retention_in_days: ::Integer
       attr_accessor number_of_records: ::Integer
+      attr_accessor privacy_budgets: Types::PrivacyBudgets
       attr_accessor description: ::String
+      attr_accessor synthetic_data_configuration: Types::SyntheticDataConfiguration
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor input_channel: Types::InputChannel
@@ -1091,6 +1122,19 @@ module Aws::CleanRoomsML
       SENSITIVE: []
     end
 
+    class MLSyntheticDataParameters
+      attr_accessor epsilon: ::Float
+      attr_accessor max_membership_inference_attack_score: ::Float
+      attr_accessor column_classification: Types::ColumnClassificationDetails
+      SENSITIVE: []
+    end
+
+    class MembershipInferenceAttackScore
+      attr_accessor attack_version: ("DISTANCE_TO_CLOSEST_RECORD_V1")
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
     class MetricDefinition
       attr_accessor name: ::String
       attr_accessor regex: ::String
@@ -1112,6 +1156,17 @@ module Aws::CleanRoomsML
       attr_accessor channel_name: ::String
       attr_accessor s3_data_distribution_type: ("FullyReplicated" | "ShardedByS3Key")
       SENSITIVE: []
+    end
+
+    class PrivacyBudgets
+      attr_accessor access_budgets: ::Array[Types::AccessBudget]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AccessBudgets < PrivacyBudgets
+      end
+      class Unknown < PrivacyBudgets
+      end
     end
 
     class PrivacyConfiguration
@@ -1254,6 +1309,24 @@ module Aws::CleanRoomsML
 
     class StoppingCondition
       attr_accessor max_runtime_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class SyntheticDataColumnProperties
+      attr_accessor column_name: ::String
+      attr_accessor column_type: ("CATEGORICAL" | "NUMERICAL")
+      attr_accessor is_predictive_value: bool
+      SENSITIVE: []
+    end
+
+    class SyntheticDataConfiguration
+      attr_accessor synthetic_data_parameters: Types::MLSyntheticDataParameters
+      attr_accessor synthetic_data_evaluation_scores: Types::SyntheticDataEvaluationScores
+      SENSITIVE: []
+    end
+
+    class SyntheticDataEvaluationScores
+      attr_accessor data_privacy_scores: Types::DataPrivacyScores
       SENSITIVE: []
     end
 

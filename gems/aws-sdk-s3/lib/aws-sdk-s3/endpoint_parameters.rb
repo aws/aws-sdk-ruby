@@ -13,87 +13,87 @@ module Aws::S3
   # @!attribute bucket
   #   The S3 bucket used to send the request. This is an optional parameter that will be set automatically for operations that are scoped to an S3 bucket.
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute region
   #   The AWS region used to dispatch the request.
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute use_fips
   #   When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute use_dual_stack
   #   When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute endpoint
   #   Override the endpoint used to send this request
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute force_path_style
   #   When true, force a path-style endpoint to be used where the bucket name is part of the path.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute accelerate
   #   When true, use S3 Accelerate. NOTE: Not all regions support S3 accelerate.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute use_global_endpoint
   #   Whether the global endpoint should be used, rather then the regional endpoint for us-east-1.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute use_object_lambda_endpoint
   #   Internal parameter to use object lambda endpoint for an operation (eg: WriteGetObjectResponse)
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute key
   #   The S3 Key used to send the request. This is an optional parameter that will be set automatically for operations that are scoped to an S3 Key.
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute prefix
   #   The S3 Prefix used to send the request. This is an optional parameter that will be set automatically for operations that are scoped to an S3 Prefix.
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute copy_source
   #   The Copy Source used for Copy Object request. This is an optional parameter that will be set automatically for operations that are scoped to Copy Source.
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute disable_access_points
   #   Internal parameter to disable Access Point Buckets
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute disable_multi_region_access_points
   #   Whether multi-region access points (MRAP) should be disabled.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute use_arn_region
   #   When an Access Point ARN is provided and this flag is enabled, the SDK MUST use the ARN&#39;s region when constructing the endpoint instead of the client&#39;s configured region.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute use_s3_express_control_endpoint
   #   Internal parameter to indicate whether S3Express operation should use control plane, (ex. CreateBucket)
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute disable_s3_express_session_auth
   #   Parameter to indicate whether S3Express session auth should be disabled
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   EndpointParameters = Struct.new(
     :bucket,

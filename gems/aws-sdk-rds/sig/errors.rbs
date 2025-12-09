@@ -301,6 +301,8 @@ module Aws
       end
       class UnsupportedDBEngineVersionFault < ::Aws::Errors::ServiceError
       end
+      class VpcEncryptionControlViolationException < ::Aws::Errors::ServiceError
+      end
     end
   end
 end

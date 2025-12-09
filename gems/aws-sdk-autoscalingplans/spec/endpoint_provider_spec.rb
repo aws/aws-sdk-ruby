@@ -448,6 +448,20 @@ module Aws::AutoScalingPlans
       end
     end
 
+    context "For region us-gov-east-1 with FIPS enabled and DualStack disabled" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://autoscaling-plans.us-gov-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: true, use_dual_stack: false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
     context "For region us-gov-west-1 with FIPS disabled and DualStack disabled" do
       let(:expected) do
         {"endpoint" => {"url" => "https://autoscaling-plans.us-gov-west-1.amazonaws.com"}}
@@ -462,13 +476,13 @@ module Aws::AutoScalingPlans
       end
     end
 
-    context "For region us-gov-east-1 with FIPS enabled and DualStack enabled" do
+    context "For region us-gov-west-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://autoscaling-plans-fips.us-gov-east-1.api.aws"}}
+        {"endpoint" => {"url" => "https://autoscaling-plans.us-gov-west-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: true, use_dual_stack: true})
+        params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: true, use_dual_stack: false})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
@@ -476,13 +490,13 @@ module Aws::AutoScalingPlans
       end
     end
 
-    context "For region us-gov-east-1 with FIPS enabled and DualStack disabled" do
+    context "For region us-gov-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint" => {"url" => "https://autoscaling-plans-fips.us-gov-east-1.amazonaws.com"}}
+        {"endpoint" => {"url" => "https://autoscaling-plans-fips.us-gov-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: true, use_dual_stack: false})
+        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: true, use_dual_stack: true})
         endpoint = subject.resolve_endpoint(params)
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})

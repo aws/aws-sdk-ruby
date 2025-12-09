@@ -67,6 +67,8 @@ module Aws::ConnectParticipant
     MeetingFeaturesConfiguration = Shapes::StructureShape.new(name: 'MeetingFeaturesConfiguration')
     Message = Shapes::StringShape.new(name: 'Message')
     MessageMetadata = Shapes::StructureShape.new(name: 'MessageMetadata')
+    MessageProcessingMetadata = Shapes::StructureShape.new(name: 'MessageProcessingMetadata')
+    MessageProcessingStatus = Shapes::StringShape.new(name: 'MessageProcessingStatus')
     MostRecent = Shapes::IntegerShape.new(name: 'MostRecent')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonEmptyClientToken = Shapes::StringShape.new(name: 'NonEmptyClientToken')
@@ -237,7 +239,11 @@ module Aws::ConnectParticipant
 
     MessageMetadata.add_member(:message_id, Shapes::ShapeRef.new(shape: ChatItemId, location_name: "MessageId"))
     MessageMetadata.add_member(:receipts, Shapes::ShapeRef.new(shape: Receipts, location_name: "Receipts"))
+    MessageMetadata.add_member(:message_processing_status, Shapes::ShapeRef.new(shape: MessageProcessingStatus, location_name: "MessageProcessingStatus"))
     MessageMetadata.struct_class = Types::MessageMetadata
+
+    MessageProcessingMetadata.add_member(:message_processing_status, Shapes::ShapeRef.new(shape: MessageProcessingStatus, location_name: "MessageProcessingStatus"))
+    MessageProcessingMetadata.struct_class = Types::MessageProcessingMetadata
 
     Receipt.add_member(:delivered_timestamp, Shapes::ShapeRef.new(shape: Instant, location_name: "DeliveredTimestamp"))
     Receipt.add_member(:read_timestamp, Shapes::ShapeRef.new(shape: Instant, location_name: "ReadTimestamp"))
@@ -269,6 +275,7 @@ module Aws::ConnectParticipant
 
     SendMessageResponse.add_member(:id, Shapes::ShapeRef.new(shape: ChatItemId, location_name: "Id"))
     SendMessageResponse.add_member(:absolute_time, Shapes::ShapeRef.new(shape: Instant, location_name: "AbsoluteTime"))
+    SendMessageResponse.add_member(:message_metadata, Shapes::ShapeRef.new(shape: MessageProcessingMetadata, location_name: "MessageMetadata"))
     SendMessageResponse.struct_class = Types::SendMessageResponse
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))

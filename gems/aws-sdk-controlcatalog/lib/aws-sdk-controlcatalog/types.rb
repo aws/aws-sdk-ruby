@@ -169,13 +169,12 @@ module Aws::ControlCatalog
     #
     # @!attribute [rw] mapping_type
     #   The type of mapping relationship between the control and other
-    #   entities. Indicates whether the mapping is to a framework or common
-    #   control.
+    #   entities.
     #   @return [String]
     #
     # @!attribute [rw] mapping
-    #   The details of the mapping relationship, containing either framework
-    #   or common control information.
+    #   The details of the mapping relationship, for example, containing
+    #   framework, common control, or related control information.
     #   @return [Types::Mapping]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controlcatalog-2018-05-10/ControlMapping AWS API Documentation
@@ -879,11 +878,17 @@ module Aws::ControlCatalog
     #   a common control.
     #   @return [Types::CommonControlMappingDetails]
     #
+    # @!attribute [rw] related_control
+    #   Returns information about controls that are related to the specified
+    #   control.
+    #   @return [Types::RelatedControlMappingDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controlcatalog-2018-05-10/Mapping AWS API Documentation
     #
     class Mapping < Struct.new(
       :framework,
       :common_control,
+      :related_control,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -891,6 +896,7 @@ module Aws::ControlCatalog
 
       class Framework < Mapping; end
       class CommonControl < Mapping; end
+      class RelatedControl < Mapping; end
       class Unknown < Mapping; end
     end
 
@@ -1006,6 +1012,27 @@ module Aws::ControlCatalog
     class RegionConfiguration < Struct.new(
       :scope,
       :deployable_regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that describes a control's relationship status with other
+    # controls.
+    #
+    # @!attribute [rw] control_arn
+    #   The unique identifier of a control.
+    #   @return [String]
+    #
+    # @!attribute [rw] relation_type
+    #   Returns an enumerated value that represents the relationship between
+    #   two or more controls.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controlcatalog-2018-05-10/RelatedControlMappingDetails AWS API Documentation
+    #
+    class RelatedControlMappingDetails < Struct.new(
+      :control_arn,
+      :relation_type)
       SENSITIVE = []
       include Aws::Structure
     end

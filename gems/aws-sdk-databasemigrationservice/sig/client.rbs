@@ -125,6 +125,28 @@ module Aws
                                        ) -> _BatchStartRecommendationsResponseSuccess
                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchStartRecommendationsResponseSuccess
 
+      interface _CancelMetadataModelConversionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelMetadataModelConversionResponse]
+        def request: () -> Types::SchemaConversionRequest
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#cancel_metadata_model_conversion-instance_method
+      def cancel_metadata_model_conversion: (
+                                              migration_project_identifier: ::String,
+                                              request_identifier: ::String
+                                            ) -> _CancelMetadataModelConversionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelMetadataModelConversionResponseSuccess
+
+      interface _CancelMetadataModelCreationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelMetadataModelCreationResponse]
+        def request: () -> Types::SchemaConversionRequest
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#cancel_metadata_model_creation-instance_method
+      def cancel_metadata_model_creation: (
+                                            migration_project_identifier: ::String,
+                                            request_identifier: ::String
+                                          ) -> _CancelMetadataModelCreationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelMetadataModelCreationResponseSuccess
+
       interface _CancelReplicationTaskAssessmentRunResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CancelReplicationTaskAssessmentRunResponse]
         def replication_task_assessment_run: () -> Types::ReplicationTaskAssessmentRun
@@ -156,7 +178,7 @@ module Aws
                                    ],
                                    ?target_data_settings: Array[
                                      {
-                                       table_preparation_mode: ("do-nothing" | "truncate" | "drop-tables-on-target")?
+                                       table_preparation_mode: ("drop-tables-on-target" | "truncate" | "do-nothing")?
                                      },
                                    ],
                                    ?number_of_jobs: ::Integer,
@@ -219,6 +241,14 @@ module Aws
                                       secrets_manager_security_db_encryption_access_role_arn: ::String?,
                                       s3_path: ::String?,
                                       s3_access_role_arn: ::String?
+                                    }?,
+                                    sybase_ase_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      database_name: ::String?,
+                                      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+                                      encrypt_password: bool?,
+                                      certificate_arn: ::String?
                                     }?,
                                     microsoft_sql_server_settings: {
                                       server_name: ::String?,
@@ -1372,6 +1402,21 @@ module Aws
                                       ) -> _DescribeInstanceProfilesResponseSuccess
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstanceProfilesResponseSuccess
 
+      interface _DescribeMetadataModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMetadataModelResponse]
+        def metadata_model_name: () -> ::String
+        def metadata_model_type: () -> ::String
+        def target_metadata_models: () -> ::Array[Types::MetadataModelReference]
+        def definition: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_metadata_model-instance_method
+      def describe_metadata_model: (
+                                     selection_rules: ::String,
+                                     migration_project_identifier: ::String,
+                                     origin: ("SOURCE" | "TARGET")
+                                   ) -> _DescribeMetadataModelResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMetadataModelResponseSuccess
+
       interface _DescribeMetadataModelAssessmentsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMetadataModelAssessmentsResponse]
         def marker: () -> ::String
@@ -1391,6 +1436,21 @@ module Aws
                                                ) -> _DescribeMetadataModelAssessmentsResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMetadataModelAssessmentsResponseSuccess
 
+      interface _DescribeMetadataModelChildrenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMetadataModelChildrenResponse]
+        def marker: () -> ::String
+        def metadata_model_children: () -> ::Array[Types::MetadataModelReference]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_metadata_model_children-instance_method
+      def describe_metadata_model_children: (
+                                              selection_rules: ::String,
+                                              migration_project_identifier: ::String,
+                                              origin: ("SOURCE" | "TARGET"),
+                                              ?marker: ::String,
+                                              ?max_records: ::Integer
+                                            ) -> _DescribeMetadataModelChildrenResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMetadataModelChildrenResponseSuccess
+
       interface _DescribeMetadataModelConversionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMetadataModelConversionsResponse]
         def marker: () -> ::String
@@ -1409,6 +1469,25 @@ module Aws
                                                  ?max_records: ::Integer
                                                ) -> _DescribeMetadataModelConversionsResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMetadataModelConversionsResponseSuccess
+
+      interface _DescribeMetadataModelCreationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMetadataModelCreationsResponse]
+        def marker: () -> ::String
+        def requests: () -> ::Array[Types::SchemaConversionRequest]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_metadata_model_creations-instance_method
+      def describe_metadata_model_creations: (
+                                               ?filters: Array[
+                                                 {
+                                                   name: ::String,
+                                                   values: Array[::String]
+                                                 },
+                                               ],
+                                               ?marker: ::String,
+                                               ?max_records: ::Integer,
+                                               migration_project_identifier: ::String
+                                             ) -> _DescribeMetadataModelCreationsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMetadataModelCreationsResponseSuccess
 
       interface _DescribeMetadataModelExportsAsScriptResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMetadataModelExportsAsScriptResponse]
@@ -1784,6 +1863,17 @@ module Aws
                                             ) -> _ExportMetadataModelAssessmentResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportMetadataModelAssessmentResponseSuccess
 
+      interface _GetTargetSelectionRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTargetSelectionRulesResponse]
+        def target_selection_rules: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#get_target_selection_rules-instance_method
+      def get_target_selection_rules: (
+                                        migration_project_identifier: ::String,
+                                        selection_rules: ::String
+                                      ) -> _GetTargetSelectionRulesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTargetSelectionRulesResponseSuccess
+
       interface _ImportCertificateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ImportCertificateResponse]
         def certificate: () -> Types::Certificate
@@ -1799,7 +1889,8 @@ module Aws
                                     value: ::String?,
                                     resource_arn: ::String?
                                   },
-                                ]
+                                ],
+                                ?kms_key_id: ::String
                               ) -> _ImportCertificateResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportCertificateResponseSuccess
 
@@ -1846,7 +1937,7 @@ module Aws
                                    ],
                                    ?target_data_settings: Array[
                                      {
-                                       table_preparation_mode: ("do-nothing" | "truncate" | "drop-tables-on-target")?
+                                       table_preparation_mode: ("drop-tables-on-target" | "truncate" | "do-nothing")?
                                      },
                                    ],
                                    ?number_of_jobs: ::Integer,
@@ -1904,6 +1995,14 @@ module Aws
                                       secrets_manager_security_db_encryption_access_role_arn: ::String?,
                                       s3_path: ::String?,
                                       s3_access_role_arn: ::String?
+                                    }?,
+                                    sybase_ase_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      database_name: ::String?,
+                                      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+                                      encrypt_password: bool?,
+                                      certificate_arn: ::String?
                                     }?,
                                     microsoft_sql_server_settings: {
                                       server_name: ::String?,
@@ -2601,6 +2700,23 @@ module Aws
                                              selection_rules: ::String
                                            ) -> _StartMetadataModelConversionResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMetadataModelConversionResponseSuccess
+
+      interface _StartMetadataModelCreationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMetadataModelCreationResponse]
+        def request_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#start_metadata_model_creation-instance_method
+      def start_metadata_model_creation: (
+                                           migration_project_identifier: ::String,
+                                           selection_rules: ::String,
+                                           metadata_model_name: ::String,
+                                           properties: {
+                                             statement_properties: {
+                                               definition: ::String
+                                             }?
+                                           }
+                                         ) -> _StartMetadataModelCreationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMetadataModelCreationResponseSuccess
 
       interface _StartMetadataModelExportAsScriptResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartMetadataModelExportAsScriptResponse]

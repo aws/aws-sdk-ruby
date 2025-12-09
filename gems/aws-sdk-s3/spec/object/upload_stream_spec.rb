@@ -27,9 +27,9 @@ module Aws
 
         it 'respects the thread_count option' do
           custom_thread_count = 20
-          expect(Thread).to receive(:new).exactly(custom_thread_count).times.and_return(double(value: nil))
           client.stub_responses(:create_multipart_upload, upload_id: 'id')
           client.stub_responses(:complete_multipart_upload)
+          expect(DefaultExecutor).to receive(:new).with(max_threads: custom_thread_count).and_call_original
           subject.upload_stream(thread_count: custom_thread_count) { |_write_stream| }
         end
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.152.0 (2025-12-01)
+------------------
+
+* Feature - This release adds support for EKS Capabilities
+
+1.151.0 (2025-11-21)
+------------------
+
+* Feature - Adds support for controlPlaneScalingConfig on EKS Clusters.
+
+1.150.0 (2025-10-24)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.149.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.148.0 (2025-09-22)
 ------------------
 

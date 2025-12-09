@@ -35,11 +35,54 @@ module Aws::BedrockDataAutomation
     #   List of Audio Extraction Category Type
     #   @return [Array<String>]
     #
+    # @!attribute [rw] type_configuration
+    #   Configuration for different audio extraction category types
+    #   @return [Types::AudioExtractionCategoryTypeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/AudioExtractionCategory AWS API Documentation
     #
     class AudioExtractionCategory < Struct.new(
       :state,
-      :types)
+      :types,
+      :type_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for different audio extraction category types
+    #
+    # @!attribute [rw] transcript
+    #   Configuration for transcript related features
+    #   @return [Types::TranscriptConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/AudioExtractionCategoryTypeConfiguration AWS API Documentation
+    #
+    class AudioExtractionCategoryTypeConfiguration < Struct.new(
+      :transcript)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Optional configuration for audio language settings
+    #
+    # @!attribute [rw] input_languages
+    #   List of supported audio languages
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] generative_output_language
+    #   Configuration for Audio output language
+    #   @return [String]
+    #
+    # @!attribute [rw] identify_multiple_languages
+    #   Enable multiple language identification in audio
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/AudioLanguageConfiguration AWS API Documentation
+    #
+    class AudioLanguageConfiguration < Struct.new(
+      :input_languages,
+      :generative_output_language,
+      :identify_multiple_languages)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -50,10 +93,20 @@ module Aws::BedrockDataAutomation
     #   Configuration to enable/disable processing of modality
     #   @return [Types::ModalityProcessingConfiguration]
     #
+    # @!attribute [rw] language_configuration
+    #   Optional configuration for audio language settings
+    #   @return [Types::AudioLanguageConfiguration]
+    #
+    # @!attribute [rw] sensitive_data_configuration
+    #   Configuration for sensitive data detection and redaction
+    #   @return [Types::SensitiveDataConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/AudioOverrideConfiguration AWS API Documentation
     #
     class AudioOverrideConfiguration < Struct.new(
-      :modality_processing)
+      :modality_processing,
+      :language_configuration,
+      :sensitive_data_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -256,6 +309,20 @@ module Aws::BedrockDataAutomation
       include Aws::Structure
     end
 
+    # Channel labeling configuration
+    #
+    # @!attribute [rw] state
+    #   State
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/ChannelLabelingConfiguration AWS API Documentation
+    #
+    class ChannelLabelingConfiguration < Struct.new(
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception is thrown when there is a conflict performing an
     # operation
     #
@@ -382,6 +449,10 @@ module Aws::BedrockDataAutomation
     #   Stage of the Project
     #   @return [String]
     #
+    # @!attribute [rw] project_type
+    #   Type of the DataAutomationProject
+    #   @return [String]
+    #
     # @!attribute [rw] standard_output_configuration
     #   Standard output configuration
     #   @return [Types::StandardOutputConfiguration]
@@ -415,6 +486,7 @@ module Aws::BedrockDataAutomation
       :project_name,
       :project_description,
       :project_stage,
+      :project_type,
       :standard_output_configuration,
       :custom_output_configuration,
       :override_configuration,
@@ -485,6 +557,10 @@ module Aws::BedrockDataAutomation
     #   Stage of the Project
     #   @return [String]
     #
+    # @!attribute [rw] project_type
+    #   Type of the DataAutomationProject
+    #   @return [String]
+    #
     # @!attribute [rw] project_description
     #   Description of the DataAutomationProject
     #   @return [String]
@@ -521,6 +597,7 @@ module Aws::BedrockDataAutomation
       :last_modified_time,
       :project_name,
       :project_stage,
+      :project_type,
       :project_description,
       :standard_output_configuration,
       :custom_output_configuration,
@@ -561,6 +638,10 @@ module Aws::BedrockDataAutomation
     #   Stage of the Project
     #   @return [String]
     #
+    # @!attribute [rw] project_type
+    #   Type of the DataAutomationProject
+    #   @return [String]
+    #
     # @!attribute [rw] project_name
     #   Name of the DataAutomationProject
     #   @return [String]
@@ -574,6 +655,7 @@ module Aws::BedrockDataAutomation
     class DataAutomationProjectSummary < Struct.new(
       :project_arn,
       :project_stage,
+      :project_type,
       :project_name,
       :creation_time)
       SENSITIVE = [:project_name]
@@ -724,11 +806,16 @@ module Aws::BedrockDataAutomation
     #   Configuration to enable/disable processing of modality
     #   @return [Types::ModalityProcessingConfiguration]
     #
+    # @!attribute [rw] sensitive_data_configuration
+    #   Configuration for sensitive data detection and redaction
+    #   @return [Types::SensitiveDataConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/DocumentOverrideConfiguration AWS API Documentation
     #
     class DocumentOverrideConfiguration < Struct.new(
       :splitter,
-      :modality_processing)
+      :modality_processing,
+      :sensitive_data_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -920,10 +1007,15 @@ module Aws::BedrockDataAutomation
     #   Configuration to enable/disable processing of modality
     #   @return [Types::ModalityProcessingConfiguration]
     #
+    # @!attribute [rw] sensitive_data_configuration
+    #   Configuration for sensitive data detection and redaction
+    #   @return [Types::SensitiveDataConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/ImageOverrideConfiguration AWS API Documentation
     #
     class ImageOverrideConfiguration < Struct.new(
-      :modality_processing)
+      :modality_processing,
+      :sensitive_data_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1212,6 +1304,25 @@ module Aws::BedrockDataAutomation
       include Aws::Structure
     end
 
+    # Configuration for PII entities detection and redaction
+    #
+    # @!attribute [rw] pii_entity_types
+    #   Types of PII entities to detect
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] redaction_mask_mode
+    #   Mode for redacting detected PII
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/PIIEntitiesConfiguration AWS API Documentation
+    #
+    class PIIEntitiesConfiguration < Struct.new(
+      :pii_entity_types,
+      :redaction_mask_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception is thrown when a resource referenced by the operation
     # does not exist
     #
@@ -1227,6 +1338,30 @@ module Aws::BedrockDataAutomation
       include Aws::Structure
     end
 
+    # Configuration for sensitive data detection and redaction
+    #
+    # @!attribute [rw] detection_mode
+    #   Mode for sensitive data detection
+    #   @return [String]
+    #
+    # @!attribute [rw] detection_scope
+    #   Scope of detection - what types of sensitive data to detect
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] pii_entities_configuration
+    #   Configuration for PII entities detection and redaction
+    #   @return [Types::PIIEntitiesConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/SensitiveDataConfiguration AWS API Documentation
+    #
+    class SensitiveDataConfiguration < Struct.new(
+      :detection_mode,
+      :detection_scope,
+      :pii_entities_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception is thrown when a request is made beyond the service
     # quota
     #
@@ -1238,6 +1373,20 @@ module Aws::BedrockDataAutomation
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Speaker labeling configuration
+    #
+    # @!attribute [rw] state
+    #   State
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/SpeakerLabelingConfiguration AWS API Documentation
+    #
+    class SpeakerLabelingConfiguration < Struct.new(
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1336,6 +1485,25 @@ module Aws::BedrockDataAutomation
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for transcript related features
+    #
+    # @!attribute [rw] speaker_labeling
+    #   Speaker labeling configuration
+    #   @return [Types::SpeakerLabelingConfiguration]
+    #
+    # @!attribute [rw] channel_labeling
+    #   Channel labeling configuration
+    #   @return [Types::ChannelLabelingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/TranscriptConfiguration AWS API Documentation
+    #
+    class TranscriptConfiguration < Struct.new(
+      :speaker_labeling,
+      :channel_labeling)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1551,10 +1719,15 @@ module Aws::BedrockDataAutomation
     #   Configuration to enable/disable processing of modality
     #   @return [Types::ModalityProcessingConfiguration]
     #
+    # @!attribute [rw] sensitive_data_configuration
+    #   Configuration for sensitive data detection and redaction
+    #   @return [Types::SensitiveDataConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/VideoOverrideConfiguration AWS API Documentation
     #
     class VideoOverrideConfiguration < Struct.new(
-      :modality_processing)
+      :modality_processing,
+      :sensitive_data_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

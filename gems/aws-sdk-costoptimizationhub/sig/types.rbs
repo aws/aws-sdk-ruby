@@ -175,6 +175,13 @@ module Aws::CostOptimizationHub
       SENSITIVE: []
     end
 
+    class EfficiencyMetricsByGroup
+      attr_accessor metrics_by_time: ::Array[Types::MetricsByTime]
+      attr_accessor group: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ElastiCacheReservedInstances
       attr_accessor configuration: Types::ElastiCacheReservedInstancesConfiguration
       attr_accessor cost_calculation: Types::ReservedInstancesCostCalculation
@@ -211,7 +218,7 @@ module Aws::CostOptimizationHub
       attr_accessor implementation_efforts: ::Array[("VeryLow" | "Low" | "Medium" | "High" | "VeryHigh")]
       attr_accessor account_ids: ::Array[::String]
       attr_accessor regions: ::Array[::String]
-      attr_accessor resource_types: ::Array[("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances" | "RdsDbInstanceStorage" | "RdsDbInstance" | "AuroraDbClusterStorage" | "DynamoDbReservedCapacity" | "MemoryDbReservedInstances")]
+      attr_accessor resource_types: ::Array[("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances" | "RdsDbInstanceStorage" | "RdsDbInstance" | "AuroraDbClusterStorage" | "DynamoDbReservedCapacity" | "MemoryDbReservedInstances" | "NatGateway")]
       attr_accessor action_types: ::Array[("Rightsize" | "Stop" | "Upgrade" | "PurchaseSavingsPlans" | "PurchaseReservedInstances" | "MigrateToGraviton" | "Delete" | "ScaleIn")]
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor resource_ids: ::Array[::String]
@@ -245,8 +252,8 @@ module Aws::CostOptimizationHub
       attr_accessor cost_calculation_lookback_period_in_days: ::Integer
       attr_accessor estimated_savings_percentage: ::Float
       attr_accessor estimated_savings_over_cost_calculation_lookback_period: ::Float
-      attr_accessor current_resource_type: ("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances" | "RdsDbInstanceStorage" | "RdsDbInstance" | "AuroraDbClusterStorage" | "DynamoDbReservedCapacity" | "MemoryDbReservedInstances")
-      attr_accessor recommended_resource_type: ("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances" | "RdsDbInstanceStorage" | "RdsDbInstance" | "AuroraDbClusterStorage" | "DynamoDbReservedCapacity" | "MemoryDbReservedInstances")
+      attr_accessor current_resource_type: ("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances" | "RdsDbInstanceStorage" | "RdsDbInstance" | "AuroraDbClusterStorage" | "DynamoDbReservedCapacity" | "MemoryDbReservedInstances" | "NatGateway")
+      attr_accessor recommended_resource_type: ("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances" | "RdsDbInstanceStorage" | "RdsDbInstance" | "AuroraDbClusterStorage" | "DynamoDbReservedCapacity" | "MemoryDbReservedInstances" | "NatGateway")
       attr_accessor region: ::String
       attr_accessor source: ("ComputeOptimizer" | "CostExplorer")
       attr_accessor last_refresh_timestamp: ::Time
@@ -280,6 +287,22 @@ module Aws::CostOptimizationHub
 
     class LambdaFunctionConfiguration
       attr_accessor compute: Types::ComputeConfiguration
+      SENSITIVE: []
+    end
+
+    class ListEfficiencyMetricsRequest
+      attr_accessor group_by: ::String
+      attr_accessor granularity: ("Daily" | "Monthly")
+      attr_accessor time_period: Types::TimePeriod
+      attr_accessor max_results: ::Integer
+      attr_accessor order_by: Types::OrderBy
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEfficiencyMetricsResponse
+      attr_accessor efficiency_metrics_by_group: ::Array[Types::EfficiencyMetricsByGroup]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -355,8 +378,29 @@ module Aws::CostOptimizationHub
       SENSITIVE: []
     end
 
+    class MetricsByTime
+      attr_accessor score: ::Float
+      attr_accessor savings: ::Float
+      attr_accessor spend: ::Float
+      attr_accessor timestamp: ::String
+      SENSITIVE: []
+    end
+
     class MixedInstanceConfiguration
       attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class NatGateway
+      attr_accessor configuration: Types::NatGatewayConfiguration
+      attr_accessor cost_calculation: Types::ResourceCostCalculation
+      SENSITIVE: []
+    end
+
+    class NatGatewayConfiguration
+      attr_accessor active_connection_count: ::Integer
+      attr_accessor packets_in_from_source: ::Integer
+      attr_accessor packets_in_from_destination: ::Integer
       SENSITIVE: []
     end
 
@@ -539,6 +583,7 @@ module Aws::CostOptimizationHub
       attr_accessor aurora_db_cluster_storage: Types::AuroraDbClusterStorage
       attr_accessor dynamo_db_reserved_capacity: Types::DynamoDbReservedCapacity
       attr_accessor memory_db_reserved_instances: Types::MemoryDbReservedInstances
+      attr_accessor nat_gateway: Types::NatGateway
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -577,6 +622,8 @@ module Aws::CostOptimizationHub
       class DynamoDbReservedCapacity < ResourceDetails
       end
       class MemoryDbReservedInstances < ResourceDetails
+      end
+      class NatGateway < ResourceDetails
       end
       class Unknown < ResourceDetails
       end
@@ -642,6 +689,12 @@ module Aws::CostOptimizationHub
 
     class ThrottlingException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimePeriod
+      attr_accessor start: ::String
+      attr_accessor end: ::String
       SENSITIVE: []
     end
 

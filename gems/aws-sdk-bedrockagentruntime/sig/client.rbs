@@ -1260,7 +1260,12 @@ module Aws
                         }
                       },
                       retrieval_query: {
-                        text: ::String
+                        image: {
+                          format: ("png" | "jpeg" | "gif" | "webp"),
+                          inline_content: ::String
+                        }?,
+                        text: ::String?,
+                        type: ("TEXT" | "IMAGE")?
                       }
                     ) -> _RetrieveResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetrieveResponseSuccess

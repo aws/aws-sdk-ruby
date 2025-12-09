@@ -645,7 +645,7 @@ module Aws::EC2
     #
     #   * `requester-id` - The ID of the entity that launched the instance on
     #     your behalf (for example, Amazon Web Services Management Console,
-    #     Auto Scaling, and so on).
+    #     Amazon EC2 Auto Scaling, and so on).
     #
     #   * `reservation-id` - The ID of the instance's reservation. A
     #     reservation ID is created any time you launch an instance. A

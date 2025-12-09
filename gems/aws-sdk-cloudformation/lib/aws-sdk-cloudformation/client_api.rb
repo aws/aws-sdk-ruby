@@ -30,9 +30,16 @@ module Aws::CloudFormation
     ActivateTypeOutput = Shapes::StructureShape.new(name: 'ActivateTypeOutput')
     AfterContext = Shapes::StringShape.new(name: 'AfterContext')
     AfterValue = Shapes::StringShape.new(name: 'AfterValue')
+    AfterValueFrom = Shapes::StringShape.new(name: 'AfterValueFrom')
     AllowedValue = Shapes::StringShape.new(name: 'AllowedValue')
     AllowedValues = Shapes::ListShape.new(name: 'AllowedValues')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException', error: {"code" => "AlreadyExistsException", "httpStatusCode" => 400, "senderFault" => true})
+    Annotation = Shapes::StructureShape.new(name: 'Annotation')
+    AnnotationList = Shapes::ListShape.new(name: 'AnnotationList')
+    AnnotationName = Shapes::StringShape.new(name: 'AnnotationName')
+    AnnotationRemediationLink = Shapes::StringShape.new(name: 'AnnotationRemediationLink')
+    AnnotationSeverityLevel = Shapes::StringShape.new(name: 'AnnotationSeverityLevel')
+    AnnotationStatus = Shapes::StringShape.new(name: 'AnnotationStatus')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AttributeChangeType = Shapes::StringShape.new(name: 'AttributeChangeType')
     AutoDeployment = Shapes::StructureShape.new(name: 'AutoDeployment')
@@ -42,8 +49,10 @@ module Aws::CloudFormation
     BatchDescribeTypeConfigurationsErrors = Shapes::ListShape.new(name: 'BatchDescribeTypeConfigurationsErrors')
     BatchDescribeTypeConfigurationsInput = Shapes::StructureShape.new(name: 'BatchDescribeTypeConfigurationsInput')
     BatchDescribeTypeConfigurationsOutput = Shapes::StructureShape.new(name: 'BatchDescribeTypeConfigurationsOutput')
+    BeaconStackOperationStatus = Shapes::StringShape.new(name: 'BeaconStackOperationStatus')
     BeforeContext = Shapes::StringShape.new(name: 'BeforeContext')
     BeforeValue = Shapes::StringShape.new(name: 'BeforeValue')
+    BeforeValueFrom = Shapes::StringShape.new(name: 'BeforeValueFrom')
     BoxedInteger = Shapes::IntegerShape.new(name: 'BoxedInteger')
     BoxedMaxResults = Shapes::IntegerShape.new(name: 'BoxedMaxResults')
     CFNRegistryException = Shapes::StructureShape.new(name: 'CFNRegistryException', error: {"code" => "CFNRegistryException", "httpStatusCode" => 400, "senderFault" => true})
@@ -109,6 +118,7 @@ module Aws::CloudFormation
     DeleteStackSetOutput = Shapes::StructureShape.new(name: 'DeleteStackSetOutput')
     DeletionMode = Shapes::StringShape.new(name: 'DeletionMode')
     DeletionTime = Shapes::TimestampShape.new(name: 'DeletionTime')
+    DeploymentMode = Shapes::StringShape.new(name: 'DeploymentMode')
     DeploymentTargets = Shapes::StructureShape.new(name: 'DeploymentTargets')
     DeprecatedStatus = Shapes::StringShape.new(name: 'DeprecatedStatus')
     DeregisterTypeInput = Shapes::StructureShape.new(name: 'DeregisterTypeInput')
@@ -119,6 +129,8 @@ module Aws::CloudFormation
     DescribeChangeSetHooksOutput = Shapes::StructureShape.new(name: 'DescribeChangeSetHooksOutput')
     DescribeChangeSetInput = Shapes::StructureShape.new(name: 'DescribeChangeSetInput')
     DescribeChangeSetOutput = Shapes::StructureShape.new(name: 'DescribeChangeSetOutput')
+    DescribeEventsInput = Shapes::StructureShape.new(name: 'DescribeEventsInput')
+    DescribeEventsOutput = Shapes::StructureShape.new(name: 'DescribeEventsOutput')
     DescribeGeneratedTemplateInput = Shapes::StructureShape.new(name: 'DescribeGeneratedTemplateInput')
     DescribeGeneratedTemplateOutput = Shapes::StructureShape.new(name: 'DescribeGeneratedTemplateOutput')
     DescribeOrganizationsAccessInput = Shapes::StructureShape.new(name: 'DescribeOrganizationsAccessInput')
@@ -162,6 +174,7 @@ module Aws::CloudFormation
     DetectionReason = Shapes::StringShape.new(name: 'DetectionReason')
     DifferenceType = Shapes::StringShape.new(name: 'DifferenceType')
     DisableRollback = Shapes::BooleanShape.new(name: 'DisableRollback')
+    DriftIgnoredReason = Shapes::StringShape.new(name: 'DriftIgnoredReason')
     DriftedStackInstancesCount = Shapes::IntegerShape.new(name: 'DriftedStackInstancesCount')
     EnableStackCreation = Shapes::BooleanShape.new(name: 'EnableStackCreation')
     EnableTerminationProtection = Shapes::BooleanShape.new(name: 'EnableTerminationProtection')
@@ -170,7 +183,9 @@ module Aws::CloudFormation
     EstimateTemplateCostInput = Shapes::StructureShape.new(name: 'EstimateTemplateCostInput')
     EstimateTemplateCostOutput = Shapes::StructureShape.new(name: 'EstimateTemplateCostOutput')
     EvaluationType = Shapes::StringShape.new(name: 'EvaluationType')
+    EventFilter = Shapes::StructureShape.new(name: 'EventFilter')
     EventId = Shapes::StringShape.new(name: 'EventId')
+    EventType = Shapes::StringShape.new(name: 'EventType')
     ExecuteChangeSetInput = Shapes::StructureShape.new(name: 'ExecuteChangeSetInput')
     ExecuteChangeSetOutput = Shapes::StructureShape.new(name: 'ExecuteChangeSetOutput')
     ExecuteStackRefactorInput = Shapes::StructureShape.new(name: 'ExecuteStackRefactorInput')
@@ -181,6 +196,7 @@ module Aws::CloudFormation
     ExportName = Shapes::StringShape.new(name: 'ExportName')
     ExportValue = Shapes::StringShape.new(name: 'ExportValue')
     Exports = Shapes::ListShape.new(name: 'Exports')
+    FailedEventsFilter = Shapes::BooleanShape.new(name: 'FailedEventsFilter')
     FailedStackInstancesCount = Shapes::IntegerShape.new(name: 'FailedStackInstancesCount')
     FailureToleranceCount = Shapes::IntegerShape.new(name: 'FailureToleranceCount')
     FailureTolerancePercentage = Shapes::IntegerShape.new(name: 'FailureTolerancePercentage')
@@ -193,6 +209,8 @@ module Aws::CloudFormation
     GeneratedTemplateUpdateReplacePolicy = Shapes::StringShape.new(name: 'GeneratedTemplateUpdateReplacePolicy')
     GetGeneratedTemplateInput = Shapes::StructureShape.new(name: 'GetGeneratedTemplateInput')
     GetGeneratedTemplateOutput = Shapes::StructureShape.new(name: 'GetGeneratedTemplateOutput')
+    GetHookResultInput = Shapes::StructureShape.new(name: 'GetHookResultInput')
+    GetHookResultOutput = Shapes::StructureShape.new(name: 'GetHookResultOutput')
     GetStackPolicyInput = Shapes::StructureShape.new(name: 'GetStackPolicyInput')
     GetStackPolicyOutput = Shapes::StructureShape.new(name: 'GetStackPolicyOutput')
     GetTemplateInput = Shapes::StructureShape.new(name: 'GetTemplateInput')
@@ -210,6 +228,9 @@ module Aws::CloudFormation
     HookResultSummary = Shapes::StructureShape.new(name: 'HookResultSummary')
     HookStatus = Shapes::StringShape.new(name: 'HookStatus')
     HookStatusReason = Shapes::StringShape.new(name: 'HookStatusReason')
+    HookTarget = Shapes::StructureShape.new(name: 'HookTarget')
+    HookTargetAction = Shapes::StringShape.new(name: 'HookTargetAction')
+    HookTargetId = Shapes::StringShape.new(name: 'HookTargetId')
     HookTargetType = Shapes::StringShape.new(name: 'HookTargetType')
     HookTargetTypeName = Shapes::StringShape.new(name: 'HookTargetTypeName')
     HookType = Shapes::StringShape.new(name: 'HookType')
@@ -238,6 +259,7 @@ module Aws::CloudFormation
     JazzResourceIdentifierPropertyKey = Shapes::StringShape.new(name: 'JazzResourceIdentifierPropertyKey')
     JazzResourceIdentifierPropertyValue = Shapes::StringShape.new(name: 'JazzResourceIdentifierPropertyValue')
     Key = Shapes::StringShape.new(name: 'Key')
+    LastOperations = Shapes::ListShape.new(name: 'LastOperations')
     LastUpdatedTime = Shapes::TimestampShape.new(name: 'LastUpdatedTime')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException', error: {"code" => "LimitExceededException", "httpStatusCode" => 400, "senderFault" => true})
     LimitName = Shapes::StringShape.new(name: 'LimitName')
@@ -285,6 +307,7 @@ module Aws::CloudFormation
     ListTypeVersionsOutput = Shapes::StructureShape.new(name: 'ListTypeVersionsOutput')
     ListTypesInput = Shapes::StructureShape.new(name: 'ListTypesInput')
     ListTypesOutput = Shapes::StructureShape.new(name: 'ListTypesOutput')
+    LiveResourceDrift = Shapes::StructureShape.new(name: 'LiveResourceDrift')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
     LoggingConfig = Shapes::StructureShape.new(name: 'LoggingConfig')
     LogicalIdHierarchy = Shapes::StringShape.new(name: 'LogicalIdHierarchy')
@@ -308,6 +331,10 @@ module Aws::CloudFormation
     NumberOfResources = Shapes::IntegerShape.new(name: 'NumberOfResources')
     OnFailure = Shapes::StringShape.new(name: 'OnFailure')
     OnStackFailure = Shapes::StringShape.new(name: 'OnStackFailure')
+    OperationEntry = Shapes::StructureShape.new(name: 'OperationEntry')
+    OperationEvent = Shapes::StructureShape.new(name: 'OperationEvent')
+    OperationEvents = Shapes::ListShape.new(name: 'OperationEvents')
+    OperationId = Shapes::StringShape.new(name: 'OperationId')
     OperationIdAlreadyExistsException = Shapes::StructureShape.new(name: 'OperationIdAlreadyExistsException', error: {"code" => "OperationIdAlreadyExistsException", "httpStatusCode" => 409, "senderFault" => true})
     OperationInProgressException = Shapes::StructureShape.new(name: 'OperationInProgressException', error: {"code" => "OperationInProgressException", "httpStatusCode" => 409, "senderFault" => true})
     OperationNotFoundException = Shapes::StructureShape.new(name: 'OperationNotFoundException', error: {"code" => "OperationNotFoundException", "httpStatusCode" => 404, "senderFault" => true})
@@ -317,6 +344,7 @@ module Aws::CloudFormation
     OperationResultFilters = Shapes::ListShape.new(name: 'OperationResultFilters')
     OperationStatus = Shapes::StringShape.new(name: 'OperationStatus')
     OperationStatusCheckFailedException = Shapes::StructureShape.new(name: 'OperationStatusCheckFailedException', error: {"code" => "ConditionalCheckFailed", "httpStatusCode" => 400, "senderFault" => true})
+    OperationType = Shapes::StringShape.new(name: 'OperationType')
     OptionalSecureUrl = Shapes::StringShape.new(name: 'OptionalSecureUrl')
     OrganizationStatus = Shapes::StringShape.new(name: 'OrganizationStatus')
     OrganizationalUnitId = Shapes::StringShape.new(name: 'OrganizationalUnitId')
@@ -339,6 +367,7 @@ module Aws::CloudFormation
     PhysicalResourceIdContext = Shapes::ListShape.new(name: 'PhysicalResourceIdContext')
     PhysicalResourceIdContextKeyValuePair = Shapes::StructureShape.new(name: 'PhysicalResourceIdContextKeyValuePair')
     PolicyAction = Shapes::StringShape.new(name: 'PolicyAction')
+    PreviousDeploymentContext = Shapes::StringShape.new(name: 'PreviousDeploymentContext')
     PrivateTypeArn = Shapes::StringShape.new(name: 'PrivateTypeArn')
     Properties = Shapes::StringShape.new(name: 'Properties')
     PropertyDescription = Shapes::StringShape.new(name: 'PropertyDescription')
@@ -371,6 +400,8 @@ module Aws::CloudFormation
     RegistrationTokenList = Shapes::ListShape.new(name: 'RegistrationTokenList')
     RegistryType = Shapes::StringShape.new(name: 'RegistryType')
     RelatedResources = Shapes::ListShape.new(name: 'RelatedResources')
+    RemediationMessageRemediationMessage = Shapes::StringShape.new(name: 'RemediationMessageRemediationMessage')
+    RemediationMessageStatusMessage = Shapes::StringShape.new(name: 'RemediationMessageStatusMessage')
     Replacement = Shapes::StringShape.new(name: 'Replacement')
     RequestToken = Shapes::StringShape.new(name: 'RequestToken')
     RequiredActivatedType = Shapes::StructureShape.new(name: 'RequiredActivatedType')
@@ -385,6 +416,10 @@ module Aws::CloudFormation
     ResourceDefinitions = Shapes::ListShape.new(name: 'ResourceDefinitions')
     ResourceDetail = Shapes::StructureShape.new(name: 'ResourceDetail')
     ResourceDetails = Shapes::ListShape.new(name: 'ResourceDetails')
+    ResourceDriftActualValue = Shapes::StringShape.new(name: 'ResourceDriftActualValue')
+    ResourceDriftIgnoredAttribute = Shapes::StructureShape.new(name: 'ResourceDriftIgnoredAttribute')
+    ResourceDriftIgnoredAttributes = Shapes::ListShape.new(name: 'ResourceDriftIgnoredAttributes')
+    ResourceDriftPreviousValue = Shapes::StringShape.new(name: 'ResourceDriftPreviousValue')
     ResourceIdentifier = Shapes::StringShape.new(name: 'ResourceIdentifier')
     ResourceIdentifierProperties = Shapes::MapShape.new(name: 'ResourceIdentifierProperties')
     ResourceIdentifierPropertyKey = Shapes::StringShape.new(name: 'ResourceIdentifierPropertyKey')
@@ -520,6 +555,7 @@ module Aws::CloudFormation
     StackResources = Shapes::ListShape.new(name: 'StackResources')
     StackSet = Shapes::StructureShape.new(name: 'StackSet')
     StackSetARN = Shapes::StringShape.new(name: 'StackSetARN')
+    StackSetARNList = Shapes::ListShape.new(name: 'StackSetARNList')
     StackSetAutoDeploymentTargetSummaries = Shapes::ListShape.new(name: 'StackSetAutoDeploymentTargetSummaries')
     StackSetAutoDeploymentTargetSummary = Shapes::StructureShape.new(name: 'StackSetAutoDeploymentTargetSummary')
     StackSetDriftDetectionDetails = Shapes::StructureShape.new(name: 'StackSetDriftDetectionDetails')
@@ -627,6 +663,10 @@ module Aws::CloudFormation
     UsePreviousValue = Shapes::BooleanShape.new(name: 'UsePreviousValue')
     ValidateTemplateInput = Shapes::StructureShape.new(name: 'ValidateTemplateInput')
     ValidateTemplateOutput = Shapes::StructureShape.new(name: 'ValidateTemplateOutput')
+    ValidationName = Shapes::StringShape.new(name: 'ValidationName')
+    ValidationPath = Shapes::StringShape.new(name: 'ValidationPath')
+    ValidationStatus = Shapes::StringShape.new(name: 'ValidationStatus')
+    ValidationStatusReason = Shapes::StringShape.new(name: 'ValidationStatusReason')
     Value = Shapes::StringShape.new(name: 'Value')
     Version = Shapes::StringShape.new(name: 'Version')
     VersionBump = Shapes::StringShape.new(name: 'VersionBump')
@@ -673,8 +713,19 @@ module Aws::CloudFormation
 
     AlreadyExistsException.struct_class = Types::AlreadyExistsException
 
+    Annotation.add_member(:annotation_name, Shapes::ShapeRef.new(shape: AnnotationName, location_name: "AnnotationName"))
+    Annotation.add_member(:status, Shapes::ShapeRef.new(shape: AnnotationStatus, location_name: "Status"))
+    Annotation.add_member(:status_message, Shapes::ShapeRef.new(shape: RemediationMessageStatusMessage, location_name: "StatusMessage"))
+    Annotation.add_member(:remediation_message, Shapes::ShapeRef.new(shape: RemediationMessageRemediationMessage, location_name: "RemediationMessage"))
+    Annotation.add_member(:remediation_link, Shapes::ShapeRef.new(shape: AnnotationRemediationLink, location_name: "RemediationLink"))
+    Annotation.add_member(:severity_level, Shapes::ShapeRef.new(shape: AnnotationSeverityLevel, location_name: "SeverityLevel"))
+    Annotation.struct_class = Types::Annotation
+
+    AnnotationList.member = Shapes::ShapeRef.new(shape: Annotation)
+
     AutoDeployment.add_member(:enabled, Shapes::ShapeRef.new(shape: AutoDeploymentNullable, location_name: "Enabled"))
     AutoDeployment.add_member(:retain_stacks_on_account_removal, Shapes::ShapeRef.new(shape: RetainStacksOnAccountRemovalNullable, location_name: "RetainStacksOnAccountRemoval"))
+    AutoDeployment.add_member(:depends_on, Shapes::ShapeRef.new(shape: StackSetARNList, location_name: "DependsOn"))
     AutoDeployment.struct_class = Types::AutoDeployment
 
     BatchDescribeTypeConfigurationsError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
@@ -775,6 +826,7 @@ module Aws::CloudFormation
     CreateChangeSetInput.add_member(:include_nested_stacks, Shapes::ShapeRef.new(shape: IncludeNestedStacks, location_name: "IncludeNestedStacks"))
     CreateChangeSetInput.add_member(:on_stack_failure, Shapes::ShapeRef.new(shape: OnStackFailure, location_name: "OnStackFailure"))
     CreateChangeSetInput.add_member(:import_existing_resources, Shapes::ShapeRef.new(shape: ImportExistingResources, location_name: "ImportExistingResources"))
+    CreateChangeSetInput.add_member(:deployment_mode, Shapes::ShapeRef.new(shape: DeploymentMode, location_name: "DeploymentMode"))
     CreateChangeSetInput.struct_class = Types::CreateChangeSetInput
 
     CreateChangeSetOutput.add_member(:id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "Id"))
@@ -824,6 +876,7 @@ module Aws::CloudFormation
     CreateStackInstancesOutput.struct_class = Types::CreateStackInstancesOutput
 
     CreateStackOutput.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
+    CreateStackOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
     CreateStackOutput.struct_class = Types::CreateStackOutput
 
     CreateStackRefactorInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -955,6 +1008,7 @@ module Aws::CloudFormation
     DescribeChangeSetOutput.add_member(:execution_status, Shapes::ShapeRef.new(shape: ExecutionStatus, location_name: "ExecutionStatus"))
     DescribeChangeSetOutput.add_member(:status, Shapes::ShapeRef.new(shape: ChangeSetStatus, location_name: "Status"))
     DescribeChangeSetOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: ChangeSetStatusReason, location_name: "StatusReason"))
+    DescribeChangeSetOutput.add_member(:stack_drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, location_name: "StackDriftStatus"))
     DescribeChangeSetOutput.add_member(:notification_arns, Shapes::ShapeRef.new(shape: NotificationARNs, location_name: "NotificationARNs"))
     DescribeChangeSetOutput.add_member(:rollback_configuration, Shapes::ShapeRef.new(shape: RollbackConfiguration, location_name: "RollbackConfiguration"))
     DescribeChangeSetOutput.add_member(:capabilities, Shapes::ShapeRef.new(shape: Capabilities, location_name: "Capabilities"))
@@ -966,7 +1020,19 @@ module Aws::CloudFormation
     DescribeChangeSetOutput.add_member(:root_change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "RootChangeSetId"))
     DescribeChangeSetOutput.add_member(:on_stack_failure, Shapes::ShapeRef.new(shape: OnStackFailure, location_name: "OnStackFailure"))
     DescribeChangeSetOutput.add_member(:import_existing_resources, Shapes::ShapeRef.new(shape: ImportExistingResources, location_name: "ImportExistingResources"))
+    DescribeChangeSetOutput.add_member(:deployment_mode, Shapes::ShapeRef.new(shape: DeploymentMode, location_name: "DeploymentMode"))
     DescribeChangeSetOutput.struct_class = Types::DescribeChangeSetOutput
+
+    DescribeEventsInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, location_name: "StackName"))
+    DescribeEventsInput.add_member(:change_set_name, Shapes::ShapeRef.new(shape: ChangeSetNameOrId, location_name: "ChangeSetName"))
+    DescribeEventsInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    DescribeEventsInput.add_member(:filters, Shapes::ShapeRef.new(shape: EventFilter, location_name: "Filters"))
+    DescribeEventsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeEventsInput.struct_class = Types::DescribeEventsInput
+
+    DescribeEventsOutput.add_member(:operation_events, Shapes::ShapeRef.new(shape: OperationEvents, location_name: "OperationEvents"))
+    DescribeEventsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeEventsOutput.struct_class = Types::DescribeEventsOutput
 
     DescribeGeneratedTemplateInput.add_member(:generated_template_name, Shapes::ShapeRef.new(shape: GeneratedTemplateName, required: true, location_name: "GeneratedTemplateName"))
     DescribeGeneratedTemplateInput.struct_class = Types::DescribeGeneratedTemplateInput
@@ -1026,7 +1092,7 @@ module Aws::CloudFormation
     DescribeStackDriftDetectionStatusOutput.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
     DescribeStackDriftDetectionStatusOutput.struct_class = Types::DescribeStackDriftDetectionStatusOutput
 
-    DescribeStackEventsInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, location_name: "StackName"))
+    DescribeStackEventsInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, required: true, location_name: "StackName"))
     DescribeStackEventsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeStackEventsInput.struct_class = Types::DescribeStackEventsInput
 
@@ -1180,6 +1246,9 @@ module Aws::CloudFormation
     EstimateTemplateCostOutput.add_member(:url, Shapes::ShapeRef.new(shape: Url, location_name: "Url"))
     EstimateTemplateCostOutput.struct_class = Types::EstimateTemplateCostOutput
 
+    EventFilter.add_member(:failed_events, Shapes::ShapeRef.new(shape: FailedEventsFilter, location_name: "FailedEvents"))
+    EventFilter.struct_class = Types::EventFilter
+
     ExecuteChangeSetInput.add_member(:change_set_name, Shapes::ShapeRef.new(shape: ChangeSetNameOrId, required: true, location_name: "ChangeSetName"))
     ExecuteChangeSetInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, location_name: "StackName"))
     ExecuteChangeSetInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
@@ -1208,6 +1277,24 @@ module Aws::CloudFormation
     GetGeneratedTemplateOutput.add_member(:status, Shapes::ShapeRef.new(shape: GeneratedTemplateStatus, location_name: "Status"))
     GetGeneratedTemplateOutput.add_member(:template_body, Shapes::ShapeRef.new(shape: TemplateBody, location_name: "TemplateBody"))
     GetGeneratedTemplateOutput.struct_class = Types::GetGeneratedTemplateOutput
+
+    GetHookResultInput.add_member(:hook_result_id, Shapes::ShapeRef.new(shape: HookInvocationId, location_name: "HookResultId"))
+    GetHookResultInput.struct_class = Types::GetHookResultInput
+
+    GetHookResultOutput.add_member(:hook_result_id, Shapes::ShapeRef.new(shape: HookInvocationId, location_name: "HookResultId"))
+    GetHookResultOutput.add_member(:invocation_point, Shapes::ShapeRef.new(shape: HookInvocationPoint, location_name: "InvocationPoint"))
+    GetHookResultOutput.add_member(:failure_mode, Shapes::ShapeRef.new(shape: HookFailureMode, location_name: "FailureMode"))
+    GetHookResultOutput.add_member(:type_name, Shapes::ShapeRef.new(shape: HookTypeName, location_name: "TypeName"))
+    GetHookResultOutput.add_member(:original_type_name, Shapes::ShapeRef.new(shape: HookTypeName, location_name: "OriginalTypeName"))
+    GetHookResultOutput.add_member(:type_version_id, Shapes::ShapeRef.new(shape: HookTypeVersionId, location_name: "TypeVersionId"))
+    GetHookResultOutput.add_member(:type_configuration_version_id, Shapes::ShapeRef.new(shape: HookTypeConfigurationVersionId, location_name: "TypeConfigurationVersionId"))
+    GetHookResultOutput.add_member(:type_arn, Shapes::ShapeRef.new(shape: HookTypeArn, location_name: "TypeArn"))
+    GetHookResultOutput.add_member(:status, Shapes::ShapeRef.new(shape: HookStatus, location_name: "Status"))
+    GetHookResultOutput.add_member(:hook_status_reason, Shapes::ShapeRef.new(shape: HookStatusReason, location_name: "HookStatusReason"))
+    GetHookResultOutput.add_member(:invoked_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "InvokedAt"))
+    GetHookResultOutput.add_member(:target, Shapes::ShapeRef.new(shape: HookTarget, location_name: "Target"))
+    GetHookResultOutput.add_member(:annotations, Shapes::ShapeRef.new(shape: AnnotationList, location_name: "Annotations"))
+    GetHookResultOutput.struct_class = Types::GetHookResultOutput
 
     GetStackPolicyInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, required: true, location_name: "StackName"))
     GetStackPolicyInput.struct_class = Types::GetStackPolicyInput
@@ -1263,6 +1350,12 @@ module Aws::CloudFormation
     HookResultSummary.add_member(:hook_execution_target, Shapes::ShapeRef.new(shape: HookResultId, location_name: "HookExecutionTarget"))
     HookResultSummary.struct_class = Types::HookResultSummary
 
+    HookTarget.add_member(:target_type, Shapes::ShapeRef.new(shape: HookTargetType, required: true, location_name: "TargetType"))
+    HookTarget.add_member(:target_type_name, Shapes::ShapeRef.new(shape: HookTargetTypeName, required: true, location_name: "TargetTypeName"))
+    HookTarget.add_member(:target_id, Shapes::ShapeRef.new(shape: HookTargetId, required: true, location_name: "TargetId"))
+    HookTarget.add_member(:action, Shapes::ShapeRef.new(shape: HookTargetAction, required: true, location_name: "Action"))
+    HookTarget.struct_class = Types::HookTarget
+
     ImportStacksToStackSetInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetNameOrId, required: true, location_name: "StackSetName"))
     ImportStacksToStackSetInput.add_member(:stack_ids, Shapes::ShapeRef.new(shape: StackIdList, location_name: "StackIds"))
     ImportStacksToStackSetInput.add_member(:stack_ids_url, Shapes::ShapeRef.new(shape: StackIdsUrl, location_name: "StackIdsUrl"))
@@ -1289,6 +1382,8 @@ module Aws::CloudFormation
 
     JazzResourceIdentifierProperties.key = Shapes::ShapeRef.new(shape: JazzResourceIdentifierPropertyKey)
     JazzResourceIdentifierProperties.value = Shapes::ShapeRef.new(shape: JazzResourceIdentifierPropertyValue)
+
+    LastOperations.member = Shapes::ShapeRef.new(shape: OperationEntry)
 
     LimitExceededException.struct_class = Types::LimitExceededException
 
@@ -1509,6 +1604,11 @@ module Aws::CloudFormation
     ListTypesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTypesOutput.struct_class = Types::ListTypesOutput
 
+    LiveResourceDrift.add_member(:previous_value, Shapes::ShapeRef.new(shape: ResourceDriftPreviousValue, location_name: "PreviousValue"))
+    LiveResourceDrift.add_member(:actual_value, Shapes::ShapeRef.new(shape: ResourceDriftActualValue, location_name: "ActualValue"))
+    LiveResourceDrift.add_member(:drift_detection_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DriftDetectionTimestamp"))
+    LiveResourceDrift.struct_class = Types::LiveResourceDrift
+
     LoggingConfig.add_member(:log_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "LogRoleArn"))
     LoggingConfig.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "LogGroupName"))
     LoggingConfig.struct_class = Types::LoggingConfig
@@ -1525,6 +1625,41 @@ module Aws::CloudFormation
     NameAlreadyExistsException.struct_class = Types::NameAlreadyExistsException
 
     NotificationARNs.member = Shapes::ShapeRef.new(shape: NotificationARN)
+
+    OperationEntry.add_member(:operation_type, Shapes::ShapeRef.new(shape: OperationType, location_name: "OperationType"))
+    OperationEntry.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    OperationEntry.struct_class = Types::OperationEntry
+
+    OperationEvent.add_member(:event_id, Shapes::ShapeRef.new(shape: EventId, location_name: "EventId"))
+    OperationEvent.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
+    OperationEvent.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    OperationEvent.add_member(:operation_type, Shapes::ShapeRef.new(shape: OperationType, location_name: "OperationType"))
+    OperationEvent.add_member(:operation_status, Shapes::ShapeRef.new(shape: BeaconStackOperationStatus, location_name: "OperationStatus"))
+    OperationEvent.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, location_name: "EventType"))
+    OperationEvent.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, location_name: "LogicalResourceId"))
+    OperationEvent.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: PhysicalResourceId, location_name: "PhysicalResourceId"))
+    OperationEvent.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    OperationEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    OperationEvent.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    OperationEvent.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    OperationEvent.add_member(:resource_status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "ResourceStatus"))
+    OperationEvent.add_member(:resource_status_reason, Shapes::ShapeRef.new(shape: ResourceStatusReason, location_name: "ResourceStatusReason"))
+    OperationEvent.add_member(:resource_properties, Shapes::ShapeRef.new(shape: ResourceProperties, location_name: "ResourceProperties"))
+    OperationEvent.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    OperationEvent.add_member(:hook_type, Shapes::ShapeRef.new(shape: HookType, location_name: "HookType"))
+    OperationEvent.add_member(:hook_status, Shapes::ShapeRef.new(shape: HookStatus, location_name: "HookStatus"))
+    OperationEvent.add_member(:hook_status_reason, Shapes::ShapeRef.new(shape: HookStatusReason, location_name: "HookStatusReason"))
+    OperationEvent.add_member(:hook_invocation_point, Shapes::ShapeRef.new(shape: HookInvocationPoint, location_name: "HookInvocationPoint"))
+    OperationEvent.add_member(:hook_failure_mode, Shapes::ShapeRef.new(shape: HookFailureMode, location_name: "HookFailureMode"))
+    OperationEvent.add_member(:detailed_status, Shapes::ShapeRef.new(shape: DetailedStatus, location_name: "DetailedStatus"))
+    OperationEvent.add_member(:validation_failure_mode, Shapes::ShapeRef.new(shape: HookFailureMode, location_name: "ValidationFailureMode"))
+    OperationEvent.add_member(:validation_name, Shapes::ShapeRef.new(shape: ValidationName, location_name: "ValidationName"))
+    OperationEvent.add_member(:validation_status, Shapes::ShapeRef.new(shape: ValidationStatus, location_name: "ValidationStatus"))
+    OperationEvent.add_member(:validation_status_reason, Shapes::ShapeRef.new(shape: ValidationStatusReason, location_name: "ValidationStatusReason"))
+    OperationEvent.add_member(:validation_path, Shapes::ShapeRef.new(shape: ValidationPath, location_name: "ValidationPath"))
+    OperationEvent.struct_class = Types::OperationEvent
+
+    OperationEvents.member = Shapes::ShapeRef.new(shape: OperationEvent)
 
     OperationIdAlreadyExistsException.struct_class = Types::OperationIdAlreadyExistsException
 
@@ -1644,11 +1779,14 @@ module Aws::CloudFormation
     ResourceChange.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ResourceChange.add_member(:replacement, Shapes::ShapeRef.new(shape: Replacement, location_name: "Replacement"))
     ResourceChange.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "Scope"))
+    ResourceChange.add_member(:resource_drift_status, Shapes::ShapeRef.new(shape: StackResourceDriftStatus, location_name: "ResourceDriftStatus"))
+    ResourceChange.add_member(:resource_drift_ignored_attributes, Shapes::ShapeRef.new(shape: ResourceDriftIgnoredAttributes, location_name: "ResourceDriftIgnoredAttributes"))
     ResourceChange.add_member(:details, Shapes::ShapeRef.new(shape: ResourceChangeDetails, location_name: "Details"))
     ResourceChange.add_member(:change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "ChangeSetId"))
     ResourceChange.add_member(:module_info, Shapes::ShapeRef.new(shape: ModuleInfo, location_name: "ModuleInfo"))
     ResourceChange.add_member(:before_context, Shapes::ShapeRef.new(shape: BeforeContext, location_name: "BeforeContext"))
     ResourceChange.add_member(:after_context, Shapes::ShapeRef.new(shape: AfterContext, location_name: "AfterContext"))
+    ResourceChange.add_member(:previous_deployment_context, Shapes::ShapeRef.new(shape: PreviousDeploymentContext, location_name: "PreviousDeploymentContext"))
     ResourceChange.struct_class = Types::ResourceChange
 
     ResourceChangeDetail.add_member(:target, Shapes::ShapeRef.new(shape: ResourceTargetDefinition, location_name: "Target"))
@@ -1675,6 +1813,12 @@ module Aws::CloudFormation
     ResourceDetail.struct_class = Types::ResourceDetail
 
     ResourceDetails.member = Shapes::ShapeRef.new(shape: ResourceDetail)
+
+    ResourceDriftIgnoredAttribute.add_member(:path, Shapes::ShapeRef.new(shape: ResourcePropertyPath, location_name: "Path"))
+    ResourceDriftIgnoredAttribute.add_member(:reason, Shapes::ShapeRef.new(shape: DriftIgnoredReason, location_name: "Reason"))
+    ResourceDriftIgnoredAttribute.struct_class = Types::ResourceDriftIgnoredAttribute
+
+    ResourceDriftIgnoredAttributes.member = Shapes::ShapeRef.new(shape: ResourceDriftIgnoredAttribute)
 
     ResourceIdentifierProperties.key = Shapes::ShapeRef.new(shape: ResourceIdentifierPropertyKey)
     ResourceIdentifierProperties.value = Shapes::ShapeRef.new(shape: ResourceIdentifierPropertyValue)
@@ -1721,6 +1865,9 @@ module Aws::CloudFormation
     ResourceTargetDefinition.add_member(:path, Shapes::ShapeRef.new(shape: ResourcePropertyPath, location_name: "Path"))
     ResourceTargetDefinition.add_member(:before_value, Shapes::ShapeRef.new(shape: BeforeValue, location_name: "BeforeValue"))
     ResourceTargetDefinition.add_member(:after_value, Shapes::ShapeRef.new(shape: AfterValue, location_name: "AfterValue"))
+    ResourceTargetDefinition.add_member(:before_value_from, Shapes::ShapeRef.new(shape: BeforeValueFrom, location_name: "BeforeValueFrom"))
+    ResourceTargetDefinition.add_member(:after_value_from, Shapes::ShapeRef.new(shape: AfterValueFrom, location_name: "AfterValueFrom"))
+    ResourceTargetDefinition.add_member(:drift, Shapes::ShapeRef.new(shape: LiveResourceDrift, location_name: "Drift"))
     ResourceTargetDefinition.add_member(:attribute_change_type, Shapes::ShapeRef.new(shape: AttributeChangeType, location_name: "AttributeChangeType"))
     ResourceTargetDefinition.struct_class = Types::ResourceTargetDefinition
 
@@ -1750,6 +1897,7 @@ module Aws::CloudFormation
     RollbackStackInput.struct_class = Types::RollbackStackInput
 
     RollbackStackOutput.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
+    RollbackStackOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
     RollbackStackOutput.struct_class = Types::RollbackStackOutput
 
     RollbackTrigger.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
@@ -1832,6 +1980,7 @@ module Aws::CloudFormation
     Stack.add_member(:retain_except_on_create, Shapes::ShapeRef.new(shape: RetainExceptOnCreate, location_name: "RetainExceptOnCreate"))
     Stack.add_member(:deletion_mode, Shapes::ShapeRef.new(shape: DeletionMode, location_name: "DeletionMode"))
     Stack.add_member(:detailed_status, Shapes::ShapeRef.new(shape: DetailedStatus, location_name: "DetailedStatus"))
+    Stack.add_member(:last_operations, Shapes::ShapeRef.new(shape: LastOperations, location_name: "LastOperations"))
     Stack.struct_class = Types::Stack
 
     StackDefinition.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, location_name: "StackName"))
@@ -1852,6 +2001,7 @@ module Aws::CloudFormation
     StackEvent.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, required: true, location_name: "StackId"))
     StackEvent.add_member(:event_id, Shapes::ShapeRef.new(shape: EventId, required: true, location_name: "EventId"))
     StackEvent.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, required: true, location_name: "StackName"))
+    StackEvent.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
     StackEvent.add_member(:logical_resource_id, Shapes::ShapeRef.new(shape: LogicalResourceId, location_name: "LogicalResourceId"))
     StackEvent.add_member(:physical_resource_id, Shapes::ShapeRef.new(shape: PhysicalResourceId, location_name: "PhysicalResourceId"))
     StackEvent.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
@@ -2047,6 +2197,8 @@ module Aws::CloudFormation
     StackSet.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "Regions"))
     StackSet.struct_class = Types::StackSet
 
+    StackSetARNList.member = Shapes::ShapeRef.new(shape: StackSetARN)
+
     StackSetAutoDeploymentTargetSummaries.member = Shapes::ShapeRef.new(shape: StackSetAutoDeploymentTargetSummary)
 
     StackSetAutoDeploymentTargetSummary.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "OrganizationalUnitId"))
@@ -2145,6 +2297,7 @@ module Aws::CloudFormation
     StackSummary.add_member(:parent_id, Shapes::ShapeRef.new(shape: StackId, location_name: "ParentId"))
     StackSummary.add_member(:root_id, Shapes::ShapeRef.new(shape: StackId, location_name: "RootId"))
     StackSummary.add_member(:drift_information, Shapes::ShapeRef.new(shape: StackDriftInformationSummary, location_name: "DriftInformation"))
+    StackSummary.add_member(:last_operations, Shapes::ShapeRef.new(shape: LastOperations, location_name: "LastOperations"))
     StackSummary.struct_class = Types::StackSummary
 
     Stacks.member = Shapes::ShapeRef.new(shape: Stack)
@@ -2326,6 +2479,7 @@ module Aws::CloudFormation
     UpdateStackInstancesOutput.struct_class = Types::UpdateStackInstancesOutput
 
     UpdateStackOutput.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
+    UpdateStackOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
     UpdateStackOutput.struct_class = Types::UpdateStackOutput
 
     UpdateStackSetInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
@@ -2621,6 +2775,11 @@ module Aws::CloudFormation
         o.input = Shapes::ShapeRef.new(shape: DescribeChangeSetInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeChangeSetOutput)
         o.errors << Shapes::ShapeRef.new(shape: ChangeSetNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_change_set_hooks, Seahorse::Model::Operation.new.tap do |o|
@@ -2630,6 +2789,19 @@ module Aws::CloudFormation
         o.input = Shapes::ShapeRef.new(shape: DescribeChangeSetHooksInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeChangeSetHooksOutput)
         o.errors << Shapes::ShapeRef.new(shape: ChangeSetNotFoundException)
+      end)
+
+      api.add_operation(:describe_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEvents"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEventsInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEventsOutput)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_generated_template, Seahorse::Model::Operation.new.tap do |o|
@@ -2852,6 +3024,15 @@ module Aws::CloudFormation
         o.input = Shapes::ShapeRef.new(shape: GetGeneratedTemplateInput)
         o.output = Shapes::ShapeRef.new(shape: GetGeneratedTemplateOutput)
         o.errors << Shapes::ShapeRef.new(shape: GeneratedTemplateNotFoundException)
+      end)
+
+      api.add_operation(:get_hook_result, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetHookResult"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetHookResultInput)
+        o.output = Shapes::ShapeRef.new(shape: GetHookResultOutput)
+        o.errors << Shapes::ShapeRef.new(shape: HookResultNotFoundException)
       end)
 
       api.add_operation(:get_stack_policy, Seahorse::Model::Operation.new.tap do |o|

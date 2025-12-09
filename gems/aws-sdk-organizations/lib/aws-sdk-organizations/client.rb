@@ -483,44 +483,37 @@ module Aws::Organizations
 
     # @!group API Operations
 
-    # Sends a response to the originator of a handshake agreeing to the
-    # action proposed by the handshake request.
+    # Accepts a handshake by sending an `ACCEPTED` response to the sender.
+    # You can view accepted handshakes in API responses for 30 days before
+    # they are deleted.
     #
-    # You can only call this operation by the following principals when they
-    # also have the relevant IAM permissions:
+    # **Only the management account can accept the following handshakes**:
     #
-    # * **Invitation to join** or **Approve all features request**
-    #   handshakes: only a principal from the member account.
+    # * Enable all features final confirmation (`APPROVE_ALL_FEATURES`)
     #
-    #   The user who calls the API for an invitation to join must have the
-    #   `organizations:AcceptHandshake` permission. If you enabled all
-    #   features in the organization, the user must also have the
-    #   `iam:CreateServiceLinkedRole` permission so that Organizations can
-    #   create the required service-linked role named
-    #   `AWSServiceRoleForOrganizations`. For more information, see
-    #   [Organizations and service-linked roles][1] in the *Organizations
-    #   User Guide*.
+    # * Billing transfer (`TRANSFER_RESPONSIBILITY`)
     #
-    # * **Enable all features final confirmation** handshake: only a
-    #   principal from the management account.
+    # For more information, see [Enabling all features][1] and [Responding
+    # to a billing transfer invitation][2] in the *Organizations User
+    # Guide*.
     #
-    #   For more information about invitations, see [Inviting an Amazon Web
-    #   Services account to join your organization][2] in the *Organizations
-    #   User Guide*. For more information about requests to enable all
-    #   features in the organization, see [Enabling all features in your
-    #   organization][3] in the *Organizations User Guide*.
+    # **Only a member account can accept the following handshakes**:
     #
-    # After you accept a handshake, it continues to appear in the results of
-    # relevant APIs for only 30 days. After that, it's deleted.
+    # * Invitation to join (`INVITE`)
+    #
+    # * Approve all features request (`ENABLE_ALL_FEATURES`)
+    #
+    # For more information, see [Responding to invitations][3] and [Enabling
+    # all features][1] in the *Organizations User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integrate_services-using_slrs
-    # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html
-    # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/manage-begin-all-features-standard-migration.html#manage-approve-all-features-invite
+    # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_transfer_billing-respond-invitation.html
+    # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_accept-decline-invite.html
     #
     # @option params [required, String] :handshake_id
-    #   The unique identifier (ID) of the handshake that you want to accept.
+    #   ID for the handshake that you want to accept.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
     #   followed by from 8 to 32 lowercase letters or digits.
@@ -605,10 +598,10 @@ module Aws::Organizations
     #   resp.handshake.state #=> String, one of "REQUESTED", "OPEN", "CANCELED", "ACCEPTED", "DECLINED", "EXPIRED"
     #   resp.handshake.requested_timestamp #=> Time
     #   resp.handshake.expiration_timestamp #=> Time
-    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
+    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE", "TRANSFER_RESPONSIBILITY"
     #   resp.handshake.resources #=> Array
     #   resp.handshake.resources[0].value #=> String
-    #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE"
+    #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE", "RESPONSIBILITY_TRANSFER", "TRANSFER_START_TIMESTAMP", "TRANSFER_TYPE", "MANAGEMENT_ACCOUNT", "MANAGEMENT_EMAIL", "MANAGEMENT_NAME"
     #   resp.handshake.resources[0].resources #=> Types::HandshakeResources
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AcceptHandshake AWS API Documentation
@@ -641,8 +634,16 @@ module Aws::Organizations
     #
     # * [SECURITYHUB\_POLICY][8]
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # * [UPGRADE\_ROLLOUT\_POLICY][9]
+    #
+    # * [INSPECTOR\_POLICY][10]
+    #
+    # * [BEDROCK\_POLICY][11]
+    #
+    # * [S3\_POLICY][12]
+    #
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     #
     #
@@ -654,11 +655,14 @@ module Aws::Organizations
     # [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     # [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     # [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    # [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    # [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    # [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    # [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
     #
     # @option params [required, String] :policy_id
-    #   The unique identifier (ID) of the policy that you want to attach to
-    #   the target. You can get the ID for the policy by calling the
-    #   ListPolicies operation.
+    #   ID for the policy that you want to attach to the target. You can get
+    #   the ID for the policy by calling the ListPolicies operation.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
     #   by from 8 to 128 lowercase or uppercase letters, digits, or the
@@ -669,8 +673,8 @@ module Aws::Organizations
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :target_id
-    #   The unique identifier (ID) of the root, OU, or account that you want
-    #   to attach the policy to. You can get the ID by calling the ListRoots,
+    #   ID for the root, OU, or account that you want to attach the policy to.
+    #   You can get the ID by calling the ListRoots,
     #   ListOrganizationalUnitsForParent, or ListAccounts operations.
     #
     #   The [regex pattern][1] for a target ID string requires one of the
@@ -727,20 +731,19 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Cancels a handshake. Canceling a handshake sets the handshake state to
-    # `CANCELED`.
+    # Cancels a Handshake.
     #
-    # This operation can be called only from the account that originated the
-    # handshake. The recipient of the handshake can't cancel it, but can
-    # use DeclineHandshake instead. After a handshake is canceled, the
-    # recipient can no longer respond to that handshake.
+    # Only the account that sent a handshake can call this operation. The
+    # recipient of the handshake can't cancel it, but can use
+    # DeclineHandshake to decline. After a handshake is canceled, the
+    # recipient can no longer respond to the handshake.
     #
-    # After you cancel a handshake, it continues to appear in the results of
-    # relevant APIs for only 30 days. After that, it's deleted.
+    # You can view canceled handshakes in API responses for 30 days before
+    # they are deleted.
     #
     # @option params [required, String] :handshake_id
-    #   The unique identifier (ID) of the handshake that you want to cancel.
-    #   You can get the ID from the ListHandshakesForOrganization operation.
+    #   ID for the handshake that you want to cancel. You can get the ID from
+    #   the ListHandshakesForOrganization operation.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
     #   followed by from 8 to 32 lowercase letters or digits.
@@ -829,10 +832,10 @@ module Aws::Organizations
     #   resp.handshake.state #=> String, one of "REQUESTED", "OPEN", "CANCELED", "ACCEPTED", "DECLINED", "EXPIRED"
     #   resp.handshake.requested_timestamp #=> Time
     #   resp.handshake.expiration_timestamp #=> Time
-    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
+    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE", "TRANSFER_RESPONSIBILITY"
     #   resp.handshake.resources #=> Array
     #   resp.handshake.resources[0].value #=> String
-    #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE"
+    #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE", "RESPONSIBILITY_TRANSFER", "TRANSFER_START_TIMESTAMP", "TRANSFER_TYPE", "MANAGEMENT_ACCOUNT", "MANAGEMENT_EMAIL", "MANAGEMENT_NAME"
     #   resp.handshake.resources[0].resources #=> Types::HandshakeResources
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CancelHandshake AWS API Documentation
@@ -948,8 +951,7 @@ module Aws::Organizations
     # Organizations clones the company name and address information for the
     # new account from the organization's management account.
     #
-    # This operation can be called only from the organization's management
-    # account.
+    # You can only call this operation from the management account.
     #
     # For more information about creating accounts, see [Creating a member
     # account in your organization][3] in the *Organizations User Guide*.
@@ -1558,7 +1560,7 @@ module Aws::Organizations
     #   resp.organization.master_account_id #=> String
     #   resp.organization.master_account_email #=> String
     #   resp.organization.available_policy_types #=> Array
-    #   resp.organization.available_policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
+    #   resp.organization.available_policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY", "INSPECTOR_POLICY", "UPGRADE_ROLLOUT_POLICY", "BEDROCK_POLICY", "S3_POLICY"
     #   resp.organization.available_policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganization AWS API Documentation
@@ -1583,16 +1585,14 @@ module Aws::Organizations
     # If the request includes tags, then the requester must have the
     # `organizations:TagResource` permission.
     #
-    # This operation can be called only from the organization's management
-    # account.
+    # You can only call this operation from the management account.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html
     #
     # @option params [required, String] :parent_id
-    #   The unique identifier (ID) of the parent root or OU that you want to
-    #   create the new OU in.
+    #   ID for the parent root or OU that you want to create the new OU in.
     #
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
@@ -1690,8 +1690,8 @@ module Aws::Organizations
     # If the request includes tags, then the requester must have the
     # `organizations:TagResource` permission.
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     #
     #
@@ -1743,6 +1743,14 @@ module Aws::Organizations
     #
     #   * [SECURITYHUB\_POLICY][8]
     #
+    #   * [UPGRADE\_ROLLOUT\_POLICY][9]
+    #
+    #   * [INSPECTOR\_POLICY][10]
+    #
+    #   * [BEDROCK\_POLICY][11]
+    #
+    #   * [S3\_POLICY][12]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -1753,6 +1761,10 @@ module Aws::Organizations
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags that you want to attach to the newly created policy.
@@ -1809,7 +1821,7 @@ module Aws::Organizations
     #     content: "PolicyContent", # required
     #     description: "PolicyDescription", # required
     #     name: "PolicyName", # required
-    #     type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY
+    #     type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY, INSPECTOR_POLICY, UPGRADE_ROLLOUT_POLICY, BEDROCK_POLICY, S3_POLICY
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1824,7 +1836,7 @@ module Aws::Organizations
     #   resp.policy.policy_summary.arn #=> String
     #   resp.policy.policy_summary.name #=> String
     #   resp.policy.policy_summary.description #=> String
-    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
+    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY", "INSPECTOR_POLICY", "UPGRADE_ROLLOUT_POLICY", "BEDROCK_POLICY", "S3_POLICY"
     #   resp.policy.policy_summary.aws_managed #=> Boolean
     #   resp.policy.content #=> String
     #
@@ -1837,20 +1849,18 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Declines a handshake request. This sets the handshake state to
-    # `DECLINED` and effectively deactivates the request.
+    # Declines a Handshake.
     #
-    # This operation can be called only from the account that received the
-    # handshake. The originator of the handshake can use CancelHandshake
-    # instead. The originator can't reactivate a declined request, but can
-    # reinitiate the process with a new handshake request.
+    # Only the account that receives a handshake can call this operation.
+    # The sender of the handshake can use CancelHandshake to cancel if the
+    # handshake hasn't yet been responded to.
     #
-    # After you decline a handshake, it continues to appear in the results
-    # of relevant APIs for only 30 days. After that, it's deleted.
+    # You can view canceled handshakes in API responses for 30 days before
+    # they are deleted.
     #
     # @option params [required, String] :handshake_id
-    #   The unique identifier (ID) of the handshake that you want to decline.
-    #   You can get the ID from the ListHandshakesForAccount operation.
+    #   ID for the handshake that you want to decline. You can get the ID from
+    #   the ListHandshakesForAccount operation.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
     #   followed by from 8 to 32 lowercase letters or digits.
@@ -1935,10 +1945,10 @@ module Aws::Organizations
     #   resp.handshake.state #=> String, one of "REQUESTED", "OPEN", "CANCELED", "ACCEPTED", "DECLINED", "EXPIRED"
     #   resp.handshake.requested_timestamp #=> Time
     #   resp.handshake.expiration_timestamp #=> Time
-    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
+    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE", "TRANSFER_RESPONSIBILITY"
     #   resp.handshake.resources #=> Array
     #   resp.handshake.resources[0].value #=> String
-    #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE"
+    #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE", "RESPONSIBILITY_TRANSFER", "TRANSFER_START_TIMESTAMP", "TRANSFER_TYPE", "MANAGEMENT_ACCOUNT", "MANAGEMENT_EMAIL", "MANAGEMENT_NAME"
     #   resp.handshake.resources[0].resources #=> Types::HandshakeResources
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeclineHandshake AWS API Documentation
@@ -1969,13 +1979,11 @@ module Aws::Organizations
     # must first remove all accounts and child OUs from the OU that you want
     # to delete.
     #
-    # This operation can be called only from the organization's management
-    # account.
+    # You can only call this operation from the management account.
     #
     # @option params [required, String] :organizational_unit_id
-    #   The unique identifier (ID) of the organizational unit that you want to
-    #   delete. You can get the ID from the ListOrganizationalUnitsForParent
-    #   operation.
+    #   ID for the organizational unit that you want to delete. You can get
+    #   the ID from the ListOrganizationalUnitsForParent operation.
     #
     #   The [regex pattern][1] for an organizational unit ID string requires
     #   "ou-" followed by from 4 to 32 lowercase letters or digits (the ID
@@ -2017,13 +2025,12 @@ module Aws::Organizations
     # perform this operation, you must first detach the policy from all
     # organizational units (OUs), roots, and accounts.
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [required, String] :policy_id
-    #   The unique identifier (ID) of the policy that you want to delete. You
-    #   can get the ID from the ListPolicies or ListPoliciesForTarget
-    #   operations.
+    #   ID for the policy that you want to delete. You can get the ID from the
+    #   ListPolicies or ListPoliciesForTarget operations.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
     #   by from 8 to 128 lowercase or uppercase letters, digits, or the
@@ -2062,8 +2069,7 @@ module Aws::Organizations
 
     # Deletes the resource policy from your organization.
     #
-    # This operation can be called only from the organization's management
-    # account.
+    # You can only call this operation from the management account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2090,8 +2096,7 @@ module Aws::Organizations
     # [Amazon Web Services Services that you can use with Organizations][1]
     # in the *Organizations User Guide.*
     #
-    # This operation can be called only from the organization's management
-    # account.
+    # You can only call this operation from the management account.
     #
     #
     #
@@ -2132,8 +2137,8 @@ module Aws::Organizations
     # Retrieves Organizations-related information about the specified
     # account.
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [required, String] :account_id
     #   The unique identifier (ID) of the Amazon Web Services account that you
@@ -2199,8 +2204,8 @@ module Aws::Organizations
     # Retrieves the current status of an asynchronous request to create an
     # account.
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [required, String] :create_account_request_id
     #   Specifies the `Id` value that uniquely identifies the `CreateAccount`
@@ -2277,7 +2282,7 @@ module Aws::Organizations
     # For more information about policy inheritance, see [Understanding
     # management policy inheritance][1] in the *Organizations User Guide*.
     #
-    # This operation can be called from any account in the organization.
+    # You can call this operation from any account in a organization.
     #
     #
     #
@@ -2299,6 +2304,14 @@ module Aws::Organizations
     #
     #   * [SECURITYHUB\_POLICY][6]
     #
+    #   * [UPGRADE\_ROLLOUT\_POLICY][7]
+    #
+    #   * [INSPECTOR\_POLICY][8]
+    #
+    #   * [BEDROCK\_POLICY][9]
+    #
+    #   * [S3\_POLICY][10]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -2307,6 +2320,10 @@ module Aws::Organizations
     #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
     #
     # @option params [String] :target_id
     #   When you're signed in as the management account, specify the ID of
@@ -2320,7 +2337,7 @@ module Aws::Organizations
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_effective_policy({
-    #     policy_type: "TAG_POLICY", # required, accepts TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY
+    #     policy_type: "TAG_POLICY", # required, accepts TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY, INSPECTOR_POLICY, UPGRADE_ROLLOUT_POLICY, BEDROCK_POLICY, S3_POLICY
     #     target_id: "PolicyTargetId",
     #   })
     #
@@ -2329,7 +2346,7 @@ module Aws::Organizations
     #   resp.effective_policy.policy_content #=> String
     #   resp.effective_policy.last_updated_timestamp #=> Time
     #   resp.effective_policy.target_id #=> String
-    #   resp.effective_policy.policy_type #=> String, one of "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
+    #   resp.effective_policy.policy_type #=> String, one of "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY", "INSPECTOR_POLICY", "UPGRADE_ROLLOUT_POLICY", "BEDROCK_POLICY", "S3_POLICY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeEffectivePolicy AWS API Documentation
     #
@@ -2340,21 +2357,17 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Retrieves information about a previously requested handshake. The
-    # handshake ID comes from the response to the original
-    # InviteAccountToOrganization operation that generated the handshake.
+    # Returns details for a handshake. A handshake is the secure exchange of
+    # information between two Amazon Web Services accounts: a sender and a
+    # recipient.
     #
-    # You can access handshakes that are `ACCEPTED`, `DECLINED`, or
-    # `CANCELED` for only 30 days after they change to that state. They're
-    # then deleted and no longer accessible.
+    # You can view `ACCEPTED`, `DECLINED`, or `CANCELED` handshakes in API
+    # Responses for 30 days before they are deleted.
     #
-    # This operation can be called from any account in the organization.
+    # You can call this operation from any account in a organization.
     #
     # @option params [required, String] :handshake_id
-    #   The unique identifier (ID) of the handshake that you want information
-    #   about. You can get the ID from the original call to
-    #   InviteAccountToOrganization, or from a call to
-    #   ListHandshakesForAccount or ListHandshakesForOrganization.
+    #   ID for the handshake that you want information about.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
     #   followed by from 8 to 32 lowercase letters or digits.
@@ -2436,10 +2449,10 @@ module Aws::Organizations
     #   resp.handshake.state #=> String, one of "REQUESTED", "OPEN", "CANCELED", "ACCEPTED", "DECLINED", "EXPIRED"
     #   resp.handshake.requested_timestamp #=> Time
     #   resp.handshake.expiration_timestamp #=> Time
-    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
+    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE", "TRANSFER_RESPONSIBILITY"
     #   resp.handshake.resources #=> Array
     #   resp.handshake.resources[0].value #=> String
-    #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE"
+    #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE", "RESPONSIBILITY_TRANSFER", "TRANSFER_START_TIMESTAMP", "TRANSFER_TYPE", "MANAGEMENT_ACCOUNT", "MANAGEMENT_EMAIL", "MANAGEMENT_NAME"
     #   resp.handshake.resources[0].resources #=> Types::HandshakeResources
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeHandshake AWS API Documentation
@@ -2454,7 +2467,7 @@ module Aws::Organizations
     # Retrieves information about the organization that the user's account
     # belongs to.
     #
-    # This operation can be called from any account in the organization.
+    # You can call this operation from any account in a organization.
     #
     # <note markdown="1"> Even if a policy type is shown as available in the organization, you
     # can disable it separately at the root level with DisablePolicyType.
@@ -2500,7 +2513,7 @@ module Aws::Organizations
     #   resp.organization.master_account_id #=> String
     #   resp.organization.master_account_email #=> String
     #   resp.organization.available_policy_types #=> Array
-    #   resp.organization.available_policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
+    #   resp.organization.available_policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY", "INSPECTOR_POLICY", "UPGRADE_ROLLOUT_POLICY", "BEDROCK_POLICY", "S3_POLICY"
     #   resp.organization.available_policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganization AWS API Documentation
@@ -2514,13 +2527,12 @@ module Aws::Organizations
 
     # Retrieves information about an organizational unit (OU).
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [required, String] :organizational_unit_id
-    #   The unique identifier (ID) of the organizational unit that you want
-    #   details about. You can get the ID from the
-    #   ListOrganizationalUnitsForParent operation.
+    #   ID for the organizational unit that you want details about. You can
+    #   get the ID from the ListOrganizationalUnitsForParent operation.
     #
     #   The [regex pattern][1] for an organizational unit ID string requires
     #   "ou-" followed by from 4 to 32 lowercase letters or digits (the ID
@@ -2576,13 +2588,12 @@ module Aws::Organizations
 
     # Retrieves information about a policy.
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [required, String] :policy_id
-    #   The unique identifier (ID) of the policy that you want details about.
-    #   You can get the ID from the ListPolicies or ListPoliciesForTarget
-    #   operations.
+    #   ID for the policy that you want details about. You can get the ID from
+    #   the ListPolicies or ListPoliciesForTarget operations.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
     #   by from 8 to 128 lowercase or uppercase letters, digits, or the
@@ -2632,7 +2643,7 @@ module Aws::Organizations
     #   resp.policy.policy_summary.arn #=> String
     #   resp.policy.policy_summary.name #=> String
     #   resp.policy.policy_summary.description #=> String
-    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
+    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY", "INSPECTOR_POLICY", "UPGRADE_ROLLOUT_POLICY", "BEDROCK_POLICY", "S3_POLICY"
     #   resp.policy.policy_summary.aws_managed #=> Boolean
     #   resp.policy.content #=> String
     #
@@ -2647,8 +2658,8 @@ module Aws::Organizations
 
     # Retrieves information about a resource policy.
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @return [Types::DescribeResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2666,6 +2677,77 @@ module Aws::Organizations
     # @param [Hash] params ({})
     def describe_resource_policy(params = {}, options = {})
       req = build_request(:describe_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Returns details for a transfer. A *transfer* is an arrangement between
+    # two management accounts where one account designates the other with
+    # specified responsibilities for their organization.
+    #
+    # @option params [required, String] :id
+    #   ID for the transfer.
+    #
+    # @return [Types::DescribeResponsibilityTransferResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeResponsibilityTransferResponse#responsibility_transfer #responsibility_transfer} => Types::ResponsibilityTransfer
+    #
+    #
+    # @example Example: To get information about a transfer
+    #
+    #   # The following example shows how to request information about a transfer:/n/n
+    #
+    #   resp = client.describe_responsibility_transfer({
+    #     id: "rt-exampletransferid222", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     responsibility_transfer: {
+    #       arn: "arn:aws:organizations::222222222222:transfer/o-exampleorgid222/billing/outbound/rt-exampletransferid222", 
+    #       end_timestamp: Time.parse("2026-01-31T23:59:59+00:00"), 
+    #       id: "rt-exampletransferid222", 
+    #       name: "sample transfer", 
+    #       source: {
+    #         management_account_email: "alice@example.com", 
+    #         management_account_id: "222222222222", 
+    #       }, 
+    #       start_timestamp: Time.parse("2026-01-01T00:00:00+00:00"), 
+    #       status: "WITHDRAWN", 
+    #       target: {
+    #         management_account_email: "juan@example.com", 
+    #         management_account_id: "333333333333", 
+    #       }, 
+    #       type: "BILLING", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_responsibility_transfer({
+    #     id: "ResponsibilityTransferId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.responsibility_transfer.arn #=> String
+    #   resp.responsibility_transfer.name #=> String
+    #   resp.responsibility_transfer.id #=> String
+    #   resp.responsibility_transfer.type #=> String, one of "BILLING"
+    #   resp.responsibility_transfer.status #=> String, one of "REQUESTED", "DECLINED", "CANCELED", "EXPIRED", "ACCEPTED", "WITHDRAWN"
+    #   resp.responsibility_transfer.source.management_account_id #=> String
+    #   resp.responsibility_transfer.source.management_account_email #=> String
+    #   resp.responsibility_transfer.target.management_account_id #=> String
+    #   resp.responsibility_transfer.target.management_account_email #=> String
+    #   resp.responsibility_transfer.start_timestamp #=> Time
+    #   resp.responsibility_transfer.end_timestamp #=> Time
+    #   resp.responsibility_transfer.active_handshake_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeResponsibilityTransfer AWS API Documentation
+    #
+    # @overload describe_responsibility_transfer(params = {})
+    # @param [Hash] params ({})
+    def describe_responsibility_transfer(params = {}, options = {})
+      req = build_request(:describe_responsibility_transfer, params)
       req.send_request(options)
     end
 
@@ -2687,8 +2769,8 @@ module Aws::Organizations
     # attached SCP), you're using the authorization strategy of a "[deny
     # list][2]".
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     #
     #
@@ -2696,8 +2778,8 @@ module Aws::Organizations
     # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/SCP_strategies.html#orgs_policies_denylist
     #
     # @option params [required, String] :policy_id
-    #   The unique identifier (ID) of the policy you want to detach. You can
-    #   get the ID from the ListPolicies or ListPoliciesForTarget operations.
+    #   ID for the policy you want to detach. You can get the ID from the
+    #   ListPolicies or ListPoliciesForTarget operations.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
     #   by from 8 to 128 lowercase or uppercase letters, digits, or the
@@ -2708,8 +2790,8 @@ module Aws::Organizations
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :target_id
-    #   The unique identifier (ID) of the root, OU, or account that you want
-    #   to detach the policy from. You can get the ID from the ListRoots,
+    #   ID for the root, OU, or account that you want to detach the policy
+    #   from. You can get the ID from the ListRoots,
     #   ListOrganizationalUnitsForParent, or ListAccounts operations.
     #
     #   The [regex pattern][1] for a target ID string requires one of the
@@ -2817,8 +2899,7 @@ module Aws::Organizations
     # Organizations, see [Using Organizations with other Amazon Web Services
     # services][3] in the *Organizations User Guide*.
     #
-    # This operation can be called only from the organization's management
-    # account.
+    # You can only call this operation from the management account.
     #
     #
     #
@@ -2863,8 +2944,8 @@ module Aws::Organizations
     # use ListRoots to see the status of policy types for a specified root,
     # and then use this operation.
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # To view the status of available policy types in the organization, use
     # ListRoots.
@@ -2874,8 +2955,8 @@ module Aws::Organizations
     # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
     #
     # @option params [required, String] :root_id
-    #   The unique identifier (ID) of the root in which you want to disable a
-    #   policy type. You can get the ID from the ListRoots operation.
+    #   ID for the root in which you want to disable a policy type. You can
+    #   get the ID from the ListRoots operation.
     #
     #   The [regex pattern][1] for a root ID string requires "r-" followed
     #   by from 4 to 32 lowercase letters or digits.
@@ -2904,6 +2985,14 @@ module Aws::Organizations
     #
     #   * [SECURITYHUB\_POLICY][8]
     #
+    #   * [UPGRADE\_ROLLOUT\_POLICY][9]
+    #
+    #   * [INSPECTOR\_POLICY][10]
+    #
+    #   * [BEDROCK\_POLICY][11]
+    #
+    #   * [S3\_POLICY][12]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -2914,6 +3003,10 @@ module Aws::Organizations
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
     #
     # @return [Types::DisablePolicyTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2945,7 +3038,7 @@ module Aws::Organizations
     #
     #   resp = client.disable_policy_type({
     #     root_id: "RootId", # required
-    #     policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY
+    #     policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY, INSPECTOR_POLICY, UPGRADE_ROLLOUT_POLICY, BEDROCK_POLICY, S3_POLICY
     #   })
     #
     # @example Response structure
@@ -2954,7 +3047,7 @@ module Aws::Organizations
     #   resp.root.arn #=> String
     #   resp.root.name #=> String
     #   resp.root.policy_types #=> Array
-    #   resp.root.policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
+    #   resp.root.policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY", "INSPECTOR_POLICY", "UPGRADE_ROLLOUT_POLICY", "BEDROCK_POLICY", "S3_POLICY"
     #   resp.root.policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyType AWS API Documentation
@@ -2987,8 +3080,7 @@ module Aws::Organizations
     # Organizations, see [Using Organizations with other Amazon Web Services
     # services][2] in the *Organizations User Guide*.
     #
-    # This operation can be called only from the organization's management
-    # account.
+    # You can only call this operation from the management account.
     #
     #
     #
@@ -3049,8 +3141,7 @@ module Aws::Organizations
     # prevent accounts from leaving the organization. Ensure that your
     # account administrators are aware of this.
     #
-    # This operation can be called only from the organization's management
-    # account.
+    # You can only call this operation from the management account.
     #
     #
     #
@@ -3106,10 +3197,10 @@ module Aws::Organizations
     #   resp.handshake.state #=> String, one of "REQUESTED", "OPEN", "CANCELED", "ACCEPTED", "DECLINED", "EXPIRED"
     #   resp.handshake.requested_timestamp #=> Time
     #   resp.handshake.expiration_timestamp #=> Time
-    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
+    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE", "TRANSFER_RESPONSIBILITY"
     #   resp.handshake.resources #=> Array
     #   resp.handshake.resources[0].value #=> String
-    #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE"
+    #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE", "RESPONSIBILITY_TRANSFER", "TRANSFER_START_TIMESTAMP", "TRANSFER_TYPE", "MANAGEMENT_ACCOUNT", "MANAGEMENT_EMAIL", "MANAGEMENT_NAME"
     #   resp.handshake.resources[0].resources #=> Types::HandshakeResources
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnableAllFeatures AWS API Documentation
@@ -3131,16 +3222,16 @@ module Aws::Organizations
     # ListRoots to see the status of policy types for a specified root, and
     # then use this operation.
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # You can enable a policy type in a root only if that policy type is
     # available in the organization. To view the status of available policy
     # types in the organization, use ListRoots.
     #
     # @option params [required, String] :root_id
-    #   The unique identifier (ID) of the root in which you want to enable a
-    #   policy type. You can get the ID from the ListRoots operation.
+    #   ID for the root in which you want to enable a policy type. You can get
+    #   the ID from the ListRoots operation.
     #
     #   The [regex pattern][1] for a root ID string requires "r-" followed
     #   by from 4 to 32 lowercase letters or digits.
@@ -3169,6 +3260,14 @@ module Aws::Organizations
     #
     #   * [SECURITYHUB\_POLICY][8]
     #
+    #   * [UPGRADE\_ROLLOUT\_POLICY][9]
+    #
+    #   * [INSPECTOR\_POLICY][10]
+    #
+    #   * [BEDROCK\_POLICY][11]
+    #
+    #   * [S3\_POLICY][12]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -3179,6 +3278,10 @@ module Aws::Organizations
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
     #
     # @return [Types::EnablePolicyTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3214,7 +3317,7 @@ module Aws::Organizations
     #
     #   resp = client.enable_policy_type({
     #     root_id: "RootId", # required
-    #     policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY
+    #     policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY, INSPECTOR_POLICY, UPGRADE_ROLLOUT_POLICY, BEDROCK_POLICY, S3_POLICY
     #   })
     #
     # @example Response structure
@@ -3223,7 +3326,7 @@ module Aws::Organizations
     #   resp.root.arn #=> String
     #   resp.root.name #=> String
     #   resp.root.policy_types #=> Array
-    #   resp.root.policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
+    #   resp.root.policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY", "INSPECTOR_POLICY", "UPGRADE_ROLLOUT_POLICY", "BEDROCK_POLICY", "S3_POLICY"
     #   resp.root.policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyType AWS API Documentation
@@ -3250,8 +3353,7 @@ module Aws::Organizations
     # If the request includes tags, then the requester must have the
     # `organizations:TagResource` permission.
     #
-    # This operation can be called only from the organization's management
-    # account.
+    # You can only call this operation from the management account.
     #
     #
     #
@@ -3397,10 +3499,10 @@ module Aws::Organizations
     #   resp.handshake.state #=> String, one of "REQUESTED", "OPEN", "CANCELED", "ACCEPTED", "DECLINED", "EXPIRED"
     #   resp.handshake.requested_timestamp #=> Time
     #   resp.handshake.expiration_timestamp #=> Time
-    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
+    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE", "TRANSFER_RESPONSIBILITY"
     #   resp.handshake.resources #=> Array
     #   resp.handshake.resources[0].value #=> String
-    #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE"
+    #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE", "RESPONSIBILITY_TRANSFER", "TRANSFER_START_TIMESTAMP", "TRANSFER_TYPE", "MANAGEMENT_ACCOUNT", "MANAGEMENT_EMAIL", "MANAGEMENT_NAME"
     #   resp.handshake.resources[0].resources #=> Types::HandshakeResources
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InviteAccountToOrganization AWS API Documentation
@@ -3412,13 +3514,188 @@ module Aws::Organizations
       req.send_request(options)
     end
 
+    # Sends an invitation to another organization's management account to
+    # designate your account with the specified responsibilities for their
+    # organization. The invitation is implemented as a Handshake whose
+    # details are in the response.
+    #
+    # You can only call this operation from the management account.
+    #
+    # @option params [required, String] :type
+    #   The type of responsibility you want to designate to your organization.
+    #   Currently, only `BILLING` is supported.
+    #
+    # @option params [required, Types::HandshakeParty] :target
+    #   A `HandshakeParty` object. Contains details for the account you want
+    #   to invite. Currently, only `ACCOUNT` and `EMAIL` are supported.
+    #
+    # @option params [String] :notes
+    #   Additional information that you want to include in the invitation.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_timestamp
+    #   Timestamp when the recipient will begin managing the specified
+    #   responsibilities.
+    #
+    # @option params [required, String] :source_name
+    #   Name you want to assign to the transfer.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags that you want to attach to the transfer. For each tag
+    #   in the list, you must specify both a tag key and a value. You can set
+    #   the value to an empty string, but you can't set it to `null`. For
+    #   more information about tagging, see [Tagging Organizations
+    #   resources][1] in the Organizations User Guide.
+    #
+    #   Any tags in the request are checked for compliance with any applicable
+    #   tag policies when the request is made. The request is rejected if the
+    #   tags in the request don't match the requirements of the policy at
+    #   that time. Tag policy compliance is <i> <b>not</b> </i> checked again
+    #   when the invitation is accepted and the tags are actually attached to
+    #   the transfer. That means that if the tag policy changes between the
+    #   invitation and the acceptance, then that tags could potentially be
+    #   non-compliant.
+    #
+    #   <note markdown="1"> If any one of the tags is not valid or if you exceed the allowed
+    #   number of tags for a transfer, then the entire request fails and
+    #   invitations are not sent.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
+    #
+    # @return [Types::InviteOrganizationToTransferResponsibilityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InviteOrganizationToTransferResponsibilityResponse#handshake #handshake} => Types::Handshake
+    #
+    #
+    # @example Example: To invite an organization to transfer responsibility
+    #
+    #   # The following example shows the management account owned by diego@example.com inviting the management account owned by
+    #   # juan@example.com to transfer responsibility.
+    #
+    #   resp = client.invite_organization_to_transfer_responsibility({
+    #     notes: "transfer notes", 
+    #     source_name: "transfer name", 
+    #     start_timestamp: Time.parse("1767225600"), 
+    #     target: {
+    #       id: "juan@example.com", 
+    #       type: "EMAIL", 
+    #     }, 
+    #     type: "BILLING", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     handshake: {
+    #       action: "TRANSFER_RESPONSIBILITY", 
+    #       arn: "arn:aws:organizations::111111111111:handshake/o-exampleorgid/transfer_responsibility/h-examplehandshakeid111", 
+    #       expiration_timestamp: Time.parse("2025-12-31T00:00:00+00:00"), 
+    #       id: "h-examplehandshakeid111", 
+    #       parties: [
+    #         {
+    #           id: "o-exampleorgid", 
+    #           type: "ORGANIZATION", 
+    #         }, 
+    #         {
+    #           id: "juan@example.com", 
+    #           type: "EMAIL", 
+    #         }, 
+    #       ], 
+    #       requested_timestamp: Time.parse("2025-10-21T04:27:19+00:00"), 
+    #       resources: [
+    #         {
+    #           resources: [
+    #             {
+    #               type: "TRANSFER_START_TIMESTAMP", 
+    #               value: "1767225600", 
+    #             }, 
+    #             {
+    #               type: "TRANSFER_TYPE", 
+    #               value: "BILLING", 
+    #             }, 
+    #           ], 
+    #           type: "RESPONSIBILITY_TRANSFER", 
+    #           value: "rt-exampletransferid111", 
+    #         }, 
+    #         {
+    #           resources: [
+    #             {
+    #               type: "MANAGEMENT_EMAIL", 
+    #               value: "diego@example.com", 
+    #             }, 
+    #             {
+    #               type: "MANAGEMENT_NAME", 
+    #               value: "Org management account", 
+    #             }, 
+    #             {
+    #               type: "MANAGEMENT_ACCOUNT", 
+    #               value: "&ExampleAccountId3;", 
+    #             }, 
+    #           ], 
+    #           type: "ORGANIZATION", 
+    #           value: "o-exampleorgid", 
+    #         }, 
+    #         {
+    #           type: "EMAIL", 
+    #           value: "juan@example.com", 
+    #         }, 
+    #       ], 
+    #       state: "REQUESTED", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.invite_organization_to_transfer_responsibility({
+    #     type: "BILLING", # required, accepts BILLING
+    #     target: { # required
+    #       id: "HandshakePartyId", # required
+    #       type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION, EMAIL
+    #     },
+    #     notes: "HandshakeNotes",
+    #     start_timestamp: Time.now, # required
+    #     source_name: "ResponsibilityTransferName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.handshake.id #=> String
+    #   resp.handshake.arn #=> String
+    #   resp.handshake.parties #=> Array
+    #   resp.handshake.parties[0].id #=> String
+    #   resp.handshake.parties[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "EMAIL"
+    #   resp.handshake.state #=> String, one of "REQUESTED", "OPEN", "CANCELED", "ACCEPTED", "DECLINED", "EXPIRED"
+    #   resp.handshake.requested_timestamp #=> Time
+    #   resp.handshake.expiration_timestamp #=> Time
+    #   resp.handshake.action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE", "TRANSFER_RESPONSIBILITY"
+    #   resp.handshake.resources #=> Array
+    #   resp.handshake.resources[0].value #=> String
+    #   resp.handshake.resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE", "RESPONSIBILITY_TRANSFER", "TRANSFER_START_TIMESTAMP", "TRANSFER_TYPE", "MANAGEMENT_ACCOUNT", "MANAGEMENT_EMAIL", "MANAGEMENT_NAME"
+    #   resp.handshake.resources[0].resources #=> Types::HandshakeResources
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InviteOrganizationToTransferResponsibility AWS API Documentation
+    #
+    # @overload invite_organization_to_transfer_responsibility(params = {})
+    # @param [Hash] params ({})
+    def invite_organization_to_transfer_responsibility(params = {}, options = {})
+      req = build_request(:invite_organization_to_transfer_responsibility, params)
+      req.send_request(options)
+    end
+
     # Removes a member account from its parent organization. This version of
     # the operation is performed by the account that wants to leave. To
     # remove a member account as a user in the management account, use
     # RemoveAccountFromOrganization instead.
     #
-    # This operation can be called only from a member account in the
-    # organization.
+    # You can only call from operation from a member account.
     #
     # * The management account in an organization with all features enabled
     #   can set service control policies (SCPs) that can restrict what
@@ -3458,7 +3735,7 @@ module Aws::Organizations
     #   support tags.
     #
     # * A newly created account has a waiting period before it can be
-    #   removed from its organization. You must wait until at least seven
+    #   removed from its organization. You must wait until at least four
     #   days after the account was created. Invited accounts aren't subject
     #   to this waiting period.
     #
@@ -3499,8 +3776,8 @@ module Aws::Organizations
     # Organizations, see [Using Organizations with other Amazon Web Services
     # services][1] in the *Organizations User Guide*.
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     #
     #
@@ -3514,16 +3791,9 @@ module Aws::Organizations
     #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The total number of results that you want included on each page of the
-    #   response. If you do not include this parameter, it defaults to a value
-    #   that is specific to the operation. If additional items exist beyond
-    #   the maximum you specify, the `NextToken` response element is present
-    #   and has a value (is not null). Include that value as the `NextToken`
-    #   request parameter in the next call to the operation to get the next
-    #   part of the results. Note that Organizations might return fewer
-    #   results than the maximum even when there are more results available.
-    #   You should check `NextToken` after every operation to ensure that you
-    #   receive all of the results.
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
     #
     # @return [Types::ListAWSServiceAccessForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3559,16 +3829,17 @@ module Aws::Organizations
     # accounts in a specified root or organizational unit (OU), use the
     # ListAccountsForParent operation instead.
     #
-    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
-    # when calling a `List*` operation. These operations can occasionally
-    # return an empty set of results even when there are more results
-    # available. The `NextToken` response parameter value is `null` *only*
-    # when there are no more results to display.
+    # <note markdown="1"> When calling List* operations, always check the `NextToken` response
+    # parameter value, even if you receive an empty result set. These
+    # operations can occasionally return an empty set of results even when
+    # more results are available. Continue making requests until `NextToken`
+    # returns null. A null `NextToken` value indicates that you have
+    # retrieved all available results.
     #
     #  </note>
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [String] :next_token
     #   The parameter for receiving additional results if you receive a
@@ -3578,16 +3849,9 @@ module Aws::Organizations
     #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The total number of results that you want included on each page of the
-    #   response. If you do not include this parameter, it defaults to a value
-    #   that is specific to the operation. If additional items exist beyond
-    #   the maximum you specify, the `NextToken` response element is present
-    #   and has a value (is not null). Include that value as the `NextToken`
-    #   request parameter in the next call to the operation to get the next
-    #   part of the results. Note that Organizations might return fewer
-    #   results than the maximum even when there are more results available.
-    #   You should check `NextToken` after every operation to ensure that you
-    #   receive all of the results.
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
     #
     # @return [Types::ListAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3682,16 +3946,17 @@ module Aws::Organizations
     # and not in any child OUs. To get a list of all accounts in the
     # organization, use the ListAccounts operation.
     #
-    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
-    # when calling a `List*` operation. These operations can occasionally
-    # return an empty set of results even when there are more results
-    # available. The `NextToken` response parameter value is `null` *only*
-    # when there are no more results to display.
+    # <note markdown="1"> When calling List* operations, always check the `NextToken` response
+    # parameter value, even if you receive an empty result set. These
+    # operations can occasionally return an empty set of results even when
+    # more results are available. Continue making requests until `NextToken`
+    # returns null. A null `NextToken` value indicates that you have
+    # retrieved all available results.
     #
     #  </note>
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [required, String] :parent_id
     #   The unique identifier (ID) for the parent root or organization unit
@@ -3705,16 +3970,9 @@ module Aws::Organizations
     #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The total number of results that you want included on each page of the
-    #   response. If you do not include this parameter, it defaults to a value
-    #   that is specific to the operation. If additional items exist beyond
-    #   the maximum you specify, the `NextToken` response element is present
-    #   and has a value (is not null). Include that value as the `NextToken`
-    #   request parameter in the next call to the operation to get the next
-    #   part of the results. Note that Organizations might return fewer
-    #   results than the maximum even when there are more results available.
-    #   You should check `NextToken` after every operation to ensure that you
-    #   receive all of the results.
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
     #
     # @return [Types::ListAccountsForParentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3792,8 +4050,8 @@ module Aws::Organizations
     # being fully enforced on all the intended accounts within an
     # organization.
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     #
     #
@@ -3815,6 +4073,14 @@ module Aws::Organizations
     #
     #   * [SECURITYHUB\_POLICY][6]
     #
+    #   * [UPGRADE\_ROLLOUT\_POLICY][7]
+    #
+    #   * [INSPECTOR\_POLICY][8]
+    #
+    #   * [BEDROCK\_POLICY][9]
+    #
+    #   * [S3\_POLICY][10]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -3823,6 +4089,10 @@ module Aws::Organizations
     #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
     #
     # @option params [String] :next_token
     #   The parameter for receiving additional results if you receive a
@@ -3832,16 +4102,9 @@ module Aws::Organizations
     #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The total number of results that you want included on each page of the
-    #   response. If you do not include this parameter, it defaults to a value
-    #   that is specific to the operation. If additional items exist beyond
-    #   the maximum you specify, the `NextToken` response element is present
-    #   and has a value (is not null). Include that value as the `NextToken`
-    #   request parameter in the next call to the operation to get the next
-    #   part of the results. Note that Organizations might return fewer
-    #   results than the maximum even when there are more results available.
-    #   You should check `NextToken` after every operation to ensure that you
-    #   receive all of the results.
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
     #
     # @return [Types::ListAccountsWithInvalidEffectivePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3890,7 +4153,7 @@ module Aws::Organizations
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_accounts_with_invalid_effective_policy({
-    #     policy_type: "TAG_POLICY", # required, accepts TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY
+    #     policy_type: "TAG_POLICY", # required, accepts TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY, INSPECTOR_POLICY, UPGRADE_ROLLOUT_POLICY, BEDROCK_POLICY, S3_POLICY
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -3906,7 +4169,7 @@ module Aws::Organizations
     #   resp.accounts[0].state #=> String, one of "PENDING_ACTIVATION", "ACTIVE", "SUSPENDED", "PENDING_CLOSURE", "CLOSED"
     #   resp.accounts[0].joined_method #=> String, one of "INVITED", "CREATED"
     #   resp.accounts[0].joined_timestamp #=> Time
-    #   resp.policy_type #=> String, one of "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
+    #   resp.policy_type #=> String, one of "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY", "INSPECTOR_POLICY", "UPGRADE_ROLLOUT_POLICY", "BEDROCK_POLICY", "S3_POLICY"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsWithInvalidEffectivePolicy AWS API Documentation
@@ -3923,16 +4186,17 @@ module Aws::Organizations
     # with ListParents enables you to traverse the tree structure that makes
     # up this root.
     #
-    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
-    # when calling a `List*` operation. These operations can occasionally
-    # return an empty set of results even when there are more results
-    # available. The `NextToken` response parameter value is `null` *only*
-    # when there are no more results to display.
+    # <note markdown="1"> When calling List* operations, always check the `NextToken` response
+    # parameter value, even if you receive an empty result set. These
+    # operations can occasionally return an empty set of results even when
+    # more results are available. Continue making requests until `NextToken`
+    # returns null. A null `NextToken` value indicates that you have
+    # retrieved all available results.
     #
     #  </note>
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [required, String] :parent_id
     #   The unique identifier (ID) for the parent root or OU whose children
@@ -3964,16 +4228,9 @@ module Aws::Organizations
     #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The total number of results that you want included on each page of the
-    #   response. If you do not include this parameter, it defaults to a value
-    #   that is specific to the operation. If additional items exist beyond
-    #   the maximum you specify, the `NextToken` response element is present
-    #   and has a value (is not null). Include that value as the `NextToken`
-    #   request parameter in the next call to the operation to get the next
-    #   part of the results. Note that Organizations might return fewer
-    #   results than the maximum even when there are more results available.
-    #   You should check `NextToken` after every operation to ensure that you
-    #   receive all of the results.
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
     #
     # @return [Types::ListChildrenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4034,16 +4291,17 @@ module Aws::Organizations
     # Lists the account creation requests that match the specified status
     # that is currently being tracked for the organization.
     #
-    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
-    # when calling a `List*` operation. These operations can occasionally
-    # return an empty set of results even when there are more results
-    # available. The `NextToken` response parameter value is `null` *only*
-    # when there are no more results to display.
+    # <note markdown="1"> When calling List* operations, always check the `NextToken` response
+    # parameter value, even if you receive an empty result set. These
+    # operations can occasionally return an empty set of results even when
+    # more results are available. Continue making requests until `NextToken`
+    # returns null. A null `NextToken` value indicates that you have
+    # retrieved all available results.
     #
     #  </note>
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [Array<String>] :states
     #   A list of one or more states that you want included in the response.
@@ -4058,16 +4316,9 @@ module Aws::Organizations
     #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The total number of results that you want included on each page of the
-    #   response. If you do not include this parameter, it defaults to a value
-    #   that is specific to the operation. If additional items exist beyond
-    #   the maximum you specify, the `NextToken` response element is present
-    #   and has a value (is not null). Include that value as the `NextToken`
-    #   request parameter in the next call to the operation to get the next
-    #   part of the results. Note that Organizations might return fewer
-    #   results than the maximum even when there are more results available.
-    #   You should check `NextToken` after every operation to ensure that you
-    #   receive all of the results.
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
     #
     # @return [Types::ListCreateAccountStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4158,8 +4409,8 @@ module Aws::Organizations
     # Lists the Amazon Web Services accounts that are designated as
     # delegated administrators in this organization.
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [String] :service_principal
     #   Specifies a service principal name. If specified, then the operation
@@ -4176,16 +4427,9 @@ module Aws::Organizations
     #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The total number of results that you want included on each page of the
-    #   response. If you do not include this parameter, it defaults to a value
-    #   that is specific to the operation. If additional items exist beyond
-    #   the maximum you specify, the `NextToken` response element is present
-    #   and has a value (is not null). Include that value as the `NextToken`
-    #   request parameter in the next call to the operation to get the next
-    #   part of the results. Note that Organizations might return fewer
-    #   results than the maximum even when there are more results available.
-    #   You should check `NextToken` after every operation to ensure that you
-    #   receive all of the results.
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
     #
     # @return [Types::ListDelegatedAdministratorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4210,6 +4454,7 @@ module Aws::Organizations
     #   resp.delegated_administrators[0].email #=> String
     #   resp.delegated_administrators[0].name #=> String
     #   resp.delegated_administrators[0].status #=> String, one of "ACTIVE", "SUSPENDED", "PENDING_CLOSURE"
+    #   resp.delegated_administrators[0].state #=> String, one of "PENDING_ACTIVATION", "ACTIVE", "SUSPENDED", "PENDING_CLOSURE", "CLOSED"
     #   resp.delegated_administrators[0].joined_method #=> String, one of "INVITED", "CREATED"
     #   resp.delegated_administrators[0].joined_timestamp #=> Time
     #   resp.delegated_administrators[0].delegation_enabled_date #=> Time
@@ -4227,8 +4472,8 @@ module Aws::Organizations
     # List the Amazon Web Services services for which the specified account
     # is a delegated administrator.
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [required, String] :account_id
     #   The account ID number of a delegated administrator account in the
@@ -4242,16 +4487,9 @@ module Aws::Organizations
     #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The total number of results that you want included on each page of the
-    #   response. If you do not include this parameter, it defaults to a value
-    #   that is specific to the operation. If additional items exist beyond
-    #   the maximum you specify, the `NextToken` response element is present
-    #   and has a value (is not null). Include that value as the `NextToken`
-    #   request parameter in the next call to the operation to get the next
-    #   part of the results. Note that Organizations might return fewer
-    #   results than the maximum even when there are more results available.
-    #   You should check `NextToken` after every operation to ensure that you
-    #   receive all of the results.
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
     #
     # @return [Types::ListDelegatedServicesForAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4287,8 +4525,8 @@ module Aws::Organizations
     # Lists all the validation errors on an [effective policy][1] for a
     # specified account and policy type.
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     #
     #
@@ -4315,6 +4553,14 @@ module Aws::Organizations
     #
     #   * [SECURITYHUB\_POLICY][6]
     #
+    #   * [UPGRADE\_ROLLOUT\_POLICY][7]
+    #
+    #   * [INSPECTOR\_POLICY][8]
+    #
+    #   * [BEDROCK\_POLICY][9]
+    #
+    #   * [S3\_POLICY][10]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -4323,6 +4569,10 @@ module Aws::Organizations
     #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
     #
     # @option params [String] :next_token
     #   The parameter for receiving additional results if you receive a
@@ -4332,16 +4582,9 @@ module Aws::Organizations
     #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The total number of results that you want included on each page of the
-    #   response. If you do not include this parameter, it defaults to a value
-    #   that is specific to the operation. If additional items exist beyond
-    #   the maximum you specify, the `NextToken` response element is present
-    #   and has a value (is not null). Include that value as the `NextToken`
-    #   request parameter in the next call to the operation to get the next
-    #   part of the results. Note that Organizations might return fewer
-    #   results than the maximum even when there are more results available.
-    #   You should check `NextToken` after every operation to ensure that you
-    #   receive all of the results.
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
     #
     # @return [Types::ListEffectivePolicyValidationErrorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4396,7 +4639,7 @@ module Aws::Organizations
     #
     #   resp = client.list_effective_policy_validation_errors({
     #     account_id: "AccountId", # required
-    #     policy_type: "TAG_POLICY", # required, accepts TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY
+    #     policy_type: "TAG_POLICY", # required, accepts TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY, INSPECTOR_POLICY, UPGRADE_ROLLOUT_POLICY, BEDROCK_POLICY, S3_POLICY
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -4404,7 +4647,7 @@ module Aws::Organizations
     # @example Response structure
     #
     #   resp.account_id #=> String
-    #   resp.policy_type #=> String, one of "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
+    #   resp.policy_type #=> String, one of "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY", "INSPECTOR_POLICY", "UPGRADE_ROLLOUT_POLICY", "BEDROCK_POLICY", "S3_POLICY"
     #   resp.path #=> String
     #   resp.evaluation_timestamp #=> Time
     #   resp.next_token #=> String
@@ -4424,31 +4667,25 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Lists the current handshakes that are associated with the account of
-    # the requesting user.
+    # Lists the recent handshakes that you have received.
     #
-    # Handshakes that are `ACCEPTED`, `DECLINED`, `CANCELED`, or `EXPIRED`
-    # appear in the results of this API for only 30 days after changing to
-    # that state. After that, they're deleted and no longer accessible.
+    # You can view `CANCELED`, `ACCEPTED`, `DECLINED`, or `EXPIRED`
+    # handshakes in API responses for 30 days before they are deleted.
     #
-    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
-    # when calling a `List*` operation. These operations can occasionally
-    # return an empty set of results even when there are more results
-    # available. The `NextToken` response parameter value is `null` *only*
-    # when there are no more results to display.
+    # You can call this operation from any account in a organization.
+    #
+    # <note markdown="1"> When calling List* operations, always check the `NextToken` response
+    # parameter value, even if you receive an empty result set. These
+    # operations can occasionally return an empty set of results even when
+    # more results are available. Continue making requests until `NextToken`
+    # returns null. A null `NextToken` value indicates that you have
+    # retrieved all available results.
     #
     #  </note>
     #
-    # This operation can be called from any account in the organization.
-    #
     # @option params [Types::HandshakeFilter] :filter
-    #   Filters the handshakes that you want included in the response. The
-    #   default is all types. Use the `ActionType` element to limit the output
-    #   to only a specified type, such as `INVITE`, `ENABLE_ALL_FEATURES`, or
-    #   `APPROVE_ALL_FEATURES`. Alternatively, for the `ENABLE_ALL_FEATURES`
-    #   handshake that generates a separate child handshake for each member
-    #   account, you can specify `ParentHandshakeId` to see only the
-    #   handshakes that were generated by that parent request.
+    #   A `HandshakeFilter` object. Contains the filer used to select the
+    #   handshakes for an operation.
     #
     # @option params [String] :next_token
     #   The parameter for receiving additional results if you receive a
@@ -4458,16 +4695,9 @@ module Aws::Organizations
     #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The total number of results that you want included on each page of the
-    #   response. If you do not include this parameter, it defaults to a value
-    #   that is specific to the operation. If additional items exist beyond
-    #   the maximum you specify, the `NextToken` response element is present
-    #   and has a value (is not null). Include that value as the `NextToken`
-    #   request parameter in the next call to the operation to get the next
-    #   part of the results. Note that Organizations might return fewer
-    #   results than the maximum even when there are more results available.
-    #   You should check `NextToken` after every operation to ensure that you
-    #   receive all of the results.
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
     #
     # @return [Types::ListHandshakesForAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4537,7 +4767,7 @@ module Aws::Organizations
     #
     #   resp = client.list_handshakes_for_account({
     #     filter: {
-    #       action_type: "INVITE", # accepts INVITE, ENABLE_ALL_FEATURES, APPROVE_ALL_FEATURES, ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE
+    #       action_type: "INVITE", # accepts INVITE, ENABLE_ALL_FEATURES, APPROVE_ALL_FEATURES, ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE, TRANSFER_RESPONSIBILITY
     #       parent_handshake_id: "HandshakeId",
     #     },
     #     next_token: "NextToken",
@@ -4555,10 +4785,10 @@ module Aws::Organizations
     #   resp.handshakes[0].state #=> String, one of "REQUESTED", "OPEN", "CANCELED", "ACCEPTED", "DECLINED", "EXPIRED"
     #   resp.handshakes[0].requested_timestamp #=> Time
     #   resp.handshakes[0].expiration_timestamp #=> Time
-    #   resp.handshakes[0].action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
+    #   resp.handshakes[0].action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE", "TRANSFER_RESPONSIBILITY"
     #   resp.handshakes[0].resources #=> Array
     #   resp.handshakes[0].resources[0].value #=> String
-    #   resp.handshakes[0].resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE"
+    #   resp.handshakes[0].resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE", "RESPONSIBILITY_TRANSFER", "TRANSFER_START_TIMESTAMP", "TRANSFER_TYPE", "MANAGEMENT_ACCOUNT", "MANAGEMENT_EMAIL", "MANAGEMENT_NAME"
     #   resp.handshakes[0].resources[0].resources #=> Types::HandshakeResources
     #   resp.next_token #=> String
     #
@@ -4571,34 +4801,26 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Lists the handshakes that are associated with the organization that
-    # the requesting user is part of. The `ListHandshakesForOrganization`
-    # operation returns a list of handshake structures. Each structure
-    # contains details and status about a handshake.
+    # Lists the recent handshakes that you have sent.
     #
-    # Handshakes that are `ACCEPTED`, `DECLINED`, `CANCELED`, or `EXPIRED`
-    # appear in the results of this API for only 30 days after changing to
-    # that state. After that, they're deleted and no longer accessible.
+    # You can view `CANCELED`, `ACCEPTED`, `DECLINED`, or `EXPIRED`
+    # handshakes in API responses for 30 days before they are deleted.
     #
-    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
-    # when calling a `List*` operation. These operations can occasionally
-    # return an empty set of results even when there are more results
-    # available. The `NextToken` response parameter value is `null` *only*
-    # when there are no more results to display.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
+    #
+    # <note markdown="1"> When calling List* operations, always check the `NextToken` response
+    # parameter value, even if you receive an empty result set. These
+    # operations can occasionally return an empty set of results even when
+    # more results are available. Continue making requests until `NextToken`
+    # returns null. A null `NextToken` value indicates that you have
+    # retrieved all available results.
     #
     #  </note>
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
-    #
     # @option params [Types::HandshakeFilter] :filter
-    #   A filter of the handshakes that you want included in the response. The
-    #   default is all types. Use the `ActionType` element to limit the output
-    #   to only a specified type, such as `INVITE`, `ENABLE-ALL-FEATURES`, or
-    #   `APPROVE-ALL-FEATURES`. Alternatively, for the `ENABLE-ALL-FEATURES`
-    #   handshake that generates a separate child handshake for each member
-    #   account, you can specify the `ParentHandshakeId` to see only the
-    #   handshakes that were generated by that parent request.
+    #   A `HandshakeFilter` object. Contains the filer used to select the
+    #   handshakes for an operation.
     #
     # @option params [String] :next_token
     #   The parameter for receiving additional results if you receive a
@@ -4608,16 +4830,9 @@ module Aws::Organizations
     #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The total number of results that you want included on each page of the
-    #   response. If you do not include this parameter, it defaults to a value
-    #   that is specific to the operation. If additional items exist beyond
-    #   the maximum you specify, the `NextToken` response element is present
-    #   and has a value (is not null). Include that value as the `NextToken`
-    #   request parameter in the next call to the operation to get the next
-    #   part of the results. Note that Organizations might return fewer
-    #   results than the maximum even when there are more results available.
-    #   You should check `NextToken` after every operation to ensure that you
-    #   receive all of the results.
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
     #
     # @return [Types::ListHandshakesForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4728,7 +4943,7 @@ module Aws::Organizations
     #
     #   resp = client.list_handshakes_for_organization({
     #     filter: {
-    #       action_type: "INVITE", # accepts INVITE, ENABLE_ALL_FEATURES, APPROVE_ALL_FEATURES, ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE
+    #       action_type: "INVITE", # accepts INVITE, ENABLE_ALL_FEATURES, APPROVE_ALL_FEATURES, ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE, TRANSFER_RESPONSIBILITY
     #       parent_handshake_id: "HandshakeId",
     #     },
     #     next_token: "NextToken",
@@ -4746,10 +4961,10 @@ module Aws::Organizations
     #   resp.handshakes[0].state #=> String, one of "REQUESTED", "OPEN", "CANCELED", "ACCEPTED", "DECLINED", "EXPIRED"
     #   resp.handshakes[0].requested_timestamp #=> Time
     #   resp.handshakes[0].expiration_timestamp #=> Time
-    #   resp.handshakes[0].action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
+    #   resp.handshakes[0].action #=> String, one of "INVITE", "ENABLE_ALL_FEATURES", "APPROVE_ALL_FEATURES", "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE", "TRANSFER_RESPONSIBILITY"
     #   resp.handshakes[0].resources #=> Array
     #   resp.handshakes[0].resources[0].value #=> String
-    #   resp.handshakes[0].resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE"
+    #   resp.handshakes[0].resources[0].type #=> String, one of "ACCOUNT", "ORGANIZATION", "ORGANIZATION_FEATURE_SET", "EMAIL", "MASTER_EMAIL", "MASTER_NAME", "NOTES", "PARENT_HANDSHAKE", "RESPONSIBILITY_TRANSFER", "TRANSFER_START_TIMESTAMP", "TRANSFER_TYPE", "MANAGEMENT_ACCOUNT", "MANAGEMENT_EMAIL", "MANAGEMENT_NAME"
     #   resp.handshakes[0].resources[0].resources #=> Types::HandshakeResources
     #   resp.next_token #=> String
     #
@@ -4762,23 +4977,125 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Lists the organizational units (OUs) in a parent organizational unit
-    # or root.
+    # Lists transfers that allow you to manage the specified
+    # responsibilities for another organization. This operation returns both
+    # transfer invitations and transfers.
     #
-    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
-    # when calling a `List*` operation. These operations can occasionally
-    # return an empty set of results even when there are more results
-    # available. The `NextToken` response parameter value is `null` *only*
-    # when there are no more results to display.
+    # <note markdown="1"> When calling List* operations, always check the `NextToken` response
+    # parameter value, even if you receive an empty result set. These
+    # operations can occasionally return an empty set of results even when
+    # more results are available. Continue making requests until `NextToken`
+    # returns null. A null `NextToken` value indicates that you have
+    # retrieved all available results.
     #
     #  </note>
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # @option params [required, String] :type
+    #   The type of responsibility. Currently, only `BILLING` is supported.
+    #
+    # @option params [String] :id
+    #   ID for the transfer.
+    #
+    # @option params [String] :next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
+    #
+    # @return [Types::ListInboundResponsibilityTransfersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInboundResponsibilityTransfersResponse#responsibility_transfers #responsibility_transfers} => Array&lt;Types::ResponsibilityTransfer&gt;
+    #   * {Types::ListInboundResponsibilityTransfersResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To get a list of all inbound responsibility transfers
+    #
+    #   # The following example shows how to get a list of all inbound responsibility transfers that are associated with the
+    #   # account of the credentials that were used to call the operation:
+    #
+    #   resp = client.list_inbound_responsibility_transfers({
+    #     type: "BILLING", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     responsibility_transfers: [
+    #       {
+    #         arn: "arn:aws:organizations::222222222222:transfer/o-exampleorgid/billing/inbound/rt-exampletransferid222", 
+    #         end_timestamp: Time.parse("2026-01-31T23:59:59+00:00"), 
+    #         id: "rt-exampletransferid222", 
+    #         name: "transfer name", 
+    #         source: {
+    #           management_account_id: "222222222222", 
+    #         }, 
+    #         start_timestamp: Time.parse("2026-01-01T00:00:00+00:00"), 
+    #         status: "WITHDRAWN", 
+    #         target: {
+    #           management_account_id: "333333333333", 
+    #         }, 
+    #         type: "BILLING", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_inbound_responsibility_transfers({
+    #     type: "BILLING", # required, accepts BILLING
+    #     id: "ResponsibilityTransferId",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.responsibility_transfers #=> Array
+    #   resp.responsibility_transfers[0].arn #=> String
+    #   resp.responsibility_transfers[0].name #=> String
+    #   resp.responsibility_transfers[0].id #=> String
+    #   resp.responsibility_transfers[0].type #=> String, one of "BILLING"
+    #   resp.responsibility_transfers[0].status #=> String, one of "REQUESTED", "DECLINED", "CANCELED", "EXPIRED", "ACCEPTED", "WITHDRAWN"
+    #   resp.responsibility_transfers[0].source.management_account_id #=> String
+    #   resp.responsibility_transfers[0].source.management_account_email #=> String
+    #   resp.responsibility_transfers[0].target.management_account_id #=> String
+    #   resp.responsibility_transfers[0].target.management_account_email #=> String
+    #   resp.responsibility_transfers[0].start_timestamp #=> Time
+    #   resp.responsibility_transfers[0].end_timestamp #=> Time
+    #   resp.responsibility_transfers[0].active_handshake_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListInboundResponsibilityTransfers AWS API Documentation
+    #
+    # @overload list_inbound_responsibility_transfers(params = {})
+    # @param [Hash] params ({})
+    def list_inbound_responsibility_transfers(params = {}, options = {})
+      req = build_request(:list_inbound_responsibility_transfers, params)
+      req.send_request(options)
+    end
+
+    # Lists the organizational units (OUs) in a parent organizational unit
+    # or root.
+    #
+    # <note markdown="1"> When calling List* operations, always check the `NextToken` response
+    # parameter value, even if you receive an empty result set. These
+    # operations can occasionally return an empty set of results even when
+    # more results are available. Continue making requests until `NextToken`
+    # returns null. A null `NextToken` value indicates that you have
+    # retrieved all available results.
+    #
+    #  </note>
+    #
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [required, String] :parent_id
-    #   The unique identifier (ID) of the root or OU whose child OUs you want
-    #   to list.
+    #   ID for the root or OU whose child OUs you want to list.
     #
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
@@ -4803,16 +5120,9 @@ module Aws::Organizations
     #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The total number of results that you want included on each page of the
-    #   response. If you do not include this parameter, it defaults to a value
-    #   that is specific to the operation. If additional items exist beyond
-    #   the maximum you specify, the `NextToken` response element is present
-    #   and has a value (is not null). Include that value as the `NextToken`
-    #   request parameter in the next call to the operation to get the next
-    #   part of the results. Note that Organizations might return fewer
-    #   results than the maximum even when there are more results available.
-    #   You should check `NextToken` after every operation to ensure that you
-    #   receive all of the results.
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
     #
     # @return [Types::ListOrganizationalUnitsForParentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4871,29 +5181,128 @@ module Aws::Organizations
       req.send_request(options)
     end
 
+    # Lists transfers that allow an account outside your organization to
+    # manage the specified responsibilities for your organization. This
+    # operation returns both transfer invitations and transfers.
+    #
+    # <note markdown="1"> When calling List* operations, always check the `NextToken` response
+    # parameter value, even if you receive an empty result set. These
+    # operations can occasionally return an empty set of results even when
+    # more results are available. Continue making requests until `NextToken`
+    # returns null. A null `NextToken` value indicates that you have
+    # retrieved all available results.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :type
+    #   The type of responsibility. Currently, only `BILLING` is supported.
+    #
+    # @option params [String] :next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
+    #
+    # @return [Types::ListOutboundResponsibilityTransfersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOutboundResponsibilityTransfersResponse#responsibility_transfers #responsibility_transfers} => Array&lt;Types::ResponsibilityTransfer&gt;
+    #   * {Types::ListOutboundResponsibilityTransfersResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To get a list of all outbound responsibility transfers
+    #
+    #   # The following example shows how to get a list of all outbound responsibility transfers that are associated with the
+    #   # account of the credentials that were used to call the operation:
+    #
+    #   resp = client.list_outbound_responsibility_transfers({
+    #     type: "BILLING", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     responsibility_transfers: [
+    #       {
+    #         arn: "arn:aws:organizations::222222222222:transfer/o-exampleorgid222/billing/outbound/rt-exampletransferid222", 
+    #         end_timestamp: Time.parse("2026-01-31T23:59:59+00:00"), 
+    #         id: "rt-exampletransferid222", 
+    #         name: "transfer name", 
+    #         source: {
+    #           management_account_id: "222222222222", 
+    #         }, 
+    #         start_timestamp: Time.parse("2026-01-01T00:00:00+00:00"), 
+    #         status: "WITHDRAWN", 
+    #         target: {
+    #           management_account_id: "333333333333", 
+    #         }, 
+    #         type: "BILLING", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_outbound_responsibility_transfers({
+    #     type: "BILLING", # required, accepts BILLING
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.responsibility_transfers #=> Array
+    #   resp.responsibility_transfers[0].arn #=> String
+    #   resp.responsibility_transfers[0].name #=> String
+    #   resp.responsibility_transfers[0].id #=> String
+    #   resp.responsibility_transfers[0].type #=> String, one of "BILLING"
+    #   resp.responsibility_transfers[0].status #=> String, one of "REQUESTED", "DECLINED", "CANCELED", "EXPIRED", "ACCEPTED", "WITHDRAWN"
+    #   resp.responsibility_transfers[0].source.management_account_id #=> String
+    #   resp.responsibility_transfers[0].source.management_account_email #=> String
+    #   resp.responsibility_transfers[0].target.management_account_id #=> String
+    #   resp.responsibility_transfers[0].target.management_account_email #=> String
+    #   resp.responsibility_transfers[0].start_timestamp #=> Time
+    #   resp.responsibility_transfers[0].end_timestamp #=> Time
+    #   resp.responsibility_transfers[0].active_handshake_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOutboundResponsibilityTransfers AWS API Documentation
+    #
+    # @overload list_outbound_responsibility_transfers(params = {})
+    # @param [Hash] params ({})
+    def list_outbound_responsibility_transfers(params = {}, options = {})
+      req = build_request(:list_outbound_responsibility_transfers, params)
+      req.send_request(options)
+    end
+
     # Lists the root or organizational units (OUs) that serve as the
     # immediate parent of the specified child OU or account. This operation,
     # along with ListChildren enables you to traverse the tree structure
     # that makes up this root.
     #
-    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
-    # when calling a `List*` operation. These operations can occasionally
-    # return an empty set of results even when there are more results
-    # available. The `NextToken` response parameter value is `null` *only*
-    # when there are no more results to display.
+    # <note markdown="1"> When calling List* operations, always check the `NextToken` response
+    # parameter value, even if you receive an empty result set. These
+    # operations can occasionally return an empty set of results even when
+    # more results are available. Continue making requests until `NextToken`
+    # returns null. A null `NextToken` value indicates that you have
+    # retrieved all available results.
     #
     #  </note>
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # <note markdown="1"> In the current release, a child can have only a single parent.
     #
     #  </note>
     #
     # @option params [required, String] :child_id
-    #   The unique identifier (ID) of the OU or account whose parent
-    #   containers you want to list. Don't specify a root.
+    #   ID for the OU or account whose parent containers you want to list.
+    #   Don't specify a root.
     #
     #   The [regex pattern][1] for a child ID string requires one of the
     #   following:
@@ -4917,16 +5326,9 @@ module Aws::Organizations
     #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The total number of results that you want included on each page of the
-    #   response. If you do not include this parameter, it defaults to a value
-    #   that is specific to the operation. If additional items exist beyond
-    #   the maximum you specify, the `NextToken` response element is present
-    #   and has a value (is not null). Include that value as the `NextToken`
-    #   request parameter in the next call to the operation to get the next
-    #   part of the results. Note that Organizations might return fewer
-    #   results than the maximum even when there are more results available.
-    #   You should check `NextToken` after every operation to ensure that you
-    #   receive all of the results.
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
     #
     # @return [Types::ListParentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4981,16 +5383,17 @@ module Aws::Organizations
     # Retrieves the list of all policies in an organization of a specified
     # type.
     #
-    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
-    # when calling a `List*` operation. These operations can occasionally
-    # return an empty set of results even when there are more results
-    # available. The `NextToken` response parameter value is `null` *only*
-    # when there are no more results to display.
+    # <note markdown="1"> When calling List* operations, always check the `NextToken` response
+    # parameter value, even if you receive an empty result set. These
+    # operations can occasionally return an empty set of results even when
+    # more results are available. Continue making requests until `NextToken`
+    # returns null. A null `NextToken` value indicates that you have
+    # retrieved all available results.
     #
     #  </note>
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [required, String] :filter
     #   Specifies the type of policy that you want to include in the response.
@@ -5012,6 +5415,14 @@ module Aws::Organizations
     #
     #   * [SECURITYHUB\_POLICY][8]
     #
+    #   * [UPGRADE\_ROLLOUT\_POLICY][9]
+    #
+    #   * [INSPECTOR\_POLICY][10]
+    #
+    #   * [BEDROCK\_POLICY][11]
+    #
+    #   * [S3\_POLICY][12]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -5022,6 +5433,10 @@ module Aws::Organizations
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
     #
     # @option params [String] :next_token
     #   The parameter for receiving additional results if you receive a
@@ -5031,16 +5446,9 @@ module Aws::Organizations
     #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The total number of results that you want included on each page of the
-    #   response. If you do not include this parameter, it defaults to a value
-    #   that is specific to the operation. If additional items exist beyond
-    #   the maximum you specify, the `NextToken` response element is present
-    #   and has a value (is not null). Include that value as the `NextToken`
-    #   request parameter in the next call to the operation to get the next
-    #   part of the results. Note that Organizations might return fewer
-    #   results than the maximum even when there are more results available.
-    #   You should check `NextToken` after every operation to ensure that you
-    #   receive all of the results.
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
     #
     # @return [Types::ListPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5091,7 +5499,7 @@ module Aws::Organizations
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_policies({
-    #     filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY
+    #     filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY, INSPECTOR_POLICY, UPGRADE_ROLLOUT_POLICY, BEDROCK_POLICY, S3_POLICY
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -5103,7 +5511,7 @@ module Aws::Organizations
     #   resp.policies[0].arn #=> String
     #   resp.policies[0].name #=> String
     #   resp.policies[0].description #=> String
-    #   resp.policies[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
+    #   resp.policies[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY", "INSPECTOR_POLICY", "UPGRADE_ROLLOUT_POLICY", "BEDROCK_POLICY", "S3_POLICY"
     #   resp.policies[0].aws_managed #=> Boolean
     #   resp.next_token #=> String
     #
@@ -5120,20 +5528,21 @@ module Aws::Organizations
     # root, organizational unit (OU), or account. You must specify the
     # policy type that you want included in the returned list.
     #
-    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
-    # when calling a `List*` operation. These operations can occasionally
-    # return an empty set of results even when there are more results
-    # available. The `NextToken` response parameter value is `null` *only*
-    # when there are no more results to display.
+    # <note markdown="1"> When calling List* operations, always check the `NextToken` response
+    # parameter value, even if you receive an empty result set. These
+    # operations can occasionally return an empty set of results even when
+    # more results are available. Continue making requests until `NextToken`
+    # returns null. A null `NextToken` value indicates that you have
+    # retrieved all available results.
     #
     #  </note>
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [required, String] :target_id
-    #   The unique identifier (ID) of the root, organizational unit, or
-    #   account whose policies you want to list.
+    #   ID for the root, organizational unit, or account whose policies you
+    #   want to list.
     #
     #   The [regex pattern][1] for a target ID string requires one of the
     #   following:
@@ -5172,6 +5581,14 @@ module Aws::Organizations
     #
     #   * [SECURITYHUB\_POLICY][8]
     #
+    #   * [UPGRADE\_ROLLOUT\_POLICY][9]
+    #
+    #   * [INSPECTOR\_POLICY][10]
+    #
+    #   * [BEDROCK\_POLICY][11]
+    #
+    #   * [S3\_POLICY][12]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -5182,6 +5599,10 @@ module Aws::Organizations
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
     #
     # @option params [String] :next_token
     #   The parameter for receiving additional results if you receive a
@@ -5191,16 +5612,9 @@ module Aws::Organizations
     #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The total number of results that you want included on each page of the
-    #   response. If you do not include this parameter, it defaults to a value
-    #   that is specific to the operation. If additional items exist beyond
-    #   the maximum you specify, the `NextToken` response element is present
-    #   and has a value (is not null). Include that value as the `NextToken`
-    #   request parameter in the next call to the operation to get the next
-    #   part of the results. Note that Organizations might return fewer
-    #   results than the maximum even when there are more results available.
-    #   You should check `NextToken` after every operation to ensure that you
-    #   receive all of the results.
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
     #
     # @return [Types::ListPoliciesForTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5239,7 +5653,7 @@ module Aws::Organizations
     #
     #   resp = client.list_policies_for_target({
     #     target_id: "PolicyTargetId", # required
-    #     filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY
+    #     filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, RESOURCE_CONTROL_POLICY, TAG_POLICY, BACKUP_POLICY, AISERVICES_OPT_OUT_POLICY, CHATBOT_POLICY, DECLARATIVE_POLICY_EC2, SECURITYHUB_POLICY, INSPECTOR_POLICY, UPGRADE_ROLLOUT_POLICY, BEDROCK_POLICY, S3_POLICY
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -5251,7 +5665,7 @@ module Aws::Organizations
     #   resp.policies[0].arn #=> String
     #   resp.policies[0].name #=> String
     #   resp.policies[0].description #=> String
-    #   resp.policies[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
+    #   resp.policies[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY", "INSPECTOR_POLICY", "UPGRADE_ROLLOUT_POLICY", "BEDROCK_POLICY", "S3_POLICY"
     #   resp.policies[0].aws_managed #=> Boolean
     #   resp.next_token #=> String
     #
@@ -5266,16 +5680,17 @@ module Aws::Organizations
 
     # Lists the roots that are defined in the current organization.
     #
-    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
-    # when calling a `List*` operation. These operations can occasionally
-    # return an empty set of results even when there are more results
-    # available. The `NextToken` response parameter value is `null` *only*
-    # when there are no more results to display.
+    # <note markdown="1"> When calling List* operations, always check the `NextToken` response
+    # parameter value, even if you receive an empty result set. These
+    # operations can occasionally return an empty set of results even when
+    # more results are available. Continue making requests until `NextToken`
+    # returns null. A null `NextToken` value indicates that you have
+    # retrieved all available results.
     #
     #  </note>
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # <note markdown="1"> Policy types can be enabled and disabled in roots. This is distinct
     # from whether they're available in the organization. When you enable
@@ -5294,16 +5709,9 @@ module Aws::Organizations
     #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The total number of results that you want included on each page of the
-    #   response. If you do not include this parameter, it defaults to a value
-    #   that is specific to the operation. If additional items exist beyond
-    #   the maximum you specify, the `NextToken` response element is present
-    #   and has a value (is not null). Include that value as the `NextToken`
-    #   request parameter in the next call to the operation to get the next
-    #   part of the results. Note that Organizations might return fewer
-    #   results than the maximum even when there are more results available.
-    #   You should check `NextToken` after every operation to ensure that you
-    #   receive all of the results.
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
     #
     # @return [Types::ListRootsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5351,7 +5759,7 @@ module Aws::Organizations
     #   resp.roots[0].arn #=> String
     #   resp.roots[0].name #=> String
     #   resp.roots[0].policy_types #=> Array
-    #   resp.roots[0].policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
+    #   resp.roots[0].policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY", "INSPECTOR_POLICY", "UPGRADE_ROLLOUT_POLICY", "BEDROCK_POLICY", "S3_POLICY"
     #   resp.roots[0].policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #   resp.next_token #=> String
     #
@@ -5376,8 +5784,8 @@ module Aws::Organizations
     #
     # * Policy (any type)
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [required, String] :resource_id
     #   The ID of the resource with the tags to list.
@@ -5435,20 +5843,20 @@ module Aws::Organizations
     # Lists all the roots, organizational units (OUs), and accounts that the
     # specified policy is attached to.
     #
-    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
-    # when calling a `List*` operation. These operations can occasionally
-    # return an empty set of results even when there are more results
-    # available. The `NextToken` response parameter value is `null` *only*
-    # when there are no more results to display.
+    # <note markdown="1"> When calling List* operations, always check the `NextToken` response
+    # parameter value, even if you receive an empty result set. These
+    # operations can occasionally return an empty set of results even when
+    # more results are available. Continue making requests until `NextToken`
+    # returns null. A null `NextToken` value indicates that you have
+    # retrieved all available results.
     #
     #  </note>
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [required, String] :policy_id
-    #   The unique identifier (ID) of the policy whose attachments you want to
-    #   know.
+    #   ID for the policy whose attachments you want to know.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
     #   by from 8 to 128 lowercase or uppercase letters, digits, or the
@@ -5466,16 +5874,9 @@ module Aws::Organizations
     #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   The total number of results that you want included on each page of the
-    #   response. If you do not include this parameter, it defaults to a value
-    #   that is specific to the operation. If additional items exist beyond
-    #   the maximum you specify, the `NextToken` response element is present
-    #   and has a value (is not null). Include that value as the `NextToken`
-    #   request parameter in the next call to the operation to get the next
-    #   part of the results. Note that Organizations might return fewer
-    #   results than the maximum even when there are more results available.
-    #   You should check `NextToken` after every operation to ensure that you
-    #   receive all of the results.
+    #   The maximum number of items to return in the response. If more results
+    #   exist than the specified `MaxResults` value, a token is included in
+    #   the response so that you can retrieve the remaining results.
     #
     # @return [Types::ListTargetsForPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5547,11 +5948,10 @@ module Aws::Organizations
     # Moves an account from its current source parent root or organizational
     # unit (OU) to the specified destination parent root or OU.
     #
-    # This operation can be called only from the organization's management
-    # account.
+    # You can only call this operation from the management account.
     #
     # @option params [required, String] :account_id
-    #   The unique identifier (ID) of the account that you want to move.
+    #   ID for the account that you want to move.
     #
     #   The [regex pattern][1] for an account ID string requires exactly 12
     #   digits.
@@ -5561,8 +5961,8 @@ module Aws::Organizations
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :source_parent_id
-    #   The unique identifier (ID) of the root or organizational unit that you
-    #   want to move the account from.
+    #   ID for the root or organizational unit that you want to move the
+    #   account from.
     #
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
@@ -5580,8 +5980,8 @@ module Aws::Organizations
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, String] :destination_parent_id
-    #   The unique identifier (ID) of the root or organizational unit that you
-    #   want to move the account to.
+    #   ID for the root or organizational unit that you want to move the
+    #   account to.
     #
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
@@ -5630,8 +6030,7 @@ module Aws::Organizations
 
     # Creates or updates a resource policy.
     #
-    # This operation can be called only from the organization's management
-    # account..
+    # You can only call this operation from the management account..
     #
     # @option params [required, String] :content
     #   If provided, the new content for the resource policy. The text must be
@@ -5704,8 +6103,7 @@ module Aws::Organizations
     # [Amazon Web Services Services that you can use with Organizations][1]
     # in the *Organizations User Guide.*
     #
-    # This operation can be called only from the organization's management
-    # account.
+    # You can only call this operation from the management account.
     #
     #
     #
@@ -5745,9 +6143,8 @@ module Aws::Organizations
     # account is no longer charged for any expenses accrued by the member
     # account after it's removed from the organization.
     #
-    # This operation can be called only from the organization's management
-    # account. Member accounts can remove themselves with LeaveOrganization
-    # instead.
+    # You can only call this operation from the management account. Member
+    # accounts can remove themselves with LeaveOrganization instead.
     #
     # * You can remove an account from your organization only if the account
     #   is configured with the information required to operate as a
@@ -5774,8 +6171,8 @@ module Aws::Organizations
     # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html
     #
     # @option params [required, String] :account_id
-    #   The unique identifier (ID) of the member account that you want to
-    #   remove from the organization.
+    #   ID for the member account that you want to remove from the
+    #   organization.
     #
     #   The [regex pattern][1] for an account ID string requires exactly 12
     #   digits.
@@ -5823,8 +6220,8 @@ module Aws::Organizations
     #
     # * Policy (any type)
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [required, String] :resource_id
     #   The ID of the resource to add a tag to.
@@ -5876,6 +6273,80 @@ module Aws::Organizations
       req.send_request(options)
     end
 
+    # Ends a transfer. A *transfer* is an arrangement between two management
+    # accounts where one account designates the other with specified
+    # responsibilities for their organization.
+    #
+    # @option params [required, String] :id
+    #   ID for the transfer.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_timestamp
+    #   Timestamp when the responsibility transfer is to end.
+    #
+    # @return [Types::TerminateResponsibilityTransferResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TerminateResponsibilityTransferResponse#responsibility_transfer #responsibility_transfer} => Types::ResponsibilityTransfer
+    #
+    #
+    # @example Example: To terminate a transfer
+    #
+    #   # The following example shows how to terminate a transfer:/n/n
+    #
+    #   resp = client.terminate_responsibility_transfer({
+    #     end_timestamp: Time.parse("1769903999"), 
+    #     id: "rt-exampletransferid222", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     responsibility_transfer: {
+    #       arn: "arn:aws:organizations::222222222222:transfer/o-exampleorgid222/billing/outbound/rt-exampletransferid222", 
+    #       end_timestamp: Time.parse("2026-01-31T23:59:59+00:00"), 
+    #       id: "rt-exampletransferid222", 
+    #       name: "transfer name", 
+    #       source: {
+    #         management_account_id: "222222222222", 
+    #       }, 
+    #       start_timestamp: Time.parse("2026-01-01T00:00:00+00:00"), 
+    #       status: "WITHDRAWN", 
+    #       target: {
+    #         management_account_id: "333333333333", 
+    #       }, 
+    #       type: "BILLING", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.terminate_responsibility_transfer({
+    #     id: "ResponsibilityTransferId", # required
+    #     end_timestamp: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.responsibility_transfer.arn #=> String
+    #   resp.responsibility_transfer.name #=> String
+    #   resp.responsibility_transfer.id #=> String
+    #   resp.responsibility_transfer.type #=> String, one of "BILLING"
+    #   resp.responsibility_transfer.status #=> String, one of "REQUESTED", "DECLINED", "CANCELED", "EXPIRED", "ACCEPTED", "WITHDRAWN"
+    #   resp.responsibility_transfer.source.management_account_id #=> String
+    #   resp.responsibility_transfer.source.management_account_email #=> String
+    #   resp.responsibility_transfer.target.management_account_id #=> String
+    #   resp.responsibility_transfer.target.management_account_email #=> String
+    #   resp.responsibility_transfer.start_timestamp #=> Time
+    #   resp.responsibility_transfer.end_timestamp #=> Time
+    #   resp.responsibility_transfer.active_handshake_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/TerminateResponsibilityTransfer AWS API Documentation
+    #
+    # @overload terminate_responsibility_transfer(params = {})
+    # @param [Hash] params ({})
+    def terminate_responsibility_transfer(params = {}, options = {})
+      req = build_request(:terminate_responsibility_transfer, params)
+      req.send_request(options)
+    end
+
     # Removes any tags with the specified keys from the specified resource.
     #
     # You can attach tags to the following resources in Organizations.
@@ -5888,8 +6359,8 @@ module Aws::Organizations
     #
     # * Policy (any type)
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [required, String] :resource_id
     #   The ID of the resource to remove a tag from.
@@ -5932,12 +6403,11 @@ module Aws::Organizations
     # change. The child OUs and accounts remain in place, and any attached
     # policies of the OU remain attached.
     #
-    # This operation can be called only from the organization's management
-    # account.
+    # You can only call this operation from the management account.
     #
     # @option params [required, String] :organizational_unit_id
-    #   The unique identifier (ID) of the OU that you want to rename. You can
-    #   get the ID from the ListOrganizationalUnitsForParent operation.
+    #   ID for the OU that you want to rename. You can get the ID from the
+    #   ListOrganizationalUnitsForParent operation.
     #
     #   The [regex pattern][1] for an organizational unit ID string requires
     #   "ou-" followed by from 4 to 32 lowercase letters or digits (the ID
@@ -6007,11 +6477,11 @@ module Aws::Organizations
     # If you don't supply any parameter, that value remains unchanged. You
     # can't change a policy's type.
     #
-    # This operation can be called only from the organization's management
-    # account or by a member account that is a delegated administrator.
+    # You can only call this operation from the management account or a
+    # member account that is a delegated administrator.
     #
     # @option params [required, String] :policy_id
-    #   The unique identifier (ID) of the policy that you want to update.
+    #   ID for the policy that you want to update.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
     #   by from 8 to 128 lowercase or uppercase letters, digits, or the
@@ -6120,7 +6590,7 @@ module Aws::Organizations
     #   resp.policy.policy_summary.arn #=> String
     #   resp.policy.policy_summary.name #=> String
     #   resp.policy.policy_summary.description #=> String
-    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY"
+    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "RESOURCE_CONTROL_POLICY", "TAG_POLICY", "BACKUP_POLICY", "AISERVICES_OPT_OUT_POLICY", "CHATBOT_POLICY", "DECLARATIVE_POLICY_EC2", "SECURITYHUB_POLICY", "INSPECTOR_POLICY", "UPGRADE_ROLLOUT_POLICY", "BEDROCK_POLICY", "S3_POLICY"
     #   resp.policy.policy_summary.aws_managed #=> Boolean
     #   resp.policy.content #=> String
     #
@@ -6130,6 +6600,82 @@ module Aws::Organizations
     # @param [Hash] params ({})
     def update_policy(params = {}, options = {})
       req = build_request(:update_policy, params)
+      req.send_request(options)
+    end
+
+    # Updates a transfer. A *transfer* is the arrangement between two
+    # management accounts where one account designates the other with
+    # specified responsibilities for their organization.
+    #
+    # You can update the name assigned to a transfer.
+    #
+    # @option params [required, String] :id
+    #   ID for the transfer.
+    #
+    # @option params [required, String] :name
+    #   New name you want to assign to the transfer.
+    #
+    # @return [Types::UpdateResponsibilityTransferResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateResponsibilityTransferResponse#responsibility_transfer #responsibility_transfer} => Types::ResponsibilityTransfer
+    #
+    #
+    # @example Example: To rename a transfer
+    #
+    #   # The following example shows how to rename a transfer. The output confirms the new name:/n/n
+    #
+    #   resp = client.update_responsibility_transfer({
+    #     id: "rt-exampletransferid222", 
+    #     name: "new name", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     responsibility_transfer: {
+    #       arn: "arn:aws:organizations::222222222222:transfer/o-exampleorgid222/billing/outbound/rt-exampletransferid222", 
+    #       end_timestamp: Time.parse("2026-01-31T23:59:59+00:00"), 
+    #       id: "rt-exampletransferid222", 
+    #       name: "new name", 
+    #       source: {
+    #         management_account_id: "222222222222", 
+    #       }, 
+    #       start_timestamp: Time.parse("2026-01-01T00:00:00+00:00"), 
+    #       status: "WITHDRAWN", 
+    #       target: {
+    #         management_account_id: "333333333333", 
+    #       }, 
+    #       type: "BILLING", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_responsibility_transfer({
+    #     id: "ResponsibilityTransferId", # required
+    #     name: "ResponsibilityTransferName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.responsibility_transfer.arn #=> String
+    #   resp.responsibility_transfer.name #=> String
+    #   resp.responsibility_transfer.id #=> String
+    #   resp.responsibility_transfer.type #=> String, one of "BILLING"
+    #   resp.responsibility_transfer.status #=> String, one of "REQUESTED", "DECLINED", "CANCELED", "EXPIRED", "ACCEPTED", "WITHDRAWN"
+    #   resp.responsibility_transfer.source.management_account_id #=> String
+    #   resp.responsibility_transfer.source.management_account_email #=> String
+    #   resp.responsibility_transfer.target.management_account_id #=> String
+    #   resp.responsibility_transfer.target.management_account_email #=> String
+    #   resp.responsibility_transfer.start_timestamp #=> Time
+    #   resp.responsibility_transfer.end_timestamp #=> Time
+    #   resp.responsibility_transfer.active_handshake_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdateResponsibilityTransfer AWS API Documentation
+    #
+    # @overload update_responsibility_transfer(params = {})
+    # @param [Hash] params ({})
+    def update_responsibility_transfer(params = {}, options = {})
+      req = build_request(:update_responsibility_transfer, params)
       req.send_request(options)
     end
 
@@ -6151,7 +6697,7 @@ module Aws::Organizations
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.124.0'
+      context[:gem_version] = '1.130.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -547,6 +547,9 @@ module Aws::DataZone
 
     # Accepts a subscription request to a specific asset.
     #
+    # @option params [Array<Types::AssetPermission>] :asset_permissions
+    #   The asset permissions of the accept subscription request.
+    #
     # @option params [Array<Types::AcceptedAssetScope>] :asset_scopes
     #   The asset scopes of the accept subscription request.
     #
@@ -582,6 +585,14 @@ module Aws::DataZone
     # @example Request syntax with placeholder values
     #
     #   resp = client.accept_subscription_request({
+    #     asset_permissions: [
+    #       {
+    #         asset_id: "AssetId", # required
+    #         permissions: { # required
+    #           s3: ["READ"], # accepts READ, WRITE
+    #         },
+    #       },
+    #     ],
     #     asset_scopes: [
     #       {
     #         asset_id: "AssetId", # required
@@ -624,6 +635,8 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].name #=> String
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.permissions.s3 #=> Array
+    #   resp.subscribed_listings[0].item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
     #   resp.subscribed_listings[0].item.product_listing.asset_listings #=> Array
     #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_id #=> String
     #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_revision #=> String
@@ -640,8 +653,16 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].owner_project_name #=> String
     #   resp.subscribed_listings[0].revision #=> String
     #   resp.subscribed_principals #=> Array
+    #   resp.subscribed_principals[0].group.id #=> String
+    #   resp.subscribed_principals[0].group.name #=> String
     #   resp.subscribed_principals[0].project.id #=> String
     #   resp.subscribed_principals[0].project.name #=> String
+    #   resp.subscribed_principals[0].user.details.iam.arn #=> String
+    #   resp.subscribed_principals[0].user.details.iam.principal_id #=> String
+    #   resp.subscribed_principals[0].user.details.sso.first_name #=> String
+    #   resp.subscribed_principals[0].user.details.sso.last_name #=> String
+    #   resp.subscribed_principals[0].user.details.sso.username #=> String
+    #   resp.subscribed_principals[0].user.id #=> String
     #   resp.updated_at #=> Time
     #   resp.updated_by #=> String
     #
@@ -897,6 +918,127 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Gets the attribute metadata.
+    #
+    # @option params [required, Array<String>] :attribute_identifiers
+    #   The attribute identifier.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The domain ID where you want to get the attribute metadata.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The entity ID for which you want to get attribute metadata.
+    #
+    # @option params [String] :entity_revision
+    #   The entity revision for which you want to get attribute metadata.
+    #
+    # @option params [required, String] :entity_type
+    #   The entity type for which you want to get attribute metadata.
+    #
+    # @return [Types::BatchGetAttributesMetadataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetAttributesMetadataOutput#attributes #attributes} => Array&lt;Types::BatchGetAttributeOutput&gt;
+    #   * {Types::BatchGetAttributesMetadataOutput#errors #errors} => Array&lt;Types::AttributeError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_attributes_metadata({
+    #     attribute_identifiers: ["AttributeIdentifier"], # required
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "EntityId", # required
+    #     entity_revision: "Revision",
+    #     entity_type: "ASSET", # required, accepts ASSET, LISTING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attributes #=> Array
+    #   resp.attributes[0].attribute_identifier #=> String
+    #   resp.attributes[0].forms #=> Array
+    #   resp.attributes[0].forms[0].content #=> String
+    #   resp.attributes[0].forms[0].form_name #=> String
+    #   resp.attributes[0].forms[0].type_name #=> String
+    #   resp.attributes[0].forms[0].type_revision #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].attribute_identifier #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/BatchGetAttributesMetadata AWS API Documentation
+    #
+    # @overload batch_get_attributes_metadata(params = {})
+    # @param [Hash] params ({})
+    def batch_get_attributes_metadata(params = {}, options = {})
+      req = build_request(:batch_get_attributes_metadata, params)
+      req.send_request(options)
+    end
+
+    # Writes the attribute metadata.
+    #
+    # @option params [required, Array<Types::AttributeInput>] :attributes
+    #   The attributes of the metadata.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :domain_identifier
+    #   The domain ID where you want to write the attribute metadata.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The entity ID for which you want to write the attribute metadata.
+    #
+    # @option params [required, String] :entity_type
+    #   The entity type for which you want to write the attribute metadata.
+    #
+    # @return [Types::BatchPutAttributesMetadataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchPutAttributesMetadataOutput#attributes #attributes} => Array&lt;Types::BatchPutAttributeOutput&gt;
+    #   * {Types::BatchPutAttributesMetadataOutput#errors #errors} => Array&lt;Types::AttributeError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_put_attributes_metadata({
+    #     attributes: [ # required
+    #       {
+    #         attribute_identifier: "AttributeIdentifier", # required
+    #         forms: [ # required
+    #           {
+    #             content: "FormInputContentString",
+    #             form_name: "FormName", # required
+    #             type_identifier: "FormTypeIdentifier",
+    #             type_revision: "RevisionInput",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "EntityId", # required
+    #     entity_type: "ASSET", # required, accepts ASSET, LISTING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attributes #=> Array
+    #   resp.attributes[0].attribute_identifier #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].attribute_identifier #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/BatchPutAttributesMetadata AWS API Documentation
+    #
+    # @overload batch_put_attributes_metadata(params = {})
+    # @param [Hash] params ({})
+    def batch_put_attributes_metadata(params = {}, options = {})
+      req = build_request(:batch_put_attributes_metadata, params)
+      req.send_request(options)
+    end
+
     # Cancels the metadata generation run.
     #
     # Prerequisites:
@@ -985,6 +1127,8 @@ module Aws::DataZone
     #   resp.subscribed_listing.item.asset_listing.glossary_terms #=> Array
     #   resp.subscribed_listing.item.asset_listing.glossary_terms[0].name #=> String
     #   resp.subscribed_listing.item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listing.item.asset_listing.permissions.s3 #=> Array
+    #   resp.subscribed_listing.item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
     #   resp.subscribed_listing.item.product_listing.asset_listings #=> Array
     #   resp.subscribed_listing.item.product_listing.asset_listings[0].entity_id #=> String
     #   resp.subscribed_listing.item.product_listing.asset_listings[0].entity_revision #=> String
@@ -1000,8 +1144,16 @@ module Aws::DataZone
     #   resp.subscribed_listing.owner_project_id #=> String
     #   resp.subscribed_listing.owner_project_name #=> String
     #   resp.subscribed_listing.revision #=> String
+    #   resp.subscribed_principal.group.id #=> String
+    #   resp.subscribed_principal.group.name #=> String
     #   resp.subscribed_principal.project.id #=> String
     #   resp.subscribed_principal.project.name #=> String
+    #   resp.subscribed_principal.user.details.iam.arn #=> String
+    #   resp.subscribed_principal.user.details.iam.principal_id #=> String
+    #   resp.subscribed_principal.user.details.sso.first_name #=> String
+    #   resp.subscribed_principal.user.details.sso.last_name #=> String
+    #   resp.subscribed_principal.user.details.sso.username #=> String
+    #   resp.subscribed_principal.user.id #=> String
     #   resp.subscription_request_id #=> String
     #   resp.updated_at #=> Time
     #   resp.updated_by #=> String
@@ -1117,9 +1269,8 @@ module Aws::DataZone
     # * `--type-revision` (if used) must match a valid revision of the asset
     #   type.
     #
-    # * Form type must exist and be associated with the asset type. Use
-    #   `create-form-type` to define. For more information, see
-    #   [create-form-type][2].
+    # * `formsInput` is required when it is associated as required in the
+    #   `asset-type`. For more information, see [create-form-type][2].
     #
     # * Form content must include all required fields as per the form schema
     #   (e.g., `bucketArn`).
@@ -1483,8 +1634,8 @@ module Aws::DataZone
     #
     # * Asset must already exist in the domain with identifier.
     #
-    # * The form type with correct revision must be registered in the same
-    #   domain.
+    # * `formsInput` is required when asset has the form type.
+    #   `typeRevision` should be the latest version of form type.
     #
     # * The form content must include all required fields (e.g., `bucketArn`
     #   for `S3ObjectCollectionForm`).
@@ -1629,8 +1780,8 @@ module Aws::DataZone
     #
     # Prerequisites:
     #
-    # * The form type with `typeIdentifier` and `typeRevision` must exist
-    #   and be published.
+    # * The `formsInput` field is required, however, can be passed as empty
+    #   (e.g. `-forms-input {})`.
     #
     # * You must have `CreateAssetType` permissions.
     #
@@ -1738,7 +1889,10 @@ module Aws::DataZone
     # @option params [required, String] :domain_identifier
     #   The ID of the domain where the connection is created.
     #
-    # @option params [required, String] :environment_identifier
+    # @option params [Boolean] :enable_trusted_identity_propagation
+    #   Specifies whether the trusted identity propagation is enabled.
+    #
+    # @option params [String] :environment_identifier
     #   The ID of the environment where the connection is created.
     #
     # @option params [required, String] :name
@@ -1746,6 +1900,9 @@ module Aws::DataZone
     #
     # @option params [Types::ConnectionPropertiesInput] :props
     #   The connection props.
+    #
+    # @option params [String] :scope
+    #   The scope of the connection.
     #
     # @return [Types::CreateConnectionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1758,6 +1915,7 @@ module Aws::DataZone
     #   * {Types::CreateConnectionOutput#physical_endpoints #physical_endpoints} => Array&lt;Types::PhysicalEndpoint&gt;
     #   * {Types::CreateConnectionOutput#project_id #project_id} => String
     #   * {Types::CreateConnectionOutput#props #props} => Types::ConnectionPropertiesOutput
+    #   * {Types::CreateConnectionOutput#scope #scope} => String
     #   * {Types::CreateConnectionOutput#type #type} => String
     #
     # @example Request syntax with placeholder values
@@ -1772,9 +1930,15 @@ module Aws::DataZone
     #     client_token: "String",
     #     description: "CreateConnectionInputDescriptionString",
     #     domain_identifier: "DomainId", # required
-    #     environment_identifier: "EnvironmentId", # required
+    #     enable_trusted_identity_propagation: false,
+    #     environment_identifier: "EnvironmentId",
     #     name: "ConnectionName", # required
     #     props: {
+    #       amazon_q_properties: {
+    #         auth_mode: "AmazonQPropertiesInputAuthModeString",
+    #         is_enabled: false, # required
+    #         profile_arn: "AmazonQPropertiesInputProfileArnString",
+    #       },
     #       athena_properties: {
     #         workgroup_name: "AthenaPropertiesInputWorkgroupNameString",
     #       },
@@ -1845,6 +2009,9 @@ module Aws::DataZone
     #       iam_properties: {
     #         glue_lineage_sync_enabled: false,
     #       },
+    #       mlflow_properties: {
+    #         tracking_server_arn: "String",
+    #       },
     #       redshift_properties: {
     #         credentials: {
     #           secret_arn: "RedshiftCredentialsSecretArnString",
@@ -1876,6 +2043,7 @@ module Aws::DataZone
     #         instance_profile_arn: "SparkEmrPropertiesInputInstanceProfileArnString",
     #         java_virtual_env: "SparkEmrPropertiesInputJavaVirtualEnvString",
     #         log_uri: "SparkEmrPropertiesInputLogUriString",
+    #         managed_endpoint_arn: "SparkEmrPropertiesInputManagedEndpointArnString",
     #         python_virtual_env: "SparkEmrPropertiesInputPythonVirtualEnvString",
     #         runtime_role: "SparkEmrPropertiesInputRuntimeRoleString",
     #         trusted_certificates_s3_uri: "SparkEmrPropertiesInputTrustedCertificatesS3UriString",
@@ -1893,6 +2061,7 @@ module Aws::DataZone
     #         worker_type: "SparkGluePropertiesInputWorkerTypeString",
     #       },
     #     },
+    #     scope: "DOMAIN", # accepts DOMAIN, PROJECT
     #   })
     #
     # @example Response structure
@@ -1908,6 +2077,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].aws_location.aws_account_id #=> String
     #   resp.physical_endpoints[0].aws_location.aws_region #=> String
     #   resp.physical_endpoints[0].aws_location.iam_connection_id #=> String
+    #   resp.physical_endpoints[0].enable_trusted_identity_propagation #=> Boolean
     #   resp.physical_endpoints[0].glue_connection.athena_properties #=> Hash
     #   resp.physical_endpoints[0].glue_connection.athena_properties["PropertyMapKeyString"] #=> String
     #   resp.physical_endpoints[0].glue_connection.authentication_configuration.authentication_type #=> String, one of "BASIC", "OAUTH2", "CUSTOM"
@@ -1929,7 +2099,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].glue_connection.connection_properties #=> Hash
     #   resp.physical_endpoints[0].glue_connection.connection_properties["String"] #=> String
     #   resp.physical_endpoints[0].glue_connection.connection_schema_version #=> Integer
-    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW"
     #   resp.physical_endpoints[0].glue_connection.creation_time #=> Time
     #   resp.physical_endpoints[0].glue_connection.description #=> String
     #   resp.physical_endpoints[0].glue_connection.last_connection_validation_time #=> Time
@@ -1956,6 +2126,9 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].protocol #=> String, one of "ATHENA", "GLUE_INTERACTIVE_SESSION", "HTTPS", "JDBC", "LIVY", "ODBC", "PRISM"
     #   resp.physical_endpoints[0].stage #=> String
     #   resp.project_id #=> String
+    #   resp.props.amazon_q_properties.auth_mode #=> String
+    #   resp.props.amazon_q_properties.is_enabled #=> Boolean
+    #   resp.props.amazon_q_properties.profile_arn #=> String
     #   resp.props.athena_properties.workgroup_name #=> String
     #   resp.props.glue_properties.error_message #=> String
     #   resp.props.glue_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
@@ -1964,6 +2137,7 @@ module Aws::DataZone
     #   resp.props.hyper_pod_properties.orchestrator #=> String, one of "EKS", "SLURM"
     #   resp.props.iam_properties.environment_id #=> String
     #   resp.props.iam_properties.glue_lineage_sync_enabled #=> Boolean
+    #   resp.props.mlflow_properties.tracking_server_arn #=> String
     #   resp.props.redshift_properties.credentials.secret_arn #=> String
     #   resp.props.redshift_properties.credentials.username_password.password #=> String
     #   resp.props.redshift_properties.credentials.username_password.username #=> String
@@ -1982,6 +2156,7 @@ module Aws::DataZone
     #   resp.props.s3_properties.s3_access_grant_location_id #=> String
     #   resp.props.s3_properties.s3_uri #=> String
     #   resp.props.s3_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
+    #   resp.props.spark_emr_properties.certificate_data #=> String
     #   resp.props.spark_emr_properties.compute_arn #=> String
     #   resp.props.spark_emr_properties.credentials.password #=> String
     #   resp.props.spark_emr_properties.credentials.username #=> String
@@ -1991,6 +2166,9 @@ module Aws::DataZone
     #   resp.props.spark_emr_properties.java_virtual_env #=> String
     #   resp.props.spark_emr_properties.livy_endpoint #=> String
     #   resp.props.spark_emr_properties.log_uri #=> String
+    #   resp.props.spark_emr_properties.managed_endpoint_arn #=> String
+    #   resp.props.spark_emr_properties.managed_endpoint_credentials.id #=> String
+    #   resp.props.spark_emr_properties.managed_endpoint_credentials.token #=> String
     #   resp.props.spark_emr_properties.python_virtual_env #=> String
     #   resp.props.spark_emr_properties.runtime_role #=> String
     #   resp.props.spark_emr_properties.trusted_certificates_s3_uri #=> String
@@ -2002,7 +2180,8 @@ module Aws::DataZone
     #   resp.props.spark_glue_properties.number_of_workers #=> Integer
     #   resp.props.spark_glue_properties.python_virtual_env #=> String
     #   resp.props.spark_glue_properties.worker_type #=> String
-    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.scope #=> String, one of "DOMAIN", "PROJECT"
+    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateConnection AWS API Documentation
     #
@@ -2033,8 +2212,6 @@ module Aws::DataZone
     #   with the same name).
     #
     # * User must have create permissions for data products in the project.
-    #
-    # * The domain must have Amazon DataZone publishing enabled.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that is provided to ensure the
@@ -3061,6 +3238,29 @@ module Aws::DataZone
     #
     # * The name must be unique within the domain.
     #
+    # For custom form types, to indicate that a field should be searchable,
+    # annotate it with `@amazon.datazone#searchable`. By default, searchable
+    # fields are indexed for semantic search, where related query terms will
+    # match the attribute value even if they are not stemmed or keyword
+    # matches. To indicate that a field should be indexed for lexical search
+    # (which disables semantic search but supports stemmed and partial
+    # matches), annotate it with
+    # `@amazon.datazone#searchable(modes:["LEXICAL"])`. To indicate that a
+    # field should be indexed for technical identifier search (for more
+    # information on technical identifier search, see:
+    # [https://aws.amazon.com/blogs/big-data/streamline-data-discovery-with-precise-technical-identifier-search-in-amazon-sagemaker-unified-studio/][1]),
+    # annotate it with `@amazon.datazone#searchable(modes:["TECHNICAL"])`.
+    #
+    # To denote that a field will store glossary term ids (which are
+    # filterable via the Search/SearchListings APIs), annotate it with
+    # `@amazon.datazone#glossaryterm("${GLOSSARY_ID}")`, where
+    # `${GLOSSARY_ID}` is the id of the glossary that the glossary terms
+    # stored in the field belong to.
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/blogs/big-data/streamline-data-discovery-with-precise-technical-identifier-search-in-amazon-sagemaker-unified-studio/
+    #
     # @option params [String] :description
     #   The description of this Amazon DataZone metadata form type.
     #
@@ -3229,7 +3429,7 @@ module Aws::DataZone
     #
     # * Domain must exist.
     #
-    # * Glossary must exist and be in an ENABLED state.
+    # * Glossary must exist.
     #
     # * The term name must be unique within the glossary.
     #
@@ -3443,6 +3643,9 @@ module Aws::DataZone
     # @option params [String] :project_profile_id
     #   The ID of the project profile.
     #
+    # @option params [Hash<String,String>] :resource_tags
+    #   The resource tags of the project.
+    #
     # @option params [Array<Types::EnvironmentConfigurationUserParameter>] :user_parameters
     #   The user parameters of the project.
     #
@@ -3461,6 +3664,7 @@ module Aws::DataZone
     #   * {Types::CreateProjectOutput#name #name} => String
     #   * {Types::CreateProjectOutput#project_profile_id #project_profile_id} => String
     #   * {Types::CreateProjectOutput#project_status #project_status} => String
+    #   * {Types::CreateProjectOutput#resource_tags #resource_tags} => Array&lt;Types::ResourceTag&gt;
     #   * {Types::CreateProjectOutput#user_parameters #user_parameters} => Array&lt;Types::EnvironmentConfigurationUserParameter&gt;
     #
     # @example Request syntax with placeholder values
@@ -3472,6 +3676,9 @@ module Aws::DataZone
     #     glossary_terms: ["GlossaryTermId"],
     #     name: "ProjectName", # required
     #     project_profile_id: "ProjectProfileId",
+    #     resource_tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #     user_parameters: [
     #       {
     #         environment_configuration_name: "EnvironmentConfigurationName",
@@ -3513,6 +3720,10 @@ module Aws::DataZone
     #   resp.name #=> String
     #   resp.project_profile_id #=> String
     #   resp.project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED", "MOVING"
+    #   resp.resource_tags #=> Array
+    #   resp.resource_tags[0].key #=> String
+    #   resp.resource_tags[0].source #=> String, one of "PROJECT", "PROJECT_PROFILE"
+    #   resp.resource_tags[0].value #=> String
     #   resp.user_parameters #=> Array
     #   resp.user_parameters[0].environment_configuration_name #=> String
     #   resp.user_parameters[0].environment_id #=> String
@@ -3572,6 +3783,9 @@ module Aws::DataZone
 
     # Creates a project profile.
     #
+    # @option params [Boolean] :allow_custom_project_resource_tags
+    #   Specifies whether custom project resource tags are supported.
+    #
     # @option params [String] :description
     #   A description of a project profile.
     #
@@ -3587,11 +3801,19 @@ module Aws::DataZone
     # @option params [required, String] :name
     #   Project profile name.
     #
+    # @option params [Array<Types::ResourceTagParameter>] :project_resource_tags
+    #   The resource tags of the project profile.
+    #
+    # @option params [String] :project_resource_tags_description
+    #   Field viewable through the UI that provides a project user with the
+    #   allowed resource tag specifications.
+    #
     # @option params [String] :status
     #   Project profile status.
     #
     # @return [Types::CreateProjectProfileOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::CreateProjectProfileOutput#allow_custom_project_resource_tags #allow_custom_project_resource_tags} => Boolean
     #   * {Types::CreateProjectProfileOutput#created_at #created_at} => Time
     #   * {Types::CreateProjectProfileOutput#created_by #created_by} => String
     #   * {Types::CreateProjectProfileOutput#description #description} => String
@@ -3601,11 +3823,14 @@ module Aws::DataZone
     #   * {Types::CreateProjectProfileOutput#id #id} => String
     #   * {Types::CreateProjectProfileOutput#last_updated_at #last_updated_at} => Time
     #   * {Types::CreateProjectProfileOutput#name #name} => String
+    #   * {Types::CreateProjectProfileOutput#project_resource_tags #project_resource_tags} => Array&lt;Types::ResourceTagParameter&gt;
+    #   * {Types::CreateProjectProfileOutput#project_resource_tags_description #project_resource_tags_description} => String
     #   * {Types::CreateProjectProfileOutput#status #status} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_project_profile({
+    #     allow_custom_project_resource_tags: false,
     #     description: "Description",
     #     domain_identifier: "DomainId", # required
     #     domain_unit_identifier: "DomainUnitId",
@@ -3646,11 +3871,20 @@ module Aws::DataZone
     #       },
     #     ],
     #     name: "ProjectProfileName", # required
+    #     project_resource_tags: [
+    #       {
+    #         is_value_editable: false, # required
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     project_resource_tags_description: "Description",
     #     status: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
     #
+    #   resp.allow_custom_project_resource_tags #=> Boolean
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.description #=> String
@@ -3681,6 +3915,11 @@ module Aws::DataZone
     #   resp.id #=> String
     #   resp.last_updated_at #=> Time
     #   resp.name #=> String
+    #   resp.project_resource_tags #=> Array
+    #   resp.project_resource_tags[0].is_value_editable #=> Boolean
+    #   resp.project_resource_tags[0].key #=> String
+    #   resp.project_resource_tags[0].value #=> String
+    #   resp.project_resource_tags_description #=> String
     #   resp.status #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateProjectProfile AWS API Documentation
@@ -3751,6 +3990,9 @@ module Aws::DataZone
     #     client_token: "ClientToken",
     #     description: "Description",
     #     detail: { # required
+    #       glossary_term_enforcement_detail: {
+    #         required_glossary_term_ids: ["GlossaryTermId"],
+    #       },
     #       metadata_form_enforcement_detail: {
     #         required_metadata_forms: [
     #           {
@@ -3787,12 +4029,14 @@ module Aws::DataZone
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.description #=> String
+    #   resp.detail.glossary_term_enforcement_detail.required_glossary_term_ids #=> Array
+    #   resp.detail.glossary_term_enforcement_detail.required_glossary_term_ids[0] #=> String
     #   resp.detail.metadata_form_enforcement_detail.required_metadata_forms #=> Array
     #   resp.detail.metadata_form_enforcement_detail.required_metadata_forms[0].type_identifier #=> String
     #   resp.detail.metadata_form_enforcement_detail.required_metadata_forms[0].type_revision #=> String
     #   resp.identifier #=> String
     #   resp.name #=> String
-    #   resp.rule_type #=> String, one of "METADATA_FORM_ENFORCEMENT"
+    #   resp.rule_type #=> String, one of "METADATA_FORM_ENFORCEMENT", "GLOSSARY_TERM_ENFORCEMENT"
     #   resp.scope.asset_type.selection_mode #=> String, one of "ALL", "SPECIFIC"
     #   resp.scope.asset_type.specific_asset_types #=> Array
     #   resp.scope.asset_type.specific_asset_types[0] #=> String
@@ -3845,6 +4089,7 @@ module Aws::DataZone
     #   * {Types::CreateSubscriptionGrantOutput#created_at #created_at} => Time
     #   * {Types::CreateSubscriptionGrantOutput#created_by #created_by} => String
     #   * {Types::CreateSubscriptionGrantOutput#domain_id #domain_id} => String
+    #   * {Types::CreateSubscriptionGrantOutput#environment_id #environment_id} => String
     #   * {Types::CreateSubscriptionGrantOutput#granted_entity #granted_entity} => Types::GrantedEntity
     #   * {Types::CreateSubscriptionGrantOutput#id #id} => String
     #   * {Types::CreateSubscriptionGrantOutput#status #status} => String
@@ -3887,11 +4132,14 @@ module Aws::DataZone
     #   resp.assets[0].failure_cause.message #=> String
     #   resp.assets[0].failure_timestamp #=> Time
     #   resp.assets[0].granted_timestamp #=> Time
+    #   resp.assets[0].permissions.s3 #=> Array
+    #   resp.assets[0].permissions.s3[0] #=> String, one of "READ", "WRITE"
     #   resp.assets[0].status #=> String, one of "GRANT_PENDING", "REVOKE_PENDING", "GRANT_IN_PROGRESS", "REVOKE_IN_PROGRESS", "GRANTED", "REVOKED", "GRANT_FAILED", "REVOKE_FAILED"
     #   resp.assets[0].target_name #=> String
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.domain_id #=> String
+    #   resp.environment_id #=> String
     #   resp.granted_entity.listing.id #=> String
     #   resp.granted_entity.listing.revision #=> String
     #   resp.id #=> String
@@ -3911,6 +4159,12 @@ module Aws::DataZone
     end
 
     # Creates a subscription request in Amazon DataZone.
+    #
+    # @option params [Array<Types::AssetPermission>] :asset_permissions
+    #   The asset permissions of the subscription request.
+    #
+    # @option params [Array<Types::AcceptedAssetScope>] :asset_scopes
+    #   The asset scopes of the subscription request.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that is provided to ensure the
@@ -3956,6 +4210,20 @@ module Aws::DataZone
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_subscription_request({
+    #     asset_permissions: [
+    #       {
+    #         asset_id: "AssetId", # required
+    #         permissions: { # required
+    #           s3: ["READ"], # accepts READ, WRITE
+    #         },
+    #       },
+    #     ],
+    #     asset_scopes: [
+    #       {
+    #         asset_id: "AssetId", # required
+    #         filter_ids: ["FilterId"], # required
+    #       },
+    #     ],
     #     client_token: "String",
     #     domain_identifier: "DomainId", # required
     #     metadata_forms: [
@@ -3974,8 +4242,14 @@ module Aws::DataZone
     #     ],
     #     subscribed_principals: [ # required
     #       {
+    #         group: {
+    #           identifier: "GroupProfileId",
+    #         },
     #         project: {
     #           identifier: "ProjectId",
+    #         },
+    #         user: {
+    #           identifier: "UserProfileId",
     #         },
     #       },
     #     ],
@@ -4012,6 +4286,8 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].name #=> String
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.permissions.s3 #=> Array
+    #   resp.subscribed_listings[0].item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
     #   resp.subscribed_listings[0].item.product_listing.asset_listings #=> Array
     #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_id #=> String
     #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_revision #=> String
@@ -4028,8 +4304,16 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].owner_project_name #=> String
     #   resp.subscribed_listings[0].revision #=> String
     #   resp.subscribed_principals #=> Array
+    #   resp.subscribed_principals[0].group.id #=> String
+    #   resp.subscribed_principals[0].group.name #=> String
     #   resp.subscribed_principals[0].project.id #=> String
     #   resp.subscribed_principals[0].project.name #=> String
+    #   resp.subscribed_principals[0].user.details.iam.arn #=> String
+    #   resp.subscribed_principals[0].user.details.iam.principal_id #=> String
+    #   resp.subscribed_principals[0].user.details.sso.first_name #=> String
+    #   resp.subscribed_principals[0].user.details.sso.last_name #=> String
+    #   resp.subscribed_principals[0].user.details.sso.username #=> String
+    #   resp.subscribed_principals[0].user.id #=> String
     #   resp.updated_at #=> Time
     #   resp.updated_by #=> String
     #
@@ -4386,9 +4670,6 @@ module Aws::DataZone
     # * The data product must exist and not be deleted or archived.
     #
     # * The user must have delete permissions for the data product.
-    #
-    # * Ensure there are no active dependencies (e.g., published links,
-    #   assets using the product).
     #
     # * Domain and project must be active.
     #
@@ -4808,7 +5089,7 @@ module Aws::DataZone
     # * The caller must have the `datazone:DeleteGlossary` permission in the
     #   domain and glossary.
     #
-    # * There should be no active assets or metadata linked to the glossary.
+    # * Glossary should not be linked to any active metadata forms.
     #
     # @option params [required, String] :domain_identifier
     #   The ID of the Amazon DataZone domain in which the business glossary is
@@ -5040,6 +5321,7 @@ module Aws::DataZone
     #   * {Types::DeleteSubscriptionGrantOutput#created_at #created_at} => Time
     #   * {Types::DeleteSubscriptionGrantOutput#created_by #created_by} => String
     #   * {Types::DeleteSubscriptionGrantOutput#domain_id #domain_id} => String
+    #   * {Types::DeleteSubscriptionGrantOutput#environment_id #environment_id} => String
     #   * {Types::DeleteSubscriptionGrantOutput#granted_entity #granted_entity} => Types::GrantedEntity
     #   * {Types::DeleteSubscriptionGrantOutput#id #id} => String
     #   * {Types::DeleteSubscriptionGrantOutput#status #status} => String
@@ -5068,11 +5350,14 @@ module Aws::DataZone
     #   resp.assets[0].failure_cause.message #=> String
     #   resp.assets[0].failure_timestamp #=> Time
     #   resp.assets[0].granted_timestamp #=> Time
+    #   resp.assets[0].permissions.s3 #=> Array
+    #   resp.assets[0].permissions.s3[0] #=> String, one of "READ", "WRITE"
     #   resp.assets[0].status #=> String, one of "GRANT_PENDING", "REVOKE_PENDING", "GRANT_IN_PROGRESS", "REVOKE_IN_PROGRESS", "GRANTED", "REVOKED", "GRANT_FAILED", "REVOKE_FAILED"
     #   resp.assets[0].target_name #=> String
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.domain_id #=> String
+    #   resp.environment_id #=> String
     #   resp.granted_entity.listing.id #=> String
     #   resp.granted_entity.listing.revision #=> String
     #   resp.id #=> String
@@ -5634,6 +5919,7 @@ module Aws::DataZone
     #   * {Types::GetConnectionOutput#physical_endpoints #physical_endpoints} => Array&lt;Types::PhysicalEndpoint&gt;
     #   * {Types::GetConnectionOutput#project_id #project_id} => String
     #   * {Types::GetConnectionOutput#props #props} => Types::ConnectionPropertiesOutput
+    #   * {Types::GetConnectionOutput#scope #scope} => String
     #   * {Types::GetConnectionOutput#type #type} => String
     #
     # @example Request syntax with placeholder values
@@ -5662,6 +5948,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].aws_location.aws_account_id #=> String
     #   resp.physical_endpoints[0].aws_location.aws_region #=> String
     #   resp.physical_endpoints[0].aws_location.iam_connection_id #=> String
+    #   resp.physical_endpoints[0].enable_trusted_identity_propagation #=> Boolean
     #   resp.physical_endpoints[0].glue_connection.athena_properties #=> Hash
     #   resp.physical_endpoints[0].glue_connection.athena_properties["PropertyMapKeyString"] #=> String
     #   resp.physical_endpoints[0].glue_connection.authentication_configuration.authentication_type #=> String, one of "BASIC", "OAUTH2", "CUSTOM"
@@ -5683,7 +5970,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].glue_connection.connection_properties #=> Hash
     #   resp.physical_endpoints[0].glue_connection.connection_properties["String"] #=> String
     #   resp.physical_endpoints[0].glue_connection.connection_schema_version #=> Integer
-    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW"
     #   resp.physical_endpoints[0].glue_connection.creation_time #=> Time
     #   resp.physical_endpoints[0].glue_connection.description #=> String
     #   resp.physical_endpoints[0].glue_connection.last_connection_validation_time #=> Time
@@ -5710,6 +5997,9 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].protocol #=> String, one of "ATHENA", "GLUE_INTERACTIVE_SESSION", "HTTPS", "JDBC", "LIVY", "ODBC", "PRISM"
     #   resp.physical_endpoints[0].stage #=> String
     #   resp.project_id #=> String
+    #   resp.props.amazon_q_properties.auth_mode #=> String
+    #   resp.props.amazon_q_properties.is_enabled #=> Boolean
+    #   resp.props.amazon_q_properties.profile_arn #=> String
     #   resp.props.athena_properties.workgroup_name #=> String
     #   resp.props.glue_properties.error_message #=> String
     #   resp.props.glue_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
@@ -5718,6 +6008,7 @@ module Aws::DataZone
     #   resp.props.hyper_pod_properties.orchestrator #=> String, one of "EKS", "SLURM"
     #   resp.props.iam_properties.environment_id #=> String
     #   resp.props.iam_properties.glue_lineage_sync_enabled #=> Boolean
+    #   resp.props.mlflow_properties.tracking_server_arn #=> String
     #   resp.props.redshift_properties.credentials.secret_arn #=> String
     #   resp.props.redshift_properties.credentials.username_password.password #=> String
     #   resp.props.redshift_properties.credentials.username_password.username #=> String
@@ -5736,6 +6027,7 @@ module Aws::DataZone
     #   resp.props.s3_properties.s3_access_grant_location_id #=> String
     #   resp.props.s3_properties.s3_uri #=> String
     #   resp.props.s3_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
+    #   resp.props.spark_emr_properties.certificate_data #=> String
     #   resp.props.spark_emr_properties.compute_arn #=> String
     #   resp.props.spark_emr_properties.credentials.password #=> String
     #   resp.props.spark_emr_properties.credentials.username #=> String
@@ -5745,6 +6037,9 @@ module Aws::DataZone
     #   resp.props.spark_emr_properties.java_virtual_env #=> String
     #   resp.props.spark_emr_properties.livy_endpoint #=> String
     #   resp.props.spark_emr_properties.log_uri #=> String
+    #   resp.props.spark_emr_properties.managed_endpoint_arn #=> String
+    #   resp.props.spark_emr_properties.managed_endpoint_credentials.id #=> String
+    #   resp.props.spark_emr_properties.managed_endpoint_credentials.token #=> String
     #   resp.props.spark_emr_properties.python_virtual_env #=> String
     #   resp.props.spark_emr_properties.runtime_role #=> String
     #   resp.props.spark_emr_properties.trusted_certificates_s3_uri #=> String
@@ -5756,7 +6051,8 @@ module Aws::DataZone
     #   resp.props.spark_glue_properties.number_of_workers #=> Integer
     #   resp.props.spark_glue_properties.python_virtual_env #=> String
     #   resp.props.spark_glue_properties.worker_type #=> String
-    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.scope #=> String, one of "DOMAIN", "PROJECT"
+    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetConnection AWS API Documentation
     #
@@ -5764,6 +6060,46 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def get_connection(params = {}, options = {})
       req = build_request(:get_connection, params)
+      req.send_request(options)
+    end
+
+    # Gets data export configuration details.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where you want to get the data export
+    #   configuration details.
+    #
+    # @return [Types::GetDataExportConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataExportConfigurationOutput#created_at #created_at} => Time
+    #   * {Types::GetDataExportConfigurationOutput#encryption_configuration #encryption_configuration} => Types::EncryptionConfiguration
+    #   * {Types::GetDataExportConfigurationOutput#is_export_enabled #is_export_enabled} => Boolean
+    #   * {Types::GetDataExportConfigurationOutput#s3_table_bucket_arn #s3_table_bucket_arn} => String
+    #   * {Types::GetDataExportConfigurationOutput#status #status} => String
+    #   * {Types::GetDataExportConfigurationOutput#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_export_configuration({
+    #     domain_identifier: "DomainId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.encryption_configuration.kms_key_arn #=> String
+    #   resp.encryption_configuration.sse_algorithm #=> String
+    #   resp.is_export_enabled #=> Boolean
+    #   resp.s3_table_bucket_arn #=> String
+    #   resp.status #=> String, one of "COMPLETED", "FAILED"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDataExportConfiguration AWS API Documentation
+    #
+    # @overload get_data_export_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_data_export_configuration(params = {}, options = {})
+      req = build_request(:get_data_export_configuration, params)
       req.send_request(options)
     end
 
@@ -6521,6 +6857,22 @@ module Aws::DataZone
     #
     # * The form type should not be deleted or in an invalid state.
     #
+    # One use case for this API is to determine whether a form field is
+    # indexed for search.
+    #
+    # A searchable field will be annotated with
+    # `@amazon.datazone#searchable`. By default, searchable fields are
+    # indexed for semantic search, where related query terms will match the
+    # attribute value even if they are not stemmed or keyword matches. If a
+    # field is indexed technical identifier search, it will be annotated
+    # with `@amazon.datazone#searchable(modes:["TECHNICAL"])`. If a field is
+    # indexed for lexical search (supports stemmed and prefix matches but
+    # not semantic matches), it will be annotated with
+    # `@amazon.datazone#searchable(modes:["LEXICAL"])`.
+    #
+    # A field storing glossary term IDs (which is filterable) will be
+    # annotated with `@amazon.datazone#glossaryterm("${glossaryId}")`.
+    #
     # @option params [required, String] :domain_identifier
     #   The ID of the Amazon DataZone domain in which this metadata form type
     #   exists.
@@ -7069,6 +7421,9 @@ module Aws::DataZone
     # @option params [required, String] :identifier
     #   The identifier of the metadata generation run.
     #
+    # @option params [String] :type
+    #   The type of the metadata generation run.
+    #
     # @return [Types::GetMetadataGenerationRunOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMetadataGenerationRunOutput#created_at #created_at} => Time
@@ -7079,12 +7434,15 @@ module Aws::DataZone
     #   * {Types::GetMetadataGenerationRunOutput#status #status} => String
     #   * {Types::GetMetadataGenerationRunOutput#target #target} => Types::MetadataGenerationRunTarget
     #   * {Types::GetMetadataGenerationRunOutput#type #type} => String
+    #   * {Types::GetMetadataGenerationRunOutput#type_stats #type_stats} => Array&lt;Types::MetadataGenerationRunTypeStat&gt;
+    #   * {Types::GetMetadataGenerationRunOutput#types #types} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_metadata_generation_run({
     #     domain_identifier: "DomainId", # required
     #     identifier: "MetadataGenerationRunIdentifier", # required
+    #     type: "BUSINESS_DESCRIPTIONS", # accepts BUSINESS_DESCRIPTIONS, BUSINESS_NAMES, BUSINESS_GLOSSARY_ASSOCIATIONS
     #   })
     #
     # @example Response structure
@@ -7094,11 +7452,17 @@ module Aws::DataZone
     #   resp.domain_id #=> String
     #   resp.id #=> String
     #   resp.owning_project_id #=> String
-    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"
+    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED", "PARTIALLY_SUCCEEDED"
     #   resp.target.identifier #=> String
     #   resp.target.revision #=> String
     #   resp.target.type #=> String, one of "ASSET"
-    #   resp.type #=> String, one of "BUSINESS_DESCRIPTIONS"
+    #   resp.type #=> String, one of "BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"
+    #   resp.type_stats #=> Array
+    #   resp.type_stats[0].error_message #=> String
+    #   resp.type_stats[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED", "PARTIALLY_SUCCEEDED"
+    #   resp.type_stats[0].type #=> String, one of "BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"
+    #   resp.types #=> Array
+    #   resp.types[0] #=> String, one of "BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetMetadataGenerationRun AWS API Documentation
     #
@@ -7132,6 +7496,7 @@ module Aws::DataZone
     #   * {Types::GetProjectOutput#name #name} => String
     #   * {Types::GetProjectOutput#project_profile_id #project_profile_id} => String
     #   * {Types::GetProjectOutput#project_status #project_status} => String
+    #   * {Types::GetProjectOutput#resource_tags #resource_tags} => Array&lt;Types::ResourceTag&gt;
     #   * {Types::GetProjectOutput#user_parameters #user_parameters} => Array&lt;Types::EnvironmentConfigurationUserParameter&gt;
     #
     # @example Request syntax with placeholder values
@@ -7163,6 +7528,10 @@ module Aws::DataZone
     #   resp.name #=> String
     #   resp.project_profile_id #=> String
     #   resp.project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED", "MOVING"
+    #   resp.resource_tags #=> Array
+    #   resp.resource_tags[0].key #=> String
+    #   resp.resource_tags[0].source #=> String, one of "PROJECT", "PROJECT_PROFILE"
+    #   resp.resource_tags[0].value #=> String
     #   resp.user_parameters #=> Array
     #   resp.user_parameters[0].environment_configuration_name #=> String
     #   resp.user_parameters[0].environment_id #=> String
@@ -7192,6 +7561,7 @@ module Aws::DataZone
     #
     # @return [Types::GetProjectProfileOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetProjectProfileOutput#allow_custom_project_resource_tags #allow_custom_project_resource_tags} => Boolean
     #   * {Types::GetProjectProfileOutput#created_at #created_at} => Time
     #   * {Types::GetProjectProfileOutput#created_by #created_by} => String
     #   * {Types::GetProjectProfileOutput#description #description} => String
@@ -7201,6 +7571,8 @@ module Aws::DataZone
     #   * {Types::GetProjectProfileOutput#id #id} => String
     #   * {Types::GetProjectProfileOutput#last_updated_at #last_updated_at} => Time
     #   * {Types::GetProjectProfileOutput#name #name} => String
+    #   * {Types::GetProjectProfileOutput#project_resource_tags #project_resource_tags} => Array&lt;Types::ResourceTagParameter&gt;
+    #   * {Types::GetProjectProfileOutput#project_resource_tags_description #project_resource_tags_description} => String
     #   * {Types::GetProjectProfileOutput#status #status} => String
     #
     # @example Request syntax with placeholder values
@@ -7212,6 +7584,7 @@ module Aws::DataZone
     #
     # @example Response structure
     #
+    #   resp.allow_custom_project_resource_tags #=> Boolean
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.description #=> String
@@ -7242,6 +7615,11 @@ module Aws::DataZone
     #   resp.id #=> String
     #   resp.last_updated_at #=> Time
     #   resp.name #=> String
+    #   resp.project_resource_tags #=> Array
+    #   resp.project_resource_tags[0].is_value_editable #=> Boolean
+    #   resp.project_resource_tags[0].key #=> String
+    #   resp.project_resource_tags[0].value #=> String
+    #   resp.project_resource_tags_description #=> String
     #   resp.status #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetProjectProfile AWS API Documentation
@@ -7303,6 +7681,8 @@ module Aws::DataZone
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.description #=> String
+    #   resp.detail.glossary_term_enforcement_detail.required_glossary_term_ids #=> Array
+    #   resp.detail.glossary_term_enforcement_detail.required_glossary_term_ids[0] #=> String
     #   resp.detail.metadata_form_enforcement_detail.required_metadata_forms #=> Array
     #   resp.detail.metadata_form_enforcement_detail.required_metadata_forms[0].type_identifier #=> String
     #   resp.detail.metadata_form_enforcement_detail.required_metadata_forms[0].type_revision #=> String
@@ -7310,7 +7690,7 @@ module Aws::DataZone
     #   resp.last_updated_by #=> String
     #   resp.name #=> String
     #   resp.revision #=> String
-    #   resp.rule_type #=> String, one of "METADATA_FORM_ENFORCEMENT"
+    #   resp.rule_type #=> String, one of "METADATA_FORM_ENFORCEMENT", "GLOSSARY_TERM_ENFORCEMENT"
     #   resp.scope.asset_type.selection_mode #=> String, one of "ALL", "SPECIFIC"
     #   resp.scope.asset_type.specific_asset_types #=> Array
     #   resp.scope.asset_type.specific_asset_types[0] #=> String
@@ -7383,6 +7763,8 @@ module Aws::DataZone
     #   resp.subscribed_listing.item.asset_listing.glossary_terms #=> Array
     #   resp.subscribed_listing.item.asset_listing.glossary_terms[0].name #=> String
     #   resp.subscribed_listing.item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listing.item.asset_listing.permissions.s3 #=> Array
+    #   resp.subscribed_listing.item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
     #   resp.subscribed_listing.item.product_listing.asset_listings #=> Array
     #   resp.subscribed_listing.item.product_listing.asset_listings[0].entity_id #=> String
     #   resp.subscribed_listing.item.product_listing.asset_listings[0].entity_revision #=> String
@@ -7398,8 +7780,16 @@ module Aws::DataZone
     #   resp.subscribed_listing.owner_project_id #=> String
     #   resp.subscribed_listing.owner_project_name #=> String
     #   resp.subscribed_listing.revision #=> String
+    #   resp.subscribed_principal.group.id #=> String
+    #   resp.subscribed_principal.group.name #=> String
     #   resp.subscribed_principal.project.id #=> String
     #   resp.subscribed_principal.project.name #=> String
+    #   resp.subscribed_principal.user.details.iam.arn #=> String
+    #   resp.subscribed_principal.user.details.iam.principal_id #=> String
+    #   resp.subscribed_principal.user.details.sso.first_name #=> String
+    #   resp.subscribed_principal.user.details.sso.last_name #=> String
+    #   resp.subscribed_principal.user.details.sso.username #=> String
+    #   resp.subscribed_principal.user.id #=> String
     #   resp.subscription_request_id #=> String
     #   resp.updated_at #=> Time
     #   resp.updated_by #=> String
@@ -7428,6 +7818,7 @@ module Aws::DataZone
     #   * {Types::GetSubscriptionGrantOutput#created_at #created_at} => Time
     #   * {Types::GetSubscriptionGrantOutput#created_by #created_by} => String
     #   * {Types::GetSubscriptionGrantOutput#domain_id #domain_id} => String
+    #   * {Types::GetSubscriptionGrantOutput#environment_id #environment_id} => String
     #   * {Types::GetSubscriptionGrantOutput#granted_entity #granted_entity} => Types::GrantedEntity
     #   * {Types::GetSubscriptionGrantOutput#id #id} => String
     #   * {Types::GetSubscriptionGrantOutput#status #status} => String
@@ -7456,11 +7847,14 @@ module Aws::DataZone
     #   resp.assets[0].failure_cause.message #=> String
     #   resp.assets[0].failure_timestamp #=> Time
     #   resp.assets[0].granted_timestamp #=> Time
+    #   resp.assets[0].permissions.s3 #=> Array
+    #   resp.assets[0].permissions.s3[0] #=> String, one of "READ", "WRITE"
     #   resp.assets[0].status #=> String, one of "GRANT_PENDING", "REVOKE_PENDING", "GRANT_IN_PROGRESS", "REVOKE_IN_PROGRESS", "GRANTED", "REVOKED", "GRANT_FAILED", "REVOKE_FAILED"
     #   resp.assets[0].target_name #=> String
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.domain_id #=> String
+    #   resp.environment_id #=> String
     #   resp.granted_entity.listing.id #=> String
     #   resp.granted_entity.listing.revision #=> String
     #   resp.id #=> String
@@ -7544,6 +7938,8 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].name #=> String
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.permissions.s3 #=> Array
+    #   resp.subscribed_listings[0].item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
     #   resp.subscribed_listings[0].item.product_listing.asset_listings #=> Array
     #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_id #=> String
     #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_revision #=> String
@@ -7560,8 +7956,16 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].owner_project_name #=> String
     #   resp.subscribed_listings[0].revision #=> String
     #   resp.subscribed_principals #=> Array
+    #   resp.subscribed_principals[0].group.id #=> String
+    #   resp.subscribed_principals[0].group.name #=> String
     #   resp.subscribed_principals[0].project.id #=> String
     #   resp.subscribed_principals[0].project.name #=> String
+    #   resp.subscribed_principals[0].user.details.iam.arn #=> String
+    #   resp.subscribed_principals[0].user.details.iam.principal_id #=> String
+    #   resp.subscribed_principals[0].user.details.sso.first_name #=> String
+    #   resp.subscribed_principals[0].user.details.sso.last_name #=> String
+    #   resp.subscribed_principals[0].user.details.sso.username #=> String
+    #   resp.subscribed_principals[0].user.id #=> String
     #   resp.updated_at #=> Time
     #   resp.updated_by #=> String
     #
@@ -8049,8 +8453,11 @@ module Aws::DataZone
     #   NextToken value in a subsequent call to ListConnections to list the
     #   next set of connections.
     #
-    # @option params [required, String] :project_identifier
+    # @option params [String] :project_identifier
     #   The ID of the project where you want to list connections.
+    #
+    # @option params [String] :scope
+    #   The scope of the connection.
     #
     # @option params [String] :sort_by
     #   Specifies how you want to sort the listed connections.
@@ -8076,10 +8483,11 @@ module Aws::DataZone
     #     max_results: 1,
     #     name: "ConnectionName",
     #     next_token: "PaginationToken",
-    #     project_identifier: "ProjectId", # required
+    #     project_identifier: "ProjectId",
+    #     scope: "DOMAIN", # accepts DOMAIN, PROJECT
     #     sort_by: "NAME", # accepts NAME
     #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
-    #     type: "ATHENA", # accepts ATHENA, BIGQUERY, DATABRICKS, DOCUMENTDB, DYNAMODB, HYPERPOD, IAM, MYSQL, OPENSEARCH, ORACLE, POSTGRESQL, REDSHIFT, S3, SAPHANA, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, VERTICA, WORKFLOWS_MWAA
+    #     type: "ATHENA", # accepts ATHENA, BIGQUERY, DATABRICKS, DOCUMENTDB, DYNAMODB, HYPERPOD, IAM, MYSQL, OPENSEARCH, ORACLE, POSTGRESQL, REDSHIFT, S3, SAPHANA, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, VERTICA, WORKFLOWS_MWAA, AMAZON_Q, MLFLOW
     #   })
     #
     # @example Response structure
@@ -8095,6 +8503,7 @@ module Aws::DataZone
     #   resp.items[0].physical_endpoints[0].aws_location.aws_account_id #=> String
     #   resp.items[0].physical_endpoints[0].aws_location.aws_region #=> String
     #   resp.items[0].physical_endpoints[0].aws_location.iam_connection_id #=> String
+    #   resp.items[0].physical_endpoints[0].enable_trusted_identity_propagation #=> Boolean
     #   resp.items[0].physical_endpoints[0].glue_connection.athena_properties #=> Hash
     #   resp.items[0].physical_endpoints[0].glue_connection.athena_properties["PropertyMapKeyString"] #=> String
     #   resp.items[0].physical_endpoints[0].glue_connection.authentication_configuration.authentication_type #=> String, one of "BASIC", "OAUTH2", "CUSTOM"
@@ -8116,7 +8525,7 @@ module Aws::DataZone
     #   resp.items[0].physical_endpoints[0].glue_connection.connection_properties #=> Hash
     #   resp.items[0].physical_endpoints[0].glue_connection.connection_properties["String"] #=> String
     #   resp.items[0].physical_endpoints[0].glue_connection.connection_schema_version #=> Integer
-    #   resp.items[0].physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.items[0].physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW"
     #   resp.items[0].physical_endpoints[0].glue_connection.creation_time #=> Time
     #   resp.items[0].physical_endpoints[0].glue_connection.description #=> String
     #   resp.items[0].physical_endpoints[0].glue_connection.last_connection_validation_time #=> Time
@@ -8143,6 +8552,9 @@ module Aws::DataZone
     #   resp.items[0].physical_endpoints[0].protocol #=> String, one of "ATHENA", "GLUE_INTERACTIVE_SESSION", "HTTPS", "JDBC", "LIVY", "ODBC", "PRISM"
     #   resp.items[0].physical_endpoints[0].stage #=> String
     #   resp.items[0].project_id #=> String
+    #   resp.items[0].props.amazon_q_properties.auth_mode #=> String
+    #   resp.items[0].props.amazon_q_properties.is_enabled #=> Boolean
+    #   resp.items[0].props.amazon_q_properties.profile_arn #=> String
     #   resp.items[0].props.athena_properties.workgroup_name #=> String
     #   resp.items[0].props.glue_properties.error_message #=> String
     #   resp.items[0].props.glue_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
@@ -8151,6 +8563,7 @@ module Aws::DataZone
     #   resp.items[0].props.hyper_pod_properties.orchestrator #=> String, one of "EKS", "SLURM"
     #   resp.items[0].props.iam_properties.environment_id #=> String
     #   resp.items[0].props.iam_properties.glue_lineage_sync_enabled #=> Boolean
+    #   resp.items[0].props.mlflow_properties.tracking_server_arn #=> String
     #   resp.items[0].props.redshift_properties.credentials.secret_arn #=> String
     #   resp.items[0].props.redshift_properties.credentials.username_password.password #=> String
     #   resp.items[0].props.redshift_properties.credentials.username_password.username #=> String
@@ -8169,6 +8582,7 @@ module Aws::DataZone
     #   resp.items[0].props.s3_properties.s3_access_grant_location_id #=> String
     #   resp.items[0].props.s3_properties.s3_uri #=> String
     #   resp.items[0].props.s3_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
+    #   resp.items[0].props.spark_emr_properties.certificate_data #=> String
     #   resp.items[0].props.spark_emr_properties.compute_arn #=> String
     #   resp.items[0].props.spark_emr_properties.credentials.password #=> String
     #   resp.items[0].props.spark_emr_properties.credentials.username #=> String
@@ -8178,6 +8592,9 @@ module Aws::DataZone
     #   resp.items[0].props.spark_emr_properties.java_virtual_env #=> String
     #   resp.items[0].props.spark_emr_properties.livy_endpoint #=> String
     #   resp.items[0].props.spark_emr_properties.log_uri #=> String
+    #   resp.items[0].props.spark_emr_properties.managed_endpoint_arn #=> String
+    #   resp.items[0].props.spark_emr_properties.managed_endpoint_credentials.id #=> String
+    #   resp.items[0].props.spark_emr_properties.managed_endpoint_credentials.token #=> String
     #   resp.items[0].props.spark_emr_properties.python_virtual_env #=> String
     #   resp.items[0].props.spark_emr_properties.runtime_role #=> String
     #   resp.items[0].props.spark_emr_properties.trusted_certificates_s3_uri #=> String
@@ -8189,7 +8606,8 @@ module Aws::DataZone
     #   resp.items[0].props.spark_glue_properties.number_of_workers #=> Integer
     #   resp.items[0].props.spark_glue_properties.python_virtual_env #=> String
     #   resp.items[0].props.spark_glue_properties.worker_type #=> String
-    #   resp.items[0].type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.items[0].scope #=> String, one of "DOMAIN", "PROJECT"
+    #   resp.items[0].type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListConnections AWS API Documentation
@@ -9335,6 +9753,9 @@ module Aws::DataZone
     # @option params [String] :status
     #   The status of the metadata generation runs.
     #
+    # @option params [String] :target_identifier
+    #   The target ID for which you want to list metadata generation runs.
+    #
     # @option params [String] :type
     #   The type of the metadata generation runs.
     #
@@ -9351,8 +9772,9 @@ module Aws::DataZone
     #     domain_identifier: "DomainId", # required
     #     max_results: 1,
     #     next_token: "PaginationToken",
-    #     status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELED, SUCCEEDED, FAILED
-    #     type: "BUSINESS_DESCRIPTIONS", # accepts BUSINESS_DESCRIPTIONS
+    #     status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELED, SUCCEEDED, FAILED, PARTIALLY_SUCCEEDED
+    #     target_identifier: "EntityId",
+    #     type: "BUSINESS_DESCRIPTIONS", # accepts BUSINESS_DESCRIPTIONS, BUSINESS_NAMES, BUSINESS_GLOSSARY_ASSOCIATIONS
     #   })
     #
     # @example Response structure
@@ -9363,11 +9785,13 @@ module Aws::DataZone
     #   resp.items[0].domain_id #=> String
     #   resp.items[0].id #=> String
     #   resp.items[0].owning_project_id #=> String
-    #   resp.items[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"
+    #   resp.items[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED", "PARTIALLY_SUCCEEDED"
     #   resp.items[0].target.identifier #=> String
     #   resp.items[0].target.revision #=> String
     #   resp.items[0].target.type #=> String, one of "ASSET"
-    #   resp.items[0].type #=> String, one of "BUSINESS_DESCRIPTIONS"
+    #   resp.items[0].type #=> String, one of "BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"
+    #   resp.items[0].types #=> Array
+    #   resp.items[0].types[0] #=> String, one of "BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListMetadataGenerationRuns AWS API Documentation
@@ -9826,7 +10250,7 @@ module Aws::DataZone
     #     max_results: 1,
     #     next_token: "PaginationToken",
     #     project_ids: ["ProjectId"],
-    #     rule_type: "METADATA_FORM_ENFORCEMENT", # accepts METADATA_FORM_ENFORCEMENT
+    #     rule_type: "METADATA_FORM_ENFORCEMENT", # accepts METADATA_FORM_ENFORCEMENT, GLOSSARY_TERM_ENFORCEMENT
     #     target_identifier: "String", # required
     #     target_type: "DOMAIN_UNIT", # required, accepts DOMAIN_UNIT
     #   })
@@ -9839,7 +10263,7 @@ module Aws::DataZone
     #   resp.items[0].last_updated_by #=> String
     #   resp.items[0].name #=> String
     #   resp.items[0].revision #=> String
-    #   resp.items[0].rule_type #=> String, one of "METADATA_FORM_ENFORCEMENT"
+    #   resp.items[0].rule_type #=> String, one of "METADATA_FORM_ENFORCEMENT", "GLOSSARY_TERM_ENFORCEMENT"
     #   resp.items[0].scope.asset_type.selection_mode #=> String, one of "ALL", "SPECIFIC"
     #   resp.items[0].scope.asset_type.specific_asset_types #=> Array
     #   resp.items[0].scope.asset_type.specific_asset_types[0] #=> String
@@ -9885,8 +10309,14 @@ module Aws::DataZone
     #   You can specify this `NextToken` value in a subsequent call to
     #   `ListSubscriptionGrants` to list the next set of subscription grants.
     #
+    # @option params [String] :owning_group_id
+    #   The ID of the owning group.
+    #
     # @option params [String] :owning_project_id
     #   The ID of the owning project of the subscription grants.
+    #
+    # @option params [String] :owning_user_id
+    #   The ID of the owning user.
     #
     # @option params [String] :sort_by
     #   Specifies the way of sorting the results of this action.
@@ -9917,7 +10347,9 @@ module Aws::DataZone
     #     environment_id: "EnvironmentId",
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     owning_group_id: "GroupProfileId",
     #     owning_project_id: "ProjectId",
+    #     owning_user_id: "UserProfileId",
     #     sort_by: "CREATED_AT", # accepts CREATED_AT, UPDATED_AT
     #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #     subscribed_listing_id: "ListingId",
@@ -9939,11 +10371,14 @@ module Aws::DataZone
     #   resp.items[0].assets[0].failure_cause.message #=> String
     #   resp.items[0].assets[0].failure_timestamp #=> Time
     #   resp.items[0].assets[0].granted_timestamp #=> Time
+    #   resp.items[0].assets[0].permissions.s3 #=> Array
+    #   resp.items[0].assets[0].permissions.s3[0] #=> String, one of "READ", "WRITE"
     #   resp.items[0].assets[0].status #=> String, one of "GRANT_PENDING", "REVOKE_PENDING", "GRANT_IN_PROGRESS", "REVOKE_IN_PROGRESS", "GRANTED", "REVOKED", "GRANT_FAILED", "REVOKE_FAILED"
     #   resp.items[0].assets[0].target_name #=> String
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].created_by #=> String
     #   resp.items[0].domain_id #=> String
+    #   resp.items[0].environment_id #=> String
     #   resp.items[0].granted_entity.listing.id #=> String
     #   resp.items[0].granted_entity.listing.revision #=> String
     #   resp.items[0].id #=> String
@@ -9988,8 +10423,14 @@ module Aws::DataZone
     #   `ListSubscriptionRequests` to list the next set of subscription
     #   requests.
     #
+    # @option params [String] :owning_group_id
+    #   The ID of the owning group.
+    #
     # @option params [String] :owning_project_id
     #   The identifier of the project for the subscription requests.
+    #
+    # @option params [String] :owning_user_id
+    #   The ID of the owning user.
     #
     # @option params [String] :sort_by
     #   Specifies the way to sort the results of this action.
@@ -10022,7 +10463,9 @@ module Aws::DataZone
     #     domain_identifier: "DomainId", # required
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     owning_group_id: "GroupProfileId",
     #     owning_project_id: "ProjectId",
+    #     owning_user_id: "UserProfileId",
     #     sort_by: "CREATED_AT", # accepts CREATED_AT, UPDATED_AT
     #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #     status: "PENDING", # accepts PENDING, ACCEPTED, REJECTED
@@ -10060,6 +10503,8 @@ module Aws::DataZone
     #   resp.items[0].subscribed_listings[0].item.asset_listing.glossary_terms #=> Array
     #   resp.items[0].subscribed_listings[0].item.asset_listing.glossary_terms[0].name #=> String
     #   resp.items[0].subscribed_listings[0].item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.items[0].subscribed_listings[0].item.asset_listing.permissions.s3 #=> Array
+    #   resp.items[0].subscribed_listings[0].item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
     #   resp.items[0].subscribed_listings[0].item.product_listing.asset_listings #=> Array
     #   resp.items[0].subscribed_listings[0].item.product_listing.asset_listings[0].entity_id #=> String
     #   resp.items[0].subscribed_listings[0].item.product_listing.asset_listings[0].entity_revision #=> String
@@ -10076,8 +10521,16 @@ module Aws::DataZone
     #   resp.items[0].subscribed_listings[0].owner_project_name #=> String
     #   resp.items[0].subscribed_listings[0].revision #=> String
     #   resp.items[0].subscribed_principals #=> Array
+    #   resp.items[0].subscribed_principals[0].group.id #=> String
+    #   resp.items[0].subscribed_principals[0].group.name #=> String
     #   resp.items[0].subscribed_principals[0].project.id #=> String
     #   resp.items[0].subscribed_principals[0].project.name #=> String
+    #   resp.items[0].subscribed_principals[0].user.details.iam.arn #=> String
+    #   resp.items[0].subscribed_principals[0].user.details.iam.principal_id #=> String
+    #   resp.items[0].subscribed_principals[0].user.details.sso.first_name #=> String
+    #   resp.items[0].subscribed_principals[0].user.details.sso.last_name #=> String
+    #   resp.items[0].subscribed_principals[0].user.details.sso.username #=> String
+    #   resp.items[0].subscribed_principals[0].user.id #=> String
     #   resp.items[0].updated_at #=> Time
     #   resp.items[0].updated_by #=> String
     #   resp.next_token #=> String
@@ -10199,8 +10652,14 @@ module Aws::DataZone
     #   specify this `NextToken` value in a subsequent call to
     #   `ListSubscriptions` to list the next set of subscriptions.
     #
+    # @option params [String] :owning_group_id
+    #   The ID of the owning group.
+    #
     # @option params [String] :owning_project_id
     #   The identifier of the owning project.
+    #
+    # @option params [String] :owning_user_id
+    #   The ID of the owning user.
     #
     # @option params [String] :sort_by
     #   Specifies the way in which the results of this action are to be
@@ -10239,7 +10698,9 @@ module Aws::DataZone
     #     domain_identifier: "DomainId", # required
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     owning_group_id: "GroupProfileId",
     #     owning_project_id: "ProjectId",
+    #     owning_user_id: "UserProfileId",
     #     sort_by: "CREATED_AT", # accepts CREATED_AT, UPDATED_AT
     #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #     status: "APPROVED", # accepts APPROVED, REVOKED, CANCELLED
@@ -10270,6 +10731,8 @@ module Aws::DataZone
     #   resp.items[0].subscribed_listing.item.asset_listing.glossary_terms #=> Array
     #   resp.items[0].subscribed_listing.item.asset_listing.glossary_terms[0].name #=> String
     #   resp.items[0].subscribed_listing.item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.items[0].subscribed_listing.item.asset_listing.permissions.s3 #=> Array
+    #   resp.items[0].subscribed_listing.item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
     #   resp.items[0].subscribed_listing.item.product_listing.asset_listings #=> Array
     #   resp.items[0].subscribed_listing.item.product_listing.asset_listings[0].entity_id #=> String
     #   resp.items[0].subscribed_listing.item.product_listing.asset_listings[0].entity_revision #=> String
@@ -10285,8 +10748,16 @@ module Aws::DataZone
     #   resp.items[0].subscribed_listing.owner_project_id #=> String
     #   resp.items[0].subscribed_listing.owner_project_name #=> String
     #   resp.items[0].subscribed_listing.revision #=> String
+    #   resp.items[0].subscribed_principal.group.id #=> String
+    #   resp.items[0].subscribed_principal.group.name #=> String
     #   resp.items[0].subscribed_principal.project.id #=> String
     #   resp.items[0].subscribed_principal.project.name #=> String
+    #   resp.items[0].subscribed_principal.user.details.iam.arn #=> String
+    #   resp.items[0].subscribed_principal.user.details.iam.principal_id #=> String
+    #   resp.items[0].subscribed_principal.user.details.sso.first_name #=> String
+    #   resp.items[0].subscribed_principal.user.details.sso.last_name #=> String
+    #   resp.items[0].subscribed_principal.user.details.sso.username #=> String
+    #   resp.items[0].subscribed_principal.user.id #=> String
     #   resp.items[0].subscription_request_id #=> String
     #   resp.items[0].updated_at #=> Time
     #   resp.items[0].updated_by #=> String
@@ -10517,6 +10988,64 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def post_time_series_data_points(params = {}, options = {})
       req = build_request(:post_time_series_data_points, params)
+      req.send_request(options)
+    end
+
+    # Creates data export configuration details.
+    #
+    # In the current release, you can enable exporting asset metadata only
+    # for one domain per Amazon Web Services account per region. If you
+    # disable exporting asset metadata feature for a domain where it's
+    # already enabled, you cannot enable this feature for another domain in
+    # the same Amazon Web Services account and region.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :domain_identifier
+    #   The domain ID where you want to create data export configuration
+    #   details.
+    #
+    # @option params [required, Boolean] :enable_export
+    #   Specifies that the export is to be enabled as part of creating data
+    #   export configuration details.
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   The encryption configuration as part of creating data export
+    #   configuration details.
+    #
+    #   The KMS key provided here as part of encryptionConfiguration must have
+    #   the required permissions as described in [KMS permissions for
+    #   exporting asset metadata in Amazon SageMaker Unified Studio][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker-unified-studio/latest/adminguide/sagemaker-unified-studio-export-asset-metadata-kms-permissions.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_data_export_configuration({
+    #     client_token: "ClientToken",
+    #     domain_identifier: "DomainId", # required
+    #     enable_export: false, # required
+    #     encryption_configuration: {
+    #       kms_key_arn: "String",
+    #       sse_algorithm: "String",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/PutDataExportConfiguration AWS API Documentation
+    #
+    # @overload put_data_export_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_data_export_configuration(params = {}, options = {})
+      req = build_request(:put_data_export_configuration, params)
       req.send_request(options)
     end
 
@@ -10754,6 +11283,8 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].name #=> String
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.permissions.s3 #=> Array
+    #   resp.subscribed_listings[0].item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
     #   resp.subscribed_listings[0].item.product_listing.asset_listings #=> Array
     #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_id #=> String
     #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_revision #=> String
@@ -10770,8 +11301,16 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].owner_project_name #=> String
     #   resp.subscribed_listings[0].revision #=> String
     #   resp.subscribed_principals #=> Array
+    #   resp.subscribed_principals[0].group.id #=> String
+    #   resp.subscribed_principals[0].group.name #=> String
     #   resp.subscribed_principals[0].project.id #=> String
     #   resp.subscribed_principals[0].project.name #=> String
+    #   resp.subscribed_principals[0].user.details.iam.arn #=> String
+    #   resp.subscribed_principals[0].user.details.iam.principal_id #=> String
+    #   resp.subscribed_principals[0].user.details.sso.first_name #=> String
+    #   resp.subscribed_principals[0].user.details.sso.last_name #=> String
+    #   resp.subscribed_principals[0].user.details.sso.username #=> String
+    #   resp.subscribed_principals[0].user.id #=> String
     #   resp.updated_at #=> Time
     #   resp.updated_by #=> String
     #
@@ -10968,6 +11507,8 @@ module Aws::DataZone
     #   resp.subscribed_listing.item.asset_listing.glossary_terms #=> Array
     #   resp.subscribed_listing.item.asset_listing.glossary_terms[0].name #=> String
     #   resp.subscribed_listing.item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listing.item.asset_listing.permissions.s3 #=> Array
+    #   resp.subscribed_listing.item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
     #   resp.subscribed_listing.item.product_listing.asset_listings #=> Array
     #   resp.subscribed_listing.item.product_listing.asset_listings[0].entity_id #=> String
     #   resp.subscribed_listing.item.product_listing.asset_listings[0].entity_revision #=> String
@@ -10983,8 +11524,16 @@ module Aws::DataZone
     #   resp.subscribed_listing.owner_project_id #=> String
     #   resp.subscribed_listing.owner_project_name #=> String
     #   resp.subscribed_listing.revision #=> String
+    #   resp.subscribed_principal.group.id #=> String
+    #   resp.subscribed_principal.group.name #=> String
     #   resp.subscribed_principal.project.id #=> String
     #   resp.subscribed_principal.project.name #=> String
+    #   resp.subscribed_principal.user.details.iam.arn #=> String
+    #   resp.subscribed_principal.user.details.iam.principal_id #=> String
+    #   resp.subscribed_principal.user.details.sso.first_name #=> String
+    #   resp.subscribed_principal.user.details.sso.last_name #=> String
+    #   resp.subscribed_principal.user.details.sso.username #=> String
+    #   resp.subscribed_principal.user.id #=> String
     #   resp.subscription_request_id #=> String
     #   resp.updated_at #=> Time
     #   resp.updated_by #=> String
@@ -11294,8 +11843,48 @@ module Aws::DataZone
       req.send_request(options)
     end
 
-    # Searches listings (records of an asset at a given time) in Amazon
-    # DataZone.
+    # Searches listings in Amazon DataZone.
+    #
+    # SearchListings is a powerful capability that enables users to discover
+    # and explore published assets and data products across their
+    # organization. It provides both basic and advanced search
+    # functionality, allowing users to find resources based on names,
+    # descriptions, metadata, and other attributes. SearchListings also
+    # supports filtering using various criteria such as creation date,
+    # owner, or status. This API is essential for making the wealth of data
+    # resources in an organization discoverable and usable, helping users
+    # find the right data for their needs quickly and efficiently.
+    #
+    # SearchListings returns results in a paginated format. When the result
+    # set is large, the response will include a nextToken, which can be used
+    # to retrieve the next page of results.
+    #
+    # The SearchListings API gives users flexibility in specifying what kind
+    # of search is run.
+    #
+    # To run a free-text search, the `searchText` parameter must be
+    # supplied. By default, all searchable fields are indexed for semantic
+    # search and will return semantic matches for SearchListings queries. To
+    # prevent semantic search indexing for a custom form attribute, see the
+    # [CreateFormType API documentation][1]. To run a lexical search query,
+    # enclose the query with double quotes (""). This will disable
+    # semantic search even for fields that have semantic search enabled and
+    # will only return results that contain the keywords wrapped by double
+    # quotes (order of tokens in the query is not enforced). Free-text
+    # search is supported for all attributes annotated with
+    # @amazon.datazone#searchable.
+    #
+    # To run a filtered search, provide filter clause using the filters
+    # parameter. To filter on glossary terms, use the special attribute
+    # `__DataZoneGlossaryTerms`.
+    #
+    # To find out whether an attribute has been annotated and indexed for a
+    # given search type, use the GetFormType API to retrieve the form
+    # containing the attribute.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datazone/latest/APIReference/API_CreateFormType.html
     #
     # @option params [Array<String>] :additional_attributes
     #   Specifies additional attributes for the search.
@@ -11770,7 +12359,8 @@ module Aws::DataZone
     #
     # * Asset must have a structured schema with valid rows and columns.
     #
-    # * Valid values for --type: BUSINESS\_DESCRIPTIONS, BUSINESS\_NAMES.
+    # * Valid values for --type: BUSINESS\_DESCRIPTIONS, BUSINESS\_NAMES,
+    #   BUSINESS\_GLOSSARY\_ASSOCIATIONS.
     #
     # * The user must have permission to run metadata generation in the
     #   domain/project.
@@ -11793,8 +12383,11 @@ module Aws::DataZone
     # @option params [required, Types::MetadataGenerationRunTarget] :target
     #   The asset for which you want to start a metadata generation run.
     #
-    # @option params [required, String] :type
+    # @option params [String] :type
     #   The type of the metadata generation run.
+    #
+    # @option params [Array<String>] :types
+    #   The types of the metadata generation run.
     #
     # @return [Types::StartMetadataGenerationRunOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11805,6 +12398,7 @@ module Aws::DataZone
     #   * {Types::StartMetadataGenerationRunOutput#owning_project_id #owning_project_id} => String
     #   * {Types::StartMetadataGenerationRunOutput#status #status} => String
     #   * {Types::StartMetadataGenerationRunOutput#type #type} => String
+    #   * {Types::StartMetadataGenerationRunOutput#types #types} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -11817,7 +12411,8 @@ module Aws::DataZone
     #       revision: "Revision",
     #       type: "ASSET", # required, accepts ASSET
     #     },
-    #     type: "BUSINESS_DESCRIPTIONS", # required, accepts BUSINESS_DESCRIPTIONS
+    #     type: "BUSINESS_DESCRIPTIONS", # accepts BUSINESS_DESCRIPTIONS, BUSINESS_NAMES, BUSINESS_GLOSSARY_ASSOCIATIONS
+    #     types: ["BUSINESS_DESCRIPTIONS"], # accepts BUSINESS_DESCRIPTIONS, BUSINESS_NAMES, BUSINESS_GLOSSARY_ASSOCIATIONS
     #   })
     #
     # @example Response structure
@@ -11827,8 +12422,10 @@ module Aws::DataZone
     #   resp.domain_id #=> String
     #   resp.id #=> String
     #   resp.owning_project_id #=> String
-    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"
-    #   resp.type #=> String, one of "BUSINESS_DESCRIPTIONS"
+    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED", "PARTIALLY_SUCCEEDED"
+    #   resp.type #=> String, one of "BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"
+    #   resp.types #=> Array
+    #   resp.types[0] #=> String, one of "BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartMetadataGenerationRun AWS API Documentation
     #
@@ -12187,6 +12784,7 @@ module Aws::DataZone
     #   * {Types::UpdateConnectionOutput#physical_endpoints #physical_endpoints} => Array&lt;Types::PhysicalEndpoint&gt;
     #   * {Types::UpdateConnectionOutput#project_id #project_id} => String
     #   * {Types::UpdateConnectionOutput#props #props} => Types::ConnectionPropertiesOutput
+    #   * {Types::UpdateConnectionOutput#scope #scope} => String
     #   * {Types::UpdateConnectionOutput#type #type} => String
     #
     # @example Request syntax with placeholder values
@@ -12202,6 +12800,11 @@ module Aws::DataZone
     #     domain_identifier: "DomainId", # required
     #     identifier: "ConnectionId", # required
     #     props: {
+    #       amazon_q_properties: {
+    #         auth_mode: "AmazonQPropertiesPatchAuthModeString",
+    #         is_enabled: false, # required
+    #         profile_arn: "AmazonQPropertiesPatchProfileArnString",
+    #       },
     #       athena_properties: {
     #         workgroup_name: "AthenaPropertiesPatchWorkgroupNameString",
     #       },
@@ -12222,6 +12825,9 @@ module Aws::DataZone
     #       },
     #       iam_properties: {
     #         glue_lineage_sync_enabled: false,
+    #       },
+    #       mlflow_properties: {
+    #         tracking_server_arn: "String",
     #       },
     #       redshift_properties: {
     #         credentials: {
@@ -12254,6 +12860,7 @@ module Aws::DataZone
     #         instance_profile_arn: "SparkEmrPropertiesPatchInstanceProfileArnString",
     #         java_virtual_env: "SparkEmrPropertiesPatchJavaVirtualEnvString",
     #         log_uri: "SparkEmrPropertiesPatchLogUriString",
+    #         managed_endpoint_arn: "SparkEmrPropertiesPatchManagedEndpointArnString",
     #         python_virtual_env: "SparkEmrPropertiesPatchPythonVirtualEnvString",
     #         runtime_role: "SparkEmrPropertiesPatchRuntimeRoleString",
     #         trusted_certificates_s3_uri: "SparkEmrPropertiesPatchTrustedCertificatesS3UriString",
@@ -12274,6 +12881,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].aws_location.aws_account_id #=> String
     #   resp.physical_endpoints[0].aws_location.aws_region #=> String
     #   resp.physical_endpoints[0].aws_location.iam_connection_id #=> String
+    #   resp.physical_endpoints[0].enable_trusted_identity_propagation #=> Boolean
     #   resp.physical_endpoints[0].glue_connection.athena_properties #=> Hash
     #   resp.physical_endpoints[0].glue_connection.athena_properties["PropertyMapKeyString"] #=> String
     #   resp.physical_endpoints[0].glue_connection.authentication_configuration.authentication_type #=> String, one of "BASIC", "OAUTH2", "CUSTOM"
@@ -12295,7 +12903,7 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].glue_connection.connection_properties #=> Hash
     #   resp.physical_endpoints[0].glue_connection.connection_properties["String"] #=> String
     #   resp.physical_endpoints[0].glue_connection.connection_schema_version #=> Integer
-    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.physical_endpoints[0].glue_connection.connection_type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW"
     #   resp.physical_endpoints[0].glue_connection.creation_time #=> Time
     #   resp.physical_endpoints[0].glue_connection.description #=> String
     #   resp.physical_endpoints[0].glue_connection.last_connection_validation_time #=> Time
@@ -12322,6 +12930,9 @@ module Aws::DataZone
     #   resp.physical_endpoints[0].protocol #=> String, one of "ATHENA", "GLUE_INTERACTIVE_SESSION", "HTTPS", "JDBC", "LIVY", "ODBC", "PRISM"
     #   resp.physical_endpoints[0].stage #=> String
     #   resp.project_id #=> String
+    #   resp.props.amazon_q_properties.auth_mode #=> String
+    #   resp.props.amazon_q_properties.is_enabled #=> Boolean
+    #   resp.props.amazon_q_properties.profile_arn #=> String
     #   resp.props.athena_properties.workgroup_name #=> String
     #   resp.props.glue_properties.error_message #=> String
     #   resp.props.glue_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
@@ -12330,6 +12941,7 @@ module Aws::DataZone
     #   resp.props.hyper_pod_properties.orchestrator #=> String, one of "EKS", "SLURM"
     #   resp.props.iam_properties.environment_id #=> String
     #   resp.props.iam_properties.glue_lineage_sync_enabled #=> Boolean
+    #   resp.props.mlflow_properties.tracking_server_arn #=> String
     #   resp.props.redshift_properties.credentials.secret_arn #=> String
     #   resp.props.redshift_properties.credentials.username_password.password #=> String
     #   resp.props.redshift_properties.credentials.username_password.username #=> String
@@ -12348,6 +12960,7 @@ module Aws::DataZone
     #   resp.props.s3_properties.s3_access_grant_location_id #=> String
     #   resp.props.s3_properties.s3_uri #=> String
     #   resp.props.s3_properties.status #=> String, one of "CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"
+    #   resp.props.spark_emr_properties.certificate_data #=> String
     #   resp.props.spark_emr_properties.compute_arn #=> String
     #   resp.props.spark_emr_properties.credentials.password #=> String
     #   resp.props.spark_emr_properties.credentials.username #=> String
@@ -12357,6 +12970,9 @@ module Aws::DataZone
     #   resp.props.spark_emr_properties.java_virtual_env #=> String
     #   resp.props.spark_emr_properties.livy_endpoint #=> String
     #   resp.props.spark_emr_properties.log_uri #=> String
+    #   resp.props.spark_emr_properties.managed_endpoint_arn #=> String
+    #   resp.props.spark_emr_properties.managed_endpoint_credentials.id #=> String
+    #   resp.props.spark_emr_properties.managed_endpoint_credentials.token #=> String
     #   resp.props.spark_emr_properties.python_virtual_env #=> String
     #   resp.props.spark_emr_properties.runtime_role #=> String
     #   resp.props.spark_emr_properties.trusted_certificates_s3_uri #=> String
@@ -12368,7 +12984,8 @@ module Aws::DataZone
     #   resp.props.spark_glue_properties.number_of_workers #=> Integer
     #   resp.props.spark_glue_properties.python_virtual_env #=> String
     #   resp.props.spark_glue_properties.worker_type #=> String
-    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"
+    #   resp.scope #=> String, one of "DOMAIN", "PROJECT"
+    #   resp.type #=> String, one of "ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateConnection AWS API Documentation
     #
@@ -13355,6 +13972,9 @@ module Aws::DataZone
     #   You can only specify the following string for this parameter:
     #   `latest`.
     #
+    # @option params [Hash<String,String>] :resource_tags
+    #   The resource tags of the project.
+    #
     # @option params [Array<Types::EnvironmentConfigurationUserParameter>] :user_parameters
     #   The user parameters of the project.
     #
@@ -13373,6 +13993,7 @@ module Aws::DataZone
     #   * {Types::UpdateProjectOutput#name #name} => String
     #   * {Types::UpdateProjectOutput#project_profile_id #project_profile_id} => String
     #   * {Types::UpdateProjectOutput#project_status #project_status} => String
+    #   * {Types::UpdateProjectOutput#resource_tags #resource_tags} => Array&lt;Types::ResourceTag&gt;
     #   * {Types::UpdateProjectOutput#user_parameters #user_parameters} => Array&lt;Types::EnvironmentConfigurationUserParameter&gt;
     #
     # @example Request syntax with placeholder values
@@ -13396,6 +14017,9 @@ module Aws::DataZone
     #     identifier: "ProjectId", # required
     #     name: "ProjectName",
     #     project_profile_version: "String",
+    #     resource_tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #     user_parameters: [
     #       {
     #         environment_configuration_name: "EnvironmentConfigurationName",
@@ -13437,6 +14061,10 @@ module Aws::DataZone
     #   resp.name #=> String
     #   resp.project_profile_id #=> String
     #   resp.project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED", "MOVING"
+    #   resp.resource_tags #=> Array
+    #   resp.resource_tags[0].key #=> String
+    #   resp.resource_tags[0].source #=> String, one of "PROJECT", "PROJECT_PROFILE"
+    #   resp.resource_tags[0].value #=> String
     #   resp.user_parameters #=> Array
     #   resp.user_parameters[0].environment_configuration_name #=> String
     #   resp.user_parameters[0].environment_id #=> String
@@ -13458,6 +14086,9 @@ module Aws::DataZone
 
     # Updates a project profile.
     #
+    # @option params [Boolean] :allow_custom_project_resource_tags
+    #   Specifies whether custom project resource tags are supported.
+    #
     # @option params [String] :description
     #   The description of a project profile.
     #
@@ -13476,11 +14107,19 @@ module Aws::DataZone
     # @option params [String] :name
     #   The name of a project profile.
     #
+    # @option params [Array<Types::ResourceTagParameter>] :project_resource_tags
+    #   The resource tags of the project profile.
+    #
+    # @option params [String] :project_resource_tags_description
+    #   Field viewable through the UI that provides a project user with the
+    #   allowed resource tag specifications.
+    #
     # @option params [String] :status
     #   The status of a project profile.
     #
     # @return [Types::UpdateProjectProfileOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::UpdateProjectProfileOutput#allow_custom_project_resource_tags #allow_custom_project_resource_tags} => Boolean
     #   * {Types::UpdateProjectProfileOutput#created_at #created_at} => Time
     #   * {Types::UpdateProjectProfileOutput#created_by #created_by} => String
     #   * {Types::UpdateProjectProfileOutput#description #description} => String
@@ -13490,11 +14129,14 @@ module Aws::DataZone
     #   * {Types::UpdateProjectProfileOutput#id #id} => String
     #   * {Types::UpdateProjectProfileOutput#last_updated_at #last_updated_at} => Time
     #   * {Types::UpdateProjectProfileOutput#name #name} => String
+    #   * {Types::UpdateProjectProfileOutput#project_resource_tags #project_resource_tags} => Array&lt;Types::ResourceTagParameter&gt;
+    #   * {Types::UpdateProjectProfileOutput#project_resource_tags_description #project_resource_tags_description} => String
     #   * {Types::UpdateProjectProfileOutput#status #status} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_project_profile({
+    #     allow_custom_project_resource_tags: false,
     #     description: "Description",
     #     domain_identifier: "DomainId", # required
     #     domain_unit_identifier: "DomainUnitId",
@@ -13536,11 +14178,20 @@ module Aws::DataZone
     #     ],
     #     identifier: "ProjectProfileId", # required
     #     name: "ProjectProfileName",
+    #     project_resource_tags: [
+    #       {
+    #         is_value_editable: false, # required
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     project_resource_tags_description: "Description",
     #     status: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
     #
+    #   resp.allow_custom_project_resource_tags #=> Boolean
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.description #=> String
@@ -13571,6 +14222,11 @@ module Aws::DataZone
     #   resp.id #=> String
     #   resp.last_updated_at #=> Time
     #   resp.name #=> String
+    #   resp.project_resource_tags #=> Array
+    #   resp.project_resource_tags[0].is_value_editable #=> Boolean
+    #   resp.project_resource_tags[0].key #=> String
+    #   resp.project_resource_tags[0].value #=> String
+    #   resp.project_resource_tags_description #=> String
     #   resp.status #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateProjectProfile AWS API Documentation
@@ -13579,6 +14235,45 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def update_project_profile(params = {}, options = {})
       req = build_request(:update_project_profile, params)
+      req.send_request(options)
+    end
+
+    # Updates the owner of the root domain unit.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :current_owner
+    #   The current owner of the root domain unit.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where the root domain unit owner is to be
+    #   updated.
+    #
+    # @option params [required, String] :new_owner
+    #   The new owner of the root domain unit.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_root_domain_unit_owner({
+    #     client_token: "ClientToken",
+    #     current_owner: "UserIdentifier", # required
+    #     domain_identifier: "DomainId", # required
+    #     new_owner: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateRootDomainUnitOwner AWS API Documentation
+    #
+    # @overload update_root_domain_unit_owner(params = {})
+    # @param [Hash] params ({})
+    def update_root_domain_unit_owner(params = {}, options = {})
+      req = build_request(:update_root_domain_unit_owner, params)
       req.send_request(options)
     end
 
@@ -13634,6 +14329,9 @@ module Aws::DataZone
     #   resp = client.update_rule({
     #     description: "Description",
     #     detail: {
+    #       glossary_term_enforcement_detail: {
+    #         required_glossary_term_ids: ["GlossaryTermId"],
+    #       },
     #       metadata_form_enforcement_detail: {
     #         required_metadata_forms: [
     #           {
@@ -13666,6 +14364,8 @@ module Aws::DataZone
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.description #=> String
+    #   resp.detail.glossary_term_enforcement_detail.required_glossary_term_ids #=> Array
+    #   resp.detail.glossary_term_enforcement_detail.required_glossary_term_ids[0] #=> String
     #   resp.detail.metadata_form_enforcement_detail.required_metadata_forms #=> Array
     #   resp.detail.metadata_form_enforcement_detail.required_metadata_forms[0].type_identifier #=> String
     #   resp.detail.metadata_form_enforcement_detail.required_metadata_forms[0].type_revision #=> String
@@ -13673,7 +14373,7 @@ module Aws::DataZone
     #   resp.last_updated_by #=> String
     #   resp.name #=> String
     #   resp.revision #=> String
-    #   resp.rule_type #=> String, one of "METADATA_FORM_ENFORCEMENT"
+    #   resp.rule_type #=> String, one of "METADATA_FORM_ENFORCEMENT", "GLOSSARY_TERM_ENFORCEMENT"
     #   resp.scope.asset_type.selection_mode #=> String, one of "ALL", "SPECIFIC"
     #   resp.scope.asset_type.specific_asset_types #=> Array
     #   resp.scope.asset_type.specific_asset_types[0] #=> String
@@ -13727,6 +14427,7 @@ module Aws::DataZone
     #   * {Types::UpdateSubscriptionGrantStatusOutput#created_at #created_at} => Time
     #   * {Types::UpdateSubscriptionGrantStatusOutput#created_by #created_by} => String
     #   * {Types::UpdateSubscriptionGrantStatusOutput#domain_id #domain_id} => String
+    #   * {Types::UpdateSubscriptionGrantStatusOutput#environment_id #environment_id} => String
     #   * {Types::UpdateSubscriptionGrantStatusOutput#granted_entity #granted_entity} => Types::GrantedEntity
     #   * {Types::UpdateSubscriptionGrantStatusOutput#id #id} => String
     #   * {Types::UpdateSubscriptionGrantStatusOutput#status #status} => String
@@ -13761,11 +14462,14 @@ module Aws::DataZone
     #   resp.assets[0].failure_cause.message #=> String
     #   resp.assets[0].failure_timestamp #=> Time
     #   resp.assets[0].granted_timestamp #=> Time
+    #   resp.assets[0].permissions.s3 #=> Array
+    #   resp.assets[0].permissions.s3[0] #=> String, one of "READ", "WRITE"
     #   resp.assets[0].status #=> String, one of "GRANT_PENDING", "REVOKE_PENDING", "GRANT_IN_PROGRESS", "REVOKE_IN_PROGRESS", "GRANTED", "REVOKED", "GRANT_FAILED", "REVOKE_FAILED"
     #   resp.assets[0].target_name #=> String
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.domain_id #=> String
+    #   resp.environment_id #=> String
     #   resp.granted_entity.listing.id #=> String
     #   resp.granted_entity.listing.revision #=> String
     #   resp.id #=> String
@@ -13852,6 +14556,8 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms #=> Array
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].name #=> String
     #   resp.subscribed_listings[0].item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.subscribed_listings[0].item.asset_listing.permissions.s3 #=> Array
+    #   resp.subscribed_listings[0].item.asset_listing.permissions.s3[0] #=> String, one of "READ", "WRITE"
     #   resp.subscribed_listings[0].item.product_listing.asset_listings #=> Array
     #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_id #=> String
     #   resp.subscribed_listings[0].item.product_listing.asset_listings[0].entity_revision #=> String
@@ -13868,8 +14574,16 @@ module Aws::DataZone
     #   resp.subscribed_listings[0].owner_project_name #=> String
     #   resp.subscribed_listings[0].revision #=> String
     #   resp.subscribed_principals #=> Array
+    #   resp.subscribed_principals[0].group.id #=> String
+    #   resp.subscribed_principals[0].group.name #=> String
     #   resp.subscribed_principals[0].project.id #=> String
     #   resp.subscribed_principals[0].project.name #=> String
+    #   resp.subscribed_principals[0].user.details.iam.arn #=> String
+    #   resp.subscribed_principals[0].user.details.iam.principal_id #=> String
+    #   resp.subscribed_principals[0].user.details.sso.first_name #=> String
+    #   resp.subscribed_principals[0].user.details.sso.last_name #=> String
+    #   resp.subscribed_principals[0].user.details.sso.username #=> String
+    #   resp.subscribed_principals[0].user.id #=> String
     #   resp.updated_at #=> Time
     #   resp.updated_by #=> String
     #
@@ -14058,7 +14772,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2025-11-21)
+------------------
+
+* Feature - Added the CreateProcurementPortalPreference, GetProcurementPortalPreference, PutProcurementPortalPreference, UpdateProcurementPortalPreferenceStatus, ListProcurementPortalPreferences and DeleteProcurementPortalPreference APIs for procurement portal preference management.
+
+1.16.0 (2025-11-19)
+------------------
+
+* Feature - Add support for adding Billing transfers in Invoice configuration
+
+1.15.0 (2025-11-10)
+------------------
+
+* Feature - Added new invoicing get-invoice-pdf API Operation
+
+1.14.0 (2025-10-27)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.13.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.12.0 (2025-08-26)
 ------------------
 

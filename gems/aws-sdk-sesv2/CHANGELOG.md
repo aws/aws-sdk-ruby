@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2025-12-08)
+------------------
+
+* Feature - Update Mail Manager Archive ARN validation
+
+1.89.0 (2025-12-05)
+------------------
+
+* Feature - Updating the desired url for `PutEmailIdentityDkimSigningAttributes` from v1 to v2
+
+1.88.0 (2025-11-21)
+------------------
+
+* Feature - Added support for new SES regions - Asia Pacific (Malaysia) and Canada (Calgary)
+
+1.87.0 (2025-10-23)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.86.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.85.0 (2025-08-28)
 ------------------
 

@@ -34,10 +34,17 @@ module Aws::ServiceQuotas
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorReason = Shapes::StructureShape.new(name: 'ErrorReason')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
+    ExcludedLimit = Shapes::StringShape.new(name: 'ExcludedLimit')
+    ExcludedQuotaList = Shapes::ListShape.new(name: 'ExcludedQuotaList')
+    ExcludedService = Shapes::StringShape.new(name: 'ExcludedService')
+    ExclusionList = Shapes::MapShape.new(name: 'ExclusionList')
+    ExclusionQuotaList = Shapes::MapShape.new(name: 'ExclusionQuotaList')
     GetAWSDefaultServiceQuotaRequest = Shapes::StructureShape.new(name: 'GetAWSDefaultServiceQuotaRequest')
     GetAWSDefaultServiceQuotaResponse = Shapes::StructureShape.new(name: 'GetAWSDefaultServiceQuotaResponse')
     GetAssociationForServiceQuotaTemplateRequest = Shapes::StructureShape.new(name: 'GetAssociationForServiceQuotaTemplateRequest')
     GetAssociationForServiceQuotaTemplateResponse = Shapes::StructureShape.new(name: 'GetAssociationForServiceQuotaTemplateResponse')
+    GetAutoManagementConfigurationRequest = Shapes::StructureShape.new(name: 'GetAutoManagementConfigurationRequest')
+    GetAutoManagementConfigurationResponse = Shapes::StructureShape.new(name: 'GetAutoManagementConfigurationResponse')
     GetRequestedServiceQuotaChangeRequest = Shapes::StructureShape.new(name: 'GetRequestedServiceQuotaChangeRequest')
     GetRequestedServiceQuotaChangeResponse = Shapes::StructureShape.new(name: 'GetRequestedServiceQuotaChangeResponse')
     GetServiceQuotaIncreaseRequestFromTemplateRequest = Shapes::StructureShape.new(name: 'GetServiceQuotaIncreaseRequestFromTemplateRequest')
@@ -72,6 +79,9 @@ module Aws::ServiceQuotas
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NoAvailableOrganizationException = Shapes::StructureShape.new(name: 'NoAvailableOrganizationException')
     NoSuchResourceException = Shapes::StructureShape.new(name: 'NoSuchResourceException')
+    OptInLevel = Shapes::StringShape.new(name: 'OptInLevel')
+    OptInStatus = Shapes::StringShape.new(name: 'OptInStatus')
+    OptInType = Shapes::StringShape.new(name: 'OptInType')
     OrganizationNotInAllFeaturesModeException = Shapes::StructureShape.new(name: 'OrganizationNotInAllFeaturesModeException')
     OutputTags = Shapes::ListShape.new(name: 'OutputTags')
     PeriodUnit = Shapes::StringShape.new(name: 'PeriodUnit')
@@ -87,6 +97,8 @@ module Aws::ServiceQuotas
     QuotaContextScopeType = Shapes::StringShape.new(name: 'QuotaContextScopeType')
     QuotaDescription = Shapes::StringShape.new(name: 'QuotaDescription')
     QuotaExceededException = Shapes::StructureShape.new(name: 'QuotaExceededException')
+    QuotaInfo = Shapes::StructureShape.new(name: 'QuotaInfo')
+    QuotaInfoList = Shapes::ListShape.new(name: 'QuotaInfoList')
     QuotaMetricName = Shapes::StringShape.new(name: 'QuotaMetricName')
     QuotaMetricNamespace = Shapes::StringShape.new(name: 'QuotaMetricNamespace')
     QuotaName = Shapes::StringShape.new(name: 'QuotaName')
@@ -112,7 +124,11 @@ module Aws::ServiceQuotas
     ServiceQuotaListDefinition = Shapes::ListShape.new(name: 'ServiceQuotaListDefinition')
     ServiceQuotaTemplateAssociationStatus = Shapes::StringShape.new(name: 'ServiceQuotaTemplateAssociationStatus')
     ServiceQuotaTemplateNotInUseException = Shapes::StructureShape.new(name: 'ServiceQuotaTemplateNotInUseException')
+    StartAutoManagementRequest = Shapes::StructureShape.new(name: 'StartAutoManagementRequest')
+    StartAutoManagementResponse = Shapes::StructureShape.new(name: 'StartAutoManagementResponse')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
+    StopAutoManagementRequest = Shapes::StructureShape.new(name: 'StopAutoManagementRequest')
+    StopAutoManagementResponse = Shapes::StructureShape.new(name: 'StopAutoManagementResponse')
     SupportCaseAllowed = Shapes::BooleanShape.new(name: 'SupportCaseAllowed')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -125,6 +141,8 @@ module Aws::ServiceQuotas
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAutoManagementRequest = Shapes::StructureShape.new(name: 'UpdateAutoManagementRequest')
+    UpdateAutoManagementResponse = Shapes::StructureShape.new(name: 'UpdateAutoManagementResponse')
 
     AWSServiceAccessNotEnabledException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     AWSServiceAccessNotEnabledException.struct_class = Types::AWSServiceAccessNotEnabledException
@@ -159,6 +177,14 @@ module Aws::ServiceQuotas
     ErrorReason.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
     ErrorReason.struct_class = Types::ErrorReason
 
+    ExcludedQuotaList.member = Shapes::ShapeRef.new(shape: ExcludedLimit)
+
+    ExclusionList.key = Shapes::ShapeRef.new(shape: ExcludedService)
+    ExclusionList.value = Shapes::ShapeRef.new(shape: ExcludedQuotaList)
+
+    ExclusionQuotaList.key = Shapes::ShapeRef.new(shape: ExcludedService)
+    ExclusionQuotaList.value = Shapes::ShapeRef.new(shape: QuotaInfoList)
+
     GetAWSDefaultServiceQuotaRequest.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, required: true, location_name: "ServiceCode"))
     GetAWSDefaultServiceQuotaRequest.add_member(:quota_code, Shapes::ShapeRef.new(shape: QuotaCode, required: true, location_name: "QuotaCode"))
     GetAWSDefaultServiceQuotaRequest.struct_class = Types::GetAWSDefaultServiceQuotaRequest
@@ -170,6 +196,15 @@ module Aws::ServiceQuotas
 
     GetAssociationForServiceQuotaTemplateResponse.add_member(:service_quota_template_association_status, Shapes::ShapeRef.new(shape: ServiceQuotaTemplateAssociationStatus, location_name: "ServiceQuotaTemplateAssociationStatus"))
     GetAssociationForServiceQuotaTemplateResponse.struct_class = Types::GetAssociationForServiceQuotaTemplateResponse
+
+    GetAutoManagementConfigurationRequest.struct_class = Types::GetAutoManagementConfigurationRequest
+
+    GetAutoManagementConfigurationResponse.add_member(:opt_in_level, Shapes::ShapeRef.new(shape: OptInLevel, location_name: "OptInLevel"))
+    GetAutoManagementConfigurationResponse.add_member(:opt_in_type, Shapes::ShapeRef.new(shape: OptInType, location_name: "OptInType"))
+    GetAutoManagementConfigurationResponse.add_member(:notification_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "NotificationArn"))
+    GetAutoManagementConfigurationResponse.add_member(:opt_in_status, Shapes::ShapeRef.new(shape: OptInStatus, location_name: "OptInStatus"))
+    GetAutoManagementConfigurationResponse.add_member(:exclusion_list, Shapes::ShapeRef.new(shape: ExclusionQuotaList, location_name: "ExclusionList"))
+    GetAutoManagementConfigurationResponse.struct_class = Types::GetAutoManagementConfigurationResponse
 
     GetRequestedServiceQuotaChangeRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, required: true, location_name: "RequestId"))
     GetRequestedServiceQuotaChangeRequest.struct_class = Types::GetRequestedServiceQuotaChangeRequest
@@ -310,6 +345,12 @@ module Aws::ServiceQuotas
     QuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     QuotaExceededException.struct_class = Types::QuotaExceededException
 
+    QuotaInfo.add_member(:quota_code, Shapes::ShapeRef.new(shape: QuotaCode, location_name: "QuotaCode"))
+    QuotaInfo.add_member(:quota_name, Shapes::ShapeRef.new(shape: QuotaName, location_name: "QuotaName"))
+    QuotaInfo.struct_class = Types::QuotaInfo
+
+    QuotaInfoList.member = Shapes::ShapeRef.new(shape: QuotaInfo)
+
     QuotaPeriod.add_member(:period_value, Shapes::ShapeRef.new(shape: PeriodValue, location_name: "PeriodValue"))
     QuotaPeriod.add_member(:period_unit, Shapes::ShapeRef.new(shape: PeriodUnit, location_name: "PeriodUnit"))
     QuotaPeriod.struct_class = Types::QuotaPeriod
@@ -390,6 +431,18 @@ module Aws::ServiceQuotas
     ServiceQuotaTemplateNotInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     ServiceQuotaTemplateNotInUseException.struct_class = Types::ServiceQuotaTemplateNotInUseException
 
+    StartAutoManagementRequest.add_member(:opt_in_level, Shapes::ShapeRef.new(shape: OptInLevel, required: true, location_name: "OptInLevel"))
+    StartAutoManagementRequest.add_member(:opt_in_type, Shapes::ShapeRef.new(shape: OptInType, required: true, location_name: "OptInType"))
+    StartAutoManagementRequest.add_member(:notification_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "NotificationArn"))
+    StartAutoManagementRequest.add_member(:exclusion_list, Shapes::ShapeRef.new(shape: ExclusionList, location_name: "ExclusionList"))
+    StartAutoManagementRequest.struct_class = Types::StartAutoManagementRequest
+
+    StartAutoManagementResponse.struct_class = Types::StartAutoManagementResponse
+
+    StopAutoManagementRequest.struct_class = Types::StopAutoManagementRequest
+
+    StopAutoManagementResponse.struct_class = Types::StopAutoManagementResponse
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -417,6 +470,13 @@ module Aws::ServiceQuotas
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateAutoManagementRequest.add_member(:opt_in_type, Shapes::ShapeRef.new(shape: OptInType, location_name: "OptInType"))
+    UpdateAutoManagementRequest.add_member(:notification_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "NotificationArn"))
+    UpdateAutoManagementRequest.add_member(:exclusion_list, Shapes::ShapeRef.new(shape: ExclusionList, location_name: "ExclusionList"))
+    UpdateAutoManagementRequest.struct_class = Types::UpdateAutoManagementRequest
+
+    UpdateAutoManagementResponse.struct_class = Types::UpdateAutoManagementResponse
 
 
     # @api private
@@ -530,6 +590,19 @@ module Aws::ServiceQuotas
         o.errors << Shapes::ShapeRef.new(shape: AWSServiceAccessNotEnabledException)
         o.errors << Shapes::ShapeRef.new(shape: TemplatesNotAvailableInRegionException)
         o.errors << Shapes::ShapeRef.new(shape: NoAvailableOrganizationException)
+      end)
+
+      api.add_operation(:get_auto_management_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAutoManagementConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAutoManagementConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAutoManagementConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
       api.add_operation(:get_requested_service_quota_change, Seahorse::Model::Operation.new.tap do |o|
@@ -744,6 +817,32 @@ module Aws::ServiceQuotas
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:start_auto_management, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartAutoManagement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartAutoManagementRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartAutoManagementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:stop_auto_management, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopAutoManagement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopAutoManagementRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopAutoManagementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -769,6 +868,19 @@ module Aws::ServiceQuotas
         o.errors << Shapes::ShapeRef.new(shape: NoSuchResourceException)
         o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:update_auto_management, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAutoManagement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAutoManagementRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAutoManagementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
     end

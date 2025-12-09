@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.92.0 (2025-10-27)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.91.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.90.0 (2025-10-08)
+------------------
+
+* Feature - This release adds the new StartOutpostDecommission API, which starts the decommission process to return Outposts racks or servers.
+
 1.89.0 (2025-08-26)
 ------------------
 

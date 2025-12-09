@@ -18,6 +18,7 @@ module Aws::LicenseManagerUserSubscriptions
     ActiveDirectoryIdentityProvider = Shapes::StructureShape.new(name: 'ActiveDirectoryIdentityProvider')
     ActiveDirectorySettings = Shapes::StructureShape.new(name: 'ActiveDirectorySettings')
     ActiveDirectorySettingsDomainIpv4ListList = Shapes::ListShape.new(name: 'ActiveDirectorySettingsDomainIpv4ListList')
+    ActiveDirectorySettingsDomainIpv6ListList = Shapes::ListShape.new(name: 'ActiveDirectorySettingsDomainIpv6ListList')
     ActiveDirectoryType = Shapes::StringShape.new(name: 'ActiveDirectoryType')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociateUserRequest = Shapes::StructureShape.new(name: 'AssociateUserRequest')
@@ -48,6 +49,7 @@ module Aws::LicenseManagerUserSubscriptions
     InstanceUserSummaryList = Shapes::ListShape.new(name: 'InstanceUserSummaryList')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IpV4 = Shapes::StringShape.new(name: 'IpV4')
+    IpV6 = Shapes::StringShape.new(name: 'IpV6')
     LicenseServer = Shapes::StructureShape.new(name: 'LicenseServer')
     LicenseServerEndpoint = Shapes::StructureShape.new(name: 'LicenseServerEndpoint')
     LicenseServerEndpointId = Shapes::StringShape.new(name: 'LicenseServerEndpointId')
@@ -117,11 +119,14 @@ module Aws::LicenseManagerUserSubscriptions
 
     ActiveDirectorySettings.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainName"))
     ActiveDirectorySettings.add_member(:domain_ipv_4_list, Shapes::ShapeRef.new(shape: ActiveDirectorySettingsDomainIpv4ListList, location_name: "DomainIpv4List"))
+    ActiveDirectorySettings.add_member(:domain_ipv_6_list, Shapes::ShapeRef.new(shape: ActiveDirectorySettingsDomainIpv6ListList, location_name: "DomainIpv6List"))
     ActiveDirectorySettings.add_member(:domain_credentials_provider, Shapes::ShapeRef.new(shape: CredentialsProvider, location_name: "DomainCredentialsProvider"))
     ActiveDirectorySettings.add_member(:domain_network_settings, Shapes::ShapeRef.new(shape: DomainNetworkSettings, location_name: "DomainNetworkSettings"))
     ActiveDirectorySettings.struct_class = Types::ActiveDirectorySettings
 
     ActiveDirectorySettingsDomainIpv4ListList.member = Shapes::ShapeRef.new(shape: IpV4)
+
+    ActiveDirectorySettingsDomainIpv6ListList.member = Shapes::ShapeRef.new(shape: IpV6)
 
     AssociateUserRequest.add_member(:username, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Username"))
     AssociateUserRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceId"))
@@ -235,6 +240,7 @@ module Aws::LicenseManagerUserSubscriptions
     LicenseServer.add_member(:provisioning_status, Shapes::ShapeRef.new(shape: LicenseServerEndpointProvisioningStatus, location_name: "ProvisioningStatus"))
     LicenseServer.add_member(:health_status, Shapes::ShapeRef.new(shape: LicenseServerHealthStatus, location_name: "HealthStatus"))
     LicenseServer.add_member(:ipv_4_address, Shapes::ShapeRef.new(shape: String, location_name: "Ipv4Address"))
+    LicenseServer.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6Address"))
     LicenseServer.struct_class = Types::LicenseServer
 
     LicenseServerEndpoint.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: String, location_name: "IdentityProviderArn"))

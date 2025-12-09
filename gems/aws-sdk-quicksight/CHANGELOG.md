@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.165.0 (2025-11-21)
+------------------
+
+* Feature - Amazon Quick Suite now supports QuickChat as an embedding type when calling the GenerateEmbedUrlForRegisteredUser API, enabling developers to embed conversational AI agents directly into their applications.
+
+1.164.0 (2025-11-20)
+------------------
+
+* Feature - Introducing comprehensive theme styling controls. New features include border customization (radius, width, color), flexible padding controls, background styling for cards and sheets, centralized typography management, and visual-level override support across layouts.
+
+1.163.0 (2025-11-06)
+------------------
+
+* Feature - Support for New Data Prep Experience
+
+1.162.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.161.0 (2025-10-09)
+------------------
+
+* Feature - This release adds support for ActionConnector and Flow, which are new resources associated with Amazon Quick Suite. Additional updates include expanded Data Source options, further branding customization, and new capabilities that can be restricted by Admins.
+
+1.160.0 (2025-10-06)
+------------------
+
+* Feature - Documentation improvements for QuickSight API documentation to clarify that delete operation APIs are global.
+
+1.159.0 (2025-09-30)
+------------------
+
+* Feature - added warnings to a few CLI pages
+
 1.158.0 (2025-09-11)
 ------------------
 

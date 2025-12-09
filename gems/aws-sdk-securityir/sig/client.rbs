@@ -140,7 +140,7 @@ module Aws
                          ?impacted_services: Array[::String],
                          ?impacted_aws_regions: Array[
                            {
-                             region: ("af-south-1" | "ap-east-1" | "ap-east-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-4" | "ap-southeast-5" | "ap-southeast-7" | "ca-central-1" | "ca-west-1" | "cn-north-1" | "cn-northwest-1" | "eu-central-1" | "eu-central-2" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "il-central-1" | "me-central-1" | "me-south-1" | "mx-central-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2")
+                             region: ("af-south-1" | "ap-east-1" | "ap-east-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-4" | "ap-southeast-5" | "ap-southeast-6" | "ap-southeast-7" | "ca-central-1" | "ca-west-1" | "cn-north-1" | "cn-northwest-1" | "eu-central-1" | "eu-central-2" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "il-central-1" | "me-central-1" | "me-south-1" | "mx-central-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2")
                            },
                          ],
                          ?tags: Hash[::String, ::String]
@@ -171,7 +171,8 @@ module Aws
                                  {
                                    name: ::String,
                                    job_title: ::String,
-                                   email: ::String
+                                   email: ::String,
+                                   communication_preferences: Array[("Case Created" | "Case Updated" | "Case Acknowledged" | "Case Closed" | "Case Updated To Service Managed" | "Case Status Updated" | "Case Pending Customer Action Reminder" | "Case Attachment Url Uploaded" | "Case Comment Added" | "Case Comment Updated" | "Membership Created" | "Membership Updated" | "Membership Cancelled" | "Register Delegated Administrator" | "Deregister Delegated Administrator" | "Disable AWS Service Access")]?
                                  },
                                ],
                                ?opt_in_features: Array[
@@ -206,6 +207,7 @@ module Aws
         def impacted_services: () -> ::Array[::String]
         def case_attachments: () -> ::Array[Types::CaseAttachmentAttributes]
         def closed_date: () -> ::Time
+        def case_metadata: () -> ::Array[Types::CaseMetadataEntry]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityIR/Client.html#get_case-instance_method
       def get_case: (
@@ -241,7 +243,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetMembershipResponse]
         def membership_id: () -> ::String
         def account_id: () -> ::String
-        def region: () -> ("af-south-1" | "ap-east-1" | "ap-east-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-4" | "ap-southeast-5" | "ap-southeast-7" | "ca-central-1" | "ca-west-1" | "cn-north-1" | "cn-northwest-1" | "eu-central-1" | "eu-central-2" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "il-central-1" | "me-central-1" | "me-south-1" | "mx-central-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2")
+        def region: () -> ("af-south-1" | "ap-east-1" | "ap-east-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-4" | "ap-southeast-5" | "ap-southeast-6" | "ap-southeast-7" | "ca-central-1" | "ca-west-1" | "cn-north-1" | "cn-northwest-1" | "eu-central-1" | "eu-central-2" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "il-central-1" | "me-central-1" | "me-south-1" | "mx-central-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2")
         def membership_name: () -> ::String
         def membership_arn: () -> ::String
         def membership_status: () -> ("Active" | "Cancelled" | "Terminated")
@@ -300,6 +302,19 @@ module Aws
                          ) -> _ListCommentsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCommentsResponseSuccess
 
+      interface _ListInvestigationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInvestigationsResponse]
+        def next_token: () -> ::String
+        def investigation_actions: () -> ::Array[Types::InvestigationAction]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityIR/Client.html#list_investigations-instance_method
+      def list_investigations: (
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer,
+                                 case_id: ::String
+                               ) -> _ListInvestigationsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInvestigationsResponseSuccess
+
       interface _ListMembershipsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListMembershipsResponse]
         def next_token: () -> ::String
@@ -321,6 +336,18 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _SendFeedbackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendFeedbackResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityIR/Client.html#send_feedback-instance_method
+      def send_feedback: (
+                           case_id: ::String,
+                           result_id: ::String,
+                           usefulness: ("USEFUL" | "NOT_USEFUL"),
+                           ?comment: ::String
+                         ) -> _SendFeedbackResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendFeedbackResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
@@ -383,16 +410,22 @@ module Aws
                          ?impacted_services_to_delete: Array[::String],
                          ?impacted_aws_regions_to_add: Array[
                            {
-                             region: ("af-south-1" | "ap-east-1" | "ap-east-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-4" | "ap-southeast-5" | "ap-southeast-7" | "ca-central-1" | "ca-west-1" | "cn-north-1" | "cn-northwest-1" | "eu-central-1" | "eu-central-2" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "il-central-1" | "me-central-1" | "me-south-1" | "mx-central-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2")
+                             region: ("af-south-1" | "ap-east-1" | "ap-east-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-4" | "ap-southeast-5" | "ap-southeast-6" | "ap-southeast-7" | "ca-central-1" | "ca-west-1" | "cn-north-1" | "cn-northwest-1" | "eu-central-1" | "eu-central-2" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "il-central-1" | "me-central-1" | "me-south-1" | "mx-central-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2")
                            },
                          ],
                          ?impacted_aws_regions_to_delete: Array[
                            {
-                             region: ("af-south-1" | "ap-east-1" | "ap-east-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-4" | "ap-southeast-5" | "ap-southeast-7" | "ca-central-1" | "ca-west-1" | "cn-north-1" | "cn-northwest-1" | "eu-central-1" | "eu-central-2" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "il-central-1" | "me-central-1" | "me-south-1" | "mx-central-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2")
+                             region: ("af-south-1" | "ap-east-1" | "ap-east-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-4" | "ap-southeast-5" | "ap-southeast-6" | "ap-southeast-7" | "ca-central-1" | "ca-west-1" | "cn-north-1" | "cn-northwest-1" | "eu-central-1" | "eu-central-2" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "il-central-1" | "me-central-1" | "me-south-1" | "mx-central-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2")
                            },
                          ],
                          ?impacted_accounts_to_add: Array[::String],
-                         ?impacted_accounts_to_delete: Array[::String]
+                         ?impacted_accounts_to_delete: Array[::String],
+                         ?case_metadata: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
                        ) -> _UpdateCaseResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCaseResponseSuccess
 
@@ -431,7 +464,8 @@ module Aws
                                  {
                                    name: ::String,
                                    job_title: ::String,
-                                   email: ::String
+                                   email: ::String,
+                                   communication_preferences: Array[("Case Created" | "Case Updated" | "Case Acknowledged" | "Case Closed" | "Case Updated To Service Managed" | "Case Status Updated" | "Case Pending Customer Action Reminder" | "Case Attachment Url Uploaded" | "Case Comment Added" | "Case Comment Updated" | "Membership Created" | "Membership Updated" | "Membership Cancelled" | "Register Delegated Administrator" | "Deregister Delegated Administrator" | "Disable AWS Service Access")]?
                                  },
                                ],
                                ?opt_in_features: Array[

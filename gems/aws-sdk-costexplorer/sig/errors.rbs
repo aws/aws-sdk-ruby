@@ -20,6 +20,9 @@ module Aws
       class BillExpirationException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class BillingViewHealthStatusException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class DataUnavailableException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

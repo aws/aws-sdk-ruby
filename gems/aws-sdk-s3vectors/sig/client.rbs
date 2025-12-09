@@ -80,6 +80,7 @@ module Aws
 
       interface _CreateIndexResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateIndexOutput]
+        def index_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#create_index-instance_method
       def create_index: (
@@ -91,12 +92,18 @@ module Aws
                           distance_metric: ("euclidean" | "cosine"),
                           ?metadata_configuration: {
                             non_filterable_metadata_keys: Array[::String]
-                          }
+                          },
+                          ?encryption_configuration: {
+                            sse_type: ("AES256" | "aws:kms")?,
+                            kms_key_arn: ::String?
+                          },
+                          ?tags: Hash[::String, ::String]
                         ) -> _CreateIndexResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIndexResponseSuccess
 
       interface _CreateVectorBucketResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateVectorBucketOutput]
+        def vector_bucket_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#create_vector_bucket-instance_method
       def create_vector_bucket: (
@@ -104,7 +111,8 @@ module Aws
                                   ?encryption_configuration: {
                                     sse_type: ("AES256" | "aws:kms")?,
                                     kms_key_arn: ::String?
-                                  }
+                                  },
+                                  ?tags: Hash[::String, ::String]
                                 ) -> _CreateVectorBucketResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVectorBucketResponseSuccess
 
@@ -215,6 +223,16 @@ module Aws
                         ) -> _ListIndexesResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIndexesResponseSuccess
 
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
       interface _ListVectorBucketsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListVectorBucketsOutput]
         def next_token: () -> ::String
@@ -282,6 +300,7 @@ module Aws
       interface _QueryVectorsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::QueryVectorsOutput]
         def vectors: () -> ::Array[Types::QueryOutputVector]
+        def distance_metric: () -> ("euclidean" | "cosine")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#query_vectors-instance_method
       def query_vectors: (
@@ -298,6 +317,26 @@ module Aws
                            ?return_distance: bool
                          ) -> _QueryVectorsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _QueryVectorsResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Vectors/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
     end
   end
 end

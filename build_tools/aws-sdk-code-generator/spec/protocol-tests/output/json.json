@@ -20,6 +20,10 @@
             "uid": "json-protocol-2018-01-01"
         },
         "shapes": {
+            "DateTime": {
+                "type": "timestamp",
+                "timestampFormat": "iso8601"
+            },
             "DatetimeOffsetsOutput": {
                 "type": "structure",
                 "members": {
@@ -27,10 +31,6 @@
                         "shape": "DateTime"
                     }
                 }
-            },
-            "DateTime": {
-                "type": "timestamp",
-                "timestampFormat": "iso8601"
             }
         },
         "cases": [
@@ -186,6 +186,10 @@
             "uid": "json-protocol-2018-01-01"
         },
         "shapes": {
+            "DateTime": {
+                "type": "timestamp",
+                "timestampFormat": "iso8601"
+            },
             "FractionalSecondsOutput": {
                 "type": "structure",
                 "members": {
@@ -193,10 +197,6 @@
                         "shape": "DateTime"
                     }
                 }
-            },
-            "DateTime": {
-                "type": "timestamp",
-                "timestampFormat": "iso8601"
             }
         },
         "cases": [
@@ -328,9 +328,6 @@
                 "documentation": "<p>This error is thrown when a request is invalid.</p>",
                 "exception": true
             },
-            "String": {
-                "type": "string"
-            },
             "ComplexNestedErrorData": {
                 "type": "structure",
                 "members": {
@@ -338,6 +335,9 @@
                         "shape": "String"
                     }
                 }
+            },
+            "String": {
+                "type": "string"
             }
         },
         "cases": [
@@ -670,6 +670,33 @@
                     },
                     "body": "{\n    \"__type\": \"aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/\"\n}"
                 }
+            },
+            {
+                "id": "AwsJson11FooErrorWithNestedTypeProperty",
+                "description": "Some services serialize errors using __type, and if the response includes additional shapes that belong to a different namespace there'll be a nested __type property that must not be considered when determining which error to be surfaced.\n\nFor an example service see Amazon DynamoDB.",
+                "given": {
+                    "name": "GreetingWithErrors",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
+                    "errors": [
+                        {
+                            "shape": "FooError"
+                        }
+                    ]
+                },
+                "errorCode": "FooError",
+                "error": {},
+                "response": {
+                    "status_code": 500,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"__type\": \"aws.protocoltests.restjson#FooError\",\n    \"ErrorDetails\": [\n      {\n          \"__type\": \"com.amazon.internal#ErrorDetails\",\n          \"reason\": \"Some reason\"\n      }\n    ]\n}"
+                }
             }
         ]
     },
@@ -694,6 +721,37 @@
             "uid": "json-protocol-2018-01-01"
         },
         "shapes": {
+            "FooEnum": {
+                "type": "string",
+                "enum": [
+                    "Foo",
+                    "Baz",
+                    "Bar",
+                    "1",
+                    "0"
+                ]
+            },
+            "FooEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "FooEnum"
+                }
+            },
+            "FooEnumMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "FooEnum"
+                }
+            },
+            "FooEnumSet": {
+                "type": "list",
+                "member": {
+                    "shape": "FooEnum"
+                }
+            },
             "JsonEnumsInputOutput": {
                 "type": "structure",
                 "members": {
@@ -715,37 +773,6 @@
                     "fooEnumMap": {
                         "shape": "FooEnumMap"
                     }
-                }
-            },
-            "FooEnum": {
-                "type": "string",
-                "enum": [
-                    "Foo",
-                    "Baz",
-                    "Bar",
-                    "1",
-                    "0"
-                ]
-            },
-            "FooEnumList": {
-                "type": "list",
-                "member": {
-                    "shape": "FooEnum"
-                }
-            },
-            "FooEnumSet": {
-                "type": "list",
-                "member": {
-                    "shape": "FooEnum"
-                }
-            },
-            "FooEnumMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "FooEnum"
                 }
             },
             "String": {
@@ -816,6 +843,31 @@
             "uid": "json-protocol-2018-01-01"
         },
         "shapes": {
+            "IntegerEnum": {
+                "type": "integer",
+                "box": true
+            },
+            "IntegerEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "IntegerEnum"
+                }
+            },
+            "IntegerEnumMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "IntegerEnum"
+                }
+            },
+            "IntegerEnumSet": {
+                "type": "list",
+                "member": {
+                    "shape": "IntegerEnum"
+                }
+            },
             "JsonIntEnumsInputOutput": {
                 "type": "structure",
                 "members": {
@@ -837,31 +889,6 @@
                     "intEnumMap": {
                         "shape": "IntegerEnumMap"
                     }
-                }
-            },
-            "IntegerEnum": {
-                "type": "integer",
-                "box": true
-            },
-            "IntegerEnumList": {
-                "type": "list",
-                "member": {
-                    "shape": "IntegerEnum"
-                }
-            },
-            "IntegerEnumSet": {
-                "type": "list",
-                "member": {
-                    "shape": "IntegerEnum"
-                }
-            },
-            "IntegerEnumMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "IntegerEnum"
                 }
             },
             "String": {
@@ -933,14 +960,34 @@
             "uid": "json-protocol-2018-01-01"
         },
         "shapes": {
-            "UnionInputOutput": {
+            "Blob": {
+                "type": "blob"
+            },
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "FooEnum": {
+                "type": "string",
+                "enum": [
+                    "Foo",
+                    "Baz",
+                    "Bar",
+                    "1",
+                    "0"
+                ]
+            },
+            "GreetingStruct": {
                 "type": "structure",
                 "members": {
-                    "contents": {
-                        "shape": "MyUnion"
+                    "hi": {
+                        "shape": "String"
                     }
-                },
-                "documentation": "<p>A shared structure that contains a single union member.</p>"
+                }
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
             },
             "MyUnion": {
                 "type": "structure",
@@ -979,30 +1026,6 @@
             "String": {
                 "type": "string"
             },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
-            },
-            "Integer": {
-                "type": "integer",
-                "box": true
-            },
-            "Blob": {
-                "type": "blob"
-            },
-            "Timestamp": {
-                "type": "timestamp"
-            },
-            "FooEnum": {
-                "type": "string",
-                "enum": [
-                    "Foo",
-                    "Baz",
-                    "Bar",
-                    "1",
-                    "0"
-                ]
-            },
             "StringList": {
                 "type": "list",
                 "member": {
@@ -1018,13 +1041,17 @@
                     "shape": "String"
                 }
             },
-            "GreetingStruct": {
+            "Timestamp": {
+                "type": "timestamp"
+            },
+            "UnionInputOutput": {
                 "type": "structure",
                 "members": {
-                    "hi": {
-                        "shape": "String"
+                    "contents": {
+                        "shape": "MyUnion"
                     }
-                }
+                },
+                "documentation": "<p>A shared structure that contains a single union member.</p>"
             }
         },
         "cases": [
@@ -1341,6 +1368,32 @@
             "uid": "json-protocol-2018-01-01"
         },
         "shapes": {
+            "Blob": {
+                "type": "blob"
+            },
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "Double": {
+                "type": "double",
+                "box": true
+            },
+            "EmptyStruct": {
+                "type": "structure",
+                "members": {}
+            },
+            "Float": {
+                "type": "float",
+                "box": true
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "JsonValue": {
+                "type": "string"
+            },
             "KitchenSink": {
                 "type": "structure",
                 "members": {
@@ -1425,39 +1478,11 @@
                     }
                 }
             },
-            "Blob": {
-                "type": "blob"
-            },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
-            },
-            "Double": {
-                "type": "double",
-                "box": true
-            },
-            "EmptyStruct": {
-                "type": "structure",
-                "members": {}
-            },
-            "Float": {
-                "type": "float",
-                "box": true
-            },
-            "SyntheticTimestamp_http_date": {
-                "type": "timestamp",
-                "timestampFormat": "rfc822"
-            },
-            "Integer": {
-                "type": "integer",
-                "box": true
-            },
-            "SyntheticTimestamp_date_time": {
-                "type": "timestamp",
-                "timestampFormat": "iso8601"
-            },
-            "JsonValue": {
-                "type": "string"
+            "ListOfKitchenSinks": {
+                "type": "list",
+                "member": {
+                    "shape": "KitchenSink"
+                }
             },
             "ListOfListOfStrings": {
                 "type": "list",
@@ -1486,6 +1511,15 @@
             "Long": {
                 "type": "long",
                 "box": true
+            },
+            "MapOfKitchenSinks": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "KitchenSink"
+                }
             },
             "MapOfListsOfStrings": {
                 "type": "map",
@@ -1523,21 +1557,6 @@
                     "shape": "SimpleStruct"
                 }
             },
-            "ListOfKitchenSinks": {
-                "type": "list",
-                "member": {
-                    "shape": "KitchenSink"
-                }
-            },
-            "MapOfKitchenSinks": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "KitchenSink"
-                }
-            },
             "SimpleStruct": {
                 "type": "structure",
                 "members": {
@@ -1557,12 +1576,20 @@
                     }
                 }
             },
-            "Timestamp": {
-                "type": "timestamp"
+            "SyntheticTimestamp_date_time": {
+                "type": "timestamp",
+                "timestampFormat": "iso8601"
             },
             "SyntheticTimestamp_epoch_seconds": {
                 "type": "timestamp",
                 "timestampFormat": "unixTimestamp"
+            },
+            "SyntheticTimestamp_http_date": {
+                "type": "timestamp",
+                "timestampFormat": "rfc822"
+            },
+            "Timestamp": {
+                "type": "timestamp"
             }
         },
         "cases": [
@@ -2277,6 +2304,11 @@
             "uid": "json-protocol-2018-01-01"
         },
         "shapes": {
+            "Document": {
+                "type": "structure",
+                "members": {},
+                "document": true
+            },
             "PutAndGetInlineDocumentsInputOutput": {
                 "type": "structure",
                 "members": {
@@ -2284,11 +2316,6 @@
                         "shape": "Document"
                     }
                 }
-            },
-            "Document": {
-                "type": "structure",
-                "members": {},
-                "document": true
             }
         },
         "cases": [
@@ -2342,6 +2369,14 @@
             "uid": "json-protocol-2018-01-01"
         },
         "shapes": {
+            "Double": {
+                "type": "double",
+                "box": true
+            },
+            "Float": {
+                "type": "float",
+                "box": true
+            },
             "SimpleScalarPropertiesInputOutput": {
                 "type": "structure",
                 "members": {
@@ -2352,14 +2387,6 @@
                         "shape": "Double"
                     }
                 }
-            },
-            "Float": {
-                "type": "float",
-                "box": true
-            },
-            "Double": {
-                "type": "double",
-                "box": true
             }
         },
         "cases": [

@@ -20,6 +20,8 @@ module Aws
       class ClientException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class ClusterContainsCapacityProviderException < ::Aws::Errors::ServiceError
+      end
       class ClusterContainsContainerInstancesException < ::Aws::Errors::ServiceError
       end
       class ClusterContainsServicesException < ::Aws::Errors::ServiceError

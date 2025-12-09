@@ -212,6 +212,7 @@ module Aws::GameLiftStreams
     CreateStreamGroupOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: StreamGroupStatusReason, location_name: "StatusReason"))
     CreateStreamGroupOutput.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedAt"))
     CreateStreamGroupOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    CreateStreamGroupOutput.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiresAt"))
     CreateStreamGroupOutput.add_member(:associated_applications, Shapes::ShapeRef.new(shape: ArnList, location_name: "AssociatedApplications"))
     CreateStreamGroupOutput.struct_class = Types::CreateStreamGroupOutput
 
@@ -293,6 +294,7 @@ module Aws::GameLiftStreams
     GetStreamGroupOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: StreamGroupStatusReason, location_name: "StatusReason"))
     GetStreamGroupOutput.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedAt"))
     GetStreamGroupOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    GetStreamGroupOutput.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiresAt"))
     GetStreamGroupOutput.add_member(:associated_applications, Shapes::ShapeRef.new(shape: ArnList, location_name: "AssociatedApplications"))
     GetStreamGroupOutput.struct_class = Types::GetStreamGroupOutput
 
@@ -456,6 +458,7 @@ module Aws::GameLiftStreams
     StreamGroupSummary.add_member(:status, Shapes::ShapeRef.new(shape: StreamGroupStatus, location_name: "Status"))
     StreamGroupSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     StreamGroupSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedAt"))
+    StreamGroupSummary.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiresAt"))
     StreamGroupSummary.struct_class = Types::StreamGroupSummary
 
     StreamGroupSummaryList.member = Shapes::ShapeRef.new(shape: StreamGroupSummary)
@@ -535,6 +538,7 @@ module Aws::GameLiftStreams
     UpdateStreamGroupOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: StreamGroupStatusReason, location_name: "StatusReason"))
     UpdateStreamGroupOutput.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedAt"))
     UpdateStreamGroupOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    UpdateStreamGroupOutput.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpiresAt"))
     UpdateStreamGroupOutput.add_member(:associated_applications, Shapes::ShapeRef.new(shape: ArnList, location_name: "AssociatedApplications"))
     UpdateStreamGroupOutput.struct_class = Types::UpdateStreamGroupOutput
 

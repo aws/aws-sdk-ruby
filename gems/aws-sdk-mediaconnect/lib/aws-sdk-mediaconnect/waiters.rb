@@ -67,11 +67,18 @@ module Aws::MediaConnect
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name  | params                 | :delay   | :max_attempts |
-  # | ------------ | ---------------------- | -------- | ------------- |
-  # | flow_active  | {Client#describe_flow} | 3        | 40            |
-  # | flow_deleted | {Client#describe_flow} | 3        | 40            |
-  # | flow_standby | {Client#describe_flow} | 3        | 40            |
+  # | waiter_name    | params                     | :delay   | :max_attempts |
+  # | -------------- | -------------------------- | -------- | ------------- |
+  # | flow_active    | {Client#describe_flow}     | 3        | 40            |
+  # | flow_deleted   | {Client#describe_flow}     | 3        | 40            |
+  # | flow_standby   | {Client#describe_flow}     | 3        | 40            |
+  # | input_active   | {Client#get_router_input}  | 3        | 40            |
+  # | input_deleted  | {Client#get_router_input}  | 3        | 40            |
+  # | input_standby  | {Client#get_router_input}  | 3        | 40            |
+  # | output_active  | {Client#get_router_output} | 3        | 40            |
+  # | output_deleted | {Client#get_router_output} | 3        | 40            |
+  # | output_routed  | {Client#get_router_output} | 3        | 40            |
+  # | output_standby | {Client#get_router_output} | 3        | 40            |
   #
   module Waiters
 
@@ -260,6 +267,437 @@ module Aws::MediaConnect
 
       # @option (see Client#describe_flow)
       # @return (see Client#describe_flow)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until the Input is ACTIVE
+    class InputActive
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_router_input,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "router_input.state",
+                "state" => "success",
+                "expected" => "ACTIVE"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "router_input.state",
+                "state" => "retry",
+                "expected" => "STARTING"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "router_input.state",
+                "state" => "retry",
+                "expected" => "UPDATING"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "InternalServerErrorException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "ServiceUnavailableException"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "router_input.state",
+                "state" => "failure",
+                "expected" => "ERROR"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_router_input)
+      # @return (see Client#get_router_input)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until the Input is deleted
+    class InputDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_router_input,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "router_input.state",
+                "state" => "retry",
+                "expected" => "DELETING"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "InternalServerErrorException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "ServiceUnavailableException"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "router_input.state",
+                "state" => "failure",
+                "expected" => "ERROR"
+              },
+              {
+                "matcher" => "error",
+                "state" => "success",
+                "expected" => "NotFoundException"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_router_input)
+      # @return (see Client#get_router_input)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until the Input is STANDBY
+    class InputStandby
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_router_input,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "router_input.state",
+                "state" => "success",
+                "expected" => "STANDBY"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "router_input.state",
+                "state" => "retry",
+                "expected" => "STOPPING"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "InternalServerErrorException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "ServiceUnavailableException"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "router_input.state",
+                "state" => "failure",
+                "expected" => "ERROR"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_router_input)
+      # @return (see Client#get_router_input)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until the Output is ACTIVE
+    class OutputActive
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_router_output,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "router_output.state",
+                "state" => "success",
+                "expected" => "ACTIVE"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "router_output.state",
+                "state" => "retry",
+                "expected" => "STARTING"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "router_output.state",
+                "state" => "retry",
+                "expected" => "UPDATING"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "InternalServerErrorException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "ServiceUnavailableException"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "router_output.state",
+                "state" => "failure",
+                "expected" => "ERROR"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_router_output)
+      # @return (see Client#get_router_output)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until the Output is deleted
+    class OutputDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_router_output,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "router_output.state",
+                "state" => "retry",
+                "expected" => "DELETING"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "InternalServerErrorException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "ServiceUnavailableException"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "router_output.state",
+                "state" => "failure",
+                "expected" => "ERROR"
+              },
+              {
+                "matcher" => "error",
+                "state" => "success",
+                "expected" => "NotFoundException"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_router_output)
+      # @return (see Client#get_router_output)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until the Output is ROUTED
+    class OutputRouted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_router_output,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "router_output.routed_state",
+                "state" => "success",
+                "expected" => "ROUTED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "router_output.routed_state",
+                "state" => "retry",
+                "expected" => "ROUTING"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "InternalServerErrorException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "ServiceUnavailableException"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_router_output)
+      # @return (see Client#get_router_output)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until the Output is STANDBY
+    class OutputStandby
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_router_output,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "router_output.state",
+                "state" => "success",
+                "expected" => "STANDBY"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "router_output.state",
+                "state" => "retry",
+                "expected" => "STOPPING"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "InternalServerErrorException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "ServiceUnavailableException"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "router_output.state",
+                "state" => "failure",
+                "expected" => "ERROR"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_router_output)
+      # @return (see Client#get_router_output)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

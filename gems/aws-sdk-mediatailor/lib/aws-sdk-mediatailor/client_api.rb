@@ -177,6 +177,7 @@ module Aws::MediaTailor
     TimeShiftConfiguration = Shapes::StructureShape.new(name: 'TimeShiftConfiguration')
     TimeSignalMessage = Shapes::StructureShape.new(name: 'TimeSignalMessage')
     TrafficShapingRetrievalWindow = Shapes::StructureShape.new(name: 'TrafficShapingRetrievalWindow')
+    TrafficShapingTpsConfiguration = Shapes::StructureShape.new(name: 'TrafficShapingTpsConfiguration')
     TrafficShapingType = Shapes::StringShape.new(name: 'TrafficShapingType')
     Transition = Shapes::StructureShape.new(name: 'Transition')
     Type = Shapes::StringShape.new(name: 'Type')
@@ -805,6 +806,7 @@ module Aws::MediaTailor
     PrefetchRetrieval.add_member(:start_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "StartTime"))
     PrefetchRetrieval.add_member(:traffic_shaping_type, Shapes::ShapeRef.new(shape: TrafficShapingType, location_name: "TrafficShapingType"))
     PrefetchRetrieval.add_member(:traffic_shaping_retrieval_window, Shapes::ShapeRef.new(shape: TrafficShapingRetrievalWindow, location_name: "TrafficShapingRetrievalWindow"))
+    PrefetchRetrieval.add_member(:traffic_shaping_tps_configuration, Shapes::ShapeRef.new(shape: TrafficShapingTpsConfiguration, location_name: "TrafficShapingTpsConfiguration"))
     PrefetchRetrieval.struct_class = Types::PrefetchRetrieval
 
     PrefetchSchedule.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Arn"))
@@ -878,6 +880,7 @@ module Aws::MediaTailor
     RecurringRetrieval.add_member(:delay_after_avail_end_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "DelayAfterAvailEndSeconds"))
     RecurringRetrieval.add_member(:traffic_shaping_type, Shapes::ShapeRef.new(shape: TrafficShapingType, location_name: "TrafficShapingType"))
     RecurringRetrieval.add_member(:traffic_shaping_retrieval_window, Shapes::ShapeRef.new(shape: TrafficShapingRetrievalWindow, location_name: "TrafficShapingRetrievalWindow"))
+    RecurringRetrieval.add_member(:traffic_shaping_tps_configuration, Shapes::ShapeRef.new(shape: TrafficShapingTpsConfiguration, location_name: "TrafficShapingTpsConfiguration"))
     RecurringRetrieval.struct_class = Types::RecurringRetrieval
 
     RequestOutputItem.add_member(:dash_playlist_settings, Shapes::ShapeRef.new(shape: DashPlaylistSettings, location_name: "DashPlaylistSettings"))
@@ -984,6 +987,10 @@ module Aws::MediaTailor
 
     TrafficShapingRetrievalWindow.add_member(:retrieval_window_duration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "RetrievalWindowDurationSeconds"))
     TrafficShapingRetrievalWindow.struct_class = Types::TrafficShapingRetrievalWindow
+
+    TrafficShapingTpsConfiguration.add_member(:peak_tps, Shapes::ShapeRef.new(shape: __integer, location_name: "PeakTps"))
+    TrafficShapingTpsConfiguration.add_member(:peak_concurrent_users, Shapes::ShapeRef.new(shape: __integer, location_name: "PeakConcurrentUsers"))
+    TrafficShapingTpsConfiguration.struct_class = Types::TrafficShapingTpsConfiguration
 
     Transition.add_member(:duration_millis, Shapes::ShapeRef.new(shape: __long, location_name: "DurationMillis"))
     Transition.add_member(:relative_position, Shapes::ShapeRef.new(shape: RelativePosition, required: true, location_name: "RelativePosition"))

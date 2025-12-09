@@ -360,7 +360,7 @@ module Aws::WAFV2
     class DeleteLoggingConfigurationRequest
       attr_accessor resource_arn: ::String
       attr_accessor log_type: ("WAF_LOGS")
-      attr_accessor log_scope: ("CUSTOMER" | "SECURITY_LAKE")
+      attr_accessor log_scope: ("CUSTOMER" | "SECURITY_LAKE" | "CLOUDWATCH_TELEMETRY_RULE_MANAGED")
       SENSITIVE: []
     end
 
@@ -445,6 +445,12 @@ module Aws::WAFV2
       attr_accessor label_namespace: ::String
       attr_accessor available_labels: ::Array[Types::LabelSummary]
       attr_accessor consumed_labels: ::Array[Types::LabelSummary]
+      SENSITIVE: []
+    end
+
+    class DisallowedFeature
+      attr_accessor feature: ::String
+      attr_accessor required_pricing_plan: ::String
       SENSITIVE: []
     end
 
@@ -563,7 +569,7 @@ module Aws::WAFV2
     class GetLoggingConfigurationRequest
       attr_accessor resource_arn: ::String
       attr_accessor log_type: ("WAF_LOGS")
-      attr_accessor log_scope: ("CUSTOMER" | "SECURITY_LAKE")
+      attr_accessor log_scope: ("CUSTOMER" | "SECURITY_LAKE" | "CLOUDWATCH_TELEMETRY_RULE_MANAGED")
       SENSITIVE: []
     end
 
@@ -866,7 +872,7 @@ module Aws::WAFV2
       attr_accessor scope: ("CLOUDFRONT" | "REGIONAL")
       attr_accessor next_marker: ::String
       attr_accessor limit: ::Integer
-      attr_accessor log_scope: ("CUSTOMER" | "SECURITY_LAKE")
+      attr_accessor log_scope: ("CUSTOMER" | "SECURITY_LAKE" | "CLOUDWATCH_TELEMETRY_RULE_MANAGED")
       SENSITIVE: []
     end
 
@@ -972,7 +978,7 @@ module Aws::WAFV2
       attr_accessor managed_by_firewall_manager: bool
       attr_accessor logging_filter: Types::LoggingFilter
       attr_accessor log_type: ("WAF_LOGS")
-      attr_accessor log_scope: ("CUSTOMER" | "SECURITY_LAKE")
+      attr_accessor log_scope: ("CUSTOMER" | "SECURITY_LAKE" | "CLOUDWATCH_TELEMETRY_RULE_MANAGED")
       SENSITIVE: []
     end
 
@@ -1630,6 +1636,12 @@ module Aws::WAFV2
 
     class WAFExpiredManagedRuleGroupVersionException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WAFFeatureNotIncludedInPricingPlanException
+      attr_accessor message: ::String
+      attr_accessor disallowed_features: ::Array[Types::DisallowedFeature]
       SENSITIVE: []
     end
 

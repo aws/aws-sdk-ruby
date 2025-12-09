@@ -98,34 +98,38 @@ module Aws::PaymentCryptography
       include Aws::Structure
     end
 
-    # Metadata used in generating the CSR
+    # The metadata used to create the certificate signing request.
     #
     # @!attribute [rw] common_name
-    #   Common Name to be used in the certificate signing request
+    #   The name you provide to create the certificate signing request.
     #   @return [String]
     #
     # @!attribute [rw] organization_unit
-    #   Organization Unit to be used in the certificate signing request
+    #   The organization unit you provide to create the certificate signing
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] organization
-    #   Organization to be used in the certificate signing request
+    #   The organization you provide to create the certificate signing
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] city
-    #   City to be used in the certificate signing request
+    #   The city you provide to create the certificate signing request.
     #   @return [String]
     #
     # @!attribute [rw] country
-    #   Country to be used in the certificate signing request
+    #   The city you provide to create the certificate signing request.
     #   @return [String]
     #
     # @!attribute [rw] state_or_province
-    #   State Or Province to be used in the certificate signing request
+    #   The state or province you provide to create the certificate signing
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] email_address
-    #   Email to be used in the certificate signing request
+    #   The email address you provide to create the certificate signing
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/CertificateSubjectType AWS API Documentation
@@ -413,10 +417,15 @@ module Aws::PaymentCryptography
     #
     # @!attribute [rw] replication_regions
     #   The list of Amazon Web Services Regions to enable as default
-    #   replication regions for the account.
+    #   replication regions for the Amazon Web Services account for
+    #   [Multi-Region key replication][1].
     #
     #   New keys created in this account will automatically be replicated to
     #   these regions unless explicitly overridden during key creation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/EnableDefaultKeyReplicationRegionsInput AWS API Documentation
@@ -709,7 +718,7 @@ module Aws::PaymentCryptography
     #   @return [String]
     #
     # @!attribute [rw] signing_key_certificate
-    #   Certificate used for signing the export key
+    #   The certificate used to sign the TR-34 key block.
     #   @return [String]
     #
     # @!attribute [rw] key_block_format
@@ -772,11 +781,11 @@ module Aws::PaymentCryptography
     #   @return [String]
     #
     # @!attribute [rw] signing_algorithm
-    #   Algorithm used to generate the certificate signing request
+    #   The cryptographic algorithm used to sign your CSR.
     #   @return [String]
     #
     # @!attribute [rw] certificate_subject
-    #   Certificate subject data
+    #   The metadata used to create the CSR.
     #   @return [Types::CertificateSubjectType]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/GetCertificateSigningRequestInput AWS API Documentation
@@ -790,7 +799,8 @@ module Aws::PaymentCryptography
     end
 
     # @!attribute [rw] certificate_signing_request
-    #   Certificate signing request
+    #   The certificate signing request generated using the key pair
+    #   associated with the key identifier.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/GetCertificateSigningRequestOutput AWS API Documentation
@@ -1300,7 +1310,7 @@ module Aws::PaymentCryptography
     #   @return [String]
     #
     # @!attribute [rw] wrapping_key_certificate
-    #   Key Identifier used for unwrapping the import key
+    #   The certificate used to wrap the TR-34 key block.
     #   @return [String]
     #
     # @!attribute [rw] wrapped_key_block
@@ -1437,14 +1447,19 @@ module Aws::PaymentCryptography
     #   @return [String]
     #
     # @!attribute [rw] multi_region_key_type
-    #   Indicates whether this key is a multi-region key and its role in the
-    #   multi-region key hierarchy.
+    #   Indicates whether this key is a Multi-Region key and its role in the
+    #   Multi-Region key hierarchy.
     #
-    #   Multi-region keys allow the same key material to be used across
-    #   multiple Amazon Web Services Regions. This field specifies whether
-    #   the key is a primary key (which can be replicated to other regions)
-    #   or a replica key (which is a copy of a primary key in another
-    #   region).
+    #   Multi-Region replication keys allow the same key material to be used
+    #   across multiple Amazon Web Services Regions. This field specifies
+    #   whether the key is a Primary Region key (PRK) (which can be
+    #   replicated to other Amazon Web Services Regions) or a Replica Region
+    #   key (RRK) (which is a copy of a PRK in another Region). For more
+    #   information, see [Multi-Region key replication][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
     #   @return [String]
     #
     # @!attribute [rw] primary_region
@@ -1458,7 +1473,7 @@ module Aws::PaymentCryptography
     #
     # @!attribute [rw] replication_status
     #   Information about the replication status of the key across different
-    #   regions.
+    #   Amazon Web Services Regions.
     #
     #   This field provides details about the current state of key
     #   replication, including any status messages or operational
@@ -1468,12 +1483,17 @@ module Aws::PaymentCryptography
     #
     # @!attribute [rw] using_default_replication_regions
     #   Indicates whether this key is using the account's default
-    #   replication regions configuration.
+    #   replication regions configuration for [Multi-Region key
+    #   replication][1].
     #
     #   When set to `true`, the key automatically replicates to the regions
     #   specified in the account's default replication settings. When set
     #   to `false`, the key has a custom replication configuration that
     #   overrides the account defaults.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/Key AWS API Documentation
@@ -1700,14 +1720,19 @@ module Aws::PaymentCryptography
     #   @return [Boolean]
     #
     # @!attribute [rw] multi_region_key_type
-    #   Indicates whether this key is a multi-region key and its role in the
-    #   multi-region key hierarchy.
+    #   Indicates whether this key is a Multi-Region key and its role in the
+    #   Multi-Region key hierarchy.
     #
-    #   Multi-region keys allow the same key material to be used across
-    #   multiple Amazon Web Services Regions. This field specifies whether
-    #   the key is a primary key (which can be replicated to other regions)
-    #   or a replica key (which is a copy of a primary key in another
-    #   region).
+    #   Multi-Region replication keys allow the same key material to be used
+    #   across multiple Amazon Web Services Regions. This field specifies
+    #   whether the key is a Primary Region key (PRK) (which can be
+    #   replicated to other Amazon Web Services Regions) or a Replica Region
+    #   key (RRK) (which is a copy of a PRK in another Region). For more
+    #   information, see [Multi-Region key replication][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
     #   @return [String]
     #
     # @!attribute [rw] primary_region
@@ -1930,19 +1955,24 @@ module Aws::PaymentCryptography
     end
 
     # Represents the replication status information for a key in a
-    # replication region.
+    # replication region for [Multi-Region key replication][1].
     #
     # This structure contains details about the current state of key
     # replication, including any status messages and operational information
     # about the replication process.
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html
+    #
     # @!attribute [rw] status
-    #   The current status of key replication in this region.
+    #   The current status of key replication in this Amazon Web Services
+    #   Region.
     #
     #   This field indicates whether the key replication is in progress,
     #   completed successfully, or has encountered an error. Possible values
-    #   include states such as SYNCRHONIZED, IN\_PROGRESS,
-    #   DELETE\_IN\_PROGRESS, or FAILED. This provides visibility into the
+    #   include states such as `SYNCRHONIZED`, `IN_PROGRESS`,
+    #   `DELETE_IN_PROGRESS`, or `FAILED`. This provides visibility into the
     #   replication process for monitoring and troubleshooting purposes.
     #   @return [String]
     #

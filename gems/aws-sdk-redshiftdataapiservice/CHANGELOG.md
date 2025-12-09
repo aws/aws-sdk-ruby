@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.65.0 (2025-11-20)
+------------------
+
+* Feature - Increasing the length limit of Statement Name from 500 to 2048.
+
+1.64.0 (2025-10-22)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.63.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.62.0 (2025-08-26)
 ------------------
 

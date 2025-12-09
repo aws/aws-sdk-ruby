@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.227.0 (2025-12-01)
+------------------
+
+* Feature - This is a combined re:Invent release for Amazon Connect.
+
+1.226.0 (2025-11-21)
+------------------
+
+* Feature - New APIs to support aliases and versions for ContactFlowModule. Updated ContactFlowModule APIs to support custom blocks.
+
+1.225.0 (2025-11-20)
+------------------
+
+* Feature - Add optional ability to exclude users from send notification actions for Contact Lens Rules.
+
+1.224.0 (2025-11-18)
+------------------
+
+* Feature - This release added support for ring timer configuration for campaign calls.
+
+1.223.0 (2025-11-12)
+------------------
+
+* Feature - Updated Authentication Profile APIs to add support for automatic logout on user inactivity
+
+1.222.0 (2025-11-06)
+------------------
+
+* Feature - Added support for Conditional Questions in Evaluation Forms. Introduced Auto Evaluation capability for Evaluation Forms and Contact Evaluations. Added new API operations: SearchEvaluationForms and SearchContactEvaluations.
+
+1.221.0 (2025-10-22)
+------------------
+
+* Feature - This release added support for email address alias configuration and outbound campaign preview mode.
+
+1.220.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.219.0 (2025-10-14)
+------------------
+
+* Feature - SDK release for TaskTemplateInfo in Contact for DescribeContact response.
+
+1.218.0 (2025-09-26)
+------------------
+
+* Feature - Adds supports for manual contact picking (WorkList) operations on Routing Profiles, Agent Management and SearchContacts APIs.
+
 1.217.0 (2025-09-19)
 ------------------
 

@@ -3032,6 +3032,11 @@ module Aws::SSM
     class ModifyDocumentPermissionResponse < Aws::EmptyStructure
     end
 
+    class NoLongerSupportedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class Node
       attr_accessor capture_time: ::Time
       attr_accessor id: ::String

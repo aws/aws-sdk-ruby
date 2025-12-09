@@ -140,7 +140,8 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InternalServerException"},
         {"shape":"AccessDeniedException"}
-      ]
+      ],
+      "readonly":true
     },
     "GetComputeNodeGroup":{
       "name":"GetComputeNodeGroup",
@@ -157,7 +158,8 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InternalServerException"},
         {"shape":"AccessDeniedException"}
-      ]
+      ],
+      "readonly":true
     },
     "GetQueue":{
       "name":"GetQueue",
@@ -174,7 +176,8 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InternalServerException"},
         {"shape":"AccessDeniedException"}
-      ]
+      ],
+      "readonly":true
     },
     "ListClusters":{
       "name":"ListClusters",
@@ -191,7 +194,8 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InternalServerException"},
         {"shape":"AccessDeniedException"}
-      ]
+      ],
+      "readonly":true
     },
     "ListComputeNodeGroups":{
       "name":"ListComputeNodeGroups",
@@ -208,7 +212,8 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InternalServerException"},
         {"shape":"AccessDeniedException"}
-      ]
+      ],
+      "readonly":true
     },
     "ListQueues":{
       "name":"ListQueues",
@@ -225,7 +230,8 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InternalServerException"},
         {"shape":"AccessDeniedException"}
-      ]
+      ],
+      "readonly":true
     },
     "ListTagsForResource":{
       "name":"ListTagsForResource",
@@ -237,7 +243,8 @@
       "output":{"shape":"ListTagsForResourceResponse"},
       "errors":[
         {"shape":"ResourceNotFoundException"}
-      ]
+      ],
+      "readonly":true
     },
     "RegisterComputeNodeGroupInstance":{
       "name":"RegisterComputeNodeGroupInstance",
@@ -259,6 +266,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"TagResourceRequest"},
+      "output":{"shape":"TagResourceResponse"},
       "errors":[
         {"shape":"ServiceQuotaExceededException"},
         {"shape":"ResourceNotFoundException"}
@@ -272,8 +280,27 @@
         "requestUri":"/"
       },
       "input":{"shape":"UntagResourceRequest"},
+      "output":{"shape":"UntagResourceResponse"},
       "errors":[
         {"shape":"ResourceNotFoundException"}
+      ],
+      "idempotent":true
+    },
+    "UpdateCluster":{
+      "name":"UpdateCluster",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateClusterRequest"},
+      "output":{"shape":"UpdateClusterResponse"},
+      "errors":[
+        {"shape":"ThrottlingException"},
+        {"shape":"ValidationException"},
+        {"shape":"ConflictException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerException"},
+        {"shape":"AccessDeniedException"}
       ],
       "idempotent":true
     },
@@ -329,8 +356,8 @@
       "type":"structure",
       "required":["mode"],
       "members":{
-        "mode":{"shape":"AccountingMode"},
-        "defaultPurgeTimeInDays":{"shape":"AccountingDefaultPurgeTimeInDaysInteger"}
+        "defaultPurgeTimeInDays":{"shape":"AccountingDefaultPurgeTimeInDaysInteger"},
+        "mode":{"shape":"AccountingMode"}
       }
     },
     "AccountingDefaultPurgeTimeInDaysInteger":{
@@ -350,8 +377,8 @@
       "type":"structure",
       "required":["mode"],
       "members":{
-        "mode":{"shape":"AccountingMode"},
-        "defaultPurgeTimeInDays":{"shape":"AccountingRequestDefaultPurgeTimeInDaysInteger"}
+        "defaultPurgeTimeInDays":{"shape":"AccountingRequestDefaultPurgeTimeInDaysInteger"},
+        "mode":{"shape":"AccountingMode"}
       }
     },
     "AccountingRequestDefaultPurgeTimeInDaysInteger":{
@@ -424,7 +451,9 @@
         "scaleDownIdleTimeInSeconds":{"shape":"ClusterSlurmConfigurationScaleDownIdleTimeInSecondsInteger"},
         "slurmCustomSettings":{"shape":"SlurmCustomSettings"},
         "authKey":{"shape":"SlurmAuthKey"},
-        "accounting":{"shape":"Accounting"}
+        "jwtAuth":{"shape":"JwtAuth"},
+        "accounting":{"shape":"Accounting"},
+        "slurmRest":{"shape":"SlurmRest"}
       }
     },
     "ClusterSlurmConfigurationRequest":{
@@ -432,17 +461,20 @@
       "members":{
         "scaleDownIdleTimeInSeconds":{"shape":"ClusterSlurmConfigurationRequestScaleDownIdleTimeInSecondsInteger"},
         "slurmCustomSettings":{"shape":"SlurmCustomSettings"},
-        "accounting":{"shape":"AccountingRequest"}
+        "accounting":{"shape":"AccountingRequest"},
+        "slurmRest":{"shape":"SlurmRestRequest"}
       }
     },
     "ClusterSlurmConfigurationRequestScaleDownIdleTimeInSecondsInteger":{
       "type":"integer",
       "box":true,
+      "max":10000000,
       "min":1
     },
     "ClusterSlurmConfigurationScaleDownIdleTimeInSecondsInteger":{
       "type":"integer",
       "box":true,
+      "max":10000000,
       "min":1
     },
     "ClusterStatus":{
@@ -673,6 +705,7 @@
         "clusterIdentifier":{"shape":"ClusterIdentifier"},
         "queueName":{"shape":"QueueName"},
         "computeNodeGroupConfigurations":{"shape":"ComputeNodeGroupConfigurationList"},
+        "slurmConfiguration":{"shape":"QueueSlurmConfigurationRequest"},
         "clientToken":{
           "shape":"SBClientToken",
           "idempotencyToken":true
@@ -769,7 +802,8 @@
       "type":"string",
       "enum":[
         "SLURMCTLD",
-        "SLURMDBD"
+        "SLURMDBD",
+        "SLURMRESTD"
       ]
     },
     "Endpoints":{
@@ -861,6 +895,23 @@
       "exception":true,
       "fault":true,
       "retryable":{"throttling":false}
+    },
+    "JwtAuth":{
+      "type":"structure",
+      "members":{
+        "jwtKey":{"shape":"JwtKey"}
+      }
+    },
+    "JwtKey":{
+      "type":"structure",
+      "required":[
+        "secretArn",
+        "secretVersion"
+      ],
+      "members":{
+        "secretArn":{"shape":"String"},
+        "secretVersion":{"shape":"String"}
+      }
     },
     "ListClustersRequest":{
       "type":"structure",
@@ -982,6 +1033,7 @@
         "modifiedAt":{"shape":"SyntheticTimestamp_date_time"},
         "status":{"shape":"QueueStatus"},
         "computeNodeGroupConfigurations":{"shape":"ComputeNodeGroupConfigurationList"},
+        "slurmConfiguration":{"shape":"QueueSlurmConfiguration"},
         "errorInfo":{"shape":"ErrorInfoList"}
       }
     },
@@ -998,6 +1050,18 @@
       "max":25,
       "min":3,
       "pattern":"(?!pcs_)^[A-Za-z][A-Za-z0-9-]+"
+    },
+    "QueueSlurmConfiguration":{
+      "type":"structure",
+      "members":{
+        "slurmCustomSettings":{"shape":"SlurmCustomSettings"}
+      }
+    },
+    "QueueSlurmConfigurationRequest":{
+      "type":"structure",
+      "members":{
+        "slurmCustomSettings":{"shape":"SlurmCustomSettings"}
+      }
     },
     "QueueStatus":{
       "type":"string",
@@ -1218,6 +1282,27 @@
       "type":"list",
       "member":{"shape":"SlurmCustomSetting"}
     },
+    "SlurmRest":{
+      "type":"structure",
+      "required":["mode"],
+      "members":{
+        "mode":{"shape":"SlurmRestMode"}
+      }
+    },
+    "SlurmRestMode":{
+      "type":"string",
+      "enum":[
+        "STANDARD",
+        "NONE"
+      ]
+    },
+    "SlurmRestRequest":{
+      "type":"structure",
+      "required":["mode"],
+      "members":{
+        "mode":{"shape":"SlurmRestMode"}
+      }
+    },
     "SpotAllocationStrategy":{
       "type":"string",
       "enum":[
@@ -1272,6 +1357,10 @@
         "tags":{"shape":"RequestTagMap"}
       }
     },
+    "TagResourceResponse":{
+      "type":"structure",
+      "members":{}
+    },
     "TagValue":{
       "type":"string",
       "max":256,
@@ -1297,6 +1386,56 @@
         "resourceArn":{"shape":"Arn"},
         "tagKeys":{"shape":"TagKeys"}
       }
+    },
+    "UntagResourceResponse":{
+      "type":"structure",
+      "members":{}
+    },
+    "UpdateAccountingRequest":{
+      "type":"structure",
+      "members":{
+        "defaultPurgeTimeInDays":{"shape":"UpdateAccountingRequestDefaultPurgeTimeInDaysInteger"},
+        "mode":{"shape":"AccountingMode"}
+      }
+    },
+    "UpdateAccountingRequestDefaultPurgeTimeInDaysInteger":{
+      "type":"integer",
+      "box":true,
+      "max":10000,
+      "min":-1
+    },
+    "UpdateClusterRequest":{
+      "type":"structure",
+      "required":["clusterIdentifier"],
+      "members":{
+        "clusterIdentifier":{"shape":"ClusterIdentifier"},
+        "clientToken":{
+          "shape":"SBClientToken",
+          "idempotencyToken":true
+        },
+        "slurmConfiguration":{"shape":"UpdateClusterSlurmConfigurationRequest"}
+      }
+    },
+    "UpdateClusterResponse":{
+      "type":"structure",
+      "members":{
+        "cluster":{"shape":"Cluster"}
+      }
+    },
+    "UpdateClusterSlurmConfigurationRequest":{
+      "type":"structure",
+      "members":{
+        "scaleDownIdleTimeInSeconds":{"shape":"UpdateClusterSlurmConfigurationRequestScaleDownIdleTimeInSecondsInteger"},
+        "slurmCustomSettings":{"shape":"SlurmCustomSettings"},
+        "accounting":{"shape":"UpdateAccountingRequest"},
+        "slurmRest":{"shape":"UpdateSlurmRestRequest"}
+      }
+    },
+    "UpdateClusterSlurmConfigurationRequestScaleDownIdleTimeInSecondsInteger":{
+      "type":"integer",
+      "box":true,
+      "max":10000000,
+      "min":1
     },
     "UpdateComputeNodeGroupRequest":{
       "type":"structure",
@@ -1343,6 +1482,7 @@
         "clusterIdentifier":{"shape":"ClusterIdentifier"},
         "queueIdentifier":{"shape":"QueueIdentifier"},
         "computeNodeGroupConfigurations":{"shape":"ComputeNodeGroupConfigurationList"},
+        "slurmConfiguration":{"shape":"UpdateQueueSlurmConfigurationRequest"},
         "clientToken":{
           "shape":"SBClientToken",
           "idempotencyToken":true
@@ -1353,6 +1493,18 @@
       "type":"structure",
       "members":{
         "queue":{"shape":"Queue"}
+      }
+    },
+    "UpdateQueueSlurmConfigurationRequest":{
+      "type":"structure",
+      "members":{
+        "slurmCustomSettings":{"shape":"SlurmCustomSettings"}
+      }
+    },
+    "UpdateSlurmRestRequest":{
+      "type":"structure",
+      "members":{
+        "mode":{"shape":"SlurmRestMode"}
       }
     },
     "ValidationException":{

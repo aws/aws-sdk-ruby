@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.302.0 (2025-12-08)
+------------------
+
+* Feature - Adding support for tagging RDS Instance/Cluster Automated Backups
+
+1.301.0 (2025-12-02)
+------------------
+
+* Feature - RDS Oracle and SQL Server: Add support for adding, modifying, and removing additional storage volumes, offering up to 256TiB storage; RDS SQL Server: Support Developer Edition via custom engine versions for development and testing purposes; M7i/R7i instances with Optimize CPU for cost savings.
+
+1.300.0 (2025-11-21)
+------------------
+
+* Feature - Add support for Upgrade Rollout Order
+
+1.299.0 (2025-11-20)
+------------------
+
+* Feature - Add support for VPC Encryption Controls.
+
+1.298.0 (2025-11-13)
+------------------
+
+* Feature - Updated endpoint and service metadata
+
+1.297.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.296.0 (2025-10-10)
+------------------
+
+* Feature - Updated the text in the Important section of the ModifyDBClusterParameterGroup page.
+
+1.295.0 (2025-10-06)
+------------------
+
+* Feature - Documentation updates to the CreateDBClusterMessage$PubliclyAccessible and CreateDBInstanceMessage$PubliclyAccessible properties.
+
+1.294.0 (2025-09-30)
+------------------
+
+* Feature - Enhanced RDS error handling: Added DBProxyEndpointNotFoundFault, DBShardGroupNotFoundFault, KMSKeyNotAccessibleFault for snapshots/restores/backups, NetworkTypeNotSupported, StorageTypeNotSupportedFault for restores, and granular state validation faults. Changed DBInstanceNotReadyFault to HTTP 400.
+
 1.293.0 (2025-09-11)
 ------------------
 

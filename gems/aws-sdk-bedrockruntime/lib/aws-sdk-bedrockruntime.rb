@@ -27,6 +27,22 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:bedrockruntime)
 #
 # See {Client} for more information.
 #
+# # Async Client
+#
+# The {AsyncClient} class provides one asynchronous method for each API operation.
+# Operation methods each accept a hash of request parameters and return an async
+# response. For streaming operations, you can signal input events and register
+# output event callbacks before waiting on the response.
+#
+#     bedrock_runtime = Aws::BedrockRuntime::AsyncClient.new
+#     resp = bedrock_runtime.apply_guardrail(
+#       # params and input stream
+#      ) do |output_stream|
+#       # register callbacks for events
+#     end
+#
+# See {AsyncClient} for more information.
+#
 # # Errors
 #
 # Errors returned from Amazon Bedrock Runtime are defined in the
@@ -57,7 +73,7 @@ module Aws::BedrockRuntime
   autoload :AsyncClient, 'aws-sdk-bedrockruntime/async_client'
   autoload :EventStreams, 'aws-sdk-bedrockruntime/event_streams'
 
-  GEM_VERSION = '1.59.0'
+  GEM_VERSION = '1.68.0'
 
 end
 

@@ -49,12 +49,13 @@ module Aws::ControlTower
   end
   autoload :Client, 'aws-sdk-controltower/client'
   autoload :Errors, 'aws-sdk-controltower/errors'
+  autoload :Waiters, 'aws-sdk-controltower/waiters'
   autoload :Resource, 'aws-sdk-controltower/resource'
   autoload :EndpointParameters, 'aws-sdk-controltower/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-controltower/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-controltower/endpoints'
 
-  GEM_VERSION = '1.49.0'
+  GEM_VERSION = '1.53.0'
 
 end
 

@@ -73,6 +73,7 @@ module Aws::States
     EvaluationFailedEventDetails = Shapes::StructureShape.new(name: 'EvaluationFailedEventDetails')
     EvaluationFailureLocation = Shapes::StringShape.new(name: 'EvaluationFailureLocation')
     EventId = Shapes::IntegerShape.new(name: 'EventId')
+    ExceptionHandlerIndex = Shapes::IntegerShape.new(name: 'ExceptionHandlerIndex')
     ExecutionAbortedEventDetails = Shapes::StructureShape.new(name: 'ExecutionAbortedEventDetails')
     ExecutionAlreadyExists = Shapes::StructureShape.new(name: 'ExecutionAlreadyExists')
     ExecutionDoesNotExist = Shapes::StructureShape.new(name: 'ExecutionDoesNotExist')
@@ -109,7 +110,11 @@ module Aws::States
     InspectionData = Shapes::StructureShape.new(name: 'InspectionData')
     InspectionDataRequest = Shapes::StructureShape.new(name: 'InspectionDataRequest')
     InspectionDataResponse = Shapes::StructureShape.new(name: 'InspectionDataResponse')
+    InspectionErrorDetails = Shapes::StructureShape.new(name: 'InspectionErrorDetails')
     InspectionLevel = Shapes::StringShape.new(name: 'InspectionLevel')
+    InspectionMaxConcurrency = Shapes::IntegerShape.new(name: 'InspectionMaxConcurrency')
+    InspectionToleratedFailureCount = Shapes::IntegerShape.new(name: 'InspectionToleratedFailureCount')
+    InspectionToleratedFailurePercentage = Shapes::FloatShape.new(name: 'InspectionToleratedFailurePercentage')
     InvalidArn = Shapes::StructureShape.new(name: 'InvalidArn')
     InvalidDefinition = Shapes::StructureShape.new(name: 'InvalidDefinition')
     InvalidEncryptionConfiguration = Shapes::StructureShape.new(name: 'InvalidEncryptionConfiguration')
@@ -153,6 +158,7 @@ module Aws::States
     LongArn = Shapes::StringShape.new(name: 'LongArn')
     LongObject = Shapes::IntegerShape.new(name: 'LongObject')
     MapIterationEventDetails = Shapes::StructureShape.new(name: 'MapIterationEventDetails')
+    MapIterationFailureCount = Shapes::IntegerShape.new(name: 'MapIterationFailureCount')
     MapRunExecutionCounts = Shapes::StructureShape.new(name: 'MapRunExecutionCounts')
     MapRunFailedEventDetails = Shapes::StructureShape.new(name: 'MapRunFailedEventDetails')
     MapRunItemCounts = Shapes::StructureShape.new(name: 'MapRunItemCounts')
@@ -165,6 +171,9 @@ module Aws::States
     MapStateStartedEventDetails = Shapes::StructureShape.new(name: 'MapStateStartedEventDetails')
     MaxConcurrency = Shapes::IntegerShape.new(name: 'MaxConcurrency')
     MissingRequiredParameter = Shapes::StructureShape.new(name: 'MissingRequiredParameter')
+    MockErrorOutput = Shapes::StructureShape.new(name: 'MockErrorOutput')
+    MockInput = Shapes::StructureShape.new(name: 'MockInput')
+    MockResponseValidationMode = Shapes::StringShape.new(name: 'MockResponseValidationMode')
     Name = Shapes::StringShape.new(name: 'Name')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PageToken = Shapes::StringShape.new(name: 'PageToken')
@@ -175,6 +184,8 @@ module Aws::States
     RedriveExecutionInput = Shapes::StructureShape.new(name: 'RedriveExecutionInput')
     RedriveExecutionOutput = Shapes::StructureShape.new(name: 'RedriveExecutionOutput')
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
+    RetrierRetryCount = Shapes::IntegerShape.new(name: 'RetrierRetryCount')
+    RetryBackoffIntervalSeconds = Shapes::IntegerShape.new(name: 'RetryBackoffIntervalSeconds')
     RevealSecrets = Shapes::BooleanShape.new(name: 'RevealSecrets')
     ReverseOrder = Shapes::BooleanShape.new(name: 'ReverseOrder')
     RevisionId = Shapes::StringShape.new(name: 'RevisionId')
@@ -234,8 +245,10 @@ module Aws::States
     TaskTimedOutEventDetails = Shapes::StructureShape.new(name: 'TaskTimedOutEventDetails')
     TaskToken = Shapes::StringShape.new(name: 'TaskToken')
     TestExecutionStatus = Shapes::StringShape.new(name: 'TestExecutionStatus')
+    TestStateConfiguration = Shapes::StructureShape.new(name: 'TestStateConfiguration')
     TestStateInput = Shapes::StructureShape.new(name: 'TestStateInput')
     TestStateOutput = Shapes::StructureShape.new(name: 'TestStateOutput')
+    TestStateStateName = Shapes::StringShape.new(name: 'TestStateStateName')
     TimeoutInSeconds = Shapes::IntegerShape.new(name: 'TimeoutInSeconds')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     ToleratedFailureCount = Shapes::IntegerShape.new(name: 'ToleratedFailureCount')
@@ -638,6 +651,14 @@ module Aws::States
     InspectionData.add_member(:request, Shapes::ShapeRef.new(shape: InspectionDataRequest, location_name: "request"))
     InspectionData.add_member(:response, Shapes::ShapeRef.new(shape: InspectionDataResponse, location_name: "response"))
     InspectionData.add_member(:variables, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "variables"))
+    InspectionData.add_member(:error_details, Shapes::ShapeRef.new(shape: InspectionErrorDetails, location_name: "errorDetails"))
+    InspectionData.add_member(:after_items_path, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "afterItemsPath"))
+    InspectionData.add_member(:after_item_selector, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "afterItemSelector"))
+    InspectionData.add_member(:after_item_batcher, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "afterItemBatcher"))
+    InspectionData.add_member(:after_items_pointer, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "afterItemsPointer"))
+    InspectionData.add_member(:tolerated_failure_count, Shapes::ShapeRef.new(shape: InspectionToleratedFailureCount, location_name: "toleratedFailureCount", metadata: {"box" => true}))
+    InspectionData.add_member(:tolerated_failure_percentage, Shapes::ShapeRef.new(shape: InspectionToleratedFailurePercentage, location_name: "toleratedFailurePercentage", metadata: {"box" => true}))
+    InspectionData.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: InspectionMaxConcurrency, location_name: "maxConcurrency", metadata: {"box" => true}))
     InspectionData.struct_class = Types::InspectionData
 
     InspectionDataRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: HTTPProtocol, location_name: "protocol"))
@@ -653,6 +674,11 @@ module Aws::States
     InspectionDataResponse.add_member(:headers, Shapes::ShapeRef.new(shape: HTTPHeaders, location_name: "headers"))
     InspectionDataResponse.add_member(:body, Shapes::ShapeRef.new(shape: HTTPBody, location_name: "body"))
     InspectionDataResponse.struct_class = Types::InspectionDataResponse
+
+    InspectionErrorDetails.add_member(:catch_index, Shapes::ShapeRef.new(shape: ExceptionHandlerIndex, location_name: "catchIndex", metadata: {"box" => true}))
+    InspectionErrorDetails.add_member(:retry_index, Shapes::ShapeRef.new(shape: ExceptionHandlerIndex, location_name: "retryIndex", metadata: {"box" => true}))
+    InspectionErrorDetails.add_member(:retry_backoff_interval_seconds, Shapes::ShapeRef.new(shape: RetryBackoffIntervalSeconds, location_name: "retryBackoffIntervalSeconds", metadata: {"box" => true}))
+    InspectionErrorDetails.struct_class = Types::InspectionErrorDetails
 
     InvalidArn.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidArn.struct_class = Types::InvalidArn
@@ -842,6 +868,15 @@ module Aws::States
 
     MissingRequiredParameter.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     MissingRequiredParameter.struct_class = Types::MissingRequiredParameter
+
+    MockErrorOutput.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    MockErrorOutput.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
+    MockErrorOutput.struct_class = Types::MockErrorOutput
+
+    MockInput.add_member(:result, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "result"))
+    MockInput.add_member(:error_output, Shapes::ShapeRef.new(shape: MockErrorOutput, location_name: "errorOutput"))
+    MockInput.add_member(:field_validation_mode, Shapes::ShapeRef.new(shape: MockResponseValidationMode, location_name: "fieldValidationMode"))
+    MockInput.struct_class = Types::MockInput
 
     PublishStateMachineVersionInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
     PublishStateMachineVersionInput.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
@@ -1050,12 +1085,22 @@ module Aws::States
     TaskTimedOutEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
     TaskTimedOutEventDetails.struct_class = Types::TaskTimedOutEventDetails
 
+    TestStateConfiguration.add_member(:retrier_retry_count, Shapes::ShapeRef.new(shape: RetrierRetryCount, location_name: "retrierRetryCount", metadata: {"box" => true}))
+    TestStateConfiguration.add_member(:error_caused_by_state, Shapes::ShapeRef.new(shape: TestStateStateName, location_name: "errorCausedByState"))
+    TestStateConfiguration.add_member(:map_iteration_failure_count, Shapes::ShapeRef.new(shape: MapIterationFailureCount, location_name: "mapIterationFailureCount", metadata: {"box" => true}))
+    TestStateConfiguration.add_member(:map_item_reader_data, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "mapItemReaderData"))
+    TestStateConfiguration.struct_class = Types::TestStateConfiguration
+
     TestStateInput.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, required: true, location_name: "definition"))
     TestStateInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn"))
     TestStateInput.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
     TestStateInput.add_member(:inspection_level, Shapes::ShapeRef.new(shape: InspectionLevel, location_name: "inspectionLevel"))
     TestStateInput.add_member(:reveal_secrets, Shapes::ShapeRef.new(shape: RevealSecrets, location_name: "revealSecrets"))
     TestStateInput.add_member(:variables, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "variables"))
+    TestStateInput.add_member(:state_name, Shapes::ShapeRef.new(shape: TestStateStateName, location_name: "stateName"))
+    TestStateInput.add_member(:mock, Shapes::ShapeRef.new(shape: MockInput, location_name: "mock"))
+    TestStateInput.add_member(:context, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "context"))
+    TestStateInput.add_member(:state_configuration, Shapes::ShapeRef.new(shape: TestStateConfiguration, location_name: "stateConfiguration"))
     TestStateInput.struct_class = Types::TestStateInput
 
     TestStateOutput.add_member(:output, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "output"))

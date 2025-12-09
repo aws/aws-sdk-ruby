@@ -313,6 +313,16 @@ module Aws::SecretsManager
     #   destination Region. By default, secrets aren't overwritten.
     #   @return [Boolean]
     #
+    # @!attribute [rw] type
+    #   The exact string that identifies the partner that holds the external
+    #   secret. For more information, see [Using Secrets Manager managed
+    #   external secrets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/managed-external-secrets.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/CreateSecretRequest AWS API Documentation
     #
     class CreateSecretRequest < Struct.new(
@@ -324,7 +334,8 @@ module Aws::SecretsManager
       :secret_string,
       :tags,
       :add_replica_regions,
-      :force_overwrite_replica_secret)
+      :force_overwrite_replica_secret,
+      :type)
       SENSITIVE = [:secret_binary, :secret_string]
       include Aws::Structure
     end
@@ -524,6 +535,16 @@ module Aws::SecretsManager
     #   The name of the secret.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The exact string that identifies the partner that holds the external
+    #   secret. For more information, see [Using Secrets Manager managed
+    #   external secrets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/managed-external-secrets.html
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The description of the secret.
     #   @return [String]
@@ -556,6 +577,27 @@ module Aws::SecretsManager
     #   function. If the secret never had rotation turned on, this field is
     #   omitted.
     #   @return [Types::RotationRulesType]
+    #
+    # @!attribute [rw] external_secret_rotation_metadata
+    #   The metadata needed to successfully rotate a managed external
+    #   secret. A list of key value pairs in JSON format specified by the
+    #   partner. For more information about the required information, see
+    #   [Managed external secrets partners][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-partners.html
+    #   @return [Array<Types::ExternalSecretRotationMetadataItem>]
+    #
+    # @!attribute [rw] external_secret_rotation_role_arn
+    #   The Amazon Resource Name (ARN) of the role that allows Secrets
+    #   Manager to rotate a secret held by a third-party partner. For more
+    #   information, see [Security and permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-security.html
+    #   @return [String]
     #
     # @!attribute [rw] last_rotated_date
     #   The last date and time that Secrets Manager rotated the secret. If
@@ -667,11 +709,14 @@ module Aws::SecretsManager
     class DescribeSecretResponse < Struct.new(
       :arn,
       :name,
+      :type,
       :description,
       :kms_key_id,
       :rotation_enabled,
       :rotation_lambda_arn,
       :rotation_rules,
+      :external_secret_rotation_metadata,
+      :external_secret_rotation_role_arn,
       :last_rotated_date,
       :last_changed_date,
       :last_accessed_date,
@@ -703,6 +748,31 @@ module Aws::SecretsManager
     #
     class EncryptionFailure < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata needed to successfully rotate a managed external secret.
+    # A list of key value pairs in JSON format specified by the partner. For
+    # more information, see [Managed external secret partners][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-partners.html
+    #
+    # @!attribute [rw] key
+    #   The key that identifies the item.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the specified item.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ExternalSecretRotationMetadataItem AWS API Documentation
+    #
+    class ExternalSecretRotationMetadataItem < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1424,12 +1494,14 @@ module Aws::SecretsManager
     #   @return [Array<String>]
     #
     # @!attribute [rw] rotation_token
-    #   A unique identifier that indicates the source of the request. For
-    #   cross-account rotation (when you rotate a secret in one account by
-    #   using a Lambda rotation function in another account) and the Lambda
-    #   rotation function assumes an IAM role to call Secrets Manager,
-    #   Secrets Manager validates the identity with the rotation token. For
-    #   more information, see [How rotation works][1].
+    #   A unique identifier that indicates the source of the request.
+    #   Required for secret rotations using an IAM assumed role or
+    #   cross-account rotation, in which you rotate a secret in one account
+    #   by using a Lambda rotation function in another account. In both
+    #   cases, the rotation function assumes an IAM role to call Secrets
+    #   Manager, and then Secrets Manager validates the identity using the
+    #   token. For more information, see [How rotation works][1] and
+    #   [Rotation by Lambda functions][2].
     #
     #   Sensitive: This field contains sensitive information, so the service
     #   does not include it in CloudTrail log entries. If you create your
@@ -1439,6 +1511,7 @@ module Aws::SecretsManager
     #
     #
     #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html
+    #   [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_lambda
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/PutSecretValueRequest AWS API Documentation
@@ -1740,24 +1813,66 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] rotation_rules
     #   A structure that defines the rotation configuration for this secret.
+    #
+    #   When changing an existing rotation schedule and setting
+    #   `RotateImmediately` to `false`:
+    #
+    #    * If using `AutomaticallyAfterDays` or a `ScheduleExpression` with
+    #     `rate()`, the previously scheduled rotation might still occur.
+    #
+    #   * To prevent unintended rotations, use a `ScheduleExpression` with
+    #     `cron()` for granular control over rotation windows.
     #   @return [Types::RotationRulesType]
+    #
+    # @!attribute [rw] external_secret_rotation_metadata
+    #   The metadata needed to successfully rotate a managed external
+    #   secret. A list of key value pairs in JSON format specified by the
+    #   partner. For more information about the required information, see
+    #   [Using Secrets Manager managed external secrets][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/managed-external-secrets.html
+    #   @return [Array<Types::ExternalSecretRotationMetadataItem>]
+    #
+    # @!attribute [rw] external_secret_rotation_role_arn
+    #   The Amazon Resource Name (ARN) of the role that allows Secrets
+    #   Manager to rotate a secret held by a third-party partner. For more
+    #   information, see [Security and permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-security.html
+    #   @return [String]
     #
     # @!attribute [rw] rotate_immediately
     #   Specifies whether to rotate the secret immediately or wait until the
     #   next scheduled rotation window. The rotation schedule is defined in
     #   RotateSecretRequest$RotationRules.
     #
-    #   For secrets that use a Lambda rotation function to rotate, if you
-    #   don't immediately rotate the secret, Secrets Manager tests the
+    #   The default for `RotateImmediately` is `true`. If you don't specify
+    #   this value, Secrets Manager rotates the secret immediately.
+    #
+    #   If you set `RotateImmediately` to `false`, Secrets Manager tests the
     #   rotation configuration by running the [ `testSecret` step][1] of the
-    #   Lambda rotation function. The test creates an `AWSPENDING` version
+    #   Lambda rotation function. This test creates an `AWSPENDING` version
     #   of the secret and then removes it.
     #
-    #   By default, Secrets Manager rotates the secret immediately.
+    #   When changing an existing rotation schedule and setting
+    #   `RotateImmediately` to `false`:
+    #
+    #   * If using `AutomaticallyAfterDays` or a `ScheduleExpression` with
+    #     `rate()`, the previously scheduled rotation might still occur.
+    #
+    #   * To prevent unintended rotations, use a `ScheduleExpression` with
+    #     `cron()` for granular control over rotation windows.
+    #
+    #   Rotation is an asynchronous process. For more information, see [How
+    #   rotation works][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_lambda-functions.html#rotate-secrets_lambda-functions-code
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/RotateSecretRequest AWS API Documentation
@@ -1767,6 +1882,8 @@ module Aws::SecretsManager
       :client_request_token,
       :rotation_lambda_arn,
       :rotation_rules,
+      :external_secret_rotation_metadata,
+      :external_secret_rotation_role_arn,
       :rotate_immediately)
       SENSITIVE = []
       include Aws::Structure
@@ -1887,6 +2004,16 @@ module Aws::SecretsManager
     #   The friendly name of the secret.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The exact string that identifies the third-party partner that holds
+    #   the external secret. For more information, see [Managed external
+    #   secret partners][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-partners.html
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The user-provided description of the secret.
     #   @return [String]
@@ -1915,6 +2042,27 @@ module Aws::SecretsManager
     # @!attribute [rw] rotation_rules
     #   A structure that defines the rotation configuration for the secret.
     #   @return [Types::RotationRulesType]
+    #
+    # @!attribute [rw] external_secret_rotation_metadata
+    #   The metadata needed to successfully rotate a managed external
+    #   secret. A list of key value pairs in JSON format specified by the
+    #   partner. For more information about the required information, see
+    #   [Managed external secrets partners][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-partners.html
+    #   @return [Array<Types::ExternalSecretRotationMetadataItem>]
+    #
+    # @!attribute [rw] external_secret_rotation_role_arn
+    #   The role that Secrets Manager assumes to call APIs required to
+    #   perform the rotation. For more information about the required
+    #   information, see [Managed external secrets partners][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-partners.html
+    #   @return [String]
     #
     # @!attribute [rw] last_rotated_date
     #   The most recent date and time that the Secrets Manager rotation
@@ -1990,11 +2138,14 @@ module Aws::SecretsManager
     class SecretListEntry < Struct.new(
       :arn,
       :name,
+      :type,
       :description,
       :kms_key_id,
       :rotation_enabled,
       :rotation_lambda_arn,
       :rotation_rules,
+      :external_secret_rotation_metadata,
+      :external_secret_rotation_role_arn,
       :last_rotated_date,
       :last_changed_date,
       :last_accessed_date,
@@ -2100,7 +2251,9 @@ module Aws::SecretsManager
     end
 
     # @!attribute [rw] secret_id
-    #   The ARN of the primary secret.
+    #   The name of the secret or the replica ARN. The replica ARN is the
+    #   same as the original primary secret ARN expect the Region is changed
+    #   to the replica Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/StopReplicationToReplicaRequest AWS API Documentation
@@ -2326,6 +2479,16 @@ module Aws::SecretsManager
     #   field.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The exact string that identifies the third-party partner that holds
+    #   the external secret. For more information, see [Managed external
+    #   secret partners][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-partners.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/UpdateSecretRequest AWS API Documentation
     #
     class UpdateSecretRequest < Struct.new(
@@ -2334,7 +2497,8 @@ module Aws::SecretsManager
       :description,
       :kms_key_id,
       :secret_binary,
-      :secret_string)
+      :secret_string,
+      :type)
       SENSITIVE = [:secret_binary, :secret_string]
       include Aws::Structure
     end

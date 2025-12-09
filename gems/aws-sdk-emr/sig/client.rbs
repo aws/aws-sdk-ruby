@@ -263,7 +263,13 @@ module Aws
                                       jar: ::String,
                                       main_class: ::String?,
                                       args: Array[::String]?
-                                    }
+                                    },
+                                    step_monitoring_configuration: {
+                                      s3_monitoring_configuration: {
+                                        log_uri: ::String?,
+                                        encryption_key_arn: ::String?
+                                      }?
+                                    }?
                                   },
                                 ],
                                 ?execution_role_arn: ::String
@@ -1161,7 +1167,13 @@ module Aws
                                 jar: ::String,
                                 main_class: ::String?,
                                 args: Array[::String]?
-                              }
+                              },
+                              step_monitoring_configuration: {
+                                s3_monitoring_configuration: {
+                                  log_uri: ::String?,
+                                  encryption_key_arn: ::String?
+                                }?
+                              }?
                             },
                           ],
                           ?bootstrap_actions: Array[
@@ -1241,7 +1253,16 @@ module Aws
                           ?os_release_label: ::String,
                           ?ebs_root_volume_iops: ::Integer,
                           ?ebs_root_volume_throughput: ::Integer,
-                          ?extended_support: bool
+                          ?extended_support: bool,
+                          ?monitoring_configuration: {
+                            cloud_watch_log_configuration: {
+                              enabled: bool,
+                              log_group_name: ::String?,
+                              log_stream_name_prefix: ::String?,
+                              encryption_key_arn: ::String?,
+                              log_types: Hash[::String, Array[::String]]?
+                            }?
+                          }
                         ) -> _RunJobFlowResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RunJobFlowResponseSuccess
 

@@ -27,8 +27,10 @@ module Aws::Imagebuilder
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {AccessDeniedException}
   # * {CallRateLimitExceededException}
   # * {ClientException}
+  # * {DryRunOperationException}
   # * {ForbiddenException}
   # * {IdempotentParameterMismatchException}
   # * {InvalidPaginationTokenException}
@@ -44,12 +46,28 @@ module Aws::Imagebuilder
   # * {ServiceException}
   # * {ServiceQuotaExceededException}
   # * {ServiceUnavailableException}
+  # * {TooManyRequestsException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class AccessDeniedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Imagebuilder::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class CallRateLimitExceededException < ServiceError
 
@@ -71,6 +89,21 @@ module Aws::Imagebuilder
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Imagebuilder::Types::ClientException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class DryRunOperationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Imagebuilder::Types::DryRunOperationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -296,6 +329,21 @@ module Aws::Imagebuilder
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Imagebuilder::Types::ServiceUnavailableException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyRequestsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Imagebuilder::Types::TooManyRequestsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

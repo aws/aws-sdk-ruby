@@ -257,6 +257,9 @@ module Aws
       class MaxDocumentSizeExceeded < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class NoLongerSupportedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class OpsItemAccessDeniedException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

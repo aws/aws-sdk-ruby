@@ -1306,6 +1306,7 @@ module Aws::WorkSpaces
     #           },
     #         ],
     #         workspace_name: "WorkspaceName",
+    #         ipv_6_address: "Ipv6Address",
     #       },
     #     ],
     #   })
@@ -1333,6 +1334,7 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].workspace_request.tags[0].key #=> String
     #   resp.failed_requests[0].workspace_request.tags[0].value #=> String
     #   resp.failed_requests[0].workspace_request.workspace_name #=> String
+    #   resp.failed_requests[0].workspace_request.ipv_6_address #=> String
     #   resp.failed_requests[0].error_code #=> String
     #   resp.failed_requests[0].error_message #=> String
     #   resp.pending_requests #=> Array
@@ -1340,6 +1342,7 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].directory_id #=> String
     #   resp.pending_requests[0].user_name #=> String
     #   resp.pending_requests[0].ip_address #=> String
+    #   resp.pending_requests[0].ipv_6_address #=> String
     #   resp.pending_requests[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "RESTORING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
     #   resp.pending_requests[0].bundle_id #=> String
     #   resp.pending_requests[0].subnet_id #=> String
@@ -2626,6 +2629,8 @@ module Aws::WorkSpaces
     #   resp.directories[0].subnet_ids[0] #=> String
     #   resp.directories[0].dns_ip_addresses #=> Array
     #   resp.directories[0].dns_ip_addresses[0] #=> String
+    #   resp.directories[0].dns_ipv_6_addresses #=> Array
+    #   resp.directories[0].dns_ipv_6_addresses[0] #=> String
     #   resp.directories[0].customer_user_name #=> String
     #   resp.directories[0].iam_role_id #=> String
     #   resp.directories[0].directory_type #=> String, one of "SIMPLE_AD", "AD_CONNECTOR", "CUSTOMER_MANAGED", "AWS_IAM_IDENTITY_CENTER"
@@ -2895,6 +2900,7 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].directory_id #=> String
     #   resp.workspaces[0].user_name #=> String
     #   resp.workspaces[0].ip_address #=> String
+    #   resp.workspaces[0].ipv_6_address #=> String
     #   resp.workspaces[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "RESTORING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
     #   resp.workspaces[0].bundle_id #=> String
     #   resp.workspaces[0].subnet_id #=> String
@@ -5044,7 +5050,7 @@ module Aws::WorkSpaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.144.0'
+      context[:gem_version] = '1.148.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

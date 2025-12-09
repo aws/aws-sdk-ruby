@@ -1304,20 +1304,19 @@ module Aws::RDS
     #   The identifier of the DB cluster snapshot to copy. This parameter
     #   isn't case-sensitive.
     #
-    #   You can't copy an encrypted, shared DB cluster snapshot from one
-    #   Amazon Web Services Region to another.
-    #
     #   Constraints:
     #
-    #   * Must specify a valid system snapshot in the "available" state.
+    #   * Must specify a valid source snapshot in the "available" state.
     #
     #   * If the source snapshot is in the same Amazon Web Services Region as
     #     the copy, specify a valid DB snapshot identifier.
     #
     #   * If the source snapshot is in a different Amazon Web Services Region
-    #     than the copy, specify a valid DB cluster snapshot ARN. For more
-    #     information, go to [ Copying Snapshots Across Amazon Web Services
-    #     Regions][1] in the *Amazon Aurora User Guide*.
+    #     than the copy, specify a valid DB cluster snapshot ARN. You can also
+    #     specify an ARN of a snapshot that is in a different account and a
+    #     different Amazon Web Services Region. For more information, go to [
+    #     Copying Snapshots Across Amazon Web Services Regions][1] in the
+    #     *Amazon Aurora User Guide*.
     #
     #   Example: `my-cluster-snapshot1`
     #
@@ -1491,7 +1490,7 @@ module Aws::RDS
     #     source_db_cluster_snapshot_identifier: "String", # required
     #     target_db_cluster_snapshot_identifier: "String", # required
     #     kms_key_id: "String",
-    #     pre_signed_url: "String",
+    #     pre_signed_url: "SensitiveString",
     #     copy_tags: false,
     #     tags: [
     #       {
@@ -1529,10 +1528,10 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.tag_list #=> Array
     #   resp.db_cluster_snapshot.tag_list[0].key #=> String
     #   resp.db_cluster_snapshot.tag_list[0].value #=> String
-    #   resp.db_cluster_snapshot.db_system_id #=> String
     #   resp.db_cluster_snapshot.storage_type #=> String
-    #   resp.db_cluster_snapshot.db_cluster_resource_id #=> String
     #   resp.db_cluster_snapshot.storage_throughput #=> Integer
+    #   resp.db_cluster_snapshot.db_cluster_resource_id #=> String
+    #   resp.db_cluster_snapshot.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterSnapshot AWS API Documentation
     #
@@ -1675,20 +1674,18 @@ module Aws::RDS
     #   the copy, specify a valid DB snapshot identifier. For example, you
     #   might specify `rds:mysql-instance1-snapshot-20130805`.
     #
-    #   If the source snapshot is in a different Amazon Web Services Region
-    #   than the copy, specify a valid DB snapshot ARN. For example, you might
-    #   specify
-    #   `arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20130805`.
-    #
     #   If you are copying from a shared manual DB snapshot, this parameter
     #   must be the Amazon Resource Name (ARN) of the shared DB snapshot.
     #
-    #   If you are copying an encrypted snapshot this parameter must be in the
-    #   ARN format for the source Amazon Web Services Region.
+    #   If the source snapshot is in a different Amazon Web Services Region
+    #   than the copy, specify a valid DB snapshot ARN. You can also specify
+    #   an ARN of a snapshot that is in a different account and a different
+    #   Amazon Web Services Region. For example, you might specify
+    #   `arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20130805`.
     #
     #   Constraints:
     #
-    #   * Must specify a valid system snapshot in the "available" state.
+    #   * Must specify a valid source snapshot in the "available" state.
     #
     #   ^
     #
@@ -1842,17 +1839,6 @@ module Aws::RDS
     #
     #   Example: `rds-caz-aiqhTgQv`.
     #
-    # @option params [Boolean] :copy_option_group
-    #   Specifies whether to copy the DB option group associated with the
-    #   source DB snapshot to the target Amazon Web Services account and
-    #   associate with the target DB snapshot. The associated option group can
-    #   be copied only with cross-account snapshot copy calls.
-    #
-    # @option params [String] :snapshot_availability_zone
-    #   Specifies the name of the Availability Zone where RDS stores the DB
-    #   snapshot. This value is valid only for snapshots that RDS stores on a
-    #   Dedicated Local Zone.
-    #
     # @option params [String] :snapshot_target
     #   Configures the location where RDS will store copied snapshots.
     #
@@ -1863,6 +1849,17 @@ module Aws::RDS
     #   * `outposts` (Amazon Web Services Outposts)
     #
     #   * `region` (Amazon Web Services Region)
+    #
+    # @option params [Boolean] :copy_option_group
+    #   Specifies whether to copy the DB option group associated with the
+    #   source DB snapshot to the target Amazon Web Services account and
+    #   associate with the target DB snapshot. The associated option group can
+    #   be copied only with cross-account snapshot copy calls.
+    #
+    # @option params [String] :snapshot_availability_zone
+    #   Specifies the name of the Availability Zone where RDS stores the DB
+    #   snapshot. This value is valid only for snapshots that RDS stores on a
+    #   Dedicated Local Zone.
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1927,12 +1924,12 @@ module Aws::RDS
     #       },
     #     ],
     #     copy_tags: false,
-    #     pre_signed_url: "String",
+    #     pre_signed_url: "SensitiveString",
     #     option_group_name: "String",
     #     target_custom_availability_zone: "String",
+    #     snapshot_target: "String",
     #     copy_option_group: false,
     #     snapshot_availability_zone: "String",
-    #     snapshot_target: "String",
     #     source_region: "String",
     #   })
     #
@@ -1953,6 +1950,7 @@ module Aws::RDS
     #   resp.db_snapshot.license_model #=> String
     #   resp.db_snapshot.snapshot_type #=> String
     #   resp.db_snapshot.iops #=> Integer
+    #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.option_group_name #=> String
     #   resp.db_snapshot.percent_progress #=> Integer
     #   resp.db_snapshot.source_region #=> String
@@ -1971,14 +1969,20 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list #=> Array
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
+    #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.original_snapshot_create_time #=> Time
     #   resp.db_snapshot.snapshot_database_time #=> Time
-    #   resp.db_snapshot.snapshot_target #=> String
-    #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
-    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #   resp.db_snapshot.multi_tenant #=> Boolean
+    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #   resp.db_snapshot.snapshot_availability_zone #=> String
+    #   resp.db_snapshot.additional_storage_volumes #=> Array
+    #   resp.db_snapshot.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_snapshot.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -2421,8 +2425,9 @@ module Aws::RDS
     # Creates a custom DB engine version (CEV).
     #
     # @option params [required, String] :engine
-    #   The database engine. RDS Custom for Oracle supports the following
-    #   values:
+    #   The database engine.
+    #
+    #   RDS Custom for Oracle supports the following values:
     #
     #   * `custom-oracle-ee`
     #
@@ -2432,12 +2437,30 @@ module Aws::RDS
     #
     #   * `custom-oracle-se2-cdb`
     #
+    #   RDS Custom for SQL Server supports the following values:
+    #
+    #   * `custom-sqlserver-ee`
+    #
+    #   * `custom-sqlserver-se`
+    #
+    #   * `ccustom-sqlserver-web`
+    #
+    #   * `custom-sqlserver-dev`
+    #
+    #   RDS for SQL Server supports only `sqlserver-dev-ee`.
+    #
     # @option params [required, String] :engine_version
-    #   The name of your CEV. The name format is 19.*customized\_string*. For
-    #   example, a valid CEV name is `19.my_cev1`. This setting is required
-    #   for RDS Custom for Oracle, but optional for Amazon RDS. The
-    #   combination of `Engine` and `EngineVersion` is unique per customer per
-    #   Region.
+    #   The name of your custom engine version (CEV).
+    #
+    #   For RDS Custom for Oracle, the name format is
+    #   `19.*customized_string*`. For example, a valid CEV name is
+    #   `19.my_cev1`.
+    #
+    #   For RDS for SQL Server and RDS Custom for SQL Server, the name format
+    #   is `major engine_version*.*minor_engine_version*.*customized_string*`.
+    #   For example, a valid CEV name is `16.00.4215.2.my_cev1`.
+    #
+    #   The CEV name is unique per customer per Amazon Web Services Regions.
     #
     # @option params [String] :database_installation_files_s3_bucket_name
     #   The name of an Amazon S3 bucket that contains database installation
@@ -2479,6 +2502,18 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk
+    #
+    # @option params [String] :source_custom_db_engine_version_identifier
+    #   The ARN of a CEV to use as a source for creating a new CEV. You can
+    #   specify a different Amazon Machine Imagine (AMI) by using either
+    #   `Source` or `UseAwsProvidedLatestImage`. You can't specify a
+    #   different JSON manifest when you specify
+    #   `SourceCustomDbEngineVersionIdentifier`.
+    #
+    # @option params [Boolean] :use_aws_provided_latest_image
+    #   Specifies whether to use the latest service-provided Amazon Machine
+    #   Image (AMI) for the CEV. If you specify `UseAwsProvidedLatestImage`,
+    #   you can't also specify `ImageId`.
     #
     # @option params [String] :description
     #   An optional description of your CEV.
@@ -2531,28 +2566,27 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
-    # @option params [String] :source_custom_db_engine_version_identifier
-    #   The ARN of a CEV to use as a source for creating a new CEV. You can
-    #   specify a different Amazon Machine Imagine (AMI) by using either
-    #   `Source` or `UseAwsProvidedLatestImage`. You can't specify a
-    #   different JSON manifest when you specify
-    #   `SourceCustomDbEngineVersionIdentifier`.
-    #
-    # @option params [Boolean] :use_aws_provided_latest_image
-    #   Specifies whether to use the latest service-provided Amazon Machine
-    #   Image (AMI) for the CEV. If you specify `UseAwsProvidedLatestImage`,
-    #   you can't also specify `ImageId`.
+    # @option params [Array<String>] :database_installation_files
+    #   The database installation files (ISO and EXE) uploaded to Amazon S3
+    #   for your database engine version to import to Amazon RDS.
     #
     # @return [Types::DBEngineVersion] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBEngineVersion#engine #engine} => String
+    #   * {Types::DBEngineVersion#major_engine_version #major_engine_version} => String
     #   * {Types::DBEngineVersion#engine_version #engine_version} => String
+    #   * {Types::DBEngineVersion#database_installation_files_s3_bucket_name #database_installation_files_s3_bucket_name} => String
+    #   * {Types::DBEngineVersion#database_installation_files_s3_prefix #database_installation_files_s3_prefix} => String
+    #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
     #   * {Types::DBEngineVersion#db_parameter_group_family #db_parameter_group_family} => String
     #   * {Types::DBEngineVersion#db_engine_description #db_engine_description} => String
+    #   * {Types::DBEngineVersion#db_engine_version_arn #db_engine_version_arn} => String
     #   * {Types::DBEngineVersion#db_engine_version_description #db_engine_version_description} => String
     #   * {Types::DBEngineVersion#default_character_set #default_character_set} => Types::CharacterSet
     #   * {Types::DBEngineVersion#image #image} => Types::CustomDBEngineVersionAMI
     #   * {Types::DBEngineVersion#db_engine_media_type #db_engine_media_type} => String
+    #   * {Types::DBEngineVersion#kms_key_id #kms_key_id} => String
+    #   * {Types::DBEngineVersion#create_time #create_time} => Time
     #   * {Types::DBEngineVersion#supported_character_sets #supported_character_sets} => Array&lt;Types::CharacterSet&gt;
     #   * {Types::DBEngineVersion#supported_nchar_character_sets #supported_nchar_character_sets} => Array&lt;Types::CharacterSet&gt;
     #   * {Types::DBEngineVersion#valid_upgrade_target #valid_upgrade_target} => Array&lt;Types::UpgradeTarget&gt;
@@ -2565,21 +2599,16 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#status #status} => String
     #   * {Types::DBEngineVersion#supports_parallel_query #supports_parallel_query} => Boolean
     #   * {Types::DBEngineVersion#supports_global_databases #supports_global_databases} => Boolean
-    #   * {Types::DBEngineVersion#major_engine_version #major_engine_version} => String
-    #   * {Types::DBEngineVersion#database_installation_files_s3_bucket_name #database_installation_files_s3_bucket_name} => String
-    #   * {Types::DBEngineVersion#database_installation_files_s3_prefix #database_installation_files_s3_prefix} => String
-    #   * {Types::DBEngineVersion#db_engine_version_arn #db_engine_version_arn} => String
-    #   * {Types::DBEngineVersion#kms_key_id #kms_key_id} => String
-    #   * {Types::DBEngineVersion#create_time #create_time} => Time
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
-    #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
     #   * {Types::DBEngineVersion#supports_limitless_database #supports_limitless_database} => Boolean
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
     #   * {Types::DBEngineVersion#supports_integrations #supports_integrations} => Boolean
     #   * {Types::DBEngineVersion#serverless_v2_features_support #serverless_v2_features_support} => Types::ServerlessV2FeaturesSupport
+    #   * {Types::DBEngineVersion#database_installation_files #database_installation_files} => Array&lt;String&gt;
+    #   * {Types::DBEngineVersion#failure_reason #failure_reason} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2590,6 +2619,8 @@ module Aws::RDS
     #     database_installation_files_s3_prefix: "String255",
     #     image_id: "String255",
     #     kms_key_id: "KmsKeyIdOrArn",
+    #     source_custom_db_engine_version_identifier: "String255",
+    #     use_aws_provided_latest_image: false,
     #     description: "Description",
     #     manifest: "CustomDBEngineVersionManifest",
     #     tags: [
@@ -2598,22 +2629,28 @@ module Aws::RDS
     #         value: "String",
     #       },
     #     ],
-    #     source_custom_db_engine_version_identifier: "String255",
-    #     use_aws_provided_latest_image: false,
+    #     database_installation_files: ["String"],
     #   })
     #
     # @example Response structure
     #
     #   resp.engine #=> String
+    #   resp.major_engine_version #=> String
     #   resp.engine_version #=> String
+    #   resp.database_installation_files_s3_bucket_name #=> String
+    #   resp.database_installation_files_s3_prefix #=> String
+    #   resp.custom_db_engine_version_manifest #=> String
     #   resp.db_parameter_group_family #=> String
     #   resp.db_engine_description #=> String
+    #   resp.db_engine_version_arn #=> String
     #   resp.db_engine_version_description #=> String
     #   resp.default_character_set.character_set_name #=> String
     #   resp.default_character_set.character_set_description #=> String
     #   resp.image.image_id #=> String
     #   resp.image.status #=> String
     #   resp.db_engine_media_type #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.create_time #=> Time
     #   resp.supported_character_sets #=> Array
     #   resp.supported_character_sets[0].character_set_name #=> String
     #   resp.supported_character_sets[0].character_set_description #=> String
@@ -2647,17 +2684,10 @@ module Aws::RDS
     #   resp.status #=> String
     #   resp.supports_parallel_query #=> Boolean
     #   resp.supports_global_databases #=> Boolean
-    #   resp.major_engine_version #=> String
-    #   resp.database_installation_files_s3_bucket_name #=> String
-    #   resp.database_installation_files_s3_prefix #=> String
-    #   resp.db_engine_version_arn #=> String
-    #   resp.kms_key_id #=> String
-    #   resp.create_time #=> Time
     #   resp.tag_list #=> Array
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
     #   resp.supports_babelfish #=> Boolean
-    #   resp.custom_db_engine_version_manifest #=> String
     #   resp.supports_limitless_database #=> Boolean
     #   resp.supports_certificate_rotation_without_restart #=> Boolean
     #   resp.supported_ca_certificate_identifiers #=> Array
@@ -2666,6 +2696,9 @@ module Aws::RDS
     #   resp.supports_integrations #=> Boolean
     #   resp.serverless_v2_features_support.min_capacity #=> Float
     #   resp.serverless_v2_features_support.max_capacity #=> Float
+    #   resp.database_installation_files #=> Array
+    #   resp.database_installation_files[0] #=> String
+    #   resp.failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomDBEngineVersion AWS API Documentation
     #
@@ -3175,80 +3208,6 @@ module Aws::RDS
     # @option params [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
     #   Reserved for future use.
     #
-    # @option params [Boolean] :deletion_protection
-    #   Specifies whether the DB cluster has deletion protection enabled. The
-    #   database can't be deleted when deletion protection is enabled. By
-    #   default, deletion protection isn't enabled.
-    #
-    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
-    #
-    # @option params [String] :global_cluster_identifier
-    #   The global cluster ID of an Aurora cluster that becomes the primary
-    #   cluster in the new global database cluster.
-    #
-    #   Valid for Cluster Type: Aurora DB clusters only
-    #
-    # @option params [Boolean] :enable_http_endpoint
-    #   Specifies whether to enable the HTTP endpoint for the DB cluster. By
-    #   default, the HTTP endpoint isn't enabled.
-    #
-    #   When enabled, the HTTP endpoint provides a connectionless web service
-    #   API (RDS Data API) for running SQL queries on the DB cluster. You can
-    #   also query your database from inside the RDS console with the RDS
-    #   query editor.
-    #
-    #   For more information, see [Using RDS Data API][1] in the *Amazon
-    #   Aurora User Guide*.
-    #
-    #   Valid for Cluster Type: Aurora DB clusters only
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
-    #
-    # @option params [Boolean] :copy_tags_to_snapshot
-    #   Specifies whether to copy all tags from the DB cluster to snapshots of
-    #   the DB cluster. The default is not to copy them.
-    #
-    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
-    #
-    # @option params [String] :domain
-    #   The Active Directory directory ID to create the DB cluster in.
-    #
-    #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
-    #   authentication to authenticate users that connect to the DB cluster.
-    #
-    #   For more information, see [Kerberos authentication][1] in the *Amazon
-    #   Aurora User Guide*.
-    #
-    #   Valid for Cluster Type: Aurora DB clusters only
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html
-    #
-    # @option params [String] :domain_iam_role_name
-    #   The name of the IAM role to use when making API calls to the Directory
-    #   Service.
-    #
-    #   Valid for Cluster Type: Aurora DB clusters only
-    #
-    # @option params [Boolean] :enable_global_write_forwarding
-    #   Specifies whether to enable this DB cluster to forward write
-    #   operations to the primary cluster of a global cluster (Aurora global
-    #   database). By default, write operations are not allowed on Aurora DB
-    #   clusters that are secondary clusters in an Aurora global database.
-    #
-    #   You can set this value only on Aurora DB clusters that are members of
-    #   an Aurora global database. With this parameter enabled, a secondary
-    #   cluster can forward writes to the current primary cluster, and the
-    #   resulting changes are replicated back to this cluster. For the primary
-    #   DB cluster of an Aurora global database, this value is used
-    #   immediately if the primary is demoted by a global cluster API
-    #   operation, but it does nothing until then.
-    #
-    #   Valid for Cluster Type: Aurora DB clusters only
-    #
     # @option params [String] :db_cluster_instance_class
     #   The compute and memory capacity of each DB instance in the Multi-AZ DB
     #   cluster, for example `db.m6gd.xlarge`. Not all DB instance classes are
@@ -3338,40 +3297,31 @@ module Aws::RDS
     # @option params [Boolean] :publicly_accessible
     #   Specifies whether the DB cluster is publicly accessible.
     #
+    #   Valid for Cluster Type: Multi-AZ DB clusters only
+    #
     #   When the DB cluster is publicly accessible and you connect from
-    #   outside of the DB cluster's virtual private cloud (VPC), its Domain
-    #   Name System (DNS) endpoint resolves to the public IP address. When you
+    #   outside of the DB cluster's virtual private cloud (VPC), its domain
+    #   name system (DNS) endpoint resolves to the public IP address. When you
     #   connect from within the same VPC as the DB cluster, the endpoint
     #   resolves to the private IP address. Access to the DB cluster is
-    #   ultimately controlled by the security group it uses. That public
-    #   access isn't permitted if the security group assigned to the DB
-    #   cluster doesn't permit it.
+    #   controlled by its security group settings.
     #
     #   When the DB cluster isn't publicly accessible, it is an internal DB
     #   cluster with a DNS name that resolves to a private IP address.
     #
-    #   Valid for Cluster Type: Multi-AZ DB clusters only
+    #   The default behavior when `PubliclyAccessible` is not specified
+    #   depends on whether a `DBSubnetGroup` is specified.
     #
-    #   Default: The default behavior varies depending on whether
-    #   `DBSubnetGroupName` is specified.
+    #   If `DBSubnetGroup` isn't specified, `PubliclyAccessible` defaults to
+    #   `true`.
     #
-    #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
-    #   isn't specified, the following applies:
+    #   If `DBSubnetGroup` is specified, `PubliclyAccessible` defaults to
+    #   `false` unless the value of `DBSubnetGroup` is `default`, in which
+    #   case `PubliclyAccessible` defaults to `true`.
     #
-    #   * If the default VPC in the target Region doesn’t have an internet
-    #     gateway attached to it, the DB cluster is private.
-    #
-    #   * If the default VPC in the target Region has an internet gateway
-    #     attached to it, the DB cluster is public.
-    #
-    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
-    #   specified, the following applies:
-    #
-    #   * If the subnets are part of a VPC that doesn’t have an internet
-    #     gateway attached to it, the DB cluster is private.
-    #
-    #   * If the subnets are part of a VPC that has an internet gateway
-    #     attached to it, the DB cluster is public.
+    #   If `PubliclyAccessible` is true and the VPC that the `DBSubnetGroup`
+    #   is in doesn't have an internet gateway attached to it, Amazon RDS
+    #   returns an error.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   Specifies whether minor engine upgrades are applied automatically to
@@ -3386,6 +3336,109 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades
+    #
+    # @option params [Boolean] :deletion_protection
+    #   Specifies whether the DB cluster has deletion protection enabled. The
+    #   database can't be deleted when deletion protection is enabled. By
+    #   default, deletion protection isn't enabled.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    # @option params [String] :global_cluster_identifier
+    #   The global cluster ID of an Aurora cluster that becomes the primary
+    #   cluster in the new global database cluster.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters only
+    #
+    # @option params [Boolean] :enable_http_endpoint
+    #   Specifies whether to enable the HTTP endpoint for the DB cluster. By
+    #   default, the HTTP endpoint isn't enabled.
+    #
+    #   When enabled, the HTTP endpoint provides a connectionless web service
+    #   API (RDS Data API) for running SQL queries on the DB cluster. You can
+    #   also query your database from inside the RDS console with the RDS
+    #   query editor.
+    #
+    #   For more information, see [Using RDS Data API][1] in the *Amazon
+    #   Aurora User Guide*.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
+    #
+    # @option params [Boolean] :copy_tags_to_snapshot
+    #   Specifies whether to copy all tags from the DB cluster to snapshots of
+    #   the DB cluster. The default is not to copy them.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    # @option params [String] :domain
+    #   The Active Directory directory ID to create the DB cluster in.
+    #
+    #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
+    #   authentication to authenticate users that connect to the DB cluster.
+    #
+    #   For more information, see [Kerberos authentication][1] in the *Amazon
+    #   Aurora User Guide*.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html
+    #
+    # @option params [String] :domain_iam_role_name
+    #   The name of the IAM role to use when making API calls to the Directory
+    #   Service.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters only
+    #
+    # @option params [Boolean] :enable_global_write_forwarding
+    #   Specifies whether to enable this DB cluster to forward write
+    #   operations to the primary cluster of a global cluster (Aurora global
+    #   database). By default, write operations are not allowed on Aurora DB
+    #   clusters that are secondary clusters in an Aurora global database.
+    #
+    #   You can set this value only on Aurora DB clusters that are members of
+    #   an Aurora global database. With this parameter enabled, a secondary
+    #   cluster can forward writes to the current primary cluster, and the
+    #   resulting changes are replicated back to this cluster. For the primary
+    #   DB cluster of an Aurora global database, this value is used
+    #   immediately if the primary is demoted by a global cluster API
+    #   operation, but it does nothing until then.
+    #
+    #   Valid for Cluster Type: Aurora DB clusters only
+    #
+    # @option params [String] :network_type
+    #   The network type of the DB cluster.
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon Aurora User Guide.*
+    #
+    #   Valid for Cluster Type: Aurora DB clusters only
+    #
+    #   Valid Values: `IPV4 | DUAL`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #
     # @option params [Integer] :monitoring_interval
     #   The interval, in seconds, between points when Enhanced Monitoring
@@ -3483,35 +3536,6 @@ module Aws::RDS
     #
     #    </note>
     #
-    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
-    #   Contains the scaling configuration of an Aurora Serverless v2 DB
-    #   cluster.
-    #
-    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
-    #   the *Amazon Aurora User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
-    #
-    # @option params [String] :network_type
-    #   The network type of the DB cluster.
-    #
-    #   The network type is determined by the `DBSubnetGroup` specified for
-    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
-    #   or the IPv4 and the IPv6 protocols (`DUAL`).
-    #
-    #   For more information, see [ Working with a DB instance in a VPC][1] in
-    #   the *Amazon Aurora User Guide.*
-    #
-    #   Valid for Cluster Type: Aurora DB clusters only
-    #
-    #   Valid Values: `IPV4 | DUAL`
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
-    #
     # @option params [String] :cluster_scalability_type
     #   Specifies the scalability mode of the Aurora DB cluster. When set to
     #   `limitless`, the cluster operates as an Aurora Limitless Database.
@@ -3550,6 +3574,13 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html
     #
+    # @option params [Boolean] :enable_local_write_forwarding
+    #   Specifies whether read replicas can forward write operations to the
+    #   writer DB instance in the DB cluster. By default, write operations
+    #   aren't allowed on reader DB instances.
+    #
+    #   Valid for: Aurora DB clusters only
+    #
     # @option params [String] :master_user_secret_kms_key_id
     #   The Amazon Web Services KMS key identifier to encrypt a secret that is
     #   automatically generated and managed in Amazon Web Services Secrets
@@ -3574,13 +3605,6 @@ module Aws::RDS
     #   Amazon Web Services Region.
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
-    #
-    # @option params [Boolean] :enable_local_write_forwarding
-    #   Specifies whether read replicas can forward write operations to the
-    #   writer DB instance in the DB cluster. By default, write operations
-    #   aren't allowed on reader DB instances.
-    #
-    #   Valid for: Aurora DB clusters only
     #
     # @option params [String] :ca_certificate_identifier
     #   The CA certificate identifier to use for the DB cluster's server
@@ -3630,6 +3654,15 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   ^
     #
     # @option params [String] :master_user_authentication_type
     #   Specifies the authentication type for the master user. With IAM master
@@ -3798,7 +3831,7 @@ module Aws::RDS
     #     engine_version: "String",
     #     port: 1,
     #     master_username: "String",
-    #     master_user_password: "String",
+    #     master_user_password: "SensitiveString",
     #     option_group_name: "String",
     #     preferred_backup_window: "String",
     #     preferred_maintenance_window: "String",
@@ -3811,7 +3844,7 @@ module Aws::RDS
     #     ],
     #     storage_encrypted: false,
     #     kms_key_id: "String",
-    #     pre_signed_url: "String",
+    #     pre_signed_url: "SensitiveString",
     #     enable_iam_database_authentication: false,
     #     backtrack_window: 1,
     #     enable_cloudwatch_logs_exports: ["String"],
@@ -3829,19 +3862,25 @@ module Aws::RDS
     #       transit_gateway_multicast_domain_id: "String",
     #       replica_mode: "open-read-only", # accepts open-read-only, mounted
     #     },
-    #     deletion_protection: false,
-    #     global_cluster_identifier: "String",
-    #     enable_http_endpoint: false,
-    #     copy_tags_to_snapshot: false,
-    #     domain: "String",
-    #     domain_iam_role_name: "String",
-    #     enable_global_write_forwarding: false,
     #     db_cluster_instance_class: "String",
     #     allocated_storage: 1,
     #     storage_type: "String",
     #     iops: 1,
     #     publicly_accessible: false,
     #     auto_minor_version_upgrade: false,
+    #     deletion_protection: false,
+    #     global_cluster_identifier: "GlobalClusterIdentifier",
+    #     enable_http_endpoint: false,
+    #     copy_tags_to_snapshot: false,
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
+    #     enable_global_write_forwarding: false,
+    #     network_type: "String",
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #       seconds_until_auto_pause: 1,
+    #     },
     #     monitoring_interval: 1,
     #     monitoring_role_arn: "String",
     #     database_insights_mode: "standard", # accepts standard, advanced
@@ -3849,19 +3888,24 @@ module Aws::RDS
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
     #     enable_limitless_database: false,
-    #     serverless_v2_scaling_configuration: {
-    #       min_capacity: 1.0,
-    #       max_capacity: 1.0,
-    #       seconds_until_auto_pause: 1,
-    #     },
-    #     network_type: "String",
     #     cluster_scalability_type: "standard", # accepts standard, limitless
     #     db_system_id: "String",
     #     manage_master_user_password: false,
-    #     master_user_secret_kms_key_id: "String",
     #     enable_local_write_forwarding: false,
+    #     master_user_secret_kms_key_id: "String",
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
     #     source_region: "String",
     #   })
@@ -3878,7 +3922,6 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
-    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -3896,6 +3939,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -3930,6 +3974,23 @@ module Aws::RDS
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -3940,6 +4001,13 @@ module Aws::RDS
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.db_cluster_instance_class #=> String
+    #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.iops #=> Integer
+    #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.publicly_accessible #=> Boolean
+    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -3963,49 +4031,26 @@ module Aws::RDS
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
-    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
-    #   resp.db_cluster.pending_modified_values.engine_version #=> String
-    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
-    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
-    #   resp.db_cluster.pending_modified_values.iops #=> Integer
-    #   resp.db_cluster.pending_modified_values.storage_type #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
-    #   resp.db_cluster.db_cluster_instance_class #=> String
-    #   resp.db_cluster.storage_type #=> String
-    #   resp.db_cluster.iops #=> Integer
-    #   resp.db_cluster.publicly_accessible #=> Boolean
-    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
+    #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.monitoring_interval #=> Integer
     #   resp.db_cluster.monitoring_role_arn #=> String
     #   resp.db_cluster.database_insights_mode #=> String, one of "standard", "advanced"
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
-    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
-    #   resp.db_cluster.serverless_v2_platform_version #=> String
-    #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
-    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
-    #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
@@ -4433,10 +4478,10 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.tag_list #=> Array
     #   resp.db_cluster_snapshot.tag_list[0].key #=> String
     #   resp.db_cluster_snapshot.tag_list[0].value #=> String
-    #   resp.db_cluster_snapshot.db_system_id #=> String
     #   resp.db_cluster_snapshot.storage_type #=> String
-    #   resp.db_cluster_snapshot.db_cluster_resource_id #=> String
     #   resp.db_cluster_snapshot.storage_throughput #=> Integer
+    #   resp.db_cluster_snapshot.db_cluster_resource_id #=> String
+    #   resp.db_cluster_snapshot.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterSnapshot AWS API Documentation
     #
@@ -4787,6 +4832,8 @@ module Aws::RDS
     #   * `oracle-se2-cdb`
     #
     #   * `postgres`
+    #
+    #   * `sqlserver-dev-ee`
     #
     #   * `sqlserver-ee`
     #
@@ -5159,6 +5206,15 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html
     #
+    # @option params [Integer] :storage_throughput
+    #   The storage throughput value, in mebibyte per second (MiBps), for the
+    #   DB instance.
+    #
+    #   This setting applies only to the `gp3` storage type.
+    #
+    #   This setting doesn't apply to Amazon Aurora or RDS Custom DB
+    #   instances.
+    #
     # @option params [String] :option_group_name
     #   The option group to associate the DB instance with.
     #
@@ -5191,37 +5247,28 @@ module Aws::RDS
     #   Specifies whether the DB instance is publicly accessible.
     #
     #   When the DB instance is publicly accessible and you connect from
-    #   outside of the DB instance's virtual private cloud (VPC), its Domain
-    #   Name System (DNS) endpoint resolves to the public IP address. When you
+    #   outside of the DB instance's virtual private cloud (VPC), its domain
+    #   name system (DNS) endpoint resolves to the public IP address. When you
     #   connect from within the same VPC as the DB instance, the endpoint
     #   resolves to the private IP address. Access to the DB instance is
-    #   ultimately controlled by the security group it uses. That public
-    #   access is not permitted if the security group assigned to the DB
-    #   instance doesn't permit it.
+    #   controlled by its security group settings.
     #
     #   When the DB instance isn't publicly accessible, it is an internal DB
     #   instance with a DNS name that resolves to a private IP address.
     #
-    #   Default: The default behavior varies depending on whether
-    #   `DBSubnetGroupName` is specified.
+    #   The default behavior when `PubliclyAccessible` is not specified
+    #   depends on whether a `DBSubnetGroup` is specified.
     #
-    #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
-    #   isn't specified, the following applies:
+    #   If `DBSubnetGroup` isn't specified, `PubliclyAccessible` defaults to
+    #   `false` for Aurora instances and `true` for non-Aurora instances.
     #
-    #   * If the default VPC in the target Region doesn’t have an internet
-    #     gateway attached to it, the DB instance is private.
+    #   If `DBSubnetGroup` is specified, `PubliclyAccessible` defaults to
+    #   `false` unless the value of `DBSubnetGroup` is `default`, in which
+    #   case `PubliclyAccessible` defaults to `true`.
     #
-    #   * If the default VPC in the target Region has an internet gateway
-    #     attached to it, the DB instance is public.
-    #
-    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
-    #   specified, the following applies:
-    #
-    #   * If the subnets are part of a VPC that doesn’t have an internet
-    #     gateway attached to it, the DB instance is private.
-    #
-    #   * If the subnets are part of a VPC that has an internet gateway
-    #     attached to it, the DB instance is public.
+    #   If `PubliclyAccessible` is true and the VPC that the `DBSubnetGroup`
+    #   is in doesn't have an internet gateway attached to it, Amazon RDS
+    #   returns an error.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to assign to the DB instance.
@@ -5594,6 +5641,42 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
     #
+    # @option params [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #   Valid Values: `IPV4 | DUAL`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
+    # @option params [String] :backup_target
+    #   The location for storing automated backups and manual snapshots.
+    #
+    #   Valid Values:
+    #
+    #   * `local` (Dedicated Local Zone)
+    #
+    #   * `outposts` (Amazon Web Services Outposts)
+    #
+    #   * `region` (Amazon Web Services Region)
+    #
+    #   Default: `region`
+    #
+    #   For more information, see [Working with Amazon RDS on Amazon Web
+    #   Services Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #
     # @option params [String] :custom_iam_instance_profile
     #   The instance profile associated with the underlying Amazon EC2
     #   instance of an RDS Custom DB instance.
@@ -5617,50 +5700,29 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
     #
-    # @option params [String] :backup_target
-    #   The location for storing automated backups and manual snapshots.
+    # @option params [String] :db_system_id
+    #   The Oracle system identifier (SID), which is the name of the Oracle
+    #   database instance that manages your database files. In this context,
+    #   the term "Oracle database instance" refers exclusively to the system
+    #   global area (SGA) and Oracle background processes. If you don't
+    #   specify a SID, the value defaults to `RDSCDB`. The Oracle SID is also
+    #   the name of your CDB.
     #
-    #   Valid Values:
+    # @option params [String] :ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB instance's server
+    #   certificate.
     #
-    #   * `local` (Dedicated Local Zone)
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
-    #   * `outposts` (Amazon Web Services Outposts)
-    #
-    #   * `region` (Amazon Web Services Region)
-    #
-    #   Default: `region`
-    #
-    #   For more information, see [Working with Amazon RDS on Amazon Web
-    #   Services Outposts][1] in the *Amazon RDS User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
-    #
-    # @option params [String] :network_type
-    #   The network type of the DB instance.
-    #
-    #   The network type is determined by the `DBSubnetGroup` specified for
-    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
-    #   or the IPv4 and the IPv6 protocols (`DUAL`).
-    #
-    #   For more information, see [ Working with a DB instance in a VPC][1] in
-    #   the *Amazon RDS User Guide.*
-    #
-    #   Valid Values: `IPV4 | DUAL`
+    #   For more information, see [Using SSL/TLS to encrypt a connection to a
+    #   DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    #   encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
-    #
-    # @option params [Integer] :storage_throughput
-    #   The storage throughput value, in mebibyte per second (MiBps), for the
-    #   DB instance.
-    #
-    #   This setting applies only to the `gp3` storage type.
-    #
-    #   This setting doesn't apply to Amazon Aurora or RDS Custom DB
-    #   instances.
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #
     # @option params [Boolean] :manage_master_user_password
     #   Specifies whether to manage the master user password with Amazon Web
@@ -5703,34 +5765,6 @@ module Aws::RDS
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
     #
-    # @option params [String] :ca_certificate_identifier
-    #   The CA certificate identifier to use for the DB instance's server
-    #   certificate.
-    #
-    #   This setting doesn't apply to RDS Custom DB instances.
-    #
-    #   For more information, see [Using SSL/TLS to encrypt a connection to a
-    #   DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
-    #   encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
-    #
-    # @option params [String] :db_system_id
-    #   The Oracle system identifier (SID), which is the name of the Oracle
-    #   database instance that manages your database files. In this context,
-    #   the term "Oracle database instance" refers exclusively to the system
-    #   global area (SGA) and Oracle background processes. If you don't
-    #   specify a SID, the value defaults to `RDSCDB`. The Oracle SID is also
-    #   the name of your CDB.
-    #
-    # @option params [Boolean] :dedicated_log_volume
-    #   Indicates whether the DB instance has a dedicated log volume (DLV)
-    #   enabled.
-    #
     # @option params [Boolean] :multi_tenant
     #   Specifies whether to use the multi-tenant configuration or the
     #   single-tenant configuration (default). This parameter only applies to
@@ -5746,6 +5780,10 @@ module Aws::RDS
     #   * If you specify the multi-tenant configuration when you create your
     #     DB instance, you can't later modify this DB instance to use the
     #     single-tenant configuration.
+    #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
     #
     # @option params [String] :engine_lifecycle_support
     #   The life cycle type for this DB instance.
@@ -5779,6 +5817,15 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #
     # @option params [String] :master_user_authentication_type
     #   Specifies the authentication type for the master user. With IAM master
     #   user authentication, you can configure the master DB user with IAM
@@ -5792,6 +5839,13 @@ module Aws::RDS
     #
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
+    #
+    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to create for the DB instance.
+    #   You can create up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
     #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5916,7 +5970,7 @@ module Aws::RDS
     #     db_instance_class: "String", # required
     #     engine: "String", # required
     #     master_username: "String",
-    #     master_user_password: "String",
+    #     master_user_password: "SensitiveString",
     #     db_security_groups: ["String"],
     #     vpc_security_group_ids: ["String"],
     #     availability_zone: "String",
@@ -5931,6 +5985,7 @@ module Aws::RDS
     #     auto_minor_version_upgrade: false,
     #     license_model: "String",
     #     iops: 1,
+    #     storage_throughput: 1,
     #     option_group_name: "String",
     #     character_set_name: "String",
     #     nchar_character_set_name: "String",
@@ -5944,7 +5999,7 @@ module Aws::RDS
     #     db_cluster_identifier: "String",
     #     storage_type: "String",
     #     tde_credential_arn: "String",
-    #     tde_credential_password: "String",
+    #     tde_credential_password: "SensitiveString",
     #     storage_encrypted: false,
     #     kms_key_id: "String",
     #     domain: "String",
@@ -5973,18 +6028,38 @@ module Aws::RDS
     #     deletion_protection: false,
     #     max_allocated_storage: 1,
     #     enable_customer_owned_ip: false,
-    #     custom_iam_instance_profile: "String",
-    #     backup_target: "String",
     #     network_type: "String",
-    #     storage_throughput: 1,
+    #     backup_target: "String",
+    #     custom_iam_instance_profile: "String",
+    #     db_system_id: "String",
+    #     ca_certificate_identifier: "String",
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
-    #     ca_certificate_identifier: "String",
-    #     db_system_id: "String",
-    #     dedicated_log_volume: false,
     #     multi_tenant: false,
+    #     dedicated_log_volume: false,
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -5993,7 +6068,6 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
-    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -6026,6 +6100,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -6035,6 +6110,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.engine_version #=> String
     #   resp.db_instance.pending_modified_values.license_model #=> String
     #   resp.db_instance.pending_modified_values.iops #=> Integer
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
@@ -6046,13 +6122,19 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
-    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
-    #   resp.db_instance.pending_modified_values.engine #=> String
-    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -6065,6 +6147,7 @@ module Aws::RDS
     #   resp.db_instance.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
+    #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
@@ -6123,34 +6206,43 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
-    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
-    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
+    #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
-    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
     #   resp.db_instance.activity_stream_kms_key_id #=> String
     #   resp.db_instance.activity_stream_kinesis_stream_name #=> String
     #   resp.db_instance.activity_stream_mode #=> String, one of "sync", "async"
     #   resp.db_instance.activity_stream_engine_native_audit_fields_included #=> Boolean
-    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
-    #   resp.db_instance.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.backup_target #=> String
-    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
+    #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
-    #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.db_system_id #=> String
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
-    #   resp.db_instance.certificate_details.ca_identifier #=> String
-    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
-    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -6290,6 +6382,12 @@ module Aws::RDS
     # @option params [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   initially allocate for the DB instance.
+    #
+    # @option params [Integer] :storage_throughput
+    #   Specifies the storage throughput value for the read replica.
+    #
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora DB
+    #   instances.
     #
     # @option params [String] :option_group_name
     #   The option group to associate the DB instance with. If not specified,
@@ -6761,6 +6859,47 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
     #
+    # @option params [Boolean] :enable_customer_owned_ip
+    #   Specifies whether to enable a customer-owned IP address (CoIP) for an
+    #   RDS on Outposts read replica.
+    #
+    #   A *CoIP* provides local or external connectivity to resources in your
+    #   Outpost subnets through your on-premises network. For some use cases,
+    #   a CoIP can provide lower latency for connections to the read replica
+    #   from outside of its virtual private cloud (VPC) on your local network.
+    #
+    #   For more information about RDS on Outposts, see [Working with Amazon
+    #   RDS on Amazon Web Services Outposts][1] in the *Amazon RDS User
+    #   Guide*.
+    #
+    #   For more information about CoIPs, see [Customer-owned IP addresses][2]
+    #   in the *Amazon Web Services Outposts User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
+    #
+    # @option params [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   read replica. A `DBSubnetGroup` can support only the IPv4 protocol or
+    #   the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
     # @option params [Integer] :max_allocated_storage
     #   The upper limit in gibibytes (GiB) to which Amazon RDS can
     #   automatically scale the storage of the DB instance.
@@ -6772,6 +6911,15 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling
+    #
+    # @option params [String] :backup_target
+    #   The location where RDS stores automated backups and manual snapshots.
+    #
+    #   Valid Values:
+    #
+    #   * `local` for Dedicated Local Zones
+    #
+    #   * `region` for Amazon Web Services Region
     #
     # @option params [String] :custom_iam_instance_profile
     #   The instance profile associated with the underlying Amazon EC2
@@ -6794,62 +6942,6 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
-    #
-    # @option params [String] :network_type
-    #   The network type of the DB instance.
-    #
-    #   Valid Values:
-    #
-    #   * `IPV4`
-    #
-    #   * `DUAL`
-    #
-    #   The network type is determined by the `DBSubnetGroup` specified for
-    #   read replica. A `DBSubnetGroup` can support only the IPv4 protocol or
-    #   the IPv4 and the IPv6 protocols (`DUAL`).
-    #
-    #   For more information, see [ Working with a DB instance in a VPC][1] in
-    #   the *Amazon RDS User Guide.*
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
-    #
-    # @option params [Integer] :storage_throughput
-    #   Specifies the storage throughput value for the read replica.
-    #
-    #   This setting doesn't apply to RDS Custom or Amazon Aurora DB
-    #   instances.
-    #
-    # @option params [Boolean] :enable_customer_owned_ip
-    #   Specifies whether to enable a customer-owned IP address (CoIP) for an
-    #   RDS on Outposts read replica.
-    #
-    #   A *CoIP* provides local or external connectivity to resources in your
-    #   Outpost subnets through your on-premises network. For some use cases,
-    #   a CoIP can provide lower latency for connections to the read replica
-    #   from outside of its virtual private cloud (VPC) on your local network.
-    #
-    #   For more information about RDS on Outposts, see [Working with Amazon
-    #   RDS on Amazon Web Services Outposts][1] in the *Amazon RDS User
-    #   Guide*.
-    #
-    #   For more information about CoIPs, see [Customer-owned IP addresses][2]
-    #   in the *Amazon Web Services Outposts User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
-    #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
-    #
-    # @option params [String] :backup_target
-    #   The location where RDS stores automated backups and manual snapshots.
-    #
-    #   Valid Values:
-    #
-    #   * `local` for Dedicated Local Zones
-    #
-    #   * `region` for Amazon Web Services Region
     #
     # @option params [Integer] :allocated_storage
     #   The amount of storage (in gibibytes) to allocate initially for the
@@ -6906,6 +6998,22 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #
+    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to create for the DB instance.
+    #   You can create up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -6947,6 +7055,7 @@ module Aws::RDS
     #     multi_az: false,
     #     auto_minor_version_upgrade: false,
     #     iops: 1,
+    #     storage_throughput: 1,
     #     option_group_name: "String",
     #     db_parameter_group_name: "String",
     #     publicly_accessible: false,
@@ -6963,7 +7072,7 @@ module Aws::RDS
     #     monitoring_interval: 1,
     #     monitoring_role_arn: "String",
     #     kms_key_id: "String",
-    #     pre_signed_url: "String",
+    #     pre_signed_url: "SensitiveString",
     #     enable_iam_database_authentication: false,
     #     database_insights_mode: "standard", # accepts standard, advanced
     #     enable_performance_insights: false,
@@ -6985,17 +7094,37 @@ module Aws::RDS
     #     domain_auth_secret_arn: "String",
     #     domain_dns_ips: ["String"],
     #     replica_mode: "open-read-only", # accepts open-read-only, mounted
-    #     max_allocated_storage: 1,
-    #     custom_iam_instance_profile: "String",
-    #     network_type: "String",
-    #     storage_throughput: 1,
     #     enable_customer_owned_ip: false,
+    #     network_type: "String",
+    #     max_allocated_storage: 1,
     #     backup_target: "String",
+    #     custom_iam_instance_profile: "String",
     #     allocated_storage: 1,
     #     source_db_cluster_identifier: "String",
     #     dedicated_log_volume: false,
     #     upgrade_storage_config: false,
     #     ca_certificate_identifier: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #     source_region: "String",
     #   })
     #
@@ -7005,7 +7134,6 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
-    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -7038,6 +7166,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -7047,6 +7176,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.engine_version #=> String
     #   resp.db_instance.pending_modified_values.license_model #=> String
     #   resp.db_instance.pending_modified_values.iops #=> Integer
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
@@ -7058,13 +7188,19 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
-    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
-    #   resp.db_instance.pending_modified_values.engine #=> String
-    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -7077,6 +7213,7 @@ module Aws::RDS
     #   resp.db_instance.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
+    #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
@@ -7135,34 +7272,43 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
-    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
-    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
+    #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
-    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
     #   resp.db_instance.activity_stream_kms_key_id #=> String
     #   resp.db_instance.activity_stream_kinesis_stream_name #=> String
     #   resp.db_instance.activity_stream_mode #=> String, one of "sync", "async"
     #   resp.db_instance.activity_stream_engine_native_audit_fields_included #=> Boolean
-    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
-    #   resp.db_instance.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.backup_target #=> String
-    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
+    #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
-    #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.db_system_id #=> String
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
-    #   resp.db_instance.certificate_details.ca_identifier #=> String
-    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
-    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -7425,20 +7571,20 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_db_proxy({
-    #     db_proxy_name: "String", # required
+    #     db_proxy_name: "DBProxyName", # required
     #     engine_family: "MYSQL", # required, accepts MYSQL, POSTGRESQL, SQLSERVER
     #     default_auth_scheme: "IAM_AUTH", # accepts IAM_AUTH, NONE
     #     auth: [
     #       {
-    #         description: "String",
-    #         user_name: "String",
+    #         description: "Description",
+    #         user_name: "AuthUserName",
     #         auth_scheme: "SECRETS", # accepts SECRETS
-    #         secret_arn: "String",
+    #         secret_arn: "Arn",
     #         iam_auth: "DISABLED", # accepts DISABLED, REQUIRED, ENABLED
     #         client_password_auth_type: "MYSQL_NATIVE_PASSWORD", # accepts MYSQL_NATIVE_PASSWORD, MYSQL_CACHING_SHA2_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, SQL_SERVER_AUTHENTICATION
     #       },
     #     ],
-    #     role_arn: "String", # required
+    #     role_arn: "Arn", # required
     #     vpc_subnet_ids: ["String"], # required
     #     vpc_security_group_ids: ["String"],
     #     require_tls: false,
@@ -7952,6 +8098,7 @@ module Aws::RDS
     #   resp.db_snapshot.license_model #=> String
     #   resp.db_snapshot.snapshot_type #=> String
     #   resp.db_snapshot.iops #=> Integer
+    #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.option_group_name #=> String
     #   resp.db_snapshot.percent_progress #=> Integer
     #   resp.db_snapshot.source_region #=> String
@@ -7970,14 +8117,20 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list #=> Array
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
+    #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.original_snapshot_create_time #=> Time
     #   resp.db_snapshot.snapshot_database_time #=> Time
-    #   resp.db_snapshot.snapshot_target #=> String
-    #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
-    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #   resp.db_snapshot.multi_tenant #=> Boolean
+    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #   resp.db_snapshot.snapshot_availability_zone #=> String
+    #   resp.db_snapshot.additional_storage_volumes #=> Array
+    #   resp.db_snapshot.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_snapshot.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -8329,7 +8482,7 @@ module Aws::RDS
     #
     #  </note>
     #
-    # @option params [String] :global_cluster_identifier
+    # @option params [required, String] :global_cluster_identifier
     #   The cluster identifier for this global database cluster. This
     #   parameter is stored as a lowercase string.
     #
@@ -8469,7 +8622,7 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_global_cluster({
-    #     global_cluster_identifier: "String",
+    #     global_cluster_identifier: "GlobalClusterIdentifier", # required
     #     source_db_cluster_identifier: "String",
     #     engine: "String",
     #     engine_version: "String",
@@ -8590,10 +8743,10 @@ module Aws::RDS
     #   * {Types::Integration#additional_encryption_context #additional_encryption_context} => Hash&lt;String,String&gt;
     #   * {Types::Integration#status #status} => String
     #   * {Types::Integration#tags #tags} => Array&lt;Types::Tag&gt;
-    #   * {Types::Integration#create_time #create_time} => Time
-    #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
     #   * {Types::Integration#data_filter #data_filter} => String
     #   * {Types::Integration#description #description} => String
+    #   * {Types::Integration#create_time #create_time} => Time
+    #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
     #
     #
     # @example Example: To create a zero-ETL integration
@@ -8652,12 +8805,12 @@ module Aws::RDS
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.data_filter #=> String
+    #   resp.description #=> String
     #   resp.create_time #=> Time
     #   resp.errors #=> Array
     #   resp.errors[0].error_code #=> String
     #   resp.errors[0].error_message #=> String
-    #   resp.data_filter #=> String
-    #   resp.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateIntegration AWS API Documentation
     #
@@ -9206,8 +9359,9 @@ module Aws::RDS
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.delete
     #
     # @option params [required, String] :engine
-    #   The database engine. RDS Custom for Oracle supports the following
-    #   values:
+    #   The database engine.
+    #
+    #   RDS Custom for Oracle supports the following values:
     #
     #   * `custom-oracle-ee`
     #
@@ -9216,6 +9370,18 @@ module Aws::RDS
     #   * `custom-oracle-se2`
     #
     #   * `custom-oracle-se2-cdb`
+    #
+    #   RDS Custom for SQL Server supports the following values:
+    #
+    #   * `custom-sqlserver-ee`
+    #
+    #   * `custom-sqlserver-se`
+    #
+    #   * `ccustom-sqlserver-web`
+    #
+    #   * `custom-sqlserver-dev`
+    #
+    #   RDS for SQL Server supports only `sqlserver-dev-ee`.
     #
     # @option params [required, String] :engine_version
     #   The custom engine version (CEV) for your DB instance. This option is
@@ -9226,13 +9392,20 @@ module Aws::RDS
     # @return [Types::DBEngineVersion] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBEngineVersion#engine #engine} => String
+    #   * {Types::DBEngineVersion#major_engine_version #major_engine_version} => String
     #   * {Types::DBEngineVersion#engine_version #engine_version} => String
+    #   * {Types::DBEngineVersion#database_installation_files_s3_bucket_name #database_installation_files_s3_bucket_name} => String
+    #   * {Types::DBEngineVersion#database_installation_files_s3_prefix #database_installation_files_s3_prefix} => String
+    #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
     #   * {Types::DBEngineVersion#db_parameter_group_family #db_parameter_group_family} => String
     #   * {Types::DBEngineVersion#db_engine_description #db_engine_description} => String
+    #   * {Types::DBEngineVersion#db_engine_version_arn #db_engine_version_arn} => String
     #   * {Types::DBEngineVersion#db_engine_version_description #db_engine_version_description} => String
     #   * {Types::DBEngineVersion#default_character_set #default_character_set} => Types::CharacterSet
     #   * {Types::DBEngineVersion#image #image} => Types::CustomDBEngineVersionAMI
     #   * {Types::DBEngineVersion#db_engine_media_type #db_engine_media_type} => String
+    #   * {Types::DBEngineVersion#kms_key_id #kms_key_id} => String
+    #   * {Types::DBEngineVersion#create_time #create_time} => Time
     #   * {Types::DBEngineVersion#supported_character_sets #supported_character_sets} => Array&lt;Types::CharacterSet&gt;
     #   * {Types::DBEngineVersion#supported_nchar_character_sets #supported_nchar_character_sets} => Array&lt;Types::CharacterSet&gt;
     #   * {Types::DBEngineVersion#valid_upgrade_target #valid_upgrade_target} => Array&lt;Types::UpgradeTarget&gt;
@@ -9245,21 +9418,16 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#status #status} => String
     #   * {Types::DBEngineVersion#supports_parallel_query #supports_parallel_query} => Boolean
     #   * {Types::DBEngineVersion#supports_global_databases #supports_global_databases} => Boolean
-    #   * {Types::DBEngineVersion#major_engine_version #major_engine_version} => String
-    #   * {Types::DBEngineVersion#database_installation_files_s3_bucket_name #database_installation_files_s3_bucket_name} => String
-    #   * {Types::DBEngineVersion#database_installation_files_s3_prefix #database_installation_files_s3_prefix} => String
-    #   * {Types::DBEngineVersion#db_engine_version_arn #db_engine_version_arn} => String
-    #   * {Types::DBEngineVersion#kms_key_id #kms_key_id} => String
-    #   * {Types::DBEngineVersion#create_time #create_time} => Time
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
-    #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
     #   * {Types::DBEngineVersion#supports_limitless_database #supports_limitless_database} => Boolean
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
     #   * {Types::DBEngineVersion#supports_integrations #supports_integrations} => Boolean
     #   * {Types::DBEngineVersion#serverless_v2_features_support #serverless_v2_features_support} => Types::ServerlessV2FeaturesSupport
+    #   * {Types::DBEngineVersion#database_installation_files #database_installation_files} => Array&lt;String&gt;
+    #   * {Types::DBEngineVersion#failure_reason #failure_reason} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -9271,15 +9439,22 @@ module Aws::RDS
     # @example Response structure
     #
     #   resp.engine #=> String
+    #   resp.major_engine_version #=> String
     #   resp.engine_version #=> String
+    #   resp.database_installation_files_s3_bucket_name #=> String
+    #   resp.database_installation_files_s3_prefix #=> String
+    #   resp.custom_db_engine_version_manifest #=> String
     #   resp.db_parameter_group_family #=> String
     #   resp.db_engine_description #=> String
+    #   resp.db_engine_version_arn #=> String
     #   resp.db_engine_version_description #=> String
     #   resp.default_character_set.character_set_name #=> String
     #   resp.default_character_set.character_set_description #=> String
     #   resp.image.image_id #=> String
     #   resp.image.status #=> String
     #   resp.db_engine_media_type #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.create_time #=> Time
     #   resp.supported_character_sets #=> Array
     #   resp.supported_character_sets[0].character_set_name #=> String
     #   resp.supported_character_sets[0].character_set_description #=> String
@@ -9313,17 +9488,10 @@ module Aws::RDS
     #   resp.status #=> String
     #   resp.supports_parallel_query #=> Boolean
     #   resp.supports_global_databases #=> Boolean
-    #   resp.major_engine_version #=> String
-    #   resp.database_installation_files_s3_bucket_name #=> String
-    #   resp.database_installation_files_s3_prefix #=> String
-    #   resp.db_engine_version_arn #=> String
-    #   resp.kms_key_id #=> String
-    #   resp.create_time #=> Time
     #   resp.tag_list #=> Array
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
     #   resp.supports_babelfish #=> Boolean
-    #   resp.custom_db_engine_version_manifest #=> String
     #   resp.supports_limitless_database #=> Boolean
     #   resp.supports_certificate_rotation_without_restart #=> Boolean
     #   resp.supported_ca_certificate_identifiers #=> Array
@@ -9332,6 +9500,9 @@ module Aws::RDS
     #   resp.supports_integrations #=> Boolean
     #   resp.serverless_v2_features_support.min_capacity #=> Float
     #   resp.serverless_v2_features_support.max_capacity #=> Float
+    #   resp.database_installation_files #=> Array
+    #   resp.database_installation_files[0] #=> String
+    #   resp.failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomDBEngineVersion AWS API Documentation
     #
@@ -9464,7 +9635,6 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
-    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -9482,6 +9652,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -9516,6 +9687,23 @@ module Aws::RDS
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -9526,6 +9714,13 @@ module Aws::RDS
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.db_cluster_instance_class #=> String
+    #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.iops #=> Integer
+    #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.publicly_accessible #=> Boolean
+    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -9549,49 +9744,26 @@ module Aws::RDS
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
-    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
-    #   resp.db_cluster.pending_modified_values.engine_version #=> String
-    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
-    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
-    #   resp.db_cluster.pending_modified_values.iops #=> Integer
-    #   resp.db_cluster.pending_modified_values.storage_type #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
-    #   resp.db_cluster.db_cluster_instance_class #=> String
-    #   resp.db_cluster.storage_type #=> String
-    #   resp.db_cluster.iops #=> Integer
-    #   resp.db_cluster.publicly_accessible #=> Boolean
-    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
+    #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.monitoring_interval #=> Integer
     #   resp.db_cluster.monitoring_role_arn #=> String
     #   resp.db_cluster.database_insights_mode #=> String, one of "standard", "advanced"
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
-    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
-    #   resp.db_cluster.serverless_v2_platform_version #=> String
-    #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
-    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
-    #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
@@ -9651,8 +9823,11 @@ module Aws::RDS
     #   resp.db_cluster_automated_backup.kms_key_id #=> String
     #   resp.db_cluster_automated_backup.storage_type #=> String
     #   resp.db_cluster_automated_backup.iops #=> Integer
-    #   resp.db_cluster_automated_backup.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster_automated_backup.storage_throughput #=> Integer
+    #   resp.db_cluster_automated_backup.aws_backup_recovery_point_arn #=> String
+    #   resp.db_cluster_automated_backup.tag_list #=> Array
+    #   resp.db_cluster_automated_backup.tag_list[0].key #=> String
+    #   resp.db_cluster_automated_backup.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterAutomatedBackup AWS API Documentation
     #
@@ -9895,10 +10070,10 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.tag_list #=> Array
     #   resp.db_cluster_snapshot.tag_list[0].key #=> String
     #   resp.db_cluster_snapshot.tag_list[0].value #=> String
-    #   resp.db_cluster_snapshot.db_system_id #=> String
     #   resp.db_cluster_snapshot.storage_type #=> String
-    #   resp.db_cluster_snapshot.db_cluster_resource_id #=> String
     #   resp.db_cluster_snapshot.storage_throughput #=> Integer
+    #   resp.db_cluster_snapshot.db_cluster_resource_id #=> String
+    #   resp.db_cluster_snapshot.db_system_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterSnapshot AWS API Documentation
     #
@@ -10042,7 +10217,6 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
-    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -10075,6 +10249,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -10084,6 +10259,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.engine_version #=> String
     #   resp.db_instance.pending_modified_values.license_model #=> String
     #   resp.db_instance.pending_modified_values.iops #=> Integer
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
@@ -10095,13 +10271,19 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
-    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
-    #   resp.db_instance.pending_modified_values.engine #=> String
-    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -10114,6 +10296,7 @@ module Aws::RDS
     #   resp.db_instance.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
+    #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
@@ -10172,34 +10355,43 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
-    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
-    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
+    #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
-    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
     #   resp.db_instance.activity_stream_kms_key_id #=> String
     #   resp.db_instance.activity_stream_kinesis_stream_name #=> String
     #   resp.db_instance.activity_stream_mode #=> String, one of "sync", "async"
     #   resp.db_instance.activity_stream_engine_native_audit_fields_included #=> Boolean
-    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
-    #   resp.db_instance.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.backup_target #=> String
-    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
+    #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
-    #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.db_system_id #=> String
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
-    #   resp.db_instance.certificate_details.ca_identifier #=> String
-    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
-    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -10292,6 +10484,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.engine_version #=> String
     #   resp.db_instance_automated_backup.license_model #=> String
     #   resp.db_instance_automated_backup.iops #=> Integer
+    #   resp.db_instance_automated_backup.storage_throughput #=> Integer
     #   resp.db_instance_automated_backup.option_group_name #=> String
     #   resp.db_instance_automated_backup.tde_credential_arn #=> String
     #   resp.db_instance_automated_backup.encrypted #=> Boolean
@@ -10304,10 +10497,19 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backup.backup_target #=> String
-    #   resp.db_instance_automated_backup.storage_throughput #=> Integer
-    #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
-    #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
     #   resp.db_instance_automated_backup.multi_tenant #=> Boolean
+    #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backup.tag_list #=> Array
+    #   resp.db_instance_automated_backup.tag_list[0].key #=> String
+    #   resp.db_instance_automated_backup.tag_list[0].value #=> String
+    #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
+    #   resp.db_instance_automated_backup.additional_storage_volumes #=> Array
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceAutomatedBackup AWS API Documentation
     #
@@ -10370,7 +10572,7 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_db_proxy({
-    #     db_proxy_name: "String", # required
+    #     db_proxy_name: "DBProxyName", # required
     #   })
     #
     # @example Response structure
@@ -10649,6 +10851,7 @@ module Aws::RDS
     #   resp.db_snapshot.license_model #=> String
     #   resp.db_snapshot.snapshot_type #=> String
     #   resp.db_snapshot.iops #=> Integer
+    #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.option_group_name #=> String
     #   resp.db_snapshot.percent_progress #=> Integer
     #   resp.db_snapshot.source_region #=> String
@@ -10667,14 +10870,20 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list #=> Array
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
+    #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.original_snapshot_create_time #=> Time
     #   resp.db_snapshot.snapshot_database_time #=> Time
-    #   resp.db_snapshot.snapshot_target #=> String
-    #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
-    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #   resp.db_snapshot.multi_tenant #=> Boolean
+    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #   resp.db_snapshot.snapshot_availability_zone #=> String
+    #   resp.db_snapshot.additional_storage_volumes #=> Array
+    #   resp.db_snapshot.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_snapshot.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -10842,7 +11051,7 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_global_cluster({
-    #     global_cluster_identifier: "String", # required
+    #     global_cluster_identifier: "GlobalClusterIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -10897,10 +11106,10 @@ module Aws::RDS
     #   * {Types::Integration#additional_encryption_context #additional_encryption_context} => Hash&lt;String,String&gt;
     #   * {Types::Integration#status #status} => String
     #   * {Types::Integration#tags #tags} => Array&lt;Types::Tag&gt;
-    #   * {Types::Integration#create_time #create_time} => Time
-    #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
     #   * {Types::Integration#data_filter #data_filter} => String
     #   * {Types::Integration#description #description} => String
+    #   * {Types::Integration#create_time #create_time} => Time
+    #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
     #
     #
     # @example Example: To delete a zero-ETL integration
@@ -10943,12 +11152,12 @@ module Aws::RDS
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.data_filter #=> String
+    #   resp.description #=> String
     #   resp.create_time #=> Time
     #   resp.errors #=> Array
     #   resp.errors[0].error_code #=> String
     #   resp.errors[0].error_message #=> String
-    #   resp.data_filter #=> String
-    #   resp.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteIntegration AWS API Documentation
     #
@@ -11092,8 +11301,8 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.deregister_db_proxy_targets({
-    #     db_proxy_name: "String", # required
-    #     target_group_name: "String",
+    #     db_proxy_name: "DBProxyName", # required
+    #     target_group_name: "DBProxyTargetGroupName",
     #     db_instance_identifiers: ["String"],
     #     db_cluster_identifiers: ["String"],
     #   })
@@ -11791,8 +12000,11 @@ module Aws::RDS
     #   resp.db_cluster_automated_backups[0].kms_key_id #=> String
     #   resp.db_cluster_automated_backups[0].storage_type #=> String
     #   resp.db_cluster_automated_backups[0].iops #=> Integer
-    #   resp.db_cluster_automated_backups[0].aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster_automated_backups[0].storage_throughput #=> Integer
+    #   resp.db_cluster_automated_backups[0].aws_backup_recovery_point_arn #=> String
+    #   resp.db_cluster_automated_backups[0].tag_list #=> Array
+    #   resp.db_cluster_automated_backups[0].tag_list[0].key #=> String
+    #   resp.db_cluster_automated_backups[0].tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterAutomatedBackups AWS API Documentation
     #
@@ -12696,10 +12908,10 @@ module Aws::RDS
     #   resp.db_cluster_snapshots[0].tag_list #=> Array
     #   resp.db_cluster_snapshots[0].tag_list[0].key #=> String
     #   resp.db_cluster_snapshots[0].tag_list[0].value #=> String
-    #   resp.db_cluster_snapshots[0].db_system_id #=> String
     #   resp.db_cluster_snapshots[0].storage_type #=> String
-    #   resp.db_cluster_snapshots[0].db_cluster_resource_id #=> String
     #   resp.db_cluster_snapshots[0].storage_throughput #=> Integer
+    #   resp.db_cluster_snapshots[0].db_cluster_resource_id #=> String
+    #   resp.db_cluster_snapshots[0].db_system_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -12923,7 +13135,6 @@ module Aws::RDS
     #   resp.db_clusters[0].db_cluster_parameter_group #=> String
     #   resp.db_clusters[0].db_subnet_group #=> String
     #   resp.db_clusters[0].status #=> String
-    #   resp.db_clusters[0].automatic_restart_time #=> Time
     #   resp.db_clusters[0].percent_progress #=> String
     #   resp.db_clusters[0].earliest_restorable_time #=> Time
     #   resp.db_clusters[0].endpoint #=> String
@@ -12941,6 +13152,7 @@ module Aws::RDS
     #   resp.db_clusters[0].db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_clusters[0].preferred_backup_window #=> String
     #   resp.db_clusters[0].preferred_maintenance_window #=> String
+    #   resp.db_clusters[0].upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_clusters[0].replication_source_identifier #=> String
     #   resp.db_clusters[0].read_replica_identifiers #=> Array
     #   resp.db_clusters[0].read_replica_identifiers[0] #=> String
@@ -12975,6 +13187,23 @@ module Aws::RDS
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_clusters[0].capacity #=> Integer
+    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_clusters[0].pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_clusters[0].pending_modified_values.master_user_password #=> String
+    #   resp.db_clusters[0].pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_clusters[0].pending_modified_values.engine_version #=> String
+    #   resp.db_clusters[0].pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_clusters[0].pending_modified_values.storage_type #=> String
+    #   resp.db_clusters[0].pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_clusters[0].pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_clusters[0].pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_clusters[0].pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_clusters[0].pending_modified_values.iops #=> Integer
+    #   resp.db_clusters[0].pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_clusters[0].pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_clusters[0].engine_mode #=> String
     #   resp.db_clusters[0].scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_clusters[0].scaling_configuration_info.max_capacity #=> Integer
@@ -12985,6 +13214,13 @@ module Aws::RDS
     #   resp.db_clusters[0].rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_clusters[0].rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_clusters[0].rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_clusters[0].db_cluster_instance_class #=> String
+    #   resp.db_clusters[0].storage_type #=> String
+    #   resp.db_clusters[0].iops #=> Integer
+    #   resp.db_clusters[0].storage_throughput #=> Integer
+    #   resp.db_clusters[0].io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_clusters[0].publicly_accessible #=> Boolean
+    #   resp.db_clusters[0].auto_minor_version_upgrade #=> Boolean
     #   resp.db_clusters[0].deletion_protection #=> Boolean
     #   resp.db_clusters[0].http_endpoint_enabled #=> Boolean
     #   resp.db_clusters[0].activity_stream_mode #=> String, one of "sync", "async"
@@ -13008,49 +13244,26 @@ module Aws::RDS
     #   resp.db_clusters[0].global_cluster_identifier #=> String
     #   resp.db_clusters[0].global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_clusters[0].global_write_forwarding_requested #=> Boolean
-    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
-    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
-    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
-    #   resp.db_clusters[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
-    #   resp.db_clusters[0].pending_modified_values.db_cluster_identifier #=> String
-    #   resp.db_clusters[0].pending_modified_values.master_user_password #=> String
-    #   resp.db_clusters[0].pending_modified_values.iam_database_authentication_enabled #=> Boolean
-    #   resp.db_clusters[0].pending_modified_values.engine_version #=> String
-    #   resp.db_clusters[0].pending_modified_values.backup_retention_period #=> Integer
-    #   resp.db_clusters[0].pending_modified_values.allocated_storage #=> Integer
-    #   resp.db_clusters[0].pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
-    #   resp.db_clusters[0].pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
-    #   resp.db_clusters[0].pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
-    #   resp.db_clusters[0].pending_modified_values.iops #=> Integer
-    #   resp.db_clusters[0].pending_modified_values.storage_type #=> String
-    #   resp.db_clusters[0].pending_modified_values.certificate_details.ca_identifier #=> String
-    #   resp.db_clusters[0].pending_modified_values.certificate_details.valid_till #=> Time
-    #   resp.db_clusters[0].db_cluster_instance_class #=> String
-    #   resp.db_clusters[0].storage_type #=> String
-    #   resp.db_clusters[0].iops #=> Integer
-    #   resp.db_clusters[0].publicly_accessible #=> Boolean
-    #   resp.db_clusters[0].auto_minor_version_upgrade #=> Boolean
+    #   resp.db_clusters[0].network_type #=> String
+    #   resp.db_clusters[0].automatic_restart_time #=> Time
+    #   resp.db_clusters[0].serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_clusters[0].serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_clusters[0].serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
+    #   resp.db_clusters[0].serverless_v2_platform_version #=> String
     #   resp.db_clusters[0].monitoring_interval #=> Integer
     #   resp.db_clusters[0].monitoring_role_arn #=> String
     #   resp.db_clusters[0].database_insights_mode #=> String, one of "standard", "advanced"
     #   resp.db_clusters[0].performance_insights_enabled #=> Boolean
     #   resp.db_clusters[0].performance_insights_kms_key_id #=> String
     #   resp.db_clusters[0].performance_insights_retention_period #=> Integer
-    #   resp.db_clusters[0].serverless_v2_scaling_configuration.min_capacity #=> Float
-    #   resp.db_clusters[0].serverless_v2_scaling_configuration.max_capacity #=> Float
-    #   resp.db_clusters[0].serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
-    #   resp.db_clusters[0].serverless_v2_platform_version #=> String
-    #   resp.db_clusters[0].network_type #=> String
     #   resp.db_clusters[0].db_system_id #=> String
     #   resp.db_clusters[0].master_user_secret.secret_arn #=> String
     #   resp.db_clusters[0].master_user_secret.secret_status #=> String
     #   resp.db_clusters[0].master_user_secret.kms_key_id #=> String
-    #   resp.db_clusters[0].io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_clusters[0].local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_clusters[0].aws_backup_recovery_point_arn #=> String
     #   resp.db_clusters[0].limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_clusters[0].limitless_database.min_required_acu #=> Float
-    #   resp.db_clusters[0].storage_throughput #=> Integer
     #   resp.db_clusters[0].cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_clusters[0].certificate_details.ca_identifier #=> String
     #   resp.db_clusters[0].certificate_details.valid_till #=> Time
@@ -13283,15 +13496,22 @@ module Aws::RDS
     #   resp.marker #=> String
     #   resp.db_engine_versions #=> Array
     #   resp.db_engine_versions[0].engine #=> String
+    #   resp.db_engine_versions[0].major_engine_version #=> String
     #   resp.db_engine_versions[0].engine_version #=> String
+    #   resp.db_engine_versions[0].database_installation_files_s3_bucket_name #=> String
+    #   resp.db_engine_versions[0].database_installation_files_s3_prefix #=> String
+    #   resp.db_engine_versions[0].custom_db_engine_version_manifest #=> String
     #   resp.db_engine_versions[0].db_parameter_group_family #=> String
     #   resp.db_engine_versions[0].db_engine_description #=> String
+    #   resp.db_engine_versions[0].db_engine_version_arn #=> String
     #   resp.db_engine_versions[0].db_engine_version_description #=> String
     #   resp.db_engine_versions[0].default_character_set.character_set_name #=> String
     #   resp.db_engine_versions[0].default_character_set.character_set_description #=> String
     #   resp.db_engine_versions[0].image.image_id #=> String
     #   resp.db_engine_versions[0].image.status #=> String
     #   resp.db_engine_versions[0].db_engine_media_type #=> String
+    #   resp.db_engine_versions[0].kms_key_id #=> String
+    #   resp.db_engine_versions[0].create_time #=> Time
     #   resp.db_engine_versions[0].supported_character_sets #=> Array
     #   resp.db_engine_versions[0].supported_character_sets[0].character_set_name #=> String
     #   resp.db_engine_versions[0].supported_character_sets[0].character_set_description #=> String
@@ -13325,17 +13545,10 @@ module Aws::RDS
     #   resp.db_engine_versions[0].status #=> String
     #   resp.db_engine_versions[0].supports_parallel_query #=> Boolean
     #   resp.db_engine_versions[0].supports_global_databases #=> Boolean
-    #   resp.db_engine_versions[0].major_engine_version #=> String
-    #   resp.db_engine_versions[0].database_installation_files_s3_bucket_name #=> String
-    #   resp.db_engine_versions[0].database_installation_files_s3_prefix #=> String
-    #   resp.db_engine_versions[0].db_engine_version_arn #=> String
-    #   resp.db_engine_versions[0].kms_key_id #=> String
-    #   resp.db_engine_versions[0].create_time #=> Time
     #   resp.db_engine_versions[0].tag_list #=> Array
     #   resp.db_engine_versions[0].tag_list[0].key #=> String
     #   resp.db_engine_versions[0].tag_list[0].value #=> String
     #   resp.db_engine_versions[0].supports_babelfish #=> Boolean
-    #   resp.db_engine_versions[0].custom_db_engine_version_manifest #=> String
     #   resp.db_engine_versions[0].supports_limitless_database #=> Boolean
     #   resp.db_engine_versions[0].supports_certificate_rotation_without_restart #=> Boolean
     #   resp.db_engine_versions[0].supported_ca_certificate_identifiers #=> Array
@@ -13344,6 +13557,9 @@ module Aws::RDS
     #   resp.db_engine_versions[0].supports_integrations #=> Boolean
     #   resp.db_engine_versions[0].serverless_v2_features_support.min_capacity #=> Float
     #   resp.db_engine_versions[0].serverless_v2_features_support.max_capacity #=> Float
+    #   resp.db_engine_versions[0].database_installation_files #=> Array
+    #   resp.db_engine_versions[0].database_installation_files[0] #=> String
+    #   resp.db_engine_versions[0].failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -13500,6 +13716,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backups[0].engine_version #=> String
     #   resp.db_instance_automated_backups[0].license_model #=> String
     #   resp.db_instance_automated_backups[0].iops #=> Integer
+    #   resp.db_instance_automated_backups[0].storage_throughput #=> Integer
     #   resp.db_instance_automated_backups[0].option_group_name #=> String
     #   resp.db_instance_automated_backups[0].tde_credential_arn #=> String
     #   resp.db_instance_automated_backups[0].encrypted #=> Boolean
@@ -13512,10 +13729,19 @@ module Aws::RDS
     #   resp.db_instance_automated_backups[0].db_instance_automated_backups_replications #=> Array
     #   resp.db_instance_automated_backups[0].db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backups[0].backup_target #=> String
-    #   resp.db_instance_automated_backups[0].storage_throughput #=> Integer
-    #   resp.db_instance_automated_backups[0].aws_backup_recovery_point_arn #=> String
-    #   resp.db_instance_automated_backups[0].dedicated_log_volume #=> Boolean
     #   resp.db_instance_automated_backups[0].multi_tenant #=> Boolean
+    #   resp.db_instance_automated_backups[0].aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backups[0].tag_list #=> Array
+    #   resp.db_instance_automated_backups[0].tag_list[0].key #=> String
+    #   resp.db_instance_automated_backups[0].tag_list[0].value #=> String
+    #   resp.db_instance_automated_backups[0].dedicated_log_volume #=> Boolean
+    #   resp.db_instance_automated_backups[0].additional_storage_volumes #=> Array
+    #   resp.db_instance_automated_backups[0].additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance_automated_backups[0].additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance_automated_backups[0].additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance_automated_backups[0].additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance_automated_backups[0].additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance_automated_backups[0].additional_storage_volumes[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstanceAutomatedBackups AWS API Documentation
     #
@@ -13642,7 +13868,6 @@ module Aws::RDS
     #   resp.db_instances[0].db_instance_class #=> String
     #   resp.db_instances[0].engine #=> String
     #   resp.db_instances[0].db_instance_status #=> String
-    #   resp.db_instances[0].automatic_restart_time #=> Time
     #   resp.db_instances[0].master_username #=> String
     #   resp.db_instances[0].db_name #=> String
     #   resp.db_instances[0].endpoint.address #=> String
@@ -13675,6 +13900,7 @@ module Aws::RDS
     #   resp.db_instances[0].db_subnet_group.supported_network_types #=> Array
     #   resp.db_instances[0].db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instances[0].preferred_maintenance_window #=> String
+    #   resp.db_instances[0].upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instances[0].pending_modified_values.db_instance_class #=> String
     #   resp.db_instances[0].pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instances[0].pending_modified_values.master_user_password #=> String
@@ -13684,6 +13910,7 @@ module Aws::RDS
     #   resp.db_instances[0].pending_modified_values.engine_version #=> String
     #   resp.db_instances[0].pending_modified_values.license_model #=> String
     #   resp.db_instances[0].pending_modified_values.iops #=> Integer
+    #   resp.db_instances[0].pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instances[0].pending_modified_values.db_instance_identifier #=> String
     #   resp.db_instances[0].pending_modified_values.storage_type #=> String
     #   resp.db_instances[0].pending_modified_values.ca_certificate_identifier #=> String
@@ -13695,13 +13922,19 @@ module Aws::RDS
     #   resp.db_instances[0].pending_modified_values.processor_features #=> Array
     #   resp.db_instances[0].pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instances[0].pending_modified_values.processor_features[0].value #=> String
-    #   resp.db_instances[0].pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instances[0].pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instances[0].pending_modified_values.resume_full_automation_mode_time #=> Time
-    #   resp.db_instances[0].pending_modified_values.storage_throughput #=> Integer
-    #   resp.db_instances[0].pending_modified_values.engine #=> String
-    #   resp.db_instances[0].pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instances[0].pending_modified_values.multi_tenant #=> Boolean
+    #   resp.db_instances[0].pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instances[0].pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instances[0].pending_modified_values.engine #=> String
+    #   resp.db_instances[0].pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instances[0].pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instances[0].pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instances[0].pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instances[0].pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instances[0].pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instances[0].pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instances[0].latest_restorable_time #=> Time
     #   resp.db_instances[0].multi_az #=> Boolean
     #   resp.db_instances[0].engine_version #=> String
@@ -13714,6 +13947,7 @@ module Aws::RDS
     #   resp.db_instances[0].replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_instances[0].license_model #=> String
     #   resp.db_instances[0].iops #=> Integer
+    #   resp.db_instances[0].storage_throughput #=> Integer
     #   resp.db_instances[0].option_group_memberships #=> Array
     #   resp.db_instances[0].option_group_memberships[0].option_group_name #=> String
     #   resp.db_instances[0].option_group_memberships[0].status #=> String
@@ -13772,34 +14006,43 @@ module Aws::RDS
     #   resp.db_instances[0].tag_list #=> Array
     #   resp.db_instances[0].tag_list[0].key #=> String
     #   resp.db_instances[0].tag_list[0].value #=> String
-    #   resp.db_instances[0].db_instance_automated_backups_replications #=> Array
-    #   resp.db_instances[0].db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instances[0].automation_mode #=> String, one of "full", "all-paused"
+    #   resp.db_instances[0].resume_full_automation_mode_time #=> Time
     #   resp.db_instances[0].customer_owned_ip_enabled #=> Boolean
-    #   resp.db_instances[0].aws_backup_recovery_point_arn #=> String
+    #   resp.db_instances[0].network_type #=> String
     #   resp.db_instances[0].activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
     #   resp.db_instances[0].activity_stream_kms_key_id #=> String
     #   resp.db_instances[0].activity_stream_kinesis_stream_name #=> String
     #   resp.db_instances[0].activity_stream_mode #=> String, one of "sync", "async"
     #   resp.db_instances[0].activity_stream_engine_native_audit_fields_included #=> Boolean
-    #   resp.db_instances[0].automation_mode #=> String, one of "full", "all-paused"
-    #   resp.db_instances[0].resume_full_automation_mode_time #=> Time
-    #   resp.db_instances[0].custom_iam_instance_profile #=> String
+    #   resp.db_instances[0].aws_backup_recovery_point_arn #=> String
+    #   resp.db_instances[0].db_instance_automated_backups_replications #=> Array
+    #   resp.db_instances[0].db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instances[0].backup_target #=> String
-    #   resp.db_instances[0].network_type #=> String
+    #   resp.db_instances[0].automatic_restart_time #=> Time
+    #   resp.db_instances[0].custom_iam_instance_profile #=> String
     #   resp.db_instances[0].activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
-    #   resp.db_instances[0].storage_throughput #=> Integer
+    #   resp.db_instances[0].certificate_details.ca_identifier #=> String
+    #   resp.db_instances[0].certificate_details.valid_till #=> Time
     #   resp.db_instances[0].db_system_id #=> String
     #   resp.db_instances[0].master_user_secret.secret_arn #=> String
     #   resp.db_instances[0].master_user_secret.secret_status #=> String
     #   resp.db_instances[0].master_user_secret.kms_key_id #=> String
-    #   resp.db_instances[0].certificate_details.ca_identifier #=> String
-    #   resp.db_instances[0].certificate_details.valid_till #=> Time
     #   resp.db_instances[0].read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instances[0].percent_progress #=> String
+    #   resp.db_instances[0].multi_tenant #=> Boolean
     #   resp.db_instances[0].dedicated_log_volume #=> Boolean
     #   resp.db_instances[0].is_storage_config_upgrade_available #=> Boolean
-    #   resp.db_instances[0].multi_tenant #=> Boolean
     #   resp.db_instances[0].engine_lifecycle_support #=> String
+    #   resp.db_instances[0].additional_storage_volumes #=> Array
+    #   resp.db_instances[0].additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instances[0].additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instances[0].additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instances[0].additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instances[0].additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instances[0].additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instances[0].additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instances[0].storage_volume_status #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -14308,7 +14551,7 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_proxies({
-    #     db_proxy_name: "String",
+    #     db_proxy_name: "DBProxyName",
     #     filters: [
     #       {
     #         name: "String", # required
@@ -14476,8 +14719,8 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_proxy_target_groups({
-    #     db_proxy_name: "String", # required
-    #     target_group_name: "String",
+    #     db_proxy_name: "DBProxyName", # required
+    #     target_group_name: "DBProxyTargetGroupName",
     #     filters: [
     #       {
     #         name: "String", # required
@@ -14552,8 +14795,8 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_proxy_targets({
-    #     db_proxy_name: "String", # required
-    #     target_group_name: "String",
+    #     db_proxy_name: "DBProxyName", # required
+    #     target_group_name: "DBProxyTargetGroupName",
     #     filters: [
     #       {
     #         name: "String", # required
@@ -14574,8 +14817,8 @@ module Aws::RDS
     #   resp.targets[0].port #=> Integer
     #   resp.targets[0].type #=> String, one of "RDS_INSTANCE", "RDS_SERVERLESS_ENDPOINT", "TRACKED_CLUSTER"
     #   resp.targets[0].role #=> String, one of "READ_WRITE", "READ_ONLY", "UNKNOWN"
-    #   resp.targets[0].target_health.state #=> String, one of "REGISTERING", "AVAILABLE", "UNAVAILABLE"
-    #   resp.targets[0].target_health.reason #=> String, one of "UNREACHABLE", "CONNECTION_FAILED", "AUTH_FAILURE", "PENDING_PROXY_CAPACITY", "INVALID_REPLICATION_STATE"
+    #   resp.targets[0].target_health.state #=> String, one of "REGISTERING", "AVAILABLE", "UNAVAILABLE", "UNUSED"
+    #   resp.targets[0].target_health.reason #=> String, one of "UNREACHABLE", "CONNECTION_FAILED", "AUTH_FAILURE", "PENDING_PROXY_CAPACITY", "INVALID_REPLICATION_STATE", "PROMOTED"
     #   resp.targets[0].target_health.description #=> String
     #   resp.marker #=> String
     #
@@ -15395,6 +15638,7 @@ module Aws::RDS
     #   resp.db_snapshots[0].license_model #=> String
     #   resp.db_snapshots[0].snapshot_type #=> String
     #   resp.db_snapshots[0].iops #=> Integer
+    #   resp.db_snapshots[0].storage_throughput #=> Integer
     #   resp.db_snapshots[0].option_group_name #=> String
     #   resp.db_snapshots[0].percent_progress #=> Integer
     #   resp.db_snapshots[0].source_region #=> String
@@ -15413,14 +15657,20 @@ module Aws::RDS
     #   resp.db_snapshots[0].tag_list #=> Array
     #   resp.db_snapshots[0].tag_list[0].key #=> String
     #   resp.db_snapshots[0].tag_list[0].value #=> String
+    #   resp.db_snapshots[0].snapshot_target #=> String
     #   resp.db_snapshots[0].original_snapshot_create_time #=> Time
     #   resp.db_snapshots[0].snapshot_database_time #=> Time
-    #   resp.db_snapshots[0].snapshot_target #=> String
-    #   resp.db_snapshots[0].storage_throughput #=> Integer
     #   resp.db_snapshots[0].db_system_id #=> String
-    #   resp.db_snapshots[0].dedicated_log_volume #=> Boolean
     #   resp.db_snapshots[0].multi_tenant #=> Boolean
+    #   resp.db_snapshots[0].dedicated_log_volume #=> Boolean
     #   resp.db_snapshots[0].snapshot_availability_zone #=> String
+    #   resp.db_snapshots[0].additional_storage_volumes #=> Array
+    #   resp.db_snapshots[0].additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_snapshots[0].additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_snapshots[0].additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_snapshots[0].additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_snapshots[0].additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_snapshots[0].additional_storage_volumes[0].storage_type #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -16260,7 +16510,7 @@ module Aws::RDS
     #
     #   resp = client.describe_events({
     #     source_identifier: "String",
-    #     source_type: "db-instance", # accepts db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot, custom-engine-version, db-proxy, blue-green-deployment
+    #     source_type: "db-instance", # accepts db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot, custom-engine-version, db-proxy, blue-green-deployment, db-shard-group, zero-etl
     #     start_time: Time.now,
     #     end_time: Time.now,
     #     duration: 1,
@@ -16280,7 +16530,7 @@ module Aws::RDS
     #   resp.marker #=> String
     #   resp.events #=> Array
     #   resp.events[0].source_identifier #=> String
-    #   resp.events[0].source_type #=> String, one of "db-instance", "db-parameter-group", "db-security-group", "db-snapshot", "db-cluster", "db-cluster-snapshot", "custom-engine-version", "db-proxy", "blue-green-deployment"
+    #   resp.events[0].source_type #=> String, one of "db-instance", "db-parameter-group", "db-security-group", "db-snapshot", "db-cluster", "db-cluster-snapshot", "custom-engine-version", "db-proxy", "blue-green-deployment", "db-shard-group", "zero-etl"
     #   resp.events[0].message #=> String
     #   resp.events[0].event_categories #=> Array
     #   resp.events[0].event_categories[0] #=> String
@@ -16536,7 +16786,7 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_global_clusters({
-    #     global_cluster_identifier: "String",
+    #     global_cluster_identifier: "GlobalClusterIdentifier",
     #     filters: [
     #       {
     #         name: "String", # required
@@ -16672,12 +16922,12 @@ module Aws::RDS
     #   resp.integrations[0].tags #=> Array
     #   resp.integrations[0].tags[0].key #=> String
     #   resp.integrations[0].tags[0].value #=> String
+    #   resp.integrations[0].data_filter #=> String
+    #   resp.integrations[0].description #=> String
     #   resp.integrations[0].create_time #=> Time
     #   resp.integrations[0].errors #=> Array
     #   resp.integrations[0].errors[0].error_code #=> String
     #   resp.integrations[0].errors[0].error_message #=> String
-    #   resp.integrations[0].data_filter #=> String
-    #   resp.integrations[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeIntegrations AWS API Documentation
     #
@@ -17203,6 +17453,7 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].supports_storage_encryption #=> Boolean
     #   resp.orderable_db_instance_options[0].storage_type #=> String
     #   resp.orderable_db_instance_options[0].supports_iops #=> Boolean
+    #   resp.orderable_db_instance_options[0].supports_storage_throughput #=> Boolean
     #   resp.orderable_db_instance_options[0].supports_enhanced_monitoring #=> Boolean
     #   resp.orderable_db_instance_options[0].supports_iam_database_authentication #=> Boolean
     #   resp.orderable_db_instance_options[0].supports_performance_insights #=> Boolean
@@ -17212,6 +17463,10 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].max_iops_per_db_instance #=> Integer
     #   resp.orderable_db_instance_options[0].min_iops_per_gib #=> Float
     #   resp.orderable_db_instance_options[0].max_iops_per_gib #=> Float
+    #   resp.orderable_db_instance_options[0].min_storage_throughput_per_db_instance #=> Integer
+    #   resp.orderable_db_instance_options[0].max_storage_throughput_per_db_instance #=> Integer
+    #   resp.orderable_db_instance_options[0].min_storage_throughput_per_iops #=> Float
+    #   resp.orderable_db_instance_options[0].max_storage_throughput_per_iops #=> Float
     #   resp.orderable_db_instance_options[0].available_processor_features #=> Array
     #   resp.orderable_db_instance_options[0].available_processor_features[0].name #=> String
     #   resp.orderable_db_instance_options[0].available_processor_features[0].default_value #=> String
@@ -17224,16 +17479,25 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].supported_activity_stream_modes #=> Array
     #   resp.orderable_db_instance_options[0].supported_activity_stream_modes[0] #=> String
     #   resp.orderable_db_instance_options[0].supports_global_databases #=> Boolean
-    #   resp.orderable_db_instance_options[0].supports_clusters #=> Boolean
     #   resp.orderable_db_instance_options[0].supported_network_types #=> Array
     #   resp.orderable_db_instance_options[0].supported_network_types[0] #=> String
-    #   resp.orderable_db_instance_options[0].supports_storage_throughput #=> Boolean
-    #   resp.orderable_db_instance_options[0].min_storage_throughput_per_db_instance #=> Integer
-    #   resp.orderable_db_instance_options[0].max_storage_throughput_per_db_instance #=> Integer
-    #   resp.orderable_db_instance_options[0].min_storage_throughput_per_iops #=> Float
-    #   resp.orderable_db_instance_options[0].max_storage_throughput_per_iops #=> Float
+    #   resp.orderable_db_instance_options[0].supports_clusters #=> Boolean
     #   resp.orderable_db_instance_options[0].supports_dedicated_log_volume #=> Boolean
     #   resp.orderable_db_instance_options[0].supports_http_endpoint #=> Boolean
+    #   resp.orderable_db_instance_options[0].supports_additional_storage_volumes #=> Boolean
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options #=> Array
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].supports_storage_autoscaling #=> Boolean
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].supports_storage_throughput #=> Boolean
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].supports_iops #=> Boolean
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].storage_type #=> String
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].min_storage_size #=> Integer
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].max_storage_size #=> Integer
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].min_iops #=> Integer
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].max_iops #=> Integer
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].min_iops_per_gib #=> Float
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].max_iops_per_gib #=> Float
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].min_storage_throughput #=> Integer
+    #   resp.orderable_db_instance_options[0].available_additional_storage_volumes_options[0].max_storage_throughput #=> Integer
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -18050,7 +18314,6 @@ module Aws::RDS
     #   resp.valid_db_instance_modifications_message.storage[0].iops_to_storage_ratio #=> Array
     #   resp.valid_db_instance_modifications_message.storage[0].iops_to_storage_ratio[0].from #=> Float
     #   resp.valid_db_instance_modifications_message.storage[0].iops_to_storage_ratio[0].to #=> Float
-    #   resp.valid_db_instance_modifications_message.storage[0].supports_storage_autoscaling #=> Boolean
     #   resp.valid_db_instance_modifications_message.storage[0].provisioned_storage_throughput #=> Array
     #   resp.valid_db_instance_modifications_message.storage[0].provisioned_storage_throughput[0].from #=> Integer
     #   resp.valid_db_instance_modifications_message.storage[0].provisioned_storage_throughput[0].to #=> Integer
@@ -18058,11 +18321,36 @@ module Aws::RDS
     #   resp.valid_db_instance_modifications_message.storage[0].storage_throughput_to_iops_ratio #=> Array
     #   resp.valid_db_instance_modifications_message.storage[0].storage_throughput_to_iops_ratio[0].from #=> Float
     #   resp.valid_db_instance_modifications_message.storage[0].storage_throughput_to_iops_ratio[0].to #=> Float
+    #   resp.valid_db_instance_modifications_message.storage[0].supports_storage_autoscaling #=> Boolean
     #   resp.valid_db_instance_modifications_message.valid_processor_features #=> Array
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].name #=> String
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].default_value #=> String
     #   resp.valid_db_instance_modifications_message.valid_processor_features[0].allowed_values #=> String
     #   resp.valid_db_instance_modifications_message.supports_dedicated_log_volume #=> Boolean
+    #   resp.valid_db_instance_modifications_message.additional_storage.supports_additional_storage_volumes #=> Boolean
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes #=> Array
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].volume_name #=> String
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage #=> Array
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].storage_type #=> String
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].storage_size #=> Array
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].storage_size[0].from #=> Integer
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].storage_size[0].to #=> Integer
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].storage_size[0].step #=> Integer
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].provisioned_iops #=> Array
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].provisioned_iops[0].from #=> Integer
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].provisioned_iops[0].to #=> Integer
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].provisioned_iops[0].step #=> Integer
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].iops_to_storage_ratio #=> Array
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].iops_to_storage_ratio[0].from #=> Float
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].iops_to_storage_ratio[0].to #=> Float
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].provisioned_storage_throughput #=> Array
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].provisioned_storage_throughput[0].from #=> Integer
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].provisioned_storage_throughput[0].to #=> Integer
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].provisioned_storage_throughput[0].step #=> Integer
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].storage_throughput_to_iops_ratio #=> Array
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].storage_throughput_to_iops_ratio[0].from #=> Float
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].storage_throughput_to_iops_ratio[0].to #=> Float
+    #   resp.valid_db_instance_modifications_message.additional_storage.volumes[0].storage[0].supports_storage_autoscaling #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeValidDBInstanceModifications AWS API Documentation
     #
@@ -18366,7 +18654,6 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
-    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -18384,6 +18671,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -18418,6 +18706,23 @@ module Aws::RDS
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -18428,6 +18733,13 @@ module Aws::RDS
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.db_cluster_instance_class #=> String
+    #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.iops #=> Integer
+    #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.publicly_accessible #=> Boolean
+    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -18451,49 +18763,26 @@ module Aws::RDS
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
-    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
-    #   resp.db_cluster.pending_modified_values.engine_version #=> String
-    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
-    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
-    #   resp.db_cluster.pending_modified_values.iops #=> Integer
-    #   resp.db_cluster.pending_modified_values.storage_type #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
-    #   resp.db_cluster.db_cluster_instance_class #=> String
-    #   resp.db_cluster.storage_type #=> String
-    #   resp.db_cluster.iops #=> Integer
-    #   resp.db_cluster.publicly_accessible #=> Boolean
-    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
+    #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.monitoring_interval #=> Integer
     #   resp.db_cluster.monitoring_role_arn #=> String
     #   resp.db_cluster.database_insights_mode #=> String, one of "standard", "advanced"
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
-    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
-    #   resp.db_cluster.serverless_v2_platform_version #=> String
-    #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
-    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
-    #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
@@ -19037,8 +19326,9 @@ module Aws::RDS
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.modify
     #
     # @option params [required, String] :engine
-    #   The database engine. RDS Custom for Oracle supports the following
-    #   values:
+    #   The database engine.
+    #
+    #   RDS Custom for Oracle supports the following values:
     #
     #   * `custom-oracle-ee`
     #
@@ -19047,6 +19337,18 @@ module Aws::RDS
     #   * `custom-oracle-se2`
     #
     #   * `custom-oracle-se2-cdb`
+    #
+    #   RDS Custom for SQL Server supports the following values:
+    #
+    #   * `custom-sqlserver-ee`
+    #
+    #   * `custom-sqlserver-se`
+    #
+    #   * `ccustom-sqlserver-web`
+    #
+    #   * `custom-sqlserver-dev`
+    #
+    #   RDS for SQL Server supports only `sqlserver-dev-ee`.
     #
     # @option params [required, String] :engine_version
     #   The custom engine version (CEV) that you want to modify. This option
@@ -19082,13 +19384,20 @@ module Aws::RDS
     # @return [Types::DBEngineVersion] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBEngineVersion#engine #engine} => String
+    #   * {Types::DBEngineVersion#major_engine_version #major_engine_version} => String
     #   * {Types::DBEngineVersion#engine_version #engine_version} => String
+    #   * {Types::DBEngineVersion#database_installation_files_s3_bucket_name #database_installation_files_s3_bucket_name} => String
+    #   * {Types::DBEngineVersion#database_installation_files_s3_prefix #database_installation_files_s3_prefix} => String
+    #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
     #   * {Types::DBEngineVersion#db_parameter_group_family #db_parameter_group_family} => String
     #   * {Types::DBEngineVersion#db_engine_description #db_engine_description} => String
+    #   * {Types::DBEngineVersion#db_engine_version_arn #db_engine_version_arn} => String
     #   * {Types::DBEngineVersion#db_engine_version_description #db_engine_version_description} => String
     #   * {Types::DBEngineVersion#default_character_set #default_character_set} => Types::CharacterSet
     #   * {Types::DBEngineVersion#image #image} => Types::CustomDBEngineVersionAMI
     #   * {Types::DBEngineVersion#db_engine_media_type #db_engine_media_type} => String
+    #   * {Types::DBEngineVersion#kms_key_id #kms_key_id} => String
+    #   * {Types::DBEngineVersion#create_time #create_time} => Time
     #   * {Types::DBEngineVersion#supported_character_sets #supported_character_sets} => Array&lt;Types::CharacterSet&gt;
     #   * {Types::DBEngineVersion#supported_nchar_character_sets #supported_nchar_character_sets} => Array&lt;Types::CharacterSet&gt;
     #   * {Types::DBEngineVersion#valid_upgrade_target #valid_upgrade_target} => Array&lt;Types::UpgradeTarget&gt;
@@ -19101,21 +19410,16 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#status #status} => String
     #   * {Types::DBEngineVersion#supports_parallel_query #supports_parallel_query} => Boolean
     #   * {Types::DBEngineVersion#supports_global_databases #supports_global_databases} => Boolean
-    #   * {Types::DBEngineVersion#major_engine_version #major_engine_version} => String
-    #   * {Types::DBEngineVersion#database_installation_files_s3_bucket_name #database_installation_files_s3_bucket_name} => String
-    #   * {Types::DBEngineVersion#database_installation_files_s3_prefix #database_installation_files_s3_prefix} => String
-    #   * {Types::DBEngineVersion#db_engine_version_arn #db_engine_version_arn} => String
-    #   * {Types::DBEngineVersion#kms_key_id #kms_key_id} => String
-    #   * {Types::DBEngineVersion#create_time #create_time} => Time
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
-    #   * {Types::DBEngineVersion#custom_db_engine_version_manifest #custom_db_engine_version_manifest} => String
     #   * {Types::DBEngineVersion#supports_limitless_database #supports_limitless_database} => Boolean
     #   * {Types::DBEngineVersion#supports_certificate_rotation_without_restart #supports_certificate_rotation_without_restart} => Boolean
     #   * {Types::DBEngineVersion#supported_ca_certificate_identifiers #supported_ca_certificate_identifiers} => Array&lt;String&gt;
     #   * {Types::DBEngineVersion#supports_local_write_forwarding #supports_local_write_forwarding} => Boolean
     #   * {Types::DBEngineVersion#supports_integrations #supports_integrations} => Boolean
     #   * {Types::DBEngineVersion#serverless_v2_features_support #serverless_v2_features_support} => Types::ServerlessV2FeaturesSupport
+    #   * {Types::DBEngineVersion#database_installation_files #database_installation_files} => Array&lt;String&gt;
+    #   * {Types::DBEngineVersion#failure_reason #failure_reason} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -19129,15 +19433,22 @@ module Aws::RDS
     # @example Response structure
     #
     #   resp.engine #=> String
+    #   resp.major_engine_version #=> String
     #   resp.engine_version #=> String
+    #   resp.database_installation_files_s3_bucket_name #=> String
+    #   resp.database_installation_files_s3_prefix #=> String
+    #   resp.custom_db_engine_version_manifest #=> String
     #   resp.db_parameter_group_family #=> String
     #   resp.db_engine_description #=> String
+    #   resp.db_engine_version_arn #=> String
     #   resp.db_engine_version_description #=> String
     #   resp.default_character_set.character_set_name #=> String
     #   resp.default_character_set.character_set_description #=> String
     #   resp.image.image_id #=> String
     #   resp.image.status #=> String
     #   resp.db_engine_media_type #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.create_time #=> Time
     #   resp.supported_character_sets #=> Array
     #   resp.supported_character_sets[0].character_set_name #=> String
     #   resp.supported_character_sets[0].character_set_description #=> String
@@ -19171,17 +19482,10 @@ module Aws::RDS
     #   resp.status #=> String
     #   resp.supports_parallel_query #=> Boolean
     #   resp.supports_global_databases #=> Boolean
-    #   resp.major_engine_version #=> String
-    #   resp.database_installation_files_s3_bucket_name #=> String
-    #   resp.database_installation_files_s3_prefix #=> String
-    #   resp.db_engine_version_arn #=> String
-    #   resp.kms_key_id #=> String
-    #   resp.create_time #=> Time
     #   resp.tag_list #=> Array
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
     #   resp.supports_babelfish #=> Boolean
-    #   resp.custom_db_engine_version_manifest #=> String
     #   resp.supports_limitless_database #=> Boolean
     #   resp.supports_certificate_rotation_without_restart #=> Boolean
     #   resp.supported_ca_certificate_identifiers #=> Array
@@ -19190,6 +19494,9 @@ module Aws::RDS
     #   resp.supports_integrations #=> Boolean
     #   resp.serverless_v2_features_support.min_capacity #=> Float
     #   resp.serverless_v2_features_support.max_capacity #=> Float
+    #   resp.database_installation_files #=> Array
+    #   resp.database_installation_files[0] #=> String
+    #   resp.failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCustomDBEngineVersion AWS API Documentation
     #
@@ -19664,6 +19971,35 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Upgrading.html#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades
     #
+    # @option params [String] :network_type
+    #   The network type of the DB cluster.
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon Aurora User Guide.*
+    #
+    #   Valid for Cluster Type: Aurora DB clusters only
+    #
+    #   Valid Values: `IPV4 | DUAL`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
+    #
     # @option params [Integer] :monitoring_interval
     #   The interval, in seconds, between points when Enhanced Monitoring
     #   metrics are collected for the DB cluster. To turn off collecting
@@ -19753,35 +20089,6 @@ module Aws::RDS
     #   If you specify a retention period that isn't valid, such as `94`,
     #   Amazon RDS issues an error.
     #
-    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
-    #   Contains the scaling configuration of an Aurora Serverless v2 DB
-    #   cluster.
-    #
-    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
-    #   the *Amazon Aurora User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
-    #
-    # @option params [String] :network_type
-    #   The network type of the DB cluster.
-    #
-    #   The network type is determined by the `DBSubnetGroup` specified for
-    #   the DB cluster. A `DBSubnetGroup` can support only the IPv4 protocol
-    #   or the IPv4 and the IPv6 protocols (`DUAL`).
-    #
-    #   For more information, see [ Working with a DB instance in a VPC][1] in
-    #   the *Amazon Aurora User Guide.*
-    #
-    #   Valid for Cluster Type: Aurora DB clusters only
-    #
-    #   Valid Values: `IPV4 | DUAL`
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
-    #
     # @option params [Boolean] :manage_master_user_password
     #   Specifies whether to manage the master user password with Amazon Web
     #   Services Secrets Manager.
@@ -19835,6 +20142,13 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html
+    #
+    # @option params [Boolean] :enable_local_write_forwarding
+    #   Specifies whether read replicas can forward write operations to the
+    #   writer DB instance in the DB cluster. By default, write operations
+    #   aren't allowed on reader DB instances.
+    #
+    #   Valid for: Aurora DB clusters only
     #
     # @option params [String] :master_user_secret_kms_key_id
     #   The Amazon Web Services KMS key identifier to encrypt a secret that is
@@ -19902,13 +20216,6 @@ module Aws::RDS
     #     mode.
     #
     #   ^
-    #
-    # @option params [Boolean] :enable_local_write_forwarding
-    #   Specifies whether read replicas can forward write operations to the
-    #   writer DB instance in the DB cluster. By default, write operations
-    #   aren't allowed on reader DB instances.
-    #
-    #   Valid for: Aurora DB clusters only
     #
     # @option params [String] :aws_backup_recovery_point_arn
     #   The Amazon Resource Name (ARN) of the recovery point in Amazon Web
@@ -20044,7 +20351,7 @@ module Aws::RDS
     #     db_cluster_parameter_group_name: "String",
     #     vpc_security_group_ids: ["String"],
     #     port: 1,
-    #     master_user_password: "String",
+    #     master_user_password: "SensitiveString",
     #     option_group_name: "String",
     #     preferred_backup_window: "String",
     #     preferred_maintenance_window: "String",
@@ -20076,24 +20383,24 @@ module Aws::RDS
     #     storage_type: "String",
     #     iops: 1,
     #     auto_minor_version_upgrade: false,
+    #     network_type: "String",
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #       seconds_until_auto_pause: 1,
+    #     },
     #     monitoring_interval: 1,
     #     monitoring_role_arn: "String",
     #     database_insights_mode: "standard", # accepts standard, advanced
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
-    #     serverless_v2_scaling_configuration: {
-    #       min_capacity: 1.0,
-    #       max_capacity: 1.0,
-    #       seconds_until_auto_pause: 1,
-    #     },
-    #     network_type: "String",
     #     manage_master_user_password: false,
     #     rotate_master_user_password: false,
+    #     enable_local_write_forwarding: false,
     #     master_user_secret_kms_key_id: "String",
     #     engine_mode: "String",
     #     allow_engine_mode_change: false,
-    #     enable_local_write_forwarding: false,
     #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #     enable_limitless_database: false,
     #     ca_certificate_identifier: "String",
@@ -20112,7 +20419,6 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
-    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -20130,6 +20436,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -20164,6 +20471,23 @@ module Aws::RDS
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -20174,6 +20498,13 @@ module Aws::RDS
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.db_cluster_instance_class #=> String
+    #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.iops #=> Integer
+    #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.publicly_accessible #=> Boolean
+    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -20197,49 +20528,26 @@ module Aws::RDS
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
-    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
-    #   resp.db_cluster.pending_modified_values.engine_version #=> String
-    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
-    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
-    #   resp.db_cluster.pending_modified_values.iops #=> Integer
-    #   resp.db_cluster.pending_modified_values.storage_type #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
-    #   resp.db_cluster.db_cluster_instance_class #=> String
-    #   resp.db_cluster.storage_type #=> String
-    #   resp.db_cluster.iops #=> Integer
-    #   resp.db_cluster.publicly_accessible #=> Boolean
-    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
+    #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.monitoring_interval #=> Integer
     #   resp.db_cluster.monitoring_role_arn #=> String
     #   resp.db_cluster.database_insights_mode #=> String, one of "standard", "advanced"
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
-    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
-    #   resp.db_cluster.serverless_v2_platform_version #=> String
-    #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
-    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
-    #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
@@ -20360,23 +20668,14 @@ module Aws::RDS
     # `ParameterName`, `ParameterValue`, and `ApplyMethod`. A maximum of 20
     # parameters can be modified in a single request.
     #
-    # After you create a DB cluster parameter group, you should wait at
-    # least 5 minutes before creating your first DB cluster that uses that
-    # DB cluster parameter group as the default parameter group. This allows
-    # Amazon RDS to fully complete the create operation before the parameter
-    # group is used as the default for a new DB cluster. This is especially
-    # important for parameters that are critical when creating the default
-    # database for a DB cluster, such as the character set for the default
-    # database defined by the `character_set_database` parameter. You can
-    # use the *Parameter Groups* option of the [Amazon RDS console][1] or
-    # the `DescribeDBClusterParameters` operation to verify that your DB
-    # cluster parameter group has been created or modified.
-    #
-    #  If the modified DB cluster parameter group is used by an Aurora
-    # Serverless v1 cluster, Aurora applies the update immediately. The
-    # cluster restart might interrupt your workload. In that case, your
-    # application must reopen any connections and retry any transactions
-    # that were active when the parameter changes took effect.
+    # There are two types of parameters - dynamic parameters and static
+    # parameters. Changes to dynamic parameters are applied to the DB
+    # cluster immediately without a reboot. Changes to static parameters are
+    # applied only after the DB cluster is rebooted, which can be done using
+    # `RebootDBCluster` operation. You can use the *Parameter Groups* option
+    # of the [Amazon RDS console][1] or the `DescribeDBClusterParameters`
+    # operation to verify that your DB cluster parameter group has been
+    # created or modified.
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
     # Amazon Aurora?][2] in the *Amazon Aurora User Guide*.
@@ -20449,7 +20748,7 @@ module Aws::RDS
     #     parameters: [ # required
     #       {
     #         parameter_name: "String",
-    #         parameter_value: "String",
+    #         parameter_value: "PotentiallySensitiveParameterValue",
     #         description: "String",
     #         source: "String",
     #         apply_type: "String",
@@ -21055,6 +21354,14 @@ module Aws::RDS
     #
     #   Default: Uses existing setting
     #
+    # @option params [Integer] :storage_throughput
+    #   The storage throughput value for the DB instance.
+    #
+    #   This setting applies only to the `gp3` storage type.
+    #
+    #   This setting doesn't apply to Amazon Aurora or RDS Custom DB
+    #   instances.
+    #
     # @option params [String] :option_group_name
     #   The option group to associate the DB instance with.
     #
@@ -21181,7 +21488,7 @@ module Aws::RDS
     #
     #   * Must be in the distinguished name format.
     #
-    #   * Can't be longer than 64 characters.
+    #   ^
     #
     #   Example:
     #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
@@ -21206,6 +21513,10 @@ module Aws::RDS
     #   ^
     #
     #   Example: `123.124.125.126,234.235.236.237`
+    #
+    # @option params [Boolean] :disable_domain
+    #   Specifies whether to remove the DB instance from the Active Directory
+    #   domain.
     #
     # @option params [Boolean] :copy_tags_to_snapshot
     #   Specifies whether to copy all tags from the DB instance to snapshots
@@ -21310,10 +21621,6 @@ module Aws::RDS
     #   Service.
     #
     #   This setting doesn't apply to RDS Custom DB instances.
-    #
-    # @option params [Boolean] :disable_domain
-    #   Specifies whether to remove the DB instance from the Active Directory
-    #   domain.
     #
     # @option params [Integer] :promotion_tier
     #   The order of priority in which an Aurora Replica is promoted to the
@@ -21554,6 +21861,24 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
     #
+    # @option params [String] :automation_mode
+    #   The automation mode of the RDS Custom DB instance. If `full`, the DB
+    #   instance automates monitoring and instance recovery. If `all paused`,
+    #   the instance pauses automation for the duration set by
+    #   `ResumeFullAutomationModeMinutes`.
+    #
+    # @option params [Integer] :resume_full_automation_mode_minutes
+    #   The number of minutes to pause the automation. When the time period
+    #   ends, RDS Custom resumes full automation.
+    #
+    #   Default: `60`
+    #
+    #   Constraints:
+    #
+    #   * Must be at least 60.
+    #
+    #   * Must be no more than 1,440.
+    #
     # @option params [Boolean] :enable_customer_owned_ip
     #   Specifies whether to enable a customer-owned IP address (CoIP) for an
     #   RDS on Outposts DB instance.
@@ -21575,30 +21900,6 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
     #
-    # @option params [String] :aws_backup_recovery_point_arn
-    #   The Amazon Resource Name (ARN) of the recovery point in Amazon Web
-    #   Services Backup.
-    #
-    #   This setting doesn't apply to RDS Custom DB instances.
-    #
-    # @option params [String] :automation_mode
-    #   The automation mode of the RDS Custom DB instance. If `full`, the DB
-    #   instance automates monitoring and instance recovery. If `all paused`,
-    #   the instance pauses automation for the duration set by
-    #   `ResumeFullAutomationModeMinutes`.
-    #
-    # @option params [Integer] :resume_full_automation_mode_minutes
-    #   The number of minutes to pause the automation. When the time period
-    #   ends, RDS Custom resumes full automation.
-    #
-    #   Default: `60`
-    #
-    #   Constraints:
-    #
-    #   * Must be at least 60.
-    #
-    #   * Must be no more than 1,440.
-    #
     # @option params [String] :network_type
     #   The network type of the DB instance.
     #
@@ -21615,13 +21916,11 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
-    # @option params [Integer] :storage_throughput
-    #   The storage throughput value for the DB instance.
+    # @option params [String] :aws_backup_recovery_point_arn
+    #   The Amazon Resource Name (ARN) of the recovery point in Amazon Web
+    #   Services Backup.
     #
-    #   This setting applies only to the `gp3` storage type.
-    #
-    #   This setting doesn't apply to Amazon Aurora or RDS Custom DB
-    #   instances.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     # @option params [Boolean] :manage_master_user_password
     #   Specifies whether to manage the master user password with Amazon Web
@@ -21712,6 +22011,27 @@ module Aws::RDS
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
     #
+    # @option params [Boolean] :multi_tenant
+    #   Specifies whether the to convert your DB instance from the
+    #   single-tenant conﬁguration to the multi-tenant conﬁguration. This
+    #   parameter is supported only for RDS for Oracle CDB instances.
+    #
+    #   During the conversion, RDS creates an initial tenant database and
+    #   associates the DB name, master user name, character set, and national
+    #   character set metadata with this database. The tags associated with
+    #   the instance also propagate to the initial tenant database. You can
+    #   add more tenant databases to your DB instance by using the
+    #   `CreateTenantDatabase` operation.
+    #
+    #   The conversion to the multi-tenant configuration is permanent and
+    #   irreversible, so you can't later convert back to the single-tenant
+    #   configuration. When you specify this parameter, you must also specify
+    #   `ApplyImmediately`.
+    #
+    # @option params [Boolean] :dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #
     # @option params [String] :engine
     #   The target Oracle DB engine when you convert a non-CDB to a CDB. This
     #   intermediate step is necessary to upgrade an Oracle Database 19c
@@ -21740,26 +22060,14 @@ module Aws::RDS
     #     parameter group with `--db-parameter-group-name` and a new option
     #     group with `--option-group-name`.
     #
-    # @option params [Boolean] :dedicated_log_volume
-    #   Indicates whether the DB instance has a dedicated log volume (DLV)
-    #   enabled.
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
     #
-    # @option params [Boolean] :multi_tenant
-    #   Specifies whether the to convert your DB instance from the
-    #   single-tenant conﬁguration to the multi-tenant conﬁguration. This
-    #   parameter is supported only for RDS for Oracle CDB instances.
+    #   Valid Values:
     #
-    #   During the conversion, RDS creates an initial tenant database and
-    #   associates the DB name, master user name, character set, and national
-    #   character set metadata with this database. The tags associated with
-    #   the instance also propagate to the initial tenant database. You can
-    #   add more tenant databases to your DB instance by using the
-    #   `CreateTenantDatabase` operation.
+    #   * `auto-backup` - The DB instance's automated backup.
     #
-    #   The conversion to the multi-tenant configuration is permanent and
-    #   irreversible, so you can't later convert back to the single-tenant
-    #   configuration. When you specify this parameter, you must also specify
-    #   `ApplyImmediately`.
+    #   ^
     #
     # @option params [String] :master_user_authentication_type
     #   Specifies the authentication type for the master user. With IAM master
@@ -21774,6 +22082,12 @@ module Aws::RDS
     #
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
+    #
+    # @option params [Array<Types::ModifyAdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to modify or delete for the DB
+    #   instance. You can create up to 3 additional storage volumes.
+    #   Additional storage volumes are supported for RDS for Oracle and RDS
+    #   for SQL Server DB instances only.
     #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -21840,7 +22154,7 @@ module Aws::RDS
     #     db_security_groups: ["String"],
     #     vpc_security_group_ids: ["String"],
     #     apply_immediately: false,
-    #     master_user_password: "String",
+    #     master_user_password: "SensitiveString",
     #     db_parameter_group_name: "String",
     #     backup_retention_period: 1,
     #     preferred_backup_window: "String",
@@ -21851,24 +22165,25 @@ module Aws::RDS
     #     auto_minor_version_upgrade: false,
     #     license_model: "String",
     #     iops: 1,
+    #     storage_throughput: 1,
     #     option_group_name: "String",
     #     new_db_instance_identifier: "String",
     #     storage_type: "String",
     #     tde_credential_arn: "String",
-    #     tde_credential_password: "String",
+    #     tde_credential_password: "SensitiveString",
     #     ca_certificate_identifier: "String",
     #     domain: "String",
     #     domain_fqdn: "String",
     #     domain_ou: "String",
     #     domain_auth_secret_arn: "String",
     #     domain_dns_ips: ["String"],
+    #     disable_domain: false,
     #     copy_tags_to_snapshot: false,
     #     monitoring_interval: 1,
     #     db_port_number: 1,
     #     publicly_accessible: false,
     #     monitoring_role_arn: "String",
     #     domain_iam_role_name: "String",
-    #     disable_domain: false,
     #     promotion_tier: 1,
     #     enable_iam_database_authentication: false,
     #     database_insights_mode: "standard", # accepts standard, advanced
@@ -21890,19 +22205,40 @@ module Aws::RDS
     #     max_allocated_storage: 1,
     #     certificate_rotation_restart: false,
     #     replica_mode: "open-read-only", # accepts open-read-only, mounted
-    #     enable_customer_owned_ip: false,
-    #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #     automation_mode: "full", # accepts full, all-paused
     #     resume_full_automation_mode_minutes: 1,
+    #     enable_customer_owned_ip: false,
     #     network_type: "String",
-    #     storage_throughput: 1,
+    #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #     manage_master_user_password: false,
     #     rotate_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
-    #     engine: "String",
-    #     dedicated_log_volume: false,
     #     multi_tenant: false,
+    #     dedicated_log_volume: false,
+    #     engine: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #         set_for_delete: false,
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -21911,7 +22247,6 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
-    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -21944,6 +22279,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -21953,6 +22289,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.engine_version #=> String
     #   resp.db_instance.pending_modified_values.license_model #=> String
     #   resp.db_instance.pending_modified_values.iops #=> Integer
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
@@ -21964,13 +22301,19 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
-    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
-    #   resp.db_instance.pending_modified_values.engine #=> String
-    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -21983,6 +22326,7 @@ module Aws::RDS
     #   resp.db_instance.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
+    #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
@@ -22041,34 +22385,43 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
-    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
-    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
+    #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
-    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
     #   resp.db_instance.activity_stream_kms_key_id #=> String
     #   resp.db_instance.activity_stream_kinesis_stream_name #=> String
     #   resp.db_instance.activity_stream_mode #=> String, one of "sync", "async"
     #   resp.db_instance.activity_stream_engine_native_audit_fields_included #=> Boolean
-    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
-    #   resp.db_instance.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.backup_target #=> String
-    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
+    #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
-    #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.db_system_id #=> String
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
-    #   resp.db_instance.certificate_details.ca_identifier #=> String
-    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
-    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -22176,7 +22529,7 @@ module Aws::RDS
     #     parameters: [ # required
     #       {
     #         parameter_name: "String",
-    #         parameter_value: "String",
+    #         parameter_value: "PotentiallySensitiveParameterValue",
     #         description: "String",
     #         source: "String",
     #         apply_type: "String",
@@ -22256,15 +22609,15 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_db_proxy({
-    #     db_proxy_name: "String", # required
-    #     new_db_proxy_name: "String",
+    #     db_proxy_name: "DBProxyName", # required
+    #     new_db_proxy_name: "DBProxyName",
     #     default_auth_scheme: "IAM_AUTH", # accepts IAM_AUTH, NONE
     #     auth: [
     #       {
-    #         description: "String",
-    #         user_name: "String",
+    #         description: "Description",
+    #         user_name: "AuthUserName",
     #         auth_scheme: "SECRETS", # accepts SECRETS
-    #         secret_arn: "String",
+    #         secret_arn: "Arn",
     #         iam_auth: "DISABLED", # accepts DISABLED, REQUIRED, ENABLED
     #         client_password_auth_type: "MYSQL_NATIVE_PASSWORD", # accepts MYSQL_NATIVE_PASSWORD, MYSQL_CACHING_SHA2_PASSWORD, POSTGRES_SCRAM_SHA_256, POSTGRES_MD5, SQL_SERVER_AUTHENTICATION
     #       },
@@ -22272,7 +22625,7 @@ module Aws::RDS
     #     require_tls: false,
     #     idle_client_timeout: 1,
     #     debug_logging: false,
-    #     role_arn: "String",
+    #     role_arn: "Arn",
     #     security_groups: ["String"],
     #   })
     #
@@ -22397,8 +22750,8 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_db_proxy_target_group({
-    #     target_group_name: "String", # required
-    #     db_proxy_name: "String", # required
+    #     target_group_name: "DBProxyTargetGroupName", # required
+    #     db_proxy_name: "DBProxyName", # required
     #     connection_pool_config: {
     #       max_connections_percent: 1,
     #       max_idle_connections_percent: 1,
@@ -22772,6 +23125,7 @@ module Aws::RDS
     #   resp.db_snapshot.license_model #=> String
     #   resp.db_snapshot.snapshot_type #=> String
     #   resp.db_snapshot.iops #=> Integer
+    #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.option_group_name #=> String
     #   resp.db_snapshot.percent_progress #=> Integer
     #   resp.db_snapshot.source_region #=> String
@@ -22790,14 +23144,20 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list #=> Array
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
+    #   resp.db_snapshot.snapshot_target #=> String
     #   resp.db_snapshot.original_snapshot_create_time #=> Time
     #   resp.db_snapshot.snapshot_database_time #=> Time
-    #   resp.db_snapshot.snapshot_target #=> String
-    #   resp.db_snapshot.storage_throughput #=> Integer
     #   resp.db_snapshot.db_system_id #=> String
-    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #   resp.db_snapshot.multi_tenant #=> Boolean
+    #   resp.db_snapshot.dedicated_log_volume #=> Boolean
     #   resp.db_snapshot.snapshot_availability_zone #=> String
+    #   resp.db_snapshot.additional_storage_volumes #=> Array
+    #   resp.db_snapshot.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_snapshot.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_snapshot.additional_storage_volumes[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -23200,7 +23560,7 @@ module Aws::RDS
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
     #
-    # @option params [String] :global_cluster_identifier
+    # @option params [required, String] :global_cluster_identifier
     #   The cluster identifier for the global cluster to modify. This
     #   parameter isn't case-sensitive.
     #
@@ -23291,8 +23651,8 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_global_cluster({
-    #     global_cluster_identifier: "String",
-    #     new_global_cluster_identifier: "String",
+    #     global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #     new_global_cluster_identifier: "GlobalClusterIdentifier",
     #     deletion_protection: false,
     #     engine_version: "String",
     #     allow_major_version_upgrade: false,
@@ -23367,10 +23727,10 @@ module Aws::RDS
     #   * {Types::Integration#additional_encryption_context #additional_encryption_context} => Hash&lt;String,String&gt;
     #   * {Types::Integration#status #status} => String
     #   * {Types::Integration#tags #tags} => Array&lt;Types::Tag&gt;
-    #   * {Types::Integration#create_time #create_time} => Time
-    #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
     #   * {Types::Integration#data_filter #data_filter} => String
     #   * {Types::Integration#description #description} => String
+    #   * {Types::Integration#create_time #create_time} => Time
+    #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
     #
     #
     # @example Example: To modify a zero-ETL integration
@@ -23418,12 +23778,12 @@ module Aws::RDS
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.data_filter #=> String
+    #   resp.description #=> String
     #   resp.create_time #=> Time
     #   resp.errors #=> Array
     #   resp.errors[0].error_code #=> String
     #   resp.errors[0].error_message #=> String
-    #   resp.data_filter #=> String
-    #   resp.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyIntegration AWS API Documentation
     #
@@ -23498,7 +23858,7 @@ module Aws::RDS
     #         option_settings: [
     #           {
     #             name: "String",
-    #             value: "String",
+    #             value: "PotentiallySensitiveOptionSettingValue",
     #             default_value: "String",
     #             description: "String",
     #             apply_type: "String",
@@ -23823,6 +24183,15 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #
     # @return [Types::PromoteReadReplicaResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PromoteReadReplicaResult#db_instance #db_instance} => Types::DBInstance
@@ -23852,6 +24221,17 @@ module Aws::RDS
     #     db_instance_identifier: "String", # required
     #     backup_retention_period: 1,
     #     preferred_backup_window: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -23860,7 +24240,6 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
-    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -23893,6 +24272,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -23902,6 +24282,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.engine_version #=> String
     #   resp.db_instance.pending_modified_values.license_model #=> String
     #   resp.db_instance.pending_modified_values.iops #=> Integer
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
@@ -23913,13 +24294,19 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
-    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
-    #   resp.db_instance.pending_modified_values.engine #=> String
-    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -23932,6 +24319,7 @@ module Aws::RDS
     #   resp.db_instance.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
+    #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
@@ -23990,34 +24378,43 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
-    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
-    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
+    #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
-    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
     #   resp.db_instance.activity_stream_kms_key_id #=> String
     #   resp.db_instance.activity_stream_kinesis_stream_name #=> String
     #   resp.db_instance.activity_stream_mode #=> String, one of "sync", "async"
     #   resp.db_instance.activity_stream_engine_native_audit_fields_included #=> Boolean
-    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
-    #   resp.db_instance.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.backup_target #=> String
-    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
+    #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
-    #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.db_system_id #=> String
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
-    #   resp.db_instance.certificate_details.ca_identifier #=> String
-    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
-    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -24064,7 +24461,6 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
-    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -24082,6 +24478,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -24116,6 +24513,23 @@ module Aws::RDS
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -24126,6 +24540,13 @@ module Aws::RDS
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.db_cluster_instance_class #=> String
+    #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.iops #=> Integer
+    #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.publicly_accessible #=> Boolean
+    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -24149,49 +24570,26 @@ module Aws::RDS
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
-    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
-    #   resp.db_cluster.pending_modified_values.engine_version #=> String
-    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
-    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
-    #   resp.db_cluster.pending_modified_values.iops #=> Integer
-    #   resp.db_cluster.pending_modified_values.storage_type #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
-    #   resp.db_cluster.db_cluster_instance_class #=> String
-    #   resp.db_cluster.storage_type #=> String
-    #   resp.db_cluster.iops #=> Integer
-    #   resp.db_cluster.publicly_accessible #=> Boolean
-    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
+    #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.monitoring_interval #=> Integer
     #   resp.db_cluster.monitoring_role_arn #=> String
     #   resp.db_cluster.database_insights_mode #=> String, one of "standard", "advanced"
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
-    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
-    #   resp.db_cluster.serverless_v2_platform_version #=> String
-    #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
-    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
-    #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
@@ -24369,7 +24767,6 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
-    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -24387,6 +24784,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -24421,6 +24819,23 @@ module Aws::RDS
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -24431,6 +24846,13 @@ module Aws::RDS
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.db_cluster_instance_class #=> String
+    #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.iops #=> Integer
+    #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.publicly_accessible #=> Boolean
+    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -24454,49 +24876,26 @@ module Aws::RDS
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
-    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
-    #   resp.db_cluster.pending_modified_values.engine_version #=> String
-    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
-    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
-    #   resp.db_cluster.pending_modified_values.iops #=> Integer
-    #   resp.db_cluster.pending_modified_values.storage_type #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
-    #   resp.db_cluster.db_cluster_instance_class #=> String
-    #   resp.db_cluster.storage_type #=> String
-    #   resp.db_cluster.iops #=> Integer
-    #   resp.db_cluster.publicly_accessible #=> Boolean
-    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
+    #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.monitoring_interval #=> Integer
     #   resp.db_cluster.monitoring_role_arn #=> String
     #   resp.db_cluster.database_insights_mode #=> String, one of "standard", "advanced"
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
-    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
-    #   resp.db_cluster.serverless_v2_platform_version #=> String
-    #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
-    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
-    #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
@@ -24590,7 +24989,6 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
-    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -24623,6 +25021,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -24632,6 +25031,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.engine_version #=> String
     #   resp.db_instance.pending_modified_values.license_model #=> String
     #   resp.db_instance.pending_modified_values.iops #=> Integer
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
@@ -24643,13 +25043,19 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
-    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
-    #   resp.db_instance.pending_modified_values.engine #=> String
-    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -24662,6 +25068,7 @@ module Aws::RDS
     #   resp.db_instance.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
+    #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
@@ -24720,34 +25127,43 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
-    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
-    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
+    #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
-    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
     #   resp.db_instance.activity_stream_kms_key_id #=> String
     #   resp.db_instance.activity_stream_kinesis_stream_name #=> String
     #   resp.db_instance.activity_stream_mode #=> String, one of "sync", "async"
     #   resp.db_instance.activity_stream_engine_native_audit_fields_included #=> Boolean
-    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
-    #   resp.db_instance.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.backup_target #=> String
-    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
+    #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
-    #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.db_system_id #=> String
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
-    #   resp.db_instance.certificate_details.ca_identifier #=> String
-    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
-    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -24836,8 +25252,8 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_db_proxy_targets({
-    #     db_proxy_name: "String", # required
-    #     target_group_name: "String",
+    #     db_proxy_name: "DBProxyName", # required
+    #     target_group_name: "DBProxyTargetGroupName",
     #     db_instance_identifiers: ["String"],
     #     db_cluster_identifiers: ["String"],
     #   })
@@ -24852,8 +25268,8 @@ module Aws::RDS
     #   resp.db_proxy_targets[0].port #=> Integer
     #   resp.db_proxy_targets[0].type #=> String, one of "RDS_INSTANCE", "RDS_SERVERLESS_ENDPOINT", "TRACKED_CLUSTER"
     #   resp.db_proxy_targets[0].role #=> String, one of "READ_WRITE", "READ_ONLY", "UNKNOWN"
-    #   resp.db_proxy_targets[0].target_health.state #=> String, one of "REGISTERING", "AVAILABLE", "UNAVAILABLE"
-    #   resp.db_proxy_targets[0].target_health.reason #=> String, one of "UNREACHABLE", "CONNECTION_FAILED", "AUTH_FAILURE", "PENDING_PROXY_CAPACITY", "INVALID_REPLICATION_STATE"
+    #   resp.db_proxy_targets[0].target_health.state #=> String, one of "REGISTERING", "AVAILABLE", "UNAVAILABLE", "UNUSED"
+    #   resp.db_proxy_targets[0].target_health.reason #=> String, one of "UNREACHABLE", "CONNECTION_FAILED", "AUTH_FAILURE", "PENDING_PROXY_CAPACITY", "INVALID_REPLICATION_STATE", "PROMOTED"
     #   resp.db_proxy_targets[0].target_health.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RegisterDBProxyTargets AWS API Documentation
@@ -24874,11 +25290,11 @@ module Aws::RDS
     #
     #  </note>
     #
-    # @option params [String] :global_cluster_identifier
+    # @option params [required, String] :global_cluster_identifier
     #   The cluster identifier to detach from the Aurora global database
     #   cluster.
     #
-    # @option params [String] :db_cluster_identifier
+    # @option params [required, String] :db_cluster_identifier
     #   The Amazon Resource Name (ARN) identifying the cluster that was
     #   detached from the Aurora global database cluster.
     #
@@ -24930,8 +25346,8 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_from_global_cluster({
-    #     global_cluster_identifier: "String",
-    #     db_cluster_identifier: "String",
+    #     global_cluster_identifier: "GlobalClusterIdentifier", # required
+    #     db_cluster_identifier: "String", # required
     #   })
     #
     # @example Response structure
@@ -25259,7 +25675,7 @@ module Aws::RDS
     #     parameters: [
     #       {
     #         parameter_name: "String",
-    #         parameter_value: "String",
+    #         parameter_value: "PotentiallySensitiveParameterValue",
     #         description: "String",
     #         source: "String",
     #         apply_type: "String",
@@ -25363,7 +25779,7 @@ module Aws::RDS
     #     parameters: [
     #       {
     #         parameter_name: "String",
-    #         parameter_value: "String",
+    #         parameter_value: "PotentiallySensitiveParameterValue",
     #         description: "String",
     #         source: "String",
     #         apply_type: "String",
@@ -25716,16 +26132,14 @@ module Aws::RDS
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
     #
-    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
-    #   Contains the scaling configuration of an Aurora Serverless v2 DB
-    #   cluster.
+    # @option params [String] :storage_type
+    #   Specifies the storage type to be associated with the DB cluster.
     #
-    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
-    #   the *Amazon Aurora User Guide*.
+    #   Valid Values: `aurora`, `aurora-iopt1`
     #
+    #   Default: `aurora`
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
+    #   Valid for: Aurora DB clusters only
     #
     # @option params [String] :network_type
     #   The network type of the DB cluster.
@@ -25746,6 +26160,17 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #
     # @option params [Boolean] :manage_master_user_password
     #   Specifies whether to manage the master user password with Amazon Web
@@ -25791,15 +26216,6 @@ module Aws::RDS
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
     #
-    # @option params [String] :storage_type
-    #   Specifies the storage type to be associated with the DB cluster.
-    #
-    #   Valid Values: `aurora`, `aurora-iopt1`
-    #
-    #   Default: `aurora`
-    #
-    #   Valid for: Aurora DB clusters only
-    #
     # @option params [String] :engine_lifecycle_support
     #   The life cycle type for this DB cluster.
     #
@@ -25836,6 +26252,15 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   ^
     #
     # @return [Types::RestoreDBClusterFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -25925,7 +26350,7 @@ module Aws::RDS
     #     engine_version: "String",
     #     port: 1,
     #     master_username: "String", # required
-    #     master_user_password: "String",
+    #     master_user_password: "SensitiveString",
     #     option_group_name: "String",
     #     preferred_backup_window: "String",
     #     preferred_maintenance_window: "String",
@@ -25949,16 +26374,27 @@ module Aws::RDS
     #     copy_tags_to_snapshot: false,
     #     domain: "String",
     #     domain_iam_role_name: "String",
+    #     storage_type: "String",
+    #     network_type: "String",
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
     #       seconds_until_auto_pause: 1,
     #     },
-    #     network_type: "String",
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
-    #     storage_type: "String",
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -25973,7 +26409,6 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
-    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -25991,6 +26426,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -26025,6 +26461,23 @@ module Aws::RDS
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -26035,6 +26488,13 @@ module Aws::RDS
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.db_cluster_instance_class #=> String
+    #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.iops #=> Integer
+    #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.publicly_accessible #=> Boolean
+    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -26058,49 +26518,26 @@ module Aws::RDS
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
-    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
-    #   resp.db_cluster.pending_modified_values.engine_version #=> String
-    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
-    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
-    #   resp.db_cluster.pending_modified_values.iops #=> Integer
-    #   resp.db_cluster.pending_modified_values.storage_type #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
-    #   resp.db_cluster.db_cluster_instance_class #=> String
-    #   resp.db_cluster.storage_type #=> String
-    #   resp.db_cluster.iops #=> Integer
-    #   resp.db_cluster.publicly_accessible #=> Boolean
-    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
+    #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.monitoring_interval #=> Integer
     #   resp.db_cluster.monitoring_role_arn #=> String
     #   resp.db_cluster.database_insights_mode #=> String, one of "standard", "advanced"
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
-    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
-    #   resp.db_cluster.serverless_v2_platform_version #=> String
-    #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
-    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
-    #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
@@ -26531,17 +26968,6 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
-    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
-    #   Contains the scaling configuration of an Aurora Serverless v2 DB
-    #   cluster.
-    #
-    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
-    #   the *Amazon Aurora User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
-    #
     # @option params [String] :network_type
     #   The network type of the DB cluster.
     #
@@ -26563,6 +26989,17 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
     #
     # @option params [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
     #   Reserved for future use.
@@ -26656,6 +27093,15 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   ^
     #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -26768,12 +27214,12 @@ module Aws::RDS
     #     storage_type: "String",
     #     iops: 1,
     #     publicly_accessible: false,
+    #     network_type: "String",
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
     #       seconds_until_auto_pause: 1,
     #     },
-    #     network_type: "String",
     #     rds_custom_cluster_configuration: {
     #       interconnect_subnet_id: "String",
     #       transit_gateway_multicast_domain_id: "String",
@@ -26785,6 +27231,17 @@ module Aws::RDS
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -26799,7 +27256,6 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
-    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -26817,6 +27273,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -26851,6 +27308,23 @@ module Aws::RDS
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -26861,6 +27335,13 @@ module Aws::RDS
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.db_cluster_instance_class #=> String
+    #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.iops #=> Integer
+    #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.publicly_accessible #=> Boolean
+    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -26884,49 +27365,26 @@ module Aws::RDS
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
-    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
-    #   resp.db_cluster.pending_modified_values.engine_version #=> String
-    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
-    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
-    #   resp.db_cluster.pending_modified_values.iops #=> Integer
-    #   resp.db_cluster.pending_modified_values.storage_type #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
-    #   resp.db_cluster.db_cluster_instance_class #=> String
-    #   resp.db_cluster.storage_type #=> String
-    #   resp.db_cluster.iops #=> Integer
-    #   resp.db_cluster.publicly_accessible #=> Boolean
-    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
+    #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.monitoring_interval #=> Integer
     #   resp.db_cluster.monitoring_role_arn #=> String
     #   resp.db_cluster.database_insights_mode #=> String, one of "standard", "advanced"
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
-    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
-    #   resp.db_cluster.serverless_v2_platform_version #=> String
-    #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
-    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
-    #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
@@ -27238,24 +27696,6 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters only
     #
-    # @option params [Types::ScalingConfiguration] :scaling_configuration
-    #   For DB clusters in `serverless` DB engine mode, the scaling properties
-    #   of the DB cluster.
-    #
-    #   Valid for: Aurora DB clusters only
-    #
-    # @option params [String] :engine_mode
-    #   The engine mode of the new cluster. Specify `provisioned` or
-    #   `serverless`, depending on the type of the cluster you are creating.
-    #   You can create an Aurora Serverless v1 clone from a provisioned
-    #   cluster, or a provisioned clone from an Aurora Serverless v1 cluster.
-    #   To create a clone that is an Aurora Serverless v1 cluster, the
-    #   original cluster must be an Aurora Serverless v1 cluster or an
-    #   encrypted provisioned cluster. To create a full copy that is an Aurora
-    #   Serverless v1 cluster, specify the engine mode `serverless`.
-    #
-    #   Valid for: Aurora DB clusters only
-    #
     # @option params [String] :db_cluster_instance_class
     #   The compute and memory capacity of the each DB instance in the
     #   Multi-AZ DB cluster, for example db.m6gd.xlarge. Not all DB instance
@@ -27338,17 +27778,6 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
     #
-    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
-    #   Contains the scaling configuration of an Aurora Serverless v2 DB
-    #   cluster.
-    #
-    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
-    #   the *Amazon Aurora User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
-    #
     # @option params [String] :network_type
     #   The network type of the DB cluster.
     #
@@ -27373,6 +27802,35 @@ module Aws::RDS
     #
     # @option params [String] :source_db_cluster_resource_id
     #   The resource ID of the source DB cluster from which to restore.
+    #
+    # @option params [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
+    #
+    # @option params [Types::ScalingConfiguration] :scaling_configuration
+    #   For DB clusters in `serverless` DB engine mode, the scaling properties
+    #   of the DB cluster.
+    #
+    #   Valid for: Aurora DB clusters only
+    #
+    # @option params [String] :engine_mode
+    #   The engine mode of the new cluster. Specify `provisioned` or
+    #   `serverless`, depending on the type of the cluster you are creating.
+    #   You can create an Aurora Serverless v1 clone from a provisioned
+    #   cluster, or a provisioned clone from an Aurora Serverless v1 cluster.
+    #   To create a clone that is an Aurora Serverless v1 cluster, the
+    #   original cluster must be an Aurora Serverless v1 cluster or an
+    #   encrypted provisioned cluster. To create a full copy that is an Aurora
+    #   Serverless v1 cluster, specify the engine mode `serverless`.
+    #
+    #   Valid for: Aurora DB clusters only
     #
     # @option params [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
     #   Reserved for future use.
@@ -27466,6 +27924,15 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   ^
     #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -27563,6 +28030,17 @@ module Aws::RDS
     #     copy_tags_to_snapshot: false,
     #     domain: "String",
     #     domain_iam_role_name: "String",
+    #     db_cluster_instance_class: "String",
+    #     storage_type: "String",
+    #     publicly_accessible: false,
+    #     iops: 1,
+    #     network_type: "String",
+    #     source_db_cluster_resource_id: "String",
+    #     serverless_v2_scaling_configuration: {
+    #       min_capacity: 1.0,
+    #       max_capacity: 1.0,
+    #       seconds_until_auto_pause: 1,
+    #     },
     #     scaling_configuration: {
     #       min_capacity: 1,
     #       max_capacity: 1,
@@ -27572,17 +28050,6 @@ module Aws::RDS
     #       seconds_before_timeout: 1,
     #     },
     #     engine_mode: "String",
-    #     db_cluster_instance_class: "String",
-    #     storage_type: "String",
-    #     publicly_accessible: false,
-    #     iops: 1,
-    #     serverless_v2_scaling_configuration: {
-    #       min_capacity: 1.0,
-    #       max_capacity: 1.0,
-    #       seconds_until_auto_pause: 1,
-    #     },
-    #     network_type: "String",
-    #     source_db_cluster_resource_id: "String",
     #     rds_custom_cluster_configuration: {
     #       interconnect_subnet_id: "String",
     #       transit_gateway_multicast_domain_id: "String",
@@ -27594,6 +28061,17 @@ module Aws::RDS
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -27608,7 +28086,6 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
-    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -27626,6 +28103,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -27660,6 +28138,23 @@ module Aws::RDS
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -27670,6 +28165,13 @@ module Aws::RDS
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.db_cluster_instance_class #=> String
+    #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.iops #=> Integer
+    #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.publicly_accessible #=> Boolean
+    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -27693,49 +28195,26 @@ module Aws::RDS
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
-    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
-    #   resp.db_cluster.pending_modified_values.engine_version #=> String
-    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
-    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
-    #   resp.db_cluster.pending_modified_values.iops #=> Integer
-    #   resp.db_cluster.pending_modified_values.storage_type #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
-    #   resp.db_cluster.db_cluster_instance_class #=> String
-    #   resp.db_cluster.storage_type #=> String
-    #   resp.db_cluster.iops #=> Integer
-    #   resp.db_cluster.publicly_accessible #=> Boolean
-    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
+    #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.monitoring_interval #=> Integer
     #   resp.db_cluster.monitoring_role_arn #=> String
     #   resp.db_cluster.database_insights_mode #=> String, one of "standard", "advanced"
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
-    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
-    #   resp.db_cluster.serverless_v2_platform_version #=> String
-    #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
-    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
-    #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
@@ -27998,6 +28477,11 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
     #
+    # @option params [Integer] :storage_throughput
+    #   Specifies the storage throughput value for the DB instance.
+    #
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
+    #
     # @option params [String] :option_group_name
     #   The name of the option group to be used for the restored DB instance.
     #
@@ -28227,6 +28711,41 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
     #
+    # @option params [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
+    # @option params [String] :backup_target
+    #   Specifies where automated backups and manual snapshots are stored for
+    #   the restored DB instance.
+    #
+    #   Possible values are `local` (Dedicated Local Zone), `outposts` (Amazon
+    #   Web Services Outposts), and `region` (Amazon Web Services Region). The
+    #   default is `region`.
+    #
+    #   For more information, see [Working with Amazon RDS on Amazon Web
+    #   Services Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #
     # @option params [String] :custom_iam_instance_profile
     #   The instance profile associated with the underlying Amazon EC2
     #   instance of an RDS Custom DB instance. The instance profile must meet
@@ -28249,45 +28768,17 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
     #
-    # @option params [String] :backup_target
-    #   Specifies where automated backups and manual snapshots are stored for
-    #   the restored DB instance.
+    # @option params [Integer] :allocated_storage
+    #   The amount of storage (in gibibytes) to allocate initially for the DB
+    #   instance. Follow the allocation rules specified in CreateDBInstance.
     #
-    #   Possible values are `local` (Dedicated Local Zone), `outposts` (Amazon
-    #   Web Services Outposts), and `region` (Amazon Web Services Region). The
-    #   default is `region`.
+    #   This setting isn't valid for RDS for SQL Server.
     #
-    #   For more information, see [Working with Amazon RDS on Amazon Web
-    #   Services Outposts][1] in the *Amazon RDS User Guide*.
+    #   <note markdown="1"> Be sure to allocate enough storage for your new DB instance so that
+    #   the restore operation can succeed. You can also allocate additional
+    #   storage for future growth.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
-    #
-    # @option params [String] :network_type
-    #   The network type of the DB instance.
-    #
-    #   Valid Values:
-    #
-    #   * `IPV4`
-    #
-    #   * `DUAL`
-    #
-    #   The network type is determined by the `DBSubnetGroup` specified for
-    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
-    #   or the IPv4 and the IPv6 protocols (`DUAL`).
-    #
-    #   For more information, see [ Working with a DB instance in a VPC][1] in
-    #   the *Amazon RDS User Guide.*
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
-    #
-    # @option params [Integer] :storage_throughput
-    #   Specifies the storage throughput value for the DB instance.
-    #
-    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
+    #    </note>
     #
     # @option params [String] :db_cluster_snapshot_identifier
     #   The identifier for the Multi-AZ DB cluster snapshot to restore from.
@@ -28313,18 +28804,6 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
-    #
-    # @option params [Integer] :allocated_storage
-    #   The amount of storage (in gibibytes) to allocate initially for the DB
-    #   instance. Follow the allocation rules specified in CreateDBInstance.
-    #
-    #   This setting isn't valid for RDS for SQL Server.
-    #
-    #   <note markdown="1"> Be sure to allocate enough storage for your new DB instance so that
-    #   the restore operation can succeed. You can also allocate additional
-    #   storage for future growth.
-    #
-    #    </note>
     #
     # @option params [Boolean] :dedicated_log_volume
     #   Specifies whether to enable a dedicated log volume (DLV) for the DB
@@ -28379,6 +28858,15 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #
     # @option params [Boolean] :manage_master_user_password
     #   Specifies whether to manage the master user password with Amazon Web
     #   Services Secrets Manager in the restored DB instance.
@@ -28418,6 +28906,13 @@ module Aws::RDS
     #   There is a default KMS key for your Amazon Web Services account. Your
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
+    #
+    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to create for the DB instance.
+    #   You can create up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
     #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -28477,6 +28972,7 @@ module Aws::RDS
     #     db_name: "String",
     #     engine: "String",
     #     iops: 1,
+    #     storage_throughput: 1,
     #     option_group_name: "String",
     #     tags: [
     #       {
@@ -28486,7 +28982,7 @@ module Aws::RDS
     #     ],
     #     storage_type: "String",
     #     tde_credential_arn: "String",
-    #     tde_credential_password: "String",
+    #     tde_credential_password: "SensitiveString",
     #     vpc_security_group_ids: ["String"],
     #     domain: "String",
     #     domain_fqdn: "String",
@@ -28507,17 +29003,37 @@ module Aws::RDS
     #     db_parameter_group_name: "String",
     #     deletion_protection: false,
     #     enable_customer_owned_ip: false,
-    #     custom_iam_instance_profile: "String",
-    #     backup_target: "String",
     #     network_type: "String",
-    #     storage_throughput: 1,
-    #     db_cluster_snapshot_identifier: "String",
+    #     backup_target: "String",
+    #     custom_iam_instance_profile: "String",
     #     allocated_storage: 1,
+    #     db_cluster_snapshot_identifier: "String",
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -28526,7 +29042,6 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
-    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -28559,6 +29074,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -28568,6 +29084,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.engine_version #=> String
     #   resp.db_instance.pending_modified_values.license_model #=> String
     #   resp.db_instance.pending_modified_values.iops #=> Integer
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
@@ -28579,13 +29096,19 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
-    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
-    #   resp.db_instance.pending_modified_values.engine #=> String
-    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -28598,6 +29121,7 @@ module Aws::RDS
     #   resp.db_instance.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
+    #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
@@ -28656,34 +29180,43 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
-    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
-    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
+    #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
-    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
     #   resp.db_instance.activity_stream_kms_key_id #=> String
     #   resp.db_instance.activity_stream_kinesis_stream_name #=> String
     #   resp.db_instance.activity_stream_mode #=> String, one of "sync", "async"
     #   resp.db_instance.activity_stream_engine_native_audit_fields_included #=> Boolean
-    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
-    #   resp.db_instance.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.backup_target #=> String
-    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
+    #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
-    #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.db_system_id #=> String
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
-    #   resp.db_instance.certificate_details.ca_identifier #=> String
-    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
-    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -28924,6 +29457,11 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
+    #
+    # @option params [Integer] :storage_throughput
+    #   Specifies the storage throughput value for the DB instance.
+    #
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     #
     # @option params [String] :option_group_name
     #   The name of the option group to associate with this DB instance. If
@@ -29168,11 +29706,6 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #
-    # @option params [Integer] :storage_throughput
-    #   Specifies the storage throughput value for the DB instance.
-    #
-    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
-    #
     # @option params [Boolean] :manage_master_user_password
     #   Specifies whether to manage the master user password with Amazon Web
     #   Services Secrets Manager.
@@ -29267,6 +29800,22 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #
+    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to modify or delete for the DB
+    #   instance. You can modify or delete up to three additional storage
+    #   volumes using the names `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`.
+    #   Additional storage volumes are supported for RDS for Oracle and RDS
+    #   for SQL Server DB instances only.
+    #
     # @return [Types::RestoreDBInstanceFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromS3Result#db_instance #db_instance} => Types::DBInstance
@@ -29280,7 +29829,7 @@ module Aws::RDS
     #     db_instance_class: "String", # required
     #     engine: "String", # required
     #     master_username: "String",
-    #     master_user_password: "String",
+    #     master_user_password: "SensitiveString",
     #     db_security_groups: ["String"],
     #     vpc_security_group_ids: ["String"],
     #     availability_zone: "String",
@@ -29295,6 +29844,7 @@ module Aws::RDS
     #     auto_minor_version_upgrade: false,
     #     license_model: "String",
     #     iops: 1,
+    #     storage_throughput: 1,
     #     option_group_name: "String",
     #     publicly_accessible: false,
     #     tags: [
@@ -29330,12 +29880,32 @@ module Aws::RDS
     #     deletion_protection: false,
     #     max_allocated_storage: 1,
     #     network_type: "String",
-    #     storage_throughput: 1,
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -29344,7 +29914,6 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
-    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -29377,6 +29946,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -29386,6 +29956,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.engine_version #=> String
     #   resp.db_instance.pending_modified_values.license_model #=> String
     #   resp.db_instance.pending_modified_values.iops #=> Integer
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
@@ -29397,13 +29968,19 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
-    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
-    #   resp.db_instance.pending_modified_values.engine #=> String
-    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -29416,6 +29993,7 @@ module Aws::RDS
     #   resp.db_instance.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
+    #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
@@ -29474,34 +30052,43 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
-    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
-    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
+    #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
-    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
     #   resp.db_instance.activity_stream_kms_key_id #=> String
     #   resp.db_instance.activity_stream_kinesis_stream_name #=> String
     #   resp.db_instance.activity_stream_mode #=> String, one of "sync", "async"
     #   resp.db_instance.activity_stream_engine_native_audit_fields_included #=> Boolean
-    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
-    #   resp.db_instance.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.backup_target #=> String
-    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
+    #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
-    #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.db_system_id #=> String
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
-    #   resp.db_instance.certificate_details.ca_identifier #=> String
-    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
-    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -29768,6 +30355,11 @@ module Aws::RDS
     #
     #   ^
     #
+    # @option params [Integer] :storage_throughput
+    #   The storage throughput value for the DB instance.
+    #
+    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
+    #
     # @option params [String] :option_group_name
     #   The name of the option group to use for the restored DB instance.
     #
@@ -29982,13 +30574,6 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling
     #
-    # @option params [String] :source_db_instance_automated_backups_arn
-    #   The Amazon Resource Name (ARN) of the replicated automated backups
-    #   from which to restore, for example,
-    #   `arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE`.
-    #
-    #   This setting doesn't apply to RDS Custom.
-    #
     # @option params [Boolean] :enable_customer_owned_ip
     #   Specifies whether to enable a customer-owned IP address (CoIP) for an
     #   RDS on Outposts DB instance.
@@ -30012,27 +30597,32 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #   [2]: https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing
     #
-    # @option params [String] :custom_iam_instance_profile
-    #   The instance profile associated with the underlying Amazon EC2
-    #   instance of an RDS Custom DB instance. The instance profile must meet
-    #   the following requirements:
+    # @option params [String] :network_type
+    #   The network type of the DB instance.
     #
-    #   * The profile must exist in your account.
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
     #
-    #   * The profile must have an IAM role that Amazon EC2 has permissions to
-    #     assume.
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
     #
-    #   * The instance profile name and the associated IAM role name must
-    #     start with the prefix `AWSRDSCustom`.
+    #   Valid Values:
     #
-    #   For the list of permissions required for the IAM role, see [ Configure
-    #   IAM and your VPC][1] in the *Amazon RDS User Guide*.
+    #   * `IPV4`
     #
-    #   This setting is required for RDS Custom.
+    #   * `DUAL`
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
+    # @option params [String] :source_db_instance_automated_backups_arn
+    #   The Amazon Resource Name (ARN) of the replicated automated backups
+    #   from which to restore, for example,
+    #   `arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE`.
+    #
+    #   This setting doesn't apply to RDS Custom.
     #
     # @option params [String] :backup_target
     #   The location for storing automated backups and manual snapshots for
@@ -30055,30 +30645,27 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #
-    # @option params [String] :network_type
-    #   The network type of the DB instance.
+    # @option params [String] :custom_iam_instance_profile
+    #   The instance profile associated with the underlying Amazon EC2
+    #   instance of an RDS Custom DB instance. The instance profile must meet
+    #   the following requirements:
     #
-    #   The network type is determined by the `DBSubnetGroup` specified for
-    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
-    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #   * The profile must exist in your account.
     #
-    #   For more information, see [ Working with a DB instance in a VPC][1] in
-    #   the *Amazon RDS User Guide.*
+    #   * The profile must have an IAM role that Amazon EC2 has permissions to
+    #     assume.
     #
-    #   Valid Values:
+    #   * The instance profile name and the associated IAM role name must
+    #     start with the prefix `AWSRDSCustom`.
     #
-    #   * `IPV4`
+    #   For the list of permissions required for the IAM role, see [ Configure
+    #   IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
-    #   * `DUAL`
+    #   This setting is required for RDS Custom.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
-    #
-    # @option params [Integer] :storage_throughput
-    #   The storage throughput value for the DB instance.
-    #
-    #   This setting doesn't apply to RDS Custom or Amazon Aurora.
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
     #
     # @option params [Integer] :allocated_storage
     #   The amount of storage (in gibibytes) to allocate initially for the DB
@@ -30145,6 +30732,15 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #
     # @option params [Boolean] :manage_master_user_password
     #   Specifies whether to manage the master user password with Amazon Web
     #   Services Secrets Manager in the restored DB instance.
@@ -30184,6 +30780,13 @@ module Aws::RDS
     #   There is a default KMS key for your Amazon Web Services account. Your
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
+    #
+    # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to restore to the DB instance.
+    #   You can restore up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
     #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -30304,6 +30907,7 @@ module Aws::RDS
     #     db_name: "String",
     #     engine: "String",
     #     iops: 1,
+    #     storage_throughput: 1,
     #     option_group_name: "String",
     #     copy_tags_to_snapshot: false,
     #     tags: [
@@ -30314,7 +30918,7 @@ module Aws::RDS
     #     ],
     #     storage_type: "String",
     #     tde_credential_arn: "String",
-    #     tde_credential_password: "String",
+    #     tde_credential_password: "SensitiveString",
     #     vpc_security_group_ids: ["String"],
     #     domain: "String",
     #     domain_iam_role_name: "String",
@@ -30335,18 +30939,38 @@ module Aws::RDS
     #     deletion_protection: false,
     #     source_dbi_resource_id: "String",
     #     max_allocated_storage: 1,
-    #     source_db_instance_automated_backups_arn: "String",
     #     enable_customer_owned_ip: false,
-    #     custom_iam_instance_profile: "String",
-    #     backup_target: "String",
     #     network_type: "String",
-    #     storage_throughput: 1,
+    #     source_db_instance_automated_backups_arn: "String",
+    #     backup_target: "String",
+    #     custom_iam_instance_profile: "String",
     #     allocated_storage: 1,
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -30355,7 +30979,6 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
-    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -30388,6 +31011,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -30397,6 +31021,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.engine_version #=> String
     #   resp.db_instance.pending_modified_values.license_model #=> String
     #   resp.db_instance.pending_modified_values.iops #=> Integer
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
@@ -30408,13 +31033,19 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
-    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
-    #   resp.db_instance.pending_modified_values.engine #=> String
-    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -30427,6 +31058,7 @@ module Aws::RDS
     #   resp.db_instance.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
+    #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
@@ -30485,34 +31117,43 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
-    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
-    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
+    #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
-    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
     #   resp.db_instance.activity_stream_kms_key_id #=> String
     #   resp.db_instance.activity_stream_kinesis_stream_name #=> String
     #   resp.db_instance.activity_stream_mode #=> String, one of "sync", "async"
     #   resp.db_instance.activity_stream_engine_native_audit_fields_included #=> Boolean
-    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
-    #   resp.db_instance.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.backup_target #=> String
-    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
+    #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
-    #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.db_system_id #=> String
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
-    #   resp.db_instance.certificate_details.ca_identifier #=> String
-    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
-    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -30670,8 +31311,8 @@ module Aws::RDS
     #   * {Types::StartActivityStreamResponse#kinesis_stream_name #kinesis_stream_name} => String
     #   * {Types::StartActivityStreamResponse#status #status} => String
     #   * {Types::StartActivityStreamResponse#mode #mode} => String
-    #   * {Types::StartActivityStreamResponse#apply_immediately #apply_immediately} => Boolean
     #   * {Types::StartActivityStreamResponse#engine_native_audit_fields_included #engine_native_audit_fields_included} => Boolean
+    #   * {Types::StartActivityStreamResponse#apply_immediately #apply_immediately} => Boolean
     #
     #
     # @example Example: To start a database activity stream
@@ -30710,8 +31351,8 @@ module Aws::RDS
     #   resp.kinesis_stream_name #=> String
     #   resp.status #=> String, one of "stopped", "starting", "started", "stopping"
     #   resp.mode #=> String, one of "sync", "async"
-    #   resp.apply_immediately #=> Boolean
     #   resp.engine_native_audit_fields_included #=> Boolean
+    #   resp.apply_immediately #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartActivityStream AWS API Documentation
     #
@@ -30787,7 +31428,6 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
-    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -30805,6 +31445,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -30839,6 +31480,23 @@ module Aws::RDS
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -30849,6 +31507,13 @@ module Aws::RDS
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.db_cluster_instance_class #=> String
+    #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.iops #=> Integer
+    #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.publicly_accessible #=> Boolean
+    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -30872,49 +31537,26 @@ module Aws::RDS
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
-    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
-    #   resp.db_cluster.pending_modified_values.engine_version #=> String
-    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
-    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
-    #   resp.db_cluster.pending_modified_values.iops #=> Integer
-    #   resp.db_cluster.pending_modified_values.storage_type #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
-    #   resp.db_cluster.db_cluster_instance_class #=> String
-    #   resp.db_cluster.storage_type #=> String
-    #   resp.db_cluster.iops #=> Integer
-    #   resp.db_cluster.publicly_accessible #=> Boolean
-    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
+    #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.monitoring_interval #=> Integer
     #   resp.db_cluster.monitoring_role_arn #=> String
     #   resp.db_cluster.database_insights_mode #=> String, one of "standard", "advanced"
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
-    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
-    #   resp.db_cluster.serverless_v2_platform_version #=> String
-    #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
-    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
-    #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
@@ -30980,7 +31622,6 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
-    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -31013,6 +31654,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -31022,6 +31664,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.engine_version #=> String
     #   resp.db_instance.pending_modified_values.license_model #=> String
     #   resp.db_instance.pending_modified_values.iops #=> Integer
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
@@ -31033,13 +31676,19 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
-    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
-    #   resp.db_instance.pending_modified_values.engine #=> String
-    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -31052,6 +31701,7 @@ module Aws::RDS
     #   resp.db_instance.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
+    #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
@@ -31110,34 +31760,43 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
-    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
-    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
+    #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
-    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
     #   resp.db_instance.activity_stream_kms_key_id #=> String
     #   resp.db_instance.activity_stream_kinesis_stream_name #=> String
     #   resp.db_instance.activity_stream_mode #=> String, one of "sync", "async"
     #   resp.db_instance.activity_stream_engine_native_audit_fields_included #=> Boolean
-    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
-    #   resp.db_instance.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.backup_target #=> String
-    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
+    #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
-    #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.db_system_id #=> String
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
-    #   resp.db_instance.certificate_details.ca_identifier #=> String
-    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
-    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -31206,6 +31865,9 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to associate with the replicated automated backups.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -31257,7 +31919,13 @@ module Aws::RDS
     #     source_db_instance_arn: "String", # required
     #     backup_retention_period: 1,
     #     kms_key_id: "String",
-    #     pre_signed_url: "String",
+    #     pre_signed_url: "SensitiveString",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #     source_region: "String",
     #   })
     #
@@ -31280,6 +31948,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.engine_version #=> String
     #   resp.db_instance_automated_backup.license_model #=> String
     #   resp.db_instance_automated_backup.iops #=> Integer
+    #   resp.db_instance_automated_backup.storage_throughput #=> Integer
     #   resp.db_instance_automated_backup.option_group_name #=> String
     #   resp.db_instance_automated_backup.tde_credential_arn #=> String
     #   resp.db_instance_automated_backup.encrypted #=> Boolean
@@ -31292,10 +31961,19 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backup.backup_target #=> String
-    #   resp.db_instance_automated_backup.storage_throughput #=> Integer
-    #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
-    #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
     #   resp.db_instance_automated_backup.multi_tenant #=> Boolean
+    #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backup.tag_list #=> Array
+    #   resp.db_instance_automated_backup.tag_list[0].key #=> String
+    #   resp.db_instance_automated_backup.tag_list[0].value #=> String
+    #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
+    #   resp.db_instance_automated_backup.additional_storage_volumes #=> Array
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstanceAutomatedBackupsReplication AWS API Documentation
     #
@@ -31623,7 +32301,6 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_parameter_group #=> String
     #   resp.db_cluster.db_subnet_group #=> String
     #   resp.db_cluster.status #=> String
-    #   resp.db_cluster.automatic_restart_time #=> Time
     #   resp.db_cluster.percent_progress #=> String
     #   resp.db_cluster.earliest_restorable_time #=> Time
     #   resp.db_cluster.endpoint #=> String
@@ -31641,6 +32318,7 @@ module Aws::RDS
     #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
     #   resp.db_cluster.preferred_backup_window #=> String
     #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_cluster.replication_source_identifier #=> String
     #   resp.db_cluster.read_replica_identifiers #=> Array
     #   resp.db_cluster.read_replica_identifiers[0] #=> String
@@ -31675,6 +32353,23 @@ module Aws::RDS
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_cluster.capacity #=> Integer
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
+    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.pending_modified_values.engine_version #=> String
+    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
+    #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
+    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.pending_modified_values.iops #=> Integer
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.engine_mode #=> String
     #   resp.db_cluster.scaling_configuration_info.min_capacity #=> Integer
     #   resp.db_cluster.scaling_configuration_info.max_capacity #=> Integer
@@ -31685,6 +32380,13 @@ module Aws::RDS
     #   resp.db_cluster.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
     #   resp.db_cluster.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
+    #   resp.db_cluster.db_cluster_instance_class #=> String
+    #   resp.db_cluster.storage_type #=> String
+    #   resp.db_cluster.iops #=> Integer
+    #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
+    #   resp.db_cluster.publicly_accessible #=> Boolean
+    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
     #   resp.db_cluster.deletion_protection #=> Boolean
     #   resp.db_cluster.http_endpoint_enabled #=> Boolean
     #   resp.db_cluster.activity_stream_mode #=> String, one of "sync", "async"
@@ -31708,49 +32410,26 @@ module Aws::RDS
     #   resp.db_cluster.global_cluster_identifier #=> String
     #   resp.db_cluster.global_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "unknown"
     #   resp.db_cluster.global_write_forwarding_requested #=> Boolean
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
-    #   resp.db_cluster.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
-    #   resp.db_cluster.pending_modified_values.db_cluster_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.master_user_password #=> String
-    #   resp.db_cluster.pending_modified_values.iam_database_authentication_enabled #=> Boolean
-    #   resp.db_cluster.pending_modified_values.engine_version #=> String
-    #   resp.db_cluster.pending_modified_values.backup_retention_period #=> Integer
-    #   resp.db_cluster.pending_modified_values.allocated_storage #=> Integer
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.interconnect_subnet_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.transit_gateway_multicast_domain_id #=> String
-    #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
-    #   resp.db_cluster.pending_modified_values.iops #=> Integer
-    #   resp.db_cluster.pending_modified_values.storage_type #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
-    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
-    #   resp.db_cluster.db_cluster_instance_class #=> String
-    #   resp.db_cluster.storage_type #=> String
-    #   resp.db_cluster.iops #=> Integer
-    #   resp.db_cluster.publicly_accessible #=> Boolean
-    #   resp.db_cluster.auto_minor_version_upgrade #=> Boolean
+    #   resp.db_cluster.network_type #=> String
+    #   resp.db_cluster.automatic_restart_time #=> Time
+    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.monitoring_interval #=> Integer
     #   resp.db_cluster.monitoring_role_arn #=> String
     #   resp.db_cluster.database_insights_mode #=> String, one of "standard", "advanced"
     #   resp.db_cluster.performance_insights_enabled #=> Boolean
     #   resp.db_cluster.performance_insights_kms_key_id #=> String
     #   resp.db_cluster.performance_insights_retention_period #=> Integer
-    #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
-    #   resp.db_cluster.serverless_v2_scaling_configuration.seconds_until_auto_pause #=> Integer
-    #   resp.db_cluster.serverless_v2_platform_version #=> String
-    #   resp.db_cluster.network_type #=> String
     #   resp.db_cluster.db_system_id #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
-    #   resp.db_cluster.io_optimized_next_allowed_modification_time #=> Time
     #   resp.db_cluster.local_write_forwarding_status #=> String, one of "enabled", "disabled", "enabling", "disabling", "requested"
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
-    #   resp.db_cluster.storage_throughput #=> Integer
     #   resp.db_cluster.cluster_scalability_type #=> String, one of "standard", "limitless"
     #   resp.db_cluster.certificate_details.ca_identifier #=> String
     #   resp.db_cluster.certificate_details.valid_till #=> Time
@@ -31824,7 +32503,6 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
-    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -31857,6 +32535,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -31866,6 +32545,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.engine_version #=> String
     #   resp.db_instance.pending_modified_values.license_model #=> String
     #   resp.db_instance.pending_modified_values.iops #=> Integer
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
@@ -31877,13 +32557,19 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
-    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
-    #   resp.db_instance.pending_modified_values.engine #=> String
-    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -31896,6 +32582,7 @@ module Aws::RDS
     #   resp.db_instance.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
+    #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
@@ -31954,34 +32641,43 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
-    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
-    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
+    #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
-    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
     #   resp.db_instance.activity_stream_kms_key_id #=> String
     #   resp.db_instance.activity_stream_kinesis_stream_name #=> String
     #   resp.db_instance.activity_stream_mode #=> String, one of "sync", "async"
     #   resp.db_instance.activity_stream_engine_native_audit_fields_included #=> Boolean
-    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
-    #   resp.db_instance.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.backup_target #=> String
-    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
+    #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
-    #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.db_system_id #=> String
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
-    #   resp.db_instance.certificate_details.ca_identifier #=> String
-    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
-    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -32076,6 +32772,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.engine_version #=> String
     #   resp.db_instance_automated_backup.license_model #=> String
     #   resp.db_instance_automated_backup.iops #=> Integer
+    #   resp.db_instance_automated_backup.storage_throughput #=> Integer
     #   resp.db_instance_automated_backup.option_group_name #=> String
     #   resp.db_instance_automated_backup.tde_credential_arn #=> String
     #   resp.db_instance_automated_backup.encrypted #=> Boolean
@@ -32088,10 +32785,19 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backup.backup_target #=> String
-    #   resp.db_instance_automated_backup.storage_throughput #=> Integer
-    #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
-    #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
     #   resp.db_instance_automated_backup.multi_tenant #=> Boolean
+    #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backup.tag_list #=> Array
+    #   resp.db_instance_automated_backup.tag_list[0].key #=> String
+    #   resp.db_instance_automated_backup.tag_list[0].value #=> String
+    #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
+    #   resp.db_instance_automated_backup.additional_storage_volumes #=> Array
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance_automated_backup.additional_storage_volumes[0].storage_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstanceAutomatedBackupsReplication AWS API Documentation
     #
@@ -32431,7 +33137,6 @@ module Aws::RDS
     #   resp.db_instance.db_instance_class #=> String
     #   resp.db_instance.engine #=> String
     #   resp.db_instance.db_instance_status #=> String
-    #   resp.db_instance.automatic_restart_time #=> Time
     #   resp.db_instance.master_username #=> String
     #   resp.db_instance.db_name #=> String
     #   resp.db_instance.endpoint.address #=> String
@@ -32464,6 +33169,7 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
     #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
+    #   resp.db_instance.upgrade_rollout_order #=> String, one of "first", "second", "last"
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.master_user_password #=> String
@@ -32473,6 +33179,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.engine_version #=> String
     #   resp.db_instance.pending_modified_values.license_model #=> String
     #   resp.db_instance.pending_modified_values.iops #=> Integer
+    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
@@ -32484,13 +33191,19 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.processor_features #=> Array
     #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
     #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
-    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.pending_modified_values.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.pending_modified_values.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.pending_modified_values.storage_throughput #=> Integer
-    #   resp.db_instance.pending_modified_values.engine #=> String
-    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
     #   resp.db_instance.pending_modified_values.multi_tenant #=> Boolean
+    #   resp.db_instance.pending_modified_values.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_instance.pending_modified_values.dedicated_log_volume #=> Boolean
+    #   resp.db_instance.pending_modified_values.engine #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes #=> Array
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -32503,6 +33216,7 @@ module Aws::RDS
     #   resp.db_instance.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
+    #   resp.db_instance.storage_throughput #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
     #   resp.db_instance.option_group_memberships[0].option_group_name #=> String
     #   resp.db_instance.option_group_memberships[0].status #=> String
@@ -32561,34 +33275,43 @@ module Aws::RDS
     #   resp.db_instance.tag_list #=> Array
     #   resp.db_instance.tag_list[0].key #=> String
     #   resp.db_instance.tag_list[0].value #=> String
-    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
-    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
+    #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.customer_owned_ip_enabled #=> Boolean
-    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.network_type #=> String
     #   resp.db_instance.activity_stream_status #=> String, one of "stopped", "starting", "started", "stopping"
     #   resp.db_instance.activity_stream_kms_key_id #=> String
     #   resp.db_instance.activity_stream_kinesis_stream_name #=> String
     #   resp.db_instance.activity_stream_mode #=> String, one of "sync", "async"
     #   resp.db_instance.activity_stream_engine_native_audit_fields_included #=> Boolean
-    #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
-    #   resp.db_instance.resume_full_automation_mode_time #=> Time
-    #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance.db_instance_automated_backups_replications #=> Array
+    #   resp.db_instance.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance.backup_target #=> String
-    #   resp.db_instance.network_type #=> String
+    #   resp.db_instance.automatic_restart_time #=> Time
+    #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.activity_stream_policy_status #=> String, one of "locked", "unlocked", "locking-policy", "unlocking-policy"
-    #   resp.db_instance.storage_throughput #=> Integer
+    #   resp.db_instance.certificate_details.ca_identifier #=> String
+    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.db_system_id #=> String
     #   resp.db_instance.master_user_secret.secret_arn #=> String
     #   resp.db_instance.master_user_secret.secret_status #=> String
     #   resp.db_instance.master_user_secret.kms_key_id #=> String
-    #   resp.db_instance.certificate_details.ca_identifier #=> String
-    #   resp.db_instance.certificate_details.valid_till #=> Time
     #   resp.db_instance.read_replica_source_db_cluster_identifier #=> String
     #   resp.db_instance.percent_progress #=> String
+    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.dedicated_log_volume #=> Boolean
     #   resp.db_instance.is_storage_config_upgrade_available #=> Boolean
-    #   resp.db_instance.multi_tenant #=> Boolean
     #   resp.db_instance.engine_lifecycle_support #=> String
+    #   resp.db_instance.additional_storage_volumes #=> Array
+    #   resp.db_instance.additional_storage_volumes[0].volume_name #=> String
+    #   resp.db_instance.additional_storage_volumes[0].storage_volume_status #=> String
+    #   resp.db_instance.additional_storage_volumes[0].allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].iops #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].max_allocated_storage #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_throughput #=> Integer
+    #   resp.db_instance.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.storage_volume_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplica AWS API Documentation
     #
@@ -32617,7 +33340,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.293.0'
+      context[:gem_version] = '1.302.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -58,6 +58,23 @@ module Aws::PinpointSMSVoiceV2
       SENSITIVE: []
     end
 
+    class CarrierLookupRequest
+      attr_accessor phone_number: ::String
+      SENSITIVE: []
+    end
+
+    class CarrierLookupResult
+      attr_accessor e164_phone_number: ::String
+      attr_accessor dialing_country_code: ::String
+      attr_accessor iso_country_code: ::String
+      attr_accessor country: ::String
+      attr_accessor mcc: ::String
+      attr_accessor mnc: ::String
+      attr_accessor carrier: ::String
+      attr_accessor phone_number_type: ("MOBILE" | "LANDLINE" | "OTHER" | "INVALID")
+      SENSITIVE: []
+    end
+
     class CloudWatchLogsDestination
       attr_accessor iam_role_arn: ::String
       attr_accessor log_group_arn: ::String

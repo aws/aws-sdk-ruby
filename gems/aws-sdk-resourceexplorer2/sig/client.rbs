@@ -90,8 +90,8 @@ module Aws
 
       interface _BatchGetViewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetViewOutput]
-        def errors: () -> ::Array[Types::BatchGetViewError]
         def views: () -> ::Array[Types::View]
+        def errors: () -> ::Array[Types::BatchGetViewError]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#batch_get_view-instance_method
       def batch_get_view: (
@@ -102,8 +102,8 @@ module Aws
       interface _CreateIndexResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateIndexOutput]
         def arn: () -> ::String
-        def created_at: () -> ::Time
         def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "UPDATING")
+        def created_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#create_index-instance_method
       def create_index: (
@@ -112,6 +112,18 @@ module Aws
                         ) -> _CreateIndexResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIndexResponseSuccess
 
+      interface _CreateResourceExplorerSetupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResourceExplorerSetupOutput]
+        def task_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#create_resource_explorer_setup-instance_method
+      def create_resource_explorer_setup: (
+                                            region_list: Array[::String],
+                                            ?aggregator_regions: Array[::String],
+                                            view_name: ::String
+                                          ) -> _CreateResourceExplorerSetupResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResourceExplorerSetupResponseSuccess
+
       interface _CreateViewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateViewOutput]
         def view: () -> Types::View
@@ -119,31 +131,42 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#create_view-instance_method
       def create_view: (
                          ?client_token: ::String,
-                         ?filters: {
-                           filter_string: ::String
-                         },
+                         view_name: ::String,
                          ?included_properties: Array[
                            {
                              name: ::String
                            },
                          ],
                          ?scope: ::String,
-                         ?tags: Hash[::String, ::String],
-                         view_name: ::String
+                         ?filters: {
+                           filter_string: ::String
+                         },
+                         ?tags: Hash[::String, ::String]
                        ) -> _CreateViewResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateViewResponseSuccess
 
       interface _DeleteIndexResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIndexOutput]
         def arn: () -> ::String
-        def last_updated_at: () -> ::Time
         def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "UPDATING")
+        def last_updated_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#delete_index-instance_method
       def delete_index: (
                           arn: ::String
                         ) -> _DeleteIndexResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIndexResponseSuccess
+
+      interface _DeleteResourceExplorerSetupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourceExplorerSetupOutput]
+        def task_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#delete_resource_explorer_setup-instance_method
+      def delete_resource_explorer_setup: (
+                                            ?region_list: Array[::String],
+                                            ?delete_in_all_regions: bool
+                                          ) -> _DeleteResourceExplorerSetupResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourceExplorerSetupResponseSuccess
 
       interface _DeleteViewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteViewOutput]
@@ -178,13 +201,13 @@ module Aws
       interface _GetIndexResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetIndexOutput]
         def arn: () -> ::String
-        def created_at: () -> ::Time
-        def last_updated_at: () -> ::Time
+        def type: () -> ("LOCAL" | "AGGREGATOR")
+        def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "UPDATING")
         def replicating_from: () -> ::Array[::String]
         def replicating_to: () -> ::Array[::String]
-        def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "UPDATING")
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
         def tags: () -> ::Hash[::String, ::String]
-        def type: () -> ("LOCAL" | "AGGREGATOR")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#get_index-instance_method
       def get_index: () -> _GetIndexResponseSuccess
@@ -200,10 +223,42 @@ module Aws
                             ) -> _GetManagedViewResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetManagedViewResponseSuccess
 
+      interface _GetResourceExplorerSetupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceExplorerSetupOutput]
+        def regions: () -> ::Array[Types::RegionStatus]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#get_resource_explorer_setup-instance_method
+      def get_resource_explorer_setup: (
+                                         task_id: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _GetResourceExplorerSetupResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceExplorerSetupResponseSuccess
+
+      interface _GetServiceIndexResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceIndexOutput]
+        def arn: () -> ::String
+        def type: () -> ("LOCAL" | "AGGREGATOR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#get_service_index-instance_method
+      def get_service_index: () -> _GetServiceIndexResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceIndexResponseSuccess
+
+      interface _GetServiceViewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceViewOutput]
+        def view: () -> Types::ServiceView
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#get_service_view-instance_method
+      def get_service_view: (
+                              service_view_arn: ::String
+                            ) -> _GetServiceViewResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceViewResponseSuccess
+
       interface _GetViewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetViewOutput]
-        def tags: () -> ::Hash[::String, ::String]
         def view: () -> Types::View
+        def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#get_view-instance_method
       def get_view: (
@@ -218,10 +273,10 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#list_indexes-instance_method
       def list_indexes: (
-                          ?max_results: ::Integer,
-                          ?next_token: ::String,
+                          ?type: ("LOCAL" | "AGGREGATOR"),
                           ?regions: Array[::String],
-                          ?type: ("LOCAL" | "AGGREGATOR")
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
                         ) -> _ListIndexesResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIndexesResponseSuccess
 
@@ -240,8 +295,8 @@ module Aws
 
       interface _ListManagedViewsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListManagedViewsOutput]
-        def managed_views: () -> ::Array[::String]
         def next_token: () -> ::String
+        def managed_views: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#list_managed_views-instance_method
       def list_managed_views: (
@@ -253,8 +308,8 @@ module Aws
 
       interface _ListResourcesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListResourcesOutput]
-        def next_token: () -> ::String
         def resources: () -> ::Array[Types::Resource]
+        def next_token: () -> ::String
         def view_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#list_resources-instance_method
@@ -263,20 +318,57 @@ module Aws
                               filter_string: ::String
                             },
                             ?max_results: ::Integer,
-                            ?next_token: ::String,
-                            ?view_arn: ::String
+                            ?view_arn: ::String,
+                            ?next_token: ::String
                           ) -> _ListResourcesResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourcesResponseSuccess
 
+      interface _ListServiceIndexesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceIndexesOutput]
+        def indexes: () -> ::Array[Types::Index]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#list_service_indexes-instance_method
+      def list_service_indexes: (
+                                  ?regions: Array[::String],
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListServiceIndexesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceIndexesResponseSuccess
+
+      interface _ListServiceViewsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceViewsOutput]
+        def next_token: () -> ::String
+        def service_views: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#list_service_views-instance_method
+      def list_service_views: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListServiceViewsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceViewsResponseSuccess
+
+      interface _ListStreamingAccessForServicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamingAccessForServicesOutput]
+        def streaming_access_for_services: () -> ::Array[Types::StreamingAccessDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#list_streaming_access_for_services-instance_method
+      def list_streaming_access_for_services: (
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _ListStreamingAccessForServicesResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamingAccessForServicesResponseSuccess
+
       interface _ListSupportedResourceTypesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSupportedResourceTypesOutput]
-        def next_token: () -> ::String
         def resource_types: () -> ::Array[Types::SupportedResourceType]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#list_supported_resource_types-instance_method
       def list_supported_resource_types: (
-                                           ?max_results: ::Integer,
-                                           ?next_token: ::String
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
                                          ) -> _ListSupportedResourceTypesResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSupportedResourceTypesResponseSuccess
 
@@ -292,29 +384,29 @@ module Aws
 
       interface _ListViewsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListViewsOutput]
-        def next_token: () -> ::String
         def views: () -> ::Array[::String]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#list_views-instance_method
       def list_views: (
-                        ?max_results: ::Integer,
-                        ?next_token: ::String
+                        ?next_token: ::String,
+                        ?max_results: ::Integer
                       ) -> _ListViewsResponseSuccess
                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListViewsResponseSuccess
 
       interface _SearchResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SearchOutput]
-        def count: () -> Types::ResourceCount
-        def next_token: () -> ::String
         def resources: () -> ::Array[Types::Resource]
+        def next_token: () -> ::String
         def view_arn: () -> ::String
+        def count: () -> Types::ResourceCount
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#search-instance_method
       def search: (
-                    ?max_results: ::Integer,
-                    ?next_token: ::String,
                     query_string: ::String,
-                    ?view_arn: ::String
+                    ?max_results: ::Integer,
+                    ?view_arn: ::String,
+                    ?next_token: ::String
                   ) -> _SearchResponseSuccess
                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchResponseSuccess
 
@@ -323,8 +415,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#tag_resource-instance_method
       def tag_resource: (
-                          ?tags: Hash[::String, ::String],
-                          resource_arn: ::String
+                          resource_arn: ::String,
+                          ?tags: Hash[::String, ::String]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
 
@@ -341,9 +433,9 @@ module Aws
       interface _UpdateIndexTypeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIndexTypeOutput]
         def arn: () -> ::String
-        def last_updated_at: () -> ::Time
-        def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "UPDATING")
         def type: () -> ("LOCAL" | "AGGREGATOR")
+        def state: () -> ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "UPDATING")
+        def last_updated_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#update_index_type-instance_method
       def update_index_type: (
@@ -358,15 +450,15 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceExplorer2/Client.html#update_view-instance_method
       def update_view: (
-                         ?filters: {
-                           filter_string: ::String
-                         },
+                         view_arn: ::String,
                          ?included_properties: Array[
                            {
                              name: ::String
                            },
                          ],
-                         view_arn: ::String
+                         ?filters: {
+                           filter_string: ::String
+                         }
                        ) -> _UpdateViewResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateViewResponseSuccess
     end

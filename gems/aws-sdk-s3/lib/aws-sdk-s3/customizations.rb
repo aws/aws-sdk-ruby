@@ -8,6 +8,7 @@ module Aws
     autoload :EncryptionV2, 'aws-sdk-s3/encryption_v2'
     autoload :EncryptionV3, 'aws-sdk-s3/encryption_v3'
     autoload :FilePart, 'aws-sdk-s3/file_part'
+    autoload :DefaultExecutor, 'aws-sdk-s3/default_executor'
     autoload :FileUploader, 'aws-sdk-s3/file_uploader'
     autoload :FileDownloader, 'aws-sdk-s3/file_downloader'
     autoload :LegacySigner, 'aws-sdk-s3/legacy_signer'

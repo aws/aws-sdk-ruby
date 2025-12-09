@@ -771,6 +771,7 @@ module Aws::SSM
     ModifyDocumentPermissionRequest = Shapes::StructureShape.new(name: 'ModifyDocumentPermissionRequest')
     ModifyDocumentPermissionResponse = Shapes::StructureShape.new(name: 'ModifyDocumentPermissionResponse')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NoLongerSupportedException = Shapes::StructureShape.new(name: 'NoLongerSupportedException')
     Node = Shapes::StructureShape.new(name: 'Node')
     NodeAccountId = Shapes::StringShape.new(name: 'NodeAccountId')
     NodeAggregator = Shapes::StructureShape.new(name: 'NodeAggregator')
@@ -3754,6 +3755,9 @@ module Aws::SSM
 
     ModifyDocumentPermissionResponse.struct_class = Types::ModifyDocumentPermissionResponse
 
+    NoLongerSupportedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    NoLongerSupportedException.struct_class = Types::NoLongerSupportedException
+
     Node.add_member(:capture_time, Shapes::ShapeRef.new(shape: NodeCaptureTime, location_name: "CaptureTime"))
     Node.add_member(:id, Shapes::ShapeRef.new(shape: NodeId, location_name: "Id"))
     Node.add_member(:owner, Shapes::ShapeRef.new(shape: NodeOwnerInfo, location_name: "Owner"))
@@ -5220,6 +5224,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: DocumentLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDocumentSchemaVersion)
         o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:create_maintenance_window, Seahorse::Model::Operation.new.tap do |o|
@@ -6902,6 +6907,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatch)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: AutomationDefinitionNotApprovedException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:start_execution_preview, Seahorse::Model::Operation.new.tap do |o|

@@ -177,6 +177,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_event_aggregates-instance_method
       def describe_event_aggregates: (
                                        ?filter: {
+                                         actionabilities: Array[("ACTION_REQUIRED" | "ACTION_MAY_BE_REQUIRED" | "INFORMATIONAL")]?,
                                          event_arns: Array[::String]?,
                                          event_type_codes: Array[::String]?,
                                          services: Array[::String]?,
@@ -206,7 +207,8 @@ module Aws
                                          tags: Array[
                                            Hash[::String, ::String],
                                          ]?,
-                                         event_status_codes: Array[("open" | "closed" | "upcoming")]?
+                                         event_status_codes: Array[("open" | "closed" | "upcoming")]?,
+                                         personas: Array[("OPERATIONS" | "SECURITY" | "BILLING")]?
                                        },
                                        aggregate_field: ("eventTypeCategory"),
                                        ?max_results: ::Integer,
@@ -253,7 +255,9 @@ module Aws
                                   ?filter: {
                                     event_type_codes: Array[::String]?,
                                     services: Array[::String]?,
-                                    event_type_categories: Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]?
+                                    event_type_categories: Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]?,
+                                    actionabilities: Array[("ACTION_REQUIRED" | "ACTION_MAY_BE_REQUIRED" | "INFORMATIONAL")]?,
+                                    personas: Array[("OPERATIONS" | "SECURITY" | "BILLING")]?
                                   },
                                   ?locale: ::String,
                                   ?next_token: ::String,
@@ -269,6 +273,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_events-instance_method
       def describe_events: (
                              ?filter: {
+                               actionabilities: Array[("ACTION_REQUIRED" | "ACTION_MAY_BE_REQUIRED" | "INFORMATIONAL")]?,
                                event_arns: Array[::String]?,
                                event_type_codes: Array[::String]?,
                                services: Array[::String]?,
@@ -298,7 +303,8 @@ module Aws
                                tags: Array[
                                  Hash[::String, ::String],
                                ]?,
-                               event_status_codes: Array[("open" | "closed" | "upcoming")]?
+                               event_status_codes: Array[("open" | "closed" | "upcoming")]?,
+                               personas: Array[("OPERATIONS" | "SECURITY" | "BILLING")]?
                              },
                              ?next_token: ::String,
                              ?max_results: ::Integer,
@@ -314,6 +320,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_events_for_organization-instance_method
       def describe_events_for_organization: (
                                               ?filter: {
+                                                actionabilities: Array[("ACTION_REQUIRED" | "ACTION_MAY_BE_REQUIRED" | "INFORMATIONAL")]?,
                                                 event_type_codes: Array[::String]?,
                                                 aws_account_ids: Array[::String]?,
                                                 services: Array[::String]?,
@@ -333,7 +340,8 @@ module Aws
                                                 entity_arns: Array[::String]?,
                                                 entity_values: Array[::String]?,
                                                 event_type_categories: Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]?,
-                                                event_status_codes: Array[("open" | "closed" | "upcoming")]?
+                                                event_status_codes: Array[("open" | "closed" | "upcoming")]?,
+                                                personas: Array[("OPERATIONS" | "SECURITY" | "BILLING")]?
                                               },
                                               ?next_token: ::String,
                                               ?max_results: ::Integer,

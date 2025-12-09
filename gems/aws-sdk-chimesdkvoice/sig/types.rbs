@@ -180,6 +180,7 @@ module Aws::ChimeSDKVoice
       attr_accessor require_encryption: bool
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor integration_type: ("CONNECT_CALL_TRANSFER_CONNECTOR" | "CONNECT_ANALYTICS_CONNECTOR")
+      attr_accessor network_type: ("IPV4_ONLY" | "DUAL_STACK")
       SENSITIVE: []
     end
 
@@ -1328,6 +1329,7 @@ module Aws::ChimeSDKVoice
       attr_accessor updated_timestamp: ::Time
       attr_accessor voice_connector_arn: ::String
       attr_accessor integration_type: ("CONNECT_CALL_TRANSFER_CONNECTOR" | "CONNECT_ANALYTICS_CONNECTOR")
+      attr_accessor network_type: ("IPV4_ONLY" | "DUAL_STACK")
       SENSITIVE: []
     end
 

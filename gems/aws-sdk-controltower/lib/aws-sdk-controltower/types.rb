@@ -26,10 +26,6 @@ module Aws::ControlTower
     # An object of shape `BaselineOperation`, returning details about the
     # specified `Baseline` operation ID.
     #
-    # @!attribute [rw] end_time
-    #   The end time of the operation (if applicable), in ISO 8601 format.
-    #   @return [Time]
-    #
     # @!attribute [rw] operation_identifier
     #   The identifier of the specified operation.
     #   @return [String]
@@ -40,14 +36,18 @@ module Aws::ControlTower
     #   `RESET_ENABLED_BASELINE`.
     #   @return [String]
     #
-    # @!attribute [rw] start_time
-    #   The start time of the operation, in ISO 8601 format.
-    #   @return [Time]
-    #
     # @!attribute [rw] status
     #   An enumerated type (`enum`) with possible values of `SUCCEEDED`,
     #   `FAILED`, or `IN_PROGRESS`.
     #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the operation, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the operation (if applicable), in ISO 8601 format.
+    #   @return [Time]
     #
     # @!attribute [rw] status_message
     #   A status message that gives more information about the operation's
@@ -57,11 +57,11 @@ module Aws::ControlTower
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/BaselineOperation AWS API Documentation
     #
     class BaselineOperation < Struct.new(
-      :end_time,
       :operation_identifier,
       :operation_type,
-      :start_time,
       :status,
+      :start_time,
+      :end_time,
       :status_message)
       SENSITIVE = []
       include Aws::Structure
@@ -73,20 +73,20 @@ module Aws::ControlTower
     #   The full ARN of a Baseline.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   A summary description of a Baseline.
-    #   @return [String]
-    #
     # @!attribute [rw] name
     #   The human-readable name of a Baseline.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A summary description of a Baseline.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/BaselineSummary AWS API Documentation
     #
     class BaselineSummary < Struct.new(
       :arn,
-      :description,
-      :name)
+      :name,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -106,28 +106,16 @@ module Aws::ControlTower
 
     # An operation performed by the control.
     #
-    # @!attribute [rw] control_identifier
-    #   The `controlIdentifier` of the control for the operation.
-    #   @return [String]
-    #
-    # @!attribute [rw] enabled_control_identifier
-    #   The `controlIdentifier` of the enabled control.
-    #   @return [String]
-    #
-    # @!attribute [rw] end_time
-    #   The time that the operation finished.
-    #   @return [Time]
-    #
-    # @!attribute [rw] operation_identifier
-    #   The identifier of the specified operation.
-    #   @return [String]
-    #
     # @!attribute [rw] operation_type
     #   One of `ENABLE_CONTROL` or `DISABLE_CONTROL`.
     #   @return [String]
     #
     # @!attribute [rw] start_time
     #   The time that the operation began.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time that the operation finished.
     #   @return [Time]
     #
     # @!attribute [rw] status
@@ -139,22 +127,34 @@ module Aws::ControlTower
     #   explaining why the operation failed.
     #   @return [String]
     #
+    # @!attribute [rw] operation_identifier
+    #   The identifier of the specified operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] control_identifier
+    #   The `controlIdentifier` of the control for the operation.
+    #   @return [String]
+    #
     # @!attribute [rw] target_identifier
     #   The target upon which the control operation is working.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_control_identifier
+    #   The `controlIdentifier` of the enabled control.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ControlOperation AWS API Documentation
     #
     class ControlOperation < Struct.new(
-      :control_identifier,
-      :enabled_control_identifier,
-      :end_time,
-      :operation_identifier,
       :operation_type,
       :start_time,
+      :end_time,
       :status,
       :status_message,
-      :target_identifier)
+      :operation_identifier,
+      :control_identifier,
+      :target_identifier,
+      :enabled_control_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -166,8 +166,8 @@ module Aws::ControlTower
     #   The set of `controlIdentifier` returned by the filter.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] control_operation_types
-    #   The set of `ControlOperation` objects returned by the filter.
+    # @!attribute [rw] target_identifiers
+    #   The set of `targetIdentifier` objects returned by the filter.
     #   @return [Array<String>]
     #
     # @!attribute [rw] enabled_control_identifiers
@@ -179,39 +179,23 @@ module Aws::ControlTower
     #   Lists the status of control operations.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] target_identifiers
-    #   The set of `targetIdentifier` objects returned by the filter.
+    # @!attribute [rw] control_operation_types
+    #   The set of `ControlOperation` objects returned by the filter.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ControlOperationFilter AWS API Documentation
     #
     class ControlOperationFilter < Struct.new(
       :control_identifiers,
-      :control_operation_types,
+      :target_identifiers,
       :enabled_control_identifiers,
       :statuses,
-      :target_identifiers)
+      :control_operation_types)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # A summary of information about the specified control operation.
-    #
-    # @!attribute [rw] control_identifier
-    #   The `controlIdentifier` of a control.
-    #   @return [String]
-    #
-    # @!attribute [rw] enabled_control_identifier
-    #   The `controlIdentifier` of an enabled control.
-    #   @return [String]
-    #
-    # @!attribute [rw] end_time
-    #   The time at which the control operation was completed.
-    #   @return [Time]
-    #
-    # @!attribute [rw] operation_identifier
-    #   The unique identifier of a control operation.
-    #   @return [String]
     #
     # @!attribute [rw] operation_type
     #   The type of operation.
@@ -219,6 +203,10 @@ module Aws::ControlTower
     #
     # @!attribute [rw] start_time
     #   The time at which a control operation began.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time at which the control operation was completed.
     #   @return [Time]
     #
     # @!attribute [rw] status
@@ -229,26 +217,52 @@ module Aws::ControlTower
     #   A speficic message displayed as part of the control status.
     #   @return [String]
     #
+    # @!attribute [rw] operation_identifier
+    #   The unique identifier of a control operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] control_identifier
+    #   The `controlIdentifier` of a control.
+    #   @return [String]
+    #
     # @!attribute [rw] target_identifier
     #   The unique identifier of the target of a control operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_control_identifier
+    #   The `controlIdentifier` of an enabled control.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ControlOperationSummary AWS API Documentation
     #
     class ControlOperationSummary < Struct.new(
-      :control_identifier,
-      :enabled_control_identifier,
-      :end_time,
-      :operation_identifier,
       :operation_type,
       :start_time,
+      :end_time,
       :status,
       :status_message,
-      :target_identifier)
+      :operation_identifier,
+      :control_identifier,
+      :target_identifier,
+      :enabled_control_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] version
+    #   The landing zone version, for example, 3.0.
+    #   @return [String]
+    #
+    # @!attribute [rw] remediation_types
+    #   Specifies the types of remediation actions to apply when creating
+    #   the landing zone, such as automatic drift correction or compliance
+    #   enforcement.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   Tags to be applied to the landing zone.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] manifest
     #   The manifest JSON file is a text file that describes your Amazon Web
     #   Services resources. For examples, review [Launch your landing
@@ -259,20 +273,13 @@ module Aws::ControlTower
     #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
-    # @!attribute [rw] tags
-    #   Tags to be applied to the landing zone.
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] version
-    #   The landing zone version, for example, 3.0.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/CreateLandingZoneInput AWS API Documentation
     #
     class CreateLandingZoneInput < Struct.new(
-      :manifest,
+      :version,
+      :remediation_types,
       :tags,
-      :version)
+      :manifest)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -369,11 +376,17 @@ module Aws::ControlTower
     #   [1]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
     #   @return [String]
     #
+    # @!attribute [rw] enabled_control_identifier
+    #   The ARN of the enabled control to be disabled, which uniquely
+    #   identifies the control instance on the target organizational unit.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/DisableControlInput AWS API Documentation
     #
     class DisableControlInput < Struct.new(
       :control_identifier,
-      :target_identifier)
+      :target_identifier,
+      :enabled_control_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -420,18 +433,20 @@ module Aws::ControlTower
     #     the drift status for the enabled control.
     #   @return [String]
     #
+    # @!attribute [rw] types
+    #   An object that categorizes the different types of drift detected for
+    #   the enabled control.
+    #   @return [Types::EnabledControlDriftTypes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/DriftStatusSummary AWS API Documentation
     #
     class DriftStatusSummary < Struct.new(
-      :drift_status)
+      :drift_status,
+      :types)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] baseline_identifier
-    #   The ARN of the baseline to be enabled.
-    #   @return [String]
-    #
     # @!attribute [rw] baseline_version
     #   The specific version to be enabled of the specified baseline.
     #   @return [String]
@@ -441,42 +456,46 @@ module Aws::ControlTower
     #   where `key` is a string and `value` is a document of any type.
     #   @return [Array<Types::EnabledBaselineParameter>]
     #
-    # @!attribute [rw] tags
-    #   Tags associated with input to `EnableBaseline`.
-    #   @return [Hash<String,String>]
+    # @!attribute [rw] baseline_identifier
+    #   The ARN of the baseline to be enabled.
+    #   @return [String]
     #
     # @!attribute [rw] target_identifier
     #   The ARN of the target on which the baseline will be enabled. Only
     #   OUs are supported as targets.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Tags associated with input to `EnableBaseline`.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnableBaselineInput AWS API Documentation
     #
     class EnableBaselineInput < Struct.new(
-      :baseline_identifier,
       :baseline_version,
       :parameters,
-      :tags,
-      :target_identifier)
+      :baseline_identifier,
+      :target_identifier,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] arn
-    #   The ARN of the `EnabledBaseline` resource.
-    #   @return [String]
-    #
     # @!attribute [rw] operation_identifier
     #   The ID (in UUID format) of the asynchronous `EnableBaseline`
     #   operation. This `operationIdentifier` is used to track status
     #   through calls to the `GetBaselineOperation` API.
     #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   The ARN of the `EnabledBaseline` resource.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnableBaselineOutput AWS API Documentation
     #
     class EnableBaselineOutput < Struct.new(
-      :arn,
-      :operation_identifier)
+      :operation_identifier,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -492,15 +511,6 @@ module Aws::ControlTower
     #   [1]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
     #   @return [String]
     #
-    # @!attribute [rw] parameters
-    #   A list of input parameter values, which are specified to configure
-    #   the control when you enable it.
-    #   @return [Array<Types::EnabledControlParameter>]
-    #
-    # @!attribute [rw] tags
-    #   Tags to be applied to the `EnabledControl` resource.
-    #   @return [Hash<String,String>]
-    #
     # @!attribute [rw] target_identifier
     #   The ARN of the organizational unit. For information on how to find
     #   the `targetIdentifier`, see [the overview page][1].
@@ -510,31 +520,40 @@ module Aws::ControlTower
     #   [1]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Tags to be applied to the `EnabledControl` resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] parameters
+    #   A list of input parameter values, which are specified to configure
+    #   the control when you enable it.
+    #   @return [Array<Types::EnabledControlParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnableControlInput AWS API Documentation
     #
     class EnableControlInput < Struct.new(
       :control_identifier,
-      :parameters,
+      :target_identifier,
       :tags,
-      :target_identifier)
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] arn
-    #   The ARN of the `EnabledControl` resource.
-    #   @return [String]
-    #
     # @!attribute [rw] operation_identifier
     #   The ID of the asynchronous operation, which is used to track status.
     #   The operation is available for 90 days.
     #   @return [String]
     #
+    # @!attribute [rw] arn
+    #   The ARN of the `EnabledControl` resource.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnableControlOutput AWS API Documentation
     #
     class EnableControlOutput < Struct.new(
-      :arn,
-      :operation_identifier)
+      :operation_identifier,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -558,9 +577,9 @@ module Aws::ControlTower
     #   The drift status of the enabled baseline.
     #   @return [Types::EnabledBaselineDriftStatusSummary]
     #
-    # @!attribute [rw] parameters
-    #   Shows the parameters that are applied when enabling this `Baseline`.
-    #   @return [Array<Types::EnabledBaselineParameterSummary>]
+    # @!attribute [rw] target_identifier
+    #   The target on which to enable the `Baseline`.
+    #   @return [String]
     #
     # @!attribute [rw] parent_identifier
     #   An ARN that represents the parent `EnabledBaseline` at the
@@ -574,9 +593,9 @@ module Aws::ControlTower
     #   resource.
     #   @return [Types::EnablementStatusSummary]
     #
-    # @!attribute [rw] target_identifier
-    #   The target on which to enable the `Baseline`.
-    #   @return [String]
+    # @!attribute [rw] parameters
+    #   Shows the parameters that are applied when enabling this `Baseline`.
+    #   @return [Array<Types::EnabledBaselineParameterSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledBaselineDetails AWS API Documentation
     #
@@ -585,10 +604,10 @@ module Aws::ControlTower
       :baseline_identifier,
       :baseline_version,
       :drift_status_summary,
-      :parameters,
+      :target_identifier,
       :parent_identifier,
       :status_summary,
-      :target_identifier)
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -663,13 +682,13 @@ module Aws::ControlTower
     # filters are `baselineIdentifiers` and `targetIdentifiers`. The filter
     # can be applied for either, or both.
     #
+    # @!attribute [rw] target_identifiers
+    #   Identifiers for the targets of the `Baseline` filter operation.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] baseline_identifiers
     #   Identifiers for the `Baseline` objects returned as part of the
     #   filter operation.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] inheritance_drift_statuses
-    #   A list of `EnabledBaselineDriftStatus` items for enabled baselines.
     #   @return [Array<String>]
     #
     # @!attribute [rw] parent_identifiers
@@ -681,18 +700,18 @@ module Aws::ControlTower
     #   A list of `EnablementStatus` items.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] target_identifiers
-    #   Identifiers for the targets of the `Baseline` filter operation.
+    # @!attribute [rw] inheritance_drift_statuses
+    #   A list of `EnabledBaselineDriftStatus` items for enabled baselines.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledBaselineFilter AWS API Documentation
     #
     class EnabledBaselineFilter < Struct.new(
+      :target_identifiers,
       :baseline_identifiers,
-      :inheritance_drift_statuses,
       :parent_identifiers,
       :statuses,
-      :target_identifiers)
+      :inheritance_drift_statuses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -772,6 +791,10 @@ module Aws::ControlTower
     #   The drift status of the enabled baseline.
     #   @return [Types::EnabledBaselineDriftStatusSummary]
     #
+    # @!attribute [rw] target_identifier
+    #   The target upon which the baseline is enabled.
+    #   @return [String]
+    #
     # @!attribute [rw] parent_identifier
     #   An ARN that represents an object returned by `ListEnabledBaseline`,
     #   to describe an enabled baseline.
@@ -782,10 +805,6 @@ module Aws::ControlTower
     #   resource.
     #   @return [Types::EnablementStatusSummary]
     #
-    # @!attribute [rw] target_identifier
-    #   The target upon which the baseline is enabled.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledBaselineSummary AWS API Documentation
     #
     class EnabledBaselineSummary < Struct.new(
@@ -793,9 +812,9 @@ module Aws::ControlTower
       :baseline_identifier,
       :baseline_version,
       :drift_status_summary,
+      :target_identifier,
       :parent_identifier,
-      :status_summary,
-      :target_identifier)
+      :status_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -815,18 +834,6 @@ module Aws::ControlTower
     #   [1]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
     #   @return [String]
     #
-    # @!attribute [rw] drift_status_summary
-    #   The drift status of the enabled control.
-    #   @return [Types::DriftStatusSummary]
-    #
-    # @!attribute [rw] parameters
-    #   Array of `EnabledControlParameter` objects.
-    #   @return [Array<Types::EnabledControlParameterSummary>]
-    #
-    # @!attribute [rw] status_summary
-    #   The deployment summary of the enabled control.
-    #   @return [Types::EnablementStatusSummary]
-    #
     # @!attribute [rw] target_identifier
     #   The ARN of the organizational unit. For information on how to find
     #   the `targetIdentifier`, see [the overview page][1].
@@ -836,20 +843,60 @@ module Aws::ControlTower
     #   [1]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
     #   @return [String]
     #
+    # @!attribute [rw] status_summary
+    #   The deployment summary of the enabled control.
+    #   @return [Types::EnablementStatusSummary]
+    #
+    # @!attribute [rw] drift_status_summary
+    #   The drift status of the enabled control.
+    #   @return [Types::DriftStatusSummary]
+    #
+    # @!attribute [rw] parent_identifier
+    #   The ARN of the parent enabled control from which this control
+    #   inherits its configuration, if applicable.
+    #   @return [String]
+    #
     # @!attribute [rw] target_regions
     #   Target Amazon Web Services Regions for the enabled control.
     #   @return [Array<Types::Region>]
+    #
+    # @!attribute [rw] parameters
+    #   Array of `EnabledControlParameter` objects.
+    #   @return [Array<Types::EnabledControlParameterSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledControlDetails AWS API Documentation
     #
     class EnabledControlDetails < Struct.new(
       :arn,
       :control_identifier,
-      :drift_status_summary,
-      :parameters,
-      :status_summary,
       :target_identifier,
-      :target_regions)
+      :status_summary,
+      :drift_status_summary,
+      :parent_identifier,
+      :target_regions,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the various categories of drift that can occur for an enabled
+    # control resource.
+    #
+    # @!attribute [rw] inheritance
+    #   Indicates drift related to inheritance configuration between parent
+    #   and child controls.
+    #   @return [Types::EnabledControlInheritanceDrift]
+    #
+    # @!attribute [rw] resource
+    #   Indicates drift related to the underlying Amazon Web Services
+    #   resources managed by the control.
+    #   @return [Types::EnabledControlResourceDrift]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledControlDriftTypes AWS API Documentation
+    #
+    class EnabledControlDriftTypes < Struct.new(
+      :inheritance,
+      :resource)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -862,20 +909,56 @@ module Aws::ControlTower
     #   The set of `controlIdentifier` returned by the filter.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] statuses
+    #   A list of `EnablementStatus` items.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] drift_statuses
     #   A list of `DriftStatus` items.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] statuses
-    #   A list of `EnablementStatus` items.
+    # @!attribute [rw] parent_identifiers
+    #   Filters enabled controls by their parent control identifiers,
+    #   allowing you to find child controls of specific parent controls.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] inheritance_drift_statuses
+    #   Filters enabled controls by their inheritance drift status, allowing
+    #   you to find controls with specific inheritance-related drift
+    #   conditions.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_drift_statuses
+    #   Filters enabled controls by their resource drift status, allowing
+    #   you to find controls with specific resource-related drift
+    #   conditions.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledControlFilter AWS API Documentation
     #
     class EnabledControlFilter < Struct.new(
       :control_identifiers,
+      :statuses,
       :drift_statuses,
-      :statuses)
+      :parent_identifiers,
+      :inheritance_drift_statuses,
+      :resource_drift_statuses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents drift information related to control inheritance between
+    # organizational units.
+    #
+    # @!attribute [rw] status
+    #   The status of inheritance drift for the enabled control, indicating
+    #   whether inheritance configuration matches expectations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledControlInheritanceDrift AWS API Documentation
+    #
+    class EnabledControlInheritanceDrift < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -920,6 +1003,22 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
+    # Represents drift information related to the underlying Amazon Web
+    # Services resources managed by the control.
+    #
+    # @!attribute [rw] status
+    #   The status of resource drift for the enabled control, indicating
+    #   whether the underlying resources match the expected configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledControlResourceDrift AWS API Documentation
+    #
+    class EnabledControlResourceDrift < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Returns a summary of information about an enabled control.
     #
     # @!attribute [rw] arn
@@ -930,16 +1029,21 @@ module Aws::ControlTower
     #   The `controlIdentifier` of the enabled control.
     #   @return [String]
     #
-    # @!attribute [rw] drift_status_summary
-    #   The drift status of the enabled control.
-    #   @return [Types::DriftStatusSummary]
+    # @!attribute [rw] target_identifier
+    #   The ARN of the organizational unit.
+    #   @return [String]
     #
     # @!attribute [rw] status_summary
     #   A short description of the status of the enabled control.
     #   @return [Types::EnablementStatusSummary]
     #
-    # @!attribute [rw] target_identifier
-    #   The ARN of the organizational unit.
+    # @!attribute [rw] drift_status_summary
+    #   The drift status of the enabled control.
+    #   @return [Types::DriftStatusSummary]
+    #
+    # @!attribute [rw] parent_identifier
+    #   The ARN of the parent enabled control from which this control
+    #   inherits its configuration, if applicable.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnabledControlSummary AWS API Documentation
@@ -947,19 +1051,16 @@ module Aws::ControlTower
     class EnabledControlSummary < Struct.new(
       :arn,
       :control_identifier,
-      :drift_status_summary,
+      :target_identifier,
       :status_summary,
-      :target_identifier)
+      :drift_status_summary,
+      :parent_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The deployment summary of an `EnabledControl` or `EnabledBaseline`
     # resource.
-    #
-    # @!attribute [rw] last_operation_identifier
-    #   The last operation identifier for the enabled resource.
-    #   @return [String]
     #
     # @!attribute [rw] status
     #   The deployment status of the enabled resource.
@@ -976,11 +1077,15 @@ module Aws::ControlTower
     #     failed to deploy.
     #   @return [String]
     #
+    # @!attribute [rw] last_operation_identifier
+    #   The last operation identifier for the enabled resource.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/EnablementStatusSummary AWS API Documentation
     #
     class EnablementStatusSummary < Struct.new(
-      :last_operation_identifier,
-      :status)
+      :status,
+      :last_operation_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1027,20 +1132,20 @@ module Aws::ControlTower
     #   The baseline ARN.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   A description of the baseline.
-    #   @return [String]
-    #
     # @!attribute [rw] name
     #   A user-friendly name for the baseline.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the baseline.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/GetBaselineOutput AWS API Documentation
     #
     class GetBaselineOutput < Struct.new(
       :arn,
-      :description,
-      :name)
+      :name,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1182,41 +1287,47 @@ module Aws::ControlTower
 
     # Information about the landing zone.
     #
+    # @!attribute [rw] version
+    #   The landing zone's current deployed version.
+    #   @return [String]
+    #
+    # @!attribute [rw] remediation_types
+    #   The types of remediation actions configured for the landing zone,
+    #   such as automatic drift correction or compliance enforcement.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] arn
     #   The ARN of the landing zone.
     #   @return [String]
-    #
-    # @!attribute [rw] drift_status
-    #   The drift status of the landing zone.
-    #   @return [Types::LandingZoneDriftStatusSummary]
-    #
-    # @!attribute [rw] latest_available_version
-    #   The latest available version of the landing zone.
-    #   @return [String]
-    #
-    # @!attribute [rw] manifest
-    #   The landing zone manifest JSON text file that specifies the landing
-    #   zone configurations.
-    #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] status
     #   The landing zone deployment status. One of `ACTIVE`, `PROCESSING`,
     #   `FAILED`.
     #   @return [String]
     #
-    # @!attribute [rw] version
-    #   The landing zone's current deployed version.
+    # @!attribute [rw] latest_available_version
+    #   The latest available version of the landing zone.
     #   @return [String]
+    #
+    # @!attribute [rw] drift_status
+    #   The drift status of the landing zone.
+    #   @return [Types::LandingZoneDriftStatusSummary]
+    #
+    # @!attribute [rw] manifest
+    #   The landing zone manifest JSON text file that specifies the landing
+    #   zone configurations.
+    #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/LandingZoneDetail AWS API Documentation
     #
     class LandingZoneDetail < Struct.new(
+      :version,
+      :remediation_types,
       :arn,
-      :drift_status,
-      :latest_available_version,
-      :manifest,
       :status,
-      :version)
+      :latest_available_version,
+      :drift_status,
+      :manifest)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1250,14 +1361,6 @@ module Aws::ControlTower
 
     # Information about a landing zone operation.
     #
-    # @!attribute [rw] end_time
-    #   The landing zone operation end time.
-    #   @return [Time]
-    #
-    # @!attribute [rw] operation_identifier
-    #   The `operationIdentifier` of the landing zone operation.
-    #   @return [String]
-    #
     # @!attribute [rw] operation_type
     #   The landing zone operation type.
     #
@@ -1272,9 +1375,9 @@ module Aws::ControlTower
     #   * `RESET`: The `ResetLandingZone` operation.
     #   @return [String]
     #
-    # @!attribute [rw] start_time
-    #   The landing zone operation start time.
-    #   @return [Time]
+    # @!attribute [rw] operation_identifier
+    #   The `operationIdentifier` of the landing zone operation.
+    #   @return [String]
     #
     # @!attribute [rw] status
     #   Valid values:
@@ -1286,6 +1389,14 @@ module Aws::ControlTower
     #   * `FAILED`: The landing zone operation failed.
     #   @return [String]
     #
+    # @!attribute [rw] start_time
+    #   The landing zone operation start time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The landing zone operation end time.
+    #   @return [Time]
+    #
     # @!attribute [rw] status_message
     #   If the operation result is FAILED, this string contains a message
     #   explaining why the operation failed.
@@ -1294,11 +1405,11 @@ module Aws::ControlTower
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/LandingZoneOperationDetail AWS API Documentation
     #
     class LandingZoneOperationDetail < Struct.new(
-      :end_time,
-      :operation_identifier,
       :operation_type,
-      :start_time,
+      :operation_identifier,
       :status,
+      :start_time,
+      :end_time,
       :status_message)
       SENSITIVE = []
       include Aws::Structure
@@ -1307,32 +1418,32 @@ module Aws::ControlTower
     # A filter object that lets you call `ListLandingZoneOperations` with a
     # specific filter.
     #
+    # @!attribute [rw] types
+    #   The set of landing zone operation types selected by the filter.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] statuses
     #   The statuses of the set of landing zone operations selected by the
     #   filter.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] types
-    #   The set of landing zone operation types selected by the filter.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/LandingZoneOperationFilter AWS API Documentation
     #
     class LandingZoneOperationFilter < Struct.new(
-      :statuses,
-      :types)
+      :types,
+      :statuses)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Returns a summary of information about a landing zone operation.
     #
-    # @!attribute [rw] operation_identifier
-    #   The `operationIdentifier` of the landing zone operation.
-    #   @return [String]
-    #
     # @!attribute [rw] operation_type
     #   The type of the landing zone operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_identifier
+    #   The `operationIdentifier` of the landing zone operation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1342,8 +1453,8 @@ module Aws::ControlTower
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/LandingZoneOperationSummary AWS API Documentation
     #
     class LandingZoneOperationSummary < Struct.new(
-      :operation_identifier,
       :operation_type,
+      :operation_identifier,
       :status)
       SENSITIVE = []
       include Aws::Structure
@@ -1363,19 +1474,19 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # @!attribute [rw] max_results
-    #   The maximum number of results to be shown.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   A pagination token.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be shown.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListBaselinesInput AWS API Documentation
     #
     class ListBaselinesInput < Struct.new(
-      :max_results,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1402,20 +1513,20 @@ module Aws::ControlTower
     #   select the types of control operations to view.
     #   @return [Types::ControlOperationFilter]
     #
-    # @!attribute [rw] max_results
-    #   The maximum number of results to be shown.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   A pagination token.
     #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be shown.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListControlOperationsInput AWS API Documentation
     #
     class ListControlOperationsInput < Struct.new(
       :filter,
-      :max_results,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1443,26 +1554,26 @@ module Aws::ControlTower
     #   filter can be applied for either, or both.
     #   @return [Types::EnabledBaselineFilter]
     #
-    # @!attribute [rw] include_children
-    #   A value that can be set to include the child enabled baselines in
-    #   responses. The default value is false.
-    #   @return [Boolean]
+    # @!attribute [rw] next_token
+    #   A pagination token.
+    #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be shown.
     #   @return [Integer]
     #
-    # @!attribute [rw] next_token
-    #   A pagination token.
-    #   @return [String]
+    # @!attribute [rw] include_children
+    #   A value that can be set to include the child enabled baselines in
+    #   responses. The default value is false.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListEnabledBaselinesInput AWS API Documentation
     #
     class ListEnabledBaselinesInput < Struct.new(
       :filter,
-      :include_children,
+      :next_token,
       :max_results,
-      :next_token)
+      :include_children)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1484,20 +1595,6 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # @!attribute [rw] filter
-    #   An input filter for the `ListEnabledControls` API that lets you
-    #   select the types of control operations to view.
-    #   @return [Types::EnabledControlFilter]
-    #
-    # @!attribute [rw] max_results
-    #   How many results to return per API call.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   The token to continue the list from a previous API call with the
-    #   same parameters.
-    #   @return [String]
-    #
     # @!attribute [rw] target_identifier
     #   The ARN of the organizational unit. For information on how to find
     #   the `targetIdentifier`, see [the overview page][1].
@@ -1507,13 +1604,33 @@ module Aws::ControlTower
     #   [1]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   The token to continue the list from a previous API call with the
+    #   same parameters.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   How many results to return per API call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter
+    #   An input filter for the `ListEnabledControls` API that lets you
+    #   select the types of control operations to view.
+    #   @return [Types::EnabledControlFilter]
+    #
+    # @!attribute [rw] include_children
+    #   A boolean value that determines whether to include enabled controls
+    #   from child organizational units in the response.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListEnabledControlsInput AWS API Documentation
     #
     class ListEnabledControlsInput < Struct.new(
-      :filter,
-      :max_results,
+      :target_identifier,
       :next_token,
-      :target_identifier)
+      :max_results,
+      :filter,
+      :include_children)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1542,21 +1659,21 @@ module Aws::ControlTower
     #   you select the types of landing zone operations to view.
     #   @return [Types::LandingZoneOperationFilter]
     #
-    # @!attribute [rw] max_results
-    #   How many results to return per API call.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   The token to continue the list from a previous API call with the
     #   same parameters.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   How many results to return per API call.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListLandingZoneOperationsInput AWS API Documentation
     #
     class ListLandingZoneOperationsInput < Struct.new(
       :filter,
-      :max_results,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1579,20 +1696,20 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # @!attribute [rw] max_results
-    #   The maximum number of returned landing zone ARNs, which is one.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   The token to continue the list from a previous API call with the
     #   same parameters.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   The maximum number of returned landing zone ARNs, which is one.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ListLandingZonesInput AWS API Documentation
     #
     class ListLandingZonesInput < Struct.new(
-      :max_results,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1753,8 +1870,12 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # The request would cause a service quota to be exceeded. The limit is
-    # 100 concurrent operations.
+    # The request would cause a service quota to be exceeded. See [Service
+    # quotas][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/controltower/latest/userguide/request-an-increase.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1793,6 +1914,10 @@ module Aws::ControlTower
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] service_code
+    #   The ID of the service that is associated with the error.
+    #   @return [String]
+    #
     # @!attribute [rw] quota_code
     #   The ID of the service quota that was exceeded.
     #   @return [String]
@@ -1801,17 +1926,13 @@ module Aws::ControlTower
     #   The number of seconds the caller should wait before retrying.
     #   @return [Integer]
     #
-    # @!attribute [rw] service_code
-    #   The ID of the service that is associated with the error.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
       :message,
+      :service_code,
       :quota_code,
-      :retry_after_seconds,
-      :service_code)
+      :retry_after_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1842,20 +1963,20 @@ module Aws::ControlTower
     #   should be updated.
     #   @return [String]
     #
-    # @!attribute [rw] enabled_baseline_identifier
-    #   Specifies the `EnabledBaseline` resource to be updated.
-    #   @return [String]
-    #
     # @!attribute [rw] parameters
     #   Parameters to apply when making an update.
     #   @return [Array<Types::EnabledBaselineParameter>]
+    #
+    # @!attribute [rw] enabled_baseline_identifier
+    #   Specifies the `EnabledBaseline` resource to be updated.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/UpdateEnabledBaselineInput AWS API Documentation
     #
     class UpdateEnabledBaselineInput < Struct.new(
       :baseline_version,
-      :enabled_baseline_identifier,
-      :parameters)
+      :parameters,
+      :enabled_baseline_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1874,20 +1995,20 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
-    # @!attribute [rw] enabled_control_identifier
-    #   The ARN of the enabled control that will be updated.
-    #   @return [String]
-    #
     # @!attribute [rw] parameters
     #   A key/value pair, where `Key` is of type `String` and `Value` is of
     #   type `Document`.
     #   @return [Array<Types::EnabledControlParameter>]
     #
+    # @!attribute [rw] enabled_control_identifier
+    #   The ARN of the enabled control that will be updated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/UpdateEnabledControlInput AWS API Documentation
     #
     class UpdateEnabledControlInput < Struct.new(
-      :enabled_control_identifier,
-      :parameters)
+      :parameters,
+      :enabled_control_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1904,6 +2025,15 @@ module Aws::ControlTower
       include Aws::Structure
     end
 
+    # @!attribute [rw] version
+    #   The landing zone version, for example, 3.2.
+    #   @return [String]
+    #
+    # @!attribute [rw] remediation_types
+    #   Specifies the types of remediation actions to apply when updating
+    #   the landing zone configuration.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] landing_zone_identifier
     #   The unique identifier of the landing zone.
     #   @return [String]
@@ -1920,16 +2050,13 @@ module Aws::ControlTower
     #   [1]: https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
-    # @!attribute [rw] version
-    #   The landing zone version, for example, 3.2.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controltower-2018-05-10/UpdateLandingZoneInput AWS API Documentation
     #
     class UpdateLandingZoneInput < Struct.new(
+      :version,
+      :remediation_types,
       :landing_zone_identifier,
-      :manifest,
-      :version)
+      :manifest)
       SENSITIVE = []
       include Aws::Structure
     end

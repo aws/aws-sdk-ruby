@@ -116,12 +116,13 @@ module Aws
       interface _ConverseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ConverseResponse]
         def output: () -> Types::ConverseOutput
-        def stop_reason: () -> ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "guardrail_intervened" | "content_filtered")
+        def stop_reason: () -> ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "guardrail_intervened" | "content_filtered" | "malformed_model_output" | "malformed_tool_use" | "model_context_window_exceeded")
         def usage: () -> Types::TokenUsage
         def metrics: () -> Types::ConverseMetrics
         def additional_model_response_fields: () -> untyped
         def trace: () -> Types::ConverseTrace
         def performance_config: () -> Types::PerformanceConfiguration
+        def service_tier: () -> Types::ServiceTier
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#converse-instance_method
       def converse: (
@@ -140,7 +141,10 @@ module Aws
                                     uri: ::String,
                                     bucket_owner: ::String?
                                   }?
-                                }
+                                },
+                                error: {
+                                  message: ::String?
+                                }?
                               }?,
                               document: {
                                 format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")?,
@@ -173,11 +177,25 @@ module Aws
                                   }?
                                 }
                               }?,
+                              audio: {
+                                format: ("mp3" | "opus" | "wav" | "aac" | "flac" | "mp4" | "ogg" | "mkv" | "mka" | "x-aac" | "m4a" | "mpeg" | "mpga" | "pcm" | "webm"),
+                                source: {
+                                  bytes: ::String?,
+                                  s3_location: {
+                                    uri: ::String,
+                                    bucket_owner: ::String?
+                                  }?
+                                },
+                                error: {
+                                  message: ::String?
+                                }?
+                              }?,
                               tool_use: {
                                 tool_use_id: ::String,
                                 name: ::String,
                                 input: {
-                                }
+                                },
+                                type: ("server_tool_use")?
                               }?,
                               tool_result: {
                                 tool_use_id: ::String,
@@ -194,7 +212,10 @@ module Aws
                                           uri: ::String,
                                           bucket_owner: ::String?
                                         }?
-                                      }
+                                      },
+                                      error: {
+                                        message: ::String?
+                                      }?
                                     }?,
                                     document: {
                                       format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")?,
@@ -226,10 +247,23 @@ module Aws
                                           bucket_owner: ::String?
                                         }?
                                       }
+                                    }?,
+                                    search_result: {
+                                      source: ::String,
+                                      title: ::String,
+                                      content: Array[
+                                        {
+                                          text: ::String
+                                        },
+                                      ],
+                                      citations: {
+                                        enabled: bool
+                                      }?
                                     }?
                                   },
                                 ],
-                                status: ("success" | "error")?
+                                status: ("success" | "error")?,
+                                type: ::String?
                               }?,
                               guard_content: {
                                 text: {
@@ -262,12 +296,17 @@ module Aws
                                 citations: Array[
                                   {
                                     title: ::String?,
+                                    source: ::String?,
                                     source_content: Array[
                                       {
                                         text: ::String?
                                       },
                                     ]?,
                                     location: {
+                                      web: {
+                                        url: ::String?,
+                                        domain: ::String?
+                                      }?,
                                       document_char: {
                                         document_index: ::Integer?,
                                         start: ::Integer?,
@@ -282,10 +321,27 @@ module Aws
                                         document_index: ::Integer?,
                                         start: ::Integer?,
                                         end: ::Integer?
+                                      }?,
+                                      search_result_location: {
+                                        search_result_index: ::Integer?,
+                                        start: ::Integer?,
+                                        end: ::Integer?
                                       }?
                                     }?
                                   },
                                 ]?
+                              }?,
+                              search_result: {
+                                source: ::String,
+                                title: ::String,
+                                content: Array[
+                                  {
+                                    text: ::String
+                                  },
+                                ],
+                                citations: {
+                                  enabled: bool
+                                }?
                               }?
                             },
                           ]
@@ -328,6 +384,9 @@ module Aws
                                 }?
                               }
                             }?,
+                            system_tool: {
+                              name: ::String
+                            }?,
                             cache_point: {
                               type: ("default")
                             }?
@@ -344,8 +403,8 @@ module Aws
                         }?
                       },
                       ?guardrail_config: {
-                        guardrail_identifier: ::String,
-                        guardrail_version: ::String,
+                        guardrail_identifier: ::String?,
+                        guardrail_version: ::String?,
                         trace: ("enabled" | "disabled" | "enabled_full")?
                       },
                       ?additional_model_request_fields: {
@@ -357,6 +416,9 @@ module Aws
                       ?request_metadata: Hash[::String, ::String],
                       ?performance_config: {
                         latency: ("standard" | "optimized")?
+                      },
+                      ?service_tier: {
+                        type: ("priority" | "default" | "flex" | "reserved")
                       }
                     ) -> _ConverseResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConverseResponseSuccess
@@ -382,7 +444,10 @@ module Aws
                                            uri: ::String,
                                            bucket_owner: ::String?
                                          }?
-                                       }
+                                       },
+                                       error: {
+                                         message: ::String?
+                                       }?
                                      }?,
                                      document: {
                                        format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")?,
@@ -415,11 +480,25 @@ module Aws
                                          }?
                                        }
                                      }?,
+                                     audio: {
+                                       format: ("mp3" | "opus" | "wav" | "aac" | "flac" | "mp4" | "ogg" | "mkv" | "mka" | "x-aac" | "m4a" | "mpeg" | "mpga" | "pcm" | "webm"),
+                                       source: {
+                                         bytes: ::String?,
+                                         s3_location: {
+                                           uri: ::String,
+                                           bucket_owner: ::String?
+                                         }?
+                                       },
+                                       error: {
+                                         message: ::String?
+                                       }?
+                                     }?,
                                      tool_use: {
                                        tool_use_id: ::String,
                                        name: ::String,
                                        input: {
-                                       }
+                                       },
+                                       type: ("server_tool_use")?
                                      }?,
                                      tool_result: {
                                        tool_use_id: ::String,
@@ -436,7 +515,10 @@ module Aws
                                                  uri: ::String,
                                                  bucket_owner: ::String?
                                                }?
-                                             }
+                                             },
+                                             error: {
+                                               message: ::String?
+                                             }?
                                            }?,
                                            document: {
                                              format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")?,
@@ -468,10 +550,23 @@ module Aws
                                                  bucket_owner: ::String?
                                                }?
                                              }
+                                           }?,
+                                           search_result: {
+                                             source: ::String,
+                                             title: ::String,
+                                             content: Array[
+                                               {
+                                                 text: ::String
+                                               },
+                                             ],
+                                             citations: {
+                                               enabled: bool
+                                             }?
                                            }?
                                          },
                                        ],
-                                       status: ("success" | "error")?
+                                       status: ("success" | "error")?,
+                                       type: ::String?
                                      }?,
                                      guard_content: {
                                        text: {
@@ -504,12 +599,17 @@ module Aws
                                        citations: Array[
                                          {
                                            title: ::String?,
+                                           source: ::String?,
                                            source_content: Array[
                                              {
                                                text: ::String?
                                              },
                                            ]?,
                                            location: {
+                                             web: {
+                                               url: ::String?,
+                                               domain: ::String?
+                                             }?,
                                              document_char: {
                                                document_index: ::Integer?,
                                                start: ::Integer?,
@@ -524,10 +624,27 @@ module Aws
                                                document_index: ::Integer?,
                                                start: ::Integer?,
                                                end: ::Integer?
+                                             }?,
+                                             search_result_location: {
+                                               search_result_index: ::Integer?,
+                                               start: ::Integer?,
+                                               end: ::Integer?
                                              }?
                                            }?
                                          },
                                        ]?
+                                     }?,
+                                     search_result: {
+                                       source: ::String,
+                                       title: ::String,
+                                       content: Array[
+                                         {
+                                           text: ::String
+                                         },
+                                       ],
+                                       citations: {
+                                         enabled: bool
+                                       }?
                                      }?
                                    },
                                  ]
@@ -570,6 +687,9 @@ module Aws
                                        }?
                                      }
                                    }?,
+                                   system_tool: {
+                                     name: ::String
+                                   }?,
                                    cache_point: {
                                      type: ("default")
                                    }?
@@ -586,8 +706,8 @@ module Aws
                                }?
                              },
                              ?guardrail_config: {
-                               guardrail_identifier: ::String,
-                               guardrail_version: ::String,
+                               guardrail_identifier: ::String?,
+                               guardrail_version: ::String?,
                                trace: ("enabled" | "disabled" | "enabled_full")?,
                                stream_processing_mode: ("sync" | "async")?
                              },
@@ -600,6 +720,9 @@ module Aws
                              ?request_metadata: Hash[::String, ::String],
                              ?performance_config: {
                                latency: ("standard" | "optimized")?
+                             },
+                             ?service_tier: {
+                               type: ("priority" | "default" | "flex" | "reserved")
                              }
                            ) ?{ (*untyped) -> void } -> _ConverseStreamResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _ConverseStreamResponseSuccess
@@ -630,7 +753,10 @@ module Aws
                                             uri: ::String,
                                             bucket_owner: ::String?
                                           }?
-                                        }
+                                        },
+                                        error: {
+                                          message: ::String?
+                                        }?
                                       }?,
                                       document: {
                                         format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")?,
@@ -663,11 +789,25 @@ module Aws
                                           }?
                                         }
                                       }?,
+                                      audio: {
+                                        format: ("mp3" | "opus" | "wav" | "aac" | "flac" | "mp4" | "ogg" | "mkv" | "mka" | "x-aac" | "m4a" | "mpeg" | "mpga" | "pcm" | "webm"),
+                                        source: {
+                                          bytes: ::String?,
+                                          s3_location: {
+                                            uri: ::String,
+                                            bucket_owner: ::String?
+                                          }?
+                                        },
+                                        error: {
+                                          message: ::String?
+                                        }?
+                                      }?,
                                       tool_use: {
                                         tool_use_id: ::String,
                                         name: ::String,
                                         input: {
-                                        }
+                                        },
+                                        type: ("server_tool_use")?
                                       }?,
                                       tool_result: {
                                         tool_use_id: ::String,
@@ -684,7 +824,10 @@ module Aws
                                                   uri: ::String,
                                                   bucket_owner: ::String?
                                                 }?
-                                              }
+                                              },
+                                              error: {
+                                                message: ::String?
+                                              }?
                                             }?,
                                             document: {
                                               format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")?,
@@ -716,10 +859,23 @@ module Aws
                                                   bucket_owner: ::String?
                                                 }?
                                               }
+                                            }?,
+                                            search_result: {
+                                              source: ::String,
+                                              title: ::String,
+                                              content: Array[
+                                                {
+                                                  text: ::String
+                                                },
+                                              ],
+                                              citations: {
+                                                enabled: bool
+                                              }?
                                             }?
                                           },
                                         ],
-                                        status: ("success" | "error")?
+                                        status: ("success" | "error")?,
+                                        type: ::String?
                                       }?,
                                       guard_content: {
                                         text: {
@@ -752,12 +908,17 @@ module Aws
                                         citations: Array[
                                           {
                                             title: ::String?,
+                                            source: ::String?,
                                             source_content: Array[
                                               {
                                                 text: ::String?
                                               },
                                             ]?,
                                             location: {
+                                              web: {
+                                                url: ::String?,
+                                                domain: ::String?
+                                              }?,
                                               document_char: {
                                                 document_index: ::Integer?,
                                                 start: ::Integer?,
@@ -772,10 +933,27 @@ module Aws
                                                 document_index: ::Integer?,
                                                 start: ::Integer?,
                                                 end: ::Integer?
+                                              }?,
+                                              search_result_location: {
+                                                search_result_index: ::Integer?,
+                                                start: ::Integer?,
+                                                end: ::Integer?
                                               }?
                                             }?
                                           },
                                         ]?
+                                      }?,
+                                      search_result: {
+                                        source: ::String,
+                                        title: ::String,
+                                        content: Array[
+                                          {
+                                            text: ::String
+                                          },
+                                        ],
+                                        citations: {
+                                          enabled: bool
+                                        }?
                                       }?
                                     },
                                   ]
@@ -800,7 +978,38 @@ module Aws
                                     type: ("default")
                                   }?
                                 },
-                              ]?
+                              ]?,
+                              tool_config: {
+                                tools: Array[
+                                  {
+                                    tool_spec: {
+                                      name: ::String,
+                                      description: ::String?,
+                                      input_schema: {
+                                        json: {
+                                        }?
+                                      }
+                                    }?,
+                                    system_tool: {
+                                      name: ::String
+                                    }?,
+                                    cache_point: {
+                                      type: ("default")
+                                    }?
+                                  },
+                                ],
+                                tool_choice: {
+                                  auto: {
+                                  }?,
+                                  any: {
+                                  }?,
+                                  tool: {
+                                    name: ::String
+                                  }?
+                                }?
+                              }?,
+                              additional_model_request_fields: {
+                              }?
                             }?
                           }
                         ) -> _CountTokensResponseSuccess
@@ -829,6 +1038,7 @@ module Aws
         def body: () -> ::String
         def content_type: () -> ::String
         def performance_config_latency: () -> ("standard" | "optimized")
+        def service_tier: () -> ("priority" | "default" | "flex" | "reserved")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#invoke_model-instance_method
       def invoke_model: (
@@ -839,7 +1049,8 @@ module Aws
                           ?trace: ("ENABLED" | "DISABLED" | "ENABLED_FULL"),
                           ?guardrail_identifier: ::String,
                           ?guardrail_version: ::String,
-                          ?performance_config_latency: ("standard" | "optimized")
+                          ?performance_config_latency: ("standard" | "optimized"),
+                          ?service_tier: ("priority" | "default" | "flex" | "reserved")
                         ) -> _InvokeModelResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeModelResponseSuccess
 
@@ -848,6 +1059,7 @@ module Aws
         def body: () -> Types::ResponseStream
         def content_type: () -> ::String
         def performance_config_latency: () -> ("standard" | "optimized")
+        def service_tier: () -> ("priority" | "default" | "flex" | "reserved")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#invoke_model_with_response_stream-instance_method
       def invoke_model_with_response_stream: (
@@ -858,7 +1070,8 @@ module Aws
                                                ?trace: ("ENABLED" | "DISABLED" | "ENABLED_FULL"),
                                                ?guardrail_identifier: ::String,
                                                ?guardrail_version: ::String,
-                                               ?performance_config_latency: ("standard" | "optimized")
+                                               ?performance_config_latency: ("standard" | "optimized"),
+                                               ?service_tier: ("priority" | "default" | "flex" | "reserved")
                                              ) ?{ (*untyped) -> void } -> _InvokeModelWithResponseStreamResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeModelWithResponseStreamResponseSuccess
 

@@ -172,6 +172,7 @@ module Aws::OpenSearchServerless
     SecurityPolicySummaries = Shapes::ListShape.new(name: 'SecurityPolicySummaries')
     SecurityPolicySummary = Shapes::StructureShape.new(name: 'SecurityPolicySummary')
     SecurityPolicyType = Shapes::StringShape.new(name: 'SecurityPolicyType')
+    ServerlessVectorAccelerationStatus = Shapes::StringShape.new(name: 'ServerlessVectorAccelerationStatus')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StandbyReplicas = Shapes::StringShape.new(name: 'StandbyReplicas')
     String = Shapes::StringShape.new(name: 'String')
@@ -207,6 +208,7 @@ module Aws::OpenSearchServerless
     UpdateVpcEndpointRequest = Shapes::StructureShape.new(name: 'UpdateVpcEndpointRequest')
     UpdateVpcEndpointResponse = Shapes::StructureShape.new(name: 'UpdateVpcEndpointResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    VectorOptions = Shapes::StructureShape.new(name: 'VectorOptions')
     VpcEndpointDetail = Shapes::StructureShape.new(name: 'VpcEndpointDetail')
     VpcEndpointDetails = Shapes::ListShape.new(name: 'VpcEndpointDetails')
     VpcEndpointErrorDetail = Shapes::StructureShape.new(name: 'VpcEndpointErrorDetail')
@@ -292,6 +294,7 @@ module Aws::OpenSearchServerless
     CollectionDetail.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     CollectionDetail.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyArn"))
     CollectionDetail.add_member(:standby_replicas, Shapes::ShapeRef.new(shape: StandbyReplicas, location_name: "standbyReplicas"))
+    CollectionDetail.add_member(:vector_options, Shapes::ShapeRef.new(shape: VectorOptions, location_name: "vectorOptions"))
     CollectionDetail.add_member(:created_date, Shapes::ShapeRef.new(shape: Long, location_name: "createdDate"))
     CollectionDetail.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Long, location_name: "lastModifiedDate"))
     CollectionDetail.add_member(:collection_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "collectionEndpoint"))
@@ -348,6 +351,7 @@ module Aws::OpenSearchServerless
     CreateCollectionDetail.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     CreateCollectionDetail.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyArn"))
     CreateCollectionDetail.add_member(:standby_replicas, Shapes::ShapeRef.new(shape: StandbyReplicas, location_name: "standbyReplicas"))
+    CreateCollectionDetail.add_member(:vector_options, Shapes::ShapeRef.new(shape: VectorOptions, location_name: "vectorOptions"))
     CreateCollectionDetail.add_member(:created_date, Shapes::ShapeRef.new(shape: Long, location_name: "createdDate"))
     CreateCollectionDetail.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Long, location_name: "lastModifiedDate"))
     CreateCollectionDetail.struct_class = Types::CreateCollectionDetail
@@ -357,6 +361,7 @@ module Aws::OpenSearchServerless
     CreateCollectionRequest.add_member(:description, Shapes::ShapeRef.new(shape: CreateCollectionRequestDescriptionString, location_name: "description"))
     CreateCollectionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateCollectionRequest.add_member(:standby_replicas, Shapes::ShapeRef.new(shape: StandbyReplicas, location_name: "standbyReplicas"))
+    CreateCollectionRequest.add_member(:vector_options, Shapes::ShapeRef.new(shape: VectorOptions, location_name: "vectorOptions"))
     CreateCollectionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateCollectionRequest.struct_class = Types::CreateCollectionRequest
 
@@ -863,6 +868,9 @@ module Aws::OpenSearchServerless
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
 
+    VectorOptions.add_member(:serverless_vector_acceleration, Shapes::ShapeRef.new(shape: ServerlessVectorAccelerationStatus, required: true, location_name: "ServerlessVectorAcceleration"))
+    VectorOptions.struct_class = Types::VectorOptions
+
     VpcEndpointDetail.add_member(:id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "id"))
     VpcEndpointDetail.add_member(:name, Shapes::ShapeRef.new(shape: VpcEndpointName, location_name: "name"))
     VpcEndpointDetail.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
@@ -1339,6 +1347,7 @@ module Aws::OpenSearchServerless
         o.output = Shapes::ShapeRef.new(shape: UpdateAccountSettingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:update_collection, Seahorse::Model::Operation.new.tap do |o|

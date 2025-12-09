@@ -1,0 +1,1147 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Route53GlobalResolver
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccessSourcesItem
+      attr_accessor arn: ::String
+      attr_accessor cidr: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor id: ::String
+      attr_accessor ip_address_type: ("IPV4" | "IPV6")
+      attr_accessor name: ::String
+      attr_accessor dns_view_id: ::String
+      attr_accessor protocol: ("DO53" | "DOH" | "DOT")
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AccessTokenItem
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor dns_view_id: ::String
+      attr_accessor expires_at: ::Time
+      attr_accessor global_resolver_id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AssociateHostedZoneInput
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateHostedZoneOutput
+      attr_accessor id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor hosted_zone_name: ::String
+      attr_accessor name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class BatchCreateFirewallRuleInput
+      attr_accessor firewall_rules: ::Array[Types::BatchCreateFirewallRuleInputItem]
+      SENSITIVE: []
+    end
+
+    class BatchCreateFirewallRuleInputItem
+      attr_accessor action: ("ALLOW" | "ALERT" | "BLOCK")
+      attr_accessor block_override_dns_type: ("CNAME")
+      attr_accessor block_override_domain: ::String
+      attr_accessor block_override_ttl: ::Integer
+      attr_accessor block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")
+      attr_accessor client_token: ::String
+      attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor description: ::String
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor dns_view_id: ::String
+      attr_accessor q_type: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateFirewallRuleOutput
+      attr_accessor failures: ::Array[Types::BatchCreateFirewallRuleOutputItem]
+      attr_accessor successes: ::Array[Types::BatchCreateFirewallRuleOutputItem]
+      SENSITIVE: []
+    end
+
+    class BatchCreateFirewallRuleOutputItem
+      attr_accessor firewall_rule: Types::BatchCreateFirewallRuleResult
+      attr_accessor code: ::Integer
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateFirewallRuleResult
+      attr_accessor action: ("ALLOW" | "ALERT" | "BLOCK")
+      attr_accessor block_override_dns_type: ("CNAME")
+      attr_accessor block_override_domain: ::String
+      attr_accessor block_override_ttl: ::Integer
+      attr_accessor block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")
+      attr_accessor client_token: ::String
+      attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor id: ::String
+      attr_accessor managed_domain_list_name: ::String
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor dns_view_id: ::String
+      attr_accessor query_type: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class BatchDeleteFirewallRuleInput
+      attr_accessor firewall_rules: ::Array[Types::BatchDeleteFirewallRuleInputItem]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteFirewallRuleInputItem
+      attr_accessor firewall_rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteFirewallRuleOutput
+      attr_accessor failures: ::Array[Types::BatchDeleteFirewallRuleOutputItem]
+      attr_accessor successes: ::Array[Types::BatchDeleteFirewallRuleOutputItem]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteFirewallRuleOutputItem
+      attr_accessor firewall_rule: Types::BatchDeleteFirewallRuleResult
+      attr_accessor code: ::Integer
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteFirewallRuleResult
+      attr_accessor client_token: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class BatchUpdateFirewallRuleInput
+      attr_accessor firewall_rules: ::Array[Types::BatchUpdateFirewallRuleInputItem]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateFirewallRuleInputItem
+      attr_accessor action: ("ALLOW" | "ALERT" | "BLOCK")
+      attr_accessor block_override_dns_type: ("CNAME")
+      attr_accessor block_override_domain: ::String
+      attr_accessor block_override_ttl: ::Integer
+      attr_accessor block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")
+      attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor description: ::String
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor firewall_rule_id: ::String
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchUpdateFirewallRuleOutput
+      attr_accessor failures: ::Array[Types::BatchUpdateFirewallRuleOutputItem]
+      attr_accessor successes: ::Array[Types::BatchUpdateFirewallRuleOutputItem]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateFirewallRuleOutputItem
+      attr_accessor firewall_rule: Types::BatchUpdateFirewallRuleResult
+      attr_accessor code: ::Integer
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchUpdateFirewallRuleResult
+      attr_accessor action: ("ALLOW" | "ALERT" | "BLOCK")
+      attr_accessor block_override_dns_type: ("CNAME")
+      attr_accessor block_override_domain: ::String
+      attr_accessor block_override_ttl: ::Integer
+      attr_accessor block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")
+      attr_accessor client_token: ::String
+      attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor dns_view_id: ::String
+      attr_accessor query_type: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessSourceInput
+      attr_accessor cidr: ::String
+      attr_accessor client_token: ::String
+      attr_accessor ip_address_type: ("IPV4" | "IPV6")
+      attr_accessor name: ::String
+      attr_accessor dns_view_id: ::String
+      attr_accessor protocol: ("DO53" | "DOH" | "DOT")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAccessSourceOutput
+      attr_accessor arn: ::String
+      attr_accessor cidr: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor id: ::String
+      attr_accessor ip_address_type: ("IPV4" | "IPV6")
+      attr_accessor name: ::String
+      attr_accessor dns_view_id: ::String
+      attr_accessor protocol: ("DO53" | "DOH" | "DOT")
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateAccessTokenInput
+      attr_accessor client_token: ::String
+      attr_accessor dns_view_id: ::String
+      attr_accessor expires_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAccessTokenOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor dns_view_id: ::String
+      attr_accessor expires_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "DELETING")
+      attr_accessor value: ::String
+      SENSITIVE: [:value]
+    end
+
+    class CreateDNSViewInput
+      attr_accessor global_resolver_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor dnssec_validation: ("ENABLED" | "DISABLED")
+      attr_accessor edns_client_subnet: ("ENABLED" | "DISABLED")
+      attr_accessor firewall_rules_fail_open: ("ENABLED" | "DISABLED")
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDNSViewOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor dnssec_validation: ("ENABLED" | "DISABLED")
+      attr_accessor edns_client_subnet: ("ENABLED" | "DISABLED")
+      attr_accessor firewall_rules_fail_open: ("ENABLED" | "DISABLED")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor global_resolver_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "ENABLING" | "DISABLING" | "DISABLED" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class CreateFirewallDomainListInput
+      attr_accessor client_token: ::String
+      attr_accessor global_resolver_id: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateFirewallDomainListOutput
+      attr_accessor arn: ::String
+      attr_accessor global_resolver_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor domain_count: ::Integer
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateFirewallRuleInput
+      attr_accessor action: ("ALLOW" | "ALERT" | "BLOCK")
+      attr_accessor block_override_dns_type: ("CNAME")
+      attr_accessor block_override_domain: ::String
+      attr_accessor block_override_ttl: ::Integer
+      attr_accessor block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")
+      attr_accessor client_token: ::String
+      attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor description: ::String
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor dns_view_id: ::String
+      attr_accessor q_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFirewallRuleOutput
+      attr_accessor action: ("ALLOW" | "ALERT" | "BLOCK")
+      attr_accessor block_override_dns_type: ("CNAME")
+      attr_accessor block_override_domain: ::String
+      attr_accessor block_override_ttl: ::Integer
+      attr_accessor block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")
+      attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor dns_view_id: ::String
+      attr_accessor query_type: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateGlobalResolverInput
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor observability_region: ::String
+      attr_accessor regions: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateGlobalResolverOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor dns_name: ::String
+      attr_accessor ipv4_addresses: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor observability_region: ::String
+      attr_accessor regions: ::Array[::String]
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DNSViewSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor dnssec_validation: ("ENABLED" | "DISABLED")
+      attr_accessor edns_client_subnet: ("ENABLED" | "DISABLED")
+      attr_accessor firewall_rules_fail_open: ("ENABLED" | "DISABLED")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor global_resolver_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "ENABLING" | "DISABLING" | "DISABLED" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class DeleteAccessSourceInput
+      attr_accessor access_source_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessSourceOutput
+      attr_accessor arn: ::String
+      attr_accessor cidr: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor id: ::String
+      attr_accessor ip_address_type: ("IPV4" | "IPV6")
+      attr_accessor name: ::String
+      attr_accessor dns_view_id: ::String
+      attr_accessor protocol: ("DO53" | "DOH" | "DOT")
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteAccessTokenInput
+      attr_accessor access_token_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessTokenOutput
+      attr_accessor id: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "DELETING")
+      attr_accessor deleted_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteDNSViewInput
+      attr_accessor dns_view_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDNSViewOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor dnssec_validation: ("ENABLED" | "DISABLED")
+      attr_accessor edns_client_subnet: ("ENABLED" | "DISABLED")
+      attr_accessor firewall_rules_fail_open: ("ENABLED" | "DISABLED")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor global_resolver_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "ENABLING" | "DISABLING" | "DISABLED" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class DeleteFirewallDomainListInput
+      attr_accessor firewall_domain_list_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFirewallDomainListOutput
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class DeleteFirewallRuleInput
+      attr_accessor firewall_rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFirewallRuleOutput
+      attr_accessor action: ("ALLOW" | "ALERT" | "BLOCK")
+      attr_accessor block_override_dns_type: ("CNAME")
+      attr_accessor block_override_domain: ::String
+      attr_accessor block_override_ttl: ::Integer
+      attr_accessor block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")
+      attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor dns_view_id: ::String
+      attr_accessor query_type: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteGlobalResolverInput
+      attr_accessor global_resolver_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGlobalResolverOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor dns_name: ::String
+      attr_accessor observability_region: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor regions: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor ipv4_addresses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisableDNSViewInput
+      attr_accessor dns_view_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisableDNSViewOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor dnssec_validation: ("ENABLED" | "DISABLED")
+      attr_accessor edns_client_subnet: ("ENABLED" | "DISABLED")
+      attr_accessor firewall_rules_fail_open: ("ENABLED" | "DISABLED")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor global_resolver_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "ENABLING" | "DISABLING" | "DISABLED" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class DisassociateHostedZoneInput
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateHostedZoneOutput
+      attr_accessor id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor hosted_zone_name: ::String
+      attr_accessor name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class EnableDNSViewInput
+      attr_accessor dns_view_id: ::String
+      SENSITIVE: []
+    end
+
+    class EnableDNSViewOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor dnssec_validation: ("ENABLED" | "DISABLED")
+      attr_accessor edns_client_subnet: ("ENABLED" | "DISABLED")
+      attr_accessor firewall_rules_fail_open: ("ENABLED" | "DISABLED")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor global_resolver_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "ENABLING" | "DISABLING" | "DISABLED" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class FirewallDomainListsItem
+      attr_accessor arn: ::String
+      attr_accessor global_resolver_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class FirewallRulesItem
+      attr_accessor action: ("ALLOW" | "ALERT" | "BLOCK")
+      attr_accessor block_override_dns_type: ("CNAME")
+      attr_accessor block_override_domain: ::String
+      attr_accessor block_override_ttl: ::Integer
+      attr_accessor block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")
+      attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor dns_view_id: ::String
+      attr_accessor query_type: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetAccessSourceInput
+      attr_accessor access_source_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessSourceOutput
+      attr_accessor arn: ::String
+      attr_accessor cidr: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor id: ::String
+      attr_accessor ip_address_type: ("IPV4" | "IPV6")
+      attr_accessor name: ::String
+      attr_accessor dns_view_id: ::String
+      attr_accessor protocol: ("DO53" | "DOH" | "DOT")
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetAccessTokenInput
+      attr_accessor access_token_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessTokenOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor dns_view_id: ::String
+      attr_accessor expires_at: ::Time
+      attr_accessor global_resolver_id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "DELETING")
+      attr_accessor updated_at: ::Time
+      attr_accessor value: ::String
+      SENSITIVE: [:value]
+    end
+
+    class GetDNSViewInput
+      attr_accessor dns_view_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDNSViewOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor dnssec_validation: ("ENABLED" | "DISABLED")
+      attr_accessor edns_client_subnet: ("ENABLED" | "DISABLED")
+      attr_accessor firewall_rules_fail_open: ("ENABLED" | "DISABLED")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor global_resolver_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "ENABLING" | "DISABLING" | "DISABLED" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class GetFirewallDomainListInput
+      attr_accessor firewall_domain_list_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFirewallDomainListOutput
+      attr_accessor arn: ::String
+      attr_accessor global_resolver_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor domain_count: ::Integer
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor status_message: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetFirewallRuleInput
+      attr_accessor firewall_rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFirewallRuleOutput
+      attr_accessor action: ("ALLOW" | "ALERT" | "BLOCK")
+      attr_accessor block_override_dns_type: ("CNAME")
+      attr_accessor block_override_domain: ::String
+      attr_accessor block_override_ttl: ::Integer
+      attr_accessor block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")
+      attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor dns_view_id: ::String
+      attr_accessor query_type: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetGlobalResolverInput
+      attr_accessor global_resolver_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGlobalResolverOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor dns_name: ::String
+      attr_accessor observability_region: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor regions: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor ipv4_addresses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetHostedZoneAssociationInput
+      attr_accessor hosted_zone_association_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetHostedZoneAssociationOutput
+      attr_accessor id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor hosted_zone_name: ::String
+      attr_accessor name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class GetManagedFirewallDomainListInput
+      attr_accessor managed_firewall_domain_list_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetManagedFirewallDomainListOutput
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor managed_list_type: ::String
+      SENSITIVE: []
+    end
+
+    class GlobalResolversItem
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor dns_name: ::String
+      attr_accessor observability_region: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor regions: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor ipv4_addresses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class HostedZoneAssociationSummary
+      attr_accessor id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor hosted_zone_name: ::String
+      attr_accessor name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class ImportFirewallDomainsInput
+      attr_accessor domain_file_url: ::String
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor operation: ::String
+      SENSITIVE: []
+    end
+
+    class ImportFirewallDomainsOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccessSourcesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class ListAccessSourcesOutput
+      attr_accessor next_token: ::String
+      attr_accessor access_sources: ::Array[Types::AccessSourcesItem]
+      SENSITIVE: []
+    end
+
+    class ListAccessTokensInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor dns_view_id: ::String
+      attr_accessor filters: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class ListAccessTokensOutput
+      attr_accessor next_token: ::String
+      attr_accessor access_tokens: ::Array[Types::AccessTokenItem]
+      SENSITIVE: []
+    end
+
+    class ListDNSViewsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor global_resolver_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListDNSViewsOutput
+      attr_accessor next_token: ::String
+      attr_accessor dns_views: ::Array[Types::DNSViewSummary]
+      SENSITIVE: []
+    end
+
+    class ListFirewallDomainListsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor global_resolver_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListFirewallDomainListsOutput
+      attr_accessor next_token: ::String
+      attr_accessor firewall_domain_lists: ::Array[Types::FirewallDomainListsItem]
+      SENSITIVE: []
+    end
+
+    class ListFirewallDomainsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor firewall_domain_list_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListFirewallDomainsOutput
+      attr_accessor next_token: ::String
+      attr_accessor domains: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListFirewallRulesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor dns_view_id: ::String
+      attr_accessor filters: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class ListFirewallRulesOutput
+      attr_accessor next_token: ::String
+      attr_accessor firewall_rules: ::Array[Types::FirewallRulesItem]
+      SENSITIVE: []
+    end
+
+    class ListGlobalResolversInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGlobalResolversOutput
+      attr_accessor next_token: ::String
+      attr_accessor global_resolvers: ::Array[Types::GlobalResolversItem]
+      SENSITIVE: []
+    end
+
+    class ListHostedZoneAssociationsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListHostedZoneAssociationsOutput
+      attr_accessor next_token: ::String
+      attr_accessor hosted_zone_associations: ::Array[Types::HostedZoneAssociationSummary]
+      SENSITIVE: []
+    end
+
+    class ListManagedFirewallDomainListsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor managed_firewall_domain_list_type: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedFirewallDomainListsOutput
+      attr_accessor next_token: ::String
+      attr_accessor managed_firewall_domain_lists: ::Array[Types::ManagedFirewallDomainListsItem]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ManagedFirewallDomainListsItem
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor managed_list_type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAccessSourceInput
+      attr_accessor access_source_id: ::String
+      attr_accessor cidr: ::String
+      attr_accessor ip_address_type: ("IPV4" | "IPV6")
+      attr_accessor name: ::String
+      attr_accessor protocol: ("DO53" | "DOH" | "DOT")
+      SENSITIVE: []
+    end
+
+    class UpdateAccessSourceOutput
+      attr_accessor arn: ::String
+      attr_accessor cidr: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor id: ::String
+      attr_accessor ip_address_type: ("IPV4" | "IPV6")
+      attr_accessor name: ::String
+      attr_accessor dns_view_id: ::String
+      attr_accessor protocol: ("DO53" | "DOH" | "DOT")
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateAccessTokenInput
+      attr_accessor access_token_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAccessTokenOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDNSViewInput
+      attr_accessor dns_view_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor dnssec_validation: ("ENABLED" | "DISABLED")
+      attr_accessor edns_client_subnet: ("ENABLED" | "DISABLED")
+      attr_accessor firewall_rules_fail_open: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateDNSViewOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor dnssec_validation: ("ENABLED" | "DISABLED")
+      attr_accessor edns_client_subnet: ("ENABLED" | "DISABLED")
+      attr_accessor firewall_rules_fail_open: ("ENABLED" | "DISABLED")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor global_resolver_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "ENABLING" | "DISABLING" | "DISABLED" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallDomainsInput
+      attr_accessor domains: ::Array[::String]
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor operation: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallDomainsOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallRuleInput
+      attr_accessor action: ("ALLOW" | "ALERT" | "BLOCK")
+      attr_accessor block_override_dns_type: ("CNAME")
+      attr_accessor block_override_domain: ::String
+      attr_accessor block_override_ttl: ::Integer
+      attr_accessor block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")
+      attr_accessor client_token: ::String
+      attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor description: ::String
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor firewall_rule_id: ::String
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallRuleOutput
+      attr_accessor action: ("ALLOW" | "ALERT" | "BLOCK")
+      attr_accessor block_override_dns_type: ("CNAME")
+      attr_accessor block_override_domain: ::String
+      attr_accessor block_override_ttl: ::Integer
+      attr_accessor block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")
+      attr_accessor confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor dns_advanced_protection: ("DGA" | "DNS_TUNNELING")
+      attr_accessor firewall_domain_list_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor dns_view_id: ::String
+      attr_accessor query_type: ::String
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateGlobalResolverInput
+      attr_accessor global_resolver_id: ::String
+      attr_accessor name: ::String
+      attr_accessor observability_region: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGlobalResolverOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor dns_name: ::String
+      attr_accessor observability_region: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor regions: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      attr_accessor ipv4_addresses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateHostedZoneAssociationInput
+      attr_accessor hosted_zone_association_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateHostedZoneAssociationOutput
+      attr_accessor id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor hosted_zone_name: ::String
+      attr_accessor name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "OPERATIONAL" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("UNKNOWN_OPERATION" | "CANNOT_PARSE" | "FIELD_VALIDATION_FAILED" | "OTHER")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

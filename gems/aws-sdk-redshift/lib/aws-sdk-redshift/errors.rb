@@ -177,6 +177,8 @@ module Aws::Redshift
   #    * This error class is not used. `RedshiftIdcApplicationNotExists` is used during parsing instead.
   # * {RedshiftIdcApplicationQuotaExceededFault}
   #    * This error class is not used. `RedshiftIdcApplicationQuotaExceeded` is used during parsing instead.
+  # * {RedshiftInvalidParameterFault}
+  #    * This error class is not used. `RedshiftInvalidParameter` is used during parsing instead.
   # * {ReservedNodeAlreadyExistsFault}
   #    * This error class is not used. `ReservedNodeAlreadyExists` is used during parsing instead.
   # * {ReservedNodeAlreadyMigratedFault}
@@ -1344,6 +1346,18 @@ module Aws::Redshift
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Redshift::Types::RedshiftIdcApplicationQuotaExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    # @deprecated This error class is not used during parsing.
+    #   Please use `RedshiftInvalidParameter` instead.
+    class RedshiftInvalidParameterFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::RedshiftInvalidParameterFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

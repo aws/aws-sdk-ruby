@@ -54,6 +54,8 @@ module Aws::Health
     EntityList = Shapes::ListShape.new(name: 'EntityList')
     Event = Shapes::StructureShape.new(name: 'Event')
     EventAccountFilter = Shapes::StructureShape.new(name: 'EventAccountFilter')
+    EventActionability = Shapes::StringShape.new(name: 'EventActionability')
+    EventActionabilityList = Shapes::ListShape.new(name: 'EventActionabilityList')
     EventAggregate = Shapes::StructureShape.new(name: 'EventAggregate')
     EventAggregateList = Shapes::ListShape.new(name: 'EventAggregateList')
     EventArnsList = Shapes::ListShape.new(name: 'EventArnsList')
@@ -62,11 +64,17 @@ module Aws::Health
     EventDetailsErrorItem = Shapes::StructureShape.new(name: 'EventDetailsErrorItem')
     EventFilter = Shapes::StructureShape.new(name: 'EventFilter')
     EventList = Shapes::ListShape.new(name: 'EventList')
+    EventPersona = Shapes::StringShape.new(name: 'EventPersona')
+    EventPersonaList = Shapes::ListShape.new(name: 'EventPersonaList')
     EventType = Shapes::StructureShape.new(name: 'EventType')
+    EventTypeActionability = Shapes::StringShape.new(name: 'EventTypeActionability')
+    EventTypeActionabilityList = Shapes::ListShape.new(name: 'EventTypeActionabilityList')
     EventTypeCategoryList = Shapes::ListShape.new(name: 'EventTypeCategoryList')
     EventTypeCodeList = Shapes::ListShape.new(name: 'EventTypeCodeList')
     EventTypeFilter = Shapes::StructureShape.new(name: 'EventTypeFilter')
     EventTypeList = Shapes::ListShape.new(name: 'EventTypeList')
+    EventTypePersona = Shapes::StringShape.new(name: 'EventTypePersona')
+    EventTypePersonaList = Shapes::ListShape.new(name: 'EventTypePersonaList')
     InvalidPaginationToken = Shapes::StructureShape.new(name: 'InvalidPaginationToken')
     OrganizationAccountIdsList = Shapes::ListShape.new(name: 'OrganizationAccountIdsList')
     OrganizationAffectedEntitiesErrorItem = Shapes::StructureShape.new(name: 'OrganizationAffectedEntitiesErrorItem')
@@ -304,11 +312,15 @@ module Aws::Health
     Event.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "lastUpdatedTime"))
     Event.add_member(:status_code, Shapes::ShapeRef.new(shape: eventStatusCode, location_name: "statusCode"))
     Event.add_member(:event_scope_code, Shapes::ShapeRef.new(shape: eventScopeCode, location_name: "eventScopeCode"))
+    Event.add_member(:actionability, Shapes::ShapeRef.new(shape: EventActionability, location_name: "actionability"))
+    Event.add_member(:personas, Shapes::ShapeRef.new(shape: EventPersonaList, location_name: "personas"))
     Event.struct_class = Types::Event
 
     EventAccountFilter.add_member(:event_arn, Shapes::ShapeRef.new(shape: eventArn, required: true, location_name: "eventArn"))
     EventAccountFilter.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: accountId, location_name: "awsAccountId"))
     EventAccountFilter.struct_class = Types::EventAccountFilter
+
+    EventActionabilityList.member = Shapes::ShapeRef.new(shape: EventActionability)
 
     EventAggregate.add_member(:aggregate_value, Shapes::ShapeRef.new(shape: aggregateValue, location_name: "aggregateValue"))
     EventAggregate.add_member(:count, Shapes::ShapeRef.new(shape: count, location_name: "count"))
@@ -331,6 +343,7 @@ module Aws::Health
     EventDetailsErrorItem.add_member(:error_message, Shapes::ShapeRef.new(shape: string, location_name: "errorMessage"))
     EventDetailsErrorItem.struct_class = Types::EventDetailsErrorItem
 
+    EventFilter.add_member(:actionabilities, Shapes::ShapeRef.new(shape: EventActionabilityList, location_name: "actionabilities"))
     EventFilter.add_member(:event_arns, Shapes::ShapeRef.new(shape: eventArnList, location_name: "eventArns"))
     EventFilter.add_member(:event_type_codes, Shapes::ShapeRef.new(shape: eventTypeList, location_name: "eventTypeCodes"))
     EventFilter.add_member(:services, Shapes::ShapeRef.new(shape: serviceList, location_name: "services"))
@@ -344,14 +357,21 @@ module Aws::Health
     EventFilter.add_member(:event_type_categories, Shapes::ShapeRef.new(shape: eventTypeCategoryList, location_name: "eventTypeCategories"))
     EventFilter.add_member(:tags, Shapes::ShapeRef.new(shape: tagFilter, location_name: "tags"))
     EventFilter.add_member(:event_status_codes, Shapes::ShapeRef.new(shape: eventStatusCodeList, location_name: "eventStatusCodes"))
+    EventFilter.add_member(:personas, Shapes::ShapeRef.new(shape: EventPersonaList, location_name: "personas"))
     EventFilter.struct_class = Types::EventFilter
 
     EventList.member = Shapes::ShapeRef.new(shape: Event)
 
+    EventPersonaList.member = Shapes::ShapeRef.new(shape: EventPersona)
+
     EventType.add_member(:service, Shapes::ShapeRef.new(shape: service, location_name: "service"))
     EventType.add_member(:code, Shapes::ShapeRef.new(shape: eventTypeCode, location_name: "code"))
     EventType.add_member(:category, Shapes::ShapeRef.new(shape: eventTypeCategory, location_name: "category"))
+    EventType.add_member(:actionability, Shapes::ShapeRef.new(shape: EventTypeActionability, location_name: "actionability"))
+    EventType.add_member(:personas, Shapes::ShapeRef.new(shape: EventTypePersonaList, location_name: "personas"))
     EventType.struct_class = Types::EventType
+
+    EventTypeActionabilityList.member = Shapes::ShapeRef.new(shape: EventTypeActionability)
 
     EventTypeCategoryList.member = Shapes::ShapeRef.new(shape: eventTypeCategory)
 
@@ -360,9 +380,13 @@ module Aws::Health
     EventTypeFilter.add_member(:event_type_codes, Shapes::ShapeRef.new(shape: EventTypeCodeList, location_name: "eventTypeCodes"))
     EventTypeFilter.add_member(:services, Shapes::ShapeRef.new(shape: serviceList, location_name: "services"))
     EventTypeFilter.add_member(:event_type_categories, Shapes::ShapeRef.new(shape: EventTypeCategoryList, location_name: "eventTypeCategories"))
+    EventTypeFilter.add_member(:actionabilities, Shapes::ShapeRef.new(shape: EventTypeActionabilityList, location_name: "actionabilities"))
+    EventTypeFilter.add_member(:personas, Shapes::ShapeRef.new(shape: EventTypePersonaList, location_name: "personas"))
     EventTypeFilter.struct_class = Types::EventTypeFilter
 
     EventTypeList.member = Shapes::ShapeRef.new(shape: EventType)
+
+    EventTypePersonaList.member = Shapes::ShapeRef.new(shape: EventTypePersona)
 
     InvalidPaginationToken.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     InvalidPaginationToken.struct_class = Types::InvalidPaginationToken
@@ -397,6 +421,8 @@ module Aws::Health
     OrganizationEvent.add_member(:end_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "endTime"))
     OrganizationEvent.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "lastUpdatedTime"))
     OrganizationEvent.add_member(:status_code, Shapes::ShapeRef.new(shape: eventStatusCode, location_name: "statusCode"))
+    OrganizationEvent.add_member(:actionability, Shapes::ShapeRef.new(shape: EventActionability, location_name: "actionability"))
+    OrganizationEvent.add_member(:personas, Shapes::ShapeRef.new(shape: EventPersonaList, location_name: "personas"))
     OrganizationEvent.struct_class = Types::OrganizationEvent
 
     OrganizationEventArnsList.member = Shapes::ShapeRef.new(shape: eventArn)
@@ -415,6 +441,7 @@ module Aws::Health
     OrganizationEventDetailsErrorItem.add_member(:error_message, Shapes::ShapeRef.new(shape: string, location_name: "errorMessage"))
     OrganizationEventDetailsErrorItem.struct_class = Types::OrganizationEventDetailsErrorItem
 
+    OrganizationEventFilter.add_member(:actionabilities, Shapes::ShapeRef.new(shape: EventActionabilityList, location_name: "actionabilities"))
     OrganizationEventFilter.add_member(:event_type_codes, Shapes::ShapeRef.new(shape: eventTypeList, location_name: "eventTypeCodes"))
     OrganizationEventFilter.add_member(:aws_account_ids, Shapes::ShapeRef.new(shape: awsAccountIdsList, location_name: "awsAccountIds"))
     OrganizationEventFilter.add_member(:services, Shapes::ShapeRef.new(shape: serviceList, location_name: "services"))
@@ -426,6 +453,7 @@ module Aws::Health
     OrganizationEventFilter.add_member(:entity_values, Shapes::ShapeRef.new(shape: entityValueList, location_name: "entityValues"))
     OrganizationEventFilter.add_member(:event_type_categories, Shapes::ShapeRef.new(shape: eventTypeCategoryList, location_name: "eventTypeCategories"))
     OrganizationEventFilter.add_member(:event_status_codes, Shapes::ShapeRef.new(shape: eventStatusCodeList, location_name: "eventStatusCodes"))
+    OrganizationEventFilter.add_member(:personas, Shapes::ShapeRef.new(shape: EventPersonaList, location_name: "personas"))
     OrganizationEventFilter.struct_class = Types::OrganizationEventFilter
 
     OrganizationEventList.member = Shapes::ShapeRef.new(shape: OrganizationEvent)

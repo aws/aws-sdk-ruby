@@ -134,7 +134,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#create_listener-instance_method
       def create_listener: (
                              load_balancer_arn: ::String,
-                             ?protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE"),
+                             ?protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE" | "QUIC" | "TCP_QUIC"),
                              ?port: ::Integer,
                              ?ssl_policy: ::String,
                              ?certificates: Array[
@@ -145,7 +145,7 @@ module Aws
                              ],
                              default_actions: Array[
                                {
-                                 type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response"),
+                                 type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response" | "jwt-validation"),
                                  target_group_arn: ::String?,
                                  authenticate_oidc_config: {
                                    issuer: ::String,
@@ -196,6 +196,17 @@ module Aws
                                      enabled: bool?,
                                      duration_seconds: ::Integer?
                                    }?
+                                 }?,
+                                 jwt_validation_config: {
+                                   jwks_endpoint: ::String,
+                                   issuer: ::String,
+                                   additional_claims: Array[
+                                     {
+                                       format: ("single-string" | "string-array" | "space-separated-values"),
+                                       name: ::String,
+                                       values: Array[::String]
+                                     },
+                                   ]?
                                  }?
                                },
                              ],
@@ -263,14 +274,17 @@ module Aws
                              field: ::String?,
                              values: Array[::String]?,
                              host_header_config: {
-                               values: Array[::String]?
+                               values: Array[::String]?,
+                               regex_values: Array[::String]?
                              }?,
                              path_pattern_config: {
-                               values: Array[::String]?
+                               values: Array[::String]?,
+                               regex_values: Array[::String]?
                              }?,
                              http_header_config: {
                                http_header_name: ::String?,
-                               values: Array[::String]?
+                               values: Array[::String]?,
+                               regex_values: Array[::String]?
                              }?,
                              query_string_config: {
                                values: Array[
@@ -285,13 +299,14 @@ module Aws
                              }?,
                              source_ip_config: {
                                values: Array[::String]?
-                             }?
+                             }?,
+                             regex_values: Array[::String]?
                            },
                          ],
                          priority: ::Integer,
                          actions: Array[
                            {
-                             type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response"),
+                             type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response" | "jwt-validation"),
                              target_group_arn: ::String?,
                              authenticate_oidc_config: {
                                issuer: ::String,
@@ -342,6 +357,17 @@ module Aws
                                  enabled: bool?,
                                  duration_seconds: ::Integer?
                                }?
+                             }?,
+                             jwt_validation_config: {
+                               jwks_endpoint: ::String,
+                               issuer: ::String,
+                               additional_claims: Array[
+                                 {
+                                   format: ("single-string" | "string-array" | "space-separated-values"),
+                                   name: ::String,
+                                   values: Array[::String]
+                                 },
+                               ]?
                              }?
                            },
                          ],
@@ -349,6 +375,27 @@ module Aws
                            {
                              key: ::String,
                              value: ::String?
+                           },
+                         ],
+                         ?transforms: Array[
+                           {
+                             type: ("host-header-rewrite" | "url-rewrite"),
+                             host_header_rewrite_config: {
+                               rewrites: Array[
+                                 {
+                                   regex: ::String,
+                                   replace: ::String
+                                 },
+                               ]?
+                             }?,
+                             url_rewrite_config: {
+                               rewrites: Array[
+                                 {
+                                   regex: ::String,
+                                   replace: ::String
+                                 },
+                               ]?
+                             }?
                            },
                          ]
                        ) -> _CreateRuleResponseSuccess
@@ -361,11 +408,11 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#create_target_group-instance_method
       def create_target_group: (
                                  name: ::String,
-                                 ?protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE"),
+                                 ?protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE" | "QUIC" | "TCP_QUIC"),
                                  ?protocol_version: ::String,
                                  ?port: ::Integer,
                                  ?vpc_id: ::String,
-                                 ?health_check_protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE"),
+                                 ?health_check_protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE" | "QUIC" | "TCP_QUIC"),
                                  ?health_check_port: ::String,
                                  ?health_check_enabled: bool,
                                  ?health_check_path: ::String,
@@ -384,7 +431,8 @@ module Aws
                                      value: ::String?
                                    },
                                  ],
-                                 ?ip_address_type: ("ipv4" | "ipv6")
+                                 ?ip_address_type: ("ipv4" | "ipv6"),
+                                 ?target_control_port: ::Integer
                                ) -> _CreateTargetGroupResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTargetGroupResponseSuccess
 
@@ -472,7 +520,8 @@ module Aws
                                   {
                                     id: ::String,
                                     port: ::Integer?,
-                                    availability_zone: ::String?
+                                    availability_zone: ::String?,
+                                    quic_server_id: ::String?
                                   },
                                 ]
                               ) -> _DeregisterTargetsResponseSuccess
@@ -638,7 +687,8 @@ module Aws
                                       {
                                         id: ::String,
                                         port: ::Integer?,
-                                        availability_zone: ::String?
+                                        availability_zone: ::String?,
+                                        quic_server_id: ::String?
                                       },
                                     ],
                                     ?include: Array[("AnomalyDetection" | "All")]
@@ -756,7 +806,7 @@ module Aws
       def modify_listener: (
                              listener_arn: ::String,
                              ?port: ::Integer,
-                             ?protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE"),
+                             ?protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE" | "QUIC" | "TCP_QUIC"),
                              ?ssl_policy: ::String,
                              ?certificates: Array[
                                {
@@ -766,7 +816,7 @@ module Aws
                              ],
                              ?default_actions: Array[
                                {
-                                 type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response"),
+                                 type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response" | "jwt-validation"),
                                  target_group_arn: ::String?,
                                  authenticate_oidc_config: {
                                    issuer: ::String,
@@ -817,6 +867,17 @@ module Aws
                                      enabled: bool?,
                                      duration_seconds: ::Integer?
                                    }?
+                                 }?,
+                                 jwt_validation_config: {
+                                   jwks_endpoint: ::String,
+                                   issuer: ::String,
+                                   additional_claims: Array[
+                                     {
+                                       format: ("single-string" | "string-array" | "space-separated-values"),
+                                       name: ::String,
+                                       values: Array[::String]
+                                     },
+                                   ]?
                                  }?
                                },
                              ],
@@ -875,14 +936,17 @@ module Aws
                              field: ::String?,
                              values: Array[::String]?,
                              host_header_config: {
-                               values: Array[::String]?
+                               values: Array[::String]?,
+                               regex_values: Array[::String]?
                              }?,
                              path_pattern_config: {
-                               values: Array[::String]?
+                               values: Array[::String]?,
+                               regex_values: Array[::String]?
                              }?,
                              http_header_config: {
                                http_header_name: ::String?,
-                               values: Array[::String]?
+                               values: Array[::String]?,
+                               regex_values: Array[::String]?
                              }?,
                              query_string_config: {
                                values: Array[
@@ -897,12 +961,13 @@ module Aws
                              }?,
                              source_ip_config: {
                                values: Array[::String]?
-                             }?
+                             }?,
+                             regex_values: Array[::String]?
                            },
                          ],
                          ?actions: Array[
                            {
-                             type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response"),
+                             type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response" | "jwt-validation"),
                              target_group_arn: ::String?,
                              authenticate_oidc_config: {
                                issuer: ::String,
@@ -953,9 +1018,42 @@ module Aws
                                  enabled: bool?,
                                  duration_seconds: ::Integer?
                                }?
+                             }?,
+                             jwt_validation_config: {
+                               jwks_endpoint: ::String,
+                               issuer: ::String,
+                               additional_claims: Array[
+                                 {
+                                   format: ("single-string" | "string-array" | "space-separated-values"),
+                                   name: ::String,
+                                   values: Array[::String]
+                                 },
+                               ]?
                              }?
                            },
-                         ]
+                         ],
+                         ?transforms: Array[
+                           {
+                             type: ("host-header-rewrite" | "url-rewrite"),
+                             host_header_rewrite_config: {
+                               rewrites: Array[
+                                 {
+                                   regex: ::String,
+                                   replace: ::String
+                                 },
+                               ]?
+                             }?,
+                             url_rewrite_config: {
+                               rewrites: Array[
+                                 {
+                                   regex: ::String,
+                                   replace: ::String
+                                 },
+                               ]?
+                             }?
+                           },
+                         ],
+                         ?reset_transforms: bool
                        ) -> _ModifyRuleResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyRuleResponseSuccess
 
@@ -966,7 +1064,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticLoadBalancingV2/Client.html#modify_target_group-instance_method
       def modify_target_group: (
                                  target_group_arn: ::String,
-                                 ?health_check_protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE"),
+                                 ?health_check_protocol: ("HTTP" | "HTTPS" | "TCP" | "TLS" | "UDP" | "TCP_UDP" | "GENEVE" | "QUIC" | "TCP_QUIC"),
                                  ?health_check_port: ::String,
                                  ?health_check_path: ::String,
                                  ?health_check_enabled: bool,
@@ -1020,7 +1118,8 @@ module Aws
                                 {
                                   id: ::String,
                                   port: ::Integer?,
-                                  availability_zone: ::String?
+                                  availability_zone: ::String?,
+                                  quic_server_id: ::String?
                                 },
                               ]
                             ) -> _RegisterTargetsResponseSuccess
@@ -1152,7 +1251,8 @@ module Aws
                       {
                         id: ::String,
                         port: ::Integer?,
-                        availability_zone: ::String?
+                        availability_zone: ::String?,
+                        quic_server_id: ::String?
                       },
                     ],
                     ?include: Array[("AnomalyDetection" | "All")]
@@ -1164,7 +1264,8 @@ module Aws
                       {
                         id: ::String,
                         port: ::Integer?,
-                        availability_zone: ::String?
+                        availability_zone: ::String?,
+                        quic_server_id: ::String?
                       },
                     ],
                     ?include: Array[("AnomalyDetection" | "All")]

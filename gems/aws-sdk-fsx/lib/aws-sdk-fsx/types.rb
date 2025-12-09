@@ -1118,6 +1118,28 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Specifies the FSx for ONTAP volume that the S3 access point will be
+    # attached to, and the file system user identity.
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the FSx for ONTAP volume to which you want the S3 access
+    #   point attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_identity
+    #   Specifies the file system user identity to use for authorizing file
+    #   read and write requests that are made using this S3 access point.
+    #   @return [Types::OntapFileSystemIdentity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateAndAttachS3AccessPointOntapConfiguration AWS API Documentation
+    #
+    class CreateAndAttachS3AccessPointOntapConfiguration < Struct.new(
+      :volume_id,
+      :file_system_identity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the FSx for OpenZFS volume that the S3 access point will be
     # attached to, and the file system user identity.
     #
@@ -1164,6 +1186,11 @@ module Aws::FSx
     #   access point to an FSx for OpenZFS volume.
     #   @return [Types::CreateAndAttachS3AccessPointOpenZFSConfiguration]
     #
+    # @!attribute [rw] ontap_configuration
+    #   Specifies the FSx for ONTAP volume that the S3 access point will be
+    #   attached to, and the file system user identity.
+    #   @return [Types::CreateAndAttachS3AccessPointOntapConfiguration]
+    #
     # @!attribute [rw] s3_access_point
     #   Specifies the virtual private cloud (VPC) configuration if you're
     #   creating an access point that is restricted to a VPC. For more
@@ -1182,6 +1209,7 @@ module Aws::FSx
       :name,
       :type,
       :open_zfs_configuration,
+      :ontap_configuration,
       :s3_access_point)
       SENSITIVE = []
       include Aws::Structure
@@ -2258,7 +2286,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] endpoint_ip_address_range
-    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   (Multi-AZ only) Specifies the IPv4 address range in which the
     #   endpoints to access your file system will be created. By default in
     #   the Amazon FSx API, Amazon FSx selects an unused IP address range
     #   for you from the 198.19.* range. By default in the Amazon FSx
@@ -2388,6 +2416,16 @@ module Aws::FSx
     #   * The value of `ThroughputCapacityPerHAPair` is not a valid value.
     #   @return [Integer]
     #
+    # @!attribute [rw] endpoint_ipv_6_address_range
+    #   (Multi-AZ only) Specifies the IPv6 address range in which the
+    #   endpoints to access your file system will be created. By default in
+    #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
+    #   available /118 IP address range for you from one of the VPC's CIDR
+    #   ranges. You can have overlapping endpoint IP addresses for file
+    #   systems deployed in the same VPC/route tables, as long as they
+    #   don't overlap with any subnet.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemOntapConfiguration AWS API Documentation
     #
     class CreateFileSystemOntapConfiguration < Struct.new(
@@ -2402,7 +2440,8 @@ module Aws::FSx
       :throughput_capacity,
       :weekly_maintenance_start_time,
       :ha_pairs,
-      :throughput_capacity_per_ha_pair)
+      :throughput_capacity_per_ha_pair,
+      :endpoint_ipv_6_address_range)
       SENSITIVE = [:fsx_admin_password]
       include Aws::Structure
     end
@@ -2526,7 +2565,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] endpoint_ip_address_range
-    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   (Multi-AZ only) Specifies the IPv4 address range in which the
     #   endpoints to access your file system will be created. By default in
     #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
     #   available /28 IP address range for you from one of the VPC's CIDR
@@ -2536,7 +2575,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] endpoint_ipv_6_address_range
-    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   (Multi-AZ only) Specifies the IPv6 address range in which the
     #   endpoints to access your file system will be created. By default in
     #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
     #   available /118 IP address range for you from one of the VPC's CIDR
@@ -2783,8 +2822,8 @@ module Aws::FSx
     #   The network type of the Amazon FSx file system that you are
     #   creating. Valid values are `IPV4` (which supports IPv4 only) and
     #   `DUAL` (for dual-stack mode, which supports both IPv4 and IPv6). The
-    #   default is `IPV4`. Supported only for Amazon FSx for OpenZFS file
-    #   systems.
+    #   default is `IPV4`. Supported for FSx for OpenZFS, FSx for ONTAP, and
+    #   FSx for Windows File Server file systems.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemRequest AWS API Documentation
@@ -2923,12 +2962,8 @@ module Aws::FSx
     #   using the AssociateFileSystemAliases operation. You can remove DNS
     #   aliases from the file system after it is created using the
     #   DisassociateFileSystemAliases operation. You only need to specify
-    #   the alias name in the request payload.
-    #
-    #   For more information, see [Working with DNS Aliases][1] and
-    #   [Walkthrough 5: Using DNS aliases to access your file system][2],
-    #   including additional steps you must take to be able to access your
-    #   file system using a DNS alias.
+    #   the alias name in the request payload. For more information, see
+    #   [Managing DNS aliases][1] and [Accessing data using DNS aliases][2].
     #
     #   An alias name has to meet the following requirements:
     #
@@ -2950,7 +2985,7 @@ module Aws::FSx
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
-    #   [2]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/dns-aliases.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] audit_log_configuration
@@ -2967,6 +3002,12 @@ module Aws::FSx
     #   limit associated with your chosen throughput capacity.
     #   @return [Types::DiskIopsConfiguration]
     #
+    # @!attribute [rw] fsrm_configuration
+    #   The File Server Resource Manager (FSRM) configuration that Amazon
+    #   FSx for Windows File Server uses for the file system. FSRM is
+    #   disabled by default.
+    #   @return [Types::WindowsFsrmConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemWindowsConfiguration AWS API Documentation
     #
     class CreateFileSystemWindowsConfiguration < Struct.new(
@@ -2981,7 +3022,8 @@ module Aws::FSx
       :copy_tags_to_backups,
       :aliases,
       :audit_log_configuration,
-      :disk_iops_configuration)
+      :disk_iops_configuration,
+      :fsrm_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6386,14 +6428,19 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] ip_addresses
-    #   IP addresses of the file system endpoint.
+    #   The IPv4 addresses of the file system endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ipv_6_addresses
+    #   The IPv6 addresses of the file system endpoint.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileSystemEndpoint AWS API Documentation
     #
     class FileSystemEndpoint < Struct.new(
       :dns_name,
-      :ip_addresses)
+      :ip_addresses,
+      :ipv_6_addresses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7290,7 +7337,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] endpoint_ip_address_range
-    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   (Multi-AZ only) Specifies the IPv4 address range in which the
     #   endpoints to access your file system will be created. By default in
     #   the Amazon FSx API, Amazon FSx selects an unused IP address range
     #   for you from the 198.19.* range. By default in the Amazon FSx
@@ -7397,6 +7444,16 @@ module Aws::FSx
     #   * The value of `ThroughputCapacityPerHAPair` is not a valid value.
     #   @return [Integer]
     #
+    # @!attribute [rw] endpoint_ipv_6_address_range
+    #   (Multi-AZ only) Specifies the IPv6 address range in which the
+    #   endpoints to access your file system will be created. By default in
+    #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
+    #   available /118 IP address range for you from one of the VPC's CIDR
+    #   ranges. You can have overlapping endpoint IP addresses for file
+    #   systems deployed in the same VPC/route tables, as long as they
+    #   don't overlap with any subnet.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapFileSystemConfiguration AWS API Documentation
     #
     class OntapFileSystemConfiguration < Struct.new(
@@ -7412,8 +7469,52 @@ module Aws::FSx
       :weekly_maintenance_start_time,
       :fsx_admin_password,
       :ha_pairs,
-      :throughput_capacity_per_ha_pair)
+      :throughput_capacity_per_ha_pair,
+      :endpoint_ipv_6_address_range)
       SENSITIVE = [:fsx_admin_password]
+      include Aws::Structure
+    end
+
+    # Specifies the file system user identity that will be used for
+    # authorizing all file access requests that are made using the S3 access
+    # point. The identity can be either a UNIX user or a Windows user.
+    #
+    # @!attribute [rw] type
+    #   Specifies the FSx for ONTAP user identity type. Valid values are
+    #   `UNIX` and `WINDOWS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] unix_user
+    #   Specifies the UNIX user identity for file system operations.
+    #   @return [Types::OntapUnixFileSystemUser]
+    #
+    # @!attribute [rw] windows_user
+    #   Specifies the Windows user identity for file system operations.
+    #   @return [Types::OntapWindowsFileSystemUser]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapFileSystemIdentity AWS API Documentation
+    #
+    class OntapFileSystemIdentity < Struct.new(
+      :type,
+      :unix_user,
+      :windows_user)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The FSx for ONTAP UNIX file system user that is used for authorizing
+    # all file access requests that are made using the S3 access point.
+    #
+    # @!attribute [rw] name
+    #   The name of the UNIX user. The name can be up to 256 characters
+    #   long.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapUnixFileSystemUser AWS API Documentation
+    #
+    class OntapUnixFileSystemUser < Struct.new(
+      :name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7576,6 +7677,23 @@ module Aws::FSx
       :volume_style,
       :aggregate_configuration,
       :size_in_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The FSx for ONTAP Windows file system user that is used for
+    # authorizing all file access requests that are made using the S3 access
+    # point.
+    #
+    # @!attribute [rw] name
+    #   The name of the Windows user. The name can be up to 256 characters
+    #   long and supports Active Directory users.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapWindowsFileSystemUser AWS API Documentation
+    #
+    class OntapWindowsFileSystemUser < Struct.new(
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7767,7 +7885,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] endpoint_ip_address_range
-    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   (Multi-AZ only) Specifies the IPv4 address range in which the
     #   endpoints to access your file system will be created. By default in
     #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
     #   available /28 IP address range for you from one of the VPC's CIDR
@@ -7776,7 +7894,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] endpoint_ipv_6_address_range
-    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   (Multi-AZ only) Specifies the IPv6 address range in which the
     #   endpoints to access your file system will be created. By default in
     #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
     #   available /118 IP address range for you from one of the VPC's CIDR
@@ -7791,7 +7909,7 @@ module Aws::FSx
     #   @return [Array<String>]
     #
     # @!attribute [rw] endpoint_ip_address
-    #   The IP address of the endpoint that is used to access data or to
+    #   The IPv4 address of the endpoint that is used to access data or to
     #   manage the file system.
     #   @return [String]
     #
@@ -8461,6 +8579,10 @@ module Aws::FSx
     #   The OpenZFSConfiguration of the S3 access point attachment.
     #   @return [Types::S3AccessPointOpenZFSConfiguration]
     #
+    # @!attribute [rw] ontap_configuration
+    #   The ONTAP configuration of the S3 access point attachment.
+    #   @return [Types::S3AccessPointOntapConfiguration]
+    #
     # @!attribute [rw] s3_access_point
     #   The S3 access point configuration of the S3 access point attachment.
     #   @return [Types::S3AccessPoint]
@@ -8474,6 +8596,7 @@ module Aws::FSx
       :name,
       :type,
       :open_zfs_configuration,
+      :ontap_configuration,
       :s3_access_point)
       SENSITIVE = []
       include Aws::Structure
@@ -8509,6 +8632,28 @@ module Aws::FSx
     class S3AccessPointAttachmentsFilter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the FSx for ONTAP attachment configuration of an S3 access
+    # point attachment.
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the FSx for ONTAP volume that the S3 access point is
+    #   attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_identity
+    #   The file system identity used to authorize file access requests made
+    #   using the S3 access point.
+    #   @return [Types::OntapFileSystemIdentity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/S3AccessPointOntapConfiguration AWS API Documentation
+    #
+    class S3AccessPointOntapConfiguration < Struct.new(
+      :volume_id,
+      :file_system_identity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8616,6 +8761,12 @@ module Aws::FSx
     #   controllers in the self-managed AD directory.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] domain_join_service_account_secret
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret containing the service account credentials used to
+    #   join the file system to your self-managed Active Directory domain.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryAttributes AWS API Documentation
     #
     class SelfManagedActiveDirectoryAttributes < Struct.new(
@@ -8623,7 +8774,8 @@ module Aws::FSx
       :organizational_unit_distinguished_name,
       :file_system_administrators_group,
       :user_name,
-      :dns_ips)
+      :dns_ips,
+      :domain_join_service_account_secret)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8690,6 +8842,31 @@ module Aws::FSx
     #   controllers in the self-managed AD directory.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] domain_join_service_account_secret
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret containing the self-managed Active Directory domain
+    #   join service account credentials. When provided, Amazon FSx uses the
+    #   credentials stored in this secret to join the file system to your
+    #   self-managed Active Directory domain.
+    #
+    #   The secret must contain two key-value pairs:
+    #
+    #   * `CUSTOMER_MANAGED_ACTIVE_DIRECTORY_USERNAME` - The username for
+    #     the service account
+    #
+    #   * `CUSTOMER_MANAGED_ACTIVE_DIRECTORY_PASSWORD` - The password for
+    #     the service account
+    #
+    #   For more information, see [ Using Amazon FSx for Windows with your
+    #   self-managed Microsoft Active Directory][1] or [ Using Amazon FSx
+    #   for ONTAP with your self-managed Microsoft Active Directory][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-manage-prereqs.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/self-manage-prereqs.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryConfiguration AWS API Documentation
     #
     class SelfManagedActiveDirectoryConfiguration < Struct.new(
@@ -8698,7 +8875,8 @@ module Aws::FSx
       :file_system_administrators_group,
       :user_name,
       :password,
-      :dns_ips)
+      :dns_ips,
+      :domain_join_service_account_secret)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -8744,6 +8922,13 @@ module Aws::FSx
     #   granted administrative privileges for the Amazon FSx resource.
     #   @return [String]
     #
+    # @!attribute [rw] domain_join_service_account_secret
+    #   Specifies the updated Amazon Resource Name (ARN) of the Amazon Web
+    #   Services Secrets Manager secret containing the self-managed Active
+    #   Directory domain join service account credentials. Amazon FSx uses
+    #   this account to join to your self-managed Active Directory domain.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryConfigurationUpdates AWS API Documentation
     #
     class SelfManagedActiveDirectoryConfigurationUpdates < Struct.new(
@@ -8752,14 +8937,15 @@ module Aws::FSx
       :dns_ips,
       :domain_name,
       :organizational_unit_distinguished_name,
-      :file_system_administrators_group)
+      :file_system_administrators_group,
+      :domain_join_service_account_secret)
       SENSITIVE = [:password]
       include Aws::Structure
     end
 
     # An error indicating that a particular service limit was exceeded. You
-    # can increase some service limits by contacting Amazon Web
-    # ServicesSupport.
+    # can increase some service limits by contacting Amazon Web Services
+    # Support.
     #
     # @!attribute [rw] limit
     #   Enumeration of the service limit that was exceeded.
@@ -9243,14 +9429,19 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] ip_addresses
-    #   The SVM endpoint's IP addresses.
+    #   The SVM endpoint's IPv4 addresses.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ipv_6_addresses
+    #   The SVM endpoint's IPv6 addresses.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SvmEndpoint AWS API Documentation
     #
     class SvmEndpoint < Struct.new(
       :dns_name,
-      :ip_addresses)
+      :ip_addresses,
+      :ipv_6_addresses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9921,6 +10112,16 @@ module Aws::FSx
     #   [2]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/supported-fsx-clients.html#using-block-storage
     #   @return [Integer]
     #
+    # @!attribute [rw] endpoint_ipv_6_address_range
+    #   (Multi-AZ only) Specifies the IPv6 address range in which the
+    #   endpoints to access your file system will be created. By default in
+    #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
+    #   available /118 IP address range for you from one of the VPC's CIDR
+    #   ranges. You can have overlapping endpoint IP addresses for file
+    #   systems deployed in the same VPC/route tables, as long as they
+    #   don't overlap with any subnet.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemOntapConfiguration AWS API Documentation
     #
     class UpdateFileSystemOntapConfiguration < Struct.new(
@@ -9933,7 +10134,8 @@ module Aws::FSx
       :add_route_table_ids,
       :remove_route_table_ids,
       :throughput_capacity_per_ha_pair,
-      :ha_pairs)
+      :ha_pairs,
+      :endpoint_ipv_6_address_range)
       SENSITIVE = [:fsx_admin_password]
       include Aws::Structure
     end
@@ -10022,7 +10224,7 @@ module Aws::FSx
     #   @return [Types::OpenZFSReadCacheConfiguration]
     #
     # @!attribute [rw] endpoint_ipv_6_address_range
-    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   (Multi-AZ only) Specifies the IPv6 address range in which the
     #   endpoints to access your file system will be created. By default in
     #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
     #   available /118 IP address range for you from one of the VPC's CIDR
@@ -10248,6 +10450,12 @@ module Aws::FSx
     #   limit associated with your chosen throughput capacity.
     #   @return [Types::DiskIopsConfiguration]
     #
+    # @!attribute [rw] fsrm_configuration
+    #   The File Server Resource Manager (FSRM) configuration that Amazon
+    #   FSx for Windows File Server uses for the file system. FSRM is
+    #   disabled by default.
+    #   @return [Types::WindowsFsrmConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemWindowsConfiguration AWS API Documentation
     #
     class UpdateFileSystemWindowsConfiguration < Struct.new(
@@ -10257,7 +10465,8 @@ module Aws::FSx
       :throughput_capacity,
       :self_managed_active_directory_configuration,
       :audit_log_configuration,
-      :disk_iops_configuration)
+      :disk_iops_configuration,
+      :fsrm_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11043,21 +11252,21 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] preferred_file_server_ip
-    #   For `MULTI_AZ_1` deployment types, the IP address of the primary, or
-    #   preferred, file server.
+    #   For `MULTI_AZ_1` deployment types, the IPv4 address of the primary,
+    #   or preferred, file server.
     #
     #   Use this IP address when mounting the file system on Linux SMB
     #   clients or Windows SMB clients that are not joined to a Microsoft
     #   Active Directory. Applicable for all Windows file system deployment
-    #   types. This IP address is temporarily unavailable when the file
+    #   types. This IPv4 address is temporarily unavailable when the file
     #   system is undergoing maintenance. For Linux and Windows SMB clients
     #   that are joined to an Active Directory, use the file system's
     #   DNSName instead. For more information on mapping and mounting file
-    #   shares, see [Accessing File Shares][1].
+    #   shares, see [Accessing data using file shares][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-file-shares.html
     #   @return [String]
     #
     # @!attribute [rw] throughput_capacity
@@ -11107,7 +11316,7 @@ module Aws::FSx
     #   aliases from the file system after it is created using the
     #   DisassociateFileSystemAliases operation. You only need to specify
     #   the alias name in the request payload. For more information, see
-    #   [DNS aliases][1].
+    #   [Managing DNS aliases][1].
     #
     #
     #
@@ -11128,6 +11337,23 @@ module Aws::FSx
     #   limit associated with your chosen throughput capacity.
     #   @return [Types::DiskIopsConfiguration]
     #
+    # @!attribute [rw] preferred_file_server_ipv_6
+    #   For MULTI\_AZ\_1 deployment types, the IPv6 address of the primary,
+    #   or preferred, file server. Use this IP address when mounting the
+    #   file system on Linux SMB clients or Windows SMB clients that are not
+    #   joined to a Microsoft Active Directory. Applicable for all Windows
+    #   file system deployment types. This IPv6 address is temporarily
+    #   unavailable when the file system is undergoing maintenance. For
+    #   Linux and Windows SMB clients that are joined to an Active
+    #   Directory, use the file system's DNSName instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] fsrm_configuration
+    #   The File Server Resource Manager (FSRM) configuration that Amazon
+    #   FSx for Windows File Server uses for the file system. FSRM is
+    #   disabled by default.
+    #   @return [Types::WindowsFsrmConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/WindowsFileSystemConfiguration AWS API Documentation
     #
     class WindowsFileSystemConfiguration < Struct.new(
@@ -11145,7 +11371,45 @@ module Aws::FSx
       :copy_tags_to_backups,
       :aliases,
       :audit_log_configuration,
-      :disk_iops_configuration)
+      :disk_iops_configuration,
+      :preferred_file_server_ipv_6,
+      :fsrm_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The File Server Resource Manager (FSRM) configuration that Amazon FSx
+    # for Windows File Server uses for the file system. When FSRM is
+    # enabled, you can manage and monitor storage quotas, file screening,
+    # storage reports, and file classification.
+    #
+    # @!attribute [rw] fsrm_service_enabled
+    #   Specifies whether FSRM is enabled or disabled on the file system.
+    #   When `TRUE`, the FSRM service is enabled and monitor file operations
+    #   according to configured policies. When `FALSE` or omitted, FSRM is
+    #   disabled. The default value is `FALSE`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] event_log_destination
+    #   The Amazon Resource Name (ARN) for the destination of the FSRM event
+    #   logs. The destination can be any Amazon CloudWatch Logs log group
+    #   ARN or Amazon Kinesis Data Firehose delivery stream ARN.
+    #
+    #   The name of the Amazon CloudWatch Logs log group must begin with the
+    #   `/aws/fsx` prefix. The name of the Amazon Kinesis Data Firehose
+    #   delivery stream must begin with the `aws-fsx` prefix.
+    #
+    #   The destination ARN (either CloudWatch Logs log group or Kinesis
+    #   Data Firehose delivery stream) must be in the same Amazon Web
+    #   Services partition, Amazon Web Services Region, and Amazon Web
+    #   Services account as your Amazon FSx file system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/WindowsFsrmConfiguration AWS API Documentation
+    #
+    class WindowsFsrmConfiguration < Struct.new(
+      :fsrm_service_enabled,
+      :event_log_destination)
       SENSITIVE = []
       include Aws::Structure
     end

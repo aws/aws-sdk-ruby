@@ -162,6 +162,21 @@ module Aws
                                       },
                                       ?error_message_configuration: {
                                         type: ("DETAILED")
+                                      },
+                                      ?synthetic_data_parameters: {
+                                        ml_synthetic_data_parameters: {
+                                          epsilon: ::Float,
+                                          max_membership_inference_attack_score: ::Float,
+                                          column_classification: {
+                                            column_mapping: Array[
+                                              {
+                                                column_name: ::String,
+                                                column_type: ("CATEGORICAL" | "NUMERICAL"),
+                                                is_predictive_value: bool
+                                              },
+                                            ]
+                                          }
+                                        }?
                                       }
                                     ) -> _CreateAnalysisTemplateResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAnalysisTemplateResponseSuccess
@@ -189,6 +204,9 @@ module Aws
                                             is_responsible: bool
                                           }?,
                                           model_inference: {
+                                            is_responsible: bool
+                                          }?,
+                                          synthetic_data_generation: {
                                             is_responsible: bool
                                           }?
                                         }?,
@@ -224,6 +242,9 @@ module Aws
                                       }?,
                                       model_inference: {
                                         is_responsible: bool
+                                      }?,
+                                      synthetic_data_generation: {
+                                        is_responsible: bool
                                       }?
                                     }?,
                                     job_compute: {
@@ -231,7 +252,8 @@ module Aws
                                     }?
                                   },
                                   ?analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL"),
-                                  ?auto_approved_change_request_types: Array[("ADD_MEMBER")]
+                                  ?auto_approved_change_request_types: Array[("ADD_MEMBER")],
+                                  ?allowed_result_regions: Array[("us-west-1" | "us-west-2" | "us-east-1" | "us-east-2" | "af-south-1" | "ap-east-1" | "ap-east-2" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-5" | "ap-southeast-4" | "ap-southeast-7" | "ap-south-1" | "ap-northeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ca-central-1" | "ca-west-1" | "eu-south-1" | "eu-west-3" | "eu-south-2" | "eu-central-2" | "eu-central-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "me-south-1" | "me-central-1" | "il-central-1" | "sa-east-1" | "mx-central-1")]
                                 ) -> _CreateCollaborationResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCollaborationResponseSuccess
 
@@ -282,6 +304,7 @@ module Aws
                                      ?description: ::String,
                                      table_reference: {
                                        glue: {
+                                         region: ("us-west-1" | "us-west-2" | "us-east-1" | "us-east-2" | "af-south-1" | "ap-east-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-5" | "ap-southeast-4" | "ap-southeast-7" | "ap-south-1" | "ap-northeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ca-central-1" | "ca-west-1" | "eu-south-1" | "eu-west-3" | "eu-south-2" | "eu-central-2" | "eu-central-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "me-south-1" | "me-central-1" | "il-central-1" | "sa-east-1" | "mx-central-1" | "ap-east-2")?,
                                          table_name: ::String,
                                          database_name: ::String
                                        }?,
@@ -301,6 +324,7 @@ module Aws
                                          }
                                        }?,
                                        athena: {
+                                         region: ("us-west-1" | "us-west-2" | "us-east-1" | "us-east-2" | "af-south-1" | "ap-east-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-5" | "ap-southeast-4" | "ap-southeast-7" | "ap-south-1" | "ap-northeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ca-central-1" | "ca-west-1" | "eu-south-1" | "eu-west-3" | "eu-south-2" | "eu-central-2" | "eu-central-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "me-south-1" | "me-central-1" | "il-central-1" | "sa-east-1" | "mx-central-1" | "ap-east-2")?,
                                          work_group: ::String,
                                          output_location: ::String?,
                                          database_name: ::String,
@@ -490,6 +514,9 @@ module Aws
                                    }?,
                                    model_inference: {
                                      is_responsible: bool
+                                   }?,
+                                   synthetic_data_generation: {
+                                     is_responsible: bool
                                    }?
                                  }?,
                                  job_compute: {
@@ -506,12 +533,22 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#create_privacy_budget_template-instance_method
       def create_privacy_budget_template: (
                                             membership_identifier: ::String,
-                                            auto_refresh: ("CALENDAR_MONTH" | "NONE"),
-                                            privacy_budget_type: ("DIFFERENTIAL_PRIVACY"),
+                                            ?auto_refresh: ("CALENDAR_MONTH" | "NONE"),
+                                            privacy_budget_type: ("DIFFERENTIAL_PRIVACY" | "ACCESS_BUDGET"),
                                             parameters: {
                                               differential_privacy: {
                                                 epsilon: ::Integer,
                                                 users_noise_per_query: ::Integer
+                                              }?,
+                                              access_budget: {
+                                                budget_parameters: Array[
+                                                  {
+                                                    type: ("CALENDAR_DAY" | "CALENDAR_MONTH" | "CALENDAR_WEEK" | "LIFETIME"),
+                                                    budget: ::Integer,
+                                                    auto_refresh: ("ENABLED" | "DISABLED")?
+                                                  },
+                                                ],
+                                                resource_arn: ::String
                                               }?
                                             },
                                             ?tags: Hash[::String, ::String]
@@ -942,9 +979,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_collaboration_privacy_budgets-instance_method
       def list_collaboration_privacy_budgets: (
                                                 collaboration_identifier: ::String,
-                                                privacy_budget_type: ("DIFFERENTIAL_PRIVACY"),
+                                                privacy_budget_type: ("DIFFERENTIAL_PRIVACY" | "ACCESS_BUDGET"),
                                                 ?max_results: ::Integer,
-                                                ?next_token: ::String
+                                                ?next_token: ::String,
+                                                ?access_budget_resource_arn: ::String
                                               ) -> _ListCollaborationPrivacyBudgetsResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCollaborationPrivacyBudgetsResponseSuccess
 
@@ -1072,9 +1110,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_privacy_budgets-instance_method
       def list_privacy_budgets: (
                                   membership_identifier: ::String,
-                                  privacy_budget_type: ("DIFFERENTIAL_PRIVACY"),
+                                  privacy_budget_type: ("DIFFERENTIAL_PRIVACY" | "ACCESS_BUDGET"),
                                   ?next_token: ::String,
-                                  ?max_results: ::Integer
+                                  ?max_results: ::Integer,
+                                  ?access_budget_resource_arn: ::String
                                 ) -> _ListPrivacyBudgetsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPrivacyBudgetsResponseSuccess
 
@@ -1167,7 +1206,7 @@ module Aws
                                  type: ("PYSPARK"),
                                  membership_identifier: ::String,
                                  job_parameters: {
-                                   analysis_template_arn: ::String?
+                                   analysis_template_arn: ::String
                                  },
                                  ?result_configuration: {
                                    output_configuration: {
@@ -1229,7 +1268,10 @@ module Aws
                                    ?compute_configuration: {
                                      worker: {
                                        type: ("CR.1X" | "CR.4X")?,
-                                       number: ::Integer?
+                                       number: ::Integer?,
+                                       properties: {
+                                         spark: Hash[::String, ::String]?
+                                       }?
                                      }?
                                    }
                                  ) -> _StartProtectedQueryResponseSuccess
@@ -1304,6 +1346,7 @@ module Aws
                                      ?description: ::String,
                                      ?table_reference: {
                                        glue: {
+                                         region: ("us-west-1" | "us-west-2" | "us-east-1" | "us-east-2" | "af-south-1" | "ap-east-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-5" | "ap-southeast-4" | "ap-southeast-7" | "ap-south-1" | "ap-northeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ca-central-1" | "ca-west-1" | "eu-south-1" | "eu-west-3" | "eu-south-2" | "eu-central-2" | "eu-central-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "me-south-1" | "me-central-1" | "il-central-1" | "sa-east-1" | "mx-central-1" | "ap-east-2")?,
                                          table_name: ::String,
                                          database_name: ::String
                                        }?,
@@ -1323,6 +1366,7 @@ module Aws
                                          }
                                        }?,
                                        athena: {
+                                         region: ("us-west-1" | "us-west-2" | "us-east-1" | "us-east-2" | "af-south-1" | "ap-east-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-5" | "ap-southeast-4" | "ap-southeast-7" | "ap-south-1" | "ap-northeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ca-central-1" | "ca-west-1" | "eu-south-1" | "eu-west-3" | "eu-south-2" | "eu-central-2" | "eu-central-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "me-south-1" | "me-central-1" | "il-central-1" | "sa-east-1" | "mx-central-1" | "ap-east-2")?,
                                          work_group: ::String,
                                          output_location: ::String?,
                                          database_name: ::String,
@@ -1500,11 +1544,20 @@ module Aws
       def update_privacy_budget_template: (
                                             membership_identifier: ::String,
                                             privacy_budget_template_identifier: ::String,
-                                            privacy_budget_type: ("DIFFERENTIAL_PRIVACY"),
+                                            privacy_budget_type: ("DIFFERENTIAL_PRIVACY" | "ACCESS_BUDGET"),
                                             ?parameters: {
                                               differential_privacy: {
                                                 epsilon: ::Integer?,
                                                 users_noise_per_query: ::Integer?
+                                              }?,
+                                              access_budget: {
+                                                budget_parameters: Array[
+                                                  {
+                                                    type: ("CALENDAR_DAY" | "CALENDAR_MONTH" | "CALENDAR_WEEK" | "LIFETIME"),
+                                                    budget: ::Integer,
+                                                    auto_refresh: ("ENABLED" | "DISABLED")?
+                                                  },
+                                                ]
                                               }?
                                             }
                                           ) -> _UpdatePrivacyBudgetTemplateResponseSuccess

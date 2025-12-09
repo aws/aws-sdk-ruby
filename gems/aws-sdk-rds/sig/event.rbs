@@ -22,7 +22,7 @@ module Aws
       def date: () -> String
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Event.html#source_type-instance_method
-      def source_type: () -> ("db-instance" | "db-parameter-group" | "db-security-group" | "db-snapshot" | "db-cluster" | "db-cluster-snapshot" | "custom-engine-version" | "db-proxy" | "blue-green-deployment")
+      def source_type: () -> ("db-instance" | "db-parameter-group" | "db-security-group" | "db-snapshot" | "db-cluster" | "db-cluster-snapshot" | "custom-engine-version" | "db-proxy" | "blue-green-deployment" | "db-shard-group" | "zero-etl")
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Event.html#message-instance_method
       def message: () -> ::String

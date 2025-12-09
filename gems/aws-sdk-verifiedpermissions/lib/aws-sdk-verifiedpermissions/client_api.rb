@@ -47,6 +47,9 @@ module Aws::VerifiedPermissions
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanAttribute = Shapes::BooleanShape.new(name: 'BooleanAttribute')
     CedarJson = Shapes::StringShape.new(name: 'CedarJson')
+    CedarTagRecordAttribute = Shapes::MapShape.new(name: 'CedarTagRecordAttribute')
+    CedarTagSetAttribute = Shapes::ListShape.new(name: 'CedarTagSetAttribute')
+    CedarTagValue = Shapes::UnionShape.new(name: 'CedarTagValue')
     CedarVersion = Shapes::StringShape.new(name: 'CedarVersion')
     Claim = Shapes::StringShape.new(name: 'Claim')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
@@ -89,6 +92,7 @@ module Aws::VerifiedPermissions
     Duration = Shapes::StringShape.new(name: 'Duration')
     EntitiesDefinition = Shapes::UnionShape.new(name: 'EntitiesDefinition')
     EntityAttributes = Shapes::MapShape.new(name: 'EntityAttributes')
+    EntityCedarTags = Shapes::MapShape.new(name: 'EntityCedarTags')
     EntityId = Shapes::StringShape.new(name: 'EntityId')
     EntityIdPrefix = Shapes::StringShape.new(name: 'EntityIdPrefix')
     EntityIdentifier = Shapes::StructureShape.new(name: 'EntityIdentifier')
@@ -351,6 +355,35 @@ module Aws::VerifiedPermissions
 
     BatchIsAuthorizedWithTokenOutputList.member = Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenOutputItem)
 
+    CedarTagRecordAttribute.key = Shapes::ShapeRef.new(shape: String)
+    CedarTagRecordAttribute.value = Shapes::ShapeRef.new(shape: CedarTagValue)
+
+    CedarTagSetAttribute.member = Shapes::ShapeRef.new(shape: CedarTagValue)
+
+    CedarTagValue.add_member(:boolean, Shapes::ShapeRef.new(shape: BooleanAttribute, location_name: "boolean"))
+    CedarTagValue.add_member(:entity_identifier, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "entityIdentifier"))
+    CedarTagValue.add_member(:long, Shapes::ShapeRef.new(shape: LongAttribute, location_name: "long"))
+    CedarTagValue.add_member(:string, Shapes::ShapeRef.new(shape: StringAttribute, location_name: "string"))
+    CedarTagValue.add_member(:set, Shapes::ShapeRef.new(shape: CedarTagSetAttribute, location_name: "set"))
+    CedarTagValue.add_member(:record, Shapes::ShapeRef.new(shape: CedarTagRecordAttribute, location_name: "record"))
+    CedarTagValue.add_member(:ipaddr, Shapes::ShapeRef.new(shape: IpAddr, location_name: "ipaddr"))
+    CedarTagValue.add_member(:decimal, Shapes::ShapeRef.new(shape: Decimal, location_name: "decimal"))
+    CedarTagValue.add_member(:datetime, Shapes::ShapeRef.new(shape: DatetimeAttribute, location_name: "datetime"))
+    CedarTagValue.add_member(:duration, Shapes::ShapeRef.new(shape: Duration, location_name: "duration"))
+    CedarTagValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CedarTagValue.add_member_subclass(:boolean, Types::CedarTagValue::Boolean)
+    CedarTagValue.add_member_subclass(:entity_identifier, Types::CedarTagValue::EntityIdentifier)
+    CedarTagValue.add_member_subclass(:long, Types::CedarTagValue::Long)
+    CedarTagValue.add_member_subclass(:string, Types::CedarTagValue::String)
+    CedarTagValue.add_member_subclass(:set, Types::CedarTagValue::Set)
+    CedarTagValue.add_member_subclass(:record, Types::CedarTagValue::Record)
+    CedarTagValue.add_member_subclass(:ipaddr, Types::CedarTagValue::Ipaddr)
+    CedarTagValue.add_member_subclass(:decimal, Types::CedarTagValue::Decimal)
+    CedarTagValue.add_member_subclass(:datetime, Types::CedarTagValue::Datetime)
+    CedarTagValue.add_member_subclass(:duration, Types::CedarTagValue::Duration)
+    CedarTagValue.add_member_subclass(:unknown, Types::CedarTagValue::Unknown)
+    CedarTagValue.struct_class = Types::CedarTagValue
+
     ClientIds.member = Shapes::ShapeRef.new(shape: ClientId)
 
     CognitoGroupConfiguration.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, required: true, location_name: "groupEntityType"))
@@ -510,6 +543,9 @@ module Aws::VerifiedPermissions
     EntityAttributes.key = Shapes::ShapeRef.new(shape: String)
     EntityAttributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
+    EntityCedarTags.key = Shapes::ShapeRef.new(shape: String)
+    EntityCedarTags.value = Shapes::ShapeRef.new(shape: CedarTagValue)
+
     EntityIdentifier.add_member(:entity_type, Shapes::ShapeRef.new(shape: EntityType, required: true, location_name: "entityType"))
     EntityIdentifier.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "entityId"))
     EntityIdentifier.struct_class = Types::EntityIdentifier
@@ -517,6 +553,7 @@ module Aws::VerifiedPermissions
     EntityItem.add_member(:identifier, Shapes::ShapeRef.new(shape: EntityIdentifier, required: true, location_name: "identifier"))
     EntityItem.add_member(:attributes, Shapes::ShapeRef.new(shape: EntityAttributes, location_name: "attributes"))
     EntityItem.add_member(:parents, Shapes::ShapeRef.new(shape: ParentList, location_name: "parents"))
+    EntityItem.add_member(:tags, Shapes::ShapeRef.new(shape: EntityCedarTags, location_name: "tags"))
     EntityItem.struct_class = Types::EntityItem
 
     EntityList.member = Shapes::ShapeRef.new(shape: EntityItem)

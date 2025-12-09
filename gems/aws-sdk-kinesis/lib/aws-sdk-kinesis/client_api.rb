@@ -32,6 +32,8 @@ module Aws::Kinesis
     DeleteResourcePolicyInput = Shapes::StructureShape.new(name: 'DeleteResourcePolicyInput')
     DeleteStreamInput = Shapes::StructureShape.new(name: 'DeleteStreamInput')
     DeregisterStreamConsumerInput = Shapes::StructureShape.new(name: 'DeregisterStreamConsumerInput')
+    DescribeAccountSettingsInput = Shapes::StructureShape.new(name: 'DescribeAccountSettingsInput')
+    DescribeAccountSettingsOutput = Shapes::StructureShape.new(name: 'DescribeAccountSettingsOutput')
     DescribeLimitsInput = Shapes::StructureShape.new(name: 'DescribeLimitsInput')
     DescribeLimitsOutput = Shapes::StructureShape.new(name: 'DescribeLimitsOutput')
     DescribeStreamConsumerInput = Shapes::StructureShape.new(name: 'DescribeStreamConsumerInput')
@@ -85,10 +87,16 @@ module Aws::Kinesis
     ListTagsForStreamInput = Shapes::StructureShape.new(name: 'ListTagsForStreamInput')
     ListTagsForStreamInputLimit = Shapes::IntegerShape.new(name: 'ListTagsForStreamInputLimit')
     ListTagsForStreamOutput = Shapes::StructureShape.new(name: 'ListTagsForStreamOutput')
+    MaxRecordSizeInKiB = Shapes::IntegerShape.new(name: 'MaxRecordSizeInKiB')
     MergeShardsInput = Shapes::StructureShape.new(name: 'MergeShardsInput')
     MetricsName = Shapes::StringShape.new(name: 'MetricsName')
     MetricsNameList = Shapes::ListShape.new(name: 'MetricsNameList')
     MillisBehindLatest = Shapes::IntegerShape.new(name: 'MillisBehindLatest')
+    MinimumThroughputBillingCommitmentInput = Shapes::StructureShape.new(name: 'MinimumThroughputBillingCommitmentInput')
+    MinimumThroughputBillingCommitmentInputStatus = Shapes::StringShape.new(name: 'MinimumThroughputBillingCommitmentInputStatus')
+    MinimumThroughputBillingCommitmentOutput = Shapes::StructureShape.new(name: 'MinimumThroughputBillingCommitmentOutput')
+    MinimumThroughputBillingCommitmentOutputStatus = Shapes::StringShape.new(name: 'MinimumThroughputBillingCommitmentOutputStatus')
+    NaturalIntegerObject = Shapes::IntegerShape.new(name: 'NaturalIntegerObject')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OnDemandStreamCountLimitObject = Shapes::IntegerShape.new(name: 'OnDemandStreamCountLimitObject')
     OnDemandStreamCountObject = Shapes::IntegerShape.new(name: 'OnDemandStreamCountObject')
@@ -153,10 +161,16 @@ module Aws::Kinesis
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UpdateAccountSettingsInput = Shapes::StructureShape.new(name: 'UpdateAccountSettingsInput')
+    UpdateAccountSettingsOutput = Shapes::StructureShape.new(name: 'UpdateAccountSettingsOutput')
+    UpdateMaxRecordSizeInput = Shapes::StructureShape.new(name: 'UpdateMaxRecordSizeInput')
     UpdateShardCountInput = Shapes::StructureShape.new(name: 'UpdateShardCountInput')
     UpdateShardCountOutput = Shapes::StructureShape.new(name: 'UpdateShardCountOutput')
     UpdateStreamModeInput = Shapes::StructureShape.new(name: 'UpdateStreamModeInput')
+    UpdateStreamWarmThroughputInput = Shapes::StructureShape.new(name: 'UpdateStreamWarmThroughputInput')
+    UpdateStreamWarmThroughputOutput = Shapes::StructureShape.new(name: 'UpdateStreamWarmThroughputOutput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    WarmThroughputObject = Shapes::StructureShape.new(name: 'WarmThroughputObject')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -192,6 +206,8 @@ module Aws::Kinesis
     CreateStreamInput.add_member(:shard_count, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "ShardCount"))
     CreateStreamInput.add_member(:stream_mode_details, Shapes::ShapeRef.new(shape: StreamModeDetails, location_name: "StreamModeDetails"))
     CreateStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateStreamInput.add_member(:warm_throughput_mi_bps, Shapes::ShapeRef.new(shape: NaturalIntegerObject, location_name: "WarmThroughputMiBps"))
+    CreateStreamInput.add_member(:max_record_size_in_ki_b, Shapes::ShapeRef.new(shape: MaxRecordSizeInKiB, location_name: "MaxRecordSizeInKiB"))
     CreateStreamInput.struct_class = Types::CreateStreamInput
 
     DecreaseStreamRetentionPeriodInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
@@ -211,6 +227,11 @@ module Aws::Kinesis
     DeregisterStreamConsumerInput.add_member(:consumer_name, Shapes::ShapeRef.new(shape: ConsumerName, location_name: "ConsumerName"))
     DeregisterStreamConsumerInput.add_member(:consumer_arn, Shapes::ShapeRef.new(shape: ConsumerARN, location_name: "ConsumerARN", metadata: {"contextParam" => {"name" => "ConsumerARN"}}))
     DeregisterStreamConsumerInput.struct_class = Types::DeregisterStreamConsumerInput
+
+    DescribeAccountSettingsInput.struct_class = Types::DescribeAccountSettingsInput
+
+    DescribeAccountSettingsOutput.add_member(:minimum_throughput_billing_commitment, Shapes::ShapeRef.new(shape: MinimumThroughputBillingCommitmentOutput, location_name: "MinimumThroughputBillingCommitment"))
+    DescribeAccountSettingsOutput.struct_class = Types::DescribeAccountSettingsOutput
 
     DescribeLimitsInput.struct_class = Types::DescribeLimitsInput
 
@@ -393,6 +414,15 @@ module Aws::Kinesis
 
     MetricsNameList.member = Shapes::ShapeRef.new(shape: MetricsName)
 
+    MinimumThroughputBillingCommitmentInput.add_member(:status, Shapes::ShapeRef.new(shape: MinimumThroughputBillingCommitmentInputStatus, required: true, location_name: "Status"))
+    MinimumThroughputBillingCommitmentInput.struct_class = Types::MinimumThroughputBillingCommitmentInput
+
+    MinimumThroughputBillingCommitmentOutput.add_member(:status, Shapes::ShapeRef.new(shape: MinimumThroughputBillingCommitmentOutputStatus, required: true, location_name: "Status"))
+    MinimumThroughputBillingCommitmentOutput.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedAt"))
+    MinimumThroughputBillingCommitmentOutput.add_member(:ended_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndedAt"))
+    MinimumThroughputBillingCommitmentOutput.add_member(:earliest_allowed_end_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EarliestAllowedEndAt"))
+    MinimumThroughputBillingCommitmentOutput.struct_class = Types::MinimumThroughputBillingCommitmentOutput
+
     ProvisionedThroughputExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ProvisionedThroughputExceededException.struct_class = Types::ProvisionedThroughputExceededException
 
@@ -533,6 +563,8 @@ module Aws::Kinesis
     StreamDescriptionSummary.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyId, location_name: "KeyId"))
     StreamDescriptionSummary.add_member(:open_shard_count, Shapes::ShapeRef.new(shape: ShardCountObject, required: true, location_name: "OpenShardCount"))
     StreamDescriptionSummary.add_member(:consumer_count, Shapes::ShapeRef.new(shape: ConsumerCountObject, location_name: "ConsumerCount"))
+    StreamDescriptionSummary.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: WarmThroughputObject, location_name: "WarmThroughput"))
+    StreamDescriptionSummary.add_member(:max_record_size_in_ki_b, Shapes::ShapeRef.new(shape: MaxRecordSizeInKiB, location_name: "MaxRecordSizeInKiB"))
     StreamDescriptionSummary.struct_class = Types::StreamDescriptionSummary
 
     StreamModeDetails.add_member(:stream_mode, Shapes::ShapeRef.new(shape: StreamMode, required: true, location_name: "StreamMode"))
@@ -594,6 +626,16 @@ module Aws::Kinesis
     UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN", metadata: {"contextParam" => {"name" => "ResourceARN"}}))
     UntagResourceInput.struct_class = Types::UntagResourceInput
 
+    UpdateAccountSettingsInput.add_member(:minimum_throughput_billing_commitment, Shapes::ShapeRef.new(shape: MinimumThroughputBillingCommitmentInput, required: true, location_name: "MinimumThroughputBillingCommitment"))
+    UpdateAccountSettingsInput.struct_class = Types::UpdateAccountSettingsInput
+
+    UpdateAccountSettingsOutput.add_member(:minimum_throughput_billing_commitment, Shapes::ShapeRef.new(shape: MinimumThroughputBillingCommitmentOutput, location_name: "MinimumThroughputBillingCommitment"))
+    UpdateAccountSettingsOutput.struct_class = Types::UpdateAccountSettingsOutput
+
+    UpdateMaxRecordSizeInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
+    UpdateMaxRecordSizeInput.add_member(:max_record_size_in_ki_b, Shapes::ShapeRef.new(shape: MaxRecordSizeInKiB, required: true, location_name: "MaxRecordSizeInKiB"))
+    UpdateMaxRecordSizeInput.struct_class = Types::UpdateMaxRecordSizeInput
+
     UpdateShardCountInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     UpdateShardCountInput.add_member(:target_shard_count, Shapes::ShapeRef.new(shape: PositiveIntegerObject, required: true, location_name: "TargetShardCount"))
     UpdateShardCountInput.add_member(:scaling_type, Shapes::ShapeRef.new(shape: ScalingType, required: true, location_name: "ScalingType"))
@@ -608,10 +650,25 @@ module Aws::Kinesis
 
     UpdateStreamModeInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
     UpdateStreamModeInput.add_member(:stream_mode_details, Shapes::ShapeRef.new(shape: StreamModeDetails, required: true, location_name: "StreamModeDetails"))
+    UpdateStreamModeInput.add_member(:warm_throughput_mi_bps, Shapes::ShapeRef.new(shape: NaturalIntegerObject, location_name: "WarmThroughputMiBps"))
     UpdateStreamModeInput.struct_class = Types::UpdateStreamModeInput
+
+    UpdateStreamWarmThroughputInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
+    UpdateStreamWarmThroughputInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
+    UpdateStreamWarmThroughputInput.add_member(:warm_throughput_mi_bps, Shapes::ShapeRef.new(shape: NaturalIntegerObject, required: true, location_name: "WarmThroughputMiBps"))
+    UpdateStreamWarmThroughputInput.struct_class = Types::UpdateStreamWarmThroughputInput
+
+    UpdateStreamWarmThroughputOutput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN"))
+    UpdateStreamWarmThroughputOutput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
+    UpdateStreamWarmThroughputOutput.add_member(:warm_throughput, Shapes::ShapeRef.new(shape: WarmThroughputObject, location_name: "WarmThroughput"))
+    UpdateStreamWarmThroughputOutput.struct_class = Types::UpdateStreamWarmThroughputOutput
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
+
+    WarmThroughputObject.add_member(:target_mi_bps, Shapes::ShapeRef.new(shape: NaturalIntegerObject, location_name: "TargetMiBps"))
+    WarmThroughputObject.add_member(:current_mi_bps, Shapes::ShapeRef.new(shape: NaturalIntegerObject, location_name: "CurrentMiBps"))
+    WarmThroughputObject.struct_class = Types::WarmThroughputObject
 
 
     # @api private
@@ -657,6 +714,7 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:decrease_stream_retention_period, Seahorse::Model::Operation.new.tap do |o|
@@ -707,6 +765,15 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+      end)
+
+      api.add_operation(:describe_account_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccountSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccountSettingsInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccountSettingsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:describe_limits, Seahorse::Model::Operation.new.tap do |o|
@@ -1097,6 +1164,31 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:update_account_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAccountSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAccountSettingsInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAccountSettingsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:update_max_record_size, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMaxRecordSize"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMaxRecordSizeInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:update_shard_count, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateShardCount"
         o.http_method = "POST"
@@ -1121,6 +1213,21 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_stream_warm_throughput, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateStreamWarmThroughput"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateStreamWarmThroughputInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateStreamWarmThroughputOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
     end
 

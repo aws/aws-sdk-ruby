@@ -13,7 +13,7 @@ require 'aws-sigv4'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:bedrockagentcore)
 
-# This module provides support for Amazon Bedrock AgentCore Data Plane Fronting Layer. This module is available in the
+# This module provides support for Amazon Bedrock AgentCore. This module is available in the
 # `aws-sdk-bedrockagentcore` gem.
 #
 # # Client
@@ -23,19 +23,19 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:bedrockagentcore)
 # structure.
 #
 #     bedrock_agent_core = Aws::BedrockAgentCore::Client.new
-#     resp = bedrock_agent_core.create_event(params)
+#     resp = bedrock_agent_core.batch_create_memory_records(params)
 #
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Bedrock AgentCore Data Plane Fronting Layer are defined in the
+# Errors returned from Amazon Bedrock AgentCore are defined in the
 # {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::BedrockAgentCore::Errors::ServiceError
-#       # rescues all Amazon Bedrock AgentCore Data Plane Fronting Layer API errors
+#       # rescues all Amazon Bedrock AgentCore API errors
 #     end
 #
 # See {Errors} for more information.
@@ -56,7 +56,7 @@ module Aws::BedrockAgentCore
   autoload :Endpoints, 'aws-sdk-bedrockagentcore/endpoints'
   autoload :EventStreams, 'aws-sdk-bedrockagentcore/event_streams'
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.13.0'
 
 end
 

@@ -409,6 +409,17 @@ module Aws
                                                                    {
                                                                      data_lake_principal_identifier: ::String?
                                                                    },
+                                                                 ],
+                                                                 ?service_integrations: Array[
+                                                                   {
+                                                                     redshift: Array[
+                                                                       {
+                                                                         redshift_connect: {
+                                                                           authorization: ("ENABLED" | "DISABLED")
+                                                                         }?
+                                                                       },
+                                                                     ]?
+                                                                   },
                                                                  ]
                                                                ) -> _CreateLakeFormationIdentityCenterConfigurationResponseSuccess
                                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLakeFormationIdentityCenterConfigurationResponseSuccess
@@ -626,6 +637,7 @@ module Aws
         def application_arn: () -> ::String
         def external_filtering: () -> Types::ExternalFilteringConfiguration
         def share_recipients: () -> ::Array[Types::DataLakePrincipal]
+        def service_integrations: () -> ::Array[Types::ServiceIntegrationUnion]
         def resource_share: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#describe_lake_formation_identity_center_configuration-instance_method
@@ -1562,6 +1574,17 @@ module Aws
                                                                  ?share_recipients: Array[
                                                                    {
                                                                      data_lake_principal_identifier: ::String?
+                                                                   },
+                                                                 ],
+                                                                 ?service_integrations: Array[
+                                                                   {
+                                                                     redshift: Array[
+                                                                       {
+                                                                         redshift_connect: {
+                                                                           authorization: ("ENABLED" | "DISABLED")
+                                                                         }?
+                                                                       },
+                                                                     ]?
                                                                    },
                                                                  ],
                                                                  ?application_status: ("ENABLED" | "DISABLED"),

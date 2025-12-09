@@ -402,6 +402,8 @@ module Aws::BCMPricingCalculator
       attr_accessor created_at: ::Time
       attr_accessor expires_at: ::Time
       attr_accessor failure_message: ::String
+      attr_accessor group_sharing_preference: ("OPEN" | "PRIORITIZED" | "RESTRICTED")
+      attr_accessor cost_category_group_sharing_preference_arn: ::String
       SENSITIVE: []
     end
 
@@ -455,6 +457,9 @@ module Aws::BCMPricingCalculator
       attr_accessor cost_summary: Types::BillEstimateCostSummary
       attr_accessor created_at: ::Time
       attr_accessor expires_at: ::Time
+      attr_accessor group_sharing_preference: ("OPEN" | "PRIORITIZED" | "RESTRICTED")
+      attr_accessor cost_category_group_sharing_preference_arn: ::String
+      attr_accessor cost_category_group_sharing_preference_effective_date: ::Time
       SENSITIVE: []
     end
 
@@ -462,6 +467,8 @@ module Aws::BCMPricingCalculator
       attr_accessor name: ::String
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor group_sharing_preference: ("OPEN" | "PRIORITIZED" | "RESTRICTED")
+      attr_accessor cost_category_group_sharing_preference_arn: ::String
       SENSITIVE: []
     end
 
@@ -473,6 +480,8 @@ module Aws::BCMPricingCalculator
       attr_accessor created_at: ::Time
       attr_accessor expires_at: ::Time
       attr_accessor failure_message: ::String
+      attr_accessor group_sharing_preference: ("OPEN" | "PRIORITIZED" | "RESTRICTED")
+      attr_accessor cost_category_group_sharing_preference_arn: ::String
       SENSITIVE: []
     end
 
@@ -564,6 +573,9 @@ module Aws::BCMPricingCalculator
       attr_accessor cost_summary: Types::BillEstimateCostSummary
       attr_accessor created_at: ::Time
       attr_accessor expires_at: ::Time
+      attr_accessor group_sharing_preference: ("OPEN" | "PRIORITIZED" | "RESTRICTED")
+      attr_accessor cost_category_group_sharing_preference_arn: ::String
+      attr_accessor cost_category_group_sharing_preference_effective_date: ::Time
       SENSITIVE: []
     end
 
@@ -580,6 +592,8 @@ module Aws::BCMPricingCalculator
       attr_accessor created_at: ::Time
       attr_accessor expires_at: ::Time
       attr_accessor failure_message: ::String
+      attr_accessor group_sharing_preference: ("OPEN" | "PRIORITIZED" | "RESTRICTED")
+      attr_accessor cost_category_group_sharing_preference_arn: ::String
       SENSITIVE: []
     end
 
@@ -740,7 +754,7 @@ module Aws::BCMPricingCalculator
     end
 
     class ListBillScenariosFilter
-      attr_accessor name: ("STATUS" | "NAME")
+      attr_accessor name: ("STATUS" | "NAME" | "GROUP_SHARING_PREFERENCE" | "COST_CATEGORY_ARN")
       attr_accessor values: ::Array[::String]
       attr_accessor match_option: ("EQUALS" | "STARTS_WITH" | "CONTAINS")
       SENSITIVE: []
@@ -882,6 +896,9 @@ module Aws::BCMPricingCalculator
       attr_accessor cost_summary: Types::BillEstimateCostSummary
       attr_accessor created_at: ::Time
       attr_accessor expires_at: ::Time
+      attr_accessor group_sharing_preference: ("OPEN" | "PRIORITIZED" | "RESTRICTED")
+      attr_accessor cost_category_group_sharing_preference_arn: ::String
+      attr_accessor cost_category_group_sharing_preference_effective_date: ::Time
       SENSITIVE: []
     end
 
@@ -889,6 +906,8 @@ module Aws::BCMPricingCalculator
       attr_accessor identifier: ::String
       attr_accessor name: ::String
       attr_accessor expires_at: ::Time
+      attr_accessor group_sharing_preference: ("OPEN" | "PRIORITIZED" | "RESTRICTED")
+      attr_accessor cost_category_group_sharing_preference_arn: ::String
       SENSITIVE: []
     end
 
@@ -900,6 +919,8 @@ module Aws::BCMPricingCalculator
       attr_accessor created_at: ::Time
       attr_accessor expires_at: ::Time
       attr_accessor failure_message: ::String
+      attr_accessor group_sharing_preference: ("OPEN" | "PRIORITIZED" | "RESTRICTED")
+      attr_accessor cost_category_group_sharing_preference_arn: ::String
       SENSITIVE: []
     end
 

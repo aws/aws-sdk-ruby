@@ -30,6 +30,43 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class BatchCreateMemoryRecordsInput
+      attr_accessor memory_id: ::String
+      attr_accessor records: ::Array[Types::MemoryRecordCreateInput]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateMemoryRecordsOutput
+      attr_accessor successful_records: ::Array[Types::MemoryRecordOutput]
+      attr_accessor failed_records: ::Array[Types::MemoryRecordOutput]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteMemoryRecordsInput
+      attr_accessor memory_id: ::String
+      attr_accessor records: ::Array[Types::MemoryRecordDeleteInput]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteMemoryRecordsOutput
+      attr_accessor successful_records: ::Array[Types::MemoryRecordOutput]
+      attr_accessor failed_records: ::Array[Types::MemoryRecordOutput]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateMemoryRecordsInput
+      attr_accessor memory_id: ::String
+      attr_accessor records: ::Array[Types::MemoryRecordUpdateInput]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateMemoryRecordsOutput
+      attr_accessor successful_records: ::Array[Types::MemoryRecordOutput]
+      attr_accessor failed_records: ::Array[Types::MemoryRecordOutput]
+      SENSITIVE: []
+    end
+
     class Branch
       attr_accessor root_event_id: ::String
       attr_accessor name: ::String
@@ -76,6 +113,15 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class CompleteResourceTokenAuthRequest
+      attr_accessor user_identifier: Types::UserIdentifier
+      attr_accessor session_uri: ::String
+      SENSITIVE: []
+    end
+
+    class CompleteResourceTokenAuthResponse < Aws::EmptyStructure
+    end
+
     class ConflictException
       attr_accessor message: ::String
       attr_accessor event_type: untyped
@@ -106,6 +152,17 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class Context
+      attr_accessor span_context: Types::SpanContext
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SpanContext < Context
+      end
+      class Unknown < Context
+      end
+    end
+
     class Conversational
       attr_accessor content: Types::Content
       attr_accessor role: ("ASSISTANT" | "USER" | "TOOL" | "OTHER")
@@ -120,6 +177,7 @@ module Aws::BedrockAgentCore
       attr_accessor payload: ::Array[Types::PayloadType]
       attr_accessor branch: Types::Branch
       attr_accessor client_token: ::String
+      attr_accessor metadata: ::Hash[::String, Types::MetadataValue]
       SENSITIVE: []
     end
 
@@ -152,6 +210,62 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class DuplicateIdException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluateRequest
+      attr_accessor evaluator_id: ::String
+      attr_accessor evaluation_input: Types::EvaluationInput
+      attr_accessor evaluation_target: Types::EvaluationTarget
+      SENSITIVE: []
+    end
+
+    class EvaluateResponse
+      attr_accessor evaluation_results: ::Array[Types::EvaluationResultContent]
+      SENSITIVE: []
+    end
+
+    class EvaluationInput
+      attr_accessor session_spans: ::Array[untyped]
+      attr_accessor unknown: untyped
+      SENSITIVE: [:session_spans]
+
+      class SessionSpans < EvaluationInput
+      end
+      class Unknown < EvaluationInput
+      end
+    end
+
+    class EvaluationResultContent
+      attr_accessor evaluator_arn: ::String
+      attr_accessor evaluator_id: ::String
+      attr_accessor evaluator_name: ::String
+      attr_accessor explanation: ::String
+      attr_accessor context: Types::Context
+      attr_accessor value: ::Float
+      attr_accessor label: ::String
+      attr_accessor token_usage: Types::TokenUsage
+      attr_accessor error_message: ::String
+      attr_accessor error_code: ::String
+      SENSITIVE: [:explanation]
+    end
+
+    class EvaluationTarget
+      attr_accessor span_ids: ::Array[::String]
+      attr_accessor trace_ids: ::Array[::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SpanIds < EvaluationTarget
+      end
+      class TraceIds < EvaluationTarget
+      end
+      class Unknown < EvaluationTarget
+      end
+    end
+
     class Event
       attr_accessor memory_id: ::String
       attr_accessor actor_id: ::String
@@ -160,11 +274,69 @@ module Aws::BedrockAgentCore
       attr_accessor event_timestamp: ::Time
       attr_accessor payload: ::Array[Types::PayloadType]
       attr_accessor branch: Types::Branch
+      attr_accessor metadata: ::Hash[::String, Types::MetadataValue]
+      SENSITIVE: []
+    end
+
+    class EventMetadataFilterExpression
+      attr_accessor left: Types::LeftExpression
+      attr_accessor operator: ("EQUALS_TO" | "EXISTS" | "NOT_EXISTS")
+      attr_accessor right: Types::RightExpression
+      SENSITIVE: []
+    end
+
+    class ExtractionJob
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExtractionJobFilterInput
+      attr_accessor strategy_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor actor_id: ::String
+      attr_accessor status: ("FAILED")
+      SENSITIVE: []
+    end
+
+    class ExtractionJobMessages
+      attr_accessor messages_list: ::Array[Types::MessageMetadata]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MessagesList < ExtractionJobMessages
+      end
+      class Unknown < ExtractionJobMessages
+      end
+    end
+
+    class ExtractionJobMetadata
+      attr_accessor job_id: ::String
+      attr_accessor messages: Types::ExtractionJobMessages
+      attr_accessor status: ("FAILED")
+      attr_accessor failure_reason: ::String
+      attr_accessor strategy_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor actor_id: ::String
       SENSITIVE: []
     end
 
     class FilterInput
       attr_accessor branch: Types::BranchFilter
+      attr_accessor event_metadata: ::Array[Types::EventMetadataFilterExpression]
+      SENSITIVE: []
+    end
+
+    class GetAgentCardRequest
+      attr_accessor runtime_session_id: ::String
+      attr_accessor agent_runtime_arn: ::String
+      attr_accessor qualifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgentCardResponse
+      attr_accessor runtime_session_id: ::String
+      attr_accessor agent_card: untyped
+      attr_accessor status_code: ::Integer
       SENSITIVE: []
     end
 
@@ -244,16 +416,20 @@ module Aws::BedrockAgentCore
       attr_accessor resource_credential_provider_name: ::String
       attr_accessor scopes: ::Array[::String]
       attr_accessor oauth2_flow: ("USER_FEDERATION" | "M2M")
+      attr_accessor session_uri: ::String
       attr_accessor resource_oauth_2_return_url: ::String
       attr_accessor force_authentication: bool
       attr_accessor custom_parameters: ::Hash[::String, ::String]
-      SENSITIVE: [:workload_identity_token]
+      attr_accessor custom_state: ::String
+      SENSITIVE: [:workload_identity_token, :custom_state]
     end
 
     class GetResourceOauth2TokenResponse
       attr_accessor authorization_url: ::String
       attr_accessor access_token: ::String
-      SENSITIVE: [:access_token]
+      attr_accessor session_uri: ::String
+      attr_accessor session_status: ("IN_PROGRESS" | "FAILED")
+      SENSITIVE: [:authorization_url, :access_token]
     end
 
     class GetWorkloadAccessTokenForJWTRequest
@@ -319,6 +495,7 @@ module Aws::BedrockAgentCore
       attr_accessor baggage: ::String
       attr_accessor agent_runtime_arn: ::String
       attr_accessor qualifier: ::String
+      attr_accessor account_id: ::String
       attr_accessor payload: ::String
       SENSITIVE: [:payload]
     end
@@ -340,6 +517,8 @@ module Aws::BedrockAgentCore
     class InvokeCodeInterpreterRequest
       attr_accessor code_interpreter_identifier: ::String
       attr_accessor session_id: ::String
+      attr_accessor trace_id: ::String
+      attr_accessor trace_parent: ::String
       attr_accessor name: ("executeCode" | "executeCommand" | "readFiles" | "listFiles" | "removeFiles" | "writeFiles" | "startCommandExecution" | "getTask" | "stopTask")
       attr_accessor arguments: Types::ToolArguments
       SENSITIVE: []
@@ -349,6 +528,17 @@ module Aws::BedrockAgentCore
       attr_accessor session_id: ::String
       attr_accessor stream: Types::CodeInterpreterStreamOutput
       SENSITIVE: []
+    end
+
+    class LeftExpression
+      attr_accessor metadata_key: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MetadataKey < LeftExpression
+      end
+      class Unknown < LeftExpression
+      end
     end
 
     class ListActorsInput
@@ -409,6 +599,20 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class ListMemoryExtractionJobsInput
+      attr_accessor memory_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter: Types::ExtractionJobFilterInput
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMemoryExtractionJobsOutput
+      attr_accessor jobs: ::Array[Types::ExtractionJobMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListMemoryRecordsInput
       attr_accessor memory_id: ::String
       attr_accessor namespace: ::String
@@ -454,12 +658,43 @@ module Aws::BedrockAgentCore
       end
     end
 
+    class MemoryMetadataFilterExpression
+      attr_accessor left: Types::LeftExpression
+      attr_accessor operator: ("EQUALS_TO" | "EXISTS" | "NOT_EXISTS")
+      attr_accessor right: Types::RightExpression
+      SENSITIVE: []
+    end
+
     class MemoryRecord
       attr_accessor memory_record_id: ::String
       attr_accessor content: Types::MemoryContent
       attr_accessor memory_strategy_id: ::String
       attr_accessor namespaces: ::Array[::String]
       attr_accessor created_at: ::Time
+      attr_accessor metadata: ::Hash[::String, Types::MetadataValue]
+      SENSITIVE: []
+    end
+
+    class MemoryRecordCreateInput
+      attr_accessor request_identifier: ::String
+      attr_accessor namespaces: ::Array[::String]
+      attr_accessor content: Types::MemoryContent
+      attr_accessor timestamp: ::Time
+      attr_accessor memory_strategy_id: ::String
+      SENSITIVE: []
+    end
+
+    class MemoryRecordDeleteInput
+      attr_accessor memory_record_id: ::String
+      SENSITIVE: []
+    end
+
+    class MemoryRecordOutput
+      attr_accessor memory_record_id: ::String
+      attr_accessor status: ("SUCCEEDED" | "FAILED")
+      attr_accessor request_identifier: ::String
+      attr_accessor error_code: ::Integer
+      attr_accessor error_message: ::String
       SENSITIVE: []
     end
 
@@ -470,14 +705,41 @@ module Aws::BedrockAgentCore
       attr_accessor namespaces: ::Array[::String]
       attr_accessor created_at: ::Time
       attr_accessor score: ::Float
+      attr_accessor metadata: ::Hash[::String, Types::MetadataValue]
       SENSITIVE: []
+    end
+
+    class MemoryRecordUpdateInput
+      attr_accessor memory_record_id: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor content: Types::MemoryContent
+      attr_accessor namespaces: ::Array[::String]
+      attr_accessor memory_strategy_id: ::String
+      SENSITIVE: []
+    end
+
+    class MessageMetadata
+      attr_accessor event_id: ::String
+      attr_accessor message_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class MetadataValue
+      attr_accessor string_value: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class StringValue < MetadataValue
+      end
+      class Unknown < MetadataValue
+      end
     end
 
     class PayloadType
       attr_accessor conversational: Types::Conversational
       attr_accessor blob: untyped
       attr_accessor unknown: untyped
-      SENSITIVE: []
+      SENSITIVE: [:blob]
 
       class Conversational < PayloadType
       end
@@ -517,6 +779,17 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class RightExpression
+      attr_accessor metadata_value: Types::MetadataValue
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MetadataValue < RightExpression
+      end
+      class Unknown < RightExpression
+      end
+    end
+
     class RuntimeClientError
       attr_accessor message: ::String
       SENSITIVE: []
@@ -526,6 +799,7 @@ module Aws::BedrockAgentCore
       attr_accessor search_query: ::String
       attr_accessor memory_strategy_id: ::String
       attr_accessor top_k: ::Integer
+      attr_accessor metadata_filters: ::Array[Types::MemoryMetadataFilterExpression]
       SENSITIVE: [:search_query]
     end
 
@@ -547,7 +821,16 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class SpanContext
+      attr_accessor session_id: ::String
+      attr_accessor trace_id: ::String
+      attr_accessor span_id: ::String
+      SENSITIVE: []
+    end
+
     class StartBrowserSessionRequest
+      attr_accessor trace_id: ::String
+      attr_accessor trace_parent: ::String
       attr_accessor browser_identifier: ::String
       attr_accessor name: ::String
       attr_accessor session_timeout_seconds: ::Integer
@@ -565,6 +848,8 @@ module Aws::BedrockAgentCore
     end
 
     class StartCodeInterpreterSessionRequest
+      attr_accessor trace_id: ::String
+      attr_accessor trace_parent: ::String
       attr_accessor code_interpreter_identifier: ::String
       attr_accessor name: ::String
       attr_accessor session_timeout_seconds: ::Integer
@@ -579,7 +864,21 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class StartMemoryExtractionJobInput
+      attr_accessor memory_id: ::String
+      attr_accessor extraction_job: Types::ExtractionJob
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartMemoryExtractionJobOutput
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
     class StopBrowserSessionRequest
+      attr_accessor trace_id: ::String
+      attr_accessor trace_parent: ::String
       attr_accessor browser_identifier: ::String
       attr_accessor session_id: ::String
       attr_accessor client_token: ::String
@@ -594,6 +893,8 @@ module Aws::BedrockAgentCore
     end
 
     class StopCodeInterpreterSessionRequest
+      attr_accessor trace_id: ::String
+      attr_accessor trace_parent: ::String
       attr_accessor code_interpreter_identifier: ::String
       attr_accessor session_id: ::String
       attr_accessor client_token: ::String
@@ -604,6 +905,20 @@ module Aws::BedrockAgentCore
       attr_accessor code_interpreter_identifier: ::String
       attr_accessor session_id: ::String
       attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class StopRuntimeSessionRequest
+      attr_accessor runtime_session_id: ::String
+      attr_accessor agent_runtime_arn: ::String
+      attr_accessor qualifier: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StopRuntimeSessionResponse
+      attr_accessor runtime_session_id: ::String
+      attr_accessor status_code: ::Integer
       SENSITIVE: []
     end
 
@@ -626,6 +941,13 @@ module Aws::BedrockAgentCore
     class ThrottlingException
       attr_accessor message: ::String
       attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class TokenUsage
+      attr_accessor input_tokens: ::Integer
+      attr_accessor output_tokens: ::Integer
+      attr_accessor total_tokens: ::Integer
       SENSITIVE: []
     end
 
@@ -671,6 +993,20 @@ module Aws::BedrockAgentCore
       attr_accessor streams: Types::BrowserSessionStream
       attr_accessor updated_at: ::Time
       SENSITIVE: []
+    end
+
+    class UserIdentifier
+      attr_accessor user_token: ::String
+      attr_accessor user_id: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: [:user_token]
+
+      class UserToken < UserIdentifier
+      end
+      class UserId < UserIdentifier
+      end
+      class Unknown < UserIdentifier
+      end
     end
 
     class ValidationException

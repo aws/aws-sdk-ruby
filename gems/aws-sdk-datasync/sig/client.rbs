@@ -535,7 +535,7 @@ module Aws
         def status: () -> ("ONLINE" | "OFFLINE")
         def last_connection_time: () -> ::Time
         def creation_time: () -> ::Time
-        def endpoint_type: () -> ("PUBLIC" | "PRIVATE_LINK" | "FIPS")
+        def endpoint_type: () -> ("PUBLIC" | "PRIVATE_LINK" | "FIPS" | "FIPS_PRIVATE_LINK")
         def private_link_config: () -> Types::PrivateLinkConfig
         def platform: () -> Types::Platform
       end

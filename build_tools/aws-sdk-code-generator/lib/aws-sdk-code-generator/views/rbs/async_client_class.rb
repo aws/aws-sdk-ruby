@@ -50,8 +50,6 @@ module AwsSdkCodeGenerator
           @api['operations'].map do |name, body|
             next unless async_operation?(body)
 
-
-
             method_name = Underscore.underscore(name)
             indent = ' ' * (12 + method_name.length)
             input_shape_name = body.dig('input', 'shape')
@@ -132,7 +130,7 @@ module AwsSdkCodeGenerator
           return unless (h2 = @protocol_settings['h2'])
 
           case h2
-          when 'eventstream'
+          when 'eventstream', 'required'
             AwsSdkCodeGenerator::Helper.operation_eventstreaming?(operation, @api)
           when 'optional'
             AwsSdkCodeGenerator::Helper.operation_bidirectional_eventstreaming?(operation, @api)

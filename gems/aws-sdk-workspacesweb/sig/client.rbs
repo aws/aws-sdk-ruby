@@ -188,10 +188,15 @@ module Aws
                                      ],
                                      ?customer_managed_key: ::String,
                                      ?additional_encryption_context: Hash[::String, ::String],
-                                     browser_policy: ::String,
-                                     ?client_token: ::String
+                                     ?browser_policy: ::String,
+                                     ?client_token: ::String,
+                                     ?web_content_filtering_policy: {
+                                       blocked_categories: Array[("Cults" | "Gambling" | "Nudity" | "Pornography" | "SexEducation" | "Tasteless" | "Violence" | "DownloadSites" | "ImageSharing" | "PeerToPeer" | "StreamingMediaAndDownloads" | "GenerativeAI" | "CriminalActivity" | "Hacking" | "HateAndIntolerance" | "IllegalDrug" | "IllegalSoftware" | "SchoolCheating" | "SelfHarm" | "Weapons" | "Chat" | "Games" | "InstantMessaging" | "ProfessionalNetwork" | "SocialNetworking" | "WebBasedEmail" | "ParkedDomains")]?,
+                                       allowed_urls: Array[::String]?,
+                                       blocked_urls: Array[::String]?
+                                     }
                                    ) -> _CreateBrowserSettingsResponseSuccess
-                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBrowserSettingsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBrowserSettingsResponseSuccess
 
       interface _CreateDataProtectionSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataProtectionSettingsResponse]
@@ -333,7 +338,7 @@ module Aws
                                    event_filter: {
                                      all: {
                                      }?,
-                                     include: Array[("WebsiteInteract" | "FileDownloadFromSecureBrowserToRemoteDisk" | "FileTransferFromRemoteToLocalDisk" | "FileTransferFromLocalToRemoteDisk" | "FileUploadFromRemoteDiskToSecureBrowser" | "ContentPasteToWebsite" | "ContentTransferFromLocalToRemoteClipboard" | "ContentCopyFromWebsite" | "UrlLoad" | "TabOpen" | "TabClose" | "PrintJobSubmit" | "SessionConnect" | "SessionStart" | "SessionDisconnect" | "SessionEnd")]?
+                                     include: Array[("WebsiteInteract" | "FileDownloadFromSecureBrowserToRemoteDisk" | "FileTransferFromRemoteToLocalDisk" | "FileTransferFromLocalToRemoteDisk" | "FileUploadFromRemoteDiskToSecureBrowser" | "ContentPasteToWebsite" | "ContentTransferFromLocalToRemoteClipboard" | "ContentCopyFromWebsite" | "UrlLoad" | "TabOpen" | "TabClose" | "PrintJobSubmit" | "SessionConnect" | "SessionStart" | "SessionDisconnect" | "SessionEnd" | "UrlBlockByContentFilter")]?
                                    },
                                    log_configuration: {
                                      s3: {
@@ -941,7 +946,12 @@ module Aws
       def update_browser_settings: (
                                      browser_settings_arn: ::String,
                                      ?browser_policy: ::String,
-                                     ?client_token: ::String
+                                     ?client_token: ::String,
+                                     ?web_content_filtering_policy: {
+                                       blocked_categories: Array[("Cults" | "Gambling" | "Nudity" | "Pornography" | "SexEducation" | "Tasteless" | "Violence" | "DownloadSites" | "ImageSharing" | "PeerToPeer" | "StreamingMediaAndDownloads" | "GenerativeAI" | "CriminalActivity" | "Hacking" | "HateAndIntolerance" | "IllegalDrug" | "IllegalSoftware" | "SchoolCheating" | "SelfHarm" | "Weapons" | "Chat" | "Games" | "InstantMessaging" | "ProfessionalNetwork" | "SocialNetworking" | "WebBasedEmail" | "ParkedDomains")]?,
+                                       allowed_urls: Array[::String]?,
+                                       blocked_urls: Array[::String]?
+                                     }
                                    ) -> _UpdateBrowserSettingsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBrowserSettingsResponseSuccess
 
@@ -1052,7 +1062,7 @@ module Aws
                                    ?event_filter: {
                                      all: {
                                      }?,
-                                     include: Array[("WebsiteInteract" | "FileDownloadFromSecureBrowserToRemoteDisk" | "FileTransferFromRemoteToLocalDisk" | "FileTransferFromLocalToRemoteDisk" | "FileUploadFromRemoteDiskToSecureBrowser" | "ContentPasteToWebsite" | "ContentTransferFromLocalToRemoteClipboard" | "ContentCopyFromWebsite" | "UrlLoad" | "TabOpen" | "TabClose" | "PrintJobSubmit" | "SessionConnect" | "SessionStart" | "SessionDisconnect" | "SessionEnd")]?
+                                     include: Array[("WebsiteInteract" | "FileDownloadFromSecureBrowserToRemoteDisk" | "FileTransferFromRemoteToLocalDisk" | "FileTransferFromLocalToRemoteDisk" | "FileUploadFromRemoteDiskToSecureBrowser" | "ContentPasteToWebsite" | "ContentTransferFromLocalToRemoteClipboard" | "ContentCopyFromWebsite" | "UrlLoad" | "TabOpen" | "TabClose" | "PrintJobSubmit" | "SessionConnect" | "SessionStart" | "SessionDisconnect" | "SessionEnd" | "UrlBlockByContentFilter")]?
                                    },
                                    ?log_configuration: {
                                      s3: {

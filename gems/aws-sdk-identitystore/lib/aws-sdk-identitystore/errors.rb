@@ -59,6 +59,11 @@ module Aws::IdentityStore
       def request_id
         @data[:request_id]
       end
+
+      # @return [String]
+      def reason
+        @data[:reason]
+      end
     end
 
     class ConflictException < ServiceError
@@ -135,6 +140,11 @@ module Aws::IdentityStore
       end
 
       # @return [String]
+      def reason
+        @data[:reason]
+      end
+
+      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -189,6 +199,11 @@ module Aws::IdentityStore
         @data[:retry_after_seconds]
       end
 
+      # @return [String]
+      def reason
+        @data[:reason]
+      end
+
       def retryable?
         true
       end
@@ -215,6 +230,11 @@ module Aws::IdentityStore
       # @return [String]
       def request_id
         @data[:request_id]
+      end
+
+      # @return [String]
+      def reason
+        @data[:reason]
       end
     end
 

@@ -187,6 +187,17 @@ module Aws::PaymentCryptographyData
       end
     end
 
+    class DiffieHellmanDerivationData
+      attr_accessor shared_information: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SharedInformation < DiffieHellmanDerivationData
+      end
+      class Unknown < DiffieHellmanDerivationData
+      end
+    end
+
     class DiscoverDynamicCardVerificationCode
       attr_accessor card_expiry_date: ::String
       attr_accessor unpredictable_number: ::String
@@ -239,7 +250,7 @@ module Aws::PaymentCryptographyData
       attr_accessor key_derivation_function: ("NIST_SP800" | "ANSI_X963")
       attr_accessor key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512")
       attr_accessor shared_information: ::String
-      SENSITIVE: [:public_key_certificate]
+      SENSITIVE: []
     end
 
     class Emv2000Attributes
@@ -366,7 +377,7 @@ module Aws::PaymentCryptographyData
       attr_accessor generation_attributes: Types::PinGenerationAttributes
       attr_accessor pin_data_length: ::Integer
       attr_accessor primary_account_number: ::String
-      attr_accessor pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_3" | "ISO_FORMAT_4")
+      attr_accessor pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_1" | "ISO_FORMAT_3" | "ISO_FORMAT_4")
       attr_accessor encryption_wrapped_key: Types::WrappedKey
       SENSITIVE: [:primary_account_number]
     end
@@ -419,6 +430,29 @@ module Aws::PaymentCryptographyData
       SENSITIVE: [:decimalization_table, :pin_validation_data]
     end
 
+    class IncomingDiffieHellmanTr31KeyBlock
+      attr_accessor private_key_identifier: ::String
+      attr_accessor certificate_authority_public_key_identifier: ::String
+      attr_accessor public_key_certificate: ::String
+      attr_accessor derive_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224")
+      attr_accessor key_derivation_function: ("NIST_SP800" | "ANSI_X963")
+      attr_accessor key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512")
+      attr_accessor derivation_data: Types::DiffieHellmanDerivationData
+      attr_accessor wrapped_key_block: ::String
+      SENSITIVE: [:wrapped_key_block]
+    end
+
+    class IncomingKeyMaterial
+      attr_accessor diffie_hellman_tr_31_key_block: Types::IncomingDiffieHellmanTr31KeyBlock
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DiffieHellmanTr31KeyBlock < IncomingKeyMaterial
+      end
+      class Unknown < IncomingKeyMaterial
+      end
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -469,6 +503,22 @@ module Aws::PaymentCryptographyData
       attr_accessor pan_sequence_number: ::String
       attr_accessor application_cryptogram: ::String
       SENSITIVE: [:primary_account_number, :application_cryptogram]
+    end
+
+    class OutgoingKeyMaterial
+      attr_accessor tr_31_key_block: Types::OutgoingTr31KeyBlock
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Tr31KeyBlock < OutgoingKeyMaterial
+      end
+      class Unknown < OutgoingKeyMaterial
+      end
+    end
+
+    class OutgoingTr31KeyBlock
+      attr_accessor wrapping_key_identifier: ::String
+      SENSITIVE: []
     end
 
     class PinData
@@ -645,6 +695,18 @@ module Aws::PaymentCryptographyData
       SENSITIVE: []
     end
 
+    class TranslateKeyMaterialInput
+      attr_accessor incoming_key_material: Types::IncomingKeyMaterial
+      attr_accessor outgoing_key_material: Types::OutgoingKeyMaterial
+      attr_accessor key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")
+      SENSITIVE: []
+    end
+
+    class TranslateKeyMaterialOutput
+      attr_accessor wrapped_key: Types::WrappedWorkingKey
+      SENSITIVE: []
+    end
+
     class TranslatePinDataInput
       attr_accessor incoming_key_identifier: ::String
       attr_accessor outgoing_key_identifier: ::String
@@ -763,7 +825,7 @@ module Aws::PaymentCryptographyData
       attr_accessor verification_attributes: Types::PinVerificationAttributes
       attr_accessor encrypted_pin_block: ::String
       attr_accessor primary_account_number: ::String
-      attr_accessor pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_3" | "ISO_FORMAT_4")
+      attr_accessor pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_1" | "ISO_FORMAT_3" | "ISO_FORMAT_4")
       attr_accessor pin_data_length: ::Integer
       attr_accessor dukpt_attributes: Types::DukptAttributes
       attr_accessor encryption_wrapped_key: Types::WrappedKey
@@ -831,6 +893,13 @@ module Aws::PaymentCryptographyData
       end
       class Unknown < WrappedKeyMaterial
       end
+    end
+
+    class WrappedWorkingKey
+      attr_accessor wrapped_key_material: ::String
+      attr_accessor key_check_value: ::String
+      attr_accessor wrapped_key_material_format: ("KEY_CRYPTOGRAM" | "TR31_KEY_BLOCK" | "TR34_KEY_BLOCK")
+      SENSITIVE: [:wrapped_key_material]
     end
   end
 end

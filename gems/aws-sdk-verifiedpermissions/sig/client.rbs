@@ -115,7 +115,24 @@ module Aws
                                            entity_type: ::String,
                                            entity_id: ::String
                                          },
-                                       ]?
+                                       ]?,
+                                       tags: Hash[::String, {
+                                           boolean: bool?,
+                                           entity_identifier: {
+                                             entity_type: ::String,
+                                             entity_id: ::String
+                                           }?,
+                                           long: ::Integer?,
+                                           string: ::String?,
+                                           set: Array[
+                                             untyped,
+                                           ]?,
+                                           record: Hash[::String, untyped]?,
+                                           ipaddr: ::String?,
+                                           decimal: ::String?,
+                                           datetime: ::String?,
+                                           duration: ::String?
+                                         }]?
                                      },
                                    ]?,
                                    cedar_json: ::String?
@@ -166,7 +183,24 @@ module Aws
                                                       entity_type: ::String,
                                                       entity_id: ::String
                                                     },
-                                                  ]?
+                                                  ]?,
+                                                  tags: Hash[::String, {
+                                                      boolean: bool?,
+                                                      entity_identifier: {
+                                                        entity_type: ::String,
+                                                        entity_id: ::String
+                                                      }?,
+                                                      long: ::Integer?,
+                                                      string: ::String?,
+                                                      set: Array[
+                                                        untyped,
+                                                      ]?,
+                                                      record: Hash[::String, untyped]?,
+                                                      ipaddr: ::String?,
+                                                      decimal: ::String?,
+                                                      datetime: ::String?,
+                                                      duration: ::String?
+                                                    }]?
                                                 },
                                               ]?,
                                               cedar_json: ::String?
@@ -466,7 +500,24 @@ module Aws
                                      entity_type: ::String,
                                      entity_id: ::String
                                    },
-                                 ]?
+                                 ]?,
+                                 tags: Hash[::String, {
+                                     boolean: bool?,
+                                     entity_identifier: {
+                                       entity_type: ::String,
+                                       entity_id: ::String
+                                     }?,
+                                     long: ::Integer?,
+                                     string: ::String?,
+                                     set: Array[
+                                       untyped,
+                                     ]?,
+                                     record: Hash[::String, untyped]?,
+                                     ipaddr: ::String?,
+                                     decimal: ::String?,
+                                     datetime: ::String?,
+                                     duration: ::String?
+                                   }]?
                                },
                              ]?,
                              cedar_json: ::String?
@@ -511,7 +562,24 @@ module Aws
                                                 entity_type: ::String,
                                                 entity_id: ::String
                                               },
-                                            ]?
+                                            ]?,
+                                            tags: Hash[::String, {
+                                                boolean: bool?,
+                                                entity_identifier: {
+                                                  entity_type: ::String,
+                                                  entity_id: ::String
+                                                }?,
+                                                long: ::Integer?,
+                                                string: ::String?,
+                                                set: Array[
+                                                  untyped,
+                                                ]?,
+                                                record: Hash[::String, untyped]?,
+                                                ipaddr: ::String?,
+                                                decimal: ::String?,
+                                                datetime: ::String?,
+                                                duration: ::String?
+                                              }]?
                                           },
                                         ]?,
                                         cedar_json: ::String?

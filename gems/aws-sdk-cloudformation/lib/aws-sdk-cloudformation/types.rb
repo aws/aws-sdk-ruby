@@ -152,7 +152,7 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] type_name_alias
-    #   An alias to assign to the public extension, in this account and
+    #   An alias to assign to the public extension in this account and
     #   Region. If you specify an alias for the extension, CloudFormation
     #   treats the alias as the extension type name within this account and
     #   Region. You must use the alias to refer to the extension in your
@@ -219,7 +219,7 @@ module Aws::CloudFormation
     end
 
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the activated extension, in this
+    #   The Amazon Resource Name (ARN) of the activated extension in this
     #   account and Region.
     #   @return [String]
     #
@@ -236,6 +236,54 @@ module Aws::CloudFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/AlreadyExistsException AWS API Documentation
     #
     class AlreadyExistsException < Aws::EmptyStructure; end
+
+    # The `Annotation` data type.
+    #
+    # A `GetHookResult` call returns detailed information and remediation
+    # guidance from Control Tower, Guard, Lambda, or custom Hooks for a Hook
+    # invocation result.
+    #
+    # @!attribute [rw] annotation_name
+    #   An identifier for the evaluation logic that was used when invoking
+    #   the Hook. For Control Tower, this is the control ID. For Guard, this
+    #   is the rule ID. For Lambda and custom Hooks, this is a user-defined
+    #   identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Hook invocation from the downstream service.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The explanation for the specific status assigned to this Hook
+    #   invocation. For example, "Bucket does not block public access".
+    #   @return [String]
+    #
+    # @!attribute [rw] remediation_message
+    #   Suggests what to change if your Hook returns a `FAILED` status. For
+    #   example, "Block public access to the bucket".
+    #   @return [String]
+    #
+    # @!attribute [rw] remediation_link
+    #   A URL that you can access for additional remediation guidance.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity_level
+    #   The relative risk associated with any violations of this type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Annotation AWS API Documentation
+    #
+    class Annotation < Struct.new(
+      :annotation_name,
+      :status,
+      :status_message,
+      :remediation_message,
+      :remediation_link,
+      :severity_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Describes whether StackSets automatically deploys to Organizations
     # accounts that are added to a target organization or organizational
@@ -261,11 +309,19 @@ module Aws::CloudFormation
     #   resources are deleted. Specify only if `Enabled` is set to `True`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] depends_on
+    #   A list of StackSet ARNs that this StackSet depends on for
+    #   auto-deployment operations. When auto-deployment is triggered,
+    #   operations will be sequenced to ensure all dependencies complete
+    #   successfully before this StackSet's operation begins.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/AutoDeployment AWS API Documentation
     #
     class AutoDeployment < Struct.new(
       :enabled,
-      :retain_stacks_on_account_removal)
+      :retain_stacks_on_account_removal,
+      :depends_on)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -508,7 +564,7 @@ module Aws::CloudFormation
     # Specifies target details for an activated Hook.
     #
     # @!attribute [rw] target_type
-    #   The name of the type.
+    #   The Hook target type.
     #   @return [String]
     #
     # @!attribute [rw] resource_target_details
@@ -738,7 +794,9 @@ module Aws::CloudFormation
     #   CloudFormation generates the change set by comparing this template
     #   with the template of the stack that you specified.
     #
-    #   Conditional: You must specify only `TemplateBody` or `TemplateURL`.
+    #   Conditional: You must specify only one of the following parameters:
+    #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
+    #   `true`.
     #   @return [String]
     #
     # @!attribute [rw] template_url
@@ -749,12 +807,28 @@ module Aws::CloudFormation
     #   specified. The location for an Amazon S3 bucket must start with
     #   `https://`. URLs from S3 static websites are not supported.
     #
-    #   Conditional: You must specify only `TemplateBody` or `TemplateURL`.
+    #   Conditional: You must specify only one of the following parameters:
+    #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
+    #   `true`.
     #   @return [String]
     #
     # @!attribute [rw] use_previous_template
     #   Whether to reuse the template that's associated with the stack to
     #   create the change set.
+    #
+    #   When using templates with the `AWS::LanguageExtensions` transform,
+    #   provide the template instead of using `UsePreviousTemplate` to
+    #   ensure new parameter values and Systems Manager parameter updates
+    #   are applied correctly. For more information, see
+    #   [AWS::LanguageExtensions transform][1].
+    #
+    #   Conditional: You must specify only one of the following parameters:
+    #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
+    #   `true`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/transform-aws-languageextensions.html
     #   @return [Boolean]
     #
     # @!attribute [rw] parameters
@@ -770,7 +844,7 @@ module Aws::CloudFormation
     #   * `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`
     #
     #     Some stack templates might include resources that can affect
-    #     permissions in your Amazon Web Services account; for example, by
+    #     permissions in your Amazon Web Services account, for example, by
     #     creating new IAM users. For those stacks, you must explicitly
     #     acknowledge this by specifying one of these capabilities.
     #
@@ -856,16 +930,15 @@ module Aws::CloudFormation
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_types
-    #   The template resource types that you have permissions to work with
-    #   if you execute this change set, such as `AWS::EC2::Instance`,
-    #   `AWS::EC2::*`, or `Custom::MyCustomInstance`.
+    #   Specifies which resource types you can work with, such as
+    #   `AWS::EC2::Instance` or `Custom::MyCustomInstance`.
     #
     #   If the list of resource types doesn't include a resource type that
     #   you're updating, the stack update fails. By default, CloudFormation
     #   grants permissions to all resource types. IAM uses this parameter
     #   for condition keys in IAM policies for CloudFormation. For more
-    #   information, see [Control access with Identity and Access
-    #   Management][1] in the *CloudFormation User Guide*.
+    #   information, see [Control CloudFormation access with Identity and
+    #   Access Management][1] in the *CloudFormation User Guide*.
     #
     #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
     #   specified.
@@ -1006,6 +1079,25 @@ module Aws::CloudFormation
     #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-name.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] deployment_mode
+    #   Determines how CloudFormation handles configuration drift during
+    #   deployment.
+    #
+    #   * `REVERT_DRIFT` – Creates a drift-aware change set that brings
+    #     actual resource states in line with template definitions. Provides
+    #     a three-way comparison between actual state, previous deployment
+    #     state, and desired state.
+    #
+    #   ^
+    #
+    #   For more information, see [Using drift-aware change sets][1] in the
+    #   *CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/drift-aware-change-sets.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSetInput AWS API Documentation
     #
     class CreateChangeSetInput < Struct.new(
@@ -1027,7 +1119,8 @@ module Aws::CloudFormation
       :resources_to_import,
       :include_nested_stacks,
       :on_stack_failure,
-      :import_existing_resources)
+      :import_existing_resources,
+      :deployment_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1260,22 +1353,15 @@ module Aws::CloudFormation
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_types
-    #   The template resource types that you have permissions to work with
-    #   for this create stack action, such as `AWS::EC2::Instance`,
-    #   `AWS::EC2::*`, or `Custom::MyCustomInstance`. Use the following
-    #   syntax to describe template resource types: `AWS::*` (for all Amazon
-    #   Web Services resources), `Custom::*` (for all custom resources),
-    #   `Custom::logical_ID ` (for a specific custom resource),
-    #   `AWS::service_name::*` (for all resources of a particular Amazon Web
-    #   Services service), and `AWS::service_name::resource_logical_ID `
-    #   (for a specific Amazon Web Services resource).
+    #   Specifies which resource types you can work with, such as
+    #   `AWS::EC2::Instance` or `Custom::MyCustomInstance`.
     #
     #   If the list of resource types doesn't include a resource that
     #   you're creating, the stack creation fails. By default,
     #   CloudFormation grants permissions to all resource types. IAM uses
     #   this parameter for CloudFormation-specific condition keys in IAM
-    #   policies. For more information, see [Control access with Identity
-    #   and Access Management][1].
+    #   policies. For more information, see [Control CloudFormation access
+    #   with Identity and Access Management][1].
     #
     #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
     #   specified.
@@ -1560,10 +1646,16 @@ module Aws::CloudFormation
     #   Unique identifier of the stack.
     #   @return [String]
     #
+    # @!attribute [rw] operation_id
+    #   A unique identifier for this stack operation that can be used to
+    #   track the operation's progress and events.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackOutput AWS API Documentation
     #
     class CreateStackOutput < Struct.new(
-      :stack_id)
+      :stack_id,
+      :operation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1906,7 +1998,7 @@ module Aws::CloudFormation
     class DeactivateOrganizationsAccessOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] type_name
-    #   The type name of the extension, in this account and Region. If you
+    #   The type name of the extension in this account and Region. If you
     #   specified a type name alias when enabling the extension, use the
     #   type name alias.
     #
@@ -1922,8 +2014,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) for the extension, in this account
-    #   and Region.
+    #   The Amazon Resource Name (ARN) for the extension in this account and
+    #   Region.
     #
     #   Conditional: You must specify either `Arn`, or `TypeName` and
     #   `Type`.
@@ -2327,8 +2419,8 @@ module Aws::CloudFormation
     # The input for the DescribeAccountLimits action.
     #
     # @!attribute [rw] next_token
-    #   A string that identifies the next page of limits that you want to
-    #   retrieve.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeAccountLimitsInput AWS API Documentation
@@ -2372,9 +2464,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   A string, provided by the `DescribeChangeSetHooks` response output,
-    #   that identifies the next page of information that you want to
-    #   retrieve.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] logical_resource_id
@@ -2406,7 +2497,7 @@ module Aws::CloudFormation
     #   @return [Array<Types::ChangeSetHook>]
     #
     # @!attribute [rw] status
-    #   Provides the status of the change set hook.
+    #   Provides the status of the change set Hook.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2448,8 +2539,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   A string (provided by the DescribeChangeSet response output) that
-    #   identifies the next page of information that you want to retrieve.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] include_property_values
@@ -2522,6 +2613,22 @@ module Aws::CloudFormation
     #   A description of the change set's status. For example, if your
     #   attempt to create a change set failed, CloudFormation shows the
     #   error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_drift_status
+    #   The drift status of the stack when the change set was created. Valid
+    #   values:
+    #
+    #   * `DRIFTED` – The stack has drifted from its last deployment.
+    #
+    #   * `IN_SYNC` – The stack is in sync with its last deployment.
+    #
+    #   * `NOT_CHECKED` – CloudFormation doesn’t currently return this
+    #     value.
+    #
+    #   * `UNKNOWN` – The drift status could not be determined.
+    #
+    #   Only present for drift-aware change sets.
     #   @return [String]
     #
     # @!attribute [rw] notification_arns
@@ -2608,6 +2715,11 @@ module Aws::CloudFormation
     #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] deployment_mode
+    #   The deployment mode specified when the change set was created. Valid
+    #   value is `REVERT_DRIFT`. Only present for drift-aware change sets.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSetOutput AWS API Documentation
     #
     class DescribeChangeSetOutput < Struct.new(
@@ -2621,6 +2733,7 @@ module Aws::CloudFormation
       :execution_status,
       :status,
       :status_reason,
+      :stack_drift_status,
       :notification_arns,
       :rollback_configuration,
       :capabilities,
@@ -2631,7 +2744,64 @@ module Aws::CloudFormation
       :parent_change_set_id,
       :root_change_set_id,
       :on_stack_failure,
-      :import_existing_resources)
+      :import_existing_resources,
+      :deployment_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_name
+    #   The name or unique stack ID for which you want to retrieve events.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_set_name
+    #   The name or Amazon Resource Name (ARN) of the change set for which
+    #   you want to retrieve events.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_id
+    #   The unique identifier of the operation for which you want to
+    #   retrieve events.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters to apply when retrieving events.
+    #   @return [Types::EventFilter]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeEventsInput AWS API Documentation
+    #
+    class DescribeEventsInput < Struct.new(
+      :stack_name,
+      :change_set_name,
+      :operation_id,
+      :filters,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_events
+    #   A list of operation events that match the specified criteria.
+    #   @return [Array<Types::OperationEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call `DescribeEvents` again and assign that token to the request
+    #   object's `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeEventsOutput AWS API Documentation
+    #
+    class DescribeEventsOutput < Struct.new(
+      :operation_events,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3035,8 +3205,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   A string that identifies the next page of events that you want to
-    #   retrieve.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackEventsInput AWS API Documentation
@@ -3212,8 +3382,8 @@ module Aws::CloudFormation
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   A string that identifies the next page of stack resource drift
-    #   results.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -3499,8 +3669,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   A string that identifies the next page of stacks that you want to
-    #   retrieve.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStacksInput AWS API Documentation
@@ -3681,13 +3851,14 @@ module Aws::CloudFormation
     # @!attribute [rw] schema
     #   The schema that defines the extension.
     #
-    #   For more information about extension schemas, see [Resource type
-    #   schema][1] in the *CloudFormation Command Line Interface (CLI) User
-    #   Guide*.
+    #   For more information, see [Resource type schema][1] in the
+    #   *CloudFormation Command Line Interface (CLI) User Guide* and the
+    #   [CloudFormation Hooks User Guide][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html
+    #   [2]: https://docs.aws.amazon.com/cloudformation-cli/latest/hooks-userguide/what-is-cloudformation-hooks.html
     #   @return [String]
     #
     # @!attribute [rw] provisioning_type
@@ -3817,14 +3988,11 @@ module Aws::CloudFormation
     #   extension in this account and Region.
     #
     #   To set the configuration data for an extension, use
-    #   [SetTypeConfiguration][1]. For more information, see [Edit
-    #   configuration data for extensions in your account][2] in the
-    #   *CloudFormation User Guide*.
+    #   [SetTypeConfiguration][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html
     #   @return [String]
     #
     # @!attribute [rw] publisher_id
@@ -4164,6 +4332,21 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # Event filter allows you to focus on specific events in an operation.
+    #
+    # @!attribute [rw] failed_events
+    #   When set to true, only returns failed events within the operation.
+    #   This helps quickly identify root causes for a failed operation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/EventFilter AWS API Documentation
+    #
+    class EventFilter < Struct.new(
+      :failed_events)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input for the ExecuteChangeSet action.
     #
     # @!attribute [rw] change_set_name
@@ -4349,6 +4532,114 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # @!attribute [rw] hook_result_id
+    #   The unique identifier (ID) of the Hook invocation result that you
+    #   want details about. You can get the ID from the [ListHookResults][1]
+    #   operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListHookResults.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetHookResultInput AWS API Documentation
+    #
+    class GetHookResultInput < Struct.new(
+      :hook_result_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hook_result_id
+    #   The unique identifier of the Hook result.
+    #   @return [String]
+    #
+    # @!attribute [rw] invocation_point
+    #   The specific point in the provisioning process where the Hook is
+    #   invoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_mode
+    #   The failure mode of the invocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the Hook that was invoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] original_type_name
+    #   The original public type name of the Hook when an alias is used.
+    #
+    #   For example, if you activate `AWS::Hooks::GuardHook` with alias
+    #   `MyCompany::Custom::GuardHook`, then `TypeName` will be
+    #   `MyCompany::Custom::GuardHook` and `OriginalTypeName` will be
+    #   `AWS::Hooks::GuardHook`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_version_id
+    #   The version identifier of the Hook that was invoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_configuration_version_id
+    #   The version identifier of the Hook configuration data that was used
+    #   during invocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_arn
+    #   The Amazon Resource Name (ARN) of the Hook.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Hook invocation. The following statuses are
+    #   possible:
+    #
+    #   * `HOOK_IN_PROGRESS`: The Hook is currently running.
+    #
+    #   * `HOOK_COMPLETE_SUCCEEDED`: The Hook completed successfully.
+    #
+    #   * `HOOK_COMPLETE_FAILED`: The Hook completed but failed validation.
+    #
+    #   * `HOOK_FAILED`: The Hook encountered an error during execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] hook_status_reason
+    #   A message that provides additional details about the Hook invocation
+    #   status.
+    #   @return [String]
+    #
+    # @!attribute [rw] invoked_at
+    #   The timestamp when the Hook was invoked.
+    #   @return [Time]
+    #
+    # @!attribute [rw] target
+    #   Information about the target of the Hook invocation.
+    #   @return [Types::HookTarget]
+    #
+    # @!attribute [rw] annotations
+    #   A list of objects with additional information and guidance that can
+    #   help you resolve a failed Hook invocation.
+    #   @return [Array<Types::Annotation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetHookResultOutput AWS API Documentation
+    #
+    class GetHookResultOutput < Struct.new(
+      :hook_result_id,
+      :invocation_point,
+      :failure_mode,
+      :type_name,
+      :original_type_name,
+      :type_version_id,
+      :type_configuration_version_id,
+      :type_arn,
+      :status,
+      :hook_status_reason,
+      :invoked_at,
+      :target,
+      :annotations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input for the GetStackPolicy action.
     #
     # @!attribute [rw] stack_name
@@ -4367,9 +4658,9 @@ module Aws::CloudFormation
     # The output for the GetStackPolicy action.
     #
     # @!attribute [rw] stack_policy_body
-    #   Structure that contains the stack policy body. (For more
-    #   information, see [Prevent updates to stack resources][1] in the
-    #   *CloudFormation User Guide*.)
+    #   Structure that contains the stack policy body. For more information,
+    #   see [Prevent updates to stack resources][1] in the *CloudFormation
+    #   User Guide*.
     #
     #
     #
@@ -4614,8 +4905,7 @@ module Aws::CloudFormation
     #
     class HookResultNotFoundException < Aws::EmptyStructure; end
 
-    # Describes a Hook invocation, its status, and the reason for its
-    # status.
+    # A `ListHookResults` call returns a summary of a Hook invocation.
     #
     # @!attribute [rw] hook_result_id
     #   The unique identifier for this Hook invocation result.
@@ -4681,8 +4971,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] hook_execution_target
-    #   The ARN of the target stack or request token of the Cloud Control
-    #   API operation.
+    #   The Amazon Resource Name (ARN) of the target stack or request token
+    #   of the Cloud Control API operation.
     #
     #   Only shown in responses when the request does not specify
     #   `TargetType` and `TargetId` filters.
@@ -4704,6 +4994,35 @@ module Aws::CloudFormation
       :target_id,
       :type_arn,
       :hook_execution_target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `HookTarget` data type.
+    #
+    # @!attribute [rw] target_type
+    #   The target type.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type_name
+    #   The target name, for example, `AWS::S3::Bucket`.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_id
+    #   The unique identifier of the Hook invocation target.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action that invoked the Hook.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/HookTarget AWS API Documentation
+    #
+    class HookTarget < Struct.new(
+      :target_type,
+      :target_type_name,
+      :target_id,
+      :action)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4838,8 +5157,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   A string (provided by the ListChangeSets response output) that
-    #   identifies the next page of change sets that you want to retrieve.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListChangeSetsInput AWS API Documentation
@@ -4874,9 +5193,8 @@ module Aws::CloudFormation
     end
 
     # @!attribute [rw] next_token
-    #   A string (provided by the ListExports response output) that
-    #   identifies the next page of exported output values that you asked to
-    #   retrieve.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListExportsInput AWS API Documentation
@@ -4907,7 +5225,8 @@ module Aws::CloudFormation
     end
 
     # @!attribute [rw] next_token
-    #   A string that identifies the next page of resource scan results.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -4991,8 +5310,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   A string that identifies the next page of events that you want to
-    #   retrieve.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListHookResultsInput AWS API Documentation
@@ -5042,9 +5361,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   A string (provided by the ListImports response output) that
-    #   identifies the next page of stacks that are importing the specified
-    #   exported output value.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListImportsInput AWS API Documentation
@@ -5085,7 +5403,8 @@ module Aws::CloudFormation
     #   @return [Array<Types::ScannedResourceIdentifier>]
     #
     # @!attribute [rw] next_token
-    #   A string that identifies the next page of resource scan results.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5153,7 +5472,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   A string that identifies the next page of resource scan results.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5201,7 +5521,8 @@ module Aws::CloudFormation
     end
 
     # @!attribute [rw] next_token
-    #   A string that identifies the next page of resource scan results.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5253,12 +5574,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   If the previous paginated request didn't return all of the
-    #   remaining results, the response object's `NextToken` parameter
-    #   value is set to a token. To retrieve the next set of results, call
-    #   this action again and assign that token to the request object's
-    #   `NextToken` parameter. If there are no remaining results, the
-    #   previous response object's `NextToken` parameter is set to `null`.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5364,12 +5681,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   If the previous request didn't return all the remaining results,
-    #   the response's `NextToken` parameter value is set to a token. To
-    #   retrieve the next set of results, call `ListStackInstances` again
-    #   and assign that token to the request object's `NextToken`
-    #   parameter. If there are no remaining results, the previous response
-    #   object's `NextToken` parameter is set to `null`.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5457,11 +5770,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   If the request doesn't return all the remaining results,
-    #   `NextToken` is set to a token. To retrieve the next set of results,
-    #   call this action again and assign that token to the request
-    #   object's `NextToken` parameter. If the request returns all results,
-    #   `NextToken` is set to `null`.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5509,11 +5819,8 @@ module Aws::CloudFormation
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   If the request doesn't return all the remaining results,
-    #   `NextToken` is set to a token. To retrieve the next set of results,
-    #   call this action again and assign that token to the request
-    #   object's `NextToken` parameter. If the request returns all results,
-    #   `NextToken` is set to `null`.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5579,8 +5886,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   A string that identifies the next page of stack resources that you
-    #   want to retrieve.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackResourcesInput AWS API Documentation
@@ -5619,8 +5926,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   A string that identifies the next page of deployment targets that
-    #   you want to retrieve.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5699,13 +6006,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   If the previous request didn't return all the remaining results,
-    #   the response object's `NextToken` parameter value is set to a
-    #   token. To retrieve the next set of results, call
-    #   `ListStackSetOperationResults` again and assign that token to the
-    #   request object's `NextToken` parameter. If there are no remaining
-    #   results, the previous response object's `NextToken` parameter is
-    #   set to `null`.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5784,13 +6086,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   If the previous paginated request didn't return all of the
-    #   remaining results, the response object's `NextToken` parameter
-    #   value is set to a token. To retrieve the next set of results, call
-    #   `ListStackSetOperations` again and assign that token to the request
-    #   object's `NextToken` parameter. If there are no remaining results,
-    #   the previous response object's `NextToken` parameter is set to
-    #   `null`.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5857,12 +6154,8 @@ module Aws::CloudFormation
     end
 
     # @!attribute [rw] next_token
-    #   If the previous paginated request didn't return all the remaining
-    #   results, the response object's `NextToken` parameter value is set
-    #   to a token. To retrieve the next set of results, call
-    #   `ListStackSets` again and assign that token to the request object's
-    #   `NextToken` parameter. If there are no remaining results, the
-    #   previous response object's `NextToken` parameter is set to `null`.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5936,8 +6229,8 @@ module Aws::CloudFormation
     # The input for ListStacks action.
     #
     # @!attribute [rw] next_token
-    #   A string that identifies the next page of stacks that you want to
-    #   retrieve.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] stack_status_filter
@@ -6013,12 +6306,8 @@ module Aws::CloudFormation
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If the previous paginated request didn't return all the remaining
-    #   results, the response object's `NextToken` parameter value is set
-    #   to a token. To retrieve the next set of results, call this action
-    #   again and assign that token to the request object's `NextToken`
-    #   parameter. If there are no remaining results, the previous response
-    #   object's `NextToken` parameter is set to `null`.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypeRegistrationsInput AWS API Documentation
@@ -6089,12 +6378,8 @@ module Aws::CloudFormation
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If the previous paginated request didn't return all of the
-    #   remaining results, the response object's `NextToken` parameter
-    #   value is set to a token. To retrieve the next set of results, call
-    #   this action again and assign that token to the request object's
-    #   `NextToken` parameter. If there are no remaining results, the
-    #   previous response object's `NextToken` parameter is set to `null`.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] deprecated_status
@@ -6171,8 +6456,7 @@ module Aws::CloudFormation
     #       Region.
     #   * `PUBLIC`: Extensions that are publicly visible and available to be
     #     activated within any Amazon Web Services account. This includes
-    #     extensions from Amazon Web Services, in addition to third-party
-    #     publishers.
+    #     extensions from Amazon Web Services and third-party publishers.
     #
     #   The default is `PRIVATE`.
     #   @return [String]
@@ -6233,12 +6517,8 @@ module Aws::CloudFormation
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   If the previous paginated request didn't return all the remaining
-    #   results, the response object's `NextToken` parameter value is set
-    #   to a token. To retrieve the next set of results, call this action
-    #   again and assign that token to the request object's `NextToken`
-    #   parameter. If there are no remaining results, the previous response
-    #   object's `NextToken` parameter is set to `null`.
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypesInput AWS API Documentation
@@ -6273,6 +6553,31 @@ module Aws::CloudFormation
     class ListTypesOutput < Struct.new(
       :type_summaries,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains drift information for a resource property, including actual
+    # value, previous deployment value, and drift detection timestamp.
+    #
+    # @!attribute [rw] previous_value
+    #   The configuration value from the previous CloudFormation deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] actual_value
+    #   The current live configuration value of the resource property.
+    #   @return [String]
+    #
+    # @!attribute [rw] drift_detection_timestamp
+    #   The timestamp when drift was detected for this resource property.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/LiveResourceDrift AWS API Documentation
+    #
+    class LiveResourceDrift < Struct.new(
+      :previous_value,
+      :actual_value,
+      :drift_detection_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6384,6 +6689,171 @@ module Aws::CloudFormation
     #
     class NameAlreadyExistsException < Aws::EmptyStructure; end
 
+    # Contains information about a CloudFormation operation.
+    #
+    # @!attribute [rw] operation_type
+    #   The type of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_id
+    #   The unique identifier for the operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/OperationEntry AWS API Documentation
+    #
+    class OperationEntry < Struct.new(
+      :operation_type,
+      :operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains detailed information about an event that occurred during a
+    # CloudFormation operation.
+    #
+    # @!attribute [rw] event_id
+    #   A unique identifier for this event.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_id
+    #   The unique ID name of the instance of the stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_id
+    #   The unique identifier of the operation this event belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_type
+    #   The type of operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_status
+    #   The current status of the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type
+    #   The type of event.
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_resource_id
+    #   The logical name of the resource as specified in the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] physical_resource_id
+    #   The name or unique identifier that corresponds to a physical
+    #   instance ID of a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Type of resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   Time the status was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The time when the event started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time when the event ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] resource_status
+    #   Current status of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_status_reason
+    #   Success or failure message associated with the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_properties
+    #   The properties used to create the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for the request that initiated this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] hook_type
+    #   The type name of the Hook that was invoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] hook_status
+    #   The status of the Hook invocation.
+    #   @return [String]
+    #
+    # @!attribute [rw] hook_status_reason
+    #   Additional information about the Hook status.
+    #   @return [String]
+    #
+    # @!attribute [rw] hook_invocation_point
+    #   The point in the operation lifecycle when the Hook was invoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] hook_failure_mode
+    #   Specifies how Hook failures are handled.
+    #   @return [String]
+    #
+    # @!attribute [rw] detailed_status
+    #   Additional status information about the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_failure_mode
+    #   Specifies how validation failures are handled.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_name
+    #   The name of the validation that was performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_status
+    #   The status of the validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_status_reason
+    #   Additional information about the validation status.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_path
+    #   The path within the resource where the validation was applied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/OperationEvent AWS API Documentation
+    #
+    class OperationEvent < Struct.new(
+      :event_id,
+      :stack_id,
+      :operation_id,
+      :operation_type,
+      :operation_status,
+      :event_type,
+      :logical_resource_id,
+      :physical_resource_id,
+      :resource_type,
+      :timestamp,
+      :start_time,
+      :end_time,
+      :resource_status,
+      :resource_status_reason,
+      :resource_properties,
+      :client_request_token,
+      :hook_type,
+      :hook_status,
+      :hook_status_reason,
+      :hook_invocation_point,
+      :hook_failure_mode,
+      :detailed_status,
+      :validation_failure_mode,
+      :validation_name,
+      :validation_status,
+      :validation_status_reason,
+      :validation_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified operation ID already exists.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/OperationIdAlreadyExistsException AWS API Documentation
@@ -6433,7 +6903,7 @@ module Aws::CloudFormation
     #
     class OperationStatusCheckFailedException < Aws::EmptyStructure; end
 
-    # The Output data type.
+    # The `Output` data type.
     #
     # @!attribute [rw] output_key
     #   The key associated with the output.
@@ -6462,7 +6932,7 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # The Parameter data type.
+    # The `Parameter` data type.
     #
     # @!attribute [rw] parameter_key
     #   The key associated with the parameter. If you don't specify a key
@@ -6519,7 +6989,7 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # The ParameterDeclaration data type.
+    # The `ParameterDeclaration` data type.
     #
     # @!attribute [rw] parameter_key
     #   The name that's associated with the parameter.
@@ -7020,8 +7490,10 @@ module Aws::CloudFormation
     # @!attribute [rw] action
     #   The action that CloudFormation takes on the resource, such as `Add`
     #   (adds a new resource), `Modify` (changes a resource), `Remove`
-    #   (deletes a resource), `Import` (imports a resource), or `Dynamic`
-    #   (exact action for the resource can't be determined).
+    #   (deletes a resource), `Import` (imports a resource), `Dynamic`
+    #   (exact action for the resource can't be determined), or
+    #   `SyncWithActual` (resource will not be changed, only CloudFormation
+    #   metadata will change).
     #   @return [String]
     #
     # @!attribute [rw] logical_resource_id
@@ -7060,6 +7532,31 @@ module Aws::CloudFormation
     #   attribute's `Metadata`, `Properties`, or `Tags`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] resource_drift_status
+    #   The drift status of the resource. Valid values:
+    #
+    #   * `IN_SYNC` – The resource matches its template definition.
+    #
+    #   * `MODIFIED` – Resource properties were modified outside
+    #     CloudFormation.
+    #
+    #   * `DELETED` – The resource was deleted outside CloudFormation.
+    #
+    #   * `NOT_CHECKED` – CloudFormation doesn’t currently return this
+    #     value.
+    #
+    #   * `UNKNOWN` – Drift status could not be determined.
+    #
+    #   * `UNSUPPORTED` – Resource type does not support actual state
+    #     comparison.
+    #
+    #   Only present for drift-aware change sets.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_drift_ignored_attributes
+    #   List of resource attributes for which drift was ignored.
+    #   @return [Array<Types::ResourceDriftIgnoredAttribute>]
+    #
     # @!attribute [rw] details
     #   For the `Modify` action, a list of `ResourceChangeDetail` structures
     #   that describes the changes that CloudFormation will make to the
@@ -7086,6 +7583,11 @@ module Aws::CloudFormation
     #   after the change is executed.
     #   @return [String]
     #
+    # @!attribute [rw] previous_deployment_context
+    #   Information about the resource's state from the previous
+    #   CloudFormation deployment.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceChange AWS API Documentation
     #
     class ResourceChange < Struct.new(
@@ -7096,11 +7598,14 @@ module Aws::CloudFormation
       :resource_type,
       :replacement,
       :scope,
+      :resource_drift_status,
+      :resource_drift_ignored_attributes,
       :details,
       :change_set_id,
       :module_info,
       :before_context,
-      :after_context)
+      :after_context,
+      :previous_deployment_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7162,6 +7667,9 @@ module Aws::CloudFormation
     #     nested stack's template might have changed. Changes to a nested
     #     stack's template aren't visible to CloudFormation until you run
     #     an update on the parent stack.
+    #
+    #   * `NoModification` entities are changes made to the template that
+    #     matches the actual state of the resource.
     #   @return [String]
     #
     # @!attribute [rw] causing_entity
@@ -7300,6 +7808,32 @@ module Aws::CloudFormation
       :resource_status,
       :resource_status_reason,
       :warnings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `ResourceDriftIgnoredAttribute` data type.
+    #
+    # @!attribute [rw] path
+    #   Path of the resource attribute for which drift was ignored.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   Reason why drift was ignored for the attribute, can have 2 possible
+    #   values:
+    #
+    #   * `WRITE_ONLY_PROPERTY` - Property is not included in read response
+    #     for the resource’s live state.
+    #
+    #   * `MANAGED_BY_AWS` - Property is managed by an Amazon Web Services
+    #     service and is expected to be dynamically modified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceDriftIgnoredAttribute AWS API Documentation
+    #
+    class ResourceDriftIgnoredAttribute < Struct.new(
+      :path,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7507,6 +8041,33 @@ module Aws::CloudFormation
     #   can be truncated.
     #   @return [String]
     #
+    # @!attribute [rw] before_value_from
+    #   Indicates the source of the before value. Valid values:
+    #
+    #   * `ACTUAL_STATE` – The before value represents current actual state.
+    #
+    #   * `PREVIOUS_DEPLOYMENT_STATE` – The before value represents the
+    #     previous CloudFormation deployment state.
+    #
+    #   Only present for drift-aware change sets.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_value_from
+    #   Indicates the source of the after value. Valid value:
+    #
+    #   * `TEMPLATE` – The after value comes from the new template.
+    #
+    #   ^
+    #
+    #   Only present for drift-aware change sets.
+    #   @return [String]
+    #
+    # @!attribute [rw] drift
+    #   Detailed drift information for the resource property, including
+    #   actual values, previous deployment values, and drift detection
+    #   timestamps.
+    #   @return [Types::LiveResourceDrift]
+    #
     # @!attribute [rw] attribute_change_type
     #   The type of change to be made to the property if the change is
     #   executed.
@@ -7516,6 +8077,9 @@ module Aws::CloudFormation
     #   * `Remove` The item will be removed.
     #
     #   * `Modify` The item will be modified.
+    #
+    #   * `SyncWithActual` The drift status of this item will be reset but
+    #     the item will not be modified.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceTargetDefinition AWS API Documentation
@@ -7527,6 +8091,9 @@ module Aws::CloudFormation
       :path,
       :before_value,
       :after_value,
+      :before_value_from,
+      :after_value_from,
+      :drift,
       :attribute_change_type)
       SENSITIVE = []
       include Aws::Structure
@@ -7675,10 +8242,16 @@ module Aws::CloudFormation
     #   Unique identifier of the stack.
     #   @return [String]
     #
+    # @!attribute [rw] operation_id
+    #   A unique identifier for this rollback operation that can be used to
+    #   track the operation's progress and events.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackStackOutput AWS API Documentation
     #
     class RollbackStackOutput < Struct.new(
-      :stack_id)
+      :stack_id,
+      :operation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7864,8 +8437,8 @@ module Aws::CloudFormation
     end
 
     # @!attribute [rw] type_arn
-    #   The Amazon Resource Name (ARN) for the extension, in this account
-    #   and Region.
+    #   The Amazon Resource Name (ARN) for the extension in this account and
+    #   Region.
     #
     #   For public extensions, this will be the ARN assigned when you call
     #   the [ActivateType][1] API operation in this account and Region. For
@@ -7883,19 +8456,15 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   The configuration data for the extension, in this account and
-    #   Region.
+    #   The configuration data for the extension in this account and Region.
     #
-    #   The configuration data must be formatted as JSON, and validate
-    #   against the schema returned in the `ConfigurationSchema` response
-    #   element of [DescribeType][1]. For more information, see [Defining
-    #   the account-level configuration of an extension][2] in the
-    #   *CloudFormation Command Line Interface (CLI) User Guide*.
+    #   The configuration data must be formatted as JSON and validate
+    #   against the extension's schema returned in the `Schema` response
+    #   element of [DescribeType][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
-    #   [2]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration
     #   @return [String]
     #
     # @!attribute [rw] configuration_alias
@@ -7932,7 +8501,7 @@ module Aws::CloudFormation
     end
 
     # @!attribute [rw] configuration_arn
-    #   The Amazon Resource Name (ARN) for the configuration data, in this
+    #   The Amazon Resource Name (ARN) for the configuration data in this
     #   account and Region.
     #
     #   Conditional: You must specify `ConfigurationArn`, or `Type` and
@@ -8004,10 +8573,10 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] unique_id
     #   A unique ID of the signal. When you signal Amazon EC2 instances or
-    #   Auto Scaling groups, specify the instance ID that you are signaling
-    #   as the unique ID. If you send multiple signals to a single resource
-    #   (such as signaling a wait condition), each signal requires a
-    #   different unique ID.
+    #   Amazon EC2 Auto Scaling groups, specify the instance ID that you are
+    #   signaling as the unique ID. If you send multiple signals to a single
+    #   resource (such as signaling a wait condition), each signal requires
+    #   a different unique ID.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -8027,7 +8596,7 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # The Stack data type.
+    # The `Stack` data type.
     #
     # @!attribute [rw] stack_id
     #   Unique identifier of the stack.
@@ -8194,6 +8763,11 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-resource-configuration-complete.html
     #   @return [String]
     #
+    # @!attribute [rw] last_operations
+    #   Information about the most recent operations performed on this
+    #   stack.
+    #   @return [Array<Types::OperationEntry>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -8221,7 +8795,8 @@ module Aws::CloudFormation
       :drift_information,
       :retain_except_on_create,
       :deletion_mode,
-      :detailed_status)
+      :detailed_status,
+      :last_operations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8328,7 +8903,7 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # The StackEvent data type.
+    # The `StackEvent` data type.
     #
     # @!attribute [rw] stack_id
     #   The unique ID name of the instance of the stack.
@@ -8340,6 +8915,11 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] stack_name
     #   The name associated with a stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_id
+    #   The unique identifier of the operation that generated this stack
+    #   event.
     #   @return [String]
     #
     # @!attribute [rw] logical_resource_id
@@ -8454,6 +9034,7 @@ module Aws::CloudFormation
       :stack_id,
       :event_id,
       :stack_name,
+      :operation_id,
       :logical_resource_id,
       :physical_resource_id,
       :resource_type,
@@ -8999,7 +9580,7 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # The StackResource data type.
+    # The `StackResource` data type.
     #
     # @!attribute [rw] stack_name
     #   The name associated with the stack.
@@ -10306,7 +10887,7 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # The StackSummary Data Type
+    # The `StackSummary` Data Type
     #
     # @!attribute [rw] stack_id
     #   Unique stack identifier.
@@ -10379,6 +10960,11 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
     #   @return [Types::StackDriftInformationSummary]
     #
+    # @!attribute [rw] last_operations
+    #   Information about the most recent operations performed on this
+    #   stack.
+    #   @return [Array<Types::OperationEntry>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSummary AWS API Documentation
     #
     class StackSummary < Struct.new(
@@ -10392,7 +10978,8 @@ module Aws::CloudFormation
       :stack_status_reason,
       :parent_id,
       :root_id,
-      :drift_information)
+      :drift_information,
+      :last_operations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10490,14 +11077,14 @@ module Aws::CloudFormation
     # to store information about an CloudFormation stack.
     #
     # @!attribute [rw] key
-    #   *Required*. A string used to identify this tag. You can specify a
-    #   maximum of 128 characters for a tag key. Tags owned by Amazon Web
-    #   Services have the reserved prefix: `aws:`.
+    #   A string used to identify this tag. You can specify a maximum of 128
+    #   characters for a tag key. Tags owned by Amazon Web Services have the
+    #   reserved prefix: `aws:`.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   *Required*. A string that contains the value for this tag. You can
-    #   specify a maximum of 256 characters for a tag value.
+    #   A string that contains the value for this tag. You can specify a
+    #   maximum of 256 characters for a tag value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag AWS API Documentation
@@ -10554,7 +11141,7 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # The TemplateParameter data type.
+    # The `TemplateParameter` data type.
     #
     # @!attribute [rw] parameter_key
     #   The name associated with the parameter.
@@ -11275,9 +11862,19 @@ module Aws::CloudFormation
     #   Reuse the existing template that is associated with the stack that
     #   you are updating.
     #
+    #   When using templates with the `AWS::LanguageExtensions` transform,
+    #   provide the template instead of using `UsePreviousTemplate` to
+    #   ensure new parameter values and Systems Manager parameter updates
+    #   are applied correctly. For more information, see
+    #   [AWS::LanguageExtensions transform][1].
+    #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
     #   `true`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/transform-aws-languageextensions.html
     #   @return [Boolean]
     #
     # @!attribute [rw] stack_policy_during_update_body
@@ -11412,16 +12009,15 @@ module Aws::CloudFormation
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_types
-    #   The template resource types that you have permissions to work with
-    #   for this update stack action, such as `AWS::EC2::Instance`,
-    #   `AWS::EC2::*`, or `Custom::MyCustomInstance`.
+    #   Specifies which resource types you can work with, such as
+    #   `AWS::EC2::Instance` or `Custom::MyCustomInstance`.
     #
     #   If the list of resource types doesn't include a resource that
     #   you're updating, the stack update fails. By default, CloudFormation
     #   grants permissions to all resource types. IAM uses this parameter
     #   for CloudFormation-specific condition keys in IAM policies. For more
-    #   information, see [Control access with Identity and Access
-    #   Management][1].
+    #   information, see [Control CloudFormation access with Identity and
+    #   Access Management][1].
     #
     #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
     #   specified.
@@ -11710,10 +12306,16 @@ module Aws::CloudFormation
     #   Unique identifier of the stack.
     #   @return [String]
     #
+    # @!attribute [rw] operation_id
+    #   A unique identifier for this update operation that can be used to
+    #   track the operation's progress and events.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackOutput AWS API Documentation
     #
     class UpdateStackOutput < Struct.new(
-      :stack_id)
+      :stack_id,
+      :operation_id)
       SENSITIVE = []
       include Aws::Structure
     end

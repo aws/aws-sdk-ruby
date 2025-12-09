@@ -22,11 +22,18 @@ module Aws::IdentityStore
     #   fails.
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   Indicates the reason for an access denial when returned by KMS while
+    #   accessing a Customer Managed KMS key. For non-KMS access-denied
+    #   errors, this field is not included.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/AccessDeniedException AWS API Documentation
     #
     class AccessDeniedException < Struct.new(
       :message,
-      :request_id)
+      :request_id,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -154,14 +161,9 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] reason
-    #   This request cannot be completed for one of the following reasons:
-    #
-    #   * Performing the requested operation would violate an existing
-    #     uniqueness claim in the identity store. Resolve the conflict
-    #     before retrying this request.
-    #
-    #   * The requested resource was being concurrently modified by another
-    #     request.
+    #   Indicates the reason for a conflict error when the service is unable
+    #   to access a Customer Managed KMS key. For non-KMS permission errors,
+    #   this field is not included.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ConflictException AWS API Documentation
@@ -273,13 +275,15 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   An object containing the name of the user.
+    #   An object containing the name of the user. When used in IAM Identity
+    #   Center, this parameter is required.
     #   @return [Types::Name]
     #
     # @!attribute [rw] display_name
     #   A string containing the name of the user. This value is typically
     #   formatted for display when the user is referenced. For example,
-    #   "John Doe."
+    #   "John Doe." When used in IAM Identity Center, this parameter is
+    #   required.
     #   @return [String]
     #
     # @!attribute [rw] nick_name
@@ -328,6 +332,30 @@ module Aws::IdentityStore
     #   A string containing the time zone of the user.
     #   @return [String]
     #
+    # @!attribute [rw] photos
+    #   A list of photos associated with the user. You can add up to 3
+    #   photos per user. Each photo can include a value, type, display name,
+    #   and primary designation.
+    #   @return [Array<Types::Photo>]
+    #
+    # @!attribute [rw] website
+    #   The user's personal website or blog URL. This field allows users to
+    #   provide a link to their personal or professional website.
+    #   @return [String]
+    #
+    # @!attribute [rw] birthdate
+    #   The user's birthdate in YYYY-MM-DD format. This field supports
+    #   standard date format for storing personal information.
+    #   @return [String]
+    #
+    # @!attribute [rw] extensions
+    #   A map with additional attribute extensions for the user. Each map
+    #   key corresponds to an extension name, while map values represent
+    #   extension data in `Document` type (not supported by Java V1, Go V1
+    #   and older versions of the CLI). `aws:identitystore:enterprise` is
+    #   the only supported extension name.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/CreateUserRequest AWS API Documentation
     #
     class CreateUserRequest < Struct.new(
@@ -344,24 +372,28 @@ module Aws::IdentityStore
       :title,
       :preferred_language,
       :locale,
-      :timezone)
-      SENSITIVE = [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone]
+      :timezone,
+      :photos,
+      :website,
+      :birthdate,
+      :extensions)
+      SENSITIVE = [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone, :website, :birthdate]
       include Aws::Structure
     end
 
-    # @!attribute [rw] user_id
-    #   The identifier of the newly created user in the identity store.
-    #   @return [String]
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the newly created user in the identity store.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/CreateUserResponse AWS API Documentation
     #
     class CreateUserResponse < Struct.new(
-      :user_id,
-      :identity_store_id)
+      :identity_store_id,
+      :user_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -462,13 +494,35 @@ module Aws::IdentityStore
     #   An object containing the identifier of a group member.
     #   @return [Types::MemberId]
     #
+    # @!attribute [rw] created_at
+    #   The date and time the group membership was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the group membership was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created the group
+    #   membership.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_by
+    #   The identifier of the user or system that last updated the group
+    #   membership.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DescribeGroupMembershipResponse AWS API Documentation
     #
     class DescribeGroupMembershipResponse < Struct.new(
       :identity_store_id,
       :membership_id,
       :group_id,
-      :member_id)
+      :member_id,
+      :created_at,
+      :updated_at,
+      :created_by,
+      :updated_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -516,6 +570,22 @@ module Aws::IdentityStore
     #   A string containing a description of the group.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   The date and time the group was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the group was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_by
+    #   The identifier of the user or system that last updated the group.
+    #   @return [String]
+    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store.
     #   @return [String]
@@ -527,6 +597,10 @@ module Aws::IdentityStore
       :display_name,
       :external_ids,
       :description,
+      :created_at,
+      :updated_at,
+      :created_by,
+      :updated_by,
       :identity_store_id)
       SENSITIVE = [:display_name, :description]
       include Aws::Structure
@@ -544,25 +618,36 @@ module Aws::IdentityStore
     #   The identifier for a user in the identity store.
     #   @return [String]
     #
+    # @!attribute [rw] extensions
+    #   A collection of extension names indicating what extensions the
+    #   service should retrieve alongside other user attributes.
+    #   `aws:identitystore:enterprise` is the only supported extension name.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DescribeUserRequest AWS API Documentation
     #
     class DescribeUserRequest < Struct.new(
       :identity_store_id,
-      :user_id)
+      :user_id,
+      :extensions)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier for a user in the identity store.
+    #   @return [String]
+    #
     # @!attribute [rw] user_name
     #   A unique string used to identify the user. The length limit is 128
     #   characters. This value can consist of letters, accented characters,
     #   symbols, numbers, and punctuation. This value is specified at the
     #   time the user is created and stored as an attribute of the user
     #   object in the identity store.
-    #   @return [String]
-    #
-    # @!attribute [rw] user_id
-    #   The identifier for a user in the identity store.
     #   @return [String]
     #
     # @!attribute [rw] external_ids
@@ -618,15 +703,53 @@ module Aws::IdentityStore
     #   The time zone for a user.
     #   @return [String]
     #
-    # @!attribute [rw] identity_store_id
-    #   The globally unique identifier for the identity store.
+    # @!attribute [rw] user_status
+    #   The current status of the user account.
     #   @return [String]
+    #
+    # @!attribute [rw] photos
+    #   A list of photos associated with the user. Returns up to 3 photos
+    #   with their associated metadata including type, display name, and
+    #   primary designation.
+    #   @return [Array<Types::Photo>]
+    #
+    # @!attribute [rw] website
+    #   The user's personal website or blog URL. Returns the stored website
+    #   information for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] birthdate
+    #   The user's birthdate in YYYY-MM-DD format. This field returns the
+    #   stored birthdate information for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the user was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the user was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_by
+    #   The identifier of the user or system that last updated the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] extensions
+    #   A map of explicitly requested attribute extensions associated with
+    #   the user. Not populated if the user has no requested extensions.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DescribeUserResponse AWS API Documentation
     #
     class DescribeUserResponse < Struct.new(
-      :user_name,
+      :identity_store_id,
       :user_id,
+      :user_name,
       :external_ids,
       :name,
       :display_name,
@@ -640,8 +763,16 @@ module Aws::IdentityStore
       :preferred_language,
       :locale,
       :timezone,
-      :identity_store_id)
-      SENSITIVE = [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone]
+      :user_status,
+      :photos,
+      :website,
+      :birthdate,
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      :extensions)
+      SENSITIVE = [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone, :website, :birthdate]
       include Aws::Structure
     end
 
@@ -699,8 +830,8 @@ module Aws::IdentityStore
     # @!attribute [rw] attribute_path
     #   The attribute path that is used to specify which attribute name to
     #   search. Length limit is 255 characters. For example, `UserName` is a
-    #   valid attribute path for the `ListUsers` API, and `DisplayName` is a
-    #   valid attribute path for the `ListGroups` API.
+    #   valid attribute path for the ` ListUsers` API, and `DisplayName` is
+    #   a valid attribute path for the ` ListGroups` API.
     #   @return [String]
     #
     # @!attribute [rw] attribute_value
@@ -726,7 +857,7 @@ module Aws::IdentityStore
     #   identifier. This value can be an identifier from an external
     #   identity provider (IdP) that is associated with the user, the group,
     #   or a unique attribute. For the unique attribute, the only valid path
-    #   is `displayName`.
+    #   is ` displayName`.
     #   @return [Types::AlternateIdentifier]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetGroupIdRequest AWS API Documentation
@@ -805,7 +936,7 @@ module Aws::IdentityStore
     #   identifier. This value can be an identifier from an external
     #   identity provider (IdP) that is associated with the user, the group,
     #   or a unique attribute. For the unique attribute, the only valid
-    #   paths are `userName` and `emails.value`.
+    #   paths are ` userName` and `emails.value`.
     #   @return [Types::AlternateIdentifier]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetUserIdRequest AWS API Documentation
@@ -817,19 +948,19 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
-    # @!attribute [rw] user_id
-    #   The identifier for a user in the identity store.
-    #   @return [String]
-    #
     # @!attribute [rw] identity_store_id
     #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier for a user in the identity store.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GetUserIdResponse AWS API Documentation
     #
     class GetUserIdResponse < Struct.new(
-      :user_id,
-      :identity_store_id)
+      :identity_store_id,
+      :user_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -848,6 +979,8 @@ module Aws::IdentityStore
     #   space, and nonbreaking space in this attribute. This value is
     #   specified at the time the group is created and stored as an
     #   attribute of the group object in the identity store.
+    #
+    #   Prefix search supports a maximum of 1,000 characters for the string.
     #   @return [String]
     #
     # @!attribute [rw] external_ids
@@ -857,6 +990,22 @@ module Aws::IdentityStore
     #
     # @!attribute [rw] description
     #   A string containing a description of the specified group.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the group was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the group was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_by
+    #   The identifier of the user or system that last updated the group.
     #   @return [String]
     #
     # @!attribute [rw] identity_store_id
@@ -870,6 +1019,10 @@ module Aws::IdentityStore
       :display_name,
       :external_ids,
       :description,
+      :created_at,
+      :updated_at,
+      :created_by,
+      :updated_by,
       :identity_store_id)
       SENSITIVE = [:display_name, :description]
       include Aws::Structure
@@ -896,13 +1049,35 @@ module Aws::IdentityStore
     #   that the user is a member of the group.
     #   @return [Types::MemberId]
     #
+    # @!attribute [rw] created_at
+    #   The date and time the group membership was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the group membership was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created the group
+    #   membership.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_by
+    #   The identifier of the user or system that last updated the group
+    #   membership.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/GroupMembership AWS API Documentation
     #
     class GroupMembership < Struct.new(
       :identity_store_id,
       :membership_id,
       :group_id,
-      :member_id)
+      :member_id,
+      :created_at,
+      :updated_at,
+      :created_by,
+      :updated_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1007,18 +1182,18 @@ module Aws::IdentityStore
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per request. This
-    #   parameter is used in the `ListUsers` and `ListGroups` requests to
+    #   parameter is used in the ` ListUsers` and `ListGroups` requests to
     #   specify how many results to return in one page. The length limit is
     #   50 characters.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used for the `ListUsers`, `ListGroups`, and
-    #   `ListGroupMemberships` API operations. This value is generated by
-    #   the identity store service. It is returned in the API response if
-    #   the total results are more than the size of one page. This token is
-    #   also returned when it is used in the API request to search for the
-    #   next page.
+    #   The pagination token used for the `ListUsers`, `ListGroups`, and `
+    #   ListGroupMemberships` API operations. This value is generated by the
+    #   identity store service. It is returned in the API response if the
+    #   total results are more than the size of one page. This token is also
+    #   returned when it is used in the API request to search for the next
+    #   page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListGroupMembershipsForMemberRequest AWS API Documentation
@@ -1038,12 +1213,12 @@ module Aws::IdentityStore
     #   @return [Array<Types::GroupMembership>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used for the `ListUsers`, `ListGroups`, and
-    #   `ListGroupMemberships` API operations. This value is generated by
-    #   the identity store service. It is returned in the API response if
-    #   the total results are more than the size of one page. This token is
-    #   also returned when it is used in the API request to search for the
-    #   next page.
+    #   The pagination token used for the `ListUsers`, `ListGroups`, and `
+    #   ListGroupMemberships` API operations. This value is generated by the
+    #   identity store service. It is returned in the API response if the
+    #   total results are more than the size of one page. This token is also
+    #   returned when it is used in the API request to search for the next
+    #   page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListGroupMembershipsForMemberResponse AWS API Documentation
@@ -1065,17 +1240,17 @@ module Aws::IdentityStore
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per request. This
-    #   parameter is used in all `List` requests to specify how many results
-    #   to return in one page.
+    #   parameter is used in all ` List` requests to specify how many
+    #   results to return in one page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used for the `ListUsers`, `ListGroups` and
-    #   `ListGroupMemberships` API operations. This value is generated by
-    #   the identity store service. It is returned in the API response if
-    #   the total results are more than the size of one page. This token is
-    #   also returned when it is used in the API request to search for the
-    #   next page.
+    #   The pagination token used for the `ListUsers`, `ListGroups` and `
+    #   ListGroupMemberships` API operations. This value is generated by the
+    #   identity store service. It is returned in the API response if the
+    #   total results are more than the size of one page. This token is also
+    #   returned when it is used in the API request to search for the next
+    #   page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListGroupMembershipsRequest AWS API Documentation
@@ -1094,12 +1269,12 @@ module Aws::IdentityStore
     #   @return [Array<Types::GroupMembership>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used for the `ListUsers`, `ListGroups`, and
-    #   `ListGroupMemberships` API operations. This value is generated by
-    #   the identity store service. It is returned in the API response if
-    #   the total results are more than the size of one page. This token is
-    #   also returned when it is used in the API request to search for the
-    #   next page.
+    #   The pagination token used for the `ListUsers`, `ListGroups`, and `
+    #   ListGroupMemberships` API operations. This value is generated by the
+    #   identity store service. It is returned in the API response if the
+    #   total results are more than the size of one page. This token is also
+    #   returned when it is used in the API request to search for the next
+    #   page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListGroupMembershipsResponse AWS API Documentation
@@ -1121,7 +1296,7 @@ module Aws::IdentityStore
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per request. This
-    #   parameter is used in the `ListUsers` and `ListGroups` requests to
+    #   parameter is used in the ` ListUsers` and `ListGroups` requests to
     #   specify how many results to return in one page. The length limit is
     #   50 characters.
     #   @return [Integer]
@@ -1135,8 +1310,8 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   A list of `Filter` objects, which is used in the `ListUsers` and
-    #   `ListGroups` requests.
+    #   A list of `Filter` objects, which is used in the `ListUsers` and `
+    #   ListGroups` requests.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListGroupsRequest AWS API Documentation
@@ -1158,7 +1333,7 @@ module Aws::IdentityStore
     #   The pagination token used for the `ListUsers` and `ListGroups` API
     #   operations. This value is generated by the identity store service.
     #   It is returned in the API response if the total results are more
-    #   than the size of one page. This token is also returned when it1 is
+    #   than the size of one page. This token is also returned when it is
     #   used in the API request to search for the next page.
     #   @return [String]
     #
@@ -1179,9 +1354,15 @@ module Aws::IdentityStore
     #   new identity store is created.
     #   @return [String]
     #
+    # @!attribute [rw] extensions
+    #   A collection of extension names indicating what extensions the
+    #   service should retrieve alongside other user attributes.
+    #   `aws:identitystore:enterprise` is the only supported extension name.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per request. This
-    #   parameter is used in the `ListUsers` and `ListGroups` requests to
+    #   parameter is used in the ` ListUsers` and `ListGroups` requests to
     #   specify how many results to return in one page. The length limit is
     #   50 characters.
     #   @return [Integer]
@@ -1195,14 +1376,15 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   A list of `Filter` objects, which is used in the `ListUsers` and
-    #   `ListGroups` requests.
+    #   A list of `Filter` objects, which is used in the `ListUsers` and `
+    #   ListGroups` requests.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListUsersRequest AWS API Documentation
     #
     class ListUsersRequest < Struct.new(
       :identity_store_id,
+      :extensions,
       :max_results,
       :next_token,
       :filters)
@@ -1321,6 +1503,41 @@ module Aws::IdentityStore
       include Aws::Structure
     end
 
+    # Contains information about a user's photo. Users can have up to 3
+    # photos, with one designated as primary. Supports common image formats,
+    # including jpg, jpeg, png, and gif.
+    #
+    # @!attribute [rw] value
+    #   The photo data or URL. Supported formats include jpg, jpeg, png, and
+    #   gif. This field is required for all photo entries.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of photo. This field is optional and can be used to
+    #   categorize different types of photos.
+    #   @return [String]
+    #
+    # @!attribute [rw] display
+    #   A human-readable description of the photo for display purposes. This
+    #   optional field provides context about the photo.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary
+    #   Specifies whether this is the user's primary photo. Default value
+    #   is `false`. Only one photo can be designated as primary per user.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/Photo AWS API Documentation
+    #
+    class Photo < Struct.new(
+      :value,
+      :type,
+      :display,
+      :primary)
+      SENSITIVE = [:value, :type, :display, :primary]
+      include Aws::Structure
+    end
+
     # Indicates that a requested resource is not found.
     #
     # @!attribute [rw] resource_type
@@ -1333,10 +1550,16 @@ module Aws::IdentityStore
     #   as `UserId` or `GroupId`. The format for `ResourceId` is either
     #   `UUID` or `1234567890-UUID`, where `UUID` is a randomly generated
     #   value for each resource when it is created and `1234567890`
-    #   represents the `IdentityStoreId` string value. In the case that the
+    #   represents the ` IdentityStoreId` string value. In the case that the
     #   identity store is migrated from a legacy SSO identity store, the
     #   `ResourceId` for that identity store will be in the format of
     #   `UUID`. Otherwise, it will be in the `1234567890-UUID` format.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   Indicates the reason for a resource not found error when the service
+    #   is unable to access a Customer Managed KMS key. For non-KMS
+    #   permission errors, this field is not included.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -1354,6 +1577,7 @@ module Aws::IdentityStore
     class ResourceNotFoundException < Struct.new(
       :resource_type,
       :resource_id,
+      :reason,
       :message,
       :request_id)
       SENSITIVE = []
@@ -1399,12 +1623,19 @@ module Aws::IdentityStore
     #   The number of seconds to wait before retrying the next request.
     #   @return [Integer]
     #
+    # @!attribute [rw] reason
+    #   Indicates the reason for the throttling error when the service is
+    #   unable to access a Customer Managed KMS key. For non-KMS permission
+    #   errors, this field is not included.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
       :message,
       :request_id,
-      :retry_after_seconds)
+      :retry_after_seconds,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1441,6 +1672,12 @@ module Aws::IdentityStore
     # @!attribute [rw] operations
     #   A list of `AttributeOperation` objects to apply to the requested
     #   group. These operations might add, replace, or remove an attribute.
+    #   For more information on the attributes that can be added, replaced,
+    #   or removed, see [Group][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html
     #   @return [Array<Types::AttributeOperation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/UpdateGroupRequest AWS API Documentation
@@ -1468,6 +1705,12 @@ module Aws::IdentityStore
     # @!attribute [rw] operations
     #   A list of `AttributeOperation` objects to apply to the requested
     #   user. These operations might add, replace, or remove an attribute.
+    #   For more information on the attributes that can be added, replaced,
+    #   or removed, see [User][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html
     #   @return [Array<Types::AttributeOperation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/UpdateUserRequest AWS API Documentation
@@ -1487,16 +1730,20 @@ module Aws::IdentityStore
     # A user object that contains the metadata and attributes for a
     # specified user.
     #
+    # @!attribute [rw] identity_store_id
+    #   The globally unique identifier for the identity store.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier for a user in the identity store.
+    #   @return [String]
+    #
     # @!attribute [rw] user_name
     #   A unique string used to identify the user. The length limit is 128
     #   characters. This value can consist of letters, accented characters,
     #   symbols, numbers, and punctuation. This value is specified at the
     #   time the user is created and stored as an attribute of the user
     #   object in the identity store.
-    #   @return [String]
-    #
-    # @!attribute [rw] user_id
-    #   The identifier for a user in the identity store.
     #   @return [String]
     #
     # @!attribute [rw] external_ids
@@ -1511,6 +1758,8 @@ module Aws::IdentityStore
     # @!attribute [rw] display_name
     #   A string containing the name of the user that is formatted for
     #   display when the user is referenced. For example, "John Doe."
+    #
+    #   Prefix search supports a maximum of 1,000 characters for the string.
     #   @return [String]
     #
     # @!attribute [rw] nick_name
@@ -1559,15 +1808,53 @@ module Aws::IdentityStore
     #   A string containing the time zone of the user.
     #   @return [String]
     #
-    # @!attribute [rw] identity_store_id
-    #   The globally unique identifier for the identity store.
+    # @!attribute [rw] user_status
+    #   The current status of the user account.
     #   @return [String]
+    #
+    # @!attribute [rw] photos
+    #   A list of photos associated with the user. Users can have up to 3
+    #   photos with metadata including type, display name, and primary
+    #   designation.
+    #   @return [Array<Types::Photo>]
+    #
+    # @!attribute [rw] website
+    #   The user's personal website or blog URL. This field stores website
+    #   information for personal or professional use.
+    #   @return [String]
+    #
+    # @!attribute [rw] birthdate
+    #   The user's birthdate in YYYY-MM-DD format. This field stores
+    #   personal birthdate information for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the user was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user or system that created the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the user was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_by
+    #   The identifier of the user or system that last updated the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] extensions
+    #   A map of explicitly requested attribute extensions associated with
+    #   the user. Not populated if the user has no requested extensions.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/User AWS API Documentation
     #
     class User < Struct.new(
-      :user_name,
+      :identity_store_id,
       :user_id,
+      :user_name,
       :external_ids,
       :name,
       :display_name,
@@ -1581,8 +1868,16 @@ module Aws::IdentityStore
       :preferred_language,
       :locale,
       :timezone,
-      :identity_store_id)
-      SENSITIVE = [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone]
+      :user_status,
+      :photos,
+      :website,
+      :birthdate,
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      :extensions)
+      SENSITIVE = [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone, :website, :birthdate]
       include Aws::Structure
     end
 
@@ -1598,11 +1893,18 @@ module Aws::IdentityStore
     #   fails.
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   Indicates the reason for the validation error when the service is
+    #   unable to access a Customer Managed KMS key. For non-KMS permission
+    #   errors, this field is not included.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
       :message,
-      :request_id)
+      :request_id,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end

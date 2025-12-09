@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.121.0 (2025-11-20)
+------------------
+
+* Feature - Add support for configuring S3 destination for step logs on a per-step basis.
+
+1.120.0 (2025-11-19)
+------------------
+
+* Feature - Add CloudWatch Logs integration for Spark driver, executor and step logs
+
+1.119.0 (2025-10-31)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.118.0 (2025-10-21)
+------------------
+
+* Feature - Added RECONFIGURING to the InstanceFleetState convenience enum.
+
 1.117.0 (2025-08-28)
 ------------------
 

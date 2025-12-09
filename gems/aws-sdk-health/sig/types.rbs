@@ -225,6 +225,8 @@ module Aws::Health
       attr_accessor last_updated_time: ::Time
       attr_accessor status_code: ("open" | "closed" | "upcoming")
       attr_accessor event_scope_code: ("PUBLIC" | "ACCOUNT_SPECIFIC" | "NONE")
+      attr_accessor actionability: ("ACTION_REQUIRED" | "ACTION_MAY_BE_REQUIRED" | "INFORMATIONAL")
+      attr_accessor personas: ::Array[("OPERATIONS" | "SECURITY" | "BILLING")]
       SENSITIVE: []
     end
 
@@ -260,6 +262,7 @@ module Aws::Health
     end
 
     class EventFilter
+      attr_accessor actionabilities: ::Array[("ACTION_REQUIRED" | "ACTION_MAY_BE_REQUIRED" | "INFORMATIONAL")]
       attr_accessor event_arns: ::Array[::String]
       attr_accessor event_type_codes: ::Array[::String]
       attr_accessor services: ::Array[::String]
@@ -273,6 +276,7 @@ module Aws::Health
       attr_accessor event_type_categories: ::Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]
       attr_accessor tags: ::Array[::Hash[::String, ::String]]
       attr_accessor event_status_codes: ::Array[("open" | "closed" | "upcoming")]
+      attr_accessor personas: ::Array[("OPERATIONS" | "SECURITY" | "BILLING")]
       SENSITIVE: []
     end
 
@@ -280,6 +284,8 @@ module Aws::Health
       attr_accessor service: ::String
       attr_accessor code: ::String
       attr_accessor category: ("issue" | "accountNotification" | "scheduledChange" | "investigation")
+      attr_accessor actionability: ("ACTION_REQUIRED" | "ACTION_MAY_BE_REQUIRED" | "INFORMATIONAL")
+      attr_accessor personas: ::Array[("OPERATIONS" | "SECURITY" | "BILLING")]
       SENSITIVE: []
     end
 
@@ -287,6 +293,8 @@ module Aws::Health
       attr_accessor event_type_codes: ::Array[::String]
       attr_accessor services: ::Array[::String]
       attr_accessor event_type_categories: ::Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]
+      attr_accessor actionabilities: ::Array[("ACTION_REQUIRED" | "ACTION_MAY_BE_REQUIRED" | "INFORMATIONAL")]
+      attr_accessor personas: ::Array[("OPERATIONS" | "SECURITY" | "BILLING")]
       SENSITIVE: []
     end
 
@@ -322,6 +330,8 @@ module Aws::Health
       attr_accessor end_time: ::Time
       attr_accessor last_updated_time: ::Time
       attr_accessor status_code: ("open" | "closed" | "upcoming")
+      attr_accessor actionability: ("ACTION_REQUIRED" | "ACTION_MAY_BE_REQUIRED" | "INFORMATIONAL")
+      attr_accessor personas: ::Array[("OPERATIONS" | "SECURITY" | "BILLING")]
       SENSITIVE: []
     end
 
@@ -342,6 +352,7 @@ module Aws::Health
     end
 
     class OrganizationEventFilter
+      attr_accessor actionabilities: ::Array[("ACTION_REQUIRED" | "ACTION_MAY_BE_REQUIRED" | "INFORMATIONAL")]
       attr_accessor event_type_codes: ::Array[::String]
       attr_accessor aws_account_ids: ::Array[::String]
       attr_accessor services: ::Array[::String]
@@ -353,6 +364,7 @@ module Aws::Health
       attr_accessor entity_values: ::Array[::String]
       attr_accessor event_type_categories: ::Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]
       attr_accessor event_status_codes: ::Array[("open" | "closed" | "upcoming")]
+      attr_accessor personas: ::Array[("OPERATIONS" | "SECURITY" | "BILLING")]
       SENSITIVE: []
     end
 

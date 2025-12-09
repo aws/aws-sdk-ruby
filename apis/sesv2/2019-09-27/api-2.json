@@ -1315,7 +1315,7 @@
       "name":"PutEmailIdentityDkimSigningAttributes",
       "http":{
         "method":"PUT",
-        "requestUri":"/v1/email/identities/{EmailIdentity}/dkim/signing"
+        "requestUri":"/v2/email/identities/{EmailIdentity}/dkim/signing"
       },
       "input":{"shape":"PutEmailIdentityDkimSigningAttributesRequest"},
       "output":{"shape":"PutEmailIdentityDkimSigningAttributesResponse"},
@@ -1628,7 +1628,7 @@
       "type":"string",
       "max":1011,
       "min":20,
-      "pattern":"arn:(aws|aws-[a-z-]+):ses:[a-z]{2}-[a-z-]+-[0-9]:[0-9]{1,20}:mailmanager-archive/a-[a-z0-9]{24,62}"
+      "pattern":"arn:(aws|aws-[a-z-]+):ses:[a-z]{2,4}-[a-z-]+-[0-9]:[0-9]{1,20}:mailmanager-archive/a-[a-z0-9]{24,62}"
     },
     "ArchivingOptions":{
       "type":"structure",
@@ -2668,7 +2668,9 @@
         "AWS_SES_US_WEST_2",
         "AWS_SES_ME_CENTRAL_1",
         "AWS_SES_AP_SOUTH_2",
-        "AWS_SES_EU_CENTRAL_2"
+        "AWS_SES_EU_CENTRAL_2",
+        "AWS_SES_AP_SOUTHEAST_5",
+        "AWS_SES_CA_WEST_1"
       ]
     },
     "DkimSigningKeyLength":{

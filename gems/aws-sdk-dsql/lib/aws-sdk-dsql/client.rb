@@ -476,7 +476,7 @@ module Aws::DSQL
 
     # @!group API Operations
 
-    # The CreateCluster API allows you to create both single-region clusters
+    # The CreateCluster API allows you to create both single-Region clusters
     # and multi-Region clusters. With the addition of the
     # *multiRegionProperties* parameter, you can create a cluster with
     # witness Region support and establish peer relationships with clusters
@@ -504,7 +504,7 @@ module Aws::DSQL
     #
     # dsql:PutMultiRegionProperties
     #
-    # : Permission to configure multi-region properties for a cluster.
+    # : Permission to configure multi-Region properties for a cluster.
     #
     #   Resources: `arn:aws:dsql:region:account-id:cluster/*`
     #
@@ -566,6 +566,15 @@ module Aws::DSQL
     #   The configuration settings when creating a multi-Region cluster,
     #   including the witness region and linked cluster properties.
     #
+    # @option params [String] :policy
+    #   An optional resource-based policy document in JSON format that defines
+    #   access permissions for the cluster.
+    #
+    # @option params [Boolean] :bypass_policy_lockout_safety_check
+    #   An optional field that controls whether to bypass the lockout
+    #   prevention check. When set to true, this parameter allows you to apply
+    #   a policy that might lock you out of the cluster. Use with caution.
+    #
     # @return [Types::CreateClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterOutput#identifier #identifier} => String
@@ -575,6 +584,7 @@ module Aws::DSQL
     #   * {Types::CreateClusterOutput#multi_region_properties #multi_region_properties} => Types::MultiRegionProperties
     #   * {Types::CreateClusterOutput#encryption_details #encryption_details} => Types::EncryptionDetails
     #   * {Types::CreateClusterOutput#deletion_protection_enabled #deletion_protection_enabled} => Boolean
+    #   * {Types::CreateClusterOutput#endpoint #endpoint} => String
     #
     #
     # @example Example: Create Cluster
@@ -599,6 +609,8 @@ module Aws::DSQL
     #       witness_region: "Region",
     #       clusters: ["ClusterArn"],
     #     },
+    #     policy: "PolicyDocument",
+    #     bypass_policy_lockout_safety_check: false,
     #   })
     #
     # @example Response structure
@@ -614,6 +626,7 @@ module Aws::DSQL
     #   resp.encryption_details.kms_key_arn #=> String
     #   resp.encryption_details.encryption_status #=> String, one of "ENABLED", "UPDATING", "KMS_KEY_INACCESSIBLE", "ENABLING"
     #   resp.deletion_protection_enabled #=> Boolean
+    #   resp.endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/CreateCluster AWS API Documentation
     #
@@ -680,6 +693,49 @@ module Aws::DSQL
       req.send_request(options)
     end
 
+    # Deletes the resource-based policy attached to a cluster. This removes
+    # all access permissions defined by the policy, reverting to default
+    # access controls.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the cluster.
+    #
+    # @option params [String] :expected_policy_version
+    #   The expected version of the policy to delete. This parameter ensures
+    #   that you're deleting the correct version of the policy and helps
+    #   prevent accidental deletions.
+    #
+    # @option params [String] :client_token
+    #   Idempotency token so a request is only processed once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::DeleteClusterPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteClusterPolicyOutput#policy_version #policy_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_cluster_policy({
+    #     identifier: "ClusterId", # required
+    #     expected_policy_version: "PolicyVersion",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/DeleteClusterPolicy AWS API Documentation
+    #
+    # @overload delete_cluster_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_cluster_policy(params = {}, options = {})
+      req = build_request(:delete_cluster_policy, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about a cluster.
     #
     # @option params [required, String] :identifier
@@ -695,6 +751,7 @@ module Aws::DSQL
     #   * {Types::GetClusterOutput#multi_region_properties #multi_region_properties} => Types::MultiRegionProperties
     #   * {Types::GetClusterOutput#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetClusterOutput#encryption_details #encryption_details} => Types::EncryptionDetails
+    #   * {Types::GetClusterOutput#endpoint #endpoint} => String
     #
     #
     # @example Example: Get Cluster
@@ -724,6 +781,7 @@ module Aws::DSQL
     #   resp.encryption_details.encryption_type #=> String, one of "AWS_OWNED_KMS_KEY", "CUSTOMER_MANAGED_KMS_KEY"
     #   resp.encryption_details.kms_key_arn #=> String
     #   resp.encryption_details.encryption_status #=> String, one of "ENABLED", "UPDATING", "KMS_KEY_INACCESSIBLE", "ENABLING"
+    #   resp.endpoint #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -740,6 +798,38 @@ module Aws::DSQL
       req.send_request(options)
     end
 
+    # Retrieves the resource-based policy document attached to a cluster.
+    # This policy defines the access permissions and conditions for the
+    # cluster.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the cluster to retrieve the policy from.
+    #
+    # @return [Types::GetClusterPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetClusterPolicyOutput#policy #policy} => String
+    #   * {Types::GetClusterPolicyOutput#policy_version #policy_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cluster_policy({
+    #     identifier: "ClusterId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #   resp.policy_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/GetClusterPolicy AWS API Documentation
+    #
+    # @overload get_cluster_policy(params = {})
+    # @param [Hash] params ({})
+    def get_cluster_policy(params = {}, options = {})
+      req = build_request(:get_cluster_policy, params)
+      req.send_request(options)
+    end
+
     # Retrieves the VPC endpoint service name.
     #
     # @option params [required, String] :identifier
@@ -748,6 +838,7 @@ module Aws::DSQL
     # @return [Types::GetVpcEndpointServiceNameOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetVpcEndpointServiceNameOutput#service_name #service_name} => String
+    #   * {Types::GetVpcEndpointServiceNameOutput#cluster_vpc_endpoint #cluster_vpc_endpoint} => String
     #
     #
     # @example Example: Get VPC Endpoint Service Name
@@ -765,6 +856,7 @@ module Aws::DSQL
     # @example Response structure
     #
     #   resp.service_name #=> String
+    #   resp.cluster_vpc_endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/GetVpcEndpointServiceName AWS API Documentation
     #
@@ -859,6 +951,61 @@ module Aws::DSQL
       req.send_request(options)
     end
 
+    # Attaches a resource-based policy to a cluster. This policy defines
+    # access permissions and conditions for the cluster, allowing you to
+    # control which principals can perform actions on the cluster.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the cluster.
+    #
+    # @option params [required, String] :policy
+    #   The resource-based policy document to attach to the cluster. This
+    #   should be a valid JSON policy document that defines permissions and
+    #   conditions.
+    #
+    # @option params [Boolean] :bypass_policy_lockout_safety_check
+    #   A flag that allows you to bypass the policy lockout safety check. When
+    #   set to true, this parameter allows you to apply a policy that might
+    #   lock you out of the cluster. Use with caution.
+    #
+    # @option params [String] :expected_policy_version
+    #   The expected version of the current policy. This parameter ensures
+    #   that you're updating the correct version of the policy and helps
+    #   prevent concurrent modification conflicts.
+    #
+    # @option params [String] :client_token
+    #   Idempotency token so a request is only processed once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::PutClusterPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutClusterPolicyOutput#policy_version #policy_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_cluster_policy({
+    #     identifier: "ClusterId", # required
+    #     policy: "PolicyDocument", # required
+    #     bypass_policy_lockout_safety_check: false,
+    #     expected_policy_version: "PolicyVersion",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/PutClusterPolicy AWS API Documentation
+    #
+    # @overload put_cluster_policy(params = {})
+    # @param [Hash] params ({})
+    def put_cluster_policy(params = {}, options = {})
+      req = build_request(:put_cluster_policy, params)
+      req.send_request(options)
+    end
+
     # Tags a resource with a map of key and value pairs.
     #
     # @option params [required, String] :resource_arn
@@ -939,7 +1086,7 @@ module Aws::DSQL
     # parameter, you can add or modify witness Region support and manage
     # peer relationships with clusters in other Regions.
     #
-    # <note markdown="1"> Note that updating multi-region clusters requires additional IAM
+    # <note markdown="1"> Note that updating multi-Region clusters requires additional IAM
     # permissions beyond those needed for standard cluster updates, as
     # detailed in the Permissions section.
     #
@@ -1100,7 +1247,7 @@ module Aws::DSQL
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dsql'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

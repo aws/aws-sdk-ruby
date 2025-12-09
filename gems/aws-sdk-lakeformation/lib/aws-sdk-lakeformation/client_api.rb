@@ -233,6 +233,9 @@ module Aws::LakeFormation
     QuerySessionContext = Shapes::StructureShape.new(name: 'QuerySessionContext')
     QueryStateString = Shapes::StringShape.new(name: 'QueryStateString')
     RAMResourceShareArn = Shapes::StringShape.new(name: 'RAMResourceShareArn')
+    RedshiftConnect = Shapes::StructureShape.new(name: 'RedshiftConnect')
+    RedshiftScopeUnion = Shapes::UnionShape.new(name: 'RedshiftScopeUnion')
+    RedshiftServiceIntegrations = Shapes::ListShape.new(name: 'RedshiftServiceIntegrations')
     RegisterResourceRequest = Shapes::StructureShape.new(name: 'RegisterResourceRequest')
     RegisterResourceResponse = Shapes::StructureShape.new(name: 'RegisterResourceResponse')
     RemoveLFTagsFromResourceRequest = Shapes::StructureShape.new(name: 'RemoveLFTagsFromResourceRequest')
@@ -260,6 +263,9 @@ module Aws::LakeFormation
     SearchTablesByLFTagsRequest = Shapes::StructureShape.new(name: 'SearchTablesByLFTagsRequest')
     SearchTablesByLFTagsResponse = Shapes::StructureShape.new(name: 'SearchTablesByLFTagsResponse')
     SecretAccessKeyString = Shapes::StringShape.new(name: 'SecretAccessKeyString')
+    ServiceAuthorization = Shapes::StringShape.new(name: 'ServiceAuthorization')
+    ServiceIntegrationList = Shapes::ListShape.new(name: 'ServiceIntegrationList')
+    ServiceIntegrationUnion = Shapes::UnionShape.new(name: 'ServiceIntegrationUnion')
     SessionTokenString = Shapes::StringShape.new(name: 'SessionTokenString')
     StartQueryPlanningRequest = Shapes::StructureShape.new(name: 'StartQueryPlanningRequest')
     StartQueryPlanningResponse = Shapes::StructureShape.new(name: 'StartQueryPlanningResponse')
@@ -456,6 +462,7 @@ module Aws::LakeFormation
     CreateLakeFormationIdentityCenterConfigurationRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: IdentityCenterInstanceArn, location_name: "InstanceArn"))
     CreateLakeFormationIdentityCenterConfigurationRequest.add_member(:external_filtering, Shapes::ShapeRef.new(shape: ExternalFilteringConfiguration, location_name: "ExternalFiltering"))
     CreateLakeFormationIdentityCenterConfigurationRequest.add_member(:share_recipients, Shapes::ShapeRef.new(shape: DataLakePrincipalList, location_name: "ShareRecipients"))
+    CreateLakeFormationIdentityCenterConfigurationRequest.add_member(:service_integrations, Shapes::ShapeRef.new(shape: ServiceIntegrationList, location_name: "ServiceIntegrations"))
     CreateLakeFormationIdentityCenterConfigurationRequest.struct_class = Types::CreateLakeFormationIdentityCenterConfigurationRequest
 
     CreateLakeFormationIdentityCenterConfigurationResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "ApplicationArn"))
@@ -572,6 +579,7 @@ module Aws::LakeFormation
     DescribeLakeFormationIdentityCenterConfigurationResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "ApplicationArn"))
     DescribeLakeFormationIdentityCenterConfigurationResponse.add_member(:external_filtering, Shapes::ShapeRef.new(shape: ExternalFilteringConfiguration, location_name: "ExternalFiltering"))
     DescribeLakeFormationIdentityCenterConfigurationResponse.add_member(:share_recipients, Shapes::ShapeRef.new(shape: DataLakePrincipalList, location_name: "ShareRecipients"))
+    DescribeLakeFormationIdentityCenterConfigurationResponse.add_member(:service_integrations, Shapes::ShapeRef.new(shape: ServiceIntegrationList, location_name: "ServiceIntegrations"))
     DescribeLakeFormationIdentityCenterConfigurationResponse.add_member(:resource_share, Shapes::ShapeRef.new(shape: RAMResourceShareArn, location_name: "ResourceShare"))
     DescribeLakeFormationIdentityCenterConfigurationResponse.struct_class = Types::DescribeLakeFormationIdentityCenterConfigurationResponse
 
@@ -984,6 +992,17 @@ module Aws::LakeFormation
     QuerySessionContext.add_member(:additional_context, Shapes::ShapeRef.new(shape: AdditionalContextMap, location_name: "AdditionalContext"))
     QuerySessionContext.struct_class = Types::QuerySessionContext
 
+    RedshiftConnect.add_member(:authorization, Shapes::ShapeRef.new(shape: ServiceAuthorization, required: true, location_name: "Authorization"))
+    RedshiftConnect.struct_class = Types::RedshiftConnect
+
+    RedshiftScopeUnion.add_member(:redshift_connect, Shapes::ShapeRef.new(shape: RedshiftConnect, location_name: "RedshiftConnect"))
+    RedshiftScopeUnion.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RedshiftScopeUnion.add_member_subclass(:redshift_connect, Types::RedshiftScopeUnion::RedshiftConnect)
+    RedshiftScopeUnion.add_member_subclass(:unknown, Types::RedshiftScopeUnion::Unknown)
+    RedshiftScopeUnion.struct_class = Types::RedshiftScopeUnion
+
+    RedshiftServiceIntegrations.member = Shapes::ShapeRef.new(shape: RedshiftScopeUnion)
+
     RegisterResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
     RegisterResourceRequest.add_member(:use_service_linked_role, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "UseServiceLinkedRole"))
     RegisterResourceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "RoleArn"))
@@ -1066,6 +1085,14 @@ module Aws::LakeFormation
     SearchTablesByLFTagsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     SearchTablesByLFTagsResponse.add_member(:table_list, Shapes::ShapeRef.new(shape: TableLFTagsList, location_name: "TableList"))
     SearchTablesByLFTagsResponse.struct_class = Types::SearchTablesByLFTagsResponse
+
+    ServiceIntegrationList.member = Shapes::ShapeRef.new(shape: ServiceIntegrationUnion)
+
+    ServiceIntegrationUnion.add_member(:redshift, Shapes::ShapeRef.new(shape: RedshiftServiceIntegrations, location_name: "Redshift"))
+    ServiceIntegrationUnion.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ServiceIntegrationUnion.add_member_subclass(:redshift, Types::ServiceIntegrationUnion::Redshift)
+    ServiceIntegrationUnion.add_member_subclass(:unknown, Types::ServiceIntegrationUnion::Unknown)
+    ServiceIntegrationUnion.struct_class = Types::ServiceIntegrationUnion
 
     StartQueryPlanningRequest.add_member(:query_planning_context, Shapes::ShapeRef.new(shape: QueryPlanningContext, required: true, location_name: "QueryPlanningContext"))
     StartQueryPlanningRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: SyntheticStartQueryPlanningRequestQueryString, required: true, location_name: "QueryString"))
@@ -1181,6 +1208,7 @@ module Aws::LakeFormation
 
     UpdateLakeFormationIdentityCenterConfigurationRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     UpdateLakeFormationIdentityCenterConfigurationRequest.add_member(:share_recipients, Shapes::ShapeRef.new(shape: DataLakePrincipalList, location_name: "ShareRecipients"))
+    UpdateLakeFormationIdentityCenterConfigurationRequest.add_member(:service_integrations, Shapes::ShapeRef.new(shape: ServiceIntegrationList, location_name: "ServiceIntegrations"))
     UpdateLakeFormationIdentityCenterConfigurationRequest.add_member(:application_status, Shapes::ShapeRef.new(shape: ApplicationStatus, location_name: "ApplicationStatus"))
     UpdateLakeFormationIdentityCenterConfigurationRequest.add_member(:external_filtering, Shapes::ShapeRef.new(shape: ExternalFilteringConfiguration, location_name: "ExternalFiltering"))
     UpdateLakeFormationIdentityCenterConfigurationRequest.struct_class = Types::UpdateLakeFormationIdentityCenterConfigurationRequest

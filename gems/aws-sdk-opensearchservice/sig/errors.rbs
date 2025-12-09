@@ -37,6 +37,8 @@ module Aws
       class SlotNotAvailableException < ::Aws::Errors::ServiceError
         def slot_suggestions: () -> ::String
       end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+      end
       class ValidationException < ::Aws::Errors::ServiceError
       end
     end

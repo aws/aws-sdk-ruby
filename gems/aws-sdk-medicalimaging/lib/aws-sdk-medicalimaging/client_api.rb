@@ -103,6 +103,7 @@ module Aws::MedicalImaging
     ListImageSetVersionsResponse = Shapes::StructureShape.new(name: 'ListImageSetVersionsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LosslessStorageFormat = Shapes::StringShape.new(name: 'LosslessStorageFormat')
     Message = Shapes::StringShape.new(name: 'Message')
     MetadataCopies = Shapes::StructureShape.new(name: 'MetadataCopies')
     MetadataUpdates = Shapes::UnionShape.new(name: 'MetadataUpdates')
@@ -127,6 +128,7 @@ module Aws::MedicalImaging
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StartDICOMImportJobRequest = Shapes::StructureShape.new(name: 'StartDICOMImportJobRequest')
     StartDICOMImportJobResponse = Shapes::StructureShape.new(name: 'StartDICOMImportJobResponse')
+    StorageTier = Shapes::StringShape.new(name: 'StorageTier')
     String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -196,6 +198,7 @@ module Aws::MedicalImaging
     CreateDatastoreRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateDatastoreRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     CreateDatastoreRequest.add_member(:lambda_authorizer_arn, Shapes::ShapeRef.new(shape: LambdaArn, location_name: "lambdaAuthorizerArn"))
+    CreateDatastoreRequest.add_member(:lossless_storage_format, Shapes::ShapeRef.new(shape: LosslessStorageFormat, location_name: "losslessStorageFormat"))
     CreateDatastoreRequest.struct_class = Types::CreateDatastoreRequest
 
     CreateDatastoreResponse.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "datastoreId"))
@@ -257,6 +260,7 @@ module Aws::MedicalImaging
     DatastoreProperties.add_member(:datastore_status, Shapes::ShapeRef.new(shape: DatastoreStatus, required: true, location_name: "datastoreStatus"))
     DatastoreProperties.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     DatastoreProperties.add_member(:lambda_authorizer_arn, Shapes::ShapeRef.new(shape: LambdaArn, location_name: "lambdaAuthorizerArn"))
+    DatastoreProperties.add_member(:lossless_storage_format, Shapes::ShapeRef.new(shape: LosslessStorageFormat, location_name: "losslessStorageFormat"))
     DatastoreProperties.add_member(:datastore_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datastoreArn"))
     DatastoreProperties.add_member(:created_at, Shapes::ShapeRef.new(shape: Date, location_name: "createdAt"))
     DatastoreProperties.add_member(:updated_at, Shapes::ShapeRef.new(shape: Date, location_name: "updatedAt"))
@@ -344,6 +348,8 @@ module Aws::MedicalImaging
     GetImageSetResponse.add_member(:image_set_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "imageSetArn"))
     GetImageSetResponse.add_member(:overrides, Shapes::ShapeRef.new(shape: Overrides, location_name: "overrides"))
     GetImageSetResponse.add_member(:is_primary, Shapes::ShapeRef.new(shape: Boolean, location_name: "isPrimary"))
+    GetImageSetResponse.add_member(:last_accessed_at, Shapes::ShapeRef.new(shape: Date, location_name: "lastAccessedAt"))
+    GetImageSetResponse.add_member(:storage_tier, Shapes::ShapeRef.new(shape: StorageTier, location_name: "storageTier"))
     GetImageSetResponse.struct_class = Types::GetImageSetResponse
 
     ImageFrameInformation.add_member(:image_frame_id, Shapes::ShapeRef.new(shape: ImageFrameId, required: true, location_name: "imageFrameId"))
@@ -369,6 +375,8 @@ module Aws::MedicalImaging
     ImageSetsMetadataSummary.add_member(:version, Shapes::ShapeRef.new(shape: Integer, location_name: "version"))
     ImageSetsMetadataSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Date, location_name: "createdAt"))
     ImageSetsMetadataSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Date, location_name: "updatedAt"))
+    ImageSetsMetadataSummary.add_member(:last_accessed_at, Shapes::ShapeRef.new(shape: Date, location_name: "lastAccessedAt"))
+    ImageSetsMetadataSummary.add_member(:storage_tier, Shapes::ShapeRef.new(shape: StorageTier, location_name: "storageTier"))
     ImageSetsMetadataSummary.add_member(:dicom_tags, Shapes::ShapeRef.new(shape: DICOMTags, location_name: "DICOMTags"))
     ImageSetsMetadataSummary.add_member(:is_primary, Shapes::ShapeRef.new(shape: Boolean, location_name: "isPrimary"))
     ImageSetsMetadataSummary.struct_class = Types::ImageSetsMetadataSummary

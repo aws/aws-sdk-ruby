@@ -14,6 +14,11 @@ module Aws::CleanRoomsML
 
     include Seahorse::Model
 
+    AccessBudget = Shapes::StructureShape.new(name: 'AccessBudget')
+    AccessBudgetDetails = Shapes::StructureShape.new(name: 'AccessBudgetDetails')
+    AccessBudgetDetailsList = Shapes::ListShape.new(name: 'AccessBudgetDetailsList')
+    AccessBudgetType = Shapes::StringShape.new(name: 'AccessBudgetType')
+    AccessBudgets = Shapes::ListShape.new(name: 'AccessBudgets')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
@@ -39,7 +44,10 @@ module Aws::CleanRoomsML
     AudienceSizeConfig = Shapes::StructureShape.new(name: 'AudienceSizeConfig')
     AudienceSizeType = Shapes::StringShape.new(name: 'AudienceSizeType')
     AudienceSizeValue = Shapes::IntegerShape.new(name: 'AudienceSizeValue')
+    AutoRefreshMode = Shapes::StringShape.new(name: 'AutoRefreshMode')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    Budget = Shapes::IntegerShape.new(name: 'Budget')
+    BudgetedResourceArn = Shapes::StringShape.new(name: 'BudgetedResourceArn')
     CancelTrainedModelInferenceJobRequest = Shapes::StructureShape.new(name: 'CancelTrainedModelInferenceJobRequest')
     CancelTrainedModelRequest = Shapes::StructureShape.new(name: 'CancelTrainedModelRequest')
     CollaborationConfiguredModelAlgorithmAssociationList = Shapes::ListShape.new(name: 'CollaborationConfiguredModelAlgorithmAssociationList')
@@ -53,6 +61,8 @@ module Aws::CleanRoomsML
     CollaborationTrainedModelInferenceJobSummary = Shapes::StructureShape.new(name: 'CollaborationTrainedModelInferenceJobSummary')
     CollaborationTrainedModelList = Shapes::ListShape.new(name: 'CollaborationTrainedModelList')
     CollaborationTrainedModelSummary = Shapes::StructureShape.new(name: 'CollaborationTrainedModelSummary')
+    ColumnClassificationDetails = Shapes::StructureShape.new(name: 'ColumnClassificationDetails')
+    ColumnMappingList = Shapes::ListShape.new(name: 'ColumnMappingList')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
     ColumnSchema = Shapes::StructureShape.new(name: 'ColumnSchema')
     ColumnType = Shapes::StringShape.new(name: 'ColumnType')
@@ -95,6 +105,7 @@ module Aws::CleanRoomsML
     CustomDataIdentifier = Shapes::StringShape.new(name: 'CustomDataIdentifier')
     CustomDataIdentifierList = Shapes::ListShape.new(name: 'CustomDataIdentifierList')
     CustomEntityConfig = Shapes::StructureShape.new(name: 'CustomEntityConfig')
+    DataPrivacyScores = Shapes::StructureShape.new(name: 'DataPrivacyScores')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     Dataset = Shapes::StructureShape.new(name: 'Dataset')
     DatasetInputConfig = Shapes::StructureShape.new(name: 'DatasetInputConfig')
@@ -229,7 +240,14 @@ module Aws::CleanRoomsML
     MLInputChannelSummaryConfiguredModelAlgorithmAssociationsList = Shapes::ListShape.new(name: 'MLInputChannelSummaryConfiguredModelAlgorithmAssociationsList')
     MLInputChannelsList = Shapes::ListShape.new(name: 'MLInputChannelsList')
     MLOutputConfiguration = Shapes::StructureShape.new(name: 'MLOutputConfiguration')
+    MLSyntheticDataParameters = Shapes::StructureShape.new(name: 'MLSyntheticDataParameters')
+    MLSyntheticDataParametersEpsilonDouble = Shapes::FloatShape.new(name: 'MLSyntheticDataParametersEpsilonDouble')
+    MLSyntheticDataParametersMaxMembershipInferenceAttackScoreDouble = Shapes::FloatShape.new(name: 'MLSyntheticDataParametersMaxMembershipInferenceAttackScoreDouble')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MembershipInferenceAttackScore = Shapes::StructureShape.new(name: 'MembershipInferenceAttackScore')
+    MembershipInferenceAttackScoreList = Shapes::ListShape.new(name: 'MembershipInferenceAttackScoreList')
+    MembershipInferenceAttackScoreScoreDouble = Shapes::FloatShape.new(name: 'MembershipInferenceAttackScoreScoreDouble')
+    MembershipInferenceAttackVersion = Shapes::StringShape.new(name: 'MembershipInferenceAttackVersion')
     MetricDefinition = Shapes::StructureShape.new(name: 'MetricDefinition')
     MetricDefinitionList = Shapes::ListShape.new(name: 'MetricDefinitionList')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
@@ -249,6 +267,7 @@ module Aws::CleanRoomsML
     ParameterMap = Shapes::MapShape.new(name: 'ParameterMap')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     PolicyExistenceCondition = Shapes::StringShape.new(name: 'PolicyExistenceCondition')
+    PrivacyBudgets = Shapes::UnionShape.new(name: 'PrivacyBudgets')
     PrivacyConfiguration = Shapes::StructureShape.new(name: 'PrivacyConfiguration')
     PrivacyConfigurationPolicies = Shapes::StructureShape.new(name: 'PrivacyConfigurationPolicies')
     ProtectedQueryInputParameters = Shapes::StructureShape.new(name: 'ProtectedQueryInputParameters')
@@ -283,6 +302,11 @@ module Aws::CleanRoomsML
     StoppingCondition = Shapes::StructureShape.new(name: 'StoppingCondition')
     StoppingConditionMaxRuntimeInSecondsInteger = Shapes::IntegerShape.new(name: 'StoppingConditionMaxRuntimeInSecondsInteger')
     String = Shapes::StringShape.new(name: 'String')
+    SyntheticDataColumnName = Shapes::StringShape.new(name: 'SyntheticDataColumnName')
+    SyntheticDataColumnProperties = Shapes::StructureShape.new(name: 'SyntheticDataColumnProperties')
+    SyntheticDataColumnType = Shapes::StringShape.new(name: 'SyntheticDataColumnType')
+    SyntheticDataConfiguration = Shapes::StructureShape.new(name: 'SyntheticDataConfiguration')
+    SyntheticDataEvaluationScores = Shapes::StructureShape.new(name: 'SyntheticDataEvaluationScores')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
@@ -333,6 +357,23 @@ module Aws::CleanRoomsML
     WorkerComputeConfiguration = Shapes::StructureShape.new(name: 'WorkerComputeConfiguration')
     WorkerComputeConfigurationNumberInteger = Shapes::IntegerShape.new(name: 'WorkerComputeConfigurationNumberInteger')
     WorkerComputeType = Shapes::StringShape.new(name: 'WorkerComputeType')
+
+    AccessBudget.add_member(:resource_arn, Shapes::ShapeRef.new(shape: BudgetedResourceArn, required: true, location_name: "resourceArn"))
+    AccessBudget.add_member(:details, Shapes::ShapeRef.new(shape: AccessBudgetDetailsList, required: true, location_name: "details"))
+    AccessBudget.add_member(:aggregate_remaining_budget, Shapes::ShapeRef.new(shape: Budget, required: true, location_name: "aggregateRemainingBudget"))
+    AccessBudget.struct_class = Types::AccessBudget
+
+    AccessBudgetDetails.add_member(:start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "startTime"))
+    AccessBudgetDetails.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "endTime"))
+    AccessBudgetDetails.add_member(:remaining_budget, Shapes::ShapeRef.new(shape: Budget, required: true, location_name: "remainingBudget"))
+    AccessBudgetDetails.add_member(:budget, Shapes::ShapeRef.new(shape: Budget, required: true, location_name: "budget"))
+    AccessBudgetDetails.add_member(:budget_type, Shapes::ShapeRef.new(shape: AccessBudgetType, required: true, location_name: "budgetType"))
+    AccessBudgetDetails.add_member(:auto_refresh, Shapes::ShapeRef.new(shape: AutoRefreshMode, location_name: "autoRefresh"))
+    AccessBudgetDetails.struct_class = Types::AccessBudgetDetails
+
+    AccessBudgetDetailsList.member = Shapes::ShapeRef.new(shape: AccessBudgetDetails)
+
+    AccessBudgets.member = Shapes::ShapeRef.new(shape: AccessBudget)
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -489,6 +530,11 @@ module Aws::CleanRoomsML
     CollaborationTrainedModelSummary.add_member(:configured_model_algorithm_association_arn, Shapes::ShapeRef.new(shape: ConfiguredModelAlgorithmAssociationArn, required: true, location_name: "configuredModelAlgorithmAssociationArn"))
     CollaborationTrainedModelSummary.add_member(:creator_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "creatorAccountId"))
     CollaborationTrainedModelSummary.struct_class = Types::CollaborationTrainedModelSummary
+
+    ColumnClassificationDetails.add_member(:column_mapping, Shapes::ShapeRef.new(shape: ColumnMappingList, required: true, location_name: "columnMapping"))
+    ColumnClassificationDetails.struct_class = Types::ColumnClassificationDetails
+
+    ColumnMappingList.member = Shapes::ShapeRef.new(shape: SyntheticDataColumnProperties)
 
     ColumnSchema.add_member(:column_name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "columnName"))
     ColumnSchema.add_member(:column_types, Shapes::ShapeRef.new(shape: ColumnTypeList, required: true, location_name: "columnTypes"))
@@ -652,6 +698,9 @@ module Aws::CleanRoomsML
     CustomEntityConfig.add_member(:custom_data_identifiers, Shapes::ShapeRef.new(shape: CustomDataIdentifierList, required: true, location_name: "customDataIdentifiers"))
     CustomEntityConfig.struct_class = Types::CustomEntityConfig
 
+    DataPrivacyScores.add_member(:membership_inference_attack_scores, Shapes::ShapeRef.new(shape: MembershipInferenceAttackScoreList, required: true, location_name: "membershipInferenceAttackScores"))
+    DataPrivacyScores.struct_class = Types::DataPrivacyScores
+
     DataSource.add_member(:glue_data_source, Shapes::ShapeRef.new(shape: GlueDataSource, required: true, location_name: "glueDataSource"))
     DataSource.struct_class = Types::DataSource
 
@@ -775,7 +824,9 @@ module Aws::CleanRoomsML
     GetCollaborationMLInputChannelResponse.add_member(:status_details, Shapes::ShapeRef.new(shape: StatusDetails, location_name: "statusDetails"))
     GetCollaborationMLInputChannelResponse.add_member(:retention_in_days, Shapes::ShapeRef.new(shape: GetCollaborationMLInputChannelResponseRetentionInDaysInteger, required: true, location_name: "retentionInDays"))
     GetCollaborationMLInputChannelResponse.add_member(:number_of_records, Shapes::ShapeRef.new(shape: GetCollaborationMLInputChannelResponseNumberOfRecordsLong, location_name: "numberOfRecords"))
+    GetCollaborationMLInputChannelResponse.add_member(:privacy_budgets, Shapes::ShapeRef.new(shape: PrivacyBudgets, location_name: "privacyBudgets"))
     GetCollaborationMLInputChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    GetCollaborationMLInputChannelResponse.add_member(:synthetic_data_configuration, Shapes::ShapeRef.new(shape: SyntheticDataConfiguration, location_name: "syntheticDataConfiguration"))
     GetCollaborationMLInputChannelResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
     GetCollaborationMLInputChannelResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
     GetCollaborationMLInputChannelResponse.add_member(:creator_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "creatorAccountId"))
@@ -890,7 +941,9 @@ module Aws::CleanRoomsML
     GetMLInputChannelResponse.add_member(:status_details, Shapes::ShapeRef.new(shape: StatusDetails, location_name: "statusDetails"))
     GetMLInputChannelResponse.add_member(:retention_in_days, Shapes::ShapeRef.new(shape: GetMLInputChannelResponseRetentionInDaysInteger, required: true, location_name: "retentionInDays"))
     GetMLInputChannelResponse.add_member(:number_of_records, Shapes::ShapeRef.new(shape: GetMLInputChannelResponseNumberOfRecordsLong, location_name: "numberOfRecords"))
+    GetMLInputChannelResponse.add_member(:privacy_budgets, Shapes::ShapeRef.new(shape: PrivacyBudgets, location_name: "privacyBudgets"))
     GetMLInputChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    GetMLInputChannelResponse.add_member(:synthetic_data_configuration, Shapes::ShapeRef.new(shape: SyntheticDataConfiguration, location_name: "syntheticDataConfiguration"))
     GetMLInputChannelResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createTime"))
     GetMLInputChannelResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "updateTime"))
     GetMLInputChannelResponse.add_member(:input_channel, Shapes::ShapeRef.new(shape: InputChannel, required: true, location_name: "inputChannel"))
@@ -1222,6 +1275,17 @@ module Aws::CleanRoomsML
     MLOutputConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "roleArn"))
     MLOutputConfiguration.struct_class = Types::MLOutputConfiguration
 
+    MLSyntheticDataParameters.add_member(:epsilon, Shapes::ShapeRef.new(shape: MLSyntheticDataParametersEpsilonDouble, required: true, location_name: "epsilon"))
+    MLSyntheticDataParameters.add_member(:max_membership_inference_attack_score, Shapes::ShapeRef.new(shape: MLSyntheticDataParametersMaxMembershipInferenceAttackScoreDouble, required: true, location_name: "maxMembershipInferenceAttackScore"))
+    MLSyntheticDataParameters.add_member(:column_classification, Shapes::ShapeRef.new(shape: ColumnClassificationDetails, required: true, location_name: "columnClassification"))
+    MLSyntheticDataParameters.struct_class = Types::MLSyntheticDataParameters
+
+    MembershipInferenceAttackScore.add_member(:attack_version, Shapes::ShapeRef.new(shape: MembershipInferenceAttackVersion, required: true, location_name: "attackVersion"))
+    MembershipInferenceAttackScore.add_member(:score, Shapes::ShapeRef.new(shape: MembershipInferenceAttackScoreScoreDouble, required: true, location_name: "score"))
+    MembershipInferenceAttackScore.struct_class = Types::MembershipInferenceAttackScore
+
+    MembershipInferenceAttackScoreList.member = Shapes::ShapeRef.new(shape: MembershipInferenceAttackScore)
+
     MetricDefinition.add_member(:name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "name"))
     MetricDefinition.add_member(:regex, Shapes::ShapeRef.new(shape: MetricRegex, required: true, location_name: "regex"))
     MetricDefinition.struct_class = Types::MetricDefinition
@@ -1245,6 +1309,12 @@ module Aws::CleanRoomsML
 
     ParameterMap.key = Shapes::ShapeRef.new(shape: ParameterKey)
     ParameterMap.value = Shapes::ShapeRef.new(shape: ParameterValue)
+
+    PrivacyBudgets.add_member(:access_budgets, Shapes::ShapeRef.new(shape: AccessBudgets, location_name: "accessBudgets"))
+    PrivacyBudgets.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PrivacyBudgets.add_member_subclass(:access_budgets, Types::PrivacyBudgets::AccessBudgets)
+    PrivacyBudgets.add_member_subclass(:unknown, Types::PrivacyBudgets::Unknown)
+    PrivacyBudgets.struct_class = Types::PrivacyBudgets
 
     PrivacyConfiguration.add_member(:policies, Shapes::ShapeRef.new(shape: PrivacyConfigurationPolicies, required: true, location_name: "policies"))
     PrivacyConfiguration.struct_class = Types::PrivacyConfiguration
@@ -1350,6 +1420,18 @@ module Aws::CleanRoomsML
 
     StoppingCondition.add_member(:max_runtime_in_seconds, Shapes::ShapeRef.new(shape: StoppingConditionMaxRuntimeInSecondsInteger, location_name: "maxRuntimeInSeconds"))
     StoppingCondition.struct_class = Types::StoppingCondition
+
+    SyntheticDataColumnProperties.add_member(:column_name, Shapes::ShapeRef.new(shape: SyntheticDataColumnName, required: true, location_name: "columnName"))
+    SyntheticDataColumnProperties.add_member(:column_type, Shapes::ShapeRef.new(shape: SyntheticDataColumnType, required: true, location_name: "columnType"))
+    SyntheticDataColumnProperties.add_member(:is_predictive_value, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isPredictiveValue"))
+    SyntheticDataColumnProperties.struct_class = Types::SyntheticDataColumnProperties
+
+    SyntheticDataConfiguration.add_member(:synthetic_data_parameters, Shapes::ShapeRef.new(shape: MLSyntheticDataParameters, required: true, location_name: "syntheticDataParameters"))
+    SyntheticDataConfiguration.add_member(:synthetic_data_evaluation_scores, Shapes::ShapeRef.new(shape: SyntheticDataEvaluationScores, location_name: "syntheticDataEvaluationScores"))
+    SyntheticDataConfiguration.struct_class = Types::SyntheticDataConfiguration
+
+    SyntheticDataEvaluationScores.add_member(:data_privacy_scores, Shapes::ShapeRef.new(shape: DataPrivacyScores, required: true, location_name: "dataPrivacyScores"))
+    SyntheticDataEvaluationScores.struct_class = Types::SyntheticDataEvaluationScores
 
     TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
 

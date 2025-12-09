@@ -175,7 +175,9 @@ module Aws
                                  greater_than: ::Integer?,
                                  greater_than_or_equal: ::Integer?,
                                  less_than: ::Integer?,
-                                 less_than_or_equal: ::Integer?
+                                 less_than_or_equal: ::Integer?,
+                                 matches: Array[::String]?,
+                                 not_matches: Array[::String]?
                                }]?
                            },
                            ?client_token: ::String,
@@ -251,7 +253,8 @@ module Aws
                                              destination_arn: ::String?,
                                              kms_key_arn: ::String?
                                            },
-                                           ?client_token: ::String
+                                           ?client_token: ::String,
+                                           ?tags: Hash[::String, ::String]
                                          ) -> _CreatePublishingDestinationResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePublishingDestinationResponseSuccess
 
@@ -475,6 +478,7 @@ module Aws
         def status: () -> ("PENDING_VERIFICATION" | "PUBLISHING" | "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY" | "STOPPED")
         def publishing_failure_start_timestamp: () -> ::Integer
         def destination_properties: () -> Types::DestinationProperties
+        def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#describe_publishing_destination-instance_method
       def describe_publishing_destination: (
@@ -632,7 +636,9 @@ module Aws
                                            greater_than: ::Integer?,
                                            greater_than_or_equal: ::Integer?,
                                            less_than: ::Integer?,
-                                           less_than_or_equal: ::Integer?
+                                           less_than_or_equal: ::Integer?,
+                                           matches: Array[::String]?,
+                                           not_matches: Array[::String]?
                                          }]?
                                      },
                                      ?group_by: ("ACCOUNT" | "DATE" | "FINDING_TYPE" | "RESOURCE" | "SEVERITY"),
@@ -682,6 +688,32 @@ module Aws
                                          malware_protection_plan_id: ::String
                                        ) -> _GetMalwareProtectionPlanResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMalwareProtectionPlanResponseSuccess
+
+      interface _GetMalwareScanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMalwareScanResponse]
+        def scan_id: () -> ::String
+        def detector_id: () -> ::String
+        def admin_detector_id: () -> ::String
+        def resource_arn: () -> ::String
+        def resource_type: () -> ("EBS_RECOVERY_POINT" | "EBS_SNAPSHOT" | "EBS_VOLUME" | "EC2_AMI" | "EC2_INSTANCE" | "EC2_RECOVERY_POINT" | "S3_RECOVERY_POINT" | "S3_BUCKET")
+        def scanned_resources_count: () -> ::Integer
+        def skipped_resources_count: () -> ::Integer
+        def failed_resources_count: () -> ::Integer
+        def scanned_resources: () -> ::Array[Types::ScannedResource]
+        def scan_configuration: () -> Types::ScanConfiguration
+        def scan_category: () -> ("FULL_SCAN" | "INCREMENTAL_SCAN")
+        def scan_status: () -> ("RUNNING" | "COMPLETED" | "COMPLETED_WITH_ISSUES" | "FAILED" | "SKIPPED")
+        def scan_status_reason: () -> ("ACCESS_DENIED" | "RESOURCE_NOT_FOUND" | "SNAPSHOT_SIZE_LIMIT_EXCEEDED" | "RESOURCE_UNAVAILABLE" | "INCONSISTENT_SOURCE" | "INCREMENTAL_NO_DIFFERENCE" | "NO_EBS_VOLUMES_FOUND" | "UNSUPPORTED_PRODUCT_CODE_TYPE" | "AMI_SNAPSHOT_LIMIT_EXCEEDED" | "UNRELATED_RESOURCES" | "BASE_RESOURCE_NOT_SCANNED" | "BASE_CREATED_AFTER_TARGET" | "UNSUPPORTED_FOR_INCREMENTAL" | "UNSUPPORTED_AMI" | "UNSUPPORTED_SNAPSHOT" | "UNSUPPORTED_COMPOSITE_RECOVERY_POINT")
+        def scan_type: () -> ("BACKUP_INITIATED" | "ON_DEMAND" | "GUARDDUTY_INITIATED")
+        def scan_started_at: () -> ::Time
+        def scan_completed_at: () -> ::Time
+        def scan_result_details: () -> Types::GetMalwareScanResultDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_malware_scan-instance_method
+      def get_malware_scan: (
+                              scan_id: ::String
+                            ) -> _GetMalwareScanResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMalwareScanResponseSuccess
 
       interface _GetMalwareScanSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetMalwareScanSettingsResponse]
@@ -910,7 +942,9 @@ module Aws
                                  greater_than: ::Integer?,
                                  greater_than_or_equal: ::Integer?,
                                  less_than: ::Integer?,
-                                 less_than_or_equal: ::Integer?
+                                 less_than_or_equal: ::Integer?,
+                                 matches: Array[::String]?,
+                                 not_matches: Array[::String]?
                                }]?
                            },
                            ?sort_criteria: {
@@ -957,6 +991,34 @@ module Aws
                                            ?next_token: ::String
                                          ) -> _ListMalwareProtectionPlansResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMalwareProtectionPlansResponseSuccess
+
+      interface _ListMalwareScansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMalwareScansResponse]
+        def scans: () -> ::Array[Types::MalwareScan]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_malware_scans-instance_method
+      def list_malware_scans: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                ?filter_criteria: {
+                                  list_malware_scans_filter_criterion: Array[
+                                    {
+                                      list_malware_scans_criterion_key: ("RESOURCE_ARN" | "SCAN_ID" | "ACCOUNT_ID" | "GUARDDUTY_FINDING_ID" | "RESOURCE_TYPE" | "SCAN_START_TIME" | "SCAN_STATUS" | "SCAN_TYPE")?,
+                                      filter_condition: {
+                                        equals_value: ::String?,
+                                        greater_than: ::Integer?,
+                                        less_than: ::Integer?
+                                      }?
+                                    },
+                                  ]?
+                                },
+                                ?sort_criteria: {
+                                  attribute_name: ::String?,
+                                  order_by: ("ASC" | "DESC")?
+                                }
+                              ) -> _ListMalwareScansResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMalwareScansResponseSuccess
 
       interface _ListMembersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListMembersResponse]
@@ -1046,13 +1108,36 @@ module Aws
                                     ) -> _ListTrustedEntitySetsResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrustedEntitySetsResponseSuccess
 
+      interface _SendObjectMalwareScanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendObjectMalwareScanResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#send_object_malware_scan-instance_method
+      def send_object_malware_scan: (
+                                      ?s3_object: {
+                                        bucket: ::String?,
+                                        key: ::String?,
+                                        version_id: ::String?
+                                      }
+                                    ) -> _SendObjectMalwareScanResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendObjectMalwareScanResponseSuccess
+
       interface _StartMalwareScanResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartMalwareScanResponse]
         def scan_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#start_malware_scan-instance_method
       def start_malware_scan: (
-                                resource_arn: ::String
+                                resource_arn: ::String,
+                                ?client_token: ::String,
+                                ?scan_configuration: {
+                                  role: ::String,
+                                  incremental_scan_details: {
+                                    baseline_resource_arn: ::String
+                                  }?,
+                                  recovery_point: {
+                                    backup_vault_name: ::String
+                                  }?
+                                }
                               ) -> _StartMalwareScanResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMalwareScanResponseSuccess
 
@@ -1170,7 +1255,9 @@ module Aws
                                  greater_than: ::Integer?,
                                  greater_than_or_equal: ::Integer?,
                                  less_than: ::Integer?,
-                                 less_than_or_equal: ::Integer?
+                                 less_than_or_equal: ::Integer?,
+                                 matches: Array[::String]?,
+                                 not_matches: Array[::String]?
                                }]?
                            }
                          ) -> _UpdateFilterResponseSuccess

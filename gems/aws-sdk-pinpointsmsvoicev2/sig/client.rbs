@@ -110,6 +110,23 @@ module Aws
                                            ) -> _AssociateProtectConfigurationResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateProtectConfigurationResponseSuccess
 
+      interface _CarrierLookupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CarrierLookupResult]
+        def e164_phone_number: () -> ::String
+        def dialing_country_code: () -> ::String
+        def iso_country_code: () -> ::String
+        def country: () -> ::String
+        def mcc: () -> ::String
+        def mnc: () -> ::String
+        def carrier: () -> ::String
+        def phone_number_type: () -> ("MOBILE" | "LANDLINE" | "OTHER" | "INVALID")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoiceV2/Client.html#carrier_lookup-instance_method
+      def carrier_lookup: (
+                            phone_number: ::String
+                          ) -> _CarrierLookupResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CarrierLookupResponseSuccess
+
       interface _CreateConfigurationSetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfigurationSetResult]
         def configuration_set_arn: () -> ::String

@@ -72,7 +72,8 @@
         {"shape":"InvalidVersionNumberException"},
         {"shape":"ResourceInUseException"},
         {"shape":"InvalidParameterCombinationException"},
-        {"shape":"ServiceQuotaExceededException"}
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"DryRunOperationException"}
       ]
     },
     "CreateContainerRecipe":{
@@ -243,7 +244,8 @@
         {"shape":"InvalidVersionNumberException"},
         {"shape":"ResourceInUseException"},
         {"shape":"InvalidParameterCombinationException"},
-        {"shape":"ServiceQuotaExceededException"}
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"DryRunOperationException"}
       ]
     },
     "DeleteComponent":{
@@ -406,6 +408,29 @@
         {"shape":"ForbiddenException"},
         {"shape":"CallRateLimitExceededException"},
         {"shape":"ResourceDependencyException"}
+      ]
+    },
+    "DistributeImage":{
+      "name":"DistributeImage",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/DistributeImage"
+      },
+      "input":{"shape":"DistributeImageRequest"},
+      "output":{"shape":"DistributeImageResponse"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"IdempotentParameterMismatchException"},
+        {"shape":"ForbiddenException"},
+        {"shape":"CallRateLimitExceededException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"ResourceNotFoundException"}
       ]
     },
     "GetComponent":{
@@ -1216,6 +1241,25 @@
         {"shape":"CallRateLimitExceededException"}
       ]
     },
+    "RetryImage":{
+      "name":"RetryImage",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/RetryImage"
+      },
+      "input":{"shape":"RetryImageRequest"},
+      "output":{"shape":"RetryImageResponse"},
+      "errors":[
+        {"shape":"ServiceException"},
+        {"shape":"ClientException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"IdempotentParameterMismatchException"},
+        {"shape":"ForbiddenException"},
+        {"shape":"CallRateLimitExceededException"},
+        {"shape":"ResourceInUseException"}
+      ]
+    },
     "SendWorkflowStepAction":{
       "name":"SendWorkflowStepAction",
       "http":{
@@ -1385,6 +1429,14 @@
     }
   },
   "shapes":{
+    "AccessDeniedException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "error":{"httpStatusCode":403},
+      "exception":true
+    },
     "AccountAggregation":{
       "type":"structure",
       "members":{
@@ -1442,6 +1494,18 @@
       "pattern":"^[-_A-Za-z0-9{][-_A-Za-z0-9\\s:{}\\.]+[-_A-Za-z0-9}]$"
     },
     "Arn":{"type":"string"},
+    "AutoDisableFailureCount":{
+      "type":"integer",
+      "max":10,
+      "min":1
+    },
+    "AutoDisablePolicy":{
+      "type":"structure",
+      "required":["failureCount"],
+      "members":{
+        "failureCount":{"shape":"AutoDisableFailureCount"}
+      }
+    },
     "Boolean":{"type":"boolean"},
     "BuildType":{
       "type":"string",
@@ -1694,6 +1758,10 @@
       "type":"list",
       "member":{"shape":"ComponentVersion"}
     },
+    "ConsecutiveFailures":{
+      "type":"integer",
+      "min":0
+    },
     "Container":{
       "type":"structure",
       "members":{
@@ -1738,7 +1806,7 @@
     },
     "ContainerRecipeArn":{
       "type":"string",
-      "pattern":"^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):container-recipe/[a-z0-9-_]+/[0-9]+\\.[0-9]+\\.[0-9]+$"
+      "pattern":"^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):container-recipe/[a-z0-9-_]+/(?:[0-9]+|x)\\.(?:[0-9]+|x)\\.(?:[0-9]+|x)$"
     },
     "ContainerRecipeSummary":{
       "type":"structure",
@@ -1750,6 +1818,7 @@
         "owner":{"shape":"NonEmptyString"},
         "parentImage":{"shape":"NonEmptyString"},
         "dateCreated":{"shape":"DateTime"},
+        "instanceImage":{"shape":"NonEmptyString"},
         "tags":{"shape":"TagMap"}
       }
     },
@@ -1787,7 +1856,8 @@
         "clientToken":{
           "shape":"ClientToken",
           "idempotencyToken":true
-        }
+        },
+        "dryRun":{"shape":"Boolean"}
       }
     },
     "CreateComponentResponse":{
@@ -1795,7 +1865,8 @@
       "members":{
         "requestId":{"shape":"NonEmptyString"},
         "clientToken":{"shape":"ClientToken"},
-        "componentBuildVersionArn":{"shape":"ComponentBuildVersionArn"}
+        "componentBuildVersionArn":{"shape":"ComponentBuildVersionArn"},
+        "latestVersionReferences":{"shape":"LatestVersionReferences"}
       }
     },
     "CreateContainerRecipeRequest":{
@@ -1804,7 +1875,6 @@
         "containerType",
         "name",
         "semanticVersion",
-        "components",
         "parentImage",
         "targetRepository",
         "clientToken"
@@ -1813,7 +1883,7 @@
         "containerType":{"shape":"ContainerType"},
         "name":{"shape":"ResourceName"},
         "description":{"shape":"NonEmptyString"},
-        "semanticVersion":{"shape":"VersionNumber"},
+        "semanticVersion":{"shape":"WildcardVersionNumber"},
         "components":{"shape":"ComponentConfigurationList"},
         "instanceConfiguration":{"shape":"InstanceConfiguration"},
         "dockerfileTemplateData":{"shape":"InlineDockerFileTemplate"},
@@ -1836,7 +1906,8 @@
       "members":{
         "requestId":{"shape":"NonEmptyString"},
         "clientToken":{"shape":"ClientToken"},
-        "containerRecipeArn":{"shape":"ContainerRecipeArn"}
+        "containerRecipeArn":{"shape":"ContainerRecipeArn"},
+        "latestVersionReferences":{"shape":"LatestVersionReferences"}
       }
     },
     "CreateDistributionConfigurationRequest":{
@@ -1890,7 +1961,8 @@
         },
         "imageScanningConfiguration":{"shape":"ImageScanningConfiguration"},
         "workflows":{"shape":"WorkflowConfigurationList"},
-        "executionRole":{"shape":"RoleNameOrArn"}
+        "executionRole":{"shape":"RoleNameOrArn"},
+        "loggingConfiguration":{"shape":"PipelineLoggingConfiguration"}
       }
     },
     "CreateImagePipelineResponse":{
@@ -1906,20 +1978,20 @@
       "required":[
         "name",
         "semanticVersion",
-        "components",
         "parentImage",
         "clientToken"
       ],
       "members":{
         "name":{"shape":"ResourceName"},
         "description":{"shape":"NonEmptyString"},
-        "semanticVersion":{"shape":"VersionNumber"},
+        "semanticVersion":{"shape":"WildcardVersionNumber"},
         "components":{"shape":"ComponentConfigurationList"},
         "parentImage":{"shape":"NonEmptyString"},
         "blockDeviceMappings":{"shape":"InstanceBlockDeviceMappings"},
         "tags":{"shape":"TagMap"},
         "workingDirectory":{"shape":"NonEmptyString"},
         "additionalInstanceConfiguration":{"shape":"AdditionalInstanceConfiguration"},
+        "amiTags":{"shape":"TagMap"},
         "clientToken":{
           "shape":"ClientToken",
           "idempotencyToken":true
@@ -1931,7 +2003,8 @@
       "members":{
         "requestId":{"shape":"NonEmptyString"},
         "clientToken":{"shape":"ClientToken"},
-        "imageRecipeArn":{"shape":"ImageRecipeArn"}
+        "imageRecipeArn":{"shape":"ImageRecipeArn"},
+        "latestVersionReferences":{"shape":"LatestVersionReferences"}
       }
     },
     "CreateImageRequest":{
@@ -1954,7 +2027,8 @@
         },
         "imageScanningConfiguration":{"shape":"ImageScanningConfiguration"},
         "workflows":{"shape":"WorkflowConfigurationList"},
-        "executionRole":{"shape":"RoleNameOrArn"}
+        "executionRole":{"shape":"RoleNameOrArn"},
+        "loggingConfiguration":{"shape":"ImageLoggingConfiguration"}
       }
     },
     "CreateImageResponse":{
@@ -1962,7 +2036,8 @@
       "members":{
         "requestId":{"shape":"NonEmptyString"},
         "clientToken":{"shape":"ClientToken"},
-        "imageBuildVersionArn":{"shape":"ImageBuildVersionArn"}
+        "imageBuildVersionArn":{"shape":"ImageBuildVersionArn"},
+        "latestVersionReferences":{"shape":"LatestVersionReferences"}
       }
     },
     "CreateInfrastructureConfigurationRequest":{
@@ -2054,14 +2129,16 @@
           "shape":"ClientToken",
           "idempotencyToken":true
         },
-        "type":{"shape":"WorkflowType"}
+        "type":{"shape":"WorkflowType"},
+        "dryRun":{"shape":"Boolean"}
       }
     },
     "CreateWorkflowResponse":{
       "type":"structure",
       "members":{
         "clientToken":{"shape":"ClientToken"},
-        "workflowBuildVersionArn":{"shape":"WorkflowBuildVersionArn"}
+        "workflowBuildVersionArn":{"shape":"WorkflowBuildVersionArn"},
+        "latestVersionReferences":{"shape":"LatestVersionReferences"}
       }
     },
     "CvssScore":{
@@ -2269,6 +2346,33 @@
         "VHD"
       ]
     },
+    "DistributeImageRequest":{
+      "type":"structure",
+      "required":[
+        "sourceImage",
+        "distributionConfigurationArn",
+        "executionRole",
+        "clientToken"
+      ],
+      "members":{
+        "sourceImage":{"shape":"NonEmptyString"},
+        "distributionConfigurationArn":{"shape":"DistributionConfigurationArn"},
+        "executionRole":{"shape":"RoleNameOrArn"},
+        "tags":{"shape":"TagMap"},
+        "clientToken":{
+          "shape":"ClientToken",
+          "idempotencyToken":true
+        },
+        "loggingConfiguration":{"shape":"ImageLoggingConfiguration"}
+      }
+    },
+    "DistributeImageResponse":{
+      "type":"structure",
+      "members":{
+        "clientToken":{"shape":"ClientToken"},
+        "imageBuildVersionArn":{"shape":"ImageBuildVersionArn"}
+      }
+    },
     "Distribution":{
       "type":"structure",
       "required":["region"],
@@ -2327,6 +2431,14 @@
       "min":30
     },
     "DockerFileTemplate":{"type":"string"},
+    "DryRunOperationException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "error":{"httpStatusCode":412},
+      "exception":true
+    },
     "EbsInstanceBlockDeviceSpecification":{
       "type":"structure",
       "members":{
@@ -2479,7 +2591,8 @@
       "type":"structure",
       "members":{
         "requestId":{"shape":"NonEmptyString"},
-        "component":{"shape":"Component"}
+        "component":{"shape":"Component"},
+        "latestVersionReferences":{"shape":"LatestVersionReferences"}
       }
     },
     "GetContainerRecipePolicyRequest":{
@@ -2515,7 +2628,8 @@
       "type":"structure",
       "members":{
         "requestId":{"shape":"NonEmptyString"},
-        "containerRecipe":{"shape":"ContainerRecipe"}
+        "containerRecipe":{"shape":"ContainerRecipe"},
+        "latestVersionReferences":{"shape":"LatestVersionReferences"}
       }
     },
     "GetDistributionConfigurationRequest":{
@@ -2605,7 +2719,8 @@
       "type":"structure",
       "members":{
         "requestId":{"shape":"NonEmptyString"},
-        "imageRecipe":{"shape":"ImageRecipe"}
+        "imageRecipe":{"shape":"ImageRecipe"},
+        "latestVersionReferences":{"shape":"LatestVersionReferences"}
       }
     },
     "GetImageRequest":{
@@ -2623,7 +2738,8 @@
       "type":"structure",
       "members":{
         "requestId":{"shape":"NonEmptyString"},
-        "image":{"shape":"Image"}
+        "image":{"shape":"Image"},
+        "latestVersionReferences":{"shape":"LatestVersionReferences"}
       }
     },
     "GetInfrastructureConfigurationRequest":{
@@ -2742,7 +2858,8 @@
     "GetWorkflowResponse":{
       "type":"structure",
       "members":{
-        "workflow":{"shape":"Workflow"}
+        "workflow":{"shape":"Workflow"},
+        "latestVersionReferences":{"shape":"LatestVersionReferences"}
       }
     },
     "GetWorkflowStepExecutionRequest":{
@@ -2823,7 +2940,8 @@
         "deprecationTime":{"shape":"DateTimeTimestamp"},
         "lifecycleExecutionId":{"shape":"LifecycleExecutionId"},
         "executionRole":{"shape":"RoleNameOrArn"},
-        "workflows":{"shape":"WorkflowConfigurationList"}
+        "workflows":{"shape":"WorkflowConfigurationList"},
+        "loggingConfiguration":{"shape":"ImageLoggingConfiguration"}
       }
     },
     "ImageAggregation":{
@@ -2845,6 +2963,12 @@
     "ImageBuilderArn":{
       "type":"string",
       "pattern":"^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws(?:-[a-z-]+)?):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline|lifecycle-policy|workflow\\/(?:build|test|distribution))/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\\.(?:x|[0-9]+)\\.(?:x|[0-9]+))(?:/[0-9]+)?)?$"
+    },
+    "ImageLoggingConfiguration":{
+      "type":"structure",
+      "members":{
+        "logGroupName":{"shape":"LogGroupName"}
+      }
     },
     "ImagePackage":{
       "type":"structure",
@@ -2875,11 +2999,14 @@
         "dateCreated":{"shape":"DateTime"},
         "dateUpdated":{"shape":"DateTime"},
         "dateLastRun":{"shape":"DateTime"},
+        "lastRunStatus":{"shape":"ImageStatus"},
         "dateNextRun":{"shape":"DateTime"},
         "tags":{"shape":"TagMap"},
         "imageScanningConfiguration":{"shape":"ImageScanningConfiguration"},
         "executionRole":{"shape":"RoleNameOrArn"},
-        "workflows":{"shape":"WorkflowConfigurationList"}
+        "workflows":{"shape":"WorkflowConfigurationList"},
+        "loggingConfiguration":{"shape":"PipelineLoggingConfiguration"},
+        "consecutiveFailures":{"shape":"ConsecutiveFailures"}
       }
     },
     "ImagePipelineAggregation":{
@@ -2913,12 +3040,13 @@
         "dateCreated":{"shape":"DateTime"},
         "tags":{"shape":"TagMap"},
         "workingDirectory":{"shape":"NonEmptyString"},
-        "additionalInstanceConfiguration":{"shape":"AdditionalInstanceConfiguration"}
+        "additionalInstanceConfiguration":{"shape":"AdditionalInstanceConfiguration"},
+        "amiTags":{"shape":"TagMap"}
       }
     },
     "ImageRecipeArn":{
       "type":"string",
-      "pattern":"^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-recipe/[a-z0-9-_]+/[0-9]+\\.[0-9]+\\.[0-9]+$"
+      "pattern":"^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-recipe/[a-z0-9-_]+/(?:[0-9]+|x)\\.(?:[0-9]+|x)\\.(?:[0-9]+|x)$"
     },
     "ImageRecipeSummary":{
       "type":"structure",
@@ -3068,7 +3196,8 @@
         "buildType":{"shape":"BuildType"},
         "imageSource":{"shape":"ImageSource"},
         "deprecationTime":{"shape":"DateTimeTimestamp"},
-        "lifecycleExecutionId":{"shape":"LifecycleExecutionId"}
+        "lifecycleExecutionId":{"shape":"LifecycleExecutionId"},
+        "loggingConfiguration":{"shape":"ImageLoggingConfiguration"}
       }
     },
     "ImageSummaryList":{
@@ -3177,6 +3306,7 @@
         "executionRole":{"shape":"RoleNameOrArn"},
         "infrastructureConfigurationArn":{"shape":"InfrastructureConfigurationArn"},
         "uri":{"shape":"Uri"},
+        "loggingConfiguration":{"shape":"ImageLoggingConfiguration"},
         "tags":{"shape":"TagMap"},
         "clientToken":{
           "shape":"ClientToken",
@@ -3207,6 +3337,7 @@
         "platform":{"shape":"Platform"},
         "osVersion":{"shape":"OsVersion"},
         "vmImportTaskId":{"shape":"NonEmptyString"},
+        "loggingConfiguration":{"shape":"ImageLoggingConfiguration"},
         "tags":{"shape":"TagMap"},
         "clientToken":{
           "shape":"ClientToken",
@@ -3376,6 +3507,15 @@
       },
       "error":{"httpStatusCode":400},
       "exception":true
+    },
+    "LatestVersionReferences":{
+      "type":"structure",
+      "members":{
+        "latestVersionArn":{"shape":"ImageBuilderArn"},
+        "latestMajorVersionArn":{"shape":"ImageBuilderArn"},
+        "latestMinorVersionArn":{"shape":"ImageBuilderArn"},
+        "latestPatchVersionArn":{"shape":"ImageBuilderArn"}
+      }
     },
     "LaunchPermissionConfiguration":{
       "type":"structure",
@@ -4144,6 +4284,12 @@
         "nextToken":{"shape":"PaginationToken"}
       }
     },
+    "LogGroupName":{
+      "type":"string",
+      "max":512,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9\\-_/\\.]{1,512}$"
+    },
     "Logging":{
       "type":"structure",
       "members":{
@@ -4270,6 +4416,13 @@
         "EXPRESSION_MATCH_ONLY",
         "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"
       ]
+    },
+    "PipelineLoggingConfiguration":{
+      "type":"structure",
+      "members":{
+        "imageLogGroupName":{"shape":"LogGroupName"},
+        "pipelineLogGroupName":{"shape":"LogGroupName"}
+      }
     },
     "PipelineStatus":{
       "type":"string",
@@ -4489,6 +4642,27 @@
       "max":25,
       "min":1
     },
+    "RetryImageRequest":{
+      "type":"structure",
+      "required":[
+        "imageBuildVersionArn",
+        "clientToken"
+      ],
+      "members":{
+        "imageBuildVersionArn":{"shape":"ImageBuildVersionArn"},
+        "clientToken":{
+          "shape":"ClientToken",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "RetryImageResponse":{
+      "type":"structure",
+      "members":{
+        "clientToken":{"shape":"ClientToken"},
+        "imageBuildVersionArn":{"shape":"ImageBuildVersionArn"}
+      }
+    },
     "RoleNameOrArn":{
       "type":"string",
       "max":2048,
@@ -4521,7 +4695,8 @@
       "members":{
         "scheduleExpression":{"shape":"NonEmptyString"},
         "timezone":{"shape":"Timezone"},
-        "pipelineExecutionStartCondition":{"shape":"PipelineExecutionStartCondition"}
+        "pipelineExecutionStartCondition":{"shape":"PipelineExecutionStartCondition"},
+        "autoDisablePolicy":{"shape":"AutoDisablePolicy"}
       }
     },
     "SecurityGroupIds":{
@@ -4631,7 +4806,8 @@
         "clientToken":{
           "shape":"ClientToken",
           "idempotencyToken":true
-        }
+        },
+        "tags":{"shape":"TagMap"}
       }
     },
     "StartImagePipelineExecutionResponse":{
@@ -4751,6 +4927,14 @@
       "min":3,
       "pattern":"[a-zA-Z0-9]{2,}(?:\\/[a-zA-Z0-9-_+]+)*"
     },
+    "TooManyRequestsException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "error":{"httpStatusCode":429},
+      "exception":true
+    },
     "UntagResourceRequest":{
       "type":"structure",
       "required":[
@@ -4823,6 +5007,7 @@
         },
         "imageScanningConfiguration":{"shape":"ImageScanningConfiguration"},
         "workflows":{"shape":"WorkflowConfigurationList"},
+        "loggingConfiguration":{"shape":"PipelineLoggingConfiguration"},
         "executionRole":{"shape":"RoleNameOrArn"}
       }
     },
@@ -4941,6 +5126,10 @@
       "type":"list",
       "member":{"shape":"VulnerablePackage"}
     },
+    "WildcardVersionNumber":{
+      "type":"string",
+      "pattern":"^(?:[0-9]+|x)\\.(?:[0-9]+|x)\\.(?:[0-9]+|x)$"
+    },
     "Workflow":{
       "type":"structure",
       "members":{
@@ -5002,7 +5191,8 @@
         "totalStepsSkipped":{"shape":"WorkflowStepCount"},
         "startTime":{"shape":"DateTime"},
         "endTime":{"shape":"DateTime"},
-        "parallelGroup":{"shape":"ParallelGroup"}
+        "parallelGroup":{"shape":"ParallelGroup"},
+        "retried":{"shape":"NullableBoolean"}
       }
     },
     "WorkflowExecutionStatus":{

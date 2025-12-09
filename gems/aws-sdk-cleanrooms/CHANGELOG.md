@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2025-12-01)
+------------------
+
+* Feature - AWS Clean Rooms now supports privacy-enhancing synthetic dataset generation for custom ML training.
+
+1.60.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.59.0 (2025-10-30)
+------------------
+
+* Feature - Added support for advanced Spark configurations to optimize SQL performance
+
+1.58.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.57.0 (2025-10-03)
+------------------
+
+* Feature - Added support for reading data sources across regions, and results delivery to allowedlisted regions.
+
+1.56.0 (2025-10-01)
+------------------
+
+* Feature - This release introduces data access budgets to control how many times a table can be used for queries and jobs in a collaboration.
+
 1.55.0 (2025-09-23)
 ------------------
 

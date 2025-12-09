@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.114.0 (2025-11-20)
+------------------
+
+* Feature - The partition value "aws-eusc" is now permitted for ARN (Amazon Resource Name) fields.
+
+1.113.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.112.0 (2025-10-17)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.111.0 (2025-09-30)
+------------------
+
+* Feature - Added support for FIPS VPC endpoints in FIPS-enabled AWS Regions.
+
 1.110.0 (2025-08-26)
 ------------------
 

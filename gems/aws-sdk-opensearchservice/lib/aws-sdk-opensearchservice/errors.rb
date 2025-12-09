@@ -39,6 +39,7 @@ module Aws::OpenSearchService
   # * {ResourceAlreadyExistsException}
   # * {ResourceNotFoundException}
   # * {SlotNotAvailableException}
+  # * {ThrottlingException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -174,6 +175,16 @@ module Aws::OpenSearchService
       # @return [String]
       def slot_suggestions
         @data[:slot_suggestions]
+      end
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::OpenSearchService::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
     end
 

@@ -225,6 +225,10 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
             "NestedStructuresInput": {
                 "type": "structure",
                 "members": {
@@ -232,6 +236,9 @@
                         "shape": "StructArg"
                     }
                 }
+            },
+            "String": {
+                "type": "string"
             },
             "StructArg": {
                 "type": "structure",
@@ -246,13 +253,6 @@
                         "shape": "StructArg"
                     }
                 }
-            },
-            "String": {
-                "type": "string"
-            },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
             }
         },
         "cases": [
@@ -593,6 +593,35 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
+            "GreetingList": {
+                "type": "list",
+                "member": {
+                    "shape": "GreetingStruct"
+                }
+            },
+            "GreetingStruct": {
+                "type": "structure",
+                "members": {
+                    "hi": {
+                        "shape": "String"
+                    }
+                }
+            },
+            "ListWithXmlName": {
+                "type": "list",
+                "member": {
+                    "shape": "String",
+                    "locationName": "item"
+                }
+            },
+            "NestedStructWithList": {
+                "type": "structure",
+                "members": {
+                    "ListArg": {
+                        "shape": "StringList"
+                    }
+                }
+            },
             "QueryListsInput": {
                 "type": "structure",
                 "members": {
@@ -619,42 +648,13 @@
                     }
                 }
             },
+            "String": {
+                "type": "string"
+            },
             "StringList": {
                 "type": "list",
                 "member": {
                     "shape": "String"
-                }
-            },
-            "GreetingList": {
-                "type": "list",
-                "member": {
-                    "shape": "GreetingStruct"
-                }
-            },
-            "ListWithXmlName": {
-                "type": "list",
-                "member": {
-                    "shape": "String",
-                    "locationName": "item"
-                }
-            },
-            "NestedStructWithList": {
-                "type": "structure",
-                "members": {
-                    "ListArg": {
-                        "shape": "StringList"
-                    }
-                }
-            },
-            "String": {
-                "type": "string"
-            },
-            "GreetingStruct": {
-                "type": "structure",
-                "members": {
-                    "hi": {
-                        "shape": "String"
-                    }
                 }
             }
         },
@@ -862,6 +862,51 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
+            "ComplexMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "GreetingStruct"
+                }
+            },
+            "GreetingStruct": {
+                "type": "structure",
+                "members": {
+                    "hi": {
+                        "shape": "String"
+                    }
+                }
+            },
+            "MapOfLists": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "StringList"
+                }
+            },
+            "MapWithXmlName": {
+                "type": "map",
+                "key": {
+                    "shape": "String",
+                    "locationName": "K"
+                },
+                "value": {
+                    "shape": "String",
+                    "locationName": "V"
+                }
+            },
+            "NestedStructWithMap": {
+                "type": "structure",
+                "members": {
+                    "MapArg": {
+                        "shape": "StringMap"
+                    }
+                }
+            },
             "QueryMapsInput": {
                 "type": "structure",
                 "members": {
@@ -895,52 +940,6 @@
                     }
                 }
             },
-            "StringMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "String"
-                }
-            },
-            "ComplexMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "GreetingStruct"
-                }
-            },
-            "MapWithXmlName": {
-                "type": "map",
-                "key": {
-                    "shape": "String",
-                    "locationName": "K"
-                },
-                "value": {
-                    "shape": "String",
-                    "locationName": "V"
-                }
-            },
-            "MapOfLists": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "StringList"
-                }
-            },
-            "NestedStructWithMap": {
-                "type": "structure",
-                "members": {
-                    "MapArg": {
-                        "shape": "StringMap"
-                    }
-                }
-            },
             "String": {
                 "type": "string"
             },
@@ -950,12 +949,13 @@
                     "shape": "String"
                 }
             },
-            "GreetingStruct": {
-                "type": "structure",
-                "members": {
-                    "hi": {
-                        "shape": "String"
-                    }
+            "StringMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
                 }
             }
         },
@@ -1250,6 +1250,10 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
+            "EpochSeconds": {
+                "type": "timestamp",
+                "timestampFormat": "unixTimestamp"
+            },
             "QueryTimestampsInput": {
                 "type": "structure",
                 "members": {
@@ -1264,16 +1268,12 @@
                     }
                 }
             },
-            "Timestamp": {
-                "type": "timestamp"
-            },
             "SyntheticTimestamp_epoch_seconds": {
                 "type": "timestamp",
                 "timestampFormat": "unixTimestamp"
             },
-            "EpochSeconds": {
-                "type": "timestamp",
-                "timestampFormat": "unixTimestamp"
+            "Timestamp": {
+                "type": "timestamp"
             }
         },
         "cases": [
@@ -1329,6 +1329,39 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
+            "Blob": {
+                "type": "blob"
+            },
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "Double": {
+                "type": "double",
+                "box": true
+            },
+            "Float": {
+                "type": "float",
+                "box": true
+            },
+            "FooEnum": {
+                "type": "string",
+                "enum": [
+                    "Foo",
+                    "Baz",
+                    "Bar",
+                    "1",
+                    "0"
+                ]
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "IntegerEnum": {
+                "type": "integer",
+                "box": true
+            },
             "SimpleInputParamsInput": {
                 "type": "structure",
                 "members": {
@@ -1363,39 +1396,6 @@
             },
             "String": {
                 "type": "string"
-            },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
-            },
-            "Integer": {
-                "type": "integer",
-                "box": true
-            },
-            "Float": {
-                "type": "float",
-                "box": true
-            },
-            "Double": {
-                "type": "double",
-                "box": true
-            },
-            "Blob": {
-                "type": "blob"
-            },
-            "FooEnum": {
-                "type": "string",
-                "enum": [
-                    "Foo",
-                    "Baz",
-                    "Bar",
-                    "1",
-                    "0"
-                ]
-            },
-            "IntegerEnum": {
-                "type": "integer",
-                "box": true
             }
         },
         "cases": [

@@ -1,0 +1,696 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RTBFabric
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptLinkResponse]
+        def gateway_id: () -> ::String
+        def peer_gateway_id: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def direction: () -> ("RESPONSE" | "REQUEST")
+        def flow_modules: () -> ::Array[Types::ModuleConfiguration]
+        def pending_flow_modules: () -> ::Array[Types::ModuleConfiguration]
+        def attributes: () -> Types::LinkAttributes
+        def link_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#accept_link-instance_method
+      def accept_link: (
+                         gateway_id: ::String,
+                         link_id: ::String,
+                         ?attributes: {
+                           responder_error_masking: Array[
+                             {
+                               http_code: ::String,
+                               action: ("NO_BID" | "PASSTHROUGH"),
+                               logging_types: Array[("NONE" | "METRIC" | "RESPONSE")],
+                               response_logging_percentage: ::Float?
+                             },
+                           ]?,
+                           customer_provided_id: ::String?
+                         },
+                         log_settings: {
+                           application_logs: {
+                             sampling: {
+                               error_log: ::Float,
+                               filter_log: ::Float
+                             }
+                           }
+                         }
+                       ) -> _AcceptLinkResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptLinkResponseSuccess
+
+      interface _CreateInboundExternalLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInboundExternalLinkResponse]
+        def gateway_id: () -> ::String
+        def link_id: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+        def domain_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#create_inbound_external_link-instance_method
+      def create_inbound_external_link: (
+                                          client_token: ::String,
+                                          gateway_id: ::String,
+                                          ?attributes: {
+                                            responder_error_masking: Array[
+                                              {
+                                                http_code: ::String,
+                                                action: ("NO_BID" | "PASSTHROUGH"),
+                                                logging_types: Array[("NONE" | "METRIC" | "RESPONSE")],
+                                                response_logging_percentage: ::Float?
+                                              },
+                                            ]?,
+                                            customer_provided_id: ::String?
+                                          },
+                                          log_settings: {
+                                            application_logs: {
+                                              sampling: {
+                                                error_log: ::Float,
+                                                filter_log: ::Float
+                                              }
+                                            }
+                                          },
+                                          ?tags: Hash[::String, ::String]
+                                        ) -> _CreateInboundExternalLinkResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInboundExternalLinkResponseSuccess
+
+      interface _CreateLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLinkResponse]
+        def gateway_id: () -> ::String
+        def peer_gateway_id: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def direction: () -> ("RESPONSE" | "REQUEST")
+        def flow_modules: () -> ::Array[Types::ModuleConfiguration]
+        def pending_flow_modules: () -> ::Array[Types::ModuleConfiguration]
+        def attributes: () -> Types::LinkAttributes
+        def link_id: () -> ::String
+        def customer_provided_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#create_link-instance_method
+      def create_link: (
+                         gateway_id: ::String,
+                         peer_gateway_id: ::String,
+                         ?attributes: {
+                           responder_error_masking: Array[
+                             {
+                               http_code: ::String,
+                               action: ("NO_BID" | "PASSTHROUGH"),
+                               logging_types: Array[("NONE" | "METRIC" | "RESPONSE")],
+                               response_logging_percentage: ::Float?
+                             },
+                           ]?,
+                           customer_provided_id: ::String?
+                         },
+                         ?http_responder_allowed: bool,
+                         ?tags: Hash[::String, ::String],
+                         log_settings: {
+                           application_logs: {
+                             sampling: {
+                               error_log: ::Float,
+                               filter_log: ::Float
+                             }
+                           }
+                         }
+                       ) -> _CreateLinkResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLinkResponseSuccess
+
+      interface _CreateOutboundExternalLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOutboundExternalLinkResponse]
+        def gateway_id: () -> ::String
+        def link_id: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#create_outbound_external_link-instance_method
+      def create_outbound_external_link: (
+                                           client_token: ::String,
+                                           gateway_id: ::String,
+                                           ?attributes: {
+                                             responder_error_masking: Array[
+                                               {
+                                                 http_code: ::String,
+                                                 action: ("NO_BID" | "PASSTHROUGH"),
+                                                 logging_types: Array[("NONE" | "METRIC" | "RESPONSE")],
+                                                 response_logging_percentage: ::Float?
+                                               },
+                                             ]?,
+                                             customer_provided_id: ::String?
+                                           },
+                                           public_endpoint: ::String,
+                                           log_settings: {
+                                             application_logs: {
+                                               sampling: {
+                                                 error_log: ::Float,
+                                                 filter_log: ::Float
+                                               }
+                                             }
+                                           },
+                                           ?tags: Hash[::String, ::String]
+                                         ) -> _CreateOutboundExternalLinkResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOutboundExternalLinkResponseSuccess
+
+      interface _CreateRequesterGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRequesterGatewayResponse]
+        def gateway_id: () -> ::String
+        def domain_name: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#create_requester_gateway-instance_method
+      def create_requester_gateway: (
+                                      vpc_id: ::String,
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String],
+                                      client_token: ::String,
+                                      ?description: ::String,
+                                      ?tags: Hash[::String, ::String]
+                                    ) -> _CreateRequesterGatewayResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRequesterGatewayResponseSuccess
+
+      interface _CreateResponderGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResponderGatewayResponse]
+        def gateway_id: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#create_responder_gateway-instance_method
+      def create_responder_gateway: (
+                                      vpc_id: ::String,
+                                      subnet_ids: Array[::String],
+                                      security_group_ids: Array[::String],
+                                      ?domain_name: ::String,
+                                      port: ::Integer,
+                                      protocol: ("HTTP" | "HTTPS"),
+                                      ?trust_store_configuration: {
+                                        certificate_authority_certificates: Array[::String]
+                                      },
+                                      ?managed_endpoint_configuration: {
+                                        auto_scaling_groups: {
+                                          auto_scaling_group_names: Array[::String],
+                                          role_arn: ::String
+                                        }?,
+                                        eks_endpoints: {
+                                          endpoints_resource_name: ::String,
+                                          endpoints_resource_namespace: ::String,
+                                          cluster_api_server_endpoint_uri: ::String,
+                                          cluster_api_server_ca_certificate_chain: ::String,
+                                          cluster_name: ::String,
+                                          role_arn: ::String
+                                        }?
+                                      },
+                                      client_token: ::String,
+                                      ?description: ::String,
+                                      ?tags: Hash[::String, ::String]
+                                    ) -> _CreateResponderGatewayResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResponderGatewayResponseSuccess
+
+      interface _DeleteInboundExternalLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInboundExternalLinkResponse]
+        def link_id: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#delete_inbound_external_link-instance_method
+      def delete_inbound_external_link: (
+                                          gateway_id: ::String,
+                                          link_id: ::String
+                                        ) -> _DeleteInboundExternalLinkResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInboundExternalLinkResponseSuccess
+
+      interface _DeleteLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLinkResponse]
+        def link_id: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#delete_link-instance_method
+      def delete_link: (
+                         gateway_id: ::String,
+                         link_id: ::String
+                       ) -> _DeleteLinkResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLinkResponseSuccess
+
+      interface _DeleteOutboundExternalLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOutboundExternalLinkResponse]
+        def link_id: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#delete_outbound_external_link-instance_method
+      def delete_outbound_external_link: (
+                                           gateway_id: ::String,
+                                           link_id: ::String
+                                         ) -> _DeleteOutboundExternalLinkResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOutboundExternalLinkResponseSuccess
+
+      interface _DeleteRequesterGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRequesterGatewayResponse]
+        def gateway_id: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#delete_requester_gateway-instance_method
+      def delete_requester_gateway: (
+                                      gateway_id: ::String
+                                    ) -> _DeleteRequesterGatewayResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRequesterGatewayResponseSuccess
+
+      interface _DeleteResponderGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResponderGatewayResponse]
+        def gateway_id: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#delete_responder_gateway-instance_method
+      def delete_responder_gateway: (
+                                      gateway_id: ::String
+                                    ) -> _DeleteResponderGatewayResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResponderGatewayResponseSuccess
+
+      interface _GetInboundExternalLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInboundExternalLinkResponse]
+        def gateway_id: () -> ::String
+        def link_id: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+        def domain_name: () -> ::String
+        def flow_modules: () -> ::Array[Types::ModuleConfiguration]
+        def pending_flow_modules: () -> ::Array[Types::ModuleConfiguration]
+        def attributes: () -> Types::LinkAttributes
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+        def log_settings: () -> Types::LinkLogSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#get_inbound_external_link-instance_method
+      def get_inbound_external_link: (
+                                       gateway_id: ::String,
+                                       link_id: ::String
+                                     ) -> _GetInboundExternalLinkResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInboundExternalLinkResponseSuccess
+
+      interface _GetLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLinkResponse]
+        def gateway_id: () -> ::String
+        def peer_gateway_id: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def direction: () -> ("RESPONSE" | "REQUEST")
+        def flow_modules: () -> ::Array[Types::ModuleConfiguration]
+        def pending_flow_modules: () -> ::Array[Types::ModuleConfiguration]
+        def attributes: () -> Types::LinkAttributes
+        def link_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def log_settings: () -> Types::LinkLogSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#get_link-instance_method
+      def get_link: (
+                      gateway_id: ::String,
+                      link_id: ::String
+                    ) -> _GetLinkResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLinkResponseSuccess
+
+      interface _GetOutboundExternalLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOutboundExternalLinkResponse]
+        def gateway_id: () -> ::String
+        def link_id: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+        def public_endpoint: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+        def log_settings: () -> Types::LinkLogSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#get_outbound_external_link-instance_method
+      def get_outbound_external_link: (
+                                        gateway_id: ::String,
+                                        link_id: ::String
+                                      ) -> _GetOutboundExternalLinkResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOutboundExternalLinkResponseSuccess
+
+      interface _GetRequesterGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRequesterGatewayResponse]
+        def status: () -> ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+        def domain_name: () -> ::String
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def vpc_id: () -> ::String
+        def subnet_ids: () -> ::Array[::String]
+        def security_group_ids: () -> ::Array[::String]
+        def gateway_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def active_links_count: () -> ::Integer
+        def total_links_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#get_requester_gateway-instance_method
+      def get_requester_gateway: (
+                                   gateway_id: ::String
+                                 ) -> _GetRequesterGatewayResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRequesterGatewayResponseSuccess
+
+      interface _GetResponderGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResponderGatewayResponse]
+        def vpc_id: () -> ::String
+        def subnet_ids: () -> ::Array[::String]
+        def security_group_ids: () -> ::Array[::String]
+        def status: () -> ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def domain_name: () -> ::String
+        def port: () -> ::Integer
+        def protocol: () -> ("HTTP" | "HTTPS")
+        def trust_store_configuration: () -> Types::TrustStoreConfiguration
+        def managed_endpoint_configuration: () -> Types::ManagedEndpointConfiguration
+        def gateway_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def active_links_count: () -> ::Integer
+        def total_links_count: () -> ::Integer
+        def inbound_links_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#get_responder_gateway-instance_method
+      def get_responder_gateway: (
+                                   gateway_id: ::String
+                                 ) -> _GetResponderGatewayResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResponderGatewayResponseSuccess
+
+      interface _ListLinksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLinksResponse]
+        def links: () -> ::Array[Types::ListLinksResponseStructure]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#list_links-instance_method
+      def list_links: (
+                        gateway_id: ::String,
+                        ?next_token: ::String,
+                        ?max_results: ::Integer
+                      ) -> _ListLinksResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLinksResponseSuccess
+
+      interface _ListRequesterGatewaysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRequesterGatewaysResponse]
+        def gateway_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#list_requester_gateways-instance_method
+      def list_requester_gateways: (
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListRequesterGatewaysResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRequesterGatewaysResponseSuccess
+
+      interface _ListResponderGatewaysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResponderGatewaysResponse]
+        def gateway_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#list_responder_gateways-instance_method
+      def list_responder_gateways: (
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListResponderGatewaysResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResponderGatewaysResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RejectLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectLinkResponse]
+        def gateway_id: () -> ::String
+        def peer_gateway_id: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def direction: () -> ("RESPONSE" | "REQUEST")
+        def flow_modules: () -> ::Array[Types::ModuleConfiguration]
+        def pending_flow_modules: () -> ::Array[Types::ModuleConfiguration]
+        def attributes: () -> Types::LinkAttributes
+        def link_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#reject_link-instance_method
+      def reject_link: (
+                         gateway_id: ::String,
+                         link_id: ::String
+                       ) -> _RejectLinkResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectLinkResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLinkResponse]
+        def link_id: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#update_link-instance_method
+      def update_link: (
+                         gateway_id: ::String,
+                         link_id: ::String,
+                         ?log_settings: {
+                           application_logs: {
+                             sampling: {
+                               error_log: ::Float,
+                               filter_log: ::Float
+                             }
+                           }
+                         }
+                       ) -> _UpdateLinkResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLinkResponseSuccess
+
+      interface _UpdateLinkModuleFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLinkModuleFlowResponse]
+        def gateway_id: () -> ::String
+        def link_id: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#update_link_module_flow-instance_method
+      def update_link_module_flow: (
+                                     client_token: ::String,
+                                     gateway_id: ::String,
+                                     link_id: ::String,
+                                     modules: Array[
+                                       {
+                                         version: ::String?,
+                                         name: ::String,
+                                         depends_on: Array[::String]?,
+                                         module_parameters: {
+                                           no_bid: {
+                                             reason: ::String?,
+                                             reason_code: ::Integer?,
+                                             pass_through_percentage: ::Float?
+                                           }?,
+                                           open_rtb_attribute: {
+                                             filter_type: ("INCLUDE" | "EXCLUDE"),
+                                             filter_configuration: Array[
+                                               {
+                                                 criteria: Array[
+                                                   {
+                                                     path: ::String,
+                                                     values: Array[::String]
+                                                   },
+                                                 ]
+                                               },
+                                             ],
+                                             action: {
+                                               no_bid: {
+                                                 no_bid_reason_code: ::Integer?
+                                               }?,
+                                               header_tag: {
+                                                 name: ::String,
+                                                 value: ::String
+                                               }?
+                                             },
+                                             holdback_percentage: ::Float
+                                           }?,
+                                           rate_limiter: {
+                                             tps: ::Float?
+                                           }?
+                                         }?
+                                       },
+                                     ]
+                                   ) -> _UpdateLinkModuleFlowResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLinkModuleFlowResponseSuccess
+
+      interface _UpdateRequesterGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRequesterGatewayResponse]
+        def gateway_id: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#update_requester_gateway-instance_method
+      def update_requester_gateway: (
+                                      client_token: ::String,
+                                      gateway_id: ::String,
+                                      ?description: ::String
+                                    ) -> _UpdateRequesterGatewayResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRequesterGatewayResponseSuccess
+
+      interface _UpdateResponderGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResponderGatewayResponse]
+        def gateway_id: () -> ::String
+        def status: () -> ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#update_responder_gateway-instance_method
+      def update_responder_gateway: (
+                                      ?domain_name: ::String,
+                                      port: ::Integer,
+                                      protocol: ("HTTP" | "HTTPS"),
+                                      ?trust_store_configuration: {
+                                        certificate_authority_certificates: Array[::String]
+                                      },
+                                      ?managed_endpoint_configuration: {
+                                        auto_scaling_groups: {
+                                          auto_scaling_group_names: Array[::String],
+                                          role_arn: ::String
+                                        }?,
+                                        eks_endpoints: {
+                                          endpoints_resource_name: ::String,
+                                          endpoints_resource_namespace: ::String,
+                                          cluster_api_server_endpoint_uri: ::String,
+                                          cluster_api_server_ca_certificate_chain: ::String,
+                                          cluster_name: ::String,
+                                          role_arn: ::String
+                                        }?
+                                      },
+                                      client_token: ::String,
+                                      gateway_id: ::String,
+                                      ?description: ::String
+                                    ) -> _UpdateResponderGatewayResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResponderGatewayResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#wait_until-instance_method
+      def wait_until: (:inbound_external_link_active waiter_name, 
+                    gateway_id: ::String,
+                    link_id: ::String
+                  ) -> Client::_GetInboundExternalLinkResponseSuccess
+                    | (:inbound_external_link_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetInboundExternalLinkResponseSuccess
+                    | (:link_accepted waiter_name, 
+                    gateway_id: ::String,
+                    link_id: ::String
+                  ) -> Client::_GetLinkResponseSuccess
+                    | (:link_accepted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetLinkResponseSuccess
+                    | (:link_active waiter_name, 
+                    gateway_id: ::String,
+                    link_id: ::String
+                  ) -> Client::_GetLinkResponseSuccess
+                    | (:link_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetLinkResponseSuccess
+                    | (:outbound_external_link_active waiter_name, 
+                    gateway_id: ::String,
+                    link_id: ::String
+                  ) -> Client::_GetOutboundExternalLinkResponseSuccess
+                    | (:outbound_external_link_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetOutboundExternalLinkResponseSuccess
+                    | (:requester_gateway_active waiter_name, 
+                    gateway_id: ::String
+                  ) -> Client::_GetRequesterGatewayResponseSuccess
+                    | (:requester_gateway_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetRequesterGatewayResponseSuccess
+                    | (:requester_gateway_deleted waiter_name, 
+                    gateway_id: ::String
+                  ) -> Client::_GetRequesterGatewayResponseSuccess
+                    | (:requester_gateway_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetRequesterGatewayResponseSuccess
+                    | (:responder_gateway_active waiter_name, 
+                    gateway_id: ::String
+                  ) -> Client::_GetResponderGatewayResponseSuccess
+                    | (:responder_gateway_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetResponderGatewayResponseSuccess
+                    | (:responder_gateway_deleted waiter_name, 
+                    gateway_id: ::String
+                  ) -> Client::_GetResponderGatewayResponseSuccess
+                    | (:responder_gateway_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetResponderGatewayResponseSuccess
+    end
+  end
+end
+

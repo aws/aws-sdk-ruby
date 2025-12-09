@@ -39,6 +39,7 @@ module Aws::PaymentCryptographyData
     DecryptDataInput = Shapes::StructureShape.new(name: 'DecryptDataInput')
     DecryptDataOutput = Shapes::StructureShape.new(name: 'DecryptDataOutput')
     DerivationMethodAttributes = Shapes::UnionShape.new(name: 'DerivationMethodAttributes')
+    DiffieHellmanDerivationData = Shapes::UnionShape.new(name: 'DiffieHellmanDerivationData')
     DiscoverDynamicCardVerificationCode = Shapes::StructureShape.new(name: 'DiscoverDynamicCardVerificationCode')
     DukptAttributes = Shapes::StructureShape.new(name: 'DukptAttributes')
     DukptDerivationAttributes = Shapes::StructureShape.new(name: 'DukptDerivationAttributes')
@@ -79,6 +80,8 @@ module Aws::PaymentCryptographyData
     Ibm3624PinOffset = Shapes::StructureShape.new(name: 'Ibm3624PinOffset')
     Ibm3624PinVerification = Shapes::StructureShape.new(name: 'Ibm3624PinVerification')
     Ibm3624RandomPin = Shapes::StructureShape.new(name: 'Ibm3624RandomPin')
+    IncomingDiffieHellmanTr31KeyBlock = Shapes::StructureShape.new(name: 'IncomingDiffieHellmanTr31KeyBlock')
+    IncomingKeyMaterial = Shapes::UnionShape.new(name: 'IncomingKeyMaterial')
     InitializationVectorType = Shapes::StringShape.new(name: 'InitializationVectorType')
     IntegerRangeBetween0And6 = Shapes::IntegerShape.new(name: 'IntegerRangeBetween0And6')
     IntegerRangeBetween3And5Type = Shapes::IntegerShape.new(name: 'IntegerRangeBetween3And5Type')
@@ -91,6 +94,7 @@ module Aws::PaymentCryptographyData
     KeyCheckValueAlgorithm = Shapes::StringShape.new(name: 'KeyCheckValueAlgorithm')
     KeyDerivationFunction = Shapes::StringShape.new(name: 'KeyDerivationFunction')
     KeyDerivationHashAlgorithm = Shapes::StringShape.new(name: 'KeyDerivationHashAlgorithm')
+    KeyMaterial = Shapes::StringShape.new(name: 'KeyMaterial')
     MacAlgorithm = Shapes::StringShape.new(name: 'MacAlgorithm')
     MacAlgorithmDukpt = Shapes::StructureShape.new(name: 'MacAlgorithmDukpt')
     MacAlgorithmEmv = Shapes::StructureShape.new(name: 'MacAlgorithmEmv')
@@ -101,6 +105,8 @@ module Aws::PaymentCryptographyData
     MasterCardAttributes = Shapes::StructureShape.new(name: 'MasterCardAttributes')
     MessageDataType = Shapes::StringShape.new(name: 'MessageDataType')
     NumberLengthEquals2 = Shapes::StringShape.new(name: 'NumberLengthEquals2')
+    OutgoingKeyMaterial = Shapes::UnionShape.new(name: 'OutgoingKeyMaterial')
+    OutgoingTr31KeyBlock = Shapes::StructureShape.new(name: 'OutgoingTr31KeyBlock')
     PaddingType = Shapes::StringShape.new(name: 'PaddingType')
     PinBlockFormatForEmvPinChange = Shapes::StringShape.new(name: 'PinBlockFormatForEmvPinChange')
     PinBlockFormatForPinData = Shapes::StringShape.new(name: 'PinBlockFormatForPinData')
@@ -139,6 +145,8 @@ module Aws::PaymentCryptographyData
     Tr31WrappedKeyBlock = Shapes::StringShape.new(name: 'Tr31WrappedKeyBlock')
     TrackDataType = Shapes::StringShape.new(name: 'TrackDataType')
     TransactionDataType = Shapes::StringShape.new(name: 'TransactionDataType')
+    TranslateKeyMaterialInput = Shapes::StructureShape.new(name: 'TranslateKeyMaterialInput')
+    TranslateKeyMaterialOutput = Shapes::StructureShape.new(name: 'TranslateKeyMaterialOutput')
     TranslatePinDataInput = Shapes::StructureShape.new(name: 'TranslatePinDataInput')
     TranslatePinDataOutput = Shapes::StructureShape.new(name: 'TranslatePinDataOutput')
     TranslationIsoFormats = Shapes::UnionShape.new(name: 'TranslationIsoFormats')
@@ -166,6 +174,8 @@ module Aws::PaymentCryptographyData
     VisaPinVerificationValue = Shapes::StructureShape.new(name: 'VisaPinVerificationValue')
     WrappedKey = Shapes::StructureShape.new(name: 'WrappedKey')
     WrappedKeyMaterial = Shapes::UnionShape.new(name: 'WrappedKeyMaterial')
+    WrappedKeyMaterialFormat = Shapes::StringShape.new(name: 'WrappedKeyMaterialFormat')
+    WrappedWorkingKey = Shapes::StructureShape.new(name: 'WrappedWorkingKey')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -281,6 +291,12 @@ module Aws::PaymentCryptographyData
     DerivationMethodAttributes.add_member_subclass(:mastercard, Types::DerivationMethodAttributes::Mastercard)
     DerivationMethodAttributes.add_member_subclass(:unknown, Types::DerivationMethodAttributes::Unknown)
     DerivationMethodAttributes.struct_class = Types::DerivationMethodAttributes
+
+    DiffieHellmanDerivationData.add_member(:shared_information, Shapes::ShapeRef.new(shape: SharedInformation, location_name: "SharedInformation"))
+    DiffieHellmanDerivationData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DiffieHellmanDerivationData.add_member_subclass(:shared_information, Types::DiffieHellmanDerivationData::SharedInformation)
+    DiffieHellmanDerivationData.add_member_subclass(:unknown, Types::DiffieHellmanDerivationData::Unknown)
+    DiffieHellmanDerivationData.struct_class = Types::DiffieHellmanDerivationData
 
     DiscoverDynamicCardVerificationCode.add_member(:card_expiry_date, Shapes::ShapeRef.new(shape: CardExpiryDateType, required: true, location_name: "CardExpiryDate"))
     DiscoverDynamicCardVerificationCode.add_member(:unpredictable_number, Shapes::ShapeRef.new(shape: HexLengthBetween2And8, required: true, location_name: "UnpredictableNumber"))
@@ -415,7 +431,7 @@ module Aws::PaymentCryptographyData
     GeneratePinDataInput.add_member(:encryption_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "EncryptionKeyIdentifier"))
     GeneratePinDataInput.add_member(:generation_attributes, Shapes::ShapeRef.new(shape: PinGenerationAttributes, required: true, location_name: "GenerationAttributes"))
     GeneratePinDataInput.add_member(:pin_data_length, Shapes::ShapeRef.new(shape: IntegerRangeBetween4And12, location_name: "PinDataLength"))
-    GeneratePinDataInput.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, required: true, location_name: "PrimaryAccountNumber"))
+    GeneratePinDataInput.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber"))
     GeneratePinDataInput.add_member(:pin_block_format, Shapes::ShapeRef.new(shape: PinBlockFormatForPinData, required: true, location_name: "PinBlockFormat"))
     GeneratePinDataInput.add_member(:encryption_wrapped_key, Shapes::ShapeRef.new(shape: WrappedKey, location_name: "EncryptionWrappedKey"))
     GeneratePinDataInput.struct_class = Types::GeneratePinDataInput
@@ -456,6 +472,22 @@ module Aws::PaymentCryptographyData
     Ibm3624RandomPin.add_member(:pin_validation_data, Shapes::ShapeRef.new(shape: PinValidationDataType, required: true, location_name: "PinValidationData"))
     Ibm3624RandomPin.struct_class = Types::Ibm3624RandomPin
 
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:private_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "PrivateKeyIdentifier"))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:certificate_authority_public_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "CertificateAuthorityPublicKeyIdentifier"))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:public_key_certificate, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "PublicKeyCertificate"))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:derive_key_algorithm, Shapes::ShapeRef.new(shape: SymmetricKeyAlgorithm, required: true, location_name: "DeriveKeyAlgorithm"))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:key_derivation_function, Shapes::ShapeRef.new(shape: KeyDerivationFunction, required: true, location_name: "KeyDerivationFunction"))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:key_derivation_hash_algorithm, Shapes::ShapeRef.new(shape: KeyDerivationHashAlgorithm, required: true, location_name: "KeyDerivationHashAlgorithm"))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:derivation_data, Shapes::ShapeRef.new(shape: DiffieHellmanDerivationData, required: true, location_name: "DerivationData"))
+    IncomingDiffieHellmanTr31KeyBlock.add_member(:wrapped_key_block, Shapes::ShapeRef.new(shape: Tr31WrappedKeyBlock, required: true, location_name: "WrappedKeyBlock"))
+    IncomingDiffieHellmanTr31KeyBlock.struct_class = Types::IncomingDiffieHellmanTr31KeyBlock
+
+    IncomingKeyMaterial.add_member(:diffie_hellman_tr_31_key_block, Shapes::ShapeRef.new(shape: IncomingDiffieHellmanTr31KeyBlock, location_name: "DiffieHellmanTr31KeyBlock"))
+    IncomingKeyMaterial.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    IncomingKeyMaterial.add_member_subclass(:diffie_hellman_tr_31_key_block, Types::IncomingKeyMaterial::DiffieHellmanTr31KeyBlock)
+    IncomingKeyMaterial.add_member_subclass(:unknown, Types::IncomingKeyMaterial::Unknown)
+    IncomingKeyMaterial.struct_class = Types::IncomingKeyMaterial
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
@@ -490,6 +522,15 @@ module Aws::PaymentCryptographyData
     MasterCardAttributes.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: NumberLengthEquals2, required: true, location_name: "PanSequenceNumber"))
     MasterCardAttributes.add_member(:application_cryptogram, Shapes::ShapeRef.new(shape: ApplicationCryptogramType, required: true, location_name: "ApplicationCryptogram"))
     MasterCardAttributes.struct_class = Types::MasterCardAttributes
+
+    OutgoingKeyMaterial.add_member(:tr_31_key_block, Shapes::ShapeRef.new(shape: OutgoingTr31KeyBlock, location_name: "Tr31KeyBlock"))
+    OutgoingKeyMaterial.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OutgoingKeyMaterial.add_member_subclass(:tr_31_key_block, Types::OutgoingKeyMaterial::Tr31KeyBlock)
+    OutgoingKeyMaterial.add_member_subclass(:unknown, Types::OutgoingKeyMaterial::Unknown)
+    OutgoingKeyMaterial.struct_class = Types::OutgoingKeyMaterial
+
+    OutgoingTr31KeyBlock.add_member(:wrapping_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "WrappingKeyIdentifier"))
+    OutgoingTr31KeyBlock.struct_class = Types::OutgoingTr31KeyBlock
 
     PinData.add_member(:pin_offset, Shapes::ShapeRef.new(shape: PinOffsetType, location_name: "PinOffset"))
     PinData.add_member(:verification_value, Shapes::ShapeRef.new(shape: VerificationValueType, location_name: "VerificationValue"))
@@ -602,6 +643,14 @@ module Aws::PaymentCryptographyData
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    TranslateKeyMaterialInput.add_member(:incoming_key_material, Shapes::ShapeRef.new(shape: IncomingKeyMaterial, required: true, location_name: "IncomingKeyMaterial"))
+    TranslateKeyMaterialInput.add_member(:outgoing_key_material, Shapes::ShapeRef.new(shape: OutgoingKeyMaterial, required: true, location_name: "OutgoingKeyMaterial"))
+    TranslateKeyMaterialInput.add_member(:key_check_value_algorithm, Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
+    TranslateKeyMaterialInput.struct_class = Types::TranslateKeyMaterialInput
+
+    TranslateKeyMaterialOutput.add_member(:wrapped_key, Shapes::ShapeRef.new(shape: WrappedWorkingKey, required: true, location_name: "WrappedKey"))
+    TranslateKeyMaterialOutput.struct_class = Types::TranslateKeyMaterialOutput
+
     TranslatePinDataInput.add_member(:incoming_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "IncomingKeyIdentifier"))
     TranslatePinDataInput.add_member(:outgoing_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "OutgoingKeyIdentifier"))
     TranslatePinDataInput.add_member(:incoming_translation_attributes, Shapes::ShapeRef.new(shape: TranslationIsoFormats, required: true, location_name: "IncomingTranslationAttributes"))
@@ -687,7 +736,7 @@ module Aws::PaymentCryptographyData
     VerifyPinDataInput.add_member(:encryption_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "EncryptionKeyIdentifier"))
     VerifyPinDataInput.add_member(:verification_attributes, Shapes::ShapeRef.new(shape: PinVerificationAttributes, required: true, location_name: "VerificationAttributes"))
     VerifyPinDataInput.add_member(:encrypted_pin_block, Shapes::ShapeRef.new(shape: EncryptedPinBlockType, required: true, location_name: "EncryptedPinBlock"))
-    VerifyPinDataInput.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, required: true, location_name: "PrimaryAccountNumber"))
+    VerifyPinDataInput.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, location_name: "PrimaryAccountNumber"))
     VerifyPinDataInput.add_member(:pin_block_format, Shapes::ShapeRef.new(shape: PinBlockFormatForPinData, required: true, location_name: "PinBlockFormat"))
     VerifyPinDataInput.add_member(:pin_data_length, Shapes::ShapeRef.new(shape: IntegerRangeBetween4And12, location_name: "PinDataLength"))
     VerifyPinDataInput.add_member(:dukpt_attributes, Shapes::ShapeRef.new(shape: DukptAttributes, location_name: "DukptAttributes"))
@@ -736,6 +785,11 @@ module Aws::PaymentCryptographyData
     WrappedKeyMaterial.add_member_subclass(:diffie_hellman_symmetric_key, Types::WrappedKeyMaterial::DiffieHellmanSymmetricKey)
     WrappedKeyMaterial.add_member_subclass(:unknown, Types::WrappedKeyMaterial::Unknown)
     WrappedKeyMaterial.struct_class = Types::WrappedKeyMaterial
+
+    WrappedWorkingKey.add_member(:wrapped_key_material, Shapes::ShapeRef.new(shape: KeyMaterial, required: true, location_name: "WrappedKeyMaterial"))
+    WrappedWorkingKey.add_member(:key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, required: true, location_name: "KeyCheckValue"))
+    WrappedWorkingKey.add_member(:wrapped_key_material_format, Shapes::ShapeRef.new(shape: WrappedKeyMaterialFormat, required: true, location_name: "WrappedKeyMaterialFormat"))
+    WrappedWorkingKey.struct_class = Types::WrappedWorkingKey
 
 
     # @api private
@@ -840,6 +894,19 @@ module Aws::PaymentCryptographyData
         o.http_request_uri = "/keys/{IncomingKeyIdentifier}/reencrypt"
         o.input = Shapes::ShapeRef.new(shape: ReEncryptDataInput)
         o.output = Shapes::ShapeRef.new(shape: ReEncryptDataOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:translate_key_material, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TranslateKeyMaterial"
+        o.http_method = "POST"
+        o.http_request_uri = "/keymaterial/translate"
+        o.input = Shapes::ShapeRef.new(shape: TranslateKeyMaterialInput)
+        o.output = Shapes::ShapeRef.new(shape: TranslateKeyMaterialOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

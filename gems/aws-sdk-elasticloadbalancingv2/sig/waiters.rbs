@@ -58,7 +58,8 @@ module Aws
                       {
                         id: ::String,
                         port: ::Integer?,
-                        availability_zone: ::String?
+                        availability_zone: ::String?,
+                        quic_server_id: ::String?
                       },
                     ],
                     ?include: Array[("AnomalyDetection" | "All")]
@@ -76,7 +77,8 @@ module Aws
                       {
                         id: ::String,
                         port: ::Integer?,
-                        availability_zone: ::String?
+                        availability_zone: ::String?,
+                        quic_server_id: ::String?
                       },
                     ],
                     ?include: Array[("AnomalyDetection" | "All")]

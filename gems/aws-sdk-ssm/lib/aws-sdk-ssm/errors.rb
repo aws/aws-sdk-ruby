@@ -112,6 +112,7 @@ module Aws::SSM
   # * {ItemSizeLimitExceededException}
   # * {MalformedResourcePolicyDocumentException}
   # * {MaxDocumentSizeExceeded}
+  # * {NoLongerSupportedException}
   # * {OpsItemAccessDeniedException}
   # * {OpsItemAlreadyExistsException}
   # * {OpsItemConflictException}
@@ -1392,6 +1393,21 @@ module Aws::SSM
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SSM::Types::MaxDocumentSizeExceeded] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class NoLongerSupportedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::NoLongerSupportedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

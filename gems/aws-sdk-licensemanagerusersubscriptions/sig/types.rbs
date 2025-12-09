@@ -24,6 +24,7 @@ module Aws::LicenseManagerUserSubscriptions
     class ActiveDirectorySettings
       attr_accessor domain_name: ::String
       attr_accessor domain_ipv_4_list: ::Array[::String]
+      attr_accessor domain_ipv_6_list: ::Array[::String]
       attr_accessor domain_credentials_provider: Types::CredentialsProvider
       attr_accessor domain_network_settings: Types::DomainNetworkSettings
       SENSITIVE: []
@@ -176,6 +177,7 @@ module Aws::LicenseManagerUserSubscriptions
       attr_accessor provisioning_status: ("PROVISIONING" | "PROVISIONING_FAILED" | "PROVISIONED" | "DELETING" | "DELETION_FAILED" | "DELETED")
       attr_accessor health_status: ("HEALTHY" | "UNHEALTHY" | "NOT_APPLICABLE")
       attr_accessor ipv_4_address: ::String
+      attr_accessor ipv_6_address: ::String
       SENSITIVE: []
     end
 

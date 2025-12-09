@@ -8,6 +8,12 @@
 module Aws::SageMaker
   module Types
 
+    class AcceleratorPartitionConfig
+      attr_accessor type: ("mig-1g.5gb" | "mig-1g.10gb" | "mig-1g.18gb" | "mig-1g.20gb" | "mig-1g.23gb" | "mig-1g.35gb" | "mig-1g.45gb" | "mig-1g.47gb" | "mig-2g.10gb" | "mig-2g.20gb" | "mig-2g.35gb" | "mig-2g.45gb" | "mig-2g.47gb" | "mig-3g.20gb" | "mig-3g.40gb" | "mig-3g.71gb" | "mig-3g.90gb" | "mig-3g.93gb" | "mig-4g.20gb" | "mig-4g.40gb" | "mig-4g.71gb" | "mig-4g.90gb" | "mig-4g.93gb" | "mig-7g.40gb" | "mig-7g.80gb" | "mig-7g.141gb" | "mig-7g.180gb" | "mig-7g.186gb")
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
     class ActionSource
       attr_accessor source_uri: ::String
       attr_accessor source_type: ::String
@@ -65,7 +71,7 @@ module Aws::SageMaker
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor containers: ::Array[Types::ModelPackageContainerDefinition]
-      attr_accessor supported_transform_instance_types: ::Array[("ml.m4.xlarge" | "ml.m4.2xlarge" | "ml.m4.4xlarge" | "ml.m4.10xlarge" | "ml.m4.16xlarge" | "ml.c4.xlarge" | "ml.c4.2xlarge" | "ml.c4.4xlarge" | "ml.c4.8xlarge" | "ml.p2.xlarge" | "ml.p2.8xlarge" | "ml.p2.16xlarge" | "ml.p3.2xlarge" | "ml.p3.8xlarge" | "ml.p3.16xlarge" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.12xlarge" | "ml.m5.24xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.c7i.large" | "ml.c7i.xlarge" | "ml.c7i.2xlarge" | "ml.c7i.4xlarge" | "ml.c7i.8xlarge" | "ml.c7i.12xlarge" | "ml.c7i.16xlarge" | "ml.c7i.24xlarge" | "ml.c7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge" | "ml.g4dn.xlarge" | "ml.g4dn.2xlarge" | "ml.g4dn.4xlarge" | "ml.g4dn.8xlarge" | "ml.g4dn.12xlarge" | "ml.g4dn.16xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge")]
+      attr_accessor supported_transform_instance_types: ::Array[("ml.m4.xlarge" | "ml.m4.2xlarge" | "ml.m4.4xlarge" | "ml.m4.10xlarge" | "ml.m4.16xlarge" | "ml.c4.xlarge" | "ml.c4.2xlarge" | "ml.c4.4xlarge" | "ml.c4.8xlarge" | "ml.p2.xlarge" | "ml.p2.8xlarge" | "ml.p2.16xlarge" | "ml.p3.2xlarge" | "ml.p3.8xlarge" | "ml.p3.16xlarge" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.12xlarge" | "ml.m5.24xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.c7i.large" | "ml.c7i.xlarge" | "ml.c7i.2xlarge" | "ml.c7i.4xlarge" | "ml.c7i.8xlarge" | "ml.c7i.12xlarge" | "ml.c7i.16xlarge" | "ml.c7i.24xlarge" | "ml.c7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge" | "ml.g4dn.xlarge" | "ml.g4dn.2xlarge" | "ml.g4dn.4xlarge" | "ml.g4dn.8xlarge" | "ml.g4dn.12xlarge" | "ml.g4dn.16xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge")]
       attr_accessor supported_realtime_inference_instance_types: ::Array[("ml.t2.medium" | "ml.t2.large" | "ml.t2.xlarge" | "ml.t2.2xlarge" | "ml.m4.xlarge" | "ml.m4.2xlarge" | "ml.m4.4xlarge" | "ml.m4.10xlarge" | "ml.m4.16xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.12xlarge" | "ml.m5.24xlarge" | "ml.m5d.large" | "ml.m5d.xlarge" | "ml.m5d.2xlarge" | "ml.m5d.4xlarge" | "ml.m5d.12xlarge" | "ml.m5d.24xlarge" | "ml.c4.large" | "ml.c4.xlarge" | "ml.c4.2xlarge" | "ml.c4.4xlarge" | "ml.c4.8xlarge" | "ml.p2.xlarge" | "ml.p2.8xlarge" | "ml.p2.16xlarge" | "ml.p3.2xlarge" | "ml.p3.8xlarge" | "ml.p3.16xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.18xlarge" | "ml.c5d.large" | "ml.c5d.xlarge" | "ml.c5d.2xlarge" | "ml.c5d.4xlarge" | "ml.c5d.9xlarge" | "ml.c5d.18xlarge" | "ml.g4dn.xlarge" | "ml.g4dn.2xlarge" | "ml.g4dn.4xlarge" | "ml.g4dn.8xlarge" | "ml.g4dn.12xlarge" | "ml.g4dn.16xlarge" | "ml.r5.large" | "ml.r5.xlarge" | "ml.r5.2xlarge" | "ml.r5.4xlarge" | "ml.r5.12xlarge" | "ml.r5.24xlarge" | "ml.r5d.large" | "ml.r5d.xlarge" | "ml.r5d.2xlarge" | "ml.r5d.4xlarge" | "ml.r5d.12xlarge" | "ml.r5d.24xlarge" | "ml.inf1.xlarge" | "ml.inf1.2xlarge" | "ml.inf1.6xlarge" | "ml.inf1.24xlarge" | "ml.dl1.24xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.r8g.medium" | "ml.r8g.large" | "ml.r8g.xlarge" | "ml.r8g.2xlarge" | "ml.r8g.4xlarge" | "ml.r8g.8xlarge" | "ml.r8g.12xlarge" | "ml.r8g.16xlarge" | "ml.r8g.24xlarge" | "ml.r8g.48xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.12xlarge" | "ml.g6e.16xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p4d.24xlarge" | "ml.c7g.large" | "ml.c7g.xlarge" | "ml.c7g.2xlarge" | "ml.c7g.4xlarge" | "ml.c7g.8xlarge" | "ml.c7g.12xlarge" | "ml.c7g.16xlarge" | "ml.m6g.large" | "ml.m6g.xlarge" | "ml.m6g.2xlarge" | "ml.m6g.4xlarge" | "ml.m6g.8xlarge" | "ml.m6g.12xlarge" | "ml.m6g.16xlarge" | "ml.m6gd.large" | "ml.m6gd.xlarge" | "ml.m6gd.2xlarge" | "ml.m6gd.4xlarge" | "ml.m6gd.8xlarge" | "ml.m6gd.12xlarge" | "ml.m6gd.16xlarge" | "ml.c6g.large" | "ml.c6g.xlarge" | "ml.c6g.2xlarge" | "ml.c6g.4xlarge" | "ml.c6g.8xlarge" | "ml.c6g.12xlarge" | "ml.c6g.16xlarge" | "ml.c6gd.large" | "ml.c6gd.xlarge" | "ml.c6gd.2xlarge" | "ml.c6gd.4xlarge" | "ml.c6gd.8xlarge" | "ml.c6gd.12xlarge" | "ml.c6gd.16xlarge" | "ml.c6gn.large" | "ml.c6gn.xlarge" | "ml.c6gn.2xlarge" | "ml.c6gn.4xlarge" | "ml.c6gn.8xlarge" | "ml.c6gn.12xlarge" | "ml.c6gn.16xlarge" | "ml.r6g.large" | "ml.r6g.xlarge" | "ml.r6g.2xlarge" | "ml.r6g.4xlarge" | "ml.r6g.8xlarge" | "ml.r6g.12xlarge" | "ml.r6g.16xlarge" | "ml.r6gd.large" | "ml.r6gd.xlarge" | "ml.r6gd.2xlarge" | "ml.r6gd.4xlarge" | "ml.r6gd.8xlarge" | "ml.r6gd.12xlarge" | "ml.r6gd.16xlarge" | "ml.p4de.24xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.trn2.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.c7i.large" | "ml.c7i.xlarge" | "ml.c7i.2xlarge" | "ml.c7i.4xlarge" | "ml.c7i.8xlarge" | "ml.c7i.12xlarge" | "ml.c7i.16xlarge" | "ml.c7i.24xlarge" | "ml.c7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge" | "ml.c8g.medium" | "ml.c8g.large" | "ml.c8g.xlarge" | "ml.c8g.2xlarge" | "ml.c8g.4xlarge" | "ml.c8g.8xlarge" | "ml.c8g.12xlarge" | "ml.c8g.16xlarge" | "ml.c8g.24xlarge" | "ml.c8g.48xlarge" | "ml.r7gd.medium" | "ml.r7gd.large" | "ml.r7gd.xlarge" | "ml.r7gd.2xlarge" | "ml.r7gd.4xlarge" | "ml.r7gd.8xlarge" | "ml.r7gd.12xlarge" | "ml.r7gd.16xlarge" | "ml.m8g.medium" | "ml.m8g.large" | "ml.m8g.xlarge" | "ml.m8g.2xlarge" | "ml.m8g.4xlarge" | "ml.m8g.8xlarge" | "ml.m8g.12xlarge" | "ml.m8g.16xlarge" | "ml.m8g.24xlarge" | "ml.m8g.48xlarge" | "ml.c6in.large" | "ml.c6in.xlarge" | "ml.c6in.2xlarge" | "ml.c6in.4xlarge" | "ml.c6in.8xlarge" | "ml.c6in.12xlarge" | "ml.c6in.16xlarge" | "ml.c6in.24xlarge" | "ml.c6in.32xlarge" | "ml.p6-b200.48xlarge" | "ml.p6e-gb200.36xlarge" | "ml.p5.4xlarge")]
       attr_accessor supported_content_types: ::Array[::String]
       attr_accessor supported_response_mime_types: ::Array[::String]
@@ -226,6 +232,12 @@ module Aws::SageMaker
     class AssociateTrialComponentResponse
       attr_accessor trial_component_arn: ::String
       attr_accessor trial_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociationInfo
+      attr_accessor source_arn: ::String
+      attr_accessor destination_arn: ::String
       SENSITIVE: []
     end
 
@@ -506,6 +518,19 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class AvailableUpgrade
+      attr_accessor version: ::String
+      attr_accessor release_notes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BaseModel
+      attr_accessor hub_content_name: ::String
+      attr_accessor hub_content_version: ::String
+      attr_accessor recipe_name: ::String
+      SENSITIVE: []
+    end
+
     class BatchAddClusterNodesError
       attr_accessor instance_group_name: ::String
       attr_accessor error_code: ("InstanceGroupNotFound" | "InvalidInstanceGroupStatus")
@@ -589,6 +614,65 @@ module Aws::SageMaker
       attr_accessor inference_specification: Types::InferenceSpecification
       attr_accessor model_package_status: ("Pending" | "InProgress" | "Completed" | "Failed" | "Deleting")
       attr_accessor model_approval_status: ("Approved" | "Rejected" | "PendingManualApproval")
+      attr_accessor model_package_registration_type: ("Logged" | "Registered")
+      SENSITIVE: []
+    end
+
+    class BatchRebootClusterNodeLogicalIdsError
+      attr_accessor node_logical_id: ::String
+      attr_accessor error_code: ("InstanceIdNotFound" | "InvalidInstanceStatus" | "InstanceIdInUse" | "InternalServerError")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchRebootClusterNodesError
+      attr_accessor node_id: ::String
+      attr_accessor error_code: ("InstanceIdNotFound" | "InvalidInstanceStatus" | "InstanceIdInUse" | "InternalServerError")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchRebootClusterNodesRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor node_ids: ::Array[::String]
+      attr_accessor node_logical_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchRebootClusterNodesResponse
+      attr_accessor successful: ::Array[::String]
+      attr_accessor failed: ::Array[Types::BatchRebootClusterNodesError]
+      attr_accessor failed_node_logical_ids: ::Array[Types::BatchRebootClusterNodeLogicalIdsError]
+      attr_accessor successful_node_logical_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchReplaceClusterNodeLogicalIdsError
+      attr_accessor node_logical_id: ::String
+      attr_accessor error_code: ("InstanceIdNotFound" | "InvalidInstanceStatus" | "InstanceIdInUse" | "InternalServerError")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchReplaceClusterNodesError
+      attr_accessor node_id: ::String
+      attr_accessor error_code: ("InstanceIdNotFound" | "InvalidInstanceStatus" | "InstanceIdInUse" | "InternalServerError")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchReplaceClusterNodesRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor node_ids: ::Array[::String]
+      attr_accessor node_logical_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchReplaceClusterNodesResponse
+      attr_accessor successful: ::Array[::String]
+      attr_accessor failed: ::Array[Types::BatchReplaceClusterNodesError]
+      attr_accessor failed_node_logical_ids: ::Array[Types::BatchReplaceClusterNodeLogicalIdsError]
+      attr_accessor successful_node_logical_ids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -605,6 +689,26 @@ module Aws::SageMaker
       attr_accessor start_time_offset: ::String
       attr_accessor end_time_offset: ::String
       attr_accessor exclude_features_attribute: ::String
+      SENSITIVE: []
+    end
+
+    class BedrockCustomModelDeploymentMetadata
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class BedrockCustomModelMetadata
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class BedrockModelImportMetadata
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class BedrockProvisionedModelThroughputMetadata
+      attr_accessor arn: ::String
       SENSITIVE: []
     end
 
@@ -861,6 +965,12 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ClusterCapacityRequirements
+      attr_accessor spot: Types::ClusterSpotOptions
+      attr_accessor on_demand: Types::ClusterOnDemandOptions
+      SENSITIVE: []
+    end
+
     class ClusterEbsVolumeConfig
       attr_accessor volume_size_in_gb: ::Integer
       attr_accessor volume_kms_key_id: ::String
@@ -896,8 +1006,9 @@ module Aws::SageMaker
     class ClusterInstanceGroupDetails
       attr_accessor current_count: ::Integer
       attr_accessor target_count: ::Integer
+      attr_accessor min_count: ::Integer
       attr_accessor instance_group_name: ::String
-      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p6e-gb200.36xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.c5n.large" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.16xlarge" | "ml.g6.12xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.gr6.4xlarge" | "ml.gr6.8xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.16xlarge" | "ml.g6e.12xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.trn2.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.i3en.large" | "ml.i3en.xlarge" | "ml.i3en.2xlarge" | "ml.i3en.3xlarge" | "ml.i3en.6xlarge" | "ml.i3en.12xlarge" | "ml.i3en.24xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge")
+      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p5.4xlarge" | "ml.p6e-gb200.36xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.c5n.large" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.16xlarge" | "ml.g6.12xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.gr6.4xlarge" | "ml.gr6.8xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.16xlarge" | "ml.g6e.12xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.trn2.3xlarge" | "ml.trn2.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.i3en.large" | "ml.i3en.xlarge" | "ml.i3en.2xlarge" | "ml.i3en.3xlarge" | "ml.i3en.6xlarge" | "ml.i3en.12xlarge" | "ml.i3en.24xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge")
       attr_accessor life_cycle_config: Types::ClusterLifeCycleConfig
       attr_accessor execution_role: ::String
       attr_accessor threads_per_core: ::Integer
@@ -910,13 +1021,20 @@ module Aws::SageMaker
       attr_accessor scheduled_update_config: Types::ScheduledUpdateConfig
       attr_accessor current_image_id: ::String
       attr_accessor desired_image_id: ::String
+      attr_accessor active_operations: ::Hash[("Scaling"), ::Integer]
+      attr_accessor kubernetes_config: Types::ClusterKubernetesConfigDetails
+      attr_accessor capacity_requirements: Types::ClusterCapacityRequirements
+      attr_accessor target_state_count: ::Integer
+      attr_accessor software_update_status: ("Pending" | "InProgress" | "Succeeded" | "Failed" | "RollbackInProgress" | "RollbackComplete")
+      attr_accessor active_software_update_config: Types::DeploymentConfiguration
       SENSITIVE: []
     end
 
     class ClusterInstanceGroupSpecification
       attr_accessor instance_count: ::Integer
+      attr_accessor min_instance_count: ::Integer
       attr_accessor instance_group_name: ::String
-      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p6e-gb200.36xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.c5n.large" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.16xlarge" | "ml.g6.12xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.gr6.4xlarge" | "ml.gr6.8xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.16xlarge" | "ml.g6e.12xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.trn2.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.i3en.large" | "ml.i3en.xlarge" | "ml.i3en.2xlarge" | "ml.i3en.3xlarge" | "ml.i3en.6xlarge" | "ml.i3en.12xlarge" | "ml.i3en.24xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge")
+      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p5.4xlarge" | "ml.p6e-gb200.36xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.c5n.large" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.16xlarge" | "ml.g6.12xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.gr6.4xlarge" | "ml.gr6.8xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.16xlarge" | "ml.g6e.12xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.trn2.3xlarge" | "ml.trn2.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.i3en.large" | "ml.i3en.xlarge" | "ml.i3en.2xlarge" | "ml.i3en.3xlarge" | "ml.i3en.6xlarge" | "ml.i3en.12xlarge" | "ml.i3en.24xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge")
       attr_accessor life_cycle_config: Types::ClusterLifeCycleConfig
       attr_accessor execution_role: ::String
       attr_accessor threads_per_core: ::Integer
@@ -926,6 +1044,8 @@ module Aws::SageMaker
       attr_accessor override_vpc_config: Types::VpcConfig
       attr_accessor scheduled_update_config: Types::ScheduledUpdateConfig
       attr_accessor image_id: ::String
+      attr_accessor kubernetes_config: Types::ClusterKubernetesConfig
+      attr_accessor capacity_requirements: Types::ClusterCapacityRequirements
       SENSITIVE: []
     end
 
@@ -952,6 +1072,35 @@ module Aws::SageMaker
       end
     end
 
+    class ClusterKubernetesConfig
+      attr_accessor labels: ::Hash[::String, ::String]
+      attr_accessor taints: ::Array[Types::ClusterKubernetesTaint]
+      SENSITIVE: []
+    end
+
+    class ClusterKubernetesConfigDetails
+      attr_accessor current_labels: ::Hash[::String, ::String]
+      attr_accessor desired_labels: ::Hash[::String, ::String]
+      attr_accessor current_taints: ::Array[Types::ClusterKubernetesTaint]
+      attr_accessor desired_taints: ::Array[Types::ClusterKubernetesTaint]
+      SENSITIVE: []
+    end
+
+    class ClusterKubernetesConfigNodeDetails
+      attr_accessor current_labels: ::Hash[::String, ::String]
+      attr_accessor desired_labels: ::Hash[::String, ::String]
+      attr_accessor current_taints: ::Array[Types::ClusterKubernetesTaint]
+      attr_accessor desired_taints: ::Array[Types::ClusterKubernetesTaint]
+      SENSITIVE: []
+    end
+
+    class ClusterKubernetesTaint
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor effect: ("NoSchedule" | "PreferNoSchedule" | "NoExecute")
+      SENSITIVE: []
+    end
+
     class ClusterLifeCycleConfig
       attr_accessor source_s3_uri: ::String
       attr_accessor on_create: ::String
@@ -970,7 +1119,7 @@ module Aws::SageMaker
       attr_accessor instance_id: ::String
       attr_accessor node_logical_id: ::String
       attr_accessor instance_status: Types::ClusterInstanceStatusDetails
-      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p6e-gb200.36xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.c5n.large" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.16xlarge" | "ml.g6.12xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.gr6.4xlarge" | "ml.gr6.8xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.16xlarge" | "ml.g6e.12xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.trn2.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.i3en.large" | "ml.i3en.xlarge" | "ml.i3en.2xlarge" | "ml.i3en.3xlarge" | "ml.i3en.6xlarge" | "ml.i3en.12xlarge" | "ml.i3en.24xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge")
+      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p5.4xlarge" | "ml.p6e-gb200.36xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.c5n.large" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.16xlarge" | "ml.g6.12xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.gr6.4xlarge" | "ml.gr6.8xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.16xlarge" | "ml.g6e.12xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.trn2.3xlarge" | "ml.trn2.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.i3en.large" | "ml.i3en.xlarge" | "ml.i3en.2xlarge" | "ml.i3en.3xlarge" | "ml.i3en.6xlarge" | "ml.i3en.12xlarge" | "ml.i3en.24xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge")
       attr_accessor launch_time: ::Time
       attr_accessor last_software_update_time: ::Time
       attr_accessor life_cycle_config: Types::ClusterLifeCycleConfig
@@ -984,6 +1133,8 @@ module Aws::SageMaker
       attr_accessor current_image_id: ::String
       attr_accessor desired_image_id: ::String
       attr_accessor ultra_server_info: Types::UltraServerInfo
+      attr_accessor kubernetes_config: Types::ClusterKubernetesConfigNodeDetails
+      attr_accessor capacity_type: ("Spot" | "OnDemand")
       SENSITIVE: []
     end
 
@@ -991,12 +1142,16 @@ module Aws::SageMaker
       attr_accessor instance_group_name: ::String
       attr_accessor instance_id: ::String
       attr_accessor node_logical_id: ::String
-      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p6e-gb200.36xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.c5n.large" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.16xlarge" | "ml.g6.12xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.gr6.4xlarge" | "ml.gr6.8xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.16xlarge" | "ml.g6e.12xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.trn2.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.i3en.large" | "ml.i3en.xlarge" | "ml.i3en.2xlarge" | "ml.i3en.3xlarge" | "ml.i3en.6xlarge" | "ml.i3en.12xlarge" | "ml.i3en.24xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge")
+      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p5.4xlarge" | "ml.p6e-gb200.36xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.c5n.large" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.16xlarge" | "ml.g6.12xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.gr6.4xlarge" | "ml.gr6.8xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.16xlarge" | "ml.g6e.12xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.trn2.3xlarge" | "ml.trn2.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.i3en.large" | "ml.i3en.xlarge" | "ml.i3en.2xlarge" | "ml.i3en.3xlarge" | "ml.i3en.6xlarge" | "ml.i3en.12xlarge" | "ml.i3en.24xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge")
       attr_accessor launch_time: ::Time
       attr_accessor last_software_update_time: ::Time
       attr_accessor instance_status: Types::ClusterInstanceStatusDetails
       attr_accessor ultra_server_info: Types::UltraServerInfo
+      attr_accessor private_dns_hostname: ::String
       SENSITIVE: []
+    end
+
+    class ClusterOnDemandOptions < Aws::EmptyStructure
     end
 
     class ClusterOrchestrator
@@ -1013,7 +1168,7 @@ module Aws::SageMaker
       attr_accessor current_count: ::Integer
       attr_accessor target_count: ::Integer
       attr_accessor instance_group_name: ::String
-      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p6e-gb200.36xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.c5n.large" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.16xlarge" | "ml.g6.12xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.gr6.4xlarge" | "ml.gr6.8xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.16xlarge" | "ml.g6e.12xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.trn2.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.i3en.large" | "ml.i3en.xlarge" | "ml.i3en.2xlarge" | "ml.i3en.3xlarge" | "ml.i3en.6xlarge" | "ml.i3en.12xlarge" | "ml.i3en.24xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge")
+      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p5.4xlarge" | "ml.p6e-gb200.36xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.c5n.large" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.16xlarge" | "ml.g6.12xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.gr6.4xlarge" | "ml.gr6.8xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.16xlarge" | "ml.g6e.12xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.trn2.3xlarge" | "ml.trn2.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.i3en.large" | "ml.i3en.xlarge" | "ml.i3en.2xlarge" | "ml.i3en.3xlarge" | "ml.i3en.6xlarge" | "ml.i3en.12xlarge" | "ml.i3en.24xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge")
       attr_accessor execution_role: ::String
       attr_accessor threads_per_core: ::Integer
       attr_accessor instance_storage_configs: ::Array[Types::ClusterInstanceStorageConfig]
@@ -1030,7 +1185,7 @@ module Aws::SageMaker
     class ClusterRestrictedInstanceGroupSpecification
       attr_accessor instance_count: ::Integer
       attr_accessor instance_group_name: ::String
-      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p6e-gb200.36xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.c5n.large" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.16xlarge" | "ml.g6.12xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.gr6.4xlarge" | "ml.gr6.8xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.16xlarge" | "ml.g6e.12xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.trn2.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.i3en.large" | "ml.i3en.xlarge" | "ml.i3en.2xlarge" | "ml.i3en.3xlarge" | "ml.i3en.6xlarge" | "ml.i3en.12xlarge" | "ml.i3en.24xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge")
+      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p5.4xlarge" | "ml.p6e-gb200.36xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.c5n.large" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.16xlarge" | "ml.g6.12xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.gr6.4xlarge" | "ml.gr6.8xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.16xlarge" | "ml.g6e.12xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.trn2.3xlarge" | "ml.trn2.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.i3en.large" | "ml.i3en.xlarge" | "ml.i3en.2xlarge" | "ml.i3en.3xlarge" | "ml.i3en.6xlarge" | "ml.i3en.12xlarge" | "ml.i3en.24xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge")
       attr_accessor execution_role: ::String
       attr_accessor threads_per_core: ::Integer
       attr_accessor instance_storage_configs: ::Array[Types::ClusterInstanceStorageConfig]
@@ -1052,6 +1207,9 @@ module Aws::SageMaker
       attr_accessor status: ("Creating" | "CreateFailed" | "CreateRollbackFailed" | "Created" | "Updating" | "UpdateFailed" | "UpdateRollbackFailed" | "Updated" | "Deleting" | "DeleteFailed" | "DeleteRollbackFailed" | "Deleted")
       attr_accessor cluster_arn: ::String
       SENSITIVE: []
+    end
+
+    class ClusterSpotOptions < Aws::EmptyStructure
     end
 
     class ClusterSummary
@@ -1151,11 +1309,12 @@ module Aws::SageMaker
     end
 
     class ComputeQuotaResourceConfig
-      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p6e-gb200.36xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.c5n.large" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.16xlarge" | "ml.g6.12xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.gr6.4xlarge" | "ml.gr6.8xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.16xlarge" | "ml.g6e.12xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.trn2.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.i3en.large" | "ml.i3en.xlarge" | "ml.i3en.2xlarge" | "ml.i3en.3xlarge" | "ml.i3en.6xlarge" | "ml.i3en.12xlarge" | "ml.i3en.24xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge")
+      attr_accessor instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p5.4xlarge" | "ml.p6e-gb200.36xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.c5n.large" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.16xlarge" | "ml.g6.12xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.gr6.4xlarge" | "ml.gr6.8xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.16xlarge" | "ml.g6e.12xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.trn2.3xlarge" | "ml.trn2.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.i3en.large" | "ml.i3en.xlarge" | "ml.i3en.2xlarge" | "ml.i3en.3xlarge" | "ml.i3en.6xlarge" | "ml.i3en.12xlarge" | "ml.i3en.24xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge")
       attr_accessor count: ::Integer
       attr_accessor accelerators: ::Integer
       attr_accessor v_cpu: ::Float
       attr_accessor memory_in_gi_b: ::Float
+      attr_accessor accelerator_partition: Types::AcceleratorPartitionConfig
       SENSITIVE: []
     end
 
@@ -1559,6 +1718,7 @@ module Aws::SageMaker
       attr_accessor execution_role_arn: ::String
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor enable_network_isolation: bool
+      attr_accessor metrics_config: Types::MetricsConfig
       SENSITIVE: []
     end
 
@@ -1630,7 +1790,7 @@ module Aws::SageMaker
 
     class CreateHubContentPresignedUrlsRequest
       attr_accessor hub_name: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference" | "DataSet" | "JsonDoc")
       attr_accessor hub_content_name: ::String
       attr_accessor hub_content_version: ::String
       attr_accessor access_config: Types::PresignedUrlAccessConfig
@@ -1808,6 +1968,23 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class CreateMlflowAppRequest
+      attr_accessor name: ::String
+      attr_accessor artifact_store_uri: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor model_registration_mode: ("AutoModelRegistrationEnabled" | "AutoModelRegistrationDisabled")
+      attr_accessor weekly_maintenance_window_start: ::String
+      attr_accessor account_default_status: ("ENABLED" | "DISABLED")
+      attr_accessor default_domain_id_list: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateMlflowAppResponse
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateMlflowTrackingServerRequest
       attr_accessor tracking_server_name: ::String
       attr_accessor artifact_store_uri: ::String
@@ -1923,6 +2100,7 @@ module Aws::SageMaker
       attr_accessor model_package_name: ::String
       attr_accessor model_package_group_name: ::String
       attr_accessor model_package_description: ::String
+      attr_accessor model_package_registration_type: ("Logged" | "Registered")
       attr_accessor inference_specification: Types::InferenceSpecification
       attr_accessor validation_specification: Types::ModelPackageValidationSpecification
       attr_accessor source_algorithm_specification: Types::SourceAlgorithmSpecification
@@ -2025,7 +2203,8 @@ module Aws::SageMaker
       attr_accessor optimization_job_name: ::String
       attr_accessor role_arn: ::String
       attr_accessor model_source: Types::OptimizationJobModelSource
-      attr_accessor deployment_instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.12xlarge" | "ml.g6e.16xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge")
+      attr_accessor deployment_instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.12xlarge" | "ml.g6e.16xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge")
+      attr_accessor max_instance_count: ::Integer
       attr_accessor optimization_environment: ::Hash[::String, ::String]
       attr_accessor optimization_configs: ::Array[Types::OptimizationConfig]
       attr_accessor output_config: Types::OptimizationJobOutputConfig
@@ -2062,6 +2241,7 @@ module Aws::SageMaker
       attr_accessor application_config: Types::PartnerAppConfig
       attr_accessor auth_type: ("IAM")
       attr_accessor enable_iam_session_based_identity: bool
+      attr_accessor enable_auto_minor_version_upgrade: bool
       attr_accessor client_token: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
@@ -2101,6 +2281,18 @@ module Aws::SageMaker
     end
 
     class CreatePresignedDomainUrlResponse
+      attr_accessor authorized_url: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePresignedMlflowAppUrlRequest
+      attr_accessor arn: ::String
+      attr_accessor expires_in_seconds: ::Integer
+      attr_accessor session_expiration_duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreatePresignedMlflowAppUrlResponse
       attr_accessor authorized_url: ::String
       SENSITIVE: []
     end
@@ -2223,6 +2415,9 @@ module Aws::SageMaker
       attr_accessor remote_debug_config: Types::RemoteDebugConfig
       attr_accessor infra_check_config: Types::InfraCheckConfig
       attr_accessor session_chaining_config: Types::SessionChainingConfig
+      attr_accessor serverless_job_config: Types::ServerlessJobConfig
+      attr_accessor mlflow_config: Types::MlflowConfig
+      attr_accessor model_package_config: Types::ModelPackageConfig
       SENSITIVE: []
     end
 
@@ -2460,6 +2655,7 @@ module Aws::SageMaker
     class DataSource
       attr_accessor s3_data_source: Types::S3DataSource
       attr_accessor file_system_data_source: Types::FileSystemDataSource
+      attr_accessor dataset_source: Types::DatasetSource
       SENSITIVE: []
     end
 
@@ -2469,6 +2665,11 @@ module Aws::SageMaker
       attr_accessor local_path: ::String
       attr_accessor data_distribution_type: ("FullyReplicated" | "ShardedByS3Key")
       attr_accessor input_mode: ("Pipe" | "File")
+      SENSITIVE: []
+    end
+
+    class DatasetSource
+      attr_accessor dataset_arn: ::String
       SENSITIVE: []
     end
 
@@ -2677,14 +2878,14 @@ module Aws::SageMaker
 
     class DeleteHubContentReferenceRequest
       attr_accessor hub_name: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference" | "DataSet" | "JsonDoc")
       attr_accessor hub_content_name: ::String
       SENSITIVE: []
     end
 
     class DeleteHubContentRequest
       attr_accessor hub_name: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference" | "DataSet" | "JsonDoc")
       attr_accessor hub_content_name: ::String
       attr_accessor hub_content_version: ::String
       SENSITIVE: []
@@ -2738,6 +2939,16 @@ module Aws::SageMaker
 
     class DeleteInferenceExperimentResponse
       attr_accessor inference_experiment_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMlflowAppRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMlflowAppResponse
+      attr_accessor arn: ::String
       SENSITIVE: []
     end
 
@@ -2833,6 +3044,11 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class DeleteProcessingJobRequest
+      attr_accessor processing_job_name: ::String
+      SENSITIVE: []
+    end
+
     class DeleteProjectInput
       attr_accessor project_name: ::String
       SENSITIVE: []
@@ -2856,6 +3072,11 @@ module Aws::SageMaker
     end
 
     class DeleteTagsOutput < Aws::EmptyStructure
+    end
+
+    class DeleteTrainingJobRequest
+      attr_accessor training_job_name: ::String
+      SENSITIVE: []
     end
 
     class DeleteTrialComponentRequest
@@ -3433,6 +3654,7 @@ module Aws::SageMaker
       attr_accessor execution_role_arn: ::String
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor enable_network_isolation: bool
+      attr_accessor metrics_config: Types::MetricsConfig
       SENSITIVE: []
     end
 
@@ -3456,6 +3678,7 @@ module Aws::SageMaker
       attr_accessor pending_deployment_summary: Types::PendingDeploymentSummary
       attr_accessor explainer_config: Types::ExplainerConfig
       attr_accessor shadow_production_variants: ::Array[Types::ProductionVariantSummary]
+      attr_accessor metrics_config: Types::MetricsConfig
       SENSITIVE: []
     end
 
@@ -3544,7 +3767,7 @@ module Aws::SageMaker
 
     class DescribeHubContentRequest
       attr_accessor hub_name: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference" | "DataSet" | "JsonDoc")
       attr_accessor hub_content_name: ::String
       attr_accessor hub_content_version: ::String
       SENSITIVE: []
@@ -3554,7 +3777,7 @@ module Aws::SageMaker
       attr_accessor hub_content_name: ::String
       attr_accessor hub_content_arn: ::String
       attr_accessor hub_content_version: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference" | "DataSet" | "JsonDoc")
       attr_accessor document_schema_version: ::String
       attr_accessor hub_name: ::String
       attr_accessor hub_arn: ::String
@@ -3567,7 +3790,7 @@ module Aws::SageMaker
       attr_accessor support_status: ("Supported" | "Deprecated" | "Restricted")
       attr_accessor hub_content_search_keywords: ::Array[::String]
       attr_accessor hub_content_dependencies: ::Array[Types::HubContentDependency]
-      attr_accessor hub_content_status: ("Available" | "Importing" | "Deleting" | "ImportFailed" | "DeleteFailed")
+      attr_accessor hub_content_status: ("Available" | "Importing" | "Deleting" | "ImportFailed" | "DeleteFailed" | "PendingImport" | "PendingDelete")
       attr_accessor failure_reason: ::String
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
@@ -3792,6 +4015,30 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class DescribeMlflowAppRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMlflowAppResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor artifact_store_uri: ::String
+      attr_accessor mlflow_version: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("Creating" | "Created" | "CreateFailed" | "Updating" | "Updated" | "UpdateFailed" | "Deleting" | "DeleteFailed" | "Deleted")
+      attr_accessor model_registration_mode: ("AutoModelRegistrationEnabled" | "AutoModelRegistrationDisabled")
+      attr_accessor account_default_status: ("ENABLED" | "DISABLED")
+      attr_accessor default_domain_id_list: ::Array[::String]
+      attr_accessor creation_time: ::Time
+      attr_accessor created_by: Types::UserContext
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_by: Types::UserContext
+      attr_accessor weekly_maintenance_window_start: ::String
+      attr_accessor maintenance_status: ("MaintenanceInProgress" | "MaintenanceComplete" | "MaintenanceFailed")
+      SENSITIVE: []
+    end
+
     class DescribeMlflowTrackingServerRequest
       attr_accessor tracking_server_name: ::String
       SENSITIVE: []
@@ -3940,6 +4187,7 @@ module Aws::SageMaker
       attr_accessor model_package_name: ::String
       attr_accessor model_package_group_name: ::String
       attr_accessor model_package_version: ::Integer
+      attr_accessor model_package_registration_type: ("Logged" | "Registered")
       attr_accessor model_package_arn: ::String
       attr_accessor model_package_description: ::String
       attr_accessor creation_time: ::Time
@@ -4072,7 +4320,8 @@ module Aws::SageMaker
       attr_accessor optimization_job_name: ::String
       attr_accessor model_source: Types::OptimizationJobModelSource
       attr_accessor optimization_environment: ::Hash[::String, ::String]
-      attr_accessor deployment_instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.12xlarge" | "ml.g6e.16xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge")
+      attr_accessor deployment_instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.12xlarge" | "ml.g6e.16xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge")
+      attr_accessor max_instance_count: ::Integer
       attr_accessor optimization_configs: ::Array[Types::OptimizationConfig]
       attr_accessor output_config: Types::OptimizationJobOutputConfig
       attr_accessor optimization_output: Types::OptimizationOutput
@@ -4084,6 +4333,7 @@ module Aws::SageMaker
 
     class DescribePartnerAppRequest
       attr_accessor arn: ::String
+      attr_accessor include_available_upgrade: bool
       SENSITIVE: []
     end
 
@@ -4104,6 +4354,9 @@ module Aws::SageMaker
       attr_accessor auth_type: ("IAM")
       attr_accessor enable_iam_session_based_identity: bool
       attr_accessor error: Types::ErrorInfo
+      attr_accessor enable_auto_minor_version_upgrade: bool
+      attr_accessor current_version_eol_date: ::Time
+      attr_accessor available_upgrade: Types::AvailableUpgrade
       SENSITIVE: []
     end
 
@@ -4138,6 +4391,7 @@ module Aws::SageMaker
       attr_accessor parallelism_configuration: Types::ParallelismConfiguration
       attr_accessor selective_execution_config: Types::SelectiveExecutionConfig
       attr_accessor pipeline_version_id: ::Integer
+      attr_accessor m_lflow_config: Types::MLflowConfiguration
       SENSITIVE: []
     end
 
@@ -4299,7 +4553,7 @@ module Aws::SageMaker
       attr_accessor labeling_job_arn: ::String
       attr_accessor auto_ml_job_arn: ::String
       attr_accessor model_artifacts: Types::ModelArtifacts
-      attr_accessor training_job_status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor training_job_status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "Deleting")
       attr_accessor secondary_status: ("Starting" | "LaunchingMLInstances" | "PreparingTrainingStack" | "Downloading" | "DownloadingTrainingImage" | "Training" | "Uploading" | "Stopping" | "Stopped" | "MaxRuntimeExceeded" | "Completed" | "Failed" | "Interrupted" | "MaxWaitTimeExceeded" | "Updating" | "Restarting" | "Pending")
       attr_accessor failure_reason: ::String
       attr_accessor hyper_parameters: ::Hash[::String, ::String]
@@ -4323,6 +4577,7 @@ module Aws::SageMaker
       attr_accessor checkpoint_config: Types::CheckpointConfig
       attr_accessor training_time_in_seconds: ::Integer
       attr_accessor billable_time_in_seconds: ::Integer
+      attr_accessor billable_token_count: ::Integer
       attr_accessor debug_hook_config: Types::DebugHookConfig
       attr_accessor experiment_config: Types::ExperimentConfig
       attr_accessor debug_rule_configurations: ::Array[Types::DebugRuleConfiguration]
@@ -4336,6 +4591,12 @@ module Aws::SageMaker
       attr_accessor retry_strategy: Types::RetryStrategy
       attr_accessor remote_debug_config: Types::RemoteDebugConfig
       attr_accessor infra_check_config: Types::InfraCheckConfig
+      attr_accessor serverless_job_config: Types::ServerlessJobConfig
+      attr_accessor mlflow_config: Types::MlflowConfig
+      attr_accessor model_package_config: Types::ModelPackageConfig
+      attr_accessor mlflow_details: Types::MlflowDetails
+      attr_accessor progress_info: Types::TrainingProgressInfo
+      attr_accessor output_model_package_arn: ::String
       SENSITIVE: []
     end
 
@@ -4361,7 +4622,7 @@ module Aws::SageMaker
       attr_accessor unhealthy_instance_count: ::Integer
       attr_accessor available_spare_instance_count: ::Integer
       attr_accessor total_ultra_server_count: ::Integer
-      attr_accessor target_resources: ::Array[("training-job" | "hyperpod-cluster")]
+      attr_accessor target_resources: ::Array[("training-job" | "hyperpod-cluster" | "endpoint")]
       attr_accessor reserved_capacity_summaries: ::Array[Types::ReservedCapacitySummary]
       SENSITIVE: []
     end
@@ -5271,13 +5532,13 @@ module Aws::SageMaker
       attr_accessor hub_content_arn: ::String
       attr_accessor sage_maker_public_hub_content_arn: ::String
       attr_accessor hub_content_version: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference" | "DataSet" | "JsonDoc")
       attr_accessor document_schema_version: ::String
       attr_accessor hub_content_display_name: ::String
       attr_accessor hub_content_description: ::String
       attr_accessor support_status: ("Supported" | "Deprecated" | "Restricted")
       attr_accessor hub_content_search_keywords: ::Array[::String]
-      attr_accessor hub_content_status: ("Available" | "Importing" | "Deleting" | "ImportFailed" | "DeleteFailed")
+      attr_accessor hub_content_status: ("Available" | "Importing" | "Deleting" | "ImportFailed" | "DeleteFailed" | "PendingImport" | "PendingDelete")
       attr_accessor creation_time: ::Time
       attr_accessor original_creation_time: ::Time
       SENSITIVE: []
@@ -5400,7 +5661,7 @@ module Aws::SageMaker
       attr_accessor creation_time: ::Time
       attr_accessor training_start_time: ::Time
       attr_accessor training_end_time: ::Time
-      attr_accessor training_job_status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor training_job_status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "Deleting")
       attr_accessor tuned_hyper_parameters: ::Hash[::String, ::String]
       attr_accessor failure_reason: ::String
       attr_accessor final_hyper_parameter_tuning_job_objective_metric: Types::FinalHyperParameterTuningJobObjectiveMetric
@@ -5572,7 +5833,7 @@ module Aws::SageMaker
     class ImportHubContentRequest
       attr_accessor hub_content_name: ::String
       attr_accessor hub_content_version: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference" | "DataSet" | "JsonDoc")
       attr_accessor document_schema_version: ::String
       attr_accessor hub_name: ::String
       attr_accessor hub_content_display_name: ::String
@@ -5619,9 +5880,24 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class InferenceComponentDataCacheConfig
+      attr_accessor enable_caching: bool
+      SENSITIVE: []
+    end
+
+    class InferenceComponentDataCacheConfigSummary
+      attr_accessor enable_caching: bool
+      SENSITIVE: []
+    end
+
     class InferenceComponentDeploymentConfig
       attr_accessor rolling_update_policy: Types::InferenceComponentRollingUpdatePolicy
       attr_accessor auto_rollback_configuration: Types::AutoRollbackConfig
+      SENSITIVE: []
+    end
+
+    class InferenceComponentMetadata
+      attr_accessor arn: ::String
       SENSITIVE: []
     end
 
@@ -5650,6 +5926,7 @@ module Aws::SageMaker
       attr_accessor startup_parameters: Types::InferenceComponentStartupParameters
       attr_accessor compute_resource_requirements: Types::InferenceComponentComputeResourceRequirements
       attr_accessor base_inference_component_name: ::String
+      attr_accessor data_cache_config: Types::InferenceComponentDataCacheConfig
       SENSITIVE: []
     end
 
@@ -5659,6 +5936,7 @@ module Aws::SageMaker
       attr_accessor startup_parameters: Types::InferenceComponentStartupParameters
       attr_accessor compute_resource_requirements: Types::InferenceComponentComputeResourceRequirements
       attr_accessor base_inference_component_name: ::String
+      attr_accessor data_cache_config: Types::InferenceComponentDataCacheConfigSummary
       SENSITIVE: []
     end
 
@@ -5760,7 +6038,7 @@ module Aws::SageMaker
 
     class InferenceSpecification
       attr_accessor containers: ::Array[Types::ModelPackageContainerDefinition]
-      attr_accessor supported_transform_instance_types: ::Array[("ml.m4.xlarge" | "ml.m4.2xlarge" | "ml.m4.4xlarge" | "ml.m4.10xlarge" | "ml.m4.16xlarge" | "ml.c4.xlarge" | "ml.c4.2xlarge" | "ml.c4.4xlarge" | "ml.c4.8xlarge" | "ml.p2.xlarge" | "ml.p2.8xlarge" | "ml.p2.16xlarge" | "ml.p3.2xlarge" | "ml.p3.8xlarge" | "ml.p3.16xlarge" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.12xlarge" | "ml.m5.24xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.c7i.large" | "ml.c7i.xlarge" | "ml.c7i.2xlarge" | "ml.c7i.4xlarge" | "ml.c7i.8xlarge" | "ml.c7i.12xlarge" | "ml.c7i.16xlarge" | "ml.c7i.24xlarge" | "ml.c7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge" | "ml.g4dn.xlarge" | "ml.g4dn.2xlarge" | "ml.g4dn.4xlarge" | "ml.g4dn.8xlarge" | "ml.g4dn.12xlarge" | "ml.g4dn.16xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge")]
+      attr_accessor supported_transform_instance_types: ::Array[("ml.m4.xlarge" | "ml.m4.2xlarge" | "ml.m4.4xlarge" | "ml.m4.10xlarge" | "ml.m4.16xlarge" | "ml.c4.xlarge" | "ml.c4.2xlarge" | "ml.c4.4xlarge" | "ml.c4.8xlarge" | "ml.p2.xlarge" | "ml.p2.8xlarge" | "ml.p2.16xlarge" | "ml.p3.2xlarge" | "ml.p3.8xlarge" | "ml.p3.16xlarge" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.12xlarge" | "ml.m5.24xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.c7i.large" | "ml.c7i.xlarge" | "ml.c7i.2xlarge" | "ml.c7i.4xlarge" | "ml.c7i.8xlarge" | "ml.c7i.12xlarge" | "ml.c7i.16xlarge" | "ml.c7i.24xlarge" | "ml.c7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge" | "ml.g4dn.xlarge" | "ml.g4dn.2xlarge" | "ml.g4dn.4xlarge" | "ml.g4dn.8xlarge" | "ml.g4dn.12xlarge" | "ml.g4dn.16xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge")]
       attr_accessor supported_realtime_inference_instance_types: ::Array[("ml.t2.medium" | "ml.t2.large" | "ml.t2.xlarge" | "ml.t2.2xlarge" | "ml.m4.xlarge" | "ml.m4.2xlarge" | "ml.m4.4xlarge" | "ml.m4.10xlarge" | "ml.m4.16xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.12xlarge" | "ml.m5.24xlarge" | "ml.m5d.large" | "ml.m5d.xlarge" | "ml.m5d.2xlarge" | "ml.m5d.4xlarge" | "ml.m5d.12xlarge" | "ml.m5d.24xlarge" | "ml.c4.large" | "ml.c4.xlarge" | "ml.c4.2xlarge" | "ml.c4.4xlarge" | "ml.c4.8xlarge" | "ml.p2.xlarge" | "ml.p2.8xlarge" | "ml.p2.16xlarge" | "ml.p3.2xlarge" | "ml.p3.8xlarge" | "ml.p3.16xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.18xlarge" | "ml.c5d.large" | "ml.c5d.xlarge" | "ml.c5d.2xlarge" | "ml.c5d.4xlarge" | "ml.c5d.9xlarge" | "ml.c5d.18xlarge" | "ml.g4dn.xlarge" | "ml.g4dn.2xlarge" | "ml.g4dn.4xlarge" | "ml.g4dn.8xlarge" | "ml.g4dn.12xlarge" | "ml.g4dn.16xlarge" | "ml.r5.large" | "ml.r5.xlarge" | "ml.r5.2xlarge" | "ml.r5.4xlarge" | "ml.r5.12xlarge" | "ml.r5.24xlarge" | "ml.r5d.large" | "ml.r5d.xlarge" | "ml.r5d.2xlarge" | "ml.r5d.4xlarge" | "ml.r5d.12xlarge" | "ml.r5d.24xlarge" | "ml.inf1.xlarge" | "ml.inf1.2xlarge" | "ml.inf1.6xlarge" | "ml.inf1.24xlarge" | "ml.dl1.24xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.r8g.medium" | "ml.r8g.large" | "ml.r8g.xlarge" | "ml.r8g.2xlarge" | "ml.r8g.4xlarge" | "ml.r8g.8xlarge" | "ml.r8g.12xlarge" | "ml.r8g.16xlarge" | "ml.r8g.24xlarge" | "ml.r8g.48xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.12xlarge" | "ml.g6e.16xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.p4d.24xlarge" | "ml.c7g.large" | "ml.c7g.xlarge" | "ml.c7g.2xlarge" | "ml.c7g.4xlarge" | "ml.c7g.8xlarge" | "ml.c7g.12xlarge" | "ml.c7g.16xlarge" | "ml.m6g.large" | "ml.m6g.xlarge" | "ml.m6g.2xlarge" | "ml.m6g.4xlarge" | "ml.m6g.8xlarge" | "ml.m6g.12xlarge" | "ml.m6g.16xlarge" | "ml.m6gd.large" | "ml.m6gd.xlarge" | "ml.m6gd.2xlarge" | "ml.m6gd.4xlarge" | "ml.m6gd.8xlarge" | "ml.m6gd.12xlarge" | "ml.m6gd.16xlarge" | "ml.c6g.large" | "ml.c6g.xlarge" | "ml.c6g.2xlarge" | "ml.c6g.4xlarge" | "ml.c6g.8xlarge" | "ml.c6g.12xlarge" | "ml.c6g.16xlarge" | "ml.c6gd.large" | "ml.c6gd.xlarge" | "ml.c6gd.2xlarge" | "ml.c6gd.4xlarge" | "ml.c6gd.8xlarge" | "ml.c6gd.12xlarge" | "ml.c6gd.16xlarge" | "ml.c6gn.large" | "ml.c6gn.xlarge" | "ml.c6gn.2xlarge" | "ml.c6gn.4xlarge" | "ml.c6gn.8xlarge" | "ml.c6gn.12xlarge" | "ml.c6gn.16xlarge" | "ml.r6g.large" | "ml.r6g.xlarge" | "ml.r6g.2xlarge" | "ml.r6g.4xlarge" | "ml.r6g.8xlarge" | "ml.r6g.12xlarge" | "ml.r6g.16xlarge" | "ml.r6gd.large" | "ml.r6gd.xlarge" | "ml.r6gd.2xlarge" | "ml.r6gd.4xlarge" | "ml.r6gd.8xlarge" | "ml.r6gd.12xlarge" | "ml.r6gd.16xlarge" | "ml.p4de.24xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.trn2.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.c7i.large" | "ml.c7i.xlarge" | "ml.c7i.2xlarge" | "ml.c7i.4xlarge" | "ml.c7i.8xlarge" | "ml.c7i.12xlarge" | "ml.c7i.16xlarge" | "ml.c7i.24xlarge" | "ml.c7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge" | "ml.c8g.medium" | "ml.c8g.large" | "ml.c8g.xlarge" | "ml.c8g.2xlarge" | "ml.c8g.4xlarge" | "ml.c8g.8xlarge" | "ml.c8g.12xlarge" | "ml.c8g.16xlarge" | "ml.c8g.24xlarge" | "ml.c8g.48xlarge" | "ml.r7gd.medium" | "ml.r7gd.large" | "ml.r7gd.xlarge" | "ml.r7gd.2xlarge" | "ml.r7gd.4xlarge" | "ml.r7gd.8xlarge" | "ml.r7gd.12xlarge" | "ml.r7gd.16xlarge" | "ml.m8g.medium" | "ml.m8g.large" | "ml.m8g.xlarge" | "ml.m8g.2xlarge" | "ml.m8g.4xlarge" | "ml.m8g.8xlarge" | "ml.m8g.12xlarge" | "ml.m8g.16xlarge" | "ml.m8g.24xlarge" | "ml.m8g.48xlarge" | "ml.c6in.large" | "ml.c6in.xlarge" | "ml.c6in.2xlarge" | "ml.c6in.4xlarge" | "ml.c6in.8xlarge" | "ml.c6in.12xlarge" | "ml.c6in.16xlarge" | "ml.c6in.24xlarge" | "ml.c6in.32xlarge" | "ml.p6-b200.48xlarge" | "ml.p6e-gb200.36xlarge" | "ml.p5.4xlarge")]
       attr_accessor supported_content_types: ::Array[::String]
       attr_accessor supported_response_mime_types: ::Array[::String]
@@ -5800,6 +6078,7 @@ module Aws::SageMaker
     class InstanceGroupScalingMetadata
       attr_accessor instance_count: ::Integer
       attr_accessor target_count: ::Integer
+      attr_accessor min_count: ::Integer
       attr_accessor failure_message: ::String
       SENSITIVE: []
     end
@@ -6006,6 +6285,14 @@ module Aws::SageMaker
       attr_accessor display_name: ::String
       attr_accessor creation_time: ::Time
       attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class LineageMetadata
+      attr_accessor action_arns: ::Hash[::String, ::String]
+      attr_accessor artifact_arns: ::Hash[::String, ::String]
+      attr_accessor context_arns: ::Hash[::String, ::String]
+      attr_accessor associations: ::Array[Types::AssociationInfo]
       SENSITIVE: []
     end
 
@@ -6517,7 +6804,7 @@ module Aws::SageMaker
 
     class ListHubContentVersionsRequest
       attr_accessor hub_name: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference" | "DataSet" | "JsonDoc")
       attr_accessor hub_content_name: ::String
       attr_accessor min_version: ::String
       attr_accessor max_schema_version: ::String
@@ -6538,7 +6825,7 @@ module Aws::SageMaker
 
     class ListHubContentsRequest
       attr_accessor hub_name: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference" | "DataSet" | "JsonDoc")
       attr_accessor name_contains: ::String
       attr_accessor max_schema_version: ::String
       attr_accessor creation_time_before: ::Time
@@ -6778,6 +7065,26 @@ module Aws::SageMaker
 
     class ListLineageGroupsResponse
       attr_accessor lineage_group_summaries: ::Array[Types::LineageGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMlflowAppsRequest
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      attr_accessor status: ("Creating" | "Created" | "CreateFailed" | "Updating" | "Updated" | "UpdateFailed" | "Deleting" | "DeleteFailed" | "Deleted")
+      attr_accessor mlflow_version: ::String
+      attr_accessor default_for_domain_id: ::String
+      attr_accessor account_default_status: ("ENABLED" | "DISABLED")
+      attr_accessor sort_by: ("Name" | "CreationTime" | "Status")
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMlflowAppsResponse
+      attr_accessor summaries: ::Array[Types::MlflowAppSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -7345,7 +7652,7 @@ module Aws::SageMaker
       attr_accessor hyper_parameter_tuning_job_name: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
-      attr_accessor status_equals: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor status_equals: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "Deleting")
       attr_accessor sort_by: ("Name" | "CreationTime" | "Status" | "FinalObjectiveMetricValue")
       attr_accessor sort_order: ("Ascending" | "Descending")
       SENSITIVE: []
@@ -7365,7 +7672,7 @@ module Aws::SageMaker
       attr_accessor last_modified_time_after: ::Time
       attr_accessor last_modified_time_before: ::Time
       attr_accessor name_contains: ::String
-      attr_accessor status_equals: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor status_equals: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "Deleting")
       attr_accessor sort_by: ("Name" | "CreationTime" | "Status")
       attr_accessor sort_order: ("Ascending" | "Descending")
       attr_accessor warm_pool_status_equals: ("Available" | "Terminated" | "Reused" | "InUse")
@@ -7512,6 +7819,12 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class MLflowConfiguration
+      attr_accessor mlflow_resource_arn: ::String
+      attr_accessor mlflow_experiment_name: ::String
+      SENSITIVE: []
+    end
+
     class MemberDefinition
       attr_accessor cognito_member_definition: Types::CognitoMemberDefinition
       attr_accessor oidc_member_definition: Types::OidcMemberDefinition
@@ -7561,10 +7874,39 @@ module Aws::SageMaker
       end
     end
 
+    class MetricsConfig
+      attr_accessor enable_enhanced_metrics: bool
+      attr_accessor metric_publish_frequency_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
     class MetricsSource
       attr_accessor content_type: ::String
       attr_accessor content_digest: ::String
       attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class MlflowAppSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("Creating" | "Created" | "CreateFailed" | "Updating" | "Updated" | "UpdateFailed" | "Deleting" | "DeleteFailed" | "Deleted")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor mlflow_version: ::String
+      SENSITIVE: []
+    end
+
+    class MlflowConfig
+      attr_accessor mlflow_resource_arn: ::String
+      attr_accessor mlflow_experiment_name: ::String
+      attr_accessor mlflow_run_name: ::String
+      SENSITIVE: []
+    end
+
+    class MlflowDetails
+      attr_accessor mlflow_experiment_id: ::String
+      attr_accessor mlflow_run_id: ::String
       SENSITIVE: []
     end
 
@@ -7852,6 +8194,7 @@ module Aws::SageMaker
       attr_accessor model_package_name: ::String
       attr_accessor model_package_group_name: ::String
       attr_accessor model_package_version: ::Integer
+      attr_accessor model_package_registration_type: ("Logged" | "Registered")
       attr_accessor model_package_arn: ::String
       attr_accessor model_package_description: ::String
       attr_accessor creation_time: ::Time
@@ -7883,6 +8226,12 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ModelPackageConfig
+      attr_accessor model_package_group_arn: ::String
+      attr_accessor source_model_package_arn: ::String
+      SENSITIVE: []
+    end
+
     class ModelPackageContainerDefinition
       attr_accessor container_hostname: ::String
       attr_accessor image: ::String
@@ -7897,6 +8246,8 @@ module Aws::SageMaker
       attr_accessor nearest_model_name: ::String
       attr_accessor additional_s3_data_source: Types::AdditionalS3DataSource
       attr_accessor model_data_etag: ::String
+      attr_accessor is_checkpoint: bool
+      attr_accessor base_model: Types::BaseModel
       SENSITIVE: []
     end
 
@@ -7954,6 +8305,7 @@ module Aws::SageMaker
       attr_accessor model_package_status: ("Pending" | "InProgress" | "Completed" | "Failed" | "Deleting")
       attr_accessor model_approval_status: ("Approved" | "Rejected" | "PendingManualApproval")
       attr_accessor model_life_cycle: Types::ModelLifeCycle
+      attr_accessor model_package_registration_type: ("Logged" | "Registered")
       SENSITIVE: []
     end
 
@@ -8014,6 +8366,18 @@ module Aws::SageMaker
     class ModelShardingConfig
       attr_accessor image: ::String
       attr_accessor override_environment: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ModelSpeculativeDecodingConfig
+      attr_accessor technique: ("EAGLE")
+      attr_accessor training_data_source: Types::ModelSpeculativeDecodingTrainingDataSource
+      SENSITIVE: []
+    end
+
+    class ModelSpeculativeDecodingTrainingDataSource
+      attr_accessor s3_uri: ::String
+      attr_accessor s3_data_type: ("S3Prefix" | "ManifestFile")
       SENSITIVE: []
     end
 
@@ -8376,6 +8740,7 @@ module Aws::SageMaker
       attr_accessor model_quantization_config: Types::ModelQuantizationConfig
       attr_accessor model_compilation_config: Types::ModelCompilationConfig
       attr_accessor model_sharding_config: Types::ModelShardingConfig
+      attr_accessor model_speculative_decoding_config: Types::ModelSpeculativeDecodingConfig
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -8385,12 +8750,15 @@ module Aws::SageMaker
       end
       class ModelShardingConfig < OptimizationConfig
       end
+      class ModelSpeculativeDecodingConfig < OptimizationConfig
+      end
       class Unknown < OptimizationConfig
       end
     end
 
     class OptimizationJobModelSource
       attr_accessor s3: Types::OptimizationJobModelSourceS3
+      attr_accessor sage_maker_model: Types::OptimizationSageMakerModel
       SENSITIVE: []
     end
 
@@ -8403,6 +8771,7 @@ module Aws::SageMaker
     class OptimizationJobOutputConfig
       attr_accessor kms_key_id: ::String
       attr_accessor s3_output_location: ::String
+      attr_accessor sage_maker_model: Types::OptimizationSageMakerModel
       SENSITIVE: []
     end
 
@@ -8414,7 +8783,8 @@ module Aws::SageMaker
       attr_accessor optimization_start_time: ::Time
       attr_accessor optimization_end_time: ::Time
       attr_accessor last_modified_time: ::Time
-      attr_accessor deployment_instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.12xlarge" | "ml.g6e.16xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge")
+      attr_accessor deployment_instance_type: ("ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p5e.48xlarge" | "ml.p5en.48xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.12xlarge" | "ml.g6e.16xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge")
+      attr_accessor max_instance_count: ::Integer
       attr_accessor optimization_types: ::Array[::String]
       SENSITIVE: []
     end
@@ -8426,6 +8796,11 @@ module Aws::SageMaker
 
     class OptimizationOutput
       attr_accessor recommended_inference_image: ::String
+      SENSITIVE: []
+    end
+
+    class OptimizationSageMakerModel
+      attr_accessor model_name: ::String
       SENSITIVE: []
     end
 
@@ -8507,6 +8882,8 @@ module Aws::SageMaker
     class PartnerAppConfig
       attr_accessor admin_users: ::Array[::String]
       attr_accessor arguments: ::Hash[::String, ::String]
+      attr_accessor assigned_group_patterns: ::Array[::String]
+      attr_accessor role_group_assignments: ::Array[Types::RoleGroupAssignment]
       SENSITIVE: []
     end
 
@@ -8632,6 +9009,12 @@ module Aws::SageMaker
       attr_accessor auto_ml_job: Types::AutoMLJobStepMetadata
       attr_accessor endpoint: Types::EndpointStepMetadata
       attr_accessor endpoint_config: Types::EndpointConfigStepMetadata
+      attr_accessor bedrock_custom_model: Types::BedrockCustomModelMetadata
+      attr_accessor bedrock_custom_model_deployment: Types::BedrockCustomModelDeploymentMetadata
+      attr_accessor bedrock_provisioned_model_throughput: Types::BedrockProvisionedModelThroughputMetadata
+      attr_accessor bedrock_model_import: Types::BedrockModelImportMetadata
+      attr_accessor inference_component: Types::InferenceComponentMetadata
+      attr_accessor lineage: Types::LineageMetadata
       SENSITIVE: []
     end
 
@@ -9357,6 +9740,12 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class RoleGroupAssignment
+      attr_accessor role_name: ::String
+      attr_accessor group_patterns: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class RollingDeploymentPolicy
       attr_accessor maximum_batch_size: Types::CapacitySizeConfig
       attr_accessor rollback_maximum_batch_size: Types::CapacitySizeConfig
@@ -9514,7 +9903,7 @@ module Aws::SageMaker
       attr_accessor start_time_after: ::Time
       attr_accessor end_time_before: ::Time
       attr_accessor duration_hours: ::Integer
-      attr_accessor target_resources: ::Array[("training-job" | "hyperpod-cluster")]
+      attr_accessor target_resources: ::Array[("training-job" | "hyperpod-cluster" | "endpoint")]
       SENSITIVE: []
     end
 
@@ -9568,6 +9957,17 @@ module Aws::SageMaker
 
     class SendPipelineExecutionStepSuccessResponse
       attr_accessor pipeline_execution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServerlessJobConfig
+      attr_accessor base_model_arn: ::String
+      attr_accessor accept_eula: bool
+      attr_accessor job_type: ("FineTuning" | "Evaluation")
+      attr_accessor customization_technique: ("SFT" | "DPO" | "RLVR" | "RLAIF")
+      attr_accessor peft: ("LORA")
+      attr_accessor evaluation_type: ("LLMAJEvaluation" | "CustomScorerEvaluation" | "BenchmarkEvaluation")
+      attr_accessor evaluator_arn: ::String
       SENSITIVE: []
     end
 
@@ -9761,6 +10161,7 @@ module Aws::SageMaker
       attr_accessor parallelism_configuration: Types::ParallelismConfiguration
       attr_accessor selective_execution_config: Types::SelectiveExecutionConfig
       attr_accessor pipeline_version_id: ::Integer
+      attr_accessor mlflow_experiment_name: ::String
       SENSITIVE: []
     end
 
@@ -9899,7 +10300,7 @@ module Aws::SageMaker
     end
 
     class StudioWebPortalSettings
-      attr_accessor hidden_ml_tools: ::Array[("DataWrangler" | "FeatureStore" | "EmrClusters" | "AutoMl" | "Experiments" | "Training" | "ModelEvaluation" | "Pipelines" | "Models" | "JumpStart" | "InferenceRecommender" | "Endpoints" | "Projects" | "InferenceOptimization" | "PerformanceEvaluation" | "LakeraGuard" | "Comet" | "DeepchecksLLMEvaluation" | "Fiddler" | "HyperPodClusters")]
+      attr_accessor hidden_ml_tools: ::Array[("DataWrangler" | "FeatureStore" | "EmrClusters" | "AutoMl" | "Experiments" | "Training" | "ModelEvaluation" | "Pipelines" | "Models" | "JumpStart" | "InferenceRecommender" | "Endpoints" | "Projects" | "InferenceOptimization" | "PerformanceEvaluation" | "LakeraGuard" | "Comet" | "DeepchecksLLMEvaluation" | "Fiddler" | "HyperPodClusters" | "RunningInstances" | "Datasets" | "Evaluators")]
       attr_accessor hidden_app_types: ::Array[("JupyterServer" | "KernelGateway" | "DetailedProfiler" | "TensorBoard" | "CodeEditor" | "JupyterLab" | "RStudioServerPro" | "RSessionGateway" | "Canvas")]
       attr_accessor hidden_instance_types: ::Array[("system" | "ml.t3.micro" | "ml.t3.small" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.8xlarge" | "ml.m5.12xlarge" | "ml.m5.16xlarge" | "ml.m5.24xlarge" | "ml.m5d.large" | "ml.m5d.xlarge" | "ml.m5d.2xlarge" | "ml.m5d.4xlarge" | "ml.m5d.8xlarge" | "ml.m5d.12xlarge" | "ml.m5d.16xlarge" | "ml.m5d.24xlarge" | "ml.c5.large" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.12xlarge" | "ml.c5.18xlarge" | "ml.c5.24xlarge" | "ml.p3.2xlarge" | "ml.p3.8xlarge" | "ml.p3.16xlarge" | "ml.p3dn.24xlarge" | "ml.g4dn.xlarge" | "ml.g4dn.2xlarge" | "ml.g4dn.4xlarge" | "ml.g4dn.8xlarge" | "ml.g4dn.12xlarge" | "ml.g4dn.16xlarge" | "ml.r5.large" | "ml.r5.xlarge" | "ml.r5.2xlarge" | "ml.r5.4xlarge" | "ml.r5.8xlarge" | "ml.r5.12xlarge" | "ml.r5.16xlarge" | "ml.r5.24xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.16xlarge" | "ml.g5.12xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge" | "ml.g6e.xlarge" | "ml.g6e.2xlarge" | "ml.g6e.4xlarge" | "ml.g6e.8xlarge" | "ml.g6e.12xlarge" | "ml.g6e.16xlarge" | "ml.g6e.24xlarge" | "ml.g6e.48xlarge" | "ml.geospatial.interactive" | "ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.p5.48xlarge" | "ml.p5en.48xlarge" | "ml.p6-b200.48xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.c7i.large" | "ml.c7i.xlarge" | "ml.c7i.2xlarge" | "ml.c7i.4xlarge" | "ml.c7i.8xlarge" | "ml.c7i.12xlarge" | "ml.c7i.16xlarge" | "ml.c7i.24xlarge" | "ml.c7i.48xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge" | "ml.m6id.large" | "ml.m6id.xlarge" | "ml.m6id.2xlarge" | "ml.m6id.4xlarge" | "ml.m6id.8xlarge" | "ml.m6id.12xlarge" | "ml.m6id.16xlarge" | "ml.m6id.24xlarge" | "ml.m6id.32xlarge" | "ml.c6id.large" | "ml.c6id.xlarge" | "ml.c6id.2xlarge" | "ml.c6id.4xlarge" | "ml.c6id.8xlarge" | "ml.c6id.12xlarge" | "ml.c6id.16xlarge" | "ml.c6id.24xlarge" | "ml.c6id.32xlarge" | "ml.r6id.large" | "ml.r6id.xlarge" | "ml.r6id.2xlarge" | "ml.r6id.4xlarge" | "ml.r6id.8xlarge" | "ml.r6id.12xlarge" | "ml.r6id.16xlarge" | "ml.r6id.24xlarge" | "ml.r6id.32xlarge")]
       attr_accessor hidden_sage_maker_image_version_aliases: ::Array[Types::HiddenSageMakerImage]
@@ -10091,7 +10492,7 @@ module Aws::SageMaker
       attr_accessor labeling_job_arn: ::String
       attr_accessor auto_ml_job_arn: ::String
       attr_accessor model_artifacts: Types::ModelArtifacts
-      attr_accessor training_job_status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor training_job_status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "Deleting")
       attr_accessor secondary_status: ("Starting" | "LaunchingMLInstances" | "PreparingTrainingStack" | "Downloading" | "DownloadingTrainingImage" | "Training" | "Uploading" | "Stopping" | "Stopped" | "MaxRuntimeExceeded" | "Completed" | "Failed" | "Interrupted" | "MaxWaitTimeExceeded" | "Updating" | "Restarting" | "Pending")
       attr_accessor failure_reason: ::String
       attr_accessor hyper_parameters: ::Hash[::String, ::String]
@@ -10119,6 +10520,8 @@ module Aws::SageMaker
       attr_accessor debug_rule_configurations: ::Array[Types::DebugRuleConfiguration]
       attr_accessor tensor_board_output_config: Types::TensorBoardOutputConfig
       attr_accessor debug_rule_evaluation_statuses: ::Array[Types::DebugRuleEvaluationStatus]
+      attr_accessor output_model_package_arn: ::String
+      attr_accessor model_package_config: Types::ModelPackageConfig
       attr_accessor profiler_config: Types::ProfilerConfig
       attr_accessor environment: ::Hash[::String, ::String]
       attr_accessor retry_strategy: Types::RetryStrategy
@@ -10156,7 +10559,7 @@ module Aws::SageMaker
       attr_accessor creation_time: ::Time
       attr_accessor training_end_time: ::Time
       attr_accessor last_modified_time: ::Time
-      attr_accessor training_job_status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor training_job_status: ("InProgress" | "Completed" | "Failed" | "Stopping" | "Stopped" | "Deleting")
       attr_accessor secondary_status: ("Starting" | "LaunchingMLInstances" | "PreparingTrainingStack" | "Downloading" | "DownloadingTrainingImage" | "Training" | "Uploading" | "Stopping" | "Stopped" | "MaxRuntimeExceeded" | "Completed" | "Failed" | "Interrupted" | "MaxWaitTimeExceeded" | "Updating" | "Restarting" | "Pending")
       attr_accessor warm_pool_status: Types::WarmPoolStatus
       attr_accessor training_plan_arn: ::String
@@ -10171,7 +10574,7 @@ module Aws::SageMaker
 
     class TrainingPlanOffering
       attr_accessor training_plan_offering_id: ::String
-      attr_accessor target_resources: ::Array[("training-job" | "hyperpod-cluster")]
+      attr_accessor target_resources: ::Array[("training-job" | "hyperpod-cluster" | "endpoint")]
       attr_accessor requested_start_time_after: ::Time
       attr_accessor requested_end_time_before: ::Time
       attr_accessor duration_hours: ::Integer
@@ -10197,8 +10600,16 @@ module Aws::SageMaker
       attr_accessor available_instance_count: ::Integer
       attr_accessor in_use_instance_count: ::Integer
       attr_accessor total_ultra_server_count: ::Integer
-      attr_accessor target_resources: ::Array[("training-job" | "hyperpod-cluster")]
+      attr_accessor target_resources: ::Array[("training-job" | "hyperpod-cluster" | "endpoint")]
       attr_accessor reserved_capacity_summaries: ::Array[Types::ReservedCapacitySummary]
+      SENSITIVE: []
+    end
+
+    class TrainingProgressInfo
+      attr_accessor total_step_count_per_epoch: ::Integer
+      attr_accessor current_step: ::Integer
+      attr_accessor current_epoch: ::Integer
+      attr_accessor max_epoch: ::Integer
       SENSITIVE: []
     end
 
@@ -10295,7 +10706,7 @@ module Aws::SageMaker
     end
 
     class TransformResources
-      attr_accessor instance_type: ("ml.m4.xlarge" | "ml.m4.2xlarge" | "ml.m4.4xlarge" | "ml.m4.10xlarge" | "ml.m4.16xlarge" | "ml.c4.xlarge" | "ml.c4.2xlarge" | "ml.c4.4xlarge" | "ml.c4.8xlarge" | "ml.p2.xlarge" | "ml.p2.8xlarge" | "ml.p2.16xlarge" | "ml.p3.2xlarge" | "ml.p3.8xlarge" | "ml.p3.16xlarge" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.12xlarge" | "ml.m5.24xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.c7i.large" | "ml.c7i.xlarge" | "ml.c7i.2xlarge" | "ml.c7i.4xlarge" | "ml.c7i.8xlarge" | "ml.c7i.12xlarge" | "ml.c7i.16xlarge" | "ml.c7i.24xlarge" | "ml.c7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge" | "ml.g4dn.xlarge" | "ml.g4dn.2xlarge" | "ml.g4dn.4xlarge" | "ml.g4dn.8xlarge" | "ml.g4dn.12xlarge" | "ml.g4dn.16xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge")
+      attr_accessor instance_type: ("ml.m4.xlarge" | "ml.m4.2xlarge" | "ml.m4.4xlarge" | "ml.m4.10xlarge" | "ml.m4.16xlarge" | "ml.c4.xlarge" | "ml.c4.2xlarge" | "ml.c4.4xlarge" | "ml.c4.8xlarge" | "ml.p2.xlarge" | "ml.p2.8xlarge" | "ml.p2.16xlarge" | "ml.p3.2xlarge" | "ml.p3.8xlarge" | "ml.p3.16xlarge" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.18xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.12xlarge" | "ml.m5.24xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.c7i.large" | "ml.c7i.xlarge" | "ml.c7i.2xlarge" | "ml.c7i.4xlarge" | "ml.c7i.8xlarge" | "ml.c7i.12xlarge" | "ml.c7i.16xlarge" | "ml.c7i.24xlarge" | "ml.c7i.48xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge" | "ml.g4dn.xlarge" | "ml.g4dn.2xlarge" | "ml.g4dn.4xlarge" | "ml.g4dn.8xlarge" | "ml.g4dn.12xlarge" | "ml.g4dn.16xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.12xlarge" | "ml.g5.16xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge")
       attr_accessor instance_count: ::Integer
       attr_accessor volume_kms_key_id: ::String
       attr_accessor transform_ami_version: ::String
@@ -10569,6 +10980,7 @@ module Aws::SageMaker
       attr_accessor tiered_storage_config: Types::ClusterTieredStorageConfig
       attr_accessor node_recovery: ("Automatic" | "None")
       attr_accessor instance_groups_to_delete: ::Array[::String]
+      attr_accessor node_provisioning_mode: ("Continuous")
       attr_accessor cluster_role: ::String
       attr_accessor auto_scaling: Types::ClusterAutoScalingConfig
       SENSITIVE: []
@@ -10675,6 +11087,7 @@ module Aws::SageMaker
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor app_network_access_type: ("PublicInternetOnly" | "VpcOnly")
       attr_accessor tag_propagation: ("ENABLED" | "DISABLED")
+      attr_accessor vpc_id: ::String
       SENSITIVE: []
     end
 
@@ -10746,7 +11159,7 @@ module Aws::SageMaker
     class UpdateHubContentReferenceRequest
       attr_accessor hub_name: ::String
       attr_accessor hub_content_name: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference" | "DataSet" | "JsonDoc")
       attr_accessor min_version: ::String
       SENSITIVE: []
     end
@@ -10760,7 +11173,7 @@ module Aws::SageMaker
     class UpdateHubContentRequest
       attr_accessor hub_name: ::String
       attr_accessor hub_content_name: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference" | "DataSet" | "JsonDoc")
       attr_accessor hub_content_version: ::String
       attr_accessor hub_content_display_name: ::String
       attr_accessor hub_content_description: ::String
@@ -10863,6 +11276,22 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class UpdateMlflowAppRequest
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor artifact_store_uri: ::String
+      attr_accessor model_registration_mode: ("AutoModelRegistrationEnabled" | "AutoModelRegistrationDisabled")
+      attr_accessor weekly_maintenance_window_start: ::String
+      attr_accessor default_domain_id_list: ::Array[::String]
+      attr_accessor account_default_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateMlflowAppResponse
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
     class UpdateMlflowTrackingServerRequest
       attr_accessor tracking_server_name: ::String
       attr_accessor artifact_store_uri: ::String
@@ -10892,6 +11321,7 @@ module Aws::SageMaker
     class UpdateModelPackageInput
       attr_accessor model_package_arn: ::String
       attr_accessor model_approval_status: ("Approved" | "Rejected" | "PendingManualApproval")
+      attr_accessor model_package_registration_type: ("Logged" | "Registered")
       attr_accessor approval_description: ::String
       attr_accessor customer_metadata_properties: ::Hash[::String, ::String]
       attr_accessor customer_metadata_properties_to_remove: ::Array[::String]
@@ -10938,6 +11368,7 @@ module Aws::SageMaker
       attr_accessor notebook_instance_name: ::String
       attr_accessor instance_type: ("ml.t2.medium" | "ml.t2.large" | "ml.t2.xlarge" | "ml.t2.2xlarge" | "ml.t3.medium" | "ml.t3.large" | "ml.t3.xlarge" | "ml.t3.2xlarge" | "ml.m4.xlarge" | "ml.m4.2xlarge" | "ml.m4.4xlarge" | "ml.m4.10xlarge" | "ml.m4.16xlarge" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.12xlarge" | "ml.m5.24xlarge" | "ml.m5d.large" | "ml.m5d.xlarge" | "ml.m5d.2xlarge" | "ml.m5d.4xlarge" | "ml.m5d.8xlarge" | "ml.m5d.12xlarge" | "ml.m5d.16xlarge" | "ml.m5d.24xlarge" | "ml.c4.xlarge" | "ml.c4.2xlarge" | "ml.c4.4xlarge" | "ml.c4.8xlarge" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.18xlarge" | "ml.c5d.xlarge" | "ml.c5d.2xlarge" | "ml.c5d.4xlarge" | "ml.c5d.9xlarge" | "ml.c5d.18xlarge" | "ml.p2.xlarge" | "ml.p2.8xlarge" | "ml.p2.16xlarge" | "ml.p3.2xlarge" | "ml.p3.8xlarge" | "ml.p3.16xlarge" | "ml.p3dn.24xlarge" | "ml.g4dn.xlarge" | "ml.g4dn.2xlarge" | "ml.g4dn.4xlarge" | "ml.g4dn.8xlarge" | "ml.g4dn.12xlarge" | "ml.g4dn.16xlarge" | "ml.r5.large" | "ml.r5.xlarge" | "ml.r5.2xlarge" | "ml.r5.4xlarge" | "ml.r5.8xlarge" | "ml.r5.12xlarge" | "ml.r5.16xlarge" | "ml.r5.24xlarge" | "ml.g5.xlarge" | "ml.g5.2xlarge" | "ml.g5.4xlarge" | "ml.g5.8xlarge" | "ml.g5.16xlarge" | "ml.g5.12xlarge" | "ml.g5.24xlarge" | "ml.g5.48xlarge" | "ml.inf1.xlarge" | "ml.inf1.2xlarge" | "ml.inf1.6xlarge" | "ml.inf1.24xlarge" | "ml.trn1.2xlarge" | "ml.trn1.32xlarge" | "ml.trn1n.32xlarge" | "ml.inf2.xlarge" | "ml.inf2.8xlarge" | "ml.inf2.24xlarge" | "ml.inf2.48xlarge" | "ml.p4d.24xlarge" | "ml.p4de.24xlarge" | "ml.p5.48xlarge" | "ml.p6-b200.48xlarge" | "ml.m6i.large" | "ml.m6i.xlarge" | "ml.m6i.2xlarge" | "ml.m6i.4xlarge" | "ml.m6i.8xlarge" | "ml.m6i.12xlarge" | "ml.m6i.16xlarge" | "ml.m6i.24xlarge" | "ml.m6i.32xlarge" | "ml.m7i.large" | "ml.m7i.xlarge" | "ml.m7i.2xlarge" | "ml.m7i.4xlarge" | "ml.m7i.8xlarge" | "ml.m7i.12xlarge" | "ml.m7i.16xlarge" | "ml.m7i.24xlarge" | "ml.m7i.48xlarge" | "ml.c6i.large" | "ml.c6i.xlarge" | "ml.c6i.2xlarge" | "ml.c6i.4xlarge" | "ml.c6i.8xlarge" | "ml.c6i.12xlarge" | "ml.c6i.16xlarge" | "ml.c6i.24xlarge" | "ml.c6i.32xlarge" | "ml.c7i.large" | "ml.c7i.xlarge" | "ml.c7i.2xlarge" | "ml.c7i.4xlarge" | "ml.c7i.8xlarge" | "ml.c7i.12xlarge" | "ml.c7i.16xlarge" | "ml.c7i.24xlarge" | "ml.c7i.48xlarge" | "ml.r6i.large" | "ml.r6i.xlarge" | "ml.r6i.2xlarge" | "ml.r6i.4xlarge" | "ml.r6i.8xlarge" | "ml.r6i.12xlarge" | "ml.r6i.16xlarge" | "ml.r6i.24xlarge" | "ml.r6i.32xlarge" | "ml.r7i.large" | "ml.r7i.xlarge" | "ml.r7i.2xlarge" | "ml.r7i.4xlarge" | "ml.r7i.8xlarge" | "ml.r7i.12xlarge" | "ml.r7i.16xlarge" | "ml.r7i.24xlarge" | "ml.r7i.48xlarge" | "ml.m6id.large" | "ml.m6id.xlarge" | "ml.m6id.2xlarge" | "ml.m6id.4xlarge" | "ml.m6id.8xlarge" | "ml.m6id.12xlarge" | "ml.m6id.16xlarge" | "ml.m6id.24xlarge" | "ml.m6id.32xlarge" | "ml.c6id.large" | "ml.c6id.xlarge" | "ml.c6id.2xlarge" | "ml.c6id.4xlarge" | "ml.c6id.8xlarge" | "ml.c6id.12xlarge" | "ml.c6id.16xlarge" | "ml.c6id.24xlarge" | "ml.c6id.32xlarge" | "ml.r6id.large" | "ml.r6id.xlarge" | "ml.r6id.2xlarge" | "ml.r6id.4xlarge" | "ml.r6id.8xlarge" | "ml.r6id.12xlarge" | "ml.r6id.16xlarge" | "ml.r6id.24xlarge" | "ml.r6id.32xlarge" | "ml.g6.xlarge" | "ml.g6.2xlarge" | "ml.g6.4xlarge" | "ml.g6.8xlarge" | "ml.g6.12xlarge" | "ml.g6.16xlarge" | "ml.g6.24xlarge" | "ml.g6.48xlarge")
       attr_accessor ip_address_type: ("ipv4" | "dualstack")
+      attr_accessor platform_identifier: ::String
       attr_accessor role_arn: ::String
       attr_accessor lifecycle_config_name: ::String
       attr_accessor disassociate_lifecycle_config: bool
@@ -10972,6 +11403,8 @@ module Aws::SageMaker
       attr_accessor tier: ::String
       attr_accessor application_config: Types::PartnerAppConfig
       attr_accessor enable_iam_session_based_identity: bool
+      attr_accessor enable_auto_minor_version_upgrade: bool
+      attr_accessor app_version: ::String
       attr_accessor client_token: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []

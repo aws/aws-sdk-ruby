@@ -10,6 +10,162 @@
 module Aws::CleanRooms
   module Types
 
+    # Controls and tracks usage limits for associated configured tables
+    # within a collaboration across queries and job. Supports both
+    # period-based budgets that can renew (daily, weekly, or monthly) and
+    # fixed lifetime budgets. Contains the resource ARN, remaining budget
+    # information, and up to two budget configurations (period-based and
+    # lifetime). By default, table usage is unlimited unless a budget is
+    # configured.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the access budget resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   Detailed budget information including time bounds, remaining budget,
+    #   and refresh settings.
+    #   @return [Array<Types::AccessBudgetDetails>]
+    #
+    # @!attribute [rw] aggregate_remaining_budget
+    #   The total remaining budget across all budget parameters, showing the
+    #   lower value between the per-period budget and lifetime budget for
+    #   this access budget. For individual parameter budgets, see
+    #   `remainingBudget`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AccessBudget AWS API Documentation
+    #
+    class AccessBudget < Struct.new(
+      :resource_arn,
+      :details,
+      :aggregate_remaining_budget)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detailed information about an access budget including time bounds,
+    # budget allocation, and configuration settings.
+    #
+    # @!attribute [rw] start_time
+    #   The start time for the access budget period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time for the access budget period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] remaining_budget
+    #   The remaining budget amount available for use within this access
+    #   budget.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] budget
+    #   The total budget allocation amount for this access budget.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] budget_type
+    #   Specifies the time period for limiting table usage in queries and
+    #   jobs. For calendar-based periods, the budget can renew if auto
+    #   refresh is enabled. For lifetime budgets, the limit applies to the
+    #   total usage throughout the collaboration. Valid values are:
+    #
+    #   `CALENDAR_DAY` - Limit table usage per day.
+    #
+    #   `CALENDAR_WEEK` - Limit table usage per week.
+    #
+    #   `CALENDAR_MONTH` - Limit table usage per month.
+    #
+    #   `LIFETIME` - Limit total table usage for the collaboration duration.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_refresh
+    #   Indicates whether the budget automatically refreshes for each time
+    #   period specified in `budgetType`. Valid values are:
+    #
+    #   `ENABLED` - The budget refreshes automatically at the start of each
+    #   period.
+    #
+    #   `DISABLED` - The budget must be refreshed manually.
+    #
+    #   `NULL` - The value is null when `budgetType` is set to `LIFETIME`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AccessBudgetDetails AWS API Documentation
+    #
+    class AccessBudgetDetails < Struct.new(
+      :start_time,
+      :end_time,
+      :remaining_budget,
+      :budget,
+      :budget_type,
+      :auto_refresh)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input parameters for privacy budget templates that support access
+    # budgets functionality, enabling enhanced budget management
+    # capabilities.
+    #
+    # @!attribute [rw] budget_parameters
+    #   An array of budget parameters that define the access budget
+    #   configuration for the privacy template.
+    #   @return [Array<Types::BudgetParameter>]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource associated with this
+    #   privacy budget template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AccessBudgetsPrivacyTemplateParametersInput AWS API Documentation
+    #
+    class AccessBudgetsPrivacyTemplateParametersInput < Struct.new(
+      :budget_parameters,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output parameters for privacy budget templates with access budgets
+    # support, containing the configured budget information.
+    #
+    # @!attribute [rw] budget_parameters
+    #   An array of budget parameters returned from the access budget
+    #   configuration.
+    #   @return [Array<Types::BudgetParameter>]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource associated with this
+    #   privacy budget template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AccessBudgetsPrivacyTemplateParametersOutput AWS API Documentation
+    #
+    class AccessBudgetsPrivacyTemplateParametersOutput < Struct.new(
+      :budget_parameters,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Update parameters for privacy budget templates with access budgets
+    # functionality, allowing modification of existing budget
+    # configurations.
+    #
+    # @!attribute [rw] budget_parameters
+    #   Updated array of budget parameters for the access budget
+    #   configuration.
+    #   @return [Array<Types::BudgetParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AccessBudgetsPrivacyTemplateUpdateParameters AWS API Documentation
+    #
+    class AccessBudgetsPrivacyTemplateUpdateParameters < Struct.new(
+      :budget_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Caller does not have sufficient access to perform this action.
     #
     # @!attribute [rw] message
@@ -530,6 +686,11 @@ module Aws::CleanRooms
     #   for faster troubleshooting in development and testing environments.
     #   @return [Types::ErrorMessageConfiguration]
     #
+    # @!attribute [rw] synthetic_data_parameters
+    #   The parameters used to generate synthetic data for this analysis
+    #   template.
+    #   @return [Types::SyntheticDataParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplate AWS API Documentation
     #
     class AnalysisTemplate < Struct.new(
@@ -549,7 +710,8 @@ module Aws::CleanRooms
       :source_metadata,
       :analysis_parameters,
       :validations,
-      :error_message_configuration)
+      :error_message_configuration,
+      :synthetic_data_parameters)
       SENSITIVE = [:analysis_parameters]
       include Aws::Structure
     end
@@ -657,6 +819,11 @@ module Aws::CleanRooms
     #   The description of the analysis template.
     #   @return [String]
     #
+    # @!attribute [rw] is_synthetic_data
+    #   Indicates if this analysis template summary generated synthetic
+    #   data.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplateSummary AWS API Documentation
     #
     class AnalysisTemplateSummary < Struct.new(
@@ -669,7 +836,8 @@ module Aws::CleanRooms
       :membership_id,
       :collaboration_arn,
       :collaboration_id,
-      :description)
+      :description,
+      :is_synthetic_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -728,6 +896,12 @@ module Aws::CleanRooms
 
     # A reference to a table within Athena.
     #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region where the Athena table is located.
+    #   This parameter is required to uniquely identify and access tables
+    #   across different Regions.
+    #   @return [String]
+    #
     # @!attribute [rw] work_group
     #   The workgroup of the Athena table reference.
     #   @return [String]
@@ -747,6 +921,7 @@ module Aws::CleanRooms
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AthenaTableReference AWS API Documentation
     #
     class AthenaTableReference < Struct.new(
+      :region,
       :work_group,
       :output_location,
       :database_name,
@@ -976,6 +1151,32 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # Individual budget parameter configuration that defines specific budget
+    # allocation settings for access budgets.
+    #
+    # @!attribute [rw] type
+    #   The type of budget parameter being configured.
+    #   @return [String]
+    #
+    # @!attribute [rw] budget
+    #   The budget allocation amount for this specific parameter.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auto_refresh
+    #   Whether this individual budget parameter automatically refreshes
+    #   when the budget period resets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/BudgetParameter AWS API Documentation
+    #
+    class BudgetParameter < Struct.new(
+      :type,
+      :budget,
+      :auto_refresh)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a single change within a collaboration change request,
     # containing the change identifier and specification.
     #
@@ -1132,6 +1333,13 @@ module Aws::CleanRooms
     #   this collaboration.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] allowed_result_regions
+    #   The Amazon Web Services Regions where collaboration query results
+    #   can be stored. Returns the list of Region identifiers that were
+    #   specified when the collaboration was created. This list is used to
+    #   enforce regional storage policies and compliance requirements.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/Collaboration AWS API Documentation
     #
     class Collaboration < Struct.new(
@@ -1150,7 +1358,8 @@ module Aws::CleanRooms
       :query_log_status,
       :job_log_status,
       :analytics_engine,
-      :auto_approved_change_types)
+      :auto_approved_change_types,
+      :allowed_result_regions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1231,6 +1440,11 @@ module Aws::CleanRooms
     #   for faster troubleshooting in development and testing environments.
     #   @return [Types::ErrorMessageConfiguration]
     #
+    # @!attribute [rw] synthetic_data_parameters
+    #   The synthetic data generation parameters configured for this
+    #   collaboration analysis template.
+    #   @return [Types::SyntheticDataParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationAnalysisTemplate AWS API Documentation
     #
     class CollaborationAnalysisTemplate < Struct.new(
@@ -1249,7 +1463,8 @@ module Aws::CleanRooms
       :source_metadata,
       :analysis_parameters,
       :validations,
-      :error_message_configuration)
+      :error_message_configuration,
+      :synthetic_data_parameters)
       SENSITIVE = [:analysis_parameters]
       include Aws::Structure
     end
@@ -1296,6 +1511,11 @@ module Aws::CleanRooms
     #   The description of the analysis template.
     #   @return [String]
     #
+    # @!attribute [rw] is_synthetic_data
+    #   Indicates if this collaboration analysis template uses synthetic
+    #   data generation.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationAnalysisTemplateSummary AWS API Documentation
     #
     class CollaborationAnalysisTemplateSummary < Struct.new(
@@ -1307,7 +1527,8 @@ module Aws::CleanRooms
       :collaboration_arn,
       :collaboration_id,
       :creator_account_id,
-      :description)
+      :description,
+      :is_synthetic_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1963,6 +2184,24 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # Contains classification information for data columns, including
+    # mappings that specify how columns should be handled during synthetic
+    # data generation and privacy analysis.
+    #
+    # @!attribute [rw] column_mapping
+    #   A mapping that defines the classification of data columns for
+    #   synthetic data generation and specifies how each column should be
+    #   handled during the privacy-preserving data synthesis process.
+    #   @return [Array<Types::SyntheticDataColumnProperties>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ColumnClassificationDetails AWS API Documentation
+    #
+    class ColumnClassificationDetails < Struct.new(
+      :column_mapping)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration of the compute resources for an analysis with the
     # Spark analytics engine.
     #
@@ -2209,8 +2448,8 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] allowed_columns
-    #   The columns within the underlying Glue table that can be utilized
-    #   within collaborations.
+    #   The columns within the underlying Glue table that can be used within
+    #   collaborations.
     #   @return [Array<String>]
     #
     # @!attribute [rw] selected_analysis_methods
@@ -2991,6 +3230,11 @@ module Aws::CleanRooms
     #   for faster troubleshooting in development and testing environments.
     #   @return [Types::ErrorMessageConfiguration]
     #
+    # @!attribute [rw] synthetic_data_parameters
+    #   The parameters for generating synthetic data when running the
+    #   analysis template.
+    #   @return [Types::SyntheticDataParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateAnalysisTemplateInput AWS API Documentation
     #
     class CreateAnalysisTemplateInput < Struct.new(
@@ -3002,7 +3246,8 @@ module Aws::CleanRooms
       :tags,
       :analysis_parameters,
       :schema,
-      :error_message_configuration)
+      :error_message_configuration,
+      :synthetic_data_parameters)
       SENSITIVE = [:analysis_parameters]
       include Aws::Structure
     end
@@ -3131,6 +3376,14 @@ module Aws::CleanRooms
     #   this collaboration.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] allowed_result_regions
+    #   The Amazon Web Services Regions where collaboration query results
+    #   can be stored. When specified, results can only be written to these
+    #   Regions. This parameter enables you to meet your compliance and data
+    #   governance requirements, and implement regional data governance
+    #   policies.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaborationInput AWS API Documentation
     #
     class CreateCollaborationInput < Struct.new(
@@ -3146,7 +3399,8 @@ module Aws::CleanRooms
       :tags,
       :creator_payment_configuration,
       :analytics_engine,
-      :auto_approved_change_request_types)
+      :auto_approved_change_request_types,
+      :allowed_result_regions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4874,6 +5128,12 @@ module Aws::CleanRooms
 
     # A reference to a table within an Glue data catalog.
     #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region where the Glue table is located. This
+    #   parameter is required to uniquely identify and access tables across
+    #   different Regions.
+    #   @return [String]
+    #
     # @!attribute [rw] table_name
     #   The name of the Glue table.
     #   @return [String]
@@ -4885,6 +5145,7 @@ module Aws::CleanRooms
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GlueTableReference AWS API Documentation
     #
     class GlueTableReference < Struct.new(
+      :region,
       :table_name,
       :database_name)
       SENSITIVE = []
@@ -5677,13 +5938,19 @@ module Aws::CleanRooms
     #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
+    # @!attribute [rw] access_budget_resource_arn
+    #   The Amazon Resource Name (ARN) of the Configured Table Association
+    #   (ConfiguredTableAssociation) used to filter privacy budgets.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgetsInput AWS API Documentation
     #
     class ListCollaborationPrivacyBudgetsInput < Struct.new(
       :collaboration_identifier,
       :privacy_budget_type,
       :max_results,
-      :next_token)
+      :next_token,
+      :access_budget_resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6107,13 +6374,19 @@ module Aws::CleanRooms
     #   value has not been met.
     #   @return [Integer]
     #
+    # @!attribute [rw] access_budget_resource_arn
+    #   The Amazon Resource Name (ARN) of the access budget resource to
+    #   filter privacy budgets by.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgetsInput AWS API Documentation
     #
     class ListPrivacyBudgetsInput < Struct.new(
       :membership_identifier,
       :privacy_budget_type,
       :next_token,
-      :max_results)
+      :max_results,
+      :access_budget_resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6331,11 +6604,48 @@ module Aws::CleanRooms
     #   inference.
     #   @return [Types::ModelInferencePaymentConfig]
     #
+    # @!attribute [rw] synthetic_data_generation
+    #   The payment configuration for machine learning synthetic data
+    #   generation.
+    #   @return [Types::SyntheticDataGenerationPaymentConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MLPaymentConfig AWS API Documentation
     #
     class MLPaymentConfig < Struct.new(
       :model_training,
-      :model_inference)
+      :model_inference,
+      :synthetic_data_generation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Parameters that control the generation of synthetic data for machine
+    # learning, including privacy settings and column classification
+    # details.
+    #
+    # @!attribute [rw] epsilon
+    #   The epsilon value for differential privacy when generating synthetic
+    #   data. Lower values provide stronger privacy guarantees but may
+    #   reduce data utility.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_membership_inference_attack_score
+    #   The maximum acceptable score for membership inference attack
+    #   vulnerability. Synthetic data generation fails if the score for the
+    #   resulting data exceeds this threshold.
+    #   @return [Float]
+    #
+    # @!attribute [rw] column_classification
+    #   Classification details for data columns that specify how each column
+    #   should be treated during synthetic data generation.
+    #   @return [Types::ColumnClassificationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MLSyntheticDataParameters AWS API Documentation
+    #
+    class MLSyntheticDataParameters < Struct.new(
+      :epsilon,
+      :max_membership_inference_attack_score,
+      :column_classification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6626,11 +6936,17 @@ module Aws::CleanRooms
     #   inference.
     #   @return [Types::MembershipModelInferencePaymentConfig]
     #
+    # @!attribute [rw] synthetic_data_generation
+    #   The payment configuration for synthetic data generation for this
+    #   machine learning membership.
+    #   @return [Types::MembershipSyntheticDataGenerationPaymentConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MembershipMLPaymentConfig AWS API Documentation
     #
     class MembershipMLPaymentConfig < Struct.new(
       :model_training,
-      :model_inference)
+      :model_inference,
+      :synthetic_data_generation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6914,6 +7230,22 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # Configuration for payment for synthetic data generation in a
+    # membership.
+    #
+    # @!attribute [rw] is_responsible
+    #   Indicates if this membership is responsible for paying for synthetic
+    #   data generation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MembershipSyntheticDataGenerationPaymentConfig AWS API Documentation
+    #
+    class MembershipSyntheticDataGenerationPaymentConfig < Struct.new(
+      :is_responsible)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing the collaboration member's model inference
     # payment responsibilities set by the collaboration creator.
     #
@@ -7117,16 +7449,22 @@ module Aws::CleanRooms
     #   available.
     #   @return [Types::DifferentialPrivacyPrivacyBudget]
     #
+    # @!attribute [rw] access_budget
+    #   Access budget information associated with this privacy budget.
+    #   @return [Types::AccessBudget]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PrivacyBudget AWS API Documentation
     #
     class PrivacyBudget < Struct.new(
       :differential_privacy,
+      :access_budget,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class DifferentialPrivacy < PrivacyBudget; end
+      class AccessBudget < PrivacyBudget; end
       class Unknown < PrivacyBudget; end
     end
 
@@ -7284,16 +7622,23 @@ module Aws::CleanRooms
     #   An object that specifies the epsilon and noise parameters.
     #   @return [Types::DifferentialPrivacyTemplateParametersInput]
     #
+    # @!attribute [rw] access_budget
+    #   Access budget configuration for the privacy budget template input,
+    #   enabling integration with access budget functionality.
+    #   @return [Types::AccessBudgetsPrivacyTemplateParametersInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PrivacyBudgetTemplateParametersInput AWS API Documentation
     #
     class PrivacyBudgetTemplateParametersInput < Struct.new(
       :differential_privacy,
+      :access_budget,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class DifferentialPrivacy < PrivacyBudgetTemplateParametersInput; end
+      class AccessBudget < PrivacyBudgetTemplateParametersInput; end
       class Unknown < PrivacyBudgetTemplateParametersInput; end
     end
 
@@ -7306,16 +7651,23 @@ module Aws::CleanRooms
     #   The epsilon and noise parameters.
     #   @return [Types::DifferentialPrivacyTemplateParametersOutput]
     #
+    # @!attribute [rw] access_budget
+    #   Access budget configuration returned from the privacy budget
+    #   template, containing the configured access budget settings.
+    #   @return [Types::AccessBudgetsPrivacyTemplateParametersOutput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PrivacyBudgetTemplateParametersOutput AWS API Documentation
     #
     class PrivacyBudgetTemplateParametersOutput < Struct.new(
       :differential_privacy,
+      :access_budget,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class DifferentialPrivacy < PrivacyBudgetTemplateParametersOutput; end
+      class AccessBudget < PrivacyBudgetTemplateParametersOutput; end
       class Unknown < PrivacyBudgetTemplateParametersOutput; end
     end
 
@@ -7389,16 +7741,23 @@ module Aws::CleanRooms
     #   parameters.
     #   @return [Types::DifferentialPrivacyTemplateUpdateParameters]
     #
+    # @!attribute [rw] access_budget
+    #   The new access budget configuration that completely replaces the
+    #   existing access budget settings in the privacy budget template.
+    #   @return [Types::AccessBudgetsPrivacyTemplateUpdateParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PrivacyBudgetTemplateUpdateParameters AWS API Documentation
     #
     class PrivacyBudgetTemplateUpdateParameters < Struct.new(
       :differential_privacy,
+      :access_budget,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class DifferentialPrivacy < PrivacyBudgetTemplateUpdateParameters; end
+      class AccessBudget < PrivacyBudgetTemplateUpdateParameters; end
       class Unknown < PrivacyBudgetTemplateUpdateParameters; end
     end
 
@@ -8532,6 +8891,10 @@ module Aws::CleanRooms
     #   present.
     #   @return [Array<Types::SchemaStatusDetail>]
     #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the schema resource.
+    #   @return [String]
+    #
     # @!attribute [rw] schema_type_properties
     #   The schema type properties.
     #   @return [Types::SchemaTypeProperties]
@@ -8553,6 +8916,7 @@ module Aws::CleanRooms
       :update_time,
       :type,
       :schema_status_details,
+      :resource_arn,
       :schema_type_properties)
       SENSITIVE = []
       include Aws::Structure
@@ -8689,6 +9053,10 @@ module Aws::CleanRooms
     #   directly on this table.
     #   @return [String]
     #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the schema summary resource.
+    #   @return [String]
+    #
     # @!attribute [rw] selected_analysis_methods
     #   The selected analysis methods for the schema.
     #   @return [Array<String>]
@@ -8705,6 +9073,7 @@ module Aws::CleanRooms
       :collaboration_arn,
       :analysis_rule_types,
       :analysis_method,
+      :resource_arn,
       :selected_analysis_methods)
       SENSITIVE = []
       include Aws::Structure
@@ -8928,6 +9297,78 @@ module Aws::CleanRooms
       :protected_query)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Properties that define how a specific data column should be handled
+    # during synthetic data generation, including its name, type, and role
+    # in predictive modeling.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the data column as it appears in the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_type
+    #   The data type of the column, which determines how the synthetic data
+    #   generation algorithm processes and synthesizes values for this
+    #   column.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_predictive_value
+    #   Indicates if this column contains predictive values that should be
+    #   treated as target variables in machine learning models. This affects
+    #   how the synthetic data generation preserves statistical
+    #   relationships.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SyntheticDataColumnProperties AWS API Documentation
+    #
+    class SyntheticDataColumnProperties < Struct.new(
+      :column_name,
+      :column_type,
+      :is_predictive_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Payment configuration for synthetic data generation.
+    #
+    # @!attribute [rw] is_responsible
+    #   Indicates who is responsible for paying for synthetic data
+    #   generation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SyntheticDataGenerationPaymentConfig AWS API Documentation
+    #
+    class SyntheticDataGenerationPaymentConfig < Struct.new(
+      :is_responsible)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The parameters that control how synthetic data is generated, including
+    # privacy settings, column classifications, and other configuration
+    # options that affect the data synthesis process.
+    #
+    # @note SyntheticDataParameters is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note SyntheticDataParameters is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SyntheticDataParameters corresponding to the set member.
+    #
+    # @!attribute [rw] ml_synthetic_data_parameters
+    #   The machine learning-specific parameters for synthetic data
+    #   generation.
+    #   @return [Types::MLSyntheticDataParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SyntheticDataParameters AWS API Documentation
+    #
+    class SyntheticDataParameters < Struct.new(
+      :ml_synthetic_data_parameters,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class MlSyntheticDataParameters < SyntheticDataParameters; end
+      class Unknown < SyntheticDataParameters; end
     end
 
     # A pointer to the dataset that underlies this table.
@@ -9644,13 +10085,51 @@ module Aws::CleanRooms
     #   128.
     #   @return [Integer]
     #
+    # @!attribute [rw] properties
+    #   The configuration properties for the worker compute environment.
+    #   These properties allow you to customize the compute settings for
+    #   your Clean Rooms workloads.
+    #   @return [Types::WorkerComputeConfigurationProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/WorkerComputeConfiguration AWS API Documentation
     #
     class WorkerComputeConfiguration < Struct.new(
       :type,
-      :number)
+      :number,
+      :properties)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The configuration properties that define the compute environment
+    # settings for workers in Clean Rooms. These properties enable
+    # customization of the underlying compute environment to optimize
+    # performance for your specific workloads.
+    #
+    # @note WorkerComputeConfigurationProperties is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note WorkerComputeConfigurationProperties is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of WorkerComputeConfigurationProperties corresponding to the set member.
+    #
+    # @!attribute [rw] spark
+    #   The Spark configuration properties for SQL workloads. This map
+    #   contains key-value pairs that configure Apache Spark settings to
+    #   optimize performance for your data processing jobs. You can specify
+    #   up to 50 Spark properties, with each key being 1-200 characters and
+    #   each value being 0-500 characters. These properties allow you to
+    #   adjust compute capacity for large datasets and complex workloads.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/WorkerComputeConfigurationProperties AWS API Documentation
+    #
+    class WorkerComputeConfigurationProperties < Struct.new(
+      :spark,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Spark < WorkerComputeConfigurationProperties; end
+      class Unknown < WorkerComputeConfigurationProperties; end
     end
 
   end

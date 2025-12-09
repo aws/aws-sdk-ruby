@@ -149,10 +149,11 @@ module Aws
         def location_states: () -> ::Array[Types::LocationState]
         def stream_class: () -> ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022")
         def id: () -> ::String
-        def status: () -> ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING")
+        def status: () -> ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING" | "EXPIRED")
         def status_reason: () -> ("internalError" | "noAvailableInstances")
         def last_updated_at: () -> ::Time
         def created_at: () -> ::Time
+        def expires_at: () -> ::Time
         def associated_applications: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#create_stream_group-instance_method
@@ -251,10 +252,11 @@ module Aws
         def location_states: () -> ::Array[Types::LocationState]
         def stream_class: () -> ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022")
         def id: () -> ::String
-        def status: () -> ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING")
+        def status: () -> ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING" | "EXPIRED")
         def status_reason: () -> ("internalError" | "noAvailableInstances")
         def last_updated_at: () -> ::Time
         def created_at: () -> ::Time
+        def expires_at: () -> ::Time
         def associated_applications: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#get_stream_group-instance_method
@@ -270,7 +272,7 @@ module Aws
         def stream_group_id: () -> ::String
         def user_id: () -> ::String
         def status: () -> ("ACTIVATING" | "ACTIVE" | "CONNECTED" | "PENDING_CLIENT_RECONNECTION" | "RECONNECTING" | "TERMINATING" | "TERMINATED" | "ERROR")
-        def status_reason: () -> ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError")
+        def status_reason: () -> ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
         def protocol: () -> ("WebRTC")
         def location: () -> ::String
         def signal_request: () -> ::String
@@ -370,7 +372,7 @@ module Aws
         def stream_group_id: () -> ::String
         def user_id: () -> ::String
         def status: () -> ("ACTIVATING" | "ACTIVE" | "CONNECTED" | "PENDING_CLIENT_RECONNECTION" | "RECONNECTING" | "TERMINATING" | "TERMINATED" | "ERROR")
-        def status_reason: () -> ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError")
+        def status_reason: () -> ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
         def protocol: () -> ("WebRTC")
         def location: () -> ::String
         def signal_request: () -> ::String
@@ -464,10 +466,11 @@ module Aws
         def location_states: () -> ::Array[Types::LocationState]
         def stream_class: () -> ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022")
         def id: () -> ::String
-        def status: () -> ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING")
+        def status: () -> ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING" | "EXPIRED")
         def status_reason: () -> ("internalError" | "noAvailableInstances")
         def last_updated_at: () -> ::Time
         def created_at: () -> ::Time
+        def expires_at: () -> ::Time
         def associated_applications: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLiftStreams/Client.html#update_stream_group-instance_method

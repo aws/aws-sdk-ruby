@@ -564,8 +564,11 @@ module Aws::PCS
     #         },
     #       ],
     #       accounting: {
-    #         mode: "STANDARD", # required, accepts STANDARD, NONE
     #         default_purge_time_in_days: 1,
+    #         mode: "STANDARD", # required, accepts STANDARD, NONE
+    #       },
+    #       slurm_rest: {
+    #         mode: "STANDARD", # required, accepts STANDARD, NONE
     #       },
     #     },
     #     client_token: "SBClientToken",
@@ -591,15 +594,18 @@ module Aws::PCS
     #   resp.cluster.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_arn #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_version #=> String
-    #   resp.cluster.slurm_configuration.accounting.mode #=> String, one of "STANDARD", "NONE"
+    #   resp.cluster.slurm_configuration.jwt_auth.jwt_key.secret_arn #=> String
+    #   resp.cluster.slurm_configuration.jwt_auth.jwt_key.secret_version #=> String
     #   resp.cluster.slurm_configuration.accounting.default_purge_time_in_days #=> Integer
+    #   resp.cluster.slurm_configuration.accounting.mode #=> String, one of "STANDARD", "NONE"
+    #   resp.cluster.slurm_configuration.slurm_rest.mode #=> String, one of "STANDARD", "NONE"
     #   resp.cluster.networking.subnet_ids #=> Array
     #   resp.cluster.networking.subnet_ids[0] #=> String
     #   resp.cluster.networking.security_group_ids #=> Array
     #   resp.cluster.networking.security_group_ids[0] #=> String
     #   resp.cluster.networking.network_type #=> String, one of "IPV4", "IPV6"
     #   resp.cluster.endpoints #=> Array
-    #   resp.cluster.endpoints[0].type #=> String, one of "SLURMCTLD", "SLURMDBD"
+    #   resp.cluster.endpoints[0].type #=> String, one of "SLURMCTLD", "SLURMDBD", "SLURMRESTD"
     #   resp.cluster.endpoints[0].private_ip_address #=> String
     #   resp.cluster.endpoints[0].public_ip_address #=> String
     #   resp.cluster.endpoints[0].ipv6_address #=> String
@@ -802,6 +808,9 @@ module Aws::PCS
     #   The list of compute node group configurations to associate with the
     #   queue. Queues assign jobs to associated compute node groups.
     #
+    # @option params [Types::QueueSlurmConfigurationRequest] :slurm_configuration
+    #   Additional options related to the Slurm scheduler.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -832,6 +841,14 @@ module Aws::PCS
     #         compute_node_group_id: "String",
     #       },
     #     ],
+    #     slurm_configuration: {
+    #       slurm_custom_settings: [
+    #         {
+    #           parameter_name: "String", # required
+    #           parameter_value: "String", # required
+    #         },
+    #       ],
+    #     },
     #     client_token: "SBClientToken",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -849,6 +866,9 @@ module Aws::PCS
     #   resp.queue.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"
     #   resp.queue.compute_node_group_configurations #=> Array
     #   resp.queue.compute_node_group_configurations[0].compute_node_group_id #=> String
+    #   resp.queue.slurm_configuration.slurm_custom_settings #=> Array
+    #   resp.queue.slurm_configuration.slurm_custom_settings[0].parameter_name #=> String
+    #   resp.queue.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
     #   resp.queue.error_info #=> Array
     #   resp.queue.error_info[0].code #=> String
     #   resp.queue.error_info[0].message #=> String
@@ -985,7 +1005,7 @@ module Aws::PCS
     # for communication with the scheduler, and provisioning status.
     #
     # @option params [required, String] :cluster_identifier
-    #   The name or ID of the cluster of the queue.
+    #   The name or ID of the cluster.
     #
     # @return [Types::GetClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1014,15 +1034,18 @@ module Aws::PCS
     #   resp.cluster.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_arn #=> String
     #   resp.cluster.slurm_configuration.auth_key.secret_version #=> String
-    #   resp.cluster.slurm_configuration.accounting.mode #=> String, one of "STANDARD", "NONE"
+    #   resp.cluster.slurm_configuration.jwt_auth.jwt_key.secret_arn #=> String
+    #   resp.cluster.slurm_configuration.jwt_auth.jwt_key.secret_version #=> String
     #   resp.cluster.slurm_configuration.accounting.default_purge_time_in_days #=> Integer
+    #   resp.cluster.slurm_configuration.accounting.mode #=> String, one of "STANDARD", "NONE"
+    #   resp.cluster.slurm_configuration.slurm_rest.mode #=> String, one of "STANDARD", "NONE"
     #   resp.cluster.networking.subnet_ids #=> Array
     #   resp.cluster.networking.subnet_ids[0] #=> String
     #   resp.cluster.networking.security_group_ids #=> Array
     #   resp.cluster.networking.security_group_ids[0] #=> String
     #   resp.cluster.networking.network_type #=> String, one of "IPV4", "IPV6"
     #   resp.cluster.endpoints #=> Array
-    #   resp.cluster.endpoints[0].type #=> String, one of "SLURMCTLD", "SLURMDBD"
+    #   resp.cluster.endpoints[0].type #=> String, one of "SLURMCTLD", "SLURMDBD", "SLURMRESTD"
     #   resp.cluster.endpoints[0].private_ip_address #=> String
     #   resp.cluster.endpoints[0].public_ip_address #=> String
     #   resp.cluster.endpoints[0].ipv6_address #=> String
@@ -1129,6 +1152,9 @@ module Aws::PCS
     #   resp.queue.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"
     #   resp.queue.compute_node_group_configurations #=> Array
     #   resp.queue.compute_node_group_configurations[0].compute_node_group_id #=> String
+    #   resp.queue.slurm_configuration.slurm_custom_settings #=> Array
+    #   resp.queue.slurm_configuration.slurm_custom_settings[0].parameter_name #=> String
+    #   resp.queue.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
     #   resp.queue.error_info #=> Array
     #   resp.queue.error_info[0].code #=> String
     #   resp.queue.error_info[0].message #=> String
@@ -1361,7 +1387,7 @@ module Aws::PCS
     #   resp.node_id #=> String
     #   resp.shared_secret #=> String
     #   resp.endpoints #=> Array
-    #   resp.endpoints[0].type #=> String, one of "SLURMCTLD", "SLURMDBD"
+    #   resp.endpoints[0].type #=> String, one of "SLURMCTLD", "SLURMDBD", "SLURMRESTD"
     #   resp.endpoints[0].private_ip_address #=> String
     #   resp.endpoints[0].public_ip_address #=> String
     #   resp.endpoints[0].ipv6_address #=> String
@@ -1434,6 +1460,107 @@ module Aws::PCS
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates a cluster configuration. You can modify Slurm scheduler
+    # settings, accounting configuration, and security groups for an
+    # existing cluster.
+    #
+    # <note markdown="1"> You can only update clusters that are in `ACTIVE`, `UPDATE_FAILED`, or
+    # `SUSPENDED` state. All associated resources (queues and compute node
+    # groups) must be in `ACTIVE` state before you can update the cluster.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The name or ID of the cluster to update.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, the subsequent retries with the same
+    #   client token return the result from the original successful request
+    #   and they have no additional effect. If you don't specify a client
+    #   token, the CLI and SDK automatically generate 1 for you.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Types::UpdateClusterSlurmConfigurationRequest] :slurm_configuration
+    #   Additional options related to the Slurm scheduler.
+    #
+    # @return [Types::UpdateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateClusterResponse#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cluster({
+    #     cluster_identifier: "ClusterIdentifier", # required
+    #     client_token: "SBClientToken",
+    #     slurm_configuration: {
+    #       scale_down_idle_time_in_seconds: 1,
+    #       slurm_custom_settings: [
+    #         {
+    #           parameter_name: "String", # required
+    #           parameter_value: "String", # required
+    #         },
+    #       ],
+    #       accounting: {
+    #         default_purge_time_in_days: 1,
+    #         mode: "STANDARD", # accepts STANDARD, NONE
+    #       },
+    #       slurm_rest: {
+    #         mode: "STANDARD", # accepts STANDARD, NONE
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.name #=> String
+    #   resp.cluster.id #=> String
+    #   resp.cluster.arn #=> String
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"
+    #   resp.cluster.created_at #=> Time
+    #   resp.cluster.modified_at #=> Time
+    #   resp.cluster.scheduler.type #=> String, one of "SLURM"
+    #   resp.cluster.scheduler.version #=> String
+    #   resp.cluster.size #=> String, one of "SMALL", "MEDIUM", "LARGE"
+    #   resp.cluster.slurm_configuration.scale_down_idle_time_in_seconds #=> Integer
+    #   resp.cluster.slurm_configuration.slurm_custom_settings #=> Array
+    #   resp.cluster.slurm_configuration.slurm_custom_settings[0].parameter_name #=> String
+    #   resp.cluster.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
+    #   resp.cluster.slurm_configuration.auth_key.secret_arn #=> String
+    #   resp.cluster.slurm_configuration.auth_key.secret_version #=> String
+    #   resp.cluster.slurm_configuration.jwt_auth.jwt_key.secret_arn #=> String
+    #   resp.cluster.slurm_configuration.jwt_auth.jwt_key.secret_version #=> String
+    #   resp.cluster.slurm_configuration.accounting.default_purge_time_in_days #=> Integer
+    #   resp.cluster.slurm_configuration.accounting.mode #=> String, one of "STANDARD", "NONE"
+    #   resp.cluster.slurm_configuration.slurm_rest.mode #=> String, one of "STANDARD", "NONE"
+    #   resp.cluster.networking.subnet_ids #=> Array
+    #   resp.cluster.networking.subnet_ids[0] #=> String
+    #   resp.cluster.networking.security_group_ids #=> Array
+    #   resp.cluster.networking.security_group_ids[0] #=> String
+    #   resp.cluster.networking.network_type #=> String, one of "IPV4", "IPV6"
+    #   resp.cluster.endpoints #=> Array
+    #   resp.cluster.endpoints[0].type #=> String, one of "SLURMCTLD", "SLURMDBD", "SLURMRESTD"
+    #   resp.cluster.endpoints[0].private_ip_address #=> String
+    #   resp.cluster.endpoints[0].public_ip_address #=> String
+    #   resp.cluster.endpoints[0].ipv6_address #=> String
+    #   resp.cluster.endpoints[0].port #=> String
+    #   resp.cluster.error_info #=> Array
+    #   resp.cluster.error_info[0].code #=> String
+    #   resp.cluster.error_info[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UpdateCluster AWS API Documentation
+    #
+    # @overload update_cluster(params = {})
+    # @param [Hash] params ({})
+    def update_cluster(params = {}, options = {})
+      req = build_request(:update_cluster, params)
       req.send_request(options)
     end
 
@@ -1594,6 +1721,9 @@ module Aws::PCS
     #   The list of compute node group configurations to associate with the
     #   queue. Queues assign jobs to associated compute node groups.
     #
+    # @option params [Types::UpdateQueueSlurmConfigurationRequest] :slurm_configuration
+    #   Additional options related to the Slurm scheduler.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Idempotency ensures that an API request
@@ -1620,6 +1750,14 @@ module Aws::PCS
     #         compute_node_group_id: "String",
     #       },
     #     ],
+    #     slurm_configuration: {
+    #       slurm_custom_settings: [
+    #         {
+    #           parameter_name: "String", # required
+    #           parameter_value: "String", # required
+    #         },
+    #       ],
+    #     },
     #     client_token: "SBClientToken",
     #   })
     #
@@ -1634,6 +1772,9 @@ module Aws::PCS
     #   resp.queue.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED", "UPDATE_FAILED", "SUSPENDING", "SUSPENDED"
     #   resp.queue.compute_node_group_configurations #=> Array
     #   resp.queue.compute_node_group_configurations[0].compute_node_group_id #=> String
+    #   resp.queue.slurm_configuration.slurm_custom_settings #=> Array
+    #   resp.queue.slurm_configuration.slurm_custom_settings[0].parameter_name #=> String
+    #   resp.queue.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
     #   resp.queue.error_info #=> Array
     #   resp.queue.error_info[0].code #=> String
     #   resp.queue.error_info[0].message #=> String
@@ -1665,7 +1806,7 @@ module Aws::PCS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcs'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

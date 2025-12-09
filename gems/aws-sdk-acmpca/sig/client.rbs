@@ -86,8 +86,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#create_certificate_authority-instance_method
       def create_certificate_authority: (
                                           certificate_authority_configuration: {
-                                            key_algorithm: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1" | "SM2"),
-                                            signing_algorithm: ("SHA256WITHECDSA" | "SHA384WITHECDSA" | "SHA512WITHECDSA" | "SHA256WITHRSA" | "SHA384WITHRSA" | "SHA512WITHRSA" | "SM3WITHSM2"),
+                                            key_algorithm: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1" | "ML_DSA_44" | "ML_DSA_65" | "ML_DSA_87" | "SM2"),
+                                            signing_algorithm: ("SHA256WITHECDSA" | "SHA384WITHECDSA" | "SHA512WITHECDSA" | "SHA256WITHRSA" | "SHA384WITHRSA" | "SHA512WITHRSA" | "SM3WITHSM2" | "ML_DSA_44" | "ML_DSA_65" | "ML_DSA_87"),
                                             subject: {
                                               country: ::String?,
                                               organization: ::String?,
@@ -428,7 +428,7 @@ module Aws
                                },
                                certificate_authority_arn: ::String,
                                csr: ::String,
-                               signing_algorithm: ("SHA256WITHECDSA" | "SHA384WITHECDSA" | "SHA512WITHECDSA" | "SHA256WITHRSA" | "SHA384WITHRSA" | "SHA512WITHRSA" | "SM3WITHSM2"),
+                               signing_algorithm: ("SHA256WITHECDSA" | "SHA384WITHECDSA" | "SHA512WITHECDSA" | "SHA256WITHRSA" | "SHA384WITHRSA" | "SHA512WITHRSA" | "SM3WITHSM2" | "ML_DSA_44" | "ML_DSA_65" | "ML_DSA_87"),
                                ?template_arn: ::String,
                                validity: {
                                  value: ::Integer,

@@ -248,6 +248,7 @@ module Aws::WorkSpaces
     DisassociateWorkspaceApplicationResult = Shapes::StructureShape.new(name: 'DisassociateWorkspaceApplicationResult')
     DisconnectTimeoutInSeconds = Shapes::IntegerShape.new(name: 'DisconnectTimeoutInSeconds')
     DnsIpAddresses = Shapes::ListShape.new(name: 'DnsIpAddresses')
+    DnsIpv6Addresses = Shapes::ListShape.new(name: 'DnsIpv6Addresses')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
     Ec2ImageId = Shapes::StringShape.new(name: 'Ec2ImageId')
     Ec2ImportTaskId = Shapes::StringShape.new(name: 'Ec2ImportTaskId')
@@ -315,6 +316,7 @@ module Aws::WorkSpaces
     IpRuleDesc = Shapes::StringShape.new(name: 'IpRuleDesc')
     IpRuleItem = Shapes::StructureShape.new(name: 'IpRuleItem')
     IpRuleList = Shapes::ListShape.new(name: 'IpRuleList')
+    Ipv6Address = Shapes::StringShape.new(name: 'Ipv6Address')
     Limit = Shapes::IntegerShape.new(name: 'Limit')
     Limit50 = Shapes::IntegerShape.new(name: 'Limit50')
     LinkId = Shapes::StringShape.new(name: 'LinkId')
@@ -1208,6 +1210,8 @@ module Aws::WorkSpaces
 
     DnsIpAddresses.member = Shapes::ShapeRef.new(shape: IpAddress)
 
+    DnsIpv6Addresses.member = Shapes::ShapeRef.new(shape: Ipv6Address)
+
     ErrorDetails.add_member(:error_code, Shapes::ShapeRef.new(shape: WorkspaceImageErrorDetailCode, location_name: "ErrorCode"))
     ErrorDetails.add_member(:error_message, Shapes::ShapeRef.new(shape: Description, location_name: "ErrorMessage"))
     ErrorDetails.struct_class = Types::ErrorDetails
@@ -1817,6 +1821,7 @@ module Aws::WorkSpaces
     Workspace.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     Workspace.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, location_name: "UserName"))
     Workspace.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
+    Workspace.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: Ipv6Address, location_name: "Ipv6Address"))
     Workspace.add_member(:state, Shapes::ShapeRef.new(shape: WorkspaceState, location_name: "State"))
     Workspace.add_member(:bundle_id, Shapes::ShapeRef.new(shape: BundleId, location_name: "BundleId"))
     Workspace.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
@@ -1882,6 +1887,7 @@ module Aws::WorkSpaces
     WorkspaceDirectory.add_member(:registration_code, Shapes::ShapeRef.new(shape: RegistrationCode, location_name: "RegistrationCode"))
     WorkspaceDirectory.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
     WorkspaceDirectory.add_member(:dns_ip_addresses, Shapes::ShapeRef.new(shape: DnsIpAddresses, location_name: "DnsIpAddresses"))
+    WorkspaceDirectory.add_member(:dns_ipv_6_addresses, Shapes::ShapeRef.new(shape: DnsIpv6Addresses, location_name: "DnsIpv6Addresses"))
     WorkspaceDirectory.add_member(:customer_user_name, Shapes::ShapeRef.new(shape: UserName, location_name: "CustomerUserName"))
     WorkspaceDirectory.add_member(:iam_role_id, Shapes::ShapeRef.new(shape: ARN, location_name: "IamRoleId"))
     WorkspaceDirectory.add_member(:directory_type, Shapes::ShapeRef.new(shape: WorkspaceDirectoryType, location_name: "DirectoryType"))
@@ -1949,6 +1955,7 @@ module Aws::WorkSpaces
     WorkspaceRequest.add_member(:workspace_properties, Shapes::ShapeRef.new(shape: WorkspaceProperties, location_name: "WorkspaceProperties"))
     WorkspaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     WorkspaceRequest.add_member(:workspace_name, Shapes::ShapeRef.new(shape: WorkspaceName, location_name: "WorkspaceName"))
+    WorkspaceRequest.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: Ipv6Address, location_name: "Ipv6Address"))
     WorkspaceRequest.struct_class = Types::WorkspaceRequest
 
     WorkspaceRequestList.member = Shapes::ShapeRef.new(shape: WorkspaceRequest)

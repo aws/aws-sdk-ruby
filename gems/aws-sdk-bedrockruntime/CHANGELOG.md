@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2025-12-02)
+------------------
+
+* Feature - Adds support for Audio Blocks and Streaming Image Output plus new Stop Reasons of malformed_model_output and malformed_tool_use.
+
+1.67.0 (2025-11-26)
+------------------
+
+* Feature - Bedrock Runtime Reserved Service Support
+
+1.66.0 (2025-11-21)
+------------------
+
+* Feature - Add support to automatically enforce safeguards across accounts within an AWS Organization.
+
+1.65.0 (2025-11-19)
+------------------
+
+* Feature - This release includes support for Search Results.
+
+1.64.0 (2025-11-18)
+------------------
+
+* Feature - Amazon Bedrock Runtime Service Tier Support Launch
+
+1.63.0 (2025-10-29)
+------------------
+
+* Feature - Add support for system tool and web citation response.
+
+1.62.0 (2025-10-28)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.61.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.60.0 (2025-09-29)
+------------------
+
+* Feature - New stop reason for Converse and ConverseStream
+
 1.59.0 (2025-08-29)
 ------------------
 

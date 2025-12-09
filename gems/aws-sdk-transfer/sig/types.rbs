@@ -32,11 +32,28 @@ module Aws::Transfer
       SENSITIVE: []
     end
 
+    class ConnectorEgressConfig
+      attr_accessor vpc_lattice: Types::ConnectorVpcLatticeEgressConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class VpcLattice < ConnectorEgressConfig
+      end
+      class Unknown < ConnectorEgressConfig
+      end
+    end
+
     class ConnectorFileTransferResult
       attr_accessor file_path: ::String
       attr_accessor status_code: ("QUEUED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
       attr_accessor failure_code: ::String
       attr_accessor failure_message: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectorVpcLatticeEgressConfig
+      attr_accessor resource_configuration_arn: ::String
+      attr_accessor port_number: ::Integer
       SENSITIVE: []
     end
 
@@ -94,6 +111,7 @@ module Aws::Transfer
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor sftp_config: Types::SftpConnectorConfig
       attr_accessor security_policy_name: ::String
+      attr_accessor egress_config: Types::ConnectorEgressConfig
       SENSITIVE: []
     end
 
@@ -168,6 +186,7 @@ module Aws::Transfer
       attr_accessor web_app_units: Types::WebAppUnits
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor web_app_endpoint_policy: ("FIPS" | "STANDARD")
+      attr_accessor endpoint_details: Types::WebAppEndpointDetails
       SENSITIVE: []
     end
 
@@ -482,6 +501,27 @@ module Aws::Transfer
       attr_accessor sftp_config: Types::SftpConnectorConfig
       attr_accessor service_managed_egress_ip_addresses: ::Array[::String]
       attr_accessor security_policy_name: ::String
+      attr_accessor egress_config: Types::DescribedConnectorEgressConfig
+      attr_accessor egress_type: ("SERVICE_MANAGED" | "VPC_LATTICE")
+      attr_accessor error_message: ::String
+      attr_accessor status: ("ACTIVE" | "ERRORED" | "PENDING")
+      SENSITIVE: []
+    end
+
+    class DescribedConnectorEgressConfig
+      attr_accessor vpc_lattice: Types::DescribedConnectorVpcLatticeEgressConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class VpcLattice < DescribedConnectorEgressConfig
+      end
+      class Unknown < DescribedConnectorEgressConfig
+      end
+    end
+
+    class DescribedConnectorVpcLatticeEgressConfig
+      attr_accessor resource_configuration_arn: ::String
+      attr_accessor port_number: ::Integer
       SENSITIVE: []
     end
 
@@ -588,6 +628,8 @@ module Aws::Transfer
       attr_accessor web_app_units: Types::WebAppUnits
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor web_app_endpoint_policy: ("FIPS" | "STANDARD")
+      attr_accessor endpoint_type: ("PUBLIC" | "VPC")
+      attr_accessor described_endpoint_details: Types::DescribedWebAppEndpointDetails
       SENSITIVE: []
     end
 
@@ -600,6 +642,17 @@ module Aws::Transfer
       SENSITIVE: [:logo_file, :favicon_file]
     end
 
+    class DescribedWebAppEndpointDetails
+      attr_accessor vpc: Types::DescribedWebAppVpcConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Vpc < DescribedWebAppEndpointDetails
+      end
+      class Unknown < DescribedWebAppEndpointDetails
+      end
+    end
+
     class DescribedWebAppIdentityProviderDetails
       attr_accessor identity_center_config: Types::DescribedIdentityCenterConfig
       attr_accessor unknown: untyped
@@ -609,6 +662,13 @@ module Aws::Transfer
       end
       class Unknown < DescribedWebAppIdentityProviderDetails
       end
+    end
+
+    class DescribedWebAppVpcConfig
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_id: ::String
+      attr_accessor vpc_endpoint_id: ::String
+      SENSITIVE: []
     end
 
     class DescribedWorkflow
@@ -1022,6 +1082,7 @@ module Aws::Transfer
       attr_accessor web_app_id: ::String
       attr_accessor access_endpoint: ::String
       attr_accessor web_app_endpoint: ::String
+      attr_accessor endpoint_type: ("PUBLIC" | "VPC")
       SENSITIVE: []
     end
 
@@ -1304,6 +1365,17 @@ module Aws::Transfer
       SENSITIVE: []
     end
 
+    class UpdateConnectorEgressConfig
+      attr_accessor vpc_lattice: Types::UpdateConnectorVpcLatticeEgressConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class VpcLattice < UpdateConnectorEgressConfig
+      end
+      class Unknown < UpdateConnectorEgressConfig
+      end
+    end
+
     class UpdateConnectorRequest
       attr_accessor connector_id: ::String
       attr_accessor url: ::String
@@ -1312,11 +1384,18 @@ module Aws::Transfer
       attr_accessor logging_role: ::String
       attr_accessor sftp_config: Types::SftpConnectorConfig
       attr_accessor security_policy_name: ::String
+      attr_accessor egress_config: Types::UpdateConnectorEgressConfig
       SENSITIVE: []
     end
 
     class UpdateConnectorResponse
       attr_accessor connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectorVpcLatticeEgressConfig
+      attr_accessor resource_configuration_arn: ::String
+      attr_accessor port_number: ::Integer
       SENSITIVE: []
     end
 
@@ -1361,6 +1440,7 @@ module Aws::Transfer
       attr_accessor structured_log_destinations: ::Array[::String]
       attr_accessor s3_storage_options: Types::S3StorageOptions
       attr_accessor ip_address_type: ("IPV4" | "DUALSTACK")
+      attr_accessor identity_provider_type: ("SERVICE_MANAGED" | "API_GATEWAY" | "AWS_DIRECTORY_SERVICE" | "AWS_LAMBDA")
       SENSITIVE: [:host_key]
     end
 
@@ -1400,6 +1480,17 @@ module Aws::Transfer
       SENSITIVE: []
     end
 
+    class UpdateWebAppEndpointDetails
+      attr_accessor vpc: Types::UpdateWebAppVpcConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Vpc < UpdateWebAppEndpointDetails
+      end
+      class Unknown < UpdateWebAppEndpointDetails
+      end
+    end
+
     class UpdateWebAppIdentityCenterConfig
       attr_accessor role: ::String
       SENSITIVE: []
@@ -1421,6 +1512,7 @@ module Aws::Transfer
       attr_accessor identity_provider_details: Types::UpdateWebAppIdentityProviderDetails
       attr_accessor access_endpoint: ::String
       attr_accessor web_app_units: Types::WebAppUnits
+      attr_accessor endpoint_details: Types::UpdateWebAppEndpointDetails
       SENSITIVE: []
     end
 
@@ -1429,11 +1521,27 @@ module Aws::Transfer
       SENSITIVE: []
     end
 
+    class UpdateWebAppVpcConfig
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class UserDetails
       attr_accessor user_name: ::String
       attr_accessor server_id: ::String
       attr_accessor session_id: ::String
       SENSITIVE: []
+    end
+
+    class WebAppEndpointDetails
+      attr_accessor vpc: Types::WebAppVpcConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Vpc < WebAppEndpointDetails
+      end
+      class Unknown < WebAppEndpointDetails
+      end
     end
 
     class WebAppIdentityProviderDetails
@@ -1456,6 +1564,13 @@ module Aws::Transfer
       end
       class Unknown < WebAppUnits
       end
+    end
+
+    class WebAppVpcConfig
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_id: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
     end
 
     class WorkflowDetail

@@ -1113,6 +1113,14 @@
       "base": "<p>The SNS topic ARN does not exist.</p>",
       "refs": {}
     },
+    "SensitiveString": {
+      "base": null,
+      "refs": {
+        "CreateDBInstanceMessage$MasterUserPassword": null,
+        "ModifyDBInstanceMessage$MasterUserPassword": null,
+        "PendingModifiedValues$MasterUserPassword": null
+      }
+    },
     "SnapshotQuotaExceededFault": {
       "base": "<p>The request would result in the user exceeding the allowed number of DB snapshots.</p>",
       "refs": {}
@@ -1160,7 +1168,6 @@
         "CreateDBInstanceMessage$DBInstanceClass": null,
         "CreateDBInstanceMessage$Engine": null,
         "CreateDBInstanceMessage$MasterUsername": null,
-        "CreateDBInstanceMessage$MasterUserPassword": null,
         "CreateDBInstanceMessage$AvailabilityZone": null,
         "CreateDBInstanceMessage$DBSubnetGroupName": null,
         "CreateDBInstanceMessage$PreferredMaintenanceWindow": null,
@@ -1329,7 +1336,6 @@
         "ListTagsForResourceMessage$ResourceName": null,
         "ModifyDBInstanceMessage$DBInstanceIdentifier": null,
         "ModifyDBInstanceMessage$DBInstanceClass": null,
-        "ModifyDBInstanceMessage$MasterUserPassword": null,
         "ModifyDBInstanceMessage$DBParameterGroupName": null,
         "ModifyDBInstanceMessage$PreferredBackupWindow": null,
         "ModifyDBInstanceMessage$PreferredMaintenanceWindow": null,
@@ -1376,7 +1382,6 @@
         "Parameter$AllowedValues": null,
         "Parameter$MinimumEngineVersion": null,
         "PendingModifiedValues$DBInstanceClass": null,
-        "PendingModifiedValues$MasterUserPassword": null,
         "PendingModifiedValues$EngineVersion": null,
         "PendingModifiedValues$DBInstanceIdentifier": null,
         "PromoteReadReplicaMessage$DBInstanceIdentifier": null,

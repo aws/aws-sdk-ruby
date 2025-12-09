@@ -695,9 +695,10 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
-    # The IAM Identity Center Configuration that includes the Identify
-    # Center instance and application ARNs that provide trusted-identity
-    # propagation.
+    # The IAM Identity Center Configuration accepts the Identity Center
+    # instance parameter required to enable trusted identity propagation.
+    # This configuration allows identity propagation between integrated
+    # services and the Identity Center instance.
     #
     # @!attribute [rw] identity_center_instance_arn
     #   The ARN of the IAM Identity Center instance.
@@ -708,28 +709,42 @@ module Aws::EMRServerless
     #   Application that provides trusted-identity propagation.
     #   @return [String]
     #
+    # @!attribute [rw] user_background_sessions_enabled
+    #   Enables user background sessions for this application so Livy
+    #   sessions can continue running after users log out of their
+    #   interactive notebook or their Identity Center sessions expire.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/IdentityCenterConfiguration AWS API Documentation
     #
     class IdentityCenterConfiguration < Struct.new(
       :identity_center_instance_arn,
-      :identity_center_application_arn)
+      :identity_center_application_arn,
+      :user_background_sessions_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Specifies the IAM Identity Center configuration used to enable or
-    # disable trusted identity propagation. When provided, this
-    # configuration determines how the application interacts with IAM
-    # Identity Center for user authentication and access control.
+    # The IAM Identity Center Configuration accepts the Identity Center
+    # instance parameter required to enable trusted identity propagation.
+    # This configuration allows identity propagation between integrated
+    # services and the Identity Center instance.
     #
     # @!attribute [rw] identity_center_instance_arn
     #   The ARN of the IAM Identity Center instance.
     #   @return [String]
     #
+    # @!attribute [rw] user_background_sessions_enabled
+    #   Enables user background sessions for this application so Livy
+    #   sessions can continue running after users log out of their
+    #   interactive notebook or their Identity Center sessions expire.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/IdentityCenterConfigurationInput AWS API Documentation
     #
     class IdentityCenterConfigurationInput < Struct.new(
-      :identity_center_instance_arn)
+      :identity_center_instance_arn,
+      :user_background_sessions_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -147,6 +147,12 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class AudioSegment
+      attr_accessor s3_uri: ::String
+      attr_accessor transcription: ::String
+      SENSITIVE: []
+    end
+
     class BadGatewayException
       attr_accessor message: ::String
       attr_accessor resource_name: ::String
@@ -469,11 +475,13 @@ module Aws::BedrockAgentRuntime
       attr_accessor flow_failure_event: Types::FlowFailureEvent
       attr_accessor flow_input_event: Types::FlowExecutionInputEvent
       attr_accessor flow_output_event: Types::FlowExecutionOutputEvent
+      attr_accessor node_action_event: Types::NodeActionEvent
+      attr_accessor node_dependency_event: Types::NodeDependencyEvent
       attr_accessor node_failure_event: Types::NodeFailureEvent
       attr_accessor node_input_event: Types::NodeInputEvent
       attr_accessor node_output_event: Types::NodeOutputEvent
       attr_accessor unknown: untyped
-      SENSITIVE: [:condition_result_event, :flow_failure_event, :flow_input_event, :flow_output_event, :node_failure_event, :node_input_event, :node_output_event]
+      SENSITIVE: [:condition_result_event, :flow_failure_event, :flow_input_event, :flow_output_event, :node_action_event, :node_dependency_event, :node_failure_event, :node_input_event, :node_output_event]
 
       class ConditionResultEvent < FlowExecutionEvent
       end
@@ -482,6 +490,10 @@ module Aws::BedrockAgentRuntime
       class FlowInputEvent < FlowExecutionEvent
       end
       class FlowOutputEvent < FlowExecutionEvent
+      end
+      class NodeActionEvent < FlowExecutionEvent
+      end
+      class NodeDependencyEvent < FlowExecutionEvent
       end
       class NodeFailureEvent < FlowExecutionEvent
       end
@@ -597,14 +609,17 @@ module Aws::BedrockAgentRuntime
     class FlowTrace
       attr_accessor condition_node_result_trace: Types::FlowTraceConditionNodeResultEvent
       attr_accessor node_action_trace: Types::FlowTraceNodeActionEvent
+      attr_accessor node_dependency_trace: Types::FlowTraceDependencyEvent
       attr_accessor node_input_trace: Types::FlowTraceNodeInputEvent
       attr_accessor node_output_trace: Types::FlowTraceNodeOutputEvent
       attr_accessor unknown: untyped
-      SENSITIVE: [:condition_node_result_trace, :node_action_trace, :node_input_trace, :node_output_trace]
+      SENSITIVE: [:condition_node_result_trace, :node_action_trace, :node_dependency_trace, :node_input_trace, :node_output_trace]
 
       class ConditionNodeResultTrace < FlowTrace
       end
       class NodeActionTrace < FlowTrace
+      end
+      class NodeDependencyTrace < FlowTrace
       end
       class NodeInputTrace < FlowTrace
       end
@@ -626,6 +641,13 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class FlowTraceDependencyEvent
+      attr_accessor node_name: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor trace_elements: Types::TraceElements
+      SENSITIVE: [:trace_elements]
+    end
+
     class FlowTraceEvent
       attr_accessor trace: Types::FlowTrace
       attr_accessor event_type: untyped
@@ -635,6 +657,8 @@ module Aws::BedrockAgentRuntime
     class FlowTraceNodeActionEvent
       attr_accessor node_name: ::String
       attr_accessor operation_name: ::String
+      attr_accessor operation_request: untyped
+      attr_accessor operation_response: untyped
       attr_accessor request_id: ::String
       attr_accessor service_name: ::String
       attr_accessor timestamp: ::Time
@@ -659,10 +683,28 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class FlowTraceNodeInputExecutionChainItem
+      attr_accessor index: ::Integer
+      attr_accessor node_name: ::String
+      attr_accessor type: ("Iterator" | "Loop")
+      SENSITIVE: []
+    end
+
     class FlowTraceNodeInputField
+      attr_accessor category: ("LoopCondition" | "ReturnValueToLoopStart" | "ExitLoop")
       attr_accessor content: Types::FlowTraceNodeInputContent
+      attr_accessor execution_chain: ::Array[Types::FlowTraceNodeInputExecutionChainItem]
       attr_accessor node_input_name: ::String
-      SENSITIVE: [:content]
+      attr_accessor source: Types::FlowTraceNodeInputSource
+      attr_accessor type: ("String" | "Number" | "Boolean" | "Object" | "Array")
+      SENSITIVE: [:content, :execution_chain, :source]
+    end
+
+    class FlowTraceNodeInputSource
+      attr_accessor expression: ::String
+      attr_accessor node_name: ::String
+      attr_accessor output_field_name: ::String
+      SENSITIVE: [:expression]
     end
 
     class FlowTraceNodeOutputContent
@@ -685,7 +727,15 @@ module Aws::BedrockAgentRuntime
 
     class FlowTraceNodeOutputField
       attr_accessor content: Types::FlowTraceNodeOutputContent
+      attr_accessor next: ::Array[Types::FlowTraceNodeOutputNext]
       attr_accessor node_output_name: ::String
+      attr_accessor type: ("String" | "Number" | "Boolean" | "Object" | "Array")
+      SENSITIVE: []
+    end
+
+    class FlowTraceNodeOutputNext
+      attr_accessor input_field_name: ::String
+      attr_accessor node_name: ::String
       SENSITIVE: []
     end
 
@@ -1054,6 +1104,12 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class InputImage
+      attr_accessor format: ("png" | "jpeg" | "gif" | "webp")
+      attr_accessor inline_content: ::String
+      SENSITIVE: [:inline_content]
+    end
+
     class InputPrompt
       attr_accessor text_prompt: Types::TextPrompt
       attr_accessor unknown: untyped
@@ -1244,7 +1300,9 @@ module Aws::BedrockAgentRuntime
     end
 
     class KnowledgeBaseQuery
+      attr_accessor image: Types::InputImage
       attr_accessor text: ::String
+      attr_accessor type: ("TEXT" | "IMAGE")
       SENSITIVE: []
     end
 
@@ -1430,6 +1488,24 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class NodeActionEvent
+      attr_accessor node_name: ::String
+      attr_accessor operation_name: ::String
+      attr_accessor operation_request: untyped
+      attr_accessor operation_response: untyped
+      attr_accessor request_id: ::String
+      attr_accessor service_name: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class NodeDependencyEvent
+      attr_accessor node_name: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor trace_elements: Types::NodeTraceElements
+      SENSITIVE: [:trace_elements]
+    end
+
     class NodeExecutionContent
       attr_accessor document: untyped
       attr_accessor unknown: untyped
@@ -1456,10 +1532,28 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: []
     end
 
+    class NodeInputExecutionChainItem
+      attr_accessor index: ::Integer
+      attr_accessor node_name: ::String
+      attr_accessor type: ("Iterator" | "Loop")
+      SENSITIVE: []
+    end
+
     class NodeInputField
+      attr_accessor category: ("LoopCondition" | "ReturnValueToLoopStart" | "ExitLoop")
       attr_accessor content: Types::NodeExecutionContent
+      attr_accessor execution_chain: ::Array[Types::NodeInputExecutionChainItem]
       attr_accessor name: ::String
+      attr_accessor source: Types::NodeInputSource
+      attr_accessor type: ("String" | "Number" | "Boolean" | "Object" | "Array")
       SENSITIVE: [:content]
+    end
+
+    class NodeInputSource
+      attr_accessor expression: ::String
+      attr_accessor node_name: ::String
+      attr_accessor output_field_name: ::String
+      SENSITIVE: [:expression]
     end
 
     class NodeOutputEvent
@@ -1472,7 +1566,26 @@ module Aws::BedrockAgentRuntime
     class NodeOutputField
       attr_accessor content: Types::NodeExecutionContent
       attr_accessor name: ::String
+      attr_accessor next: ::Array[Types::NodeOutputNext]
+      attr_accessor type: ("String" | "Number" | "Boolean" | "Object" | "Array")
       SENSITIVE: [:content]
+    end
+
+    class NodeOutputNext
+      attr_accessor input_field_name: ::String
+      attr_accessor node_name: ::String
+      SENSITIVE: []
+    end
+
+    class NodeTraceElements
+      attr_accessor agent_traces: ::Array[Types::TracePart]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AgentTraces < NodeTraceElements
+      end
+      class Unknown < NodeTraceElements
+      end
     end
 
     class Observation
@@ -1881,10 +1994,12 @@ module Aws::BedrockAgentRuntime
     end
 
     class RetrievalResultContent
+      attr_accessor audio: Types::AudioSegment
       attr_accessor byte_content: ::String
       attr_accessor row: ::Array[Types::RetrievalResultContentColumn]
       attr_accessor text: ::String
-      attr_accessor type: ("TEXT" | "IMAGE" | "ROW")
+      attr_accessor type: ("TEXT" | "IMAGE" | "ROW" | "AUDIO" | "VIDEO")
+      attr_accessor video: Types::VideoSegment
       SENSITIVE: [:row]
     end
 
@@ -2229,6 +2344,17 @@ module Aws::BedrockAgentRuntime
       end
     end
 
+    class TraceElements
+      attr_accessor agent_traces: ::Array[Types::TracePart]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AgentTraces < TraceElements
+      end
+      class Unknown < TraceElements
+      end
+    end
+
     class TracePart
       attr_accessor agent_alias_id: ::String
       attr_accessor agent_id: ::String
@@ -2300,6 +2426,12 @@ module Aws::BedrockAgentRuntime
     class VectorSearchRerankingConfiguration
       attr_accessor bedrock_reranking_configuration: Types::VectorSearchBedrockRerankingConfiguration
       attr_accessor type: ("BEDROCK_RERANKING_MODEL")
+      SENSITIVE: []
+    end
+
+    class VideoSegment
+      attr_accessor s3_uri: ::String
+      attr_accessor summary: ::String
       SENSITIVE: []
     end
 

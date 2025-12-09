@@ -3312,7 +3312,7 @@ module Aws::SESV2
       api.add_operation(:put_email_identity_dkim_signing_attributes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutEmailIdentityDkimSigningAttributes"
         o.http_method = "PUT"
-        o.http_request_uri = "/v1/email/identities/{EmailIdentity}/dkim/signing"
+        o.http_request_uri = "/v2/email/identities/{EmailIdentity}/dkim/signing"
         o.input = Shapes::ShapeRef.new(shape: PutEmailIdentityDkimSigningAttributesRequest)
         o.output = Shapes::ShapeRef.new(shape: PutEmailIdentityDkimSigningAttributesResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)

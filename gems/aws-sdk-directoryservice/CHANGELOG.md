@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.96.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.95.0 (2025-10-17)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.94.0 (2025-09-30)
+------------------
+
+* Feature - AWS Directory service now supports IPv6-native and dual-stack configurations for AWS Managed Microsoft AD, AD Connector, and Simple AD (dual-stack only). Additionally, AWS Managed Microsoft AD Standard Edition directories can be upgraded to Enterprise Edition directories through a single API call.
+
 1.93.0 (2025-08-27)
 ------------------
 

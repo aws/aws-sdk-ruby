@@ -1,6 +1,64 @@
 Unreleased Changes
 ------------------
 
+3.239.2 (2025-11-25)
+------------------
+
+* Issue - Fix `login_credentials` in credentials chain when config is enabled.
+
+3.239.1 (2025-11-21)
+------------------
+
+* Issue - Fixed HTTP/2 connection issues when using custom ports.
+
+3.239.0 (2025-11-20)
+------------------
+
+* Feature - Updated Aws::Signin::Client with the latest API changes.
+
+* Issue - Fix region configuration for LoginCredential's Signin client.
+
+3.238.0 (2025-11-19)
+------------------
+
+* Feature - Updated Aws::Signin::Client with the latest API changes.
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - IAM now supports outbound identity federation via the STS GetWebIdentityToken API, enabling AWS workloads to securely authenticate with external services using short-lived JSON Web Tokens.
+
+* Feature - Add `LoginCredentials` which retrieves credentials from AWS Sign-In. Support `aws-sdk-signin` alias gem.
+
+3.237.0 (2025-11-10)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Added GetDelegatedAccessToken API, which is not available for general use at this time.
+
+3.236.0 (2025-10-30)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Update endpoint ruleset parameters casing
+
+3.235.0 (2025-10-24)
+------------------
+
+* Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
+
+* Feature - Update endpoint ruleset parameters casing
+
+3.234.0 (2025-10-21)
+------------------
+
+* Issue - Fix `request_checksum_calculation` `when_required` mode to only calculate checksums when explicitly provided by user.
+
+* Feature - Add `CREDENTIALS_CODE` metric for `static_profile_` prefixed methods in default credential chain.
+
 3.233.0 (2025-09-23)
 ------------------
 

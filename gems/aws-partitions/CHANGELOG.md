@@ -1,6 +1,144 @@
 Unreleased Changes
 ------------------
 
+1.1191.0 (2025-12-08)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1190.0 (2025-12-02)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::NovaAct`.
+
+1.1189.0 (2025-12-01)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::Route53GlobalResolver`.
+
+* Feature - Added support for enumerating regions for  `Aws::PartnerCentralBenefits`.
+
+* Feature - Added support for enumerating regions for  `Aws::PartnerCentralAccount`.
+
+1.1188.0 (2025-11-25)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1187.0 (2025-11-21)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::SageMakerRuntimeHTTP2`.
+
+* Feature - Added support for enumerating regions for  `Aws::ComputeOptimizerAutomation`.
+
+1.1186.0 (2025-11-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1185.0 (2025-11-19)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::Signin`.
+
+* Feature - Added support for enumerating regions for  `Aws::PartnerCentralChannel`.
+
+1.1184.0 (2025-11-18)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1183.0 (2025-11-17)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::MWAAServerless`.
+
+1.1182.0 (2025-11-14)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1181.0 (2025-11-06)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1180.0 (2025-11-04)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1179.0 (2025-10-30)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1178.0 (2025-10-28)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1177.0 (2025-10-24)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1176.0 (2025-10-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1175.0 (2025-10-22)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::RTBFabric`.
+
+1.1174.0 (2025-10-17)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1173.0 (2025-10-15)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1172.0 (2025-10-10)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1171.0 (2025-10-09)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1170.0 (2025-10-08)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1169.0 (2025-10-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1168.0 (2025-09-30)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1167.0 (2025-09-29)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.1166.0 (2025-09-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.1165.0 (2025-09-25)
 ------------------
 

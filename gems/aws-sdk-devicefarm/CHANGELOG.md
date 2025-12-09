@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.98.0 (2025-11-20)
+------------------
+
+* Feature - Add support for environment variables and an IAM execution role.
+
+1.97.0 (2025-11-17)
+------------------
+
+* Feature - This release adds support for interacting with devices during a remote access session using the remoteDriverEndpoint interface
+
+1.96.0 (2025-10-22)
+------------------
+
+* Feature - This release adds support for optionally including an app as part of a CreateRemoteAccessSession request
+
+1.95.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.94.0 (2025-08-26)
 ------------------
 

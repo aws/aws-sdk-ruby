@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2025-11-21)
+------------------
+
+* Feature - This release adds the health check log feature in ALB, allowing customers to send detailed target health check log data directly to their designated Amazon S3 bucket.
+
+1.144.0 (2025-11-20)
+------------------
+
+* Feature - This release adds the target optimizer feature in ALB, enabling strict concurrency enforcement on targets.
+
+1.143.0 (2025-11-13)
+------------------
+
+* Feature - QUIC and TCP_QUIC protocol support for Network Load Balancer (NLB). This capability enables customers to forward QUIC traffic to their targets with ultra-low latency while maintaining session stickiness using QUIC Connection IDs.
+
+1.142.0 (2025-11-12)
+------------------
+
+* Feature - This release expands ALB Authentication to support JWT verification and adds support for a new JWT validation action in listener rule.
+
+1.141.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.140.0 (2025-10-15)
+------------------
+
+* Feature - This release expands Listener Rule Conditions to support RegexValues and adds support for a new Transforms field in Listener Rules.
+
 1.139.0 (2025-08-26)
 ------------------
 

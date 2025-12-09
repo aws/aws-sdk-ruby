@@ -346,7 +346,7 @@ module Aws::RDS
     #     parameters: [ # required
     #       {
     #         parameter_name: "String",
-    #         parameter_value: "String",
+    #         parameter_value: "PotentiallySensitiveParameterValue",
     #         description: "String",
     #         source: "String",
     #         apply_type: "String",
@@ -411,7 +411,7 @@ module Aws::RDS
     #     parameters: [
     #       {
     #         parameter_name: "String",
-    #         parameter_value: "String",
+    #         parameter_value: "PotentiallySensitiveParameterValue",
     #         description: "String",
     #         source: "String",
     #         apply_type: "String",

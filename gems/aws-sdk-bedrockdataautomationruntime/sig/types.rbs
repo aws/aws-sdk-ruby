@@ -52,6 +52,9 @@ module Aws::BedrockDataAutomationRuntime
       attr_accessor error_type: ::String
       attr_accessor error_message: ::String
       attr_accessor output_configuration: Types::OutputConfiguration
+      attr_accessor job_submission_time: ::Time
+      attr_accessor job_completion_time: ::Time
+      attr_accessor job_duration_in_seconds: ::Integer
       SENSITIVE: []
     end
 
@@ -84,6 +87,21 @@ module Aws::BedrockDataAutomationRuntime
       SENSITIVE: []
     end
 
+    class InvokeDataAutomationRequest
+      attr_accessor input_configuration: Types::SyncInputConfiguration
+      attr_accessor data_automation_configuration: Types::DataAutomationConfiguration
+      attr_accessor blueprints: ::Array[Types::Blueprint]
+      attr_accessor data_automation_profile_arn: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class InvokeDataAutomationResponse
+      attr_accessor semantic_modality: ("DOCUMENT" | "IMAGE" | "AUDIO" | "VIDEO")
+      attr_accessor output_segments: ::Array[Types::OutputSegment]
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -104,6 +122,13 @@ module Aws::BedrockDataAutomationRuntime
       SENSITIVE: []
     end
 
+    class OutputSegment
+      attr_accessor custom_output_status: ("MATCH" | "NO_MATCH")
+      attr_accessor custom_output: ::String
+      attr_accessor standard_output: ::String
+      SENSITIVE: []
+    end
+
     class ResourceNotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -111,6 +136,17 @@ module Aws::BedrockDataAutomationRuntime
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SyncInputConfiguration
+      attr_accessor bytes: ::String
+      attr_accessor s3_uri: ::String
       SENSITIVE: []
     end
 

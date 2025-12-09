@@ -62,6 +62,7 @@ module Aws::IoTManagedIntegrations
     CapabilitySchemaItem = Shapes::StructureShape.new(name: 'CapabilitySchemaItem')
     CapabilitySchemas = Shapes::ListShape.new(name: 'CapabilitySchemas')
     CapabilityVersion = Shapes::StringShape.new(name: 'CapabilityVersion')
+    CertificatePem = Shapes::StringShape.new(name: 'CertificatePem')
     ClaimCertificate = Shapes::StringShape.new(name: 'ClaimCertificate')
     ClaimCertificatePrivateKey = Shapes::StringShape.new(name: 'ClaimCertificatePrivateKey')
     Classification = Shapes::StringShape.new(name: 'Classification')
@@ -215,6 +216,8 @@ module Aws::IoTManagedIntegrations
     GetHubConfigurationResponse = Shapes::StructureShape.new(name: 'GetHubConfigurationResponse')
     GetManagedThingCapabilitiesRequest = Shapes::StructureShape.new(name: 'GetManagedThingCapabilitiesRequest')
     GetManagedThingCapabilitiesResponse = Shapes::StructureShape.new(name: 'GetManagedThingCapabilitiesResponse')
+    GetManagedThingCertificateRequest = Shapes::StructureShape.new(name: 'GetManagedThingCertificateRequest')
+    GetManagedThingCertificateResponse = Shapes::StructureShape.new(name: 'GetManagedThingCertificateResponse')
     GetManagedThingConnectivityDataRequest = Shapes::StructureShape.new(name: 'GetManagedThingConnectivityDataRequest')
     GetManagedThingConnectivityDataResponse = Shapes::StructureShape.new(name: 'GetManagedThingConnectivityDataResponse')
     GetManagedThingMetaDataRequest = Shapes::StructureShape.new(name: 'GetManagedThingMetaDataRequest')
@@ -950,6 +953,13 @@ module Aws::IoTManagedIntegrations
     GetManagedThingCapabilitiesResponse.add_member(:capabilities, Shapes::ShapeRef.new(shape: Capabilities, location_name: "Capabilities"))
     GetManagedThingCapabilitiesResponse.add_member(:capability_report, Shapes::ShapeRef.new(shape: CapabilityReport, location_name: "CapabilityReport"))
     GetManagedThingCapabilitiesResponse.struct_class = Types::GetManagedThingCapabilitiesResponse
+
+    GetManagedThingCertificateRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ManagedThingId, required: true, location: "uri", location_name: "Identifier"))
+    GetManagedThingCertificateRequest.struct_class = Types::GetManagedThingCertificateRequest
+
+    GetManagedThingCertificateResponse.add_member(:managed_thing_id, Shapes::ShapeRef.new(shape: ManagedThingId, location_name: "ManagedThingId"))
+    GetManagedThingCertificateResponse.add_member(:certificate_pem, Shapes::ShapeRef.new(shape: CertificatePem, location_name: "CertificatePem"))
+    GetManagedThingCertificateResponse.struct_class = Types::GetManagedThingCertificateResponse
 
     GetManagedThingConnectivityDataRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: ManagedThingId, required: true, location: "uri", location_name: "Identifier"))
     GetManagedThingConnectivityDataRequest.struct_class = Types::GetManagedThingConnectivityDataRequest
@@ -1721,6 +1731,7 @@ module Aws::IoTManagedIntegrations
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1749,8 +1760,10 @@ module Aws::IoTManagedIntegrations
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:create_credential_locker, Seahorse::Model::Operation.new.tap do |o|
@@ -1891,6 +1904,7 @@ module Aws::IoTManagedIntegrations
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
@@ -2192,6 +2206,21 @@ module Aws::IoTManagedIntegrations
         o.http_request_uri = "/managed-things-capabilities/{Identifier}"
         o.input = Shapes::ShapeRef.new(shape: GetManagedThingCapabilitiesRequest)
         o.output = Shapes::ShapeRef.new(shape: GetManagedThingCapabilitiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_managed_thing_certificate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetManagedThingCertificate"
+        o.http_method = "GET"
+        o.http_request_uri = "/managed-things-certificate/{Identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetManagedThingCertificateRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetManagedThingCertificateResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -2857,6 +2886,7 @@ module Aws::IoTManagedIntegrations
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)

@@ -508,89 +508,89 @@ module Aws::GroundStation
     #
     # Only one type of `configData` can be specified.
     #
-    # @option params [required, Types::ConfigTypeData] :config_data
-    #   Parameters of a `Config`.
-    #
     # @option params [required, String] :name
     #   Name of a `Config`.
+    #
+    # @option params [required, Types::ConfigTypeData] :config_data
+    #   Parameters of a `Config`.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags assigned to a `Config`.
     #
     # @return [Types::ConfigIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ConfigIdResponse#config_arn #config_arn} => String
     #   * {Types::ConfigIdResponse#config_id #config_id} => String
     #   * {Types::ConfigIdResponse#config_type #config_type} => String
+    #   * {Types::ConfigIdResponse#config_arn #config_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_config({
+    #     name: "SafeName", # required
     #     config_data: { # required
     #       antenna_downlink_config: {
     #         spectrum_config: { # required
-    #           bandwidth: { # required
-    #             units: "GHz", # required, accepts GHz, MHz, kHz
-    #             value: 1.0, # required
-    #           },
     #           center_frequency: { # required
-    #             units: "GHz", # required, accepts GHz, MHz, kHz
     #             value: 1.0, # required
+    #             units: "GHz", # required, accepts GHz, MHz, kHz
+    #           },
+    #           bandwidth: { # required
+    #             value: 1.0, # required
+    #             units: "GHz", # required, accepts GHz, MHz, kHz
     #           },
     #           polarization: "RIGHT_HAND", # accepts RIGHT_HAND, LEFT_HAND, NONE
     #         },
     #       },
-    #       antenna_downlink_demod_decode_config: {
-    #         decode_config: { # required
-    #           unvalidated_json: "JsonString", # required
-    #         },
-    #         demodulation_config: { # required
-    #           unvalidated_json: "JsonString", # required
-    #         },
-    #         spectrum_config: { # required
-    #           bandwidth: { # required
-    #             units: "GHz", # required, accepts GHz, MHz, kHz
-    #             value: 1.0, # required
-    #           },
-    #           center_frequency: { # required
-    #             units: "GHz", # required, accepts GHz, MHz, kHz
-    #             value: 1.0, # required
-    #           },
-    #           polarization: "RIGHT_HAND", # accepts RIGHT_HAND, LEFT_HAND, NONE
-    #         },
-    #       },
-    #       antenna_uplink_config: {
-    #         spectrum_config: { # required
-    #           center_frequency: { # required
-    #             units: "GHz", # required, accepts GHz, MHz, kHz
-    #             value: 1.0, # required
-    #           },
-    #           polarization: "RIGHT_HAND", # accepts RIGHT_HAND, LEFT_HAND, NONE
-    #         },
-    #         target_eirp: { # required
-    #           units: "dBW", # required, accepts dBW
-    #           value: 1.0, # required
-    #         },
-    #         transmit_disabled: false,
+    #       tracking_config: {
+    #         autotrack: "REQUIRED", # required, accepts REQUIRED, PREFERRED, REMOVED
     #       },
     #       dataflow_endpoint_config: {
     #         dataflow_endpoint_name: "String", # required
     #         dataflow_endpoint_region: "String",
     #       },
-    #       s3_recording_config: {
-    #         bucket_arn: "BucketArn", # required
-    #         prefix: "S3KeyPrefix",
-    #         role_arn: "RoleArn", # required
+    #       antenna_downlink_demod_decode_config: {
+    #         spectrum_config: { # required
+    #           center_frequency: { # required
+    #             value: 1.0, # required
+    #             units: "GHz", # required, accepts GHz, MHz, kHz
+    #           },
+    #           bandwidth: { # required
+    #             value: 1.0, # required
+    #             units: "GHz", # required, accepts GHz, MHz, kHz
+    #           },
+    #           polarization: "RIGHT_HAND", # accepts RIGHT_HAND, LEFT_HAND, NONE
+    #         },
+    #         demodulation_config: { # required
+    #           unvalidated_json: "JsonString", # required
+    #         },
+    #         decode_config: { # required
+    #           unvalidated_json: "JsonString", # required
+    #         },
     #       },
-    #       tracking_config: {
-    #         autotrack: "REQUIRED", # required, accepts REQUIRED, PREFERRED, REMOVED
+    #       antenna_uplink_config: {
+    #         transmit_disabled: false,
+    #         spectrum_config: { # required
+    #           center_frequency: { # required
+    #             value: 1.0, # required
+    #             units: "GHz", # required, accepts GHz, MHz, kHz
+    #           },
+    #           polarization: "RIGHT_HAND", # accepts RIGHT_HAND, LEFT_HAND, NONE
+    #         },
+    #         target_eirp: { # required
+    #           value: 1.0, # required
+    #           units: "dBW", # required, accepts dBW
+    #         },
     #       },
     #       uplink_echo_config: {
-    #         antenna_uplink_config_arn: "ConfigArn", # required
     #         enabled: false, # required
+    #         antenna_uplink_config_arn: "ConfigArn", # required
+    #       },
+    #       s3_recording_config: {
+    #         bucket_arn: "BucketArn", # required
+    #         role_arn: "RoleArn", # required
+    #         prefix: "S3KeyPrefix",
     #       },
     #     },
-    #     name: "SafeName", # required
     #     tags: {
     #       "String" => "String",
     #     },
@@ -598,9 +598,9 @@ module Aws::GroundStation
     #
     # @example Response structure
     #
-    #   resp.config_arn #=> String
     #   resp.config_id #=> String
     #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"
+    #   resp.config_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/CreateConfig AWS API Documentation
     #
@@ -621,12 +621,21 @@ module Aws::GroundStation
     # When a contact uses multiple `DataflowEndpointConfig` objects, each
     # `Config` must match a `DataflowEndpoint` in the same group.
     #
-    # @option params [Integer] :contact_post_pass_duration_seconds
-    #   Amount of time, in seconds, after a contact ends that the Ground
-    #   Station Dataflow Endpoint Group will be in a `POSTPASS` state. A
-    #   Ground Station Dataflow Endpoint Group State Change event will be
-    #   emitted when the Dataflow Endpoint Group enters and exits the
-    #   `POSTPASS` state.
+    # @option params [required, Array<Types::EndpointDetails>] :endpoint_details
+    #   Endpoint details of each endpoint in the dataflow endpoint group. All
+    #   dataflow endpoints within a single dataflow endpoint group must be of
+    #   the same type. You cannot mix [ AWS Ground Station Agent endpoints][1]
+    #   with [Dataflow endpoints][2] in the same group. If your use case
+    #   requires both types of endpoints, you must create separate dataflow
+    #   endpoint groups for each type.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ground-station/latest/APIReference/API_AwsGroundStationAgentEndpoint.html
+    #   [2]: https://docs.aws.amazon.com/ground-station/latest/APIReference/API_DataflowEndpoint.html
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags of a dataflow endpoint group.
     #
     # @option params [Integer] :contact_pre_pass_duration_seconds
     #   Amount of time, in seconds, before a contact starts that the Ground
@@ -634,19 +643,12 @@ module Aws::GroundStation
     #   Station Dataflow Endpoint Group State Change event will be emitted
     #   when the Dataflow Endpoint Group enters and exits the `PREPASS` state.
     #
-    # @option params [required, Array<Types::EndpointDetails>] :endpoint_details
-    #   Endpoint details of each endpoint in the dataflow endpoint group.
-    #   All dataflow endpoints within a single dataflow endpoint group must be
-    #   of the same type. You cannot mix <a
-    #   href="https://docs.aws.amazon.com/ground-station/latest/APIReference/API_AwsGroundStationAgentEndpoint.html">
-    #   AWS Ground Station Agent endpoints</a> with <a
-    #   href="https://docs.aws.amazon.com/ground-station/latest/APIReference/API_DataflowEndpoint.html">Dataflow
-    #   endpoints</a> in the same group. If your use case requires both types
-    #   of endpoints, you must create separate dataflow endpoint groups for
-    #   each type. </p>
-    #
-    # @option params [Hash<String,String>] :tags
-    #   Tags of a dataflow endpoint group.
+    # @option params [Integer] :contact_post_pass_duration_seconds
+    #   Amount of time, in seconds, after a contact ends that the Ground
+    #   Station Dataflow Endpoint Group will be in a `POSTPASS` state. A
+    #   Ground Station Dataflow Endpoint Group State Change event will be
+    #   emitted when the Dataflow Endpoint Group enters and exits the
+    #   `POSTPASS` state.
     #
     # @return [Types::DataflowEndpointGroupIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -655,53 +657,105 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_dataflow_endpoint_group({
-    #     contact_post_pass_duration_seconds: 1,
-    #     contact_pre_pass_duration_seconds: 1,
     #     endpoint_details: [ # required
     #       {
-    #         aws_ground_station_agent_endpoint: {
-    #           agent_status: "SUCCESS", # accepts SUCCESS, FAILED, ACTIVE, INACTIVE
-    #           audit_results: "HEALTHY", # accepts HEALTHY, UNHEALTHY
-    #           egress_address: { # required
-    #             mtu: 1,
-    #             socket_address: { # required
-    #               name: "String", # required
-    #               port: 1, # required
-    #             },
-    #           },
-    #           ingress_address: { # required
-    #             mtu: 1,
-    #             socket_address: { # required
-    #               name: "IpV4Address", # required
-    #               port_range: { # required
-    #                 maximum: 1, # required
-    #                 minimum: 1, # required
-    #               },
-    #             },
-    #           },
-    #           name: "SafeName", # required
+    #         security_details: {
+    #           subnet_ids: ["String"], # required
+    #           security_group_ids: ["String"], # required
+    #           role_arn: "RoleArn", # required
     #         },
     #         endpoint: {
+    #           name: "SafeName",
     #           address: {
     #             name: "String", # required
     #             port: 1, # required
     #           },
-    #           mtu: 1,
-    #           name: "SafeName",
     #           status: "created", # accepts created, creating, deleted, deleting, failed
+    #           mtu: 1,
     #         },
-    #         health_reasons: ["NO_REGISTERED_AGENT"], # accepts NO_REGISTERED_AGENT, INVALID_IP_OWNERSHIP, NOT_AUTHORIZED_TO_CREATE_SLR, UNVERIFIED_IP_OWNERSHIP, INITIALIZING_DATAPLANE, DATAPLANE_FAILURE, HEALTHY
+    #         aws_ground_station_agent_endpoint: {
+    #           name: "SafeName", # required
+    #           egress_address: { # required
+    #             socket_address: { # required
+    #               name: "String", # required
+    #               port: 1, # required
+    #             },
+    #             mtu: 1,
+    #           },
+    #           ingress_address: { # required
+    #             socket_address: { # required
+    #               name: "IpV4Address", # required
+    #               port_range: { # required
+    #                 minimum: 1, # required
+    #                 maximum: 1, # required
+    #               },
+    #             },
+    #             mtu: 1,
+    #           },
+    #           agent_status: "SUCCESS", # accepts SUCCESS, FAILED, ACTIVE, INACTIVE
+    #           audit_results: "HEALTHY", # accepts HEALTHY, UNHEALTHY
+    #         },
+    #         uplink_aws_ground_station_agent_endpoint: {
+    #           name: "SafeName", # required
+    #           dataflow_details: { # required
+    #             agent_connection_details: {
+    #               ingress_address_and_port: { # required
+    #                 socket_address: { # required
+    #                   name: "String", # required
+    #                   port: 1, # required
+    #                 },
+    #                 mtu: 1,
+    #               },
+    #               agent_ip_and_port_address: { # required
+    #                 socket_address: { # required
+    #                   name: "IpV4Address", # required
+    #                   port_range: { # required
+    #                     minimum: 1, # required
+    #                     maximum: 1, # required
+    #                   },
+    #                 },
+    #                 mtu: 1,
+    #               },
+    #             },
+    #           },
+    #           agent_status: "SUCCESS", # accepts SUCCESS, FAILED, ACTIVE, INACTIVE
+    #           audit_results: "HEALTHY", # accepts HEALTHY, UNHEALTHY
+    #         },
+    #         downlink_aws_ground_station_agent_endpoint: {
+    #           name: "SafeName", # required
+    #           dataflow_details: { # required
+    #             agent_connection_details: {
+    #               agent_ip_and_port_address: { # required
+    #                 socket_address: { # required
+    #                   name: "IpV4Address", # required
+    #                   port_range: { # required
+    #                     minimum: 1, # required
+    #                     maximum: 1, # required
+    #                   },
+    #                 },
+    #                 mtu: 1,
+    #               },
+    #               egress_address_and_port: { # required
+    #                 socket_address: { # required
+    #                   name: "String", # required
+    #                   port: 1, # required
+    #                 },
+    #                 mtu: 1,
+    #               },
+    #             },
+    #           },
+    #           agent_status: "SUCCESS", # accepts SUCCESS, FAILED, ACTIVE, INACTIVE
+    #           audit_results: "HEALTHY", # accepts HEALTHY, UNHEALTHY
+    #         },
     #         health_status: "HEALTHY", # accepts HEALTHY, UNHEALTHY
-    #         security_details: {
-    #           role_arn: "RoleArn", # required
-    #           security_group_ids: ["String"], # required
-    #           subnet_ids: ["String"], # required
-    #         },
+    #         health_reasons: ["NO_REGISTERED_AGENT"], # accepts NO_REGISTERED_AGENT, INVALID_IP_OWNERSHIP, NOT_AUTHORIZED_TO_CREATE_SLR, UNVERIFIED_IP_OWNERSHIP, INITIALIZING_DATAPLANE, DATAPLANE_FAILURE, HEALTHY
     #       },
     #     ],
     #     tags: {
     #       "String" => "String",
     #     },
+    #     contact_pre_pass_duration_seconds: 1,
+    #     contact_post_pass_duration_seconds: 1,
     #   })
     #
     # @example Response structure
@@ -717,39 +771,143 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
-    # Creates an Ephemeris with the specified `EphemerisData`.
+    # Creates a `DataflowEndpointGroupV2` containing the specified list of
+    # `DataflowEndpoint` objects.
+    #
+    # The `name` field in each endpoint is used in your mission profile
+    # `DataflowEndpointConfig` to specify which endpoints to use during a
+    # contact.
+    #
+    # When a contact uses multiple `DataflowEndpointConfig` objects, each
+    # `Config` must match a `DataflowEndpoint` in the same group.
+    #
+    # @option params [required, Array<Types::CreateEndpointDetails>] :endpoints
+    #   Dataflow endpoint group's endpoint definitions
+    #
+    # @option params [Integer] :contact_pre_pass_duration_seconds
+    #   Amount of time, in seconds, before a contact starts that the Ground
+    #   Station Dataflow Endpoint Group will be in a `PREPASS` state. A Ground
+    #   Station Dataflow Endpoint Group State Change event will be emitted
+    #   when the Dataflow Endpoint Group enters and exits the `PREPASS` state.
+    #
+    # @option params [Integer] :contact_post_pass_duration_seconds
+    #   Amount of time, in seconds, after a contact ends that the Ground
+    #   Station Dataflow Endpoint Group will be in a `POSTPASS` state. A
+    #   Ground Station Dataflow Endpoint Group State Change event will be
+    #   emitted when the Dataflow Endpoint Group enters and exits the
+    #   `POSTPASS` state.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags of a V2 dataflow endpoint group.
+    #
+    # @return [Types::CreateDataflowEndpointGroupV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataflowEndpointGroupV2Response#dataflow_endpoint_group_id #dataflow_endpoint_group_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_dataflow_endpoint_group_v2({
+    #     endpoints: [ # required
+    #       {
+    #         uplink_aws_ground_station_agent_endpoint: {
+    #           name: "SafeName", # required
+    #           dataflow_details: { # required
+    #             agent_connection_details: {
+    #               ingress_address_and_port: { # required
+    #                 socket_address: { # required
+    #                   name: "String", # required
+    #                   port: 1, # required
+    #                 },
+    #                 mtu: 1,
+    #               },
+    #               agent_ip_and_port_address: { # required
+    #                 socket_address: { # required
+    #                   name: "IpV4Address", # required
+    #                   port_range: { # required
+    #                     minimum: 1, # required
+    #                     maximum: 1, # required
+    #                   },
+    #                 },
+    #                 mtu: 1,
+    #               },
+    #             },
+    #           },
+    #         },
+    #         downlink_aws_ground_station_agent_endpoint: {
+    #           name: "SafeName", # required
+    #           dataflow_details: { # required
+    #             agent_connection_details: {
+    #               agent_ip_and_port_address: { # required
+    #                 socket_address: { # required
+    #                   name: "IpV4Address", # required
+    #                   port_range: { # required
+    #                     minimum: 1, # required
+    #                     maximum: 1, # required
+    #                   },
+    #                 },
+    #                 mtu: 1,
+    #               },
+    #               egress_address_and_port: { # required
+    #                 socket_address: { # required
+    #                   name: "String", # required
+    #                   port: 1, # required
+    #                 },
+    #                 mtu: 1,
+    #               },
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     contact_pre_pass_duration_seconds: 1,
+    #     contact_post_pass_duration_seconds: 1,
+    #     tags: {
+    #       "String" => "String",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataflow_endpoint_group_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/CreateDataflowEndpointGroupV2 AWS API Documentation
+    #
+    # @overload create_dataflow_endpoint_group_v2(params = {})
+    # @param [Hash] params ({})
+    def create_dataflow_endpoint_group_v2(params = {}, options = {})
+      req = build_request(:create_dataflow_endpoint_group_v2, params)
+      req.send_request(options)
+    end
+
+    # Create an ephemeris with your specified EphemerisData.
+    #
+    # @option params [String] :satellite_id
+    #   The satellite ID that associates this ephemeris with a satellite in
+    #   AWS Ground Station.
     #
     # @option params [Boolean] :enabled
-    #   Whether to set the ephemeris status to `ENABLED` after validation.
+    #   Set to `true` to enable the ephemeris after validation. Set to `false`
+    #   to keep it disabled.
     #
-    #   Setting this to false will set the ephemeris status to `DISABLED`
-    #   after validation.
+    # @option params [Integer] :priority
+    #   A priority score that determines which ephemeris to use when multiple
+    #   ephemerides overlap.
     #
-    # @option params [Types::EphemerisData] :ephemeris
-    #   Ephemeris data.
+    #   Higher numbers take precedence. The default is 1. Must be 1 or
+    #   greater.
     #
     # @option params [Time,DateTime,Date,Integer,String] :expiration_time
     #   An overall expiration time for the ephemeris in UTC, after which it
     #   will become `EXPIRED`.
     #
-    # @option params [String] :kms_key_arn
-    #   The ARN of a KMS key used to encrypt the ephemeris in Ground Station.
-    #
     # @option params [required, String] :name
-    #   A name string associated with the ephemeris. Used as a human-readable
-    #   identifier for the ephemeris.
+    #   A name that you can use to identify the ephemeris.
     #
-    # @option params [Integer] :priority
-    #   Customer-provided priority score to establish the order in which
-    #   overlapping ephemerides should be used.
+    # @option params [String] :kms_key_arn
+    #   The ARN of the KMS key to use for encrypting the ephemeris.
     #
-    #   The default for customer-provided ephemeris priority is 1, and higher
-    #   numbers take precedence.
-    #
-    #   Priority must be 1 or greater
-    #
-    # @option params [required, String] :satellite_id
-    #   AWS Ground Station satellite ID for this ephemeris.
+    # @option params [Types::EphemerisData] :ephemeris
+    #   Ephemeris data.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags assigned to an ephemeris.
@@ -761,16 +919,13 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_ephemeris({
+    #     satellite_id: "Uuid",
     #     enabled: false,
+    #     priority: 1,
+    #     expiration_time: Time.now,
+    #     name: "SafeName", # required
+    #     kms_key_arn: "KeyArn",
     #     ephemeris: {
-    #       oem: {
-    #         oem_data: "UnboundedString",
-    #         s3_object: {
-    #           bucket: "S3BucketName",
-    #           key: "S3ObjectKey",
-    #           version: "S3VersionId",
-    #         },
-    #       },
     #       tle: {
     #         s3_object: {
     #           bucket: "S3BucketName",
@@ -782,18 +937,50 @@ module Aws::GroundStation
     #             tle_line_1: "TleLineOne", # required
     #             tle_line_2: "TleLineTwo", # required
     #             valid_time_range: { # required
-    #               end_time: Time.now, # required
     #               start_time: Time.now, # required
+    #               end_time: Time.now, # required
     #             },
     #           },
     #         ],
     #       },
+    #       oem: {
+    #         s3_object: {
+    #           bucket: "S3BucketName",
+    #           key: "S3ObjectKey",
+    #           version: "S3VersionId",
+    #         },
+    #         oem_data: "UnboundedString",
+    #       },
+    #       az_el: {
+    #         ground_station: "GroundStationName", # required
+    #         data: { # required
+    #           s3_object: {
+    #             bucket: "S3BucketName",
+    #             key: "S3ObjectKey",
+    #             version: "S3VersionId",
+    #           },
+    #           az_el_data: {
+    #             angle_unit: "DEGREE_ANGLE", # required, accepts DEGREE_ANGLE, RADIAN
+    #             az_el_segment_list: [ # required
+    #               {
+    #                 reference_epoch: Time.now, # required
+    #                 valid_time_range: { # required
+    #                   start_time: Time.now, # required
+    #                   end_time: Time.now, # required
+    #                 },
+    #                 az_el_list: [ # required
+    #                   {
+    #                     dt: 1.0, # required
+    #                     az: 1.0, # required
+    #                     el: 1.0, # required
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       },
     #     },
-    #     expiration_time: Time.now,
-    #     kms_key_arn: "KeyArn",
-    #     name: "SafeName", # required
-    #     priority: 1,
-    #     satellite_id: "Uuid", # required
     #     tags: {
     #       "String" => "String",
     #     },
@@ -817,38 +1004,38 @@ module Aws::GroundStation
     # `dataflowEdges` is a list of lists of strings. Each lower level list
     # of strings has two elements: a *from* ARN and a *to* ARN.
     #
-    # @option params [Integer] :contact_post_pass_duration_seconds
-    #   Amount of time after a contact ends that you’d like to receive a
-    #   Ground Station Contact State Change event indicating the pass has
-    #   finished.
+    # @option params [required, String] :name
+    #   Name of a mission profile.
     #
     # @option params [Integer] :contact_pre_pass_duration_seconds
     #   Amount of time prior to contact start you’d like to receive a Ground
     #   Station Contact State Change event indicating an upcoming pass.
     #
-    # @option params [required, Array<Array>] :dataflow_edges
-    #   A list of lists of ARNs. Each list of ARNs is an edge, with a *from*
-    #   `Config` and a *to* `Config`.
+    # @option params [Integer] :contact_post_pass_duration_seconds
+    #   Amount of time after a contact ends that you’d like to receive a
+    #   Ground Station Contact State Change event indicating the pass has
+    #   finished.
     #
     # @option params [required, Integer] :minimum_viable_contact_duration_seconds
     #   Smallest amount of time in seconds that you’d like to see for an
     #   available contact. AWS Ground Station will not present you with
     #   contacts shorter than this duration.
     #
-    # @option params [required, String] :name
-    #   Name of a mission profile.
+    # @option params [required, Array<Array>] :dataflow_edges
+    #   A list of lists of ARNs. Each list of ARNs is an edge, with a *from*
+    #   `Config` and a *to* `Config`.
+    #
+    # @option params [required, String] :tracking_config_arn
+    #   ARN of a tracking `Config`.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags assigned to a mission profile.
     #
     # @option params [Types::KmsKey] :streams_kms_key
     #   KMS key to use for encrypting streams.
     #
     # @option params [String] :streams_kms_role
     #   Role to use for encrypting streams with KMS key.
-    #
-    # @option params [Hash<String,String>] :tags
-    #   Tags assigned to a mission profile.
-    #
-    # @option params [required, String] :tracking_config_arn
-    #   ARN of a tracking `Config`.
     #
     # @return [Types::MissionProfileIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -857,23 +1044,23 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_mission_profile({
-    #     contact_post_pass_duration_seconds: 1,
+    #     name: "SafeName", # required
     #     contact_pre_pass_duration_seconds: 1,
+    #     contact_post_pass_duration_seconds: 1,
+    #     minimum_viable_contact_duration_seconds: 1, # required
     #     dataflow_edges: [ # required
     #       ["ConfigArn"],
     #     ],
-    #     minimum_viable_contact_duration_seconds: 1, # required
-    #     name: "SafeName", # required
-    #     streams_kms_key: {
-    #       kms_alias_arn: "KeyAliasArn",
-    #       kms_alias_name: "KeyAliasName",
-    #       kms_key_arn: "KeyArn",
-    #     },
-    #     streams_kms_role: "RoleArn",
+    #     tracking_config_arn: "ConfigArn", # required
     #     tags: {
     #       "String" => "String",
     #     },
-    #     tracking_config_arn: "ConfigArn", # required
+    #     streams_kms_key: {
+    #       kms_key_arn: "KeyArn",
+    #       kms_alias_arn: "KeyAliasArn",
+    #       kms_alias_name: "KeyAliasName",
+    #     },
+    #     streams_kms_role: "RoleArn",
     #   })
     #
     # @example Response structure
@@ -899,9 +1086,9 @@ module Aws::GroundStation
     #
     # @return [Types::ConfigIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ConfigIdResponse#config_arn #config_arn} => String
     #   * {Types::ConfigIdResponse#config_id #config_id} => String
     #   * {Types::ConfigIdResponse#config_type #config_type} => String
+    #   * {Types::ConfigIdResponse#config_arn #config_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -912,9 +1099,9 @@ module Aws::GroundStation
     #
     # @example Response structure
     #
-    #   resp.config_arn #=> String
     #   resp.config_id #=> String
     #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"
+    #   resp.config_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DeleteConfig AWS API Documentation
     #
@@ -953,7 +1140,7 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
-    # Deletes an ephemeris
+    # Delete an ephemeris.
     #
     # @option params [required, String] :ephemeris_id
     #   The AWS Ground Station ephemeris ID.
@@ -1017,21 +1204,23 @@ module Aws::GroundStation
     # @return [Types::DescribeContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeContactResponse#contact_id #contact_id} => String
-    #   * {Types::DescribeContactResponse#contact_status #contact_status} => String
-    #   * {Types::DescribeContactResponse#dataflow_list #dataflow_list} => Array&lt;Types::DataflowDetail&gt;
-    #   * {Types::DescribeContactResponse#end_time #end_time} => Time
-    #   * {Types::DescribeContactResponse#error_message #error_message} => String
-    #   * {Types::DescribeContactResponse#ground_station #ground_station} => String
-    #   * {Types::DescribeContactResponse#maximum_elevation #maximum_elevation} => Types::Elevation
     #   * {Types::DescribeContactResponse#mission_profile_arn #mission_profile_arn} => String
-    #   * {Types::DescribeContactResponse#post_pass_end_time #post_pass_end_time} => Time
-    #   * {Types::DescribeContactResponse#pre_pass_start_time #pre_pass_start_time} => Time
-    #   * {Types::DescribeContactResponse#region #region} => String
     #   * {Types::DescribeContactResponse#satellite_arn #satellite_arn} => String
     #   * {Types::DescribeContactResponse#start_time #start_time} => Time
+    #   * {Types::DescribeContactResponse#end_time #end_time} => Time
+    #   * {Types::DescribeContactResponse#pre_pass_start_time #pre_pass_start_time} => Time
+    #   * {Types::DescribeContactResponse#post_pass_end_time #post_pass_end_time} => Time
+    #   * {Types::DescribeContactResponse#ground_station #ground_station} => String
+    #   * {Types::DescribeContactResponse#contact_status #contact_status} => String
+    #   * {Types::DescribeContactResponse#error_message #error_message} => String
+    #   * {Types::DescribeContactResponse#maximum_elevation #maximum_elevation} => Types::Elevation
     #   * {Types::DescribeContactResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::DescribeContactResponse#visibility_end_time #visibility_end_time} => Time
+    #   * {Types::DescribeContactResponse#region #region} => String
+    #   * {Types::DescribeContactResponse#dataflow_list #dataflow_list} => Array&lt;Types::DataflowDetail&gt;
     #   * {Types::DescribeContactResponse#visibility_start_time #visibility_start_time} => Time
+    #   * {Types::DescribeContactResponse#visibility_end_time #visibility_end_time} => Time
+    #   * {Types::DescribeContactResponse#tracking_overrides #tracking_overrides} => Types::TrackingOverrides
+    #   * {Types::DescribeContactResponse#ephemeris #ephemeris} => Types::EphemerisResponseData
     #
     # @example Request syntax with placeholder values
     #
@@ -1042,82 +1231,125 @@ module Aws::GroundStation
     # @example Response structure
     #
     #   resp.contact_id #=> String
-    #   resp.contact_status #=> String, one of "SCHEDULING", "FAILED_TO_SCHEDULE", "SCHEDULED", "CANCELLED", "AWS_CANCELLED", "PREPASS", "PASS", "POSTPASS", "COMPLETED", "FAILED", "AVAILABLE", "CANCELLING", "AWS_FAILED"
-    #   resp.dataflow_list #=> Array
-    #   resp.dataflow_list[0].destination.config_details.antenna_demod_decode_details.output_node #=> String
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.agent_status #=> String, one of "SUCCESS", "FAILED", "ACTIVE", "INACTIVE"
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.audit_results #=> String, one of "HEALTHY", "UNHEALTHY"
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.egress_address.mtu #=> Integer
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.egress_address.socket_address.name #=> String
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.egress_address.socket_address.port #=> Integer
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.mtu #=> Integer
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.socket_address.name #=> String
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.socket_address.port_range.maximum #=> Integer
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.socket_address.port_range.minimum #=> Integer
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.name #=> String
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.address.name #=> String
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.address.port #=> Integer
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.mtu #=> Integer
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.name #=> String
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.status #=> String, one of "created", "creating", "deleted", "deleting", "failed"
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.health_reasons #=> Array
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.health_reasons[0] #=> String, one of "NO_REGISTERED_AGENT", "INVALID_IP_OWNERSHIP", "NOT_AUTHORIZED_TO_CREATE_SLR", "UNVERIFIED_IP_OWNERSHIP", "INITIALIZING_DATAPLANE", "DATAPLANE_FAILURE", "HEALTHY"
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.health_status #=> String, one of "HEALTHY", "UNHEALTHY"
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.role_arn #=> String
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.security_group_ids #=> Array
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.security_group_ids[0] #=> String
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.subnet_ids #=> Array
-    #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.subnet_ids[0] #=> String
-    #   resp.dataflow_list[0].destination.config_details.s3_recording_details.bucket_arn #=> String
-    #   resp.dataflow_list[0].destination.config_details.s3_recording_details.key_template #=> String
-    #   resp.dataflow_list[0].destination.config_id #=> String
-    #   resp.dataflow_list[0].destination.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"
-    #   resp.dataflow_list[0].destination.dataflow_destination_region #=> String
-    #   resp.dataflow_list[0].error_message #=> String
-    #   resp.dataflow_list[0].source.config_details.antenna_demod_decode_details.output_node #=> String
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.agent_status #=> String, one of "SUCCESS", "FAILED", "ACTIVE", "INACTIVE"
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.audit_results #=> String, one of "HEALTHY", "UNHEALTHY"
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.egress_address.mtu #=> Integer
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.egress_address.socket_address.name #=> String
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.egress_address.socket_address.port #=> Integer
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.mtu #=> Integer
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.socket_address.name #=> String
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.socket_address.port_range.maximum #=> Integer
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.socket_address.port_range.minimum #=> Integer
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.name #=> String
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.address.name #=> String
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.address.port #=> Integer
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.mtu #=> Integer
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.name #=> String
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.status #=> String, one of "created", "creating", "deleted", "deleting", "failed"
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.health_reasons #=> Array
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.health_reasons[0] #=> String, one of "NO_REGISTERED_AGENT", "INVALID_IP_OWNERSHIP", "NOT_AUTHORIZED_TO_CREATE_SLR", "UNVERIFIED_IP_OWNERSHIP", "INITIALIZING_DATAPLANE", "DATAPLANE_FAILURE", "HEALTHY"
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.health_status #=> String, one of "HEALTHY", "UNHEALTHY"
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.role_arn #=> String
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.security_group_ids #=> Array
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.security_group_ids[0] #=> String
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.subnet_ids #=> Array
-    #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.subnet_ids[0] #=> String
-    #   resp.dataflow_list[0].source.config_details.s3_recording_details.bucket_arn #=> String
-    #   resp.dataflow_list[0].source.config_details.s3_recording_details.key_template #=> String
-    #   resp.dataflow_list[0].source.config_id #=> String
-    #   resp.dataflow_list[0].source.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"
-    #   resp.dataflow_list[0].source.dataflow_source_region #=> String
-    #   resp.end_time #=> Time
-    #   resp.error_message #=> String
-    #   resp.ground_station #=> String
-    #   resp.maximum_elevation.unit #=> String, one of "DEGREE_ANGLE", "RADIAN"
-    #   resp.maximum_elevation.value #=> Float
     #   resp.mission_profile_arn #=> String
-    #   resp.post_pass_end_time #=> Time
-    #   resp.pre_pass_start_time #=> Time
-    #   resp.region #=> String
     #   resp.satellite_arn #=> String
     #   resp.start_time #=> Time
+    #   resp.end_time #=> Time
+    #   resp.pre_pass_start_time #=> Time
+    #   resp.post_pass_end_time #=> Time
+    #   resp.ground_station #=> String
+    #   resp.contact_status #=> String, one of "SCHEDULING", "FAILED_TO_SCHEDULE", "SCHEDULED", "CANCELLED", "AWS_CANCELLED", "PREPASS", "PASS", "POSTPASS", "COMPLETED", "FAILED", "AVAILABLE", "CANCELLING", "AWS_FAILED"
+    #   resp.error_message #=> String
+    #   resp.maximum_elevation.value #=> Float
+    #   resp.maximum_elevation.unit #=> String, one of "DEGREE_ANGLE", "RADIAN"
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
-    #   resp.visibility_end_time #=> Time
+    #   resp.region #=> String
+    #   resp.dataflow_list #=> Array
+    #   resp.dataflow_list[0].source.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"
+    #   resp.dataflow_list[0].source.config_id #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.subnet_ids #=> Array
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.subnet_ids[0] #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.security_group_ids #=> Array
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.security_group_ids[0] #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.security_details.role_arn #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.name #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.address.name #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.address.port #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.status #=> String, one of "created", "creating", "deleted", "deleting", "failed"
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.endpoint.mtu #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.name #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.egress_address.socket_address.name #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.egress_address.socket_address.port #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.egress_address.mtu #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.socket_address.name #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.socket_address.port_range.minimum #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.socket_address.port_range.maximum #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.mtu #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.agent_status #=> String, one of "SUCCESS", "FAILED", "ACTIVE", "INACTIVE"
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.aws_ground_station_agent_endpoint.audit_results #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.name #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.ingress_address_and_port.socket_address.name #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.ingress_address_and_port.socket_address.port #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.ingress_address_and_port.mtu #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.socket_address.name #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.socket_address.port_range.minimum #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.socket_address.port_range.maximum #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.mtu #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.agent_status #=> String, one of "SUCCESS", "FAILED", "ACTIVE", "INACTIVE"
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.audit_results #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.name #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.socket_address.name #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.socket_address.port_range.minimum #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.socket_address.port_range.maximum #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.mtu #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.egress_address_and_port.socket_address.name #=> String
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.egress_address_and_port.socket_address.port #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.egress_address_and_port.mtu #=> Integer
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.agent_status #=> String, one of "SUCCESS", "FAILED", "ACTIVE", "INACTIVE"
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.audit_results #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.health_status #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.health_reasons #=> Array
+    #   resp.dataflow_list[0].source.config_details.endpoint_details.health_reasons[0] #=> String, one of "NO_REGISTERED_AGENT", "INVALID_IP_OWNERSHIP", "NOT_AUTHORIZED_TO_CREATE_SLR", "UNVERIFIED_IP_OWNERSHIP", "INITIALIZING_DATAPLANE", "DATAPLANE_FAILURE", "HEALTHY"
+    #   resp.dataflow_list[0].source.config_details.antenna_demod_decode_details.output_node #=> String
+    #   resp.dataflow_list[0].source.config_details.s3_recording_details.bucket_arn #=> String
+    #   resp.dataflow_list[0].source.config_details.s3_recording_details.key_template #=> String
+    #   resp.dataflow_list[0].source.dataflow_source_region #=> String
+    #   resp.dataflow_list[0].destination.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"
+    #   resp.dataflow_list[0].destination.config_id #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.subnet_ids #=> Array
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.subnet_ids[0] #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.security_group_ids #=> Array
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.security_group_ids[0] #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.security_details.role_arn #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.name #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.address.name #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.address.port #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.status #=> String, one of "created", "creating", "deleted", "deleting", "failed"
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.endpoint.mtu #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.name #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.egress_address.socket_address.name #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.egress_address.socket_address.port #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.egress_address.mtu #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.socket_address.name #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.socket_address.port_range.minimum #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.socket_address.port_range.maximum #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.ingress_address.mtu #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.agent_status #=> String, one of "SUCCESS", "FAILED", "ACTIVE", "INACTIVE"
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.aws_ground_station_agent_endpoint.audit_results #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.name #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.ingress_address_and_port.socket_address.name #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.ingress_address_and_port.socket_address.port #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.ingress_address_and_port.mtu #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.socket_address.name #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.socket_address.port_range.minimum #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.socket_address.port_range.maximum #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.mtu #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.agent_status #=> String, one of "SUCCESS", "FAILED", "ACTIVE", "INACTIVE"
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.uplink_aws_ground_station_agent_endpoint.audit_results #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.name #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.socket_address.name #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.socket_address.port_range.minimum #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.socket_address.port_range.maximum #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.mtu #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.egress_address_and_port.socket_address.name #=> String
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.egress_address_and_port.socket_address.port #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.egress_address_and_port.mtu #=> Integer
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.agent_status #=> String, one of "SUCCESS", "FAILED", "ACTIVE", "INACTIVE"
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.downlink_aws_ground_station_agent_endpoint.audit_results #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.health_status #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.health_reasons #=> Array
+    #   resp.dataflow_list[0].destination.config_details.endpoint_details.health_reasons[0] #=> String, one of "NO_REGISTERED_AGENT", "INVALID_IP_OWNERSHIP", "NOT_AUTHORIZED_TO_CREATE_SLR", "UNVERIFIED_IP_OWNERSHIP", "INITIALIZING_DATAPLANE", "DATAPLANE_FAILURE", "HEALTHY"
+    #   resp.dataflow_list[0].destination.config_details.antenna_demod_decode_details.output_node #=> String
+    #   resp.dataflow_list[0].destination.config_details.s3_recording_details.bucket_arn #=> String
+    #   resp.dataflow_list[0].destination.config_details.s3_recording_details.key_template #=> String
+    #   resp.dataflow_list[0].destination.dataflow_destination_region #=> String
+    #   resp.dataflow_list[0].error_message #=> String
     #   resp.visibility_start_time #=> Time
+    #   resp.visibility_end_time #=> Time
+    #   resp.tracking_overrides.program_track_settings.az_el.ephemeris_id #=> String
+    #   resp.ephemeris.ephemeris_id #=> String
+    #   resp.ephemeris.ephemeris_type #=> String, one of "TLE", "OEM", "AZ_EL", "SERVICE_MANAGED"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1133,23 +1365,24 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
-    # Describes an existing ephemeris.
+    # Retrieve information about an existing ephemeris.
     #
     # @option params [required, String] :ephemeris_id
     #   The AWS Ground Station ephemeris ID.
     #
     # @return [Types::DescribeEphemerisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeEphemerisResponse#creation_time #creation_time} => Time
-    #   * {Types::DescribeEphemerisResponse#enabled #enabled} => Boolean
     #   * {Types::DescribeEphemerisResponse#ephemeris_id #ephemeris_id} => String
-    #   * {Types::DescribeEphemerisResponse#invalid_reason #invalid_reason} => String
-    #   * {Types::DescribeEphemerisResponse#name #name} => String
-    #   * {Types::DescribeEphemerisResponse#priority #priority} => Integer
     #   * {Types::DescribeEphemerisResponse#satellite_id #satellite_id} => String
     #   * {Types::DescribeEphemerisResponse#status #status} => String
-    #   * {Types::DescribeEphemerisResponse#supplied_data #supplied_data} => Types::EphemerisTypeDescription
+    #   * {Types::DescribeEphemerisResponse#priority #priority} => Integer
+    #   * {Types::DescribeEphemerisResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeEphemerisResponse#enabled #enabled} => Boolean
+    #   * {Types::DescribeEphemerisResponse#name #name} => String
     #   * {Types::DescribeEphemerisResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeEphemerisResponse#supplied_data #supplied_data} => Types::EphemerisTypeDescription
+    #   * {Types::DescribeEphemerisResponse#invalid_reason #invalid_reason} => String
+    #   * {Types::DescribeEphemerisResponse#error_reasons #error_reasons} => Array&lt;Types::EphemerisErrorReason&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1159,24 +1392,31 @@ module Aws::GroundStation
     #
     # @example Response structure
     #
-    #   resp.creation_time #=> Time
-    #   resp.enabled #=> Boolean
     #   resp.ephemeris_id #=> String
-    #   resp.invalid_reason #=> String, one of "METADATA_INVALID", "TIME_RANGE_INVALID", "TRAJECTORY_INVALID", "KMS_KEY_INVALID", "VALIDATION_ERROR"
-    #   resp.name #=> String
-    #   resp.priority #=> Integer
     #   resp.satellite_id #=> String
     #   resp.status #=> String, one of "VALIDATING", "INVALID", "ERROR", "ENABLED", "DISABLED", "EXPIRED"
-    #   resp.supplied_data.oem.ephemeris_data #=> String
-    #   resp.supplied_data.oem.source_s3_object.bucket #=> String
-    #   resp.supplied_data.oem.source_s3_object.key #=> String
-    #   resp.supplied_data.oem.source_s3_object.version #=> String
-    #   resp.supplied_data.tle.ephemeris_data #=> String
+    #   resp.priority #=> Integer
+    #   resp.creation_time #=> Time
+    #   resp.enabled #=> Boolean
+    #   resp.name #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #   resp.supplied_data.tle.source_s3_object.bucket #=> String
     #   resp.supplied_data.tle.source_s3_object.key #=> String
     #   resp.supplied_data.tle.source_s3_object.version #=> String
-    #   resp.tags #=> Hash
-    #   resp.tags["String"] #=> String
+    #   resp.supplied_data.tle.ephemeris_data #=> String
+    #   resp.supplied_data.oem.source_s3_object.bucket #=> String
+    #   resp.supplied_data.oem.source_s3_object.key #=> String
+    #   resp.supplied_data.oem.source_s3_object.version #=> String
+    #   resp.supplied_data.oem.ephemeris_data #=> String
+    #   resp.supplied_data.az_el.source_s3_object.bucket #=> String
+    #   resp.supplied_data.az_el.source_s3_object.key #=> String
+    #   resp.supplied_data.az_el.source_s3_object.version #=> String
+    #   resp.supplied_data.az_el.ephemeris_data #=> String
+    #   resp.invalid_reason #=> String, one of "METADATA_INVALID", "TIME_RANGE_INVALID", "TRAJECTORY_INVALID", "KMS_KEY_INVALID", "VALIDATION_ERROR"
+    #   resp.error_reasons #=> Array
+    #   resp.error_reasons[0].error_code #=> String, one of "INTERNAL_ERROR", "MISMATCHED_SATCAT_ID", "OEM_VERSION_UNSUPPORTED", "ORIGINATOR_MISSING", "CREATION_DATE_MISSING", "OBJECT_NAME_MISSING", "OBJECT_ID_MISSING", "REF_FRAME_UNSUPPORTED", "REF_FRAME_EPOCH_UNSUPPORTED", "TIME_SYSTEM_UNSUPPORTED", "CENTER_BODY_UNSUPPORTED", "INTERPOLATION_MISSING", "INTERPOLATION_DEGREE_INVALID", "AZ_EL_SEGMENT_LIST_MISSING", "INSUFFICIENT_TIME_AZ_EL", "START_TIME_IN_FUTURE", "END_TIME_IN_PAST", "EXPIRATION_TIME_TOO_EARLY", "START_TIME_METADATA_TOO_EARLY", "STOP_TIME_METADATA_TOO_LATE", "AZ_EL_SEGMENT_END_TIME_BEFORE_START_TIME", "AZ_EL_SEGMENT_TIMES_OVERLAP", "AZ_EL_SEGMENTS_OUT_OF_ORDER", "TIME_AZ_EL_ITEMS_OUT_OF_ORDER", "MEAN_MOTION_INVALID", "TIME_AZ_EL_AZ_RADIAN_RANGE_INVALID", "TIME_AZ_EL_EL_RADIAN_RANGE_INVALID", "TIME_AZ_EL_AZ_DEGREE_RANGE_INVALID", "TIME_AZ_EL_EL_DEGREE_RANGE_INVALID", "TIME_AZ_EL_ANGLE_UNITS_INVALID", "INSUFFICIENT_KMS_PERMISSIONS", "FILE_FORMAT_INVALID", "AZ_EL_SEGMENT_REFERENCE_EPOCH_INVALID", "AZ_EL_SEGMENT_START_TIME_INVALID", "AZ_EL_SEGMENT_END_TIME_INVALID", "AZ_EL_SEGMENT_VALID_TIME_RANGE_INVALID", "AZ_EL_SEGMENT_END_TIME_TOO_LATE", "AZ_EL_TOTAL_DURATION_EXCEEDED"
+    #   resp.error_reasons[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DescribeEphemeris AWS API Documentation
     #
@@ -1187,11 +1427,12 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
-    # <note markdown="1"> For use by AWS Ground Station Agent and shouldn't be called directly.
+    # <note markdown="1"> For use by AWS Ground Station Agent and shouldn't
+    # be called directly.
     #
     #  </note>
     #
-    # Gets the latest configuration information for a registered agent.
+    #  Gets the latest configuration information for a registered agent.
     #
     # @option params [required, String] :agent_id
     #   UUID of agent to get configuration information for.
@@ -1221,6 +1462,47 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
+    # <note markdown="1"> For use by AWS Ground Station Agent and shouldn't
+    # be called directly.
+    #
+    #  </note>
+    #
+    #  Gets a presigned URL for uploading agent task response logs.
+    #
+    # @option params [required, String] :agent_id
+    #   UUID of agent requesting the response URL.
+    #
+    # @option params [required, String] :task_id
+    #   GUID of the agent task for which the response URL is being requested.
+    #
+    # @return [Types::GetAgentTaskResponseUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAgentTaskResponseUrlResponse#agent_id #agent_id} => String
+    #   * {Types::GetAgentTaskResponseUrlResponse#task_id #task_id} => String
+    #   * {Types::GetAgentTaskResponseUrlResponse#presigned_log_url #presigned_log_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_agent_task_response_url({
+    #     agent_id: "Uuid", # required
+    #     task_id: "Uuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.agent_id #=> String
+    #   resp.task_id #=> String
+    #   resp.presigned_log_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetAgentTaskResponseUrl AWS API Documentation
+    #
+    # @overload get_agent_task_response_url(params = {})
+    # @param [Hash] params ({})
+    def get_agent_task_response_url(params = {}, options = {})
+      req = build_request(:get_agent_task_response_url, params)
+      req.send_request(options)
+    end
+
     # Returns `Config` information.
     #
     # Only one `Config` response can be returned.
@@ -1233,11 +1515,11 @@ module Aws::GroundStation
     #
     # @return [Types::GetConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetConfigResponse#config_arn #config_arn} => String
-    #   * {Types::GetConfigResponse#config_data #config_data} => Types::ConfigTypeData
     #   * {Types::GetConfigResponse#config_id #config_id} => String
-    #   * {Types::GetConfigResponse#config_type #config_type} => String
+    #   * {Types::GetConfigResponse#config_arn #config_arn} => String
     #   * {Types::GetConfigResponse#name #name} => String
+    #   * {Types::GetConfigResponse#config_type #config_type} => String
+    #   * {Types::GetConfigResponse#config_data #config_data} => Types::ConfigTypeData
     #   * {Types::GetConfigResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1249,36 +1531,36 @@ module Aws::GroundStation
     #
     # @example Response structure
     #
+    #   resp.config_id #=> String
     #   resp.config_arn #=> String
-    #   resp.config_data.antenna_downlink_config.spectrum_config.bandwidth.units #=> String, one of "GHz", "MHz", "kHz"
-    #   resp.config_data.antenna_downlink_config.spectrum_config.bandwidth.value #=> Float
-    #   resp.config_data.antenna_downlink_config.spectrum_config.center_frequency.units #=> String, one of "GHz", "MHz", "kHz"
+    #   resp.name #=> String
+    #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"
     #   resp.config_data.antenna_downlink_config.spectrum_config.center_frequency.value #=> Float
+    #   resp.config_data.antenna_downlink_config.spectrum_config.center_frequency.units #=> String, one of "GHz", "MHz", "kHz"
+    #   resp.config_data.antenna_downlink_config.spectrum_config.bandwidth.value #=> Float
+    #   resp.config_data.antenna_downlink_config.spectrum_config.bandwidth.units #=> String, one of "GHz", "MHz", "kHz"
     #   resp.config_data.antenna_downlink_config.spectrum_config.polarization #=> String, one of "RIGHT_HAND", "LEFT_HAND", "NONE"
-    #   resp.config_data.antenna_downlink_demod_decode_config.decode_config.unvalidated_json #=> String
-    #   resp.config_data.antenna_downlink_demod_decode_config.demodulation_config.unvalidated_json #=> String
-    #   resp.config_data.antenna_downlink_demod_decode_config.spectrum_config.bandwidth.units #=> String, one of "GHz", "MHz", "kHz"
-    #   resp.config_data.antenna_downlink_demod_decode_config.spectrum_config.bandwidth.value #=> Float
-    #   resp.config_data.antenna_downlink_demod_decode_config.spectrum_config.center_frequency.units #=> String, one of "GHz", "MHz", "kHz"
-    #   resp.config_data.antenna_downlink_demod_decode_config.spectrum_config.center_frequency.value #=> Float
-    #   resp.config_data.antenna_downlink_demod_decode_config.spectrum_config.polarization #=> String, one of "RIGHT_HAND", "LEFT_HAND", "NONE"
-    #   resp.config_data.antenna_uplink_config.spectrum_config.center_frequency.units #=> String, one of "GHz", "MHz", "kHz"
-    #   resp.config_data.antenna_uplink_config.spectrum_config.center_frequency.value #=> Float
-    #   resp.config_data.antenna_uplink_config.spectrum_config.polarization #=> String, one of "RIGHT_HAND", "LEFT_HAND", "NONE"
-    #   resp.config_data.antenna_uplink_config.target_eirp.units #=> String, one of "dBW"
-    #   resp.config_data.antenna_uplink_config.target_eirp.value #=> Float
-    #   resp.config_data.antenna_uplink_config.transmit_disabled #=> Boolean
+    #   resp.config_data.tracking_config.autotrack #=> String, one of "REQUIRED", "PREFERRED", "REMOVED"
     #   resp.config_data.dataflow_endpoint_config.dataflow_endpoint_name #=> String
     #   resp.config_data.dataflow_endpoint_config.dataflow_endpoint_region #=> String
-    #   resp.config_data.s3_recording_config.bucket_arn #=> String
-    #   resp.config_data.s3_recording_config.prefix #=> String
-    #   resp.config_data.s3_recording_config.role_arn #=> String
-    #   resp.config_data.tracking_config.autotrack #=> String, one of "REQUIRED", "PREFERRED", "REMOVED"
-    #   resp.config_data.uplink_echo_config.antenna_uplink_config_arn #=> String
+    #   resp.config_data.antenna_downlink_demod_decode_config.spectrum_config.center_frequency.value #=> Float
+    #   resp.config_data.antenna_downlink_demod_decode_config.spectrum_config.center_frequency.units #=> String, one of "GHz", "MHz", "kHz"
+    #   resp.config_data.antenna_downlink_demod_decode_config.spectrum_config.bandwidth.value #=> Float
+    #   resp.config_data.antenna_downlink_demod_decode_config.spectrum_config.bandwidth.units #=> String, one of "GHz", "MHz", "kHz"
+    #   resp.config_data.antenna_downlink_demod_decode_config.spectrum_config.polarization #=> String, one of "RIGHT_HAND", "LEFT_HAND", "NONE"
+    #   resp.config_data.antenna_downlink_demod_decode_config.demodulation_config.unvalidated_json #=> String
+    #   resp.config_data.antenna_downlink_demod_decode_config.decode_config.unvalidated_json #=> String
+    #   resp.config_data.antenna_uplink_config.transmit_disabled #=> Boolean
+    #   resp.config_data.antenna_uplink_config.spectrum_config.center_frequency.value #=> Float
+    #   resp.config_data.antenna_uplink_config.spectrum_config.center_frequency.units #=> String, one of "GHz", "MHz", "kHz"
+    #   resp.config_data.antenna_uplink_config.spectrum_config.polarization #=> String, one of "RIGHT_HAND", "LEFT_HAND", "NONE"
+    #   resp.config_data.antenna_uplink_config.target_eirp.value #=> Float
+    #   resp.config_data.antenna_uplink_config.target_eirp.units #=> String, one of "dBW"
     #   resp.config_data.uplink_echo_config.enabled #=> Boolean
-    #   resp.config_id #=> String
-    #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"
-    #   resp.name #=> String
+    #   resp.config_data.uplink_echo_config.antenna_uplink_config_arn #=> String
+    #   resp.config_data.s3_recording_config.bucket_arn #=> String
+    #   resp.config_data.s3_recording_config.role_arn #=> String
+    #   resp.config_data.s3_recording_config.prefix #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
     #
@@ -1298,12 +1580,12 @@ module Aws::GroundStation
     #
     # @return [Types::GetDataflowEndpointGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetDataflowEndpointGroupResponse#contact_post_pass_duration_seconds #contact_post_pass_duration_seconds} => Integer
-    #   * {Types::GetDataflowEndpointGroupResponse#contact_pre_pass_duration_seconds #contact_pre_pass_duration_seconds} => Integer
-    #   * {Types::GetDataflowEndpointGroupResponse#dataflow_endpoint_group_arn #dataflow_endpoint_group_arn} => String
     #   * {Types::GetDataflowEndpointGroupResponse#dataflow_endpoint_group_id #dataflow_endpoint_group_id} => String
+    #   * {Types::GetDataflowEndpointGroupResponse#dataflow_endpoint_group_arn #dataflow_endpoint_group_arn} => String
     #   * {Types::GetDataflowEndpointGroupResponse#endpoints_details #endpoints_details} => Array&lt;Types::EndpointDetails&gt;
     #   * {Types::GetDataflowEndpointGroupResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetDataflowEndpointGroupResponse#contact_pre_pass_duration_seconds #contact_pre_pass_duration_seconds} => Integer
+    #   * {Types::GetDataflowEndpointGroupResponse#contact_post_pass_duration_seconds #contact_post_pass_duration_seconds} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -1313,36 +1595,56 @@ module Aws::GroundStation
     #
     # @example Response structure
     #
-    #   resp.contact_post_pass_duration_seconds #=> Integer
-    #   resp.contact_pre_pass_duration_seconds #=> Integer
-    #   resp.dataflow_endpoint_group_arn #=> String
     #   resp.dataflow_endpoint_group_id #=> String
+    #   resp.dataflow_endpoint_group_arn #=> String
     #   resp.endpoints_details #=> Array
-    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.agent_status #=> String, one of "SUCCESS", "FAILED", "ACTIVE", "INACTIVE"
-    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.audit_results #=> String, one of "HEALTHY", "UNHEALTHY"
-    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.egress_address.mtu #=> Integer
-    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.egress_address.socket_address.name #=> String
-    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.egress_address.socket_address.port #=> Integer
-    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.ingress_address.mtu #=> Integer
-    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.ingress_address.socket_address.name #=> String
-    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.ingress_address.socket_address.port_range.maximum #=> Integer
-    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.ingress_address.socket_address.port_range.minimum #=> Integer
-    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.name #=> String
-    #   resp.endpoints_details[0].endpoint.address.name #=> String
-    #   resp.endpoints_details[0].endpoint.address.port #=> Integer
-    #   resp.endpoints_details[0].endpoint.mtu #=> Integer
-    #   resp.endpoints_details[0].endpoint.name #=> String
-    #   resp.endpoints_details[0].endpoint.status #=> String, one of "created", "creating", "deleted", "deleting", "failed"
-    #   resp.endpoints_details[0].health_reasons #=> Array
-    #   resp.endpoints_details[0].health_reasons[0] #=> String, one of "NO_REGISTERED_AGENT", "INVALID_IP_OWNERSHIP", "NOT_AUTHORIZED_TO_CREATE_SLR", "UNVERIFIED_IP_OWNERSHIP", "INITIALIZING_DATAPLANE", "DATAPLANE_FAILURE", "HEALTHY"
-    #   resp.endpoints_details[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY"
-    #   resp.endpoints_details[0].security_details.role_arn #=> String
-    #   resp.endpoints_details[0].security_details.security_group_ids #=> Array
-    #   resp.endpoints_details[0].security_details.security_group_ids[0] #=> String
     #   resp.endpoints_details[0].security_details.subnet_ids #=> Array
     #   resp.endpoints_details[0].security_details.subnet_ids[0] #=> String
+    #   resp.endpoints_details[0].security_details.security_group_ids #=> Array
+    #   resp.endpoints_details[0].security_details.security_group_ids[0] #=> String
+    #   resp.endpoints_details[0].security_details.role_arn #=> String
+    #   resp.endpoints_details[0].endpoint.name #=> String
+    #   resp.endpoints_details[0].endpoint.address.name #=> String
+    #   resp.endpoints_details[0].endpoint.address.port #=> Integer
+    #   resp.endpoints_details[0].endpoint.status #=> String, one of "created", "creating", "deleted", "deleting", "failed"
+    #   resp.endpoints_details[0].endpoint.mtu #=> Integer
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.name #=> String
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.egress_address.socket_address.name #=> String
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.egress_address.socket_address.port #=> Integer
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.egress_address.mtu #=> Integer
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.ingress_address.socket_address.name #=> String
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.ingress_address.socket_address.port_range.minimum #=> Integer
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.ingress_address.socket_address.port_range.maximum #=> Integer
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.ingress_address.mtu #=> Integer
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.agent_status #=> String, one of "SUCCESS", "FAILED", "ACTIVE", "INACTIVE"
+    #   resp.endpoints_details[0].aws_ground_station_agent_endpoint.audit_results #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.endpoints_details[0].uplink_aws_ground_station_agent_endpoint.name #=> String
+    #   resp.endpoints_details[0].uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.ingress_address_and_port.socket_address.name #=> String
+    #   resp.endpoints_details[0].uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.ingress_address_and_port.socket_address.port #=> Integer
+    #   resp.endpoints_details[0].uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.ingress_address_and_port.mtu #=> Integer
+    #   resp.endpoints_details[0].uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.socket_address.name #=> String
+    #   resp.endpoints_details[0].uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.socket_address.port_range.minimum #=> Integer
+    #   resp.endpoints_details[0].uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.socket_address.port_range.maximum #=> Integer
+    #   resp.endpoints_details[0].uplink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.mtu #=> Integer
+    #   resp.endpoints_details[0].uplink_aws_ground_station_agent_endpoint.agent_status #=> String, one of "SUCCESS", "FAILED", "ACTIVE", "INACTIVE"
+    #   resp.endpoints_details[0].uplink_aws_ground_station_agent_endpoint.audit_results #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.endpoints_details[0].downlink_aws_ground_station_agent_endpoint.name #=> String
+    #   resp.endpoints_details[0].downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.socket_address.name #=> String
+    #   resp.endpoints_details[0].downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.socket_address.port_range.minimum #=> Integer
+    #   resp.endpoints_details[0].downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.socket_address.port_range.maximum #=> Integer
+    #   resp.endpoints_details[0].downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.agent_ip_and_port_address.mtu #=> Integer
+    #   resp.endpoints_details[0].downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.egress_address_and_port.socket_address.name #=> String
+    #   resp.endpoints_details[0].downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.egress_address_and_port.socket_address.port #=> Integer
+    #   resp.endpoints_details[0].downlink_aws_ground_station_agent_endpoint.dataflow_details.agent_connection_details.egress_address_and_port.mtu #=> Integer
+    #   resp.endpoints_details[0].downlink_aws_ground_station_agent_endpoint.agent_status #=> String, one of "SUCCESS", "FAILED", "ACTIVE", "INACTIVE"
+    #   resp.endpoints_details[0].downlink_aws_ground_station_agent_endpoint.audit_results #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.endpoints_details[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY"
+    #   resp.endpoints_details[0].health_reasons #=> Array
+    #   resp.endpoints_details[0].health_reasons[0] #=> String, one of "NO_REGISTERED_AGENT", "INVALID_IP_OWNERSHIP", "NOT_AUTHORIZED_TO_CREATE_SLR", "UNVERIFIED_IP_OWNERSHIP", "INITIALIZING_DATAPLANE", "DATAPLANE_FAILURE", "HEALTHY"
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
+    #   resp.contact_pre_pass_duration_seconds #=> Integer
+    #   resp.contact_post_pass_duration_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetDataflowEndpointGroup AWS API Documentation
     #
@@ -1363,11 +1665,11 @@ module Aws::GroundStation
     #
     # @return [Types::GetMinuteUsageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetMinuteUsageResponse#estimated_minutes_remaining #estimated_minutes_remaining} => Integer
     #   * {Types::GetMinuteUsageResponse#is_reserved_minutes_customer #is_reserved_minutes_customer} => Boolean
     #   * {Types::GetMinuteUsageResponse#total_reserved_minute_allocation #total_reserved_minute_allocation} => Integer
-    #   * {Types::GetMinuteUsageResponse#total_scheduled_minutes #total_scheduled_minutes} => Integer
     #   * {Types::GetMinuteUsageResponse#upcoming_minutes_scheduled #upcoming_minutes_scheduled} => Integer
+    #   * {Types::GetMinuteUsageResponse#total_scheduled_minutes #total_scheduled_minutes} => Integer
+    #   * {Types::GetMinuteUsageResponse#estimated_minutes_remaining #estimated_minutes_remaining} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -1378,11 +1680,11 @@ module Aws::GroundStation
     #
     # @example Response structure
     #
-    #   resp.estimated_minutes_remaining #=> Integer
     #   resp.is_reserved_minutes_customer #=> Boolean
     #   resp.total_reserved_minute_allocation #=> Integer
-    #   resp.total_scheduled_minutes #=> Integer
     #   resp.upcoming_minutes_scheduled #=> Integer
+    #   resp.total_scheduled_minutes #=> Integer
+    #   resp.estimated_minutes_remaining #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetMinuteUsage AWS API Documentation
     #
@@ -1400,18 +1702,18 @@ module Aws::GroundStation
     #
     # @return [Types::GetMissionProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetMissionProfileResponse#contact_post_pass_duration_seconds #contact_post_pass_duration_seconds} => Integer
-    #   * {Types::GetMissionProfileResponse#contact_pre_pass_duration_seconds #contact_pre_pass_duration_seconds} => Integer
-    #   * {Types::GetMissionProfileResponse#dataflow_edges #dataflow_edges} => Array&lt;Array&lt;String&gt;&gt;
-    #   * {Types::GetMissionProfileResponse#minimum_viable_contact_duration_seconds #minimum_viable_contact_duration_seconds} => Integer
-    #   * {Types::GetMissionProfileResponse#mission_profile_arn #mission_profile_arn} => String
     #   * {Types::GetMissionProfileResponse#mission_profile_id #mission_profile_id} => String
+    #   * {Types::GetMissionProfileResponse#mission_profile_arn #mission_profile_arn} => String
     #   * {Types::GetMissionProfileResponse#name #name} => String
     #   * {Types::GetMissionProfileResponse#region #region} => String
+    #   * {Types::GetMissionProfileResponse#contact_pre_pass_duration_seconds #contact_pre_pass_duration_seconds} => Integer
+    #   * {Types::GetMissionProfileResponse#contact_post_pass_duration_seconds #contact_post_pass_duration_seconds} => Integer
+    #   * {Types::GetMissionProfileResponse#minimum_viable_contact_duration_seconds #minimum_viable_contact_duration_seconds} => Integer
+    #   * {Types::GetMissionProfileResponse#dataflow_edges #dataflow_edges} => Array&lt;Array&lt;String&gt;&gt;
+    #   * {Types::GetMissionProfileResponse#tracking_config_arn #tracking_config_arn} => String
+    #   * {Types::GetMissionProfileResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetMissionProfileResponse#streams_kms_key #streams_kms_key} => Types::KmsKey
     #   * {Types::GetMissionProfileResponse#streams_kms_role #streams_kms_role} => String
-    #   * {Types::GetMissionProfileResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::GetMissionProfileResponse#tracking_config_arn #tracking_config_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1421,23 +1723,23 @@ module Aws::GroundStation
     #
     # @example Response structure
     #
-    #   resp.contact_post_pass_duration_seconds #=> Integer
+    #   resp.mission_profile_id #=> String
+    #   resp.mission_profile_arn #=> String
+    #   resp.name #=> String
+    #   resp.region #=> String
     #   resp.contact_pre_pass_duration_seconds #=> Integer
+    #   resp.contact_post_pass_duration_seconds #=> Integer
+    #   resp.minimum_viable_contact_duration_seconds #=> Integer
     #   resp.dataflow_edges #=> Array
     #   resp.dataflow_edges[0] #=> Array
     #   resp.dataflow_edges[0][0] #=> String
-    #   resp.minimum_viable_contact_duration_seconds #=> Integer
-    #   resp.mission_profile_arn #=> String
-    #   resp.mission_profile_id #=> String
-    #   resp.name #=> String
-    #   resp.region #=> String
-    #   resp.streams_kms_key.kms_alias_arn #=> String
-    #   resp.streams_kms_key.kms_alias_name #=> String
-    #   resp.streams_kms_key.kms_key_arn #=> String
-    #   resp.streams_kms_role #=> String
+    #   resp.tracking_config_arn #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
-    #   resp.tracking_config_arn #=> String
+    #   resp.streams_kms_key.kms_key_arn #=> String
+    #   resp.streams_kms_key.kms_alias_arn #=> String
+    #   resp.streams_kms_key.kms_alias_name #=> String
+    #   resp.streams_kms_role #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetMissionProfile AWS API Documentation
     #
@@ -1455,11 +1757,11 @@ module Aws::GroundStation
     #
     # @return [Types::GetSatelliteResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetSatelliteResponse#current_ephemeris #current_ephemeris} => Types::EphemerisMetaData
-    #   * {Types::GetSatelliteResponse#ground_stations #ground_stations} => Array&lt;String&gt;
-    #   * {Types::GetSatelliteResponse#norad_satellite_id #norad_satellite_id} => Integer
-    #   * {Types::GetSatelliteResponse#satellite_arn #satellite_arn} => String
     #   * {Types::GetSatelliteResponse#satellite_id #satellite_id} => String
+    #   * {Types::GetSatelliteResponse#satellite_arn #satellite_arn} => String
+    #   * {Types::GetSatelliteResponse#norad_satellite_id #norad_satellite_id} => Integer
+    #   * {Types::GetSatelliteResponse#ground_stations #ground_stations} => Array&lt;String&gt;
+    #   * {Types::GetSatelliteResponse#current_ephemeris #current_ephemeris} => Types::EphemerisMetaData
     #
     # @example Request syntax with placeholder values
     #
@@ -1469,15 +1771,15 @@ module Aws::GroundStation
     #
     # @example Response structure
     #
+    #   resp.satellite_id #=> String
+    #   resp.satellite_arn #=> String
+    #   resp.norad_satellite_id #=> Integer
+    #   resp.ground_stations #=> Array
+    #   resp.ground_stations[0] #=> String
+    #   resp.current_ephemeris.source #=> String, one of "CUSTOMER_PROVIDED", "SPACE_TRACK"
     #   resp.current_ephemeris.ephemeris_id #=> String
     #   resp.current_ephemeris.epoch #=> Time
     #   resp.current_ephemeris.name #=> String
-    #   resp.current_ephemeris.source #=> String, one of "CUSTOMER_PROVIDED", "SPACE_TRACK"
-    #   resp.ground_stations #=> Array
-    #   resp.ground_stations[0] #=> String
-    #   resp.norad_satellite_id #=> Integer
-    #   resp.satellite_arn #=> String
-    #   resp.satellite_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetSatellite AWS API Documentation
     #
@@ -1499,8 +1801,8 @@ module Aws::GroundStation
     #
     # @return [Types::ListConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListConfigsResponse#config_list #config_list} => Array&lt;Types::ConfigListItem&gt;
     #   * {Types::ListConfigsResponse#next_token #next_token} => String
+    #   * {Types::ListConfigsResponse#config_list #config_list} => Array&lt;Types::ConfigListItem&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1513,12 +1815,12 @@ module Aws::GroundStation
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.config_list #=> Array
-    #   resp.config_list[0].config_arn #=> String
     #   resp.config_list[0].config_id #=> String
     #   resp.config_list[0].config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"
+    #   resp.config_list[0].config_arn #=> String
     #   resp.config_list[0].name #=> String
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListConfigs AWS API Documentation
     #
@@ -1534,72 +1836,82 @@ module Aws::GroundStation
     # If `statusList` contains AVAILABLE, the request must include
     # `groundStation`, `missionprofileArn`, and `satelliteArn`.
     #
+    # @option params [Integer] :max_results
+    #   Maximum number of contacts returned.
+    #
+    # @option params [String] :next_token
+    #   Next token returned in the request of a previous `ListContacts` call.
+    #   Used to get the next page of results.
+    #
+    # @option params [required, Array<String>] :status_list
+    #   Status of a contact reservation.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   Start time of a contact in UTC.
+    #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   End time of a contact in UTC.
     #
     # @option params [String] :ground_station
     #   Name of a ground station.
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of contacts returned.
+    # @option params [String] :satellite_arn
+    #   ARN of a satellite.
     #
     # @option params [String] :mission_profile_arn
     #   ARN of a mission profile.
     #
-    # @option params [String] :next_token
-    #   Next token returned in the request of a previous `ListContacts` call.
-    #   Used to get the next page of results.
-    #
-    # @option params [String] :satellite_arn
-    #   ARN of a satellite.
-    #
-    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
-    #   Start time of a contact in UTC.
-    #
-    # @option params [required, Array<String>] :status_list
-    #   Status of a contact reservation.
+    # @option params [Types::EphemerisFilter] :ephemeris
+    #   Filter for selecting contacts that use a specific ephemeris".
     #
     # @return [Types::ListContactsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListContactsResponse#contact_list #contact_list} => Array&lt;Types::ContactData&gt;
     #   * {Types::ListContactsResponse#next_token #next_token} => String
+    #   * {Types::ListContactsResponse#contact_list #contact_list} => Array&lt;Types::ContactData&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_contacts({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     status_list: ["SCHEDULING"], # required, accepts SCHEDULING, FAILED_TO_SCHEDULE, SCHEDULED, CANCELLED, AWS_CANCELLED, PREPASS, PASS, POSTPASS, COMPLETED, FAILED, AVAILABLE, CANCELLING, AWS_FAILED
+    #     start_time: Time.now, # required
     #     end_time: Time.now, # required
     #     ground_station: "GroundStationName",
-    #     max_results: 1,
-    #     mission_profile_arn: "MissionProfileArn",
-    #     next_token: "PaginationToken",
     #     satellite_arn: "satelliteArn",
-    #     start_time: Time.now, # required
-    #     status_list: ["SCHEDULING"], # required, accepts SCHEDULING, FAILED_TO_SCHEDULE, SCHEDULED, CANCELLED, AWS_CANCELLED, PREPASS, PASS, POSTPASS, COMPLETED, FAILED, AVAILABLE, CANCELLING, AWS_FAILED
+    #     mission_profile_arn: "MissionProfileArn",
+    #     ephemeris: {
+    #       az_el: {
+    #         id: "Uuid", # required
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.contact_list #=> Array
     #   resp.contact_list[0].contact_id #=> String
-    #   resp.contact_list[0].contact_status #=> String, one of "SCHEDULING", "FAILED_TO_SCHEDULE", "SCHEDULED", "CANCELLED", "AWS_CANCELLED", "PREPASS", "PASS", "POSTPASS", "COMPLETED", "FAILED", "AVAILABLE", "CANCELLING", "AWS_FAILED"
-    #   resp.contact_list[0].end_time #=> Time
-    #   resp.contact_list[0].error_message #=> String
-    #   resp.contact_list[0].ground_station #=> String
-    #   resp.contact_list[0].maximum_elevation.unit #=> String, one of "DEGREE_ANGLE", "RADIAN"
-    #   resp.contact_list[0].maximum_elevation.value #=> Float
     #   resp.contact_list[0].mission_profile_arn #=> String
-    #   resp.contact_list[0].post_pass_end_time #=> Time
-    #   resp.contact_list[0].pre_pass_start_time #=> Time
-    #   resp.contact_list[0].region #=> String
     #   resp.contact_list[0].satellite_arn #=> String
     #   resp.contact_list[0].start_time #=> Time
+    #   resp.contact_list[0].end_time #=> Time
+    #   resp.contact_list[0].pre_pass_start_time #=> Time
+    #   resp.contact_list[0].post_pass_end_time #=> Time
+    #   resp.contact_list[0].ground_station #=> String
+    #   resp.contact_list[0].contact_status #=> String, one of "SCHEDULING", "FAILED_TO_SCHEDULE", "SCHEDULED", "CANCELLED", "AWS_CANCELLED", "PREPASS", "PASS", "POSTPASS", "COMPLETED", "FAILED", "AVAILABLE", "CANCELLING", "AWS_FAILED"
+    #   resp.contact_list[0].error_message #=> String
+    #   resp.contact_list[0].maximum_elevation.value #=> Float
+    #   resp.contact_list[0].maximum_elevation.unit #=> String, one of "DEGREE_ANGLE", "RADIAN"
+    #   resp.contact_list[0].region #=> String
     #   resp.contact_list[0].tags #=> Hash
     #   resp.contact_list[0].tags["String"] #=> String
-    #   resp.contact_list[0].visibility_end_time #=> Time
     #   resp.contact_list[0].visibility_start_time #=> Time
-    #   resp.next_token #=> String
+    #   resp.contact_list[0].visibility_end_time #=> Time
+    #   resp.contact_list[0].ephemeris.ephemeris_id #=> String
+    #   resp.contact_list[0].ephemeris.ephemeris_type #=> String, one of "TLE", "OEM", "AZ_EL", "SERVICE_MANAGED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListContacts AWS API Documentation
     #
@@ -1622,8 +1934,8 @@ module Aws::GroundStation
     #
     # @return [Types::ListDataflowEndpointGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListDataflowEndpointGroupsResponse#dataflow_endpoint_group_list #dataflow_endpoint_group_list} => Array&lt;Types::DataflowEndpointListItem&gt;
     #   * {Types::ListDataflowEndpointGroupsResponse#next_token #next_token} => String
+    #   * {Types::ListDataflowEndpointGroupsResponse#dataflow_endpoint_group_list #dataflow_endpoint_group_list} => Array&lt;Types::DataflowEndpointListItem&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1636,10 +1948,10 @@ module Aws::GroundStation
     #
     # @example Response structure
     #
-    #   resp.dataflow_endpoint_group_list #=> Array
-    #   resp.dataflow_endpoint_group_list[0].dataflow_endpoint_group_arn #=> String
-    #   resp.dataflow_endpoint_group_list[0].dataflow_endpoint_group_id #=> String
     #   resp.next_token #=> String
+    #   resp.dataflow_endpoint_group_list #=> Array
+    #   resp.dataflow_endpoint_group_list[0].dataflow_endpoint_group_id #=> String
+    #   resp.dataflow_endpoint_group_list[0].dataflow_endpoint_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListDataflowEndpointGroups AWS API Documentation
     #
@@ -1650,12 +1962,25 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
-    # List existing ephemerides.
+    # List your existing ephemerides.
+    #
+    # @option params [String] :satellite_id
+    #   The AWS Ground Station satellite ID to list ephemeris for.
+    #
+    # @option params [String] :ephemeris_type
+    #   Filter ephemerides by type. If not specified, all ephemeris types will
+    #   be returned.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The start time for the list operation in UTC. Returns ephemerides with
+    #   expiration times within your specified time range.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
-    #   The end time to list in UTC. The operation will return an ephemeris if
-    #   its expiration time is within the time range defined by the
-    #   `startTime` and `endTime`.
+    #   The end time for the list operation in UTC. Returns ephemerides with
+    #   expiration times within your specified time range.
+    #
+    # @option params [Array<String>] :status_list
+    #   The list of ephemeris status to return.
     #
     # @option params [Integer] :max_results
     #   Maximum number of ephemerides to return.
@@ -1663,48 +1988,39 @@ module Aws::GroundStation
     # @option params [String] :next_token
     #   Pagination token.
     #
-    # @option params [required, String] :satellite_id
-    #   The AWS Ground Station satellite ID to list ephemeris for.
-    #
-    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
-    #   The start time to list in UTC. The operation will return an ephemeris
-    #   if its expiration time is within the time range defined by the
-    #   `startTime` and `endTime`.
-    #
-    # @option params [Array<String>] :status_list
-    #   The list of ephemeris status to return.
-    #
     # @return [Types::ListEphemeridesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListEphemeridesResponse#ephemerides #ephemerides} => Array&lt;Types::EphemerisItem&gt;
     #   * {Types::ListEphemeridesResponse#next_token #next_token} => String
+    #   * {Types::ListEphemeridesResponse#ephemerides #ephemerides} => Array&lt;Types::EphemerisItem&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_ephemerides({
+    #     satellite_id: "Uuid",
+    #     ephemeris_type: "TLE", # accepts TLE, OEM, AZ_EL, SERVICE_MANAGED
+    #     start_time: Time.now, # required
     #     end_time: Time.now, # required
+    #     status_list: ["VALIDATING"], # accepts VALIDATING, INVALID, ERROR, ENABLED, DISABLED, EXPIRED
     #     max_results: 1,
     #     next_token: "PaginationToken",
-    #     satellite_id: "Uuid", # required
-    #     start_time: Time.now, # required
-    #     status_list: ["VALIDATING"], # accepts VALIDATING, INVALID, ERROR, ENABLED, DISABLED, EXPIRED
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.ephemerides #=> Array
-    #   resp.ephemerides[0].creation_time #=> Time
-    #   resp.ephemerides[0].enabled #=> Boolean
     #   resp.ephemerides[0].ephemeris_id #=> String
-    #   resp.ephemerides[0].name #=> String
+    #   resp.ephemerides[0].ephemeris_type #=> String, one of "TLE", "OEM", "AZ_EL", "SERVICE_MANAGED"
+    #   resp.ephemerides[0].status #=> String, one of "VALIDATING", "INVALID", "ERROR", "ENABLED", "DISABLED", "EXPIRED"
     #   resp.ephemerides[0].priority #=> Integer
+    #   resp.ephemerides[0].enabled #=> Boolean
+    #   resp.ephemerides[0].creation_time #=> Time
+    #   resp.ephemerides[0].name #=> String
     #   resp.ephemerides[0].source_s3_object.bucket #=> String
     #   resp.ephemerides[0].source_s3_object.key #=> String
     #   resp.ephemerides[0].source_s3_object.version #=> String
-    #   resp.ephemerides[0].status #=> String, one of "VALIDATING", "INVALID", "ERROR", "ENABLED", "DISABLED", "EXPIRED"
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListEphemerides AWS API Documentation
     #
@@ -1717,6 +2033,9 @@ module Aws::GroundStation
 
     # Returns a list of ground stations.
     #
+    # @option params [String] :satellite_id
+    #   Satellite ID to retrieve on-boarded ground stations.
+    #
     # @option params [Integer] :max_results
     #   Maximum number of ground stations returned.
     #
@@ -1724,31 +2043,28 @@ module Aws::GroundStation
     #   Next token that can be supplied in the next call to get the next page
     #   of ground stations.
     #
-    # @option params [String] :satellite_id
-    #   Satellite ID to retrieve on-boarded ground stations.
-    #
     # @return [Types::ListGroundStationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListGroundStationsResponse#ground_station_list #ground_station_list} => Array&lt;Types::GroundStationData&gt;
     #   * {Types::ListGroundStationsResponse#next_token #next_token} => String
+    #   * {Types::ListGroundStationsResponse#ground_station_list #ground_station_list} => Array&lt;Types::GroundStationData&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_ground_stations({
+    #     satellite_id: "Uuid",
     #     max_results: 1,
     #     next_token: "PaginationToken",
-    #     satellite_id: "Uuid",
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.ground_station_list #=> Array
     #   resp.ground_station_list[0].ground_station_id #=> String
     #   resp.ground_station_list[0].ground_station_name #=> String
     #   resp.ground_station_list[0].region #=> String
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListGroundStations AWS API Documentation
     #
@@ -1770,8 +2086,8 @@ module Aws::GroundStation
     #
     # @return [Types::ListMissionProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListMissionProfilesResponse#mission_profile_list #mission_profile_list} => Array&lt;Types::MissionProfileListItem&gt;
     #   * {Types::ListMissionProfilesResponse#next_token #next_token} => String
+    #   * {Types::ListMissionProfilesResponse#mission_profile_list #mission_profile_list} => Array&lt;Types::MissionProfileListItem&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1784,12 +2100,12 @@ module Aws::GroundStation
     #
     # @example Response structure
     #
-    #   resp.mission_profile_list #=> Array
-    #   resp.mission_profile_list[0].mission_profile_arn #=> String
-    #   resp.mission_profile_list[0].mission_profile_id #=> String
-    #   resp.mission_profile_list[0].name #=> String
-    #   resp.mission_profile_list[0].region #=> String
     #   resp.next_token #=> String
+    #   resp.mission_profile_list #=> Array
+    #   resp.mission_profile_list[0].mission_profile_id #=> String
+    #   resp.mission_profile_list[0].mission_profile_arn #=> String
+    #   resp.mission_profile_list[0].region #=> String
+    #   resp.mission_profile_list[0].name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListMissionProfiles AWS API Documentation
     #
@@ -1827,15 +2143,15 @@ module Aws::GroundStation
     #
     #   resp.next_token #=> String
     #   resp.satellites #=> Array
+    #   resp.satellites[0].satellite_id #=> String
+    #   resp.satellites[0].satellite_arn #=> String
+    #   resp.satellites[0].norad_satellite_id #=> Integer
+    #   resp.satellites[0].ground_stations #=> Array
+    #   resp.satellites[0].ground_stations[0] #=> String
+    #   resp.satellites[0].current_ephemeris.source #=> String, one of "CUSTOMER_PROVIDED", "SPACE_TRACK"
     #   resp.satellites[0].current_ephemeris.ephemeris_id #=> String
     #   resp.satellites[0].current_ephemeris.epoch #=> Time
     #   resp.satellites[0].current_ephemeris.name #=> String
-    #   resp.satellites[0].current_ephemeris.source #=> String, one of "CUSTOMER_PROVIDED", "SPACE_TRACK"
-    #   resp.satellites[0].ground_stations #=> Array
-    #   resp.satellites[0].ground_stations[0] #=> String
-    #   resp.satellites[0].norad_satellite_id #=> Integer
-    #   resp.satellites[0].satellite_arn #=> String
-    #   resp.satellites[0].satellite_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListSatellites AWS API Documentation
     #
@@ -1875,17 +2191,18 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
-    # <note markdown="1"> For use by AWS Ground Station Agent and shouldn't be called directly.
+    # <note markdown="1"> For use by AWS Ground Station Agent and shouldn't
+    # be called directly.
     #
     #  </note>
     #
-    # Registers a new agent with AWS Ground Station.
-    #
-    # @option params [required, Types::AgentDetails] :agent_details
-    #   Detailed information about the agent being registered.
+    #  Registers a new agent with AWS Ground Station.
     #
     # @option params [required, Types::DiscoveryData] :discovery_data
     #   Data for associating an agent with the capabilities it is managing.
+    #
+    # @option params [required, Types::AgentDetails] :agent_details
+    #   Detailed information about the agent being registered.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags assigned to an `Agent`.
@@ -1897,23 +2214,23 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_agent({
+    #     discovery_data: { # required
+    #       public_ip_addresses: ["IpV4Address"], # required
+    #       private_ip_addresses: ["IpV4Address"], # required
+    #       capability_arns: ["CapabilityArn"], # required
+    #     },
     #     agent_details: { # required
-    #       agent_cpu_cores: [1],
     #       agent_version: "VersionString", # required
+    #       instance_id: "InstanceId", # required
+    #       instance_type: "InstanceType", # required
+    #       reserved_cpu_cores: [1],
+    #       agent_cpu_cores: [1],
     #       component_versions: [ # required
     #         {
     #           component_type: "ComponentTypeString", # required
     #           versions: ["VersionString"], # required
     #         },
     #       ],
-    #       instance_id: "InstanceId", # required
-    #       instance_type: "InstanceType", # required
-    #       reserved_cpu_cores: [1],
-    #     },
-    #     discovery_data: { # required
-    #       capability_arns: ["CapabilityArn"], # required
-    #       private_ip_addresses: ["IpV4Address"], # required
-    #       public_ip_addresses: ["IpV4Address"], # required
     #     },
     #     tags: {
     #       "String" => "String",
@@ -1935,23 +2252,26 @@ module Aws::GroundStation
 
     # Reserves a contact using specified parameters.
     #
+    # @option params [required, String] :mission_profile_arn
+    #   ARN of a mission profile.
+    #
+    # @option params [String] :satellite_arn
+    #   ARN of a satellite
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   Start time of a contact in UTC.
+    #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   End time of a contact in UTC.
     #
     # @option params [required, String] :ground_station
     #   Name of a ground station.
     #
-    # @option params [required, String] :mission_profile_arn
-    #   ARN of a mission profile.
-    #
-    # @option params [required, String] :satellite_arn
-    #   ARN of a satellite
-    #
-    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
-    #   Start time of a contact in UTC.
-    #
     # @option params [Hash<String,String>] :tags
     #   Tags assigned to a contact.
+    #
+    # @option params [Types::TrackingOverrides] :tracking_overrides
+    #   Tracking configuration overrides for the contact.
     #
     # @return [Types::ContactIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1960,13 +2280,20 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.reserve_contact({
+    #     mission_profile_arn: "MissionProfileArn", # required
+    #     satellite_arn: "satelliteArn",
+    #     start_time: Time.now, # required
     #     end_time: Time.now, # required
     #     ground_station: "GroundStationName", # required
-    #     mission_profile_arn: "MissionProfileArn", # required
-    #     satellite_arn: "satelliteArn", # required
-    #     start_time: Time.now, # required
     #     tags: {
     #       "String" => "String",
+    #     },
+    #     tracking_overrides: {
+    #       program_track_settings: { # required
+    #         az_el: {
+    #           ephemeris_id: "Uuid", # required
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -2037,23 +2364,24 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
-    # <note markdown="1"> For use by AWS Ground Station Agent and shouldn't be called directly.
+    # <note markdown="1"> For use by AWS Ground Station Agent and shouldn't
+    # be called directly.
     #
     #  </note>
     #
-    # Update the status of the agent.
+    #  Update the status of the agent.
     #
     # @option params [required, String] :agent_id
     #   UUID of agent to update.
+    #
+    # @option params [required, String] :task_id
+    #   GUID of agent task.
     #
     # @option params [required, Types::AggregateStatus] :aggregate_status
     #   Aggregate status for agent.
     #
     # @option params [required, Array<Types::ComponentStatusData>] :component_statuses
     #   List of component statuses for agent.
-    #
-    # @option params [required, String] :task_id
-    #   GUID of agent task.
     #
     # @return [Types::UpdateAgentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2063,24 +2391,24 @@ module Aws::GroundStation
     #
     #   resp = client.update_agent_status({
     #     agent_id: "Uuid", # required
+    #     task_id: "Uuid", # required
     #     aggregate_status: { # required
+    #       status: "SUCCESS", # required, accepts SUCCESS, FAILED, ACTIVE, INACTIVE
     #       signature_map: {
     #         "String" => false,
     #       },
-    #       status: "SUCCESS", # required, accepts SUCCESS, FAILED, ACTIVE, INACTIVE
     #     },
     #     component_statuses: [ # required
     #       {
-    #         bytes_received: 1,
-    #         bytes_sent: 1,
-    #         capability_arn: "CapabilityArn", # required
     #         component_type: "ComponentTypeString", # required
-    #         dataflow_id: "Uuid", # required
-    #         packets_dropped: 1,
+    #         capability_arn: "CapabilityArn", # required
     #         status: "SUCCESS", # required, accepts SUCCESS, FAILED, ACTIVE, INACTIVE
+    #         bytes_sent: 1,
+    #         bytes_received: 1,
+    #         packets_dropped: 1,
+    #         dataflow_id: "Uuid", # required
     #       },
     #     ],
-    #     task_id: "Uuid", # required
     #   })
     #
     # @example Response structure
@@ -2101,101 +2429,101 @@ module Aws::GroundStation
     # Updating a `Config` will not update the execution parameters for
     # existing future contacts scheduled with this `Config`.
     #
-    # @option params [required, Types::ConfigTypeData] :config_data
-    #   Parameters of a `Config`.
-    #
     # @option params [required, String] :config_id
     #   UUID of a `Config`.
-    #
-    # @option params [required, String] :config_type
-    #   Type of a `Config`.
     #
     # @option params [required, String] :name
     #   Name of a `Config`.
     #
+    # @option params [required, String] :config_type
+    #   Type of a `Config`.
+    #
+    # @option params [required, Types::ConfigTypeData] :config_data
+    #   Parameters of a `Config`.
+    #
     # @return [Types::ConfigIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ConfigIdResponse#config_arn #config_arn} => String
     #   * {Types::ConfigIdResponse#config_id #config_id} => String
     #   * {Types::ConfigIdResponse#config_type #config_type} => String
+    #   * {Types::ConfigIdResponse#config_arn #config_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_config({
+    #     config_id: "Uuid", # required
+    #     name: "SafeName", # required
+    #     config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, tracking, dataflow-endpoint, antenna-uplink, uplink-echo, s3-recording
     #     config_data: { # required
     #       antenna_downlink_config: {
     #         spectrum_config: { # required
-    #           bandwidth: { # required
-    #             units: "GHz", # required, accepts GHz, MHz, kHz
-    #             value: 1.0, # required
-    #           },
     #           center_frequency: { # required
-    #             units: "GHz", # required, accepts GHz, MHz, kHz
     #             value: 1.0, # required
+    #             units: "GHz", # required, accepts GHz, MHz, kHz
+    #           },
+    #           bandwidth: { # required
+    #             value: 1.0, # required
+    #             units: "GHz", # required, accepts GHz, MHz, kHz
     #           },
     #           polarization: "RIGHT_HAND", # accepts RIGHT_HAND, LEFT_HAND, NONE
     #         },
     #       },
-    #       antenna_downlink_demod_decode_config: {
-    #         decode_config: { # required
-    #           unvalidated_json: "JsonString", # required
-    #         },
-    #         demodulation_config: { # required
-    #           unvalidated_json: "JsonString", # required
-    #         },
-    #         spectrum_config: { # required
-    #           bandwidth: { # required
-    #             units: "GHz", # required, accepts GHz, MHz, kHz
-    #             value: 1.0, # required
-    #           },
-    #           center_frequency: { # required
-    #             units: "GHz", # required, accepts GHz, MHz, kHz
-    #             value: 1.0, # required
-    #           },
-    #           polarization: "RIGHT_HAND", # accepts RIGHT_HAND, LEFT_HAND, NONE
-    #         },
-    #       },
-    #       antenna_uplink_config: {
-    #         spectrum_config: { # required
-    #           center_frequency: { # required
-    #             units: "GHz", # required, accepts GHz, MHz, kHz
-    #             value: 1.0, # required
-    #           },
-    #           polarization: "RIGHT_HAND", # accepts RIGHT_HAND, LEFT_HAND, NONE
-    #         },
-    #         target_eirp: { # required
-    #           units: "dBW", # required, accepts dBW
-    #           value: 1.0, # required
-    #         },
-    #         transmit_disabled: false,
+    #       tracking_config: {
+    #         autotrack: "REQUIRED", # required, accepts REQUIRED, PREFERRED, REMOVED
     #       },
     #       dataflow_endpoint_config: {
     #         dataflow_endpoint_name: "String", # required
     #         dataflow_endpoint_region: "String",
     #       },
-    #       s3_recording_config: {
-    #         bucket_arn: "BucketArn", # required
-    #         prefix: "S3KeyPrefix",
-    #         role_arn: "RoleArn", # required
+    #       antenna_downlink_demod_decode_config: {
+    #         spectrum_config: { # required
+    #           center_frequency: { # required
+    #             value: 1.0, # required
+    #             units: "GHz", # required, accepts GHz, MHz, kHz
+    #           },
+    #           bandwidth: { # required
+    #             value: 1.0, # required
+    #             units: "GHz", # required, accepts GHz, MHz, kHz
+    #           },
+    #           polarization: "RIGHT_HAND", # accepts RIGHT_HAND, LEFT_HAND, NONE
+    #         },
+    #         demodulation_config: { # required
+    #           unvalidated_json: "JsonString", # required
+    #         },
+    #         decode_config: { # required
+    #           unvalidated_json: "JsonString", # required
+    #         },
     #       },
-    #       tracking_config: {
-    #         autotrack: "REQUIRED", # required, accepts REQUIRED, PREFERRED, REMOVED
+    #       antenna_uplink_config: {
+    #         transmit_disabled: false,
+    #         spectrum_config: { # required
+    #           center_frequency: { # required
+    #             value: 1.0, # required
+    #             units: "GHz", # required, accepts GHz, MHz, kHz
+    #           },
+    #           polarization: "RIGHT_HAND", # accepts RIGHT_HAND, LEFT_HAND, NONE
+    #         },
+    #         target_eirp: { # required
+    #           value: 1.0, # required
+    #           units: "dBW", # required, accepts dBW
+    #         },
     #       },
     #       uplink_echo_config: {
-    #         antenna_uplink_config_arn: "ConfigArn", # required
     #         enabled: false, # required
+    #         antenna_uplink_config_arn: "ConfigArn", # required
+    #       },
+    #       s3_recording_config: {
+    #         bucket_arn: "BucketArn", # required
+    #         role_arn: "RoleArn", # required
+    #         prefix: "S3KeyPrefix",
     #       },
     #     },
-    #     config_id: "Uuid", # required
-    #     config_type: "antenna-downlink", # required, accepts antenna-downlink, antenna-downlink-demod-decode, tracking, dataflow-endpoint, antenna-uplink, uplink-echo, s3-recording
-    #     name: "SafeName", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.config_arn #=> String
     #   resp.config_id #=> String
     #   resp.config_type #=> String, one of "antenna-downlink", "antenna-downlink-demod-decode", "tracking", "dataflow-endpoint", "antenna-uplink", "uplink-echo", "s3-recording"
+    #   resp.config_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/UpdateConfig AWS API Documentation
     #
@@ -2206,27 +2534,24 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
-    # Updates an existing ephemeris
-    #
-    # @option params [required, Boolean] :enabled
-    #   Whether the ephemeris is enabled or not. Changing this value will not
-    #   require the ephemeris to be re-validated.
+    # Update an existing ephemeris.
     #
     # @option params [required, String] :ephemeris_id
     #   The AWS Ground Station ephemeris ID.
     #
+    # @option params [required, Boolean] :enabled
+    #   Enable or disable the ephemeris. Changing this value doesn't require
+    #   re-validation.
+    #
     # @option params [String] :name
-    #   A name string associated with the ephemeris. Used as a human-readable
-    #   identifier for the ephemeris.
+    #   A name that you can use to identify the ephemeris.
     #
     # @option params [Integer] :priority
-    #   Customer-provided priority score to establish the order in which
-    #   overlapping ephemerides should be used.
+    #   A priority score that determines which ephemeris to use when multiple
+    #   ephemerides overlap.
     #
-    #   The default for customer-provided ephemeris priority is 1, and higher
-    #   numbers take precedence.
-    #
-    #   Priority must be 1 or greater
+    #   Higher numbers take precedence. The default is 1. Must be 1 or
+    #   greater.
     #
     # @return [Types::EphemerisIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2235,8 +2560,8 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_ephemeris({
-    #     enabled: false, # required
     #     ephemeris_id: "Uuid", # required
+    #     enabled: false, # required
     #     name: "SafeName",
     #     priority: 1,
     #   })
@@ -2259,39 +2584,39 @@ module Aws::GroundStation
     # Updating a mission profile will not update the execution parameters
     # for existing future contacts.
     #
-    # @option params [Integer] :contact_post_pass_duration_seconds
-    #   Amount of time after a contact ends that you’d like to receive a
-    #   Ground Station Contact State Change event indicating the pass has
-    #   finished.
-    #
-    # @option params [Integer] :contact_pre_pass_duration_seconds
-    #   Amount of time after a contact ends that you’d like to receive a
-    #   Ground Station Contact State Change event indicating the pass has
-    #   finished.
-    #
-    # @option params [Array<Array>] :dataflow_edges
-    #   A list of lists of ARNs. Each list of ARNs is an edge, with a *from*
-    #   `Config` and a *to* `Config`.
-    #
-    # @option params [Integer] :minimum_viable_contact_duration_seconds
-    #   Smallest amount of time in seconds that you’d like to see for an
-    #   available contact. AWS Ground Station will not present you with
-    #   contacts shorter than this duration.
-    #
     # @option params [required, String] :mission_profile_id
     #   UUID of a mission profile.
     #
     # @option params [String] :name
     #   Name of a mission profile.
     #
+    # @option params [Integer] :contact_pre_pass_duration_seconds
+    #   Amount of time after a contact ends that you’d like to receive a
+    #   Ground Station Contact State Change event indicating the pass has
+    #   finished.
+    #
+    # @option params [Integer] :contact_post_pass_duration_seconds
+    #   Amount of time after a contact ends that you’d like to receive a
+    #   Ground Station Contact State Change event indicating the pass has
+    #   finished.
+    #
+    # @option params [Integer] :minimum_viable_contact_duration_seconds
+    #   Smallest amount of time in seconds that you’d like to see for an
+    #   available contact. AWS Ground Station will not present you with
+    #   contacts shorter than this duration.
+    #
+    # @option params [Array<Array>] :dataflow_edges
+    #   A list of lists of ARNs. Each list of ARNs is an edge, with a *from*
+    #   `Config` and a *to* `Config`.
+    #
+    # @option params [String] :tracking_config_arn
+    #   ARN of a tracking `Config`.
+    #
     # @option params [Types::KmsKey] :streams_kms_key
     #   KMS key to use for encrypting streams.
     #
     # @option params [String] :streams_kms_role
     #   Role to use for encrypting streams with KMS key.
-    #
-    # @option params [String] :tracking_config_arn
-    #   ARN of a tracking `Config`.
     #
     # @return [Types::MissionProfileIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2300,21 +2625,21 @@ module Aws::GroundStation
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_mission_profile({
-    #     contact_post_pass_duration_seconds: 1,
+    #     mission_profile_id: "Uuid", # required
+    #     name: "SafeName",
     #     contact_pre_pass_duration_seconds: 1,
+    #     contact_post_pass_duration_seconds: 1,
+    #     minimum_viable_contact_duration_seconds: 1,
     #     dataflow_edges: [
     #       ["ConfigArn"],
     #     ],
-    #     minimum_viable_contact_duration_seconds: 1,
-    #     mission_profile_id: "Uuid", # required
-    #     name: "SafeName",
+    #     tracking_config_arn: "ConfigArn",
     #     streams_kms_key: {
+    #       kms_key_arn: "KeyArn",
     #       kms_alias_arn: "KeyAliasArn",
     #       kms_alias_name: "KeyAliasName",
-    #       kms_key_arn: "KeyArn",
     #     },
     #     streams_kms_role: "RoleArn",
-    #     tracking_config_arn: "ConfigArn",
     #   })
     #
     # @example Response structure
@@ -2348,7 +2673,7 @@ module Aws::GroundStation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-groundstation'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

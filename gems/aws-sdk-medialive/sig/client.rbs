@@ -779,7 +779,16 @@ module Aws
                                             language_code: ::String,
                                             language_description: ::String
                                           },
-                                        ]?
+                                        ]?,
+                                        id_3_behavior: ("DISABLED" | "ENABLED")?,
+                                        klv_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
+                                        nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
+                                        scte_35_type: ("NONE" | "SCTE_35_WITHOUT_SEGMENTATION")?,
+                                        segment_length: ::Integer?,
+                                        segment_length_units: ("MILLISECONDS" | "SECONDS")?,
+                                        timed_metadata_id_3_frame: ("NONE" | "PRIV" | "TDRL")?,
+                                        timed_metadata_id_3_period: ::Integer?,
+                                        timed_metadata_passthrough: ("DISABLED" | "ENABLED")?
                                       }?
                                     }?,
                                     ms_smooth_group_settings: {
@@ -1282,6 +1291,8 @@ module Aws
                                         rec_601_settings: {
                                         }?,
                                         rec_709_settings: {
+                                        }?,
+                                        hlg_2020_settings: {
                                         }?
                                       }?,
                                       filter_settings: {
@@ -1396,7 +1407,9 @@ module Aws
                                       }?,
                                       bitrate: ::Integer?,
                                       rate_control_mode: ("CBR" | "QVBR")?,
-                                      min_bitrate: ::Integer?
+                                      min_bitrate: ::Integer?,
+                                      spatial_aq: ("DISABLED" | "ENABLED")?,
+                                      temporal_aq: ("DISABLED" | "ENABLED")?
                                     }?
                                   }?,
                                   height: ::Integer?,
@@ -1629,7 +1642,7 @@ module Aws
                             },
                           ],
                           ?tags: Hash[::String, ::String],
-                          ?type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI"),
+                          ?type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI" | "MEDIACONNECT_ROUTER"),
                           ?vpc: {
                             security_group_ids: Array[::String]?,
                             subnet_ids: Array[::String]
@@ -1681,7 +1694,16 @@ module Aws
                               },
                             ]?
                           },
-                          ?sdi_sources: Array[::String]
+                          ?sdi_sources: Array[::String],
+                          ?router_settings: {
+                            destinations: Array[
+                              {
+                                availability_zone_name: ::String
+                              },
+                            ]?,
+                            encryption_type: ("AUTOMATIC" | "SECRETS_MANAGER")?,
+                            secret_arn: ::String?
+                          }
                         ) -> _CreateInputResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInputResponseSuccess
 
@@ -1946,12 +1968,13 @@ module Aws
         def sources: () -> ::Array[Types::InputSource]
         def state: () -> ("CREATING" | "DETACHED" | "ATTACHED" | "DELETING" | "DELETED")
         def tags: () -> ::Hash[::String, ::String]
-        def type: () -> ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI")
+        def type: () -> ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI" | "MEDIACONNECT_ROUTER")
         def srt_settings: () -> Types::SrtSettings
         def input_network_location: () -> ("AWS" | "ON_PREMISES")
         def multicast_settings: () -> Types::MulticastSettings
         def smpte_2110_receiver_group_settings: () -> Types::Smpte2110ReceiverGroupSettings
         def sdi_sources: () -> ::Array[::String]
+        def router_settings: () -> Types::RouterInputSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#describe_input-instance_method
       def describe_input: (
@@ -2910,7 +2933,16 @@ module Aws
                                             language_code: ::String,
                                             language_description: ::String
                                           },
-                                        ]?
+                                        ]?,
+                                        id_3_behavior: ("DISABLED" | "ENABLED")?,
+                                        klv_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
+                                        nielsen_id_3_behavior: ("NO_PASSTHROUGH" | "PASSTHROUGH")?,
+                                        scte_35_type: ("NONE" | "SCTE_35_WITHOUT_SEGMENTATION")?,
+                                        segment_length: ::Integer?,
+                                        segment_length_units: ("MILLISECONDS" | "SECONDS")?,
+                                        timed_metadata_id_3_frame: ("NONE" | "PRIV" | "TDRL")?,
+                                        timed_metadata_id_3_period: ::Integer?,
+                                        timed_metadata_passthrough: ("DISABLED" | "ENABLED")?
                                       }?
                                     }?,
                                     ms_smooth_group_settings: {
@@ -3413,6 +3445,8 @@ module Aws
                                         rec_601_settings: {
                                         }?,
                                         rec_709_settings: {
+                                        }?,
+                                        hlg_2020_settings: {
                                         }?
                                       }?,
                                       filter_settings: {
@@ -3527,7 +3561,9 @@ module Aws
                                       }?,
                                       bitrate: ::Integer?,
                                       rate_control_mode: ("CBR" | "QVBR")?,
-                                      min_bitrate: ::Integer?
+                                      min_bitrate: ::Integer?,
+                                      spatial_aq: ("DISABLED" | "ENABLED")?,
+                                      temporal_aq: ("DISABLED" | "ENABLED")?
                                     }?
                                   }?,
                                   height: ::Integer?,
@@ -3841,7 +3877,10 @@ module Aws
                               },
                             ]?
                           },
-                          ?sdi_sources: Array[::String]
+                          ?sdi_sources: Array[::String],
+                          ?special_router_settings: {
+                            router_arn: ::String?
+                          }
                         ) -> _UpdateInputResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInputResponseSuccess
 
@@ -5081,6 +5120,48 @@ module Aws
                                ?type: ("SINGLE" | "QUAD")
                              ) -> _UpdateSdiSourceResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSdiSourceResponseSuccess
+
+      interface _ListAlertsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAlertsResponse]
+        def alerts: () -> ::Array[Types::ChannelAlert]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#list_alerts-instance_method
+      def list_alerts: (
+                         channel_id: ::String,
+                         ?max_results: ::Integer,
+                         ?next_token: ::String,
+                         ?state_filter: ::String
+                       ) -> _ListAlertsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAlertsResponseSuccess
+
+      interface _ListClusterAlertsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterAlertsResponse]
+        def alerts: () -> ::Array[Types::ClusterAlert]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#list_cluster_alerts-instance_method
+      def list_cluster_alerts: (
+                                 cluster_id: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 ?state_filter: ::String
+                               ) -> _ListClusterAlertsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterAlertsResponseSuccess
+
+      interface _ListMultiplexAlertsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMultiplexAlertsResponse]
+        def alerts: () -> ::Array[Types::MultiplexAlert]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#list_multiplex_alerts-instance_method
+      def list_multiplex_alerts: (
+                                   ?max_results: ::Integer,
+                                   multiplex_id: ::String,
+                                   ?next_token: ::String,
+                                   ?state_filter: ::String
+                                 ) -> _ListMultiplexAlertsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMultiplexAlertsResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#wait_until-instance_method
       def wait_until: (:channel_created waiter_name, 

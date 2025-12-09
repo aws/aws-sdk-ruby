@@ -218,6 +218,13 @@
         "TracePart$agentId": "<p>The unique identifier of the agent.</p>"
       }
     },
+    "AgentTraces": {
+      "base": null,
+      "refs": {
+        "NodeTraceElements$agentTraces": "<p>Agent trace information for the node execution.</p>",
+        "TraceElements$agentTraces": "<p>Agent trace information for the flow execution.</p>"
+      }
+    },
     "AgentVersion": {
       "base": null,
       "refs": {
@@ -285,6 +292,18 @@
       "refs": {
         "InlineAgentPayloadPart$attribution": "<p>Contains citations for a part of an agent response.</p>",
         "PayloadPart$attribution": "<p>Contains citations for a part of an agent response.</p>"
+      }
+    },
+    "AudioSegment": {
+      "base": "<p>Contains information about an audio segment retrieved from a knowledge base, including its location and transcription.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a> – in the <code>audio</code> field</p> </li> </ul>",
+      "refs": {
+        "RetrievalResultContent$audio": "<p>Audio segment information when the retrieval result contains audio content.</p>"
+      }
+    },
+    "AudioSegmentS3UriString": {
+      "base": null,
+      "refs": {
+        "AudioSegment$s3Uri": "<p>The S3 URI where this specific audio segment is stored in the multimodal storage destination.</p>"
       }
     },
     "BadGatewayException": {
@@ -543,23 +562,19 @@
     },
     "CreateInvocationRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateInvocationResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateSessionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreateSessionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "CreationMode": {
       "base": null,
@@ -606,6 +621,7 @@
         "FlowExecutionSummary$endedAt": "<p>The timestamp when the flow execution ended. This field is only populated when the execution has completed, failed, timed out, or been aborted.</p>",
         "FlowFailureEvent$timestamp": "<p>The timestamp when the failure occurred.</p>",
         "FlowTraceConditionNodeResultEvent$timestamp": "<p>The date and time that the trace was returned.</p>",
+        "FlowTraceDependencyEvent$timestamp": "<p>The date and time that the dependency trace was generated.</p>",
         "FlowTraceNodeActionEvent$timestamp": "<p>The date and time that the operation was called.</p>",
         "FlowTraceNodeInputEvent$timestamp": "<p>The date and time that the trace was returned.</p>",
         "FlowTraceNodeOutputEvent$timestamp": "<p>The date and time that the trace was returned.</p>",
@@ -618,6 +634,8 @@
         "InvocationSummary$createdAt": "<p>The timestamp for when the invocation was created.</p>",
         "MemorySessionSummary$sessionExpiryTime": "<p>The time when the memory duration for the session is set to end.</p>",
         "MemorySessionSummary$sessionStartTime": "<p>The start time for this session.</p>",
+        "NodeActionEvent$timestamp": "<p>The date and time that the operation was called.</p>",
+        "NodeDependencyEvent$timestamp": "<p>The date and time that the dependency trace was generated.</p>",
         "NodeFailureEvent$timestamp": "<p>The timestamp when the node failure occurred.</p>",
         "NodeInputEvent$timestamp": "<p>The timestamp when the inputs were provided to the node.</p>",
         "NodeOutputEvent$timestamp": "<p>The timestamp when the outputs were produced by the node.</p>",
@@ -630,23 +648,19 @@
     },
     "DeleteAgentMemoryRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteAgentMemoryResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteSessionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DeleteSessionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "DependencyFailedException": {
       "base": "<p>There was an issue with a dependency. Check the resource configurations and retry the request.</p>",
@@ -665,8 +679,12 @@
         "FlowInputContent$document": "<p>The input to send to the prompt flow input node.</p>",
         "FlowMultiTurnInputContent$document": "<p>The requested additional input to send back to the multi-turn flow node.</p>",
         "FlowOutputContent$document": "<p>The content in the output.</p>",
+        "FlowTraceNodeActionEvent$operationRequest": "<p>The request payload sent to the downstream service.</p>",
+        "FlowTraceNodeActionEvent$operationResponse": "<p>The response payload received from the downstream service.</p>",
         "FlowTraceNodeInputContent$document": "<p>The content of the node input.</p>",
         "FlowTraceNodeOutputContent$document": "<p>The content of the node output.</p>",
+        "NodeActionEvent$operationRequest": "<p>The request payload sent to the downstream service.</p>",
+        "NodeActionEvent$operationResponse": "<p>The response payload received from the downstream service.</p>",
         "NodeExecutionContent$document": "<p>The document content of the field, which can contain text or structured data.</p>",
         "PromptConfiguration$additionalModelRequestFields": "<p>If the Converse or ConverseStream operations support the model, <code>additionalModelRequestFields</code> contains additional inference parameters, beyond the base set of inference parameters in the <code>inferenceConfiguration</code> field. </p> <p>For more information, see <i>Inference request parameters and response fields for foundation models</i> in the Amazon Bedrock user guide.</p>",
         "RerankDocument$jsonDocument": "<p>Contains a JSON document to rerank.</p>"
@@ -680,13 +698,11 @@
     },
     "EndSessionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "EndSessionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ExecutionType": {
       "base": null,
@@ -863,6 +879,13 @@
       "base": null,
       "refs": {
         "FlowCompletionEvent$completionReason": "<p>The reason that the flow completed.</p>"
+      }
+    },
+    "FlowControlNodeType": {
+      "base": null,
+      "refs": {
+        "FlowTraceNodeInputExecutionChainItem$type": "<p>The type of execution chain item. Supported values are Iterator and Loop.</p>",
+        "NodeInputExecutionChainItem$type": "<p>The type of execution chain item. Supported values are Iterator and Loop.</p>"
       }
     },
     "FlowErrorCode": {
@@ -1042,6 +1065,43 @@
         "FlowResponseStream$flowMultiTurnInputRequestEvent": "<p>The event stream containing the multi-turn input request information from the flow.</p>"
       }
     },
+    "FlowNodeIODataType": {
+      "base": null,
+      "refs": {
+        "FlowTraceNodeInputField$type": "<p>The data type of the input field for compatibility validation.</p>",
+        "FlowTraceNodeOutputField$type": "<p>The data type of the output field for compatibility validation.</p>",
+        "NodeInputField$type": "<p>The data type of the input field for compatibility validation.</p>",
+        "NodeOutputField$type": "<p>The data type of the output field for compatibility validation.</p>"
+      }
+    },
+    "FlowNodeInputCategory": {
+      "base": null,
+      "refs": {
+        "FlowTraceNodeInputField$category": "<p>The category of the input field.</p>",
+        "NodeInputField$category": "<p>The category of the input field.</p>"
+      }
+    },
+    "FlowNodeInputExpression": {
+      "base": null,
+      "refs": {
+        "FlowTraceNodeInputSource$expression": "<p>The expression used to extract data from the source.</p>",
+        "NodeInputSource$expression": "<p>The expression used to extract data from the source.</p>"
+      }
+    },
+    "FlowNodeInputName": {
+      "base": null,
+      "refs": {
+        "FlowTraceNodeOutputNext$inputFieldName": "<p>The name of the input field in the next node that receives the data.</p>",
+        "NodeOutputNext$inputFieldName": "<p>The name of the input field in the next node that receives the data.</p>"
+      }
+    },
+    "FlowNodeOutputName": {
+      "base": null,
+      "refs": {
+        "FlowTraceNodeInputSource$outputFieldName": "<p>The name of the output field from the source node.</p>",
+        "NodeInputSource$outputFieldName": "<p>The name of the output field from the source node.</p>"
+      }
+    },
     "FlowOutputContent": {
       "base": "<p>Contains information about the content in an output from prompt flow invocation.</p>",
       "refs": {
@@ -1096,6 +1156,12 @@
         "FlowTraceConditionNodeResultEvent$satisfiedConditions": "<p>An array of objects containing information about the conditions that were satisfied.</p>"
       }
     },
+    "FlowTraceDependencyEvent": {
+      "base": "<p>Contains information about a dependency trace event in the flow.</p>",
+      "refs": {
+        "FlowTrace$nodeDependencyTrace": "<p>Contains information about an internal trace of a node.</p>"
+      }
+    },
     "FlowTraceEvent": {
       "base": "<p>Contains information about a trace, which tracks an input or output for a node in the flow. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html\">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>",
       "refs": {
@@ -1105,7 +1171,7 @@
     "FlowTraceNodeActionEvent": {
       "base": "<p>Contains information about an action (operation) called by a node in an Amazon Bedrock flow. The service generates action events for calls made by prompt nodes, agent nodes, and Amazon Web Services Lambda nodes. </p>",
       "refs": {
-        "FlowTrace$nodeActionTrace": "<p>Contains information about an action (operation) called by a node. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html\">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>"
+        "FlowTrace$nodeActionTrace": "<p>Contains information about an action (operation) called by a node.</p>"
       }
     },
     "FlowTraceNodeInputContent": {
@@ -1120,6 +1186,18 @@
         "FlowTrace$nodeInputTrace": "<p>Contains information about the input into a node.</p>"
       }
     },
+    "FlowTraceNodeInputExecutionChain": {
+      "base": null,
+      "refs": {
+        "FlowTraceNodeInputField$executionChain": "<p>The execution path through nested nodes like iterators and loops.</p>"
+      }
+    },
+    "FlowTraceNodeInputExecutionChainItem": {
+      "base": "<p>Represents an item in the execution chain for flow trace node input tracking.</p>",
+      "refs": {
+        "FlowTraceNodeInputExecutionChain$member": null
+      }
+    },
     "FlowTraceNodeInputField": {
       "base": "<p>Contains information about a field in the input into a node. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html\">Track each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>",
       "refs": {
@@ -1130,6 +1208,12 @@
       "base": null,
       "refs": {
         "FlowTraceNodeInputEvent$fields": "<p>An array of objects containing information about each field in the input.</p>"
+      }
+    },
+    "FlowTraceNodeInputSource": {
+      "base": "<p>Represents the source of input data for a flow trace node field.</p>",
+      "refs": {
+        "FlowTraceNodeInputField$source": "<p>The source node that provides input data to this field.</p>"
       }
     },
     "FlowTraceNodeOutputContent": {
@@ -1154,6 +1238,18 @@
       "base": null,
       "refs": {
         "FlowTraceNodeOutputEvent$fields": "<p>An array of objects containing information about each field in the output.</p>"
+      }
+    },
+    "FlowTraceNodeOutputNext": {
+      "base": "<p>Represents the next node that receives output data from a flow trace.</p>",
+      "refs": {
+        "FlowTraceNodeOutputNextList$member": null
+      }
+    },
+    "FlowTraceNodeOutputNextList": {
+      "base": null,
+      "refs": {
+        "FlowTraceNodeOutputField$next": "<p>The next node that receives output data from this field.</p>"
       }
     },
     "Function": {
@@ -1212,13 +1308,11 @@
     },
     "GenerateQueryRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GenerateQueryResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GeneratedQueries": {
       "base": null,
@@ -1253,53 +1347,43 @@
     },
     "GetAgentMemoryRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetAgentMemoryResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetExecutionFlowSnapshotRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetExecutionFlowSnapshotResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetFlowExecutionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetFlowExecutionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetInvocationStepRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetInvocationStepResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetSessionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GetSessionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "GuadrailAction": {
       "base": null,
@@ -1667,6 +1751,24 @@
         "SessionState$files": "<p>Contains information about the files used by code interpreter.</p>"
       }
     },
+    "InputImage": {
+      "base": "<p>Contains the image data for multimodal knowledge base queries, including format and content.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax\">Retrieve request</a> – in the <code>image</code> field</p> </li> </ul>",
+      "refs": {
+        "KnowledgeBaseQuery$image": "<p>An image to include in the knowledge base query for multimodal retrieval.</p>"
+      }
+    },
+    "InputImageFormat": {
+      "base": null,
+      "refs": {
+        "InputImage$format": "<p>The format of the input image. Supported formats include png, gif, jpeg, and webp.</p>"
+      }
+    },
+    "InputImageInlineContentBlob": {
+      "base": null,
+      "refs": {
+        "InputImage$inlineContent": "<p>The base64-encoded image data for inline image content. Maximum size is 5MB.</p>"
+      }
+    },
     "InputPrompt": {
       "base": "<p>Contains information about the prompt to optimize.</p>",
       "refs": {
@@ -1698,6 +1800,8 @@
       "refs": {
         "ApiResult$httpStatusCode": "<p>http status code from API execution response (for example: 200, 400, 500).</p>",
         "FailureTrace$failureCode": "<p>The failure code for the trace.</p>",
+        "FlowTraceNodeInputExecutionChainItem$index": "<p>The index position of this item in the execution chain.</p>",
+        "NodeInputExecutionChainItem$index": "<p>The index position of this item in the execution chain.</p>",
         "Usage$inputTokens": "<p>Contains information about the input tokens from the foundation model usage.</p>",
         "Usage$outputTokens": "<p>Contains information about the output tokens from the foundation model usage.</p>"
       }
@@ -1797,33 +1901,27 @@
     },
     "InvokeAgentRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "InvokeAgentResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "InvokeFlowRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "InvokeFlowResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "InvokeInlineAgentRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "InvokeInlineAgentResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "KmsKeyArn": {
       "base": null,
@@ -1899,6 +1997,12 @@
         "KnowledgeBaseQuery$text": "<p>The text of the query made to the knowledge base.</p>"
       }
     },
+    "KnowledgeBaseQueryType": {
+      "base": null,
+      "refs": {
+        "KnowledgeBaseQuery$type": "<p>The type of query being performed.</p>"
+      }
+    },
     "KnowledgeBaseRetrievalConfiguration": {
       "base": "<p>Contains configurations for knowledge base query. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html\">Query configurations</a>.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax\">Retrieve request</a> – in the <code>retrievalConfiguration</code> field</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax\">RetrieveAndGenerate request</a> – in the <code>retrievalConfiguration</code> field</p> </li> </ul>",
       "refs": {
@@ -1961,63 +2065,51 @@
     },
     "ListFlowExecutionEventsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListFlowExecutionEventsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListFlowExecutionsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListFlowExecutionsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListInvocationStepsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListInvocationStepsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListInvocationsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListInvocationsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListSessionsRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListSessionsResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListTagsForResourceRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "ListTagsForResourceResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "Long": {
       "base": null,
@@ -2214,6 +2306,18 @@
         "RetrieveResponse$nextToken": "<p>If there are more results than can fit in the response, the response returns a <code>nextToken</code>. Use this token in the <code>nextToken</code> field of another request to retrieve the next batch of results.</p>"
       }
     },
+    "NodeActionEvent": {
+      "base": "<p>Contains information about an action (operation) called by a node during execution.</p>",
+      "refs": {
+        "FlowExecutionEvent$nodeActionEvent": "<p>Contains information about an action (operation) called by a node during execution.</p>"
+      }
+    },
+    "NodeDependencyEvent": {
+      "base": "<p>Contains information about an internal trace of a specific node during execution.</p>",
+      "refs": {
+        "FlowExecutionEvent$nodeDependencyEvent": "<p>Contains information about an internal trace of a specific node during execution.</p>"
+      }
+    },
     "NodeErrorCode": {
       "base": null,
       "refs": {
@@ -2239,6 +2343,18 @@
         "FlowExecutionEvent$nodeInputEvent": "<p>Contains information about the inputs provided to a specific node during execution.</p>"
       }
     },
+    "NodeInputExecutionChain": {
+      "base": null,
+      "refs": {
+        "NodeInputField$executionChain": "<p>The execution path through nested nodes like iterators and loops.</p>"
+      }
+    },
+    "NodeInputExecutionChainItem": {
+      "base": "<p>Represents an item in the execution chain for node input tracking.</p>",
+      "refs": {
+        "NodeInputExecutionChain$member": null
+      }
+    },
     "NodeInputField": {
       "base": "<p>Represents an input field provided to a node during a flow execution.</p>",
       "refs": {
@@ -2260,6 +2376,12 @@
         "NodeInputField$name": "<p>The name of the input field as defined in the node's input schema.</p>"
       }
     },
+    "NodeInputSource": {
+      "base": "<p>Represents the source of input data for a node field.</p>",
+      "refs": {
+        "NodeInputField$source": "<p>The source node that provides input data to this field.</p>"
+      }
+    },
     "NodeName": {
       "base": null,
       "refs": {
@@ -2271,12 +2393,21 @@
         "FlowMultiTurnInputRequestEvent$nodeName": "<p>The name of the node in the flow that is requesting the input.</p>",
         "FlowOutputEvent$nodeName": "<p>The name of the flow output node that the output is from.</p>",
         "FlowTraceConditionNodeResultEvent$nodeName": "<p>The name of the condition node.</p>",
+        "FlowTraceDependencyEvent$nodeName": "<p>The name of the node that generated the dependency trace.</p>",
         "FlowTraceNodeActionEvent$nodeName": "<p>The name of the node that called the operation.</p>",
         "FlowTraceNodeInputEvent$nodeName": "<p>The name of the node that received the input.</p>",
+        "FlowTraceNodeInputExecutionChainItem$nodeName": "<p>The name of the node in the execution chain.</p>",
+        "FlowTraceNodeInputSource$nodeName": "<p>The name of the source node that provides the input data.</p>",
         "FlowTraceNodeOutputEvent$nodeName": "<p>The name of the node that yielded the output.</p>",
+        "FlowTraceNodeOutputNext$nodeName": "<p>The name of the next node that receives the output data.</p>",
+        "NodeActionEvent$nodeName": "<p>The name of the node that called the operation.</p>",
+        "NodeDependencyEvent$nodeName": "<p>The name of the node that generated the dependency trace.</p>",
         "NodeFailureEvent$nodeName": "<p>The name of the node where the failure occurred.</p>",
         "NodeInputEvent$nodeName": "<p>The name of the node that received the inputs.</p>",
-        "NodeOutputEvent$nodeName": "<p>The name of the node that produced the outputs.</p>"
+        "NodeInputExecutionChainItem$nodeName": "<p>The name of the node in the execution chain.</p>",
+        "NodeInputSource$nodeName": "<p>The name of the source node that provides the input data.</p>",
+        "NodeOutputEvent$nodeName": "<p>The name of the node that produced the outputs.</p>",
+        "NodeOutputNext$nodeName": "<p>The name of the next node that receives the output data.</p>"
       }
     },
     "NodeOutputEvent": {
@@ -2304,6 +2435,24 @@
         "FlowOutputField$name": "<p>The name of the output field as defined in the flow's output schema.</p>",
         "FlowTraceNodeOutputField$nodeOutputName": "<p>The name of the node output.</p>",
         "NodeOutputField$name": "<p>The name of the output field as defined in the node's output schema.</p>"
+      }
+    },
+    "NodeOutputNext": {
+      "base": "<p>Represents the next node that receives output data.</p>",
+      "refs": {
+        "NodeOutputNextList$member": null
+      }
+    },
+    "NodeOutputNextList": {
+      "base": null,
+      "refs": {
+        "NodeOutputField$next": "<p>The next node that receives output data from this field.</p>"
+      }
+    },
+    "NodeTraceElements": {
+      "base": "<p>Contains trace elements for node execution tracking.</p>",
+      "refs": {
+        "NodeDependencyEvent$traceElements": "<p>The trace elements containing detailed information about the node execution.</p>"
       }
     },
     "NodeType": {
@@ -2339,8 +2488,7 @@
     },
     "OptimizePromptRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "OptimizePromptRequestTargetModelIdString": {
       "base": null,
@@ -2350,8 +2498,7 @@
     },
     "OptimizePromptResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "OptimizedPrompt": {
       "base": "<p>Contains information about the optimized prompt.</p>",
@@ -2623,13 +2770,11 @@
     },
     "PutInvocationStepRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "PutInvocationStepResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "QueryGenerationInput": {
       "base": "<p>Contains information about a natural language query to transform into SQL.</p>",
@@ -2766,13 +2911,11 @@
     },
     "RerankRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "RerankResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "RerankResult": {
       "base": "<p>Contains information about a document that was reranked.</p>",
@@ -2783,7 +2926,7 @@
     "RerankResultIndexInteger": {
       "base": null,
       "refs": {
-        "RerankResult$index": "<p>The ranking of the document. The lower a number, the higher the document is ranked.</p>"
+        "RerankResult$index": "<p>The original index of the document from the input sources array.</p>"
       }
     },
     "RerankResultsList": {
@@ -3032,7 +3175,7 @@
     "RetrieveAndGenerateInputTextString": {
       "base": null,
       "refs": {
-        "RetrieveAndGenerateInput$text": "<p>The query made to the knowledge base.</p>"
+        "RetrieveAndGenerateInput$text": "<p>The query made to the knowledge base, in characters.</p>"
       }
     },
     "RetrieveAndGenerateOutput": {
@@ -3049,13 +3192,11 @@
     },
     "RetrieveAndGenerateRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "RetrieveAndGenerateResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "RetrieveAndGenerateSessionConfiguration": {
       "base": "<p>Contains configuration about the session with the knowledge base.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax\">RetrieveAndGenerate request</a> – in the <code>sessionConfiguration</code> field</p> </li> </ul>",
@@ -3066,13 +3207,11 @@
     },
     "RetrieveAndGenerateStreamRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "RetrieveAndGenerateStreamResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "RetrieveAndGenerateStreamResponseOutput": {
       "base": "<p>A retrieve and generate stream response output.</p>",
@@ -3088,13 +3227,11 @@
     },
     "RetrieveRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "RetrieveResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "RetrievedReference": {
       "base": "<p>Contains metadata about a source cited for the generated response.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax\">RetrieveAndGenerate response</a> – in the <code>retrievedReferences</code> field</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax\">InvokeAgent response</a> – in the <code>retrievedReferences</code> field</p> </li> </ul>",
@@ -3343,23 +3480,19 @@
     },
     "StartFlowExecutionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StartFlowExecutionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopFlowExecutionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopFlowExecutionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "StopSequences": {
       "base": null,
@@ -3397,6 +3530,7 @@
         "ApiResult$actionGroup": "<p>The action group that the API operation belongs to.</p>",
         "ApiResult$agentId": "<p>The agent's ID.</p>",
         "ApiResult$httpMethod": "<p>The HTTP method for the API operation.</p>",
+        "AudioSegment$transcription": "<p>The text transcription of the audio segment content.</p>",
         "CodeInterpreterInvocationInput$code": "<p>The code for the code interpreter to use.</p>",
         "CodeInterpreterInvocationOutput$executionError": "<p>Contains the error returned from code execution.</p>",
         "CodeInterpreterInvocationOutput$executionOutput": "<p>Contains the successful output returned from code execution</p>",
@@ -3434,6 +3568,9 @@
         "InputFile$name": "<p>The name of the source file.</p>",
         "InternalServerException$reason": "<p>The reason for the exception. If the reason is <code>BEDROCK_MODEL_INVOCATION_SERVICE_UNAVAILABLE</code>, the model invocation service is unavailable. Retry your request.</p>",
         "Metadata$clientRequestId": "<p>A unique identifier associated with the downstream invocation. This ID can be used for tracing, debugging, and identifying specific invocations in customer logs or systems.</p>",
+        "NodeActionEvent$operationName": "<p>The name of the operation that the node called.</p>",
+        "NodeActionEvent$requestId": "<p>The ID of the request that the node made to the operation.</p>",
+        "NodeActionEvent$serviceName": "<p>The name of the service that the node called.</p>",
         "NodeFailureEvent$errorMessage": "<p>A descriptive message that provides details about the node failure.</p>",
         "OutputFile$name": "<p>The name of the file containing response from code interpreter.</p>",
         "Parameter$name": "<p>The name of the parameter.</p>",
@@ -3467,7 +3604,8 @@
         "SessionAttributesMap$value": null,
         "SessionState$invocationId": "<p>The identifier of the invocation of an action. This value must match the <code>invocationId</code> returned in the <code>InvokeAgent</code> response for the action whose results are provided in the <code>returnControlInvocationResults</code> field. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-returncontrol.html\">Return control to the agent developer</a> and <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html\">Control session context</a>.</p>",
         "StopSequences$member": null,
-        "TextResponsePart$text": "<p>The part of the generated text that contains a citation.</p>"
+        "TextResponsePart$text": "<p>The part of the generated text that contains a citation.</p>",
+        "VideoSegment$summary": "<p>A text summary describing the content of the video segment.</p>"
       }
     },
     "SummaryText": {
@@ -3500,13 +3638,11 @@
     },
     "TagResourceRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "TagResourceResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "TagValue": {
       "base": "<p>Value of a tag</p>",
@@ -3553,7 +3689,7 @@
     "TextPromptTemplate": {
       "base": null,
       "refs": {
-        "PromptTemplate$textPromptTemplate": "<p>The template for the prompt that's sent to the model for response generation. You can include prompt placeholders, which become replaced before the prompt is sent to the model to provide instructions and context to the model. In addition, you can include XML tags to delineate meaningful sections of the prompt template.</p> <p>For more information, see the following resources:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html#kb-test-config-sysprompt\">Knowledge base prompt templates</a> </p> </li> <li> <p> <a href=\"https://docs.anthropic.com/claude/docs/use-xml-tags\">Use XML tags with Anthropic Claude models</a> </p> </li> </ul>"
+        "PromptTemplate$textPromptTemplate": "<p>The template for the prompt that's sent to the model for response generation. You can include prompt placeholders, which become replaced before the prompt is sent to the model to provide instructions and context to the model. In addition, you can include XML tags to delineate meaningful sections of the prompt template.</p> <p>For more information, see the following resources:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html#kb-test-config-sysprompt\">Knowledge base prompt templates</a> </p> </li> <li> <p> <a href=\"https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags\">Use XML tags with Anthropic Claude models</a> </p> </li> </ul>"
       }
     },
     "TextPromptTextString": {
@@ -3616,6 +3752,12 @@
         "TracePart$trace": "<p>Contains one part of the agent's reasoning process and results from calling API actions and querying knowledge bases. You can use the trace to understand how the agent arrived at the response it provided the customer. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement\">Trace enablement</a>.</p>"
       }
     },
+    "TraceElements": {
+      "base": "<p>Contains trace elements for flow execution tracking.</p>",
+      "refs": {
+        "FlowTraceDependencyEvent$traceElements": "<p>The trace elements containing detailed information about the dependency.</p>"
+      }
+    },
     "TraceId": {
       "base": null,
       "refs": {
@@ -3641,6 +3783,7 @@
     "TracePart": {
       "base": "<p>Contains information about the agent and session, alongside the agent's reasoning process and results from calling API actions and querying knowledge bases and metadata about the trace. You can use the trace to understand how the agent arrived at the response it provided the customer. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement\">Trace enablement</a>.</p>",
       "refs": {
+        "AgentTraces$member": null,
         "ResponseStream$trace": "<p>Contains information about the agent and session, alongside the agent's reasoning process and results from calling actions and querying knowledge bases and metadata about the trace. You can use the trace to understand how the agent arrived at the response it provided the customer. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/trace-events.html\">Trace events</a>.</p>"
       }
     },
@@ -3658,23 +3801,19 @@
     },
     "UntagResourceRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UntagResourceResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateSessionRequest": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "UpdateSessionResponse": {
       "base": null,
-      "refs": {
-      }
+      "refs": {}
     },
     "Usage": {
       "base": "<p>Contains information of the usage of the foundation model.</p>",
@@ -3758,6 +3897,18 @@
         "FlowExecutionSummary$flowVersion": "<p>The version of the flow used for the execution.</p>",
         "GetExecutionFlowSnapshotResponse$flowVersion": "<p>The version of the flow used for the flow execution.</p>",
         "GetFlowExecutionResponse$flowVersion": "<p>The version of the flow used for the execution.</p>"
+      }
+    },
+    "VideoSegment": {
+      "base": "<p>Contains information about a video segment retrieved from a knowledge base, including its location and summary.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a> – in the <code>video</code> field</p> </li> </ul>",
+      "refs": {
+        "RetrievalResultContent$video": "<p>Video segment information when the retrieval result contains video content.</p>"
+      }
+    },
+    "VideoSegmentS3UriString": {
+      "base": null,
+      "refs": {
+        "VideoSegment$s3Uri": "<p>The S3 URI where this specific video segment is stored in the multimodal storage destination.</p>"
       }
     }
   }

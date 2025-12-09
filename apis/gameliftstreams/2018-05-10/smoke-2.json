@@ -1,6 +1,40 @@
 {
   "version" : 2,
   "testCases" : [ {
+    "id" : "ListTagsForResource",
+    "operationName" : "ListTagsForResource",
+    "input" : {
+      "ResourceArn" : "arn:aws:gameliftstreams:us-west-2:012345678901:abcdefghi"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ValidationException"
+      }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetApplication",
+    "operationName" : "GetApplication",
+    "input" : {
+      "Identifier" : "aBcDeFgHi"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
     "id" : "GetStreamSession",
     "operationName" : "GetStreamSession",
     "input" : {
@@ -19,32 +53,11 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListTagsForResource",
-    "operationName" : "ListTagsForResource",
-    "input" : {
-      "ResourceArn" : "arn:aws:gameliftstreams:us-west-2:012345678901:abcdefghi"
-    },
+    "id" : "ListStreamSessionsByAccount",
+    "operationName" : "ListStreamSessionsByAccount",
+    "input" : { },
     "expectation" : {
-      "failure" : {
-        "errorId" : "ValidationException"
-      }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListStreamSessions",
-    "operationName" : "ListStreamSessions",
-    "input" : {
-      "Identifier" : "abcdefghi"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
+      "success" : { }
     },
     "config" : {
       "region" : "us-west-2",
@@ -83,11 +96,15 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListStreamSessionsByAccount",
-    "operationName" : "ListStreamSessionsByAccount",
-    "input" : { },
+    "id" : "ListStreamSessions",
+    "operationName" : "ListStreamSessions",
+    "input" : {
+      "Identifier" : "abcdefghi"
+    },
     "expectation" : {
-      "success" : { }
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
     },
     "config" : {
       "region" : "us-west-2",
@@ -101,23 +118,6 @@
     "input" : { },
     "expectation" : {
       "success" : { }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetApplication",
-    "operationName" : "GetApplication",
-    "input" : {
-      "Identifier" : "aBcDeFgHi"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
     },
     "config" : {
       "region" : "us-west-2",

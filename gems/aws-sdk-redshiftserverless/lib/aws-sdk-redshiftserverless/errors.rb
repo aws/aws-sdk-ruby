@@ -29,6 +29,7 @@ module Aws::RedshiftServerless
   # ## Error Classes
   # * {AccessDeniedException}
   # * {ConflictException}
+  # * {DryRunException}
   # * {InsufficientCapacityException}
   # * {InternalServerException}
   # * {InvalidPaginationException}
@@ -70,6 +71,21 @@ module Aws::RedshiftServerless
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RedshiftServerless::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class DryRunException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RedshiftServerless::Types::DryRunException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

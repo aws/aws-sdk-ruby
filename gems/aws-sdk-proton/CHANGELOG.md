@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.62.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.61.0 (2025-10-07)
+------------------
+
+* Feature - Deprecating APIs in AWS Proton namespace.
+
 1.60.0 (2025-08-26)
 ------------------
 

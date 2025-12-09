@@ -596,11 +596,30 @@ module Aws::ConnectParticipant
     #   recipients.
     #   @return [Array<Types::Receipt>]
     #
+    # @!attribute [rw] message_processing_status
+    #   The status of Message Processing for the message.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/MessageMetadata AWS API Documentation
     #
     class MessageMetadata < Struct.new(
       :message_id,
-      :receipts)
+      :receipts,
+      :message_processing_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata for chat messages.
+    #
+    # @!attribute [rw] message_processing_status
+    #   The status of Message Processing for the message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/MessageProcessingMetadata AWS API Documentation
+    #
+    class MessageProcessingMetadata < Struct.new(
+      :message_processing_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -796,11 +815,16 @@ module Aws::ConnectParticipant
     #   example, 2019-11-08T02:41:28.172Z.
     #   @return [String]
     #
+    # @!attribute [rw] message_metadata
+    #   Contains metadata for the message.
+    #   @return [Types::MessageProcessingMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/SendMessageResponse AWS API Documentation
     #
     class SendMessageResponse < Struct.new(
       :id,
-      :absolute_time)
+      :absolute_time,
+      :message_metadata)
       SENSITIVE = []
       include Aws::Structure
     end

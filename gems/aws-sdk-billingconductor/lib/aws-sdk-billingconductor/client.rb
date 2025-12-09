@@ -648,8 +648,11 @@ module Aws::BillingConductor
     # plan computation.
     #
     # @option params [String] :client_token
-    #   The token that is needed to support idempotency. Idempotency isn't
-    #   currently supported, but will be implemented in a future update.
+    #   A unique, case-sensitive identifier that you specify to ensure
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes no more than one time. With an idempotent request, if the
+    #   original request completes successfully, any subsequent retries
+    #   complete successfully without performing any further actions.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -686,8 +689,9 @@ module Aws::BillingConductor
     #     client_token: "ClientToken",
     #     name: "BillingGroupName", # required
     #     account_grouping: { # required
-    #       linked_account_ids: ["AccountId"], # required
+    #       linked_account_ids: ["AccountId"],
     #       auto_associate: false,
+    #       responsibility_transfer_arn: "ResponsibilityTransferArn",
     #     },
     #     computation_preference: { # required
     #       pricing_plan_arn: "PricingPlanFullArn", # required
@@ -718,8 +722,11 @@ module Aws::BillingConductor
     # or discount.
     #
     # @option params [String] :client_token
-    #   The token that is needed to support idempotency. Idempotency isn't
-    #   currently supported, but will be implemented in a future update.
+    #   A unique, case-sensitive identifier that you specify to ensure
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes no more than one time. With an idempotent request, if the
+    #   original request completes successfully, any subsequent retries
+    #   complete successfully without performing any further actions.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -749,6 +756,14 @@ module Aws::BillingConductor
     # @option params [String] :account_id
     #   The Amazon Web Services account in which this custom line item will be
     #   applied to.
+    #
+    # @option params [String] :computation_rule
+    #   Specifies how the custom line item charges are computed.
+    #
+    # @option params [Types::PresentationObject] :presentation_details
+    #   Details controlling how the custom line item charges are presented in
+    #   the bill. Contains specifications for which service the charges will
+    #   be shown under.
     #
     # @return [Types::CreateCustomLineItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -786,6 +801,10 @@ module Aws::BillingConductor
     #       ],
     #     },
     #     account_id: "AccountId",
+    #     computation_rule: "CONSOLIDATED", # accepts CONSOLIDATED
+    #     presentation_details: {
+    #       service: "Service", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -805,8 +824,11 @@ module Aws::BillingConductor
     # charges for billing groups.
     #
     # @option params [String] :client_token
-    #   The token that is needed to support idempotency. Idempotency isn't
-    #   currently supported, but will be implemented in a future update.
+    #   A unique, case-sensitive identifier that you specify to ensure
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes no more than one time. With an idempotent request, if the
+    #   original request completes successfully, any subsequent retries
+    #   complete successfully without performing any further actions.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -859,8 +881,11 @@ module Aws::BillingConductor
     # of pricing plans.
     #
     # @option params [String] :client_token
-    #   The token that's needed to support idempotency. Idempotency isn't
-    #   currently supported, but will be implemented in a future update.
+    #   A unique, case-sensitive identifier that you specify to ensure
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes no more than one time. With an idempotent request, if the
+    #   original request completes successfully, any subsequent retries
+    #   complete successfully without performing any further actions.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -880,6 +905,7 @@ module Aws::BillingConductor
     #
     # @option params [Float] :modifier_percentage
     #   A percentage modifier that's applied on the public pricing rates.
+    #   Your entry will be rounded to the nearest 2 decimal places.
     #
     # @option params [String] :service
     #   If the `Scope` attribute is set to `SERVICE` or `SKU`, the attribute
@@ -904,7 +930,7 @@ module Aws::BillingConductor
     #   If the `Scope` attribute is set to `SKU`, this attribute indicates
     #   which usage type the `PricingRule` is modifying. For example,
     #   `USW2-BoxUsage:m2.2xlarge` describes an` M2 High Memory Double Extra
-    #   Large` instance in the US West (Oregon) Region.     </p>
+    #   Large` instance in the US West (Oregon) Region.
     #
     # @option params [String] :operation
     #   Operation is the specific Amazon Web Services action covered by this
@@ -1151,7 +1177,7 @@ module Aws::BillingConductor
 
     # Retrieves the margin summary report, which includes the Amazon Web
     # Services cost and charged amount (pro forma cost) by Amazon Web
-    # Service for a specific billing group.
+    # Services service for a specific billing group.
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Number (ARN) that uniquely identifies the billing
@@ -1164,8 +1190,8 @@ module Aws::BillingConductor
     # @option params [Array<String>] :group_by
     #   A list of strings that specify the attributes that are used to break
     #   down costs in the margin summary reports for the billing group. For
-    #   example, you can view your costs by the Amazon Web Service name or the
-    #   billing period.
+    #   example, you can view your costs by the Amazon Web Services service
+    #   name or the billing period.
     #
     # @option params [Integer] :max_results
     #   The maximum number of margin summary reports to retrieve.
@@ -1365,8 +1391,17 @@ module Aws::BillingConductor
     #     filters: {
     #       arns: ["BillingGroupArn"],
     #       pricing_plan: "PricingPlanFullArn",
-    #       statuses: ["ACTIVE"], # accepts ACTIVE, PRIMARY_ACCOUNT_MISSING
+    #       statuses: ["ACTIVE"], # accepts ACTIVE, PRIMARY_ACCOUNT_MISSING, PENDING
     #       auto_associate: false,
+    #       primary_account_ids: ["AccountId"],
+    #       billing_group_types: ["STANDARD"], # accepts STANDARD, TRANSFER_BILLING
+    #       names: [
+    #         {
+    #           search_option: "STARTS_WITH", # required, accepts STARTS_WITH
+    #           search_value: "SearchValue", # required
+    #         },
+    #       ],
+    #       responsibility_transfer_arns: ["ResponsibilityTransferArn"],
     #     },
     #   })
     #
@@ -1381,9 +1416,11 @@ module Aws::BillingConductor
     #   resp.billing_groups[0].size #=> Integer
     #   resp.billing_groups[0].creation_time #=> Integer
     #   resp.billing_groups[0].last_modified_time #=> Integer
-    #   resp.billing_groups[0].status #=> String, one of "ACTIVE", "PRIMARY_ACCOUNT_MISSING"
+    #   resp.billing_groups[0].status #=> String, one of "ACTIVE", "PRIMARY_ACCOUNT_MISSING", "PENDING"
     #   resp.billing_groups[0].status_reason #=> String
     #   resp.billing_groups[0].account_grouping.auto_associate #=> Boolean
+    #   resp.billing_groups[0].account_grouping.responsibility_transfer_arn #=> String
+    #   resp.billing_groups[0].billing_group_type #=> String, one of "STANDARD", "TRANSFER_BILLING"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListBillingGroups AWS API Documentation
@@ -1456,6 +1493,8 @@ module Aws::BillingConductor
     #   resp.custom_line_item_versions[0].arn #=> String
     #   resp.custom_line_item_versions[0].start_time #=> Integer
     #   resp.custom_line_item_versions[0].account_id #=> String
+    #   resp.custom_line_item_versions[0].computation_rule #=> String, one of "CONSOLIDATED"
+    #   resp.custom_line_item_versions[0].presentation_details.service #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListCustomLineItemVersions AWS API Documentation
@@ -1528,6 +1567,8 @@ module Aws::BillingConductor
     #   resp.custom_line_items[0].last_modified_time #=> Integer
     #   resp.custom_line_items[0].association_size #=> Integer
     #   resp.custom_line_items[0].account_id #=> String
+    #   resp.custom_line_items[0].computation_rule #=> String, one of "CONSOLIDATED"
+    #   resp.custom_line_items[0].presentation_details.service #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListCustomLineItems AWS API Documentation
@@ -1951,13 +1992,14 @@ module Aws::BillingConductor
     #   resp = client.update_billing_group({
     #     arn: "BillingGroupArn", # required
     #     name: "BillingGroupName",
-    #     status: "ACTIVE", # accepts ACTIVE, PRIMARY_ACCOUNT_MISSING
+    #     status: "ACTIVE", # accepts ACTIVE, PRIMARY_ACCOUNT_MISSING, PENDING
     #     computation_preference: {
     #       pricing_plan_arn: "PricingPlanFullArn", # required
     #     },
     #     description: "BillingGroupDescription",
     #     account_grouping: {
     #       auto_associate: false,
+    #       responsibility_transfer_arn: "ResponsibilityTransferArn",
     #     },
     #   })
     #
@@ -1970,9 +2012,10 @@ module Aws::BillingConductor
     #   resp.pricing_plan_arn #=> String
     #   resp.size #=> Integer
     #   resp.last_modified_time #=> Integer
-    #   resp.status #=> String, one of "ACTIVE", "PRIMARY_ACCOUNT_MISSING"
+    #   resp.status #=> String, one of "ACTIVE", "PRIMARY_ACCOUNT_MISSING", "PENDING"
     #   resp.status_reason #=> String
     #   resp.account_grouping.auto_associate #=> Boolean
+    #   resp.account_grouping.responsibility_transfer_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdateBillingGroup AWS API Documentation
     #
@@ -2128,7 +2171,8 @@ module Aws::BillingConductor
     #   The new pricing rule type.
     #
     # @option params [Float] :modifier_percentage
-    #   The new modifier to show pricing plan rates as a percentage.
+    #   The new modifier to show pricing plan rates as a percentage. Your
+    #   entry will be rounded to the nearest 2 decimal places.
     #
     # @option params [Types::UpdateTieringInput] :tiering
     #   The set of tiering configurations for the pricing rule.
@@ -2207,7 +2251,7 @@ module Aws::BillingConductor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-billingconductor'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1044,6 +1044,8 @@ module Aws::Glue
     #   resp.results[0].rule_results[0].evaluated_rule #=> String
     #   resp.results[0].rule_results[0].rule_metrics #=> Hash
     #   resp.results[0].rule_results[0].rule_metrics["NameString"] #=> Float
+    #   resp.results[0].rule_results[0].labels #=> Hash
+    #   resp.results[0].rule_results[0].labels["NameString"] #=> String
     #   resp.results[0].analyzer_results #=> Array
     #   resp.results[0].analyzer_results[0].name #=> String
     #   resp.results[0].analyzer_results[0].description #=> String
@@ -2900,6 +2902,10 @@ module Aws::Glue
     #   A list of Identity Center scopes that define the permissions and
     #   access levels for the Glue configuration.
     #
+    # @option params [Boolean] :user_background_sessions_enabled
+    #   Specifies whether users can run background sessions when using
+    #   Identity Center authentication with Glue services.
+    #
     # @return [Types::CreateGlueIdentityCenterConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGlueIdentityCenterConfigurationResponse#application_arn #application_arn} => String
@@ -2909,6 +2915,7 @@ module Aws::Glue
     #   resp = client.create_glue_identity_center_configuration({
     #     instance_arn: "IdentityCenterInstanceArn", # required
     #     scopes: ["IdentityCenterScope"],
+    #     user_background_sessions_enabled: false,
     #   })
     #
     # @example Response structure
@@ -2978,8 +2985,8 @@ module Aws::Glue
     #
     #   resp = client.create_integration({
     #     integration_name: "String128", # required
-    #     source_arn: "String128", # required
-    #     target_arn: "String128", # required
+    #     source_arn: "String512", # required
+    #     target_arn: "String512", # required
     #     description: "IntegrationDescription",
     #     data_filter: "String2048",
     #     kms_key_id: "String2048",
@@ -3051,16 +3058,21 @@ module Aws::Glue
     # @option params [Types::TargetProcessingProperties] :target_processing_properties
     #   The resource properties associated with the integration target.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata assigned to the resource consisting of a list of key-value
+    #   pairs.
+    #
     # @return [Types::CreateIntegrationResourcePropertyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIntegrationResourcePropertyResponse#resource_arn #resource_arn} => String
+    #   * {Types::CreateIntegrationResourcePropertyResponse#resource_property_arn #resource_property_arn} => String
     #   * {Types::CreateIntegrationResourcePropertyResponse#source_processing_properties #source_processing_properties} => Types::SourceProcessingProperties
     #   * {Types::CreateIntegrationResourcePropertyResponse#target_processing_properties #target_processing_properties} => Types::TargetProcessingProperties
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_integration_resource_property({
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #     source_processing_properties: {
     #       role_arn: "String128",
     #     },
@@ -3070,11 +3082,18 @@ module Aws::Glue
     #       connection_name: "String128",
     #       event_bus_arn: "String2048",
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.resource_arn #=> String
+    #   resp.resource_property_arn #=> String
     #   resp.source_processing_properties.role_arn #=> String
     #   resp.target_processing_properties.role_arn #=> String
     #   resp.target_processing_properties.kms_arn #=> String
@@ -3123,7 +3142,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_integration_table_properties({
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #     table_name: "String128", # required
     #     source_table_config: {
     #       fields: ["String128"],
@@ -4392,7 +4411,12 @@ module Aws::Glue
     #             view_expanded_text: "ViewTextString",
     #           },
     #         ],
+    #         view_version_id: 1,
+    #         view_version_token: "VersionString",
+    #         refresh_seconds: 1,
+    #         last_refresh_type: "FULL", # accepts FULL, INCREMENTAL
     #         sub_objects: ["ArnString"],
+    #         sub_object_version_ids: [1],
     #       },
     #     },
     #     partition_indexes: [
@@ -4420,6 +4444,10 @@ module Aws::Glue
     #                 },
     #                 required: false, # required
     #                 doc: "CommentString",
+    #                 initial_default: {
+    #                 },
+    #                 write_default: {
+    #                 },
     #               },
     #             ],
     #           },
@@ -4729,6 +4757,7 @@ module Aws::Glue
     #       function_name: "NameString",
     #       class_name: "NameString",
     #       owner_name: "NameString",
+    #       function_type: "REGULAR_FUNCTION", # accepts REGULAR_FUNCTION, AGGREGATE_FUNCTION, STORED_PROCEDURE
     #       owner_type: "USER", # accepts USER, ROLE, GROUP
     #       resource_uris: [
     #         {
@@ -5234,6 +5263,29 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # This API is used for deleting the `ResourceProperty` of the Glue
+    # connection (for the source) or Glue database ARN (for the target).
+    #
+    # @option params [required, String] :resource_arn
+    #   The connection ARN of the source, or the database ARN of the target.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_integration_resource_property({
+    #     resource_arn: "String512", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteIntegrationResourceProperty AWS API Documentation
+    #
+    # @overload delete_integration_resource_property(params = {})
+    # @param [Hash] params ({})
+    def delete_integration_resource_property(params = {}, options = {})
+      req = build_request(:delete_integration_resource_property, params)
+      req.send_request(options)
+    end
+
     # Deletes the table properties that have been created for the tables
     # that need to be replicated.
     #
@@ -5248,7 +5300,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_integration_table_properties({
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #     table_name: "String128", # required
     #   })
     #
@@ -6160,7 +6212,7 @@ module Aws::Glue
     #     integration_arn: "String128",
     #     marker: "String128",
     #     max_records: 1,
-    #     target_arn: "String128",
+    #     target_arn: "String512",
     #   })
     #
     # @example Response structure
@@ -7704,6 +7756,8 @@ module Aws::Glue
     #   resp.rule_results[0].evaluated_rule #=> String
     #   resp.rule_results[0].rule_metrics #=> Hash
     #   resp.rule_results[0].rule_metrics["NameString"] #=> Float
+    #   resp.rule_results[0].labels #=> Hash
+    #   resp.rule_results[0].labels["NameString"] #=> String
     #   resp.analyzer_results #=> Array
     #   resp.analyzer_results[0].name #=> String
     #   resp.analyzer_results[0].description #=> String
@@ -8325,6 +8379,7 @@ module Aws::Glue
     #   * {Types::GetGlueIdentityCenterConfigurationResponse#application_arn #application_arn} => String
     #   * {Types::GetGlueIdentityCenterConfigurationResponse#instance_arn #instance_arn} => String
     #   * {Types::GetGlueIdentityCenterConfigurationResponse#scopes #scopes} => Array&lt;String&gt;
+    #   * {Types::GetGlueIdentityCenterConfigurationResponse#user_background_sessions_enabled #user_background_sessions_enabled} => Boolean
     #
     # @example Response structure
     #
@@ -8332,6 +8387,7 @@ module Aws::Glue
     #   resp.instance_arn #=> String
     #   resp.scopes #=> Array
     #   resp.scopes[0] #=> String
+    #   resp.user_background_sessions_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetGlueIdentityCenterConfiguration AWS API Documentation
     #
@@ -8351,18 +8407,20 @@ module Aws::Glue
     # @return [Types::GetIntegrationResourcePropertyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetIntegrationResourcePropertyResponse#resource_arn #resource_arn} => String
+    #   * {Types::GetIntegrationResourcePropertyResponse#resource_property_arn #resource_property_arn} => String
     #   * {Types::GetIntegrationResourcePropertyResponse#source_processing_properties #source_processing_properties} => Types::SourceProcessingProperties
     #   * {Types::GetIntegrationResourcePropertyResponse#target_processing_properties #target_processing_properties} => Types::TargetProcessingProperties
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_integration_resource_property({
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.resource_arn #=> String
+    #   resp.resource_property_arn #=> String
     #   resp.source_processing_properties.role_arn #=> String
     #   resp.target_processing_properties.role_arn #=> String
     #   resp.target_processing_properties.kms_arn #=> String
@@ -8404,7 +8462,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_integration_table_properties({
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #     table_name: "String128", # required
     #   })
     #
@@ -10151,6 +10209,13 @@ module Aws::Glue
     #   recent transaction commit time will be used. Cannot be specified along
     #   with `TransactionId`.
     #
+    # @option params [Types::AuditContext] :audit_context
+    #   A structure containing the Lake Formation [audit context][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html
+    #
     # @option params [Boolean] :include_status_details
     #   Specifies whether to include status details related to a request to
     #   create or update an Glue Data Catalog view.
@@ -10167,6 +10232,11 @@ module Aws::Glue
     #     name: "NameString", # required
     #     transaction_id: "TransactionIdString",
     #     query_as_of_time: Time.now,
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString",
+    #       requested_columns: ["ColumnNameString"],
+    #       all_columns_requested: false,
+    #     },
     #     include_status_details: false,
     #   })
     #
@@ -10242,8 +10312,14 @@ module Aws::Glue
     #   resp.table.federated_table.connection_type #=> String
     #   resp.table.view_definition.is_protected #=> Boolean
     #   resp.table.view_definition.definer #=> String
+    #   resp.table.view_definition.view_version_id #=> Integer
+    #   resp.table.view_definition.view_version_token #=> String
+    #   resp.table.view_definition.refresh_seconds #=> Integer
+    #   resp.table.view_definition.last_refresh_type #=> String, one of "FULL", "INCREMENTAL"
     #   resp.table.view_definition.sub_objects #=> Array
     #   resp.table.view_definition.sub_objects[0] #=> String
+    #   resp.table.view_definition.sub_object_version_ids #=> Array
+    #   resp.table.view_definition.sub_object_version_ids[0] #=> Integer
     #   resp.table.view_definition.representations #=> Array
     #   resp.table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
     #   resp.table.view_definition.representations[0].dialect_version #=> String
@@ -10252,6 +10328,7 @@ module Aws::Glue
     #   resp.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table.is_multi_dialect_view #=> Boolean
+    #   resp.table.is_materialized_view #=> Boolean
     #   resp.table.status.requested_by #=> String
     #   resp.table.status.updated_by #=> String
     #   resp.table.status.request_time #=> Time
@@ -10467,8 +10544,14 @@ module Aws::Glue
     #   resp.table_version.table.federated_table.connection_type #=> String
     #   resp.table_version.table.view_definition.is_protected #=> Boolean
     #   resp.table_version.table.view_definition.definer #=> String
+    #   resp.table_version.table.view_definition.view_version_id #=> Integer
+    #   resp.table_version.table.view_definition.view_version_token #=> String
+    #   resp.table_version.table.view_definition.refresh_seconds #=> Integer
+    #   resp.table_version.table.view_definition.last_refresh_type #=> String, one of "FULL", "INCREMENTAL"
     #   resp.table_version.table.view_definition.sub_objects #=> Array
     #   resp.table_version.table.view_definition.sub_objects[0] #=> String
+    #   resp.table_version.table.view_definition.sub_object_version_ids #=> Array
+    #   resp.table_version.table.view_definition.sub_object_version_ids[0] #=> Integer
     #   resp.table_version.table.view_definition.representations #=> Array
     #   resp.table_version.table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
     #   resp.table_version.table.view_definition.representations[0].dialect_version #=> String
@@ -10477,6 +10560,7 @@ module Aws::Glue
     #   resp.table_version.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table_version.table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_version.table.is_multi_dialect_view #=> Boolean
+    #   resp.table_version.table.is_materialized_view #=> Boolean
     #   resp.table_version.table.status.requested_by #=> String
     #   resp.table_version.table.status.updated_by #=> String
     #   resp.table_version.table.status.request_time #=> Time
@@ -10616,8 +10700,14 @@ module Aws::Glue
     #   resp.table_versions[0].table.federated_table.connection_type #=> String
     #   resp.table_versions[0].table.view_definition.is_protected #=> Boolean
     #   resp.table_versions[0].table.view_definition.definer #=> String
+    #   resp.table_versions[0].table.view_definition.view_version_id #=> Integer
+    #   resp.table_versions[0].table.view_definition.view_version_token #=> String
+    #   resp.table_versions[0].table.view_definition.refresh_seconds #=> Integer
+    #   resp.table_versions[0].table.view_definition.last_refresh_type #=> String, one of "FULL", "INCREMENTAL"
     #   resp.table_versions[0].table.view_definition.sub_objects #=> Array
     #   resp.table_versions[0].table.view_definition.sub_objects[0] #=> String
+    #   resp.table_versions[0].table.view_definition.sub_object_version_ids #=> Array
+    #   resp.table_versions[0].table.view_definition.sub_object_version_ids[0] #=> Integer
     #   resp.table_versions[0].table.view_definition.representations #=> Array
     #   resp.table_versions[0].table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
     #   resp.table_versions[0].table.view_definition.representations[0].dialect_version #=> String
@@ -10626,6 +10716,7 @@ module Aws::Glue
     #   resp.table_versions[0].table.view_definition.representations[0].validation_connection #=> String
     #   resp.table_versions[0].table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_versions[0].table.is_multi_dialect_view #=> Boolean
+    #   resp.table_versions[0].table.is_materialized_view #=> Boolean
     #   resp.table_versions[0].table.status.requested_by #=> String
     #   resp.table_versions[0].table.status.updated_by #=> String
     #   resp.table_versions[0].table.status.request_time #=> Time
@@ -10684,6 +10775,13 @@ module Aws::Glue
     #   recent transaction commit time will be used. Cannot be specified along
     #   with `TransactionId`.
     #
+    # @option params [Types::AuditContext] :audit_context
+    #   A structure containing the Lake Formation [audit context][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html
+    #
     # @option params [Boolean] :include_status_details
     #   Specifies whether to include status details related to a request to
     #   create or update an Glue Data Catalog view.
@@ -10716,6 +10814,11 @@ module Aws::Glue
     #     max_results: 1,
     #     transaction_id: "TransactionIdString",
     #     query_as_of_time: Time.now,
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString",
+    #       requested_columns: ["ColumnNameString"],
+    #       all_columns_requested: false,
+    #     },
     #     include_status_details: false,
     #     attributes_to_get: ["NAME"], # accepts NAME, TABLE_TYPE
     #   })
@@ -10793,8 +10896,14 @@ module Aws::Glue
     #   resp.table_list[0].federated_table.connection_type #=> String
     #   resp.table_list[0].view_definition.is_protected #=> Boolean
     #   resp.table_list[0].view_definition.definer #=> String
+    #   resp.table_list[0].view_definition.view_version_id #=> Integer
+    #   resp.table_list[0].view_definition.view_version_token #=> String
+    #   resp.table_list[0].view_definition.refresh_seconds #=> Integer
+    #   resp.table_list[0].view_definition.last_refresh_type #=> String, one of "FULL", "INCREMENTAL"
     #   resp.table_list[0].view_definition.sub_objects #=> Array
     #   resp.table_list[0].view_definition.sub_objects[0] #=> String
+    #   resp.table_list[0].view_definition.sub_object_version_ids #=> Array
+    #   resp.table_list[0].view_definition.sub_object_version_ids[0] #=> Integer
     #   resp.table_list[0].view_definition.representations #=> Array
     #   resp.table_list[0].view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
     #   resp.table_list[0].view_definition.representations[0].dialect_version #=> String
@@ -10803,6 +10912,7 @@ module Aws::Glue
     #   resp.table_list[0].view_definition.representations[0].validation_connection #=> String
     #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_list[0].is_multi_dialect_view #=> Boolean
+    #   resp.table_list[0].is_materialized_view #=> Boolean
     #   resp.table_list[0].status.requested_by #=> String
     #   resp.table_list[0].status.updated_by #=> String
     #   resp.table_list[0].status.request_time #=> Time
@@ -11422,6 +11532,7 @@ module Aws::Glue
     #   * {Types::GetUnfilteredTableMetadataResponse#cell_filters #cell_filters} => Array&lt;Types::ColumnRowFilter&gt;
     #   * {Types::GetUnfilteredTableMetadataResponse#query_authorization_id #query_authorization_id} => String
     #   * {Types::GetUnfilteredTableMetadataResponse#is_multi_dialect_view #is_multi_dialect_view} => Boolean
+    #   * {Types::GetUnfilteredTableMetadataResponse#is_materialized_view #is_materialized_view} => Boolean
     #   * {Types::GetUnfilteredTableMetadataResponse#resource_arn #resource_arn} => String
     #   * {Types::GetUnfilteredTableMetadataResponse#is_protected #is_protected} => Boolean
     #   * {Types::GetUnfilteredTableMetadataResponse#permissions #permissions} => Array&lt;String&gt;
@@ -11530,8 +11641,14 @@ module Aws::Glue
     #   resp.table.federated_table.connection_type #=> String
     #   resp.table.view_definition.is_protected #=> Boolean
     #   resp.table.view_definition.definer #=> String
+    #   resp.table.view_definition.view_version_id #=> Integer
+    #   resp.table.view_definition.view_version_token #=> String
+    #   resp.table.view_definition.refresh_seconds #=> Integer
+    #   resp.table.view_definition.last_refresh_type #=> String, one of "FULL", "INCREMENTAL"
     #   resp.table.view_definition.sub_objects #=> Array
     #   resp.table.view_definition.sub_objects[0] #=> String
+    #   resp.table.view_definition.sub_object_version_ids #=> Array
+    #   resp.table.view_definition.sub_object_version_ids[0] #=> Integer
     #   resp.table.view_definition.representations #=> Array
     #   resp.table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
     #   resp.table.view_definition.representations[0].dialect_version #=> String
@@ -11540,6 +11657,7 @@ module Aws::Glue
     #   resp.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table.is_multi_dialect_view #=> Boolean
+    #   resp.table.is_materialized_view #=> Boolean
     #   resp.table.status.requested_by #=> String
     #   resp.table.status.updated_by #=> String
     #   resp.table.status.request_time #=> Time
@@ -11565,6 +11683,7 @@ module Aws::Glue
     #   resp.cell_filters[0].row_filter_expression #=> String
     #   resp.query_authorization_id #=> String
     #   resp.is_multi_dialect_view #=> Boolean
+    #   resp.is_materialized_view #=> Boolean
     #   resp.resource_arn #=> String
     #   resp.is_protected #=> Boolean
     #   resp.permissions #=> Array
@@ -11658,6 +11777,7 @@ module Aws::Glue
     #   resp.user_defined_function.database_name #=> String
     #   resp.user_defined_function.class_name #=> String
     #   resp.user_defined_function.owner_name #=> String
+    #   resp.user_defined_function.function_type #=> String, one of "REGULAR_FUNCTION", "AGGREGATE_FUNCTION", "STORED_PROCEDURE"
     #   resp.user_defined_function.owner_type #=> String, one of "USER", "ROLE", "GROUP"
     #   resp.user_defined_function.create_time #=> Time
     #   resp.user_defined_function.resource_uris #=> Array
@@ -11690,6 +11810,15 @@ module Aws::Glue
     #   An optional function-name pattern string that filters the function
     #   definitions returned.
     #
+    # @option params [String] :function_type
+    #   An optional function-type pattern string that filters the function
+    #   definitions returned from Amazon Redshift Federated Permissions
+    #   Catalog.
+    #
+    #   Specify a value of `REGULAR_FUNCTION` or `STORED_PROCEDURE`. The
+    #   `STORED_PROCEDURE` function type is only compatible with Amazon
+    #   Redshift Federated Permissions Catalog.
+    #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation call.
     #
@@ -11709,6 +11838,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     database_name: "NameString",
     #     pattern: "NameString", # required
+    #     function_type: "REGULAR_FUNCTION", # accepts REGULAR_FUNCTION, AGGREGATE_FUNCTION, STORED_PROCEDURE
     #     next_token: "Token",
     #     max_results: 1,
     #   })
@@ -11720,6 +11850,7 @@ module Aws::Glue
     #   resp.user_defined_functions[0].database_name #=> String
     #   resp.user_defined_functions[0].class_name #=> String
     #   resp.user_defined_functions[0].owner_name #=> String
+    #   resp.user_defined_functions[0].function_type #=> String, one of "REGULAR_FUNCTION", "AGGREGATE_FUNCTION", "STORED_PROCEDURE"
     #   resp.user_defined_functions[0].owner_type #=> String, one of "USER", "ROLE", "GROUP"
     #   resp.user_defined_functions[0].create_time #=> Time
     #   resp.user_defined_functions[0].resource_uris #=> Array
@@ -13112,6 +13243,58 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # List integration resource properties for a single customer. It
+    # supports the filters, maxRecords and markers.
+    #
+    # @option params [String] :marker
+    #   This is the pagination token for next page, initial value is `null`.
+    #
+    # @option params [Array<Types::IntegrationResourcePropertyFilter>] :filters
+    #   A list of filters, supported filter Key is `SourceArn` and
+    #   `TargetArn`.
+    #
+    # @option params [Integer] :max_records
+    #   This is total number of items to be evaluated.
+    #
+    # @return [Types::ListIntegrationResourcePropertiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIntegrationResourcePropertiesResponse#integration_resource_property_list #integration_resource_property_list} => Array&lt;Types::IntegrationResourceProperty&gt;
+    #   * {Types::ListIntegrationResourcePropertiesResponse#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_integration_resource_properties({
+    #     marker: "String1024",
+    #     filters: [
+    #       {
+    #         name: "String128",
+    #         values: ["String128"],
+    #       },
+    #     ],
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.integration_resource_property_list #=> Array
+    #   resp.integration_resource_property_list[0].resource_arn #=> String
+    #   resp.integration_resource_property_list[0].resource_property_arn #=> String
+    #   resp.integration_resource_property_list[0].source_processing_properties.role_arn #=> String
+    #   resp.integration_resource_property_list[0].target_processing_properties.role_arn #=> String
+    #   resp.integration_resource_property_list[0].target_processing_properties.kms_arn #=> String
+    #   resp.integration_resource_property_list[0].target_processing_properties.connection_name #=> String
+    #   resp.integration_resource_property_list[0].target_processing_properties.event_bus_arn #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListIntegrationResourceProperties AWS API Documentation
+    #
+    # @overload list_integration_resource_properties(params = {})
+    # @param [Hash] params ({})
+    def list_integration_resource_properties(params = {}, options = {})
+      req = build_request(:list_integration_resource_properties, params)
+      req.send_request(options)
+    end
+
     # Retrieves the names of all job resources in this Amazon Web Services
     # account, or the resources with the specified tag. This operation
     # allows you to see which resources are available in your account, and
@@ -13755,7 +13938,8 @@ module Aws::Glue
     #   Selects source tables for the integration using Maxwell filter syntax.
     #
     # @option params [Types::IntegrationConfig] :integration_config
-    #   Properties associated with the integration.
+    #   The configuration settings for the integration. Currently, only the
+    #   RefreshInterval can be modified.
     #
     # @option params [String] :integration_name
     #   A unique name for an integration in Glue.
@@ -14554,8 +14738,14 @@ module Aws::Glue
     #   resp.table_list[0].federated_table.connection_type #=> String
     #   resp.table_list[0].view_definition.is_protected #=> Boolean
     #   resp.table_list[0].view_definition.definer #=> String
+    #   resp.table_list[0].view_definition.view_version_id #=> Integer
+    #   resp.table_list[0].view_definition.view_version_token #=> String
+    #   resp.table_list[0].view_definition.refresh_seconds #=> Integer
+    #   resp.table_list[0].view_definition.last_refresh_type #=> String, one of "FULL", "INCREMENTAL"
     #   resp.table_list[0].view_definition.sub_objects #=> Array
     #   resp.table_list[0].view_definition.sub_objects[0] #=> String
+    #   resp.table_list[0].view_definition.sub_object_version_ids #=> Array
+    #   resp.table_list[0].view_definition.sub_object_version_ids[0] #=> Integer
     #   resp.table_list[0].view_definition.representations #=> Array
     #   resp.table_list[0].view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
     #   resp.table_list[0].view_definition.representations[0].dialect_version #=> String
@@ -14564,6 +14754,7 @@ module Aws::Glue
     #   resp.table_list[0].view_definition.representations[0].validation_connection #=> String
     #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_list[0].is_multi_dialect_view #=> Boolean
+    #   resp.table_list[0].is_materialized_view #=> Boolean
     #   resp.table_list[0].status.requested_by #=> String
     #   resp.table_list[0].status.updated_by #=> String
     #   resp.table_list[0].status.request_time #=> Time
@@ -16740,12 +16931,17 @@ module Aws::Glue
     #   A list of Identity Center scopes that define the updated permissions
     #   and access levels for the Glue configuration.
     #
+    # @option params [Boolean] :user_background_sessions_enabled
+    #   Specifies whether users can run background sessions when using
+    #   Identity Center authentication with Glue services.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_glue_identity_center_configuration({
     #     scopes: ["IdentityCenterScope"],
+    #     user_background_sessions_enabled: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateGlueIdentityCenterConfiguration AWS API Documentation
@@ -16776,13 +16972,14 @@ module Aws::Glue
     # @return [Types::UpdateIntegrationResourcePropertyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateIntegrationResourcePropertyResponse#resource_arn #resource_arn} => String
+    #   * {Types::UpdateIntegrationResourcePropertyResponse#resource_property_arn #resource_property_arn} => String
     #   * {Types::UpdateIntegrationResourcePropertyResponse#source_processing_properties #source_processing_properties} => Types::SourceProcessingProperties
     #   * {Types::UpdateIntegrationResourcePropertyResponse#target_processing_properties #target_processing_properties} => Types::TargetProcessingProperties
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_integration_resource_property({
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #     source_processing_properties: {
     #       role_arn: "String128",
     #     },
@@ -16797,6 +16994,7 @@ module Aws::Glue
     # @example Response structure
     #
     #   resp.resource_arn #=> String
+    #   resp.resource_property_arn #=> String
     #   resp.source_processing_properties.role_arn #=> String
     #   resp.target_processing_properties.role_arn #=> String
     #   resp.target_processing_properties.kms_arn #=> String
@@ -16840,7 +17038,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_integration_table_properties({
-    #     resource_arn: "String128", # required
+    #     resource_arn: "String512", # required
     #     table_name: "String128", # required
     #     source_table_config: {
     #       fields: ["String128"],
@@ -17516,7 +17714,12 @@ module Aws::Glue
     #             view_expanded_text: "ViewTextString",
     #           },
     #         ],
+    #         view_version_id: 1,
+    #         view_version_token: "VersionString",
+    #         refresh_seconds: 1,
+    #         last_refresh_type: "FULL", # accepts FULL, INCREMENTAL
     #         sub_objects: ["ArnString"],
+    #         sub_object_version_ids: [1],
     #       },
     #     },
     #     skip_archive: false,
@@ -17541,6 +17744,10 @@ module Aws::Glue
     #                     },
     #                     required: false, # required
     #                     doc: "CommentString",
+    #                     initial_default: {
+    #                     },
+    #                     write_default: {
+    #                     },
     #                   },
     #                 ],
     #               },
@@ -17570,6 +17777,16 @@ module Aws::Glue
     #               properties: {
     #                 "NullableString" => "NullableString",
     #               },
+    #               action: "add-schema", # accepts add-schema, set-current-schema, add-spec, set-default-spec, add-sort-order, set-default-sort-order, set-location, set-properties, remove-properties, add-encryption-key, remove-encryption-key
+    #               encryption_key: {
+    #                 key_id: "EncryptionKeyIdString", # required
+    #                 encrypted_key_metadata: "EncryptedKeyMetadataString", # required
+    #                 encrypted_by_id: "EncryptionKeyIdString",
+    #                 properties: {
+    #                   "NullableString" => "NullableString",
+    #                 },
+    #               },
+    #               key_id: "EncryptionKeyIdString",
     #             },
     #           ],
     #         },
@@ -17831,6 +18048,7 @@ module Aws::Glue
     #       function_name: "NameString",
     #       class_name: "NameString",
     #       owner_name: "NameString",
+    #       function_type: "REGULAR_FUNCTION", # accepts REGULAR_FUNCTION, AGGREGATE_FUNCTION, STORED_PROCEDURE
     #       owner_type: "USER", # accepts USER, ROLE, GROUP
     #       resource_uris: [
     #         {
@@ -17920,7 +18138,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.236.0'
+      context[:gem_version] = '1.244.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

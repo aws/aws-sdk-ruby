@@ -65,6 +65,7 @@ module Aws::Personalize
 
     class BatchInferenceJobConfig
       attr_accessor item_exploration_config: ::Hash[::String, ::String]
+      attr_accessor ranking_influence: ::Hash[("POPULARITY" | "FRESHNESS"), ::Float]
       SENSITIVE: []
     end
 
@@ -145,6 +146,7 @@ module Aws::Personalize
       attr_accessor item_exploration_config: ::Hash[::String, ::String]
       attr_accessor enable_metadata_with_recommendations: bool
       attr_accessor sync_with_latest_solution_version: bool
+      attr_accessor ranking_influence: ::Hash[("POPULARITY" | "FRESHNESS"), ::Float]
       SENSITIVE: []
     end
 
@@ -377,6 +379,7 @@ module Aws::Personalize
       attr_accessor perform_hpo: bool
       attr_accessor perform_auto_ml: bool
       attr_accessor perform_auto_training: bool
+      attr_accessor perform_incremental_update: bool
       attr_accessor recipe_arn: ::String
       attr_accessor dataset_group_arn: ::String
       attr_accessor event_type: ::String
@@ -1315,6 +1318,7 @@ module Aws::Personalize
       attr_accessor perform_hpo: bool
       attr_accessor perform_auto_ml: bool
       attr_accessor perform_auto_training: bool
+      attr_accessor perform_incremental_update: bool
       attr_accessor recipe_arn: ::String
       attr_accessor dataset_group_arn: ::String
       attr_accessor event_type: ::String
@@ -1361,6 +1365,7 @@ module Aws::Personalize
       attr_accessor solution_update_config: Types::SolutionUpdateConfig
       attr_accessor status: ::String
       attr_accessor perform_auto_training: bool
+      attr_accessor perform_incremental_update: bool
       attr_accessor creation_date_time: ::Time
       attr_accessor last_updated_date_time: ::Time
       attr_accessor failure_reason: ::String
@@ -1373,6 +1378,7 @@ module Aws::Personalize
       attr_accessor solution_arn: ::String
       attr_accessor perform_hpo: bool
       attr_accessor perform_auto_ml: bool
+      attr_accessor perform_incremental_update: bool
       attr_accessor recipe_arn: ::String
       attr_accessor event_type: ::String
       attr_accessor dataset_group_arn: ::String
@@ -1456,6 +1462,7 @@ module Aws::Personalize
 
     class TrainingDataConfig
       attr_accessor excluded_dataset_columns: ::Hash[::String, ::Array[::String]]
+      attr_accessor included_dataset_columns: ::Hash[::String, ::Array[::String]]
       SENSITIVE: []
     end
 
@@ -1524,6 +1531,7 @@ module Aws::Personalize
     class UpdateSolutionRequest
       attr_accessor solution_arn: ::String
       attr_accessor perform_auto_training: bool
+      attr_accessor perform_incremental_update: bool
       attr_accessor solution_update_config: Types::SolutionUpdateConfig
       SENSITIVE: []
     end

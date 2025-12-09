@@ -553,13 +553,22 @@ module Aws::Kinesis
     # planning and automatically scale to handle gigabytes of write and read
     # throughput per minute. With the on-demand mode, Kinesis Data Streams
     # automatically manages the shards in order to provide the necessary
-    # throughput. For the data streams with a provisioned mode, you must
-    # specify the number of shards for the data stream. Each shard can
-    # support reads up to five transactions per second, up to a maximum data
-    # read total of 2 MiB per second. Each shard can support writes up to
-    # 1,000 records per second, up to a maximum data write total of 1 MiB
-    # per second. If the amount of data input increases or decreases, you
-    # can add or remove shards.
+    # throughput.
+    #
+    # If you'd still like to proactively scale your on-demand data stream’s
+    # capacity, you can unlock the warm throughput feature for on-demand
+    # data streams by enabling `MinimumThroughputBillingCommitment` for your
+    # account. Once your account has `MinimumThroughputBillingCommitment`
+    # enabled, you can specify the warm throughput in MiB per second that
+    # your stream can support in writes.
+    #
+    # For the data streams with a provisioned mode, you must specify the
+    # number of shards for the data stream. Each shard can support reads up
+    # to five transactions per second, up to a maximum data read total of 2
+    # MiB per second. Each shard can support writes up to 1,000 records per
+    # second, up to a maximum data write total of 1 MiB per second. If the
+    # amount of data input increases or decreases, you can add or remove
+    # shards.
     #
     # The stream name identifies the stream. The name is scoped to the
     # Amazon Web Services account used by the application. It is also scoped
@@ -581,10 +590,10 @@ module Aws::Kinesis
     #
     # * Create more shards than are authorized for your account.
     #
-    # For the default shard limit for an Amazon Web Services account, see
-    # [Amazon Kinesis Data Streams Limits][1] in the *Amazon Kinesis Data
-    # Streams Developer Guide*. To increase this limit, [contact Amazon Web
-    # Services Support][2].
+    # For the default shard or on-demand throughput limits for an Amazon Web
+    # Services account, see [Amazon Kinesis Data Streams Limits][1] in the
+    # *Amazon Kinesis Data Streams Developer Guide*. To increase this limit,
+    # [contact Amazon Web Services Support][2].
     #
     # You can use DescribeStreamSummary to check the stream status, which is
     # returned in `StreamStatus`.
@@ -627,6 +636,15 @@ module Aws::Kinesis
     #   A set of up to 50 key-value pairs to use to create the tags. A tag
     #   consists of a required key and an optional value.
     #
+    # @option params [Integer] :warm_throughput_mi_bps
+    #   The target warm throughput in MB/s that the stream should be scaled to
+    #   handle. This represents the throughput capacity that will be
+    #   immediately available for write operations.
+    #
+    # @option params [Integer] :max_record_size_in_ki_b
+    #   The maximum record size of a single record in kibibyte (KiB) that you
+    #   can write to, and read from a stream.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -640,6 +658,8 @@ module Aws::Kinesis
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     warm_throughput_mi_bps: 1,
+    #     max_record_size_in_ki_b: 1,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStream AWS API Documentation
@@ -826,6 +846,34 @@ module Aws::Kinesis
     # @param [Hash] params ({})
     def deregister_stream_consumer(params = {}, options = {})
       req = build_request(:deregister_stream_consumer, params)
+      req.send_request(options)
+    end
+
+    # Describes the account-level settings for Amazon Kinesis Data Streams.
+    # This operation returns information about the minimum throughput
+    # billing commitments and other account-level configurations.
+    #
+    # This API has a call limit of 5 transactions per second (TPS) for each
+    # Amazon Web Services account. TPS over 5 will initiate the
+    # `LimitExceededException`.
+    #
+    # @return [Types::DescribeAccountSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccountSettingsOutput#minimum_throughput_billing_commitment #minimum_throughput_billing_commitment} => Types::MinimumThroughputBillingCommitmentOutput
+    #
+    # @example Response structure
+    #
+    #   resp.minimum_throughput_billing_commitment.status #=> String, one of "ENABLED", "DISABLED", "ENABLED_UNTIL_EARLIEST_ALLOWED_END"
+    #   resp.minimum_throughput_billing_commitment.started_at #=> Time
+    #   resp.minimum_throughput_billing_commitment.ended_at #=> Time
+    #   resp.minimum_throughput_billing_commitment.earliest_allowed_end_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeAccountSettings AWS API Documentation
+    #
+    # @overload describe_account_settings(params = {})
+    # @param [Hash] params ({})
+    def describe_account_settings(params = {}, options = {})
+      req = build_request(:describe_account_settings, params)
       req.send_request(options)
     end
 
@@ -1082,6 +1130,9 @@ module Aws::Kinesis
     #   resp.stream_description_summary.key_id #=> String
     #   resp.stream_description_summary.open_shard_count #=> Integer
     #   resp.stream_description_summary.consumer_count #=> Integer
+    #   resp.stream_description_summary.warm_throughput.target_mi_bps #=> Integer
+    #   resp.stream_description_summary.warm_throughput.current_mi_bps #=> Integer
+    #   resp.stream_description_summary.max_record_size_in_ki_b #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamSummary AWS API Documentation
     #
@@ -2088,7 +2139,7 @@ module Aws::Kinesis
     # `PutRecord` to send data into the stream for real-time ingestion and
     # subsequent processing, one record at a time. Each shard can support
     # writes up to 1,000 records per second, up to a maximum data write
-    # total of 1 MiB per second.
+    # total of 10 MiB per second.
     #
     # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
     # `StreamName` parameter, or both. It is recommended that you use the
@@ -2222,10 +2273,10 @@ module Aws::Kinesis
     #  </note>
     #
     # Each `PutRecords` request can support up to 500 records. Each record
-    # in the request can be as large as 1 MiB, up to a limit of 5 MiB for
+    # in the request can be as large as 10 MiB, up to a limit of 10 MiB for
     # the entire request, including partition keys. Each shard can support
     # writes up to 1,000 records per second, up to a maximum data write
-    # total of 1 MiB per second.
+    # total of 1 MB per second.
     #
     # You must specify the name of the stream that captures, stores, and
     # transports the data; and an array of request `Records`, with each
@@ -2412,8 +2463,11 @@ module Aws::Kinesis
     # registered. Tags will take effect from the `CREATING` status of the
     # consumer.
     #
-    # You can register up to 20 consumers per stream. A given consumer can
-    # only be registered with one stream at a time.
+    # With On-demand Advantage streams, you can register up to 50 consumers
+    # per stream to use Enhanced Fan-out. With On-demand Standard and
+    # Provisioned streams, you can register up to 20 consumers per stream to
+    # use Enhanced Fan-out. A given consumer can only be registered with one
+    # stream at a time.
     #
     # For an example of how to use this operation, see [Enhanced Fan-Out
     # Using the Kinesis Data Streams API][1].
@@ -2844,6 +2898,86 @@ module Aws::Kinesis
       req.send_request(options)
     end
 
+    # Updates the account-level settings for Amazon Kinesis Data Streams.
+    #
+    # Updating account settings is a synchronous operation. Upon receiving
+    # the request, Kinesis Data Streams will return immediately with your
+    # account’s updated settings.
+    #
+    # **API limits**
+    #
+    # * Certain account configurations have minimum commitment windows.
+    #   Attempting to update your settings prior to the end of the minimum
+    #   commitment window might have certain restrictions.
+    #
+    # * This API has a call limit of 5 transactions per second (TPS) for
+    #   each Amazon Web Services account. TPS over 5 will initiate the
+    #   `LimitExceededException`.
+    #
+    # @option params [required, Types::MinimumThroughputBillingCommitmentInput] :minimum_throughput_billing_commitment
+    #   Specifies the minimum throughput billing commitment configuration for
+    #   your account.
+    #
+    # @return [Types::UpdateAccountSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAccountSettingsOutput#minimum_throughput_billing_commitment #minimum_throughput_billing_commitment} => Types::MinimumThroughputBillingCommitmentOutput
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_account_settings({
+    #     minimum_throughput_billing_commitment: { # required
+    #       status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.minimum_throughput_billing_commitment.status #=> String, one of "ENABLED", "DISABLED", "ENABLED_UNTIL_EARLIEST_ALLOWED_END"
+    #   resp.minimum_throughput_billing_commitment.started_at #=> Time
+    #   resp.minimum_throughput_billing_commitment.ended_at #=> Time
+    #   resp.minimum_throughput_billing_commitment.earliest_allowed_end_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateAccountSettings AWS API Documentation
+    #
+    # @overload update_account_settings(params = {})
+    # @param [Hash] params ({})
+    def update_account_settings(params = {}, options = {})
+      req = build_request(:update_account_settings, params)
+      req.send_request(options)
+    end
+
+    # This allows you to update the `MaxRecordSize` of a single record that
+    # you can write to, and read from a stream. You can ingest and digest
+    # single records up to 10240 KiB.
+    #
+    # @option params [String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the stream for the `MaxRecordSize`
+    #   update.
+    #
+    # @option params [required, Integer] :max_record_size_in_ki_b
+    #   The maximum record size of a single record in KiB that you can write
+    #   to, and read from a stream. Specify a value between 1024 and 10240 KiB
+    #   (1 to 10 MiB). If you specify a value that is out of this range,
+    #   `UpdateMaxRecordSize` sends back an `ValidationException` message.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_max_record_size({
+    #     stream_arn: "StreamARN",
+    #     max_record_size_in_ki_b: 1, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateMaxRecordSize AWS API Documentation
+    #
+    # @overload update_max_record_size(params = {})
+    # @param [Hash] params ({})
+    def update_max_record_size(params = {}, options = {})
+      req = build_request(:update_max_record_size, params)
+      req.send_request(options)
+    end
+
     # Updates the shard count of the specified stream to the specified
     # number of shards. This API is only supported for the data streams with
     # the provisioned capacity mode.
@@ -2963,6 +3097,13 @@ module Aws::Kinesis
     # Data Streams, you can choose between an **on-demand** capacity mode
     # and a **provisioned** capacity mode for your data stream.
     #
+    # If you'd still like to proactively scale your on-demand data stream’s
+    # capacity, you can unlock the warm throughput feature for on-demand
+    # data streams by enabling `MinimumThroughputBillingCommitment` for your
+    # account. Once your account has `MinimumThroughputBillingCommitment`
+    # enabled, you can specify the warm throughput in MiB per second that
+    # your stream can support in writes.
+    #
     # @option params [required, String] :stream_arn
     #   Specifies the ARN of the data stream whose capacity mode you want to
     #   update.
@@ -2973,6 +3114,12 @@ module Aws::Kinesis
     #   **on-demand** capacity mode and a **provisioned** capacity mode for
     #   your data streams.
     #
+    # @option params [Integer] :warm_throughput_mi_bps
+    #   The target warm throughput in MB/s that the stream should be scaled to
+    #   handle. This represents the throughput capacity that will be
+    #   immediately available for write operations. This field is only valid
+    #   when the stream mode is being updated to on-demand.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2982,6 +3129,7 @@ module Aws::Kinesis
     #     stream_mode_details: { # required
     #       stream_mode: "PROVISIONED", # required, accepts PROVISIONED, ON_DEMAND
     #     },
+    #     warm_throughput_mi_bps: 1,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateStreamMode AWS API Documentation
@@ -2990,6 +3138,91 @@ module Aws::Kinesis
     # @param [Hash] params ({})
     def update_stream_mode(params = {}, options = {})
       req = build_request(:update_stream_mode, params)
+      req.send_request(options)
+    end
+
+    # Updates the warm throughput configuration for the specified Amazon
+    # Kinesis Data Streams on-demand data stream. This operation allows you
+    # to proactively scale your on-demand data stream to a specified
+    # throughput level, enabling better performance for sudden traffic
+    # spikes.
+    #
+    # <note markdown="1"> When invoking this API, you must use either the `StreamARN` or the
+    # `StreamName` parameter, or both. It is recommended that you use the
+    # `StreamARN` input parameter when you invoke this API.
+    #
+    #  </note>
+    #
+    # Updating the warm throughput is an asynchronous operation. Upon
+    # receiving the request, Kinesis Data Streams returns immediately and
+    # sets the status of the stream to `UPDATING`. After the update is
+    # complete, Kinesis Data Streams sets the status of the stream back to
+    # `ACTIVE`. Depending on the size of the stream, the scaling action
+    # could take a few minutes to complete. You can continue to read and
+    # write data to your stream while its status is `UPDATING`.
+    #
+    # This operation is only supported for data streams with the on-demand
+    # capacity mode in accounts that have
+    # `MinimumThroughputBillingCommitment` enabled. Provisioned capacity
+    # mode streams do not support warm throughput configuration.
+    #
+    # This operation has the following default limits. By default, you
+    # cannot do the following:
+    #
+    # * Scale to more than 10 GiBps for an on-demand stream.
+    #
+    # * This API has a call limit of 5 transactions per second (TPS) for
+    #   each Amazon Web Services account. TPS over 5 will initiate the
+    #   `LimitExceededException`.
+    #
+    # For the default limits for an Amazon Web Services account, see
+    # [Streams Limits][1] in the *Amazon Kinesis Data Streams Developer
+    # Guide*. To request an increase in the call rate limit, the shard limit
+    # for this API, or your overall shard limit, use the [limits form][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
+    # [2]: https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase&amp;limitType=service-code-kinesis
+    #
+    # @option params [String] :stream_arn
+    #   The ARN of the stream to be updated.
+    #
+    # @option params [String] :stream_name
+    #   The name of the stream to be updated.
+    #
+    # @option params [required, Integer] :warm_throughput_mi_bps
+    #   The target warm throughput in MB/s that the stream should be scaled to
+    #   handle. This represents the throughput capacity that will be
+    #   immediately available for write operations.
+    #
+    # @return [Types::UpdateStreamWarmThroughputOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateStreamWarmThroughputOutput#stream_arn #stream_arn} => String
+    #   * {Types::UpdateStreamWarmThroughputOutput#stream_name #stream_name} => String
+    #   * {Types::UpdateStreamWarmThroughputOutput#warm_throughput #warm_throughput} => Types::WarmThroughputObject
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_stream_warm_throughput({
+    #     stream_arn: "StreamARN",
+    #     stream_name: "StreamName",
+    #     warm_throughput_mi_bps: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stream_arn #=> String
+    #   resp.stream_name #=> String
+    #   resp.warm_throughput.target_mi_bps #=> Integer
+    #   resp.warm_throughput.current_mi_bps #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateStreamWarmThroughput AWS API Documentation
+    #
+    # @overload update_stream_warm_throughput(params = {})
+    # @param [Hash] params ({})
+    def update_stream_warm_throughput(params = {}, options = {})
+      req = build_request(:update_stream_warm_throughput, params)
       req.send_request(options)
     end
 
@@ -3011,7 +3244,7 @@ module Aws::Kinesis
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

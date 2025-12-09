@@ -18,6 +18,7 @@ module Aws::Backup
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AdvancedBackupSetting = Shapes::StructureShape.new(name: 'AdvancedBackupSetting')
     AdvancedBackupSettings = Shapes::ListShape.new(name: 'AdvancedBackupSettings')
+    AggregatedScanResult = Shapes::StructureShape.new(name: 'AggregatedScanResult')
     AggregationPeriod = Shapes::StringShape.new(name: 'AggregationPeriod')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     AssociateBackupVaultMpaApprovalTeamInput = Shapes::StructureShape.new(name: 'AssociateBackupVaultMpaApprovalTeamInput')
@@ -53,6 +54,7 @@ module Aws::Backup
     BackupVaultList = Shapes::ListShape.new(name: 'BackupVaultList')
     BackupVaultListMember = Shapes::StructureShape.new(name: 'BackupVaultListMember')
     BackupVaultName = Shapes::StringShape.new(name: 'BackupVaultName')
+    BackupVaultNameOrWildcard = Shapes::StringShape.new(name: 'BackupVaultNameOrWildcard')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CalculatedLifecycle = Shapes::StructureShape.new(name: 'CalculatedLifecycle')
     CancelLegalHoldInput = Shapes::StructureShape.new(name: 'CancelLegalHoldInput')
@@ -99,6 +101,9 @@ module Aws::Backup
     CreateRestoreTestingPlanOutput = Shapes::StructureShape.new(name: 'CreateRestoreTestingPlanOutput')
     CreateRestoreTestingSelectionInput = Shapes::StructureShape.new(name: 'CreateRestoreTestingSelectionInput')
     CreateRestoreTestingSelectionOutput = Shapes::StructureShape.new(name: 'CreateRestoreTestingSelectionOutput')
+    CreateTieringConfigurationInput = Shapes::StructureShape.new(name: 'CreateTieringConfigurationInput')
+    CreateTieringConfigurationOutput = Shapes::StructureShape.new(name: 'CreateTieringConfigurationOutput')
+    CreatorRequestId = Shapes::StringShape.new(name: 'CreatorRequestId')
     CronExpression = Shapes::StringShape.new(name: 'CronExpression')
     DateRange = Shapes::StructureShape.new(name: 'DateRange')
     DeleteBackupPlanInput = Shapes::StructureShape.new(name: 'DeleteBackupPlanInput')
@@ -113,6 +118,8 @@ module Aws::Backup
     DeleteReportPlanInput = Shapes::StructureShape.new(name: 'DeleteReportPlanInput')
     DeleteRestoreTestingPlanInput = Shapes::StructureShape.new(name: 'DeleteRestoreTestingPlanInput')
     DeleteRestoreTestingSelectionInput = Shapes::StructureShape.new(name: 'DeleteRestoreTestingSelectionInput')
+    DeleteTieringConfigurationInput = Shapes::StructureShape.new(name: 'DeleteTieringConfigurationInput')
+    DeleteTieringConfigurationOutput = Shapes::StructureShape.new(name: 'DeleteTieringConfigurationOutput')
     DependencyFailureException = Shapes::StructureShape.new(name: 'DependencyFailureException')
     DescribeBackupJobInput = Shapes::StructureShape.new(name: 'DescribeBackupJobInput')
     DescribeBackupJobOutput = Shapes::StructureShape.new(name: 'DescribeBackupJobOutput')
@@ -136,9 +143,12 @@ module Aws::Backup
     DescribeReportPlanOutput = Shapes::StructureShape.new(name: 'DescribeReportPlanOutput')
     DescribeRestoreJobInput = Shapes::StructureShape.new(name: 'DescribeRestoreJobInput')
     DescribeRestoreJobOutput = Shapes::StructureShape.new(name: 'DescribeRestoreJobOutput')
+    DescribeScanJobInput = Shapes::StructureShape.new(name: 'DescribeScanJobInput')
+    DescribeScanJobOutput = Shapes::StructureShape.new(name: 'DescribeScanJobOutput')
     DisassociateBackupVaultMpaApprovalTeamInput = Shapes::StructureShape.new(name: 'DisassociateBackupVaultMpaApprovalTeamInput')
     DisassociateRecoveryPointFromParentInput = Shapes::StructureShape.new(name: 'DisassociateRecoveryPointFromParentInput')
     DisassociateRecoveryPointInput = Shapes::StructureShape.new(name: 'DisassociateRecoveryPointInput')
+    EncryptionKeyType = Shapes::StringShape.new(name: 'EncryptionKeyType')
     ExportBackupPlanTemplateInput = Shapes::StructureShape.new(name: 'ExportBackupPlanTemplateInput')
     ExportBackupPlanTemplateOutput = Shapes::StructureShape.new(name: 'ExportBackupPlanTemplateOutput')
     FormatList = Shapes::ListShape.new(name: 'FormatList')
@@ -175,6 +185,8 @@ module Aws::Backup
     GetRestoreTestingSelectionInput = Shapes::StructureShape.new(name: 'GetRestoreTestingSelectionInput')
     GetRestoreTestingSelectionOutput = Shapes::StructureShape.new(name: 'GetRestoreTestingSelectionOutput')
     GetSupportedResourceTypesOutput = Shapes::StructureShape.new(name: 'GetSupportedResourceTypesOutput')
+    GetTieringConfigurationInput = Shapes::StructureShape.new(name: 'GetTieringConfigurationInput')
+    GetTieringConfigurationOutput = Shapes::StructureShape.new(name: 'GetTieringConfigurationOutput')
     GlobalSettings = Shapes::MapShape.new(name: 'GlobalSettings')
     GlobalSettingsName = Shapes::StringShape.new(name: 'GlobalSettingsName')
     GlobalSettingsValue = Shapes::StringShape.new(name: 'GlobalSettingsValue')
@@ -198,6 +210,7 @@ module Aws::Backup
     LegalHoldStatus = Shapes::StringShape.new(name: 'LegalHoldStatus')
     LegalHoldsList = Shapes::ListShape.new(name: 'LegalHoldsList')
     Lifecycle = Shapes::StructureShape.new(name: 'Lifecycle')
+    LifecycleDeleteAfterEvent = Shapes::StringShape.new(name: 'LifecycleDeleteAfterEvent')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListBackupJobSummariesInput = Shapes::StructureShape.new(name: 'ListBackupJobSummariesInput')
     ListBackupJobSummariesOutput = Shapes::StructureShape.new(name: 'ListBackupJobSummariesOutput')
@@ -252,11 +265,20 @@ module Aws::Backup
     ListRestoreTestingSelectionsInput = Shapes::StructureShape.new(name: 'ListRestoreTestingSelectionsInput')
     ListRestoreTestingSelectionsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRestoreTestingSelectionsInputMaxResultsInteger')
     ListRestoreTestingSelectionsOutput = Shapes::StructureShape.new(name: 'ListRestoreTestingSelectionsOutput')
+    ListScanJobSummariesInput = Shapes::StructureShape.new(name: 'ListScanJobSummariesInput')
+    ListScanJobSummariesOutput = Shapes::StructureShape.new(name: 'ListScanJobSummariesOutput')
+    ListScanJobsInput = Shapes::StructureShape.new(name: 'ListScanJobsInput')
+    ListScanJobsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListScanJobsInputMaxResultsInteger')
+    ListScanJobsOutput = Shapes::StructureShape.new(name: 'ListScanJobsOutput')
     ListTagsInput = Shapes::StructureShape.new(name: 'ListTagsInput')
     ListTagsOutput = Shapes::StructureShape.new(name: 'ListTagsOutput')
+    ListTieringConfigurationsInput = Shapes::StructureShape.new(name: 'ListTieringConfigurationsInput')
+    ListTieringConfigurationsOutput = Shapes::StructureShape.new(name: 'ListTieringConfigurationsOutput')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MalwareScanner = Shapes::StringShape.new(name: 'MalwareScanner')
     MaxFrameworkInputs = Shapes::IntegerShape.new(name: 'MaxFrameworkInputs')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MaxScheduledRunsPreview = Shapes::IntegerShape.new(name: 'MaxScheduledRunsPreview')
     MessageCategory = Shapes::StringShape.new(name: 'MessageCategory')
     Metadata = Shapes::MapShape.new(name: 'Metadata')
     MetadataKey = Shapes::StringShape.new(name: 'MetadataKey')
@@ -297,6 +319,8 @@ module Aws::Backup
     ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
     ResourceIdentifiers = Shapes::ListShape.new(name: 'ResourceIdentifiers')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceSelection = Shapes::StructureShape.new(name: 'ResourceSelection')
+    ResourceSelections = Shapes::ListShape.new(name: 'ResourceSelections')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceTypeList = Shapes::ListShape.new(name: 'ResourceTypeList')
     ResourceTypeManagementPreference = Shapes::MapShape.new(name: 'ResourceTypeManagementPreference')
@@ -329,6 +353,29 @@ module Aws::Backup
     RestoreTestingSelections = Shapes::ListShape.new(name: 'RestoreTestingSelections')
     RestoreValidationStatus = Shapes::StringShape.new(name: 'RestoreValidationStatus')
     RevokeRestoreAccessBackupVaultInput = Shapes::StructureShape.new(name: 'RevokeRestoreAccessBackupVaultInput')
+    RuleExecutionType = Shapes::StringShape.new(name: 'RuleExecutionType')
+    ScanAction = Shapes::StructureShape.new(name: 'ScanAction')
+    ScanActions = Shapes::ListShape.new(name: 'ScanActions')
+    ScanFinding = Shapes::StringShape.new(name: 'ScanFinding')
+    ScanFindings = Shapes::ListShape.new(name: 'ScanFindings')
+    ScanJob = Shapes::StructureShape.new(name: 'ScanJob')
+    ScanJobCreator = Shapes::StructureShape.new(name: 'ScanJobCreator')
+    ScanJobState = Shapes::StringShape.new(name: 'ScanJobState')
+    ScanJobStatus = Shapes::StringShape.new(name: 'ScanJobStatus')
+    ScanJobSummary = Shapes::StructureShape.new(name: 'ScanJobSummary')
+    ScanJobSummaryList = Shapes::ListShape.new(name: 'ScanJobSummaryList')
+    ScanJobs = Shapes::ListShape.new(name: 'ScanJobs')
+    ScanMode = Shapes::StringShape.new(name: 'ScanMode')
+    ScanResourceType = Shapes::StringShape.new(name: 'ScanResourceType')
+    ScanResult = Shapes::StructureShape.new(name: 'ScanResult')
+    ScanResultInfo = Shapes::StructureShape.new(name: 'ScanResultInfo')
+    ScanResultStatus = Shapes::StringShape.new(name: 'ScanResultStatus')
+    ScanResults = Shapes::ListShape.new(name: 'ScanResults')
+    ScanSetting = Shapes::StructureShape.new(name: 'ScanSetting')
+    ScanSettings = Shapes::ListShape.new(name: 'ScanSettings')
+    ScanState = Shapes::StringShape.new(name: 'ScanState')
+    ScheduledPlanExecutionMember = Shapes::StructureShape.new(name: 'ScheduledPlanExecutionMember')
+    ScheduledRunsPreview = Shapes::ListShape.new(name: 'ScheduledRunsPreview')
     SensitiveStringMap = Shapes::MapShape.new(name: 'SensitiveStringMap')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StartBackupJobInput = Shapes::StructureShape.new(name: 'StartBackupJobInput')
@@ -339,6 +386,8 @@ module Aws::Backup
     StartReportJobOutput = Shapes::StructureShape.new(name: 'StartReportJobOutput')
     StartRestoreJobInput = Shapes::StructureShape.new(name: 'StartRestoreJobInput')
     StartRestoreJobOutput = Shapes::StructureShape.new(name: 'StartRestoreJobOutput')
+    StartScanJobInput = Shapes::StructureShape.new(name: 'StartScanJobInput')
+    StartScanJobOutput = Shapes::StructureShape.new(name: 'StartScanJobOutput')
     StopBackupJobInput = Shapes::StructureShape.new(name: 'StopBackupJobInput')
     StorageClass = Shapes::StringShape.new(name: 'StorageClass')
     String = Shapes::StringShape.new(name: 'String')
@@ -347,6 +396,13 @@ module Aws::Backup
     TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
+    TieringConfiguration = Shapes::StructureShape.new(name: 'TieringConfiguration')
+    TieringConfigurationInputForCreate = Shapes::StructureShape.new(name: 'TieringConfigurationInputForCreate')
+    TieringConfigurationInputForUpdate = Shapes::StructureShape.new(name: 'TieringConfigurationInputForUpdate')
+    TieringConfigurationName = Shapes::StringShape.new(name: 'TieringConfigurationName')
+    TieringConfigurationsList = Shapes::ListShape.new(name: 'TieringConfigurationsList')
+    TieringConfigurationsListMember = Shapes::StructureShape.new(name: 'TieringConfigurationsListMember')
+    TieringDownSettingsInDays = Shapes::IntegerShape.new(name: 'TieringDownSettingsInDays')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Timezone = Shapes::StringShape.new(name: 'Timezone')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
@@ -366,6 +422,8 @@ module Aws::Backup
     UpdateRestoreTestingPlanOutput = Shapes::StructureShape.new(name: 'UpdateRestoreTestingPlanOutput')
     UpdateRestoreTestingSelectionInput = Shapes::StructureShape.new(name: 'UpdateRestoreTestingSelectionInput')
     UpdateRestoreTestingSelectionOutput = Shapes::StructureShape.new(name: 'UpdateRestoreTestingSelectionOutput')
+    UpdateTieringConfigurationInput = Shapes::StructureShape.new(name: 'UpdateTieringConfigurationInput')
+    UpdateTieringConfigurationOutput = Shapes::StructureShape.new(name: 'UpdateTieringConfigurationOutput')
     VaultNames = Shapes::ListShape.new(name: 'VaultNames')
     VaultState = Shapes::StringShape.new(name: 'VaultState')
     VaultType = Shapes::StringShape.new(name: 'VaultType')
@@ -384,6 +442,11 @@ module Aws::Backup
 
     AdvancedBackupSettings.member = Shapes::ShapeRef.new(shape: AdvancedBackupSetting)
 
+    AggregatedScanResult.add_member(:failed_scan, Shapes::ShapeRef.new(shape: Boolean, location_name: "FailedScan"))
+    AggregatedScanResult.add_member(:findings, Shapes::ShapeRef.new(shape: ScanFindings, location_name: "Findings"))
+    AggregatedScanResult.add_member(:last_computed, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastComputed"))
+    AggregatedScanResult.struct_class = Types::AggregatedScanResult
+
     AlreadyExistsException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
     AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     AlreadyExistsException.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId"))
@@ -401,7 +464,12 @@ module Aws::Backup
     BackupJob.add_member(:backup_job_id, Shapes::ShapeRef.new(shape: string, location_name: "BackupJobId"))
     BackupJob.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
     BackupJob.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupVaultArn"))
+    BackupJob.add_member(:vault_type, Shapes::ShapeRef.new(shape: string, location_name: "VaultType"))
+    BackupJob.add_member(:vault_lock_state, Shapes::ShapeRef.new(shape: string, location_name: "VaultLockState"))
     BackupJob.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
+    BackupJob.add_member(:recovery_point_lifecycle, Shapes::ShapeRef.new(shape: Lifecycle, location_name: "RecoveryPointLifecycle"))
+    BackupJob.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "EncryptionKeyArn"))
+    BackupJob.add_member(:is_encrypted, Shapes::ShapeRef.new(shape: boolean, location_name: "IsEncrypted"))
     BackupJob.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceArn"))
     BackupJob.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     BackupJob.add_member(:completion_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CompletionDate"))
@@ -447,11 +515,13 @@ module Aws::Backup
     BackupPlan.add_member(:backup_plan_name, Shapes::ShapeRef.new(shape: BackupPlanName, required: true, location_name: "BackupPlanName"))
     BackupPlan.add_member(:rules, Shapes::ShapeRef.new(shape: BackupRules, required: true, location_name: "Rules"))
     BackupPlan.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
+    BackupPlan.add_member(:scan_settings, Shapes::ShapeRef.new(shape: ScanSettings, location_name: "ScanSettings"))
     BackupPlan.struct_class = Types::BackupPlan
 
     BackupPlanInput.add_member(:backup_plan_name, Shapes::ShapeRef.new(shape: BackupPlanName, required: true, location_name: "BackupPlanName"))
     BackupPlanInput.add_member(:rules, Shapes::ShapeRef.new(shape: BackupRulesInput, required: true, location_name: "Rules"))
     BackupPlanInput.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
+    BackupPlanInput.add_member(:scan_settings, Shapes::ShapeRef.new(shape: ScanSettings, location_name: "ScanSettings"))
     BackupPlanInput.struct_class = Types::BackupPlanInput
 
     BackupPlanTemplatesList.member = Shapes::ShapeRef.new(shape: BackupPlanTemplatesListMember)
@@ -477,6 +547,7 @@ module Aws::Backup
 
     BackupRule.add_member(:rule_name, Shapes::ShapeRef.new(shape: BackupRuleName, required: true, location_name: "RuleName"))
     BackupRule.add_member(:target_backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location_name: "TargetBackupVaultName"))
+    BackupRule.add_member(:target_logically_air_gapped_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "TargetLogicallyAirGappedBackupVaultArn"))
     BackupRule.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: CronExpression, location_name: "ScheduleExpression"))
     BackupRule.add_member(:start_window_minutes, Shapes::ShapeRef.new(shape: WindowMinutes, location_name: "StartWindowMinutes"))
     BackupRule.add_member(:completion_window_minutes, Shapes::ShapeRef.new(shape: WindowMinutes, location_name: "CompletionWindowMinutes"))
@@ -487,10 +558,12 @@ module Aws::Backup
     BackupRule.add_member(:enable_continuous_backup, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableContinuousBackup"))
     BackupRule.add_member(:schedule_expression_timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "ScheduleExpressionTimezone"))
     BackupRule.add_member(:index_actions, Shapes::ShapeRef.new(shape: IndexActions, location_name: "IndexActions"))
+    BackupRule.add_member(:scan_actions, Shapes::ShapeRef.new(shape: ScanActions, location_name: "ScanActions"))
     BackupRule.struct_class = Types::BackupRule
 
     BackupRuleInput.add_member(:rule_name, Shapes::ShapeRef.new(shape: BackupRuleName, required: true, location_name: "RuleName"))
     BackupRuleInput.add_member(:target_backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location_name: "TargetBackupVaultName"))
+    BackupRuleInput.add_member(:target_logically_air_gapped_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "TargetLogicallyAirGappedBackupVaultArn"))
     BackupRuleInput.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: CronExpression, location_name: "ScheduleExpression"))
     BackupRuleInput.add_member(:start_window_minutes, Shapes::ShapeRef.new(shape: WindowMinutes, location_name: "StartWindowMinutes"))
     BackupRuleInput.add_member(:completion_window_minutes, Shapes::ShapeRef.new(shape: WindowMinutes, location_name: "CompletionWindowMinutes"))
@@ -500,6 +573,7 @@ module Aws::Backup
     BackupRuleInput.add_member(:enable_continuous_backup, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableContinuousBackup"))
     BackupRuleInput.add_member(:schedule_expression_timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "ScheduleExpressionTimezone"))
     BackupRuleInput.add_member(:index_actions, Shapes::ShapeRef.new(shape: IndexActions, location_name: "IndexActions"))
+    BackupRuleInput.add_member(:scan_actions, Shapes::ShapeRef.new(shape: ScanActions, location_name: "ScanActions"))
     BackupRuleInput.struct_class = Types::BackupRuleInput
 
     BackupRules.member = Shapes::ShapeRef.new(shape: BackupRule)
@@ -540,6 +614,7 @@ module Aws::Backup
     BackupVaultListMember.add_member(:min_retention_days, Shapes::ShapeRef.new(shape: Long, location_name: "MinRetentionDays"))
     BackupVaultListMember.add_member(:max_retention_days, Shapes::ShapeRef.new(shape: Long, location_name: "MaxRetentionDays"))
     BackupVaultListMember.add_member(:lock_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "LockDate"))
+    BackupVaultListMember.add_member(:encryption_key_type, Shapes::ShapeRef.new(shape: EncryptionKeyType, location_name: "EncryptionKeyType"))
     BackupVaultListMember.struct_class = Types::BackupVaultListMember
 
     CalculatedLifecycle.add_member(:move_to_cold_storage_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "MoveToColdStorageAt"))
@@ -600,7 +675,11 @@ module Aws::Backup
     CopyJob.add_member(:source_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SourceBackupVaultArn"))
     CopyJob.add_member(:source_recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SourceRecoveryPointArn"))
     CopyJob.add_member(:destination_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "DestinationBackupVaultArn"))
+    CopyJob.add_member(:destination_vault_type, Shapes::ShapeRef.new(shape: string, location_name: "DestinationVaultType"))
+    CopyJob.add_member(:destination_vault_lock_state, Shapes::ShapeRef.new(shape: string, location_name: "DestinationVaultLockState"))
     CopyJob.add_member(:destination_recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "DestinationRecoveryPointArn"))
+    CopyJob.add_member(:destination_encryption_key_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "DestinationEncryptionKeyArn"))
+    CopyJob.add_member(:destination_recovery_point_lifecycle, Shapes::ShapeRef.new(shape: Lifecycle, location_name: "DestinationRecoveryPointLifecycle"))
     CopyJob.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceArn"))
     CopyJob.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     CopyJob.add_member(:completion_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CompletionDate"))
@@ -609,6 +688,7 @@ module Aws::Backup
     CopyJob.add_member(:backup_size_in_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "BackupSizeInBytes"))
     CopyJob.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "IamRoleArn"))
     CopyJob.add_member(:created_by, Shapes::ShapeRef.new(shape: RecoveryPointCreator, location_name: "CreatedBy"))
+    CopyJob.add_member(:created_by_backup_job_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatedByBackupJobId"))
     CopyJob.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     CopyJob.add_member(:parent_job_id, Shapes::ShapeRef.new(shape: string, location_name: "ParentJobId"))
     CopyJob.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
@@ -701,6 +781,7 @@ module Aws::Backup
     CreateLogicallyAirGappedBackupVaultInput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId", metadata: {"idempotencyToken" => true}))
     CreateLogicallyAirGappedBackupVaultInput.add_member(:min_retention_days, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "MinRetentionDays"))
     CreateLogicallyAirGappedBackupVaultInput.add_member(:max_retention_days, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "MaxRetentionDays"))
+    CreateLogicallyAirGappedBackupVaultInput.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "EncryptionKeyArn"))
     CreateLogicallyAirGappedBackupVaultInput.struct_class = Types::CreateLogicallyAirGappedBackupVaultInput
 
     CreateLogicallyAirGappedBackupVaultOutput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
@@ -756,6 +837,16 @@ module Aws::Backup
     CreateRestoreTestingSelectionOutput.add_member(:restore_testing_selection_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingSelectionName"))
     CreateRestoreTestingSelectionOutput.struct_class = Types::CreateRestoreTestingSelectionOutput
 
+    CreateTieringConfigurationInput.add_member(:tiering_configuration, Shapes::ShapeRef.new(shape: TieringConfigurationInputForCreate, required: true, location_name: "TieringConfiguration"))
+    CreateTieringConfigurationInput.add_member(:tiering_configuration_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "TieringConfigurationTags"))
+    CreateTieringConfigurationInput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, location_name: "CreatorRequestId", metadata: {"idempotencyToken" => true}))
+    CreateTieringConfigurationInput.struct_class = Types::CreateTieringConfigurationInput
+
+    CreateTieringConfigurationOutput.add_member(:tiering_configuration_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "TieringConfigurationArn"))
+    CreateTieringConfigurationOutput.add_member(:tiering_configuration_name, Shapes::ShapeRef.new(shape: string, location_name: "TieringConfigurationName"))
+    CreateTieringConfigurationOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
+    CreateTieringConfigurationOutput.struct_class = Types::CreateTieringConfigurationOutput
+
     DateRange.add_member(:from_date, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "FromDate"))
     DateRange.add_member(:to_date, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "ToDate"))
     DateRange.struct_class = Types::DateRange
@@ -802,6 +893,11 @@ module Aws::Backup
     DeleteRestoreTestingSelectionInput.add_member(:restore_testing_selection_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "RestoreTestingSelectionName"))
     DeleteRestoreTestingSelectionInput.struct_class = Types::DeleteRestoreTestingSelectionInput
 
+    DeleteTieringConfigurationInput.add_member(:tiering_configuration_name, Shapes::ShapeRef.new(shape: TieringConfigurationName, required: true, location: "uri", location_name: "tieringConfigurationName"))
+    DeleteTieringConfigurationInput.struct_class = Types::DeleteTieringConfigurationInput
+
+    DeleteTieringConfigurationOutput.struct_class = Types::DeleteTieringConfigurationOutput
+
     DependencyFailureException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
     DependencyFailureException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     DependencyFailureException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "Type"))
@@ -814,8 +910,13 @@ module Aws::Backup
     DescribeBackupJobOutput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     DescribeBackupJobOutput.add_member(:backup_job_id, Shapes::ShapeRef.new(shape: string, location_name: "BackupJobId"))
     DescribeBackupJobOutput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, location_name: "BackupVaultName"))
+    DescribeBackupJobOutput.add_member(:recovery_point_lifecycle, Shapes::ShapeRef.new(shape: Lifecycle, location_name: "RecoveryPointLifecycle"))
     DescribeBackupJobOutput.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupVaultArn"))
+    DescribeBackupJobOutput.add_member(:vault_type, Shapes::ShapeRef.new(shape: string, location_name: "VaultType"))
+    DescribeBackupJobOutput.add_member(:vault_lock_state, Shapes::ShapeRef.new(shape: string, location_name: "VaultLockState"))
     DescribeBackupJobOutput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
+    DescribeBackupJobOutput.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "EncryptionKeyArn"))
+    DescribeBackupJobOutput.add_member(:is_encrypted, Shapes::ShapeRef.new(shape: boolean, location_name: "IsEncrypted"))
     DescribeBackupJobOutput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceArn"))
     DescribeBackupJobOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     DescribeBackupJobOutput.add_member(:completion_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CompletionDate"))
@@ -860,6 +961,7 @@ module Aws::Backup
     DescribeBackupVaultOutput.add_member(:mpa_approval_team_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "MpaApprovalTeamArn"))
     DescribeBackupVaultOutput.add_member(:mpa_session_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "MpaSessionArn"))
     DescribeBackupVaultOutput.add_member(:latest_mpa_approval_team_update, Shapes::ShapeRef.new(shape: LatestMpaApprovalTeamUpdate, location_name: "LatestMpaApprovalTeamUpdate"))
+    DescribeBackupVaultOutput.add_member(:encryption_key_type, Shapes::ShapeRef.new(shape: EncryptionKeyType, location_name: "EncryptionKeyType"))
     DescribeBackupVaultOutput.struct_class = Types::DescribeBackupVaultOutput
 
     DescribeCopyJobInput.add_member(:copy_job_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "copyJobId"))
@@ -933,6 +1035,8 @@ module Aws::Backup
     DescribeRecoveryPointOutput.add_member(:vault_type, Shapes::ShapeRef.new(shape: VaultType, location_name: "VaultType"))
     DescribeRecoveryPointOutput.add_member(:index_status, Shapes::ShapeRef.new(shape: IndexStatus, location_name: "IndexStatus"))
     DescribeRecoveryPointOutput.add_member(:index_status_message, Shapes::ShapeRef.new(shape: string, location_name: "IndexStatusMessage"))
+    DescribeRecoveryPointOutput.add_member(:encryption_key_type, Shapes::ShapeRef.new(shape: EncryptionKeyType, location_name: "EncryptionKeyType"))
+    DescribeRecoveryPointOutput.add_member(:scan_results, Shapes::ShapeRef.new(shape: ScanResults, location_name: "ScanResults"))
     DescribeRecoveryPointOutput.struct_class = Types::DescribeRecoveryPointOutput
 
     DescribeRegionSettingsInput.struct_class = Types::DescribeRegionSettingsInput
@@ -959,6 +1063,8 @@ module Aws::Backup
     DescribeRestoreJobOutput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     DescribeRestoreJobOutput.add_member(:restore_job_id, Shapes::ShapeRef.new(shape: string, location_name: "RestoreJobId"))
     DescribeRestoreJobOutput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
+    DescribeRestoreJobOutput.add_member(:source_resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SourceResourceArn"))
+    DescribeRestoreJobOutput.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupVaultArn"))
     DescribeRestoreJobOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     DescribeRestoreJobOutput.add_member(:completion_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CompletionDate"))
     DescribeRestoreJobOutput.add_member(:status, Shapes::ShapeRef.new(shape: RestoreJobStatus, location_name: "Status"))
@@ -975,7 +1081,34 @@ module Aws::Backup
     DescribeRestoreJobOutput.add_member(:validation_status_message, Shapes::ShapeRef.new(shape: string, location_name: "ValidationStatusMessage"))
     DescribeRestoreJobOutput.add_member(:deletion_status, Shapes::ShapeRef.new(shape: RestoreDeletionStatus, location_name: "DeletionStatus"))
     DescribeRestoreJobOutput.add_member(:deletion_status_message, Shapes::ShapeRef.new(shape: string, location_name: "DeletionStatusMessage"))
+    DescribeRestoreJobOutput.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
+    DescribeRestoreJobOutput.add_member(:parent_job_id, Shapes::ShapeRef.new(shape: string, location_name: "ParentJobId"))
     DescribeRestoreJobOutput.struct_class = Types::DescribeRestoreJobOutput
+
+    DescribeScanJobInput.add_member(:scan_job_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "ScanJobId"))
+    DescribeScanJobInput.struct_class = Types::DescribeScanJobInput
+
+    DescribeScanJobOutput.add_member(:account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AccountId"))
+    DescribeScanJobOutput.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "BackupVaultArn"))
+    DescribeScanJobOutput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "BackupVaultName"))
+    DescribeScanJobOutput.add_member(:completion_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompletionDate"))
+    DescribeScanJobOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: ScanJobCreator, required: true, location_name: "CreatedBy"))
+    DescribeScanJobOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationDate"))
+    DescribeScanJobOutput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IamRoleArn"))
+    DescribeScanJobOutput.add_member(:malware_scanner, Shapes::ShapeRef.new(shape: MalwareScanner, required: true, location_name: "MalwareScanner"))
+    DescribeScanJobOutput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RecoveryPointArn"))
+    DescribeScanJobOutput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
+    DescribeScanJobOutput.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceName"))
+    DescribeScanJobOutput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ScanResourceType, required: true, location_name: "ResourceType"))
+    DescribeScanJobOutput.add_member(:scan_base_recovery_point_arn, Shapes::ShapeRef.new(shape: String, location_name: "ScanBaseRecoveryPointArn"))
+    DescribeScanJobOutput.add_member(:scan_id, Shapes::ShapeRef.new(shape: String, location_name: "ScanId"))
+    DescribeScanJobOutput.add_member(:scan_job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScanJobId"))
+    DescribeScanJobOutput.add_member(:scan_mode, Shapes::ShapeRef.new(shape: ScanMode, required: true, location_name: "ScanMode"))
+    DescribeScanJobOutput.add_member(:scan_result, Shapes::ShapeRef.new(shape: ScanResultInfo, location_name: "ScanResult"))
+    DescribeScanJobOutput.add_member(:scanner_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScannerRoleArn"))
+    DescribeScanJobOutput.add_member(:state, Shapes::ShapeRef.new(shape: ScanState, required: true, location_name: "State"))
+    DescribeScanJobOutput.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    DescribeScanJobOutput.struct_class = Types::DescribeScanJobOutput
 
     DisassociateBackupVaultMpaApprovalTeamInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
     DisassociateBackupVaultMpaApprovalTeamInput.add_member(:requester_comment, Shapes::ShapeRef.new(shape: RequesterComment, location_name: "RequesterComment"))
@@ -1028,6 +1161,7 @@ module Aws::Backup
 
     GetBackupPlanInput.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupPlanId"))
     GetBackupPlanInput.add_member(:version_id, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "versionId"))
+    GetBackupPlanInput.add_member(:max_scheduled_runs_preview, Shapes::ShapeRef.new(shape: MaxScheduledRunsPreview, location: "querystring", location_name: "MaxScheduledRunsPreview"))
     GetBackupPlanInput.struct_class = Types::GetBackupPlanInput
 
     GetBackupPlanOutput.add_member(:backup_plan, Shapes::ShapeRef.new(shape: BackupPlan, location_name: "BackupPlan"))
@@ -1039,6 +1173,7 @@ module Aws::Backup
     GetBackupPlanOutput.add_member(:deletion_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "DeletionDate"))
     GetBackupPlanOutput.add_member(:last_execution_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastExecutionDate"))
     GetBackupPlanOutput.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
+    GetBackupPlanOutput.add_member(:scheduled_runs_preview, Shapes::ShapeRef.new(shape: ScheduledRunsPreview, location_name: "ScheduledRunsPreview"))
     GetBackupPlanOutput.struct_class = Types::GetBackupPlanOutput
 
     GetBackupSelectionInput.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupPlanId"))
@@ -1141,6 +1276,12 @@ module Aws::Backup
     GetSupportedResourceTypesOutput.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypes, location_name: "ResourceTypes"))
     GetSupportedResourceTypesOutput.struct_class = Types::GetSupportedResourceTypesOutput
 
+    GetTieringConfigurationInput.add_member(:tiering_configuration_name, Shapes::ShapeRef.new(shape: TieringConfigurationName, required: true, location: "uri", location_name: "tieringConfigurationName"))
+    GetTieringConfigurationInput.struct_class = Types::GetTieringConfigurationInput
+
+    GetTieringConfigurationOutput.add_member(:tiering_configuration, Shapes::ShapeRef.new(shape: TieringConfiguration, location_name: "TieringConfiguration"))
+    GetTieringConfigurationOutput.struct_class = Types::GetTieringConfigurationOutput
+
     GlobalSettings.key = Shapes::ShapeRef.new(shape: GlobalSettingsName)
     GlobalSettings.value = Shapes::ShapeRef.new(shape: GlobalSettingsValue)
 
@@ -1214,6 +1355,7 @@ module Aws::Backup
     Lifecycle.add_member(:move_to_cold_storage_after_days, Shapes::ShapeRef.new(shape: Long, location_name: "MoveToColdStorageAfterDays"))
     Lifecycle.add_member(:delete_after_days, Shapes::ShapeRef.new(shape: Long, location_name: "DeleteAfterDays"))
     Lifecycle.add_member(:opt_in_to_archive_for_supported_resources, Shapes::ShapeRef.new(shape: Boolean, location_name: "OptInToArchiveForSupportedResources"))
+    Lifecycle.add_member(:delete_after_event, Shapes::ShapeRef.new(shape: LifecycleDeleteAfterEvent, location_name: "DeleteAfterEvent"))
     Lifecycle.struct_class = Types::Lifecycle
 
     LimitExceededException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
@@ -1327,6 +1469,7 @@ module Aws::Backup
     ListCopyJobsInput.add_member(:by_complete_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeAfter"))
     ListCopyJobsInput.add_member(:by_parent_job_id, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "parentJobId"))
     ListCopyJobsInput.add_member(:by_message_category, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "messageCategory"))
+    ListCopyJobsInput.add_member(:by_source_recovery_point_arn, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "sourceRecoveryPointArn"))
     ListCopyJobsInput.struct_class = Types::ListCopyJobsInput
 
     ListCopyJobsOutput.add_member(:copy_jobs, Shapes::ShapeRef.new(shape: CopyJobsList, location_name: "CopyJobs"))
@@ -1481,6 +1624,7 @@ module Aws::Backup
     ListRestoreJobsInput.add_member(:by_complete_before, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeBefore"))
     ListRestoreJobsInput.add_member(:by_complete_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "completeAfter"))
     ListRestoreJobsInput.add_member(:by_restore_testing_plan_arn, Shapes::ShapeRef.new(shape: ARN, location: "querystring", location_name: "restoreTestingPlanArn"))
+    ListRestoreJobsInput.add_member(:by_parent_job_id, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "parentJobId"))
     ListRestoreJobsInput.struct_class = Types::ListRestoreJobsInput
 
     ListRestoreJobsOutput.add_member(:restore_jobs, Shapes::ShapeRef.new(shape: RestoreJobsList, location_name: "RestoreJobs"))
@@ -1504,6 +1648,39 @@ module Aws::Backup
     ListRestoreTestingSelectionsOutput.add_member(:restore_testing_selections, Shapes::ShapeRef.new(shape: RestoreTestingSelections, required: true, location_name: "RestoreTestingSelections"))
     ListRestoreTestingSelectionsOutput.struct_class = Types::ListRestoreTestingSelectionsOutput
 
+    ListScanJobSummariesInput.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "AccountId"))
+    ListScanJobSummariesInput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location: "querystring", location_name: "ResourceType"))
+    ListScanJobSummariesInput.add_member(:malware_scanner, Shapes::ShapeRef.new(shape: MalwareScanner, location: "querystring", location_name: "MalwareScanner"))
+    ListScanJobSummariesInput.add_member(:scan_result_status, Shapes::ShapeRef.new(shape: ScanResultStatus, location: "querystring", location_name: "ScanResultStatus"))
+    ListScanJobSummariesInput.add_member(:state, Shapes::ShapeRef.new(shape: ScanJobStatus, location: "querystring", location_name: "State"))
+    ListScanJobSummariesInput.add_member(:aggregation_period, Shapes::ShapeRef.new(shape: AggregationPeriod, location: "querystring", location_name: "AggregationPeriod"))
+    ListScanJobSummariesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListScanJobSummariesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "NextToken"))
+    ListScanJobSummariesInput.struct_class = Types::ListScanJobSummariesInput
+
+    ListScanJobSummariesOutput.add_member(:scan_job_summaries, Shapes::ShapeRef.new(shape: ScanJobSummaryList, location_name: "ScanJobSummaries"))
+    ListScanJobSummariesOutput.add_member(:aggregation_period, Shapes::ShapeRef.new(shape: string, location_name: "AggregationPeriod"))
+    ListScanJobSummariesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
+    ListScanJobSummariesOutput.struct_class = Types::ListScanJobSummariesOutput
+
+    ListScanJobsInput.add_member(:by_account_id, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "ByAccountId"))
+    ListScanJobsInput.add_member(:by_backup_vault_name, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "ByBackupVaultName"))
+    ListScanJobsInput.add_member(:by_complete_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "ByCompleteAfter"))
+    ListScanJobsInput.add_member(:by_complete_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "ByCompleteBefore"))
+    ListScanJobsInput.add_member(:by_malware_scanner, Shapes::ShapeRef.new(shape: MalwareScanner, location: "querystring", location_name: "ByMalwareScanner"))
+    ListScanJobsInput.add_member(:by_recovery_point_arn, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "ByRecoveryPointArn"))
+    ListScanJobsInput.add_member(:by_resource_arn, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "ByResourceArn"))
+    ListScanJobsInput.add_member(:by_resource_type, Shapes::ShapeRef.new(shape: ScanResourceType, location: "querystring", location_name: "ByResourceType"))
+    ListScanJobsInput.add_member(:by_scan_result_status, Shapes::ShapeRef.new(shape: ScanResultStatus, location: "querystring", location_name: "ByScanResultStatus"))
+    ListScanJobsInput.add_member(:by_state, Shapes::ShapeRef.new(shape: ScanState, location: "querystring", location_name: "ByState"))
+    ListScanJobsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListScanJobsInputMaxResultsInteger, location: "querystring", location_name: "MaxResults"))
+    ListScanJobsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "NextToken"))
+    ListScanJobsInput.struct_class = Types::ListScanJobsInput
+
+    ListScanJobsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListScanJobsOutput.add_member(:scan_jobs, Shapes::ShapeRef.new(shape: ScanJobs, required: true, location_name: "ScanJobs"))
+    ListScanJobsOutput.struct_class = Types::ListScanJobsOutput
+
     ListTagsInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
     ListTagsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1512,6 +1689,14 @@ module Aws::Backup
     ListTagsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
     ListTagsOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ListTagsOutput.struct_class = Types::ListTagsOutput
+
+    ListTieringConfigurationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListTieringConfigurationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
+    ListTieringConfigurationsInput.struct_class = Types::ListTieringConfigurationsInput
+
+    ListTieringConfigurationsOutput.add_member(:tiering_configurations, Shapes::ShapeRef.new(shape: TieringConfigurationsList, location_name: "TieringConfigurations"))
+    ListTieringConfigurationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
+    ListTieringConfigurationsOutput.struct_class = Types::ListTieringConfigurationsOutput
 
     Metadata.key = Shapes::ShapeRef.new(shape: MetadataKey)
     Metadata.value = Shapes::ShapeRef.new(shape: MetadataValue)
@@ -1582,6 +1767,8 @@ module Aws::Backup
     RecoveryPointByBackupVault.add_member(:vault_type, Shapes::ShapeRef.new(shape: VaultType, location_name: "VaultType"))
     RecoveryPointByBackupVault.add_member(:index_status, Shapes::ShapeRef.new(shape: IndexStatus, location_name: "IndexStatus"))
     RecoveryPointByBackupVault.add_member(:index_status_message, Shapes::ShapeRef.new(shape: string, location_name: "IndexStatusMessage"))
+    RecoveryPointByBackupVault.add_member(:encryption_key_type, Shapes::ShapeRef.new(shape: EncryptionKeyType, location_name: "EncryptionKeyType"))
+    RecoveryPointByBackupVault.add_member(:aggregated_scan_result, Shapes::ShapeRef.new(shape: AggregatedScanResult, location_name: "AggregatedScanResult"))
     RecoveryPointByBackupVault.struct_class = Types::RecoveryPointByBackupVault
 
     RecoveryPointByBackupVaultList.member = Shapes::ShapeRef.new(shape: RecoveryPointByBackupVault)
@@ -1599,14 +1786,20 @@ module Aws::Backup
     RecoveryPointByResource.add_member(:vault_type, Shapes::ShapeRef.new(shape: VaultType, location_name: "VaultType"))
     RecoveryPointByResource.add_member(:index_status, Shapes::ShapeRef.new(shape: IndexStatus, location_name: "IndexStatus"))
     RecoveryPointByResource.add_member(:index_status_message, Shapes::ShapeRef.new(shape: string, location_name: "IndexStatusMessage"))
+    RecoveryPointByResource.add_member(:encryption_key_type, Shapes::ShapeRef.new(shape: EncryptionKeyType, location_name: "EncryptionKeyType"))
+    RecoveryPointByResource.add_member(:aggregated_scan_result, Shapes::ShapeRef.new(shape: AggregatedScanResult, location_name: "AggregatedScanResult"))
     RecoveryPointByResource.struct_class = Types::RecoveryPointByResource
 
     RecoveryPointByResourceList.member = Shapes::ShapeRef.new(shape: RecoveryPointByResource)
 
     RecoveryPointCreator.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: string, location_name: "BackupPlanId"))
     RecoveryPointCreator.add_member(:backup_plan_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupPlanArn"))
+    RecoveryPointCreator.add_member(:backup_plan_name, Shapes::ShapeRef.new(shape: string, location_name: "BackupPlanName"))
     RecoveryPointCreator.add_member(:backup_plan_version, Shapes::ShapeRef.new(shape: string, location_name: "BackupPlanVersion"))
     RecoveryPointCreator.add_member(:backup_rule_id, Shapes::ShapeRef.new(shape: string, location_name: "BackupRuleId"))
+    RecoveryPointCreator.add_member(:backup_rule_name, Shapes::ShapeRef.new(shape: string, location_name: "BackupRuleName"))
+    RecoveryPointCreator.add_member(:backup_rule_cron, Shapes::ShapeRef.new(shape: string, location_name: "BackupRuleCron"))
+    RecoveryPointCreator.add_member(:backup_rule_timezone, Shapes::ShapeRef.new(shape: string, location_name: "BackupRuleTimezone"))
     RecoveryPointCreator.struct_class = Types::RecoveryPointCreator
 
     RecoveryPointMember.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
@@ -1674,6 +1867,13 @@ module Aws::Backup
     ResourceNotFoundException.add_member(:context, Shapes::ShapeRef.new(shape: string, location_name: "Context"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    ResourceSelection.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceArns, required: true, location_name: "Resources"))
+    ResourceSelection.add_member(:tiering_down_settings_in_days, Shapes::ShapeRef.new(shape: TieringDownSettingsInDays, required: true, location_name: "TieringDownSettingsInDays"))
+    ResourceSelection.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
+    ResourceSelection.struct_class = Types::ResourceSelection
+
+    ResourceSelections.member = Shapes::ShapeRef.new(shape: ResourceSelection)
+
     ResourceTypeList.member = Shapes::ShapeRef.new(shape: ARN)
 
     ResourceTypeManagementPreference.key = Shapes::ShapeRef.new(shape: ResourceType)
@@ -1712,6 +1912,8 @@ module Aws::Backup
     RestoreJobsListMember.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     RestoreJobsListMember.add_member(:restore_job_id, Shapes::ShapeRef.new(shape: string, location_name: "RestoreJobId"))
     RestoreJobsListMember.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
+    RestoreJobsListMember.add_member(:source_resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SourceResourceArn"))
+    RestoreJobsListMember.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "BackupVaultArn"))
     RestoreJobsListMember.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     RestoreJobsListMember.add_member(:completion_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CompletionDate"))
     RestoreJobsListMember.add_member(:status, Shapes::ShapeRef.new(shape: RestoreJobStatus, location_name: "Status"))
@@ -1723,6 +1925,8 @@ module Aws::Backup
     RestoreJobsListMember.add_member(:created_resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "CreatedResourceArn"))
     RestoreJobsListMember.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     RestoreJobsListMember.add_member(:recovery_point_creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "RecoveryPointCreationDate"))
+    RestoreJobsListMember.add_member(:is_parent, Shapes::ShapeRef.new(shape: boolean, location_name: "IsParent"))
+    RestoreJobsListMember.add_member(:parent_job_id, Shapes::ShapeRef.new(shape: string, location_name: "ParentJobId"))
     RestoreJobsListMember.add_member(:created_by, Shapes::ShapeRef.new(shape: RestoreJobCreator, location_name: "CreatedBy"))
     RestoreJobsListMember.add_member(:validation_status, Shapes::ShapeRef.new(shape: RestoreValidationStatus, location_name: "ValidationStatus"))
     RestoreJobsListMember.add_member(:validation_status_message, Shapes::ShapeRef.new(shape: string, location_name: "ValidationStatusMessage"))
@@ -1819,6 +2023,82 @@ module Aws::Backup
     RevokeRestoreAccessBackupVaultInput.add_member(:requester_comment, Shapes::ShapeRef.new(shape: RequesterComment, location: "querystring", location_name: "requesterComment"))
     RevokeRestoreAccessBackupVaultInput.struct_class = Types::RevokeRestoreAccessBackupVaultInput
 
+    ScanAction.add_member(:malware_scanner, Shapes::ShapeRef.new(shape: MalwareScanner, location_name: "MalwareScanner"))
+    ScanAction.add_member(:scan_mode, Shapes::ShapeRef.new(shape: ScanMode, location_name: "ScanMode"))
+    ScanAction.struct_class = Types::ScanAction
+
+    ScanActions.member = Shapes::ShapeRef.new(shape: ScanAction)
+
+    ScanFindings.member = Shapes::ShapeRef.new(shape: ScanFinding)
+
+    ScanJob.add_member(:account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AccountId"))
+    ScanJob.add_member(:backup_vault_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "BackupVaultArn"))
+    ScanJob.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "BackupVaultName"))
+    ScanJob.add_member(:completion_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompletionDate"))
+    ScanJob.add_member(:created_by, Shapes::ShapeRef.new(shape: ScanJobCreator, required: true, location_name: "CreatedBy"))
+    ScanJob.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationDate"))
+    ScanJob.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IamRoleArn"))
+    ScanJob.add_member(:malware_scanner, Shapes::ShapeRef.new(shape: MalwareScanner, required: true, location_name: "MalwareScanner"))
+    ScanJob.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RecoveryPointArn"))
+    ScanJob.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
+    ScanJob.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceName"))
+    ScanJob.add_member(:resource_type, Shapes::ShapeRef.new(shape: ScanResourceType, required: true, location_name: "ResourceType"))
+    ScanJob.add_member(:scan_base_recovery_point_arn, Shapes::ShapeRef.new(shape: String, location_name: "ScanBaseRecoveryPointArn"))
+    ScanJob.add_member(:scan_id, Shapes::ShapeRef.new(shape: String, location_name: "ScanId"))
+    ScanJob.add_member(:scan_job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScanJobId"))
+    ScanJob.add_member(:scan_mode, Shapes::ShapeRef.new(shape: ScanMode, required: true, location_name: "ScanMode"))
+    ScanJob.add_member(:scan_result, Shapes::ShapeRef.new(shape: ScanResultInfo, location_name: "ScanResult"))
+    ScanJob.add_member(:scanner_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScannerRoleArn"))
+    ScanJob.add_member(:state, Shapes::ShapeRef.new(shape: ScanState, location_name: "State"))
+    ScanJob.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    ScanJob.struct_class = Types::ScanJob
+
+    ScanJobCreator.add_member(:backup_plan_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "BackupPlanArn"))
+    ScanJobCreator.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "BackupPlanId"))
+    ScanJobCreator.add_member(:backup_plan_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "BackupPlanVersion"))
+    ScanJobCreator.add_member(:backup_rule_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "BackupRuleId"))
+    ScanJobCreator.struct_class = Types::ScanJobCreator
+
+    ScanJobSummary.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "Region"))
+    ScanJobSummary.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    ScanJobSummary.add_member(:state, Shapes::ShapeRef.new(shape: ScanJobStatus, location_name: "State"))
+    ScanJobSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    ScanJobSummary.add_member(:count, Shapes::ShapeRef.new(shape: integer, location_name: "Count"))
+    ScanJobSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "StartTime"))
+    ScanJobSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "EndTime"))
+    ScanJobSummary.add_member(:malware_scanner, Shapes::ShapeRef.new(shape: MalwareScanner, location_name: "MalwareScanner"))
+    ScanJobSummary.add_member(:scan_result_status, Shapes::ShapeRef.new(shape: ScanResultStatus, location_name: "ScanResultStatus"))
+    ScanJobSummary.struct_class = Types::ScanJobSummary
+
+    ScanJobSummaryList.member = Shapes::ShapeRef.new(shape: ScanJobSummary)
+
+    ScanJobs.member = Shapes::ShapeRef.new(shape: ScanJob)
+
+    ScanResult.add_member(:malware_scanner, Shapes::ShapeRef.new(shape: MalwareScanner, location_name: "MalwareScanner"))
+    ScanResult.add_member(:scan_job_state, Shapes::ShapeRef.new(shape: ScanJobState, location_name: "ScanJobState"))
+    ScanResult.add_member(:last_scan_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastScanTimestamp"))
+    ScanResult.add_member(:findings, Shapes::ShapeRef.new(shape: ScanFindings, location_name: "Findings"))
+    ScanResult.struct_class = Types::ScanResult
+
+    ScanResultInfo.add_member(:scan_result_status, Shapes::ShapeRef.new(shape: ScanResultStatus, required: true, location_name: "ScanResultStatus"))
+    ScanResultInfo.struct_class = Types::ScanResultInfo
+
+    ScanResults.member = Shapes::ShapeRef.new(shape: ScanResult)
+
+    ScanSetting.add_member(:malware_scanner, Shapes::ShapeRef.new(shape: MalwareScanner, location_name: "MalwareScanner"))
+    ScanSetting.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypes, location_name: "ResourceTypes"))
+    ScanSetting.add_member(:scanner_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "ScannerRoleArn"))
+    ScanSetting.struct_class = Types::ScanSetting
+
+    ScanSettings.member = Shapes::ShapeRef.new(shape: ScanSetting)
+
+    ScheduledPlanExecutionMember.add_member(:execution_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "ExecutionTime"))
+    ScheduledPlanExecutionMember.add_member(:rule_id, Shapes::ShapeRef.new(shape: string, location_name: "RuleId"))
+    ScheduledPlanExecutionMember.add_member(:rule_execution_type, Shapes::ShapeRef.new(shape: RuleExecutionType, location_name: "RuleExecutionType"))
+    ScheduledPlanExecutionMember.struct_class = Types::ScheduledPlanExecutionMember
+
+    ScheduledRunsPreview.member = Shapes::ShapeRef.new(shape: ScheduledPlanExecutionMember)
+
     SensitiveStringMap.key = Shapes::ShapeRef.new(shape: String)
     SensitiveStringMap.value = Shapes::ShapeRef.new(shape: String)
 
@@ -1829,6 +2109,7 @@ module Aws::Backup
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
     StartBackupJobInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location_name: "BackupVaultName"))
+    StartBackupJobInput.add_member(:logically_air_gapped_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "LogicallyAirGappedBackupVaultArn"))
     StartBackupJobInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ResourceArn"))
     StartBackupJobInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "IamRoleArn"))
     StartBackupJobInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken", metadata: {"idempotencyToken" => true}))
@@ -1877,6 +2158,20 @@ module Aws::Backup
     StartRestoreJobOutput.add_member(:restore_job_id, Shapes::ShapeRef.new(shape: RestoreJobId, location_name: "RestoreJobId"))
     StartRestoreJobOutput.struct_class = Types::StartRestoreJobOutput
 
+    StartScanJobInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "BackupVaultName"))
+    StartScanJobInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IamRoleArn"))
+    StartScanJobInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: String, location_name: "IdempotencyToken"))
+    StartScanJobInput.add_member(:malware_scanner, Shapes::ShapeRef.new(shape: MalwareScanner, required: true, location_name: "MalwareScanner"))
+    StartScanJobInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RecoveryPointArn"))
+    StartScanJobInput.add_member(:scan_base_recovery_point_arn, Shapes::ShapeRef.new(shape: String, location_name: "ScanBaseRecoveryPointArn"))
+    StartScanJobInput.add_member(:scan_mode, Shapes::ShapeRef.new(shape: ScanMode, required: true, location_name: "ScanMode"))
+    StartScanJobInput.add_member(:scanner_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScannerRoleArn"))
+    StartScanJobInput.struct_class = Types::StartScanJobInput
+
+    StartScanJobOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationDate"))
+    StartScanJobOutput.add_member(:scan_job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScanJobId"))
+    StartScanJobOutput.struct_class = Types::StartScanJobOutput
+
     StopBackupJobInput.add_member(:backup_job_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupJobId"))
     StopBackupJobInput.struct_class = Types::StopBackupJobInput
 
@@ -1888,6 +2183,33 @@ module Aws::Backup
 
     Tags.key = Shapes::ShapeRef.new(shape: TagKey)
     Tags.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TieringConfiguration.add_member(:tiering_configuration_name, Shapes::ShapeRef.new(shape: TieringConfigurationName, required: true, location_name: "TieringConfigurationName"))
+    TieringConfiguration.add_member(:tiering_configuration_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "TieringConfigurationArn"))
+    TieringConfiguration.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultNameOrWildcard, required: true, location_name: "BackupVaultName"))
+    TieringConfiguration.add_member(:resource_selection, Shapes::ShapeRef.new(shape: ResourceSelections, required: true, location_name: "ResourceSelection"))
+    TieringConfiguration.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: CreatorRequestId, location_name: "CreatorRequestId"))
+    TieringConfiguration.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
+    TieringConfiguration.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdatedTime"))
+    TieringConfiguration.struct_class = Types::TieringConfiguration
+
+    TieringConfigurationInputForCreate.add_member(:tiering_configuration_name, Shapes::ShapeRef.new(shape: TieringConfigurationName, required: true, location_name: "TieringConfigurationName"))
+    TieringConfigurationInputForCreate.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultNameOrWildcard, required: true, location_name: "BackupVaultName"))
+    TieringConfigurationInputForCreate.add_member(:resource_selection, Shapes::ShapeRef.new(shape: ResourceSelections, required: true, location_name: "ResourceSelection"))
+    TieringConfigurationInputForCreate.struct_class = Types::TieringConfigurationInputForCreate
+
+    TieringConfigurationInputForUpdate.add_member(:resource_selection, Shapes::ShapeRef.new(shape: ResourceSelections, required: true, location_name: "ResourceSelection"))
+    TieringConfigurationInputForUpdate.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultNameOrWildcard, required: true, location_name: "BackupVaultName"))
+    TieringConfigurationInputForUpdate.struct_class = Types::TieringConfigurationInputForUpdate
+
+    TieringConfigurationsList.member = Shapes::ShapeRef.new(shape: TieringConfigurationsListMember)
+
+    TieringConfigurationsListMember.add_member(:tiering_configuration_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "TieringConfigurationArn"))
+    TieringConfigurationsListMember.add_member(:tiering_configuration_name, Shapes::ShapeRef.new(shape: TieringConfigurationName, location_name: "TieringConfigurationName"))
+    TieringConfigurationsListMember.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultNameOrWildcard, location_name: "BackupVaultName"))
+    TieringConfigurationsListMember.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
+    TieringConfigurationsListMember.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdatedTime"))
+    TieringConfigurationsListMember.struct_class = Types::TieringConfigurationsListMember
 
     UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceInput.add_member(:tag_key_list, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeyList"))
@@ -1902,6 +2224,7 @@ module Aws::Backup
     UpdateBackupPlanOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     UpdateBackupPlanOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: string, location_name: "VersionId"))
     UpdateBackupPlanOutput.add_member(:advanced_backup_settings, Shapes::ShapeRef.new(shape: AdvancedBackupSettings, location_name: "AdvancedBackupSettings"))
+    UpdateBackupPlanOutput.add_member(:scan_settings, Shapes::ShapeRef.new(shape: ScanSettings, location_name: "ScanSettings"))
     UpdateBackupPlanOutput.struct_class = Types::UpdateBackupPlanOutput
 
     UpdateFrameworkInput.add_member(:framework_name, Shapes::ShapeRef.new(shape: FrameworkName, required: true, location: "uri", location_name: "frameworkName"))
@@ -1978,6 +2301,16 @@ module Aws::Backup
     UpdateRestoreTestingSelectionOutput.add_member(:restore_testing_selection_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RestoreTestingSelectionName"))
     UpdateRestoreTestingSelectionOutput.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
     UpdateRestoreTestingSelectionOutput.struct_class = Types::UpdateRestoreTestingSelectionOutput
+
+    UpdateTieringConfigurationInput.add_member(:tiering_configuration_name, Shapes::ShapeRef.new(shape: TieringConfigurationName, required: true, location: "uri", location_name: "tieringConfigurationName"))
+    UpdateTieringConfigurationInput.add_member(:tiering_configuration, Shapes::ShapeRef.new(shape: TieringConfigurationInputForUpdate, required: true, location_name: "TieringConfiguration"))
+    UpdateTieringConfigurationInput.struct_class = Types::UpdateTieringConfigurationInput
+
+    UpdateTieringConfigurationOutput.add_member(:tiering_configuration_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "TieringConfigurationArn"))
+    UpdateTieringConfigurationOutput.add_member(:tiering_configuration_name, Shapes::ShapeRef.new(shape: TieringConfigurationName, location_name: "TieringConfigurationName"))
+    UpdateTieringConfigurationOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
+    UpdateTieringConfigurationOutput.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdatedTime"))
+    UpdateTieringConfigurationOutput.struct_class = Types::UpdateTieringConfigurationOutput
 
     VaultNames.member = Shapes::ShapeRef.new(shape: string)
 
@@ -2165,6 +2498,20 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:create_tiering_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTieringConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/tiering-configurations"
+        o.input = Shapes::ShapeRef.new(shape: CreateTieringConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateTieringConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:delete_backup_plan, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBackupPlan"
         o.http_method = "DELETE"
@@ -2300,6 +2647,18 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:delete_tiering_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTieringConfiguration"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tiering-configurations/{tieringConfigurationName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTieringConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTieringConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:describe_backup_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeBackupJob"
         o.http_method = "GET"
@@ -2426,6 +2785,18 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyFailureException)
+      end)
+
+      api.add_operation(:describe_scan_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeScanJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/scan/jobs/{ScanJobId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeScanJobInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeScanJobOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:disassociate_backup_vault_mpa_approval_team, Seahorse::Model::Operation.new.tap do |o|
@@ -2639,6 +3010,18 @@ module Aws::Backup
         o.http_request_uri = "/supported-resource-types"
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: GetSupportedResourceTypesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:get_tiering_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTieringConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/tiering-configurations/{tieringConfigurationName}"
+        o.input = Shapes::ShapeRef.new(shape: GetTieringConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: GetTieringConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
@@ -3067,6 +3450,38 @@ module Aws::Backup
         )
       end)
 
+      api.add_operation(:list_scan_job_summaries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListScanJobSummaries"
+        o.http_method = "GET"
+        o.http_request_uri = "/audit/scan-job-summaries"
+        o.input = Shapes::ShapeRef.new(shape: ListScanJobSummariesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListScanJobSummariesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_scan_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListScanJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/scan/jobs"
+        o.input = Shapes::ShapeRef.new(shape: ListScanJobsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListScanJobsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTags"
         o.http_method = "GET"
@@ -3076,6 +3491,22 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_tiering_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTieringConfigurations"
+        o.http_method = "GET"
+        o.http_request_uri = "/tiering-configurations/"
+        o.input = Shapes::ShapeRef.new(shape: ListTieringConfigurationsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTieringConfigurationsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -3199,6 +3630,20 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:start_scan_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartScanJob"
+        o.http_method = "PUT"
+        o.http_request_uri = "/scan/job"
+        o.input = Shapes::ShapeRef.new(shape: StartScanJobInput)
+        o.output = Shapes::ShapeRef.new(shape: StartScanJobOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:stop_backup_job, Seahorse::Model::Operation.new.tap do |o|
@@ -3351,6 +3796,21 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:update_tiering_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTieringConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/tiering-configurations/{tieringConfigurationName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateTieringConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateTieringConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
     end

@@ -32,6 +32,63 @@ module Aws::PrometheusService
       SENSITIVE: []
     end
 
+    class AnomalyDetectorConfiguration
+      attr_accessor random_cut_forest: Types::RandomCutForestConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RandomCutForest < AnomalyDetectorConfiguration
+      end
+      class Unknown < AnomalyDetectorConfiguration
+      end
+    end
+
+    class AnomalyDetectorDescription
+      attr_accessor arn: ::String
+      attr_accessor anomaly_detector_id: ::String
+      attr_accessor alias: ::String
+      attr_accessor evaluation_interval_in_seconds: ::Integer
+      attr_accessor missing_data_action: Types::AnomalyDetectorMissingDataAction
+      attr_accessor configuration: Types::AnomalyDetectorConfiguration
+      attr_accessor labels: ::Hash[::String, ::String]
+      attr_accessor status: Types::AnomalyDetectorStatus
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AnomalyDetectorMissingDataAction
+      attr_accessor mark_as_anomaly: bool
+      attr_accessor skip: bool
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MarkAsAnomaly < AnomalyDetectorMissingDataAction
+      end
+      class Skip < AnomalyDetectorMissingDataAction
+      end
+      class Unknown < AnomalyDetectorMissingDataAction
+      end
+    end
+
+    class AnomalyDetectorStatus
+      attr_accessor status_code: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATION_FAILED" | "UPDATE_FAILED" | "DELETION_FAILED")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class AnomalyDetectorSummary
+      attr_accessor arn: ::String
+      attr_accessor anomaly_detector_id: ::String
+      attr_accessor alias: ::String
+      attr_accessor status: Types::AnomalyDetectorStatus
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class CloudWatchLogDestination
       attr_accessor log_group_arn: ::String
       SENSITIVE: []
@@ -58,6 +115,26 @@ module Aws::PrometheusService
 
     class CreateAlertManagerDefinitionResponse
       attr_accessor status: Types::AlertManagerDefinitionStatus
+      SENSITIVE: []
+    end
+
+    class CreateAnomalyDetectorRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor alias: ::String
+      attr_accessor evaluation_interval_in_seconds: ::Integer
+      attr_accessor missing_data_action: Types::AnomalyDetectorMissingDataAction
+      attr_accessor configuration: Types::AnomalyDetectorConfiguration
+      attr_accessor labels: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAnomalyDetectorResponse
+      attr_accessor anomaly_detector_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: Types::AnomalyDetectorStatus
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -144,6 +221,13 @@ module Aws::PrometheusService
       SENSITIVE: []
     end
 
+    class DeleteAnomalyDetectorRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor anomaly_detector_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
     class DeleteLoggingConfigurationRequest
       attr_accessor workspace_id: ::String
       attr_accessor client_token: ::String
@@ -201,6 +285,17 @@ module Aws::PrometheusService
 
     class DescribeAlertManagerDefinitionResponse
       attr_accessor alert_manager_definition: Types::AlertManagerDefinitionDescription
+      SENSITIVE: []
+    end
+
+    class DescribeAnomalyDetectorRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor anomaly_detector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAnomalyDetectorResponse
+      attr_accessor anomaly_detector: Types::AnomalyDetectorDescription
       SENSITIVE: []
     end
 
@@ -317,6 +412,20 @@ module Aws::PrometheusService
       SENSITIVE: []
     end
 
+    class IgnoreNearExpected
+      attr_accessor amount: ::Float
+      attr_accessor ratio: ::Float
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Amount < IgnoreNearExpected
+      end
+      class Ratio < IgnoreNearExpected
+      end
+      class Unknown < IgnoreNearExpected
+      end
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       attr_accessor retry_after_seconds: ::Integer
@@ -331,6 +440,20 @@ module Aws::PrometheusService
 
     class LimitsPerLabelSetEntry
       attr_accessor max_series: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAnomalyDetectorsRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor alias: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnomalyDetectorsResponse
+      attr_accessor anomaly_detectors: ::Array[Types::AnomalyDetectorSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -422,6 +545,25 @@ module Aws::PrometheusService
       SENSITIVE: []
     end
 
+    class PutAnomalyDetectorRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor anomaly_detector_id: ::String
+      attr_accessor evaluation_interval_in_seconds: ::Integer
+      attr_accessor missing_data_action: Types::AnomalyDetectorMissingDataAction
+      attr_accessor configuration: Types::AnomalyDetectorConfiguration
+      attr_accessor labels: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class PutAnomalyDetectorResponse
+      attr_accessor anomaly_detector_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: Types::AnomalyDetectorStatus
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class PutResourcePolicyRequest
       attr_accessor workspace_id: ::String
       attr_accessor policy_document: ::String
@@ -464,6 +606,15 @@ module Aws::PrometheusService
     class QueryLoggingConfigurationStatus
       attr_accessor status_code: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATION_FAILED" | "UPDATE_FAILED")
       attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class RandomCutForestConfiguration
+      attr_accessor query: ::String
+      attr_accessor shingle_size: ::Integer
+      attr_accessor sample_size: ::Integer
+      attr_accessor ignore_near_expected_from_above: Types::IgnoreNearExpected
+      attr_accessor ignore_near_expected_from_below: Types::IgnoreNearExpected
       SENSITIVE: []
     end
 
@@ -590,10 +741,13 @@ module Aws::PrometheusService
 
     class Source
       attr_accessor eks_configuration: Types::EksConfiguration
+      attr_accessor vpc_configuration: Types::VpcConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class EksConfiguration < Source
+      end
+      class VpcConfiguration < Source
       end
       class Unknown < Source
       end
@@ -709,6 +863,12 @@ module Aws::PrometheusService
     class ValidationExceptionField
       attr_accessor name: ::String
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VpcConfiguration
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
       SENSITIVE: []
     end
 

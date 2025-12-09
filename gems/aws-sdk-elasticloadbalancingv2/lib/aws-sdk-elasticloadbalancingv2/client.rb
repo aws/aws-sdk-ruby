@@ -658,9 +658,9 @@ module Aws::ElasticLoadBalancingV2
     #   The protocol for connections from clients to the load balancer. For
     #   Application Load Balancers, the supported protocols are HTTP and
     #   HTTPS. For Network Load Balancers, the supported protocols are TCP,
-    #   TLS, UDP, and TCP\_UDP. You can’t specify the UDP or TCP\_UDP protocol
-    #   if dual-stack mode is enabled. You can't specify a protocol for a
-    #   Gateway Load Balancer.
+    #   TLS, UDP, TCP\_UDP, QUIC, and TCP\_QUIC. You can’t specify the UDP,
+    #   TCP\_UDP, QUIC, or TCP\_QUIC protocol if dual-stack mode is enabled.
+    #   You can't specify a protocol for a Gateway Load Balancer.
     #
     # @option params [Integer] :port
     #   The port on which the load balancer is listening. You can't specify a
@@ -713,7 +713,8 @@ module Aws::ElasticLoadBalancingV2
     #   The tags to assign to the listener.
     #
     # @option params [Types::MutualAuthenticationAttributes] :mutual_authentication
-    #   The mutual authentication configuration information.
+    #   \[HTTPS listeners\] The mutual authentication configuration
+    #   information.
     #
     # @return [Types::CreateListenerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -808,7 +809,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #   resp = client.create_listener({
     #     load_balancer_arn: "LoadBalancerArn", # required
-    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP, GENEVE
+    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP, GENEVE, QUIC, TCP_QUIC
     #     port: 1,
     #     ssl_policy: "SslPolicyName",
     #     certificates: [
@@ -819,7 +820,7 @@ module Aws::ElasticLoadBalancingV2
     #     ],
     #     default_actions: [ # required
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response, jwt-validation
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -875,6 +876,17 @@ module Aws::ElasticLoadBalancingV2
     #             duration_seconds: 1,
     #           },
     #         },
+    #         jwt_validation_config: {
+    #           jwks_endpoint: "JwtValidationActionJwksEndpoint", # required
+    #           issuer: "JwtValidationActionIssuer", # required
+    #           additional_claims: [
+    #             {
+    #               format: "single-string", # required, accepts single-string, string-array, space-separated-values
+    #               name: "JwtValidationActionAdditionalClaimName", # required
+    #               values: ["JwtValidationActionAdditionalClaimValue"], # required
+    #             },
+    #           ],
+    #         },
     #       },
     #     ],
     #     alpn_policy: ["AlpnPolicyValue"],
@@ -899,13 +911,13 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].listener_arn #=> String
     #   resp.listeners[0].load_balancer_arn #=> String
     #   resp.listeners[0].port #=> Integer
-    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE"
+    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE", "QUIC", "TCP_QUIC"
     #   resp.listeners[0].certificates #=> Array
     #   resp.listeners[0].certificates[0].certificate_arn #=> String
     #   resp.listeners[0].certificates[0].is_default #=> Boolean
     #   resp.listeners[0].ssl_policy #=> String
     #   resp.listeners[0].default_actions #=> Array
-    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
+    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response", "jwt-validation"
     #   resp.listeners[0].default_actions[0].target_group_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -944,6 +956,13 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].forward_config.target_groups[0].weight #=> Integer
     #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
     #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.jwks_endpoint #=> String
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.issuer #=> String
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.additional_claims #=> Array
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.additional_claims[0].format #=> String, one of "single-string", "string-array", "space-separated-values"
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.additional_claims[0].name #=> String
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.additional_claims[0].values #=> Array
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.additional_claims[0].values[0] #=> String
     #   resp.listeners[0].alpn_policy #=> Array
     #   resp.listeners[0].alpn_policy[0] #=> String
     #   resp.listeners[0].mutual_authentication.mode #=> String
@@ -1258,12 +1277,13 @@ module Aws::ElasticLoadBalancingV2
     # Creates a rule for the specified listener. The listener must be
     # associated with an Application Load Balancer.
     #
-    # Each rule consists of a priority, one or more actions, and one or more
-    # conditions. Rules are evaluated in priority order, from the lowest
-    # value to the highest value. When the conditions for a rule are met,
-    # its actions are performed. If the conditions for no rules are met, the
-    # actions for the default rule are performed. For more information, see
-    # [Listener rules][1] in the *Application Load Balancers Guide*.
+    # Each rule consists of a priority, one or more actions, one or more
+    # conditions, and up to two optional transforms. Rules are evaluated in
+    # priority order, from the lowest value to the highest value. When the
+    # conditions for a rule are met, its actions are performed. If the
+    # conditions for no rules are met, the actions for the default rule are
+    # performed. For more information, see [Listener rules][1] in the
+    # *Application Load Balancers Guide*.
     #
     #
     #
@@ -1284,6 +1304,10 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to assign to the rule.
+    #
+    # @option params [Array<Types::RuleTransform>] :transforms
+    #   The transforms to apply to requests that match this rule. You can add
+    #   one host header rewrite transform and one URL rewrite transform.
     #
     # @return [Types::CreateRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1349,13 +1373,16 @@ module Aws::ElasticLoadBalancingV2
     #         values: ["StringValue"],
     #         host_header_config: {
     #           values: ["StringValue"],
+    #           regex_values: ["StringValue"],
     #         },
     #         path_pattern_config: {
     #           values: ["StringValue"],
+    #           regex_values: ["StringValue"],
     #         },
     #         http_header_config: {
     #           http_header_name: "HttpHeaderConditionName",
     #           values: ["StringValue"],
+    #           regex_values: ["StringValue"],
     #         },
     #         query_string_config: {
     #           values: [
@@ -1371,12 +1398,13 @@ module Aws::ElasticLoadBalancingV2
     #         source_ip_config: {
     #           values: ["StringValue"],
     #         },
+    #         regex_values: ["StringValue"],
     #       },
     #     ],
     #     priority: 1, # required
     #     actions: [ # required
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response, jwt-validation
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -1432,12 +1460,44 @@ module Aws::ElasticLoadBalancingV2
     #             duration_seconds: 1,
     #           },
     #         },
+    #         jwt_validation_config: {
+    #           jwks_endpoint: "JwtValidationActionJwksEndpoint", # required
+    #           issuer: "JwtValidationActionIssuer", # required
+    #           additional_claims: [
+    #             {
+    #               format: "single-string", # required, accepts single-string, string-array, space-separated-values
+    #               name: "JwtValidationActionAdditionalClaimName", # required
+    #               values: ["JwtValidationActionAdditionalClaimValue"], # required
+    #             },
+    #           ],
+    #         },
     #       },
     #     ],
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue",
+    #       },
+    #     ],
+    #     transforms: [
+    #       {
+    #         type: "host-header-rewrite", # required, accepts host-header-rewrite, url-rewrite
+    #         host_header_rewrite_config: {
+    #           rewrites: [
+    #             {
+    #               regex: "StringValue", # required
+    #               replace: "StringValue", # required
+    #             },
+    #           ],
+    #         },
+    #         url_rewrite_config: {
+    #           rewrites: [
+    #             {
+    #               regex: "StringValue", # required
+    #               replace: "StringValue", # required
+    #             },
+    #           ],
+    #         },
     #       },
     #     ],
     #   })
@@ -1453,11 +1513,17 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].values[0] #=> String
     #   resp.rules[0].conditions[0].host_header_config.values #=> Array
     #   resp.rules[0].conditions[0].host_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].host_header_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].host_header_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].path_pattern_config.values #=> Array
     #   resp.rules[0].conditions[0].path_pattern_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].path_pattern_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].path_pattern_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].http_header_config.http_header_name #=> String
     #   resp.rules[0].conditions[0].http_header_config.values #=> Array
     #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].http_header_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].http_header_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].query_string_config.values #=> Array
     #   resp.rules[0].conditions[0].query_string_config.values[0].key #=> String
     #   resp.rules[0].conditions[0].query_string_config.values[0].value #=> String
@@ -1465,8 +1531,10 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
     #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
     #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].regex_values #=> Array
+    #   resp.rules[0].conditions[0].regex_values[0] #=> String
     #   resp.rules[0].actions #=> Array
-    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
+    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response", "jwt-validation"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -1505,7 +1573,22 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].forward_config.target_groups[0].weight #=> Integer
     #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
     #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
+    #   resp.rules[0].actions[0].jwt_validation_config.jwks_endpoint #=> String
+    #   resp.rules[0].actions[0].jwt_validation_config.issuer #=> String
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims #=> Array
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims[0].format #=> String, one of "single-string", "string-array", "space-separated-values"
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims[0].name #=> String
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims[0].values #=> Array
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims[0].values[0] #=> String
     #   resp.rules[0].is_default #=> Boolean
+    #   resp.rules[0].transforms #=> Array
+    #   resp.rules[0].transforms[0].type #=> String, one of "host-header-rewrite", "url-rewrite"
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites #=> Array
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites[0].regex #=> String
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites[0].replace #=> String
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites #=> Array
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites[0].regex #=> String
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites[0].replace #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateRule AWS API Documentation
     #
@@ -1547,10 +1630,11 @@ module Aws::ElasticLoadBalancingV2
     #   The protocol to use for routing traffic to the targets. For
     #   Application Load Balancers, the supported protocols are HTTP and
     #   HTTPS. For Network Load Balancers, the supported protocols are TCP,
-    #   TLS, UDP, or TCP\_UDP. For Gateway Load Balancers, the supported
-    #   protocol is GENEVE. A TCP\_UDP listener must be associated with a
-    #   TCP\_UDP target group. If the target is a Lambda function, this
-    #   parameter does not apply.
+    #   TLS, UDP, TCP\_UDP, QUIC, or TCP\_QUIC. For Gateway Load Balancers,
+    #   the supported protocol is GENEVE. A TCP\_UDP listener must be
+    #   associated with a TCP\_UDP target group. A TCP\_QUIC listener must be
+    #   associated with a TCP\_QUIC target group. If the target is a Lambda
+    #   function, this parameter does not apply.
     #
     # @option params [String] :protocol_version
     #   \[HTTP/HTTPS protocol\] The protocol version. Specify `GRPC` to send
@@ -1574,15 +1658,15 @@ module Aws::ElasticLoadBalancingV2
     #   targets. For Application Load Balancers, the default is HTTP. For
     #   Network Load Balancers and Gateway Load Balancers, the default is TCP.
     #   The TCP protocol is not supported for health checks if the protocol of
-    #   the target group is HTTP or HTTPS. The GENEVE, TLS, UDP, and TCP\_UDP
-    #   protocols are not supported for health checks.
+    #   the target group is HTTP or HTTPS. The GENEVE, TLS, UDP, TCP\_UDP,
+    #   QUIC, and TCP\_QUIC protocols are not supported for health checks.
     #
     # @option params [String] :health_check_port
     #   The port the load balancer uses when performing health checks on
-    #   targets. If the protocol is HTTP, HTTPS, TCP, TLS, UDP, or TCP\_UDP,
-    #   the default is `traffic-port`, which is the port on which each target
-    #   receives traffic from the load balancer. If the protocol is GENEVE,
-    #   the default is port 80.
+    #   targets. If the protocol is HTTP, HTTPS, TCP, TLS, UDP, TCP\_UDP,
+    #   QUIC, or TCP\_QUIC the default is `traffic-port`, which is the port on
+    #   which each target receives traffic from the load balancer. If the
+    #   protocol is GENEVE, the default is port 80.
     #
     # @option params [Boolean] :health_check_enabled
     #   Indicates whether health checks are enabled. If the target type is
@@ -1603,9 +1687,10 @@ module Aws::ElasticLoadBalancingV2
     # @option params [Integer] :health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
     #   an individual target. The range is 5-300. If the target group protocol
-    #   is TCP, TLS, UDP, TCP\_UDP, HTTP or HTTPS, the default is 30 seconds.
-    #   If the target group protocol is GENEVE, the default is 10 seconds. If
-    #   the target type is `lambda`, the default is 35 seconds.
+    #   is TCP, TLS, UDP, TCP\_UDP, QUIC, TCP\_QUIC, HTTP or HTTPS, the
+    #   default is 30 seconds. If the target group protocol is GENEVE, the
+    #   default is 10 seconds. If the target type is `lambda`, the default is
+    #   35 seconds.
     #
     # @option params [Integer] :health_check_timeout_seconds
     #   The amount of time, in seconds, during which no response from a target
@@ -1625,16 +1710,17 @@ module Aws::ElasticLoadBalancingV2
     # @option params [Integer] :unhealthy_threshold_count
     #   The number of consecutive health check failures required before
     #   considering a target unhealthy. The range is 2-10. If the target group
-    #   protocol is TCP, TCP\_UDP, UDP, TLS, HTTP or HTTPS, the default is 2.
-    #   For target groups with a protocol of GENEVE, the default is 2. If the
-    #   target type is `lambda`, the default is 5.
+    #   protocol is TCP, TCP\_UDP, UDP, TLS, QUIC, TCP\_QUIC, HTTP or HTTPS,
+    #   the default is 2. For target groups with a protocol of GENEVE, the
+    #   default is 2. If the target type is `lambda`, the default is 5.
     #
     # @option params [Types::Matcher] :matcher
     #   \[HTTP/HTTPS health checks\] The HTTP or gRPC codes to use when
     #   checking for a successful response from a target. For target groups
-    #   with a protocol of TCP, TCP\_UDP, UDP or TLS the range is 200-599. For
-    #   target groups with a protocol of HTTP or HTTPS, the range is 200-499.
-    #   For target groups with a protocol of GENEVE, the range is 200-399.
+    #   with a protocol of TCP, TCP\_UDP, UDP, QUIC, TCP\_QUIC, or TLS the
+    #   range is 200-599. For target groups with a protocol of HTTP or HTTPS,
+    #   the range is 200-499. For target groups with a protocol of GENEVE, the
+    #   range is 200-399.
     #
     # @option params [String] :target_type
     #   The type of target that you must specify when registering targets with
@@ -1659,6 +1745,10 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [String] :ip_address_type
     #   The IP address type. The default value is `ipv4`.
+    #
+    # @option params [Integer] :target_control_port
+    #   The port on which the target control agent and application load
+    #   balancer exchange management traffic for the target optimizer feature.
     #
     # @return [Types::CreateTargetGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1704,11 +1794,11 @@ module Aws::ElasticLoadBalancingV2
     #
     #   resp = client.create_target_group({
     #     name: "TargetGroupName", # required
-    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP, GENEVE
+    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP, GENEVE, QUIC, TCP_QUIC
     #     protocol_version: "ProtocolVersion",
     #     port: 1,
     #     vpc_id: "VpcId",
-    #     health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP, GENEVE
+    #     health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP, GENEVE, QUIC, TCP_QUIC
     #     health_check_port: "HealthCheckPort",
     #     health_check_enabled: false,
     #     health_check_path: "Path",
@@ -1728,6 +1818,7 @@ module Aws::ElasticLoadBalancingV2
     #       },
     #     ],
     #     ip_address_type: "ipv4", # accepts ipv4, ipv6
+    #     target_control_port: 1,
     #   })
     #
     # @example Response structure
@@ -1735,10 +1826,10 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups #=> Array
     #   resp.target_groups[0].target_group_arn #=> String
     #   resp.target_groups[0].target_group_name #=> String
-    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE"
+    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE", "QUIC", "TCP_QUIC"
     #   resp.target_groups[0].port #=> Integer
     #   resp.target_groups[0].vpc_id #=> String
-    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE"
+    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE", "QUIC", "TCP_QUIC"
     #   resp.target_groups[0].health_check_port #=> String
     #   resp.target_groups[0].health_check_enabled #=> Boolean
     #   resp.target_groups[0].health_check_interval_seconds #=> Integer
@@ -1753,6 +1844,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].target_type #=> String, one of "instance", "ip", "lambda", "alb"
     #   resp.target_groups[0].protocol_version #=> String
     #   resp.target_groups[0].ip_address_type #=> String, one of "ipv4", "ipv6"
+    #   resp.target_groups[0].target_control_port #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTargetGroup AWS API Documentation
     #
@@ -2095,6 +2187,7 @@ module Aws::ElasticLoadBalancingV2
     #         id: "TargetId", # required
     #         port: 1,
     #         availability_zone: "ZoneName",
+    #         quic_server_id: "QuicServerId",
     #       },
     #     ],
     #   })
@@ -2370,13 +2463,13 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].listener_arn #=> String
     #   resp.listeners[0].load_balancer_arn #=> String
     #   resp.listeners[0].port #=> Integer
-    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE"
+    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE", "QUIC", "TCP_QUIC"
     #   resp.listeners[0].certificates #=> Array
     #   resp.listeners[0].certificates[0].certificate_arn #=> String
     #   resp.listeners[0].certificates[0].is_default #=> Boolean
     #   resp.listeners[0].ssl_policy #=> String
     #   resp.listeners[0].default_actions #=> Array
-    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
+    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response", "jwt-validation"
     #   resp.listeners[0].default_actions[0].target_group_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -2415,6 +2508,13 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].forward_config.target_groups[0].weight #=> Integer
     #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
     #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.jwks_endpoint #=> String
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.issuer #=> String
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.additional_claims #=> Array
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.additional_claims[0].format #=> String, one of "single-string", "string-array", "space-separated-values"
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.additional_claims[0].name #=> String
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.additional_claims[0].values #=> Array
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.additional_claims[0].values[0] #=> String
     #   resp.listeners[0].alpn_policy #=> Array
     #   resp.listeners[0].alpn_policy[0] #=> String
     #   resp.listeners[0].mutual_authentication.mode #=> String
@@ -2639,7 +2739,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Describes the specified rules or the rules for the specified listener.
-    # You must specify either a listener or one or more rules.
+    # You must specify either a listener or rules.
     #
     # @option params [String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
@@ -2717,11 +2817,17 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].values[0] #=> String
     #   resp.rules[0].conditions[0].host_header_config.values #=> Array
     #   resp.rules[0].conditions[0].host_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].host_header_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].host_header_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].path_pattern_config.values #=> Array
     #   resp.rules[0].conditions[0].path_pattern_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].path_pattern_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].path_pattern_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].http_header_config.http_header_name #=> String
     #   resp.rules[0].conditions[0].http_header_config.values #=> Array
     #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].http_header_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].http_header_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].query_string_config.values #=> Array
     #   resp.rules[0].conditions[0].query_string_config.values[0].key #=> String
     #   resp.rules[0].conditions[0].query_string_config.values[0].value #=> String
@@ -2729,8 +2835,10 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
     #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
     #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].regex_values #=> Array
+    #   resp.rules[0].conditions[0].regex_values[0] #=> String
     #   resp.rules[0].actions #=> Array
-    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
+    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response", "jwt-validation"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -2769,7 +2877,22 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].forward_config.target_groups[0].weight #=> Integer
     #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
     #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
+    #   resp.rules[0].actions[0].jwt_validation_config.jwks_endpoint #=> String
+    #   resp.rules[0].actions[0].jwt_validation_config.issuer #=> String
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims #=> Array
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims[0].format #=> String, one of "single-string", "string-array", "space-separated-values"
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims[0].name #=> String
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims[0].values #=> Array
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims[0].values[0] #=> String
     #   resp.rules[0].is_default #=> Boolean
+    #   resp.rules[0].transforms #=> Array
+    #   resp.rules[0].transforms[0].type #=> String, one of "host-header-rewrite", "url-rewrite"
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites #=> Array
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites[0].regex #=> String
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites[0].replace #=> String
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites #=> Array
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites[0].regex #=> String
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites[0].replace #=> String
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeRules AWS API Documentation
@@ -3169,10 +3292,10 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups #=> Array
     #   resp.target_groups[0].target_group_arn #=> String
     #   resp.target_groups[0].target_group_name #=> String
-    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE"
+    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE", "QUIC", "TCP_QUIC"
     #   resp.target_groups[0].port #=> Integer
     #   resp.target_groups[0].vpc_id #=> String
-    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE"
+    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE", "QUIC", "TCP_QUIC"
     #   resp.target_groups[0].health_check_port #=> String
     #   resp.target_groups[0].health_check_enabled #=> Boolean
     #   resp.target_groups[0].health_check_interval_seconds #=> Integer
@@ -3187,6 +3310,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].target_type #=> String, one of "instance", "ip", "lambda", "alb"
     #   resp.target_groups[0].protocol_version #=> String
     #   resp.target_groups[0].ip_address_type #=> String, one of "ipv4", "ipv6"
+    #   resp.target_groups[0].target_control_port #=> Integer
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetGroups AWS API Documentation
@@ -3289,6 +3413,7 @@ module Aws::ElasticLoadBalancingV2
     #         id: "TargetId", # required
     #         port: 1,
     #         availability_zone: "ZoneName",
+    #         quic_server_id: "QuicServerId",
     #       },
     #     ],
     #     include: ["AnomalyDetection"], # accepts AnomalyDetection, All
@@ -3300,6 +3425,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_health_descriptions[0].target.id #=> String
     #   resp.target_health_descriptions[0].target.port #=> Integer
     #   resp.target_health_descriptions[0].target.availability_zone #=> String
+    #   resp.target_health_descriptions[0].target.quic_server_id #=> String
     #   resp.target_health_descriptions[0].health_check_port #=> String
     #   resp.target_health_descriptions[0].target_health.state #=> String, one of "initial", "healthy", "unhealthy", "unhealthy.draining", "unused", "draining", "unavailable"
     #   resp.target_health_descriptions[0].target_health.reason #=> String, one of "Elb.RegistrationInProgress", "Elb.InitialHealthChecking", "Target.ResponseCodeMismatch", "Target.Timeout", "Target.FailedHealthChecks", "Target.NotRegistered", "Target.NotInUse", "Target.DeregistrationInProgress", "Target.InvalidState", "Target.IpUnusable", "Target.HealthCheckDisabled", "Elb.InternalError"
@@ -3683,10 +3809,10 @@ module Aws::ElasticLoadBalancingV2
     # @option params [String] :protocol
     #   The protocol for connections from clients to the load balancer.
     #   Application Load Balancers support the HTTP and HTTPS protocols.
-    #   Network Load Balancers support the TCP, TLS, UDP, and TCP\_UDP
-    #   protocols. You can’t change the protocol to UDP or TCP\_UDP if
-    #   dual-stack mode is enabled. You can't specify a protocol for a
-    #   Gateway Load Balancer.
+    #   Network Load Balancers support the TCP, TLS, UDP, TCP\_UDP, QUIC, and
+    #   TCP\_QUIC protocols. You can’t change the protocol to UDP, TCP\_UDP,
+    #   QUIC, or TCP\_QUIC if dual-stack mode is enabled. You can't specify a
+    #   protocol for a Gateway Load Balancer.
     #
     # @option params [String] :ssl_policy
     #   \[HTTPS and TLS listeners\] The security policy that defines which
@@ -3732,7 +3858,8 @@ module Aws::ElasticLoadBalancingV2
     #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html#alpn-policies
     #
     # @option params [Types::MutualAuthenticationAttributes] :mutual_authentication
-    #   The mutual authentication configuration information.
+    #   \[HTTPS listeners\] The mutual authentication configuration
+    #   information.
     #
     # @return [Types::ModifyListenerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3813,7 +3940,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp = client.modify_listener({
     #     listener_arn: "ListenerArn", # required
     #     port: 1,
-    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP, GENEVE
+    #     protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP, GENEVE, QUIC, TCP_QUIC
     #     ssl_policy: "SslPolicyName",
     #     certificates: [
     #       {
@@ -3823,7 +3950,7 @@ module Aws::ElasticLoadBalancingV2
     #     ],
     #     default_actions: [
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response, jwt-validation
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -3879,6 +4006,17 @@ module Aws::ElasticLoadBalancingV2
     #             duration_seconds: 1,
     #           },
     #         },
+    #         jwt_validation_config: {
+    #           jwks_endpoint: "JwtValidationActionJwksEndpoint", # required
+    #           issuer: "JwtValidationActionIssuer", # required
+    #           additional_claims: [
+    #             {
+    #               format: "single-string", # required, accepts single-string, string-array, space-separated-values
+    #               name: "JwtValidationActionAdditionalClaimName", # required
+    #               values: ["JwtValidationActionAdditionalClaimValue"], # required
+    #             },
+    #           ],
+    #         },
     #       },
     #     ],
     #     alpn_policy: ["AlpnPolicyValue"],
@@ -3897,13 +4035,13 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].listener_arn #=> String
     #   resp.listeners[0].load_balancer_arn #=> String
     #   resp.listeners[0].port #=> Integer
-    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE"
+    #   resp.listeners[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE", "QUIC", "TCP_QUIC"
     #   resp.listeners[0].certificates #=> Array
     #   resp.listeners[0].certificates[0].certificate_arn #=> String
     #   resp.listeners[0].certificates[0].is_default #=> Boolean
     #   resp.listeners[0].ssl_policy #=> String
     #   resp.listeners[0].default_actions #=> Array
-    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
+    #   resp.listeners[0].default_actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response", "jwt-validation"
     #   resp.listeners[0].default_actions[0].target_group_arn #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.listeners[0].default_actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -3942,6 +4080,13 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].forward_config.target_groups[0].weight #=> Integer
     #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
     #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.jwks_endpoint #=> String
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.issuer #=> String
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.additional_claims #=> Array
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.additional_claims[0].format #=> String, one of "single-string", "string-array", "space-separated-values"
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.additional_claims[0].name #=> String
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.additional_claims[0].values #=> Array
+    #   resp.listeners[0].default_actions[0].jwt_validation_config.additional_claims[0].values[0] #=> String
     #   resp.listeners[0].alpn_policy #=> Array
     #   resp.listeners[0].alpn_policy[0] #=> String
     #   resp.listeners[0].mutual_authentication.mode #=> String
@@ -4189,6 +4334,15 @@ module Aws::ElasticLoadBalancingV2
     # @option params [Array<Types::Action>] :actions
     #   The actions.
     #
+    # @option params [Array<Types::RuleTransform>] :transforms
+    #   The transforms to apply to requests that match this rule. You can add
+    #   one host header rewrite transform and one URL rewrite transform. If
+    #   you specify `Transforms`, you can't specify `ResetTransforms`.
+    #
+    # @option params [Boolean] :reset_transforms
+    #   Indicates whether to remove all transforms from the rule. If you
+    #   specify `ResetTransforms`, you can't specify `Transforms`.
+    #
     # @return [Types::ModifyRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyRuleOutput#rules #rules} => Array&lt;Types::Rule&gt;
@@ -4245,13 +4399,16 @@ module Aws::ElasticLoadBalancingV2
     #         values: ["StringValue"],
     #         host_header_config: {
     #           values: ["StringValue"],
+    #           regex_values: ["StringValue"],
     #         },
     #         path_pattern_config: {
     #           values: ["StringValue"],
+    #           regex_values: ["StringValue"],
     #         },
     #         http_header_config: {
     #           http_header_name: "HttpHeaderConditionName",
     #           values: ["StringValue"],
+    #           regex_values: ["StringValue"],
     #         },
     #         query_string_config: {
     #           values: [
@@ -4267,11 +4424,12 @@ module Aws::ElasticLoadBalancingV2
     #         source_ip_config: {
     #           values: ["StringValue"],
     #         },
+    #         regex_values: ["StringValue"],
     #       },
     #     ],
     #     actions: [
     #       {
-    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito, redirect, fixed-response, jwt-validation
     #         target_group_arn: "TargetGroupArn",
     #         authenticate_oidc_config: {
     #           issuer: "AuthenticateOidcActionIssuer", # required
@@ -4327,8 +4485,41 @@ module Aws::ElasticLoadBalancingV2
     #             duration_seconds: 1,
     #           },
     #         },
+    #         jwt_validation_config: {
+    #           jwks_endpoint: "JwtValidationActionJwksEndpoint", # required
+    #           issuer: "JwtValidationActionIssuer", # required
+    #           additional_claims: [
+    #             {
+    #               format: "single-string", # required, accepts single-string, string-array, space-separated-values
+    #               name: "JwtValidationActionAdditionalClaimName", # required
+    #               values: ["JwtValidationActionAdditionalClaimValue"], # required
+    #             },
+    #           ],
+    #         },
     #       },
     #     ],
+    #     transforms: [
+    #       {
+    #         type: "host-header-rewrite", # required, accepts host-header-rewrite, url-rewrite
+    #         host_header_rewrite_config: {
+    #           rewrites: [
+    #             {
+    #               regex: "StringValue", # required
+    #               replace: "StringValue", # required
+    #             },
+    #           ],
+    #         },
+    #         url_rewrite_config: {
+    #           rewrites: [
+    #             {
+    #               regex: "StringValue", # required
+    #               replace: "StringValue", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     ],
+    #     reset_transforms: false,
     #   })
     #
     # @example Response structure
@@ -4342,11 +4533,17 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].values[0] #=> String
     #   resp.rules[0].conditions[0].host_header_config.values #=> Array
     #   resp.rules[0].conditions[0].host_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].host_header_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].host_header_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].path_pattern_config.values #=> Array
     #   resp.rules[0].conditions[0].path_pattern_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].path_pattern_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].path_pattern_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].http_header_config.http_header_name #=> String
     #   resp.rules[0].conditions[0].http_header_config.values #=> Array
     #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].http_header_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].http_header_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].query_string_config.values #=> Array
     #   resp.rules[0].conditions[0].query_string_config.values[0].key #=> String
     #   resp.rules[0].conditions[0].query_string_config.values[0].value #=> String
@@ -4354,8 +4551,10 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
     #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
     #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].regex_values #=> Array
+    #   resp.rules[0].conditions[0].regex_values[0] #=> String
     #   resp.rules[0].actions #=> Array
-    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
+    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response", "jwt-validation"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -4394,7 +4593,22 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].forward_config.target_groups[0].weight #=> Integer
     #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
     #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
+    #   resp.rules[0].actions[0].jwt_validation_config.jwks_endpoint #=> String
+    #   resp.rules[0].actions[0].jwt_validation_config.issuer #=> String
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims #=> Array
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims[0].format #=> String, one of "single-string", "string-array", "space-separated-values"
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims[0].name #=> String
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims[0].values #=> Array
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims[0].values[0] #=> String
     #   resp.rules[0].is_default #=> Boolean
+    #   resp.rules[0].transforms #=> Array
+    #   resp.rules[0].transforms[0].type #=> String, one of "host-header-rewrite", "url-rewrite"
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites #=> Array
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites[0].regex #=> String
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites[0].replace #=> String
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites #=> Array
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites[0].regex #=> String
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites[0].replace #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyRule AWS API Documentation
     #
@@ -4418,8 +4632,8 @@ module Aws::ElasticLoadBalancingV2
     #   The TCP protocol is not supported for health checks if the protocol of
     #   the target group is HTTP or HTTPS. It is supported for health checks
     #   only if the protocol of the target group is TCP, TLS, UDP, or
-    #   TCP\_UDP. The GENEVE, TLS, UDP, and TCP\_UDP protocols are not
-    #   supported for health checks.
+    #   TCP\_UDP. The GENEVE, TLS, UDP, TCP\_UDP, QUIC, and TCP\_QUIC
+    #   protocols are not supported for health checks.
     #
     # @option params [String] :health_check_port
     #   The port the load balancer uses when performing health checks on
@@ -4436,7 +4650,10 @@ module Aws::ElasticLoadBalancingV2
     #   Services.ALB/healthcheck.
     #
     # @option params [Boolean] :health_check_enabled
-    #   Indicates whether health checks are enabled.
+    #   Indicates whether health checks are enabled. If the target type is
+    #   `lambda`, health checks are disabled by default but can be enabled. If
+    #   the target type is `instance`, `ip`, or `alb`, health checks are
+    #   always enabled and can't be disabled.
     #
     # @option params [Integer] :health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
@@ -4506,7 +4723,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #   resp = client.modify_target_group({
     #     target_group_arn: "TargetGroupArn", # required
-    #     health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP, GENEVE
+    #     health_check_protocol: "HTTP", # accepts HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP, GENEVE, QUIC, TCP_QUIC
     #     health_check_port: "HealthCheckPort",
     #     health_check_path: "Path",
     #     health_check_enabled: false,
@@ -4525,10 +4742,10 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups #=> Array
     #   resp.target_groups[0].target_group_arn #=> String
     #   resp.target_groups[0].target_group_name #=> String
-    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE"
+    #   resp.target_groups[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE", "QUIC", "TCP_QUIC"
     #   resp.target_groups[0].port #=> Integer
     #   resp.target_groups[0].vpc_id #=> String
-    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE"
+    #   resp.target_groups[0].health_check_protocol #=> String, one of "HTTP", "HTTPS", "TCP", "TLS", "UDP", "TCP_UDP", "GENEVE", "QUIC", "TCP_QUIC"
     #   resp.target_groups[0].health_check_port #=> String
     #   resp.target_groups[0].health_check_enabled #=> Boolean
     #   resp.target_groups[0].health_check_interval_seconds #=> Integer
@@ -4543,6 +4760,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].target_type #=> String, one of "instance", "ip", "lambda", "alb"
     #   resp.target_groups[0].protocol_version #=> String
     #   resp.target_groups[0].ip_address_type #=> String, one of "ipv4", "ipv6"
+    #   resp.target_groups[0].target_control_port #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroup AWS API Documentation
     #
@@ -4753,6 +4971,7 @@ module Aws::ElasticLoadBalancingV2
     #         id: "TargetId", # required
     #         port: 1,
     #         availability_zone: "ZoneName",
+    #         quic_server_id: "QuicServerId",
     #       },
     #     ],
     #   })
@@ -4991,11 +5210,17 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].values[0] #=> String
     #   resp.rules[0].conditions[0].host_header_config.values #=> Array
     #   resp.rules[0].conditions[0].host_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].host_header_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].host_header_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].path_pattern_config.values #=> Array
     #   resp.rules[0].conditions[0].path_pattern_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].path_pattern_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].path_pattern_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].http_header_config.http_header_name #=> String
     #   resp.rules[0].conditions[0].http_header_config.values #=> Array
     #   resp.rules[0].conditions[0].http_header_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].http_header_config.regex_values #=> Array
+    #   resp.rules[0].conditions[0].http_header_config.regex_values[0] #=> String
     #   resp.rules[0].conditions[0].query_string_config.values #=> Array
     #   resp.rules[0].conditions[0].query_string_config.values[0].key #=> String
     #   resp.rules[0].conditions[0].query_string_config.values[0].value #=> String
@@ -5003,8 +5228,10 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].conditions[0].http_request_method_config.values[0] #=> String
     #   resp.rules[0].conditions[0].source_ip_config.values #=> Array
     #   resp.rules[0].conditions[0].source_ip_config.values[0] #=> String
+    #   resp.rules[0].conditions[0].regex_values #=> Array
+    #   resp.rules[0].conditions[0].regex_values[0] #=> String
     #   resp.rules[0].actions #=> Array
-    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response"
+    #   resp.rules[0].actions[0].type #=> String, one of "forward", "authenticate-oidc", "authenticate-cognito", "redirect", "fixed-response", "jwt-validation"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.issuer #=> String
     #   resp.rules[0].actions[0].authenticate_oidc_config.authorization_endpoint #=> String
@@ -5043,7 +5270,22 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].forward_config.target_groups[0].weight #=> Integer
     #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
     #   resp.rules[0].actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
+    #   resp.rules[0].actions[0].jwt_validation_config.jwks_endpoint #=> String
+    #   resp.rules[0].actions[0].jwt_validation_config.issuer #=> String
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims #=> Array
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims[0].format #=> String, one of "single-string", "string-array", "space-separated-values"
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims[0].name #=> String
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims[0].values #=> Array
+    #   resp.rules[0].actions[0].jwt_validation_config.additional_claims[0].values[0] #=> String
     #   resp.rules[0].is_default #=> Boolean
+    #   resp.rules[0].transforms #=> Array
+    #   resp.rules[0].transforms[0].type #=> String, one of "host-header-rewrite", "url-rewrite"
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites #=> Array
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites[0].regex #=> String
+    #   resp.rules[0].transforms[0].host_header_rewrite_config.rewrites[0].replace #=> String
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites #=> Array
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites[0].regex #=> String
+    #   resp.rules[0].transforms[0].url_rewrite_config.rewrites[0].replace #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetRulePriorities AWS API Documentation
     #
@@ -5073,7 +5315,8 @@ module Aws::ElasticLoadBalancingV2
     # @option params [String] :enforce_security_group_inbound_rules_on_private_link_traffic
     #   Indicates whether to evaluate inbound security group rules for traffic
     #   sent to a Network Load Balancer through Amazon Web Services
-    #   PrivateLink. The default is `on`.
+    #   PrivateLink. Applies only if the load balancer has an associated
+    #   security group. The default is `on`.
     #
     # @return [Types::SetSecurityGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5127,10 +5370,6 @@ module Aws::ElasticLoadBalancingV2
     # Gateway Load Balancer. The specified subnets replace the previously
     # enabled subnets.
     #
-    # When you specify subnets for a Network Load Balancer, or Gateway Load
-    # Balancer you must include all subnets that were enabled previously,
-    # with their existing configurations, plus any additional subnets.
-    #
     # @option params [required, String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
     #
@@ -5147,8 +5386,13 @@ module Aws::ElasticLoadBalancingV2
     #   \[Application Load Balancers on Local Zones\] You can specify subnets
     #   from one or more Local Zones.
     #
-    #   \[Network Load Balancers and Gateway Load Balancers\] You can specify
-    #   subnets from one or more Availability Zones.
+    #   \[Network Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones.
+    #
+    #   \[Gateway Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones. You must include all subnets that were enabled
+    #   previously, with their existing configurations, plus any additional
+    #   subnets.
     #
     # @option params [Array<Types::SubnetMapping>] :subnet_mappings
     #   The IDs of the public subnets. You can specify only one subnet per
@@ -5286,7 +5530,7 @@ module Aws::ElasticLoadBalancingV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.139.0'
+      context[:gem_version] = '1.145.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -111,6 +111,7 @@ module Aws::ChimeSDKMeetings
       attr_accessor primary_meeting_id: ::String
       attr_accessor tenant_ids: ::Array[::String]
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor media_placement_network_type: ("Ipv4Only" | "DualStack")
       SENSITIVE: [:client_request_token, :meeting_host_id, :external_meeting_id]
     end
 
@@ -130,6 +131,7 @@ module Aws::ChimeSDKMeetings
       attr_accessor primary_meeting_id: ::String
       attr_accessor tenant_ids: ::Array[::String]
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor media_placement_network_type: ("Ipv4Only" | "DualStack")
       SENSITIVE: [:client_request_token, :meeting_host_id, :external_meeting_id]
     end
 

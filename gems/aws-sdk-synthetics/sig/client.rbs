@@ -100,7 +100,8 @@ module Aws
                              s3_key: ::String?,
                              s3_version: ::String?,
                              zip_file: ::String?,
-                             handler: ::String,
+                             handler: ::String?,
+                             blueprint_types: Array[::String]?,
                              dependencies: Array[
                                {
                                  type: ("LambdaLayer")?,
@@ -333,7 +334,8 @@ module Aws
                                     s3_key: ::String?,
                                     s3_version: ::String?,
                                     zip_file: ::String?,
-                                    handler: ::String,
+                                    handler: ::String?,
+                                    blueprint_types: Array[::String]?,
                                     dependencies: Array[
                                       {
                                         type: ("LambdaLayer")?,
@@ -435,7 +437,8 @@ module Aws
                              s3_key: ::String?,
                              s3_version: ::String?,
                              zip_file: ::String?,
-                             handler: ::String,
+                             handler: ::String?,
+                             blueprint_types: Array[::String]?,
                              dependencies: Array[
                                {
                                  type: ("LambdaLayer")?,

@@ -27,10 +27,15 @@ module Aws::ECR
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {BlockedByOrganizationPolicyException}
   # * {EmptyUploadException}
+  # * {ExclusionAlreadyExistsException}
+  # * {ExclusionNotFoundException}
   # * {ImageAlreadyExistsException}
+  # * {ImageArchivedException}
   # * {ImageDigestDoesNotMatchException}
   # * {ImageNotFoundException}
+  # * {ImageStorageClassUpdateNotSupportedException}
   # * {ImageTagAlreadyExistsException}
   # * {InvalidLayerException}
   # * {InvalidLayerPartException}
@@ -56,6 +61,7 @@ module Aws::ECR
   # * {ScanNotFoundException}
   # * {SecretNotFoundException}
   # * {ServerException}
+  # * {SigningConfigurationNotFoundException}
   # * {TemplateAlreadyExistsException}
   # * {TemplateNotFoundException}
   # * {TooManyTagsException}
@@ -74,6 +80,21 @@ module Aws::ECR
 
     extend Aws::Errors::DynamicErrors
 
+    class BlockedByOrganizationPolicyException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::BlockedByOrganizationPolicyException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class EmptyUploadException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -89,11 +110,56 @@ module Aws::ECR
       end
     end
 
+    class ExclusionAlreadyExistsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::ExclusionAlreadyExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ExclusionNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::ExclusionNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class ImageAlreadyExistsException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ECR::Types::ImageAlreadyExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ImageArchivedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::ImageArchivedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -124,6 +190,21 @@ module Aws::ECR
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ECR::Types::ImageNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ImageStorageClassUpdateNotSupportedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::ImageStorageClassUpdateNotSupportedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -524,6 +605,21 @@ module Aws::ECR
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ECR::Types::ServerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class SigningConfigurationNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::SigningConfigurationNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2025-11-21)
+------------------
+
+* Feature - Support for on-demand rotation of AWS KMS Multi-Region keys with imported key material
+
+1.117.0 (2025-11-07)
+------------------
+
+* Feature - Added support for new ECC_NIST_EDWARDS25519 AWS KMS key spec
+
+1.116.0 (2025-10-30)
+------------------
+
+* Feature - Add cross account VPC endpoint service connectivity support to CustomKeyStore.
+
+1.115.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.114.0 (2025-10-16)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.113.0 (2025-09-24)
 ------------------
 

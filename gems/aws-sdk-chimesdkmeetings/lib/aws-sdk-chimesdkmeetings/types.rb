@@ -66,6 +66,14 @@ module Aws::ChimeSDKMeetings
     #     Request status code. However, you can set your `video` capability
     #     to receive and you set your `content` capability to not receive.
     #
+    #   * If meeting features is defined as `Video:MaxResolution:None` but
+    #     `Content:MaxResolution` is defined as something other than `None`
+    #     and attendee capabilities are not defined in the API request, then
+    #     the default attendee video capability is set to `Receive` and
+    #     attendee content capability is set to `SendReceive`. This is
+    #     because content `SendReceive` requires video to be at least
+    #     `Receive`.
+    #
     #   * When you change an `audio` capability from `None` or `Receive` to
     #     `Send` or `SendReceive` , and if the attendee left their
     #     microphone unmuted, audio will flow from the attendee to the other
@@ -115,6 +123,13 @@ module Aws::ChimeSDKMeetings
     #   response will contain an HTTP 400 Bad Request status code. However,
     #   you can set your `video` capability to receive and you set your
     #   `content` capability to not receive.
+    #
+    # * If meeting features is defined as `Video:MaxResolution:None` but
+    #   `Content:MaxResolution` is defined as something other than `None`
+    #   and attendee capabilities are not defined in the API request, then
+    #   the default attendee video capability is set to `Receive` and
+    #   attendee content capability is set to `SendReceive`. This is because
+    #   content `SendReceive` requires video to be at least `Receive`.
     #
     # * When you change an `audio` capability from `None` or `Receive` to
     #   `Send` or `SendReceive` , and an attendee unmutes their microphone,
@@ -408,6 +423,14 @@ module Aws::ChimeSDKMeetings
     #     Request status code. However, you can set your `video` capability
     #     to receive and you set your `content` capability to not receive.
     #
+    #   * If meeting features is defined as `Video:MaxResolution:None` but
+    #     `Content:MaxResolution` is defined as something other than `None`
+    #     and attendee capabilities are not defined in the API request, then
+    #     the default attendee video capability is set to `Receive` and
+    #     attendee content capability is set to `SendReceive`. This is
+    #     because content `SendReceive` requires video to be at least
+    #     `Receive`.
+    #
     #   * When you change an `audio` capability from `None` or `Receive` to
     #     `Send` or `SendReceive` , and if the attendee left their
     #     microphone unmuted, audio will flow from the attendee to the other
@@ -575,6 +598,11 @@ module Aws::ChimeSDKMeetings
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] media_placement_network_type
+    #   The type of network for the media placement. Either IPv4 only or
+    #   dual-stack (IPv4 and IPv6).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateMeetingRequest AWS API Documentation
     #
     class CreateMeetingRequest < Struct.new(
@@ -586,7 +614,8 @@ module Aws::ChimeSDKMeetings
       :meeting_features,
       :primary_meeting_id,
       :tenant_ids,
-      :tags)
+      :tags,
+      :media_placement_network_type)
       SENSITIVE = [:client_request_token, :meeting_host_id, :external_meeting_id]
       include Aws::Structure
     end
@@ -666,6 +695,11 @@ module Aws::ChimeSDKMeetings
     #   The tags in the request.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] media_placement_network_type
+    #   The type of network for the media placement. Either IPv4 only or
+    #   dual-stack (IPv4 and IPv6).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateMeetingWithAttendeesRequest AWS API Documentation
     #
     class CreateMeetingWithAttendeesRequest < Struct.new(
@@ -678,7 +712,8 @@ module Aws::ChimeSDKMeetings
       :attendees,
       :primary_meeting_id,
       :tenant_ids,
-      :tags)
+      :tags,
+      :media_placement_network_type)
       SENSITIVE = [:client_request_token, :meeting_host_id, :external_meeting_id]
       include Aws::Structure
     end

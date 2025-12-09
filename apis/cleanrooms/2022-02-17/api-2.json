@@ -1580,6 +1580,80 @@
     }
   },
   "shapes":{
+    "AccessBudget":{
+      "type":"structure",
+      "required":[
+        "resourceArn",
+        "details",
+        "aggregateRemainingBudget"
+      ],
+      "members":{
+        "resourceArn":{"shape":"BudgetedResourceArn"},
+        "details":{"shape":"AccessBudgetDetailsList"},
+        "aggregateRemainingBudget":{"shape":"RemainingBudget"}
+      }
+    },
+    "AccessBudgetDetails":{
+      "type":"structure",
+      "required":[
+        "startTime",
+        "remainingBudget",
+        "budget",
+        "budgetType"
+      ],
+      "members":{
+        "startTime":{"shape":"Timestamp"},
+        "endTime":{"shape":"Timestamp"},
+        "remainingBudget":{"shape":"RemainingBudget"},
+        "budget":{"shape":"Budget"},
+        "budgetType":{"shape":"AccessBudgetType"},
+        "autoRefresh":{"shape":"AutoRefreshMode"}
+      }
+    },
+    "AccessBudgetDetailsList":{
+      "type":"list",
+      "member":{"shape":"AccessBudgetDetails"},
+      "max":2,
+      "min":1
+    },
+    "AccessBudgetType":{
+      "type":"string",
+      "enum":[
+        "CALENDAR_DAY",
+        "CALENDAR_MONTH",
+        "CALENDAR_WEEK",
+        "LIFETIME"
+      ]
+    },
+    "AccessBudgetsPrivacyTemplateParametersInput":{
+      "type":"structure",
+      "required":[
+        "budgetParameters",
+        "resourceArn"
+      ],
+      "members":{
+        "budgetParameters":{"shape":"BudgetParameters"},
+        "resourceArn":{"shape":"BudgetedResourceArn"}
+      }
+    },
+    "AccessBudgetsPrivacyTemplateParametersOutput":{
+      "type":"structure",
+      "required":[
+        "budgetParameters",
+        "resourceArn"
+      ],
+      "members":{
+        "budgetParameters":{"shape":"BudgetParameters"},
+        "resourceArn":{"shape":"BudgetedResourceArn"}
+      }
+    },
+    "AccessBudgetsPrivacyTemplateUpdateParameters":{
+      "type":"structure",
+      "required":["budgetParameters"],
+      "members":{
+        "budgetParameters":{"shape":"BudgetParameters"}
+      }
+    },
     "AccessDeniedException":{
       "type":"structure",
       "members":{
@@ -1685,6 +1759,10 @@
       "type":"list",
       "member":{"shape":"AccountId"}
     },
+    "AllowedResultRegions":{
+      "type":"list",
+      "member":{"shape":"SupportedS3Region"}
+    },
     "AnalysisFormat":{
       "type":"string",
       "enum":[
@@ -1716,7 +1794,7 @@
     "AnalysisParameterList":{
       "type":"list",
       "member":{"shape":"AnalysisParameter"},
-      "max":10,
+      "max":50,
       "min":0
     },
     "AnalysisRule":{
@@ -1916,7 +1994,8 @@
         "sourceMetadata":{"shape":"AnalysisSourceMetadata"},
         "analysisParameters":{"shape":"AnalysisParameterList"},
         "validations":{"shape":"AnalysisTemplateValidationStatusDetailList"},
-        "errorMessageConfiguration":{"shape":"ErrorMessageConfiguration"}
+        "errorMessageConfiguration":{"shape":"ErrorMessageConfiguration"},
+        "syntheticDataParameters":{"shape":"SyntheticDataParameters"}
       }
     },
     "AnalysisTemplateArn":{
@@ -1999,7 +2078,8 @@
         "membershipId":{"shape":"UUID"},
         "collaborationArn":{"shape":"CollaborationArn"},
         "collaborationId":{"shape":"UUID"},
-        "description":{"shape":"ResourceDescription"}
+        "description":{"shape":"ResourceDescription"},
+        "isSyntheticData":{"shape":"Boolean"}
       }
     },
     "AnalysisTemplateSummaryList":{
@@ -2008,7 +2088,7 @@
     },
     "AnalysisTemplateText":{
       "type":"string",
-      "max":90000,
+      "max":500000,
       "min":0,
       "sensitive":true
     },
@@ -2091,6 +2171,7 @@
         "tableName"
       ],
       "members":{
+        "region":{"shape":"CommercialRegion"},
         "workGroup":{"shape":"AthenaWorkGroup"},
         "outputLocation":{"shape":"AthenaOutputLocation"},
         "databaseName":{"shape":"AthenaDatabaseName"},
@@ -2110,6 +2191,13 @@
     "AutoApprovedChangeTypeList":{
       "type":"list",
       "member":{"shape":"AutoApprovedChangeType"}
+    },
+    "AutoRefreshMode":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "BatchGetCollaborationAnalysisTemplateError":{
       "type":"structure",
@@ -2266,6 +2354,36 @@
       "type":"boolean",
       "box":true
     },
+    "Budget":{
+      "type":"integer",
+      "box":true,
+      "max":1000000,
+      "min":0
+    },
+    "BudgetParameter":{
+      "type":"structure",
+      "required":[
+        "type",
+        "budget"
+      ],
+      "members":{
+        "type":{"shape":"AccessBudgetType"},
+        "budget":{"shape":"Budget"},
+        "autoRefresh":{"shape":"AutoRefreshMode"}
+      }
+    },
+    "BudgetParameters":{
+      "type":"list",
+      "member":{"shape":"BudgetParameter"},
+      "max":2,
+      "min":1
+    },
+    "BudgetedResourceArn":{
+      "type":"string",
+      "max":200,
+      "min":0,
+      "pattern":"arn:aws:[\\w]+:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/configuredtableassociation/[\\d\\w-]+"
+    },
     "Change":{
       "type":"structure",
       "required":[
@@ -2367,7 +2485,8 @@
         "queryLogStatus":{"shape":"CollaborationQueryLogStatus"},
         "jobLogStatus":{"shape":"CollaborationJobLogStatus"},
         "analyticsEngine":{"shape":"AnalyticsEngine"},
-        "autoApprovedChangeTypes":{"shape":"AutoApprovedChangeTypeList"}
+        "autoApprovedChangeTypes":{"shape":"AutoApprovedChangeTypeList"},
+        "allowedResultRegions":{"shape":"AllowedResultRegions"}
       }
     },
     "CollaborationAnalysisTemplate":{
@@ -2400,7 +2519,8 @@
         "sourceMetadata":{"shape":"AnalysisSourceMetadata"},
         "analysisParameters":{"shape":"AnalysisParameterList"},
         "validations":{"shape":"AnalysisTemplateValidationStatusDetailList"},
-        "errorMessageConfiguration":{"shape":"ErrorMessageConfiguration"}
+        "errorMessageConfiguration":{"shape":"ErrorMessageConfiguration"},
+        "syntheticDataParameters":{"shape":"SyntheticDataParameters"}
       }
     },
     "CollaborationAnalysisTemplateList":{
@@ -2430,7 +2550,8 @@
         "collaborationArn":{"shape":"CollaborationArn"},
         "collaborationId":{"shape":"UUID"},
         "creatorAccountId":{"shape":"AccountId"},
-        "description":{"shape":"ResourceDescription"}
+        "description":{"shape":"ResourceDescription"},
+        "isSyntheticData":{"shape":"Boolean"}
       }
     },
     "CollaborationAnalysisTemplateSummaryList":{
@@ -2768,9 +2889,22 @@
         "type":{"shape":"ColumnTypeString"}
       }
     },
+    "ColumnClassificationDetails":{
+      "type":"structure",
+      "required":["columnMapping"],
+      "members":{
+        "columnMapping":{"shape":"ColumnMappingList"}
+      }
+    },
     "ColumnList":{
       "type":"list",
       "member":{"shape":"Column"}
+    },
+    "ColumnMappingList":{
+      "type":"list",
+      "member":{"shape":"SyntheticDataColumnProperties"},
+      "max":1000,
+      "min":5
     },
     "ColumnName":{
       "type":"string",
@@ -2783,6 +2917,44 @@
       "max":255,
       "min":0,
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t]*"
+    },
+    "CommercialRegion":{
+      "type":"string",
+      "enum":[
+        "us-west-1",
+        "us-west-2",
+        "us-east-1",
+        "us-east-2",
+        "af-south-1",
+        "ap-east-1",
+        "ap-south-2",
+        "ap-southeast-1",
+        "ap-southeast-2",
+        "ap-southeast-3",
+        "ap-southeast-5",
+        "ap-southeast-4",
+        "ap-southeast-7",
+        "ap-south-1",
+        "ap-northeast-3",
+        "ap-northeast-1",
+        "ap-northeast-2",
+        "ca-central-1",
+        "ca-west-1",
+        "eu-south-1",
+        "eu-west-3",
+        "eu-south-2",
+        "eu-central-2",
+        "eu-central-1",
+        "eu-north-1",
+        "eu-west-1",
+        "eu-west-2",
+        "me-south-1",
+        "me-central-1",
+        "il-central-1",
+        "sa-east-1",
+        "mx-central-1",
+        "ap-east-2"
+      ]
     },
     "ComputeConfiguration":{
       "type":"structure",
@@ -3264,7 +3436,8 @@
         "tags":{"shape":"TagMap"},
         "analysisParameters":{"shape":"AnalysisParameterList"},
         "schema":{"shape":"AnalysisSchema"},
-        "errorMessageConfiguration":{"shape":"ErrorMessageConfiguration"}
+        "errorMessageConfiguration":{"shape":"ErrorMessageConfiguration"},
+        "syntheticDataParameters":{"shape":"SyntheticDataParameters"}
       }
     },
     "CreateAnalysisTemplateOutput":{
@@ -3319,7 +3492,8 @@
         "tags":{"shape":"TagMap"},
         "creatorPaymentConfiguration":{"shape":"PaymentConfiguration"},
         "analyticsEngine":{"shape":"AnalyticsEngine"},
-        "autoApprovedChangeRequestTypes":{"shape":"AutoApprovedChangeTypeList"}
+        "autoApprovedChangeRequestTypes":{"shape":"AutoApprovedChangeTypeList"},
+        "allowedResultRegions":{"shape":"AllowedResultRegions"}
       }
     },
     "CreateCollaborationOutput":{
@@ -3545,7 +3719,6 @@
       "type":"structure",
       "required":[
         "membershipIdentifier",
-        "autoRefresh",
         "privacyBudgetType",
         "parameters"
       ],
@@ -3871,7 +4044,7 @@
       "type":"structure",
       "required":["name"],
       "members":{
-        "name":{"shape":"String"}
+        "name":{"shape":"ColumnName"}
       }
     },
     "DifferentialPrivacyColumnList":{
@@ -4605,6 +4778,7 @@
         "databaseName"
       ],
       "members":{
+        "region":{"shape":"CommercialRegion"},
         "tableName":{"shape":"GlueTableName"},
         "databaseName":{"shape":"GlueDatabaseName"}
       }
@@ -5124,6 +5298,11 @@
           "shape":"PaginationToken",
           "location":"querystring",
           "locationName":"nextToken"
+        },
+        "accessBudgetResourceArn":{
+          "shape":"BudgetedResourceArn",
+          "location":"querystring",
+          "locationName":"accessBudgetResourceArn"
         }
       }
     },
@@ -5414,6 +5593,11 @@
           "shape":"MaxResults",
           "location":"querystring",
           "locationName":"maxResults"
+        },
+        "accessBudgetResourceArn":{
+          "shape":"BudgetedResourceArn",
+          "location":"querystring",
+          "locationName":"accessBudgetResourceArn"
         }
       }
     },
@@ -5560,8 +5744,34 @@
       "type":"structure",
       "members":{
         "modelTraining":{"shape":"ModelTrainingPaymentConfig"},
-        "modelInference":{"shape":"ModelInferencePaymentConfig"}
+        "modelInference":{"shape":"ModelInferencePaymentConfig"},
+        "syntheticDataGeneration":{"shape":"SyntheticDataGenerationPaymentConfig"}
       }
+    },
+    "MLSyntheticDataParameters":{
+      "type":"structure",
+      "required":[
+        "epsilon",
+        "maxMembershipInferenceAttackScore",
+        "columnClassification"
+      ],
+      "members":{
+        "epsilon":{"shape":"MLSyntheticDataParametersEpsilonDouble"},
+        "maxMembershipInferenceAttackScore":{"shape":"MaxMembershipInferenceAttackScore"},
+        "columnClassification":{"shape":"ColumnClassificationDetails"}
+      }
+    },
+    "MLSyntheticDataParametersEpsilonDouble":{
+      "type":"double",
+      "box":true,
+      "max":10,
+      "min":0.0001
+    },
+    "MaxMembershipInferenceAttackScore":{
+      "type":"double",
+      "box":true,
+      "max":1,
+      "min":0.5
     },
     "MaxResults":{
       "type":"integer",
@@ -5596,7 +5806,6 @@
     "MemberList":{
       "type":"list",
       "member":{"shape":"MemberSpecification"},
-      "max":9,
       "min":0
     },
     "MemberSpecification":{
@@ -5718,7 +5927,8 @@
       "type":"structure",
       "members":{
         "modelTraining":{"shape":"MembershipModelTrainingPaymentConfig"},
-        "modelInference":{"shape":"MembershipModelInferencePaymentConfig"}
+        "modelInference":{"shape":"MembershipModelInferencePaymentConfig"},
+        "syntheticDataGeneration":{"shape":"MembershipSyntheticDataGenerationPaymentConfig"}
       }
     },
     "MembershipModelInferencePaymentConfig":{
@@ -5834,6 +6044,13 @@
     "MembershipSummaryList":{
       "type":"list",
       "member":{"shape":"MembershipSummary"}
+    },
+    "MembershipSyntheticDataGenerationPaymentConfig":{
+      "type":"structure",
+      "required":["isResponsible"],
+      "members":{
+        "isResponsible":{"shape":"Boolean"}
+      }
     },
     "ModelInferencePaymentConfig":{
       "type":"structure",
@@ -5971,7 +6188,8 @@
     "PrivacyBudget":{
       "type":"structure",
       "members":{
-        "differentialPrivacy":{"shape":"DifferentialPrivacyPrivacyBudget"}
+        "differentialPrivacy":{"shape":"DifferentialPrivacyPrivacyBudget"},
+        "accessBudget":{"shape":"AccessBudget"}
       },
       "union":true
     },
@@ -6059,14 +6277,16 @@
     "PrivacyBudgetTemplateParametersInput":{
       "type":"structure",
       "members":{
-        "differentialPrivacy":{"shape":"DifferentialPrivacyTemplateParametersInput"}
+        "differentialPrivacy":{"shape":"DifferentialPrivacyTemplateParametersInput"},
+        "accessBudget":{"shape":"AccessBudgetsPrivacyTemplateParametersInput"}
       },
       "union":true
     },
     "PrivacyBudgetTemplateParametersOutput":{
       "type":"structure",
       "members":{
-        "differentialPrivacy":{"shape":"DifferentialPrivacyTemplateParametersOutput"}
+        "differentialPrivacy":{"shape":"DifferentialPrivacyTemplateParametersOutput"},
+        "accessBudget":{"shape":"AccessBudgetsPrivacyTemplateParametersOutput"}
       },
       "union":true
     },
@@ -6102,13 +6322,17 @@
     "PrivacyBudgetTemplateUpdateParameters":{
       "type":"structure",
       "members":{
-        "differentialPrivacy":{"shape":"DifferentialPrivacyTemplateUpdateParameters"}
+        "differentialPrivacy":{"shape":"DifferentialPrivacyTemplateUpdateParameters"},
+        "accessBudget":{"shape":"AccessBudgetsPrivacyTemplateUpdateParameters"}
       },
       "union":true
     },
     "PrivacyBudgetType":{
       "type":"string",
-      "enum":["DIFFERENTIAL_PRIVACY"]
+      "enum":[
+        "DIFFERENTIAL_PRIVACY",
+        "ACCESS_BUDGET"
+      ]
     },
     "PrivacyImpact":{
       "type":"structure",
@@ -6224,6 +6448,7 @@
     },
     "ProtectedJobParameters":{
       "type":"structure",
+      "required":["analysisTemplateArn"],
       "members":{
         "analysisTemplateArn":{"shape":"AnalysisTemplateArn"}
       }
@@ -6626,6 +6851,11 @@
       "type":"list",
       "member":{"shape":"ReceiverConfiguration"}
     },
+    "RemainingBudget":{
+      "type":"integer",
+      "box":true,
+      "min":0
+    },
     "ResourceAlias":{
       "type":"string",
       "max":128,
@@ -6697,6 +6927,8 @@
     },
     "S3LocationKeyString":{
       "type":"string",
+      "max":1024,
+      "min":1,
       "pattern":"[a-zA-Z0-9!_.*'()-/]+"
     },
     "ScalarFunctions":{
@@ -6763,6 +6995,7 @@
         "updateTime":{"shape":"Timestamp"},
         "type":{"shape":"SchemaType"},
         "schemaStatusDetails":{"shape":"SchemaStatusDetailList"},
+        "resourceArn":{"shape":"SchemaResourceArn"},
         "schemaTypeProperties":{"shape":"SchemaTypeProperties"}
       }
     },
@@ -6802,6 +7035,12 @@
       "member":{"shape":"Schema"},
       "max":25,
       "min":0
+    },
+    "SchemaResourceArn":{
+      "type":"string",
+      "max":200,
+      "min":0,
+      "pattern":"arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership\\/[\\d\\w-]+\\/(configuredtableassociation|idmappingtable)\\/[\\d\\w-]+"
     },
     "SchemaStatus":{
       "type":"string",
@@ -6881,6 +7120,7 @@
         "collaborationArn":{"shape":"CollaborationArn"},
         "analysisRuleTypes":{"shape":"AnalysisRuleTypeList"},
         "analysisMethod":{"shape":"AnalysisMethod"},
+        "resourceArn":{"shape":"SchemaResourceArn"},
         "selectedAnalysisMethods":{"shape":"SelectedAnalysisMethods"}
       }
     },
@@ -7004,6 +7244,23 @@
         "columnType":{"shape":"ColumnTypeString"}
       }
     },
+    "SparkProperties":{
+      "type":"map",
+      "key":{"shape":"SparkPropertyKey"},
+      "value":{"shape":"SparkPropertyValue"},
+      "max":50,
+      "min":0
+    },
+    "SparkPropertyKey":{
+      "type":"string",
+      "max":200,
+      "min":1
+    },
+    "SparkPropertyValue":{
+      "type":"string",
+      "max":500,
+      "min":0
+    },
     "StartProtectedJobInput":{
       "type":"structure",
       "required":[
@@ -7057,6 +7314,84 @@
       }
     },
     "String":{"type":"string"},
+    "SupportedS3Region":{
+      "type":"string",
+      "enum":[
+        "us-west-1",
+        "us-west-2",
+        "us-east-1",
+        "us-east-2",
+        "af-south-1",
+        "ap-east-1",
+        "ap-east-2",
+        "ap-south-2",
+        "ap-southeast-1",
+        "ap-southeast-2",
+        "ap-southeast-3",
+        "ap-southeast-5",
+        "ap-southeast-4",
+        "ap-southeast-7",
+        "ap-south-1",
+        "ap-northeast-3",
+        "ap-northeast-1",
+        "ap-northeast-2",
+        "ca-central-1",
+        "ca-west-1",
+        "eu-south-1",
+        "eu-west-3",
+        "eu-south-2",
+        "eu-central-2",
+        "eu-central-1",
+        "eu-north-1",
+        "eu-west-1",
+        "eu-west-2",
+        "me-south-1",
+        "me-central-1",
+        "il-central-1",
+        "sa-east-1",
+        "mx-central-1"
+      ]
+    },
+    "SyntheticDataColumnName":{
+      "type":"string",
+      "max":128,
+      "min":0,
+      "pattern":"[a-z0-9_](([a-z0-9_]+-)*([a-z0-9_]+))?"
+    },
+    "SyntheticDataColumnProperties":{
+      "type":"structure",
+      "required":[
+        "columnName",
+        "columnType",
+        "isPredictiveValue"
+      ],
+      "members":{
+        "columnName":{"shape":"SyntheticDataColumnName"},
+        "columnType":{"shape":"SyntheticDataColumnType"},
+        "isPredictiveValue":{"shape":"Boolean"}
+      }
+    },
+    "SyntheticDataColumnType":{
+      "type":"string",
+      "enum":[
+        "CATEGORICAL",
+        "NUMERICAL"
+      ]
+    },
+    "SyntheticDataGenerationPaymentConfig":{
+      "type":"structure",
+      "required":["isResponsible"],
+      "members":{
+        "isResponsible":{"shape":"Boolean"}
+      }
+    },
+    "SyntheticDataParameters":{
+      "type":"structure",
+      "members":{
+        "mlSyntheticDataParameters":{"shape":"MLSyntheticDataParameters"}
+      },
+      "union":true
+    },
     "TableAlias":{
       "type":"string",
       "max":128,
@@ -7574,7 +7909,8 @@
       "type":"structure",
       "members":{
         "type":{"shape":"WorkerComputeType"},
-        "number":{"shape":"WorkerComputeConfigurationNumberInteger"}
+        "number":{"shape":"WorkerComputeConfigurationNumberInteger"},
+        "properties":{"shape":"WorkerComputeConfigurationProperties"}
       }
     },
     "WorkerComputeConfigurationNumberInteger":{
@@ -7582,6 +7918,13 @@
       "box":true,
       "max":400,
       "min":2
+    },
+    "WorkerComputeConfigurationProperties":{
+      "type":"structure",
+      "members":{
+        "spark":{"shape":"SparkProperties"}
+      },
+      "union":true
     },
     "WorkerComputeType":{
       "type":"string",

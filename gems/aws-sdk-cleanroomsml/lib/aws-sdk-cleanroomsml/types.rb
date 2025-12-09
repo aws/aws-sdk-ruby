@@ -10,6 +10,77 @@
 module Aws::CleanRoomsML
   module Types
 
+    # An access budget that defines consumption limits for a specific
+    # resource within defined time periods.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that this access
+    #   budget applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   A list of budget details for this resource. Contains active budget
+    #   periods that apply to the resource.
+    #   @return [Array<Types::AccessBudgetDetails>]
+    #
+    # @!attribute [rw] aggregate_remaining_budget
+    #   The total remaining budget across all active budget periods for this
+    #   resource.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/AccessBudget AWS API Documentation
+    #
+    class AccessBudget < Struct.new(
+      :resource_arn,
+      :details,
+      :aggregate_remaining_budget)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The detailed information for a specific budget period, including time
+    # boundaries and budget amounts.
+    #
+    # @!attribute [rw] start_time
+    #   The start time of this budget period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of this budget period. If not specified, the budget
+    #   period continues indefinitely.
+    #   @return [Time]
+    #
+    # @!attribute [rw] remaining_budget
+    #   The amount of budget remaining in this period.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] budget
+    #   The total budget amount allocated for this period.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] budget_type
+    #   The type of budget period. Calendar-based types reset automatically
+    #   at regular intervals, while LIFETIME budgets never reset.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_refresh
+    #   Specifies whether this budget automatically refreshes when the
+    #   current period ends.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/AccessBudgetDetails AWS API Documentation
+    #
+    class AccessBudgetDetails < Struct.new(
+      :start_time,
+      :end_time,
+      :remaining_budget,
+      :budget,
+      :budget_type,
+      :auto_refresh)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You do not have sufficient access to perform this action.
     #
     # @!attribute [rw] message
@@ -729,6 +800,24 @@ module Aws::CleanRoomsML
       :status,
       :configured_model_algorithm_association_arn,
       :creator_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains classification information for data columns, including
+    # mappings that specify how columns should be handled during synthetic
+    # data generation and privacy analysis.
+    #
+    # @!attribute [rw] column_mapping
+    #   A mapping that defines the classification of data columns for
+    #   synthetic data generation and specifies how each column should be
+    #   handled during the privacy-preserving data synthesis process.
+    #   @return [Array<Types::SyntheticDataColumnProperties>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ColumnClassificationDetails AWS API Documentation
+    #
+    class ColumnClassificationDetails < Struct.new(
+      :column_mapping)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1731,6 +1820,24 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # Privacy evaluation scores that measure the privacy characteristics of
+    # the generated synthetic data, including assessments of potential
+    # privacy risks such as membership inference attacks.
+    #
+    # @!attribute [rw] membership_inference_attack_scores
+    #   Scores that evaluate the vulnerability of the synthetic data to
+    #   membership inference attacks, which attempt to determine whether a
+    #   specific individual was a member of the original dataset.
+    #   @return [Array<Types::MembershipInferenceAttackScore>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/DataPrivacyScores AWS API Documentation
+    #
+    class DataPrivacyScores < Struct.new(
+      :membership_inference_attack_scores)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines information about the Glue data source that contains the
     # training data.
     #
@@ -2289,9 +2396,22 @@ module Aws::CleanRoomsML
     #   The number of records in the ML input channel.
     #   @return [Integer]
     #
+    # @!attribute [rw] privacy_budgets
+    #   Returns the privacy budgets that control access to this Clean Rooms
+    #   ML input channel. Use these budgets to monitor and limit resource
+    #   consumption over specified time periods.
+    #   @return [Types::PrivacyBudgets]
+    #
     # @!attribute [rw] description
     #   The description of the ML input channel.
     #   @return [String]
+    #
+    # @!attribute [rw] synthetic_data_configuration
+    #   The synthetic data configuration for this ML input channel,
+    #   including parameters for generating privacy-preserving synthetic
+    #   data and evaluation scores for measuring the privacy of the
+    #   generated data.
+    #   @return [Types::SyntheticDataConfiguration]
     #
     # @!attribute [rw] create_time
     #   The time at which the ML input channel was created.
@@ -2317,7 +2437,9 @@ module Aws::CleanRoomsML
       :status_details,
       :retention_in_days,
       :number_of_records,
+      :privacy_budgets,
       :description,
+      :synthetic_data_configuration,
       :create_time,
       :update_time,
       :creator_account_id)
@@ -2919,9 +3041,22 @@ module Aws::CleanRoomsML
     #   The number of records in the ML input channel.
     #   @return [Integer]
     #
+    # @!attribute [rw] privacy_budgets
+    #   Returns the privacy budgets that control access to this Clean Rooms
+    #   ML input channel. Use these budgets to monitor and limit resource
+    #   consumption over specified time periods.
+    #   @return [Types::PrivacyBudgets]
+    #
     # @!attribute [rw] description
     #   The description of the ML input channel.
     #   @return [String]
+    #
+    # @!attribute [rw] synthetic_data_configuration
+    #   The synthetic data configuration for this ML input channel,
+    #   including parameters for generating privacy-preserving synthetic
+    #   data and evaluation scores for measuring the privacy of the
+    #   generated data.
+    #   @return [Types::SyntheticDataConfiguration]
     #
     # @!attribute [rw] create_time
     #   The time at which the ML input channel was created.
@@ -2998,7 +3133,9 @@ module Aws::CleanRoomsML
       :status_details,
       :retention_in_days,
       :number_of_records,
+      :privacy_budgets,
       :description,
+      :synthetic_data_configuration,
       :create_time,
       :update_time,
       :input_channel,
@@ -4558,6 +4695,61 @@ module Aws::CleanRoomsML
       include Aws::Structure
     end
 
+    # Parameters that control the generation of synthetic data for custom
+    # model training, including privacy settings and column classification
+    # details.
+    #
+    # @!attribute [rw] epsilon
+    #   The epsilon value for differential privacy, which controls the
+    #   privacy-utility tradeoff in synthetic data generation. Lower values
+    #   provide stronger privacy guarantees but may reduce data utility.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_membership_inference_attack_score
+    #   The maximum acceptable score for membership inference attack
+    #   vulnerability. Synthetic data generation fails if the score for the
+    #   resulting data exceeds this threshold.
+    #   @return [Float]
+    #
+    # @!attribute [rw] column_classification
+    #   Classification details for data columns that specify how each column
+    #   should be treated during synthetic data generation.
+    #   @return [Types::ColumnClassificationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/MLSyntheticDataParameters AWS API Documentation
+    #
+    class MLSyntheticDataParameters < Struct.new(
+      :epsilon,
+      :max_membership_inference_attack_score,
+      :column_classification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A score that measures the vulnerability of synthetic data to
+    # membership inference attacks and provides both the numerical score and
+    # the version of the attack methodology used for evaluation.
+    #
+    # @!attribute [rw] attack_version
+    #   The version of the membership inference attack, which consists of
+    #   the attack type and its version number, used to generate this
+    #   privacy score.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The numerical score representing the vulnerability to membership
+    #   inference attacks.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/MembershipInferenceAttackScore AWS API Documentation
+    #
+    class MembershipInferenceAttackScore < Struct.new(
+      :attack_version,
+      :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the model metric that is reported for a trained
     # model.
     #
@@ -4644,6 +4836,29 @@ module Aws::CleanRoomsML
       :s3_data_distribution_type)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The privacy budget information that controls access to Clean Rooms ML
+    # input channels.
+    #
+    # @note PrivacyBudgets is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PrivacyBudgets corresponding to the set member.
+    #
+    # @!attribute [rw] access_budgets
+    #   A list of access budgets that apply to resources associated with
+    #   this Clean Rooms ML input channel.
+    #   @return [Array<Types::AccessBudget>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/PrivacyBudgets AWS API Documentation
+    #
+    class PrivacyBudgets < Struct.new(
+      :access_budgets,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AccessBudgets < PrivacyBudgets; end
+      class Unknown < PrivacyBudgets; end
     end
 
     # Information about the privacy configuration for a configured model
@@ -5212,6 +5427,81 @@ module Aws::CleanRoomsML
     #
     class StoppingCondition < Struct.new(
       :max_runtime_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Properties that define how a specific data column should be handled
+    # during synthetic data generation, including its name, type, and role
+    # in predictive modeling.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the data column as it appears in the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_type
+    #   The data type of the column, which determines how the synthetic data
+    #   generation algorithm processes and synthesizes values for this
+    #   column.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_predictive_value
+    #   Indicates if this column contains predictive values that should be
+    #   treated as target variables in machine learning models. This affects
+    #   how the synthetic data generation preserves statistical
+    #   relationships.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/SyntheticDataColumnProperties AWS API Documentation
+    #
+    class SyntheticDataColumnProperties < Struct.new(
+      :column_name,
+      :column_type,
+      :is_predictive_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for synthetic data generation, including the
+    # parameters that control data synthesis and the evaluation scores that
+    # measure the quality and privacy characteristics of the generated
+    # synthetic data.
+    #
+    # @!attribute [rw] synthetic_data_parameters
+    #   The parameters that control how synthetic data is generated,
+    #   including privacy settings, column classifications, and other
+    #   configuration options that affect the data synthesis process.
+    #   @return [Types::MLSyntheticDataParameters]
+    #
+    # @!attribute [rw] synthetic_data_evaluation_scores
+    #   Evaluation scores that assess the quality and privacy
+    #   characteristics of the generated synthetic data, providing metrics
+    #   on data utility and privacy preservation.
+    #   @return [Types::SyntheticDataEvaluationScores]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/SyntheticDataConfiguration AWS API Documentation
+    #
+    class SyntheticDataConfiguration < Struct.new(
+      :synthetic_data_parameters,
+      :synthetic_data_evaluation_scores)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Comprehensive evaluation metrics for synthetic data that assess both
+    # the utility of the generated data for machine learning tasks and its
+    # privacy preservation characteristics.
+    #
+    # @!attribute [rw] data_privacy_scores
+    #   Privacy-specific evaluation scores that measure how well the
+    #   synthetic data protects individual privacy, including assessments of
+    #   potential privacy risks such as membership inference attacks.
+    #   @return [Types::DataPrivacyScores]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/SyntheticDataEvaluationScores AWS API Documentation
+    #
+    class SyntheticDataEvaluationScores < Struct.new(
+      :data_privacy_scores)
       SENSITIVE = []
       include Aws::Structure
     end

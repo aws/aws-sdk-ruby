@@ -190,6 +190,7 @@ module Aws
                                },
                                ?manage_master_user_password: bool,
                                ?master_user_secret_kms_key_id: ::String,
+                               ?network_type: ::String,
                                ?source_region: ::String
                              ) -> _CreateDBClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBClusterResponseSuccess
@@ -755,7 +756,8 @@ module Aws
                                },
                                ?manage_master_user_password: bool,
                                ?master_user_secret_kms_key_id: ::String,
-                               ?rotate_master_user_password: bool
+                               ?rotate_master_user_password: bool,
+                               ?network_type: ::String
                              ) -> _ModifyDBClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBClusterResponseSuccess
 
@@ -948,7 +950,8 @@ module Aws
                                                 min_capacity: ::Float?,
                                                 max_capacity: ::Float?
                                               },
-                                              ?storage_type: ::String
+                                              ?storage_type: ::String,
+                                              ?network_type: ::String
                                             ) -> _RestoreDBClusterFromSnapshotResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBClusterFromSnapshotResponseSuccess
 
@@ -979,7 +982,8 @@ module Aws
                                                    min_capacity: ::Float?,
                                                    max_capacity: ::Float?
                                                  },
-                                                 ?storage_type: ::String
+                                                 ?storage_type: ::String,
+                                                 ?network_type: ::String
                                                ) -> _RestoreDBClusterToPointInTimeResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBClusterToPointInTimeResponseSuccess
 

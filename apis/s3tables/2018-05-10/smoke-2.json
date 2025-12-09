@@ -18,36 +18,6 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListTableBuckets_Success",
-    "operationName" : "ListTableBuckets",
-    "input" : { },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListNamespaces_AccessDeniedException",
-    "operationName" : "ListNamespaces",
-    "input" : {
-      "tableBucketARN" : "arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "AccessDeniedException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
     "id" : "GetTable_AccessDeniedException",
     "operationName" : "GetTable",
     "input" : {
@@ -84,6 +54,36 @@
       "useAccountIdRouting" : true
     }
   }, {
+    "id" : "ListTableBuckets_Success",
+    "operationName" : "ListTableBuckets",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListTables_AccessDeniedException",
+    "operationName" : "ListTables",
+    "input" : {
+      "tableBucketARN" : "arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "AccessDeniedException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
     "id" : "GetNamespace_AccessDeniedException",
     "operationName" : "GetNamespace",
     "input" : {
@@ -102,8 +102,8 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "ListTables_AccessDeniedException",
-    "operationName" : "ListTables",
+    "id" : "ListNamespaces_AccessDeniedException",
+    "operationName" : "ListNamespaces",
     "input" : {
       "tableBucketARN" : "arn:aws:s3tables:us-east-1:123456789012:bucket/does-not-exist"
     },

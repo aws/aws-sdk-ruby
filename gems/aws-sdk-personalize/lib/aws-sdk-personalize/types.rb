@@ -278,10 +278,19 @@ module Aws::Personalize
     #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] ranking_influence
+    #   A map of ranking influence values for POPULARITY and FRESHNESS. For
+    #   each key, specify a numerical value between 0.0 and 1.0 that
+    #   determines how much influence that ranking factor has on the final
+    #   recommendations. A value closer to 1.0 gives more weight to the
+    #   factor, while a value closer to 0.0 reduces its influence.
+    #   @return [Hash<String,Float>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/BatchInferenceJobConfig AWS API Documentation
     #
     class BatchInferenceJobConfig < Struct.new(
-      :item_exploration_config)
+      :item_exploration_config,
+      :ranking_influence)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -616,6 +625,11 @@ module Aws::Personalize
     #   Provides a summary of the properties of a campaign update. For a
     #   complete listing, call the [DescribeCampaign][1] API.
     #
+    #   <note markdown="1"> The `latestCampaignUpdate` field is only returned when the campaign
+    #   has had at least one `UpdateCampaign` call.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html
@@ -685,12 +699,21 @@ module Aws::Personalize
     #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update
     #   @return [Boolean]
     #
+    # @!attribute [rw] ranking_influence
+    #   A map of ranking influence values for POPULARITY and FRESHNESS. For
+    #   each key, specify a numerical value between 0.0 and 1.0 that
+    #   determines how much influence that ranking factor has on the final
+    #   recommendations. A value closer to 1.0 gives more weight to the
+    #   factor, while a value closer to 0.0 reduces its influence.
+    #   @return [Hash<String,Float>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CampaignConfig AWS API Documentation
     #
     class CampaignConfig < Struct.new(
       :item_exploration_config,
       :enable_metadata_with_recommendations,
-      :sync_with_latest_solution_version)
+      :sync_with_latest_solution_version,
+      :ranking_influence)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1688,6 +1711,14 @@ module Aws::Personalize
     #   [3]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] perform_incremental_update
+    #   Whether to perform incremental training updates on your model. When
+    #   enabled, this allows the model to learn from new data more
+    #   frequently without requiring full retraining, which enables near
+    #   real-time personalization. This parameter is supported only for
+    #   solutions that use the semantic-similarity recipe.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] recipe_arn
     #   The Amazon Resource Name (ARN) of the recipe to use for model
     #   training. This is required when `performAutoML` is false. For
@@ -1739,6 +1770,7 @@ module Aws::Personalize
       :perform_hpo,
       :perform_auto_ml,
       :perform_auto_training,
+      :perform_incremental_update,
       :recipe_arn,
       :dataset_group_arn,
       :event_type,
@@ -2999,7 +3031,17 @@ module Aws::Personalize
     end
 
     # @!attribute [rw] campaign
+    #   <note markdown="1"> The `latestCampaignUpdate` field is only returned when the campaign
+    #   has had at least one `UpdateCampaign` call.
+    #
+    #    </note>
+    #
     #   The properties of the campaign.
+    #
+    #   <note markdown="1"> The `latestCampaignUpdate` field is only returned when the campaign
+    #   has had at least one `UpdateCampaign` call.
+    #
+    #    </note>
     #   @return [Types::Campaign]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeCampaignResponse AWS API Documentation
@@ -5304,6 +5346,15 @@ module Aws::Personalize
     #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] perform_incremental_update
+    #   A Boolean value that indicates whether incremental training updates
+    #   are performed on the model. When enabled, this allows the model to
+    #   learn from new data more frequently without requiring full
+    #   retraining, which enables near real-time personalization. This
+    #   parameter is supported only for solutions that use the
+    #   semantic-similarity recipe
+    #   @return [Boolean]
+    #
     # @!attribute [rw] recipe_arn
     #   The ARN of the recipe used to create the solution. This is required
     #   when `performAutoML` is false.
@@ -5365,6 +5416,7 @@ module Aws::Personalize
       :perform_hpo,
       :perform_auto_ml,
       :perform_auto_training,
+      :perform_incremental_update,
       :recipe_arn,
       :dataset_group_arn,
       :event_type,
@@ -5544,6 +5596,15 @@ module Aws::Personalize
     #   Whether the solution automatically creates solution versions.
     #   @return [Boolean]
     #
+    # @!attribute [rw] perform_incremental_update
+    #   A Boolean value that indicates whether incremental training updates
+    #   are performed on the model. When enabled, this allows the model to
+    #   learn from new data more frequently without requiring full
+    #   retraining, which enables near real-time personalization. This
+    #   parameter is supported only for solutions that use the
+    #   semantic-similarity recipe.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] creation_date_time
     #   The date and time (in Unix format) that the solution update was
     #   created.
@@ -5564,6 +5625,7 @@ module Aws::Personalize
       :solution_update_config,
       :status,
       :perform_auto_training,
+      :perform_incremental_update,
       :creation_date_time,
       :last_updated_date_time,
       :failure_reason)
@@ -5599,6 +5661,14 @@ module Aws::Personalize
     #   When true, Amazon Personalize searches for the most optimal recipe
     #   according to the solution configuration. When false (the default),
     #   Amazon Personalize uses `recipeArn`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] perform_incremental_update
+    #   Whether the solution version should perform an incremental update.
+    #   When set to true, the training will process only the data that has
+    #   changed since the latest training, similar to when trainingMode is
+    #   set to UPDATE. This can only be used with solution versions that use
+    #   the User-Personalization recipe.
     #   @return [Boolean]
     #
     # @!attribute [rw] recipe_arn
@@ -5681,6 +5751,7 @@ module Aws::Personalize
       :solution_arn,
       :perform_hpo,
       :perform_auto_ml,
+      :perform_incremental_update,
       :recipe_arn,
       :event_type,
       :dataset_group_arn,
@@ -5932,10 +6003,21 @@ module Aws::Personalize
     #   and Amazon Personalize considers it only when filtering.
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] included_dataset_columns
+    #   A map that specifies which columns to include from each dataset
+    #   during training. The map can contain up to 3 entries, where each key
+    #   is a dataset name (maximum length of 256 characters, must contain
+    #   only letters and underscores) and each value is an array of up to 50
+    #   column names. Column names can be up to 150 characters long, must
+    #   start with a letter or underscore, and can contain only letters,
+    #   numbers, and underscores.
+    #   @return [Hash<String,Array<String>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/TrainingDataConfig AWS API Documentation
     #
     class TrainingDataConfig < Struct.new(
-      :excluded_dataset_columns)
+      :excluded_dataset_columns,
+      :included_dataset_columns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6162,6 +6244,14 @@ module Aws::Personalize
     #   [3]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] perform_incremental_update
+    #   Whether to perform incremental training updates on your model. When
+    #   enabled, this allows the model to learn from new data more
+    #   frequently without requiring full retraining, which enables near
+    #   real-time personalization. This parameter is supported only for
+    #   solutions that use the semantic-similarity recipe.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] solution_update_config
     #   The new configuration details of the solution.
     #   @return [Types::SolutionUpdateConfig]
@@ -6171,6 +6261,7 @@ module Aws::Personalize
     class UpdateSolutionRequest < Struct.new(
       :solution_arn,
       :perform_auto_training,
+      :perform_incremental_update,
       :solution_update_config)
       SENSITIVE = []
       include Aws::Structure
