@@ -1,14 +1,7 @@
 Unreleased Changes
 ------------------
 
-1.200.0 (2025-12-15)
-------------------
-
-* Issue - Updates to the S3 Encryption Client
-
-The V3 S3 Encryption Client now requires key committing algorithm suites by default.
-
-See migration guide: [link to docs]
+* Issue - Updates to the S3 Encryption Client. The V3 S3 Encryption Client now requires key committing algorithm suites by default. See migration guide: [link to docs]
 
 1.199.1 (2025-09-25)
 ------------------
