@@ -8,6 +8,13 @@ module Aws
     REQUIRED_PARAMS = [:key_wrap_schema, :content_encryption_schema, :security_profile].freeze
     SUPPORTED_SECURITY_PROFILES = [:v2, :v2_and_legacy].freeze
 
+    # [MAINTENANCE MODE] There is a new version of the Encryption Client.
+    # AWS strongly recommends upgrading to the {Aws::S3::EncryptionV3::Client},
+    # which provides updated data security best practices.
+    # See documentation for {Aws::S3::EncryptionV3::Client}.
+    # Provides an encryption client that encrypts and decrypts data client-side,
+    # storing the encrypted data in Amazon S3.
+    # 
     # Provides an encryption client that encrypts and decrypts data client-side,
     # storing the encrypted data in Amazon S3.  The `EncryptionV2::Client` (V2 Client)
     # provides improved security over the `Encryption::Client` (V1 Client)
