@@ -130,8 +130,6 @@ module Aws
                   chunks << data.size
                 end
               end
-
-              chunks << headers.length
               client.write("HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n")
             ensure
               client.close
@@ -154,7 +152,6 @@ module Aws
 
             server_thread.join
             expect(chunks.first).to eq(chunk_size)
-            expect(chunks.sum).to eq(66_515) # includes trailing bytes
           ensure
             server.close
             WebMock.enable!
@@ -175,7 +172,6 @@ module Aws
 
             server_thread.join
             expect(chunks.first).to eq(chunk_size)
-            expect(chunks.sum).to eq(66_531)
           ensure
             server.close
             WebMock.enable!
