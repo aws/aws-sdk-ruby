@@ -167,7 +167,6 @@ module Aws
           tmpfile.unlink
           s3 = Client.new(stub_responses: true)
           resp = s3.put_object(bucket: 'bucket', key: 'key', body: tmpfile)
-          # Need to discuss
           expect(resp.context.http_request.body.instance_variable_get(:@io).read).to eq(data)
         end
       end
