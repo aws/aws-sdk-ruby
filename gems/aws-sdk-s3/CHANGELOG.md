@@ -3,7 +3,7 @@ Unreleased Changes
 
 * Feature - Added `:http_chunk_size` parameter to `TransferManager#upload_file` to control the buffer size when streaming request bodies over HTTP. Larger chunk sizes may improve network throughput at the cost of higher memory usage.
 
-* Feature -  Improved memory efficiency when calculating request checksums for large file uploads.
+* Feature - Improved memory efficiency when calculating request checksums for large file uploads.
 
 1.206.0 (2025-12-02)
 ------------------
