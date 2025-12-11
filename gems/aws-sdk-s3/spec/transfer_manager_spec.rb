@@ -97,11 +97,88 @@ module Aws
         end
 
         context ':http_check_size' do
-          it 'sets chunk size greater than 16KB' do
-            subject.upload_file(file, bucket: 'bucket', key: 'key', http_chunk_size: 32_768) do |resp|
-              expect(resp.context.http_request.body).to be_a(Aws::Plugins::ChecksumAlgorithm::AwsChunkedTrailerDigestIO)
-              expect(resp.context.http_request.body.instance_variable_get(:@chunk_size)).to eq(32_768)
+          before do
+            WebMock.disable!
+          end
+
+          after do
+            WebMock.enable!
+          end
+
+          let(:port) { 1234 }
+          let(:test_file) do
+            file = '/tmp/test_upload_file'
+            File.write(file, 'x' * 65_536)
+            file
+          end
+
+          let(:tm) do
+            client = Aws::S3::Client.new(
+              endpoint: "http://localhost:#{port}",
+              region: 'us-east-1',
+              access_key_id: 't',
+              secret_access_key: 't'
+            )
+            Aws::S3::TransferManager.new(client: client)
+          end
+
+          def start_mirror_server(port, chunk_size)
+            server = TCPServer.new(port)
+            chunks = []
+
+            server_thread = Thread.new do
+              client = server.accept
+
+              headers = ''
+              while (line = client.gets)
+                headers += line
+                break if line.strip.empty?
+              end
+
+              if headers.include?('Expect: 100-continue')
+                client.write("HTTP/1.1 100 Continue\r\n\r\n")
+
+                loop do
+                  sleep(0.001) # needs wait between reads
+                  data = client.read_nonblock(chunk_size, exception: false)
+                  break if data == :wait_readable || data.nil?
+
+                  chunks << data.size
+                end
+              end
+
+              chunks << headers.length
+              client.write("HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n")
+            ensure
+              client.close
             end
+            [server, server_thread, chunks]
+          end
+
+          it 'uses the given chunk size when uploading' do
+            chunk_size = 32_768
+            server, server_thread, chunks = start_mirror_server(port, chunk_size)
+            tm.upload_file(test_file, bucket: 'test-bucket', key: 'test-key', http_chunk_size: chunk_size)
+
+            server_thread.join
+            expect(chunks.first).to eq(chunk_size)
+            expect(chunks.sum).to eq(66_514) # includes trailing bytes
+          ensure
+            File.delete(test_file)
+            server.close
+          end
+
+          it 'uses default chunk size' do
+            chunk_size = 16_384
+            server, server_thread, chunks = start_mirror_server(port, chunk_size)
+            tm.upload_file(test_file, bucket: 'test-bucket', key: 'test-key')
+
+            server_thread.join
+            expect(chunks.first).to eq(chunk_size)
+            expect(chunks.sum).to eq(66_530) # includes trailing bytes
+          ensure
+            File.delete(test_file)
+            server.close
           end
 
           it 'raises error when less than 16KB' do
