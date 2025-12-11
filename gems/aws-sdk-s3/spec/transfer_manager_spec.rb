@@ -134,13 +134,13 @@ module Aws
             ensure
               client.close
             end
-            [server, server_thread, chunks, port]
+            [server, server_thread, port]
           end
 
           it 'uses the given chunk size when uploading' do
             WebMock.disable!
             chunk_size = 32_768
-            server, server_thread, chunks, port = start_mirror_server(chunk_size)
+            server, server_thread, port = start_mirror_server(chunk_size)
             client = Aws::S3::Client.new(
               endpoint: "http://localhost:#{port}",
               region: 'us-east-1',
@@ -148,19 +148,28 @@ module Aws
               secret_access_key: 't'
             )
             tm = Aws::S3::TransferManager.new(client: client)
-            tm.upload_file(test_file, bucket: 'test-bucket', key: 'test-key', http_chunk_size: chunk_size)
+            read_sizes = []
 
+            expect(Seahorse::Client::NetHttp::Patches::RequestPatches::RequestIO)
+              .to receive(:custom_stream).and_call_original
+            allow_any_instance_of(Aws::Plugins::ChecksumAlgorithm::AwsChunkedTrailerDigestIO)
+              .to receive(:read).and_wrap_original do |method, size|
+              read_sizes << size
+              method.call(size)
+            end
+
+            tm.upload_file(test_file, bucket: 'test-bucket', key: 'test-key', http_chunk_size: chunk_size)
             server_thread.join
-            expect(chunks.first).to eq(chunk_size)
+            expect(read_sizes).to all(eq(chunk_size))
           ensure
-            server.close
+            server&.close
             WebMock.enable!
           end
 
           it 'uses default chunk size' do
             WebMock.disable!
             chunk_size = 16_384
-            server, server_thread, chunks, port = start_mirror_server(chunk_size)
+            server, server_thread, port = start_mirror_server(chunk_size)
             client = Aws::S3::Client.new(
               endpoint: "http://localhost:#{port}",
               region: 'us-east-1',
@@ -168,10 +177,16 @@ module Aws
               secret_access_key: 't'
             )
             tm = Aws::S3::TransferManager.new(client: client)
-            tm.upload_file(test_file, bucket: 'test-bucket', key: 'test-key')
+            read_sizes = []
 
+            allow_any_instance_of(Aws::Plugins::ChecksumAlgorithm::AwsChunkedTrailerDigestIO)
+              .to receive(:read).and_wrap_original do |method, size|
+              read_sizes << size
+              method.call(size)
+            end
+            tm.upload_file(test_file, bucket: 'test-bucket', key: 'test-key')
             server_thread.join
-            expect(chunks.first).to eq(chunk_size)
+            expect(read_sizes).to all(eq(chunk_size))
           ensure
             server.close
             WebMock.enable!
@@ -183,7 +198,6 @@ module Aws
             end.to raise_error(ArgumentError, /:http_chunk_size must be at least 16384 bytes/)
           end
         end
-
       end
 
       describe '#upload_stream', :jruby_flaky do
