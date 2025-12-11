@@ -752,6 +752,17 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     additional_storage_volumes: [
@@ -1299,6 +1310,14 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
     # @option options [Boolean] :manage_master_user_password
     #   Specifies whether to manage the master user password with Amazon Web
     #   Services Secrets Manager in the restored DB instance.

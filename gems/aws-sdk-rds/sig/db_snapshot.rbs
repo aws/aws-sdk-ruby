@@ -233,6 +233,17 @@ module Aws
                      ?dedicated_log_volume: bool,
                      ?ca_certificate_identifier: ::String,
                      ?engine_lifecycle_support: ::String,
+                     ?tag_specifications: Array[
+                       {
+                         resource_type: ::String?,
+                         tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]?
+                       },
+                     ],
                      ?manage_master_user_password: bool,
                      ?master_user_secret_kms_key_id: ::String,
                      ?additional_storage_volumes: Array[

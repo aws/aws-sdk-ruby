@@ -482,9 +482,25 @@ module Aws::RolesAnywhere
     #
     # <b>Required permissions: </b> `rolesanywhere:CreateProfile`.
     #
-    # @option params [Boolean] :accept_role_session_name
-    #   Used to determine if a custom role session name will be accepted in a
-    #   temporary credential request.
+    # @option params [required, String] :name
+    #   The name of the profile.
+    #
+    # @option params [Boolean] :require_instance_properties
+    #   Unused, saved for future use. Will likely specify whether instance
+    #   properties are required in temporary credential requests with this
+    #   profile.
+    #
+    # @option params [String] :session_policy
+    #   A session policy that applies to the trust boundary of the vended
+    #   session credentials.
+    #
+    # @option params [required, Array<String>] :role_arns
+    #   A list of IAM roles that this profile can assume in a temporary
+    #   credential request.
+    #
+    # @option params [Array<String>] :managed_policy_arns
+    #   A list of managed policy ARNs that apply to the vended session
+    #   credentials.
     #
     # @option params [Integer] :duration_seconds
     #   Used to determine how long sessions vended using this profile are
@@ -499,27 +515,12 @@ module Aws::RolesAnywhere
     # @option params [Boolean] :enabled
     #   Specifies whether the profile is enabled.
     #
-    # @option params [Array<String>] :managed_policy_arns
-    #   A list of managed policy ARNs that apply to the vended session
-    #   credentials.
-    #
-    # @option params [required, String] :name
-    #   The name of the profile.
-    #
-    # @option params [Boolean] :require_instance_properties
-    #   Specifies whether instance properties are required in temporary
-    #   credential requests with this profile.
-    #
-    # @option params [required, Array<String>] :role_arns
-    #   A list of IAM roles that this profile can assume in a temporary
-    #   credential request.
-    #
-    # @option params [String] :session_policy
-    #   A session policy that applies to the trust boundary of the vended
-    #   session credentials.
-    #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to attach to the profile.
+    #
+    # @option params [Boolean] :accept_role_session_name
+    #   Used to determine if a custom role session name will be accepted in a
+    #   temporary credential request.
     #
     # @return [Types::ProfileDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -528,43 +529,43 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_profile({
-    #     accept_role_session_name: false,
-    #     duration_seconds: 1,
-    #     enabled: false,
-    #     managed_policy_arns: ["ManagedPolicyListMemberString"],
     #     name: "ResourceName", # required
     #     require_instance_properties: false,
-    #     role_arns: ["RoleArn"], # required
     #     session_policy: "String",
+    #     role_arns: ["RoleArn"], # required
+    #     managed_policy_arns: ["ManagedPolicyListMemberString"],
+    #     duration_seconds: 1,
+    #     enabled: false,
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     accept_role_session_name: false,
     #   })
     #
     # @example Response structure
     #
+    #   resp.profile.profile_id #=> String
+    #   resp.profile.profile_arn #=> String
+    #   resp.profile.name #=> String
+    #   resp.profile.require_instance_properties #=> Boolean
+    #   resp.profile.enabled #=> Boolean
+    #   resp.profile.created_by #=> String
+    #   resp.profile.session_policy #=> String
+    #   resp.profile.role_arns #=> Array
+    #   resp.profile.role_arns[0] #=> String
+    #   resp.profile.managed_policy_arns #=> Array
+    #   resp.profile.managed_policy_arns[0] #=> String
+    #   resp.profile.created_at #=> Time
+    #   resp.profile.updated_at #=> Time
+    #   resp.profile.duration_seconds #=> Integer
     #   resp.profile.accept_role_session_name #=> Boolean
     #   resp.profile.attribute_mappings #=> Array
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
-    #   resp.profile.created_at #=> Time
-    #   resp.profile.created_by #=> String
-    #   resp.profile.duration_seconds #=> Integer
-    #   resp.profile.enabled #=> Boolean
-    #   resp.profile.managed_policy_arns #=> Array
-    #   resp.profile.managed_policy_arns[0] #=> String
-    #   resp.profile.name #=> String
-    #   resp.profile.profile_arn #=> String
-    #   resp.profile.profile_id #=> String
-    #   resp.profile.require_instance_properties #=> Boolean
-    #   resp.profile.role_arns #=> Array
-    #   resp.profile.role_arns[0] #=> String
-    #   resp.profile.session_policy #=> String
-    #   resp.profile.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/CreateProfile AWS API Documentation
     #
@@ -584,20 +585,20 @@ module Aws::RolesAnywhere
     #
     # <b>Required permissions: </b> `rolesanywhere:CreateTrustAnchor`.
     #
-    # @option params [Boolean] :enabled
-    #   Specifies whether the trust anchor is enabled.
-    #
     # @option params [required, String] :name
     #   The name of the trust anchor.
-    #
-    # @option params [Array<Types::NotificationSetting>] :notification_settings
-    #   A list of notification settings to be associated to the trust anchor.
     #
     # @option params [required, Types::Source] :source
     #   The trust anchor type and its related certificate data.
     #
+    # @option params [Boolean] :enabled
+    #   Specifies whether the trust anchor is enabled.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to attach to the trust anchor.
+    #
+    # @option params [Array<Types::NotificationSetting>] :notification_settings
+    #   A list of notification settings to be associated to the trust anchor.
     #
     # @return [Types::TrustAnchorDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -606,48 +607,48 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_trust_anchor({
-    #     enabled: false,
     #     name: "ResourceName", # required
-    #     notification_settings: [
-    #       {
-    #         channel: "ALL", # accepts ALL
-    #         enabled: false, # required
-    #         event: "CA_CERTIFICATE_EXPIRY", # required, accepts CA_CERTIFICATE_EXPIRY, END_ENTITY_CERTIFICATE_EXPIRY
-    #         threshold: 1,
-    #       },
-    #     ],
     #     source: { # required
-    #       source_data: {
-    #         acm_pca_arn: "String",
-    #         x509_certificate_data: "SourceDataX509CertificateDataString",
-    #       },
     #       source_type: "AWS_ACM_PCA", # accepts AWS_ACM_PCA, CERTIFICATE_BUNDLE, SELF_SIGNED_REPOSITORY
+    #       source_data: {
+    #         x509_certificate_data: "SourceDataX509CertificateDataString",
+    #         acm_pca_arn: "String",
+    #       },
     #     },
+    #     enabled: false,
     #     tags: [
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     notification_settings: [
+    #       {
+    #         enabled: false, # required
+    #         event: "CA_CERTIFICATE_EXPIRY", # required, accepts CA_CERTIFICATE_EXPIRY, END_ENTITY_CERTIFICATE_EXPIRY
+    #         threshold: 1,
+    #         channel: "ALL", # accepts ALL
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
-    #   resp.trust_anchor.created_at #=> Time
-    #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.trust_anchor_id #=> String
+    #   resp.trust_anchor.trust_anchor_arn #=> String
     #   resp.trust_anchor.name #=> String
+    #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
+    #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
+    #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
+    #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.created_at #=> Time
+    #   resp.trust_anchor.updated_at #=> Time
     #   resp.trust_anchor.notification_settings #=> Array
-    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
-    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
     #   resp.trust_anchor.notification_settings[0].enabled #=> Boolean
     #   resp.trust_anchor.notification_settings[0].event #=> String, one of "CA_CERTIFICATE_EXPIRY", "END_ENTITY_CERTIFICATE_EXPIRY"
     #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
-    #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
-    #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
-    #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
-    #   resp.trust_anchor.trust_anchor_arn #=> String
-    #   resp.trust_anchor.trust_anchor_id #=> String
-    #   resp.trust_anchor.updated_at #=> Time
+    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
+    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/CreateTrustAnchor AWS API Documentation
     #
@@ -661,12 +662,12 @@ module Aws::RolesAnywhere
     # Delete an entry from the attribute mapping rules enforced by a given
     # profile.
     #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of the profile.
+    #
     # @option params [required, String] :certificate_field
     #   Fields (x509Subject, x509Issuer and x509SAN) within X.509
     #   certificates.
-    #
-    # @option params [required, String] :profile_id
-    #   The unique identifier of the profile.
     #
     # @option params [Array<String>] :specifiers
     #   A list of specifiers of a certificate field; for example, CN, OU, UID
@@ -676,35 +677,78 @@ module Aws::RolesAnywhere
     #
     #   * {Types::DeleteAttributeMappingResponse#profile #profile} => Types::ProfileDetail
     #
+    #
+    # @example Example: DeleteAttributeMapping - Deletes a custom attribute mapping rule
+    #
+    #   resp = client.delete_attribute_mapping({
+    #     certificate_field: "x509Subject", 
+    #     profile_id: "00000000-0000-0000-0000-000000000000", 
+    #     specifiers: [
+    #       "OU", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     profile: {
+    #       name: "Dummy Profile", 
+    #       accept_role_session_name: false, 
+    #       attribute_mappings: [
+    #         {
+    #           certificate_field: "x509Subject", 
+    #           mapping_rules: [
+    #             {
+    #               specifier: "CN", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       ], 
+    #       created_at: Time.parse("2021-07-19T15:55:25.986591Z"), 
+    #       created_by: "arn:aws:sts::123456789012:assumed-role/Admin/DummyRole", 
+    #       duration_seconds: 3600, 
+    #       enabled: true, 
+    #       managed_policy_arns: [
+    #       ], 
+    #       profile_arn: "arn:aws:rolesanywhere:us-east-1:123456789012:profile/00000000-0000-0000-0000-000000000000", 
+    #       profile_id: "00000000-0000-0000-0000-000000000000", 
+    #       require_instance_properties: false, 
+    #       role_arns: [
+    #         "arn:aws:iam::123456789012:role/DummyRole", 
+    #       ], 
+    #       session_policy: "", 
+    #       updated_at: Time.parse("2021-07-19T15:55:25.986591Z"), 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_attribute_mapping({
-    #     certificate_field: "x509Subject", # required, accepts x509Subject, x509Issuer, x509SAN
     #     profile_id: "Uuid", # required
+    #     certificate_field: "x509Subject", # required, accepts x509Subject, x509Issuer, x509SAN
     #     specifiers: ["String"],
     #   })
     #
     # @example Response structure
     #
+    #   resp.profile.profile_id #=> String
+    #   resp.profile.profile_arn #=> String
+    #   resp.profile.name #=> String
+    #   resp.profile.require_instance_properties #=> Boolean
+    #   resp.profile.enabled #=> Boolean
+    #   resp.profile.created_by #=> String
+    #   resp.profile.session_policy #=> String
+    #   resp.profile.role_arns #=> Array
+    #   resp.profile.role_arns[0] #=> String
+    #   resp.profile.managed_policy_arns #=> Array
+    #   resp.profile.managed_policy_arns[0] #=> String
+    #   resp.profile.created_at #=> Time
+    #   resp.profile.updated_at #=> Time
+    #   resp.profile.duration_seconds #=> Integer
     #   resp.profile.accept_role_session_name #=> Boolean
     #   resp.profile.attribute_mappings #=> Array
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
-    #   resp.profile.created_at #=> Time
-    #   resp.profile.created_by #=> String
-    #   resp.profile.duration_seconds #=> Integer
-    #   resp.profile.enabled #=> Boolean
-    #   resp.profile.managed_policy_arns #=> Array
-    #   resp.profile.managed_policy_arns[0] #=> String
-    #   resp.profile.name #=> String
-    #   resp.profile.profile_arn #=> String
-    #   resp.profile.profile_id #=> String
-    #   resp.profile.require_instance_properties #=> Boolean
-    #   resp.profile.role_arns #=> Array
-    #   resp.profile.role_arns[0] #=> String
-    #   resp.profile.session_policy #=> String
-    #   resp.profile.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DeleteAttributeMapping AWS API Documentation
     #
@@ -734,13 +778,13 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
-    #   resp.crl.created_at #=> Time
-    #   resp.crl.crl_arn #=> String
-    #   resp.crl.crl_data #=> String
     #   resp.crl.crl_id #=> String
-    #   resp.crl.enabled #=> Boolean
+    #   resp.crl.crl_arn #=> String
     #   resp.crl.name #=> String
+    #   resp.crl.enabled #=> Boolean
+    #   resp.crl.crl_data #=> String
     #   resp.crl.trust_anchor_arn #=> String
+    #   resp.crl.created_at #=> Time
     #   resp.crl.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DeleteCrl AWS API Documentation
@@ -771,25 +815,25 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.profile_id #=> String
+    #   resp.profile.profile_arn #=> String
+    #   resp.profile.name #=> String
+    #   resp.profile.require_instance_properties #=> Boolean
+    #   resp.profile.enabled #=> Boolean
+    #   resp.profile.created_by #=> String
+    #   resp.profile.session_policy #=> String
+    #   resp.profile.role_arns #=> Array
+    #   resp.profile.role_arns[0] #=> String
+    #   resp.profile.managed_policy_arns #=> Array
+    #   resp.profile.managed_policy_arns[0] #=> String
+    #   resp.profile.created_at #=> Time
+    #   resp.profile.updated_at #=> Time
+    #   resp.profile.duration_seconds #=> Integer
     #   resp.profile.accept_role_session_name #=> Boolean
     #   resp.profile.attribute_mappings #=> Array
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
-    #   resp.profile.created_at #=> Time
-    #   resp.profile.created_by #=> String
-    #   resp.profile.duration_seconds #=> Integer
-    #   resp.profile.enabled #=> Boolean
-    #   resp.profile.managed_policy_arns #=> Array
-    #   resp.profile.managed_policy_arns[0] #=> String
-    #   resp.profile.name #=> String
-    #   resp.profile.profile_arn #=> String
-    #   resp.profile.profile_id #=> String
-    #   resp.profile.require_instance_properties #=> Boolean
-    #   resp.profile.role_arns #=> Array
-    #   resp.profile.role_arns[0] #=> String
-    #   resp.profile.session_policy #=> String
-    #   resp.profile.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DeleteProfile AWS API Documentation
     #
@@ -819,21 +863,21 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
-    #   resp.trust_anchor.created_at #=> Time
-    #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.trust_anchor_id #=> String
+    #   resp.trust_anchor.trust_anchor_arn #=> String
     #   resp.trust_anchor.name #=> String
+    #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
+    #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
+    #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
+    #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.created_at #=> Time
+    #   resp.trust_anchor.updated_at #=> Time
     #   resp.trust_anchor.notification_settings #=> Array
-    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
-    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
     #   resp.trust_anchor.notification_settings[0].enabled #=> Boolean
     #   resp.trust_anchor.notification_settings[0].event #=> String, one of "CA_CERTIFICATE_EXPIRY", "END_ENTITY_CERTIFICATE_EXPIRY"
     #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
-    #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
-    #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
-    #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
-    #   resp.trust_anchor.trust_anchor_arn #=> String
-    #   resp.trust_anchor.trust_anchor_id #=> String
-    #   resp.trust_anchor.updated_at #=> Time
+    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
+    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DeleteTrustAnchor AWS API Documentation
     #
@@ -863,13 +907,13 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
-    #   resp.crl.created_at #=> Time
-    #   resp.crl.crl_arn #=> String
-    #   resp.crl.crl_data #=> String
     #   resp.crl.crl_id #=> String
-    #   resp.crl.enabled #=> Boolean
+    #   resp.crl.crl_arn #=> String
     #   resp.crl.name #=> String
+    #   resp.crl.enabled #=> Boolean
+    #   resp.crl.crl_data #=> String
     #   resp.crl.trust_anchor_arn #=> String
+    #   resp.crl.created_at #=> Time
     #   resp.crl.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DisableCrl AWS API Documentation
@@ -901,25 +945,25 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.profile_id #=> String
+    #   resp.profile.profile_arn #=> String
+    #   resp.profile.name #=> String
+    #   resp.profile.require_instance_properties #=> Boolean
+    #   resp.profile.enabled #=> Boolean
+    #   resp.profile.created_by #=> String
+    #   resp.profile.session_policy #=> String
+    #   resp.profile.role_arns #=> Array
+    #   resp.profile.role_arns[0] #=> String
+    #   resp.profile.managed_policy_arns #=> Array
+    #   resp.profile.managed_policy_arns[0] #=> String
+    #   resp.profile.created_at #=> Time
+    #   resp.profile.updated_at #=> Time
+    #   resp.profile.duration_seconds #=> Integer
     #   resp.profile.accept_role_session_name #=> Boolean
     #   resp.profile.attribute_mappings #=> Array
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
-    #   resp.profile.created_at #=> Time
-    #   resp.profile.created_by #=> String
-    #   resp.profile.duration_seconds #=> Integer
-    #   resp.profile.enabled #=> Boolean
-    #   resp.profile.managed_policy_arns #=> Array
-    #   resp.profile.managed_policy_arns[0] #=> String
-    #   resp.profile.name #=> String
-    #   resp.profile.profile_arn #=> String
-    #   resp.profile.profile_id #=> String
-    #   resp.profile.require_instance_properties #=> Boolean
-    #   resp.profile.role_arns #=> Array
-    #   resp.profile.role_arns[0] #=> String
-    #   resp.profile.session_policy #=> String
-    #   resp.profile.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DisableProfile AWS API Documentation
     #
@@ -950,21 +994,21 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
-    #   resp.trust_anchor.created_at #=> Time
-    #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.trust_anchor_id #=> String
+    #   resp.trust_anchor.trust_anchor_arn #=> String
     #   resp.trust_anchor.name #=> String
+    #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
+    #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
+    #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
+    #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.created_at #=> Time
+    #   resp.trust_anchor.updated_at #=> Time
     #   resp.trust_anchor.notification_settings #=> Array
-    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
-    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
     #   resp.trust_anchor.notification_settings[0].enabled #=> Boolean
     #   resp.trust_anchor.notification_settings[0].event #=> String, one of "CA_CERTIFICATE_EXPIRY", "END_ENTITY_CERTIFICATE_EXPIRY"
     #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
-    #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
-    #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
-    #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
-    #   resp.trust_anchor.trust_anchor_arn #=> String
-    #   resp.trust_anchor.trust_anchor_id #=> String
-    #   resp.trust_anchor.updated_at #=> Time
+    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
+    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/DisableTrustAnchor AWS API Documentation
     #
@@ -996,13 +1040,13 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
-    #   resp.crl.created_at #=> Time
-    #   resp.crl.crl_arn #=> String
-    #   resp.crl.crl_data #=> String
     #   resp.crl.crl_id #=> String
-    #   resp.crl.enabled #=> Boolean
+    #   resp.crl.crl_arn #=> String
     #   resp.crl.name #=> String
+    #   resp.crl.enabled #=> Boolean
+    #   resp.crl.crl_data #=> String
     #   resp.crl.trust_anchor_arn #=> String
+    #   resp.crl.created_at #=> Time
     #   resp.crl.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/EnableCrl AWS API Documentation
@@ -1033,25 +1077,25 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.profile_id #=> String
+    #   resp.profile.profile_arn #=> String
+    #   resp.profile.name #=> String
+    #   resp.profile.require_instance_properties #=> Boolean
+    #   resp.profile.enabled #=> Boolean
+    #   resp.profile.created_by #=> String
+    #   resp.profile.session_policy #=> String
+    #   resp.profile.role_arns #=> Array
+    #   resp.profile.role_arns[0] #=> String
+    #   resp.profile.managed_policy_arns #=> Array
+    #   resp.profile.managed_policy_arns[0] #=> String
+    #   resp.profile.created_at #=> Time
+    #   resp.profile.updated_at #=> Time
+    #   resp.profile.duration_seconds #=> Integer
     #   resp.profile.accept_role_session_name #=> Boolean
     #   resp.profile.attribute_mappings #=> Array
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
-    #   resp.profile.created_at #=> Time
-    #   resp.profile.created_by #=> String
-    #   resp.profile.duration_seconds #=> Integer
-    #   resp.profile.enabled #=> Boolean
-    #   resp.profile.managed_policy_arns #=> Array
-    #   resp.profile.managed_policy_arns[0] #=> String
-    #   resp.profile.name #=> String
-    #   resp.profile.profile_arn #=> String
-    #   resp.profile.profile_id #=> String
-    #   resp.profile.require_instance_properties #=> Boolean
-    #   resp.profile.role_arns #=> Array
-    #   resp.profile.role_arns[0] #=> String
-    #   resp.profile.session_policy #=> String
-    #   resp.profile.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/EnableProfile AWS API Documentation
     #
@@ -1082,21 +1126,21 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
-    #   resp.trust_anchor.created_at #=> Time
-    #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.trust_anchor_id #=> String
+    #   resp.trust_anchor.trust_anchor_arn #=> String
     #   resp.trust_anchor.name #=> String
+    #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
+    #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
+    #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
+    #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.created_at #=> Time
+    #   resp.trust_anchor.updated_at #=> Time
     #   resp.trust_anchor.notification_settings #=> Array
-    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
-    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
     #   resp.trust_anchor.notification_settings[0].enabled #=> Boolean
     #   resp.trust_anchor.notification_settings[0].event #=> String, one of "CA_CERTIFICATE_EXPIRY", "END_ENTITY_CERTIFICATE_EXPIRY"
     #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
-    #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
-    #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
-    #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
-    #   resp.trust_anchor.trust_anchor_arn #=> String
-    #   resp.trust_anchor.trust_anchor_id #=> String
-    #   resp.trust_anchor.updated_at #=> Time
+    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
+    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/EnableTrustAnchor AWS API Documentation
     #
@@ -1126,13 +1170,13 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
-    #   resp.crl.created_at #=> Time
-    #   resp.crl.crl_arn #=> String
-    #   resp.crl.crl_data #=> String
     #   resp.crl.crl_id #=> String
-    #   resp.crl.enabled #=> Boolean
+    #   resp.crl.crl_arn #=> String
     #   resp.crl.name #=> String
+    #   resp.crl.enabled #=> Boolean
+    #   resp.crl.crl_data #=> String
     #   resp.crl.trust_anchor_arn #=> String
+    #   resp.crl.created_at #=> Time
     #   resp.crl.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/GetCrl AWS API Documentation
@@ -1163,25 +1207,25 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
+    #   resp.profile.profile_id #=> String
+    #   resp.profile.profile_arn #=> String
+    #   resp.profile.name #=> String
+    #   resp.profile.require_instance_properties #=> Boolean
+    #   resp.profile.enabled #=> Boolean
+    #   resp.profile.created_by #=> String
+    #   resp.profile.session_policy #=> String
+    #   resp.profile.role_arns #=> Array
+    #   resp.profile.role_arns[0] #=> String
+    #   resp.profile.managed_policy_arns #=> Array
+    #   resp.profile.managed_policy_arns[0] #=> String
+    #   resp.profile.created_at #=> Time
+    #   resp.profile.updated_at #=> Time
+    #   resp.profile.duration_seconds #=> Integer
     #   resp.profile.accept_role_session_name #=> Boolean
     #   resp.profile.attribute_mappings #=> Array
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
-    #   resp.profile.created_at #=> Time
-    #   resp.profile.created_by #=> String
-    #   resp.profile.duration_seconds #=> Integer
-    #   resp.profile.enabled #=> Boolean
-    #   resp.profile.managed_policy_arns #=> Array
-    #   resp.profile.managed_policy_arns[0] #=> String
-    #   resp.profile.name #=> String
-    #   resp.profile.profile_arn #=> String
-    #   resp.profile.profile_id #=> String
-    #   resp.profile.require_instance_properties #=> Boolean
-    #   resp.profile.role_arns #=> Array
-    #   resp.profile.role_arns[0] #=> String
-    #   resp.profile.session_policy #=> String
-    #   resp.profile.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/GetProfile AWS API Documentation
     #
@@ -1215,25 +1259,25 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
-    #   resp.subject.created_at #=> Time
-    #   resp.subject.credentials #=> Array
-    #   resp.subject.credentials[0].enabled #=> Boolean
-    #   resp.subject.credentials[0].failed #=> Boolean
-    #   resp.subject.credentials[0].issuer #=> String
-    #   resp.subject.credentials[0].seen_at #=> Time
-    #   resp.subject.credentials[0].serial_number #=> String
-    #   resp.subject.credentials[0].x509_certificate_data #=> String
-    #   resp.subject.enabled #=> Boolean
-    #   resp.subject.instance_properties #=> Array
-    #   resp.subject.instance_properties[0].failed #=> Boolean
-    #   resp.subject.instance_properties[0].properties #=> Hash
-    #   resp.subject.instance_properties[0].properties["InstancePropertyMapKeyString"] #=> String
-    #   resp.subject.instance_properties[0].seen_at #=> Time
-    #   resp.subject.last_seen_at #=> Time
     #   resp.subject.subject_arn #=> String
     #   resp.subject.subject_id #=> String
-    #   resp.subject.updated_at #=> Time
+    #   resp.subject.enabled #=> Boolean
     #   resp.subject.x509_subject #=> String
+    #   resp.subject.last_seen_at #=> Time
+    #   resp.subject.created_at #=> Time
+    #   resp.subject.updated_at #=> Time
+    #   resp.subject.credentials #=> Array
+    #   resp.subject.credentials[0].seen_at #=> Time
+    #   resp.subject.credentials[0].serial_number #=> String
+    #   resp.subject.credentials[0].issuer #=> String
+    #   resp.subject.credentials[0].enabled #=> Boolean
+    #   resp.subject.credentials[0].x509_certificate_data #=> String
+    #   resp.subject.credentials[0].failed #=> Boolean
+    #   resp.subject.instance_properties #=> Array
+    #   resp.subject.instance_properties[0].seen_at #=> Time
+    #   resp.subject.instance_properties[0].properties #=> Hash
+    #   resp.subject.instance_properties[0].properties["InstancePropertyMapKeyString"] #=> String
+    #   resp.subject.instance_properties[0].failed #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/GetSubject AWS API Documentation
     #
@@ -1263,21 +1307,21 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
-    #   resp.trust_anchor.created_at #=> Time
-    #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.trust_anchor_id #=> String
+    #   resp.trust_anchor.trust_anchor_arn #=> String
     #   resp.trust_anchor.name #=> String
+    #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
+    #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
+    #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
+    #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.created_at #=> Time
+    #   resp.trust_anchor.updated_at #=> Time
     #   resp.trust_anchor.notification_settings #=> Array
-    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
-    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
     #   resp.trust_anchor.notification_settings[0].enabled #=> Boolean
     #   resp.trust_anchor.notification_settings[0].event #=> String, one of "CA_CERTIFICATE_EXPIRY", "END_ENTITY_CERTIFICATE_EXPIRY"
     #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
-    #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
-    #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
-    #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
-    #   resp.trust_anchor.trust_anchor_arn #=> String
-    #   resp.trust_anchor.trust_anchor_id #=> String
-    #   resp.trust_anchor.updated_at #=> Time
+    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
+    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/GetTrustAnchor AWS API Documentation
     #
@@ -1296,14 +1340,14 @@ module Aws::RolesAnywhere
     #
     # <b>Required permissions: </b> `rolesanywhere:ImportCrl`.
     #
+    # @option params [required, String] :name
+    #   The name of the certificate revocation list (CRL).
+    #
     # @option params [required, String, StringIO, File] :crl_data
     #   The x509 v3 specified certificate revocation list (CRL).
     #
     # @option params [Boolean] :enabled
     #   Specifies whether the certificate revocation list (CRL) is enabled.
-    #
-    # @option params [required, String] :name
-    #   The name of the certificate revocation list (CRL).
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags to attach to the certificate revocation list (CRL).
@@ -1319,9 +1363,9 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.import_crl({
+    #     name: "ResourceName", # required
     #     crl_data: "data", # required
     #     enabled: false,
-    #     name: "ResourceName", # required
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1333,13 +1377,13 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
-    #   resp.crl.created_at #=> Time
-    #   resp.crl.crl_arn #=> String
-    #   resp.crl.crl_data #=> String
     #   resp.crl.crl_id #=> String
-    #   resp.crl.enabled #=> Boolean
+    #   resp.crl.crl_arn #=> String
     #   resp.crl.name #=> String
+    #   resp.crl.enabled #=> Boolean
+    #   resp.crl.crl_data #=> String
     #   resp.crl.trust_anchor_arn #=> String
+    #   resp.crl.created_at #=> Time
     #   resp.crl.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ImportCrl AWS API Documentation
@@ -1366,8 +1410,8 @@ module Aws::RolesAnywhere
     #
     # @return [Types::ListCrlsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListCrlsResponse#crls #crls} => Array&lt;Types::CrlDetail&gt;
     #   * {Types::ListCrlsResponse#next_token #next_token} => String
+    #   * {Types::ListCrlsResponse#crls #crls} => Array&lt;Types::CrlDetail&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1380,16 +1424,16 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
-    #   resp.crls #=> Array
-    #   resp.crls[0].created_at #=> Time
-    #   resp.crls[0].crl_arn #=> String
-    #   resp.crls[0].crl_data #=> String
-    #   resp.crls[0].crl_id #=> String
-    #   resp.crls[0].enabled #=> Boolean
-    #   resp.crls[0].name #=> String
-    #   resp.crls[0].trust_anchor_arn #=> String
-    #   resp.crls[0].updated_at #=> Time
     #   resp.next_token #=> String
+    #   resp.crls #=> Array
+    #   resp.crls[0].crl_id #=> String
+    #   resp.crls[0].crl_arn #=> String
+    #   resp.crls[0].name #=> String
+    #   resp.crls[0].enabled #=> Boolean
+    #   resp.crls[0].crl_data #=> String
+    #   resp.crls[0].trust_anchor_arn #=> String
+    #   resp.crls[0].created_at #=> Time
+    #   resp.crls[0].updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ListCrls AWS API Documentation
     #
@@ -1431,25 +1475,25 @@ module Aws::RolesAnywhere
     #
     #   resp.next_token #=> String
     #   resp.profiles #=> Array
+    #   resp.profiles[0].profile_id #=> String
+    #   resp.profiles[0].profile_arn #=> String
+    #   resp.profiles[0].name #=> String
+    #   resp.profiles[0].require_instance_properties #=> Boolean
+    #   resp.profiles[0].enabled #=> Boolean
+    #   resp.profiles[0].created_by #=> String
+    #   resp.profiles[0].session_policy #=> String
+    #   resp.profiles[0].role_arns #=> Array
+    #   resp.profiles[0].role_arns[0] #=> String
+    #   resp.profiles[0].managed_policy_arns #=> Array
+    #   resp.profiles[0].managed_policy_arns[0] #=> String
+    #   resp.profiles[0].created_at #=> Time
+    #   resp.profiles[0].updated_at #=> Time
+    #   resp.profiles[0].duration_seconds #=> Integer
     #   resp.profiles[0].accept_role_session_name #=> Boolean
     #   resp.profiles[0].attribute_mappings #=> Array
     #   resp.profiles[0].attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profiles[0].attribute_mappings[0].mapping_rules #=> Array
     #   resp.profiles[0].attribute_mappings[0].mapping_rules[0].specifier #=> String
-    #   resp.profiles[0].created_at #=> Time
-    #   resp.profiles[0].created_by #=> String
-    #   resp.profiles[0].duration_seconds #=> Integer
-    #   resp.profiles[0].enabled #=> Boolean
-    #   resp.profiles[0].managed_policy_arns #=> Array
-    #   resp.profiles[0].managed_policy_arns[0] #=> String
-    #   resp.profiles[0].name #=> String
-    #   resp.profiles[0].profile_arn #=> String
-    #   resp.profiles[0].profile_id #=> String
-    #   resp.profiles[0].require_instance_properties #=> Boolean
-    #   resp.profiles[0].role_arns #=> Array
-    #   resp.profiles[0].role_arns[0] #=> String
-    #   resp.profiles[0].session_policy #=> String
-    #   resp.profiles[0].updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ListProfiles AWS API Documentation
     #
@@ -1475,8 +1519,8 @@ module Aws::RolesAnywhere
     #
     # @return [Types::ListSubjectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListSubjectsResponse#next_token #next_token} => String
     #   * {Types::ListSubjectsResponse#subjects #subjects} => Array&lt;Types::SubjectSummary&gt;
+    #   * {Types::ListSubjectsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1489,15 +1533,15 @@ module Aws::RolesAnywhere
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.subjects #=> Array
-    #   resp.subjects[0].created_at #=> Time
-    #   resp.subjects[0].enabled #=> Boolean
-    #   resp.subjects[0].last_seen_at #=> Time
     #   resp.subjects[0].subject_arn #=> String
     #   resp.subjects[0].subject_id #=> String
-    #   resp.subjects[0].updated_at #=> Time
+    #   resp.subjects[0].enabled #=> Boolean
     #   resp.subjects[0].x509_subject #=> String
+    #   resp.subjects[0].last_seen_at #=> Time
+    #   resp.subjects[0].created_at #=> Time
+    #   resp.subjects[0].updated_at #=> Time
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ListSubjects AWS API Documentation
     #
@@ -1571,21 +1615,21 @@ module Aws::RolesAnywhere
     #
     #   resp.next_token #=> String
     #   resp.trust_anchors #=> Array
-    #   resp.trust_anchors[0].created_at #=> Time
-    #   resp.trust_anchors[0].enabled #=> Boolean
+    #   resp.trust_anchors[0].trust_anchor_id #=> String
+    #   resp.trust_anchors[0].trust_anchor_arn #=> String
     #   resp.trust_anchors[0].name #=> String
+    #   resp.trust_anchors[0].source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
+    #   resp.trust_anchors[0].source.source_data.x509_certificate_data #=> String
+    #   resp.trust_anchors[0].source.source_data.acm_pca_arn #=> String
+    #   resp.trust_anchors[0].enabled #=> Boolean
+    #   resp.trust_anchors[0].created_at #=> Time
+    #   resp.trust_anchors[0].updated_at #=> Time
     #   resp.trust_anchors[0].notification_settings #=> Array
-    #   resp.trust_anchors[0].notification_settings[0].channel #=> String, one of "ALL"
-    #   resp.trust_anchors[0].notification_settings[0].configured_by #=> String
     #   resp.trust_anchors[0].notification_settings[0].enabled #=> Boolean
     #   resp.trust_anchors[0].notification_settings[0].event #=> String, one of "CA_CERTIFICATE_EXPIRY", "END_ENTITY_CERTIFICATE_EXPIRY"
     #   resp.trust_anchors[0].notification_settings[0].threshold #=> Integer
-    #   resp.trust_anchors[0].source.source_data.acm_pca_arn #=> String
-    #   resp.trust_anchors[0].source.source_data.x509_certificate_data #=> String
-    #   resp.trust_anchors[0].source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
-    #   resp.trust_anchors[0].trust_anchor_arn #=> String
-    #   resp.trust_anchors[0].trust_anchor_id #=> String
-    #   resp.trust_anchors[0].updated_at #=> Time
+    #   resp.trust_anchors[0].notification_settings[0].channel #=> String, one of "ALL"
+    #   resp.trust_anchors[0].notification_settings[0].configured_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ListTrustAnchors AWS API Documentation
     #
@@ -1600,6 +1644,9 @@ module Aws::RolesAnywhere
     # given profile. A mapping specifies a certificate field and one or more
     # specifiers that have contextual meanings.
     #
+    # @option params [required, String] :profile_id
+    #   The unique identifier of the profile.
+    #
     # @option params [required, String] :certificate_field
     #   Fields (x509Subject, x509Issuer and x509SAN) within X.509
     #   certificates.
@@ -1607,46 +1654,88 @@ module Aws::RolesAnywhere
     # @option params [required, Array<Types::MappingRule>] :mapping_rules
     #   A list of mapping entries for every supported specifier or sub-field.
     #
-    # @option params [required, String] :profile_id
-    #   The unique identifier of the profile.
-    #
     # @return [Types::PutAttributeMappingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutAttributeMappingResponse#profile #profile} => Types::ProfileDetail
     #
+    #
+    # @example Example: PutAttributeMapping - Adds a custom attribute mapping rule
+    #
+    #   resp = client.put_attribute_mapping({
+    #     certificate_field: "x509Subject", 
+    #     mapping_rules: [
+    #       {
+    #         specifier: "CN", 
+    #       }, 
+    #     ], 
+    #     profile_id: "00000000-0000-0000-0000-000000000000", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     profile: {
+    #       name: "Dummy Profile", 
+    #       accept_role_session_name: false, 
+    #       attribute_mappings: [
+    #         {
+    #           certificate_field: "x509Subject", 
+    #           mapping_rules: [
+    #             {
+    #               specifier: "CN", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       ], 
+    #       created_at: Time.parse("2021-07-19T15:55:25.986591Z"), 
+    #       created_by: "arn:aws:sts::123456789012:assumed-role/Admin/DummyRole", 
+    #       duration_seconds: 3600, 
+    #       enabled: true, 
+    #       managed_policy_arns: [
+    #       ], 
+    #       profile_arn: "arn:aws:rolesanywhere:us-east-1:123456789012:profile/00000000-0000-0000-0000-000000000000", 
+    #       profile_id: "00000000-0000-0000-0000-000000000000", 
+    #       require_instance_properties: false, 
+    #       role_arns: [
+    #         "arn:aws:iam::123456789012:role/DummyRole", 
+    #       ], 
+    #       session_policy: "", 
+    #       updated_at: Time.parse("2021-07-19T15:55:25.986591Z"), 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_attribute_mapping({
+    #     profile_id: "Uuid", # required
     #     certificate_field: "x509Subject", # required, accepts x509Subject, x509Issuer, x509SAN
     #     mapping_rules: [ # required
     #       {
     #         specifier: "MappingRuleSpecifierString", # required
     #       },
     #     ],
-    #     profile_id: "Uuid", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.profile.profile_id #=> String
+    #   resp.profile.profile_arn #=> String
+    #   resp.profile.name #=> String
+    #   resp.profile.require_instance_properties #=> Boolean
+    #   resp.profile.enabled #=> Boolean
+    #   resp.profile.created_by #=> String
+    #   resp.profile.session_policy #=> String
+    #   resp.profile.role_arns #=> Array
+    #   resp.profile.role_arns[0] #=> String
+    #   resp.profile.managed_policy_arns #=> Array
+    #   resp.profile.managed_policy_arns[0] #=> String
+    #   resp.profile.created_at #=> Time
+    #   resp.profile.updated_at #=> Time
+    #   resp.profile.duration_seconds #=> Integer
     #   resp.profile.accept_role_session_name #=> Boolean
     #   resp.profile.attribute_mappings #=> Array
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
-    #   resp.profile.created_at #=> Time
-    #   resp.profile.created_by #=> String
-    #   resp.profile.duration_seconds #=> Integer
-    #   resp.profile.enabled #=> Boolean
-    #   resp.profile.managed_policy_arns #=> Array
-    #   resp.profile.managed_policy_arns[0] #=> String
-    #   resp.profile.name #=> String
-    #   resp.profile.profile_arn #=> String
-    #   resp.profile.profile_id #=> String
-    #   resp.profile.require_instance_properties #=> Boolean
-    #   resp.profile.role_arns #=> Array
-    #   resp.profile.role_arns[0] #=> String
-    #   resp.profile.session_policy #=> String
-    #   resp.profile.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/PutAttributeMapping AWS API Documentation
     #
@@ -1665,47 +1754,95 @@ module Aws::RolesAnywhere
     #
     # <b>Required permissions: </b> `rolesanywhere:PutNotificationSettings`.
     #
-    # @option params [required, Array<Types::NotificationSetting>] :notification_settings
-    #   A list of notification settings to be associated to the trust anchor.
-    #
     # @option params [required, String] :trust_anchor_id
     #   The unique identifier of the trust anchor.
+    #
+    # @option params [required, Array<Types::NotificationSetting>] :notification_settings
+    #   A list of notification settings to be associated to the trust anchor.
     #
     # @return [Types::PutNotificationSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutNotificationSettingsResponse#trust_anchor #trust_anchor} => Types::TrustAnchorDetail
     #
+    #
+    # @example Example: PutNotificationSettings - Adds custom notification settings
+    #
+    #   resp = client.put_notification_settings({
+    #     notification_settings: [
+    #       {
+    #         enabled: true, 
+    #         event: "END_ENTITY_CERTIFICATE_EXPIRY", 
+    #         threshold: 10, 
+    #       }, 
+    #     ], 
+    #     trust_anchor_id: "c2505e61-2fc1-4a18-9fcf-94e18a22928b", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     trust_anchor: {
+    #       name: "PutNotificationSettings - TA with PCA - example", 
+    #       created_at: Time.parse("2021-07-19T15:55:25.986591Z"), 
+    #       enabled: true, 
+    #       notification_settings: [
+    #         {
+    #           channel: "ALL", 
+    #           configured_by: "rolesanywhere.amazonaws.com", 
+    #           enabled: true, 
+    #           event: "CA_CERTIFICATE_EXPIRY", 
+    #           threshold: 45, 
+    #         }, 
+    #         {
+    #           channel: "ALL", 
+    #           configured_by: "123456789012", 
+    #           enabled: true, 
+    #           event: "END_ENTITY_CERTIFICATE_EXPIRY", 
+    #           threshold: 10, 
+    #         }, 
+    #       ], 
+    #       source: {
+    #         source_data: {
+    #           acm_pca_arn: "arn:aws:acm-pca:us-west-2:123456789012:certificate-authority/123abc00-1233-12b3-1a33-54cb9c1ce2f3", 
+    #         }, 
+    #         source_type: "AWS_ACM_PCA", 
+    #       }, 
+    #       trust_anchor_arn: "arn:aws:rolesanywhere:us-west-2:123456789012:trust-anchor/c2505e61-2fc1-4a18-9fcf-94e18a22928b", 
+    #       trust_anchor_id: "c2505e61-2fc1-4a18-9fcf-94e18a22928b", 
+    #       updated_at: Time.parse("2021-07-19T15:55:25.986591Z"), 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_notification_settings({
+    #     trust_anchor_id: "Uuid", # required
     #     notification_settings: [ # required
     #       {
-    #         channel: "ALL", # accepts ALL
     #         enabled: false, # required
     #         event: "CA_CERTIFICATE_EXPIRY", # required, accepts CA_CERTIFICATE_EXPIRY, END_ENTITY_CERTIFICATE_EXPIRY
     #         threshold: 1,
+    #         channel: "ALL", # accepts ALL
     #       },
     #     ],
-    #     trust_anchor_id: "Uuid", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.trust_anchor.created_at #=> Time
-    #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.trust_anchor_id #=> String
+    #   resp.trust_anchor.trust_anchor_arn #=> String
     #   resp.trust_anchor.name #=> String
+    #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
+    #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
+    #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
+    #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.created_at #=> Time
+    #   resp.trust_anchor.updated_at #=> Time
     #   resp.trust_anchor.notification_settings #=> Array
-    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
-    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
     #   resp.trust_anchor.notification_settings[0].enabled #=> Boolean
     #   resp.trust_anchor.notification_settings[0].event #=> String, one of "CA_CERTIFICATE_EXPIRY", "END_ENTITY_CERTIFICATE_EXPIRY"
     #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
-    #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
-    #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
-    #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
-    #   resp.trust_anchor.trust_anchor_arn #=> String
-    #   resp.trust_anchor.trust_anchor_id #=> String
-    #   resp.trust_anchor.updated_at #=> Time
+    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
+    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/PutNotificationSettings AWS API Documentation
     #
@@ -1722,46 +1859,92 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b>
     # `rolesanywhere:ResetNotificationSettings`.
     #
+    # @option params [required, String] :trust_anchor_id
+    #   The unique identifier of the trust anchor.
+    #
     # @option params [required, Array<Types::NotificationSettingKey>] :notification_setting_keys
     #   A list of notification setting keys to reset. A notification setting
     #   key includes the event and the channel.
-    #
-    # @option params [required, String] :trust_anchor_id
-    #   The unique identifier of the trust anchor.
     #
     # @return [Types::ResetNotificationSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ResetNotificationSettingsResponse#trust_anchor #trust_anchor} => Types::TrustAnchorDetail
     #
+    #
+    # @example Example: ResetNotificationSettings - Resets to IAM Roles Anywhere defined default notification settings
+    #
+    #   resp = client.reset_notification_settings({
+    #     notification_setting_keys: [
+    #       {
+    #         event: "END_ENTITY_CERTIFICATE_EXPIRY", 
+    #       }, 
+    #     ], 
+    #     trust_anchor_id: "c2505e61-2fc1-4a18-9fcf-94e18a22928b", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     trust_anchor: {
+    #       name: "ResetNotificationSettings - TA with PCA - example", 
+    #       created_at: Time.parse("2021-07-19T15:55:25.986591Z"), 
+    #       enabled: true, 
+    #       notification_settings: [
+    #         {
+    #           channel: "ALL", 
+    #           configured_by: "rolesanywhere.amazonaws.com", 
+    #           enabled: true, 
+    #           event: "CA_CERTIFICATE_EXPIRY", 
+    #           threshold: 45, 
+    #         }, 
+    #         {
+    #           channel: "ALL", 
+    #           configured_by: "123456789012", 
+    #           enabled: true, 
+    #           event: "END_ENTITY_CERTIFICATE_EXPIRY", 
+    #           threshold: 45, 
+    #         }, 
+    #       ], 
+    #       source: {
+    #         source_data: {
+    #           acm_pca_arn: "arn:aws:acm-pca:us-west-2:123456789012:certificate-authority/123abc00-1233-12b3-1a33-54cb9c1ce2f3", 
+    #         }, 
+    #         source_type: "AWS_ACM_PCA", 
+    #       }, 
+    #       trust_anchor_arn: "arn:aws:rolesanywhere:us-west-2:123456789012:trust-anchor/c2505e61-2fc1-4a18-9fcf-94e18a22928b", 
+    #       trust_anchor_id: "c2505e61-2fc1-4a18-9fcf-94e18a22928b", 
+    #       updated_at: Time.parse("2021-07-19T15:55:25.986591Z"), 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.reset_notification_settings({
+    #     trust_anchor_id: "Uuid", # required
     #     notification_setting_keys: [ # required
     #       {
-    #         channel: "ALL", # accepts ALL
     #         event: "CA_CERTIFICATE_EXPIRY", # required, accepts CA_CERTIFICATE_EXPIRY, END_ENTITY_CERTIFICATE_EXPIRY
+    #         channel: "ALL", # accepts ALL
     #       },
     #     ],
-    #     trust_anchor_id: "Uuid", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.trust_anchor.created_at #=> Time
-    #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.trust_anchor_id #=> String
+    #   resp.trust_anchor.trust_anchor_arn #=> String
     #   resp.trust_anchor.name #=> String
+    #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
+    #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
+    #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
+    #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.created_at #=> Time
+    #   resp.trust_anchor.updated_at #=> Time
     #   resp.trust_anchor.notification_settings #=> Array
-    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
-    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
     #   resp.trust_anchor.notification_settings[0].enabled #=> Boolean
     #   resp.trust_anchor.notification_settings[0].event #=> String, one of "CA_CERTIFICATE_EXPIRY", "END_ENTITY_CERTIFICATE_EXPIRY"
     #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
-    #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
-    #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
-    #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
-    #   resp.trust_anchor.trust_anchor_arn #=> String
-    #   resp.trust_anchor.trust_anchor_id #=> String
-    #   resp.trust_anchor.updated_at #=> Time
+    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
+    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ResetNotificationSettings AWS API Documentation
     #
@@ -1840,14 +2023,14 @@ module Aws::RolesAnywhere
     #
     # <b>Required permissions: </b> `rolesanywhere:UpdateCrl`.
     #
-    # @option params [String, StringIO, File] :crl_data
-    #   The x509 v3 specified certificate revocation list (CRL).
-    #
     # @option params [required, String] :crl_id
     #   The unique identifier of the certificate revocation list (CRL).
     #
     # @option params [String] :name
     #   The name of the Crl.
+    #
+    # @option params [String, StringIO, File] :crl_data
+    #   The x509 v3 specified certificate revocation list (CRL).
     #
     # @return [Types::CrlDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1856,20 +2039,20 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_crl({
-    #     crl_data: "data",
     #     crl_id: "Uuid", # required
     #     name: "ResourceName",
+    #     crl_data: "data",
     #   })
     #
     # @example Response structure
     #
-    #   resp.crl.created_at #=> Time
-    #   resp.crl.crl_arn #=> String
-    #   resp.crl.crl_data #=> String
     #   resp.crl.crl_id #=> String
-    #   resp.crl.enabled #=> Boolean
+    #   resp.crl.crl_arn #=> String
     #   resp.crl.name #=> String
+    #   resp.crl.enabled #=> Boolean
+    #   resp.crl.crl_data #=> String
     #   resp.crl.trust_anchor_arn #=> String
+    #   resp.crl.created_at #=> Time
     #   resp.crl.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/UpdateCrl AWS API Documentation
@@ -1887,9 +2070,23 @@ module Aws::RolesAnywhere
     #
     # <b>Required permissions: </b> `rolesanywhere:UpdateProfile`.
     #
-    # @option params [Boolean] :accept_role_session_name
-    #   Used to determine if a custom role session name will be accepted in a
-    #   temporary credential request.
+    # @option params [required, String] :profile_id
+    #   The unique identifier of the profile.
+    #
+    # @option params [String] :name
+    #   The name of the profile.
+    #
+    # @option params [String] :session_policy
+    #   A session policy that applies to the trust boundary of the vended
+    #   session credentials.
+    #
+    # @option params [Array<String>] :role_arns
+    #   A list of IAM roles that this profile can assume in a temporary
+    #   credential request.
+    #
+    # @option params [Array<String>] :managed_policy_arns
+    #   A list of managed policy ARNs that apply to the vended session
+    #   credentials.
     #
     # @option params [Integer] :duration_seconds
     #   Used to determine how long sessions vended using this profile are
@@ -1901,23 +2098,9 @@ module Aws::RolesAnywhere
     #
     #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object
     #
-    # @option params [Array<String>] :managed_policy_arns
-    #   A list of managed policy ARNs that apply to the vended session
-    #   credentials.
-    #
-    # @option params [String] :name
-    #   The name of the profile.
-    #
-    # @option params [required, String] :profile_id
-    #   The unique identifier of the profile.
-    #
-    # @option params [Array<String>] :role_arns
-    #   A list of IAM roles that this profile can assume in a temporary
-    #   credential request.
-    #
-    # @option params [String] :session_policy
-    #   A session policy that applies to the trust boundary of the vended
-    #   session credentials.
+    # @option params [Boolean] :accept_role_session_name
+    #   Used to determine if a custom role session name will be accepted in a
+    #   temporary credential request.
     #
     # @return [Types::ProfileDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1926,36 +2109,36 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_profile({
-    #     accept_role_session_name: false,
-    #     duration_seconds: 1,
-    #     managed_policy_arns: ["ManagedPolicyListMemberString"],
-    #     name: "ResourceName",
     #     profile_id: "Uuid", # required
-    #     role_arns: ["RoleArn"],
+    #     name: "ResourceName",
     #     session_policy: "UpdateProfileRequestSessionPolicyString",
+    #     role_arns: ["RoleArn"],
+    #     managed_policy_arns: ["ManagedPolicyListMemberString"],
+    #     duration_seconds: 1,
+    #     accept_role_session_name: false,
     #   })
     #
     # @example Response structure
     #
+    #   resp.profile.profile_id #=> String
+    #   resp.profile.profile_arn #=> String
+    #   resp.profile.name #=> String
+    #   resp.profile.require_instance_properties #=> Boolean
+    #   resp.profile.enabled #=> Boolean
+    #   resp.profile.created_by #=> String
+    #   resp.profile.session_policy #=> String
+    #   resp.profile.role_arns #=> Array
+    #   resp.profile.role_arns[0] #=> String
+    #   resp.profile.managed_policy_arns #=> Array
+    #   resp.profile.managed_policy_arns[0] #=> String
+    #   resp.profile.created_at #=> Time
+    #   resp.profile.updated_at #=> Time
+    #   resp.profile.duration_seconds #=> Integer
     #   resp.profile.accept_role_session_name #=> Boolean
     #   resp.profile.attribute_mappings #=> Array
     #   resp.profile.attribute_mappings[0].certificate_field #=> String, one of "x509Subject", "x509Issuer", "x509SAN"
     #   resp.profile.attribute_mappings[0].mapping_rules #=> Array
     #   resp.profile.attribute_mappings[0].mapping_rules[0].specifier #=> String
-    #   resp.profile.created_at #=> Time
-    #   resp.profile.created_by #=> String
-    #   resp.profile.duration_seconds #=> Integer
-    #   resp.profile.enabled #=> Boolean
-    #   resp.profile.managed_policy_arns #=> Array
-    #   resp.profile.managed_policy_arns[0] #=> String
-    #   resp.profile.name #=> String
-    #   resp.profile.profile_arn #=> String
-    #   resp.profile.profile_id #=> String
-    #   resp.profile.require_instance_properties #=> Boolean
-    #   resp.profile.role_arns #=> Array
-    #   resp.profile.role_arns[0] #=> String
-    #   resp.profile.session_policy #=> String
-    #   resp.profile.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/UpdateProfile AWS API Documentation
     #
@@ -1976,14 +2159,14 @@ module Aws::RolesAnywhere
     #
     # <b>Required permissions: </b> `rolesanywhere:UpdateTrustAnchor`.
     #
+    # @option params [required, String] :trust_anchor_id
+    #   The unique identifier of the trust anchor.
+    #
     # @option params [String] :name
     #   The name of the trust anchor.
     #
     # @option params [Types::Source] :source
     #   The trust anchor type and its related certificate data.
-    #
-    # @option params [required, String] :trust_anchor_id
-    #   The unique identifier of the trust anchor.
     #
     # @return [Types::TrustAnchorDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1992,34 +2175,34 @@ module Aws::RolesAnywhere
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_trust_anchor({
+    #     trust_anchor_id: "Uuid", # required
     #     name: "ResourceName",
     #     source: {
-    #       source_data: {
-    #         acm_pca_arn: "String",
-    #         x509_certificate_data: "SourceDataX509CertificateDataString",
-    #       },
     #       source_type: "AWS_ACM_PCA", # accepts AWS_ACM_PCA, CERTIFICATE_BUNDLE, SELF_SIGNED_REPOSITORY
+    #       source_data: {
+    #         x509_certificate_data: "SourceDataX509CertificateDataString",
+    #         acm_pca_arn: "String",
+    #       },
     #     },
-    #     trust_anchor_id: "Uuid", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.trust_anchor.created_at #=> Time
-    #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.trust_anchor_id #=> String
+    #   resp.trust_anchor.trust_anchor_arn #=> String
     #   resp.trust_anchor.name #=> String
+    #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
+    #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
+    #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
+    #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.created_at #=> Time
+    #   resp.trust_anchor.updated_at #=> Time
     #   resp.trust_anchor.notification_settings #=> Array
-    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
-    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
     #   resp.trust_anchor.notification_settings[0].enabled #=> Boolean
     #   resp.trust_anchor.notification_settings[0].event #=> String, one of "CA_CERTIFICATE_EXPIRY", "END_ENTITY_CERTIFICATE_EXPIRY"
     #   resp.trust_anchor.notification_settings[0].threshold #=> Integer
-    #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
-    #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
-    #   resp.trust_anchor.source.source_type #=> String, one of "AWS_ACM_PCA", "CERTIFICATE_BUNDLE", "SELF_SIGNED_REPOSITORY"
-    #   resp.trust_anchor.trust_anchor_arn #=> String
-    #   resp.trust_anchor.trust_anchor_id #=> String
-    #   resp.trust_anchor.updated_at #=> Time
+    #   resp.trust_anchor.notification_settings[0].channel #=> String, one of "ALL"
+    #   resp.trust_anchor.notification_settings[0].configured_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/UpdateTrustAnchor AWS API Documentation
     #
@@ -2048,7 +2231,7 @@ module Aws::RolesAnywhere
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rolesanywhere'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

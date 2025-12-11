@@ -171,6 +171,14 @@ module Aws::CostExplorer
       attr_accessor processing_status: ::Array[Types::CostCategoryProcessingStatus]
       attr_accessor values: ::Array[::String]
       attr_accessor default_value: ::String
+      attr_accessor supported_resource_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CostCategoryResourceAssociation
+      attr_accessor resource_arn: ::String
+      attr_accessor cost_category_name: ::String
+      attr_accessor cost_category_arn: ::String
       SENSITIVE: []
     end
 
@@ -966,11 +974,25 @@ module Aws::CostExplorer
       attr_accessor effective_on: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor supported_resource_types: ::Array[::String]
       SENSITIVE: []
     end
 
     class ListCostCategoryDefinitionsResponse
       attr_accessor cost_category_references: ::Array[Types::CostCategoryReference]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCostCategoryResourceAssociationsRequest
+      attr_accessor cost_category_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCostCategoryResourceAssociationsResponse
+      attr_accessor cost_category_resource_associations: ::Array[Types::CostCategoryResourceAssociation]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end

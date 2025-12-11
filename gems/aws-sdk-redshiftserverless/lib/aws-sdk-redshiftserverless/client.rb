@@ -1876,6 +1876,58 @@ module Aws::RedshiftServerless
       req.send_request(options)
     end
 
+    # Returns an Identity Center authentication token for accessing Amazon
+    # Redshift Serverless workgroups.
+    #
+    # The token provides secure access to data within the specified
+    # workgroups using Identity Center identity propagation. The token
+    # expires after a specified duration and must be refreshed for continued
+    # access.
+    #
+    # The Identity and Access Management (IAM) user or role that runs
+    # GetIdentityCenterAuthToken must have appropriate permissions to access
+    # the specified workgroups and Identity Center integration must be
+    # configured for the workgroups.
+    #
+    # @option params [required, Array<String>] :workgroup_names
+    #   A list of workgroup names for which to generate the Identity Center
+    #   authentication token.
+    #
+    #   Constraints:
+    #
+    #   * Must contain between 1 and 20 workgroup names.
+    #
+    #   * Each workgroup name must be a valid Amazon Redshift Serverless
+    #     workgroup identifier.
+    #
+    #   * All specified workgroups must have Identity Center integration
+    #     enabled.
+    #
+    # @return [Types::GetIdentityCenterAuthTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIdentityCenterAuthTokenResponse#expiration_time #expiration_time} => Time
+    #   * {Types::GetIdentityCenterAuthTokenResponse#token #token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_identity_center_auth_token({
+    #     workgroup_names: ["WorkgroupName"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.expiration_time #=> Time
+    #   resp.token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetIdentityCenterAuthToken AWS API Documentation
+    #
+    # @overload get_identity_center_auth_token(params = {})
+    # @param [Hash] params ({})
+    def get_identity_center_auth_token(params = {}, options = {})
+      req = build_request(:get_identity_center_auth_token, params)
+      req.send_request(options)
+    end
+
     # Returns information about a namespace in Amazon Redshift Serverless.
     #
     # @option params [required, String] :namespace_name
@@ -4306,7 +4358,7 @@ module Aws::RedshiftServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

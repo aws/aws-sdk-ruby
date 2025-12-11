@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.302.0 (2025-12-08)
+------------------
+
+* Feature - Adding support for tagging RDS Instance/Cluster Automated Backups
+
 1.301.0 (2025-12-02)
 ------------------
 

@@ -2173,6 +2173,25 @@ module Aws::SESV2
     #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] signing_hosted_zone
+    #   The hosted zone where Amazon SES publishes the DKIM public key TXT
+    #   records for this email identity. This value indicates the DNS zone
+    #   that customers must reference when configuring their CNAME records
+    #   for DKIM authentication.
+    #
+    #   When configuring DKIM for your domain, create CNAME records in your
+    #   DNS that point to the selectors in this hosted zone. For example:
+    #
+    #   ` selector1._domainkey.yourdomain.com CNAME
+    #   selector1.<SigningHostedZone> `
+    #
+    #   ` selector2._domainkey.yourdomain.com CNAME
+    #   selector2.<SigningHostedZone> `
+    #
+    #   ` selector3._domainkey.yourdomain.com CNAME
+    #   selector3.<SigningHostedZone> `
+    #   @return [String]
+    #
     # @!attribute [rw] signing_attributes_origin
     #   A string that indicates how DKIM was configured for the identity.
     #   These are the possible values:
@@ -2334,6 +2353,7 @@ module Aws::SESV2
       :signing_enabled,
       :status,
       :tokens,
+      :signing_hosted_zone,
       :signing_attributes_origin,
       :next_signing_key_length,
       :current_signing_key_length,
@@ -7056,11 +7076,31 @@ module Aws::SESV2
     #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] signing_hosted_zone
+    #   The hosted zone where Amazon SES publishes the DKIM public key TXT
+    #   records for this email identity. This value indicates the DNS zone
+    #   that customers must reference when configuring their CNAME records
+    #   for DKIM authentication.
+    #
+    #   When configuring DKIM for your domain, create CNAME records in your
+    #   DNS that point to the selectors in this hosted zone. For example:
+    #
+    #   ` selector1._domainkey.yourdomain.com CNAME
+    #   selector1.<SigningHostedZone> `
+    #
+    #   ` selector2._domainkey.yourdomain.com CNAME
+    #   selector2.<SigningHostedZone> `
+    #
+    #   ` selector3._domainkey.yourdomain.com CNAME
+    #   selector3.<SigningHostedZone> `
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutEmailIdentityDkimSigningAttributesResponse AWS API Documentation
     #
     class PutEmailIdentityDkimSigningAttributesResponse < Struct.new(
       :dkim_status,
-      :dkim_tokens)
+      :dkim_tokens,
+      :signing_hosted_zone)
       SENSITIVE = []
       include Aws::Structure
     end

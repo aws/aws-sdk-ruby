@@ -1256,9 +1256,23 @@ module Aws
       def list_cost_category_definitions: (
                                             ?effective_on: ::String,
                                             ?next_token: ::String,
-                                            ?max_results: ::Integer
+                                            ?max_results: ::Integer,
+                                            ?supported_resource_types: Array[::String]
                                           ) -> _ListCostCategoryDefinitionsResponseSuccess
                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCostCategoryDefinitionsResponseSuccess
+
+      interface _ListCostCategoryResourceAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCostCategoryResourceAssociationsResponse]
+        def cost_category_resource_associations: () -> ::Array[Types::CostCategoryResourceAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#list_cost_category_resource_associations-instance_method
+      def list_cost_category_resource_associations: (
+                                                      ?cost_category_arn: ::String,
+                                                      ?next_token: ::String,
+                                                      ?max_results: ::Integer
+                                                    ) -> _ListCostCategoryResourceAssociationsResponseSuccess
+                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCostCategoryResourceAssociationsResponseSuccess
 
       interface _ListSavingsPlansPurchaseRecommendationGenerationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSavingsPlansPurchaseRecommendationGenerationResponse]

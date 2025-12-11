@@ -1242,6 +1242,10 @@ module Aws::SecretsManager
     #   Secrets are listed by `CreatedDate`.
     #   @return [String]
     #
+    # @!attribute [rw] sort_by
+    #   If not specified, secrets are listed by `CreatedDate`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/ListSecretsRequest AWS API Documentation
     #
     class ListSecretsRequest < Struct.new(
@@ -1249,7 +1253,8 @@ module Aws::SecretsManager
       :max_results,
       :next_token,
       :filters,
-      :sort_order)
+      :sort_order,
+      :sort_by)
       SENSITIVE = []
       include Aws::Structure
     end

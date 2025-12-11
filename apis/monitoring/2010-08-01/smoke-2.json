@@ -13,6 +13,22 @@
             "config": {
                 "region": "us-west-2"
             }
+        },
+        {
+            "id": "AmbiguousErrorResolution",
+            "operationName": "GetDashboard",
+            "input": {
+                "DashboardName": "foo"
+            },
+            "expectation": {
+                "failure": {
+                    "errorId": "ResourceNotFound"
+                }
+            },
+            "config": {
+                "region": "us-west-2"
+            },
+            "tags": ["query-compatibility"]
         }
     ]
 }

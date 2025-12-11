@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2025-12-08)
+------------------
+
+* Feature - Increases certificate string length for trust anchor source data to support ML-DSA certificates.
+
 1.44.0 (2025-11-21)
 ------------------
 

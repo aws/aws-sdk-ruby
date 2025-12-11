@@ -256,10 +256,14 @@ module Aws::QuickSight
     AxisTickLabelOptions = Shapes::StructureShape.new(name: 'AxisTickLabelOptions')
     BarChartAggregatedFieldWells = Shapes::StructureShape.new(name: 'BarChartAggregatedFieldWells')
     BarChartConfiguration = Shapes::StructureShape.new(name: 'BarChartConfiguration')
+    BarChartDefaultSeriesSettings = Shapes::StructureShape.new(name: 'BarChartDefaultSeriesSettings')
     BarChartFieldWells = Shapes::StructureShape.new(name: 'BarChartFieldWells')
     BarChartOrientation = Shapes::StringShape.new(name: 'BarChartOrientation')
+    BarChartSeriesSettings = Shapes::StructureShape.new(name: 'BarChartSeriesSettings')
     BarChartSortConfiguration = Shapes::StructureShape.new(name: 'BarChartSortConfiguration')
     BarChartVisual = Shapes::StructureShape.new(name: 'BarChartVisual')
+    BarSeriesItem = Shapes::StructureShape.new(name: 'BarSeriesItem')
+    BarSeriesItemList = Shapes::ListShape.new(name: 'BarSeriesItemList')
     BarsArrangement = Shapes::StringShape.new(name: 'BarsArrangement')
     BaseMapStyleType = Shapes::StringShape.new(name: 'BaseMapStyleType')
     BasicAuthConnectionMetadata = Shapes::StructureShape.new(name: 'BasicAuthConnectionMetadata')
@@ -288,6 +292,7 @@ module Aws::QuickSight
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     BorderRadius = Shapes::StringShape.new(name: 'BorderRadius')
+    BorderSettings = Shapes::StructureShape.new(name: 'BorderSettings')
     BorderStyle = Shapes::StructureShape.new(name: 'BorderStyle')
     BoxPlotAggregatedFieldWells = Shapes::StructureShape.new(name: 'BoxPlotAggregatedFieldWells')
     BoxPlotChartConfiguration = Shapes::StructureShape.new(name: 'BoxPlotChartConfiguration')
@@ -398,9 +403,13 @@ module Aws::QuickSight
     ColumnTooltipItem = Shapes::StructureShape.new(name: 'ColumnTooltipItem')
     ComboChartAggregatedFieldWells = Shapes::StructureShape.new(name: 'ComboChartAggregatedFieldWells')
     ComboChartConfiguration = Shapes::StructureShape.new(name: 'ComboChartConfiguration')
+    ComboChartDefaultSeriesSettings = Shapes::StructureShape.new(name: 'ComboChartDefaultSeriesSettings')
     ComboChartFieldWells = Shapes::StructureShape.new(name: 'ComboChartFieldWells')
+    ComboChartSeriesSettings = Shapes::StructureShape.new(name: 'ComboChartSeriesSettings')
     ComboChartSortConfiguration = Shapes::StructureShape.new(name: 'ComboChartSortConfiguration')
     ComboChartVisual = Shapes::StructureShape.new(name: 'ComboChartVisual')
+    ComboSeriesItem = Shapes::StructureShape.new(name: 'ComboSeriesItem')
+    ComboSeriesItemList = Shapes::ListShape.new(name: 'ComboSeriesItemList')
     CommitMode = Shapes::StringShape.new(name: 'CommitMode')
     ComparativeOrder = Shapes::StructureShape.new(name: 'ComparativeOrder')
     ComparisonConfiguration = Shapes::StructureShape.new(name: 'ComparisonConfiguration')
@@ -435,6 +444,9 @@ module Aws::QuickSight
     ContributionAnalysisSortType = Shapes::StringShape.new(name: 'ContributionAnalysisSortType')
     ContributionAnalysisTimeRanges = Shapes::StructureShape.new(name: 'ContributionAnalysisTimeRanges')
     ContributorDimensionList = Shapes::ListShape.new(name: 'ContributorDimensionList')
+    Coordinate = Shapes::StructureShape.new(name: 'Coordinate')
+    CoordinateLatitudeDouble = Shapes::FloatShape.new(name: 'CoordinateLatitudeDouble')
+    CoordinateLongitudeDouble = Shapes::FloatShape.new(name: 'CoordinateLongitudeDouble')
     CopySourceArn = Shapes::StringShape.new(name: 'CopySourceArn')
     CreateAccountCustomizationRequest = Shapes::StructureShape.new(name: 'CreateAccountCustomizationRequest')
     CreateAccountCustomizationResponse = Shapes::StructureShape.new(name: 'CreateAccountCustomizationResponse')
@@ -521,6 +533,8 @@ module Aws::QuickSight
     CustomerManagedKeyUnavailableException = Shapes::StructureShape.new(name: 'CustomerManagedKeyUnavailableException')
     Dashboard = Shapes::StructureShape.new(name: 'Dashboard')
     DashboardBehavior = Shapes::StringShape.new(name: 'DashboardBehavior')
+    DashboardCustomizationStatus = Shapes::StringShape.new(name: 'DashboardCustomizationStatus')
+    DashboardCustomizationVisualOptions = Shapes::StructureShape.new(name: 'DashboardCustomizationVisualOptions')
     DashboardError = Shapes::StructureShape.new(name: 'DashboardError')
     DashboardErrorList = Shapes::ListShape.new(name: 'DashboardErrorList')
     DashboardErrorType = Shapes::StringShape.new(name: 'DashboardErrorType')
@@ -546,6 +560,8 @@ module Aws::QuickSight
     DataBarsOptions = Shapes::StructureShape.new(name: 'DataBarsOptions')
     DataColor = Shapes::StructureShape.new(name: 'DataColor')
     DataColorPalette = Shapes::StructureShape.new(name: 'DataColorPalette')
+    DataFieldBarSeriesItem = Shapes::StructureShape.new(name: 'DataFieldBarSeriesItem')
+    DataFieldComboSeriesItem = Shapes::StructureShape.new(name: 'DataFieldComboSeriesItem')
     DataFieldSeriesItem = Shapes::StructureShape.new(name: 'DataFieldSeriesItem')
     DataLabelContent = Shapes::StringShape.new(name: 'DataLabelContent')
     DataLabelOptions = Shapes::StructureShape.new(name: 'DataLabelOptions')
@@ -664,6 +680,11 @@ module Aws::QuickSight
     DayOfTheWeek = Shapes::StringShape.new(name: 'DayOfTheWeek')
     DayOfWeek = Shapes::StringShape.new(name: 'DayOfWeek')
     DbUsername = Shapes::StringShape.new(name: 'DbUsername')
+    DecalPatternType = Shapes::StringShape.new(name: 'DecalPatternType')
+    DecalSettings = Shapes::StructureShape.new(name: 'DecalSettings')
+    DecalSettingsConfiguration = Shapes::StructureShape.new(name: 'DecalSettingsConfiguration')
+    DecalSettingsList = Shapes::ListShape.new(name: 'DecalSettingsList')
+    DecalStyleType = Shapes::StringShape.new(name: 'DecalStyleType')
     DecimalDatasetParameter = Shapes::StructureShape.new(name: 'DecimalDatasetParameter')
     DecimalDatasetParameterDefaultValue = Shapes::FloatShape.new(name: 'DecimalDatasetParameterDefaultValue')
     DecimalDatasetParameterDefaultValues = Shapes::StructureShape.new(name: 'DecimalDatasetParameterDefaultValues')
@@ -890,6 +911,7 @@ module Aws::QuickSight
     DropDownControlDisplayOptions = Shapes::StructureShape.new(name: 'DropDownControlDisplayOptions')
     DynamicDefaultValue = Shapes::StructureShape.new(name: 'DynamicDefaultValue')
     Edition = Shapes::StringShape.new(name: 'Edition')
+    ElementValue = Shapes::StringShape.new(name: 'ElementValue')
     Email = Shapes::StringShape.new(name: 'Email')
     EmbeddingIdentityType = Shapes::StringShape.new(name: 'EmbeddingIdentityType')
     EmbeddingUrl = Shapes::StringShape.new(name: 'EmbeddingUrl')
@@ -915,7 +937,9 @@ module Aws::QuickSight
     Expression = Shapes::StringShape.new(name: 'Expression')
     FailedKeyRegistrationEntries = Shapes::ListShape.new(name: 'FailedKeyRegistrationEntries')
     FailedKeyRegistrationEntry = Shapes::StructureShape.new(name: 'FailedKeyRegistrationEntry')
+    FieldBarSeriesItem = Shapes::StructureShape.new(name: 'FieldBarSeriesItem')
     FieldBasedTooltip = Shapes::StructureShape.new(name: 'FieldBasedTooltip')
+    FieldComboSeriesItem = Shapes::StructureShape.new(name: 'FieldComboSeriesItem')
     FieldFolder = Shapes::StructureShape.new(name: 'FieldFolder')
     FieldFolderDescription = Shapes::StringShape.new(name: 'FieldFolderDescription')
     FieldFolderMap = Shapes::MapShape.new(name: 'FieldFolderMap')
@@ -1044,6 +1068,15 @@ module Aws::QuickSight
     GeoSpatialColumnGroup = Shapes::StructureShape.new(name: 'GeoSpatialColumnGroup')
     GeoSpatialCountryCode = Shapes::StringShape.new(name: 'GeoSpatialCountryCode')
     GeoSpatialDataRole = Shapes::StringShape.new(name: 'GeoSpatialDataRole')
+    GeocodePreference = Shapes::StructureShape.new(name: 'GeocodePreference')
+    GeocodePreferenceList = Shapes::ListShape.new(name: 'GeocodePreferenceList')
+    GeocodePreferenceValue = Shapes::UnionShape.new(name: 'GeocodePreferenceValue')
+    GeocoderHierarchy = Shapes::StructureShape.new(name: 'GeocoderHierarchy')
+    GeocoderHierarchyCityString = Shapes::StringShape.new(name: 'GeocoderHierarchyCityString')
+    GeocoderHierarchyCountryString = Shapes::StringShape.new(name: 'GeocoderHierarchyCountryString')
+    GeocoderHierarchyCountyString = Shapes::StringShape.new(name: 'GeocoderHierarchyCountyString')
+    GeocoderHierarchyPostCodeString = Shapes::StringShape.new(name: 'GeocoderHierarchyPostCodeString')
+    GeocoderHierarchyStateString = Shapes::StringShape.new(name: 'GeocoderHierarchyStateString')
     GeospatialCategoricalColor = Shapes::StructureShape.new(name: 'GeospatialCategoricalColor')
     GeospatialCategoricalDataColor = Shapes::StructureShape.new(name: 'GeospatialCategoricalDataColor')
     GeospatialCategoricalDataColorList = Shapes::ListShape.new(name: 'GeospatialCategoricalDataColorList')
@@ -1101,6 +1134,8 @@ module Aws::QuickSight
     GetFlowMetadataOutput = Shapes::StructureShape.new(name: 'GetFlowMetadataOutput')
     GetFlowPermissionsInput = Shapes::StructureShape.new(name: 'GetFlowPermissionsInput')
     GetFlowPermissionsOutput = Shapes::StructureShape.new(name: 'GetFlowPermissionsOutput')
+    GetIdentityContextRequest = Shapes::StructureShape.new(name: 'GetIdentityContextRequest')
+    GetIdentityContextResponse = Shapes::StructureShape.new(name: 'GetIdentityContextResponse')
     GetSessionEmbedUrlRequest = Shapes::StructureShape.new(name: 'GetSessionEmbedUrlRequest')
     GetSessionEmbedUrlResponse = Shapes::StructureShape.new(name: 'GetSessionEmbedUrlResponse')
     GlobalTableBorderOptions = Shapes::StructureShape.new(name: 'GlobalTableBorderOptions')
@@ -1255,6 +1290,7 @@ module Aws::QuickSight
     KPIVisualLayoutOptions = Shapes::StructureShape.new(name: 'KPIVisualLayoutOptions')
     KPIVisualStandardLayout = Shapes::StructureShape.new(name: 'KPIVisualStandardLayout')
     KPIVisualStandardLayoutType = Shapes::StringShape.new(name: 'KPIVisualStandardLayoutType')
+    KeyPairCredentials = Shapes::StructureShape.new(name: 'KeyPairCredentials')
     KeyRegistration = Shapes::ListShape.new(name: 'KeyRegistration')
     LabelOptions = Shapes::StructureShape.new(name: 'LabelOptions')
     Latitude = Shapes::FloatShape.new(name: 'Latitude')
@@ -1588,6 +1624,8 @@ module Aws::QuickSight
     PrimaryValueDisplayType = Shapes::StringShape.new(name: 'PrimaryValueDisplayType')
     Principal = Shapes::StringShape.new(name: 'Principal')
     PrincipalList = Shapes::ListShape.new(name: 'PrincipalList')
+    PrivateKey = Shapes::StringShape.new(name: 'PrivateKey')
+    PrivateKeyPassphrase = Shapes::StringShape.new(name: 'PrivateKeyPassphrase')
     ProgressBarOptions = Shapes::StructureShape.new(name: 'ProgressBarOptions')
     ProjectId = Shapes::StringShape.new(name: 'ProjectId')
     ProjectOperation = Shapes::StructureShape.new(name: 'ProjectOperation')
@@ -1680,6 +1718,8 @@ module Aws::QuickSight
     RegisteredUserQSearchBarEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserQSearchBarEmbeddingConfiguration')
     RegisteredUserQuickChatEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserQuickChatEmbeddingConfiguration')
     RegisteredUserQuickSightConsoleEmbeddingConfiguration = Shapes::StructureShape.new(name: 'RegisteredUserQuickSightConsoleEmbeddingConfiguration')
+    RegisteredUserSnapshotJobResult = Shapes::StructureShape.new(name: 'RegisteredUserSnapshotJobResult')
+    RegisteredUserSnapshotJobResultList = Shapes::ListShape.new(name: 'RegisteredUserSnapshotJobResultList')
     RelationalTable = Shapes::StructureShape.new(name: 'RelationalTable')
     RelationalTableCatalog = Shapes::StringShape.new(name: 'RelationalTableCatalog')
     RelationalTableName = Shapes::StringShape.new(name: 'RelationalTableName')
@@ -2287,6 +2327,7 @@ module Aws::QuickSight
     UpdateVPCConnectionResponse = Shapes::StructureShape.new(name: 'UpdateVPCConnectionResponse')
     UploadSettings = Shapes::StructureShape.new(name: 'UploadSettings')
     User = Shapes::StructureShape.new(name: 'User')
+    UserIdentifier = Shapes::UnionShape.new(name: 'UserIdentifier')
     UserList = Shapes::ListShape.new(name: 'UserList')
     UserName = Shapes::StringShape.new(name: 'UserName')
     UserRole = Shapes::StringShape.new(name: 'UserRole')
@@ -2317,6 +2358,8 @@ module Aws::QuickSight
     VisualCustomActionOperation = Shapes::StructureShape.new(name: 'VisualCustomActionOperation')
     VisualCustomActionOperationList = Shapes::ListShape.new(name: 'VisualCustomActionOperationList')
     VisualCustomActionTrigger = Shapes::StringShape.new(name: 'VisualCustomActionTrigger')
+    VisualCustomizationAdditionalFieldsList = Shapes::ListShape.new(name: 'VisualCustomizationAdditionalFieldsList')
+    VisualCustomizationFieldsConfiguration = Shapes::StructureShape.new(name: 'VisualCustomizationFieldsConfiguration')
     VisualHighlightOperation = Shapes::StructureShape.new(name: 'VisualHighlightOperation')
     VisualHighlightTrigger = Shapes::StringShape.new(name: 'VisualHighlightTrigger')
     VisualInteractionOptions = Shapes::StructureShape.new(name: 'VisualInteractionOptions')
@@ -2372,6 +2415,7 @@ module Aws::QuickSight
     XpathFields = Shapes::StringShape.new(name: 'XpathFields')
     YAxisOptions = Shapes::StructureShape.new(name: 'YAxisOptions')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
+    statusCode = Shapes::IntegerShape.new(name: 'statusCode')
 
     APIKeyConnectionMetadata.add_member(:base_endpoint, Shapes::ShapeRef.new(shape: Endpoint, required: true, location_name: "BaseEndpoint"))
     APIKeyConnectionMetadata.add_member(:api_key, Shapes::ShapeRef.new(shape: APIKey, required: true, location_name: "ApiKey"))
@@ -3124,6 +3168,8 @@ module Aws::QuickSight
     BarChartConfiguration.add_member(:value_axis, Shapes::ShapeRef.new(shape: AxisDisplayOptions, location_name: "ValueAxis"))
     BarChartConfiguration.add_member(:value_label_options, Shapes::ShapeRef.new(shape: ChartAxisLabelOptions, location_name: "ValueLabelOptions"))
     BarChartConfiguration.add_member(:color_label_options, Shapes::ShapeRef.new(shape: ChartAxisLabelOptions, location_name: "ColorLabelOptions"))
+    BarChartConfiguration.add_member(:default_series_settings, Shapes::ShapeRef.new(shape: BarChartDefaultSeriesSettings, location_name: "DefaultSeriesSettings"))
+    BarChartConfiguration.add_member(:series, Shapes::ShapeRef.new(shape: BarSeriesItemList, location_name: "Series"))
     BarChartConfiguration.add_member(:legend, Shapes::ShapeRef.new(shape: LegendOptions, location_name: "Legend"))
     BarChartConfiguration.add_member(:data_labels, Shapes::ShapeRef.new(shape: DataLabelOptions, location_name: "DataLabels"))
     BarChartConfiguration.add_member(:tooltip, Shapes::ShapeRef.new(shape: TooltipOptions, location_name: "Tooltip"))
@@ -3132,8 +3178,16 @@ module Aws::QuickSight
     BarChartConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     BarChartConfiguration.struct_class = Types::BarChartConfiguration
 
+    BarChartDefaultSeriesSettings.add_member(:decal_settings, Shapes::ShapeRef.new(shape: DecalSettings, location_name: "DecalSettings"))
+    BarChartDefaultSeriesSettings.add_member(:border_settings, Shapes::ShapeRef.new(shape: BorderSettings, location_name: "BorderSettings"))
+    BarChartDefaultSeriesSettings.struct_class = Types::BarChartDefaultSeriesSettings
+
     BarChartFieldWells.add_member(:bar_chart_aggregated_field_wells, Shapes::ShapeRef.new(shape: BarChartAggregatedFieldWells, location_name: "BarChartAggregatedFieldWells"))
     BarChartFieldWells.struct_class = Types::BarChartFieldWells
+
+    BarChartSeriesSettings.add_member(:decal_settings, Shapes::ShapeRef.new(shape: DecalSettings, location_name: "DecalSettings"))
+    BarChartSeriesSettings.add_member(:border_settings, Shapes::ShapeRef.new(shape: BorderSettings, location_name: "BorderSettings"))
+    BarChartSeriesSettings.struct_class = Types::BarChartSeriesSettings
 
     BarChartSortConfiguration.add_member(:category_sort, Shapes::ShapeRef.new(shape: FieldSortOptionsList, location_name: "CategorySort"))
     BarChartSortConfiguration.add_member(:category_items_limit, Shapes::ShapeRef.new(shape: ItemsLimitConfiguration, location_name: "CategoryItemsLimit"))
@@ -3151,6 +3205,12 @@ module Aws::QuickSight
     BarChartVisual.add_member(:column_hierarchies, Shapes::ShapeRef.new(shape: ColumnHierarchyList, location_name: "ColumnHierarchies"))
     BarChartVisual.add_member(:visual_content_alt_text, Shapes::ShapeRef.new(shape: LongPlainText, location_name: "VisualContentAltText"))
     BarChartVisual.struct_class = Types::BarChartVisual
+
+    BarSeriesItem.add_member(:field_bar_series_item, Shapes::ShapeRef.new(shape: FieldBarSeriesItem, location_name: "FieldBarSeriesItem"))
+    BarSeriesItem.add_member(:data_field_bar_series_item, Shapes::ShapeRef.new(shape: DataFieldBarSeriesItem, location_name: "DataFieldBarSeriesItem"))
+    BarSeriesItem.struct_class = Types::BarSeriesItem
+
+    BarSeriesItemList.member = Shapes::ShapeRef.new(shape: BarSeriesItem)
 
     BasicAuthConnectionMetadata.add_member(:base_endpoint, Shapes::ShapeRef.new(shape: Endpoint, required: true, location_name: "BaseEndpoint"))
     BasicAuthConnectionMetadata.add_member(:username, Shapes::ShapeRef.new(shape: ActionUserName, required: true, location_name: "Username"))
@@ -3234,6 +3294,11 @@ module Aws::QuickSight
 
     BookmarksConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
     BookmarksConfigurations.struct_class = Types::BookmarksConfigurations
+
+    BorderSettings.add_member(:border_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "BorderVisibility"))
+    BorderSettings.add_member(:border_width, Shapes::ShapeRef.new(shape: PixelLength, location_name: "BorderWidth"))
+    BorderSettings.add_member(:border_color, Shapes::ShapeRef.new(shape: HexColorWithTransparency, location_name: "BorderColor"))
+    BorderSettings.struct_class = Types::BorderSettings
 
     BorderStyle.add_member(:color, Shapes::ShapeRef.new(shape: Color, location_name: "Color"))
     BorderStyle.add_member(:show, Shapes::ShapeRef.new(shape: Boolean, location_name: "Show", metadata: {"box" => true}))
@@ -3512,6 +3577,7 @@ module Aws::QuickSight
     ColumnConfiguration.add_member(:format_configuration, Shapes::ShapeRef.new(shape: FormatConfiguration, location_name: "FormatConfiguration"))
     ColumnConfiguration.add_member(:role, Shapes::ShapeRef.new(shape: ColumnRole, location_name: "Role"))
     ColumnConfiguration.add_member(:colors_configuration, Shapes::ShapeRef.new(shape: ColorsConfiguration, location_name: "ColorsConfiguration"))
+    ColumnConfiguration.add_member(:decal_settings_configuration, Shapes::ShapeRef.new(shape: DecalSettingsConfiguration, location_name: "DecalSettingsConfiguration"))
     ColumnConfiguration.struct_class = Types::ColumnConfiguration
 
     ColumnConfigurationList.member = Shapes::ShapeRef.new(shape: ColumnConfiguration)
@@ -3606,6 +3672,8 @@ module Aws::QuickSight
     ComboChartConfiguration.add_member(:secondary_y_axis_label_options, Shapes::ShapeRef.new(shape: ChartAxisLabelOptions, location_name: "SecondaryYAxisLabelOptions"))
     ComboChartConfiguration.add_member(:single_axis_options, Shapes::ShapeRef.new(shape: SingleAxisOptions, location_name: "SingleAxisOptions"))
     ComboChartConfiguration.add_member(:color_label_options, Shapes::ShapeRef.new(shape: ChartAxisLabelOptions, location_name: "ColorLabelOptions"))
+    ComboChartConfiguration.add_member(:default_series_settings, Shapes::ShapeRef.new(shape: ComboChartDefaultSeriesSettings, location_name: "DefaultSeriesSettings"))
+    ComboChartConfiguration.add_member(:series, Shapes::ShapeRef.new(shape: ComboSeriesItemList, location_name: "Series"))
     ComboChartConfiguration.add_member(:legend, Shapes::ShapeRef.new(shape: LegendOptions, location_name: "Legend"))
     ComboChartConfiguration.add_member(:bar_data_labels, Shapes::ShapeRef.new(shape: DataLabelOptions, location_name: "BarDataLabels"))
     ComboChartConfiguration.add_member(:line_data_labels, Shapes::ShapeRef.new(shape: DataLabelOptions, location_name: "LineDataLabels"))
@@ -3615,8 +3683,20 @@ module Aws::QuickSight
     ComboChartConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     ComboChartConfiguration.struct_class = Types::ComboChartConfiguration
 
+    ComboChartDefaultSeriesSettings.add_member(:line_style_settings, Shapes::ShapeRef.new(shape: LineChartLineStyleSettings, location_name: "LineStyleSettings"))
+    ComboChartDefaultSeriesSettings.add_member(:marker_style_settings, Shapes::ShapeRef.new(shape: LineChartMarkerStyleSettings, location_name: "MarkerStyleSettings"))
+    ComboChartDefaultSeriesSettings.add_member(:decal_settings, Shapes::ShapeRef.new(shape: DecalSettings, location_name: "DecalSettings"))
+    ComboChartDefaultSeriesSettings.add_member(:border_settings, Shapes::ShapeRef.new(shape: BorderSettings, location_name: "BorderSettings"))
+    ComboChartDefaultSeriesSettings.struct_class = Types::ComboChartDefaultSeriesSettings
+
     ComboChartFieldWells.add_member(:combo_chart_aggregated_field_wells, Shapes::ShapeRef.new(shape: ComboChartAggregatedFieldWells, location_name: "ComboChartAggregatedFieldWells"))
     ComboChartFieldWells.struct_class = Types::ComboChartFieldWells
+
+    ComboChartSeriesSettings.add_member(:line_style_settings, Shapes::ShapeRef.new(shape: LineChartLineStyleSettings, location_name: "LineStyleSettings"))
+    ComboChartSeriesSettings.add_member(:marker_style_settings, Shapes::ShapeRef.new(shape: LineChartMarkerStyleSettings, location_name: "MarkerStyleSettings"))
+    ComboChartSeriesSettings.add_member(:decal_settings, Shapes::ShapeRef.new(shape: DecalSettings, location_name: "DecalSettings"))
+    ComboChartSeriesSettings.add_member(:border_settings, Shapes::ShapeRef.new(shape: BorderSettings, location_name: "BorderSettings"))
+    ComboChartSeriesSettings.struct_class = Types::ComboChartSeriesSettings
 
     ComboChartSortConfiguration.add_member(:category_sort, Shapes::ShapeRef.new(shape: FieldSortOptionsList, location_name: "CategorySort"))
     ComboChartSortConfiguration.add_member(:category_items_limit, Shapes::ShapeRef.new(shape: ItemsLimitConfiguration, location_name: "CategoryItemsLimit"))
@@ -3632,6 +3712,12 @@ module Aws::QuickSight
     ComboChartVisual.add_member(:column_hierarchies, Shapes::ShapeRef.new(shape: ColumnHierarchyList, location_name: "ColumnHierarchies"))
     ComboChartVisual.add_member(:visual_content_alt_text, Shapes::ShapeRef.new(shape: LongPlainText, location_name: "VisualContentAltText"))
     ComboChartVisual.struct_class = Types::ComboChartVisual
+
+    ComboSeriesItem.add_member(:field_combo_series_item, Shapes::ShapeRef.new(shape: FieldComboSeriesItem, location_name: "FieldComboSeriesItem"))
+    ComboSeriesItem.add_member(:data_field_combo_series_item, Shapes::ShapeRef.new(shape: DataFieldComboSeriesItem, location_name: "DataFieldComboSeriesItem"))
+    ComboSeriesItem.struct_class = Types::ComboSeriesItem
+
+    ComboSeriesItemList.member = Shapes::ShapeRef.new(shape: ComboSeriesItem)
 
     ComparativeOrder.add_member(:use_ordering, Shapes::ShapeRef.new(shape: ColumnOrderingType, location_name: "UseOrdering"))
     ComparativeOrder.add_member(:specifed_order, Shapes::ShapeRef.new(shape: StringList, location_name: "SpecifedOrder"))
@@ -3729,6 +3815,10 @@ module Aws::QuickSight
     ContributionAnalysisTimeRanges.struct_class = Types::ContributionAnalysisTimeRanges
 
     ContributorDimensionList.member = Shapes::ShapeRef.new(shape: ColumnIdentifier)
+
+    Coordinate.add_member(:latitude, Shapes::ShapeRef.new(shape: CoordinateLatitudeDouble, required: true, location_name: "Latitude"))
+    Coordinate.add_member(:longitude, Shapes::ShapeRef.new(shape: CoordinateLongitudeDouble, required: true, location_name: "Longitude"))
+    Coordinate.struct_class = Types::Coordinate
 
     CreateAccountCustomizationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     CreateAccountCustomizationRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location: "querystring", location_name: "namespace"))
@@ -4253,6 +4343,9 @@ module Aws::QuickSight
     Dashboard.add_member(:link_entities, Shapes::ShapeRef.new(shape: LinkEntityArnList, location_name: "LinkEntities"))
     Dashboard.struct_class = Types::Dashboard
 
+    DashboardCustomizationVisualOptions.add_member(:fields_configuration, Shapes::ShapeRef.new(shape: VisualCustomizationFieldsConfiguration, location_name: "FieldsConfiguration"))
+    DashboardCustomizationVisualOptions.struct_class = Types::DashboardCustomizationVisualOptions
+
     DashboardError.add_member(:type, Shapes::ShapeRef.new(shape: DashboardErrorType, location_name: "Type"))
     DashboardError.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
     DashboardError.add_member(:violated_entities, Shapes::ShapeRef.new(shape: EntityList, location_name: "ViolatedEntities"))
@@ -4370,6 +4463,16 @@ module Aws::QuickSight
     DataColorPalette.add_member(:min_max_gradient, Shapes::ShapeRef.new(shape: ColorList, location_name: "MinMaxGradient"))
     DataColorPalette.add_member(:empty_fill_color, Shapes::ShapeRef.new(shape: HexColor, location_name: "EmptyFillColor"))
     DataColorPalette.struct_class = Types::DataColorPalette
+
+    DataFieldBarSeriesItem.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "FieldId"))
+    DataFieldBarSeriesItem.add_member(:field_value, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "FieldValue"))
+    DataFieldBarSeriesItem.add_member(:settings, Shapes::ShapeRef.new(shape: BarChartSeriesSettings, location_name: "Settings"))
+    DataFieldBarSeriesItem.struct_class = Types::DataFieldBarSeriesItem
+
+    DataFieldComboSeriesItem.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "FieldId"))
+    DataFieldComboSeriesItem.add_member(:field_value, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "FieldValue"))
+    DataFieldComboSeriesItem.add_member(:settings, Shapes::ShapeRef.new(shape: ComboChartSeriesSettings, location_name: "Settings"))
+    DataFieldComboSeriesItem.struct_class = Types::DataFieldComboSeriesItem
 
     DataFieldSeriesItem.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "FieldId"))
     DataFieldSeriesItem.add_member(:field_value, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "FieldValue"))
@@ -4615,6 +4718,7 @@ module Aws::QuickSight
     DataSourceCredentials.add_member(:credential_pair, Shapes::ShapeRef.new(shape: CredentialPair, location_name: "CredentialPair"))
     DataSourceCredentials.add_member(:copy_source_arn, Shapes::ShapeRef.new(shape: CopySourceArn, location_name: "CopySourceArn"))
     DataSourceCredentials.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
+    DataSourceCredentials.add_member(:key_pair_credentials, Shapes::ShapeRef.new(shape: KeyPairCredentials, location_name: "KeyPairCredentials"))
     DataSourceCredentials.add_member(:web_proxy_credentials, Shapes::ShapeRef.new(shape: WebProxyCredentials, location_name: "WebProxyCredentials"))
     DataSourceCredentials.struct_class = Types::DataSourceCredentials
 
@@ -4777,6 +4881,18 @@ module Aws::QuickSight
     DateTimeValueWhenUnsetConfiguration.add_member(:value_when_unset_option, Shapes::ShapeRef.new(shape: ValueWhenUnsetOption, location_name: "ValueWhenUnsetOption"))
     DateTimeValueWhenUnsetConfiguration.add_member(:custom_value, Shapes::ShapeRef.new(shape: SensitiveTimestamp, location_name: "CustomValue"))
     DateTimeValueWhenUnsetConfiguration.struct_class = Types::DateTimeValueWhenUnsetConfiguration
+
+    DecalSettings.add_member(:element_value, Shapes::ShapeRef.new(shape: ElementValue, location_name: "ElementValue"))
+    DecalSettings.add_member(:decal_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "DecalVisibility"))
+    DecalSettings.add_member(:decal_color, Shapes::ShapeRef.new(shape: HexColorWithTransparency, location_name: "DecalColor"))
+    DecalSettings.add_member(:decal_pattern_type, Shapes::ShapeRef.new(shape: DecalPatternType, location_name: "DecalPatternType"))
+    DecalSettings.add_member(:decal_style_type, Shapes::ShapeRef.new(shape: DecalStyleType, location_name: "DecalStyleType"))
+    DecalSettings.struct_class = Types::DecalSettings
+
+    DecalSettingsConfiguration.add_member(:custom_decal_settings, Shapes::ShapeRef.new(shape: DecalSettingsList, location_name: "CustomDecalSettings"))
+    DecalSettingsConfiguration.struct_class = Types::DecalSettingsConfiguration
+
+    DecalSettingsList.member = Shapes::ShapeRef.new(shape: DecalSettings)
 
     DecimalDatasetParameter.add_member(:id, Shapes::ShapeRef.new(shape: DatasetParameterId, required: true, location_name: "Id"))
     DecimalDatasetParameter.add_member(:name, Shapes::ShapeRef.new(shape: DatasetParameterName, required: true, location_name: "Name"))
@@ -5932,10 +6048,18 @@ module Aws::QuickSight
     FailedKeyRegistrationEntry.add_member(:sender_fault, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "SenderFault"))
     FailedKeyRegistrationEntry.struct_class = Types::FailedKeyRegistrationEntry
 
+    FieldBarSeriesItem.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "FieldId"))
+    FieldBarSeriesItem.add_member(:settings, Shapes::ShapeRef.new(shape: BarChartSeriesSettings, location_name: "Settings"))
+    FieldBarSeriesItem.struct_class = Types::FieldBarSeriesItem
+
     FieldBasedTooltip.add_member(:aggregation_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "AggregationVisibility"))
     FieldBasedTooltip.add_member(:tooltip_title_type, Shapes::ShapeRef.new(shape: TooltipTitleType, location_name: "TooltipTitleType"))
     FieldBasedTooltip.add_member(:tooltip_fields, Shapes::ShapeRef.new(shape: TooltipItemList, location_name: "TooltipFields"))
     FieldBasedTooltip.struct_class = Types::FieldBasedTooltip
+
+    FieldComboSeriesItem.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "FieldId"))
+    FieldComboSeriesItem.add_member(:settings, Shapes::ShapeRef.new(shape: ComboChartSeriesSettings, location_name: "Settings"))
+    FieldComboSeriesItem.struct_class = Types::FieldComboSeriesItem
 
     FieldFolder.add_member(:description, Shapes::ShapeRef.new(shape: FieldFolderDescription, location_name: "description"))
     FieldFolder.add_member(:columns, Shapes::ShapeRef.new(shape: FolderColumnList, location_name: "columns"))
@@ -6014,6 +6138,7 @@ module Aws::QuickSight
     FilledMapVisual.add_member(:column_hierarchies, Shapes::ShapeRef.new(shape: ColumnHierarchyList, location_name: "ColumnHierarchies"))
     FilledMapVisual.add_member(:actions, Shapes::ShapeRef.new(shape: VisualCustomActionList, location_name: "Actions"))
     FilledMapVisual.add_member(:visual_content_alt_text, Shapes::ShapeRef.new(shape: LongPlainText, location_name: "VisualContentAltText"))
+    FilledMapVisual.add_member(:geocoding_preferences, Shapes::ShapeRef.new(shape: GeocodePreferenceList, location_name: "GeocodingPreferences"))
     FilledMapVisual.struct_class = Types::FilledMapVisual
 
     Filter.add_member(:category_filter, Shapes::ShapeRef.new(shape: CategoryFilter, location_name: "CategoryFilter"))
@@ -6447,6 +6572,27 @@ module Aws::QuickSight
     GeoSpatialColumnGroup.add_member(:columns, Shapes::ShapeRef.new(shape: ColumnList, required: true, location_name: "Columns"))
     GeoSpatialColumnGroup.struct_class = Types::GeoSpatialColumnGroup
 
+    GeocodePreference.add_member(:request_key, Shapes::ShapeRef.new(shape: GeocoderHierarchy, required: true, location_name: "RequestKey"))
+    GeocodePreference.add_member(:preference, Shapes::ShapeRef.new(shape: GeocodePreferenceValue, required: true, location_name: "Preference"))
+    GeocodePreference.struct_class = Types::GeocodePreference
+
+    GeocodePreferenceList.member = Shapes::ShapeRef.new(shape: GeocodePreference)
+
+    GeocodePreferenceValue.add_member(:geocoder_hierarchy, Shapes::ShapeRef.new(shape: GeocoderHierarchy, location_name: "GeocoderHierarchy"))
+    GeocodePreferenceValue.add_member(:coordinate, Shapes::ShapeRef.new(shape: Coordinate, location_name: "Coordinate"))
+    GeocodePreferenceValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    GeocodePreferenceValue.add_member_subclass(:geocoder_hierarchy, Types::GeocodePreferenceValue::GeocoderHierarchy)
+    GeocodePreferenceValue.add_member_subclass(:coordinate, Types::GeocodePreferenceValue::Coordinate)
+    GeocodePreferenceValue.add_member_subclass(:unknown, Types::GeocodePreferenceValue::Unknown)
+    GeocodePreferenceValue.struct_class = Types::GeocodePreferenceValue
+
+    GeocoderHierarchy.add_member(:country, Shapes::ShapeRef.new(shape: GeocoderHierarchyCountryString, location_name: "Country"))
+    GeocoderHierarchy.add_member(:state, Shapes::ShapeRef.new(shape: GeocoderHierarchyStateString, location_name: "State"))
+    GeocoderHierarchy.add_member(:county, Shapes::ShapeRef.new(shape: GeocoderHierarchyCountyString, location_name: "County"))
+    GeocoderHierarchy.add_member(:city, Shapes::ShapeRef.new(shape: GeocoderHierarchyCityString, location_name: "City"))
+    GeocoderHierarchy.add_member(:post_code, Shapes::ShapeRef.new(shape: GeocoderHierarchyPostCodeString, location_name: "PostCode"))
+    GeocoderHierarchy.struct_class = Types::GeocoderHierarchy
+
     GeospatialCategoricalColor.add_member(:category_data_colors, Shapes::ShapeRef.new(shape: GeospatialCategoricalDataColorList, required: true, location_name: "CategoryDataColors"))
     GeospatialCategoricalColor.add_member(:null_data_visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "NullDataVisibility"))
     GeospatialCategoricalColor.add_member(:null_data_settings, Shapes::ShapeRef.new(shape: GeospatialNullDataSettings, location_name: "NullDataSettings"))
@@ -6593,6 +6739,7 @@ module Aws::QuickSight
     GeospatialMapVisual.add_member(:column_hierarchies, Shapes::ShapeRef.new(shape: ColumnHierarchyList, location_name: "ColumnHierarchies"))
     GeospatialMapVisual.add_member(:actions, Shapes::ShapeRef.new(shape: VisualCustomActionList, location_name: "Actions"))
     GeospatialMapVisual.add_member(:visual_content_alt_text, Shapes::ShapeRef.new(shape: LongPlainText, location_name: "VisualContentAltText"))
+    GeospatialMapVisual.add_member(:geocoding_preferences, Shapes::ShapeRef.new(shape: GeocodePreferenceList, location_name: "GeocodingPreferences"))
     GeospatialMapVisual.struct_class = Types::GeospatialMapVisual
 
     GeospatialNullDataSettings.add_member(:symbol_style, Shapes::ShapeRef.new(shape: GeospatialNullSymbolStyle, required: true, location_name: "SymbolStyle"))
@@ -6680,6 +6827,17 @@ module Aws::QuickSight
     GetFlowPermissionsOutput.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     GetFlowPermissionsOutput.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     GetFlowPermissionsOutput.struct_class = Types::GetFlowPermissionsOutput
+
+    GetIdentityContextRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    GetIdentityContextRequest.add_member(:user_identifier, Shapes::ShapeRef.new(shape: UserIdentifier, required: true, location_name: "UserIdentifier"))
+    GetIdentityContextRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
+    GetIdentityContextRequest.add_member(:session_expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SessionExpiresAt"))
+    GetIdentityContextRequest.struct_class = Types::GetIdentityContextRequest
+
+    GetIdentityContextResponse.add_member(:status, Shapes::ShapeRef.new(shape: statusCode, required: true, location: "statusCode", location_name: "Status"))
+    GetIdentityContextResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestId"))
+    GetIdentityContextResponse.add_member(:context, Shapes::ShapeRef.new(shape: String, location_name: "Context"))
+    GetIdentityContextResponse.struct_class = Types::GetIdentityContextResponse
 
     GetSessionEmbedUrlRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     GetSessionEmbedUrlRequest.add_member(:entry_point, Shapes::ShapeRef.new(shape: EntryPoint, location: "querystring", location_name: "entry-point"))
@@ -7164,6 +7322,11 @@ module Aws::QuickSight
     KPIVisualStandardLayout.add_member(:type, Shapes::ShapeRef.new(shape: KPIVisualStandardLayoutType, required: true, location_name: "Type"))
     KPIVisualStandardLayout.struct_class = Types::KPIVisualStandardLayout
 
+    KeyPairCredentials.add_member(:key_pair_username, Shapes::ShapeRef.new(shape: DbUsername, required: true, location_name: "KeyPairUsername"))
+    KeyPairCredentials.add_member(:private_key, Shapes::ShapeRef.new(shape: PrivateKey, required: true, location_name: "PrivateKey"))
+    KeyPairCredentials.add_member(:private_key_passphrase, Shapes::ShapeRef.new(shape: PrivateKeyPassphrase, location_name: "PrivateKeyPassphrase"))
+    KeyPairCredentials.struct_class = Types::KeyPairCredentials
+
     KeyRegistration.member = Shapes::ShapeRef.new(shape: RegisteredCustomerManagedKey)
 
     LabelOptions.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
@@ -7251,6 +7414,7 @@ module Aws::QuickSight
     LineChartDefaultSeriesSettings.add_member(:axis_binding, Shapes::ShapeRef.new(shape: AxisBinding, location_name: "AxisBinding"))
     LineChartDefaultSeriesSettings.add_member(:line_style_settings, Shapes::ShapeRef.new(shape: LineChartLineStyleSettings, location_name: "LineStyleSettings"))
     LineChartDefaultSeriesSettings.add_member(:marker_style_settings, Shapes::ShapeRef.new(shape: LineChartMarkerStyleSettings, location_name: "MarkerStyleSettings"))
+    LineChartDefaultSeriesSettings.add_member(:decal_settings, Shapes::ShapeRef.new(shape: DecalSettings, location_name: "DecalSettings"))
     LineChartDefaultSeriesSettings.struct_class = Types::LineChartDefaultSeriesSettings
 
     LineChartFieldWells.add_member(:line_chart_aggregated_field_wells, Shapes::ShapeRef.new(shape: LineChartAggregatedFieldWells, location_name: "LineChartAggregatedFieldWells"))
@@ -7270,6 +7434,7 @@ module Aws::QuickSight
 
     LineChartSeriesSettings.add_member(:line_style_settings, Shapes::ShapeRef.new(shape: LineChartLineStyleSettings, location_name: "LineStyleSettings"))
     LineChartSeriesSettings.add_member(:marker_style_settings, Shapes::ShapeRef.new(shape: LineChartMarkerStyleSettings, location_name: "MarkerStyleSettings"))
+    LineChartSeriesSettings.add_member(:decal_settings, Shapes::ShapeRef.new(shape: DecalSettings, location_name: "DecalSettings"))
     LineChartSeriesSettings.struct_class = Types::LineChartSeriesSettings
 
     LineChartSortConfiguration.add_member(:category_sort, Shapes::ShapeRef.new(shape: FieldSortOptionsList, location_name: "CategorySort"))
@@ -8242,6 +8407,7 @@ module Aws::QuickSight
     PivotTableConfiguration.add_member(:total_options, Shapes::ShapeRef.new(shape: PivotTableTotalOptions, location_name: "TotalOptions"))
     PivotTableConfiguration.add_member(:field_options, Shapes::ShapeRef.new(shape: PivotTableFieldOptions, location_name: "FieldOptions"))
     PivotTableConfiguration.add_member(:paginated_report_options, Shapes::ShapeRef.new(shape: PivotTablePaginatedReportOptions, location_name: "PaginatedReportOptions"))
+    PivotTableConfiguration.add_member(:dashboard_customization_visual_options, Shapes::ShapeRef.new(shape: DashboardCustomizationVisualOptions, location_name: "DashboardCustomizationVisualOptions"))
     PivotTableConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     PivotTableConfiguration.struct_class = Types::PivotTableConfiguration
 
@@ -8751,6 +8917,11 @@ module Aws::QuickSight
     RegisteredUserQuickSightConsoleEmbeddingConfiguration.add_member(:initial_path, Shapes::ShapeRef.new(shape: EntryPath, location_name: "InitialPath"))
     RegisteredUserQuickSightConsoleEmbeddingConfiguration.add_member(:feature_configurations, Shapes::ShapeRef.new(shape: RegisteredUserConsoleFeatureConfigurations, location_name: "FeatureConfigurations"))
     RegisteredUserQuickSightConsoleEmbeddingConfiguration.struct_class = Types::RegisteredUserQuickSightConsoleEmbeddingConfiguration
+
+    RegisteredUserSnapshotJobResult.add_member(:file_groups, Shapes::ShapeRef.new(shape: SnapshotJobResultFileGroupList, location_name: "FileGroups"))
+    RegisteredUserSnapshotJobResult.struct_class = Types::RegisteredUserSnapshotJobResult
+
+    RegisteredUserSnapshotJobResultList.member = Shapes::ShapeRef.new(shape: RegisteredUserSnapshotJobResult)
 
     RelationalTable.add_member(:data_source_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DataSourceArn"))
     RelationalTable.add_member(:catalog, Shapes::ShapeRef.new(shape: RelationalTableCatalog, location_name: "Catalog"))
@@ -9381,6 +9552,7 @@ module Aws::QuickSight
     SnapshotJobErrorInfo.struct_class = Types::SnapshotJobErrorInfo
 
     SnapshotJobResult.add_member(:anonymous_users, Shapes::ShapeRef.new(shape: AnonymousUserSnapshotJobResultList, location_name: "AnonymousUsers"))
+    SnapshotJobResult.add_member(:registered_users, Shapes::ShapeRef.new(shape: RegisteredUserSnapshotJobResultList, location_name: "RegisteredUsers"))
     SnapshotJobResult.struct_class = Types::SnapshotJobResult
 
     SnapshotJobResultErrorInfo.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
@@ -9497,7 +9669,7 @@ module Aws::QuickSight
     StartDashboardSnapshotJobRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     StartDashboardSnapshotJobRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "DashboardId"))
     StartDashboardSnapshotJobRequest.add_member(:snapshot_job_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SnapshotJobId"))
-    StartDashboardSnapshotJobRequest.add_member(:user_configuration, Shapes::ShapeRef.new(shape: SnapshotUserConfiguration, required: true, location_name: "UserConfiguration"))
+    StartDashboardSnapshotJobRequest.add_member(:user_configuration, Shapes::ShapeRef.new(shape: SnapshotUserConfiguration, location_name: "UserConfiguration"))
     StartDashboardSnapshotJobRequest.add_member(:snapshot_configuration, Shapes::ShapeRef.new(shape: SnapshotConfiguration, required: true, location_name: "SnapshotConfiguration"))
     StartDashboardSnapshotJobRequest.struct_class = Types::StartDashboardSnapshotJobRequest
 
@@ -9644,6 +9816,7 @@ module Aws::QuickSight
     TableConfiguration.add_member(:field_options, Shapes::ShapeRef.new(shape: TableFieldOptions, location_name: "FieldOptions"))
     TableConfiguration.add_member(:paginated_report_options, Shapes::ShapeRef.new(shape: TablePaginatedReportOptions, location_name: "PaginatedReportOptions"))
     TableConfiguration.add_member(:table_inline_visualizations, Shapes::ShapeRef.new(shape: TableInlineVisualizationList, location_name: "TableInlineVisualizations"))
+    TableConfiguration.add_member(:dashboard_customization_visual_options, Shapes::ShapeRef.new(shape: DashboardCustomizationVisualOptions, location_name: "DashboardCustomizationVisualOptions"))
     TableConfiguration.add_member(:interactions, Shapes::ShapeRef.new(shape: VisualInteractionOptions, location_name: "Interactions"))
     TableConfiguration.struct_class = Types::TableConfiguration
 
@@ -11095,6 +11268,16 @@ module Aws::QuickSight
     User.add_member(:external_login_id, Shapes::ShapeRef.new(shape: String, location_name: "ExternalLoginId"))
     User.struct_class = Types::User
 
+    UserIdentifier.add_member(:user_name, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "UserName"))
+    UserIdentifier.add_member(:email, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Email"))
+    UserIdentifier.add_member(:user_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "UserArn"))
+    UserIdentifier.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    UserIdentifier.add_member_subclass(:user_name, Types::UserIdentifier::UserName)
+    UserIdentifier.add_member_subclass(:email, Types::UserIdentifier::Email)
+    UserIdentifier.add_member_subclass(:user_arn, Types::UserIdentifier::UserArn)
+    UserIdentifier.add_member_subclass(:unknown, Types::UserIdentifier::Unknown)
+    UserIdentifier.struct_class = Types::UserIdentifier
+
     UserList.member = Shapes::ShapeRef.new(shape: User)
 
     VPCConnection.add_member(:vpc_connection_id, Shapes::ShapeRef.new(shape: VPCConnectionResourceIdUnrestricted, location_name: "VPCConnectionId"))
@@ -11185,6 +11368,12 @@ module Aws::QuickSight
     VisualCustomActionOperation.struct_class = Types::VisualCustomActionOperation
 
     VisualCustomActionOperationList.member = Shapes::ShapeRef.new(shape: VisualCustomActionOperation)
+
+    VisualCustomizationAdditionalFieldsList.member = Shapes::ShapeRef.new(shape: ColumnIdentifier)
+
+    VisualCustomizationFieldsConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: DashboardCustomizationStatus, location_name: "Status"))
+    VisualCustomizationFieldsConfiguration.add_member(:additional_fields, Shapes::ShapeRef.new(shape: VisualCustomizationAdditionalFieldsList, location_name: "AdditionalFields"))
+    VisualCustomizationFieldsConfiguration.struct_class = Types::VisualCustomizationFieldsConfiguration
 
     VisualHighlightOperation.add_member(:trigger, Shapes::ShapeRef.new(shape: VisualHighlightTrigger, required: true, location_name: "Trigger"))
     VisualHighlightOperation.struct_class = Types::VisualHighlightOperation
@@ -13140,6 +13329,20 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_identity_context, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIdentityContext"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/identity-context"
+        o.input = Shapes::ShapeRef.new(shape: GetIdentityContextRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetIdentityContextResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 

@@ -440,6 +440,7 @@ module Aws::RDS
       attr_accessor master_user_secret_kms_key_id: ::String
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
       attr_accessor source_region: ::String
       SENSITIVE: [:master_user_password, :pre_signed_url]
@@ -540,6 +541,7 @@ module Aws::RDS
       attr_accessor multi_tenant: bool
       attr_accessor dedicated_log_volume: bool
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
       attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       SENSITIVE: [:master_user_password, :tde_credential_password]
@@ -593,6 +595,7 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool
       attr_accessor upgrade_storage_config: bool
       attr_accessor ca_certificate_identifier: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       attr_accessor source_region: ::String
       SENSITIVE: [:pre_signed_url]
@@ -921,6 +924,7 @@ module Aws::RDS
       attr_accessor iops: ::Integer
       attr_accessor storage_throughput: ::Integer
       attr_accessor aws_backup_recovery_point_arn: ::String
+      attr_accessor tag_list: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
@@ -1300,6 +1304,7 @@ module Aws::RDS
       attr_accessor backup_target: ::String
       attr_accessor multi_tenant: bool
       attr_accessor aws_backup_recovery_point_arn: ::String
+      attr_accessor tag_list: ::Array[Types::Tag]
       attr_accessor dedicated_log_volume: bool
       attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       SENSITIVE: []
@@ -3062,6 +3067,7 @@ module Aws::RDS
       attr_accessor multi_tenant: bool
       attr_accessor dedicated_log_volume: bool
       attr_accessor engine: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
       attr_accessor additional_storage_volumes: ::Array[Types::ModifyAdditionalStorageVolume]
       SENSITIVE: [:master_user_password, :tde_credential_password]
@@ -3521,6 +3527,7 @@ module Aws::RDS
       attr_accessor db_instance_identifier: ::String
       attr_accessor backup_retention_period: ::Integer
       attr_accessor preferred_backup_window: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       SENSITIVE: []
     end
 
@@ -3795,6 +3802,7 @@ module Aws::RDS
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       SENSITIVE: [:master_user_password]
     end
 
@@ -3839,6 +3847,7 @@ module Aws::RDS
       attr_accessor performance_insights_kms_key_id: ::String
       attr_accessor performance_insights_retention_period: ::Integer
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       SENSITIVE: []
     end
 
@@ -3883,6 +3892,7 @@ module Aws::RDS
       attr_accessor performance_insights_kms_key_id: ::String
       attr_accessor performance_insights_retention_period: ::Integer
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       SENSITIVE: []
     end
 
@@ -3934,6 +3944,7 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
       attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
@@ -3998,6 +4009,7 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       SENSITIVE: [:master_user_password]
     end
@@ -4054,6 +4066,7 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
       attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
@@ -4202,6 +4215,7 @@ module Aws::RDS
       attr_accessor backup_retention_period: ::Integer
       attr_accessor kms_key_id: ::String
       attr_accessor pre_signed_url: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       attr_accessor source_region: ::String
       SENSITIVE: [:pre_signed_url]
     end
@@ -4359,6 +4373,12 @@ module Aws::RDS
 
     class TagListMessage
       attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagSpecification
+      attr_accessor resource_type: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 

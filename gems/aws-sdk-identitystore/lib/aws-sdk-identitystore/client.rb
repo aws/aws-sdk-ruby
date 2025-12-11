@@ -639,6 +639,13 @@ module Aws::IdentityStore
     #   The user's birthdate in YYYY-MM-DD format. This field supports
     #   standard date format for storing personal information.
     #
+    # @option params [Hash<String,Hash,Array,String,Numeric,Boolean>] :extensions
+    #   A map with additional attribute extensions for the user. Each map key
+    #   corresponds to an extension name, while map values represent extension
+    #   data in `Document` type (not supported by Java V1, Go V1 and older
+    #   versions of the CLI). `aws:identitystore:enterprise` is the only
+    #   supported extension name.
+    #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserResponse#identity_store_id #identity_store_id} => String
@@ -701,6 +708,9 @@ module Aws::IdentityStore
     #     ],
     #     website: "SensitiveStringType",
     #     birthdate: "SensitiveStringType",
+    #     extensions: {
+    #       "ExtensionName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #     },
     #   })
     #
     # @example Response structure
@@ -943,6 +953,11 @@ module Aws::IdentityStore
     # @option params [required, String] :user_id
     #   The identifier for a user in the identity store.
     #
+    # @option params [Array<String>] :extensions
+    #   A collection of extension names indicating what extensions the service
+    #   should retrieve alongside other user attributes.
+    #   `aws:identitystore:enterprise` is the only supported extension name.
+    #
     # @return [Types::DescribeUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeUserResponse#identity_store_id #identity_store_id} => String
@@ -969,12 +984,14 @@ module Aws::IdentityStore
     #   * {Types::DescribeUserResponse#created_by #created_by} => String
     #   * {Types::DescribeUserResponse#updated_at #updated_at} => Time
     #   * {Types::DescribeUserResponse#updated_by #updated_by} => String
+    #   * {Types::DescribeUserResponse#extensions #extensions} => Hash&lt;String,Hash,Array,String,Numeric,Boolean&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_user({
     #     identity_store_id: "IdentityStoreId", # required
     #     user_id: "ResourceId", # required
+    #     extensions: ["ExtensionName"],
     #   })
     #
     # @example Response structure
@@ -1028,6 +1045,8 @@ module Aws::IdentityStore
     #   resp.created_by #=> String
     #   resp.updated_at #=> Time
     #   resp.updated_by #=> String
+    #   resp.extensions #=> Hash
+    #   resp.extensions["ExtensionName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DescribeUser AWS API Documentation
     #
@@ -1516,6 +1535,11 @@ module Aws::IdentityStore
     #   lower case letters. This value is generated at the time that a new
     #   identity store is created.
     #
+    # @option params [Array<String>] :extensions
+    #   A collection of extension names indicating what extensions the service
+    #   should retrieve alongside other user attributes.
+    #   `aws:identitystore:enterprise` is the only supported extension name.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per request. This
     #   parameter is used in the ` ListUsers` and `ListGroups` requests to
@@ -1544,6 +1568,7 @@ module Aws::IdentityStore
     #
     #   resp = client.list_users({
     #     identity_store_id: "IdentityStoreId", # required
+    #     extensions: ["ExtensionName"],
     #     max_results: 1,
     #     next_token: "NextToken",
     #     filters: [
@@ -1606,6 +1631,8 @@ module Aws::IdentityStore
     #   resp.users[0].created_by #=> String
     #   resp.users[0].updated_at #=> Time
     #   resp.users[0].updated_by #=> String
+    #   resp.users[0].extensions #=> Hash
+    #   resp.users[0].extensions["ExtensionName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListUsers AWS API Documentation
@@ -1721,7 +1748,7 @@ module Aws::IdentityStore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-identitystore'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

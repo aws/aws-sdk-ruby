@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.166.0 (2025-12-11)
+------------------
+
+* Feature - This release adds new GetIdentityContext API, Dashboard customization options for tables and pivot tables, Visual styling options- borders and decals, map GeocodingPreferences, KeyPairCredentials for DataSourceCredentials. Snapshot APIs now support registered users. Parameters limit increased to 400
+
 1.165.0 (2025-11-21)
 ------------------
 

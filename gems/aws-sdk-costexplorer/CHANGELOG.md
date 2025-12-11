@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.142.0 (2025-12-08)
+------------------
+
+* Feature - Add support for Cost Category resource associations including filtering by resource type on ListCostCategoryDefinitions and new ListCostCategoryResourceAssociations API.
+
 1.141.0 (2025-12-02)
 ------------------
 

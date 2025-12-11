@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2025-12-09)
+------------------
+
+* Feature - Token Exchange introduces seamless token exchange capabilities for IVS RTX, enabling customers to upgrade or downgrade token capabilities and update token attributes within the IVS client SDK without forcing clients to disconnect and reconnect.
+
 1.54.0 (2025-11-21)
 ------------------
 

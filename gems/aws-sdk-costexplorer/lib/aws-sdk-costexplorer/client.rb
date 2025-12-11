@@ -698,22 +698,22 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Creates a new Cost Category with the requested name and rules.
+    # Creates a new cost category with the requested name and rules.
     #
     # @option params [required, String] :name
-    #   The unique name of the Cost Category.
+    #   The unique name of the cost category.
     #
     # @option params [String] :effective_start
-    #   The Cost Category's effective start date. It can only be a billing
+    #   The cost category's effective start date. It can only be a billing
     #   start date (first day of the month). If the date isn't provided,
     #   it's the first day of the current month. Dates can't be before the
     #   previous twelve months, or in the future.
     #
     # @option params [required, String] :rule_version
-    #   The rule schema version in this particular Cost Category.
+    #   The rule schema version in this particular cost category.
     #
     # @option params [required, Array<Types::CostCategoryRule>] :rules
-    #   The Cost Category rules used to categorize costs. For more
+    #   The cost category rules used to categorize costs. For more
     #   information, see [CostCategoryRule][1].
     #
     #
@@ -724,8 +724,8 @@ module Aws::CostExplorer
     #   The default value for the cost category.
     #
     # @option params [Array<Types::CostCategorySplitChargeRule>] :split_charge_rules
-    #   The split charge rules used to allocate your charges between your Cost
-    #   Category values.
+    #   The split charge rules used to allocate your charges between your cost
+    #   category values.
     #
     # @option params [Array<Types::ResourceTag>] :resource_tags
     #   An optional list of tags to associate with the specified [
@@ -890,11 +890,11 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Deletes a Cost Category. Expenses from this month going forward will
-    # no longer be categorized with this Cost Category.
+    # Deletes a cost category. Expenses from this month going forward will
+    # no longer be categorized with this cost category.
     #
     # @option params [required, String] :cost_category_arn
-    #   The unique identifier for your Cost Category.
+    #   The unique identifier for your cost category.
     #
     # @return [Types::DeleteCostCategoryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -922,19 +922,19 @@ module Aws::CostExplorer
     end
 
     # Returns the name, Amazon Resource Name (ARN), rules, definition, and
-    # effective dates of a Cost Category that's defined in the account.
+    # effective dates of a cost category that's defined in the account.
     #
-    # You have the option to use `EffectiveOn` to return a Cost Category
+    # You have the option to use `EffectiveOn` to return a cost category
     # that's active on a specific date. If there's no `EffectiveOn`
     # specified, you see a Cost Category that's effective on the current
-    # date. If Cost Category is still effective, `EffectiveEnd` is omitted
+    # date. If cost category is still effective, `EffectiveEnd` is omitted
     # in the response.
     #
     # @option params [required, String] :cost_category_arn
-    #   The unique identifier for your Cost Category.
+    #   The unique identifier for your cost category.
     #
     # @option params [String] :effective_on
-    #   The date when the Cost Category was effective.
+    #   The date when the cost category was effective.
     #
     # @return [Types::DescribeCostCategoryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1839,6 +1839,10 @@ module Aws::CostExplorer
     #   You can nest `Expression` objects to define any combination of
     #   dimension filters. For more information, see [Expression][1].
     #
+    #   The `GetCostAndUsageWithResources` operation requires that you either
+    #   group by or filter by a `ResourceId`. It requires the [Expression][1]
+    #   `"SERVICE = Amazon Elastic Compute Cloud - Compute"` in the filter.
+    #
     #   Valid values for `MatchOptions` for `Dimensions` are `EQUALS` and
     #   `CASE_SENSITIVE`.
     #
@@ -1981,9 +1985,9 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Retrieves an array of Cost Category names and values incurred cost.
+    # Retrieves an array of cost category names and values incurred cost.
     #
-    # <note markdown="1"> If some Cost Category names and values are not associated with any
+    # <note markdown="1"> If some cost category names and values are not associated with any
     # cost, they will not be returned by this API.
     #
     #  </note>
@@ -1992,15 +1996,15 @@ module Aws::CostExplorer
     #   The value that you want to search the filter values for.
     #
     #   If you don't specify a `CostCategoryName`, `SearchString` is used to
-    #   filter Cost Category names that match the `SearchString` pattern. If
+    #   filter cost category names that match the `SearchString` pattern. If
     #   you specify a `CostCategoryName`, `SearchString` is used to filter
-    #   Cost Category values that match the `SearchString` pattern.
+    #   cost category values that match the `SearchString` pattern.
     #
     # @option params [required, Types::DateInterval] :time_period
     #   The time period of the request.
     #
     # @option params [String] :cost_category_name
-    #   The unique name of the Cost Category.
+    #   The unique name of the cost category.
     #
     # @option params [Types::Expression] :filter
     #   Use `Expression` to filter in various Cost Explorer APIs.
@@ -3017,7 +3021,7 @@ module Aws::CostExplorer
     # ElastiCache, Amazon Relational Database Service, or Amazon Redshift
     # usage is covered by a reservation. An organization's management
     # account can see the coverage of the associated member accounts. This
-    # supports dimensions, Cost Categories, and nested expressions. For any
+    # supports dimensions, cost categories, and nested expressions. For any
     # time period, you can filter data about reservation usage by the
     # following dimensions:
     #
@@ -4164,7 +4168,7 @@ module Aws::CostExplorer
     # Retrieves the Savings Plans covered for your account. This enables you
     # to see how much of your cost is covered by a Savings Plan. An
     # organization’s management account can see the coverage of the
-    # associated member accounts. This supports dimensions, Cost Categories,
+    # associated member accounts. This supports dimensions, cost categories,
     # and nested expressions. For any time period, you can filter data for
     # Savings Plans usage with the following dimensions:
     #
@@ -5357,17 +5361,17 @@ module Aws::CostExplorer
     end
 
     # Returns the name, Amazon Resource Name (ARN), `NumberOfRules` and
-    # effective dates of all Cost Categories defined in the account. You
-    # have the option to use `EffectiveOn` to return a list of Cost
-    # Categories that were active on a specific date. If there is no
-    # `EffectiveOn` specified, you’ll see Cost Categories that are effective
-    # on the current date. If Cost Category is still effective,
-    # `EffectiveEnd` is omitted in the response.
+    # effective dates of all cost categories defined in the account. You
+    # have the option to use `EffectiveOn` and `SupportedResourceTypes` to
+    # return a list of cost categories that were active on a specific date.
+    # If there is no `EffectiveOn` specified, you’ll see cost categories
+    # that are effective on the current date. If cost category is still
+    # effective, `EffectiveEnd` is omitted in the response.
     # `ListCostCategoryDefinitions` supports pagination. The request can
     # have a `MaxResults` range up to 100.
     #
     # @option params [String] :effective_on
-    #   The date when the Cost Category was effective.
+    #   The date when the cost category was effective.
     #
     # @option params [String] :next_token
     #   The token to retrieve the next set of results. Amazon Web Services
@@ -5376,6 +5380,13 @@ module Aws::CostExplorer
     #
     # @option params [Integer] :max_results
     #   The number of entries a paginated response contains.
+    #
+    # @option params [Array<String>] :supported_resource_types
+    #   Filter cost category definitions that are supported by given resource
+    #   types based on the latest version. If the filter is present, the
+    #   result only includes Cost Categories that supports input resource
+    #   type. If the filter isn't provided, no filtering is applied. The
+    #   valid values are `billing:rispgroupsharing`.
     #
     # @return [Types::ListCostCategoryDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5390,6 +5401,7 @@ module Aws::CostExplorer
     #     effective_on: "ZonedDateTime",
     #     next_token: "NextPageToken",
     #     max_results: 1,
+    #     supported_resource_types: ["ResourceType"],
     #   })
     #
     # @example Response structure
@@ -5406,6 +5418,8 @@ module Aws::CostExplorer
     #   resp.cost_category_references[0].values #=> Array
     #   resp.cost_category_references[0].values[0] #=> String
     #   resp.cost_category_references[0].default_value #=> String
+    #   resp.cost_category_references[0].supported_resource_types #=> Array
+    #   resp.cost_category_references[0].supported_resource_types[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostCategoryDefinitions AWS API Documentation
@@ -5414,6 +5428,55 @@ module Aws::CostExplorer
     # @param [Hash] params ({})
     def list_cost_category_definitions(params = {}, options = {})
       req = build_request(:list_cost_category_definitions, params)
+      req.send_request(options)
+    end
+
+    # Returns resource associations of all cost categories defined in the
+    # account. You have the option to use `CostCategoryArn` to get the
+    # association for a specific cost category.
+    # `ListCostCategoryResourceAssociations` supports pagination. The
+    # request can have a `MaxResults` range up to 100.
+    #
+    # @option params [String] :cost_category_arn
+    #   The unique identifier for your cost category.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #
+    # @option params [Integer] :max_results
+    #   The number of entries a paginated response contains.
+    #
+    # @return [Types::ListCostCategoryResourceAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCostCategoryResourceAssociationsResponse#cost_category_resource_associations #cost_category_resource_associations} => Array&lt;Types::CostCategoryResourceAssociation&gt;
+    #   * {Types::ListCostCategoryResourceAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cost_category_resource_associations({
+    #     cost_category_arn: "Arn",
+    #     next_token: "NextPageToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cost_category_resource_associations #=> Array
+    #   resp.cost_category_resource_associations[0].resource_arn #=> String
+    #   resp.cost_category_resource_associations[0].cost_category_name #=> String
+    #   resp.cost_category_resource_associations[0].cost_category_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostCategoryResourceAssociations AWS API Documentation
+    #
+    # @overload list_cost_category_resource_associations(params = {})
+    # @param [Hash] params ({})
+    def list_cost_category_resource_associations(params = {}, options = {})
+      req = build_request(:list_cost_category_resource_associations, params)
       req.send_request(options)
     end
 
@@ -5982,22 +6045,22 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Updates an existing Cost Category. Changes made to the Cost Category
+    # Updates an existing cost category. Changes made to the cost category
     # rules will be used to categorize the current month’s expenses and
     # future expenses. This won’t change categorization for the previous
     # months.
     #
     # @option params [required, String] :cost_category_arn
-    #   The unique identifier for your Cost Category.
+    #   The unique identifier for your cost category.
     #
     # @option params [String] :effective_start
-    #   The Cost Category's effective start date. It can only be a billing
+    #   The cost category's effective start date. It can only be a billing
     #   start date (first day of the month). If the date isn't provided,
     #   it's the first day of the current month. Dates can't be before the
     #   previous twelve months, or in the future.
     #
     # @option params [required, String] :rule_version
-    #   The rule schema version in this particular Cost Category.
+    #   The rule schema version in this particular cost category.
     #
     # @option params [required, Array<Types::CostCategoryRule>] :rules
     #   The `Expression` object used to categorize costs. For more
@@ -6011,8 +6074,8 @@ module Aws::CostExplorer
     #   The default value for the cost category.
     #
     # @option params [Array<Types::CostCategorySplitChargeRule>] :split_charge_rules
-    #   The split charge rules used to allocate your charges between your Cost
-    #   Category values.
+    #   The split charge rules used to allocate your charges between your cost
+    #   category values.
     #
     # @return [Types::UpdateCostCategoryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6113,7 +6176,7 @@ module Aws::CostExplorer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.141.0'
+      context[:gem_version] = '1.142.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

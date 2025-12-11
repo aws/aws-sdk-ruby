@@ -4,16 +4,12 @@ Unreleased Changes
 1.343.0 (2025-12-03)
 ------------------
 
-* Feature - Introduces Serverless training: A fully managed compute infrastructure that abstracts away all infrastructure complexity, allowing you to focus purely on model development.
-  
-  Added AI model customization assets used to train, refine, and evaluate custom models during the model customization process.
+* Feature - Introduces Serverless training: A fully managed compute infrastructure that abstracts away all infrastructure complexity, allowing you to focus purely on model development. Added AI model customization assets used to train, refine, and evaluate custom models during the model customization process.
 
 1.342.0 (2025-12-02)
 ------------------
 
-* Feature - Added support for serverless MLflow Apps.
-  
-  Added support for new HubContentTypes (DataSet and JsonDoc) in Private Hub for AI model customization assets, enabling tracking and management of training datasets and evaluators (reward functions/prompts) throughout the ML lifecycle.
+* Feature - Added support for serverless MLflow Apps. Added support for new HubContentTypes (DataSet and JsonDoc) in Private Hub for AI model customization assets, enabling tracking and management of training datasets and evaluators (reward functions/prompts) throughout the ML lifecycle.
 
 1.341.0 (2025-11-21)
 ------------------

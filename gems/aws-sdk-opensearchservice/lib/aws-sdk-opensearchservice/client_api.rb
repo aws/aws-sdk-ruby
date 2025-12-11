@@ -310,6 +310,7 @@ module Aws::OpenSearchService
     JWTOptionsInput = Shapes::StructureShape.new(name: 'JWTOptionsInput')
     JWTOptionsOutput = Shapes::StructureShape.new(name: 'JWTOptionsOutput')
     KeyStoreAccessOption = Shapes::StructureShape.new(name: 'KeyStoreAccessOption')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LastUpdated = Shapes::TimestampShape.new(name: 'LastUpdated')
     LicenseFilepath = Shapes::StringShape.new(name: 'LicenseFilepath')
@@ -865,6 +866,7 @@ module Aws::OpenSearchService
     CreateApplicationRequest.add_member(:iam_identity_center_options, Shapes::ShapeRef.new(shape: IamIdentityCenterOptionsInput, location_name: "iamIdentityCenterOptions"))
     CreateApplicationRequest.add_member(:app_configs, Shapes::ShapeRef.new(shape: AppConfigs, location_name: "appConfigs"))
     CreateApplicationRequest.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "tagList"))
+    CreateApplicationRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "id"))
@@ -875,6 +877,7 @@ module Aws::OpenSearchService
     CreateApplicationResponse.add_member(:app_configs, Shapes::ShapeRef.new(shape: AppConfigs, location_name: "appConfigs"))
     CreateApplicationResponse.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "tagList"))
     CreateApplicationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    CreateApplicationResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     CreateApplicationResponse.struct_class = Types::CreateApplicationResponse
 
     CreateDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
@@ -1386,6 +1389,7 @@ module Aws::OpenSearchService
     GetApplicationResponse.add_member(:app_configs, Shapes::ShapeRef.new(shape: AppConfigs, location_name: "appConfigs"))
     GetApplicationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     GetApplicationResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
+    GetApplicationResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     GetApplicationResponse.struct_class = Types::GetApplicationResponse
 
     GetCompatibleVersionsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location: "querystring", location_name: "domainName"))

@@ -457,6 +457,17 @@ module Aws
                                ?master_user_secret_kms_key_id: ::String,
                                ?ca_certificate_identifier: ::String,
                                ?engine_lifecycle_support: ::String,
+                               ?tag_specifications: Array[
+                                 {
+                                   resource_type: ::String?,
+                                   tags: Array[
+                                     {
+                                       key: ::String?,
+                                       value: ::String?
+                                     },
+                                   ]?
+                                 },
+                               ],
                                ?master_user_authentication_type: ("password" | "iam-db-auth"),
                                ?source_region: ::String
                              ) -> _CreateDBClusterResponseSuccess
@@ -606,6 +617,17 @@ module Aws
                                 ?multi_tenant: bool,
                                 ?dedicated_log_volume: bool,
                                 ?engine_lifecycle_support: ::String,
+                                ?tag_specifications: Array[
+                                  {
+                                    resource_type: ::String?,
+                                    tags: Array[
+                                      {
+                                        key: ::String?,
+                                        value: ::String?
+                                      },
+                                    ]?
+                                  },
+                                ],
                                 ?master_user_authentication_type: ("password" | "iam-db-auth"),
                                 ?additional_storage_volumes: Array[
                                   {
@@ -683,6 +705,17 @@ module Aws
                                              ?dedicated_log_volume: bool,
                                              ?upgrade_storage_config: bool,
                                              ?ca_certificate_identifier: ::String,
+                                             ?tag_specifications: Array[
+                                               {
+                                                 resource_type: ::String?,
+                                                 tags: Array[
+                                                   {
+                                                     key: ::String?,
+                                                     value: ::String?
+                                                   },
+                                                 ]?
+                                               },
+                                             ],
                                              ?additional_storage_volumes: Array[
                                                {
                                                  volume_name: ::String,
@@ -2520,6 +2553,17 @@ module Aws
                                 ?multi_tenant: bool,
                                 ?dedicated_log_volume: bool,
                                 ?engine: ::String,
+                                ?tag_specifications: Array[
+                                  {
+                                    resource_type: ::String?,
+                                    tags: Array[
+                                      {
+                                        key: ::String?,
+                                        value: ::String?
+                                      },
+                                    ]?
+                                  },
+                                ],
                                 ?master_user_authentication_type: ("password" | "iam-db-auth"),
                                 ?additional_storage_volumes: Array[
                                   {
@@ -2806,7 +2850,18 @@ module Aws
       def promote_read_replica: (
                                   db_instance_identifier: ::String,
                                   ?backup_retention_period: ::Integer,
-                                  ?preferred_backup_window: ::String
+                                  ?preferred_backup_window: ::String,
+                                  ?tag_specifications: Array[
+                                    {
+                                      resource_type: ::String?,
+                                      tags: Array[
+                                        {
+                                          key: ::String?,
+                                          value: ::String?
+                                        },
+                                      ]?
+                                    },
+                                  ]
                                 ) -> _PromoteReadReplicaResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PromoteReadReplicaResponseSuccess
 
@@ -3040,7 +3095,18 @@ module Aws
                                         },
                                         ?manage_master_user_password: bool,
                                         ?master_user_secret_kms_key_id: ::String,
-                                        ?engine_lifecycle_support: ::String
+                                        ?engine_lifecycle_support: ::String,
+                                        ?tag_specifications: Array[
+                                          {
+                                            resource_type: ::String?,
+                                            tags: Array[
+                                              {
+                                                key: ::String?,
+                                                value: ::String?
+                                              },
+                                            ]?
+                                          },
+                                        ]
                                       ) -> _RestoreDBClusterFromS3ResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBClusterFromS3ResponseSuccess
 
@@ -3104,7 +3170,18 @@ module Aws
                                               ?enable_performance_insights: bool,
                                               ?performance_insights_kms_key_id: ::String,
                                               ?performance_insights_retention_period: ::Integer,
-                                              ?engine_lifecycle_support: ::String
+                                              ?engine_lifecycle_support: ::String,
+                                              ?tag_specifications: Array[
+                                                {
+                                                  resource_type: ::String?,
+                                                  tags: Array[
+                                                    {
+                                                      key: ::String?,
+                                                      value: ::String?
+                                                    },
+                                                  ]?
+                                                },
+                                              ]
                                             ) -> _RestoreDBClusterFromSnapshotResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBClusterFromSnapshotResponseSuccess
 
@@ -3168,7 +3245,18 @@ module Aws
                                                  ?enable_performance_insights: bool,
                                                  ?performance_insights_kms_key_id: ::String,
                                                  ?performance_insights_retention_period: ::Integer,
-                                                 ?engine_lifecycle_support: ::String
+                                                 ?engine_lifecycle_support: ::String,
+                                                 ?tag_specifications: Array[
+                                                   {
+                                                     resource_type: ::String?,
+                                                     tags: Array[
+                                                       {
+                                                         key: ::String?,
+                                                         value: ::String?
+                                                       },
+                                                     ]?
+                                                   },
+                                                 ]
                                                ) -> _RestoreDBClusterToPointInTimeResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBClusterToPointInTimeResponseSuccess
 
@@ -3230,6 +3318,17 @@ module Aws
                                                   ?dedicated_log_volume: bool,
                                                   ?ca_certificate_identifier: ::String,
                                                   ?engine_lifecycle_support: ::String,
+                                                  ?tag_specifications: Array[
+                                                    {
+                                                      resource_type: ::String?,
+                                                      tags: Array[
+                                                        {
+                                                          key: ::String?,
+                                                          value: ::String?
+                                                        },
+                                                      ]?
+                                                    },
+                                                  ],
                                                   ?manage_master_user_password: bool,
                                                   ?master_user_secret_kms_key_id: ::String,
                                                   ?additional_storage_volumes: Array[
@@ -3313,6 +3412,17 @@ module Aws
                                          ?dedicated_log_volume: bool,
                                          ?ca_certificate_identifier: ::String,
                                          ?engine_lifecycle_support: ::String,
+                                         ?tag_specifications: Array[
+                                           {
+                                             resource_type: ::String?,
+                                             tags: Array[
+                                               {
+                                                 key: ::String?,
+                                                 value: ::String?
+                                               },
+                                             ]?
+                                           },
+                                         ],
                                          ?additional_storage_volumes: Array[
                                            {
                                              volume_name: ::String,
@@ -3388,6 +3498,17 @@ module Aws
                                                   ?dedicated_log_volume: bool,
                                                   ?ca_certificate_identifier: ::String,
                                                   ?engine_lifecycle_support: ::String,
+                                                  ?tag_specifications: Array[
+                                                    {
+                                                      resource_type: ::String?,
+                                                      tags: Array[
+                                                        {
+                                                          key: ::String?,
+                                                          value: ::String?
+                                                        },
+                                                      ]?
+                                                    },
+                                                  ],
                                                   ?manage_master_user_password: bool,
                                                   ?master_user_secret_kms_key_id: ::String,
                                                   ?additional_storage_volumes: Array[
@@ -3466,6 +3587,12 @@ module Aws
                                                              ?backup_retention_period: ::Integer,
                                                              ?kms_key_id: ::String,
                                                              ?pre_signed_url: ::String,
+                                                             ?tags: Array[
+                                                               {
+                                                                 key: ::String?,
+                                                                 value: ::String?
+                                                               },
+                                                             ],
                                                              ?source_region: ::String
                                                            ) -> _StartDBInstanceAutomatedBackupsReplicationResponseSuccess
                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDBInstanceAutomatedBackupsReplicationResponseSuccess

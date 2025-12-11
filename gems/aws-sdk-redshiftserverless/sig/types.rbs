@@ -352,6 +352,17 @@ module Aws::RedshiftServerless
       SENSITIVE: []
     end
 
+    class GetIdentityCenterAuthTokenRequest
+      attr_accessor workgroup_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetIdentityCenterAuthTokenResponse
+      attr_accessor expiration_time: ::Time
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
     class GetNamespaceRequest
       attr_accessor namespace_name: ::String
       SENSITIVE: []

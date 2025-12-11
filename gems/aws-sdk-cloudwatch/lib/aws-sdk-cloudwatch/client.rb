@@ -34,7 +34,7 @@ require 'aws-sdk-core/plugins/defaults_mode'
 require 'aws-sdk-core/plugins/recursion_detection'
 require 'aws-sdk-core/plugins/telemetry'
 require 'aws-sdk-core/plugins/sign'
-require 'aws-sdk-core/plugins/protocols/query'
+require 'aws-sdk-core/plugins/protocols/json_rpc'
 
 module Aws::CloudWatch
   # An API client for CloudWatch.  To construct a client, you need to configure a `:region` and `:credentials`.
@@ -84,7 +84,7 @@ module Aws::CloudWatch
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::Telemetry)
     add_plugin(Aws::Plugins::Sign)
-    add_plugin(Aws::Plugins::Protocols::Query)
+    add_plugin(Aws::Plugins::Protocols::JsonRpc)
     add_plugin(Aws::CloudWatch::Plugins::Endpoints)
 
     # @overload initialize(options)
@@ -353,6 +353,13 @@ module Aws::CloudWatch
     #     * `Aws.config[:sigv4a_signing_region_set]`
     #     * `ENV['AWS_SIGV4A_SIGNING_REGION_SET']`
     #     * `~/.aws/config`
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disables response data type conversions. The request parameters
+    #     hash must be formatted exactly as the API expects.This option is useful
+    #     when you want to ensure the highest level of performance by avoiding
+    #     overhead of walking request parameters and response data structures.
     #
     #   @option options [Boolean] :stub_responses (false)
     #     Causes the client to return stubbed responses. By default
@@ -4395,7 +4402,7 @@ module Aws::CloudWatch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.125.0'
+      context[:gem_version] = '1.126.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -84,6 +84,8 @@ module Aws::RedshiftServerless
     GetCustomDomainAssociationResponse = Shapes::StructureShape.new(name: 'GetCustomDomainAssociationResponse')
     GetEndpointAccessRequest = Shapes::StructureShape.new(name: 'GetEndpointAccessRequest')
     GetEndpointAccessResponse = Shapes::StructureShape.new(name: 'GetEndpointAccessResponse')
+    GetIdentityCenterAuthTokenRequest = Shapes::StructureShape.new(name: 'GetIdentityCenterAuthTokenRequest')
+    GetIdentityCenterAuthTokenResponse = Shapes::StructureShape.new(name: 'GetIdentityCenterAuthTokenResponse')
     GetNamespaceRequest = Shapes::StructureShape.new(name: 'GetNamespaceRequest')
     GetNamespaceResponse = Shapes::StructureShape.new(name: 'GetNamespaceResponse')
     GetRecoveryPointRequest = Shapes::StructureShape.new(name: 'GetRecoveryPointRequest')
@@ -282,6 +284,7 @@ module Aws::RedshiftServerless
     Workgroup = Shapes::StructureShape.new(name: 'Workgroup')
     WorkgroupList = Shapes::ListShape.new(name: 'WorkgroupList')
     WorkgroupName = Shapes::StringShape.new(name: 'WorkgroupName')
+    WorkgroupNameList = Shapes::ListShape.new(name: 'WorkgroupNameList')
     WorkgroupStatus = Shapes::StringShape.new(name: 'WorkgroupStatus')
 
     AccessDeniedException.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
@@ -533,6 +536,13 @@ module Aws::RedshiftServerless
 
     GetEndpointAccessResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: EndpointAccess, location_name: "endpoint"))
     GetEndpointAccessResponse.struct_class = Types::GetEndpointAccessResponse
+
+    GetIdentityCenterAuthTokenRequest.add_member(:workgroup_names, Shapes::ShapeRef.new(shape: WorkgroupNameList, required: true, location_name: "workgroupNames"))
+    GetIdentityCenterAuthTokenRequest.struct_class = Types::GetIdentityCenterAuthTokenRequest
+
+    GetIdentityCenterAuthTokenResponse.add_member(:expiration_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "expirationTime"))
+    GetIdentityCenterAuthTokenResponse.add_member(:token, Shapes::ShapeRef.new(shape: String, location_name: "token"))
+    GetIdentityCenterAuthTokenResponse.struct_class = Types::GetIdentityCenterAuthTokenResponse
 
     GetNamespaceRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespaceName"))
     GetNamespaceRequest.struct_class = Types::GetNamespaceRequest
@@ -1195,6 +1205,8 @@ module Aws::RedshiftServerless
 
     WorkgroupList.member = Shapes::ShapeRef.new(shape: Workgroup)
 
+    WorkgroupNameList.member = Shapes::ShapeRef.new(shape: WorkgroupName)
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -1499,6 +1511,21 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:get_identity_center_auth_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIdentityCenterAuthToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetIdentityCenterAuthTokenRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetIdentityCenterAuthTokenResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_namespace, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetNamespace"
         o.http_method = "POST"
@@ -1600,6 +1627,7 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 

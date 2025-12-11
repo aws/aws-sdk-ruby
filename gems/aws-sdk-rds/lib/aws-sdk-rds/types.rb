@@ -3391,6 +3391,16 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   Tags to assign to resources associated with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   ^
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @!attribute [rw] master_user_authentication_type
     #   Specifies the authentication type for the master user. With IAM
     #   master user authentication, you can configure the master DB user
@@ -3473,6 +3483,7 @@ module Aws::RDS
       :master_user_secret_kms_key_id,
       :ca_certificate_identifier,
       :engine_lifecycle_support,
+      :tag_specifications,
       :master_user_authentication_type,
       :source_region)
       SENSITIVE = [:master_user_password, :pre_signed_url]
@@ -5058,6 +5069,16 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @!attribute [rw] master_user_authentication_type
     #   Specifies the authentication type for the master user. With IAM
     #   master user authentication, you can configure the master DB user
@@ -5149,6 +5170,7 @@ module Aws::RDS
       :multi_tenant,
       :dedicated_log_volume,
       :engine_lifecycle_support,
+      :tag_specifications,
       :master_user_authentication_type,
       :additional_storage_volumes)
       SENSITIVE = [:master_user_password, :tde_credential_password]
@@ -5938,6 +5960,16 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @!attribute [rw] additional_storage_volumes
     #   A list of additional storage volumes to create for the DB instance.
     #   You can create up to three additional storage volumes using the
@@ -6001,6 +6033,7 @@ module Aws::RDS
       :dedicated_log_volume,
       :upgrade_storage_config,
       :ca_certificate_identifier,
+      :tag_specifications,
       :additional_storage_volumes,
       :source_region)
       SENSITIVE = [:pre_signed_url]
@@ -8138,6 +8171,19 @@ module Aws::RDS
     #   Services Backup.
     #   @return [String]
     #
+    # @!attribute [rw] tag_list
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterAutomatedBackup AWS API Documentation
     #
     class DBClusterAutomatedBackup < Struct.new(
@@ -8165,7 +8211,8 @@ module Aws::RDS
       :storage_type,
       :iops,
       :storage_throughput,
-      :aws_backup_recovery_point_arn)
+      :aws_backup_recovery_point_arn,
+      :tag_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10225,6 +10272,19 @@ module Aws::RDS
     #   Services Backup.
     #   @return [String]
     #
+    # @!attribute [rw] tag_list
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] dedicated_log_volume
     #   Indicates whether the DB instance has a dedicated log volume (DLV)
     #   enabled.
@@ -10269,6 +10329,7 @@ module Aws::RDS
       :backup_target,
       :multi_tenant,
       :aws_backup_recovery_point_arn,
+      :tag_list,
       :dedicated_log_volume,
       :additional_storage_volumes)
       SENSITIVE = []
@@ -20411,6 +20472,16 @@ module Aws::RDS
     #     `--option-group-name`.
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @!attribute [rw] master_user_authentication_type
     #   Specifies the authentication type for the master user. With IAM
     #   master user authentication, you can change the master DB user to use
@@ -20498,6 +20569,7 @@ module Aws::RDS
       :multi_tenant,
       :dedicated_log_volume,
       :engine,
+      :tag_specifications,
       :master_user_authentication_type,
       :additional_storage_volumes)
       SENSITIVE = [:master_user_password, :tde_credential_password]
@@ -22908,12 +22980,23 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaMessage AWS API Documentation
     #
     class PromoteReadReplicaMessage < Struct.new(
       :db_instance_identifier,
       :backup_retention_period,
-      :preferred_backup_window)
+      :preferred_backup_window,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24298,6 +24381,16 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   Tags to assign to resources associated with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   ^
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Message AWS API Documentation
     #
     class RestoreDBClusterFromS3Message < Struct.new(
@@ -24337,7 +24430,8 @@ module Aws::RDS
       :serverless_v2_scaling_configuration,
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
-      :engine_lifecycle_support)
+      :engine_lifecycle_support,
+      :tag_specifications)
       SENSITIVE = [:master_user_password]
       include Aws::Structure
     end
@@ -24940,6 +25034,16 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   Tags to assign to resources associated with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   ^
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -24977,7 +25081,8 @@ module Aws::RDS
       :enable_performance_insights,
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
-      :engine_lifecycle_support)
+      :engine_lifecycle_support,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25557,6 +25662,16 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   Tags to assign to resources associated with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   ^
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -25594,7 +25709,8 @@ module Aws::RDS
       :enable_performance_insights,
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
-      :engine_lifecycle_support)
+      :engine_lifecycle_support,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26279,6 +26395,16 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @!attribute [rw] manage_master_user_password
     #   Specifies whether to manage the master user password with Amazon Web
     #   Services Secrets Manager in the restored DB instance.
@@ -26374,6 +26500,7 @@ module Aws::RDS
       :dedicated_log_volume,
       :ca_certificate_identifier,
       :engine_lifecycle_support,
+      :tag_specifications,
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
       :additional_storage_volumes)
@@ -27021,6 +27148,16 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @!attribute [rw] additional_storage_volumes
     #   A list of additional storage volumes to modify or delete for the DB
     #   instance. You can modify or delete up to three additional storage
@@ -27084,6 +27221,7 @@ module Aws::RDS
       :dedicated_log_volume,
       :ca_certificate_identifier,
       :engine_lifecycle_support,
+      :tag_specifications,
       :additional_storage_volumes)
       SENSITIVE = [:master_user_password]
       include Aws::Structure
@@ -27777,6 +27915,16 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @!attribute [rw] manage_master_user_password
     #   Specifies whether to manage the master user password with Amazon Web
     #   Services Secrets Manager in the restored DB instance.
@@ -27876,6 +28024,7 @@ module Aws::RDS
       :dedicated_log_volume,
       :ca_certificate_identifier,
       :engine_lifecycle_support,
+      :tag_specifications,
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
       :additional_storage_volumes)
@@ -28585,6 +28734,10 @@ module Aws::RDS
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to associate with the replicated automated backups.
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -28597,6 +28750,7 @@ module Aws::RDS
       :backup_retention_period,
       :kms_key_id,
       :pre_signed_url,
+      :tags,
       :source_region)
       SENSITIVE = [:pre_signed_url]
       include Aws::Structure
@@ -29286,6 +29440,42 @@ module Aws::RDS
     #
     class TagListMessage < Struct.new(
       :tag_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The tags to apply to resources when creating or modifying a DB
+    # instance or DB cluster. When you specify a tag, you must specify the
+    # resource type to tag, otherwise the request will fail.
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource to tag on creation.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags.
+    #
+    #   For more information, see [Tagging Amazon RDS resources][1] in the
+    #   *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    #   resources][2] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/TagSpecification AWS API Documentation
+    #
+    class TagSpecification < Struct.new(
+      :resource_type,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

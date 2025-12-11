@@ -1135,6 +1135,7 @@ module Aws::SESV2
     #   resp.dkim_attributes.status #=> String, one of "PENDING", "SUCCESS", "FAILED", "TEMPORARY_FAILURE", "NOT_STARTED"
     #   resp.dkim_attributes.tokens #=> Array
     #   resp.dkim_attributes.tokens[0] #=> String
+    #   resp.dkim_attributes.signing_hosted_zone #=> String
     #   resp.dkim_attributes.signing_attributes_origin #=> String, one of "AWS_SES", "EXTERNAL", "AWS_SES_AF_SOUTH_1", "AWS_SES_EU_NORTH_1", "AWS_SES_AP_SOUTH_1", "AWS_SES_EU_WEST_3", "AWS_SES_EU_WEST_2", "AWS_SES_EU_SOUTH_1", "AWS_SES_EU_WEST_1", "AWS_SES_AP_NORTHEAST_3", "AWS_SES_AP_NORTHEAST_2", "AWS_SES_ME_SOUTH_1", "AWS_SES_AP_NORTHEAST_1", "AWS_SES_IL_CENTRAL_1", "AWS_SES_SA_EAST_1", "AWS_SES_CA_CENTRAL_1", "AWS_SES_AP_SOUTHEAST_1", "AWS_SES_AP_SOUTHEAST_2", "AWS_SES_AP_SOUTHEAST_3", "AWS_SES_EU_CENTRAL_1", "AWS_SES_US_EAST_1", "AWS_SES_US_EAST_2", "AWS_SES_US_WEST_1", "AWS_SES_US_WEST_2", "AWS_SES_ME_CENTRAL_1", "AWS_SES_AP_SOUTH_2", "AWS_SES_EU_CENTRAL_2", "AWS_SES_AP_SOUTHEAST_5", "AWS_SES_CA_WEST_1"
     #   resp.dkim_attributes.next_signing_key_length #=> String, one of "RSA_1024_BIT", "RSA_2048_BIT"
     #   resp.dkim_attributes.current_signing_key_length #=> String, one of "RSA_1024_BIT", "RSA_2048_BIT"
@@ -2650,6 +2651,7 @@ module Aws::SESV2
     #   resp.dkim_attributes.status #=> String, one of "PENDING", "SUCCESS", "FAILED", "TEMPORARY_FAILURE", "NOT_STARTED"
     #   resp.dkim_attributes.tokens #=> Array
     #   resp.dkim_attributes.tokens[0] #=> String
+    #   resp.dkim_attributes.signing_hosted_zone #=> String
     #   resp.dkim_attributes.signing_attributes_origin #=> String, one of "AWS_SES", "EXTERNAL", "AWS_SES_AF_SOUTH_1", "AWS_SES_EU_NORTH_1", "AWS_SES_AP_SOUTH_1", "AWS_SES_EU_WEST_3", "AWS_SES_EU_WEST_2", "AWS_SES_EU_SOUTH_1", "AWS_SES_EU_WEST_1", "AWS_SES_AP_NORTHEAST_3", "AWS_SES_AP_NORTHEAST_2", "AWS_SES_ME_SOUTH_1", "AWS_SES_AP_NORTHEAST_1", "AWS_SES_IL_CENTRAL_1", "AWS_SES_SA_EAST_1", "AWS_SES_CA_CENTRAL_1", "AWS_SES_AP_SOUTHEAST_1", "AWS_SES_AP_SOUTHEAST_2", "AWS_SES_AP_SOUTHEAST_3", "AWS_SES_EU_CENTRAL_1", "AWS_SES_US_EAST_1", "AWS_SES_US_EAST_2", "AWS_SES_US_WEST_1", "AWS_SES_US_WEST_2", "AWS_SES_ME_CENTRAL_1", "AWS_SES_AP_SOUTH_2", "AWS_SES_EU_CENTRAL_2", "AWS_SES_AP_SOUTHEAST_5", "AWS_SES_CA_WEST_1"
     #   resp.dkim_attributes.next_signing_key_length #=> String, one of "RSA_1024_BIT", "RSA_2048_BIT"
     #   resp.dkim_attributes.current_signing_key_length #=> String, one of "RSA_1024_BIT", "RSA_2048_BIT"
@@ -4979,6 +4981,7 @@ module Aws::SESV2
     #
     #   * {Types::PutEmailIdentityDkimSigningAttributesResponse#dkim_status #dkim_status} => String
     #   * {Types::PutEmailIdentityDkimSigningAttributesResponse#dkim_tokens #dkim_tokens} => Array&lt;String&gt;
+    #   * {Types::PutEmailIdentityDkimSigningAttributesResponse#signing_hosted_zone #signing_hosted_zone} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -4998,6 +5001,7 @@ module Aws::SESV2
     #   resp.dkim_status #=> String, one of "PENDING", "SUCCESS", "FAILED", "TEMPORARY_FAILURE", "NOT_STARTED"
     #   resp.dkim_tokens #=> Array
     #   resp.dkim_tokens[0] #=> String
+    #   resp.signing_hosted_zone #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutEmailIdentityDkimSigningAttributes AWS API Documentation
     #
@@ -6114,7 +6118,7 @@ module Aws::SESV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

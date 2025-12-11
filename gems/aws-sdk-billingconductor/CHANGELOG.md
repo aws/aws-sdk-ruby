@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2025-12-10)
+------------------
+
+* Feature - Launch itemized custom line item and service line item filter
+
 1.49.0 (2025-11-21)
 ------------------
 

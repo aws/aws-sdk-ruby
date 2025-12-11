@@ -409,6 +409,17 @@ module Aws
                                ) -> _GetEndpointAccessResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEndpointAccessResponseSuccess
 
+      interface _GetIdentityCenterAuthTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIdentityCenterAuthTokenResponse]
+        def expiration_time: () -> ::Time
+        def token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#get_identity_center_auth_token-instance_method
+      def get_identity_center_auth_token: (
+                                            workgroup_names: Array[::String]
+                                          ) -> _GetIdentityCenterAuthTokenResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdentityCenterAuthTokenResponseSuccess
+
       interface _GetNamespaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetNamespaceResponse]
         def namespace: () -> Types::Namespace

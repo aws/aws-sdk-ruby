@@ -75,6 +75,7 @@ module Aws::IVSRealTime
     EventErrorCode = Shapes::StringShape.new(name: 'EventErrorCode')
     EventList = Shapes::ListShape.new(name: 'EventList')
     EventName = Shapes::StringShape.new(name: 'EventName')
+    ExchangedParticipantToken = Shapes::StructureShape.new(name: 'ExchangedParticipantToken')
     Framerate = Shapes::FloatShape.new(name: 'Framerate')
     GetCompositionRequest = Shapes::StructureShape.new(name: 'GetCompositionRequest')
     GetCompositionResponse = Shapes::StructureShape.new(name: 'GetCompositionResponse')
@@ -450,9 +451,17 @@ module Aws::IVSRealTime
     Event.add_member(:destination_stage_arn, Shapes::ShapeRef.new(shape: StageArn, location_name: "destinationStageArn"))
     Event.add_member(:destination_session_id, Shapes::ShapeRef.new(shape: StageSessionId, location_name: "destinationSessionId"))
     Event.add_member(:replica, Shapes::ShapeRef.new(shape: Replica, location_name: "replica"))
+    Event.add_member(:previous_token, Shapes::ShapeRef.new(shape: ExchangedParticipantToken, location_name: "previousToken"))
+    Event.add_member(:new_token, Shapes::ShapeRef.new(shape: ExchangedParticipantToken, location_name: "newToken"))
     Event.struct_class = Types::Event
 
     EventList.member = Shapes::ShapeRef.new(shape: Event)
+
+    ExchangedParticipantToken.add_member(:capabilities, Shapes::ShapeRef.new(shape: ParticipantTokenCapabilities, location_name: "capabilities"))
+    ExchangedParticipantToken.add_member(:attributes, Shapes::ShapeRef.new(shape: ParticipantTokenAttributes, location_name: "attributes"))
+    ExchangedParticipantToken.add_member(:user_id, Shapes::ShapeRef.new(shape: ParticipantTokenUserId, location_name: "userId"))
+    ExchangedParticipantToken.add_member(:expiration_time, Shapes::ShapeRef.new(shape: ParticipantTokenExpirationTime, location_name: "expirationTime"))
+    ExchangedParticipantToken.struct_class = Types::ExchangedParticipantToken
 
     GetCompositionRequest.add_member(:arn, Shapes::ShapeRef.new(shape: CompositionArn, required: true, location_name: "arn"))
     GetCompositionRequest.struct_class = Types::GetCompositionRequest

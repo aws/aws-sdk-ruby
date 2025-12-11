@@ -180,14 +180,15 @@ module Aws
                                        type: ("CREDIT" | "FEE"),
                                        line_item_filters: Array[
                                          {
-                                           attribute: ("LINE_ITEM_TYPE"),
-                                           match_option: ("NOT_EQUAL"),
-                                           values: Array[("SAVINGS_PLAN_NEGATION")]
+                                           attribute: ("LINE_ITEM_TYPE" | "SERVICE"),
+                                           match_option: ("NOT_EQUAL" | "EQUAL"),
+                                           values: Array[("SAVINGS_PLAN_NEGATION")]?,
+                                           attribute_values: Array[::String]?
                                          },
                                        ]?
                                      },
                                      ?account_id: ::String,
-                                     ?computation_rule: ("CONSOLIDATED"),
+                                     ?computation_rule: ("ITEMIZED" | "CONSOLIDATED"),
                                      ?presentation_details: {
                                        service: ::String
                                      }
@@ -583,9 +584,10 @@ module Aws
                                        }?,
                                        line_item_filters: Array[
                                          {
-                                           attribute: ("LINE_ITEM_TYPE"),
-                                           match_option: ("NOT_EQUAL"),
-                                           values: Array[("SAVINGS_PLAN_NEGATION")]
+                                           attribute: ("LINE_ITEM_TYPE" | "SERVICE"),
+                                           match_option: ("NOT_EQUAL" | "EQUAL"),
+                                           values: Array[("SAVINGS_PLAN_NEGATION")]?,
+                                           attribute_values: Array[::String]?
                                          },
                                        ]?
                                      },

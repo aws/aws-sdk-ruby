@@ -52,12 +52,14 @@ module Aws::Odb
       attr_accessor cloud_autonomous_vm_cluster_id: ::String
       attr_accessor cloud_autonomous_vm_cluster_arn: ::String
       attr_accessor odb_network_id: ::String
+      attr_accessor odb_network_arn: ::String
       attr_accessor oci_resource_anchor_name: ::String
       attr_accessor percent_progress: ::Float
       attr_accessor display_name: ::String
       attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
       attr_accessor status_reason: ::String
       attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor cloud_exadata_infrastructure_arn: ::String
       attr_accessor autonomous_data_storage_percentage: ::Float
       attr_accessor autonomous_data_storage_size_in_t_bs: ::Float
       attr_accessor available_autonomous_data_storage_size_in_t_bs: ::Float
@@ -111,12 +113,14 @@ module Aws::Odb
       attr_accessor cloud_autonomous_vm_cluster_id: ::String
       attr_accessor cloud_autonomous_vm_cluster_arn: ::String
       attr_accessor odb_network_id: ::String
+      attr_accessor odb_network_arn: ::String
       attr_accessor oci_resource_anchor_name: ::String
       attr_accessor percent_progress: ::Float
       attr_accessor display_name: ::String
       attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
       attr_accessor status_reason: ::String
       attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor cloud_exadata_infrastructure_arn: ::String
       attr_accessor autonomous_data_storage_percentage: ::Float
       attr_accessor autonomous_data_storage_size_in_t_bs: ::Float
       attr_accessor available_autonomous_data_storage_size_in_t_bs: ::Float
@@ -262,6 +266,7 @@ module Aws::Odb
       attr_accessor status_reason: ::String
       attr_accessor cloud_vm_cluster_arn: ::String
       attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor cloud_exadata_infrastructure_arn: ::String
       attr_accessor cluster_name: ::String
       attr_accessor cpu_core_count: ::Integer
       attr_accessor data_collection_options: Types::DataCollectionOptions
@@ -294,6 +299,7 @@ module Aws::Odb
       attr_accessor time_zone: ::String
       attr_accessor vip_ids: ::Array[::String]
       attr_accessor odb_network_id: ::String
+      attr_accessor odb_network_arn: ::String
       attr_accessor percent_progress: ::Float
       attr_accessor compute_model: ("ECPU" | "OCPU")
       attr_accessor iam_roles: ::Array[Types::IamRole]
@@ -307,6 +313,7 @@ module Aws::Odb
       attr_accessor status_reason: ::String
       attr_accessor cloud_vm_cluster_arn: ::String
       attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor cloud_exadata_infrastructure_arn: ::String
       attr_accessor cluster_name: ::String
       attr_accessor cpu_core_count: ::Integer
       attr_accessor data_collection_options: Types::DataCollectionOptions
@@ -339,6 +346,7 @@ module Aws::Odb
       attr_accessor time_zone: ::String
       attr_accessor vip_ids: ::Array[::String]
       attr_accessor odb_network_id: ::String
+      attr_accessor odb_network_arn: ::String
       attr_accessor percent_progress: ::Float
       attr_accessor compute_model: ("ECPU" | "OCPU")
       attr_accessor iam_roles: ::Array[Types::IamRole]

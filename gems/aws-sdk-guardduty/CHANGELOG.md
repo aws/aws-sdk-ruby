@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.137.0 (2025-12-09)
+------------------
+
+* Feature - Adding support for Ec2LaunchTemplate Version field
+
 1.136.0 (2025-12-02)
 ------------------
 

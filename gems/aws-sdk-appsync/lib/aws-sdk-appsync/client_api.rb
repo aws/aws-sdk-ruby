@@ -518,7 +518,7 @@ module Aws::AppSync
     CreateApiRequest.add_member(:name, Shapes::ShapeRef.new(shape: ApiName, required: true, location_name: "name"))
     CreateApiRequest.add_member(:owner_contact, Shapes::ShapeRef.new(shape: String, location_name: "ownerContact"))
     CreateApiRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateApiRequest.add_member(:event_config, Shapes::ShapeRef.new(shape: EventConfig, location_name: "eventConfig"))
+    CreateApiRequest.add_member(:event_config, Shapes::ShapeRef.new(shape: EventConfig, required: true, location_name: "eventConfig"))
     CreateApiRequest.struct_class = Types::CreateApiRequest
 
     CreateApiResponse.add_member(:api, Shapes::ShapeRef.new(shape: Api, location_name: "api"))
@@ -1328,7 +1328,7 @@ module Aws::AppSync
     UpdateApiRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     UpdateApiRequest.add_member(:name, Shapes::ShapeRef.new(shape: ApiName, required: true, location_name: "name"))
     UpdateApiRequest.add_member(:owner_contact, Shapes::ShapeRef.new(shape: String, location_name: "ownerContact"))
-    UpdateApiRequest.add_member(:event_config, Shapes::ShapeRef.new(shape: EventConfig, location_name: "eventConfig"))
+    UpdateApiRequest.add_member(:event_config, Shapes::ShapeRef.new(shape: EventConfig, required: true, location_name: "eventConfig"))
     UpdateApiRequest.struct_class = Types::UpdateApiRequest
 
     UpdateApiResponse.add_member(:api, Shapes::ShapeRef.new(shape: Api, location_name: "api"))

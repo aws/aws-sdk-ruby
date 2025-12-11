@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.171.0 (2025-12-11)
+------------------
+
+* Feature - Add Dotnet 10 (dotnet10) support to AWS Lambda.
+
 1.170.0 (2025-12-04)
 ------------------
 

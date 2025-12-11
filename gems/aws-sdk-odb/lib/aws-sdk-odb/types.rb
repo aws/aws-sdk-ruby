@@ -42,18 +42,21 @@ module Aws::Odb
     end
 
     # @!attribute [rw] iam_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM service role to associate
-    #   with the resource.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
+    #   and Access Management (IAM) service role to associate with the
+    #   resource.
     #   @return [String]
     #
     # @!attribute [rw] aws_integration
     #   The Amazon Web Services integration configuration settings for the
-    #   IAM service role association.
+    #   Amazon Web Services Identity and Access Management (IAM) service
+    #   role association.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the target resource to associate
-    #   with the IAM service role.
+    #   with the Amazon Web Services Identity and Access Management (IAM)
+    #   service role.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/AssociateIamRoleToResourceInput AWS API Documentation
@@ -166,6 +169,11 @@ module Aws::Odb
     #   Autonomous VM cluster.
     #   @return [String]
     #
+    # @!attribute [rw] odb_network_arn
+    #   The Amazon Resource Name (ARN) of the ODB network associated with
+    #   this Autonomous VM cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] oci_resource_anchor_name
     #   The name of the OCI resource anchor associated with this Autonomous
     #   VM cluster.
@@ -194,6 +202,11 @@ module Aws::Odb
     # @!attribute [rw] cloud_exadata_infrastructure_id
     #   The unique identifier of the Cloud Exadata Infrastructure containing
     #   this Autonomous VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_exadata_infrastructure_arn
+    #   The Amazon Resource Name (ARN) of the Cloud Exadata Infrastructure
+    #   containing this Autonomous VM cluster.
     #   @return [String]
     #
     # @!attribute [rw] autonomous_data_storage_percentage
@@ -389,12 +402,14 @@ module Aws::Odb
       :cloud_autonomous_vm_cluster_id,
       :cloud_autonomous_vm_cluster_arn,
       :odb_network_id,
+      :odb_network_arn,
       :oci_resource_anchor_name,
       :percent_progress,
       :display_name,
       :status,
       :status_reason,
       :cloud_exadata_infrastructure_id,
+      :cloud_exadata_infrastructure_arn,
       :autonomous_data_storage_percentage,
       :autonomous_data_storage_size_in_t_bs,
       :available_autonomous_data_storage_size_in_t_bs,
@@ -474,6 +489,11 @@ module Aws::Odb
     #   Autonomous VM cluster.
     #   @return [String]
     #
+    # @!attribute [rw] odb_network_arn
+    #   The Amazon Resource Name (ARN) of the ODB network associated with
+    #   this Autonomous VM cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] oci_resource_anchor_name
     #   The name of the OCI resource anchor associated with this Autonomous
     #   VM cluster.
@@ -500,6 +520,11 @@ module Aws::Odb
     # @!attribute [rw] cloud_exadata_infrastructure_id
     #   The unique identifier of the Exadata infrastructure containing this
     #   Autonomous VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_exadata_infrastructure_arn
+    #   The Amazon Resource Name (ARN) of the Exadata infrastructure
+    #   containing this Autonomous VM cluster.
     #   @return [String]
     #
     # @!attribute [rw] autonomous_data_storage_percentage
@@ -691,12 +716,14 @@ module Aws::Odb
       :cloud_autonomous_vm_cluster_id,
       :cloud_autonomous_vm_cluster_arn,
       :odb_network_id,
+      :odb_network_arn,
       :oci_resource_anchor_name,
       :percent_progress,
       :display_name,
       :status,
       :status_reason,
       :cloud_exadata_infrastructure_id,
+      :cloud_exadata_infrastructure_arn,
       :autonomous_data_storage_percentage,
       :autonomous_data_storage_size_in_t_bs,
       :available_autonomous_data_storage_size_in_t_bs,
@@ -1276,6 +1303,11 @@ module Aws::Odb
     #   cluster belongs to.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_exadata_infrastructure_arn
+    #   The Amazon Resource Name (ARN) of the Exadata infrastructure that
+    #   this VM cluster belongs to.
+    #   @return [String]
+    #
     # @!attribute [rw] cluster_name
     #   The name of the Grid Infrastructure (GI) cluster.
     #   @return [String]
@@ -1422,6 +1454,11 @@ module Aws::Odb
     #   The unique identifier of the ODB network for the VM cluster.
     #   @return [String]
     #
+    # @!attribute [rw] odb_network_arn
+    #   The Amazon Resource Name (ARN) of the ODB network associated with
+    #   this VM cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] percent_progress
     #   The amount of progress made on the current operation on the VM
     #   cluster, expressed as a percentage.
@@ -1450,6 +1487,7 @@ module Aws::Odb
       :status_reason,
       :cloud_vm_cluster_arn,
       :cloud_exadata_infrastructure_id,
+      :cloud_exadata_infrastructure_arn,
       :cluster_name,
       :cpu_core_count,
       :data_collection_options,
@@ -1482,6 +1520,7 @@ module Aws::Odb
       :time_zone,
       :vip_ids,
       :odb_network_id,
+      :odb_network_arn,
       :percent_progress,
       :compute_model,
       :iam_roles)
@@ -1514,6 +1553,11 @@ module Aws::Odb
     # @!attribute [rw] cloud_exadata_infrastructure_id
     #   The unique identifier of the Exadata infrastructure that this VM
     #   cluster belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_exadata_infrastructure_arn
+    #   The Amazon Resource Name (ARN) of the Exadata infrastructure that
+    #   this VM cluster belongs to.
     #   @return [String]
     #
     # @!attribute [rw] cluster_name
@@ -1663,6 +1707,11 @@ module Aws::Odb
     #   The unique identifier of the ODB network for the VM cluster.
     #   @return [String]
     #
+    # @!attribute [rw] odb_network_arn
+    #   The Amazon Resource Name (ARN) of the ODB network associated with
+    #   this VM cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] percent_progress
     #   The amount of progress made on the current operation on the VM
     #   cluster, expressed as a percentage.
@@ -1691,6 +1740,7 @@ module Aws::Odb
       :status_reason,
       :cloud_vm_cluster_arn,
       :cloud_exadata_infrastructure_id,
+      :cloud_exadata_infrastructure_arn,
       :cluster_name,
       :cpu_core_count,
       :data_collection_options,
@@ -1723,6 +1773,7 @@ module Aws::Odb
       :time_zone,
       :vip_ids,
       :odb_network_id,
+      :odb_network_arn,
       :percent_progress,
       :compute_model,
       :iam_roles)
@@ -2301,13 +2352,14 @@ module Aws::Odb
     #   @return [String]
     #
     # @!attribute [rw] sts_policy_document
-    #   The STS policy document that defines permissions for token service
-    #   usage within the ODB network.
+    #   The Amazon Web Services Security Token Service (STS) policy document
+    #   that defines permissions for token service usage within the ODB
+    #   network.
     #   @return [String]
     #
     # @!attribute [rw] kms_policy_document
-    #   The KMS policy document that defines permissions for key usage
-    #   within the ODB network.
+    #   The Amazon Web Services Key Management Service (KMS) policy document
+    #   that defines permissions for key usage within the ODB network.
     #   @return [String]
     #
     # @!attribute [rw] cross_region_s3_restore_sources_to_enable
@@ -2451,15 +2503,17 @@ module Aws::Odb
     # restore source for the ODB network.
     #
     # @!attribute [rw] region
-    #   The Amazon Web Services Region for cross-Region S3 restore access.
+    #   The Amazon Web Services Region for cross-Region Amazon S3 restore
+    #   access.
     #   @return [String]
     #
     # @!attribute [rw] ipv4_addresses
-    #   The IPv4 addresses allowed for cross-Region S3 restore access.
+    #   The IPv4 addresses allowed for cross-Region Amazon S3 restore
+    #   access.
     #   @return [Array<String>]
     #
     # @!attribute [rw] status
-    #   The current status of the cross-Region S3 restore access
+    #   The current status of the cross-Region Amazon S3 restore access
     #   configuration.
     #   @return [String]
     #
@@ -3368,18 +3422,21 @@ module Aws::Odb
     class DeleteOdbPeeringConnectionOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] iam_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM service role to
-    #   disassociate from the resource.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
+    #   and Access Management (IAM) service role to disassociate from the
+    #   resource.
     #   @return [String]
     #
     # @!attribute [rw] aws_integration
     #   The Amazon Web Services integration configuration settings for the
-    #   IAM service role disassociation.
+    #   Amazon Web Services Identity and Access Management (IAM) service
+    #   role disassociation.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the target resource to
-    #   disassociate from the IAM service role.
+    #   disassociate from the Amazon Web Services Identity and Access
+    #   Management (IAM) service role.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/DisassociateIamRoleFromResourceInput AWS API Documentation
@@ -3694,21 +3751,25 @@ module Aws::Odb
     # Management (IAM) service role associated with a resource.
     #
     # @!attribute [rw] iam_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM service role.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
+    #   and Access Management (IAM) service role.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the IAM service role.
+    #   The current status of the Amazon Web Services Identity and Access
+    #   Management (IAM) service role.
     #   @return [String]
     #
     # @!attribute [rw] status_reason
-    #   Additional information about the current status of the IAM service
-    #   role, if applicable.
+    #   Additional information about the current status of the Amazon Web
+    #   Services Identity and Access Management (IAM) service role, if
+    #   applicable.
     #   @return [String]
     #
     # @!attribute [rw] aws_integration
     #   The Amazon Web Services integration configuration settings for the
-    #   IAM service role.
+    #   Amazon Web Services Identity and Access Management (IAM) service
+    #   role.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/IamRole AWS API Documentation
@@ -3763,19 +3824,23 @@ module Aws::Odb
     # access from the ODB network.
     #
     # @!attribute [rw] status
-    #   The current status of the KMS access configuration.
+    #   The current status of the Amazon Web Services Key Management Service
+    #   (KMS) access configuration.
     #   @return [String]
     #
     # @!attribute [rw] ipv4_addresses
-    #   The IPv4 addresses allowed for KMS access.
+    #   The IPv4 addresses allowed for Amazon Web Services Key Management
+    #   Service (KMS) access.
     #   @return [Array<String>]
     #
     # @!attribute [rw] domain_name
-    #   The domain name for KMS access configuration.
+    #   The domain name for Amazon Web Services Key Management Service (KMS)
+    #   access configuration.
     #   @return [String]
     #
     # @!attribute [rw] kms_policy_document
-    #   The KMS policy document that defines permissions for key usage.
+    #   The Amazon Web Services Key Management Service (KMS) policy document
+    #   that defines permissions for key usage.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/KmsAccess AWS API Documentation
@@ -4428,12 +4493,12 @@ module Aws::Odb
     #
     # @!attribute [rw] sts_access
     #   The Amazon Web Services Security Token Service (STS) access
-    #   configuration for managed services.
+    #   configuration.
     #   @return [Types::StsAccess]
     #
     # @!attribute [rw] kms_access
     #   The Amazon Web Services Key Management Service (KMS) access
-    #   configuration for managed services.
+    #   configuration.
     #   @return [Types::KmsAccess]
     #
     # @!attribute [rw] cross_region_s3_restore_sources_access
@@ -5148,20 +5213,23 @@ module Aws::Odb
     # access from the ODB network.
     #
     # @!attribute [rw] status
-    #   The current status of the STS access configuration.
+    #   The current status of the Amazon Web Services Security Token Service
+    #   (STS) access configuration.
     #   @return [String]
     #
     # @!attribute [rw] ipv4_addresses
-    #   The IPv4 addresses allowed for STS access.
+    #   The IPv4 addresses allowed for Amazon Web Services Security Token
+    #   Service (STS) access.
     #   @return [Array<String>]
     #
     # @!attribute [rw] domain_name
-    #   The domain name for STS access configuration.
+    #   The domain name for Amazon Web Services Security Token Service (STS)
+    #   access configuration.
     #   @return [String]
     #
     # @!attribute [rw] sts_policy_document
-    #   The STS policy document that defines permissions for token service
-    #   usage.
+    #   The Amazon Web Services Security Token Service (STS) policy document
+    #   that defines permissions for token service usage.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/StsAccess AWS API Documentation
@@ -5353,13 +5421,14 @@ module Aws::Odb
     #   @return [String]
     #
     # @!attribute [rw] sts_policy_document
-    #   The STS policy document that defines permissions for token service
-    #   usage within the ODB network.
+    #   The Amazon Web Services Security Token Service (STS) policy document
+    #   that defines permissions for token service usage within the ODB
+    #   network.
     #   @return [String]
     #
     # @!attribute [rw] kms_policy_document
-    #   The KMS policy document that defines permissions for key usage
-    #   within the ODB network.
+    #   The Amazon Web Services Key Management Service (KMS) policy document
+    #   that defines permissions for key usage within the ODB network.
     #   @return [String]
     #
     # @!attribute [rw] cross_region_s3_restore_sources_to_enable

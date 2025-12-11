@@ -478,45 +478,45 @@ module Aws::Mgn
 
     # Archive application.
     #
-    # @option params [String] :account_id
-    #   Account ID.
-    #
     # @option params [required, String] :application_id
     #   Application ID.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @return [Types::Application] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::Application#application_aggregated_status #application_aggregated_status} => Types::ApplicationAggregatedStatus
     #   * {Types::Application#application_id #application_id} => String
     #   * {Types::Application#arn #arn} => String
-    #   * {Types::Application#creation_date_time #creation_date_time} => String
+    #   * {Types::Application#name #name} => String
     #   * {Types::Application#description #description} => String
     #   * {Types::Application#is_archived #is_archived} => Boolean
+    #   * {Types::Application#application_aggregated_status #application_aggregated_status} => Types::ApplicationAggregatedStatus
+    #   * {Types::Application#creation_date_time #creation_date_time} => String
     #   * {Types::Application#last_modified_date_time #last_modified_date_time} => String
-    #   * {Types::Application#name #name} => String
     #   * {Types::Application#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Application#wave_id #wave_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.archive_application({
-    #     account_id: "AccountID",
     #     application_id: "ApplicationID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.application_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
-    #   resp.application_aggregated_status.last_update_date_time #=> String
-    #   resp.application_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
-    #   resp.application_aggregated_status.total_source_servers #=> Integer
     #   resp.application_id #=> String
     #   resp.arn #=> String
-    #   resp.creation_date_time #=> String
+    #   resp.name #=> String
     #   resp.description #=> String
     #   resp.is_archived #=> Boolean
+    #   resp.application_aggregated_status.last_update_date_time #=> String
+    #   resp.application_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.application_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.application_aggregated_status.total_source_servers #=> Integer
+    #   resp.creation_date_time #=> String
     #   resp.last_modified_date_time #=> String
-    #   resp.name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.wave_id #=> String
@@ -532,47 +532,47 @@ module Aws::Mgn
 
     # Archive wave.
     #
-    # @option params [String] :account_id
-    #   Account ID.
-    #
     # @option params [required, String] :wave_id
     #   Wave ID.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @return [Types::Wave] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::Wave#wave_id #wave_id} => String
     #   * {Types::Wave#arn #arn} => String
-    #   * {Types::Wave#creation_date_time #creation_date_time} => String
+    #   * {Types::Wave#name #name} => String
     #   * {Types::Wave#description #description} => String
     #   * {Types::Wave#is_archived #is_archived} => Boolean
-    #   * {Types::Wave#last_modified_date_time #last_modified_date_time} => String
-    #   * {Types::Wave#name #name} => String
-    #   * {Types::Wave#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Wave#wave_aggregated_status #wave_aggregated_status} => Types::WaveAggregatedStatus
-    #   * {Types::Wave#wave_id #wave_id} => String
+    #   * {Types::Wave#creation_date_time #creation_date_time} => String
+    #   * {Types::Wave#last_modified_date_time #last_modified_date_time} => String
+    #   * {Types::Wave#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.archive_wave({
-    #     account_id: "AccountID",
     #     wave_id: "WaveID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
+    #   resp.wave_id #=> String
     #   resp.arn #=> String
-    #   resp.creation_date_time #=> String
+    #   resp.name #=> String
     #   resp.description #=> String
     #   resp.is_archived #=> Boolean
+    #   resp.wave_aggregated_status.last_update_date_time #=> String
+    #   resp.wave_aggregated_status.replication_started_date_time #=> String
+    #   resp.wave_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.wave_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.wave_aggregated_status.total_applications #=> Integer
+    #   resp.creation_date_time #=> String
     #   resp.last_modified_date_time #=> String
-    #   resp.name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.wave_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
-    #   resp.wave_aggregated_status.last_update_date_time #=> String
-    #   resp.wave_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
-    #   resp.wave_aggregated_status.replication_started_date_time #=> String
-    #   resp.wave_aggregated_status.total_applications #=> Integer
-    #   resp.wave_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ArchiveWave AWS API Documentation
     #
@@ -585,23 +585,23 @@ module Aws::Mgn
 
     # Associate applications to wave.
     #
-    # @option params [String] :account_id
-    #   Account ID.
+    # @option params [required, String] :wave_id
+    #   Wave ID.
     #
     # @option params [required, Array<String>] :application_i_ds
     #   Application IDs list.
     #
-    # @option params [required, String] :wave_id
-    #   Wave ID.
+    # @option params [String] :account_id
+    #   Account ID.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_applications({
-    #     account_id: "AccountID",
-    #     application_i_ds: ["ApplicationID"], # required
     #     wave_id: "WaveID", # required
+    #     application_i_ds: ["ApplicationID"], # required
+    #     account_id: "AccountID",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/AssociateApplications AWS API Documentation
@@ -615,23 +615,23 @@ module Aws::Mgn
 
     # Associate source servers to application.
     #
-    # @option params [String] :account_id
-    #   Account ID.
-    #
     # @option params [required, String] :application_id
     #   Application ID.
     #
     # @option params [required, Array<String>] :source_server_i_ds
     #   Source server IDs list.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_source_servers({
-    #     account_id: "AccountID",
     #     application_id: "ApplicationID", # required
     #     source_server_i_ds: ["SourceServerID"], # required
+    #     account_id: "AccountID",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/AssociateSourceServers AWS API Documentation
@@ -648,110 +648,111 @@ module Aws::Mgn
     # or READY\_FOR\_CUTOVER. This command only works if the Source Server
     # is already launchable (dataReplicationInfo.lagDuration is not null.)
     #
-    # @option params [String] :account_id
-    #   The request to change the source server migration account ID.
-    #
-    # @option params [required, Types::ChangeServerLifeCycleStateSourceServerLifecycle] :life_cycle
-    #   The request to change the source server migration lifecycle state.
-    #
     # @option params [required, String] :source_server_id
     #   The request to change the source server migration lifecycle state by
     #   source server ID.
     #
+    # @option params [required, Types::ChangeServerLifeCycleStateSourceServerLifecycle] :life_cycle
+    #   The request to change the source server migration lifecycle state.
+    #
+    # @option params [String] :account_id
+    #   The request to change the source server migration account ID.
+    #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::SourceServer#application_id #application_id} => String
-    #   * {Types::SourceServer#arn #arn} => String
-    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
-    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
-    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
-    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
-    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
-    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
-    #   * {Types::SourceServer#replication_type #replication_type} => String
-    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
+    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
+    #   * {Types::SourceServer#replication_type #replication_type} => String
     #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
+    #   * {Types::SourceServer#application_id #application_id} => String
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.change_server_life_cycle_state({
-    #     account_id: "AccountID",
+    #     source_server_id: "SourceServerID", # required
     #     life_cycle: { # required
     #       state: "READY_FOR_TEST", # required, accepts READY_FOR_TEST, READY_FOR_CUTOVER, CUTOVER
     #     },
-    #     source_server_id: "SourceServerID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.application_id #=> String
+    #   resp.source_server_id #=> String
     #   resp.arn #=> String
-    #   resp.connector_action.connector_arn #=> String
-    #   resp.connector_action.credentials_secret_arn #=> String
-    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
-    #   resp.data_replication_info.data_replication_error.raw_error #=> String
-    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.launched_instance.ec2_instance_id #=> String
+    #   resp.launched_instance.job_id #=> String
+    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
+    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.eta_date_time #=> String
+    #   resp.data_replication_info.replicated_disks #=> Array
+    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
     #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.steps #=> Array
     #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
-    #   resp.data_replication_info.eta_date_time #=> String
-    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
+    #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
-    #   resp.data_replication_info.replicated_disks #=> Array
-    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
-    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
-    #   resp.fqdn_for_action_framework #=> String
-    #   resp.is_archived #=> Boolean
-    #   resp.launched_instance.ec2_instance_id #=> String
-    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
-    #   resp.launched_instance.job_id #=> String
+    #   resp.data_replication_info.replicator_id #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
-    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
-    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
-    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.last_seen_by_service_date_time #=> String
-    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
+    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
     #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
-    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
-    #   resp.source_properties.cpus #=> Array
-    #   resp.source_properties.cpus[0].cores #=> Integer
-    #   resp.source_properties.cpus[0].model_name #=> String
-    #   resp.source_properties.disks #=> Array
-    #   resp.source_properties.disks[0].bytes #=> Integer
-    #   resp.source_properties.disks[0].device_name #=> String
-    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.recommended_instance_type #=> String
     #   resp.source_properties.identification_hints.fqdn #=> String
     #   resp.source_properties.identification_hints.hostname #=> String
-    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
-    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.network_interfaces #=> Array
+    #   resp.source_properties.network_interfaces[0].mac_address #=> String
     #   resp.source_properties.network_interfaces[0].ips #=> Array
     #   resp.source_properties.network_interfaces[0].ips[0] #=> String
     #   resp.source_properties.network_interfaces[0].is_primary #=> Boolean
-    #   resp.source_properties.network_interfaces[0].mac_address #=> String
-    #   resp.source_properties.os.full_string #=> String
+    #   resp.source_properties.disks #=> Array
+    #   resp.source_properties.disks[0].device_name #=> String
+    #   resp.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_properties.cpus #=> Array
+    #   resp.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_properties.cpus[0].model_name #=> String
     #   resp.source_properties.ram_bytes #=> Integer
-    #   resp.source_properties.recommended_instance_type #=> String
-    #   resp.source_server_id #=> String
-    #   resp.tags #=> Hash
-    #   resp.tags["TagKey"] #=> String
-    #   resp.user_provided_id #=> String
+    #   resp.source_properties.os.full_string #=> String
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.vcenter_client_id #=> String
+    #   resp.application_id #=> String
+    #   resp.user_provided_id #=> String
+    #   resp.fqdn_for_action_framework #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
+    #   resp.connector_action.connector_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ChangeServerLifeCycleState AWS API Documentation
     #
@@ -764,55 +765,55 @@ module Aws::Mgn
 
     # Create application.
     #
-    # @option params [String] :account_id
-    #   Account ID.
+    # @option params [required, String] :name
+    #   Application name.
     #
     # @option params [String] :description
     #   Application description.
     #
-    # @option params [required, String] :name
-    #   Application name.
-    #
     # @option params [Hash<String,String>] :tags
     #   Application tags.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @return [Types::Application] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::Application#application_aggregated_status #application_aggregated_status} => Types::ApplicationAggregatedStatus
     #   * {Types::Application#application_id #application_id} => String
     #   * {Types::Application#arn #arn} => String
-    #   * {Types::Application#creation_date_time #creation_date_time} => String
+    #   * {Types::Application#name #name} => String
     #   * {Types::Application#description #description} => String
     #   * {Types::Application#is_archived #is_archived} => Boolean
+    #   * {Types::Application#application_aggregated_status #application_aggregated_status} => Types::ApplicationAggregatedStatus
+    #   * {Types::Application#creation_date_time #creation_date_time} => String
     #   * {Types::Application#last_modified_date_time #last_modified_date_time} => String
-    #   * {Types::Application#name #name} => String
     #   * {Types::Application#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Application#wave_id #wave_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_application({
-    #     account_id: "AccountID",
-    #     description: "ApplicationDescription",
     #     name: "ApplicationName", # required
+    #     description: "ApplicationDescription",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.application_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
-    #   resp.application_aggregated_status.last_update_date_time #=> String
-    #   resp.application_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
-    #   resp.application_aggregated_status.total_source_servers #=> Integer
     #   resp.application_id #=> String
     #   resp.arn #=> String
-    #   resp.creation_date_time #=> String
+    #   resp.name #=> String
     #   resp.description #=> String
     #   resp.is_archived #=> Boolean
+    #   resp.application_aggregated_status.last_update_date_time #=> String
+    #   resp.application_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.application_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.application_aggregated_status.total_source_servers #=> Integer
+    #   resp.creation_date_time #=> String
     #   resp.last_modified_date_time #=> String
-    #   resp.name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.wave_id #=> String
@@ -831,52 +832,52 @@ module Aws::Mgn
     # @option params [required, String] :name
     #   Create Connector request name.
     #
-    # @option params [Types::ConnectorSsmCommandConfig] :ssm_command_config
-    #   Create Connector request SSM command config.
-    #
     # @option params [required, String] :ssm_instance_id
     #   Create Connector request SSM instance ID.
     #
     # @option params [Hash<String,String>] :tags
     #   Create Connector request tags.
     #
+    # @option params [Types::ConnectorSsmCommandConfig] :ssm_command_config
+    #   Create Connector request SSM command config.
+    #
     # @return [Types::Connector] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::Connector#arn #arn} => String
     #   * {Types::Connector#connector_id #connector_id} => String
     #   * {Types::Connector#name #name} => String
-    #   * {Types::Connector#ssm_command_config #ssm_command_config} => Types::ConnectorSsmCommandConfig
     #   * {Types::Connector#ssm_instance_id #ssm_instance_id} => String
+    #   * {Types::Connector#arn #arn} => String
     #   * {Types::Connector#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::Connector#ssm_command_config #ssm_command_config} => Types::ConnectorSsmCommandConfig
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_connector({
     #     name: "ConnectorName", # required
-    #     ssm_command_config: {
-    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
-    #       cloud_watch_output_enabled: false, # required
-    #       output_s3_bucket_name: "S3BucketName",
-    #       s3_output_enabled: false, # required
-    #     },
     #     ssm_instance_id: "SsmInstanceID", # required
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     ssm_command_config: {
+    #       s3_output_enabled: false, # required
+    #       output_s3_bucket_name: "S3BucketName",
+    #       cloud_watch_output_enabled: false, # required
+    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
     #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
     #   resp.connector_id #=> String
     #   resp.name #=> String
-    #   resp.ssm_command_config.cloud_watch_log_group_name #=> String
-    #   resp.ssm_command_config.cloud_watch_output_enabled #=> Boolean
-    #   resp.ssm_command_config.output_s3_bucket_name #=> String
-    #   resp.ssm_command_config.s3_output_enabled #=> Boolean
     #   resp.ssm_instance_id #=> String
+    #   resp.arn #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.ssm_command_config.s3_output_enabled #=> Boolean
+    #   resp.ssm_command_config.output_s3_bucket_name #=> String
+    #   resp.ssm_command_config.cloud_watch_output_enabled #=> Boolean
+    #   resp.ssm_command_config.cloud_watch_log_group_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateConnector AWS API Documentation
     #
@@ -889,164 +890,176 @@ module Aws::Mgn
 
     # Creates a new Launch Configuration Template.
     #
-    # @option params [Boolean] :associate_public_ip_address
-    #   Associate public Ip address.
-    #
-    # @option params [String] :boot_mode
-    #   Launch configuration template boot mode.
-    #
-    # @option params [Boolean] :copy_private_ip
-    #   Copy private Ip.
-    #
-    # @option params [Boolean] :copy_tags
-    #   Copy tags.
+    # @option params [Types::PostLaunchActions] :post_launch_actions
+    #   Launch configuration template post launch actions.
     #
     # @option params [Boolean] :enable_map_auto_tagging
     #   Enable map auto tagging.
     #
-    # @option params [Types::LaunchTemplateDiskConf] :large_volume_conf
-    #   Large volume config.
-    #
-    # @option params [String] :launch_disposition
-    #   Launch disposition.
-    #
-    # @option params [Types::Licensing] :licensing
-    #   Configure Licensing.
-    #
     # @option params [String] :map_auto_tagging_mpe_id
     #   Launch configuration template map auto tagging MPE ID.
-    #
-    # @option params [Types::PostLaunchActions] :post_launch_actions
-    #   Launch configuration template post launch actions.
-    #
-    # @option params [Types::LaunchTemplateDiskConf] :small_volume_conf
-    #   Small volume config.
-    #
-    # @option params [Integer] :small_volume_max_size
-    #   Small volume maximum size.
     #
     # @option params [Hash<String,String>] :tags
     #   Request to associate tags during creation of a Launch Configuration
     #   Template.
     #
+    # @option params [String] :launch_disposition
+    #   Launch disposition.
+    #
     # @option params [String] :target_instance_type_right_sizing_method
     #   Target instance type right-sizing method.
     #
+    # @option params [Boolean] :copy_private_ip
+    #   Copy private Ip.
+    #
+    # @option params [Boolean] :associate_public_ip_address
+    #   Associate public Ip address.
+    #
+    # @option params [Boolean] :copy_tags
+    #   Copy tags.
+    #
+    # @option params [Types::Licensing] :licensing
+    #   Configure Licensing.
+    #
+    # @option params [String] :boot_mode
+    #   Launch configuration template boot mode.
+    #
+    # @option params [Integer] :small_volume_max_size
+    #   Small volume maximum size.
+    #
+    # @option params [Types::LaunchTemplateDiskConf] :small_volume_conf
+    #   Small volume config.
+    #
+    # @option params [Types::LaunchTemplateDiskConf] :large_volume_conf
+    #   Large volume config.
+    #
+    # @option params [Boolean] :enable_parameters_encryption
+    #   Enable parameters encryption.
+    #
+    # @option params [String] :parameters_encryption_key
+    #   Parameters encryption key.
+    #
     # @return [Types::LaunchConfigurationTemplate] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::LaunchConfigurationTemplate#arn #arn} => String
-    #   * {Types::LaunchConfigurationTemplate#associate_public_ip_address #associate_public_ip_address} => Boolean
-    #   * {Types::LaunchConfigurationTemplate#boot_mode #boot_mode} => String
-    #   * {Types::LaunchConfigurationTemplate#copy_private_ip #copy_private_ip} => Boolean
-    #   * {Types::LaunchConfigurationTemplate#copy_tags #copy_tags} => Boolean
-    #   * {Types::LaunchConfigurationTemplate#ec2_launch_template_id #ec2_launch_template_id} => String
-    #   * {Types::LaunchConfigurationTemplate#enable_map_auto_tagging #enable_map_auto_tagging} => Boolean
-    #   * {Types::LaunchConfigurationTemplate#large_volume_conf #large_volume_conf} => Types::LaunchTemplateDiskConf
     #   * {Types::LaunchConfigurationTemplate#launch_configuration_template_id #launch_configuration_template_id} => String
-    #   * {Types::LaunchConfigurationTemplate#launch_disposition #launch_disposition} => String
-    #   * {Types::LaunchConfigurationTemplate#licensing #licensing} => Types::Licensing
-    #   * {Types::LaunchConfigurationTemplate#map_auto_tagging_mpe_id #map_auto_tagging_mpe_id} => String
+    #   * {Types::LaunchConfigurationTemplate#arn #arn} => String
     #   * {Types::LaunchConfigurationTemplate#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
-    #   * {Types::LaunchConfigurationTemplate#small_volume_conf #small_volume_conf} => Types::LaunchTemplateDiskConf
-    #   * {Types::LaunchConfigurationTemplate#small_volume_max_size #small_volume_max_size} => Integer
+    #   * {Types::LaunchConfigurationTemplate#enable_map_auto_tagging #enable_map_auto_tagging} => Boolean
+    #   * {Types::LaunchConfigurationTemplate#map_auto_tagging_mpe_id #map_auto_tagging_mpe_id} => String
     #   * {Types::LaunchConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::LaunchConfigurationTemplate#ec2_launch_template_id #ec2_launch_template_id} => String
+    #   * {Types::LaunchConfigurationTemplate#launch_disposition #launch_disposition} => String
     #   * {Types::LaunchConfigurationTemplate#target_instance_type_right_sizing_method #target_instance_type_right_sizing_method} => String
+    #   * {Types::LaunchConfigurationTemplate#copy_private_ip #copy_private_ip} => Boolean
+    #   * {Types::LaunchConfigurationTemplate#associate_public_ip_address #associate_public_ip_address} => Boolean
+    #   * {Types::LaunchConfigurationTemplate#copy_tags #copy_tags} => Boolean
+    #   * {Types::LaunchConfigurationTemplate#licensing #licensing} => Types::Licensing
+    #   * {Types::LaunchConfigurationTemplate#boot_mode #boot_mode} => String
+    #   * {Types::LaunchConfigurationTemplate#small_volume_max_size #small_volume_max_size} => Integer
+    #   * {Types::LaunchConfigurationTemplate#small_volume_conf #small_volume_conf} => Types::LaunchTemplateDiskConf
+    #   * {Types::LaunchConfigurationTemplate#large_volume_conf #large_volume_conf} => Types::LaunchTemplateDiskConf
+    #   * {Types::LaunchConfigurationTemplate#enable_parameters_encryption #enable_parameters_encryption} => Boolean
+    #   * {Types::LaunchConfigurationTemplate#parameters_encryption_key #parameters_encryption_key} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_launch_configuration_template({
-    #     associate_public_ip_address: false,
-    #     boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI, USE_SOURCE
-    #     copy_private_ip: false,
-    #     copy_tags: false,
-    #     enable_map_auto_tagging: false,
-    #     large_volume_conf: {
-    #       iops: 1,
-    #       throughput: 1,
-    #       volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
-    #     },
-    #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
-    #     licensing: {
-    #       os_byol: false,
-    #     },
-    #     map_auto_tagging_mpe_id: "TagValue",
     #     post_launch_actions: {
-    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
     #       deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY, TEST_ONLY
     #       s3_log_bucket: "S3LogBucketName",
     #       s3_output_key_prefix: "BoundedString",
+    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
     #       ssm_documents: [
     #         {
     #           action_name: "BoundedString", # required
+    #           ssm_document_name: "SsmDocumentName", # required
+    #           timeout_seconds: 1,
+    #           must_succeed_for_cutover: false,
+    #           parameters: {
+    #             "SsmDocumentParameterName" => [
+    #               {
+    #                 parameter_type: "STRING", # required, accepts STRING, SECURE_STRING
+    #                 parameter_name: "SsmParameterStoreParameterName", # required
+    #               },
+    #             ],
+    #           },
     #           external_parameters: {
     #             "SsmDocumentParameterName" => {
     #               dynamic_path: "JmesPathString",
     #             },
     #           },
-    #           must_succeed_for_cutover: false,
-    #           parameters: {
-    #             "SsmDocumentParameterName" => [
-    #               {
-    #                 parameter_name: "SsmParameterStoreParameterName", # required
-    #                 parameter_type: "STRING", # required, accepts STRING
-    #               },
-    #             ],
-    #           },
-    #           ssm_document_name: "SsmDocumentName", # required
-    #           timeout_seconds: 1,
     #         },
     #       ],
     #     },
-    #     small_volume_conf: {
-    #       iops: 1,
-    #       throughput: 1,
-    #       volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
-    #     },
-    #     small_volume_max_size: 1,
+    #     enable_map_auto_tagging: false,
+    #     map_auto_tagging_mpe_id: "TagValue",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
     #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
+    #     copy_private_ip: false,
+    #     associate_public_ip_address: false,
+    #     copy_tags: false,
+    #     licensing: {
+    #       os_byol: false,
+    #     },
+    #     boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI, USE_SOURCE
+    #     small_volume_max_size: 1,
+    #     small_volume_conf: {
+    #       volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
+    #       iops: 1,
+    #       throughput: 1,
+    #     },
+    #     large_volume_conf: {
+    #       volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
+    #       iops: 1,
+    #       throughput: 1,
+    #     },
+    #     enable_parameters_encryption: false,
+    #     parameters_encryption_key: "KmsKeyArn",
     #   })
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.associate_public_ip_address #=> Boolean
-    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI", "USE_SOURCE"
-    #   resp.copy_private_ip #=> Boolean
-    #   resp.copy_tags #=> Boolean
-    #   resp.ec2_launch_template_id #=> String
-    #   resp.enable_map_auto_tagging #=> Boolean
-    #   resp.large_volume_conf.iops #=> Integer
-    #   resp.large_volume_conf.throughput #=> Integer
-    #   resp.large_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
     #   resp.launch_configuration_template_id #=> String
-    #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
-    #   resp.licensing.os_byol #=> Boolean
-    #   resp.map_auto_tagging_mpe_id #=> String
-    #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
+    #   resp.arn #=> String
     #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY", "TEST_ONLY"
     #   resp.post_launch_actions.s3_log_bucket #=> String
     #   resp.post_launch_actions.s3_output_key_prefix #=> String
+    #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
     #   resp.post_launch_actions.ssm_documents #=> Array
     #   resp.post_launch_actions.ssm_documents[0].action_name #=> String
-    #   resp.post_launch_actions.ssm_documents[0].external_parameters #=> Hash
-    #   resp.post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
+    #   resp.post_launch_actions.ssm_documents[0].ssm_document_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
     #   resp.post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
     #   resp.post_launch_actions.ssm_documents[0].parameters #=> Hash
     #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING", "SECURE_STRING"
     #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
-    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
-    #   resp.post_launch_actions.ssm_documents[0].ssm_document_name #=> String
-    #   resp.post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
-    #   resp.small_volume_conf.iops #=> Integer
-    #   resp.small_volume_conf.throughput #=> Integer
-    #   resp.small_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
-    #   resp.small_volume_max_size #=> Integer
+    #   resp.post_launch_actions.ssm_documents[0].external_parameters #=> Hash
+    #   resp.post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
+    #   resp.enable_map_auto_tagging #=> Boolean
+    #   resp.map_auto_tagging_mpe_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.ec2_launch_template_id #=> String
+    #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
     #   resp.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
+    #   resp.copy_private_ip #=> Boolean
+    #   resp.associate_public_ip_address #=> Boolean
+    #   resp.copy_tags #=> Boolean
+    #   resp.licensing.os_byol #=> Boolean
+    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI", "USE_SOURCE"
+    #   resp.small_volume_max_size #=> Integer
+    #   resp.small_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
+    #   resp.small_volume_conf.iops #=> Integer
+    #   resp.small_volume_conf.throughput #=> Integer
+    #   resp.large_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
+    #   resp.large_volume_conf.iops #=> Integer
+    #   resp.large_volume_conf.throughput #=> Integer
+    #   resp.enable_parameters_encryption #=> Boolean
+    #   resp.parameters_encryption_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateLaunchConfigurationTemplate AWS API Documentation
     #
@@ -1059,21 +1072,25 @@ module Aws::Mgn
 
     # Creates a new ReplicationConfigurationTemplate.
     #
+    # @option params [required, String] :staging_area_subnet_id
+    #   Request to configure the Staging Area subnet ID during Replication
+    #   Settings template creation.
+    #
     # @option params [required, Boolean] :associate_default_security_group
     #   Request to associate the default Application Migration Service
     #   Security group with the Replication Settings template.
     #
-    # @option params [required, Integer] :bandwidth_throttling
-    #   Request to configure bandwidth throttling during Replication Settings
-    #   template creation.
+    # @option params [required, Array<String>] :replication_servers_security_groups_i_ds
+    #   Request to configure the Replication Server Security group ID during
+    #   Replication Settings template creation.
     #
-    # @option params [required, Boolean] :create_public_ip
-    #   Request to create Public IP during Replication Settings template
-    #   creation.
+    # @option params [required, String] :replication_server_instance_type
+    #   Request to configure the Replication Server instance type during
+    #   Replication Settings template creation.
     #
-    # @option params [required, String] :data_plane_routing
-    #   Request to configure data plane routing during Replication Settings
-    #   template creation.
+    # @option params [required, Boolean] :use_dedicated_replication_server
+    #   Request to use Dedicated Replication Servers during Replication
+    #   Settings template creation.
     #
     # @option params [required, String] :default_large_staging_disk_type
     #   Request to configure the default large staging disk EBS volume type
@@ -1087,97 +1104,99 @@ module Aws::Mgn
     #   Request to configure an EBS encryption key during Replication Settings
     #   template creation.
     #
-    # @option params [required, String] :replication_server_instance_type
-    #   Request to configure the Replication Server instance type during
-    #   Replication Settings template creation.
+    # @option params [required, Integer] :bandwidth_throttling
+    #   Request to configure bandwidth throttling during Replication Settings
+    #   template creation.
     #
-    # @option params [required, Array<String>] :replication_servers_security_groups_i_ds
-    #   Request to configure the Replication Server Security group ID during
-    #   Replication Settings template creation.
+    # @option params [required, String] :data_plane_routing
+    #   Request to configure data plane routing during Replication Settings
+    #   template creation.
     #
-    # @option params [required, String] :staging_area_subnet_id
-    #   Request to configure the Staging Area subnet ID during Replication
-    #   Settings template creation.
+    # @option params [required, Boolean] :create_public_ip
+    #   Request to create Public IP during Replication Settings template
+    #   creation.
     #
     # @option params [required, Hash<String,String>] :staging_area_tags
     #   Request to configure Staging Area tags during Replication Settings
     #   template creation.
     #
-    # @option params [Hash<String,String>] :tags
-    #   Request to configure tags during Replication Settings template
-    #   creation.
-    #
-    # @option params [required, Boolean] :use_dedicated_replication_server
-    #   Request to use Dedicated Replication Servers during Replication
-    #   Settings template creation.
-    #
     # @option params [Boolean] :use_fips_endpoint
     #   Request to use Fips Endpoint during Replication Settings template
     #   creation.
     #
+    # @option params [Hash<String,String>] :tags
+    #   Request to configure tags during Replication Settings template
+    #   creation.
+    #
+    # @option params [String] :internet_protocol
+    #   Request to configure the internet protocol to IPv4 or IPv6.
+    #
     # @return [Types::ReplicationConfigurationTemplate] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::ReplicationConfigurationTemplate#replication_configuration_template_id #replication_configuration_template_id} => String
     #   * {Types::ReplicationConfigurationTemplate#arn #arn} => String
+    #   * {Types::ReplicationConfigurationTemplate#staging_area_subnet_id #staging_area_subnet_id} => String
     #   * {Types::ReplicationConfigurationTemplate#associate_default_security_group #associate_default_security_group} => Boolean
-    #   * {Types::ReplicationConfigurationTemplate#bandwidth_throttling #bandwidth_throttling} => Integer
-    #   * {Types::ReplicationConfigurationTemplate#create_public_ip #create_public_ip} => Boolean
-    #   * {Types::ReplicationConfigurationTemplate#data_plane_routing #data_plane_routing} => String
+    #   * {Types::ReplicationConfigurationTemplate#replication_servers_security_groups_i_ds #replication_servers_security_groups_i_ds} => Array&lt;String&gt;
+    #   * {Types::ReplicationConfigurationTemplate#replication_server_instance_type #replication_server_instance_type} => String
+    #   * {Types::ReplicationConfigurationTemplate#use_dedicated_replication_server #use_dedicated_replication_server} => Boolean
     #   * {Types::ReplicationConfigurationTemplate#default_large_staging_disk_type #default_large_staging_disk_type} => String
     #   * {Types::ReplicationConfigurationTemplate#ebs_encryption #ebs_encryption} => String
     #   * {Types::ReplicationConfigurationTemplate#ebs_encryption_key_arn #ebs_encryption_key_arn} => String
-    #   * {Types::ReplicationConfigurationTemplate#replication_configuration_template_id #replication_configuration_template_id} => String
-    #   * {Types::ReplicationConfigurationTemplate#replication_server_instance_type #replication_server_instance_type} => String
-    #   * {Types::ReplicationConfigurationTemplate#replication_servers_security_groups_i_ds #replication_servers_security_groups_i_ds} => Array&lt;String&gt;
-    #   * {Types::ReplicationConfigurationTemplate#staging_area_subnet_id #staging_area_subnet_id} => String
+    #   * {Types::ReplicationConfigurationTemplate#bandwidth_throttling #bandwidth_throttling} => Integer
+    #   * {Types::ReplicationConfigurationTemplate#data_plane_routing #data_plane_routing} => String
+    #   * {Types::ReplicationConfigurationTemplate#create_public_ip #create_public_ip} => Boolean
     #   * {Types::ReplicationConfigurationTemplate#staging_area_tags #staging_area_tags} => Hash&lt;String,String&gt;
-    #   * {Types::ReplicationConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::ReplicationConfigurationTemplate#use_dedicated_replication_server #use_dedicated_replication_server} => Boolean
     #   * {Types::ReplicationConfigurationTemplate#use_fips_endpoint #use_fips_endpoint} => Boolean
+    #   * {Types::ReplicationConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::ReplicationConfigurationTemplate#internet_protocol #internet_protocol} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_replication_configuration_template({
+    #     staging_area_subnet_id: "SubnetID", # required
     #     associate_default_security_group: false, # required
-    #     bandwidth_throttling: 1, # required
-    #     create_public_ip: false, # required
-    #     data_plane_routing: "PRIVATE_IP", # required, accepts PRIVATE_IP, PUBLIC_IP
+    #     replication_servers_security_groups_i_ds: ["SecurityGroupID"], # required
+    #     replication_server_instance_type: "EC2InstanceType", # required
+    #     use_dedicated_replication_server: false, # required
     #     default_large_staging_disk_type: "GP2", # required, accepts GP2, ST1, GP3
     #     ebs_encryption: "DEFAULT", # required, accepts DEFAULT, CUSTOM
     #     ebs_encryption_key_arn: "ARN",
-    #     replication_server_instance_type: "EC2InstanceType", # required
-    #     replication_servers_security_groups_i_ds: ["SecurityGroupID"], # required
-    #     staging_area_subnet_id: "SubnetID", # required
+    #     bandwidth_throttling: 1, # required
+    #     data_plane_routing: "PRIVATE_IP", # required, accepts PRIVATE_IP, PUBLIC_IP
+    #     create_public_ip: false, # required
     #     staging_area_tags: { # required
     #       "TagKey" => "TagValue",
     #     },
+    #     use_fips_endpoint: false,
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     use_dedicated_replication_server: false, # required
-    #     use_fips_endpoint: false,
+    #     internet_protocol: "IPV4", # accepts IPV4, IPV6
     #   })
     #
     # @example Response structure
     #
+    #   resp.replication_configuration_template_id #=> String
     #   resp.arn #=> String
+    #   resp.staging_area_subnet_id #=> String
     #   resp.associate_default_security_group #=> Boolean
-    #   resp.bandwidth_throttling #=> Integer
-    #   resp.create_public_ip #=> Boolean
-    #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
+    #   resp.replication_servers_security_groups_i_ds #=> Array
+    #   resp.replication_servers_security_groups_i_ds[0] #=> String
+    #   resp.replication_server_instance_type #=> String
+    #   resp.use_dedicated_replication_server #=> Boolean
     #   resp.default_large_staging_disk_type #=> String, one of "GP2", "ST1", "GP3"
     #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.ebs_encryption_key_arn #=> String
-    #   resp.replication_configuration_template_id #=> String
-    #   resp.replication_server_instance_type #=> String
-    #   resp.replication_servers_security_groups_i_ds #=> Array
-    #   resp.replication_servers_security_groups_i_ds[0] #=> String
-    #   resp.staging_area_subnet_id #=> String
+    #   resp.bandwidth_throttling #=> Integer
+    #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
+    #   resp.create_public_ip #=> Boolean
     #   resp.staging_area_tags #=> Hash
     #   resp.staging_area_tags["TagKey"] #=> String
+    #   resp.use_fips_endpoint #=> Boolean
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.use_dedicated_replication_server #=> Boolean
-    #   resp.use_fips_endpoint #=> Boolean
+    #   resp.internet_protocol #=> String, one of "IPV4", "IPV6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateReplicationConfigurationTemplate AWS API Documentation
     #
@@ -1190,57 +1209,57 @@ module Aws::Mgn
 
     # Create wave.
     #
-    # @option params [String] :account_id
-    #   Account ID.
+    # @option params [required, String] :name
+    #   Wave name.
     #
     # @option params [String] :description
     #   Wave description.
     #
-    # @option params [required, String] :name
-    #   Wave name.
-    #
     # @option params [Hash<String,String>] :tags
     #   Wave tags.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @return [Types::Wave] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::Wave#wave_id #wave_id} => String
     #   * {Types::Wave#arn #arn} => String
-    #   * {Types::Wave#creation_date_time #creation_date_time} => String
+    #   * {Types::Wave#name #name} => String
     #   * {Types::Wave#description #description} => String
     #   * {Types::Wave#is_archived #is_archived} => Boolean
-    #   * {Types::Wave#last_modified_date_time #last_modified_date_time} => String
-    #   * {Types::Wave#name #name} => String
-    #   * {Types::Wave#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Wave#wave_aggregated_status #wave_aggregated_status} => Types::WaveAggregatedStatus
-    #   * {Types::Wave#wave_id #wave_id} => String
+    #   * {Types::Wave#creation_date_time #creation_date_time} => String
+    #   * {Types::Wave#last_modified_date_time #last_modified_date_time} => String
+    #   * {Types::Wave#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_wave({
-    #     account_id: "AccountID",
-    #     description: "WaveDescription",
     #     name: "WaveName", # required
+    #     description: "WaveDescription",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
+    #   resp.wave_id #=> String
     #   resp.arn #=> String
-    #   resp.creation_date_time #=> String
+    #   resp.name #=> String
     #   resp.description #=> String
     #   resp.is_archived #=> Boolean
+    #   resp.wave_aggregated_status.last_update_date_time #=> String
+    #   resp.wave_aggregated_status.replication_started_date_time #=> String
+    #   resp.wave_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.wave_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.wave_aggregated_status.total_applications #=> Integer
+    #   resp.creation_date_time #=> String
     #   resp.last_modified_date_time #=> String
-    #   resp.name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.wave_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
-    #   resp.wave_aggregated_status.last_update_date_time #=> String
-    #   resp.wave_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
-    #   resp.wave_aggregated_status.replication_started_date_time #=> String
-    #   resp.wave_aggregated_status.total_applications #=> Integer
-    #   resp.wave_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/CreateWave AWS API Documentation
     #
@@ -1253,19 +1272,19 @@ module Aws::Mgn
 
     # Delete application.
     #
-    # @option params [String] :account_id
-    #   Account ID.
-    #
     # @option params [required, String] :application_id
     #   Application ID.
+    #
+    # @option params [String] :account_id
+    #   Account ID.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_application({
-    #     account_id: "AccountID",
     #     application_id: "ApplicationID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteApplication AWS API Documentation
@@ -1301,19 +1320,19 @@ module Aws::Mgn
 
     # Deletes a single Job by ID.
     #
-    # @option params [String] :account_id
-    #   Request to delete Job from service by Account ID.
-    #
     # @option params [required, String] :job_id
     #   Request to delete Job from service by Job ID.
+    #
+    # @option params [String] :account_id
+    #   Request to delete Job from service by Account ID.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_job({
-    #     account_id: "AccountID",
     #     job_id: "JobID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteJob AWS API Documentation
@@ -1372,19 +1391,19 @@ module Aws::Mgn
 
     # Deletes a single source server by ID.
     #
-    # @option params [String] :account_id
-    #   Request to delete Source Server from service by Account ID.
-    #
     # @option params [required, String] :source_server_id
     #   Request to delete Source Server from service by Server ID.
+    #
+    # @option params [String] :account_id
+    #   Request to delete Source Server from service by Account ID.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_source_server({
-    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteSourceServer AWS API Documentation
@@ -1420,19 +1439,19 @@ module Aws::Mgn
 
     # Delete wave.
     #
-    # @option params [String] :account_id
-    #   Account ID.
-    #
     # @option params [required, String] :wave_id
     #   Wave ID.
+    #
+    # @option params [String] :account_id
+    #   Account ID.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_wave({
-    #     account_id: "AccountID",
     #     wave_id: "WaveID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteWave AWS API Documentation
@@ -1446,9 +1465,6 @@ module Aws::Mgn
 
     # Retrieves detailed job log items with paging.
     #
-    # @option params [String] :account_id
-    #   Request to describe Job log Account ID.
-    #
     # @option params [required, String] :job_id
     #   Request to describe Job log job ID.
     #
@@ -1457,6 +1473,9 @@ module Aws::Mgn
     #
     # @option params [String] :next_token
     #   Request to describe Job log next token.
+    #
+    # @option params [String] :account_id
+    #   Request to describe Job log Account ID.
     #
     # @return [Types::DescribeJobLogItemsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1468,21 +1487,23 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_job_log_items({
-    #     account_id: "AccountID",
     #     job_id: "JobID", # required
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].event #=> String, one of "JOB_START", "SERVER_SKIPPED", "CLEANUP_START", "CLEANUP_END", "CLEANUP_FAIL", "SNAPSHOT_START", "SNAPSHOT_END", "SNAPSHOT_FAIL", "USING_PREVIOUS_SNAPSHOT", "CONVERSION_START", "CONVERSION_END", "CONVERSION_FAIL", "LAUNCH_START", "LAUNCH_FAILED", "JOB_CANCEL", "JOB_END"
-    #   resp.items[0].event_data.conversion_server_id #=> String
-    #   resp.items[0].event_data.raw_error #=> String
-    #   resp.items[0].event_data.source_server_id #=> String
-    #   resp.items[0].event_data.target_instance_id #=> String
     #   resp.items[0].log_date_time #=> String
+    #   resp.items[0].event #=> String, one of "JOB_START", "SERVER_SKIPPED", "CLEANUP_START", "CLEANUP_END", "CLEANUP_FAIL", "SNAPSHOT_START", "SNAPSHOT_END", "SNAPSHOT_FAIL", "USING_PREVIOUS_SNAPSHOT", "CONVERSION_START", "CONVERSION_END", "CONVERSION_FAIL", "LAUNCH_START", "LAUNCH_FAILED", "JOB_CANCEL", "JOB_END"
+    #   resp.items[0].event_data.source_server_id #=> String
+    #   resp.items[0].event_data.conversion_server_id #=> String
+    #   resp.items[0].event_data.target_instance_id #=> String
+    #   resp.items[0].event_data.raw_error #=> String
+    #   resp.items[0].event_data.attempt_count #=> Integer
+    #   resp.items[0].event_data.max_attempts_count #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeJobLogItems AWS API Documentation
@@ -1502,9 +1523,6 @@ module Aws::Mgn
     # which are APIs available only to *Support* and only used in response
     # to relevant support tickets.
     #
-    # @option params [String] :account_id
-    #   Request to describe job log items by Account ID.
-    #
     # @option params [Types::DescribeJobsRequestFilters] :filters
     #   Request to describe Job log filters.
     #
@@ -1513,6 +1531,9 @@ module Aws::Mgn
     #
     # @option params [String] :next_token
     #   Request to describe job log items by next token.
+    #
+    # @option params [String] :account_id
+    #   Request to describe job log items by Account ID.
     #
     # @return [Types::DescribeJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1524,48 +1545,48 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_jobs({
-    #     account_id: "AccountID",
     #     filters: {
-    #       from_date: "ISO8601DatetimeString",
     #       job_i_ds: ["JobID"],
+    #       from_date: "ISO8601DatetimeString",
     #       to_date: "ISO8601DatetimeString",
     #     },
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
+    #   resp.items[0].job_id #=> String
     #   resp.items[0].arn #=> String
+    #   resp.items[0].type #=> String, one of "LAUNCH", "TERMINATE"
+    #   resp.items[0].initiated_by #=> String, one of "START_TEST", "START_CUTOVER", "DIAGNOSTIC", "TERMINATE"
     #   resp.items[0].creation_date_time #=> String
     #   resp.items[0].end_date_time #=> String
-    #   resp.items[0].initiated_by #=> String, one of "START_TEST", "START_CUTOVER", "DIAGNOSTIC", "TERMINATE"
-    #   resp.items[0].job_id #=> String
+    #   resp.items[0].status #=> String, one of "PENDING", "STARTED", "COMPLETED"
     #   resp.items[0].participating_servers #=> Array
+    #   resp.items[0].participating_servers[0].source_server_id #=> String
     #   resp.items[0].participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.items[0].participating_servers[0].launched_ec2_instance_id #=> String
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.ssm_agent_discovery_datetime #=> String
     #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list #=> Array
-    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_id #=> String
-    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
-    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
     #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.action_name #=> String
-    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters #=> Hash
-    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.ssm_document_name #=> String
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.timeout_seconds #=> Integer
     #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.must_succeed_for_cutover #=> Boolean
     #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters #=> Hash
     #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING", "SECURE_STRING"
     #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_name #=> String
-    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
-    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.ssm_document_name #=> String
-    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.timeout_seconds #=> Integer
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters #=> Hash
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document_type #=> String, one of "AUTOMATION", "COMMAND"
-    #   resp.items[0].participating_servers[0].post_launch_actions_status.ssm_agent_discovery_datetime #=> String
-    #   resp.items[0].participating_servers[0].source_server_id #=> String
-    #   resp.items[0].status #=> String, one of "PENDING", "STARTED", "COMPLETED"
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_id #=> String
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.items[0].participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
-    #   resp.items[0].type #=> String, one of "LAUNCH", "TERMINATE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeJobs AWS API Documentation
@@ -1610,42 +1631,44 @@ module Aws::Mgn
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].arn #=> String
-    #   resp.items[0].associate_public_ip_address #=> Boolean
-    #   resp.items[0].boot_mode #=> String, one of "LEGACY_BIOS", "UEFI", "USE_SOURCE"
-    #   resp.items[0].copy_private_ip #=> Boolean
-    #   resp.items[0].copy_tags #=> Boolean
-    #   resp.items[0].ec2_launch_template_id #=> String
-    #   resp.items[0].enable_map_auto_tagging #=> Boolean
-    #   resp.items[0].large_volume_conf.iops #=> Integer
-    #   resp.items[0].large_volume_conf.throughput #=> Integer
-    #   resp.items[0].large_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
     #   resp.items[0].launch_configuration_template_id #=> String
-    #   resp.items[0].launch_disposition #=> String, one of "STOPPED", "STARTED"
-    #   resp.items[0].licensing.os_byol #=> Boolean
-    #   resp.items[0].map_auto_tagging_mpe_id #=> String
-    #   resp.items[0].post_launch_actions.cloud_watch_log_group_name #=> String
+    #   resp.items[0].arn #=> String
     #   resp.items[0].post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY", "TEST_ONLY"
     #   resp.items[0].post_launch_actions.s3_log_bucket #=> String
     #   resp.items[0].post_launch_actions.s3_output_key_prefix #=> String
+    #   resp.items[0].post_launch_actions.cloud_watch_log_group_name #=> String
     #   resp.items[0].post_launch_actions.ssm_documents #=> Array
     #   resp.items[0].post_launch_actions.ssm_documents[0].action_name #=> String
-    #   resp.items[0].post_launch_actions.ssm_documents[0].external_parameters #=> Hash
-    #   resp.items[0].post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
+    #   resp.items[0].post_launch_actions.ssm_documents[0].ssm_document_name #=> String
+    #   resp.items[0].post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
     #   resp.items[0].post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
     #   resp.items[0].post_launch_actions.ssm_documents[0].parameters #=> Hash
     #   resp.items[0].post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.items[0].post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING", "SECURE_STRING"
     #   resp.items[0].post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
-    #   resp.items[0].post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
-    #   resp.items[0].post_launch_actions.ssm_documents[0].ssm_document_name #=> String
-    #   resp.items[0].post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
-    #   resp.items[0].small_volume_conf.iops #=> Integer
-    #   resp.items[0].small_volume_conf.throughput #=> Integer
-    #   resp.items[0].small_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
-    #   resp.items[0].small_volume_max_size #=> Integer
+    #   resp.items[0].post_launch_actions.ssm_documents[0].external_parameters #=> Hash
+    #   resp.items[0].post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
+    #   resp.items[0].enable_map_auto_tagging #=> Boolean
+    #   resp.items[0].map_auto_tagging_mpe_id #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.items[0].ec2_launch_template_id #=> String
+    #   resp.items[0].launch_disposition #=> String, one of "STOPPED", "STARTED"
     #   resp.items[0].target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
+    #   resp.items[0].copy_private_ip #=> Boolean
+    #   resp.items[0].associate_public_ip_address #=> Boolean
+    #   resp.items[0].copy_tags #=> Boolean
+    #   resp.items[0].licensing.os_byol #=> Boolean
+    #   resp.items[0].boot_mode #=> String, one of "LEGACY_BIOS", "UEFI", "USE_SOURCE"
+    #   resp.items[0].small_volume_max_size #=> Integer
+    #   resp.items[0].small_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
+    #   resp.items[0].small_volume_conf.iops #=> Integer
+    #   resp.items[0].small_volume_conf.throughput #=> Integer
+    #   resp.items[0].large_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
+    #   resp.items[0].large_volume_conf.iops #=> Integer
+    #   resp.items[0].large_volume_conf.throughput #=> Integer
+    #   resp.items[0].enable_parameters_encryption #=> Boolean
+    #   resp.items[0].parameters_encryption_key #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeLaunchConfigurationTemplates AWS API Documentation
@@ -1660,15 +1683,15 @@ module Aws::Mgn
     # Lists all ReplicationConfigurationTemplates, filtered by Source Server
     # IDs.
     #
+    # @option params [Array<String>] :replication_configuration_template_i_ds
+    #   Request to describe Replication Configuration template by template
+    #   IDs.
+    #
     # @option params [Integer] :max_results
     #   Request to describe Replication Configuration template by max results.
     #
     # @option params [String] :next_token
     #   Request to describe Replication Configuration template by next token.
-    #
-    # @option params [Array<String>] :replication_configuration_template_i_ds
-    #   Request to describe Replication Configuration template by template
-    #   IDs.
     #
     # @return [Types::DescribeReplicationConfigurationTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1680,33 +1703,34 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_replication_configuration_templates({
+    #     replication_configuration_template_i_ds: ["ReplicationConfigurationTemplateID"],
     #     max_results: 1,
     #     next_token: "PaginationToken",
-    #     replication_configuration_template_i_ds: ["ReplicationConfigurationTemplateID"],
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
+    #   resp.items[0].replication_configuration_template_id #=> String
     #   resp.items[0].arn #=> String
+    #   resp.items[0].staging_area_subnet_id #=> String
     #   resp.items[0].associate_default_security_group #=> Boolean
-    #   resp.items[0].bandwidth_throttling #=> Integer
-    #   resp.items[0].create_public_ip #=> Boolean
-    #   resp.items[0].data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
+    #   resp.items[0].replication_servers_security_groups_i_ds #=> Array
+    #   resp.items[0].replication_servers_security_groups_i_ds[0] #=> String
+    #   resp.items[0].replication_server_instance_type #=> String
+    #   resp.items[0].use_dedicated_replication_server #=> Boolean
     #   resp.items[0].default_large_staging_disk_type #=> String, one of "GP2", "ST1", "GP3"
     #   resp.items[0].ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.items[0].ebs_encryption_key_arn #=> String
-    #   resp.items[0].replication_configuration_template_id #=> String
-    #   resp.items[0].replication_server_instance_type #=> String
-    #   resp.items[0].replication_servers_security_groups_i_ds #=> Array
-    #   resp.items[0].replication_servers_security_groups_i_ds[0] #=> String
-    #   resp.items[0].staging_area_subnet_id #=> String
+    #   resp.items[0].bandwidth_throttling #=> Integer
+    #   resp.items[0].data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
+    #   resp.items[0].create_public_ip #=> Boolean
     #   resp.items[0].staging_area_tags #=> Hash
     #   resp.items[0].staging_area_tags["TagKey"] #=> String
+    #   resp.items[0].use_fips_endpoint #=> Boolean
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
-    #   resp.items[0].use_dedicated_replication_server #=> Boolean
-    #   resp.items[0].use_fips_endpoint #=> Boolean
+    #   resp.items[0].internet_protocol #=> String, one of "IPV4", "IPV6"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeReplicationConfigurationTemplates AWS API Documentation
@@ -1720,9 +1744,6 @@ module Aws::Mgn
 
     # Retrieves all SourceServers or multiple SourceServers by ID.
     #
-    # @option params [String] :account_id
-    #   Request to filter Source Servers list by Accoun ID.
-    #
     # @option params [Types::DescribeSourceServersRequestFilters] :filters
     #   Request to filter Source Servers list.
     #
@@ -1731,6 +1752,9 @@ module Aws::Mgn
     #
     # @option params [String] :next_token
     #   Request to filter Source Servers list by next token.
+    #
+    # @option params [String] :account_id
+    #   Request to filter Source Servers list by Accoun ID.
     #
     # @return [Types::DescribeSourceServersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1742,86 +1766,87 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_source_servers({
-    #     account_id: "AccountID",
     #     filters: {
-    #       application_i_ds: ["ApplicationID"],
-    #       is_archived: false,
-    #       life_cycle_states: ["STOPPED"], # accepts STOPPED, NOT_READY, READY_FOR_TEST, TESTING, READY_FOR_CUTOVER, CUTTING_OVER, CUTOVER, DISCONNECTED, DISCOVERED, PENDING_INSTALLATION
-    #       replication_types: ["AGENT_BASED"], # accepts AGENT_BASED, SNAPSHOT_SHIPPING
     #       source_server_i_ds: ["SourceServerID"],
+    #       is_archived: false,
+    #       replication_types: ["AGENT_BASED"], # accepts AGENT_BASED, SNAPSHOT_SHIPPING
+    #       life_cycle_states: ["STOPPED"], # accepts STOPPED, NOT_READY, READY_FOR_TEST, TESTING, READY_FOR_CUTOVER, CUTTING_OVER, CUTOVER, DISCONNECTED, DISCOVERED, PENDING_INSTALLATION
+    #       application_i_ds: ["ApplicationID"],
     #     },
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].application_id #=> String
+    #   resp.items[0].source_server_id #=> String
     #   resp.items[0].arn #=> String
-    #   resp.items[0].connector_action.connector_arn #=> String
-    #   resp.items[0].connector_action.credentials_secret_arn #=> String
-    #   resp.items[0].data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
-    #   resp.items[0].data_replication_info.data_replication_error.raw_error #=> String
-    #   resp.items[0].data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.items[0].is_archived #=> Boolean
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.items[0].launched_instance.ec2_instance_id #=> String
+    #   resp.items[0].launched_instance.job_id #=> String
+    #   resp.items[0].launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
+    #   resp.items[0].data_replication_info.lag_duration #=> String
+    #   resp.items[0].data_replication_info.eta_date_time #=> String
+    #   resp.items[0].data_replication_info.replicated_disks #=> Array
+    #   resp.items[0].data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.items[0].data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.items[0].data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.items[0].data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.items[0].data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.items[0].data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
     #   resp.items[0].data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.items[0].data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
     #   resp.items[0].data_replication_info.data_replication_initiation.steps #=> Array
     #   resp.items[0].data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.items[0].data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.items[0].data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
-    #   resp.items[0].data_replication_info.eta_date_time #=> String
-    #   resp.items[0].data_replication_info.lag_duration #=> String
+    #   resp.items[0].data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
+    #   resp.items[0].data_replication_info.data_replication_error.raw_error #=> String
     #   resp.items[0].data_replication_info.last_snapshot_date_time #=> String
-    #   resp.items[0].data_replication_info.replicated_disks #=> Array
-    #   resp.items[0].data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
-    #   resp.items[0].data_replication_info.replicated_disks[0].device_name #=> String
-    #   resp.items[0].data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
-    #   resp.items[0].data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
-    #   resp.items[0].data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
-    #   resp.items[0].fqdn_for_action_framework #=> String
-    #   resp.items[0].is_archived #=> Boolean
-    #   resp.items[0].launched_instance.ec2_instance_id #=> String
-    #   resp.items[0].launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
-    #   resp.items[0].launched_instance.job_id #=> String
+    #   resp.items[0].data_replication_info.replicator_id #=> String
     #   resp.items[0].life_cycle.added_to_service_date_time #=> String
-    #   resp.items[0].life_cycle.elapsed_replication_duration #=> String
     #   resp.items[0].life_cycle.first_byte_date_time #=> String
-    #   resp.items[0].life_cycle.last_cutover.finalized.api_call_date_time #=> String
-    #   resp.items[0].life_cycle.last_cutover.initiated.api_call_date_time #=> String
-    #   resp.items[0].life_cycle.last_cutover.initiated.job_id #=> String
-    #   resp.items[0].life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.items[0].life_cycle.elapsed_replication_duration #=> String
     #   resp.items[0].life_cycle.last_seen_by_service_date_time #=> String
-    #   resp.items[0].life_cycle.last_test.finalized.api_call_date_time #=> String
     #   resp.items[0].life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.items[0].life_cycle.last_test.initiated.job_id #=> String
     #   resp.items[0].life_cycle.last_test.reverted.api_call_date_time #=> String
+    #   resp.items[0].life_cycle.last_test.finalized.api_call_date_time #=> String
+    #   resp.items[0].life_cycle.last_cutover.initiated.api_call_date_time #=> String
+    #   resp.items[0].life_cycle.last_cutover.initiated.job_id #=> String
+    #   resp.items[0].life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.items[0].life_cycle.last_cutover.finalized.api_call_date_time #=> String
     #   resp.items[0].life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
-    #   resp.items[0].replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
-    #   resp.items[0].source_properties.cpus #=> Array
-    #   resp.items[0].source_properties.cpus[0].cores #=> Integer
-    #   resp.items[0].source_properties.cpus[0].model_name #=> String
-    #   resp.items[0].source_properties.disks #=> Array
-    #   resp.items[0].source_properties.disks[0].bytes #=> Integer
-    #   resp.items[0].source_properties.disks[0].device_name #=> String
-    #   resp.items[0].source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.items[0].source_properties.last_updated_date_time #=> String
+    #   resp.items[0].source_properties.recommended_instance_type #=> String
     #   resp.items[0].source_properties.identification_hints.fqdn #=> String
     #   resp.items[0].source_properties.identification_hints.hostname #=> String
-    #   resp.items[0].source_properties.identification_hints.vm_path #=> String
     #   resp.items[0].source_properties.identification_hints.vm_ware_uuid #=> String
-    #   resp.items[0].source_properties.last_updated_date_time #=> String
+    #   resp.items[0].source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.items[0].source_properties.identification_hints.vm_path #=> String
     #   resp.items[0].source_properties.network_interfaces #=> Array
+    #   resp.items[0].source_properties.network_interfaces[0].mac_address #=> String
     #   resp.items[0].source_properties.network_interfaces[0].ips #=> Array
     #   resp.items[0].source_properties.network_interfaces[0].ips[0] #=> String
     #   resp.items[0].source_properties.network_interfaces[0].is_primary #=> Boolean
-    #   resp.items[0].source_properties.network_interfaces[0].mac_address #=> String
-    #   resp.items[0].source_properties.os.full_string #=> String
+    #   resp.items[0].source_properties.disks #=> Array
+    #   resp.items[0].source_properties.disks[0].device_name #=> String
+    #   resp.items[0].source_properties.disks[0].bytes #=> Integer
+    #   resp.items[0].source_properties.cpus #=> Array
+    #   resp.items[0].source_properties.cpus[0].cores #=> Integer
+    #   resp.items[0].source_properties.cpus[0].model_name #=> String
     #   resp.items[0].source_properties.ram_bytes #=> Integer
-    #   resp.items[0].source_properties.recommended_instance_type #=> String
-    #   resp.items[0].source_server_id #=> String
-    #   resp.items[0].tags #=> Hash
-    #   resp.items[0].tags["TagKey"] #=> String
-    #   resp.items[0].user_provided_id #=> String
+    #   resp.items[0].source_properties.os.full_string #=> String
+    #   resp.items[0].replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.items[0].vcenter_client_id #=> String
+    #   resp.items[0].application_id #=> String
+    #   resp.items[0].user_provided_id #=> String
+    #   resp.items[0].fqdn_for_action_framework #=> String
+    #   resp.items[0].connector_action.credentials_secret_arn #=> String
+    #   resp.items[0].connector_action.connector_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeSourceServers AWS API Documentation
@@ -1858,16 +1883,16 @@ module Aws::Mgn
     # @example Response structure
     #
     #   resp.items #=> Array
+    #   resp.items[0].vcenter_client_id #=> String
     #   resp.items[0].arn #=> String
-    #   resp.items[0].datacenter_name #=> String
     #   resp.items[0].hostname #=> String
+    #   resp.items[0].vcenter_uuid #=> String
+    #   resp.items[0].datacenter_name #=> String
     #   resp.items[0].last_seen_datetime #=> String
     #   resp.items[0].source_server_tags #=> Hash
     #   resp.items[0].source_server_tags["TagKey"] #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
-    #   resp.items[0].vcenter_client_id #=> String
-    #   resp.items[0].vcenter_uuid #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeVcenterClients AWS API Documentation
@@ -1881,23 +1906,23 @@ module Aws::Mgn
 
     # Disassociate applications from wave.
     #
-    # @option params [String] :account_id
-    #   Account ID.
+    # @option params [required, String] :wave_id
+    #   Wave ID.
     #
     # @option params [required, Array<String>] :application_i_ds
     #   Application IDs list.
     #
-    # @option params [required, String] :wave_id
-    #   Wave ID.
+    # @option params [String] :account_id
+    #   Account ID.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_applications({
-    #     account_id: "AccountID",
-    #     application_i_ds: ["ApplicationID"], # required
     #     wave_id: "WaveID", # required
+    #     application_i_ds: ["ApplicationID"], # required
+    #     account_id: "AccountID",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DisassociateApplications AWS API Documentation
@@ -1911,23 +1936,23 @@ module Aws::Mgn
 
     # Disassociate source servers from application.
     #
-    # @option params [String] :account_id
-    #   Account ID.
-    #
     # @option params [required, String] :application_id
     #   Application ID.
     #
     # @option params [required, Array<String>] :source_server_i_ds
     #   Source server IDs list.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_source_servers({
-    #     account_id: "AccountID",
     #     application_id: "ApplicationID", # required
     #     source_server_i_ds: ["SourceServerID"], # required
+    #     account_id: "AccountID",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DisassociateSourceServers AWS API Documentation
@@ -1954,103 +1979,104 @@ module Aws::Mgn
     # dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration
     # will be nullified.
     #
-    # @option params [String] :account_id
-    #   Request to disconnect Source Server from service by Account ID.
-    #
     # @option params [required, String] :source_server_id
     #   Request to disconnect Source Server from service by Server ID.
     #
+    # @option params [String] :account_id
+    #   Request to disconnect Source Server from service by Account ID.
+    #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::SourceServer#application_id #application_id} => String
-    #   * {Types::SourceServer#arn #arn} => String
-    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
-    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
-    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
-    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
-    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
-    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
-    #   * {Types::SourceServer#replication_type #replication_type} => String
-    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
+    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
+    #   * {Types::SourceServer#replication_type #replication_type} => String
     #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
+    #   * {Types::SourceServer#application_id #application_id} => String
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disconnect_from_service({
-    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.application_id #=> String
+    #   resp.source_server_id #=> String
     #   resp.arn #=> String
-    #   resp.connector_action.connector_arn #=> String
-    #   resp.connector_action.credentials_secret_arn #=> String
-    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
-    #   resp.data_replication_info.data_replication_error.raw_error #=> String
-    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.launched_instance.ec2_instance_id #=> String
+    #   resp.launched_instance.job_id #=> String
+    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
+    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.eta_date_time #=> String
+    #   resp.data_replication_info.replicated_disks #=> Array
+    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
     #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.steps #=> Array
     #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
-    #   resp.data_replication_info.eta_date_time #=> String
-    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
+    #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
-    #   resp.data_replication_info.replicated_disks #=> Array
-    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
-    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
-    #   resp.fqdn_for_action_framework #=> String
-    #   resp.is_archived #=> Boolean
-    #   resp.launched_instance.ec2_instance_id #=> String
-    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
-    #   resp.launched_instance.job_id #=> String
+    #   resp.data_replication_info.replicator_id #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
-    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
-    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
-    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.last_seen_by_service_date_time #=> String
-    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
+    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
     #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
-    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
-    #   resp.source_properties.cpus #=> Array
-    #   resp.source_properties.cpus[0].cores #=> Integer
-    #   resp.source_properties.cpus[0].model_name #=> String
-    #   resp.source_properties.disks #=> Array
-    #   resp.source_properties.disks[0].bytes #=> Integer
-    #   resp.source_properties.disks[0].device_name #=> String
-    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.recommended_instance_type #=> String
     #   resp.source_properties.identification_hints.fqdn #=> String
     #   resp.source_properties.identification_hints.hostname #=> String
-    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
-    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.network_interfaces #=> Array
+    #   resp.source_properties.network_interfaces[0].mac_address #=> String
     #   resp.source_properties.network_interfaces[0].ips #=> Array
     #   resp.source_properties.network_interfaces[0].ips[0] #=> String
     #   resp.source_properties.network_interfaces[0].is_primary #=> Boolean
-    #   resp.source_properties.network_interfaces[0].mac_address #=> String
-    #   resp.source_properties.os.full_string #=> String
+    #   resp.source_properties.disks #=> Array
+    #   resp.source_properties.disks[0].device_name #=> String
+    #   resp.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_properties.cpus #=> Array
+    #   resp.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_properties.cpus[0].model_name #=> String
     #   resp.source_properties.ram_bytes #=> Integer
-    #   resp.source_properties.recommended_instance_type #=> String
-    #   resp.source_server_id #=> String
-    #   resp.tags #=> Hash
-    #   resp.tags["TagKey"] #=> String
-    #   resp.user_provided_id #=> String
+    #   resp.source_properties.os.full_string #=> String
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.vcenter_client_id #=> String
+    #   resp.application_id #=> String
+    #   resp.user_provided_id #=> String
+    #   resp.fqdn_for_action_framework #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
+    #   resp.connector_action.connector_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DisconnectFromService AWS API Documentation
     #
@@ -2075,103 +2101,104 @@ module Aws::Mgn
     # dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration
     # will be nullified.
     #
-    # @option params [String] :account_id
-    #   Request to finalize Cutover by Source Account ID.
-    #
     # @option params [required, String] :source_server_id
     #   Request to finalize Cutover by Source Server ID.
     #
+    # @option params [String] :account_id
+    #   Request to finalize Cutover by Source Account ID.
+    #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::SourceServer#application_id #application_id} => String
-    #   * {Types::SourceServer#arn #arn} => String
-    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
-    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
-    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
-    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
-    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
-    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
-    #   * {Types::SourceServer#replication_type #replication_type} => String
-    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
+    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
+    #   * {Types::SourceServer#replication_type #replication_type} => String
     #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
+    #   * {Types::SourceServer#application_id #application_id} => String
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.finalize_cutover({
-    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.application_id #=> String
+    #   resp.source_server_id #=> String
     #   resp.arn #=> String
-    #   resp.connector_action.connector_arn #=> String
-    #   resp.connector_action.credentials_secret_arn #=> String
-    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
-    #   resp.data_replication_info.data_replication_error.raw_error #=> String
-    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.launched_instance.ec2_instance_id #=> String
+    #   resp.launched_instance.job_id #=> String
+    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
+    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.eta_date_time #=> String
+    #   resp.data_replication_info.replicated_disks #=> Array
+    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
     #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.steps #=> Array
     #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
-    #   resp.data_replication_info.eta_date_time #=> String
-    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
+    #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
-    #   resp.data_replication_info.replicated_disks #=> Array
-    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
-    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
-    #   resp.fqdn_for_action_framework #=> String
-    #   resp.is_archived #=> Boolean
-    #   resp.launched_instance.ec2_instance_id #=> String
-    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
-    #   resp.launched_instance.job_id #=> String
+    #   resp.data_replication_info.replicator_id #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
-    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
-    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
-    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.last_seen_by_service_date_time #=> String
-    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
+    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
     #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
-    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
-    #   resp.source_properties.cpus #=> Array
-    #   resp.source_properties.cpus[0].cores #=> Integer
-    #   resp.source_properties.cpus[0].model_name #=> String
-    #   resp.source_properties.disks #=> Array
-    #   resp.source_properties.disks[0].bytes #=> Integer
-    #   resp.source_properties.disks[0].device_name #=> String
-    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.recommended_instance_type #=> String
     #   resp.source_properties.identification_hints.fqdn #=> String
     #   resp.source_properties.identification_hints.hostname #=> String
-    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
-    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.network_interfaces #=> Array
+    #   resp.source_properties.network_interfaces[0].mac_address #=> String
     #   resp.source_properties.network_interfaces[0].ips #=> Array
     #   resp.source_properties.network_interfaces[0].ips[0] #=> String
     #   resp.source_properties.network_interfaces[0].is_primary #=> Boolean
-    #   resp.source_properties.network_interfaces[0].mac_address #=> String
-    #   resp.source_properties.os.full_string #=> String
+    #   resp.source_properties.disks #=> Array
+    #   resp.source_properties.disks[0].device_name #=> String
+    #   resp.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_properties.cpus #=> Array
+    #   resp.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_properties.cpus[0].model_name #=> String
     #   resp.source_properties.ram_bytes #=> Integer
-    #   resp.source_properties.recommended_instance_type #=> String
-    #   resp.source_server_id #=> String
-    #   resp.tags #=> Hash
-    #   resp.tags["TagKey"] #=> String
-    #   resp.user_provided_id #=> String
+    #   resp.source_properties.os.full_string #=> String
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.vcenter_client_id #=> String
+    #   resp.application_id #=> String
+    #   resp.user_provided_id #=> String
+    #   resp.fqdn_for_action_framework #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
+    #   resp.connector_action.connector_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/FinalizeCutover AWS API Documentation
     #
@@ -2185,62 +2212,62 @@ module Aws::Mgn
     # Lists all LaunchConfigurations available, filtered by Source Server
     # IDs.
     #
-    # @option params [String] :account_id
-    #   Request to get Launch Configuration information by Account ID.
-    #
     # @option params [required, String] :source_server_id
     #   Request to get Launch Configuration information by Source Server ID.
     #
+    # @option params [String] :account_id
+    #   Request to get Launch Configuration information by Account ID.
+    #
     # @return [Types::LaunchConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::LaunchConfiguration#boot_mode #boot_mode} => String
+    #   * {Types::LaunchConfiguration#source_server_id #source_server_id} => String
+    #   * {Types::LaunchConfiguration#name #name} => String
+    #   * {Types::LaunchConfiguration#ec2_launch_template_id #ec2_launch_template_id} => String
+    #   * {Types::LaunchConfiguration#launch_disposition #launch_disposition} => String
+    #   * {Types::LaunchConfiguration#target_instance_type_right_sizing_method #target_instance_type_right_sizing_method} => String
     #   * {Types::LaunchConfiguration#copy_private_ip #copy_private_ip} => Boolean
     #   * {Types::LaunchConfiguration#copy_tags #copy_tags} => Boolean
-    #   * {Types::LaunchConfiguration#ec2_launch_template_id #ec2_launch_template_id} => String
-    #   * {Types::LaunchConfiguration#enable_map_auto_tagging #enable_map_auto_tagging} => Boolean
-    #   * {Types::LaunchConfiguration#launch_disposition #launch_disposition} => String
     #   * {Types::LaunchConfiguration#licensing #licensing} => Types::Licensing
-    #   * {Types::LaunchConfiguration#map_auto_tagging_mpe_id #map_auto_tagging_mpe_id} => String
-    #   * {Types::LaunchConfiguration#name #name} => String
+    #   * {Types::LaunchConfiguration#boot_mode #boot_mode} => String
     #   * {Types::LaunchConfiguration#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
-    #   * {Types::LaunchConfiguration#source_server_id #source_server_id} => String
-    #   * {Types::LaunchConfiguration#target_instance_type_right_sizing_method #target_instance_type_right_sizing_method} => String
+    #   * {Types::LaunchConfiguration#enable_map_auto_tagging #enable_map_auto_tagging} => Boolean
+    #   * {Types::LaunchConfiguration#map_auto_tagging_mpe_id #map_auto_tagging_mpe_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_launch_configuration({
-    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI", "USE_SOURCE"
+    #   resp.source_server_id #=> String
+    #   resp.name #=> String
+    #   resp.ec2_launch_template_id #=> String
+    #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
     #   resp.copy_private_ip #=> Boolean
     #   resp.copy_tags #=> Boolean
-    #   resp.ec2_launch_template_id #=> String
-    #   resp.enable_map_auto_tagging #=> Boolean
-    #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
     #   resp.licensing.os_byol #=> Boolean
-    #   resp.map_auto_tagging_mpe_id #=> String
-    #   resp.name #=> String
-    #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
+    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI", "USE_SOURCE"
     #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY", "TEST_ONLY"
     #   resp.post_launch_actions.s3_log_bucket #=> String
     #   resp.post_launch_actions.s3_output_key_prefix #=> String
+    #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
     #   resp.post_launch_actions.ssm_documents #=> Array
     #   resp.post_launch_actions.ssm_documents[0].action_name #=> String
-    #   resp.post_launch_actions.ssm_documents[0].external_parameters #=> Hash
-    #   resp.post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
+    #   resp.post_launch_actions.ssm_documents[0].ssm_document_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
     #   resp.post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
     #   resp.post_launch_actions.ssm_documents[0].parameters #=> Hash
     #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING", "SECURE_STRING"
     #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
-    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
-    #   resp.post_launch_actions.ssm_documents[0].ssm_document_name #=> String
-    #   resp.post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
-    #   resp.source_server_id #=> String
-    #   resp.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
+    #   resp.post_launch_actions.ssm_documents[0].external_parameters #=> Hash
+    #   resp.post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
+    #   resp.enable_map_auto_tagging #=> Boolean
+    #   resp.map_auto_tagging_mpe_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/GetLaunchConfiguration AWS API Documentation
     #
@@ -2253,63 +2280,65 @@ module Aws::Mgn
 
     # Lists all ReplicationConfigurations, filtered by Source Server ID.
     #
-    # @option params [String] :account_id
-    #   Request to get Replication Configuration by Account ID.
-    #
     # @option params [required, String] :source_server_id
     #   Request to get Replication Configuration by Source Server ID.
     #
+    # @option params [String] :account_id
+    #   Request to get Replication Configuration by Account ID.
+    #
     # @return [Types::ReplicationConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::ReplicationConfiguration#source_server_id #source_server_id} => String
+    #   * {Types::ReplicationConfiguration#name #name} => String
+    #   * {Types::ReplicationConfiguration#staging_area_subnet_id #staging_area_subnet_id} => String
     #   * {Types::ReplicationConfiguration#associate_default_security_group #associate_default_security_group} => Boolean
-    #   * {Types::ReplicationConfiguration#bandwidth_throttling #bandwidth_throttling} => Integer
-    #   * {Types::ReplicationConfiguration#create_public_ip #create_public_ip} => Boolean
-    #   * {Types::ReplicationConfiguration#data_plane_routing #data_plane_routing} => String
+    #   * {Types::ReplicationConfiguration#replication_servers_security_groups_i_ds #replication_servers_security_groups_i_ds} => Array&lt;String&gt;
+    #   * {Types::ReplicationConfiguration#replication_server_instance_type #replication_server_instance_type} => String
+    #   * {Types::ReplicationConfiguration#use_dedicated_replication_server #use_dedicated_replication_server} => Boolean
     #   * {Types::ReplicationConfiguration#default_large_staging_disk_type #default_large_staging_disk_type} => String
+    #   * {Types::ReplicationConfiguration#replicated_disks #replicated_disks} => Array&lt;Types::ReplicationConfigurationReplicatedDisk&gt;
     #   * {Types::ReplicationConfiguration#ebs_encryption #ebs_encryption} => String
     #   * {Types::ReplicationConfiguration#ebs_encryption_key_arn #ebs_encryption_key_arn} => String
-    #   * {Types::ReplicationConfiguration#name #name} => String
-    #   * {Types::ReplicationConfiguration#replicated_disks #replicated_disks} => Array&lt;Types::ReplicationConfigurationReplicatedDisk&gt;
-    #   * {Types::ReplicationConfiguration#replication_server_instance_type #replication_server_instance_type} => String
-    #   * {Types::ReplicationConfiguration#replication_servers_security_groups_i_ds #replication_servers_security_groups_i_ds} => Array&lt;String&gt;
-    #   * {Types::ReplicationConfiguration#source_server_id #source_server_id} => String
-    #   * {Types::ReplicationConfiguration#staging_area_subnet_id #staging_area_subnet_id} => String
+    #   * {Types::ReplicationConfiguration#bandwidth_throttling #bandwidth_throttling} => Integer
+    #   * {Types::ReplicationConfiguration#data_plane_routing #data_plane_routing} => String
+    #   * {Types::ReplicationConfiguration#create_public_ip #create_public_ip} => Boolean
     #   * {Types::ReplicationConfiguration#staging_area_tags #staging_area_tags} => Hash&lt;String,String&gt;
-    #   * {Types::ReplicationConfiguration#use_dedicated_replication_server #use_dedicated_replication_server} => Boolean
     #   * {Types::ReplicationConfiguration#use_fips_endpoint #use_fips_endpoint} => Boolean
+    #   * {Types::ReplicationConfiguration#internet_protocol #internet_protocol} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_replication_configuration({
-    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.associate_default_security_group #=> Boolean
-    #   resp.bandwidth_throttling #=> Integer
-    #   resp.create_public_ip #=> Boolean
-    #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
-    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "ST1", "GP3"
-    #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
-    #   resp.ebs_encryption_key_arn #=> String
+    #   resp.source_server_id #=> String
     #   resp.name #=> String
-    #   resp.replicated_disks #=> Array
-    #   resp.replicated_disks[0].device_name #=> String
-    #   resp.replicated_disks[0].iops #=> Integer
-    #   resp.replicated_disks[0].is_boot_disk #=> Boolean
-    #   resp.replicated_disks[0].staging_disk_type #=> String, one of "AUTO", "GP2", "IO1", "SC1", "ST1", "STANDARD", "GP3", "IO2"
-    #   resp.replicated_disks[0].throughput #=> Integer
-    #   resp.replication_server_instance_type #=> String
+    #   resp.staging_area_subnet_id #=> String
+    #   resp.associate_default_security_group #=> Boolean
     #   resp.replication_servers_security_groups_i_ds #=> Array
     #   resp.replication_servers_security_groups_i_ds[0] #=> String
-    #   resp.source_server_id #=> String
-    #   resp.staging_area_subnet_id #=> String
+    #   resp.replication_server_instance_type #=> String
+    #   resp.use_dedicated_replication_server #=> Boolean
+    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "ST1", "GP3"
+    #   resp.replicated_disks #=> Array
+    #   resp.replicated_disks[0].device_name #=> String
+    #   resp.replicated_disks[0].is_boot_disk #=> Boolean
+    #   resp.replicated_disks[0].staging_disk_type #=> String, one of "AUTO", "GP2", "IO1", "SC1", "ST1", "STANDARD", "GP3", "IO2"
+    #   resp.replicated_disks[0].iops #=> Integer
+    #   resp.replicated_disks[0].throughput #=> Integer
+    #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
+    #   resp.ebs_encryption_key_arn #=> String
+    #   resp.bandwidth_throttling #=> Integer
+    #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
+    #   resp.create_public_ip #=> Boolean
     #   resp.staging_area_tags #=> Hash
     #   resp.staging_area_tags["TagKey"] #=> String
-    #   resp.use_dedicated_replication_server #=> Boolean
     #   resp.use_fips_endpoint #=> Boolean
+    #   resp.internet_protocol #=> String, one of "IPV4", "IPV6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/GetReplicationConfiguration AWS API Documentation
     #
@@ -2335,9 +2364,6 @@ module Aws::Mgn
 
     # Retrieves all applications or multiple applications by ID.
     #
-    # @option params [String] :account_id
-    #   Applications list Account ID.
-    #
     # @option params [Types::ListApplicationsRequestFilters] :filters
     #   Applications list filters.
     #
@@ -2346,6 +2372,9 @@ module Aws::Mgn
     #
     # @option params [String] :next_token
     #   Request next token.
+    #
+    # @option params [String] :account_id
+    #   Applications list Account ID.
     #
     # @return [Types::ListApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2357,7 +2386,6 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_applications({
-    #     account_id: "AccountID",
     #     filters: {
     #       application_i_ds: ["ApplicationID"],
     #       is_archived: false,
@@ -2365,22 +2393,23 @@ module Aws::Mgn
     #     },
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].application_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
-    #   resp.items[0].application_aggregated_status.last_update_date_time #=> String
-    #   resp.items[0].application_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
-    #   resp.items[0].application_aggregated_status.total_source_servers #=> Integer
     #   resp.items[0].application_id #=> String
     #   resp.items[0].arn #=> String
-    #   resp.items[0].creation_date_time #=> String
+    #   resp.items[0].name #=> String
     #   resp.items[0].description #=> String
     #   resp.items[0].is_archived #=> Boolean
+    #   resp.items[0].application_aggregated_status.last_update_date_time #=> String
+    #   resp.items[0].application_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.items[0].application_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.items[0].application_aggregated_status.total_source_servers #=> Integer
+    #   resp.items[0].creation_date_time #=> String
     #   resp.items[0].last_modified_date_time #=> String
-    #   resp.items[0].name #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
     #   resp.items[0].wave_id #=> String
@@ -2426,16 +2455,16 @@ module Aws::Mgn
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].arn #=> String
     #   resp.items[0].connector_id #=> String
     #   resp.items[0].name #=> String
-    #   resp.items[0].ssm_command_config.cloud_watch_log_group_name #=> String
-    #   resp.items[0].ssm_command_config.cloud_watch_output_enabled #=> Boolean
-    #   resp.items[0].ssm_command_config.output_s3_bucket_name #=> String
-    #   resp.items[0].ssm_command_config.s3_output_enabled #=> Boolean
     #   resp.items[0].ssm_instance_id #=> String
+    #   resp.items[0].arn #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.items[0].ssm_command_config.s3_output_enabled #=> Boolean
+    #   resp.items[0].ssm_command_config.output_s3_bucket_name #=> String
+    #   resp.items[0].ssm_command_config.cloud_watch_output_enabled #=> Boolean
+    #   resp.items[0].ssm_command_config.cloud_watch_log_group_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListConnectors AWS API Documentation
@@ -2476,8 +2505,8 @@ module Aws::Mgn
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].error_data.raw_error #=> String
     #   resp.items[0].error_date_time #=> String
+    #   resp.items[0].error_data.raw_error #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListExportErrors AWS API Documentation
@@ -2520,17 +2549,20 @@ module Aws::Mgn
     # @example Response structure
     #
     #   resp.items #=> Array
+    #   resp.items[0].export_id #=> String
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].s3_bucket #=> String
+    #   resp.items[0].s3_key #=> String
+    #   resp.items[0].s3_bucket_owner #=> String
     #   resp.items[0].creation_date_time #=> String
     #   resp.items[0].end_date_time #=> String
-    #   resp.items[0].export_id #=> String
-    #   resp.items[0].progress_percentage #=> Float
-    #   resp.items[0].s3_bucket #=> String
-    #   resp.items[0].s3_bucket_owner #=> String
-    #   resp.items[0].s3_key #=> String
     #   resp.items[0].status #=> String, one of "PENDING", "STARTED", "FAILED", "SUCCEEDED"
-    #   resp.items[0].summary.applications_count #=> Integer
+    #   resp.items[0].progress_percentage #=> Float
     #   resp.items[0].summary.servers_count #=> Integer
+    #   resp.items[0].summary.applications_count #=> Integer
     #   resp.items[0].summary.waves_count #=> Integer
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListExports AWS API Documentation
@@ -2571,15 +2603,15 @@ module Aws::Mgn
     # @example Response structure
     #
     #   resp.items #=> Array
-    #   resp.items[0].error_data.account_id #=> String
-    #   resp.items[0].error_data.application_id #=> String
-    #   resp.items[0].error_data.ec2_launch_template_id #=> String
-    #   resp.items[0].error_data.raw_error #=> String
-    #   resp.items[0].error_data.row_number #=> Integer
-    #   resp.items[0].error_data.source_server_id #=> String
-    #   resp.items[0].error_data.wave_id #=> String
     #   resp.items[0].error_date_time #=> String
     #   resp.items[0].error_type #=> String, one of "VALIDATION_ERROR", "PROCESSING_ERROR"
+    #   resp.items[0].error_data.source_server_id #=> String
+    #   resp.items[0].error_data.application_id #=> String
+    #   resp.items[0].error_data.wave_id #=> String
+    #   resp.items[0].error_data.ec2_launch_template_id #=> String
+    #   resp.items[0].error_data.row_number #=> Integer
+    #   resp.items[0].error_data.raw_error #=> String
+    #   resp.items[0].error_data.account_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListImportErrors AWS API Documentation
@@ -2622,20 +2654,23 @@ module Aws::Mgn
     # @example Response structure
     #
     #   resp.items #=> Array
+    #   resp.items[0].import_id #=> String
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].s3_bucket_source.s3_bucket #=> String
+    #   resp.items[0].s3_bucket_source.s3_key #=> String
+    #   resp.items[0].s3_bucket_source.s3_bucket_owner #=> String
     #   resp.items[0].creation_date_time #=> String
     #   resp.items[0].end_date_time #=> String
-    #   resp.items[0].import_id #=> String
-    #   resp.items[0].progress_percentage #=> Float
-    #   resp.items[0].s3_bucket_source.s3_bucket #=> String
-    #   resp.items[0].s3_bucket_source.s3_bucket_owner #=> String
-    #   resp.items[0].s3_bucket_source.s3_key #=> String
     #   resp.items[0].status #=> String, one of "PENDING", "STARTED", "FAILED", "SUCCEEDED"
+    #   resp.items[0].progress_percentage #=> Float
+    #   resp.items[0].summary.waves.created_count #=> Integer
+    #   resp.items[0].summary.waves.modified_count #=> Integer
     #   resp.items[0].summary.applications.created_count #=> Integer
     #   resp.items[0].summary.applications.modified_count #=> Integer
     #   resp.items[0].summary.servers.created_count #=> Integer
     #   resp.items[0].summary.servers.modified_count #=> Integer
-    #   resp.items[0].summary.waves.created_count #=> Integer
-    #   resp.items[0].summary.waves.modified_count #=> Integer
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListImports AWS API Documentation
@@ -2686,9 +2721,8 @@ module Aws::Mgn
 
     # List source server post migration custom actions.
     #
-    # @option params [String] :account_id
-    #   Account ID to return when listing source server post migration custom
-    #   actions.
+    # @option params [required, String] :source_server_id
+    #   Source server ID.
     #
     # @option params [Types::SourceServerActionsRequestFilters] :filters
     #   Filters to apply when listing source server post migration custom
@@ -2702,8 +2736,9 @@ module Aws::Mgn
     #   Next token to use when listing source server post migration custom
     #   actions.
     #
-    # @option params [required, String] :source_server_id
-    #   Source server ID.
+    # @option params [String] :account_id
+    #   Account ID to return when listing source server post migration custom
+    #   actions.
     #
     # @return [Types::ListSourceServerActionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2715,13 +2750,13 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_source_server_actions({
-    #     account_id: "AccountID",
+    #     source_server_id: "SourceServerID", # required
     #     filters: {
     #       action_i_ds: ["ActionID"],
     #     },
     #     max_results: 1,
     #     next_token: "PaginationToken",
-    #     source_server_id: "SourceServerID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
@@ -2729,20 +2764,20 @@ module Aws::Mgn
     #   resp.items #=> Array
     #   resp.items[0].action_id #=> String
     #   resp.items[0].action_name #=> String
-    #   resp.items[0].active #=> Boolean
-    #   resp.items[0].category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "REFACTORING", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
-    #   resp.items[0].description #=> String
     #   resp.items[0].document_identifier #=> String
-    #   resp.items[0].document_version #=> String
-    #   resp.items[0].external_parameters #=> Hash
-    #   resp.items[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
-    #   resp.items[0].must_succeed_for_cutover #=> Boolean
     #   resp.items[0].order #=> Integer
+    #   resp.items[0].document_version #=> String
+    #   resp.items[0].active #=> Boolean
+    #   resp.items[0].timeout_seconds #=> Integer
+    #   resp.items[0].must_succeed_for_cutover #=> Boolean
     #   resp.items[0].parameters #=> Hash
     #   resp.items[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.items[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING", "SECURE_STRING"
     #   resp.items[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
-    #   resp.items[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
-    #   resp.items[0].timeout_seconds #=> Integer
+    #   resp.items[0].external_parameters #=> Hash
+    #   resp.items[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "REFACTORING", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListSourceServerActions AWS API Documentation
@@ -2785,11 +2820,11 @@ module Aws::Mgn
 
     # List template post migration custom actions.
     #
-    # @option params [Types::TemplateActionsRequestFilters] :filters
-    #   Filters to apply when listing template post migration custom actions.
-    #
     # @option params [required, String] :launch_configuration_template_id
     #   Launch configuration template ID.
+    #
+    # @option params [Types::TemplateActionsRequestFilters] :filters
+    #   Filters to apply when listing template post migration custom actions.
     #
     # @option params [Integer] :max_results
     #   Maximum amount of items to return when listing template post migration
@@ -2808,10 +2843,10 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_template_actions({
+    #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
     #     filters: {
     #       action_i_ds: ["ActionID"],
     #     },
-    #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
     #     max_results: 1,
     #     next_token: "PaginationToken",
     #   })
@@ -2821,21 +2856,21 @@ module Aws::Mgn
     #   resp.items #=> Array
     #   resp.items[0].action_id #=> String
     #   resp.items[0].action_name #=> String
-    #   resp.items[0].active #=> Boolean
-    #   resp.items[0].category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "REFACTORING", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
-    #   resp.items[0].description #=> String
     #   resp.items[0].document_identifier #=> String
-    #   resp.items[0].document_version #=> String
-    #   resp.items[0].external_parameters #=> Hash
-    #   resp.items[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
-    #   resp.items[0].must_succeed_for_cutover #=> Boolean
-    #   resp.items[0].operating_system #=> String
     #   resp.items[0].order #=> Integer
+    #   resp.items[0].document_version #=> String
+    #   resp.items[0].active #=> Boolean
+    #   resp.items[0].timeout_seconds #=> Integer
+    #   resp.items[0].must_succeed_for_cutover #=> Boolean
     #   resp.items[0].parameters #=> Hash
     #   resp.items[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.items[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING", "SECURE_STRING"
     #   resp.items[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
-    #   resp.items[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
-    #   resp.items[0].timeout_seconds #=> Integer
+    #   resp.items[0].operating_system #=> String
+    #   resp.items[0].external_parameters #=> Hash
+    #   resp.items[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "REFACTORING", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListTemplateActions AWS API Documentation
@@ -2849,9 +2884,6 @@ module Aws::Mgn
 
     # Retrieves all waves or multiple waves by ID.
     #
-    # @option params [String] :account_id
-    #   Request account ID.
-    #
     # @option params [Types::ListWavesRequestFilters] :filters
     #   Waves list filters.
     #
@@ -2860,6 +2892,9 @@ module Aws::Mgn
     #
     # @option params [String] :next_token
     #   Request next token.
+    #
+    # @option params [String] :account_id
+    #   Request account ID.
     #
     # @return [Types::ListWavesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2871,32 +2906,32 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_waves({
-    #     account_id: "AccountID",
     #     filters: {
-    #       is_archived: false,
     #       wave_i_ds: ["WaveID"],
+    #       is_archived: false,
     #     },
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
     #   resp.items #=> Array
+    #   resp.items[0].wave_id #=> String
     #   resp.items[0].arn #=> String
-    #   resp.items[0].creation_date_time #=> String
+    #   resp.items[0].name #=> String
     #   resp.items[0].description #=> String
     #   resp.items[0].is_archived #=> Boolean
+    #   resp.items[0].wave_aggregated_status.last_update_date_time #=> String
+    #   resp.items[0].wave_aggregated_status.replication_started_date_time #=> String
+    #   resp.items[0].wave_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.items[0].wave_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.items[0].wave_aggregated_status.total_applications #=> Integer
+    #   resp.items[0].creation_date_time #=> String
     #   resp.items[0].last_modified_date_time #=> String
-    #   resp.items[0].name #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
-    #   resp.items[0].wave_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
-    #   resp.items[0].wave_aggregated_status.last_update_date_time #=> String
-    #   resp.items[0].wave_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
-    #   resp.items[0].wave_aggregated_status.replication_started_date_time #=> String
-    #   resp.items[0].wave_aggregated_status.total_applications #=> Integer
-    #   resp.items[0].wave_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ListWaves AWS API Documentation
@@ -2913,103 +2948,104 @@ module Aws::Mgn
     # by ID. This command only works for SourceServers with a lifecycle.
     # state which equals DISCONNECTED or CUTOVER.
     #
-    # @option params [String] :account_id
-    #   Mark as archived by Account ID.
-    #
     # @option params [required, String] :source_server_id
     #   Mark as archived by Source Server ID.
     #
+    # @option params [String] :account_id
+    #   Mark as archived by Account ID.
+    #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::SourceServer#application_id #application_id} => String
-    #   * {Types::SourceServer#arn #arn} => String
-    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
-    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
-    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
-    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
-    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
-    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
-    #   * {Types::SourceServer#replication_type #replication_type} => String
-    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
+    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
+    #   * {Types::SourceServer#replication_type #replication_type} => String
     #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
+    #   * {Types::SourceServer#application_id #application_id} => String
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.mark_as_archived({
-    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.application_id #=> String
+    #   resp.source_server_id #=> String
     #   resp.arn #=> String
-    #   resp.connector_action.connector_arn #=> String
-    #   resp.connector_action.credentials_secret_arn #=> String
-    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
-    #   resp.data_replication_info.data_replication_error.raw_error #=> String
-    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.launched_instance.ec2_instance_id #=> String
+    #   resp.launched_instance.job_id #=> String
+    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
+    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.eta_date_time #=> String
+    #   resp.data_replication_info.replicated_disks #=> Array
+    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
     #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.steps #=> Array
     #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
-    #   resp.data_replication_info.eta_date_time #=> String
-    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
+    #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
-    #   resp.data_replication_info.replicated_disks #=> Array
-    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
-    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
-    #   resp.fqdn_for_action_framework #=> String
-    #   resp.is_archived #=> Boolean
-    #   resp.launched_instance.ec2_instance_id #=> String
-    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
-    #   resp.launched_instance.job_id #=> String
+    #   resp.data_replication_info.replicator_id #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
-    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
-    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
-    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.last_seen_by_service_date_time #=> String
-    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
+    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
     #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
-    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
-    #   resp.source_properties.cpus #=> Array
-    #   resp.source_properties.cpus[0].cores #=> Integer
-    #   resp.source_properties.cpus[0].model_name #=> String
-    #   resp.source_properties.disks #=> Array
-    #   resp.source_properties.disks[0].bytes #=> Integer
-    #   resp.source_properties.disks[0].device_name #=> String
-    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.recommended_instance_type #=> String
     #   resp.source_properties.identification_hints.fqdn #=> String
     #   resp.source_properties.identification_hints.hostname #=> String
-    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
-    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.network_interfaces #=> Array
+    #   resp.source_properties.network_interfaces[0].mac_address #=> String
     #   resp.source_properties.network_interfaces[0].ips #=> Array
     #   resp.source_properties.network_interfaces[0].ips[0] #=> String
     #   resp.source_properties.network_interfaces[0].is_primary #=> Boolean
-    #   resp.source_properties.network_interfaces[0].mac_address #=> String
-    #   resp.source_properties.os.full_string #=> String
+    #   resp.source_properties.disks #=> Array
+    #   resp.source_properties.disks[0].device_name #=> String
+    #   resp.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_properties.cpus #=> Array
+    #   resp.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_properties.cpus[0].model_name #=> String
     #   resp.source_properties.ram_bytes #=> Integer
-    #   resp.source_properties.recommended_instance_type #=> String
-    #   resp.source_server_id #=> String
-    #   resp.tags #=> Hash
-    #   resp.tags["TagKey"] #=> String
-    #   resp.user_provided_id #=> String
+    #   resp.source_properties.os.full_string #=> String
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.vcenter_client_id #=> String
+    #   resp.application_id #=> String
+    #   resp.user_provided_id #=> String
+    #   resp.fqdn_for_action_framework #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
+    #   resp.connector_action.connector_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/MarkAsArchived AWS API Documentation
     #
@@ -3022,103 +3058,104 @@ module Aws::Mgn
 
     # Pause Replication.
     #
-    # @option params [String] :account_id
-    #   Pause Replication Request account ID.
-    #
     # @option params [required, String] :source_server_id
     #   Pause Replication Request source server ID.
     #
+    # @option params [String] :account_id
+    #   Pause Replication Request account ID.
+    #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::SourceServer#application_id #application_id} => String
-    #   * {Types::SourceServer#arn #arn} => String
-    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
-    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
-    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
-    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
-    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
-    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
-    #   * {Types::SourceServer#replication_type #replication_type} => String
-    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
+    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
+    #   * {Types::SourceServer#replication_type #replication_type} => String
     #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
+    #   * {Types::SourceServer#application_id #application_id} => String
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.pause_replication({
-    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.application_id #=> String
+    #   resp.source_server_id #=> String
     #   resp.arn #=> String
-    #   resp.connector_action.connector_arn #=> String
-    #   resp.connector_action.credentials_secret_arn #=> String
-    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
-    #   resp.data_replication_info.data_replication_error.raw_error #=> String
-    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.launched_instance.ec2_instance_id #=> String
+    #   resp.launched_instance.job_id #=> String
+    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
+    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.eta_date_time #=> String
+    #   resp.data_replication_info.replicated_disks #=> Array
+    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
     #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.steps #=> Array
     #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
-    #   resp.data_replication_info.eta_date_time #=> String
-    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
+    #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
-    #   resp.data_replication_info.replicated_disks #=> Array
-    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
-    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
-    #   resp.fqdn_for_action_framework #=> String
-    #   resp.is_archived #=> Boolean
-    #   resp.launched_instance.ec2_instance_id #=> String
-    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
-    #   resp.launched_instance.job_id #=> String
+    #   resp.data_replication_info.replicator_id #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
-    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
-    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
-    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.last_seen_by_service_date_time #=> String
-    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
+    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
     #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
-    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
-    #   resp.source_properties.cpus #=> Array
-    #   resp.source_properties.cpus[0].cores #=> Integer
-    #   resp.source_properties.cpus[0].model_name #=> String
-    #   resp.source_properties.disks #=> Array
-    #   resp.source_properties.disks[0].bytes #=> Integer
-    #   resp.source_properties.disks[0].device_name #=> String
-    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.recommended_instance_type #=> String
     #   resp.source_properties.identification_hints.fqdn #=> String
     #   resp.source_properties.identification_hints.hostname #=> String
-    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
-    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.network_interfaces #=> Array
+    #   resp.source_properties.network_interfaces[0].mac_address #=> String
     #   resp.source_properties.network_interfaces[0].ips #=> Array
     #   resp.source_properties.network_interfaces[0].ips[0] #=> String
     #   resp.source_properties.network_interfaces[0].is_primary #=> Boolean
-    #   resp.source_properties.network_interfaces[0].mac_address #=> String
-    #   resp.source_properties.os.full_string #=> String
+    #   resp.source_properties.disks #=> Array
+    #   resp.source_properties.disks[0].device_name #=> String
+    #   resp.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_properties.cpus #=> Array
+    #   resp.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_properties.cpus[0].model_name #=> String
     #   resp.source_properties.ram_bytes #=> Integer
-    #   resp.source_properties.recommended_instance_type #=> String
-    #   resp.source_server_id #=> String
-    #   resp.tags #=> Hash
-    #   resp.tags["TagKey"] #=> String
-    #   resp.user_provided_id #=> String
+    #   resp.source_properties.os.full_string #=> String
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.vcenter_client_id #=> String
+    #   resp.application_id #=> String
+    #   resp.user_provided_id #=> String
+    #   resp.fqdn_for_action_framework #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
+    #   resp.connector_action.connector_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/PauseReplication AWS API Documentation
     #
@@ -3131,111 +3168,111 @@ module Aws::Mgn
 
     # Put source server post migration custom action.
     #
-    # @option params [String] :account_id
-    #   Source server post migration custom account ID.
-    #
-    # @option params [required, String] :action_id
-    #   Source server post migration custom action ID.
+    # @option params [required, String] :source_server_id
+    #   Source server ID.
     #
     # @option params [required, String] :action_name
     #   Source server post migration custom action name.
     #
-    # @option params [Boolean] :active
-    #   Source server post migration custom action active status.
-    #
-    # @option params [String] :category
-    #   Source server post migration custom action category.
-    #
-    # @option params [String] :description
-    #   Source server post migration custom action description.
-    #
     # @option params [required, String] :document_identifier
     #   Source server post migration custom action document identifier.
-    #
-    # @option params [String] :document_version
-    #   Source server post migration custom action document version.
-    #
-    # @option params [Hash<String,Types::SsmExternalParameter>] :external_parameters
-    #   Source server post migration custom action external parameters.
-    #
-    # @option params [Boolean] :must_succeed_for_cutover
-    #   Source server post migration custom action must succeed for cutover.
     #
     # @option params [required, Integer] :order
     #   Source server post migration custom action order.
     #
-    # @option params [Hash<String,Array>] :parameters
-    #   Source server post migration custom action parameters.
+    # @option params [required, String] :action_id
+    #   Source server post migration custom action ID.
     #
-    # @option params [required, String] :source_server_id
-    #   Source server ID.
+    # @option params [String] :document_version
+    #   Source server post migration custom action document version.
+    #
+    # @option params [Boolean] :active
+    #   Source server post migration custom action active status.
     #
     # @option params [Integer] :timeout_seconds
     #   Source server post migration custom action timeout in seconds.
+    #
+    # @option params [Boolean] :must_succeed_for_cutover
+    #   Source server post migration custom action must succeed for cutover.
+    #
+    # @option params [Hash<String,Array>] :parameters
+    #   Source server post migration custom action parameters.
+    #
+    # @option params [Hash<String,Types::SsmExternalParameter>] :external_parameters
+    #   Source server post migration custom action external parameters.
+    #
+    # @option params [String] :description
+    #   Source server post migration custom action description.
+    #
+    # @option params [String] :category
+    #   Source server post migration custom action category.
+    #
+    # @option params [String] :account_id
+    #   Source server post migration custom account ID.
     #
     # @return [Types::SourceServerActionDocument] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SourceServerActionDocument#action_id #action_id} => String
     #   * {Types::SourceServerActionDocument#action_name #action_name} => String
-    #   * {Types::SourceServerActionDocument#active #active} => Boolean
-    #   * {Types::SourceServerActionDocument#category #category} => String
-    #   * {Types::SourceServerActionDocument#description #description} => String
     #   * {Types::SourceServerActionDocument#document_identifier #document_identifier} => String
-    #   * {Types::SourceServerActionDocument#document_version #document_version} => String
-    #   * {Types::SourceServerActionDocument#external_parameters #external_parameters} => Hash&lt;String,Types::SsmExternalParameter&gt;
-    #   * {Types::SourceServerActionDocument#must_succeed_for_cutover #must_succeed_for_cutover} => Boolean
     #   * {Types::SourceServerActionDocument#order #order} => Integer
-    #   * {Types::SourceServerActionDocument#parameters #parameters} => Hash&lt;String,Array&lt;Types::SsmParameterStoreParameter&gt;&gt;
+    #   * {Types::SourceServerActionDocument#document_version #document_version} => String
+    #   * {Types::SourceServerActionDocument#active #active} => Boolean
     #   * {Types::SourceServerActionDocument#timeout_seconds #timeout_seconds} => Integer
+    #   * {Types::SourceServerActionDocument#must_succeed_for_cutover #must_succeed_for_cutover} => Boolean
+    #   * {Types::SourceServerActionDocument#parameters #parameters} => Hash&lt;String,Array&lt;Types::SsmParameterStoreParameter&gt;&gt;
+    #   * {Types::SourceServerActionDocument#external_parameters #external_parameters} => Hash&lt;String,Types::SsmExternalParameter&gt;
+    #   * {Types::SourceServerActionDocument#description #description} => String
+    #   * {Types::SourceServerActionDocument#category #category} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_source_server_action({
-    #     account_id: "AccountID",
-    #     action_id: "ActionID", # required
+    #     source_server_id: "SourceServerID", # required
     #     action_name: "ActionName", # required
-    #     active: false,
-    #     category: "DISASTER_RECOVERY", # accepts DISASTER_RECOVERY, OPERATING_SYSTEM, LICENSE_AND_SUBSCRIPTION, VALIDATION, OBSERVABILITY, REFACTORING, SECURITY, NETWORKING, CONFIGURATION, BACKUP, OTHER
-    #     description: "ActionDescription",
     #     document_identifier: "BoundedString", # required
+    #     order: 1, # required
+    #     action_id: "ActionID", # required
     #     document_version: "DocumentVersion",
+    #     active: false,
+    #     timeout_seconds: 1,
+    #     must_succeed_for_cutover: false,
+    #     parameters: {
+    #       "SsmDocumentParameterName" => [
+    #         {
+    #           parameter_type: "STRING", # required, accepts STRING, SECURE_STRING
+    #           parameter_name: "SsmParameterStoreParameterName", # required
+    #         },
+    #       ],
+    #     },
     #     external_parameters: {
     #       "SsmDocumentParameterName" => {
     #         dynamic_path: "JmesPathString",
     #       },
     #     },
-    #     must_succeed_for_cutover: false,
-    #     order: 1, # required
-    #     parameters: {
-    #       "SsmDocumentParameterName" => [
-    #         {
-    #           parameter_name: "SsmParameterStoreParameterName", # required
-    #           parameter_type: "STRING", # required, accepts STRING
-    #         },
-    #       ],
-    #     },
-    #     source_server_id: "SourceServerID", # required
-    #     timeout_seconds: 1,
+    #     description: "ActionDescription",
+    #     category: "DISASTER_RECOVERY", # accepts DISASTER_RECOVERY, OPERATING_SYSTEM, LICENSE_AND_SUBSCRIPTION, VALIDATION, OBSERVABILITY, REFACTORING, SECURITY, NETWORKING, CONFIGURATION, BACKUP, OTHER
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
     #   resp.action_id #=> String
     #   resp.action_name #=> String
-    #   resp.active #=> Boolean
-    #   resp.category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "REFACTORING", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
-    #   resp.description #=> String
     #   resp.document_identifier #=> String
-    #   resp.document_version #=> String
-    #   resp.external_parameters #=> Hash
-    #   resp.external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
-    #   resp.must_succeed_for_cutover #=> Boolean
     #   resp.order #=> Integer
+    #   resp.document_version #=> String
+    #   resp.active #=> Boolean
+    #   resp.timeout_seconds #=> Integer
+    #   resp.must_succeed_for_cutover #=> Boolean
     #   resp.parameters #=> Hash
     #   resp.parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING", "SECURE_STRING"
     #   resp.parameters["SsmDocumentParameterName"][0].parameter_name #=> String
-    #   resp.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
-    #   resp.timeout_seconds #=> Integer
+    #   resp.external_parameters #=> Hash
+    #   resp.external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
+    #   resp.description #=> String
+    #   resp.category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "REFACTORING", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/PutSourceServerAction AWS API Documentation
     #
@@ -3248,114 +3285,114 @@ module Aws::Mgn
 
     # Put template post migration custom action.
     #
-    # @option params [required, String] :action_id
-    #   Template post migration custom action ID.
+    # @option params [required, String] :launch_configuration_template_id
+    #   Launch configuration template ID.
     #
     # @option params [required, String] :action_name
     #   Template post migration custom action name.
     #
-    # @option params [Boolean] :active
-    #   Template post migration custom action active status.
-    #
-    # @option params [String] :category
-    #   Template post migration custom action category.
-    #
-    # @option params [String] :description
-    #   Template post migration custom action description.
-    #
     # @option params [required, String] :document_identifier
     #   Template post migration custom action document identifier.
+    #
+    # @option params [required, Integer] :order
+    #   Template post migration custom action order.
+    #
+    # @option params [required, String] :action_id
+    #   Template post migration custom action ID.
     #
     # @option params [String] :document_version
     #   Template post migration custom action document version.
     #
-    # @option params [Hash<String,Types::SsmExternalParameter>] :external_parameters
-    #   Template post migration custom action external parameters.
+    # @option params [Boolean] :active
+    #   Template post migration custom action active status.
     #
-    # @option params [required, String] :launch_configuration_template_id
-    #   Launch configuration template ID.
+    # @option params [Integer] :timeout_seconds
+    #   Template post migration custom action timeout in seconds.
     #
     # @option params [Boolean] :must_succeed_for_cutover
     #   Template post migration custom action must succeed for cutover.
+    #
+    # @option params [Hash<String,Array>] :parameters
+    #   Template post migration custom action parameters.
     #
     # @option params [String] :operating_system
     #   Operating system eligible for this template post migration custom
     #   action.
     #
-    # @option params [required, Integer] :order
-    #   Template post migration custom action order.
+    # @option params [Hash<String,Types::SsmExternalParameter>] :external_parameters
+    #   Template post migration custom action external parameters.
     #
-    # @option params [Hash<String,Array>] :parameters
-    #   Template post migration custom action parameters.
+    # @option params [String] :description
+    #   Template post migration custom action description.
     #
-    # @option params [Integer] :timeout_seconds
-    #   Template post migration custom action timeout in seconds.
+    # @option params [String] :category
+    #   Template post migration custom action category.
     #
     # @return [Types::TemplateActionDocument] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::TemplateActionDocument#action_id #action_id} => String
     #   * {Types::TemplateActionDocument#action_name #action_name} => String
-    #   * {Types::TemplateActionDocument#active #active} => Boolean
-    #   * {Types::TemplateActionDocument#category #category} => String
-    #   * {Types::TemplateActionDocument#description #description} => String
     #   * {Types::TemplateActionDocument#document_identifier #document_identifier} => String
-    #   * {Types::TemplateActionDocument#document_version #document_version} => String
-    #   * {Types::TemplateActionDocument#external_parameters #external_parameters} => Hash&lt;String,Types::SsmExternalParameter&gt;
-    #   * {Types::TemplateActionDocument#must_succeed_for_cutover #must_succeed_for_cutover} => Boolean
-    #   * {Types::TemplateActionDocument#operating_system #operating_system} => String
     #   * {Types::TemplateActionDocument#order #order} => Integer
-    #   * {Types::TemplateActionDocument#parameters #parameters} => Hash&lt;String,Array&lt;Types::SsmParameterStoreParameter&gt;&gt;
+    #   * {Types::TemplateActionDocument#document_version #document_version} => String
+    #   * {Types::TemplateActionDocument#active #active} => Boolean
     #   * {Types::TemplateActionDocument#timeout_seconds #timeout_seconds} => Integer
+    #   * {Types::TemplateActionDocument#must_succeed_for_cutover #must_succeed_for_cutover} => Boolean
+    #   * {Types::TemplateActionDocument#parameters #parameters} => Hash&lt;String,Array&lt;Types::SsmParameterStoreParameter&gt;&gt;
+    #   * {Types::TemplateActionDocument#operating_system #operating_system} => String
+    #   * {Types::TemplateActionDocument#external_parameters #external_parameters} => Hash&lt;String,Types::SsmExternalParameter&gt;
+    #   * {Types::TemplateActionDocument#description #description} => String
+    #   * {Types::TemplateActionDocument#category #category} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_template_action({
-    #     action_id: "ActionID", # required
+    #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
     #     action_name: "BoundedString", # required
-    #     active: false,
-    #     category: "DISASTER_RECOVERY", # accepts DISASTER_RECOVERY, OPERATING_SYSTEM, LICENSE_AND_SUBSCRIPTION, VALIDATION, OBSERVABILITY, REFACTORING, SECURITY, NETWORKING, CONFIGURATION, BACKUP, OTHER
-    #     description: "ActionDescription",
     #     document_identifier: "BoundedString", # required
+    #     order: 1, # required
+    #     action_id: "ActionID", # required
     #     document_version: "DocumentVersion",
+    #     active: false,
+    #     timeout_seconds: 1,
+    #     must_succeed_for_cutover: false,
+    #     parameters: {
+    #       "SsmDocumentParameterName" => [
+    #         {
+    #           parameter_type: "STRING", # required, accepts STRING, SECURE_STRING
+    #           parameter_name: "SsmParameterStoreParameterName", # required
+    #         },
+    #       ],
+    #     },
+    #     operating_system: "OperatingSystemString",
     #     external_parameters: {
     #       "SsmDocumentParameterName" => {
     #         dynamic_path: "JmesPathString",
     #       },
     #     },
-    #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
-    #     must_succeed_for_cutover: false,
-    #     operating_system: "OperatingSystemString",
-    #     order: 1, # required
-    #     parameters: {
-    #       "SsmDocumentParameterName" => [
-    #         {
-    #           parameter_name: "SsmParameterStoreParameterName", # required
-    #           parameter_type: "STRING", # required, accepts STRING
-    #         },
-    #       ],
-    #     },
-    #     timeout_seconds: 1,
+    #     description: "ActionDescription",
+    #     category: "DISASTER_RECOVERY", # accepts DISASTER_RECOVERY, OPERATING_SYSTEM, LICENSE_AND_SUBSCRIPTION, VALIDATION, OBSERVABILITY, REFACTORING, SECURITY, NETWORKING, CONFIGURATION, BACKUP, OTHER
     #   })
     #
     # @example Response structure
     #
     #   resp.action_id #=> String
     #   resp.action_name #=> String
-    #   resp.active #=> Boolean
-    #   resp.category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "REFACTORING", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
-    #   resp.description #=> String
     #   resp.document_identifier #=> String
-    #   resp.document_version #=> String
-    #   resp.external_parameters #=> Hash
-    #   resp.external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
-    #   resp.must_succeed_for_cutover #=> Boolean
-    #   resp.operating_system #=> String
     #   resp.order #=> Integer
+    #   resp.document_version #=> String
+    #   resp.active #=> Boolean
+    #   resp.timeout_seconds #=> Integer
+    #   resp.must_succeed_for_cutover #=> Boolean
     #   resp.parameters #=> Hash
     #   resp.parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING", "SECURE_STRING"
     #   resp.parameters["SsmDocumentParameterName"][0].parameter_name #=> String
-    #   resp.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
-    #   resp.timeout_seconds #=> Integer
+    #   resp.operating_system #=> String
+    #   resp.external_parameters #=> Hash
+    #   resp.external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
+    #   resp.description #=> String
+    #   resp.category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "REFACTORING", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/PutTemplateAction AWS API Documentation
     #
@@ -3368,23 +3405,23 @@ module Aws::Mgn
 
     # Remove source server post migration custom action.
     #
-    # @option params [String] :account_id
-    #   Source server post migration account ID.
+    # @option params [required, String] :source_server_id
+    #   Source server ID of the post migration custom action to remove.
     #
     # @option params [required, String] :action_id
     #   Source server post migration custom action ID to remove.
     #
-    # @option params [required, String] :source_server_id
-    #   Source server ID of the post migration custom action to remove.
+    # @option params [String] :account_id
+    #   Source server post migration account ID.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_source_server_action({
-    #     account_id: "AccountID",
-    #     action_id: "ActionID", # required
     #     source_server_id: "SourceServerID", # required
+    #     action_id: "ActionID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/RemoveSourceServerAction AWS API Documentation
@@ -3398,20 +3435,20 @@ module Aws::Mgn
 
     # Remove template post migration custom action.
     #
-    # @option params [required, String] :action_id
-    #   Template post migration custom action ID to remove.
-    #
     # @option params [required, String] :launch_configuration_template_id
     #   Launch configuration template ID of the post migration custom action
     #   to remove.
+    #
+    # @option params [required, String] :action_id
+    #   Template post migration custom action ID to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_template_action({
-    #     action_id: "ActionID", # required
     #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
+    #     action_id: "ActionID", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/RemoveTemplateAction AWS API Documentation
@@ -3425,103 +3462,104 @@ module Aws::Mgn
 
     # Resume Replication.
     #
-    # @option params [String] :account_id
-    #   Resume Replication Request account ID.
-    #
     # @option params [required, String] :source_server_id
     #   Resume Replication Request source server ID.
     #
+    # @option params [String] :account_id
+    #   Resume Replication Request account ID.
+    #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::SourceServer#application_id #application_id} => String
-    #   * {Types::SourceServer#arn #arn} => String
-    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
-    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
-    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
-    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
-    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
-    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
-    #   * {Types::SourceServer#replication_type #replication_type} => String
-    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
+    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
+    #   * {Types::SourceServer#replication_type #replication_type} => String
     #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
+    #   * {Types::SourceServer#application_id #application_id} => String
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.resume_replication({
-    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.application_id #=> String
+    #   resp.source_server_id #=> String
     #   resp.arn #=> String
-    #   resp.connector_action.connector_arn #=> String
-    #   resp.connector_action.credentials_secret_arn #=> String
-    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
-    #   resp.data_replication_info.data_replication_error.raw_error #=> String
-    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.launched_instance.ec2_instance_id #=> String
+    #   resp.launched_instance.job_id #=> String
+    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
+    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.eta_date_time #=> String
+    #   resp.data_replication_info.replicated_disks #=> Array
+    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
     #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.steps #=> Array
     #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
-    #   resp.data_replication_info.eta_date_time #=> String
-    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
+    #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
-    #   resp.data_replication_info.replicated_disks #=> Array
-    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
-    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
-    #   resp.fqdn_for_action_framework #=> String
-    #   resp.is_archived #=> Boolean
-    #   resp.launched_instance.ec2_instance_id #=> String
-    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
-    #   resp.launched_instance.job_id #=> String
+    #   resp.data_replication_info.replicator_id #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
-    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
-    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
-    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.last_seen_by_service_date_time #=> String
-    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
+    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
     #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
-    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
-    #   resp.source_properties.cpus #=> Array
-    #   resp.source_properties.cpus[0].cores #=> Integer
-    #   resp.source_properties.cpus[0].model_name #=> String
-    #   resp.source_properties.disks #=> Array
-    #   resp.source_properties.disks[0].bytes #=> Integer
-    #   resp.source_properties.disks[0].device_name #=> String
-    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.recommended_instance_type #=> String
     #   resp.source_properties.identification_hints.fqdn #=> String
     #   resp.source_properties.identification_hints.hostname #=> String
-    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
-    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.network_interfaces #=> Array
+    #   resp.source_properties.network_interfaces[0].mac_address #=> String
     #   resp.source_properties.network_interfaces[0].ips #=> Array
     #   resp.source_properties.network_interfaces[0].ips[0] #=> String
     #   resp.source_properties.network_interfaces[0].is_primary #=> Boolean
-    #   resp.source_properties.network_interfaces[0].mac_address #=> String
-    #   resp.source_properties.os.full_string #=> String
+    #   resp.source_properties.disks #=> Array
+    #   resp.source_properties.disks[0].device_name #=> String
+    #   resp.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_properties.cpus #=> Array
+    #   resp.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_properties.cpus[0].model_name #=> String
     #   resp.source_properties.ram_bytes #=> Integer
-    #   resp.source_properties.recommended_instance_type #=> String
-    #   resp.source_server_id #=> String
-    #   resp.tags #=> Hash
-    #   resp.tags["TagKey"] #=> String
-    #   resp.user_provided_id #=> String
+    #   resp.source_properties.os.full_string #=> String
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.vcenter_client_id #=> String
+    #   resp.application_id #=> String
+    #   resp.user_provided_id #=> String
+    #   resp.fqdn_for_action_framework #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
+    #   resp.connector_action.connector_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ResumeReplication AWS API Documentation
     #
@@ -3537,103 +3575,104 @@ module Aws::Mgn
     # the previous initiation started. This command will not work if the
     # SourceServer is not stalled or is in a DISCONNECTED or STOPPED state.
     #
-    # @option params [String] :account_id
-    #   Retry data replication for Account ID.
-    #
     # @option params [required, String] :source_server_id
     #   Retry data replication for Source Server ID.
     #
+    # @option params [String] :account_id
+    #   Retry data replication for Account ID.
+    #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::SourceServer#application_id #application_id} => String
-    #   * {Types::SourceServer#arn #arn} => String
-    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
-    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
-    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
-    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
-    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
-    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
-    #   * {Types::SourceServer#replication_type #replication_type} => String
-    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
+    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
+    #   * {Types::SourceServer#replication_type #replication_type} => String
     #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
+    #   * {Types::SourceServer#application_id #application_id} => String
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.retry_data_replication({
-    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.application_id #=> String
+    #   resp.source_server_id #=> String
     #   resp.arn #=> String
-    #   resp.connector_action.connector_arn #=> String
-    #   resp.connector_action.credentials_secret_arn #=> String
-    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
-    #   resp.data_replication_info.data_replication_error.raw_error #=> String
-    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.launched_instance.ec2_instance_id #=> String
+    #   resp.launched_instance.job_id #=> String
+    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
+    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.eta_date_time #=> String
+    #   resp.data_replication_info.replicated_disks #=> Array
+    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
     #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.steps #=> Array
     #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
-    #   resp.data_replication_info.eta_date_time #=> String
-    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
+    #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
-    #   resp.data_replication_info.replicated_disks #=> Array
-    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
-    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
-    #   resp.fqdn_for_action_framework #=> String
-    #   resp.is_archived #=> Boolean
-    #   resp.launched_instance.ec2_instance_id #=> String
-    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
-    #   resp.launched_instance.job_id #=> String
+    #   resp.data_replication_info.replicator_id #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
-    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
-    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
-    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.last_seen_by_service_date_time #=> String
-    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
+    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
     #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
-    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
-    #   resp.source_properties.cpus #=> Array
-    #   resp.source_properties.cpus[0].cores #=> Integer
-    #   resp.source_properties.cpus[0].model_name #=> String
-    #   resp.source_properties.disks #=> Array
-    #   resp.source_properties.disks[0].bytes #=> Integer
-    #   resp.source_properties.disks[0].device_name #=> String
-    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.recommended_instance_type #=> String
     #   resp.source_properties.identification_hints.fqdn #=> String
     #   resp.source_properties.identification_hints.hostname #=> String
-    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
-    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.network_interfaces #=> Array
+    #   resp.source_properties.network_interfaces[0].mac_address #=> String
     #   resp.source_properties.network_interfaces[0].ips #=> Array
     #   resp.source_properties.network_interfaces[0].ips[0] #=> String
     #   resp.source_properties.network_interfaces[0].is_primary #=> Boolean
-    #   resp.source_properties.network_interfaces[0].mac_address #=> String
-    #   resp.source_properties.os.full_string #=> String
+    #   resp.source_properties.disks #=> Array
+    #   resp.source_properties.disks[0].device_name #=> String
+    #   resp.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_properties.cpus #=> Array
+    #   resp.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_properties.cpus[0].model_name #=> String
     #   resp.source_properties.ram_bytes #=> Integer
-    #   resp.source_properties.recommended_instance_type #=> String
-    #   resp.source_server_id #=> String
-    #   resp.tags #=> Hash
-    #   resp.tags["TagKey"] #=> String
-    #   resp.user_provided_id #=> String
+    #   resp.source_properties.os.full_string #=> String
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.vcenter_client_id #=> String
+    #   resp.application_id #=> String
+    #   resp.user_provided_id #=> String
+    #   resp.fqdn_for_action_framework #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
+    #   resp.connector_action.connector_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/RetryDataReplication AWS API Documentation
     #
@@ -3648,14 +3687,14 @@ module Aws::Mgn
     # starts a LAUNCH job whose initiatedBy property is StartCutover and
     # changes the SourceServer.lifeCycle.state property to CUTTING\_OVER.
     #
-    # @option params [String] :account_id
-    #   Start Cutover by Account IDs
-    #
     # @option params [required, Array<String>] :source_server_i_ds
     #   Start Cutover by Source Server IDs.
     #
     # @option params [Hash<String,String>] :tags
     #   Start Cutover by Tags.
+    #
+    # @option params [String] :account_id
+    #   Start Cutover by Account IDs
     #
     # @return [Types::StartCutoverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3664,44 +3703,44 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_cutover({
-    #     account_id: "AccountID",
     #     source_server_i_ds: ["SourceServerID"], # required
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
+    #   resp.job.job_id #=> String
     #   resp.job.arn #=> String
+    #   resp.job.type #=> String, one of "LAUNCH", "TERMINATE"
+    #   resp.job.initiated_by #=> String, one of "START_TEST", "START_CUTOVER", "DIAGNOSTIC", "TERMINATE"
     #   resp.job.creation_date_time #=> String
     #   resp.job.end_date_time #=> String
-    #   resp.job.initiated_by #=> String, one of "START_TEST", "START_CUTOVER", "DIAGNOSTIC", "TERMINATE"
-    #   resp.job.job_id #=> String
+    #   resp.job.status #=> String, one of "PENDING", "STARTED", "COMPLETED"
     #   resp.job.participating_servers #=> Array
+    #   resp.job.participating_servers[0].source_server_id #=> String
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.job.participating_servers[0].launched_ec2_instance_id #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.ssm_agent_discovery_datetime #=> String
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list #=> Array
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_id #=> String
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.action_name #=> String
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters #=> Hash
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.ssm_document_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.timeout_seconds #=> Integer
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.must_succeed_for_cutover #=> Boolean
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters #=> Hash
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING", "SECURE_STRING"
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_name #=> String
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.ssm_document_name #=> String
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.timeout_seconds #=> Integer
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters #=> Hash
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document_type #=> String, one of "AUTOMATION", "COMMAND"
-    #   resp.job.participating_servers[0].post_launch_actions_status.ssm_agent_discovery_datetime #=> String
-    #   resp.job.participating_servers[0].source_server_id #=> String
-    #   resp.job.status #=> String, one of "PENDING", "STARTED", "COMPLETED"
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_id #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
     #   resp.job.tags #=> Hash
     #   resp.job.tags["TagKey"] #=> String
-    #   resp.job.type #=> String, one of "LAUNCH", "TERMINATE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartCutover AWS API Documentation
     #
@@ -3717,11 +3756,14 @@ module Aws::Mgn
     # @option params [required, String] :s3_bucket
     #   Start export request s3 bucket.
     #
+    # @option params [required, String] :s3_key
+    #   Start export request s3key.
+    #
     # @option params [String] :s3_bucket_owner
     #   Start export request s3 bucket owner.
     #
-    # @option params [required, String] :s3_key
-    #   Start export request s3key.
+    # @option params [Hash<String,String>] :tags
+    #   Start import request tags.
     #
     # @return [Types::StartExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3731,23 +3773,29 @@ module Aws::Mgn
     #
     #   resp = client.start_export({
     #     s3_bucket: "S3BucketName", # required
-    #     s3_bucket_owner: "AccountID",
     #     s3_key: "S3Key", # required
+    #     s3_bucket_owner: "AccountID",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
     #
+    #   resp.export_task.export_id #=> String
+    #   resp.export_task.arn #=> String
+    #   resp.export_task.s3_bucket #=> String
+    #   resp.export_task.s3_key #=> String
+    #   resp.export_task.s3_bucket_owner #=> String
     #   resp.export_task.creation_date_time #=> String
     #   resp.export_task.end_date_time #=> String
-    #   resp.export_task.export_id #=> String
-    #   resp.export_task.progress_percentage #=> Float
-    #   resp.export_task.s3_bucket #=> String
-    #   resp.export_task.s3_bucket_owner #=> String
-    #   resp.export_task.s3_key #=> String
     #   resp.export_task.status #=> String, one of "PENDING", "STARTED", "FAILED", "SUCCEEDED"
-    #   resp.export_task.summary.applications_count #=> Integer
+    #   resp.export_task.progress_percentage #=> Float
     #   resp.export_task.summary.servers_count #=> Integer
+    #   resp.export_task.summary.applications_count #=> Integer
     #   resp.export_task.summary.waves_count #=> Integer
+    #   resp.export_task.tags #=> Hash
+    #   resp.export_task.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartExport AWS API Documentation
     #
@@ -3769,6 +3817,9 @@ module Aws::Mgn
     # @option params [required, Types::S3BucketSource] :s3_bucket_source
     #   Start import request s3 bucket source.
     #
+    # @option params [Hash<String,String>] :tags
+    #   Start import request tags.
+    #
     # @return [Types::StartImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartImportResponse#import_task #import_task} => Types::ImportTask
@@ -3779,27 +3830,33 @@ module Aws::Mgn
     #     client_token: "ClientIdempotencyToken",
     #     s3_bucket_source: { # required
     #       s3_bucket: "S3BucketName", # required
-    #       s3_bucket_owner: "AccountID",
     #       s3_key: "S3Key", # required
+    #       s3_bucket_owner: "AccountID",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #   })
     #
     # @example Response structure
     #
+    #   resp.import_task.import_id #=> String
+    #   resp.import_task.arn #=> String
+    #   resp.import_task.s3_bucket_source.s3_bucket #=> String
+    #   resp.import_task.s3_bucket_source.s3_key #=> String
+    #   resp.import_task.s3_bucket_source.s3_bucket_owner #=> String
     #   resp.import_task.creation_date_time #=> String
     #   resp.import_task.end_date_time #=> String
-    #   resp.import_task.import_id #=> String
-    #   resp.import_task.progress_percentage #=> Float
-    #   resp.import_task.s3_bucket_source.s3_bucket #=> String
-    #   resp.import_task.s3_bucket_source.s3_bucket_owner #=> String
-    #   resp.import_task.s3_bucket_source.s3_key #=> String
     #   resp.import_task.status #=> String, one of "PENDING", "STARTED", "FAILED", "SUCCEEDED"
+    #   resp.import_task.progress_percentage #=> Float
+    #   resp.import_task.summary.waves.created_count #=> Integer
+    #   resp.import_task.summary.waves.modified_count #=> Integer
     #   resp.import_task.summary.applications.created_count #=> Integer
     #   resp.import_task.summary.applications.modified_count #=> Integer
     #   resp.import_task.summary.servers.created_count #=> Integer
     #   resp.import_task.summary.servers.modified_count #=> Integer
-    #   resp.import_task.summary.waves.created_count #=> Integer
-    #   resp.import_task.summary.waves.modified_count #=> Integer
+    #   resp.import_task.tags #=> Hash
+    #   resp.import_task.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartImport AWS API Documentation
     #
@@ -3810,105 +3867,107 @@ module Aws::Mgn
       req.send_request(options)
     end
 
-    # Starts replication for SNAPSHOT\_SHIPPING agents.
-    #
-    # @option params [String] :account_id
-    #   Account ID on which to start replication.
+    # Start replication for source server irrespective of its replication
+    # type.
     #
     # @option params [required, String] :source_server_id
     #   ID of source server on which to start replication.
     #
+    # @option params [String] :account_id
+    #   Account ID on which to start replication.
+    #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::SourceServer#application_id #application_id} => String
-    #   * {Types::SourceServer#arn #arn} => String
-    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
-    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
-    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
-    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
-    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
-    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
-    #   * {Types::SourceServer#replication_type #replication_type} => String
-    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
+    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
+    #   * {Types::SourceServer#replication_type #replication_type} => String
     #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
+    #   * {Types::SourceServer#application_id #application_id} => String
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_replication({
-    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.application_id #=> String
+    #   resp.source_server_id #=> String
     #   resp.arn #=> String
-    #   resp.connector_action.connector_arn #=> String
-    #   resp.connector_action.credentials_secret_arn #=> String
-    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
-    #   resp.data_replication_info.data_replication_error.raw_error #=> String
-    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.launched_instance.ec2_instance_id #=> String
+    #   resp.launched_instance.job_id #=> String
+    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
+    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.eta_date_time #=> String
+    #   resp.data_replication_info.replicated_disks #=> Array
+    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
     #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.steps #=> Array
     #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
-    #   resp.data_replication_info.eta_date_time #=> String
-    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
+    #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
-    #   resp.data_replication_info.replicated_disks #=> Array
-    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
-    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
-    #   resp.fqdn_for_action_framework #=> String
-    #   resp.is_archived #=> Boolean
-    #   resp.launched_instance.ec2_instance_id #=> String
-    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
-    #   resp.launched_instance.job_id #=> String
+    #   resp.data_replication_info.replicator_id #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
-    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
-    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
-    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.last_seen_by_service_date_time #=> String
-    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
+    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
     #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
-    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
-    #   resp.source_properties.cpus #=> Array
-    #   resp.source_properties.cpus[0].cores #=> Integer
-    #   resp.source_properties.cpus[0].model_name #=> String
-    #   resp.source_properties.disks #=> Array
-    #   resp.source_properties.disks[0].bytes #=> Integer
-    #   resp.source_properties.disks[0].device_name #=> String
-    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.recommended_instance_type #=> String
     #   resp.source_properties.identification_hints.fqdn #=> String
     #   resp.source_properties.identification_hints.hostname #=> String
-    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
-    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.network_interfaces #=> Array
+    #   resp.source_properties.network_interfaces[0].mac_address #=> String
     #   resp.source_properties.network_interfaces[0].ips #=> Array
     #   resp.source_properties.network_interfaces[0].ips[0] #=> String
     #   resp.source_properties.network_interfaces[0].is_primary #=> Boolean
-    #   resp.source_properties.network_interfaces[0].mac_address #=> String
-    #   resp.source_properties.os.full_string #=> String
+    #   resp.source_properties.disks #=> Array
+    #   resp.source_properties.disks[0].device_name #=> String
+    #   resp.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_properties.cpus #=> Array
+    #   resp.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_properties.cpus[0].model_name #=> String
     #   resp.source_properties.ram_bytes #=> Integer
-    #   resp.source_properties.recommended_instance_type #=> String
-    #   resp.source_server_id #=> String
-    #   resp.tags #=> Hash
-    #   resp.tags["TagKey"] #=> String
-    #   resp.user_provided_id #=> String
+    #   resp.source_properties.os.full_string #=> String
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.vcenter_client_id #=> String
+    #   resp.application_id #=> String
+    #   resp.user_provided_id #=> String
+    #   resp.fqdn_for_action_framework #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
+    #   resp.connector_action.connector_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartReplication AWS API Documentation
     #
@@ -3923,14 +3982,14 @@ module Aws::Mgn
     # starts a LAUNCH job whose initiatedBy property is StartTest and
     # changes the SourceServer.lifeCycle.state property to TESTING.
     #
-    # @option params [String] :account_id
-    #   Start Test for Account ID.
-    #
     # @option params [required, Array<String>] :source_server_i_ds
     #   Start Test for Source Server IDs.
     #
     # @option params [Hash<String,String>] :tags
     #   Start Test by Tags.
+    #
+    # @option params [String] :account_id
+    #   Start Test for Account ID.
     #
     # @return [Types::StartTestResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3939,44 +3998,44 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_test({
-    #     account_id: "AccountID",
     #     source_server_i_ds: ["SourceServerID"], # required
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
+    #   resp.job.job_id #=> String
     #   resp.job.arn #=> String
+    #   resp.job.type #=> String, one of "LAUNCH", "TERMINATE"
+    #   resp.job.initiated_by #=> String, one of "START_TEST", "START_CUTOVER", "DIAGNOSTIC", "TERMINATE"
     #   resp.job.creation_date_time #=> String
     #   resp.job.end_date_time #=> String
-    #   resp.job.initiated_by #=> String, one of "START_TEST", "START_CUTOVER", "DIAGNOSTIC", "TERMINATE"
-    #   resp.job.job_id #=> String
+    #   resp.job.status #=> String, one of "PENDING", "STARTED", "COMPLETED"
     #   resp.job.participating_servers #=> Array
+    #   resp.job.participating_servers[0].source_server_id #=> String
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.job.participating_servers[0].launched_ec2_instance_id #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.ssm_agent_discovery_datetime #=> String
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list #=> Array
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_id #=> String
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.action_name #=> String
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters #=> Hash
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.ssm_document_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.timeout_seconds #=> Integer
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.must_succeed_for_cutover #=> Boolean
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters #=> Hash
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING", "SECURE_STRING"
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_name #=> String
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.ssm_document_name #=> String
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.timeout_seconds #=> Integer
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters #=> Hash
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document_type #=> String, one of "AUTOMATION", "COMMAND"
-    #   resp.job.participating_servers[0].post_launch_actions_status.ssm_agent_discovery_datetime #=> String
-    #   resp.job.participating_servers[0].source_server_id #=> String
-    #   resp.job.status #=> String, one of "PENDING", "STARTED", "COMPLETED"
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_id #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
     #   resp.job.tags #=> Hash
     #   resp.job.tags["TagKey"] #=> String
-    #   resp.job.type #=> String, one of "LAUNCH", "TERMINATE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartTest AWS API Documentation
     #
@@ -3989,103 +4048,104 @@ module Aws::Mgn
 
     # Stop Replication.
     #
-    # @option params [String] :account_id
-    #   Stop Replication Request account ID.
-    #
     # @option params [required, String] :source_server_id
     #   Stop Replication Request source server ID.
     #
+    # @option params [String] :account_id
+    #   Stop Replication Request account ID.
+    #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::SourceServer#application_id #application_id} => String
-    #   * {Types::SourceServer#arn #arn} => String
-    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
-    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
-    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
-    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
-    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
-    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
-    #   * {Types::SourceServer#replication_type #replication_type} => String
-    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
+    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
+    #   * {Types::SourceServer#replication_type #replication_type} => String
     #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
+    #   * {Types::SourceServer#application_id #application_id} => String
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_replication({
-    #     account_id: "AccountID",
     #     source_server_id: "SourceServerID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.application_id #=> String
+    #   resp.source_server_id #=> String
     #   resp.arn #=> String
-    #   resp.connector_action.connector_arn #=> String
-    #   resp.connector_action.credentials_secret_arn #=> String
-    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
-    #   resp.data_replication_info.data_replication_error.raw_error #=> String
-    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.launched_instance.ec2_instance_id #=> String
+    #   resp.launched_instance.job_id #=> String
+    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
+    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.eta_date_time #=> String
+    #   resp.data_replication_info.replicated_disks #=> Array
+    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
     #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.steps #=> Array
     #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
-    #   resp.data_replication_info.eta_date_time #=> String
-    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
+    #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
-    #   resp.data_replication_info.replicated_disks #=> Array
-    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
-    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
-    #   resp.fqdn_for_action_framework #=> String
-    #   resp.is_archived #=> Boolean
-    #   resp.launched_instance.ec2_instance_id #=> String
-    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
-    #   resp.launched_instance.job_id #=> String
+    #   resp.data_replication_info.replicator_id #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
-    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
-    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
-    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.last_seen_by_service_date_time #=> String
-    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
+    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
     #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
-    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
-    #   resp.source_properties.cpus #=> Array
-    #   resp.source_properties.cpus[0].cores #=> Integer
-    #   resp.source_properties.cpus[0].model_name #=> String
-    #   resp.source_properties.disks #=> Array
-    #   resp.source_properties.disks[0].bytes #=> Integer
-    #   resp.source_properties.disks[0].device_name #=> String
-    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.recommended_instance_type #=> String
     #   resp.source_properties.identification_hints.fqdn #=> String
     #   resp.source_properties.identification_hints.hostname #=> String
-    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
-    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.network_interfaces #=> Array
+    #   resp.source_properties.network_interfaces[0].mac_address #=> String
     #   resp.source_properties.network_interfaces[0].ips #=> Array
     #   resp.source_properties.network_interfaces[0].ips[0] #=> String
     #   resp.source_properties.network_interfaces[0].is_primary #=> Boolean
-    #   resp.source_properties.network_interfaces[0].mac_address #=> String
-    #   resp.source_properties.os.full_string #=> String
+    #   resp.source_properties.disks #=> Array
+    #   resp.source_properties.disks[0].device_name #=> String
+    #   resp.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_properties.cpus #=> Array
+    #   resp.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_properties.cpus[0].model_name #=> String
     #   resp.source_properties.ram_bytes #=> Integer
-    #   resp.source_properties.recommended_instance_type #=> String
-    #   resp.source_server_id #=> String
-    #   resp.tags #=> Hash
-    #   resp.tags["TagKey"] #=> String
-    #   resp.user_provided_id #=> String
+    #   resp.source_properties.os.full_string #=> String
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.vcenter_client_id #=> String
+    #   resp.application_id #=> String
+    #   resp.user_provided_id #=> String
+    #   resp.fqdn_for_action_framework #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
+    #   resp.connector_action.connector_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StopReplication AWS API Documentation
     #
@@ -4132,14 +4192,14 @@ module Aws::Mgn
     # instances. This command will not work for any Source Server with a
     # lifecycle.state of TESTING, CUTTING\_OVER, or CUTOVER.
     #
-    # @option params [String] :account_id
-    #   Terminate Target instance by Account ID
-    #
     # @option params [required, Array<String>] :source_server_i_ds
     #   Terminate Target instance by Source Server IDs.
     #
     # @option params [Hash<String,String>] :tags
     #   Terminate Target instance by Tags.
+    #
+    # @option params [String] :account_id
+    #   Terminate Target instance by Account ID
     #
     # @return [Types::TerminateTargetInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4148,44 +4208,44 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.terminate_target_instances({
-    #     account_id: "AccountID",
     #     source_server_i_ds: ["SourceServerID"], # required
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
+    #   resp.job.job_id #=> String
     #   resp.job.arn #=> String
+    #   resp.job.type #=> String, one of "LAUNCH", "TERMINATE"
+    #   resp.job.initiated_by #=> String, one of "START_TEST", "START_CUTOVER", "DIAGNOSTIC", "TERMINATE"
     #   resp.job.creation_date_time #=> String
     #   resp.job.end_date_time #=> String
-    #   resp.job.initiated_by #=> String, one of "START_TEST", "START_CUTOVER", "DIAGNOSTIC", "TERMINATE"
-    #   resp.job.job_id #=> String
+    #   resp.job.status #=> String, one of "PENDING", "STARTED", "COMPLETED"
     #   resp.job.participating_servers #=> Array
+    #   resp.job.participating_servers[0].source_server_id #=> String
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
     #   resp.job.participating_servers[0].launched_ec2_instance_id #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.ssm_agent_discovery_datetime #=> String
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list #=> Array
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_id #=> String
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.action_name #=> String
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters #=> Hash
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.ssm_document_name #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.timeout_seconds #=> Integer
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.must_succeed_for_cutover #=> Boolean
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters #=> Hash
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING", "SECURE_STRING"
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_name #=> String
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.ssm_document_name #=> String
-    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.timeout_seconds #=> Integer
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters #=> Hash
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document.external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
     #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].ssm_document_type #=> String, one of "AUTOMATION", "COMMAND"
-    #   resp.job.participating_servers[0].post_launch_actions_status.ssm_agent_discovery_datetime #=> String
-    #   resp.job.participating_servers[0].source_server_id #=> String
-    #   resp.job.status #=> String, one of "PENDING", "STARTED", "COMPLETED"
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_id #=> String
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].execution_status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
+    #   resp.job.participating_servers[0].post_launch_actions_status.post_launch_actions_launch_status_list[0].failure_reason #=> String
     #   resp.job.tags #=> Hash
     #   resp.job.tags["TagKey"] #=> String
-    #   resp.job.type #=> String, one of "LAUNCH", "TERMINATE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/TerminateTargetInstances AWS API Documentation
     #
@@ -4198,45 +4258,45 @@ module Aws::Mgn
 
     # Unarchive application.
     #
-    # @option params [String] :account_id
-    #   Account ID.
-    #
     # @option params [required, String] :application_id
     #   Application ID.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @return [Types::Application] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::Application#application_aggregated_status #application_aggregated_status} => Types::ApplicationAggregatedStatus
     #   * {Types::Application#application_id #application_id} => String
     #   * {Types::Application#arn #arn} => String
-    #   * {Types::Application#creation_date_time #creation_date_time} => String
+    #   * {Types::Application#name #name} => String
     #   * {Types::Application#description #description} => String
     #   * {Types::Application#is_archived #is_archived} => Boolean
+    #   * {Types::Application#application_aggregated_status #application_aggregated_status} => Types::ApplicationAggregatedStatus
+    #   * {Types::Application#creation_date_time #creation_date_time} => String
     #   * {Types::Application#last_modified_date_time #last_modified_date_time} => String
-    #   * {Types::Application#name #name} => String
     #   * {Types::Application#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Application#wave_id #wave_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.unarchive_application({
-    #     account_id: "AccountID",
     #     application_id: "ApplicationID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.application_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
-    #   resp.application_aggregated_status.last_update_date_time #=> String
-    #   resp.application_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
-    #   resp.application_aggregated_status.total_source_servers #=> Integer
     #   resp.application_id #=> String
     #   resp.arn #=> String
-    #   resp.creation_date_time #=> String
+    #   resp.name #=> String
     #   resp.description #=> String
     #   resp.is_archived #=> Boolean
+    #   resp.application_aggregated_status.last_update_date_time #=> String
+    #   resp.application_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.application_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.application_aggregated_status.total_source_servers #=> Integer
+    #   resp.creation_date_time #=> String
     #   resp.last_modified_date_time #=> String
-    #   resp.name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.wave_id #=> String
@@ -4252,47 +4312,47 @@ module Aws::Mgn
 
     # Unarchive wave.
     #
-    # @option params [String] :account_id
-    #   Account ID.
-    #
     # @option params [required, String] :wave_id
     #   Wave ID.
     #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @return [Types::Wave] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::Wave#wave_id #wave_id} => String
     #   * {Types::Wave#arn #arn} => String
-    #   * {Types::Wave#creation_date_time #creation_date_time} => String
+    #   * {Types::Wave#name #name} => String
     #   * {Types::Wave#description #description} => String
     #   * {Types::Wave#is_archived #is_archived} => Boolean
-    #   * {Types::Wave#last_modified_date_time #last_modified_date_time} => String
-    #   * {Types::Wave#name #name} => String
-    #   * {Types::Wave#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Wave#wave_aggregated_status #wave_aggregated_status} => Types::WaveAggregatedStatus
-    #   * {Types::Wave#wave_id #wave_id} => String
+    #   * {Types::Wave#creation_date_time #creation_date_time} => String
+    #   * {Types::Wave#last_modified_date_time #last_modified_date_time} => String
+    #   * {Types::Wave#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.unarchive_wave({
-    #     account_id: "AccountID",
     #     wave_id: "WaveID", # required
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
+    #   resp.wave_id #=> String
     #   resp.arn #=> String
-    #   resp.creation_date_time #=> String
+    #   resp.name #=> String
     #   resp.description #=> String
     #   resp.is_archived #=> Boolean
+    #   resp.wave_aggregated_status.last_update_date_time #=> String
+    #   resp.wave_aggregated_status.replication_started_date_time #=> String
+    #   resp.wave_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.wave_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.wave_aggregated_status.total_applications #=> Integer
+    #   resp.creation_date_time #=> String
     #   resp.last_modified_date_time #=> String
-    #   resp.name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.wave_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
-    #   resp.wave_aggregated_status.last_update_date_time #=> String
-    #   resp.wave_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
-    #   resp.wave_aggregated_status.replication_started_date_time #=> String
-    #   resp.wave_aggregated_status.total_applications #=> Integer
-    #   resp.wave_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UnarchiveWave AWS API Documentation
     #
@@ -4332,53 +4392,53 @@ module Aws::Mgn
 
     # Update application.
     #
-    # @option params [String] :account_id
-    #   Account ID.
-    #
     # @option params [required, String] :application_id
     #   Application ID.
-    #
-    # @option params [String] :description
-    #   Application description.
     #
     # @option params [String] :name
     #   Application name.
     #
+    # @option params [String] :description
+    #   Application description.
+    #
+    # @option params [String] :account_id
+    #   Account ID.
+    #
     # @return [Types::Application] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::Application#application_aggregated_status #application_aggregated_status} => Types::ApplicationAggregatedStatus
     #   * {Types::Application#application_id #application_id} => String
     #   * {Types::Application#arn #arn} => String
-    #   * {Types::Application#creation_date_time #creation_date_time} => String
+    #   * {Types::Application#name #name} => String
     #   * {Types::Application#description #description} => String
     #   * {Types::Application#is_archived #is_archived} => Boolean
+    #   * {Types::Application#application_aggregated_status #application_aggregated_status} => Types::ApplicationAggregatedStatus
+    #   * {Types::Application#creation_date_time #creation_date_time} => String
     #   * {Types::Application#last_modified_date_time #last_modified_date_time} => String
-    #   * {Types::Application#name #name} => String
     #   * {Types::Application#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Application#wave_id #wave_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_application({
-    #     account_id: "AccountID",
     #     application_id: "ApplicationID", # required
-    #     description: "ApplicationDescription",
     #     name: "ApplicationName",
+    #     description: "ApplicationDescription",
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.application_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
-    #   resp.application_aggregated_status.last_update_date_time #=> String
-    #   resp.application_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
-    #   resp.application_aggregated_status.total_source_servers #=> Integer
     #   resp.application_id #=> String
     #   resp.arn #=> String
-    #   resp.creation_date_time #=> String
+    #   resp.name #=> String
     #   resp.description #=> String
     #   resp.is_archived #=> Boolean
+    #   resp.application_aggregated_status.last_update_date_time #=> String
+    #   resp.application_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.application_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.application_aggregated_status.total_source_servers #=> Integer
+    #   resp.creation_date_time #=> String
     #   resp.last_modified_date_time #=> String
-    #   resp.name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.wave_id #=> String
@@ -4405,12 +4465,12 @@ module Aws::Mgn
     #
     # @return [Types::Connector] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::Connector#arn #arn} => String
     #   * {Types::Connector#connector_id #connector_id} => String
     #   * {Types::Connector#name #name} => String
-    #   * {Types::Connector#ssm_command_config #ssm_command_config} => Types::ConnectorSsmCommandConfig
     #   * {Types::Connector#ssm_instance_id #ssm_instance_id} => String
+    #   * {Types::Connector#arn #arn} => String
     #   * {Types::Connector#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::Connector#ssm_command_config #ssm_command_config} => Types::ConnectorSsmCommandConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -4418,25 +4478,25 @@ module Aws::Mgn
     #     connector_id: "ConnectorID", # required
     #     name: "ConnectorName",
     #     ssm_command_config: {
-    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
-    #       cloud_watch_output_enabled: false, # required
-    #       output_s3_bucket_name: "S3BucketName",
     #       s3_output_enabled: false, # required
+    #       output_s3_bucket_name: "S3BucketName",
+    #       cloud_watch_output_enabled: false, # required
+    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
     #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
     #   resp.connector_id #=> String
     #   resp.name #=> String
-    #   resp.ssm_command_config.cloud_watch_log_group_name #=> String
-    #   resp.ssm_command_config.cloud_watch_output_enabled #=> Boolean
-    #   resp.ssm_command_config.output_s3_bucket_name #=> String
-    #   resp.ssm_command_config.s3_output_enabled #=> Boolean
     #   resp.ssm_instance_id #=> String
+    #   resp.arn #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.ssm_command_config.s3_output_enabled #=> Boolean
+    #   resp.ssm_command_config.output_s3_bucket_name #=> String
+    #   resp.ssm_command_config.cloud_watch_output_enabled #=> Boolean
+    #   resp.ssm_command_config.cloud_watch_log_group_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateConnector AWS API Documentation
     #
@@ -4453,11 +4513,17 @@ module Aws::Mgn
     #
     #  </note>
     #
-    # @option params [String] :account_id
-    #   Update Launch configuration Account ID.
+    # @option params [required, String] :source_server_id
+    #   Update Launch configuration by Source Server ID request.
     #
-    # @option params [String] :boot_mode
-    #   Update Launch configuration boot mode request.
+    # @option params [String] :name
+    #   Update Launch configuration name request.
+    #
+    # @option params [String] :launch_disposition
+    #   Update Launch configuration launch disposition request.
+    #
+    # @option params [String] :target_instance_type_right_sizing_method
+    #   Update Launch configuration Target instance right sizing request.
     #
     # @option params [Boolean] :copy_private_ip
     #   Update Launch configuration copy Private IP request.
@@ -4465,118 +4531,112 @@ module Aws::Mgn
     # @option params [Boolean] :copy_tags
     #   Update Launch configuration copy Tags request.
     #
-    # @option params [Boolean] :enable_map_auto_tagging
-    #   Enable map auto tagging.
-    #
-    # @option params [String] :launch_disposition
-    #   Update Launch configuration launch disposition request.
-    #
     # @option params [Types::Licensing] :licensing
     #   Update Launch configuration licensing request.
     #
-    # @option params [String] :map_auto_tagging_mpe_id
-    #   Launch configuration map auto tagging MPE ID.
-    #
-    # @option params [String] :name
-    #   Update Launch configuration name request.
+    # @option params [String] :boot_mode
+    #   Update Launch configuration boot mode request.
     #
     # @option params [Types::PostLaunchActions] :post_launch_actions
     #   Post Launch Actions to executed on the Test or Cutover instance.
     #
-    # @option params [required, String] :source_server_id
-    #   Update Launch configuration by Source Server ID request.
+    # @option params [Boolean] :enable_map_auto_tagging
+    #   Enable map auto tagging.
     #
-    # @option params [String] :target_instance_type_right_sizing_method
-    #   Update Launch configuration Target instance right sizing request.
+    # @option params [String] :map_auto_tagging_mpe_id
+    #   Launch configuration map auto tagging MPE ID.
+    #
+    # @option params [String] :account_id
+    #   Update Launch configuration Account ID.
     #
     # @return [Types::LaunchConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::LaunchConfiguration#boot_mode #boot_mode} => String
+    #   * {Types::LaunchConfiguration#source_server_id #source_server_id} => String
+    #   * {Types::LaunchConfiguration#name #name} => String
+    #   * {Types::LaunchConfiguration#ec2_launch_template_id #ec2_launch_template_id} => String
+    #   * {Types::LaunchConfiguration#launch_disposition #launch_disposition} => String
+    #   * {Types::LaunchConfiguration#target_instance_type_right_sizing_method #target_instance_type_right_sizing_method} => String
     #   * {Types::LaunchConfiguration#copy_private_ip #copy_private_ip} => Boolean
     #   * {Types::LaunchConfiguration#copy_tags #copy_tags} => Boolean
-    #   * {Types::LaunchConfiguration#ec2_launch_template_id #ec2_launch_template_id} => String
-    #   * {Types::LaunchConfiguration#enable_map_auto_tagging #enable_map_auto_tagging} => Boolean
-    #   * {Types::LaunchConfiguration#launch_disposition #launch_disposition} => String
     #   * {Types::LaunchConfiguration#licensing #licensing} => Types::Licensing
-    #   * {Types::LaunchConfiguration#map_auto_tagging_mpe_id #map_auto_tagging_mpe_id} => String
-    #   * {Types::LaunchConfiguration#name #name} => String
+    #   * {Types::LaunchConfiguration#boot_mode #boot_mode} => String
     #   * {Types::LaunchConfiguration#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
-    #   * {Types::LaunchConfiguration#source_server_id #source_server_id} => String
-    #   * {Types::LaunchConfiguration#target_instance_type_right_sizing_method #target_instance_type_right_sizing_method} => String
+    #   * {Types::LaunchConfiguration#enable_map_auto_tagging #enable_map_auto_tagging} => Boolean
+    #   * {Types::LaunchConfiguration#map_auto_tagging_mpe_id #map_auto_tagging_mpe_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_launch_configuration({
-    #     account_id: "AccountID",
-    #     boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI, USE_SOURCE
+    #     source_server_id: "SourceServerID", # required
+    #     name: "SmallBoundedString",
+    #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
+    #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
     #     copy_private_ip: false,
     #     copy_tags: false,
-    #     enable_map_auto_tagging: false,
-    #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
     #     licensing: {
     #       os_byol: false,
     #     },
-    #     map_auto_tagging_mpe_id: "TagValue",
-    #     name: "SmallBoundedString",
+    #     boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI, USE_SOURCE
     #     post_launch_actions: {
-    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
     #       deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY, TEST_ONLY
     #       s3_log_bucket: "S3LogBucketName",
     #       s3_output_key_prefix: "BoundedString",
+    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
     #       ssm_documents: [
     #         {
     #           action_name: "BoundedString", # required
+    #           ssm_document_name: "SsmDocumentName", # required
+    #           timeout_seconds: 1,
+    #           must_succeed_for_cutover: false,
+    #           parameters: {
+    #             "SsmDocumentParameterName" => [
+    #               {
+    #                 parameter_type: "STRING", # required, accepts STRING, SECURE_STRING
+    #                 parameter_name: "SsmParameterStoreParameterName", # required
+    #               },
+    #             ],
+    #           },
     #           external_parameters: {
     #             "SsmDocumentParameterName" => {
     #               dynamic_path: "JmesPathString",
     #             },
     #           },
-    #           must_succeed_for_cutover: false,
-    #           parameters: {
-    #             "SsmDocumentParameterName" => [
-    #               {
-    #                 parameter_name: "SsmParameterStoreParameterName", # required
-    #                 parameter_type: "STRING", # required, accepts STRING
-    #               },
-    #             ],
-    #           },
-    #           ssm_document_name: "SsmDocumentName", # required
-    #           timeout_seconds: 1,
     #         },
     #       ],
     #     },
-    #     source_server_id: "SourceServerID", # required
-    #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
+    #     enable_map_auto_tagging: false,
+    #     map_auto_tagging_mpe_id: "TagValue",
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI", "USE_SOURCE"
+    #   resp.source_server_id #=> String
+    #   resp.name #=> String
+    #   resp.ec2_launch_template_id #=> String
+    #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
     #   resp.copy_private_ip #=> Boolean
     #   resp.copy_tags #=> Boolean
-    #   resp.ec2_launch_template_id #=> String
-    #   resp.enable_map_auto_tagging #=> Boolean
-    #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
     #   resp.licensing.os_byol #=> Boolean
-    #   resp.map_auto_tagging_mpe_id #=> String
-    #   resp.name #=> String
-    #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
+    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI", "USE_SOURCE"
     #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY", "TEST_ONLY"
     #   resp.post_launch_actions.s3_log_bucket #=> String
     #   resp.post_launch_actions.s3_output_key_prefix #=> String
+    #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
     #   resp.post_launch_actions.ssm_documents #=> Array
     #   resp.post_launch_actions.ssm_documents[0].action_name #=> String
-    #   resp.post_launch_actions.ssm_documents[0].external_parameters #=> Hash
-    #   resp.post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
+    #   resp.post_launch_actions.ssm_documents[0].ssm_document_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
     #   resp.post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
     #   resp.post_launch_actions.ssm_documents[0].parameters #=> Hash
     #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING", "SECURE_STRING"
     #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
-    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
-    #   resp.post_launch_actions.ssm_documents[0].ssm_document_name #=> String
-    #   resp.post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
-    #   resp.source_server_id #=> String
-    #   resp.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
+    #   resp.post_launch_actions.ssm_documents[0].external_parameters #=> Hash
+    #   resp.post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
+    #   resp.enable_map_auto_tagging #=> Boolean
+    #   resp.map_auto_tagging_mpe_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateLaunchConfiguration AWS API Documentation
     #
@@ -4589,161 +4649,173 @@ module Aws::Mgn
 
     # Updates an existing Launch Configuration Template by ID.
     #
-    # @option params [Boolean] :associate_public_ip_address
-    #   Associate public Ip address.
-    #
-    # @option params [String] :boot_mode
-    #   Launch configuration template boot mode.
-    #
-    # @option params [Boolean] :copy_private_ip
-    #   Copy private Ip.
-    #
-    # @option params [Boolean] :copy_tags
-    #   Copy tags.
-    #
-    # @option params [Boolean] :enable_map_auto_tagging
-    #   Enable map auto tagging.
-    #
-    # @option params [Types::LaunchTemplateDiskConf] :large_volume_conf
-    #   Large volume config.
-    #
     # @option params [required, String] :launch_configuration_template_id
     #   Launch Configuration Template ID.
-    #
-    # @option params [String] :launch_disposition
-    #   Launch disposition.
-    #
-    # @option params [Types::Licensing] :licensing
-    #   Configure Licensing.
-    #
-    # @option params [String] :map_auto_tagging_mpe_id
-    #   Launch configuration template map auto tagging MPE ID.
     #
     # @option params [Types::PostLaunchActions] :post_launch_actions
     #   Post Launch Action to execute on the Test or Cutover instance.
     #
-    # @option params [Types::LaunchTemplateDiskConf] :small_volume_conf
-    #   Small volume config.
+    # @option params [Boolean] :enable_map_auto_tagging
+    #   Enable map auto tagging.
     #
-    # @option params [Integer] :small_volume_max_size
-    #   Small volume maximum size.
+    # @option params [String] :map_auto_tagging_mpe_id
+    #   Launch configuration template map auto tagging MPE ID.
+    #
+    # @option params [String] :launch_disposition
+    #   Launch disposition.
     #
     # @option params [String] :target_instance_type_right_sizing_method
     #   Target instance type right-sizing method.
     #
+    # @option params [Boolean] :copy_private_ip
+    #   Copy private Ip.
+    #
+    # @option params [Boolean] :associate_public_ip_address
+    #   Associate public Ip address.
+    #
+    # @option params [Boolean] :copy_tags
+    #   Copy tags.
+    #
+    # @option params [Types::Licensing] :licensing
+    #   Configure Licensing.
+    #
+    # @option params [String] :boot_mode
+    #   Launch configuration template boot mode.
+    #
+    # @option params [Integer] :small_volume_max_size
+    #   Small volume maximum size.
+    #
+    # @option params [Types::LaunchTemplateDiskConf] :small_volume_conf
+    #   Small volume config.
+    #
+    # @option params [Types::LaunchTemplateDiskConf] :large_volume_conf
+    #   Large volume config.
+    #
+    # @option params [Boolean] :enable_parameters_encryption
+    #   Enable parameters encryption.
+    #
+    # @option params [String] :parameters_encryption_key
+    #   Parameters encryption key.
+    #
     # @return [Types::LaunchConfigurationTemplate] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::LaunchConfigurationTemplate#arn #arn} => String
-    #   * {Types::LaunchConfigurationTemplate#associate_public_ip_address #associate_public_ip_address} => Boolean
-    #   * {Types::LaunchConfigurationTemplate#boot_mode #boot_mode} => String
-    #   * {Types::LaunchConfigurationTemplate#copy_private_ip #copy_private_ip} => Boolean
-    #   * {Types::LaunchConfigurationTemplate#copy_tags #copy_tags} => Boolean
-    #   * {Types::LaunchConfigurationTemplate#ec2_launch_template_id #ec2_launch_template_id} => String
-    #   * {Types::LaunchConfigurationTemplate#enable_map_auto_tagging #enable_map_auto_tagging} => Boolean
-    #   * {Types::LaunchConfigurationTemplate#large_volume_conf #large_volume_conf} => Types::LaunchTemplateDiskConf
     #   * {Types::LaunchConfigurationTemplate#launch_configuration_template_id #launch_configuration_template_id} => String
-    #   * {Types::LaunchConfigurationTemplate#launch_disposition #launch_disposition} => String
-    #   * {Types::LaunchConfigurationTemplate#licensing #licensing} => Types::Licensing
-    #   * {Types::LaunchConfigurationTemplate#map_auto_tagging_mpe_id #map_auto_tagging_mpe_id} => String
+    #   * {Types::LaunchConfigurationTemplate#arn #arn} => String
     #   * {Types::LaunchConfigurationTemplate#post_launch_actions #post_launch_actions} => Types::PostLaunchActions
-    #   * {Types::LaunchConfigurationTemplate#small_volume_conf #small_volume_conf} => Types::LaunchTemplateDiskConf
-    #   * {Types::LaunchConfigurationTemplate#small_volume_max_size #small_volume_max_size} => Integer
+    #   * {Types::LaunchConfigurationTemplate#enable_map_auto_tagging #enable_map_auto_tagging} => Boolean
+    #   * {Types::LaunchConfigurationTemplate#map_auto_tagging_mpe_id #map_auto_tagging_mpe_id} => String
     #   * {Types::LaunchConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::LaunchConfigurationTemplate#ec2_launch_template_id #ec2_launch_template_id} => String
+    #   * {Types::LaunchConfigurationTemplate#launch_disposition #launch_disposition} => String
     #   * {Types::LaunchConfigurationTemplate#target_instance_type_right_sizing_method #target_instance_type_right_sizing_method} => String
+    #   * {Types::LaunchConfigurationTemplate#copy_private_ip #copy_private_ip} => Boolean
+    #   * {Types::LaunchConfigurationTemplate#associate_public_ip_address #associate_public_ip_address} => Boolean
+    #   * {Types::LaunchConfigurationTemplate#copy_tags #copy_tags} => Boolean
+    #   * {Types::LaunchConfigurationTemplate#licensing #licensing} => Types::Licensing
+    #   * {Types::LaunchConfigurationTemplate#boot_mode #boot_mode} => String
+    #   * {Types::LaunchConfigurationTemplate#small_volume_max_size #small_volume_max_size} => Integer
+    #   * {Types::LaunchConfigurationTemplate#small_volume_conf #small_volume_conf} => Types::LaunchTemplateDiskConf
+    #   * {Types::LaunchConfigurationTemplate#large_volume_conf #large_volume_conf} => Types::LaunchTemplateDiskConf
+    #   * {Types::LaunchConfigurationTemplate#enable_parameters_encryption #enable_parameters_encryption} => Boolean
+    #   * {Types::LaunchConfigurationTemplate#parameters_encryption_key #parameters_encryption_key} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_launch_configuration_template({
-    #     associate_public_ip_address: false,
-    #     boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI, USE_SOURCE
-    #     copy_private_ip: false,
-    #     copy_tags: false,
-    #     enable_map_auto_tagging: false,
-    #     large_volume_conf: {
-    #       iops: 1,
-    #       throughput: 1,
-    #       volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
-    #     },
     #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
-    #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
-    #     licensing: {
-    #       os_byol: false,
-    #     },
-    #     map_auto_tagging_mpe_id: "TagValue",
     #     post_launch_actions: {
-    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
     #       deployment: "TEST_AND_CUTOVER", # accepts TEST_AND_CUTOVER, CUTOVER_ONLY, TEST_ONLY
     #       s3_log_bucket: "S3LogBucketName",
     #       s3_output_key_prefix: "BoundedString",
+    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
     #       ssm_documents: [
     #         {
     #           action_name: "BoundedString", # required
+    #           ssm_document_name: "SsmDocumentName", # required
+    #           timeout_seconds: 1,
+    #           must_succeed_for_cutover: false,
+    #           parameters: {
+    #             "SsmDocumentParameterName" => [
+    #               {
+    #                 parameter_type: "STRING", # required, accepts STRING, SECURE_STRING
+    #                 parameter_name: "SsmParameterStoreParameterName", # required
+    #               },
+    #             ],
+    #           },
     #           external_parameters: {
     #             "SsmDocumentParameterName" => {
     #               dynamic_path: "JmesPathString",
     #             },
     #           },
-    #           must_succeed_for_cutover: false,
-    #           parameters: {
-    #             "SsmDocumentParameterName" => [
-    #               {
-    #                 parameter_name: "SsmParameterStoreParameterName", # required
-    #                 parameter_type: "STRING", # required, accepts STRING
-    #               },
-    #             ],
-    #           },
-    #           ssm_document_name: "SsmDocumentName", # required
-    #           timeout_seconds: 1,
     #         },
     #       ],
     #     },
+    #     enable_map_auto_tagging: false,
+    #     map_auto_tagging_mpe_id: "TagValue",
+    #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
+    #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
+    #     copy_private_ip: false,
+    #     associate_public_ip_address: false,
+    #     copy_tags: false,
+    #     licensing: {
+    #       os_byol: false,
+    #     },
+    #     boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI, USE_SOURCE
+    #     small_volume_max_size: 1,
     #     small_volume_conf: {
+    #       volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
     #       iops: 1,
     #       throughput: 1,
-    #       volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
     #     },
-    #     small_volume_max_size: 1,
-    #     target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
+    #     large_volume_conf: {
+    #       volume_type: "io1", # accepts io1, io2, gp3, gp2, st1, sc1, standard
+    #       iops: 1,
+    #       throughput: 1,
+    #     },
+    #     enable_parameters_encryption: false,
+    #     parameters_encryption_key: "ARN",
     #   })
     #
     # @example Response structure
     #
-    #   resp.arn #=> String
-    #   resp.associate_public_ip_address #=> Boolean
-    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI", "USE_SOURCE"
-    #   resp.copy_private_ip #=> Boolean
-    #   resp.copy_tags #=> Boolean
-    #   resp.ec2_launch_template_id #=> String
-    #   resp.enable_map_auto_tagging #=> Boolean
-    #   resp.large_volume_conf.iops #=> Integer
-    #   resp.large_volume_conf.throughput #=> Integer
-    #   resp.large_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
     #   resp.launch_configuration_template_id #=> String
-    #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
-    #   resp.licensing.os_byol #=> Boolean
-    #   resp.map_auto_tagging_mpe_id #=> String
-    #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
+    #   resp.arn #=> String
     #   resp.post_launch_actions.deployment #=> String, one of "TEST_AND_CUTOVER", "CUTOVER_ONLY", "TEST_ONLY"
     #   resp.post_launch_actions.s3_log_bucket #=> String
     #   resp.post_launch_actions.s3_output_key_prefix #=> String
+    #   resp.post_launch_actions.cloud_watch_log_group_name #=> String
     #   resp.post_launch_actions.ssm_documents #=> Array
     #   resp.post_launch_actions.ssm_documents[0].action_name #=> String
-    #   resp.post_launch_actions.ssm_documents[0].external_parameters #=> Hash
-    #   resp.post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
+    #   resp.post_launch_actions.ssm_documents[0].ssm_document_name #=> String
+    #   resp.post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
     #   resp.post_launch_actions.ssm_documents[0].must_succeed_for_cutover #=> Boolean
     #   resp.post_launch_actions.ssm_documents[0].parameters #=> Hash
     #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"] #=> Array
+    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING", "SECURE_STRING"
     #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_name #=> String
-    #   resp.post_launch_actions.ssm_documents[0].parameters["SsmDocumentParameterName"][0].parameter_type #=> String, one of "STRING"
-    #   resp.post_launch_actions.ssm_documents[0].ssm_document_name #=> String
-    #   resp.post_launch_actions.ssm_documents[0].timeout_seconds #=> Integer
-    #   resp.small_volume_conf.iops #=> Integer
-    #   resp.small_volume_conf.throughput #=> Integer
-    #   resp.small_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
-    #   resp.small_volume_max_size #=> Integer
+    #   resp.post_launch_actions.ssm_documents[0].external_parameters #=> Hash
+    #   resp.post_launch_actions.ssm_documents[0].external_parameters["SsmDocumentParameterName"].dynamic_path #=> String
+    #   resp.enable_map_auto_tagging #=> Boolean
+    #   resp.map_auto_tagging_mpe_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.ec2_launch_template_id #=> String
+    #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
     #   resp.target_instance_type_right_sizing_method #=> String, one of "NONE", "BASIC"
+    #   resp.copy_private_ip #=> Boolean
+    #   resp.associate_public_ip_address #=> Boolean
+    #   resp.copy_tags #=> Boolean
+    #   resp.licensing.os_byol #=> Boolean
+    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI", "USE_SOURCE"
+    #   resp.small_volume_max_size #=> Integer
+    #   resp.small_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
+    #   resp.small_volume_conf.iops #=> Integer
+    #   resp.small_volume_conf.throughput #=> Integer
+    #   resp.large_volume_conf.volume_type #=> String, one of "io1", "io2", "gp3", "gp2", "st1", "sc1", "standard"
+    #   resp.large_volume_conf.iops #=> Integer
+    #   resp.large_volume_conf.throughput #=> Integer
+    #   resp.enable_parameters_encryption #=> Boolean
+    #   resp.parameters_encryption_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateLaunchConfigurationTemplate AWS API Documentation
     #
@@ -4757,25 +4829,37 @@ module Aws::Mgn
     # Allows you to update multiple ReplicationConfigurations by Source
     # Server ID.
     #
-    # @option params [String] :account_id
-    #   Update replication configuration Account ID request.
+    # @option params [required, String] :source_server_id
+    #   Update replication configuration Source Server ID request.
+    #
+    # @option params [String] :name
+    #   Update replication configuration name request.
+    #
+    # @option params [String] :staging_area_subnet_id
+    #   Update replication configuration Staging Area subnet request.
     #
     # @option params [Boolean] :associate_default_security_group
     #   Update replication configuration associate default Application
     #   Migration Service Security group request.
     #
-    # @option params [Integer] :bandwidth_throttling
-    #   Update replication configuration bandwidth throttling request.
+    # @option params [Array<String>] :replication_servers_security_groups_i_ds
+    #   Update replication configuration Replication Server Security Groups
+    #   IDs request.
     #
-    # @option params [Boolean] :create_public_ip
-    #   Update replication configuration create Public IP request.
+    # @option params [String] :replication_server_instance_type
+    #   Update replication configuration Replication Server instance type
+    #   request.
     #
-    # @option params [String] :data_plane_routing
-    #   Update replication configuration data plane routing request.
+    # @option params [Boolean] :use_dedicated_replication_server
+    #   Update replication configuration use dedicated Replication Server
+    #   request.
     #
     # @option params [String] :default_large_staging_disk_type
     #   Update replication configuration use default large Staging Disk type
     #   request.
+    #
+    # @option params [Array<Types::ReplicationConfigurationReplicatedDisk>] :replicated_disks
+    #   Update replication configuration replicated disks request.
     #
     # @option params [String] :ebs_encryption
     #   Update replication configuration EBS encryption request.
@@ -4783,112 +4867,106 @@ module Aws::Mgn
     # @option params [String] :ebs_encryption_key_arn
     #   Update replication configuration EBS encryption key ARN request.
     #
-    # @option params [String] :name
-    #   Update replication configuration name request.
+    # @option params [Integer] :bandwidth_throttling
+    #   Update replication configuration bandwidth throttling request.
     #
-    # @option params [Array<Types::ReplicationConfigurationReplicatedDisk>] :replicated_disks
-    #   Update replication configuration replicated disks request.
+    # @option params [String] :data_plane_routing
+    #   Update replication configuration data plane routing request.
     #
-    # @option params [String] :replication_server_instance_type
-    #   Update replication configuration Replication Server instance type
-    #   request.
-    #
-    # @option params [Array<String>] :replication_servers_security_groups_i_ds
-    #   Update replication configuration Replication Server Security Groups
-    #   IDs request.
-    #
-    # @option params [required, String] :source_server_id
-    #   Update replication configuration Source Server ID request.
-    #
-    # @option params [String] :staging_area_subnet_id
-    #   Update replication configuration Staging Area subnet request.
+    # @option params [Boolean] :create_public_ip
+    #   Update replication configuration create Public IP request.
     #
     # @option params [Hash<String,String>] :staging_area_tags
     #   Update replication configuration Staging Area Tags request.
     #
-    # @option params [Boolean] :use_dedicated_replication_server
-    #   Update replication configuration use dedicated Replication Server
-    #   request.
-    #
     # @option params [Boolean] :use_fips_endpoint
     #   Update replication configuration use Fips Endpoint.
     #
+    # @option params [String] :account_id
+    #   Update replication configuration Account ID request.
+    #
+    # @option params [String] :internet_protocol
+    #   Update replication configuration internet protocol.
+    #
     # @return [Types::ReplicationConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::ReplicationConfiguration#source_server_id #source_server_id} => String
+    #   * {Types::ReplicationConfiguration#name #name} => String
+    #   * {Types::ReplicationConfiguration#staging_area_subnet_id #staging_area_subnet_id} => String
     #   * {Types::ReplicationConfiguration#associate_default_security_group #associate_default_security_group} => Boolean
-    #   * {Types::ReplicationConfiguration#bandwidth_throttling #bandwidth_throttling} => Integer
-    #   * {Types::ReplicationConfiguration#create_public_ip #create_public_ip} => Boolean
-    #   * {Types::ReplicationConfiguration#data_plane_routing #data_plane_routing} => String
+    #   * {Types::ReplicationConfiguration#replication_servers_security_groups_i_ds #replication_servers_security_groups_i_ds} => Array&lt;String&gt;
+    #   * {Types::ReplicationConfiguration#replication_server_instance_type #replication_server_instance_type} => String
+    #   * {Types::ReplicationConfiguration#use_dedicated_replication_server #use_dedicated_replication_server} => Boolean
     #   * {Types::ReplicationConfiguration#default_large_staging_disk_type #default_large_staging_disk_type} => String
+    #   * {Types::ReplicationConfiguration#replicated_disks #replicated_disks} => Array&lt;Types::ReplicationConfigurationReplicatedDisk&gt;
     #   * {Types::ReplicationConfiguration#ebs_encryption #ebs_encryption} => String
     #   * {Types::ReplicationConfiguration#ebs_encryption_key_arn #ebs_encryption_key_arn} => String
-    #   * {Types::ReplicationConfiguration#name #name} => String
-    #   * {Types::ReplicationConfiguration#replicated_disks #replicated_disks} => Array&lt;Types::ReplicationConfigurationReplicatedDisk&gt;
-    #   * {Types::ReplicationConfiguration#replication_server_instance_type #replication_server_instance_type} => String
-    #   * {Types::ReplicationConfiguration#replication_servers_security_groups_i_ds #replication_servers_security_groups_i_ds} => Array&lt;String&gt;
-    #   * {Types::ReplicationConfiguration#source_server_id #source_server_id} => String
-    #   * {Types::ReplicationConfiguration#staging_area_subnet_id #staging_area_subnet_id} => String
+    #   * {Types::ReplicationConfiguration#bandwidth_throttling #bandwidth_throttling} => Integer
+    #   * {Types::ReplicationConfiguration#data_plane_routing #data_plane_routing} => String
+    #   * {Types::ReplicationConfiguration#create_public_ip #create_public_ip} => Boolean
     #   * {Types::ReplicationConfiguration#staging_area_tags #staging_area_tags} => Hash&lt;String,String&gt;
-    #   * {Types::ReplicationConfiguration#use_dedicated_replication_server #use_dedicated_replication_server} => Boolean
     #   * {Types::ReplicationConfiguration#use_fips_endpoint #use_fips_endpoint} => Boolean
+    #   * {Types::ReplicationConfiguration#internet_protocol #internet_protocol} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_replication_configuration({
-    #     account_id: "AccountID",
-    #     associate_default_security_group: false,
-    #     bandwidth_throttling: 1,
-    #     create_public_ip: false,
-    #     data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
-    #     default_large_staging_disk_type: "GP2", # accepts GP2, ST1, GP3
-    #     ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
-    #     ebs_encryption_key_arn: "ARN",
+    #     source_server_id: "SourceServerID", # required
     #     name: "SmallBoundedString",
+    #     staging_area_subnet_id: "SubnetID",
+    #     associate_default_security_group: false,
+    #     replication_servers_security_groups_i_ds: ["SecurityGroupID"],
+    #     replication_server_instance_type: "EC2InstanceType",
+    #     use_dedicated_replication_server: false,
+    #     default_large_staging_disk_type: "GP2", # accepts GP2, ST1, GP3
     #     replicated_disks: [
     #       {
     #         device_name: "BoundedString",
-    #         iops: 1,
     #         is_boot_disk: false,
     #         staging_disk_type: "AUTO", # accepts AUTO, GP2, IO1, SC1, ST1, STANDARD, GP3, IO2
+    #         iops: 1,
     #         throughput: 1,
     #       },
     #     ],
-    #     replication_server_instance_type: "EC2InstanceType",
-    #     replication_servers_security_groups_i_ds: ["SecurityGroupID"],
-    #     source_server_id: "SourceServerID", # required
-    #     staging_area_subnet_id: "SubnetID",
+    #     ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
+    #     ebs_encryption_key_arn: "ARN",
+    #     bandwidth_throttling: 1,
+    #     data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
+    #     create_public_ip: false,
     #     staging_area_tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     use_dedicated_replication_server: false,
     #     use_fips_endpoint: false,
+    #     account_id: "AccountID",
+    #     internet_protocol: "IPV4", # accepts IPV4, IPV6
     #   })
     #
     # @example Response structure
     #
-    #   resp.associate_default_security_group #=> Boolean
-    #   resp.bandwidth_throttling #=> Integer
-    #   resp.create_public_ip #=> Boolean
-    #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
-    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "ST1", "GP3"
-    #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
-    #   resp.ebs_encryption_key_arn #=> String
+    #   resp.source_server_id #=> String
     #   resp.name #=> String
-    #   resp.replicated_disks #=> Array
-    #   resp.replicated_disks[0].device_name #=> String
-    #   resp.replicated_disks[0].iops #=> Integer
-    #   resp.replicated_disks[0].is_boot_disk #=> Boolean
-    #   resp.replicated_disks[0].staging_disk_type #=> String, one of "AUTO", "GP2", "IO1", "SC1", "ST1", "STANDARD", "GP3", "IO2"
-    #   resp.replicated_disks[0].throughput #=> Integer
-    #   resp.replication_server_instance_type #=> String
+    #   resp.staging_area_subnet_id #=> String
+    #   resp.associate_default_security_group #=> Boolean
     #   resp.replication_servers_security_groups_i_ds #=> Array
     #   resp.replication_servers_security_groups_i_ds[0] #=> String
-    #   resp.source_server_id #=> String
-    #   resp.staging_area_subnet_id #=> String
+    #   resp.replication_server_instance_type #=> String
+    #   resp.use_dedicated_replication_server #=> Boolean
+    #   resp.default_large_staging_disk_type #=> String, one of "GP2", "ST1", "GP3"
+    #   resp.replicated_disks #=> Array
+    #   resp.replicated_disks[0].device_name #=> String
+    #   resp.replicated_disks[0].is_boot_disk #=> Boolean
+    #   resp.replicated_disks[0].staging_disk_type #=> String, one of "AUTO", "GP2", "IO1", "SC1", "ST1", "STANDARD", "GP3", "IO2"
+    #   resp.replicated_disks[0].iops #=> Integer
+    #   resp.replicated_disks[0].throughput #=> Integer
+    #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
+    #   resp.ebs_encryption_key_arn #=> String
+    #   resp.bandwidth_throttling #=> Integer
+    #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
+    #   resp.create_public_ip #=> Boolean
     #   resp.staging_area_tags #=> Hash
     #   resp.staging_area_tags["TagKey"] #=> String
-    #   resp.use_dedicated_replication_server #=> Boolean
     #   resp.use_fips_endpoint #=> Boolean
+    #   resp.internet_protocol #=> String, one of "IPV4", "IPV6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateReplicationConfiguration AWS API Documentation
     #
@@ -4901,22 +4979,31 @@ module Aws::Mgn
 
     # Updates multiple ReplicationConfigurationTemplates by ID.
     #
+    # @option params [required, String] :replication_configuration_template_id
+    #   Update replication configuration template template ID request.
+    #
     # @option params [String] :arn
     #   Update replication configuration template ARN request.
+    #
+    # @option params [String] :staging_area_subnet_id
+    #   Update replication configuration template Staging Area subnet ID
+    #   request.
     #
     # @option params [Boolean] :associate_default_security_group
     #   Update replication configuration template associate default
     #   Application Migration Service Security group request.
     #
-    # @option params [Integer] :bandwidth_throttling
-    #   Update replication configuration template bandwidth throttling
-    #   request.
+    # @option params [Array<String>] :replication_servers_security_groups_i_ds
+    #   Update replication configuration template Replication Server Security
+    #   groups IDs request.
     #
-    # @option params [Boolean] :create_public_ip
-    #   Update replication configuration template create Public IP request.
+    # @option params [String] :replication_server_instance_type
+    #   Update replication configuration template Replication Server instance
+    #   type request.
     #
-    # @option params [String] :data_plane_routing
-    #   Update replication configuration template data plane routing request.
+    # @option params [Boolean] :use_dedicated_replication_server
+    #   Update replication configuration template use dedicated Replication
+    #   Server request.
     #
     # @option params [String] :default_large_staging_disk_type
     #   Update replication configuration template use default large Staging
@@ -4929,93 +5016,90 @@ module Aws::Mgn
     #   Update replication configuration template EBS encryption key ARN
     #   request.
     #
-    # @option params [required, String] :replication_configuration_template_id
-    #   Update replication configuration template template ID request.
-    #
-    # @option params [String] :replication_server_instance_type
-    #   Update replication configuration template Replication Server instance
-    #   type request.
-    #
-    # @option params [Array<String>] :replication_servers_security_groups_i_ds
-    #   Update replication configuration template Replication Server Security
-    #   groups IDs request.
-    #
-    # @option params [String] :staging_area_subnet_id
-    #   Update replication configuration template Staging Area subnet ID
+    # @option params [Integer] :bandwidth_throttling
+    #   Update replication configuration template bandwidth throttling
     #   request.
+    #
+    # @option params [String] :data_plane_routing
+    #   Update replication configuration template data plane routing request.
+    #
+    # @option params [Boolean] :create_public_ip
+    #   Update replication configuration template create Public IP request.
     #
     # @option params [Hash<String,String>] :staging_area_tags
     #   Update replication configuration template Staging Area Tags request.
     #
-    # @option params [Boolean] :use_dedicated_replication_server
-    #   Update replication configuration template use dedicated Replication
-    #   Server request.
-    #
     # @option params [Boolean] :use_fips_endpoint
     #   Update replication configuration template use Fips Endpoint request.
     #
+    # @option params [String] :internet_protocol
+    #   Update replication configuration template internet protocol request.
+    #
     # @return [Types::ReplicationConfigurationTemplate] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::ReplicationConfigurationTemplate#replication_configuration_template_id #replication_configuration_template_id} => String
     #   * {Types::ReplicationConfigurationTemplate#arn #arn} => String
+    #   * {Types::ReplicationConfigurationTemplate#staging_area_subnet_id #staging_area_subnet_id} => String
     #   * {Types::ReplicationConfigurationTemplate#associate_default_security_group #associate_default_security_group} => Boolean
-    #   * {Types::ReplicationConfigurationTemplate#bandwidth_throttling #bandwidth_throttling} => Integer
-    #   * {Types::ReplicationConfigurationTemplate#create_public_ip #create_public_ip} => Boolean
-    #   * {Types::ReplicationConfigurationTemplate#data_plane_routing #data_plane_routing} => String
+    #   * {Types::ReplicationConfigurationTemplate#replication_servers_security_groups_i_ds #replication_servers_security_groups_i_ds} => Array&lt;String&gt;
+    #   * {Types::ReplicationConfigurationTemplate#replication_server_instance_type #replication_server_instance_type} => String
+    #   * {Types::ReplicationConfigurationTemplate#use_dedicated_replication_server #use_dedicated_replication_server} => Boolean
     #   * {Types::ReplicationConfigurationTemplate#default_large_staging_disk_type #default_large_staging_disk_type} => String
     #   * {Types::ReplicationConfigurationTemplate#ebs_encryption #ebs_encryption} => String
     #   * {Types::ReplicationConfigurationTemplate#ebs_encryption_key_arn #ebs_encryption_key_arn} => String
-    #   * {Types::ReplicationConfigurationTemplate#replication_configuration_template_id #replication_configuration_template_id} => String
-    #   * {Types::ReplicationConfigurationTemplate#replication_server_instance_type #replication_server_instance_type} => String
-    #   * {Types::ReplicationConfigurationTemplate#replication_servers_security_groups_i_ds #replication_servers_security_groups_i_ds} => Array&lt;String&gt;
-    #   * {Types::ReplicationConfigurationTemplate#staging_area_subnet_id #staging_area_subnet_id} => String
+    #   * {Types::ReplicationConfigurationTemplate#bandwidth_throttling #bandwidth_throttling} => Integer
+    #   * {Types::ReplicationConfigurationTemplate#data_plane_routing #data_plane_routing} => String
+    #   * {Types::ReplicationConfigurationTemplate#create_public_ip #create_public_ip} => Boolean
     #   * {Types::ReplicationConfigurationTemplate#staging_area_tags #staging_area_tags} => Hash&lt;String,String&gt;
-    #   * {Types::ReplicationConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::ReplicationConfigurationTemplate#use_dedicated_replication_server #use_dedicated_replication_server} => Boolean
     #   * {Types::ReplicationConfigurationTemplate#use_fips_endpoint #use_fips_endpoint} => Boolean
+    #   * {Types::ReplicationConfigurationTemplate#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::ReplicationConfigurationTemplate#internet_protocol #internet_protocol} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_replication_configuration_template({
+    #     replication_configuration_template_id: "ReplicationConfigurationTemplateID", # required
     #     arn: "ARN",
+    #     staging_area_subnet_id: "SubnetID",
     #     associate_default_security_group: false,
-    #     bandwidth_throttling: 1,
-    #     create_public_ip: false,
-    #     data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
+    #     replication_servers_security_groups_i_ds: ["SecurityGroupID"],
+    #     replication_server_instance_type: "EC2InstanceType",
+    #     use_dedicated_replication_server: false,
     #     default_large_staging_disk_type: "GP2", # accepts GP2, ST1, GP3
     #     ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
     #     ebs_encryption_key_arn: "ARN",
-    #     replication_configuration_template_id: "ReplicationConfigurationTemplateID", # required
-    #     replication_server_instance_type: "EC2InstanceType",
-    #     replication_servers_security_groups_i_ds: ["SecurityGroupID"],
-    #     staging_area_subnet_id: "SubnetID",
+    #     bandwidth_throttling: 1,
+    #     data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
+    #     create_public_ip: false,
     #     staging_area_tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     use_dedicated_replication_server: false,
     #     use_fips_endpoint: false,
+    #     internet_protocol: "IPV4", # accepts IPV4, IPV6
     #   })
     #
     # @example Response structure
     #
+    #   resp.replication_configuration_template_id #=> String
     #   resp.arn #=> String
+    #   resp.staging_area_subnet_id #=> String
     #   resp.associate_default_security_group #=> Boolean
-    #   resp.bandwidth_throttling #=> Integer
-    #   resp.create_public_ip #=> Boolean
-    #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
+    #   resp.replication_servers_security_groups_i_ds #=> Array
+    #   resp.replication_servers_security_groups_i_ds[0] #=> String
+    #   resp.replication_server_instance_type #=> String
+    #   resp.use_dedicated_replication_server #=> Boolean
     #   resp.default_large_staging_disk_type #=> String, one of "GP2", "ST1", "GP3"
     #   resp.ebs_encryption #=> String, one of "DEFAULT", "CUSTOM"
     #   resp.ebs_encryption_key_arn #=> String
-    #   resp.replication_configuration_template_id #=> String
-    #   resp.replication_server_instance_type #=> String
-    #   resp.replication_servers_security_groups_i_ds #=> Array
-    #   resp.replication_servers_security_groups_i_ds[0] #=> String
-    #   resp.staging_area_subnet_id #=> String
+    #   resp.bandwidth_throttling #=> Integer
+    #   resp.data_plane_routing #=> String, one of "PRIVATE_IP", "PUBLIC_IP"
+    #   resp.create_public_ip #=> Boolean
     #   resp.staging_area_tags #=> Hash
     #   resp.staging_area_tags["TagKey"] #=> String
+    #   resp.use_fips_endpoint #=> Boolean
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.use_dedicated_replication_server #=> Boolean
-    #   resp.use_fips_endpoint #=> Boolean
+    #   resp.internet_protocol #=> String, one of "IPV4", "IPV6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateReplicationConfigurationTemplate AWS API Documentation
     #
@@ -5031,107 +5115,108 @@ module Aws::Mgn
     # @option params [String] :account_id
     #   Update Source Server request account ID.
     #
-    # @option params [Types::SourceServerConnectorAction] :connector_action
-    #   Update Source Server request connector action.
-    #
     # @option params [required, String] :source_server_id
     #   Update Source Server request source server ID.
     #
+    # @option params [Types::SourceServerConnectorAction] :connector_action
+    #   Update Source Server request connector action.
+    #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::SourceServer#application_id #application_id} => String
-    #   * {Types::SourceServer#arn #arn} => String
-    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
-    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
-    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
-    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
-    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
-    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
-    #   * {Types::SourceServer#replication_type #replication_type} => String
-    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
+    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
+    #   * {Types::SourceServer#replication_type #replication_type} => String
     #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
+    #   * {Types::SourceServer#application_id #application_id} => String
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_source_server({
     #     account_id: "AccountID",
-    #     connector_action: {
-    #       connector_arn: "ConnectorArn",
-    #       credentials_secret_arn: "SecretArn",
-    #     },
     #     source_server_id: "SourceServerID", # required
+    #     connector_action: {
+    #       credentials_secret_arn: "SecretArn",
+    #       connector_arn: "ConnectorArn",
+    #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.application_id #=> String
+    #   resp.source_server_id #=> String
     #   resp.arn #=> String
-    #   resp.connector_action.connector_arn #=> String
-    #   resp.connector_action.credentials_secret_arn #=> String
-    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
-    #   resp.data_replication_info.data_replication_error.raw_error #=> String
-    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.launched_instance.ec2_instance_id #=> String
+    #   resp.launched_instance.job_id #=> String
+    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
+    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.eta_date_time #=> String
+    #   resp.data_replication_info.replicated_disks #=> Array
+    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
     #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.steps #=> Array
     #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
-    #   resp.data_replication_info.eta_date_time #=> String
-    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
+    #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
-    #   resp.data_replication_info.replicated_disks #=> Array
-    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
-    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
-    #   resp.fqdn_for_action_framework #=> String
-    #   resp.is_archived #=> Boolean
-    #   resp.launched_instance.ec2_instance_id #=> String
-    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
-    #   resp.launched_instance.job_id #=> String
+    #   resp.data_replication_info.replicator_id #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
-    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
-    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
-    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.last_seen_by_service_date_time #=> String
-    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
+    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
     #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
-    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
-    #   resp.source_properties.cpus #=> Array
-    #   resp.source_properties.cpus[0].cores #=> Integer
-    #   resp.source_properties.cpus[0].model_name #=> String
-    #   resp.source_properties.disks #=> Array
-    #   resp.source_properties.disks[0].bytes #=> Integer
-    #   resp.source_properties.disks[0].device_name #=> String
-    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.recommended_instance_type #=> String
     #   resp.source_properties.identification_hints.fqdn #=> String
     #   resp.source_properties.identification_hints.hostname #=> String
-    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
-    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.network_interfaces #=> Array
+    #   resp.source_properties.network_interfaces[0].mac_address #=> String
     #   resp.source_properties.network_interfaces[0].ips #=> Array
     #   resp.source_properties.network_interfaces[0].ips[0] #=> String
     #   resp.source_properties.network_interfaces[0].is_primary #=> Boolean
-    #   resp.source_properties.network_interfaces[0].mac_address #=> String
-    #   resp.source_properties.os.full_string #=> String
+    #   resp.source_properties.disks #=> Array
+    #   resp.source_properties.disks[0].device_name #=> String
+    #   resp.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_properties.cpus #=> Array
+    #   resp.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_properties.cpus[0].model_name #=> String
     #   resp.source_properties.ram_bytes #=> Integer
-    #   resp.source_properties.recommended_instance_type #=> String
-    #   resp.source_server_id #=> String
-    #   resp.tags #=> Hash
-    #   resp.tags["TagKey"] #=> String
-    #   resp.user_provided_id #=> String
+    #   resp.source_properties.os.full_string #=> String
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.vcenter_client_id #=> String
+    #   resp.application_id #=> String
+    #   resp.user_provided_id #=> String
+    #   resp.fqdn_for_action_framework #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
+    #   resp.connector_action.connector_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateSourceServer AWS API Documentation
     #
@@ -5145,107 +5230,110 @@ module Aws::Mgn
     # Allows you to change between the AGENT\_BASED replication type and the
     # SNAPSHOT\_SHIPPING replication type.
     #
-    # @option params [String] :account_id
-    #   Account ID on which to update replication type.
-    #
-    # @option params [required, String] :replication_type
-    #   Replication type to which to update source server.
+    # SNAPSHOT\_SHIPPING should be used for agentless replication.
     #
     # @option params [required, String] :source_server_id
     #   ID of source server on which to update replication type.
     #
+    # @option params [required, String] :replication_type
+    #   Replication type to which to update source server.
+    #
+    # @option params [String] :account_id
+    #   Account ID on which to update replication type.
+    #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::SourceServer#application_id #application_id} => String
-    #   * {Types::SourceServer#arn #arn} => String
-    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
-    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
-    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
-    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
-    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
-    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
-    #   * {Types::SourceServer#replication_type #replication_type} => String
-    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
+    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
+    #   * {Types::SourceServer#replication_type #replication_type} => String
     #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
+    #   * {Types::SourceServer#application_id #application_id} => String
+    #   * {Types::SourceServer#user_provided_id #user_provided_id} => String
+    #   * {Types::SourceServer#fqdn_for_action_framework #fqdn_for_action_framework} => String
+    #   * {Types::SourceServer#connector_action #connector_action} => Types::SourceServerConnectorAction
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_source_server_replication_type({
-    #     account_id: "AccountID",
-    #     replication_type: "AGENT_BASED", # required, accepts AGENT_BASED, SNAPSHOT_SHIPPING
     #     source_server_id: "SourceServerID", # required
+    #     replication_type: "AGENT_BASED", # required, accepts AGENT_BASED, SNAPSHOT_SHIPPING
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
-    #   resp.application_id #=> String
+    #   resp.source_server_id #=> String
     #   resp.arn #=> String
-    #   resp.connector_action.connector_arn #=> String
-    #   resp.connector_action.credentials_secret_arn #=> String
-    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
-    #   resp.data_replication_info.data_replication_error.raw_error #=> String
-    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.is_archived #=> Boolean
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.launched_instance.ec2_instance_id #=> String
+    #   resp.launched_instance.job_id #=> String
+    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
+    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.eta_date_time #=> String
+    #   resp.data_replication_info.replicated_disks #=> Array
+    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
     #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.steps #=> Array
     #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
-    #   resp.data_replication_info.eta_date_time #=> String
-    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
+    #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.last_snapshot_date_time #=> String
-    #   resp.data_replication_info.replicated_disks #=> Array
-    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
-    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
-    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
-    #   resp.fqdn_for_action_framework #=> String
-    #   resp.is_archived #=> Boolean
-    #   resp.launched_instance.ec2_instance_id #=> String
-    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
-    #   resp.launched_instance.job_id #=> String
+    #   resp.data_replication_info.replicator_id #=> String
     #   resp.life_cycle.added_to_service_date_time #=> String
-    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.first_byte_date_time #=> String
-    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
-    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
-    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.elapsed_replication_duration #=> String
     #   resp.life_cycle.last_seen_by_service_date_time #=> String
-    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
+    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
     #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED", "PENDING_INSTALLATION"
-    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
-    #   resp.source_properties.cpus #=> Array
-    #   resp.source_properties.cpus[0].cores #=> Integer
-    #   resp.source_properties.cpus[0].model_name #=> String
-    #   resp.source_properties.disks #=> Array
-    #   resp.source_properties.disks[0].bytes #=> Integer
-    #   resp.source_properties.disks[0].device_name #=> String
-    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.recommended_instance_type #=> String
     #   resp.source_properties.identification_hints.fqdn #=> String
     #   resp.source_properties.identification_hints.hostname #=> String
-    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
-    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.network_interfaces #=> Array
+    #   resp.source_properties.network_interfaces[0].mac_address #=> String
     #   resp.source_properties.network_interfaces[0].ips #=> Array
     #   resp.source_properties.network_interfaces[0].ips[0] #=> String
     #   resp.source_properties.network_interfaces[0].is_primary #=> Boolean
-    #   resp.source_properties.network_interfaces[0].mac_address #=> String
-    #   resp.source_properties.os.full_string #=> String
+    #   resp.source_properties.disks #=> Array
+    #   resp.source_properties.disks[0].device_name #=> String
+    #   resp.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_properties.cpus #=> Array
+    #   resp.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_properties.cpus[0].model_name #=> String
     #   resp.source_properties.ram_bytes #=> Integer
-    #   resp.source_properties.recommended_instance_type #=> String
-    #   resp.source_server_id #=> String
-    #   resp.tags #=> Hash
-    #   resp.tags["TagKey"] #=> String
-    #   resp.user_provided_id #=> String
+    #   resp.source_properties.os.full_string #=> String
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.vcenter_client_id #=> String
+    #   resp.application_id #=> String
+    #   resp.user_provided_id #=> String
+    #   resp.fqdn_for_action_framework #=> String
+    #   resp.connector_action.credentials_secret_arn #=> String
+    #   resp.connector_action.connector_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateSourceServerReplicationType AWS API Documentation
     #
@@ -5258,55 +5346,55 @@ module Aws::Mgn
 
     # Update wave.
     #
-    # @option params [String] :account_id
-    #   Account ID.
-    #
-    # @option params [String] :description
-    #   Wave description.
+    # @option params [required, String] :wave_id
+    #   Wave ID.
     #
     # @option params [String] :name
     #   Wave name.
     #
-    # @option params [required, String] :wave_id
-    #   Wave ID.
+    # @option params [String] :description
+    #   Wave description.
+    #
+    # @option params [String] :account_id
+    #   Account ID.
     #
     # @return [Types::Wave] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::Wave#wave_id #wave_id} => String
     #   * {Types::Wave#arn #arn} => String
-    #   * {Types::Wave#creation_date_time #creation_date_time} => String
+    #   * {Types::Wave#name #name} => String
     #   * {Types::Wave#description #description} => String
     #   * {Types::Wave#is_archived #is_archived} => Boolean
-    #   * {Types::Wave#last_modified_date_time #last_modified_date_time} => String
-    #   * {Types::Wave#name #name} => String
-    #   * {Types::Wave#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Wave#wave_aggregated_status #wave_aggregated_status} => Types::WaveAggregatedStatus
-    #   * {Types::Wave#wave_id #wave_id} => String
+    #   * {Types::Wave#creation_date_time #creation_date_time} => String
+    #   * {Types::Wave#last_modified_date_time #last_modified_date_time} => String
+    #   * {Types::Wave#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_wave({
-    #     account_id: "AccountID",
-    #     description: "WaveDescription",
-    #     name: "WaveName",
     #     wave_id: "WaveID", # required
+    #     name: "WaveName",
+    #     description: "WaveDescription",
+    #     account_id: "AccountID",
     #   })
     #
     # @example Response structure
     #
+    #   resp.wave_id #=> String
     #   resp.arn #=> String
-    #   resp.creation_date_time #=> String
+    #   resp.name #=> String
     #   resp.description #=> String
     #   resp.is_archived #=> Boolean
+    #   resp.wave_aggregated_status.last_update_date_time #=> String
+    #   resp.wave_aggregated_status.replication_started_date_time #=> String
+    #   resp.wave_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
+    #   resp.wave_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.wave_aggregated_status.total_applications #=> Integer
+    #   resp.creation_date_time #=> String
     #   resp.last_modified_date_time #=> String
-    #   resp.name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.wave_aggregated_status.health_status #=> String, one of "HEALTHY", "LAGGING", "ERROR"
-    #   resp.wave_aggregated_status.last_update_date_time #=> String
-    #   resp.wave_aggregated_status.progress_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
-    #   resp.wave_aggregated_status.replication_started_date_time #=> String
-    #   resp.wave_aggregated_status.total_applications #=> Integer
-    #   resp.wave_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateWave AWS API Documentation
     #
@@ -5335,7 +5423,7 @@ module Aws::Mgn
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mgn'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

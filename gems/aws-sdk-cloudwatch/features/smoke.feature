@@ -18,3 +18,15 @@ Feature: Smoke tests for CloudWatch
 {"namespace":"AWS/EC2"}
       """
     Then I expect an error was not raised
+
+  @cloudwatch @smoke @query-compatibility
+  Scenario: AmbiguousErrorResolution
+    Given I create a 'Aws::CloudWatch' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'get_dashboard' with params:
+      """
+{"dashboard_name":"foo"}
+      """
+    Then I expect a 'Aws::CloudWatch::Errors::ResourceNotFound' was raised

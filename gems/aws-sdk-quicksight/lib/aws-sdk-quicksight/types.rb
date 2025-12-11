@@ -3309,6 +3309,15 @@ module Aws::QuickSight
     #   visibility) for a color that is used in a bar chart.
     #   @return [Types::ChartAxisLabelOptions]
     #
+    # @!attribute [rw] default_series_settings
+    #   The options that determine the default presentation of all bar
+    #   series in `BarChartVisual`.
+    #   @return [Types::BarChartDefaultSeriesSettings]
+    #
+    # @!attribute [rw] series
+    #   The series item configuration of a `BarChartVisual`.
+    #   @return [Array<Types::BarSeriesItem>]
+    #
     # @!attribute [rw] legend
     #   The legend display setup of the visual.
     #   @return [Types::LegendOptions]
@@ -3348,12 +3357,34 @@ module Aws::QuickSight
       :value_axis,
       :value_label_options,
       :color_label_options,
+      :default_series_settings,
+      :series,
       :legend,
       :data_labels,
       :tooltip,
       :reference_lines,
       :contribution_analysis_defaults,
       :interactions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options that determine the default presentation of all bar series
+    # in `BarChartVisual`.
+    #
+    # @!attribute [rw] decal_settings
+    #   Decal settings for all bar series in the visual.
+    #   @return [Types::DecalSettings]
+    #
+    # @!attribute [rw] border_settings
+    #   Border settings for all bar series in the visual.
+    #   @return [Types::BorderSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BarChartDefaultSeriesSettings AWS API Documentation
+    #
+    class BarChartDefaultSeriesSettings < Struct.new(
+      :decal_settings,
+      :border_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3371,6 +3402,25 @@ module Aws::QuickSight
     #
     class BarChartFieldWells < Struct.new(
       :bar_chart_aggregated_field_wells)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Options that determine the presentation of a bar series in the visual.
+    #
+    # @!attribute [rw] decal_settings
+    #   Decal settings for the bar series.
+    #   @return [Types::DecalSettings]
+    #
+    # @!attribute [rw] border_settings
+    #   Border settings for the bar series.
+    #   @return [Types::BorderSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BarChartSeriesSettings AWS API Documentation
+    #
+    class BarChartSeriesSettings < Struct.new(
+      :decal_settings,
+      :border_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3481,6 +3531,28 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The series item configuration of a `BarChartVisual`.
+    #
+    # This is a union type structure. For this structure to be valid, only
+    # one of the attributes can be defined.
+    #
+    # @!attribute [rw] field_bar_series_item
+    #   The field series item configuration of a `BarChartVisual`.
+    #   @return [Types::FieldBarSeriesItem]
+    #
+    # @!attribute [rw] data_field_bar_series_item
+    #   The data field series item configuration of a `BarChartVisual`.
+    #   @return [Types::DataFieldBarSeriesItem]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BarSeriesItem AWS API Documentation
+    #
+    class BarSeriesItem < Struct.new(
+      :field_bar_series_item,
+      :data_field_bar_series_item)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3867,6 +3939,31 @@ module Aws::QuickSight
     #
     class BookmarksConfigurations < Struct.new(
       :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Border settings configuration for visual elements, including
+    # visibility, width, and color properties.
+    #
+    # @!attribute [rw] border_visibility
+    #   Visibility setting for the border.
+    #   @return [String]
+    #
+    # @!attribute [rw] border_width
+    #   Width of the border. Valid range is from 1px to 8px.
+    #   @return [String]
+    #
+    # @!attribute [rw] border_color
+    #   Color of the border.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BorderSettings AWS API Documentation
+    #
+    class BorderSettings < Struct.new(
+      :border_visibility,
+      :border_width,
+      :border_color)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5148,13 +5245,18 @@ module Aws::QuickSight
     #   The color configurations of the column.
     #   @return [Types::ColorsConfiguration]
     #
+    # @!attribute [rw] decal_settings_configuration
+    #   Decal configuration of the column.
+    #   @return [Types::DecalSettingsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ColumnConfiguration AWS API Documentation
     #
     class ColumnConfiguration < Struct.new(
       :column,
       :format_configuration,
       :role,
-      :colors_configuration)
+      :colors_configuration,
+      :decal_settings_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5509,6 +5611,15 @@ module Aws::QuickSight
     #   visibility) of a combo chart's color field well.
     #   @return [Types::ChartAxisLabelOptions]
     #
+    # @!attribute [rw] default_series_settings
+    #   The options that determine the default presentation of all series in
+    #   `ComboChartVisual`.
+    #   @return [Types::ComboChartDefaultSeriesSettings]
+    #
+    # @!attribute [rw] series
+    #   The series item configuration of a `ComboChartVisual`.
+    #   @return [Array<Types::ComboSeriesItem>]
+    #
     # @!attribute [rw] legend
     #   The legend display setup of the visual.
     #   @return [Types::LegendOptions]
@@ -5555,6 +5666,8 @@ module Aws::QuickSight
       :secondary_y_axis_label_options,
       :single_axis_options,
       :color_label_options,
+      :default_series_settings,
+      :series,
       :legend,
       :bar_data_labels,
       :line_data_labels,
@@ -5562,6 +5675,36 @@ module Aws::QuickSight
       :reference_lines,
       :visual_palette,
       :interactions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options that determine the default presentation of all series in
+    # `ComboChartVisual`.
+    #
+    # @!attribute [rw] line_style_settings
+    #   Line styles options for all line series in the visual.
+    #   @return [Types::LineChartLineStyleSettings]
+    #
+    # @!attribute [rw] marker_style_settings
+    #   Marker styles options for all line series in the visual.
+    #   @return [Types::LineChartMarkerStyleSettings]
+    #
+    # @!attribute [rw] decal_settings
+    #   Decal settings for all series in the visual.
+    #   @return [Types::DecalSettings]
+    #
+    # @!attribute [rw] border_settings
+    #   Border settings for all bar series in the visual.
+    #   @return [Types::BorderSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ComboChartDefaultSeriesSettings AWS API Documentation
+    #
+    class ComboChartDefaultSeriesSettings < Struct.new(
+      :line_style_settings,
+      :marker_style_settings,
+      :decal_settings,
+      :border_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5581,6 +5724,35 @@ module Aws::QuickSight
     #
     class ComboChartFieldWells < Struct.new(
       :combo_chart_aggregated_field_wells)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Options that determine the presentation of a series in the visual.
+    #
+    # @!attribute [rw] line_style_settings
+    #   Line styles options for the line series in the visual.
+    #   @return [Types::LineChartLineStyleSettings]
+    #
+    # @!attribute [rw] marker_style_settings
+    #   Marker styles options for the line series in the visual.
+    #   @return [Types::LineChartMarkerStyleSettings]
+    #
+    # @!attribute [rw] decal_settings
+    #   Decal settings for the series in the visual.
+    #   @return [Types::DecalSettings]
+    #
+    # @!attribute [rw] border_settings
+    #   Border settings for the bar series in the visual.
+    #   @return [Types::BorderSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ComboChartSeriesSettings AWS API Documentation
+    #
+    class ComboChartSeriesSettings < Struct.new(
+      :line_style_settings,
+      :marker_style_settings,
+      :decal_settings,
+      :border_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5669,6 +5841,28 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The series item configuration of a `ComboChartVisual`.
+    #
+    # This is a union type structure. For this structure to be valid, only
+    # one of the attributes can be defined.
+    #
+    # @!attribute [rw] field_combo_series_item
+    #   The field series item configuration of a `ComboChartVisual`.
+    #   @return [Types::FieldComboSeriesItem]
+    #
+    # @!attribute [rw] data_field_combo_series_item
+    #   The data field series item configuration of a `ComboChartVisual`.
+    #   @return [Types::DataFieldComboSeriesItem]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ComboSeriesItem AWS API Documentation
+    #
+    class ComboSeriesItem < Struct.new(
+      :field_combo_series_item,
+      :data_field_combo_series_item)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6114,6 +6308,25 @@ module Aws::QuickSight
     class ContributionAnalysisTimeRanges < Struct.new(
       :start_range,
       :end_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The preference coordinate for the geocode preference.
+    #
+    # @!attribute [rw] latitude
+    #   The latitude coordinate value for the geocode preference.
+    #   @return [Float]
+    #
+    # @!attribute [rw] longitude
+    #   The longitude coordinate value for the geocode preference.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Coordinate AWS API Documentation
+    #
+    class Coordinate < Struct.new(
+      :latitude,
+      :longitude)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9003,6 +9216,22 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The options that define customizations available to dashboard readers
+    # for a specific visual
+    #
+    # @!attribute [rw] fields_configuration
+    #   The configuration that controls field customization options
+    #   available to dashboard readers for a visual.
+    #   @return [Types::VisualCustomizationFieldsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DashboardCustomizationVisualOptions AWS API Documentation
+    #
+    class DashboardCustomizationVisualOptions < Struct.new(
+      :fields_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Dashboard error.
     #
     # @!attribute [rw] type
@@ -9636,6 +9865,60 @@ module Aws::QuickSight
       :min_max_gradient,
       :empty_fill_color)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data field series item configuration of a `BarChartVisual`.
+    #
+    # @!attribute [rw] field_id
+    #   Field ID of the field that you are setting the series configuration
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_value
+    #   Field value of the field that you are setting the series
+    #   configuration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   Options that determine the presentation of bar series associated to
+    #   the field.
+    #   @return [Types::BarChartSeriesSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataFieldBarSeriesItem AWS API Documentation
+    #
+    class DataFieldBarSeriesItem < Struct.new(
+      :field_id,
+      :field_value,
+      :settings)
+      SENSITIVE = [:field_value]
+      include Aws::Structure
+    end
+
+    # The data field series item configuration of a `ComboChartVisual`.
+    #
+    # @!attribute [rw] field_id
+    #   Field ID of the field that you are setting the series configuration
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_value
+    #   Field value of the field that you are setting the series
+    #   configuration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   Options that determine the presentation of series associated to the
+    #   field.
+    #   @return [Types::ComboChartSeriesSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataFieldComboSeriesItem AWS API Documentation
+    #
+    class DataFieldComboSeriesItem < Struct.new(
+      :field_id,
+      :field_value,
+      :settings)
+      SENSITIVE = [:field_value]
       include Aws::Structure
     end
 
@@ -10851,6 +11134,10 @@ module Aws::QuickSight
     #   data source in Amazon Secrets Manager.
     #   @return [String]
     #
+    # @!attribute [rw] key_pair_credentials
+    #   The credentials for connecting using key-pair.
+    #   @return [Types::KeyPairCredentials]
+    #
     # @!attribute [rw] web_proxy_credentials
     #   The credentials for connecting through a web proxy server.
     #   @return [Types::WebProxyCredentials]
@@ -10861,6 +11148,7 @@ module Aws::QuickSight
       :credential_pair,
       :copy_source_arn,
       :secret_arn,
+      :key_pair_credentials,
       :web_proxy_credentials)
       SENSITIVE = []
       include Aws::Structure
@@ -11627,6 +11915,108 @@ module Aws::QuickSight
       :value_when_unset_option,
       :custom_value)
       SENSITIVE = [:custom_value]
+      include Aws::Structure
+    end
+
+    # Decal settings for accessibility features that define visual patterns
+    # and styling for data elements.
+    #
+    # @!attribute [rw] element_value
+    #   Field value of the field that you are setting the decal pattern to.
+    #   Applicable only for field level settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] decal_visibility
+    #   Visibility setting for the decal pattern.
+    #   @return [String]
+    #
+    # @!attribute [rw] decal_color
+    #   Color configuration for the decal pattern.
+    #   @return [String]
+    #
+    # @!attribute [rw] decal_pattern_type
+    #   Type of pattern used for the decal, such as solid, diagonal, or
+    #   circular patterns in various sizes.
+    #
+    #   * `SOLID`: Solid fill pattern.
+    #
+    #   * `DIAGONAL_SMALL`: Small diagonal stripes pattern.
+    #
+    #   * `DIAGONAL_MEDIUM`: Medium diagonal stripes pattern.
+    #
+    #   * `DIAGONAL_LARGE`: Large diagonal stripes pattern.
+    #
+    #   * `DIAGONAL_OPPOSITE_SMALL`: Small cross-diagonal stripes pattern.
+    #
+    #   * `DIAGONAL_OPPOSITE_MEDIUM`: Medium cross-diagonal stripes pattern.
+    #
+    #   * `DIAGONAL_OPPOSITE_LARGE`: Large cross-diagonal stripes pattern.
+    #
+    #   * `CIRCLE_SMALL`: Small circle pattern.
+    #
+    #   * `CIRCLE_MEDIUM`: Medium circle pattern.
+    #
+    #   * `CIRCLE_LARGE`: Large circle pattern.
+    #
+    #   * `DIAMOND_SMALL`: Small diamonds pattern.
+    #
+    #   * `DIAMOND_MEDIUM`: Medium diamonds pattern.
+    #
+    #   * `DIAMOND_LARGE`: Large diamonds pattern.
+    #
+    #   * `DIAMOND_GRID_SMALL`: Small diamond grid pattern.
+    #
+    #   * `DIAMOND_GRID_MEDIUM`: Medium diamond grid pattern.
+    #
+    #   * `DIAMOND_GRID_LARGE`: Large diamond grid pattern.
+    #
+    #   * `CHECKERBOARD_SMALL`: Small checkerboard pattern.
+    #
+    #   * `CHECKERBOARD_MEDIUM`: Medium checkerboard pattern.
+    #
+    #   * `CHECKERBOARD_LARGE`: Large checkerboard pattern.
+    #
+    #   * `TRIANGLE_SMALL`: Small triangles pattern.
+    #
+    #   * `TRIANGLE_MEDIUM`: Medium triangles pattern.
+    #
+    #   * `TRIANGLE_LARGE`: Large triangles pattern.
+    #   @return [String]
+    #
+    # @!attribute [rw] decal_style_type
+    #   Style type for the decal, which can be either manual or automatic.
+    #   This field is only applicable for line series.
+    #
+    #   * `Manual`: Apply manual line and marker configuration for line
+    #     series.
+    #
+    #   * `Auto`: Apply automatic line and marker configuration for line
+    #     series.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DecalSettings AWS API Documentation
+    #
+    class DecalSettings < Struct.new(
+      :element_value,
+      :decal_visibility,
+      :decal_color,
+      :decal_pattern_type,
+      :decal_style_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Decal settings configuration for a column
+    #
+    # @!attribute [rw] custom_decal_settings
+    #   A list of up to 50 decal settings.
+    #   @return [Array<Types::DecalSettings>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DecalSettingsConfiguration AWS API Documentation
+    #
+    class DecalSettingsConfiguration < Struct.new(
+      :custom_decal_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -17227,6 +17617,27 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The field series item configuration of a `BarChartVisual`.
+    #
+    # @!attribute [rw] field_id
+    #   Field ID of the field for which you are setting the series
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   Options that determine the presentation of bar series associated to
+    #   the field.
+    #   @return [Types::BarChartSeriesSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FieldBarSeriesItem AWS API Documentation
+    #
+    class FieldBarSeriesItem < Struct.new(
+      :field_id,
+      :settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The setup for the detailed tooltip.
     #
     # @!attribute [rw] aggregation_visibility
@@ -17252,6 +17663,27 @@ module Aws::QuickSight
       :aggregation_visibility,
       :tooltip_title_type,
       :tooltip_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The field series item configuration of a `ComboChartVisual`.
+    #
+    # @!attribute [rw] field_id
+    #   Field ID of the field for which you are setting the series
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   Options that determine the presentation of series associated to the
+    #   field.
+    #   @return [Types::ComboChartSeriesSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FieldComboSeriesItem AWS API Documentation
+    #
+    class FieldComboSeriesItem < Struct.new(
+      :field_id,
+      :settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17584,6 +18016,10 @@ module Aws::QuickSight
     #   The alt text for the visual.
     #   @return [String]
     #
+    # @!attribute [rw] geocoding_preferences
+    #   The geocoding prefences for filled map visual.
+    #   @return [Array<Types::GeocodePreference>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilledMapVisual AWS API Documentation
     #
     class FilledMapVisual < Struct.new(
@@ -17594,7 +18030,8 @@ module Aws::QuickSight
       :conditional_formatting,
       :column_hierarchies,
       :actions,
-      :visual_content_alt_text)
+      :visual_content_alt_text,
+      :geocoding_preferences)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19778,6 +20215,88 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The geocode preference.
+    #
+    # @!attribute [rw] request_key
+    #   The unique request key for the geocode preference.
+    #   @return [Types::GeocoderHierarchy]
+    #
+    # @!attribute [rw] preference
+    #   The preference definition for the geocode preference.
+    #   @return [Types::GeocodePreferenceValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GeocodePreference AWS API Documentation
+    #
+    class GeocodePreference < Struct.new(
+      :request_key,
+      :preference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The preference value for the geocode preference.
+    #
+    # @note GeocodePreferenceValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note GeocodePreferenceValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GeocodePreferenceValue corresponding to the set member.
+    #
+    # @!attribute [rw] geocoder_hierarchy
+    #   The preference hierarchy for the geocode preference.
+    #   @return [Types::GeocoderHierarchy]
+    #
+    # @!attribute [rw] coordinate
+    #   The preference coordinate for the geocode preference.
+    #   @return [Types::Coordinate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GeocodePreferenceValue AWS API Documentation
+    #
+    class GeocodePreferenceValue < Struct.new(
+      :geocoder_hierarchy,
+      :coordinate,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class GeocoderHierarchy < GeocodePreferenceValue; end
+      class Coordinate < GeocodePreferenceValue; end
+      class Unknown < GeocodePreferenceValue; end
+    end
+
+    # The preference hierarchy for the geocode preference.
+    #
+    # @!attribute [rw] country
+    #   The country value for the preference hierarchy.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state/region value for the preference hierarchy.
+    #   @return [String]
+    #
+    # @!attribute [rw] county
+    #   The county/district value for the preference hierarchy.
+    #   @return [String]
+    #
+    # @!attribute [rw] city
+    #   The city value for the preference hierarchy.
+    #   @return [String]
+    #
+    # @!attribute [rw] post_code
+    #   The postcode value for the preference hierarchy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GeocoderHierarchy AWS API Documentation
+    #
+    class GeocoderHierarchy < Struct.new(
+      :country,
+      :state,
+      :county,
+      :city,
+      :post_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The definition for a categorical color.
     #
     # @!attribute [rw] category_data_colors
@@ -20435,6 +20954,10 @@ module Aws::QuickSight
     #   The alt text for the visual.
     #   @return [String]
     #
+    # @!attribute [rw] geocoding_preferences
+    #   The geocoding prefences for geospatial map.
+    #   @return [Array<Types::GeocodePreference>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GeospatialMapVisual AWS API Documentation
     #
     class GeospatialMapVisual < Struct.new(
@@ -20444,7 +20967,8 @@ module Aws::QuickSight
       :chart_configuration,
       :column_hierarchies,
       :actions,
-      :visual_content_alt_text)
+      :visual_content_alt_text,
+      :geocoding_preferences)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20891,6 +21415,70 @@ module Aws::QuickSight
       :permissions,
       :request_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # ///////////////////////// /////////////////////////
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the Amazon Web Services account that the user whose
+    #   identity context you want to retrieve is in. Currently, you use the
+    #   ID for the Amazon Web Services account that contains your Quick
+    #   Sight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_identifier
+    #   The identifier for the user whose identity context you want to
+    #   retrieve.
+    #   @return [Types::UserIdentifier]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the user that you want to get identity context for.
+    #   This parameter is required when the UserIdentifier is specified
+    #   using Email or UserName.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_expires_at
+    #   The timestamp at which the session will expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetIdentityContextRequest AWS API Documentation
+    #
+    class GetIdentityContextRequest < Struct.new(
+      :aws_account_id,
+      :user_identifier,
+      :namespace,
+      :session_expires_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   The identity context information for the user. This is an identity
+    #   token that should be used as the ContextAssertion parameter in the
+    #   [STS AssumeRole API][1] call to obtain identity enhanced AWS
+    #   credentials.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetIdentityContextResponse AWS API Documentation
+    #
+    class GetIdentityContextResponse < Struct.new(
+      :status,
+      :request_id,
+      :context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23128,6 +23716,31 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The combination of username, private key and passphrase that are used
+    # as credentials.
+    #
+    # @!attribute [rw] key_pair_username
+    #   Username
+    #   @return [String]
+    #
+    # @!attribute [rw] private_key
+    #   PrivateKey
+    #   @return [String]
+    #
+    # @!attribute [rw] private_key_passphrase
+    #   PrivateKeyPassphrase
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KeyPairCredentials AWS API Documentation
+    #
+    class KeyPairCredentials < Struct.new(
+      :key_pair_username,
+      :private_key,
+      :private_key_passphrase)
+      SENSITIVE = [:private_key, :private_key_passphrase]
+      include Aws::Structure
+    end
+
     # The share label options for the labels.
     #
     # @!attribute [rw] visibility
@@ -23569,12 +24182,17 @@ module Aws::QuickSight
     #   Marker styles options for all line series in the visual.
     #   @return [Types::LineChartMarkerStyleSettings]
     #
+    # @!attribute [rw] decal_settings
+    #   Decal settings options for all line series in the visual.
+    #   @return [Types::DecalSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/LineChartDefaultSeriesSettings AWS API Documentation
     #
     class LineChartDefaultSeriesSettings < Struct.new(
       :axis_binding,
       :line_style_settings,
-      :marker_style_settings)
+      :marker_style_settings,
+      :decal_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23686,11 +24304,16 @@ module Aws::QuickSight
     #   Marker styles options for a line series in `LineChartVisual`.
     #   @return [Types::LineChartMarkerStyleSettings]
     #
+    # @!attribute [rw] decal_settings
+    #   Decal settings for a line series in `LineChartVisual`.
+    #   @return [Types::DecalSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/LineChartSeriesSettings AWS API Documentation
     #
     class LineChartSeriesSettings < Struct.new(
       :line_style_settings,
-      :marker_style_settings)
+      :marker_style_settings,
+      :decal_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28394,6 +29017,11 @@ module Aws::QuickSight
     #   The paginated report options for a pivot table visual.
     #   @return [Types::PivotTablePaginatedReportOptions]
     #
+    # @!attribute [rw] dashboard_customization_visual_options
+    #   The options that define customizations available to dashboard
+    #   readers for a specific visual
+    #   @return [Types::DashboardCustomizationVisualOptions]
+    #
     # @!attribute [rw] interactions
     #   The general visual interactions setup for a visual.
     #   @return [Types::VisualInteractionOptions]
@@ -28407,6 +29035,7 @@ module Aws::QuickSight
       :total_options,
       :field_options,
       :paginated_report_options,
+      :dashboard_customization_visual_options,
       :interactions)
       SENSITIVE = []
       include Aws::Structure
@@ -31053,6 +31682,26 @@ module Aws::QuickSight
     class RegisteredUserQuickSightConsoleEmbeddingConfiguration < Struct.new(
       :initial_path,
       :feature_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains information about files that are requested
+    # for registered user during a `StartDashboardSnapshotJob` API call.
+    #
+    # @!attribute [rw] file_groups
+    #   A list of `SnapshotJobResultFileGroup` objects that contain
+    #   information on the files that are requested for registered user
+    #   during a `StartDashboardSnapshotJob` API call. If the job succeeds,
+    #   these objects contain the location where the snapshot artifacts are
+    #   stored. If the job fails, the objects contain information about the
+    #   error that caused the job to fail.
+    #   @return [Array<Types::SnapshotJobResultFileGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserSnapshotJobResult AWS API Documentation
+    #
+    class RegisteredUserSnapshotJobResult < Struct.new(
+      :file_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34060,6 +34709,12 @@ module Aws::QuickSight
     # An object that contains information on the error that caused the
     # snapshot job to fail.
     #
+    # For more information, see [DescribeDashboardSnapshotJobResult API][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeDashboardSnapshotJobResult.html
+    #
     # @!attribute [rw] error_message
     #   The error message.
     #   @return [String]
@@ -34088,10 +34743,17 @@ module Aws::QuickSight
     #   call.
     #   @return [Array<Types::AnonymousUserSnapshotJobResult>]
     #
+    # @!attribute [rw] registered_users
+    #   A list of `RegisteredUserSnapshotJobResult` objects that contain
+    #   information about files that are requested for registered user
+    #   during a `StartDashboardSnapshotJob` API call.
+    #   @return [Array<Types::RegisteredUserSnapshotJobResult>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotJobResult AWS API Documentation
     #
     class SnapshotJobResult < Struct.new(
-      :anonymous_users)
+      :anonymous_users,
+      :registered_users)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34181,6 +34843,10 @@ module Aws::QuickSight
 
     # A structure that contains information about the users that the
     # dashboard snapshot is generated for.
+    #
+    # When using identity-enhanced session credentials, set the
+    # UserConfiguration request attribute to null. Otherwise, the request
+    # will be invalid.
     #
     # @!attribute [rw] anonymous_users
     #   An array of records that describe the anonymous users that the
@@ -34666,9 +35332,14 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] user_configuration
-    #   A structure that contains information about the anonymous users that
-    #   the generated snapshot is for. This API will not return information
-    #   about registered Amazon Quick Sight.
+    #   A structure that contains information about the users that the
+    #   dashboard snapshot is generated for. The users can be either
+    #   anonymous users or registered users. Anonymous users cannot be used
+    #   together with registered users.
+    #
+    #   When using identity-enhanced session credentials, set the
+    #   UserConfiguration request attribute to null. Otherwise, the request
+    #   will be invalid.
     #   @return [Types::SnapshotUserConfiguration]
     #
     # @!attribute [rw] snapshot_configuration
@@ -35300,6 +35971,11 @@ module Aws::QuickSight
     #   A collection of inline visualizations to display within a chart.
     #   @return [Array<Types::TableInlineVisualization>]
     #
+    # @!attribute [rw] dashboard_customization_visual_options
+    #   The options that define customizations available to dashboard
+    #   readers for a specific visual
+    #   @return [Types::DashboardCustomizationVisualOptions]
+    #
     # @!attribute [rw] interactions
     #   The general visual interactions setup for a visual.
     #   @return [Types::VisualInteractionOptions]
@@ -35314,6 +35990,7 @@ module Aws::QuickSight
       :field_options,
       :paginated_report_options,
       :table_inline_visualizations,
+      :dashboard_customization_visual_options,
       :interactions)
       SENSITIVE = []
       include Aws::Structure
@@ -42377,6 +43054,41 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A structure that contains information to identify a user.
+    #
+    # @note UserIdentifier is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] user_name
+    #   The name of the user that you want to get identity context for.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The email address of the user that you want to get identity context
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_arn
+    #   The Amazon Resource Name (ARN) of the user that you want to get
+    #   identity context for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UserIdentifier AWS API Documentation
+    #
+    class UserIdentifier < Struct.new(
+      :user_name,
+      :email,
+      :user_arn,
+      :unknown)
+      SENSITIVE = [:user_name, :email]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class UserName < UserIdentifier; end
+      class Email < UserIdentifier; end
+      class UserArn < UserIdentifier; end
+      class Unknown < UserIdentifier; end
+    end
+
     # The structure of a VPC connection.
     #
     # @!attribute [rw] vpc_connection_id
@@ -42968,6 +43680,29 @@ module Aws::QuickSight
       :navigation_operation,
       :url_operation,
       :set_parameters_operation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration that controls field customization options available
+    # to dashboard readers for a visual.
+    #
+    # @!attribute [rw] status
+    #   Specifies whether dashboard readers can customize fields for this
+    #   visual. This option is `ENABLED` by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_fields
+    #   The additional dataset fields available for dashboard readers to
+    #   customize the visual with, beyond the fields already configured on
+    #   the visual.
+    #   @return [Array<Types::ColumnIdentifier>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/VisualCustomizationFieldsConfiguration AWS API Documentation
+    #
+    class VisualCustomizationFieldsConfiguration < Struct.new(
+      :status,
+      :additional_fields)
       SENSITIVE = []
       include Aws::Structure
     end

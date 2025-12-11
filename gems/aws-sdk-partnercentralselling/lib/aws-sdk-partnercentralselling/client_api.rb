@@ -34,6 +34,7 @@ module Aws::PartnerCentralSelling
     AddressSummaryPostalCodeString = Shapes::StringShape.new(name: 'AddressSummaryPostalCodeString')
     Alias = Shapes::StringShape.new(name: 'Alias')
     Amount = Shapes::StringShape.new(name: 'Amount')
+    AmountMap = Shapes::MapShape.new(name: 'AmountMap')
     ApnPrograms = Shapes::ListShape.new(name: 'ApnPrograms')
     AssignOpportunityRequest = Shapes::StructureShape.new(name: 'AssignOpportunityRequest')
     AssigneeContact = Shapes::StructureShape.new(name: 'AssigneeContact')
@@ -61,8 +62,17 @@ module Aws::PartnerCentralSelling
     AwsOpportunityRelatedEntities = Shapes::StructureShape.new(name: 'AwsOpportunityRelatedEntities')
     AwsOpportunityStage = Shapes::StringShape.new(name: 'AwsOpportunityStage')
     AwsOpportunityTeamMembersList = Shapes::ListShape.new(name: 'AwsOpportunityTeamMembersList')
+    AwsPartition = Shapes::StringShape.new(name: 'AwsPartition')
+    AwsProductDetails = Shapes::StructureShape.new(name: 'AwsProductDetails')
+    AwsProductDetailsCategoriesList = Shapes::ListShape.new(name: 'AwsProductDetailsCategoriesList')
     AwsProductIdentifier = Shapes::StringShape.new(name: 'AwsProductIdentifier')
     AwsProductIdentifiers = Shapes::ListShape.new(name: 'AwsProductIdentifiers')
+    AwsProductInsights = Shapes::StructureShape.new(name: 'AwsProductInsights')
+    AwsProductInsightsCurrencyCodeEnum = Shapes::StringShape.new(name: 'AwsProductInsightsCurrencyCodeEnum')
+    AwsProductOptimization = Shapes::StructureShape.new(name: 'AwsProductOptimization')
+    AwsProductOptimizationsList = Shapes::ListShape.new(name: 'AwsProductOptimizationsList')
+    AwsProductsList = Shapes::ListShape.new(name: 'AwsProductsList')
+    AwsProductsSpendInsightsBySource = Shapes::StructureShape.new(name: 'AwsProductsSpendInsightsBySource')
     AwsSubmission = Shapes::StructureShape.new(name: 'AwsSubmission')
     AwsTeamMember = Shapes::StructureShape.new(name: 'AwsTeamMember')
     AwsTeamMemberFirstNameString = Shapes::StringShape.new(name: 'AwsTeamMemberFirstNameString')
@@ -149,6 +159,7 @@ module Aws::PartnerCentralSelling
     EngagementSummaryList = Shapes::ListShape.new(name: 'EngagementSummaryList')
     EngagementTitle = Shapes::StringShape.new(name: 'EngagementTitle')
     EngagementUseCase = Shapes::StringShape.new(name: 'EngagementUseCase')
+    EstimationUrl = Shapes::StringShape.new(name: 'EstimationUrl')
     ExpectedCustomerSpend = Shapes::StructureShape.new(name: 'ExpectedCustomerSpend')
     ExpectedCustomerSpendCurrencyCodeEnum = Shapes::StringShape.new(name: 'ExpectedCustomerSpendCurrencyCodeEnum')
     ExpectedCustomerSpendList = Shapes::ListShape.new(name: 'ExpectedCustomerSpendList')
@@ -251,6 +262,7 @@ module Aws::PartnerCentralSelling
     MarketingSource = Shapes::StringShape.new(name: 'MarketingSource')
     MemberCompanyName = Shapes::StringShape.new(name: 'MemberCompanyName')
     MemberPageSize = Shapes::IntegerShape.new(name: 'MemberPageSize')
+    MonetaryAmount = Shapes::StringShape.new(name: 'MonetaryAmount')
     MonetaryValue = Shapes::StructureShape.new(name: 'MonetaryValue')
     MonetaryValueAmountString = Shapes::StringShape.new(name: 'MonetaryValueAmountString')
     Name = Shapes::StringShape.new(name: 'Name')
@@ -422,6 +434,9 @@ module Aws::PartnerCentralSelling
     AddressSummary.add_member(:country_code, Shapes::ShapeRef.new(shape: CountryCode, location_name: "CountryCode"))
     AddressSummary.struct_class = Types::AddressSummary
 
+    AmountMap.key = Shapes::ShapeRef.new(shape: String)
+    AmountMap.value = Shapes::ShapeRef.new(shape: MonetaryAmount)
+
     ApnPrograms.member = Shapes::ShapeRef.new(shape: String)
 
     AssignOpportunityRequest.add_member(:catalog, Shapes::ShapeRef.new(shape: CatalogIdentifier, required: true, location_name: "Catalog"))
@@ -455,6 +470,7 @@ module Aws::PartnerCentralSelling
 
     AwsOpportunityInsights.add_member(:next_best_actions, Shapes::ShapeRef.new(shape: String, location_name: "NextBestActions"))
     AwsOpportunityInsights.add_member(:engagement_score, Shapes::ShapeRef.new(shape: EngagementScore, location_name: "EngagementScore"))
+    AwsOpportunityInsights.add_member(:aws_products_spend_insights_by_source, Shapes::ShapeRef.new(shape: AwsProductsSpendInsightsBySource, location_name: "AwsProductsSpendInsightsBySource"))
     AwsOpportunityInsights.struct_class = Types::AwsOpportunityInsights
 
     AwsOpportunityLifeCycle.add_member(:target_close_date, Shapes::ShapeRef.new(shape: Date, location_name: "TargetCloseDate"))
@@ -467,6 +483,7 @@ module Aws::PartnerCentralSelling
     AwsOpportunityLifeCycleNextStepsHistoryList.member = Shapes::ShapeRef.new(shape: ProfileNextStepsHistory)
 
     AwsOpportunityProject.add_member(:expected_customer_spend, Shapes::ShapeRef.new(shape: ExpectedCustomerSpendList, location_name: "ExpectedCustomerSpend"))
+    AwsOpportunityProject.add_member(:aws_partition, Shapes::ShapeRef.new(shape: AwsPartition, location_name: "AwsPartition"))
     AwsOpportunityProject.struct_class = Types::AwsOpportunityProject
 
     AwsOpportunityRelatedEntities.add_member(:aws_products, Shapes::ShapeRef.new(shape: AwsProductIdentifiers, location_name: "AwsProducts"))
@@ -475,7 +492,39 @@ module Aws::PartnerCentralSelling
 
     AwsOpportunityTeamMembersList.member = Shapes::ShapeRef.new(shape: AwsTeamMember)
 
+    AwsProductDetails.add_member(:product_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ProductCode"))
+    AwsProductDetails.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "ServiceCode"))
+    AwsProductDetails.add_member(:categories, Shapes::ShapeRef.new(shape: AwsProductDetailsCategoriesList, required: true, location_name: "Categories"))
+    AwsProductDetails.add_member(:amount, Shapes::ShapeRef.new(shape: MonetaryAmount, location_name: "Amount"))
+    AwsProductDetails.add_member(:optimized_amount, Shapes::ShapeRef.new(shape: MonetaryAmount, location_name: "OptimizedAmount"))
+    AwsProductDetails.add_member(:potential_savings_amount, Shapes::ShapeRef.new(shape: MonetaryAmount, location_name: "PotentialSavingsAmount"))
+    AwsProductDetails.add_member(:optimizations, Shapes::ShapeRef.new(shape: AwsProductOptimizationsList, required: true, location_name: "Optimizations"))
+    AwsProductDetails.struct_class = Types::AwsProductDetails
+
+    AwsProductDetailsCategoriesList.member = Shapes::ShapeRef.new(shape: String)
+
     AwsProductIdentifiers.member = Shapes::ShapeRef.new(shape: AwsProductIdentifier)
+
+    AwsProductInsights.add_member(:currency_code, Shapes::ShapeRef.new(shape: AwsProductInsightsCurrencyCodeEnum, required: true, location_name: "CurrencyCode"))
+    AwsProductInsights.add_member(:frequency, Shapes::ShapeRef.new(shape: PaymentFrequency, required: true, location_name: "Frequency"))
+    AwsProductInsights.add_member(:total_amount, Shapes::ShapeRef.new(shape: MonetaryAmount, location_name: "TotalAmount"))
+    AwsProductInsights.add_member(:total_optimized_amount, Shapes::ShapeRef.new(shape: MonetaryAmount, location_name: "TotalOptimizedAmount"))
+    AwsProductInsights.add_member(:total_potential_savings_amount, Shapes::ShapeRef.new(shape: MonetaryAmount, location_name: "TotalPotentialSavingsAmount"))
+    AwsProductInsights.add_member(:total_amount_by_category, Shapes::ShapeRef.new(shape: AmountMap, required: true, location_name: "TotalAmountByCategory"))
+    AwsProductInsights.add_member(:aws_products, Shapes::ShapeRef.new(shape: AwsProductsList, required: true, location_name: "AwsProducts"))
+    AwsProductInsights.struct_class = Types::AwsProductInsights
+
+    AwsProductOptimization.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Description"))
+    AwsProductOptimization.add_member(:savings_amount, Shapes::ShapeRef.new(shape: MonetaryAmount, required: true, location_name: "SavingsAmount"))
+    AwsProductOptimization.struct_class = Types::AwsProductOptimization
+
+    AwsProductOptimizationsList.member = Shapes::ShapeRef.new(shape: AwsProductOptimization)
+
+    AwsProductsList.member = Shapes::ShapeRef.new(shape: AwsProductDetails)
+
+    AwsProductsSpendInsightsBySource.add_member(:partner, Shapes::ShapeRef.new(shape: AwsProductInsights, location_name: "Partner"))
+    AwsProductsSpendInsightsBySource.add_member(:aws, Shapes::ShapeRef.new(shape: AwsProductInsights, location_name: "AWS"))
+    AwsProductsSpendInsightsBySource.struct_class = Types::AwsProductsSpendInsightsBySource
 
     AwsSubmission.add_member(:involvement_type, Shapes::ShapeRef.new(shape: SalesInvolvementType, required: true, location_name: "InvolvementType"))
     AwsSubmission.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
@@ -697,11 +746,11 @@ module Aws::PartnerCentralSelling
 
     EngagementSummaryList.member = Shapes::ShapeRef.new(shape: EngagementSummary)
 
-    ExpectedCustomerSpend.add_member(:amount, Shapes::ShapeRef.new(shape: Amount, required: true, location_name: "Amount"))
+    ExpectedCustomerSpend.add_member(:amount, Shapes::ShapeRef.new(shape: Amount, location_name: "Amount"))
     ExpectedCustomerSpend.add_member(:currency_code, Shapes::ShapeRef.new(shape: ExpectedCustomerSpendCurrencyCodeEnum, required: true, location_name: "CurrencyCode"))
     ExpectedCustomerSpend.add_member(:frequency, Shapes::ShapeRef.new(shape: PaymentFrequency, required: true, location_name: "Frequency"))
     ExpectedCustomerSpend.add_member(:target_company, Shapes::ShapeRef.new(shape: ExpectedCustomerSpendTargetCompanyString, required: true, location_name: "TargetCompany"))
-    ExpectedCustomerSpend.add_member(:estimation_url, Shapes::ShapeRef.new(shape: WebsiteUrl, location_name: "EstimationUrl"))
+    ExpectedCustomerSpend.add_member(:estimation_url, Shapes::ShapeRef.new(shape: EstimationUrl, location_name: "EstimationUrl"))
     ExpectedCustomerSpend.struct_class = Types::ExpectedCustomerSpend
 
     ExpectedCustomerSpendList.member = Shapes::ShapeRef.new(shape: ExpectedCustomerSpend)
@@ -1219,6 +1268,7 @@ module Aws::PartnerCentralSelling
     Project.add_member(:other_competitor_names, Shapes::ShapeRef.new(shape: ProjectOtherCompetitorNamesString, location_name: "OtherCompetitorNames"))
     Project.add_member(:other_solution_description, Shapes::ShapeRef.new(shape: ProjectOtherSolutionDescriptionString, location_name: "OtherSolutionDescription"))
     Project.add_member(:additional_comments, Shapes::ShapeRef.new(shape: ProjectAdditionalCommentsString, location_name: "AdditionalComments"))
+    Project.add_member(:aws_partition, Shapes::ShapeRef.new(shape: AwsPartition, location_name: "AwsPartition"))
     Project.struct_class = Types::Project
 
     ProjectDetails.add_member(:business_problem, Shapes::ShapeRef.new(shape: EngagementCustomerBusinessProblem, required: true, location_name: "BusinessProblem"))

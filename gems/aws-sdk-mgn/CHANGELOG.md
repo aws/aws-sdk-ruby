@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2025-12-09)
+------------------
+
+* Feature - Added parameters encryption, IPv4/IPv6 protocol configuration, and enhanced tagging support for replication operations.
+
 1.57.0 (2025-11-21)
 ------------------
 

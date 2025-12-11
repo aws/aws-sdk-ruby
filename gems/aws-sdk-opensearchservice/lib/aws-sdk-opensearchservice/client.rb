@@ -958,6 +958,13 @@ module Aws::OpenSearchService
     # @option params [Array<Types::Tag>] :tag_list
     #   A list of tags attached to a domain.
     #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   application's data at rest. If provided, the application uses your
+    #   customer-managed key for encryption. If omitted, the application uses
+    #   an AWS-managed key. The KMS key must be in the same region as the
+    #   application.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#id #id} => String
@@ -968,6 +975,7 @@ module Aws::OpenSearchService
     #   * {Types::CreateApplicationResponse#app_configs #app_configs} => Array&lt;Types::AppConfig&gt;
     #   * {Types::CreateApplicationResponse#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #   * {Types::CreateApplicationResponse#created_at #created_at} => Time
+    #   * {Types::CreateApplicationResponse#kms_key_arn #kms_key_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -997,6 +1005,7 @@ module Aws::OpenSearchService
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     kms_key_arn: "KmsKeyArn",
     #   })
     #
     # @example Response structure
@@ -1018,6 +1027,7 @@ module Aws::OpenSearchService
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
     #   resp.created_at #=> Time
+    #   resp.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateApplication AWS API Documentation
     #
@@ -3660,6 +3670,7 @@ module Aws::OpenSearchService
     #   * {Types::GetApplicationResponse#app_configs #app_configs} => Array&lt;Types::AppConfig&gt;
     #   * {Types::GetApplicationResponse#created_at #created_at} => Time
     #   * {Types::GetApplicationResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetApplicationResponse#kms_key_arn #kms_key_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3686,6 +3697,7 @@ module Aws::OpenSearchService
     #   resp.app_configs[0].value #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
+    #   resp.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetApplication AWS API Documentation
     #
@@ -6102,7 +6114,7 @@ module Aws::OpenSearchService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -716,34 +716,34 @@ module Aws::CostExplorer
     # the set of rules for the `CostCategory` object.
     #
     # @!attribute [rw] cost_category_arn
-    #   The unique identifier for your Cost Category.
+    #   The unique identifier for your cost category.
     #   @return [String]
     #
     # @!attribute [rw] effective_start
-    #   The effective start date of your Cost Category.
+    #   The effective start date of your cost category.
     #   @return [String]
     #
     # @!attribute [rw] effective_end
-    #   The effective end date of your Cost Category.
+    #   The effective end date of your cost category.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The unique name of the Cost Category.
+    #   The unique name of the cost category.
     #   @return [String]
     #
     # @!attribute [rw] rule_version
-    #   The rule schema version in this particular Cost Category.
+    #   The rule schema version in this particular cost category.
     #   @return [String]
     #
     # @!attribute [rw] rules
     #   The rules are processed in order. If there are multiple rules that
     #   match the line item, then the first rule to match is used to
-    #   determine that Cost Category value.
+    #   determine that cost category value.
     #   @return [Array<Types::CostCategoryRule>]
     #
     # @!attribute [rw] split_charge_rules
     #   The split charge rules that are used to allocate your charges
-    #   between your Cost Category values.
+    #   between your cost category values.
     #   @return [Array<Types::CostCategorySplitChargeRule>]
     #
     # @!attribute [rw] processing_status
@@ -821,31 +821,31 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # A reference to a Cost Category containing only enough information to
+    # A reference to a cost category containing only enough information to
     # identify the Cost Category.
     #
-    # You can use this information to retrieve the full Cost Category
+    # You can use this information to retrieve the full cost category
     # information using `DescribeCostCategory`.
     #
     # @!attribute [rw] cost_category_arn
-    #   The unique identifier for your Cost Category.
+    #   The unique identifier for your cost category.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The unique name of the Cost Category.
+    #   The unique name of the cost category.
     #   @return [String]
     #
     # @!attribute [rw] effective_start
-    #   The Cost Category's effective start date.
+    #   The cost category's effective start date.
     #   @return [String]
     #
     # @!attribute [rw] effective_end
-    #   The Cost Category's effective end date.
+    #   The cost category's effective end date.
     #   @return [String]
     #
     # @!attribute [rw] number_of_rules
-    #   The number of rules that are associated with a specific Cost
-    #   Category.
+    #   The number of rules that are associated with a specific cost
+    #   category.
     #   @return [Integer]
     #
     # @!attribute [rw] processing_status
@@ -861,6 +861,10 @@ module Aws::CostExplorer
     #   The default value for the cost category.
     #   @return [String]
     #
+    # @!attribute [rw] supported_resource_types
+    #   The resource types supported by a specific cost category.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostCategoryReference AWS API Documentation
     #
     class CostCategoryReference < Struct.new(
@@ -871,14 +875,40 @@ module Aws::CostExplorer
       :number_of_rules,
       :processing_status,
       :values,
-      :default_value)
+      :default_value,
+      :supported_resource_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A reference to a cost category association that contains information
+    # on an associated resource.
+    #
+    # @!attribute [rw] resource_arn
+    #   The unique identifier for an associated resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] cost_category_name
+    #   The unique name of the cost category.
+    #   @return [String]
+    #
+    # @!attribute [rw] cost_category_arn
+    #   The unique identifier for your cost category.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostCategoryResourceAssociation AWS API Documentation
+    #
+    class CostCategoryResourceAssociation < Struct.new(
+      :resource_arn,
+      :cost_category_name,
+      :cost_category_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Rules are processed in order. If there are multiple rules that match
     # the line item, then the first rule to match is used to determine that
-    # Cost Category value.
+    # cost category value.
     #
     # @!attribute [rw] value
     #   The default value for the cost category.
@@ -891,7 +921,7 @@ module Aws::CostExplorer
     #   `RECORD_TYPE`, `LINKED_ACCOUNT_NAME`, `REGION`, and `USAGE_TYPE`.
     #
     #   `RECORD_TYPE` is a dimension used for Cost Explorer APIs, and is
-    #   also supported for Cost Category expressions. This dimension uses
+    #   also supported for cost category expressions. This dimension uses
     #   different terms, depending on whether you're using the console or
     #   API/JSON editor. For a detailed comparison, see [Term
     #   Comparisons][2] in the *Billing and Cost Management User Guide*.
@@ -930,18 +960,18 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Use the split charge rule to split the cost of one Cost Category value
+    # Use the split charge rule to split the cost of one cost category value
     # across several other target values.
     #
     # @!attribute [rw] source
-    #   The Cost Category value that you want to split. That value can't be
+    #   The cost category value that you want to split. That value can't be
     #   used as a source or a target in other split charge rules. To
     #   indicate uncategorized costs, you can use an empty string as the
     #   source.
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The Cost Category values that you want to split costs across. These
+    #   The cost category values that you want to split costs across. These
     #   values can't be used as a source in other split charge rules.
     #   @return [Array<String>]
     #
@@ -1004,11 +1034,11 @@ module Aws::CostExplorer
     # it filters on resources without the given Cost Categories key.
     #
     # @!attribute [rw] key
-    #   The unique name of the Cost Category.
+    #   The unique name of the cost category.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The specific value of the Cost Category.
+    #   The specific value of the cost category.
     #   @return [Array<String>]
     #
     # @!attribute [rw] match_options
@@ -1434,22 +1464,22 @@ module Aws::CostExplorer
     end
 
     # @!attribute [rw] name
-    #   The unique name of the Cost Category.
+    #   The unique name of the cost category.
     #   @return [String]
     #
     # @!attribute [rw] effective_start
-    #   The Cost Category's effective start date. It can only be a billing
+    #   The cost category's effective start date. It can only be a billing
     #   start date (first day of the month). If the date isn't provided,
     #   it's the first day of the current month. Dates can't be before the
     #   previous twelve months, or in the future.
     #   @return [String]
     #
     # @!attribute [rw] rule_version
-    #   The rule schema version in this particular Cost Category.
+    #   The rule schema version in this particular cost category.
     #   @return [String]
     #
     # @!attribute [rw] rules
-    #   The Cost Category rules used to categorize costs. For more
+    #   The cost category rules used to categorize costs. For more
     #   information, see [CostCategoryRule][1].
     #
     #
@@ -1463,7 +1493,7 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] split_charge_rules
     #   The split charge rules used to allocate your charges between your
-    #   Cost Category values.
+    #   cost category values.
     #   @return [Array<Types::CostCategorySplitChargeRule>]
     #
     # @!attribute [rw] resource_tags
@@ -1513,11 +1543,11 @@ module Aws::CostExplorer
     end
 
     # @!attribute [rw] cost_category_arn
-    #   The unique identifier for your newly created Cost Category.
+    #   The unique identifier for your newly created cost category.
     #   @return [String]
     #
     # @!attribute [rw] effective_start
-    #   The Cost Category's effective start date. It can only be a billing
+    #   The cost category's effective start date. It can only be a billing
     #   start date (first day of the month).
     #   @return [String]
     #
@@ -1676,7 +1706,7 @@ module Aws::CostExplorer
     class DeleteAnomalySubscriptionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] cost_category_arn
-    #   The unique identifier for your Cost Category.
+    #   The unique identifier for your cost category.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DeleteCostCategoryDefinitionRequest AWS API Documentation
@@ -1688,13 +1718,13 @@ module Aws::CostExplorer
     end
 
     # @!attribute [rw] cost_category_arn
-    #   The unique identifier for your Cost Category.
+    #   The unique identifier for your cost category.
     #   @return [String]
     #
     # @!attribute [rw] effective_end
-    #   The effective end date of the Cost Category as a result of deleting
-    #   it. No costs after this date is categorized by the deleted Cost
-    #   Category.
+    #   The effective end date of the cost category as a result of deleting
+    #   it. No costs after this date is categorized by the deleted cost
+    #   category.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DeleteCostCategoryDefinitionResponse AWS API Documentation
@@ -1707,11 +1737,11 @@ module Aws::CostExplorer
     end
 
     # @!attribute [rw] cost_category_arn
-    #   The unique identifier for your Cost Category.
+    #   The unique identifier for your cost category.
     #   @return [String]
     #
     # @!attribute [rw] effective_on
-    #   The date when the Cost Category was effective.
+    #   The date when the cost category was effective.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DescribeCostCategoryDefinitionRequest AWS API Documentation
@@ -1768,8 +1798,8 @@ module Aws::CostExplorer
     # @!attribute [rw] match_options
     #   The match options that you can use to filter your results.
     #
-    #   `MatchOptions` is only applicable for actions related to Cost
-    #   Category and Anomaly Subscriptions. Refer to the documentation for
+    #   `MatchOptions` is only applicable for actions related to cost
+    #   category and Anomaly Subscriptions. Refer to the documentation for
     #   each specific API to see what is supported.
     #
     #   The default values for `MatchOptions` are `EQUALS` and
@@ -2940,6 +2970,11 @@ module Aws::CostExplorer
     #   service. You can nest `Expression` objects to define any combination
     #   of dimension filters. For more information, see [Expression][1].
     #
+    #   The `GetCostAndUsageWithResources` operation requires that you
+    #   either group by or filter by a `ResourceId`. It requires the
+    #   [Expression][1] `"SERVICE = Amazon Elastic Compute Cloud - Compute"`
+    #   in the filter.
+    #
     #   Valid values for `MatchOptions` for `Dimensions` are `EQUALS` and
     #   `CASE_SENSITIVE`.
     #
@@ -3048,9 +3083,9 @@ module Aws::CostExplorer
     #   The value that you want to search the filter values for.
     #
     #   If you don't specify a `CostCategoryName`, `SearchString` is used
-    #   to filter Cost Category names that match the `SearchString` pattern.
+    #   to filter cost category names that match the `SearchString` pattern.
     #   If you specify a `CostCategoryName`, `SearchString` is used to
-    #   filter Cost Category values that match the `SearchString` pattern.
+    #   filter cost category values that match the `SearchString` pattern.
     #   @return [String]
     #
     # @!attribute [rw] time_period
@@ -3058,7 +3093,7 @@ module Aws::CostExplorer
     #   @return [Types::DateInterval]
     #
     # @!attribute [rw] cost_category_name
-    #   The unique name of the Cost Category.
+    #   The unique name of the cost category.
     #   @return [String]
     #
     # @!attribute [rw] filter
@@ -3230,11 +3265,11 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] cost_category_names
-    #   The names of the Cost Categories.
+    #   The names of the cost categories.
     #   @return [Array<String>]
     #
     # @!attribute [rw] cost_category_values
-    #   The Cost Category values.
+    #   The cost category values.
     #
     #   If the `CostCategoryName` key isn't specified in the request, the
     #   `CostCategoryValues` fields aren't returned.
@@ -5790,7 +5825,7 @@ module Aws::CostExplorer
     end
 
     # @!attribute [rw] effective_on
-    #   The date when the Cost Category was effective.
+    #   The date when the cost category was effective.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -5803,18 +5838,27 @@ module Aws::CostExplorer
     #   The number of entries a paginated response contains.
     #   @return [Integer]
     #
+    # @!attribute [rw] supported_resource_types
+    #   Filter cost category definitions that are supported by given
+    #   resource types based on the latest version. If the filter is
+    #   present, the result only includes Cost Categories that supports
+    #   input resource type. If the filter isn't provided, no filtering is
+    #   applied. The valid values are `billing:rispgroupsharing`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostCategoryDefinitionsRequest AWS API Documentation
     #
     class ListCostCategoryDefinitionsRequest < Struct.new(
       :effective_on,
       :next_token,
-      :max_results)
+      :max_results,
+      :supported_resource_types)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] cost_category_references
-    #   A reference to a Cost Category that contains enough information to
+    #   A reference to a cost category that contains enough information to
     #   identify the Cost Category.
     #   @return [Array<Types::CostCategoryReference>]
     #
@@ -5828,6 +5872,50 @@ module Aws::CostExplorer
     #
     class ListCostCategoryDefinitionsResponse < Struct.new(
       :cost_category_references,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cost_category_arn
+    #   The unique identifier for your cost category.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of entries a paginated response contains.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostCategoryResourceAssociationsRequest AWS API Documentation
+    #
+    class ListCostCategoryResourceAssociationsRequest < Struct.new(
+      :cost_category_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cost_category_resource_associations
+    #   A reference to a cost category association that contains information
+    #   on an associated resource.
+    #   @return [Array<Types::CostCategoryResourceAssociation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostCategoryResourceAssociationsResponse AWS API Documentation
+    #
+    class ListCostCategoryResourceAssociationsResponse < Struct.new(
+      :cost_category_resource_associations,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -8089,8 +8177,8 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] match_options
     #   The match options that you can use to filter your results.
-    #   `MatchOptions` is only applicable for actions related to Cost
-    #   Category. The default values for `MatchOptions` are `EQUALS` and
+    #   `MatchOptions` is only applicable for actions related to cost
+    #   category. The default values for `MatchOptions` are `EQUALS` and
     #   `CASE_SENSITIVE`.
     #   @return [Array<String>]
     #
@@ -8474,18 +8562,18 @@ module Aws::CostExplorer
     end
 
     # @!attribute [rw] cost_category_arn
-    #   The unique identifier for your Cost Category.
+    #   The unique identifier for your cost category.
     #   @return [String]
     #
     # @!attribute [rw] effective_start
-    #   The Cost Category's effective start date. It can only be a billing
+    #   The cost category's effective start date. It can only be a billing
     #   start date (first day of the month). If the date isn't provided,
     #   it's the first day of the current month. Dates can't be before the
     #   previous twelve months, or in the future.
     #   @return [String]
     #
     # @!attribute [rw] rule_version
-    #   The rule schema version in this particular Cost Category.
+    #   The rule schema version in this particular cost category.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -8503,7 +8591,7 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] split_charge_rules
     #   The split charge rules used to allocate your charges between your
-    #   Cost Category values.
+    #   cost category values.
     #   @return [Array<Types::CostCategorySplitChargeRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateCostCategoryDefinitionRequest AWS API Documentation
@@ -8520,11 +8608,11 @@ module Aws::CostExplorer
     end
 
     # @!attribute [rw] cost_category_arn
-    #   The unique identifier for your Cost Category.
+    #   The unique identifier for your cost category.
     #   @return [String]
     #
     # @!attribute [rw] effective_start
-    #   The Cost Category's effective start date. It can only be a billing
+    #   The cost category's effective start date. It can only be a billing
     #   start date (first day of the month).
     #   @return [String]
     #

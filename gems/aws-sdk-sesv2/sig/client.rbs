@@ -1420,6 +1420,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::PutEmailIdentityDkimSigningAttributesResponse]
         def dkim_status: () -> ("PENDING" | "SUCCESS" | "FAILED" | "TEMPORARY_FAILURE" | "NOT_STARTED")
         def dkim_tokens: () -> ::Array[::String]
+        def signing_hosted_zone: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_email_identity_dkim_signing_attributes-instance_method
       def put_email_identity_dkim_signing_attributes: (

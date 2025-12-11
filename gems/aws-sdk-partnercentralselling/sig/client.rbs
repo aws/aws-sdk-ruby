@@ -286,7 +286,7 @@ module Aws
                                                   target_completion_date: ::String,
                                                   expected_customer_spend: Array[
                                                     {
-                                                      amount: ::String,
+                                                      amount: ::String?,
                                                       currency_code: ("USD" | "EUR" | "GBP" | "AUD" | "CAD" | "CNY" | "NZD" | "INR" | "JPY" | "CHF" | "SEK" | "AED" | "AFN" | "ALL" | "AMD" | "ANG" | "AOA" | "ARS" | "AWG" | "AZN" | "BAM" | "BBD" | "BDT" | "BGN" | "BHD" | "BIF" | "BMD" | "BND" | "BOB" | "BOV" | "BRL" | "BSD" | "BTN" | "BWP" | "BYN" | "BZD" | "CDF" | "CHE" | "CHW" | "CLF" | "CLP" | "COP" | "COU" | "CRC" | "CUC" | "CUP" | "CVE" | "CZK" | "DJF" | "DKK" | "DOP" | "DZD" | "EGP" | "ERN" | "ETB" | "FJD" | "FKP" | "GEL" | "GHS" | "GIP" | "GMD" | "GNF" | "GTQ" | "GYD" | "HKD" | "HNL" | "HRK" | "HTG" | "HUF" | "IDR" | "ILS" | "IQD" | "IRR" | "ISK" | "JMD" | "JOD" | "KES" | "KGS" | "KHR" | "KMF" | "KPW" | "KRW" | "KWD" | "KYD" | "KZT" | "LAK" | "LBP" | "LKR" | "LRD" | "LSL" | "LYD" | "MAD" | "MDL" | "MGA" | "MKD" | "MMK" | "MNT" | "MOP" | "MRU" | "MUR" | "MVR" | "MWK" | "MXN" | "MXV" | "MYR" | "MZN" | "NAD" | "NGN" | "NIO" | "NOK" | "NPR" | "OMR" | "PAB" | "PEN" | "PGK" | "PHP" | "PKR" | "PLN" | "PYG" | "QAR" | "RON" | "RSD" | "RUB" | "RWF" | "SAR" | "SBD" | "SCR" | "SDG" | "SGD" | "SHP" | "SLL" | "SOS" | "SRD" | "SSP" | "STN" | "SVC" | "SYP" | "SZL" | "THB" | "TJS" | "TMT" | "TND" | "TOP" | "TRY" | "TTD" | "TWD" | "TZS" | "UAH" | "UGX" | "USN" | "UYI" | "UYU" | "UZS" | "VEF" | "VND" | "VUV" | "WST" | "XAF" | "XCD" | "XDR" | "XOF" | "XPF" | "XSU" | "XUA" | "YER" | "ZAR" | "ZMW" | "ZWL"),
                                                       frequency: ("Monthly"),
                                                       target_company: ::String,
@@ -359,7 +359,7 @@ module Aws
                                   delivery_models: Array[("SaaS or PaaS" | "BYOL or AMI" | "Managed Services" | "Professional Services" | "Resell" | "Other")]?,
                                   expected_customer_spend: Array[
                                     {
-                                      amount: ::String,
+                                      amount: ::String?,
                                       currency_code: ("USD" | "EUR" | "GBP" | "AUD" | "CAD" | "CNY" | "NZD" | "INR" | "JPY" | "CHF" | "SEK" | "AED" | "AFN" | "ALL" | "AMD" | "ANG" | "AOA" | "ARS" | "AWG" | "AZN" | "BAM" | "BBD" | "BDT" | "BGN" | "BHD" | "BIF" | "BMD" | "BND" | "BOB" | "BOV" | "BRL" | "BSD" | "BTN" | "BWP" | "BYN" | "BZD" | "CDF" | "CHE" | "CHW" | "CLF" | "CLP" | "COP" | "COU" | "CRC" | "CUC" | "CUP" | "CVE" | "CZK" | "DJF" | "DKK" | "DOP" | "DZD" | "EGP" | "ERN" | "ETB" | "FJD" | "FKP" | "GEL" | "GHS" | "GIP" | "GMD" | "GNF" | "GTQ" | "GYD" | "HKD" | "HNL" | "HRK" | "HTG" | "HUF" | "IDR" | "ILS" | "IQD" | "IRR" | "ISK" | "JMD" | "JOD" | "KES" | "KGS" | "KHR" | "KMF" | "KPW" | "KRW" | "KWD" | "KYD" | "KZT" | "LAK" | "LBP" | "LKR" | "LRD" | "LSL" | "LYD" | "MAD" | "MDL" | "MGA" | "MKD" | "MMK" | "MNT" | "MOP" | "MRU" | "MUR" | "MVR" | "MWK" | "MXN" | "MXV" | "MYR" | "MZN" | "NAD" | "NGN" | "NIO" | "NOK" | "NPR" | "OMR" | "PAB" | "PEN" | "PGK" | "PHP" | "PKR" | "PLN" | "PYG" | "QAR" | "RON" | "RSD" | "RUB" | "RWF" | "SAR" | "SBD" | "SCR" | "SDG" | "SGD" | "SHP" | "SLL" | "SOS" | "SRD" | "SSP" | "STN" | "SVC" | "SYP" | "SZL" | "THB" | "TJS" | "TMT" | "TND" | "TOP" | "TRY" | "TTD" | "TWD" | "TZS" | "UAH" | "UGX" | "USN" | "UYI" | "UYU" | "UZS" | "VEF" | "VND" | "VUV" | "WST" | "XAF" | "XCD" | "XDR" | "XOF" | "XPF" | "XSU" | "XUA" | "YER" | "ZAR" | "ZMW" | "ZWL"),
                                       frequency: ("Monthly"),
                                       target_company: ::String,
@@ -375,7 +375,8 @@ module Aws
                                   competitor_name: ("Oracle Cloud" | "On-Prem" | "Co-location" | "Akamai" | "AliCloud" | "Google Cloud Platform" | "IBM Softlayer" | "Microsoft Azure" | "Other- Cost Optimization" | "No Competition" | "*Other")?,
                                   other_competitor_names: ::String?,
                                   other_solution_description: ::String?,
-                                  additional_comments: ::String?
+                                  additional_comments: ::String?,
+                                  aws_partition: ("aws-eusc")?
                                 },
                                 ?opportunity_type: ("Net New Business" | "Flat Renewal" | "Expansion"),
                                 ?marketing: {
@@ -1124,7 +1125,7 @@ module Aws
                                   delivery_models: Array[("SaaS or PaaS" | "BYOL or AMI" | "Managed Services" | "Professional Services" | "Resell" | "Other")]?,
                                   expected_customer_spend: Array[
                                     {
-                                      amount: ::String,
+                                      amount: ::String?,
                                       currency_code: ("USD" | "EUR" | "GBP" | "AUD" | "CAD" | "CNY" | "NZD" | "INR" | "JPY" | "CHF" | "SEK" | "AED" | "AFN" | "ALL" | "AMD" | "ANG" | "AOA" | "ARS" | "AWG" | "AZN" | "BAM" | "BBD" | "BDT" | "BGN" | "BHD" | "BIF" | "BMD" | "BND" | "BOB" | "BOV" | "BRL" | "BSD" | "BTN" | "BWP" | "BYN" | "BZD" | "CDF" | "CHE" | "CHW" | "CLF" | "CLP" | "COP" | "COU" | "CRC" | "CUC" | "CUP" | "CVE" | "CZK" | "DJF" | "DKK" | "DOP" | "DZD" | "EGP" | "ERN" | "ETB" | "FJD" | "FKP" | "GEL" | "GHS" | "GIP" | "GMD" | "GNF" | "GTQ" | "GYD" | "HKD" | "HNL" | "HRK" | "HTG" | "HUF" | "IDR" | "ILS" | "IQD" | "IRR" | "ISK" | "JMD" | "JOD" | "KES" | "KGS" | "KHR" | "KMF" | "KPW" | "KRW" | "KWD" | "KYD" | "KZT" | "LAK" | "LBP" | "LKR" | "LRD" | "LSL" | "LYD" | "MAD" | "MDL" | "MGA" | "MKD" | "MMK" | "MNT" | "MOP" | "MRU" | "MUR" | "MVR" | "MWK" | "MXN" | "MXV" | "MYR" | "MZN" | "NAD" | "NGN" | "NIO" | "NOK" | "NPR" | "OMR" | "PAB" | "PEN" | "PGK" | "PHP" | "PKR" | "PLN" | "PYG" | "QAR" | "RON" | "RSD" | "RUB" | "RWF" | "SAR" | "SBD" | "SCR" | "SDG" | "SGD" | "SHP" | "SLL" | "SOS" | "SRD" | "SSP" | "STN" | "SVC" | "SYP" | "SZL" | "THB" | "TJS" | "TMT" | "TND" | "TOP" | "TRY" | "TTD" | "TWD" | "TZS" | "UAH" | "UGX" | "USN" | "UYI" | "UYU" | "UZS" | "VEF" | "VND" | "VUV" | "WST" | "XAF" | "XCD" | "XDR" | "XOF" | "XPF" | "XSU" | "XUA" | "YER" | "ZAR" | "ZMW" | "ZWL"),
                                       frequency: ("Monthly"),
                                       target_company: ::String,
@@ -1140,7 +1141,8 @@ module Aws
                                   competitor_name: ("Oracle Cloud" | "On-Prem" | "Co-location" | "Akamai" | "AliCloud" | "Google Cloud Platform" | "IBM Softlayer" | "Microsoft Azure" | "Other- Cost Optimization" | "No Competition" | "*Other")?,
                                   other_competitor_names: ::String?,
                                   other_solution_description: ::String?,
-                                  additional_comments: ::String?
+                                  additional_comments: ::String?,
+                                  aws_partition: ("aws-eusc")?
                                 },
                                 ?opportunity_type: ("Net New Business" | "Flat Renewal" | "Expansion"),
                                 ?marketing: {

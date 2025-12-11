@@ -3456,7 +3456,7 @@ module Aws::Bedrock
     #   resp = client.get_automated_reasoning_policy_build_workflow_result_assets({
     #     policy_arn: "AutomatedReasoningPolicyArn", # required
     #     build_workflow_id: "AutomatedReasoningPolicyBuildWorkflowId", # required
-    #     asset_type: "BUILD_LOG", # required, accepts BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION, GENERATED_TEST_CASES
+    #     asset_type: "BUILD_LOG", # required, accepts BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION, GENERATED_TEST_CASES, POLICY_SCENARIOS
     #   })
     #
     # @example Response structure
@@ -3577,6 +3577,12 @@ module Aws::Bedrock
     #   resp.build_workflow_assets.generated_test_cases.generated_test_cases[0].query_content #=> String
     #   resp.build_workflow_assets.generated_test_cases.generated_test_cases[0].guard_content #=> String
     #   resp.build_workflow_assets.generated_test_cases.generated_test_cases[0].expected_aggregated_findings_result #=> String, one of "VALID", "INVALID", "SATISFIABLE", "IMPOSSIBLE", "TRANSLATION_AMBIGUOUS", "TOO_COMPLEX", "NO_TRANSLATION"
+    #   resp.build_workflow_assets.policy_scenarios.policy_scenarios #=> Array
+    #   resp.build_workflow_assets.policy_scenarios.policy_scenarios[0].expression #=> String
+    #   resp.build_workflow_assets.policy_scenarios.policy_scenarios[0].alternate_expression #=> String
+    #   resp.build_workflow_assets.policy_scenarios.policy_scenarios[0].expected_result #=> String, one of "VALID", "INVALID", "SATISFIABLE", "IMPOSSIBLE", "TRANSLATION_AMBIGUOUS", "TOO_COMPLEX", "NO_TRANSLATION"
+    #   resp.build_workflow_assets.policy_scenarios.policy_scenarios[0].rule_ids #=> Array
+    #   resp.build_workflow_assets.policy_scenarios.policy_scenarios[0].rule_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetAutomatedReasoningPolicyBuildWorkflowResultAssets AWS API Documentation
     #
@@ -3616,9 +3622,9 @@ module Aws::Bedrock
     #   resp.policy_arn #=> String
     #   resp.scenario.expression #=> String
     #   resp.scenario.alternate_expression #=> String
+    #   resp.scenario.expected_result #=> String, one of "VALID", "INVALID", "SATISFIABLE", "IMPOSSIBLE", "TRANSLATION_AMBIGUOUS", "TOO_COMPLEX", "NO_TRANSLATION"
     #   resp.scenario.rule_ids #=> Array
     #   resp.scenario.rule_ids[0] #=> String
-    #   resp.scenario.expected_result #=> String, one of "VALID", "INVALID", "SATISFIABLE", "IMPOSSIBLE", "TRANSLATION_AMBIGUOUS", "TOO_COMPLEX", "NO_TRANSLATION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetAutomatedReasoningPolicyNextScenario AWS API Documentation
     #
@@ -7812,7 +7818,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

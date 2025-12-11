@@ -1007,6 +1007,17 @@ module Aws::RDS
     #     master_user_secret_kms_key_id: "String",
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
     #     source_region: "String",
     #   })
@@ -1859,6 +1870,14 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   ^
     # @option options [String] :master_user_authentication_type
     #   Specifies the authentication type for the master user. With IAM master
     #   user authentication, you can configure the master DB user with IAM
@@ -2831,6 +2850,17 @@ module Aws::RDS
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_cluster_identifier
@@ -3283,6 +3313,14 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   ^
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(source_db_cluster_identifier: @id)

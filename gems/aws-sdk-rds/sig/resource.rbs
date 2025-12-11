@@ -158,6 +158,17 @@ module Aws
                                ?master_user_secret_kms_key_id: ::String,
                                ?ca_certificate_identifier: ::String,
                                ?engine_lifecycle_support: ::String,
+                               ?tag_specifications: Array[
+                                 {
+                                   resource_type: ::String?,
+                                   tags: Array[
+                                     {
+                                       key: ::String?,
+                                       value: ::String?
+                                     },
+                                   ]?
+                                 },
+                               ],
                                ?master_user_authentication_type: ("password" | "iam-db-auth"),
                                ?source_region: ::String
                              ) -> DBCluster
@@ -253,6 +264,17 @@ module Aws
                                 ?multi_tenant: bool,
                                 ?dedicated_log_volume: bool,
                                 ?engine_lifecycle_support: ::String,
+                                ?tag_specifications: Array[
+                                  {
+                                    resource_type: ::String?,
+                                    tags: Array[
+                                      {
+                                        key: ::String?,
+                                        value: ::String?
+                                      },
+                                    ]?
+                                  },
+                                ],
                                 ?master_user_authentication_type: ("password" | "iam-db-auth"),
                                 ?additional_storage_volumes: Array[
                                   {

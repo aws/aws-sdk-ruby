@@ -3653,6 +3653,11 @@ module Aws::QuickSight
     #       },
     #       copy_source_arn: "CopySourceArn",
     #       secret_arn: "SecretArn",
+    #       key_pair_credentials: {
+    #         key_pair_username: "DbUsername", # required
+    #         private_key: "PrivateKey", # required
+    #         private_key_passphrase: "PrivateKeyPassphrase",
+    #       },
     #       web_proxy_credentials: {
     #         web_proxy_username: "DbUsername", # required
     #         web_proxy_password: "Password", # required
@@ -8010,6 +8015,23 @@ module Aws::QuickSight
     # Poll job descriptions after a job starts to know the status of the
     # job. For information on available status codes, see `JobStatus`.
     #
+    # **Registered user support**
+    #
+    # This API can be called as before to get status of a job started by the
+    # same Quick Sight user.
+    #
+    # **Possible error scenarios**
+    #
+    # Request will fail with an Access Denied error in the following
+    # scenarios:
+    #
+    # * The credentials have expired.
+    #
+    # * Job has been started by a different user.
+    #
+    # * Impersonated Quick Sight user doesn't have access to the specified
+    #   dashboard in the job.
+    #
     # @option params [required, String] :aws_account_id
     #   The ID of the Amazon Web Services account that the dashboard snapshot
     #   job is executed in.
@@ -8105,6 +8127,47 @@ module Aws::QuickSight
     # that says `Dashboard Snapshot Job with id <SnapshotjobId> has not
     # reached a terminal state.`.
     #
+    # **Registered user support**
+    #
+    # This API can be called as before to get the result of a job started by
+    # the same Quick Sight user. The result for the user will be returned in
+    # `RegisteredUsers` response attribute. The attribute will contain a
+    # list with at most one object in it.
+    #
+    # **Possible error scenarios**
+    #
+    # The request fails with an Access Denied error in the following
+    # scenarios:
+    #
+    # * The credentials have expired.
+    #
+    # * The job was started by a different user.
+    #
+    # * The registered user doesn't have access to the specified dashboard.
+    #
+    # The request succeeds but the job fails in the following scenarios:
+    #
+    # * `DASHBOARD_ACCESS_DENIED` - The registered user lost access to the
+    #   dashboard.
+    #
+    # * `CAPABILITY_RESTRICTED` - The registered user is restricted from
+    #   exporting data in **all** selected formats.
+    #
+    # The request succeeds but the response contains an error code in the
+    # following scenarios:
+    #
+    # * `CAPABILITY_RESTRICTED` - The registered user is restricted from
+    #   exporting data in **some** selected formats.
+    #
+    # * `RLS_CHANGED` - Row-level security settings have changed. Re-run the
+    #   job with current settings.
+    #
+    # * `CLS_CHANGED` - Column-level security settings have changed. Re-run
+    #   the job with current settings.
+    #
+    # * `DATASET_DELETED` - The dataset has been deleted. Verify the dataset
+    #   exists before re-running the job.
+    #
     # @option params [required, String] :aws_account_id
     #   The ID of the Amazon Web Services account that the dashboard snapshot
     #   job is executed in.
@@ -8158,6 +8221,23 @@ module Aws::QuickSight
     #   resp.result.anonymous_users[0].file_groups[0].s3_results[0].error_info #=> Array
     #   resp.result.anonymous_users[0].file_groups[0].s3_results[0].error_info[0].error_message #=> String
     #   resp.result.anonymous_users[0].file_groups[0].s3_results[0].error_info[0].error_type #=> String
+    #   resp.result.registered_users #=> Array
+    #   resp.result.registered_users[0].file_groups #=> Array
+    #   resp.result.registered_users[0].file_groups[0].files #=> Array
+    #   resp.result.registered_users[0].file_groups[0].files[0].sheet_selections #=> Array
+    #   resp.result.registered_users[0].file_groups[0].files[0].sheet_selections[0].sheet_id #=> String
+    #   resp.result.registered_users[0].file_groups[0].files[0].sheet_selections[0].selection_scope #=> String, one of "ALL_VISUALS", "SELECTED_VISUALS"
+    #   resp.result.registered_users[0].file_groups[0].files[0].sheet_selections[0].visual_ids #=> Array
+    #   resp.result.registered_users[0].file_groups[0].files[0].sheet_selections[0].visual_ids[0] #=> String
+    #   resp.result.registered_users[0].file_groups[0].files[0].format_type #=> String, one of "CSV", "PDF", "EXCEL"
+    #   resp.result.registered_users[0].file_groups[0].s3_results #=> Array
+    #   resp.result.registered_users[0].file_groups[0].s3_results[0].s3_destination_configuration.bucket_configuration.bucket_name #=> String
+    #   resp.result.registered_users[0].file_groups[0].s3_results[0].s3_destination_configuration.bucket_configuration.bucket_prefix #=> String
+    #   resp.result.registered_users[0].file_groups[0].s3_results[0].s3_destination_configuration.bucket_configuration.bucket_region #=> String
+    #   resp.result.registered_users[0].file_groups[0].s3_results[0].s3_uri #=> String
+    #   resp.result.registered_users[0].file_groups[0].s3_results[0].error_info #=> Array
+    #   resp.result.registered_users[0].file_groups[0].s3_results[0].error_info[0].error_message #=> String
+    #   resp.result.registered_users[0].file_groups[0].s3_results[0].error_info[0].error_type #=> String
     #   resp.error_info.error_message #=> String
     #   resp.error_info.error_type #=> String
     #   resp.request_id #=> String
@@ -11321,6 +11401,110 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def get_flow_permissions(params = {}, options = {})
       req = build_request(:get_flow_permissions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the identity context for a Quick Sight user in a specified
+    # namespace, allowing you to obtain identity tokens that can be used
+    # with identity-enhanced IAM role sessions to call identity-aware APIs.
+    #
+    # Currently, you can call the following APIs with identity-enhanced
+    # Credentials
+    #
+    # * [StartDashboardSnapshotJob][1]
+    #
+    # * [DescribeDashboardSnapshotJob][2]
+    #
+    # * [DescribeDashboardSnapshotJobResult][3]
+    #
+    # **Supported Authentication Methods**
+    #
+    # This API supports Quick Sight native users, IAM federated users, and
+    # Active Directory users. For Quick Sight users authenticated by Amazon
+    # Web Services Identity Center, see [Identity Center documentation on
+    # identity-enhanced IAM role sessions][4].
+    #
+    # **Getting Identity-Enhanced Credentials**
+    #
+    # To obtain identity-enhanced credentials, follow these steps:
+    #
+    # * Call the GetIdentityContext API to retrieve an identity token for
+    #   the specified user.
+    #
+    # * Use the identity token with the [STS AssumeRole API][5] to obtain
+    #   identity-enhanced IAM role session credentials.
+    #
+    # **Usage with STS AssumeRole**
+    #
+    # The identity token returned by this API should be used with the STS
+    # AssumeRole API to obtain credentials for an identity-enhanced IAM role
+    # session. When calling AssumeRole, include the identity token in the
+    # `ProvidedContexts` parameter with `ProviderArn` set to
+    # `arn:aws:iam::aws:contextProvider/QuickSight` and `ContextAssertion`
+    # set to the identity token received from this API.
+    #
+    # The assumed role must allow the `sts:SetContext` action in addition to
+    # `sts:AssumeRole` in its trust relationship policy. The trust policy
+    # should include both actions for the principal that will be assuming
+    # the role.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_StartDashboardSnapshotJob.html
+    # [2]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeDashboardSnapshotJob.html
+    # [3]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeDashboardSnapshotJobResult.html
+    # [4]: https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-identity-enhanced-iam-role-sessions.html
+    # [5]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the Amazon Web Services account that the user whose
+    #   identity context you want to retrieve is in. Currently, you use the ID
+    #   for the Amazon Web Services account that contains your Quick Sight
+    #   account.
+    #
+    # @option params [required, Types::UserIdentifier] :user_identifier
+    #   The identifier for the user whose identity context you want to
+    #   retrieve.
+    #
+    # @option params [String] :namespace
+    #   The namespace of the user that you want to get identity context for.
+    #   This parameter is required when the UserIdentifier is specified using
+    #   Email or UserName.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :session_expires_at
+    #   The timestamp at which the session will expire.
+    #
+    # @return [Types::GetIdentityContextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIdentityContextResponse#status #status} => Integer
+    #   * {Types::GetIdentityContextResponse#request_id #request_id} => String
+    #   * {Types::GetIdentityContextResponse#context #context} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_identity_context({
+    #     aws_account_id: "AwsAccountId", # required
+    #     user_identifier: { # required
+    #       user_name: "SensitiveString",
+    #       email: "SensitiveString",
+    #       user_arn: "Arn",
+    #     },
+    #     namespace: "Namespace",
+    #     session_expires_at: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.context #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetIdentityContext AWS API Documentation
+    #
+    # @overload get_identity_context(params = {})
+    # @param [Hash] params ({})
+    def get_identity_context(params = {}, options = {})
+      req = build_request(:get_identity_context, params)
       req.send_request(options)
     end
 
@@ -15842,9 +16026,95 @@ module Aws::QuickSight
     #
     # * The size of the generated snapshots.
     #
+    # **Registered user support**
+    #
+    # You can generate snapshots for registered Quick Sight users by using
+    # the Snapshot Job APIs with [identity-enhanced IAM role session
+    # credentials][2]. This approach allows you to create snapshots on
+    # behalf of specific Quick Sight users while respecting their row-level
+    # security (RLS), column-level security (CLS), dynamic default
+    # parameters and dashboard parameter/filter settings.
+    #
+    # To generate snapshots for registered Quick Sight users, you need to:
+    #
+    # * Obtain identity-enhanced IAM role session credentials from AWS
+    #   Security Token Service (STS).
+    #
+    # * Use these credentials to call the Snapshot Job APIs.
+    #
+    # Identity-enhanced credentials are credentials that contain information
+    # about the end user (e.g., registered Quick Sight user).
+    #
+    # If your Quick Sight users are backed by [AWS Identity Center][3], then
+    # you need to set up a [trusted token issuer][4]. Then, getting
+    # identity-enhanced IAM credentials for a Quick Sight user will look
+    # like the following:
+    #
+    # * Authenticate user with your OIDC compliant Identity Provider. You
+    #   should get auth tokens back.
+    #
+    # * Use the OIDC API, [CreateTokenWithIAM][5], to exchange auth tokens
+    #   to IAM tokens. One of the resulted tokens will be identity token.
+    #
+    # * Call STS AssumeRole API as you normally would, but provide an extra
+    #   `ProvidedContexts` parameter in the API request. The list of
+    #   contexts must have a single trusted context assertion. The
+    #   `ProviderArn` should be
+    #   `arn:aws:iam::aws:contextProvider/IdentityCenter` while
+    #   `ContextAssertion` will be the identity token you received in
+    #   response from CreateTokenWithIAM
+    #
+    # For more details, see [IdC documentation on Identity-enhanced IAM role
+    # sessions][2].
+    #
+    # To obtain Identity-enhanced credentials for Quick Sight native users,
+    # IAM federated users, or Active Directory users, follow the steps
+    # below:
+    #
+    # * Call Quick Sight [GetIdentityContext API][6] to get identity token.
+    #
+    # * Call STS AssumeRole API as you normally would, but provide extra
+    #   `ProvidedContexts` parameter in the API request. The list of
+    #   contexts must have a single trusted context assertion. The
+    #   `ProviderArn` should be
+    #   `arn:aws:iam::aws:contextProvider/QuickSight` while
+    #   `ContextAssertion` will be the identity token you received in
+    #   response from GetIdentityContext
+    #
+    # After obtaining the identity-enhanced IAM role session credentials,
+    # you can use them to start a job, describe the job and describe job
+    # result. You can use the same credentials as long as they haven't
+    # expired. All API requests made with these credentials are considered
+    # to be made by the impersonated Quick Sight user.
+    #
+    # When using identity-enhanced session credentials, set the
+    # UserConfiguration request attribute to null. Otherwise, the request
+    # will be invalid.
+    #
+    # **Possible error scenarios**
+    #
+    # The request fails with an Access Denied error in the following
+    # scenarios:
+    #
+    # * The credentials have expired.
+    #
+    # * The impersonated Quick Sight user doesn't have access to the
+    #   specified dashboard.
+    #
+    # * The impersonated Quick Sight user is restricted from exporting data
+    #   in the selected formats. For more information about export
+    #   restrictions, see [Customizing access to Amazon Quick Sight
+    #   capabilities][7].
+    #
     #
     #
     # [1]: http://aws.amazon.com/contact-us/
+    # [2]: https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-identity-enhanced-iam-role-sessions.html
+    # [3]: https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html
+    # [4]: https://docs.aws.amazon.com/singlesignon/latest/userguide/setuptrustedtokenissuer.html
+    # [5]: https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateTokenWithIAM.html
+    # [6]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GetIdentityContext.html
+    # [7]: https://docs.aws.amazon.com/quicksuite/latest/userguide/create-custom-permisions-profile.html
     #
     # @option params [required, String] :aws_account_id
     #   The ID of the Amazon Web Services account that the dashboard snapshot
@@ -15860,10 +16130,15 @@ module Aws::QuickSight
     #   runs. You can reuse this ID for another job 24 hours after the current
     #   job is completed.
     #
-    # @option params [required, Types::SnapshotUserConfiguration] :user_configuration
-    #   A structure that contains information about the anonymous users that
-    #   the generated snapshot is for. This API will not return information
-    #   about registered Amazon Quick Sight.
+    # @option params [Types::SnapshotUserConfiguration] :user_configuration
+    #   A structure that contains information about the users that the
+    #   dashboard snapshot is generated for. The users can be either anonymous
+    #   users or registered users. Anonymous users cannot be used together
+    #   with registered users.
+    #
+    #   When using identity-enhanced session credentials, set the
+    #   UserConfiguration request attribute to null. Otherwise, the request
+    #   will be invalid.
     #
     # @option params [required, Types::SnapshotConfiguration] :snapshot_configuration
     #   A structure that describes the configuration of the dashboard
@@ -15882,7 +16157,7 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     dashboard_id: "ShortRestrictiveResourceId", # required
     #     snapshot_job_id: "ShortRestrictiveResourceId", # required
-    #     user_configuration: { # required
+    #     user_configuration: {
     #       anonymous_users: [
     #         {
     #           row_level_permission_tags: [
@@ -18552,6 +18827,11 @@ module Aws::QuickSight
     #       },
     #       copy_source_arn: "CopySourceArn",
     #       secret_arn: "SecretArn",
+    #       key_pair_credentials: {
+    #         key_pair_username: "DbUsername", # required
+    #         private_key: "PrivateKey", # required
+    #         private_key_passphrase: "PrivateKeyPassphrase",
+    #       },
     #       web_proxy_credentials: {
     #         web_proxy_username: "DbUsername", # required
     #         web_proxy_password: "Password", # required
@@ -20656,7 +20936,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.165.0'
+      context[:gem_version] = '1.166.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

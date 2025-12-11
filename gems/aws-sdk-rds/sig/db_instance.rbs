@@ -373,6 +373,17 @@ module Aws
                     ?multi_tenant: bool,
                     ?dedicated_log_volume: bool,
                     ?engine_lifecycle_support: ::String,
+                    ?tag_specifications: Array[
+                      {
+                        resource_type: ::String?,
+                        tags: Array[
+                          {
+                            key: ::String?,
+                            value: ::String?
+                          },
+                        ]?
+                      },
+                    ],
                     ?master_user_authentication_type: ("password" | "iam-db-auth"),
                     ?additional_storage_volumes: Array[
                       {
@@ -445,6 +456,17 @@ module Aws
                                  ?dedicated_log_volume: bool,
                                  ?upgrade_storage_config: bool,
                                  ?ca_certificate_identifier: ::String,
+                                 ?tag_specifications: Array[
+                                   {
+                                     resource_type: ::String?,
+                                     tags: Array[
+                                       {
+                                         key: ::String?,
+                                         value: ::String?
+                                       },
+                                     ]?
+                                   },
+                                 ],
                                  ?additional_storage_volumes: Array[
                                    {
                                      volume_name: ::String,
@@ -549,6 +571,17 @@ module Aws
                     ?multi_tenant: bool,
                     ?dedicated_log_volume: bool,
                     ?engine: ::String,
+                    ?tag_specifications: Array[
+                      {
+                        resource_type: ::String?,
+                        tags: Array[
+                          {
+                            key: ::String?,
+                            value: ::String?
+                          },
+                        ]?
+                      },
+                    ],
                     ?master_user_authentication_type: ("password" | "iam-db-auth"),
                     ?additional_storage_volumes: Array[
                       {
@@ -567,7 +600,18 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBInstance.html#promote-instance_method
       def promote: (
                      ?backup_retention_period: ::Integer,
-                     ?preferred_backup_window: ::String
+                     ?preferred_backup_window: ::String,
+                     ?tag_specifications: Array[
+                       {
+                         resource_type: ::String?,
+                         tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]?
+                       },
+                     ]
                    ) -> DBInstance
                  | (?Hash[Symbol, untyped]) -> DBInstance
 
@@ -634,6 +678,17 @@ module Aws
                      ?dedicated_log_volume: bool,
                      ?ca_certificate_identifier: ::String,
                      ?engine_lifecycle_support: ::String,
+                     ?tag_specifications: Array[
+                       {
+                         resource_type: ::String?,
+                         tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]?
+                       },
+                     ],
                      ?manage_master_user_password: bool,
                      ?master_user_secret_kms_key_id: ::String,
                      ?additional_storage_volumes: Array[

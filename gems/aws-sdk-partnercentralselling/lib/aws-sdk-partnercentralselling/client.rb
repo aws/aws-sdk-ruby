@@ -985,11 +985,11 @@ module Aws::PartnerCentralSelling
     #             target_completion_date: "Date", # required
     #             expected_customer_spend: [ # required
     #               {
-    #                 amount: "Amount", # required
+    #                 amount: "Amount",
     #                 currency_code: "USD", # required, accepts USD, EUR, GBP, AUD, CAD, CNY, NZD, INR, JPY, CHF, SEK, AED, AFN, ALL, AMD, ANG, AOA, ARS, AWG, AZN, BAM, BBD, BDT, BGN, BHD, BIF, BMD, BND, BOB, BOV, BRL, BSD, BTN, BWP, BYN, BZD, CDF, CHE, CHW, CLF, CLP, COP, COU, CRC, CUC, CUP, CVE, CZK, DJF, DKK, DOP, DZD, EGP, ERN, ETB, FJD, FKP, GEL, GHS, GIP, GMD, GNF, GTQ, GYD, HKD, HNL, HRK, HTG, HUF, IDR, ILS, IQD, IRR, ISK, JMD, JOD, KES, KGS, KHR, KMF, KPW, KRW, KWD, KYD, KZT, LAK, LBP, LKR, LRD, LSL, LYD, MAD, MDL, MGA, MKD, MMK, MNT, MOP, MRU, MUR, MVR, MWK, MXN, MXV, MYR, MZN, NAD, NGN, NIO, NOK, NPR, OMR, PAB, PEN, PGK, PHP, PKR, PLN, PYG, QAR, RON, RSD, RUB, RWF, SAR, SBD, SCR, SDG, SGD, SHP, SLL, SOS, SRD, SSP, STN, SVC, SYP, SZL, THB, TJS, TMT, TND, TOP, TRY, TTD, TWD, TZS, UAH, UGX, USN, UYI, UYU, UZS, VEF, VND, VUV, WST, XAF, XCD, XDR, XOF, XPF, XSU, XUA, YER, ZAR, ZMW, ZWL
     #                 frequency: "Monthly", # required, accepts Monthly
     #                 target_company: "ExpectedCustomerSpendTargetCompanyString", # required
-    #                 estimation_url: "WebsiteUrl",
+    #                 estimation_url: "EstimationUrl",
     #               },
     #             ],
     #           },
@@ -1223,11 +1223,11 @@ module Aws::PartnerCentralSelling
     #       delivery_models: ["SaaS or PaaS"], # accepts SaaS or PaaS, BYOL or AMI, Managed Services, Professional Services, Resell, Other
     #       expected_customer_spend: [
     #         {
-    #           amount: "Amount", # required
+    #           amount: "Amount",
     #           currency_code: "USD", # required, accepts USD, EUR, GBP, AUD, CAD, CNY, NZD, INR, JPY, CHF, SEK, AED, AFN, ALL, AMD, ANG, AOA, ARS, AWG, AZN, BAM, BBD, BDT, BGN, BHD, BIF, BMD, BND, BOB, BOV, BRL, BSD, BTN, BWP, BYN, BZD, CDF, CHE, CHW, CLF, CLP, COP, COU, CRC, CUC, CUP, CVE, CZK, DJF, DKK, DOP, DZD, EGP, ERN, ETB, FJD, FKP, GEL, GHS, GIP, GMD, GNF, GTQ, GYD, HKD, HNL, HRK, HTG, HUF, IDR, ILS, IQD, IRR, ISK, JMD, JOD, KES, KGS, KHR, KMF, KPW, KRW, KWD, KYD, KZT, LAK, LBP, LKR, LRD, LSL, LYD, MAD, MDL, MGA, MKD, MMK, MNT, MOP, MRU, MUR, MVR, MWK, MXN, MXV, MYR, MZN, NAD, NGN, NIO, NOK, NPR, OMR, PAB, PEN, PGK, PHP, PKR, PLN, PYG, QAR, RON, RSD, RUB, RWF, SAR, SBD, SCR, SDG, SGD, SHP, SLL, SOS, SRD, SSP, STN, SVC, SYP, SZL, THB, TJS, TMT, TND, TOP, TRY, TTD, TWD, TZS, UAH, UGX, USN, UYI, UYU, UZS, VEF, VND, VUV, WST, XAF, XCD, XDR, XOF, XPF, XSU, XUA, YER, ZAR, ZMW, ZWL
     #           frequency: "Monthly", # required, accepts Monthly
     #           target_company: "ExpectedCustomerSpendTargetCompanyString", # required
-    #           estimation_url: "WebsiteUrl",
+    #           estimation_url: "EstimationUrl",
     #         },
     #       ],
     #       title: "ProjectTitleString",
@@ -1240,6 +1240,7 @@ module Aws::PartnerCentralSelling
     #       other_competitor_names: "ProjectOtherCompetitorNamesString",
     #       other_solution_description: "ProjectOtherSolutionDescriptionString",
     #       additional_comments: "ProjectAdditionalCommentsString",
+    #       aws_partition: "aws-eusc", # accepts aws-eusc
     #     },
     #     opportunity_type: "Net New Business", # accepts Net New Business, Flat Renewal, Expansion
     #     marketing: {
@@ -1618,6 +1619,42 @@ module Aws::PartnerCentralSelling
     #   resp.opportunity_team[0].business_title #=> String, one of "AWSSalesRep", "AWSAccountOwner", "WWPSPDM", "PDM", "PSM", "ISVSM"
     #   resp.insights.next_best_actions #=> String
     #   resp.insights.engagement_score #=> String, one of "High", "Medium", "Low"
+    #   resp.insights.aws_products_spend_insights_by_source.partner.currency_code #=> String, one of "USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"
+    #   resp.insights.aws_products_spend_insights_by_source.partner.frequency #=> String, one of "Monthly"
+    #   resp.insights.aws_products_spend_insights_by_source.partner.total_amount #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.partner.total_optimized_amount #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.partner.total_potential_savings_amount #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.partner.total_amount_by_category #=> Hash
+    #   resp.insights.aws_products_spend_insights_by_source.partner.total_amount_by_category["String"] #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.partner.aws_products #=> Array
+    #   resp.insights.aws_products_spend_insights_by_source.partner.aws_products[0].product_code #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.partner.aws_products[0].service_code #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.partner.aws_products[0].categories #=> Array
+    #   resp.insights.aws_products_spend_insights_by_source.partner.aws_products[0].categories[0] #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.partner.aws_products[0].amount #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.partner.aws_products[0].optimized_amount #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.partner.aws_products[0].potential_savings_amount #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.partner.aws_products[0].optimizations #=> Array
+    #   resp.insights.aws_products_spend_insights_by_source.partner.aws_products[0].optimizations[0].description #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.partner.aws_products[0].optimizations[0].savings_amount #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.aws.currency_code #=> String, one of "USD", "EUR", "GBP", "AUD", "CAD", "CNY", "NZD", "INR", "JPY", "CHF", "SEK", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CDF", "CHE", "CHW", "CLF", "CLP", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "IQD", "IRR", "ISK", "JMD", "JOD", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USN", "UYI", "UYU", "UZS", "VEF", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA", "YER", "ZAR", "ZMW", "ZWL"
+    #   resp.insights.aws_products_spend_insights_by_source.aws.frequency #=> String, one of "Monthly"
+    #   resp.insights.aws_products_spend_insights_by_source.aws.total_amount #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.aws.total_optimized_amount #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.aws.total_potential_savings_amount #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.aws.total_amount_by_category #=> Hash
+    #   resp.insights.aws_products_spend_insights_by_source.aws.total_amount_by_category["String"] #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.aws.aws_products #=> Array
+    #   resp.insights.aws_products_spend_insights_by_source.aws.aws_products[0].product_code #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.aws.aws_products[0].service_code #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.aws.aws_products[0].categories #=> Array
+    #   resp.insights.aws_products_spend_insights_by_source.aws.aws_products[0].categories[0] #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.aws.aws_products[0].amount #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.aws.aws_products[0].optimized_amount #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.aws.aws_products[0].potential_savings_amount #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.aws.aws_products[0].optimizations #=> Array
+    #   resp.insights.aws_products_spend_insights_by_source.aws.aws_products[0].optimizations[0].description #=> String
+    #   resp.insights.aws_products_spend_insights_by_source.aws.aws_products[0].optimizations[0].savings_amount #=> String
     #   resp.involvement_type_change_reason #=> String, one of "Expansion Opportunity", "Change in Deal Information", "Customer Requested", "Technical Complexity", "Risk Mitigation"
     #   resp.related_entity_ids.aws_products #=> Array
     #   resp.related_entity_ids.aws_products[0] #=> String
@@ -1635,6 +1672,7 @@ module Aws::PartnerCentralSelling
     #   resp.project.expected_customer_spend[0].frequency #=> String, one of "Monthly"
     #   resp.project.expected_customer_spend[0].target_company #=> String
     #   resp.project.expected_customer_spend[0].estimation_url #=> String
+    #   resp.project.aws_partition #=> String, one of "aws-eusc"
     #   resp.catalog #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/GetAwsOpportunitySummary AWS API Documentation
@@ -1922,6 +1960,7 @@ module Aws::PartnerCentralSelling
     #   resp.project.other_competitor_names #=> String
     #   resp.project.other_solution_description #=> String
     #   resp.project.additional_comments #=> String
+    #   resp.project.aws_partition #=> String, one of "aws-eusc"
     #   resp.opportunity_type #=> String, one of "Net New Business", "Flat Renewal", "Expansion"
     #   resp.marketing.campaign_name #=> String
     #   resp.marketing.source #=> String, one of "Marketing Activity", "None"
@@ -3983,11 +4022,11 @@ module Aws::PartnerCentralSelling
     #       delivery_models: ["SaaS or PaaS"], # accepts SaaS or PaaS, BYOL or AMI, Managed Services, Professional Services, Resell, Other
     #       expected_customer_spend: [
     #         {
-    #           amount: "Amount", # required
+    #           amount: "Amount",
     #           currency_code: "USD", # required, accepts USD, EUR, GBP, AUD, CAD, CNY, NZD, INR, JPY, CHF, SEK, AED, AFN, ALL, AMD, ANG, AOA, ARS, AWG, AZN, BAM, BBD, BDT, BGN, BHD, BIF, BMD, BND, BOB, BOV, BRL, BSD, BTN, BWP, BYN, BZD, CDF, CHE, CHW, CLF, CLP, COP, COU, CRC, CUC, CUP, CVE, CZK, DJF, DKK, DOP, DZD, EGP, ERN, ETB, FJD, FKP, GEL, GHS, GIP, GMD, GNF, GTQ, GYD, HKD, HNL, HRK, HTG, HUF, IDR, ILS, IQD, IRR, ISK, JMD, JOD, KES, KGS, KHR, KMF, KPW, KRW, KWD, KYD, KZT, LAK, LBP, LKR, LRD, LSL, LYD, MAD, MDL, MGA, MKD, MMK, MNT, MOP, MRU, MUR, MVR, MWK, MXN, MXV, MYR, MZN, NAD, NGN, NIO, NOK, NPR, OMR, PAB, PEN, PGK, PHP, PKR, PLN, PYG, QAR, RON, RSD, RUB, RWF, SAR, SBD, SCR, SDG, SGD, SHP, SLL, SOS, SRD, SSP, STN, SVC, SYP, SZL, THB, TJS, TMT, TND, TOP, TRY, TTD, TWD, TZS, UAH, UGX, USN, UYI, UYU, UZS, VEF, VND, VUV, WST, XAF, XCD, XDR, XOF, XPF, XSU, XUA, YER, ZAR, ZMW, ZWL
     #           frequency: "Monthly", # required, accepts Monthly
     #           target_company: "ExpectedCustomerSpendTargetCompanyString", # required
-    #           estimation_url: "WebsiteUrl",
+    #           estimation_url: "EstimationUrl",
     #         },
     #       ],
     #       title: "ProjectTitleString",
@@ -4000,6 +4039,7 @@ module Aws::PartnerCentralSelling
     #       other_competitor_names: "ProjectOtherCompetitorNamesString",
     #       other_solution_description: "ProjectOtherSolutionDescriptionString",
     #       additional_comments: "ProjectAdditionalCommentsString",
+    #       aws_partition: "aws-eusc", # accepts aws-eusc
     #     },
     #     opportunity_type: "Net New Business", # accepts Net New Business, Flat Renewal, Expansion
     #     marketing: {
@@ -4069,7 +4109,7 @@ module Aws::PartnerCentralSelling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-partnercentralselling'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

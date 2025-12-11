@@ -1292,6 +1292,8 @@ module Aws::Organizations
     #
     #   * [S3\_POLICY][12]
     #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][13]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -1305,7 +1307,8 @@ module Aws::Organizations
     #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
     #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
     #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
-    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
+    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1644,6 +1647,8 @@ module Aws::Organizations
     #
     #   * [S3\_POLICY][10]
     #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][11]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -1655,7 +1660,8 @@ module Aws::Organizations
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
     #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
     #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
-    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @!attribute [rw] target_id
@@ -1954,6 +1960,8 @@ module Aws::Organizations
     #
     #   * [S3\_POLICY][12]
     #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][13]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -1967,7 +1975,8 @@ module Aws::Organizations
     #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
     #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
     #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
-    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
+    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyTypeRequest AWS API Documentation
@@ -2227,6 +2236,8 @@ module Aws::Organizations
     #
     #   * [S3\_POLICY][12]
     #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][13]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -2240,7 +2251,8 @@ module Aws::Organizations
     #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
     #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
     #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
-    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
+    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyTypeRequest AWS API Documentation
@@ -3122,6 +3134,8 @@ module Aws::Organizations
     #
     #   * [S3\_POLICY][10]
     #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][11]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -3133,7 +3147,8 @@ module Aws::Organizations
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
     #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
     #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
-    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3189,6 +3204,8 @@ module Aws::Organizations
     #
     #   * [S3\_POLICY][10]
     #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][11]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -3200,7 +3217,8 @@ module Aws::Organizations
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
     #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
     #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
-    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3482,6 +3500,8 @@ module Aws::Organizations
     #
     #   * [S3\_POLICY][10]
     #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][11]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -3493,7 +3513,8 @@ module Aws::Organizations
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
     #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
     #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
-    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3549,6 +3570,8 @@ module Aws::Organizations
     #
     #   * [S3\_POLICY][10]
     #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][11]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -3560,7 +3583,8 @@ module Aws::Organizations
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
     #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
     #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
-    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -3991,6 +4015,8 @@ module Aws::Organizations
     #
     #   * [S3\_POLICY][12]
     #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][13]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -4004,7 +4030,8 @@ module Aws::Organizations
     #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
     #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
     #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
-    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
+    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4082,6 +4109,8 @@ module Aws::Organizations
     #
     #   * [S3\_POLICY][12]
     #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][13]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -4095,7 +4124,8 @@ module Aws::Organizations
     #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
     #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
     #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
-    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_S3.html
+    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @!attribute [rw] next_token

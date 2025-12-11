@@ -1614,7 +1614,7 @@ module Aws::IVSRealTime
     # @example Response structure
     #
     #   resp.events #=> Array
-    #   resp.events[0].name #=> String, one of "JOINED", "LEFT", "PUBLISH_STARTED", "PUBLISH_STOPPED", "SUBSCRIBE_STARTED", "SUBSCRIBE_STOPPED", "PUBLISH_ERROR", "SUBSCRIBE_ERROR", "JOIN_ERROR", "REPLICATION_STARTED", "REPLICATION_STOPPED"
+    #   resp.events[0].name #=> String, one of "JOINED", "LEFT", "PUBLISH_STARTED", "PUBLISH_STOPPED", "SUBSCRIBE_STARTED", "SUBSCRIBE_STOPPED", "PUBLISH_ERROR", "SUBSCRIBE_ERROR", "JOIN_ERROR", "REPLICATION_STARTED", "REPLICATION_STOPPED", "TOKEN_EXCHANGED"
     #   resp.events[0].participant_id #=> String
     #   resp.events[0].event_time #=> Time
     #   resp.events[0].remote_participant_id #=> String
@@ -1622,6 +1622,18 @@ module Aws::IVSRealTime
     #   resp.events[0].destination_stage_arn #=> String
     #   resp.events[0].destination_session_id #=> String
     #   resp.events[0].replica #=> Boolean
+    #   resp.events[0].previous_token.capabilities #=> Array
+    #   resp.events[0].previous_token.capabilities[0] #=> String, one of "PUBLISH", "SUBSCRIBE"
+    #   resp.events[0].previous_token.attributes #=> Hash
+    #   resp.events[0].previous_token.attributes["String"] #=> String
+    #   resp.events[0].previous_token.user_id #=> String
+    #   resp.events[0].previous_token.expiration_time #=> Time
+    #   resp.events[0].new_token.capabilities #=> Array
+    #   resp.events[0].new_token.capabilities[0] #=> String, one of "PUBLISH", "SUBSCRIBE"
+    #   resp.events[0].new_token.attributes #=> Hash
+    #   resp.events[0].new_token.attributes["String"] #=> String
+    #   resp.events[0].new_token.user_id #=> String
+    #   resp.events[0].new_token.expiration_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListParticipantEvents AWS API Documentation
@@ -2496,7 +2508,7 @@ module Aws::IVSRealTime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ivsrealtime'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

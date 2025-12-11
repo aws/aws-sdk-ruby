@@ -161,14 +161,9 @@ module Aws::IdentityStore
     #   @return [String]
     #
     # @!attribute [rw] reason
-    #   This request cannot be completed for one of the following reasons:
-    #
-    #   * Performing the requested operation would violate an existing
-    #     uniqueness claim in the identity store. Resolve the conflict
-    #     before retrying this request.
-    #
-    #   * The requested resource was being concurrently modified by another
-    #     request.
+    #   Indicates the reason for a conflict error when the service is unable
+    #   to access a Customer Managed KMS key. For non-KMS permission errors,
+    #   this field is not included.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ConflictException AWS API Documentation
@@ -353,6 +348,14 @@ module Aws::IdentityStore
     #   standard date format for storing personal information.
     #   @return [String]
     #
+    # @!attribute [rw] extensions
+    #   A map with additional attribute extensions for the user. Each map
+    #   key corresponds to an extension name, while map values represent
+    #   extension data in `Document` type (not supported by Java V1, Go V1
+    #   and older versions of the CLI). `aws:identitystore:enterprise` is
+    #   the only supported extension name.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/CreateUserRequest AWS API Documentation
     #
     class CreateUserRequest < Struct.new(
@@ -372,7 +375,8 @@ module Aws::IdentityStore
       :timezone,
       :photos,
       :website,
-      :birthdate)
+      :birthdate,
+      :extensions)
       SENSITIVE = [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone, :website, :birthdate]
       include Aws::Structure
     end
@@ -614,11 +618,18 @@ module Aws::IdentityStore
     #   The identifier for a user in the identity store.
     #   @return [String]
     #
+    # @!attribute [rw] extensions
+    #   A collection of extension names indicating what extensions the
+    #   service should retrieve alongside other user attributes.
+    #   `aws:identitystore:enterprise` is the only supported extension name.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DescribeUserRequest AWS API Documentation
     #
     class DescribeUserRequest < Struct.new(
       :identity_store_id,
-      :user_id)
+      :user_id,
+      :extensions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -728,6 +739,11 @@ module Aws::IdentityStore
     #   The identifier of the user or system that last updated the user.
     #   @return [String]
     #
+    # @!attribute [rw] extensions
+    #   A map of explicitly requested attribute extensions associated with
+    #   the user. Not populated if the user has no requested extensions.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DescribeUserResponse AWS API Documentation
     #
     class DescribeUserResponse < Struct.new(
@@ -754,7 +770,8 @@ module Aws::IdentityStore
       :created_at,
       :created_by,
       :updated_at,
-      :updated_by)
+      :updated_by,
+      :extensions)
       SENSITIVE = [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone, :website, :birthdate]
       include Aws::Structure
     end
@@ -1337,6 +1354,12 @@ module Aws::IdentityStore
     #   new identity store is created.
     #   @return [String]
     #
+    # @!attribute [rw] extensions
+    #   A collection of extension names indicating what extensions the
+    #   service should retrieve alongside other user attributes.
+    #   `aws:identitystore:enterprise` is the only supported extension name.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per request. This
     #   parameter is used in the ` ListUsers` and `ListGroups` requests to
@@ -1361,6 +1384,7 @@ module Aws::IdentityStore
     #
     class ListUsersRequest < Struct.new(
       :identity_store_id,
+      :extensions,
       :max_results,
       :next_token,
       :filters)
@@ -1820,6 +1844,11 @@ module Aws::IdentityStore
     #   The identifier of the user or system that last updated the user.
     #   @return [String]
     #
+    # @!attribute [rw] extensions
+    #   A map of explicitly requested attribute extensions associated with
+    #   the user. Not populated if the user has no requested extensions.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/User AWS API Documentation
     #
     class User < Struct.new(
@@ -1846,7 +1875,8 @@ module Aws::IdentityStore
       :created_at,
       :created_by,
       :updated_at,
-      :updated_by)
+      :updated_by,
+      :extensions)
       SENSITIVE = [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone, :website, :birthdate]
       include Aws::Structure
     end

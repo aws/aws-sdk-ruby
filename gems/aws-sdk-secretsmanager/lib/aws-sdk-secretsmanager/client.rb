@@ -1871,6 +1871,9 @@ module Aws::SecretsManager
     # @option params [String] :sort_order
     #   Secrets are listed by `CreatedDate`.
     #
+    # @option params [String] :sort_by
+    #   If not specified, secrets are listed by `CreatedDate`.
+    #
     # @return [Types::ListSecretsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListSecretsResponse#secret_list #secret_list} => Array&lt;Types::SecretListEntry&gt;
@@ -1927,6 +1930,7 @@ module Aws::SecretsManager
     #       },
     #     ],
     #     sort_order: "asc", # accepts asc, desc
+    #     sort_by: "created-date", # accepts created-date, last-accessed-date, last-changed-date, name
     #   })
     #
     # @example Response structure
@@ -3508,7 +3512,7 @@ module Aws::SecretsManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.124.0'
+      context[:gem_version] = '1.125.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

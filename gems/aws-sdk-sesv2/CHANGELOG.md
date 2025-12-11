@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2025-12-11)
+------------------
+
+* Feature - Update GetEmailIdentity and CreateEmailIdentity response to include SigningHostedZone in DkimAttributes. Updated PutEmailIdentityDkimSigningAttributes Response to include SigningHostedZone.
+
+1.90.0 (2025-12-08)
+------------------
+
+* Feature - Update Mail Manager Archive ARN validation
+
 1.89.0 (2025-12-05)
 ------------------
 

@@ -360,6 +360,17 @@ module Aws
                     ?master_user_secret_kms_key_id: ::String,
                     ?ca_certificate_identifier: ::String,
                     ?engine_lifecycle_support: ::String,
+                    ?tag_specifications: Array[
+                      {
+                        resource_type: ::String?,
+                        tags: Array[
+                          {
+                            key: ::String?,
+                            value: ::String?
+                          },
+                        ]?
+                      },
+                    ],
                     ?master_user_authentication_type: ("password" | "iam-db-auth"),
                     ?source_region: ::String
                   ) -> DBCluster
@@ -511,7 +522,18 @@ module Aws
                      ?enable_performance_insights: bool,
                      ?performance_insights_kms_key_id: ::String,
                      ?performance_insights_retention_period: ::Integer,
-                     ?engine_lifecycle_support: ::String
+                     ?engine_lifecycle_support: ::String,
+                     ?tag_specifications: Array[
+                       {
+                         resource_type: ::String?,
+                         tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]?
+                       },
+                     ]
                    ) -> DBCluster
                  | (?Hash[Symbol, untyped]) -> DBCluster
 

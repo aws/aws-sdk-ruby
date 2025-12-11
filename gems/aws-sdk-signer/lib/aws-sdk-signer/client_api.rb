@@ -582,7 +582,7 @@ module Aws::Signer
         o.http_method = "GET"
         o.http_request_uri = "/revocations"
         o.endpoint_pattern = {
-          "hostPrefix" => "verification.",
+          "hostPrefix" => "data-",
         }
         o.input = Shapes::ShapeRef.new(shape: GetRevocationStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: GetRevocationStatusResponse)

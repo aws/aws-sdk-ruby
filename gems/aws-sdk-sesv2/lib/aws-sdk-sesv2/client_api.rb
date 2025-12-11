@@ -274,6 +274,7 @@ module Aws::SESV2
     GetTenantResponse = Shapes::StructureShape.new(name: 'GetTenantResponse')
     GuardianAttributes = Shapes::StructureShape.new(name: 'GuardianAttributes')
     GuardianOptions = Shapes::StructureShape.new(name: 'GuardianOptions')
+    HostedZone = Shapes::StringShape.new(name: 'HostedZone')
     HttpsPolicy = Shapes::StringShape.new(name: 'HttpsPolicy')
     Identity = Shapes::StringShape.new(name: 'Identity')
     IdentityInfo = Shapes::StructureShape.new(name: 'IdentityInfo')
@@ -976,6 +977,7 @@ module Aws::SESV2
     DkimAttributes.add_member(:signing_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "SigningEnabled"))
     DkimAttributes.add_member(:status, Shapes::ShapeRef.new(shape: DkimStatus, location_name: "Status"))
     DkimAttributes.add_member(:tokens, Shapes::ShapeRef.new(shape: DnsTokenList, location_name: "Tokens"))
+    DkimAttributes.add_member(:signing_hosted_zone, Shapes::ShapeRef.new(shape: HostedZone, location_name: "SigningHostedZone"))
     DkimAttributes.add_member(:signing_attributes_origin, Shapes::ShapeRef.new(shape: DkimSigningAttributesOrigin, location_name: "SigningAttributesOrigin"))
     DkimAttributes.add_member(:next_signing_key_length, Shapes::ShapeRef.new(shape: DkimSigningKeyLength, location_name: "NextSigningKeyLength"))
     DkimAttributes.add_member(:current_signing_key_length, Shapes::ShapeRef.new(shape: DkimSigningKeyLength, location_name: "CurrentSigningKeyLength"))
@@ -1814,6 +1816,7 @@ module Aws::SESV2
 
     PutEmailIdentityDkimSigningAttributesResponse.add_member(:dkim_status, Shapes::ShapeRef.new(shape: DkimStatus, location_name: "DkimStatus"))
     PutEmailIdentityDkimSigningAttributesResponse.add_member(:dkim_tokens, Shapes::ShapeRef.new(shape: DnsTokenList, location_name: "DkimTokens"))
+    PutEmailIdentityDkimSigningAttributesResponse.add_member(:signing_hosted_zone, Shapes::ShapeRef.new(shape: HostedZone, location_name: "SigningHostedZone"))
     PutEmailIdentityDkimSigningAttributesResponse.struct_class = Types::PutEmailIdentityDkimSigningAttributesResponse
 
     PutEmailIdentityFeedbackAttributesRequest.add_member(:email_identity, Shapes::ShapeRef.new(shape: Identity, required: true, location: "uri", location_name: "EmailIdentity"))

@@ -544,19 +544,20 @@ module Aws::Account
     # account.
     #
     # For complete details about how to use the alternate contact
-    # operations, see [Access or updating the alternate contacts][1].
+    # operations, see [Update the alternate contacts for your Amazon Web
+    # Services account][1].
     #
     # <note markdown="1"> Before you can update the alternate contact information for an Amazon
     # Web Services account that is managed by Organizations, you must first
     # enable integration between Amazon Web Services Account Management and
-    # Organizations. For more information, see [Enabling trusted access for
+    # Organizations. For more information, see [Enable trusted access for
     # Amazon Web Services Account Management][2].
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html
+    # [1]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-alternate.html
     # [2]: https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html
     #
     # @option params [String] :account_id
@@ -572,7 +573,7 @@ module Aws::Account
     #   same organization. The organization must have [all features
     #   enabled][2], and the organization must have [trusted access][3]
     #   enabled for the Account Management service, and optionally a
-    #   [delegated admin][4] account assigned.
+    #   [delegated administrator][4] account assigned.
     #
     #   <note markdown="1"> The management account can't specify its own `AccountId`; it must
     #   call the operation in standalone context by not including the
@@ -589,8 +590,8 @@ module Aws::Account
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
     #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
     #
     # @option params [required, String] :alternate_contact_type
     #   Specifies which of the alternate contacts to delete.
@@ -755,7 +756,7 @@ module Aws::Account
     #   same organization. The organization must have [all features
     #   enabled][2], and the organization must have [trusted access][3]
     #   enabled for the Account Management service, and optionally a
-    #   [delegated admin][4] account assigned.
+    #   [delegated administrator][4] account assigned.
     #
     #   <note markdown="1"> The management account can't specify its own `AccountId`; it must
     #   call the operation in standalone context by not including the
@@ -772,8 +773,8 @@ module Aws::Account
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
     #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
     #
     # @return [Types::GetAccountInformationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -806,19 +807,20 @@ module Aws::Account
     # Services account.
     #
     # For complete details about how to use the alternate contact
-    # operations, see [Access or updating the alternate contacts][1].
+    # operations, see [Update the alternate contacts for your Amazon Web
+    # Services account][1].
     #
     # <note markdown="1"> Before you can update the alternate contact information for an Amazon
     # Web Services account that is managed by Organizations, you must first
     # enable integration between Amazon Web Services Account Management and
-    # Organizations. For more information, see [Enabling trusted access for
+    # Organizations. For more information, see [Enable trusted access for
     # Amazon Web Services Account Management][2].
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html
+    # [1]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-alternate.html
     # [2]: https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html
     #
     # @option params [String] :account_id
@@ -834,7 +836,7 @@ module Aws::Account
     #   same organization. The organization must have [all features
     #   enabled][2], and the organization must have [trusted access][3]
     #   enabled for the Account Management service, and optionally a
-    #   [delegated admin][4] account assigned.
+    #   [delegated administrator][4] account assigned.
     #
     #   <note markdown="1"> The management account can't specify its own `AccountId`; it must
     #   call the operation in standalone context by not including the
@@ -851,8 +853,8 @@ module Aws::Account
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
     #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
     #
     # @option params [required, String] :alternate_contact_type
     #   Specifies which alternate contact you want to retrieve.
@@ -889,11 +891,12 @@ module Aws::Account
     # account.
     #
     # For complete details about how to use the primary contact operations,
-    # see [Update the primary and alternate contact information][1].
+    # see [Update the primary contact for your Amazon Web Services
+    # account][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html
+    # [1]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-primary.html
     #
     # @option params [String] :account_id
     #   Specifies the 12-digit account ID number of the Amazon Web Services
@@ -957,6 +960,69 @@ module Aws::Account
     # @param [Hash] params ({})
     def get_contact_information(params = {}, options = {})
       req = build_request(:get_contact_information, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about the GovCloud account linked to the
+    # specified standard account (if it exists) including the GovCloud
+    # account ID and state. To use this API, an IAM user or role must have
+    # the `account:GetGovCloudAccountInformation` IAM permission.
+    #
+    # @option params [String] :standard_account_id
+    #   Specifies the 12 digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation.
+    #
+    #   If you do not specify this parameter, it defaults to the Amazon Web
+    #   Services account of the identity used to call the operation.
+    #
+    #   To use this parameter, the caller must be an identity in the
+    #   [organization's management account][1] or a delegated administrator
+    #   account, and the specified account ID must be a member account in the
+    #   same organization. The organization must have [all features
+    #   enabled][2], and the organization must have [trusted access][3]
+    #   enabled for the Account Management service, and optionally a
+    #   [delegated administrator][4] account assigned.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`; it must
+    #   call the operation in standalone context by not including the
+    #   `AccountId` parameter.
+    #
+    #    </note>
+    #
+    #   To call this operation on an account that is not a member of an
+    #   organization, then don't specify this parameter, and call the
+    #   operation using an identity belonging to the account whose contacts
+    #   you wish to retrieve or modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
+    #
+    # @return [Types::GetGovCloudAccountInformationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGovCloudAccountInformationResponse#account_state #account_state} => String
+    #   * {Types::GetGovCloudAccountInformationResponse#gov_cloud_account_id #gov_cloud_account_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_gov_cloud_account_information({
+    #     standard_account_id: "AccountId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_state #=> String, one of "PENDING_ACTIVATION", "ACTIVE", "SUSPENDED", "CLOSED"
+    #   resp.gov_cloud_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/GetGovCloudAccountInformation AWS API Documentation
+    #
+    # @overload get_gov_cloud_account_information(params = {})
+    # @param [Hash] params ({})
+    def get_gov_cloud_account_information(params = {}, options = {})
+      req = build_request(:get_gov_cloud_account_information, params)
       req.send_request(options)
     end
 
@@ -1188,7 +1254,7 @@ module Aws::Account
     #   same organization. The organization must have [all features
     #   enabled][2], and the organization must have [trusted access][3]
     #   enabled for the Account Management service, and optionally a
-    #   [delegated admin][4] account assigned.
+    #   [delegated administrator][4] account assigned.
     #
     #   <note markdown="1"> The management account can't specify its own `AccountId`; it must
     #   call the operation in standalone context by not including the
@@ -1205,8 +1271,8 @@ module Aws::Account
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
     #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
     #
     # @option params [required, String] :account_name
     #   The name of the account.
@@ -1233,19 +1299,20 @@ module Aws::Account
     # Services account.
     #
     # For complete details about how to use the alternate contact
-    # operations, see [Access or updating the alternate contacts][1].
+    # operations, see [Update the alternate contacts for your Amazon Web
+    # Services account][1].
     #
     # <note markdown="1"> Before you can update the alternate contact information for an Amazon
     # Web Services account that is managed by Organizations, you must first
     # enable integration between Amazon Web Services Account Management and
-    # Organizations. For more information, see [Enabling trusted access for
+    # Organizations. For more information, see [Enable trusted access for
     # Amazon Web Services Account Management][2].
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html
+    # [1]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-alternate.html
     # [2]: https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html
     #
     # @option params [String] :account_id
@@ -1261,7 +1328,7 @@ module Aws::Account
     #   same organization. The organization must have [all features
     #   enabled][2], and the organization must have [trusted access][3]
     #   enabled for the Account Management service, and optionally a
-    #   [delegated admin][4] account assigned.
+    #   [delegated administrator][4] account assigned.
     #
     #   <note markdown="1"> The management account can't specify its own `AccountId`; it must
     #   call the operation in standalone context by not including the
@@ -1278,8 +1345,8 @@ module Aws::Account
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
     #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
     #
     # @option params [required, String] :alternate_contact_type
     #   Specifies which alternate contact you want to create or update.
@@ -1322,11 +1389,12 @@ module Aws::Account
     # account.
     #
     # For complete details about how to use the primary contact operations,
-    # see [Update the primary and alternate contact information][1].
+    # see [Update the primary contact for your Amazon Web Services
+    # account][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html
+    # [1]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-primary.html
     #
     # @option params [String] :account_id
     #   Specifies the 12-digit account ID number of the Amazon Web Services
@@ -1338,8 +1406,8 @@ module Aws::Account
     #   specified account ID must be a member account in the same
     #   organization. The organization must have [all features enabled][2],
     #   and the organization must have [trusted access][3] enabled for the
-    #   Account Management service, and optionally a [delegated admin][4]
-    #   account assigned.
+    #   Account Management service, and optionally a [delegated
+    #   administrator][4] account assigned.
     #
     #   <note markdown="1"> The management account can't specify its own `AccountId`. It must
     #   call the operation in standalone context by not including the
@@ -1356,7 +1424,7 @@ module Aws::Account
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
     #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
     #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
     #
     # @option params [required, Types::ContactInformation] :contact_information
@@ -1469,7 +1537,7 @@ module Aws::Account
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-account'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

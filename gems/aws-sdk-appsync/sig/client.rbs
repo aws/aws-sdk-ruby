@@ -128,7 +128,7 @@ module Aws
                         name: ::String,
                         ?owner_contact: ::String,
                         ?tags: Hash[::String, ::String],
-                        ?event_config: {
+                        event_config: {
                           auth_providers: Array[
                             {
                               auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA"),
@@ -1048,7 +1048,7 @@ module Aws
                         api_id: ::String,
                         name: ::String,
                         ?owner_contact: ::String,
-                        ?event_config: {
+                        event_config: {
                           auth_providers: Array[
                             {
                               auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA"),

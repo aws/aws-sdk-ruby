@@ -3655,6 +3655,15 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   ^
+    #
     # @option params [String] :master_user_authentication_type
     #   Specifies the authentication type for the master user. With IAM master
     #   user authentication, you can configure the master DB user with IAM
@@ -3886,6 +3895,17 @@ module Aws::RDS
     #     master_user_secret_kms_key_id: "String",
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
     #     source_region: "String",
     #   })
@@ -5797,6 +5817,15 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #
     # @option params [String] :master_user_authentication_type
     #   Specifies the authentication type for the master user. With IAM master
     #   user authentication, you can configure the master DB user with IAM
@@ -6009,6 +6038,17 @@ module Aws::RDS
     #     multi_tenant: false,
     #     dedicated_log_volume: false,
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
     #     additional_storage_volumes: [
     #       {
@@ -6958,6 +6998,15 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #
     # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
     #   A list of additional storage volumes to create for the DB instance.
     #   You can create up to three additional storage volumes using the names
@@ -7055,6 +7104,17 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     upgrade_storage_config: false,
     #     ca_certificate_identifier: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     additional_storage_volumes: [
     #       {
     #         volume_name: "String", # required
@@ -9765,6 +9825,9 @@ module Aws::RDS
     #   resp.db_cluster_automated_backup.iops #=> Integer
     #   resp.db_cluster_automated_backup.storage_throughput #=> Integer
     #   resp.db_cluster_automated_backup.aws_backup_recovery_point_arn #=> String
+    #   resp.db_cluster_automated_backup.tag_list #=> Array
+    #   resp.db_cluster_automated_backup.tag_list[0].key #=> String
+    #   resp.db_cluster_automated_backup.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterAutomatedBackup AWS API Documentation
     #
@@ -10436,6 +10499,9 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.backup_target #=> String
     #   resp.db_instance_automated_backup.multi_tenant #=> Boolean
     #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backup.tag_list #=> Array
+    #   resp.db_instance_automated_backup.tag_list[0].key #=> String
+    #   resp.db_instance_automated_backup.tag_list[0].value #=> String
     #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
     #   resp.db_instance_automated_backup.additional_storage_volumes #=> Array
     #   resp.db_instance_automated_backup.additional_storage_volumes[0].volume_name #=> String
@@ -11936,6 +12002,9 @@ module Aws::RDS
     #   resp.db_cluster_automated_backups[0].iops #=> Integer
     #   resp.db_cluster_automated_backups[0].storage_throughput #=> Integer
     #   resp.db_cluster_automated_backups[0].aws_backup_recovery_point_arn #=> String
+    #   resp.db_cluster_automated_backups[0].tag_list #=> Array
+    #   resp.db_cluster_automated_backups[0].tag_list[0].key #=> String
+    #   resp.db_cluster_automated_backups[0].tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterAutomatedBackups AWS API Documentation
     #
@@ -13662,6 +13731,9 @@ module Aws::RDS
     #   resp.db_instance_automated_backups[0].backup_target #=> String
     #   resp.db_instance_automated_backups[0].multi_tenant #=> Boolean
     #   resp.db_instance_automated_backups[0].aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backups[0].tag_list #=> Array
+    #   resp.db_instance_automated_backups[0].tag_list[0].key #=> String
+    #   resp.db_instance_automated_backups[0].tag_list[0].value #=> String
     #   resp.db_instance_automated_backups[0].dedicated_log_volume #=> Boolean
     #   resp.db_instance_automated_backups[0].additional_storage_volumes #=> Array
     #   resp.db_instance_automated_backups[0].additional_storage_volumes[0].volume_name #=> String
@@ -21988,6 +22060,15 @@ module Aws::RDS
     #     parameter group with `--db-parameter-group-name` and a new option
     #     group with `--option-group-name`.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #
     # @option params [String] :master_user_authentication_type
     #   Specifies the authentication type for the master user. With IAM master
     #   user authentication, you can change the master DB user to use IAM
@@ -22135,6 +22216,17 @@ module Aws::RDS
     #     multi_tenant: false,
     #     dedicated_log_volume: false,
     #     engine: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
     #     additional_storage_volumes: [
     #       {
@@ -24091,6 +24183,15 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #
     # @return [Types::PromoteReadReplicaResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PromoteReadReplicaResult#db_instance #db_instance} => Types::DBInstance
@@ -24120,6 +24221,17 @@ module Aws::RDS
     #     db_instance_identifier: "String", # required
     #     backup_retention_period: 1,
     #     preferred_backup_window: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -26141,6 +26253,15 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   ^
+    #
     # @return [Types::RestoreDBClusterFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromS3Result#db_cluster #db_cluster} => Types::DBCluster
@@ -26263,6 +26384,17 @@ module Aws::RDS
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -26962,6 +27094,15 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   ^
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -27090,6 +27231,17 @@ module Aws::RDS
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -27773,6 +27925,15 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   ^
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -27900,6 +28061,17 @@ module Aws::RDS
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -28686,6 +28858,15 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #
     # @option params [Boolean] :manage_master_user_password
     #   Specifies whether to manage the master user password with Amazon Web
     #   Services Secrets Manager in the restored DB instance.
@@ -28830,6 +29011,17 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     additional_storage_volumes: [
@@ -29608,6 +29800,15 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #
     # @option params [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
     #   A list of additional storage volumes to modify or delete for the DB
     #   instance. You can modify or delete up to three additional storage
@@ -29684,6 +29885,17 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     additional_storage_volumes: [
     #       {
     #         volume_name: "String", # required
@@ -30520,6 +30732,15 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    #
     # @option params [Boolean] :manage_master_user_password
     #   Specifies whether to manage the master user password with Amazon Web
     #   Services Secrets Manager in the restored DB instance.
@@ -30727,6 +30948,17 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     additional_storage_volumes: [
@@ -31633,6 +31865,9 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to associate with the replicated automated backups.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -31685,6 +31920,12 @@ module Aws::RDS
     #     backup_retention_period: 1,
     #     kms_key_id: "String",
     #     pre_signed_url: "SensitiveString",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #     source_region: "String",
     #   })
     #
@@ -31722,6 +31963,9 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.backup_target #=> String
     #   resp.db_instance_automated_backup.multi_tenant #=> Boolean
     #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backup.tag_list #=> Array
+    #   resp.db_instance_automated_backup.tag_list[0].key #=> String
+    #   resp.db_instance_automated_backup.tag_list[0].value #=> String
     #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
     #   resp.db_instance_automated_backup.additional_storage_volumes #=> Array
     #   resp.db_instance_automated_backup.additional_storage_volumes[0].volume_name #=> String
@@ -32543,6 +32787,9 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.backup_target #=> String
     #   resp.db_instance_automated_backup.multi_tenant #=> Boolean
     #   resp.db_instance_automated_backup.aws_backup_recovery_point_arn #=> String
+    #   resp.db_instance_automated_backup.tag_list #=> Array
+    #   resp.db_instance_automated_backup.tag_list[0].key #=> String
+    #   resp.db_instance_automated_backup.tag_list[0].value #=> String
     #   resp.db_instance_automated_backup.dedicated_log_volume #=> Boolean
     #   resp.db_instance_automated_backup.additional_storage_volumes #=> Array
     #   resp.db_instance_automated_backup.additional_storage_volumes[0].volume_name #=> String
@@ -33093,7 +33340,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.301.0'
+      context[:gem_version] = '1.302.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

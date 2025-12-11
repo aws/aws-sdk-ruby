@@ -277,7 +277,8 @@ module Aws
                               values: Array[::String]?
                             },
                           ],
-                          ?sort_order: ("asc" | "desc")
+                          ?sort_order: ("asc" | "desc"),
+                          ?sort_by: ("created-date" | "last-accessed-date" | "last-changed-date" | "name")
                         ) -> _ListSecretsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSecretsResponseSuccess
 

@@ -1362,7 +1362,7 @@ module Aws::GuardDuty
     Ec2InstanceUids.member = Shapes::ShapeRef.new(shape: Ec2InstanceUid)
 
     Ec2LaunchTemplate.add_member(:ec2_instance_uids, Shapes::ShapeRef.new(shape: Ec2InstanceUids, location_name: "ec2InstanceUids"))
-    Ec2LaunchTemplate.add_member(:version, Shapes::ShapeRef.new(shape: LaunchTemplateVersion, location_name: "Version"))
+    Ec2LaunchTemplate.add_member(:version, Shapes::ShapeRef.new(shape: LaunchTemplateVersion, location_name: "version"))
     Ec2LaunchTemplate.struct_class = Types::Ec2LaunchTemplate
 
     Ec2NetworkInterface.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6Addresses, location_name: "ipv6Addresses"))

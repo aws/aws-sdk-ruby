@@ -513,16 +513,18 @@ module Aws::Odb
     # service integration.
     #
     # @option params [required, String] :iam_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM service role to associate
-    #   with the resource.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity and
+    #   Access Management (IAM) service role to associate with the resource.
     #
     # @option params [required, String] :aws_integration
-    #   The Amazon Web Services integration configuration settings for the IAM
-    #   service role association.
+    #   The Amazon Web Services integration configuration settings for the
+    #   Amazon Web Services Identity and Access Management (IAM) service role
+    #   association.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the target resource to associate
-    #   with the IAM service role.
+    #   with the Amazon Web Services Identity and Access Management (IAM)
+    #   service role.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1064,12 +1066,13 @@ module Aws::Odb
     #   network.
     #
     # @option params [String] :sts_policy_document
-    #   The STS policy document that defines permissions for token service
-    #   usage within the ODB network.
+    #   The Amazon Web Services Security Token Service (STS) policy document
+    #   that defines permissions for token service usage within the ODB
+    #   network.
     #
     # @option params [String] :kms_policy_document
-    #   The KMS policy document that defines permissions for key usage within
-    #   the ODB network.
+    #   The Amazon Web Services Key Management Service (KMS) policy document
+    #   that defines permissions for key usage within the ODB network.
     #
     # @option params [Array<String>] :cross_region_s3_restore_sources_to_enable
     #   The cross-Region Amazon S3 restore sources to enable for the ODB
@@ -1322,16 +1325,19 @@ module Aws::Odb
     # Services service integration.
     #
     # @option params [required, String] :iam_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM service role to disassociate
-    #   from the resource.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity and
+    #   Access Management (IAM) service role to disassociate from the
+    #   resource.
     #
     # @option params [required, String] :aws_integration
-    #   The Amazon Web Services integration configuration settings for the IAM
-    #   service role disassociation.
+    #   The Amazon Web Services integration configuration settings for the
+    #   Amazon Web Services Identity and Access Management (IAM) service role
+    #   disassociation.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the target resource to disassociate
-    #   from the IAM service role.
+    #   from the Amazon Web Services Identity and Access Management (IAM)
+    #   service role.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1373,12 +1379,14 @@ module Aws::Odb
     #   resp.cloud_autonomous_vm_cluster.cloud_autonomous_vm_cluster_id #=> String
     #   resp.cloud_autonomous_vm_cluster.cloud_autonomous_vm_cluster_arn #=> String
     #   resp.cloud_autonomous_vm_cluster.odb_network_id #=> String
+    #   resp.cloud_autonomous_vm_cluster.odb_network_arn #=> String
     #   resp.cloud_autonomous_vm_cluster.oci_resource_anchor_name #=> String
     #   resp.cloud_autonomous_vm_cluster.percent_progress #=> Float
     #   resp.cloud_autonomous_vm_cluster.display_name #=> String
     #   resp.cloud_autonomous_vm_cluster.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
     #   resp.cloud_autonomous_vm_cluster.status_reason #=> String
     #   resp.cloud_autonomous_vm_cluster.cloud_exadata_infrastructure_id #=> String
+    #   resp.cloud_autonomous_vm_cluster.cloud_exadata_infrastructure_arn #=> String
     #   resp.cloud_autonomous_vm_cluster.autonomous_data_storage_percentage #=> Float
     #   resp.cloud_autonomous_vm_cluster.autonomous_data_storage_size_in_t_bs #=> Float
     #   resp.cloud_autonomous_vm_cluster.available_autonomous_data_storage_size_in_t_bs #=> Float
@@ -1587,6 +1595,7 @@ module Aws::Odb
     #   resp.cloud_vm_cluster.status_reason #=> String
     #   resp.cloud_vm_cluster.cloud_vm_cluster_arn #=> String
     #   resp.cloud_vm_cluster.cloud_exadata_infrastructure_id #=> String
+    #   resp.cloud_vm_cluster.cloud_exadata_infrastructure_arn #=> String
     #   resp.cloud_vm_cluster.cluster_name #=> String
     #   resp.cloud_vm_cluster.cpu_core_count #=> Integer
     #   resp.cloud_vm_cluster.data_collection_options.is_diagnostics_events_enabled #=> Boolean
@@ -1631,6 +1640,7 @@ module Aws::Odb
     #   resp.cloud_vm_cluster.vip_ids #=> Array
     #   resp.cloud_vm_cluster.vip_ids[0] #=> String
     #   resp.cloud_vm_cluster.odb_network_id #=> String
+    #   resp.cloud_vm_cluster.odb_network_arn #=> String
     #   resp.cloud_vm_cluster.percent_progress #=> Float
     #   resp.cloud_vm_cluster.compute_model #=> String, one of "ECPU", "OCPU"
     #   resp.cloud_vm_cluster.iam_roles #=> Array
@@ -2030,12 +2040,14 @@ module Aws::Odb
     #   resp.cloud_autonomous_vm_clusters[0].cloud_autonomous_vm_cluster_id #=> String
     #   resp.cloud_autonomous_vm_clusters[0].cloud_autonomous_vm_cluster_arn #=> String
     #   resp.cloud_autonomous_vm_clusters[0].odb_network_id #=> String
+    #   resp.cloud_autonomous_vm_clusters[0].odb_network_arn #=> String
     #   resp.cloud_autonomous_vm_clusters[0].oci_resource_anchor_name #=> String
     #   resp.cloud_autonomous_vm_clusters[0].percent_progress #=> Float
     #   resp.cloud_autonomous_vm_clusters[0].display_name #=> String
     #   resp.cloud_autonomous_vm_clusters[0].status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
     #   resp.cloud_autonomous_vm_clusters[0].status_reason #=> String
     #   resp.cloud_autonomous_vm_clusters[0].cloud_exadata_infrastructure_id #=> String
+    #   resp.cloud_autonomous_vm_clusters[0].cloud_exadata_infrastructure_arn #=> String
     #   resp.cloud_autonomous_vm_clusters[0].autonomous_data_storage_percentage #=> Float
     #   resp.cloud_autonomous_vm_clusters[0].autonomous_data_storage_size_in_t_bs #=> Float
     #   resp.cloud_autonomous_vm_clusters[0].available_autonomous_data_storage_size_in_t_bs #=> Float
@@ -2237,6 +2249,7 @@ module Aws::Odb
     #   resp.cloud_vm_clusters[0].status_reason #=> String
     #   resp.cloud_vm_clusters[0].cloud_vm_cluster_arn #=> String
     #   resp.cloud_vm_clusters[0].cloud_exadata_infrastructure_id #=> String
+    #   resp.cloud_vm_clusters[0].cloud_exadata_infrastructure_arn #=> String
     #   resp.cloud_vm_clusters[0].cluster_name #=> String
     #   resp.cloud_vm_clusters[0].cpu_core_count #=> Integer
     #   resp.cloud_vm_clusters[0].data_collection_options.is_diagnostics_events_enabled #=> Boolean
@@ -2281,6 +2294,7 @@ module Aws::Odb
     #   resp.cloud_vm_clusters[0].vip_ids #=> Array
     #   resp.cloud_vm_clusters[0].vip_ids[0] #=> String
     #   resp.cloud_vm_clusters[0].odb_network_id #=> String
+    #   resp.cloud_vm_clusters[0].odb_network_arn #=> String
     #   resp.cloud_vm_clusters[0].percent_progress #=> Float
     #   resp.cloud_vm_clusters[0].compute_model #=> String, one of "ECPU", "OCPU"
     #   resp.cloud_vm_clusters[0].iam_roles #=> Array
@@ -3068,12 +3082,13 @@ module Aws::Odb
     #   ODB network.
     #
     # @option params [String] :sts_policy_document
-    #   The STS policy document that defines permissions for token service
-    #   usage within the ODB network.
+    #   The Amazon Web Services Security Token Service (STS) policy document
+    #   that defines permissions for token service usage within the ODB
+    #   network.
     #
     # @option params [String] :kms_policy_document
-    #   The KMS policy document that defines permissions for key usage within
-    #   the ODB network.
+    #   The Amazon Web Services Key Management Service (KMS) policy document
+    #   that defines permissions for key usage within the ODB network.
     #
     # @option params [Array<String>] :cross_region_s3_restore_sources_to_enable
     #   The cross-Region Amazon S3 restore sources to enable for the ODB
@@ -3195,7 +3210,7 @@ module Aws::Odb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-odb'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

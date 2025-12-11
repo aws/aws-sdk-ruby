@@ -132,6 +132,7 @@ module Aws::SecretsManager
     SecretVersionsListEntry = Shapes::StructureShape.new(name: 'SecretVersionsListEntry')
     SecretVersionsListType = Shapes::ListShape.new(name: 'SecretVersionsListType')
     SecretVersionsToStagesMapType = Shapes::MapShape.new(name: 'SecretVersionsToStagesMapType')
+    SortByType = Shapes::StringShape.new(name: 'SortByType')
     SortOrderType = Shapes::StringShape.new(name: 'SortOrderType')
     StatusMessageType = Shapes::StringShape.new(name: 'StatusMessageType')
     StatusType = Shapes::StringShape.new(name: 'StatusType')
@@ -332,6 +333,7 @@ module Aws::SecretsManager
     ListSecretsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenType, location_name: "NextToken"))
     ListSecretsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FiltersListType, location_name: "Filters"))
     ListSecretsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrderType, location_name: "SortOrder"))
+    ListSecretsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortByType, location_name: "SortBy"))
     ListSecretsRequest.struct_class = Types::ListSecretsRequest
 
     ListSecretsResponse.add_member(:secret_list, Shapes::ShapeRef.new(shape: SecretListType, location_name: "SecretList"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2025-12-09)
+------------------
+
+* Feature - Update Event API to require EventConfig parameter in creation and update requests.
+
 1.115.0 (2025-11-21)
 ------------------
 

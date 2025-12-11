@@ -794,14 +794,15 @@ module Aws::BillingConductor
     #       type: "CREDIT", # required, accepts CREDIT, FEE
     #       line_item_filters: [
     #         {
-    #           attribute: "LINE_ITEM_TYPE", # required, accepts LINE_ITEM_TYPE
-    #           match_option: "NOT_EQUAL", # required, accepts NOT_EQUAL
-    #           values: ["SAVINGS_PLAN_NEGATION"], # required, accepts SAVINGS_PLAN_NEGATION
+    #           attribute: "LINE_ITEM_TYPE", # required, accepts LINE_ITEM_TYPE, SERVICE
+    #           match_option: "NOT_EQUAL", # required, accepts NOT_EQUAL, EQUAL
+    #           values: ["SAVINGS_PLAN_NEGATION"], # accepts SAVINGS_PLAN_NEGATION
+    #           attribute_values: ["AttributeValue"],
     #         },
     #       ],
     #     },
     #     account_id: "AccountId",
-    #     computation_rule: "CONSOLIDATED", # accepts CONSOLIDATED
+    #     computation_rule: "ITEMIZED", # accepts ITEMIZED, CONSOLIDATED
     #     presentation_details: {
     #       service: "Service", # required
     #     },
@@ -1477,10 +1478,12 @@ module Aws::BillingConductor
     #   resp.custom_line_item_versions[0].charge_details.percentage.percentage_value #=> Float
     #   resp.custom_line_item_versions[0].charge_details.type #=> String, one of "CREDIT", "FEE"
     #   resp.custom_line_item_versions[0].charge_details.line_item_filters #=> Array
-    #   resp.custom_line_item_versions[0].charge_details.line_item_filters[0].attribute #=> String, one of "LINE_ITEM_TYPE"
-    #   resp.custom_line_item_versions[0].charge_details.line_item_filters[0].match_option #=> String, one of "NOT_EQUAL"
+    #   resp.custom_line_item_versions[0].charge_details.line_item_filters[0].attribute #=> String, one of "LINE_ITEM_TYPE", "SERVICE"
+    #   resp.custom_line_item_versions[0].charge_details.line_item_filters[0].match_option #=> String, one of "NOT_EQUAL", "EQUAL"
     #   resp.custom_line_item_versions[0].charge_details.line_item_filters[0].values #=> Array
     #   resp.custom_line_item_versions[0].charge_details.line_item_filters[0].values[0] #=> String, one of "SAVINGS_PLAN_NEGATION"
+    #   resp.custom_line_item_versions[0].charge_details.line_item_filters[0].attribute_values #=> Array
+    #   resp.custom_line_item_versions[0].charge_details.line_item_filters[0].attribute_values[0] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.custom_line_item_versions[0].currency_code #=> String, one of "USD", "CNY"
     #   resp.custom_line_item_versions[0].description #=> String
     #   resp.custom_line_item_versions[0].product_code #=> String
@@ -1493,7 +1496,7 @@ module Aws::BillingConductor
     #   resp.custom_line_item_versions[0].arn #=> String
     #   resp.custom_line_item_versions[0].start_time #=> Integer
     #   resp.custom_line_item_versions[0].account_id #=> String
-    #   resp.custom_line_item_versions[0].computation_rule #=> String, one of "CONSOLIDATED"
+    #   resp.custom_line_item_versions[0].computation_rule #=> String, one of "ITEMIZED", "CONSOLIDATED"
     #   resp.custom_line_item_versions[0].presentation_details.service #=> String
     #   resp.next_token #=> String
     #
@@ -1555,10 +1558,12 @@ module Aws::BillingConductor
     #   resp.custom_line_items[0].charge_details.percentage.percentage_value #=> Float
     #   resp.custom_line_items[0].charge_details.type #=> String, one of "CREDIT", "FEE"
     #   resp.custom_line_items[0].charge_details.line_item_filters #=> Array
-    #   resp.custom_line_items[0].charge_details.line_item_filters[0].attribute #=> String, one of "LINE_ITEM_TYPE"
-    #   resp.custom_line_items[0].charge_details.line_item_filters[0].match_option #=> String, one of "NOT_EQUAL"
+    #   resp.custom_line_items[0].charge_details.line_item_filters[0].attribute #=> String, one of "LINE_ITEM_TYPE", "SERVICE"
+    #   resp.custom_line_items[0].charge_details.line_item_filters[0].match_option #=> String, one of "NOT_EQUAL", "EQUAL"
     #   resp.custom_line_items[0].charge_details.line_item_filters[0].values #=> Array
     #   resp.custom_line_items[0].charge_details.line_item_filters[0].values[0] #=> String, one of "SAVINGS_PLAN_NEGATION"
+    #   resp.custom_line_items[0].charge_details.line_item_filters[0].attribute_values #=> Array
+    #   resp.custom_line_items[0].charge_details.line_item_filters[0].attribute_values[0] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.custom_line_items[0].currency_code #=> String, one of "USD", "CNY"
     #   resp.custom_line_items[0].description #=> String
     #   resp.custom_line_items[0].product_code #=> String
@@ -1567,7 +1572,7 @@ module Aws::BillingConductor
     #   resp.custom_line_items[0].last_modified_time #=> Integer
     #   resp.custom_line_items[0].association_size #=> Integer
     #   resp.custom_line_items[0].account_id #=> String
-    #   resp.custom_line_items[0].computation_rule #=> String, one of "CONSOLIDATED"
+    #   resp.custom_line_items[0].computation_rule #=> String, one of "ITEMIZED", "CONSOLIDATED"
     #   resp.custom_line_items[0].presentation_details.service #=> String
     #   resp.next_token #=> String
     #
@@ -2071,9 +2076,10 @@ module Aws::BillingConductor
     #       },
     #       line_item_filters: [
     #         {
-    #           attribute: "LINE_ITEM_TYPE", # required, accepts LINE_ITEM_TYPE
-    #           match_option: "NOT_EQUAL", # required, accepts NOT_EQUAL
-    #           values: ["SAVINGS_PLAN_NEGATION"], # required, accepts SAVINGS_PLAN_NEGATION
+    #           attribute: "LINE_ITEM_TYPE", # required, accepts LINE_ITEM_TYPE, SERVICE
+    #           match_option: "NOT_EQUAL", # required, accepts NOT_EQUAL, EQUAL
+    #           values: ["SAVINGS_PLAN_NEGATION"], # accepts SAVINGS_PLAN_NEGATION
+    #           attribute_values: ["AttributeValue"],
     #         },
     #       ],
     #     },
@@ -2093,10 +2099,12 @@ module Aws::BillingConductor
     #   resp.charge_details.percentage.percentage_value #=> Float
     #   resp.charge_details.type #=> String, one of "CREDIT", "FEE"
     #   resp.charge_details.line_item_filters #=> Array
-    #   resp.charge_details.line_item_filters[0].attribute #=> String, one of "LINE_ITEM_TYPE"
-    #   resp.charge_details.line_item_filters[0].match_option #=> String, one of "NOT_EQUAL"
+    #   resp.charge_details.line_item_filters[0].attribute #=> String, one of "LINE_ITEM_TYPE", "SERVICE"
+    #   resp.charge_details.line_item_filters[0].match_option #=> String, one of "NOT_EQUAL", "EQUAL"
     #   resp.charge_details.line_item_filters[0].values #=> Array
     #   resp.charge_details.line_item_filters[0].values[0] #=> String, one of "SAVINGS_PLAN_NEGATION"
+    #   resp.charge_details.line_item_filters[0].attribute_values #=> Array
+    #   resp.charge_details.line_item_filters[0].attribute_values[0] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.last_modified_time #=> Integer
     #   resp.association_size #=> Integer
     #
@@ -2251,7 +2259,7 @@ module Aws::BillingConductor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-billingconductor'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

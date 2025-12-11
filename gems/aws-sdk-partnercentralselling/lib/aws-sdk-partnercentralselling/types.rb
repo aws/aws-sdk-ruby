@@ -439,11 +439,17 @@ module Aws::PartnerCentralSelling
     #   helps partners prioritize their efforts.
     #   @return [String]
     #
+    # @!attribute [rw] aws_products_spend_insights_by_source
+    #   Source-separated spend insights that provide independent analysis
+    #   for AWS predictions and partner estimates
+    #   @return [Types::AwsProductsSpendInsightsBySource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/AwsOpportunityInsights AWS API Documentation
     #
     class AwsOpportunityInsights < Struct.new(
       :next_best_actions,
-      :engagement_score)
+      :engagement_score,
+      :aws_products_spend_insights_by_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -511,10 +517,17 @@ module Aws::PartnerCentralSelling
     #   [1]: https://calculator.aws/#/
     #   @return [Array<Types::ExpectedCustomerSpend>]
     #
+    # @!attribute [rw] aws_partition
+    #   AWS partition where the opportunity will be deployed. Possible
+    #   values: 'aws-eusc' for AWS European Sovereign Cloud, `null` for
+    #   all other partitions
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/AwsOpportunityProject AWS API Documentation
     #
     class AwsOpportunityProject < Struct.new(
-      :expected_customer_spend)
+      :expected_customer_spend,
+      :aws_partition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -540,6 +553,143 @@ module Aws::PartnerCentralSelling
     class AwsOpportunityRelatedEntities < Struct.new(
       :aws_products,
       :solutions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # AWS services with program eligibility indicators (MAP, modernization
+    # pathways), cost estimates, and optimization recommendations.
+    #
+    # @!attribute [rw] product_code
+    #   AWS Partner Central product identifier used for opportunity
+    #   association
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   Pricing Calculator service code (links to original calculator URL)
+    #   @return [String]
+    #
+    # @!attribute [rw] categories
+    #   List of program and pathway categories this product is eligible for
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] amount
+    #   Baseline service cost before optimizations (may be null for
+    #   AWS-sourced predictions)
+    #   @return [String]
+    #
+    # @!attribute [rw] optimized_amount
+    #   Service cost after applying optimizations (may be null for
+    #   AWS-sourced predictions)
+    #   @return [String]
+    #
+    # @!attribute [rw] potential_savings_amount
+    #   Service-specific cost reduction through optimizations (may be null
+    #   for AWS-sourced predictions)
+    #   @return [String]
+    #
+    # @!attribute [rw] optimizations
+    #   List of specific optimization recommendations for this product
+    #   @return [Array<Types::AwsProductOptimization>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/AwsProductDetails AWS API Documentation
+    #
+    class AwsProductDetails < Struct.new(
+      :product_code,
+      :service_code,
+      :categories,
+      :amount,
+      :optimized_amount,
+      :potential_savings_amount,
+      :optimizations)
+      SENSITIVE = [:amount, :optimized_amount, :potential_savings_amount]
+      include Aws::Structure
+    end
+
+    # Comprehensive spend analysis for a single source (AWS or Partner)
+    # including total amounts, optimization savings, program category
+    # breakdowns, and detailed product-level insights.
+    #
+    # @!attribute [rw] currency_code
+    #   ISO 4217 currency code (e.g., "USD") ensuring consistent
+    #   representation across calculations
+    #   @return [String]
+    #
+    # @!attribute [rw] frequency
+    #   Time period for spend amounts: "Monthly" or "Annually"
+    #   @return [String]
+    #
+    # @!attribute [rw] total_amount
+    #   Total estimated spend for this source before optimizations
+    #   @return [String]
+    #
+    # @!attribute [rw] total_optimized_amount
+    #   Total estimated spend after applying recommended optimizations
+    #   @return [String]
+    #
+    # @!attribute [rw] total_potential_savings_amount
+    #   Quantified savings achievable through implementing optimizations
+    #   @return [String]
+    #
+    # @!attribute [rw] total_amount_by_category
+    #   Spend amounts mapped to AWS programs and modernization pathways
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] aws_products
+    #   Product-level details including costs and optimization
+    #   recommendations
+    #   @return [Array<Types::AwsProductDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/AwsProductInsights AWS API Documentation
+    #
+    class AwsProductInsights < Struct.new(
+      :currency_code,
+      :frequency,
+      :total_amount,
+      :total_optimized_amount,
+      :total_potential_savings_amount,
+      :total_amount_by_category,
+      :aws_products)
+      SENSITIVE = [:currency_code, :total_amount, :total_optimized_amount, :total_potential_savings_amount, :total_amount_by_category]
+      include Aws::Structure
+    end
+
+    # Details for a specific optimization recommendation
+    #
+    # @!attribute [rw] description
+    #   Human-readable explanation of the optimization strategy
+    #   @return [String]
+    #
+    # @!attribute [rw] savings_amount
+    #   Quantified cost savings achievable by implementing this optimization
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/AwsProductOptimization AWS API Documentation
+    #
+    class AwsProductOptimization < Struct.new(
+      :description,
+      :savings_amount)
+      SENSITIVE = [:savings_amount]
+      include Aws::Structure
+    end
+
+    # Source-separated spend insights that provide independent analysis for
+    # AWS predictions and partner estimates
+    #
+    # @!attribute [rw] partner
+    #   Partner-sourced insights derived from Pricing Calculator URLs
+    #   including detailed service costs and optimizations
+    #   @return [Types::AwsProductInsights]
+    #
+    # @!attribute [rw] aws
+    #   AI-generated insights including recommended products from AWS
+    #   @return [Types::AwsProductInsights]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/AwsProductsSpendInsightsBySource AWS API Documentation
+    #
+    class AwsProductsSpendInsightsBySource < Struct.new(
+      :partner,
+      :aws)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1826,7 +1976,7 @@ module Aws::PartnerCentralSelling
       :frequency,
       :target_company,
       :estimation_url)
-      SENSITIVE = [:amount, :currency_code, :estimation_url]
+      SENSITIVE = [:amount, :currency_code]
       include Aws::Structure
     end
 
@@ -5041,6 +5191,12 @@ module Aws::PartnerCentralSelling
     #   that weren't captured in other fields.
     #   @return [String]
     #
+    # @!attribute [rw] aws_partition
+    #   AWS partition where the opportunity will be deployed. Possible
+    #   values: 'aws-eusc' for AWS European Sovereign Cloud, `null` for
+    #   all other partitions
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/Project AWS API Documentation
     #
     class Project < Struct.new(
@@ -5055,7 +5211,8 @@ module Aws::PartnerCentralSelling
       :competitor_name,
       :other_competitor_names,
       :other_solution_description,
-      :additional_comments)
+      :additional_comments,
+      :aws_partition)
       SENSITIVE = [:title, :customer_business_problem, :other_solution_description]
       include Aws::Structure
     end

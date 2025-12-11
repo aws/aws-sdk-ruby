@@ -49,12 +49,13 @@ module Aws::RolesAnywhere
   end
   autoload :Client, 'aws-sdk-rolesanywhere/client'
   autoload :Errors, 'aws-sdk-rolesanywhere/errors'
+  autoload :Waiters, 'aws-sdk-rolesanywhere/waiters'
   autoload :Resource, 'aws-sdk-rolesanywhere/resource'
   autoload :EndpointParameters, 'aws-sdk-rolesanywhere/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-rolesanywhere/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-rolesanywhere/endpoints'
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.45.0'
 
 end
 

@@ -647,7 +647,7 @@ module Aws::AppSync
     # @option params [Hash<String,String>] :tags
     #   A map with keys of `TagKey` objects and values of `TagValue` objects.
     #
-    # @option params [Types::EventConfig] :event_config
+    # @option params [required, Types::EventConfig] :event_config
     #   The Event API configuration. This includes the default authorization
     #   configuration for connecting, publishing, and subscribing to an Event
     #   API.
@@ -664,7 +664,7 @@ module Aws::AppSync
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
-    #     event_config: {
+    #     event_config: { # required
     #       auth_providers: [ # required
     #         {
     #           auth_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
@@ -3991,7 +3991,7 @@ module Aws::AppSync
     # @option params [String] :owner_contact
     #   The owner contact information for the `Api`.
     #
-    # @option params [Types::EventConfig] :event_config
+    # @option params [required, Types::EventConfig] :event_config
     #   The new event configuration. This includes the default authorization
     #   configuration for connecting, publishing, and subscribing to an Event
     #   API.
@@ -4006,7 +4006,7 @@ module Aws::AppSync
     #     api_id: "String", # required
     #     name: "ApiName", # required
     #     owner_contact: "String",
-    #     event_config: {
+    #     event_config: { # required
     #       auth_providers: [ # required
     #         {
     #           auth_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
@@ -5115,7 +5115,7 @@ module Aws::AppSync
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

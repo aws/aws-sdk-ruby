@@ -1575,6 +1575,14 @@ module Aws::OpenSearchService
     #   A list of tags attached to a domain.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   application's data at rest. If provided, the application uses your
+    #   customer-managed key for encryption. If omitted, the application
+    #   uses an AWS-managed key. The KMS key must be in the same region as
+    #   the application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -1583,7 +1591,8 @@ module Aws::OpenSearchService
       :data_sources,
       :iam_identity_center_options,
       :app_configs,
-      :tag_list)
+      :tag_list,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1629,6 +1638,11 @@ module Aws::OpenSearchService
     #   created.
     #   @return [Time]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   application's data at rest.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateApplicationResponse AWS API Documentation
     #
     class CreateApplicationResponse < Struct.new(
@@ -1639,7 +1653,8 @@ module Aws::OpenSearchService
       :iam_identity_center_options,
       :app_configs,
       :tag_list,
-      :created_at)
+      :created_at,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4210,6 +4225,11 @@ module Aws::OpenSearchService
     #   The timestamp of the last update to the OpenSearch application.
     #   @return [Time]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   application's data at rest.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetApplicationResponse AWS API Documentation
     #
     class GetApplicationResponse < Struct.new(
@@ -4222,7 +4242,8 @@ module Aws::OpenSearchService
       :data_sources,
       :app_configs,
       :created_at,
-      :last_updated_at)
+      :last_updated_at,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end

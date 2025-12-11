@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2025-12-11)
+------------------
+
+* Feature - Add SortBy parameter to ListSecrets
+
 1.124.0 (2025-11-21)
 ------------------
 

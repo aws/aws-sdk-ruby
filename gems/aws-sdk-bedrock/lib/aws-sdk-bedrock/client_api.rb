@@ -152,6 +152,8 @@ module Aws::Bedrock
     AutomatedReasoningPolicyScenario = Shapes::StructureShape.new(name: 'AutomatedReasoningPolicyScenario')
     AutomatedReasoningPolicyScenarioAlternateExpression = Shapes::StringShape.new(name: 'AutomatedReasoningPolicyScenarioAlternateExpression')
     AutomatedReasoningPolicyScenarioExpression = Shapes::StringShape.new(name: 'AutomatedReasoningPolicyScenarioExpression')
+    AutomatedReasoningPolicyScenarioList = Shapes::ListShape.new(name: 'AutomatedReasoningPolicyScenarioList')
+    AutomatedReasoningPolicyScenarios = Shapes::StructureShape.new(name: 'AutomatedReasoningPolicyScenarios')
     AutomatedReasoningPolicySummaries = Shapes::ListShape.new(name: 'AutomatedReasoningPolicySummaries')
     AutomatedReasoningPolicySummary = Shapes::StructureShape.new(name: 'AutomatedReasoningPolicySummary')
     AutomatedReasoningPolicyTestCase = Shapes::StructureShape.new(name: 'AutomatedReasoningPolicyTestCase')
@@ -1035,11 +1037,13 @@ module Aws::Bedrock
     AutomatedReasoningPolicyBuildResultAssets.add_member(:quality_report, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyDefinitionQualityReport, location_name: "qualityReport"))
     AutomatedReasoningPolicyBuildResultAssets.add_member(:build_log, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyBuildLog, location_name: "buildLog"))
     AutomatedReasoningPolicyBuildResultAssets.add_member(:generated_test_cases, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyGeneratedTestCases, location_name: "generatedTestCases"))
+    AutomatedReasoningPolicyBuildResultAssets.add_member(:policy_scenarios, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyScenarios, location_name: "policyScenarios"))
     AutomatedReasoningPolicyBuildResultAssets.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     AutomatedReasoningPolicyBuildResultAssets.add_member_subclass(:policy_definition, Types::AutomatedReasoningPolicyBuildResultAssets::PolicyDefinition)
     AutomatedReasoningPolicyBuildResultAssets.add_member_subclass(:quality_report, Types::AutomatedReasoningPolicyBuildResultAssets::QualityReport)
     AutomatedReasoningPolicyBuildResultAssets.add_member_subclass(:build_log, Types::AutomatedReasoningPolicyBuildResultAssets::BuildLog)
     AutomatedReasoningPolicyBuildResultAssets.add_member_subclass(:generated_test_cases, Types::AutomatedReasoningPolicyBuildResultAssets::GeneratedTestCases)
+    AutomatedReasoningPolicyBuildResultAssets.add_member_subclass(:policy_scenarios, Types::AutomatedReasoningPolicyBuildResultAssets::PolicyScenarios)
     AutomatedReasoningPolicyBuildResultAssets.add_member_subclass(:unknown, Types::AutomatedReasoningPolicyBuildResultAssets::Unknown)
     AutomatedReasoningPolicyBuildResultAssets.struct_class = Types::AutomatedReasoningPolicyBuildResultAssets
 
@@ -1224,9 +1228,14 @@ module Aws::Bedrock
 
     AutomatedReasoningPolicyScenario.add_member(:expression, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyScenarioExpression, required: true, location_name: "expression"))
     AutomatedReasoningPolicyScenario.add_member(:alternate_expression, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyScenarioAlternateExpression, required: true, location_name: "alternateExpression"))
-    AutomatedReasoningPolicyScenario.add_member(:rule_ids, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyDefinitionRuleIdList, required: true, location_name: "ruleIds"))
     AutomatedReasoningPolicyScenario.add_member(:expected_result, Shapes::ShapeRef.new(shape: AutomatedReasoningCheckResult, required: true, location_name: "expectedResult"))
+    AutomatedReasoningPolicyScenario.add_member(:rule_ids, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyDefinitionRuleIdList, required: true, location_name: "ruleIds"))
     AutomatedReasoningPolicyScenario.struct_class = Types::AutomatedReasoningPolicyScenario
+
+    AutomatedReasoningPolicyScenarioList.member = Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyScenario)
+
+    AutomatedReasoningPolicyScenarios.add_member(:policy_scenarios, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyScenarioList, required: true, location_name: "policyScenarios"))
+    AutomatedReasoningPolicyScenarios.struct_class = Types::AutomatedReasoningPolicyScenarios
 
     AutomatedReasoningPolicySummaries.member = Shapes::ShapeRef.new(shape: AutomatedReasoningPolicySummary)
 

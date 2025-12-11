@@ -1241,6 +1241,53 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] workgroup_names
+    #   A list of workgroup names for which to generate the Identity Center
+    #   authentication token.
+    #
+    #   Constraints:
+    #
+    #   * Must contain between 1 and 20 workgroup names.
+    #
+    #   * Each workgroup name must be a valid Amazon Redshift Serverless
+    #     workgroup identifier.
+    #
+    #   * All specified workgroups must have Identity Center integration
+    #     enabled.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetIdentityCenterAuthTokenRequest AWS API Documentation
+    #
+    class GetIdentityCenterAuthTokenRequest < Struct.new(
+      :workgroup_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] expiration_time
+    #   The date and time when the Identity Center authentication token
+    #   expires.
+    #
+    #   After this time, a new token must be requested for continued access.
+    #   @return [Time]
+    #
+    # @!attribute [rw] token
+    #   The Identity Center authentication token that can be used to access
+    #   data in the specified workgroups.
+    #
+    #   This token contains the Identity Center identity information and is
+    #   encrypted for secure transmission.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetIdentityCenterAuthTokenResponse AWS API Documentation
+    #
+    class GetIdentityCenterAuthTokenResponse < Struct.new(
+      :expiration_time,
+      :token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] namespace_name
     #   The name of the namespace to retrieve information for.
     #   @return [String]

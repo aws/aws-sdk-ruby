@@ -23,6 +23,7 @@ module Aws::Account
     AddressLine = Shapes::StringShape.new(name: 'AddressLine')
     AlternateContact = Shapes::StructureShape.new(name: 'AlternateContact')
     AlternateContactType = Shapes::StringShape.new(name: 'AlternateContactType')
+    AwsAccountState = Shapes::StringShape.new(name: 'AwsAccountState')
     City = Shapes::StringShape.new(name: 'City')
     CompanyName = Shapes::StringShape.new(name: 'CompanyName')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -41,6 +42,8 @@ module Aws::Account
     GetAlternateContactResponse = Shapes::StructureShape.new(name: 'GetAlternateContactResponse')
     GetContactInformationRequest = Shapes::StructureShape.new(name: 'GetContactInformationRequest')
     GetContactInformationResponse = Shapes::StructureShape.new(name: 'GetContactInformationResponse')
+    GetGovCloudAccountInformationRequest = Shapes::StructureShape.new(name: 'GetGovCloudAccountInformationRequest')
+    GetGovCloudAccountInformationResponse = Shapes::StructureShape.new(name: 'GetGovCloudAccountInformationResponse')
     GetPrimaryEmailRequest = Shapes::StructureShape.new(name: 'GetPrimaryEmailRequest')
     GetPrimaryEmailResponse = Shapes::StructureShape.new(name: 'GetPrimaryEmailResponse')
     GetRegionOptStatusRequest = Shapes::StructureShape.new(name: 'GetRegionOptStatusRequest')
@@ -65,6 +68,7 @@ module Aws::Account
     RegionOptStatus = Shapes::StringShape.new(name: 'RegionOptStatus')
     RegionOptStatusList = Shapes::ListShape.new(name: 'RegionOptStatusList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceUnavailableException = Shapes::StructureShape.new(name: 'ResourceUnavailableException')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     StartPrimaryEmailUpdateRequest = Shapes::StructureShape.new(name: 'StartPrimaryEmailUpdateRequest')
     StartPrimaryEmailUpdateResponse = Shapes::StructureShape.new(name: 'StartPrimaryEmailUpdateResponse')
@@ -148,6 +152,13 @@ module Aws::Account
     GetContactInformationResponse.add_member(:contact_information, Shapes::ShapeRef.new(shape: ContactInformation, location_name: "ContactInformation"))
     GetContactInformationResponse.struct_class = Types::GetContactInformationResponse
 
+    GetGovCloudAccountInformationRequest.add_member(:standard_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "StandardAccountId"))
+    GetGovCloudAccountInformationRequest.struct_class = Types::GetGovCloudAccountInformationRequest
+
+    GetGovCloudAccountInformationResponse.add_member(:account_state, Shapes::ShapeRef.new(shape: AwsAccountState, required: true, location_name: "AccountState"))
+    GetGovCloudAccountInformationResponse.add_member(:gov_cloud_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "GovCloudAccountId"))
+    GetGovCloudAccountInformationResponse.struct_class = Types::GetGovCloudAccountInformationResponse
+
     GetPrimaryEmailRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     GetPrimaryEmailRequest.struct_class = Types::GetPrimaryEmailRequest
 
@@ -203,6 +214,10 @@ module Aws::Account
     ResourceNotFoundException.add_member(:error_type, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amzn-ErrorType"))
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceUnavailableException.add_member(:error_type, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amzn-ErrorType"))
+    ResourceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ResourceUnavailableException.struct_class = Types::ResourceUnavailableException
 
     StartPrimaryEmailUpdateRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     StartPrimaryEmailUpdateRequest.add_member(:primary_email, Shapes::ShapeRef.new(shape: PrimaryEmailAddress, required: true, location_name: "PrimaryEmail"))
@@ -331,6 +346,20 @@ module Aws::Account
         o.input = Shapes::ShapeRef.new(shape: GetContactInformationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetContactInformationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_gov_cloud_account_information, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetGovCloudAccountInformation"
+        o.http_method = "POST"
+        o.http_request_uri = "/getGovCloudAccountInformation"
+        o.input = Shapes::ShapeRef.new(shape: GetGovCloudAccountInformationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetGovCloudAccountInformationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)

@@ -56,7 +56,7 @@ module Aws::Signer
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/signer/latest/developerguide/signing-profile-cross-account.html
+    #   [1]: http://docs.aws.amazon.com/signer/latest/developerguide/signing-profile-cross-account.html
     #   @return [String]
     #
     # @!attribute [rw] principal

@@ -27,6 +27,10 @@ module Aws
         def error_type: () -> ::String
         def message: () -> ::String
       end
+      class ResourceUnavailableException < ::Aws::Errors::ServiceError
+        def error_type: () -> ::String
+        def message: () -> ::String
+      end
       class TooManyRequestsException < ::Aws::Errors::ServiceError
         def error_type: () -> ::String
         def message: () -> ::String

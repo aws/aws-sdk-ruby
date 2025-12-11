@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2025-12-10)
+------------------
+
+* Feature - The following APIs now return CloudExadataInfrastructureArn and OdbNetworkArn fields for improved resource identification and AWS service integration - GetCloudVmCluster, ListCloudVmClusters, GetCloudAutonomousVmCluster, and ListCloudAutonomousVmClusters.
+
 1.9.0 (2025-11-21)
 ------------------
 

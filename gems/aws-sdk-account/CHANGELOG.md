@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2025-12-09)
+------------------
+
+* Feature - This release adds a new API (GetGovCloudAccountInformation) used to retrieve information about a linked GovCloud account from the standard AWS partition.
+
 1.51.0 (2025-11-21)
 ------------------
 

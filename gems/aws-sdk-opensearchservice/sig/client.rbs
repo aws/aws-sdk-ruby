@@ -228,6 +228,7 @@ module Aws
         def app_configs: () -> ::Array[Types::AppConfig]
         def tag_list: () -> ::Array[Types::Tag]
         def created_at: () -> ::Time
+        def kms_key_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#create_application-instance_method
       def create_application: (
@@ -255,7 +256,8 @@ module Aws
                                     key: ::String,
                                     value: ::String
                                   },
-                                ]
+                                ],
+                                ?kms_key_arn: ::String
                               ) -> _CreateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
 
@@ -840,6 +842,7 @@ module Aws
         def app_configs: () -> ::Array[Types::AppConfig]
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
+        def kms_key_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#get_application-instance_method
       def get_application: (

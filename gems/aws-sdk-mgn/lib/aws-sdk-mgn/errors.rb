@@ -52,13 +52,13 @@ module Aws::Mgn
       end
 
       # @return [String]
-      def code
-        @code || @data[:code]
+      def message
+        @message || @data[:message]
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def code
+        @code || @data[:code]
       end
     end
 
@@ -72,18 +72,13 @@ module Aws::Mgn
       end
 
       # @return [String]
-      def code
-        @code || @data[:code]
-      end
-
-      # @return [String]
-      def errors
-        @data[:errors]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
       end
 
       # @return [String]
@@ -94,6 +89,11 @@ module Aws::Mgn
       # @return [String]
       def resource_type
         @data[:resource_type]
+      end
+
+      # @return [String]
+      def errors
+        @data[:errors]
       end
     end
 
@@ -127,13 +127,13 @@ module Aws::Mgn
       end
 
       # @return [String]
-      def code
-        @code || @data[:code]
+      def message
+        @message || @data[:message]
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def code
+        @code || @data[:code]
       end
 
       # @return [String]
@@ -157,23 +157,13 @@ module Aws::Mgn
       end
 
       # @return [String]
-      def code
-        @code || @data[:code]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
       end
 
       # @return [String]
-      def quota_code
-        @data[:quota_code]
-      end
-
-      # @return [String]
-      def quota_value
-        @data[:quota_value]
+      def code
+        @code || @data[:code]
       end
 
       # @return [String]
@@ -189,6 +179,16 @@ module Aws::Mgn
       # @return [String]
       def service_code
         @data[:service_code]
+      end
+
+      # @return [String]
+      def quota_code
+        @data[:quota_code]
+      end
+
+      # @return [String]
+      def quota_value
+        @data[:quota_value]
       end
     end
 
@@ -207,6 +207,11 @@ module Aws::Mgn
       end
 
       # @return [String]
+      def service_code
+        @data[:service_code]
+      end
+
+      # @return [String]
       def quota_code
         @data[:quota_code]
       end
@@ -214,11 +219,6 @@ module Aws::Mgn
       # @return [String]
       def retry_after_seconds
         @data[:retry_after_seconds]
-      end
-
-      # @return [String]
-      def service_code
-        @data[:service_code]
       end
     end
 
@@ -232,13 +232,13 @@ module Aws::Mgn
       end
 
       # @return [String]
-      def code
-        @code || @data[:code]
+      def message
+        @message || @data[:message]
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def code
+        @code || @data[:code]
       end
     end
 
@@ -252,23 +252,23 @@ module Aws::Mgn
       end
 
       # @return [String]
-      def code
-        @code || @data[:code]
-      end
-
-      # @return [String]
-      def field_list
-        @data[:field_list]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
       end
 
       # @return [String]
+      def code
+        @code || @data[:code]
+      end
+
+      # @return [String]
       def reason
         @data[:reason]
+      end
+
+      # @return [String]
+      def field_list
+        @data[:field_list]
       end
     end
 

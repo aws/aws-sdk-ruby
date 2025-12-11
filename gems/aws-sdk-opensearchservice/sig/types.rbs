@@ -388,6 +388,7 @@ module Aws::OpenSearchService
       attr_accessor iam_identity_center_options: Types::IamIdentityCenterOptionsInput
       attr_accessor app_configs: ::Array[Types::AppConfig]
       attr_accessor tag_list: ::Array[Types::Tag]
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -400,6 +401,7 @@ module Aws::OpenSearchService
       attr_accessor app_configs: ::Array[Types::AppConfig]
       attr_accessor tag_list: ::Array[Types::Tag]
       attr_accessor created_at: ::Time
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -1064,6 +1066,7 @@ module Aws::OpenSearchService
       attr_accessor app_configs: ::Array[Types::AppConfig]
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 

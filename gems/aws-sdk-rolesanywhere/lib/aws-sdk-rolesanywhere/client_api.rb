@@ -124,41 +124,41 @@ module Aws::RolesAnywhere
 
     AttributeMappings.member = Shapes::ShapeRef.new(shape: AttributeMapping)
 
-    CreateProfileRequest.add_member(:accept_role_session_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "acceptRoleSessionName"))
-    CreateProfileRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: CreateProfileRequestDurationSecondsInteger, location_name: "durationSeconds"))
-    CreateProfileRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
-    CreateProfileRequest.add_member(:managed_policy_arns, Shapes::ShapeRef.new(shape: ManagedPolicyList, location_name: "managedPolicyArns"))
     CreateProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     CreateProfileRequest.add_member(:require_instance_properties, Shapes::ShapeRef.new(shape: Boolean, location_name: "requireInstanceProperties"))
-    CreateProfileRequest.add_member(:role_arns, Shapes::ShapeRef.new(shape: RoleArnList, required: true, location_name: "roleArns"))
     CreateProfileRequest.add_member(:session_policy, Shapes::ShapeRef.new(shape: String, location_name: "sessionPolicy"))
+    CreateProfileRequest.add_member(:role_arns, Shapes::ShapeRef.new(shape: RoleArnList, required: true, location_name: "roleArns"))
+    CreateProfileRequest.add_member(:managed_policy_arns, Shapes::ShapeRef.new(shape: ManagedPolicyList, location_name: "managedPolicyArns"))
+    CreateProfileRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: CreateProfileRequestDurationSecondsInteger, location_name: "durationSeconds"))
+    CreateProfileRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     CreateProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateProfileRequest.add_member(:accept_role_session_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "acceptRoleSessionName"))
     CreateProfileRequest.struct_class = Types::CreateProfileRequest
 
-    CreateTrustAnchorRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     CreateTrustAnchorRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
-    CreateTrustAnchorRequest.add_member(:notification_settings, Shapes::ShapeRef.new(shape: NotificationSettings, location_name: "notificationSettings"))
     CreateTrustAnchorRequest.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "source"))
+    CreateTrustAnchorRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     CreateTrustAnchorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateTrustAnchorRequest.add_member(:notification_settings, Shapes::ShapeRef.new(shape: NotificationSettings, location_name: "notificationSettings"))
     CreateTrustAnchorRequest.struct_class = Types::CreateTrustAnchorRequest
 
     CredentialSummaries.member = Shapes::ShapeRef.new(shape: CredentialSummary)
 
-    CredentialSummary.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
-    CredentialSummary.add_member(:failed, Shapes::ShapeRef.new(shape: Boolean, location_name: "failed"))
-    CredentialSummary.add_member(:issuer, Shapes::ShapeRef.new(shape: String, location_name: "issuer"))
     CredentialSummary.add_member(:seen_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "seenAt"))
     CredentialSummary.add_member(:serial_number, Shapes::ShapeRef.new(shape: String, location_name: "serialNumber"))
+    CredentialSummary.add_member(:issuer, Shapes::ShapeRef.new(shape: String, location_name: "issuer"))
+    CredentialSummary.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     CredentialSummary.add_member(:x509_certificate_data, Shapes::ShapeRef.new(shape: String, location_name: "x509CertificateData"))
+    CredentialSummary.add_member(:failed, Shapes::ShapeRef.new(shape: Boolean, location_name: "failed"))
     CredentialSummary.struct_class = Types::CredentialSummary
 
-    CrlDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
-    CrlDetail.add_member(:crl_arn, Shapes::ShapeRef.new(shape: String, location_name: "crlArn"))
-    CrlDetail.add_member(:crl_data, Shapes::ShapeRef.new(shape: Blob, location_name: "crlData"))
     CrlDetail.add_member(:crl_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "crlId"))
-    CrlDetail.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    CrlDetail.add_member(:crl_arn, Shapes::ShapeRef.new(shape: String, location_name: "crlArn"))
     CrlDetail.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    CrlDetail.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    CrlDetail.add_member(:crl_data, Shapes::ShapeRef.new(shape: Blob, location_name: "crlData"))
     CrlDetail.add_member(:trust_anchor_arn, Shapes::ShapeRef.new(shape: String, location_name: "trustAnchorArn"))
+    CrlDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     CrlDetail.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     CrlDetail.struct_class = Types::CrlDetail
 
@@ -167,33 +167,33 @@ module Aws::RolesAnywhere
 
     CrlDetails.member = Shapes::ShapeRef.new(shape: CrlDetail)
 
-    DeleteAttributeMappingRequest.add_member(:certificate_field, Shapes::ShapeRef.new(shape: CertificateField, required: true, location: "querystring", location_name: "certificateField"))
     DeleteAttributeMappingRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "profileId"))
+    DeleteAttributeMappingRequest.add_member(:certificate_field, Shapes::ShapeRef.new(shape: CertificateField, required: true, location: "querystring", location_name: "certificateField"))
     DeleteAttributeMappingRequest.add_member(:specifiers, Shapes::ShapeRef.new(shape: SpecifierList, location: "querystring", location_name: "specifiers"))
     DeleteAttributeMappingRequest.struct_class = Types::DeleteAttributeMappingRequest
 
     DeleteAttributeMappingResponse.add_member(:profile, Shapes::ShapeRef.new(shape: ProfileDetail, required: true, location_name: "profile"))
     DeleteAttributeMappingResponse.struct_class = Types::DeleteAttributeMappingResponse
 
+    ImportCrlRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     ImportCrlRequest.add_member(:crl_data, Shapes::ShapeRef.new(shape: ImportCrlRequestCrlDataBlob, required: true, location_name: "crlData"))
     ImportCrlRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
-    ImportCrlRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     ImportCrlRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     ImportCrlRequest.add_member(:trust_anchor_arn, Shapes::ShapeRef.new(shape: TrustAnchorArn, required: true, location_name: "trustAnchorArn"))
     ImportCrlRequest.struct_class = Types::ImportCrlRequest
 
     InstanceProperties.member = Shapes::ShapeRef.new(shape: InstanceProperty)
 
-    InstanceProperty.add_member(:failed, Shapes::ShapeRef.new(shape: Boolean, location_name: "failed"))
-    InstanceProperty.add_member(:properties, Shapes::ShapeRef.new(shape: InstancePropertyMap, location_name: "properties"))
     InstanceProperty.add_member(:seen_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "seenAt"))
+    InstanceProperty.add_member(:properties, Shapes::ShapeRef.new(shape: InstancePropertyMap, location_name: "properties"))
+    InstanceProperty.add_member(:failed, Shapes::ShapeRef.new(shape: Boolean, location_name: "failed"))
     InstanceProperty.struct_class = Types::InstanceProperty
 
     InstancePropertyMap.key = Shapes::ShapeRef.new(shape: InstancePropertyMapKeyString)
     InstancePropertyMap.value = Shapes::ShapeRef.new(shape: InstancePropertyMapValueString)
 
-    ListCrlsResponse.add_member(:crls, Shapes::ShapeRef.new(shape: CrlDetails, location_name: "crls"))
     ListCrlsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListCrlsResponse.add_member(:crls, Shapes::ShapeRef.new(shape: CrlDetails, location_name: "crls"))
     ListCrlsResponse.struct_class = Types::ListCrlsResponse
 
     ListProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -204,8 +204,8 @@ module Aws::RolesAnywhere
     ListRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "pageSize"))
     ListRequest.struct_class = Types::ListRequest
 
-    ListSubjectsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListSubjectsResponse.add_member(:subjects, Shapes::ShapeRef.new(shape: SubjectSummaries, location_name: "subjects"))
+    ListSubjectsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListSubjectsResponse.struct_class = Types::ListSubjectsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "querystring", location_name: "resourceArn"))
@@ -225,43 +225,43 @@ module Aws::RolesAnywhere
 
     MappingRules.member = Shapes::ShapeRef.new(shape: MappingRule)
 
-    NotificationSetting.add_member(:channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "channel"))
     NotificationSetting.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     NotificationSetting.add_member(:event, Shapes::ShapeRef.new(shape: NotificationEvent, required: true, location_name: "event"))
     NotificationSetting.add_member(:threshold, Shapes::ShapeRef.new(shape: NotificationSettingThresholdInteger, location_name: "threshold"))
+    NotificationSetting.add_member(:channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "channel"))
     NotificationSetting.struct_class = Types::NotificationSetting
 
-    NotificationSettingDetail.add_member(:channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "channel"))
-    NotificationSettingDetail.add_member(:configured_by, Shapes::ShapeRef.new(shape: NotificationSettingDetailConfiguredByString, location_name: "configuredBy"))
     NotificationSettingDetail.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     NotificationSettingDetail.add_member(:event, Shapes::ShapeRef.new(shape: NotificationEvent, required: true, location_name: "event"))
     NotificationSettingDetail.add_member(:threshold, Shapes::ShapeRef.new(shape: NotificationSettingDetailThresholdInteger, location_name: "threshold"))
+    NotificationSettingDetail.add_member(:channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "channel"))
+    NotificationSettingDetail.add_member(:configured_by, Shapes::ShapeRef.new(shape: NotificationSettingDetailConfiguredByString, location_name: "configuredBy"))
     NotificationSettingDetail.struct_class = Types::NotificationSettingDetail
 
     NotificationSettingDetails.member = Shapes::ShapeRef.new(shape: NotificationSettingDetail)
 
-    NotificationSettingKey.add_member(:channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "channel"))
     NotificationSettingKey.add_member(:event, Shapes::ShapeRef.new(shape: NotificationEvent, required: true, location_name: "event"))
+    NotificationSettingKey.add_member(:channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "channel"))
     NotificationSettingKey.struct_class = Types::NotificationSettingKey
 
     NotificationSettingKeys.member = Shapes::ShapeRef.new(shape: NotificationSettingKey)
 
     NotificationSettings.member = Shapes::ShapeRef.new(shape: NotificationSetting)
 
+    ProfileDetail.add_member(:profile_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "profileId"))
+    ProfileDetail.add_member(:profile_arn, Shapes::ShapeRef.new(shape: ProfileArn, location_name: "profileArn"))
+    ProfileDetail.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    ProfileDetail.add_member(:require_instance_properties, Shapes::ShapeRef.new(shape: Boolean, location_name: "requireInstanceProperties"))
+    ProfileDetail.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    ProfileDetail.add_member(:created_by, Shapes::ShapeRef.new(shape: String, location_name: "createdBy"))
+    ProfileDetail.add_member(:session_policy, Shapes::ShapeRef.new(shape: String, location_name: "sessionPolicy"))
+    ProfileDetail.add_member(:role_arns, Shapes::ShapeRef.new(shape: RoleArnList, location_name: "roleArns"))
+    ProfileDetail.add_member(:managed_policy_arns, Shapes::ShapeRef.new(shape: ManagedPolicyList, location_name: "managedPolicyArns"))
+    ProfileDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    ProfileDetail.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    ProfileDetail.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "durationSeconds"))
     ProfileDetail.add_member(:accept_role_session_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "acceptRoleSessionName"))
     ProfileDetail.add_member(:attribute_mappings, Shapes::ShapeRef.new(shape: AttributeMappings, location_name: "attributeMappings"))
-    ProfileDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
-    ProfileDetail.add_member(:created_by, Shapes::ShapeRef.new(shape: String, location_name: "createdBy"))
-    ProfileDetail.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "durationSeconds"))
-    ProfileDetail.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
-    ProfileDetail.add_member(:managed_policy_arns, Shapes::ShapeRef.new(shape: ManagedPolicyList, location_name: "managedPolicyArns"))
-    ProfileDetail.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
-    ProfileDetail.add_member(:profile_arn, Shapes::ShapeRef.new(shape: ProfileArn, location_name: "profileArn"))
-    ProfileDetail.add_member(:profile_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "profileId"))
-    ProfileDetail.add_member(:require_instance_properties, Shapes::ShapeRef.new(shape: Boolean, location_name: "requireInstanceProperties"))
-    ProfileDetail.add_member(:role_arns, Shapes::ShapeRef.new(shape: RoleArnList, location_name: "roleArns"))
-    ProfileDetail.add_member(:session_policy, Shapes::ShapeRef.new(shape: String, location_name: "sessionPolicy"))
-    ProfileDetail.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     ProfileDetail.struct_class = Types::ProfileDetail
 
     ProfileDetailResponse.add_member(:profile, Shapes::ShapeRef.new(shape: ProfileDetail, location_name: "profile"))
@@ -269,23 +269,23 @@ module Aws::RolesAnywhere
 
     ProfileDetails.member = Shapes::ShapeRef.new(shape: ProfileDetail)
 
+    PutAttributeMappingRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "profileId"))
     PutAttributeMappingRequest.add_member(:certificate_field, Shapes::ShapeRef.new(shape: CertificateField, required: true, location_name: "certificateField"))
     PutAttributeMappingRequest.add_member(:mapping_rules, Shapes::ShapeRef.new(shape: MappingRules, required: true, location_name: "mappingRules"))
-    PutAttributeMappingRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "profileId"))
     PutAttributeMappingRequest.struct_class = Types::PutAttributeMappingRequest
 
     PutAttributeMappingResponse.add_member(:profile, Shapes::ShapeRef.new(shape: ProfileDetail, required: true, location_name: "profile"))
     PutAttributeMappingResponse.struct_class = Types::PutAttributeMappingResponse
 
-    PutNotificationSettingsRequest.add_member(:notification_settings, Shapes::ShapeRef.new(shape: NotificationSettings, required: true, location_name: "notificationSettings"))
     PutNotificationSettingsRequest.add_member(:trust_anchor_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "trustAnchorId"))
+    PutNotificationSettingsRequest.add_member(:notification_settings, Shapes::ShapeRef.new(shape: NotificationSettings, required: true, location_name: "notificationSettings"))
     PutNotificationSettingsRequest.struct_class = Types::PutNotificationSettingsRequest
 
     PutNotificationSettingsResponse.add_member(:trust_anchor, Shapes::ShapeRef.new(shape: TrustAnchorDetail, required: true, location_name: "trustAnchor"))
     PutNotificationSettingsResponse.struct_class = Types::PutNotificationSettingsResponse
 
-    ResetNotificationSettingsRequest.add_member(:notification_setting_keys, Shapes::ShapeRef.new(shape: NotificationSettingKeys, required: true, location_name: "notificationSettingKeys"))
     ResetNotificationSettingsRequest.add_member(:trust_anchor_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "trustAnchorId"))
+    ResetNotificationSettingsRequest.add_member(:notification_setting_keys, Shapes::ShapeRef.new(shape: NotificationSettingKeys, required: true, location_name: "notificationSettingKeys"))
     ResetNotificationSettingsRequest.struct_class = Types::ResetNotificationSettingsRequest
 
     ResetNotificationSettingsResponse.add_member(:trust_anchor, Shapes::ShapeRef.new(shape: TrustAnchorDetail, required: true, location_name: "trustAnchor"))
@@ -308,29 +308,29 @@ module Aws::RolesAnywhere
     ScalarTrustAnchorRequest.add_member(:trust_anchor_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "trustAnchorId"))
     ScalarTrustAnchorRequest.struct_class = Types::ScalarTrustAnchorRequest
 
-    Source.add_member(:source_data, Shapes::ShapeRef.new(shape: SourceData, location_name: "sourceData"))
     Source.add_member(:source_type, Shapes::ShapeRef.new(shape: TrustAnchorType, location_name: "sourceType"))
+    Source.add_member(:source_data, Shapes::ShapeRef.new(shape: SourceData, location_name: "sourceData"))
     Source.struct_class = Types::Source
 
-    SourceData.add_member(:acm_pca_arn, Shapes::ShapeRef.new(shape: String, location_name: "acmPcaArn"))
     SourceData.add_member(:x509_certificate_data, Shapes::ShapeRef.new(shape: SourceDataX509CertificateDataString, location_name: "x509CertificateData"))
+    SourceData.add_member(:acm_pca_arn, Shapes::ShapeRef.new(shape: String, location_name: "acmPcaArn"))
     SourceData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    SourceData.add_member_subclass(:acm_pca_arn, Types::SourceData::AcmPcaArn)
     SourceData.add_member_subclass(:x509_certificate_data, Types::SourceData::X509CertificateData)
+    SourceData.add_member_subclass(:acm_pca_arn, Types::SourceData::AcmPcaArn)
     SourceData.add_member_subclass(:unknown, Types::SourceData::Unknown)
     SourceData.struct_class = Types::SourceData
 
     SpecifierList.member = Shapes::ShapeRef.new(shape: String)
 
-    SubjectDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
-    SubjectDetail.add_member(:credentials, Shapes::ShapeRef.new(shape: CredentialSummaries, location_name: "credentials"))
-    SubjectDetail.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
-    SubjectDetail.add_member(:instance_properties, Shapes::ShapeRef.new(shape: InstanceProperties, location_name: "instanceProperties"))
-    SubjectDetail.add_member(:last_seen_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastSeenAt"))
     SubjectDetail.add_member(:subject_arn, Shapes::ShapeRef.new(shape: String, location_name: "subjectArn"))
     SubjectDetail.add_member(:subject_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "subjectId"))
-    SubjectDetail.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    SubjectDetail.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     SubjectDetail.add_member(:x509_subject, Shapes::ShapeRef.new(shape: String, location_name: "x509Subject"))
+    SubjectDetail.add_member(:last_seen_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastSeenAt"))
+    SubjectDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    SubjectDetail.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    SubjectDetail.add_member(:credentials, Shapes::ShapeRef.new(shape: CredentialSummaries, location_name: "credentials"))
+    SubjectDetail.add_member(:instance_properties, Shapes::ShapeRef.new(shape: InstanceProperties, location_name: "instanceProperties"))
     SubjectDetail.struct_class = Types::SubjectDetail
 
     SubjectDetailResponse.add_member(:subject, Shapes::ShapeRef.new(shape: SubjectDetail, location_name: "subject"))
@@ -338,13 +338,13 @@ module Aws::RolesAnywhere
 
     SubjectSummaries.member = Shapes::ShapeRef.new(shape: SubjectSummary)
 
-    SubjectSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
-    SubjectSummary.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
-    SubjectSummary.add_member(:last_seen_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastSeenAt"))
     SubjectSummary.add_member(:subject_arn, Shapes::ShapeRef.new(shape: String, location_name: "subjectArn"))
     SubjectSummary.add_member(:subject_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "subjectId"))
-    SubjectSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    SubjectSummary.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     SubjectSummary.add_member(:x509_subject, Shapes::ShapeRef.new(shape: String, location_name: "x509Subject"))
+    SubjectSummary.add_member(:last_seen_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastSeenAt"))
+    SubjectSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    SubjectSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     SubjectSummary.struct_class = Types::SubjectSummary
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
@@ -364,14 +364,14 @@ module Aws::RolesAnywhere
     TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     TooManyTagsException.struct_class = Types::TooManyTagsException
 
-    TrustAnchorDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
-    TrustAnchorDetail.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
-    TrustAnchorDetail.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
-    TrustAnchorDetail.add_member(:notification_settings, Shapes::ShapeRef.new(shape: NotificationSettingDetails, location_name: "notificationSettings"))
-    TrustAnchorDetail.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
-    TrustAnchorDetail.add_member(:trust_anchor_arn, Shapes::ShapeRef.new(shape: String, location_name: "trustAnchorArn"))
     TrustAnchorDetail.add_member(:trust_anchor_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "trustAnchorId"))
+    TrustAnchorDetail.add_member(:trust_anchor_arn, Shapes::ShapeRef.new(shape: String, location_name: "trustAnchorArn"))
+    TrustAnchorDetail.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    TrustAnchorDetail.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
+    TrustAnchorDetail.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    TrustAnchorDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     TrustAnchorDetail.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    TrustAnchorDetail.add_member(:notification_settings, Shapes::ShapeRef.new(shape: NotificationSettingDetails, location_name: "notificationSettings"))
     TrustAnchorDetail.struct_class = Types::TrustAnchorDetail
 
     TrustAnchorDetailResponse.add_member(:trust_anchor, Shapes::ShapeRef.new(shape: TrustAnchorDetail, required: true, location_name: "trustAnchor"))
@@ -385,23 +385,23 @@ module Aws::RolesAnywhere
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
-    UpdateCrlRequest.add_member(:crl_data, Shapes::ShapeRef.new(shape: UpdateCrlRequestCrlDataBlob, location_name: "crlData"))
     UpdateCrlRequest.add_member(:crl_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "crlId"))
     UpdateCrlRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    UpdateCrlRequest.add_member(:crl_data, Shapes::ShapeRef.new(shape: UpdateCrlRequestCrlDataBlob, location_name: "crlData"))
     UpdateCrlRequest.struct_class = Types::UpdateCrlRequest
 
-    UpdateProfileRequest.add_member(:accept_role_session_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "acceptRoleSessionName"))
-    UpdateProfileRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: UpdateProfileRequestDurationSecondsInteger, location_name: "durationSeconds"))
-    UpdateProfileRequest.add_member(:managed_policy_arns, Shapes::ShapeRef.new(shape: ManagedPolicyList, location_name: "managedPolicyArns"))
-    UpdateProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     UpdateProfileRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "profileId"))
-    UpdateProfileRequest.add_member(:role_arns, Shapes::ShapeRef.new(shape: RoleArnList, location_name: "roleArns"))
+    UpdateProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     UpdateProfileRequest.add_member(:session_policy, Shapes::ShapeRef.new(shape: UpdateProfileRequestSessionPolicyString, location_name: "sessionPolicy"))
+    UpdateProfileRequest.add_member(:role_arns, Shapes::ShapeRef.new(shape: RoleArnList, location_name: "roleArns"))
+    UpdateProfileRequest.add_member(:managed_policy_arns, Shapes::ShapeRef.new(shape: ManagedPolicyList, location_name: "managedPolicyArns"))
+    UpdateProfileRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: UpdateProfileRequestDurationSecondsInteger, location_name: "durationSeconds"))
+    UpdateProfileRequest.add_member(:accept_role_session_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "acceptRoleSessionName"))
     UpdateProfileRequest.struct_class = Types::UpdateProfileRequest
 
+    UpdateTrustAnchorRequest.add_member(:trust_anchor_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "trustAnchorId"))
     UpdateTrustAnchorRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     UpdateTrustAnchorRequest.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
-    UpdateTrustAnchorRequest.add_member(:trust_anchor_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "trustAnchorId"))
     UpdateTrustAnchorRequest.struct_class = Types::UpdateTrustAnchorRequest
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -417,7 +417,6 @@ module Aws::RolesAnywhere
         "apiVersion" => "2018-05-10",
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "rolesanywhere",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],
         "serviceFullName" => "IAM Roles Anywhere",

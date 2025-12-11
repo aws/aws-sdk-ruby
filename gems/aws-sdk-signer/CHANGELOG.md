@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2025-12-10)
+------------------
+
+* Feature - Adds support for Signer GetRevocationStatus with updated endpoints
+
 1.79.0 (2025-11-21)
 ------------------
 

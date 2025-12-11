@@ -98,6 +98,7 @@ module Aws::IdentityStore
       attr_accessor photos: ::Array[Types::Photo]
       attr_accessor website: ::String
       attr_accessor birthdate: ::String
+      attr_accessor extensions: ::Hash[::String, untyped]
       SENSITIVE: [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone, :website, :birthdate]
     end
 
@@ -174,6 +175,7 @@ module Aws::IdentityStore
     class DescribeUserRequest
       attr_accessor identity_store_id: ::String
       attr_accessor user_id: ::String
+      attr_accessor extensions: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -202,6 +204,7 @@ module Aws::IdentityStore
       attr_accessor created_by: ::String
       attr_accessor updated_at: ::Time
       attr_accessor updated_by: ::String
+      attr_accessor extensions: ::Hash[::String, untyped]
       SENSITIVE: [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone, :website, :birthdate]
     end
 
@@ -356,6 +359,7 @@ module Aws::IdentityStore
 
     class ListUsersRequest
       attr_accessor identity_store_id: ::String
+      attr_accessor extensions: ::Array[::String]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor filters: ::Array[Types::Filter]
@@ -405,7 +409,7 @@ module Aws::IdentityStore
     end
 
     class ResourceNotFoundException
-      attr_accessor resource_type: ("GROUP" | "USER" | "IDENTITY_STORE" | "GROUP_MEMBERSHIP")
+      attr_accessor resource_type: ("GROUP" | "USER" | "IDENTITY_STORE" | "GROUP_MEMBERSHIP" | "RESOURCE_POLICY")
       attr_accessor resource_id: ::String
       attr_accessor reason: ("KMS_KEY_NOT_FOUND")
       attr_accessor message: ::String
@@ -478,6 +482,7 @@ module Aws::IdentityStore
       attr_accessor created_by: ::String
       attr_accessor updated_at: ::Time
       attr_accessor updated_by: ::String
+      attr_accessor extensions: ::Hash[::String, untyped]
       SENSITIVE: [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone, :website, :birthdate]
     end
 

@@ -2638,6 +2638,17 @@ module Aws
                                                }?
                                              },
                                            ]?,
+                                           dashboard_customization_visual_options: {
+                                             fields_configuration: {
+                                               status: ("ENABLED" | "DISABLED")?,
+                                               additional_fields: Array[
+                                                 {
+                                                   data_set_identifier: ::String,
+                                                   column_name: ::String
+                                                 },
+                                               ]?
+                                             }?
+                                           }?,
                                            interactions: {
                                              visual_menu_option: {
                                                availability_status: ("ENABLED" | "DISABLED")?
@@ -4710,6 +4721,17 @@ module Aws
                                              vertical_overflow_visibility: ("HIDDEN" | "VISIBLE")?,
                                              overflow_column_header_visibility: ("HIDDEN" | "VISIBLE")?
                                            }?,
+                                           dashboard_customization_visual_options: {
+                                             fields_configuration: {
+                                               status: ("ENABLED" | "DISABLED")?,
+                                               additional_fields: Array[
+                                                 {
+                                                   data_set_identifier: ::String,
+                                                   column_name: ::String
+                                                 },
+                                               ]?
+                                             }?
+                                           }?,
                                            interactions: {
                                              visual_menu_option: {
                                                availability_status: ("ENABLED" | "DISABLED")?
@@ -6231,6 +6253,59 @@ module Aws
                                                },
                                              ]?
                                            }?,
+                                           default_series_settings: {
+                                             decal_settings: {
+                                               element_value: ::String?,
+                                               decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               decal_color: ::String?,
+                                               decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                               decal_style_type: ("Manual" | "Auto")?
+                                             }?,
+                                             border_settings: {
+                                               border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               border_width: ::String?,
+                                               border_color: ::String?
+                                             }?
+                                           }?,
+                                           series: Array[
+                                             {
+                                               field_bar_series_item: {
+                                                 field_id: ::String,
+                                                 settings: {
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
+                                                   }?,
+                                                   border_settings: {
+                                                     border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     border_width: ::String?,
+                                                     border_color: ::String?
+                                                   }?
+                                                 }?
+                                               }?,
+                                               data_field_bar_series_item: {
+                                                 field_id: ::String,
+                                                 field_value: ::String?,
+                                                 settings: {
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
+                                                   }?,
+                                                   border_settings: {
+                                                     border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     border_width: ::String?,
+                                                     border_color: ::String?
+                                                   }?
+                                                 }?
+                                               }?
+                                             },
+                                           ]?,
                                            legend: {
                                              visibility: ("HIDDEN" | "VISIBLE")?,
                                              title: {
@@ -11455,6 +11530,13 @@ module Aws
                                                marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
                                                marker_size: ::String?,
                                                marker_color: ::String?
+                                             }?,
+                                             decal_settings: {
+                                               element_value: ::String?,
+                                               decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               decal_color: ::String?,
+                                               decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                               decal_style_type: ("Manual" | "Auto")?
                                              }?
                                            }?,
                                            series: Array[
@@ -11474,6 +11556,13 @@ module Aws
                                                      marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
                                                      marker_size: ::String?,
                                                      marker_color: ::String?
+                                                   }?,
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
                                                    }?
                                                  }?
                                                }?,
@@ -11493,6 +11582,13 @@ module Aws
                                                      marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
                                                      marker_size: ::String?,
                                                      marker_color: ::String?
+                                                   }?,
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
                                                    }?
                                                  }?
                                                }?
@@ -15570,7 +15666,31 @@ module Aws
                                              ]
                                            },
                                          ]?,
-                                         visual_content_alt_text: ::String?
+                                         visual_content_alt_text: ::String?,
+                                         geocoding_preferences: Array[
+                                           {
+                                             request_key: {
+                                               country: ::String?,
+                                               state: ::String?,
+                                               county: ::String?,
+                                               city: ::String?,
+                                               post_code: ::String?
+                                             },
+                                             preference: {
+                                               geocoder_hierarchy: {
+                                                 country: ::String?,
+                                                 state: ::String?,
+                                                 county: ::String?,
+                                                 city: ::String?,
+                                                 post_code: ::String?
+                                               }?,
+                                               coordinate: {
+                                                 latitude: ::Float,
+                                                 longitude: ::Float
+                                               }?
+                                             }
+                                           },
+                                         ]?
                                        }?,
                                        filled_map_visual: {
                                          visual_id: ::String,
@@ -16421,7 +16541,31 @@ module Aws
                                              ]
                                            },
                                          ]?,
-                                         visual_content_alt_text: ::String?
+                                         visual_content_alt_text: ::String?,
+                                         geocoding_preferences: Array[
+                                           {
+                                             request_key: {
+                                               country: ::String?,
+                                               state: ::String?,
+                                               county: ::String?,
+                                               city: ::String?,
+                                               post_code: ::String?
+                                             },
+                                             preference: {
+                                               geocoder_hierarchy: {
+                                                 country: ::String?,
+                                                 state: ::String?,
+                                                 county: ::String?,
+                                                 city: ::String?,
+                                                 post_code: ::String?
+                                               }?,
+                                               coordinate: {
+                                                 latitude: ::Float,
+                                                 longitude: ::Float
+                                               }?
+                                             }
+                                           },
+                                         ]?
                                        }?,
                                        layer_map_visual: {
                                          visual_id: ::String,
@@ -22855,6 +22999,95 @@ module Aws
                                                },
                                              ]?
                                            }?,
+                                           default_series_settings: {
+                                             line_style_settings: {
+                                               line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")?,
+                                               line_style: ("SOLID" | "DOTTED" | "DASHED")?,
+                                               line_width: ::String?
+                                             }?,
+                                             marker_style_settings: {
+                                               marker_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
+                                               marker_size: ::String?,
+                                               marker_color: ::String?
+                                             }?,
+                                             decal_settings: {
+                                               element_value: ::String?,
+                                               decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               decal_color: ::String?,
+                                               decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                               decal_style_type: ("Manual" | "Auto")?
+                                             }?,
+                                             border_settings: {
+                                               border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               border_width: ::String?,
+                                               border_color: ::String?
+                                             }?
+                                           }?,
+                                           series: Array[
+                                             {
+                                               field_combo_series_item: {
+                                                 field_id: ::String,
+                                                 settings: {
+                                                   line_style_settings: {
+                                                     line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")?,
+                                                     line_style: ("SOLID" | "DOTTED" | "DASHED")?,
+                                                     line_width: ::String?
+                                                   }?,
+                                                   marker_style_settings: {
+                                                     marker_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
+                                                     marker_size: ::String?,
+                                                     marker_color: ::String?
+                                                   }?,
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
+                                                   }?,
+                                                   border_settings: {
+                                                     border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     border_width: ::String?,
+                                                     border_color: ::String?
+                                                   }?
+                                                 }?
+                                               }?,
+                                               data_field_combo_series_item: {
+                                                 field_id: ::String,
+                                                 field_value: ::String?,
+                                                 settings: {
+                                                   line_style_settings: {
+                                                     line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")?,
+                                                     line_style: ("SOLID" | "DOTTED" | "DASHED")?,
+                                                     line_width: ::String?
+                                                   }?,
+                                                   marker_style_settings: {
+                                                     marker_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
+                                                     marker_size: ::String?,
+                                                     marker_color: ::String?
+                                                   }?,
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
+                                                   }?,
+                                                   border_settings: {
+                                                     border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     border_width: ::String?,
+                                                     border_color: ::String?
+                                                   }?
+                                                 }?
+                                               }?
+                                             },
+                                           ]?,
                                            legend: {
                                              visibility: ("HIDDEN" | "VISIBLE")?,
                                              title: {
@@ -38298,6 +38531,17 @@ module Aws
                                          special_value: ("EMPTY" | "NULL" | "OTHER")?
                                        },
                                      ]?
+                                   }?,
+                                   decal_settings_configuration: {
+                                     custom_decal_settings: Array[
+                                       {
+                                         element_value: ::String?,
+                                         decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                         decal_color: ::String?,
+                                         decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                         decal_style_type: ("Manual" | "Auto")?
+                                       },
+                                     ]?
                                    }?
                                  },
                                ]?,
@@ -40251,6 +40495,17 @@ module Aws
                                                 }?
                                               },
                                             ]?,
+                                            dashboard_customization_visual_options: {
+                                              fields_configuration: {
+                                                status: ("ENABLED" | "DISABLED")?,
+                                                additional_fields: Array[
+                                                  {
+                                                    data_set_identifier: ::String,
+                                                    column_name: ::String
+                                                  },
+                                                ]?
+                                              }?
+                                            }?,
                                             interactions: {
                                               visual_menu_option: {
                                                 availability_status: ("ENABLED" | "DISABLED")?
@@ -42323,6 +42578,17 @@ module Aws
                                               vertical_overflow_visibility: ("HIDDEN" | "VISIBLE")?,
                                               overflow_column_header_visibility: ("HIDDEN" | "VISIBLE")?
                                             }?,
+                                            dashboard_customization_visual_options: {
+                                              fields_configuration: {
+                                                status: ("ENABLED" | "DISABLED")?,
+                                                additional_fields: Array[
+                                                  {
+                                                    data_set_identifier: ::String,
+                                                    column_name: ::String
+                                                  },
+                                                ]?
+                                              }?
+                                            }?,
                                             interactions: {
                                               visual_menu_option: {
                                                 availability_status: ("ENABLED" | "DISABLED")?
@@ -43844,6 +44110,59 @@ module Aws
                                                 },
                                               ]?
                                             }?,
+                                            default_series_settings: {
+                                              decal_settings: {
+                                                element_value: ::String?,
+                                                decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                decal_color: ::String?,
+                                                decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                decal_style_type: ("Manual" | "Auto")?
+                                              }?,
+                                              border_settings: {
+                                                border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                border_width: ::String?,
+                                                border_color: ::String?
+                                              }?
+                                            }?,
+                                            series: Array[
+                                              {
+                                                field_bar_series_item: {
+                                                  field_id: ::String,
+                                                  settings: {
+                                                    decal_settings: {
+                                                      element_value: ::String?,
+                                                      decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      decal_color: ::String?,
+                                                      decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                      decal_style_type: ("Manual" | "Auto")?
+                                                    }?,
+                                                    border_settings: {
+                                                      border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      border_width: ::String?,
+                                                      border_color: ::String?
+                                                    }?
+                                                  }?
+                                                }?,
+                                                data_field_bar_series_item: {
+                                                  field_id: ::String,
+                                                  field_value: ::String?,
+                                                  settings: {
+                                                    decal_settings: {
+                                                      element_value: ::String?,
+                                                      decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      decal_color: ::String?,
+                                                      decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                      decal_style_type: ("Manual" | "Auto")?
+                                                    }?,
+                                                    border_settings: {
+                                                      border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      border_width: ::String?,
+                                                      border_color: ::String?
+                                                    }?
+                                                  }?
+                                                }?
+                                              },
+                                            ]?,
                                             legend: {
                                               visibility: ("HIDDEN" | "VISIBLE")?,
                                               title: {
@@ -49068,6 +49387,13 @@ module Aws
                                                 marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
                                                 marker_size: ::String?,
                                                 marker_color: ::String?
+                                              }?,
+                                              decal_settings: {
+                                                element_value: ::String?,
+                                                decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                decal_color: ::String?,
+                                                decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                decal_style_type: ("Manual" | "Auto")?
                                               }?
                                             }?,
                                             series: Array[
@@ -49087,6 +49413,13 @@ module Aws
                                                       marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
                                                       marker_size: ::String?,
                                                       marker_color: ::String?
+                                                    }?,
+                                                    decal_settings: {
+                                                      element_value: ::String?,
+                                                      decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      decal_color: ::String?,
+                                                      decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                      decal_style_type: ("Manual" | "Auto")?
                                                     }?
                                                   }?
                                                 }?,
@@ -49106,6 +49439,13 @@ module Aws
                                                       marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
                                                       marker_size: ::String?,
                                                       marker_color: ::String?
+                                                    }?,
+                                                    decal_settings: {
+                                                      element_value: ::String?,
+                                                      decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      decal_color: ::String?,
+                                                      decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                      decal_style_type: ("Manual" | "Auto")?
                                                     }?
                                                   }?
                                                 }?
@@ -53183,7 +53523,31 @@ module Aws
                                               ]
                                             },
                                           ]?,
-                                          visual_content_alt_text: ::String?
+                                          visual_content_alt_text: ::String?,
+                                          geocoding_preferences: Array[
+                                            {
+                                              request_key: {
+                                                country: ::String?,
+                                                state: ::String?,
+                                                county: ::String?,
+                                                city: ::String?,
+                                                post_code: ::String?
+                                              },
+                                              preference: {
+                                                geocoder_hierarchy: {
+                                                  country: ::String?,
+                                                  state: ::String?,
+                                                  county: ::String?,
+                                                  city: ::String?,
+                                                  post_code: ::String?
+                                                }?,
+                                                coordinate: {
+                                                  latitude: ::Float,
+                                                  longitude: ::Float
+                                                }?
+                                              }
+                                            },
+                                          ]?
                                         }?,
                                         filled_map_visual: {
                                           visual_id: ::String,
@@ -54034,7 +54398,31 @@ module Aws
                                               ]
                                             },
                                           ]?,
-                                          visual_content_alt_text: ::String?
+                                          visual_content_alt_text: ::String?,
+                                          geocoding_preferences: Array[
+                                            {
+                                              request_key: {
+                                                country: ::String?,
+                                                state: ::String?,
+                                                county: ::String?,
+                                                city: ::String?,
+                                                post_code: ::String?
+                                              },
+                                              preference: {
+                                                geocoder_hierarchy: {
+                                                  country: ::String?,
+                                                  state: ::String?,
+                                                  county: ::String?,
+                                                  city: ::String?,
+                                                  post_code: ::String?
+                                                }?,
+                                                coordinate: {
+                                                  latitude: ::Float,
+                                                  longitude: ::Float
+                                                }?
+                                              }
+                                            },
+                                          ]?
                                         }?,
                                         layer_map_visual: {
                                           visual_id: ::String,
@@ -60468,6 +60856,95 @@ module Aws
                                                 },
                                               ]?
                                             }?,
+                                            default_series_settings: {
+                                              line_style_settings: {
+                                                line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")?,
+                                                line_style: ("SOLID" | "DOTTED" | "DASHED")?,
+                                                line_width: ::String?
+                                              }?,
+                                              marker_style_settings: {
+                                                marker_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
+                                                marker_size: ::String?,
+                                                marker_color: ::String?
+                                              }?,
+                                              decal_settings: {
+                                                element_value: ::String?,
+                                                decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                decal_color: ::String?,
+                                                decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                decal_style_type: ("Manual" | "Auto")?
+                                              }?,
+                                              border_settings: {
+                                                border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                border_width: ::String?,
+                                                border_color: ::String?
+                                              }?
+                                            }?,
+                                            series: Array[
+                                              {
+                                                field_combo_series_item: {
+                                                  field_id: ::String,
+                                                  settings: {
+                                                    line_style_settings: {
+                                                      line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")?,
+                                                      line_style: ("SOLID" | "DOTTED" | "DASHED")?,
+                                                      line_width: ::String?
+                                                    }?,
+                                                    marker_style_settings: {
+                                                      marker_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
+                                                      marker_size: ::String?,
+                                                      marker_color: ::String?
+                                                    }?,
+                                                    decal_settings: {
+                                                      element_value: ::String?,
+                                                      decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      decal_color: ::String?,
+                                                      decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                      decal_style_type: ("Manual" | "Auto")?
+                                                    }?,
+                                                    border_settings: {
+                                                      border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      border_width: ::String?,
+                                                      border_color: ::String?
+                                                    }?
+                                                  }?
+                                                }?,
+                                                data_field_combo_series_item: {
+                                                  field_id: ::String,
+                                                  field_value: ::String?,
+                                                  settings: {
+                                                    line_style_settings: {
+                                                      line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")?,
+                                                      line_style: ("SOLID" | "DOTTED" | "DASHED")?,
+                                                      line_width: ::String?
+                                                    }?,
+                                                    marker_style_settings: {
+                                                      marker_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
+                                                      marker_size: ::String?,
+                                                      marker_color: ::String?
+                                                    }?,
+                                                    decal_settings: {
+                                                      element_value: ::String?,
+                                                      decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      decal_color: ::String?,
+                                                      decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                      decal_style_type: ("Manual" | "Auto")?
+                                                    }?,
+                                                    border_settings: {
+                                                      border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      border_width: ::String?,
+                                                      border_color: ::String?
+                                                    }?
+                                                  }?
+                                                }?
+                                              },
+                                            ]?,
                                             legend: {
                                               visibility: ("HIDDEN" | "VISIBLE")?,
                                               title: {
@@ -75911,6 +76388,17 @@ module Aws
                                           special_value: ("EMPTY" | "NULL" | "OTHER")?
                                         },
                                       ]?
+                                    }?,
+                                    decal_settings_configuration: {
+                                      custom_decal_settings: Array[
+                                        {
+                                          element_value: ::String?,
+                                          decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                          decal_color: ::String?,
+                                          decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                          decal_style_type: ("Manual" | "Auto")?
+                                        },
+                                      ]?
                                     }?
                                   },
                                 ]?,
@@ -77089,6 +77577,11 @@ module Aws
                                   }?,
                                   copy_source_arn: ::String?,
                                   secret_arn: ::String?,
+                                  key_pair_credentials: {
+                                    key_pair_username: ::String,
+                                    private_key: ::String,
+                                    private_key_passphrase: ::String?
+                                  }?,
                                   web_proxy_credentials: {
                                     web_proxy_username: ::String,
                                     web_proxy_password: ::String
@@ -78929,6 +79422,17 @@ module Aws
                                                }?
                                              },
                                            ]?,
+                                           dashboard_customization_visual_options: {
+                                             fields_configuration: {
+                                               status: ("ENABLED" | "DISABLED")?,
+                                               additional_fields: Array[
+                                                 {
+                                                   data_set_identifier: ::String,
+                                                   column_name: ::String
+                                                 },
+                                               ]?
+                                             }?
+                                           }?,
                                            interactions: {
                                              visual_menu_option: {
                                                availability_status: ("ENABLED" | "DISABLED")?
@@ -81001,6 +81505,17 @@ module Aws
                                              vertical_overflow_visibility: ("HIDDEN" | "VISIBLE")?,
                                              overflow_column_header_visibility: ("HIDDEN" | "VISIBLE")?
                                            }?,
+                                           dashboard_customization_visual_options: {
+                                             fields_configuration: {
+                                               status: ("ENABLED" | "DISABLED")?,
+                                               additional_fields: Array[
+                                                 {
+                                                   data_set_identifier: ::String,
+                                                   column_name: ::String
+                                                 },
+                                               ]?
+                                             }?
+                                           }?,
                                            interactions: {
                                              visual_menu_option: {
                                                availability_status: ("ENABLED" | "DISABLED")?
@@ -82522,6 +83037,59 @@ module Aws
                                                },
                                              ]?
                                            }?,
+                                           default_series_settings: {
+                                             decal_settings: {
+                                               element_value: ::String?,
+                                               decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               decal_color: ::String?,
+                                               decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                               decal_style_type: ("Manual" | "Auto")?
+                                             }?,
+                                             border_settings: {
+                                               border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               border_width: ::String?,
+                                               border_color: ::String?
+                                             }?
+                                           }?,
+                                           series: Array[
+                                             {
+                                               field_bar_series_item: {
+                                                 field_id: ::String,
+                                                 settings: {
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
+                                                   }?,
+                                                   border_settings: {
+                                                     border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     border_width: ::String?,
+                                                     border_color: ::String?
+                                                   }?
+                                                 }?
+                                               }?,
+                                               data_field_bar_series_item: {
+                                                 field_id: ::String,
+                                                 field_value: ::String?,
+                                                 settings: {
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
+                                                   }?,
+                                                   border_settings: {
+                                                     border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     border_width: ::String?,
+                                                     border_color: ::String?
+                                                   }?
+                                                 }?
+                                               }?
+                                             },
+                                           ]?,
                                            legend: {
                                              visibility: ("HIDDEN" | "VISIBLE")?,
                                              title: {
@@ -87746,6 +88314,13 @@ module Aws
                                                marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
                                                marker_size: ::String?,
                                                marker_color: ::String?
+                                             }?,
+                                             decal_settings: {
+                                               element_value: ::String?,
+                                               decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               decal_color: ::String?,
+                                               decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                               decal_style_type: ("Manual" | "Auto")?
                                              }?
                                            }?,
                                            series: Array[
@@ -87765,6 +88340,13 @@ module Aws
                                                      marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
                                                      marker_size: ::String?,
                                                      marker_color: ::String?
+                                                   }?,
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
                                                    }?
                                                  }?
                                                }?,
@@ -87784,6 +88366,13 @@ module Aws
                                                      marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
                                                      marker_size: ::String?,
                                                      marker_color: ::String?
+                                                   }?,
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
                                                    }?
                                                  }?
                                                }?
@@ -91861,7 +92450,31 @@ module Aws
                                              ]
                                            },
                                          ]?,
-                                         visual_content_alt_text: ::String?
+                                         visual_content_alt_text: ::String?,
+                                         geocoding_preferences: Array[
+                                           {
+                                             request_key: {
+                                               country: ::String?,
+                                               state: ::String?,
+                                               county: ::String?,
+                                               city: ::String?,
+                                               post_code: ::String?
+                                             },
+                                             preference: {
+                                               geocoder_hierarchy: {
+                                                 country: ::String?,
+                                                 state: ::String?,
+                                                 county: ::String?,
+                                                 city: ::String?,
+                                                 post_code: ::String?
+                                               }?,
+                                               coordinate: {
+                                                 latitude: ::Float,
+                                                 longitude: ::Float
+                                               }?
+                                             }
+                                           },
+                                         ]?
                                        }?,
                                        filled_map_visual: {
                                          visual_id: ::String,
@@ -92712,7 +93325,31 @@ module Aws
                                              ]
                                            },
                                          ]?,
-                                         visual_content_alt_text: ::String?
+                                         visual_content_alt_text: ::String?,
+                                         geocoding_preferences: Array[
+                                           {
+                                             request_key: {
+                                               country: ::String?,
+                                               state: ::String?,
+                                               county: ::String?,
+                                               city: ::String?,
+                                               post_code: ::String?
+                                             },
+                                             preference: {
+                                               geocoder_hierarchy: {
+                                                 country: ::String?,
+                                                 state: ::String?,
+                                                 county: ::String?,
+                                                 city: ::String?,
+                                                 post_code: ::String?
+                                               }?,
+                                               coordinate: {
+                                                 latitude: ::Float,
+                                                 longitude: ::Float
+                                               }?
+                                             }
+                                           },
+                                         ]?
                                        }?,
                                        layer_map_visual: {
                                          visual_id: ::String,
@@ -99146,6 +99783,95 @@ module Aws
                                                },
                                              ]?
                                            }?,
+                                           default_series_settings: {
+                                             line_style_settings: {
+                                               line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")?,
+                                               line_style: ("SOLID" | "DOTTED" | "DASHED")?,
+                                               line_width: ::String?
+                                             }?,
+                                             marker_style_settings: {
+                                               marker_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
+                                               marker_size: ::String?,
+                                               marker_color: ::String?
+                                             }?,
+                                             decal_settings: {
+                                               element_value: ::String?,
+                                               decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               decal_color: ::String?,
+                                               decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                               decal_style_type: ("Manual" | "Auto")?
+                                             }?,
+                                             border_settings: {
+                                               border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               border_width: ::String?,
+                                               border_color: ::String?
+                                             }?
+                                           }?,
+                                           series: Array[
+                                             {
+                                               field_combo_series_item: {
+                                                 field_id: ::String,
+                                                 settings: {
+                                                   line_style_settings: {
+                                                     line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")?,
+                                                     line_style: ("SOLID" | "DOTTED" | "DASHED")?,
+                                                     line_width: ::String?
+                                                   }?,
+                                                   marker_style_settings: {
+                                                     marker_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
+                                                     marker_size: ::String?,
+                                                     marker_color: ::String?
+                                                   }?,
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
+                                                   }?,
+                                                   border_settings: {
+                                                     border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     border_width: ::String?,
+                                                     border_color: ::String?
+                                                   }?
+                                                 }?
+                                               }?,
+                                               data_field_combo_series_item: {
+                                                 field_id: ::String,
+                                                 field_value: ::String?,
+                                                 settings: {
+                                                   line_style_settings: {
+                                                     line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")?,
+                                                     line_style: ("SOLID" | "DOTTED" | "DASHED")?,
+                                                     line_width: ::String?
+                                                   }?,
+                                                   marker_style_settings: {
+                                                     marker_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
+                                                     marker_size: ::String?,
+                                                     marker_color: ::String?
+                                                   }?,
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
+                                                   }?,
+                                                   border_settings: {
+                                                     border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     border_width: ::String?,
+                                                     border_color: ::String?
+                                                   }?
+                                                 }?
+                                               }?
+                                             },
+                                           ]?,
                                            legend: {
                                              visibility: ("HIDDEN" | "VISIBLE")?,
                                              title: {
@@ -114587,6 +115313,17 @@ module Aws
                                          field_value: ::String?,
                                          color: ::String,
                                          special_value: ("EMPTY" | "NULL" | "OTHER")?
+                                       },
+                                     ]?
+                                   }?,
+                                   decal_settings_configuration: {
+                                     custom_decal_settings: Array[
+                                       {
+                                         element_value: ::String?,
+                                         decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                         decal_color: ::String?,
+                                         decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                         decal_style_type: ("Manual" | "Auto")?
                                        },
                                      ]?
                                    }?
@@ -116759,6 +117496,24 @@ module Aws
                                 ) -> _GetFlowPermissionsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFlowPermissionsResponseSuccess
 
+      interface _GetIdentityContextResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIdentityContextResponse]
+        def status: () -> ::Integer
+        def request_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#get_identity_context-instance_method
+      def get_identity_context: (
+                                  aws_account_id: ::String,
+                                  user_identifier: {
+                                    user_name: ::String?,
+                                    email: ::String?,
+                                    user_arn: ::String?
+                                  },
+                                  ?namespace: ::String,
+                                  ?session_expires_at: ::Time
+                                ) -> _GetIdentityContextResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdentityContextResponseSuccess
+
       interface _GetSessionEmbedUrlResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionEmbedUrlResponse]
         def embed_url: () -> ::String
@@ -118141,7 +118896,7 @@ module Aws
                                           aws_account_id: ::String,
                                           dashboard_id: ::String,
                                           snapshot_job_id: ::String,
-                                          user_configuration: {
+                                          ?user_configuration: {
                                             anonymous_users: Array[
                                               {
                                                 row_level_permission_tags: Array[
@@ -120014,6 +120769,17 @@ module Aws
                                                }?
                                              },
                                            ]?,
+                                           dashboard_customization_visual_options: {
+                                             fields_configuration: {
+                                               status: ("ENABLED" | "DISABLED")?,
+                                               additional_fields: Array[
+                                                 {
+                                                   data_set_identifier: ::String,
+                                                   column_name: ::String
+                                                 },
+                                               ]?
+                                             }?
+                                           }?,
                                            interactions: {
                                              visual_menu_option: {
                                                availability_status: ("ENABLED" | "DISABLED")?
@@ -122086,6 +122852,17 @@ module Aws
                                              vertical_overflow_visibility: ("HIDDEN" | "VISIBLE")?,
                                              overflow_column_header_visibility: ("HIDDEN" | "VISIBLE")?
                                            }?,
+                                           dashboard_customization_visual_options: {
+                                             fields_configuration: {
+                                               status: ("ENABLED" | "DISABLED")?,
+                                               additional_fields: Array[
+                                                 {
+                                                   data_set_identifier: ::String,
+                                                   column_name: ::String
+                                                 },
+                                               ]?
+                                             }?
+                                           }?,
                                            interactions: {
                                              visual_menu_option: {
                                                availability_status: ("ENABLED" | "DISABLED")?
@@ -123607,6 +124384,59 @@ module Aws
                                                },
                                              ]?
                                            }?,
+                                           default_series_settings: {
+                                             decal_settings: {
+                                               element_value: ::String?,
+                                               decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               decal_color: ::String?,
+                                               decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                               decal_style_type: ("Manual" | "Auto")?
+                                             }?,
+                                             border_settings: {
+                                               border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               border_width: ::String?,
+                                               border_color: ::String?
+                                             }?
+                                           }?,
+                                           series: Array[
+                                             {
+                                               field_bar_series_item: {
+                                                 field_id: ::String,
+                                                 settings: {
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
+                                                   }?,
+                                                   border_settings: {
+                                                     border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     border_width: ::String?,
+                                                     border_color: ::String?
+                                                   }?
+                                                 }?
+                                               }?,
+                                               data_field_bar_series_item: {
+                                                 field_id: ::String,
+                                                 field_value: ::String?,
+                                                 settings: {
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
+                                                   }?,
+                                                   border_settings: {
+                                                     border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     border_width: ::String?,
+                                                     border_color: ::String?
+                                                   }?
+                                                 }?
+                                               }?
+                                             },
+                                           ]?,
                                            legend: {
                                              visibility: ("HIDDEN" | "VISIBLE")?,
                                              title: {
@@ -128831,6 +129661,13 @@ module Aws
                                                marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
                                                marker_size: ::String?,
                                                marker_color: ::String?
+                                             }?,
+                                             decal_settings: {
+                                               element_value: ::String?,
+                                               decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               decal_color: ::String?,
+                                               decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                               decal_style_type: ("Manual" | "Auto")?
                                              }?
                                            }?,
                                            series: Array[
@@ -128850,6 +129687,13 @@ module Aws
                                                      marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
                                                      marker_size: ::String?,
                                                      marker_color: ::String?
+                                                   }?,
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
                                                    }?
                                                  }?
                                                }?,
@@ -128869,6 +129713,13 @@ module Aws
                                                      marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
                                                      marker_size: ::String?,
                                                      marker_color: ::String?
+                                                   }?,
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
                                                    }?
                                                  }?
                                                }?
@@ -132946,7 +133797,31 @@ module Aws
                                              ]
                                            },
                                          ]?,
-                                         visual_content_alt_text: ::String?
+                                         visual_content_alt_text: ::String?,
+                                         geocoding_preferences: Array[
+                                           {
+                                             request_key: {
+                                               country: ::String?,
+                                               state: ::String?,
+                                               county: ::String?,
+                                               city: ::String?,
+                                               post_code: ::String?
+                                             },
+                                             preference: {
+                                               geocoder_hierarchy: {
+                                                 country: ::String?,
+                                                 state: ::String?,
+                                                 county: ::String?,
+                                                 city: ::String?,
+                                                 post_code: ::String?
+                                               }?,
+                                               coordinate: {
+                                                 latitude: ::Float,
+                                                 longitude: ::Float
+                                               }?
+                                             }
+                                           },
+                                         ]?
                                        }?,
                                        filled_map_visual: {
                                          visual_id: ::String,
@@ -133797,7 +134672,31 @@ module Aws
                                              ]
                                            },
                                          ]?,
-                                         visual_content_alt_text: ::String?
+                                         visual_content_alt_text: ::String?,
+                                         geocoding_preferences: Array[
+                                           {
+                                             request_key: {
+                                               country: ::String?,
+                                               state: ::String?,
+                                               county: ::String?,
+                                               city: ::String?,
+                                               post_code: ::String?
+                                             },
+                                             preference: {
+                                               geocoder_hierarchy: {
+                                                 country: ::String?,
+                                                 state: ::String?,
+                                                 county: ::String?,
+                                                 city: ::String?,
+                                                 post_code: ::String?
+                                               }?,
+                                               coordinate: {
+                                                 latitude: ::Float,
+                                                 longitude: ::Float
+                                               }?
+                                             }
+                                           },
+                                         ]?
                                        }?,
                                        layer_map_visual: {
                                          visual_id: ::String,
@@ -140231,6 +141130,95 @@ module Aws
                                                },
                                              ]?
                                            }?,
+                                           default_series_settings: {
+                                             line_style_settings: {
+                                               line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")?,
+                                               line_style: ("SOLID" | "DOTTED" | "DASHED")?,
+                                               line_width: ::String?
+                                             }?,
+                                             marker_style_settings: {
+                                               marker_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
+                                               marker_size: ::String?,
+                                               marker_color: ::String?
+                                             }?,
+                                             decal_settings: {
+                                               element_value: ::String?,
+                                               decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               decal_color: ::String?,
+                                               decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                               decal_style_type: ("Manual" | "Auto")?
+                                             }?,
+                                             border_settings: {
+                                               border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               border_width: ::String?,
+                                               border_color: ::String?
+                                             }?
+                                           }?,
+                                           series: Array[
+                                             {
+                                               field_combo_series_item: {
+                                                 field_id: ::String,
+                                                 settings: {
+                                                   line_style_settings: {
+                                                     line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")?,
+                                                     line_style: ("SOLID" | "DOTTED" | "DASHED")?,
+                                                     line_width: ::String?
+                                                   }?,
+                                                   marker_style_settings: {
+                                                     marker_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
+                                                     marker_size: ::String?,
+                                                     marker_color: ::String?
+                                                   }?,
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
+                                                   }?,
+                                                   border_settings: {
+                                                     border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     border_width: ::String?,
+                                                     border_color: ::String?
+                                                   }?
+                                                 }?
+                                               }?,
+                                               data_field_combo_series_item: {
+                                                 field_id: ::String,
+                                                 field_value: ::String?,
+                                                 settings: {
+                                                   line_style_settings: {
+                                                     line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")?,
+                                                     line_style: ("SOLID" | "DOTTED" | "DASHED")?,
+                                                     line_width: ::String?
+                                                   }?,
+                                                   marker_style_settings: {
+                                                     marker_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
+                                                     marker_size: ::String?,
+                                                     marker_color: ::String?
+                                                   }?,
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
+                                                   }?,
+                                                   border_settings: {
+                                                     border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     border_width: ::String?,
+                                                     border_color: ::String?
+                                                   }?
+                                                 }?
+                                               }?
+                                             },
+                                           ]?,
                                            legend: {
                                              visibility: ("HIDDEN" | "VISIBLE")?,
                                              title: {
@@ -155674,6 +156662,17 @@ module Aws
                                          special_value: ("EMPTY" | "NULL" | "OTHER")?
                                        },
                                      ]?
+                                   }?,
+                                   decal_settings_configuration: {
+                                     custom_decal_settings: Array[
+                                       {
+                                         element_value: ::String?,
+                                         decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                         decal_color: ::String?,
+                                         decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                         decal_style_type: ("Manual" | "Auto")?
+                                       },
+                                     ]?
                                    }?
                                  },
                                ]?,
@@ -157666,6 +158665,17 @@ module Aws
                                                 }?
                                               },
                                             ]?,
+                                            dashboard_customization_visual_options: {
+                                              fields_configuration: {
+                                                status: ("ENABLED" | "DISABLED")?,
+                                                additional_fields: Array[
+                                                  {
+                                                    data_set_identifier: ::String,
+                                                    column_name: ::String
+                                                  },
+                                                ]?
+                                              }?
+                                            }?,
                                             interactions: {
                                               visual_menu_option: {
                                                 availability_status: ("ENABLED" | "DISABLED")?
@@ -159738,6 +160748,17 @@ module Aws
                                               vertical_overflow_visibility: ("HIDDEN" | "VISIBLE")?,
                                               overflow_column_header_visibility: ("HIDDEN" | "VISIBLE")?
                                             }?,
+                                            dashboard_customization_visual_options: {
+                                              fields_configuration: {
+                                                status: ("ENABLED" | "DISABLED")?,
+                                                additional_fields: Array[
+                                                  {
+                                                    data_set_identifier: ::String,
+                                                    column_name: ::String
+                                                  },
+                                                ]?
+                                              }?
+                                            }?,
                                             interactions: {
                                               visual_menu_option: {
                                                 availability_status: ("ENABLED" | "DISABLED")?
@@ -161259,6 +162280,59 @@ module Aws
                                                 },
                                               ]?
                                             }?,
+                                            default_series_settings: {
+                                              decal_settings: {
+                                                element_value: ::String?,
+                                                decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                decal_color: ::String?,
+                                                decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                decal_style_type: ("Manual" | "Auto")?
+                                              }?,
+                                              border_settings: {
+                                                border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                border_width: ::String?,
+                                                border_color: ::String?
+                                              }?
+                                            }?,
+                                            series: Array[
+                                              {
+                                                field_bar_series_item: {
+                                                  field_id: ::String,
+                                                  settings: {
+                                                    decal_settings: {
+                                                      element_value: ::String?,
+                                                      decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      decal_color: ::String?,
+                                                      decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                      decal_style_type: ("Manual" | "Auto")?
+                                                    }?,
+                                                    border_settings: {
+                                                      border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      border_width: ::String?,
+                                                      border_color: ::String?
+                                                    }?
+                                                  }?
+                                                }?,
+                                                data_field_bar_series_item: {
+                                                  field_id: ::String,
+                                                  field_value: ::String?,
+                                                  settings: {
+                                                    decal_settings: {
+                                                      element_value: ::String?,
+                                                      decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      decal_color: ::String?,
+                                                      decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                      decal_style_type: ("Manual" | "Auto")?
+                                                    }?,
+                                                    border_settings: {
+                                                      border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      border_width: ::String?,
+                                                      border_color: ::String?
+                                                    }?
+                                                  }?
+                                                }?
+                                              },
+                                            ]?,
                                             legend: {
                                               visibility: ("HIDDEN" | "VISIBLE")?,
                                               title: {
@@ -166483,6 +167557,13 @@ module Aws
                                                 marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
                                                 marker_size: ::String?,
                                                 marker_color: ::String?
+                                              }?,
+                                              decal_settings: {
+                                                element_value: ::String?,
+                                                decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                decal_color: ::String?,
+                                                decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                decal_style_type: ("Manual" | "Auto")?
                                               }?
                                             }?,
                                             series: Array[
@@ -166502,6 +167583,13 @@ module Aws
                                                       marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
                                                       marker_size: ::String?,
                                                       marker_color: ::String?
+                                                    }?,
+                                                    decal_settings: {
+                                                      element_value: ::String?,
+                                                      decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      decal_color: ::String?,
+                                                      decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                      decal_style_type: ("Manual" | "Auto")?
                                                     }?
                                                   }?
                                                 }?,
@@ -166521,6 +167609,13 @@ module Aws
                                                       marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
                                                       marker_size: ::String?,
                                                       marker_color: ::String?
+                                                    }?,
+                                                    decal_settings: {
+                                                      element_value: ::String?,
+                                                      decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      decal_color: ::String?,
+                                                      decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                      decal_style_type: ("Manual" | "Auto")?
                                                     }?
                                                   }?
                                                 }?
@@ -170598,7 +171693,31 @@ module Aws
                                               ]
                                             },
                                           ]?,
-                                          visual_content_alt_text: ::String?
+                                          visual_content_alt_text: ::String?,
+                                          geocoding_preferences: Array[
+                                            {
+                                              request_key: {
+                                                country: ::String?,
+                                                state: ::String?,
+                                                county: ::String?,
+                                                city: ::String?,
+                                                post_code: ::String?
+                                              },
+                                              preference: {
+                                                geocoder_hierarchy: {
+                                                  country: ::String?,
+                                                  state: ::String?,
+                                                  county: ::String?,
+                                                  city: ::String?,
+                                                  post_code: ::String?
+                                                }?,
+                                                coordinate: {
+                                                  latitude: ::Float,
+                                                  longitude: ::Float
+                                                }?
+                                              }
+                                            },
+                                          ]?
                                         }?,
                                         filled_map_visual: {
                                           visual_id: ::String,
@@ -171449,7 +172568,31 @@ module Aws
                                               ]
                                             },
                                           ]?,
-                                          visual_content_alt_text: ::String?
+                                          visual_content_alt_text: ::String?,
+                                          geocoding_preferences: Array[
+                                            {
+                                              request_key: {
+                                                country: ::String?,
+                                                state: ::String?,
+                                                county: ::String?,
+                                                city: ::String?,
+                                                post_code: ::String?
+                                              },
+                                              preference: {
+                                                geocoder_hierarchy: {
+                                                  country: ::String?,
+                                                  state: ::String?,
+                                                  county: ::String?,
+                                                  city: ::String?,
+                                                  post_code: ::String?
+                                                }?,
+                                                coordinate: {
+                                                  latitude: ::Float,
+                                                  longitude: ::Float
+                                                }?
+                                              }
+                                            },
+                                          ]?
                                         }?,
                                         layer_map_visual: {
                                           visual_id: ::String,
@@ -177883,6 +179026,95 @@ module Aws
                                                 },
                                               ]?
                                             }?,
+                                            default_series_settings: {
+                                              line_style_settings: {
+                                                line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")?,
+                                                line_style: ("SOLID" | "DOTTED" | "DASHED")?,
+                                                line_width: ::String?
+                                              }?,
+                                              marker_style_settings: {
+                                                marker_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
+                                                marker_size: ::String?,
+                                                marker_color: ::String?
+                                              }?,
+                                              decal_settings: {
+                                                element_value: ::String?,
+                                                decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                decal_color: ::String?,
+                                                decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                decal_style_type: ("Manual" | "Auto")?
+                                              }?,
+                                              border_settings: {
+                                                border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                border_width: ::String?,
+                                                border_color: ::String?
+                                              }?
+                                            }?,
+                                            series: Array[
+                                              {
+                                                field_combo_series_item: {
+                                                  field_id: ::String,
+                                                  settings: {
+                                                    line_style_settings: {
+                                                      line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")?,
+                                                      line_style: ("SOLID" | "DOTTED" | "DASHED")?,
+                                                      line_width: ::String?
+                                                    }?,
+                                                    marker_style_settings: {
+                                                      marker_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
+                                                      marker_size: ::String?,
+                                                      marker_color: ::String?
+                                                    }?,
+                                                    decal_settings: {
+                                                      element_value: ::String?,
+                                                      decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      decal_color: ::String?,
+                                                      decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                      decal_style_type: ("Manual" | "Auto")?
+                                                    }?,
+                                                    border_settings: {
+                                                      border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      border_width: ::String?,
+                                                      border_color: ::String?
+                                                    }?
+                                                  }?
+                                                }?,
+                                                data_field_combo_series_item: {
+                                                  field_id: ::String,
+                                                  field_value: ::String?,
+                                                  settings: {
+                                                    line_style_settings: {
+                                                      line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")?,
+                                                      line_style: ("SOLID" | "DOTTED" | "DASHED")?,
+                                                      line_width: ::String?
+                                                    }?,
+                                                    marker_style_settings: {
+                                                      marker_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
+                                                      marker_size: ::String?,
+                                                      marker_color: ::String?
+                                                    }?,
+                                                    decal_settings: {
+                                                      element_value: ::String?,
+                                                      decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      decal_color: ::String?,
+                                                      decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                      decal_style_type: ("Manual" | "Auto")?
+                                                    }?,
+                                                    border_settings: {
+                                                      border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                      border_width: ::String?,
+                                                      border_color: ::String?
+                                                    }?
+                                                  }?
+                                                }?
+                                              },
+                                            ]?,
                                             legend: {
                                               visibility: ("HIDDEN" | "VISIBLE")?,
                                               title: {
@@ -193326,6 +194558,17 @@ module Aws
                                           special_value: ("EMPTY" | "NULL" | "OTHER")?
                                         },
                                       ]?
+                                    }?,
+                                    decal_settings_configuration: {
+                                      custom_decal_settings: Array[
+                                        {
+                                          element_value: ::String?,
+                                          decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                          decal_color: ::String?,
+                                          decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                          decal_style_type: ("Manual" | "Auto")?
+                                        },
+                                      ]?
                                     }?
                                   },
                                 ]?,
@@ -194588,6 +195831,11 @@ module Aws
                                   }?,
                                   copy_source_arn: ::String?,
                                   secret_arn: ::String?,
+                                  key_pair_credentials: {
+                                    key_pair_username: ::String,
+                                    private_key: ::String,
+                                    private_key_passphrase: ::String?
+                                  }?,
                                   web_proxy_credentials: {
                                     web_proxy_username: ::String,
                                     web_proxy_password: ::String
@@ -196507,6 +197755,17 @@ module Aws
                                                }?
                                              },
                                            ]?,
+                                           dashboard_customization_visual_options: {
+                                             fields_configuration: {
+                                               status: ("ENABLED" | "DISABLED")?,
+                                               additional_fields: Array[
+                                                 {
+                                                   data_set_identifier: ::String,
+                                                   column_name: ::String
+                                                 },
+                                               ]?
+                                             }?
+                                           }?,
                                            interactions: {
                                              visual_menu_option: {
                                                availability_status: ("ENABLED" | "DISABLED")?
@@ -198579,6 +199838,17 @@ module Aws
                                              vertical_overflow_visibility: ("HIDDEN" | "VISIBLE")?,
                                              overflow_column_header_visibility: ("HIDDEN" | "VISIBLE")?
                                            }?,
+                                           dashboard_customization_visual_options: {
+                                             fields_configuration: {
+                                               status: ("ENABLED" | "DISABLED")?,
+                                               additional_fields: Array[
+                                                 {
+                                                   data_set_identifier: ::String,
+                                                   column_name: ::String
+                                                 },
+                                               ]?
+                                             }?
+                                           }?,
                                            interactions: {
                                              visual_menu_option: {
                                                availability_status: ("ENABLED" | "DISABLED")?
@@ -200100,6 +201370,59 @@ module Aws
                                                },
                                              ]?
                                            }?,
+                                           default_series_settings: {
+                                             decal_settings: {
+                                               element_value: ::String?,
+                                               decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               decal_color: ::String?,
+                                               decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                               decal_style_type: ("Manual" | "Auto")?
+                                             }?,
+                                             border_settings: {
+                                               border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               border_width: ::String?,
+                                               border_color: ::String?
+                                             }?
+                                           }?,
+                                           series: Array[
+                                             {
+                                               field_bar_series_item: {
+                                                 field_id: ::String,
+                                                 settings: {
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
+                                                   }?,
+                                                   border_settings: {
+                                                     border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     border_width: ::String?,
+                                                     border_color: ::String?
+                                                   }?
+                                                 }?
+                                               }?,
+                                               data_field_bar_series_item: {
+                                                 field_id: ::String,
+                                                 field_value: ::String?,
+                                                 settings: {
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
+                                                   }?,
+                                                   border_settings: {
+                                                     border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     border_width: ::String?,
+                                                     border_color: ::String?
+                                                   }?
+                                                 }?
+                                               }?
+                                             },
+                                           ]?,
                                            legend: {
                                              visibility: ("HIDDEN" | "VISIBLE")?,
                                              title: {
@@ -205324,6 +206647,13 @@ module Aws
                                                marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
                                                marker_size: ::String?,
                                                marker_color: ::String?
+                                             }?,
+                                             decal_settings: {
+                                               element_value: ::String?,
+                                               decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               decal_color: ::String?,
+                                               decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                               decal_style_type: ("Manual" | "Auto")?
                                              }?
                                            }?,
                                            series: Array[
@@ -205343,6 +206673,13 @@ module Aws
                                                      marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
                                                      marker_size: ::String?,
                                                      marker_color: ::String?
+                                                   }?,
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
                                                    }?
                                                  }?
                                                }?,
@@ -205362,6 +206699,13 @@ module Aws
                                                      marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
                                                      marker_size: ::String?,
                                                      marker_color: ::String?
+                                                   }?,
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
                                                    }?
                                                  }?
                                                }?
@@ -209439,7 +210783,31 @@ module Aws
                                              ]
                                            },
                                          ]?,
-                                         visual_content_alt_text: ::String?
+                                         visual_content_alt_text: ::String?,
+                                         geocoding_preferences: Array[
+                                           {
+                                             request_key: {
+                                               country: ::String?,
+                                               state: ::String?,
+                                               county: ::String?,
+                                               city: ::String?,
+                                               post_code: ::String?
+                                             },
+                                             preference: {
+                                               geocoder_hierarchy: {
+                                                 country: ::String?,
+                                                 state: ::String?,
+                                                 county: ::String?,
+                                                 city: ::String?,
+                                                 post_code: ::String?
+                                               }?,
+                                               coordinate: {
+                                                 latitude: ::Float,
+                                                 longitude: ::Float
+                                               }?
+                                             }
+                                           },
+                                         ]?
                                        }?,
                                        filled_map_visual: {
                                          visual_id: ::String,
@@ -210290,7 +211658,31 @@ module Aws
                                              ]
                                            },
                                          ]?,
-                                         visual_content_alt_text: ::String?
+                                         visual_content_alt_text: ::String?,
+                                         geocoding_preferences: Array[
+                                           {
+                                             request_key: {
+                                               country: ::String?,
+                                               state: ::String?,
+                                               county: ::String?,
+                                               city: ::String?,
+                                               post_code: ::String?
+                                             },
+                                             preference: {
+                                               geocoder_hierarchy: {
+                                                 country: ::String?,
+                                                 state: ::String?,
+                                                 county: ::String?,
+                                                 city: ::String?,
+                                                 post_code: ::String?
+                                               }?,
+                                               coordinate: {
+                                                 latitude: ::Float,
+                                                 longitude: ::Float
+                                               }?
+                                             }
+                                           },
+                                         ]?
                                        }?,
                                        layer_map_visual: {
                                          visual_id: ::String,
@@ -216724,6 +218116,95 @@ module Aws
                                                },
                                              ]?
                                            }?,
+                                           default_series_settings: {
+                                             line_style_settings: {
+                                               line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")?,
+                                               line_style: ("SOLID" | "DOTTED" | "DASHED")?,
+                                               line_width: ::String?
+                                             }?,
+                                             marker_style_settings: {
+                                               marker_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
+                                               marker_size: ::String?,
+                                               marker_color: ::String?
+                                             }?,
+                                             decal_settings: {
+                                               element_value: ::String?,
+                                               decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               decal_color: ::String?,
+                                               decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                               decal_style_type: ("Manual" | "Auto")?
+                                             }?,
+                                             border_settings: {
+                                               border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                               border_width: ::String?,
+                                               border_color: ::String?
+                                             }?
+                                           }?,
+                                           series: Array[
+                                             {
+                                               field_combo_series_item: {
+                                                 field_id: ::String,
+                                                 settings: {
+                                                   line_style_settings: {
+                                                     line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")?,
+                                                     line_style: ("SOLID" | "DOTTED" | "DASHED")?,
+                                                     line_width: ::String?
+                                                   }?,
+                                                   marker_style_settings: {
+                                                     marker_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
+                                                     marker_size: ::String?,
+                                                     marker_color: ::String?
+                                                   }?,
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
+                                                   }?,
+                                                   border_settings: {
+                                                     border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     border_width: ::String?,
+                                                     border_color: ::String?
+                                                   }?
+                                                 }?
+                                               }?,
+                                               data_field_combo_series_item: {
+                                                 field_id: ::String,
+                                                 field_value: ::String?,
+                                                 settings: {
+                                                   line_style_settings: {
+                                                     line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     line_interpolation: ("LINEAR" | "SMOOTH" | "STEPPED")?,
+                                                     line_style: ("SOLID" | "DOTTED" | "DASHED")?,
+                                                     line_width: ::String?
+                                                   }?,
+                                                   marker_style_settings: {
+                                                     marker_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     marker_shape: ("CIRCLE" | "TRIANGLE" | "SQUARE" | "DIAMOND" | "ROUNDED_SQUARE")?,
+                                                     marker_size: ::String?,
+                                                     marker_color: ::String?
+                                                   }?,
+                                                   decal_settings: {
+                                                     element_value: ::String?,
+                                                     decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     decal_color: ::String?,
+                                                     decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                                     decal_style_type: ("Manual" | "Auto")?
+                                                   }?,
+                                                   border_settings: {
+                                                     border_visibility: ("HIDDEN" | "VISIBLE")?,
+                                                     border_width: ::String?,
+                                                     border_color: ::String?
+                                                   }?
+                                                 }?
+                                               }?
+                                             },
+                                           ]?,
                                            legend: {
                                              visibility: ("HIDDEN" | "VISIBLE")?,
                                              title: {
@@ -232165,6 +233646,17 @@ module Aws
                                          field_value: ::String?,
                                          color: ::String,
                                          special_value: ("EMPTY" | "NULL" | "OTHER")?
+                                       },
+                                     ]?
+                                   }?,
+                                   decal_settings_configuration: {
+                                     custom_decal_settings: Array[
+                                       {
+                                         element_value: ::String?,
+                                         decal_visibility: ("HIDDEN" | "VISIBLE")?,
+                                         decal_color: ::String?,
+                                         decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")?,
+                                         decal_style_type: ("Manual" | "Auto")?
                                        },
                                      ]?
                                    }?

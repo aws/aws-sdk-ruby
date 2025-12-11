@@ -1060,6 +1060,17 @@ module Aws::RDS
     #     multi_tenant: false,
     #     dedicated_log_volume: false,
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
     #     additional_storage_volumes: [
     #       {
@@ -2302,6 +2313,14 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
     # @option options [String] :master_user_authentication_type
     #   Specifies the authentication type for the master user. With IAM master
     #   user authentication, you can configure the master DB user with IAM
@@ -2393,6 +2412,17 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     upgrade_storage_config: false,
     #     ca_certificate_identifier: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     additional_storage_volumes: [
     #       {
     #         volume_name: "String", # required
@@ -3038,6 +3068,14 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
     # @option options [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
     #   A list of additional storage volumes to create for the DB instance.
     #   You can create up to three additional storage volumes using the names
@@ -3248,6 +3286,17 @@ module Aws::RDS
     #     multi_tenant: false,
     #     dedicated_log_volume: false,
     #     engine: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
     #     additional_storage_volumes: [
     #       {
@@ -4346,6 +4395,14 @@ module Aws::RDS
     #     parameter group. To avoid reverting to the default, specify a new
     #     parameter group with `--db-parameter-group-name` and a new option
     #     group with `--option-group-name`.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
     # @option options [String] :master_user_authentication_type
     #   Specifies the authentication type for the master user. With IAM master
     #   user authentication, you can change the master DB user to use IAM
@@ -4382,6 +4439,17 @@ module Aws::RDS
     #   dbinstance = db_instance.promote({
     #     backup_retention_period: 1,
     #     preferred_backup_window: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :backup_retention_period
@@ -4419,6 +4487,14 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
     # @return [DBInstance]
     def promote(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -4514,6 +4590,17 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     additional_storage_volumes: [
@@ -5088,6 +5175,14 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
     # @option options [Boolean] :manage_master_user_password
     #   Specifies whether to manage the master user password with Amazon Web
     #   Services Secrets Manager in the restored DB instance.

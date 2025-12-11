@@ -35,6 +35,8 @@ module Aws::BillingConductor
     AssociateResourcesResponseList = Shapes::ListShape.new(name: 'AssociateResourcesResponseList')
     Association = Shapes::StringShape.new(name: 'Association')
     Attribute = Shapes::StructureShape.new(name: 'Attribute')
+    AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
+    AttributeValueList = Shapes::ListShape.new(name: 'AttributeValueList')
     AttributesList = Shapes::ListShape.new(name: 'AttributesList')
     BatchAssociateResourcesToCustomLineItemInput = Shapes::StructureShape.new(name: 'BatchAssociateResourcesToCustomLineItemInput')
     BatchAssociateResourcesToCustomLineItemOutput = Shapes::StructureShape.new(name: 'BatchAssociateResourcesToCustomLineItemOutput')
@@ -286,6 +288,8 @@ module Aws::BillingConductor
     Attribute.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
     Attribute.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
     Attribute.struct_class = Types::Attribute
+
+    AttributeValueList.member = Shapes::ShapeRef.new(shape: AttributeValue)
 
     AttributesList.member = Shapes::ShapeRef.new(shape: Attribute)
 
@@ -554,7 +558,8 @@ module Aws::BillingConductor
 
     LineItemFilter.add_member(:attribute, Shapes::ShapeRef.new(shape: LineItemFilterAttributeName, required: true, location_name: "Attribute"))
     LineItemFilter.add_member(:match_option, Shapes::ShapeRef.new(shape: MatchOption, required: true, location_name: "MatchOption"))
-    LineItemFilter.add_member(:values, Shapes::ShapeRef.new(shape: LineItemFilterValuesList, required: true, location_name: "Values"))
+    LineItemFilter.add_member(:values, Shapes::ShapeRef.new(shape: LineItemFilterValuesList, location_name: "Values"))
+    LineItemFilter.add_member(:attribute_values, Shapes::ShapeRef.new(shape: AttributeValueList, location_name: "AttributeValues"))
     LineItemFilter.struct_class = Types::LineItemFilter
 
     LineItemFilterValuesList.member = Shapes::ShapeRef.new(shape: LineItemFilterValue)

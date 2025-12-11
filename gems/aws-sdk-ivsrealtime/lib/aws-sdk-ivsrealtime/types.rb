@@ -1003,6 +1003,14 @@ module Aws::IVSRealTime
     #   `remoteParticipantId`. Default: `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] previous_token
+    #   Source participant token for `TOKEN_EXCHANGED` event.
+    #   @return [Types::ExchangedParticipantToken]
+    #
+    # @!attribute [rw] new_token
+    #   Participant token created during `TOKEN_EXCHANGED` event.
+    #   @return [Types::ExchangedParticipantToken]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/Event AWS API Documentation
     #
     class Event < Struct.new(
@@ -1013,7 +1021,53 @@ module Aws::IVSRealTime
       :error_code,
       :destination_stage_arn,
       :destination_session_id,
-      :replica)
+      :replica,
+      :previous_token,
+      :new_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object specifying an exchanged participant token in a stage, created
+    # when an original participant token is updated.
+    #
+    # **Important**: Treat tokens as opaque; i.e., do not build
+    # functionality based on token contents. The format of tokens could
+    # change in the future.
+    #
+    # @!attribute [rw] capabilities
+    #   Set of capabilities that the user is allowed to perform in the
+    #   stage.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] attributes
+    #   Application-provided attributes to encode into the token and attach
+    #   to a stage. Map keys and values can contain UTF-8 encoded text. The
+    #   maximum length of this field is 1 KB total. *This field is exposed
+    #   to all stage participants and should not be used for personally
+    #   identifying, confidential, or sensitive information.*
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] user_id
+    #   Customer-assigned name to help identify the token; this can be used
+    #   to link a participant to a user in the customer’s own systems. This
+    #   can be any UTF-8 encoded text. *This field is exposed to all stage
+    #   participants and should not be used for personally identifying,
+    #   confidential, or sensitive information.*
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_time
+    #   ISO 8601 timestamp (returned as a string) for when this token
+    #   expires.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ExchangedParticipantToken AWS API Documentation
+    #
+    class ExchangedParticipantToken < Struct.new(
+      :capabilities,
+      :attributes,
+      :user_id,
+      :expiration_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2331,9 +2385,10 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] attributes
     #   Application-provided attributes to encode into the token and attach
-    #   to a stage. *This field is exposed to all stage participants and
-    #   should not be used for personally identifying, confidential, or
-    #   sensitive information.*
+    #   to a stage. Map keys and values can contain UTF-8 encoded text. The
+    #   maximum length of this field is 1 KB total. *This field is exposed
+    #   to all stage participants and should not be used for personally
+    #   identifying, confidential, or sensitive information.*
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] duration

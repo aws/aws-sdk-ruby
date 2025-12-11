@@ -95,6 +95,7 @@ module Aws::PartnerCentralSelling
     class AwsOpportunityInsights
       attr_accessor next_best_actions: ::String
       attr_accessor engagement_score: ("High" | "Medium" | "Low")
+      attr_accessor aws_products_spend_insights_by_source: Types::AwsProductsSpendInsightsBySource
       SENSITIVE: []
     end
 
@@ -109,12 +110,47 @@ module Aws::PartnerCentralSelling
 
     class AwsOpportunityProject
       attr_accessor expected_customer_spend: ::Array[Types::ExpectedCustomerSpend]
+      attr_accessor aws_partition: ("aws-eusc")
       SENSITIVE: []
     end
 
     class AwsOpportunityRelatedEntities
       attr_accessor aws_products: ::Array[::String]
       attr_accessor solutions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AwsProductDetails
+      attr_accessor product_code: ::String
+      attr_accessor service_code: ::String
+      attr_accessor categories: ::Array[::String]
+      attr_accessor amount: ::String
+      attr_accessor optimized_amount: ::String
+      attr_accessor potential_savings_amount: ::String
+      attr_accessor optimizations: ::Array[Types::AwsProductOptimization]
+      SENSITIVE: [:amount, :optimized_amount, :potential_savings_amount]
+    end
+
+    class AwsProductInsights
+      attr_accessor currency_code: ("USD" | "EUR" | "GBP" | "AUD" | "CAD" | "CNY" | "NZD" | "INR" | "JPY" | "CHF" | "SEK" | "AED" | "AFN" | "ALL" | "AMD" | "ANG" | "AOA" | "ARS" | "AWG" | "AZN" | "BAM" | "BBD" | "BDT" | "BGN" | "BHD" | "BIF" | "BMD" | "BND" | "BOB" | "BOV" | "BRL" | "BSD" | "BTN" | "BWP" | "BYN" | "BZD" | "CDF" | "CHE" | "CHW" | "CLF" | "CLP" | "COP" | "COU" | "CRC" | "CUC" | "CUP" | "CVE" | "CZK" | "DJF" | "DKK" | "DOP" | "DZD" | "EGP" | "ERN" | "ETB" | "FJD" | "FKP" | "GEL" | "GHS" | "GIP" | "GMD" | "GNF" | "GTQ" | "GYD" | "HKD" | "HNL" | "HRK" | "HTG" | "HUF" | "IDR" | "ILS" | "IQD" | "IRR" | "ISK" | "JMD" | "JOD" | "KES" | "KGS" | "KHR" | "KMF" | "KPW" | "KRW" | "KWD" | "KYD" | "KZT" | "LAK" | "LBP" | "LKR" | "LRD" | "LSL" | "LYD" | "MAD" | "MDL" | "MGA" | "MKD" | "MMK" | "MNT" | "MOP" | "MRU" | "MUR" | "MVR" | "MWK" | "MXN" | "MXV" | "MYR" | "MZN" | "NAD" | "NGN" | "NIO" | "NOK" | "NPR" | "OMR" | "PAB" | "PEN" | "PGK" | "PHP" | "PKR" | "PLN" | "PYG" | "QAR" | "RON" | "RSD" | "RUB" | "RWF" | "SAR" | "SBD" | "SCR" | "SDG" | "SGD" | "SHP" | "SLL" | "SOS" | "SRD" | "SSP" | "STN" | "SVC" | "SYP" | "SZL" | "THB" | "TJS" | "TMT" | "TND" | "TOP" | "TRY" | "TTD" | "TWD" | "TZS" | "UAH" | "UGX" | "USN" | "UYI" | "UYU" | "UZS" | "VEF" | "VND" | "VUV" | "WST" | "XAF" | "XCD" | "XDR" | "XOF" | "XPF" | "XSU" | "XUA" | "YER" | "ZAR" | "ZMW" | "ZWL")
+      attr_accessor frequency: ("Monthly")
+      attr_accessor total_amount: ::String
+      attr_accessor total_optimized_amount: ::String
+      attr_accessor total_potential_savings_amount: ::String
+      attr_accessor total_amount_by_category: ::Hash[::String, ::String]
+      attr_accessor aws_products: ::Array[Types::AwsProductDetails]
+      SENSITIVE: [:currency_code, :total_amount, :total_optimized_amount, :total_potential_savings_amount]
+    end
+
+    class AwsProductOptimization
+      attr_accessor description: ::String
+      attr_accessor savings_amount: ::String
+      SENSITIVE: [:savings_amount]
+    end
+
+    class AwsProductsSpendInsightsBySource
+      attr_accessor partner: Types::AwsProductInsights
+      attr_accessor aws: Types::AwsProductInsights
       SENSITIVE: []
     end
 
@@ -382,7 +418,7 @@ module Aws::PartnerCentralSelling
       attr_accessor frequency: ("Monthly")
       attr_accessor target_company: ::String
       attr_accessor estimation_url: ::String
-      SENSITIVE: [:amount, :currency_code, :estimation_url]
+      SENSITIVE: [:amount, :currency_code]
     end
 
     class GetAwsOpportunitySummaryRequest
@@ -999,6 +1035,7 @@ module Aws::PartnerCentralSelling
       attr_accessor other_competitor_names: ::String
       attr_accessor other_solution_description: ::String
       attr_accessor additional_comments: ::String
+      attr_accessor aws_partition: ("aws-eusc")
       SENSITIVE: [:title, :customer_business_problem, :other_solution_description]
     end
 

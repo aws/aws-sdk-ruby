@@ -1430,12 +1430,18 @@ module Aws::BillingConductor
     #   filter on. Currently, you can only exclude Savings Plans discounts.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] attribute_values
+    #   The values of the line item filter. This specifies the values to
+    #   filter on.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/LineItemFilter AWS API Documentation
     #
     class LineItemFilter < Struct.new(
       :attribute,
       :match_option,
-      :values)
+      :values,
+      :attribute_values)
       SENSITIVE = []
       include Aws::Structure
     end

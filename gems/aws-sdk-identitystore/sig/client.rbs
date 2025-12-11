@@ -167,7 +167,8 @@ module Aws
                            },
                          ],
                          ?website: ::String,
-                         ?birthdate: ::String
+                         ?birthdate: ::String,
+                         ?extensions: Hash[::String, untyped]
                        ) -> _CreateUserResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
 
@@ -264,11 +265,13 @@ module Aws
         def created_by: () -> ::String
         def updated_at: () -> ::Time
         def updated_by: () -> ::String
+        def extensions: () -> ::Hash[::String, untyped]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IdentityStore/Client.html#describe_user-instance_method
       def describe_user: (
                            identity_store_id: ::String,
-                           user_id: ::String
+                           user_id: ::String,
+                           ?extensions: Array[::String]
                          ) -> _DescribeUserResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUserResponseSuccess
 
@@ -400,6 +403,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IdentityStore/Client.html#list_users-instance_method
       def list_users: (
                         identity_store_id: ::String,
+                        ?extensions: Array[::String],
                         ?max_results: ::Integer,
                         ?next_token: ::String,
                         ?filters: Array[

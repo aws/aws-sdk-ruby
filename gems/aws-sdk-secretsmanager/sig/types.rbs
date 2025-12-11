@@ -235,6 +235,7 @@ module Aws::SecretsManager
       attr_accessor next_token: ::String
       attr_accessor filters: ::Array[Types::Filter]
       attr_accessor sort_order: ("asc" | "desc")
+      attr_accessor sort_by: ("created-date" | "last-accessed-date" | "last-changed-date" | "name")
       SENSITIVE: []
     end
 

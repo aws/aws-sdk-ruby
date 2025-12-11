@@ -47,6 +47,9 @@ module Aws::IdentityStore
     Email = Shapes::StructureShape.new(name: 'Email')
     Emails = Shapes::ListShape.new(name: 'Emails')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
+    ExtensionName = Shapes::StringShape.new(name: 'ExtensionName')
+    ExtensionNames = Shapes::ListShape.new(name: 'ExtensionNames')
+    Extensions = Shapes::MapShape.new(name: 'Extensions')
     ExternalId = Shapes::StructureShape.new(name: 'ExternalId')
     ExternalIdIdentifier = Shapes::StringShape.new(name: 'ExternalIdIdentifier')
     ExternalIdIssuer = Shapes::StringShape.new(name: 'ExternalIdIssuer')
@@ -182,6 +185,7 @@ module Aws::IdentityStore
     CreateUserRequest.add_member(:photos, Shapes::ShapeRef.new(shape: Photos, location_name: "Photos"))
     CreateUserRequest.add_member(:website, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Website"))
     CreateUserRequest.add_member(:birthdate, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Birthdate"))
+    CreateUserRequest.add_member(:extensions, Shapes::ShapeRef.new(shape: Extensions, location_name: "Extensions"))
     CreateUserRequest.struct_class = Types::CreateUserRequest
 
     CreateUserResponse.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
@@ -237,6 +241,7 @@ module Aws::IdentityStore
 
     DescribeUserRequest.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
     DescribeUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "UserId"))
+    DescribeUserRequest.add_member(:extensions, Shapes::ShapeRef.new(shape: ExtensionNames, location_name: "Extensions"))
     DescribeUserRequest.struct_class = Types::DescribeUserRequest
 
     DescribeUserResponse.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
@@ -263,6 +268,7 @@ module Aws::IdentityStore
     DescribeUserResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: StringType, location_name: "CreatedBy"))
     DescribeUserResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "UpdatedAt"))
     DescribeUserResponse.add_member(:updated_by, Shapes::ShapeRef.new(shape: StringType, location_name: "UpdatedBy"))
+    DescribeUserResponse.add_member(:extensions, Shapes::ShapeRef.new(shape: Extensions, location_name: "Extensions"))
     DescribeUserResponse.struct_class = Types::DescribeUserResponse
 
     Email.add_member(:value, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Value"))
@@ -271,6 +277,11 @@ module Aws::IdentityStore
     Email.struct_class = Types::Email
 
     Emails.member = Shapes::ShapeRef.new(shape: Email)
+
+    ExtensionNames.member = Shapes::ShapeRef.new(shape: ExtensionName)
+
+    Extensions.key = Shapes::ShapeRef.new(shape: ExtensionName)
+    Extensions.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
     ExternalId.add_member(:issuer, Shapes::ShapeRef.new(shape: ExternalIdIssuer, required: true, location_name: "Issuer"))
     ExternalId.add_member(:id, Shapes::ShapeRef.new(shape: ExternalIdIdentifier, required: true, location_name: "Id"))
@@ -387,6 +398,7 @@ module Aws::IdentityStore
     ListGroupsResponse.struct_class = Types::ListGroupsResponse
 
     ListUsersRequest.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
+    ListUsersRequest.add_member(:extensions, Shapes::ShapeRef.new(shape: ExtensionNames, location_name: "Extensions"))
     ListUsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListUsersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListUsersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, deprecated: true, location_name: "Filters", metadata: {"deprecatedMessage" => "Using filters with ListUsers API is deprecated, please use GetGroupId API instead."}))
@@ -484,6 +496,7 @@ module Aws::IdentityStore
     User.add_member(:created_by, Shapes::ShapeRef.new(shape: StringType, location_name: "CreatedBy"))
     User.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "UpdatedAt"))
     User.add_member(:updated_by, Shapes::ShapeRef.new(shape: StringType, location_name: "UpdatedBy"))
+    User.add_member(:extensions, Shapes::ShapeRef.new(shape: Extensions, location_name: "Extensions"))
     User.struct_class = Types::User
 
     Users.member = Shapes::ShapeRef.new(shape: User)
