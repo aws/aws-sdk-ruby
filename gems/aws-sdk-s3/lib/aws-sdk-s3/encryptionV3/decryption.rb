@@ -136,7 +136,14 @@ module Aws
                 else
                   envelope_from_metadata(context)
                 end
-              envelope.merge!(secondary) if secondary
+                # If we attempted to read a non-existent instruction file,
+                # then envelope would be nil,
+                # but we may find the information we need in the metadata.
+                if envelope && secondary
+                  envelope.merge!(secondary)
+                elsif secondary
+                  envelope = secondary
+                end
             end
 
             ##= ../specification/s3-encryption/data-format/metadata-strategy.md#object-metadata

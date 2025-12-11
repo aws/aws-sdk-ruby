@@ -398,6 +398,139 @@ module Aws
           end
         end
 
+        context 'Envelope merging with nil secondary source' do
+          it 'uses metadata when instruction file does not exist' do
+            # Test case 1: envelope_location: :instruction_file
+            # Instruction file doesn't exist (returns nil)
+            # Metadata has complete V3 envelope data
+            # Expected: Should successfully decrypt using metadata
+            
+            client_v3 = Client.new(
+              encryption_key: key,
+              key_wrap_schema: :aes_gcm,
+              client: s3_client,
+              envelope_location: :instruction_file
+            )
+            
+            # Create complete V3 metadata
+            complete_metadata = {
+              'x-amz-3' => Base64.strict_encode64('encrypted-key'),
+              'x-amz-w' => '02',
+              'x-amz-c' => '115',
+              'x-amz-d' => Base64.strict_encode64('commitment'),
+              'x-amz-i' => Base64.strict_encode64('message-id')
+            }
+            
+            # Stub get_object to return metadata but fail on instruction file
+            stub_get_with_metadata(s3_client, complete_metadata, 'encrypted-content')
+            s3_client.stub_responses(:get_object, 
+              {status_code: 200, body: 'encrypted-content', headers: complete_metadata.map { |k, v| ["x-amz-meta-#{k}", v] }.to_h.merge('content-length' => '17')},
+              Aws::S3::Errors::NoSuchKey.new(nil, 'Not Found')  # instruction file doesn't exist
+            )
+            
+            # Should not raise an error - envelope is nil but secondary (metadata) has complete data
+            expect {
+              envelope = Decryption.get_encryption_envelope(
+                OpenStruct.new(
+                  http_response: OpenStruct.new(
+                    headers: complete_metadata.map { |k, v| ["x-amz-meta-#{k}", v] }.to_h.merge('content-length' => '17')
+                  ),
+                  params: { bucket: test_bucket, key: test_object },
+                  encryption: { envelope_location: :instruction_file, instruction_file_suffix: '.instruction' },
+                  client: s3_client
+                )
+              )
+              expect(envelope).to be_a(Hash)
+              expect(envelope['x-amz-3']).not_to be_nil
+              expect(envelope['x-amz-w']).to eq('02')
+            }.not_to raise_error
+          end
+
+          it 'fails when metadata is incomplete and instruction file does not exist' do
+            # Test case 2: envelope_location: :metadata
+            # Metadata has incomplete data (missing x-amz-3, x-amz-w)
+            # Instruction file doesn't exist (returns nil)
+            # Expected: Should fail with DecryptionError about incomplete envelope
+            
+            client_v3 = Client.new(
+              encryption_key: key,
+              key_wrap_schema: :aes_gcm,
+              client: s3_client,
+              envelope_location: :metadata
+            )
+            
+            # Create incomplete metadata (missing envelope keys)
+            incomplete_metadata = {
+              'x-amz-c' => '115',
+              'x-amz-d' => Base64.strict_encode64('commitment'),
+              'x-amz-i' => Base64.strict_encode64('message-id')
+            }
+            
+            stub_get_with_metadata(s3_client, incomplete_metadata)
+            # Stub instruction file to not exist
+            s3_client.stub_responses(:get_object,
+              {status_code: 200, body: 'encrypted-content', headers: incomplete_metadata.map { |k, v| ["x-amz-meta-#{k}", v] }.to_h.merge('content-length' => '17')},
+              Aws::S3::Errors::NoSuchKey.new(nil, 'Not Found')
+            )
+            
+            # Should raise DecryptionError because envelope is incomplete and secondary is nil
+            expect {
+              Decryption.get_encryption_envelope(
+                OpenStruct.new(
+                  http_response: OpenStruct.new(
+                    headers: incomplete_metadata.map { |k, v| ["x-amz-meta-#{k}", v] }.to_h.merge('content-length' => '17')
+                  ),
+                  params: { bucket: test_bucket, key: test_object },
+                  encryption: { envelope_location: :metadata, instruction_file_suffix: '.instruction' },
+                  client: s3_client
+                )
+              )
+            }.to raise_error(Errors::DecryptionError, /unsupported key wrapping algorithm/)
+          end
+
+          it 'fails when instruction file does not exist and metadata is incomplete' do
+            # Test case 3: envelope_location: :instruction_file
+            # Instruction file doesn't exist (returns nil)
+            # Metadata is incomplete (only has metadata keys, missing envelope keys)
+            # Expected: Should fail with DecryptionError about incomplete envelope
+            
+            client_v3 = Client.new(
+              encryption_key: key,
+              key_wrap_schema: :aes_gcm,
+              client: s3_client,
+              envelope_location: :instruction_file
+            )
+            
+            # Create incomplete metadata (missing envelope keys)
+            incomplete_metadata = {
+              'x-amz-c' => '115',
+              'x-amz-d' => Base64.strict_encode64('commitment'),
+              'x-amz-i' => Base64.strict_encode64('message-id')
+            }
+            
+            stub_get_with_metadata(s3_client, incomplete_metadata)
+            # Stub instruction file to not exist
+            s3_client.stub_responses(:get_object,
+              {status_code: 200, body: 'encrypted-content', headers: incomplete_metadata.map { |k, v| ["x-amz-meta-#{k}", v] }.to_h.merge('content-length' => '17')},
+              Aws::S3::Errors::NoSuchKey.new(nil, 'Not Found')
+            )
+            
+            # Should raise DecryptionError because envelope is nil but secondary is incomplete
+            expect {
+              Decryption.get_encryption_envelope(
+                OpenStruct.new(
+                  http_response: OpenStruct.new(
+                    headers: incomplete_metadata.map { |k, v| ["x-amz-meta-#{k}", v] }.to_h.merge('content-length' => '17')
+                  ),
+                  params: { bucket: test_bucket, key: test_object },
+                  encryption: { envelope_location: :instruction_file, instruction_file_suffix: '.instruction' },
+                  client: s3_client
+                )
+              )
+            }.to raise_error(Errors::DecryptionError, /unsupported key wrapping algorithm/)
+          end
+        end
+
         context 'KMS encryption' do
           let(:kms_client) { KMS::Client.new(stub_responses: true) }
           let(:kms_key_id) { 'arn:aws:kms:us-west-2:123456789012:key/12345678-1234-1234-1234-123456789012' }
