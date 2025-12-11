@@ -354,6 +354,7 @@ module Aws
           if body.respond_to?(:read)
             body.rewind
             update_in_chunks(digest, body)
+            body.rewind
           else
             digest.update(body)
           end
@@ -469,7 +470,7 @@ module Aws
           @digest = ChecksumAlgorithm.digest_for_algorithm(@algorithm)
           @chunk_size = Thread.current[:net_http_override_body_stream_chunk] || MIN_CHUNK_SIZE
           @overhead_bytes = calculate_overhead(@chunk_size)
-          @max_chunk_size = @chunk_size - @overhead_bytes
+          @base_chunk_size = @chunk_size - @overhead_bytes
           @current_chunk = ''.b
           @eof = false
         end
@@ -477,10 +478,10 @@ module Aws
         # the size of the application layer aws-chunked + trailer body
         def size
           orig_body_size = @io.size
-          n_full_chunks = orig_body_size / @max_chunk_size
-          partial_bytes = orig_body_size % @max_chunk_size
+          n_full_chunks = orig_body_size / @base_chunk_size
+          partial_bytes = orig_body_size % @base_chunk_size
 
-          chunked_body_size = n_full_chunks * (@max_chunk_size + @max_chunk_size.to_s(16).size + 4)
+          chunked_body_size = n_full_chunks * (@base_chunk_size + @base_chunk_size.to_s(16).size + 4)
           chunked_body_size += partial_bytes.to_s(16).size + partial_bytes + 4 unless partial_bytes.zero?
           trailer_size = ChecksumAlgorithm.trailer_length(@algorithm, @location_name)
           chunked_body_size + trailer_size
@@ -511,7 +512,7 @@ module Aws
         end
 
         def fill_chunk
-          chunk = @io.read(@max_chunk_size)
+          chunk = @io.read(@base_chunk_size)
           if chunk
             chunk.force_encoding('ASCII-8BIT')
             @digest.update(chunk)

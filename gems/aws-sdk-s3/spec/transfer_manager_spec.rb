@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'spec_helper'
+require 'socket'
 require 'tempfile'
 
 module Aws
@@ -105,30 +106,20 @@ module Aws
             WebMock.enable!
           end
 
-          let(:port) { 1234 }
           let(:test_file) do
-            file = '/tmp/test_upload_file'
-            File.write(file, 'x' * 65_536)
-            file
+            Tempfile.new('test_upload_file').tap do |f|
+              f.write('x' * 65_536)
+              f.rewind
+            end
           end
 
-          let(:tm) do
-            client = Aws::S3::Client.new(
-              endpoint: "http://localhost:#{port}",
-              region: 'us-east-1',
-              access_key_id: 't',
-              secret_access_key: 't'
-            )
-            Aws::S3::TransferManager.new(client: client)
-          end
-
-          def start_mirror_server(port, chunk_size)
-            server = TCPServer.new(port)
+          def start_mirror_server(chunk_size)
+            server = TCPServer.new('localhost', 0)
+            port = server.addr[1]
             chunks = []
 
             server_thread = Thread.new do
               client = server.accept
-
               headers = ''
               while (line = client.gets)
                 headers += line
@@ -152,32 +143,44 @@ module Aws
             ensure
               client.close
             end
-            [server, server_thread, chunks]
+            [server, server_thread, chunks, port]
           end
 
           it 'uses the given chunk size when uploading' do
             chunk_size = 32_768
-            server, server_thread, chunks = start_mirror_server(port, chunk_size)
+            server, server_thread, chunks, port = start_mirror_server(chunk_size)
+            client = Aws::S3::Client.new(
+              endpoint: "http://localhost:#{port}",
+              region: 'us-east-1',
+              access_key_id: 't',
+              secret_access_key: 't'
+            )
+            tm = Aws::S3::TransferManager.new(client: client)
             tm.upload_file(test_file, bucket: 'test-bucket', key: 'test-key', http_chunk_size: chunk_size)
 
             server_thread.join
             expect(chunks.first).to eq(chunk_size)
-            expect(chunks.sum).to eq(66_514) # includes trailing bytes
+            expect(chunks.sum).to eq(66_515) # includes trailing bytes
           ensure
-            File.delete(test_file)
             server.close
           end
 
           it 'uses default chunk size' do
             chunk_size = 16_384
-            server, server_thread, chunks = start_mirror_server(port, chunk_size)
+            server, server_thread, chunks, port = start_mirror_server(chunk_size)
+            client = Aws::S3::Client.new(
+              endpoint: "http://localhost:#{port}",
+              region: 'us-east-1',
+              access_key_id: 't',
+              secret_access_key: 't'
+            )
+            tm = Aws::S3::TransferManager.new(client: client)
             tm.upload_file(test_file, bucket: 'test-bucket', key: 'test-key')
 
             server_thread.join
             expect(chunks.first).to eq(chunk_size)
-            expect(chunks.sum).to eq(66_530) # includes trailing bytes
+            expect(chunks.sum).to eq(66_531)
           ensure
-            File.delete(test_file)
             server.close
           end
 
