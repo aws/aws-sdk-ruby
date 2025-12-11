@@ -7,11 +7,12 @@ module Aws
 
     REQUIRED_PARAMS = [:key_wrap_schema, :content_encryption_schema, :security_profile].freeze
     SUPPORTED_SECURITY_PROFILES = [:v2, :v2_and_legacy].freeze
+    SUPPORTED_COMMITMENT_POLICIES = [:forbid_encrypt_allow_decrypt].freeze
 
     # [MAINTENANCE MODE] There is a new version of the Encryption Client.
     # AWS strongly recommends upgrading to the {Aws::S3::EncryptionV3::Client},
     # which provides updated data security best practices.
-    # See documentation for {Aws::S3::EncryptionV3::Client}.
+    # For migration guidance, see: https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/s3-encryption-migration-v2-v3.html
     # Provides an encryption client that encrypts and decrypts data client-side,
     # storing the encrypted data in Amazon S3.
     # 
@@ -314,6 +315,15 @@ module Aws
         # @option options [KMS::Client] :kms_client A default {KMS::Client}
         #   is constructed when using KMS to manage encryption keys.
         #
+        # @option options [Symbol] :commitment_policy (nil)
+        #   Optional parameter for migration from V2 to V3. When set to
+        #   :forbid_encrypt_allow_decrypt, this explicitly indicates you are
+        #   maintaining V2 encryption behavior while preparing for migration.
+        #   This allows the V2 client to decrypt V3-encrypted objects while
+        #   continuing to encrypt new objects using V2 algorithms.
+        #   Only :forbid_encrypt_allow_decrypt is supported.
+        #   For migration guidance, see: https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/s3-encryption-migration-v2-v3.html
+        #
         def initialize(options = {})
           validate_params(options)
           @client = extract_client(options)
@@ -324,6 +334,7 @@ module Aws
           @kms_allow_decrypt_with_any_cmk =
             options[:kms_key_id] == :kms_allow_decrypt_with_any_cmk
           @security_profile = extract_security_profile(options)
+          @commitment_policy = extract_commitment_policy(options)
           # The v3 cipher is only used for decrypt.
           # Therefore any configured v2 `content_encryption_schema` is going to be incorrect.
           @v3_cipher_provider = build_v3_cipher_provider_for_decrypt(options.reject { |k, _| k == :content_encryption_schema })
@@ -351,6 +362,11 @@ module Aws
         #   the envelope is stored in the object with the object key suffixed
         #   by this string.
         attr_reader :instruction_file_suffix
+
+        # @return [Symbol, nil] Optional commitment policy for V2 to V3 migration.
+        #   When set to :forbid_encrypt_allow_decrypt, explicitly indicates
+        #   maintaining V2 encryption behavior while preparing for migration.
+        attr_reader :commitment_policy
 
         # Uploads an object to Amazon S3, encrypting data client-side.
         # See {S3::Client#put_object} for documentation on accepted
@@ -508,6 +524,7 @@ module Aws
             options.delete(:encryption_key)
             options.delete(:envelope_location)
             options.delete(:instruction_file_suffix)
+            options.delete(:commitment_policy)
             REQUIRED_PARAMS.each { |p| options.delete(p) }
             S3::Client.new(options)
           end
@@ -601,6 +618,21 @@ module Aws
             )
           end
           security_profile
+        end
+
+        def extract_commitment_policy(options)
+          validate_commitment_policy(options[:commitment_policy])
+        end
+
+        def validate_commitment_policy(commitment_policy)
+          return nil if commitment_policy.nil?
+
+          unless SUPPORTED_COMMITMENT_POLICIES.include? commitment_policy
+            raise ArgumentError, "Unsupported commitment policy: :#{commitment_policy}. " \
+            "The V2 client only supports :forbid_encrypt_allow_decrypt for migration purposes. " \
+            "For migration guidance, see: https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/s3-encryption-migration-v2-v3.html"
+          end
+          commitment_policy
         end
       end
     end
