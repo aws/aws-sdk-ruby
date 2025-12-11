@@ -98,14 +98,6 @@ module Aws
         end
 
         context ':http_check_size' do
-          before do
-            WebMock.disable!
-          end
-
-          after do
-            WebMock.enable!
-          end
-
           let(:test_file) do
             Tempfile.new('test_upload_file').tap do |f|
               f.write('x' * 65_536)
@@ -114,6 +106,7 @@ module Aws
           end
 
           def start_mirror_server(chunk_size)
+
             server = TCPServer.new('localhost', 0)
             port = server.addr[1]
             chunks = []
@@ -147,6 +140,7 @@ module Aws
           end
 
           it 'uses the given chunk size when uploading' do
+            WebMock.disable!
             chunk_size = 32_768
             server, server_thread, chunks, port = start_mirror_server(chunk_size)
             client = Aws::S3::Client.new(
@@ -163,9 +157,11 @@ module Aws
             expect(chunks.sum).to eq(66_515) # includes trailing bytes
           ensure
             server.close
+            WebMock.enable!
           end
 
           it 'uses default chunk size' do
+            WebMock.disable!
             chunk_size = 16_384
             server, server_thread, chunks, port = start_mirror_server(chunk_size)
             client = Aws::S3::Client.new(
@@ -182,6 +178,7 @@ module Aws
             expect(chunks.sum).to eq(66_531)
           ensure
             server.close
+            WebMock.enable!
           end
 
           it 'raises error when less than 16KB' do
