@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/user_agent'
 require 'aws-sdk-core/plugins/rest_json_protocol'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+require 'aws-sdk-bedrock/plugins/bearer_authorization'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:bedrock)
 
@@ -64,6 +65,7 @@ module Aws::Bedrock
     add_plugin(Aws::Core::Plugins::RestJsonProtocol)
     add_plugin(Aws::Core::Plugins::RegionalEndpoints)
     add_plugin(Aws::Core::Plugins::SigV4)
+    add_plugin(Aws::Bedrock::Plugins::BearerAuthorization)
 
     # @param options [Hash] Client options
     # @option options [String] :access_key_id
