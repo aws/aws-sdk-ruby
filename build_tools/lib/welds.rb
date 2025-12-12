@@ -6,6 +6,7 @@ require_relative 'welds/regional_endpoints'
 require_relative 'welds/sigv4'
 
 require_relative 'welds/services/bedrock'
+require_relative 'welds/services/bedrockruntime'
 require_relative 'welds/services/cloudfront'
 require_relative 'welds/services/docdb'
 require_relative 'welds/services/dynamodb'
