@@ -150,7 +150,7 @@ module Aws
                     end
                   },
                   headers: {
-                    'Content-Length' => '58',
+                    'Content-Length' => defined?(JRUBY_VERSION) ? '16' : '58',
                     # key is encrypted here with the master encryption key,
                     # then base64 encoded
                     'X-Amz-Meta-X-Amz-Key' => 'gX+a4JQYj7FP0y5TAAvxTz4e'\
@@ -183,16 +183,14 @@ module Aws
               options[:envelope_location] = :instruction_file
               client.put_object(bucket: 'bucket', key: 'key', body: 'secret')
 
-              # first request stores the encryption materials in the
-              # instruction file
+              # first request stores the encryption materials in the instruction file
               expect(
                 a_request(
                   :put,
                   'https://bucket.s3.us-west-1.amazonaws.com/key.instruction'
                 ).with(
                   body: Json.dump(
-                    'x-amz-key' => 'gX+a4JQYj7FP0y5TAAvxTz4e2l0DvOIt'\
-                      'bXByml/NPtKQcUlsoGHoYR/T0TuYHcNj',
+                    'x-amz-key' => 'gX+a4JQYj7FP0y5TAAvxTz4e2l0DvOItbXByml/NPtKQcUlsoGHoYR/T0TuYHcNj',
                     'x-amz-iv' => 'TO5mQgtOzWkTfoX4RE5tsA==',
                     'x-amz-matdesc' => '{}'
                   )
@@ -213,7 +211,7 @@ module Aws
                     end
                   },
                   headers: {
-                    'Content-Length' => '58',
+                    'Content-Length' => defined?(JRUBY_VERSION) ? '16' : '58',
                     'X-Amz-Meta-X-Amz-Unencrypted-Content-Length' => '6'
                   }
                 )

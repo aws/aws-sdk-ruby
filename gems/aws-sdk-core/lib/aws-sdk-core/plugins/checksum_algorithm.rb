@@ -332,6 +332,8 @@ module Aws
             headers[algorithm_header] = checksum_properties[:algorithm]
           end
 
+          # Trailer implementation within JRUBY environment is facing some
+          # network issues that will need further investigation
           return apply_request_checksum(context, headers, checksum_properties) if defined?(JRUBY_VERSION)
 
           case checksum_properties[:in]
