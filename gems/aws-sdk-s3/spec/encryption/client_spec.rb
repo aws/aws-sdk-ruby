@@ -63,9 +63,7 @@ module Aws
             expect do
               options.delete(:encryption_key)
               Encryption::Client.new(options)
-            end.to raise_error(
-              ArgumentError, /:kms_key_id, :key_provider, or :encryption_key/
-            )
+            end.to raise_error(ArgumentError, /:kms_key_id, :key_provider, or :encryption_key/)
 
             expect do
               Encryption::Client.new(options.merge(encryption_key: master_key))
@@ -121,19 +119,6 @@ module Aws
         end
 
         describe 'encryption methods' do
-          def extract_chunked_content(chunked_body)
-            lines = chunked_body.split("\r\n")
-            return nil unless lines.length >= 2
-
-            hex_size = lines[0]
-            content = lines[1]
-
-            # Verify the hex size matches content length
-            return content if hex_size.to_i(16) == content.bytesize
-
-            nil
-          end
-
           # this is the encrypted string "secret" using the fixed envelope
           # keys defined below in the before(:each) block
           let(:encrypted_body) { Base64.decode64('JIgXCTXpeQerPLiU6dVL4Q==') }
@@ -153,22 +138,24 @@ module Aws
             it 'encrypts the data client-side' do
               stub_request(:put, 'https://bucket.s3.us-west-1.amazonaws.com/key')
               client.put_object(bucket: 'bucket', key: 'key', body: 'secret')
-              expect(a_request(:put, 'https://bucket.s3.us-west-1.amazonaws.com/key')
-                .with(
-                  body: lambda { |body|
-                    actual_content = extract_chunked_content(body)
-                    actual_content == encrypted_body
-                  },
+              expect(
+                a_request(
+                  :put, 'https://bucket.s3.us-west-1.amazonaws.com/key'
+                ).with(
+                  body: ->(b) { b == encrypted_body },
                   headers: {
                     'Content-Length' => '58',
-                    # key is encrypted here with the master encryption key, then base64 encoded
-                    'X-Amz-Meta-X-Amz-Key' => 'gX+a4JQYj7FP0y5TAAvxTz4e2l0DvOItbXByml/NPtKQcUlsoGHoYR/T0TuYHcNj',
+                    # key is encrypted here with the master encryption key,
+                    # then base64 encoded
+                    'X-Amz-Meta-X-Amz-Key' => 'gX+a4JQYj7FP0y5TAAvxTz4e'\
+                      '2l0DvOItbXByml/NPtKQcUls'\
+                      'oGHoYR/T0TuYHcNj',
                     'X-Amz-Meta-X-Amz-Iv' => 'TO5mQgtOzWkTfoX4RE5tsA==',
                     'X-Amz-Meta-X-Amz-Matdesc' => '{}',
                     'X-Amz-Meta-X-Amz-Unencrypted-Content-Length' => '6'
                   }
-                ))
-                .to have_been_made.once
+                )
+              ).to have_been_made.once
             end
 
             it 'encrypts an empty or missing body' do
@@ -190,31 +177,34 @@ module Aws
               options[:envelope_location] = :instruction_file
               client.put_object(bucket: 'bucket', key: 'key', body: 'secret')
 
-              # first request stores the encryption materials in the instruction file
-              expect(a_request(:put, 'https://bucket.s3.us-west-1.amazonaws.com/key.instruction')
-                .with(
-                  body: lambda { |body|
-                    actual_content = extract_chunked_content(body)
-                    expected_content = Json.dump(
-                      'x-amz-key' => 'gX+a4JQYj7FP0y5TAAvxTz4e2l0DvOItbXByml/NPtKQcUlsoGHoYR/T0TuYHcNj',
-                      'x-amz-iv' => 'TO5mQgtOzWkTfoX4RE5tsA==',
-                      'x-amz-matdesc' => '{}'
-                    )
-                    actual_content == expected_content
-                  }
-                ))
-                .to have_been_made.once
+              # first request stores the encryption materials in the
+              # instruction file
+              expect(
+                a_request(
+                  :put,
+                  'https://bucket.s3.us-west-1.amazonaws.com/key.instruction'
+                ).with(
+                  body: Json.dump(
+                    'x-amz-key' => 'gX+a4JQYj7FP0y5TAAvxTz4e2l0DvOIt'\
+                      'bXByml/NPtKQcUlsoGHoYR/T0TuYHcNj',
+                    'x-amz-iv' => 'TO5mQgtOzWkTfoX4RE5tsA==',
+                    'x-amz-matdesc' => '{}'
+                  )
+                )
+              ).to have_been_made.once
 
               # second request stores teh encrypted object
-              expect(a_request(:put, 'https://bucket.s3.us-west-1.amazonaws.com/key')
-                .with(
-                  body: lambda { |body|
-                    actual_content = extract_chunked_content(body)
-                    actual_content == encrypted_body
-                  },
-                  headers: { 'Content-Length' => '58', 'X-Amz-Meta-X-Amz-Unencrypted-Content-Length' => '6' }
-                ))
-                .to have_been_made.once
+              expect(
+                a_request(
+                  :put, 'https://bucket.s3.us-west-1.amazonaws.com/key'
+                ).with(
+                  body: ->(b) { b == encrypted_body },
+                  headers: {
+                    'Content-Length' => '58',
+                    'X-Amz-Meta-X-Amz-Unencrypted-Content-Length' => '6'
+                  }
+                )
+              ).to have_been_made.once
             end
 
             it 'accpets a custom instruction file suffix' do
@@ -237,14 +227,9 @@ module Aws
               stub_request(:put, 'https://bucket.s3.us-west-1.amazonaws.com/key')
               expect_any_instance_of(EncryptHandler).to receive(:warn)
               client.put_object(bucket: 'bucket', key: 'key', body: 'secret', content_md5: 'MD5')
-              expect(a_request(:put, 'https://bucket.s3.us-west-1.amazonaws.com/key')
-                .with(
-                  body: lambda { |body|
-                    actual_content = extract_chunked_content(body)
-                    actual_content == encrypted_body
-                  }
-                ))
-                .to have_been_made.once
+              expect(
+                a_request(:put, 'https://bucket.s3.us-west-1.amazonaws.com/key').with(body: encrypted_body)
+              ).to have_been_made.once
             end
 
             it 'supports encryption with an asymmetric key pair' do
@@ -277,8 +262,8 @@ module Aws
                   body: encrypted_body,
                   headers: {
                     'X-Amz-Meta-X-Amz-Key' => 'gX+a4JQYj7FP0y5TAAvxTz4e'\
-                                              '2l0DvOItbXByml/NPtKQcUls'\
-                                              'oGHoYR/T0TuYHcNj',
+                      '2l0DvOItbXByml/NPtKQcUls'\
+                      'oGHoYR/T0TuYHcNj',
                     'X-Amz-Meta-X-Amz-Iv' => 'TO5mQgtOzWkTfoX4RE5tsA==',
                     'X-Amz-Meta-X-Amz-Matdesc' => matdesc
                   }
@@ -299,8 +284,8 @@ module Aws
                 body: encrypted_body,
                 headers: {
                   'X-Amz-Meta-X-Amz-Key' => 'gX+a4JQYj7FP0y5TAAvxTz4e'\
-                                            '2l0DvOItbXByml/NPtKQcUls'\
-                                            'oGHoYR/T0TuYHcNj',
+                    '2l0DvOItbXByml/NPtKQcUls'\
+                    'oGHoYR/T0TuYHcNj',
                   'X-Amz-Meta-X-Amz-Iv' => 'TO5mQgtOzWkTfoX4RE5tsA==',
                   'X-Amz-Meta-X-Amz-Matdesc' => '{}'
                 }
@@ -316,7 +301,7 @@ module Aws
               ).to_return(
                 body: Json.dump(
                   'x-amz-key' => 'gX+a4JQYj7FP0y5TAAvxTz4e2l0DvOIt'\
-                               'bXByml/NPtKQcUlsoGHoYR/T0TuYHcNj',
+                    'bXByml/NPtKQcUlsoGHoYR/T0TuYHcNj',
                   'x-amz-iv' => 'TO5mQgtOzWkTfoX4RE5tsA==',
                   'x-amz-matdesc' => '{}'
                 )
@@ -333,7 +318,7 @@ module Aws
               stub_encrypted_get_chunked
               allow_any_instance_of(DecryptHandler)
                 .to receive(:attach_http_event_listeners)
-                .and_wrap_original do |m, context|
+                      .and_wrap_original do |m, context|
                 m.call(context)
                 context.http_response.on_data do |_chunk|
                   if context.retries.zero?
@@ -421,7 +406,7 @@ module Aws
               stub_encrypted_get('MATERIALS-DESC')
               key_provider = double('key-provider')
               expect(key_provider).to receive(:key_for)
-                .with('MATERIALS-DESC').and_return(master_key)
+                                        .with('MATERIALS-DESC').and_return(master_key)
               options[:key_provider] = key_provider
               resp = client.get_object(bucket: 'bucket', key: 'key')
               expect(resp.body.read).to eq('secret')
@@ -436,8 +421,8 @@ module Aws
               expect do
                 client.get_object(bucket: 'bucket', key: 'key')
               end.to raise_error(
-                Errors::DecryptionError, 'unable to locate encryption envelope'
-              )
+                       Errors::DecryptionError, 'unable to locate encryption envelope'
+                     )
             end
 
             it 'resets the cipher during decryption on error' do
@@ -446,8 +431,8 @@ module Aws
                 http_resp = context.http_response
                 headers = {
                   'X-Amz-Meta-X-Amz-Key' => 'gX+a4JQYj7FP0y5TAAvxTz4e'\
-                                            '2l0DvOItbXByml/NPtKQcUls'\
-                                            'oGHoYR/T0TuYHcNj',
+                    '2l0DvOItbXByml/NPtKQcUls'\
+                    'oGHoYR/T0TuYHcNj',
                   'X-Amz-Meta-X-Amz-Iv' => 'TO5mQgtOzWkTfoX4RE5tsA==',
                   'X-Amz-Meta-X-Amz-Matdesc' => '{}'
                 }
@@ -478,16 +463,16 @@ module Aws
               expect do
                 client.get_object(bucket: 'bucket', key: 'key')
               end.to raise_error(
-                Errors::DecryptionError,
-                'decryption failed, possible incorrect key'
-              )
+                       Errors::DecryptionError,
+                       'decryption failed, possible incorrect key'
+                     )
             end
 
             it 'validates the key length' do
               stub_encrypted_get
               options[:encryption_key] = '.' * 31
               msg = 'invalid key, symmetric key required to be 16, 24, or 32 '\
-                    'bytes in length, saw length 31'
+                'bytes in length, saw length 31'
               expect do
                 client.get_object(bucket: 'bucket', key: 'key')
               end.to raise_error(ArgumentError, msg)
@@ -554,7 +539,7 @@ module Aws
 
           let(:plaintext_object_key) do
             "\xE4^\xE3\xE0v@\x8Aq\xAF\xE7y\x10\x18\xD4X"\
-            "\xC2\xDC&\xF6\xDB\xCCM\x03\xAF3DD\xFF\xDA\x0Flj"
+              "\xC2\xDC&\xF6\xDB\xCCM\x03\xAF3DD\xFF\xDA\x0Flj"
           end
 
           let(:encrypted_object_key) { 'encrypted-object-key' }
@@ -564,7 +549,7 @@ module Aws
           before(:each) do
             allow_any_instance_of(OpenSSL::Cipher).to(
               receive(:random_iv)
-              .and_return(random_iv)
+                .and_return(random_iv)
             )
           end
 
@@ -581,12 +566,9 @@ module Aws
             envelope.each do |key, value|
               expect(headers["x-amz-meta-#{key}"]).to eq(value)
             end
-            # TODO: fails due to encoding issues
-            # Our trailer implementation uses US-ASCII encoding
-            # but the value below is based on UTF-8
             expect(
               Base64.encode64(resp.context.http_request.body_contents)
-            ).to eq("MTANCuBQI95EziIrEPvW/P5ImvINCg==\n")
+            ).to eq("4FAj3kTOIisQ+9b8/kia8g==\n")
           end
 
           it 'supports decryption via KMS w/ CBC' do
@@ -629,7 +611,7 @@ module Aws
 
           let(:plaintext_object_key) do
             "\xACb.\xEB\x16\x19(\x9AJ\xE0uCA\x034z\xF6&\x7F"\
-            "\x8E\x0E\xC0\xD5\x1A\x88\xAF2\xB1\xEEg#\x15"
+              "\x8E\x0E\xC0\xD5\x1A\x88\xAF2\xB1\xEEg#\x15"
           end
 
           if OpenSSL::Cipher.ciphers.include?('aes-256-gcm')
