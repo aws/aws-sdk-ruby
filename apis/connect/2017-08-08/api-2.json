@@ -11873,6 +11873,16 @@
         "PotentialDisconnectIssue":{"shape":"PotentialDisconnectIssue"}
       }
     },
+    "DisconnectOnCustomerExit":{
+      "type":"list",
+      "member":{"shape":"DisconnectOnCustomerExitParticipantType"},
+      "max":1,
+      "min":1
+    },
+    "DisconnectOnCustomerExitParticipantType":{
+      "type":"string",
+      "enum":["AGENT"]
+    },
     "DisconnectReason":{
       "type":"structure",
       "members":{
@@ -20894,7 +20904,8 @@
         "PersistentChat":{"shape":"PersistentChat"},
         "RelatedContactId":{"shape":"ContactId"},
         "SegmentAttributes":{"shape":"SegmentAttributes"},
-        "CustomerId":{"shape":"CustomerIdNonEmpty"}
+        "CustomerId":{"shape":"CustomerIdNonEmpty"},
+        "DisconnectOnCustomerExit":{"shape":"DisconnectOnCustomerExit"}
       }
     },
     "StartChatContactResponse":{
@@ -21050,6 +21061,7 @@
         "ChatDurationInMinutes":{"shape":"ChatDurationInMinutes"},
         "ParticipantDetails":{"shape":"ParticipantDetails"},
         "InitialSystemMessage":{"shape":"ChatMessage"},
+        "InitialTemplatedSystemMessage":{"shape":"TemplatedMessageConfig"},
         "RelatedContactId":{"shape":"ContactId"},
         "SupportedMessagingContentTypes":{"shape":"SupportedMessagingContentTypes"},
         "ClientToken":{

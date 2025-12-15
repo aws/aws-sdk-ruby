@@ -110,6 +110,20 @@ module Aws
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _CancelImportTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelImportTaskResponse]
+        def import_id: () -> ::String
+        def import_statistics: () -> Types::ImportStatistics
+        def import_status: () -> ("IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED")
+        def creation_time: () -> ::Integer
+        def last_updated_time: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#cancel_import_task-instance_method
+      def cancel_import_task: (
+                                import_id: ::String
+                              ) -> _CancelImportTaskResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelImportTaskResponseSuccess
+
       interface _CreateDeliveryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDeliveryResponse]
         def delivery: () -> Types::Delivery
@@ -143,6 +157,23 @@ module Aws
                                 ?destination_prefix: ::String
                               ) -> _CreateExportTaskResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateExportTaskResponseSuccess
+
+      interface _CreateImportTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateImportTaskResponse]
+        def import_id: () -> ::String
+        def import_destination_arn: () -> ::String
+        def creation_time: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#create_import_task-instance_method
+      def create_import_task: (
+                                import_source_arn: ::String,
+                                import_role_arn: ::String,
+                                ?import_filter: {
+                                  start_event_time: ::Integer?,
+                                  end_event_time: ::Integer?
+                                }
+                              ) -> _CreateImportTaskResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImportTaskResponseSuccess
 
       interface _CreateLogAnomalyDetectorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateLogAnomalyDetectorResponse]
@@ -444,6 +475,37 @@ module Aws
                                     ?next_token: ::String
                                   ) -> _DescribeFieldIndexesResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFieldIndexesResponseSuccess
+
+      interface _DescribeImportTaskBatchesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeImportTaskBatchesResponse]
+        def import_source_arn: () -> ::String
+        def import_id: () -> ::String
+        def import_batches: () -> ::Array[Types::ImportBatch]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_import_task_batches-instance_method
+      def describe_import_task_batches: (
+                                          import_id: ::String,
+                                          ?batch_import_status: Array[("IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED")],
+                                          ?limit: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _DescribeImportTaskBatchesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeImportTaskBatchesResponseSuccess
+
+      interface _DescribeImportTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeImportTasksResponse]
+        def imports: () -> ::Array[Types::Import]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_import_tasks-instance_method
+      def describe_import_tasks: (
+                                   ?import_id: ::String,
+                                   ?import_status: ("IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED"),
+                                   ?import_source_arn: ::String,
+                                   ?limit: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _DescribeImportTasksResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeImportTasksResponseSuccess
 
       interface _DescribeIndexPoliciesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeIndexPoliciesResponse]

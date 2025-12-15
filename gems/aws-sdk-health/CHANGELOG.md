@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2025-12-15)
+------------------
+
+* Feature - Updating Health API endpoint generation for dualstack only regions
+
 1.90.0 (2025-11-21)
 ------------------
 

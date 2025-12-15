@@ -104,8 +104,9 @@ module Aws::DataSync
     class CancelTaskExecutionResponse < Aws::EmptyStructure; end
 
     # Specifies configuration information for a DataSync-managed secret,
-    # such as an authentication token or secret key that DataSync uses to
-    # access a specific storage location, with a customer-managed KMS key.
+    # such as an authentication token, secret key, password, or Kerberos
+    # keytab that DataSync uses to access a specific storage location, with
+    # a customer-managed KMS key.
     #
     # <note markdown="1"> You can use either `CmkSecretConfig` or `CustomSecretConfig` to
     # provide credentials for a `CreateLocation` request. Do not provide
@@ -297,14 +298,14 @@ module Aws::DataSync
     #   a specific AzureBlob storage location, with a customer-managed KMS
     #   key.
     #
-    #   When you include this paramater as part of a
+    #   When you include this parameter as part of a
     #   `CreateLocationAzureBlob` request, you provide only the KMS key ARN.
     #   DataSync uses this KMS key together with the authentication token
     #   you specify for `SasConfiguration` to create a DataSync-managed
     #   secret to store the location access credentials.
     #
-    #   Make sure the DataSync has permission to access the KMS key that you
-    #   specify.
+    #   Make sure that DataSync has permission to access the KMS key that
+    #   you specify.
     #
     #   <note markdown="1"> You can use either `CmkSecretConfig` (with `SasConfiguration`) or
     #   `CustomSecretConfig` (without `SasConfiguration`) to provide
@@ -317,9 +318,9 @@ module Aws::DataSync
     # @!attribute [rw] custom_secret_config
     #   Specifies configuration information for a customer-managed Secrets
     #   Manager secret where the authentication token for an AzureBlob
-    #   storage location is stored in plain text. This configuration
-    #   includes the secret ARN, and the ARN for an IAM role that provides
-    #   access to the secret.
+    #   storage location is stored in plain text, in Secrets Manager. This
+    #   configuration includes the secret ARN, and the ARN for an IAM role
+    #   that provides access to the secret.
     #
     #   <note markdown="1"> You can use either `CmkSecretConfig` (with `SasConfiguration`) or
     #   `CustomSecretConfig` (without `SasConfiguration`) to provide
@@ -1038,14 +1039,14 @@ module Aws::DataSync
     #   which includes the `SecretKey` that DataSync uses to access a
     #   specific object storage location, with a customer-managed KMS key.
     #
-    #   When you include this paramater as part of a
+    #   When you include this parameter as part of a
     #   `CreateLocationObjectStorage` request, you provide only the KMS key
     #   ARN. DataSync uses this KMS key together with the value you specify
     #   for the `SecretKey` parameter to create a DataSync-managed secret to
     #   store the location access credentials.
     #
-    #   Make sure the DataSync has permission to access the KMS key that you
-    #   specify.
+    #   Make sure that DataSync has permission to access the KMS key that
+    #   you specify.
     #
     #   <note markdown="1"> You can use either `CmkSecretConfig` (with `SecretKey`) or
     #   `CustomSecretConfig` (without `SecretKey`) to provide credentials
@@ -1058,9 +1059,9 @@ module Aws::DataSync
     # @!attribute [rw] custom_secret_config
     #   Specifies configuration information for a customer-managed Secrets
     #   Manager secret where the secret key for a specific object storage
-    #   location is stored in plain text. This configuration includes the
-    #   secret ARN, and the ARN for an IAM role that provides access to the
-    #   secret.
+    #   location is stored in plain text, in Secrets Manager. This
+    #   configuration includes the secret ARN, and the ARN for an IAM role
+    #   that provides access to the secret.
     #
     #   <note markdown="1"> You can use either `CmkSecretConfig` (with `SecretKey`) or
     #   `CustomSecretConfig` (without `SecretKey`) to provide credentials
@@ -1273,6 +1274,47 @@ module Aws::DataSync
     #   `AuthenticationType` is set to `NTLM`.
     #   @return [String]
     #
+    # @!attribute [rw] cmk_secret_config
+    #   Specifies configuration information for a DataSync-managed secret,
+    #   either a `Password` or `KerberosKeytab` (for `NTLM` (default) and
+    #   `KERBEROS` authentication types, respectively) that DataSync uses to
+    #   access a specific SMB storage location, with a customer-managed KMS
+    #   key.
+    #
+    #   When you include this parameter as part of a
+    #   `CreateLocationSmbRequest` request, you provide only the KMS key
+    #   ARN. DataSync uses this KMS key together with either the `Password`
+    #   or `KerberosKeytab` you specify to create a DataSync-managed secret
+    #   to store the location access credentials.
+    #
+    #   Make sure that DataSync has permission to access the KMS key that
+    #   you specify.
+    #
+    #   <note markdown="1"> You can use either `CmkSecretConfig` (with either `Password` or
+    #   `KerberosKeytab`) or `CustomSecretConfig` (without any `Password`
+    #   and `KerberosKeytab`) to provide credentials for a
+    #   `CreateLocationSmbRequest` request. Do not provide both
+    #   `CmkSecretConfig` and `CustomSecretConfig` parameters for the same
+    #   request.
+    #
+    #    </note>
+    #   @return [Types::CmkSecretConfig]
+    #
+    # @!attribute [rw] custom_secret_config
+    #   Specifies configuration information for a customer-managed Secrets
+    #   Manager secret where the SMB storage location credentials is stored
+    #   in Secrets Manager as plain text (for `Password`) or binary (for
+    #   `KerberosKeytab`). This configuration includes the secret ARN, and
+    #   the ARN for an IAM role that provides access to the secret.
+    #
+    #   <note markdown="1"> You can use either `CmkSecretConfig` (with `SasConfiguration`) or
+    #   `CustomSecretConfig` (without `SasConfiguration`) to provide
+    #   credentials for a `CreateLocationSmbRequest` request. Do not provide
+    #   both parameters for the same request.
+    #
+    #    </note>
+    #   @return [Types::CustomSecretConfig]
+    #
     # @!attribute [rw] agent_arns
     #   Specifies the DataSync agent (or agents) that can connect to your
     #   SMB file server. You specify an agent by using its Amazon Resource
@@ -1352,6 +1394,8 @@ module Aws::DataSync
       :user,
       :domain,
       :password,
+      :cmk_secret_config,
+      :custom_secret_config,
       :agent_arns,
       :mount_options,
       :tags,
@@ -1544,9 +1588,11 @@ module Aws::DataSync
     end
 
     # Specifies configuration information for a customer-managed Secrets
-    # Manager secret where a storage location authentication token or secret
-    # key is stored in plain text. This configuration includes the secret
-    # ARN, and the ARN for an IAM role that provides access to the secret.
+    # Manager secret where a storage location credentials is stored in
+    # Secrets Manager as plain text (for authentication token, secret key,
+    # or password) or as binary (for Kerberos keytab). This configuration
+    # includes the secret ARN, and the ARN for an IAM role that provides
+    # access to the secret.
     #
     # <note markdown="1"> You can use either `CmkSecretConfig` or `CustomSecretConfig` to
     # provide credentials for a `CreateLocation` request. Do not provide
@@ -2484,6 +2530,26 @@ module Aws::DataSync
     #   SMB file server.
     #   @return [String]
     #
+    # @!attribute [rw] managed_secret_config
+    #   Describes configuration information for a DataSync-managed secret,
+    #   such as a `Password` or `KerberosKeytab` that DataSync uses to
+    #   access a specific storage location. DataSync uses the default Amazon
+    #   Web Services-managed KMS key to encrypt this secret in Secrets
+    #   Manager.
+    #   @return [Types::ManagedSecretConfig]
+    #
+    # @!attribute [rw] cmk_secret_config
+    #   Describes configuration information for a DataSync-managed secret,
+    #   such as a `Password` or `KerberosKeytab` that DataSync uses to
+    #   access a specific storage location, with a customer-managed KMS key.
+    #   @return [Types::CmkSecretConfig]
+    #
+    # @!attribute [rw] custom_secret_config
+    #   Describes configuration information for a customer-managed secret,
+    #   such as a `Password` or `KerberosKeytab` that DataSync uses to
+    #   access a specific storage location, with a customer-managed KMS key.
+    #   @return [Types::CustomSecretConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationSmbResponse AWS API Documentation
     #
     class DescribeLocationSmbResponse < Struct.new(
@@ -2496,7 +2562,10 @@ module Aws::DataSync
       :creation_time,
       :dns_ip_addresses,
       :kerberos_principal,
-      :authentication_type)
+      :authentication_type,
+      :managed_secret_config,
+      :cmk_secret_config,
+      :custom_secret_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2615,12 +2684,19 @@ module Aws::DataSync
     #   * If `TranserMode` is set to `ALL` - The calculation is based only
     #     on the items that DataSync finds at the source location.
     #
+    #   <note markdown="1"> For [Enhanced mode tasks][5], this counter only includes files or
+    #   objects. Directories are counted in [EstimatedFoldersToTransfer][6].
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
     #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-TransferMode
     #   [3]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-OverwriteMode
     #   [4]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-PreserveDeletedFiles
+    #   [5]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   [6]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-EstimatedFoldersToTransfer
     #   @return [Integer]
     #
     # @!attribute [rw] estimated_bytes_to_transfer
@@ -2640,6 +2716,16 @@ module Aws::DataSync
     #   implementation-specific for some location types, so don't use it as
     #   an exact indication of what's transferring or to monitor your task
     #   execution.
+    #
+    #   <note markdown="1"> For [Enhanced mode tasks][1], this counter only includes files or
+    #   objects. Directories are counted in [FoldersTransferred][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersTransferred
     #   @return [Integer]
     #
     # @!attribute [rw] bytes_written
@@ -2688,14 +2774,31 @@ module Aws::DataSync
     #   task to [delete data in the destination that isn't in the
     #   source][1], the value is always `0`.
     #
+    #   <note markdown="1"> For [Enhanced mode tasks][2], this counter only includes files or
+    #   objects. Directories are counted in [FoldersDeleted][3].
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   [3]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersDeleted
     #   @return [Integer]
     #
     # @!attribute [rw] files_skipped
     #   The number of files, objects, and directories that DataSync skips
     #   during your transfer.
+    #
+    #   <note markdown="1"> For [Enhanced mode tasks][1], this counter only includes files or
+    #   objects. Directories are counted in [FoldersSkipped][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersSkipped
     #   @return [Integer]
     #
     # @!attribute [rw] files_verified
@@ -2706,11 +2809,16 @@ module Aws::DataSync
     #   transferred][1], DataSync doesn't verify directories in some
     #   situations or files that fail to transfer.
     #
+    #    For [Enhanced mode tasks][2], this counter only includes files or
+    #   objects. Directories are counted in [FoldersVerified][3].
+    #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-data-verification-options.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   [3]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-FoldersVerified
     #   @return [Integer]
     #
     # @!attribute [rw] report_result
@@ -2728,9 +2836,16 @@ module Aws::DataSync
     #   task to [delete data in the destination that isn't in the
     #   source][1], the value is always `0`.
     #
+    #   <note markdown="1"> For [Enhanced mode tasks][2], this counter only includes files or
+    #   objects. Directories are counted in [EstimatedFoldersToDelete][3].
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   [3]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeTaskExecution.html#DataSync-DescribeTaskExecution-response-EstimatedFoldersToDelete
     #   @return [Integer]
     #
     # @!attribute [rw] task_mode
@@ -2743,8 +2858,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] files_prepared
-    #   The number of objects that DataSync will attempt to transfer after
-    #   comparing your source and destination locations.
+    #   The number of files or objects that DataSync will attempt to
+    #   transfer after comparing your source and destination locations.
     #
     #   <note markdown="1"> Applies only to [Enhanced mode tasks][1].
     #
@@ -2762,7 +2877,8 @@ module Aws::DataSync
     #   @return [Integer]
     #
     # @!attribute [rw] files_listed
-    #   The number of objects that DataSync finds at your locations.
+    #   The number of files or objects that DataSync finds at your
+    #   locations.
     #
     #   <note markdown="1"> Applies only to [Enhanced mode tasks][1].
     #
@@ -2774,8 +2890,8 @@ module Aws::DataSync
     #   @return [Types::TaskExecutionFilesListedDetail]
     #
     # @!attribute [rw] files_failed
-    #   The number of objects that DataSync fails to prepare, transfer,
-    #   verify, and delete during your task execution.
+    #   The number of files or objects that DataSync fails to prepare,
+    #   transfer, verify, and delete during your task execution.
     #
     #   <note markdown="1"> Applies only to [Enhanced mode tasks][1].
     #
@@ -2785,6 +2901,159 @@ module Aws::DataSync
     #
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
     #   @return [Types::TaskExecutionFilesFailedDetail]
+    #
+    # @!attribute [rw] estimated_folders_to_delete
+    #   The number of directories that DataSync expects to delete in your
+    #   destination location. If you don't configure your task to [delete
+    #   data in the destination that isn't in the source][1], the value is
+    #   always `0`.
+    #
+    #   <note markdown="1"> Applies only to [Enhanced mode tasks][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] estimated_folders_to_transfer
+    #   The number of directories that DataSync expects to transfer over the
+    #   network. This value is calculated as DataSync [prepares][1]
+    #   directories to transfer.
+    #
+    #   How this gets calculated depends primarily on your task’s [transfer
+    #   mode][2] configuration:
+    #
+    #   * If `TranserMode` is set to `CHANGED` - The calculation is based on
+    #     comparing the content of the source and destination locations and
+    #     determining the difference that needs to be transferred. The
+    #     difference can include:
+    #
+    #     * Anything that's added or modified at the source location.
+    #
+    #     * Anything that's in both locations and modified at the
+    #       destination after an initial transfer (unless [OverwriteMode][3]
+    #       is set to `NEVER`).
+    #   * If `TranserMode` is set to `ALL` - The calculation is based only
+    #     on the items that DataSync finds at the source location.
+    #
+    #   <note markdown="1"> Applies only to [Enhanced mode tasks][4].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#understand-task-execution-statuses
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-TransferMode
+    #   [3]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-OverwriteMode
+    #   [4]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folders_skipped
+    #   The number of directories that DataSync skips during your transfer.
+    #
+    #   <note markdown="1"> Applies only to [Enhanced mode tasks][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folders_prepared
+    #   The number of directories that DataSync will attempt to transfer
+    #   after comparing your source and destination locations.
+    #
+    #   <note markdown="1"> Applies only to [Enhanced mode tasks][1].
+    #
+    #    </note>
+    #
+    #   This counter isn't applicable if you configure your task to
+    #   [transfer all data][2]. In that scenario, DataSync copies everything
+    #   from the source to the destination without comparing differences
+    #   between the locations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-transfer-mode
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folders_transferred
+    #   The number of directories that DataSync actually transfers over the
+    #   network. This value is updated periodically during your task
+    #   execution when something is read from the source and sent over the
+    #   network.
+    #
+    #   If DataSync fails to transfer something, this value can be less than
+    #   `EstimatedFoldersToTransfer`. In some cases, this value can also be
+    #   greater than `EstimatedFoldersToTransfer`.
+    #
+    #   <note markdown="1"> Applies only to [Enhanced mode tasks][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folders_verified
+    #   The number of directories that DataSync verifies during your
+    #   transfer.
+    #
+    #   <note markdown="1"> Applies only to [Enhanced mode tasks][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folders_deleted
+    #   The number of directories that DataSync actually deletes in your
+    #   destination location. If you don't configure your task to [delete
+    #   data in the destination that isn't in the source][1], the value is
+    #   always `0`.
+    #
+    #   <note markdown="1"> Applies only to [Enhanced mode tasks][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] folders_listed
+    #   The number of directories that DataSync finds at your locations.
+    #
+    #   <note markdown="1"> Applies only to [Enhanced mode tasks][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   @return [Types::TaskExecutionFoldersListedDetail]
+    #
+    # @!attribute [rw] folders_failed
+    #   The number of directories that DataSync fails to list, prepare,
+    #   transfer, verify, and delete during your task execution.
+    #
+    #   <note markdown="1"> Applies only to [Enhanced mode tasks][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #   @return [Types::TaskExecutionFoldersFailedDetail]
     #
     # @!attribute [rw] launch_time
     #   The time that the task execution actually begins. For non-queued
@@ -2825,6 +3094,15 @@ module Aws::DataSync
       :files_prepared,
       :files_listed,
       :files_failed,
+      :estimated_folders_to_delete,
+      :estimated_folders_to_transfer,
+      :folders_skipped,
+      :folders_prepared,
+      :folders_transferred,
+      :folders_verified,
+      :folders_deleted,
+      :folders_listed,
+      :folders_failed,
       :launch_time,
       :end_time)
       SENSITIVE = []
@@ -4009,14 +4287,6 @@ module Aws::DataSync
     #   Limits the bandwidth used by a DataSync task. For example, if you
     #   want DataSync to use a maximum of 1 MB, set this value to `1048576`
     #   (`=1024*1024`).
-    #
-    #   <note markdown="1"> Not applicable to [Enhanced mode tasks][1].
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
     #   @return [Integer]
     #
     # @!attribute [rw] task_queueing
@@ -4685,8 +4955,8 @@ module Aws::DataSync
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # The number of objects that DataSync fails to prepare, transfer,
-    # verify, and delete during your task execution.
+    # The number of files or objects that DataSync fails to prepare,
+    # transfer, verify, and delete during your task execution.
     #
     # <note markdown="1"> Applies only to [Enhanced mode tasks][1].
     #
@@ -4697,23 +4967,23 @@ module Aws::DataSync
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
     #
     # @!attribute [rw] prepare
-    #   The number of objects that DataSync fails to prepare during your
-    #   task execution.
+    #   The number of files or objects that DataSync fails to prepare during
+    #   your task execution.
     #   @return [Integer]
     #
     # @!attribute [rw] transfer
-    #   The number of objects that DataSync fails to transfer during your
-    #   task execution.
+    #   The number of files or objects that DataSync fails to transfer
+    #   during your task execution.
     #   @return [Integer]
     #
     # @!attribute [rw] verify
-    #   The number of objects that DataSync fails to verify during your task
-    #   execution.
+    #   The number of files or objects that DataSync fails to verify during
+    #   your task execution.
     #   @return [Integer]
     #
     # @!attribute [rw] delete
-    #   The number of objects that DataSync fails to delete during your task
-    #   execution.
+    #   The number of files or objects that DataSync fails to delete during
+    #   your task execution.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskExecutionFilesFailedDetail AWS API Documentation
@@ -4727,7 +4997,7 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # The number of objects that DataSync finds at your locations.
+    # The number of files or objects that DataSync finds at your locations.
     #
     # <note markdown="1"> Applies only to [Enhanced mode tasks][1].
     #
@@ -4738,7 +5008,8 @@ module Aws::DataSync
     # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
     #
     # @!attribute [rw] at_source
-    #   The number of objects that DataSync finds at your source location.
+    #   The number of files or objects that DataSync finds at your source
+    #   location.
     #
     #   * With a [manifest][1], DataSync lists only what's in your manifest
     #     (and not everything at your source location).
@@ -4756,10 +5027,10 @@ module Aws::DataSync
     #   @return [Integer]
     #
     # @!attribute [rw] at_destination_for_delete
-    #   The number of objects that DataSync finds at your destination
-    #   location. This counter is only applicable if you [configure your
-    #   task][1] to delete data in the destination that isn't in the
-    #   source.
+    #   The number of files or objects that DataSync finds at your
+    #   destination location. This counter is only applicable if you
+    #   [configure your task][1] to delete data in the destination that
+    #   isn't in the source.
     #
     #
     #
@@ -4769,6 +5040,103 @@ module Aws::DataSync
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskExecutionFilesListedDetail AWS API Documentation
     #
     class TaskExecutionFilesListedDetail < Struct.new(
+      :at_source,
+      :at_destination_for_delete)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of directories that DataSync fails to list, prepare,
+    # transfer, verify, and delete during your task execution.
+    #
+    # <note markdown="1"> Applies only to [Enhanced mode tasks][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #
+    # @!attribute [rw] list
+    #   The number of directories that DataSync fails to list during your
+    #   task execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prepare
+    #   The number of directories that DataSync fails to prepare during your
+    #   task execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] transfer
+    #   The number of directories that DataSync fails to transfer during
+    #   your task execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] verify
+    #   The number of directories that DataSync fails to verify during your
+    #   task execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] delete
+    #   The number of directories that DataSync fails to delete during your
+    #   task execution.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskExecutionFoldersFailedDetail AWS API Documentation
+    #
+    class TaskExecutionFoldersFailedDetail < Struct.new(
+      :list,
+      :prepare,
+      :transfer,
+      :verify,
+      :delete)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of directories that DataSync finds at your locations.
+    #
+    # <note markdown="1"> Applies only to [Enhanced mode tasks][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html
+    #
+    # @!attribute [rw] at_source
+    #   The number of directories that DataSync finds at your source
+    #   location.
+    #
+    #   * With a [manifest][1], DataSync lists only what's in your manifest
+    #     (and not everything at your source location).
+    #
+    #   * With an include [filter][2], DataSync lists only what matches the
+    #     filter at your source location.
+    #
+    #   * With an exclude filter, DataSync lists everything at your source
+    #     location before applying the filter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
+    #   [2]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] at_destination_for_delete
+    #   The number of directories that DataSync finds at your destination
+    #   location. This counter is only applicable if you [configure your
+    #   task][1] to delete data in the destination that isn't in the
+    #   source.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html#task-option-file-object-handling
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TaskExecutionFoldersListedDetail AWS API Documentation
+    #
+    class TaskExecutionFoldersListedDetail < Struct.new(
       :at_source,
       :at_destination_for_delete)
       SENSITIVE = []
@@ -5947,6 +6315,20 @@ module Aws::DataSync
     #   `AuthenticationType` is set to `NTLM`.
     #   @return [String]
     #
+    # @!attribute [rw] cmk_secret_config
+    #   Specifies configuration information for a DataSync-managed secret,
+    #   such as a `Password` or `KerberosKeytab` or set of credentials that
+    #   DataSync uses to access a specific transfer location, and a
+    #   customer-managed KMS key.
+    #   @return [Types::CmkSecretConfig]
+    #
+    # @!attribute [rw] custom_secret_config
+    #   Specifies configuration information for a customer-managed secret,
+    #   such as a `Password` or `KerberosKeytab` or set of credentials that
+    #   DataSync uses to access a specific transfer location, and a
+    #   customer-managed KMS key.
+    #   @return [Types::CustomSecretConfig]
+    #
     # @!attribute [rw] agent_arns
     #   Specifies the DataSync agent (or agents) that can connect to your
     #   SMB file server. You specify an agent by using its Amazon Resource
@@ -6021,6 +6403,8 @@ module Aws::DataSync
       :user,
       :domain,
       :password,
+      :cmk_secret_config,
+      :custom_secret_config,
       :agent_arns,
       :mount_options,
       :authentication_type,

@@ -649,8 +649,8 @@ module Aws::EntityResolution
     #     ],
     #     output_source_config: [
     #       {
-    #         output_s3_path: "S3Path", # required
     #         kms_arn: "KMSArn",
+    #         output_s3_path: "S3Path", # required
     #       },
     #     ],
     #     id_mapping_techniques: { # required
@@ -694,8 +694,8 @@ module Aws::EntityResolution
     #   resp.input_source_config[0].schema_name #=> String
     #   resp.input_source_config[0].type #=> String, one of "SOURCE", "TARGET"
     #   resp.output_source_config #=> Array
-    #   resp.output_source_config[0].output_s3_path #=> String
     #   resp.output_source_config[0].kms_arn #=> String
+    #   resp.output_source_config[0].output_s3_path #=> String
     #   resp.id_mapping_techniques.id_mapping_type #=> String, one of "PROVIDER", "RULE_BASED"
     #   resp.id_mapping_techniques.rule_based_properties.rules #=> Array
     #   resp.id_mapping_techniques.rule_based_properties.rules[0].rule_name #=> String
@@ -909,8 +909,8 @@ module Aws::EntityResolution
     #     ],
     #     output_source_config: [ # required
     #       {
-    #         output_s3_path: "S3Path", # required
     #         kms_arn: "KMSArn",
+    #         output_s3_path: "OptionalS3Path",
     #         output: [ # required
     #           {
     #             name: "AttributeName", # required
@@ -918,6 +918,10 @@ module Aws::EntityResolution
     #           },
     #         ],
     #         apply_normalization: false,
+    #         customer_profiles_integration_config: {
+    #           domain_arn: "CustomerProfilesDomainArn", # required
+    #           object_type_arn: "CustomerProfilesObjectTypeArn", # required
+    #         },
     #       },
     #     ],
     #     resolution_techniques: { # required
@@ -968,12 +972,14 @@ module Aws::EntityResolution
     #   resp.input_source_config[0].schema_name #=> String
     #   resp.input_source_config[0].apply_normalization #=> Boolean
     #   resp.output_source_config #=> Array
-    #   resp.output_source_config[0].output_s3_path #=> String
     #   resp.output_source_config[0].kms_arn #=> String
+    #   resp.output_source_config[0].output_s3_path #=> String
     #   resp.output_source_config[0].output #=> Array
     #   resp.output_source_config[0].output[0].name #=> String
     #   resp.output_source_config[0].output[0].hashed #=> Boolean
     #   resp.output_source_config[0].apply_normalization #=> Boolean
+    #   resp.output_source_config[0].customer_profiles_integration_config.domain_arn #=> String
+    #   resp.output_source_config[0].customer_profiles_integration_config.object_type_arn #=> String
     #   resp.resolution_techniques.resolution_type #=> String, one of "RULE_MATCHING", "ML_MATCHING", "PROVIDER"
     #   resp.resolution_techniques.rule_based_properties.rules #=> Array
     #   resp.resolution_techniques.rule_based_properties.rules[0].rule_name #=> String
@@ -1403,8 +1409,8 @@ module Aws::EntityResolution
     #   resp.input_source_config[0].schema_name #=> String
     #   resp.input_source_config[0].type #=> String, one of "SOURCE", "TARGET"
     #   resp.output_source_config #=> Array
-    #   resp.output_source_config[0].output_s3_path #=> String
     #   resp.output_source_config[0].kms_arn #=> String
+    #   resp.output_source_config[0].output_s3_path #=> String
     #   resp.id_mapping_techniques.id_mapping_type #=> String, one of "PROVIDER", "RULE_BASED"
     #   resp.id_mapping_techniques.rule_based_properties.rules #=> Array
     #   resp.id_mapping_techniques.rule_based_properties.rules[0].rule_name #=> String
@@ -1625,12 +1631,14 @@ module Aws::EntityResolution
     #   resp.input_source_config[0].schema_name #=> String
     #   resp.input_source_config[0].apply_normalization #=> Boolean
     #   resp.output_source_config #=> Array
-    #   resp.output_source_config[0].output_s3_path #=> String
     #   resp.output_source_config[0].kms_arn #=> String
+    #   resp.output_source_config[0].output_s3_path #=> String
     #   resp.output_source_config[0].output #=> Array
     #   resp.output_source_config[0].output[0].name #=> String
     #   resp.output_source_config[0].output[0].hashed #=> Boolean
     #   resp.output_source_config[0].apply_normalization #=> Boolean
+    #   resp.output_source_config[0].customer_profiles_integration_config.domain_arn #=> String
+    #   resp.output_source_config[0].customer_profiles_integration_config.object_type_arn #=> String
     #   resp.resolution_techniques.resolution_type #=> String, one of "RULE_MATCHING", "ML_MATCHING", "PROVIDER"
     #   resp.resolution_techniques.rule_based_properties.rules #=> Array
     #   resp.resolution_techniques.rule_based_properties.rules[0].rule_name #=> String
@@ -2405,8 +2413,8 @@ module Aws::EntityResolution
     #     ],
     #     output_source_config: [
     #       {
-    #         output_s3_path: "S3Path", # required
     #         kms_arn: "KMSArn",
+    #         output_s3_path: "S3Path", # required
     #       },
     #     ],
     #     id_mapping_techniques: { # required
@@ -2447,8 +2455,8 @@ module Aws::EntityResolution
     #   resp.input_source_config[0].schema_name #=> String
     #   resp.input_source_config[0].type #=> String, one of "SOURCE", "TARGET"
     #   resp.output_source_config #=> Array
-    #   resp.output_source_config[0].output_s3_path #=> String
     #   resp.output_source_config[0].kms_arn #=> String
+    #   resp.output_source_config[0].output_s3_path #=> String
     #   resp.id_mapping_techniques.id_mapping_type #=> String, one of "PROVIDER", "RULE_BASED"
     #   resp.id_mapping_techniques.rule_based_properties.rules #=> Array
     #   resp.id_mapping_techniques.rule_based_properties.rules[0].rule_name #=> String
@@ -2634,8 +2642,8 @@ module Aws::EntityResolution
     #     ],
     #     output_source_config: [ # required
     #       {
-    #         output_s3_path: "S3Path", # required
     #         kms_arn: "KMSArn",
+    #         output_s3_path: "OptionalS3Path",
     #         output: [ # required
     #           {
     #             name: "AttributeName", # required
@@ -2643,6 +2651,10 @@ module Aws::EntityResolution
     #           },
     #         ],
     #         apply_normalization: false,
+    #         customer_profiles_integration_config: {
+    #           domain_arn: "CustomerProfilesDomainArn", # required
+    #           object_type_arn: "CustomerProfilesObjectTypeArn", # required
+    #         },
     #       },
     #     ],
     #     resolution_techniques: { # required
@@ -2689,12 +2701,14 @@ module Aws::EntityResolution
     #   resp.input_source_config[0].schema_name #=> String
     #   resp.input_source_config[0].apply_normalization #=> Boolean
     #   resp.output_source_config #=> Array
-    #   resp.output_source_config[0].output_s3_path #=> String
     #   resp.output_source_config[0].kms_arn #=> String
+    #   resp.output_source_config[0].output_s3_path #=> String
     #   resp.output_source_config[0].output #=> Array
     #   resp.output_source_config[0].output[0].name #=> String
     #   resp.output_source_config[0].output[0].hashed #=> Boolean
     #   resp.output_source_config[0].apply_normalization #=> Boolean
+    #   resp.output_source_config[0].customer_profiles_integration_config.domain_arn #=> String
+    #   resp.output_source_config[0].customer_profiles_integration_config.object_type_arn #=> String
     #   resp.resolution_techniques.resolution_type #=> String, one of "RULE_MATCHING", "ML_MATCHING", "PROVIDER"
     #   resp.resolution_techniques.rule_based_properties.rules #=> Array
     #   resp.resolution_techniques.rule_based_properties.rules[0].rule_name #=> String
@@ -2803,7 +2817,7 @@ module Aws::EntityResolution
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-entityresolution'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -15,7 +15,7 @@ module Aws::Glacier
     #
     # For information about the underlying REST API, see [Abort Multipart
     # Upload][1]. For conceptual information, see [Working with Archives in
-    # Amazon S3 Glacier][2].
+    # Amazon Glacier][2].
     #
     #
     #
@@ -25,10 +25,10 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -75,10 +75,10 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -98,11 +98,11 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Contains the Amazon S3 Glacier response to your request.
+    # Contains the Amazon Glacier response to your request.
     #
     # For information about the underlying REST API, see [Upload
     # Archive][1]. For conceptual information, see [Working with Archives in
-    # Amazon S3 Glacier][2].
+    # Amazon Glacier][2].
     #
     #
     #
@@ -114,7 +114,7 @@ module Aws::Glacier
     #   @return [String]
     #
     # @!attribute [rw] checksum
-    #   The checksum of the archive computed by Amazon S3 Glacier.
+    #   The checksum of the archive computed by Amazon Glacier.
     #   @return [String]
     #
     # @!attribute [rw] archive_id
@@ -212,17 +212,17 @@ module Aws::Glacier
 
     # Provides options to complete a multipart upload operation. This
     # informs Amazon Glacier that all the archive parts have been uploaded
-    # and Amazon S3 Glacier (Glacier) can now assemble the archive from the
+    # and Amazon Glacier (Glacier) can now assemble the archive from the
     # uploaded parts. After assembling and saving the archive to the vault,
     # Glacier returns the URI path of the newly created archive resource.
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -243,8 +243,8 @@ module Aws::Glacier
     #   The SHA256 tree hash of the entire archive. It is the tree hash of
     #   SHA256 tree hash of the individual parts. If the value you specify
     #   in the request does not match the SHA256 tree hash of the final
-    #   assembled archive as computed by Amazon S3 Glacier (Glacier),
-    #   Glacier returns an error and the request fails.
+    #   assembled archive as computed by Amazon Glacier (Glacier), Glacier
+    #   returns an error and the request fails.
     #   @return [String]
     #
     class CompleteMultipartUploadInput < Struct.new(
@@ -309,7 +309,7 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Contains the Amazon S3 Glacier response to your request.
+    # Contains the Amazon Glacier response to your request.
     #
     # @!attribute [rw] location
     #   The URI of the vault that was created.
@@ -358,16 +358,15 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Provides options for deleting an archive from an Amazon S3 Glacier
-    # vault.
+    # Provides options for deleting an archive from an Amazon Glacier vault.
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -391,10 +390,10 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -408,15 +407,15 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Provides options for deleting a vault from Amazon S3 Glacier.
+    # Provides options for deleting a vault from Amazon Glacier.
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -436,10 +435,10 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -458,10 +457,10 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -486,10 +485,10 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -503,7 +502,7 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Contains the Amazon S3 Glacier response to your request.
+    # Contains the Amazon Glacier response to your request.
     #
     # @!attribute [rw] vault_arn
     #   The Amazon Resource Name (ARN) of the vault.
@@ -520,7 +519,7 @@ module Aws::Glacier
     #   @return [Time]
     #
     # @!attribute [rw] last_inventory_date
-    #   The Universal Coordinated Time (UTC) date when Amazon S3 Glacier
+    #   The Universal Coordinated Time (UTC) date when Amazon Glacier
     #   completed the last vault inventory. This value should be a string in
     #   the ISO 8601 date format, for example `2012-03-20T17:03:43.221Z`.
     #   @return [Time]
@@ -593,8 +592,8 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Contains the Amazon S3 Glacier response to the
-    # `GetDataRetrievalPolicy` request.
+    # Contains the Amazon Glacier response to the `GetDataRetrievalPolicy`
+    # request.
     #
     # @!attribute [rw] policy
     #   Contains the returned data retrieval policy in JSON format.
@@ -606,15 +605,15 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Provides options for downloading output of an Amazon S3 Glacier job.
+    # Provides options for downloading output of an Amazon Glacier job.
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -654,7 +653,7 @@ module Aws::Glacier
     #       values to find the checksum of the entire output. Using the
     #       DescribeJob API, obtain job information of the job that provided
     #       you the output. The response includes the checksum of the entire
-    #       archive stored in Amazon S3 Glacier. You compare this value with
+    #       archive stored in Amazon Glacier. You compare this value with
     #       the checksum you computed to ensure you have downloaded the
     #       entire archive content with no errors.
     #   @return [String]
@@ -668,7 +667,7 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Contains the Amazon S3 Glacier response to your request.
+    # Contains the Amazon Glacier response to your request.
     #
     # @!attribute [rw] body
     #   The job data, either archive data or inventory data.
@@ -701,9 +700,9 @@ module Aws::Glacier
     #   @return [Integer]
     #
     # @!attribute [rw] content_range
-    #   The range of bytes returned by Amazon S3 Glacier. If only partial
+    #   The range of bytes returned by Amazon Glacier. If only partial
     #   output is downloaded, the response provides the range of bytes
-    #   Amazon S3 Glacier returned. For example, bytes 0-1048575/8388608
+    #   Amazon Glacier returned. For example, bytes 0-1048575/8388608
     #   returns the first 1 MB from 8 MB.
     #   @return [String]
     #
@@ -746,10 +745,10 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -780,10 +779,10 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -797,7 +796,7 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Contains the Amazon S3 Glacier response to your request.
+    # Contains the Amazon Glacier response to your request.
     #
     # @!attribute [rw] policy
     #   The vault lock policy as a JSON string, which uses "\\" as an
@@ -833,10 +832,10 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -850,7 +849,7 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Contains the Amazon S3 Glacier response to your request.
+    # Contains the Amazon Glacier response to your request.
     #
     # @!attribute [rw] vault_notification_config
     #   Returns the notification configuration set on the vault.
@@ -1068,15 +1067,15 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Provides options for initiating an Amazon S3 Glacier job.
+    # Provides options for initiating an Amazon Glacier job.
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -1095,7 +1094,7 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Contains the Amazon S3 Glacier response to your request.
+    # Contains the Amazon Glacier response to your request.
     #
     # @!attribute [rw] location
     #   The relative URI path of the job.
@@ -1117,16 +1116,16 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Provides options for initiating a multipart upload to an Amazon S3
+    # Provides options for initiating a multipart upload to an Amazon
     # Glacier vault.
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -1156,10 +1155,10 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # The Amazon S3 Glacier response to your request.
+    # The Amazon Glacier response to your request.
     #
     # @!attribute [rw] location
-    #   The relative URI path of the multipart upload ID Amazon S3 Glacier
+    #   The relative URI path of the multipart upload ID Amazon Glacier
     #   created.
     #   @return [String]
     #
@@ -1204,7 +1203,7 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Contains the Amazon S3 Glacier response to your request.
+    # Contains the Amazon Glacier response to your request.
     #
     # @!attribute [rw] lock_id
     #   The lock ID, which is used to complete the vault locking process.
@@ -1391,7 +1390,7 @@ module Aws::Glacier
     #   @return [String]
     #
     # @!attribute [rw] sns_topic
-    #   The Amazon SNS topic ARN to which Amazon S3 Glacier sends a
+    #   The Amazon SNS topic ARN to which Amazon Glacier sends a
     #   notification when the job is completed and the output is ready for
     #   you to download. The specified topic publishes the notification to
     #   its subscribers. The SNS topic must exist.
@@ -1469,16 +1468,16 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Provides options for retrieving a job list for an Amazon S3 Glacier
+    # Provides options for retrieving a job list for an Amazon Glacier
     # vault.
     #
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -1519,7 +1518,7 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Contains the Amazon S3 Glacier response to your request.
+    # Contains the Amazon Glacier response to your request.
     #
     # @!attribute [rw] job_list
     #   A list of job objects. Each job object contains metadata describing
@@ -1547,10 +1546,10 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -1580,7 +1579,7 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Contains the Amazon S3 Glacier response to your request.
+    # Contains the Amazon Glacier response to your request.
     #
     # @!attribute [rw] uploads_list
     #   A list of in-progress multipart uploads.
@@ -1606,10 +1605,10 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -1644,7 +1643,7 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Contains the Amazon S3 Glacier response to your request.
+    # Contains the Amazon Glacier response to your request.
     #
     # @!attribute [rw] multipart_upload_id
     #   The ID of the upload to which the parts are associated.
@@ -1697,7 +1696,7 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The AWS account ID of the account that owns the vault. You can
     #   either specify an AWS account ID or optionally a single '-'
-    #   (hyphen), in which case Amazon S3 Glacier uses the AWS account ID
+    #   (hyphen), in which case Amazon Glacier uses the AWS account ID
     #   associated with the credentials used to sign the request. If you use
     #   an account ID, don't include any hyphens ('-') in the ID.
     #   @return [String]
@@ -1723,10 +1722,10 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -1740,7 +1739,7 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Contains the Amazon S3 Glacier response to your request.
+    # Contains the Amazon Glacier response to your request.
     #
     # @!attribute [rw] tags
     #   The tags attached to the vault. Each tag is composed of a key and a
@@ -1786,7 +1785,7 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Contains the Amazon S3 Glacier response to your request.
+    # Contains the Amazon Glacier response to your request.
     #
     # @!attribute [rw] vault_list
     #   List of vaults.
@@ -1828,6 +1827,23 @@ module Aws::Glacier
       include Aws::Structure
     end
 
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class NoLongerSupportedException < Struct.new(
+      :type,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the location where the select job results
     # are stored.
     #
@@ -1861,7 +1877,7 @@ module Aws::Glacier
     #   @return [String]
     #
     # @!attribute [rw] sha256_tree_hash
-    #   The SHA256 tree hash value that Amazon S3 Glacier calculated for the
+    #   The SHA256 tree hash value that Amazon Glacier calculated for the
     #   part. This field is never `null`.
     #   @return [String]
     #
@@ -1923,7 +1939,7 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The AWS account ID of the account that owns the vault. You can
     #   either specify an AWS account ID or optionally a single '-'
-    #   (hyphen), in which case Amazon S3 Glacier uses the AWS account ID
+    #   (hyphen), in which case Amazon Glacier uses the AWS account ID
     #   associated with the credentials used to sign the request. If you use
     #   an account ID, don't include any hyphens ('-') in the ID.
     #   @return [String]
@@ -1949,10 +1965,10 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -1972,8 +1988,8 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Returned if, when uploading an archive, Amazon S3 Glacier times out
-    # while receiving the upload.
+    # Returned if, when uploading an archive, Amazon Glacier times out while
+    # receiving the upload.
     #
     # @!attribute [rw] type
     #   Client
@@ -1984,7 +2000,7 @@ module Aws::Glacier
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   Returned if, when uploading an archive, Amazon S3 Glacier times out
+    #   Returned if, when uploading an archive, Amazon Glacier times out
     #   while receiving the upload.
     #   @return [String]
     #
@@ -2146,10 +2162,10 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -2174,10 +2190,10 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -2205,10 +2221,10 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] archive_description
@@ -2275,10 +2291,10 @@ module Aws::Glacier
     # @!attribute [rw] account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the
-    #   AWS account ID associated with the credentials used to sign the
-    #   request. If you use an account ID, do not include any hyphens
-    #   ('-') in the ID.
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
+    #   account ID associated with the credentials used to sign the request.
+    #   If you use an account ID, do not include any hyphens ('-') in the
+    #   ID.
     #   @return [String]
     #
     # @!attribute [rw] vault_name
@@ -2295,7 +2311,7 @@ module Aws::Glacier
     #
     # @!attribute [rw] range
     #   Identifies the range of bytes in the assembled archive that will be
-    #   uploaded in this part. Amazon S3 Glacier uses this information to
+    #   uploaded in this part. Amazon Glacier uses this information to
     #   assemble the archive in the proper sequence. The format of this
     #   header follows RFC 2616. An example header is Content-Range:bytes
     #   0-4194303/*.
@@ -2316,11 +2332,11 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Contains the Amazon S3 Glacier response to your request.
+    # Contains the Amazon Glacier response to your request.
     #
     # @!attribute [rw] checksum
-    #   The SHA256 tree hash that Amazon S3 Glacier computed for the
-    #   uploaded part.
+    #   The SHA256 tree hash that Amazon Glacier computed for the uploaded
+    #   part.
     #   @return [String]
     #
     class UploadMultipartPartOutput < Struct.new(
@@ -2361,7 +2377,7 @@ module Aws::Glacier
     #   @return [String]
     #
     # @!attribute [rw] events
-    #   A list of one or more events for which Amazon S3 Glacier will send a
+    #   A list of one or more events for which Amazon Glacier will send a
     #   notification to the specified Amazon SNS topic.
     #   @return [Array<String>]
     #

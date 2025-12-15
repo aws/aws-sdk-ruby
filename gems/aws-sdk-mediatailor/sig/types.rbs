@@ -34,6 +34,11 @@ module Aws::MediaTailor
       SENSITIVE: []
     end
 
+    class AdDecisionServerConfiguration
+      attr_accessor http_request: Types::HttpRequest
+      SENSITIVE: []
+    end
+
     class AdMarkerPassthrough
       attr_accessor enabled: bool
       SENSITIVE: []
@@ -537,6 +542,7 @@ module Aws::MediaTailor
       attr_accessor transcode_profile_name: ::String
       attr_accessor video_content_source_url: ::String
       attr_accessor ad_conditioning_configuration: Types::AdConditioningConfiguration
+      attr_accessor ad_decision_server_configuration: Types::AdDecisionServerConfiguration
       SENSITIVE: []
     end
 
@@ -578,6 +584,14 @@ module Aws::MediaTailor
       attr_accessor path: ::String
       attr_accessor source_group: ::String
       attr_accessor type: ("DASH" | "HLS")
+      SENSITIVE: []
+    end
+
+    class HttpRequest
+      attr_accessor method: ("GET" | "POST")
+      attr_accessor body: ::String
+      attr_accessor headers: ::Hash[::String, ::String]
+      attr_accessor compress_request: ("NONE" | "GZIP")
       SENSITIVE: []
     end
 
@@ -749,6 +763,7 @@ module Aws::MediaTailor
       attr_accessor transcode_profile_name: ::String
       attr_accessor video_content_source_url: ::String
       attr_accessor ad_conditioning_configuration: Types::AdConditioningConfiguration
+      attr_accessor ad_decision_server_configuration: Types::AdDecisionServerConfiguration
       SENSITIVE: []
     end
 
@@ -807,6 +822,7 @@ module Aws::MediaTailor
       attr_accessor transcode_profile_name: ::String
       attr_accessor video_content_source_url: ::String
       attr_accessor ad_conditioning_configuration: Types::AdConditioningConfiguration
+      attr_accessor ad_decision_server_configuration: Types::AdDecisionServerConfiguration
       SENSITIVE: []
     end
 
@@ -832,6 +848,7 @@ module Aws::MediaTailor
       attr_accessor transcode_profile_name: ::String
       attr_accessor video_content_source_url: ::String
       attr_accessor ad_conditioning_configuration: Types::AdConditioningConfiguration
+      attr_accessor ad_decision_server_configuration: Types::AdDecisionServerConfiguration
       SENSITIVE: []
     end
 

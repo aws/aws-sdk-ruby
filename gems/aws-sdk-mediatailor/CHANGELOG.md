@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2025-12-15)
+------------------
+
+* Feature - Added support for Ad Decision Server Configuration enabling HTTP POST requests with custom bodies, headers, GZIP compression, and dynamic variables. No changes required for existing GET request configurations.
+
 1.110.0 (2025-11-21)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2025-12-15)
+------------------
+
+* Feature - This release updates broken links for AgentCore Policy APIs in the AWS CLI and SDK resources.
+
 1.16.0 (2025-12-02)
 ------------------
 

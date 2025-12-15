@@ -35,6 +35,9 @@ module Aws::WorkSpacesWeb
     AssociateUserSettingsResponse = Shapes::StructureShape.new(name: 'AssociateUserSettingsResponse')
     AuthenticationType = Shapes::StringShape.new(name: 'AuthenticationType')
     BlockedCategories = Shapes::ListShape.new(name: 'BlockedCategories')
+    BrandingConfiguration = Shapes::StructureShape.new(name: 'BrandingConfiguration')
+    BrandingConfigurationCreateInput = Shapes::StructureShape.new(name: 'BrandingConfigurationCreateInput')
+    BrandingConfigurationUpdateInput = Shapes::StructureShape.new(name: 'BrandingConfigurationUpdateInput')
     BrowserPolicy = Shapes::StringShape.new(name: 'BrowserPolicy')
     BrowserSettings = Shapes::StructureShape.new(name: 'BrowserSettings')
     BrowserSettingsList = Shapes::ListShape.new(name: 'BrowserSettingsList')
@@ -51,8 +54,10 @@ module Aws::WorkSpacesWeb
     CertificateThumbprint = Shapes::StringShape.new(name: 'CertificateThumbprint')
     CertificateThumbprintList = Shapes::ListShape.new(name: 'CertificateThumbprintList')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    ColorTheme = Shapes::StringShape.new(name: 'ColorTheme')
     ConfidenceLevel = Shapes::IntegerShape.new(name: 'ConfidenceLevel')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ContactLinkUrl = Shapes::StringShape.new(name: 'ContactLinkUrl')
     CookieDomain = Shapes::StringShape.new(name: 'CookieDomain')
     CookieName = Shapes::StringShape.new(name: 'CookieName')
     CookiePath = Shapes::StringShape.new(name: 'CookiePath')
@@ -162,6 +167,8 @@ module Aws::WorkSpacesWeb
     GetUserSettingsResponse = Shapes::StructureShape.new(name: 'GetUserSettingsResponse')
     GlobalInlineRedactionUrls = Shapes::ListShape.new(name: 'GlobalInlineRedactionUrls')
     HiddenToolbarItemList = Shapes::ListShape.new(name: 'HiddenToolbarItemList')
+    IconImage = Shapes::BlobShape.new(name: 'IconImage')
+    IconImageInput = Shapes::UnionShape.new(name: 'IconImageInput')
     IdentityProvider = Shapes::StructureShape.new(name: 'IdentityProvider')
     IdentityProviderDetails = Shapes::MapShape.new(name: 'IdentityProviderDetails')
     IdentityProviderList = Shapes::ListShape.new(name: 'IdentityProviderList')
@@ -169,6 +176,7 @@ module Aws::WorkSpacesWeb
     IdentityProviderSummary = Shapes::StructureShape.new(name: 'IdentityProviderSummary')
     IdentityProviderType = Shapes::StringShape.new(name: 'IdentityProviderType')
     IdleDisconnectTimeoutInMinutes = Shapes::IntegerShape.new(name: 'IdleDisconnectTimeoutInMinutes')
+    ImageMetadata = Shapes::StructureShape.new(name: 'ImageMetadata')
     InlineRedactionConfiguration = Shapes::StructureShape.new(name: 'InlineRedactionConfiguration')
     InlineRedactionPattern = Shapes::StructureShape.new(name: 'InlineRedactionPattern')
     InlineRedactionPatterns = Shapes::ListShape.new(name: 'InlineRedactionPatterns')
@@ -211,11 +219,23 @@ module Aws::WorkSpacesWeb
     ListUserAccessLoggingSettingsResponse = Shapes::StructureShape.new(name: 'ListUserAccessLoggingSettingsResponse')
     ListUserSettingsRequest = Shapes::StructureShape.new(name: 'ListUserSettingsRequest')
     ListUserSettingsResponse = Shapes::StructureShape.new(name: 'ListUserSettingsResponse')
+    Locale = Shapes::StringShape.new(name: 'Locale')
+    LocalizedBrandingStringMap = Shapes::MapShape.new(name: 'LocalizedBrandingStringMap')
+    LocalizedBrandingStrings = Shapes::StructureShape.new(name: 'LocalizedBrandingStrings')
+    LocalizedBrandingStringsBrowserTabTitleString = Shapes::StringShape.new(name: 'LocalizedBrandingStringsBrowserTabTitleString')
+    LocalizedBrandingStringsContactButtonTextString = Shapes::StringShape.new(name: 'LocalizedBrandingStringsContactButtonTextString')
+    LocalizedBrandingStringsLoadingTextString = Shapes::StringShape.new(name: 'LocalizedBrandingStringsLoadingTextString')
+    LocalizedBrandingStringsLoginButtonTextString = Shapes::StringShape.new(name: 'LocalizedBrandingStringsLoginButtonTextString')
+    LocalizedBrandingStringsLoginDescriptionString = Shapes::StringShape.new(name: 'LocalizedBrandingStringsLoginDescriptionString')
+    LocalizedBrandingStringsLoginTitleString = Shapes::StringShape.new(name: 'LocalizedBrandingStringsLoginTitleString')
+    LocalizedBrandingStringsWelcomeTextString = Shapes::StringShape.new(name: 'LocalizedBrandingStringsWelcomeTextString')
     LogConfiguration = Shapes::StructureShape.new(name: 'LogConfiguration')
     LogFileFormat = Shapes::StringShape.new(name: 'LogFileFormat')
+    Markdown = Shapes::StringShape.new(name: 'Markdown')
     MaxConcurrentSessions = Shapes::IntegerShape.new(name: 'MaxConcurrentSessions')
     MaxDisplayResolution = Shapes::StringShape.new(name: 'MaxDisplayResolution')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MimeType = Shapes::StringShape.new(name: 'MimeType')
     NetworkSettings = Shapes::StructureShape.new(name: 'NetworkSettings')
     NetworkSettingsList = Shapes::ListShape.new(name: 'NetworkSettingsList')
     NetworkSettingsSummary = Shapes::StructureShape.new(name: 'NetworkSettingsSummary')
@@ -241,6 +261,7 @@ module Aws::WorkSpacesWeb
     S3BucketOwner = Shapes::StringShape.new(name: 'S3BucketOwner')
     S3KeyPrefix = Shapes::StringShape.new(name: 'S3KeyPrefix')
     S3LogConfiguration = Shapes::StructureShape.new(name: 'S3LogConfiguration')
+    S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SamlMetadata = Shapes::StringShape.new(name: 'SamlMetadata')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
@@ -315,6 +336,8 @@ module Aws::WorkSpacesWeb
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     VisualMode = Shapes::StringShape.new(name: 'VisualMode')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
+    WallpaperImage = Shapes::BlobShape.new(name: 'WallpaperImage')
+    WallpaperImageInput = Shapes::UnionShape.new(name: 'WallpaperImageInput')
     WebContentFilteringPolicy = Shapes::StructureShape.new(name: 'WebContentFilteringPolicy')
     keyArn = Shapes::StringShape.new(name: 'keyArn')
 
@@ -388,6 +411,30 @@ module Aws::WorkSpacesWeb
     AssociateUserSettingsResponse.struct_class = Types::AssociateUserSettingsResponse
 
     BlockedCategories.member = Shapes::ShapeRef.new(shape: Category)
+
+    BrandingConfiguration.add_member(:logo, Shapes::ShapeRef.new(shape: ImageMetadata, required: true, location_name: "logo"))
+    BrandingConfiguration.add_member(:wallpaper, Shapes::ShapeRef.new(shape: ImageMetadata, required: true, location_name: "wallpaper"))
+    BrandingConfiguration.add_member(:favicon, Shapes::ShapeRef.new(shape: ImageMetadata, required: true, location_name: "favicon"))
+    BrandingConfiguration.add_member(:localized_strings, Shapes::ShapeRef.new(shape: LocalizedBrandingStringMap, required: true, location_name: "localizedStrings"))
+    BrandingConfiguration.add_member(:color_theme, Shapes::ShapeRef.new(shape: ColorTheme, required: true, location_name: "colorTheme"))
+    BrandingConfiguration.add_member(:terms_of_service, Shapes::ShapeRef.new(shape: Markdown, location_name: "termsOfService"))
+    BrandingConfiguration.struct_class = Types::BrandingConfiguration
+
+    BrandingConfigurationCreateInput.add_member(:logo, Shapes::ShapeRef.new(shape: IconImageInput, required: true, location_name: "logo"))
+    BrandingConfigurationCreateInput.add_member(:wallpaper, Shapes::ShapeRef.new(shape: WallpaperImageInput, required: true, location_name: "wallpaper"))
+    BrandingConfigurationCreateInput.add_member(:favicon, Shapes::ShapeRef.new(shape: IconImageInput, required: true, location_name: "favicon"))
+    BrandingConfigurationCreateInput.add_member(:localized_strings, Shapes::ShapeRef.new(shape: LocalizedBrandingStringMap, required: true, location_name: "localizedStrings"))
+    BrandingConfigurationCreateInput.add_member(:color_theme, Shapes::ShapeRef.new(shape: ColorTheme, required: true, location_name: "colorTheme"))
+    BrandingConfigurationCreateInput.add_member(:terms_of_service, Shapes::ShapeRef.new(shape: Markdown, location_name: "termsOfService"))
+    BrandingConfigurationCreateInput.struct_class = Types::BrandingConfigurationCreateInput
+
+    BrandingConfigurationUpdateInput.add_member(:logo, Shapes::ShapeRef.new(shape: IconImageInput, location_name: "logo"))
+    BrandingConfigurationUpdateInput.add_member(:wallpaper, Shapes::ShapeRef.new(shape: WallpaperImageInput, location_name: "wallpaper"))
+    BrandingConfigurationUpdateInput.add_member(:favicon, Shapes::ShapeRef.new(shape: IconImageInput, location_name: "favicon"))
+    BrandingConfigurationUpdateInput.add_member(:localized_strings, Shapes::ShapeRef.new(shape: LocalizedBrandingStringMap, location_name: "localizedStrings"))
+    BrandingConfigurationUpdateInput.add_member(:color_theme, Shapes::ShapeRef.new(shape: ColorTheme, location_name: "colorTheme"))
+    BrandingConfigurationUpdateInput.add_member(:terms_of_service, Shapes::ShapeRef.new(shape: Markdown, location_name: "termsOfService"))
+    BrandingConfigurationUpdateInput.struct_class = Types::BrandingConfigurationUpdateInput
 
     BrowserSettings.add_member(:browser_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "browserSettingsArn"))
     BrowserSettings.add_member(:associated_portal_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "associatedPortalArns"))
@@ -551,6 +598,7 @@ module Aws::WorkSpacesWeb
     CreateUserSettingsRequest.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
     CreateUserSettingsRequest.add_member(:deep_link_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "deepLinkAllowed"))
     CreateUserSettingsRequest.add_member(:toolbar_configuration, Shapes::ShapeRef.new(shape: ToolbarConfiguration, location_name: "toolbarConfiguration"))
+    CreateUserSettingsRequest.add_member(:branding_configuration_input, Shapes::ShapeRef.new(shape: BrandingConfigurationCreateInput, location_name: "brandingConfigurationInput"))
     CreateUserSettingsRequest.struct_class = Types::CreateUserSettingsRequest
 
     CreateUserSettingsResponse.add_member(:user_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "userSettingsArn"))
@@ -775,6 +823,14 @@ module Aws::WorkSpacesWeb
 
     HiddenToolbarItemList.member = Shapes::ShapeRef.new(shape: ToolbarItem)
 
+    IconImageInput.add_member(:blob, Shapes::ShapeRef.new(shape: IconImage, location_name: "blob"))
+    IconImageInput.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "s3Uri"))
+    IconImageInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    IconImageInput.add_member_subclass(:blob, Types::IconImageInput::Blob)
+    IconImageInput.add_member_subclass(:s3_uri, Types::IconImageInput::S3Uri)
+    IconImageInput.add_member_subclass(:unknown, Types::IconImageInput::Unknown)
+    IconImageInput.struct_class = Types::IconImageInput
+
     IdentityProvider.add_member(:identity_provider_arn, Shapes::ShapeRef.new(shape: SubresourceARN, required: true, location_name: "identityProviderArn"))
     IdentityProvider.add_member(:identity_provider_name, Shapes::ShapeRef.new(shape: IdentityProviderName, location_name: "identityProviderName"))
     IdentityProvider.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "identityProviderType"))
@@ -790,6 +846,11 @@ module Aws::WorkSpacesWeb
     IdentityProviderSummary.add_member(:identity_provider_name, Shapes::ShapeRef.new(shape: IdentityProviderName, location_name: "identityProviderName"))
     IdentityProviderSummary.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "identityProviderType"))
     IdentityProviderSummary.struct_class = Types::IdentityProviderSummary
+
+    ImageMetadata.add_member(:mime_type, Shapes::ShapeRef.new(shape: MimeType, required: true, location_name: "mimeType"))
+    ImageMetadata.add_member(:file_extension, Shapes::ShapeRef.new(shape: StringType, required: true, location_name: "fileExtension"))
+    ImageMetadata.add_member(:last_upload_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUploadTimestamp"))
+    ImageMetadata.struct_class = Types::ImageMetadata
 
     InlineRedactionConfiguration.add_member(:inline_redaction_patterns, Shapes::ShapeRef.new(shape: InlineRedactionPatterns, required: true, location_name: "inlineRedactionPatterns"))
     InlineRedactionConfiguration.add_member(:global_enforced_urls, Shapes::ShapeRef.new(shape: GlobalInlineRedactionUrls, location_name: "globalEnforcedUrls"))
@@ -948,6 +1009,19 @@ module Aws::WorkSpacesWeb
     ListUserSettingsResponse.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettingsList, location_name: "userSettings"))
     ListUserSettingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListUserSettingsResponse.struct_class = Types::ListUserSettingsResponse
+
+    LocalizedBrandingStringMap.key = Shapes::ShapeRef.new(shape: Locale)
+    LocalizedBrandingStringMap.value = Shapes::ShapeRef.new(shape: LocalizedBrandingStrings)
+
+    LocalizedBrandingStrings.add_member(:browser_tab_title, Shapes::ShapeRef.new(shape: LocalizedBrandingStringsBrowserTabTitleString, required: true, location_name: "browserTabTitle"))
+    LocalizedBrandingStrings.add_member(:welcome_text, Shapes::ShapeRef.new(shape: LocalizedBrandingStringsWelcomeTextString, required: true, location_name: "welcomeText"))
+    LocalizedBrandingStrings.add_member(:login_title, Shapes::ShapeRef.new(shape: LocalizedBrandingStringsLoginTitleString, location_name: "loginTitle"))
+    LocalizedBrandingStrings.add_member(:login_description, Shapes::ShapeRef.new(shape: LocalizedBrandingStringsLoginDescriptionString, location_name: "loginDescription"))
+    LocalizedBrandingStrings.add_member(:login_button_text, Shapes::ShapeRef.new(shape: LocalizedBrandingStringsLoginButtonTextString, location_name: "loginButtonText"))
+    LocalizedBrandingStrings.add_member(:contact_link, Shapes::ShapeRef.new(shape: ContactLinkUrl, location_name: "contactLink"))
+    LocalizedBrandingStrings.add_member(:contact_button_text, Shapes::ShapeRef.new(shape: LocalizedBrandingStringsContactButtonTextString, location_name: "contactButtonText"))
+    LocalizedBrandingStrings.add_member(:loading_text, Shapes::ShapeRef.new(shape: LocalizedBrandingStringsLoadingTextString, location_name: "loadingText"))
+    LocalizedBrandingStrings.struct_class = Types::LocalizedBrandingStrings
 
     LogConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: S3LogConfiguration, location_name: "s3"))
     LogConfiguration.struct_class = Types::LogConfiguration
@@ -1219,6 +1293,7 @@ module Aws::WorkSpacesWeb
     UpdateUserSettingsRequest.add_member(:cookie_synchronization_configuration, Shapes::ShapeRef.new(shape: CookieSynchronizationConfiguration, location_name: "cookieSynchronizationConfiguration"))
     UpdateUserSettingsRequest.add_member(:deep_link_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "deepLinkAllowed"))
     UpdateUserSettingsRequest.add_member(:toolbar_configuration, Shapes::ShapeRef.new(shape: ToolbarConfiguration, location_name: "toolbarConfiguration"))
+    UpdateUserSettingsRequest.add_member(:branding_configuration_input, Shapes::ShapeRef.new(shape: BrandingConfigurationUpdateInput, location_name: "brandingConfigurationInput"))
     UpdateUserSettingsRequest.struct_class = Types::UpdateUserSettingsRequest
 
     UpdateUserSettingsResponse.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettings, required: true, location_name: "userSettings"))
@@ -1251,6 +1326,7 @@ module Aws::WorkSpacesWeb
     UserSettings.add_member(:additional_encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextMap, location_name: "additionalEncryptionContext"))
     UserSettings.add_member(:deep_link_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "deepLinkAllowed"))
     UserSettings.add_member(:toolbar_configuration, Shapes::ShapeRef.new(shape: ToolbarConfiguration, location_name: "toolbarConfiguration"))
+    UserSettings.add_member(:branding_configuration, Shapes::ShapeRef.new(shape: BrandingConfiguration, location_name: "brandingConfiguration"))
     UserSettings.struct_class = Types::UserSettings
 
     UserSettingsList.member = Shapes::ShapeRef.new(shape: UserSettingsSummary)
@@ -1266,6 +1342,7 @@ module Aws::WorkSpacesWeb
     UserSettingsSummary.add_member(:cookie_synchronization_configuration, Shapes::ShapeRef.new(shape: CookieSynchronizationConfiguration, location_name: "cookieSynchronizationConfiguration"))
     UserSettingsSummary.add_member(:deep_link_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "deepLinkAllowed"))
     UserSettingsSummary.add_member(:toolbar_configuration, Shapes::ShapeRef.new(shape: ToolbarConfiguration, location_name: "toolbarConfiguration"))
+    UserSettingsSummary.add_member(:branding_configuration, Shapes::ShapeRef.new(shape: BrandingConfiguration, location_name: "brandingConfiguration"))
     UserSettingsSummary.struct_class = Types::UserSettingsSummary
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
@@ -1278,6 +1355,14 @@ module Aws::WorkSpacesWeb
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
+
+    WallpaperImageInput.add_member(:blob, Shapes::ShapeRef.new(shape: WallpaperImage, location_name: "blob"))
+    WallpaperImageInput.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "s3Uri"))
+    WallpaperImageInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    WallpaperImageInput.add_member_subclass(:blob, Types::WallpaperImageInput::Blob)
+    WallpaperImageInput.add_member_subclass(:s3_uri, Types::WallpaperImageInput::S3Uri)
+    WallpaperImageInput.add_member_subclass(:unknown, Types::WallpaperImageInput::Unknown)
+    WallpaperImageInput.struct_class = Types::WallpaperImageInput
 
     WebContentFilteringPolicy.add_member(:blocked_categories, Shapes::ShapeRef.new(shape: BlockedCategories, location_name: "blockedCategories"))
     WebContentFilteringPolicy.add_member(:allowed_urls, Shapes::ShapeRef.new(shape: UrlPatternList, location_name: "allowedUrls"))
@@ -1552,6 +1637,7 @@ module Aws::WorkSpacesWeb
         o.input = Shapes::ShapeRef.new(shape: CreateUserSettingsRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateUserSettingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)

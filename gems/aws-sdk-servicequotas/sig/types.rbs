@@ -90,6 +90,25 @@ module Aws::ServiceQuotas
       SENSITIVE: []
     end
 
+    class GetQuotaUtilizationReportRequest
+      attr_accessor report_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetQuotaUtilizationReportResponse
+      attr_accessor report_id: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor generated_at: ::Time
+      attr_accessor total_count: ::Integer
+      attr_accessor quotas: ::Array[Types::QuotaUtilizationInfo]
+      attr_accessor next_token: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
     class GetRequestedServiceQuotaChangeRequest
       attr_accessor request_id: ::String
       SENSITIVE: []
@@ -294,6 +313,19 @@ module Aws::ServiceQuotas
       SENSITIVE: []
     end
 
+    class QuotaUtilizationInfo
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor utilization: ::Float
+      attr_accessor default_value: ::Float
+      attr_accessor applied_value: ::Float
+      attr_accessor service_name: ::String
+      attr_accessor adjustable: bool
+      SENSITIVE: []
+    end
+
     class RequestServiceQuotaIncreaseRequest
       attr_accessor service_code: ::String
       attr_accessor quota_code: ::String
@@ -310,6 +342,7 @@ module Aws::ServiceQuotas
 
     class RequestedServiceQuotaChange
       attr_accessor id: ::String
+      attr_accessor request_type: ("AutomaticManagement")
       attr_accessor case_id: ::String
       attr_accessor service_code: ::String
       attr_accessor service_name: ::String
@@ -389,6 +422,16 @@ module Aws::ServiceQuotas
     end
 
     class StartAutoManagementResponse < Aws::EmptyStructure
+    end
+
+    class StartQuotaUtilizationReportRequest < Aws::EmptyStructure
+    end
+
+    class StartQuotaUtilizationReportResponse
+      attr_accessor report_id: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class StopAutoManagementRequest < Aws::EmptyStructure

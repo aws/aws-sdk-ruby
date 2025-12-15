@@ -252,6 +252,102 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
+    # @!attribute [rw] report_id
+    #   The unique identifier for the quota utilization report. This
+    #   identifier is returned by the `StartQuotaUtilizationReport`
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates the next page of results to retrieve. This
+    #   token is returned in the response when there are more results
+    #   available. Omit this parameter for the first request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page. The default value
+    #   is 1,000 and the maximum allowed value is 1,000.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetQuotaUtilizationReportRequest AWS API Documentation
+    #
+    class GetQuotaUtilizationReportRequest < Struct.new(
+      :report_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] report_id
+    #   The unique identifier for the quota utilization report.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the report generation. Possible values are:
+    #
+    #   * `PENDING` - The report generation is in progress. Retry this
+    #     operation after a few seconds.
+    #
+    #   * `IN_PROGRESS` - The report is being processed. Continue polling
+    #     until the status changes to `COMPLETED`.
+    #
+    #   * `COMPLETED` - The report is ready and quota utilization data is
+    #     available in the response.
+    #
+    #   * `FAILED` - The report generation failed. Check the `ErrorCode` and
+    #     `ErrorMessage` fields for details.
+    #   @return [String]
+    #
+    # @!attribute [rw] generated_at
+    #   The timestamp when the report was generated, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] total_count
+    #   The total number of quotas included in the report across all pages.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] quotas
+    #   A list of quota utilization records, sorted by utilization
+    #   percentage in descending order. Each record includes the quota code,
+    #   service code, service name, quota name, namespace, utilization
+    #   percentage, default value, applied value, and whether the quota is
+    #   adjustable. Up to 1,000 records are returned per page.
+    #   @return [Array<Types::QuotaUtilizationInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates more results are available. Include this
+    #   token in the next request to retrieve the next page of results. If
+    #   this field is not present, you have retrieved all available results.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   An error code indicating the reason for failure when the report
+    #   status is `FAILED`. This field is only present when the status is
+    #   `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A detailed error message describing the failure when the report
+    #   status is `FAILED`. This field is only present when the status is
+    #   `FAILED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetQuotaUtilizationReportResponse AWS API Documentation
+    #
+    class GetQuotaUtilizationReportResponse < Struct.new(
+      :report_id,
+      :status,
+      :generated_at,
+      :total_count,
+      :quotas,
+      :next_token,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] request_id
     #   Specifies the ID of the quota increase request.
     #   @return [String]
@@ -1047,6 +1143,64 @@ module Aws::ServiceQuotas
       include Aws::Structure
     end
 
+    # Information about a quota's utilization, including the quota code,
+    # service information, current usage, and applied limits.
+    #
+    # @!attribute [rw] quota_code
+    #   The quota identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   The service identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_name
+    #   The quota name.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the metric used to track quota usage.
+    #   @return [String]
+    #
+    # @!attribute [rw] utilization
+    #   The utilization percentage of the quota, calculated as (current
+    #   usage / applied value) × 100. Values range from 0.0 to 100.0 or
+    #   higher if usage exceeds the quota limit.
+    #   @return [Float]
+    #
+    # @!attribute [rw] default_value
+    #   The default value of the quota.
+    #   @return [Float]
+    #
+    # @!attribute [rw] applied_value
+    #   The applied value of the quota, which may be higher than the default
+    #   value if a quota increase has been requested and approved.
+    #   @return [Float]
+    #
+    # @!attribute [rw] service_name
+    #   The service name.
+    #   @return [String]
+    #
+    # @!attribute [rw] adjustable
+    #   Indicates whether the quota value can be increased.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/QuotaUtilizationInfo AWS API Documentation
+    #
+    class QuotaUtilizationInfo < Struct.new(
+      :quota_code,
+      :service_code,
+      :quota_name,
+      :namespace,
+      :utilization,
+      :default_value,
+      :applied_value,
+      :service_name,
+      :adjustable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] service_code
     #   Specifies the service identifier. To find the service code value for
     #   an Amazon Web Services service, use the ListServices operation.
@@ -1106,6 +1260,19 @@ module Aws::ServiceQuotas
     #
     # @!attribute [rw] id
     #   The unique identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_type
+    #   The type of quota increase request. Possible values include:
+    #
+    #   * `AutomaticManagement` - The request was automatically created by
+    #     Service Quotas Automatic Management when quota utilization
+    #     approached the limit.
+    #
+    #   ^
+    #
+    #   If this field is not present, the request was manually created by a
+    #   user.
     #   @return [String]
     #
     # @!attribute [rw] case_id
@@ -1201,6 +1368,7 @@ module Aws::ServiceQuotas
     #
     class RequestedServiceQuotaChange < Struct.new(
       :id,
+      :request_type,
       :case_id,
       :service_code,
       :service_name,
@@ -1460,6 +1628,40 @@ module Aws::ServiceQuotas
     # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/StartAutoManagementResponse AWS API Documentation
     #
     class StartAutoManagementResponse < Aws::EmptyStructure; end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/StartQuotaUtilizationReportRequest AWS API Documentation
+    #
+    class StartQuotaUtilizationReportRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] report_id
+    #   A unique identifier for the quota utilization report. Use this
+    #   identifier with the `GetQuotaUtilizationReport` operation to
+    #   retrieve the report results.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the report generation. The status will be
+    #   `PENDING` when the report is first initiated.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   An optional message providing additional information about the
+    #   report generation status. This field may contain details about the
+    #   report initiation or indicate if an existing recent report is being
+    #   reused.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/StartQuotaUtilizationReportResponse AWS API Documentation
+    #
+    class StartQuotaUtilizationReportResponse < Struct.new(
+      :report_id,
+      :status,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @api private
     #

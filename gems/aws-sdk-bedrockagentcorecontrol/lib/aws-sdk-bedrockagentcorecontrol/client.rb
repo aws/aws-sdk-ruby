@@ -1982,7 +1982,7 @@ module Aws::BedrockAgentCoreControl
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_GetPolicy.html
+    # [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_GetPolicy.html
     #
     # @option params [required, String] :name
     #   The customer-assigned immutable name for the policy. Must be unique
@@ -2095,7 +2095,7 @@ module Aws::BedrockAgentCoreControl
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_GetPolicyEngine.html
+    # [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_GetPolicyEngine.html
     #
     # @option params [required, String] :name
     #   The customer-assigned immutable name for the policy engine. This name
@@ -3686,7 +3686,7 @@ module Aws::BedrockAgentCoreControl
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_StartPolicyGeneration.html
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_StartPolicyGeneration.html
     #
     # @option params [required, String] :policy_engine_id
     #   The identifier of the policy engine associated with the policy
@@ -4419,7 +4419,7 @@ module Aws::BedrockAgentCoreControl
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicies.html
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicies.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of policies to return in a single response. If not
@@ -4488,7 +4488,7 @@ module Aws::BedrockAgentCoreControl
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicyEngines.html
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyEngines.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of policy engines to return in a single response.
@@ -4546,7 +4546,7 @@ module Aws::BedrockAgentCoreControl
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_StartPolicyGeneration.html
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_StartPolicyGeneration.html
     #
     # @option params [required, String] :policy_engine_id
     #   The unique identifier of the policy engine associated with the policy
@@ -4562,7 +4562,7 @@ module Aws::BedrockAgentCoreControl
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicyGenerationAssets.html
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyGenerationAssets.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of policy generation assets to return in a single
@@ -6583,7 +6583,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

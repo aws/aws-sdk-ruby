@@ -109,6 +109,36 @@ module Aws::WorkSpacesWeb
       SENSITIVE: []
     end
 
+    class BrandingConfiguration
+      attr_accessor logo: Types::ImageMetadata
+      attr_accessor wallpaper: Types::ImageMetadata
+      attr_accessor favicon: Types::ImageMetadata
+      attr_accessor localized_strings: ::Hash[("de-DE" | "en-US" | "es-ES" | "fr-FR" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "zh-CN" | "zh-TW"), Types::LocalizedBrandingStrings]
+      attr_accessor color_theme: ("Light" | "Dark")
+      attr_accessor terms_of_service: ::String
+      SENSITIVE: [:terms_of_service]
+    end
+
+    class BrandingConfigurationCreateInput
+      attr_accessor logo: Types::IconImageInput
+      attr_accessor wallpaper: Types::WallpaperImageInput
+      attr_accessor favicon: Types::IconImageInput
+      attr_accessor localized_strings: ::Hash[("de-DE" | "en-US" | "es-ES" | "fr-FR" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "zh-CN" | "zh-TW"), Types::LocalizedBrandingStrings]
+      attr_accessor color_theme: ("Light" | "Dark")
+      attr_accessor terms_of_service: ::String
+      SENSITIVE: [:terms_of_service]
+    end
+
+    class BrandingConfigurationUpdateInput
+      attr_accessor logo: Types::IconImageInput
+      attr_accessor wallpaper: Types::WallpaperImageInput
+      attr_accessor favicon: Types::IconImageInput
+      attr_accessor localized_strings: ::Hash[("de-DE" | "en-US" | "es-ES" | "fr-FR" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "zh-CN" | "zh-TW"), Types::LocalizedBrandingStrings]
+      attr_accessor color_theme: ("Light" | "Dark")
+      attr_accessor terms_of_service: ::String
+      SENSITIVE: [:terms_of_service]
+    end
+
     class BrowserSettings
       attr_accessor browser_settings_arn: ::String
       attr_accessor associated_portal_arns: ::Array[::String]
@@ -312,6 +342,7 @@ module Aws::WorkSpacesWeb
       attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
       attr_accessor toolbar_configuration: Types::ToolbarConfiguration
+      attr_accessor branding_configuration_input: Types::BrandingConfigurationCreateInput
       SENSITIVE: [:cookie_synchronization_configuration]
     end
 
@@ -649,6 +680,20 @@ module Aws::WorkSpacesWeb
       SENSITIVE: []
     end
 
+    class IconImageInput
+      attr_accessor blob: ::String
+      attr_accessor s3_uri: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Blob < IconImageInput
+      end
+      class S3Uri < IconImageInput
+      end
+      class Unknown < IconImageInput
+      end
+    end
+
     class IdentityProvider
       attr_accessor identity_provider_arn: ::String
       attr_accessor identity_provider_name: ::String
@@ -662,6 +707,13 @@ module Aws::WorkSpacesWeb
       attr_accessor identity_provider_name: ::String
       attr_accessor identity_provider_type: ("SAML" | "Facebook" | "Google" | "LoginWithAmazon" | "SignInWithApple" | "OIDC")
       SENSITIVE: [:identity_provider_name]
+    end
+
+    class ImageMetadata
+      attr_accessor mime_type: ("image/png" | "image/jpeg" | "image/x-icon")
+      attr_accessor file_extension: ::String
+      attr_accessor last_upload_timestamp: ::Time
+      SENSITIVE: []
     end
 
     class InlineRedactionConfiguration
@@ -873,6 +925,18 @@ module Aws::WorkSpacesWeb
     class ListUserSettingsResponse
       attr_accessor user_settings: ::Array[Types::UserSettingsSummary]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LocalizedBrandingStrings
+      attr_accessor browser_tab_title: ::String
+      attr_accessor welcome_text: ::String
+      attr_accessor login_title: ::String
+      attr_accessor login_description: ::String
+      attr_accessor login_button_text: ::String
+      attr_accessor contact_link: ::String
+      attr_accessor contact_button_text: ::String
+      attr_accessor loading_text: ::String
       SENSITIVE: []
     end
 
@@ -1210,6 +1274,7 @@ module Aws::WorkSpacesWeb
       attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration
       attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
       attr_accessor toolbar_configuration: Types::ToolbarConfiguration
+      attr_accessor branding_configuration_input: Types::BrandingConfigurationUpdateInput
       SENSITIVE: [:cookie_synchronization_configuration]
     end
 
@@ -1246,6 +1311,7 @@ module Aws::WorkSpacesWeb
       attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
       attr_accessor toolbar_configuration: Types::ToolbarConfiguration
+      attr_accessor branding_configuration: Types::BrandingConfiguration
       SENSITIVE: [:cookie_synchronization_configuration]
     end
 
@@ -1261,6 +1327,7 @@ module Aws::WorkSpacesWeb
       attr_accessor cookie_synchronization_configuration: Types::CookieSynchronizationConfiguration
       attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
       attr_accessor toolbar_configuration: Types::ToolbarConfiguration
+      attr_accessor branding_configuration: Types::BrandingConfiguration
       SENSITIVE: [:cookie_synchronization_configuration]
     end
 
@@ -1275,6 +1342,20 @@ module Aws::WorkSpacesWeb
       attr_accessor name: ::String
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class WallpaperImageInput
+      attr_accessor blob: ::String
+      attr_accessor s3_uri: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Blob < WallpaperImageInput
+      end
+      class S3Uri < WallpaperImageInput
+      end
+      class Unknown < WallpaperImageInput
+      end
     end
 
     class WebContentFilteringPolicy

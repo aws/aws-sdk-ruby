@@ -563,6 +563,31 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
+    # Specifies the configuration for integrating with Customer Profiles.
+    # This configuration enables Entity Resolution to send matched output
+    # directly to Customer Profiles instead of Amazon S3, creating a unified
+    # customer view by automatically updating customer profiles based on
+    # match clusters.
+    #
+    # @!attribute [rw] domain_arn
+    #   The Amazon Resource Name (ARN) of the Customer Profiles domain where
+    #   the matched output will be sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_type_arn
+    #   The Amazon Resource Name (ARN) of the Customer Profiles object type
+    #   that defines the structure for the matched customer data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/CustomerProfilesIntegrationConfig AWS API Documentation
+    #
+    class CustomerProfilesIntegrationConfig < Struct.new(
+      :domain_arn,
+      :object_type_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] workflow_name
     #   The name of the workflow to be deleted.
     #   @return [String]
@@ -1738,20 +1763,20 @@ module Aws::EntityResolution
 
     # The output source for the ID mapping workflow.
     #
-    # @!attribute [rw] output_s3_path
-    #   The S3 path to which Entity Resolution will write the output table.
-    #   @return [String]
-    #
     # @!attribute [rw] kms_arn
     #   Customer KMS ARN for encryption at rest. If not provided, system
     #   will use an Entity Resolution managed KMS key.
     #   @return [String]
     #
+    # @!attribute [rw] output_s3_path
+    #   The S3 path to which Entity Resolution will write the output table.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/IdMappingWorkflowOutputSource AWS API Documentation
     #
     class IdMappingWorkflowOutputSource < Struct.new(
-      :output_s3_path,
-      :kms_arn)
+      :kms_arn,
+      :output_s3_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2540,13 +2565,13 @@ module Aws::EntityResolution
     # included in the output table, and whether the values of the column
     # should be hashed.
     #
-    # @!attribute [rw] output_s3_path
-    #   The S3 path to which Entity Resolution will write the output table.
-    #   @return [String]
-    #
     # @!attribute [rw] kms_arn
     #   Customer KMS ARN for encryption at rest. If not provided, system
     #   will use an Entity Resolution managed KMS key.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_s3_path
+    #   The S3 path to which Entity Resolution will write the output table.
     #   @return [String]
     #
     # @!attribute [rw] output
@@ -2564,13 +2589,22 @@ module Aws::EntityResolution
     #   output to (123)-456-7890.
     #   @return [Boolean]
     #
+    # @!attribute [rw] customer_profiles_integration_config
+    #   Specifies the Customer Profiles integration configuration for
+    #   sending matched output directly to Customer Profiles. When
+    #   configured, Entity Resolution automatically creates and updates
+    #   customer profiles based on match clusters, eliminating the need for
+    #   manual Amazon S3 integration setup.
+    #   @return [Types::CustomerProfilesIntegrationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/OutputSource AWS API Documentation
     #
     class OutputSource < Struct.new(
-      :output_s3_path,
       :kms_arn,
+      :output_s3_path,
       :output,
-      :apply_normalization)
+      :apply_normalization,
+      :customer_profiles_integration_config)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -15,6 +15,6 @@ Feature: Smoke tests for BCMRecommendedActions
       """
     When I call the operation 'list_recommended_actions' with params:
       """
-{"max_results":10}
+{"max_results":5}
       """
-    Then I expect an error was raised
+    Then I expect an error was not raised

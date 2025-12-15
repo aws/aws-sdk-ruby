@@ -82,6 +82,7 @@ module Aws::Glacier
     ListVaultsInput = Shapes::StructureShape.new(name: 'ListVaultsInput')
     ListVaultsOutput = Shapes::StructureShape.new(name: 'ListVaultsOutput')
     MissingParameterValueException = Shapes::StructureShape.new(name: 'MissingParameterValueException')
+    NoLongerSupportedException = Shapes::StructureShape.new(name: 'NoLongerSupportedException')
     NotificationEventList = Shapes::ListShape.new(name: 'NotificationEventList')
     NullableLong = Shapes::IntegerShape.new(name: 'NullableLong')
     OutputLocation = Shapes::StructureShape.new(name: 'OutputLocation')
@@ -459,6 +460,11 @@ module Aws::Glacier
     MissingParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     MissingParameterValueException.struct_class = Types::MissingParameterValueException
 
+    NoLongerSupportedException.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "type"))
+    NoLongerSupportedException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
+    NoLongerSupportedException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    NoLongerSupportedException.struct_class = Types::NoLongerSupportedException
+
     NotificationEventList.member = Shapes::ShapeRef.new(shape: string)
 
     OutputLocation.add_member(:s3, Shapes::ShapeRef.new(shape: S3Location, location_name: "S3"))
@@ -625,6 +631,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:abort_vault_lock, Seahorse::Model::Operation.new.tap do |o|
@@ -637,6 +644,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:add_tags_to_vault, Seahorse::Model::Operation.new.tap do |o|
@@ -650,6 +658,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:complete_multipart_upload, Seahorse::Model::Operation.new.tap do |o|
@@ -662,6 +671,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:complete_vault_lock, Seahorse::Model::Operation.new.tap do |o|
@@ -674,6 +684,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:create_vault, Seahorse::Model::Operation.new.tap do |o|
@@ -685,6 +696,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
@@ -698,6 +710,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:delete_vault, Seahorse::Model::Operation.new.tap do |o|
@@ -710,6 +723,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:delete_vault_access_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -722,6 +736,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:delete_vault_notifications, Seahorse::Model::Operation.new.tap do |o|
@@ -734,6 +749,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:describe_job, Seahorse::Model::Operation.new.tap do |o|
@@ -746,6 +762,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:describe_vault, Seahorse::Model::Operation.new.tap do |o|
@@ -758,6 +775,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:get_data_retrieval_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -769,6 +787,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:get_job_output, Seahorse::Model::Operation.new.tap do |o|
@@ -781,6 +800,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:get_vault_access_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -793,6 +813,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:get_vault_lock, Seahorse::Model::Operation.new.tap do |o|
@@ -805,6 +826,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:get_vault_notifications, Seahorse::Model::Operation.new.tap do |o|
@@ -817,6 +839,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:initiate_job, Seahorse::Model::Operation.new.tap do |o|
@@ -831,6 +854,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientCapacityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:initiate_multipart_upload, Seahorse::Model::Operation.new.tap do |o|
@@ -843,6 +867,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:initiate_vault_lock, Seahorse::Model::Operation.new.tap do |o|
@@ -855,6 +880,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:list_jobs, Seahorse::Model::Operation.new.tap do |o|
@@ -867,6 +893,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -885,6 +912,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -903,6 +931,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -920,6 +949,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:list_tags_for_vault, Seahorse::Model::Operation.new.tap do |o|
@@ -932,6 +962,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:list_vaults, Seahorse::Model::Operation.new.tap do |o|
@@ -944,6 +975,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -962,6 +994,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:remove_tags_from_vault, Seahorse::Model::Operation.new.tap do |o|
@@ -974,6 +1007,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:set_data_retrieval_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -985,6 +1019,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:set_vault_access_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -997,6 +1032,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:set_vault_notifications, Seahorse::Model::Operation.new.tap do |o|
@@ -1009,6 +1045,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:upload_archive, Seahorse::Model::Operation.new.tap do |o|
@@ -1022,6 +1059,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
 
       api.add_operation(:upload_multipart_part, Seahorse::Model::Operation.new.tap do |o|
@@ -1035,6 +1073,7 @@ module Aws::Glacier
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: NoLongerSupportedException)
       end)
     end
 

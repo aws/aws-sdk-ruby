@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2025-12-12)
+------------------
+
+* Feature - Added new freetier action types to RecommendedAction.type.
+
 1.4.0 (2025-11-21)
 ------------------
 

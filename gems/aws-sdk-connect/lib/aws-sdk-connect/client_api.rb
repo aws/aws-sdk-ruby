@@ -609,6 +609,8 @@ module Aws::Connect
     DisassociateWorkspaceRequest = Shapes::StructureShape.new(name: 'DisassociateWorkspaceRequest')
     DisassociateWorkspaceResponse = Shapes::StructureShape.new(name: 'DisassociateWorkspaceResponse')
     DisconnectDetails = Shapes::StructureShape.new(name: 'DisconnectDetails')
+    DisconnectOnCustomerExit = Shapes::ListShape.new(name: 'DisconnectOnCustomerExit')
+    DisconnectOnCustomerExitParticipantType = Shapes::StringShape.new(name: 'DisconnectOnCustomerExitParticipantType')
     DisconnectReason = Shapes::StructureShape.new(name: 'DisconnectReason')
     DisconnectReasonCode = Shapes::StringShape.new(name: 'DisconnectReasonCode')
     DismissUserContactRequest = Shapes::StructureShape.new(name: 'DismissUserContactRequest')
@@ -4128,6 +4130,8 @@ module Aws::Connect
     DisconnectDetails.add_member(:potential_disconnect_issue, Shapes::ShapeRef.new(shape: PotentialDisconnectIssue, location_name: "PotentialDisconnectIssue"))
     DisconnectDetails.struct_class = Types::DisconnectDetails
 
+    DisconnectOnCustomerExit.member = Shapes::ShapeRef.new(shape: DisconnectOnCustomerExitParticipantType)
+
     DisconnectReason.add_member(:code, Shapes::ShapeRef.new(shape: DisconnectReasonCode, location_name: "Code"))
     DisconnectReason.struct_class = Types::DisconnectReason
 
@@ -7349,6 +7353,7 @@ module Aws::Connect
     StartChatContactRequest.add_member(:related_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "RelatedContactId"))
     StartChatContactRequest.add_member(:segment_attributes, Shapes::ShapeRef.new(shape: SegmentAttributes, location_name: "SegmentAttributes"))
     StartChatContactRequest.add_member(:customer_id, Shapes::ShapeRef.new(shape: CustomerIdNonEmpty, location_name: "CustomerId"))
+    StartChatContactRequest.add_member(:disconnect_on_customer_exit, Shapes::ShapeRef.new(shape: DisconnectOnCustomerExit, location_name: "DisconnectOnCustomerExit"))
     StartChatContactRequest.struct_class = Types::StartChatContactRequest
 
     StartChatContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
@@ -7422,6 +7427,7 @@ module Aws::Connect
     StartOutboundChatContactRequest.add_member(:chat_duration_in_minutes, Shapes::ShapeRef.new(shape: ChatDurationInMinutes, location_name: "ChatDurationInMinutes"))
     StartOutboundChatContactRequest.add_member(:participant_details, Shapes::ShapeRef.new(shape: ParticipantDetails, location_name: "ParticipantDetails"))
     StartOutboundChatContactRequest.add_member(:initial_system_message, Shapes::ShapeRef.new(shape: ChatMessage, location_name: "InitialSystemMessage"))
+    StartOutboundChatContactRequest.add_member(:initial_templated_system_message, Shapes::ShapeRef.new(shape: TemplatedMessageConfig, location_name: "InitialTemplatedSystemMessage"))
     StartOutboundChatContactRequest.add_member(:related_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "RelatedContactId"))
     StartOutboundChatContactRequest.add_member(:supported_messaging_content_types, Shapes::ShapeRef.new(shape: SupportedMessagingContentTypes, location_name: "SupportedMessagingContentTypes"))
     StartOutboundChatContactRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))

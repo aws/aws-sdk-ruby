@@ -7195,7 +7195,7 @@ module Aws::S3
     #   resp.inventory_configuration.id #=> String
     #   resp.inventory_configuration.included_object_versions #=> String, one of "All", "Current"
     #   resp.inventory_configuration.optional_fields #=> Array
-    #   resp.inventory_configuration.optional_fields[0] #=> String, one of "Size", "LastModifiedDate", "StorageClass", "ETag", "IsMultipartUploaded", "ReplicationStatus", "EncryptionStatus", "ObjectLockRetainUntilDate", "ObjectLockMode", "ObjectLockLegalHoldStatus", "IntelligentTieringAccessTier", "BucketKeyStatus", "ChecksumAlgorithm", "ObjectAccessControlList", "ObjectOwner"
+    #   resp.inventory_configuration.optional_fields[0] #=> String, one of "Size", "LastModifiedDate", "StorageClass", "ETag", "IsMultipartUploaded", "ReplicationStatus", "EncryptionStatus", "ObjectLockRetainUntilDate", "ObjectLockMode", "ObjectLockLegalHoldStatus", "IntelligentTieringAccessTier", "BucketKeyStatus", "ChecksumAlgorithm", "ObjectAccessControlList", "ObjectOwner", "LifecycleExpirationDate"
     #   resp.inventory_configuration.schedule.frequency #=> String, one of "Daily", "Weekly"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketInventoryConfiguration AWS API Documentation
@@ -11935,7 +11935,7 @@ module Aws::S3
     #   resp.inventory_configuration_list[0].id #=> String
     #   resp.inventory_configuration_list[0].included_object_versions #=> String, one of "All", "Current"
     #   resp.inventory_configuration_list[0].optional_fields #=> Array
-    #   resp.inventory_configuration_list[0].optional_fields[0] #=> String, one of "Size", "LastModifiedDate", "StorageClass", "ETag", "IsMultipartUploaded", "ReplicationStatus", "EncryptionStatus", "ObjectLockRetainUntilDate", "ObjectLockMode", "ObjectLockLegalHoldStatus", "IntelligentTieringAccessTier", "BucketKeyStatus", "ChecksumAlgorithm", "ObjectAccessControlList", "ObjectOwner"
+    #   resp.inventory_configuration_list[0].optional_fields[0] #=> String, one of "Size", "LastModifiedDate", "StorageClass", "ETag", "IsMultipartUploaded", "ReplicationStatus", "EncryptionStatus", "ObjectLockRetainUntilDate", "ObjectLockMode", "ObjectLockLegalHoldStatus", "IntelligentTieringAccessTier", "BucketKeyStatus", "ChecksumAlgorithm", "ObjectAccessControlList", "ObjectOwner", "LifecycleExpirationDate"
     #   resp.inventory_configuration_list[0].schedule.frequency #=> String, one of "Daily", "Weekly"
     #   resp.is_truncated #=> Boolean
     #   resp.next_continuation_token #=> String
@@ -15254,7 +15254,7 @@ module Aws::S3
     #       },
     #       id: "InventoryId", # required
     #       included_object_versions: "All", # required, accepts All, Current
-    #       optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, EncryptionStatus, ObjectLockRetainUntilDate, ObjectLockMode, ObjectLockLegalHoldStatus, IntelligentTieringAccessTier, BucketKeyStatus, ChecksumAlgorithm, ObjectAccessControlList, ObjectOwner
+    #       optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, EncryptionStatus, ObjectLockRetainUntilDate, ObjectLockMode, ObjectLockLegalHoldStatus, IntelligentTieringAccessTier, BucketKeyStatus, ChecksumAlgorithm, ObjectAccessControlList, ObjectOwner, LifecycleExpirationDate
     #       schedule: { # required
     #         frequency: "Daily", # required, accepts Daily, Weekly
     #       },
@@ -22283,7 +22283,7 @@ module Aws::S3
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.206.0'
+      context[:gem_version] = '1.207.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

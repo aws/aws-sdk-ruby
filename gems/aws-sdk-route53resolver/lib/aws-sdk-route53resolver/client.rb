@@ -631,6 +631,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoint.protocols #=> Array
     #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
+    #   resp.resolver_endpoint.rni_enhanced_metrics_enabled #=> Boolean
+    #   resp.resolver_endpoint.target_name_server_metrics_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/AssociateResolverEndpointIpAddress AWS API Documentation
     #
@@ -724,6 +726,10 @@ module Aws::Route53Resolver
     # @option params [String] :name
     #   A name for the association that you're creating between a Resolver
     #   rule and a VPC.
+    #
+    #   The name can be up to 64 characters long and can contain letters (a-z,
+    #   A-Z), numbers (0-9), hyphens (-), underscores (\_), and spaces. The
+    #   name cannot consist of only numbers.
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC that you want to associate the Resolver rule with.
@@ -1262,6 +1268,40 @@ module Aws::Route53Resolver
     #
     #   * None, which is treated as Do53.
     #
+    # @option params [Boolean] :rni_enhanced_metrics_enabled
+    #   Specifies whether RNI enhanced metrics are enabled for the Resolver
+    #   endpoints. When set to true, one-minute granular metrics are published
+    #   in CloudWatch for each RNI associated with this endpoint. When set to
+    #   false, metrics are not published. Default is false.
+    #
+    #   <note markdown="1"> Standard CloudWatch pricing and charges are applied for using the
+    #   Route 53 Resolver endpoint RNI enhanced metrics. For more information,
+    #   see [Detailed metrics][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html
+    #
+    # @option params [Boolean] :target_name_server_metrics_enabled
+    #   Specifies whether target name server metrics are enabled for the
+    #   outbound Resolver endpoints. When set to true, one-minute granular
+    #   metrics are published in CloudWatch for each target name server
+    #   associated with this endpoint. When set to false, metrics are not
+    #   published. Default is false. This is not supported for inbound
+    #   Resolver endpoints.
+    #
+    #   <note markdown="1"> Standard CloudWatch pricing and charges are applied for using the
+    #   Route 53 Resolver endpoint target name server metrics. For more
+    #   information, see [Detailed metrics][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html
+    #
     # @return [Types::CreateResolverEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateResolverEndpointResponse#resolver_endpoint #resolver_endpoint} => Types::ResolverEndpoint
@@ -1290,6 +1330,8 @@ module Aws::Route53Resolver
     #     ],
     #     resolver_endpoint_type: "IPV6", # accepts IPV6, IPV4, DUALSTACK
     #     protocols: ["DoH"], # accepts DoH, Do53, DoH-FIPS
+    #     rni_enhanced_metrics_enabled: false,
+    #     target_name_server_metrics_enabled: false,
     #   })
     #
     # @example Response structure
@@ -1312,6 +1354,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoint.protocols #=> Array
     #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
+    #   resp.resolver_endpoint.rni_enhanced_metrics_enabled #=> Boolean
+    #   resp.resolver_endpoint.target_name_server_metrics_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateResolverEndpoint AWS API Documentation
     #
@@ -1435,6 +1479,10 @@ module Aws::Route53Resolver
     #   A friendly name that lets you easily find a rule in the Resolver
     #   dashboard in the Route 53 console.
     #
+    #   The name can be up to 64 characters long and can contain letters (a-z,
+    #   A-Z), numbers (0-9), hyphens (-), underscores (\_), and spaces. The
+    #   name cannot consist of only numbers.
+    #
     # @option params [required, String] :rule_type
     #   When you want to forward DNS queries for specified domain name to
     #   resolvers on your network, specify `FORWARD` or `DELEGATE`.
@@ -1464,7 +1512,16 @@ module Aws::Route53Resolver
     #   Separate IP addresses with a space.
     #
     #   `TargetIps` is available only when the value of `Rule type` is
-    #   `FORWARD`.
+    #   `FORWARD`. You should not provide TargetIps when the Rule type is
+    #   `DELEGATE`.
+    #
+    #   <note markdown="1"> when creating a DELEGATE rule, you must not provide the `TargetIps`
+    #   parameter. If you provide the `TargetIps`, you may receive an ERROR
+    #   message similar to "Delegate resolver rules need to specify a
+    #   nameserver name". This error means you should not provide
+    #   `TargetIps`.
+    #
+    #    </note>
     #
     # @option params [String] :resolver_endpoint_id
     #   The ID of the outbound Resolver endpoint that you want to use to route
@@ -1792,6 +1849,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoint.protocols #=> Array
     #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
+    #   resp.resolver_endpoint.rni_enhanced_metrics_enabled #=> Boolean
+    #   resp.resolver_endpoint.target_name_server_metrics_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteResolverEndpoint AWS API Documentation
     #
@@ -2009,6 +2068,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoint.protocols #=> Array
     #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
+    #   resp.resolver_endpoint.rni_enhanced_metrics_enabled #=> Boolean
+    #   resp.resolver_endpoint.target_name_server_metrics_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DisassociateResolverEndpointIpAddress AWS API Documentation
     #
@@ -2439,6 +2500,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoint.protocols #=> Array
     #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
+    #   resp.resolver_endpoint.rni_enhanced_metrics_enabled #=> Boolean
+    #   resp.resolver_endpoint.target_name_server_metrics_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverEndpoint AWS API Documentation
     #
@@ -3461,6 +3524,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoints[0].resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoints[0].protocols #=> Array
     #   resp.resolver_endpoints[0].protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
+    #   resp.resolver_endpoints[0].rni_enhanced_metrics_enabled #=> Boolean
+    #   resp.resolver_endpoints[0].target_name_server_metrics_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverEndpoints AWS API Documentation
     #
@@ -4788,6 +4853,40 @@ module Aws::Route53Resolver
     #   traffic has transferred to using the DoH protocol, or DoH-FIPS, and
     #   then remove the Do53.
     #
+    # @option params [Boolean] :rni_enhanced_metrics_enabled
+    #   Updates whether RNI enhanced metrics are enabled for the Resolver
+    #   endpoints. When set to true, one-minute granular metrics are published
+    #   in CloudWatch for each RNI associated with this endpoint. When set to
+    #   false, metrics are not published.
+    #
+    #   <note markdown="1"> Standard CloudWatch pricing and charges are applied for using the
+    #   Route 53 Resolver endpoint RNI enhanced metrics. For more information,
+    #   see [Detailed metrics][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html
+    #
+    # @option params [Boolean] :target_name_server_metrics_enabled
+    #   Updates whether target name server metrics are enabled for the
+    #   outbound Resolver endpoints. When set to true, one-minute granular
+    #   metrics are published in CloudWatch for each target name server
+    #   associated with this endpoint. When set to false, metrics are not
+    #   published. This setting is not supported for inbound Resolver
+    #   endpoints.
+    #
+    #   <note markdown="1"> Standard CloudWatch pricing and charges are applied for using the
+    #   Route 53 Resolver endpoint target name server metrics. For more
+    #   information, see [Detailed metrics][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html
+    #
     # @return [Types::UpdateResolverEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateResolverEndpointResponse#resolver_endpoint #resolver_endpoint} => Types::ResolverEndpoint
@@ -4805,6 +4904,8 @@ module Aws::Route53Resolver
     #       },
     #     ],
     #     protocols: ["DoH"], # accepts DoH, Do53, DoH-FIPS
+    #     rni_enhanced_metrics_enabled: false,
+    #     target_name_server_metrics_enabled: false,
     #   })
     #
     # @example Response structure
@@ -4827,6 +4928,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoint.protocols #=> Array
     #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
+    #   resp.resolver_endpoint.rni_enhanced_metrics_enabled #=> Boolean
+    #   resp.resolver_endpoint.target_name_server_metrics_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverEndpoint AWS API Documentation
     #
@@ -4920,7 +5023,7 @@ module Aws::Route53Resolver
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -6764,6 +6764,7 @@ module Aws::Connect
       attr_accessor related_contact_id: ::String
       attr_accessor segment_attributes: ::Hash[::String, Types::SegmentAttributeValue]
       attr_accessor customer_id: ::String
+      attr_accessor disconnect_on_customer_exit: ::Array[("AGENT")]
       SENSITIVE: [:customer_id]
     end
 
@@ -6859,6 +6860,7 @@ module Aws::Connect
       attr_accessor chat_duration_in_minutes: ::Integer
       attr_accessor participant_details: Types::ParticipantDetails
       attr_accessor initial_system_message: Types::ChatMessage
+      attr_accessor initial_templated_system_message: Types::TemplatedMessageConfig
       attr_accessor related_contact_id: ::String
       attr_accessor supported_messaging_content_types: ::Array[::String]
       attr_accessor client_token: ::String

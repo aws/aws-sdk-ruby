@@ -108,6 +108,20 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class CancelImportTaskRequest
+      attr_accessor import_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelImportTaskResponse
+      attr_accessor import_id: ::String
+      attr_accessor import_statistics: Types::ImportStatistics
+      attr_accessor import_status: ("IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED")
+      attr_accessor creation_time: ::Integer
+      attr_accessor last_updated_time: ::Integer
+      SENSITIVE: []
+    end
+
     class ConfigurationTemplate
       attr_accessor service: ::String
       attr_accessor log_type: ::String
@@ -172,6 +186,20 @@ module Aws::CloudWatchLogs
 
     class CreateExportTaskResponse
       attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateImportTaskRequest
+      attr_accessor import_source_arn: ::String
+      attr_accessor import_role_arn: ::String
+      attr_accessor import_filter: Types::ImportFilter
+      SENSITIVE: []
+    end
+
+    class CreateImportTaskResponse
+      attr_accessor import_id: ::String
+      attr_accessor import_destination_arn: ::String
+      attr_accessor creation_time: ::Integer
       SENSITIVE: []
     end
 
@@ -518,6 +546,37 @@ module Aws::CloudWatchLogs
 
     class DescribeFieldIndexesResponse
       attr_accessor field_indexes: ::Array[Types::FieldIndex]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImportTaskBatchesRequest
+      attr_accessor import_id: ::String
+      attr_accessor batch_import_status: ::Array[("IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED")]
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImportTaskBatchesResponse
+      attr_accessor import_source_arn: ::String
+      attr_accessor import_id: ::String
+      attr_accessor import_batches: ::Array[Types::ImportBatch]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImportTasksRequest
+      attr_accessor import_id: ::String
+      attr_accessor import_status: ("IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED")
+      attr_accessor import_source_arn: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImportTasksResponse
+      attr_accessor imports: ::Array[Types::Import]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -980,6 +1039,37 @@ module Aws::CloudWatchLogs
     class GroupingIdentifier
       attr_accessor key: ::String
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Import
+      attr_accessor import_id: ::String
+      attr_accessor import_source_arn: ::String
+      attr_accessor import_status: ("IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED")
+      attr_accessor import_destination_arn: ::String
+      attr_accessor import_statistics: Types::ImportStatistics
+      attr_accessor import_filter: Types::ImportFilter
+      attr_accessor creation_time: ::Integer
+      attr_accessor last_updated_time: ::Integer
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class ImportBatch
+      attr_accessor batch_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class ImportFilter
+      attr_accessor start_event_time: ::Integer
+      attr_accessor end_event_time: ::Integer
+      SENSITIVE: []
+    end
+
+    class ImportStatistics
+      attr_accessor bytes_imported: ::Integer
       SENSITIVE: []
     end
 

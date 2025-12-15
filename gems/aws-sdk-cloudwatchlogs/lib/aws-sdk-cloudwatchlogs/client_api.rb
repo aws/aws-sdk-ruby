@@ -46,9 +46,12 @@ module Aws::CloudWatchLogs
     AssociateSourceToS3TableIntegrationRequest = Shapes::StructureShape.new(name: 'AssociateSourceToS3TableIntegrationRequest')
     AssociateSourceToS3TableIntegrationResponse = Shapes::StructureShape.new(name: 'AssociateSourceToS3TableIntegrationResponse')
     Baseline = Shapes::BooleanShape.new(name: 'Baseline')
+    BatchId = Shapes::StringShape.new(name: 'BatchId')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CSV = Shapes::StructureShape.new(name: 'CSV')
     CancelExportTaskRequest = Shapes::StructureShape.new(name: 'CancelExportTaskRequest')
+    CancelImportTaskRequest = Shapes::StructureShape.new(name: 'CancelImportTaskRequest')
+    CancelImportTaskResponse = Shapes::StructureShape.new(name: 'CancelImportTaskResponse')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CollectionRetentionDays = Shapes::IntegerShape.new(name: 'CollectionRetentionDays')
     Column = Shapes::StringShape.new(name: 'Column')
@@ -65,6 +68,8 @@ module Aws::CloudWatchLogs
     CreateDeliveryResponse = Shapes::StructureShape.new(name: 'CreateDeliveryResponse')
     CreateExportTaskRequest = Shapes::StructureShape.new(name: 'CreateExportTaskRequest')
     CreateExportTaskResponse = Shapes::StructureShape.new(name: 'CreateExportTaskResponse')
+    CreateImportTaskRequest = Shapes::StructureShape.new(name: 'CreateImportTaskRequest')
+    CreateImportTaskResponse = Shapes::StructureShape.new(name: 'CreateImportTaskResponse')
     CreateLogAnomalyDetectorRequest = Shapes::StructureShape.new(name: 'CreateLogAnomalyDetectorRequest')
     CreateLogAnomalyDetectorResponse = Shapes::StructureShape.new(name: 'CreateLogAnomalyDetectorResponse')
     CreateLogGroupRequest = Shapes::StructureShape.new(name: 'CreateLogGroupRequest')
@@ -144,6 +149,10 @@ module Aws::CloudWatchLogs
     DescribeFieldIndexesLogGroupIdentifiers = Shapes::ListShape.new(name: 'DescribeFieldIndexesLogGroupIdentifiers')
     DescribeFieldIndexesRequest = Shapes::StructureShape.new(name: 'DescribeFieldIndexesRequest')
     DescribeFieldIndexesResponse = Shapes::StructureShape.new(name: 'DescribeFieldIndexesResponse')
+    DescribeImportTaskBatchesRequest = Shapes::StructureShape.new(name: 'DescribeImportTaskBatchesRequest')
+    DescribeImportTaskBatchesResponse = Shapes::StructureShape.new(name: 'DescribeImportTaskBatchesResponse')
+    DescribeImportTasksRequest = Shapes::StructureShape.new(name: 'DescribeImportTasksRequest')
+    DescribeImportTasksResponse = Shapes::StructureShape.new(name: 'DescribeImportTasksResponse')
     DescribeIndexPoliciesLogGroupIdentifiers = Shapes::ListShape.new(name: 'DescribeIndexPoliciesLogGroupIdentifiers')
     DescribeIndexPoliciesRequest = Shapes::StructureShape.new(name: 'DescribeIndexPoliciesRequest')
     DescribeIndexPoliciesResponse = Shapes::StructureShape.new(name: 'DescribeIndexPoliciesResponse')
@@ -193,6 +202,7 @@ module Aws::CloudWatchLogs
     EntityRejectionErrorType = Shapes::StringShape.new(name: 'EntityRejectionErrorType')
     Enumerations = Shapes::MapShape.new(name: 'Enumerations')
     EpochMillis = Shapes::IntegerShape.new(name: 'EpochMillis')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EvaluationFrequency = Shapes::StringShape.new(name: 'EvaluationFrequency')
     EventId = Shapes::StringShape.new(name: 'EventId')
     EventMessage = Shapes::StringShape.new(name: 'EventMessage')
@@ -275,6 +285,15 @@ module Aws::CloudWatchLogs
     GroupingIdentifierValue = Shapes::StringShape.new(name: 'GroupingIdentifierValue')
     GroupingIdentifiers = Shapes::ListShape.new(name: 'GroupingIdentifiers')
     Histogram = Shapes::MapShape.new(name: 'Histogram')
+    Import = Shapes::StructureShape.new(name: 'Import')
+    ImportBatch = Shapes::StructureShape.new(name: 'ImportBatch')
+    ImportBatchList = Shapes::ListShape.new(name: 'ImportBatchList')
+    ImportFilter = Shapes::StructureShape.new(name: 'ImportFilter')
+    ImportId = Shapes::StringShape.new(name: 'ImportId')
+    ImportList = Shapes::ListShape.new(name: 'ImportList')
+    ImportStatistics = Shapes::StructureShape.new(name: 'ImportStatistics')
+    ImportStatus = Shapes::StringShape.new(name: 'ImportStatus')
+    ImportStatusList = Shapes::ListShape.new(name: 'ImportStatusList')
     IncludeLinkedAccounts = Shapes::BooleanShape.new(name: 'IncludeLinkedAccounts')
     IndexPolicies = Shapes::ListShape.new(name: 'IndexPolicies')
     IndexPolicy = Shapes::StructureShape.new(name: 'IndexPolicy')
@@ -718,6 +737,16 @@ module Aws::CloudWatchLogs
     CancelExportTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: ExportTaskId, required: true, location_name: "taskId"))
     CancelExportTaskRequest.struct_class = Types::CancelExportTaskRequest
 
+    CancelImportTaskRequest.add_member(:import_id, Shapes::ShapeRef.new(shape: ImportId, required: true, location_name: "importId"))
+    CancelImportTaskRequest.struct_class = Types::CancelImportTaskRequest
+
+    CancelImportTaskResponse.add_member(:import_id, Shapes::ShapeRef.new(shape: ImportId, location_name: "importId"))
+    CancelImportTaskResponse.add_member(:import_statistics, Shapes::ShapeRef.new(shape: ImportStatistics, location_name: "importStatistics"))
+    CancelImportTaskResponse.add_member(:import_status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "importStatus"))
+    CancelImportTaskResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
+    CancelImportTaskResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedTime"))
+    CancelImportTaskResponse.struct_class = Types::CancelImportTaskResponse
+
     Columns.member = Shapes::ShapeRef.new(shape: Column)
 
     ConfigurationTemplate.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
@@ -773,6 +802,16 @@ module Aws::CloudWatchLogs
 
     CreateExportTaskResponse.add_member(:task_id, Shapes::ShapeRef.new(shape: ExportTaskId, location_name: "taskId"))
     CreateExportTaskResponse.struct_class = Types::CreateExportTaskResponse
+
+    CreateImportTaskRequest.add_member(:import_source_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "importSourceArn"))
+    CreateImportTaskRequest.add_member(:import_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "importRoleArn"))
+    CreateImportTaskRequest.add_member(:import_filter, Shapes::ShapeRef.new(shape: ImportFilter, location_name: "importFilter"))
+    CreateImportTaskRequest.struct_class = Types::CreateImportTaskRequest
+
+    CreateImportTaskResponse.add_member(:import_id, Shapes::ShapeRef.new(shape: ImportId, location_name: "importId"))
+    CreateImportTaskResponse.add_member(:import_destination_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "importDestinationArn"))
+    CreateImportTaskResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
+    CreateImportTaskResponse.struct_class = Types::CreateImportTaskResponse
 
     CreateLogAnomalyDetectorRequest.add_member(:log_group_arn_list, Shapes::ShapeRef.new(shape: LogGroupArnList, required: true, location_name: "logGroupArnList"))
     CreateLogAnomalyDetectorRequest.add_member(:detector_name, Shapes::ShapeRef.new(shape: DetectorName, location_name: "detectorName"))
@@ -1031,6 +1070,29 @@ module Aws::CloudWatchLogs
     DescribeFieldIndexesResponse.add_member(:field_indexes, Shapes::ShapeRef.new(shape: FieldIndexes, location_name: "fieldIndexes"))
     DescribeFieldIndexesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeFieldIndexesResponse.struct_class = Types::DescribeFieldIndexesResponse
+
+    DescribeImportTaskBatchesRequest.add_member(:import_id, Shapes::ShapeRef.new(shape: ImportId, required: true, location_name: "importId"))
+    DescribeImportTaskBatchesRequest.add_member(:batch_import_status, Shapes::ShapeRef.new(shape: ImportStatusList, location_name: "batchImportStatus"))
+    DescribeImportTaskBatchesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: DescribeLimit, location_name: "limit"))
+    DescribeImportTaskBatchesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeImportTaskBatchesRequest.struct_class = Types::DescribeImportTaskBatchesRequest
+
+    DescribeImportTaskBatchesResponse.add_member(:import_source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "importSourceArn"))
+    DescribeImportTaskBatchesResponse.add_member(:import_id, Shapes::ShapeRef.new(shape: ImportId, location_name: "importId"))
+    DescribeImportTaskBatchesResponse.add_member(:import_batches, Shapes::ShapeRef.new(shape: ImportBatchList, location_name: "importBatches"))
+    DescribeImportTaskBatchesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeImportTaskBatchesResponse.struct_class = Types::DescribeImportTaskBatchesResponse
+
+    DescribeImportTasksRequest.add_member(:import_id, Shapes::ShapeRef.new(shape: ImportId, location_name: "importId"))
+    DescribeImportTasksRequest.add_member(:import_status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "importStatus"))
+    DescribeImportTasksRequest.add_member(:import_source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "importSourceArn"))
+    DescribeImportTasksRequest.add_member(:limit, Shapes::ShapeRef.new(shape: DescribeLimit, location_name: "limit"))
+    DescribeImportTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeImportTasksRequest.struct_class = Types::DescribeImportTasksRequest
+
+    DescribeImportTasksResponse.add_member(:imports, Shapes::ShapeRef.new(shape: ImportList, location_name: "imports"))
+    DescribeImportTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeImportTasksResponse.struct_class = Types::DescribeImportTasksResponse
 
     DescribeIndexPoliciesLogGroupIdentifiers.member = Shapes::ShapeRef.new(shape: LogGroupIdentifier)
 
@@ -1405,6 +1467,35 @@ module Aws::CloudWatchLogs
 
     Histogram.key = Shapes::ShapeRef.new(shape: Time)
     Histogram.value = Shapes::ShapeRef.new(shape: Count)
+
+    Import.add_member(:import_id, Shapes::ShapeRef.new(shape: ImportId, location_name: "importId"))
+    Import.add_member(:import_source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "importSourceArn"))
+    Import.add_member(:import_status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "importStatus"))
+    Import.add_member(:import_destination_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "importDestinationArn"))
+    Import.add_member(:import_statistics, Shapes::ShapeRef.new(shape: ImportStatistics, location_name: "importStatistics"))
+    Import.add_member(:import_filter, Shapes::ShapeRef.new(shape: ImportFilter, location_name: "importFilter"))
+    Import.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
+    Import.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedTime"))
+    Import.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
+    Import.struct_class = Types::Import
+
+    ImportBatch.add_member(:batch_id, Shapes::ShapeRef.new(shape: BatchId, required: true, location_name: "batchId"))
+    ImportBatch.add_member(:status, Shapes::ShapeRef.new(shape: ImportStatus, required: true, location_name: "status"))
+    ImportBatch.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
+    ImportBatch.struct_class = Types::ImportBatch
+
+    ImportBatchList.member = Shapes::ShapeRef.new(shape: ImportBatch)
+
+    ImportFilter.add_member(:start_event_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startEventTime"))
+    ImportFilter.add_member(:end_event_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endEventTime"))
+    ImportFilter.struct_class = Types::ImportFilter
+
+    ImportList.member = Shapes::ShapeRef.new(shape: Import)
+
+    ImportStatistics.add_member(:bytes_imported, Shapes::ShapeRef.new(shape: StoredBytes, location_name: "bytesImported"))
+    ImportStatistics.struct_class = Types::ImportStatistics
+
+    ImportStatusList.member = Shapes::ShapeRef.new(shape: ImportStatus)
 
     IndexPolicies.member = Shapes::ShapeRef.new(shape: IndexPolicy)
 
@@ -2398,6 +2489,19 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:cancel_import_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelImportTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelImportTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelImportTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+      end)
+
       api.add_operation(:create_delivery, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDelivery"
         o.http_method = "POST"
@@ -2425,6 +2529,21 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+      end)
+
+      api.add_operation(:create_import_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateImportTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateImportTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateImportTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
       end)
 
       api.add_operation(:create_log_anomaly_detector, Seahorse::Model::Operation.new.tap do |o|
@@ -2841,6 +2960,32 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:describe_import_task_batches, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeImportTaskBatches"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeImportTaskBatchesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeImportTaskBatchesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+      end)
+
+      api.add_operation(:describe_import_tasks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeImportTasks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeImportTasksRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeImportTasksResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+      end)
+
       api.add_operation(:describe_index_policies, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeIndexPolicies"
         o.http_method = "POST"
@@ -3212,6 +3357,12 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_anomalies, Seahorse::Model::Operation.new.tap do |o|

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2025-12-12)
+------------------
+
+* Feature - Adds support for portal branding customization, enabling administrators to personalize end-user portals with custom assets.
+
 1.52.0 (2025-11-21)
 ------------------
 
