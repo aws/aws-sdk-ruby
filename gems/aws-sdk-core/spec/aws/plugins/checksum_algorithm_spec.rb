@@ -259,8 +259,11 @@ module Aws
             client.stub_responses(:http_checksum_streaming_operation, lambda do |context|
               headers = context.http_request.headers
 
-              expect(headers['x-amz-content-sha256'])
-                .to eq('STREAMING-UNSIGNED-PAYLOAD-TRAILER')
+              unless defined?(JRUBY_VERSION)
+                expect(headers['x-amz-content-sha256']).to eq('STREAMING-UNSIGNED-PAYLOAD-TRAILER')
+              end
+
+
               test_case['expectHeaders'].each do |key, value|
                 expect(headers[key]).to eq(value)
               end

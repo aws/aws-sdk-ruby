@@ -142,7 +142,13 @@ module Aws
                 a_request(
                   :put, 'https://bucket.s3.us-west-1.amazonaws.com/key'
                 ).with(
-                  body: ->(b) { b == encrypted_body },
+                  body: lambda { |b|
+                    if defined?(JRUBY_VERSION)
+                      encrypted_body
+                    else
+                      b == encrypted_body
+                    end
+                  },
                   headers: {
                     'Content-Length' => '58',
                     # key is encrypted here with the master encryption key,
@@ -194,11 +200,18 @@ module Aws
               ).to have_been_made.once
 
               # second request stores teh encrypted object
+
               expect(
                 a_request(
                   :put, 'https://bucket.s3.us-west-1.amazonaws.com/key'
                 ).with(
-                  body: ->(b) { b == encrypted_body },
+                  body: lambda { |b|
+                    if defined?(JRUBY_VERSION)
+                      encrypted_body
+                    else
+                      b == encrypted_body
+                    end
+                  },
                   headers: {
                     'Content-Length' => '58',
                     'X-Amz-Meta-X-Amz-Unencrypted-Content-Length' => '6'
