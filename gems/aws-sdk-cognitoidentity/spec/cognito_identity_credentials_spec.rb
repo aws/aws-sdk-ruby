@@ -38,7 +38,7 @@ module Aws
 
         it 'constructs a client with passed arguments when not given' do
           expect(CognitoIdentity::Client).to receive(:new)
-            .with({region: 'us-east-1', credentials: false})
+            .with({region: 'us-east-1', credentials: nil})
             .and_return(client)
 
           creds = CognitoIdentityCredentials.new(
@@ -50,7 +50,7 @@ module Aws
 
         it 'excludes before_refresh from client construction' do
           expect(CognitoIdentity::Client).to receive(:new)
-                                               .with({region: 'us-east-1', credentials: false})
+                                               .with({region: 'us-east-1', credentials: nil})
                                                .and_return(client)
 
           creds = CognitoIdentityCredentials.new(
