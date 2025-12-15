@@ -139,6 +139,12 @@ module Aws::EntityResolution
       SENSITIVE: []
     end
 
+    class CustomerProfilesIntegrationConfig
+      attr_accessor domain_arn: ::String
+      attr_accessor object_type_arn: ::String
+      SENSITIVE: []
+    end
+
     class DeleteIdMappingWorkflowInput
       attr_accessor workflow_name: ::String
       SENSITIVE: []
@@ -448,8 +454,8 @@ module Aws::EntityResolution
     end
 
     class IdMappingWorkflowOutputSource
-      attr_accessor output_s3_path: ::String
       attr_accessor kms_arn: ::String
+      attr_accessor output_s3_path: ::String
       SENSITIVE: []
     end
 
@@ -676,10 +682,11 @@ module Aws::EntityResolution
     end
 
     class OutputSource
-      attr_accessor output_s3_path: ::String
       attr_accessor kms_arn: ::String
+      attr_accessor output_s3_path: ::String
       attr_accessor output: ::Array[Types::OutputAttribute]
       attr_accessor apply_normalization: bool
+      attr_accessor customer_profiles_integration_config: Types::CustomerProfilesIntegrationConfig
       SENSITIVE: []
     end
 

@@ -1564,7 +1564,7 @@ module Aws
                                                   }?,
                                                   id: ::String,
                                                   included_object_versions: ("All" | "Current"),
-                                                  optional_fields: Array[("Size" | "LastModifiedDate" | "StorageClass" | "ETag" | "IsMultipartUploaded" | "ReplicationStatus" | "EncryptionStatus" | "ObjectLockRetainUntilDate" | "ObjectLockMode" | "ObjectLockLegalHoldStatus" | "IntelligentTieringAccessTier" | "BucketKeyStatus" | "ChecksumAlgorithm" | "ObjectAccessControlList" | "ObjectOwner")]?,
+                                                  optional_fields: Array[("Size" | "LastModifiedDate" | "StorageClass" | "ETag" | "IsMultipartUploaded" | "ReplicationStatus" | "EncryptionStatus" | "ObjectLockRetainUntilDate" | "ObjectLockMode" | "ObjectLockLegalHoldStatus" | "IntelligentTieringAccessTier" | "BucketKeyStatus" | "ChecksumAlgorithm" | "ObjectAccessControlList" | "ObjectOwner" | "LifecycleExpirationDate")]?,
                                                   schedule: {
                                                     frequency: ("Daily" | "Weekly")
                                                   }

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.585.0 (2025-12-15)
+------------------
+
+* Feature - EC2 Capacity Manager now supports SpotTotalCount, SpotTotalInterruptions and SpotInterruptionRate metrics for both vCPU and instance units.
+
 1.584.0 (2025-12-08)
 ------------------
 

@@ -5,6 +5,12 @@ Unreleased Changes
 
 * Feature - Improved memory efficiency when calculating request checksums for large file uploads (Ruby MRI only).
 
+1.207.0 (2025-12-15)
+------------------
+
+* Feature - This release adds support for the new optional field 'LifecycleExpirationDate' in S3 Inventory configurations.
+
+
 1.206.0 (2025-12-02)
 ------------------
 

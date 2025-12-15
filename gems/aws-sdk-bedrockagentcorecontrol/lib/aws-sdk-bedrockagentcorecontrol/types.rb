@@ -4992,7 +4992,7 @@ module Aws::BedrockAgentCoreControl
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_StartPolicyGeneration.html
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_StartPolicyGeneration.html
     #   @return [String]
     #
     # @!attribute [rw] policy_engine_id
@@ -6123,7 +6123,7 @@ module Aws::BedrockAgentCoreControl
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicies.html
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicies.html
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -6182,7 +6182,7 @@ module Aws::BedrockAgentCoreControl
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicyEngines.html
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyEngines.html
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -6213,7 +6213,7 @@ module Aws::BedrockAgentCoreControl
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicyEngines.html
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyEngines.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicyEnginesResponse AWS API Documentation
@@ -6233,7 +6233,7 @@ module Aws::BedrockAgentCoreControl
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_StartPolicyGeneration.html
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_StartPolicyGeneration.html
     #   @return [String]
     #
     # @!attribute [rw] policy_engine_id
@@ -6251,7 +6251,7 @@ module Aws::BedrockAgentCoreControl
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicyGenerationAssets.html
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyGenerationAssets.html
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -6288,7 +6288,7 @@ module Aws::BedrockAgentCoreControl
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicyGenerationAssets.html
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyGenerationAssets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicyGenerationAssetsResponse AWS API Documentation

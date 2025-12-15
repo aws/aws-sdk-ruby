@@ -1627,6 +1627,12 @@ module Aws::WorkSpacesWeb
     #   sessions. If administrators do not modify these settings, end users
     #   retain control over their toolbar preferences.
     #
+    # @option params [Types::BrandingConfigurationCreateInput] :branding_configuration_input
+    #   The branding configuration input that customizes the appearance of the
+    #   web portal for end users. This includes a custom logo, favicon,
+    #   wallpaper, localized strings, color theme, and an optional terms of
+    #   service.
+    #
     # @return [Types::CreateUserSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserSettingsResponse#user_settings_arn #user_settings_arn} => String
@@ -1674,6 +1680,34 @@ module Aws::WorkSpacesWeb
     #       visual_mode: "Dark", # accepts Dark, Light
     #       hidden_toolbar_items: ["Windows"], # accepts Windows, DualMonitor, FullScreen, Webcam, Microphone
     #       max_display_resolution: "size4096X2160", # accepts size4096X2160, size3840X2160, size3440X1440, size2560X1440, size1920X1080, size1280X720, size1024X768, size800X600
+    #     },
+    #     branding_configuration_input: {
+    #       logo: { # required
+    #         blob: "data",
+    #         s3_uri: "S3Uri",
+    #       },
+    #       wallpaper: { # required
+    #         blob: "data",
+    #         s3_uri: "S3Uri",
+    #       },
+    #       favicon: { # required
+    #         blob: "data",
+    #         s3_uri: "S3Uri",
+    #       },
+    #       localized_strings: { # required
+    #         "de-DE" => {
+    #           browser_tab_title: "LocalizedBrandingStringsBrowserTabTitleString", # required
+    #           welcome_text: "LocalizedBrandingStringsWelcomeTextString", # required
+    #           login_title: "LocalizedBrandingStringsLoginTitleString",
+    #           login_description: "LocalizedBrandingStringsLoginDescriptionString",
+    #           login_button_text: "LocalizedBrandingStringsLoginButtonTextString",
+    #           contact_link: "ContactLinkUrl",
+    #           contact_button_text: "LocalizedBrandingStringsContactButtonTextString",
+    #           loading_text: "LocalizedBrandingStringsLoadingTextString",
+    #         },
+    #       },
+    #       color_theme: "Light", # required, accepts Light, Dark
+    #       terms_of_service: "Markdown",
     #     },
     #   })
     #
@@ -2714,6 +2748,26 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings.toolbar_configuration.hidden_toolbar_items #=> Array
     #   resp.user_settings.toolbar_configuration.hidden_toolbar_items[0] #=> String, one of "Windows", "DualMonitor", "FullScreen", "Webcam", "Microphone"
     #   resp.user_settings.toolbar_configuration.max_display_resolution #=> String, one of "size4096X2160", "size3840X2160", "size3440X1440", "size2560X1440", "size1920X1080", "size1280X720", "size1024X768", "size800X600"
+    #   resp.user_settings.branding_configuration.logo.mime_type #=> String, one of "image/png", "image/jpeg", "image/x-icon"
+    #   resp.user_settings.branding_configuration.logo.file_extension #=> String
+    #   resp.user_settings.branding_configuration.logo.last_upload_timestamp #=> Time
+    #   resp.user_settings.branding_configuration.wallpaper.mime_type #=> String, one of "image/png", "image/jpeg", "image/x-icon"
+    #   resp.user_settings.branding_configuration.wallpaper.file_extension #=> String
+    #   resp.user_settings.branding_configuration.wallpaper.last_upload_timestamp #=> Time
+    #   resp.user_settings.branding_configuration.favicon.mime_type #=> String, one of "image/png", "image/jpeg", "image/x-icon"
+    #   resp.user_settings.branding_configuration.favicon.file_extension #=> String
+    #   resp.user_settings.branding_configuration.favicon.last_upload_timestamp #=> Time
+    #   resp.user_settings.branding_configuration.localized_strings #=> Hash
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].browser_tab_title #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].welcome_text #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].login_title #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].login_description #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].login_button_text #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].contact_link #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].contact_button_text #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].loading_text #=> String
+    #   resp.user_settings.branding_configuration.color_theme #=> String, one of "Light", "Dark"
+    #   resp.user_settings.branding_configuration.terms_of_service #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetUserSettings AWS API Documentation
     #
@@ -3366,6 +3420,26 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings[0].toolbar_configuration.hidden_toolbar_items #=> Array
     #   resp.user_settings[0].toolbar_configuration.hidden_toolbar_items[0] #=> String, one of "Windows", "DualMonitor", "FullScreen", "Webcam", "Microphone"
     #   resp.user_settings[0].toolbar_configuration.max_display_resolution #=> String, one of "size4096X2160", "size3840X2160", "size3440X1440", "size2560X1440", "size1920X1080", "size1280X720", "size1024X768", "size800X600"
+    #   resp.user_settings[0].branding_configuration.logo.mime_type #=> String, one of "image/png", "image/jpeg", "image/x-icon"
+    #   resp.user_settings[0].branding_configuration.logo.file_extension #=> String
+    #   resp.user_settings[0].branding_configuration.logo.last_upload_timestamp #=> Time
+    #   resp.user_settings[0].branding_configuration.wallpaper.mime_type #=> String, one of "image/png", "image/jpeg", "image/x-icon"
+    #   resp.user_settings[0].branding_configuration.wallpaper.file_extension #=> String
+    #   resp.user_settings[0].branding_configuration.wallpaper.last_upload_timestamp #=> Time
+    #   resp.user_settings[0].branding_configuration.favicon.mime_type #=> String, one of "image/png", "image/jpeg", "image/x-icon"
+    #   resp.user_settings[0].branding_configuration.favicon.file_extension #=> String
+    #   resp.user_settings[0].branding_configuration.favicon.last_upload_timestamp #=> Time
+    #   resp.user_settings[0].branding_configuration.localized_strings #=> Hash
+    #   resp.user_settings[0].branding_configuration.localized_strings["Locale"].browser_tab_title #=> String
+    #   resp.user_settings[0].branding_configuration.localized_strings["Locale"].welcome_text #=> String
+    #   resp.user_settings[0].branding_configuration.localized_strings["Locale"].login_title #=> String
+    #   resp.user_settings[0].branding_configuration.localized_strings["Locale"].login_description #=> String
+    #   resp.user_settings[0].branding_configuration.localized_strings["Locale"].login_button_text #=> String
+    #   resp.user_settings[0].branding_configuration.localized_strings["Locale"].contact_link #=> String
+    #   resp.user_settings[0].branding_configuration.localized_strings["Locale"].contact_button_text #=> String
+    #   resp.user_settings[0].branding_configuration.localized_strings["Locale"].loading_text #=> String
+    #   resp.user_settings[0].branding_configuration.color_theme #=> String, one of "Light", "Dark"
+    #   resp.user_settings[0].branding_configuration.terms_of_service #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListUserSettings AWS API Documentation
@@ -4271,6 +4345,14 @@ module Aws::WorkSpacesWeb
     #   sessions. If administrators do not modify these settings, end users
     #   retain control over their toolbar preferences.
     #
+    # @option params [Types::BrandingConfigurationUpdateInput] :branding_configuration_input
+    #   The branding configuration that customizes the appearance of the web
+    #   portal for end users. When updating user settings without an existing
+    #   branding configuration, all fields (logo, favicon, wallpaper,
+    #   localized strings, and color theme) are required except for terms of
+    #   service. When updating user settings with an existing branding
+    #   configuration, all fields are optional.
+    #
     # @return [Types::UpdateUserSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateUserSettingsResponse#user_settings #user_settings} => Types::UserSettings
@@ -4310,6 +4392,34 @@ module Aws::WorkSpacesWeb
     #       hidden_toolbar_items: ["Windows"], # accepts Windows, DualMonitor, FullScreen, Webcam, Microphone
     #       max_display_resolution: "size4096X2160", # accepts size4096X2160, size3840X2160, size3440X1440, size2560X1440, size1920X1080, size1280X720, size1024X768, size800X600
     #     },
+    #     branding_configuration_input: {
+    #       logo: {
+    #         blob: "data",
+    #         s3_uri: "S3Uri",
+    #       },
+    #       wallpaper: {
+    #         blob: "data",
+    #         s3_uri: "S3Uri",
+    #       },
+    #       favicon: {
+    #         blob: "data",
+    #         s3_uri: "S3Uri",
+    #       },
+    #       localized_strings: {
+    #         "de-DE" => {
+    #           browser_tab_title: "LocalizedBrandingStringsBrowserTabTitleString", # required
+    #           welcome_text: "LocalizedBrandingStringsWelcomeTextString", # required
+    #           login_title: "LocalizedBrandingStringsLoginTitleString",
+    #           login_description: "LocalizedBrandingStringsLoginDescriptionString",
+    #           login_button_text: "LocalizedBrandingStringsLoginButtonTextString",
+    #           contact_link: "ContactLinkUrl",
+    #           contact_button_text: "LocalizedBrandingStringsContactButtonTextString",
+    #           loading_text: "LocalizedBrandingStringsLoadingTextString",
+    #         },
+    #       },
+    #       color_theme: "Light", # accepts Light, Dark
+    #       terms_of_service: "Markdown",
+    #     },
     #   })
     #
     # @example Response structure
@@ -4341,6 +4451,26 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings.toolbar_configuration.hidden_toolbar_items #=> Array
     #   resp.user_settings.toolbar_configuration.hidden_toolbar_items[0] #=> String, one of "Windows", "DualMonitor", "FullScreen", "Webcam", "Microphone"
     #   resp.user_settings.toolbar_configuration.max_display_resolution #=> String, one of "size4096X2160", "size3840X2160", "size3440X1440", "size2560X1440", "size1920X1080", "size1280X720", "size1024X768", "size800X600"
+    #   resp.user_settings.branding_configuration.logo.mime_type #=> String, one of "image/png", "image/jpeg", "image/x-icon"
+    #   resp.user_settings.branding_configuration.logo.file_extension #=> String
+    #   resp.user_settings.branding_configuration.logo.last_upload_timestamp #=> Time
+    #   resp.user_settings.branding_configuration.wallpaper.mime_type #=> String, one of "image/png", "image/jpeg", "image/x-icon"
+    #   resp.user_settings.branding_configuration.wallpaper.file_extension #=> String
+    #   resp.user_settings.branding_configuration.wallpaper.last_upload_timestamp #=> Time
+    #   resp.user_settings.branding_configuration.favicon.mime_type #=> String, one of "image/png", "image/jpeg", "image/x-icon"
+    #   resp.user_settings.branding_configuration.favicon.file_extension #=> String
+    #   resp.user_settings.branding_configuration.favicon.last_upload_timestamp #=> Time
+    #   resp.user_settings.branding_configuration.localized_strings #=> Hash
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].browser_tab_title #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].welcome_text #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].login_title #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].login_description #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].login_button_text #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].contact_link #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].contact_button_text #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].loading_text #=> String
+    #   resp.user_settings.branding_configuration.color_theme #=> String, one of "Light", "Dark"
+    #   resp.user_settings.branding_configuration.terms_of_service #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateUserSettings AWS API Documentation
     #
@@ -4369,7 +4499,7 @@ module Aws::WorkSpacesWeb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspacesweb'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

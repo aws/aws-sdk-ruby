@@ -242,7 +242,9 @@ module Aws
                                         },
                                       ],
                                       ?resolver_endpoint_type: ("IPV6" | "IPV4" | "DUALSTACK"),
-                                      ?protocols: Array[("DoH" | "Do53" | "DoH-FIPS")]
+                                      ?protocols: Array[("DoH" | "Do53" | "DoH-FIPS")],
+                                      ?rni_enhanced_metrics_enabled: bool,
+                                      ?target_name_server_metrics_enabled: bool
                                     ) -> _CreateResolverEndpointResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResolverEndpointResponseSuccess
 
@@ -1001,7 +1003,9 @@ module Aws
                                           ipv_6: ::String
                                         },
                                       ],
-                                      ?protocols: Array[("DoH" | "Do53" | "DoH-FIPS")]
+                                      ?protocols: Array[("DoH" | "Do53" | "DoH-FIPS")],
+                                      ?rni_enhanced_metrics_enabled: bool,
+                                      ?target_name_server_metrics_enabled: bool
                                     ) -> _UpdateResolverEndpointResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResolverEndpointResponseSuccess
 

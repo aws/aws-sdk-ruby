@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2025-12-15)
+------------------
+
+* Feature - This release allows you to import your historical CloudTrail Lake data into CloudWatch with a few steps, enabling you to easily consolidate operational, security, and compliance data in one place.
+
 1.134.0 (2025-12-02)
 ------------------
 

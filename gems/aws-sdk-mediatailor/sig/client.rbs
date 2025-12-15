@@ -667,6 +667,7 @@ module Aws
         def transcode_profile_name: () -> ::String
         def video_content_source_url: () -> ::String
         def ad_conditioning_configuration: () -> Types::AdConditioningConfiguration
+        def ad_decision_server_configuration: () -> Types::AdDecisionServerConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#get_playback_configuration-instance_method
       def get_playback_configuration: (
@@ -825,6 +826,7 @@ module Aws
         def transcode_profile_name: () -> ::String
         def video_content_source_url: () -> ::String
         def ad_conditioning_configuration: () -> Types::AdConditioningConfiguration
+        def ad_decision_server_configuration: () -> Types::AdDecisionServerConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#put_playback_configuration-instance_method
       def put_playback_configuration: (
@@ -865,6 +867,14 @@ module Aws
                                         ?video_content_source_url: ::String,
                                         ?ad_conditioning_configuration: {
                                           streaming_media_file_conditioning: ("TRANSCODE" | "NONE")
+                                        },
+                                        ?ad_decision_server_configuration: {
+                                          http_request: {
+                                            method: ("GET" | "POST")?,
+                                            body: ::String?,
+                                            headers: Hash[::String, ::String]?,
+                                            compress_request: ("NONE" | "GZIP")?
+                                          }?
                                         }
                                       ) -> _PutPlaybackConfigurationResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPlaybackConfigurationResponseSuccess

@@ -685,6 +685,43 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Cancels an active import task and stops importing data from the
+    # CloudTrail Lake Event Data Store.
+    #
+    # @option params [required, String] :import_id
+    #   The ID of the import task to cancel.
+    #
+    # @return [Types::CancelImportTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelImportTaskResponse#import_id #import_id} => String
+    #   * {Types::CancelImportTaskResponse#import_statistics #import_statistics} => Types::ImportStatistics
+    #   * {Types::CancelImportTaskResponse#import_status #import_status} => String
+    #   * {Types::CancelImportTaskResponse#creation_time #creation_time} => Integer
+    #   * {Types::CancelImportTaskResponse#last_updated_time #last_updated_time} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_import_task({
+    #     import_id: "ImportId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_id #=> String
+    #   resp.import_statistics.bytes_imported #=> Integer
+    #   resp.import_status #=> String, one of "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED"
+    #   resp.creation_time #=> Integer
+    #   resp.last_updated_time #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CancelImportTask AWS API Documentation
+    #
+    # @overload cancel_import_task(params = {})
+    # @param [Hash] params ({})
+    def cancel_import_task(params = {}, options = {})
+      req = build_request(:cancel_import_task, params)
+      req.send_request(options)
+    end
+
     # Creates a *delivery*. A delivery is a connection between a logical
     # *delivery source* and a logical *delivery destination* that you have
     # already created.
@@ -910,6 +947,111 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def create_export_task(params = {}, options = {})
       req = build_request(:create_export_task, params)
+      req.send_request(options)
+    end
+
+    # Starts an import from a data source to CloudWatch Log and creates a
+    # managed log group as the destination for the imported data. Currently,
+    # [CloudTrail Event Data Store][1] is the only supported data source.
+    #
+    # The import task must satisfy the following constraints:
+    #
+    # * The specified source must be in an ACTIVE state.
+    #
+    # * The API caller must have permissions to access the data in the
+    #   provided source and to perform iam:PassRole on the provided import
+    #   role which has the same permissions, as described below.
+    #
+    # * The provided IAM role must trust the "cloudtrail.amazonaws.com"
+    #   principal and have the following permissions:
+    #
+    #   * cloudtrail:GetEventDataStoreData
+    #
+    #   * logs:CreateLogGroup
+    #
+    #   * logs:CreateLogStream
+    #
+    #   * logs:PutResourcePolicy
+    #
+    #   * (If source has an associated AWS KMS Key) kms:Decrypt
+    #
+    #   * (If source has an associated AWS KMS Key) kms:GenerateDataKey
+    #   Example IAM policy for provided import role:
+    #
+    #   `[ { "Effect": "Allow", "Action": "iam:PassRole", "Resource":
+    #   "arn:aws:iam::123456789012:role/apiCallerCredentials", "Condition":
+    #   { "StringLike": { "iam:AssociatedResourceARN":
+    #   "arn:aws:logs:us-east-1:123456789012:log-group:aws/cloudtrail/f1d45bff-d0e3-4868-b5d9-2eb678aa32fb:*"
+    #   } } }, { "Effect": "Allow", "Action": [
+    #   "cloudtrail:GetEventDataStoreData" ], "Resource": [
+    #   "arn:aws:cloudtrail:us-east-1:123456789012:eventdatastore/f1d45bff-d0e3-4868-b5d9-2eb678aa32fb"
+    #   ] }, { "Effect": "Allow", "Action": [ "logs:CreateImportTask",
+    #   "logs:CreateLogGroup", "logs:CreateLogStream",
+    #   "logs:PutResourcePolicy" ], "Resource": [
+    #   "arn:aws:logs:us-east-1:123456789012:log-group:/aws/cloudtrail/*" ]
+    #   }, { "Effect": "Allow", "Action": [ "kms:Decrypt",
+    #   "kms:GenerateDataKey" ], "Resource": [
+    #   "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012"
+    #   ] } ]`
+    #
+    # * If the import source has a customer managed key, the
+    #   "cloudtrail.amazonaws.com" principal needs permissions to perform
+    #   kms:Decrypt and kms:GenerateDataKey.
+    #
+    # * There can be no more than 3 active imports per account at a given
+    #   time.
+    #
+    # * The startEventTime must be less than or equal to endEventTime.
+    #
+    # * The data being imported must be within the specified source's
+    #   retention period.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-event-data-store.html
+    #
+    # @option params [required, String] :import_source_arn
+    #   The ARN of the source to import from.
+    #
+    # @option params [required, String] :import_role_arn
+    #   The ARN of the IAM role that grants CloudWatch Logs permission to
+    #   import from the CloudTrail Lake Event Data Store.
+    #
+    # @option params [Types::ImportFilter] :import_filter
+    #   Optional filters to constrain the import by CloudTrail event time.
+    #   Times are specified in Unix timestamp milliseconds. The range of data
+    #   being imported must be within the specified source's retention
+    #   period.
+    #
+    # @return [Types::CreateImportTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateImportTaskResponse#import_id #import_id} => String
+    #   * {Types::CreateImportTaskResponse#import_destination_arn #import_destination_arn} => String
+    #   * {Types::CreateImportTaskResponse#creation_time #creation_time} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_import_task({
+    #     import_source_arn: "Arn", # required
+    #     import_role_arn: "RoleArn", # required
+    #     import_filter: {
+    #       start_event_time: 1,
+    #       end_event_time: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_id #=> String
+    #   resp.import_destination_arn #=> String
+    #   resp.creation_time #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateImportTask AWS API Documentation
+    #
+    # @overload create_import_task(params = {})
+    # @param [Hash] params ({})
+    def create_import_task(params = {}, options = {})
+      req = build_request(:create_import_task, params)
       req.send_request(options)
     end
 
@@ -1567,7 +1709,7 @@ module Aws::CloudWatchLogs
     # retained for up to 30 days.
     #
     # You can't use this operation to delete an account-level index policy.
-    # Instead, use [DeletAccountPolicy][1].
+    # Instead, use [DeleteAccountPolicy][1].
     #
     # If you delete a log-group level field index policy and there is an
     # account-level field index policy, in a few minutes the log group
@@ -2406,6 +2548,119 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def describe_field_indexes(params = {}, options = {})
       req = build_request(:describe_field_indexes, params)
+      req.send_request(options)
+    end
+
+    # Gets detailed information about the individual batches within an
+    # import task, including their status and any error messages. For
+    # CloudTrail Event Data Store sources, a batch refers to a subset of
+    # stored events grouped by their eventTime.
+    #
+    # @option params [required, String] :import_id
+    #   The ID of the import task to get batch information for.
+    #
+    # @option params [Array<String>] :batch_import_status
+    #   Optional filter to list import batches by their status. Accepts
+    #   multiple status values: IN\_PROGRESS, CANCELLED, COMPLETED and FAILED.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of import batches to return in the response.
+    #   Default: 10
+    #
+    # @option params [String] :next_token
+    #   The pagination token for the next set of results.
+    #
+    # @return [Types::DescribeImportTaskBatchesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeImportTaskBatchesResponse#import_source_arn #import_source_arn} => String
+    #   * {Types::DescribeImportTaskBatchesResponse#import_id #import_id} => String
+    #   * {Types::DescribeImportTaskBatchesResponse#import_batches #import_batches} => Array&lt;Types::ImportBatch&gt;
+    #   * {Types::DescribeImportTaskBatchesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_import_task_batches({
+    #     import_id: "ImportId", # required
+    #     batch_import_status: ["IN_PROGRESS"], # accepts IN_PROGRESS, CANCELLED, COMPLETED, FAILED
+    #     limit: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_source_arn #=> String
+    #   resp.import_id #=> String
+    #   resp.import_batches #=> Array
+    #   resp.import_batches[0].batch_id #=> String
+    #   resp.import_batches[0].status #=> String, one of "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED"
+    #   resp.import_batches[0].error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeImportTaskBatches AWS API Documentation
+    #
+    # @overload describe_import_task_batches(params = {})
+    # @param [Hash] params ({})
+    def describe_import_task_batches(params = {}, options = {})
+      req = build_request(:describe_import_task_batches, params)
+      req.send_request(options)
+    end
+
+    # Lists and describes import tasks, with optional filtering by import
+    # status and source ARN.
+    #
+    # @option params [String] :import_id
+    #   Optional filter to describe a specific import task by its ID.
+    #
+    # @option params [String] :import_status
+    #   Optional filter to list imports by their status. Valid values are
+    #   IN\_PROGRESS, CANCELLED, COMPLETED and FAILED.
+    #
+    # @option params [String] :import_source_arn
+    #   Optional filter to list imports from a specific source
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of import tasks to return in the response. Default:
+    #   50
+    #
+    # @option params [String] :next_token
+    #   The pagination token for the next set of results.
+    #
+    # @return [Types::DescribeImportTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeImportTasksResponse#imports #imports} => Array&lt;Types::Import&gt;
+    #   * {Types::DescribeImportTasksResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_import_tasks({
+    #     import_id: "ImportId",
+    #     import_status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELLED, COMPLETED, FAILED
+    #     import_source_arn: "Arn",
+    #     limit: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.imports #=> Array
+    #   resp.imports[0].import_id #=> String
+    #   resp.imports[0].import_source_arn #=> String
+    #   resp.imports[0].import_status #=> String, one of "IN_PROGRESS", "CANCELLED", "COMPLETED", "FAILED"
+    #   resp.imports[0].import_destination_arn #=> String
+    #   resp.imports[0].import_statistics.bytes_imported #=> Integer
+    #   resp.imports[0].import_filter.start_event_time #=> Integer
+    #   resp.imports[0].import_filter.end_event_time #=> Integer
+    #   resp.imports[0].creation_time #=> Integer
+    #   resp.imports[0].last_updated_time #=> Integer
+    #   resp.imports[0].error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeImportTasks AWS API Documentation
+    #
+    # @overload describe_import_tasks(params = {})
+    # @param [Hash] params ({})
+    def describe_import_tasks(params = {}, options = {})
+      req = build_request(:describe_import_tasks, params)
       req.send_request(options)
     end
 
@@ -4556,6 +4811,8 @@ module Aws::CloudWatchLogs
     #   * {Types::ListAggregateLogGroupSummariesResponse#aggregate_log_group_summaries #aggregate_log_group_summaries} => Array&lt;Types::AggregateLogGroupSummary&gt;
     #   * {Types::ListAggregateLogGroupSummariesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_aggregate_log_group_summaries({
@@ -5139,8 +5396,8 @@ module Aws::CloudWatchLogs
 
     # Creates an account-level data protection policy, subscription filter
     # policy, field index policy, transformer policy, or metric extraction
-    # policy that applies to all log groups or a subset of log groups in the
-    # account.
+    # policy that applies to all log groups, a subset of log groups, or a
+    # data source name and type combination in the account.
     #
     # For field index policies, you can configure indexed fields as *facets*
     # to enable interactive exploration of your logs. Facets provide value
@@ -5283,8 +5540,65 @@ module Aws::CloudWatchLogs
     # multiple account-level transformer policies with selection criteria,
     # no two of them can use the same or overlapping log group name
     # prefixes. For example, if you have one policy filtered to log groups
-    # that start with `my-log`, you can't have another field index policy
+    # that start with `my-log`, you can't have another transformer policy
     # filtered to `my-logpprod` or `my-logging`.
+    #
+    # You can also set up a transformer at the log-group level. For more
+    # information, see [PutTransformer][8]. If there is both a log-group
+    # level transformer created with `PutTransformer` and an account-level
+    # transformer that could apply to the same log group, the log group uses
+    # only the log-group level transformer. It ignores the account-level
+    # transformer.
+    #
+    # **Field index policy**
+    #
+    # You can use field index policies to create indexes on fields found in
+    # log events for a log group or data source name and type combination.
+    # Creating field indexes can help lower the scan volume for CloudWatch
+    # Logs Insights queries that reference those fields, because these
+    # queries attempt to skip the processing of log events that are known to
+    # not match the indexed field. Good fields to index are fields that you
+    # often need to query for and fields or values that match only a small
+    # fraction of the total log events. Common examples of indexes include
+    # request ID, session ID, user IDs, or instance IDs. For more
+    # information, see [Create field indexes to improve query performance
+    # and reduce costs][9]
+    #
+    # To find the fields that are in your log group events, use the
+    # [GetLogGroupFields][10] operation. To find the fields for a data
+    # source use the [GetLogFields][11] operation.
+    #
+    # For example, suppose you have created a field index for `requestId`.
+    # Then, any CloudWatch Logs Insights query on that log group that
+    # includes `requestId = value ` or `requestId in [value, value, ...]`
+    # will attempt to process only the log events where the indexed field
+    # matches the specified value.
+    #
+    # Matches of log events to the names of indexed fields are
+    # case-sensitive. For example, an indexed field of `RequestId` won't
+    # match a log event containing `requestId`.
+    #
+    # You can have one account-level field index policy that applies to all
+    # log groups in the account. Or you can create as many as 20
+    # account-level field index policies that are each scoped to a subset of
+    # log groups using `LogGroupNamePrefix` with the `selectionCriteria`
+    # parameter. You can have another 20 account-level field index policies
+    # using `DataSourceName` and `DataSourceType` for the
+    # `selectionCriteria` parameter. If you have multiple account-level
+    # index policies with `LogGroupNamePrefix` selection criteria, no two of
+    # them can use the same or overlapping log group name prefixes. For
+    # example, if you have one policy filtered to log groups that start with
+    # *my-log*, you can't have another field index policy filtered to
+    # *my-logpprod* or *my-logging*. Similarly, if you have multiple
+    # account-level index policies with `DataSourceName` and
+    # `DataSourceType` selection criteria, no two of them can use the same
+    # data source name and type combination. For example, if you have one
+    # policy filtered to the data source name `amazon_vpc` and data source
+    # type `flow` you cannot create another policy with this combination.
+    #
+    # If you create an account-level field index policy in a monitoring
+    # account in cross-account observability, the policy is applied only to
+    # the monitoring account and not to any source accounts.
     #
     # CloudWatch Logs provides default field indexes for all log groups in
     # the Standard log class. Default field indexes are automatically
@@ -5298,67 +5612,80 @@ module Aws::CloudWatchLogs
     #
     # * `@source.log`
     #
+    # * `@data_source_name`
+    #
+    # * `@data_source_type`
+    #
+    # * `@data_format`
+    #
     # * `traceId`
+    #
+    # * `severityText`
+    #
+    # * `attributes.session.id`
+    #
+    # CloudWatch Logs provides default field indexes for certain data source
+    # name and type combinations as well. Default field indexes are
+    # automatically available for the following data source name and type
+    # combinations as identified in the following list:
+    #
+    # `amazon_vpc.flow`
+    #
+    # * `action`
+    #
+    # * `logStatus`
+    #
+    # * `region`
+    #
+    # * `flowDirection`
+    #
+    # * `type`
+    #
+    # `amazon_route53.resolver_query`
+    #
+    # * `transport`
+    #
+    # * `rcode`
+    #
+    # `aws_waf.access`
+    #
+    # * `action`
+    #
+    # * `httpRequest.country`
+    #
+    # `aws_cloudtrail.data`, `aws_cloudtrail.management`
+    #
+    # * `eventSource`
+    #
+    # * `eventName`
+    #
+    # * `awsRegion`
+    #
+    # * `userAgent`
+    #
+    # * `errorCode`
+    #
+    # * `eventType`
+    #
+    # * `managementEvent`
+    #
+    # * `readOnly`
+    #
+    # * `eventCategory`
+    #
+    # * `requestId`
     #
     # Default field indexes are in addition to any custom field indexes you
     # define within your policy. Default field indexes are not counted
-    # towards your field index quota.
-    #
-    # You can also set up a transformer at the log-group level. For more
-    # information, see [PutTransformer][8]. If there is both a log-group
-    # level transformer created with `PutTransformer` and an account-level
-    # transformer that could apply to the same log group, the log group uses
-    # only the log-group level transformer. It ignores the account-level
-    # transformer.
-    #
-    # **Field index policy**
-    #
-    # You can use field index policies to create indexes on fields found in
-    # log events in the log group. Creating field indexes can help lower the
-    # scan volume for CloudWatch Logs Insights queries that reference those
-    # fields, because these queries attempt to skip the processing of log
-    # events that are known to not match the indexed field. Good fields to
-    # index are fields that you often need to query for and fields or values
-    # that match only a small fraction of the total log events. Common
-    # examples of indexes include request ID, session ID, user IDs, or
-    # instance IDs. For more information, see [Create field indexes to
-    # improve query performance and reduce costs][9]
-    #
-    # To find the fields that are in your log group events, use the
-    # [GetLogGroupFields][10] operation.
-    #
-    # For example, suppose you have created a field index for `requestId`.
-    # Then, any CloudWatch Logs Insights query on that log group that
-    # includes `requestId = value ` or `requestId in [value, value, ...]`
-    # will attempt to process only the log events where the indexed field
-    # matches the specified value.
-    #
-    # Matches of log events to the names of indexed fields are
-    # case-sensitive. For example, an indexed field of `RequestId` won't
-    # match a log event containing `requestId`.
-    #
-    # You can have one account-level field index policy that applies to all
-    # log groups in the account. Or you can create as many as 40
-    # account-level field index policies (20 for log group prefix selection,
-    # 20 for data source selection) that are each scoped to a subset of log
-    # groups or data sources with the `selectionCriteria` parameter. Field
-    # index policies can now be created for specific data source name and
-    # type combinations using DataSourceName and DataSourceType selection
-    # criteria. If you have multiple account-level index policies with
-    # selection criteria, no two of them can use the same or overlapping log
-    # group name prefixes. For example, if you have one policy filtered to
-    # log groups that start with `my-log`, you can't have another field
-    # index policy filtered to `my-logpprod` or `my-logging`.
-    #
-    # If you create an account-level field index policy in a monitoring
-    # account in cross-account observability, the policy is applied only to
-    # the monitoring account and not to any source accounts.
+    # towards your [field index quota][12].
     #
     # If you want to create a field index policy for a single log group, you
-    # can use [PutIndexPolicy][11] instead of `PutAccountPolicy`. If you do
-    # so, that log group will use only that log-group level policy, and will
-    # ignore the account-level policy that you create with
-    # [PutAccountPolicy][12].
+    # can use [PutIndexPolicy][13] instead of `PutAccountPolicy`. If you do
+    # so, that log group will use that log-group level policy and any
+    # account-level policies that match at the data source level; any
+    # account-level policy that matches at the log group level (for example,
+    # no selection criteria or log group name prefix selection criteria)
+    # will be ignored.
     #
     # **Metric extraction policy**
     #
@@ -5434,11 +5761,13 @@ module Aws::CloudWatchLogs
     # [8]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html
     # [9]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing.html
     # [10]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogGroupFields.html
-    # [11]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutIndexPolicy.html
-    # [12]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutAccountPolicy.html
+    # [11]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogFields.html
+    # [12]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs-Field-Indexing-Syntax
+    # [13]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutIndexPolicy.html
     #
     # @option params [required, String] :policy_name
-    #   A name for the policy. This must be unique within the account.
+    #   A name for the policy. This must be unique within the account and
+    #   cannot start with `aws/`.
     #
     # @option params [required, String] :policy_document
     #   Specify the policy, in JSON.
@@ -5530,15 +5859,21 @@ module Aws::CloudWatchLogs
     #
     #   * **Fields** The array of field indexes to create.
     #
-    #   ^
+    #   * **FieldsV2** The object of field indexes to create along with it's
+    #     type.
     #
     #   It must contain at least one field index.
     #
     #   The following is an example of an index policy document that creates
-    #   two indexes, `RequestId` and `TransactionId`.
+    #   indexes with different types.
     #
-    #   `"policyDocument": "{ "Fields": [ "RequestId", "TransactionId" ]
-    #   }"`
+    #   `"policyDocument": "{ "Fields": [ "TransactionId" ], "FieldsV2":
+    #   {"RequestId": {"type": "FIELD_INDEX"}, "APIName": {"type":
+    #   "FACET"}, "StatusCode": {"type": "FACET"}}}"`
+    #
+    #   You can use `FieldsV2` to specify the type for each field. Supported
+    #   types are `FIELD_INDEX` and `FACET`. Field names within `Fields` and
+    #   `FieldsV2` must be mutually exclusive.
     #
     #
     #
@@ -5556,17 +5891,27 @@ module Aws::CloudWatchLogs
     #
     # @option params [String] :selection_criteria
     #   Use this parameter to apply the new policy to a subset of log groups
-    #   in the account.
+    #   in the account or a data source name and type combination.
     #
     #   Specifying `selectionCriteria` is valid only when you specify
     #   `SUBSCRIPTION_FILTER_POLICY`, `FIELD_INDEX_POLICY` or
     #   `TRANSFORMER_POLICY`for `policyType`.
     #
-    #   If `policyType` is `SUBSCRIPTION_FILTER_POLICY`, the only supported
-    #   `selectionCriteria` filter is `LogGroupName NOT IN []`
+    #   * If `policyType` is `SUBSCRIPTION_FILTER_POLICY`, the only supported
+    #     `selectionCriteria` filter is `LogGroupName NOT IN []`
     #
-    #   If `policyType` is `FIELD_INDEX_POLICY` or `TRANSFORMER_POLICY`, the
-    #   only supported `selectionCriteria` filter is `LogGroupNamePrefix`
+    #   * If `policyType` is `TRANSFORMER_POLICY`, the only supported
+    #     `selectionCriteria` filter is `LogGroupNamePrefix`
+    #
+    #   * If `policyType` is `FIELD_INDEX_POLICY`, the supported
+    #     `selectionCriteria` filters are:
+    #
+    #     * `LogGroupNamePrefix`
+    #
+    #     * `DataSourceName` AND `DataSourceType`
+    #     When you specify `selectionCriteria` for a field index policy you
+    #     can use either `LogGroupNamePrefix` by itself or `DataSourceName`
+    #     and `DataSourceType` together.
     #
     #   The `selectionCriteria` string can be up to 25KB in length. The length
     #   is determined by using its UTF-8 bytes.
@@ -6010,10 +6355,16 @@ module Aws::CloudWatchLogs
     #
     #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
     #
+    #   * For Network Firewall Proxy, the valid values are `ALERT_LOGS`,
+    #     `ALLOW_LOGS`, and `DENY_LOGS`.
+    #
     #   * For Network Load Balancer, the valid value is `NLB_ACCESS_LOGS`.
     #
     #   * For PCS, the valid values are `PCS_SCHEDULER_LOGS` and
     #     `PCS_JOBCOMP_LOGS`.
+    #
+    #   * For Quick Suite, the valid values are `CHAT_LOGS` and
+    #     `FEEDBACK_LOGS`.
     #
     #   * For Amazon Web Services RTB Fabric, the valid values is
     #     `APPLICATION_LOGS`.
@@ -6292,10 +6643,15 @@ module Aws::CloudWatchLogs
     #
     # @option params [required, String] :policy_document
     #   The index policy document, in JSON format. The following is an example
-    #   of an index policy document that creates two indexes, `RequestId` and
-    #   `TransactionId`.
+    #   of an index policy document that creates indexes with different types.
     #
-    #   `"policyDocument": "{ "Fields": [ "RequestId", "TransactionId" ] }"`
+    #   `"policyDocument": "{"Fields": [ "TransactionId" ], "FieldsV2":
+    #   {"RequestId": {"type": "FIELD_INDEX"}, "APIName": {"type": "FACET"},
+    #   "StatusCode": {"type": "FACET"}}}"`
+    #
+    #   You can use `FieldsV2` to specify the type for each field. Supported
+    #   types are `FIELD_INDEX` and `FACET`. Field names within `Fields` and
+    #   `FieldsV2` must be mutually exclusive.
     #
     #   The policy document must include at least one field index. For more
     #   information about the fields that can be included and other
@@ -8522,7 +8878,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.135.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

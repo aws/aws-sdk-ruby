@@ -503,8 +503,8 @@ module Aws::Glacier
     # [Access Control Using AWS Identity and Access Management (IAM)][1].
     #
     # For conceptual information and underlying REST API, see [Working with
-    # Archives in Amazon S3 Glacier][2] and [Abort Multipart Upload][3] in
-    # the *Amazon Glacier Developer Guide*.
+    # Archives in Amazon Glacier][2] and [Abort Multipart Upload][3] in the
+    # *Amazon Glacier Developer Guide*.
     #
     #
     #
@@ -515,7 +515,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -622,7 +622,7 @@ module Aws::Glacier
     # the operation throws the `LimitExceededException` error. If a tag
     # already exists on the vault under a specified key, the existing key
     # value will be overwritten. For more information about tags, see
-    # [Tagging Amazon S3 Glacier Resources][1].
+    # [Tagging Amazon Glacier Resources][1].
     #
     #
     #
@@ -631,7 +631,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -676,7 +676,7 @@ module Aws::Glacier
       req.send_request(options)
     end
 
-    # You call this operation to inform Amazon S3 Glacier (Glacier) that all
+    # You call this operation to inform Amazon Glacier (Glacier) that all
     # the archive parts have been uploaded and that Glacier can now assemble
     # the archive from the uploaded parts. After assembling and saving the
     # archive to the vault, Glacier returns the URI path of the newly
@@ -732,7 +732,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -751,7 +751,7 @@ module Aws::Glacier
     #   The SHA256 tree hash of the entire archive. It is the tree hash of
     #   SHA256 tree hash of the individual parts. If the value you specify in
     #   the request does not match the SHA256 tree hash of the final assembled
-    #   archive as computed by Amazon S3 Glacier (Glacier), Glacier returns an
+    #   archive as computed by Amazon Glacier (Glacier), Glacier returns an
     #   error and the request fails.
     #
     # @return [Types::ArchiveCreationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -873,7 +873,7 @@ module Aws::Glacier
     # This operation creates a new vault with the specified name. The name
     # of the vault must be unique within a region for an AWS account. You
     # can create up to 1,000 vaults per account. If you need to create more
-    # vaults, contact Amazon S3 Glacier.
+    # vaults, contact Amazon Glacier.
     #
     # You must use the following guidelines when naming a vault.
     #
@@ -955,11 +955,11 @@ module Aws::Glacier
     # according to the following scenarios:
     #
     # * If the archive retrieval job is actively preparing the data for
-    #   download when Amazon S3 Glacier receives the delete archive request,
+    #   download when Amazon Glacier receives the delete archive request,
     #   the archival retrieval operation might fail.
     #
     # * If the archive retrieval job has successfully prepared the archive
-    #   for download when Amazon S3 Glacier receives the delete archive
+    #   for download when Amazon Glacier receives the delete archive
     #   request, you will be able to download the output.
     #
     # This operation is idempotent. Attempting to delete an already-deleted
@@ -984,7 +984,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -1023,16 +1023,16 @@ module Aws::Glacier
       req.send_request(options)
     end
 
-    # This operation deletes a vault. Amazon S3 Glacier will delete a vault
+    # This operation deletes a vault. Amazon Glacier will delete a vault
     # only if there are no archives in the vault as of the last inventory
     # and there have been no writes to the vault since the last inventory.
     # If either of these conditions is not satisfied, the vault deletion
-    # fails (that is, the vault is not removed) and Amazon S3 Glacier
-    # returns an error. You can use DescribeVault to return the number of
-    # archives in a vault, and you can use [Initiate a Job (POST jobs)][1]
-    # to initiate a new inventory retrieval for a vault. The inventory
-    # contains the archive IDs you use to delete archives using [Delete
-    # Archive (DELETE archive)][2].
+    # fails (that is, the vault is not removed) and Amazon Glacier returns
+    # an error. You can use DescribeVault to return the number of archives
+    # in a vault, and you can use [Initiate a Job (POST jobs)][1] to
+    # initiate a new inventory retrieval for a vault. The inventory contains
+    # the archive IDs you use to delete archives using [Delete Archive
+    # (DELETE archive)][2].
     #
     # This operation is idempotent.
     #
@@ -1043,7 +1043,7 @@ module Aws::Glacier
     # [Access Control Using AWS Identity and Access Management (IAM)][3].
     #
     # For conceptual information and underlying REST API, see [Deleting a
-    # Vault in Amazon Glacier][4] and [Delete Vault ][5] in the *Amazon S3
+    # Vault in Amazon Glacier][4] and [Delete Vault ][5] in the *Amazon
     # Glacier Developer Guide*.
     #
     #
@@ -1057,7 +1057,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -1093,9 +1093,9 @@ module Aws::Glacier
 
     # This operation deletes the access policy associated with the specified
     # vault. The operation is eventually consistent; that is, it might take
-    # some time for Amazon S3 Glacier to completely remove the access
-    # policy, and you might still see the effect of the policy for a short
-    # time after you send the delete request.
+    # some time for Amazon Glacier to completely remove the access policy,
+    # and you might still see the effect of the policy for a short time
+    # after you send the delete request.
     #
     # This operation is idempotent. You can invoke delete multiple times,
     # even if there is no policy associated with the vault. For more
@@ -1109,7 +1109,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -1145,7 +1145,7 @@ module Aws::Glacier
 
     # This operation deletes the notification configuration set for a vault.
     # The operation is eventually consistent; that is, it might take some
-    # time for Amazon S3 Glacier to completely disable the notifications and
+    # time for Amazon Glacier to completely disable the notifications and
     # you might still receive some notifications for a short time after you
     # send the delete request.
     #
@@ -1156,9 +1156,8 @@ module Aws::Glacier
     # [Access Control Using AWS Identity and Access Management (IAM)][1].
     #
     # For conceptual information and underlying REST API, see [Configuring
-    # Vault Notifications in Amazon S3 Glacier][2] and [Delete Vault
-    # Notification Configuration ][3] in the Amazon S3 Glacier Developer
-    # Guide.
+    # Vault Notifications in Amazon Glacier][2] and [Delete Vault
+    # Notification Configuration ][3] in the Amazon Glacier Developer Guide.
     #
     #
     #
@@ -1169,7 +1168,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -1206,7 +1205,7 @@ module Aws::Glacier
     # This operation returns information about a job you previously
     # initiated, including the job initiation date, the user who initiated
     # the job, the job status code/message and the Amazon SNS topic to
-    # notify after Amazon S3 Glacier (Glacier) completes the job. For more
+    # notify after Amazon Glacier (Glacier) completes the job. For more
     # information about initiating a job, see InitiateJob.
     #
     # <note markdown="1"> This operation enables you to check the status of your job. However,
@@ -1237,7 +1236,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -1376,9 +1375,9 @@ module Aws::Glacier
     # remove an archive from a vault, and then immediately use Describe
     # Vault, the change in contents will not be immediately reflected. If
     # you want to retrieve the latest inventory of the vault, use
-    # InitiateJob. Amazon S3 Glacier generates vault inventories
-    # approximately daily. For more information, see [Downloading a Vault
-    # Inventory in Amazon S3 Glacier][1].
+    # InitiateJob. Amazon Glacier generates vault inventories approximately
+    # daily. For more information, see [Downloading a Vault Inventory in
+    # Amazon Glacier][1].
     #
     # An AWS account has full permission to perform all operations
     # (actions). However, AWS Identity and Access Management (IAM) users
@@ -1387,8 +1386,8 @@ module Aws::Glacier
     # [Access Control Using AWS Identity and Access Management (IAM)][2].
     #
     # For conceptual information and underlying REST API, see [Retrieving
-    # Vault Metadata in Amazon S3 Glacier][3] and [Describe Vault ][4] in
-    # the *Amazon Glacier Developer Guide*.
+    # Vault Metadata in Amazon Glacier][3] and [Describe Vault ][4] in the
+    # *Amazon Glacier Developer Guide*.
     #
     #
     #
@@ -1400,7 +1399,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -1534,10 +1533,10 @@ module Aws::Glacier
     #
     # You can download all the job output or download a portion of the
     # output by specifying a byte range. In the case of an archive retrieval
-    # job, depending on the byte range you specify, Amazon S3 Glacier
-    # (Glacier) returns the checksum for the portion of the data. You can
-    # compute the checksum on the client and verify that the values match to
-    # ensure the portion you downloaded is the correct data.
+    # job, depending on the byte range you specify, Amazon Glacier (Glacier)
+    # returns the checksum for the portion of the data. You can compute the
+    # checksum on the client and verify that the values match to ensure the
+    # portion you downloaded is the correct data.
     #
     # A job ID will not expire for at least 24 hours after Glacier completes
     # the job. That a byte range. For both archive and inventory retrieval
@@ -1550,7 +1549,7 @@ module Aws::Glacier
     # example, if you specify a range of `bytes=0-1048575`, you should
     # verify your download size is 1,048,576 bytes. If you download an
     # entire archive, the expected size is the size of the archive when you
-    # uploaded it to Amazon S3 Glacier The expected size is also returned in
+    # uploaded it to Amazon Glacier The expected size is also returned in
     # the headers from the **Get Job Output** response.
     #
     # In the case of an archive retrieval job, depending on the byte range
@@ -1583,7 +1582,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -1623,7 +1622,7 @@ module Aws::Glacier
     #       find the checksum of the entire output. Using the DescribeJob API,
     #       obtain job information of the job that provided you the output.
     #       The response includes the checksum of the entire archive stored in
-    #       Amazon S3 Glacier. You compare this value with the checksum you
+    #       Amazon Glacier. You compare this value with the checksum you
     #       computed to ensure you have downloaded the entire archive content
     #       with no errors.
     #
@@ -1698,7 +1697,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -1777,7 +1776,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -1838,7 +1837,7 @@ module Aws::Glacier
     # see SetVaultNotifications. If a notification configuration for a vault
     # is not set, the operation returns a `404 Not Found` error. For more
     # information about vault notifications, see [Configuring Vault
-    # Notifications in Amazon S3 Glacier][1].
+    # Notifications in Amazon Glacier][1].
     #
     # An AWS account has full permission to perform all operations
     # (actions). However, AWS Identity and Access Management (IAM) users
@@ -1847,9 +1846,8 @@ module Aws::Glacier
     # [Access Control Using AWS Identity and Access Management (IAM)][2].
     #
     # For conceptual information and underlying REST API, see [Configuring
-    # Vault Notifications in Amazon S3 Glacier][1] and [Get Vault
-    # Notification Configuration ][3] in the *Amazon Glacier Developer
-    # Guide*.
+    # Vault Notifications in Amazon Glacier][1] and [Get Vault Notification
+    # Configuration ][3] in the *Amazon Glacier Developer Guide*.
     #
     #
     #
@@ -1860,7 +1858,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -1925,7 +1923,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -2053,8 +2051,8 @@ module Aws::Glacier
       req.send_request(options)
     end
 
-    # This operation initiates a multipart upload. Amazon S3 Glacier creates
-    # a multipart upload resource and returns its ID in the response. The
+    # This operation initiates a multipart upload. Amazon Glacier creates a
+    # multipart upload resource and returns its ID in the response. The
     # multipart upload ID is used in subsequent requests to upload parts of
     # an archive (see UploadMultipartPart).
     #
@@ -2071,12 +2069,12 @@ module Aws::Glacier
     # MB, you will upload four parts of 4 MB each and one part of 0.2 MB.
     #
     # <note markdown="1"> You don't need to know the size of the archive when you start a
-    # multipart upload because Amazon S3 Glacier does not require you to
+    # multipart upload because Amazon Glacier does not require you to
     # specify the overall archive size.
     #
     #  </note>
     #
-    # After you complete the multipart upload, Amazon S3 Glacier (Glacier)
+    # After you complete the multipart upload, Amazon Glacier (Glacier)
     # removes the multipart upload resource referenced by the ID. Glacier
     # also removes the multipart upload resource if you cancel the multipart
     # upload or it may be removed if there is no activity for a period of 24
@@ -2101,7 +2099,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -2313,7 +2311,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -2495,8 +2493,8 @@ module Aws::Glacier
     # [Access Control Using AWS Identity and Access Management (IAM)][1].
     #
     # For conceptual information and the underlying REST API, see [Working
-    # with Archives in Amazon S3 Glacier][2] and [List Multipart Uploads
-    # ][3] in the *Amazon Glacier Developer Guide*.
+    # with Archives in Amazon Glacier][2] and [List Multipart Uploads ][3]
+    # in the *Amazon Glacier Developer Guide*.
     #
     #
     #
@@ -2507,7 +2505,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -2621,8 +2619,8 @@ module Aws::Glacier
     # [Access Control Using AWS Identity and Access Management (IAM)][1].
     #
     # For conceptual information and the underlying REST API, see [Working
-    # with Archives in Amazon S3 Glacier][2] and [List Parts][3] in the
-    # *Amazon Glacier Developer Guide*.
+    # with Archives in Amazon Glacier][2] and [List Parts][3] in the *Amazon
+    # Glacier Developer Guide*.
     #
     #
     #
@@ -2633,7 +2631,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -2734,9 +2732,9 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The AWS account ID of the account that owns the vault. You can either
     #   specify an AWS account ID or optionally a single '-' (hyphen), in
-    #   which case Amazon S3 Glacier uses the AWS account ID associated with
-    #   the credentials used to sign the request. If you use an account ID,
-    #   don't include any hyphens ('-') in the ID.
+    #   which case Amazon Glacier uses the AWS account ID associated with the
+    #   credentials used to sign the request. If you use an account ID, don't
+    #   include any hyphens ('-') in the ID.
     #
     # @return [Types::ListProvisionedCapacityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2789,7 +2787,7 @@ module Aws::Glacier
 
     # This operation lists all the tags attached to a vault. The operation
     # returns an empty map if there are no tags. For more information about
-    # tags, see [Tagging Amazon S3 Glacier Resources][1].
+    # tags, see [Tagging Amazon Glacier Resources][1].
     #
     #
     #
@@ -2798,7 +2796,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -2866,7 +2864,7 @@ module Aws::Glacier
     # [Access Control Using AWS Identity and Access Management (IAM)][1].
     #
     # For conceptual information and underlying REST API, see [Retrieving
-    # Vault Metadata in Amazon S3 Glacier][2] and [List Vaults ][3] in the
+    # Vault Metadata in Amazon Glacier][2] and [List Vaults ][3] in the
     # *Amazon Glacier Developer Guide*.
     #
     #
@@ -2907,7 +2905,6 @@ module Aws::Glacier
     #
     #   resp = client.list_vaults({
     #     account_id: "-", 
-    #     limit: , 
     #     marker: "", 
     #   })
     #
@@ -2957,9 +2954,9 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The AWS account ID of the account that owns the vault. You can either
     #   specify an AWS account ID or optionally a single '-' (hyphen), in
-    #   which case Amazon S3 Glacier uses the AWS account ID associated with
-    #   the credentials used to sign the request. If you use an account ID,
-    #   don't include any hyphens ('-') in the ID.
+    #   which case Amazon Glacier uses the AWS account ID associated with the
+    #   credentials used to sign the request. If you use an account ID, don't
+    #   include any hyphens ('-') in the ID.
     #
     # @return [Types::PurchaseProvisionedCapacityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2997,7 +2994,7 @@ module Aws::Glacier
     end
 
     # This operation removes one or more tags from the set of tags attached
-    # to a vault. For more information about tags, see [Tagging Amazon S3
+    # to a vault. For more information about tags, see [Tagging Amazon
     # Glacier Resources][1]. This operation is idempotent. The operation
     # will be successful, even if there are no tags attached to the vault.
     #
@@ -3008,7 +3005,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -3132,7 +3129,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -3182,7 +3179,7 @@ module Aws::Glacier
     # To configure vault notifications, send a PUT request to the
     # `notification-configuration` subresource of the vault. The request
     # should include a JSON document that provides an Amazon SNS topic and
-    # specific events for which you want Amazon S3 Glacier to send
+    # specific events for which you want Amazon Glacier to send
     # notifications to the topic.
     #
     # Amazon SNS topics must grant permission to the vault to be allowed to
@@ -3208,9 +3205,8 @@ module Aws::Glacier
     # [Access Control Using AWS Identity and Access Management (IAM)][1].
     #
     # For conceptual information and underlying REST API, see [Configuring
-    # Vault Notifications in Amazon S3 Glacier][2] and [Set Vault
-    # Notification Configuration ][3] in the *Amazon Glacier Developer
-    # Guide*.
+    # Vault Notifications in Amazon Glacier][2] and [Set Vault Notification
+    # Configuration ][3] in the *Amazon Glacier Developer Guide*.
     #
     #
     #
@@ -3221,7 +3217,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -3271,10 +3267,10 @@ module Aws::Glacier
 
     # This operation adds an archive to a vault. This is a synchronous
     # operation, and for a successful upload, your data is durably
-    # persisted. Amazon S3 Glacier returns the archive ID in the
+    # persisted. Amazon Glacier returns the archive ID in the
     # `x-amz-archive-id` header of the response.
     #
-    # You must use the archive ID to access your data in Amazon S3 Glacier.
+    # You must use the archive ID to access your data in Amazon Glacier.
     # After you upload an archive, you should save the archive ID returned
     # so that you can retrieve or delete the archive later. Besides saving
     # the archive ID, you can also index it and give it a friendly name to
@@ -3322,7 +3318,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -3395,7 +3391,7 @@ module Aws::Glacier
     # * **SHA256 tree hash does not match**To ensure that part data is not
     #   corrupted in transmission, you compute a SHA256 tree hash of the
     #   part and include it in your request. Upon receiving the part data,
-    #   Amazon S3 Glacier also computes a SHA256 tree hash. If these hash
+    #   Amazon Glacier also computes a SHA256 tree hash. If these hash
     #   values don't match, the operation fails. For information about
     #   computing a SHA256 tree hash, see [Computing Checksums][1].
     #
@@ -3443,7 +3439,7 @@ module Aws::Glacier
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
     #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '`-`' (hyphen), in which case Amazon S3 Glacier uses the AWS
+    #   single '`-`' (hyphen), in which case Amazon Glacier uses the AWS
     #   account ID associated with the credentials used to sign the request.
     #   If you use an account ID, do not include any hyphens ('-') in the
     #   ID.
@@ -3459,7 +3455,7 @@ module Aws::Glacier
     #
     # @option params [String] :range
     #   Identifies the range of bytes in the assembled archive that will be
-    #   uploaded in this part. Amazon S3 Glacier uses this information to
+    #   uploaded in this part. Amazon Glacier uses this information to
     #   assemble the archive in the proper sequence. The format of this header
     #   follows RFC 2616. An example header is Content-Range:bytes
     #   0-4194303/*.
@@ -3530,7 +3526,7 @@ module Aws::Glacier
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glacier'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

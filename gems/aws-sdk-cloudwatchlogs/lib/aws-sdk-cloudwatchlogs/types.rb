@@ -506,6 +506,52 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @!attribute [rw] import_id
+    #   The ID of the import task to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CancelImportTaskRequest AWS API Documentation
+    #
+    class CancelImportTaskRequest < Struct.new(
+      :import_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_id
+    #   The ID of the cancelled import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_statistics
+    #   Statistics about the import progress at the time of cancellation.
+    #   @return [Types::ImportStatistics]
+    #
+    # @!attribute [rw] import_status
+    #   The final status of the import task. This will be set to CANCELLED.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the import task was created, expressed as the
+    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp when the import task was cancelled, expressed as the
+    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CancelImportTaskResponse AWS API Documentation
+    #
+    class CancelImportTaskResponse < Struct.new(
+      :import_id,
+      :import_statistics,
+      :import_status,
+      :creation_time,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure containing information about the deafult settings and
     # available settings that you can use to configure a [delivery][1] or a
     # [delivery destination][2].
@@ -833,6 +879,56 @@ module Aws::CloudWatchLogs
     #
     class CreateExportTaskResponse < Struct.new(
       :task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_source_arn
+    #   The ARN of the source to import from.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_role_arn
+    #   The ARN of the IAM role that grants CloudWatch Logs permission to
+    #   import from the CloudTrail Lake Event Data Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_filter
+    #   Optional filters to constrain the import by CloudTrail event time.
+    #   Times are specified in Unix timestamp milliseconds. The range of
+    #   data being imported must be within the specified source's retention
+    #   period.
+    #   @return [Types::ImportFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateImportTaskRequest AWS API Documentation
+    #
+    class CreateImportTaskRequest < Struct.new(
+      :import_source_arn,
+      :import_role_arn,
+      :import_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_id
+    #   A unique identifier for the import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_destination_arn
+    #   The ARN of the CloudWatch Logs log group created as the destination
+    #   for the imported events.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the import task was created, expressed as the
+    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateImportTaskResponse AWS API Documentation
+    #
+    class CreateImportTaskResponse < Struct.new(
+      :import_id,
+      :import_destination_arn,
+      :creation_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2216,6 +2312,116 @@ module Aws::CloudWatchLogs
     #
     class DescribeFieldIndexesResponse < Struct.new(
       :field_indexes,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_id
+    #   The ID of the import task to get batch information for.
+    #   @return [String]
+    #
+    # @!attribute [rw] batch_import_status
+    #   Optional filter to list import batches by their status. Accepts
+    #   multiple status values: IN\_PROGRESS, CANCELLED, COMPLETED and
+    #   FAILED.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of import batches to return in the response.
+    #   Default: 10
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeImportTaskBatchesRequest AWS API Documentation
+    #
+    class DescribeImportTaskBatchesRequest < Struct.new(
+      :import_id,
+      :batch_import_status,
+      :limit,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_source_arn
+    #   The ARN of the source being imported from.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_id
+    #   The ID of the import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_batches
+    #   The list of import batches that match the request filters.
+    #   @return [Array<Types::ImportBatch>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of results. Not
+    #   present if there are no additional results to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeImportTaskBatchesResponse AWS API Documentation
+    #
+    class DescribeImportTaskBatchesResponse < Struct.new(
+      :import_source_arn,
+      :import_id,
+      :import_batches,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_id
+    #   Optional filter to describe a specific import task by its ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_status
+    #   Optional filter to list imports by their status. Valid values are
+    #   IN\_PROGRESS, CANCELLED, COMPLETED and FAILED.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_source_arn
+    #   Optional filter to list imports from a specific source
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of import tasks to return in the response.
+    #   Default: 50
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeImportTasksRequest AWS API Documentation
+    #
+    class DescribeImportTasksRequest < Struct.new(
+      :import_id,
+      :import_status,
+      :import_source_arn,
+      :limit,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] imports
+    #   The list of import tasks that match the request filters.
+    #   @return [Array<Types::Import>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of results. Not
+    #   present if there are no additional results to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeImportTasksResponse AWS API Documentation
+    #
+    class DescribeImportTasksResponse < Struct.new(
+      :imports,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4140,6 +4346,127 @@ module Aws::CloudWatchLogs
     class GroupingIdentifier < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An import job to move data from CloudTrail Event Data Store to
+    # CloudWatch.
+    #
+    # @!attribute [rw] import_id
+    #   The unique identifier of the import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_source_arn
+    #   The ARN of the CloudTrail Lake Event Data Store being imported from.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_status
+    #   The current status of the import task. Valid values are
+    #   IN\_PROGRESS, CANCELLED, COMPLETED and FAILED.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_destination_arn
+    #   The ARN of the managed CloudWatch Logs log group where the events
+    #   are being imported to.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_statistics
+    #   Statistics about the import progress
+    #   @return [Types::ImportStatistics]
+    #
+    # @!attribute [rw] import_filter
+    #   The filter criteria used for this import task.
+    #   @return [Types::ImportFilter]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the import task was created, expressed as the
+    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp when the import task was last updated, expressed as
+    #   the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_message
+    #   Error message related to any failed imports
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/Import AWS API Documentation
+    #
+    class Import < Struct.new(
+      :import_id,
+      :import_source_arn,
+      :import_status,
+      :import_destination_arn,
+      :import_statistics,
+      :import_filter,
+      :creation_time,
+      :last_updated_time,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of events being imported to CloudWatch
+    #
+    # @!attribute [rw] batch_id
+    #   The unique identifier of the import batch.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the import batch. Valid values are
+    #   IN\_PROGRESS, CANCELLED, COMPLETED and FAILED.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message if the batch failed to import. Only present when
+    #   status is FAILED.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ImportBatch AWS API Documentation
+    #
+    class ImportBatch < Struct.new(
+      :batch_id,
+      :status,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter criteria used for import tasks
+    #
+    # @!attribute [rw] start_event_time
+    #   The start of the time range for events to import, expressed as the
+    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_event_time
+    #   The end of the time range for events to import, expressed as the
+    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ImportFilter AWS API Documentation
+    #
+    class ImportFilter < Struct.new(
+      :start_event_time,
+      :end_event_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Statistics about the import progress
+    #
+    # @!attribute [rw] bytes_imported
+    #   The total number of bytes that have been imported to the managed log
+    #   group.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ImportStatistics AWS API Documentation
+    #
+    class ImportStatistics < Struct.new(
+      :bytes_imported)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6741,7 +7068,8 @@ module Aws::CloudWatchLogs
     end
 
     # @!attribute [rw] policy_name
-    #   A name for the policy. This must be unique within the account.
+    #   A name for the policy. This must be unique within the account and
+    #   cannot start with `aws/`.
     #   @return [String]
     #
     # @!attribute [rw] policy_document
@@ -6834,15 +7162,22 @@ module Aws::CloudWatchLogs
     #
     #   * **Fields** The array of field indexes to create.
     #
-    #   ^
+    #   * **FieldsV2** The object of field indexes to create along with
+    #     it's type.
     #
     #   It must contain at least one field index.
     #
     #   The following is an example of an index policy document that creates
-    #   two indexes, `RequestId` and `TransactionId`.
+    #   indexes with different types.
     #
-    #   `"policyDocument": "{ "Fields": [ "RequestId", "TransactionId"
-    #   ] }"`
+    #   `"policyDocument": "{ "Fields": [ "TransactionId" ],
+    #   "FieldsV2": {"RequestId": {"type": "FIELD_INDEX"},
+    #   "APIName": {"type": "FACET"}, "StatusCode": {"type":
+    #   "FACET"}}}"`
+    #
+    #   You can use `FieldsV2` to specify the type for each field. Supported
+    #   types are `FIELD_INDEX` and `FACET`. Field names within `Fields` and
+    #   `FieldsV2` must be mutually exclusive.
     #
     #
     #
@@ -6864,17 +7199,27 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] selection_criteria
     #   Use this parameter to apply the new policy to a subset of log groups
-    #   in the account.
+    #   in the account or a data source name and type combination.
     #
     #   Specifying `selectionCriteria` is valid only when you specify
     #   `SUBSCRIPTION_FILTER_POLICY`, `FIELD_INDEX_POLICY` or
     #   `TRANSFORMER_POLICY`for `policyType`.
     #
-    #   If `policyType` is `SUBSCRIPTION_FILTER_POLICY`, the only supported
-    #   `selectionCriteria` filter is `LogGroupName NOT IN []`
+    #   * If `policyType` is `SUBSCRIPTION_FILTER_POLICY`, the only
+    #     supported `selectionCriteria` filter is `LogGroupName NOT IN []`
     #
-    #   If `policyType` is `FIELD_INDEX_POLICY` or `TRANSFORMER_POLICY`, the
-    #   only supported `selectionCriteria` filter is `LogGroupNamePrefix`
+    #   * If `policyType` is `TRANSFORMER_POLICY`, the only supported
+    #     `selectionCriteria` filter is `LogGroupNamePrefix`
+    #
+    #   * If `policyType` is `FIELD_INDEX_POLICY`, the supported
+    #     `selectionCriteria` filters are:
+    #
+    #     * `LogGroupNamePrefix`
+    #
+    #     * `DataSourceName` AND `DataSourceType`
+    #     When you specify `selectionCriteria` for a field index policy you
+    #     can use either `LogGroupNamePrefix` by itself or `DataSourceName`
+    #     and `DataSourceType` together.
     #
     #   The `selectionCriteria` string can be up to 25KB in length. The
     #   length is determined by using its UTF-8 bytes.
@@ -7144,10 +7489,16 @@ module Aws::CloudWatchLogs
     #
     #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
     #
+    #   * For Network Firewall Proxy, the valid values are `ALERT_LOGS`,
+    #     `ALLOW_LOGS`, and `DENY_LOGS`.
+    #
     #   * For Network Load Balancer, the valid value is `NLB_ACCESS_LOGS`.
     #
     #   * For PCS, the valid values are `PCS_SCHEDULER_LOGS` and
     #     `PCS_JOBCOMP_LOGS`.
+    #
+    #   * For Quick Suite, the valid values are `CHAT_LOGS` and
+    #     `FEEDBACK_LOGS`.
     #
     #   * For Amazon Web Services RTB Fabric, the valid values is
     #     `APPLICATION_LOGS`.
@@ -7298,10 +7649,16 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] policy_document
     #   The index policy document, in JSON format. The following is an
-    #   example of an index policy document that creates two indexes,
-    #   `RequestId` and `TransactionId`.
+    #   example of an index policy document that creates indexes with
+    #   different types.
     #
-    #   `"policyDocument": "{ "Fields": [ "RequestId", "TransactionId" ] }"`
+    #   `"policyDocument": "{"Fields": [ "TransactionId" ], "FieldsV2":
+    #   {"RequestId": {"type": "FIELD_INDEX"}, "APIName": {"type": "FACET"},
+    #   "StatusCode": {"type": "FACET"}}}"`
+    #
+    #   You can use `FieldsV2` to specify the type for each field. Supported
+    #   types are `FIELD_INDEX` and `FACET`. Field names within `Fields` and
+    #   `FieldsV2` must be mutually exclusive.
     #
     #   The policy document must include at least one field index. For more
     #   information about the fields that can be included and other

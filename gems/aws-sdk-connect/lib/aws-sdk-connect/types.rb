@@ -29013,6 +29013,19 @@ module Aws::Connect
     #   may be a customer number from your CRM.
     #   @return [String]
     #
+    # @!attribute [rw] disconnect_on_customer_exit
+    #   A list of participant types to automatically disconnect when the end
+    #   customer ends the chat session, allowing them to continue through
+    #   disconnect flows such as surveys or feedback forms.
+    #
+    #   Valid value: `AGENT`.
+    #
+    #   With the `DisconnectOnCustomerExit` parameter, you can configure
+    #   automatic agent disconnection when end customers end the chat,
+    #   ensuring that disconnect flows are triggered consistently regardless
+    #   of which participant disconnects first.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactRequest AWS API Documentation
     #
     class StartChatContactRequest < Struct.new(
@@ -29028,7 +29041,8 @@ module Aws::Connect
       :persistent_chat,
       :related_contact_id,
       :segment_attributes,
-      :customer_id)
+      :customer_id,
+      :disconnect_on_customer_exit)
       SENSITIVE = [:customer_id]
       include Aws::Structure
     end
@@ -29469,6 +29483,10 @@ module Aws::Connect
     #   A chat message.
     #   @return [Types::ChatMessage]
     #
+    # @!attribute [rw] initial_templated_system_message
+    #   Information about template message configuration.
+    #   @return [Types::TemplatedMessageConfig]
+    #
     # @!attribute [rw] related_contact_id
     #   The unique identifier for an Amazon Connect contact. This identifier
     #   is related to the contact starting.
@@ -29526,6 +29544,7 @@ module Aws::Connect
       :chat_duration_in_minutes,
       :participant_details,
       :initial_system_message,
+      :initial_templated_system_message,
       :related_contact_id,
       :supported_messaging_content_types,
       :client_token)

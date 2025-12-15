@@ -246,6 +246,7 @@ module Aws::Route53Resolver
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceUnavailableException = Shapes::StructureShape.new(name: 'ResourceUnavailableException')
     Rfc3339TimeString = Shapes::StringShape.new(name: 'Rfc3339TimeString')
+    RniEnhancedMetricsEnabled = Shapes::BooleanShape.new(name: 'RniEnhancedMetricsEnabled')
     RuleTypeOption = Shapes::StringShape.new(name: 'RuleTypeOption')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     ServerNameIndication = Shapes::StringShape.new(name: 'ServerNameIndication')
@@ -266,6 +267,7 @@ module Aws::Route53Resolver
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TargetAddress = Shapes::StructureShape.new(name: 'TargetAddress')
     TargetList = Shapes::ListShape.new(name: 'TargetList')
+    TargetNameServerMetricsEnabled = Shapes::BooleanShape.new(name: 'TargetNameServerMetricsEnabled')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UnknownResourceException = Shapes::StructureShape.new(name: 'UnknownResourceException')
     Unsigned = Shapes::IntegerShape.new(name: 'Unsigned')
@@ -390,6 +392,8 @@ module Aws::Route53Resolver
     CreateResolverEndpointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags", metadata: {"box" => true}))
     CreateResolverEndpointRequest.add_member(:resolver_endpoint_type, Shapes::ShapeRef.new(shape: ResolverEndpointType, location_name: "ResolverEndpointType", metadata: {"box" => true}))
     CreateResolverEndpointRequest.add_member(:protocols, Shapes::ShapeRef.new(shape: ProtocolList, location_name: "Protocols", metadata: {"box" => true}))
+    CreateResolverEndpointRequest.add_member(:rni_enhanced_metrics_enabled, Shapes::ShapeRef.new(shape: RniEnhancedMetricsEnabled, location_name: "RniEnhancedMetricsEnabled", metadata: {"box" => true}))
+    CreateResolverEndpointRequest.add_member(:target_name_server_metrics_enabled, Shapes::ShapeRef.new(shape: TargetNameServerMetricsEnabled, location_name: "TargetNameServerMetricsEnabled", metadata: {"box" => true}))
     CreateResolverEndpointRequest.struct_class = Types::CreateResolverEndpointRequest
 
     CreateResolverEndpointResponse.add_member(:resolver_endpoint, Shapes::ShapeRef.new(shape: ResolverEndpoint, location_name: "ResolverEndpoint"))
@@ -965,6 +969,8 @@ module Aws::Route53Resolver
     ResolverEndpoint.add_member(:preferred_instance_type, Shapes::ShapeRef.new(shape: OutpostInstanceType, location_name: "PreferredInstanceType"))
     ResolverEndpoint.add_member(:resolver_endpoint_type, Shapes::ShapeRef.new(shape: ResolverEndpointType, location_name: "ResolverEndpointType"))
     ResolverEndpoint.add_member(:protocols, Shapes::ShapeRef.new(shape: ProtocolList, location_name: "Protocols"))
+    ResolverEndpoint.add_member(:rni_enhanced_metrics_enabled, Shapes::ShapeRef.new(shape: RniEnhancedMetricsEnabled, location_name: "RniEnhancedMetricsEnabled"))
+    ResolverEndpoint.add_member(:target_name_server_metrics_enabled, Shapes::ShapeRef.new(shape: TargetNameServerMetricsEnabled, location_name: "TargetNameServerMetricsEnabled"))
     ResolverEndpoint.struct_class = Types::ResolverEndpoint
 
     ResolverEndpoints.member = Shapes::ShapeRef.new(shape: ResolverEndpoint)
@@ -1164,6 +1170,8 @@ module Aws::Route53Resolver
     UpdateResolverEndpointRequest.add_member(:resolver_endpoint_type, Shapes::ShapeRef.new(shape: ResolverEndpointType, location_name: "ResolverEndpointType", metadata: {"box" => true}))
     UpdateResolverEndpointRequest.add_member(:update_ip_addresses, Shapes::ShapeRef.new(shape: UpdateIpAddresses, location_name: "UpdateIpAddresses", metadata: {"box" => true}))
     UpdateResolverEndpointRequest.add_member(:protocols, Shapes::ShapeRef.new(shape: ProtocolList, location_name: "Protocols", metadata: {"box" => true}))
+    UpdateResolverEndpointRequest.add_member(:rni_enhanced_metrics_enabled, Shapes::ShapeRef.new(shape: RniEnhancedMetricsEnabled, location_name: "RniEnhancedMetricsEnabled", metadata: {"box" => true}))
+    UpdateResolverEndpointRequest.add_member(:target_name_server_metrics_enabled, Shapes::ShapeRef.new(shape: TargetNameServerMetricsEnabled, location_name: "TargetNameServerMetricsEnabled", metadata: {"box" => true}))
     UpdateResolverEndpointRequest.struct_class = Types::UpdateResolverEndpointRequest
 
     UpdateResolverEndpointResponse.add_member(:resolver_endpoint, Shapes::ShapeRef.new(shape: ResolverEndpoint, location_name: "ResolverEndpoint"))

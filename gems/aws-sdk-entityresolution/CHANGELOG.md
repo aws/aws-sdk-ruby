@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2025-12-15)
+------------------
+
+* Feature - Support Customer Profiles Integration for AWS Entity Resolution
+
 1.40.0 (2025-11-21)
 ------------------
 

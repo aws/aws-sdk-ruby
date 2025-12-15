@@ -140,6 +140,7 @@ module Aws::DataSync
     InputTagList = Shapes::ListShape.new(name: 'InputTagList')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    ItemCount = Shapes::IntegerShape.new(name: 'ItemCount')
     KerberosKeytabFile = Shapes::BlobShape.new(name: 'KerberosKeytabFile')
     KerberosKrb5ConfFile = Shapes::BlobShape.new(name: 'KerberosKrb5ConfFile')
     KerberosPrincipal = Shapes::StringShape.new(name: 'KerberosPrincipal')
@@ -241,6 +242,8 @@ module Aws::DataSync
     TaskExecutionArn = Shapes::StringShape.new(name: 'TaskExecutionArn')
     TaskExecutionFilesFailedDetail = Shapes::StructureShape.new(name: 'TaskExecutionFilesFailedDetail')
     TaskExecutionFilesListedDetail = Shapes::StructureShape.new(name: 'TaskExecutionFilesListedDetail')
+    TaskExecutionFoldersFailedDetail = Shapes::StructureShape.new(name: 'TaskExecutionFoldersFailedDetail')
+    TaskExecutionFoldersListedDetail = Shapes::StructureShape.new(name: 'TaskExecutionFoldersListedDetail')
     TaskExecutionList = Shapes::ListShape.new(name: 'TaskExecutionList')
     TaskExecutionListEntry = Shapes::StructureShape.new(name: 'TaskExecutionListEntry')
     TaskExecutionResultDetail = Shapes::StructureShape.new(name: 'TaskExecutionResultDetail')
@@ -459,6 +462,8 @@ module Aws::DataSync
     CreateLocationSmbRequest.add_member(:user, Shapes::ShapeRef.new(shape: SmbUser, location_name: "User"))
     CreateLocationSmbRequest.add_member(:domain, Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
     CreateLocationSmbRequest.add_member(:password, Shapes::ShapeRef.new(shape: SmbPassword, location_name: "Password"))
+    CreateLocationSmbRequest.add_member(:cmk_secret_config, Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    CreateLocationSmbRequest.add_member(:custom_secret_config, Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
     CreateLocationSmbRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, required: true, location_name: "AgentArns"))
     CreateLocationSmbRequest.add_member(:mount_options, Shapes::ShapeRef.new(shape: SmbMountOptions, location_name: "MountOptions"))
     CreateLocationSmbRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
@@ -657,6 +662,9 @@ module Aws::DataSync
     DescribeLocationSmbResponse.add_member(:dns_ip_addresses, Shapes::ShapeRef.new(shape: DnsIpList, location_name: "DnsIpAddresses"))
     DescribeLocationSmbResponse.add_member(:kerberos_principal, Shapes::ShapeRef.new(shape: KerberosPrincipal, location_name: "KerberosPrincipal"))
     DescribeLocationSmbResponse.add_member(:authentication_type, Shapes::ShapeRef.new(shape: SmbAuthenticationType, location_name: "AuthenticationType"))
+    DescribeLocationSmbResponse.add_member(:managed_secret_config, Shapes::ShapeRef.new(shape: ManagedSecretConfig, location_name: "ManagedSecretConfig"))
+    DescribeLocationSmbResponse.add_member(:cmk_secret_config, Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    DescribeLocationSmbResponse.add_member(:custom_secret_config, Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
     DescribeLocationSmbResponse.struct_class = Types::DescribeLocationSmbResponse
 
     DescribeTaskExecutionRequest.add_member(:task_execution_arn, Shapes::ShapeRef.new(shape: TaskExecutionArn, required: true, location_name: "TaskExecutionArn"))
@@ -686,6 +694,15 @@ module Aws::DataSync
     DescribeTaskExecutionResponse.add_member(:files_prepared, Shapes::ShapeRef.new(shape: long, location_name: "FilesPrepared"))
     DescribeTaskExecutionResponse.add_member(:files_listed, Shapes::ShapeRef.new(shape: TaskExecutionFilesListedDetail, location_name: "FilesListed"))
     DescribeTaskExecutionResponse.add_member(:files_failed, Shapes::ShapeRef.new(shape: TaskExecutionFilesFailedDetail, location_name: "FilesFailed"))
+    DescribeTaskExecutionResponse.add_member(:estimated_folders_to_delete, Shapes::ShapeRef.new(shape: ItemCount, location_name: "EstimatedFoldersToDelete"))
+    DescribeTaskExecutionResponse.add_member(:estimated_folders_to_transfer, Shapes::ShapeRef.new(shape: ItemCount, location_name: "EstimatedFoldersToTransfer"))
+    DescribeTaskExecutionResponse.add_member(:folders_skipped, Shapes::ShapeRef.new(shape: ItemCount, location_name: "FoldersSkipped"))
+    DescribeTaskExecutionResponse.add_member(:folders_prepared, Shapes::ShapeRef.new(shape: ItemCount, location_name: "FoldersPrepared"))
+    DescribeTaskExecutionResponse.add_member(:folders_transferred, Shapes::ShapeRef.new(shape: ItemCount, location_name: "FoldersTransferred"))
+    DescribeTaskExecutionResponse.add_member(:folders_verified, Shapes::ShapeRef.new(shape: ItemCount, location_name: "FoldersVerified"))
+    DescribeTaskExecutionResponse.add_member(:folders_deleted, Shapes::ShapeRef.new(shape: ItemCount, location_name: "FoldersDeleted"))
+    DescribeTaskExecutionResponse.add_member(:folders_listed, Shapes::ShapeRef.new(shape: TaskExecutionFoldersListedDetail, location_name: "FoldersListed"))
+    DescribeTaskExecutionResponse.add_member(:folders_failed, Shapes::ShapeRef.new(shape: TaskExecutionFoldersFailedDetail, location_name: "FoldersFailed"))
     DescribeTaskExecutionResponse.add_member(:launch_time, Shapes::ShapeRef.new(shape: Time, location_name: "LaunchTime"))
     DescribeTaskExecutionResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "EndTime"))
     DescribeTaskExecutionResponse.struct_class = Types::DescribeTaskExecutionResponse
@@ -953,6 +970,17 @@ module Aws::DataSync
     TaskExecutionFilesListedDetail.add_member(:at_destination_for_delete, Shapes::ShapeRef.new(shape: long, location_name: "AtDestinationForDelete"))
     TaskExecutionFilesListedDetail.struct_class = Types::TaskExecutionFilesListedDetail
 
+    TaskExecutionFoldersFailedDetail.add_member(:list, Shapes::ShapeRef.new(shape: long, location_name: "List"))
+    TaskExecutionFoldersFailedDetail.add_member(:prepare, Shapes::ShapeRef.new(shape: long, location_name: "Prepare"))
+    TaskExecutionFoldersFailedDetail.add_member(:transfer, Shapes::ShapeRef.new(shape: long, location_name: "Transfer"))
+    TaskExecutionFoldersFailedDetail.add_member(:verify, Shapes::ShapeRef.new(shape: long, location_name: "Verify"))
+    TaskExecutionFoldersFailedDetail.add_member(:delete, Shapes::ShapeRef.new(shape: long, location_name: "Delete"))
+    TaskExecutionFoldersFailedDetail.struct_class = Types::TaskExecutionFoldersFailedDetail
+
+    TaskExecutionFoldersListedDetail.add_member(:at_source, Shapes::ShapeRef.new(shape: long, location_name: "AtSource"))
+    TaskExecutionFoldersListedDetail.add_member(:at_destination_for_delete, Shapes::ShapeRef.new(shape: long, location_name: "AtDestinationForDelete"))
+    TaskExecutionFoldersListedDetail.struct_class = Types::TaskExecutionFoldersListedDetail
+
     TaskExecutionList.member = Shapes::ShapeRef.new(shape: TaskExecutionListEntry)
 
     TaskExecutionListEntry.add_member(:task_execution_arn, Shapes::ShapeRef.new(shape: TaskExecutionArn, location_name: "TaskExecutionArn"))
@@ -1120,6 +1148,8 @@ module Aws::DataSync
     UpdateLocationSmbRequest.add_member(:user, Shapes::ShapeRef.new(shape: SmbUser, location_name: "User"))
     UpdateLocationSmbRequest.add_member(:domain, Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
     UpdateLocationSmbRequest.add_member(:password, Shapes::ShapeRef.new(shape: SmbPassword, location_name: "Password"))
+    UpdateLocationSmbRequest.add_member(:cmk_secret_config, Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))
+    UpdateLocationSmbRequest.add_member(:custom_secret_config, Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
     UpdateLocationSmbRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
     UpdateLocationSmbRequest.add_member(:mount_options, Shapes::ShapeRef.new(shape: SmbMountOptions, location_name: "MountOptions"))
     UpdateLocationSmbRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: SmbAuthenticationType, location_name: "AuthenticationType"))

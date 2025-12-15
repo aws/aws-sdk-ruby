@@ -440,6 +440,32 @@ module Aws
                                     visual_mode: ("Dark" | "Light")?,
                                     hidden_toolbar_items: Array[("Windows" | "DualMonitor" | "FullScreen" | "Webcam" | "Microphone")]?,
                                     max_display_resolution: ("size4096X2160" | "size3840X2160" | "size3440X1440" | "size2560X1440" | "size1920X1080" | "size1280X720" | "size1024X768" | "size800X600")?
+                                  },
+                                  ?branding_configuration_input: {
+                                    logo: {
+                                      blob: ::String?,
+                                      s3_uri: ::String?
+                                    },
+                                    wallpaper: {
+                                      blob: ::String?,
+                                      s3_uri: ::String?
+                                    },
+                                    favicon: {
+                                      blob: ::String?,
+                                      s3_uri: ::String?
+                                    },
+                                    localized_strings: Hash[("de-DE" | "en-US" | "es-ES" | "fr-FR" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "zh-CN" | "zh-TW"), {
+                                        browser_tab_title: ::String,
+                                        welcome_text: ::String,
+                                        login_title: ::String?,
+                                        login_description: ::String?,
+                                        login_button_text: ::String?,
+                                        contact_link: ::String?,
+                                        contact_button_text: ::String?,
+                                        loading_text: ::String?
+                                      }],
+                                    color_theme: ("Light" | "Dark"),
+                                    terms_of_service: ::String?
                                   }
                                 ) -> _CreateUserSettingsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserSettingsResponseSuccess
@@ -1139,6 +1165,32 @@ module Aws
                                     visual_mode: ("Dark" | "Light")?,
                                     hidden_toolbar_items: Array[("Windows" | "DualMonitor" | "FullScreen" | "Webcam" | "Microphone")]?,
                                     max_display_resolution: ("size4096X2160" | "size3840X2160" | "size3440X1440" | "size2560X1440" | "size1920X1080" | "size1280X720" | "size1024X768" | "size800X600")?
+                                  },
+                                  ?branding_configuration_input: {
+                                    logo: {
+                                      blob: ::String?,
+                                      s3_uri: ::String?
+                                    }?,
+                                    wallpaper: {
+                                      blob: ::String?,
+                                      s3_uri: ::String?
+                                    }?,
+                                    favicon: {
+                                      blob: ::String?,
+                                      s3_uri: ::String?
+                                    }?,
+                                    localized_strings: Hash[("de-DE" | "en-US" | "es-ES" | "fr-FR" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "zh-CN" | "zh-TW"), {
+                                        browser_tab_title: ::String,
+                                        welcome_text: ::String,
+                                        login_title: ::String?,
+                                        login_description: ::String?,
+                                        login_button_text: ::String?,
+                                        contact_link: ::String?,
+                                        contact_button_text: ::String?,
+                                        loading_text: ::String?
+                                      }]?,
+                                    color_theme: ("Light" | "Dark")?,
+                                    terms_of_service: ::String?
                                   }
                                 ) -> _UpdateUserSettingsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserSettingsResponseSuccess

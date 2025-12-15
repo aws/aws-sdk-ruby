@@ -188,6 +188,23 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # Configuration parameters for customizing HTTP requests sent to the ad
+    # decision server (ADS). This allows you to specify the HTTP method,
+    # headers, request body, and compression settings for ADS requests.
+    #
+    # @!attribute [rw] http_request
+    #   The HTTP request configuration parameters for the ad decision
+    #   server.
+    #   @return [Types::HttpRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/AdDecisionServerConfiguration AWS API Documentation
+    #
+    class AdDecisionServerConfiguration < Struct.new(
+      :http_request)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # For HLS, when set to `true`, MediaTailor passes through
     # `EXT-X-CUE-IN`, `EXT-X-CUE-OUT`, and `EXT-X-SPLICEPOINT-SCTE35` ad
     # markers from the origin manifest to the MediaTailor personalized
@@ -2340,6 +2357,12 @@ module Aws::MediaTailor
     #   priority MediaTailor uses when inserting ads.
     #   @return [Types::AdConditioningConfiguration]
     #
+    # @!attribute [rw] ad_decision_server_configuration
+    #   The configuration for customizing HTTP requests to the ad decision
+    #   server (ADS). This includes settings for request method, headers,
+    #   body content, and compression options.
+    #   @return [Types::AdDecisionServerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetPlaybackConfigurationResponse AWS API Documentation
     #
     class GetPlaybackConfigurationResponse < Struct.new(
@@ -2363,7 +2386,8 @@ module Aws::MediaTailor
       :tags,
       :transcode_profile_name,
       :video_content_source_url,
-      :ad_conditioning_configuration)
+      :ad_conditioning_configuration,
+      :ad_decision_server_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2530,6 +2554,42 @@ module Aws::MediaTailor
       :path,
       :source_group,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # HTTP request configuration parameters that define how MediaTailor
+    # communicates with the ad decision server.
+    #
+    # @!attribute [rw] method
+    #   The HTTP method to use when making requests to the ad decision
+    #   server. Supported values are `GET` and `POST`.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The request body content to send with HTTP requests to the ad
+    #   decision server. This value is only eligible for `POST` requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] headers
+    #   Custom HTTP headers to include in requests to the ad decision
+    #   server. Specify headers as key-value pairs. This value is only
+    #   eligible for `POST` requests.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] compress_request
+    #   The compression method to apply to requests sent to the ad decision
+    #   server. Supported values are `NONE` and `GZIP`. This value is only
+    #   eligible for `POST` requests.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/HttpRequest AWS API Documentation
+    #
+    class HttpRequest < Struct.new(
+      :method,
+      :body,
+      :headers,
+      :compress_request)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3362,6 +3422,13 @@ module Aws::MediaTailor
     #   priority MediaTailor uses when inserting ads.
     #   @return [Types::AdConditioningConfiguration]
     #
+    # @!attribute [rw] ad_decision_server_configuration
+    #   Configuration parameters for customizing HTTP requests sent to the
+    #   ad decision server (ADS). This allows you to specify the HTTP
+    #   method, headers, request body, and compression settings for ADS
+    #   requests.
+    #   @return [Types::AdDecisionServerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PlaybackConfiguration AWS API Documentation
     #
     class PlaybackConfiguration < Struct.new(
@@ -3385,7 +3452,8 @@ module Aws::MediaTailor
       :tags,
       :transcode_profile_name,
       :video_content_source_url,
-      :ad_conditioning_configuration)
+      :ad_conditioning_configuration,
+      :ad_decision_server_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3455,19 +3523,22 @@ module Aws::MediaTailor
     #   @return [Time]
     #
     # @!attribute [rw] traffic_shaping_type
-    #   Indicates the type of traffic shaping used for prefetch traffic
-    #   shaping and limiting the number of requests to the ADS at one time.
+    #   Indicates the type of traffic shaping used to limit the number of
+    #   requests to the ADS at one time.
     #   @return [String]
     #
     # @!attribute [rw] traffic_shaping_retrieval_window
-    #   Configuration for spreading ADS traffic across a set window instead
-    #   of sending ADS requests for all sessions at the same time.
+    #   The configuration that tells Elemental MediaTailor how many seconds
+    #   to spread out requests to the ad decision server (ADS). Instead of
+    #   sending ADS requests for all sessions at the same time, MediaTailor
+    #   spreads the requests across the amount of time specified in the
+    #   retrieval window.
     #   @return [Types::TrafficShapingRetrievalWindow]
     #
     # @!attribute [rw] traffic_shaping_tps_configuration
-    #   The configuration for TPS-based traffic shaping that limits the
-    #   number of requests to the ad decision server (ADS) based on
-    #   transactions per second instead of time windows.
+    #   The configuration for TPS-based traffic shaping. This approach
+    #   limits requests to the ad decision server (ADS) based on
+    #   transactions per second and concurrent users.
     #   @return [Types::TrafficShapingTpsConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PrefetchRetrieval AWS API Documentation
@@ -3708,6 +3779,12 @@ module Aws::MediaTailor
     #   priority MediaTailor uses when inserting ads.
     #   @return [Types::AdConditioningConfiguration]
     #
+    # @!attribute [rw] ad_decision_server_configuration
+    #   The configuration for customizing HTTP requests to the ad decision
+    #   server (ADS). This includes settings for request method, headers,
+    #   body content, and compression options.
+    #   @return [Types::AdDecisionServerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PutPlaybackConfigurationRequest AWS API Documentation
     #
     class PutPlaybackConfigurationRequest < Struct.new(
@@ -3726,7 +3803,8 @@ module Aws::MediaTailor
       :tags,
       :transcode_profile_name,
       :video_content_source_url,
-      :ad_conditioning_configuration)
+      :ad_conditioning_configuration,
+      :ad_decision_server_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3881,6 +3959,12 @@ module Aws::MediaTailor
     #   priority MediaTailor uses when inserting ads.
     #   @return [Types::AdConditioningConfiguration]
     #
+    # @!attribute [rw] ad_decision_server_configuration
+    #   The configuration for customizing HTTP requests to the ad decision
+    #   server (ADS). This includes settings for request method, headers,
+    #   body content, and compression options.
+    #   @return [Types::AdDecisionServerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PutPlaybackConfigurationResponse AWS API Documentation
     #
     class PutPlaybackConfigurationResponse < Struct.new(
@@ -3904,7 +3988,8 @@ module Aws::MediaTailor
       :tags,
       :transcode_profile_name,
       :video_content_source_url,
-      :ad_conditioning_configuration)
+      :ad_conditioning_configuration,
+      :ad_decision_server_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3982,19 +4067,22 @@ module Aws::MediaTailor
     #   @return [Integer]
     #
     # @!attribute [rw] traffic_shaping_type
-    #   Indicates the type of traffic shaping used for traffic shaping and
-    #   limiting the number of requests to the ADS at one time.
+    #   Indicates the type of traffic shaping used to limit the number of
+    #   requests to the ADS at one time.
     #   @return [String]
     #
     # @!attribute [rw] traffic_shaping_retrieval_window
-    #   Configuration for spreading ADS traffic across a set window instead
-    #   of sending ADS requests for all sessions at the same time.
+    #   The configuration that tells Elemental MediaTailor how many seconds
+    #   to spread out requests to the ad decision server (ADS). Instead of
+    #   sending ADS requests for all sessions at the same time, MediaTailor
+    #   spreads the requests across the amount of time specified in the
+    #   retrieval window.
     #   @return [Types::TrafficShapingRetrievalWindow]
     #
     # @!attribute [rw] traffic_shaping_tps_configuration
-    #   The configuration for TPS-based traffic shaping that limits the
-    #   number of requests to the ad decision server (ADS) based on
-    #   transactions per second instead of time windows.
+    #   The configuration for TPS-based traffic shaping. This approach
+    #   limits requests to the ad decision server (ADS) based on
+    #   transactions per second and concurrent users.
     #   @return [Types::TrafficShapingTpsConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/RecurringRetrieval AWS API Documentation
@@ -4560,10 +4648,11 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
-    # The configuration that tells Elemental MediaTailor how to spread out
-    # requests to the ad decision server (ADS). Instead of sending ADS
-    # requests for all sessions at the same time, MediaTailor spreads the
-    # requests across the amount of time specified in the retrieval window.
+    # The configuration that tells Elemental MediaTailor how many seconds to
+    # spread out requests to the ad decision server (ADS). Instead of
+    # sending ADS requests for all sessions at the same time, MediaTailor
+    # spreads the requests across the amount of time specified in the
+    # retrieval window.
     #
     # @!attribute [rw] retrieval_window_duration_seconds
     #   The amount of time, in seconds, that MediaTailor spreads prefetch
@@ -4580,8 +4669,7 @@ module Aws::MediaTailor
 
     # The configuration for TPS-based traffic shaping. This approach limits
     # requests to the ad decision server (ADS) based on transactions per
-    # second and concurrent users, providing more intuitive capacity
-    # management compared to time-window based traffic shaping.
+    # second and concurrent users.
     #
     # @!attribute [rw] peak_tps
     #   The maximum number of transactions per second (TPS) that your ad

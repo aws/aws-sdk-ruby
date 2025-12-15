@@ -2086,6 +2086,7 @@ module Aws::MediaTailor
     #   * {Types::GetPlaybackConfigurationResponse#transcode_profile_name #transcode_profile_name} => String
     #   * {Types::GetPlaybackConfigurationResponse#video_content_source_url #video_content_source_url} => String
     #   * {Types::GetPlaybackConfigurationResponse#ad_conditioning_configuration #ad_conditioning_configuration} => Types::AdConditioningConfiguration
+    #   * {Types::GetPlaybackConfigurationResponse#ad_decision_server_configuration #ad_decision_server_configuration} => Types::AdDecisionServerConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -2134,6 +2135,11 @@ module Aws::MediaTailor
     #   resp.transcode_profile_name #=> String
     #   resp.video_content_source_url #=> String
     #   resp.ad_conditioning_configuration.streaming_media_file_conditioning #=> String, one of "TRANSCODE", "NONE"
+    #   resp.ad_decision_server_configuration.http_request.method #=> String, one of "GET", "POST"
+    #   resp.ad_decision_server_configuration.http_request.body #=> String
+    #   resp.ad_decision_server_configuration.http_request.headers #=> Hash
+    #   resp.ad_decision_server_configuration.http_request.headers["__string"] #=> String
+    #   resp.ad_decision_server_configuration.http_request.compress_request #=> String, one of "NONE", "GZIP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetPlaybackConfiguration AWS API Documentation
     #
@@ -2530,6 +2536,11 @@ module Aws::MediaTailor
     #   resp.items[0].transcode_profile_name #=> String
     #   resp.items[0].video_content_source_url #=> String
     #   resp.items[0].ad_conditioning_configuration.streaming_media_file_conditioning #=> String, one of "TRANSCODE", "NONE"
+    #   resp.items[0].ad_decision_server_configuration.http_request.method #=> String, one of "GET", "POST"
+    #   resp.items[0].ad_decision_server_configuration.http_request.body #=> String
+    #   resp.items[0].ad_decision_server_configuration.http_request.headers #=> Hash
+    #   resp.items[0].ad_decision_server_configuration.http_request.headers["__string"] #=> String
+    #   resp.items[0].ad_decision_server_configuration.http_request.compress_request #=> String, one of "NONE", "GZIP"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListPlaybackConfigurations AWS API Documentation
@@ -2963,6 +2974,11 @@ module Aws::MediaTailor
     #   on ads that the ad decision server (ADS) returns, and what priority
     #   MediaTailor uses when inserting ads.
     #
+    # @option params [Types::AdDecisionServerConfiguration] :ad_decision_server_configuration
+    #   The configuration for customizing HTTP requests to the ad decision
+    #   server (ADS). This includes settings for request method, headers, body
+    #   content, and compression options.
+    #
     # @return [Types::PutPlaybackConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutPlaybackConfigurationResponse#ad_decision_server_url #ad_decision_server_url} => String
@@ -2986,6 +3002,7 @@ module Aws::MediaTailor
     #   * {Types::PutPlaybackConfigurationResponse#transcode_profile_name #transcode_profile_name} => String
     #   * {Types::PutPlaybackConfigurationResponse#video_content_source_url #video_content_source_url} => String
     #   * {Types::PutPlaybackConfigurationResponse#ad_conditioning_configuration #ad_conditioning_configuration} => Types::AdConditioningConfiguration
+    #   * {Types::PutPlaybackConfigurationResponse#ad_decision_server_configuration #ad_decision_server_configuration} => Types::AdDecisionServerConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -3034,6 +3051,16 @@ module Aws::MediaTailor
     #     ad_conditioning_configuration: {
     #       streaming_media_file_conditioning: "TRANSCODE", # required, accepts TRANSCODE, NONE
     #     },
+    #     ad_decision_server_configuration: {
+    #       http_request: {
+    #         method: "GET", # accepts GET, POST
+    #         body: "__string",
+    #         headers: {
+    #           "__string" => "__string",
+    #         },
+    #         compress_request: "NONE", # accepts NONE, GZIP
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -3077,6 +3104,11 @@ module Aws::MediaTailor
     #   resp.transcode_profile_name #=> String
     #   resp.video_content_source_url #=> String
     #   resp.ad_conditioning_configuration.streaming_media_file_conditioning #=> String, one of "TRANSCODE", "NONE"
+    #   resp.ad_decision_server_configuration.http_request.method #=> String, one of "GET", "POST"
+    #   resp.ad_decision_server_configuration.http_request.body #=> String
+    #   resp.ad_decision_server_configuration.http_request.headers #=> Hash
+    #   resp.ad_decision_server_configuration.http_request.headers["__string"] #=> String
+    #   resp.ad_decision_server_configuration.http_request.compress_request #=> String, one of "NONE", "GZIP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PutPlaybackConfiguration AWS API Documentation
     #
@@ -3757,7 +3789,7 @@ module Aws::MediaTailor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -141,6 +141,8 @@ module Aws::Route53Resolver
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor resolver_endpoint_type: ("IPV6" | "IPV4" | "DUALSTACK")
       attr_accessor protocols: ::Array[("DoH" | "Do53" | "DoH-FIPS")]
+      attr_accessor rni_enhanced_metrics_enabled: bool
+      attr_accessor target_name_server_metrics_enabled: bool
       SENSITIVE: []
     end
 
@@ -926,6 +928,8 @@ module Aws::Route53Resolver
       attr_accessor preferred_instance_type: ::String
       attr_accessor resolver_endpoint_type: ("IPV6" | "IPV4" | "DUALSTACK")
       attr_accessor protocols: ::Array[("DoH" | "Do53" | "DoH-FIPS")]
+      attr_accessor rni_enhanced_metrics_enabled: bool
+      attr_accessor target_name_server_metrics_enabled: bool
       SENSITIVE: []
     end
 
@@ -1171,6 +1175,8 @@ module Aws::Route53Resolver
       attr_accessor resolver_endpoint_type: ("IPV6" | "IPV4" | "DUALSTACK")
       attr_accessor update_ip_addresses: ::Array[Types::UpdateIpAddress]
       attr_accessor protocols: ::Array[("DoH" | "Do53" | "DoH-FIPS")]
+      attr_accessor rni_enhanced_metrics_enabled: bool
+      attr_accessor target_name_server_metrics_enabled: bool
       SENSITIVE: []
     end
 

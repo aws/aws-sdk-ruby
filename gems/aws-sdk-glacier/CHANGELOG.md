@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2025-12-15)
+------------------
+
+* Feature - Documentation updates for Amazon Glacier's maintenance mode
+
 1.86.0 (2025-11-21)
 ------------------
 

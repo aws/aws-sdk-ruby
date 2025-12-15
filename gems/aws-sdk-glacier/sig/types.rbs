@@ -440,6 +440,13 @@ module Aws::Glacier
       SENSITIVE: []
     end
 
+    class NoLongerSupportedException
+      attr_accessor type: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class OutputLocation
       attr_accessor s3: Types::S3Location
       SENSITIVE: []

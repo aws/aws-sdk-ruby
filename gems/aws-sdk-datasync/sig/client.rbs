@@ -392,6 +392,14 @@ module Aws
                                  ?user: ::String,
                                  ?domain: ::String,
                                  ?password: ::String,
+                                 ?cmk_secret_config: {
+                                   secret_arn: ::String?,
+                                   kms_key_arn: ::String?
+                                 },
+                                 ?custom_secret_config: {
+                                   secret_arn: ::String?,
+                                   secret_access_role_arn: ::String?
+                                 },
                                  agent_arns: Array[::String],
                                  ?mount_options: {
                                    version: ("AUTOMATIC" | "SMB2" | "SMB3" | "SMB1" | "SMB2_0")?
@@ -720,6 +728,9 @@ module Aws
         def dns_ip_addresses: () -> ::Array[::String]
         def kerberos_principal: () -> ::String
         def authentication_type: () -> ("NTLM" | "KERBEROS")
+        def managed_secret_config: () -> Types::ManagedSecretConfig
+        def cmk_secret_config: () -> Types::CmkSecretConfig
+        def custom_secret_config: () -> Types::CustomSecretConfig
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#describe_location_smb-instance_method
       def describe_location_smb: (
@@ -782,6 +793,15 @@ module Aws
         def files_prepared: () -> ::Integer
         def files_listed: () -> Types::TaskExecutionFilesListedDetail
         def files_failed: () -> Types::TaskExecutionFilesFailedDetail
+        def estimated_folders_to_delete: () -> ::Integer
+        def estimated_folders_to_transfer: () -> ::Integer
+        def folders_skipped: () -> ::Integer
+        def folders_prepared: () -> ::Integer
+        def folders_transferred: () -> ::Integer
+        def folders_verified: () -> ::Integer
+        def folders_deleted: () -> ::Integer
+        def folders_listed: () -> Types::TaskExecutionFoldersListedDetail
+        def folders_failed: () -> Types::TaskExecutionFoldersFailedDetail
         def launch_time: () -> ::Time
         def end_time: () -> ::Time
       end
@@ -1192,6 +1212,14 @@ module Aws
                                  ?user: ::String,
                                  ?domain: ::String,
                                  ?password: ::String,
+                                 ?cmk_secret_config: {
+                                   secret_arn: ::String?,
+                                   kms_key_arn: ::String?
+                                 },
+                                 ?custom_secret_config: {
+                                   secret_arn: ::String?,
+                                   secret_access_role_arn: ::String?
+                                 },
                                  ?agent_arns: Array[::String],
                                  ?mount_options: {
                                    version: ("AUTOMATIC" | "SMB2" | "SMB3" | "SMB1" | "SMB2_0")?

@@ -691,6 +691,82 @@ module Aws::ServiceQuotas
       req.send_request(options)
     end
 
+    # Retrieves the quota utilization report for your Amazon Web Services
+    # account. This operation returns paginated results showing your quota
+    # usage across all Amazon Web Services services, sorted by utilization
+    # percentage in descending order (highest utilization first).
+    #
+    # You must first initiate a report using the
+    # `StartQuotaUtilizationReport` operation. The report generation process
+    # is asynchronous and may take several seconds to complete. Poll this
+    # operation periodically to check the status and retrieve results when
+    # the report is ready.
+    #
+    # Each report contains up to 1,000 quota records per page. Use the
+    # `NextToken` parameter to retrieve additional pages of results. Reports
+    # are automatically deleted after 15 minutes.
+    #
+    # @option params [required, String] :report_id
+    #   The unique identifier for the quota utilization report. This
+    #   identifier is returned by the `StartQuotaUtilizationReport` operation.
+    #
+    # @option params [String] :next_token
+    #   A token that indicates the next page of results to retrieve. This
+    #   token is returned in the response when there are more results
+    #   available. Omit this parameter for the first request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page. The default value is
+    #   1,000 and the maximum allowed value is 1,000.
+    #
+    # @return [Types::GetQuotaUtilizationReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQuotaUtilizationReportResponse#report_id #report_id} => String
+    #   * {Types::GetQuotaUtilizationReportResponse#status #status} => String
+    #   * {Types::GetQuotaUtilizationReportResponse#generated_at #generated_at} => Time
+    #   * {Types::GetQuotaUtilizationReportResponse#total_count #total_count} => Integer
+    #   * {Types::GetQuotaUtilizationReportResponse#quotas #quotas} => Array&lt;Types::QuotaUtilizationInfo&gt;
+    #   * {Types::GetQuotaUtilizationReportResponse#next_token #next_token} => String
+    #   * {Types::GetQuotaUtilizationReportResponse#error_code #error_code} => String
+    #   * {Types::GetQuotaUtilizationReportResponse#error_message #error_message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_quota_utilization_report({
+    #     report_id: "ReportId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.report_id #=> String
+    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.generated_at #=> Time
+    #   resp.total_count #=> Integer
+    #   resp.quotas #=> Array
+    #   resp.quotas[0].quota_code #=> String
+    #   resp.quotas[0].service_code #=> String
+    #   resp.quotas[0].quota_name #=> String
+    #   resp.quotas[0].namespace #=> String
+    #   resp.quotas[0].utilization #=> Float
+    #   resp.quotas[0].default_value #=> Float
+    #   resp.quotas[0].applied_value #=> Float
+    #   resp.quotas[0].service_name #=> String
+    #   resp.quotas[0].adjustable #=> Boolean
+    #   resp.next_token #=> String
+    #   resp.error_code #=> String
+    #   resp.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetQuotaUtilizationReport AWS API Documentation
+    #
+    # @overload get_quota_utilization_report(params = {})
+    # @param [Hash] params ({})
+    def get_quota_utilization_report(params = {}, options = {})
+      req = build_request(:get_quota_utilization_report, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about the specified quota increase request.
     #
     # @option params [required, String] :request_id
@@ -709,6 +785,7 @@ module Aws::ServiceQuotas
     # @example Response structure
     #
     #   resp.requested_quota.id #=> String
+    #   resp.requested_quota.request_type #=> String, one of "AutomaticManagement"
     #   resp.requested_quota.case_id #=> String
     #   resp.requested_quota.service_code #=> String
     #   resp.requested_quota.service_name #=> String
@@ -991,6 +1068,7 @@ module Aws::ServiceQuotas
     #   resp.next_token #=> String
     #   resp.requested_quotas #=> Array
     #   resp.requested_quotas[0].id #=> String
+    #   resp.requested_quotas[0].request_type #=> String, one of "AutomaticManagement"
     #   resp.requested_quotas[0].case_id #=> String
     #   resp.requested_quotas[0].service_code #=> String
     #   resp.requested_quotas[0].service_name #=> String
@@ -1084,6 +1162,7 @@ module Aws::ServiceQuotas
     #   resp.next_token #=> String
     #   resp.requested_quotas #=> Array
     #   resp.requested_quotas[0].id #=> String
+    #   resp.requested_quotas[0].request_type #=> String, one of "AutomaticManagement"
     #   resp.requested_quotas[0].case_id #=> String
     #   resp.requested_quotas[0].service_code #=> String
     #   resp.requested_quotas[0].service_name #=> String
@@ -1468,6 +1547,7 @@ module Aws::ServiceQuotas
     # @example Response structure
     #
     #   resp.requested_quota.id #=> String
+    #   resp.requested_quota.request_type #=> String, one of "AutomaticManagement"
     #   resp.requested_quota.case_id #=> String
     #   resp.requested_quota.service_code #=> String
     #   resp.requested_quota.service_name #=> String
@@ -1547,6 +1627,37 @@ module Aws::ServiceQuotas
     # @param [Hash] params ({})
     def start_auto_management(params = {}, options = {})
       req = build_request(:start_auto_management, params)
+      req.send_request(options)
+    end
+
+    # Initiates the generation of a quota utilization report for your Amazon
+    # Web Services account. This asynchronous operation analyzes your quota
+    # usage across all Amazon Web Services services and returns a unique
+    # report identifier that you can use to retrieve the results.
+    #
+    # The report generation process may take several seconds to complete,
+    # depending on the number of quotas in your account. Use the
+    # `GetQuotaUtilizationReport` operation to check the status and retrieve
+    # the results when the report is ready.
+    #
+    # @return [Types::StartQuotaUtilizationReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartQuotaUtilizationReportResponse#report_id #report_id} => String
+    #   * {Types::StartQuotaUtilizationReportResponse#status #status} => String
+    #   * {Types::StartQuotaUtilizationReportResponse#message #message} => String
+    #
+    # @example Response structure
+    #
+    #   resp.report_id #=> String
+    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/StartQuotaUtilizationReport AWS API Documentation
+    #
+    # @overload start_quota_utilization_report(params = {})
+    # @param [Hash] params ({})
+    def start_quota_utilization_report(params = {}, options = {})
+      req = build_request(:start_quota_utilization_report, params)
       req.send_request(options)
     end
 
@@ -1713,7 +1824,7 @@ module Aws::ServiceQuotas
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-servicequotas'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

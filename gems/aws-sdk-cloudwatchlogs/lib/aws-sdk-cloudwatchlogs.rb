@@ -55,7 +55,7 @@ module Aws::CloudWatchLogs
   autoload :Endpoints, 'aws-sdk-cloudwatchlogs/endpoints'
   autoload :EventStreams, 'aws-sdk-cloudwatchlogs/event_streams'
 
-  GEM_VERSION = '1.134.0'
+  GEM_VERSION = '1.135.0'
 
 end
 

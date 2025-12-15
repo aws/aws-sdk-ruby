@@ -240,7 +240,7 @@ module Aws::Glacier
     #   The SHA256 tree hash of the entire archive. It is the tree hash of
     #   SHA256 tree hash of the individual parts. If the value you specify in
     #   the request does not match the SHA256 tree hash of the final assembled
-    #   archive as computed by Amazon S3 Glacier (Glacier), Glacier returns an
+    #   archive as computed by Amazon Glacier (Glacier), Glacier returns an
     #   error and the request fails.
     # @return [Types::ArchiveCreationOutput]
     def complete(options = {})
@@ -297,7 +297,7 @@ module Aws::Glacier
     #   The SHA256 tree hash of the data being uploaded.
     # @option options [String] :range
     #   Identifies the range of bytes in the assembled archive that will be
-    #   uploaded in this part. Amazon S3 Glacier uses this information to
+    #   uploaded in this part. Amazon Glacier uses this information to
     #   assemble the archive in the proper sequence. The format of this header
     #   follows RFC 2616. An example header is Content-Range:bytes
     #   0-4194303/*.

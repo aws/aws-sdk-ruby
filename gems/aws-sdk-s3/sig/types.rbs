@@ -1354,7 +1354,7 @@ module Aws::S3
       attr_accessor filter: Types::InventoryFilter
       attr_accessor id: ::String
       attr_accessor included_object_versions: ("All" | "Current")
-      attr_accessor optional_fields: ::Array[("Size" | "LastModifiedDate" | "StorageClass" | "ETag" | "IsMultipartUploaded" | "ReplicationStatus" | "EncryptionStatus" | "ObjectLockRetainUntilDate" | "ObjectLockMode" | "ObjectLockLegalHoldStatus" | "IntelligentTieringAccessTier" | "BucketKeyStatus" | "ChecksumAlgorithm" | "ObjectAccessControlList" | "ObjectOwner")]
+      attr_accessor optional_fields: ::Array[("Size" | "LastModifiedDate" | "StorageClass" | "ETag" | "IsMultipartUploaded" | "ReplicationStatus" | "EncryptionStatus" | "ObjectLockRetainUntilDate" | "ObjectLockMode" | "ObjectLockLegalHoldStatus" | "IntelligentTieringAccessTier" | "BucketKeyStatus" | "ChecksumAlgorithm" | "ObjectAccessControlList" | "ObjectOwner" | "LifecycleExpirationDate")]
       attr_accessor schedule: Types::InventorySchedule
       SENSITIVE: []
     end

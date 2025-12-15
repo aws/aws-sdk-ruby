@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2025-12-15)
+------------------
+
+* Feature - Add support for SQ Dashboard Api
+
 1.65.0 (2025-11-21)
 ------------------
 

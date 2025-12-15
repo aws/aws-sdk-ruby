@@ -4,10 +4,10 @@
     "id" : "ListRecommendedActionsSuccess",
     "operationName" : "ListRecommendedActions",
     "input" : {
-      "maxResults" : 10
+      "maxResults" : 5
     },
     "expectation" : {
-      "failure" : { }
+      "success" : { }
     },
     "config" : {
       "region" : "us-west-2",
