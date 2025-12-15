@@ -208,6 +208,7 @@ module Aws
       # @option option [Integer] :http_chunk_size (16384) Size in bytes for each chunk when streaming request bodies
       #   over HTTP. Controls the buffer size used when sending data to S3. Larger values may improve throughput by
       #   reducing the number of network writes, but use more memory. Custom values must be at least 16KB.
+      #   Only Ruby MRI is supported.
       #
       # @option options [Proc] :progress_callback (nil)
       #   A Proc that will be called when each chunk of the upload is sent.

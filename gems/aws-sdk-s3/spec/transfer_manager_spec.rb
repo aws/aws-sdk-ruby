@@ -97,7 +97,7 @@ module Aws
           subject.upload_file(large_file, bucket: 'bucket', key: 'key', multipart_threshold: 200 * one_mb_size)
         end
 
-        context ':http_check_size' do
+        context ':http_check_size', skip: defined?(JRUBY_VERSION) do
           let(:test_file) do
             Tempfile.new('test_upload_file').tap do |f|
               f.write('x' * 65_536)
@@ -106,7 +106,6 @@ module Aws
           end
 
           def start_mirror_server(chunk_size)
-
             server = TCPServer.new('localhost', 0)
             port = server.addr[1]
             chunks = []
