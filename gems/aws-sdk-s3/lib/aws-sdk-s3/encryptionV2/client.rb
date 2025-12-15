@@ -5,9 +5,17 @@ require 'forwardable'
 module Aws
   module S3
 
-    REQUIRED_PARAMS = [:key_wrap_schema, :content_encryption_schema, :security_profile]
-    SUPPORTED_SECURITY_PROFILES = [:v2, :v2_and_legacy]
+    REQUIRED_PARAMS = [:key_wrap_schema, :content_encryption_schema, :security_profile].freeze
+    SUPPORTED_SECURITY_PROFILES = [:v2, :v2_and_legacy].freeze
+    SUPPORTED_COMMITMENT_POLICIES = [:forbid_encrypt_allow_decrypt].freeze
 
+    # [MAINTENANCE MODE] There is a new version of the Encryption Client.
+    # AWS strongly recommends upgrading to the {Aws::S3::EncryptionV3::Client},
+    # which provides updated data security best practices.
+    # For migration guidance, see: https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/s3-encryption-migration-v2-v3.html
+    # Provides an encryption client that encrypts and decrypts data client-side,
+    # storing the encrypted data in Amazon S3.
+    # 
     # Provides an encryption client that encrypts and decrypts data client-side,
     # storing the encrypted data in Amazon S3.  The `EncryptionV2::Client` (V2 Client)
     # provides improved security over the `Encryption::Client` (V1 Client)
@@ -307,15 +315,29 @@ module Aws
         # @option options [KMS::Client] :kms_client A default {KMS::Client}
         #   is constructed when using KMS to manage encryption keys.
         #
+        # @option options [Symbol] :commitment_policy (nil)
+        #   Optional parameter for migration from V2 to V3. When set to
+        #   :forbid_encrypt_allow_decrypt, this explicitly indicates you are
+        #   maintaining V2 encryption behavior while preparing for migration.
+        #   This allows the V2 client to decrypt V3-encrypted objects while
+        #   continuing to encrypt new objects using V2 algorithms.
+        #   Only :forbid_encrypt_allow_decrypt is supported.
+        #   For migration guidance, see: https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/s3-encryption-migration-v2-v3.html
+        #
         def initialize(options = {})
           validate_params(options)
           @client = extract_client(options)
-          @cipher_provider = cipher_provider(options)
+          @cipher_provider = build_cipher_provider(options)
+          @key_provider = @cipher_provider.key_provider if @cipher_provider.is_a?(DefaultCipherProvider)
           @envelope_location = extract_location(options)
           @instruction_file_suffix = extract_suffix(options)
           @kms_allow_decrypt_with_any_cmk =
             options[:kms_key_id] == :kms_allow_decrypt_with_any_cmk
           @security_profile = extract_security_profile(options)
+          @commitment_policy = extract_commitment_policy(options)
+          # The v3 cipher is only used for decrypt.
+          # Therefore any configured v2 `content_encryption_schema` is going to be incorrect.
+          @v3_cipher_provider = build_v3_cipher_provider_for_decrypt(options.reject { |k, _| k == :content_encryption_schema })
         end
 
         # @return [S3::Client]
@@ -340,6 +362,11 @@ module Aws
         #   the envelope is stored in the object with the object key suffixed
         #   by this string.
         attr_reader :instruction_file_suffix
+
+        # @return [Symbol, nil] Optional commitment policy for V2 to V3 migration.
+        #   When set to :forbid_encrypt_allow_decrypt, explicitly indicates
+        #   maintaining V2 encryption behavior while preparing for migration.
+        attr_reader :commitment_policy
 
         # Uploads an object to Amazon S3, encrypting data client-side.
         # See {S3::Client#put_object} for documentation on accepted
@@ -410,6 +437,7 @@ module Aws
           req.handlers.add(DecryptHandler)
           req.context[:encryption] = {
             cipher_provider: @cipher_provider,
+            v3_cipher_provider: @v3_cipher_provider,
             envelope_location: envelope_location,
             instruction_file_suffix: instruction_file_suffix,
             kms_encryption_context: kms_encryption_context,
@@ -422,6 +450,50 @@ module Aws
         end
 
         private
+
+        def build_cipher_provider(options)
+          if options[:kms_key_id]
+            KmsCipherProvider.new(
+              kms_key_id: options[:kms_key_id],
+              kms_client: kms_client(options),
+              key_wrap_schema: options[:key_wrap_schema],
+              content_encryption_schema: options[:content_encryption_schema]
+            )
+          else
+            key_provider = extract_key_provider(options)
+            DefaultCipherProvider.new(
+              key_provider: key_provider,
+              key_wrap_schema: options[:key_wrap_schema],
+              content_encryption_schema: options[:content_encryption_schema]
+            )
+          end
+        end
+
+        def build_v3_cipher_provider_for_decrypt(options)
+          if options[:kms_key_id]
+            Aws::S3::EncryptionV3::KmsCipherProvider.new(
+              kms_key_id: options[:kms_key_id],
+              kms_client: kms_client(options),
+              key_wrap_schema: options[:key_wrap_schema],
+              content_encryption_schema: options[:content_encryption_schema]
+            )
+          else
+            # Create V3 key provider explicitly for proper namespace consistency
+            key_provider = if options[:key_provider]
+              options[:key_provider]
+            elsif options[:encryption_key]
+              Aws::S3::EncryptionV3::DefaultKeyProvider.new(options)
+            else
+              msg = 'you must pass a :kms_key_id, :key_provider, or :encryption_key'
+              raise ArgumentError, msg
+            end
+            Aws::S3::EncryptionV3::DefaultCipherProvider.new(
+              key_provider: key_provider,
+              key_wrap_schema: options[:key_wrap_schema],
+              content_encryption_schema: options[:content_encryption_schema]
+            )
+          end
+        end
 
         # Validate required parameters exist and don't conflict.
         # The cek_alg and wrap_alg are passed on to the CipherProviders
@@ -452,36 +524,19 @@ module Aws
             options.delete(:encryption_key)
             options.delete(:envelope_location)
             options.delete(:instruction_file_suffix)
+            options.delete(:commitment_policy)
             REQUIRED_PARAMS.each { |p| options.delete(p) }
             S3::Client.new(options)
           end
         end
 
         def kms_client(options)
-          options[:kms_client] || begin
+          options[:kms_client] || (@kms_client ||=
             KMS::Client.new(
               region: @client.config.region,
               credentials: @client.config.credentials,
               )
-          end
-        end
-
-        def cipher_provider(options)
-          if options[:kms_key_id]
-            KmsCipherProvider.new(
-              kms_key_id: options[:kms_key_id],
-              kms_client: kms_client(options),
-              key_wrap_schema: options[:key_wrap_schema],
-              content_encryption_schema: options[:content_encryption_schema]
-            )
-          else
-            @key_provider = extract_key_provider(options)
-            DefaultCipherProvider.new(
-              key_provider: @key_provider,
-              key_wrap_schema: options[:key_wrap_schema],
-              content_encryption_schema: options[:content_encryption_schema]
-            )
-          end
+          )
         end
 
         def extract_key_provider(options)
@@ -564,7 +619,27 @@ module Aws
           end
           security_profile
         end
+
+        def extract_commitment_policy(options)
+          validate_commitment_policy(options[:commitment_policy])
+        end
+
+        def validate_commitment_policy(commitment_policy)
+          return nil if commitment_policy.nil?
+
+          unless SUPPORTED_COMMITMENT_POLICIES.include? commitment_policy
+            raise ArgumentError, "Unsupported commitment policy: :#{commitment_policy}. " \
+            "The V2 client only supports :forbid_encrypt_allow_decrypt for migration purposes. " \
+            "For migration guidance, see: https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/s3-encryption-migration-v2-v3.html"
+          end
+          commitment_policy
+        end
       end
     end
   end
 end
+
+##= ../specification/s3-encryption/data-format/content-metadata.md#v1-v2-shared
+##= type=exception
+##= reason=This has never been supported in Ruby
+##% This string MAY be encoded by the esoteric double-encoding scheme used by the S3 web server.

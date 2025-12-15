@@ -16,6 +16,8 @@ module Aws
         #   envelope and encryption cipher.
         def encryption_cipher
           cipher = Utils.aes_encryption_cipher(:CBC)
+          ##= ../specification/s3-encryption/data-format/content-metadata.md#algorithm-suite-and-message-format-version-compatibility
+          ##% Objects encrypted with ALG_AES_256_CBC_IV16_NO_KDF MAY use either the V1 or V2 message format version.
           envelope = {
             'x-amz-key' => encode64(encrypt(envelope_key(cipher))),
             'x-amz-iv' => encode64(envelope_iv(cipher)),
