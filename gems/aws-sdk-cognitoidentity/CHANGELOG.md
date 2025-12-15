@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix default client initialization for CognitoIdentityProvider.
+
 1.82.0 (2025-11-21)
 ------------------
 
