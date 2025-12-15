@@ -331,6 +331,9 @@ module Aws
           if (algorithm_header = checksum_properties[:request_algorithm_header])
             headers[algorithm_header] = checksum_properties[:algorithm]
           end
+
+          return apply_request_checksum(context, headers, checksum_properties) if defined?(JRUBY_VERSION)
+
           case checksum_properties[:in]
           when 'header'
             apply_request_checksum(context, headers, checksum_properties)
@@ -388,7 +391,6 @@ module Aws
           end
 
           headers['X-Amz-Decoded-Content-Length'] = context.http_request.body.size
-
           context.http_request.body =
             AwsChunkedTrailerDigestIO.new(
               io: context.http_request.body,
@@ -471,7 +473,8 @@ module Aws
           @chunk_size = Thread.current[:net_http_override_body_stream_chunk] || MIN_CHUNK_SIZE
           @overhead_bytes = calculate_overhead(@chunk_size)
           @base_chunk_size = @chunk_size - @overhead_bytes
-          @current_chunk = ''.b
+          @buffer = +''
+          @current_chunk = +''
           @eof = false
         end
 
@@ -489,19 +492,41 @@ module Aws
 
         def rewind
           @io.rewind
-          @current_chunk.clear
+          @buffer = +''
+          @current_chunk = +''
           @eof = false
         end
 
-        def read(_length = nil, buf = nil)
-          return if @eof
+        def read(length = nil, buf = nil)
+          return @io.read unless length
+
+          return if @eof && @buffer.empty? && @current_chunk.empty?
 
           buf&.clear
-          output_buffer = buf || ''.b
-          fill_chunk if @current_chunk.empty? && !@eof
+          output_buffer = buf || +''
 
-          output_buffer << @current_chunk
-          @current_chunk.clear
+          while output_buffer.bytesize < length # fill until output buffer is ready
+            unless @buffer.empty?
+              take = [length - output_buffer.bytesize, @buffer.bytesize].min
+              slice_data = @buffer.slice!(0, take)
+              output_buffer << slice_data
+              next
+            end
+
+            unless @current_chunk.empty?
+              take = [length - output_buffer.bytesize, @current_chunk.bytesize].min
+              slice_data = @current_chunk.slice!(0, take)
+              output_buffer << slice_data
+              next
+            end
+
+            if !@eof
+              fill_chunk
+            else
+              break
+            end
+          end
+
           output_buffer
         end
 
@@ -513,13 +538,12 @@ module Aws
 
         def fill_chunk
           chunk = @io.read(@base_chunk_size)
-          if chunk
-            chunk.force_encoding('ASCII-8BIT')
+          if chunk && !chunk.empty?
             @digest.update(chunk)
-            @current_chunk << "#{chunk.bytesize.to_s(16)}\r\n#{chunk}\r\n".b
+            @current_chunk << "#{chunk.bytesize.to_s(16)}\r\n#{chunk}\r\n"
           else
             trailer_str = { @location_name => @digest.base64digest }.map { |k, v| "#{k}:#{v}" }.join("\r\n")
-            @current_chunk << "0\r\n#{trailer_str}\r\n\r\n".b
+            @current_chunk << "0\r\n#{trailer_str}\r\n\r\n"
             @eof = true
           end
         end
