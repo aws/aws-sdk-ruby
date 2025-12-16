@@ -1,19 +1,21 @@
 # frozen_string_literal: true
 
-$LOAD_PATH.unshift(File.expand_path('../../aws-sdk-sso/lib', __dir__))
-$LOAD_PATH.unshift(File.expand_path('../../aws-sdk-sts/lib', __dir__))
-$LOAD_PATH.unshift(File.expand_path('../../aws-sdk-ssooidc/lib', __dir__))
+$LOAD_PATH.unshift(File.expand_path('../../aws-sdk-cognitoidentity/lib', __dir__))
 $LOAD_PATH.unshift(File.expand_path('../../aws-sdk-signin/lib', __dir__))
+$LOAD_PATH.unshift(File.expand_path('../../aws-sdk-sso/lib', __dir__))
+$LOAD_PATH.unshift(File.expand_path('../../aws-sdk-ssooidc/lib', __dir__))
+$LOAD_PATH.unshift(File.expand_path('../../aws-sdk-sts/lib', __dir__))
 
 require 'byebug'
 require 'rspec'
 require 'webmock/rspec'
 
 require 'aws-sdk-core'
-require 'aws-sdk-sts'
+require 'aws-sdk-cognitoidentity'
+require 'aws-sdk-signin'
 require 'aws-sdk-sso'
 require 'aws-sdk-ssooidc'
-require 'aws-sdk-signin'
+require 'aws-sdk-sts'
 
 require_relative 'client_helper'
 require_relative 'login_credentials_provider_helper'
