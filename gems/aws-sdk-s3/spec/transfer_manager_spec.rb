@@ -111,27 +111,29 @@ module Aws
             chunks = []
 
             server_thread = Thread.new do
-              client = server.accept
-              headers = ''
-              while (line = client.gets)
-                headers += line
-                break if line.strip.empty?
-              end
-
-              if headers.include?('Expect: 100-continue')
-                client.write("HTTP/1.1 100 Continue\r\n\r\n")
-
-                loop do
-                  sleep(0.001) # needs wait between reads
-                  data = client.read_nonblock(chunk_size, exception: false)
-                  break if data == :wait_readable || data.nil?
-
-                  chunks << data.size
+              Timeout.timeout(10) do
+                client = server.accept
+                headers = ''
+                while (line = client.gets)
+                  headers += line
+                  break if line.strip.empty?
                 end
+
+                if headers.include?('Expect: 100-continue')
+                  client.write("HTTP/1.1 100 Continue\r\n\r\n")
+
+                  loop do
+                    sleep(0.01) # needs wait between reads
+                    data = client.read_nonblock(chunk_size, exception: false)
+                    break if data == :wait_readable || data.nil?
+
+                    chunks << data.size
+                  end
+                end
+                client.write("HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n")
+              ensure
+                client.close
               end
-              client.write("HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n")
-            ensure
-              client.close
             end
             [server, server_thread, port]
           end
