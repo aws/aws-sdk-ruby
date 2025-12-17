@@ -226,10 +226,17 @@ module Aws
       # @see Client#upload_part
       def upload_file(source, bucket:, key:, **options)
         upload_opts = options.merge(bucket: bucket, key: key)
-        http_chunk_size = upload_opts.delete(:http_chunk_size)
-        if http_chunk_size && http_chunk_size < Aws::Plugins::ChecksumAlgorithm::MIN_CHUNK_SIZE
-          raise ArgumentError, ':http_chunk_size must be at least 16384 bytes (16KB)'
-        end
+        http_chunk_size =
+          if defined?(JRUBY_VERSION)
+            nil
+          else
+            chunk = upload_opts.delete(:http_chunk_size)
+            if chunk && chunk < Aws::Plugins::ChecksumAlgorithm::MIN_CHUNK_SIZE
+              raise ArgumentError, ':http_chunk_size must be at least 16384 bytes (16KB)'
+            end
+
+            chunk
+          end
 
         executor = @executor || DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
         uploader = FileUploader.new(
