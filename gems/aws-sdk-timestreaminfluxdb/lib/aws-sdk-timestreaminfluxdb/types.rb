@@ -2593,6 +2593,178 @@ module Aws::TimestreamInfluxDB
       class Unknown < PercentOrAbsoluteLong; end
     end
 
+    # @!attribute [rw] db_cluster_id
+    #   Service-generated unique identifier of the DB cluster to reboot.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_ids
+    #   A list of service-generated unique DB Instance Ids belonging to the
+    #   DB Cluster to reboot.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/RebootDbClusterInput AWS API Documentation
+    #
+    class RebootDbClusterInput < Struct.new(
+      :db_cluster_id,
+      :instance_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_cluster_status
+    #   The status of the DB Cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/RebootDbClusterOutput AWS API Documentation
+    #
+    class RebootDbClusterOutput < Struct.new(
+      :db_cluster_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The id of the DB instance to reboot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/RebootDbInstanceInput AWS API Documentation
+    #
+    class RebootDbInstanceInput < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   A service-generated unique identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-supplied name that uniquely identifies the DB instance
+    #   when interacting with the Amazon Timestream for InfluxDB API and CLI
+    #   commands.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the DB instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the DB instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The endpoint used to connect to InfluxDB. The default InfluxDB port
+    #   is 8086.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port number on which InfluxDB accepts connections.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] network_type
+    #   Specifies whether the networkType of the Timestream for InfluxDB
+    #   instance is IPV4, which can communicate over IPv4 protocol only, or
+    #   DUAL, which can communicate over both IPv4 and IPv6 protocols.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_instance_type
+    #   The Timestream for InfluxDB instance type that InfluxDB runs on.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_storage_type
+    #   The Timestream for InfluxDB DB storage type that InfluxDB stores
+    #   data on.
+    #   @return [String]
+    #
+    # @!attribute [rw] allocated_storage
+    #   The amount of storage allocated for your DB storage type (in
+    #   gibibytes).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] deployment_type
+    #   Specifies whether the Timestream for InfluxDB is deployed as
+    #   Single-AZ or with a MultiAZ Standby for High availability.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_subnet_ids
+    #   A list of VPC subnet IDs associated with the DB instance.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] publicly_accessible
+    #   Indicates if the DB instance has a public IP to facilitate access.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] vpc_security_group_ids
+    #   A list of VPC security group IDs associated with the DB instance.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] db_parameter_group_identifier
+    #   The id of the DB parameter group assigned to your DB instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone in which the DB instance resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_availability_zone
+    #   The Availability Zone in which the standby instance is located when
+    #   deploying with a MultiAZ standby instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_delivery_configuration
+    #   Configuration for sending InfluxDB engine logs to send to specified
+    #   S3 bucket.
+    #   @return [Types::LogDeliveryConfiguration]
+    #
+    # @!attribute [rw] influx_auth_parameters_secret_arn
+    #   The Amazon Resource Name (ARN) of the Secrets Manager secret
+    #   containing the initial InfluxDB authorization parameters. The secret
+    #   value is a JSON formatted key-value pair holding InfluxDB
+    #   authorization values: organization, bucket, username, and password.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_id
+    #   Specifies the DbCluster to which this DbInstance belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_mode
+    #   Specifies the DbInstance's role in the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_modes
+    #   Specifies the DbInstance's roles in the cluster.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/RebootDbInstanceOutput AWS API Documentation
+    #
+    class RebootDbInstanceOutput < Struct.new(
+      :id,
+      :name,
+      :arn,
+      :status,
+      :endpoint,
+      :port,
+      :network_type,
+      :db_instance_type,
+      :db_storage_type,
+      :allocated_storage,
+      :deployment_type,
+      :vpc_subnet_ids,
+      :publicly_accessible,
+      :vpc_security_group_ids,
+      :db_parameter_group_identifier,
+      :availability_zone,
+      :secondary_availability_zone,
+      :log_delivery_configuration,
+      :influx_auth_parameters_secret_arn,
+      :db_cluster_id,
+      :instance_mode,
+      :instance_modes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The requested resource was not found or does not exist.
     #
     # @!attribute [rw] message

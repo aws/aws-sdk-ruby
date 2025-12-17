@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2025-12-16)
+------------------
+
+* Feature - This release adds support for rebooting InfluxDB DbInstances and DbClusters
+
 1.34.0 (2025-11-21)
 ------------------
 

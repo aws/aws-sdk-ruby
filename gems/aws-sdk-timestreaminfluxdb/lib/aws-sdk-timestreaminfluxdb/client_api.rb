@@ -154,6 +154,11 @@ module Aws::TimestreamInfluxDB
     PercentOrAbsoluteLongAbsoluteLong = Shapes::IntegerShape.new(name: 'PercentOrAbsoluteLongAbsoluteLong')
     PercentOrAbsoluteLongPercentString = Shapes::StringShape.new(name: 'PercentOrAbsoluteLongPercentString')
     Port = Shapes::IntegerShape.new(name: 'Port')
+    RebootDbClusterInput = Shapes::StructureShape.new(name: 'RebootDbClusterInput')
+    RebootDbClusterInputInstanceIdsList = Shapes::ListShape.new(name: 'RebootDbClusterInputInstanceIdsList')
+    RebootDbClusterOutput = Shapes::StructureShape.new(name: 'RebootDbClusterOutput')
+    RebootDbInstanceInput = Shapes::StructureShape.new(name: 'RebootDbInstanceInput')
+    RebootDbInstanceOutput = Shapes::StructureShape.new(name: 'RebootDbInstanceOutput')
     RequestTagMap = Shapes::MapShape.new(name: 'RequestTagMap')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResponseTagMap = Shapes::MapShape.new(name: 'ResponseTagMap')
@@ -621,6 +626,42 @@ module Aws::TimestreamInfluxDB
     PercentOrAbsoluteLong.add_member_subclass(:unknown, Types::PercentOrAbsoluteLong::Unknown)
     PercentOrAbsoluteLong.struct_class = Types::PercentOrAbsoluteLong
 
+    RebootDbClusterInput.add_member(:db_cluster_id, Shapes::ShapeRef.new(shape: DbClusterId, required: true, location_name: "dbClusterId"))
+    RebootDbClusterInput.add_member(:instance_ids, Shapes::ShapeRef.new(shape: RebootDbClusterInputInstanceIdsList, location_name: "instanceIds"))
+    RebootDbClusterInput.struct_class = Types::RebootDbClusterInput
+
+    RebootDbClusterInputInstanceIdsList.member = Shapes::ShapeRef.new(shape: DbInstanceId)
+
+    RebootDbClusterOutput.add_member(:db_cluster_status, Shapes::ShapeRef.new(shape: ClusterStatus, location_name: "dbClusterStatus"))
+    RebootDbClusterOutput.struct_class = Types::RebootDbClusterOutput
+
+    RebootDbInstanceInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DbInstanceIdentifier, required: true, location_name: "identifier"))
+    RebootDbInstanceInput.struct_class = Types::RebootDbInstanceInput
+
+    RebootDbInstanceOutput.add_member(:id, Shapes::ShapeRef.new(shape: DbInstanceId, required: true, location_name: "id"))
+    RebootDbInstanceOutput.add_member(:name, Shapes::ShapeRef.new(shape: DbInstanceName, required: true, location_name: "name"))
+    RebootDbInstanceOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    RebootDbInstanceOutput.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    RebootDbInstanceOutput.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
+    RebootDbInstanceOutput.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "port"))
+    RebootDbInstanceOutput.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "networkType"))
+    RebootDbInstanceOutput.add_member(:db_instance_type, Shapes::ShapeRef.new(shape: DbInstanceType, location_name: "dbInstanceType"))
+    RebootDbInstanceOutput.add_member(:db_storage_type, Shapes::ShapeRef.new(shape: DbStorageType, location_name: "dbStorageType"))
+    RebootDbInstanceOutput.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: AllocatedStorage, location_name: "allocatedStorage"))
+    RebootDbInstanceOutput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: DeploymentType, location_name: "deploymentType"))
+    RebootDbInstanceOutput.add_member(:vpc_subnet_ids, Shapes::ShapeRef.new(shape: VpcSubnetIdList, required: true, location_name: "vpcSubnetIds"))
+    RebootDbInstanceOutput.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
+    RebootDbInstanceOutput.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "vpcSecurityGroupIds"))
+    RebootDbInstanceOutput.add_member(:db_parameter_group_identifier, Shapes::ShapeRef.new(shape: DbParameterGroupIdentifier, location_name: "dbParameterGroupIdentifier"))
+    RebootDbInstanceOutput.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    RebootDbInstanceOutput.add_member(:secondary_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "secondaryAvailabilityZone"))
+    RebootDbInstanceOutput.add_member(:log_delivery_configuration, Shapes::ShapeRef.new(shape: LogDeliveryConfiguration, location_name: "logDeliveryConfiguration"))
+    RebootDbInstanceOutput.add_member(:influx_auth_parameters_secret_arn, Shapes::ShapeRef.new(shape: String, location_name: "influxAuthParametersSecretArn"))
+    RebootDbInstanceOutput.add_member(:db_cluster_id, Shapes::ShapeRef.new(shape: DbClusterId, location_name: "dbClusterId"))
+    RebootDbInstanceOutput.add_member(:instance_mode, Shapes::ShapeRef.new(shape: InstanceMode, location_name: "instanceMode"))
+    RebootDbInstanceOutput.add_member(:instance_modes, Shapes::ShapeRef.new(shape: InstanceModeList, location_name: "instanceModes"))
+    RebootDbInstanceOutput.struct_class = Types::RebootDbInstanceOutput
+
     RequestTagMap.key = Shapes::ShapeRef.new(shape: TagKey)
     RequestTagMap.value = Shapes::ShapeRef.new(shape: TagValue)
 
@@ -921,6 +962,34 @@ module Aws::TimestreamInfluxDB
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:reboot_db_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RebootDbCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RebootDbClusterInput)
+        o.output = Shapes::ShapeRef.new(shape: RebootDbClusterOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:reboot_db_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RebootDbInstance"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RebootDbInstanceInput)
+        o.output = Shapes::ShapeRef.new(shape: RebootDbInstanceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

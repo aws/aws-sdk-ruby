@@ -368,6 +368,11 @@ module Aws::IoT
       SENSITIVE: []
     end
 
+    class AwsJsonSubstitutionCommandPreprocessorConfig
+      attr_accessor output_format: ("JSON" | "CBOR")
+      SENSITIVE: []
+    end
+
     class Behavior
       attr_accessor name: ::String
       attr_accessor metric: ::String
@@ -625,8 +630,10 @@ module Aws::IoT
 
     class CommandParameter
       attr_accessor name: ::String
+      attr_accessor type: ("STRING" | "INTEGER" | "DOUBLE" | "LONG" | "UNSIGNEDLONG" | "BOOLEAN" | "BINARY")
       attr_accessor value: Types::CommandParameterValue
       attr_accessor default_value: Types::CommandParameterValue
+      attr_accessor value_conditions: ::Array[Types::CommandParameterValueCondition]
       attr_accessor description: ::String
       SENSITIVE: []
     end
@@ -642,9 +649,35 @@ module Aws::IoT
       SENSITIVE: []
     end
 
+    class CommandParameterValueComparisonOperand
+      attr_accessor number: ::String
+      attr_accessor numbers: ::Array[::String]
+      attr_accessor string: ::String
+      attr_accessor strings: ::Array[::String]
+      attr_accessor number_range: Types::CommandParameterValueNumberRange
+      SENSITIVE: []
+    end
+
+    class CommandParameterValueCondition
+      attr_accessor comparison_operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "LESS_THAN_EQUALS" | "GREATER_THAN" | "GREATER_THAN_EQUALS" | "IN_SET" | "NOT_IN_SET" | "IN_RANGE" | "NOT_IN_RANGE")
+      attr_accessor operand: Types::CommandParameterValueComparisonOperand
+      SENSITIVE: []
+    end
+
+    class CommandParameterValueNumberRange
+      attr_accessor min: ::String
+      attr_accessor max: ::String
+      SENSITIVE: []
+    end
+
     class CommandPayload
       attr_accessor content: ::String
       attr_accessor content_type: ::String
+      SENSITIVE: []
+    end
+
+    class CommandPreprocessor
+      attr_accessor aws_json_substitution: Types::AwsJsonSubstitutionCommandPreprocessorConfig
       SENSITIVE: []
     end
 
@@ -769,6 +802,8 @@ module Aws::IoT
       attr_accessor display_name: ::String
       attr_accessor description: ::String
       attr_accessor payload: Types::CommandPayload
+      attr_accessor payload_template: ::String
+      attr_accessor preprocessor: Types::CommandPreprocessor
       attr_accessor mandatory_parameters: ::Array[Types::CommandParameter]
       attr_accessor role_arn: ::String
       attr_accessor tags: ::Array[Types::Tag]
@@ -2315,6 +2350,8 @@ module Aws::IoT
       attr_accessor description: ::String
       attr_accessor mandatory_parameters: ::Array[Types::CommandParameter]
       attr_accessor payload: Types::CommandPayload
+      attr_accessor payload_template: ::String
+      attr_accessor preprocessor: Types::CommandPreprocessor
       attr_accessor role_arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time

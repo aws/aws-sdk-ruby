@@ -3,6 +3,13 @@ Unreleased Changes
 
 * Feature - Improved memory efficiency when calculating request checksums.
 
+3.240.0 (2025-12-16)
+------------------
+
+* Feature - Updated configuration values for `defaults_mode`.
+
+* Issue - Prioritizes JSON over CBOR when both are supported for stubbed clients.
+
 3.239.2 (2025-11-25)
 ------------------
 

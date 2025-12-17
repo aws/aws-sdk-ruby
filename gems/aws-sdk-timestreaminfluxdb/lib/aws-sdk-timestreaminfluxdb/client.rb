@@ -622,7 +622,7 @@ module Aws::TimestreamInfluxDB
     # @example Response structure
     #
     #   resp.db_cluster_id #=> String
-    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"
+    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbCluster AWS API Documentation
     #
@@ -788,7 +788,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED"
     #   resp.endpoint #=> String
     #   resp.port #=> Integer
     #   resp.network_type #=> String, one of "IPV4", "DUAL"
@@ -1310,7 +1310,7 @@ module Aws::TimestreamInfluxDB
     #
     # @example Response structure
     #
-    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"
+    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DeleteDbCluster AWS API Documentation
     #
@@ -1362,7 +1362,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED"
     #   resp.endpoint #=> String
     #   resp.port #=> Integer
     #   resp.network_type #=> String, one of "IPV4", "DUAL"
@@ -1434,7 +1434,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE"
     #   resp.endpoint #=> String
     #   resp.reader_endpoint #=> String
     #   resp.port #=> Integer
@@ -1505,7 +1505,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED"
     #   resp.endpoint #=> String
     #   resp.port #=> Integer
     #   resp.network_type #=> String, one of "IPV4", "DUAL"
@@ -1771,7 +1771,7 @@ module Aws::TimestreamInfluxDB
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
     #   resp.items[0].arn #=> String
-    #   resp.items[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"
+    #   resp.items[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE"
     #   resp.items[0].endpoint #=> String
     #   resp.items[0].reader_endpoint #=> String
     #   resp.items[0].port #=> Integer
@@ -1824,7 +1824,7 @@ module Aws::TimestreamInfluxDB
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
     #   resp.items[0].arn #=> String
-    #   resp.items[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"
+    #   resp.items[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED"
     #   resp.items[0].endpoint #=> String
     #   resp.items[0].port #=> Integer
     #   resp.items[0].network_type #=> String, one of "IPV4", "DUAL"
@@ -1879,7 +1879,7 @@ module Aws::TimestreamInfluxDB
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
     #   resp.items[0].arn #=> String
-    #   resp.items[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"
+    #   resp.items[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED"
     #   resp.items[0].endpoint #=> String
     #   resp.items[0].port #=> Integer
     #   resp.items[0].network_type #=> String, one of "IPV4", "DUAL"
@@ -1971,6 +1971,113 @@ module Aws::TimestreamInfluxDB
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Reboots a Timestream for InfluxDB cluster.
+    #
+    # @option params [required, String] :db_cluster_id
+    #   Service-generated unique identifier of the DB cluster to reboot.
+    #
+    # @option params [Array<String>] :instance_ids
+    #   A list of service-generated unique DB Instance Ids belonging to the DB
+    #   Cluster to reboot.
+    #
+    # @return [Types::RebootDbClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RebootDbClusterOutput#db_cluster_status #db_cluster_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reboot_db_cluster({
+    #     db_cluster_id: "DbClusterId", # required
+    #     instance_ids: ["DbInstanceId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/RebootDbCluster AWS API Documentation
+    #
+    # @overload reboot_db_cluster(params = {})
+    # @param [Hash] params ({})
+    def reboot_db_cluster(params = {}, options = {})
+      req = build_request(:reboot_db_cluster, params)
+      req.send_request(options)
+    end
+
+    # Reboots a Timestream for InfluxDB instance.
+    #
+    # @option params [required, String] :identifier
+    #   The id of the DB instance to reboot.
+    #
+    # @return [Types::RebootDbInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RebootDbInstanceOutput#id #id} => String
+    #   * {Types::RebootDbInstanceOutput#name #name} => String
+    #   * {Types::RebootDbInstanceOutput#arn #arn} => String
+    #   * {Types::RebootDbInstanceOutput#status #status} => String
+    #   * {Types::RebootDbInstanceOutput#endpoint #endpoint} => String
+    #   * {Types::RebootDbInstanceOutput#port #port} => Integer
+    #   * {Types::RebootDbInstanceOutput#network_type #network_type} => String
+    #   * {Types::RebootDbInstanceOutput#db_instance_type #db_instance_type} => String
+    #   * {Types::RebootDbInstanceOutput#db_storage_type #db_storage_type} => String
+    #   * {Types::RebootDbInstanceOutput#allocated_storage #allocated_storage} => Integer
+    #   * {Types::RebootDbInstanceOutput#deployment_type #deployment_type} => String
+    #   * {Types::RebootDbInstanceOutput#vpc_subnet_ids #vpc_subnet_ids} => Array&lt;String&gt;
+    #   * {Types::RebootDbInstanceOutput#publicly_accessible #publicly_accessible} => Boolean
+    #   * {Types::RebootDbInstanceOutput#vpc_security_group_ids #vpc_security_group_ids} => Array&lt;String&gt;
+    #   * {Types::RebootDbInstanceOutput#db_parameter_group_identifier #db_parameter_group_identifier} => String
+    #   * {Types::RebootDbInstanceOutput#availability_zone #availability_zone} => String
+    #   * {Types::RebootDbInstanceOutput#secondary_availability_zone #secondary_availability_zone} => String
+    #   * {Types::RebootDbInstanceOutput#log_delivery_configuration #log_delivery_configuration} => Types::LogDeliveryConfiguration
+    #   * {Types::RebootDbInstanceOutput#influx_auth_parameters_secret_arn #influx_auth_parameters_secret_arn} => String
+    #   * {Types::RebootDbInstanceOutput#db_cluster_id #db_cluster_id} => String
+    #   * {Types::RebootDbInstanceOutput#instance_mode #instance_mode} => String
+    #   * {Types::RebootDbInstanceOutput#instance_modes #instance_modes} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reboot_db_instance({
+    #     identifier: "DbInstanceIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED"
+    #   resp.endpoint #=> String
+    #   resp.port #=> Integer
+    #   resp.network_type #=> String, one of "IPV4", "DUAL"
+    #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"
+    #   resp.db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
+    #   resp.allocated_storage #=> Integer
+    #   resp.deployment_type #=> String, one of "SINGLE_AZ", "WITH_MULTIAZ_STANDBY"
+    #   resp.vpc_subnet_ids #=> Array
+    #   resp.vpc_subnet_ids[0] #=> String
+    #   resp.publicly_accessible #=> Boolean
+    #   resp.vpc_security_group_ids #=> Array
+    #   resp.vpc_security_group_ids[0] #=> String
+    #   resp.db_parameter_group_identifier #=> String
+    #   resp.availability_zone #=> String
+    #   resp.secondary_availability_zone #=> String
+    #   resp.log_delivery_configuration.s3_configuration.bucket_name #=> String
+    #   resp.log_delivery_configuration.s3_configuration.enabled #=> Boolean
+    #   resp.influx_auth_parameters_secret_arn #=> String
+    #   resp.db_cluster_id #=> String
+    #   resp.instance_mode #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
+    #   resp.instance_modes #=> Array
+    #   resp.instance_modes[0] #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/RebootDbInstance AWS API Documentation
+    #
+    # @overload reboot_db_instance(params = {})
+    # @param [Hash] params ({})
+    def reboot_db_instance(params = {}, options = {})
+      req = build_request(:reboot_db_instance, params)
       req.send_request(options)
     end
 
@@ -2071,7 +2178,7 @@ module Aws::TimestreamInfluxDB
     #
     # @example Response structure
     #
-    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"
+    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE", "UPDATING_INSTANCE_TYPE", "REBOOTING", "REBOOT_FAILED", "PARTIALLY_AVAILABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/UpdateDbCluster AWS API Documentation
     #
@@ -2171,7 +2278,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE", "REBOOTING", "REBOOT_FAILED"
     #   resp.endpoint #=> String
     #   resp.port #=> Integer
     #   resp.network_type #=> String, one of "IPV4", "DUAL"
@@ -2222,7 +2329,7 @@ module Aws::TimestreamInfluxDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-timestreaminfluxdb'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

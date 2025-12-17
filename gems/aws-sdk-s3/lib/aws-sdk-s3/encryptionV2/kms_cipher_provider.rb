@@ -33,6 +33,8 @@ module Aws
           end
           cipher = Utils.aes_encryption_cipher(:GCM)
           cipher.key = key_data.plaintext
+          ##= ../specification/s3-encryption/data-format/content-metadata.md#algorithm-suite-and-message-format-version-compatibility
+          ##% Objects encrypted with ALG_AES_256_GCM_IV12_TAG16_NO_KDF MUST use the V2 message format version only.
           envelope = {
             'x-amz-key-v2' => encode64(key_data.ciphertext_blob),
             'x-amz-iv' => encode64(cipher.iv = cipher.random_iv),
@@ -53,9 +55,15 @@ module Aws
 
           case envelope['x-amz-wrap-alg']
           when 'kms'
+            ##= ../specification/s3-encryption/client.md#enable-legacy-wrapping-algorithms
+            ##% The S3EC MUST support the option to enable or disable legacy wrapping algorithms.
             unless options[:security_profile] == :v2_and_legacy
+              ##= ../specification/s3-encryption/client.md#enable-legacy-wrapping-algorithms
+              ##% When disabled, the S3EC MUST NOT decrypt objects encrypted using legacy wrapping algorithms; it MUST throw an exception when attempting to decrypt an object encrypted with a legacy wrapping algorithm.
               raise Errors::LegacyDecryptionError
             end
+            ##= ../specification/s3-encryption/client.md#enable-legacy-wrapping-algorithms
+            ##% When enabled, the S3EC MUST be able to decrypt objects encrypted with all supported wrapping algorithms (both legacy and fully supported).
           when 'kms+context'
             if cek_alg != encryption_context['aws:x-amz-cek-alg']
               raise Errors::CEKAlgMismatchError

@@ -1,0 +1,26 @@
+[
+  {
+    "comment": "Basic S3EC.ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY",
+    "data_key": "80d90dc4cc7e77d8a6332efa44eba56230a7fe7b89af37d1e501ab2e07c0a163",
+    "message_id": "b8ea76bed24c7b85382a148cb9dcd1cfdfb765f55ded4dfa6e0c4c79",
+    "encryption_key": "6dd14f546cc006e639126e83f5d4d1b118576bb5df97f38c6fb3a1db87bbc338",
+    "commitment_key": "f89818bc0a346d3a3426b68e9509b6b2ae5fe1f904aa329fb73625db"
+  },
+  {
+    "comment": "Basic S3EC.ALG_AES_256_GCM_HKDF_SHA512_COMMIT_KEY",
+    "data_key": "501afb8227d22e75e68010414b8abdaf3064c081e8e922dafef4992036394d60",
+    "message_id": "61a00b4981a5aacfd136c55cb726e32d2a547dc7600a7d4675c69127",
+    "encryption_key": "e14786a714748d1d2c3a4a6816dec56ddf1881bbeabb4f39420ffb9f63700b2f",
+    "commitment_key": "5c1e73e47f6fe3a70d6d094283aceaa76d2975feb829212d88f0afc1"
+  },
+  {
+    "comment": "Example KAT entry",
+    "data_key": "09b579890de8618fa436ced66b655af4aa6ec760fabf3eb9e7cc7fd22e79851e",
+    "message_id": "9faa68cd791762eb7280bab11ca1d4011de7e3a255a628d9fbe54f0a",
+    "encryption_key": "bd99a917127150fae9e6f87193b122c52ae72fbcdc30e8d18cdf81fabf8b2df3",
+    "commitment_key": "ebbeb009a83d2dad7ce3d8df0b7814d1dfe7e9e89703f768ab6ffe3f",
+    "plaintext": "48656c6c6f2c20576f726c6421",
+    "ciphertext": "ac9f0d1185cbc1d2b7e77788b4",
+    "auth_tag": "abe58c0c421fa648faca6de694057e9a"
+  }
+]

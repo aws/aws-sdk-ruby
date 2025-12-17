@@ -149,6 +149,7 @@ module Aws::IoT
     AwsJobRolloutRatePerMinute = Shapes::IntegerShape.new(name: 'AwsJobRolloutRatePerMinute')
     AwsJobTimeoutConfig = Shapes::StructureShape.new(name: 'AwsJobTimeoutConfig')
     AwsJobTimeoutInProgressTimeoutInMinutes = Shapes::IntegerShape.new(name: 'AwsJobTimeoutInProgressTimeoutInMinutes')
+    AwsJsonSubstitutionCommandPreprocessorConfig = Shapes::StructureShape.new(name: 'AwsJsonSubstitutionCommandPreprocessorConfig')
     BatchMode = Shapes::BooleanShape.new(name: 'BatchMode')
     BeforeSubstitutionFlag = Shapes::BooleanShape.new(name: 'BeforeSubstitutionFlag')
     Behavior = Shapes::StructureShape.new(name: 'Behavior')
@@ -258,9 +259,18 @@ module Aws::IoT
     CommandParameterDescription = Shapes::StringShape.new(name: 'CommandParameterDescription')
     CommandParameterList = Shapes::ListShape.new(name: 'CommandParameterList')
     CommandParameterName = Shapes::StringShape.new(name: 'CommandParameterName')
+    CommandParameterType = Shapes::StringShape.new(name: 'CommandParameterType')
     CommandParameterValue = Shapes::StructureShape.new(name: 'CommandParameterValue')
+    CommandParameterValueComparisonOperand = Shapes::StructureShape.new(name: 'CommandParameterValueComparisonOperand')
+    CommandParameterValueComparisonOperator = Shapes::StringShape.new(name: 'CommandParameterValueComparisonOperator')
+    CommandParameterValueCondition = Shapes::StructureShape.new(name: 'CommandParameterValueCondition')
+    CommandParameterValueConditionList = Shapes::ListShape.new(name: 'CommandParameterValueConditionList')
+    CommandParameterValueNumberRange = Shapes::StructureShape.new(name: 'CommandParameterValueNumberRange')
+    CommandParameterValueStringList = Shapes::ListShape.new(name: 'CommandParameterValueStringList')
     CommandPayload = Shapes::StructureShape.new(name: 'CommandPayload')
     CommandPayloadBlob = Shapes::BlobShape.new(name: 'CommandPayloadBlob')
+    CommandPayloadTemplateString = Shapes::StringShape.new(name: 'CommandPayloadTemplateString')
+    CommandPreprocessor = Shapes::StructureShape.new(name: 'CommandPreprocessor')
     CommandSummary = Shapes::StructureShape.new(name: 'CommandSummary')
     CommandSummaryList = Shapes::ListShape.new(name: 'CommandSummaryList')
     Comment = Shapes::StringShape.new(name: 'Comment')
@@ -991,6 +1001,7 @@ module Aws::IoT
     OptionalVersion = Shapes::IntegerShape.new(name: 'OptionalVersion')
     OutgoingCertificate = Shapes::StructureShape.new(name: 'OutgoingCertificate')
     OutgoingCertificates = Shapes::ListShape.new(name: 'OutgoingCertificates')
+    OutputFormat = Shapes::StringShape.new(name: 'OutputFormat')
     OverrideDynamicGroups = Shapes::BooleanShape.new(name: 'OverrideDynamicGroups')
     PackageArn = Shapes::StringShape.new(name: 'PackageArn')
     PackageCatalogMaxResults = Shapes::IntegerShape.new(name: 'PackageCatalogMaxResults')
@@ -1819,6 +1830,9 @@ module Aws::IoT
     AwsJobTimeoutConfig.add_member(:in_progress_timeout_in_minutes, Shapes::ShapeRef.new(shape: AwsJobTimeoutInProgressTimeoutInMinutes, location_name: "inProgressTimeoutInMinutes"))
     AwsJobTimeoutConfig.struct_class = Types::AwsJobTimeoutConfig
 
+    AwsJsonSubstitutionCommandPreprocessorConfig.add_member(:output_format, Shapes::ShapeRef.new(shape: OutputFormat, required: true, location_name: "outputFormat"))
+    AwsJsonSubstitutionCommandPreprocessorConfig.struct_class = Types::AwsJsonSubstitutionCommandPreprocessorConfig
+
     Behavior.add_member(:name, Shapes::ShapeRef.new(shape: BehaviorName, required: true, location_name: "name"))
     Behavior.add_member(:metric, Shapes::ShapeRef.new(shape: BehaviorMetric, location_name: "metric"))
     Behavior.add_member(:metric_dimension, Shapes::ShapeRef.new(shape: MetricDimension, location_name: "metricDimension"))
@@ -2038,8 +2052,10 @@ module Aws::IoT
     CommandExecutionSummaryList.member = Shapes::ShapeRef.new(shape: CommandExecutionSummary)
 
     CommandParameter.add_member(:name, Shapes::ShapeRef.new(shape: CommandParameterName, required: true, location_name: "name"))
+    CommandParameter.add_member(:type, Shapes::ShapeRef.new(shape: CommandParameterType, location_name: "type"))
     CommandParameter.add_member(:value, Shapes::ShapeRef.new(shape: CommandParameterValue, location_name: "value"))
     CommandParameter.add_member(:default_value, Shapes::ShapeRef.new(shape: CommandParameterValue, location_name: "defaultValue"))
+    CommandParameter.add_member(:value_conditions, Shapes::ShapeRef.new(shape: CommandParameterValueConditionList, location_name: "valueConditions"))
     CommandParameter.add_member(:description, Shapes::ShapeRef.new(shape: CommandParameterDescription, location_name: "description"))
     CommandParameter.struct_class = Types::CommandParameter
 
@@ -2054,9 +2070,31 @@ module Aws::IoT
     CommandParameterValue.add_member(:ul, Shapes::ShapeRef.new(shape: UnsignedLongParameterValue, location_name: "UL"))
     CommandParameterValue.struct_class = Types::CommandParameterValue
 
+    CommandParameterValueComparisonOperand.add_member(:number, Shapes::ShapeRef.new(shape: StringParameterValue, location_name: "number"))
+    CommandParameterValueComparisonOperand.add_member(:numbers, Shapes::ShapeRef.new(shape: CommandParameterValueStringList, location_name: "numbers"))
+    CommandParameterValueComparisonOperand.add_member(:string, Shapes::ShapeRef.new(shape: StringParameterValue, location_name: "string"))
+    CommandParameterValueComparisonOperand.add_member(:strings, Shapes::ShapeRef.new(shape: CommandParameterValueStringList, location_name: "strings"))
+    CommandParameterValueComparisonOperand.add_member(:number_range, Shapes::ShapeRef.new(shape: CommandParameterValueNumberRange, location_name: "numberRange"))
+    CommandParameterValueComparisonOperand.struct_class = Types::CommandParameterValueComparisonOperand
+
+    CommandParameterValueCondition.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: CommandParameterValueComparisonOperator, required: true, location_name: "comparisonOperator"))
+    CommandParameterValueCondition.add_member(:operand, Shapes::ShapeRef.new(shape: CommandParameterValueComparisonOperand, required: true, location_name: "operand"))
+    CommandParameterValueCondition.struct_class = Types::CommandParameterValueCondition
+
+    CommandParameterValueConditionList.member = Shapes::ShapeRef.new(shape: CommandParameterValueCondition)
+
+    CommandParameterValueNumberRange.add_member(:min, Shapes::ShapeRef.new(shape: StringParameterValue, required: true, location_name: "min"))
+    CommandParameterValueNumberRange.add_member(:max, Shapes::ShapeRef.new(shape: StringParameterValue, required: true, location_name: "max"))
+    CommandParameterValueNumberRange.struct_class = Types::CommandParameterValueNumberRange
+
+    CommandParameterValueStringList.member = Shapes::ShapeRef.new(shape: StringParameterValue)
+
     CommandPayload.add_member(:content, Shapes::ShapeRef.new(shape: CommandPayloadBlob, location_name: "content"))
     CommandPayload.add_member(:content_type, Shapes::ShapeRef.new(shape: MimeType, location_name: "contentType"))
     CommandPayload.struct_class = Types::CommandPayload
+
+    CommandPreprocessor.add_member(:aws_json_substitution, Shapes::ShapeRef.new(shape: AwsJsonSubstitutionCommandPreprocessorConfig, location_name: "awsJsonSubstitution"))
+    CommandPreprocessor.struct_class = Types::CommandPreprocessor
 
     CommandSummary.add_member(:command_arn, Shapes::ShapeRef.new(shape: CommandArn, location_name: "commandArn"))
     CommandSummary.add_member(:command_id, Shapes::ShapeRef.new(shape: CommandId, location_name: "commandId"))
@@ -2148,6 +2186,8 @@ module Aws::IoT
     CreateCommandRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
     CreateCommandRequest.add_member(:description, Shapes::ShapeRef.new(shape: CommandDescription, location_name: "description"))
     CreateCommandRequest.add_member(:payload, Shapes::ShapeRef.new(shape: CommandPayload, location_name: "payload"))
+    CreateCommandRequest.add_member(:payload_template, Shapes::ShapeRef.new(shape: CommandPayloadTemplateString, location_name: "payloadTemplate"))
+    CreateCommandRequest.add_member(:preprocessor, Shapes::ShapeRef.new(shape: CommandPreprocessor, location_name: "preprocessor"))
     CreateCommandRequest.add_member(:mandatory_parameters, Shapes::ShapeRef.new(shape: CommandParameterList, location_name: "mandatoryParameters"))
     CreateCommandRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     CreateCommandRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
@@ -3305,6 +3345,8 @@ module Aws::IoT
     GetCommandResponse.add_member(:description, Shapes::ShapeRef.new(shape: CommandDescription, location_name: "description"))
     GetCommandResponse.add_member(:mandatory_parameters, Shapes::ShapeRef.new(shape: CommandParameterList, location_name: "mandatoryParameters"))
     GetCommandResponse.add_member(:payload, Shapes::ShapeRef.new(shape: CommandPayload, location_name: "payload"))
+    GetCommandResponse.add_member(:payload_template, Shapes::ShapeRef.new(shape: CommandPayloadTemplateString, location_name: "payloadTemplate"))
+    GetCommandResponse.add_member(:preprocessor, Shapes::ShapeRef.new(shape: CommandPreprocessor, location_name: "preprocessor"))
     GetCommandResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     GetCommandResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateType, location_name: "createdAt"))
     GetCommandResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "lastUpdatedAt"))

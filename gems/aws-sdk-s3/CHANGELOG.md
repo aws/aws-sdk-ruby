@@ -5,11 +5,15 @@ Unreleased Changes
 
 * Feature - Improved memory efficiency when calculating request checksums for large file uploads (Ruby MRI only).
 
+1.208.0 (2025-12-16)
+------------------
+
+* Feature - Updates to the S3 Encryption Client. The V3 S3 Encryption Client now requires key committing algorithm suites by default.
+
 1.207.0 (2025-12-15)
 ------------------
 
 * Feature - This release adds support for the new optional field 'LifecycleExpirationDate' in S3 Inventory configurations.
-
 
 1.206.0 (2025-12-02)
 ------------------

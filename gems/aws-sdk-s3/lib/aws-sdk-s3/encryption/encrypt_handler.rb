@@ -38,6 +38,8 @@ module Aws
           io = StringIO.new(io) if String === io
           context.params[:body] = IOEncrypter.new(cipher, io)
           context.params[:metadata] ||= {}
+          ##= ../specification/s3-encryption/data-format/content-metadata.md#content-metadata-mapkeys
+          ##% - The mapkey "x-amz-unencrypted-content-length" SHOULD be present for V1 format objects.
           context.params[:metadata]['x-amz-unencrypted-content-length'] = io.size
           if context.params.delete(:content_md5)
             warn('Setting content_md5 on client side encrypted objects is deprecated')

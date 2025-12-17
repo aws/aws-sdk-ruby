@@ -44,7 +44,7 @@ module Aws::TimestreamInfluxDB
 
     class CreateDbClusterOutput
       attr_accessor db_cluster_id: ::String
-      attr_accessor db_cluster_status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE")
+      attr_accessor db_cluster_status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
       SENSITIVE: []
     end
 
@@ -73,7 +73,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
       attr_accessor endpoint: ::String
       attr_accessor port: ::Integer
       attr_accessor network_type: ("IPV4" | "DUAL")
@@ -116,7 +116,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
       attr_accessor endpoint: ::String
       attr_accessor reader_endpoint: ::String
       attr_accessor port: ::Integer
@@ -133,7 +133,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
       attr_accessor endpoint: ::String
       attr_accessor port: ::Integer
       attr_accessor network_type: ("IPV4" | "DUAL")
@@ -150,7 +150,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
       attr_accessor endpoint: ::String
       attr_accessor port: ::Integer
       attr_accessor network_type: ("IPV4" | "DUAL")
@@ -175,7 +175,7 @@ module Aws::TimestreamInfluxDB
     end
 
     class DeleteDbClusterOutput
-      attr_accessor db_cluster_status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE")
+      attr_accessor db_cluster_status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
       SENSITIVE: []
     end
 
@@ -188,7 +188,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
       attr_accessor endpoint: ::String
       attr_accessor port: ::Integer
       attr_accessor network_type: ("IPV4" | "DUAL")
@@ -225,7 +225,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
       attr_accessor endpoint: ::String
       attr_accessor reader_endpoint: ::String
       attr_accessor port: ::Integer
@@ -254,7 +254,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
       attr_accessor endpoint: ::String
       attr_accessor port: ::Integer
       attr_accessor network_type: ("IPV4" | "DUAL")
@@ -527,6 +527,48 @@ module Aws::TimestreamInfluxDB
       end
     end
 
+    class RebootDbClusterInput
+      attr_accessor db_cluster_id: ::String
+      attr_accessor instance_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RebootDbClusterOutput
+      attr_accessor db_cluster_status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
+      SENSITIVE: []
+    end
+
+    class RebootDbInstanceInput
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class RebootDbInstanceOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
+      attr_accessor endpoint: ::String
+      attr_accessor port: ::Integer
+      attr_accessor network_type: ("IPV4" | "DUAL")
+      attr_accessor db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
+      attr_accessor db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY")
+      attr_accessor vpc_subnet_ids: ::Array[::String]
+      attr_accessor publicly_accessible: bool
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor db_parameter_group_identifier: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor secondary_availability_zone: ::String
+      attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
+      attr_accessor influx_auth_parameters_secret_arn: ::String
+      attr_accessor db_cluster_id: ::String
+      attr_accessor instance_mode: ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
+      attr_accessor instance_modes: ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
+      SENSITIVE: []
+    end
+
     class ResourceNotFoundException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
@@ -574,7 +616,7 @@ module Aws::TimestreamInfluxDB
     end
 
     class UpdateDbClusterOutput
-      attr_accessor db_cluster_status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE")
+      attr_accessor db_cluster_status: ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
       SENSITIVE: []
     end
 
@@ -594,7 +636,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
       attr_accessor endpoint: ::String
       attr_accessor port: ::Integer
       attr_accessor network_type: ("IPV4" | "DUAL")

@@ -82,7 +82,7 @@ module Aws
       interface _CreateDbClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDbClusterOutput]
         def db_cluster_id: () -> ::String
-        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE")
+        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#create_db_cluster-instance_method
       def create_db_cluster: (
@@ -117,7 +117,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
         def endpoint: () -> ::String
         def port: () -> ::Integer
         def network_type: () -> ("IPV4" | "DUAL")
@@ -438,7 +438,7 @@ module Aws
 
       interface _DeleteDbClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDbClusterOutput]
-        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE")
+        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#delete_db_cluster-instance_method
       def delete_db_cluster: (
@@ -451,7 +451,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
         def endpoint: () -> ::String
         def port: () -> ::Integer
         def network_type: () -> ("IPV4" | "DUAL")
@@ -482,7 +482,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE")
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
         def endpoint: () -> ::String
         def reader_endpoint: () -> ::String
         def port: () -> ::Integer
@@ -511,7 +511,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
         def endpoint: () -> ::String
         def port: () -> ::Integer
         def network_type: () -> ("IPV4" | "DUAL")
@@ -610,6 +610,48 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _RebootDbClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RebootDbClusterOutput]
+        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#reboot_db_cluster-instance_method
+      def reboot_db_cluster: (
+                               db_cluster_id: ::String,
+                               ?instance_ids: Array[::String]
+                             ) -> _RebootDbClusterResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebootDbClusterResponseSuccess
+
+      interface _RebootDbInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RebootDbInstanceOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
+        def endpoint: () -> ::String
+        def port: () -> ::Integer
+        def network_type: () -> ("IPV4" | "DUAL")
+        def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
+        def db_storage_type: () -> ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3")
+        def allocated_storage: () -> ::Integer
+        def deployment_type: () -> ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY")
+        def vpc_subnet_ids: () -> ::Array[::String]
+        def publicly_accessible: () -> bool
+        def vpc_security_group_ids: () -> ::Array[::String]
+        def db_parameter_group_identifier: () -> ::String
+        def availability_zone: () -> ::String
+        def secondary_availability_zone: () -> ::String
+        def log_delivery_configuration: () -> Types::LogDeliveryConfiguration
+        def influx_auth_parameters_secret_arn: () -> ::String
+        def db_cluster_id: () -> ::String
+        def instance_mode: () -> ("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")
+        def instance_modes: () -> ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#reboot_db_instance-instance_method
+      def reboot_db_instance: (
+                                identifier: ::String
+                              ) -> _RebootDbInstanceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebootDbInstanceResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#tag_resource-instance_method
       def tag_resource: (
                           resource_arn: ::String,
@@ -626,7 +668,7 @@ module Aws
 
       interface _UpdateDbClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDbClusterOutput]
-        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE")
+        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE" | "UPDATING_INSTANCE_TYPE" | "REBOOTING" | "REBOOT_FAILED" | "PARTIALLY_AVAILABLE")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#update_db_cluster-instance_method
       def update_db_cluster: (
@@ -649,7 +691,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE" | "REBOOTING" | "REBOOT_FAILED")
         def endpoint: () -> ::String
         def port: () -> ::Integer
         def network_type: () -> ("IPV4" | "DUAL")

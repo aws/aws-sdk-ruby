@@ -14,10 +14,14 @@ module Aws
             options[:key_wrap_schema],
             @key_provider.encryption_materials.key
           )
+          ##= ../specification/s3-encryption/encryption.md#content-encryption
+          ##% The S3EC MUST use the encryption algorithm configured during [client](./client.md) initialization.
           @content_encryption_schema = validate_cek(
             options[:content_encryption_schema]
           )
         end
+
+        attr_reader :key_provider
 
         # @return [Array<Hash,Cipher>] Creates an returns a new encryption
         #   envelope and encryption cipher.
@@ -30,9 +34,14 @@ module Aws
             )
           else
             enc_key = encode64(
+              ##= ../specification/s3-encryption/encryption.md#alg-aes-256-gcm-iv12-tag16-no-kdf
+              ##% The client MUST NOT provide any AAD when encrypting with ALG_AES_256_GCM_IV12_TAG16_NO_KDF.
               encrypt_aes_gcm(envelope_key(cipher), @content_encryption_schema)
             )
           end
+
+          ##= ../specification/s3-encryption/data-format/content-metadata.md#algorithm-suite-and-message-format-version-compatibility
+          ##% Objects encrypted with ALG_AES_256_GCM_IV12_TAG16_NO_KDF MUST use the V2 message format version only.
           envelope = {
             'x-amz-key-v2' => enc_key,
             'x-amz-cek-alg' => @content_encryption_schema,
@@ -52,8 +61,16 @@ module Aws
           master_key = @key_provider.key_for(envelope['x-amz-matdesc'])
           if envelope.key? 'x-amz-key'
             unless options[:security_profile] == :v2_and_legacy
+              ##= ../specification/s3-encryption/decryption.md#legacy-decryption
+              ##% If the S3EC is not configured to enable legacy unauthenticated content decryption, the client MUST throw an exception when attempting to decrypt an object encrypted with a legacy unauthenticated algorithm suite.
+              ##= ../specification/s3-encryption/client.md#enable-legacy-unauthenticated-modes
+              ##% When disabled, the S3EC MUST NOT decrypt objects encrypted using legacy content encryption algorithms; it MUST throw an exception when attempting to decrypt an object encrypted with a legacy content encryption algorithm.
               raise Errors::LegacyDecryptionError
             end
+            ##= ../specification/s3-encryption/decryption.md#legacy-decryption
+            ##% The S3EC MUST NOT decrypt objects encrypted using legacy unauthenticated algorithm suites unless specifically configured to do so.
+            ##= ../specification/s3-encryption/client.md#enable-legacy-unauthenticated-modes
+            ##% When enabled, the S3EC MUST be able to decrypt objects encrypted with all content encryption algorithms (both legacy and fully supported).
             # Support for decryption of legacy objects
             key = Utils.decrypt(master_key, decode64(envelope['x-amz-key']))
             iv = decode64(envelope['x-amz-iv'])

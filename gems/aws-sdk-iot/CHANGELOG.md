@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.158.0 (2025-12-16)
+------------------
+
+* Feature - Add support for dynamic payloads in IoT Device Management Commands
+
 1.157.0 (2025-11-21)
 ------------------
 

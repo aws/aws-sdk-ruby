@@ -381,9 +381,16 @@ module Aws
                               content: ::String?,
                               content_type: ::String?
                             },
+                            ?payload_template: ::String,
+                            ?preprocessor: {
+                              aws_json_substitution: {
+                                output_format: ("JSON" | "CBOR")
+                              }?
+                            },
                             ?mandatory_parameters: Array[
                               {
                                 name: ::String,
+                                type: ("STRING" | "INTEGER" | "DOUBLE" | "LONG" | "UNSIGNEDLONG" | "BOOLEAN" | "BINARY")?,
                                 value: {
                                   s: ::String?,
                                   b: bool?,
@@ -402,6 +409,21 @@ module Aws
                                   bin: ::String?,
                                   ul: ::String?
                                 }?,
+                                value_conditions: Array[
+                                  {
+                                    comparison_operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "LESS_THAN_EQUALS" | "GREATER_THAN" | "GREATER_THAN_EQUALS" | "IN_SET" | "NOT_IN_SET" | "IN_RANGE" | "NOT_IN_RANGE"),
+                                    operand: {
+                                      number: ::String?,
+                                      numbers: Array[::String]?,
+                                      string: ::String?,
+                                      strings: Array[::String]?,
+                                      number_range: {
+                                        min: ::String,
+                                        max: ::String
+                                      }?
+                                    }
+                                  },
+                                ]?,
                                 description: ::String?
                               },
                             ],
@@ -2619,6 +2641,8 @@ module Aws
         def description: () -> ::String
         def mandatory_parameters: () -> ::Array[Types::CommandParameter]
         def payload: () -> Types::CommandPayload
+        def payload_template: () -> ::String
+        def preprocessor: () -> Types::CommandPreprocessor
         def role_arn: () -> ::String
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
