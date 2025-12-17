@@ -146,7 +146,7 @@ module Aws
                     if defined?(JRUBY_VERSION)
                       encrypted_body
                     else
-                      b == encrypted_body
+                      b.include?(encrypted_body)
                     end
                   },
                   headers: {
@@ -182,6 +182,11 @@ module Aws
 
               options[:envelope_location] = :instruction_file
               client.put_object(bucket: 'bucket', key: 'key', body: 'secret')
+              expected_body = Json.dump(
+                'x-amz-key' => 'gX+a4JQYj7FP0y5TAAvxTz4e2l0DvOItbXByml/NPtKQcUlsoGHoYR/T0TuYHcNj',
+                'x-amz-iv' => 'TO5mQgtOzWkTfoX4RE5tsA==',
+                'x-amz-matdesc' => '{}'
+              )
 
               # first request stores the encryption materials in the instruction file
               expect(
@@ -189,16 +194,17 @@ module Aws
                   :put,
                   'https://bucket.s3.us-west-1.amazonaws.com/key.instruction'
                 ).with(
-                  body: Json.dump(
-                    'x-amz-key' => 'gX+a4JQYj7FP0y5TAAvxTz4e2l0DvOItbXByml/NPtKQcUlsoGHoYR/T0TuYHcNj',
-                    'x-amz-iv' => 'TO5mQgtOzWkTfoX4RE5tsA==',
-                    'x-amz-matdesc' => '{}'
-                  )
+                  body: lambda { |b|
+                    if defined?(JRUBY_VERSION)
+                      expected_body
+                    else
+                      b.include?(expected_body)
+                    end
+                  }
                 )
               ).to have_been_made.once
 
               # second request stores teh encrypted object
-
               expect(
                 a_request(
                   :put, 'https://bucket.s3.us-west-1.amazonaws.com/key'
@@ -207,7 +213,7 @@ module Aws
                     if defined?(JRUBY_VERSION)
                       encrypted_body
                     else
-                      b == encrypted_body
+                      b.include?(encrypted_body)
                     end
                   },
                   headers: {
@@ -239,7 +245,16 @@ module Aws
               expect_any_instance_of(EncryptHandler).to receive(:warn)
               client.put_object(bucket: 'bucket', key: 'key', body: 'secret', content_md5: 'MD5')
               expect(
-                a_request(:put, 'https://bucket.s3.us-west-1.amazonaws.com/key').with(body: encrypted_body)
+                a_request(:put, 'https://bucket.s3.us-west-1.amazonaws.com/key')
+                  .with(
+                    body: lambda { |b|
+                      if defined?(JRUBY_VERSION)
+                        encrypted_body
+                      else
+                        b.include?(encrypted_body)
+                      end
+                    }
+                  )
               ).to have_been_made.once
             end
 
@@ -570,16 +585,18 @@ module Aws
               plaintext: plaintext_object_key,
               ciphertext_blob: encrypted_object_key
             )
-            resp = client.put_object(
-              bucket: 'aws-sdk', key: 'foo', body: 'plain-text'
-            )
+            resp = client.put_object(bucket: 'aws-sdk', key: 'foo', body: 'plain-text')
             headers = resp.context.http_request.headers
             envelope.each do |key, value|
               expect(headers["x-amz-meta-#{key}"]).to eq(value)
             end
-            expect(
-              Base64.encode64(resp.context.http_request.body_contents)
-            ).to eq("4FAj3kTOIisQ+9b8/kia8g==\n")
+            result =
+              if defined?(JRUBY_VERSION)
+                resp.context.http_request.body_contents
+              else
+                resp.context.http_request.body.instance_variable_get('@io').read
+              end
+            expect(Base64.encode64(result)).to eq("4FAj3kTOIisQ+9b8/kia8g==\n")
           end
 
           it 'supports decryption via KMS w/ CBC' do

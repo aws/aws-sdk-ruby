@@ -502,7 +502,7 @@ module Aws
         end
 
         def read(length = nil, buf = nil)
-          return @io.read unless length
+          length ||= MIN_CHUNK_SIZE
 
           return if @eof && @buffer.empty? && @current_chunk.empty?
 
