@@ -244,11 +244,6 @@ module BuildTools
       test['input']['identifier'] = 'a' * 26
     end
 
-    smoke('ElasticTranscoder') do |smoke|
-      # discontinued service
-      smoke['testCases'] = []
-    end
-
     smoke('ObservabilityAdmin') do |smoke|
       test = smoke['testCases'].find do |test_case|
         test_case['id'] == 'GetTelemetryEvaluationStatusForOrganization'
