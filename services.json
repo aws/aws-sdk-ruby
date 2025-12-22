@@ -484,7 +484,7 @@
   },
   "ElasticLoadBalancingV2": {
     "models": "elasticloadbalancingv2/2015-12-01"
-  }
+  },
   "ElasticsearchService": {
     "models": "es/2015-01-01"
   },
