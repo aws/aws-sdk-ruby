@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Elastic Transcoder has been removed from the SDK because it has been discontinued.
+
 1.79.0 (2025-11-21)
 ------------------
 
