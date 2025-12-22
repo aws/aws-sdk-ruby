@@ -634,6 +634,14 @@ module Aws::SESV2
     #     ],
     #     suppression_options: {
     #       suppressed_reasons: ["BOUNCE"], # accepts BOUNCE, COMPLAINT
+    #       validation_options: {
+    #         condition_threshold: { # required
+    #           condition_threshold_enabled: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           overall_confidence_threshold: {
+    #             confidence_verdict_threshold: "MEDIUM", # required, accepts MEDIUM, HIGH, MANAGED
+    #           },
+    #         },
+    #       },
     #     },
     #     vdm_options: {
     #       dashboard_options: {
@@ -844,6 +852,10 @@ module Aws::SESV2
     #
     #   [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom-faq
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of objects that define the tags (keys and values) to
+    #   associate with the custom verification email template.
+    #
     # @option params [required, String] :success_redirection_url
     #   The URL that the recipient of the verification email is sent to if his
     #   or her address is successfully verified.
@@ -861,6 +873,12 @@ module Aws::SESV2
     #     from_email_address: "EmailAddress", # required
     #     template_subject: "EmailTemplateSubject", # required
     #     template_content: "TemplateContent", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #     success_redirection_url: "SuccessRedirectionURL", # required
     #     failure_redirection_url: "FailureRedirectionURL", # required
     #   })
@@ -1224,6 +1242,10 @@ module Aws::SESV2
     #   The content of the email template, composed of a subject line, an HTML
     #   part, and a text-only part.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of objects that define the tags (keys and values) to
+    #   associate with the email template.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1235,6 +1257,12 @@ module Aws::SESV2
     #       text: "EmailTemplateText",
     #       html: "EmailTemplateHtml",
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateEmailTemplate AWS API Documentation
@@ -1980,6 +2008,8 @@ module Aws::SESV2
     #   resp.sending_enabled #=> Boolean
     #   resp.suppression_attributes.suppressed_reasons #=> Array
     #   resp.suppression_attributes.suppressed_reasons[0] #=> String, one of "BOUNCE", "COMPLAINT"
+    #   resp.suppression_attributes.validation_attributes.condition_threshold.condition_threshold_enabled #=> String, one of "ENABLED", "DISABLED"
+    #   resp.suppression_attributes.validation_attributes.condition_threshold.overall_confidence_threshold.confidence_verdict_threshold #=> String, one of "MEDIUM", "HIGH", "MANAGED"
     #   resp.details.mail_type #=> String, one of "MARKETING", "TRANSACTIONAL"
     #   resp.details.website_url #=> String
     #   resp.details.contact_language #=> String, one of "EN", "JA"
@@ -2083,6 +2113,8 @@ module Aws::SESV2
     #   resp.tags[0].value #=> String
     #   resp.suppression_options.suppressed_reasons #=> Array
     #   resp.suppression_options.suppressed_reasons[0] #=> String, one of "BOUNCE", "COMPLAINT"
+    #   resp.suppression_options.validation_options.condition_threshold.condition_threshold_enabled #=> String, one of "ENABLED", "DISABLED"
+    #   resp.suppression_options.validation_options.condition_threshold.overall_confidence_threshold.confidence_verdict_threshold #=> String, one of "MEDIUM", "HIGH", "MANAGED"
     #   resp.vdm_options.dashboard_options.engagement_metrics #=> String, one of "ENABLED", "DISABLED"
     #   resp.vdm_options.guardian_options.optimized_shared_delivery #=> String, one of "ENABLED", "DISABLED"
     #   resp.archiving_options.archive_arn #=> String
@@ -2262,6 +2294,7 @@ module Aws::SESV2
     #   * {Types::GetCustomVerificationEmailTemplateResponse#from_email_address #from_email_address} => String
     #   * {Types::GetCustomVerificationEmailTemplateResponse#template_subject #template_subject} => String
     #   * {Types::GetCustomVerificationEmailTemplateResponse#template_content #template_content} => String
+    #   * {Types::GetCustomVerificationEmailTemplateResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::GetCustomVerificationEmailTemplateResponse#success_redirection_url #success_redirection_url} => String
     #   * {Types::GetCustomVerificationEmailTemplateResponse#failure_redirection_url #failure_redirection_url} => String
     #
@@ -2277,6 +2310,9 @@ module Aws::SESV2
     #   resp.from_email_address #=> String
     #   resp.template_subject #=> String
     #   resp.template_content #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #   resp.success_redirection_url #=> String
     #   resp.failure_redirection_url #=> String
     #
@@ -2616,6 +2652,42 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Provides validation insights about a specific email address, including
+    # syntax validation, DNS record checks, mailbox existence, and other
+    # deliverability factors.
+    #
+    # @option params [required, String] :email_address
+    #   The email address to analyze for validation insights.
+    #
+    # @return [Types::GetEmailAddressInsightsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEmailAddressInsightsResponse#mailbox_validation #mailbox_validation} => Types::MailboxValidation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_email_address_insights({
+    #     email_address: "EmailAddress", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.mailbox_validation.is_valid.confidence_verdict #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.mailbox_validation.evaluations.has_valid_syntax.confidence_verdict #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.mailbox_validation.evaluations.has_valid_dns_records.confidence_verdict #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.mailbox_validation.evaluations.mailbox_exists.confidence_verdict #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.mailbox_validation.evaluations.is_role_address.confidence_verdict #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.mailbox_validation.evaluations.is_disposable.confidence_verdict #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.mailbox_validation.evaluations.is_random_input.confidence_verdict #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetEmailAddressInsights AWS API Documentation
+    #
+    # @overload get_email_address_insights(params = {})
+    # @param [Hash] params ({})
+    def get_email_address_insights(params = {}, options = {})
+      req = build_request(:get_email_address_insights, params)
+      req.send_request(options)
+    end
+
     # Provides information about a specific identity, including the
     # identity's verification status, sending authorization policies, its
     # DKIM authentication status, and its custom Mail-From settings.
@@ -2741,6 +2813,7 @@ module Aws::SESV2
     #
     #   * {Types::GetEmailTemplateResponse#template_name #template_name} => String
     #   * {Types::GetEmailTemplateResponse#template_content #template_content} => Types::EmailTemplateContent
+    #   * {Types::GetEmailTemplateResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2754,6 +2827,9 @@ module Aws::SESV2
     #   resp.template_content.subject #=> String
     #   resp.template_content.text #=> String
     #   resp.template_content.html #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetEmailTemplate AWS API Documentation
     #
@@ -4407,12 +4483,24 @@ module Aws::SESV2
     #     for your account when a message sent to that address results in a
     #     hard bounce.
     #
+    # @option params [Types::SuppressionValidationAttributes] :validation_attributes
+    #   An object that contains additional suppression attributes for your
+    #   account.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_suppression_attributes({
     #     suppressed_reasons: ["BOUNCE"], # accepts BOUNCE, COMPLAINT
+    #     validation_attributes: {
+    #       condition_threshold: { # required
+    #         condition_threshold_enabled: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         overall_confidence_threshold: {
+    #           confidence_verdict_threshold: "MEDIUM", # required, accepts MEDIUM, HIGH, MANAGED
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountSuppressionAttributes AWS API Documentation
@@ -4625,6 +4713,11 @@ module Aws::SESV2
     #     for your account when a message sent to that address results in a
     #     hard bounce.
     #
+    # @option params [Types::SuppressionValidationOptions] :validation_options
+    #   An object that contains information about the email address
+    #   suppression preferences for the configuration set in the current
+    #   Amazon Web Services Region.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4632,6 +4725,14 @@ module Aws::SESV2
     #   resp = client.put_configuration_set_suppression_options({
     #     configuration_set_name: "ConfigurationSetName", # required
     #     suppressed_reasons: ["BOUNCE"], # accepts BOUNCE, COMPLAINT
+    #     validation_options: {
+    #       condition_threshold: { # required
+    #         condition_threshold_enabled: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         overall_confidence_threshold: {
+    #           confidence_verdict_threshold: "MEDIUM", # required, accepts MEDIUM, HIGH, MANAGED
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutConfigurationSetSuppressionOptions AWS API Documentation
@@ -6118,7 +6219,7 @@ module Aws::SESV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

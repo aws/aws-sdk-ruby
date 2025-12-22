@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.160.0 (2025-12-19)
+------------------
+
+* Feature - This release adds event-based logging feature that enables granular event logging controls for AWS IoT logs.
+
+1.159.0 (2025-12-18)
+------------------
+
+* Feature - This release adds message batching for the IoT Rules Engine HTTP action.
+
 1.158.0 (2025-12-16)
 ------------------
 

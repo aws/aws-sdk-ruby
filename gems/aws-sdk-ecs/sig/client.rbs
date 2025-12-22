@@ -111,6 +111,7 @@ module Aws
                                             storage_size_gi_b: ::Integer?
                                           }?,
                                           monitoring: ("BASIC" | "DETAILED")?,
+                                          capacity_option_type: ("ON_DEMAND" | "SPOT")?,
                                           instance_requirements: {
                                             v_cpu_count: {
                                               min: ::Integer,
@@ -552,7 +553,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#delete_account_setting-instance_method
       def delete_account_setting: (
-                                    name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode"),
+                                    name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode" | "fargateEventWindows"),
                                     ?principal_arn: ::String
                                   ) -> _DeleteAccountSettingResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccountSettingResponseSuccess
@@ -841,7 +842,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#list_account_settings-instance_method
       def list_account_settings: (
-                                   ?name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode"),
+                                   ?name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode" | "fargateEventWindows"),
                                    ?value: ::String,
                                    ?principal_arn: ::String,
                                    ?effective_settings: bool,
@@ -1005,7 +1006,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#put_account_setting-instance_method
       def put_account_setting: (
-                                 name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode"),
+                                 name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode" | "fargateEventWindows"),
                                  value: ::String,
                                  ?principal_arn: ::String
                                ) -> _PutAccountSettingResponseSuccess
@@ -1017,7 +1018,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#put_account_setting_default-instance_method
       def put_account_setting_default: (
-                                         name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode"),
+                                         name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode" | "fargateEventWindows"),
                                          value: ::String
                                        ) -> _PutAccountSettingDefaultResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountSettingDefaultResponseSuccess

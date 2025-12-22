@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2025-12-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Feature - Elastic Transcoder has been removed from the SDK because it has been discontinued.
+
 1.79.0 (2025-11-21)
 ------------------
 

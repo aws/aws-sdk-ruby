@@ -599,6 +599,7 @@ module Aws::WorkSpacesWeb
     CreateUserSettingsRequest.add_member(:deep_link_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "deepLinkAllowed"))
     CreateUserSettingsRequest.add_member(:toolbar_configuration, Shapes::ShapeRef.new(shape: ToolbarConfiguration, location_name: "toolbarConfiguration"))
     CreateUserSettingsRequest.add_member(:branding_configuration_input, Shapes::ShapeRef.new(shape: BrandingConfigurationCreateInput, location_name: "brandingConfigurationInput"))
+    CreateUserSettingsRequest.add_member(:web_authn_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "webAuthnAllowed"))
     CreateUserSettingsRequest.struct_class = Types::CreateUserSettingsRequest
 
     CreateUserSettingsResponse.add_member(:user_settings_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "userSettingsArn"))
@@ -1294,6 +1295,7 @@ module Aws::WorkSpacesWeb
     UpdateUserSettingsRequest.add_member(:deep_link_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "deepLinkAllowed"))
     UpdateUserSettingsRequest.add_member(:toolbar_configuration, Shapes::ShapeRef.new(shape: ToolbarConfiguration, location_name: "toolbarConfiguration"))
     UpdateUserSettingsRequest.add_member(:branding_configuration_input, Shapes::ShapeRef.new(shape: BrandingConfigurationUpdateInput, location_name: "brandingConfigurationInput"))
+    UpdateUserSettingsRequest.add_member(:web_authn_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "webAuthnAllowed"))
     UpdateUserSettingsRequest.struct_class = Types::UpdateUserSettingsRequest
 
     UpdateUserSettingsResponse.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettings, required: true, location_name: "userSettings"))
@@ -1327,6 +1329,7 @@ module Aws::WorkSpacesWeb
     UserSettings.add_member(:deep_link_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "deepLinkAllowed"))
     UserSettings.add_member(:toolbar_configuration, Shapes::ShapeRef.new(shape: ToolbarConfiguration, location_name: "toolbarConfiguration"))
     UserSettings.add_member(:branding_configuration, Shapes::ShapeRef.new(shape: BrandingConfiguration, location_name: "brandingConfiguration"))
+    UserSettings.add_member(:web_authn_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "webAuthnAllowed"))
     UserSettings.struct_class = Types::UserSettings
 
     UserSettingsList.member = Shapes::ShapeRef.new(shape: UserSettingsSummary)
@@ -1343,6 +1346,7 @@ module Aws::WorkSpacesWeb
     UserSettingsSummary.add_member(:deep_link_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "deepLinkAllowed"))
     UserSettingsSummary.add_member(:toolbar_configuration, Shapes::ShapeRef.new(shape: ToolbarConfiguration, location_name: "toolbarConfiguration"))
     UserSettingsSummary.add_member(:branding_configuration, Shapes::ShapeRef.new(shape: BrandingConfiguration, location_name: "brandingConfiguration"))
+    UserSettingsSummary.add_member(:web_authn_allowed, Shapes::ShapeRef.new(shape: EnabledType, location_name: "webAuthnAllowed"))
     UserSettingsSummary.struct_class = Types::UserSettingsSummary
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))

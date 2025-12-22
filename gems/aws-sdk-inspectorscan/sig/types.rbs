@@ -22,7 +22,7 @@ module Aws::InspectorScan
 
     class ScanSbomRequest
       attr_accessor sbom: untyped
-      attr_accessor output_format: ("CYCLONE_DX_1_5" | "INSPECTOR")
+      attr_accessor output_format: ("CYCLONE_DX_1_5" | "INSPECTOR" | "INSPECTOR_ALT")
       SENSITIVE: []
     end
 

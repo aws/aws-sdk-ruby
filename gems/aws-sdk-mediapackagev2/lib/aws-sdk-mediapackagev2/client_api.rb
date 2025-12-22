@@ -214,6 +214,7 @@ module Aws::MediaPackageV2
     SegmentSegmentNameString = Shapes::StringShape.new(name: 'SegmentSegmentNameString')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SpekeKeyProvider = Shapes::StructureShape.new(name: 'SpekeKeyProvider')
+    SpekeKeyProviderCertificateArnString = Shapes::StringShape.new(name: 'SpekeKeyProviderCertificateArnString')
     SpekeKeyProviderDrmSystemsList = Shapes::ListShape.new(name: 'SpekeKeyProviderDrmSystemsList')
     SpekeKeyProviderResourceIdString = Shapes::StringShape.new(name: 'SpekeKeyProviderResourceIdString')
     SpekeKeyProviderRoleArnString = Shapes::StringShape.new(name: 'SpekeKeyProviderRoleArnString')
@@ -925,6 +926,7 @@ module Aws::MediaPackageV2
     SpekeKeyProvider.add_member(:drm_systems, Shapes::ShapeRef.new(shape: SpekeKeyProviderDrmSystemsList, required: true, location_name: "DrmSystems"))
     SpekeKeyProvider.add_member(:role_arn, Shapes::ShapeRef.new(shape: SpekeKeyProviderRoleArnString, required: true, location_name: "RoleArn"))
     SpekeKeyProvider.add_member(:url, Shapes::ShapeRef.new(shape: SpekeKeyProviderUrlString, required: true, location_name: "Url"))
+    SpekeKeyProvider.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: SpekeKeyProviderCertificateArnString, location_name: "CertificateArn"))
     SpekeKeyProvider.struct_class = Types::SpekeKeyProvider
 
     SpekeKeyProviderDrmSystemsList.member = Shapes::ShapeRef.new(shape: DrmSystem)

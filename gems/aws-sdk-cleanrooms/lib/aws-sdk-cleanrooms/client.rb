@@ -1076,7 +1076,7 @@ module Aws::CleanRooms
     #       },
     #     },
     #     analytics_engine: "SPARK", # accepts SPARK, CLEAN_ROOMS_SQL
-    #     auto_approved_change_request_types: ["ADD_MEMBER"], # accepts ADD_MEMBER
+    #     auto_approved_change_request_types: ["ADD_MEMBER"], # accepts ADD_MEMBER, GRANT_RECEIVE_RESULTS_ABILITY, REVOKE_RECEIVE_RESULTS_ABILITY
     #     allowed_result_regions: ["us-west-1"], # accepts us-west-1, us-west-2, us-east-1, us-east-2, af-south-1, ap-east-1, ap-east-2, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-5, ap-southeast-4, ap-southeast-7, ap-south-1, ap-northeast-3, ap-northeast-1, ap-northeast-2, ca-central-1, ca-west-1, eu-south-1, eu-west-3, eu-south-2, eu-central-2, eu-central-1, eu-north-1, eu-west-1, eu-west-2, me-south-1, me-central-1, il-central-1, sa-east-1, mx-central-1
     #   })
     #
@@ -1101,7 +1101,7 @@ module Aws::CleanRooms
     #   resp.collaboration.job_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #   resp.collaboration.auto_approved_change_types #=> Array
-    #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER"
+    #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY"
     #   resp.collaboration.allowed_result_regions #=> Array
     #   resp.collaboration.allowed_result_regions[0] #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"
     #
@@ -1137,12 +1137,15 @@ module Aws::CleanRooms
     #     collaboration_identifier: "CollaborationIdentifier", # required
     #     changes: [ # required
     #       {
-    #         specification_type: "MEMBER", # required, accepts MEMBER
+    #         specification_type: "MEMBER", # required, accepts MEMBER, COLLABORATION
     #         specification: { # required
     #           member: {
     #             account_id: "AccountId", # required
     #             member_abilities: ["CAN_QUERY"], # required, accepts CAN_QUERY, CAN_RECEIVE_RESULTS, CAN_RUN_JOB
     #             display_name: "DisplayName",
+    #           },
+    #           collaboration: {
+    #             auto_approved_change_types: ["ADD_MEMBER"], # accepts ADD_MEMBER, GRANT_RECEIVE_RESULTS_ABILITY, REVOKE_RECEIVE_RESULTS_ABILITY
     #           },
     #         },
     #       },
@@ -1158,13 +1161,17 @@ module Aws::CleanRooms
     #   resp.collaboration_change_request.status #=> String, one of "PENDING", "APPROVED", "CANCELLED", "DENIED", "COMMITTED"
     #   resp.collaboration_change_request.is_auto_approved #=> Boolean
     #   resp.collaboration_change_request.changes #=> Array
-    #   resp.collaboration_change_request.changes[0].specification_type #=> String, one of "MEMBER"
+    #   resp.collaboration_change_request.changes[0].specification_type #=> String, one of "MEMBER", "COLLABORATION"
     #   resp.collaboration_change_request.changes[0].specification.member.account_id #=> String
     #   resp.collaboration_change_request.changes[0].specification.member.member_abilities #=> Array
     #   resp.collaboration_change_request.changes[0].specification.member.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
     #   resp.collaboration_change_request.changes[0].specification.member.display_name #=> String
+    #   resp.collaboration_change_request.changes[0].specification.collaboration.auto_approved_change_types #=> Array
+    #   resp.collaboration_change_request.changes[0].specification.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY"
     #   resp.collaboration_change_request.changes[0].types #=> Array
-    #   resp.collaboration_change_request.changes[0].types[0] #=> String, one of "ADD_MEMBER"
+    #   resp.collaboration_change_request.changes[0].types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "EDIT_AUTO_APPROVED_CHANGE_TYPES"
+    #   resp.collaboration_change_request.approvals #=> Hash
+    #   resp.collaboration_change_request.approvals["AccountId"].status #=> String, one of "APPROVED", "DENIED", "PENDING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaborationChangeRequest AWS API Documentation
     #
@@ -2454,7 +2461,7 @@ module Aws::CleanRooms
     #   resp.collaboration.job_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #   resp.collaboration.auto_approved_change_types #=> Array
-    #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER"
+    #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY"
     #   resp.collaboration.allowed_result_regions #=> Array
     #   resp.collaboration.allowed_result_regions[0] #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"
     #
@@ -2568,13 +2575,17 @@ module Aws::CleanRooms
     #   resp.collaboration_change_request.status #=> String, one of "PENDING", "APPROVED", "CANCELLED", "DENIED", "COMMITTED"
     #   resp.collaboration_change_request.is_auto_approved #=> Boolean
     #   resp.collaboration_change_request.changes #=> Array
-    #   resp.collaboration_change_request.changes[0].specification_type #=> String, one of "MEMBER"
+    #   resp.collaboration_change_request.changes[0].specification_type #=> String, one of "MEMBER", "COLLABORATION"
     #   resp.collaboration_change_request.changes[0].specification.member.account_id #=> String
     #   resp.collaboration_change_request.changes[0].specification.member.member_abilities #=> Array
     #   resp.collaboration_change_request.changes[0].specification.member.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
     #   resp.collaboration_change_request.changes[0].specification.member.display_name #=> String
+    #   resp.collaboration_change_request.changes[0].specification.collaboration.auto_approved_change_types #=> Array
+    #   resp.collaboration_change_request.changes[0].specification.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY"
     #   resp.collaboration_change_request.changes[0].types #=> Array
-    #   resp.collaboration_change_request.changes[0].types[0] #=> String, one of "ADD_MEMBER"
+    #   resp.collaboration_change_request.changes[0].types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "EDIT_AUTO_APPROVED_CHANGE_TYPES"
+    #   resp.collaboration_change_request.approvals #=> Hash
+    #   resp.collaboration_change_request.approvals["AccountId"].status #=> String, one of "APPROVED", "DENIED", "PENDING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationChangeRequest AWS API Documentation
     #
@@ -3678,13 +3689,17 @@ module Aws::CleanRooms
     #   resp.collaboration_change_request_summaries[0].status #=> String, one of "PENDING", "APPROVED", "CANCELLED", "DENIED", "COMMITTED"
     #   resp.collaboration_change_request_summaries[0].is_auto_approved #=> Boolean
     #   resp.collaboration_change_request_summaries[0].changes #=> Array
-    #   resp.collaboration_change_request_summaries[0].changes[0].specification_type #=> String, one of "MEMBER"
+    #   resp.collaboration_change_request_summaries[0].changes[0].specification_type #=> String, one of "MEMBER", "COLLABORATION"
     #   resp.collaboration_change_request_summaries[0].changes[0].specification.member.account_id #=> String
     #   resp.collaboration_change_request_summaries[0].changes[0].specification.member.member_abilities #=> Array
     #   resp.collaboration_change_request_summaries[0].changes[0].specification.member.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
     #   resp.collaboration_change_request_summaries[0].changes[0].specification.member.display_name #=> String
+    #   resp.collaboration_change_request_summaries[0].changes[0].specification.collaboration.auto_approved_change_types #=> Array
+    #   resp.collaboration_change_request_summaries[0].changes[0].specification.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY"
     #   resp.collaboration_change_request_summaries[0].changes[0].types #=> Array
-    #   resp.collaboration_change_request_summaries[0].changes[0].types[0] #=> String, one of "ADD_MEMBER"
+    #   resp.collaboration_change_request_summaries[0].changes[0].types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "EDIT_AUTO_APPROVED_CHANGE_TYPES"
+    #   resp.collaboration_change_request_summaries[0].approvals #=> Hash
+    #   resp.collaboration_change_request_summaries[0].approvals["AccountId"].status #=> String, one of "APPROVED", "DENIED", "PENDING"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationChangeRequests AWS API Documentation
@@ -5202,7 +5217,7 @@ module Aws::CleanRooms
     #   resp.collaboration.job_log_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.collaboration.analytics_engine #=> String, one of "SPARK", "CLEAN_ROOMS_SQL"
     #   resp.collaboration.auto_approved_change_types #=> Array
-    #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER"
+    #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY"
     #   resp.collaboration.allowed_result_regions #=> Array
     #   resp.collaboration.allowed_result_regions[0] #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"
     #
@@ -5212,6 +5227,73 @@ module Aws::CleanRooms
     # @param [Hash] params ({})
     def update_collaboration(params = {}, options = {})
       req = build_request(:update_collaboration, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing collaboration change request. This operation
+    # allows approval actions for pending change requests in collaborations
+    # (APPROVE, DENY, CANCEL, COMMIT).
+    #
+    # For change requests without automatic approval, a member in the
+    # collaboration can manually APPROVE or DENY a change request. The
+    # collaboration owner can manually CANCEL or COMMIT a change request.
+    #
+    # @option params [required, String] :collaboration_identifier
+    #   The unique identifier of the collaboration that contains the change
+    #   request to be updated.
+    #
+    # @option params [required, String] :change_request_identifier
+    #   The unique identifier of the specific change request to be updated
+    #   within the collaboration.
+    #
+    # @option params [required, String] :action
+    #   The action to perform on the change request. Valid values include
+    #   APPROVE (approve the change), DENY (reject the change), CANCEL (cancel
+    #   the request), and COMMIT (commit after the request is approved).
+    #
+    #   For change requests without automatic approval, a member in the
+    #   collaboration can manually APPROVE or DENY a change request. The
+    #   collaboration owner can manually CANCEL or COMMIT a change request.
+    #
+    # @return [Types::UpdateCollaborationChangeRequestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCollaborationChangeRequestOutput#collaboration_change_request #collaboration_change_request} => Types::CollaborationChangeRequest
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_collaboration_change_request({
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     change_request_identifier: "CollaborationChangeRequestIdentifier", # required
+    #     action: "APPROVE", # required, accepts APPROVE, DENY, CANCEL, COMMIT
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.collaboration_change_request.id #=> String
+    #   resp.collaboration_change_request.collaboration_id #=> String
+    #   resp.collaboration_change_request.create_time #=> Time
+    #   resp.collaboration_change_request.update_time #=> Time
+    #   resp.collaboration_change_request.status #=> String, one of "PENDING", "APPROVED", "CANCELLED", "DENIED", "COMMITTED"
+    #   resp.collaboration_change_request.is_auto_approved #=> Boolean
+    #   resp.collaboration_change_request.changes #=> Array
+    #   resp.collaboration_change_request.changes[0].specification_type #=> String, one of "MEMBER", "COLLABORATION"
+    #   resp.collaboration_change_request.changes[0].specification.member.account_id #=> String
+    #   resp.collaboration_change_request.changes[0].specification.member.member_abilities #=> Array
+    #   resp.collaboration_change_request.changes[0].specification.member.member_abilities[0] #=> String, one of "CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"
+    #   resp.collaboration_change_request.changes[0].specification.member.display_name #=> String
+    #   resp.collaboration_change_request.changes[0].specification.collaboration.auto_approved_change_types #=> Array
+    #   resp.collaboration_change_request.changes[0].specification.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY"
+    #   resp.collaboration_change_request.changes[0].types #=> Array
+    #   resp.collaboration_change_request.changes[0].types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY", "EDIT_AUTO_APPROVED_CHANGE_TYPES"
+    #   resp.collaboration_change_request.approvals #=> Hash
+    #   resp.collaboration_change_request.approvals["AccountId"].status #=> String, one of "APPROVED", "DENIED", "PENDING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateCollaborationChangeRequest AWS API Documentation
+    #
+    # @overload update_collaboration_change_request(params = {})
+    # @param [Hash] params ({})
+    def update_collaboration_change_request(params = {}, options = {})
+      req = build_request(:update_collaboration_change_request, params)
       req.send_request(options)
     end
 
@@ -6076,7 +6158,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

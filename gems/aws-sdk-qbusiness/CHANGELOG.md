@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2025-12-19)
+------------------
+
+* Feature - It is a internal bug fix for region expansion
+
 1.51.0 (2025-11-21)
 ------------------
 

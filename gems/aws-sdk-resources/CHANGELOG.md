@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.250.0 (2025-12-19)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-wickr` gem.
+
 3.249.0 (2025-12-02)
 ------------------
 

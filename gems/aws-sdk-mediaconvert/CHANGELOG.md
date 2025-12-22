@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.175.0 (2025-12-17)
+------------------
+
+* Feature - Adds support for tile encoding in HEVC and audio for video overlays.
+
 1.174.0 (2025-11-21)
 ------------------
 

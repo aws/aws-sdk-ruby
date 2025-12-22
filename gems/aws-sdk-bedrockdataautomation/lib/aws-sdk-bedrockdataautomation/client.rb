@@ -476,6 +476,43 @@ module Aws::BedrockDataAutomation
 
     # @!group API Operations
 
+    # Copies a Blueprint from one stage to another
+    #
+    # @option params [required, String] :blueprint_arn
+    #   Blueprint to be copied
+    #
+    # @option params [required, String] :source_stage
+    #   Source stage to copy from
+    #
+    # @option params [required, String] :target_stage
+    #   Target stage to copy to
+    #
+    # @option params [String] :client_token
+    #   Client token for idempotency
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.copy_blueprint_stage({
+    #     blueprint_arn: "BlueprintArn", # required
+    #     source_stage: "DEVELOPMENT", # required, accepts DEVELOPMENT, LIVE
+    #     target_stage: "DEVELOPMENT", # required, accepts DEVELOPMENT, LIVE
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/CopyBlueprintStage AWS API Documentation
+    #
+    # @overload copy_blueprint_stage(params = {})
+    # @param [Hash] params ({})
+    def copy_blueprint_stage(params = {}, options = {})
+      req = build_request(:copy_blueprint_stage, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Bedrock Data Automation Blueprint
     #
     # @option params [required, String] :blueprint_name
@@ -541,6 +578,12 @@ module Aws::BedrockDataAutomation
     #   resp.blueprint.kms_key_id #=> String
     #   resp.blueprint.kms_encryption_context #=> Hash
     #   resp.blueprint.kms_encryption_context["EncryptionContextKey"] #=> String
+    #   resp.blueprint.optimization_samples #=> Array
+    #   resp.blueprint.optimization_samples[0].asset_s3_object.s3_uri #=> String
+    #   resp.blueprint.optimization_samples[0].asset_s3_object.version #=> String
+    #   resp.blueprint.optimization_samples[0].ground_truth_s3_object.s3_uri #=> String
+    #   resp.blueprint.optimization_samples[0].ground_truth_s3_object.version #=> String
+    #   resp.blueprint.optimization_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/CreateBlueprint AWS API Documentation
     #
@@ -587,6 +630,12 @@ module Aws::BedrockDataAutomation
     #   resp.blueprint.kms_key_id #=> String
     #   resp.blueprint.kms_encryption_context #=> Hash
     #   resp.blueprint.kms_encryption_context["EncryptionContextKey"] #=> String
+    #   resp.blueprint.optimization_samples #=> Array
+    #   resp.blueprint.optimization_samples[0].asset_s3_object.s3_uri #=> String
+    #   resp.blueprint.optimization_samples[0].asset_s3_object.version #=> String
+    #   resp.blueprint.optimization_samples[0].ground_truth_s3_object.s3_uri #=> String
+    #   resp.blueprint.optimization_samples[0].ground_truth_s3_object.version #=> String
+    #   resp.blueprint.optimization_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/CreateBlueprintVersion AWS API Documentation
     #
@@ -920,6 +969,12 @@ module Aws::BedrockDataAutomation
     #   resp.blueprint.kms_key_id #=> String
     #   resp.blueprint.kms_encryption_context #=> Hash
     #   resp.blueprint.kms_encryption_context["EncryptionContextKey"] #=> String
+    #   resp.blueprint.optimization_samples #=> Array
+    #   resp.blueprint.optimization_samples[0].asset_s3_object.s3_uri #=> String
+    #   resp.blueprint.optimization_samples[0].asset_s3_object.version #=> String
+    #   resp.blueprint.optimization_samples[0].ground_truth_s3_object.s3_uri #=> String
+    #   resp.blueprint.optimization_samples[0].ground_truth_s3_object.version #=> String
+    #   resp.blueprint.optimization_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/GetBlueprint AWS API Documentation
     #
@@ -927,6 +982,41 @@ module Aws::BedrockDataAutomation
     # @param [Hash] params ({})
     def get_blueprint(params = {}, options = {})
       req = build_request(:get_blueprint, params)
+      req.send_request(options)
+    end
+
+    # API used to get blueprint optimization status.
+    #
+    # @option params [required, String] :invocation_arn
+    #   Invocation arn.
+    #
+    # @return [Types::GetBlueprintOptimizationStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBlueprintOptimizationStatusResponse#status #status} => String
+    #   * {Types::GetBlueprintOptimizationStatusResponse#error_type #error_type} => String
+    #   * {Types::GetBlueprintOptimizationStatusResponse#error_message #error_message} => String
+    #   * {Types::GetBlueprintOptimizationStatusResponse#output_configuration #output_configuration} => Types::BlueprintOptimizationOutputConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_blueprint_optimization_status({
+    #     invocation_arn: "BlueprintOptimizationInvocationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "Created", "InProgress", "Success", "ServiceError", "ClientError"
+    #   resp.error_type #=> String
+    #   resp.error_message #=> String
+    #   resp.output_configuration.s3_object.s3_uri #=> String
+    #   resp.output_configuration.s3_object.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/GetBlueprintOptimizationStatus AWS API Documentation
+    #
+    # @overload get_blueprint_optimization_status(params = {})
+    # @param [Hash] params ({})
+    def get_blueprint_optimization_status(params = {}, options = {})
+      req = build_request(:get_blueprint_optimization_status, params)
       req.send_request(options)
     end
 
@@ -1040,6 +1130,83 @@ module Aws::BedrockDataAutomation
     # @param [Hash] params ({})
     def get_data_automation_project(params = {}, options = {})
       req = build_request(:get_data_automation_project, params)
+      req.send_request(options)
+    end
+
+    # Invoke an async job to perform Blueprint Optimization
+    #
+    # @option params [required, Types::BlueprintOptimizationObject] :blueprint
+    #   Blueprint to be optimized
+    #
+    # @option params [required, Array<Types::BlueprintOptimizationSample>] :samples
+    #   List of Blueprint Optimization Samples
+    #
+    # @option params [required, Types::BlueprintOptimizationOutputConfiguration] :output_configuration
+    #   Output configuration where the results should be placed
+    #
+    # @option params [required, String] :data_automation_profile_arn
+    #   Data automation profile ARN
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   Encryption configuration.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   List of tags.
+    #
+    # @return [Types::InvokeBlueprintOptimizationAsyncResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InvokeBlueprintOptimizationAsyncResponse#invocation_arn #invocation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.invoke_blueprint_optimization_async({
+    #     blueprint: { # required
+    #       blueprint_arn: "BlueprintArn", # required
+    #       stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
+    #     },
+    #     samples: [ # required
+    #       {
+    #         asset_s3_object: { # required
+    #           s3_uri: "S3Uri", # required
+    #           version: "S3ObjectVersion",
+    #         },
+    #         ground_truth_s3_object: { # required
+    #           s3_uri: "S3Uri", # required
+    #           version: "S3ObjectVersion",
+    #         },
+    #       },
+    #     ],
+    #     output_configuration: { # required
+    #       s3_object: { # required
+    #         s3_uri: "S3Uri", # required
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #     data_automation_profile_arn: "DataAutomationProfileArn", # required
+    #     encryption_configuration: {
+    #       kms_key_id: "KmsKeyId", # required
+    #       kms_encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue",
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.invocation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/InvokeBlueprintOptimizationAsync AWS API Documentation
+    #
+    # @overload invoke_blueprint_optimization_async(params = {})
+    # @param [Hash] params ({})
+    def invoke_blueprint_optimization_async(params = {}, options = {})
+      req = build_request(:invoke_blueprint_optimization_async, params)
       req.send_request(options)
     end
 
@@ -1293,6 +1460,12 @@ module Aws::BedrockDataAutomation
     #   resp.blueprint.kms_key_id #=> String
     #   resp.blueprint.kms_encryption_context #=> Hash
     #   resp.blueprint.kms_encryption_context["EncryptionContextKey"] #=> String
+    #   resp.blueprint.optimization_samples #=> Array
+    #   resp.blueprint.optimization_samples[0].asset_s3_object.s3_uri #=> String
+    #   resp.blueprint.optimization_samples[0].asset_s3_object.version #=> String
+    #   resp.blueprint.optimization_samples[0].ground_truth_s3_object.s3_uri #=> String
+    #   resp.blueprint.optimization_samples[0].ground_truth_s3_object.version #=> String
+    #   resp.blueprint.optimization_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/UpdateBlueprint AWS API Documentation
     #
@@ -1532,7 +1705,7 @@ module Aws::BedrockDataAutomation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockdataautomation'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

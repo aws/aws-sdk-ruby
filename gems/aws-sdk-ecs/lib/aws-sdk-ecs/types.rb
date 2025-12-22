@@ -6870,6 +6870,31 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/detailed-monitoring-managed-instances.html
     #   @return [String]
     #
+    # @!attribute [rw] capacity_option_type
+    #   The capacity option type. This determines whether Amazon ECS
+    #   launches On-Demand or Spot Instances for your managed instance
+    #   capacity provider.
+    #
+    #   Valid values are:
+    #
+    #   * `ON_DEMAND` - Launches standard On-Demand Instances. On-Demand
+    #     Instances provide predictable pricing and availability.
+    #
+    #   * `SPOT` - Launches Spot Instances that use spare Amazon EC2
+    #     capacity at reduced cost. Spot Instances can be interrupted by
+    #     Amazon EC2 with a two-minute notification when the capacity is
+    #     needed back.
+    #
+    #   The default is On-Demand
+    #
+    #   For more information about Amazon EC2 capacity options, see
+    #   [Instance purchasing options][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
+    #   @return [String]
+    #
     # @!attribute [rw] instance_requirements
     #   The instance requirements. You can specify:
     #
@@ -6889,6 +6914,7 @@ module Aws::ECS
       :network_configuration,
       :storage_configuration,
       :monitoring,
+      :capacity_option_type,
       :instance_requirements)
       SENSITIVE = []
       include Aws::Structure
@@ -10224,6 +10250,13 @@ module Aws::ECS
     #     maintenance, see [Amazon Web Services Fargate task maintenance][5]
     #     in the *Amazon ECS Developer Guide*.
     #
+    #   * `fargateEventWindows` - When Amazon Web Services determines that a
+    #     security or infrastructure update is needed for an Amazon ECS task
+    #     hosted on Fargate, the tasks need to be stopped and new tasks
+    #     launched to replace them. Use `fargateEventWindows` to use EC2
+    #     Event Windows associated with Fargate tasks to configure time
+    #     windows for task retirement.
+    #
     #   * `tagResourceAuthorization` - Amazon ECS is introducing tagging
     #     authorization for resource creation. Users must have permissions
     #     for actions that create the resource, such as `ecsCreateCluster`.
@@ -10390,6 +10423,13 @@ module Aws::ECS
     #     retire a Fargate task. For information about the Fargate tasks
     #     maintenance, see [Amazon Web Services Fargate task maintenance][5]
     #     in the *Amazon ECS Developer Guide*.
+    #
+    #   * `fargateEventWindows` - When Amazon Web Services determines that a
+    #     security or infrastructure update is needed for an Amazon ECS task
+    #     hosted on Fargate, the tasks need to be stopped and new tasks
+    #     launched to replace them. Use `fargateEventWindows` to use EC2
+    #     Event Windows associated with Fargate tasks to configure time
+    #     windows for task retirement.
     #
     #   * `tagResourceAuthorization` - Amazon ECS is introducing tagging
     #     authorization for resource creation. Users must have permissions

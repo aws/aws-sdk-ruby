@@ -1139,8 +1139,8 @@ module Aws::AppStream
     #   The launch parameters of the application.
     #
     # @option params [required, Array<String>] :platforms
-    #   The platforms the application supports. WINDOWS\_SERVER\_2019 and
-    #   AMAZON\_LINUX2 are supported for Elastic fleets.
+    #   The platforms the application supports. WINDOWS\_SERVER\_2019,
+    #   AMAZON\_LINUX2 and UBUNTU\_PRO\_2404 are supported for Elastic fleets.
     #
     # @option params [required, Array<String>] :instance_families
     #   The instance families the application supports. Valid values are
@@ -1169,7 +1169,7 @@ module Aws::AppStream
     #     launch_path: "String", # required
     #     working_directory: "String",
     #     launch_parameters: "String",
-    #     platforms: ["WINDOWS"], # required, accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, AMAZON_LINUX2, RHEL8, ROCKY_LINUX8
+    #     platforms: ["WINDOWS"], # required, accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, AMAZON_LINUX2, RHEL8, ROCKY_LINUX8, UBUNTU_PRO_2404
     #     instance_families: ["String"], # required
     #     app_block_arn: "Arn", # required
     #     tags: {
@@ -1194,7 +1194,7 @@ module Aws::AppStream
     #   resp.application.icon_s3_location.s3_bucket #=> String
     #   resp.application.icon_s3_location.s3_key #=> String
     #   resp.application.platforms #=> Array
-    #   resp.application.platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.application.platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.application.instance_families #=> Array
     #   resp.application.instance_families[0] #=> String
     #   resp.application.created_time #=> Time
@@ -1462,14 +1462,6 @@ module Aws::AppStream
     #
     #   * stream.memory.z1d.12xlarge
     #
-    #   * stream.graphics-design.large
-    #
-    #   * stream.graphics-design.xlarge
-    #
-    #   * stream.graphics-design.2xlarge
-    #
-    #   * stream.graphics-design.4xlarge
-    #
     #   * stream.graphics.g4dn.xlarge
     #
     #   * stream.graphics.g4dn.2xlarge
@@ -1668,8 +1660,8 @@ module Aws::AppStream
     #   The default value is `APP`.
     #
     # @option params [String] :platform
-    #   The fleet platform. WINDOWS\_SERVER\_2019 and AMAZON\_LINUX2 are
-    #   supported for Elastic fleets.
+    #   The fleet platform. WINDOWS\_SERVER\_2019, AMAZON\_LINUX2 and
+    #   UBUNTU\_PRO\_2404 are supported for Elastic fleets.
     #
     # @option params [Integer] :max_concurrent_sessions
     #   The maximum concurrent sessions of the Elastic fleet. This is required
@@ -1728,7 +1720,7 @@ module Aws::AppStream
     #     idle_disconnect_timeout_in_seconds: 1,
     #     iam_role_arn: "Arn",
     #     stream_view: "APP", # accepts APP, DESKTOP
-    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, AMAZON_LINUX2, RHEL8, ROCKY_LINUX8
+    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, AMAZON_LINUX2, RHEL8, ROCKY_LINUX8, UBUNTU_PRO_2404
     #     max_concurrent_sessions: 1,
     #     usb_device_filter_strings: ["UsbDeviceFilterString"],
     #     session_script_s3_location: {
@@ -1776,7 +1768,7 @@ module Aws::AppStream
     #   resp.fleet.idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.fleet.iam_role_arn #=> String
     #   resp.fleet.stream_view #=> String, one of "APP", "DESKTOP"
-    #   resp.fleet.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.fleet.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.fleet.max_concurrent_sessions #=> Integer
     #   resp.fleet.usb_device_filter_strings #=> Array
     #   resp.fleet.usb_device_filter_strings[0] #=> String
@@ -1850,14 +1842,6 @@ module Aws::AppStream
     #   * stream.memory.z1d.6xlarge
     #
     #   * stream.memory.z1d.12xlarge
-    #
-    #   * stream.graphics-design.large
-    #
-    #   * stream.graphics-design.xlarge
-    #
-    #   * stream.graphics-design.2xlarge
-    #
-    #   * stream.graphics-design.4xlarge
     #
     #   * stream.graphics.g4dn.xlarge
     #
@@ -2142,7 +2126,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -2309,7 +2293,7 @@ module Aws::AppStream
     #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.image.image_builder_supported #=> Boolean
     #   resp.image.image_builder_name #=> String
-    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image.description #=> String
     #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE", "IMAGE_UPDATE_FAILURE", "IMAGE_IMPORT_FAILURE"
     #   resp.image.state_change_reason.message #=> String
@@ -2329,7 +2313,7 @@ module Aws::AppStream
     #   resp.image.applications[0].icon_s3_location.s3_bucket #=> String
     #   resp.image.applications[0].icon_s3_location.s3_key #=> String
     #   resp.image.applications[0].platforms #=> Array
-    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image.applications[0].instance_families #=> Array
     #   resp.image.applications[0].instance_families[0] #=> String
     #   resp.image.applications[0].created_time #=> Time
@@ -2736,7 +2720,7 @@ module Aws::AppStream
     #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.image.image_builder_supported #=> Boolean
     #   resp.image.image_builder_name #=> String
-    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image.description #=> String
     #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE", "IMAGE_UPDATE_FAILURE", "IMAGE_IMPORT_FAILURE"
     #   resp.image.state_change_reason.message #=> String
@@ -2756,7 +2740,7 @@ module Aws::AppStream
     #   resp.image.applications[0].icon_s3_location.s3_bucket #=> String
     #   resp.image.applications[0].icon_s3_location.s3_key #=> String
     #   resp.image.applications[0].platforms #=> Array
-    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image.applications[0].instance_families #=> Array
     #   resp.image.applications[0].instance_families[0] #=> String
     #   resp.image.applications[0].created_time #=> Time
@@ -3031,7 +3015,7 @@ module Aws::AppStream
     #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.image.image_builder_supported #=> Boolean
     #   resp.image.image_builder_name #=> String
-    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image.description #=> String
     #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE", "IMAGE_UPDATE_FAILURE", "IMAGE_IMPORT_FAILURE"
     #   resp.image.state_change_reason.message #=> String
@@ -3051,7 +3035,7 @@ module Aws::AppStream
     #   resp.image.applications[0].icon_s3_location.s3_bucket #=> String
     #   resp.image.applications[0].icon_s3_location.s3_key #=> String
     #   resp.image.applications[0].platforms #=> Array
-    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image.applications[0].instance_families #=> Array
     #   resp.image.applications[0].instance_families[0] #=> String
     #   resp.image.applications[0].created_time #=> Time
@@ -3108,7 +3092,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -3571,7 +3555,7 @@ module Aws::AppStream
     #   resp.applications[0].icon_s3_location.s3_bucket #=> String
     #   resp.applications[0].icon_s3_location.s3_key #=> String
     #   resp.applications[0].platforms #=> Array
-    #   resp.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.applications[0].instance_families #=> Array
     #   resp.applications[0].instance_families[0] #=> String
     #   resp.applications[0].created_time #=> Time
@@ -3752,7 +3736,7 @@ module Aws::AppStream
     #   resp.fleets[0].idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.fleets[0].iam_role_arn #=> String
     #   resp.fleets[0].stream_view #=> String, one of "APP", "DESKTOP"
-    #   resp.fleets[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.fleets[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.fleets[0].max_concurrent_sessions #=> Integer
     #   resp.fleets[0].usb_device_filter_strings #=> Array
     #   resp.fleets[0].usb_device_filter_strings[0] #=> String
@@ -3817,7 +3801,7 @@ module Aws::AppStream
     #   resp.image_builders[0].vpc_config.security_group_ids #=> Array
     #   resp.image_builders[0].vpc_config.security_group_ids[0] #=> String
     #   resp.image_builders[0].instance_type #=> String
-    #   resp.image_builders[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.image_builders[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image_builders[0].iam_role_arn #=> String
     #   resp.image_builders[0].state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"
     #   resp.image_builders[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -3952,7 +3936,7 @@ module Aws::AppStream
     #   resp.images[0].visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.images[0].image_builder_supported #=> Boolean
     #   resp.images[0].image_builder_name #=> String
-    #   resp.images[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.images[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.images[0].description #=> String
     #   resp.images[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE", "IMAGE_UPDATE_FAILURE", "IMAGE_IMPORT_FAILURE"
     #   resp.images[0].state_change_reason.message #=> String
@@ -3972,7 +3956,7 @@ module Aws::AppStream
     #   resp.images[0].applications[0].icon_s3_location.s3_bucket #=> String
     #   resp.images[0].applications[0].icon_s3_location.s3_key #=> String
     #   resp.images[0].applications[0].platforms #=> Array
-    #   resp.images[0].applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.images[0].applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.images[0].applications[0].instance_families #=> Array
     #   resp.images[0].applications[0].instance_families[0] #=> String
     #   resp.images[0].applications[0].created_time #=> Time
@@ -5032,7 +5016,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -5195,7 +5179,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -5397,7 +5381,7 @@ module Aws::AppStream
     #     name: "Name", # required
     #     description: "Description",
     #     display_name: "DisplayName",
-    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, AMAZON_LINUX2, RHEL8, ROCKY_LINUX8
+    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, AMAZON_LINUX2, RHEL8, ROCKY_LINUX8, UBUNTU_PRO_2404
     #     instance_type: "String",
     #     vpc_config: {
     #       subnet_ids: ["String"],
@@ -5518,7 +5502,7 @@ module Aws::AppStream
     #   resp.application.icon_s3_location.s3_bucket #=> String
     #   resp.application.icon_s3_location.s3_key #=> String
     #   resp.application.platforms #=> Array
-    #   resp.application.platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.application.platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.application.instance_families #=> Array
     #   resp.application.instance_families[0] #=> String
     #   resp.application.created_time #=> Time
@@ -5734,14 +5718,6 @@ module Aws::AppStream
     #
     #   * stream.memory.z1d.12xlarge
     #
-    #   * stream.graphics-design.large
-    #
-    #   * stream.graphics-design.xlarge
-    #
-    #   * stream.graphics-design.2xlarge
-    #
-    #   * stream.graphics-design.4xlarge
-    #
     #   * stream.graphics.g4dn.xlarge
     #
     #   * stream.graphics.g4dn.2xlarge
@@ -5910,8 +5886,8 @@ module Aws::AppStream
     #   The default value is `APP`.
     #
     # @option params [String] :platform
-    #   The platform of the fleet. WINDOWS\_SERVER\_2019 and AMAZON\_LINUX2
-    #   are supported for Elastic fleets.
+    #   The platform of the fleet. WINDOWS\_SERVER\_2019, AMAZON\_LINUX2 and
+    #   UBUNTU\_PRO\_2404 are supported for Elastic fleets.
     #
     # @option params [Integer] :max_concurrent_sessions
     #   The maximum number of concurrent sessions for a fleet.
@@ -5966,7 +5942,7 @@ module Aws::AppStream
     #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN, USB_DEVICE_FILTER_STRINGS, SESSION_SCRIPT_S3_LOCATION, MAX_SESSIONS_PER_INSTANCE, VOLUME_CONFIGURATION
     #     iam_role_arn: "Arn",
     #     stream_view: "APP", # accepts APP, DESKTOP
-    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, AMAZON_LINUX2, RHEL8, ROCKY_LINUX8
+    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, AMAZON_LINUX2, RHEL8, ROCKY_LINUX8, UBUNTU_PRO_2404
     #     max_concurrent_sessions: 1,
     #     usb_device_filter_strings: ["UsbDeviceFilterString"],
     #     session_script_s3_location: {
@@ -6014,7 +5990,7 @@ module Aws::AppStream
     #   resp.fleet.idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.fleet.iam_role_arn #=> String
     #   resp.fleet.stream_view #=> String, one of "APP", "DESKTOP"
-    #   resp.fleet.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8"
+    #   resp.fleet.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.fleet.max_concurrent_sessions #=> Integer
     #   resp.fleet.usb_device_filter_strings #=> Array
     #   resp.fleet.usb_device_filter_strings[0] #=> String
@@ -6311,7 +6287,7 @@ module Aws::AppStream
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.123.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

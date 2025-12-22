@@ -238,7 +238,7 @@ module Aws
                                                  ],
                                                  ?repository_policy: ::String,
                                                  ?lifecycle_policy: ::String,
-                                                 applied_for: Array[("REPLICATION" | "PULL_THROUGH_CACHE")],
+                                                 applied_for: Array[("REPLICATION" | "PULL_THROUGH_CACHE" | "CREATE_ON_PUSH")],
                                                  ?custom_role_arn: ::String
                                                ) -> _CreateRepositoryCreationTemplateResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRepositoryCreationTemplateResponseSuccess
@@ -973,7 +973,7 @@ module Aws
                                                  ],
                                                  ?repository_policy: ::String,
                                                  ?lifecycle_policy: ::String,
-                                                 ?applied_for: Array[("REPLICATION" | "PULL_THROUGH_CACHE")],
+                                                 ?applied_for: Array[("REPLICATION" | "PULL_THROUGH_CACHE" | "CREATE_ON_PUSH")],
                                                  ?custom_role_arn: ::String
                                                ) -> _UpdateRepositoryCreationTemplateResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRepositoryCreationTemplateResponseSuccess

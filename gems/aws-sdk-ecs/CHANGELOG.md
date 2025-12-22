@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.216.0 (2025-12-18)
+------------------
+
+* Feature - Adding support for Event Windows via a new ECS account setting "fargateEventWindows". When enabled, ECS Fargate will use the configured event window for patching tasks. Introducing "CapacityOptionType" for CreateCapacityProvider API, allowing support for Spot capacity for ECS Managed Instances.
+
 1.215.0 (2025-12-05)
 ------------------
 

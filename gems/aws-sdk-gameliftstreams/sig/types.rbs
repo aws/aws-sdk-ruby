@@ -85,7 +85,7 @@ module Aws::GameLiftStreams
 
     class CreateStreamGroupInput
       attr_accessor description: ::String
-      attr_accessor stream_class: ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022")
+      attr_accessor stream_class: ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022" | "gen6n_small" | "gen6n_medium" | "gen6n_high" | "gen6n_ultra" | "gen6n_ultra_win2022" | "gen6n_pro" | "gen6n_pro_win2022")
       attr_accessor default_application_identifier: ::String
       attr_accessor location_configurations: ::Array[Types::LocationConfiguration]
       attr_accessor tags: ::Hash[::String, ::String]
@@ -98,7 +98,7 @@ module Aws::GameLiftStreams
       attr_accessor description: ::String
       attr_accessor default_application: Types::DefaultApplication
       attr_accessor location_states: ::Array[Types::LocationState]
-      attr_accessor stream_class: ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022")
+      attr_accessor stream_class: ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022" | "gen6n_small" | "gen6n_medium" | "gen6n_high" | "gen6n_ultra" | "gen6n_ultra_win2022" | "gen6n_pro" | "gen6n_pro_win2022")
       attr_accessor id: ::String
       attr_accessor status: ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING" | "EXPIRED")
       attr_accessor status_reason: ("internalError" | "noAvailableInstances")
@@ -200,7 +200,7 @@ module Aws::GameLiftStreams
       attr_accessor description: ::String
       attr_accessor default_application: Types::DefaultApplication
       attr_accessor location_states: ::Array[Types::LocationState]
-      attr_accessor stream_class: ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022")
+      attr_accessor stream_class: ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022" | "gen6n_small" | "gen6n_medium" | "gen6n_high" | "gen6n_ultra" | "gen6n_ultra_win2022" | "gen6n_pro" | "gen6n_pro_win2022")
       attr_accessor id: ::String
       attr_accessor status: ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING" | "EXPIRED")
       attr_accessor status_reason: ("internalError" | "noAvailableInstances")
@@ -232,6 +232,7 @@ module Aws::GameLiftStreams
       attr_accessor session_length_seconds: ::Integer
       attr_accessor additional_launch_args: ::Array[::String]
       attr_accessor additional_environment_variables: ::Hash[::String, ::String]
+      attr_accessor performance_stats_configuration: Types::PerformanceStatsConfiguration
       attr_accessor log_file_location_uri: ::String
       attr_accessor web_sdk_protocol_url: ::String
       attr_accessor last_updated_at: ::Time
@@ -313,6 +314,8 @@ module Aws::GameLiftStreams
       attr_accessor location_name: ::String
       attr_accessor always_on_capacity: ::Integer
       attr_accessor on_demand_capacity: ::Integer
+      attr_accessor target_idle_capacity: ::Integer
+      attr_accessor maximum_capacity: ::Integer
       SENSITIVE: []
     end
 
@@ -321,9 +324,16 @@ module Aws::GameLiftStreams
       attr_accessor status: ("ACTIVATING" | "ACTIVE" | "ERROR" | "REMOVING")
       attr_accessor always_on_capacity: ::Integer
       attr_accessor on_demand_capacity: ::Integer
+      attr_accessor target_idle_capacity: ::Integer
+      attr_accessor maximum_capacity: ::Integer
       attr_accessor requested_capacity: ::Integer
       attr_accessor allocated_capacity: ::Integer
       attr_accessor idle_capacity: ::Integer
+      SENSITIVE: []
+    end
+
+    class PerformanceStatsConfiguration
+      attr_accessor shared_with_client: bool
       SENSITIVE: []
     end
 
@@ -368,6 +378,7 @@ module Aws::GameLiftStreams
       attr_accessor session_length_seconds: ::Integer
       attr_accessor additional_launch_args: ::Array[::String]
       attr_accessor additional_environment_variables: ::Hash[::String, ::String]
+      attr_accessor performance_stats_configuration: Types::PerformanceStatsConfiguration
       SENSITIVE: [:signal_request]
     end
 
@@ -386,6 +397,7 @@ module Aws::GameLiftStreams
       attr_accessor session_length_seconds: ::Integer
       attr_accessor additional_launch_args: ::Array[::String]
       attr_accessor additional_environment_variables: ::Hash[::String, ::String]
+      attr_accessor performance_stats_configuration: Types::PerformanceStatsConfiguration
       attr_accessor log_file_location_uri: ::String
       attr_accessor web_sdk_protocol_url: ::String
       attr_accessor last_updated_at: ::Time
@@ -400,7 +412,7 @@ module Aws::GameLiftStreams
       attr_accessor id: ::String
       attr_accessor description: ::String
       attr_accessor default_application: Types::DefaultApplication
-      attr_accessor stream_class: ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022")
+      attr_accessor stream_class: ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022" | "gen6n_small" | "gen6n_medium" | "gen6n_high" | "gen6n_ultra" | "gen6n_ultra_win2022" | "gen6n_pro" | "gen6n_pro_win2022")
       attr_accessor status: ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING" | "EXPIRED")
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
@@ -412,6 +424,7 @@ module Aws::GameLiftStreams
       attr_accessor arn: ::String
       attr_accessor user_id: ::String
       attr_accessor status: ("ACTIVATING" | "ACTIVE" | "CONNECTED" | "PENDING_CLIENT_RECONNECTION" | "RECONNECTING" | "TERMINATING" | "TERMINATED" | "ERROR")
+      attr_accessor status_reason: ("internalError" | "invalidSignalRequest" | "placementTimeout" | "applicationLogS3DestinationError" | "applicationExit" | "connectionTimeout" | "reconnectionTimeout" | "maxSessionLengthTimeout" | "idleTimeout" | "apiTerminated")
       attr_accessor protocol: ("WebRTC")
       attr_accessor last_updated_at: ::Time
       attr_accessor created_at: ::Time
@@ -489,7 +502,7 @@ module Aws::GameLiftStreams
       attr_accessor description: ::String
       attr_accessor default_application: Types::DefaultApplication
       attr_accessor location_states: ::Array[Types::LocationState]
-      attr_accessor stream_class: ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022")
+      attr_accessor stream_class: ("gen4n_high" | "gen4n_ultra" | "gen4n_win2022" | "gen5n_high" | "gen5n_ultra" | "gen5n_win2022" | "gen6n_small" | "gen6n_medium" | "gen6n_high" | "gen6n_ultra" | "gen6n_ultra_win2022" | "gen6n_pro" | "gen6n_pro_win2022")
       attr_accessor id: ::String
       attr_accessor status: ("ACTIVATING" | "UPDATING_LOCATIONS" | "ACTIVE" | "ACTIVE_WITH_ERRORS" | "ERROR" | "DELETING" | "EXPIRED")
       attr_accessor status_reason: ("internalError" | "noAvailableInstances")

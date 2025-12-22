@@ -3801,7 +3801,7 @@ module Aws::SageMaker
 
     ClusterOnDemandOptions.struct_class = Types::ClusterOnDemandOptions
 
-    ClusterOrchestrator.add_member(:eks, Shapes::ShapeRef.new(shape: ClusterOrchestratorEksConfig, required: true, location_name: "Eks"))
+    ClusterOrchestrator.add_member(:eks, Shapes::ShapeRef.new(shape: ClusterOrchestratorEksConfig, location_name: "Eks"))
     ClusterOrchestrator.struct_class = Types::ClusterOrchestrator
 
     ClusterOrchestratorEksConfig.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: EksClusterArn, required: true, location_name: "ClusterArn"))

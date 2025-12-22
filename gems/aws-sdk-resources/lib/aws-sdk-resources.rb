@@ -414,6 +414,7 @@ module Aws
   autoload :WAFRegional, 'aws-sdk-wafregional'
   autoload :WAFV2, 'aws-sdk-wafv2'
   autoload :WellArchitected, 'aws-sdk-wellarchitected'
+  autoload :Wickr, 'aws-sdk-wickr'
   autoload :WorkDocs, 'aws-sdk-workdocs'
   autoload :WorkMail, 'aws-sdk-workmail'
   autoload :WorkMailMessageFlow, 'aws-sdk-workmailmessageflow'

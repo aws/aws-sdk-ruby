@@ -67,9 +67,10 @@ module Aws::InspectorScan
 
       api.metadata = {
         "apiVersion" => "2023-08-08",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "inspector-scan",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "inspector-scan",
         "serviceFullName" => "Inspector Scan",
         "serviceId" => "Inspector Scan",

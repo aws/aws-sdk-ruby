@@ -555,8 +555,9 @@ module Aws::ECR
     #
     # @!attribute [rw] applied_for
     #   A list of enumerable strings representing the Amazon ECR repository
-    #   creation scenarios that this template will apply towards. The two
-    #   supported scenarios are `PULL_THROUGH_CACHE` and `REPLICATION`
+    #   creation scenarios that this template will apply towards. The
+    #   supported scenarios are `PULL_THROUGH_CACHE`, `REPLICATION`, and
+    #   `CREATE_ON_PUSH`
     #   @return [Array<String>]
     #
     # @!attribute [rw] custom_role_arn
@@ -4281,8 +4282,9 @@ module Aws::ECR
     #
     # @!attribute [rw] applied_for
     #   A list of enumerable Strings representing the repository creation
-    #   scenarios that this template will apply towards. The two supported
-    #   scenarios are PULL\_THROUGH\_CACHE and REPLICATION
+    #   scenarios that this template will apply towards. The supported
+    #   scenarios are PULL\_THROUGH\_CACHE, REPLICATION, and
+    #   CREATE\_ON\_PUSH
     #   @return [Array<String>]
     #
     # @!attribute [rw] custom_role_arn
@@ -5270,8 +5272,8 @@ module Aws::ECR
     # @!attribute [rw] applied_for
     #   Updates the list of enumerable strings representing the Amazon ECR
     #   repository creation scenarios that this template will apply towards.
-    #   The two supported scenarios are `PULL_THROUGH_CACHE` and
-    #   `REPLICATION`
+    #   The supported scenarios are `PULL_THROUGH_CACHE`, `REPLICATION`, and
+    #   `CREATE_ON_PUSH`
     #   @return [Array<String>]
     #
     # @!attribute [rw] custom_role_arn

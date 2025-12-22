@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2025-12-18)
+------------------
+
+* Feature - Adding support for collaboration change requests requiring an approval workflow. Adding support for change requests that grant or revoke results receiver ability and modifying auto approved change types in an existing collaboration.
+
 1.61.0 (2025-12-01)
 ------------------
 

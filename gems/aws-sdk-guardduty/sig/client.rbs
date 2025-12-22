@@ -776,7 +776,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_remaining_free_trial_days-instance_method
       def get_remaining_free_trial_days: (
                                            detector_id: ::String,
-                                           ?account_ids: Array[::String]
+                                           account_ids: Array[::String]
                                          ) -> _GetRemainingFreeTrialDaysResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRemainingFreeTrialDaysResponseSuccess
 

@@ -1373,6 +1373,32 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Configuration settings for batching.
+    #
+    # @!attribute [rw] max_batch_open_ms
+    #   The maximum amount of time (in milliseconds) that an outgoing call
+    #   waits for other calls with which it batches messages of the same
+    #   type. The higher the setting, the longer the latency of the batched
+    #   HTTP Action will be.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_batch_size
+    #   The maximum number of messages that are batched together in a single
+    #   action execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_batch_size_bytes
+    #   Maximum size of a message batch, in bytes.
+    #   @return [Integer]
+    #
+    class BatchConfig < Struct.new(
+      :max_batch_open_ms,
+      :max_batch_size,
+      :max_batch_size_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A Device Defender security profile behavior.
     #
     # @!attribute [rw] name
@@ -8973,9 +8999,16 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # @api private
+    # @!attribute [rw] verbose
+    #   The flag is used to get all the event types and their respective
+    #   configuration that event-based logging supports.
+    #   @return [Boolean]
     #
-    class GetV2LoggingOptionsRequest < Aws::EmptyStructure; end
+    class GetV2LoggingOptionsRequest < Struct.new(
+      :verbose)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] role_arn
     #   The IAM role ARN IoT uses to write to your CloudWatch logs.
@@ -8989,10 +9022,16 @@ module Aws::IoT
     #   Disables all logs.
     #   @return [Boolean]
     #
+    # @!attribute [rw] event_configurations
+    #   The list of event configurations that override account-level
+    #   logging.
+    #   @return [Array<Types::LogEventConfiguration>]
+    #
     class GetV2LoggingOptionsResponse < Struct.new(
       :role_arn,
       :default_log_level,
-      :disable_all_logs)
+      :disable_all_logs,
+      :event_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9041,11 +9080,27 @@ module Aws::IoT
     #   endpoint.
     #   @return [Types::HttpAuthorization]
     #
+    # @!attribute [rw] enable_batching
+    #   Whether to process the HTTP action messages into a single request.
+    #   Value can be true or false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] batch_config
+    #   The configuration settings for batching. For more information, see [
+    #   Batching HTTP action messages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/http_batching.html
+    #   @return [Types::BatchConfig]
+    #
     class HttpAction < Struct.new(
       :url,
       :confirmation_url,
       :headers,
-      :auth)
+      :auth,
+      :enable_batching,
+      :batch_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13112,6 +13167,35 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Configuration for event-based logging that specifies which event types
+    # to log and their logging settings. Used for account-level logging
+    # overrides.
+    #
+    # @!attribute [rw] event_type
+    #   The type of event to log. These include event types like Connect,
+    #   Publish, and Disconnect.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_level
+    #   The logging level for the specified event type. Determines the
+    #   verbosity of log messages generated for this event type.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_destination
+    #   CloudWatch Log Group for event-based logging. Specifies where log
+    #   events should be sent. The log destination for event-based logging
+    #   overrides default Log Group for the specified event type and applies
+    #   to all resources associated with that event.
+    #   @return [String]
+    #
+    class LogEventConfiguration < Struct.new(
+      :event_type,
+      :log_level,
+      :log_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A log target.
     #
     # @!attribute [rw] target_type
@@ -15417,10 +15501,16 @@ module Aws::IoT
     #   If true all logs are disabled. The default is false.
     #   @return [Boolean]
     #
+    # @!attribute [rw] event_configurations
+    #   The list of event configurations that override account-level
+    #   logging.
+    #   @return [Array<Types::LogEventConfiguration>]
+    #
     class SetV2LoggingOptionsRequest < Struct.new(
       :role_arn,
       :default_log_level,
-      :disable_all_logs)
+      :disable_all_logs,
+      :event_configurations)
       SENSITIVE = []
       include Aws::Structure
     end

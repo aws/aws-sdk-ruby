@@ -373,6 +373,13 @@ module Aws::IoT
       SENSITIVE: []
     end
 
+    class BatchConfig
+      attr_accessor max_batch_open_ms: ::Integer
+      attr_accessor max_batch_size: ::Integer
+      attr_accessor max_batch_size_bytes: ::Integer
+      SENSITIVE: []
+    end
+
     class Behavior
       attr_accessor name: ::String
       attr_accessor metric: ::String
@@ -2560,13 +2567,16 @@ module Aws::IoT
       SENSITIVE: []
     end
 
-    class GetV2LoggingOptionsRequest < Aws::EmptyStructure
+    class GetV2LoggingOptionsRequest
+      attr_accessor verbose: bool
+      SENSITIVE: []
     end
 
     class GetV2LoggingOptionsResponse
       attr_accessor role_arn: ::String
       attr_accessor default_log_level: ("DEBUG" | "INFO" | "ERROR" | "WARN" | "DISABLED")
       attr_accessor disable_all_logs: bool
+      attr_accessor event_configurations: ::Array[Types::LogEventConfiguration]
       SENSITIVE: []
     end
 
@@ -2581,6 +2591,8 @@ module Aws::IoT
       attr_accessor confirmation_url: ::String
       attr_accessor headers: ::Array[Types::HttpActionHeader]
       attr_accessor auth: Types::HttpAuthorization
+      attr_accessor enable_batching: bool
+      attr_accessor batch_config: Types::BatchConfig
       SENSITIVE: []
     end
 
@@ -3777,6 +3789,13 @@ module Aws::IoT
       SENSITIVE: []
     end
 
+    class LogEventConfiguration
+      attr_accessor event_type: ::String
+      attr_accessor log_level: ("DEBUG" | "INFO" | "ERROR" | "WARN" | "DISABLED")
+      attr_accessor log_destination: ::String
+      SENSITIVE: []
+    end
+
     class LogTarget
       attr_accessor target_type: ("DEFAULT" | "THING_GROUP" | "CLIENT_ID" | "SOURCE_IP" | "PRINCIPAL_ID")
       attr_accessor target_name: ::String
@@ -4415,6 +4434,7 @@ module Aws::IoT
       attr_accessor role_arn: ::String
       attr_accessor default_log_level: ("DEBUG" | "INFO" | "ERROR" | "WARN" | "DISABLED")
       attr_accessor disable_all_logs: bool
+      attr_accessor event_configurations: ::Array[Types::LogEventConfiguration]
       SENSITIVE: []
     end
 

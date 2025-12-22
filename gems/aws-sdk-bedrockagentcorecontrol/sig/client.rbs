@@ -389,6 +389,7 @@ module Aws
         def target_configuration: () -> Types::TargetConfiguration
         def credential_provider_configurations: () -> ::Array[Types::CredentialProviderConfiguration]
         def last_synchronized_at: () -> ::Time
+        def metadata_configuration: () -> Types::MetadataConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_gateway_target-instance_method
       def create_gateway_target: (
@@ -485,7 +486,12 @@ module Aws
                                          }?
                                        }?
                                      },
-                                   ]
+                                   ],
+                                   ?metadata_configuration: {
+                                     allowed_request_headers: Array[::String]?,
+                                     allowed_query_parameters: Array[::String]?,
+                                     allowed_response_headers: Array[::String]?
+                                   }
                                  ) -> _CreateGatewayTargetResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGatewayTargetResponseSuccess
 
@@ -1129,6 +1135,7 @@ module Aws
         def target_configuration: () -> Types::TargetConfiguration
         def credential_provider_configurations: () -> ::Array[Types::CredentialProviderConfiguration]
         def last_synchronized_at: () -> ::Time
+        def metadata_configuration: () -> Types::MetadataConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_gateway_target-instance_method
       def get_gateway_target: (
@@ -1840,6 +1847,7 @@ module Aws
         def target_configuration: () -> Types::TargetConfiguration
         def credential_provider_configurations: () -> ::Array[Types::CredentialProviderConfiguration]
         def last_synchronized_at: () -> ::Time
+        def metadata_configuration: () -> Types::MetadataConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_gateway_target-instance_method
       def update_gateway_target: (
@@ -1936,7 +1944,12 @@ module Aws
                                          }?
                                        }?
                                      },
-                                   ]
+                                   ],
+                                   ?metadata_configuration: {
+                                     allowed_request_headers: Array[::String]?,
+                                     allowed_query_parameters: Array[::String]?,
+                                     allowed_response_headers: Array[::String]?
+                                   }
                                  ) -> _UpdateGatewayTargetResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewayTargetResponseSuccess
 

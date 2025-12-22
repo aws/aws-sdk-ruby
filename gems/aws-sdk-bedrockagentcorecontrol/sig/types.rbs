@@ -443,6 +443,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor client_token: ::String
       attr_accessor target_configuration: Types::TargetConfiguration
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
+      attr_accessor metadata_configuration: Types::MetadataConfiguration
       SENSITIVE: [:name, :description]
     end
 
@@ -458,6 +459,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor target_configuration: Types::TargetConfiguration
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
       attr_accessor last_synchronized_at: ::Time
+      attr_accessor metadata_configuration: Types::MetadataConfiguration
       SENSITIVE: [:name, :description]
     end
 
@@ -1159,6 +1161,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor target_configuration: Types::TargetConfiguration
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
       attr_accessor last_synchronized_at: ::Time
+      attr_accessor metadata_configuration: Types::MetadataConfiguration
       SENSITIVE: [:name, :description]
     end
 
@@ -1330,6 +1333,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor target_configuration: Types::TargetConfiguration
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
       attr_accessor last_synchronized_at: ::Time
+      attr_accessor metadata_configuration: Types::MetadataConfiguration
       SENSITIVE: [:name, :description]
     end
 
@@ -1925,6 +1929,13 @@ module Aws::BedrockAgentCoreControl
 
     class MessageBasedTriggerInput
       attr_accessor message_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class MetadataConfiguration
+      attr_accessor allowed_request_headers: ::Array[::String]
+      attr_accessor allowed_query_parameters: ::Array[::String]
+      attr_accessor allowed_response_headers: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -2759,6 +2770,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor description: ::String
       attr_accessor target_configuration: Types::TargetConfiguration
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
+      attr_accessor metadata_configuration: Types::MetadataConfiguration
       SENSITIVE: [:name, :description]
     end
 
@@ -2774,6 +2786,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor target_configuration: Types::TargetConfiguration
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
       attr_accessor last_synchronized_at: ::Time
+      attr_accessor metadata_configuration: Types::MetadataConfiguration
       SENSITIVE: [:name, :description]
     end
 

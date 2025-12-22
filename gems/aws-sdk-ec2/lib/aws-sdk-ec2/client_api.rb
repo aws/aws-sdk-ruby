@@ -6171,6 +6171,7 @@ module Aws::EC2
     CreatePlacementGroupRequest.add_member(:partition_count, Shapes::ShapeRef.new(shape: Integer, location_name: "PartitionCount"))
     CreatePlacementGroupRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreatePlacementGroupRequest.add_member(:spread_level, Shapes::ShapeRef.new(shape: SpreadLevel, location_name: "SpreadLevel"))
+    CreatePlacementGroupRequest.add_member(:linked_group_id, Shapes::ShapeRef.new(shape: PlacementGroupId, location_name: "LinkedGroupId"))
     CreatePlacementGroupRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreatePlacementGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
     CreatePlacementGroupRequest.add_member(:strategy, Shapes::ShapeRef.new(shape: PlacementStrategy, location_name: "strategy"))
@@ -10850,6 +10851,7 @@ module Aws::EC2
     FleetLaunchTemplateOverrides.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirements, location_name: "instanceRequirements"))
     FleetLaunchTemplateOverrides.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "imageId"))
     FleetLaunchTemplateOverrides.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: BlockDeviceMappingResponseList, location_name: "blockDeviceMappingSet"))
+    FleetLaunchTemplateOverrides.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
     FleetLaunchTemplateOverrides.struct_class = Types::FleetLaunchTemplateOverrides
 
     FleetLaunchTemplateOverridesList.member = Shapes::ShapeRef.new(shape: FleetLaunchTemplateOverrides, location_name: "item")
@@ -10866,6 +10868,7 @@ module Aws::EC2
     FleetLaunchTemplateOverridesRequest.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: FleetBlockDeviceMappingRequestList, location_name: "BlockDeviceMapping"))
     FleetLaunchTemplateOverridesRequest.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirementsRequest, location_name: "InstanceRequirements"))
     FleetLaunchTemplateOverridesRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "ImageId"))
+    FleetLaunchTemplateOverridesRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     FleetLaunchTemplateOverridesRequest.struct_class = Types::FleetLaunchTemplateOverridesRequest
 
     FleetLaunchTemplateSpecification.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateId"))
@@ -13572,6 +13575,7 @@ module Aws::EC2
     LaunchTemplateOverrides.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "weightedCapacity"))
     LaunchTemplateOverrides.add_member(:priority, Shapes::ShapeRef.new(shape: Double, location_name: "priority"))
     LaunchTemplateOverrides.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirements, location_name: "instanceRequirements"))
+    LaunchTemplateOverrides.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
     LaunchTemplateOverrides.struct_class = Types::LaunchTemplateOverrides
 
     LaunchTemplateOverridesList.member = Shapes::ShapeRef.new(shape: LaunchTemplateOverrides, location_name: "item")
@@ -15523,6 +15527,7 @@ module Aws::EC2
     PlacementGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     PlacementGroup.add_member(:group_arn, Shapes::ShapeRef.new(shape: String, location_name: "groupArn"))
     PlacementGroup.add_member(:spread_level, Shapes::ShapeRef.new(shape: SpreadLevel, location_name: "spreadLevel"))
+    PlacementGroup.add_member(:linked_group_id, Shapes::ShapeRef.new(shape: PlacementGroupId, location_name: "linkedGroupId"))
     PlacementGroup.struct_class = Types::PlacementGroup
 
     PlacementGroupIdStringList.member = Shapes::ShapeRef.new(shape: PlacementGroupId, location_name: "GroupId")
@@ -17397,6 +17402,7 @@ module Aws::EC2
     SpotPlacement.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
     SpotPlacement.add_member(:group_name, Shapes::ShapeRef.new(shape: PlacementGroupName, location_name: "groupName"))
     SpotPlacement.add_member(:tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "tenancy"))
+    SpotPlacement.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
     SpotPlacement.struct_class = Types::SpotPlacement
 
     SpotPlacementScore.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))

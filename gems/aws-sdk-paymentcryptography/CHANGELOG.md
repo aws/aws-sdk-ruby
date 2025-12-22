@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2025-12-17)
+------------------
+
+* Feature - Support for AS2805 standard.  Modifications to import-key and export-key to support AS2805 variants.
+
 1.47.0 (2025-11-21)
 ------------------
 

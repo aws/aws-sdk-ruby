@@ -56,8 +56,8 @@ module Aws::PCS
     #   @return [Integer]
     #
     # @!attribute [rw] mode
-    #   The default value for `mode` is `STANDARD`. A value of `STANDARD`
-    #   means Slurm accounting is enabled.
+    #   The default value for `mode` is `NONE`. A value of `STANDARD` means
+    #   Slurm accounting is enabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/Accounting AWS API Documentation
@@ -91,8 +91,8 @@ module Aws::PCS
     #   @return [Integer]
     #
     # @!attribute [rw] mode
-    #   The default value for `mode` is `STANDARD`. A value of `STANDARD`
-    #   means Slurm accounting is enabled.
+    #   The default value for `mode` is `NONE`. A value of `STANDARD` means
+    #   Slurm accounting is enabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/AccountingRequest AWS API Documentation
@@ -1183,17 +1183,17 @@ module Aws::PCS
       include Aws::Structure
     end
 
-    # The JWT key stored in AWS Secrets Manager for Slurm REST API
-    # authentication.
+    # The JWT key stored in Amazon Web Services Secrets Manager for Slurm
+    # REST API authentication.
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of the AWS Secrets Manager secret
-    #   containing the JWT key.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret containing the JWT key.
     #   @return [String]
     #
     # @!attribute [rw] secret_version
-    #   The version of the AWS Secrets Manager secret containing the JWT
-    #   key.
+    #   The version of the Amazon Web Services Secrets Manager secret
+    #   containing the JWT key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/JwtKey AWS API Documentation
@@ -1919,8 +1919,8 @@ module Aws::PCS
     # **ClusterSlurmConfiguration** object.
     #
     # @!attribute [rw] mode
-    #   The default value for `mode` is `STANDARD`. A value of `STANDARD`
-    #   means the Slurm REST API is enabled.
+    #   The default value for `mode` is `NONE`. A value of `STANDARD` means
+    #   the Slurm REST API is enabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/SlurmRest AWS API Documentation
@@ -1936,8 +1936,8 @@ module Aws::PCS
     # **ClusterSlurmConfiguration** object.
     #
     # @!attribute [rw] mode
-    #   The default value for `mode` is `STANDARD`. A value of `STANDARD`
-    #   means the Slurm REST API is enabled.
+    #   The default value for `mode` is `NONE`. A value of `STANDARD` means
+    #   the Slurm REST API is enabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/SlurmRestRequest AWS API Documentation
@@ -2057,8 +2057,8 @@ module Aws::PCS
     #   @return [Integer]
     #
     # @!attribute [rw] mode
-    #   The default value for `mode` is `STANDARD`. A value of `STANDARD`
-    #   means Slurm accounting is enabled.
+    #   The default value for `mode` is `NONE`. A value of `STANDARD` means
+    #   Slurm accounting is enabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UpdateAccountingRequest AWS API Documentation
@@ -2343,8 +2343,8 @@ module Aws::PCS
     # configuring the Slurm REST API.
     #
     # @!attribute [rw] mode
-    #   The default value for `mode` is `STANDARD`. A value of `STANDARD`
-    #   means the Slurm REST API is enabled.
+    #   The default value for `mode` is `NONE`. A value of `STANDARD` means
+    #   the Slurm REST API is enabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pcs-2023-02-10/UpdateSlurmRestRequest AWS API Documentation

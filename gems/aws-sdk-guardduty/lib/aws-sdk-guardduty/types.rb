@@ -8756,6 +8756,11 @@ module Aws::GuardDuty
     #   involved in the finding.
     #   @return [String]
     #
+    # @!attribute [rw] dbi_resource_id
+    #   The unique ID of the database resource involved in the activity that
+    #   prompted GuardDuty to generate the finding.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Information about the tag key-value pairs.
     #   @return [Array<Types::Tag>]
@@ -8768,6 +8773,7 @@ module Aws::GuardDuty
       :engine_version,
       :db_cluster_identifier,
       :db_instance_arn,
+      :dbi_resource_id,
       :tags)
       SENSITIVE = []
       include Aws::Structure

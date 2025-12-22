@@ -369,6 +369,13 @@ module Aws::ARCRegionswitch
     #   The triggers associated with a Region switch plan.
     #   @return [Array<Types::Trigger>]
     #
+    # @!attribute [rw] report_configuration
+    #   Configuration for automatic report generation for plan executions.
+    #   When configured, Region switch automatically generates a report
+    #   after each plan execution that includes execution events, plan
+    #   configuration, and CloudWatch alarm states.
+    #   @return [Types::ReportConfiguration]
+    #
     # @!attribute [rw] name
     #   The name of a Region switch plan.
     #   @return [String]
@@ -402,6 +409,7 @@ module Aws::ARCRegionswitch
       :recovery_time_objective_minutes,
       :associated_alarms,
       :triggers,
+      :report_configuration,
       :name,
       :regions,
       :recovery_approach,
@@ -473,6 +481,68 @@ module Aws::ARCRegionswitch
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/DeletePlanResponse AWS API Documentation
     #
     class DeletePlanResponse < Aws::EmptyStructure; end
+
+    # Configuration for Amazon DocumentDB global clusters used in a Region
+    # switch plan.
+    #
+    # @!attribute [rw] timeout_minutes
+    #   The timeout value specified for the configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cross_account_role
+    #   The cross account role for the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   The external ID (secret key) for the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] behavior
+    #   The behavior for a global cluster, that is, only allow switchover or
+    #   also allow failover.
+    #   @return [String]
+    #
+    # @!attribute [rw] ungraceful
+    #   The settings for ungraceful execution.
+    #   @return [Types::DocumentDbUngraceful]
+    #
+    # @!attribute [rw] global_cluster_identifier
+    #   The global cluster identifier for a DocumentDB global cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_cluster_arns
+    #   The database cluster Amazon Resource Names (ARNs) for a DocumentDB
+    #   global cluster.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/DocumentDbConfiguration AWS API Documentation
+    #
+    class DocumentDbConfiguration < Struct.new(
+      :timeout_minutes,
+      :cross_account_role,
+      :external_id,
+      :behavior,
+      :ungraceful,
+      :global_cluster_identifier,
+      :database_cluster_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for handling failures when performing operations on
+    # DocumentDB global clusters.
+    #
+    # @!attribute [rw] ungraceful
+    #   The settings for ungraceful execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/DocumentDbUngraceful AWS API Documentation
+    #
+    class DocumentDbUngraceful < Struct.new(
+      :ungraceful)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Configuration for increasing the capacity of Amazon EC2 Auto Scaling
     # groups during a Region switch.
@@ -728,6 +798,11 @@ module Aws::ARCRegionswitch
     #   The Amazon Route 53 health check configuration.
     #   @return [Types::Route53HealthCheckConfiguration]
     #
+    # @!attribute [rw] document_db_config
+    #   Configuration for Amazon DocumentDB global clusters used in a Region
+    #   switch plan.
+    #   @return [Types::DocumentDbConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/ExecutionBlockConfiguration AWS API Documentation
     #
     class ExecutionBlockConfiguration < Struct.new(
@@ -741,6 +816,7 @@ module Aws::ARCRegionswitch
       :ecs_capacity_increase_config,
       :eks_resource_scaling_config,
       :route53_health_check_config,
+      :document_db_config,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -756,6 +832,7 @@ module Aws::ARCRegionswitch
       class EcsCapacityIncreaseConfig < ExecutionBlockConfiguration; end
       class EksResourceScalingConfig < ExecutionBlockConfiguration; end
       class Route53HealthCheckConfig < ExecutionBlockConfiguration; end
+      class DocumentDbConfig < ExecutionBlockConfiguration; end
       class Unknown < ExecutionBlockConfiguration; end
     end
 
@@ -810,6 +887,44 @@ module Aws::ARCRegionswitch
       :description,
       :event_id,
       :previous_event_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a report generation that failed.
+    #
+    # @!attribute [rw] error_code
+    #   The error code for the failed report generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message for the failed report generation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/FailedReportOutput AWS API Documentation
+    #
+    class FailedReportOutput < Struct.new(
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a generated execution report.
+    #
+    # @!attribute [rw] report_generation_time
+    #   The timestamp when the report was generated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] report_output
+    #   The output location or cause of a failure in report generation.
+    #   @return [Types::ReportOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/GeneratedReport AWS API Documentation
+    #
+    class GeneratedReport < Struct.new(
+      :report_generation_time,
+      :report_output)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -984,6 +1099,11 @@ module Aws::ARCRegionswitch
     #   that you've specified are healthy again.
     #   @return [String]
     #
+    # @!attribute [rw] generated_report_details
+    #   Information about the location of a generated report, or the cause
+    #   of its failure.
+    #   @return [Array<Types::GeneratedReport>]
+    #
     # @!attribute [rw] next_token
     #   Specifies that you want to receive the next page of results. Valid
     #   only if you received a `nextToken` response in the previous request.
@@ -1009,6 +1129,7 @@ module Aws::ARCRegionswitch
       :step_states,
       :plan,
       :actual_recovery_time,
+      :generated_report_details,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1448,6 +1569,63 @@ module Aws::ARCRegionswitch
     end
 
     # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Arc Region Switch Plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] hosted_zone_id
+    #   The hosted zone ID for the health checks.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_name
+    #   The record name for the health checks.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of objects that you want to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `nextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `nextToken`
+    #   response to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/ListRoute53HealthChecksInRegionRequest AWS API Documentation
+    #
+    class ListRoute53HealthChecksInRegionRequest < Struct.new(
+      :arn,
+      :hosted_zone_id,
+      :record_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] health_checks
+    #   List of the health checks requested.
+    #   @return [Array<Types::Route53HealthCheck>]
+    #
+    # @!attribute [rw] next_token
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `nextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `nextToken`
+    #   response to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/ListRoute53HealthChecksInRegionResponse AWS API Documentation
+    #
+    class ListRoute53HealthChecksInRegionResponse < Struct.new(
+      :health_checks,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the Amazon Route 53 health check
     #   request.
     #   @return [String]
@@ -1595,6 +1773,10 @@ module Aws::ARCRegionswitch
     #   The triggers for a plan.
     #   @return [Array<Types::Trigger>]
     #
+    # @!attribute [rw] report_configuration
+    #   The report configuration for a plan.
+    #   @return [Types::ReportConfiguration]
+    #
     # @!attribute [rw] name
     #   The name for a plan.
     #   @return [String]
@@ -1634,6 +1816,7 @@ module Aws::ARCRegionswitch
       :recovery_time_objective_minutes,
       :associated_alarms,
       :triggers,
+      :report_configuration,
       :name,
       :regions,
       :recovery_approach,
@@ -1668,6 +1851,74 @@ module Aws::ARCRegionswitch
       :arn)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Configuration for automatic report generation for plan executions.
+    # When configured, Region switch automatically generates a report after
+    # each plan execution that includes execution events, plan
+    # configuration, and CloudWatch alarm states.
+    #
+    # @!attribute [rw] report_output
+    #   The output configuration for the report.
+    #   @return [Array<Types::ReportOutputConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/ReportConfiguration AWS API Documentation
+    #
+    class ReportConfiguration < Struct.new(
+      :report_output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output location or cause of a failure in report generation.
+    #
+    # @note ReportOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ReportOutput corresponding to the set member.
+    #
+    # @!attribute [rw] s3_report_output
+    #   Information about a report delivered to Amazon S3.
+    #   @return [Types::S3ReportOutput]
+    #
+    # @!attribute [rw] failed_report_output
+    #   The details about a failed report generation.
+    #   @return [Types::FailedReportOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/ReportOutput AWS API Documentation
+    #
+    class ReportOutput < Struct.new(
+      :s3_report_output,
+      :failed_report_output,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3ReportOutput < ReportOutput; end
+      class FailedReportOutput < ReportOutput; end
+      class Unknown < ReportOutput; end
+    end
+
+    # Configuration for report output destinations used in a Region switch
+    # plan.
+    #
+    # @note ReportOutputConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ReportOutputConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ReportOutputConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] s3_configuration
+    #   Configuration for delivering reports to an Amazon S3 bucket.
+    #   @return [Types::S3ReportOutputConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/ReportOutputConfiguration AWS API Documentation
+    #
+    class ReportOutputConfiguration < Struct.new(
+      :s3_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3Configuration < ReportOutputConfiguration; end
+      class Unknown < ReportOutputConfiguration; end
     end
 
     # The specified resource was not found.
@@ -1743,6 +1994,10 @@ module Aws::ARCRegionswitch
     #   The Amazon Route 53 health check ID.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The Amazon Route 53 health check status.
+    #   @return [String]
+    #
     # @!attribute [rw] region
     #   The Amazon Route 53 Region.
     #   @return [String]
@@ -1753,6 +2008,7 @@ module Aws::ARCRegionswitch
       :hosted_zone_id,
       :record_name,
       :health_check_id,
+      :status,
       :region)
       SENSITIVE = []
       include Aws::Structure
@@ -1813,6 +2069,42 @@ module Aws::ARCRegionswitch
     class Route53ResourceRecordSet < Struct.new(
       :record_set_identifier,
       :region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a report delivered to Amazon S3.
+    #
+    # @!attribute [rw] s3_object_key
+    #   The S3 object key where the generated report is stored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/S3ReportOutput AWS API Documentation
+    #
+    class S3ReportOutput < Struct.new(
+      :s3_object_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for delivering generated reports to an Amazon S3 bucket.
+    #
+    # @!attribute [rw] bucket_path
+    #   The S3 bucket name and optional prefix where reports are stored.
+    #   Format: bucket-name or bucket-name/prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_owner
+    #   The Amazon Web Services account ID that owns the S3 bucket. Required
+    #   to ensure the bucket is still owned by the same expected owner at
+    #   generation time.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/S3ReportOutputConfiguration AWS API Documentation
+    #
+    class S3ReportOutputConfiguration < Struct.new(
+      :bucket_path,
+      :bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2191,6 +2483,10 @@ module Aws::ARCRegionswitch
     #   of the plan.
     #   @return [Array<Types::Trigger>]
     #
+    # @!attribute [rw] report_configuration
+    #   The updated report configuration for the plan.
+    #   @return [Types::ReportConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/UpdatePlanRequest AWS API Documentation
     #
     class UpdatePlanRequest < Struct.new(
@@ -2200,7 +2496,8 @@ module Aws::ARCRegionswitch
       :execution_role,
       :recovery_time_objective_minutes,
       :associated_alarms,
-      :triggers)
+      :triggers,
+      :report_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

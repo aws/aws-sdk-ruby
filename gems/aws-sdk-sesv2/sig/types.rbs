@@ -217,6 +217,7 @@ module Aws::SESV2
       attr_accessor from_email_address: ::String
       attr_accessor template_subject: ::String
       attr_accessor template_content: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       attr_accessor success_redirection_url: ::String
       attr_accessor failure_redirection_url: ::String
       SENSITIVE: []
@@ -277,6 +278,7 @@ module Aws::SESV2
     class CreateEmailTemplateRequest
       attr_accessor template_name: ::String
       attr_accessor template_content: Types::EmailTemplateContent
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
@@ -576,6 +578,21 @@ module Aws::SESV2
       SENSITIVE: []
     end
 
+    class EmailAddressInsightsMailboxEvaluations
+      attr_accessor has_valid_syntax: Types::EmailAddressInsightsVerdict
+      attr_accessor has_valid_dns_records: Types::EmailAddressInsightsVerdict
+      attr_accessor mailbox_exists: Types::EmailAddressInsightsVerdict
+      attr_accessor is_role_address: Types::EmailAddressInsightsVerdict
+      attr_accessor is_disposable: Types::EmailAddressInsightsVerdict
+      attr_accessor is_random_input: Types::EmailAddressInsightsVerdict
+      SENSITIVE: []
+    end
+
+    class EmailAddressInsightsVerdict
+      attr_accessor confidence_verdict: ("LOW" | "MEDIUM" | "HIGH")
+      SENSITIVE: []
+    end
+
     class EmailContent
       attr_accessor simple: Types::Message
       attr_accessor raw: Types::RawMessage
@@ -772,6 +789,7 @@ module Aws::SESV2
       attr_accessor from_email_address: ::String
       attr_accessor template_subject: ::String
       attr_accessor template_content: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       attr_accessor success_redirection_url: ::String
       attr_accessor failure_redirection_url: ::String
       SENSITIVE: []
@@ -859,6 +877,16 @@ module Aws::SESV2
       SENSITIVE: []
     end
 
+    class GetEmailAddressInsightsRequest
+      attr_accessor email_address: ::String
+      SENSITIVE: []
+    end
+
+    class GetEmailAddressInsightsResponse
+      attr_accessor mailbox_validation: Types::MailboxValidation
+      SENSITIVE: []
+    end
+
     class GetEmailIdentityPoliciesRequest
       attr_accessor email_identity: ::String
       SENSITIVE: []
@@ -896,6 +924,7 @@ module Aws::SESV2
     class GetEmailTemplateResponse
       attr_accessor template_name: ::String
       attr_accessor template_content: Types::EmailTemplateContent
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
@@ -1333,6 +1362,12 @@ module Aws::SESV2
     class MailFromDomainNotVerifiedException < Aws::EmptyStructure
     end
 
+    class MailboxValidation
+      attr_accessor is_valid: Types::EmailAddressInsightsVerdict
+      attr_accessor evaluations: Types::EmailAddressInsightsMailboxEvaluations
+      SENSITIVE: []
+    end
+
     class Message
       attr_accessor subject: Types::Content
       attr_accessor body: Types::Body
@@ -1463,6 +1498,7 @@ module Aws::SESV2
 
     class PutAccountSuppressionAttributesRequest
       attr_accessor suppressed_reasons: ::Array[("BOUNCE" | "COMPLAINT")]
+      attr_accessor validation_attributes: Types::SuppressionValidationAttributes
       SENSITIVE: []
     end
 
@@ -1518,6 +1554,7 @@ module Aws::SESV2
     class PutConfigurationSetSuppressionOptionsRequest
       attr_accessor configuration_set_name: ::String
       attr_accessor suppressed_reasons: ::Array[("BOUNCE" | "COMPLAINT")]
+      attr_accessor validation_options: Types::SuppressionValidationOptions
       SENSITIVE: []
     end
 
@@ -1816,6 +1853,18 @@ module Aws::SESV2
 
     class SuppressionAttributes
       attr_accessor suppressed_reasons: ::Array[("BOUNCE" | "COMPLAINT")]
+      attr_accessor validation_attributes: Types::SuppressionValidationAttributes
+      SENSITIVE: []
+    end
+
+    class SuppressionConditionThreshold
+      attr_accessor condition_threshold_enabled: ("ENABLED" | "DISABLED")
+      attr_accessor overall_confidence_threshold: Types::SuppressionConfidenceThreshold
+      SENSITIVE: []
+    end
+
+    class SuppressionConfidenceThreshold
+      attr_accessor confidence_verdict_threshold: ("MEDIUM" | "HIGH" | "MANAGED")
       SENSITIVE: []
     end
 
@@ -1826,6 +1875,17 @@ module Aws::SESV2
 
     class SuppressionOptions
       attr_accessor suppressed_reasons: ::Array[("BOUNCE" | "COMPLAINT")]
+      attr_accessor validation_options: Types::SuppressionValidationOptions
+      SENSITIVE: []
+    end
+
+    class SuppressionValidationAttributes
+      attr_accessor condition_threshold: Types::SuppressionConditionThreshold
+      SENSITIVE: []
+    end
+
+    class SuppressionValidationOptions
+      attr_accessor condition_threshold: Types::SuppressionConditionThreshold
       SENSITIVE: []
     end
 

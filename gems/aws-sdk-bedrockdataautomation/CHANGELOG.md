@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2025-12-18)
+------------------
+
+* Feature - Blueprint Optimization (BPO) is a new Amazon Bedrock Data Automation (BDA) capability that improves blueprint inference accuracy using example content assets and ground truth data. BPO works by generating better instructions for fields in the Blueprint using provided data.
+
 1.22.0 (2025-11-21)
 ------------------
 

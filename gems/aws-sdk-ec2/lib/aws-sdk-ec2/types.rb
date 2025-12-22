@@ -12990,6 +12990,10 @@ module Aws::EC2
     #   * Rack – No usage restrictions.
     #   @return [String]
     #
+    # @!attribute [rw] linked_group_id
+    #   Reserved for future use.
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
@@ -13014,6 +13018,7 @@ module Aws::EC2
       :partition_count,
       :tag_specifications,
       :spread_level,
+      :linked_group_id,
       :dry_run,
       :group_name,
       :strategy)
@@ -26480,7 +26485,7 @@ module Aws::EC2
     #
     #   * `requester-id` - The ID of the entity that launched the instance
     #     on your behalf (for example, Amazon Web Services Management
-    #     Console, Amazon EC2 Auto Scaling, and so on).
+    #     Console, Auto Scaling, and so on).
     #
     #   * `reservation-id` - The ID of the instance's reservation. A
     #     reservation ID is created any time you launch an instance. A
@@ -41368,7 +41373,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
-    #   The Availability Zone in which to launch the instances.
+    #   The Availability Zone in which to launch the instances. For example,
+    #   `us-east-2a`.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified
+    #   in the request, but not both.
     #   @return [String]
     #
     # @!attribute [rw] weighted_capacity
@@ -41483,6 +41492,14 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html
     #   @return [Array<Types::BlockDeviceMappingResponse>]
     #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone in which to launch the instances.
+    #   For example, `use2-az1`.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified
+    #   in the request, but not both.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverrides AWS API Documentation
     #
     class FleetLaunchTemplateOverrides < Struct.new(
@@ -41495,7 +41512,8 @@ module Aws::EC2
       :placement,
       :instance_requirements,
       :image_id,
-      :block_device_mappings)
+      :block_device_mappings,
+      :availability_zone_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41535,7 +41553,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
-    #   The Availability Zone in which to launch the instances.
+    #   The Availability Zone in which to launch the instances. For example,
+    #   `us-east-2a`.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified
+    #   in the request, but not both.
     #   @return [String]
     #
     # @!attribute [rw] weighted_capacity
@@ -41650,6 +41672,14 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-launch-template.html#use-an-ssm-parameter-instead-of-an-ami-id
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone in which to launch the instances.
+    #   For example, `use2-az1`.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified
+    #   in the request, but not both.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverridesRequest AWS API Documentation
     #
     class FleetLaunchTemplateOverridesRequest < Struct.new(
@@ -41662,7 +41692,8 @@ module Aws::EC2
       :placement,
       :block_device_mappings,
       :instance_requirements,
-      :image_id)
+      :image_id,
+      :availability_zone_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -56909,7 +56940,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
-    #   The Availability Zone in which to launch the instances.
+    #   The Availability Zone in which to launch the instances. For example,
+    #   `us-east-2a`.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified
+    #   in the request, but not both.
     #   @return [String]
     #
     # @!attribute [rw] weighted_capacity
@@ -56964,6 +56999,14 @@ module Aws::EC2
     #    </note>
     #   @return [Types::InstanceRequirements]
     #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone in which to launch the instances.
+    #   For example, `use2-az1`.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified
+    #   in the request, but not both.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateOverrides AWS API Documentation
     #
     class LaunchTemplateOverrides < Struct.new(
@@ -56973,7 +57016,8 @@ module Aws::EC2
       :availability_zone,
       :weighted_capacity,
       :priority,
-      :instance_requirements)
+      :instance_requirements,
+      :availability_zone_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -67499,6 +67543,10 @@ module Aws::EC2
     #   groups can be spread across hosts.
     #   @return [String]
     #
+    # @!attribute [rw] linked_group_id
+    #   Reserved for future use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PlacementGroup AWS API Documentation
     #
     class PlacementGroup < Struct.new(
@@ -67509,7 +67557,8 @@ module Aws::EC2
       :group_id,
       :tags,
       :group_arn,
-      :spread_level)
+      :spread_level,
+      :linked_group_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -77747,10 +77796,13 @@ module Aws::EC2
     # Describes Spot Instance placement.
     #
     # @!attribute [rw] availability_zone
-    #   The Availability Zone.
+    #   The Availability Zone. For example, `us-east-2a`.
     #
     #   \[Spot Fleet only\] To specify multiple Availability Zones, separate
-    #   them using commas; for example, "us-west-2a, us-west-2b".
+    #   them using commas; for example, "`us-east-2a`, `us-east-2b`".
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified
+    #   in the request, but not both.
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -77763,12 +77815,23 @@ module Aws::EC2
     #   hardware. The `host` tenancy is not supported for Spot Instances.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone. For example, `use2-az1`.
+    #
+    #   \[Spot Fleet only\] To specify multiple Availability Zones, separate
+    #   them using commas; for example, "`use2-az1`, `use2-bz1`".
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified
+    #   in the request, but not both.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotPlacement AWS API Documentation
     #
     class SpotPlacement < Struct.new(
       :availability_zone,
       :group_name,
-      :tenancy)
+      :tenancy,
+      :availability_zone_id)
       SENSITIVE = []
       include Aws::Structure
     end

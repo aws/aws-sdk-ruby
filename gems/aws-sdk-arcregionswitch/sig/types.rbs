@@ -103,6 +103,7 @@ module Aws::ARCRegionswitch
       attr_accessor recovery_time_objective_minutes: ::Integer
       attr_accessor associated_alarms: ::Hash[::String, Types::AssociatedAlarm]
       attr_accessor triggers: ::Array[Types::Trigger]
+      attr_accessor report_configuration: Types::ReportConfiguration
       attr_accessor name: ::String
       attr_accessor regions: ::Array[::String]
       attr_accessor recovery_approach: ("activeActive" | "activePassive")
@@ -131,6 +132,22 @@ module Aws::ARCRegionswitch
     end
 
     class DeletePlanResponse < Aws::EmptyStructure
+    end
+
+    class DocumentDbConfiguration
+      attr_accessor timeout_minutes: ::Integer
+      attr_accessor cross_account_role: ::String
+      attr_accessor external_id: ::String
+      attr_accessor behavior: ("switchoverOnly" | "failover")
+      attr_accessor ungraceful: Types::DocumentDbUngraceful
+      attr_accessor global_cluster_identifier: ::String
+      attr_accessor database_cluster_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DocumentDbUngraceful
+      attr_accessor ungraceful: ("failover")
+      SENSITIVE: []
     end
 
     class Ec2AsgCapacityIncreaseConfiguration
@@ -201,6 +218,7 @@ module Aws::ARCRegionswitch
       attr_accessor ecs_capacity_increase_config: Types::EcsCapacityIncreaseConfiguration
       attr_accessor eks_resource_scaling_config: Types::EksResourceScalingConfiguration
       attr_accessor route53_health_check_config: Types::Route53HealthCheckConfiguration
+      attr_accessor document_db_config: Types::DocumentDbConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -224,20 +242,34 @@ module Aws::ARCRegionswitch
       end
       class Route53HealthCheckConfig < ExecutionBlockConfiguration
       end
+      class DocumentDbConfig < ExecutionBlockConfiguration
+      end
       class Unknown < ExecutionBlockConfiguration
       end
     end
 
     class ExecutionEvent
       attr_accessor timestamp: ::Time
-      attr_accessor type: ("unknown" | "executionPending" | "executionStarted" | "executionSucceeded" | "executionFailed" | "executionPausing" | "executionPaused" | "executionCanceling" | "executionCanceled" | "executionPendingApproval" | "executionBehaviorChangedToUngraceful" | "executionBehaviorChangedToGraceful" | "executionPendingChildPlanManualApproval" | "executionSuccessMonitoringApplicationHealth" | "stepStarted" | "stepUpdate" | "stepSucceeded" | "stepFailed" | "stepSkipped" | "stepPausedByError" | "stepPausedByOperator" | "stepCanceled" | "stepPendingApproval" | "stepExecutionBehaviorChangedToUngraceful" | "stepPendingApplicationHealthMonitor")
+      attr_accessor type: ("unknown" | "executionPending" | "executionStarted" | "executionSucceeded" | "executionFailed" | "executionPausing" | "executionPaused" | "executionCanceling" | "executionCanceled" | "executionPendingApproval" | "executionBehaviorChangedToUngraceful" | "executionBehaviorChangedToGraceful" | "executionPendingChildPlanManualApproval" | "executionSuccessMonitoringApplicationHealth" | "stepStarted" | "stepUpdate" | "stepSucceeded" | "stepFailed" | "stepSkipped" | "stepPausedByError" | "stepPausedByOperator" | "stepCanceled" | "stepPendingApproval" | "stepExecutionBehaviorChangedToUngraceful" | "stepPendingApplicationHealthMonitor" | "planEvaluationWarning")
       attr_accessor step_name: ::String
-      attr_accessor execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck")
+      attr_accessor execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb")
       attr_accessor resources: ::Array[::String]
       attr_accessor error: ::String
       attr_accessor description: ::String
       attr_accessor event_id: ::String
       attr_accessor previous_event_id: ::String
+      SENSITIVE: []
+    end
+
+    class FailedReportOutput
+      attr_accessor error_code: ("insufficientPermissions" | "invalidResource" | "configurationError")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class GeneratedReport
+      attr_accessor report_generation_time: ::Time
+      attr_accessor report_output: Types::ReportOutput
       SENSITIVE: []
     end
 
@@ -282,6 +314,7 @@ module Aws::ARCRegionswitch
       attr_accessor step_states: ::Array[Types::StepState]
       attr_accessor plan: Types::Plan
       attr_accessor actual_recovery_time: ::String
+      attr_accessor generated_report_details: ::Array[Types::GeneratedReport]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -415,6 +448,21 @@ module Aws::ARCRegionswitch
       SENSITIVE: []
     end
 
+    class ListRoute53HealthChecksInRegionRequest
+      attr_accessor arn: ::String
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor record_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoute53HealthChecksInRegionResponse
+      attr_accessor health_checks: ::Array[Types::Route53HealthCheck]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListRoute53HealthChecksRequest
       attr_accessor arn: ::String
       attr_accessor hosted_zone_id: ::String
@@ -459,6 +507,7 @@ module Aws::ARCRegionswitch
       attr_accessor recovery_time_objective_minutes: ::Integer
       attr_accessor associated_alarms: ::Hash[::String, Types::AssociatedAlarm]
       attr_accessor triggers: ::Array[Types::Trigger]
+      attr_accessor report_configuration: Types::ReportConfiguration
       attr_accessor name: ::String
       attr_accessor regions: ::Array[::String]
       attr_accessor recovery_approach: ("activeActive" | "activePassive")
@@ -474,6 +523,36 @@ module Aws::ARCRegionswitch
       attr_accessor external_id: ::String
       attr_accessor arn: ::String
       SENSITIVE: []
+    end
+
+    class ReportConfiguration
+      attr_accessor report_output: ::Array[Types::ReportOutputConfiguration]
+      SENSITIVE: []
+    end
+
+    class ReportOutput
+      attr_accessor s3_report_output: Types::S3ReportOutput
+      attr_accessor failed_report_output: Types::FailedReportOutput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3ReportOutput < ReportOutput
+      end
+      class FailedReportOutput < ReportOutput
+      end
+      class Unknown < ReportOutput
+      end
+    end
+
+    class ReportOutputConfiguration
+      attr_accessor s3_configuration: Types::S3ReportOutputConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3Configuration < ReportOutputConfiguration
+      end
+      class Unknown < ReportOutputConfiguration
+      end
     end
 
     class ResourceNotFoundException
@@ -496,6 +575,7 @@ module Aws::ARCRegionswitch
       attr_accessor hosted_zone_id: ::String
       attr_accessor record_name: ::String
       attr_accessor health_check_id: ::String
+      attr_accessor status: ("healthy" | "unhealthy" | "unknown")
       attr_accessor region: ::String
       SENSITIVE: []
     end
@@ -513,6 +593,17 @@ module Aws::ARCRegionswitch
     class Route53ResourceRecordSet
       attr_accessor record_set_identifier: ::String
       attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class S3ReportOutput
+      attr_accessor s3_object_key: ::String
+      SENSITIVE: []
+    end
+
+    class S3ReportOutputConfiguration
+      attr_accessor bucket_path: ::String
+      attr_accessor bucket_owner: ::String
       SENSITIVE: []
     end
 
@@ -547,7 +638,7 @@ module Aws::ARCRegionswitch
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor execution_block_configuration: Types::ExecutionBlockConfiguration
-      attr_accessor execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck")
+      attr_accessor execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb")
       SENSITIVE: []
     end
 
@@ -624,6 +715,7 @@ module Aws::ARCRegionswitch
       attr_accessor recovery_time_objective_minutes: ::Integer
       attr_accessor associated_alarms: ::Hash[::String, Types::AssociatedAlarm]
       attr_accessor triggers: ::Array[Types::Trigger]
+      attr_accessor report_configuration: Types::ReportConfiguration
       SENSITIVE: []
     end
 

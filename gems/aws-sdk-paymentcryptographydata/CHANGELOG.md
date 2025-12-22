@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2025-12-17)
+------------------
+
+* Feature - Support for AS2805 standard.  New API GenerateAs2805KekValidation and changes to translate pin, GenerateMac and VerifyMac to support AS2805 key variants.
+
 1.44.0 (2025-11-21)
 ------------------
 

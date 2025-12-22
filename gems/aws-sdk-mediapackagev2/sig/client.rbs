@@ -254,7 +254,8 @@ module Aws
                                           resource_id: ::String,
                                           drm_systems: Array[("CLEAR_KEY_AES_128" | "FAIRPLAY" | "PLAYREADY" | "WIDEVINE" | "IRDETO")],
                                           role_arn: ::String,
-                                          url: ::String
+                                          url: ::String,
+                                          certificate_arn: ::String?
                                         }
                                       }?
                                     },
@@ -808,7 +809,8 @@ module Aws
                                           resource_id: ::String,
                                           drm_systems: Array[("CLEAR_KEY_AES_128" | "FAIRPLAY" | "PLAYREADY" | "WIDEVINE" | "IRDETO")],
                                           role_arn: ::String,
-                                          url: ::String
+                                          url: ::String,
+                                          certificate_arn: ::String?
                                         }
                                       }?
                                     },

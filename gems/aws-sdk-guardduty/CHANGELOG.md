@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.139.0 (2025-12-22)
+------------------
+
+* Feature - Make accountIds a required field in GetRemainingFreeTrialDays API to reflect service behavior.
+
+1.138.0 (2025-12-17)
+------------------
+
+* Feature - Add support for dbiResourceId in finding.
+
 1.137.0 (2025-12-09)
 ------------------
 

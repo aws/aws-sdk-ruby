@@ -478,11 +478,23 @@ module Aws::InspectorScan
 
     # Scans a provided CycloneDX 1.5 SBOM and reports on any vulnerabilities
     # discovered in that SBOM. You can generate compatible SBOMs for your
-    # resources using the [Amazon Inspector SBOM generator]().
+    # resources using the [Amazon Inspector SBOM generator][1].
+    #
+    # <note markdown="1"> The output of this action reports NVD and CVSS scores when NVD and
+    # CVSS scores are available. Because the output reports both scores, you
+    # might notice a discrepency between them. However, you can triage the
+    # severity of either score depending on the vendor of your choosing.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/inspector/latest/user/sbom-generator.html
     #
     # @option params [required, Hash,Array,String,Numeric,Boolean] :sbom
     #   The JSON file for the SBOM you want to scan. The SBOM must be in
-    #   CycloneDX 1.5 format.
+    #   CycloneDX 1.5 format. This format limits you to passing 2000
+    #   components before throwing a `ValidException` error.
     #
     #   Document type used to carry open content
     #   (Hash,Array,String,Numeric,Boolean). A document type value is
@@ -501,7 +513,7 @@ module Aws::InspectorScan
     #   resp = client.scan_sbom({
     #     sbom: { # required
     #     },
-    #     output_format: "CYCLONE_DX_1_5", # accepts CYCLONE_DX_1_5, INSPECTOR
+    #     output_format: "CYCLONE_DX_1_5", # accepts CYCLONE_DX_1_5, INSPECTOR, INSPECTOR_ALT
     #   })
     #
     # @example Response structure
@@ -535,7 +547,7 @@ module Aws::InspectorScan
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-inspectorscan'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -652,6 +652,7 @@ module Aws
             'WAFRegional' => 'waf-regional',
             'WAFV2' => 'wafv2',
             'WellArchitected' => 'wellarchitected',
+            'Wickr' => 'admin.wickr',
             'WorkDocs' => 'workdocs',
             'WorkMail' => 'workmail',
             'WorkMailMessageFlow' => 'workmailmessageflow',

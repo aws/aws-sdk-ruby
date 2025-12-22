@@ -1356,6 +1356,11 @@ module Aws::WorkSpacesWeb
     #   service.
     #   @return [Types::BrandingConfigurationCreateInput]
     #
+    # @!attribute [rw] web_authn_allowed
+    #   Specifies whether the user can use WebAuthn redirection for
+    #   passwordless login to websites within the streaming session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/CreateUserSettingsRequest AWS API Documentation
     #
     class CreateUserSettingsRequest < Struct.new(
@@ -1373,7 +1378,8 @@ module Aws::WorkSpacesWeb
       :additional_encryption_context,
       :deep_link_allowed,
       :toolbar_configuration,
-      :branding_configuration_input)
+      :branding_configuration_input,
+      :web_authn_allowed)
       SENSITIVE = [:tags, :cookie_synchronization_configuration]
       include Aws::Structure
     end
@@ -4525,6 +4531,11 @@ module Aws::WorkSpacesWeb
     #   branding configuration, all fields are optional.
     #   @return [Types::BrandingConfigurationUpdateInput]
     #
+    # @!attribute [rw] web_authn_allowed
+    #   Specifies whether the user can use WebAuthn redirection for
+    #   passwordless login to websites within the streaming session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateUserSettingsRequest AWS API Documentation
     #
     class UpdateUserSettingsRequest < Struct.new(
@@ -4540,7 +4551,8 @@ module Aws::WorkSpacesWeb
       :cookie_synchronization_configuration,
       :deep_link_allowed,
       :toolbar_configuration,
-      :branding_configuration_input)
+      :branding_configuration_input,
+      :web_authn_allowed)
       SENSITIVE = [:cookie_synchronization_configuration]
       include Aws::Structure
     end
@@ -4683,6 +4695,11 @@ module Aws::WorkSpacesWeb
     #   the web portal for end users.
     #   @return [Types::BrandingConfiguration]
     #
+    # @!attribute [rw] web_authn_allowed
+    #   Specifies whether the user can use WebAuthn redirection for
+    #   passwordless login to websites within the streaming session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UserSettings AWS API Documentation
     #
     class UserSettings < Struct.new(
@@ -4700,7 +4717,8 @@ module Aws::WorkSpacesWeb
       :additional_encryption_context,
       :deep_link_allowed,
       :toolbar_configuration,
-      :branding_configuration)
+      :branding_configuration,
+      :web_authn_allowed)
       SENSITIVE = [:cookie_synchronization_configuration]
       include Aws::Structure
     end
@@ -4770,6 +4788,11 @@ module Aws::WorkSpacesWeb
     #   the web portal for end users.
     #   @return [Types::BrandingConfiguration]
     #
+    # @!attribute [rw] web_authn_allowed
+    #   Specifies whether the user can use WebAuthn redirection for
+    #   passwordless login to websites within the streaming session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UserSettingsSummary AWS API Documentation
     #
     class UserSettingsSummary < Struct.new(
@@ -4784,7 +4807,8 @@ module Aws::WorkSpacesWeb
       :cookie_synchronization_configuration,
       :deep_link_allowed,
       :toolbar_configuration,
-      :branding_configuration)
+      :branding_configuration,
+      :web_authn_allowed)
       SENSITIVE = [:cookie_synchronization_configuration]
       include Aws::Structure
     end

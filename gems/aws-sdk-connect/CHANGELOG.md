@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.230.0 (2025-12-19)
+------------------
+
+* Feature - Adding support for Custom Metrics and Pre-Defined Attributes to GetCurrentMetricData API.
+
 1.229.0 (2025-12-15)
 ------------------
 

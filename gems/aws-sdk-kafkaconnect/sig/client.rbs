@@ -139,6 +139,7 @@ module Aws
                                   }?
                                 }
                               },
+                              ?network_type: ("IPV4" | "DUAL"),
                               plugins: Array[
                                 {
                                   custom_plugin: {
@@ -245,6 +246,7 @@ module Aws
         def kafka_cluster_encryption_in_transit: () -> Types::KafkaClusterEncryptionInTransitDescription
         def kafka_connect_version: () -> ::String
         def log_delivery: () -> Types::LogDeliveryDescription
+        def network_type: () -> ("IPV4" | "DUAL")
         def plugins: () -> ::Array[Types::PluginDescription]
         def service_execution_role_arn: () -> ::String
         def worker_configuration: () -> Types::WorkerConfigurationDescription

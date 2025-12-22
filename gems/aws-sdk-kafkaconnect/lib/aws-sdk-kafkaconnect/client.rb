@@ -508,13 +508,18 @@ module Aws::KafkaConnect
     # @option params [Types::LogDelivery] :log_delivery
     #   Details about log delivery.
     #
+    # @option params [String] :network_type
+    #   The network type of the connector. It gives connectors connectivity to
+    #   either IPv4 (IPV4) or IPv4 and IPv6 (DUAL) destinations. Defaults to
+    #   IPV4.
+    #
     # @option params [required, Array<Types::Plugin>] :plugins
     #   Amazon MSK Connect does not currently support specifying multiple
     #   plugins as a list. To use more than one plugin for your connector, you
     #   can create a single custom plugin using a ZIP file that bundles
     #   multiple plugins together.
     #
-    #   Specifies which plugin to use for the connector. You must specify a
+    #    Specifies which plugin to use for the connector. You must specify a
     #   single-element list containing one `customPlugin` object.
     #
     # @option params [required, String] :service_execution_role_arn
@@ -594,6 +599,7 @@ module Aws::KafkaConnect
     #         },
     #       },
     #     },
+    #     network_type: "IPV4", # accepts IPV4, DUAL
     #     plugins: [ # required
     #       {
     #         custom_plugin: { # required
@@ -855,6 +861,7 @@ module Aws::KafkaConnect
     #   * {Types::DescribeConnectorResponse#kafka_cluster_encryption_in_transit #kafka_cluster_encryption_in_transit} => Types::KafkaClusterEncryptionInTransitDescription
     #   * {Types::DescribeConnectorResponse#kafka_connect_version #kafka_connect_version} => String
     #   * {Types::DescribeConnectorResponse#log_delivery #log_delivery} => Types::LogDeliveryDescription
+    #   * {Types::DescribeConnectorResponse#network_type #network_type} => String
     #   * {Types::DescribeConnectorResponse#plugins #plugins} => Array&lt;Types::PluginDescription&gt;
     #   * {Types::DescribeConnectorResponse#service_execution_role_arn #service_execution_role_arn} => String
     #   * {Types::DescribeConnectorResponse#worker_configuration #worker_configuration} => Types::WorkerConfigurationDescription
@@ -898,6 +905,7 @@ module Aws::KafkaConnect
     #   resp.log_delivery.worker_log_delivery.s3.bucket #=> String
     #   resp.log_delivery.worker_log_delivery.s3.enabled #=> Boolean
     #   resp.log_delivery.worker_log_delivery.s3.prefix #=> String
+    #   resp.network_type #=> String, one of "IPV4", "DUAL"
     #   resp.plugins #=> Array
     #   resp.plugins[0].custom_plugin.custom_plugin_arn #=> String
     #   resp.plugins[0].custom_plugin.revision #=> Integer
@@ -1185,6 +1193,7 @@ module Aws::KafkaConnect
     #   resp.connectors[0].log_delivery.worker_log_delivery.s3.bucket #=> String
     #   resp.connectors[0].log_delivery.worker_log_delivery.s3.enabled #=> Boolean
     #   resp.connectors[0].log_delivery.worker_log_delivery.s3.prefix #=> String
+    #   resp.connectors[0].network_type #=> String, one of "IPV4", "DUAL"
     #   resp.connectors[0].plugins #=> Array
     #   resp.connectors[0].plugins[0].custom_plugin.custom_plugin_arn #=> String
     #   resp.connectors[0].plugins[0].custom_plugin.revision #=> Integer
@@ -1398,7 +1407,8 @@ module Aws::KafkaConnect
       req.send_request(options)
     end
 
-    # Updates the specified connector.
+    # Updates the specified connector. For request body, specify only one
+    # parameter: either `capacity` or `connectorConfiguration`.
     #
     # @option params [Types::CapacityUpdate] :capacity
     #   The target capacity.
@@ -1480,7 +1490,7 @@ module Aws::KafkaConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kafkaconnect'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

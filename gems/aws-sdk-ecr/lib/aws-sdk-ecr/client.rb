@@ -1128,8 +1128,9 @@ module Aws::ECR
     #
     # @option params [required, Array<String>] :applied_for
     #   A list of enumerable strings representing the Amazon ECR repository
-    #   creation scenarios that this template will apply towards. The two
-    #   supported scenarios are `PULL_THROUGH_CACHE` and `REPLICATION`
+    #   creation scenarios that this template will apply towards. The
+    #   supported scenarios are `PULL_THROUGH_CACHE`, `REPLICATION`, and
+    #   `CREATE_ON_PUSH`
     #
     # @option params [String] :custom_role_arn
     #   The ARN of the role to be assumed by Amazon ECR. This role must be in
@@ -1152,6 +1153,7 @@ module Aws::ECR
     #     applied_for: [
     #       "REPLICATION", 
     #       "PULL_THROUGH_CACHE", 
+    #       "CREATE_ON_PUSH", 
     #     ], 
     #     description: "Repos for testing images", 
     #     encryption_configuration: {
@@ -1176,6 +1178,7 @@ module Aws::ECR
     #       applied_for: [
     #         "REPLICATION", 
     #         "PULL_THROUGH_CACHE", 
+    #         "CREATE_ON_PUSH", 
     #       ], 
     #       created_at: Time.parse("2023-12-16T17:29:02-07:00"), 
     #       description: "Repos for testing images", 
@@ -1220,7 +1223,7 @@ module Aws::ECR
     #     ],
     #     repository_policy: "RepositoryPolicyText",
     #     lifecycle_policy: "LifecyclePolicyTextForRepositoryCreationTemplate",
-    #     applied_for: ["REPLICATION"], # required, accepts REPLICATION, PULL_THROUGH_CACHE
+    #     applied_for: ["REPLICATION"], # required, accepts REPLICATION, PULL_THROUGH_CACHE, CREATE_ON_PUSH
     #     custom_role_arn: "CustomRoleArn",
     #   })
     #
@@ -1241,7 +1244,7 @@ module Aws::ECR
     #   resp.repository_creation_template.repository_policy #=> String
     #   resp.repository_creation_template.lifecycle_policy #=> String
     #   resp.repository_creation_template.applied_for #=> Array
-    #   resp.repository_creation_template.applied_for[0] #=> String, one of "REPLICATION", "PULL_THROUGH_CACHE"
+    #   resp.repository_creation_template.applied_for[0] #=> String, one of "REPLICATION", "PULL_THROUGH_CACHE", "CREATE_ON_PUSH"
     #   resp.repository_creation_template.custom_role_arn #=> String
     #   resp.repository_creation_template.created_at #=> Time
     #   resp.repository_creation_template.updated_at #=> Time
@@ -1494,7 +1497,7 @@ module Aws::ECR
     #   resp.repository_creation_template.repository_policy #=> String
     #   resp.repository_creation_template.lifecycle_policy #=> String
     #   resp.repository_creation_template.applied_for #=> Array
-    #   resp.repository_creation_template.applied_for[0] #=> String, one of "REPLICATION", "PULL_THROUGH_CACHE"
+    #   resp.repository_creation_template.applied_for[0] #=> String, one of "REPLICATION", "PULL_THROUGH_CACHE", "CREATE_ON_PUSH"
     #   resp.repository_creation_template.custom_role_arn #=> String
     #   resp.repository_creation_template.created_at #=> Time
     #   resp.repository_creation_template.updated_at #=> Time
@@ -2303,6 +2306,7 @@ module Aws::ECR
     #         applied_for: [
     #           "PULL_THROUGH_CACHE", 
     #           "REPLICATION", 
+    #           "CREATE_ON_PUSH", 
     #         ], 
     #         created_at: Time.parse("2023-12-16T17:29:02-07:00"), 
     #         encryption_configuration: {
@@ -2353,7 +2357,7 @@ module Aws::ECR
     #   resp.repository_creation_templates[0].repository_policy #=> String
     #   resp.repository_creation_templates[0].lifecycle_policy #=> String
     #   resp.repository_creation_templates[0].applied_for #=> Array
-    #   resp.repository_creation_templates[0].applied_for[0] #=> String, one of "REPLICATION", "PULL_THROUGH_CACHE"
+    #   resp.repository_creation_templates[0].applied_for[0] #=> String, one of "REPLICATION", "PULL_THROUGH_CACHE", "CREATE_ON_PUSH"
     #   resp.repository_creation_templates[0].custom_role_arn #=> String
     #   resp.repository_creation_templates[0].created_at #=> Time
     #   resp.repository_creation_templates[0].updated_at #=> Time
@@ -4261,7 +4265,8 @@ module Aws::ECR
     # @option params [Array<String>] :applied_for
     #   Updates the list of enumerable strings representing the Amazon ECR
     #   repository creation scenarios that this template will apply towards.
-    #   The two supported scenarios are `PULL_THROUGH_CACHE` and `REPLICATION`
+    #   The supported scenarios are `PULL_THROUGH_CACHE`, `REPLICATION`, and
+    #   `CREATE_ON_PUSH`
     #
     # @option params [String] :custom_role_arn
     #   The ARN of the role to be assumed by Amazon ECR. This role must be in
@@ -4343,7 +4348,7 @@ module Aws::ECR
     #     ],
     #     repository_policy: "RepositoryPolicyText",
     #     lifecycle_policy: "LifecyclePolicyTextForRepositoryCreationTemplate",
-    #     applied_for: ["REPLICATION"], # accepts REPLICATION, PULL_THROUGH_CACHE
+    #     applied_for: ["REPLICATION"], # accepts REPLICATION, PULL_THROUGH_CACHE, CREATE_ON_PUSH
     #     custom_role_arn: "CustomRoleArn",
     #   })
     #
@@ -4364,7 +4369,7 @@ module Aws::ECR
     #   resp.repository_creation_template.repository_policy #=> String
     #   resp.repository_creation_template.lifecycle_policy #=> String
     #   resp.repository_creation_template.applied_for #=> Array
-    #   resp.repository_creation_template.applied_for[0] #=> String, one of "REPLICATION", "PULL_THROUGH_CACHE"
+    #   resp.repository_creation_template.applied_for[0] #=> String, one of "REPLICATION", "PULL_THROUGH_CACHE", "CREATE_ON_PUSH"
     #   resp.repository_creation_template.custom_role_arn #=> String
     #   resp.repository_creation_template.created_at #=> Time
     #   resp.repository_creation_template.updated_at #=> Time
@@ -4518,7 +4523,7 @@ module Aws::ECR
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

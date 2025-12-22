@@ -486,7 +486,8 @@
     "models": "elasticloadbalancingv2/2015-12-01"
   },
   "ElasticTranscoder": {
-    "models": "elastictranscoder/2012-09-25"
+    "models": "elastictranscoder/2012-09-25",
+    "deprecated": true
   },
   "ElasticsearchService": {
     "models": "es/2015-01-01"
@@ -1334,6 +1335,9 @@
   },
   "WellArchitected": {
     "models": "wellarchitected/2020-03-31"
+  },
+  "Wickr": {
+    "models": "wickr/2024-02-01"
   },
   "WorkDocs": {
     "models": "workdocs/2016-05-01"

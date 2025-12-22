@@ -176,6 +176,9 @@ module Aws
                                 ?identity_center_configuration: {
                                   identity_center_instance_arn: ::String?,
                                   user_background_sessions_enabled: bool?
+                                },
+                                ?job_level_cost_allocation_configuration: {
+                                  enabled: bool?
                                 }
                               ) -> _CreateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
@@ -464,6 +467,9 @@ module Aws
                                 ?identity_center_configuration: {
                                   identity_center_instance_arn: ::String?,
                                   user_background_sessions_enabled: bool?
+                                },
+                                ?job_level_cost_allocation_configuration: {
+                                  enabled: bool?
                                 }
                               ) -> _UpdateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess

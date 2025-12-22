@@ -86,7 +86,7 @@ module Aws
       def scan_sbom: (
                        sbom: {
                        },
-                       ?output_format: ("CYCLONE_DX_1_5" | "INSPECTOR")
+                       ?output_format: ("CYCLONE_DX_1_5" | "INSPECTOR" | "INSPECTOR_ALT")
                      ) -> _ScanSbomResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ScanSbomResponseSuccess
     end

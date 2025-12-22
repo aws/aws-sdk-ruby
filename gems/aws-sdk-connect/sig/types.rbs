@@ -1752,6 +1752,7 @@ module Aws::Connect
 
     class CurrentMetric
       attr_accessor name: ("AGENTS_ONLINE" | "AGENTS_AVAILABLE" | "AGENTS_ON_CALL" | "AGENTS_NON_PRODUCTIVE" | "AGENTS_AFTER_CONTACT_WORK" | "AGENTS_ERROR" | "AGENTS_STAFFED" | "CONTACTS_IN_QUEUE" | "OLDEST_CONTACT_AGE" | "CONTACTS_SCHEDULED" | "AGENTS_ON_CONTACT" | "SLOTS_ACTIVE" | "SLOTS_AVAILABLE")
+      attr_accessor metric_id: ::String
       attr_accessor unit: ("SECONDS" | "COUNT" | "PERCENT")
       SENSITIVE: []
     end
@@ -2608,6 +2609,8 @@ module Aws::Connect
       attr_accessor routing_profile: Types::RoutingProfileReference
       attr_accessor routing_step_expression: ::String
       attr_accessor agent_status: Types::AgentStatusIdentifier
+      attr_accessor subtype: ::String
+      attr_accessor validation_test_type: ::String
       SENSITIVE: []
     end
 
@@ -3521,6 +3524,8 @@ module Aws::Connect
       attr_accessor routing_profiles: ::Array[::String]
       attr_accessor routing_step_expressions: ::Array[::String]
       attr_accessor agent_statuses: ::Array[::String]
+      attr_accessor subtypes: ::Array[::String]
+      attr_accessor validation_test_types: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -3598,7 +3603,7 @@ module Aws::Connect
     class GetCurrentMetricDataRequest
       attr_accessor instance_id: ::String
       attr_accessor filters: Types::Filters
-      attr_accessor groupings: ::Array[("QUEUE" | "CHANNEL" | "ROUTING_PROFILE" | "ROUTING_STEP_EXPRESSION" | "AGENT_STATUS")]
+      attr_accessor groupings: ::Array[("QUEUE" | "CHANNEL" | "ROUTING_PROFILE" | "ROUTING_STEP_EXPRESSION" | "AGENT_STATUS" | "SUBTYPE" | "VALIDATION_TEST_TYPE")]
       attr_accessor current_metrics: ::Array[Types::CurrentMetric]
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -3675,7 +3680,7 @@ module Aws::Connect
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor filters: Types::Filters
-      attr_accessor groupings: ::Array[("QUEUE" | "CHANNEL" | "ROUTING_PROFILE" | "ROUTING_STEP_EXPRESSION" | "AGENT_STATUS")]
+      attr_accessor groupings: ::Array[("QUEUE" | "CHANNEL" | "ROUTING_PROFILE" | "ROUTING_STEP_EXPRESSION" | "AGENT_STATUS" | "SUBTYPE" | "VALIDATION_TEST_TYPE")]
       attr_accessor historical_metrics: ::Array[Types::HistoricalMetric]
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer

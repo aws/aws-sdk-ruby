@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:bedrockdataautomation)
 # structure.
 #
 #     bedrock_data_automation = Aws::BedrockDataAutomation::Client.new
-#     resp = bedrock_data_automation.create_blueprint(params)
+#     resp = bedrock_data_automation.copy_blueprint_stage(params)
 #
 # See {Client} for more information.
 #
@@ -54,7 +54,7 @@ module Aws::BedrockDataAutomation
   autoload :EndpointProvider, 'aws-sdk-bedrockdataautomation/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-bedrockdataautomation/endpoints'
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.23.0'
 
 end
 

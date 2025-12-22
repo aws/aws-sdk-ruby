@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2025-12-18)
+------------------
+
+* Feature - Added support for new operating systems (1) Ubuntu 24.04 Pro LTS on Elastic fleets, and (2) Microsoft Server 2025 on Always-On and On-Demand fleets
+
 1.123.0 (2025-11-21)
 ------------------
 

@@ -1390,6 +1390,12 @@ module Aws
                                            service_name: ::String,
                                            role_arn: ::String
                                          }?
+                                       }?,
+                                       enable_batching: bool?,
+                                       batch_config: {
+                                         max_batch_open_ms: ::Integer?,
+                                         max_batch_size: ::Integer?,
+                                         max_batch_size_bytes: ::Integer?
                                        }?
                                      }?,
                                      kafka: {
@@ -1597,6 +1603,12 @@ module Aws
                                          service_name: ::String,
                                          role_arn: ::String
                                        }?
+                                     }?,
+                                     enable_batching: bool?,
+                                     batch_config: {
+                                       max_batch_open_ms: ::Integer?,
+                                       max_batch_size: ::Integer?,
+                                       max_batch_size_bytes: ::Integer?
                                      }?
                                    }?,
                                    kafka: {
@@ -2888,9 +2900,11 @@ module Aws
         def role_arn: () -> ::String
         def default_log_level: () -> ("DEBUG" | "INFO" | "ERROR" | "WARN" | "DISABLED")
         def disable_all_logs: () -> bool
+        def event_configurations: () -> ::Array[Types::LogEventConfiguration]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#get_v2_logging_options-instance_method
       def get_v2_logging_options: (
+                                    ?verbose: bool
                                   ) -> _GetV2LoggingOptionsResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetV2LoggingOptionsResponseSuccess
 
@@ -4124,6 +4138,12 @@ module Aws
                                             service_name: ::String,
                                             role_arn: ::String
                                           }?
+                                        }?,
+                                        enable_batching: bool?,
+                                        batch_config: {
+                                          max_batch_open_ms: ::Integer?,
+                                          max_batch_size: ::Integer?,
+                                          max_batch_size_bytes: ::Integer?
                                         }?
                                       }?,
                                       kafka: {
@@ -4331,6 +4351,12 @@ module Aws
                                           service_name: ::String,
                                           role_arn: ::String
                                         }?
+                                      }?,
+                                      enable_batching: bool?,
+                                      batch_config: {
+                                        max_batch_open_ms: ::Integer?,
+                                        max_batch_size: ::Integer?,
+                                        max_batch_size_bytes: ::Integer?
                                       }?
                                     }?,
                                     kafka: {
@@ -4426,7 +4452,14 @@ module Aws
       def set_v2_logging_options: (
                                     ?role_arn: ::String,
                                     ?default_log_level: ("DEBUG" | "INFO" | "ERROR" | "WARN" | "DISABLED"),
-                                    ?disable_all_logs: bool
+                                    ?disable_all_logs: bool,
+                                    ?event_configurations: Array[
+                                      {
+                                        event_type: ::String,
+                                        log_level: ("DEBUG" | "INFO" | "ERROR" | "WARN" | "DISABLED")?,
+                                        log_destination: ::String?
+                                      },
+                                    ]
                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

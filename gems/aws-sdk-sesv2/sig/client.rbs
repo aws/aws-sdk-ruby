@@ -136,7 +136,15 @@ module Aws
                                         },
                                       ],
                                       ?suppression_options: {
-                                        suppressed_reasons: Array[("BOUNCE" | "COMPLAINT")]?
+                                        suppressed_reasons: Array[("BOUNCE" | "COMPLAINT")]?,
+                                        validation_options: {
+                                          condition_threshold: {
+                                            condition_threshold_enabled: ("ENABLED" | "DISABLED"),
+                                            overall_confidence_threshold: {
+                                              confidence_verdict_threshold: ("MEDIUM" | "HIGH" | "MANAGED")
+                                            }?
+                                          }
+                                        }?
                                       },
                                       ?vdm_options: {
                                         dashboard_options: {
@@ -239,6 +247,12 @@ module Aws
                                                        from_email_address: ::String,
                                                        template_subject: ::String,
                                                        template_content: ::String,
+                                                       ?tags: Array[
+                                                         {
+                                                           key: ::String,
+                                                           value: ::String
+                                                         },
+                                                       ],
                                                        success_redirection_url: ::String,
                                                        failure_redirection_url: ::String
                                                      ) -> _CreateCustomVerificationEmailTemplateResponseSuccess
@@ -389,7 +403,13 @@ module Aws
                                      subject: ::String?,
                                      text: ::String?,
                                      html: ::String?
-                                   }
+                                   },
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ]
                                  ) -> _CreateEmailTemplateResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEmailTemplateResponseSuccess
 
@@ -733,6 +753,7 @@ module Aws
         def from_email_address: () -> ::String
         def template_subject: () -> ::String
         def template_content: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
         def success_redirection_url: () -> ::String
         def failure_redirection_url: () -> ::String
       end
@@ -825,6 +846,16 @@ module Aws
                                         ) -> _GetDomainStatisticsReportResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainStatisticsReportResponseSuccess
 
+      interface _GetEmailAddressInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEmailAddressInsightsResponse]
+        def mailbox_validation: () -> Types::MailboxValidation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_email_address_insights-instance_method
+      def get_email_address_insights: (
+                                        email_address: ::String
+                                      ) -> _GetEmailAddressInsightsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEmailAddressInsightsResponseSuccess
+
       interface _GetEmailIdentityResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetEmailIdentityResponse]
         def identity_type: () -> ("EMAIL_ADDRESS" | "DOMAIN" | "MANAGED_DOMAIN")
@@ -858,6 +889,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetEmailTemplateResponse]
         def template_name: () -> ::String
         def template_content: () -> Types::EmailTemplateContent
+        def tags: () -> ::Array[Types::Tag]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_email_template-instance_method
       def get_email_template: (
@@ -1246,7 +1278,15 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_account_suppression_attributes-instance_method
       def put_account_suppression_attributes: (
-                                                ?suppressed_reasons: Array[("BOUNCE" | "COMPLAINT")]
+                                                ?suppressed_reasons: Array[("BOUNCE" | "COMPLAINT")],
+                                                ?validation_attributes: {
+                                                  condition_threshold: {
+                                                    condition_threshold_enabled: ("ENABLED" | "DISABLED"),
+                                                    overall_confidence_threshold: {
+                                                      confidence_verdict_threshold: ("MEDIUM" | "HIGH" | "MANAGED")
+                                                    }?
+                                                  }
+                                                }
                                               ) -> _PutAccountSuppressionAttributesResponseSuccess
                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountSuppressionAttributesResponseSuccess
 
@@ -1315,7 +1355,15 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_configuration_set_suppression_options-instance_method
       def put_configuration_set_suppression_options: (
                                                        configuration_set_name: ::String,
-                                                       ?suppressed_reasons: Array[("BOUNCE" | "COMPLAINT")]
+                                                       ?suppressed_reasons: Array[("BOUNCE" | "COMPLAINT")],
+                                                       ?validation_options: {
+                                                         condition_threshold: {
+                                                           condition_threshold_enabled: ("ENABLED" | "DISABLED"),
+                                                           overall_confidence_threshold: {
+                                                             confidence_verdict_threshold: ("MEDIUM" | "HIGH" | "MANAGED")
+                                                           }?
+                                                         }
+                                                       }
                                                      ) -> _PutConfigurationSetSuppressionOptionsResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConfigurationSetSuppressionOptionsResponseSuccess
 

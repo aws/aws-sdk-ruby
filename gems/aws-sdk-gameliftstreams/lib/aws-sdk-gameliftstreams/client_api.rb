@@ -28,6 +28,7 @@ module Aws::GameLiftStreams
     ArnList = Shapes::ListShape.new(name: 'ArnList')
     AssociateApplicationsInput = Shapes::StructureShape.new(name: 'AssociateApplicationsInput')
     AssociateApplicationsOutput = Shapes::StructureShape.new(name: 'AssociateApplicationsOutput')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CapacityValue = Shapes::IntegerShape.new(name: 'CapacityValue')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -85,9 +86,11 @@ module Aws::GameLiftStreams
     LocationStates = Shapes::ListShape.new(name: 'LocationStates')
     LocationsList = Shapes::ListShape.new(name: 'LocationsList')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MaximumCapacity = Shapes::IntegerShape.new(name: 'MaximumCapacity')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OnDemandCapacity = Shapes::IntegerShape.new(name: 'OnDemandCapacity')
     OutputUri = Shapes::StringShape.new(name: 'OutputUri')
+    PerformanceStatsConfiguration = Shapes::StructureShape.new(name: 'PerformanceStatsConfiguration')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
     RemoveStreamGroupLocationsInput = Shapes::StructureShape.new(name: 'RemoveStreamGroupLocationsInput')
     ReplicationStatus = Shapes::StructureShape.new(name: 'ReplicationStatus')
@@ -120,6 +123,7 @@ module Aws::GameLiftStreams
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
+    TargetIdleCapacity = Shapes::IntegerShape.new(name: 'TargetIdleCapacity')
     TerminateStreamSessionInput = Shapes::StructureShape.new(name: 'TerminateStreamSessionInput')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -316,6 +320,7 @@ module Aws::GameLiftStreams
     GetStreamSessionOutput.add_member(:session_length_seconds, Shapes::ShapeRef.new(shape: SessionLengthSeconds, location_name: "SessionLengthSeconds"))
     GetStreamSessionOutput.add_member(:additional_launch_args, Shapes::ShapeRef.new(shape: GameLaunchArgList, location_name: "AdditionalLaunchArgs"))
     GetStreamSessionOutput.add_member(:additional_environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "AdditionalEnvironmentVariables"))
+    GetStreamSessionOutput.add_member(:performance_stats_configuration, Shapes::ShapeRef.new(shape: PerformanceStatsConfiguration, location_name: "PerformanceStatsConfiguration"))
     GetStreamSessionOutput.add_member(:log_file_location_uri, Shapes::ShapeRef.new(shape: FileLocationUri, location_name: "LogFileLocationUri"))
     GetStreamSessionOutput.add_member(:web_sdk_protocol_url, Shapes::ShapeRef.new(shape: WebSdkProtocolUrl, location_name: "WebSdkProtocolUrl"))
     GetStreamSessionOutput.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedAt"))
@@ -374,7 +379,9 @@ module Aws::GameLiftStreams
 
     LocationConfiguration.add_member(:location_name, Shapes::ShapeRef.new(shape: LocationName, required: true, location_name: "LocationName"))
     LocationConfiguration.add_member(:always_on_capacity, Shapes::ShapeRef.new(shape: AlwaysOnCapacity, location_name: "AlwaysOnCapacity"))
-    LocationConfiguration.add_member(:on_demand_capacity, Shapes::ShapeRef.new(shape: OnDemandCapacity, location_name: "OnDemandCapacity"))
+    LocationConfiguration.add_member(:on_demand_capacity, Shapes::ShapeRef.new(shape: OnDemandCapacity, deprecated: true, location_name: "OnDemandCapacity", metadata: {"deprecatedMessage" => "This input field is deprecated in favor of explicit MaximumCapacity values.", "deprecatedSince" => "2025-12-17"}))
+    LocationConfiguration.add_member(:target_idle_capacity, Shapes::ShapeRef.new(shape: TargetIdleCapacity, location_name: "TargetIdleCapacity"))
+    LocationConfiguration.add_member(:maximum_capacity, Shapes::ShapeRef.new(shape: MaximumCapacity, location_name: "MaximumCapacity"))
     LocationConfiguration.struct_class = Types::LocationConfiguration
 
     LocationConfigurations.member = Shapes::ShapeRef.new(shape: LocationConfiguration)
@@ -385,6 +392,8 @@ module Aws::GameLiftStreams
     LocationState.add_member(:status, Shapes::ShapeRef.new(shape: StreamGroupLocationStatus, location_name: "Status"))
     LocationState.add_member(:always_on_capacity, Shapes::ShapeRef.new(shape: AlwaysOnCapacity, location_name: "AlwaysOnCapacity"))
     LocationState.add_member(:on_demand_capacity, Shapes::ShapeRef.new(shape: OnDemandCapacity, location_name: "OnDemandCapacity"))
+    LocationState.add_member(:target_idle_capacity, Shapes::ShapeRef.new(shape: TargetIdleCapacity, location_name: "TargetIdleCapacity"))
+    LocationState.add_member(:maximum_capacity, Shapes::ShapeRef.new(shape: MaximumCapacity, location_name: "MaximumCapacity"))
     LocationState.add_member(:requested_capacity, Shapes::ShapeRef.new(shape: CapacityValue, location_name: "RequestedCapacity"))
     LocationState.add_member(:allocated_capacity, Shapes::ShapeRef.new(shape: CapacityValue, location_name: "AllocatedCapacity"))
     LocationState.add_member(:idle_capacity, Shapes::ShapeRef.new(shape: CapacityValue, location_name: "IdleCapacity"))
@@ -393,6 +402,9 @@ module Aws::GameLiftStreams
     LocationStates.member = Shapes::ShapeRef.new(shape: LocationState)
 
     LocationsList.member = Shapes::ShapeRef.new(shape: String)
+
+    PerformanceStatsConfiguration.add_member(:shared_with_client, Shapes::ShapeRef.new(shape: Boolean, location_name: "SharedWithClient"))
+    PerformanceStatsConfiguration.struct_class = Types::PerformanceStatsConfiguration
 
     RemoveStreamGroupLocationsInput.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
     RemoveStreamGroupLocationsInput.add_member(:locations, Shapes::ShapeRef.new(shape: LocationsList, required: true, location: "querystring", location_name: "locations"))
@@ -426,6 +438,7 @@ module Aws::GameLiftStreams
     StartStreamSessionInput.add_member(:session_length_seconds, Shapes::ShapeRef.new(shape: SessionLengthSeconds, location_name: "SessionLengthSeconds"))
     StartStreamSessionInput.add_member(:additional_launch_args, Shapes::ShapeRef.new(shape: GameLaunchArgList, location_name: "AdditionalLaunchArgs"))
     StartStreamSessionInput.add_member(:additional_environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "AdditionalEnvironmentVariables"))
+    StartStreamSessionInput.add_member(:performance_stats_configuration, Shapes::ShapeRef.new(shape: PerformanceStatsConfiguration, location_name: "PerformanceStatsConfiguration"))
     StartStreamSessionInput.struct_class = Types::StartStreamSessionInput
 
     StartStreamSessionOutput.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -442,6 +455,7 @@ module Aws::GameLiftStreams
     StartStreamSessionOutput.add_member(:session_length_seconds, Shapes::ShapeRef.new(shape: SessionLengthSeconds, location_name: "SessionLengthSeconds"))
     StartStreamSessionOutput.add_member(:additional_launch_args, Shapes::ShapeRef.new(shape: GameLaunchArgList, location_name: "AdditionalLaunchArgs"))
     StartStreamSessionOutput.add_member(:additional_environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "AdditionalEnvironmentVariables"))
+    StartStreamSessionOutput.add_member(:performance_stats_configuration, Shapes::ShapeRef.new(shape: PerformanceStatsConfiguration, location_name: "PerformanceStatsConfiguration"))
     StartStreamSessionOutput.add_member(:log_file_location_uri, Shapes::ShapeRef.new(shape: FileLocationUri, location_name: "LogFileLocationUri"))
     StartStreamSessionOutput.add_member(:web_sdk_protocol_url, Shapes::ShapeRef.new(shape: WebSdkProtocolUrl, location_name: "WebSdkProtocolUrl"))
     StartStreamSessionOutput.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedAt"))
@@ -466,6 +480,7 @@ module Aws::GameLiftStreams
     StreamSessionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     StreamSessionSummary.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "UserId"))
     StreamSessionSummary.add_member(:status, Shapes::ShapeRef.new(shape: StreamSessionStatus, location_name: "Status"))
+    StreamSessionSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: StreamSessionStatusReason, location_name: "StatusReason"))
     StreamSessionSummary.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "Protocol"))
     StreamSessionSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedAt"))
     StreamSessionSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))

@@ -1251,6 +1251,8 @@ module Aws::MediaConvert
     #             interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
     #             max_bitrate: 1,
     #             min_i_interval: 1,
+    #             mv_over_picture_boundaries: "ENABLED", # accepts ENABLED, DISABLED
+    #             mv_temporal_predictor: "ENABLED", # accepts ENABLED, DISABLED
     #             number_b_frames_between_reference_frames: 1,
     #             number_reference_frames: 1,
     #             par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
@@ -1273,7 +1275,11 @@ module Aws::MediaConvert
     #             telecine: "NONE", # accepts NONE, SOFT, HARD
     #             temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             temporal_ids: "DISABLED", # accepts DISABLED, ENABLED
+    #             tile_height: 1,
+    #             tile_padding: "NONE", # accepts NONE, PADDED
+    #             tile_width: 1,
     #             tiles: "DISABLED", # accepts DISABLED, ENABLED
+    #             tree_block_size: "AUTO", # accepts AUTO, TREE_SIZE_32X32
     #             unregistered_sei_timecode: "DISABLED", # accepts DISABLED, ENABLED
     #             write_mp_4_packaging_type: "HVC1", # accepts HVC1, HEV1
     #           },
@@ -1995,6 +2001,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.max_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.min_i_interval #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.mv_over_picture_boundaries #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.mv_temporal_predictor #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.number_b_frames_between_reference_frames #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.number_reference_frames #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
@@ -2016,7 +2024,11 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.telecine #=> String, one of "NONE", "SOFT", "HARD"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.temporal_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.temporal_ids #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.tile_height #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.tile_padding #=> String, one of "NONE", "PADDED"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.tile_width #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.tiles #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.tree_block_size #=> String, one of "AUTO", "TREE_SIZE_32X32"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.unregistered_sei_timecode #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.write_mp_4_packaging_type #=> String, one of "HVC1", "HEV1"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH"
@@ -3064,6 +3076,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.max_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.min_i_interval #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.mv_over_picture_boundaries #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.mv_temporal_predictor #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.number_b_frames_between_reference_frames #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.number_reference_frames #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
@@ -3085,7 +3099,11 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.telecine #=> String, one of "NONE", "SOFT", "HARD"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.temporal_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.temporal_ids #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.tile_height #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.tile_padding #=> String, one of "NONE", "PADDED"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.tile_width #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.tiles #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.tree_block_size #=> String, one of "AUTO", "TREE_SIZE_32X32"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.unregistered_sei_timecode #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.write_mp_4_packaging_type #=> String, one of "HVC1", "HEV1"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH"
@@ -3947,6 +3965,8 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.max_bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.min_i_interval #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.mv_over_picture_boundaries #=> String, one of "ENABLED", "DISABLED"
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.mv_temporal_predictor #=> String, one of "ENABLED", "DISABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.number_b_frames_between_reference_frames #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.number_reference_frames #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
@@ -3968,7 +3988,11 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.telecine #=> String, one of "NONE", "SOFT", "HARD"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.temporal_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.temporal_ids #=> String, one of "DISABLED", "ENABLED"
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.tile_height #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.tile_padding #=> String, one of "NONE", "PADDED"
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.tile_width #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.tiles #=> String, one of "DISABLED", "ENABLED"
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.tree_block_size #=> String, one of "AUTO", "TREE_SIZE_32X32"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.unregistered_sei_timecode #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.write_mp_4_packaging_type #=> String, one of "HVC1", "HEV1"
     #   resp.presets[0].settings.video_description.codec_settings.mpeg_2_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH"
@@ -5247,6 +5271,8 @@ module Aws::MediaConvert
     #             interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
     #             max_bitrate: 1,
     #             min_i_interval: 1,
+    #             mv_over_picture_boundaries: "ENABLED", # accepts ENABLED, DISABLED
+    #             mv_temporal_predictor: "ENABLED", # accepts ENABLED, DISABLED
     #             number_b_frames_between_reference_frames: 1,
     #             number_reference_frames: 1,
     #             par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
@@ -5269,7 +5295,11 @@ module Aws::MediaConvert
     #             telecine: "NONE", # accepts NONE, SOFT, HARD
     #             temporal_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             temporal_ids: "DISABLED", # accepts DISABLED, ENABLED
+    #             tile_height: 1,
+    #             tile_padding: "NONE", # accepts NONE, PADDED
+    #             tile_width: 1,
     #             tiles: "DISABLED", # accepts DISABLED, ENABLED
+    #             tree_block_size: "AUTO", # accepts AUTO, TREE_SIZE_32X32
     #             unregistered_sei_timecode: "DISABLED", # accepts DISABLED, ENABLED
     #             write_mp_4_packaging_type: "HVC1", # accepts HVC1, HEV1
     #           },
@@ -5988,6 +6018,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.max_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.min_i_interval #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.mv_over_picture_boundaries #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.mv_temporal_predictor #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.number_b_frames_between_reference_frames #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.number_reference_frames #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.par_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
@@ -6009,7 +6041,11 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.telecine #=> String, one of "NONE", "SOFT", "HARD"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.temporal_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.temporal_ids #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.tile_height #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.tile_padding #=> String, one of "NONE", "PADDED"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.tile_width #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.tiles #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.tree_block_size #=> String, one of "AUTO", "TREE_SIZE_32X32"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.unregistered_sei_timecode #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.write_mp_4_packaging_type #=> String, one of "HVC1", "HEV1"
     #   resp.preset.settings.video_description.codec_settings.mpeg_2_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH"
@@ -6335,7 +6371,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.174.0'
+      context[:gem_version] = '1.175.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

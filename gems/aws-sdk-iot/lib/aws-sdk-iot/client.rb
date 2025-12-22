@@ -4100,6 +4100,12 @@ module Aws::IoT
     #                 role_arn: "AwsArn", # required
     #               },
     #             },
+    #             enable_batching: false,
+    #             batch_config: {
+    #               max_batch_open_ms: 1,
+    #               max_batch_size: 1,
+    #               max_batch_size_bytes: 1,
+    #             },
     #           },
     #           kafka: {
     #             destination_arn: "AwsArn", # required
@@ -4308,6 +4314,12 @@ module Aws::IoT
     #               service_name: "ServiceName", # required
     #               role_arn: "AwsArn", # required
     #             },
+    #           },
+    #           enable_batching: false,
+    #           batch_config: {
+    #             max_batch_open_ms: 1,
+    #             max_batch_size: 1,
+    #             max_batch_size_bytes: 1,
     #           },
     #         },
     #         kafka: {
@@ -8795,6 +8807,10 @@ module Aws::IoT
     #   resp.rule.actions[0].http.auth.sigv4.signing_region #=> String
     #   resp.rule.actions[0].http.auth.sigv4.service_name #=> String
     #   resp.rule.actions[0].http.auth.sigv4.role_arn #=> String
+    #   resp.rule.actions[0].http.enable_batching #=> Boolean
+    #   resp.rule.actions[0].http.batch_config.max_batch_open_ms #=> Integer
+    #   resp.rule.actions[0].http.batch_config.max_batch_size #=> Integer
+    #   resp.rule.actions[0].http.batch_config.max_batch_size_bytes #=> Integer
     #   resp.rule.actions[0].kafka.destination_arn #=> String
     #   resp.rule.actions[0].kafka.topic #=> String
     #   resp.rule.actions[0].kafka.key #=> String
@@ -8920,6 +8936,10 @@ module Aws::IoT
     #   resp.rule.error_action.http.auth.sigv4.signing_region #=> String
     #   resp.rule.error_action.http.auth.sigv4.service_name #=> String
     #   resp.rule.error_action.http.auth.sigv4.role_arn #=> String
+    #   resp.rule.error_action.http.enable_batching #=> Boolean
+    #   resp.rule.error_action.http.batch_config.max_batch_open_ms #=> Integer
+    #   resp.rule.error_action.http.batch_config.max_batch_size #=> Integer
+    #   resp.rule.error_action.http.batch_config.max_batch_size_bytes #=> Integer
     #   resp.rule.error_action.kafka.destination_arn #=> String
     #   resp.rule.error_action.kafka.topic #=> String
     #   resp.rule.error_action.kafka.key #=> String
@@ -9000,17 +9020,32 @@ module Aws::IoT
     #
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
+    # @option params [Boolean] :verbose
+    #   The flag is used to get all the event types and their respective
+    #   configuration that event-based logging supports.
+    #
     # @return [Types::GetV2LoggingOptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetV2LoggingOptionsResponse#role_arn #role_arn} => String
     #   * {Types::GetV2LoggingOptionsResponse#default_log_level #default_log_level} => String
     #   * {Types::GetV2LoggingOptionsResponse#disable_all_logs #disable_all_logs} => Boolean
+    #   * {Types::GetV2LoggingOptionsResponse#event_configurations #event_configurations} => Array&lt;Types::LogEventConfiguration&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_v2_logging_options({
+    #     verbose: false,
+    #   })
     #
     # @example Response structure
     #
     #   resp.role_arn #=> String
     #   resp.default_log_level #=> String, one of "DEBUG", "INFO", "ERROR", "WARN", "DISABLED"
     #   resp.disable_all_logs #=> Boolean
+    #   resp.event_configurations #=> Array
+    #   resp.event_configurations[0].event_type #=> String
+    #   resp.event_configurations[0].log_level #=> String, one of "DEBUG", "INFO", "ERROR", "WARN", "DISABLED"
+    #   resp.event_configurations[0].log_destination #=> String
     #
     # @overload get_v2_logging_options(params = {})
     # @param [Hash] params ({})
@@ -13487,6 +13522,12 @@ module Aws::IoT
     #                 role_arn: "AwsArn", # required
     #               },
     #             },
+    #             enable_batching: false,
+    #             batch_config: {
+    #               max_batch_open_ms: 1,
+    #               max_batch_size: 1,
+    #               max_batch_size_bytes: 1,
+    #             },
     #           },
     #           kafka: {
     #             destination_arn: "AwsArn", # required
@@ -13695,6 +13736,12 @@ module Aws::IoT
     #               service_name: "ServiceName", # required
     #               role_arn: "AwsArn", # required
     #             },
+    #           },
+    #           enable_batching: false,
+    #           batch_config: {
+    #             max_batch_open_ms: 1,
+    #             max_batch_size: 1,
+    #             max_batch_size_bytes: 1,
     #           },
     #         },
     #         kafka: {
@@ -13975,6 +14022,9 @@ module Aws::IoT
     # @option params [Boolean] :disable_all_logs
     #   If true all logs are disabled. The default is false.
     #
+    # @option params [Array<Types::LogEventConfiguration>] :event_configurations
+    #   The list of event configurations that override account-level logging.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -13983,6 +14033,13 @@ module Aws::IoT
     #     role_arn: "AwsArn",
     #     default_log_level: "DEBUG", # accepts DEBUG, INFO, ERROR, WARN, DISABLED
     #     disable_all_logs: false,
+    #     event_configurations: [
+    #       {
+    #         event_type: "LogEventType", # required
+    #         log_level: "DEBUG", # accepts DEBUG, INFO, ERROR, WARN, DISABLED
+    #         log_destination: "LogDestination",
+    #       },
+    #     ],
     #   })
     #
     # @overload set_v2_logging_options(params = {})
@@ -16601,7 +16658,7 @@ module Aws::IoT
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.158.0'
+      context[:gem_version] = '1.160.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

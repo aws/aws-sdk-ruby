@@ -35,6 +35,9 @@ module Aws::BedrockAgentCoreControl
     AllowedAudienceList = Shapes::ListShape.new(name: 'AllowedAudienceList')
     AllowedClient = Shapes::StringShape.new(name: 'AllowedClient')
     AllowedClientsList = Shapes::ListShape.new(name: 'AllowedClientsList')
+    AllowedQueryParameters = Shapes::ListShape.new(name: 'AllowedQueryParameters')
+    AllowedRequestHeaders = Shapes::ListShape.new(name: 'AllowedRequestHeaders')
+    AllowedResponseHeaders = Shapes::ListShape.new(name: 'AllowedResponseHeaders')
     AllowedScopeType = Shapes::StringShape.new(name: 'AllowedScopeType')
     AllowedScopesType = Shapes::ListShape.new(name: 'AllowedScopesType')
     ApiGatewayTargetConfiguration = Shapes::StructureShape.new(name: 'ApiGatewayTargetConfiguration')
@@ -296,6 +299,8 @@ module Aws::BedrockAgentCoreControl
     GoogleOauth2ProviderConfigInput = Shapes::StructureShape.new(name: 'GoogleOauth2ProviderConfigInput')
     GoogleOauth2ProviderConfigOutput = Shapes::StructureShape.new(name: 'GoogleOauth2ProviderConfigOutput')
     HeaderName = Shapes::StringShape.new(name: 'HeaderName')
+    HttpHeaderName = Shapes::StringShape.new(name: 'HttpHeaderName')
+    HttpQueryParameterName = Shapes::StringShape.new(name: 'HttpQueryParameterName')
     InboundTokenClaimNameType = Shapes::StringShape.new(name: 'InboundTokenClaimNameType')
     InboundTokenClaimValueType = Shapes::StringShape.new(name: 'InboundTokenClaimValueType')
     IncludedOauth2ProviderConfigInput = Shapes::StructureShape.new(name: 'IncludedOauth2ProviderConfigInput')
@@ -395,6 +400,7 @@ module Aws::BedrockAgentCoreControl
     MessageBasedTrigger = Shapes::StructureShape.new(name: 'MessageBasedTrigger')
     MessageBasedTriggerInput = Shapes::StructureShape.new(name: 'MessageBasedTriggerInput')
     MessageBasedTriggerInputMessageCountInteger = Shapes::IntegerShape.new(name: 'MessageBasedTriggerInputMessageCountInteger')
+    MetadataConfiguration = Shapes::StructureShape.new(name: 'MetadataConfiguration')
     MicrosoftOauth2ProviderConfigInput = Shapes::StructureShape.new(name: 'MicrosoftOauth2ProviderConfigInput')
     MicrosoftOauth2ProviderConfigOutput = Shapes::StructureShape.new(name: 'MicrosoftOauth2ProviderConfigOutput')
     ModelId = Shapes::StringShape.new(name: 'ModelId')
@@ -668,6 +674,12 @@ module Aws::BedrockAgentCoreControl
     AllowedAudienceList.member = Shapes::ShapeRef.new(shape: AllowedAudience)
 
     AllowedClientsList.member = Shapes::ShapeRef.new(shape: AllowedClient)
+
+    AllowedQueryParameters.member = Shapes::ShapeRef.new(shape: HttpQueryParameterName)
+
+    AllowedRequestHeaders.member = Shapes::ShapeRef.new(shape: HttpHeaderName)
+
+    AllowedResponseHeaders.member = Shapes::ShapeRef.new(shape: HttpHeaderName)
 
     AllowedScopesType.member = Shapes::ShapeRef.new(shape: AllowedScopeType)
 
@@ -971,6 +983,7 @@ module Aws::BedrockAgentCoreControl
     CreateGatewayTargetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateGatewayTargetRequest.add_member(:target_configuration, Shapes::ShapeRef.new(shape: TargetConfiguration, required: true, location_name: "targetConfiguration"))
     CreateGatewayTargetRequest.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialProviderConfigurations, location_name: "credentialProviderConfigurations"))
+    CreateGatewayTargetRequest.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: MetadataConfiguration, location_name: "metadataConfiguration"))
     CreateGatewayTargetRequest.struct_class = Types::CreateGatewayTargetRequest
 
     CreateGatewayTargetResponse.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "gatewayArn"))
@@ -984,6 +997,7 @@ module Aws::BedrockAgentCoreControl
     CreateGatewayTargetResponse.add_member(:target_configuration, Shapes::ShapeRef.new(shape: TargetConfiguration, required: true, location_name: "targetConfiguration"))
     CreateGatewayTargetResponse.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialProviderConfigurations, required: true, location_name: "credentialProviderConfigurations"))
     CreateGatewayTargetResponse.add_member(:last_synchronized_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "lastSynchronizedAt"))
+    CreateGatewayTargetResponse.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: MetadataConfiguration, location_name: "metadataConfiguration"))
     CreateGatewayTargetResponse.struct_class = Types::CreateGatewayTargetResponse
 
     CreateMemoryInput.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateMemoryInputClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -1484,6 +1498,7 @@ module Aws::BedrockAgentCoreControl
     GatewayTarget.add_member(:target_configuration, Shapes::ShapeRef.new(shape: TargetConfiguration, required: true, location_name: "targetConfiguration"))
     GatewayTarget.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialProviderConfigurations, required: true, location_name: "credentialProviderConfigurations"))
     GatewayTarget.add_member(:last_synchronized_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "lastSynchronizedAt"))
+    GatewayTarget.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: MetadataConfiguration, location_name: "metadataConfiguration"))
     GatewayTarget.struct_class = Types::GatewayTarget
 
     GatewayTargetList.member = Shapes::ShapeRef.new(shape: GatewayTarget)
@@ -1625,6 +1640,7 @@ module Aws::BedrockAgentCoreControl
     GetGatewayTargetResponse.add_member(:target_configuration, Shapes::ShapeRef.new(shape: TargetConfiguration, required: true, location_name: "targetConfiguration"))
     GetGatewayTargetResponse.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialProviderConfigurations, required: true, location_name: "credentialProviderConfigurations"))
     GetGatewayTargetResponse.add_member(:last_synchronized_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "lastSynchronizedAt"))
+    GetGatewayTargetResponse.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: MetadataConfiguration, location_name: "metadataConfiguration"))
     GetGatewayTargetResponse.struct_class = Types::GetGatewayTargetResponse
 
     GetMemoryInput.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, required: true, location: "uri", location_name: "memoryId"))
@@ -2052,6 +2068,11 @@ module Aws::BedrockAgentCoreControl
 
     MessageBasedTriggerInput.add_member(:message_count, Shapes::ShapeRef.new(shape: MessageBasedTriggerInputMessageCountInteger, location_name: "messageCount"))
     MessageBasedTriggerInput.struct_class = Types::MessageBasedTriggerInput
+
+    MetadataConfiguration.add_member(:allowed_request_headers, Shapes::ShapeRef.new(shape: AllowedRequestHeaders, location_name: "allowedRequestHeaders"))
+    MetadataConfiguration.add_member(:allowed_query_parameters, Shapes::ShapeRef.new(shape: AllowedQueryParameters, location_name: "allowedQueryParameters"))
+    MetadataConfiguration.add_member(:allowed_response_headers, Shapes::ShapeRef.new(shape: AllowedResponseHeaders, location_name: "allowedResponseHeaders"))
+    MetadataConfiguration.struct_class = Types::MetadataConfiguration
 
     MicrosoftOauth2ProviderConfigInput.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, required: true, location_name: "clientId"))
     MicrosoftOauth2ProviderConfigInput.add_member(:client_secret, Shapes::ShapeRef.new(shape: ClientSecretType, required: true, location_name: "clientSecret"))
@@ -2688,6 +2709,7 @@ module Aws::BedrockAgentCoreControl
     UpdateGatewayTargetRequest.add_member(:description, Shapes::ShapeRef.new(shape: TargetDescription, location_name: "description"))
     UpdateGatewayTargetRequest.add_member(:target_configuration, Shapes::ShapeRef.new(shape: TargetConfiguration, required: true, location_name: "targetConfiguration"))
     UpdateGatewayTargetRequest.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialProviderConfigurations, location_name: "credentialProviderConfigurations"))
+    UpdateGatewayTargetRequest.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: MetadataConfiguration, location_name: "metadataConfiguration"))
     UpdateGatewayTargetRequest.struct_class = Types::UpdateGatewayTargetRequest
 
     UpdateGatewayTargetResponse.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "gatewayArn"))
@@ -2701,6 +2723,7 @@ module Aws::BedrockAgentCoreControl
     UpdateGatewayTargetResponse.add_member(:target_configuration, Shapes::ShapeRef.new(shape: TargetConfiguration, required: true, location_name: "targetConfiguration"))
     UpdateGatewayTargetResponse.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialProviderConfigurations, required: true, location_name: "credentialProviderConfigurations"))
     UpdateGatewayTargetResponse.add_member(:last_synchronized_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "lastSynchronizedAt"))
+    UpdateGatewayTargetResponse.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: MetadataConfiguration, location_name: "metadataConfiguration"))
     UpdateGatewayTargetResponse.struct_class = Types::UpdateGatewayTargetResponse
 
     UpdateMemoryInput.add_member(:client_token, Shapes::ShapeRef.new(shape: UpdateMemoryInputClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))

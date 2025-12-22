@@ -894,6 +894,22 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # Contains detailed information about the approval state of a given
+    # member in the collaboration for a given collaboration change request.
+    #
+    # @!attribute [rw] status
+    #   The approval status of a member's vote on the change request. Valid
+    #   values are PENDING (if they haven't voted), APPROVED, or DENIED.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ApprovalStatusDetails AWS API Documentation
+    #
+    class ApprovalStatusDetails < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A reference to a table within Athena.
     #
     # @!attribute [rw] region
@@ -1234,16 +1250,24 @@ module Aws::CleanRooms
     #   The member change specification when the change type is `MEMBER`.
     #   @return [Types::MemberChangeSpecification]
     #
+    # @!attribute [rw] collaboration
+    #   The collaboration configuration changes being requested. Currently,
+    #   this only supports modifying which change types are auto-approved
+    #   for the collaboration.
+    #   @return [Types::CollaborationChangeSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ChangeSpecification AWS API Documentation
     #
     class ChangeSpecification < Struct.new(
       :member,
+      :collaboration,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class Member < ChangeSpecification; end
+      class Collaboration < ChangeSpecification; end
       class Unknown < ChangeSpecification; end
     end
 
@@ -1567,6 +1591,11 @@ module Aws::CleanRooms
     #   The list of changes specified in this change request.
     #   @return [Array<Types::Change>]
     #
+    # @!attribute [rw] approvals
+    #   A list of approval details from collaboration members, including
+    #   approval status and multi-party approval workflow information.
+    #   @return [Hash<String,Types::ApprovalStatusDetails>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationChangeRequest AWS API Documentation
     #
     class CollaborationChangeRequest < Struct.new(
@@ -1576,7 +1605,8 @@ module Aws::CleanRooms
       :update_time,
       :status,
       :is_auto_approved,
-      :changes)
+      :changes,
+      :approvals)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1611,6 +1641,11 @@ module Aws::CleanRooms
     #   Summary of the changes in this change request.
     #   @return [Array<Types::Change>]
     #
+    # @!attribute [rw] approvals
+    #   Summary of approval statuses from all collaboration members for this
+    #   change request.
+    #   @return [Hash<String,Types::ApprovalStatusDetails>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationChangeRequestSummary AWS API Documentation
     #
     class CollaborationChangeRequestSummary < Struct.new(
@@ -1620,7 +1655,25 @@ module Aws::CleanRooms
       :update_time,
       :status,
       :is_auto_approved,
-      :changes)
+      :changes,
+      :approvals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the specific changes being requested for a collaboration,
+    # including configuration modifications and approval requirements.
+    #
+    # @!attribute [rw] auto_approved_change_types
+    #   Defines requested updates to properties of the collaboration.
+    #   Currently, this only supports modifying which change types are
+    #   auto-approved for the collaboration.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationChangeSpecification AWS API Documentation
+    #
+    class CollaborationChangeSpecification < Struct.new(
+      :auto_approved_change_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9496,6 +9549,51 @@ module Aws::CleanRooms
     #
     class UpdateAnalysisTemplateOutput < Struct.new(
       :analysis_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_identifier
+    #   The unique identifier of the collaboration that contains the change
+    #   request to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_request_identifier
+    #   The unique identifier of the specific change request to be updated
+    #   within the collaboration.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action to perform on the change request. Valid values include
+    #   APPROVE (approve the change), DENY (reject the change), CANCEL
+    #   (cancel the request), and COMMIT (commit after the request is
+    #   approved).
+    #
+    #   For change requests without automatic approval, a member in the
+    #   collaboration can manually APPROVE or DENY a change request. The
+    #   collaboration owner can manually CANCEL or COMMIT a change request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateCollaborationChangeRequestInput AWS API Documentation
+    #
+    class UpdateCollaborationChangeRequestInput < Struct.new(
+      :collaboration_identifier,
+      :change_request_identifier,
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_change_request
+    #   Represents a request to modify a collaboration. Change requests
+    #   enable structured modifications to collaborations after they have
+    #   been created.
+    #   @return [Types::CollaborationChangeRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateCollaborationChangeRequestOutput AWS API Documentation
+    #
+    class UpdateCollaborationChangeRequestOutput < Struct.new(
+      :collaboration_change_request)
       SENSITIVE = []
       include Aws::Structure
     end

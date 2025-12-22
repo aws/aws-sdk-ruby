@@ -244,6 +244,11 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class ApprovalStatusDetails
+      attr_accessor status: ("APPROVED" | "DENIED" | "PENDING")
+      SENSITIVE: []
+    end
+
     class AthenaTableReference
       attr_accessor region: ("us-west-1" | "us-west-2" | "us-east-1" | "us-east-2" | "af-south-1" | "ap-east-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-5" | "ap-southeast-4" | "ap-southeast-7" | "ap-south-1" | "ap-northeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ca-central-1" | "ca-west-1" | "eu-south-1" | "eu-west-3" | "eu-south-2" | "eu-central-2" | "eu-central-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "me-south-1" | "me-central-1" | "il-central-1" | "sa-east-1" | "mx-central-1" | "ap-east-2")
       attr_accessor work_group: ::String
@@ -329,24 +334,27 @@ module Aws::CleanRooms
     end
 
     class Change
-      attr_accessor specification_type: ("MEMBER")
+      attr_accessor specification_type: ("MEMBER" | "COLLABORATION")
       attr_accessor specification: Types::ChangeSpecification
-      attr_accessor types: ::Array[("ADD_MEMBER")]
+      attr_accessor types: ::Array[("ADD_MEMBER" | "GRANT_RECEIVE_RESULTS_ABILITY" | "REVOKE_RECEIVE_RESULTS_ABILITY" | "EDIT_AUTO_APPROVED_CHANGE_TYPES")]
       SENSITIVE: []
     end
 
     class ChangeInput
-      attr_accessor specification_type: ("MEMBER")
+      attr_accessor specification_type: ("MEMBER" | "COLLABORATION")
       attr_accessor specification: Types::ChangeSpecification
       SENSITIVE: []
     end
 
     class ChangeSpecification
       attr_accessor member: Types::MemberChangeSpecification
+      attr_accessor collaboration: Types::CollaborationChangeSpecification
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Member < ChangeSpecification
+      end
+      class Collaboration < ChangeSpecification
       end
       class Unknown < ChangeSpecification
       end
@@ -368,7 +376,7 @@ module Aws::CleanRooms
       attr_accessor query_log_status: ("ENABLED" | "DISABLED")
       attr_accessor job_log_status: ("ENABLED" | "DISABLED")
       attr_accessor analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL")
-      attr_accessor auto_approved_change_types: ::Array[("ADD_MEMBER")]
+      attr_accessor auto_approved_change_types: ::Array[("ADD_MEMBER" | "GRANT_RECEIVE_RESULTS_ABILITY" | "REVOKE_RECEIVE_RESULTS_ABILITY")]
       attr_accessor allowed_result_regions: ::Array[("us-west-1" | "us-west-2" | "us-east-1" | "us-east-2" | "af-south-1" | "ap-east-1" | "ap-east-2" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-5" | "ap-southeast-4" | "ap-southeast-7" | "ap-south-1" | "ap-northeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ca-central-1" | "ca-west-1" | "eu-south-1" | "eu-west-3" | "eu-south-2" | "eu-central-2" | "eu-central-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "me-south-1" | "me-central-1" | "il-central-1" | "sa-east-1" | "mx-central-1")]
       SENSITIVE: []
     end
@@ -416,6 +424,7 @@ module Aws::CleanRooms
       attr_accessor status: ("PENDING" | "APPROVED" | "CANCELLED" | "DENIED" | "COMMITTED")
       attr_accessor is_auto_approved: bool
       attr_accessor changes: ::Array[Types::Change]
+      attr_accessor approvals: ::Hash[::String, Types::ApprovalStatusDetails]
       SENSITIVE: []
     end
 
@@ -427,6 +436,12 @@ module Aws::CleanRooms
       attr_accessor status: ("PENDING" | "APPROVED" | "CANCELLED" | "DENIED" | "COMMITTED")
       attr_accessor is_auto_approved: bool
       attr_accessor changes: ::Array[Types::Change]
+      attr_accessor approvals: ::Hash[::String, Types::ApprovalStatusDetails]
+      SENSITIVE: []
+    end
+
+    class CollaborationChangeSpecification
+      attr_accessor auto_approved_change_types: ::Array[("ADD_MEMBER" | "GRANT_RECEIVE_RESULTS_ABILITY" | "REVOKE_RECEIVE_RESULTS_ABILITY")]
       SENSITIVE: []
     end
 
@@ -872,7 +887,7 @@ module Aws::CleanRooms
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor creator_payment_configuration: Types::PaymentConfiguration
       attr_accessor analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL")
-      attr_accessor auto_approved_change_request_types: ::Array[("ADD_MEMBER")]
+      attr_accessor auto_approved_change_request_types: ::Array[("ADD_MEMBER" | "GRANT_RECEIVE_RESULTS_ABILITY" | "REVOKE_RECEIVE_RESULTS_ABILITY")]
       attr_accessor allowed_result_regions: ::Array[("us-west-1" | "us-west-2" | "us-east-1" | "us-east-2" | "af-south-1" | "ap-east-1" | "ap-east-2" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-5" | "ap-southeast-4" | "ap-southeast-7" | "ap-south-1" | "ap-northeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ca-central-1" | "ca-west-1" | "eu-south-1" | "eu-west-3" | "eu-south-2" | "eu-central-2" | "eu-central-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "me-south-1" | "me-central-1" | "il-central-1" | "sa-east-1" | "mx-central-1")]
       SENSITIVE: []
     end
@@ -2702,6 +2717,18 @@ module Aws::CleanRooms
 
     class UpdateAnalysisTemplateOutput
       attr_accessor analysis_template: Types::AnalysisTemplate
+      SENSITIVE: []
+    end
+
+    class UpdateCollaborationChangeRequestInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor change_request_identifier: ::String
+      attr_accessor action: ("APPROVE" | "DENY" | "CANCEL" | "COMMIT")
+      SENSITIVE: []
+    end
+
+    class UpdateCollaborationChangeRequestOutput
+      attr_accessor collaboration_change_request: Types::CollaborationChangeRequest
       SENSITIVE: []
     end
 

@@ -7407,6 +7407,8 @@ module Aws::Connect
     # each metric, see [Metrics definitions][1] in the *Amazon Connect
     # Administrator Guide*.
     #
+    # Only one of either the Name or MetricId is required.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html
@@ -7415,7 +7417,16 @@ module Aws::Connect
     #   The name of the metric.
     #   @return [String]
     #
+    # @!attribute [rw] metric_id
+    #   Out of the box current metrics or custom metrics can be referenced
+    #   via this field. This field is a valid AWS Connect Arn or a UUID.
+    #   @return [String]
+    #
     # @!attribute [rw] unit
+    #   <note markdown="1"> The Unit parameter is not supported for custom metrics.
+    #
+    #    </note>
+    #
     #   The unit for the metric.
     #   @return [String]
     #
@@ -7423,6 +7434,7 @@ module Aws::Connect
     #
     class CurrentMetric < Struct.new(
       :name,
+      :metric_id,
       :unit)
       SENSITIVE = []
       include Aws::Structure
@@ -7616,8 +7628,8 @@ module Aws::Connect
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_region
-    #   The AWS region where the data table was last modified, used for
-    #   region replication.
+    #   The Amazon Web Services Region where the data table was last
+    #   modified, used for region replication.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -7716,8 +7728,8 @@ module Aws::Connect
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_region
-    #   The AWS region where this attribute was last modified, used for
-    #   region replication.
+    #   The Amazon Web Services Region where this attribute was last
+    #   modified, used for region replication.
     #   @return [String]
     #
     # @!attribute [rw] validation
@@ -10312,6 +10324,14 @@ module Aws::Connect
     #   Information about the agent status assigned to the user.
     #   @return [Types::AgentStatusIdentifier]
     #
+    # @!attribute [rw] subtype
+    #   The subtype of the channel used for the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_test_type
+    #   The testing and simulation type
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Dimensions AWS API Documentation
     #
     class Dimensions < Struct.new(
@@ -10319,7 +10339,9 @@ module Aws::Connect
       :channel,
       :routing_profile,
       :routing_step_expression,
-      :agent_status)
+      :agent_status,
+      :subtype,
+      :validation_test_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13636,6 +13658,14 @@ module Aws::Connect
     #   A list of up to 50 agent status IDs or ARNs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] subtypes
+    #   A list of up to 10 subtypes can be provided.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] validation_test_types
+    #   A list of up to 10 validationTestTypes can be provided.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Filters AWS API Documentation
     #
     class Filters < Struct.new(
@@ -13643,7 +13673,9 @@ module Aws::Connect
       :channels,
       :routing_profiles,
       :routing_step_expressions,
-      :agent_statuses)
+      :agent_statuses,
+      :subtypes,
+      :validation_test_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13936,6 +13968,10 @@ module Aws::Connect
     #
     #   * AgentStatuses: 50
     #
+    #   * Subtypes: 10
+    #
+    #   * ValidationTestTypes: 10
+    #
     #   Metric data is retrieved only for the resources associated with the
     #   queues or routing profiles, and by any channels included in the
     #   filter. (You cannot filter by both queue AND routing profile.) You
@@ -13943,6 +13979,12 @@ module Aws::Connect
     #
     #   When using `AgentStatuses` as filter make sure Queues is added as
     #   primary filter.
+    #
+    #   When using `Subtypes` as filter make sure Queues is added as primary
+    #   filter.
+    #
+    #   When using `ValidationTestTypes` as filter make sure Queues is added
+    #   as primary filter.
     #
     #   When using the `RoutingStepExpression` filter, you need to pass
     #   exactly one `QueueId`. The filter is also case sensitive so when
@@ -13972,6 +14014,10 @@ module Aws::Connect
     #     `AGENT_STATUS`, the only metric available is the `AGENTS_ONLINE`
     #     metric.
     #
+    #   * If you group by `SUBTYPE` or `VALIDATION_TEST_TYPE` as secondary
+    #     grouping then you must include `QUEUE` as primary grouping and use
+    #     Queue as filter
+    #
     #   * If you group by `ROUTING_PROFILE`, you must include either a queue
     #     or routing profile filter. In addition, a routing profile filter
     #     is required for metrics `CONTACTS_SCHEDULED`, `CONTACTS_IN_QUEUE`,
@@ -13982,10 +14028,16 @@ module Aws::Connect
     #   @return [Array<String>]
     #
     # @!attribute [rw] current_metrics
-    #   The metrics to retrieve. Specify the name and unit for each metric.
-    #   The following metrics are available. For a description of all the
-    #   metrics, see [Metrics definitions][1] in the *Amazon Connect
-    #   Administrator Guide*.
+    #   The metrics to retrieve. Specify the name or metricId, and unit for
+    #   each metric. The following metrics are available. For a description
+    #   of all the metrics, see [Metrics definitions][1] in the *Amazon
+    #   Connect Administrator Guide*.
+    #
+    #   <note markdown="1"> MetricId should be used to reference custom metrics or out of the
+    #   box metrics as Arn. If using MetricId, the limit is 10 MetricId per
+    #   request.
+    #
+    #    </note>
     #
     #   AGENTS\_AFTER\_CONTACT\_WORK
     #
@@ -20578,8 +20630,8 @@ module Aws::Connect
     #   claimed to. You can [find the instance ID][1] in the Amazon Resource
     #   Name (ARN) of the instance. If both `TargetArn` and `InstanceId` are
     #   not provided, this API lists numbers claimed to all the Amazon
-    #   Connect instances belonging to your account in the same AWS Region
-    #   as the request.
+    #   Connect instances belonging to your account in the same Amazon Web
+    #   Services Region as the request.
     #
     #
     #
@@ -29017,13 +29069,6 @@ module Aws::Connect
     #   A list of participant types to automatically disconnect when the end
     #   customer ends the chat session, allowing them to continue through
     #   disconnect flows such as surveys or feedback forms.
-    #
-    #   Valid value: `AGENT`.
-    #
-    #   With the `DisconnectOnCustomerExit` parameter, you can configure
-    #   automatic agent disconnection when end customers end the chat,
-    #   ensuring that disconnect flows are triggered consistently regardless
-    #   of which participant disconnects first.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactRequest AWS API Documentation
@@ -29446,7 +29491,7 @@ module Aws::Connect
     #   * Attribute keys can include only alphanumeric, `-`, and `_`.
     #
     #   * This field can be used to show channel subtype, such as
-    #     `connect:Guide` and `connect:SMS`.
+    #     `connect:SMS` and `connect:WhatsApp`.
     #   @return [Hash<String,Types::SegmentAttributeValue>]
     #
     # @!attribute [rw] attributes
@@ -29518,11 +29563,11 @@ module Aws::Connect
     #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If not provided, the AWS SDK populates
-    #   this field. For more information about idempotency, see [Making
-    #   retries safe with idempotent APIs][1]. The token is valid for 7 days
-    #   after creation. If a contact is already started, the contact ID is
-    #   returned.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1]. The token is
+    #   valid for 7 days after creation. If a contact is already started,
+    #   the contact ID is returned.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -35277,7 +35322,8 @@ module Aws::Connect
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_region
-    #   The AWS Region where the workspace was last modified.
+    #   The Amazon Web Services Region where the workspace was last
+    #   modified.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -35543,7 +35589,8 @@ module Aws::Connect
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_region
-    #   The AWS Region where the workspace was last modified.
+    #   The Amazon Web Services Region where the workspace was last
+    #   modified.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/WorkspaceSummary AWS API Documentation

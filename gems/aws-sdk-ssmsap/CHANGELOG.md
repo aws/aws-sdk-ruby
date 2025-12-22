@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2025-12-18)
+------------------
+
+* Feature - Added "Stopping" for the HANA Database Status.
+
 1.46.0 (2025-11-21)
 ------------------
 

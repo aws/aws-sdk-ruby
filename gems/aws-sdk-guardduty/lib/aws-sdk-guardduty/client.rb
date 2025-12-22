@@ -2903,6 +2903,7 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.rds_db_instance_details.engine_version #=> String
     #   resp.findings[0].resource.rds_db_instance_details.db_cluster_identifier #=> String
     #   resp.findings[0].resource.rds_db_instance_details.db_instance_arn #=> String
+    #   resp.findings[0].resource.rds_db_instance_details.dbi_resource_id #=> String
     #   resp.findings[0].resource.rds_db_instance_details.tags #=> Array
     #   resp.findings[0].resource.rds_db_instance_details.tags[0].key #=> String
     #   resp.findings[0].resource.rds_db_instance_details.tags[0].value #=> String
@@ -3995,7 +3996,7 @@ module Aws::GuardDuty
     #
     #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
-    # @option params [Array<String>] :account_ids
+    # @option params [required, Array<String>] :account_ids
     #   A list of account identifiers of the GuardDuty member account.
     #
     # @return [Types::GetRemainingFreeTrialDaysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4007,7 +4008,7 @@ module Aws::GuardDuty
     #
     #   resp = client.get_remaining_free_trial_days({
     #     detector_id: "DetectorId", # required
-    #     account_ids: ["AccountId"],
+    #     account_ids: ["AccountId"], # required
     #   })
     #
     # @example Response structure
@@ -6516,7 +6517,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.137.0'
+      context[:gem_version] = '1.139.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

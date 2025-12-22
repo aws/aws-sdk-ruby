@@ -466,7 +466,8 @@ module Aws
                                       }],
                                     color_theme: ("Light" | "Dark"),
                                     terms_of_service: ::String?
-                                  }
+                                  },
+                                  ?web_authn_allowed: ("Disabled" | "Enabled")
                                 ) -> _CreateUserSettingsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserSettingsResponseSuccess
 
@@ -1191,7 +1192,8 @@ module Aws
                                       }]?,
                                     color_theme: ("Light" | "Dark")?,
                                     terms_of_service: ::String?
-                                  }
+                                  },
+                                  ?web_authn_allowed: ("Disabled" | "Enabled")
                                 ) -> _UpdateUserSettingsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserSettingsResponseSuccess
     end

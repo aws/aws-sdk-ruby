@@ -1673,7 +1673,7 @@ module Aws::GuardDuty
     GetOrganizationStatisticsResponse.struct_class = Types::GetOrganizationStatisticsResponse
 
     GetRemainingFreeTrialDaysRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
-    GetRemainingFreeTrialDaysRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    GetRemainingFreeTrialDaysRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
     GetRemainingFreeTrialDaysRequest.struct_class = Types::GetRemainingFreeTrialDaysRequest
 
     GetRemainingFreeTrialDaysResponse.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountFreeTrialInfos, location_name: "accounts"))
@@ -2418,6 +2418,7 @@ module Aws::GuardDuty
     RdsDbInstanceDetails.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "engineVersion"))
     RdsDbInstanceDetails.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "dbClusterIdentifier"))
     RdsDbInstanceDetails.add_member(:db_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "dbInstanceArn"))
+    RdsDbInstanceDetails.add_member(:dbi_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "dbiResourceId"))
     RdsDbInstanceDetails.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RdsDbInstanceDetails.struct_class = Types::RdsDbInstanceDetails
 

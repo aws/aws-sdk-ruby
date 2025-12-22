@@ -600,6 +600,9 @@ module Aws::EMRServerless
     #   This configuration allows identity propagation between integrated
     #   services and the Identity Center instance.
     #
+    # @option params [Types::JobLevelCostAllocationConfiguration] :job_level_cost_allocation_configuration
+    #   The configuration object that enables job level cost allocation.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#application_id #application_id} => String
@@ -698,6 +701,9 @@ module Aws::EMRServerless
     #     identity_center_configuration: {
     #       identity_center_instance_arn: "IdentityCenterInstanceArn",
     #       user_background_sessions_enabled: false,
+    #     },
+    #     job_level_cost_allocation_configuration: {
+    #       enabled: false,
     #     },
     #   })
     #
@@ -813,6 +819,7 @@ module Aws::EMRServerless
     #   resp.application.identity_center_configuration.identity_center_instance_arn #=> String
     #   resp.application.identity_center_configuration.identity_center_application_arn #=> String
     #   resp.application.identity_center_configuration.user_background_sessions_enabled #=> Boolean
+    #   resp.application.job_level_cost_allocation_configuration.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetApplication AWS API Documentation
     #
@@ -1516,6 +1523,9 @@ module Aws::EMRServerless
     #   configuration determines how the application interacts with IAM
     #   Identity Center for user authentication and access control.
     #
+    # @option params [Types::JobLevelCostAllocationConfiguration] :job_level_cost_allocation_configuration
+    #   The configuration object that enables job level cost allocation.
+    #
     # @return [Types::UpdateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateApplicationResponse#application #application} => Types::Application
@@ -1609,6 +1619,9 @@ module Aws::EMRServerless
     #       identity_center_instance_arn: "IdentityCenterInstanceArn",
     #       user_background_sessions_enabled: false,
     #     },
+    #     job_level_cost_allocation_configuration: {
+    #       enabled: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1670,6 +1683,7 @@ module Aws::EMRServerless
     #   resp.application.identity_center_configuration.identity_center_instance_arn #=> String
     #   resp.application.identity_center_configuration.identity_center_application_arn #=> String
     #   resp.application.identity_center_configuration.user_background_sessions_enabled #=> Boolean
+    #   resp.application.job_level_cost_allocation_configuration.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplication AWS API Documentation
     #
@@ -1698,7 +1712,7 @@ module Aws::EMRServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

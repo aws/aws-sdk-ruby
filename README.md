@@ -474,6 +474,7 @@ RubyGems.org page under "LINKS" section.
 | AWS WAF Regional                                      | Aws::WAFRegional                         | aws-sdk-wafregional                         | 2016-11-28  |
 | AWS WAFV2                                             | Aws::WAFV2                               | aws-sdk-wafv2                               | 2019-07-29  |
 | AWS Well-Architected Tool                             | Aws::WellArchitected                     | aws-sdk-wellarchitected                     | 2020-03-31  |
+| AWS Wickr Admin API                                   | Aws::Wickr                               | aws-sdk-wickr                               | 2024-02-01  |
 | AWS X-Ray                                             | Aws::XRay                                | aws-sdk-xray                                | 2016-04-12  |
 | AWS re:Post Private                                   | Aws::Repostspace                         | aws-sdk-repostspace                         | 2022-05-13  |
 | AWSBillingConductor                                   | Aws::BillingConductor                    | aws-sdk-billingconductor                    | 2021-07-30  |

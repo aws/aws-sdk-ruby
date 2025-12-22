@@ -1176,6 +1176,7 @@ module Aws::MediaPackageV2
     #         }, 
     #         key_rotation_interval_seconds: 300, 
     #         speke_key_provider: {
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e", 
     #           drm_systems: [
     #             "CLEAR_KEY_AES_128", 
     #           ], 
@@ -1278,6 +1279,7 @@ module Aws::MediaPackageV2
     #         }, 
     #         key_rotation_interval_seconds: 300, 
     #         speke_key_provider: {
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e", 
     #           drm_systems: [
     #             "CLEAR_KEY_AES_128", 
     #           ], 
@@ -1479,6 +1481,7 @@ module Aws::MediaPackageV2
     #         }, 
     #         key_rotation_interval_seconds: 300, 
     #         speke_key_provider: {
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e", 
     #           drm_systems: [
     #             "PLAYREADY", 
     #             "WIDEVINE", 
@@ -1688,6 +1691,7 @@ module Aws::MediaPackageV2
     #         }, 
     #         key_rotation_interval_seconds: 300, 
     #         speke_key_provider: {
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e", 
     #           drm_systems: [
     #             "PLAYREADY", 
     #             "WIDEVINE", 
@@ -1859,6 +1863,7 @@ module Aws::MediaPackageV2
     #           drm_systems: ["CLEAR_KEY_AES_128"], # required, accepts CLEAR_KEY_AES_128, FAIRPLAY, PLAYREADY, WIDEVINE, IRDETO
     #           role_arn: "SpekeKeyProviderRoleArnString", # required
     #           url: "SpekeKeyProviderUrlString", # required
+    #           certificate_arn: "SpekeKeyProviderCertificateArnString",
     #         },
     #       },
     #     },
@@ -2026,6 +2031,7 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.speke_key_provider.drm_systems[0] #=> String, one of "CLEAR_KEY_AES_128", "FAIRPLAY", "PLAYREADY", "WIDEVINE", "IRDETO"
     #   resp.segment.encryption.speke_key_provider.role_arn #=> String
     #   resp.segment.encryption.speke_key_provider.url #=> String
+    #   resp.segment.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
     #   resp.description #=> String
@@ -2833,6 +2839,7 @@ module Aws::MediaPackageV2
     #         }, 
     #         key_rotation_interval_seconds: 300, 
     #         speke_key_provider: {
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e", 
     #           drm_systems: [
     #             "CLEAR_KEY_AES_128", 
     #           ], 
@@ -2969,6 +2976,7 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.speke_key_provider.drm_systems[0] #=> String, one of "CLEAR_KEY_AES_128", "FAIRPLAY", "PLAYREADY", "WIDEVINE", "IRDETO"
     #   resp.segment.encryption.speke_key_provider.role_arn #=> String
     #   resp.segment.encryption.speke_key_provider.url #=> String
+    #   resp.segment.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
     #   resp.reset_at #=> Time
@@ -4639,6 +4647,7 @@ module Aws::MediaPackageV2
     #         }, 
     #         key_rotation_interval_seconds: 300, 
     #         speke_key_provider: {
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e", 
     #           drm_systems: [
     #             "CLEAR_KEY_AES_128", 
     #           ], 
@@ -4736,6 +4745,7 @@ module Aws::MediaPackageV2
     #         }, 
     #         key_rotation_interval_seconds: 300, 
     #         speke_key_provider: {
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e", 
     #           drm_systems: [
     #             "CLEAR_KEY_AES_128", 
     #           ], 
@@ -4914,6 +4924,7 @@ module Aws::MediaPackageV2
     #           drm_systems: ["CLEAR_KEY_AES_128"], # required, accepts CLEAR_KEY_AES_128, FAIRPLAY, PLAYREADY, WIDEVINE, IRDETO
     #           role_arn: "SpekeKeyProviderRoleArnString", # required
     #           url: "SpekeKeyProviderUrlString", # required
+    #           certificate_arn: "SpekeKeyProviderCertificateArnString",
     #         },
     #       },
     #     },
@@ -5078,6 +5089,7 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.speke_key_provider.drm_systems[0] #=> String, one of "CLEAR_KEY_AES_128", "FAIRPLAY", "PLAYREADY", "WIDEVINE", "IRDETO"
     #   resp.segment.encryption.speke_key_provider.role_arn #=> String
     #   resp.segment.encryption.speke_key_provider.url #=> String
+    #   resp.segment.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
     #   resp.description #=> String
@@ -5198,7 +5210,7 @@ module Aws::MediaPackageV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

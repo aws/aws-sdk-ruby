@@ -402,6 +402,7 @@ module Aws::Connect
     CurrentMetric = Shapes::StructureShape.new(name: 'CurrentMetric')
     CurrentMetricData = Shapes::StructureShape.new(name: 'CurrentMetricData')
     CurrentMetricDataCollections = Shapes::ListShape.new(name: 'CurrentMetricDataCollections')
+    CurrentMetricId = Shapes::StringShape.new(name: 'CurrentMetricId')
     CurrentMetricName = Shapes::StringShape.new(name: 'CurrentMetricName')
     CurrentMetricResult = Shapes::StructureShape.new(name: 'CurrentMetricResult')
     CurrentMetricResults = Shapes::ListShape.new(name: 'CurrentMetricResults')
@@ -1670,6 +1671,7 @@ module Aws::Connect
     SubmitContactEvaluationRequest = Shapes::StructureShape.new(name: 'SubmitContactEvaluationRequest')
     SubmitContactEvaluationResponse = Shapes::StructureShape.new(name: 'SubmitContactEvaluationResponse')
     Subtype = Shapes::StringShape.new(name: 'Subtype')
+    Subtypes = Shapes::ListShape.new(name: 'Subtypes')
     SuccessfulBatchAssociationSummary = Shapes::StructureShape.new(name: 'SuccessfulBatchAssociationSummary')
     SuccessfulBatchAssociationSummaryList = Shapes::ListShape.new(name: 'SuccessfulBatchAssociationSummaryList')
     SuccessfulRequest = Shapes::StructureShape.new(name: 'SuccessfulRequest')
@@ -1895,6 +1897,8 @@ module Aws::Connect
     Validation = Shapes::StructureShape.new(name: 'Validation')
     ValidationEnum = Shapes::StructureShape.new(name: 'ValidationEnum')
     ValidationEnumValues = Shapes::ListShape.new(name: 'ValidationEnumValues')
+    ValidationTestType = Shapes::StringShape.new(name: 'ValidationTestType')
+    ValidationTestTypes = Shapes::ListShape.new(name: 'ValidationTestTypes')
     Value = Shapes::FloatShape.new(name: 'Value')
     ValueBoundary = Shapes::IntegerShape.new(name: 'ValueBoundary')
     ValueList = Shapes::ListShape.new(name: 'ValueList')
@@ -3411,6 +3415,7 @@ module Aws::Connect
     CrossChannelBehavior.struct_class = Types::CrossChannelBehavior
 
     CurrentMetric.add_member(:name, Shapes::ShapeRef.new(shape: CurrentMetricName, location_name: "Name"))
+    CurrentMetric.add_member(:metric_id, Shapes::ShapeRef.new(shape: CurrentMetricId, location_name: "MetricId"))
     CurrentMetric.add_member(:unit, Shapes::ShapeRef.new(shape: Unit, location_name: "Unit"))
     CurrentMetric.struct_class = Types::CurrentMetric
 
@@ -4027,6 +4032,8 @@ module Aws::Connect
     Dimensions.add_member(:routing_profile, Shapes::ShapeRef.new(shape: RoutingProfileReference, location_name: "RoutingProfile"))
     Dimensions.add_member(:routing_step_expression, Shapes::ShapeRef.new(shape: RoutingExpression, location_name: "RoutingStepExpression"))
     Dimensions.add_member(:agent_status, Shapes::ShapeRef.new(shape: AgentStatusIdentifier, location_name: "AgentStatus"))
+    Dimensions.add_member(:subtype, Shapes::ShapeRef.new(shape: Subtype, location_name: "Subtype"))
+    Dimensions.add_member(:validation_test_type, Shapes::ShapeRef.new(shape: ValidationTestType, location_name: "ValidationTestType"))
     Dimensions.struct_class = Types::Dimensions
 
     DimensionsV2Map.key = Shapes::ShapeRef.new(shape: DimensionsV2Key)
@@ -4766,6 +4773,8 @@ module Aws::Connect
     Filters.add_member(:routing_profiles, Shapes::ShapeRef.new(shape: RoutingProfiles, location_name: "RoutingProfiles"))
     Filters.add_member(:routing_step_expressions, Shapes::ShapeRef.new(shape: RoutingExpressions, location_name: "RoutingStepExpressions"))
     Filters.add_member(:agent_statuses, Shapes::ShapeRef.new(shape: AgentStatuses, location_name: "AgentStatuses"))
+    Filters.add_member(:subtypes, Shapes::ShapeRef.new(shape: Subtypes, location_name: "Subtypes"))
+    Filters.add_member(:validation_test_types, Shapes::ShapeRef.new(shape: ValidationTestTypes, location_name: "ValidationTestTypes"))
     Filters.struct_class = Types::Filters
 
     FiltersV2List.member = Shapes::ShapeRef.new(shape: FilterV2)
@@ -7576,6 +7585,8 @@ module Aws::Connect
     SubmitContactEvaluationResponse.add_member(:evaluation_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "EvaluationArn"))
     SubmitContactEvaluationResponse.struct_class = Types::SubmitContactEvaluationResponse
 
+    Subtypes.member = Shapes::ShapeRef.new(shape: Subtype)
+
     SuccessfulBatchAssociationSummary.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceArn"))
     SuccessfulBatchAssociationSummary.struct_class = Types::SuccessfulBatchAssociationSummary
 
@@ -8427,6 +8438,8 @@ module Aws::Connect
     ValidationEnum.struct_class = Types::ValidationEnum
 
     ValidationEnumValues.member = Shapes::ShapeRef.new(shape: String)
+
+    ValidationTestTypes.member = Shapes::ShapeRef.new(shape: ValidationTestType)
 
     ValueList.member = Shapes::ShapeRef.new(shape: String)
 

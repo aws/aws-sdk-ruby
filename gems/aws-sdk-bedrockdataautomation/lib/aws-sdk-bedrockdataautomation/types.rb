@@ -205,6 +205,14 @@ module Aws::BedrockDataAutomation
     #   KMS Encryption Context
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] optimization_samples
+    #   List of Blueprint Optimization Samples
+    #   @return [Array<Types::BlueprintOptimizationSample>]
+    #
+    # @!attribute [rw] optimization_time
+    #   Time Stamp
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/Blueprint AWS API Documentation
     #
     class Blueprint < Struct.new(
@@ -217,7 +225,9 @@ module Aws::BedrockDataAutomation
       :blueprint_version,
       :blueprint_stage,
       :kms_key_id,
-      :kms_encryption_context)
+      :kms_encryption_context,
+      :optimization_samples,
+      :optimization_time)
       SENSITIVE = [:schema, :blueprint_name]
       include Aws::Structure
     end
@@ -266,6 +276,58 @@ module Aws::BedrockDataAutomation
       :blueprint_arn,
       :blueprint_version,
       :blueprint_stage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Structure for single blueprint entity.
+    #
+    # @!attribute [rw] blueprint_arn
+    #   Arn of blueprint.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   Stage of blueprint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/BlueprintOptimizationObject AWS API Documentation
+    #
+    class BlueprintOptimizationObject < Struct.new(
+      :blueprint_arn,
+      :stage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Blueprint Optimization Output configuration.
+    #
+    # @!attribute [rw] s3_object
+    #   S3 object.
+    #   @return [Types::S3Object]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/BlueprintOptimizationOutputConfiguration AWS API Documentation
+    #
+    class BlueprintOptimizationOutputConfiguration < Struct.new(
+      :s3_object)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Blueprint Recommendation Sample
+    #
+    # @!attribute [rw] asset_s3_object
+    #   S3 Object of the asset
+    #   @return [Types::S3Object]
+    #
+    # @!attribute [rw] ground_truth_s3_object
+    #   Ground truth for the Blueprint and Asset combination
+    #   @return [Types::S3Object]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/BlueprintOptimizationSample AWS API Documentation
+    #
+    class BlueprintOptimizationSample < Struct.new(
+      :asset_s3_object,
+      :ground_truth_s3_object)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -337,6 +399,44 @@ module Aws::BedrockDataAutomation
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # CopyBlueprintStage Request
+    #
+    # @!attribute [rw] blueprint_arn
+    #   Blueprint to be copied
+    #   @return [String]
+    #
+    # @!attribute [rw] source_stage
+    #   Source stage to copy from
+    #   @return [String]
+    #
+    # @!attribute [rw] target_stage
+    #   Target stage to copy to
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Client token for idempotency
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/CopyBlueprintStageRequest AWS API Documentation
+    #
+    class CopyBlueprintStageRequest < Struct.new(
+      :blueprint_arn,
+      :source_stage,
+      :target_stage,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # CopyBlueprintStage Response
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/CopyBlueprintStageResponse AWS API Documentation
+    #
+    class CopyBlueprintStageResponse < Aws::EmptyStructure; end
 
     # Create Blueprint Request
     #
@@ -896,6 +996,49 @@ module Aws::BedrockDataAutomation
       include Aws::Structure
     end
 
+    # Structure for request of GetBlueprintOptimizationStatus API.
+    #
+    # @!attribute [rw] invocation_arn
+    #   Invocation arn.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/GetBlueprintOptimizationStatusRequest AWS API Documentation
+    #
+    class GetBlueprintOptimizationStatusRequest < Struct.new(
+      :invocation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response of GetBlueprintOptimizationStatus API.
+    #
+    # @!attribute [rw] status
+    #   Job Status.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_type
+    #   Error Type.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Error Message.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_configuration
+    #   Output configuration.
+    #   @return [Types::BlueprintOptimizationOutputConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/GetBlueprintOptimizationStatusResponse AWS API Documentation
+    #
+    class GetBlueprintOptimizationStatusResponse < Struct.new(
+      :status,
+      :error_type,
+      :error_message,
+      :output_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Get Blueprint Request
     #
     # @!attribute [rw] blueprint_arn
@@ -1088,6 +1231,59 @@ module Aws::BedrockDataAutomation
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Invoke Blueprint Optimization Async Request
+    #
+    # @!attribute [rw] blueprint
+    #   Blueprint to be optimized
+    #   @return [Types::BlueprintOptimizationObject]
+    #
+    # @!attribute [rw] samples
+    #   List of Blueprint Optimization Samples
+    #   @return [Array<Types::BlueprintOptimizationSample>]
+    #
+    # @!attribute [rw] output_configuration
+    #   Output configuration where the results should be placed
+    #   @return [Types::BlueprintOptimizationOutputConfiguration]
+    #
+    # @!attribute [rw] data_automation_profile_arn
+    #   Data automation profile ARN
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   Encryption configuration.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   List of tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/InvokeBlueprintOptimizationAsyncRequest AWS API Documentation
+    #
+    class InvokeBlueprintOptimizationAsyncRequest < Struct.new(
+      :blueprint,
+      :samples,
+      :output_configuration,
+      :data_automation_profile_arn,
+      :encryption_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Invoke Blueprint Optimization Async Response
+    #
+    # @!attribute [rw] invocation_arn
+    #   ARN of the blueprint optimization job
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/InvokeBlueprintOptimizationAsyncResponse AWS API Documentation
+    #
+    class InvokeBlueprintOptimizationAsyncResponse < Struct.new(
+      :invocation_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1334,6 +1530,25 @@ module Aws::BedrockDataAutomation
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # S3 object
+    #
+    # @!attribute [rw] s3_uri
+    #   S3 uri.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   S3 object version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/S3Object AWS API Documentation
+    #
+    class S3Object < Struct.new(
+      :s3_uri,
+      :version)
       SENSITIVE = []
       include Aws::Structure
     end

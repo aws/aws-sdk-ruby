@@ -557,12 +557,95 @@ module Aws::GameLiftStreams
     #
     #   A stream class can be one of the following:
     #
+    #   * <b> <code>gen6n_pro_win2022</code> (NVIDIA, pro)</b> Supports
+    #     applications with extremely high 3D scene complexity which require
+    #     maximum resources. Runs applications on Microsoft Windows Server
+    #     2022 Base and supports DirectX 12. Compatible with Unreal Engine
+    #     versions up through 5.6, 32 and 64-bit applications, and
+    #     anti-cheat technology. Uses NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 16 vCPUs, 64 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_pro</code> (NVIDIA, pro)</b> Supports applications
+    #     with extremely high 3D scene complexity which require maximum
+    #     resources. Uses dedicated NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 16 vCPUs, 64 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_ultra_win2022</code> (NVIDIA, ultra)</b> Supports
+    #     applications with high 3D scene complexity. Runs applications on
+    #     Microsoft Windows Server 2022 Base and supports DirectX 12.
+    #     Compatible with Unreal Engine versions up through 5.6, 32 and
+    #     64-bit applications, and anti-cheat technology. Uses NVIDIA L4
+    #     Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 8 vCPUs, 32 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_ultra</code> (NVIDIA, ultra)</b> Supports
+    #     applications with high 3D scene complexity. Uses dedicated NVIDIA
+    #     L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 8 vCPUs, 32 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_high</code> (NVIDIA, high)</b> Supports
+    #     applications with moderate to high 3D scene complexity. Uses
+    #     NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 4 vCPUs, 16 GB RAM, 12 GB VRAM
+    #
+    #     * Tenancy: Supports up to 2 concurrent stream sessions
+    #   * <b> <code>gen6n_medium</code> (NVIDIA, medium)</b> Supports
+    #     applications with moderate 3D scene complexity. Uses NVIDIA L4
+    #     Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 2 vCPUs, 8 GB RAM, 6 GB VRAM
+    #
+    #     * Tenancy: Supports up to 4 concurrent stream sessions
+    #   * <b> <code>gen6n_small</code> (NVIDIA, small)</b> Supports
+    #     applications with lightweight 3D scene complexity and low CPU
+    #     usage. Uses NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 1 vCPUs, 4 GB RAM, 2 GB VRAM
+    #
+    #     * Tenancy: Supports up to 12 concurrent stream sessions
     #   * <b> <code>gen5n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.6,
     #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
-    #     A10G Tensor GPU.
+    #     A10G Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -573,7 +656,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports 1 concurrent stream session
     #   * <b> <code>gen5n_high</code> (NVIDIA, high)</b> Supports
     #     applications with moderate to high 3D scene complexity. Uses
-    #     NVIDIA A10G Tensor GPU.
+    #     NVIDIA A10G Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -584,7 +667,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports up to 2 concurrent stream sessions
     #   * <b> <code>gen5n_ultra</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Uses
-    #     dedicated NVIDIA A10G Tensor GPU.
+    #     dedicated NVIDIA A10G Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -596,9 +679,9 @@ module Aws::GameLiftStreams
     #   * <b> <code>gen4n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.6,
     #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
-    #     T4 Tensor GPU.
+    #     T4 Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -609,7 +692,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports 1 concurrent stream session
     #   * <b> <code>gen4n_high</code> (NVIDIA, high)</b> Supports
     #     applications with moderate to high 3D scene complexity. Uses
-    #     NVIDIA T4 Tensor GPU.
+    #     NVIDIA T4 Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -620,7 +703,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports up to 2 concurrent stream sessions
     #   * <b> <code>gen4n_ultra</code> (NVIDIA, ultra)</b> Supports
     #     applications with high 3D scene complexity. Uses dedicated NVIDIA
-    #     T4 Tensor GPU.
+    #     T4 Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -747,12 +830,95 @@ module Aws::GameLiftStreams
     #
     #   A stream class can be one of the following:
     #
+    #   * <b> <code>gen6n_pro_win2022</code> (NVIDIA, pro)</b> Supports
+    #     applications with extremely high 3D scene complexity which require
+    #     maximum resources. Runs applications on Microsoft Windows Server
+    #     2022 Base and supports DirectX 12. Compatible with Unreal Engine
+    #     versions up through 5.6, 32 and 64-bit applications, and
+    #     anti-cheat technology. Uses NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 16 vCPUs, 64 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_pro</code> (NVIDIA, pro)</b> Supports applications
+    #     with extremely high 3D scene complexity which require maximum
+    #     resources. Uses dedicated NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 16 vCPUs, 64 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_ultra_win2022</code> (NVIDIA, ultra)</b> Supports
+    #     applications with high 3D scene complexity. Runs applications on
+    #     Microsoft Windows Server 2022 Base and supports DirectX 12.
+    #     Compatible with Unreal Engine versions up through 5.6, 32 and
+    #     64-bit applications, and anti-cheat technology. Uses NVIDIA L4
+    #     Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 8 vCPUs, 32 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_ultra</code> (NVIDIA, ultra)</b> Supports
+    #     applications with high 3D scene complexity. Uses dedicated NVIDIA
+    #     L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 8 vCPUs, 32 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_high</code> (NVIDIA, high)</b> Supports
+    #     applications with moderate to high 3D scene complexity. Uses
+    #     NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 4 vCPUs, 16 GB RAM, 12 GB VRAM
+    #
+    #     * Tenancy: Supports up to 2 concurrent stream sessions
+    #   * <b> <code>gen6n_medium</code> (NVIDIA, medium)</b> Supports
+    #     applications with moderate 3D scene complexity. Uses NVIDIA L4
+    #     Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 2 vCPUs, 8 GB RAM, 6 GB VRAM
+    #
+    #     * Tenancy: Supports up to 4 concurrent stream sessions
+    #   * <b> <code>gen6n_small</code> (NVIDIA, small)</b> Supports
+    #     applications with lightweight 3D scene complexity and low CPU
+    #     usage. Uses NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 1 vCPUs, 4 GB RAM, 2 GB VRAM
+    #
+    #     * Tenancy: Supports up to 12 concurrent stream sessions
     #   * <b> <code>gen5n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.6,
     #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
-    #     A10G Tensor GPU.
+    #     A10G Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -763,7 +929,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports 1 concurrent stream session
     #   * <b> <code>gen5n_high</code> (NVIDIA, high)</b> Supports
     #     applications with moderate to high 3D scene complexity. Uses
-    #     NVIDIA A10G Tensor GPU.
+    #     NVIDIA A10G Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -774,7 +940,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports up to 2 concurrent stream sessions
     #   * <b> <code>gen5n_ultra</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Uses
-    #     dedicated NVIDIA A10G Tensor GPU.
+    #     dedicated NVIDIA A10G Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -786,9 +952,9 @@ module Aws::GameLiftStreams
     #   * <b> <code>gen4n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.6,
     #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
-    #     T4 Tensor GPU.
+    #     T4 Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -799,7 +965,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports 1 concurrent stream session
     #   * <b> <code>gen4n_high</code> (NVIDIA, high)</b> Supports
     #     applications with moderate to high 3D scene complexity. Uses
-    #     NVIDIA T4 Tensor GPU.
+    #     NVIDIA T4 Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -810,7 +976,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports up to 2 concurrent stream sessions
     #   * <b> <code>gen4n_ultra</code> (NVIDIA, ultra)</b> Supports
     #     applications with high 3D scene complexity. Uses dedicated NVIDIA
-    #     T4 Tensor GPU.
+    #     T4 Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -863,10 +1029,10 @@ module Aws::GameLiftStreams
     #     an issue with the server. Try again later.
     #
     #   * `noAvailableInstances`: Amazon GameLift Streams does not currently
-    #     have enough available on-demand capacity to fulfill your request.
-    #     Wait a few minutes and retry the request as capacity can shift
-    #     frequently. You can also try to make the request using a different
-    #     stream class or in another region.
+    #     have enough available capacity to fulfill your request. Wait a few
+    #     minutes and retry the request as capacity can shift frequently.
+    #     You can also try to make the request using a different stream
+    #     class or in another region.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_at
@@ -1452,12 +1618,95 @@ module Aws::GameLiftStreams
     #
     #   A stream class can be one of the following:
     #
+    #   * <b> <code>gen6n_pro_win2022</code> (NVIDIA, pro)</b> Supports
+    #     applications with extremely high 3D scene complexity which require
+    #     maximum resources. Runs applications on Microsoft Windows Server
+    #     2022 Base and supports DirectX 12. Compatible with Unreal Engine
+    #     versions up through 5.6, 32 and 64-bit applications, and
+    #     anti-cheat technology. Uses NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 16 vCPUs, 64 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_pro</code> (NVIDIA, pro)</b> Supports applications
+    #     with extremely high 3D scene complexity which require maximum
+    #     resources. Uses dedicated NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 16 vCPUs, 64 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_ultra_win2022</code> (NVIDIA, ultra)</b> Supports
+    #     applications with high 3D scene complexity. Runs applications on
+    #     Microsoft Windows Server 2022 Base and supports DirectX 12.
+    #     Compatible with Unreal Engine versions up through 5.6, 32 and
+    #     64-bit applications, and anti-cheat technology. Uses NVIDIA L4
+    #     Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 8 vCPUs, 32 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_ultra</code> (NVIDIA, ultra)</b> Supports
+    #     applications with high 3D scene complexity. Uses dedicated NVIDIA
+    #     L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 8 vCPUs, 32 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_high</code> (NVIDIA, high)</b> Supports
+    #     applications with moderate to high 3D scene complexity. Uses
+    #     NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 4 vCPUs, 16 GB RAM, 12 GB VRAM
+    #
+    #     * Tenancy: Supports up to 2 concurrent stream sessions
+    #   * <b> <code>gen6n_medium</code> (NVIDIA, medium)</b> Supports
+    #     applications with moderate 3D scene complexity. Uses NVIDIA L4
+    #     Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 2 vCPUs, 8 GB RAM, 6 GB VRAM
+    #
+    #     * Tenancy: Supports up to 4 concurrent stream sessions
+    #   * <b> <code>gen6n_small</code> (NVIDIA, small)</b> Supports
+    #     applications with lightweight 3D scene complexity and low CPU
+    #     usage. Uses NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 1 vCPUs, 4 GB RAM, 2 GB VRAM
+    #
+    #     * Tenancy: Supports up to 12 concurrent stream sessions
     #   * <b> <code>gen5n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.6,
     #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
-    #     A10G Tensor GPU.
+    #     A10G Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -1468,7 +1717,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports 1 concurrent stream session
     #   * <b> <code>gen5n_high</code> (NVIDIA, high)</b> Supports
     #     applications with moderate to high 3D scene complexity. Uses
-    #     NVIDIA A10G Tensor GPU.
+    #     NVIDIA A10G Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -1479,7 +1728,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports up to 2 concurrent stream sessions
     #   * <b> <code>gen5n_ultra</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Uses
-    #     dedicated NVIDIA A10G Tensor GPU.
+    #     dedicated NVIDIA A10G Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -1491,9 +1740,9 @@ module Aws::GameLiftStreams
     #   * <b> <code>gen4n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.6,
     #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
-    #     T4 Tensor GPU.
+    #     T4 Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -1504,7 +1753,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports 1 concurrent stream session
     #   * <b> <code>gen4n_high</code> (NVIDIA, high)</b> Supports
     #     applications with moderate to high 3D scene complexity. Uses
-    #     NVIDIA T4 Tensor GPU.
+    #     NVIDIA T4 Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -1515,7 +1764,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports up to 2 concurrent stream sessions
     #   * <b> <code>gen4n_ultra</code> (NVIDIA, ultra)</b> Supports
     #     applications with high 3D scene complexity. Uses dedicated NVIDIA
-    #     T4 Tensor GPU.
+    #     T4 Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -1568,10 +1817,10 @@ module Aws::GameLiftStreams
     #     an issue with the server. Try again later.
     #
     #   * `noAvailableInstances`: Amazon GameLift Streams does not currently
-    #     have enough available on-demand capacity to fulfill your request.
-    #     Wait a few minutes and retry the request as capacity can shift
-    #     frequently. You can also try to make the request using a different
-    #     stream class or in another region.
+    #     have enough available capacity to fulfill your request. Wait a few
+    #     minutes and retry the request as capacity can shift frequently.
+    #     You can also try to make the request using a different stream
+    #     class or in another region.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_at
@@ -1853,6 +2102,10 @@ module Aws::GameLiftStreams
     #   using command-line arguments.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] performance_stats_configuration
+    #   The performance stats configuration for the stream session
+    #   @return [Types::PerformanceStatsConfiguration]
+    #
     # @!attribute [rw] log_file_location_uri
     #   Access location for log files that your content generates during a
     #   stream session. These log files are uploaded to cloud storage
@@ -1910,6 +2163,7 @@ module Aws::GameLiftStreams
       :session_length_seconds,
       :additional_launch_args,
       :additional_environment_variables,
+      :performance_stats_configuration,
       :log_file_location_uri,
       :web_sdk_protocol_url,
       :last_updated_at,
@@ -2209,14 +2463,17 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] always_on_capacity
-    #   The streaming capacity that is allocated and ready to handle stream
-    #   requests without delay. You pay for this capacity whether it's in
-    #   use or not. Best for quickest time from streaming request to
-    #   streaming session. Default is 1 (2 for high stream classes) when
-    #   creating a stream group or adding a location.
+    #   This setting, if non-zero, indicates minimum streaming capacity
+    #   which is allocated to you and is never released back to the service.
+    #   You pay for this base level of capacity at all times, whether used
+    #   or idle.
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_capacity
+    #   This field is deprecated. Use `MaximumCapacity` instead. This
+    #   parameter cannot be used with `MaximumCapacity` or
+    #   `TargetIdleCapacity` in the same location configuration.
+    #
     #   The streaming capacity that Amazon GameLift Streams can allocate in
     #   response to stream requests, and then de-allocate when the session
     #   has terminated. This offers a cost control measure at the expense of
@@ -2224,12 +2481,28 @@ module Aws::GameLiftStreams
     #   when creating a stream group or adding a location.
     #   @return [Integer]
     #
+    # @!attribute [rw] target_idle_capacity
+    #   This indicates idle capacity which the service pre-allocates and
+    #   holds for you in anticipation of future activity. This helps to
+    #   insulate your users from capacity-allocation delays. You pay for
+    #   capacity which is held in this intentional idle state.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_capacity
+    #   This indicates the maximum capacity that the service can allocate
+    #   for you. Newly created streams may take a few minutes to start.
+    #   Capacity is released back to the service when idle. You pay for
+    #   capacity that is allocated to you until it is released.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/LocationConfiguration AWS API Documentation
     #
     class LocationConfiguration < Struct.new(
       :location_name,
       :always_on_capacity,
-      :on_demand_capacity)
+      :on_demand_capacity,
+      :target_idle_capacity,
+      :maximum_capacity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2272,11 +2545,10 @@ module Aws::GameLiftStreams
     #   @return [String]
     #
     # @!attribute [rw] always_on_capacity
-    #   The streaming capacity that is allocated and ready to handle stream
-    #   requests without delay. You pay for this capacity whether it's in
-    #   use or not. Best for quickest time from streaming request to
-    #   streaming session. Default is 1 (2 for high stream classes) when
-    #   creating a stream group or adding a location.
+    #   This setting, if non-zero, indicates minimum streaming capacity
+    #   which is allocated to you and is never released back to the service.
+    #   You pay for this base level of capacity at all times, whether used
+    #   or idle.
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_capacity
@@ -2285,6 +2557,20 @@ module Aws::GameLiftStreams
     #   has terminated. This offers a cost control measure at the expense of
     #   a greater startup time (typically under 5 minutes). Default is 0
     #   when creating a stream group or adding a location.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_idle_capacity
+    #   This indicates idle capacity which the service pre-allocates and
+    #   holds for you in anticipation of future activity. This helps to
+    #   insulate your users from capacity-allocation delays. You pay for
+    #   capacity which is held in this intentional idle state.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_capacity
+    #   This indicates the maximum capacity that the service can allocate
+    #   for you. Newly created streams may take a few minutes to start.
+    #   Capacity is released back to the service when idle. You pay for
+    #   capacity that is allocated to you until it is released.
     #   @return [Integer]
     #
     # @!attribute [rw] requested_capacity
@@ -2302,13 +2588,15 @@ module Aws::GameLiftStreams
     #   This value is the stream capacity that Amazon GameLift Streams has
     #   provisioned in a stream group that can respond immediately to stream
     #   requests. It includes resources that are currently streaming and
-    #   resources that are idle and ready to respond to stream requests. You
-    #   pay for this capacity whether it's in use or not. After making
-    #   changes to capacity, it can take a few minutes for the allocated
-    #   capacity count to reflect the change while compute resources are
-    #   allocated or deallocated. Similarly, when allocated on-demand
-    #   capacity is no longer needed, it can take a few minutes for Amazon
-    #   GameLift Streams to spin down the allocated capacity.
+    #   resources that are idle and ready to respond to stream requests.
+    #   When target-idle capacity is configured, the idle resources include
+    #   the capacity buffer maintained beyond ongoing sessions. You pay for
+    #   this capacity whether it's in use or not. After making changes to
+    #   capacity, it can take a few minutes for the allocated capacity count
+    #   to reflect the change while compute resources are allocated or
+    #   deallocated. Similarly, when allocated on-demand capacity is no
+    #   longer needed, it can take a few minutes for Amazon GameLift Streams
+    #   to spin down the allocated capacity.
     #   @return [Integer]
     #
     # @!attribute [rw] idle_capacity
@@ -2324,9 +2612,27 @@ module Aws::GameLiftStreams
       :status,
       :always_on_capacity,
       :on_demand_capacity,
+      :target_idle_capacity,
+      :maximum_capacity,
       :requested_capacity,
       :allocated_capacity,
       :idle_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for sharing the stream session's performance
+    # stats with the client
+    #
+    # @!attribute [rw] shared_with_client
+    #   Performance stats for the session are streamed to the client when
+    #   set to `true`. Defaults to `false`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/PerformanceStatsConfiguration AWS API Documentation
+    #
+    class PerformanceStatsConfiguration < Struct.new(
+      :shared_with_client)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2593,6 +2899,11 @@ module Aws::GameLiftStreams
     #   using command-line arguments.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] performance_stats_configuration
+    #   Configuration settings for sharing the stream session's performance
+    #   stats with the client
+    #   @return [Types::PerformanceStatsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/StartStreamSessionInput AWS API Documentation
     #
     class StartStreamSessionInput < Struct.new(
@@ -2607,7 +2918,8 @@ module Aws::GameLiftStreams
       :connection_timeout_seconds,
       :session_length_seconds,
       :additional_launch_args,
-      :additional_environment_variables)
+      :additional_environment_variables,
+      :performance_stats_configuration)
       SENSITIVE = [:signal_request]
       include Aws::Structure
     end
@@ -2805,6 +3117,10 @@ module Aws::GameLiftStreams
     #   using command-line arguments.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] performance_stats_configuration
+    #   The performance stats configuration for the stream session
+    #   @return [Types::PerformanceStatsConfiguration]
+    #
     # @!attribute [rw] log_file_location_uri
     #   Access location for log files that your content generates during a
     #   stream session. These log files are uploaded to cloud storage
@@ -2862,6 +3178,7 @@ module Aws::GameLiftStreams
       :session_length_seconds,
       :additional_launch_args,
       :additional_environment_variables,
+      :performance_stats_configuration,
       :log_file_location_uri,
       :web_sdk_protocol_url,
       :last_updated_at,
@@ -2909,12 +3226,95 @@ module Aws::GameLiftStreams
     #
     #   A stream class can be one of the following:
     #
+    #   * <b> <code>gen6n_pro_win2022</code> (NVIDIA, pro)</b> Supports
+    #     applications with extremely high 3D scene complexity which require
+    #     maximum resources. Runs applications on Microsoft Windows Server
+    #     2022 Base and supports DirectX 12. Compatible with Unreal Engine
+    #     versions up through 5.6, 32 and 64-bit applications, and
+    #     anti-cheat technology. Uses NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 16 vCPUs, 64 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_pro</code> (NVIDIA, pro)</b> Supports applications
+    #     with extremely high 3D scene complexity which require maximum
+    #     resources. Uses dedicated NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 16 vCPUs, 64 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_ultra_win2022</code> (NVIDIA, ultra)</b> Supports
+    #     applications with high 3D scene complexity. Runs applications on
+    #     Microsoft Windows Server 2022 Base and supports DirectX 12.
+    #     Compatible with Unreal Engine versions up through 5.6, 32 and
+    #     64-bit applications, and anti-cheat technology. Uses NVIDIA L4
+    #     Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 8 vCPUs, 32 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_ultra</code> (NVIDIA, ultra)</b> Supports
+    #     applications with high 3D scene complexity. Uses dedicated NVIDIA
+    #     L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 8 vCPUs, 32 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_high</code> (NVIDIA, high)</b> Supports
+    #     applications with moderate to high 3D scene complexity. Uses
+    #     NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 4 vCPUs, 16 GB RAM, 12 GB VRAM
+    #
+    #     * Tenancy: Supports up to 2 concurrent stream sessions
+    #   * <b> <code>gen6n_medium</code> (NVIDIA, medium)</b> Supports
+    #     applications with moderate 3D scene complexity. Uses NVIDIA L4
+    #     Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 2 vCPUs, 8 GB RAM, 6 GB VRAM
+    #
+    #     * Tenancy: Supports up to 4 concurrent stream sessions
+    #   * <b> <code>gen6n_small</code> (NVIDIA, small)</b> Supports
+    #     applications with lightweight 3D scene complexity and low CPU
+    #     usage. Uses NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 1 vCPUs, 4 GB RAM, 2 GB VRAM
+    #
+    #     * Tenancy: Supports up to 12 concurrent stream sessions
     #   * <b> <code>gen5n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.6,
     #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
-    #     A10G Tensor GPU.
+    #     A10G Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -2925,7 +3325,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports 1 concurrent stream session
     #   * <b> <code>gen5n_high</code> (NVIDIA, high)</b> Supports
     #     applications with moderate to high 3D scene complexity. Uses
-    #     NVIDIA A10G Tensor GPU.
+    #     NVIDIA A10G Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -2936,7 +3336,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports up to 2 concurrent stream sessions
     #   * <b> <code>gen5n_ultra</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Uses
-    #     dedicated NVIDIA A10G Tensor GPU.
+    #     dedicated NVIDIA A10G Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -2948,9 +3348,9 @@ module Aws::GameLiftStreams
     #   * <b> <code>gen4n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.6,
     #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
-    #     T4 Tensor GPU.
+    #     T4 Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -2961,7 +3361,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports 1 concurrent stream session
     #   * <b> <code>gen4n_high</code> (NVIDIA, high)</b> Supports
     #     applications with moderate to high 3D scene complexity. Uses
-    #     NVIDIA T4 Tensor GPU.
+    #     NVIDIA T4 Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -2972,7 +3372,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports up to 2 concurrent stream sessions
     #   * <b> <code>gen4n_ultra</code> (NVIDIA, ultra)</b> Supports
     #     applications with high 3D scene complexity. Uses dedicated NVIDIA
-    #     T4 Tensor GPU.
+    #     T4 Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -3108,6 +3508,60 @@ module Aws::GameLiftStreams
     #   * `TERMINATED`: The stream session has ended.
     #   @return [String]
     #
+    # @!attribute [rw] status_reason
+    #   A short description of the reason the stream session is in `ERROR`
+    #   status or `TERMINATED` status.
+    #
+    #   `ERROR` status reasons:
+    #
+    #   * `applicationLogS3DestinationError`: Could not write the
+    #     application log to the Amazon S3 bucket that is configured for the
+    #     streaming application. Make sure the bucket still exists.
+    #
+    #   * `internalError`: An internal service error occurred. Start a new
+    #     stream session to continue streaming.
+    #
+    #   * `invalidSignalRequest`: The WebRTC signal request that was sent is
+    #     not valid. When starting or reconnecting to a stream session, use
+    #     `generateSignalRequest` in the Amazon GameLift Streams Web SDK to
+    #     generate a new signal request.
+    #
+    #   * `placementTimeout`: Amazon GameLift Streams could not find
+    #     available stream capacity to start a stream session. Increase the
+    #     stream capacity in the stream group or wait until capacity becomes
+    #     available.
+    #
+    #   `TERMINATED` status reasons:
+    #
+    #   * `apiTerminated`: The stream session was terminated by an API call
+    #     to [TerminateStreamSession][1].
+    #
+    #   * `applicationExit`: The streaming application exited or crashed.
+    #     The stream session was terminated because the application is no
+    #     longer running.
+    #
+    #   * `connectionTimeout`: The stream session was terminated because the
+    #     client failed to connect within the connection timeout period
+    #     specified by `ConnectionTimeoutSeconds`.
+    #
+    #   * `idleTimeout`: The stream session was terminated because it
+    #     exceeded the idle timeout period of 60 minutes with no user input
+    #     activity.
+    #
+    #   * `maxSessionLengthTimeout`: The stream session was terminated
+    #     because it exceeded the maximum session length timeout period
+    #     specified by `SessionLengthSeconds`.
+    #
+    #   * `reconnectionTimeout`: The stream session was terminated because
+    #     the client failed to reconnect within the reconnection timeout
+    #     period specified by `ConnectionTimeoutSeconds` after losing
+    #     connection.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_TerminateStreamSession.html
+    #   @return [String]
+    #
     # @!attribute [rw] protocol
     #   The data transfer protocol in use with the stream session.
     #   @return [String]
@@ -3156,6 +3610,7 @@ module Aws::GameLiftStreams
       :arn,
       :user_id,
       :status,
+      :status_reason,
       :protocol,
       :last_updated_at,
       :created_at,
@@ -3577,12 +4032,95 @@ module Aws::GameLiftStreams
     #
     #   A stream class can be one of the following:
     #
+    #   * <b> <code>gen6n_pro_win2022</code> (NVIDIA, pro)</b> Supports
+    #     applications with extremely high 3D scene complexity which require
+    #     maximum resources. Runs applications on Microsoft Windows Server
+    #     2022 Base and supports DirectX 12. Compatible with Unreal Engine
+    #     versions up through 5.6, 32 and 64-bit applications, and
+    #     anti-cheat technology. Uses NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 16 vCPUs, 64 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_pro</code> (NVIDIA, pro)</b> Supports applications
+    #     with extremely high 3D scene complexity which require maximum
+    #     resources. Uses dedicated NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 16 vCPUs, 64 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_ultra_win2022</code> (NVIDIA, ultra)</b> Supports
+    #     applications with high 3D scene complexity. Runs applications on
+    #     Microsoft Windows Server 2022 Base and supports DirectX 12.
+    #     Compatible with Unreal Engine versions up through 5.6, 32 and
+    #     64-bit applications, and anti-cheat technology. Uses NVIDIA L4
+    #     Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 8 vCPUs, 32 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_ultra</code> (NVIDIA, ultra)</b> Supports
+    #     applications with high 3D scene complexity. Uses dedicated NVIDIA
+    #     L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 8 vCPUs, 32 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_high</code> (NVIDIA, high)</b> Supports
+    #     applications with moderate to high 3D scene complexity. Uses
+    #     NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 4 vCPUs, 16 GB RAM, 12 GB VRAM
+    #
+    #     * Tenancy: Supports up to 2 concurrent stream sessions
+    #   * <b> <code>gen6n_medium</code> (NVIDIA, medium)</b> Supports
+    #     applications with moderate 3D scene complexity. Uses NVIDIA L4
+    #     Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 2 vCPUs, 8 GB RAM, 6 GB VRAM
+    #
+    #     * Tenancy: Supports up to 4 concurrent stream sessions
+    #   * <b> <code>gen6n_small</code> (NVIDIA, small)</b> Supports
+    #     applications with lightweight 3D scene complexity and low CPU
+    #     usage. Uses NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 1 vCPUs, 4 GB RAM, 2 GB VRAM
+    #
+    #     * Tenancy: Supports up to 12 concurrent stream sessions
     #   * <b> <code>gen5n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.6,
     #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
-    #     A10G Tensor GPU.
+    #     A10G Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -3593,7 +4131,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports 1 concurrent stream session
     #   * <b> <code>gen5n_high</code> (NVIDIA, high)</b> Supports
     #     applications with moderate to high 3D scene complexity. Uses
-    #     NVIDIA A10G Tensor GPU.
+    #     NVIDIA A10G Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -3604,7 +4142,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports up to 2 concurrent stream sessions
     #   * <b> <code>gen5n_ultra</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Uses
-    #     dedicated NVIDIA A10G Tensor GPU.
+    #     dedicated NVIDIA A10G Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -3616,9 +4154,9 @@ module Aws::GameLiftStreams
     #   * <b> <code>gen4n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.6,
     #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
-    #     T4 Tensor GPU.
+    #     T4 Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -3629,7 +4167,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports 1 concurrent stream session
     #   * <b> <code>gen4n_high</code> (NVIDIA, high)</b> Supports
     #     applications with moderate to high 3D scene complexity. Uses
-    #     NVIDIA T4 Tensor GPU.
+    #     NVIDIA T4 Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -3640,7 +4178,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports up to 2 concurrent stream sessions
     #   * <b> <code>gen4n_ultra</code> (NVIDIA, ultra)</b> Supports
     #     applications with high 3D scene complexity. Uses dedicated NVIDIA
-    #     T4 Tensor GPU.
+    #     T4 Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -3693,10 +4231,10 @@ module Aws::GameLiftStreams
     #     an issue with the server. Try again later.
     #
     #   * `noAvailableInstances`: Amazon GameLift Streams does not currently
-    #     have enough available on-demand capacity to fulfill your request.
-    #     Wait a few minutes and retry the request as capacity can shift
-    #     frequently. You can also try to make the request using a different
-    #     stream class or in another region.
+    #     have enough available capacity to fulfill your request. Wait a few
+    #     minutes and retry the request as capacity can shift frequently.
+    #     You can also try to make the request using a different stream
+    #     class or in another region.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_at

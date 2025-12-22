@@ -119,7 +119,7 @@ module Aws::PaymentCryptography
     #   @return [String]
     #
     # @!attribute [rw] country
-    #   The city you provide to create the certificate signing request.
+    #   The country you provide to create the certificate signing request.
     #   @return [String]
     #
     # @!attribute [rw] state_or_province
@@ -454,6 +454,37 @@ module Aws::PaymentCryptography
       include Aws::Structure
     end
 
+    # Parameter information for key material export using AS2805 key
+    # cryptogram format.
+    #
+    # @!attribute [rw] wrapping_key_identifier
+    #   A key identifier that can be either a key ARN or an alias name. This
+    #   allows flexible key identification in operations.
+    #
+    #   When using a key ARN, it must be a fully qualified ARN in the
+    #   format: `arn:aws:payment-cryptography:region:account:key/key-id`.
+    #
+    #   When using an alias, it must begin with `alias/` followed by the
+    #   alias name.
+    #
+    #   Do not include confidential or sensitive information in this field.
+    #   This field may be displayed in plaintext in CloudTrail logs and
+    #   other output.
+    #   @return [String]
+    #
+    # @!attribute [rw] as_2805_key_variant
+    #   The cryptographic usage of the key under export.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ExportAs2805KeyCryptogram AWS API Documentation
+    #
+    class ExportAs2805KeyCryptogram < Struct.new(
+      :wrapping_key_identifier,
+      :as_2805_key_variant)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The attributes for IPEK generation during export.
     #
     # @!attribute [rw] export_dukpt_initial_key
@@ -632,6 +663,11 @@ module Aws::PaymentCryptography
     #   asymmetric ECDH key exchange method.
     #   @return [Types::ExportDiffieHellmanTr31KeyBlock]
     #
+    # @!attribute [rw] as_2805_key_cryptogram
+    #   Parameter information for key material export using AS2805 key
+    #   cryptogram format.
+    #   @return [Types::ExportAs2805KeyCryptogram]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ExportKeyMaterial AWS API Documentation
     #
     class ExportKeyMaterial < Struct.new(
@@ -639,6 +675,7 @@ module Aws::PaymentCryptography
       :tr_34_key_block,
       :key_cryptogram,
       :diffie_hellman_tr_31_key_block,
+      :as_2805_key_cryptogram,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -648,6 +685,7 @@ module Aws::PaymentCryptography
       class Tr34KeyBlock < ExportKeyMaterial; end
       class KeyCryptogram < ExportKeyMaterial; end
       class DiffieHellmanTr31KeyBlock < ExportKeyMaterial; end
+      class As2805KeyCryptogram < ExportKeyMaterial; end
       class Unknown < ExportKeyMaterial; end
     end
 
@@ -1029,6 +1067,59 @@ module Aws::PaymentCryptography
       include Aws::Structure
     end
 
+    # Parameter information for key material import using AS2805 key
+    # cryptogram format.
+    #
+    # @!attribute [rw] as_2805_key_variant
+    #   The cryptographic usage of the key under import.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_modes_of_use
+    #   The list of cryptographic operations that you can perform using the
+    #   key. The modes of use are deﬁned in section A.5.3 of the TR-31 spec.
+    #   @return [Types::KeyModesOfUse]
+    #
+    # @!attribute [rw] key_algorithm
+    #   The key algorithm of the key under import.
+    #   @return [String]
+    #
+    # @!attribute [rw] exportable
+    #   Specified whether the key is exportable. This data is immutable
+    #   after the key is imported.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] wrapping_key_identifier
+    #   A key identifier that can be either a key ARN or an alias name. This
+    #   allows flexible key identification in operations.
+    #
+    #   When using a key ARN, it must be a fully qualified ARN in the
+    #   format: `arn:aws:payment-cryptography:region:account:key/key-id`.
+    #
+    #   When using an alias, it must begin with `alias/` followed by the
+    #   alias name.
+    #
+    #   Do not include confidential or sensitive information in this field.
+    #   This field may be displayed in plaintext in CloudTrail logs and
+    #   other output.
+    #   @return [String]
+    #
+    # @!attribute [rw] wrapped_key_cryptogram
+    #   The wrapped key cryptogram under import.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ImportAs2805KeyCryptogram AWS API Documentation
+    #
+    class ImportAs2805KeyCryptogram < Struct.new(
+      :as_2805_key_variant,
+      :key_modes_of_use,
+      :key_algorithm,
+      :exportable,
+      :wrapping_key_identifier,
+      :wrapped_key_cryptogram)
+      SENSITIVE = [:wrapped_key_cryptogram]
+      include Aws::Structure
+    end
+
     # Key derivation parameter information for key material import using
     # asymmetric ECDH key exchange method.
     #
@@ -1228,6 +1319,11 @@ module Aws::PaymentCryptography
     #   asymmetric ECDH key exchange method.
     #   @return [Types::ImportDiffieHellmanTr31KeyBlock]
     #
+    # @!attribute [rw] as_2805_key_cryptogram
+    #   Parameter information for key material import using AS2805 key
+    #   cryptogram format.
+    #   @return [Types::ImportAs2805KeyCryptogram]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-2021-09-14/ImportKeyMaterial AWS API Documentation
     #
     class ImportKeyMaterial < Struct.new(
@@ -1237,6 +1333,7 @@ module Aws::PaymentCryptography
       :tr_34_key_block,
       :key_cryptogram,
       :diffie_hellman_tr_31_key_block,
+      :as_2805_key_cryptogram,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1248,6 +1345,7 @@ module Aws::PaymentCryptography
       class Tr34KeyBlock < ImportKeyMaterial; end
       class KeyCryptogram < ImportKeyMaterial; end
       class DiffieHellmanTr31KeyBlock < ImportKeyMaterial; end
+      class As2805KeyCryptogram < ImportKeyMaterial; end
       class Unknown < ImportKeyMaterial; end
     end
 

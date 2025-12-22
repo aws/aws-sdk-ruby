@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2025-12-19)
+------------------
+
+* Feature - Add support for WebAuthn under user settings.
+
 1.53.0 (2025-12-12)
 ------------------
 

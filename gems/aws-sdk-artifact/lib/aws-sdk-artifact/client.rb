@@ -779,6 +779,92 @@ module Aws::Artifact
       req.send_request(options)
     end
 
+    # List available report versions for a given report.
+    #
+    # @option params [required, String] :report_id
+    #   Unique resource ID for the report resource.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of resources to return in the paginated response.
+    #
+    # @option params [String] :next_token
+    #   Pagination token to request the next page of resources.
+    #
+    # @return [Types::ListReportVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReportVersionsResponse#reports #reports} => Array&lt;Types::ReportSummary&gt;
+    #   * {Types::ListReportVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Invoke ListReportVersions operation
+    #
+    #   # The ListReportVersions operation returns a collection of report versions
+    #   # for a given resource.
+    #
+    #   resp = client.list_report_versions({
+    #     report_id: "report-abcdef0123456789", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "gPFEGk7CF4wS901w7ppYclt7gPFEGk7CF4wS901w7ppYclt7gPFEGk7CF4wS901w7ppYclt7", 
+    #     reports: [
+    #       {
+    #         version: 1, 
+    #         name: "name", 
+    #         arn: "arn:aws:artifact:us-east-1::report:report-abcdef0123456789:1", 
+    #         category: "category", 
+    #         company_name: "companyName", 
+    #         description: "description", 
+    #         id: "report-abcdef0123456789", 
+    #         period_end: Time.parse("2022-04-01T20:32:04Z"), 
+    #         period_start: Time.parse("2022-04-01T20:32:04Z"), 
+    #         product_name: "productName", 
+    #         series: "series", 
+    #         state: "PUBLISHED", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_report_versions({
+    #     report_id: "ReportId", # required
+    #     max_results: 1,
+    #     next_token: "NextTokenAttribute",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.reports #=> Array
+    #   resp.reports[0].id #=> String
+    #   resp.reports[0].name #=> String
+    #   resp.reports[0].state #=> String, one of "PUBLISHED", "UNPUBLISHED"
+    #   resp.reports[0].arn #=> String
+    #   resp.reports[0].version #=> Integer
+    #   resp.reports[0].upload_state #=> String, one of "PROCESSING", "COMPLETE", "FAILED", "FAULT"
+    #   resp.reports[0].description #=> String
+    #   resp.reports[0].period_start #=> Time
+    #   resp.reports[0].period_end #=> Time
+    #   resp.reports[0].series #=> String
+    #   resp.reports[0].category #=> String
+    #   resp.reports[0].company_name #=> String
+    #   resp.reports[0].product_name #=> String
+    #   resp.reports[0].status_message #=> String
+    #   resp.reports[0].acceptance_type #=> String, one of "PASSTHROUGH", "EXPLICIT"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ListReportVersions AWS API Documentation
+    #
+    # @overload list_report_versions(params = {})
+    # @param [Hash] params ({})
+    def list_report_versions(params = {}, options = {})
+      req = build_request(:list_report_versions, params)
+      req.send_request(options)
+    end
+
     # List available reports.
     #
     # @option params [Integer] :max_results
@@ -921,7 +1007,7 @@ module Aws::Artifact
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-artifact'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

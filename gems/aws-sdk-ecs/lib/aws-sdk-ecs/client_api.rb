@@ -52,6 +52,7 @@ module Aws::ECS
     BurstablePerformance = Shapes::StringShape.new(name: 'BurstablePerformance')
     CPUArchitecture = Shapes::StringShape.new(name: 'CPUArchitecture')
     CanaryConfiguration = Shapes::StructureShape.new(name: 'CanaryConfiguration')
+    CapacityOptionType = Shapes::StringShape.new(name: 'CapacityOptionType')
     CapacityProvider = Shapes::StructureShape.new(name: 'CapacityProvider')
     CapacityProviderField = Shapes::StringShape.new(name: 'CapacityProviderField')
     CapacityProviderFieldList = Shapes::ListShape.new(name: 'CapacityProviderFieldList')
@@ -1403,6 +1404,7 @@ module Aws::ECS
     InstanceLaunchTemplate.add_member(:network_configuration, Shapes::ShapeRef.new(shape: ManagedInstancesNetworkConfiguration, required: true, location_name: "networkConfiguration"))
     InstanceLaunchTemplate.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: ManagedInstancesStorageConfiguration, location_name: "storageConfiguration"))
     InstanceLaunchTemplate.add_member(:monitoring, Shapes::ShapeRef.new(shape: ManagedInstancesMonitoringOptions, location_name: "monitoring"))
+    InstanceLaunchTemplate.add_member(:capacity_option_type, Shapes::ShapeRef.new(shape: CapacityOptionType, location_name: "capacityOptionType"))
     InstanceLaunchTemplate.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirementsRequest, location_name: "instanceRequirements"))
     InstanceLaunchTemplate.struct_class = Types::InstanceLaunchTemplate
 

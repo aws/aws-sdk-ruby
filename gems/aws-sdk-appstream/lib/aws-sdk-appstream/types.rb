@@ -1165,8 +1165,9 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] platforms
-    #   The platforms the application supports. WINDOWS\_SERVER\_2019 and
-    #   AMAZON\_LINUX2 are supported for Elastic fleets.
+    #   The platforms the application supports. WINDOWS\_SERVER\_2019,
+    #   AMAZON\_LINUX2 and UBUNTU\_PRO\_2404 are supported for Elastic
+    #   fleets.
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_families
@@ -1417,14 +1418,6 @@ module Aws::AppStream
     #
     #   * stream.memory.z1d.12xlarge
     #
-    #   * stream.graphics-design.large
-    #
-    #   * stream.graphics-design.xlarge
-    #
-    #   * stream.graphics-design.2xlarge
-    #
-    #   * stream.graphics-design.4xlarge
-    #
     #   * stream.graphics.g4dn.xlarge
     #
     #   * stream.graphics.g4dn.2xlarge
@@ -1640,8 +1633,8 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The fleet platform. WINDOWS\_SERVER\_2019 and AMAZON\_LINUX2 are
-    #   supported for Elastic fleets.
+    #   The fleet platform. WINDOWS\_SERVER\_2019, AMAZON\_LINUX2 and
+    #   UBUNTU\_PRO\_2404 are supported for Elastic fleets.
     #   @return [String]
     #
     # @!attribute [rw] max_concurrent_sessions
@@ -1766,14 +1759,6 @@ module Aws::AppStream
     #   * stream.memory.z1d.6xlarge
     #
     #   * stream.memory.z1d.12xlarge
-    #
-    #   * stream.graphics-design.large
-    #
-    #   * stream.graphics-design.xlarge
-    #
-    #   * stream.graphics-design.2xlarge
-    #
-    #   * stream.graphics-design.4xlarge
     #
     #   * stream.graphics.g4dn.xlarge
     #
@@ -4272,14 +4257,6 @@ module Aws::AppStream
     #
     #   * stream.memory.z1d.12xlarge
     #
-    #   * stream.graphics-design.large
-    #
-    #   * stream.graphics-design.xlarge
-    #
-    #   * stream.graphics-design.2xlarge
-    #
-    #   * stream.graphics-design.4xlarge
-    #
     #   * stream.graphics.g4dn.xlarge
     #
     #   * stream.graphics.g4dn.2xlarge
@@ -4661,15 +4638,11 @@ module Aws::AppStream
     #
     #   * Memory Optimized
     #
-    #   * Graphics
-    #
-    #   * Graphics Design
-    #
-    #   * Graphics Pro
-    #
     #   * Graphics G4
     #
     #   * Graphics G5
+    #
+    #   * Graphics G6
     #   @return [Array<String>]
     #
     # @!attribute [rw] dynamic_app_providers_enabled
@@ -4790,14 +4763,6 @@ module Aws::AppStream
     #   * stream.memory.z1d.6xlarge
     #
     #   * stream.memory.z1d.12xlarge
-    #
-    #   * stream.graphics-design.large
-    #
-    #   * stream.graphics-design.xlarge
-    #
-    #   * stream.graphics-design.2xlarge
-    #
-    #   * stream.graphics-design.4xlarge
     #
     #   * stream.graphics.g4dn.xlarge
     #
@@ -6462,14 +6427,6 @@ module Aws::AppStream
     #
     #   * stream.memory.z1d.12xlarge
     #
-    #   * stream.graphics-design.large
-    #
-    #   * stream.graphics-design.xlarge
-    #
-    #   * stream.graphics-design.2xlarge
-    #
-    #   * stream.graphics-design.4xlarge
-    #
     #   * stream.graphics.g4dn.xlarge
     #
     #   * stream.graphics.g4dn.2xlarge
@@ -6655,8 +6612,8 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform of the fleet. WINDOWS\_SERVER\_2019 and AMAZON\_LINUX2
-    #   are supported for Elastic fleets.
+    #   The platform of the fleet. WINDOWS\_SERVER\_2019, AMAZON\_LINUX2 and
+    #   UBUNTU\_PRO\_2404 are supported for Elastic fleets.
     #   @return [String]
     #
     # @!attribute [rw] max_concurrent_sessions

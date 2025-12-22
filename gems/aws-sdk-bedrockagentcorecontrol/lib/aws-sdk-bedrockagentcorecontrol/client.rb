@@ -1252,6 +1252,10 @@ module Aws::BedrockAgentCoreControl
     #   configurations specify how the gateway authenticates with the target
     #   endpoint.
     #
+    # @option params [Types::MetadataConfiguration] :metadata_configuration
+    #   Optional configuration for HTTP header and query parameter propagation
+    #   to and from the gateway target.
+    #
     # @return [Types::CreateGatewayTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGatewayTargetResponse#gateway_arn #gateway_arn} => String
@@ -1265,6 +1269,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::CreateGatewayTargetResponse#target_configuration #target_configuration} => Types::TargetConfiguration
     #   * {Types::CreateGatewayTargetResponse#credential_provider_configurations #credential_provider_configurations} => Array&lt;Types::CredentialProviderConfiguration&gt;
     #   * {Types::CreateGatewayTargetResponse#last_synchronized_at #last_synchronized_at} => Time
+    #   * {Types::CreateGatewayTargetResponse#metadata_configuration #metadata_configuration} => Types::MetadataConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -1377,6 +1382,11 @@ module Aws::BedrockAgentCoreControl
     #         },
     #       },
     #     ],
+    #     metadata_configuration: {
+    #       allowed_request_headers: ["HttpHeaderName"],
+    #       allowed_query_parameters: ["HttpQueryParameterName"],
+    #       allowed_response_headers: ["HttpHeaderName"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -1442,6 +1452,12 @@ module Aws::BedrockAgentCoreControl
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_prefix #=> String
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_location #=> String, one of "HEADER", "QUERY_PARAMETER"
     #   resp.last_synchronized_at #=> Time
+    #   resp.metadata_configuration.allowed_request_headers #=> Array
+    #   resp.metadata_configuration.allowed_request_headers[0] #=> String
+    #   resp.metadata_configuration.allowed_query_parameters #=> Array
+    #   resp.metadata_configuration.allowed_query_parameters[0] #=> String
+    #   resp.metadata_configuration.allowed_response_headers #=> Array
+    #   resp.metadata_configuration.allowed_response_headers[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayTarget AWS API Documentation
     #
@@ -3207,6 +3223,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetGatewayTargetResponse#target_configuration #target_configuration} => Types::TargetConfiguration
     #   * {Types::GetGatewayTargetResponse#credential_provider_configurations #credential_provider_configurations} => Array&lt;Types::CredentialProviderConfiguration&gt;
     #   * {Types::GetGatewayTargetResponse#last_synchronized_at #last_synchronized_at} => Time
+    #   * {Types::GetGatewayTargetResponse#metadata_configuration #metadata_configuration} => Types::MetadataConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -3278,6 +3295,12 @@ module Aws::BedrockAgentCoreControl
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_prefix #=> String
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_location #=> String, one of "HEADER", "QUERY_PARAMETER"
     #   resp.last_synchronized_at #=> Time
+    #   resp.metadata_configuration.allowed_request_headers #=> Array
+    #   resp.metadata_configuration.allowed_request_headers[0] #=> String
+    #   resp.metadata_configuration.allowed_query_parameters #=> Array
+    #   resp.metadata_configuration.allowed_query_parameters[0] #=> String
+    #   resp.metadata_configuration.allowed_response_headers #=> Array
+    #   resp.metadata_configuration.allowed_response_headers[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetGatewayTarget AWS API Documentation
     #
@@ -4994,6 +5017,12 @@ module Aws::BedrockAgentCoreControl
     #   resp.targets[0].credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_prefix #=> String
     #   resp.targets[0].credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_location #=> String, one of "HEADER", "QUERY_PARAMETER"
     #   resp.targets[0].last_synchronized_at #=> Time
+    #   resp.targets[0].metadata_configuration.allowed_request_headers #=> Array
+    #   resp.targets[0].metadata_configuration.allowed_request_headers[0] #=> String
+    #   resp.targets[0].metadata_configuration.allowed_query_parameters #=> Array
+    #   resp.targets[0].metadata_configuration.allowed_query_parameters[0] #=> String
+    #   resp.targets[0].metadata_configuration.allowed_response_headers #=> Array
+    #   resp.targets[0].metadata_configuration.allowed_response_headers[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/SynchronizeGatewayTargets AWS API Documentation
     #
@@ -5613,6 +5642,10 @@ module Aws::BedrockAgentCoreControl
     # @option params [Array<Types::CredentialProviderConfiguration>] :credential_provider_configurations
     #   The updated credential provider configurations for the gateway target.
     #
+    # @option params [Types::MetadataConfiguration] :metadata_configuration
+    #   Configuration for HTTP header and query parameter propagation to the
+    #   gateway target.
+    #
     # @return [Types::UpdateGatewayTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateGatewayTargetResponse#gateway_arn #gateway_arn} => String
@@ -5626,6 +5659,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::UpdateGatewayTargetResponse#target_configuration #target_configuration} => Types::TargetConfiguration
     #   * {Types::UpdateGatewayTargetResponse#credential_provider_configurations #credential_provider_configurations} => Array&lt;Types::CredentialProviderConfiguration&gt;
     #   * {Types::UpdateGatewayTargetResponse#last_synchronized_at #last_synchronized_at} => Time
+    #   * {Types::UpdateGatewayTargetResponse#metadata_configuration #metadata_configuration} => Types::MetadataConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -5738,6 +5772,11 @@ module Aws::BedrockAgentCoreControl
     #         },
     #       },
     #     ],
+    #     metadata_configuration: {
+    #       allowed_request_headers: ["HttpHeaderName"],
+    #       allowed_query_parameters: ["HttpQueryParameterName"],
+    #       allowed_response_headers: ["HttpHeaderName"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -5803,6 +5842,12 @@ module Aws::BedrockAgentCoreControl
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_prefix #=> String
     #   resp.credential_provider_configurations[0].credential_provider.api_key_credential_provider.credential_location #=> String, one of "HEADER", "QUERY_PARAMETER"
     #   resp.last_synchronized_at #=> Time
+    #   resp.metadata_configuration.allowed_request_headers #=> Array
+    #   resp.metadata_configuration.allowed_request_headers[0] #=> String
+    #   resp.metadata_configuration.allowed_query_parameters #=> Array
+    #   resp.metadata_configuration.allowed_query_parameters[0] #=> String
+    #   resp.metadata_configuration.allowed_response_headers #=> Array
+    #   resp.metadata_configuration.allowed_response_headers[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayTarget AWS API Documentation
     #
@@ -6583,7 +6628,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

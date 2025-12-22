@@ -452,8 +452,8 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] quick_sight_configuration
-    #   The Amazon QuickSight configuration for an Amazon Q Business
-    #   application that uses QuickSight as the identity provider.
+    #   The Amazon Quick Suite configuration for an Amazon Q Business
+    #   application that uses Quick Suite as the identity provider.
     #   @return [Types::QuickSightConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/Application AWS API Documentation
@@ -2025,11 +2025,11 @@ module Aws::QBusiness
     #   @return [Types::PersonalizationConfiguration]
     #
     # @!attribute [rw] quick_sight_configuration
-    #   The Amazon QuickSight configuration for an Amazon Q Business
-    #   application that uses QuickSight for authentication. This
-    #   configuration is required if your application uses QuickSight as the
-    #   identity provider. For more information, see [Creating an Amazon
-    #   QuickSight integrated application][1].
+    #   The Amazon Quick Suite configuration for an Amazon Q Business
+    #   application that uses Quick Suite for authentication. This
+    #   configuration is required if your application uses Quick Suite as
+    #   the identity provider. For more information, see [Creating an Amazon
+    #   Quick Suite integrated application][1].
     #
     #
     #
@@ -4430,7 +4430,7 @@ module Aws::QBusiness
     #   @return [Array<String>]
     #
     # @!attribute [rw] quick_sight_configuration
-    #   The Amazon QuickSight authentication configuration for the Amazon Q
+    #   The Amazon Quick Suite authentication configuration for the Amazon Q
     #   Business application.
     #   @return [Types::QuickSightConfiguration]
     #
@@ -7633,9 +7633,9 @@ module Aws::QBusiness
       include Aws::Structure
     end
 
-    # The Amazon QuickSight configuration for an Amazon Q Business
-    # application that uses QuickSight as the identity provider. For more
-    # information, see [Creating an Amazon QuickSight integrated
+    # The Amazon Quick Suite configuration for an Amazon Q Business
+    # application that uses Quick Suite as the identity provider. For more
+    # information, see [Creating an Amazon Quick Suite integrated
     # application][1].
     #
     #
@@ -7643,8 +7643,8 @@ module Aws::QBusiness
     # [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html
     #
     # @!attribute [rw] client_namespace
-    #   The Amazon QuickSight namespace that is used as the identity
-    #   provider. For more information about QuickSight namespaces, see
+    #   The Amazon Quick Suite namespace that is used as the identity
+    #   provider. For more information about Quick Suite namespaces, see
     #   [Namespace operations][1].
     #
     #

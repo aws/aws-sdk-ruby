@@ -103,6 +103,19 @@ module Aws::Artifact
       SENSITIVE: []
     end
 
+    class ListReportVersionsRequest
+      attr_accessor report_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReportVersionsResponse
+      attr_accessor reports: ::Array[Types::ReportSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListReportsRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String

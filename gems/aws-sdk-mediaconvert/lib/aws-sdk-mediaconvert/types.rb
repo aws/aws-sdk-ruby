@@ -814,10 +814,16 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] default_selection
-    #   Enable this setting on one audio selector to set it as the default
-    #   for the job. The service uses this default for outputs where it
-    #   can't find the specified input audio. If you don't set a default,
-    #   those outputs have no audio.
+    #   Specify a fallback audio selector for this input. Use to ensure
+    #   outputs have audio even when the audio selector you specify in your
+    #   output is missing from the source. DEFAULT (Checked in the
+    #   MediaConvert console): If your output settings specify an audio
+    #   selector that does not exist in this input, MediaConvert uses this
+    #   audio selector instead. This is useful when you have multiple inputs
+    #   with a different number of audio tracks. NOT\_DEFAULT (Unchecked in
+    #   the MediaConvert console): MediaConvert will not fallback from any
+    #   missing audio selector. Any output specifying a missing audio
+    #   selector will be silent.
     #   @return [String]
     #
     # @!attribute [rw] external_audio_file_input
@@ -6880,6 +6886,18 @@ module Aws::MediaConvert
     #   systems require a regular GOP size.
     #   @return [Integer]
     #
+    # @!attribute [rw] mv_over_picture_boundaries
+    #   If you are setting up the picture as a tile, you must set this to
+    #   "disabled". In all other configurations, you typically enter
+    #   "enabled".
+    #   @return [String]
+    #
+    # @!attribute [rw] mv_temporal_predictor
+    #   If you are setting up the picture as a tile, you must set this to
+    #   "disabled". In other configurations, you typically enter
+    #   "enabled".
+    #   @return [String]
+    #
     # @!attribute [rw] number_b_frames_between_reference_frames
     #   Specify the number of B-frames between reference frames in this
     #   output. For the best video quality: Leave blank. MediaConvert
@@ -7068,9 +7086,38 @@ module Aws::MediaConvert
     #   frames (lowest temporal layer) for a half frame rate output.
     #   @return [String]
     #
+    # @!attribute [rw] tile_height
+    #   Set this field to set up the picture as a tile. You must also set
+    #   TileWidth. The tile height must result in 22 or fewer rows in the
+    #   frame. The tile width must result in 20 or fewer columns in the
+    #   frame. And finally, the product of the column count and row count
+    #   must be 64 or less. If the tile width and height are specified,
+    #   MediaConvert will override the video codec slices field with a value
+    #   that MediaConvert calculates.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tile_padding
+    #   Set to "padded" to force MediaConvert to add padding to the frame,
+    #   to obtain a frame that is a whole multiple of the tile size. If you
+    #   are setting up the picture as a tile, you must enter "padded". In
+    #   all other configurations, you typically enter "none".
+    #   @return [String]
+    #
+    # @!attribute [rw] tile_width
+    #   Set this field to set up the picture as a tile. See TileHeight for
+    #   more information.
+    #   @return [Integer]
+    #
     # @!attribute [rw] tiles
     #   Enable use of tiles, allowing horizontal as well as vertical
     #   subdivision of the encoded pictures.
+    #   @return [String]
+    #
+    # @!attribute [rw] tree_block_size
+    #   Select the tree block size used for encoding. If you enter "auto",
+    #   the encoder will pick the best size. If you are setting up the
+    #   picture as a tile, you must set this to 32x32. In all other
+    #   configurations, you typically enter "auto".
     #   @return [String]
     #
     # @!attribute [rw] unregistered_sei_timecode
@@ -7120,6 +7167,8 @@ module Aws::MediaConvert
       :interlace_mode,
       :max_bitrate,
       :min_i_interval,
+      :mv_over_picture_boundaries,
+      :mv_temporal_predictor,
       :number_b_frames_between_reference_frames,
       :number_reference_frames,
       :par_control,
@@ -7138,7 +7187,11 @@ module Aws::MediaConvert
       :telecine,
       :temporal_adaptive_quantization,
       :temporal_ids,
+      :tile_height,
+      :tile_padding,
+      :tile_width,
       :tiles,
+      :tree_block_size,
       :unregistered_sei_timecode,
       :write_mp_4_packaging_type)
       SENSITIVE = []
@@ -8694,6 +8747,11 @@ module Aws::MediaConvert
     #   value for width.
     #   @return [Integer]
     #
+    # @!attribute [rw] image_input
+    #   Specify the HTTP, HTTPS, or Amazon S3 location of the image that you
+    #   want to overlay on the video. Use a PNG or TGA file.
+    #   @return [String]
+    #
     # @!attribute [rw] sample_rate
     #   Specify the audio sample rate, in Hz, for the silent audio in your
     #   video generator input. Enter an integer from 32000 to 48000.
@@ -8716,6 +8774,7 @@ module Aws::MediaConvert
       :framerate_denominator,
       :framerate_numerator,
       :height,
+      :image_input,
       :sample_rate,
       :width)
       SENSITIVE = []
@@ -14778,6 +14837,20 @@ module Aws::MediaConvert
     # Input settings for Video overlay. You can include one or more video
     # overlays in sequence at different times that you specify.
     #
+    # @!attribute [rw] audio_selectors
+    #   Use Audio selectors to specify audio to use during your Video
+    #   overlay. You can use multiple Audio selectors per Video overlay.
+    #   When you include an Audio selector within a Video overlay,
+    #   MediaConvert mutes any Audio selectors with the same name from the
+    #   underlying input. For example, if your underlying input has Audio
+    #   selector 1 and Audio selector 2, and your Video overlay only has
+    #   Audio selector 1, then MediaConvert replaces all audio for Audio
+    #   selector 1 during the Video overlay. To replace all audio for all
+    #   Audio selectors from the underlying input by using a single Audio
+    #   selector in your overlay, set DefaultSelection to DEFAULT (Check
+    #   \\"Use as default\\" in the MediaConvert console).
+    #   @return [Hash<String,Types::AudioSelector>]
+    #
     # @!attribute [rw] file_input
     #   Specify the input file S3, HTTP, or HTTPS URL for your video
     #   overlay. To specify one or more Transitions for your base input
@@ -14807,6 +14880,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoOverlayInput AWS API Documentation
     #
     class VideoOverlayInput < Struct.new(
+      :audio_selectors,
       :file_input,
       :input_clippings,
       :timecode_source,

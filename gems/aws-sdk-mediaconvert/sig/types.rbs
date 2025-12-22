@@ -335,7 +335,7 @@ module Aws::MediaConvert
       attr_accessor dvb_sub_source_settings: Types::DvbSubSourceSettings
       attr_accessor embedded_source_settings: Types::EmbeddedSourceSettings
       attr_accessor file_source_settings: Types::FileSourceSettings
-      attr_accessor source_type: ("ANCILLARY" | "DVB_SUB" | "EMBEDDED" | "SCTE20" | "SCC" | "TTML" | "STL" | "SRT" | "SMI" | "SMPTE_TT" | "TELETEXT" | "NULL_SOURCE" | "IMSC" | "WEBVTT")
+      attr_accessor source_type: ("ANCILLARY" | "DVB_SUB" | "EMBEDDED" | "SCTE20" | "SCC" | "TTML" | "STL" | "SRT" | "SMI" | "SMPTE_TT" | "TELETEXT" | "NULL_SOURCE" | "IMSC" | "WEBVTT" | "TT_3GPP")
       attr_accessor teletext_source_settings: Types::TeletextSourceSettings
       attr_accessor track_source_settings: Types::TrackSourceSettings
       attr_accessor webvtt_hls_source_settings: Types::WebvttHlsSourceSettings
@@ -1089,6 +1089,8 @@ module Aws::MediaConvert
       attr_accessor interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")
       attr_accessor max_bitrate: ::Integer
       attr_accessor min_i_interval: ::Integer
+      attr_accessor mv_over_picture_boundaries: ("ENABLED" | "DISABLED")
+      attr_accessor mv_temporal_predictor: ("ENABLED" | "DISABLED")
       attr_accessor number_b_frames_between_reference_frames: ::Integer
       attr_accessor number_reference_frames: ::Integer
       attr_accessor par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")
@@ -1107,7 +1109,11 @@ module Aws::MediaConvert
       attr_accessor telecine: ("NONE" | "SOFT" | "HARD")
       attr_accessor temporal_adaptive_quantization: ("DISABLED" | "ENABLED")
       attr_accessor temporal_ids: ("DISABLED" | "ENABLED")
+      attr_accessor tile_height: ::Integer
+      attr_accessor tile_padding: ("NONE" | "PADDED")
+      attr_accessor tile_width: ::Integer
       attr_accessor tiles: ("DISABLED" | "ENABLED")
+      attr_accessor tree_block_size: ("AUTO" | "TREE_SIZE_32X32")
       attr_accessor unregistered_sei_timecode: ("DISABLED" | "ENABLED")
       attr_accessor write_mp_4_packaging_type: ("HVC1" | "HEV1")
       SENSITIVE: []
@@ -1334,6 +1340,7 @@ module Aws::MediaConvert
       attr_accessor framerate_denominator: ::Integer
       attr_accessor framerate_numerator: ::Integer
       attr_accessor height: ::Integer
+      attr_accessor image_input: ::String
       attr_accessor sample_rate: ::Integer
       attr_accessor width: ::Integer
       SENSITIVE: []
@@ -2418,6 +2425,7 @@ module Aws::MediaConvert
     end
 
     class VideoOverlayInput
+      attr_accessor audio_selectors: ::Hash[::String, Types::AudioSelector]
       attr_accessor file_input: ::String
       attr_accessor input_clippings: ::Array[Types::VideoOverlayInputClipping]
       attr_accessor timecode_source: ("EMBEDDED" | "ZEROBASED" | "SPECIFIEDSTART")

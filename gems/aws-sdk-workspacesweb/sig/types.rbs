@@ -343,6 +343,7 @@ module Aws::WorkSpacesWeb
       attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
       attr_accessor toolbar_configuration: Types::ToolbarConfiguration
       attr_accessor branding_configuration_input: Types::BrandingConfigurationCreateInput
+      attr_accessor web_authn_allowed: ("Disabled" | "Enabled")
       SENSITIVE: [:cookie_synchronization_configuration]
     end
 
@@ -1275,6 +1276,7 @@ module Aws::WorkSpacesWeb
       attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
       attr_accessor toolbar_configuration: Types::ToolbarConfiguration
       attr_accessor branding_configuration_input: Types::BrandingConfigurationUpdateInput
+      attr_accessor web_authn_allowed: ("Disabled" | "Enabled")
       SENSITIVE: [:cookie_synchronization_configuration]
     end
 
@@ -1312,6 +1314,7 @@ module Aws::WorkSpacesWeb
       attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
       attr_accessor toolbar_configuration: Types::ToolbarConfiguration
       attr_accessor branding_configuration: Types::BrandingConfiguration
+      attr_accessor web_authn_allowed: ("Disabled" | "Enabled")
       SENSITIVE: [:cookie_synchronization_configuration]
     end
 
@@ -1328,6 +1331,7 @@ module Aws::WorkSpacesWeb
       attr_accessor deep_link_allowed: ("Disabled" | "Enabled")
       attr_accessor toolbar_configuration: Types::ToolbarConfiguration
       attr_accessor branding_configuration: Types::BrandingConfiguration
+      attr_accessor web_authn_allowed: ("Disabled" | "Enabled")
       SENSITIVE: [:cookie_synchronization_configuration]
     end
 

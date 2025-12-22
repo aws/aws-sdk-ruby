@@ -115,6 +115,7 @@ module Aws::KafkaConnect
       attr_accessor kafka_cluster_encryption_in_transit: Types::KafkaClusterEncryptionInTransitDescription
       attr_accessor kafka_connect_version: ::String
       attr_accessor log_delivery: Types::LogDeliveryDescription
+      attr_accessor network_type: ("IPV4" | "DUAL")
       attr_accessor plugins: ::Array[Types::PluginDescription]
       attr_accessor service_execution_role_arn: ::String
       attr_accessor worker_configuration: Types::WorkerConfigurationDescription
@@ -131,6 +132,7 @@ module Aws::KafkaConnect
       attr_accessor kafka_cluster_encryption_in_transit: Types::KafkaClusterEncryptionInTransit
       attr_accessor kafka_connect_version: ::String
       attr_accessor log_delivery: Types::LogDelivery
+      attr_accessor network_type: ("IPV4" | "DUAL")
       attr_accessor plugins: ::Array[Types::Plugin]
       attr_accessor service_execution_role_arn: ::String
       attr_accessor worker_configuration: Types::WorkerConfiguration
@@ -301,6 +303,7 @@ module Aws::KafkaConnect
       attr_accessor kafka_cluster_encryption_in_transit: Types::KafkaClusterEncryptionInTransitDescription
       attr_accessor kafka_connect_version: ::String
       attr_accessor log_delivery: Types::LogDeliveryDescription
+      attr_accessor network_type: ("IPV4" | "DUAL")
       attr_accessor plugins: ::Array[Types::PluginDescription]
       attr_accessor service_execution_role_arn: ::String
       attr_accessor worker_configuration: Types::WorkerConfigurationDescription

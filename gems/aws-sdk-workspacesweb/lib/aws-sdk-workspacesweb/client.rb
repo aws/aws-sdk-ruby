@@ -1633,6 +1633,10 @@ module Aws::WorkSpacesWeb
     #   wallpaper, localized strings, color theme, and an optional terms of
     #   service.
     #
+    # @option params [String] :web_authn_allowed
+    #   Specifies whether the user can use WebAuthn redirection for
+    #   passwordless login to websites within the streaming session.
+    #
     # @return [Types::CreateUserSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserSettingsResponse#user_settings_arn #user_settings_arn} => String
@@ -1709,6 +1713,7 @@ module Aws::WorkSpacesWeb
     #       color_theme: "Light", # required, accepts Light, Dark
     #       terms_of_service: "Markdown",
     #     },
+    #     web_authn_allowed: "Disabled", # accepts Disabled, Enabled
     #   })
     #
     # @example Response structure
@@ -2768,6 +2773,7 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings.branding_configuration.localized_strings["Locale"].loading_text #=> String
     #   resp.user_settings.branding_configuration.color_theme #=> String, one of "Light", "Dark"
     #   resp.user_settings.branding_configuration.terms_of_service #=> String
+    #   resp.user_settings.web_authn_allowed #=> String, one of "Disabled", "Enabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetUserSettings AWS API Documentation
     #
@@ -3440,6 +3446,7 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings[0].branding_configuration.localized_strings["Locale"].loading_text #=> String
     #   resp.user_settings[0].branding_configuration.color_theme #=> String, one of "Light", "Dark"
     #   resp.user_settings[0].branding_configuration.terms_of_service #=> String
+    #   resp.user_settings[0].web_authn_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListUserSettings AWS API Documentation
@@ -4353,6 +4360,10 @@ module Aws::WorkSpacesWeb
     #   service. When updating user settings with an existing branding
     #   configuration, all fields are optional.
     #
+    # @option params [String] :web_authn_allowed
+    #   Specifies whether the user can use WebAuthn redirection for
+    #   passwordless login to websites within the streaming session.
+    #
     # @return [Types::UpdateUserSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateUserSettingsResponse#user_settings #user_settings} => Types::UserSettings
@@ -4420,6 +4431,7 @@ module Aws::WorkSpacesWeb
     #       color_theme: "Light", # accepts Light, Dark
     #       terms_of_service: "Markdown",
     #     },
+    #     web_authn_allowed: "Disabled", # accepts Disabled, Enabled
     #   })
     #
     # @example Response structure
@@ -4471,6 +4483,7 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings.branding_configuration.localized_strings["Locale"].loading_text #=> String
     #   resp.user_settings.branding_configuration.color_theme #=> String, one of "Light", "Dark"
     #   resp.user_settings.branding_configuration.terms_of_service #=> String
+    #   resp.user_settings.web_authn_allowed #=> String, one of "Disabled", "Enabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateUserSettings AWS API Documentation
     #
@@ -4499,7 +4512,7 @@ module Aws::WorkSpacesWeb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspacesweb'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

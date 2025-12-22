@@ -1657,6 +1657,11 @@ module Aws::BedrockAgentCoreControl
     #   endpoint.
     #   @return [Array<Types::CredentialProviderConfiguration>]
     #
+    # @!attribute [rw] metadata_configuration
+    #   Optional configuration for HTTP header and query parameter
+    #   propagation to and from the gateway target.
+    #   @return [Types::MetadataConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayTargetRequest AWS API Documentation
     #
     class CreateGatewayTargetRequest < Struct.new(
@@ -1665,7 +1670,8 @@ module Aws::BedrockAgentCoreControl
       :description,
       :client_token,
       :target_configuration,
-      :credential_provider_configurations)
+      :credential_provider_configurations,
+      :metadata_configuration)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -1714,6 +1720,11 @@ module Aws::BedrockAgentCoreControl
     #   The last synchronization of the target.
     #   @return [Time]
     #
+    # @!attribute [rw] metadata_configuration
+    #   The metadata configuration that was applied to the created gateway
+    #   target.
+    #   @return [Types::MetadataConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateGatewayTargetResponse AWS API Documentation
     #
     class CreateGatewayTargetResponse < Struct.new(
@@ -1727,7 +1738,8 @@ module Aws::BedrockAgentCoreControl
       :description,
       :target_configuration,
       :credential_provider_configurations,
-      :last_synchronized_at)
+      :last_synchronized_at,
+      :metadata_configuration)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -4038,6 +4050,11 @@ module Aws::BedrockAgentCoreControl
     #   The last synchronization time.
     #   @return [Time]
     #
+    # @!attribute [rw] metadata_configuration
+    #   The metadata configuration for HTTP header and query parameter
+    #   propagation to and from this gateway target.
+    #   @return [Types::MetadataConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GatewayTarget AWS API Documentation
     #
     class GatewayTarget < Struct.new(
@@ -4051,7 +4068,8 @@ module Aws::BedrockAgentCoreControl
       :description,
       :target_configuration,
       :credential_provider_configurations,
-      :last_synchronized_at)
+      :last_synchronized_at,
+      :metadata_configuration)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -4712,6 +4730,11 @@ module Aws::BedrockAgentCoreControl
     #   The last synchronization of the target.
     #   @return [Time]
     #
+    # @!attribute [rw] metadata_configuration
+    #   The metadata configuration for HTTP header and query parameter
+    #   propagation for the retrieved gateway target.
+    #   @return [Types::MetadataConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetGatewayTargetResponse AWS API Documentation
     #
     class GetGatewayTargetResponse < Struct.new(
@@ -4725,7 +4748,8 @@ module Aws::BedrockAgentCoreControl
       :description,
       :target_configuration,
       :credential_provider_configurations,
-      :last_synchronized_at)
+      :last_synchronized_at,
+      :metadata_configuration)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -6778,6 +6802,34 @@ module Aws::BedrockAgentCoreControl
     #
     class MessageBasedTriggerInput < Struct.new(
       :message_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for HTTP header and query parameter propagation between
+    # the gateway and target servers.
+    #
+    # @!attribute [rw] allowed_request_headers
+    #   A list of HTTP headers that are allowed to be propagated from
+    #   incoming client requests to the target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_query_parameters
+    #   A list of URL query parameters that are allowed to be propagated
+    #   from incoming gateway URL to the target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_response_headers
+    #   A list of HTTP headers that are allowed to be propagated from the
+    #   target response back to the client.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/MetadataConfiguration AWS API Documentation
+    #
+    class MetadataConfiguration < Struct.new(
+      :allowed_request_headers,
+      :allowed_query_parameters,
+      :allowed_response_headers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9551,6 +9603,11 @@ module Aws::BedrockAgentCoreControl
     #   target.
     #   @return [Array<Types::CredentialProviderConfiguration>]
     #
+    # @!attribute [rw] metadata_configuration
+    #   Configuration for HTTP header and query parameter propagation to the
+    #   gateway target.
+    #   @return [Types::MetadataConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayTargetRequest AWS API Documentation
     #
     class UpdateGatewayTargetRequest < Struct.new(
@@ -9559,7 +9616,8 @@ module Aws::BedrockAgentCoreControl
       :name,
       :description,
       :target_configuration,
-      :credential_provider_configurations)
+      :credential_provider_configurations,
+      :metadata_configuration)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -9610,6 +9668,10 @@ module Aws::BedrockAgentCoreControl
     #   The date and time at which the targets were last synchronized.
     #   @return [Time]
     #
+    # @!attribute [rw] metadata_configuration
+    #   The metadata configuration that was applied to the gateway target.
+    #   @return [Types::MetadataConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateGatewayTargetResponse AWS API Documentation
     #
     class UpdateGatewayTargetResponse < Struct.new(
@@ -9623,7 +9685,8 @@ module Aws::BedrockAgentCoreControl
       :description,
       :target_configuration,
       :credential_provider_configurations,
-      :last_synchronized_at)
+      :last_synchronized_at,
+      :metadata_configuration)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end

@@ -1311,11 +1311,11 @@ module Aws::QBusiness
     #   [1]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html
     #
     # @option params [Types::QuickSightConfiguration] :quick_sight_configuration
-    #   The Amazon QuickSight configuration for an Amazon Q Business
-    #   application that uses QuickSight for authentication. This
-    #   configuration is required if your application uses QuickSight as the
-    #   identity provider. For more information, see [Creating an Amazon
-    #   QuickSight integrated application][1].
+    #   The Amazon Quick Suite configuration for an Amazon Q Business
+    #   application that uses Quick Suite for authentication. This
+    #   configuration is required if your application uses Quick Suite as the
+    #   identity provider. For more information, see [Creating an Amazon Quick
+    #   Suite integrated application][1].
     #
     #
     #
@@ -6255,7 +6255,7 @@ module Aws::QBusiness
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qbusiness'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

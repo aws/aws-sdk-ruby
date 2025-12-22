@@ -2910,7 +2910,8 @@ module Aws::Connect
     # creation of all table properties except for attributes and values. A
     # table with no attributes and values is a valid state for a table. The
     # number of tables per instance is limited to 100 per instance.
-    # Customers can request an increase by using AWS Service Quotas.
+    # Customers can request an increase by using Amazon Web Services Service
+    # Quotas.
     #
     # @option params [required, String] :instance_id
     #   The unique identifier for the Amazon Connect instance where the data
@@ -9845,7 +9846,7 @@ module Aws::Connect
     # value to help identify values that are actively in use. The term
     # "Batch" is not included in the operation name since it does not meet
     # all the criteria for a batch operation as specified in Batch
-    # Operations: AWS API Standards.
+    # Operations: Amazon Web Services API Standards.
     #
     # @option params [required, String] :instance_id
     #   The unique identifier for the Amazon Connect instance.
@@ -10171,6 +10172,10 @@ module Aws::Connect
     #
     #   * AgentStatuses: 50
     #
+    #   * Subtypes: 10
+    #
+    #   * ValidationTestTypes: 10
+    #
     #   Metric data is retrieved only for the resources associated with the
     #   queues or routing profiles, and by any channels included in the
     #   filter. (You cannot filter by both queue AND routing profile.) You can
@@ -10178,6 +10183,12 @@ module Aws::Connect
     #
     #   When using `AgentStatuses` as filter make sure Queues is added as
     #   primary filter.
+    #
+    #   When using `Subtypes` as filter make sure Queues is added as primary
+    #   filter.
+    #
+    #   When using `ValidationTestTypes` as filter make sure Queues is added
+    #   as primary filter.
     #
     #   When using the `RoutingStepExpression` filter, you need to pass
     #   exactly one `QueueId`. The filter is also case sensitive so when using
@@ -10206,6 +10217,10 @@ module Aws::Connect
     #     `AGENT_STATUS`, the only metric available is the `AGENTS_ONLINE`
     #     metric.
     #
+    #   * If you group by `SUBTYPE` or `VALIDATION_TEST_TYPE` as secondary
+    #     grouping then you must include `QUEUE` as primary grouping and use
+    #     Queue as filter
+    #
     #   * If you group by `ROUTING_PROFILE`, you must include either a queue
     #     or routing profile filter. In addition, a routing profile filter is
     #     required for metrics `CONTACTS_SCHEDULED`, `CONTACTS_IN_QUEUE`, and
@@ -10215,10 +10230,16 @@ module Aws::Connect
     #     `ROUTING_STEP_EXPRESSION` is required.
     #
     # @option params [required, Array<Types::CurrentMetric>] :current_metrics
-    #   The metrics to retrieve. Specify the name and unit for each metric.
-    #   The following metrics are available. For a description of all the
-    #   metrics, see [Metrics definitions][1] in the *Amazon Connect
+    #   The metrics to retrieve. Specify the name or metricId, and unit for
+    #   each metric. The following metrics are available. For a description of
+    #   all the metrics, see [Metrics definitions][1] in the *Amazon Connect
     #   Administrator Guide*.
+    #
+    #   <note markdown="1"> MetricId should be used to reference custom metrics or out of the box
+    #   metrics as Arn. If using MetricId, the limit is 10 MetricId per
+    #   request.
+    #
+    #    </note>
     #
     #   AGENTS\_AFTER\_CONTACT\_WORK
     #
@@ -10375,11 +10396,14 @@ module Aws::Connect
     #       routing_profiles: ["RoutingProfileId"],
     #       routing_step_expressions: ["RoutingExpression"],
     #       agent_statuses: ["AgentStatusId"],
+    #       subtypes: ["Subtype"],
+    #       validation_test_types: ["ValidationTestType"],
     #     },
-    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, ROUTING_STEP_EXPRESSION, AGENT_STATUS
+    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, ROUTING_STEP_EXPRESSION, AGENT_STATUS, SUBTYPE, VALIDATION_TEST_TYPE
     #     current_metrics: [ # required
     #       {
     #         name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
+    #         metric_id: "CurrentMetricId",
     #         unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
     #       },
     #     ],
@@ -10405,8 +10429,11 @@ module Aws::Connect
     #   resp.metric_results[0].dimensions.routing_step_expression #=> String
     #   resp.metric_results[0].dimensions.agent_status.arn #=> String
     #   resp.metric_results[0].dimensions.agent_status.id #=> String
+    #   resp.metric_results[0].dimensions.subtype #=> String
+    #   resp.metric_results[0].dimensions.validation_test_type #=> String
     #   resp.metric_results[0].collections #=> Array
     #   resp.metric_results[0].collections[0].metric.name #=> String, one of "AGENTS_ONLINE", "AGENTS_AVAILABLE", "AGENTS_ON_CALL", "AGENTS_NON_PRODUCTIVE", "AGENTS_AFTER_CONTACT_WORK", "AGENTS_ERROR", "AGENTS_STAFFED", "CONTACTS_IN_QUEUE", "OLDEST_CONTACT_AGE", "CONTACTS_SCHEDULED", "AGENTS_ON_CONTACT", "SLOTS_ACTIVE", "SLOTS_AVAILABLE"
+    #   resp.metric_results[0].collections[0].metric.metric_id #=> String
     #   resp.metric_results[0].collections[0].metric.unit #=> String, one of "SECONDS", "COUNT", "PERCENT"
     #   resp.metric_results[0].collections[0].value #=> Float
     #   resp.data_snapshot_time #=> Time
@@ -11040,8 +11067,10 @@ module Aws::Connect
     #       routing_profiles: ["RoutingProfileId"],
     #       routing_step_expressions: ["RoutingExpression"],
     #       agent_statuses: ["AgentStatusId"],
+    #       subtypes: ["Subtype"],
+    #       validation_test_types: ["ValidationTestType"],
     #     },
-    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, ROUTING_STEP_EXPRESSION, AGENT_STATUS
+    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, ROUTING_STEP_EXPRESSION, AGENT_STATUS, SUBTYPE, VALIDATION_TEST_TYPE
     #     historical_metrics: [ # required
     #       {
     #         name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
@@ -11069,6 +11098,8 @@ module Aws::Connect
     #   resp.metric_results[0].dimensions.routing_step_expression #=> String
     #   resp.metric_results[0].dimensions.agent_status.arn #=> String
     #   resp.metric_results[0].dimensions.agent_status.id #=> String
+    #   resp.metric_results[0].dimensions.subtype #=> String
+    #   resp.metric_results[0].dimensions.validation_test_type #=> String
     #   resp.metric_results[0].collections #=> Array
     #   resp.metric_results[0].collections[0].metric.name #=> String, one of "CONTACTS_QUEUED", "CONTACTS_HANDLED", "CONTACTS_ABANDONED", "CONTACTS_CONSULTED", "CONTACTS_AGENT_HUNG_UP_FIRST", "CONTACTS_HANDLED_INCOMING", "CONTACTS_HANDLED_OUTBOUND", "CONTACTS_HOLD_ABANDONS", "CONTACTS_TRANSFERRED_IN", "CONTACTS_TRANSFERRED_OUT", "CONTACTS_TRANSFERRED_IN_FROM_QUEUE", "CONTACTS_TRANSFERRED_OUT_FROM_QUEUE", "CONTACTS_MISSED", "CALLBACK_CONTACTS_HANDLED", "API_CONTACTS_HANDLED", "OCCUPANCY", "HANDLE_TIME", "AFTER_CONTACT_WORK_TIME", "QUEUED_TIME", "ABANDON_TIME", "QUEUE_ANSWER_TIME", "HOLD_TIME", "INTERACTION_TIME", "INTERACTION_AND_HOLD_TIME", "SERVICE_LEVEL"
     #   resp.metric_results[0].collections[0].metric.threshold.comparison #=> String, one of "LT"
@@ -14386,8 +14417,8 @@ module Aws::Connect
 
     # Returns all attributes for a specified data table. A maximum of 100
     # attributes per data table is allowed. Customers can request an
-    # increase by using AWS Service Quotas. The response can be filtered by
-    # specific attribute IDs for CloudFormation integration.
+    # increase by using Amazon Web Services Service Quotas. The response can
+    # be filtered by specific attribute IDs for CloudFormation integration.
     #
     # @option params [required, String] :instance_id
     #   The unique identifier for the Amazon Connect instance.
@@ -15555,8 +15586,8 @@ module Aws::Connect
     #   claimed to. You can [find the instance ID][1] in the Amazon Resource
     #   Name (ARN) of the instance. If both `TargetArn` and `InstanceId` are
     #   not provided, this API lists numbers claimed to all the Amazon Connect
-    #   instances belonging to your account in the same AWS Region as the
-    #   request.
+    #   instances belonging to your account in the same Amazon Web Services
+    #   Region as the request.
     #
     #
     #
@@ -21019,13 +21050,6 @@ module Aws::Connect
     #   customer ends the chat session, allowing them to continue through
     #   disconnect flows such as surveys or feedback forms.
     #
-    #   Valid value: `AGENT`.
-    #
-    #   With the `DisconnectOnCustomerExit` parameter, you can configure
-    #   automatic agent disconnection when end customers end the chat,
-    #   ensuring that disconnect flows are triggered consistently regardless
-    #   of which participant disconnects first.
-    #
     # @return [Types::StartChatContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartChatContactResponse#contact_id #contact_id} => String
@@ -21551,31 +21575,36 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Initiates a new outbound SMS contact to a customer. Response of this
-    # API provides the `ContactId` of the outbound SMS contact created.
+    # Initiates a new outbound SMS or WhatsApp contact to a customer.
+    # Response of this API provides the `ContactId` of the outbound SMS or
+    # WhatsApp contact created.
     #
     # **SourceEndpoint** only supports Endpoints with
     # `CONNECT_PHONENUMBER_ARN` as Type and **DestinationEndpoint** only
     # supports Endpoints with `TELEPHONE_NUMBER` as Type. **ContactFlowId**
-    # initiates the flow to manage the new SMS contact created.
+    # initiates the flow to manage the new contact created.
     #
-    # This API can be used to initiate outbound SMS contacts for an agent,
-    # or it can also deflect an ongoing contact to an outbound SMS contact
-    # by using the [StartOutboundChatContact][1] Flow Action.
+    # This API can be used to initiate outbound SMS or WhatsApp contacts for
+    # an agent, or it can also deflect an ongoing contact to an outbound SMS
+    # or WhatsApp contact by using the [StartOutboundChatContact][1] Flow
+    # Action.
     #
-    # For more information about using SMS in Amazon Connect, see the
-    # following topics in the *Amazon Connect Administrator Guide*:
+    # For more information about using SMS or WhatsApp in Amazon Connect,
+    # see the following topics in the *Amazon Connect Administrator Guide*:
     #
     # * [Set up SMS messaging][2]
     #
-    # * [Request an SMS-enabled phone number through AWS End User Messaging
-    #   SMS][3]
+    # * [Request an SMS-enabled phone number through Amazon Web Services End
+    #   User Messaging SMS][3]
+    #
+    # * [Set up WhatsApp Business messaging][4]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartOutboundChatContact.html
     # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-sms-messaging.html
     # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/sms-number.html
+    # [4]: https://docs.aws.amazon.com/connect/latest/adminguide/whatsapp-integration.html
     #
     # @option params [required, Types::Endpoint] :source_endpoint
     #   Information about the endpoint.
@@ -21595,7 +21624,7 @@ module Aws::Connect
     #   * Attribute keys can include only alphanumeric, `-`, and `_`.
     #
     #   * This field can be used to show channel subtype, such as
-    #     `connect:Guide` and `connect:SMS`.
+    #     `connect:SMS` and `connect:WhatsApp`.
     #
     # @option params [Hash<String,String>] :attributes
     #   A custom key-value pair using an attribute map. The attributes are
@@ -21658,11 +21687,11 @@ module Aws::Connect
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If not provided, the AWS SDK populates
-    #   this field. For more information about idempotency, see [Making
-    #   retries safe with idempotent APIs][1]. The token is valid for 7 days
-    #   after creation. If a contact is already started, the contact ID is
-    #   returned.
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1]. The token is valid for
+    #   7 days after creation. If a contact is already started, the contact ID
+    #   is returned.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -26819,7 +26848,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.229.0'
+      context[:gem_version] = '1.230.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

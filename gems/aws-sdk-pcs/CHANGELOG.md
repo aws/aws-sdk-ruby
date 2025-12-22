@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2025-12-22)
+------------------
+
+* Feature - Change API Reference Documentation for default Mode in Accounting and SlurmRest
+
 1.36.0 (2025-11-21)
 ------------------
 

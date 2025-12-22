@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2025-12-18)
+------------------
+
+* Feature - Amazon OpenSearch Service adds support for warm nodes, enabling new multi-tier architecture.
+
 1.82.0 (2025-12-10)
 ------------------
 

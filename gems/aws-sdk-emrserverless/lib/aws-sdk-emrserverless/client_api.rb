@@ -79,6 +79,7 @@ module Aws::EMRServerless
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JobArn = Shapes::StringShape.new(name: 'JobArn')
     JobDriver = Shapes::UnionShape.new(name: 'JobDriver')
+    JobLevelCostAllocationConfiguration = Shapes::StructureShape.new(name: 'JobLevelCostAllocationConfiguration')
     JobRun = Shapes::StructureShape.new(name: 'JobRun')
     JobRunAttemptSummary = Shapes::StructureShape.new(name: 'JobRunAttemptSummary')
     JobRunAttempts = Shapes::ListShape.new(name: 'JobRunAttempts')
@@ -189,6 +190,7 @@ module Aws::EMRServerless
     Application.add_member(:interactive_configuration, Shapes::ShapeRef.new(shape: InteractiveConfiguration, location_name: "interactiveConfiguration"))
     Application.add_member(:scheduler_configuration, Shapes::ShapeRef.new(shape: SchedulerConfiguration, location_name: "schedulerConfiguration"))
     Application.add_member(:identity_center_configuration, Shapes::ShapeRef.new(shape: IdentityCenterConfiguration, location_name: "identityCenterConfiguration"))
+    Application.add_member(:job_level_cost_allocation_configuration, Shapes::ShapeRef.new(shape: JobLevelCostAllocationConfiguration, location_name: "jobLevelCostAllocationConfiguration"))
     Application.struct_class = Types::Application
 
     ApplicationList.member = Shapes::ShapeRef.new(shape: ApplicationSummary)
@@ -262,6 +264,7 @@ module Aws::EMRServerless
     CreateApplicationRequest.add_member(:interactive_configuration, Shapes::ShapeRef.new(shape: InteractiveConfiguration, location_name: "interactiveConfiguration"))
     CreateApplicationRequest.add_member(:scheduler_configuration, Shapes::ShapeRef.new(shape: SchedulerConfiguration, location_name: "schedulerConfiguration"))
     CreateApplicationRequest.add_member(:identity_center_configuration, Shapes::ShapeRef.new(shape: IdentityCenterConfigurationInput, location_name: "identityCenterConfiguration"))
+    CreateApplicationRequest.add_member(:job_level_cost_allocation_configuration, Shapes::ShapeRef.new(shape: JobLevelCostAllocationConfiguration, location_name: "jobLevelCostAllocationConfiguration"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationId"))
@@ -341,6 +344,9 @@ module Aws::EMRServerless
     JobDriver.add_member_subclass(:hive, Types::JobDriver::Hive)
     JobDriver.add_member_subclass(:unknown, Types::JobDriver::Unknown)
     JobDriver.struct_class = Types::JobDriver
+
+    JobLevelCostAllocationConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    JobLevelCostAllocationConfiguration.struct_class = Types::JobLevelCostAllocationConfiguration
 
     JobRun.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationId"))
     JobRun.add_member(:job_run_id, Shapes::ShapeRef.new(shape: JobRunId, required: true, location_name: "jobRunId"))
@@ -585,6 +591,7 @@ module Aws::EMRServerless
     UpdateApplicationRequest.add_member(:monitoring_configuration, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
     UpdateApplicationRequest.add_member(:scheduler_configuration, Shapes::ShapeRef.new(shape: SchedulerConfiguration, location_name: "schedulerConfiguration"))
     UpdateApplicationRequest.add_member(:identity_center_configuration, Shapes::ShapeRef.new(shape: IdentityCenterConfigurationInput, location_name: "identityCenterConfiguration"))
+    UpdateApplicationRequest.add_member(:job_level_cost_allocation_configuration, Shapes::ShapeRef.new(shape: JobLevelCostAllocationConfiguration, location_name: "jobLevelCostAllocationConfiguration"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
     UpdateApplicationResponse.add_member(:application, Shapes::ShapeRef.new(shape: Application, required: true, location_name: "application"))

@@ -139,7 +139,7 @@ module Aws::ECR
       attr_accessor image_tag_mutability_exclusion_filters: ::Array[Types::ImageTagMutabilityExclusionFilter]
       attr_accessor repository_policy: ::String
       attr_accessor lifecycle_policy: ::String
-      attr_accessor applied_for: ::Array[("REPLICATION" | "PULL_THROUGH_CACHE")]
+      attr_accessor applied_for: ::Array[("REPLICATION" | "PULL_THROUGH_CACHE" | "CREATE_ON_PUSH")]
       attr_accessor custom_role_arn: ::String
       SENSITIVE: []
     end
@@ -1128,7 +1128,7 @@ module Aws::ECR
       attr_accessor image_tag_mutability_exclusion_filters: ::Array[Types::ImageTagMutabilityExclusionFilter]
       attr_accessor repository_policy: ::String
       attr_accessor lifecycle_policy: ::String
-      attr_accessor applied_for: ::Array[("REPLICATION" | "PULL_THROUGH_CACHE")]
+      attr_accessor applied_for: ::Array[("REPLICATION" | "PULL_THROUGH_CACHE" | "CREATE_ON_PUSH")]
       attr_accessor custom_role_arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
@@ -1401,7 +1401,7 @@ module Aws::ECR
       attr_accessor image_tag_mutability_exclusion_filters: ::Array[Types::ImageTagMutabilityExclusionFilter]
       attr_accessor repository_policy: ::String
       attr_accessor lifecycle_policy: ::String
-      attr_accessor applied_for: ::Array[("REPLICATION" | "PULL_THROUGH_CACHE")]
+      attr_accessor applied_for: ::Array[("REPLICATION" | "PULL_THROUGH_CACHE" | "CREATE_ON_PUSH")]
       attr_accessor custom_role_arn: ::String
       SENSITIVE: []
     end

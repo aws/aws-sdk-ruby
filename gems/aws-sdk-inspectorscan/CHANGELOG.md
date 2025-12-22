@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2025-12-17)
+------------------
+
+* Feature - Adds an additional OutputFormat
+
 1.30.0 (2025-11-21)
 ------------------
 

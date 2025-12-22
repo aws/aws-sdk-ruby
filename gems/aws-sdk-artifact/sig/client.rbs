@@ -134,6 +134,19 @@ module Aws
                                     ) -> _ListCustomerAgreementsResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomerAgreementsResponseSuccess
 
+      interface _ListReportVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReportVersionsResponse]
+        def reports: () -> ::Array[Types::ReportSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Artifact/Client.html#list_report_versions-instance_method
+      def list_report_versions: (
+                                  report_id: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListReportVersionsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReportVersionsResponseSuccess
+
       interface _ListReportsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListReportsResponse]
         def reports: () -> ::Array[Types::ReportSummary]

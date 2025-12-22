@@ -104,6 +104,55 @@ module Aws::PaymentCryptographyData
       include Aws::Structure
     end
 
+    # Parameter information for generating a random key for KEK validation
+    # to perform node-to-node initialization.
+    #
+    # @note As2805KekValidationType is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] kek_validation_request
+    #   Parameter information for generating a KEK validation request during
+    #   node-to-node initialization.
+    #   @return [Types::KekValidationRequest]
+    #
+    # @!attribute [rw] kek_validation_response
+    #   Parameter information for generating a KEK validation response
+    #   during node-to-node initialization.
+    #   @return [Types::KekValidationResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/As2805KekValidationType AWS API Documentation
+    #
+    class As2805KekValidationType < Struct.new(
+      :kek_validation_request,
+      :kek_validation_response,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class KekValidationRequest < As2805KekValidationType; end
+      class KekValidationResponse < As2805KekValidationType; end
+      class Unknown < As2805KekValidationType; end
+    end
+
+    # Parameter information to use a PEK derived using AS2805.
+    #
+    # @!attribute [rw] system_trace_audit_number
+    #   The system trace audit number for the transaction.
+    #   @return [String]
+    #
+    # @!attribute [rw] transaction_amount
+    #   The transaction amount for the transaction.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/As2805PekDerivationAttributes AWS API Documentation
+    #
+    class As2805PekDerivationAttributes < Struct.new(
+      :system_trace_audit_number,
+      :transaction_amount)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Parameters for plaintext encryption using asymmetric keys.
     #
     # @!attribute [rw] padding_type
@@ -1043,6 +1092,62 @@ module Aws::PaymentCryptographyData
     end
 
     # @!attribute [rw] key_identifier
+    #   The `keyARN` of sending KEK that Amazon Web Services Payment
+    #   Cryptography uses for node-to-node initialization
+    #   @return [String]
+    #
+    # @!attribute [rw] kek_validation_type
+    #   Parameter information for generating a random key for KEK validation
+    #   to perform node-to-node initialization.
+    #   @return [Types::As2805KekValidationType]
+    #
+    # @!attribute [rw] random_key_send_variant_mask
+    #   The key variant to use for generating a random key for KEK
+    #   validation during node-to-node initialization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/GenerateAs2805KekValidationInput AWS API Documentation
+    #
+    class GenerateAs2805KekValidationInput < Struct.new(
+      :key_identifier,
+      :kek_validation_type,
+      :random_key_send_variant_mask)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_arn
+    #   The `keyARN` of sending KEK that Amazon Web Services Payment
+    #   Cryptography validates for node-to-node initialization
+    #   @return [String]
+    #
+    # @!attribute [rw] key_check_value
+    #   The key check value (KCV) of the sending KEK that Amazon Web
+    #   Services Payment Cryptography validates for node-to-node
+    #   initialization.
+    #   @return [String]
+    #
+    # @!attribute [rw] random_key_send
+    #   The random key generated for sending KEK validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] random_key_receive
+    #   The random key generated for receiving KEK validation. The
+    #   initiating node sends this key to its partner node for validation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/GenerateAs2805KekValidationOutput AWS API Documentation
+    #
+    class GenerateAs2805KekValidationOutput < Struct.new(
+      :key_arn,
+      :key_check_value,
+      :random_key_send,
+      :random_key_receive)
+      SENSITIVE = [:random_key_send, :random_key_receive]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_identifier
     #   The `keyARN` of the CVK encryption key that Amazon Web Services
     #   Payment Cryptography uses to generate card data.
     #   @return [String]
@@ -1308,9 +1413,7 @@ module Aws::PaymentCryptographyData
     #   except that the fill digits are random values from 10 to 15.
     #
     #   The `ISO_Format_4` PIN block format is the only one supporting AES
-    #   encryption. It is similar to `ISO_Format_3` but doubles the pin
-    #   block length by padding with fill digit A and random values from 10
-    #   to 15.
+    #   encryption.
     #   @return [String]
     #
     # @!attribute [rw] encryption_wrapped_key
@@ -1625,6 +1728,37 @@ module Aws::PaymentCryptographyData
     class InternalServerException < Struct.new(
       :message)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Parameter information for generating a KEK validation request during
+    # node-to-node initialization.
+    #
+    # @!attribute [rw] derive_key_algorithm
+    #   The key derivation algorithm to use for generating a KEK validation
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/KekValidationRequest AWS API Documentation
+    #
+    class KekValidationRequest < Struct.new(
+      :derive_key_algorithm)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Parameter information for generating a KEK validation response during
+    # node-to-node initialization.
+    #
+    # @!attribute [rw] random_key_send
+    #   The random key for generating a KEK validation response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/KekValidationResponse AWS API Documentation
+    #
+    class KekValidationResponse < Struct.new(
+      :random_key_send)
+      SENSITIVE = [:random_key_send]
       include Aws::Structure
     end
 
@@ -2320,7 +2454,8 @@ module Aws::PaymentCryptographyData
     #   @return [Types::OutgoingKeyMaterial]
     #
     # @!attribute [rw] key_check_value_algorithm
-    #   The key check value (KCV) algorithm used for calculating the KCV.
+    #   The key check value (KCV) algorithm used for calculating the KCV of
+    #   the derived key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/TranslateKeyMaterialInput AWS API Documentation
@@ -2395,6 +2530,11 @@ module Aws::PaymentCryptographyData
     #   outgoing PIN block data.
     #   @return [Types::WrappedKey]
     #
+    # @!attribute [rw] incoming_as_2805_attributes
+    #   The attributes and values to use for incoming AS2805 encryption key
+    #   for PIN block translation.
+    #   @return [Types::As2805PekDerivationAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/TranslatePinDataInput AWS API Documentation
     #
     class TranslatePinDataInput < Struct.new(
@@ -2406,7 +2546,8 @@ module Aws::PaymentCryptographyData
       :incoming_dukpt_attributes,
       :outgoing_dukpt_attributes,
       :incoming_wrapped_key,
-      :outgoing_wrapped_key)
+      :outgoing_wrapped_key,
+      :incoming_as_2805_attributes)
       SENSITIVE = [:encrypted_pin_block]
       include Aws::Structure
     end
@@ -2446,20 +2587,24 @@ module Aws::PaymentCryptographyData
     # @note TranslationIsoFormats is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] iso_format_0
-    #   Parameters that are required for ISO9564 PIN format 0 tranlation.
+    #   Parameters that are required for ISO9564 PIN format 0 translation.
     #   @return [Types::TranslationPinDataIsoFormat034]
     #
     # @!attribute [rw] iso_format_1
-    #   Parameters that are required for ISO9564 PIN format 1 tranlation.
+    #   Parameters that are required for ISO9564 PIN format 1 translation.
     #   @return [Types::TranslationPinDataIsoFormat1]
     #
     # @!attribute [rw] iso_format_3
-    #   Parameters that are required for ISO9564 PIN format 3 tranlation.
+    #   Parameters that are required for ISO9564 PIN format 3 translation.
     #   @return [Types::TranslationPinDataIsoFormat034]
     #
     # @!attribute [rw] iso_format_4
-    #   Parameters that are required for ISO9564 PIN format 4 tranlation.
+    #   Parameters that are required for ISO9564 PIN format 4 translation.
     #   @return [Types::TranslationPinDataIsoFormat034]
+    #
+    # @!attribute [rw] as_2805_format_0
+    #   Parameters that are required for AS2805 PIN format 0 translation.
+    #   @return [Types::TranslationPinDataAs2805Format0]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/TranslationIsoFormats AWS API Documentation
     #
@@ -2468,6 +2613,7 @@ module Aws::PaymentCryptographyData
       :iso_format_1,
       :iso_format_3,
       :iso_format_4,
+      :as_2805_format_0,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -2477,11 +2623,29 @@ module Aws::PaymentCryptographyData
       class IsoFormat1 < TranslationIsoFormats; end
       class IsoFormat3 < TranslationIsoFormats; end
       class IsoFormat4 < TranslationIsoFormats; end
+      class As2805Format0 < TranslationIsoFormats; end
       class Unknown < TranslationIsoFormats; end
     end
 
-    # Parameters that are required for tranlation between ISO9564 PIN format
-    # 0,3,4 tranlation.
+    # Parameters that are required for translation between AS2805 PIN format
+    # 0 translation.
+    #
+    # @!attribute [rw] primary_account_number
+    #   The Primary Account Number (PAN) of the cardholder. A PAN is a
+    #   unique identifier for a payment credit or debit card and associates
+    #   the card to a specific account holder.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/TranslationPinDataAs2805Format0 AWS API Documentation
+    #
+    class TranslationPinDataAs2805Format0 < Struct.new(
+      :primary_account_number)
+      SENSITIVE = [:primary_account_number]
+      include Aws::Structure
+    end
+
+    # Parameters that are required for translation between ISO9564 PIN
+    # format 0,3,4 translation.
     #
     # @!attribute [rw] primary_account_number
     #   The Primary Account Number (PAN) of the cardholder. A PAN is a
@@ -2497,7 +2661,7 @@ module Aws::PaymentCryptographyData
       include Aws::Structure
     end
 
-    # Parameters that are required for ISO9564 PIN format 1 tranlation.
+    # Parameters that are required for ISO9564 PIN format 1 translation.
     #
     # @api private
     #

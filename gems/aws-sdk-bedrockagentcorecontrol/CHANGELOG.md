@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2025-12-18)
+------------------
+
+* Feature - Feature to support header exchanges between Bedrock AgentCore Gateway Targets and client, along with propagating query parameter to the configured targets.
+
 1.17.0 (2025-12-15)
 ------------------
 

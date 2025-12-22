@@ -235,9 +235,20 @@ module Aws
                                          region: ::String?
                                        },
                                      ]?
+                                   }?,
+                                   document_db_config: {
+                                     timeout_minutes: ::Integer?,
+                                     cross_account_role: ::String?,
+                                     external_id: ::String?,
+                                     behavior: ("switchoverOnly" | "failover"),
+                                     ungraceful: {
+                                       ungraceful: ("failover")?
+                                     }?,
+                                     global_cluster_identifier: ::String,
+                                     database_cluster_arns: Array[::String]
                                    }?
                                  },
-                                 execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck")
+                                 execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb")
                                },
                              ]?,
                              workflow_target_action: ("activate" | "deactivate"),
@@ -267,6 +278,16 @@ module Aws
                              min_delay_minutes_between_executions: ::Integer
                            },
                          ],
+                         ?report_configuration: {
+                           report_output: Array[
+                             {
+                               s3_configuration: {
+                                 bucket_path: ::String?,
+                                 bucket_owner: ::String?
+                               }?
+                             },
+                           ]?
+                         },
                          name: ::String,
                          regions: Array[::String],
                          recovery_approach: ("activeActive" | "activePassive"),
@@ -328,6 +349,7 @@ module Aws
         def step_states: () -> ::Array[Types::StepState]
         def plan: () -> Types::Plan
         def actual_recovery_time: () -> ::String
+        def generated_report_details: () -> ::Array[Types::GeneratedReport]
         def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#get_plan_execution-instance_method
@@ -416,6 +438,21 @@ module Aws
                                          ?next_token: ::String
                                        ) -> _ListRoute53HealthChecksResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRoute53HealthChecksResponseSuccess
+
+      interface _ListRoute53HealthChecksInRegionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRoute53HealthChecksInRegionResponse]
+        def health_checks: () -> ::Array[Types::Route53HealthCheck]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ARCRegionswitch/Client.html#list_route_53_health_checks_in_region-instance_method
+      def list_route_53_health_checks_in_region: (
+                                                   arn: ::String,
+                                                   ?hosted_zone_id: ::String,
+                                                   ?record_name: ::String,
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String
+                                                 ) -> _ListRoute53HealthChecksInRegionResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRoute53HealthChecksInRegionResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
@@ -599,9 +636,20 @@ module Aws
                                          region: ::String?
                                        },
                                      ]?
+                                   }?,
+                                   document_db_config: {
+                                     timeout_minutes: ::Integer?,
+                                     cross_account_role: ::String?,
+                                     external_id: ::String?,
+                                     behavior: ("switchoverOnly" | "failover"),
+                                     ungraceful: {
+                                       ungraceful: ("failover")?
+                                     }?,
+                                     global_cluster_identifier: ::String,
+                                     database_cluster_arns: Array[::String]
                                    }?
                                  },
-                                 execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck")
+                                 execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb")
                                },
                              ]?,
                              workflow_target_action: ("activate" | "deactivate"),
@@ -630,7 +678,17 @@ module Aws
                              ],
                              min_delay_minutes_between_executions: ::Integer
                            },
-                         ]
+                         ],
+                         ?report_configuration: {
+                           report_output: Array[
+                             {
+                               s3_configuration: {
+                                 bucket_path: ::String?,
+                                 bucket_owner: ::String?
+                               }?
+                             },
+                           ]?
+                         }
                        ) -> _UpdatePlanResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePlanResponseSuccess
 

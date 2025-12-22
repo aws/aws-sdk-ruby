@@ -934,6 +934,11 @@ module Aws::SESV2
     #   [1]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom-faq
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An array of objects that define the tags (keys and values) to
+    #   associate with the custom verification email template.
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] success_redirection_url
     #   The URL that the recipient of the verification email is sent to if
     #   his or her address is successfully verified.
@@ -951,6 +956,7 @@ module Aws::SESV2
       :from_email_address,
       :template_subject,
       :template_content,
+      :tags,
       :success_redirection_url,
       :failure_redirection_url)
       SENSITIVE = []
@@ -1206,11 +1212,17 @@ module Aws::SESV2
     #   HTML part, and a text-only part.
     #   @return [Types::EmailTemplateContent]
     #
+    # @!attribute [rw] tags
+    #   An array of objects that define the tags (keys and values) to
+    #   associate with the email template.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateEmailTemplateRequest AWS API Documentation
     #
     class CreateEmailTemplateRequest < Struct.new(
       :template_name,
-      :template_content)
+      :template_content,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2705,6 +2717,64 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # Contains individual validation checks performed on an email address.
+    #
+    # @!attribute [rw] has_valid_syntax
+    #   Checks that the email address follows proper RFC standards and
+    #   contains valid characters in the correct format.
+    #   @return [Types::EmailAddressInsightsVerdict]
+    #
+    # @!attribute [rw] has_valid_dns_records
+    #   Checks that the domain exists, has valid DNS records, and is
+    #   conﬁgured to receive email.
+    #   @return [Types::EmailAddressInsightsVerdict]
+    #
+    # @!attribute [rw] mailbox_exists
+    #   Checks that the mailbox exists and can receive messages without
+    #   actually sending an email.
+    #   @return [Types::EmailAddressInsightsVerdict]
+    #
+    # @!attribute [rw] is_role_address
+    #   Identiﬁes role-based addresses (such as admin@, support@, or info@)
+    #   that may have lower engagement rates.
+    #   @return [Types::EmailAddressInsightsVerdict]
+    #
+    # @!attribute [rw] is_disposable
+    #   Checks disposable or temporary email addresses that could negatively
+    #   impact your sender reputation.
+    #   @return [Types::EmailAddressInsightsVerdict]
+    #
+    # @!attribute [rw] is_random_input
+    #   Checks if the input appears to be random text.
+    #   @return [Types::EmailAddressInsightsVerdict]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/EmailAddressInsightsMailboxEvaluations AWS API Documentation
+    #
+    class EmailAddressInsightsMailboxEvaluations < Struct.new(
+      :has_valid_syntax,
+      :has_valid_dns_records,
+      :mailbox_exists,
+      :is_role_address,
+      :is_disposable,
+      :is_random_input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the overall validation verdict for an email address.
+    #
+    # @!attribute [rw] confidence_verdict
+    #   The confidence level of the validation verdict.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/EmailAddressInsightsVerdict AWS API Documentation
+    #
+    class EmailAddressInsightsVerdict < Struct.new(
+      :confidence_verdict)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that defines the entire content of the email, including the
     # message headers, body content, and attachments. For a simple email
     # message, you specify the subject and provide both text and HTML
@@ -3642,6 +3712,11 @@ module Aws::SESV2
     #   The content of the custom verification email.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An array of objects that define the tags (keys and values) that are
+    #   associated with the custom verification email template.
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] success_redirection_url
     #   The URL that the recipient of the verification email is sent to if
     #   his or her address is successfully verified.
@@ -3659,6 +3734,7 @@ module Aws::SESV2
       :from_email_address,
       :template_subject,
       :template_content,
+      :tags,
       :success_redirection_url,
       :failure_redirection_url)
       SENSITIVE = []
@@ -3989,6 +4065,34 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # A request to return validation insights about an email address.
+    #
+    # @!attribute [rw] email_address
+    #   The email address to analyze for validation insights.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetEmailAddressInsightsRequest AWS API Documentation
+    #
+    class GetEmailAddressInsightsRequest < Struct.new(
+      :email_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Validation insights about an email address.
+    #
+    # @!attribute [rw] mailbox_validation
+    #   Detailed validation results for the email address.
+    #   @return [Types::MailboxValidation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetEmailAddressInsightsResponse AWS API Documentation
+    #
+    class GetEmailAddressInsightsResponse < Struct.new(
+      :mailbox_validation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A request to return the policies of an email identity.
     #
     # @!attribute [rw] email_identity
@@ -4154,11 +4258,17 @@ module Aws::SESV2
     #   HTML part, and a text-only part.
     #   @return [Types::EmailTemplateContent]
     #
+    # @!attribute [rw] tags
+    #   An array of objects that define the tags (keys and values) that are
+    #   associated with the email template.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetEmailTemplateResponse AWS API Documentation
     #
     class GetEmailTemplateResponse < Struct.new(
       :template_name,
-      :template_content)
+      :template_content,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5943,6 +6053,25 @@ module Aws::SESV2
     #
     class MailFromDomainNotVerifiedException < Aws::EmptyStructure; end
 
+    # Contains detailed validation information about an email address.
+    #
+    # @!attribute [rw] is_valid
+    #   Overall validity assessment with a conﬁdence verdict.
+    #   @return [Types::EmailAddressInsightsVerdict]
+    #
+    # @!attribute [rw] evaluations
+    #   Specific validation checks performed on the email address.
+    #   @return [Types::EmailAddressInsightsMailboxEvaluations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/MailboxValidation AWS API Documentation
+    #
+    class MailboxValidation < Struct.new(
+      :is_valid,
+      :evaluations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the email message that you're sending. The `Message`
     # object consists of a subject line and a message body.
     #
@@ -6517,10 +6646,16 @@ module Aws::SESV2
     #     in a hard bounce.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] validation_attributes
+    #   An object that contains additional suppression attributes for your
+    #   account.
+    #   @return [Types::SuppressionValidationAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountSuppressionAttributesRequest AWS API Documentation
     #
     class PutAccountSuppressionAttributesRequest < Struct.new(
-      :suppressed_reasons)
+      :suppressed_reasons,
+      :validation_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6704,11 +6839,18 @@ module Aws::SESV2
     #     in a hard bounce.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] validation_options
+    #   An object that contains information about the email address
+    #   suppression preferences for the configuration set in the current
+    #   Amazon Web Services Region.
+    #   @return [Types::SuppressionValidationOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutConfigurationSetSuppressionOptionsRequest AWS API Documentation
     #
     class PutConfigurationSetSuppressionOptionsRequest < Struct.new(
       :configuration_set_name,
-      :suppressed_reasons)
+      :suppressed_reasons,
+      :validation_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8088,10 +8230,58 @@ module Aws::SESV2
     #     in a hard bounce.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] validation_attributes
+    #   Structure containing validation attributes used for suppressing
+    #   sending to specific destination on account level.
+    #   @return [Types::SuppressionValidationAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SuppressionAttributes AWS API Documentation
     #
     class SuppressionAttributes < Struct.new(
-      :suppressed_reasons)
+      :suppressed_reasons,
+      :validation_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains Auto Validation settings, allowing you to suppress sending to
+    # specific destination(s) if they do not meet required threshold. For
+    # details on Auto Validation, see [Auto Validation][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/email-validation.html
+    #
+    # @!attribute [rw] condition_threshold_enabled
+    #   Indicates whether Auto Validation is enabled for suppression. Set to
+    #   `ENABLED` to enable the Auto Validation feature, or set to
+    #   `DISABLED` to disable it.
+    #   @return [String]
+    #
+    # @!attribute [rw] overall_confidence_threshold
+    #   The overall confidence threshold used to determine suppression
+    #   decisions.
+    #   @return [Types::SuppressionConfidenceThreshold]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SuppressionConditionThreshold AWS API Documentation
+    #
+    class SuppressionConditionThreshold < Struct.new(
+      :condition_threshold_enabled,
+      :overall_confidence_threshold)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the confidence threshold settings for Auto Validation.
+    #
+    # @!attribute [rw] confidence_verdict_threshold
+    #   The confidence level threshold for suppression decisions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SuppressionConfidenceThreshold AWS API Documentation
+    #
+    class SuppressionConfidenceThreshold < Struct.new(
+      :confidence_verdict_threshold)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8133,10 +8323,46 @@ module Aws::SESV2
     #     in a hard bounce.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] validation_options
+    #   Contains validation options for email address suppression.
+    #   @return [Types::SuppressionValidationOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SuppressionOptions AWS API Documentation
     #
     class SuppressionOptions < Struct.new(
-      :suppressed_reasons)
+      :suppressed_reasons,
+      :validation_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Structure containing validation attributes used for suppressing
+    # sending to specific destination on account level.
+    #
+    # @!attribute [rw] condition_threshold
+    #   Specifies the condition threshold settings for account-level
+    #   suppression.
+    #   @return [Types::SuppressionConditionThreshold]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SuppressionValidationAttributes AWS API Documentation
+    #
+    class SuppressionValidationAttributes < Struct.new(
+      :condition_threshold)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains validation options for email address suppression.
+    #
+    # @!attribute [rw] condition_threshold
+    #   Specifies the condition threshold settings for suppression
+    #   validation.
+    #   @return [Types::SuppressionConditionThreshold]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SuppressionValidationOptions AWS API Documentation
+    #
+    class SuppressionValidationOptions < Struct.new(
+      :condition_threshold)
       SENSITIVE = []
       include Aws::Structure
     end

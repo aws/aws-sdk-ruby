@@ -791,6 +791,92 @@ module Aws::PaymentCryptographyData
       req.send_request(options)
     end
 
+    # Establishes node-to-node initialization between payment processing
+    # nodes such as an acquirer, issuer or payment network using Australian
+    # Standard 2805 (AS2805).
+    #
+    # During node-to-node initialization, both communicating nodes must
+    # validate that they possess the correct Key Encrypting Keys (KEKs)
+    # before proceeding with session key exchange. In AS2805, the sending
+    # KEK (KEKs) of one node corresponds to the receiving KEK (KEKr) of its
+    # partner node. Each node uses its KEK to encrypt and decrypt session
+    # keys exchanged between the nodes. A KEK can be created or imported
+    # into Amazon Web Services Payment Cryptography using either the
+    # [CreateKey][1] or [ImportKey][2] operations.
+    #
+    # The node initiating communication can use
+    # `GenerateAS2805KekValidation` to generate a combined KEK validation
+    # request and KEK validation response to send to the partnering node for
+    # validation. When invoked, the API internally generates a random
+    # sending key encrypted under KEKs and provides a receiving key
+    # encrypted under KEKr as response. The initiating node sends the
+    # response returned by this API to its partner for validation.
+    #
+    # For information about valid keys for this operation, see
+    # [Understanding key attributes][3] and [Key types for specific data
+    # operations][4] in the *Amazon Web Services Payment Cryptography User
+    # Guide*.
+    #
+    # **Cross-account use**: This operation can't be used across different
+    # Amazon Web Services accounts.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    #
+    # @option params [required, String] :key_identifier
+    #   The `keyARN` of sending KEK that Amazon Web Services Payment
+    #   Cryptography uses for node-to-node initialization
+    #
+    # @option params [required, Types::As2805KekValidationType] :kek_validation_type
+    #   Parameter information for generating a random key for KEK validation
+    #   to perform node-to-node initialization.
+    #
+    # @option params [required, String] :random_key_send_variant_mask
+    #   The key variant to use for generating a random key for KEK validation
+    #   during node-to-node initialization.
+    #
+    # @return [Types::GenerateAs2805KekValidationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GenerateAs2805KekValidationOutput#key_arn #key_arn} => String
+    #   * {Types::GenerateAs2805KekValidationOutput#key_check_value #key_check_value} => String
+    #   * {Types::GenerateAs2805KekValidationOutput#random_key_send #random_key_send} => String
+    #   * {Types::GenerateAs2805KekValidationOutput#random_key_receive #random_key_receive} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.generate_as_2805_kek_validation({
+    #     key_identifier: "KeyArnOrKeyAliasType", # required
+    #     kek_validation_type: { # required
+    #       kek_validation_request: {
+    #         derive_key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512, HMAC_SHA224
+    #       },
+    #       kek_validation_response: {
+    #         random_key_send: "As2805RandomKeyMaterial", # required
+    #       },
+    #     },
+    #     random_key_send_variant_mask: "VARIANT_MASK_82C0", # required, accepts VARIANT_MASK_82C0, VARIANT_MASK_82
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_arn #=> String
+    #   resp.key_check_value #=> String
+    #   resp.random_key_send #=> String
+    #   resp.random_key_receive #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/GenerateAs2805KekValidation AWS API Documentation
+    #
+    # @overload generate_as_2805_kek_validation(params = {})
+    # @param [Hash] params ({})
+    def generate_as_2805_kek_validation(params = {}, options = {})
+      req = build_request(:generate_as_2805_kek_validation, params)
+      req.send_request(options)
+    end
+
     # Generates card-related validation data using algorithms such as Card
     # Verification Values (CVV/CVV2), Dynamic Card Verification Values
     # (dCVV/dCVV2), or Card Security Codes (CSC). For more information, see
@@ -922,7 +1008,7 @@ module Aws::PaymentCryptographyData
     # by setting generation attributes and algorithm to the associated
     # values. The MAC generation encryption key must have valid values for
     # `KeyUsage` such as `TR31_M7_HMAC_KEY` for HMAC generation, and the key
-    # must have `KeyModesOfUse` set to `Generate` and `Verify`.
+    # must have `KeyModesOfUse` set to `Generate`.
     #
     # For information about valid keys for this operation, see
     # [Understanding key attributes][1] and [Key types for specific data
@@ -969,7 +1055,7 @@ module Aws::PaymentCryptographyData
     #     key_identifier: "KeyArnOrKeyAliasType", # required
     #     message_data: "MessageDataType", # required
     #     generation_attributes: { # required
-    #       algorithm: "ISO9797_ALGORITHM1", # accepts ISO9797_ALGORITHM1, ISO9797_ALGORITHM3, CMAC, HMAC, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512
+    #       algorithm: "ISO9797_ALGORITHM1", # accepts ISO9797_ALGORITHM1, ISO9797_ALGORITHM3, CMAC, HMAC, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512, AS2805_4_1
     #       emv_mac: {
     #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
     #         primary_account_number: "PrimaryAccountNumberType", # required
@@ -1259,8 +1345,7 @@ module Aws::PaymentCryptographyData
     #   except that the fill digits are random values from 10 to 15.
     #
     #   The `ISO_Format_4` PIN block format is the only one supporting AES
-    #   encryption. It is similar to `ISO_Format_3` but doubles the pin block
-    #   length by padding with fill digit A and random values from 10 to 15.
+    #   encryption.
     #
     # @option params [Types::WrappedKey] :encryption_wrapped_key
     #   Parameter information of a WrappedKeyBlock for encryption key
@@ -1517,16 +1602,16 @@ module Aws::PaymentCryptographyData
       req.send_request(options)
     end
 
-    # Translates an encryption key between different wrapping keys without
-    # importing the key into Amazon Web Services Payment Cryptography.
+    # Translates an cryptographic key between different wrapping keys
+    # without importing the key into Amazon Web Services Payment
+    # Cryptography.
     #
     # This operation can be used when key material is frequently rotated,
     # such as during every card transaction, and there is a need to avoid
     # importing short-lived keys into Amazon Web Services Payment
-    # Cryptography. It translates short-lived transaction keys such as Pin
-    # Encryption Key (PEK) generated for each transaction and wrapped with
-    # an ECDH (Elliptic Curve Diffie-Hellman) derived wrapping key to
-    # another KEK (Key Encryption Key) wrapping key.
+    # Cryptography. It translates short-lived transaction keys such as
+    # [PEK][1] generated for each transaction and wrapped with an [ECDH][2]
+    # derived wrapping key to another [KEK][3] wrapping key.
     #
     # Before using this operation, you must first request the public key
     # certificate of the ECC key pair generated within Amazon Web Services
@@ -1536,13 +1621,11 @@ module Aws::PaymentCryptographyData
     # parameters to generate a derived key. The service uses this derived
     # key to unwrap the incoming transaction key received as a
     # TR31WrappedKeyBlock and re-wrap using a user provided KEK to generate
-    # an outgoing Tr31WrappedKeyBlock. For more information on establishing
-    # ECDH derived keys, see the [Creating keys][1] in the *Amazon Web
-    # Services Payment Cryptography User Guide*.
+    # an outgoing Tr31WrappedKeyBlock.
     #
     # For information about valid keys for this operation, see
-    # [Understanding key attributes][2] and [Key types for specific data
-    # operations][3] in the *Amazon Web Services Payment Cryptography User
+    # [Understanding key attributes][4] and [Key types for specific data
+    # operations][5] in the *Amazon Web Services Payment Cryptography User
     # Guide*.
     #
     # **Cross-account use**: This operation can't be used across different
@@ -1550,20 +1633,22 @@ module Aws::PaymentCryptographyData
     #
     # **Related operations:**
     #
-    # * [CreateKey][4]
+    # * [CreateKey][6]
     #
-    # * [GetPublicCertificate][5]
+    # * [GetPublicCertificate][7]
     #
-    # * [ImportKey][6]
+    # * [ImportKey][8]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/create-keys.html
-    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
-    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
-    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
-    # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
-    # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/terminology.html#terms.pek
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/terminology.html#terms.ecdh
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/terminology.html#terms.kek
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+    # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
+    # [7]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
+    # [8]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
     #
     # @option params [required, Types::IncomingKeyMaterial] :incoming_key_material
     #   Parameter information of the TR31WrappedKeyBlock containing the
@@ -1574,7 +1659,8 @@ module Aws::PaymentCryptographyData
     #   key in the outgoing TR31WrappedKeyBlock.
     #
     # @option params [String] :key_check_value_algorithm
-    #   The key check value (KCV) algorithm used for calculating the KCV.
+    #   The key check value (KCV) algorithm used for calculating the KCV of
+    #   the derived key.
     #
     # @return [Types::TranslateKeyMaterialOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1731,6 +1817,10 @@ module Aws::PaymentCryptographyData
     #   The WrappedKeyBlock containing the encryption key for encrypting
     #   outgoing PIN block data.
     #
+    # @option params [Types::As2805PekDerivationAttributes] :incoming_as_2805_attributes
+    #   The attributes and values to use for incoming AS2805 encryption key
+    #   for PIN block translation.
+    #
     # @return [Types::TranslatePinDataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::TranslatePinDataOutput#pin_block #pin_block} => String
@@ -1754,6 +1844,9 @@ module Aws::PaymentCryptographyData
     #       iso_format_4: {
     #         primary_account_number: "PrimaryAccountNumberType", # required
     #       },
+    #       as_2805_format_0: {
+    #         primary_account_number: "PrimaryAccountNumberType", # required
+    #       },
     #     },
     #     outgoing_translation_attributes: { # required
     #       iso_format_0: {
@@ -1765,6 +1858,9 @@ module Aws::PaymentCryptographyData
     #         primary_account_number: "PrimaryAccountNumberType", # required
     #       },
     #       iso_format_4: {
+    #         primary_account_number: "PrimaryAccountNumberType", # required
+    #       },
+    #       as_2805_format_0: {
     #         primary_account_number: "PrimaryAccountNumberType", # required
     #       },
     #     },
@@ -1806,6 +1902,10 @@ module Aws::PaymentCryptographyData
     #         },
     #       },
     #       key_check_value_algorithm: "CMAC", # accepts CMAC, ANSI_X9_24, HMAC, SHA_1
+    #     },
+    #     incoming_as_2805_attributes: {
+    #       system_trace_audit_number: "SystemTraceAuditNumberType", # required
+    #       transaction_amount: "TransactionAmountType", # required
     #     },
     #   })
     #
@@ -2137,7 +2237,7 @@ module Aws::PaymentCryptographyData
     #     message_data: "MessageDataType", # required
     #     mac: "MacType", # required
     #     verification_attributes: { # required
-    #       algorithm: "ISO9797_ALGORITHM1", # accepts ISO9797_ALGORITHM1, ISO9797_ALGORITHM3, CMAC, HMAC, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512
+    #       algorithm: "ISO9797_ALGORITHM1", # accepts ISO9797_ALGORITHM1, ISO9797_ALGORITHM3, CMAC, HMAC, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512, AS2805_4_1
     #       emv_mac: {
     #         major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
     #         primary_account_number: "PrimaryAccountNumberType", # required
@@ -2335,7 +2435,7 @@ module Aws::PaymentCryptographyData
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-paymentcryptographydata'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

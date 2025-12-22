@@ -7758,6 +7758,7 @@ module Aws::EC2
     #               require_encryption_in_transit: false,
     #             },
     #             image_id: "String",
+    #             availability_zone_id: "AvailabilityZoneId",
     #           },
     #         ],
     #       },
@@ -7859,6 +7860,7 @@ module Aws::EC2
     #   resp.errors[0].launch_template_and_overrides.overrides.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.errors[0].launch_template_and_overrides.overrides.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
     #   resp.errors[0].launch_template_and_overrides.overrides.block_device_mappings[0].no_device #=> String
+    #   resp.errors[0].launch_template_and_overrides.overrides.availability_zone_id #=> String
     #   resp.errors[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.errors[0].error_code #=> String
     #   resp.errors[0].error_message #=> String
@@ -7930,6 +7932,7 @@ module Aws::EC2
     #   resp.instances[0].launch_template_and_overrides.overrides.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.instances[0].launch_template_and_overrides.overrides.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
     #   resp.instances[0].launch_template_and_overrides.overrides.block_device_mappings[0].no_device #=> String
+    #   resp.instances[0].launch_template_and_overrides.overrides.availability_zone_id #=> String
     #   resp.instances[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.instances[0].instance_ids #=> Array
     #   resp.instances[0].instance_ids[0] #=> String
@@ -13174,6 +13177,9 @@ module Aws::EC2
     #
     #   * Rack – No usage restrictions.
     #
+    # @option params [String] :linked_group_id
+    #   Reserved for future use.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the operation,
     #   without actually making the request, and provides an error response.
@@ -13223,6 +13229,7 @@ module Aws::EC2
     #       },
     #     ],
     #     spread_level: "host", # accepts host, rack
+    #     linked_group_id: "PlacementGroupId",
     #     dry_run: false,
     #     group_name: "String",
     #     strategy: "cluster", # accepts cluster, spread, partition
@@ -13240,6 +13247,7 @@ module Aws::EC2
     #   resp.placement_group.tags[0].value #=> String
     #   resp.placement_group.group_arn #=> String
     #   resp.placement_group.spread_level #=> String, one of "host", "rack"
+    #   resp.placement_group.linked_group_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePlacementGroup AWS API Documentation
     #
@@ -27670,6 +27678,7 @@ module Aws::EC2
     #   resp.fleets[0].launch_template_configs[0].overrides[0].block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.fleets[0].launch_template_configs[0].overrides[0].block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
     #   resp.fleets[0].launch_template_configs[0].overrides[0].block_device_mappings[0].no_device #=> String
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].availability_zone_id #=> String
     #   resp.fleets[0].target_capacity_specification.total_target_capacity #=> Integer
     #   resp.fleets[0].target_capacity_specification.on_demand_target_capacity #=> Integer
     #   resp.fleets[0].target_capacity_specification.spot_target_capacity #=> Integer
@@ -27766,6 +27775,7 @@ module Aws::EC2
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.block_device_mappings[0].no_device #=> String
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.availability_zone_id #=> String
     #   resp.fleets[0].errors[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.fleets[0].errors[0].error_code #=> String
     #   resp.fleets[0].errors[0].error_message #=> String
@@ -27837,6 +27847,7 @@ module Aws::EC2
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "io2", "gp2", "sc1", "st1", "gp3"
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.block_device_mappings[0].no_device #=> String
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.availability_zone_id #=> String
     #   resp.fleets[0].instances[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.fleets[0].instances[0].instance_ids #=> Array
     #   resp.fleets[0].instances[0].instance_ids[0] #=> String
@@ -31788,7 +31799,7 @@ module Aws::EC2
     #
     #   * `requester-id` - The ID of the entity that launched the instance on
     #     your behalf (for example, Amazon Web Services Management Console,
-    #     Amazon EC2 Auto Scaling, and so on).
+    #     Auto Scaling, and so on).
     #
     #   * `reservation-id` - The ID of the instance's reservation. A
     #     reservation ID is created any time you launch an instance. A
@@ -36982,6 +36993,7 @@ module Aws::EC2
     #   resp.placement_groups[0].tags[0].value #=> String
     #   resp.placement_groups[0].group_arn #=> String
     #   resp.placement_groups[0].spread_level #=> String, one of "host", "rack"
+    #   resp.placement_groups[0].linked_group_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePlacementGroups AWS API Documentation
     #
@@ -40168,6 +40180,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].placement.availability_zone #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].placement.group_name #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].placement.tenancy #=> String, one of "default", "dedicated", "host"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].placement.availability_zone_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].ramdisk_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].spot_price #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].subnet_id #=> String
@@ -40280,6 +40293,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.baseline_performance_factors.cpu.references #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.baseline_performance_factors.cpu.references[0].instance_family #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.require_encryption_in_transit #=> Boolean
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].availability_zone_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_price #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.target_capacity #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_target_capacity #=> Integer
@@ -40638,6 +40652,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.placement.availability_zone #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.group_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.tenancy #=> String, one of "default", "dedicated", "host"
+    #   resp.spot_instance_requests[0].launch_specification.placement.availability_zone_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.ramdisk_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.subnet_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.security_groups #=> Array
@@ -56820,6 +56835,7 @@ module Aws::EC2
     #               require_encryption_in_transit: false,
     #             },
     #             image_id: "String",
+    #             availability_zone_id: "AvailabilityZoneId",
     #           },
     #         ],
     #       },
@@ -60323,6 +60339,7 @@ module Aws::EC2
     #               },
     #               require_encryption_in_transit: false,
     #             },
+    #             availability_zone_id: "AvailabilityZoneId",
     #           },
     #         ],
     #       },
@@ -66352,6 +66369,7 @@ module Aws::EC2
     #             availability_zone: "String",
     #             group_name: "PlacementGroupName",
     #             tenancy: "default", # accepts default, dedicated, host
+    #             availability_zone_id: "String",
     #           },
     #           ramdisk_id: "String",
     #           spot_price: "String",
@@ -66518,6 +66536,7 @@ module Aws::EC2
     #                 },
     #                 require_encryption_in_transit: false,
     #               },
+    #               availability_zone_id: "AvailabilityZoneId",
     #             },
     #           ],
     #         },
@@ -66854,6 +66873,7 @@ module Aws::EC2
     #         availability_zone: "String",
     #         group_name: "PlacementGroupName",
     #         tenancy: "default", # accepts default, dedicated, host
+    #         availability_zone_id: "String",
     #       },
     #       ramdisk_id: "RamdiskId",
     #       subnet_id: "SubnetId",
@@ -66956,6 +66976,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.placement.availability_zone #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.group_name #=> String
     #   resp.spot_instance_requests[0].launch_specification.placement.tenancy #=> String, one of "default", "dedicated", "host"
+    #   resp.spot_instance_requests[0].launch_specification.placement.availability_zone_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.ramdisk_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.subnet_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.security_groups #=> Array
@@ -71672,7 +71693,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.585.0'
+      context[:gem_version] = '1.587.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

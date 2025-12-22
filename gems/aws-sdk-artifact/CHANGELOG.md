@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2025-12-18)
+------------------
+
+* Feature - Add support for ListReportVersions API  for the calling AWS account.
+
 1.30.0 (2025-11-21)
 ------------------
 

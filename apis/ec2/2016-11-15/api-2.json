@@ -14294,6 +14294,7 @@
           "locationName":"TagSpecification"
         },
         "SpreadLevel":{"shape":"SpreadLevel"},
+        "LinkedGroupId":{"shape":"PlacementGroupId"},
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
@@ -27912,6 +27913,10 @@
         "BlockDeviceMappings":{
           "shape":"BlockDeviceMappingResponseList",
           "locationName":"blockDeviceMappingSet"
+        },
+        "AvailabilityZoneId":{
+          "shape":"AvailabilityZoneId",
+          "locationName":"availabilityZoneId"
         }
       }
     },
@@ -27944,7 +27949,8 @@
           "locationName":"BlockDeviceMapping"
         },
         "InstanceRequirements":{"shape":"InstanceRequirementsRequest"},
-        "ImageId":{"shape":"String"}
+        "ImageId":{"shape":"String"},
+        "AvailabilityZoneId":{"shape":"AvailabilityZoneId"}
       }
     },
     "FleetLaunchTemplateSpecification":{
@@ -38624,6 +38630,10 @@
         "InstanceRequirements":{
           "shape":"InstanceRequirements",
           "locationName":"instanceRequirements"
+        },
+        "AvailabilityZoneId":{
+          "shape":"AvailabilityZoneId",
+          "locationName":"availabilityZoneId"
         }
       }
     },
@@ -44698,6 +44708,10 @@
         "SpreadLevel":{
           "shape":"SpreadLevel",
           "locationName":"spreadLevel"
+        },
+        "LinkedGroupId":{
+          "shape":"PlacementGroupId",
+          "locationName":"linkedGroupId"
         }
       }
     },
@@ -51339,6 +51353,10 @@
         "Tenancy":{
           "shape":"Tenancy",
           "locationName":"tenancy"
+        },
+        "AvailabilityZoneId":{
+          "shape":"String",
+          "locationName":"availabilityZoneId"
         }
       }
     },

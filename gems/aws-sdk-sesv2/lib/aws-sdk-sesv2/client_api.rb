@@ -176,6 +176,9 @@ module Aws::SESV2
     DomainIspPlacements = Shapes::ListShape.new(name: 'DomainIspPlacements')
     EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
     EmailAddressFilterList = Shapes::ListShape.new(name: 'EmailAddressFilterList')
+    EmailAddressInsightsConfidenceVerdict = Shapes::StringShape.new(name: 'EmailAddressInsightsConfidenceVerdict')
+    EmailAddressInsightsMailboxEvaluations = Shapes::StructureShape.new(name: 'EmailAddressInsightsMailboxEvaluations')
+    EmailAddressInsightsVerdict = Shapes::StructureShape.new(name: 'EmailAddressInsightsVerdict')
     EmailAddressList = Shapes::ListShape.new(name: 'EmailAddressList')
     EmailContent = Shapes::StructureShape.new(name: 'EmailContent')
     EmailInsights = Shapes::StructureShape.new(name: 'EmailInsights')
@@ -252,6 +255,8 @@ module Aws::SESV2
     GetDomainDeliverabilityCampaignResponse = Shapes::StructureShape.new(name: 'GetDomainDeliverabilityCampaignResponse')
     GetDomainStatisticsReportRequest = Shapes::StructureShape.new(name: 'GetDomainStatisticsReportRequest')
     GetDomainStatisticsReportResponse = Shapes::StructureShape.new(name: 'GetDomainStatisticsReportResponse')
+    GetEmailAddressInsightsRequest = Shapes::StructureShape.new(name: 'GetEmailAddressInsightsRequest')
+    GetEmailAddressInsightsResponse = Shapes::StructureShape.new(name: 'GetEmailAddressInsightsResponse')
     GetEmailIdentityPoliciesRequest = Shapes::StructureShape.new(name: 'GetEmailIdentityPoliciesRequest')
     GetEmailIdentityPoliciesResponse = Shapes::StructureShape.new(name: 'GetEmailIdentityPoliciesResponse')
     GetEmailIdentityRequest = Shapes::StructureShape.new(name: 'GetEmailIdentityRequest')
@@ -361,6 +366,7 @@ module Aws::SESV2
     MailFromDomainNotVerifiedException = Shapes::StructureShape.new(name: 'MailFromDomainNotVerifiedException')
     MailFromDomainStatus = Shapes::StringShape.new(name: 'MailFromDomainStatus')
     MailType = Shapes::StringShape.new(name: 'MailType')
+    MailboxValidation = Shapes::StructureShape.new(name: 'MailboxValidation')
     Max24HourSend = Shapes::FloatShape.new(name: 'Max24HourSend')
     MaxDeliverySeconds = Shapes::IntegerShape.new(name: 'MaxDeliverySeconds')
     MaxItems = Shapes::IntegerShape.new(name: 'MaxItems')
@@ -520,11 +526,16 @@ module Aws::SESV2
     SuppressedDestinationSummaries = Shapes::ListShape.new(name: 'SuppressedDestinationSummaries')
     SuppressedDestinationSummary = Shapes::StructureShape.new(name: 'SuppressedDestinationSummary')
     SuppressionAttributes = Shapes::StructureShape.new(name: 'SuppressionAttributes')
+    SuppressionConditionThreshold = Shapes::StructureShape.new(name: 'SuppressionConditionThreshold')
+    SuppressionConfidenceThreshold = Shapes::StructureShape.new(name: 'SuppressionConfidenceThreshold')
+    SuppressionConfidenceVerdictThreshold = Shapes::StringShape.new(name: 'SuppressionConfidenceVerdictThreshold')
     SuppressionListDestination = Shapes::StructureShape.new(name: 'SuppressionListDestination')
     SuppressionListImportAction = Shapes::StringShape.new(name: 'SuppressionListImportAction')
     SuppressionListReason = Shapes::StringShape.new(name: 'SuppressionListReason')
     SuppressionListReasons = Shapes::ListShape.new(name: 'SuppressionListReasons')
     SuppressionOptions = Shapes::StructureShape.new(name: 'SuppressionOptions')
+    SuppressionValidationAttributes = Shapes::StructureShape.new(name: 'SuppressionValidationAttributes')
+    SuppressionValidationOptions = Shapes::StructureShape.new(name: 'SuppressionValidationOptions')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -756,6 +767,7 @@ module Aws::SESV2
     CreateCustomVerificationEmailTemplateRequest.add_member(:from_email_address, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location_name: "FromEmailAddress"))
     CreateCustomVerificationEmailTemplateRequest.add_member(:template_subject, Shapes::ShapeRef.new(shape: EmailTemplateSubject, required: true, location_name: "TemplateSubject"))
     CreateCustomVerificationEmailTemplateRequest.add_member(:template_content, Shapes::ShapeRef.new(shape: TemplateContent, required: true, location_name: "TemplateContent"))
+    CreateCustomVerificationEmailTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateCustomVerificationEmailTemplateRequest.add_member(:success_redirection_url, Shapes::ShapeRef.new(shape: SuccessRedirectionURL, required: true, location_name: "SuccessRedirectionURL"))
     CreateCustomVerificationEmailTemplateRequest.add_member(:failure_redirection_url, Shapes::ShapeRef.new(shape: FailureRedirectionURL, required: true, location_name: "FailureRedirectionURL"))
     CreateCustomVerificationEmailTemplateRequest.struct_class = Types::CreateCustomVerificationEmailTemplateRequest
@@ -799,6 +811,7 @@ module Aws::SESV2
 
     CreateEmailTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: EmailTemplateName, required: true, location_name: "TemplateName"))
     CreateEmailTemplateRequest.add_member(:template_content, Shapes::ShapeRef.new(shape: EmailTemplateContent, required: true, location_name: "TemplateContent"))
+    CreateEmailTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateEmailTemplateRequest.struct_class = Types::CreateEmailTemplateRequest
 
     CreateEmailTemplateResponse.struct_class = Types::CreateEmailTemplateResponse
@@ -1028,6 +1041,17 @@ module Aws::SESV2
 
     EmailAddressFilterList.member = Shapes::ShapeRef.new(shape: InsightsEmailAddress)
 
+    EmailAddressInsightsMailboxEvaluations.add_member(:has_valid_syntax, Shapes::ShapeRef.new(shape: EmailAddressInsightsVerdict, location_name: "HasValidSyntax"))
+    EmailAddressInsightsMailboxEvaluations.add_member(:has_valid_dns_records, Shapes::ShapeRef.new(shape: EmailAddressInsightsVerdict, location_name: "HasValidDnsRecords"))
+    EmailAddressInsightsMailboxEvaluations.add_member(:mailbox_exists, Shapes::ShapeRef.new(shape: EmailAddressInsightsVerdict, location_name: "MailboxExists"))
+    EmailAddressInsightsMailboxEvaluations.add_member(:is_role_address, Shapes::ShapeRef.new(shape: EmailAddressInsightsVerdict, location_name: "IsRoleAddress"))
+    EmailAddressInsightsMailboxEvaluations.add_member(:is_disposable, Shapes::ShapeRef.new(shape: EmailAddressInsightsVerdict, location_name: "IsDisposable"))
+    EmailAddressInsightsMailboxEvaluations.add_member(:is_random_input, Shapes::ShapeRef.new(shape: EmailAddressInsightsVerdict, location_name: "IsRandomInput"))
+    EmailAddressInsightsMailboxEvaluations.struct_class = Types::EmailAddressInsightsMailboxEvaluations
+
+    EmailAddressInsightsVerdict.add_member(:confidence_verdict, Shapes::ShapeRef.new(shape: EmailAddressInsightsConfidenceVerdict, location_name: "ConfidenceVerdict"))
+    EmailAddressInsightsVerdict.struct_class = Types::EmailAddressInsightsVerdict
+
     EmailAddressList.member = Shapes::ShapeRef.new(shape: EmailAddress)
 
     EmailContent.add_member(:simple, Shapes::ShapeRef.new(shape: Message, location_name: "Simple"))
@@ -1193,6 +1217,7 @@ module Aws::SESV2
     GetCustomVerificationEmailTemplateResponse.add_member(:from_email_address, Shapes::ShapeRef.new(shape: EmailAddress, location_name: "FromEmailAddress"))
     GetCustomVerificationEmailTemplateResponse.add_member(:template_subject, Shapes::ShapeRef.new(shape: EmailTemplateSubject, location_name: "TemplateSubject"))
     GetCustomVerificationEmailTemplateResponse.add_member(:template_content, Shapes::ShapeRef.new(shape: TemplateContent, location_name: "TemplateContent"))
+    GetCustomVerificationEmailTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     GetCustomVerificationEmailTemplateResponse.add_member(:success_redirection_url, Shapes::ShapeRef.new(shape: SuccessRedirectionURL, location_name: "SuccessRedirectionURL"))
     GetCustomVerificationEmailTemplateResponse.add_member(:failure_redirection_url, Shapes::ShapeRef.new(shape: FailureRedirectionURL, location_name: "FailureRedirectionURL"))
     GetCustomVerificationEmailTemplateResponse.struct_class = Types::GetCustomVerificationEmailTemplateResponse
@@ -1252,6 +1277,12 @@ module Aws::SESV2
     GetDomainStatisticsReportResponse.add_member(:daily_volumes, Shapes::ShapeRef.new(shape: DailyVolumes, required: true, location_name: "DailyVolumes"))
     GetDomainStatisticsReportResponse.struct_class = Types::GetDomainStatisticsReportResponse
 
+    GetEmailAddressInsightsRequest.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location_name: "EmailAddress"))
+    GetEmailAddressInsightsRequest.struct_class = Types::GetEmailAddressInsightsRequest
+
+    GetEmailAddressInsightsResponse.add_member(:mailbox_validation, Shapes::ShapeRef.new(shape: MailboxValidation, location_name: "MailboxValidation"))
+    GetEmailAddressInsightsResponse.struct_class = Types::GetEmailAddressInsightsResponse
+
     GetEmailIdentityPoliciesRequest.add_member(:email_identity, Shapes::ShapeRef.new(shape: Identity, required: true, location: "uri", location_name: "EmailIdentity"))
     GetEmailIdentityPoliciesRequest.struct_class = Types::GetEmailIdentityPoliciesRequest
 
@@ -1278,6 +1309,7 @@ module Aws::SESV2
 
     GetEmailTemplateResponse.add_member(:template_name, Shapes::ShapeRef.new(shape: EmailTemplateName, required: true, location_name: "TemplateName"))
     GetEmailTemplateResponse.add_member(:template_content, Shapes::ShapeRef.new(shape: EmailTemplateContent, required: true, location_name: "TemplateContent"))
+    GetEmailTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     GetEmailTemplateResponse.struct_class = Types::GetEmailTemplateResponse
 
     GetExportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "JobId"))
@@ -1610,6 +1642,10 @@ module Aws::SESV2
 
     MailFromDomainNotVerifiedException.struct_class = Types::MailFromDomainNotVerifiedException
 
+    MailboxValidation.add_member(:is_valid, Shapes::ShapeRef.new(shape: EmailAddressInsightsVerdict, location_name: "IsValid"))
+    MailboxValidation.add_member(:evaluations, Shapes::ShapeRef.new(shape: EmailAddressInsightsMailboxEvaluations, location_name: "Evaluations"))
+    MailboxValidation.struct_class = Types::MailboxValidation
+
     Message.add_member(:subject, Shapes::ShapeRef.new(shape: Content, required: true, location_name: "Subject"))
     Message.add_member(:body, Shapes::ShapeRef.new(shape: Body, required: true, location_name: "Body"))
     Message.add_member(:headers, Shapes::ShapeRef.new(shape: MessageHeaderList, location_name: "Headers"))
@@ -1719,6 +1755,7 @@ module Aws::SESV2
     PutAccountSendingAttributesResponse.struct_class = Types::PutAccountSendingAttributesResponse
 
     PutAccountSuppressionAttributesRequest.add_member(:suppressed_reasons, Shapes::ShapeRef.new(shape: SuppressionListReasons, location_name: "SuppressedReasons"))
+    PutAccountSuppressionAttributesRequest.add_member(:validation_attributes, Shapes::ShapeRef.new(shape: SuppressionValidationAttributes, location_name: "ValidationAttributes"))
     PutAccountSuppressionAttributesRequest.struct_class = Types::PutAccountSuppressionAttributesRequest
 
     PutAccountSuppressionAttributesResponse.struct_class = Types::PutAccountSuppressionAttributesResponse
@@ -1756,6 +1793,7 @@ module Aws::SESV2
 
     PutConfigurationSetSuppressionOptionsRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location: "uri", location_name: "ConfigurationSetName"))
     PutConfigurationSetSuppressionOptionsRequest.add_member(:suppressed_reasons, Shapes::ShapeRef.new(shape: SuppressionListReasons, location_name: "SuppressedReasons"))
+    PutConfigurationSetSuppressionOptionsRequest.add_member(:validation_options, Shapes::ShapeRef.new(shape: SuppressionValidationOptions, location_name: "ValidationOptions"))
     PutConfigurationSetSuppressionOptionsRequest.struct_class = Types::PutConfigurationSetSuppressionOptionsRequest
 
     PutConfigurationSetSuppressionOptionsResponse.struct_class = Types::PutConfigurationSetSuppressionOptionsResponse
@@ -1982,7 +2020,15 @@ module Aws::SESV2
     SuppressedDestinationSummary.struct_class = Types::SuppressedDestinationSummary
 
     SuppressionAttributes.add_member(:suppressed_reasons, Shapes::ShapeRef.new(shape: SuppressionListReasons, location_name: "SuppressedReasons"))
+    SuppressionAttributes.add_member(:validation_attributes, Shapes::ShapeRef.new(shape: SuppressionValidationAttributes, location_name: "ValidationAttributes"))
     SuppressionAttributes.struct_class = Types::SuppressionAttributes
+
+    SuppressionConditionThreshold.add_member(:condition_threshold_enabled, Shapes::ShapeRef.new(shape: FeatureStatus, required: true, location_name: "ConditionThresholdEnabled"))
+    SuppressionConditionThreshold.add_member(:overall_confidence_threshold, Shapes::ShapeRef.new(shape: SuppressionConfidenceThreshold, location_name: "OverallConfidenceThreshold"))
+    SuppressionConditionThreshold.struct_class = Types::SuppressionConditionThreshold
+
+    SuppressionConfidenceThreshold.add_member(:confidence_verdict_threshold, Shapes::ShapeRef.new(shape: SuppressionConfidenceVerdictThreshold, required: true, location_name: "ConfidenceVerdictThreshold"))
+    SuppressionConfidenceThreshold.struct_class = Types::SuppressionConfidenceThreshold
 
     SuppressionListDestination.add_member(:suppression_list_import_action, Shapes::ShapeRef.new(shape: SuppressionListImportAction, required: true, location_name: "SuppressionListImportAction"))
     SuppressionListDestination.struct_class = Types::SuppressionListDestination
@@ -1990,7 +2036,14 @@ module Aws::SESV2
     SuppressionListReasons.member = Shapes::ShapeRef.new(shape: SuppressionListReason)
 
     SuppressionOptions.add_member(:suppressed_reasons, Shapes::ShapeRef.new(shape: SuppressionListReasons, location_name: "SuppressedReasons"))
+    SuppressionOptions.add_member(:validation_options, Shapes::ShapeRef.new(shape: SuppressionValidationOptions, location_name: "ValidationOptions"))
     SuppressionOptions.struct_class = Types::SuppressionOptions
+
+    SuppressionValidationAttributes.add_member(:condition_threshold, Shapes::ShapeRef.new(shape: SuppressionConditionThreshold, required: true, location_name: "ConditionThreshold"))
+    SuppressionValidationAttributes.struct_class = Types::SuppressionValidationAttributes
+
+    SuppressionValidationOptions.add_member(:condition_threshold, Shapes::ShapeRef.new(shape: SuppressionConditionThreshold, required: true, location_name: "ConditionThreshold"))
+    SuppressionValidationOptions.struct_class = Types::SuppressionValidationOptions
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
@@ -2696,6 +2749,16 @@ module Aws::SESV2
         o.output = Shapes::ShapeRef.new(shape: GetDomainStatisticsReportResponse)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:get_email_address_insights, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEmailAddressInsights"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/email-address-insights/"
+        o.input = Shapes::ShapeRef.new(shape: GetEmailAddressInsightsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEmailAddressInsightsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 

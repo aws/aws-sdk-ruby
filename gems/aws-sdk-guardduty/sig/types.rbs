@@ -2178,6 +2178,7 @@ module Aws::GuardDuty
       attr_accessor engine_version: ::String
       attr_accessor db_cluster_identifier: ::String
       attr_accessor db_instance_arn: ::String
+      attr_accessor dbi_resource_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end

@@ -612,6 +612,7 @@ module Aws::ECS
     #           storage_size_gi_b: 1,
     #         },
     #         monitoring: "BASIC", # accepts BASIC, DETAILED
+    #         capacity_option_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
     #         instance_requirements: {
     #           v_cpu_count: { # required
     #             min: 1, # required
@@ -701,6 +702,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT"
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
@@ -2786,13 +2788,13 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_account_setting({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate, defaultLogDriverMode
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate, defaultLogDriverMode, fargateEventWindows
     #     principal_arn: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate", "defaultLogDriverMode"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate", "defaultLogDriverMode", "fargateEventWindows"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #   resp.setting.type #=> String, one of "user", "aws_managed"
@@ -2978,6 +2980,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT"
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
@@ -4512,6 +4515,7 @@ module Aws::ECS
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT"
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
@@ -6669,7 +6673,7 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_account_settings({
-    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate, defaultLogDriverMode
+    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate, defaultLogDriverMode, fargateEventWindows
     #     value: "String",
     #     principal_arn: "String",
     #     effective_settings: false,
@@ -6680,7 +6684,7 @@ module Aws::ECS
     # @example Response structure
     #
     #   resp.settings #=> Array
-    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate", "defaultLogDriverMode"
+    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate", "defaultLogDriverMode", "fargateEventWindows"
     #   resp.settings[0].value #=> String
     #   resp.settings[0].principal_arn #=> String
     #   resp.settings[0].type #=> String, one of "user", "aws_managed"
@@ -7782,6 +7786,13 @@ module Aws::ECS
     #     maintenance, see [Amazon Web Services Fargate task maintenance][5]
     #     in the *Amazon ECS Developer Guide*.
     #
+    #   * `fargateEventWindows` - When Amazon Web Services determines that a
+    #     security or infrastructure update is needed for an Amazon ECS task
+    #     hosted on Fargate, the tasks need to be stopped and new tasks
+    #     launched to replace them. Use `fargateEventWindows` to use EC2 Event
+    #     Windows associated with Fargate tasks to configure time windows for
+    #     task retirement.
+    #
     #   * `tagResourceAuthorization` - Amazon ECS is introducing tagging
     #     authorization for resource creation. Users must have permissions for
     #     actions that create the resource, such as `ecsCreateCluster`. If
@@ -7916,14 +7927,14 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_setting({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate, defaultLogDriverMode
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate, defaultLogDriverMode, fargateEventWindows
     #     value: "String", # required
     #     principal_arn: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate", "defaultLogDriverMode"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate", "defaultLogDriverMode", "fargateEventWindows"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #   resp.setting.type #=> String, one of "user", "aws_managed"
@@ -8021,6 +8032,13 @@ module Aws::ECS
     #     maintenance, see [Amazon Web Services Fargate task maintenance][5]
     #     in the *Amazon ECS Developer Guide*.
     #
+    #   * `fargateEventWindows` - When Amazon Web Services determines that a
+    #     security or infrastructure update is needed for an Amazon ECS task
+    #     hosted on Fargate, the tasks need to be stopped and new tasks
+    #     launched to replace them. Use `fargateEventWindows` to use EC2 Event
+    #     Windows associated with Fargate tasks to configure time windows for
+    #     task retirement.
+    #
     #   * `tagResourceAuthorization` - Amazon ECS is introducing tagging
     #     authorization for resource creation. Users must have permissions for
     #     actions that create the resource, such as `ecsCreateCluster`. If
@@ -8116,13 +8134,13 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_setting_default({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate, defaultLogDriverMode
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate, defaultLogDriverMode, fargateEventWindows
     #     value: "String", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate", "defaultLogDriverMode"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate", "defaultLogDriverMode", "fargateEventWindows"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #   resp.setting.type #=> String, one of "user", "aws_managed"
@@ -11520,6 +11538,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT"
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
@@ -14014,7 +14033,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.215.0'
+      context[:gem_version] = '1.216.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

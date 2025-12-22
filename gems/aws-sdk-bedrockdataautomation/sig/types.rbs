@@ -67,6 +67,8 @@ module Aws::BedrockDataAutomation
       attr_accessor blueprint_stage: ("DEVELOPMENT" | "LIVE")
       attr_accessor kms_key_id: ::String
       attr_accessor kms_encryption_context: ::Hash[::String, ::String]
+      attr_accessor optimization_samples: ::Array[Types::BlueprintOptimizationSample]
+      attr_accessor optimization_time: ::Time
       SENSITIVE: [:schema, :blueprint_name]
     end
 
@@ -81,6 +83,23 @@ module Aws::BedrockDataAutomation
       attr_accessor blueprint_arn: ::String
       attr_accessor blueprint_version: ::String
       attr_accessor blueprint_stage: ("DEVELOPMENT" | "LIVE")
+      SENSITIVE: []
+    end
+
+    class BlueprintOptimizationObject
+      attr_accessor blueprint_arn: ::String
+      attr_accessor stage: ("DEVELOPMENT" | "LIVE")
+      SENSITIVE: []
+    end
+
+    class BlueprintOptimizationOutputConfiguration
+      attr_accessor s3_object: Types::S3Object
+      SENSITIVE: []
+    end
+
+    class BlueprintOptimizationSample
+      attr_accessor asset_s3_object: Types::S3Object
+      attr_accessor ground_truth_s3_object: Types::S3Object
       SENSITIVE: []
     end
 
@@ -102,6 +121,17 @@ module Aws::BedrockDataAutomation
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class CopyBlueprintStageRequest
+      attr_accessor blueprint_arn: ::String
+      attr_accessor source_stage: ("DEVELOPMENT" | "LIVE")
+      attr_accessor target_stage: ("DEVELOPMENT" | "LIVE")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CopyBlueprintStageResponse < Aws::EmptyStructure
     end
 
     class CreateBlueprintRequest
@@ -266,6 +296,19 @@ module Aws::BedrockDataAutomation
       SENSITIVE: []
     end
 
+    class GetBlueprintOptimizationStatusRequest
+      attr_accessor invocation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetBlueprintOptimizationStatusResponse
+      attr_accessor status: ("Created" | "InProgress" | "Success" | "ServiceError" | "ClientError")
+      attr_accessor error_type: ::String
+      attr_accessor error_message: ::String
+      attr_accessor output_configuration: Types::BlueprintOptimizationOutputConfiguration
+      SENSITIVE: []
+    end
+
     class GetBlueprintRequest
       attr_accessor blueprint_arn: ::String
       attr_accessor blueprint_version: ::String
@@ -326,6 +369,21 @@ module Aws::BedrockDataAutomation
 
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvokeBlueprintOptimizationAsyncRequest
+      attr_accessor blueprint: Types::BlueprintOptimizationObject
+      attr_accessor samples: ::Array[Types::BlueprintOptimizationSample]
+      attr_accessor output_configuration: Types::BlueprintOptimizationOutputConfiguration
+      attr_accessor data_automation_profile_arn: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class InvokeBlueprintOptimizationAsyncResponse
+      attr_accessor invocation_arn: ::String
       SENSITIVE: []
     end
 
@@ -400,6 +458,12 @@ module Aws::BedrockDataAutomation
 
     class ResourceNotFoundException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3Object
+      attr_accessor s3_uri: ::String
+      attr_accessor version: ::String
       SENSITIVE: []
     end
 

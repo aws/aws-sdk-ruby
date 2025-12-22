@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2025-12-18)
+------------------
+
+* Feature - Amazon SES introduces Email Validation feature which checks email addresses for syntax errors, domain validity, and risky addresses to help maintain deliverability and protect sender reputation. SES also adds resource tagging and ABAC support for EmailTemplates and CustomVerificationEmailTemplates.
+
 1.91.0 (2025-12-11)
 ------------------
 

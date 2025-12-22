@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2025-12-17)
+------------------
+
+* Feature - Support dual-stack network connectivity for connectors via NetworkType field.
+
 1.48.0 (2025-11-21)
 ------------------
 

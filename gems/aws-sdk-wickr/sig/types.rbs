@@ -1,0 +1,974 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Wickr
+  module Types
+
+    class BadRequestError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BasicDeviceObject
+      attr_accessor app_id: ::String
+      attr_accessor created: ::String
+      attr_accessor last_login: ::String
+      attr_accessor status_text: ::String
+      attr_accessor suspend: bool
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateUserRequest
+      attr_accessor network_id: ::String
+      attr_accessor users: ::Array[Types::BatchCreateUserRequestItem]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateUserRequestItem
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor username: ::String
+      attr_accessor invite_code: ::String
+      attr_accessor invite_code_ttl: ::Integer
+      attr_accessor code_validation: bool
+      SENSITIVE: [:first_name, :last_name]
+    end
+
+    class BatchCreateUserResponse
+      attr_accessor message: ::String
+      attr_accessor successful: ::Array[Types::User]
+      attr_accessor failed: ::Array[Types::BatchUserErrorResponseItem]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteUserRequest
+      attr_accessor network_id: ::String
+      attr_accessor user_ids: ::Array[::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteUserResponse
+      attr_accessor message: ::String
+      attr_accessor successful: ::Array[Types::BatchUserSuccessResponseItem]
+      attr_accessor failed: ::Array[Types::BatchUserErrorResponseItem]
+      SENSITIVE: []
+    end
+
+    class BatchDeviceErrorResponseItem
+      attr_accessor field: ::String
+      attr_accessor reason: ::String
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeviceSuccessResponseItem
+      attr_accessor app_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchLookupUserUnameRequest
+      attr_accessor network_id: ::String
+      attr_accessor unames: ::Array[::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchLookupUserUnameResponse
+      attr_accessor message: ::String
+      attr_accessor successful: ::Array[Types::BatchUnameSuccessResponseItem]
+      attr_accessor failed: ::Array[Types::BatchUnameErrorResponseItem]
+      SENSITIVE: []
+    end
+
+    class BatchReinviteUserRequest
+      attr_accessor network_id: ::String
+      attr_accessor user_ids: ::Array[::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchReinviteUserResponse
+      attr_accessor message: ::String
+      attr_accessor successful: ::Array[Types::BatchUserSuccessResponseItem]
+      attr_accessor failed: ::Array[Types::BatchUserErrorResponseItem]
+      SENSITIVE: []
+    end
+
+    class BatchResetDevicesForUserRequest
+      attr_accessor network_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor app_ids: ::Array[::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchResetDevicesForUserResponse
+      attr_accessor message: ::String
+      attr_accessor successful: ::Array[Types::BatchDeviceSuccessResponseItem]
+      attr_accessor failed: ::Array[Types::BatchDeviceErrorResponseItem]
+      SENSITIVE: []
+    end
+
+    class BatchToggleUserSuspendStatusRequest
+      attr_accessor network_id: ::String
+      attr_accessor suspend: bool
+      attr_accessor user_ids: ::Array[::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchToggleUserSuspendStatusResponse
+      attr_accessor message: ::String
+      attr_accessor successful: ::Array[Types::BatchUserSuccessResponseItem]
+      attr_accessor failed: ::Array[Types::BatchUserErrorResponseItem]
+      SENSITIVE: []
+    end
+
+    class BatchUnameErrorResponseItem
+      attr_accessor field: ::String
+      attr_accessor reason: ::String
+      attr_accessor uname: ::String
+      SENSITIVE: []
+    end
+
+    class BatchUnameSuccessResponseItem
+      attr_accessor uname: ::String
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class BatchUserErrorResponseItem
+      attr_accessor field: ::String
+      attr_accessor reason: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchUserSuccessResponseItem
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class BlockedGuestUser
+      attr_accessor username: ::String
+      attr_accessor admin: ::String
+      attr_accessor modified: ::String
+      attr_accessor username_hash: ::String
+      SENSITIVE: []
+    end
+
+    class Bot
+      attr_accessor bot_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor username: ::String
+      attr_accessor uname: ::String
+      attr_accessor pubkey: ::String
+      attr_accessor status: ::Integer
+      attr_accessor group_id: ::String
+      attr_accessor has_challenge: bool
+      attr_accessor suspended: bool
+      attr_accessor last_login: ::String
+      SENSITIVE: []
+    end
+
+    class CallingSettings
+      attr_accessor can_start_11_call: bool
+      attr_accessor can_video_call: bool
+      attr_accessor force_tcp_call: bool
+      SENSITIVE: []
+    end
+
+    class CreateBotRequest
+      attr_accessor network_id: ::String
+      attr_accessor username: ::String
+      attr_accessor display_name: ::String
+      attr_accessor group_id: ::String
+      attr_accessor challenge: ::String
+      SENSITIVE: [:challenge]
+    end
+
+    class CreateBotResponse
+      attr_accessor message: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor network_id: ::String
+      attr_accessor username: ::String
+      attr_accessor display_name: ::String
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDataRetentionBotChallengeRequest
+      attr_accessor network_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDataRetentionBotChallengeResponse
+      attr_accessor challenge: ::String
+      SENSITIVE: [:challenge]
+    end
+
+    class CreateDataRetentionBotRequest
+      attr_accessor network_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDataRetentionBotResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateNetworkRequest
+      attr_accessor network_name: ::String
+      attr_accessor access_level: ("STANDARD" | "PREMIUM")
+      attr_accessor enable_premium_free_trial: bool
+      attr_accessor encryption_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateNetworkResponse
+      attr_accessor network_id: ::String
+      attr_accessor network_name: ::String
+      attr_accessor encryption_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSecurityGroupRequest
+      attr_accessor network_id: ::String
+      attr_accessor name: ::String
+      attr_accessor security_group_settings: Types::SecurityGroupSettingsRequest
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSecurityGroupResponse
+      attr_accessor security_group: Types::SecurityGroup
+      SENSITIVE: []
+    end
+
+    class DeleteBotRequest
+      attr_accessor network_id: ::String
+      attr_accessor bot_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBotResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataRetentionBotRequest
+      attr_accessor network_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataRetentionBotResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNetworkRequest
+      attr_accessor network_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNetworkResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSecurityGroupRequest
+      attr_accessor network_id: ::String
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSecurityGroupResponse
+      attr_accessor message: ::String
+      attr_accessor network_id: ::String
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorDetail
+      attr_accessor field: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class ForbiddenError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetBotRequest
+      attr_accessor network_id: ::String
+      attr_accessor bot_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBotResponse
+      attr_accessor bot_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor username: ::String
+      attr_accessor uname: ::String
+      attr_accessor pubkey: ::String
+      attr_accessor status: ::Integer
+      attr_accessor group_id: ::String
+      attr_accessor has_challenge: bool
+      attr_accessor suspended: bool
+      attr_accessor last_login: ::String
+      SENSITIVE: []
+    end
+
+    class GetBotsCountRequest
+      attr_accessor network_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBotsCountResponse
+      attr_accessor pending: ::Integer
+      attr_accessor active: ::Integer
+      attr_accessor total: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetDataRetentionBotRequest
+      attr_accessor network_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataRetentionBotResponse
+      attr_accessor bot_name: ::String
+      attr_accessor bot_exists: bool
+      attr_accessor is_bot_active: bool
+      attr_accessor is_data_retention_bot_registered: bool
+      attr_accessor is_data_retention_service_enabled: bool
+      attr_accessor is_pubkey_msg_acked: bool
+      SENSITIVE: []
+    end
+
+    class GetGuestUserHistoryCountRequest
+      attr_accessor network_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGuestUserHistoryCountResponse
+      attr_accessor history: ::Array[Types::GuestUserHistoryCount]
+      SENSITIVE: []
+    end
+
+    class GetNetworkRequest
+      attr_accessor network_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkResponse
+      attr_accessor network_id: ::String
+      attr_accessor network_name: ::String
+      attr_accessor access_level: ("STANDARD" | "PREMIUM")
+      attr_accessor aws_account_id: ::String
+      attr_accessor network_arn: ::String
+      attr_accessor standing: ::Integer
+      attr_accessor free_trial_expiration: ::String
+      attr_accessor migration_state: ::Integer
+      attr_accessor encryption_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkSettingsRequest
+      attr_accessor network_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetNetworkSettingsResponse
+      attr_accessor settings: ::Array[Types::Setting]
+      SENSITIVE: []
+    end
+
+    class GetOidcInfoRequest
+      attr_accessor network_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor code: ::String
+      attr_accessor grant_type: ::String
+      attr_accessor redirect_uri: ::String
+      attr_accessor url: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor code_verifier: ::String
+      attr_accessor certificate: ::String
+      SENSITIVE: [:client_secret]
+    end
+
+    class GetOidcInfoResponse
+      attr_accessor openid_connect_info: Types::OidcConfigInfo
+      attr_accessor token_info: Types::OidcTokenInfo
+      SENSITIVE: []
+    end
+
+    class GetSecurityGroupRequest
+      attr_accessor network_id: ::String
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSecurityGroupResponse
+      attr_accessor security_group: Types::SecurityGroup
+      SENSITIVE: []
+    end
+
+    class GetUserRequest
+      attr_accessor network_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetUserResponse
+      attr_accessor user_id: ::String
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor username: ::String
+      attr_accessor is_admin: bool
+      attr_accessor suspended: bool
+      attr_accessor status: ::Integer
+      attr_accessor last_activity: ::Integer
+      attr_accessor last_login: ::Integer
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: [:first_name, :last_name]
+    end
+
+    class GetUsersCountRequest
+      attr_accessor network_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetUsersCountResponse
+      attr_accessor pending: ::Integer
+      attr_accessor active: ::Integer
+      attr_accessor rejected: ::Integer
+      attr_accessor remaining: ::Integer
+      attr_accessor total: ::Integer
+      SENSITIVE: []
+    end
+
+    class GuestUser
+      attr_accessor billing_period: ::String
+      attr_accessor username: ::String
+      attr_accessor username_hash: ::String
+      SENSITIVE: []
+    end
+
+    class GuestUserHistoryCount
+      attr_accessor month: ::String
+      attr_accessor count: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListBlockedGuestUsersRequest
+      attr_accessor network_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_direction: ("ASC" | "DESC")
+      attr_accessor sort_fields: ::String
+      attr_accessor username: ::String
+      attr_accessor admin: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBlockedGuestUsersResponse
+      attr_accessor next_token: ::String
+      attr_accessor blocklist: ::Array[Types::BlockedGuestUser]
+      SENSITIVE: []
+    end
+
+    class ListBotsRequest
+      attr_accessor network_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_fields: ::String
+      attr_accessor sort_direction: ("ASC" | "DESC")
+      attr_accessor display_name: ::String
+      attr_accessor username: ::String
+      attr_accessor status: ::Integer
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotsResponse
+      attr_accessor bots: ::Array[Types::Bot]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDevicesForUserRequest
+      attr_accessor network_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_fields: ::String
+      attr_accessor sort_direction: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class ListDevicesForUserResponse
+      attr_accessor next_token: ::String
+      attr_accessor devices: ::Array[Types::BasicDeviceObject]
+      SENSITIVE: []
+    end
+
+    class ListGuestUsersRequest
+      attr_accessor network_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_direction: ("ASC" | "DESC")
+      attr_accessor sort_fields: ::String
+      attr_accessor username: ::String
+      attr_accessor billing_period: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGuestUsersResponse
+      attr_accessor next_token: ::String
+      attr_accessor guestlist: ::Array[Types::GuestUser]
+      SENSITIVE: []
+    end
+
+    class ListNetworksRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_fields: ::String
+      attr_accessor sort_direction: ("ASC" | "DESC")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNetworksResponse
+      attr_accessor networks: ::Array[Types::Network]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSecurityGroupUsersRequest
+      attr_accessor network_id: ::String
+      attr_accessor group_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_fields: ::String
+      attr_accessor sort_direction: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class ListSecurityGroupUsersResponse
+      attr_accessor users: ::Array[Types::User]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSecurityGroupsRequest
+      attr_accessor network_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_fields: ::String
+      attr_accessor sort_direction: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class ListSecurityGroupsResponse
+      attr_accessor security_groups: ::Array[Types::SecurityGroup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUsersRequest
+      attr_accessor network_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_fields: ::String
+      attr_accessor sort_direction: ("ASC" | "DESC")
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor username: ::String
+      attr_accessor status: ::Integer
+      attr_accessor group_id: ::String
+      SENSITIVE: [:first_name, :last_name]
+    end
+
+    class ListUsersResponse
+      attr_accessor next_token: ::String
+      attr_accessor users: ::Array[Types::User]
+      SENSITIVE: []
+    end
+
+    class Network
+      attr_accessor network_id: ::String
+      attr_accessor network_name: ::String
+      attr_accessor access_level: ("STANDARD" | "PREMIUM")
+      attr_accessor aws_account_id: ::String
+      attr_accessor network_arn: ::String
+      attr_accessor standing: ::Integer
+      attr_accessor free_trial_expiration: ::String
+      attr_accessor migration_state: ::Integer
+      attr_accessor encryption_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkSettings
+      attr_accessor enable_client_metrics: bool
+      attr_accessor read_receipt_config: Types::ReadReceiptConfig
+      attr_accessor data_retention: bool
+      SENSITIVE: []
+    end
+
+    class OidcConfigInfo
+      attr_accessor application_name: ::String
+      attr_accessor client_id: ::String
+      attr_accessor company_id: ::String
+      attr_accessor scopes: ::String
+      attr_accessor issuer: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor secret: ::String
+      attr_accessor redirect_url: ::String
+      attr_accessor user_id: ::String
+      attr_accessor custom_username: ::String
+      attr_accessor ca_certificate: ::String
+      attr_accessor application_id: ::Integer
+      attr_accessor sso_token_buffer_minutes: ::Integer
+      attr_accessor extra_auth_params: ::String
+      SENSITIVE: [:client_secret, :secret]
+    end
+
+    class OidcTokenInfo
+      attr_accessor code_verifier: ::String
+      attr_accessor code_challenge: ::String
+      attr_accessor access_token: ::String
+      attr_accessor id_token: ::String
+      attr_accessor refresh_token: ::String
+      attr_accessor token_type: ::String
+      attr_accessor expires_in: ::Integer
+      SENSITIVE: []
+    end
+
+    class PasswordRequirements
+      attr_accessor lowercase: ::Integer
+      attr_accessor min_length: ::Integer
+      attr_accessor numbers: ::Integer
+      attr_accessor symbols: ::Integer
+      attr_accessor uppercase: ::Integer
+      SENSITIVE: []
+    end
+
+    class PermittedWickrEnterpriseNetwork
+      attr_accessor domain: ::String
+      attr_accessor network_id: ::String
+      SENSITIVE: []
+    end
+
+    class RateLimitError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReadReceiptConfig
+      attr_accessor status: ("DISABLED" | "ENABLED" | "FORCE_ENABLED")
+      SENSITIVE: []
+    end
+
+    class RegisterOidcConfigRequest
+      attr_accessor network_id: ::String
+      attr_accessor company_id: ::String
+      attr_accessor custom_username: ::String
+      attr_accessor extra_auth_params: ::String
+      attr_accessor issuer: ::String
+      attr_accessor scopes: ::String
+      attr_accessor secret: ::String
+      attr_accessor sso_token_buffer_minutes: ::Integer
+      attr_accessor user_id: ::String
+      SENSITIVE: [:secret]
+    end
+
+    class RegisterOidcConfigResponse
+      attr_accessor application_name: ::String
+      attr_accessor client_id: ::String
+      attr_accessor company_id: ::String
+      attr_accessor scopes: ::String
+      attr_accessor issuer: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor secret: ::String
+      attr_accessor redirect_url: ::String
+      attr_accessor user_id: ::String
+      attr_accessor custom_username: ::String
+      attr_accessor ca_certificate: ::String
+      attr_accessor application_id: ::Integer
+      attr_accessor sso_token_buffer_minutes: ::Integer
+      attr_accessor extra_auth_params: ::String
+      SENSITIVE: [:client_secret, :secret]
+    end
+
+    class RegisterOidcConfigTestRequest
+      attr_accessor network_id: ::String
+      attr_accessor extra_auth_params: ::String
+      attr_accessor issuer: ::String
+      attr_accessor scopes: ::String
+      attr_accessor certificate: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterOidcConfigTestResponse
+      attr_accessor token_endpoint: ::String
+      attr_accessor userinfo_endpoint: ::String
+      attr_accessor response_types_supported: ::Array[::String]
+      attr_accessor scopes_supported: ::Array[::String]
+      attr_accessor issuer: ::String
+      attr_accessor authorization_endpoint: ::String
+      attr_accessor end_session_endpoint: ::String
+      attr_accessor logout_endpoint: ::String
+      attr_accessor grant_types_supported: ::Array[::String]
+      attr_accessor revocation_endpoint: ::String
+      attr_accessor token_endpoint_auth_methods_supported: ::Array[::String]
+      attr_accessor microsoft_multi_refresh_token: bool
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SecurityGroup
+      attr_accessor active_members: ::Integer
+      attr_accessor bot_members: ::Integer
+      attr_accessor active_directory_guid: ::String
+      attr_accessor id: ::String
+      attr_accessor is_default: bool
+      attr_accessor name: ::String
+      attr_accessor modified: ::Integer
+      attr_accessor security_group_settings: Types::SecurityGroupSettings
+      SENSITIVE: []
+    end
+
+    class SecurityGroupSettings
+      attr_accessor always_reauthenticate: bool
+      attr_accessor atak_package_values: ::Array[::String]
+      attr_accessor calling: Types::CallingSettings
+      attr_accessor check_for_updates: bool
+      attr_accessor enable_atak: bool
+      attr_accessor enable_crash_reports: bool
+      attr_accessor enable_file_download: bool
+      attr_accessor enable_guest_federation: bool
+      attr_accessor enable_notification_preview: bool
+      attr_accessor enable_open_access_option: bool
+      attr_accessor enable_restricted_global_federation: bool
+      attr_accessor files_enabled: bool
+      attr_accessor force_device_lockout: ::Integer
+      attr_accessor force_open_access: bool
+      attr_accessor force_read_receipts: bool
+      attr_accessor global_federation: bool
+      attr_accessor is_ato_enabled: bool
+      attr_accessor is_link_preview_enabled: bool
+      attr_accessor location_allow_maps: bool
+      attr_accessor location_enabled: bool
+      attr_accessor max_auto_download_size: ::Integer
+      attr_accessor max_bor: ::Integer
+      attr_accessor max_ttl: ::Integer
+      attr_accessor message_forwarding_enabled: bool
+      attr_accessor password_requirements: Types::PasswordRequirements
+      attr_accessor presence_enabled: bool
+      attr_accessor quick_responses: ::Array[::String]
+      attr_accessor show_master_recovery_key: bool
+      attr_accessor shredder: Types::ShredderSettings
+      attr_accessor sso_max_idle_minutes: ::Integer
+      attr_accessor federation_mode: ::Integer
+      attr_accessor lockout_threshold: ::Integer
+      attr_accessor permitted_networks: ::Array[::String]
+      attr_accessor permitted_wickr_aws_networks: ::Array[Types::WickrAwsNetworks]
+      attr_accessor permitted_wickr_enterprise_networks: ::Array[Types::PermittedWickrEnterpriseNetwork]
+      SENSITIVE: []
+    end
+
+    class SecurityGroupSettingsRequest
+      attr_accessor lockout_threshold: ::Integer
+      attr_accessor permitted_networks: ::Array[::String]
+      attr_accessor enable_guest_federation: bool
+      attr_accessor global_federation: bool
+      attr_accessor federation_mode: ::Integer
+      attr_accessor enable_restricted_global_federation: bool
+      attr_accessor permitted_wickr_aws_networks: ::Array[Types::WickrAwsNetworks]
+      attr_accessor permitted_wickr_enterprise_networks: ::Array[Types::PermittedWickrEnterpriseNetwork]
+      SENSITIVE: []
+    end
+
+    class Setting
+      attr_accessor option_name: ::String
+      attr_accessor value: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ShredderSettings
+      attr_accessor can_process_manually: bool
+      attr_accessor intensity: ::Integer
+      SENSITIVE: []
+    end
+
+    class UnauthorizedError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBotRequest
+      attr_accessor network_id: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor group_id: ::String
+      attr_accessor challenge: ::String
+      attr_accessor suspend: bool
+      SENSITIVE: [:challenge]
+    end
+
+    class UpdateBotResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDataRetentionRequest
+      attr_accessor network_id: ::String
+      attr_accessor action_type: ("ENABLE" | "DISABLE" | "PUBKEY_MSG_ACK")
+      SENSITIVE: []
+    end
+
+    class UpdateDataRetentionResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGuestUserRequest
+      attr_accessor network_id: ::String
+      attr_accessor username_hash: ::String
+      attr_accessor block: bool
+      SENSITIVE: []
+    end
+
+    class UpdateGuestUserResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateNetworkRequest
+      attr_accessor network_id: ::String
+      attr_accessor network_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor encryption_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateNetworkResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateNetworkSettingsRequest
+      attr_accessor network_id: ::String
+      attr_accessor settings: Types::NetworkSettings
+      SENSITIVE: []
+    end
+
+    class UpdateNetworkSettingsResponse
+      attr_accessor settings: ::Array[Types::Setting]
+      SENSITIVE: []
+    end
+
+    class UpdateSecurityGroupRequest
+      attr_accessor network_id: ::String
+      attr_accessor group_id: ::String
+      attr_accessor name: ::String
+      attr_accessor security_group_settings: Types::SecurityGroupSettings
+      SENSITIVE: []
+    end
+
+    class UpdateSecurityGroupResponse
+      attr_accessor security_group: Types::SecurityGroup
+      SENSITIVE: []
+    end
+
+    class UpdateUserDetails
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor username: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor invite_code: ::String
+      attr_accessor invite_code_ttl: ::Integer
+      attr_accessor code_validation: bool
+      SENSITIVE: [:first_name, :last_name]
+    end
+
+    class UpdateUserRequest
+      attr_accessor network_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor user_details: Types::UpdateUserDetails
+      SENSITIVE: []
+    end
+
+    class UpdateUserResponse
+      attr_accessor user_id: ::String
+      attr_accessor network_id: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor middle_name: ::String
+      attr_accessor suspended: bool
+      attr_accessor modified: ::Integer
+      attr_accessor status: ::Integer
+      attr_accessor invite_code: ::String
+      attr_accessor invite_expiration: ::Integer
+      attr_accessor code_validation: bool
+      SENSITIVE: [:first_name, :last_name]
+    end
+
+    class User
+      attr_accessor user_id: ::String
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor username: ::String
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor is_admin: bool
+      attr_accessor suspended: bool
+      attr_accessor status: ::Integer
+      attr_accessor otp_enabled: bool
+      attr_accessor scim_id: ::String
+      attr_accessor type: ::String
+      attr_accessor cell: ::String
+      attr_accessor country_code: ::String
+      attr_accessor challenge_failures: ::Integer
+      attr_accessor is_invite_expired: bool
+      attr_accessor is_user: bool
+      attr_accessor invite_code: ::String
+      attr_accessor code_validation: bool
+      attr_accessor uname: ::String
+      SENSITIVE: [:first_name, :last_name]
+    end
+
+    class ValidationError
+      attr_accessor reasons: ::Array[Types::ErrorDetail]
+      SENSITIVE: []
+    end
+
+    class WickrAwsNetworks
+      attr_accessor region: ::String
+      attr_accessor network_id: ::String
+      SENSITIVE: []
+    end
+  end
+end

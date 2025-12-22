@@ -442,7 +442,7 @@ module Aws::ECS
     end
 
     class DeleteAccountSettingRequest
-      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode")
+      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode" | "fargateEventWindows")
       attr_accessor principal_arn: ::String
       SENSITIVE: []
     end
@@ -1018,6 +1018,7 @@ module Aws::ECS
       attr_accessor network_configuration: Types::ManagedInstancesNetworkConfiguration
       attr_accessor storage_configuration: Types::ManagedInstancesStorageConfiguration
       attr_accessor monitoring: ("BASIC" | "DETAILED")
+      attr_accessor capacity_option_type: ("ON_DEMAND" | "SPOT")
       attr_accessor instance_requirements: Types::InstanceRequirementsRequest
       SENSITIVE: []
     end
@@ -1095,7 +1096,7 @@ module Aws::ECS
     end
 
     class ListAccountSettingsRequest
-      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode")
+      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode" | "fargateEventWindows")
       attr_accessor value: ::String
       attr_accessor principal_arn: ::String
       attr_accessor effective_settings: bool
@@ -1544,7 +1545,7 @@ module Aws::ECS
     end
 
     class PutAccountSettingDefaultRequest
-      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode")
+      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode" | "fargateEventWindows")
       attr_accessor value: ::String
       SENSITIVE: []
     end
@@ -1555,7 +1556,7 @@ module Aws::ECS
     end
 
     class PutAccountSettingRequest
-      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode")
+      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode" | "fargateEventWindows")
       attr_accessor value: ::String
       attr_accessor principal_arn: ::String
       SENSITIVE: []
@@ -1980,7 +1981,7 @@ module Aws::ECS
     end
 
     class Setting
-      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode")
+      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode" | "fargateEventWindows")
       attr_accessor value: ::String
       attr_accessor principal_arn: ::String
       attr_accessor type: ("user" | "aws_managed")

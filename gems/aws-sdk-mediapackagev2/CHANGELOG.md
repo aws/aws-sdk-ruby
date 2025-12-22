@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2025-12-17)
+------------------
+
+* Feature - This release adds support for SPEKE V2 content key encryption in MediaPackage v2 Origin Endpoints.
+
 1.54.0 (2025-11-21)
 ------------------
 

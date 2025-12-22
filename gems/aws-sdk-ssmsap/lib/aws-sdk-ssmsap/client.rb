@@ -745,7 +745,7 @@ module Aws::SsmSap
     #   resp.database.database_name #=> String
     #   resp.database.database_type #=> String, one of "SYSTEM", "TENANT"
     #   resp.database.arn #=> String
-    #   resp.database.status #=> String, one of "RUNNING", "STARTING", "STOPPED", "WARNING", "UNKNOWN", "ERROR"
+    #   resp.database.status #=> String, one of "RUNNING", "STARTING", "STOPPED", "WARNING", "UNKNOWN", "ERROR", "STOPPING"
     #   resp.database.primary_host #=> String
     #   resp.database.sql_port #=> Integer
     #   resp.database.last_updated #=> Time
@@ -1797,7 +1797,7 @@ module Aws::SsmSap
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssmsap'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

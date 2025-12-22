@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2025-12-18)
+------------------
+
+* Feature - Adds support for ECR Create On Push
+
 1.115.0 (2025-11-21)
 ------------------
 
