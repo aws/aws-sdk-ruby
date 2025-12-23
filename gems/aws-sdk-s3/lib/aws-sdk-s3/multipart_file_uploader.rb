@@ -79,7 +79,7 @@ module Aws
       rescue MultipartUploadError => e
         raise e
       rescue StandardError => e
-        msg = "failed to abort multipart upload: #{e.message}. " \
+        msg = "failed to abort multipart upload: #{e&.message}. " \
               "Multipart upload failed: #{errors.map(&:message).join('; ')}"
         raise MultipartUploadError.new(msg, errors + [e])
       end
