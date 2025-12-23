@@ -485,10 +485,6 @@
   "ElasticLoadBalancingV2": {
     "models": "elasticloadbalancingv2/2015-12-01"
   },
-  "ElasticTranscoder": {
-    "models": "elastictranscoder/2012-09-25",
-    "deprecated": true
-  },
   "ElasticsearchService": {
     "models": "es/2015-01-01"
   },
