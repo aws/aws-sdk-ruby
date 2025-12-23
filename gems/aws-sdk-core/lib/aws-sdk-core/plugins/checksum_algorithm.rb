@@ -477,8 +477,7 @@ module Aws
           @chunk_size = Thread.current[:net_http_override_body_stream_chunk] || MIN_CHUNK_SIZE
           @overhead_bytes = calculate_overhead(@chunk_size)
           @base_chunk_size = @chunk_size - @overhead_bytes
-          @buffer = +''
-          @current_chunk = +''
+          @encoded_buffer = +''
           @eof = false
         end
 
@@ -496,42 +495,32 @@ module Aws
 
         def rewind
           @io.rewind
-          @buffer = +''
-          @current_chunk = +''
+          @encoded_buffer = +''
           @eof = false
+          @digest = ChecksumAlgorithm.digest_for_algorithm(@algorithm)
         end
 
         def read(length = nil, buf = nil)
-          length ||= MIN_CHUNK_SIZE
-
-          return if @eof && @buffer.empty? && @current_chunk.empty?
+          return '' if length == 0
+          return if @eof && @encoded_buffer.empty?
 
           buf&.clear
           output_buffer = buf || +''
 
-          while output_buffer.bytesize < length # fill until output buffer is ready
-            unless @buffer.empty?
-              take = [length - output_buffer.bytesize, @buffer.bytesize].min
-              slice_data = @buffer.slice!(0, take)
-              output_buffer << slice_data
-              next
-            end
+          fill_encoded_buffer(length)
 
-            unless @current_chunk.empty?
-              take = [length - output_buffer.bytesize, @current_chunk.bytesize].min
-              slice_data = @current_chunk.slice!(0, take)
-              output_buffer << slice_data
-              next
-            end
-
-            if !@eof
-              fill_chunk
-            else
-              break
-            end
+          if length
+            output_buffer << @encoded_buffer.slice!(0, length)
+          else
+            output_buffer << @encoded_buffer
+            @encoded_buffer.clear
           end
 
-          output_buffer
+          output_buffer.empty? && eof? ? nil : output_buffer
+        end
+
+        def eof?
+          @eof && @encoded_buffer.empty?
         end
 
         private
@@ -540,15 +529,21 @@ module Aws
           chunk_size.to_s(16).size + 4 # hex_length + "\r\n\r\n"
         end
 
-        def fill_chunk
-          chunk = @io.read(@base_chunk_size)
-          if chunk && !chunk.empty?
-            @digest.update(chunk)
-            @current_chunk << "#{chunk.bytesize.to_s(16)}\r\n#{chunk}\r\n"
-          else
-            trailer_str = { @location_name => @digest.base64digest }.map { |k, v| "#{k}:#{v}" }.join("\r\n")
-            @current_chunk << "0\r\n#{trailer_str}\r\n\r\n"
-            @eof = true
+        def fill_encoded_buffer(required_length)
+          return if required_length && @encoded_buffer.bytesize >= required_length # hey, we have enough to return so let's send it!
+
+          # must NOT be end of file AND NO required length is set (nil) OR current buffer size is smaller than required length
+          while !@eof && (!required_length || @encoded_buffer.bytesize <= required_length)
+            chunk = @io.read(@base_chunk_size)
+            if chunk && !chunk.empty?
+              @digest.update(chunk)
+              @encoded_buffer << "#{chunk.bytesize.to_s(16)}\r\n#{chunk}\r\n"
+            else
+              trailer_str = { @location_name => @digest.base64digest }.map { |k, v| "#{k}:#{v}" }.join("\r\n")
+              @encoded_buffer << "0\r\n#{trailer_str}\r\n\r\n"
+              @eof = true
+              break
+            end
           end
         end
       end
