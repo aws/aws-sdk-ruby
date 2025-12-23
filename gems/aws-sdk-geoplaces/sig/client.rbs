@@ -141,7 +141,7 @@ module Aws
       interface _GetPlaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPlaceResponse]
         def place_id: () -> ::String
-        def place_type: () -> ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress")
+        def place_type: () -> ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress" | "InferredSecondaryAddress")
         def title: () -> ::String
         def pricing_bucket: () -> ::String
         def address: () -> Types::Address
@@ -190,7 +190,8 @@ module Aws
                              ?language: ::String,
                              ?political_view: ::String,
                              ?intended_use: ("SingleUse" | "Storage"),
-                             ?key: ::String
+                             ?key: ::String,
+                             ?heading: ::Float
                            ) -> _ReverseGeocodeResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReverseGeocodeResponseSuccess
 

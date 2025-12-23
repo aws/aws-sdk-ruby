@@ -165,7 +165,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-elasticbeanstalk', '~> 1')
   spec.add_dependency('aws-sdk-elasticloadbalancing', '~> 1')
   spec.add_dependency('aws-sdk-elasticloadbalancingv2', '~> 1')
-  spec.add_dependency('aws-sdk-elastictranscoder', '~> 1')
   spec.add_dependency('aws-sdk-elasticsearchservice', '~> 1')
   spec.add_dependency('aws-sdk-entityresolution', '~> 1')
   spec.add_dependency('aws-sdk-eventbridge', '~> 1')

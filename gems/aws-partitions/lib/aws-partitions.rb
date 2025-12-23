@@ -394,7 +394,6 @@ module Aws
             'ElasticBeanstalk' => 'elasticbeanstalk',
             'ElasticLoadBalancing' => 'elasticloadbalancing',
             'ElasticLoadBalancingV2' => 'elasticloadbalancing',
-            'ElasticTranscoder' => 'elastictranscoder',
             'ElasticsearchService' => 'es',
             'EntityResolution' => 'entityresolution',
             'EventBridge' => 'events',

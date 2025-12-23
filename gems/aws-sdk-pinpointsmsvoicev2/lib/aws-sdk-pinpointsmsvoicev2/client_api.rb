@@ -1477,6 +1477,7 @@ module Aws::PinpointSMSVoiceV2
     RegistrationFieldValueInformation.add_member(:text_value, Shapes::ShapeRef.new(shape: TextValue, location_name: "TextValue"))
     RegistrationFieldValueInformation.add_member(:registration_attachment_id, Shapes::ShapeRef.new(shape: RegistrationAttachmentIdOrArn, location_name: "RegistrationAttachmentId"))
     RegistrationFieldValueInformation.add_member(:denied_reason, Shapes::ShapeRef.new(shape: String, location_name: "DeniedReason"))
+    RegistrationFieldValueInformation.add_member(:feedback, Shapes::ShapeRef.new(shape: String, location_name: "Feedback"))
     RegistrationFieldValueInformation.struct_class = Types::RegistrationFieldValueInformation
 
     RegistrationFieldValueInformationList.member = Shapes::ShapeRef.new(shape: RegistrationFieldValueInformation)
@@ -1547,6 +1548,7 @@ module Aws::PinpointSMSVoiceV2
     RegistrationVersionInformation.add_member(:registration_version_status, Shapes::ShapeRef.new(shape: RegistrationVersionStatus, required: true, location_name: "RegistrationVersionStatus"))
     RegistrationVersionInformation.add_member(:registration_version_status_history, Shapes::ShapeRef.new(shape: RegistrationVersionStatusHistory, required: true, location_name: "RegistrationVersionStatusHistory"))
     RegistrationVersionInformation.add_member(:denied_reasons, Shapes::ShapeRef.new(shape: RegistrationDeniedReasonInformationList, location_name: "DeniedReasons"))
+    RegistrationVersionInformation.add_member(:feedback, Shapes::ShapeRef.new(shape: String, location_name: "Feedback"))
     RegistrationVersionInformation.struct_class = Types::RegistrationVersionInformation
 
     RegistrationVersionInformationList.member = Shapes::ShapeRef.new(shape: RegistrationVersionInformation)
@@ -1555,6 +1557,7 @@ module Aws::PinpointSMSVoiceV2
 
     RegistrationVersionStatusHistory.add_member(:draft_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "DraftTimestamp"))
     RegistrationVersionStatusHistory.add_member(:submitted_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmittedTimestamp"))
+    RegistrationVersionStatusHistory.add_member(:aws_reviewing_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "AwsReviewingTimestamp"))
     RegistrationVersionStatusHistory.add_member(:reviewing_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ReviewingTimestamp"))
     RegistrationVersionStatusHistory.add_member(:requires_authentication_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RequiresAuthenticationTimestamp"))
     RegistrationVersionStatusHistory.add_member(:approved_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ApprovedTimestamp"))
@@ -1832,6 +1835,7 @@ module Aws::PinpointSMSVoiceV2
     StringMap.value = Shapes::ShapeRef.new(shape: String)
 
     SubmitRegistrationVersionRequest.add_member(:registration_id, Shapes::ShapeRef.new(shape: RegistrationIdOrArn, required: true, location_name: "RegistrationId"))
+    SubmitRegistrationVersionRequest.add_member(:aws_review, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "AwsReview"))
     SubmitRegistrationVersionRequest.struct_class = Types::SubmitRegistrationVersionRequest
 
     SubmitRegistrationVersionResult.add_member(:registration_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RegistrationArn"))
@@ -1839,6 +1843,7 @@ module Aws::PinpointSMSVoiceV2
     SubmitRegistrationVersionResult.add_member(:version_number, Shapes::ShapeRef.new(shape: RegistrationVersionNumber, required: true, location_name: "VersionNumber"))
     SubmitRegistrationVersionResult.add_member(:registration_version_status, Shapes::ShapeRef.new(shape: RegistrationVersionStatus, required: true, location_name: "RegistrationVersionStatus"))
     SubmitRegistrationVersionResult.add_member(:registration_version_status_history, Shapes::ShapeRef.new(shape: RegistrationVersionStatusHistory, required: true, location_name: "RegistrationVersionStatusHistory"))
+    SubmitRegistrationVersionResult.add_member(:aws_review, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "AwsReview"))
     SubmitRegistrationVersionResult.struct_class = Types::SubmitRegistrationVersionResult
 
     SupportedAssociation.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceType"))

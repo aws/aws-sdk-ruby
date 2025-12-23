@@ -6421,6 +6421,19 @@ module Aws::S3
       end
     end
 
+    context "S3 Outposts invalid bucket name" do
+      let(:expected) do
+        {"error" => "Invalid Outposts Bucket alias - it must be a valid bucket name."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-east-1", bucket: "test-accessp-o0b1de75431d83bebd/8xz5w8ijx1qzlbp3i3kbeta0--op-s3", endpoint: "https://example.amazonaws.com", use_fips: false, use_dual_stack: false, accelerate: false})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
     context "S3 Outposts bucketAlias Invalid hardware type" do
       let(:expected) do
         {"error" => "Unrecognized hardware type: \"Expected hardware type o or e but got h\""}

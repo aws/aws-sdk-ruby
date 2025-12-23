@@ -27,7 +27,8 @@ module Aws::GeoPlaces
     # a vehicle.
     #
     # @!attribute [rw] position
-    #   The position, in longitude and latitude.
+    #   The position in World Geodetic System (WGS 84) format: \[longitude,
+    #   latitude\].
     #   @return [Array<Float>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/AccessPoint AWS API Documentation
@@ -143,6 +144,13 @@ module Aws::GeoPlaces
     #   Components that correspond to secondary identifiers on an Address.
     #   Secondary address components include information such as Suite or
     #   Unit Number, Building, or Floor.
+    #
+    #   <note markdown="1"> Coverage for `Address.SecondaryAddressComponents` is available in
+    #   the following countries:
+    #
+    #    AUS, CAN, NZL, USA, PRI
+    #
+    #    </note>
     #   @return [Array<Types::SecondaryAddressComponent>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/Address AWS API Documentation
@@ -236,6 +244,12 @@ module Aws::GeoPlaces
     #
     # @!attribute [rw] secondary_address_components
     #   Match scores for the secondary address components in the result.
+    #
+    #   <note markdown="1"> Coverage for this functionality is available in the following
+    #   countries: AUS, AUT, BRA, CAN, ESP, FRA, GBR, IDN, IND, NZL, TUR,
+    #   TWN, USA.
+    #
+    #    </note>
     #   @return [Array<Types::SecondaryAddressComponentMatchScore>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/AddressComponentMatchScores AWS API Documentation
@@ -488,13 +502,15 @@ module Aws::GeoPlaces
     # @!attribute [rw] max_results
     #   An optional limit for the number of results returned in a single
     #   call.
+    #
+    #   Default value: 5
     #   @return [Integer]
     #
     # @!attribute [rw] bias_position
     #   The position in longitude and latitude that the results should be
     #   close to. Typically, place results returned are ranked higher the
     #   closer they are to this position. Stored in `[lng, lat]` and in the
-    #   WSG84 format.
+    #   WGS 84 format.
     #
     #   <note markdown="1"> The fields `BiasPosition`, `FilterBoundingBox`, and `FilterCircle`
     #   are mutually exclusive.
@@ -863,8 +879,8 @@ module Aws::GeoPlaces
     # The `Circle` that all results must be in.
     #
     # @!attribute [rw] center
-    #   The center position, in longitude and latitude, of the
-    #   `FilterCircle`.
+    #   The center position in World Geodetic System (WGS 84) format:
+    #   \[longitude, latitude\].
     #   @return [Array<Float>]
     #
     # @!attribute [rw] radius
@@ -1013,6 +1029,13 @@ module Aws::GeoPlaces
     #
     # @!attribute [rw] secondary_address_components
     #   Parsed secondary address components from the provided query text.
+    #
+    #   <note markdown="1"> Coverage for `ParsedQuery.Address.SecondaryAddressComponents` is
+    #   available in the following countries:
+    #
+    #    AUS, AUT, BRA, CAN, ESP, FRA, GBR, HKG, IDN, IND, NZL, TUR, TWN, USA
+    #
+    #    </note>
     #   @return [Array<Types::ParsedQuerySecondaryAddressComponent>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/GeocodeParsedQueryAddressComponents AWS API Documentation
@@ -1096,10 +1119,6 @@ module Aws::GeoPlaces
     #   The free-form text query to match addresses against. This is usually
     #   a partially typed address from an end user in an address box or
     #   form.
-    #
-    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] query_components
@@ -1110,18 +1129,15 @@ module Aws::GeoPlaces
     # @!attribute [rw] max_results
     #   An optional limit for the number of results returned in a single
     #   call.
+    #
+    #   Default value: 20
     #   @return [Integer]
     #
     # @!attribute [rw] bias_position
     #   The position, in longitude and latitude, that the results should be
     #   close to. Typically, place results returned are ranked higher the
     #   closer they are to this position. Stored in `[lng, lat]` and in the
-    #   WSG84 format.
-    #
-    #   <note markdown="1"> The fields `BiasPosition`, `FilterBoundingBox`, and `FilterCircle`
-    #   are mutually exclusive.
-    #
-    #    </note>
+    #   WGS 84 format.
     #   @return [Array<Float>]
     #
     # @!attribute [rw] filter
@@ -1192,7 +1208,8 @@ module Aws::GeoPlaces
     end
 
     # @!attribute [rw] pricing_bucket
-    #   The pricing bucket for which the query is charged at.
+    #   The pricing bucket for which the query is charged at, or the maximum
+    #   pricing bucket when the query is charged per item within the query.
     #
     #   For more information on pricing, please visit [Amazon Location
     #   Service Pricing][1].
@@ -1243,7 +1260,8 @@ module Aws::GeoPlaces
     #   @return [Array<Types::PostalCodeDetails>]
     #
     # @!attribute [rw] position
-    #   The position in longitude and latitude.
+    #   The position in World Geodetic System (WGS 84) format: \[longitude,
+    #   latitude\].
     #   @return [Array<Float>]
     #
     # @!attribute [rw] distance
@@ -1267,7 +1285,8 @@ module Aws::GeoPlaces
     #   @return [Array<Types::FoodType>]
     #
     # @!attribute [rw] access_points
-    #   Position of the access point represented by longitude and latitude.
+    #   Position of the access point in World Geodetic System (WGS 84)
+    #   format: \[longitude, latitude\].
     #   @return [Array<Types::AccessPoint>]
     #
     # @!attribute [rw] time_zone
@@ -1302,6 +1321,11 @@ module Aws::GeoPlaces
     #   All secondary addresses that are associated with a main address. A
     #   secondary address is one that includes secondary designators, such
     #   as a Suite or Unit Number, Building, or Floor information.
+    #
+    #   <note markdown="1"> Coverage for this functionality is available in the following
+    #   countries: AUS, CAN, NZL, USA, PRI.
+    #
+    #    </note>
     #   @return [Array<Types::RelatedPlace>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/GeocodeResultItem AWS API Documentation
@@ -1429,7 +1453,8 @@ module Aws::GeoPlaces
     #   @return [Array<Types::PostalCodeDetails>]
     #
     # @!attribute [rw] position
-    #   The position, in longitude and latitude.
+    #   The position in World Geodetic System (WGS 84) format: \[longitude,
+    #   latitude\].
     #   @return [Array<Float>]
     #
     # @!attribute [rw] map_view
@@ -1461,7 +1486,8 @@ module Aws::GeoPlaces
     #   @return [Array<Types::OpeningHours>]
     #
     # @!attribute [rw] access_points
-    #   Position of the access point in `(lng,lat)`.
+    #   Position of the access point in World Geodetic System (WGS 84)
+    #   format: \[longitude, latitude\].
     #   @return [Array<Types::AccessPoint>]
     #
     # @!attribute [rw] access_restrictions
@@ -1494,6 +1520,11 @@ module Aws::GeoPlaces
     #   All secondary addresses that are associated with a main address. A
     #   secondary address is one that includes secondary designators, such
     #   as a Suite or Unit Number, Building, or Floor information.
+    #
+    #   <note markdown="1"> Coverage for this functionality is available in the following
+    #   countries: AUS, CAN, NZL, USA, PRI.
+    #
+    #    </note>
     #   @return [Array<Types::RelatedPlace>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/GetPlaceResponse AWS API Documentation
@@ -1579,7 +1610,8 @@ module Aws::GeoPlaces
     #   @return [Types::Address]
     #
     # @!attribute [rw] position
-    #   The position, in longitude and latitude.
+    #   The position in World Geodetic System (WGS 84) format: \[longitude,
+    #   latitude\].
     #   @return [Array<Float>]
     #
     # @!attribute [rw] distance
@@ -1600,7 +1632,8 @@ module Aws::GeoPlaces
     #   @return [Array<Float>]
     #
     # @!attribute [rw] access_points
-    #   Position of the access point represented by longitude and latitude.
+    #   Position of the access point in World Geodetic System (WGS 84)
+    #   format: \[longitude, latitude\].
     #   @return [Array<Types::AccessPoint>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/Intersection AWS API Documentation
@@ -1952,11 +1985,13 @@ module Aws::GeoPlaces
     #   @return [Types::Address]
     #
     # @!attribute [rw] position
-    #   The position, in longitude and latitude.
+    #   The position in World Geodetic System (WGS 84) format: \[longitude,
+    #   latitude\].
     #   @return [Array<Float>]
     #
     # @!attribute [rw] access_points
-    #   Position of the access point represented by longitude and latitude.
+    #   Position of the access point in World Geodetic System (WGS 84)
+    #   format: \[longitude, latitude\].
     #   @return [Array<Types::AccessPoint>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/RelatedPlace AWS API Documentation
@@ -1987,9 +2022,10 @@ module Aws::GeoPlaces
     end
 
     # @!attribute [rw] query_position
-    #   The position, in `[lng, lat]` for which you are querying nearby
-    #   results for. Results closer to the position will be ranked higher
-    #   then results further away from the position
+    #   The position in World Geodetic System (WGS 84) format: \[longitude,
+    #   latitude\] for which you are querying nearby results for. Results
+    #   closer to the position will be ranked higher then results further
+    #   away from the position
     #   @return [Array<Float>]
     #
     # @!attribute [rw] query_radius
@@ -2000,6 +2036,8 @@ module Aws::GeoPlaces
     # @!attribute [rw] max_results
     #   An optional limit for the number of results returned in a single
     #   call.
+    #
+    #   Default value: 1
     #   @return [Integer]
     #
     # @!attribute [rw] filter
@@ -2052,6 +2090,14 @@ module Aws::GeoPlaces
     #   key or valid SigV4 signature must be provided when making a request.
     #   @return [String]
     #
+    # @!attribute [rw] heading
+    #   The heading in degrees from true north in a navigation context. The
+    #   heading is measured as the angle clockwise from the North direction.
+    #
+    #   Example: North is `0` degrees, East is `90` degrees, South is `180`
+    #   degrees, and West is `270` degrees.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/ReverseGeocodeRequest AWS API Documentation
     #
     class ReverseGeocodeRequest < Struct.new(
@@ -2063,8 +2109,9 @@ module Aws::GeoPlaces
       :language,
       :political_view,
       :intended_use,
-      :key)
-      SENSITIVE = [:query_position, :query_radius, :political_view, :key]
+      :key,
+      :heading)
+      SENSITIVE = [:query_position, :query_radius, :political_view, :key, :heading]
       include Aws::Structure
     end
 
@@ -2120,7 +2167,8 @@ module Aws::GeoPlaces
     #   @return [Array<Types::PostalCodeDetails>]
     #
     # @!attribute [rw] position
-    #   The position in longitude and latitude.
+    #   The position in World Geodetic System (WGS 84) format: \[longitude,
+    #   latitude\].
     #   @return [Array<Float>]
     #
     # @!attribute [rw] distance
@@ -2144,7 +2192,8 @@ module Aws::GeoPlaces
     #   @return [Array<Types::FoodType>]
     #
     # @!attribute [rw] access_points
-    #   Position of the access point represented by longitude and latitude.
+    #   Position of the access point in World Geodetic System (WGS 84)
+    #   format: \[longitude, latitude\].
     #   @return [Array<Types::AccessPoint>]
     #
     # @!attribute [rw] time_zone
@@ -2241,9 +2290,10 @@ module Aws::GeoPlaces
     end
 
     # @!attribute [rw] query_position
-    #   The position, in `[lng, lat]` for which you are querying nearby
-    #   results for. Results closer to the position will be ranked higher
-    #   then results further away from the position
+    #   The position in World Geodetic System (WGS 84) format: \[longitude,
+    #   latitude\] for which you are querying nearby results for. Results
+    #   closer to the position will be ranked higher then results further
+    #   away from the position
     #   @return [Array<Float>]
     #
     # @!attribute [rw] query_radius
@@ -2258,6 +2308,8 @@ module Aws::GeoPlaces
     # @!attribute [rw] max_results
     #   An optional limit for the number of results returned in a single
     #   call.
+    #
+    #   Default value: 20
     #   @return [Integer]
     #
     # @!attribute [rw] filter
@@ -2385,7 +2437,8 @@ module Aws::GeoPlaces
     #   @return [Boolean]
     #
     # @!attribute [rw] position
-    #   The position in longitude and latitude.
+    #   The position in World Geodetic System (WGS 84) format: \[longitude,
+    #   latitude\].
     #   @return [Array<Float>]
     #
     # @!attribute [rw] distance
@@ -2421,7 +2474,8 @@ module Aws::GeoPlaces
     #   @return [Array<Types::OpeningHours>]
     #
     # @!attribute [rw] access_points
-    #   Position of the access point represent by longitude and latitude.
+    #   Position of the access point in World Geodetic System (WGS 84)
+    #   format: \[longitude, latitude\].
     #   @return [Array<Types::AccessPoint>]
     #
     # @!attribute [rw] access_restrictions
@@ -2507,7 +2561,8 @@ module Aws::GeoPlaces
     #   a partially typed address from an end user in an address box or
     #   form.
     #
-    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #   <note markdown="1"> Exactly one of the following fields must be set: `QueryText` or
+    #   `QueryId`.
     #
     #    </note>
     #   @return [String]
@@ -2517,7 +2572,8 @@ module Aws::GeoPlaces
     #   the SearchText API will preform a SearchText query with the improved
     #   query terms for the original query made to the suggest API.
     #
-    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #   <note markdown="1"> Exactly one of the following fields must be set: `QueryText` or
+    #   `QueryId`.
     #
     #    </note>
     #   @return [String]
@@ -2525,16 +2581,18 @@ module Aws::GeoPlaces
     # @!attribute [rw] max_results
     #   An optional limit for the number of results returned in a single
     #   call.
+    #
+    #   Default value: 20
     #   @return [Integer]
     #
     # @!attribute [rw] bias_position
     #   The position, in longitude and latitude, that the results should be
     #   close to. Typically, place results returned are ranked higher the
     #   closer they are to this position. Stored in `[lng, lat]` and in the
-    #   WSG84 format.
+    #   WGS 84 format.
     #
-    #   <note markdown="1"> The fields `BiasPosition`, `FilterBoundingBox`, and `FilterCircle`
-    #   are mutually exclusive.
+    #   <note markdown="1"> Exactly one of the following fields must be set: `BiasPosition`,
+    #   `Filter.BoundingBox`, or `Filter.Circle`.
     #
     #    </note>
     #   @return [Array<Float>]
@@ -2665,7 +2723,8 @@ module Aws::GeoPlaces
     #   @return [Boolean]
     #
     # @!attribute [rw] position
-    #   The position, in longitude and latitude.
+    #   The position in World Geodetic System (WGS 84) format: \[longitude,
+    #   latitude\].
     #   @return [Array<Float>]
     #
     # @!attribute [rw] distance
@@ -2701,7 +2760,8 @@ module Aws::GeoPlaces
     #   @return [Array<Types::OpeningHours>]
     #
     # @!attribute [rw] access_points
-    #   Position of the access point represent by longitude and latitude.
+    #   Position of the access point in World Geodetic System (WGS 84)
+    #   format: \[longitude, latitude\].
     #   @return [Array<Types::AccessPoint>]
     #
     # @!attribute [rw] access_restrictions
@@ -2758,11 +2818,18 @@ module Aws::GeoPlaces
     #   Number that uniquely identifies a secondary address.
     #   @return [String]
     #
+    # @!attribute [rw] designator
+    #   The designator of the secondary address component.
+    #
+    #   Example: `Apt`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-places-2020-11-19/SecondaryAddressComponent AWS API Documentation
     #
     class SecondaryAddressComponent < Struct.new(
-      :number)
-      SENSITIVE = [:number]
+      :number,
+      :designator)
+      SENSITIVE = [:number, :designator]
       include Aws::Structure
     end
 
@@ -2976,7 +3043,8 @@ module Aws::GeoPlaces
     #   @return [Types::Address]
     #
     # @!attribute [rw] position
-    #   The position, in longitude and latitude.
+    #   The position in World Geodetic System (WGS 84) format: \[longitude,
+    #   latitude\].
     #   @return [Array<Float>]
     #
     # @!attribute [rw] distance
@@ -3004,7 +3072,8 @@ module Aws::GeoPlaces
     #   @return [Array<Types::BusinessChain>]
     #
     # @!attribute [rw] access_points
-    #   Position of the access point represent by longitude and latitude.
+    #   Position of the access point in World Geodetic System (WGS 84)
+    #   format: \[longitude, latitude\].
     #   @return [Array<Types::AccessPoint>]
     #
     # @!attribute [rw] access_restrictions
@@ -3065,7 +3134,7 @@ module Aws::GeoPlaces
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/latest/APIReference/API_geoplaces_SearchText.html
+    #   [1]: https://docs.aws.amazon.com/location/latest/APIReference/API_geoplaces_SearchText.html
     #   @return [String]
     #
     # @!attribute [rw] query_type
@@ -3088,7 +3157,7 @@ module Aws::GeoPlaces
     #   a partially typed address from an end user in an address box or
     #   form.
     #
-    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #   <note markdown="1"> The fields `QueryText` and `QueryID` are mutually exclusive.
     #
     #    </note>
     #   @return [String]
@@ -3096,6 +3165,8 @@ module Aws::GeoPlaces
     # @!attribute [rw] max_results
     #   An optional limit for the number of results returned in a single
     #   call.
+    #
+    #   Default value: 20
     #   @return [Integer]
     #
     # @!attribute [rw] max_query_refinements
@@ -3107,7 +3178,7 @@ module Aws::GeoPlaces
     #   The position, in longitude and latitude, that the results should be
     #   close to. Typically, place results returned are ranked higher the
     #   closer they are to this position. Stored in `[lng, lat]` and in the
-    #   WSG84 format.
+    #   WGS 84 format.
     #
     #   <note markdown="1"> The fields `BiasPosition`, `FilterBoundingBox`, and `FilterCircle`
     #   are mutually exclusive.

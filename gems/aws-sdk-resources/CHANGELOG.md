@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.251.0 (2025-12-23)
+------------------
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-elastictranscoder` gem.
+
 3.250.0 (2025-12-19)
 ------------------
 

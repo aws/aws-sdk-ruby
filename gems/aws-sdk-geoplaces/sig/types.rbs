@@ -128,7 +128,7 @@ module Aws::GeoPlaces
 
     class AutocompleteResultItem
       attr_accessor place_id: ::String
-      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress")
+      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress" | "InferredSecondaryAddress")
       attr_accessor title: ::String
       attr_accessor address: Types::Address
       attr_accessor distance: ::Integer
@@ -262,7 +262,7 @@ module Aws::GeoPlaces
 
     class GeocodeResultItem
       attr_accessor place_id: ::String
-      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress")
+      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress" | "InferredSecondaryAddress")
       attr_accessor title: ::String
       attr_accessor address: Types::Address
       attr_accessor address_number_corrected: bool
@@ -295,7 +295,7 @@ module Aws::GeoPlaces
 
     class GetPlaceResponse
       attr_accessor place_id: ::String
-      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress")
+      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress" | "InferredSecondaryAddress")
       attr_accessor title: ::String
       attr_accessor pricing_bucket: ::String
       attr_accessor address: Types::Address
@@ -424,7 +424,7 @@ module Aws::GeoPlaces
 
     class RelatedPlace
       attr_accessor place_id: ::String
-      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress")
+      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress" | "InferredSecondaryAddress")
       attr_accessor title: ::String
       attr_accessor address: Types::Address
       attr_accessor position: ::Array[::Float]
@@ -447,7 +447,8 @@ module Aws::GeoPlaces
       attr_accessor political_view: ::String
       attr_accessor intended_use: ("SingleUse" | "Storage")
       attr_accessor key: ::String
-      SENSITIVE: [:query_position, :query_radius, :political_view, :key]
+      attr_accessor heading: ::Float
+      SENSITIVE: [:query_position, :query_radius, :political_view, :key, :heading]
     end
 
     class ReverseGeocodeResponse
@@ -458,7 +459,7 @@ module Aws::GeoPlaces
 
     class ReverseGeocodeResultItem
       attr_accessor place_id: ::String
-      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress")
+      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress" | "InferredSecondaryAddress")
       attr_accessor title: ::String
       attr_accessor address: Types::Address
       attr_accessor address_number_corrected: bool
@@ -510,7 +511,7 @@ module Aws::GeoPlaces
 
     class SearchNearbyResultItem
       attr_accessor place_id: ::String
-      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress")
+      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress" | "InferredSecondaryAddress")
       attr_accessor title: ::String
       attr_accessor address: Types::Address
       attr_accessor address_number_corrected: bool
@@ -561,7 +562,7 @@ module Aws::GeoPlaces
 
     class SearchTextResultItem
       attr_accessor place_id: ::String
-      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress")
+      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress" | "InferredSecondaryAddress")
       attr_accessor title: ::String
       attr_accessor address: Types::Address
       attr_accessor address_number_corrected: bool
@@ -583,7 +584,8 @@ module Aws::GeoPlaces
 
     class SecondaryAddressComponent
       attr_accessor number: ::String
-      SENSITIVE: [:number]
+      attr_accessor designator: ::String
+      SENSITIVE: [:number, :designator]
     end
 
     class SecondaryAddressComponentMatchScore
@@ -635,7 +637,7 @@ module Aws::GeoPlaces
 
     class SuggestPlaceResult
       attr_accessor place_id: ::String
-      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress")
+      attr_accessor place_type: ("Country" | "Region" | "SubRegion" | "Locality" | "District" | "SubDistrict" | "PostalCode" | "Block" | "SubBlock" | "Intersection" | "Street" | "PointOfInterest" | "PointAddress" | "InterpolatedAddress" | "SecondaryAddress" | "InferredSecondaryAddress")
       attr_accessor address: Types::Address
       attr_accessor position: ::Array[::Float]
       attr_accessor distance: ::Integer

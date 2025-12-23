@@ -245,7 +245,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor registration_arn: ::String
       attr_accessor registration_id: ::String
       attr_accessor registration_type: ::String
-      attr_accessor registration_status: ("CREATED" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
+      attr_accessor registration_status: ("CREATED" | "SUBMITTED" | "AWS_REVIEWING" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
       attr_accessor current_version_number: ::Integer
       attr_accessor additional_attributes: ::Hash[::String, ::String]
       attr_accessor tags: ::Array[Types::Tag]
@@ -262,7 +262,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor registration_arn: ::String
       attr_accessor registration_id: ::String
       attr_accessor version_number: ::Integer
-      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "AWS_REVIEWING" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
       attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory
       SENSITIVE: []
     end
@@ -487,7 +487,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor registration_arn: ::String
       attr_accessor registration_id: ::String
       attr_accessor registration_type: ::String
-      attr_accessor registration_status: ("CREATED" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
+      attr_accessor registration_status: ("CREATED" | "SUBMITTED" | "AWS_REVIEWING" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
       attr_accessor current_version_number: ::Integer
       attr_accessor approved_version_number: ::Integer
       attr_accessor latest_denied_version_number: ::Integer
@@ -858,7 +858,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor registration_arn: ::String
       attr_accessor registration_id: ::String
       attr_accessor version_number: ::Integer
-      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "AWS_REVIEWING" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
       attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory
       SENSITIVE: []
     end
@@ -1270,6 +1270,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor text_value: ::String
       attr_accessor registration_attachment_id: ::String
       attr_accessor denied_reason: ::String
+      attr_accessor feedback: ::String
       SENSITIVE: []
     end
 
@@ -1283,7 +1284,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor registration_arn: ::String
       attr_accessor registration_id: ::String
       attr_accessor registration_type: ::String
-      attr_accessor registration_status: ("CREATED" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
+      attr_accessor registration_status: ("CREATED" | "SUBMITTED" | "AWS_REVIEWING" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
       attr_accessor current_version_number: ::Integer
       attr_accessor approved_version_number: ::Integer
       attr_accessor latest_denied_version_number: ::Integer
@@ -1337,15 +1338,17 @@ module Aws::PinpointSMSVoiceV2
 
     class RegistrationVersionInformation
       attr_accessor version_number: ::Integer
-      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "AWS_REVIEWING" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
       attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory
       attr_accessor denied_reasons: ::Array[Types::RegistrationDeniedReasonInformation]
+      attr_accessor feedback: ::String
       SENSITIVE: []
     end
 
     class RegistrationVersionStatusHistory
       attr_accessor draft_timestamp: ::Time
       attr_accessor submitted_timestamp: ::Time
+      attr_accessor aws_reviewing_timestamp: ::Time
       attr_accessor reviewing_timestamp: ::Time
       attr_accessor requires_authentication_timestamp: ::Time
       attr_accessor approved_timestamp: ::Time
@@ -1684,6 +1687,7 @@ module Aws::PinpointSMSVoiceV2
 
     class SubmitRegistrationVersionRequest
       attr_accessor registration_id: ::String
+      attr_accessor aws_review: bool
       SENSITIVE: []
     end
 
@@ -1691,8 +1695,9 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor registration_arn: ::String
       attr_accessor registration_id: ::String
       attr_accessor version_number: ::Integer
-      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "AWS_REVIEWING" | "REVIEWING" | "REQUIRES_AUTHENTICATION" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
       attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory
+      attr_accessor aws_review: bool
       SENSITIVE: []
     end
 

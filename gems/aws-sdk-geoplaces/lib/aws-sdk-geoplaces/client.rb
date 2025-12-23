@@ -485,6 +485,13 @@ module Aws::GeoPlaces
     # can be tailored using optional parameters like language and political
     # views.
     #
+    # For more information, see [Autocomplete][1] in the *Amazon Location
+    # Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/autocomplete.html
+    #
     # @option params [required, String] :query_text
     #   The free-form text query to match addresses against. This is usually a
     #   partially typed address from an end user in an address box or form.
@@ -496,11 +503,13 @@ module Aws::GeoPlaces
     # @option params [Integer] :max_results
     #   An optional limit for the number of results returned in a single call.
     #
+    #   Default value: 5
+    #
     # @option params [Array<Float>] :bias_position
     #   The position in longitude and latitude that the results should be
     #   close to. Typically, place results returned are ranked higher the
     #   closer they are to this position. Stored in `[lng, lat]` and in the
-    #   WSG84 format.
+    #   WGS 84 format.
     #
     #   <note markdown="1"> The fields `BiasPosition`, `FilterBoundingBox`, and `FilterCircle` are
     #   mutually exclusive.
@@ -612,7 +621,7 @@ module Aws::GeoPlaces
     #   resp.pricing_bucket #=> String
     #   resp.result_items #=> Array
     #   resp.result_items[0].place_id #=> String
-    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
+    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"
     #   resp.result_items[0].title #=> String
     #   resp.result_items[0].address.label #=> String
     #   resp.result_items[0].address.country.code_2 #=> String
@@ -644,6 +653,7 @@ module Aws::GeoPlaces
     #   resp.result_items[0].address.building #=> String
     #   resp.result_items[0].address.secondary_address_components #=> Array
     #   resp.result_items[0].address.secondary_address_components[0].number #=> String
+    #   resp.result_items[0].address.secondary_address_components[0].designator #=> String
     #   resp.result_items[0].distance #=> Integer
     #   resp.result_items[0].language #=> String
     #   resp.result_items[0].political_view #=> String
@@ -738,13 +748,16 @@ module Aws::GeoPlaces
     # additional features such as time zone information and the inclusion of
     # political views.
     #
+    # For more information, see [Geocode][1] in the *Amazon Location Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/geocode.html
+    #
     # @option params [String] :query_text
     #   The free-form text query to match addresses against. This is usually a
     #   partially typed address from an end user in an address box or form.
-    #
-    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
-    #
-    #    </note>
     #
     # @option params [Types::GeocodeQueryComponents] :query_components
     #   A structured free text query allows you to search for places by the
@@ -753,16 +766,13 @@ module Aws::GeoPlaces
     # @option params [Integer] :max_results
     #   An optional limit for the number of results returned in a single call.
     #
+    #   Default value: 20
+    #
     # @option params [Array<Float>] :bias_position
     #   The position, in longitude and latitude, that the results should be
     #   close to. Typically, place results returned are ranked higher the
     #   closer they are to this position. Stored in `[lng, lat]` and in the
-    #   WSG84 format.
-    #
-    #   <note markdown="1"> The fields `BiasPosition`, `FilterBoundingBox`, and `FilterCircle` are
-    #   mutually exclusive.
-    #
-    #    </note>
+    #   WGS 84 format.
     #
     # @option params [Types::GeocodeFilter] :filter
     #   A structure which contains a set of inclusion/exclusion properties
@@ -844,7 +854,7 @@ module Aws::GeoPlaces
     #   resp.pricing_bucket #=> String
     #   resp.result_items #=> Array
     #   resp.result_items[0].place_id #=> String
-    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
+    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"
     #   resp.result_items[0].title #=> String
     #   resp.result_items[0].address.label #=> String
     #   resp.result_items[0].address.country.code_2 #=> String
@@ -876,6 +886,7 @@ module Aws::GeoPlaces
     #   resp.result_items[0].address.building #=> String
     #   resp.result_items[0].address.secondary_address_components #=> Array
     #   resp.result_items[0].address.secondary_address_components[0].number #=> String
+    #   resp.result_items[0].address.secondary_address_components[0].designator #=> String
     #   resp.result_items[0].address_number_corrected #=> Boolean
     #   resp.result_items[0].postal_code_details #=> Array
     #   resp.result_items[0].postal_code_details[0].postal_code #=> String
@@ -1025,6 +1036,7 @@ module Aws::GeoPlaces
     #   resp.result_items[0].intersections[0].address.building #=> String
     #   resp.result_items[0].intersections[0].address.secondary_address_components #=> Array
     #   resp.result_items[0].intersections[0].address.secondary_address_components[0].number #=> String
+    #   resp.result_items[0].intersections[0].address.secondary_address_components[0].designator #=> String
     #   resp.result_items[0].intersections[0].position #=> Array
     #   resp.result_items[0].intersections[0].position[0] #=> Float
     #   resp.result_items[0].intersections[0].distance #=> Integer
@@ -1035,7 +1047,7 @@ module Aws::GeoPlaces
     #   resp.result_items[0].intersections[0].access_points[0].position #=> Array
     #   resp.result_items[0].intersections[0].access_points[0].position[0] #=> Float
     #   resp.result_items[0].main_address.place_id #=> String
-    #   resp.result_items[0].main_address.place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
+    #   resp.result_items[0].main_address.place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"
     #   resp.result_items[0].main_address.title #=> String
     #   resp.result_items[0].main_address.address.label #=> String
     #   resp.result_items[0].main_address.address.country.code_2 #=> String
@@ -1067,6 +1079,7 @@ module Aws::GeoPlaces
     #   resp.result_items[0].main_address.address.building #=> String
     #   resp.result_items[0].main_address.address.secondary_address_components #=> Array
     #   resp.result_items[0].main_address.address.secondary_address_components[0].number #=> String
+    #   resp.result_items[0].main_address.address.secondary_address_components[0].designator #=> String
     #   resp.result_items[0].main_address.position #=> Array
     #   resp.result_items[0].main_address.position[0] #=> Float
     #   resp.result_items[0].main_address.access_points #=> Array
@@ -1074,7 +1087,7 @@ module Aws::GeoPlaces
     #   resp.result_items[0].main_address.access_points[0].position[0] #=> Float
     #   resp.result_items[0].secondary_addresses #=> Array
     #   resp.result_items[0].secondary_addresses[0].place_id #=> String
-    #   resp.result_items[0].secondary_addresses[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
+    #   resp.result_items[0].secondary_addresses[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"
     #   resp.result_items[0].secondary_addresses[0].title #=> String
     #   resp.result_items[0].secondary_addresses[0].address.label #=> String
     #   resp.result_items[0].secondary_addresses[0].address.country.code_2 #=> String
@@ -1106,6 +1119,7 @@ module Aws::GeoPlaces
     #   resp.result_items[0].secondary_addresses[0].address.building #=> String
     #   resp.result_items[0].secondary_addresses[0].address.secondary_address_components #=> Array
     #   resp.result_items[0].secondary_addresses[0].address.secondary_address_components[0].number #=> String
+    #   resp.result_items[0].secondary_addresses[0].address.secondary_address_components[0].designator #=> String
     #   resp.result_items[0].secondary_addresses[0].position #=> Array
     #   resp.result_items[0].secondary_addresses[0].position[0] #=> Float
     #   resp.result_items[0].secondary_addresses[0].access_points #=> Array
@@ -1123,6 +1137,13 @@ module Aws::GeoPlaces
 
     # `GetPlace` finds a place by its unique ID. A `PlaceId` is returned by
     # other place operations.
+    #
+    # For more information, see [GetPlace][1] in the *Amazon Location
+    # Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/get-place.html
     #
     # @option params [required, String] :place_id
     #   The `PlaceId` of the place you wish to receive the information for.
@@ -1204,7 +1225,7 @@ module Aws::GeoPlaces
     # @example Response structure
     #
     #   resp.place_id #=> String
-    #   resp.place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
+    #   resp.place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"
     #   resp.title #=> String
     #   resp.pricing_bucket #=> String
     #   resp.address.label #=> String
@@ -1237,6 +1258,7 @@ module Aws::GeoPlaces
     #   resp.address.building #=> String
     #   resp.address.secondary_address_components #=> Array
     #   resp.address.secondary_address_components[0].number #=> String
+    #   resp.address.secondary_address_components[0].designator #=> String
     #   resp.address_number_corrected #=> Boolean
     #   resp.postal_code_details #=> Array
     #   resp.postal_code_details[0].postal_code #=> String
@@ -1360,7 +1382,7 @@ module Aws::GeoPlaces
     #   resp.phonemes.address.street[0].language #=> String
     #   resp.phonemes.address.street[0].preferred #=> Boolean
     #   resp.main_address.place_id #=> String
-    #   resp.main_address.place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
+    #   resp.main_address.place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"
     #   resp.main_address.title #=> String
     #   resp.main_address.address.label #=> String
     #   resp.main_address.address.country.code_2 #=> String
@@ -1392,6 +1414,7 @@ module Aws::GeoPlaces
     #   resp.main_address.address.building #=> String
     #   resp.main_address.address.secondary_address_components #=> Array
     #   resp.main_address.address.secondary_address_components[0].number #=> String
+    #   resp.main_address.address.secondary_address_components[0].designator #=> String
     #   resp.main_address.position #=> Array
     #   resp.main_address.position[0] #=> Float
     #   resp.main_address.access_points #=> Array
@@ -1399,7 +1422,7 @@ module Aws::GeoPlaces
     #   resp.main_address.access_points[0].position[0] #=> Float
     #   resp.secondary_addresses #=> Array
     #   resp.secondary_addresses[0].place_id #=> String
-    #   resp.secondary_addresses[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
+    #   resp.secondary_addresses[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"
     #   resp.secondary_addresses[0].title #=> String
     #   resp.secondary_addresses[0].address.label #=> String
     #   resp.secondary_addresses[0].address.country.code_2 #=> String
@@ -1431,6 +1454,7 @@ module Aws::GeoPlaces
     #   resp.secondary_addresses[0].address.building #=> String
     #   resp.secondary_addresses[0].address.secondary_address_components #=> Array
     #   resp.secondary_addresses[0].address.secondary_address_components[0].number #=> String
+    #   resp.secondary_addresses[0].address.secondary_address_components[0].designator #=> String
     #   resp.secondary_addresses[0].position #=> Array
     #   resp.secondary_addresses[0].position[0] #=> Float
     #   resp.secondary_addresses[0].access_points #=> Array
@@ -1454,10 +1478,18 @@ module Aws::GeoPlaces
     # can also provide additional features such as time zone information and
     # the inclusion of political views.
     #
+    # For more information, see [Reverse Geocode][1] in the *Amazon Location
+    # Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/reverse-geocode.html
+    #
     # @option params [required, Array<Float>] :query_position
-    #   The position, in `[lng, lat]` for which you are querying nearby
-    #   results for. Results closer to the position will be ranked higher then
-    #   results further away from the position
+    #   The position in World Geodetic System (WGS 84) format: \[longitude,
+    #   latitude\] for which you are querying nearby results for. Results
+    #   closer to the position will be ranked higher then results further away
+    #   from the position
     #
     # @option params [Integer] :query_radius
     #   The maximum distance in meters from the QueryPosition from which a
@@ -1465,6 +1497,8 @@ module Aws::GeoPlaces
     #
     # @option params [Integer] :max_results
     #   An optional limit for the number of results returned in a single call.
+    #
+    #   Default value: 1
     #
     # @option params [Types::ReverseGeocodeFilter] :filter
     #   A structure which contains a set of inclusion/exclusion properties
@@ -1509,6 +1543,13 @@ module Aws::GeoPlaces
     #   Optional: The API key to be used for authorization. Either an API key
     #   or valid SigV4 signature must be provided when making a request.
     #
+    # @option params [Float] :heading
+    #   The heading in degrees from true north in a navigation context. The
+    #   heading is measured as the angle clockwise from the North direction.
+    #
+    #   Example: North is `0` degrees, East is `90` degrees, South is `180`
+    #   degrees, and West is `270` degrees.
+    #
     # @return [Types::ReverseGeocodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ReverseGeocodeResponse#pricing_bucket #pricing_bucket} => String
@@ -1528,6 +1569,7 @@ module Aws::GeoPlaces
     #     political_view: "CountryCode",
     #     intended_use: "SingleUse", # accepts SingleUse, Storage
     #     key: "ApiKey",
+    #     heading: 1.0,
     #   })
     #
     # @example Response structure
@@ -1535,7 +1577,7 @@ module Aws::GeoPlaces
     #   resp.pricing_bucket #=> String
     #   resp.result_items #=> Array
     #   resp.result_items[0].place_id #=> String
-    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
+    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"
     #   resp.result_items[0].title #=> String
     #   resp.result_items[0].address.label #=> String
     #   resp.result_items[0].address.country.code_2 #=> String
@@ -1567,6 +1609,7 @@ module Aws::GeoPlaces
     #   resp.result_items[0].address.building #=> String
     #   resp.result_items[0].address.secondary_address_components #=> Array
     #   resp.result_items[0].address.secondary_address_components[0].number #=> String
+    #   resp.result_items[0].address.secondary_address_components[0].designator #=> String
     #   resp.result_items[0].address_number_corrected #=> Boolean
     #   resp.result_items[0].postal_code_details #=> Array
     #   resp.result_items[0].postal_code_details[0].postal_code #=> String
@@ -1628,6 +1671,7 @@ module Aws::GeoPlaces
     #   resp.result_items[0].intersections[0].address.building #=> String
     #   resp.result_items[0].intersections[0].address.secondary_address_components #=> Array
     #   resp.result_items[0].intersections[0].address.secondary_address_components[0].number #=> String
+    #   resp.result_items[0].intersections[0].address.secondary_address_components[0].designator #=> String
     #   resp.result_items[0].intersections[0].position #=> Array
     #   resp.result_items[0].intersections[0].position[0] #=> Float
     #   resp.result_items[0].intersections[0].distance #=> Integer
@@ -1654,10 +1698,18 @@ module Aws::GeoPlaces
     # type, contact, opening hours. Also, the API can return phonemes, time
     # zones and more based on requested parameters.
     #
+    # For more information, see [Search Nearby][1] in the *Amazon Location
+    # Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/search-nearby.html
+    #
     # @option params [required, Array<Float>] :query_position
-    #   The position, in `[lng, lat]` for which you are querying nearby
-    #   results for. Results closer to the position will be ranked higher then
-    #   results further away from the position
+    #   The position in World Geodetic System (WGS 84) format: \[longitude,
+    #   latitude\] for which you are querying nearby results for. Results
+    #   closer to the position will be ranked higher then results further away
+    #   from the position
     #
     # @option params [Integer] :query_radius
     #   The maximum distance in meters from the QueryPosition from which a
@@ -1669,6 +1721,8 @@ module Aws::GeoPlaces
     #
     # @option params [Integer] :max_results
     #   An optional limit for the number of results returned in a single call.
+    #
+    #   Default value: 20
     #
     # @option params [Types::SearchNearbyFilter] :filter
     #   A structure which contains a set of inclusion/exclusion properties
@@ -1752,7 +1806,7 @@ module Aws::GeoPlaces
     #   resp.pricing_bucket #=> String
     #   resp.result_items #=> Array
     #   resp.result_items[0].place_id #=> String
-    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
+    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"
     #   resp.result_items[0].title #=> String
     #   resp.result_items[0].address.label #=> String
     #   resp.result_items[0].address.country.code_2 #=> String
@@ -1784,6 +1838,7 @@ module Aws::GeoPlaces
     #   resp.result_items[0].address.building #=> String
     #   resp.result_items[0].address.secondary_address_components #=> Array
     #   resp.result_items[0].address.secondary_address_components[0].number #=> String
+    #   resp.result_items[0].address.secondary_address_components[0].designator #=> String
     #   resp.result_items[0].address_number_corrected #=> Boolean
     #   resp.result_items[0].position #=> Array
     #   resp.result_items[0].position[0] #=> Float
@@ -1916,11 +1971,19 @@ module Aws::GeoPlaces
     # complete a follow-up query suggested from the `Suggest` API via a
     # query id.
     #
+    # For more information, see [Search Text][1] in the *Amazon Location
+    # Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/search-text.html
+    #
     # @option params [String] :query_text
     #   The free-form text query to match addresses against. This is usually a
     #   partially typed address from an end user in an address box or form.
     #
-    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #   <note markdown="1"> Exactly one of the following fields must be set: `QueryText` or
+    #   `QueryId`.
     #
     #    </note>
     #
@@ -1929,21 +1992,24 @@ module Aws::GeoPlaces
     #   the SearchText API will preform a SearchText query with the improved
     #   query terms for the original query made to the suggest API.
     #
-    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #   <note markdown="1"> Exactly one of the following fields must be set: `QueryText` or
+    #   `QueryId`.
     #
     #    </note>
     #
     # @option params [Integer] :max_results
     #   An optional limit for the number of results returned in a single call.
     #
+    #   Default value: 20
+    #
     # @option params [Array<Float>] :bias_position
     #   The position, in longitude and latitude, that the results should be
     #   close to. Typically, place results returned are ranked higher the
     #   closer they are to this position. Stored in `[lng, lat]` and in the
-    #   WSG84 format.
+    #   WGS 84 format.
     #
-    #   <note markdown="1"> The fields `BiasPosition`, `FilterBoundingBox`, and `FilterCircle` are
-    #   mutually exclusive.
+    #   <note markdown="1"> Exactly one of the following fields must be set: `BiasPosition`,
+    #   `Filter.BoundingBox`, or `Filter.Circle`.
     #
     #    </note>
     #
@@ -2028,7 +2094,7 @@ module Aws::GeoPlaces
     #   resp.pricing_bucket #=> String
     #   resp.result_items #=> Array
     #   resp.result_items[0].place_id #=> String
-    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
+    #   resp.result_items[0].place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"
     #   resp.result_items[0].title #=> String
     #   resp.result_items[0].address.label #=> String
     #   resp.result_items[0].address.country.code_2 #=> String
@@ -2060,6 +2126,7 @@ module Aws::GeoPlaces
     #   resp.result_items[0].address.building #=> String
     #   resp.result_items[0].address.secondary_address_components #=> Array
     #   resp.result_items[0].address.secondary_address_components[0].number #=> String
+    #   resp.result_items[0].address.secondary_address_components[0].designator #=> String
     #   resp.result_items[0].address_number_corrected #=> Boolean
     #   resp.result_items[0].position #=> Array
     #   resp.result_items[0].position[0] #=> Float
@@ -2200,16 +2267,25 @@ module Aws::GeoPlaces
     # features like phonemes and timezones. The response includes refined
     # query terms and detailed place information.
     #
+    # For more information, see [Suggest][1] in the *Amazon Location Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/suggest.html
+    #
     # @option params [required, String] :query_text
     #   The free-form text query to match addresses against. This is usually a
     #   partially typed address from an end user in an address box or form.
     #
-    #   <note markdown="1"> The fields `QueryText`, and `QueryID` are mutually exclusive.
+    #   <note markdown="1"> The fields `QueryText` and `QueryID` are mutually exclusive.
     #
     #    </note>
     #
     # @option params [Integer] :max_results
     #   An optional limit for the number of results returned in a single call.
+    #
+    #   Default value: 20
     #
     # @option params [Integer] :max_query_refinements
     #   Maximum number of query terms to be returned for use with a search
@@ -2219,7 +2295,7 @@ module Aws::GeoPlaces
     #   The position, in longitude and latitude, that the results should be
     #   close to. Typically, place results returned are ranked higher the
     #   closer they are to this position. Stored in `[lng, lat]` and in the
-    #   WSG84 format.
+    #   WGS 84 format.
     #
     #   <note markdown="1"> The fields `BiasPosition`, `FilterBoundingBox`, and `FilterCircle` are
     #   mutually exclusive.
@@ -2292,7 +2368,7 @@ module Aws::GeoPlaces
     #   resp.result_items[0].title #=> String
     #   resp.result_items[0].suggest_result_item_type #=> String, one of "Place", "Query"
     #   resp.result_items[0].place.place_id #=> String
-    #   resp.result_items[0].place.place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress"
+    #   resp.result_items[0].place.place_type #=> String, one of "Country", "Region", "SubRegion", "Locality", "District", "SubDistrict", "PostalCode", "Block", "SubBlock", "Intersection", "Street", "PointOfInterest", "PointAddress", "InterpolatedAddress", "SecondaryAddress", "InferredSecondaryAddress"
     #   resp.result_items[0].place.address.label #=> String
     #   resp.result_items[0].place.address.country.code_2 #=> String
     #   resp.result_items[0].place.address.country.code_3 #=> String
@@ -2323,6 +2399,7 @@ module Aws::GeoPlaces
     #   resp.result_items[0].place.address.building #=> String
     #   resp.result_items[0].place.address.secondary_address_components #=> Array
     #   resp.result_items[0].place.address.secondary_address_components[0].number #=> String
+    #   resp.result_items[0].place.address.secondary_address_components[0].designator #=> String
     #   resp.result_items[0].place.position #=> Array
     #   resp.result_items[0].place.position[0] #=> Float
     #   resp.result_items[0].place.distance #=> Integer
@@ -2437,7 +2514,7 @@ module Aws::GeoPlaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-geoplaces'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

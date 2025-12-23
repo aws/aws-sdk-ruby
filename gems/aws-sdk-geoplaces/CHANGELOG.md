@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2025-12-23)
+------------------
+
+* Feature - Adds support for InferredSecondaryAddress place type, Designator in SecondaryAddressComponent and Heading in ReverseGeocode.
+
 1.16.0 (2025-11-21)
 ------------------
 
