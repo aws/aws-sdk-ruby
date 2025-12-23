@@ -388,6 +388,7 @@ a clock skew correction and retry requests with skewed client clocks.
         def retry_if_possible(response, error_inspector)
           context = response.context
           if should_retry?(context, error_inspector)
+            puts "***RETRYING (attempt #{context.retries}) ***\n"
             retry_request(context, error_inspector)
           else
             response
