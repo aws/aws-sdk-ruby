@@ -27,7 +27,7 @@ module Aws
     #
     # Automatically handles refreshing credentials if an Expiration time is provided in the credentials payload.
     class ContainerCredentialsProvider
-      include Smithy::Client::IdentityProvider
+      include IdentityProvider
       include Smithy::Client::RefreshingIdentityProvider
 
       # @api private
@@ -91,10 +91,6 @@ module Aws
 
       # @return [Proc]
       attr_reader :backoff
-
-      # Feature IDs for the User-Agent
-      # @api private
-      attr_accessor :features
 
       private
 

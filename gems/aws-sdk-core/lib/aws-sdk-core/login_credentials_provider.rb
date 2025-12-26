@@ -15,7 +15,7 @@ module Aws
     #
     # If you omit the `:client` option, a new {Aws::Signin::Client} object will be constructed.
     class LoginCredentialsProvider
-      include Smithy::Client::IdentityProvider
+      include IdentityProvider
       include Smithy::Client::RefreshingIdentityProvider
 
       # Raised when Login Token is invalid
@@ -44,10 +44,6 @@ module Aws
 
       # @return [Signin::Client]
       attr_reader :client
-
-      # Feature IDs for the User-Agent
-      # @api private
-      attr_accessor :features
 
       private
 

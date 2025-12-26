@@ -5,7 +5,7 @@ module Aws
     # Auto-refreshing token provider that loads a cached access token from disk derived from the AWS SSO device grant
     # authorization flow.
     class SSOOIDCTokenProvider
-      include Smithy::Client::IdentityProvider
+      include IdentityProvider
       include Smithy::Client::RefreshingIdentityProvider
 
       # Raised when SSO Token is invalid
@@ -34,10 +34,6 @@ module Aws
 
       # @return [SSOOIDC::Client]
       attr_reader :client
-
-      # Feature IDs for the User-Agent
-      # @api private
-      attr_accessor :features
 
       private
 

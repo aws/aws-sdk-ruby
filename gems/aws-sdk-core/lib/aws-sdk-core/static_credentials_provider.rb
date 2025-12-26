@@ -4,7 +4,7 @@ module Aws
   module Core
     # Returns static credentials.
     class StaticCredentialsProvider
-      include Smithy::Client::IdentityProvider
+      include IdentityProvider
 
       # @overload initialize(options)
       #   Initializes with a credentials object.
@@ -20,10 +20,6 @@ module Aws
         @identity = options[:credentials] || Credentials.new(options)
         @features = []
       end
-
-      # Feature IDs for the User-Agent
-      # @api private
-      attr_accessor :features
     end
   end
 end

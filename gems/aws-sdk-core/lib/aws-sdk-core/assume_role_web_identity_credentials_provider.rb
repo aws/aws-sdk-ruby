@@ -16,7 +16,7 @@ module Aws
     #
     # @see Aws::STS::Client#assume_role_with_web_identity
     class AssumeRoleWebIdentityCredentialsProvider
-      include Smithy::Client::IdentityProvider
+      include IdentityProvider
       include Smithy::Client::RefreshingIdentityProvider
 
       # Raised when :web_identity_token_file parameter is not provided or the file doesn't exist when initializing
@@ -53,10 +53,6 @@ module Aws
 
       # @return [STS::Client]
       attr_reader :client
-
-      # Feature IDs for the User-Agent
-      # @api private
-      attr_accessor :features
 
       private
 

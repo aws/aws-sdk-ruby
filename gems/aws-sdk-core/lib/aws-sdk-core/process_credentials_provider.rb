@@ -18,7 +18,7 @@ module Aws
     #
     # @see https://docs.aws.amazon.com/cli/latest/topic/config-vars.html#sourcing-credentials-from-external-processes
     class ProcessCredentialsProvider
-      include Smithy::Client::IdentityProvider
+      include IdentityProvider
       include Smithy::Client::RefreshingIdentityProvider
 
       # Creates a new ProcessCredentialsProvider object, which allows an
@@ -30,10 +30,6 @@ module Aws
         @features = ['CREDENTIALS_PROCESS']
         super
       end
-
-      # Feature IDs for the User-Agent
-      # @api private
-      attr_accessor :features
 
       private
 

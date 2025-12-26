@@ -21,7 +21,7 @@ module Aws
     # @see Aws::SSO::Client#get_role_credentials
     # @see https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html
     class SSOCredentialsProvider
-      include Smithy::Client::IdentityProvider
+      include IdentityProvider
       include Smithy::Client::RefreshingIdentityProvider
 
       # @option options [String] :sso_session The SSO Session used for fetching the SSO token.
@@ -63,10 +63,6 @@ module Aws
 
       # @return [SSO::Client]
       attr_reader :client
-
-      # Feature IDs for the User-Agent
-      # @api private
-      attr_accessor :features
 
       private
 

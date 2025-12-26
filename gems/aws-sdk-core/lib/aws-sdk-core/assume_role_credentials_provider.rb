@@ -16,7 +16,7 @@ module Aws
     #
     # @see Aws::STS::Client#assume_role
     class AssumeRoleCredentialsProvider
-      include Smithy::Client::IdentityProvider
+      include IdentityProvider
       include Smithy::Client::RefreshingIdentityProvider
 
       # @option options [String] :role_arn
@@ -49,10 +49,6 @@ module Aws
 
       # @return [Hash]
       attr_reader :assume_role_params
-
-      # Feature IDs for the User-Agent
-      # @api private
-      attr_accessor :features
 
       private
 

@@ -11,7 +11,7 @@ module Aws
     #
     # @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-imds-credentials.html
     class InstanceProfileCredentialsProvider
-      include Smithy::Client::IdentityProvider
+      include IdentityProvider
       include Smithy::Client::RefreshingIdentityProvider
 
       # Path base for GET request for profile and credentials
@@ -38,10 +38,6 @@ module Aws
 
       # @return [EC2Metadata]
       attr_reader :ec2_metadata
-
-      # Feature IDs for the User-Agent
-      # @api private
-      attr_accessor :features
 
       private
 
