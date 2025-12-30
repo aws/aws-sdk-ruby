@@ -469,6 +469,9 @@ module Aws
       # Wrapper for request body that implements application-layer
       # chunking with Digest computed on chunks + added as a trailer
       class AwsChunkedTrailerDigestIO
+        CHUNK_OVERHEAD = 4 # "\r\n\r\n"
+        HEX_BASE = 16
+
         def initialize(options = {})
           @io = options.delete(:io)
           @location_name = options.delete(:location_name)
@@ -487,8 +490,9 @@ module Aws
           n_full_chunks = orig_body_size / @base_chunk_size
           partial_bytes = orig_body_size % @base_chunk_size
 
-          chunked_body_size = n_full_chunks * (@base_chunk_size + @base_chunk_size.to_s(16).size + 4)
-          chunked_body_size += partial_bytes.to_s(16).size + partial_bytes + 4 unless partial_bytes.zero?
+          full_chunk_overhead = @base_chunk_size.to_s(HEX_BASE).size + CHUNK_OVERHEAD
+          chunked_body_size = n_full_chunks * (@base_chunk_size + full_chunk_overhead)
+          chunked_body_size += partial_bytes.to_s(HEX_BASE).size + partial_bytes + 4 unless partial_bytes.zero?
           trailer_size = ChecksumAlgorithm.trailer_length(@algorithm, @location_name)
           chunked_body_size + trailer_size
         end
@@ -501,7 +505,7 @@ module Aws
         end
 
         def read(length = nil, buf = nil)
-          return '' if length == 0
+          return '' if length&.zero?
           return if @eof && @encoded_buffer.empty?
 
           buf&.clear
@@ -526,25 +530,32 @@ module Aws
         private
 
         def calculate_overhead(chunk_size)
-          chunk_size.to_s(16).size + 4 # hex_length + "\r\n\r\n"
+          chunk_size.to_s(HEX_BASE).size + CHUNK_OVERHEAD
         end
 
         def fill_encoded_buffer(required_length)
-          return if required_length && @encoded_buffer.bytesize >= required_length # hey, we have enough to return so let's send it!
+          return if required_length && @encoded_buffer.bytesize >= required_length
 
-          # must NOT be end of file AND NO required length is set (nil) OR current buffer size is smaller than required length
-          while !@eof && (!required_length || @encoded_buffer.bytesize <= required_length)
+          while !@eof && fill_data?(required_length)
             chunk = @io.read(@base_chunk_size)
             if chunk && !chunk.empty?
               @digest.update(chunk)
-              @encoded_buffer << "#{chunk.bytesize.to_s(16)}\r\n#{chunk}\r\n"
+              @encoded_buffer << "#{chunk.bytesize.to_s(HEX_BASE)}\r\n#{chunk}\r\n"
             else
-              trailer_str = { @location_name => @digest.base64digest }.map { |k, v| "#{k}:#{v}" }.join("\r\n")
-              @encoded_buffer << "0\r\n#{trailer_str}\r\n\r\n"
+              @encoded_buffer << "0\r\n#{trailer_string}\r\n\r\n"
               @eof = true
               break
             end
           end
+        end
+
+        def trailer_string
+          { @location_name => @digest.base64digest }.map { |k, v| "#{k}:#{v}" }.join("\r\n")
+        end
+
+        # Returns true if more data needs to be read into the buffer
+        def fill_data?(length)
+          length.nil? || @encoded_buffer.bytesize < length
         end
       end
     end
