@@ -1070,6 +1070,9 @@ module Aws::MediaLive
     #
     # @option params [Boolean] :dry_run
     #
+    # @option params [Types::LinkedChannelSettings] :linked_channel_settings
+    #   Configuration for linked channel relationships
+    #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelResponse#channel #channel} => Types::Channel
@@ -1277,6 +1280,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
     #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.pipeline_locking_method #=> String, one of "SOURCE_TIMECODE", "VIDEO_ALIGNMENT"
     #   resp.channel.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -1918,6 +1922,11 @@ module Aws::MediaLive
     #   resp.channel.anywhere_settings.cluster_id #=> String
     #   resp.channel.channel_engine_version.expiration_date #=> Time
     #   resp.channel.channel_engine_version.version #=> String
+    #   resp.channel.linked_channel_settings.follower_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
+    #   resp.channel.linked_channel_settings.follower_channel_settings.primary_channel_arn #=> String
+    #   resp.channel.linked_channel_settings.primary_channel_settings.following_channel_arns #=> Array
+    #   resp.channel.linked_channel_settings.primary_channel_settings.following_channel_arns[0] #=> String
+    #   resp.channel.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
     #
@@ -2510,6 +2519,7 @@ module Aws::MediaLive
     #   * {Types::DeleteChannelResponse#vpc #vpc} => Types::VpcOutputSettingsDescription
     #   * {Types::DeleteChannelResponse#anywhere_settings #anywhere_settings} => Types::DescribeAnywhereSettings
     #   * {Types::DeleteChannelResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
+    #   * {Types::DeleteChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -2720,6 +2730,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
+    #   resp.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.pipeline_locking_method #=> String, one of "SOURCE_TIMECODE", "VIDEO_ALIGNMENT"
     #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -3361,6 +3372,11 @@ module Aws::MediaLive
     #   resp.anywhere_settings.cluster_id #=> String
     #   resp.channel_engine_version.expiration_date #=> Time
     #   resp.channel_engine_version.version #=> String
+    #   resp.linked_channel_settings.follower_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
+    #   resp.linked_channel_settings.follower_channel_settings.primary_channel_arn #=> String
+    #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns #=> Array
+    #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns[0] #=> String
+    #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannel AWS API Documentation
     #
@@ -3694,6 +3710,7 @@ module Aws::MediaLive
     #   * {Types::DescribeChannelResponse#vpc #vpc} => Types::VpcOutputSettingsDescription
     #   * {Types::DescribeChannelResponse#anywhere_settings #anywhere_settings} => Types::DescribeAnywhereSettings
     #   * {Types::DescribeChannelResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
+    #   * {Types::DescribeChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -3904,6 +3921,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
+    #   resp.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.pipeline_locking_method #=> String, one of "SOURCE_TIMECODE", "VIDEO_ALIGNMENT"
     #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -4545,6 +4563,11 @@ module Aws::MediaLive
     #   resp.anywhere_settings.cluster_id #=> String
     #   resp.channel_engine_version.expiration_date #=> Time
     #   resp.channel_engine_version.version #=> String
+    #   resp.linked_channel_settings.follower_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
+    #   resp.linked_channel_settings.follower_channel_settings.primary_channel_arn #=> String
+    #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns #=> Array
+    #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns[0] #=> String
+    #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -5397,6 +5420,11 @@ module Aws::MediaLive
     #   resp.channels[0].used_channel_engine_versions #=> Array
     #   resp.channels[0].used_channel_engine_versions[0].expiration_date #=> Time
     #   resp.channels[0].used_channel_engine_versions[0].version #=> String
+    #   resp.channels[0].linked_channel_settings.follower_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
+    #   resp.channels[0].linked_channel_settings.follower_channel_settings.primary_channel_arn #=> String
+    #   resp.channels[0].linked_channel_settings.primary_channel_settings.following_channel_arns #=> Array
+    #   resp.channels[0].linked_channel_settings.primary_channel_settings.following_channel_arns[0] #=> String
+    #   resp.channels[0].linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListChannels AWS API Documentation
@@ -6106,6 +6134,7 @@ module Aws::MediaLive
     #   * {Types::StartChannelResponse#vpc #vpc} => Types::VpcOutputSettingsDescription
     #   * {Types::StartChannelResponse#anywhere_settings #anywhere_settings} => Types::DescribeAnywhereSettings
     #   * {Types::StartChannelResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
+    #   * {Types::StartChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -6316,6 +6345,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
+    #   resp.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.pipeline_locking_method #=> String, one of "SOURCE_TIMECODE", "VIDEO_ALIGNMENT"
     #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -6957,6 +6987,11 @@ module Aws::MediaLive
     #   resp.anywhere_settings.cluster_id #=> String
     #   resp.channel_engine_version.expiration_date #=> Time
     #   resp.channel_engine_version.version #=> String
+    #   resp.linked_channel_settings.follower_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
+    #   resp.linked_channel_settings.follower_channel_settings.primary_channel_arn #=> String
+    #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns #=> Array
+    #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns[0] #=> String
+    #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannel AWS API Documentation
     #
@@ -7097,6 +7132,7 @@ module Aws::MediaLive
     #   * {Types::StopChannelResponse#vpc #vpc} => Types::VpcOutputSettingsDescription
     #   * {Types::StopChannelResponse#anywhere_settings #anywhere_settings} => Types::DescribeAnywhereSettings
     #   * {Types::StopChannelResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
+    #   * {Types::StopChannelResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -7307,6 +7343,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
+    #   resp.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.pipeline_locking_method #=> String, one of "SOURCE_TIMECODE", "VIDEO_ALIGNMENT"
     #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -7948,6 +7985,11 @@ module Aws::MediaLive
     #   resp.anywhere_settings.cluster_id #=> String
     #   resp.channel_engine_version.expiration_date #=> Time
     #   resp.channel_engine_version.version #=> String
+    #   resp.linked_channel_settings.follower_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
+    #   resp.linked_channel_settings.follower_channel_settings.primary_channel_arn #=> String
+    #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns #=> Array
+    #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns[0] #=> String
+    #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannel AWS API Documentation
     #
@@ -8123,6 +8165,9 @@ module Aws::MediaLive
     #
     # @option params [Types::AnywhereSettings] :anywhere_settings
     #   Elemental anywhere settings
+    #
+    # @option params [Types::LinkedChannelSettings] :linked_channel_settings
+    #   Configuration for linked channel relationships
     #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8331,6 +8376,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
     #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.pipeline_locking_method #=> String, one of "SOURCE_TIMECODE", "VIDEO_ALIGNMENT"
     #   resp.channel.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -8972,6 +9018,11 @@ module Aws::MediaLive
     #   resp.channel.anywhere_settings.cluster_id #=> String
     #   resp.channel.channel_engine_version.expiration_date #=> Time
     #   resp.channel.channel_engine_version.version #=> String
+    #   resp.channel.linked_channel_settings.follower_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
+    #   resp.channel.linked_channel_settings.follower_channel_settings.primary_channel_arn #=> String
+    #   resp.channel.linked_channel_settings.primary_channel_settings.following_channel_arns #=> Array
+    #   resp.channel.linked_channel_settings.primary_channel_settings.following_channel_arns[0] #=> String
+    #   resp.channel.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannel AWS API Documentation
     #
@@ -9238,6 +9289,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
     #   resp.channel.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
+    #   resp.channel.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.pipeline_locking_method #=> String, one of "SOURCE_TIMECODE", "VIDEO_ALIGNMENT"
     #   resp.channel.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -9879,6 +9931,11 @@ module Aws::MediaLive
     #   resp.channel.anywhere_settings.cluster_id #=> String
     #   resp.channel.channel_engine_version.expiration_date #=> Time
     #   resp.channel.channel_engine_version.version #=> String
+    #   resp.channel.linked_channel_settings.follower_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
+    #   resp.channel.linked_channel_settings.follower_channel_settings.primary_channel_arn #=> String
+    #   resp.channel.linked_channel_settings.primary_channel_settings.following_channel_arns #=> Array
+    #   resp.channel.linked_channel_settings.primary_channel_settings.following_channel_arns[0] #=> String
+    #   resp.channel.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannelClass AWS API Documentation
     #
@@ -10536,6 +10593,7 @@ module Aws::MediaLive
     #   * {Types::RestartChannelPipelinesResponse#vpc #vpc} => Types::VpcOutputSettingsDescription
     #   * {Types::RestartChannelPipelinesResponse#anywhere_settings #anywhere_settings} => Types::DescribeAnywhereSettings
     #   * {Types::RestartChannelPipelinesResponse#channel_engine_version #channel_engine_version} => Types::ChannelEngineVersionResponse
+    #   * {Types::RestartChannelPipelinesResponse#linked_channel_settings #linked_channel_settings} => Types::DescribeLinkedChannelSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -10747,6 +10805,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.custom_epoch #=> String
     #   resp.encoder_settings.global_configuration.output_locking_settings.epoch_locking_settings.jam_sync_time #=> String
+    #   resp.encoder_settings.global_configuration.output_locking_settings.pipeline_locking_settings.pipeline_locking_method #=> String, one of "SOURCE_TIMECODE", "VIDEO_ALIGNMENT"
     #   resp.encoder_settings.motion_graphics_configuration.motion_graphics_insertion #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
     #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
@@ -11389,6 +11448,11 @@ module Aws::MediaLive
     #   resp.anywhere_settings.cluster_id #=> String
     #   resp.channel_engine_version.expiration_date #=> Time
     #   resp.channel_engine_version.version #=> String
+    #   resp.linked_channel_settings.follower_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
+    #   resp.linked_channel_settings.follower_channel_settings.primary_channel_arn #=> String
+    #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns #=> Array
+    #   resp.linked_channel_settings.primary_channel_settings.following_channel_arns[0] #=> String
+    #   resp.linked_channel_settings.primary_channel_settings.linked_channel_type #=> String, one of "FOLLOWING_CHANNEL", "PRIMARY_CHANNEL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RestartChannelPipelines AWS API Documentation
     #
@@ -14716,7 +14780,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.170.0'
+      context[:gem_version] = '1.171.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

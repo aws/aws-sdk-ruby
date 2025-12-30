@@ -1220,6 +1220,7 @@ module Aws::QuickSight
       attr_accessor chat_agent: ("DENY")
       attr_accessor create_chat_agents: ("DENY")
       attr_accessor research: ("DENY")
+      attr_accessor self_upgrade_user_role: ("DENY")
       SENSITIVE: []
     end
 
@@ -4209,6 +4210,19 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DescribeSelfUpgradeConfigurationRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor namespace: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSelfUpgradeConfigurationResponse
+      attr_accessor self_upgrade_configuration: Types::SelfUpgradeConfiguration
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
     class DescribeTemplateAliasRequest
       attr_accessor aws_account_id: ::String
       attr_accessor template_id: ::String
@@ -5996,6 +6010,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class InvalidParameterException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
     class InvalidParameterValueException
       attr_accessor message: ::String
       attr_accessor request_id: ::String
@@ -6691,6 +6711,22 @@ module Aws::QuickSight
 
     class ListRoleMembershipsResponse
       attr_accessor members_list: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSelfUpgradesRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor namespace: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSelfUpgradesResponse
+      attr_accessor self_upgrade_request_details: ::Array[Types::SelfUpgradeRequestDetail]
       attr_accessor next_token: ::String
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
@@ -8715,6 +8751,24 @@ module Aws::QuickSight
 
     class SelectedSheetsFilterScopeConfiguration
       attr_accessor sheet_visual_scoping_configurations: ::Array[Types::SheetVisualScopingConfiguration]
+      SENSITIVE: []
+    end
+
+    class SelfUpgradeConfiguration
+      attr_accessor self_upgrade_status: ("AUTO_APPROVAL" | "ADMIN_APPROVAL")
+      SENSITIVE: []
+    end
+
+    class SelfUpgradeRequestDetail
+      attr_accessor upgrade_request_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor original_role: ("ADMIN" | "AUTHOR" | "READER" | "RESTRICTED_AUTHOR" | "RESTRICTED_READER" | "ADMIN_PRO" | "AUTHOR_PRO" | "READER_PRO")
+      attr_accessor requested_role: ("ADMIN" | "AUTHOR" | "READER" | "RESTRICTED_AUTHOR" | "RESTRICTED_READER" | "ADMIN_PRO" | "AUTHOR_PRO" | "READER_PRO")
+      attr_accessor request_note: ::String
+      attr_accessor creation_time: ::Integer
+      attr_accessor request_status: ("PENDING" | "APPROVED" | "DENIED" | "UPDATE_FAILED" | "VERIFY_FAILED")
+      attr_accessor last_update_attempt_time: ::Integer
+      attr_accessor last_update_failure_reason: ::String
       SENSITIVE: []
     end
 
@@ -10891,6 +10945,34 @@ module Aws::QuickSight
     end
 
     class UpdateSPICECapacityConfigurationResponse
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateSelfUpgradeConfigurationRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor namespace: ::String
+      attr_accessor self_upgrade_status: ("AUTO_APPROVAL" | "ADMIN_APPROVAL")
+      SENSITIVE: []
+    end
+
+    class UpdateSelfUpgradeConfigurationResponse
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateSelfUpgradeRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor namespace: ::String
+      attr_accessor upgrade_request_id: ::String
+      attr_accessor action: ("APPROVE" | "DENY" | "VERIFY")
+      SENSITIVE: []
+    end
+
+    class UpdateSelfUpgradeResponse
+      attr_accessor self_upgrade_request_detail: Types::SelfUpgradeRequestDetail
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
       SENSITIVE: []

@@ -3543,6 +3543,11 @@ module Aws::Connect
     #   List of next contact entries for the contact.
     #   @return [Array<Types::NextContactEntry>]
     #
+    # @!attribute [rw] global_resiliency_metadata
+    #   Information about the global resiliency configuration for the
+    #   contact, including traffic distribution details.
+    #   @return [Types::GlobalResiliencyMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Contact AWS API Documentation
     #
     class Contact < Struct.new(
@@ -3592,7 +3597,8 @@ module Aws::Connect
       :contact_details,
       :outbound_strategy,
       :attributes,
-      :next_contacts)
+      :next_contacts,
+      :global_resiliency_metadata)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -17121,6 +17127,34 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about the global resiliency configuration for the contact,
+    # including traffic distribution details.
+    #
+    # @!attribute [rw] active_region
+    #   The current AWS region in which the contact is active. This
+    #   indicates where the contact is being processed in real-time.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_region
+    #   The AWS region where the contact was originally created and
+    #   initiated. This may differ from the ActiveRegion if the contact has
+    #   been transferred across regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_distribution_group_id
+    #   The identifier of the traffic distribution group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GlobalResiliencyMetadata AWS API Documentation
+    #
+    class GlobalResiliencyMetadata < Struct.new(
+      :active_region,
+      :origin_region,
+      :traffic_distribution_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains granular access control configuration for security profiles,
     # including data table access permissions.
     #
@@ -18633,6 +18667,23 @@ module Aws::Connect
     class IntervalDetails < Struct.new(
       :time_zone,
       :interval_period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This exception occurs when an API request is made to a non-active
+    # region in an Amazon Connect instance configured with Amazon Connect
+    # Global Resiliency. For example, if the active region is US West
+    # (Oregon) and a request is made to US East (N. Virginia), the exception
+    # will be returned.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InvalidActiveRegionException AWS API Documentation
+    #
+    class InvalidActiveRegionException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

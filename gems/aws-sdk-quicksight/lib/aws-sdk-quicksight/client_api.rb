@@ -863,6 +863,8 @@ module Aws::QuickSight
     DescribeRefreshScheduleResponse = Shapes::StructureShape.new(name: 'DescribeRefreshScheduleResponse')
     DescribeRoleCustomPermissionRequest = Shapes::StructureShape.new(name: 'DescribeRoleCustomPermissionRequest')
     DescribeRoleCustomPermissionResponse = Shapes::StructureShape.new(name: 'DescribeRoleCustomPermissionResponse')
+    DescribeSelfUpgradeConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeSelfUpgradeConfigurationRequest')
+    DescribeSelfUpgradeConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeSelfUpgradeConfigurationResponse')
     DescribeTemplateAliasRequest = Shapes::StructureShape.new(name: 'DescribeTemplateAliasRequest')
     DescribeTemplateAliasResponse = Shapes::StructureShape.new(name: 'DescribeTemplateAliasResponse')
     DescribeTemplateDefinitionRequest = Shapes::StructureShape.new(name: 'DescribeTemplateDefinitionRequest')
@@ -1258,6 +1260,7 @@ module Aws::QuickSight
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidDataSetParameterValueException = Shapes::StructureShape.new(name: 'InvalidDataSetParameterValueException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
+    InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     InvalidTopicReviewedAnswer = Shapes::StructureShape.new(name: 'InvalidTopicReviewedAnswer')
@@ -1377,6 +1380,8 @@ module Aws::QuickSight
     ListRefreshSchedulesResponse = Shapes::StructureShape.new(name: 'ListRefreshSchedulesResponse')
     ListRoleMembershipsRequest = Shapes::StructureShape.new(name: 'ListRoleMembershipsRequest')
     ListRoleMembershipsResponse = Shapes::StructureShape.new(name: 'ListRoleMembershipsResponse')
+    ListSelfUpgradesRequest = Shapes::StructureShape.new(name: 'ListSelfUpgradesRequest')
+    ListSelfUpgradesResponse = Shapes::StructureShape.new(name: 'ListSelfUpgradesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListTemplateAliasesRequest = Shapes::StructureShape.new(name: 'ListTemplateAliasesRequest')
@@ -1828,6 +1833,12 @@ module Aws::QuickSight
     SelectedFieldOptions = Shapes::StringShape.new(name: 'SelectedFieldOptions')
     SelectedSheetsFilterScopeConfiguration = Shapes::StructureShape.new(name: 'SelectedSheetsFilterScopeConfiguration')
     SelectedTooltipType = Shapes::StringShape.new(name: 'SelectedTooltipType')
+    SelfUpgradeAdminAction = Shapes::StringShape.new(name: 'SelfUpgradeAdminAction')
+    SelfUpgradeConfiguration = Shapes::StructureShape.new(name: 'SelfUpgradeConfiguration')
+    SelfUpgradeRequestDetail = Shapes::StructureShape.new(name: 'SelfUpgradeRequestDetail')
+    SelfUpgradeRequestDetailList = Shapes::ListShape.new(name: 'SelfUpgradeRequestDetailList')
+    SelfUpgradeRequestStatus = Shapes::StringShape.new(name: 'SelfUpgradeRequestStatus')
+    SelfUpgradeStatus = Shapes::StringShape.new(name: 'SelfUpgradeStatus')
     SemanticEntityType = Shapes::StructureShape.new(name: 'SemanticEntityType')
     SemanticModelConfiguration = Shapes::StructureShape.new(name: 'SemanticModelConfiguration')
     SemanticTable = Shapes::StructureShape.new(name: 'SemanticTable')
@@ -2301,6 +2312,10 @@ module Aws::QuickSight
     UpdateRoleCustomPermissionResponse = Shapes::StructureShape.new(name: 'UpdateRoleCustomPermissionResponse')
     UpdateSPICECapacityConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateSPICECapacityConfigurationRequest')
     UpdateSPICECapacityConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateSPICECapacityConfigurationResponse')
+    UpdateSelfUpgradeConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateSelfUpgradeConfigurationRequest')
+    UpdateSelfUpgradeConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateSelfUpgradeConfigurationResponse')
+    UpdateSelfUpgradeRequest = Shapes::StructureShape.new(name: 'UpdateSelfUpgradeRequest')
+    UpdateSelfUpgradeResponse = Shapes::StructureShape.new(name: 'UpdateSelfUpgradeResponse')
     UpdateTemplateAliasRequest = Shapes::StructureShape.new(name: 'UpdateTemplateAliasRequest')
     UpdateTemplateAliasResponse = Shapes::StructureShape.new(name: 'UpdateTemplateAliasResponse')
     UpdateTemplatePermissionsRequest = Shapes::StructureShape.new(name: 'UpdateTemplatePermissionsRequest')
@@ -3461,6 +3476,7 @@ module Aws::QuickSight
     Capabilities.add_member(:chat_agent, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ChatAgent"))
     Capabilities.add_member(:create_chat_agents, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "CreateChatAgents"))
     Capabilities.add_member(:research, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "Research"))
+    Capabilities.add_member(:self_upgrade_user_role, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "SelfUpgradeUserRole"))
     Capabilities.struct_class = Types::Capabilities
 
     CascadingControlConfiguration.add_member(:source_controls, Shapes::ShapeRef.new(shape: CascadingControlSourceList, location_name: "SourceControls"))
@@ -5780,6 +5796,15 @@ module Aws::QuickSight
     DescribeRoleCustomPermissionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location_name: "Status"))
     DescribeRoleCustomPermissionResponse.struct_class = Types::DescribeRoleCustomPermissionResponse
 
+    DescribeSelfUpgradeConfigurationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeSelfUpgradeConfigurationRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
+    DescribeSelfUpgradeConfigurationRequest.struct_class = Types::DescribeSelfUpgradeConfigurationRequest
+
+    DescribeSelfUpgradeConfigurationResponse.add_member(:self_upgrade_configuration, Shapes::ShapeRef.new(shape: SelfUpgradeConfiguration, location_name: "SelfUpgradeConfiguration"))
+    DescribeSelfUpgradeConfigurationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeSelfUpgradeConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeSelfUpgradeConfigurationResponse.struct_class = Types::DescribeSelfUpgradeConfigurationResponse
+
     DescribeTemplateAliasRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeTemplateAliasRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "TemplateId"))
     DescribeTemplateAliasRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasName, required: true, location: "uri", location_name: "AliasName"))
@@ -7202,6 +7227,10 @@ module Aws::QuickSight
     InvalidNextTokenException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
 
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidParameterException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
     InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidParameterValueException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
@@ -7735,6 +7764,18 @@ module Aws::QuickSight
     ListRoleMembershipsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ListRoleMembershipsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     ListRoleMembershipsResponse.struct_class = Types::ListRoleMembershipsResponse
+
+    ListSelfUpgradesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    ListSelfUpgradesRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
+    ListSelfUpgradesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    ListSelfUpgradesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box" => true}))
+    ListSelfUpgradesRequest.struct_class = Types::ListSelfUpgradesRequest
+
+    ListSelfUpgradesResponse.add_member(:self_upgrade_request_details, Shapes::ShapeRef.new(shape: SelfUpgradeRequestDetailList, location_name: "SelfUpgradeRequestDetails"))
+    ListSelfUpgradesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListSelfUpgradesResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    ListSelfUpgradesResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    ListSelfUpgradesResponse.struct_class = Types::ListSelfUpgradesResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -9302,6 +9343,22 @@ module Aws::QuickSight
 
     SelectedSheetsFilterScopeConfiguration.add_member(:sheet_visual_scoping_configurations, Shapes::ShapeRef.new(shape: SheetVisualScopingConfigurations, location_name: "SheetVisualScopingConfigurations"))
     SelectedSheetsFilterScopeConfiguration.struct_class = Types::SelectedSheetsFilterScopeConfiguration
+
+    SelfUpgradeConfiguration.add_member(:self_upgrade_status, Shapes::ShapeRef.new(shape: SelfUpgradeStatus, location_name: "SelfUpgradeStatus"))
+    SelfUpgradeConfiguration.struct_class = Types::SelfUpgradeConfiguration
+
+    SelfUpgradeRequestDetail.add_member(:upgrade_request_id, Shapes::ShapeRef.new(shape: String, location_name: "UpgradeRequestId"))
+    SelfUpgradeRequestDetail.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, location_name: "UserName"))
+    SelfUpgradeRequestDetail.add_member(:original_role, Shapes::ShapeRef.new(shape: UserRole, location_name: "OriginalRole"))
+    SelfUpgradeRequestDetail.add_member(:requested_role, Shapes::ShapeRef.new(shape: UserRole, location_name: "RequestedRole"))
+    SelfUpgradeRequestDetail.add_member(:request_note, Shapes::ShapeRef.new(shape: String, location_name: "RequestNote"))
+    SelfUpgradeRequestDetail.add_member(:creation_time, Shapes::ShapeRef.new(shape: Long, location_name: "CreationTime"))
+    SelfUpgradeRequestDetail.add_member(:request_status, Shapes::ShapeRef.new(shape: SelfUpgradeRequestStatus, location_name: "RequestStatus"))
+    SelfUpgradeRequestDetail.add_member(:last_update_attempt_time, Shapes::ShapeRef.new(shape: Long, location_name: "lastUpdateAttemptTime"))
+    SelfUpgradeRequestDetail.add_member(:last_update_failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "lastUpdateFailureReason"))
+    SelfUpgradeRequestDetail.struct_class = Types::SelfUpgradeRequestDetail
+
+    SelfUpgradeRequestDetailList.member = Shapes::ShapeRef.new(shape: SelfUpgradeRequestDetail)
 
     SemanticEntityType.add_member(:type_name, Shapes::ShapeRef.new(shape: LimitedString, location_name: "TypeName"))
     SemanticEntityType.add_member(:sub_type_name, Shapes::ShapeRef.new(shape: LimitedString, location_name: "SubTypeName"))
@@ -11082,6 +11139,26 @@ module Aws::QuickSight
     UpdateSPICECapacityConfigurationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UpdateSPICECapacityConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     UpdateSPICECapacityConfigurationResponse.struct_class = Types::UpdateSPICECapacityConfigurationResponse
+
+    UpdateSelfUpgradeConfigurationRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateSelfUpgradeConfigurationRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
+    UpdateSelfUpgradeConfigurationRequest.add_member(:self_upgrade_status, Shapes::ShapeRef.new(shape: SelfUpgradeStatus, required: true, location_name: "SelfUpgradeStatus"))
+    UpdateSelfUpgradeConfigurationRequest.struct_class = Types::UpdateSelfUpgradeConfigurationRequest
+
+    UpdateSelfUpgradeConfigurationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateSelfUpgradeConfigurationResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateSelfUpgradeConfigurationResponse.struct_class = Types::UpdateSelfUpgradeConfigurationResponse
+
+    UpdateSelfUpgradeRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateSelfUpgradeRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
+    UpdateSelfUpgradeRequest.add_member(:upgrade_request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "UpgradeRequestId"))
+    UpdateSelfUpgradeRequest.add_member(:action, Shapes::ShapeRef.new(shape: SelfUpgradeAdminAction, required: true, location_name: "Action"))
+    UpdateSelfUpgradeRequest.struct_class = Types::UpdateSelfUpgradeRequest
+
+    UpdateSelfUpgradeResponse.add_member(:self_upgrade_request_detail, Shapes::ShapeRef.new(shape: SelfUpgradeRequestDetail, location_name: "SelfUpgradeRequestDetail"))
+    UpdateSelfUpgradeResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateSelfUpgradeResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateSelfUpgradeResponse.struct_class = Types::UpdateSelfUpgradeResponse
 
     UpdateTemplateAliasRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     UpdateTemplateAliasRequest.add_member(:template_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location: "uri", location_name: "TemplateId"))
@@ -13053,6 +13130,22 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
 
+      api.add_operation(:describe_self_upgrade_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSelfUpgradeConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/namespaces/{Namespace}/self-upgrade-configuration"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSelfUpgradeConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSelfUpgradeConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
       api.add_operation(:describe_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeTemplate"
         o.http_method = "GET"
@@ -13810,6 +13903,23 @@ module Aws::QuickSight
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_self_upgrades, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSelfUpgrades"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/namespaces/{Namespace}/self-upgrade-requests"
+        o.input = Shapes::ShapeRef.new(shape: ListSelfUpgradesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSelfUpgradesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -14900,6 +15010,39 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_self_upgrade, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSelfUpgrade"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/namespaces/{Namespace}/update-self-upgrade-request"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSelfUpgradeRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSelfUpgradeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
+      api.add_operation(:update_self_upgrade_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSelfUpgradeConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/namespaces/{Namespace}/self-upgrade-configuration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSelfUpgradeConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSelfUpgradeConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
 
       api.add_operation(:update_template, Seahorse::Model::Operation.new.tap do |o|

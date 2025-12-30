@@ -493,6 +493,7 @@ module Aws::MediaLive
       attr_accessor vpc: Types::VpcOutputSettingsDescription
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -527,6 +528,7 @@ module Aws::MediaLive
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
       attr_accessor used_channel_engine_versions: ::Array[Types::ChannelEngineVersionResponse]
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -576,6 +578,7 @@ module Aws::MediaLive
       attr_accessor anywhere_settings: Types::AnywhereSettings
       attr_accessor channel_engine_version: Types::ChannelEngineVersionRequest
       attr_accessor dry_run: bool
+      attr_accessor linked_channel_settings: Types::LinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -597,6 +600,7 @@ module Aws::MediaLive
       attr_accessor anywhere_settings: Types::AnywhereSettings
       attr_accessor channel_engine_version: Types::ChannelEngineVersionRequest
       attr_accessor dry_run: bool
+      attr_accessor linked_channel_settings: Types::LinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -786,6 +790,7 @@ module Aws::MediaLive
       attr_accessor vpc: Types::VpcOutputSettingsDescription
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -920,6 +925,7 @@ module Aws::MediaLive
       attr_accessor vpc: Types::VpcOutputSettingsDescription
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -2639,7 +2645,9 @@ module Aws::MediaLive
       SENSITIVE: []
     end
 
-    class PipelineLockingSettings < Aws::EmptyStructure
+    class PipelineLockingSettings
+      attr_accessor pipeline_locking_method: ("SOURCE_TIMECODE" | "VIDEO_ALIGNMENT")
+      SENSITIVE: []
     end
 
     class PipelinePauseStateSettings
@@ -2956,6 +2964,7 @@ module Aws::MediaLive
       attr_accessor vpc: Types::VpcOutputSettingsDescription
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -3073,6 +3082,7 @@ module Aws::MediaLive
       attr_accessor vpc: Types::VpcOutputSettingsDescription
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -3264,6 +3274,7 @@ module Aws::MediaLive
       attr_accessor channel_engine_version: Types::ChannelEngineVersionRequest
       attr_accessor dry_run: bool
       attr_accessor anywhere_settings: Types::AnywhereSettings
+      attr_accessor linked_channel_settings: Types::LinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -3299,6 +3310,7 @@ module Aws::MediaLive
       attr_accessor channel_engine_version: Types::ChannelEngineVersionRequest
       attr_accessor dry_run: bool
       attr_accessor anywhere_settings: Types::AnywhereSettings
+      attr_accessor linked_channel_settings: Types::LinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -3607,6 +3619,7 @@ module Aws::MediaLive
       attr_accessor vpc: Types::VpcOutputSettingsDescription
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -5830,6 +5843,41 @@ module Aws::MediaLive
 
     class SpecialRouterSettings
       attr_accessor router_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFollowerChannelSettings
+      attr_accessor linked_channel_type: ("FOLLOWING_CHANNEL" | "PRIMARY_CHANNEL")
+      attr_accessor primary_channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLinkedChannelSettings
+      attr_accessor follower_channel_settings: Types::DescribeFollowerChannelSettings
+      attr_accessor primary_channel_settings: Types::DescribePrimaryChannelSettings
+      SENSITIVE: []
+    end
+
+    class DescribePrimaryChannelSettings
+      attr_accessor following_channel_arns: ::Array[::String]
+      attr_accessor linked_channel_type: ("FOLLOWING_CHANNEL" | "PRIMARY_CHANNEL")
+      SENSITIVE: []
+    end
+
+    class FollowerChannelSettings
+      attr_accessor linked_channel_type: ("FOLLOWING_CHANNEL" | "PRIMARY_CHANNEL")
+      attr_accessor primary_channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LinkedChannelSettings
+      attr_accessor follower_channel_settings: Types::FollowerChannelSettings
+      attr_accessor primary_channel_settings: Types::PrimaryChannelSettings
+      SENSITIVE: []
+    end
+
+    class PrimaryChannelSettings
+      attr_accessor linked_channel_type: ("FOLLOWING_CHANNEL" | "PRIMARY_CHANNEL")
       SENSITIVE: []
     end
   end

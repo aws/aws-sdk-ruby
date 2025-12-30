@@ -38796,7 +38796,8 @@ module Aws
                                          space: ("DENY")?,
                                          chat_agent: ("DENY")?,
                                          create_chat_agents: ("DENY")?,
-                                         research: ("DENY")?
+                                         research: ("DENY")?,
+                                         self_upgrade_user_role: ("DENY")?
                                        },
                                        ?tags: Array[
                                          {
@@ -117007,6 +117008,19 @@ module Aws
                                            ) -> _DescribeRoleCustomPermissionResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRoleCustomPermissionResponseSuccess
 
+      interface _DescribeSelfUpgradeConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSelfUpgradeConfigurationResponse]
+        def self_upgrade_configuration: () -> Types::SelfUpgradeConfiguration
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_self_upgrade_configuration-instance_method
+      def describe_self_upgrade_configuration: (
+                                                 aws_account_id: ::String,
+                                                 namespace: ::String
+                                               ) -> _DescribeSelfUpgradeConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSelfUpgradeConfigurationResponseSuccess
+
       interface _DescribeTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTemplateResponse]
         def template: () -> Types::Template
@@ -117882,6 +117896,22 @@ module Aws
                                    namespace: ::String
                                  ) -> _ListRoleMembershipsResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRoleMembershipsResponseSuccess
+
+      interface _ListSelfUpgradesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSelfUpgradesResponse]
+        def self_upgrade_request_details: () -> ::Array[Types::SelfUpgradeRequestDetail]
+        def next_token: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#list_self_upgrades-instance_method
+      def list_self_upgrades: (
+                                aws_account_id: ::String,
+                                namespace: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListSelfUpgradesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSelfUpgradesResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
@@ -156984,7 +157014,8 @@ module Aws
                                          space: ("DENY")?,
                                          chat_agent: ("DENY")?,
                                          create_chat_agents: ("DENY")?,
-                                         research: ("DENY")?
+                                         research: ("DENY")?,
+                                         self_upgrade_user_role: ("DENY")?
                                        }
                                      ) -> _UpdateCustomPermissionsResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCustomPermissionsResponseSuccess
@@ -196133,6 +196164,34 @@ module Aws
                                                  purchase_mode: ("MANUAL" | "AUTO_PURCHASE")
                                                ) -> _UpdateSPICECapacityConfigurationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSPICECapacityConfigurationResponseSuccess
+
+      interface _UpdateSelfUpgradeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSelfUpgradeResponse]
+        def self_upgrade_request_detail: () -> Types::SelfUpgradeRequestDetail
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_self_upgrade-instance_method
+      def update_self_upgrade: (
+                                 aws_account_id: ::String,
+                                 namespace: ::String,
+                                 upgrade_request_id: ::String,
+                                 action: ("APPROVE" | "DENY" | "VERIFY")
+                               ) -> _UpdateSelfUpgradeResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSelfUpgradeResponseSuccess
+
+      interface _UpdateSelfUpgradeConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSelfUpgradeConfigurationResponse]
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_self_upgrade_configuration-instance_method
+      def update_self_upgrade_configuration: (
+                                               aws_account_id: ::String,
+                                               namespace: ::String,
+                                               self_upgrade_status: ("AUTO_APPROVAL" | "ADMIN_APPROVAL")
+                                             ) -> _UpdateSelfUpgradeConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSelfUpgradeConfigurationResponseSuccess
 
       interface _UpdateTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTemplateResponse]

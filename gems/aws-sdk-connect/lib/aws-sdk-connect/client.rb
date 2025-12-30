@@ -7162,6 +7162,9 @@ module Aws::Connect
     #   resp.contact.next_contacts[0].next_contact_metadata.quick_connect_contact_data.quick_connect_id #=> String
     #   resp.contact.next_contacts[0].next_contact_metadata.quick_connect_contact_data.quick_connect_name #=> String
     #   resp.contact.next_contacts[0].next_contact_metadata.quick_connect_contact_data.quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER", "FLOW"
+    #   resp.contact.global_resiliency_metadata.active_region #=> String
+    #   resp.contact.global_resiliency_metadata.origin_region #=> String
+    #   resp.contact.global_resiliency_metadata.traffic_distribution_group_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContact AWS API Documentation
     #
@@ -26848,7 +26851,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.230.0'
+      context[:gem_version] = '1.231.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

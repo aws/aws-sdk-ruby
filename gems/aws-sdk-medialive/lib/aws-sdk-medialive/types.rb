@@ -1884,6 +1884,10 @@ module Aws::MediaLive
     #   Requested engine version for this channel.
     #   @return [Types::ChannelEngineVersionResponse]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   Linked Channel Settings for this channel.
+    #   @return [Types::DescribeLinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Channel AWS API Documentation
     #
     class Channel < Struct.new(
@@ -1906,7 +1910,8 @@ module Aws::MediaLive
       :tags,
       :vpc,
       :anywhere_settings,
-      :channel_engine_version)
+      :channel_engine_version,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2018,6 +2023,10 @@ module Aws::MediaLive
     #   The engine version that the running pipelines are using.
     #   @return [Array<Types::ChannelEngineVersionResponse>]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   Linked Channel Settings for this channel.
+    #   @return [Types::DescribeLinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelSummary AWS API Documentation
     #
     class ChannelSummary < Struct.new(
@@ -2039,7 +2048,8 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
-      :used_channel_engine_versions)
+      :used_channel_engine_versions,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2200,6 +2210,10 @@ module Aws::MediaLive
     # @!attribute [rw] dry_run
     #   @return [Boolean]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   The linked channel settings for the channel.
+    #   @return [Types::LinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
     #
     class CreateChannel < Struct.new(
@@ -2219,7 +2233,8 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
-      :dry_run)
+      :dry_run,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2285,6 +2300,10 @@ module Aws::MediaLive
     # @!attribute [rw] dry_run
     #   @return [Boolean]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   Configuration for linked channel relationships
+    #   @return [Types::LinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
@@ -2304,7 +2323,8 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
-      :dry_run)
+      :dry_run,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2908,6 +2928,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_engine_version
     #   @return [Types::ChannelEngineVersionResponse]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   Linked channel configuration details
+    #   @return [Types::DescribeLinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannelResponse AWS API Documentation
     #
     class DeleteChannelResponse < Struct.new(
@@ -2930,7 +2954,8 @@ module Aws::MediaLive
       :tags,
       :vpc,
       :anywhere_settings,
-      :channel_engine_version)
+      :channel_engine_version,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3305,6 +3330,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_engine_version
     #   @return [Types::ChannelEngineVersionResponse]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   Linked channel configuration details
+    #   @return [Types::DescribeLinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannelResponse AWS API Documentation
     #
     class DescribeChannelResponse < Struct.new(
@@ -3327,7 +3356,8 @@ module Aws::MediaLive
       :tags,
       :vpc,
       :anywhere_settings,
-      :channel_engine_version)
+      :channel_engine_version,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10592,11 +10622,21 @@ module Aws::MediaLive
 
     # Pipeline Locking Settings
     #
-    # @api private
+    # @!attribute [rw] pipeline_locking_method
+    #   The method to use to lock the video frames in the pipelines.
+    #   sourceTimecode (default): Use the timecode in the source.
+    #   videoAlignment: Lock frames that the encoder identifies as having
+    #   matching content. If videoAlignment is selected, existing timecodes
+    #   will not be used for any locking decisions.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PipelineLockingSettings AWS API Documentation
     #
-    class PipelineLockingSettings < Aws::EmptyStructure; end
+    class PipelineLockingSettings < Struct.new(
+      :pipeline_locking_method)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Settings for pausing a pipeline.
     #
@@ -11765,6 +11805,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_engine_version
     #   @return [Types::ChannelEngineVersionResponse]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   Linked channel configuration details
+    #   @return [Types::DescribeLinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannelResponse AWS API Documentation
     #
     class StartChannelResponse < Struct.new(
@@ -11787,7 +11831,8 @@ module Aws::MediaLive
       :tags,
       :vpc,
       :anywhere_settings,
-      :channel_engine_version)
+      :channel_engine_version,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12212,6 +12257,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_engine_version
     #   @return [Types::ChannelEngineVersionResponse]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   Linked channel configuration details
+    #   @return [Types::DescribeLinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannelResponse AWS API Documentation
     #
     class StopChannelResponse < Struct.new(
@@ -12234,7 +12283,8 @@ module Aws::MediaLive
       :tags,
       :vpc,
       :anywhere_settings,
-      :channel_engine_version)
+      :channel_engine_version,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12840,6 +12890,10 @@ module Aws::MediaLive
     #   The Elemental Anywhere settings for this channel.
     #   @return [Types::AnywhereSettings]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   The linked channel settings for the channel.
+    #   @return [Types::LinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannel AWS API Documentation
     #
     class UpdateChannel < Struct.new(
@@ -12854,7 +12908,8 @@ module Aws::MediaLive
       :role_arn,
       :channel_engine_version,
       :dry_run,
-      :anywhere_settings)
+      :anywhere_settings,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12950,6 +13005,10 @@ module Aws::MediaLive
     #   Elemental anywhere settings
     #   @return [Types::AnywhereSettings]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   Configuration for linked channel relationships
+    #   @return [Types::LinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannelRequest AWS API Documentation
     #
     class UpdateChannelRequest < Struct.new(
@@ -12965,7 +13024,8 @@ module Aws::MediaLive
       :role_arn,
       :channel_engine_version,
       :dry_run,
-      :anywhere_settings)
+      :anywhere_settings,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14045,6 +14105,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_engine_version
     #   @return [Types::ChannelEngineVersionResponse]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   Linked channel configuration details
+    #   @return [Types::DescribeLinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RestartChannelPipelinesResponse AWS API Documentation
     #
     class RestartChannelPipelinesResponse < Struct.new(
@@ -14068,7 +14132,8 @@ module Aws::MediaLive
       :tags,
       :vpc,
       :anywhere_settings,
-      :channel_engine_version)
+      :channel_engine_version,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22414,6 +22479,115 @@ module Aws::MediaLive
     #
     class SpecialRouterSettings < Struct.new(
       :router_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of a follower channel in a linked pair
+    #
+    # @!attribute [rw] linked_channel_type
+    #   Specifies this as a follower channel
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_channel_arn
+    #   The ARN of the primary channel this channel follows
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeFollowerChannelSettings AWS API Documentation
+    #
+    class DescribeFollowerChannelSettings < Struct.new(
+      :linked_channel_type,
+      :primary_channel_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Linked channel configuration details
+    #
+    # @!attribute [rw] follower_channel_settings
+    #   Details of a follower channel in a linked pair
+    #   @return [Types::DescribeFollowerChannelSettings]
+    #
+    # @!attribute [rw] primary_channel_settings
+    #   Details of a primary (leader) channel in a linked pair
+    #   @return [Types::DescribePrimaryChannelSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeLinkedChannelSettings AWS API Documentation
+    #
+    class DescribeLinkedChannelSettings < Struct.new(
+      :follower_channel_settings,
+      :primary_channel_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of a primary (leader) channel in a linked pair
+    #
+    # @!attribute [rw] following_channel_arns
+    #   The ARNs of the following channels for this primary channel
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] linked_channel_type
+    #   Specifies this as a primary channel
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribePrimaryChannelSettings AWS API Documentation
+    #
+    class DescribePrimaryChannelSettings < Struct.new(
+      :following_channel_arns,
+      :linked_channel_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for a follower channel in a linked pair
+    #
+    # @!attribute [rw] linked_channel_type
+    #   Specifies this as a follower channel
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_channel_arn
+    #   The ARN of the primary channel to follow
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FollowerChannelSettings AWS API Documentation
+    #
+    class FollowerChannelSettings < Struct.new(
+      :linked_channel_type,
+      :primary_channel_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for linked channel relationships
+    #
+    # @!attribute [rw] follower_channel_settings
+    #   Settings for a follower channel in a linked pair
+    #   @return [Types::FollowerChannelSettings]
+    #
+    # @!attribute [rw] primary_channel_settings
+    #   Settings for a primary (leader) channel in a linked pair
+    #   @return [Types::PrimaryChannelSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/LinkedChannelSettings AWS API Documentation
+    #
+    class LinkedChannelSettings < Struct.new(
+      :follower_channel_settings,
+      :primary_channel_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for a primary (leader) channel in a linked pair
+    #
+    # @!attribute [rw] linked_channel_type
+    #   Specifies this as a primary channel
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PrimaryChannelSettings AWS API Documentation
+    #
+    class PrimaryChannelSettings < Struct.new(
+      :linked_channel_type)
       SENSITIVE = []
       include Aws::Structure
     end

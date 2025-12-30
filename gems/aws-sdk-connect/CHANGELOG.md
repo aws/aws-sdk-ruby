@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.231.0 (2025-12-29)
+------------------
+
+* Feature - Changes for Contact for Global Search
+
 1.230.0 (2025-12-19)
 ------------------
 

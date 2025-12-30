@@ -863,6 +863,7 @@ module Aws::Connect
       attr_accessor outbound_strategy: Types::OutboundStrategy
       attr_accessor attributes: ::Hash[::String, ::String]
       attr_accessor next_contacts: ::Array[Types::NextContactEntry]
+      attr_accessor global_resiliency_metadata: Types::GlobalResiliencyMetadata
       SENSITIVE: [:name, :description]
     end
 
@@ -3764,6 +3765,13 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class GlobalResiliencyMetadata
+      attr_accessor active_region: ::String
+      attr_accessor origin_region: ::String
+      attr_accessor traffic_distribution_group_id: ::String
+      SENSITIVE: []
+    end
+
     class GranularAccessControlConfiguration
       attr_accessor data_table_access_control_configuration: Types::DataTableAccessControlConfiguration
       SENSITIVE: []
@@ -4082,6 +4090,11 @@ module Aws::Connect
     class IntervalDetails
       attr_accessor time_zone: ::String
       attr_accessor interval_period: ("FIFTEEN_MIN" | "THIRTY_MIN" | "HOUR" | "DAY" | "WEEK" | "TOTAL")
+      SENSITIVE: []
+    end
+
+    class InvalidActiveRegionException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 

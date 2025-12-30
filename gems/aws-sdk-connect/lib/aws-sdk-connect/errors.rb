@@ -36,6 +36,7 @@ module Aws::Connect
   # * {DuplicateResourceException}
   # * {IdempotencyException}
   # * {InternalServiceException}
+  # * {InvalidActiveRegionException}
   # * {InvalidContactFlowException}
   # * {InvalidContactFlowModuleException}
   # * {InvalidParameterException}
@@ -185,6 +186,21 @@ module Aws::Connect
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Connect::Types::InternalServiceException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidActiveRegionException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Connect::Types::InvalidActiveRegionException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

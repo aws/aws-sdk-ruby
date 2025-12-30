@@ -2236,6 +2236,7 @@ module Aws::QuickSight
     #       chat_agent: "DENY", # accepts DENY
     #       create_chat_agents: "DENY", # accepts DENY
     #       research: "DENY", # accepts DENY
+    #       self_upgrade_user_role: "DENY", # accepts DENY
     #     },
     #     tags: [
     #       {
@@ -7790,6 +7791,7 @@ module Aws::QuickSight
     #   resp.custom_permissions.capabilities.chat_agent #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.create_chat_agents #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.research #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.self_upgrade_user_role #=> String, one of "DENY"
     #   resp.request_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeCustomPermissions AWS API Documentation
@@ -9744,6 +9746,44 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def describe_role_custom_permission(params = {}, options = {})
       req = build_request(:describe_role_custom_permission, params)
+      req.send_request(options)
+    end
+
+    # Describes the self-upgrade configuration for a Quick Suite account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Suite self-upgrade configuration.
+    #
+    # @option params [required, String] :namespace
+    #   The Quick Suite namespace that you want to describe the Quick Suite
+    #   self-upgrade configuration for.
+    #
+    # @return [Types::DescribeSelfUpgradeConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSelfUpgradeConfigurationResponse#self_upgrade_configuration #self_upgrade_configuration} => Types::SelfUpgradeConfiguration
+    #   * {Types::DescribeSelfUpgradeConfigurationResponse#request_id #request_id} => String
+    #   * {Types::DescribeSelfUpgradeConfigurationResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_self_upgrade_configuration({
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.self_upgrade_configuration.self_upgrade_status #=> String, one of "AUTO_APPROVAL", "ADMIN_APPROVAL"
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeSelfUpgradeConfiguration AWS API Documentation
+    #
+    # @overload describe_self_upgrade_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_self_upgrade_configuration(params = {}, options = {})
+      req = build_request(:describe_self_upgrade_configuration, params)
       req.send_request(options)
     end
 
@@ -11946,6 +11986,7 @@ module Aws::QuickSight
     #   resp.custom_permissions_list[0].capabilities.chat_agent #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.create_chat_agents #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.research #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.self_upgrade_user_role #=> String, one of "DENY"
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #
@@ -13115,6 +13156,63 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def list_role_memberships(params = {}, options = {})
       req = build_request(:list_role_memberships, params)
+      req.send_request(options)
+    end
+
+    # Lists all self-upgrade requests for a Quick Suite account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   self-upgrade requests.
+    #
+    # @option params [required, String] :namespace
+    #   The Quick Suite namespace for the self-upgrade requests.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @return [Types::ListSelfUpgradesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSelfUpgradesResponse#self_upgrade_request_details #self_upgrade_request_details} => Array&lt;Types::SelfUpgradeRequestDetail&gt;
+    #   * {Types::ListSelfUpgradesResponse#next_token #next_token} => String
+    #   * {Types::ListSelfUpgradesResponse#request_id #request_id} => String
+    #   * {Types::ListSelfUpgradesResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_self_upgrades({
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.self_upgrade_request_details #=> Array
+    #   resp.self_upgrade_request_details[0].upgrade_request_id #=> String
+    #   resp.self_upgrade_request_details[0].user_name #=> String
+    #   resp.self_upgrade_request_details[0].original_role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER", "ADMIN_PRO", "AUTHOR_PRO", "READER_PRO"
+    #   resp.self_upgrade_request_details[0].requested_role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER", "ADMIN_PRO", "AUTHOR_PRO", "READER_PRO"
+    #   resp.self_upgrade_request_details[0].request_note #=> String
+    #   resp.self_upgrade_request_details[0].creation_time #=> Integer
+    #   resp.self_upgrade_request_details[0].request_status #=> String, one of "PENDING", "APPROVED", "DENIED", "UPDATE_FAILED", "VERIFY_FAILED"
+    #   resp.self_upgrade_request_details[0].last_update_attempt_time #=> Integer
+    #   resp.self_upgrade_request_details[0].last_update_failure_reason #=> String
+    #   resp.next_token #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListSelfUpgrades AWS API Documentation
+    #
+    # @overload list_self_upgrades(params = {})
+    # @param [Hash] params ({})
+    def list_self_upgrades(params = {}, options = {})
+      req = build_request(:list_self_upgrades, params)
       req.send_request(options)
     end
 
@@ -16037,18 +16135,18 @@ module Aws::QuickSight
     #
     # To generate snapshots for registered Quick Sight users, you need to:
     #
-    # * Obtain identity-enhanced IAM role session credentials from AWS
-    #   Security Token Service (STS).
+    # * Obtain identity-enhanced IAM role session credentials from Amazon
+    #   Web Services Security Token Service (STS).
     #
     # * Use these credentials to call the Snapshot Job APIs.
     #
     # Identity-enhanced credentials are credentials that contain information
     # about the end user (e.g., registered Quick Sight user).
     #
-    # If your Quick Sight users are backed by [AWS Identity Center][3], then
-    # you need to set up a [trusted token issuer][4]. Then, getting
-    # identity-enhanced IAM credentials for a Quick Sight user will look
-    # like the following:
+    # If your Quick Sight users are backed by [Amazon Web Services Identity
+    # Center][3], then you need to set up a [trusted token issuer][4]. Then,
+    # getting identity-enhanced IAM credentials for a Quick Sight user will
+    # look like the following:
     #
     # * Authenticate user with your OIDC compliant Identity Provider. You
     #   should get auth tokens back.
@@ -17222,6 +17320,7 @@ module Aws::QuickSight
     #       chat_agent: "DENY", # accepts DENY
     #       create_chat_agents: "DENY", # accepts DENY
     #       research: "DENY", # accepts DENY
+    #       self_upgrade_user_role: "DENY", # accepts DENY
     #     },
     #   })
     #
@@ -19701,6 +19800,102 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Updates a self-upgrade request for a Quick Suite user by approving,
+    # denying, or verifying the request.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   self-upgrade request.
+    #
+    # @option params [required, String] :namespace
+    #   The Quick Suite namespace for the self-upgrade request.
+    #
+    # @option params [required, String] :upgrade_request_id
+    #   The ID of the self-upgrade request to update.
+    #
+    # @option params [required, String] :action
+    #   The action to perform on the self-upgrade request. Valid values are
+    #   `APPROVE`, `DENY`, or `VERIFY`.
+    #
+    # @return [Types::UpdateSelfUpgradeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSelfUpgradeResponse#self_upgrade_request_detail #self_upgrade_request_detail} => Types::SelfUpgradeRequestDetail
+    #   * {Types::UpdateSelfUpgradeResponse#request_id #request_id} => String
+    #   * {Types::UpdateSelfUpgradeResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_self_upgrade({
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #     upgrade_request_id: "String", # required
+    #     action: "APPROVE", # required, accepts APPROVE, DENY, VERIFY
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.self_upgrade_request_detail.upgrade_request_id #=> String
+    #   resp.self_upgrade_request_detail.user_name #=> String
+    #   resp.self_upgrade_request_detail.original_role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER", "ADMIN_PRO", "AUTHOR_PRO", "READER_PRO"
+    #   resp.self_upgrade_request_detail.requested_role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER", "ADMIN_PRO", "AUTHOR_PRO", "READER_PRO"
+    #   resp.self_upgrade_request_detail.request_note #=> String
+    #   resp.self_upgrade_request_detail.creation_time #=> Integer
+    #   resp.self_upgrade_request_detail.request_status #=> String, one of "PENDING", "APPROVED", "DENIED", "UPDATE_FAILED", "VERIFY_FAILED"
+    #   resp.self_upgrade_request_detail.last_update_attempt_time #=> Integer
+    #   resp.self_upgrade_request_detail.last_update_failure_reason #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateSelfUpgrade AWS API Documentation
+    #
+    # @overload update_self_upgrade(params = {})
+    # @param [Hash] params ({})
+    def update_self_upgrade(params = {}, options = {})
+      req = build_request(:update_self_upgrade, params)
+      req.send_request(options)
+    end
+
+    # Updates the self-upgrade configuration for a Quick Suite account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Suite self-upgrade configuration that you want to update.
+    #
+    # @option params [required, String] :namespace
+    #   The Quick Suite namespace that you want to update the Quick Suite
+    #   self-upgrade configuration for.
+    #
+    # @option params [required, String] :self_upgrade_status
+    #   The self-upgrade status that you want to set for the Quick Suite
+    #   account.
+    #
+    # @return [Types::UpdateSelfUpgradeConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSelfUpgradeConfigurationResponse#request_id #request_id} => String
+    #   * {Types::UpdateSelfUpgradeConfigurationResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_self_upgrade_configuration({
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #     self_upgrade_status: "AUTO_APPROVAL", # required, accepts AUTO_APPROVAL, ADMIN_APPROVAL
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateSelfUpgradeConfiguration AWS API Documentation
+    #
+    # @overload update_self_upgrade_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_self_upgrade_configuration(params = {}, options = {})
+      req = build_request(:update_self_upgrade_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates a template from an existing Amazon Quick Sight analysis or
     # another template.
     #
@@ -20936,7 +21131,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.166.0'
+      context[:gem_version] = '1.167.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

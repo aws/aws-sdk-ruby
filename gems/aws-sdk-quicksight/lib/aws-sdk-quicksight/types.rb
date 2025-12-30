@@ -4686,6 +4686,10 @@ module Aws::QuickSight
     #   The ability to perform research-related actions.
     #   @return [String]
     #
+    # @!attribute [rw] self_upgrade_user_role
+    #   The ability to enable users to upgrade their user role.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Capabilities AWS API Documentation
     #
     class Capabilities < Struct.new(
@@ -4725,7 +4729,8 @@ module Aws::QuickSight
       :space,
       :chat_agent,
       :create_chat_agents,
-      :research)
+      :research,
+      :self_upgrade_user_role)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16345,6 +16350,47 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Suite self-upgrade configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The Quick Suite namespace that you want to describe the Quick Suite
+    #   self-upgrade configuration for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeSelfUpgradeConfigurationRequest AWS API Documentation
+    #
+    class DescribeSelfUpgradeConfigurationRequest < Struct.new(
+      :aws_account_id,
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] self_upgrade_configuration
+    #   The self-upgrade configuration for the Quick Suite account.
+    #   @return [Types::SelfUpgradeConfiguration]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeSelfUpgradeConfigurationResponse AWS API Documentation
+    #
+    class DescribeSelfUpgradeConfigurationResponse < Struct.new(
+      :self_upgrade_configuration,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account that contains the template
     #   alias that you're describing.
     #   @return [String]
@@ -21465,8 +21511,8 @@ module Aws::QuickSight
     # @!attribute [rw] context
     #   The identity context information for the user. This is an identity
     #   token that should be used as the ContextAssertion parameter in the
-    #   [STS AssumeRole API][1] call to obtain identity enhanced AWS
-    #   credentials.
+    #   [STS AssumeRole API][1] call to obtain identity enhanced Amazon Web
+    #   Services credentials.
     #
     #
     #
@@ -23139,6 +23185,24 @@ module Aws::QuickSight
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InvalidNextTokenException AWS API Documentation
     #
     class InvalidNextTokenException < Struct.new(
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One or more parameter has a value that isn't valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
       :message,
       :request_id)
       SENSITIVE = []
@@ -25753,6 +25817,63 @@ module Aws::QuickSight
     #
     class ListRoleMembershipsResponse < Struct.new(
       :members_list,
+      :next_token,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   self-upgrade requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The Quick Suite namespace for the self-upgrade requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListSelfUpgradesRequest AWS API Documentation
+    #
+    class ListSelfUpgradesRequest < Struct.new(
+      :aws_account_id,
+      :namespace,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] self_upgrade_request_details
+    #   A list of self-upgrade request details.
+    #   @return [Array<Types::SelfUpgradeRequestDetail>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListSelfUpgradesResponse AWS API Documentation
+    #
+    class ListSelfUpgradesResponse < Struct.new(
+      :self_upgrade_request_details,
       :next_token,
       :request_id,
       :status)
@@ -33626,6 +33747,81 @@ module Aws::QuickSight
     #
     class SelectedSheetsFilterScopeConfiguration < Struct.new(
       :sheet_visual_scoping_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The self-upgrade configuration for the Quick Suite account.
+    #
+    # @!attribute [rw] self_upgrade_status
+    #   Status set for the self-upgrade configuration for the Quick Suite
+    #   account. It can contain the following values:
+    #
+    #   * `AUTO_APPROVAL`: All the self-upgrade requests will be auto
+    #     approved.
+    #
+    #   * `ADMIN_APPROVAL`: All the self-upgrade requests will require admin
+    #     approval.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SelfUpgradeConfiguration AWS API Documentation
+    #
+    class SelfUpgradeConfiguration < Struct.new(
+      :self_upgrade_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of a self-upgrade request.
+    #
+    # @!attribute [rw] upgrade_request_id
+    #   The ID of the self-upgrade request.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The username of the user who initiated the self-upgrade request.
+    #   @return [String]
+    #
+    # @!attribute [rw] original_role
+    #   The original role of the user before the upgrade.
+    #   @return [String]
+    #
+    # @!attribute [rw] requested_role
+    #   The role that the user is requesting to upgrade to.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_note
+    #   An optional note explaining the reason for the self-upgrade request.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the self-upgrade request was created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_status
+    #   The status of the self-upgrade request.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_attempt_time
+    #   The time of the last update attempt for the self-upgrade request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_update_failure_reason
+    #   The reason for the last update failure, if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SelfUpgradeRequestDetail AWS API Documentation
+    #
+    class SelfUpgradeRequestDetail < Struct.new(
+      :upgrade_request_id,
+      :user_name,
+      :original_role,
+      :requested_role,
+      :request_note,
+      :creation_time,
+      :request_status,
+      :last_update_attempt_time,
+      :last_update_failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42025,6 +42221,99 @@ module Aws::QuickSight
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateSPICECapacityConfigurationResponse AWS API Documentation
     #
     class UpdateSPICECapacityConfigurationResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Suite self-upgrade configuration that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The Quick Suite namespace that you want to update the Quick Suite
+    #   self-upgrade configuration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] self_upgrade_status
+    #   The self-upgrade status that you want to set for the Quick Suite
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateSelfUpgradeConfigurationRequest AWS API Documentation
+    #
+    class UpdateSelfUpgradeConfigurationRequest < Struct.new(
+      :aws_account_id,
+      :namespace,
+      :self_upgrade_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateSelfUpgradeConfigurationResponse AWS API Documentation
+    #
+    class UpdateSelfUpgradeConfigurationResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   self-upgrade request.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The Quick Suite namespace for the self-upgrade request.
+    #   @return [String]
+    #
+    # @!attribute [rw] upgrade_request_id
+    #   The ID of the self-upgrade request to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action to perform on the self-upgrade request. Valid values are
+    #   `APPROVE`, `DENY`, or `VERIFY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateSelfUpgradeRequest AWS API Documentation
+    #
+    class UpdateSelfUpgradeRequest < Struct.new(
+      :aws_account_id,
+      :namespace,
+      :upgrade_request_id,
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] self_upgrade_request_detail
+    #   Details of the updated self-upgrade request.
+    #   @return [Types::SelfUpgradeRequestDetail]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateSelfUpgradeResponse AWS API Documentation
+    #
+    class UpdateSelfUpgradeResponse < Struct.new(
+      :self_upgrade_request_detail,
       :request_id,
       :status)
       SENSITIVE = []

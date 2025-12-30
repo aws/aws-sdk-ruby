@@ -24,6 +24,7 @@ module Aws::Connect
     ActionType = Shapes::StringShape.new(name: 'ActionType')
     ActivateEvaluationFormRequest = Shapes::StructureShape.new(name: 'ActivateEvaluationFormRequest')
     ActivateEvaluationFormResponse = Shapes::StructureShape.new(name: 'ActivateEvaluationFormResponse')
+    ActiveRegion = Shapes::StringShape.new(name: 'ActiveRegion')
     AdditionalEmailRecipients = Shapes::StructureShape.new(name: 'AdditionalEmailRecipients')
     AfterContactWorkTimeLimit = Shapes::IntegerShape.new(name: 'AfterContactWorkTimeLimit')
     AgentAvailabilityTimer = Shapes::StringShape.new(name: 'AgentAvailabilityTimer')
@@ -860,6 +861,7 @@ module Aws::Connect
     GetTaskTemplateResponse = Shapes::StructureShape.new(name: 'GetTaskTemplateResponse')
     GetTrafficDistributionRequest = Shapes::StructureShape.new(name: 'GetTrafficDistributionRequest')
     GetTrafficDistributionResponse = Shapes::StructureShape.new(name: 'GetTrafficDistributionResponse')
+    GlobalResiliencyMetadata = Shapes::StructureShape.new(name: 'GlobalResiliencyMetadata')
     GlobalSignInEndpoint = Shapes::StringShape.new(name: 'GlobalSignInEndpoint')
     GranularAccessControlConfiguration = Shapes::StructureShape.new(name: 'GranularAccessControlConfiguration')
     Grouping = Shapes::StringShape.new(name: 'Grouping')
@@ -961,6 +963,7 @@ module Aws::Connect
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     IntervalDetails = Shapes::StructureShape.new(name: 'IntervalDetails')
     IntervalPeriod = Shapes::StringShape.new(name: 'IntervalPeriod')
+    InvalidActiveRegionException = Shapes::StructureShape.new(name: 'InvalidActiveRegionException')
     InvalidContactFlowException = Shapes::StructureShape.new(name: 'InvalidContactFlowException')
     InvalidContactFlowModuleException = Shapes::StructureShape.new(name: 'InvalidContactFlowModuleException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
@@ -1190,6 +1193,7 @@ module Aws::Connect
     OperationalHour = Shapes::StructureShape.new(name: 'OperationalHour')
     OperationalHours = Shapes::ListShape.new(name: 'OperationalHours')
     Origin = Shapes::StringShape.new(name: 'Origin')
+    OriginRegion = Shapes::StringShape.new(name: 'OriginRegion')
     OriginsList = Shapes::ListShape.new(name: 'OriginsList')
     OutboundAdditionalRecipients = Shapes::StructureShape.new(name: 'OutboundAdditionalRecipients')
     OutboundCallerConfig = Shapes::StructureShape.new(name: 'OutboundCallerConfig')
@@ -2700,6 +2704,7 @@ module Aws::Connect
     Contact.add_member(:outbound_strategy, Shapes::ShapeRef.new(shape: OutboundStrategy, location_name: "OutboundStrategy"))
     Contact.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
     Contact.add_member(:next_contacts, Shapes::ShapeRef.new(shape: NextContacts, location_name: "NextContacts"))
+    Contact.add_member(:global_resiliency_metadata, Shapes::ShapeRef.new(shape: GlobalResiliencyMetadata, location_name: "GlobalResiliencyMetadata"))
     Contact.struct_class = Types::Contact
 
     ContactAnalysis.add_member(:transcript, Shapes::ShapeRef.new(shape: Transcript, location_name: "Transcript"))
@@ -4958,6 +4963,11 @@ module Aws::Connect
     GetTrafficDistributionResponse.add_member(:agent_config, Shapes::ShapeRef.new(shape: AgentConfig, location_name: "AgentConfig"))
     GetTrafficDistributionResponse.struct_class = Types::GetTrafficDistributionResponse
 
+    GlobalResiliencyMetadata.add_member(:active_region, Shapes::ShapeRef.new(shape: ActiveRegion, location_name: "ActiveRegion"))
+    GlobalResiliencyMetadata.add_member(:origin_region, Shapes::ShapeRef.new(shape: OriginRegion, location_name: "OriginRegion"))
+    GlobalResiliencyMetadata.add_member(:traffic_distribution_group_id, Shapes::ShapeRef.new(shape: TrafficDistributionGroupId, location_name: "TrafficDistributionGroupId"))
+    GlobalResiliencyMetadata.struct_class = Types::GlobalResiliencyMetadata
+
     GranularAccessControlConfiguration.add_member(:data_table_access_control_configuration, Shapes::ShapeRef.new(shape: DataTableAccessControlConfiguration, location_name: "DataTableAccessControlConfiguration"))
     GranularAccessControlConfiguration.struct_class = Types::GranularAccessControlConfiguration
 
@@ -5235,6 +5245,9 @@ module Aws::Connect
     IntervalDetails.add_member(:time_zone, Shapes::ShapeRef.new(shape: String, location_name: "TimeZone"))
     IntervalDetails.add_member(:interval_period, Shapes::ShapeRef.new(shape: IntervalPeriod, location_name: "IntervalPeriod"))
     IntervalDetails.struct_class = Types::IntervalDetails
+
+    InvalidActiveRegionException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    InvalidActiveRegionException.struct_class = Types::InvalidActiveRegionException
 
     InvalidContactFlowException.add_member(:problems, Shapes::ShapeRef.new(shape: Problems, location_name: "problems"))
     InvalidContactFlowException.struct_class = Types::InvalidContactFlowException
@@ -12182,6 +12195,7 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidActiveRegionException)
       end)
 
       api.add_operation(:search_agent_statuses, Seahorse::Model::Operation.new.tap do |o|
@@ -12719,6 +12733,7 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidActiveRegionException)
       end)
 
       api.add_operation(:start_contact_streaming, Seahorse::Model::Operation.new.tap do |o|
@@ -12846,6 +12861,7 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidActiveRegionException)
       end)
 
       api.add_operation(:stop_contact_media_processing, Seahorse::Model::Operation.new.tap do |o|
@@ -12871,6 +12887,7 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidActiveRegionException)
       end)
 
       api.add_operation(:stop_contact_streaming, Seahorse::Model::Operation.new.tap do |o|
@@ -12907,6 +12924,7 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidActiveRegionException)
       end)
 
       api.add_operation(:tag_contact, Seahorse::Model::Operation.new.tap do |o|
@@ -12920,6 +12938,7 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidActiveRegionException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -12961,6 +12980,7 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidActiveRegionException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -13017,6 +13037,7 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidActiveRegionException)
       end)
 
       api.add_operation(:update_contact_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -13029,6 +13050,7 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidActiveRegionException)
       end)
 
       api.add_operation(:update_contact_evaluation, Seahorse::Model::Operation.new.tap do |o|
@@ -13143,6 +13165,7 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidActiveRegionException)
       end)
 
       api.add_operation(:update_contact_schedule, Seahorse::Model::Operation.new.tap do |o|

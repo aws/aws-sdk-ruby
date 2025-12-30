@@ -37,6 +37,7 @@ module Aws::QuickSight
   # * {InternalServerException}
   # * {InvalidDataSetParameterValueException}
   # * {InvalidNextTokenException}
+  # * {InvalidParameterException}
   # * {InvalidParameterValueException}
   # * {InvalidRequestException}
   # * {LimitExceededException}
@@ -236,6 +237,26 @@ module Aws::QuickSight
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::QuickSight::Types::InvalidNextTokenException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+    end
+
+    class InvalidParameterException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::QuickSight::Types::InvalidParameterException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
