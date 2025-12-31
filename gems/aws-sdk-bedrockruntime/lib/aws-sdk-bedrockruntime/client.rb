@@ -728,6 +728,12 @@ module Aws::BedrockRuntime
     #   resp.assessments[0].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #   resp.assessments[0].invocation_metrics.guardrail_coverage.images.guarded #=> Integer
     #   resp.assessments[0].invocation_metrics.guardrail_coverage.images.total #=> Integer
+    #   resp.assessments[0].applied_guardrail_details.guardrail_id #=> String
+    #   resp.assessments[0].applied_guardrail_details.guardrail_version #=> String
+    #   resp.assessments[0].applied_guardrail_details.guardrail_arn #=> String
+    #   resp.assessments[0].applied_guardrail_details.guardrail_origin #=> Array
+    #   resp.assessments[0].applied_guardrail_details.guardrail_origin[0] #=> String, one of "REQUEST", "ACCOUNT_ENFORCED", "ORGANIZATION_ENFORCED"
+    #   resp.assessments[0].applied_guardrail_details.guardrail_ownership #=> String, one of "SELF", "CROSS_ACCOUNT"
     #   resp.guardrail_coverage.text_characters.guarded #=> Integer
     #   resp.guardrail_coverage.text_characters.total #=> Integer
     #   resp.guardrail_coverage.images.guarded #=> Integer
@@ -914,6 +920,10 @@ module Aws::BedrockRuntime
     # @option params [Types::PerformanceConfiguration] :performance_config
     #   Model performance settings for the request.
     #
+    # @option params [Types::ServiceTier] :service_tier
+    #   Specifies the processing tier configuration used for serving the
+    #   request.
+    #
     # @return [Types::ConverseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ConverseResponse#output #output} => Types::ConverseOutput
@@ -923,6 +933,7 @@ module Aws::BedrockRuntime
     #   * {Types::ConverseResponse#additional_model_response_fields #additional_model_response_fields} => Hash,Array,String,Numeric,Boolean
     #   * {Types::ConverseResponse#trace #trace} => Types::ConverseTrace
     #   * {Types::ConverseResponse#performance_config #performance_config} => Types::PerformanceConfiguration
+    #   * {Types::ConverseResponse#service_tier #service_tier} => Types::ServiceTier
     #
     # @example Request syntax with placeholder values
     #
@@ -942,6 +953,9 @@ module Aws::BedrockRuntime
     #                   uri: "S3Uri", # required
     #                   bucket_owner: "AccountId",
     #                 },
+    #               },
+    #               error: {
+    #                 message: "String",
     #               },
     #             },
     #             document: {
@@ -975,11 +989,25 @@ module Aws::BedrockRuntime
     #                 },
     #               },
     #             },
+    #             audio: {
+    #               format: "mp3", # required, accepts mp3, opus, wav, aac, flac, mp4, ogg, mkv, mka, x-aac, m4a, mpeg, mpga, pcm, webm
+    #               source: { # required
+    #                 bytes: "data",
+    #                 s3_location: {
+    #                   uri: "S3Uri", # required
+    #                   bucket_owner: "AccountId",
+    #                 },
+    #               },
+    #               error: {
+    #                 message: "String",
+    #               },
+    #             },
     #             tool_use: {
     #               tool_use_id: "ToolUseId", # required
     #               name: "ToolName", # required
     #               input: { # required
     #               },
+    #               type: "server_tool_use", # accepts server_tool_use
     #             },
     #             tool_result: {
     #               tool_use_id: "ToolUseId", # required
@@ -996,6 +1024,9 @@ module Aws::BedrockRuntime
     #                         uri: "S3Uri", # required
     #                         bucket_owner: "AccountId",
     #                       },
+    #                     },
+    #                     error: {
+    #                       message: "String",
     #                     },
     #                   },
     #                   document: {
@@ -1029,9 +1060,22 @@ module Aws::BedrockRuntime
     #                       },
     #                     },
     #                   },
+    #                   search_result: {
+    #                     source: "String", # required
+    #                     title: "String", # required
+    #                     content: [ # required
+    #                       {
+    #                         text: "String", # required
+    #                       },
+    #                     ],
+    #                     citations: {
+    #                       enabled: false, # required
+    #                     },
+    #                   },
     #                 },
     #               ],
     #               status: "success", # accepts success, error
+    #               type: "String",
     #             },
     #             guard_content: {
     #               text: {
@@ -1064,12 +1108,17 @@ module Aws::BedrockRuntime
     #               citations: [
     #                 {
     #                   title: "String",
+    #                   source: "String",
     #                   source_content: [
     #                     {
     #                       text: "String",
     #                     },
     #                   ],
     #                   location: {
+    #                     web: {
+    #                       url: "String",
+    #                       domain: "String",
+    #                     },
     #                     document_char: {
     #                       document_index: 1,
     #                       start: 1,
@@ -1085,9 +1134,26 @@ module Aws::BedrockRuntime
     #                       start: 1,
     #                       end: 1,
     #                     },
+    #                     search_result_location: {
+    #                       search_result_index: 1,
+    #                       start: 1,
+    #                       end: 1,
+    #                     },
     #                   },
     #                 },
     #               ],
+    #             },
+    #             search_result: {
+    #               source: "String", # required
+    #               title: "String", # required
+    #               content: [ # required
+    #                 {
+    #                   text: "String", # required
+    #                 },
+    #               ],
+    #               citations: {
+    #                 enabled: false, # required
+    #               },
     #             },
     #           },
     #         ],
@@ -1130,6 +1196,9 @@ module Aws::BedrockRuntime
     #               },
     #             },
     #           },
+    #           system_tool: {
+    #             name: "ToolName", # required
+    #           },
     #           cache_point: {
     #             type: "default", # required, accepts default
     #           },
@@ -1146,8 +1215,8 @@ module Aws::BedrockRuntime
     #       },
     #     },
     #     guardrail_config: {
-    #       guardrail_identifier: "GuardrailIdentifier", # required
-    #       guardrail_version: "GuardrailVersion", # required
+    #       guardrail_identifier: "GuardrailIdentifier",
+    #       guardrail_version: "GuardrailVersion",
     #       trace: "enabled", # accepts enabled, disabled, enabled_full
     #     },
     #     additional_model_request_fields: {
@@ -1164,6 +1233,9 @@ module Aws::BedrockRuntime
     #     performance_config: {
     #       latency: "standard", # accepts standard, optimized
     #     },
+    #     service_tier: {
+    #       type: "priority", # required, accepts priority, default, flex, reserved
+    #     },
     #   })
     #
     # @example Response structure
@@ -1175,6 +1247,7 @@ module Aws::BedrockRuntime
     #   resp.output.message.content[0].image.source.bytes #=> String
     #   resp.output.message.content[0].image.source.s3_location.uri #=> String
     #   resp.output.message.content[0].image.source.s3_location.bucket_owner #=> String
+    #   resp.output.message.content[0].image.error.message #=> String
     #   resp.output.message.content[0].document.format #=> String, one of "pdf", "csv", "doc", "docx", "xls", "xlsx", "html", "txt", "md"
     #   resp.output.message.content[0].document.name #=> String
     #   resp.output.message.content[0].document.source.bytes #=> String
@@ -1189,8 +1262,14 @@ module Aws::BedrockRuntime
     #   resp.output.message.content[0].video.source.bytes #=> String
     #   resp.output.message.content[0].video.source.s3_location.uri #=> String
     #   resp.output.message.content[0].video.source.s3_location.bucket_owner #=> String
+    #   resp.output.message.content[0].audio.format #=> String, one of "mp3", "opus", "wav", "aac", "flac", "mp4", "ogg", "mkv", "mka", "x-aac", "m4a", "mpeg", "mpga", "pcm", "webm"
+    #   resp.output.message.content[0].audio.source.bytes #=> String
+    #   resp.output.message.content[0].audio.source.s3_location.uri #=> String
+    #   resp.output.message.content[0].audio.source.s3_location.bucket_owner #=> String
+    #   resp.output.message.content[0].audio.error.message #=> String
     #   resp.output.message.content[0].tool_use.tool_use_id #=> String
     #   resp.output.message.content[0].tool_use.name #=> String
+    #   resp.output.message.content[0].tool_use.type #=> String, one of "server_tool_use"
     #   resp.output.message.content[0].tool_result.tool_use_id #=> String
     #   resp.output.message.content[0].tool_result.content #=> Array
     #   resp.output.message.content[0].tool_result.content[0].text #=> String
@@ -1198,6 +1277,7 @@ module Aws::BedrockRuntime
     #   resp.output.message.content[0].tool_result.content[0].image.source.bytes #=> String
     #   resp.output.message.content[0].tool_result.content[0].image.source.s3_location.uri #=> String
     #   resp.output.message.content[0].tool_result.content[0].image.source.s3_location.bucket_owner #=> String
+    #   resp.output.message.content[0].tool_result.content[0].image.error.message #=> String
     #   resp.output.message.content[0].tool_result.content[0].document.format #=> String, one of "pdf", "csv", "doc", "docx", "xls", "xlsx", "html", "txt", "md"
     #   resp.output.message.content[0].tool_result.content[0].document.name #=> String
     #   resp.output.message.content[0].tool_result.content[0].document.source.bytes #=> String
@@ -1212,7 +1292,13 @@ module Aws::BedrockRuntime
     #   resp.output.message.content[0].tool_result.content[0].video.source.bytes #=> String
     #   resp.output.message.content[0].tool_result.content[0].video.source.s3_location.uri #=> String
     #   resp.output.message.content[0].tool_result.content[0].video.source.s3_location.bucket_owner #=> String
+    #   resp.output.message.content[0].tool_result.content[0].search_result.source #=> String
+    #   resp.output.message.content[0].tool_result.content[0].search_result.title #=> String
+    #   resp.output.message.content[0].tool_result.content[0].search_result.content #=> Array
+    #   resp.output.message.content[0].tool_result.content[0].search_result.content[0].text #=> String
+    #   resp.output.message.content[0].tool_result.content[0].search_result.citations.enabled #=> Boolean
     #   resp.output.message.content[0].tool_result.status #=> String, one of "success", "error"
+    #   resp.output.message.content[0].tool_result.type #=> String
     #   resp.output.message.content[0].guard_content.text.text #=> String
     #   resp.output.message.content[0].guard_content.text.qualifiers #=> Array
     #   resp.output.message.content[0].guard_content.text.qualifiers[0] #=> String, one of "grounding_source", "query", "guard_content"
@@ -1226,8 +1312,11 @@ module Aws::BedrockRuntime
     #   resp.output.message.content[0].citations_content.content[0].text #=> String
     #   resp.output.message.content[0].citations_content.citations #=> Array
     #   resp.output.message.content[0].citations_content.citations[0].title #=> String
+    #   resp.output.message.content[0].citations_content.citations[0].source #=> String
     #   resp.output.message.content[0].citations_content.citations[0].source_content #=> Array
     #   resp.output.message.content[0].citations_content.citations[0].source_content[0].text #=> String
+    #   resp.output.message.content[0].citations_content.citations[0].location.web.url #=> String
+    #   resp.output.message.content[0].citations_content.citations[0].location.web.domain #=> String
     #   resp.output.message.content[0].citations_content.citations[0].location.document_char.document_index #=> Integer
     #   resp.output.message.content[0].citations_content.citations[0].location.document_char.start #=> Integer
     #   resp.output.message.content[0].citations_content.citations[0].location.document_char.end #=> Integer
@@ -1237,7 +1326,15 @@ module Aws::BedrockRuntime
     #   resp.output.message.content[0].citations_content.citations[0].location.document_chunk.document_index #=> Integer
     #   resp.output.message.content[0].citations_content.citations[0].location.document_chunk.start #=> Integer
     #   resp.output.message.content[0].citations_content.citations[0].location.document_chunk.end #=> Integer
-    #   resp.stop_reason #=> String, one of "end_turn", "tool_use", "max_tokens", "stop_sequence", "guardrail_intervened", "content_filtered", "model_context_window_exceeded"
+    #   resp.output.message.content[0].citations_content.citations[0].location.search_result_location.search_result_index #=> Integer
+    #   resp.output.message.content[0].citations_content.citations[0].location.search_result_location.start #=> Integer
+    #   resp.output.message.content[0].citations_content.citations[0].location.search_result_location.end #=> Integer
+    #   resp.output.message.content[0].search_result.source #=> String
+    #   resp.output.message.content[0].search_result.title #=> String
+    #   resp.output.message.content[0].search_result.content #=> Array
+    #   resp.output.message.content[0].search_result.content[0].text #=> String
+    #   resp.output.message.content[0].search_result.citations.enabled #=> Boolean
+    #   resp.stop_reason #=> String, one of "end_turn", "tool_use", "max_tokens", "stop_sequence", "guardrail_intervened", "content_filtered", "malformed_model_output", "malformed_tool_use", "model_context_window_exceeded"
     #   resp.usage.input_tokens #=> Integer
     #   resp.usage.output_tokens #=> Integer
     #   resp.usage.total_tokens #=> Integer
@@ -1406,6 +1503,12 @@ module Aws::BedrockRuntime
     #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.images.guarded #=> Integer
     #   resp.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.images.total #=> Integer
+    #   resp.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_id #=> String
+    #   resp.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_version #=> String
+    #   resp.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_arn #=> String
+    #   resp.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_origin #=> Array
+    #   resp.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_origin[0] #=> String, one of "REQUEST", "ACCOUNT_ENFORCED", "ORGANIZATION_ENFORCED"
+    #   resp.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_ownership #=> String, one of "SELF", "CROSS_ACCOUNT"
     #   resp.trace.guardrail.output_assessments #=> Hash
     #   resp.trace.guardrail.output_assessments["String"] #=> Array
     #   resp.trace.guardrail.output_assessments["String"][0].topic_policy.topics #=> Array
@@ -1567,9 +1670,16 @@ module Aws::BedrockRuntime
     #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.images.guarded #=> Integer
     #   resp.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.images.total #=> Integer
+    #   resp.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_id #=> String
+    #   resp.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_version #=> String
+    #   resp.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_arn #=> String
+    #   resp.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_origin #=> Array
+    #   resp.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_origin[0] #=> String, one of "REQUEST", "ACCOUNT_ENFORCED", "ORGANIZATION_ENFORCED"
+    #   resp.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_ownership #=> String, one of "SELF", "CROSS_ACCOUNT"
     #   resp.trace.guardrail.action_reason #=> String
     #   resp.trace.prompt_router.invoked_model_id #=> String
     #   resp.performance_config.latency #=> String, one of "standard", "optimized"
+    #   resp.service_tier.type #=> String, one of "priority", "default", "flex", "reserved"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/Converse AWS API Documentation
     #
@@ -1762,6 +1872,10 @@ module Aws::BedrockRuntime
     #
     # @option params [Types::PerformanceConfiguration] :performance_config
     #   Model performance settings for the request.
+    #
+    # @option params [Types::ServiceTier] :service_tier
+    #   Specifies the processing tier configuration used for serving the
+    #   request.
     #
     # @return [Types::ConverseStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1965,6 +2079,9 @@ module Aws::BedrockRuntime
     #                   bucket_owner: "AccountId",
     #                 },
     #               },
+    #               error: {
+    #                 message: "String",
+    #               },
     #             },
     #             document: {
     #               format: "pdf", # accepts pdf, csv, doc, docx, xls, xlsx, html, txt, md
@@ -1997,11 +2114,25 @@ module Aws::BedrockRuntime
     #                 },
     #               },
     #             },
+    #             audio: {
+    #               format: "mp3", # required, accepts mp3, opus, wav, aac, flac, mp4, ogg, mkv, mka, x-aac, m4a, mpeg, mpga, pcm, webm
+    #               source: { # required
+    #                 bytes: "data",
+    #                 s3_location: {
+    #                   uri: "S3Uri", # required
+    #                   bucket_owner: "AccountId",
+    #                 },
+    #               },
+    #               error: {
+    #                 message: "String",
+    #               },
+    #             },
     #             tool_use: {
     #               tool_use_id: "ToolUseId", # required
     #               name: "ToolName", # required
     #               input: { # required
     #               },
+    #               type: "server_tool_use", # accepts server_tool_use
     #             },
     #             tool_result: {
     #               tool_use_id: "ToolUseId", # required
@@ -2018,6 +2149,9 @@ module Aws::BedrockRuntime
     #                         uri: "S3Uri", # required
     #                         bucket_owner: "AccountId",
     #                       },
+    #                     },
+    #                     error: {
+    #                       message: "String",
     #                     },
     #                   },
     #                   document: {
@@ -2051,9 +2185,22 @@ module Aws::BedrockRuntime
     #                       },
     #                     },
     #                   },
+    #                   search_result: {
+    #                     source: "String", # required
+    #                     title: "String", # required
+    #                     content: [ # required
+    #                       {
+    #                         text: "String", # required
+    #                       },
+    #                     ],
+    #                     citations: {
+    #                       enabled: false, # required
+    #                     },
+    #                   },
     #                 },
     #               ],
     #               status: "success", # accepts success, error
+    #               type: "String",
     #             },
     #             guard_content: {
     #               text: {
@@ -2086,12 +2233,17 @@ module Aws::BedrockRuntime
     #               citations: [
     #                 {
     #                   title: "String",
+    #                   source: "String",
     #                   source_content: [
     #                     {
     #                       text: "String",
     #                     },
     #                   ],
     #                   location: {
+    #                     web: {
+    #                       url: "String",
+    #                       domain: "String",
+    #                     },
     #                     document_char: {
     #                       document_index: 1,
     #                       start: 1,
@@ -2107,9 +2259,26 @@ module Aws::BedrockRuntime
     #                       start: 1,
     #                       end: 1,
     #                     },
+    #                     search_result_location: {
+    #                       search_result_index: 1,
+    #                       start: 1,
+    #                       end: 1,
+    #                     },
     #                   },
     #                 },
     #               ],
+    #             },
+    #             search_result: {
+    #               source: "String", # required
+    #               title: "String", # required
+    #               content: [ # required
+    #                 {
+    #                   text: "String", # required
+    #                 },
+    #               ],
+    #               citations: {
+    #                 enabled: false, # required
+    #               },
     #             },
     #           },
     #         ],
@@ -2152,6 +2321,9 @@ module Aws::BedrockRuntime
     #               },
     #             },
     #           },
+    #           system_tool: {
+    #             name: "ToolName", # required
+    #           },
     #           cache_point: {
     #             type: "default", # required, accepts default
     #           },
@@ -2168,8 +2340,8 @@ module Aws::BedrockRuntime
     #       },
     #     },
     #     guardrail_config: {
-    #       guardrail_identifier: "GuardrailIdentifier", # required
-    #       guardrail_version: "GuardrailVersion", # required
+    #       guardrail_identifier: "GuardrailIdentifier",
+    #       guardrail_version: "GuardrailVersion",
     #       trace: "enabled", # accepts enabled, disabled, enabled_full
     #       stream_processing_mode: "sync", # accepts sync, async
     #     },
@@ -2187,6 +2359,9 @@ module Aws::BedrockRuntime
     #     performance_config: {
     #       latency: "standard", # accepts standard, optimized
     #     },
+    #     service_tier: {
+    #       type: "priority", # required, accepts priority, default, flex, reserved
+    #     },
     #   })
     #
     # @example Response structure
@@ -2201,17 +2376,27 @@ module Aws::BedrockRuntime
     #   # For :content_block_start event available at #on_content_block_start_event callback and response eventstream enumerator:
     #   event.start.tool_use.tool_use_id #=> String
     #   event.start.tool_use.name #=> String
+    #   event.start.tool_use.type #=> String, one of "server_tool_use"
+    #   event.start.tool_result.tool_use_id #=> String
+    #   event.start.tool_result.type #=> String
+    #   event.start.tool_result.status #=> String, one of "success", "error"
+    #   event.start.image.format #=> String, one of "png", "jpeg", "gif", "webp"
     #   event.content_block_index #=> Integer
     #
     #   # For :content_block_delta event available at #on_content_block_delta_event callback and response eventstream enumerator:
     #   event.delta.text #=> String
     #   event.delta.tool_use.input #=> String
+    #   event.delta.tool_result #=> Array
+    #   event.delta.tool_result[0].text #=> String
     #   event.delta.reasoning_content.text #=> String
     #   event.delta.reasoning_content.redacted_content #=> String
     #   event.delta.reasoning_content.signature #=> String
     #   event.delta.citation.title #=> String
+    #   event.delta.citation.source #=> String
     #   event.delta.citation.source_content #=> Array
     #   event.delta.citation.source_content[0].text #=> String
+    #   event.delta.citation.location.web.url #=> String
+    #   event.delta.citation.location.web.domain #=> String
     #   event.delta.citation.location.document_char.document_index #=> Integer
     #   event.delta.citation.location.document_char.start #=> Integer
     #   event.delta.citation.location.document_char.end #=> Integer
@@ -2221,13 +2406,20 @@ module Aws::BedrockRuntime
     #   event.delta.citation.location.document_chunk.document_index #=> Integer
     #   event.delta.citation.location.document_chunk.start #=> Integer
     #   event.delta.citation.location.document_chunk.end #=> Integer
+    #   event.delta.citation.location.search_result_location.search_result_index #=> Integer
+    #   event.delta.citation.location.search_result_location.start #=> Integer
+    #   event.delta.citation.location.search_result_location.end #=> Integer
+    #   event.delta.image.source.bytes #=> String
+    #   event.delta.image.source.s3_location.uri #=> String
+    #   event.delta.image.source.s3_location.bucket_owner #=> String
+    #   event.delta.image.error.message #=> String
     #   event.content_block_index #=> Integer
     #
     #   # For :content_block_stop event available at #on_content_block_stop_event callback and response eventstream enumerator:
     #   event.content_block_index #=> Integer
     #
     #   # For :message_stop event available at #on_message_stop_event callback and response eventstream enumerator:
-    #   event.stop_reason #=> String, one of "end_turn", "tool_use", "max_tokens", "stop_sequence", "guardrail_intervened", "content_filtered", "model_context_window_exceeded"
+    #   event.stop_reason #=> String, one of "end_turn", "tool_use", "max_tokens", "stop_sequence", "guardrail_intervened", "content_filtered", "malformed_model_output", "malformed_tool_use", "model_context_window_exceeded"
     #
     #   # For :metadata event available at #on_metadata_event callback and response eventstream enumerator:
     #   event.usage.input_tokens #=> Integer
@@ -2398,6 +2590,12 @@ module Aws::BedrockRuntime
     #   event.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #   event.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.images.guarded #=> Integer
     #   event.trace.guardrail.input_assessment["String"].invocation_metrics.guardrail_coverage.images.total #=> Integer
+    #   event.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_id #=> String
+    #   event.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_version #=> String
+    #   event.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_arn #=> String
+    #   event.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_origin #=> Array
+    #   event.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_origin[0] #=> String, one of "REQUEST", "ACCOUNT_ENFORCED", "ORGANIZATION_ENFORCED"
+    #   event.trace.guardrail.input_assessment["String"].applied_guardrail_details.guardrail_ownership #=> String, one of "SELF", "CROSS_ACCOUNT"
     #   event.trace.guardrail.output_assessments #=> Hash
     #   event.trace.guardrail.output_assessments["String"] #=> Array
     #   event.trace.guardrail.output_assessments["String"][0].topic_policy.topics #=> Array
@@ -2559,9 +2757,16 @@ module Aws::BedrockRuntime
     #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.text_characters.total #=> Integer
     #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.images.guarded #=> Integer
     #   event.trace.guardrail.output_assessments["String"][0].invocation_metrics.guardrail_coverage.images.total #=> Integer
+    #   event.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_id #=> String
+    #   event.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_version #=> String
+    #   event.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_arn #=> String
+    #   event.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_origin #=> Array
+    #   event.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_origin[0] #=> String, one of "REQUEST", "ACCOUNT_ENFORCED", "ORGANIZATION_ENFORCED"
+    #   event.trace.guardrail.output_assessments["String"][0].applied_guardrail_details.guardrail_ownership #=> String, one of "SELF", "CROSS_ACCOUNT"
     #   event.trace.guardrail.action_reason #=> String
     #   event.trace.prompt_router.invoked_model_id #=> String
     #   event.performance_config.latency #=> String, one of "standard", "optimized"
+    #   event.service_tier.type #=> String, one of "priority", "default", "flex", "reserved"
     #
     #   # For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -2689,6 +2894,9 @@ module Aws::BedrockRuntime
     #                       bucket_owner: "AccountId",
     #                     },
     #                   },
+    #                   error: {
+    #                     message: "String",
+    #                   },
     #                 },
     #                 document: {
     #                   format: "pdf", # accepts pdf, csv, doc, docx, xls, xlsx, html, txt, md
@@ -2721,11 +2929,25 @@ module Aws::BedrockRuntime
     #                     },
     #                   },
     #                 },
+    #                 audio: {
+    #                   format: "mp3", # required, accepts mp3, opus, wav, aac, flac, mp4, ogg, mkv, mka, x-aac, m4a, mpeg, mpga, pcm, webm
+    #                   source: { # required
+    #                     bytes: "data",
+    #                     s3_location: {
+    #                       uri: "S3Uri", # required
+    #                       bucket_owner: "AccountId",
+    #                     },
+    #                   },
+    #                   error: {
+    #                     message: "String",
+    #                   },
+    #                 },
     #                 tool_use: {
     #                   tool_use_id: "ToolUseId", # required
     #                   name: "ToolName", # required
     #                   input: { # required
     #                   },
+    #                   type: "server_tool_use", # accepts server_tool_use
     #                 },
     #                 tool_result: {
     #                   tool_use_id: "ToolUseId", # required
@@ -2742,6 +2964,9 @@ module Aws::BedrockRuntime
     #                             uri: "S3Uri", # required
     #                             bucket_owner: "AccountId",
     #                           },
+    #                         },
+    #                         error: {
+    #                           message: "String",
     #                         },
     #                       },
     #                       document: {
@@ -2775,9 +3000,22 @@ module Aws::BedrockRuntime
     #                           },
     #                         },
     #                       },
+    #                       search_result: {
+    #                         source: "String", # required
+    #                         title: "String", # required
+    #                         content: [ # required
+    #                           {
+    #                             text: "String", # required
+    #                           },
+    #                         ],
+    #                         citations: {
+    #                           enabled: false, # required
+    #                         },
+    #                       },
     #                     },
     #                   ],
     #                   status: "success", # accepts success, error
+    #                   type: "String",
     #                 },
     #                 guard_content: {
     #                   text: {
@@ -2810,12 +3048,17 @@ module Aws::BedrockRuntime
     #                   citations: [
     #                     {
     #                       title: "String",
+    #                       source: "String",
     #                       source_content: [
     #                         {
     #                           text: "String",
     #                         },
     #                       ],
     #                       location: {
+    #                         web: {
+    #                           url: "String",
+    #                           domain: "String",
+    #                         },
     #                         document_char: {
     #                           document_index: 1,
     #                           start: 1,
@@ -2831,9 +3074,26 @@ module Aws::BedrockRuntime
     #                           start: 1,
     #                           end: 1,
     #                         },
+    #                         search_result_location: {
+    #                           search_result_index: 1,
+    #                           start: 1,
+    #                           end: 1,
+    #                         },
     #                       },
     #                     },
     #                   ],
+    #                 },
+    #                 search_result: {
+    #                   source: "String", # required
+    #                   title: "String", # required
+    #                   content: [ # required
+    #                     {
+    #                       text: "String", # required
+    #                     },
+    #                   ],
+    #                   citations: {
+    #                     enabled: false, # required
+    #                   },
     #                 },
     #               },
     #             ],
@@ -2859,6 +3119,37 @@ module Aws::BedrockRuntime
     #             },
     #           },
     #         ],
+    #         tool_config: {
+    #           tools: [ # required
+    #             {
+    #               tool_spec: {
+    #                 name: "ToolName", # required
+    #                 description: "NonEmptyString",
+    #                 input_schema: { # required
+    #                   json: {
+    #                   },
+    #                 },
+    #               },
+    #               system_tool: {
+    #                 name: "ToolName", # required
+    #               },
+    #               cache_point: {
+    #                 type: "default", # required, accepts default
+    #               },
+    #             },
+    #           ],
+    #           tool_choice: {
+    #             auto: {
+    #             },
+    #             any: {
+    #             },
+    #             tool: {
+    #               name: "ToolName", # required
+    #             },
+    #           },
+    #         },
+    #         additional_model_request_fields: {
+    #         },
     #       },
     #     },
     #   })
@@ -3033,11 +3324,15 @@ module Aws::BedrockRuntime
     # @option params [String] :performance_config_latency
     #   Model performance settings for the request.
     #
+    # @option params [String] :service_tier
+    #   Specifies the processing tier type used for serving the request.
+    #
     # @return [Types::InvokeModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeModelResponse#body #body} => String
     #   * {Types::InvokeModelResponse#content_type #content_type} => String
     #   * {Types::InvokeModelResponse#performance_config_latency #performance_config_latency} => String
+    #   * {Types::InvokeModelResponse#service_tier #service_tier} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3050,6 +3345,7 @@ module Aws::BedrockRuntime
     #     guardrail_identifier: "GuardrailIdentifier",
     #     guardrail_version: "GuardrailVersion",
     #     performance_config_latency: "standard", # accepts standard, optimized
+    #     service_tier: "priority", # accepts priority, default, flex, reserved
     #   })
     #
     # @example Response structure
@@ -3057,6 +3353,7 @@ module Aws::BedrockRuntime
     #   resp.body #=> String
     #   resp.content_type #=> String
     #   resp.performance_config_latency #=> String, one of "standard", "optimized"
+    #   resp.service_tier #=> String, one of "priority", "default", "flex", "reserved"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModel AWS API Documentation
     #
@@ -3187,11 +3484,15 @@ module Aws::BedrockRuntime
     # @option params [String] :performance_config_latency
     #   Model performance settings for the request.
     #
+    # @option params [String] :service_tier
+    #   Specifies the processing tier type used for serving the request.
+    #
     # @return [Types::InvokeModelWithResponseStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeModelWithResponseStreamResponse#body #body} => Types::ResponseStream
     #   * {Types::InvokeModelWithResponseStreamResponse#content_type #content_type} => String
     #   * {Types::InvokeModelWithResponseStreamResponse#performance_config_latency #performance_config_latency} => String
+    #   * {Types::InvokeModelWithResponseStreamResponse#service_tier #service_tier} => String
     #
     # @example EventStream Operation Example
     #
@@ -3347,6 +3648,7 @@ module Aws::BedrockRuntime
     #     guardrail_identifier: "GuardrailIdentifier",
     #     guardrail_version: "GuardrailVersion",
     #     performance_config_latency: "standard", # accepts standard, optimized
+    #     service_tier: "priority", # accepts priority, default, flex, reserved
     #   })
     #
     # @example Response structure
@@ -3380,6 +3682,7 @@ module Aws::BedrockRuntime
     #
     #   resp.content_type #=> String
     #   resp.performance_config_latency #=> String, one of "standard", "optimized"
+    #   resp.service_tier #=> String, one of "priority", "default", "flex", "reserved"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModelWithResponseStream AWS API Documentation
     #
@@ -3574,7 +3877,7 @@ module Aws::BedrockRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

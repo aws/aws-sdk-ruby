@@ -31,6 +31,7 @@ module Aws::Glacier
   # * {InvalidParameterValueException}
   # * {LimitExceededException}
   # * {MissingParameterValueException}
+  # * {NoLongerSupportedException}
   # * {PolicyEnforcedException}
   # * {RequestTimeoutException}
   # * {ResourceNotFoundException}
@@ -122,6 +123,31 @@ module Aws::Glacier
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Glacier::Types::MissingParameterValueException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def type
+        @data[:type]
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class NoLongerSupportedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glacier::Types::NoLongerSupportedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

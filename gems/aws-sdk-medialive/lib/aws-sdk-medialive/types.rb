@@ -1884,6 +1884,10 @@ module Aws::MediaLive
     #   Requested engine version for this channel.
     #   @return [Types::ChannelEngineVersionResponse]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   Linked Channel Settings for this channel.
+    #   @return [Types::DescribeLinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Channel AWS API Documentation
     #
     class Channel < Struct.new(
@@ -1906,7 +1910,8 @@ module Aws::MediaLive
       :tags,
       :vpc,
       :anywhere_settings,
-      :channel_engine_version)
+      :channel_engine_version,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2018,6 +2023,10 @@ module Aws::MediaLive
     #   The engine version that the running pipelines are using.
     #   @return [Array<Types::ChannelEngineVersionResponse>]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   Linked Channel Settings for this channel.
+    #   @return [Types::DescribeLinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelSummary AWS API Documentation
     #
     class ChannelSummary < Struct.new(
@@ -2039,7 +2048,8 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
-      :used_channel_engine_versions)
+      :used_channel_engine_versions,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2200,6 +2210,10 @@ module Aws::MediaLive
     # @!attribute [rw] dry_run
     #   @return [Boolean]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   The linked channel settings for the channel.
+    #   @return [Types::LinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
     #
     class CreateChannel < Struct.new(
@@ -2219,7 +2233,8 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
-      :dry_run)
+      :dry_run,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2285,6 +2300,10 @@ module Aws::MediaLive
     # @!attribute [rw] dry_run
     #   @return [Boolean]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   Configuration for linked channel relationships
+    #   @return [Types::LinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
@@ -2304,7 +2323,8 @@ module Aws::MediaLive
       :vpc,
       :anywhere_settings,
       :channel_engine_version,
-      :dry_run)
+      :dry_run,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2409,6 +2429,11 @@ module Aws::MediaLive
     #   SDI Sources for this Input.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] router_settings
+    #   This is the collection of settings that are used during the creation
+    #   of a MediaConnect router input.
+    #   @return [Types::RouterSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInput AWS API Documentation
     #
     class CreateInput < Struct.new(
@@ -2427,7 +2452,8 @@ module Aws::MediaLive
       :input_network_location,
       :multicast_settings,
       :smpte_2110_receiver_group_settings,
-      :sdi_sources)
+      :sdi_sources,
+      :router_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2498,6 +2524,11 @@ module Aws::MediaLive
     #   SDI Sources for this Input.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] router_settings
+    #   This is the collection of settings that are used during the creation
+    #   of a MediaConnect router input.
+    #   @return [Types::RouterSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateInputRequest AWS API Documentation
     #
     class CreateInputRequest < Struct.new(
@@ -2516,7 +2547,8 @@ module Aws::MediaLive
       :input_network_location,
       :multicast_settings,
       :smpte_2110_receiver_group_settings,
-      :sdi_sources)
+      :sdi_sources,
+      :router_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2896,6 +2928,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_engine_version
     #   @return [Types::ChannelEngineVersionResponse]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   Linked channel configuration details
+    #   @return [Types::DescribeLinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteChannelResponse AWS API Documentation
     #
     class DeleteChannelResponse < Struct.new(
@@ -2918,7 +2954,8 @@ module Aws::MediaLive
       :tags,
       :vpc,
       :anywhere_settings,
-      :channel_engine_version)
+      :channel_engine_version,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3293,6 +3330,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_engine_version
     #   @return [Types::ChannelEngineVersionResponse]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   Linked channel configuration details
+    #   @return [Types::DescribeLinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannelResponse AWS API Documentation
     #
     class DescribeChannelResponse < Struct.new(
@@ -3315,7 +3356,8 @@ module Aws::MediaLive
       :tags,
       :vpc,
       :anywhere_settings,
-      :channel_engine_version)
+      :channel_engine_version,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3556,6 +3598,10 @@ module Aws::MediaLive
     #   SDI Sources for this Input.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] router_settings
+    #   The settings for a MediaConnect Router Input.
+    #   @return [Types::RouterInputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputResponse AWS API Documentation
     #
     class DescribeInputResponse < Struct.new(
@@ -3579,7 +3625,8 @@ module Aws::MediaLive
       :input_network_location,
       :multicast_settings,
       :smpte_2110_receiver_group_settings,
-      :sdi_sources)
+      :sdi_sources,
+      :router_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5476,6 +5523,10 @@ module Aws::MediaLive
     #   Rec709 Settings
     #   @return [Types::Rec709Settings]
     #
+    # @!attribute [rw] hlg_2020_settings
+    #   Hlg2020 Settings
+    #   @return [Types::Hlg2020Settings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H265ColorSpaceSettings AWS API Documentation
     #
     class H265ColorSpaceSettings < Struct.new(
@@ -5483,7 +5534,8 @@ module Aws::MediaLive
       :dolby_vision_81_settings,
       :hdr_10_settings,
       :rec_601_settings,
-      :rec_709_settings)
+      :rec_709_settings,
+      :hlg_2020_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5754,10 +5806,15 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] gop_b_reference
-    #   H265 Gop BReference
+    #   Allows the encoder to use a B-Frame as a reference frame as well.
+    #   ENABLED: B-frames will also serve as reference frames. DISABLED:
+    #   B-frames won't be reference frames. Must be DISABLED if resolution
+    #   is greater than 1080p or when using tiled hevc encoding.
     #   @return [String]
     #
     # @!attribute [rw] gop_num_b_frames
+    #   Sets the number of B-frames between reference frames. Set to 2 if
+    #   resolution is greater than 1080p or when using tiled hevc encoding.
     #   @return [Integer]
     #
     # @!attribute [rw] min_bitrate
@@ -5768,7 +5825,10 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] subgop_length
-    #   H265 Sub Gop Length
+    #   Sets the number of B-frames in each sub-GOP. FIXED: Use the value in
+    #   Num B-frames. DYNAMIC: Optimizes the number of B-frames in each
+    #   sub-GOP to improve visual quality. Must be FIXED if resolution is
+    #   greater than 1080p or when using tiled hevc encoding.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H265Settings AWS API Documentation
@@ -6662,6 +6722,11 @@ module Aws::MediaLive
     #   SDI Sources for this Input.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] router_settings
+    #   Information about any MediaConnect router association with this
+    #   input.
+    #   @return [Types::RouterInputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Input AWS API Documentation
     #
     class Input < Struct.new(
@@ -6685,7 +6750,8 @@ module Aws::MediaLive
       :input_network_location,
       :multicast_settings,
       :smpte_2110_receiver_group_settings,
-      :sdi_sources)
+      :sdi_sources,
+      :router_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10556,11 +10622,21 @@ module Aws::MediaLive
 
     # Pipeline Locking Settings
     #
-    # @api private
+    # @!attribute [rw] pipeline_locking_method
+    #   The method to use to lock the video frames in the pipelines.
+    #   sourceTimecode (default): Use the timecode in the source.
+    #   videoAlignment: Lock frames that the encoder identifies as having
+    #   matching content. If videoAlignment is selected, existing timecodes
+    #   will not be used for any locking decisions.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PipelineLockingSettings AWS API Documentation
     #
-    class PipelineLockingSettings < Aws::EmptyStructure; end
+    class PipelineLockingSettings < Struct.new(
+      :pipeline_locking_method)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Settings for pausing a pipeline.
     #
@@ -11729,6 +11805,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_engine_version
     #   @return [Types::ChannelEngineVersionResponse]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   Linked channel configuration details
+    #   @return [Types::DescribeLinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannelResponse AWS API Documentation
     #
     class StartChannelResponse < Struct.new(
@@ -11751,7 +11831,8 @@ module Aws::MediaLive
       :tags,
       :vpc,
       :anywhere_settings,
-      :channel_engine_version)
+      :channel_engine_version,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12176,6 +12257,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_engine_version
     #   @return [Types::ChannelEngineVersionResponse]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   Linked channel configuration details
+    #   @return [Types::DescribeLinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopChannelResponse AWS API Documentation
     #
     class StopChannelResponse < Struct.new(
@@ -12198,7 +12283,8 @@ module Aws::MediaLive
       :tags,
       :vpc,
       :anywhere_settings,
-      :channel_engine_version)
+      :channel_engine_version,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12804,6 +12890,10 @@ module Aws::MediaLive
     #   The Elemental Anywhere settings for this channel.
     #   @return [Types::AnywhereSettings]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   The linked channel settings for the channel.
+    #   @return [Types::LinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannel AWS API Documentation
     #
     class UpdateChannel < Struct.new(
@@ -12818,7 +12908,8 @@ module Aws::MediaLive
       :role_arn,
       :channel_engine_version,
       :dry_run,
-      :anywhere_settings)
+      :anywhere_settings,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12914,6 +13005,10 @@ module Aws::MediaLive
     #   Elemental anywhere settings
     #   @return [Types::AnywhereSettings]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   Configuration for linked channel relationships
+    #   @return [Types::LinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateChannelRequest AWS API Documentation
     #
     class UpdateChannelRequest < Struct.new(
@@ -12929,7 +13024,8 @@ module Aws::MediaLive
       :role_arn,
       :channel_engine_version,
       :dry_run,
-      :anywhere_settings)
+      :anywhere_settings,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13010,6 +13106,14 @@ module Aws::MediaLive
     #   SDI Sources for this Input.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] special_router_settings
+    #   When using MediaConnect Router as the source of a MediaLive input
+    #   there's a special handoff that occurs when a router output is
+    #   created. This group of settings is set on your behalf by the
+    #   MediaConnect Router service using this set of settings. This setting
+    #   object can only by used by that service.
+    #   @return [Types::SpecialRouterSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInput AWS API Documentation
     #
     class UpdateInput < Struct.new(
@@ -13023,7 +13127,8 @@ module Aws::MediaLive
       :srt_settings,
       :multicast_settings,
       :smpte_2110_receiver_group_settings,
-      :sdi_sources)
+      :sdi_sources,
+      :special_router_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13216,6 +13321,14 @@ module Aws::MediaLive
     #   SDI Sources for this Input.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] special_router_settings
+    #   When using MediaConnect Router as the source of a MediaLive input
+    #   there's a special handoff that occurs when a router output is
+    #   created. This group of settings is set on your behalf by the
+    #   MediaConnect Router service using this set of settings. This setting
+    #   object can only by used by that service.
+    #   @return [Types::SpecialRouterSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputRequest AWS API Documentation
     #
     class UpdateInputRequest < Struct.new(
@@ -13230,7 +13343,8 @@ module Aws::MediaLive
       :srt_settings,
       :multicast_settings,
       :smpte_2110_receiver_group_settings,
-      :sdi_sources)
+      :sdi_sources,
+      :special_router_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13991,6 +14105,10 @@ module Aws::MediaLive
     # @!attribute [rw] channel_engine_version
     #   @return [Types::ChannelEngineVersionResponse]
     #
+    # @!attribute [rw] linked_channel_settings
+    #   Linked channel configuration details
+    #   @return [Types::DescribeLinkedChannelSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RestartChannelPipelinesResponse AWS API Documentation
     #
     class RestartChannelPipelinesResponse < Struct.new(
@@ -14014,7 +14132,8 @@ module Aws::MediaLive
       :tags,
       :vpc,
       :anywhere_settings,
-      :channel_engine_version)
+      :channel_engine_version,
+      :linked_channel_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18431,6 +18550,22 @@ module Aws::MediaLive
     #   bandwidth for this output.
     #   @return [Integer]
     #
+    # @!attribute [rw] spatial_aq
+    #   Spatial AQ makes adjustments within each frame based on spatial
+    #   variation of content complexity. Enabled: MediaLive will determine
+    #   the appropriate level of spatial AQ to apply. Disabled: No spatial
+    #   AQ. For more information, see the topic about video adaptive
+    #   quantization in the MediaLive user guide.
+    #   @return [String]
+    #
+    # @!attribute [rw] temporal_aq
+    #   Temporal AQ makes adjustments within each frame based on variations
+    #   in content complexity over time. Enabled: MediaLive will determine
+    #   the appropriate level of temporal AQ to apply. Disabled: No temporal
+    #   AQ. For more information, see the topic about video adaptive
+    #   quantization in the MediaLive user guide.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Av1Settings AWS API Documentation
     #
     class Av1Settings < Struct.new(
@@ -18453,7 +18588,9 @@ module Aws::MediaLive
       :timecode_burnin_settings,
       :bitrate,
       :rate_control_mode,
-      :min_bitrate)
+      :min_bitrate,
+      :spatial_aq,
+      :temporal_aq)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21925,6 +22062,532 @@ module Aws::MediaLive
       :timed_metadata_id_3_frame,
       :timed_metadata_id_3_period,
       :timed_metadata_passthrough)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An alert on a channel
+    #
+    # @!attribute [rw] alert_type
+    #   The type of the alert
+    #   @return [String]
+    #
+    # @!attribute [rw] cleared_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] id
+    #   The unique ID for this alert instance
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The user facing alert message which can have more context
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_id
+    #   The ID of the pipeline this alert is associated with
+    #   @return [String]
+    #
+    # @!attribute [rw] set_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the alert
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelAlert AWS API Documentation
+    #
+    class ChannelAlert < Struct.new(
+      :alert_type,
+      :cleared_timestamp,
+      :id,
+      :message,
+      :pipeline_id,
+      :set_timestamp,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An alert on a cluster
+    #
+    # @!attribute [rw] alert_type
+    #   The type of the alert
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_id
+    #   The ID of the channel this alert is associated with
+    #   @return [String]
+    #
+    # @!attribute [rw] cleared_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] id
+    #   The further subtype of this alert
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The user facing alert message which can have more context
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   The ID of the node this alert is associated with
+    #   @return [String]
+    #
+    # @!attribute [rw] set_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the alert
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ClusterAlert AWS API Documentation
+    #
+    class ClusterAlert < Struct.new(
+      :alert_type,
+      :channel_id,
+      :cleared_timestamp,
+      :id,
+      :message,
+      :node_id,
+      :set_timestamp,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_id
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] state_filter
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListAlertsRequest AWS API Documentation
+    #
+    class ListAlertsRequest < Struct.new(
+      :channel_id,
+      :max_results,
+      :next_token,
+      :state_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alerts
+    #   @return [Array<Types::ChannelAlert>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListAlertsResponse AWS API Documentation
+    #
+    class ListAlertsResponse < Struct.new(
+      :alerts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful ListAlerts request
+    #
+    # @!attribute [rw] alerts
+    #   The alerts found for this channel
+    #   @return [Array<Types::ChannelAlert>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListAlertsResultModel AWS API Documentation
+    #
+    class ListAlertsResultModel < Struct.new(
+      :alerts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_id
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] state_filter
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListClusterAlertsRequest AWS API Documentation
+    #
+    class ListClusterAlertsRequest < Struct.new(
+      :cluster_id,
+      :max_results,
+      :next_token,
+      :state_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alerts
+    #   @return [Array<Types::ClusterAlert>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListClusterAlertsResponse AWS API Documentation
+    #
+    class ListClusterAlertsResponse < Struct.new(
+      :alerts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful ListClusterAlerts request
+    #
+    # @!attribute [rw] alerts
+    #   The alerts found for this cluster
+    #   @return [Array<Types::ClusterAlert>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListClusterAlertsResultModel AWS API Documentation
+    #
+    class ListClusterAlertsResultModel < Struct.new(
+      :alerts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] multiplex_id
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] state_filter
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListMultiplexAlertsRequest AWS API Documentation
+    #
+    class ListMultiplexAlertsRequest < Struct.new(
+      :max_results,
+      :multiplex_id,
+      :next_token,
+      :state_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] alerts
+    #   @return [Array<Types::MultiplexAlert>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListMultiplexAlertsResponse AWS API Documentation
+    #
+    class ListMultiplexAlertsResponse < Struct.new(
+      :alerts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful ListMultiplexAlerts request.
+    #
+    # @!attribute [rw] alerts
+    #   The alerts found for this multiplex
+    #   @return [Array<Types::MultiplexAlert>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListMultiplexAlertsResultModel AWS API Documentation
+    #
+    class ListMultiplexAlertsResultModel < Struct.new(
+      :alerts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An alert on a multiplex
+    #
+    # @!attribute [rw] alert_type
+    #   The type of the alert
+    #   @return [String]
+    #
+    # @!attribute [rw] cleared_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] id
+    #   The unique ID for this alert instance
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The user facing alert message which can have more context
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_id
+    #   The ID of the pipeline this alert is associated with
+    #   @return [String]
+    #
+    # @!attribute [rw] set_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The state of the alert
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexAlert AWS API Documentation
+    #
+    class MultiplexAlert < Struct.new(
+      :alert_type,
+      :cleared_timestamp,
+      :id,
+      :message,
+      :pipeline_id,
+      :set_timestamp,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Hlg2020 Settings
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Hlg2020Settings AWS API Documentation
+    #
+    class Hlg2020Settings < Aws::EmptyStructure; end
+
+    # @!attribute [rw] availability_zone_name
+    #   The Availability Zone (AZ) names of the AZs this destination is
+    #   created in.
+    #   @return [String]
+    #
+    # @!attribute [rw] router_output_arn
+    #   ARN of the output from MediaConnect Router currently connected to
+    #   this input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RouterDestination AWS API Documentation
+    #
+    class RouterDestination < Struct.new(
+      :availability_zone_name,
+      :router_output_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] availability_zone_name
+    #   Availability Zone for this MediaConnect Router destination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RouterDestinationSettings AWS API Documentation
+    #
+    class RouterDestinationSettings < Struct.new(
+      :availability_zone_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The settings for a MediaConnect Router Input.
+    #
+    # @!attribute [rw] destinations
+    #   MediaConnect Router destinations associated with the MediaLive
+    #   Input.
+    #   @return [Array<Types::RouterDestination>]
+    #
+    # @!attribute [rw] encryption_type
+    #   Encryption configuration for MediaConnect router. When using
+    #   SECRETS\_MANAGER encryption, you must provide the ARN of the secret
+    #   used to encrypt data in transit. When using AUTOMATIC encryption, a
+    #   service-managed secret will be used instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   ARN of the secret used to encrypt this input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RouterInputSettings AWS API Documentation
+    #
+    class RouterInputSettings < Struct.new(
+      :destinations,
+      :encryption_type,
+      :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This is the collection of settings that are used during the creation
+    # of a MediaConnect router input.
+    #
+    # @!attribute [rw] destinations
+    #   Destinations for the input from MediaConnect Router. Provide one for
+    #   a single-pipeline input and two for a standard input.
+    #   @return [Array<Types::RouterDestinationSettings>]
+    #
+    # @!attribute [rw] encryption_type
+    #   Encryption configuration for MediaConnect router. When using
+    #   SECRETS\_MANAGER encryption, you must provide the ARN of the secret
+    #   used to encrypt data in transit. When using AUTOMATIC encryption, a
+    #   service-managed secret will be used instead.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   ARN of the secret used to encrypt this input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RouterSettings AWS API Documentation
+    #
+    class RouterSettings < Struct.new(
+      :destinations,
+      :encryption_type,
+      :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # When using MediaConnect Router as the source of a MediaLive input
+    # there's a special handoff that occurs when a router output is
+    # created. This group of settings is set on your behalf by the
+    # MediaConnect Router service using this set of settings. This setting
+    # object can only by used by that service.
+    #
+    # @!attribute [rw] router_arn
+    #   This is the arn of the MediaConnect Router resource being associated
+    #   with the MediaLive Input.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SpecialRouterSettings AWS API Documentation
+    #
+    class SpecialRouterSettings < Struct.new(
+      :router_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of a follower channel in a linked pair
+    #
+    # @!attribute [rw] linked_channel_type
+    #   Specifies this as a follower channel
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_channel_arn
+    #   The ARN of the primary channel this channel follows
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeFollowerChannelSettings AWS API Documentation
+    #
+    class DescribeFollowerChannelSettings < Struct.new(
+      :linked_channel_type,
+      :primary_channel_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Linked channel configuration details
+    #
+    # @!attribute [rw] follower_channel_settings
+    #   Details of a follower channel in a linked pair
+    #   @return [Types::DescribeFollowerChannelSettings]
+    #
+    # @!attribute [rw] primary_channel_settings
+    #   Details of a primary (leader) channel in a linked pair
+    #   @return [Types::DescribePrimaryChannelSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeLinkedChannelSettings AWS API Documentation
+    #
+    class DescribeLinkedChannelSettings < Struct.new(
+      :follower_channel_settings,
+      :primary_channel_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of a primary (leader) channel in a linked pair
+    #
+    # @!attribute [rw] following_channel_arns
+    #   The ARNs of the following channels for this primary channel
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] linked_channel_type
+    #   Specifies this as a primary channel
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribePrimaryChannelSettings AWS API Documentation
+    #
+    class DescribePrimaryChannelSettings < Struct.new(
+      :following_channel_arns,
+      :linked_channel_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for a follower channel in a linked pair
+    #
+    # @!attribute [rw] linked_channel_type
+    #   Specifies this as a follower channel
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_channel_arn
+    #   The ARN of the primary channel to follow
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FollowerChannelSettings AWS API Documentation
+    #
+    class FollowerChannelSettings < Struct.new(
+      :linked_channel_type,
+      :primary_channel_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for linked channel relationships
+    #
+    # @!attribute [rw] follower_channel_settings
+    #   Settings for a follower channel in a linked pair
+    #   @return [Types::FollowerChannelSettings]
+    #
+    # @!attribute [rw] primary_channel_settings
+    #   Settings for a primary (leader) channel in a linked pair
+    #   @return [Types::PrimaryChannelSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/LinkedChannelSettings AWS API Documentation
+    #
+    class LinkedChannelSettings < Struct.new(
+      :follower_channel_settings,
+      :primary_channel_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for a primary (leader) channel in a linked pair
+    #
+    # @!attribute [rw] linked_channel_type
+    #   Specifies this as a primary channel
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PrimaryChannelSettings AWS API Documentation
+    #
+    class PrimaryChannelSettings < Struct.new(
+      :linked_channel_type)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,0 +1,344 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MWAAServerless
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAAServerless/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkflowResponse]
+        def workflow_arn: () -> ::String
+        def created_at: () -> ::Time
+        def revision_id: () -> ::String
+        def workflow_status: () -> ("READY" | "DELETING")
+        def workflow_version: () -> ::String
+        def is_latest_version: () -> bool
+        def warnings: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAAServerless/Client.html#create_workflow-instance_method
+      def create_workflow: (
+                             name: ::String,
+                             ?client_token: ::String,
+                             definition_s3_location: {
+                               bucket: ::String,
+                               object_key: ::String,
+                               version_id: ::String?
+                             },
+                             role_arn: ::String,
+                             ?description: ::String,
+                             ?encryption_configuration: {
+                               type: ("AWS_MANAGED_KEY" | "CUSTOMER_MANAGED_KEY"),
+                               kms_key_id: ::String?
+                             },
+                             ?logging_configuration: {
+                               log_group_name: ::String
+                             },
+                             ?engine_version: ::Integer,
+                             ?network_configuration: {
+                               security_group_ids: Array[::String]?,
+                               subnet_ids: Array[::String]?
+                             },
+                             ?tags: Hash[::String, ::String],
+                             ?trigger_mode: ::String
+                           ) -> _CreateWorkflowResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkflowResponseSuccess
+
+      interface _DeleteWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkflowResponse]
+        def workflow_arn: () -> ::String
+        def workflow_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAAServerless/Client.html#delete_workflow-instance_method
+      def delete_workflow: (
+                             workflow_arn: ::String,
+                             ?workflow_version: ::String
+                           ) -> _DeleteWorkflowResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkflowResponseSuccess
+
+      interface _GetTaskInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTaskInstanceResponse]
+        def workflow_arn: () -> ::String
+        def run_id: () -> ::String
+        def task_instance_id: () -> ::String
+        def workflow_version: () -> ::String
+        def status: () -> ("QUEUED" | "FAILED" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "UP_FOR_RESCHEDULE" | "UP_FOR_RETRY" | "UPSTREAM_FAILED" | "REMOVED" | "RESTARTING" | "DEFERRED" | "NONE" | "CANCELLED" | "TIMEOUT")
+        def duration_in_seconds: () -> ::Integer
+        def operator_name: () -> ::String
+        def modified_at: () -> ::Time
+        def ended_at: () -> ::Time
+        def started_at: () -> ::Time
+        def attempt_number: () -> ::Integer
+        def error_message: () -> ::String
+        def task_id: () -> ::String
+        def log_stream: () -> ::String
+        def xcom: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAAServerless/Client.html#get_task_instance-instance_method
+      def get_task_instance: (
+                               workflow_arn: ::String,
+                               task_instance_id: ::String,
+                               run_id: ::String
+                             ) -> _GetTaskInstanceResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTaskInstanceResponseSuccess
+
+      interface _GetWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkflowResponse]
+        def workflow_arn: () -> ::String
+        def workflow_version: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def modified_at: () -> ::Time
+        def encryption_configuration: () -> Types::EncryptionConfiguration
+        def logging_configuration: () -> Types::LoggingConfiguration
+        def engine_version: () -> ::Integer
+        def workflow_status: () -> ("READY" | "DELETING")
+        def definition_s3_location: () -> Types::DefinitionS3Location
+        def schedule_configuration: () -> Types::ScheduleConfiguration
+        def role_arn: () -> ::String
+        def network_configuration: () -> Types::NetworkConfiguration
+        def trigger_mode: () -> ::String
+        def workflow_definition: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAAServerless/Client.html#get_workflow-instance_method
+      def get_workflow: (
+                          workflow_arn: ::String,
+                          ?workflow_version: ::String
+                        ) -> _GetWorkflowResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowResponseSuccess
+
+      interface _GetWorkflowRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkflowRunResponse]
+        def workflow_arn: () -> ::String
+        def workflow_version: () -> ::String
+        def run_id: () -> ::String
+        def run_type: () -> ("ON_DEMAND" | "SCHEDULED")
+        def override_parameters: () -> ::Hash[::String, untyped]
+        def run_detail: () -> Types::WorkflowRunDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAAServerless/Client.html#get_workflow_run-instance_method
+      def get_workflow_run: (
+                              workflow_arn: ::String,
+                              run_id: ::String
+                            ) -> _GetWorkflowRunResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowRunResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAAServerless/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTaskInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTaskInstancesResponse]
+        def task_instances: () -> ::Array[Types::TaskInstanceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAAServerless/Client.html#list_task_instances-instance_method
+      def list_task_instances: (
+                                 workflow_arn: ::String,
+                                 run_id: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListTaskInstancesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTaskInstancesResponseSuccess
+
+      interface _ListWorkflowRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkflowRunsResponse]
+        def workflow_runs: () -> ::Array[Types::WorkflowRunSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAAServerless/Client.html#list_workflow_runs-instance_method
+      def list_workflow_runs: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                workflow_arn: ::String,
+                                ?workflow_version: ::String
+                              ) -> _ListWorkflowRunsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowRunsResponseSuccess
+
+      interface _ListWorkflowVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkflowVersionsResponse]
+        def workflow_versions: () -> ::Array[Types::WorkflowVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAAServerless/Client.html#list_workflow_versions-instance_method
+      def list_workflow_versions: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String,
+                                    workflow_arn: ::String
+                                  ) -> _ListWorkflowVersionsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowVersionsResponseSuccess
+
+      interface _ListWorkflowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkflowsResponse]
+        def workflows: () -> ::Array[Types::WorkflowSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAAServerless/Client.html#list_workflows-instance_method
+      def list_workflows: (
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListWorkflowsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowsResponseSuccess
+
+      interface _StartWorkflowRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartWorkflowRunResponse]
+        def run_id: () -> ::String
+        def status: () -> ("STARTING" | "QUEUED" | "RUNNING" | "SUCCESS" | "FAILED" | "TIMEOUT" | "STOPPING" | "STOPPED")
+        def started_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAAServerless/Client.html#start_workflow_run-instance_method
+      def start_workflow_run: (
+                                workflow_arn: ::String,
+                                ?client_token: ::String,
+                                ?override_parameters: Hash[::String, {
+                                  }],
+                                ?workflow_version: ::String
+                              ) -> _StartWorkflowRunResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartWorkflowRunResponseSuccess
+
+      interface _StopWorkflowRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopWorkflowRunResponse]
+        def workflow_arn: () -> ::String
+        def workflow_version: () -> ::String
+        def run_id: () -> ::String
+        def status: () -> ("STARTING" | "QUEUED" | "RUNNING" | "SUCCESS" | "FAILED" | "TIMEOUT" | "STOPPING" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAAServerless/Client.html#stop_workflow_run-instance_method
+      def stop_workflow_run: (
+                               workflow_arn: ::String,
+                               run_id: ::String
+                             ) -> _StopWorkflowRunResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopWorkflowRunResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAAServerless/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAAServerless/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkflowResponse]
+        def workflow_arn: () -> ::String
+        def modified_at: () -> ::Time
+        def workflow_version: () -> ::String
+        def warnings: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MWAAServerless/Client.html#update_workflow-instance_method
+      def update_workflow: (
+                             workflow_arn: ::String,
+                             definition_s3_location: {
+                               bucket: ::String,
+                               object_key: ::String,
+                               version_id: ::String?
+                             },
+                             role_arn: ::String,
+                             ?description: ::String,
+                             ?logging_configuration: {
+                               log_group_name: ::String
+                             },
+                             ?engine_version: ::Integer,
+                             ?network_configuration: {
+                               security_group_ids: Array[::String]?,
+                               subnet_ids: Array[::String]?
+                             },
+                             ?trigger_mode: ::String
+                           ) -> _UpdateWorkflowResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkflowResponseSuccess
+    end
+  end
+end
+

@@ -21,6 +21,7 @@ module Aws::MediaTailor
     AdBreakOpportunities = Shapes::ListShape.new(name: 'AdBreakOpportunities')
     AdBreakOpportunity = Shapes::StructureShape.new(name: 'AdBreakOpportunity')
     AdConditioningConfiguration = Shapes::StructureShape.new(name: 'AdConditioningConfiguration')
+    AdDecisionServerConfiguration = Shapes::StructureShape.new(name: 'AdDecisionServerConfiguration')
     AdMarkerPassthrough = Shapes::StructureShape.new(name: 'AdMarkerPassthrough')
     AdMarkupType = Shapes::StringShape.new(name: 'AdMarkupType')
     AdsInteractionExcludeEventType = Shapes::StringShape.new(name: 'AdsInteractionExcludeEventType')
@@ -39,6 +40,7 @@ module Aws::MediaTailor
     Channel = Shapes::StructureShape.new(name: 'Channel')
     ChannelState = Shapes::StringShape.new(name: 'ChannelState')
     ClipRange = Shapes::StructureShape.new(name: 'ClipRange')
+    CompressionMethod = Shapes::StringShape.new(name: 'CompressionMethod')
     ConfigurationAliasesRequest = Shapes::MapShape.new(name: 'ConfigurationAliasesRequest')
     ConfigurationAliasesResponse = Shapes::MapShape.new(name: 'ConfigurationAliasesResponse')
     ConfigureLogsForChannelRequest = Shapes::StructureShape.new(name: 'ConfigureLogsForChannelRequest')
@@ -101,6 +103,7 @@ module Aws::MediaTailor
     HttpConfiguration = Shapes::StructureShape.new(name: 'HttpConfiguration')
     HttpPackageConfiguration = Shapes::StructureShape.new(name: 'HttpPackageConfiguration')
     HttpPackageConfigurations = Shapes::ListShape.new(name: 'HttpPackageConfigurations')
+    HttpRequest = Shapes::StructureShape.new(name: 'HttpRequest')
     InsertionMode = Shapes::StringShape.new(name: 'InsertionMode')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     KeyValuePair = Shapes::StructureShape.new(name: 'KeyValuePair')
@@ -134,6 +137,7 @@ module Aws::MediaTailor
     ManifestServiceInteractionLog = Shapes::StructureShape.new(name: 'ManifestServiceInteractionLog')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
+    Method = Shapes::StringShape.new(name: 'Method')
     Mode = Shapes::StringShape.new(name: 'Mode')
     Operator = Shapes::StringShape.new(name: 'Operator')
     OriginManifestType = Shapes::StringShape.new(name: 'OriginManifestType')
@@ -172,6 +176,7 @@ module Aws::MediaTailor
     StopChannelResponse = Shapes::StructureShape.new(name: 'StopChannelResponse')
     StreamingMediaFileConditioning = Shapes::StringShape.new(name: 'StreamingMediaFileConditioning')
     String = Shapes::StringShape.new(name: 'String')
+    StringMap = Shapes::MapShape.new(name: 'StringMap')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     Tier = Shapes::StringShape.new(name: 'Tier')
     TimeShiftConfiguration = Shapes::StructureShape.new(name: 'TimeShiftConfiguration')
@@ -245,6 +250,9 @@ module Aws::MediaTailor
 
     AdConditioningConfiguration.add_member(:streaming_media_file_conditioning, Shapes::ShapeRef.new(shape: StreamingMediaFileConditioning, required: true, location_name: "StreamingMediaFileConditioning"))
     AdConditioningConfiguration.struct_class = Types::AdConditioningConfiguration
+
+    AdDecisionServerConfiguration.add_member(:http_request, Shapes::ShapeRef.new(shape: HttpRequest, location_name: "HttpRequest"))
+    AdDecisionServerConfiguration.struct_class = Types::AdDecisionServerConfiguration
 
     AdMarkerPassthrough.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
     AdMarkerPassthrough.struct_class = Types::AdMarkerPassthrough
@@ -638,6 +646,7 @@ module Aws::MediaTailor
     GetPlaybackConfigurationResponse.add_member(:transcode_profile_name, Shapes::ShapeRef.new(shape: __string, location_name: "TranscodeProfileName"))
     GetPlaybackConfigurationResponse.add_member(:video_content_source_url, Shapes::ShapeRef.new(shape: __string, location_name: "VideoContentSourceUrl"))
     GetPlaybackConfigurationResponse.add_member(:ad_conditioning_configuration, Shapes::ShapeRef.new(shape: AdConditioningConfiguration, location_name: "AdConditioningConfiguration"))
+    GetPlaybackConfigurationResponse.add_member(:ad_decision_server_configuration, Shapes::ShapeRef.new(shape: AdDecisionServerConfiguration, location_name: "AdDecisionServerConfiguration"))
     GetPlaybackConfigurationResponse.struct_class = Types::GetPlaybackConfigurationResponse
 
     GetPrefetchScheduleRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "Name"))
@@ -670,6 +679,12 @@ module Aws::MediaTailor
     HttpPackageConfiguration.struct_class = Types::HttpPackageConfiguration
 
     HttpPackageConfigurations.member = Shapes::ShapeRef.new(shape: HttpPackageConfiguration)
+
+    HttpRequest.add_member(:method, Shapes::ShapeRef.new(shape: Method, location_name: "Method"))
+    HttpRequest.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
+    HttpRequest.add_member(:headers, Shapes::ShapeRef.new(shape: StringMap, location_name: "Headers"))
+    HttpRequest.add_member(:compress_request, Shapes::ShapeRef.new(shape: CompressionMethod, location_name: "CompressRequest"))
+    HttpRequest.struct_class = Types::HttpRequest
 
     KeyValuePair.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Key"))
     KeyValuePair.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
@@ -794,6 +809,7 @@ module Aws::MediaTailor
     PlaybackConfiguration.add_member(:transcode_profile_name, Shapes::ShapeRef.new(shape: __string, location_name: "TranscodeProfileName"))
     PlaybackConfiguration.add_member(:video_content_source_url, Shapes::ShapeRef.new(shape: __string, location_name: "VideoContentSourceUrl"))
     PlaybackConfiguration.add_member(:ad_conditioning_configuration, Shapes::ShapeRef.new(shape: AdConditioningConfiguration, location_name: "AdConditioningConfiguration"))
+    PlaybackConfiguration.add_member(:ad_decision_server_configuration, Shapes::ShapeRef.new(shape: AdDecisionServerConfiguration, location_name: "AdDecisionServerConfiguration"))
     PlaybackConfiguration.struct_class = Types::PlaybackConfiguration
 
     PrefetchConsumption.add_member(:avail_matching_criteria, Shapes::ShapeRef.new(shape: __listOfAvailMatchingCriteria, location_name: "AvailMatchingCriteria"))
@@ -841,6 +857,7 @@ module Aws::MediaTailor
     PutPlaybackConfigurationRequest.add_member(:transcode_profile_name, Shapes::ShapeRef.new(shape: __string, location_name: "TranscodeProfileName"))
     PutPlaybackConfigurationRequest.add_member(:video_content_source_url, Shapes::ShapeRef.new(shape: __string, location_name: "VideoContentSourceUrl"))
     PutPlaybackConfigurationRequest.add_member(:ad_conditioning_configuration, Shapes::ShapeRef.new(shape: AdConditioningConfiguration, location_name: "AdConditioningConfiguration"))
+    PutPlaybackConfigurationRequest.add_member(:ad_decision_server_configuration, Shapes::ShapeRef.new(shape: AdDecisionServerConfiguration, location_name: "AdDecisionServerConfiguration"))
     PutPlaybackConfigurationRequest.struct_class = Types::PutPlaybackConfigurationRequest
 
     PutPlaybackConfigurationResponse.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
@@ -864,6 +881,7 @@ module Aws::MediaTailor
     PutPlaybackConfigurationResponse.add_member(:transcode_profile_name, Shapes::ShapeRef.new(shape: __string, location_name: "TranscodeProfileName"))
     PutPlaybackConfigurationResponse.add_member(:video_content_source_url, Shapes::ShapeRef.new(shape: __string, location_name: "VideoContentSourceUrl"))
     PutPlaybackConfigurationResponse.add_member(:ad_conditioning_configuration, Shapes::ShapeRef.new(shape: AdConditioningConfiguration, location_name: "AdConditioningConfiguration"))
+    PutPlaybackConfigurationResponse.add_member(:ad_decision_server_configuration, Shapes::ShapeRef.new(shape: AdDecisionServerConfiguration, location_name: "AdDecisionServerConfiguration"))
     PutPlaybackConfigurationResponse.struct_class = Types::PutPlaybackConfigurationResponse
 
     RecurringConsumption.add_member(:retrieved_ad_expiration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "RetrievedAdExpirationSeconds"))
@@ -974,6 +992,9 @@ module Aws::MediaTailor
     StopChannelRequest.struct_class = Types::StopChannelRequest
 
     StopChannelResponse.struct_class = Types::StopChannelResponse
+
+    StringMap.key = Shapes::ShapeRef.new(shape: __string)
+    StringMap.value = Shapes::ShapeRef.new(shape: __string)
 
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ResourceArn"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "tags"))

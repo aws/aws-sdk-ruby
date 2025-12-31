@@ -11,8 +11,8 @@ Gem::Specification.new do |spec|
 
   spec.name          = 'aws-sdk-bedrockagentcore'
   spec.version       = File.read(File.expand_path('../VERSION', __FILE__)).strip
-  spec.summary       = 'AWS SDK for Ruby - Amazon Bedrock AgentCore Data Plane Fronting Layer'
-  spec.description   = 'Official AWS Ruby gem for Amazon Bedrock AgentCore Data Plane Fronting Layer. This gem is part of the AWS SDK for Ruby.'
+  spec.summary       = 'AWS SDK for Ruby - Amazon Bedrock AgentCore'
+  spec.description   = 'Official AWS Ruby gem for Amazon Bedrock AgentCore. This gem is part of the AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
     'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-bedrockagentcore/CHANGELOG.md'
   }
 
-  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.231.0')
+  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.239.1')
   spec.add_dependency('aws-sigv4', '~> 1.5')
 
   spec.required_ruby_version = '>= 2.7'

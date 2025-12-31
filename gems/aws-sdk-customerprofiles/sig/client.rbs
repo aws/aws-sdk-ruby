@@ -202,6 +202,7 @@ module Aws
         def dead_letter_queue_url: () -> ::String
         def matching: () -> Types::MatchingResponse
         def rule_based_matching: () -> Types::RuleBasedMatchingResponse
+        def data_store: () -> Types::DataStoreResponse
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
         def tags: () -> ::Hash[::String, ::String]
@@ -263,6 +264,9 @@ module Aws
                                  s3_key_name: ::String?
                                }?
                              }?
+                           },
+                           ?data_store: {
+                             enabled: bool?
                            },
                            ?tags: Hash[::String, ::String]
                          ) -> _CreateDomainResponseSuccess
@@ -541,6 +545,32 @@ module Aws
                           ) -> _CreateProfileResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfileResponseSuccess
 
+      interface _CreateRecommenderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRecommenderResponse]
+        def recommender_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#create_recommender-instance_method
+      def create_recommender: (
+                                domain_name: ::String,
+                                recommender_name: ::String,
+                                recommender_recipe_name: ("recommended-for-you" | "similar-items" | "frequently-paired-items" | "popular-items" | "trending-now"),
+                                ?recommender_config: {
+                                  events_config: {
+                                    event_parameters_list: Array[
+                                      {
+                                        event_type: ::String,
+                                        event_value_threshold: ::Float?
+                                      },
+                                    ]
+                                  },
+                                  training_frequency: ::Integer?
+                                },
+                                ?description: ::String,
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateRecommenderResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRecommenderResponseSuccess
+
       interface _CreateSegmentDefinitionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateSegmentDefinitionResponse]
         def segment_definition_name: () -> ::String
@@ -556,7 +586,7 @@ module Aws
                                        segment_definition_name: ::String,
                                        display_name: ::String,
                                        ?description: ::String,
-                                       segment_groups: {
+                                       ?segment_groups: {
                                          groups: Array[
                                            {
                                              dimensions: Array[
@@ -763,6 +793,7 @@ module Aws
                                          ]?,
                                          include: ("ALL" | "ANY" | "NONE")?
                                        },
+                                       ?segment_sql_query: ::String,
                                        ?tags: Hash[::String, ::String]
                                      ) -> _CreateSegmentDefinitionResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSegmentDefinitionResponseSuccess
@@ -776,7 +807,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#create_segment_estimate-instance_method
       def create_segment_estimate: (
                                      domain_name: ::String,
-                                     segment_query: {
+                                     ?segment_query: {
                                        groups: Array[
                                          {
                                            dimensions: Array[
@@ -982,7 +1013,8 @@ module Aws
                                          },
                                        ]?,
                                        include: ("ALL" | "ANY" | "NONE")?
-                                     }
+                                     },
+                                     ?segment_sql_query: ::String
                                    ) -> _CreateSegmentEstimateResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSegmentEstimateResponseSuccess
 
@@ -1049,6 +1081,16 @@ module Aws
                                   layout_definition_name: ::String
                                 ) -> _DeleteDomainLayoutResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainLayoutResponseSuccess
+
+      interface _DeleteDomainObjectTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainObjectTypeResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#delete_domain_object_type-instance_method
+      def delete_domain_object_type: (
+                                       domain_name: ::String,
+                                       object_type_name: ::String
+                                     ) -> _DeleteDomainObjectTypeResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainObjectTypeResponseSuccess
 
       interface _DeleteEventStreamResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEventStreamResponse]
@@ -1129,6 +1171,16 @@ module Aws
                                         object_type_name: ::String
                                       ) -> _DeleteProfileObjectTypeResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProfileObjectTypeResponseSuccess
+
+      interface _DeleteRecommenderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRecommenderResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#delete_recommender-instance_method
+      def delete_recommender: (
+                                domain_name: ::String,
+                                recommender_name: ::String
+                              ) -> _DeleteRecommenderResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRecommenderResponseSuccess
 
       interface _DeleteSegmentDefinitionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSegmentDefinitionResponse]
@@ -1233,6 +1285,7 @@ module Aws
         def stats: () -> Types::DomainStats
         def matching: () -> Types::MatchingResponse
         def rule_based_matching: () -> Types::RuleBasedMatchingResponse
+        def data_store: () -> Types::DataStoreResponse
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
         def tags: () -> ::Hash[::String, ::String]
@@ -1262,6 +1315,23 @@ module Aws
                                layout_definition_name: ::String
                              ) -> _GetDomainLayoutResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainLayoutResponseSuccess
+
+      interface _GetDomainObjectTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainObjectTypeResponse]
+        def object_type_name: () -> ::String
+        def description: () -> ::String
+        def encryption_key: () -> ::String
+        def fields: () -> ::Hash[::String, Types::DomainObjectTypeField]
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_domain_object_type-instance_method
+      def get_domain_object_type: (
+                                    domain_name: ::String,
+                                    object_type_name: ::String
+                                  ) -> _GetDomainObjectTypeResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainObjectTypeResponseSuccess
 
       interface _GetEventStreamResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetEventStreamResponse]
@@ -1333,6 +1403,7 @@ module Aws
         def is_unstructured: () -> bool
         def role_arn: () -> ::String
         def event_trigger_names: () -> ::Array[::String]
+        def scope: () -> ("PROFILE" | "DOMAIN")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_integration-instance_method
       def get_integration: (
@@ -1355,6 +1426,19 @@ module Aws
                          domain_name: ::String
                        ) -> _GetMatchesResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMatchesResponseSuccess
+
+      interface _GetObjectTypeAttributeStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetObjectTypeAttributeStatisticsResponse]
+        def statistics: () -> Types::GetObjectTypeAttributeStatisticsStats
+        def calculated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_object_type_attribute_statistics-instance_method
+      def get_object_type_attribute_statistics: (
+                                                  domain_name: ::String,
+                                                  object_type_name: ::String,
+                                                  attribute_name: ::String
+                                                ) -> _GetObjectTypeAttributeStatisticsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetObjectTypeAttributeStatisticsResponseSuccess
 
       interface _GetProfileHistoryRecordResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetProfileHistoryRecordResponse]
@@ -1415,6 +1499,42 @@ module Aws
                                             ) -> _GetProfileObjectTypeTemplateResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileObjectTypeTemplateResponseSuccess
 
+      interface _GetProfileRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProfileRecommendationsResponse]
+        def recommendations: () -> ::Array[Types::Recommendation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_profile_recommendations-instance_method
+      def get_profile_recommendations: (
+                                         domain_name: ::String,
+                                         profile_id: ::String,
+                                         recommender_name: ::String,
+                                         ?context: Hash[::String, ::String],
+                                         ?max_results: ::Integer
+                                       ) -> _GetProfileRecommendationsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileRecommendationsResponseSuccess
+
+      interface _GetRecommenderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecommenderResponse]
+        def recommender_name: () -> ::String
+        def recommender_recipe_name: () -> ("recommended-for-you" | "similar-items" | "frequently-paired-items" | "popular-items" | "trending-now")
+        def recommender_config: () -> Types::RecommenderConfig
+        def description: () -> ::String
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "ACTIVE" | "FAILED" | "STOPPING" | "INACTIVE" | "STARTING" | "DELETING")
+        def last_updated_at: () -> ::Time
+        def created_at: () -> ::Time
+        def failure_reason: () -> ::String
+        def latest_recommender_update: () -> Types::RecommenderUpdate
+        def training_metrics: () -> ::Array[Types::TrainingMetrics]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_recommender-instance_method
+      def get_recommender: (
+                             domain_name: ::String,
+                             recommender_name: ::String,
+                             ?training_metrics_count: ::Integer
+                           ) -> _GetRecommenderResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecommenderResponseSuccess
+
       interface _GetSegmentDefinitionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSegmentDefinitionResponse]
         def segment_definition_name: () -> ::String
@@ -1424,6 +1544,8 @@ module Aws
         def segment_definition_arn: () -> ::String
         def created_at: () -> ::Time
         def tags: () -> ::Hash[::String, ::String]
+        def segment_sql_query: () -> ::String
+        def segment_type: () -> ("CLASSIC" | "ENHANCED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_segment_definition-instance_method
       def get_segment_definition: (
@@ -1453,6 +1575,7 @@ module Aws
         def segment_definition_name: () -> ::String
         def profiles: () -> ::Array[Types::ProfileQueryResult]
         def failures: () -> ::Array[Types::ProfileQueryFailures]
+        def last_computed_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_segment_membership-instance_method
       def get_segment_membership: (
@@ -1621,6 +1744,19 @@ module Aws
                                ) -> _ListDomainLayoutsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainLayoutsResponseSuccess
 
+      interface _ListDomainObjectTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainObjectTypesResponse]
+        def items: () -> ::Array[Types::DomainObjectTypesListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_domain_object_types-instance_method
+      def list_domain_object_types: (
+                                      domain_name: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListDomainObjectTypesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainObjectTypesResponseSuccess
+
       interface _ListDomainsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainsResponse]
         def items: () -> ::Array[Types::ListDomainItem]
@@ -1685,6 +1821,21 @@ module Aws
                                ?include_hidden: bool
                              ) -> _ListIntegrationsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIntegrationsResponseSuccess
+
+      interface _ListObjectTypeAttributeValuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListObjectTypeAttributeValuesResponse]
+        def items: () -> ::Array[Types::ListObjectTypeAttributeValuesItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_object_type_attribute_values-instance_method
+      def list_object_type_attribute_values: (
+                                               ?next_token: ::String,
+                                               ?max_results: ::Integer,
+                                               domain_name: ::String,
+                                               object_type_name: ::String,
+                                               attribute_name: ::String
+                                             ) -> _ListObjectTypeAttributeValuesResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListObjectTypeAttributeValuesResponseSuccess
 
       interface _ListObjectTypeAttributesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListObjectTypeAttributesResponse]
@@ -1774,6 +1925,31 @@ module Aws
                                   }
                                 ) -> _ListProfileObjectsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfileObjectsResponseSuccess
+
+      interface _ListRecommenderRecipesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommenderRecipesResponse]
+        def next_token: () -> ::String
+        def recommender_recipes: () -> ::Array[Types::RecommenderRecipe]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_recommender_recipes-instance_method
+      def list_recommender_recipes: (
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListRecommenderRecipesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommenderRecipesResponseSuccess
+
+      interface _ListRecommendersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommendersResponse]
+        def next_token: () -> ::String
+        def recommenders: () -> ::Array[Types::RecommenderSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_recommenders-instance_method
+      def list_recommenders: (
+                               domain_name: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListRecommendersResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendersResponseSuccess
 
       interface _ListRuleBasedMatchesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRuleBasedMatchesResponse]
@@ -1878,6 +2054,32 @@ module Aws
                           ) -> _MergeProfilesResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MergeProfilesResponseSuccess
 
+      interface _PutDomainObjectTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDomainObjectTypeResponse]
+        def object_type_name: () -> ::String
+        def description: () -> ::String
+        def encryption_key: () -> ::String
+        def fields: () -> ::Hash[::String, Types::DomainObjectTypeField]
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#put_domain_object_type-instance_method
+      def put_domain_object_type: (
+                                    domain_name: ::String,
+                                    object_type_name: ::String,
+                                    ?description: ::String,
+                                    ?encryption_key: ::String,
+                                    fields: Hash[::String, {
+                                        source: ::String,
+                                        target: ::String,
+                                        content_type: ("STRING" | "NUMBER")?,
+                                        feature_type: ("TEXTUAL" | "CATEGORICAL")?
+                                      }],
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _PutDomainObjectTypeResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDomainObjectTypeResponseSuccess
+
       interface _PutIntegrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutIntegrationResponse]
         def domain_name: () -> ::String
@@ -1891,12 +2093,14 @@ module Aws
         def is_unstructured: () -> bool
         def role_arn: () -> ::String
         def event_trigger_names: () -> ::Array[::String]
+        def scope: () -> ("PROFILE" | "DOMAIN")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#put_integration-instance_method
       def put_integration: (
                              domain_name: ::String,
                              ?uri: ::String,
                              ?object_type_name: ::String,
+                             ?object_type_names: Hash[::String, ::String],
                              ?tags: Hash[::String, ::String],
                              ?flow_definition: {
                                description: ::String?,
@@ -1959,9 +2163,9 @@ module Aws
                                  }?
                                }
                              },
-                             ?object_type_names: Hash[::String, ::String],
                              ?role_arn: ::String,
-                             ?event_trigger_names: Array[::String]
+                             ?event_trigger_names: Array[::String],
+                             ?scope: ("PROFILE" | "DOMAIN")
                            ) -> _PutIntegrationResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutIntegrationResponseSuccess
 
@@ -2042,6 +2246,16 @@ module Aws
                            ) -> _SearchProfilesResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchProfilesResponseSuccess
 
+      interface _StartRecommenderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartRecommenderResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#start_recommender-instance_method
+      def start_recommender: (
+                               domain_name: ::String,
+                               recommender_name: ::String
+                             ) -> _StartRecommenderResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRecommenderResponseSuccess
+
       interface _StartUploadJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartUploadJobResponse]
       end
@@ -2051,6 +2265,16 @@ module Aws
                               job_id: ::String
                             ) -> _StartUploadJobResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartUploadJobResponseSuccess
+
+      interface _StopRecommenderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopRecommenderResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#stop_recommender-instance_method
+      def stop_recommender: (
+                              domain_name: ::String,
+                              recommender_name: ::String
+                            ) -> _StopRecommenderResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopRecommenderResponseSuccess
 
       interface _StopUploadJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopUploadJobResponse]
@@ -2131,6 +2355,7 @@ module Aws
         def dead_letter_queue_url: () -> ::String
         def matching: () -> Types::MatchingResponse
         def rule_based_matching: () -> Types::RuleBasedMatchingResponse
+        def data_store: () -> Types::DataStoreResponse
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
         def tags: () -> ::Hash[::String, ::String]
@@ -2192,6 +2417,9 @@ module Aws
                                  s3_key_name: ::String?
                                }?
                              }?
+                           },
+                           ?data_store: {
+                             enabled: bool?
                            },
                            ?tags: Hash[::String, ::String]
                          ) -> _UpdateDomainResponseSuccess
@@ -2368,6 +2596,29 @@ module Aws
                             }
                           ) -> _UpdateProfileResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProfileResponseSuccess
+
+      interface _UpdateRecommenderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRecommenderResponse]
+        def recommender_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#update_recommender-instance_method
+      def update_recommender: (
+                                domain_name: ::String,
+                                recommender_name: ::String,
+                                ?description: ::String,
+                                ?recommender_config: {
+                                  events_config: {
+                                    event_parameters_list: Array[
+                                      {
+                                        event_type: ::String,
+                                        event_value_threshold: ::Float?
+                                      },
+                                    ]
+                                  },
+                                  training_frequency: ::Integer?
+                                }
+                              ) -> _UpdateRecommenderResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRecommenderResponseSuccess
     end
   end
 end

@@ -38,6 +38,9 @@ module Aws
       class InternalServiceException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class InvalidActiveRegionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class InvalidContactFlowException < ::Aws::Errors::ServiceError
         def problems: () -> ::String
       end

@@ -110,8 +110,27 @@ module Aws::ResourceGroupsTaggingAPI
       SENSITIVE: []
     end
 
+    class ListRequiredTagsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRequiredTagsOutput
+      attr_accessor required_tags: ::Array[Types::RequiredTag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class PaginationTokenExpiredException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RequiredTag
+      attr_accessor resource_type: ::String
+      attr_accessor cloud_formation_resource_types: ::Array[::String]
+      attr_accessor reporting_tag_keys: ::Array[::String]
       SENSITIVE: []
     end
 

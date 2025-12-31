@@ -11,10 +11,16 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class CallRateLimitExceededException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
       class ClientException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DryRunOperationException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
       class ForbiddenException < ::Aws::Errors::ServiceError
@@ -60,6 +66,9 @@ module Aws
         def message: () -> ::String
       end
       class ServiceUnavailableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyRequestsException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
     end

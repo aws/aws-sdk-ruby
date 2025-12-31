@@ -225,6 +225,10 @@
             "uid": "ec2-protocol-2020-01-08"
         },
         "shapes": {
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
             "NestedStructuresInput": {
                 "type": "structure",
                 "members": {
@@ -232,6 +236,9 @@
                         "shape": "StructArg"
                     }
                 }
+            },
+            "String": {
+                "type": "string"
             },
             "StructArg": {
                 "type": "structure",
@@ -246,13 +253,6 @@
                         "shape": "StructArg"
                     }
                 }
-            },
-            "String": {
-                "type": "string"
-            },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
             }
         },
         "cases": [
@@ -542,6 +542,35 @@
             "uid": "ec2-protocol-2020-01-08"
         },
         "shapes": {
+            "GreetingList": {
+                "type": "list",
+                "member": {
+                    "shape": "GreetingStruct"
+                }
+            },
+            "GreetingStruct": {
+                "type": "structure",
+                "members": {
+                    "hi": {
+                        "shape": "String"
+                    }
+                }
+            },
+            "ListWithXmlName": {
+                "type": "list",
+                "member": {
+                    "shape": "String",
+                    "locationName": "item"
+                }
+            },
+            "NestedStructWithList": {
+                "type": "structure",
+                "members": {
+                    "ListArg": {
+                        "shape": "StringList"
+                    }
+                }
+            },
             "QueryListsInput": {
                 "type": "structure",
                 "members": {
@@ -563,42 +592,13 @@
                     }
                 }
             },
+            "String": {
+                "type": "string"
+            },
             "StringList": {
                 "type": "list",
                 "member": {
                     "shape": "String"
-                }
-            },
-            "GreetingList": {
-                "type": "list",
-                "member": {
-                    "shape": "GreetingStruct"
-                }
-            },
-            "ListWithXmlName": {
-                "type": "list",
-                "member": {
-                    "shape": "String",
-                    "locationName": "item"
-                }
-            },
-            "NestedStructWithList": {
-                "type": "structure",
-                "members": {
-                    "ListArg": {
-                        "shape": "StringList"
-                    }
-                }
-            },
-            "String": {
-                "type": "string"
-            },
-            "GreetingStruct": {
-                "type": "structure",
-                "members": {
-                    "hi": {
-                        "shape": "String"
-                    }
                 }
             }
         },
@@ -777,6 +777,10 @@
             "uid": "ec2-protocol-2020-01-08"
         },
         "shapes": {
+            "EpochSeconds": {
+                "type": "timestamp",
+                "timestampFormat": "unixTimestamp"
+            },
             "QueryTimestampsInput": {
                 "type": "structure",
                 "members": {
@@ -791,16 +795,12 @@
                     }
                 }
             },
-            "Timestamp": {
-                "type": "timestamp"
-            },
             "SyntheticTimestamp_epoch_seconds": {
                 "type": "timestamp",
                 "timestampFormat": "unixTimestamp"
             },
-            "EpochSeconds": {
-                "type": "timestamp",
-                "timestampFormat": "unixTimestamp"
+            "Timestamp": {
+                "type": "timestamp"
             }
         },
         "cases": [
@@ -856,6 +856,35 @@
             "uid": "ec2-protocol-2020-01-08"
         },
         "shapes": {
+            "Blob": {
+                "type": "blob"
+            },
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "Double": {
+                "type": "double",
+                "box": true
+            },
+            "Float": {
+                "type": "float",
+                "box": true
+            },
+            "FooEnum": {
+                "type": "string",
+                "enum": [
+                    "Foo",
+                    "Baz",
+                    "Bar",
+                    "1",
+                    "0"
+                ]
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
             "SimpleInputParamsInput": {
                 "type": "structure",
                 "members": {
@@ -898,35 +927,6 @@
             },
             "String": {
                 "type": "string"
-            },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
-            },
-            "Integer": {
-                "type": "integer",
-                "box": true
-            },
-            "Float": {
-                "type": "float",
-                "box": true
-            },
-            "Double": {
-                "type": "double",
-                "box": true
-            },
-            "Blob": {
-                "type": "blob"
-            },
-            "FooEnum": {
-                "type": "string",
-                "enum": [
-                    "Foo",
-                    "Baz",
-                    "Bar",
-                    "1",
-                    "0"
-                ]
             }
         },
         "cases": [

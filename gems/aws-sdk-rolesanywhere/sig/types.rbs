@@ -20,45 +20,45 @@ module Aws::RolesAnywhere
     end
 
     class CreateProfileRequest
-      attr_accessor accept_role_session_name: bool
-      attr_accessor duration_seconds: ::Integer
-      attr_accessor enabled: bool
-      attr_accessor managed_policy_arns: ::Array[::String]
       attr_accessor name: ::String
       attr_accessor require_instance_properties: bool
-      attr_accessor role_arns: ::Array[::String]
       attr_accessor session_policy: ::String
+      attr_accessor role_arns: ::Array[::String]
+      attr_accessor managed_policy_arns: ::Array[::String]
+      attr_accessor duration_seconds: ::Integer
+      attr_accessor enabled: bool
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor accept_role_session_name: bool
       SENSITIVE: []
     end
 
     class CreateTrustAnchorRequest
-      attr_accessor enabled: bool
       attr_accessor name: ::String
-      attr_accessor notification_settings: ::Array[Types::NotificationSetting]
       attr_accessor source: Types::Source
+      attr_accessor enabled: bool
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor notification_settings: ::Array[Types::NotificationSetting]
       SENSITIVE: []
     end
 
     class CredentialSummary
-      attr_accessor enabled: bool
-      attr_accessor failed: bool
-      attr_accessor issuer: ::String
       attr_accessor seen_at: ::Time
       attr_accessor serial_number: ::String
+      attr_accessor issuer: ::String
+      attr_accessor enabled: bool
       attr_accessor x509_certificate_data: ::String
+      attr_accessor failed: bool
       SENSITIVE: []
     end
 
     class CrlDetail
-      attr_accessor created_at: ::Time
-      attr_accessor crl_arn: ::String
-      attr_accessor crl_data: ::String
       attr_accessor crl_id: ::String
-      attr_accessor enabled: bool
+      attr_accessor crl_arn: ::String
       attr_accessor name: ::String
+      attr_accessor enabled: bool
+      attr_accessor crl_data: ::String
       attr_accessor trust_anchor_arn: ::String
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -69,8 +69,8 @@ module Aws::RolesAnywhere
     end
 
     class DeleteAttributeMappingRequest
-      attr_accessor certificate_field: ("x509Subject" | "x509Issuer" | "x509SAN")
       attr_accessor profile_id: ::String
+      attr_accessor certificate_field: ("x509Subject" | "x509Issuer" | "x509SAN")
       attr_accessor specifiers: ::Array[::String]
       SENSITIVE: []
     end
@@ -81,24 +81,24 @@ module Aws::RolesAnywhere
     end
 
     class ImportCrlRequest
+      attr_accessor name: ::String
       attr_accessor crl_data: ::String
       attr_accessor enabled: bool
-      attr_accessor name: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor trust_anchor_arn: ::String
       SENSITIVE: []
     end
 
     class InstanceProperty
-      attr_accessor failed: bool
-      attr_accessor properties: ::Hash[::String, ::String]
       attr_accessor seen_at: ::Time
+      attr_accessor properties: ::Hash[::String, ::String]
+      attr_accessor failed: bool
       SENSITIVE: []
     end
 
     class ListCrlsResponse
-      attr_accessor crls: ::Array[Types::CrlDetail]
       attr_accessor next_token: ::String
+      attr_accessor crls: ::Array[Types::CrlDetail]
       SENSITIVE: []
     end
 
@@ -115,8 +115,8 @@ module Aws::RolesAnywhere
     end
 
     class ListSubjectsResponse
-      attr_accessor next_token: ::String
       attr_accessor subjects: ::Array[Types::SubjectSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -142,43 +142,43 @@ module Aws::RolesAnywhere
     end
 
     class NotificationSetting
-      attr_accessor channel: ("ALL")
       attr_accessor enabled: bool
       attr_accessor event: ("CA_CERTIFICATE_EXPIRY" | "END_ENTITY_CERTIFICATE_EXPIRY")
       attr_accessor threshold: ::Integer
+      attr_accessor channel: ("ALL")
       SENSITIVE: []
     end
 
     class NotificationSettingDetail
-      attr_accessor channel: ("ALL")
-      attr_accessor configured_by: ::String
       attr_accessor enabled: bool
       attr_accessor event: ("CA_CERTIFICATE_EXPIRY" | "END_ENTITY_CERTIFICATE_EXPIRY")
       attr_accessor threshold: ::Integer
+      attr_accessor channel: ("ALL")
+      attr_accessor configured_by: ::String
       SENSITIVE: []
     end
 
     class NotificationSettingKey
-      attr_accessor channel: ("ALL")
       attr_accessor event: ("CA_CERTIFICATE_EXPIRY" | "END_ENTITY_CERTIFICATE_EXPIRY")
+      attr_accessor channel: ("ALL")
       SENSITIVE: []
     end
 
     class ProfileDetail
+      attr_accessor profile_id: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor require_instance_properties: bool
+      attr_accessor enabled: bool
+      attr_accessor created_by: ::String
+      attr_accessor session_policy: ::String
+      attr_accessor role_arns: ::Array[::String]
+      attr_accessor managed_policy_arns: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor duration_seconds: ::Integer
       attr_accessor accept_role_session_name: bool
       attr_accessor attribute_mappings: ::Array[Types::AttributeMapping]
-      attr_accessor created_at: ::Time
-      attr_accessor created_by: ::String
-      attr_accessor duration_seconds: ::Integer
-      attr_accessor enabled: bool
-      attr_accessor managed_policy_arns: ::Array[::String]
-      attr_accessor name: ::String
-      attr_accessor profile_arn: ::String
-      attr_accessor profile_id: ::String
-      attr_accessor require_instance_properties: bool
-      attr_accessor role_arns: ::Array[::String]
-      attr_accessor session_policy: ::String
-      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -188,9 +188,9 @@ module Aws::RolesAnywhere
     end
 
     class PutAttributeMappingRequest
+      attr_accessor profile_id: ::String
       attr_accessor certificate_field: ("x509Subject" | "x509Issuer" | "x509SAN")
       attr_accessor mapping_rules: ::Array[Types::MappingRule]
-      attr_accessor profile_id: ::String
       SENSITIVE: []
     end
 
@@ -200,8 +200,8 @@ module Aws::RolesAnywhere
     end
 
     class PutNotificationSettingsRequest
-      attr_accessor notification_settings: ::Array[Types::NotificationSetting]
       attr_accessor trust_anchor_id: ::String
+      attr_accessor notification_settings: ::Array[Types::NotificationSetting]
       SENSITIVE: []
     end
 
@@ -211,8 +211,8 @@ module Aws::RolesAnywhere
     end
 
     class ResetNotificationSettingsRequest
-      attr_accessor notification_setting_keys: ::Array[Types::NotificationSettingKey]
       attr_accessor trust_anchor_id: ::String
+      attr_accessor notification_setting_keys: ::Array[Types::NotificationSettingKey]
       SENSITIVE: []
     end
 
@@ -247,35 +247,35 @@ module Aws::RolesAnywhere
     end
 
     class Source
-      attr_accessor source_data: Types::SourceData
       attr_accessor source_type: ("AWS_ACM_PCA" | "CERTIFICATE_BUNDLE" | "SELF_SIGNED_REPOSITORY")
+      attr_accessor source_data: Types::SourceData
       SENSITIVE: []
     end
 
     class SourceData
-      attr_accessor acm_pca_arn: ::String
       attr_accessor x509_certificate_data: ::String
+      attr_accessor acm_pca_arn: ::String
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class AcmPcaArn < SourceData
-      end
       class X509CertificateData < SourceData
+      end
+      class AcmPcaArn < SourceData
       end
       class Unknown < SourceData
       end
     end
 
     class SubjectDetail
-      attr_accessor created_at: ::Time
-      attr_accessor credentials: ::Array[Types::CredentialSummary]
-      attr_accessor enabled: bool
-      attr_accessor instance_properties: ::Array[Types::InstanceProperty]
-      attr_accessor last_seen_at: ::Time
       attr_accessor subject_arn: ::String
       attr_accessor subject_id: ::String
-      attr_accessor updated_at: ::Time
+      attr_accessor enabled: bool
       attr_accessor x509_subject: ::String
+      attr_accessor last_seen_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor credentials: ::Array[Types::CredentialSummary]
+      attr_accessor instance_properties: ::Array[Types::InstanceProperty]
       SENSITIVE: []
     end
 
@@ -285,13 +285,13 @@ module Aws::RolesAnywhere
     end
 
     class SubjectSummary
-      attr_accessor created_at: ::Time
-      attr_accessor enabled: bool
-      attr_accessor last_seen_at: ::Time
       attr_accessor subject_arn: ::String
       attr_accessor subject_id: ::String
-      attr_accessor updated_at: ::Time
+      attr_accessor enabled: bool
       attr_accessor x509_subject: ::String
+      attr_accessor last_seen_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -316,14 +316,14 @@ module Aws::RolesAnywhere
     end
 
     class TrustAnchorDetail
-      attr_accessor created_at: ::Time
-      attr_accessor enabled: bool
-      attr_accessor name: ::String
-      attr_accessor notification_settings: ::Array[Types::NotificationSettingDetail]
-      attr_accessor source: Types::Source
-      attr_accessor trust_anchor_arn: ::String
       attr_accessor trust_anchor_id: ::String
+      attr_accessor trust_anchor_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor source: Types::Source
+      attr_accessor enabled: bool
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor notification_settings: ::Array[Types::NotificationSettingDetail]
       SENSITIVE: []
     end
 
@@ -342,27 +342,27 @@ module Aws::RolesAnywhere
     end
 
     class UpdateCrlRequest
-      attr_accessor crl_data: ::String
       attr_accessor crl_id: ::String
       attr_accessor name: ::String
+      attr_accessor crl_data: ::String
       SENSITIVE: []
     end
 
     class UpdateProfileRequest
-      attr_accessor accept_role_session_name: bool
-      attr_accessor duration_seconds: ::Integer
-      attr_accessor managed_policy_arns: ::Array[::String]
-      attr_accessor name: ::String
       attr_accessor profile_id: ::String
-      attr_accessor role_arns: ::Array[::String]
+      attr_accessor name: ::String
       attr_accessor session_policy: ::String
+      attr_accessor role_arns: ::Array[::String]
+      attr_accessor managed_policy_arns: ::Array[::String]
+      attr_accessor duration_seconds: ::Integer
+      attr_accessor accept_role_session_name: bool
       SENSITIVE: []
     end
 
     class UpdateTrustAnchorRequest
+      attr_accessor trust_anchor_id: ::String
       attr_accessor name: ::String
       attr_accessor source: Types::Source
-      attr_accessor trust_anchor_id: ::String
       SENSITIVE: []
     end
 

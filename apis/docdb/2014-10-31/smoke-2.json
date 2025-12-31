@@ -11,19 +11,6 @@
             "config": {
                 "region": "us-west-2"
             }
-        },
-        {
-            "id": "DescribeDBInstancesFailure",
-            "operationName": "DescribeDBInstances",
-            "input": {
-                "DBInstanceIdentifier": "fake-id"
-            },
-            "expectation": {
-                "failure": {}
-            },
-            "config": {
-                "region": "us-west-2"
-            }
         }
     ]
 }

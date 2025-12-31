@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.157.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.156.0 (2025-11-19)
+------------------
+
+* Feature - Extended Global Secondary Index (GSI) composite keys to support up to 8 attributes.
+
+1.155.0 (2025-10-21)
+------------------
+
+* Feature - Add AccountID based endpoint metric to endpoint rules.
+
 1.154.0 (2025-10-02)
 ------------------
 

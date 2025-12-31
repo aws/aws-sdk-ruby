@@ -31,6 +31,7 @@ module Aws::Account
   # * {ConflictException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
+  # * {ResourceUnavailableException}
   # * {TooManyRequestsException}
   # * {ValidationException}
   #
@@ -109,6 +110,26 @@ module Aws::Account
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Account::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def error_type
+        @data[:error_type]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ResourceUnavailableException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Account::Types::ResourceUnavailableException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

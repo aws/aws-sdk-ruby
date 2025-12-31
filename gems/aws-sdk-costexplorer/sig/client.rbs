@@ -92,7 +92,7 @@ module Aws
                                       last_updated_date: ::String?,
                                       last_evaluated_date: ::String?,
                                       monitor_type: ("DIMENSIONAL" | "CUSTOM"),
-                                      monitor_dimension: ("SERVICE")?,
+                                      monitor_dimension: ("SERVICE" | "LINKED_ACCOUNT" | "TAG" | "COST_CATEGORY")?,
                                       monitor_specification: {
                                         or: Array[
                                           untyped,
@@ -989,7 +989,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_savings_plans_purchase_recommendation-instance_method
       def get_savings_plans_purchase_recommendation: (
-                                                       savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP"),
+                                                       savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP" | "DATABASE_SP"),
                                                        term_in_years: ("ONE_YEAR" | "THREE_YEARS"),
                                                        payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION"),
                                                        ?account_scope: ("PAYER" | "LINKED"),
@@ -1256,9 +1256,23 @@ module Aws
       def list_cost_category_definitions: (
                                             ?effective_on: ::String,
                                             ?next_token: ::String,
-                                            ?max_results: ::Integer
+                                            ?max_results: ::Integer,
+                                            ?supported_resource_types: Array[::String]
                                           ) -> _ListCostCategoryDefinitionsResponseSuccess
                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCostCategoryDefinitionsResponseSuccess
+
+      interface _ListCostCategoryResourceAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCostCategoryResourceAssociationsResponse]
+        def cost_category_resource_associations: () -> ::Array[Types::CostCategoryResourceAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#list_cost_category_resource_associations-instance_method
+      def list_cost_category_resource_associations: (
+                                                      ?cost_category_arn: ::String,
+                                                      ?next_token: ::String,
+                                                      ?max_results: ::Integer
+                                                    ) -> _ListCostCategoryResourceAssociationsResponseSuccess
+                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCostCategoryResourceAssociationsResponseSuccess
 
       interface _ListSavingsPlansPurchaseRecommendationGenerationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSavingsPlansPurchaseRecommendationGenerationResponse]
@@ -1311,7 +1325,7 @@ module Aws
                                                     savings_plans_to_add: Array[
                                                       {
                                                         payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION")?,
-                                                        savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP")?,
+                                                        savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP" | "DATABASE_SP")?,
                                                         region: ::String?,
                                                         instance_family: ::String?,
                                                         term_in_years: ("ONE_YEAR" | "THREE_YEARS")?,

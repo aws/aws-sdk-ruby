@@ -1,0 +1,70 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "TagResourceFailsWithInvalidArn",
+    "operationName" : "TagResource",
+    "input" : {
+      "ResourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/partner-0123456789abc",
+      "Tags" : [ {
+        "Key" : "SmokeTestKey",
+        "Value" : "SmokeTestValue"
+      } ]
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "UntagResourceFailsWithInvalidArn",
+    "operationName" : "UntagResource",
+    "input" : {
+      "ResourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/partner-0123456789abc",
+      "TagKeys" : [ "SmokeTestKey" ]
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetPartnerFailsWithInvalidIdentifier",
+    "operationName" : "GetPartner",
+    "input" : {
+      "Catalog" : "AWS",
+      "Identifier" : "partner-0123456789abc"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListTagsFailsWithInvalidArn",
+    "operationName" : "ListTagsForResource",
+    "input" : {
+      "ResourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/partner-0123456789abc"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

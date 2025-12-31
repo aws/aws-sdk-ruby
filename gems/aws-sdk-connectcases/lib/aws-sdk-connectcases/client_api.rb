@@ -32,6 +32,7 @@ module Aws::ConnectCases
     BatchGetCaseRuleResponse = Shapes::StructureShape.new(name: 'BatchGetCaseRuleResponse')
     BatchGetCaseRuleResponseCaseRulesList = Shapes::ListShape.new(name: 'BatchGetCaseRuleResponseCaseRulesList')
     BatchGetCaseRuleResponseErrorsList = Shapes::ListShape.new(name: 'BatchGetCaseRuleResponseErrorsList')
+    BatchGetCaseRuleResponseUnprocessedCaseRulesList = Shapes::ListShape.new(name: 'BatchGetCaseRuleResponseUnprocessedCaseRulesList')
     BatchGetFieldIdentifierList = Shapes::ListShape.new(name: 'BatchGetFieldIdentifierList')
     BatchGetFieldRequest = Shapes::StructureShape.new(name: 'BatchGetFieldRequest')
     BatchGetFieldResponse = Shapes::StructureShape.new(name: 'BatchGetFieldResponse')
@@ -144,6 +145,7 @@ module Aws::ConnectCases
     FieldOptionError = Shapes::StructureShape.new(name: 'FieldOptionError')
     FieldOptionName = Shapes::StringShape.new(name: 'FieldOptionName')
     FieldOptionValue = Shapes::StringShape.new(name: 'FieldOptionValue')
+    FieldOptionsCaseRule = Shapes::StructureShape.new(name: 'FieldOptionsCaseRule')
     FieldOptionsList = Shapes::ListShape.new(name: 'FieldOptionsList')
     FieldSummary = Shapes::StructureShape.new(name: 'FieldSummary')
     FieldType = Shapes::StringShape.new(name: 'FieldType')
@@ -172,6 +174,7 @@ module Aws::ConnectCases
     GetLayoutResponse = Shapes::StructureShape.new(name: 'GetLayoutResponse')
     GetTemplateRequest = Shapes::StructureShape.new(name: 'GetTemplateRequest')
     GetTemplateResponse = Shapes::StructureShape.new(name: 'GetTemplateResponse')
+    HiddenCaseRule = Shapes::StructureShape.new(name: 'HiddenCaseRule')
     IamPrincipalArn = Shapes::StringShape.new(name: 'IamPrincipalArn')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -212,6 +215,10 @@ module Aws::ConnectCases
     OperandTwo = Shapes::UnionShape.new(name: 'OperandTwo')
     OperandTwoStringValueString = Shapes::StringShape.new(name: 'OperandTwoStringValueString')
     Order = Shapes::StringShape.new(name: 'Order')
+    ParentChildFieldOptionValue = Shapes::StringShape.new(name: 'ParentChildFieldOptionValue')
+    ParentChildFieldOptionsMapping = Shapes::StructureShape.new(name: 'ParentChildFieldOptionsMapping')
+    ParentChildFieldOptionsMappingChildFieldOptionValuesList = Shapes::ListShape.new(name: 'ParentChildFieldOptionsMappingChildFieldOptionValuesList')
+    ParentChildFieldOptionsMappingList = Shapes::ListShape.new(name: 'ParentChildFieldOptionsMappingList')
     PutCaseEventConfigurationRequest = Shapes::StructureShape.new(name: 'PutCaseEventConfigurationRequest')
     PutCaseEventConfigurationResponse = Shapes::StructureShape.new(name: 'PutCaseEventConfigurationResponse')
     RelatedItemArn = Shapes::StringShape.new(name: 'RelatedItemArn')
@@ -345,11 +352,14 @@ module Aws::ConnectCases
 
     BatchGetCaseRuleResponse.add_member(:case_rules, Shapes::ShapeRef.new(shape: BatchGetCaseRuleResponseCaseRulesList, required: true, location_name: "caseRules"))
     BatchGetCaseRuleResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetCaseRuleResponseErrorsList, required: true, location_name: "errors"))
+    BatchGetCaseRuleResponse.add_member(:unprocessed_case_rules, Shapes::ShapeRef.new(shape: BatchGetCaseRuleResponseUnprocessedCaseRulesList, location_name: "unprocessedCaseRules"))
     BatchGetCaseRuleResponse.struct_class = Types::BatchGetCaseRuleResponse
 
     BatchGetCaseRuleResponseCaseRulesList.member = Shapes::ShapeRef.new(shape: GetCaseRuleResponse)
 
     BatchGetCaseRuleResponseErrorsList.member = Shapes::ShapeRef.new(shape: CaseRuleError)
+
+    BatchGetCaseRuleResponseUnprocessedCaseRulesList.member = Shapes::ShapeRef.new(shape: CaseRuleId)
 
     BatchGetFieldIdentifierList.member = Shapes::ShapeRef.new(shape: FieldIdentifier)
 
@@ -414,8 +424,12 @@ module Aws::ConnectCases
     CaseFilterOrAllList.member = Shapes::ShapeRef.new(shape: CaseFilter)
 
     CaseRuleDetails.add_member(:required, Shapes::ShapeRef.new(shape: RequiredCaseRule, location_name: "required"))
+    CaseRuleDetails.add_member(:field_options, Shapes::ShapeRef.new(shape: FieldOptionsCaseRule, location_name: "fieldOptions"))
+    CaseRuleDetails.add_member(:hidden, Shapes::ShapeRef.new(shape: HiddenCaseRule, location_name: "hidden"))
     CaseRuleDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CaseRuleDetails.add_member_subclass(:required, Types::CaseRuleDetails::Required)
+    CaseRuleDetails.add_member_subclass(:field_options, Types::CaseRuleDetails::FieldOptions)
+    CaseRuleDetails.add_member_subclass(:hidden, Types::CaseRuleDetails::Hidden)
     CaseRuleDetails.add_member_subclass(:unknown, Types::CaseRuleDetails::Unknown)
     CaseRuleDetails.struct_class = Types::CaseRuleDetails
 
@@ -677,6 +691,11 @@ module Aws::ConnectCases
     FieldOptionError.add_member(:value, Shapes::ShapeRef.new(shape: FieldOptionValue, required: true, location_name: "value"))
     FieldOptionError.struct_class = Types::FieldOptionError
 
+    FieldOptionsCaseRule.add_member(:parent_field_id, Shapes::ShapeRef.new(shape: FieldId, location_name: "parentFieldId"))
+    FieldOptionsCaseRule.add_member(:child_field_id, Shapes::ShapeRef.new(shape: FieldId, location_name: "childFieldId"))
+    FieldOptionsCaseRule.add_member(:parent_child_field_options_mappings, Shapes::ShapeRef.new(shape: ParentChildFieldOptionsMappingList, required: true, location_name: "parentChildFieldOptionsMappings"))
+    FieldOptionsCaseRule.struct_class = Types::FieldOptionsCaseRule
+
     FieldOptionsList.member = Shapes::ShapeRef.new(shape: FieldOption)
 
     FieldSummary.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "fieldId"))
@@ -812,6 +831,10 @@ module Aws::ConnectCases
     GetTemplateResponse.add_member(:rules, Shapes::ShapeRef.new(shape: TemplateCaseRuleList, location_name: "rules"))
     GetTemplateResponse.struct_class = Types::GetTemplateResponse
 
+    HiddenCaseRule.add_member(:default_value, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "defaultValue"))
+    HiddenCaseRule.add_member(:conditions, Shapes::ShapeRef.new(shape: BooleanConditionList, required: true, location_name: "conditions"))
+    HiddenCaseRule.struct_class = Types::HiddenCaseRule
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -932,6 +955,14 @@ module Aws::ConnectCases
     OperandTwo.add_member_subclass(:empty_value, Types::OperandTwo::EmptyValue)
     OperandTwo.add_member_subclass(:unknown, Types::OperandTwo::Unknown)
     OperandTwo.struct_class = Types::OperandTwo
+
+    ParentChildFieldOptionsMapping.add_member(:parent_field_option_value, Shapes::ShapeRef.new(shape: ParentChildFieldOptionValue, required: true, location_name: "parentFieldOptionValue"))
+    ParentChildFieldOptionsMapping.add_member(:child_field_option_values, Shapes::ShapeRef.new(shape: ParentChildFieldOptionsMappingChildFieldOptionValuesList, required: true, location_name: "childFieldOptionValues"))
+    ParentChildFieldOptionsMapping.struct_class = Types::ParentChildFieldOptionsMapping
+
+    ParentChildFieldOptionsMappingChildFieldOptionValuesList.member = Shapes::ShapeRef.new(shape: ParentChildFieldOptionValue)
+
+    ParentChildFieldOptionsMappingList.member = Shapes::ShapeRef.new(shape: ParentChildFieldOptionsMapping)
 
     PutCaseEventConfigurationRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
     PutCaseEventConfigurationRequest.add_member(:event_bridge, Shapes::ShapeRef.new(shape: EventBridgeConfiguration, required: true, location_name: "eventBridge"))
@@ -1142,7 +1173,7 @@ module Aws::ConnectCases
     TemplateCaseRuleList.member = Shapes::ShapeRef.new(shape: TemplateRule)
 
     TemplateRule.add_member(:case_rule_id, Shapes::ShapeRef.new(shape: CaseRuleId, required: true, location_name: "caseRuleId"))
-    TemplateRule.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "fieldId"))
+    TemplateRule.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, location_name: "fieldId"))
     TemplateRule.struct_class = Types::TemplateRule
 
     TemplateStatusFilters.member = Shapes::ShapeRef.new(shape: TemplateStatus)
@@ -1834,6 +1865,7 @@ module Aws::ConnectCases
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:update_field, Seahorse::Model::Operation.new.tap do |o|
@@ -1877,6 +1909,7 @@ module Aws::ConnectCases
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
     end
 

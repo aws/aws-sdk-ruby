@@ -31,8 +31,24 @@ module AwsSdkCodeGenerator
 
             case protocol_settings['h2']
             when 'required'
-              # When h2 is required, the operation must be sent over H2.
-              raise NotImplementedError, 'H2 required is not implemented yet'
+              # We only support eventstream operations for h2 required
+              ops << Operation.new(
+                name: method_name,
+                documentation: ClientOperationDocumentation.new(
+                  name: name,
+                  module_name: module_name,
+                  method_name: method_name,
+                  operation: operation,
+                  api: api,
+                  protocol: protocol,
+                  examples: examples,
+                  client_examples: client_examples[method_name] || [],
+                  async_client: true
+                ).to_s,
+                streaming: AwsSdkCodeGenerator::Helper.operation_streaming?(operation, api),
+                eventstream_output: es_output,
+                eventstream_input: es_input
+              )
             when 'optional'
               # When h2 is optional, only bidirectional eventstreaming operations will be on the async client. Other
               # operations MAY be on the async client, but we currently do not do this. (They are disjoint).
@@ -77,6 +93,14 @@ module AwsSdkCodeGenerator
                 eventstream_input: es_input
               )
             end
+          else
+            next unless protocol_settings['h2'] == 'required'
+
+            # Raised when h2 required contains non-eventstreaming operations.
+            # H2 required means that service will only accept HTTP/2 connections.
+            # Eventstreaming operations are supported and other operations may not work reliably on async client.
+            # Full HTTP/2 support for all operations is planned for next MV.
+            raise 'H2 required only support event streaming operations'
           end
         else
           # We only support eventstream output on the sync client (http 1.1)

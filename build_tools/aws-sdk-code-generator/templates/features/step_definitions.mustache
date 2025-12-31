@@ -1,6 +1,8 @@
 Before("@{{var_name}}") do
+  {{#service.resources}}
   @service = {{module_name}}::Resource.new
   @client = @service.client
+  {{/service.resources}}
 end
 
 After("@{{var_name}}") do

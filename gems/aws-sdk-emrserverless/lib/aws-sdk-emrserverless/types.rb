@@ -123,6 +123,10 @@ module Aws::EMRServerless
     #   identity propagation.
     #   @return [Types::IdentityCenterConfiguration]
     #
+    # @!attribute [rw] job_level_cost_allocation_configuration
+    #   The configuration object that enables job level cost allocation.
+    #   @return [Types::JobLevelCostAllocationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/Application AWS API Documentation
     #
     class Application < Struct.new(
@@ -148,7 +152,8 @@ module Aws::EMRServerless
       :monitoring_configuration,
       :interactive_configuration,
       :scheduler_configuration,
-      :identity_center_configuration)
+      :identity_center_configuration,
+      :job_level_cost_allocation_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -506,6 +511,10 @@ module Aws::EMRServerless
     #   services and the Identity Center instance.
     #   @return [Types::IdentityCenterConfigurationInput]
     #
+    # @!attribute [rw] job_level_cost_allocation_configuration
+    #   The configuration object that enables job level cost allocation.
+    #   @return [Types::JobLevelCostAllocationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -526,7 +535,8 @@ module Aws::EMRServerless
       :monitoring_configuration,
       :interactive_configuration,
       :scheduler_configuration,
-      :identity_center_configuration)
+      :identity_center_configuration,
+      :job_level_cost_allocation_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -695,9 +705,10 @@ module Aws::EMRServerless
       include Aws::Structure
     end
 
-    # The IAM Identity Center Configuration that includes the Identify
-    # Center instance and application ARNs that provide trusted-identity
-    # propagation.
+    # The IAM Identity Center Configuration accepts the Identity Center
+    # instance parameter required to enable trusted identity propagation.
+    # This configuration allows identity propagation between integrated
+    # services and the Identity Center instance.
     #
     # @!attribute [rw] identity_center_instance_arn
     #   The ARN of the IAM Identity Center instance.
@@ -708,28 +719,42 @@ module Aws::EMRServerless
     #   Application that provides trusted-identity propagation.
     #   @return [String]
     #
+    # @!attribute [rw] user_background_sessions_enabled
+    #   Enables user background sessions for this application so Livy
+    #   sessions can continue running after users log out of their
+    #   interactive notebook or their Identity Center sessions expire.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/IdentityCenterConfiguration AWS API Documentation
     #
     class IdentityCenterConfiguration < Struct.new(
       :identity_center_instance_arn,
-      :identity_center_application_arn)
+      :identity_center_application_arn,
+      :user_background_sessions_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Specifies the IAM Identity Center configuration used to enable or
-    # disable trusted identity propagation. When provided, this
-    # configuration determines how the application interacts with IAM
-    # Identity Center for user authentication and access control.
+    # The IAM Identity Center Configuration accepts the Identity Center
+    # instance parameter required to enable trusted identity propagation.
+    # This configuration allows identity propagation between integrated
+    # services and the Identity Center instance.
     #
     # @!attribute [rw] identity_center_instance_arn
     #   The ARN of the IAM Identity Center instance.
     #   @return [String]
     #
+    # @!attribute [rw] user_background_sessions_enabled
+    #   Enables user background sessions for this application so Livy
+    #   sessions can continue running after users log out of their
+    #   interactive notebook or their Identity Center sessions expire.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/IdentityCenterConfigurationInput AWS API Documentation
     #
     class IdentityCenterConfigurationInput < Struct.new(
-      :identity_center_instance_arn)
+      :identity_center_instance_arn,
+      :user_background_sessions_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -853,6 +878,20 @@ module Aws::EMRServerless
       class SparkSubmit < JobDriver; end
       class Hive < JobDriver; end
       class Unknown < JobDriver; end
+    end
+
+    # The configuration object that enables job level cost allocation.
+    #
+    # @!attribute [rw] enabled
+    #   Enables job level cost allocation for the application.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/JobLevelCostAllocationConfiguration AWS API Documentation
+    #
+    class JobLevelCostAllocationConfiguration < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Information about a job run. A job run is a unit of work, such as a
@@ -1944,6 +1983,10 @@ module Aws::EMRServerless
     #   Identity Center for user authentication and access control.
     #   @return [Types::IdentityCenterConfigurationInput]
     #
+    # @!attribute [rw] job_level_cost_allocation_configuration
+    #   The configuration object that enables job level cost allocation.
+    #   @return [Types::JobLevelCostAllocationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplicationRequest AWS API Documentation
     #
     class UpdateApplicationRequest < Struct.new(
@@ -1962,7 +2005,8 @@ module Aws::EMRServerless
       :runtime_configuration,
       :monitoring_configuration,
       :scheduler_configuration,
-      :identity_center_configuration)
+      :identity_center_configuration,
+      :job_level_cost_allocation_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

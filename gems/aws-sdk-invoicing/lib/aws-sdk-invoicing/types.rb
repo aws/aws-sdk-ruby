@@ -102,6 +102,52 @@ module Aws::Invoicing
       include Aws::Structure
     end
 
+    # The request could not be completed due to a conflict with the current
+    # state of the resource. This exception occurs when a concurrent
+    # modification is detected during an update operation, or when
+    # attempting to create a resource that already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier of the resource that caused the conflict.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource that caused the conflict.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents contact information for a person or role associated with
+    # the procurement portal preference.
+    #
+    # @!attribute [rw] name
+    #   The name of the contact person or role.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The email address of the contact person or role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/Contact AWS API Documentation
+    #
+    class Contact < Struct.new(
+      :name,
+      :email)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The unique name of the invoice unit that is shown on the generated
     #   invoice. This can't be changed once it is set. To change this name,
@@ -154,6 +200,118 @@ module Aws::Invoicing
     #
     class CreateInvoiceUnitResponse < Struct.new(
       :invoice_unit_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] procurement_portal_name
+    #   The name of the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] buyer_domain
+    #   The domain identifier for the buyer in the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] buyer_identifier
+    #   The unique identifier for the buyer in the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] supplier_domain
+    #   The domain identifier for the supplier in the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] supplier_identifier
+    #   The unique identifier for the supplier in the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] selector
+    #   Specifies criteria for selecting which invoices should be processed
+    #   using a particular procurement portal preference.
+    #   @return [Types::ProcurementPortalPreferenceSelector]
+    #
+    # @!attribute [rw] procurement_portal_shared_secret
+    #   The shared secret or authentication credential used to establish
+    #   secure communication with the procurement portal. This value must be
+    #   encrypted at rest.
+    #   @return [String]
+    #
+    # @!attribute [rw] procurement_portal_instance_endpoint
+    #   The endpoint URL where e-invoices will be delivered to the
+    #   procurement portal. Must be a valid HTTPS URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_env_preference
+    #   Configuration settings for the test environment of the procurement
+    #   portal. Includes test credentials and endpoints that are used for
+    #   validation before production deployment.
+    #   @return [Types::TestEnvPreferenceInput]
+    #
+    # @!attribute [rw] einvoice_delivery_enabled
+    #   Indicates whether e-invoice delivery is enabled for this procurement
+    #   portal preference. Set to true to enable e-invoice delivery, false
+    #   to disable.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] einvoice_delivery_preference
+    #   Specifies the e-invoice delivery configuration including document
+    #   types, attachment types, and customization settings for the portal.
+    #   @return [Types::EinvoiceDeliveryPreference]
+    #
+    # @!attribute [rw] purchase_order_retrieval_enabled
+    #   Indicates whether purchase order retrieval is enabled for this
+    #   procurement portal preference. Set to true to enable PO retrieval,
+    #   false to disable.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] contacts
+    #   List of contact information for portal administrators and technical
+    #   contacts responsible for the e-invoice integration.
+    #   @return [Array<Types::Contact>]
+    #
+    # @!attribute [rw] resource_tags
+    #   The tags to apply to this procurement portal preference resource.
+    #   Each tag consists of a key and an optional value.
+    #   @return [Array<Types::ResourceTag>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/CreateProcurementPortalPreferenceRequest AWS API Documentation
+    #
+    class CreateProcurementPortalPreferenceRequest < Struct.new(
+      :procurement_portal_name,
+      :buyer_domain,
+      :buyer_identifier,
+      :supplier_domain,
+      :supplier_identifier,
+      :selector,
+      :procurement_portal_shared_secret,
+      :procurement_portal_instance_endpoint,
+      :test_env_preference,
+      :einvoice_delivery_enabled,
+      :einvoice_delivery_preference,
+      :purchase_order_retrieval_enabled,
+      :contacts,
+      :resource_tags,
+      :client_token)
+      SENSITIVE = [:procurement_portal_shared_secret, :contacts]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the created procurement portal
+    #   preference.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/CreateProcurementPortalPreferenceResponse AWS API Documentation
+    #
+    class CreateProcurementPortalPreferenceResponse < Struct.new(
+      :procurement_portal_preference_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -234,6 +392,32 @@ module Aws::Invoicing
       include Aws::Structure
     end
 
+    # @!attribute [rw] procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the procurement portal preference
+    #   to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/DeleteProcurementPortalPreferenceRequest AWS API Documentation
+    #
+    class DeleteProcurementPortalPreferenceRequest < Struct.new(
+      :procurement_portal_preference_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the deleted procurement portal
+    #   preference.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/DeleteProcurementPortalPreferenceResponse AWS API Documentation
+    #
+    class DeleteProcurementPortalPreferenceResponse < Struct.new(
+      :procurement_portal_preference_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The discounts details.
     #
     # @!attribute [rw] breakdown
@@ -273,6 +457,49 @@ module Aws::Invoicing
       :description,
       :amount,
       :rate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the preferences for e-invoice delivery, including document
+    # types, attachment types, and customization settings.
+    #
+    # @!attribute [rw] einvoice_delivery_document_types
+    #   The types of e-invoice documents to be delivered.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] einvoice_delivery_attachment_types
+    #   The types of attachments to include with the e-invoice delivery.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] protocol
+    #   The communication protocol to use for e-invoice delivery.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_order_data_sources
+    #   The sources of purchase order data to use for e-invoice generation
+    #   and delivery.
+    #   @return [Array<Types::PurchaseOrderDataSource>]
+    #
+    # @!attribute [rw] connection_testing_method
+    #   The method to use for testing the connection to the procurement
+    #   portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] einvoice_delivery_activation_date
+    #   The date when e-invoice delivery should be activated for this
+    #   preference.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/EinvoiceDeliveryPreference AWS API Documentation
+    #
+    class EinvoiceDeliveryPreference < Struct.new(
+      :einvoice_delivery_document_types,
+      :einvoice_delivery_attachment_types,
+      :protocol,
+      :purchase_order_data_sources,
+      :connection_testing_method,
+      :einvoice_delivery_activation_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -365,12 +592,45 @@ module Aws::Invoicing
     #   accounts in the rules.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] bill_source_accounts
+    #   A list of Amazon Web Services account account IDs used to filter
+    #   invoice units. These are payer accounts from other Organizations
+    #   that have delegated their billing responsibility to the receiver
+    #   account through the billing transfer feature.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/Filters AWS API Documentation
     #
     class Filters < Struct.new(
       :names,
       :invoice_receivers,
-      :accounts)
+      :accounts,
+      :bill_source_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] invoice_id
+    #   Your unique invoice ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/GetInvoicePDFRequest AWS API Documentation
+    #
+    class GetInvoicePDFRequest < Struct.new(
+      :invoice_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] invoice_pdf
+    #   The invoice document and supplemental documents associated with the
+    #   invoice.
+    #   @return [Types::InvoicePDF]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/GetInvoicePDFResponse AWS API Documentation
+    #
+    class GetInvoicePDFResponse < Struct.new(
+      :invoice_pdf)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -445,6 +705,32 @@ module Aws::Invoicing
       include Aws::Structure
     end
 
+    # @!attribute [rw] procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the procurement portal preference
+    #   to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/GetProcurementPortalPreferenceRequest AWS API Documentation
+    #
+    class GetProcurementPortalPreferenceRequest < Struct.new(
+      :procurement_portal_preference_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] procurement_portal_preference
+    #   The detailed configuration of the requested procurement portal
+    #   preference.
+    #   @return [Types::ProcurementPortalPreference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/GetProcurementPortalPreferenceResponse AWS API Documentation
+    #
+    class GetProcurementPortalPreferenceResponse < Struct.new(
+      :procurement_portal_preference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The processing request failed because of an unknown error, exception,
     # or failure.
     #
@@ -495,6 +781,35 @@ module Aws::Invoicing
       :currency_code,
       :amount_breakdown,
       :currency_exchange_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Invoice document data.
+    #
+    # @!attribute [rw] invoice_id
+    #   Your unique invoice ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_url
+    #   The pre-signed URL to download the invoice document.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_url_expiration_date
+    #   The pre-signed URL expiration date of the invoice document.
+    #   @return [Time]
+    #
+    # @!attribute [rw] supplemental_documents
+    #   List of supplemental documents associated with the invoice.
+    #   @return [Array<Types::SupplementalDocument>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/InvoicePDF AWS API Documentation
+    #
+    class InvoicePDF < Struct.new(
+      :invoice_id,
+      :document_url,
+      :document_url_expiration_date,
+      :supplemental_documents)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -712,10 +1027,19 @@ module Aws::Invoicing
     #   the invoice unit.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] bill_source_accounts
+    #   A list of Amazon Web Services account account IDs that have
+    #   delegated their billing responsibility to the receiver account
+    #   through transfer billing. Unlike linked accounts, these bill source
+    #   accounts can be payer accounts from other organizations that have
+    #   authorized billing transfer to this account.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/InvoiceUnitRule AWS API Documentation
     #
     class InvoiceUnitRule < Struct.new(
-      :linked_accounts)
+      :linked_accounts,
+      :bill_source_accounts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -825,6 +1149,45 @@ module Aws::Invoicing
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. (You received this token from
+    #   a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   NextToken value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/ListProcurementPortalPreferencesRequest AWS API Documentation
+    #
+    class ListProcurementPortalPreferencesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] procurement_portal_preferences
+    #   The list of procurement portal preferences associated with the
+    #   Amazon Web Services account.
+    #   @return [Array<Types::ProcurementPortalPreferenceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results, or null if
+    #   there are no more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/ListProcurementPortalPreferencesResponse AWS API Documentation
+    #
+    class ListProcurementPortalPreferencesResponse < Struct.new(
+      :procurement_portal_preferences,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of tags to list.
     #   @return [String]
@@ -845,6 +1208,366 @@ module Aws::Invoicing
     #
     class ListTagsForResourceResponse < Struct.new(
       :resource_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the full configuration of a procurement portal preference,
+    # including settings for e-invoice delivery and purchase order
+    # retrieval.
+    #
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID associated with this procurement
+    #   portal preference.
+    #   @return [String]
+    #
+    # @!attribute [rw] procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the procurement portal preference.
+    #   @return [String]
+    #
+    # @!attribute [rw] procurement_portal_name
+    #   The name of the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] buyer_domain
+    #   The domain identifier for the buyer in the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] buyer_identifier
+    #   The unique identifier for the buyer in the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] supplier_domain
+    #   The domain identifier for the supplier in the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] supplier_identifier
+    #   The unique identifier for the supplier in the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] selector
+    #   Specifies criteria for selecting which invoices should be processed
+    #   using a particular procurement portal preference.
+    #   @return [Types::ProcurementPortalPreferenceSelector]
+    #
+    # @!attribute [rw] procurement_portal_shared_secret
+    #   The shared secret or authentication credential used for secure
+    #   communication with the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] procurement_portal_instance_endpoint
+    #   The endpoint URL where e-invoices are delivered to the procurement
+    #   portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_order_retrieval_endpoint
+    #   The endpoint URL used for retrieving purchase orders from the
+    #   procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_env_preference
+    #   Configuration on settings for the test environment of the
+    #   procurement portal.
+    #   @return [Types::TestEnvPreference]
+    #
+    # @!attribute [rw] einvoice_delivery_enabled
+    #   Indicates whether e-invoice delivery is enabled for this procurement
+    #   portal preference.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] einvoice_delivery_preference
+    #   The configuration settings that specify how e-invoices are delivered
+    #   to the procurement portal.
+    #   @return [Types::EinvoiceDeliveryPreference]
+    #
+    # @!attribute [rw] purchase_order_retrieval_enabled
+    #   Indicates whether purchase order retrieval is enabled for this
+    #   procurement portal preference.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] contacts
+    #   List of contact information for portal administrators and technical
+    #   contacts.
+    #   @return [Array<Types::Contact>]
+    #
+    # @!attribute [rw] einvoice_delivery_preference_status
+    #   The current status of the e-invoice delivery preference.
+    #   @return [String]
+    #
+    # @!attribute [rw] einvoice_delivery_preference_status_reason
+    #   The reason for the current e-invoice delivery preference status.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_order_retrieval_preference_status
+    #   The current status of the purchase order retrieval preference.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_order_retrieval_preference_status_reason
+    #   The reason for the current purchase order retrieval preference
+    #   status.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number of the procurement portal preference
+    #   configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] create_date
+    #   The date and time when the procurement portal preference was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_date
+    #   The date and time when the procurement portal preference was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/ProcurementPortalPreference AWS API Documentation
+    #
+    class ProcurementPortalPreference < Struct.new(
+      :aws_account_id,
+      :procurement_portal_preference_arn,
+      :procurement_portal_name,
+      :buyer_domain,
+      :buyer_identifier,
+      :supplier_domain,
+      :supplier_identifier,
+      :selector,
+      :procurement_portal_shared_secret,
+      :procurement_portal_instance_endpoint,
+      :purchase_order_retrieval_endpoint,
+      :test_env_preference,
+      :einvoice_delivery_enabled,
+      :einvoice_delivery_preference,
+      :purchase_order_retrieval_enabled,
+      :contacts,
+      :einvoice_delivery_preference_status,
+      :einvoice_delivery_preference_status_reason,
+      :purchase_order_retrieval_preference_status,
+      :purchase_order_retrieval_preference_status_reason,
+      :version,
+      :create_date,
+      :last_update_date)
+      SENSITIVE = [:contacts]
+      include Aws::Structure
+    end
+
+    # Specifies criteria for selecting which invoices should be processed
+    # using a particular procurement portal preference.
+    #
+    # @!attribute [rw] invoice_unit_arns
+    #   The Amazon Resource Name (ARN) of invoice unit identifiers to which
+    #   this preference applies.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] seller_of_records
+    #   The list of seller of record IDs to which this preference applies.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/ProcurementPortalPreferenceSelector AWS API Documentation
+    #
+    class ProcurementPortalPreferenceSelector < Struct.new(
+      :invoice_unit_arns,
+      :seller_of_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of a procurement portal preference, including key
+    # identifiers and status information.
+    #
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID associated with this procurement
+    #   portal preference summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the procurement portal preference.
+    #   @return [String]
+    #
+    # @!attribute [rw] procurement_portal_name
+    #   The name of the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] buyer_domain
+    #   The domain identifier for the buyer in the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] buyer_identifier
+    #   The unique identifier for the buyer in the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] supplier_domain
+    #   The domain identifier for the supplier in the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] supplier_identifier
+    #   The unique identifier for the supplier in the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] selector
+    #   Specifies criteria for selecting which invoices should be processed
+    #   using a particular procurement portal preference.
+    #   @return [Types::ProcurementPortalPreferenceSelector]
+    #
+    # @!attribute [rw] einvoice_delivery_enabled
+    #   Indicates whether e-invoice delivery is enabled for this procurement
+    #   portal preference.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] purchase_order_retrieval_enabled
+    #   Indicates whether purchase order retrieval is enabled for this
+    #   procurement portal preference.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] einvoice_delivery_preference_status
+    #   The current status of the e-invoice delivery preference in this
+    #   summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] einvoice_delivery_preference_status_reason
+    #   The reason for the current e-invoice delivery preference status in
+    #   this summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_order_retrieval_preference_status
+    #   The current status of the purchase order retrieval preference in
+    #   this summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_order_retrieval_preference_status_reason
+    #   The reason for the current purchase order retrieval preference
+    #   status in this summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number of the procurement portal preference
+    #   configuration in this summary.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] create_date
+    #   The date and time when the procurement portal preference was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_date
+    #   The date and time when the procurement portal preference was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/ProcurementPortalPreferenceSummary AWS API Documentation
+    #
+    class ProcurementPortalPreferenceSummary < Struct.new(
+      :aws_account_id,
+      :procurement_portal_preference_arn,
+      :procurement_portal_name,
+      :buyer_domain,
+      :buyer_identifier,
+      :supplier_domain,
+      :supplier_identifier,
+      :selector,
+      :einvoice_delivery_enabled,
+      :purchase_order_retrieval_enabled,
+      :einvoice_delivery_preference_status,
+      :einvoice_delivery_preference_status_reason,
+      :purchase_order_retrieval_preference_status,
+      :purchase_order_retrieval_preference_status_reason,
+      :version,
+      :create_date,
+      :last_update_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the source configuration for retrieving purchase order data.
+    #
+    # @!attribute [rw] einvoice_delivery_document_type
+    #   The type of e-invoice document that requires purchase order data.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_order_data_source_type
+    #   The type of source for purchase order data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/PurchaseOrderDataSource AWS API Documentation
+    #
+    class PurchaseOrderDataSource < Struct.new(
+      :einvoice_delivery_document_type,
+      :purchase_order_data_source_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the procurement portal preference
+    #   to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] selector
+    #   Specifies criteria for selecting which invoices should be processed
+    #   using a particular procurement portal preference.
+    #   @return [Types::ProcurementPortalPreferenceSelector]
+    #
+    # @!attribute [rw] procurement_portal_shared_secret
+    #   The updated shared secret or authentication credential for the
+    #   procurement portal. This value must be encrypted at rest.
+    #   @return [String]
+    #
+    # @!attribute [rw] procurement_portal_instance_endpoint
+    #   The updated endpoint URL where e-invoices will be delivered to the
+    #   procurement portal. Must be a valid HTTPS URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_env_preference
+    #   Updated configuration settings for the test environment of the
+    #   procurement portal.
+    #   @return [Types::TestEnvPreferenceInput]
+    #
+    # @!attribute [rw] einvoice_delivery_enabled
+    #   Updated flag indicating whether e-invoice delivery is enabled for
+    #   this procurement portal preference.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] einvoice_delivery_preference
+    #   Updated e-invoice delivery configuration including document types,
+    #   attachment types, and customization settings for the portal.
+    #   @return [Types::EinvoiceDeliveryPreference]
+    #
+    # @!attribute [rw] purchase_order_retrieval_enabled
+    #   Updated flag indicating whether purchase order retrieval is enabled
+    #   for this procurement portal preference.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] contacts
+    #   Updated list of contact information for portal administrators and
+    #   technical contacts.
+    #   @return [Array<Types::Contact>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/PutProcurementPortalPreferenceRequest AWS API Documentation
+    #
+    class PutProcurementPortalPreferenceRequest < Struct.new(
+      :procurement_portal_preference_arn,
+      :selector,
+      :procurement_portal_shared_secret,
+      :procurement_portal_instance_endpoint,
+      :test_env_preference,
+      :einvoice_delivery_enabled,
+      :einvoice_delivery_preference,
+      :purchase_order_retrieval_enabled,
+      :contacts)
+      SENSITIVE = [:procurement_portal_shared_secret, :contacts]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the updated procurement portal
+    #   preference.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/PutProcurementPortalPreferenceResponse AWS API Documentation
+    #
+    class PutProcurementPortalPreferenceResponse < Struct.new(
+      :procurement_portal_preference_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -955,6 +1678,25 @@ module Aws::Invoicing
       include Aws::Structure
     end
 
+    # Supplemental document associated with the invoice.
+    #
+    # @!attribute [rw] document_url
+    #   The pre-signed URL to download invoice supplemental document.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_url_expiration_date
+    #   The pre-signed URL expiration date of invoice supplemental document.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/SupplementalDocument AWS API Documentation
+    #
+    class SupplementalDocument < Struct.new(
+      :document_url,
+      :document_url_expiration_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the tags.
     #   @return [String]
@@ -1015,6 +1757,102 @@ module Aws::Invoicing
       :description,
       :amount,
       :rate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration settings for testing the procurement portal
+    # integration in a non-production environment.
+    #
+    # @!attribute [rw] buyer_domain
+    #   The domain identifier for the buyer in the test environment of the
+    #   procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] buyer_identifier
+    #   The unique identifier for the buyer in the test environment of the
+    #   procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] supplier_domain
+    #   The domain identifier for the supplier in the test environment of
+    #   the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] supplier_identifier
+    #   The unique identifier for the supplier in the test environment of
+    #   the procurement portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] procurement_portal_shared_secret
+    #   The shared secret or authentication credential used for secure
+    #   communication with the test environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] procurement_portal_instance_endpoint
+    #   The endpoint URL where e-invoices are delivered in the test
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_order_retrieval_endpoint
+    #   The endpoint URL used for retrieving purchase orders in the test
+    #   environment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/TestEnvPreference AWS API Documentation
+    #
+    class TestEnvPreference < Struct.new(
+      :buyer_domain,
+      :buyer_identifier,
+      :supplier_domain,
+      :supplier_identifier,
+      :procurement_portal_shared_secret,
+      :procurement_portal_instance_endpoint,
+      :purchase_order_retrieval_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input parameters for configuring test environment preferences for a
+    # procurement portal.
+    #
+    # @!attribute [rw] buyer_domain
+    #   The domain identifier to use for the buyer in the test environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] buyer_identifier
+    #   The unique identifier to use for the buyer in the test environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] supplier_domain
+    #   The domain identifier to use for the supplier in the test
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] supplier_identifier
+    #   The unique identifier to use for the supplier in the test
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] procurement_portal_shared_secret
+    #   The shared secret or authentication credential to use for secure
+    #   communication in the test environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] procurement_portal_instance_endpoint
+    #   The endpoint URL where e-invoices will be delivered in the test
+    #   environment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/TestEnvPreferenceInput AWS API Documentation
+    #
+    class TestEnvPreferenceInput < Struct.new(
+      :buyer_domain,
+      :buyer_identifier,
+      :supplier_domain,
+      :supplier_identifier,
+      :procurement_portal_shared_secret,
+      :procurement_portal_instance_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1092,6 +1930,54 @@ module Aws::Invoicing
     #
     class UpdateInvoiceUnitResponse < Struct.new(
       :invoice_unit_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the procurement portal preference
+    #   to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] einvoice_delivery_preference_status
+    #   The updated status of the e-invoice delivery preference.
+    #   @return [String]
+    #
+    # @!attribute [rw] einvoice_delivery_preference_status_reason
+    #   The reason for the e-invoice delivery preference status update,
+    #   providing context for the change.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_order_retrieval_preference_status
+    #   The updated status of the purchase order retrieval preference.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_order_retrieval_preference_status_reason
+    #   The reason for the purchase order retrieval preference status
+    #   update, providing context for the change.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/UpdateProcurementPortalPreferenceStatusRequest AWS API Documentation
+    #
+    class UpdateProcurementPortalPreferenceStatusRequest < Struct.new(
+      :procurement_portal_preference_arn,
+      :einvoice_delivery_preference_status,
+      :einvoice_delivery_preference_status_reason,
+      :purchase_order_retrieval_preference_status,
+      :purchase_order_retrieval_preference_status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] procurement_portal_preference_arn
+    #   The Amazon Resource Name (ARN) of the procurement portal preference
+    #   with updated status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/UpdateProcurementPortalPreferenceStatusResponse AWS API Documentation
+    #
+    class UpdateProcurementPortalPreferenceStatusResponse < Struct.new(
+      :procurement_portal_preference_arn)
       SENSITIVE = []
       include Aws::Structure
     end

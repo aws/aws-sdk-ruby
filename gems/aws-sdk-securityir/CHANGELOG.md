@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2025-11-21)
+------------------
+
+* Feature - Add ListInvestigations and SendFeedback APIs to support SecurityIR AI agents
+
+1.16.0 (2025-11-11)
+------------------
+
+* Feature - Added support for configuring communication preferences as well as clearly displaying case comment author identities.
+
+1.15.0 (2025-10-28)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.14.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.13.0 (2025-08-26)
 ------------------
 

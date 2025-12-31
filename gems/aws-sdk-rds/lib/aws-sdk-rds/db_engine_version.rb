@@ -317,6 +317,22 @@ module Aws::RDS
       data[:serverless_v2_features_support]
     end
 
+    # The database installation files (ISO and EXE) uploaded to Amazon S3
+    # for your database engine version to import to Amazon RDS. Required for
+    # `sqlserver-dev-ee`.
+    # @return [Array<String>]
+    def database_installation_files
+      data[:database_installation_files]
+    end
+
+    # The reason that the custom engine version creation for
+    # `sqlserver-dev-ee` failed with an `incompatible-installation-media`
+    # status.
+    # @return [String]
+    def failure_reason
+      data[:failure_reason]
+    end
+
     # @!endgroup
 
     # @return [Client]

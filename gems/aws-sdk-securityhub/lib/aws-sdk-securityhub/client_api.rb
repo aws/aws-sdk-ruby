@@ -789,8 +789,6 @@ module Aws::SecurityHub
     ConnectionDirection = Shapes::StringShape.new(name: 'ConnectionDirection')
     ConnectorAuthStatus = Shapes::StringShape.new(name: 'ConnectorAuthStatus')
     ConnectorProviderName = Shapes::StringShape.new(name: 'ConnectorProviderName')
-    ConnectorRegistrationsV2Request = Shapes::StructureShape.new(name: 'ConnectorRegistrationsV2Request')
-    ConnectorRegistrationsV2Response = Shapes::StructureShape.new(name: 'ConnectorRegistrationsV2Response')
     ConnectorStatus = Shapes::StringShape.new(name: 'ConnectorStatus')
     ConnectorSummary = Shapes::StructureShape.new(name: 'ConnectorSummary')
     ConnectorSummaryList = Shapes::ListShape.new(name: 'ConnectorSummaryList')
@@ -912,6 +910,12 @@ module Aws::SecurityHub
     FindingHistoryUpdatesList = Shapes::ListShape.new(name: 'FindingHistoryUpdatesList')
     FindingProviderFields = Shapes::StructureShape.new(name: 'FindingProviderFields')
     FindingProviderSeverity = Shapes::StructureShape.new(name: 'FindingProviderSeverity')
+    FindingsTrendsCompositeFilter = Shapes::StructureShape.new(name: 'FindingsTrendsCompositeFilter')
+    FindingsTrendsCompositeFilterList = Shapes::ListShape.new(name: 'FindingsTrendsCompositeFilterList')
+    FindingsTrendsFilters = Shapes::StructureShape.new(name: 'FindingsTrendsFilters')
+    FindingsTrendsStringField = Shapes::StringShape.new(name: 'FindingsTrendsStringField')
+    FindingsTrendsStringFilter = Shapes::StructureShape.new(name: 'FindingsTrendsStringFilter')
+    FindingsTrendsStringFilterList = Shapes::ListShape.new(name: 'FindingsTrendsStringFilterList')
     FirewallPolicyDetails = Shapes::StructureShape.new(name: 'FirewallPolicyDetails')
     FirewallPolicyStatefulRuleGroupReferencesDetails = Shapes::StructureShape.new(name: 'FirewallPolicyStatefulRuleGroupReferencesDetails')
     FirewallPolicyStatefulRuleGroupReferencesList = Shapes::ListShape.new(name: 'FirewallPolicyStatefulRuleGroupReferencesList')
@@ -943,6 +947,8 @@ module Aws::SecurityHub
     GetFindingStatisticsV2Response = Shapes::StructureShape.new(name: 'GetFindingStatisticsV2Response')
     GetFindingsRequest = Shapes::StructureShape.new(name: 'GetFindingsRequest')
     GetFindingsResponse = Shapes::StructureShape.new(name: 'GetFindingsResponse')
+    GetFindingsTrendsV2Request = Shapes::StructureShape.new(name: 'GetFindingsTrendsV2Request')
+    GetFindingsTrendsV2Response = Shapes::StructureShape.new(name: 'GetFindingsTrendsV2Response')
     GetFindingsV2Request = Shapes::StructureShape.new(name: 'GetFindingsV2Request')
     GetFindingsV2Response = Shapes::StructureShape.new(name: 'GetFindingsV2Response')
     GetInsightResultsRequest = Shapes::StructureShape.new(name: 'GetInsightResultsRequest')
@@ -957,10 +963,13 @@ module Aws::SecurityHub
     GetMembersResponse = Shapes::StructureShape.new(name: 'GetMembersResponse')
     GetResourcesStatisticsV2Request = Shapes::StructureShape.new(name: 'GetResourcesStatisticsV2Request')
     GetResourcesStatisticsV2Response = Shapes::StructureShape.new(name: 'GetResourcesStatisticsV2Response')
+    GetResourcesTrendsV2Request = Shapes::StructureShape.new(name: 'GetResourcesTrendsV2Request')
+    GetResourcesTrendsV2Response = Shapes::StructureShape.new(name: 'GetResourcesTrendsV2Response')
     GetResourcesV2Request = Shapes::StructureShape.new(name: 'GetResourcesV2Request')
     GetResourcesV2Response = Shapes::StructureShape.new(name: 'GetResourcesV2Response')
     GetSecurityControlDefinitionRequest = Shapes::StructureShape.new(name: 'GetSecurityControlDefinitionRequest')
     GetSecurityControlDefinitionResponse = Shapes::StructureShape.new(name: 'GetSecurityControlDefinitionResponse')
+    GranularityField = Shapes::StringShape.new(name: 'GranularityField')
     GroupByField = Shapes::StringShape.new(name: 'GroupByField')
     GroupByResult = Shapes::StructureShape.new(name: 'GroupByResult')
     GroupByResults = Shapes::ListShape.new(name: 'GroupByResults')
@@ -1079,6 +1088,9 @@ module Aws::SecurityHub
     OcsfFindingIdentifier = Shapes::StructureShape.new(name: 'OcsfFindingIdentifier')
     OcsfFindingIdentifierList = Shapes::ListShape.new(name: 'OcsfFindingIdentifierList')
     OcsfFindingsList = Shapes::ListShape.new(name: 'OcsfFindingsList')
+    OcsfIpField = Shapes::StringShape.new(name: 'OcsfIpField')
+    OcsfIpFilter = Shapes::StructureShape.new(name: 'OcsfIpFilter')
+    OcsfIpFilterList = Shapes::ListShape.new(name: 'OcsfIpFilterList')
     OcsfMapField = Shapes::StringShape.new(name: 'OcsfMapField')
     OcsfMapFilter = Shapes::StructureShape.new(name: 'OcsfMapFilter')
     OcsfMapFilterList = Shapes::ListShape.new(name: 'OcsfMapFilterList')
@@ -1128,6 +1140,8 @@ module Aws::SecurityHub
     RecordState = Shapes::StringShape.new(name: 'RecordState')
     Records = Shapes::ListShape.new(name: 'Records')
     RegionAvailabilityStatus = Shapes::StringShape.new(name: 'RegionAvailabilityStatus')
+    RegisterConnectorV2Request = Shapes::StructureShape.new(name: 'RegisterConnectorV2Request')
+    RegisterConnectorV2Response = Shapes::StructureShape.new(name: 'RegisterConnectorV2Response')
     RelatedFinding = Shapes::StructureShape.new(name: 'RelatedFinding')
     RelatedFindingList = Shapes::ListShape.new(name: 'RelatedFindingList')
     RelatedRequirementsList = Shapes::ListShape.new(name: 'RelatedRequirementsList')
@@ -1153,6 +1167,7 @@ module Aws::SecurityHub
     Resources = Shapes::ListShape.new(name: 'Resources')
     ResourcesCompositeFilter = Shapes::StructureShape.new(name: 'ResourcesCompositeFilter')
     ResourcesCompositeFilterList = Shapes::ListShape.new(name: 'ResourcesCompositeFilterList')
+    ResourcesCount = Shapes::StructureShape.new(name: 'ResourcesCount')
     ResourcesDateField = Shapes::StringShape.new(name: 'ResourcesDateField')
     ResourcesDateFilter = Shapes::StructureShape.new(name: 'ResourcesDateFilter')
     ResourcesDateFilterList = Shapes::ListShape.new(name: 'ResourcesDateFilterList')
@@ -1166,6 +1181,15 @@ module Aws::SecurityHub
     ResourcesStringField = Shapes::StringShape.new(name: 'ResourcesStringField')
     ResourcesStringFilter = Shapes::StructureShape.new(name: 'ResourcesStringFilter')
     ResourcesStringFilterList = Shapes::ListShape.new(name: 'ResourcesStringFilterList')
+    ResourcesTrendsCompositeFilter = Shapes::StructureShape.new(name: 'ResourcesTrendsCompositeFilter')
+    ResourcesTrendsCompositeFilterList = Shapes::ListShape.new(name: 'ResourcesTrendsCompositeFilterList')
+    ResourcesTrendsFilters = Shapes::StructureShape.new(name: 'ResourcesTrendsFilters')
+    ResourcesTrendsMetrics = Shapes::ListShape.new(name: 'ResourcesTrendsMetrics')
+    ResourcesTrendsMetricsResult = Shapes::StructureShape.new(name: 'ResourcesTrendsMetricsResult')
+    ResourcesTrendsStringField = Shapes::StringShape.new(name: 'ResourcesTrendsStringField')
+    ResourcesTrendsStringFilter = Shapes::StructureShape.new(name: 'ResourcesTrendsStringFilter')
+    ResourcesTrendsStringFilterList = Shapes::ListShape.new(name: 'ResourcesTrendsStringFilterList')
+    ResourcesTrendsValues = Shapes::StructureShape.new(name: 'ResourcesTrendsValues')
     Result = Shapes::StructureShape.new(name: 'Result')
     ResultList = Shapes::ListShape.new(name: 'ResultList')
     RouteSetDetails = Shapes::StructureShape.new(name: 'RouteSetDetails')
@@ -1221,13 +1245,15 @@ module Aws::SecurityHub
     SensitiveDataDetectionsList = Shapes::ListShape.new(name: 'SensitiveDataDetectionsList')
     SensitiveDataResult = Shapes::StructureShape.new(name: 'SensitiveDataResult')
     SensitiveDataResultList = Shapes::ListShape.new(name: 'SensitiveDataResultList')
-    SensitiveNonEmptyString = Shapes::StringShape.new(name: 'SensitiveNonEmptyString')
     Sequence = Shapes::StructureShape.new(name: 'Sequence')
     ServiceNowDetail = Shapes::StructureShape.new(name: 'ServiceNowDetail')
     ServiceNowProviderConfiguration = Shapes::StructureShape.new(name: 'ServiceNowProviderConfiguration')
+    ServiceNowUpdateConfiguration = Shapes::StructureShape.new(name: 'ServiceNowUpdateConfiguration')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Severity = Shapes::StructureShape.new(name: 'Severity')
     SeverityLabel = Shapes::StringShape.new(name: 'SeverityLabel')
     SeverityRating = Shapes::StringShape.new(name: 'SeverityRating')
+    SeverityTrendsCount = Shapes::StructureShape.new(name: 'SeverityTrendsCount')
     SeverityUpdate = Shapes::StructureShape.new(name: 'SeverityUpdate')
     Signal = Shapes::StructureShape.new(name: 'Signal')
     SignalsList = Shapes::ListShape.new(name: 'SignalsList')
@@ -1292,7 +1318,12 @@ module Aws::SecurityHub
     ThreatIntelIndicatorType = Shapes::StringShape.new(name: 'ThreatIntelIndicatorType')
     ThreatList = Shapes::ListShape.new(name: 'ThreatList')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TicketCreationMode = Shapes::StringShape.new(name: 'TicketCreationMode')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
+    TrendsMetrics = Shapes::ListShape.new(name: 'TrendsMetrics')
+    TrendsMetricsResult = Shapes::StructureShape.new(name: 'TrendsMetricsResult')
+    TrendsValueCount = Shapes::IntegerShape.new(name: 'TrendsValueCount')
+    TrendsValues = Shapes::StructureShape.new(name: 'TrendsValues')
     TypeList = Shapes::ListShape.new(name: 'TypeList')
     UnprocessedAutomationRule = Shapes::StructureShape.new(name: 'UnprocessedAutomationRule')
     UnprocessedAutomationRulesList = Shapes::ListShape.new(name: 'UnprocessedAutomationRulesList')
@@ -5502,6 +5533,8 @@ module Aws::SecurityHub
     CompositeFilter.add_member(:boolean_filters, Shapes::ShapeRef.new(shape: OcsfBooleanFilterList, location_name: "BooleanFilters"))
     CompositeFilter.add_member(:number_filters, Shapes::ShapeRef.new(shape: OcsfNumberFilterList, location_name: "NumberFilters"))
     CompositeFilter.add_member(:map_filters, Shapes::ShapeRef.new(shape: OcsfMapFilterList, location_name: "MapFilters"))
+    CompositeFilter.add_member(:ip_filters, Shapes::ShapeRef.new(shape: OcsfIpFilterList, location_name: "IpFilters"))
+    CompositeFilter.add_member(:nested_composite_filters, Shapes::ShapeRef.new(shape: CompositeFilterList, location_name: "NestedCompositeFilters"))
     CompositeFilter.add_member(:operator, Shapes::ShapeRef.new(shape: AllowedOperators, location_name: "Operator"))
     CompositeFilter.struct_class = Types::CompositeFilter
 
@@ -5558,14 +5591,6 @@ module Aws::SecurityHub
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
     ConflictException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
     ConflictException.struct_class = Types::ConflictException
-
-    ConnectorRegistrationsV2Request.add_member(:auth_code, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AuthCode"))
-    ConnectorRegistrationsV2Request.add_member(:auth_state, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AuthState"))
-    ConnectorRegistrationsV2Request.struct_class = Types::ConnectorRegistrationsV2Request
-
-    ConnectorRegistrationsV2Response.add_member(:connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ConnectorArn"))
-    ConnectorRegistrationsV2Response.add_member(:connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ConnectorId"))
-    ConnectorRegistrationsV2Response.struct_class = Types::ConnectorRegistrationsV2Response
 
     ConnectorSummary.add_member(:connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ConnectorArn"))
     ConnectorSummary.add_member(:connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ConnectorId"))
@@ -5660,9 +5685,10 @@ module Aws::SecurityHub
     CreateConnectorV2Request.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateConnectorV2Request.struct_class = Types::CreateConnectorV2Request
 
-    CreateConnectorV2Response.add_member(:connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ConnectorArn"))
+    CreateConnectorV2Response.add_member(:connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ConnectorArn"))
     CreateConnectorV2Response.add_member(:connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ConnectorId"))
     CreateConnectorV2Response.add_member(:auth_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AuthUrl"))
+    CreateConnectorV2Response.add_member(:connector_status, Shapes::ShapeRef.new(shape: ConnectorStatus, location_name: "ConnectorStatus"))
     CreateConnectorV2Response.struct_class = Types::CreateConnectorV2Response
 
     CreateFindingAggregatorRequest.add_member(:region_linking_mode, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "RegionLinkingMode"))
@@ -5692,6 +5718,7 @@ module Aws::SecurityHub
     CreateTicketV2Request.add_member(:connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ConnectorId"))
     CreateTicketV2Request.add_member(:finding_metadata_uid, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "FindingMetadataUid"))
     CreateTicketV2Request.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateTicketV2Request.add_member(:mode, Shapes::ShapeRef.new(shape: TicketCreationMode, location_name: "Mode"))
     CreateTicketV2Request.struct_class = Types::CreateTicketV2Request
 
     CreateTicketV2Response.add_member(:ticket_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "TicketId"))
@@ -6001,6 +6028,23 @@ module Aws::SecurityHub
     FindingProviderSeverity.add_member(:original, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Original"))
     FindingProviderSeverity.struct_class = Types::FindingProviderSeverity
 
+    FindingsTrendsCompositeFilter.add_member(:string_filters, Shapes::ShapeRef.new(shape: FindingsTrendsStringFilterList, location_name: "StringFilters"))
+    FindingsTrendsCompositeFilter.add_member(:nested_composite_filters, Shapes::ShapeRef.new(shape: FindingsTrendsCompositeFilterList, location_name: "NestedCompositeFilters"))
+    FindingsTrendsCompositeFilter.add_member(:operator, Shapes::ShapeRef.new(shape: AllowedOperators, location_name: "Operator"))
+    FindingsTrendsCompositeFilter.struct_class = Types::FindingsTrendsCompositeFilter
+
+    FindingsTrendsCompositeFilterList.member = Shapes::ShapeRef.new(shape: FindingsTrendsCompositeFilter)
+
+    FindingsTrendsFilters.add_member(:composite_filters, Shapes::ShapeRef.new(shape: FindingsTrendsCompositeFilterList, location_name: "CompositeFilters"))
+    FindingsTrendsFilters.add_member(:composite_operator, Shapes::ShapeRef.new(shape: AllowedOperators, location_name: "CompositeOperator"))
+    FindingsTrendsFilters.struct_class = Types::FindingsTrendsFilters
+
+    FindingsTrendsStringFilter.add_member(:field_name, Shapes::ShapeRef.new(shape: FindingsTrendsStringField, location_name: "FieldName"))
+    FindingsTrendsStringFilter.add_member(:filter, Shapes::ShapeRef.new(shape: StringFilter, location_name: "Filter"))
+    FindingsTrendsStringFilter.struct_class = Types::FindingsTrendsStringFilter
+
+    FindingsTrendsStringFilterList.member = Shapes::ShapeRef.new(shape: FindingsTrendsStringFilter)
+
     FirewallPolicyDetails.add_member(:stateful_rule_group_references, Shapes::ShapeRef.new(shape: FirewallPolicyStatefulRuleGroupReferencesList, location_name: "StatefulRuleGroupReferences"))
     FirewallPolicyDetails.add_member(:stateless_custom_actions, Shapes::ShapeRef.new(shape: FirewallPolicyStatelessCustomActionsList, location_name: "StatelessCustomActions"))
     FirewallPolicyDetails.add_member(:stateless_default_actions, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "StatelessDefaultActions"))
@@ -6148,6 +6192,18 @@ module Aws::SecurityHub
     GetFindingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetFindingsResponse.struct_class = Types::GetFindingsResponse
 
+    GetFindingsTrendsV2Request.add_member(:filters, Shapes::ShapeRef.new(shape: FindingsTrendsFilters, location_name: "Filters"))
+    GetFindingsTrendsV2Request.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
+    GetFindingsTrendsV2Request.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    GetFindingsTrendsV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetFindingsTrendsV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetFindingsTrendsV2Request.struct_class = Types::GetFindingsTrendsV2Request
+
+    GetFindingsTrendsV2Response.add_member(:granularity, Shapes::ShapeRef.new(shape: GranularityField, required: true, location_name: "Granularity"))
+    GetFindingsTrendsV2Response.add_member(:trends_metrics, Shapes::ShapeRef.new(shape: TrendsMetrics, required: true, location_name: "TrendsMetrics"))
+    GetFindingsTrendsV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetFindingsTrendsV2Response.struct_class = Types::GetFindingsTrendsV2Response
+
     GetFindingsV2Request.add_member(:filters, Shapes::ShapeRef.new(shape: OcsfFindingFilters, location_name: "Filters"))
     GetFindingsV2Request.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "SortCriteria"))
     GetFindingsV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -6197,6 +6253,18 @@ module Aws::SecurityHub
 
     GetResourcesStatisticsV2Response.add_member(:group_by_results, Shapes::ShapeRef.new(shape: GroupByResults, required: true, location_name: "GroupByResults"))
     GetResourcesStatisticsV2Response.struct_class = Types::GetResourcesStatisticsV2Response
+
+    GetResourcesTrendsV2Request.add_member(:filters, Shapes::ShapeRef.new(shape: ResourcesTrendsFilters, location_name: "Filters"))
+    GetResourcesTrendsV2Request.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
+    GetResourcesTrendsV2Request.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    GetResourcesTrendsV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetResourcesTrendsV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetResourcesTrendsV2Request.struct_class = Types::GetResourcesTrendsV2Request
+
+    GetResourcesTrendsV2Response.add_member(:granularity, Shapes::ShapeRef.new(shape: GranularityField, required: true, location_name: "Granularity"))
+    GetResourcesTrendsV2Response.add_member(:trends_metrics, Shapes::ShapeRef.new(shape: ResourcesTrendsMetrics, required: true, location_name: "TrendsMetrics"))
+    GetResourcesTrendsV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetResourcesTrendsV2Response.struct_class = Types::GetResourcesTrendsV2Response
 
     GetResourcesV2Request.add_member(:filters, Shapes::ShapeRef.new(shape: ResourcesFilters, location_name: "Filters"))
     GetResourcesV2Request.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "SortCriteria"))
@@ -6350,7 +6418,7 @@ module Aws::SecurityHub
     JiraCloudProviderConfiguration.add_member(:project_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProjectKey"))
     JiraCloudProviderConfiguration.struct_class = Types::JiraCloudProviderConfiguration
 
-    JiraCloudUpdateConfiguration.add_member(:project_key, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ProjectKey"))
+    JiraCloudUpdateConfiguration.add_member(:project_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProjectKey"))
     JiraCloudUpdateConfiguration.struct_class = Types::JiraCloudUpdateConfiguration
 
     KeywordFilter.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
@@ -6627,6 +6695,12 @@ module Aws::SecurityHub
 
     OcsfFindingsList.member = Shapes::ShapeRef.new(shape: OcsfFinding)
 
+    OcsfIpFilter.add_member(:field_name, Shapes::ShapeRef.new(shape: OcsfIpField, location_name: "FieldName"))
+    OcsfIpFilter.add_member(:filter, Shapes::ShapeRef.new(shape: IpFilter, location_name: "Filter"))
+    OcsfIpFilter.struct_class = Types::OcsfIpFilter
+
+    OcsfIpFilterList.member = Shapes::ShapeRef.new(shape: OcsfIpFilter)
+
     OcsfMapFilter.add_member(:field_name, Shapes::ShapeRef.new(shape: OcsfMapField, location_name: "FieldName"))
     OcsfMapFilter.add_member(:filter, Shapes::ShapeRef.new(shape: MapFilter, location_name: "Filter"))
     OcsfMapFilter.struct_class = Types::OcsfMapFilter
@@ -6791,8 +6865,10 @@ module Aws::SecurityHub
     ProviderSummary.struct_class = Types::ProviderSummary
 
     ProviderUpdateConfiguration.add_member(:jira_cloud, Shapes::ShapeRef.new(shape: JiraCloudUpdateConfiguration, location_name: "JiraCloud"))
+    ProviderUpdateConfiguration.add_member(:service_now, Shapes::ShapeRef.new(shape: ServiceNowUpdateConfiguration, location_name: "ServiceNow"))
     ProviderUpdateConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ProviderUpdateConfiguration.add_member_subclass(:jira_cloud, Types::ProviderUpdateConfiguration::JiraCloud)
+    ProviderUpdateConfiguration.add_member_subclass(:service_now, Types::ProviderUpdateConfiguration::ServiceNow)
     ProviderUpdateConfiguration.add_member_subclass(:unknown, Types::ProviderUpdateConfiguration::Unknown)
     ProviderUpdateConfiguration.struct_class = Types::ProviderUpdateConfiguration
 
@@ -6812,6 +6888,14 @@ module Aws::SecurityHub
     Record.struct_class = Types::Record
 
     Records.member = Shapes::ShapeRef.new(shape: Record)
+
+    RegisterConnectorV2Request.add_member(:auth_code, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AuthCode"))
+    RegisterConnectorV2Request.add_member(:auth_state, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AuthState"))
+    RegisterConnectorV2Request.struct_class = Types::RegisterConnectorV2Request
+
+    RegisterConnectorV2Response.add_member(:connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ConnectorArn"))
+    RegisterConnectorV2Response.add_member(:connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ConnectorId"))
+    RegisterConnectorV2Response.struct_class = Types::RegisterConnectorV2Response
 
     RelatedFinding.add_member(:product_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ProductArn"))
     RelatedFinding.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Id"))
@@ -6966,7 +7050,7 @@ module Aws::SecurityHub
     ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    ResourceResult.add_member(:resource_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceArn"))
+    ResourceResult.add_member(:resource_guid, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceGuid"))
     ResourceResult.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ResourceId"))
     ResourceResult.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AccountId"))
     ResourceResult.add_member(:region, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Region"))
@@ -7002,10 +7086,14 @@ module Aws::SecurityHub
     ResourcesCompositeFilter.add_member(:date_filters, Shapes::ShapeRef.new(shape: ResourcesDateFilterList, location_name: "DateFilters"))
     ResourcesCompositeFilter.add_member(:number_filters, Shapes::ShapeRef.new(shape: ResourcesNumberFilterList, location_name: "NumberFilters"))
     ResourcesCompositeFilter.add_member(:map_filters, Shapes::ShapeRef.new(shape: ResourcesMapFilterList, location_name: "MapFilters"))
+    ResourcesCompositeFilter.add_member(:nested_composite_filters, Shapes::ShapeRef.new(shape: ResourcesCompositeFilterList, location_name: "NestedCompositeFilters"))
     ResourcesCompositeFilter.add_member(:operator, Shapes::ShapeRef.new(shape: AllowedOperators, location_name: "Operator"))
     ResourcesCompositeFilter.struct_class = Types::ResourcesCompositeFilter
 
     ResourcesCompositeFilterList.member = Shapes::ShapeRef.new(shape: ResourcesCompositeFilter)
+
+    ResourcesCount.add_member(:all_resources, Shapes::ShapeRef.new(shape: TrendsValueCount, required: true, location_name: "AllResources"))
+    ResourcesCount.struct_class = Types::ResourcesCount
 
     ResourcesDateFilter.add_member(:field_name, Shapes::ShapeRef.new(shape: ResourcesDateField, location_name: "FieldName"))
     ResourcesDateFilter.add_member(:filter, Shapes::ShapeRef.new(shape: DateFilter, location_name: "Filter"))
@@ -7034,6 +7122,32 @@ module Aws::SecurityHub
     ResourcesStringFilter.struct_class = Types::ResourcesStringFilter
 
     ResourcesStringFilterList.member = Shapes::ShapeRef.new(shape: ResourcesStringFilter)
+
+    ResourcesTrendsCompositeFilter.add_member(:string_filters, Shapes::ShapeRef.new(shape: ResourcesTrendsStringFilterList, location_name: "StringFilters"))
+    ResourcesTrendsCompositeFilter.add_member(:nested_composite_filters, Shapes::ShapeRef.new(shape: ResourcesTrendsCompositeFilterList, location_name: "NestedCompositeFilters"))
+    ResourcesTrendsCompositeFilter.add_member(:operator, Shapes::ShapeRef.new(shape: AllowedOperators, location_name: "Operator"))
+    ResourcesTrendsCompositeFilter.struct_class = Types::ResourcesTrendsCompositeFilter
+
+    ResourcesTrendsCompositeFilterList.member = Shapes::ShapeRef.new(shape: ResourcesTrendsCompositeFilter)
+
+    ResourcesTrendsFilters.add_member(:composite_filters, Shapes::ShapeRef.new(shape: ResourcesTrendsCompositeFilterList, location_name: "CompositeFilters"))
+    ResourcesTrendsFilters.add_member(:composite_operator, Shapes::ShapeRef.new(shape: AllowedOperators, location_name: "CompositeOperator"))
+    ResourcesTrendsFilters.struct_class = Types::ResourcesTrendsFilters
+
+    ResourcesTrendsMetrics.member = Shapes::ShapeRef.new(shape: ResourcesTrendsMetricsResult)
+
+    ResourcesTrendsMetricsResult.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
+    ResourcesTrendsMetricsResult.add_member(:trends_values, Shapes::ShapeRef.new(shape: ResourcesTrendsValues, required: true, location_name: "TrendsValues"))
+    ResourcesTrendsMetricsResult.struct_class = Types::ResourcesTrendsMetricsResult
+
+    ResourcesTrendsStringFilter.add_member(:field_name, Shapes::ShapeRef.new(shape: ResourcesTrendsStringField, location_name: "FieldName"))
+    ResourcesTrendsStringFilter.add_member(:filter, Shapes::ShapeRef.new(shape: StringFilter, location_name: "Filter"))
+    ResourcesTrendsStringFilter.struct_class = Types::ResourcesTrendsStringFilter
+
+    ResourcesTrendsStringFilterList.member = Shapes::ShapeRef.new(shape: ResourcesTrendsStringFilter)
+
+    ResourcesTrendsValues.add_member(:resources_count, Shapes::ShapeRef.new(shape: ResourcesCount, required: true, location_name: "ResourcesCount"))
+    ResourcesTrendsValues.struct_class = Types::ResourcesTrendsValues
 
     Result.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     Result.add_member(:processing_result, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProcessingResult"))
@@ -7239,20 +7353,36 @@ module Aws::SecurityHub
     Sequence.struct_class = Types::Sequence
 
     ServiceNowDetail.add_member(:instance_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InstanceName"))
-    ServiceNowDetail.add_member(:client_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClientId"))
+    ServiceNowDetail.add_member(:secret_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "SecretArn"))
     ServiceNowDetail.add_member(:auth_status, Shapes::ShapeRef.new(shape: ConnectorAuthStatus, required: true, location_name: "AuthStatus"))
     ServiceNowDetail.struct_class = Types::ServiceNowDetail
 
     ServiceNowProviderConfiguration.add_member(:instance_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "InstanceName"))
-    ServiceNowProviderConfiguration.add_member(:client_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ClientId"))
-    ServiceNowProviderConfiguration.add_member(:client_secret, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, required: true, location_name: "ClientSecret"))
+    ServiceNowProviderConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "SecretArn"))
     ServiceNowProviderConfiguration.struct_class = Types::ServiceNowProviderConfiguration
+
+    ServiceNowUpdateConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SecretArn"))
+    ServiceNowUpdateConfiguration.struct_class = Types::ServiceNowUpdateConfiguration
+
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    ServiceQuotaExceededException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     Severity.add_member(:product, Shapes::ShapeRef.new(shape: Double, location_name: "Product"))
     Severity.add_member(:label, Shapes::ShapeRef.new(shape: SeverityLabel, location_name: "Label"))
     Severity.add_member(:normalized, Shapes::ShapeRef.new(shape: Integer, location_name: "Normalized"))
     Severity.add_member(:original, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Original"))
     Severity.struct_class = Types::Severity
+
+    SeverityTrendsCount.add_member(:unknown, Shapes::ShapeRef.new(shape: TrendsValueCount, required: true, location_name: "Unknown"))
+    SeverityTrendsCount.add_member(:informational, Shapes::ShapeRef.new(shape: TrendsValueCount, required: true, location_name: "Informational"))
+    SeverityTrendsCount.add_member(:low, Shapes::ShapeRef.new(shape: TrendsValueCount, required: true, location_name: "Low"))
+    SeverityTrendsCount.add_member(:medium, Shapes::ShapeRef.new(shape: TrendsValueCount, required: true, location_name: "Medium"))
+    SeverityTrendsCount.add_member(:high, Shapes::ShapeRef.new(shape: TrendsValueCount, required: true, location_name: "High"))
+    SeverityTrendsCount.add_member(:critical, Shapes::ShapeRef.new(shape: TrendsValueCount, required: true, location_name: "Critical"))
+    SeverityTrendsCount.add_member(:fatal, Shapes::ShapeRef.new(shape: TrendsValueCount, required: true, location_name: "Fatal"))
+    SeverityTrendsCount.add_member(:other, Shapes::ShapeRef.new(shape: TrendsValueCount, required: true, location_name: "Other"))
+    SeverityTrendsCount.struct_class = Types::SeverityTrendsCount
 
     SeverityUpdate.add_member(:normalized, Shapes::ShapeRef.new(shape: RatioScale, location_name: "Normalized"))
     SeverityUpdate.add_member(:product, Shapes::ShapeRef.new(shape: Double, location_name: "Product"))
@@ -7491,6 +7621,15 @@ module Aws::SecurityHub
     ThrottlingException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    TrendsMetrics.member = Shapes::ShapeRef.new(shape: TrendsMetricsResult)
+
+    TrendsMetricsResult.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
+    TrendsMetricsResult.add_member(:trends_values, Shapes::ShapeRef.new(shape: TrendsValues, required: true, location_name: "TrendsValues"))
+    TrendsMetricsResult.struct_class = Types::TrendsMetricsResult
+
+    TrendsValues.add_member(:severity_trends, Shapes::ShapeRef.new(shape: SeverityTrendsCount, required: true, location_name: "SeverityTrends"))
+    TrendsValues.struct_class = Types::TrendsValues
+
     TypeList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     UnprocessedAutomationRule.add_member(:rule_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RuleArn"))
@@ -7592,7 +7731,6 @@ module Aws::SecurityHub
     UpdateConfigurationPolicyResponse.struct_class = Types::UpdateConfigurationPolicyResponse
 
     UpdateConnectorV2Request.add_member(:connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "ConnectorId"))
-    UpdateConnectorV2Request.add_member(:client_secret, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "ClientSecret"))
     UpdateConnectorV2Request.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
     UpdateConnectorV2Request.add_member(:provider, Shapes::ShapeRef.new(shape: ProviderUpdateConfiguration, location_name: "Provider"))
     UpdateConnectorV2Request.struct_class = Types::UpdateConnectorV2Request
@@ -7928,20 +8066,6 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
-      api.add_operation(:connector_registrations_v2, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ConnectorRegistrationsV2"
-        o.http_method = "POST"
-        o.http_request_uri = "/connectorsv2/registrations"
-        o.input = Shapes::ShapeRef.new(shape: ConnectorRegistrationsV2Request)
-        o.output = Shapes::ShapeRef.new(shape: ConnectorRegistrationsV2Response)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-      end)
-
       api.add_operation(:create_action_target, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateActionTarget"
         o.http_method = "POST"
@@ -7967,6 +8091,7 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_automation_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -7993,6 +8118,7 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_configuration_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -8021,6 +8147,7 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_finding_aggregator, Seahorse::Model::Operation.new.tap do |o|
@@ -8645,6 +8772,24 @@ module Aws::SecurityHub
         )
       end)
 
+      api.add_operation(:get_findings_trends_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFindingsTrendsV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/findingsTrendsv2"
+        o.input = Shapes::ShapeRef.new(shape: GetFindingsTrendsV2Request)
+        o.output = Shapes::ShapeRef.new(shape: GetFindingsTrendsV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_findings_v2, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetFindingsV2"
         o.http_method = "POST"
@@ -8747,6 +8892,24 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_resources_trends_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourcesTrendsV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/resourcesTrendsv2"
+        o.input = Shapes::ShapeRef.new(shape: GetResourcesTrendsV2Request)
+        o.output = Shapes::ShapeRef.new(shape: GetResourcesTrendsV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_resources_v2, Seahorse::Model::Operation.new.tap do |o|
@@ -9028,6 +9191,20 @@ module Aws::SecurityHub
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:register_connector_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterConnectorV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/connectorsv2/register"
+        o.input = Shapes::ShapeRef.new(shape: RegisterConnectorV2Request)
+        o.output = Shapes::ShapeRef.new(shape: RegisterConnectorV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 

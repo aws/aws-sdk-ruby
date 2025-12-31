@@ -396,6 +396,24 @@ module Aws::VPCLattice
     #   false.
     #   @return [Boolean]
     #
+    # @!attribute [rw] custom_domain_name
+    #   A custom domain name for your resource configuration. Additionally,
+    #   provide a DomainVerificationID to prove your ownership of a domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_domain
+    #   (GROUP) The group domain for a group resource configuration. Any
+    #   domains that you create for the child resource are subdomains of the
+    #   group domain. Child resources inherit the verification status of the
+    #   domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_verification_identifier
+    #   The domain verification ID of your verified custom domain name. If
+    #   you don't provide an ID, you must configure the DNS settings
+    #   yourself.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you retry a request that completed
@@ -422,6 +440,9 @@ module Aws::VPCLattice
       :resource_configuration_group_identifier,
       :resource_configuration_definition,
       :allow_association_to_shareable_service_network,
+      :custom_domain_name,
+      :group_domain,
+      :domain_verification_identifier,
       :client_token,
       :tags)
       SENSITIVE = []
@@ -503,6 +524,25 @@ module Aws::VPCLattice
     #   The reason that the request failed.
     #   @return [String]
     #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name for your resource configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_verification_id
+    #   The domain name verification ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_domain
+    #   (GROUP) The group domain for a group resource configuration. Any
+    #   domains that you create for the child resource are subdomains of the
+    #   group domain. Child resources inherit the verification status of the
+    #   domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_verification_arn
+    #   The verification ID ARN
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateResourceConfigurationResponse AWS API Documentation
     #
     class CreateResourceConfigurationResponse < Struct.new(
@@ -518,7 +558,11 @@ module Aws::VPCLattice
       :resource_configuration_definition,
       :allow_association_to_shareable_service_network,
       :created_at,
-      :failure_reason)
+      :failure_reason,
+      :custom_domain_name,
+      :domain_verification_id,
+      :group_domain,
+      :domain_verification_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -819,6 +863,11 @@ module Aws::VPCLattice
     #   configuration.
     #   @return [String]
     #
+    # @!attribute [rw] private_dns_enabled
+    #   Indicates if private DNS is enabled for the service network resource
+    #   association.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   A key-value pair to associate with a resource.
     #   @return [Hash<String,String>]
@@ -829,6 +878,7 @@ module Aws::VPCLattice
       :client_token,
       :resource_configuration_identifier,
       :service_network_identifier,
+      :private_dns_enabled,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -850,13 +900,19 @@ module Aws::VPCLattice
     #   The ID of the account that created the association.
     #   @return [String]
     #
+    # @!attribute [rw] private_dns_enabled
+    #   Indicates if private DNS is is enabled for the service network
+    #   resource association.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateServiceNetworkResourceAssociationResponse AWS API Documentation
     #
     class CreateServiceNetworkResourceAssociationResponse < Struct.new(
       :id,
       :arn,
       :status,
-      :created_by)
+      :created_by,
+      :private_dns_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -985,6 +1041,10 @@ module Aws::VPCLattice
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @!attribute [rw] private_dns_enabled
+    #   Indicates if private DNS is enabled for the VPC association.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] security_group_ids
     #   The IDs of the security groups. Security groups aren't added by
     #   default. You can add a security group to apply network level
@@ -1002,14 +1062,20 @@ module Aws::VPCLattice
     #   The tags for the association.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] dns_options
+    #   DNS options for the service network VPC association.
+    #   @return [Types::DnsOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateServiceNetworkVpcAssociationRequest AWS API Documentation
     #
     class CreateServiceNetworkVpcAssociationRequest < Struct.new(
       :client_token,
       :service_network_identifier,
       :vpc_identifier,
+      :private_dns_enabled,
       :security_group_ids,
-      :tags)
+      :tags,
+      :dns_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1034,6 +1100,14 @@ module Aws::VPCLattice
     #   The IDs of the security groups.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] private_dns_enabled
+    #   Indicates if private DNS is enabled for the VPC association.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dns_options
+    #   The DNS configuration options.
+    #   @return [Types::DnsOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateServiceNetworkVpcAssociationResponse AWS API Documentation
     #
     class CreateServiceNetworkVpcAssociationResponse < Struct.new(
@@ -1041,7 +1115,9 @@ module Aws::VPCLattice
       :status,
       :arn,
       :created_by,
-      :security_group_ids)
+      :security_group_ids,
+      :private_dns_enabled,
+      :dns_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1259,6 +1335,22 @@ module Aws::VPCLattice
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/DeleteAuthPolicyResponse AWS API Documentation
     #
     class DeleteAuthPolicyResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_verification_identifier
+    #   The ID of the domain verification to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/DeleteDomainVerificationRequest AWS API Documentation
+    #
+    class DeleteDomainVerificationRequest < Struct.new(
+      :domain_verification_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/DeleteDomainVerificationResponse AWS API Documentation
+    #
+    class DeleteDomainVerificationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] service_identifier
     #   The ID or ARN of the service.
@@ -1676,6 +1768,49 @@ module Aws::VPCLattice
       include Aws::Structure
     end
 
+    # The DNS configuration options.
+    #
+    # @!attribute [rw] private_dns_preference
+    #   The preference for which private domains have a private hosted zone
+    #   created for and associated with the specified VPC. Only supported
+    #   when private DNS is enabled and when the VPC endpoint type is
+    #   ServiceNetwork or Resource.
+    #
+    #   * `ALL_DOMAINS` - VPC Lattice provisions private hosted zones for
+    #     all custom domain names.
+    #
+    #   * `VERIFIED_DOMAINS_ONLY` - VPC Lattice provisions a private hosted
+    #     zone only if custom domain name has been verified by the provider.
+    #
+    #   * `VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS` - VPC Lattice provisions
+    #     private hosted zones for all verified custom domain names and
+    #     other domain names that the resource consumer specifies. The
+    #     resource consumer specifies the domain names in the
+    #     privateDnsSpecifiedDomains parameter.
+    #
+    #   * `SPECIFIED_DOMAINS_ONLY` - VPC Lattice provisions a private hosted
+    #     zone for domain names specified by the resource consumer. The
+    #     resource consumer specifies the domain names in the
+    #     privateDnsSpecifiedDomains parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_dns_specified_domains
+    #   Indicates which of the private domains to create private hosted
+    #   zones for and associate with the specified VPC. Only supported when
+    #   private DNS is enabled and the private DNS preference is
+    #   `VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS` or
+    #   `SPECIFIED_DOMAINS_ONLY`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/DnsOptions AWS API Documentation
+    #
+    class DnsOptions < Struct.new(
+      :private_dns_preference,
+      :private_dns_specified_domains)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The DNS name of the resource.
     #
     # @!attribute [rw] domain_name
@@ -1691,6 +1826,57 @@ module Aws::VPCLattice
     class DnsResource < Struct.new(
       :domain_name,
       :ip_address_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a domain verification.
+    #
+    # @!attribute [rw] id
+    #   The ID of the domain verification.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the domain verification.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name being verified.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the domain verification process.
+    #   @return [String]
+    #
+    # @!attribute [rw] txt_method_config
+    #   The TXT record configuration used for domain verification.
+    #   @return [Types::TxtMethodConfig]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the domain verification was created, in
+    #   ISO-8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_verified_time
+    #   The date and time that the domain was last successfully verified, in
+    #   ISO-8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the domain verification.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/DomainVerificationSummary AWS API Documentation
+    #
+    class DomainVerificationSummary < Struct.new(
+      :id,
+      :arn,
+      :domain_name,
+      :status,
+      :txt_method_config,
+      :created_at,
+      :last_verified_time,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1843,6 +2029,67 @@ module Aws::VPCLattice
       :state,
       :created_at,
       :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_verification_identifier
+    #   The ID or ARN of the domain verification to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetDomainVerificationRequest AWS API Documentation
+    #
+    class GetDomainVerificationRequest < Struct.new(
+      :domain_verification_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the domain verification.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the domain verification.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name being verified.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the domain verification process.
+    #   @return [String]
+    #
+    # @!attribute [rw] txt_method_config
+    #   The TXT record configuration used for domain verification.
+    #   @return [Types::TxtMethodConfig]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the domain verification was created, in
+    #   ISO-8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_verified_time
+    #   The date and time that the domain was last successfully verified, in
+    #   ISO-8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the domain verification.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetDomainVerificationResponse AWS API Documentation
+    #
+    class GetDomainVerificationResponse < Struct.new(
+      :id,
+      :arn,
+      :domain_name,
+      :status,
+      :txt_method_config,
+      :created_at,
+      :last_verified_time,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2016,6 +2263,25 @@ module Aws::VPCLattice
     #   updated, in ISO-8601 format.
     #   @return [Time]
     #
+    # @!attribute [rw] domain_verification_id
+    #   The domain verification ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_verification_arn
+    #   The ARN of the domain verification.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_verification_status
+    #   The domain verification status.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_domain
+    #   (GROUP) The group domain for a group resource configuration. Any
+    #   domains that you create for the child resource are subdomains of the
+    #   group domain. Child resources inherit the verification status of the
+    #   domain.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetResourceConfigurationResponse AWS API Documentation
     #
     class GetResourceConfigurationResponse < Struct.new(
@@ -2034,7 +2300,11 @@ module Aws::VPCLattice
       :created_at,
       :amazon_managed,
       :failure_reason,
-      :last_updated_at)
+      :last_updated_at,
+      :domain_verification_id,
+      :domain_verification_arn,
+      :domain_verification_status,
+      :group_domain)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2306,6 +2576,11 @@ module Aws::VPCLattice
     #   The private DNS entry for the service.
     #   @return [Types::DnsEntry]
     #
+    # @!attribute [rw] private_dns_enabled
+    #   Indicates if private DNS is enabled in the service network resource
+    #   association.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] dns_entry
     #   The DNS entry for the service.
     #   @return [Types::DnsEntry]
@@ -2313,6 +2588,11 @@ module Aws::VPCLattice
     # @!attribute [rw] is_managed_association
     #   Indicates whether the association is managed by Amazon.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] domain_verification_status
+    #   The domain verification status in the service network resource
+    #   association.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetServiceNetworkResourceAssociationResponse AWS API Documentation
     #
@@ -2332,8 +2612,10 @@ module Aws::VPCLattice
       :failure_code,
       :last_updated_at,
       :private_dns_entry,
+      :private_dns_enabled,
       :dns_entry,
-      :is_managed_association)
+      :is_managed_association,
+      :domain_verification_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2539,6 +2821,10 @@ module Aws::VPCLattice
     #   The IDs of the security groups.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] private_dns_enabled
+    #   Indicates if private DNS is enabled in the VPC association.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] failure_message
     #   The failure message.
     #   @return [String]
@@ -2551,6 +2837,10 @@ module Aws::VPCLattice
     #   The date and time that the association was last updated, in ISO-8601
     #   format.
     #   @return [Time]
+    #
+    # @!attribute [rw] dns_options
+    #   DNS options for the service network VPC association.
+    #   @return [Types::DnsOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetServiceNetworkVpcAssociationResponse AWS API Documentation
     #
@@ -2565,9 +2855,11 @@ module Aws::VPCLattice
       :service_network_arn,
       :vpc_id,
       :security_group_ids,
+      :private_dns_enabled,
       :failure_message,
       :failure_code,
-      :last_updated_at)
+      :last_updated_at,
+      :dns_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2960,6 +3252,40 @@ module Aws::VPCLattice
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListDomainVerificationsRequest AWS API Documentation
+    #
+    class ListDomainVerificationsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   Information about the domain verifications.
+    #   @return [Array<Types::DomainVerificationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListDomainVerificationsResponse AWS API Documentation
+    #
+    class ListDomainVerificationsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] service_identifier
     #   The ID or ARN of the service.
     #   @return [String]
@@ -3008,6 +3334,10 @@ module Aws::VPCLattice
     #   The ID of the resource configuration of type `Group`.
     #   @return [String]
     #
+    # @!attribute [rw] domain_verification_identifier
+    #   The domain verification ID.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   The maximum page size.
     #   @return [Integer]
@@ -3021,6 +3351,7 @@ module Aws::VPCLattice
     class ListResourceConfigurationsRequest < Struct.new(
       :resource_gateway_identifier,
       :resource_configuration_group_identifier,
+      :domain_verification_identifier,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -3866,6 +4197,21 @@ module Aws::VPCLattice
     #   updated, in ISO-8601 format.
     #   @return [Time]
     #
+    # @!attribute [rw] custom_domain_name
+    #   The custom domain name.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_verification_id
+    #   The domain verification ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_domain
+    #   (GROUP) The group domain for a group resource configuration. Any
+    #   domains that you create for the child resource are subdomains of the
+    #   group domain. Child resources inherit the verification status of the
+    #   domain.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ResourceConfigurationSummary AWS API Documentation
     #
     class ResourceConfigurationSummary < Struct.new(
@@ -3878,7 +4224,10 @@ module Aws::VPCLattice
       :status,
       :amazon_managed,
       :created_at,
-      :last_updated_at)
+      :last_updated_at,
+      :custom_domain_name,
+      :domain_verification_id,
+      :group_domain)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4341,6 +4690,11 @@ module Aws::VPCLattice
     #   The failure code.
     #   @return [String]
     #
+    # @!attribute [rw] private_dns_enabled
+    #   Indicates if private DNS is enabled for the service network resource
+    #   association.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ServiceNetworkResourceAssociationSummary AWS API Documentation
     #
     class ServiceNetworkResourceAssociationSummary < Struct.new(
@@ -4358,7 +4712,8 @@ module Aws::VPCLattice
       :dns_entry,
       :private_dns_entry,
       :is_managed_association,
-      :failure_code)
+      :failure_code,
+      :private_dns_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4528,6 +4883,15 @@ module Aws::VPCLattice
     #   The Amazon Resource Name (ARN) of the service network.
     #   @return [String]
     #
+    # @!attribute [rw] private_dns_enabled
+    #   Indicates if private DNS is enabled for the service network VPC
+    #   association.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dns_options
+    #   The DNS options for the service network VPC association.
+    #   @return [Types::DnsOptions]
+    #
     # @!attribute [rw] vpc_id
     #   The ID of the VPC.
     #   @return [String]
@@ -4548,6 +4912,8 @@ module Aws::VPCLattice
       :service_network_id,
       :service_network_name,
       :service_network_arn,
+      :private_dns_enabled,
+      :dns_options,
       :vpc_id,
       :last_updated_at)
       SENSITIVE = []
@@ -4647,6 +5013,67 @@ module Aws::VPCLattice
     #
     class SharingConfig < Struct.new(
       :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you retry a request that completed
+    #   successfully using the same client token and parameters, the retry
+    #   succeeds without performing any actions. If the parameters aren't
+    #   identical, the retry fails.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name to verify ownership for.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the domain verification.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/StartDomainVerificationRequest AWS API Documentation
+    #
+    class StartDomainVerificationRequest < Struct.new(
+      :client_token,
+      :domain_name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the domain verification.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the domain verification.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name being verified.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the domain verification process.
+    #   @return [String]
+    #
+    # @!attribute [rw] txt_method_config
+    #   The TXT record configuration used for domain verification.
+    #   @return [Types::TxtMethodConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/StartDomainVerificationResponse AWS API Documentation
+    #
+    class StartDomainVerificationResponse < Struct.new(
+      :id,
+      :arn,
+      :domain_name,
+      :status,
+      :txt_method_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4949,6 +5376,27 @@ module Aws::VPCLattice
       :service_code,
       :quota_code,
       :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for TXT record-based domain verification method.
+    #
+    # @!attribute [rw] value
+    #   The value that must be added to the TXT record for domain
+    #   verification.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the TXT record that must be created for domain
+    #   verification.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/TxtMethodConfig AWS API Documentation
+    #
+    class TxtMethodConfig < Struct.new(
+      :value,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end

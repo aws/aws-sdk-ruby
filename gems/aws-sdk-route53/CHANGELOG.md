@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2025-12-09)
+------------------
+
+* Feature - Amazon Route 53 now supports the EU (Germany) Region (eusc-de-east-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region
+
+1.127.0 (2025-11-25)
+------------------
+
+* Feature - Adds support for new route53 feature: accelerated recovery.
+
+1.126.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.125.0 (2025-11-19)
+------------------
+
+* Feature - Add dual-stack endpoint support for Route53
+
+1.124.0 (2025-10-22)
+------------------
+
+* Feature - Amazon Route 53 now supports the ISOB West Region for private DNS for Amazon VPCs and cloudwatch healthchecks.
+
+1.123.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.122.0 (2025-09-03)
 ------------------
 

@@ -133,6 +133,20 @@ module Aws::Athena
       SENSITIVE: []
     end
 
+    class Classification
+      attr_accessor name: ::String
+      attr_accessor properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CloudWatchLoggingConfiguration
+      attr_accessor enabled: bool
+      attr_accessor log_group: ::String
+      attr_accessor log_stream_name_prefix: ::String
+      attr_accessor log_types: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
     class Column
       attr_accessor name: ::String
       attr_accessor type: ::String
@@ -341,6 +355,7 @@ module Aws::Athena
       attr_accessor default_executor_dpu_size: ::Integer
       attr_accessor additional_configs: ::Hash[::String, ::String]
       attr_accessor spark_properties: ::Hash[::String, ::String]
+      attr_accessor classifications: ::Array[Types::Classification]
       SENSITIVE: []
     end
 
@@ -522,6 +537,28 @@ module Aws::Athena
       SENSITIVE: []
     end
 
+    class GetResourceDashboardRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceDashboardResponse
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class GetSessionEndpointRequest
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSessionEndpointResponse
+      attr_accessor endpoint_url: ::String
+      attr_accessor auth_token: ::String
+      attr_accessor auth_token_expiration_time: ::Time
+      SENSITIVE: []
+    end
+
     class GetSessionRequest
       attr_accessor session_id: ::String
       SENSITIVE: []
@@ -534,6 +571,7 @@ module Aws::Athena
       attr_accessor engine_version: ::String
       attr_accessor engine_configuration: Types::EngineConfiguration
       attr_accessor notebook_version: ::String
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration
       attr_accessor session_configuration: Types::SessionConfiguration
       attr_accessor status: Types::SessionStatus
       attr_accessor statistics: Types::SessionStatistics
@@ -819,6 +857,12 @@ module Aws::Athena
       SENSITIVE: []
     end
 
+    class ManagedLoggingConfiguration
+      attr_accessor enabled: bool
+      attr_accessor kms_key: ::String
+      SENSITIVE: []
+    end
+
     class ManagedQueryResultsConfiguration
       attr_accessor enabled: bool
       attr_accessor encryption_configuration: Types::ManagedQueryResultsEncryptionConfiguration
@@ -839,6 +883,13 @@ module Aws::Athena
 
     class MetadataException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MonitoringConfiguration
+      attr_accessor cloud_watch_logging_configuration: Types::CloudWatchLoggingConfiguration
+      attr_accessor managed_logging_configuration: Types::ManagedLoggingConfiguration
+      attr_accessor s3_logging_configuration: Types::S3LoggingConfiguration
       SENSITIVE: []
     end
 
@@ -926,6 +977,7 @@ module Aws::Athena
       attr_accessor query_planning_time_in_millis: ::Integer
       attr_accessor service_processing_time_in_millis: ::Integer
       attr_accessor result_reuse_information: Types::ResultReuseInformation
+      attr_accessor dpu_count: ::Float
       SENSITIVE: []
     end
 
@@ -1049,6 +1101,13 @@ module Aws::Athena
       SENSITIVE: []
     end
 
+    class S3LoggingConfiguration
+      attr_accessor enabled: bool
+      attr_accessor kms_key: ::String
+      attr_accessor log_location: ::String
+      SENSITIVE: []
+    end
+
     class SessionAlreadyExistsException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1058,6 +1117,7 @@ module Aws::Athena
       attr_accessor execution_role: ::String
       attr_accessor working_directory: ::String
       attr_accessor idle_timeout_seconds: ::Integer
+      attr_accessor session_idle_timeout_in_minutes: ::Integer
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
       SENSITIVE: []
     end
@@ -1109,6 +1169,7 @@ module Aws::Athena
       attr_accessor work_group: ::String
       attr_accessor execution_parameters: ::Array[::String]
       attr_accessor result_reuse_configuration: Types::ResultReuseConfiguration
+      attr_accessor engine_configuration: Types::EngineConfiguration
       SENSITIVE: []
     end
 
@@ -1121,9 +1182,13 @@ module Aws::Athena
       attr_accessor description: ::String
       attr_accessor work_group: ::String
       attr_accessor engine_configuration: Types::EngineConfiguration
+      attr_accessor execution_role: ::String
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration
       attr_accessor notebook_version: ::String
       attr_accessor session_idle_timeout_in_minutes: ::Integer
       attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor copy_work_group_tags: bool
       SENSITIVE: []
     end
 
@@ -1318,6 +1383,8 @@ module Aws::Athena
       attr_accessor engine_version: Types::EngineVersion
       attr_accessor additional_configuration: ::String
       attr_accessor execution_role: ::String
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration
+      attr_accessor engine_configuration: Types::EngineConfiguration
       attr_accessor customer_content_encryption_configuration: Types::CustomerContentEncryptionConfiguration
       attr_accessor enable_minimum_encryption_configuration: bool
       attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration
@@ -1340,6 +1407,8 @@ module Aws::Athena
       attr_accessor customer_content_encryption_configuration: Types::CustomerContentEncryptionConfiguration
       attr_accessor enable_minimum_encryption_configuration: bool
       attr_accessor query_results_s3_access_grants_configuration: Types::QueryResultsS3AccessGrantsConfiguration
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration
+      attr_accessor engine_configuration: Types::EngineConfiguration
       SENSITIVE: []
     end
 

@@ -574,6 +574,9 @@ module Aws::MedicalImaging
     # @option params [String] :lambda_authorizer_arn
     #   The ARN of the authorizer's Lambda function.
     #
+    # @option params [String] :lossless_storage_format
+    #   The lossless storage format for the datastore.
+    #
     # @return [Types::CreateDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDatastoreResponse#datastore_id #datastore_id} => String
@@ -589,6 +592,7 @@ module Aws::MedicalImaging
     #     },
     #     kms_key_arn: "KmsKeyArn",
     #     lambda_authorizer_arn: "LambdaArn",
+    #     lossless_storage_format: "HTJ2K", # accepts HTJ2K, JPEG_2000_LOSSLESS
     #   })
     #
     # @example Response structure
@@ -751,6 +755,7 @@ module Aws::MedicalImaging
     #   resp.datastore_properties.datastore_status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "DELETING", "DELETED"
     #   resp.datastore_properties.kms_key_arn #=> String
     #   resp.datastore_properties.lambda_authorizer_arn #=> String
+    #   resp.datastore_properties.lossless_storage_format #=> String, one of "HTJ2K", "JPEG_2000_LOSSLESS"
     #   resp.datastore_properties.datastore_arn #=> String
     #   resp.datastore_properties.created_at #=> Time
     #   resp.datastore_properties.updated_at #=> Time
@@ -829,6 +834,8 @@ module Aws::MedicalImaging
     #   * {Types::GetImageSetResponse#image_set_arn #image_set_arn} => String
     #   * {Types::GetImageSetResponse#overrides #overrides} => Types::Overrides
     #   * {Types::GetImageSetResponse#is_primary #is_primary} => Boolean
+    #   * {Types::GetImageSetResponse#last_accessed_at #last_accessed_at} => Time
+    #   * {Types::GetImageSetResponse#storage_tier #storage_tier} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -852,6 +859,8 @@ module Aws::MedicalImaging
     #   resp.image_set_arn #=> String
     #   resp.overrides.forced #=> Boolean
     #   resp.is_primary #=> Boolean
+    #   resp.last_accessed_at #=> Time
+    #   resp.storage_tier #=> String, one of "FREQUENT_ACCESS", "ARCHIVE_INSTANT_ACCESS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/GetImageSet AWS API Documentation
     #
@@ -1164,6 +1173,8 @@ module Aws::MedicalImaging
     #   resp.image_sets_metadata_summaries[0].version #=> Integer
     #   resp.image_sets_metadata_summaries[0].created_at #=> Time
     #   resp.image_sets_metadata_summaries[0].updated_at #=> Time
+    #   resp.image_sets_metadata_summaries[0].last_accessed_at #=> Time
+    #   resp.image_sets_metadata_summaries[0].storage_tier #=> String, one of "FREQUENT_ACCESS", "ARCHIVE_INSTANT_ACCESS"
     #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_patient_id #=> String
     #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_patient_name #=> String
     #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_patient_birth_date #=> String
@@ -1407,7 +1418,7 @@ module Aws::MedicalImaging
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medicalimaging'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2025-12-18)
+------------------
+
+* Feature - Added support for new operating systems (1) Ubuntu 24.04 Pro LTS on Elastic fleets, and (2) Microsoft Server 2025 on Always-On and On-Demand fleets
+
+1.123.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.122.0 (2025-11-17)
+------------------
+
+* Feature - Adding support for additional instances and extended storage
+
+1.121.0 (2025-11-10)
+------------------
+
+* Feature - AWS Appstream support for IPv6
+
+1.120.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.119.0 (2025-10-14)
+------------------
+
+* Feature - This release introduces support for Microsoft license included applications streaming.
+
 1.118.0 (2025-09-24)
 ------------------
 

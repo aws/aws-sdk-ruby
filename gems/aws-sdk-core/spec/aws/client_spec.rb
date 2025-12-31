@@ -208,6 +208,36 @@ Known AWS regions include (not specific to this service):
 
       end
 
+      describe 'protocol_helper' do
+        it 'returns configured protocol' do
+          service = ApiHelper.sample_service(metadata: { 'protocol' => 'query' })
+          client_class = ApiHelper.sample_client(service: service)
+          client = client_class.new(options)
+
+          helper = client.send(:protocol_helper)
+          expect(helper).to be_a(Aws::Stubbing::Protocols::Query)
+        end
+
+        it 'prioritizes Json over RpcV2 when both protocols are supported' do
+          service = ApiHelper.sample_service(
+            metadata: {
+              'protocol' => 'smithy-rpc-v2-cbor',
+              'protocols' => %w[smithy-rpc-v2-cbor json]
+            }
+          )
+          client_class = ApiHelper.sample_client(service: service)
+          client = client_class.new(options)
+
+          helper = client.send(:protocol_helper)
+          expect(helper).to be_a(Aws::Stubbing::Protocols::Json)
+        end
+
+        it 'raises error for unsupported protocol' do
+          expect do
+            ApiHelper.sample_service(metadata: { 'protocol' => 'unsupported' })
+          end.to raise_error(/unsupported protocol/)
+        end
+      end
     end
   end
 end

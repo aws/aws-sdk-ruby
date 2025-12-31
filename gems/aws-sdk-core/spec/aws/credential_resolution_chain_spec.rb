@@ -78,7 +78,7 @@ module Aws
           profile: 'assumerole_sc', region: 'us-east-1'
         )
         expect(client.config.credentials.credentials.access_key_id).to eq('AR_AKID')
-        expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i')
+        expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i', 'e')
       end
 
       it 'emits correct UserAgent metrics during STS call for assume role credentials' do
@@ -96,7 +96,7 @@ module Aws
         )
         expect_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
           resp = m.call(*args)
-          expect(metrics_from_user_agent_header(resp)).to include('o', 'n')
+          expect(metrics_from_user_agent_header(resp)).to include('o', 'n', 'e')
           resp
         end
         ApiHelper.sample_rest_xml::Client.new(
@@ -117,7 +117,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AR_AKID')
-        expect(metric_values(client.config.credentials.metrics)).to include('q', 'k')
+        expect(metric_values(client.config.credentials.metrics)).to include('q', 'k', 'e')
       end
 
       it 'emits correct UserAgent metrics during STS call for assume role web identity from profile' do
@@ -129,7 +129,7 @@ module Aws
         )
         expect_any_instance_of(STS::Client).to receive(:assume_role_with_web_identity).and_wrap_original do |m, *args|
           resp = m.call(*args)
-          expect(metrics_from_user_agent_header(resp)).to include('q')
+          expect(metrics_from_user_agent_header(resp)).to include('q', 'e')
           resp
         end
         ApiHelper.sample_rest_xml::Client.new(
@@ -188,14 +188,14 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('SSO_AKID')
-        expect(metric_values(client.config.credentials.metrics)).to include('r', 's')
+        expect(metric_values(client.config.credentials.metrics)).to include('r', 's', 'e')
       end
 
       it 'emits correct UserAgent metrics during SSO call for SSO' do
         sso_stub
         expect_any_instance_of(SSO::Client).to receive(:get_role_credentials).and_wrap_original do |m, *args|
           resp = m.call(*args)
-          expect(metrics_from_user_agent_header(resp)).to include('r')
+          expect(metrics_from_user_agent_header(resp)).to include('r', 'e')
           resp
         end
         ApiHelper.sample_rest_xml::Client.new(
@@ -212,14 +212,14 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('SSO_AKID')
-        expect(metric_values(client.config.credentials.metrics)).to include('t', 'u')
+        expect(metric_values(client.config.credentials.metrics)).to include('t', 'u', 'e')
       end
 
       it 'emits correct UserAgent metrics during SSO call for legacy SSO' do
         legacy_sso_stub
         expect_any_instance_of(SSO::Client).to receive(:get_role_credentials).and_wrap_original do |m, *args|
           resp = m.call(*args)
-          expect(metrics_from_user_agent_header(resp)).to include('t')
+          expect(metrics_from_user_agent_header(resp)).to include('t', 'e')
           resp
         end
         ApiHelper.sample_rest_xml::Client.new(
@@ -236,7 +236,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('SSO_AKID')
-        expect(metric_values(client.config.credentials.metrics)).to include('r', 's')
+        expect(metric_values(client.config.credentials.metrics)).to include('r', 's', 'e')
       end
 
       it 'loads SSO credentials from when the session name has quotes' do
@@ -248,7 +248,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('SSO_AKID')
-        expect(metric_values(client.config.credentials.metrics)).to include('r', 's')
+        expect(metric_values(client.config.credentials.metrics)).to include('r', 's', 'e')
       end
 
       it 'raises when attempting to load an incomplete SSO Profile' do
@@ -294,7 +294,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AR_AKID')
-        expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i')
+        expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i', 'e')
 
         sts_client = client.config.credentials.client
         expect(
@@ -309,7 +309,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('ACCESS_KEY_CRD')
-        expect(metric_values(client.config.credentials.metrics)).to include('n')
+        expect(metric_values(client.config.credentials.metrics)).to include('n', 'e')
       end
 
       it 'will source static credentials from shared config after shared credentials' do
@@ -319,7 +319,26 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('ACCESS_KEY_SC1')
-        expect(metric_values(client.config.credentials.metrics)).to include('n')
+        expect(metric_values(client.config.credentials.metrics)).to include('n', 'e')
+      end
+
+      it 'prefers login credentials from profile over env' do
+        mock_login_cached_token
+        stub_const(
+          'ENV',
+          'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
+          'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
+        )
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'creds_from_login', region: 'us-east-1')
+        expect(client.config.credentials.credentials.access_key_id).to eq('AK_LOGIN')
+        expect(metric_values(client.config.credentials.metrics)).to include('AD', 'AC', 'e')
+      end
+
+      it 'prefers login credentials over process' do
+        mock_login_cached_token
+        client = ApiHelper.sample_rest_xml::Client.new(profile: 'process_plus_login', region: 'us-east-1')
+        expect(client.config.credentials.credentials.access_key_id).to eq('AK_LOGIN')
+        expect(metric_values(client.config.credentials.metrics)).to include('AD', 'AC', 'e')
       end
 
       it 'prefers process credentials over metadata credentials' do
@@ -329,7 +348,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AK_PROC1')
-        expect(metric_values(client.config.credentials.metrics)).to include('v', 'w')
+        expect(metric_values(client.config.credentials.metrics)).to include('v', 'w', 'e')
       end
 
       it 'prefers direct credentials over process credentials when profile not set' do
@@ -359,7 +378,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AK_PROC1')
-        expect(metric_values(client.config.credentials.metrics)).to include('v', 'w')
+        expect(metric_values(client.config.credentials.metrics)).to include('v', 'w', 'e')
       end
 
       it 'attempts to fetch metadata credentials last using IMDS' do
@@ -390,7 +409,7 @@ module Aws
               "Token" : "session-token-md",
               "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
             }
-          JSON
+         JSON
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'nonexistant', region: 'us-east-1'
         )
@@ -459,7 +478,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
-          expect(metric_values(client.config.credentials.metrics)).to include('o', 'q', 'k', 'i')
+          expect(metric_values(client.config.credentials.metrics)).to include('o', 'q', 'k', 'i', 'e')
 
           sts_client = client.config.credentials.client
           expect(
@@ -483,12 +502,12 @@ module Aws
           )
           expect_any_instance_of(STS::Client).to receive(:assume_role_with_web_identity).and_wrap_original do |m, *args|
             resp = m.call(*args)
-            expect(metrics_from_user_agent_header(resp)).to include('o', 'q')
+            expect(metrics_from_user_agent_header(resp)).to include('o', 'q', 'e')
             resp
           end
           expect_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
             resp = m.call(*args)
-            expect(metrics_from_user_agent_header(resp)).to include('o', 'q', 'k')
+            expect(metrics_from_user_agent_header(resp)).to include('o', 'q', 'k', 'e')
             resp
           end
           ApiHelper.sample_rest_xml::Client.new(
@@ -511,7 +530,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AK_PROC1')
-          expect(metric_values(client.config.credentials.metrics)).to include('o', 'v', 'w', 'i')
+          expect(metric_values(client.config.credentials.metrics)).to include('o', 'v', 'w', 'i', 'e')
         end
 
         it 'emits correct UserAgent metrics during STS calls for :source_profile from process credentials' do
@@ -524,7 +543,7 @@ module Aws
           )
           expect_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
             resp = m.call(*args)
-            expect(metrics_from_user_agent_header(resp)).to include('o', 'v', 'w')
+            expect(metrics_from_user_agent_header(resp)).to include('o', 'v', 'w', 'e')
             resp
           end
           ApiHelper.sample_rest_xml::Client.new(
@@ -549,7 +568,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
-          expect(metric_values(client.config.credentials.metrics)).to include('o', 'r', 's', 'i')
+          expect(metric_values(client.config.credentials.metrics)).to include('o', 'r', 's', 'i', 'e')
         end
 
         it 'emits correct UserAgent metrics during service calls for :source_profile from sso credentials' do
@@ -564,12 +583,12 @@ module Aws
           )
           expect_any_instance_of(SSO::Client).to receive(:get_role_credentials).and_wrap_original do |m, *args|
             resp = m.call(*args)
-            expect(metrics_from_user_agent_header(resp)).to include('o', 'r')
+            expect(metrics_from_user_agent_header(resp)).to include('o', 'r', 'e')
             resp
           end
           expect_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
             resp = m.call(*args)
-            expect(metrics_from_user_agent_header(resp)).to include('o', 'r', 's')
+            expect(metrics_from_user_agent_header(resp)).to include('o', 'r', 's', 'e')
             resp
           end
           ApiHelper.sample_rest_xml::Client.new(
@@ -594,7 +613,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
-          expect(metric_values(client.config.credentials.metrics)).to include('o', 't', 'u', 'i')
+          expect(metric_values(client.config.credentials.metrics)).to include('o', 't', 'u', 'i', 'e')
         end
 
         it 'emits correct UserAgent metrics during STS calls for :source_profile from legacy sso credentials' do
@@ -609,12 +628,12 @@ module Aws
           )
           expect_any_instance_of(SSO::Client).to receive(:get_role_credentials).and_wrap_original do |m, *args|
             resp = m.call(*args)
-            expect(metrics_from_user_agent_header(resp)).to include('o', 't')
+            expect(metrics_from_user_agent_header(resp)).to include('o', 't', 'e')
             resp
           end
           expect_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
             resp = m.call(*args)
-            expect(metrics_from_user_agent_header(resp)).to include('o', 't', 'u')
+            expect(metrics_from_user_agent_header(resp)).to include('o', 't', 'u', 'e')
             resp
           end
           ApiHelper.sample_rest_xml::Client.new(
@@ -645,7 +664,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AK_2')
-          expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i')
+          expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i', 'e')
         end
 
         it 'emits correct UserAgent metrics during STS calls for assume role chaining' do
@@ -666,7 +685,7 @@ module Aws
           )
           allow_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
             resp = m.call(*args)
-            expect(metrics_from_user_agent_header(resp)).to include('o', 'n')
+            expect(metrics_from_user_agent_header(resp)).to include('o', 'n', 'e')
             resp
           end
           ApiHelper.sample_rest_xml::Client.new(
@@ -689,7 +708,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AK_2')
-          expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i')
+          expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i', 'e')
         end
 
         it 'uses static credentials when the profile self references' do
@@ -707,7 +726,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AK_2')
-          expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i')
+          expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i', 'e')
         end
 
         it 'raises if there is a loop in chained profiles' do
@@ -748,7 +767,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
-          expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i')
+          expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i', 'e')
         end
 
         it 'will then try to assume a role from shared config' do
@@ -765,7 +784,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
-          expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i')
+          expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i', 'e')
         end
 
         it 'assumes a role from config using source in shared credentials' do
@@ -782,7 +801,7 @@ module Aws
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
-          expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i')
+          expect(metric_values(client.config.credentials.metrics)).to include('o', 'n', 'i', 'e')
         end
 
         it 'allows region to be resolved when unspecified' do
@@ -848,7 +867,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AR_AKID')
-        expect(metric_values(client.config.credentials.metrics)).to include('p', '0', 'i')
+        expect(metric_values(client.config.credentials.metrics)).to include('p', '0', 'i', 'e')
       end
 
       it 'emits correct UserAgent metrics during STS calls for EC2 Instance Metadata as a source' do
@@ -887,7 +906,7 @@ module Aws
           .to_return(status: 200, body: resp)
         expect_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
           resp = m.call(*args)
-          expect(metrics_from_user_agent_header(resp)).to include('p', '0')
+          expect(metrics_from_user_agent_header(resp)).to include('p', '0', 'e')
           resp
         end
         ApiHelper.sample_rest_xml::Client.new(
@@ -925,7 +944,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AR_AKID')
-        expect(metric_values(client.config.credentials.metrics)).to include('p', 'z', 'i')
+        expect(metric_values(client.config.credentials.metrics)).to include('p', 'z', 'i', 'e')
       end
 
       it 'emits correct UserAgent metrics during STS calls for ECS Credentials as a source' do
@@ -952,7 +971,7 @@ module Aws
         )
         expect_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
           resp = m.call(*args)
-          expect(metrics_from_user_agent_header(resp)).to include('p', 'z')
+          expect(metrics_from_user_agent_header(resp)).to include('p', 'z', 'e')
           resp
         end
         ApiHelper.sample_rest_xml::Client.new(
@@ -982,7 +1001,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AR_AKID')
-        expect(metric_values(client.config.credentials.metrics)).to include('p', 'g', 'i')
+        expect(metric_values(client.config.credentials.metrics)).to include('p', 'g', 'i', 'e')
       end
 
       it 'emits correct UserAgent metrics during STS calls for ENV as a source' do
@@ -1001,7 +1020,7 @@ module Aws
         )
         expect_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
           resp = m.call(*args)
-          expect(metrics_from_user_agent_header(resp)).to include('p', 'g')
+          expect(metrics_from_user_agent_header(resp)).to include('p', 'g', 'e')
           resp
         end
         ApiHelper.sample_rest_xml::Client.new(
@@ -1067,7 +1086,7 @@ module Aws
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('ACCESS_KEY_1')
-        expect(metric_values(client.config.credentials.metrics)).to include('n')
+        expect(metric_values(client.config.credentials.metrics)).to include('n', 'e')
       end
 
       it 'will not load credentials from shared config' do
@@ -1211,6 +1230,25 @@ module Aws
     def legacy_sso_stub
       mock_sso_cached_token
       sso_stub
+    end
+
+    def mock_login_cached_token
+      cached_token = {
+        'accessToken' => {
+          'accessKeyId' => 'AK_LOGIN',
+          'secretAccessKey' => 'SECRET_AK_LOGIN',
+          'sessionToken' => 'TOKEN_LOGIN',
+          'accountId' => '0123456789012',
+          'expiresAt' => (Time.now.utc + 900).to_datetime.rfc3339
+        },
+        'tokenType' => 'aws_sigv4',
+        'refreshToken' => 'refresh_token',
+        'idToken' => 'identity_token',
+        'clientId' => 'arn:aws:signin:::devtools/same-device',
+        'dpopKey' => OpenSSL::PKey::EC.generate('prime256v1').to_pem
+      }
+      allow(Dir).to receive(:home).and_return('HOME')
+      expect(JSON).to receive(:load_file).and_return(cached_token)
     end
 
     def stub_token_file(token)

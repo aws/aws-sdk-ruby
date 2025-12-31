@@ -2943,7 +2943,7 @@ module Aws
       def delete_logging_configuration: (
                                           resource_arn: ::String,
                                           ?log_type: ("WAF_LOGS"),
-                                          ?log_scope: ("CUSTOMER" | "SECURITY_LAKE")
+                                          ?log_scope: ("CUSTOMER" | "SECURITY_LAKE" | "CLOUDWATCH_TELEMETRY_RULE_MANAGED")
                                         ) -> _DeleteLoggingConfigurationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLoggingConfigurationResponseSuccess
 
@@ -3085,7 +3085,7 @@ module Aws
       def get_logging_configuration: (
                                        resource_arn: ::String,
                                        ?log_type: ("WAF_LOGS"),
-                                       ?log_scope: ("CUSTOMER" | "SECURITY_LAKE")
+                                       ?log_scope: ("CUSTOMER" | "SECURITY_LAKE" | "CLOUDWATCH_TELEMETRY_RULE_MANAGED")
                                      ) -> _GetLoggingConfigurationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLoggingConfigurationResponseSuccess
 
@@ -3275,7 +3275,7 @@ module Aws
                                          scope: ("CLOUDFRONT" | "REGIONAL"),
                                          ?next_marker: ::String,
                                          ?limit: ::Integer,
-                                         ?log_scope: ("CUSTOMER" | "SECURITY_LAKE")
+                                         ?log_scope: ("CUSTOMER" | "SECURITY_LAKE" | "CLOUDWATCH_TELEMETRY_RULE_MANAGED")
                                        ) -> _ListLoggingConfigurationsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLoggingConfigurationsResponseSuccess
 
@@ -3461,7 +3461,7 @@ module Aws
                                            default_behavior: ("KEEP" | "DROP")
                                          }?,
                                          log_type: ("WAF_LOGS")?,
-                                         log_scope: ("CUSTOMER" | "SECURITY_LAKE")?
+                                         log_scope: ("CUSTOMER" | "SECURITY_LAKE" | "CLOUDWATCH_TELEMETRY_RULE_MANAGED")?
                                        }
                                      ) -> _PutLoggingConfigurationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLoggingConfigurationResponseSuccess

@@ -295,6 +295,150 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
+    # The branding configuration output including custom images metadata,
+    # localized strings, color theme, and terms of service.
+    #
+    # @!attribute [rw] logo
+    #   Metadata for the logo image file, including the MIME type, file
+    #   extension, and upload timestamp.
+    #   @return [Types::ImageMetadata]
+    #
+    # @!attribute [rw] wallpaper
+    #   Metadata for the wallpaper image file, including the MIME type, file
+    #   extension, and upload timestamp.
+    #   @return [Types::ImageMetadata]
+    #
+    # @!attribute [rw] favicon
+    #   Metadata for the favicon image file, including the MIME type, file
+    #   extension, and upload timestamp.
+    #   @return [Types::ImageMetadata]
+    #
+    # @!attribute [rw] localized_strings
+    #   A map of localized text strings for different languages, allowing
+    #   the portal to display content in the user's preferred language.
+    #   @return [Hash<String,Types::LocalizedBrandingStrings>]
+    #
+    # @!attribute [rw] color_theme
+    #   The color theme for components on the web portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] terms_of_service
+    #   The terms of service text in Markdown format that users must accept
+    #   before accessing the portal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/BrandingConfiguration AWS API Documentation
+    #
+    class BrandingConfiguration < Struct.new(
+      :logo,
+      :wallpaper,
+      :favicon,
+      :localized_strings,
+      :color_theme,
+      :terms_of_service)
+      SENSITIVE = [:terms_of_service]
+      include Aws::Structure
+    end
+
+    # The input configuration for creating branding settings.
+    #
+    # @!attribute [rw] logo
+    #   The logo image for the portal. Provide either a binary image file or
+    #   an S3 URI pointing to the image file. Maximum 100 KB in JPEG, PNG,
+    #   or ICO format.
+    #   @return [Types::IconImageInput]
+    #
+    # @!attribute [rw] wallpaper
+    #   The wallpaper image for the portal. Provide either a binary image
+    #   file or an S3 URI pointing to the image file. Maximum 5 MB in JPEG
+    #   or PNG format.
+    #   @return [Types::WallpaperImageInput]
+    #
+    # @!attribute [rw] favicon
+    #   The favicon image for the portal. Provide either a binary image file
+    #   or an S3 URI pointing to the image file. Maximum 100 KB in JPEG,
+    #   PNG, or ICO format.
+    #   @return [Types::IconImageInput]
+    #
+    # @!attribute [rw] localized_strings
+    #   A map of localized text strings for different supported languages.
+    #   Each locale must provide the required fields `browserTabTitle` and
+    #   `welcomeText`.
+    #   @return [Hash<String,Types::LocalizedBrandingStrings>]
+    #
+    # @!attribute [rw] color_theme
+    #   The color theme for components on the web portal. Choose `Light` if
+    #   you upload a dark wallpaper, or `Dark` for a light wallpaper.
+    #   @return [String]
+    #
+    # @!attribute [rw] terms_of_service
+    #   The terms of service text in Markdown format. Users will be
+    #   presented with the terms of service after successfully signing in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/BrandingConfigurationCreateInput AWS API Documentation
+    #
+    class BrandingConfigurationCreateInput < Struct.new(
+      :logo,
+      :wallpaper,
+      :favicon,
+      :localized_strings,
+      :color_theme,
+      :terms_of_service)
+      SENSITIVE = [:terms_of_service]
+      include Aws::Structure
+    end
+
+    # The input configuration for updating branding settings. All fields are
+    # optional when updating existing branding.
+    #
+    # @!attribute [rw] logo
+    #   The logo image for the portal. Provide either a binary image file or
+    #   an S3 URI pointing to the image file. Maximum 100 KB in JPEG, PNG,
+    #   or ICO format.
+    #   @return [Types::IconImageInput]
+    #
+    # @!attribute [rw] wallpaper
+    #   The wallpaper image for the portal. Provide either a binary image
+    #   file or an S3 URI pointing to the image file. Maximum 5 MB in JPEG
+    #   or PNG format.
+    #   @return [Types::WallpaperImageInput]
+    #
+    # @!attribute [rw] favicon
+    #   The favicon image for the portal. Provide either a binary image file
+    #   or an S3 URI pointing to the image file. Maximum 100 KB in JPEG,
+    #   PNG, or ICO format.
+    #   @return [Types::IconImageInput]
+    #
+    # @!attribute [rw] localized_strings
+    #   A map of localized text strings for different supported languages.
+    #   Each locale must provide the required fields `browserTabTitle` and
+    #   `welcomeText`.
+    #   @return [Hash<String,Types::LocalizedBrandingStrings>]
+    #
+    # @!attribute [rw] color_theme
+    #   The color theme for components on the web portal. Choose `Light` if
+    #   you upload a dark wallpaper, or `Dark` for a light wallpaper.
+    #   @return [String]
+    #
+    # @!attribute [rw] terms_of_service
+    #   The terms of service text in Markdown format. To remove existing
+    #   terms of service, provide an empty string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/BrandingConfigurationUpdateInput AWS API Documentation
+    #
+    class BrandingConfigurationUpdateInput < Struct.new(
+      :logo,
+      :wallpaper,
+      :favicon,
+      :localized_strings,
+      :color_theme,
+      :terms_of_service)
+      SENSITIVE = [:terms_of_service]
+      include Aws::Structure
+    end
+
     # The browser settings resource that can be associated with a web
     # portal. Once associated with a web portal, browser settings control
     # how the browser will behave once a user starts a streaming session for
@@ -323,6 +467,12 @@ module Aws::WorkSpacesWeb
     #   The additional encryption context of the browser settings.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] web_content_filtering_policy
+    #   The policy that specifies which URLs end users are allowed to access
+    #   or which URLs or domain categories they are restricted from
+    #   accessing for enhanced security.
+    #   @return [Types::WebContentFilteringPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/BrowserSettings AWS API Documentation
     #
     class BrowserSettings < Struct.new(
@@ -330,7 +480,8 @@ module Aws::WorkSpacesWeb
       :associated_portal_arns,
       :browser_policy,
       :customer_managed_key,
-      :additional_encryption_context)
+      :additional_encryption_context,
+      :web_content_filtering_policy)
       SENSITIVE = [:browser_policy]
       include Aws::Structure
     end
@@ -524,6 +675,12 @@ module Aws::WorkSpacesWeb
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] web_content_filtering_policy
+    #   The policy that specifies which URLs end users are allowed to access
+    #   or which URLs or domain categories they are restricted from
+    #   accessing for enhanced security.
+    #   @return [Types::WebContentFilteringPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/CreateBrowserSettingsRequest AWS API Documentation
     #
     class CreateBrowserSettingsRequest < Struct.new(
@@ -531,7 +688,8 @@ module Aws::WorkSpacesWeb
       :customer_managed_key,
       :additional_encryption_context,
       :browser_policy,
-      :client_token)
+      :client_token,
+      :web_content_filtering_policy)
       SENSITIVE = [:tags, :browser_policy]
       include Aws::Structure
     end
@@ -1191,6 +1349,18 @@ module Aws::WorkSpacesWeb
     #   settings, end users retain control over their toolbar preferences.
     #   @return [Types::ToolbarConfiguration]
     #
+    # @!attribute [rw] branding_configuration_input
+    #   The branding configuration input that customizes the appearance of
+    #   the web portal for end users. This includes a custom logo, favicon,
+    #   wallpaper, localized strings, color theme, and an optional terms of
+    #   service.
+    #   @return [Types::BrandingConfigurationCreateInput]
+    #
+    # @!attribute [rw] web_authn_allowed
+    #   Specifies whether the user can use WebAuthn redirection for
+    #   passwordless login to websites within the streaming session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/CreateUserSettingsRequest AWS API Documentation
     #
     class CreateUserSettingsRequest < Struct.new(
@@ -1207,7 +1377,9 @@ module Aws::WorkSpacesWeb
       :customer_managed_key,
       :additional_encryption_context,
       :deep_link_allowed,
-      :toolbar_configuration)
+      :toolbar_configuration,
+      :branding_configuration_input,
+      :web_authn_allowed)
       SENSITIVE = [:tags, :cookie_synchronization_configuration]
       include Aws::Structure
     end
@@ -2016,6 +2188,37 @@ module Aws::WorkSpacesWeb
       include Aws::Structure
     end
 
+    # The input for an icon image (logo or favicon). Provide either a binary
+    # image file or an S3 URI pointing to the image file. Maximum 100 KB in
+    # JPEG, PNG, or ICO format.
+    #
+    # @note IconImageInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] blob
+    #   The image provided as a binary image file.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   The S3 URI pointing to the image file. The URI must use the format
+    #   `s3://bucket-name/key-name`. You must have read access to the S3
+    #   object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/IconImageInput AWS API Documentation
+    #
+    class IconImageInput < Struct.new(
+      :blob,
+      :s3_uri,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Blob < IconImageInput; end
+      class S3Uri < IconImageInput; end
+      class Unknown < IconImageInput; end
+    end
+
     # The identity provider.
     #
     # @!attribute [rw] identity_provider_arn
@@ -2130,6 +2333,30 @@ module Aws::WorkSpacesWeb
       :identity_provider_name,
       :identity_provider_type)
       SENSITIVE = [:identity_provider_name]
+      include Aws::Structure
+    end
+
+    # Metadata information about an uploaded image file.
+    #
+    # @!attribute [rw] mime_type
+    #   The MIME type of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_extension
+    #   The file extension of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_upload_timestamp
+    #   The timestamp when the image was last uploaded.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ImageMetadata AWS API Documentation
+    #
+    class ImageMetadata < Struct.new(
+      :mime_type,
+      :file_extension,
+      :last_upload_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2839,6 +3066,63 @@ module Aws::WorkSpacesWeb
     class ListUserSettingsResponse < Struct.new(
       :user_settings,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Localized text strings for a specific language that customize the web
+    # portal.
+    #
+    # @!attribute [rw] browser_tab_title
+    #   The text displayed in the browser tab title.
+    #   @return [String]
+    #
+    # @!attribute [rw] welcome_text
+    #   The welcome text displayed on the sign-in page.
+    #   @return [String]
+    #
+    # @!attribute [rw] login_title
+    #   The title text for the login section. This field is optional and
+    #   defaults to "Sign In".
+    #   @return [String]
+    #
+    # @!attribute [rw] login_description
+    #   The description text for the login section. This field is optional
+    #   and defaults to "Sign in to your session".
+    #   @return [String]
+    #
+    # @!attribute [rw] login_button_text
+    #   The text displayed on the login button. This field is optional and
+    #   defaults to "Sign In".
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_link
+    #   A contact link URL. The URL must start with `https://` or `mailto:`.
+    #   If not provided, the contact button will be hidden from the web
+    #   portal screen.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_button_text
+    #   The text displayed on the contact button. This field is optional and
+    #   defaults to "Contact us".
+    #   @return [String]
+    #
+    # @!attribute [rw] loading_text
+    #   The text displayed during session loading. This field is optional
+    #   and defaults to "Loading your session".
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/LocalizedBrandingStrings AWS API Documentation
+    #
+    class LocalizedBrandingStrings < Struct.new(
+      :browser_tab_title,
+      :welcome_text,
+      :login_title,
+      :login_description,
+      :login_button_text,
+      :contact_link,
+      :contact_button_text,
+      :loading_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3661,12 +3945,19 @@ module Aws::WorkSpacesWeb
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] web_content_filtering_policy
+    #   The policy that specifies which URLs end users are allowed to access
+    #   or which URLs or domain categories they are restricted from
+    #   accessing for enhanced security.
+    #   @return [Types::WebContentFilteringPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateBrowserSettingsRequest AWS API Documentation
     #
     class UpdateBrowserSettingsRequest < Struct.new(
       :browser_settings_arn,
       :browser_policy,
-      :client_token)
+      :client_token,
+      :web_content_filtering_policy)
       SENSITIVE = [:browser_policy]
       include Aws::Structure
     end
@@ -4231,6 +4522,20 @@ module Aws::WorkSpacesWeb
     #   settings, end users retain control over their toolbar preferences.
     #   @return [Types::ToolbarConfiguration]
     #
+    # @!attribute [rw] branding_configuration_input
+    #   The branding configuration that customizes the appearance of the web
+    #   portal for end users. When updating user settings without an
+    #   existing branding configuration, all fields (logo, favicon,
+    #   wallpaper, localized strings, and color theme) are required except
+    #   for terms of service. When updating user settings with an existing
+    #   branding configuration, all fields are optional.
+    #   @return [Types::BrandingConfigurationUpdateInput]
+    #
+    # @!attribute [rw] web_authn_allowed
+    #   Specifies whether the user can use WebAuthn redirection for
+    #   passwordless login to websites within the streaming session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateUserSettingsRequest AWS API Documentation
     #
     class UpdateUserSettingsRequest < Struct.new(
@@ -4245,7 +4550,9 @@ module Aws::WorkSpacesWeb
       :client_token,
       :cookie_synchronization_configuration,
       :deep_link_allowed,
-      :toolbar_configuration)
+      :toolbar_configuration,
+      :branding_configuration_input,
+      :web_authn_allowed)
       SENSITIVE = [:cookie_synchronization_configuration]
       include Aws::Structure
     end
@@ -4383,6 +4690,16 @@ module Aws::WorkSpacesWeb
     #   settings, end users retain control over their toolbar preferences.
     #   @return [Types::ToolbarConfiguration]
     #
+    # @!attribute [rw] branding_configuration
+    #   The branding configuration output that customizes the appearance of
+    #   the web portal for end users.
+    #   @return [Types::BrandingConfiguration]
+    #
+    # @!attribute [rw] web_authn_allowed
+    #   Specifies whether the user can use WebAuthn redirection for
+    #   passwordless login to websites within the streaming session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UserSettings AWS API Documentation
     #
     class UserSettings < Struct.new(
@@ -4399,7 +4716,9 @@ module Aws::WorkSpacesWeb
       :customer_managed_key,
       :additional_encryption_context,
       :deep_link_allowed,
-      :toolbar_configuration)
+      :toolbar_configuration,
+      :branding_configuration,
+      :web_authn_allowed)
       SENSITIVE = [:cookie_synchronization_configuration]
       include Aws::Structure
     end
@@ -4464,6 +4783,16 @@ module Aws::WorkSpacesWeb
     #   settings, end users retain control over their toolbar preferences.
     #   @return [Types::ToolbarConfiguration]
     #
+    # @!attribute [rw] branding_configuration
+    #   The branding configuration output that customizes the appearance of
+    #   the web portal for end users.
+    #   @return [Types::BrandingConfiguration]
+    #
+    # @!attribute [rw] web_authn_allowed
+    #   Specifies whether the user can use WebAuthn redirection for
+    #   passwordless login to websites within the streaming session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UserSettingsSummary AWS API Documentation
     #
     class UserSettingsSummary < Struct.new(
@@ -4477,7 +4806,9 @@ module Aws::WorkSpacesWeb
       :idle_disconnect_timeout_in_minutes,
       :cookie_synchronization_configuration,
       :deep_link_allowed,
-      :toolbar_configuration)
+      :toolbar_configuration,
+      :branding_configuration,
+      :web_authn_allowed)
       SENSITIVE = [:cookie_synchronization_configuration]
       include Aws::Structure
     end
@@ -4522,6 +4853,62 @@ module Aws::WorkSpacesWeb
       :name,
       :message)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input for a wallpaper image. Provide the image as either a binary
+    # image file or an S3 URI. Maximum 5 MB in JPEG or PNG format.
+    #
+    # @note WallpaperImageInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] blob
+    #   The image provided as a binary image file.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   The S3 URI pointing to the image file. The URI must use the format
+    #   `s3://bucket-name/key-name`. You must have read access to the S3
+    #   object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/WallpaperImageInput AWS API Documentation
+    #
+    class WallpaperImageInput < Struct.new(
+      :blob,
+      :s3_uri,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Blob < WallpaperImageInput; end
+      class S3Uri < WallpaperImageInput; end
+      class Unknown < WallpaperImageInput; end
+    end
+
+    # The policy that specifies which URLs end users are allowed to access
+    # or which URLs or domain categories they are restricted from accessing
+    # for enhanced security.
+    #
+    # @!attribute [rw] blocked_categories
+    #   Categories of websites that are blocked on the end user’s browsers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_urls
+    #   URLs and domains that are always accessible to end users.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] blocked_urls
+    #   URLs and domains that end users cannot access.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/WebContentFilteringPolicy AWS API Documentation
+    #
+    class WebContentFilteringPolicy < Struct.new(
+      :blocked_categories,
+      :allowed_urls,
+      :blocked_urls)
+      SENSITIVE = [:allowed_urls, :blocked_urls]
       include Aws::Structure
     end
 

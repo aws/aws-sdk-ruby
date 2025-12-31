@@ -25,7 +25,7 @@ The endpoint provider used to resolve endpoints. Any object that responds to
 
       option(
         :disable_s3_express_session_auth,
-        doc_type: 'Boolean',
+        doc_type: 'boolean',
         docstring: <<~DOCS) do |cfg|
 Parameter to indicate whether S3Express session auth should be disabled
         DOCS

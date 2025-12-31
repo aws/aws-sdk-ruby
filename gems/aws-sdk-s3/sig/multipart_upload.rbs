@@ -33,7 +33,7 @@ module Aws
       def initiated: () -> ::Time
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/MultipartUpload.html#storage_class-instance_method
-      def storage_class: () -> ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS")
+      def storage_class: () -> ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/MultipartUpload.html#owner-instance_method
       def owner: () -> Types::Owner

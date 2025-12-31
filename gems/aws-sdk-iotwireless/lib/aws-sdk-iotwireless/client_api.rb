@@ -559,13 +559,16 @@ module Aws::IoTWireless
     SidewalkGetStartImportInfo = Shapes::StructureShape.new(name: 'SidewalkGetStartImportInfo')
     SidewalkId = Shapes::StringShape.new(name: 'SidewalkId')
     SidewalkListDevice = Shapes::StructureShape.new(name: 'SidewalkListDevice')
+    SidewalkListDevicesForImportInfo = Shapes::StructureShape.new(name: 'SidewalkListDevicesForImportInfo')
     SidewalkManufacturingSn = Shapes::StringShape.new(name: 'SidewalkManufacturingSn')
+    SidewalkPositioning = Shapes::StructureShape.new(name: 'SidewalkPositioning')
     SidewalkResourceTypeEventConfiguration = Shapes::StructureShape.new(name: 'SidewalkResourceTypeEventConfiguration')
     SidewalkSendDataToDevice = Shapes::StructureShape.new(name: 'SidewalkSendDataToDevice')
     SidewalkSingleStartImportInfo = Shapes::StructureShape.new(name: 'SidewalkSingleStartImportInfo')
     SidewalkStartImportInfo = Shapes::StructureShape.new(name: 'SidewalkStartImportInfo')
     SidewalkUpdateAccount = Shapes::StructureShape.new(name: 'SidewalkUpdateAccount')
     SidewalkUpdateImportInfo = Shapes::StructureShape.new(name: 'SidewalkUpdateImportInfo')
+    SidewalkUpdateWirelessDevice = Shapes::StructureShape.new(name: 'SidewalkUpdateWirelessDevice')
     SigningAlg = Shapes::StringShape.new(name: 'SigningAlg')
     StartBulkAssociateWirelessDeviceWithMulticastGroupRequest = Shapes::StructureShape.new(name: 'StartBulkAssociateWirelessDeviceWithMulticastGroupRequest')
     StartBulkAssociateWirelessDeviceWithMulticastGroupResponse = Shapes::StructureShape.new(name: 'StartBulkAssociateWirelessDeviceWithMulticastGroupResponse')
@@ -1367,6 +1370,7 @@ module Aws::IoTWireless
     GetWirelessDeviceImportTaskResponse.add_member(:id, Shapes::ShapeRef.new(shape: ImportTaskId, location_name: "Id"))
     GetWirelessDeviceImportTaskResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ImportTaskArn, location_name: "Arn"))
     GetWirelessDeviceImportTaskResponse.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, location_name: "DestinationName"))
+    GetWirelessDeviceImportTaskResponse.add_member(:positioning, Shapes::ShapeRef.new(shape: PositioningConfigStatus, location_name: "Positioning"))
     GetWirelessDeviceImportTaskResponse.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkGetStartImportInfo, location_name: "Sidewalk"))
     GetWirelessDeviceImportTaskResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
     GetWirelessDeviceImportTaskResponse.add_member(:status, Shapes::ShapeRef.new(shape: ImportTaskStatus, location_name: "Status"))
@@ -1545,6 +1549,8 @@ module Aws::IoTWireless
 
     ListDevicesForWirelessDeviceImportTaskResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDevicesForWirelessDeviceImportTaskResponse.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, location_name: "DestinationName"))
+    ListDevicesForWirelessDeviceImportTaskResponse.add_member(:positioning, Shapes::ShapeRef.new(shape: PositioningConfigStatus, location_name: "Positioning"))
+    ListDevicesForWirelessDeviceImportTaskResponse.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkListDevicesForImportInfo, location_name: "Sidewalk"))
     ListDevicesForWirelessDeviceImportTaskResponse.add_member(:imported_wireless_device_list, Shapes::ShapeRef.new(shape: ImportedWirelessDeviceList, location_name: "ImportedWirelessDeviceList"))
     ListDevicesForWirelessDeviceImportTaskResponse.struct_class = Types::ListDevicesForWirelessDeviceImportTaskResponse
 
@@ -2057,6 +2063,8 @@ module Aws::IoTWireless
     SidewalkCreateDeviceProfile.struct_class = Types::SidewalkCreateDeviceProfile
 
     SidewalkCreateWirelessDevice.add_member(:device_profile_id, Shapes::ShapeRef.new(shape: DeviceProfileId, location_name: "DeviceProfileId"))
+    SidewalkCreateWirelessDevice.add_member(:positioning, Shapes::ShapeRef.new(shape: SidewalkPositioning, location_name: "Positioning"))
+    SidewalkCreateWirelessDevice.add_member(:sidewalk_manufacturing_sn, Shapes::ShapeRef.new(shape: SidewalkManufacturingSn, location_name: "SidewalkManufacturingSn"))
     SidewalkCreateWirelessDevice.struct_class = Types::SidewalkCreateWirelessDevice
 
     SidewalkDevice.add_member(:amazon_id, Shapes::ShapeRef.new(shape: AmazonId, location_name: "AmazonId"))
@@ -2067,6 +2075,7 @@ module Aws::IoTWireless
     SidewalkDevice.add_member(:device_profile_id, Shapes::ShapeRef.new(shape: DeviceProfileId, location_name: "DeviceProfileId"))
     SidewalkDevice.add_member(:certificate_id, Shapes::ShapeRef.new(shape: DakCertificateId, location_name: "CertificateId"))
     SidewalkDevice.add_member(:status, Shapes::ShapeRef.new(shape: WirelessDeviceSidewalkStatus, location_name: "Status"))
+    SidewalkDevice.add_member(:positioning, Shapes::ShapeRef.new(shape: SidewalkPositioning, location_name: "Positioning"))
     SidewalkDevice.struct_class = Types::SidewalkDevice
 
     SidewalkDeviceMetadata.add_member(:rssi, Shapes::ShapeRef.new(shape: Integer, location_name: "Rssi"))
@@ -2085,6 +2094,7 @@ module Aws::IoTWireless
 
     SidewalkGetStartImportInfo.add_member(:device_creation_file_list, Shapes::ShapeRef.new(shape: DeviceCreationFileList, location_name: "DeviceCreationFileList"))
     SidewalkGetStartImportInfo.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
+    SidewalkGetStartImportInfo.add_member(:positioning, Shapes::ShapeRef.new(shape: SidewalkPositioning, location_name: "Positioning"))
     SidewalkGetStartImportInfo.struct_class = Types::SidewalkGetStartImportInfo
 
     SidewalkListDevice.add_member(:amazon_id, Shapes::ShapeRef.new(shape: AmazonId, location_name: "AmazonId"))
@@ -2093,7 +2103,14 @@ module Aws::IoTWireless
     SidewalkListDevice.add_member(:device_certificates, Shapes::ShapeRef.new(shape: DeviceCertificateList, location_name: "DeviceCertificates"))
     SidewalkListDevice.add_member(:device_profile_id, Shapes::ShapeRef.new(shape: DeviceProfileId, location_name: "DeviceProfileId"))
     SidewalkListDevice.add_member(:status, Shapes::ShapeRef.new(shape: WirelessDeviceSidewalkStatus, location_name: "Status"))
+    SidewalkListDevice.add_member(:positioning, Shapes::ShapeRef.new(shape: SidewalkPositioning, location_name: "Positioning"))
     SidewalkListDevice.struct_class = Types::SidewalkListDevice
+
+    SidewalkListDevicesForImportInfo.add_member(:positioning, Shapes::ShapeRef.new(shape: SidewalkPositioning, location_name: "Positioning"))
+    SidewalkListDevicesForImportInfo.struct_class = Types::SidewalkListDevicesForImportInfo
+
+    SidewalkPositioning.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, location_name: "DestinationName"))
+    SidewalkPositioning.struct_class = Types::SidewalkPositioning
 
     SidewalkResourceTypeEventConfiguration.add_member(:wireless_device_event_topic, Shapes::ShapeRef.new(shape: EventNotificationTopicStatus, location_name: "WirelessDeviceEventTopic"))
     SidewalkResourceTypeEventConfiguration.struct_class = Types::SidewalkResourceTypeEventConfiguration
@@ -2104,10 +2121,12 @@ module Aws::IoTWireless
     SidewalkSendDataToDevice.struct_class = Types::SidewalkSendDataToDevice
 
     SidewalkSingleStartImportInfo.add_member(:sidewalk_manufacturing_sn, Shapes::ShapeRef.new(shape: SidewalkManufacturingSn, location_name: "SidewalkManufacturingSn"))
+    SidewalkSingleStartImportInfo.add_member(:positioning, Shapes::ShapeRef.new(shape: SidewalkPositioning, location_name: "Positioning"))
     SidewalkSingleStartImportInfo.struct_class = Types::SidewalkSingleStartImportInfo
 
     SidewalkStartImportInfo.add_member(:device_creation_file, Shapes::ShapeRef.new(shape: DeviceCreationFile, location_name: "DeviceCreationFile"))
     SidewalkStartImportInfo.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
+    SidewalkStartImportInfo.add_member(:positioning, Shapes::ShapeRef.new(shape: SidewalkPositioning, location_name: "Positioning"))
     SidewalkStartImportInfo.struct_class = Types::SidewalkStartImportInfo
 
     SidewalkUpdateAccount.add_member(:app_server_private_key, Shapes::ShapeRef.new(shape: AppServerPrivateKey, location_name: "AppServerPrivateKey"))
@@ -2115,6 +2134,9 @@ module Aws::IoTWireless
 
     SidewalkUpdateImportInfo.add_member(:device_creation_file, Shapes::ShapeRef.new(shape: DeviceCreationFile, location_name: "DeviceCreationFile"))
     SidewalkUpdateImportInfo.struct_class = Types::SidewalkUpdateImportInfo
+
+    SidewalkUpdateWirelessDevice.add_member(:positioning, Shapes::ShapeRef.new(shape: SidewalkPositioning, location_name: "Positioning"))
+    SidewalkUpdateWirelessDevice.struct_class = Types::SidewalkUpdateWirelessDevice
 
     StartBulkAssociateWirelessDeviceWithMulticastGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, required: true, location: "uri", location_name: "Id"))
     StartBulkAssociateWirelessDeviceWithMulticastGroupRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, location_name: "QueryString"))
@@ -2146,6 +2168,7 @@ module Aws::IoTWireless
     StartSingleWirelessDeviceImportTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     StartSingleWirelessDeviceImportTaskRequest.add_member(:device_name, Shapes::ShapeRef.new(shape: DeviceName, location_name: "DeviceName"))
     StartSingleWirelessDeviceImportTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartSingleWirelessDeviceImportTaskRequest.add_member(:positioning, Shapes::ShapeRef.new(shape: PositioningConfigStatus, location_name: "Positioning"))
     StartSingleWirelessDeviceImportTaskRequest.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkSingleStartImportInfo, required: true, location_name: "Sidewalk"))
     StartSingleWirelessDeviceImportTaskRequest.struct_class = Types::StartSingleWirelessDeviceImportTaskRequest
 
@@ -2156,6 +2179,7 @@ module Aws::IoTWireless
     StartWirelessDeviceImportTaskRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location_name: "DestinationName"))
     StartWirelessDeviceImportTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
     StartWirelessDeviceImportTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartWirelessDeviceImportTaskRequest.add_member(:positioning, Shapes::ShapeRef.new(shape: PositioningConfigStatus, location_name: "Positioning"))
     StartWirelessDeviceImportTaskRequest.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkStartImportInfo, required: true, location_name: "Sidewalk"))
     StartWirelessDeviceImportTaskRequest.struct_class = Types::StartWirelessDeviceImportTaskRequest
 
@@ -2380,6 +2404,7 @@ module Aws::IoTWireless
     UpdateWirelessDeviceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateWirelessDeviceRequest.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANUpdateDevice, location_name: "LoRaWAN"))
     UpdateWirelessDeviceRequest.add_member(:positioning, Shapes::ShapeRef.new(shape: PositioningConfigStatus, location_name: "Positioning"))
+    UpdateWirelessDeviceRequest.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkUpdateWirelessDevice, location_name: "Sidewalk"))
     UpdateWirelessDeviceRequest.struct_class = Types::UpdateWirelessDeviceRequest
 
     UpdateWirelessDeviceResponse.struct_class = Types::UpdateWirelessDeviceResponse
@@ -2447,6 +2472,7 @@ module Aws::IoTWireless
     WirelessDeviceImportTask.add_member(:id, Shapes::ShapeRef.new(shape: ImportTaskId, location_name: "Id"))
     WirelessDeviceImportTask.add_member(:arn, Shapes::ShapeRef.new(shape: ImportTaskArn, location_name: "Arn"))
     WirelessDeviceImportTask.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, location_name: "DestinationName"))
+    WirelessDeviceImportTask.add_member(:positioning, Shapes::ShapeRef.new(shape: PositioningConfigStatus, location_name: "Positioning"))
     WirelessDeviceImportTask.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkGetStartImportInfo, location_name: "Sidewalk"))
     WirelessDeviceImportTask.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
     WirelessDeviceImportTask.add_member(:status, Shapes::ShapeRef.new(shape: ImportTaskStatus, location_name: "Status"))
@@ -2479,6 +2505,7 @@ module Aws::IoTWireless
     WirelessDeviceStatistics.add_member(:fuota_device_status, Shapes::ShapeRef.new(shape: FuotaDeviceStatus, location_name: "FuotaDeviceStatus"))
     WirelessDeviceStatistics.add_member(:multicast_device_status, Shapes::ShapeRef.new(shape: MulticastDeviceStatus, location_name: "MulticastDeviceStatus"))
     WirelessDeviceStatistics.add_member(:mc_group_id, Shapes::ShapeRef.new(shape: McGroupId, location_name: "McGroupId"))
+    WirelessDeviceStatistics.add_member(:positioning, Shapes::ShapeRef.new(shape: PositioningConfigStatus, location_name: "Positioning"))
     WirelessDeviceStatistics.struct_class = Types::WirelessDeviceStatistics
 
     WirelessDeviceStatisticsList.member = Shapes::ShapeRef.new(shape: WirelessDeviceStatistics)

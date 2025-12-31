@@ -26,7 +26,7 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] handshake_id
-    #   The unique identifier (ID) of the handshake that you want to accept.
+    #   ID for the handshake that you want to accept.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
     #   followed by from 8 to 32 lowercase letters or digits.
@@ -45,7 +45,7 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] handshake
-    #   A structure that contains details about the accepted handshake.
+    #   A `Handshake` object. Contains details for the handshake.
     #   @return [Types::Handshake]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AcceptHandshakeResponse AWS API Documentation
@@ -283,9 +283,8 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] policy_id
-    #   The unique identifier (ID) of the policy that you want to attach to
-    #   the target. You can get the ID for the policy by calling the
-    #   ListPolicies operation.
+    #   ID for the policy that you want to attach to the target. You can get
+    #   the ID for the policy by calling the ListPolicies operation.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
     #   followed by from 8 to 128 lowercase or uppercase letters, digits, or
@@ -297,10 +296,9 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   The unique identifier (ID) of the root, OU, or account that you want
-    #   to attach the policy to. You can get the ID by calling the
-    #   ListRoots, ListOrganizationalUnitsForParent, or ListAccounts
-    #   operations.
+    #   ID for the root, OU, or account that you want to attach the policy
+    #   to. You can get the ID by calling the ListRoots,
+    #   ListOrganizationalUnitsForParent, or ListAccounts operations.
     #
     #   The [regex pattern][1] for a target ID string requires one of the
     #   following:
@@ -331,8 +329,8 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] handshake_id
-    #   The unique identifier (ID) of the handshake that you want to cancel.
-    #   You can get the ID from the ListHandshakesForOrganization operation.
+    #   ID for the handshake that you want to cancel. You can get the ID
+    #   from the ListHandshakesForOrganization operation.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
     #   followed by from 8 to 32 lowercase letters or digits.
@@ -351,8 +349,7 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] handshake
-    #   A structure that contains details about the handshake that you
-    #   canceled.
+    #   A `Handshake` object. Contains for the handshake that you canceled.
     #   @return [Types::Handshake]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CancelHandshakeResponse AWS API Documentation
@@ -483,6 +480,11 @@ module Aws::Organizations
     #   or your account isn't fully active. You must complete the account
     #   setup before you create an organization.
     #
+    # * ACTIVE\_RESPONSIBILITY\_TRANSFER\_PROCESS: You cannot delete
+    #   organization due to an ongoing responsibility transfer process. For
+    #   example, a pending invitation or an in-progress transfer. To delete
+    #   the organization, you must resolve the current transfer process.
+    #
     # * ACCOUNT\_NUMBER\_LIMIT\_EXCEEDED: You attempted to exceed the limit
     #   on the number of accounts in an organization. If you need more
     #   accounts, contact [Amazon Web Services Support][2] to request an
@@ -549,7 +551,7 @@ module Aws::Organizations
     #
     # * EMAIL\_VERIFICATION\_CODE\_EXPIRED: The email verification code is
     #   only valid for a limited period of time. You must resubmit the
-    #   request and generate a new verfication code.
+    #   request and generate a new verification code.
     #
     # * HANDSHAKE\_RATE\_LIMIT\_EXCEEDED: You attempted to exceed the number
     #   of handshakes that you can send in one day.
@@ -630,6 +632,19 @@ module Aws::Organizations
     #   SECURITYHUB\_POLICY). To complete this operation, you must first
     #   disable the policy type.
     #
+    # * RESPONSIBILITY\_TRANSFER\_MAX\_INBOUND\_QUOTA\_VIOLATION: You have
+    #   exceeded your inbound transfers limit.
+    #
+    # * RESPONSIBILITY\_TRANSFER\_MAX\_LEVEL\_VIOLATION: You have exceeded
+    #   the maximum length of your transfer chain.
+    #
+    # * RESPONSIBILITY\_TRANSFER\_MAX\_OUTBOUND\_QUOTA\_VIOLATION: You have
+    #   exceeded your outbound transfers limit.
+    #
+    # * RESPONSIBILITY\_TRANSFER\_MAX\_TRANSFERS\_QUOTA\_VIOLATION: You have
+    #   exceeded the maximum number of inbound transfers allowed in a
+    #   transfer chain.
+    #
     # * SERVICE\_ACCESS\_NOT\_ENABLED:
     #
     #   * You attempted to register a delegated administrator before you
@@ -642,8 +657,19 @@ module Aws::Organizations
     #   with tags that are not compliant with the tag policy requirements
     #   for this account.
     #
+    # * TRANSFER\_RESPONSIBILITY\_SOURCE\_DELETION\_IN\_PROGRESS: The source
+    #   organization cannot accept this transfer invitation because it is
+    #   marked for deletion.
+    #
+    # * TRANSFER\_RESPONSIBILITY\_TARGET\_DELETION\_IN\_PROGRESS: The source
+    #   organization cannot accept this transfer invitation because target
+    #   organization is marked for deletion.
+    #
+    # * UNSUPPORTED\_PRICING: Your organization has a pricing contract that
+    #   is unsupported.
+    #
     # * WAIT\_PERIOD\_ACTIVE: After you create an Amazon Web Services
-    #   account, you must wait until at least seven days after the account
+    #   account, you must wait until at least four days after the account
     #   was created. Invited accounts aren't subject to this waiting
     #   period.
     #
@@ -859,8 +885,8 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] gov_cloud_account_id
-    #   If the account was created successfully, the unique identifier (ID)
-    #   of the new account in the Amazon Web Services GovCloud (US) Region.
+    #   If the account was created successfully, the ID for the new account
+    #   in the Amazon Web Services GovCloud (US) Region.
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
@@ -1146,8 +1172,7 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] parent_id
-    #   The unique identifier (ID) of the parent root or OU that you want to
-    #   create the new OU in.
+    #   ID for the parent root or OU that you want to create the new OU in.
     #
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
@@ -1259,6 +1284,16 @@ module Aws::Organizations
     #
     #   * [SECURITYHUB\_POLICY][8]
     #
+    #   * [UPGRADE\_ROLLOUT\_POLICY][9]
+    #
+    #   * [INSPECTOR\_POLICY][10]
+    #
+    #   * [BEDROCK\_POLICY][11]
+    #
+    #   * [S3\_POLICY][12]
+    #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][13]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -1269,6 +1304,11 @@ module Aws::Organizations
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1314,9 +1354,8 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] handshake_id
-    #   The unique identifier (ID) of the handshake that you want to
-    #   decline. You can get the ID from the ListHandshakesForAccount
-    #   operation.
+    #   ID for the handshake that you want to decline. You can get the ID
+    #   from the ListHandshakesForAccount operation.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
     #   followed by from 8 to 32 lowercase letters or digits.
@@ -1335,8 +1374,7 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] handshake
-    #   A structure that contains details about the declined handshake. The
-    #   state is updated to show the value `DECLINED`.
+    #   A `Handshake` object. Contains details for the declined handshake.
     #   @return [Types::Handshake]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeclineHandshakeResponse AWS API Documentation
@@ -1373,6 +1411,20 @@ module Aws::Organizations
     #   organization.
     #   @return [String]
     #
+    # @!attribute [rw] state
+    #   Each state represents a specific phase in the account lifecycle. Use
+    #   this information to manage account access, automate workflows, or
+    #   trigger actions based on account state changes.
+    #
+    #   For more information about account states and their implications,
+    #   see [Monitor the state of your Amazon Web Services accounts ][1] in
+    #   the *Organizations User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_account_state.html
+    #   @return [String]
+    #
     # @!attribute [rw] joined_method
     #   The method by which the delegated administrator's account joined
     #   the organization.
@@ -1395,6 +1447,7 @@ module Aws::Organizations
       :email,
       :name,
       :status,
+      :state,
       :joined_method,
       :joined_timestamp,
       :delegation_enabled_date)
@@ -1426,9 +1479,8 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] organizational_unit_id
-    #   The unique identifier (ID) of the organizational unit that you want
-    #   to delete. You can get the ID from the
-    #   ListOrganizationalUnitsForParent operation.
+    #   ID for the organizational unit that you want to delete. You can get
+    #   the ID from the ListOrganizationalUnitsForParent operation.
     #
     #   The [regex pattern][1] for an organizational unit ID string requires
     #   "ou-" followed by from 4 to 32 lowercase letters or digits (the ID
@@ -1450,9 +1502,8 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] policy_id
-    #   The unique identifier (ID) of the policy that you want to delete.
-    #   You can get the ID from the ListPolicies or ListPoliciesForTarget
-    #   operations.
+    #   ID for the policy that you want to delete. You can get the ID from
+    #   the ListPolicies or ListPoliciesForTarget operations.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
     #   followed by from 8 to 128 lowercase or uppercase letters, digits, or
@@ -1588,6 +1639,16 @@ module Aws::Organizations
     #
     #   * [SECURITYHUB\_POLICY][6]
     #
+    #   * [UPGRADE\_ROLLOUT\_POLICY][7]
+    #
+    #   * [INSPECTOR\_POLICY][8]
+    #
+    #   * [BEDROCK\_POLICY][9]
+    #
+    #   * [S3\_POLICY][10]
+    #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][11]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -1596,6 +1657,11 @@ module Aws::Organizations
     #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @!attribute [rw] target_id
@@ -1626,10 +1692,7 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] handshake_id
-    #   The unique identifier (ID) of the handshake that you want
-    #   information about. You can get the ID from the original call to
-    #   InviteAccountToOrganization, or from a call to
-    #   ListHandshakesForAccount or ListHandshakesForOrganization.
+    #   ID for the handshake that you want information about.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
     #   followed by from 8 to 32 lowercase letters or digits.
@@ -1648,7 +1711,7 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] handshake
-    #   A structure that contains information about the specified handshake.
+    #   A `Handshake` object. Contains details for the handshake.
     #   @return [Types::Handshake]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeHandshakeResponse AWS API Documentation
@@ -1679,9 +1742,8 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] organizational_unit_id
-    #   The unique identifier (ID) of the organizational unit that you want
-    #   details about. You can get the ID from the
-    #   ListOrganizationalUnitsForParent operation.
+    #   ID for the organizational unit that you want details about. You can
+    #   get the ID from the ListOrganizationalUnitsForParent operation.
     #
     #   The [regex pattern][1] for an organizational unit ID string requires
     #   "ou-" followed by from 4 to 32 lowercase letters or digits (the ID
@@ -1715,9 +1777,8 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] policy_id
-    #   The unique identifier (ID) of the policy that you want details
-    #   about. You can get the ID from the ListPolicies or
-    #   ListPoliciesForTarget operations.
+    #   ID for the policy that you want details about. You can get the ID
+    #   from the ListPolicies or ListPoliciesForTarget operations.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
     #   followed by from 8 to 128 lowercase or uppercase letters, digits, or
@@ -1760,6 +1821,30 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   ID for the transfer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeResponsibilityTransferRequest AWS API Documentation
+    #
+    class DescribeResponsibilityTransferRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] responsibility_transfer
+    #   A `ResponsibilityTransfer` object. Contains details for a transfer.
+    #   @return [Types::ResponsibilityTransfer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeResponsibilityTransferResponse AWS API Documentation
+    #
+    class DescribeResponsibilityTransferResponse < Struct.new(
+      :responsibility_transfer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # We can't find the destination container (a root or OU) with the
     # `ParentId` that you specified.
     #
@@ -1775,9 +1860,8 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] policy_id
-    #   The unique identifier (ID) of the policy you want to detach. You can
-    #   get the ID from the ListPolicies or ListPoliciesForTarget
-    #   operations.
+    #   ID for the policy you want to detach. You can get the ID from the
+    #   ListPolicies or ListPoliciesForTarget operations.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
     #   followed by from 8 to 128 lowercase or uppercase letters, digits, or
@@ -1789,8 +1873,8 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] target_id
-    #   The unique identifier (ID) of the root, OU, or account that you want
-    #   to detach the policy from. You can get the ID from the ListRoots,
+    #   ID for the root, OU, or account that you want to detach the policy
+    #   from. You can get the ID from the ListRoots,
     #   ListOrganizationalUnitsForParent, or ListAccounts operations.
     #
     #   The [regex pattern][1] for a target ID string requires one of the
@@ -1837,8 +1921,8 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] root_id
-    #   The unique identifier (ID) of the root in which you want to disable
-    #   a policy type. You can get the ID from the ListRoots operation.
+    #   ID for the root in which you want to disable a policy type. You can
+    #   get the ID from the ListRoots operation.
     #
     #   The [regex pattern][1] for a root ID string requires "r-" followed
     #   by from 4 to 32 lowercase letters or digits.
@@ -1868,6 +1952,16 @@ module Aws::Organizations
     #
     #   * [SECURITYHUB\_POLICY][8]
     #
+    #   * [UPGRADE\_ROLLOUT\_POLICY][9]
+    #
+    #   * [INSPECTOR\_POLICY][10]
+    #
+    #   * [BEDROCK\_POLICY][11]
+    #
+    #   * [S3\_POLICY][12]
+    #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][13]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -1878,6 +1972,11 @@ module Aws::Organizations
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyTypeRequest AWS API Documentation
@@ -2098,8 +2197,8 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] root_id
-    #   The unique identifier (ID) of the root in which you want to enable a
-    #   policy type. You can get the ID from the ListRoots operation.
+    #   ID for the root in which you want to enable a policy type. You can
+    #   get the ID from the ListRoots operation.
     #
     #   The [regex pattern][1] for a root ID string requires "r-" followed
     #   by from 4 to 32 lowercase letters or digits.
@@ -2129,6 +2228,16 @@ module Aws::Organizations
     #
     #   * [SECURITYHUB\_POLICY][8]
     #
+    #   * [UPGRADE\_ROLLOUT\_POLICY][9]
+    #
+    #   * [INSPECTOR\_POLICY][10]
+    #
+    #   * [BEDROCK\_POLICY][11]
+    #
+    #   * [S3\_POLICY][12]
+    #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][13]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -2139,6 +2248,11 @@ module Aws::Organizations
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyTypeRequest AWS API Documentation
@@ -2206,20 +2320,16 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # Contains information that must be exchanged to securely establish a
-    # relationship between two accounts (an *originator* and a *recipient*).
-    # For example, when a management account (the originator) invites
-    # another account (the recipient) to join its organization, the two
-    # accounts exchange information as a series of handshake requests and
-    # responses.
+    # Contains details for a handshake. A handshake is the secure exchange
+    # of information between two Amazon Web Services accounts: a sender and
+    # a recipient.
     #
     # **Note:** Handshakes that are `CANCELED`, `ACCEPTED`, `DECLINED`, or
     # `EXPIRED` show up in lists for only 30 days after entering that state
     # After that they are deleted.
     #
     # @!attribute [rw] id
-    #   The unique identifier (ID) of a handshake. The originating account
-    #   creates the ID when it initiates the handshake.
+    #   ID for the handshake.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
     #   followed by from 8 to 32 lowercase letters or digits.
@@ -2230,7 +2340,7 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of a handshake.
+    #   Amazon Resource Name (ARN) for the handshake.
     #
     #   For more information about ARNs in Organizations, see [ARN Formats
     #   Supported by Organizations][1] in the *Amazon Web Services Service
@@ -2242,74 +2352,58 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] parties
-    #   Information about the two accounts that are participating in the
-    #   handshake.
+    #   An array of `HandshakeParty` objects. Contains details for
+    #   participant in a handshake.
     #   @return [Array<Types::HandshakeParty>]
     #
     # @!attribute [rw] state
-    #   The current state of the handshake. Use the state to trace the flow
-    #   of the handshake through the process from its creation to its
-    #   acceptance. The meaning of each of the valid values is as follows:
+    #   Current state for the handshake.
     #
-    #   * **REQUESTED**: This handshake was sent to multiple recipients
-    #     (applicable to only some handshake types) and not all recipients
-    #     have responded yet. The request stays in this state until all
-    #     recipients respond.
+    #   * **REQUESTED**: Handshake awaiting a response from the recipient.
     #
-    #   * **OPEN**: This handshake was sent to multiple recipients
-    #     (applicable to only some policy types) and all recipients have
-    #     responded, allowing the originator to complete the handshake
-    #     action.
+    #   * **OPEN**: Handshake sent to multiple recipients and all recipients
+    #     have responded. The sender can now complete the handshake action.
     #
-    #   * **CANCELED**: This handshake is no longer active because it was
-    #     canceled by the originating account.
+    #   * **CANCELED**: Handshake canceled by the sender.
     #
-    #   * **ACCEPTED**: This handshake is complete because it has been
-    #     accepted by the recipient.
+    #   * **ACCEPTED**: Handshake accepted by the recipient.
     #
-    #   * **DECLINED**: This handshake is no longer active because it was
-    #     declined by the recipient account.
+    #   * **DECLINED**: Handshake declined by the recipient.
     #
-    #   * **EXPIRED**: This handshake is no longer active because the
-    #     originator did not receive a response of any kind from the
-    #     recipient before the expiration time (15 days).
+    #   * **EXPIRED**: Handshake has expired.
     #   @return [String]
     #
     # @!attribute [rw] requested_timestamp
-    #   The date and time that the handshake request was made.
+    #   Timestamp when the handshake request was made.
     #   @return [Time]
     #
     # @!attribute [rw] expiration_timestamp
-    #   The date and time that the handshake expires. If the recipient of
-    #   the handshake request fails to respond before the specified date and
-    #   time, the handshake becomes inactive and is no longer valid.
+    #   Timestamp when the handshake expires.
     #   @return [Time]
     #
     # @!attribute [rw] action
-    #   The type of handshake, indicating what action occurs when the
-    #   recipient accepts the handshake. The following handshake types are
-    #   supported:
+    #   The type of handshake:
     #
-    #   * **INVITE**: This type of handshake represents a request to join an
-    #     organization. It is always sent from the management account to
-    #     only non-member accounts.
+    #   * **INVITE**: Handshake sent to a standalone account requesting that
+    #     it to join the sender's organization.
     #
-    #   * **ENABLE\_ALL\_FEATURES**: This type of handshake represents a
-    #     request to enable all features in an organization. It is always
-    #     sent from the management account to only *invited* member
-    #     accounts. Created accounts do not receive this because those
-    #     accounts were created by the organization's management account
-    #     and approval is inferred.
+    #   * **ENABLE\_ALL\_FEATURES**: Handshake sent to invited member
+    #     accounts to enable all features for the organization.
     #
-    #   * **APPROVE\_ALL\_FEATURES**: This type of handshake is sent from
-    #     the Organizations service when all member accounts have approved
-    #     the `ENABLE_ALL_FEATURES` invitation. It is sent only to the
-    #     management account and signals the master that it can finalize the
-    #     process to enable all features.
+    #   * **APPROVE\_ALL\_FEATURES**: Handshake sent to the management
+    #     account when all invited member accounts have approved to enable
+    #     all features.
+    #
+    #   * **TRANSFER\_RESPONSIBILITY**: Handshake sent to another
+    #     organization's management account requesting that it designate
+    #     the sender with the specified responsibilities for recipient's
+    #     organization.
     #   @return [String]
     #
     # @!attribute [rw] resources
-    #   Additional information that is needed to process the handshake.
+    #   An array of `HandshakeResource` objects. When needed, contains
+    #   additional details for a handshake. For example, the email address
+    #   for the sender.
     #   @return [Array<Types::HandshakeResource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Handshake AWS API Documentation
@@ -2369,16 +2463,20 @@ module Aws::Organizations
     #   of enabling all features. You can resume inviting accounts after you
     #   finalize the process when all accounts have agreed to the change.
     #
+    # * LEGACY\_PERMISSIONS\_STILL\_IN\_USE: Your organization must migrate
+    #   to use the new IAM fine-grained actions for billing, cost
+    #   management, and accounts.
+    #
     # * ORGANIZATION\_ALREADY\_HAS\_ALL\_FEATURES: The handshake request is
     #   invalid because the organization has already enabled all features.
-    #
-    # * ORGANIZATION\_IS\_ALREADY\_PENDING\_ALL\_FEATURES\_MIGRATION: The
-    #   handshake request is invalid because the organization has already
-    #   started the process to enable all features.
     #
     # * ORGANIZATION\_FROM\_DIFFERENT\_SELLER\_OF\_RECORD: The request
     #   failed because the account is from a different marketplace than the
     #   accounts in the organization.
+    #
+    # * ORGANIZATION\_IS\_ALREADY\_PENDING\_ALL\_FEATURES\_MIGRATION: The
+    #   handshake request is invalid because the organization has already
+    #   started the process to enable all features.
     #
     # * ORGANIZATION\_MEMBERSHIP\_CHANGE\_RATE\_LIMIT\_EXCEEDED: You
     #   attempted to change the membership of an account too quickly after
@@ -2387,6 +2485,16 @@ module Aws::Organizations
     # * PAYMENT\_INSTRUMENT\_REQUIRED: You can't complete the operation
     #   with an account that doesn't have a payment instrument, such as a
     #   credit card, associated with it.
+    #
+    # * RESPONSIBILITY\_TRANSFER\_ALREADY\_EXISTS: You cannot perform this
+    #   operation with the current transfer.
+    #
+    # * SOURCE\_AND\_TARGET\_CANNOT\_MATCH: An account can't accept a
+    #   transfer invitation if it is both the sender and recipient of the
+    #   invitation.
+    #
+    # * UNUSED\_PREPAYMENT\_BALANCE: Your organization has an outstanding
+    #   pre-payment balance.
     #
     #
     #
@@ -2407,19 +2515,18 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # Specifies the criteria that are used to select the handshakes for the
-    # operation.
+    # Contains the filter used to select the handshakes for an operation.
     #
     # @!attribute [rw] action_type
-    #   Specifies the type of handshake action.
+    #   The type of handshake.
     #
     #   If you specify `ActionType`, you cannot also specify
     #   `ParentHandshakeId`.
     #   @return [String]
     #
     # @!attribute [rw] parent_handshake_id
-    #   Specifies the parent handshake. Only used for handshake types that
-    #   are a child of another type.
+    #   The parent handshake. Only used for handshake types that are a child
+    #   of another type.
     #
     #   If you specify `ParentHandshakeId`, you cannot also specify
     #   `ActionType`.
@@ -2454,10 +2561,11 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # Identifies a participant in a handshake.
+    # Contains details for a participant in a handshake.
     #
     # @!attribute [rw] id
-    #   The unique identifier (ID) for the party.
+    #   ID for the participant: Acccount ID, organization ID, or email
+    #   address.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
     #   followed by from 8 to 32 lowercase letters or digits.
@@ -2468,7 +2576,7 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of party.
+    #   The type of ID for the participant.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/HandshakeParty AWS API Documentation
@@ -2480,38 +2588,35 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # Contains additional data that is needed to process a handshake.
+    # Contains additional details for a handshake.
     #
     # @!attribute [rw] value
-    #   The information that is passed to the other party in the handshake.
-    #   The format of the value string must match the requirements of the
-    #   specified type.
+    #   Additional information for the handshake. The format of the value
+    #   string must match the requirements of the specified type.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The type of information being passed, specifying how the value is to
     #   be interpreted by the other party:
     #
-    #   * `ACCOUNT` - Specifies an Amazon Web Services account ID number.
+    #   * **ACCOUNT**: ID for an Amazon Web Services account.
     #
-    #   * `ORGANIZATION` - Specifies an organization ID number.
+    #   * **ORGANIZATION**: ID for an organization.
     #
-    #   * `EMAIL` - Specifies the email address that is associated with the
-    #     account that receives the handshake.
+    #   * **EMAIL**: Email address for the recipient.
     #
-    #   * `OWNER_EMAIL` - Specifies the email address associated with the
-    #     management account. Included as information about an organization.
+    #   * **OWNER\_EMAIL**: Email address for the sender.
     #
-    #   * `OWNER_NAME` - Specifies the name associated with the management
-    #     account. Included as information about an organization.
+    #   * **OWNER\_NAME**: Name of the sender.
     #
-    #   * `NOTES` - Additional text provided by the handshake initiator and
-    #     intended for the recipient to read.
+    #   * **NOTES**: Additional text included by the sender for the
+    #     recipient.
     #   @return [String]
     #
     # @!attribute [rw] resources
-    #   When needed, contains an additional array of `HandshakeResource`
-    #   objects.
+    #   An array of `HandshakeResource` objects. When needed, contains
+    #   additional details for a handshake. For example, the email address
+    #   for the sender.
     #   @return [Array<Types::HandshakeResource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/HandshakeResource AWS API Documentation
@@ -2548,8 +2653,19 @@ module Aws::Organizations
     #
     #  </note>
     #
+    # * CALLER\_REQUIRED\_FIELD\_MISSING: At least one of the required field
+    #   is missing: Caller Account Id, Management Account Id or Organization
+    #   Id.
+    #
     # * DUPLICATE\_TAG\_KEY: Tag keys must be unique among the tags attached
     #   to the same entity.
+    #
+    # * END\_DATE\_NOT\_END\_OF\_MONTH: You provided an invalid end date.
+    #   The end date must be the end of the last day of the month
+    #   (23.59.59.999).
+    #
+    # * END\_DATE\_TOO\_EARLY: You provided an invalid end date. It is too
+    #   early for the transfer to end.
     #
     # * IMMUTABLE\_POLICY: You specified a policy that is managed by Amazon
     #   Web Services and can't be modified.
@@ -2559,6 +2675,11 @@ module Aws::Organizations
     #
     # * INVALID\_EMAIL\_ADDRESS\_TARGET: You specified an invalid email
     #   address for the invited account owner.
+    #
+    # * INVALID\_END\_DATE: The selected withdrawal date doesn't meet the
+    #   terms of your partner agreement. Visit Amazon Web Services Partner
+    #   Central to view your partner agreements or contact your Amazon Web
+    #   Services Partner for help.
     #
     # * INVALID\_ENUM: You specified an invalid value.
     #
@@ -2588,6 +2709,9 @@ module Aws::Organizations
     #
     # * INVALID\_ROLE\_NAME: You provided a role name that isn't valid. A
     #   role name can't begin with the reserved prefix `AWSServiceRoleFor`.
+    #
+    # * INVALID\_START\_DATE: The start date doesn't meet the minimum
+    #   requirements.
     #
     # * INVALID\_SYNTAX\_ORGANIZATION\_ARN: You specified an invalid Amazon
     #   Resource Name (ARN) for the organization.
@@ -2620,11 +2744,27 @@ module Aws::Organizations
     # * NON\_DETACHABLE\_POLICY: You can't detach this Amazon Web Services
     #   Managed Policy.
     #
+    # * START\_DATE\_NOT\_BEGINNING\_OF\_DAY: You provided an invalid start
+    #   date. The start date must be the beginning of the day
+    #   (00:00:00.000).
+    #
+    # * START\_DATE\_NOT\_BEGINNING\_OF\_MONTH: You provided an invalid
+    #   start date. The start date must be the first day of the month.
+    #
+    # * START\_DATE\_TOO\_EARLY: You provided an invalid start date. The
+    #   start date is too early.
+    #
+    # * START\_DATE\_TOO\_LATE: You provided an invalid start date. The
+    #   start date is too late.
+    #
     # * TARGET\_NOT\_SUPPORTED: You can't perform the specified operation
     #   on that target entity.
     #
     # * UNRECOGNIZED\_SERVICE\_PRINCIPAL: You specified a service principal
     #   that isn't recognized.
+    #
+    # * UNSUPPORTED\_ACTION\_IN\_RESPONSIBILITY\_TRANSFER: You provided a
+    #   value that is not supported by this operation.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2637,6 +2777,20 @@ module Aws::Organizations
     class InvalidInputException < Struct.new(
       :message,
       :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The responsibility transfer can't transition to the requested state
+    # because it's not in a valid state for this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InvalidResponsibilityTransferTransitionException AWS API Documentation
+    #
+    class InvalidResponsibilityTransferTransitionException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2717,6 +2871,87 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # @!attribute [rw] type
+    #   The type of responsibility you want to designate to your
+    #   organization. Currently, only `BILLING` is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   A `HandshakeParty` object. Contains details for the account you want
+    #   to invite. Currently, only `ACCOUNT` and `EMAIL` are supported.
+    #   @return [Types::HandshakeParty]
+    #
+    # @!attribute [rw] notes
+    #   Additional information that you want to include in the invitation.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_timestamp
+    #   Timestamp when the recipient will begin managing the specified
+    #   responsibilities.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_name
+    #   Name you want to assign to the transfer.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags that you want to attach to the transfer. For each tag
+    #   in the list, you must specify both a tag key and a value. You can
+    #   set the value to an empty string, but you can't set it to `null`.
+    #   For more information about tagging, see [Tagging Organizations
+    #   resources][1] in the Organizations User Guide.
+    #
+    #   Any tags in the request are checked for compliance with any
+    #   applicable tag policies when the request is made. The request is
+    #   rejected if the tags in the request don't match the requirements of
+    #   the policy at that time. Tag policy compliance is <i> <b>not</b>
+    #   </i> checked again when the invitation is accepted and the tags are
+    #   actually attached to the transfer. That means that if the tag policy
+    #   changes between the invitation and the acceptance, then that tags
+    #   could potentially be non-compliant.
+    #
+    #   <note markdown="1"> If any one of the tags is not valid or if you exceed the allowed
+    #   number of tags for a transfer, then the entire request fails and
+    #   invitations are not sent.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InviteOrganizationToTransferResponsibilityRequest AWS API Documentation
+    #
+    class InviteOrganizationToTransferResponsibilityRequest < Struct.new(
+      :type,
+      :target,
+      :notes,
+      :start_timestamp,
+      :source_name,
+      :tags)
+      SENSITIVE = [:notes, :source_name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] handshake
+    #   Contains details for a handshake. A handshake is the secure exchange
+    #   of information between two Amazon Web Services accounts: a sender
+    #   and a recipient.
+    #
+    #   **Note:** Handshakes that are `CANCELED`, `ACCEPTED`, `DECLINED`, or
+    #   `EXPIRED` show up in lists for only 30 days after entering that
+    #   state After that they are deleted.
+    #   @return [Types::Handshake]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/InviteOrganizationToTransferResponsibilityResponse AWS API Documentation
+    #
+    class InviteOrganizationToTransferResponsibilityResponse < Struct.new(
+      :handshake)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   The parameter for receiving additional results if you receive a
     #   `NextToken` response in a previous request. A `NextToken` response
@@ -2726,16 +2961,10 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of results that you want included on each page of
-    #   the response. If you do not include this parameter, it defaults to a
-    #   value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganizationRequest AWS API Documentation
@@ -2785,16 +3014,10 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of results that you want included on each page of
-    #   the response. If you do not include this parameter, it defaults to a
-    #   value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsForParentRequest AWS API Documentation
@@ -2844,16 +3067,10 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of results that you want included on each page of
-    #   the response. If you do not include this parameter, it defaults to a
-    #   value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsRequest AWS API Documentation
@@ -2909,6 +3126,16 @@ module Aws::Organizations
     #
     #   * [SECURITYHUB\_POLICY][6]
     #
+    #   * [UPGRADE\_ROLLOUT\_POLICY][7]
+    #
+    #   * [INSPECTOR\_POLICY][8]
+    #
+    #   * [BEDROCK\_POLICY][9]
+    #
+    #   * [S3\_POLICY][10]
+    #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][11]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -2917,6 +3144,11 @@ module Aws::Organizations
     #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2928,16 +3160,10 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of results that you want included on each page of
-    #   the response. If you do not include this parameter, it defaults to a
-    #   value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsWithInvalidEffectivePolicyRequest AWS API Documentation
@@ -2970,6 +3196,16 @@ module Aws::Organizations
     #
     #   * [SECURITYHUB\_POLICY][6]
     #
+    #   * [UPGRADE\_ROLLOUT\_POLICY][7]
+    #
+    #   * [INSPECTOR\_POLICY][8]
+    #
+    #   * [BEDROCK\_POLICY][9]
+    #
+    #   * [S3\_POLICY][10]
+    #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][11]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -2978,6 +3214,11 @@ module Aws::Organizations
     #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3032,16 +3273,10 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of results that you want included on each page of
-    #   the response. If you do not include this parameter, it defaults to a
-    #   value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListChildrenRequest AWS API Documentation
@@ -3091,16 +3326,10 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of results that you want included on each page of
-    #   the response. If you do not include this parameter, it defaults to a
-    #   value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatusRequest AWS API Documentation
@@ -3153,16 +3382,10 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of results that you want included on each page of
-    #   the response. If you do not include this parameter, it defaults to a
-    #   value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListDelegatedAdministratorsRequest AWS API Documentation
@@ -3210,16 +3433,10 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of results that you want included on each page of
-    #   the response. If you do not include this parameter, it defaults to a
-    #   value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListDelegatedServicesForAccountRequest AWS API Documentation
@@ -3275,6 +3492,16 @@ module Aws::Organizations
     #
     #   * [SECURITYHUB\_POLICY][6]
     #
+    #   * [UPGRADE\_ROLLOUT\_POLICY][7]
+    #
+    #   * [INSPECTOR\_POLICY][8]
+    #
+    #   * [BEDROCK\_POLICY][9]
+    #
+    #   * [S3\_POLICY][10]
+    #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][11]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -3283,6 +3510,11 @@ module Aws::Organizations
     #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3294,16 +3526,10 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of results that you want included on each page of
-    #   the response. If you do not include this parameter, it defaults to a
-    #   value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListEffectivePolicyValidationErrorsRequest AWS API Documentation
@@ -3336,6 +3562,16 @@ module Aws::Organizations
     #
     #   * [SECURITYHUB\_POLICY][6]
     #
+    #   * [UPGRADE\_ROLLOUT\_POLICY][7]
+    #
+    #   * [INSPECTOR\_POLICY][8]
+    #
+    #   * [BEDROCK\_POLICY][9]
+    #
+    #   * [S3\_POLICY][10]
+    #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][11]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative.html
@@ -3344,6 +3580,11 @@ module Aws::Organizations
     #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [5]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -3384,14 +3625,8 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] filter
-    #   Filters the handshakes that you want included in the response. The
-    #   default is all types. Use the `ActionType` element to limit the
-    #   output to only a specified type, such as `INVITE`,
-    #   `ENABLE_ALL_FEATURES`, or `APPROVE_ALL_FEATURES`. Alternatively, for
-    #   the `ENABLE_ALL_FEATURES` handshake that generates a separate child
-    #   handshake for each member account, you can specify
-    #   `ParentHandshakeId` to see only the handshakes that were generated
-    #   by that parent request.
+    #   A `HandshakeFilter` object. Contains the filer used to select the
+    #   handshakes for an operation.
     #   @return [Types::HandshakeFilter]
     #
     # @!attribute [rw] next_token
@@ -3403,16 +3638,10 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of results that you want included on each page of
-    #   the response. If you do not include this parameter, it defaults to a
-    #   value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForAccountRequest AWS API Documentation
@@ -3426,8 +3655,7 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] handshakes
-    #   A list of Handshake objects with details about each of the
-    #   handshakes that is associated with the specified account.
+    #   An array of `Handshake`objects. Contains details for a handshake.
     #   @return [Array<Types::Handshake>]
     #
     # @!attribute [rw] next_token
@@ -3448,14 +3676,8 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] filter
-    #   A filter of the handshakes that you want included in the response.
-    #   The default is all types. Use the `ActionType` element to limit the
-    #   output to only a specified type, such as `INVITE`,
-    #   `ENABLE-ALL-FEATURES`, or `APPROVE-ALL-FEATURES`. Alternatively, for
-    #   the `ENABLE-ALL-FEATURES` handshake that generates a separate child
-    #   handshake for each member account, you can specify the
-    #   `ParentHandshakeId` to see only the handshakes that were generated
-    #   by that parent request.
+    #   A `HandshakeFilter` object. Contains the filer used to select the
+    #   handshakes for an operation.
     #   @return [Types::HandshakeFilter]
     #
     # @!attribute [rw] next_token
@@ -3467,16 +3689,10 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of results that you want included on each page of
-    #   the response. If you do not include this parameter, it defaults to a
-    #   value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForOrganizationRequest AWS API Documentation
@@ -3490,8 +3706,7 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] handshakes
-    #   A list of Handshake objects with details about each of the
-    #   handshakes that are associated with an organization.
+    #   An array of `Handshake`objects. Contains details for a handshake.
     #   @return [Array<Types::Handshake>]
     #
     # @!attribute [rw] next_token
@@ -3511,9 +3726,63 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # @!attribute [rw] type
+    #   The type of responsibility. Currently, only `BILLING` is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   ID for the transfer.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListInboundResponsibilityTransfersRequest AWS API Documentation
+    #
+    class ListInboundResponsibilityTransfersRequest < Struct.new(
+      :type,
+      :id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] responsibility_transfers
+    #   A `ResponsibilityTransfers` object. Contains details for a transfer.
+    #   @return [Array<Types::ResponsibilityTransfer>]
+    #
+    # @!attribute [rw] next_token
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListInboundResponsibilityTransfersResponse AWS API Documentation
+    #
+    class ListInboundResponsibilityTransfersResponse < Struct.new(
+      :responsibility_transfers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] parent_id
-    #   The unique identifier (ID) of the root or OU whose child OUs you
-    #   want to list.
+    #   ID for the root or OU whose child OUs you want to list.
     #
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
@@ -3541,16 +3810,10 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of results that you want included on each page of
-    #   the response. If you do not include this parameter, it defaults to a
-    #   value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOrganizationalUnitsForParentRequest AWS API Documentation
@@ -3584,9 +3847,60 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # @!attribute [rw] type
+    #   The type of responsibility. Currently, only `BILLING` is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOutboundResponsibilityTransfersRequest AWS API Documentation
+    #
+    class ListOutboundResponsibilityTransfersRequest < Struct.new(
+      :type,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] responsibility_transfers
+    #   An array of `ResponsibilityTransfer` objects. Contains details for a
+    #   transfer.
+    #   @return [Array<Types::ResponsibilityTransfer>]
+    #
+    # @!attribute [rw] next_token
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOutboundResponsibilityTransfersResponse AWS API Documentation
+    #
+    class ListOutboundResponsibilityTransfersResponse < Struct.new(
+      :responsibility_transfers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] child_id
-    #   The unique identifier (ID) of the OU or account whose parent
-    #   containers you want to list. Don't specify a root.
+    #   ID for the OU or account whose parent containers you want to list.
+    #   Don't specify a root.
     #
     #   The [regex pattern][1] for a child ID string requires one of the
     #   following:
@@ -3613,16 +3927,10 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of results that you want included on each page of
-    #   the response. If you do not include this parameter, it defaults to a
-    #   value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListParentsRequest AWS API Documentation
@@ -3657,8 +3965,8 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] target_id
-    #   The unique identifier (ID) of the root, organizational unit, or
-    #   account whose policies you want to list.
+    #   ID for the root, organizational unit, or account whose policies you
+    #   want to list.
     #
     #   The [regex pattern][1] for a target ID string requires one of the
     #   following:
@@ -3699,6 +4007,16 @@ module Aws::Organizations
     #
     #   * [SECURITYHUB\_POLICY][8]
     #
+    #   * [UPGRADE\_ROLLOUT\_POLICY][9]
+    #
+    #   * [INSPECTOR\_POLICY][10]
+    #
+    #   * [BEDROCK\_POLICY][11]
+    #
+    #   * [S3\_POLICY][12]
+    #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][13]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -3709,6 +4027,11 @@ module Aws::Organizations
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3720,16 +4043,10 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of results that you want included on each page of
-    #   the response. If you do not include this parameter, it defaults to a
-    #   value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesForTargetRequest AWS API Documentation
@@ -3784,6 +4101,16 @@ module Aws::Organizations
     #
     #   * [SECURITYHUB\_POLICY][8]
     #
+    #   * [UPGRADE\_ROLLOUT\_POLICY][9]
+    #
+    #   * [INSPECTOR\_POLICY][10]
+    #
+    #   * [BEDROCK\_POLICY][11]
+    #
+    #   * [S3\_POLICY][12]
+    #
+    #   * [NETWORK\_SECURITY\_DIRECTOR\_POLICY][13]
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
@@ -3794,6 +4121,11 @@ module Aws::Organizations
     #   [6]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
     #   [7]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
     #   [8]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_security_hub.html
+    #   [9]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_upgrade_rollout.html
+    #   [10]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inspector.html
+    #   [11]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_bedrock.html
+    #   [12]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_s3.html
+    #   [13]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3805,16 +4137,10 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of results that you want included on each page of
-    #   the response. If you do not include this parameter, it defaults to a
-    #   value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesRequest AWS API Documentation
@@ -3859,16 +4185,10 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of results that you want included on each page of
-    #   the response. If you do not include this parameter, it defaults to a
-    #   value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListRootsRequest AWS API Documentation
@@ -3957,8 +4277,7 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] policy_id
-    #   The unique identifier (ID) of the policy whose attachments you want
-    #   to know.
+    #   ID for the policy whose attachments you want to know.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
     #   followed by from 8 to 128 lowercase or uppercase letters, digits, or
@@ -3978,16 +4297,10 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The total number of results that you want included on each page of
-    #   the response. If you do not include this parameter, it defaults to a
-    #   value that is specific to the operation. If additional items exist
-    #   beyond the maximum you specify, the `NextToken` response element is
-    #   present and has a value (is not null). Include that value as the
-    #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more
-    #   results available. You should check `NextToken` after every
-    #   operation to ensure that you receive all of the results.
+    #   The maximum number of items to return in the response. If more
+    #   results exist than the specified `MaxResults` value, a token is
+    #   included in the response so that you can retrieve the remaining
+    #   results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTargetsForPolicyRequest AWS API Documentation
@@ -4059,7 +4372,7 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] account_id
-    #   The unique identifier (ID) of the account that you want to move.
+    #   ID for the account that you want to move.
     #
     #   The [regex pattern][1] for an account ID string requires exactly 12
     #   digits.
@@ -4070,8 +4383,8 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] source_parent_id
-    #   The unique identifier (ID) of the root or organizational unit that
-    #   you want to move the account from.
+    #   ID for the root or organizational unit that you want to move the
+    #   account from.
     #
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
@@ -4091,8 +4404,8 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] destination_parent_id
-    #   The unique identifier (ID) of the root or organizational unit that
-    #   you want to move the account to.
+    #   ID for the root or organizational unit that you want to move the
+    #   account to.
     #
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
@@ -4714,8 +5027,8 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] account_id
-    #   The unique identifier (ID) of the member account that you want to
-    #   remove from the organization.
+    #   ID for the member account that you want to remove from the
+    #   organization.
     #
     #   The [regex pattern][1] for an account ID string requires exactly 12
     #   digits.
@@ -4783,6 +5096,96 @@ module Aws::Organizations
     class ResourcePolicySummary < Struct.new(
       :id,
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details for a transfer. A *transfer* is the arrangement
+    # between two management accounts where one account designates the other
+    # with specified responsibilities for their organization.
+    #
+    # @!attribute [rw] arn
+    #   Amazon Resource Name (ARN) for the transfer.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name assigned to the transfer.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   ID for the transfer.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of transfer. Currently, only `BILLING` is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status for the transfer.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   Account that allows another account external to its organization to
+    #   manage the specified responsibilities for the organization.
+    #   @return [Types::TransferParticipant]
+    #
+    # @!attribute [rw] target
+    #   Account that manages the specified responsibilities for another
+    #   organization.
+    #   @return [Types::TransferParticipant]
+    #
+    # @!attribute [rw] start_timestamp
+    #   Timestamp when the transfer starts.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_timestamp
+    #   Timestamp when the transfer ends.
+    #   @return [Time]
+    #
+    # @!attribute [rw] active_handshake_id
+    #   ID for the handshake of the transfer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ResponsibilityTransfer AWS API Documentation
+    #
+    class ResponsibilityTransfer < Struct.new(
+      :arn,
+      :name,
+      :id,
+      :type,
+      :status,
+      :source,
+      :target,
+      :start_timestamp,
+      :end_timestamp,
+      :active_handshake_id)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # The responsibility transfer is already in the status that you
+    # specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ResponsibilityTransferAlreadyInStatusException AWS API Documentation
+    #
+    class ResponsibilityTransferAlreadyInStatusException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # We can't find a transfer that you specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ResponsibilityTransferNotFoundException AWS API Documentation
+    #
+    class ResponsibilityTransferNotFoundException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4977,6 +5380,35 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   ID for the transfer.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_timestamp
+    #   Timestamp when the responsibility transfer is to end.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/TerminateResponsibilityTransferRequest AWS API Documentation
+    #
+    class TerminateResponsibilityTransferRequest < Struct.new(
+      :id,
+      :end_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] responsibility_transfer
+    #   A `ResponsibilityTransfer` object. Contains details for a transfer.
+    #   @return [Types::ResponsibilityTransfer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/TerminateResponsibilityTransferResponse AWS API Documentation
+    #
+    class TerminateResponsibilityTransferResponse < Struct.new(
+      :responsibility_transfer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You have sent too many requests in too short a period of time. The
     # quota helps protect against denial-of-service attacks. Try again
     # later.
@@ -5000,6 +5432,28 @@ module Aws::Organizations
       :type,
       :message)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details for a participant in a transfer. A *transfer* is the
+    # arrangement between two management accounts where one account
+    # designates the other with specified responsibilities for their
+    # organization.
+    #
+    # @!attribute [rw] management_account_id
+    #   ID for the management account.
+    #   @return [String]
+    #
+    # @!attribute [rw] management_account_email
+    #   Email address for the management account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/TransferParticipant AWS API Documentation
+    #
+    class TransferParticipant < Struct.new(
+      :management_account_id,
+      :management_account_email)
+      SENSITIVE = [:management_account_email]
       include Aws::Structure
     end
 
@@ -5048,8 +5502,8 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] organizational_unit_id
-    #   The unique identifier (ID) of the OU that you want to rename. You
-    #   can get the ID from the ListOrganizationalUnitsForParent operation.
+    #   ID for the OU that you want to rename. You can get the ID from the
+    #   ListOrganizationalUnitsForParent operation.
     #
     #   The [regex pattern][1] for an organizational unit ID string requires
     #   "ou-" followed by from 4 to 32 lowercase letters or digits (the ID
@@ -5096,7 +5550,7 @@ module Aws::Organizations
     end
 
     # @!attribute [rw] policy_id
-    #   The unique identifier (ID) of the policy that you want to update.
+    #   ID for the policy that you want to update.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
     #   followed by from 8 to 128 lowercase or uppercase letters, digits, or
@@ -5158,6 +5612,37 @@ module Aws::Organizations
     #
     class UpdatePolicyResponse < Struct.new(
       :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   ID for the transfer.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   New name you want to assign to the transfer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdateResponsibilityTransferRequest AWS API Documentation
+    #
+    class UpdateResponsibilityTransferRequest < Struct.new(
+      :id,
+      :name)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] responsibility_transfer
+    #   Contains details for a transfer. A *transfer* is the arrangement
+    #   between two management accounts where one account designates the
+    #   other with specified responsibilities for their organization.
+    #   @return [Types::ResponsibilityTransfer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdateResponsibilityTransferResponse AWS API Documentation
+    #
+    class UpdateResponsibilityTransferResponse < Struct.new(
+      :responsibility_transfer)
       SENSITIVE = []
       include Aws::Structure
     end

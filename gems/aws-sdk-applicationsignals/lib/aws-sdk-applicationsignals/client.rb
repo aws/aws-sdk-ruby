@@ -1400,6 +1400,11 @@ module Aws::ApplicationSignals
     #     service operation metrics from Application Signals RED metrics
     #     during the Assessment phase
     #
+    #     <note markdown="1"> Anomaly detection is not supported for sparse metrics (those missing
+    #     more than 80% of datapoints within the given time period).
+    #
+    #      </note>
+    #
     #   * `service_quota` - ServiceQuotaAuditor: Monitors resource utilization
     #     against service quotas during the Assessment phase
     #
@@ -1429,6 +1434,10 @@ module Aws::ApplicationSignals
     #   services, SLOs, or service operations to limit the audit findings to
     #   specific entities.
     #
+    # @option params [String] :detail_level
+    #   The level of details of the audit findings. Supported values: `BRIEF`,
+    #   `DETAILED`.
+    #
     # @option params [String] :next_token
     #   Include this value, if it was returned by the previous operation, to
     #   get the next set of audit findings.
@@ -1439,6 +1448,8 @@ module Aws::ApplicationSignals
     #
     # @return [Types::ListAuditFindingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::ListAuditFindingsOutput#start_time #start_time} => Time
+    #   * {Types::ListAuditFindingsOutput#end_time #end_time} => Time
     #   * {Types::ListAuditFindingsOutput#audit_findings #audit_findings} => Array&lt;Types::AuditFinding&gt;
     #   * {Types::ListAuditFindingsOutput#next_token #next_token} => String
     #
@@ -1472,21 +1483,29 @@ module Aws::ApplicationSignals
     #             operation: "String",
     #             metric_type: "String",
     #           },
+    #           canary: {
+    #             canary_name: "String", # required
+    #           },
     #         },
     #       },
     #     ],
+    #     detail_level: "BRIEF", # accepts BRIEF, DETAILED
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
+    #   resp.start_time #=> Time
+    #   resp.end_time #=> Time
     #   resp.audit_findings #=> Array
     #   resp.audit_findings[0].key_attributes #=> Hash
     #   resp.audit_findings[0].key_attributes["KeyAttributeName"] #=> String
     #   resp.audit_findings[0].auditor_results #=> Array
     #   resp.audit_findings[0].auditor_results[0].auditor #=> String
     #   resp.audit_findings[0].auditor_results[0].description #=> String
+    #   resp.audit_findings[0].auditor_results[0].data #=> Hash
+    #   resp.audit_findings[0].auditor_results[0].data["String"] #=> String
     #   resp.audit_findings[0].auditor_results[0].severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "NONE"
     #   resp.audit_findings[0].operation #=> String
     #   resp.audit_findings[0].metric_graph.metric_data_queries #=> Array
@@ -1532,6 +1551,111 @@ module Aws::ApplicationSignals
       req.send_request(options)
     end
 
+    # Returns a list of change events for a specific entity, such as
+    # deployments, configuration changes, or other state-changing
+    # activities. This operation helps track the history of changes that may
+    # have affected service performance.
+    #
+    # @option params [required, Hash<String,String>] :entity
+    #   The entity for which to retrieve change events. This specifies the
+    #   service, resource, or other entity whose event history you want to
+    #   examine.
+    #
+    #   This is a string-to-string map. It can include the following fields.
+    #
+    #   * `Type` designates the type of object this is.
+    #
+    #   * `ResourceType` specifies the type of the resource. This field is
+    #     used only when the value of the `Type` field is `Resource` or
+    #     `AWS::Resource`.
+    #
+    #   * `Name` specifies the name of the object. This is used only if the
+    #     value of the `Type` field is `Service`, `RemoteService`, or
+    #     `AWS::Service`.
+    #
+    #   * `Identifier` identifies the resource objects of this resource. This
+    #     is used only if the value of the `Type` field is `Resource` or
+    #     `AWS::Resource`.
+    #
+    #   * `Environment` specifies the location where this object is hosted, or
+    #     what it belongs to.
+    #
+    #   * `AwsAccountId` specifies the account where this object is in.
+    #
+    #   Below is an example of a service.
+    #
+    #   `{ "Type": "Service", "Name": "visits-service", "Environment":
+    #   "petclinic-test" }`
+    #
+    #   Below is an example of a resource.
+    #
+    #   `{ "Type": "AWS::Resource", "ResourceType": "AWS::DynamoDB::Table",
+    #   "Identifier": "Customers" }`
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The start of the time period to retrieve change events for. When used
+    #   in a raw HTTP Query API, it is formatted as epoch time in seconds. For
+    #   example: `1698778057`
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The end of the time period to retrieve change events for. When used in
+    #   a raw HTTP Query API, it is formatted as epoch time in seconds. For
+    #   example: `1698778057`
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of change events to return in one operation. If you
+    #   omit this parameter, the default of 50 is used.
+    #
+    # @option params [String] :next_token
+    #   Include this value, if it was returned by the previous operation, to
+    #   get the next set of change events.
+    #
+    # @return [Types::ListEntityEventsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEntityEventsOutput#start_time #start_time} => Time
+    #   * {Types::ListEntityEventsOutput#end_time #end_time} => Time
+    #   * {Types::ListEntityEventsOutput#change_events #change_events} => Array&lt;Types::ChangeEvent&gt;
+    #   * {Types::ListEntityEventsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_entity_events({
+    #     entity: { # required
+    #       "KeyAttributeName" => "KeyAttributeValue",
+    #     },
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.start_time #=> Time
+    #   resp.end_time #=> Time
+    #   resp.change_events #=> Array
+    #   resp.change_events[0].timestamp #=> Time
+    #   resp.change_events[0].account_id #=> String
+    #   resp.change_events[0].region #=> String
+    #   resp.change_events[0].entity #=> Hash
+    #   resp.change_events[0].entity["KeyAttributeName"] #=> String
+    #   resp.change_events[0].change_event_type #=> String, one of "DEPLOYMENT", "CONFIGURATION"
+    #   resp.change_events[0].event_id #=> String
+    #   resp.change_events[0].user_name #=> String
+    #   resp.change_events[0].event_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/ListEntityEvents AWS API Documentation
+    #
+    # @overload list_entity_events(params = {})
+    # @param [Hash] params ({})
+    def list_entity_events(params = {}, options = {})
+      req = build_request(:list_entity_events, params)
+      req.send_request(options)
+    end
+
     # Returns the current grouping configuration for this account, including
     # all custom grouping attribute definitions that have been configured.
     # These definitions determine how services are logically grouped based
@@ -1541,6 +1665,16 @@ module Aws::ApplicationSignals
     # @option params [String] :next_token
     #   Include this value, if it was returned by the previous operation, to
     #   get the next set of grouping attribute definitions.
+    #
+    # @option params [String] :aws_account_id
+    #   The Amazon Web Services account ID to retrieve grouping attribute
+    #   definitions for. Use this when accessing grouping configurations from
+    #   a different account in cross-account monitoring scenarios.
+    #
+    # @option params [Boolean] :include_linked_accounts
+    #   If you are using this operation in a monitoring account, specify
+    #   `true` to include grouping attributes from source accounts in the
+    #   returned data.
     #
     # @return [Types::ListGroupingAttributeDefinitionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1552,6 +1686,8 @@ module Aws::ApplicationSignals
     #
     #   resp = client.list_grouping_attribute_definitions({
     #     next_token: "NextToken",
+    #     aws_account_id: "AwsAccountId",
+    #     include_linked_accounts: false,
     #   })
     #
     # @example Response structure
@@ -2111,7 +2247,7 @@ module Aws::ApplicationSignals
     #   resp.service_states[0].latest_change_events[0].region #=> String
     #   resp.service_states[0].latest_change_events[0].entity #=> Hash
     #   resp.service_states[0].latest_change_events[0].entity["KeyAttributeName"] #=> String
-    #   resp.service_states[0].latest_change_events[0].change_event_type #=> String, one of "DEPLOYMENT"
+    #   resp.service_states[0].latest_change_events[0].change_event_type #=> String, one of "DEPLOYMENT", "CONFIGURATION"
     #   resp.service_states[0].latest_change_events[0].event_id #=> String
     #   resp.service_states[0].latest_change_events[0].user_name #=> String
     #   resp.service_states[0].latest_change_events[0].event_name #=> String
@@ -2320,6 +2456,10 @@ module Aws::ApplicationSignals
     # * `tag:GetResources`
     #
     # * `autoscaling:DescribeAutoScalingGroups`
+    #
+    # A service-linked CloudTrail event channel is created to process
+    # CloudTrail events and return change event information. This includes
+    # last deployment time, userName, eventName, and other event metadata.
     #
     # After completing this step, you still need to instrument your Java and
     # Python applications to send data to Application Signals. For more
@@ -2763,7 +2903,7 @@ module Aws::ApplicationSignals
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-applicationsignals'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

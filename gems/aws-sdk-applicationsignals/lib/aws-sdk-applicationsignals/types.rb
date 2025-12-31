@@ -99,11 +99,11 @@ module Aws::ApplicationSignals
     end
 
     # A structure that specifies the target entity for audit analysis, such
-    # as a `service`, `SLO`, or `service_operation`.
+    # as a `service`, `SLO`, `service_operation`, or `canary`.
     #
     # @!attribute [rw] type
-    #   The type of entity being audited, such as `Service`, `SLO`, or
-    #   `ServiceOperation`.
+    #   The type of entity being audited, such as `service`, `SLO`,
+    #   `service_operation`, or `canary`.
     #   @return [String]
     #
     # @!attribute [rw] data
@@ -138,12 +138,18 @@ module Aws::ApplicationSignals
     #   specific service operation.
     #   @return [Types::ServiceOperationEntity]
     #
+    # @!attribute [rw] canary
+    #   Canary entity information when the audit target is a CloudWatch
+    #   Synthetics canary.
+    #   @return [Types::CanaryEntity]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/AuditTargetEntity AWS API Documentation
     #
     class AuditTargetEntity < Struct.new(
       :service,
       :slo,
       :service_operation,
+      :canary,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -152,12 +158,13 @@ module Aws::ApplicationSignals
       class Service < AuditTargetEntity; end
       class Slo < AuditTargetEntity; end
       class ServiceOperation < AuditTargetEntity; end
+      class Canary < AuditTargetEntity; end
       class Unknown < AuditTargetEntity; end
     end
 
     # A structure that contains the result of an automated audit analysis,
-    # including the auditor name, description of findings, and severity
-    # level.
+    # including the auditor name, description of findings, additional data,
+    # and severity level.
     #
     # @!attribute [rw] auditor
     #   The name of the auditor algorithm that generated this result.
@@ -167,6 +174,11 @@ module Aws::ApplicationSignals
     #   A detailed description of the audit finding, explaining what was
     #   observed and potential implications.
     #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   This is a string-to-string map. It contains additional data about
+    #   the result of an automated audit analysis.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] severity
     #   The severity level of this audit finding, indicating the importance
@@ -178,6 +190,7 @@ module Aws::ApplicationSignals
     class AuditorResult < Struct.new(
       :auditor,
       :description,
+      :data,
       :severity)
       SENSITIVE = []
       include Aws::Structure
@@ -359,6 +372,21 @@ module Aws::ApplicationSignals
       include Aws::Structure
     end
 
+    # A structure that contains identifying information for a CloudWatch
+    # Synthetics canary entity used in audit targeting.
+    #
+    # @!attribute [rw] canary_name
+    #   The name of the CloudWatch Synthetics canary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/CanaryEntity AWS API Documentation
+    #
+    class CanaryEntity < Struct.new(
+      :canary_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that contains information about a change event that
     # occurred for a service, such as a deployment or configuration change.
     #
@@ -378,6 +406,37 @@ module Aws::ApplicationSignals
     # @!attribute [rw] entity
     #   The entity (service or resource) that was affected by this change
     #   event, including its key attributes.
+    #
+    #   This is a string-to-string map. It can include the following fields.
+    #
+    #   * `Type` designates the type of object this is.
+    #
+    #   * `ResourceType` specifies the type of the resource. This field is
+    #     used only when the value of the `Type` field is `Resource` or
+    #     `AWS::Resource`.
+    #
+    #   * `Name` specifies the name of the object. This is used only if the
+    #     value of the `Type` field is `Service`, `RemoteService`, or
+    #     `AWS::Service`.
+    #
+    #   * `Identifier` identifies the resource objects of this resource.
+    #     This is used only if the value of the `Type` field is `Resource`
+    #     or `AWS::Resource`.
+    #
+    #   * `Environment` specifies the location where this object is hosted,
+    #     or what it belongs to.
+    #
+    #   * `AwsAccountId` specifies the account where this object is in.
+    #
+    #   Below is an example of a service.
+    #
+    #   `{ "Type": "Service", "Name": "visits-service", "Environment":
+    #   "petclinic-test" }`
+    #
+    #   Below is an example of a resource.
+    #
+    #   `{ "Type": "AWS::Resource", "ResourceType": "AWS::DynamoDB::Table",
+    #   "Identifier": "Customers" }`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] change_event_type
@@ -385,7 +444,9 @@ module Aws::ApplicationSignals
     #   @return [String]
     #
     # @!attribute [rw] event_id
-    #   A unique identifier for this change event.
+    #   A unique identifier for this change event. For CloudTrail-based
+    #   events, this is the CloudTrail event id. For other events, this will
+    #   be `Unknown`.
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -969,6 +1030,11 @@ module Aws::ApplicationSignals
     #     service operation metrics from Application Signals RED metrics
     #     during the Assessment phase
     #
+    #     <note markdown="1"> Anomaly detection is not supported for sparse metrics (those
+    #     missing more than 80% of datapoints within the given time period).
+    #
+    #      </note>
+    #
     #   * `service_quota` - ServiceQuotaAuditor: Monitors resource
     #     utilization against service quotas during the Assessment phase
     #
@@ -1000,6 +1066,11 @@ module Aws::ApplicationSignals
     #   specific entities.
     #   @return [Array<Types::AuditTarget>]
     #
+    # @!attribute [rw] detail_level
+    #   The level of details of the audit findings. Supported values:
+    #   `BRIEF`, `DETAILED`.
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   Include this value, if it was returned by the previous operation, to
     #   get the next set of audit findings.
@@ -1017,12 +1088,25 @@ module Aws::ApplicationSignals
       :end_time,
       :auditors,
       :audit_targets,
+      :detail_level,
       :next_token,
       :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] start_time
+    #   The start of the time period that the returned audit findings apply
+    #   to. When used in a raw HTTP Query API, it is formatted as epoch time
+    #   in seconds. For example, `1698778057`
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time period that the returned audit findings apply
+    #   to. When used in a raw HTTP Query API, it is formatted as epoch time
+    #   in seconds. For example, `1698778057`
+    #   @return [Time]
+    #
     # @!attribute [rw] audit_findings
     #   An array of structures, where each structure contains information
     #   about one audit finding, including the auditor results, severity,
@@ -1037,7 +1121,114 @@ module Aws::ApplicationSignals
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/ListAuditFindingsOutput AWS API Documentation
     #
     class ListAuditFindingsOutput < Struct.new(
+      :start_time,
+      :end_time,
       :audit_findings,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entity
+    #   The entity for which to retrieve change events. This specifies the
+    #   service, resource, or other entity whose event history you want to
+    #   examine.
+    #
+    #   This is a string-to-string map. It can include the following fields.
+    #
+    #   * `Type` designates the type of object this is.
+    #
+    #   * `ResourceType` specifies the type of the resource. This field is
+    #     used only when the value of the `Type` field is `Resource` or
+    #     `AWS::Resource`.
+    #
+    #   * `Name` specifies the name of the object. This is used only if the
+    #     value of the `Type` field is `Service`, `RemoteService`, or
+    #     `AWS::Service`.
+    #
+    #   * `Identifier` identifies the resource objects of this resource.
+    #     This is used only if the value of the `Type` field is `Resource`
+    #     or `AWS::Resource`.
+    #
+    #   * `Environment` specifies the location where this object is hosted,
+    #     or what it belongs to.
+    #
+    #   * `AwsAccountId` specifies the account where this object is in.
+    #
+    #   Below is an example of a service.
+    #
+    #   `{ "Type": "Service", "Name": "visits-service", "Environment":
+    #   "petclinic-test" }`
+    #
+    #   Below is an example of a resource.
+    #
+    #   `{ "Type": "AWS::Resource", "ResourceType": "AWS::DynamoDB::Table",
+    #   "Identifier": "Customers" }`
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] start_time
+    #   The start of the time period to retrieve change events for. When
+    #   used in a raw HTTP Query API, it is formatted as epoch time in
+    #   seconds. For example: `1698778057`
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time period to retrieve change events for. When used
+    #   in a raw HTTP Query API, it is formatted as epoch time in seconds.
+    #   For example: `1698778057`
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of change events to return in one operation. If
+    #   you omit this parameter, the default of 50 is used.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Include this value, if it was returned by the previous operation, to
+    #   get the next set of change events.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/ListEntityEventsInput AWS API Documentation
+    #
+    class ListEntityEventsInput < Struct.new(
+      :entity,
+      :start_time,
+      :end_time,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] start_time
+    #   The start of the time period that the returned change events apply
+    #   to. When used in a raw HTTP Query API, it is formatted as epoch time
+    #   in seconds. For example: `1698778057`
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time period that the returned change events apply to.
+    #   When used in a raw HTTP Query API, it is formatted as epoch time in
+    #   seconds. For example: `1698778057`
+    #   @return [Time]
+    #
+    # @!attribute [rw] change_events
+    #   An array of structures, where each structure contains information
+    #   about one change event that occurred for the specified entity during
+    #   the requested time period.
+    #   @return [Array<Types::ChangeEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   Include this value in your next use of this API to get the next set
+    #   of change events.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/ListEntityEventsOutput AWS API Documentation
+    #
+    class ListEntityEventsOutput < Struct.new(
+      :start_time,
+      :end_time,
+      :change_events,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1048,10 +1239,24 @@ module Aws::ApplicationSignals
     #   get the next set of grouping attribute definitions.
     #   @return [String]
     #
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID to retrieve grouping attribute
+    #   definitions for. Use this when accessing grouping configurations
+    #   from a different account in cross-account monitoring scenarios.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_linked_accounts
+    #   If you are using this operation in a monitoring account, specify
+    #   `true` to include grouping attributes from source accounts in the
+    #   returned data.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-signals-2024-04-15/ListGroupingAttributeDefinitionsInput AWS API Documentation
     #
     class ListGroupingAttributeDefinitionsInput < Struct.new(
-      :next_token)
+      :next_token,
+      :aws_account_id,
+      :include_linked_accounts)
       SENSITIVE = []
       include Aws::Structure
     end

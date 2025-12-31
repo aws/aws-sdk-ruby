@@ -686,6 +686,11 @@ module Aws::CleanRooms
     #   for faster troubleshooting in development and testing environments.
     #   @return [Types::ErrorMessageConfiguration]
     #
+    # @!attribute [rw] synthetic_data_parameters
+    #   The parameters used to generate synthetic data for this analysis
+    #   template.
+    #   @return [Types::SyntheticDataParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplate AWS API Documentation
     #
     class AnalysisTemplate < Struct.new(
@@ -705,7 +710,8 @@ module Aws::CleanRooms
       :source_metadata,
       :analysis_parameters,
       :validations,
-      :error_message_configuration)
+      :error_message_configuration,
+      :synthetic_data_parameters)
       SENSITIVE = [:analysis_parameters]
       include Aws::Structure
     end
@@ -813,6 +819,11 @@ module Aws::CleanRooms
     #   The description of the analysis template.
     #   @return [String]
     #
+    # @!attribute [rw] is_synthetic_data
+    #   Indicates if this analysis template summary generated synthetic
+    #   data.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplateSummary AWS API Documentation
     #
     class AnalysisTemplateSummary < Struct.new(
@@ -825,7 +836,8 @@ module Aws::CleanRooms
       :membership_id,
       :collaboration_arn,
       :collaboration_id,
-      :description)
+      :description,
+      :is_synthetic_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -878,6 +890,22 @@ module Aws::CleanRooms
     #
     class AnalysisTemplateValidationStatusReason < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains detailed information about the approval state of a given
+    # member in the collaboration for a given collaboration change request.
+    #
+    # @!attribute [rw] status
+    #   The approval status of a member's vote on the change request. Valid
+    #   values are PENDING (if they haven't voted), APPROVED, or DENIED.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ApprovalStatusDetails AWS API Documentation
+    #
+    class ApprovalStatusDetails < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1222,16 +1250,24 @@ module Aws::CleanRooms
     #   The member change specification when the change type is `MEMBER`.
     #   @return [Types::MemberChangeSpecification]
     #
+    # @!attribute [rw] collaboration
+    #   The collaboration configuration changes being requested. Currently,
+    #   this only supports modifying which change types are auto-approved
+    #   for the collaboration.
+    #   @return [Types::CollaborationChangeSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ChangeSpecification AWS API Documentation
     #
     class ChangeSpecification < Struct.new(
       :member,
+      :collaboration,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class Member < ChangeSpecification; end
+      class Collaboration < ChangeSpecification; end
       class Unknown < ChangeSpecification; end
     end
 
@@ -1428,6 +1464,11 @@ module Aws::CleanRooms
     #   for faster troubleshooting in development and testing environments.
     #   @return [Types::ErrorMessageConfiguration]
     #
+    # @!attribute [rw] synthetic_data_parameters
+    #   The synthetic data generation parameters configured for this
+    #   collaboration analysis template.
+    #   @return [Types::SyntheticDataParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationAnalysisTemplate AWS API Documentation
     #
     class CollaborationAnalysisTemplate < Struct.new(
@@ -1446,7 +1487,8 @@ module Aws::CleanRooms
       :source_metadata,
       :analysis_parameters,
       :validations,
-      :error_message_configuration)
+      :error_message_configuration,
+      :synthetic_data_parameters)
       SENSITIVE = [:analysis_parameters]
       include Aws::Structure
     end
@@ -1493,6 +1535,11 @@ module Aws::CleanRooms
     #   The description of the analysis template.
     #   @return [String]
     #
+    # @!attribute [rw] is_synthetic_data
+    #   Indicates if this collaboration analysis template uses synthetic
+    #   data generation.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationAnalysisTemplateSummary AWS API Documentation
     #
     class CollaborationAnalysisTemplateSummary < Struct.new(
@@ -1504,7 +1551,8 @@ module Aws::CleanRooms
       :collaboration_arn,
       :collaboration_id,
       :creator_account_id,
-      :description)
+      :description,
+      :is_synthetic_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1543,6 +1591,11 @@ module Aws::CleanRooms
     #   The list of changes specified in this change request.
     #   @return [Array<Types::Change>]
     #
+    # @!attribute [rw] approvals
+    #   A list of approval details from collaboration members, including
+    #   approval status and multi-party approval workflow information.
+    #   @return [Hash<String,Types::ApprovalStatusDetails>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationChangeRequest AWS API Documentation
     #
     class CollaborationChangeRequest < Struct.new(
@@ -1552,7 +1605,8 @@ module Aws::CleanRooms
       :update_time,
       :status,
       :is_auto_approved,
-      :changes)
+      :changes,
+      :approvals)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1587,6 +1641,11 @@ module Aws::CleanRooms
     #   Summary of the changes in this change request.
     #   @return [Array<Types::Change>]
     #
+    # @!attribute [rw] approvals
+    #   Summary of approval statuses from all collaboration members for this
+    #   change request.
+    #   @return [Hash<String,Types::ApprovalStatusDetails>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationChangeRequestSummary AWS API Documentation
     #
     class CollaborationChangeRequestSummary < Struct.new(
@@ -1596,7 +1655,25 @@ module Aws::CleanRooms
       :update_time,
       :status,
       :is_auto_approved,
-      :changes)
+      :changes,
+      :approvals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the specific changes being requested for a collaboration,
+    # including configuration modifications and approval requirements.
+    #
+    # @!attribute [rw] auto_approved_change_types
+    #   Defines requested updates to properties of the collaboration.
+    #   Currently, this only supports modifying which change types are
+    #   auto-approved for the collaboration.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationChangeSpecification AWS API Documentation
+    #
+    class CollaborationChangeSpecification < Struct.new(
+      :auto_approved_change_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2160,6 +2237,24 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # Contains classification information for data columns, including
+    # mappings that specify how columns should be handled during synthetic
+    # data generation and privacy analysis.
+    #
+    # @!attribute [rw] column_mapping
+    #   A mapping that defines the classification of data columns for
+    #   synthetic data generation and specifies how each column should be
+    #   handled during the privacy-preserving data synthesis process.
+    #   @return [Array<Types::SyntheticDataColumnProperties>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ColumnClassificationDetails AWS API Documentation
+    #
+    class ColumnClassificationDetails < Struct.new(
+      :column_mapping)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration of the compute resources for an analysis with the
     # Spark analytics engine.
     #
@@ -2406,8 +2501,8 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] allowed_columns
-    #   The columns within the underlying Glue table that can be utilized
-    #   within collaborations.
+    #   The columns within the underlying Glue table that can be used within
+    #   collaborations.
     #   @return [Array<String>]
     #
     # @!attribute [rw] selected_analysis_methods
@@ -3188,6 +3283,11 @@ module Aws::CleanRooms
     #   for faster troubleshooting in development and testing environments.
     #   @return [Types::ErrorMessageConfiguration]
     #
+    # @!attribute [rw] synthetic_data_parameters
+    #   The parameters for generating synthetic data when running the
+    #   analysis template.
+    #   @return [Types::SyntheticDataParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateAnalysisTemplateInput AWS API Documentation
     #
     class CreateAnalysisTemplateInput < Struct.new(
@@ -3199,7 +3299,8 @@ module Aws::CleanRooms
       :tags,
       :analysis_parameters,
       :schema,
-      :error_message_configuration)
+      :error_message_configuration,
+      :synthetic_data_parameters)
       SENSITIVE = [:analysis_parameters]
       include Aws::Structure
     end
@@ -6556,11 +6657,48 @@ module Aws::CleanRooms
     #   inference.
     #   @return [Types::ModelInferencePaymentConfig]
     #
+    # @!attribute [rw] synthetic_data_generation
+    #   The payment configuration for machine learning synthetic data
+    #   generation.
+    #   @return [Types::SyntheticDataGenerationPaymentConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MLPaymentConfig AWS API Documentation
     #
     class MLPaymentConfig < Struct.new(
       :model_training,
-      :model_inference)
+      :model_inference,
+      :synthetic_data_generation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Parameters that control the generation of synthetic data for machine
+    # learning, including privacy settings and column classification
+    # details.
+    #
+    # @!attribute [rw] epsilon
+    #   The epsilon value for differential privacy when generating synthetic
+    #   data. Lower values provide stronger privacy guarantees but may
+    #   reduce data utility.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_membership_inference_attack_score
+    #   The maximum acceptable score for membership inference attack
+    #   vulnerability. Synthetic data generation fails if the score for the
+    #   resulting data exceeds this threshold.
+    #   @return [Float]
+    #
+    # @!attribute [rw] column_classification
+    #   Classification details for data columns that specify how each column
+    #   should be treated during synthetic data generation.
+    #   @return [Types::ColumnClassificationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MLSyntheticDataParameters AWS API Documentation
+    #
+    class MLSyntheticDataParameters < Struct.new(
+      :epsilon,
+      :max_membership_inference_attack_score,
+      :column_classification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6851,11 +6989,17 @@ module Aws::CleanRooms
     #   inference.
     #   @return [Types::MembershipModelInferencePaymentConfig]
     #
+    # @!attribute [rw] synthetic_data_generation
+    #   The payment configuration for synthetic data generation for this
+    #   machine learning membership.
+    #   @return [Types::MembershipSyntheticDataGenerationPaymentConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MembershipMLPaymentConfig AWS API Documentation
     #
     class MembershipMLPaymentConfig < Struct.new(
       :model_training,
-      :model_inference)
+      :model_inference,
+      :synthetic_data_generation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7135,6 +7279,22 @@ module Aws::CleanRooms
       :member_abilities,
       :ml_member_abilities,
       :payment_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for payment for synthetic data generation in a
+    # membership.
+    #
+    # @!attribute [rw] is_responsible
+    #   Indicates if this membership is responsible for paying for synthetic
+    #   data generation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MembershipSyntheticDataGenerationPaymentConfig AWS API Documentation
+    #
+    class MembershipSyntheticDataGenerationPaymentConfig < Struct.new(
+      :is_responsible)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9192,6 +9352,78 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # Properties that define how a specific data column should be handled
+    # during synthetic data generation, including its name, type, and role
+    # in predictive modeling.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the data column as it appears in the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_type
+    #   The data type of the column, which determines how the synthetic data
+    #   generation algorithm processes and synthesizes values for this
+    #   column.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_predictive_value
+    #   Indicates if this column contains predictive values that should be
+    #   treated as target variables in machine learning models. This affects
+    #   how the synthetic data generation preserves statistical
+    #   relationships.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SyntheticDataColumnProperties AWS API Documentation
+    #
+    class SyntheticDataColumnProperties < Struct.new(
+      :column_name,
+      :column_type,
+      :is_predictive_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Payment configuration for synthetic data generation.
+    #
+    # @!attribute [rw] is_responsible
+    #   Indicates who is responsible for paying for synthetic data
+    #   generation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SyntheticDataGenerationPaymentConfig AWS API Documentation
+    #
+    class SyntheticDataGenerationPaymentConfig < Struct.new(
+      :is_responsible)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The parameters that control how synthetic data is generated, including
+    # privacy settings, column classifications, and other configuration
+    # options that affect the data synthesis process.
+    #
+    # @note SyntheticDataParameters is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note SyntheticDataParameters is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SyntheticDataParameters corresponding to the set member.
+    #
+    # @!attribute [rw] ml_synthetic_data_parameters
+    #   The machine learning-specific parameters for synthetic data
+    #   generation.
+    #   @return [Types::MLSyntheticDataParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SyntheticDataParameters AWS API Documentation
+    #
+    class SyntheticDataParameters < Struct.new(
+      :ml_synthetic_data_parameters,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class MlSyntheticDataParameters < SyntheticDataParameters; end
+      class Unknown < SyntheticDataParameters; end
+    end
+
     # A pointer to the dataset that underlies this table.
     #
     # @note TableReference is a union - when making an API calls you must set exactly one of the members.
@@ -9317,6 +9549,51 @@ module Aws::CleanRooms
     #
     class UpdateAnalysisTemplateOutput < Struct.new(
       :analysis_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_identifier
+    #   The unique identifier of the collaboration that contains the change
+    #   request to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_request_identifier
+    #   The unique identifier of the specific change request to be updated
+    #   within the collaboration.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action to perform on the change request. Valid values include
+    #   APPROVE (approve the change), DENY (reject the change), CANCEL
+    #   (cancel the request), and COMMIT (commit after the request is
+    #   approved).
+    #
+    #   For change requests without automatic approval, a member in the
+    #   collaboration can manually APPROVE or DENY a change request. The
+    #   collaboration owner can manually CANCEL or COMMIT a change request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateCollaborationChangeRequestInput AWS API Documentation
+    #
+    class UpdateCollaborationChangeRequestInput < Struct.new(
+      :collaboration_identifier,
+      :change_request_identifier,
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_change_request
+    #   Represents a request to modify a collaboration. Change requests
+    #   enable structured modifications to collaborations after they have
+    #   been created.
+    #   @return [Types::CollaborationChangeRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateCollaborationChangeRequestOutput AWS API Documentation
+    #
+    class UpdateCollaborationChangeRequestOutput < Struct.new(
+      :collaboration_change_request)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9906,13 +10183,51 @@ module Aws::CleanRooms
     #   128.
     #   @return [Integer]
     #
+    # @!attribute [rw] properties
+    #   The configuration properties for the worker compute environment.
+    #   These properties allow you to customize the compute settings for
+    #   your Clean Rooms workloads.
+    #   @return [Types::WorkerComputeConfigurationProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/WorkerComputeConfiguration AWS API Documentation
     #
     class WorkerComputeConfiguration < Struct.new(
       :type,
-      :number)
+      :number,
+      :properties)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The configuration properties that define the compute environment
+    # settings for workers in Clean Rooms. These properties enable
+    # customization of the underlying compute environment to optimize
+    # performance for your specific workloads.
+    #
+    # @note WorkerComputeConfigurationProperties is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note WorkerComputeConfigurationProperties is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of WorkerComputeConfigurationProperties corresponding to the set member.
+    #
+    # @!attribute [rw] spark
+    #   The Spark configuration properties for SQL workloads. This map
+    #   contains key-value pairs that configure Apache Spark settings to
+    #   optimize performance for your data processing jobs. You can specify
+    #   up to 50 Spark properties, with each key being 1-200 characters and
+    #   each value being 0-500 characters. These properties allow you to
+    #   adjust compute capacity for large datasets and complex workloads.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/WorkerComputeConfigurationProperties AWS API Documentation
+    #
+    class WorkerComputeConfigurationProperties < Struct.new(
+      :spark,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Spark < WorkerComputeConfigurationProperties; end
+      class Unknown < WorkerComputeConfigurationProperties; end
     end
 
   end

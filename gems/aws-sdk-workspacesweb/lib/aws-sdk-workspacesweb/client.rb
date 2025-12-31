@@ -779,7 +779,7 @@ module Aws::WorkSpacesWeb
     # @option params [Hash<String,String>] :additional_encryption_context
     #   Additional encryption context of the browser settings.
     #
-    # @option params [required, String] :browser_policy
+    # @option params [String] :browser_policy
     #   A JSON string containing Chrome Enterprise policies that will be
     #   applied to all streaming sessions.
     #
@@ -795,6 +795,11 @@ module Aws::WorkSpacesWeb
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [Types::WebContentFilteringPolicy] :web_content_filtering_policy
+    #   The policy that specifies which URLs end users are allowed to access
+    #   or which URLs or domain categories they are restricted from accessing
+    #   for enhanced security.
     #
     # @return [Types::CreateBrowserSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -813,8 +818,13 @@ module Aws::WorkSpacesWeb
     #     additional_encryption_context: {
     #       "StringType" => "StringType",
     #     },
-    #     browser_policy: "BrowserPolicy", # required
+    #     browser_policy: "BrowserPolicy",
     #     client_token: "ClientToken",
+    #     web_content_filtering_policy: {
+    #       blocked_categories: ["Cults"], # accepts Cults, Gambling, Nudity, Pornography, SexEducation, Tasteless, Violence, DownloadSites, ImageSharing, PeerToPeer, StreamingMediaAndDownloads, GenerativeAI, CriminalActivity, Hacking, HateAndIntolerance, IllegalDrug, IllegalSoftware, SchoolCheating, SelfHarm, Weapons, Chat, Games, InstantMessaging, ProfessionalNetwork, SocialNetworking, WebBasedEmail, ParkedDomains
+    #       allowed_urls: ["UrlPattern"],
+    #       blocked_urls: ["UrlPattern"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -1397,7 +1407,7 @@ module Aws::WorkSpacesWeb
     #     event_filter: { # required
     #       all: {
     #       },
-    #       include: ["WebsiteInteract"], # accepts WebsiteInteract, FileDownloadFromSecureBrowserToRemoteDisk, FileTransferFromRemoteToLocalDisk, FileTransferFromLocalToRemoteDisk, FileUploadFromRemoteDiskToSecureBrowser, ContentPasteToWebsite, ContentTransferFromLocalToRemoteClipboard, ContentCopyFromWebsite, UrlLoad, TabOpen, TabClose, PrintJobSubmit, SessionConnect, SessionStart, SessionDisconnect, SessionEnd
+    #       include: ["WebsiteInteract"], # accepts WebsiteInteract, FileDownloadFromSecureBrowserToRemoteDisk, FileTransferFromRemoteToLocalDisk, FileTransferFromLocalToRemoteDisk, FileUploadFromRemoteDiskToSecureBrowser, ContentPasteToWebsite, ContentTransferFromLocalToRemoteClipboard, ContentCopyFromWebsite, UrlLoad, TabOpen, TabClose, PrintJobSubmit, SessionConnect, SessionStart, SessionDisconnect, SessionEnd, UrlBlockByContentFilter
     #     },
     #     log_configuration: { # required
     #       s3: {
@@ -1617,6 +1627,16 @@ module Aws::WorkSpacesWeb
     #   sessions. If administrators do not modify these settings, end users
     #   retain control over their toolbar preferences.
     #
+    # @option params [Types::BrandingConfigurationCreateInput] :branding_configuration_input
+    #   The branding configuration input that customizes the appearance of the
+    #   web portal for end users. This includes a custom logo, favicon,
+    #   wallpaper, localized strings, color theme, and an optional terms of
+    #   service.
+    #
+    # @option params [String] :web_authn_allowed
+    #   Specifies whether the user can use WebAuthn redirection for
+    #   passwordless login to websites within the streaming session.
+    #
     # @return [Types::CreateUserSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserSettingsResponse#user_settings_arn #user_settings_arn} => String
@@ -1665,6 +1685,35 @@ module Aws::WorkSpacesWeb
     #       hidden_toolbar_items: ["Windows"], # accepts Windows, DualMonitor, FullScreen, Webcam, Microphone
     #       max_display_resolution: "size4096X2160", # accepts size4096X2160, size3840X2160, size3440X1440, size2560X1440, size1920X1080, size1280X720, size1024X768, size800X600
     #     },
+    #     branding_configuration_input: {
+    #       logo: { # required
+    #         blob: "data",
+    #         s3_uri: "S3Uri",
+    #       },
+    #       wallpaper: { # required
+    #         blob: "data",
+    #         s3_uri: "S3Uri",
+    #       },
+    #       favicon: { # required
+    #         blob: "data",
+    #         s3_uri: "S3Uri",
+    #       },
+    #       localized_strings: { # required
+    #         "de-DE" => {
+    #           browser_tab_title: "LocalizedBrandingStringsBrowserTabTitleString", # required
+    #           welcome_text: "LocalizedBrandingStringsWelcomeTextString", # required
+    #           login_title: "LocalizedBrandingStringsLoginTitleString",
+    #           login_description: "LocalizedBrandingStringsLoginDescriptionString",
+    #           login_button_text: "LocalizedBrandingStringsLoginButtonTextString",
+    #           contact_link: "ContactLinkUrl",
+    #           contact_button_text: "LocalizedBrandingStringsContactButtonTextString",
+    #           loading_text: "LocalizedBrandingStringsLoadingTextString",
+    #         },
+    #       },
+    #       color_theme: "Light", # required, accepts Light, Dark
+    #       terms_of_service: "Markdown",
+    #     },
+    #     web_authn_allowed: "Disabled", # accepts Disabled, Enabled
     #   })
     #
     # @example Response structure
@@ -2152,6 +2201,12 @@ module Aws::WorkSpacesWeb
     #   resp.browser_settings.customer_managed_key #=> String
     #   resp.browser_settings.additional_encryption_context #=> Hash
     #   resp.browser_settings.additional_encryption_context["StringType"] #=> String
+    #   resp.browser_settings.web_content_filtering_policy.blocked_categories #=> Array
+    #   resp.browser_settings.web_content_filtering_policy.blocked_categories[0] #=> String, one of "Cults", "Gambling", "Nudity", "Pornography", "SexEducation", "Tasteless", "Violence", "DownloadSites", "ImageSharing", "PeerToPeer", "StreamingMediaAndDownloads", "GenerativeAI", "CriminalActivity", "Hacking", "HateAndIntolerance", "IllegalDrug", "IllegalSoftware", "SchoolCheating", "SelfHarm", "Weapons", "Chat", "Games", "InstantMessaging", "ProfessionalNetwork", "SocialNetworking", "WebBasedEmail", "ParkedDomains"
+    #   resp.browser_settings.web_content_filtering_policy.allowed_urls #=> Array
+    #   resp.browser_settings.web_content_filtering_policy.allowed_urls[0] #=> String
+    #   resp.browser_settings.web_content_filtering_policy.blocked_urls #=> Array
+    #   resp.browser_settings.web_content_filtering_policy.blocked_urls[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetBrowserSettings AWS API Documentation
     #
@@ -2531,7 +2586,7 @@ module Aws::WorkSpacesWeb
     #
     #   resp.session_logger.session_logger_arn #=> String
     #   resp.session_logger.event_filter.include #=> Array
-    #   resp.session_logger.event_filter.include[0] #=> String, one of "WebsiteInteract", "FileDownloadFromSecureBrowserToRemoteDisk", "FileTransferFromRemoteToLocalDisk", "FileTransferFromLocalToRemoteDisk", "FileUploadFromRemoteDiskToSecureBrowser", "ContentPasteToWebsite", "ContentTransferFromLocalToRemoteClipboard", "ContentCopyFromWebsite", "UrlLoad", "TabOpen", "TabClose", "PrintJobSubmit", "SessionConnect", "SessionStart", "SessionDisconnect", "SessionEnd"
+    #   resp.session_logger.event_filter.include[0] #=> String, one of "WebsiteInteract", "FileDownloadFromSecureBrowserToRemoteDisk", "FileTransferFromRemoteToLocalDisk", "FileTransferFromLocalToRemoteDisk", "FileUploadFromRemoteDiskToSecureBrowser", "ContentPasteToWebsite", "ContentTransferFromLocalToRemoteClipboard", "ContentCopyFromWebsite", "UrlLoad", "TabOpen", "TabClose", "PrintJobSubmit", "SessionConnect", "SessionStart", "SessionDisconnect", "SessionEnd", "UrlBlockByContentFilter"
     #   resp.session_logger.log_configuration.s3.bucket #=> String
     #   resp.session_logger.log_configuration.s3.key_prefix #=> String
     #   resp.session_logger.log_configuration.s3.bucket_owner #=> String
@@ -2698,6 +2753,27 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings.toolbar_configuration.hidden_toolbar_items #=> Array
     #   resp.user_settings.toolbar_configuration.hidden_toolbar_items[0] #=> String, one of "Windows", "DualMonitor", "FullScreen", "Webcam", "Microphone"
     #   resp.user_settings.toolbar_configuration.max_display_resolution #=> String, one of "size4096X2160", "size3840X2160", "size3440X1440", "size2560X1440", "size1920X1080", "size1280X720", "size1024X768", "size800X600"
+    #   resp.user_settings.branding_configuration.logo.mime_type #=> String, one of "image/png", "image/jpeg", "image/x-icon"
+    #   resp.user_settings.branding_configuration.logo.file_extension #=> String
+    #   resp.user_settings.branding_configuration.logo.last_upload_timestamp #=> Time
+    #   resp.user_settings.branding_configuration.wallpaper.mime_type #=> String, one of "image/png", "image/jpeg", "image/x-icon"
+    #   resp.user_settings.branding_configuration.wallpaper.file_extension #=> String
+    #   resp.user_settings.branding_configuration.wallpaper.last_upload_timestamp #=> Time
+    #   resp.user_settings.branding_configuration.favicon.mime_type #=> String, one of "image/png", "image/jpeg", "image/x-icon"
+    #   resp.user_settings.branding_configuration.favicon.file_extension #=> String
+    #   resp.user_settings.branding_configuration.favicon.last_upload_timestamp #=> Time
+    #   resp.user_settings.branding_configuration.localized_strings #=> Hash
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].browser_tab_title #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].welcome_text #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].login_title #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].login_description #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].login_button_text #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].contact_link #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].contact_button_text #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].loading_text #=> String
+    #   resp.user_settings.branding_configuration.color_theme #=> String, one of "Light", "Dark"
+    #   resp.user_settings.branding_configuration.terms_of_service #=> String
+    #   resp.user_settings.web_authn_allowed #=> String, one of "Disabled", "Enabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/GetUserSettings AWS API Documentation
     #
@@ -3350,6 +3426,27 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings[0].toolbar_configuration.hidden_toolbar_items #=> Array
     #   resp.user_settings[0].toolbar_configuration.hidden_toolbar_items[0] #=> String, one of "Windows", "DualMonitor", "FullScreen", "Webcam", "Microphone"
     #   resp.user_settings[0].toolbar_configuration.max_display_resolution #=> String, one of "size4096X2160", "size3840X2160", "size3440X1440", "size2560X1440", "size1920X1080", "size1280X720", "size1024X768", "size800X600"
+    #   resp.user_settings[0].branding_configuration.logo.mime_type #=> String, one of "image/png", "image/jpeg", "image/x-icon"
+    #   resp.user_settings[0].branding_configuration.logo.file_extension #=> String
+    #   resp.user_settings[0].branding_configuration.logo.last_upload_timestamp #=> Time
+    #   resp.user_settings[0].branding_configuration.wallpaper.mime_type #=> String, one of "image/png", "image/jpeg", "image/x-icon"
+    #   resp.user_settings[0].branding_configuration.wallpaper.file_extension #=> String
+    #   resp.user_settings[0].branding_configuration.wallpaper.last_upload_timestamp #=> Time
+    #   resp.user_settings[0].branding_configuration.favicon.mime_type #=> String, one of "image/png", "image/jpeg", "image/x-icon"
+    #   resp.user_settings[0].branding_configuration.favicon.file_extension #=> String
+    #   resp.user_settings[0].branding_configuration.favicon.last_upload_timestamp #=> Time
+    #   resp.user_settings[0].branding_configuration.localized_strings #=> Hash
+    #   resp.user_settings[0].branding_configuration.localized_strings["Locale"].browser_tab_title #=> String
+    #   resp.user_settings[0].branding_configuration.localized_strings["Locale"].welcome_text #=> String
+    #   resp.user_settings[0].branding_configuration.localized_strings["Locale"].login_title #=> String
+    #   resp.user_settings[0].branding_configuration.localized_strings["Locale"].login_description #=> String
+    #   resp.user_settings[0].branding_configuration.localized_strings["Locale"].login_button_text #=> String
+    #   resp.user_settings[0].branding_configuration.localized_strings["Locale"].contact_link #=> String
+    #   resp.user_settings[0].branding_configuration.localized_strings["Locale"].contact_button_text #=> String
+    #   resp.user_settings[0].branding_configuration.localized_strings["Locale"].loading_text #=> String
+    #   resp.user_settings[0].branding_configuration.color_theme #=> String, one of "Light", "Dark"
+    #   resp.user_settings[0].branding_configuration.terms_of_service #=> String
+    #   resp.user_settings[0].web_authn_allowed #=> String, one of "Disabled", "Enabled"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/ListUserSettings AWS API Documentation
@@ -3454,6 +3551,11 @@ module Aws::WorkSpacesWeb
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::WebContentFilteringPolicy] :web_content_filtering_policy
+    #   The policy that specifies which URLs end users are allowed to access
+    #   or which URLs or domain categories they are restricted from accessing
+    #   for enhanced security.
+    #
     # @return [Types::UpdateBrowserSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBrowserSettingsResponse#browser_settings #browser_settings} => Types::BrowserSettings
@@ -3464,6 +3566,11 @@ module Aws::WorkSpacesWeb
     #     browser_settings_arn: "ARN", # required
     #     browser_policy: "BrowserPolicy",
     #     client_token: "ClientToken",
+    #     web_content_filtering_policy: {
+    #       blocked_categories: ["Cults"], # accepts Cults, Gambling, Nudity, Pornography, SexEducation, Tasteless, Violence, DownloadSites, ImageSharing, PeerToPeer, StreamingMediaAndDownloads, GenerativeAI, CriminalActivity, Hacking, HateAndIntolerance, IllegalDrug, IllegalSoftware, SchoolCheating, SelfHarm, Weapons, Chat, Games, InstantMessaging, ProfessionalNetwork, SocialNetworking, WebBasedEmail, ParkedDomains
+    #       allowed_urls: ["UrlPattern"],
+    #       blocked_urls: ["UrlPattern"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -3475,6 +3582,12 @@ module Aws::WorkSpacesWeb
     #   resp.browser_settings.customer_managed_key #=> String
     #   resp.browser_settings.additional_encryption_context #=> Hash
     #   resp.browser_settings.additional_encryption_context["StringType"] #=> String
+    #   resp.browser_settings.web_content_filtering_policy.blocked_categories #=> Array
+    #   resp.browser_settings.web_content_filtering_policy.blocked_categories[0] #=> String, one of "Cults", "Gambling", "Nudity", "Pornography", "SexEducation", "Tasteless", "Violence", "DownloadSites", "ImageSharing", "PeerToPeer", "StreamingMediaAndDownloads", "GenerativeAI", "CriminalActivity", "Hacking", "HateAndIntolerance", "IllegalDrug", "IllegalSoftware", "SchoolCheating", "SelfHarm", "Weapons", "Chat", "Games", "InstantMessaging", "ProfessionalNetwork", "SocialNetworking", "WebBasedEmail", "ParkedDomains"
+    #   resp.browser_settings.web_content_filtering_policy.allowed_urls #=> Array
+    #   resp.browser_settings.web_content_filtering_policy.allowed_urls[0] #=> String
+    #   resp.browser_settings.web_content_filtering_policy.blocked_urls #=> Array
+    #   resp.browser_settings.web_content_filtering_policy.blocked_urls[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateBrowserSettings AWS API Documentation
     #
@@ -4035,7 +4148,7 @@ module Aws::WorkSpacesWeb
     #     event_filter: {
     #       all: {
     #       },
-    #       include: ["WebsiteInteract"], # accepts WebsiteInteract, FileDownloadFromSecureBrowserToRemoteDisk, FileTransferFromRemoteToLocalDisk, FileTransferFromLocalToRemoteDisk, FileUploadFromRemoteDiskToSecureBrowser, ContentPasteToWebsite, ContentTransferFromLocalToRemoteClipboard, ContentCopyFromWebsite, UrlLoad, TabOpen, TabClose, PrintJobSubmit, SessionConnect, SessionStart, SessionDisconnect, SessionEnd
+    #       include: ["WebsiteInteract"], # accepts WebsiteInteract, FileDownloadFromSecureBrowserToRemoteDisk, FileTransferFromRemoteToLocalDisk, FileTransferFromLocalToRemoteDisk, FileUploadFromRemoteDiskToSecureBrowser, ContentPasteToWebsite, ContentTransferFromLocalToRemoteClipboard, ContentCopyFromWebsite, UrlLoad, TabOpen, TabClose, PrintJobSubmit, SessionConnect, SessionStart, SessionDisconnect, SessionEnd, UrlBlockByContentFilter
     #     },
     #     log_configuration: {
     #       s3: {
@@ -4053,7 +4166,7 @@ module Aws::WorkSpacesWeb
     #
     #   resp.session_logger.session_logger_arn #=> String
     #   resp.session_logger.event_filter.include #=> Array
-    #   resp.session_logger.event_filter.include[0] #=> String, one of "WebsiteInteract", "FileDownloadFromSecureBrowserToRemoteDisk", "FileTransferFromRemoteToLocalDisk", "FileTransferFromLocalToRemoteDisk", "FileUploadFromRemoteDiskToSecureBrowser", "ContentPasteToWebsite", "ContentTransferFromLocalToRemoteClipboard", "ContentCopyFromWebsite", "UrlLoad", "TabOpen", "TabClose", "PrintJobSubmit", "SessionConnect", "SessionStart", "SessionDisconnect", "SessionEnd"
+    #   resp.session_logger.event_filter.include[0] #=> String, one of "WebsiteInteract", "FileDownloadFromSecureBrowserToRemoteDisk", "FileTransferFromRemoteToLocalDisk", "FileTransferFromLocalToRemoteDisk", "FileUploadFromRemoteDiskToSecureBrowser", "ContentPasteToWebsite", "ContentTransferFromLocalToRemoteClipboard", "ContentCopyFromWebsite", "UrlLoad", "TabOpen", "TabClose", "PrintJobSubmit", "SessionConnect", "SessionStart", "SessionDisconnect", "SessionEnd", "UrlBlockByContentFilter"
     #   resp.session_logger.log_configuration.s3.bucket #=> String
     #   resp.session_logger.log_configuration.s3.key_prefix #=> String
     #   resp.session_logger.log_configuration.s3.bucket_owner #=> String
@@ -4239,6 +4352,18 @@ module Aws::WorkSpacesWeb
     #   sessions. If administrators do not modify these settings, end users
     #   retain control over their toolbar preferences.
     #
+    # @option params [Types::BrandingConfigurationUpdateInput] :branding_configuration_input
+    #   The branding configuration that customizes the appearance of the web
+    #   portal for end users. When updating user settings without an existing
+    #   branding configuration, all fields (logo, favicon, wallpaper,
+    #   localized strings, and color theme) are required except for terms of
+    #   service. When updating user settings with an existing branding
+    #   configuration, all fields are optional.
+    #
+    # @option params [String] :web_authn_allowed
+    #   Specifies whether the user can use WebAuthn redirection for
+    #   passwordless login to websites within the streaming session.
+    #
     # @return [Types::UpdateUserSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateUserSettingsResponse#user_settings #user_settings} => Types::UserSettings
@@ -4278,6 +4403,35 @@ module Aws::WorkSpacesWeb
     #       hidden_toolbar_items: ["Windows"], # accepts Windows, DualMonitor, FullScreen, Webcam, Microphone
     #       max_display_resolution: "size4096X2160", # accepts size4096X2160, size3840X2160, size3440X1440, size2560X1440, size1920X1080, size1280X720, size1024X768, size800X600
     #     },
+    #     branding_configuration_input: {
+    #       logo: {
+    #         blob: "data",
+    #         s3_uri: "S3Uri",
+    #       },
+    #       wallpaper: {
+    #         blob: "data",
+    #         s3_uri: "S3Uri",
+    #       },
+    #       favicon: {
+    #         blob: "data",
+    #         s3_uri: "S3Uri",
+    #       },
+    #       localized_strings: {
+    #         "de-DE" => {
+    #           browser_tab_title: "LocalizedBrandingStringsBrowserTabTitleString", # required
+    #           welcome_text: "LocalizedBrandingStringsWelcomeTextString", # required
+    #           login_title: "LocalizedBrandingStringsLoginTitleString",
+    #           login_description: "LocalizedBrandingStringsLoginDescriptionString",
+    #           login_button_text: "LocalizedBrandingStringsLoginButtonTextString",
+    #           contact_link: "ContactLinkUrl",
+    #           contact_button_text: "LocalizedBrandingStringsContactButtonTextString",
+    #           loading_text: "LocalizedBrandingStringsLoadingTextString",
+    #         },
+    #       },
+    #       color_theme: "Light", # accepts Light, Dark
+    #       terms_of_service: "Markdown",
+    #     },
+    #     web_authn_allowed: "Disabled", # accepts Disabled, Enabled
     #   })
     #
     # @example Response structure
@@ -4309,6 +4463,27 @@ module Aws::WorkSpacesWeb
     #   resp.user_settings.toolbar_configuration.hidden_toolbar_items #=> Array
     #   resp.user_settings.toolbar_configuration.hidden_toolbar_items[0] #=> String, one of "Windows", "DualMonitor", "FullScreen", "Webcam", "Microphone"
     #   resp.user_settings.toolbar_configuration.max_display_resolution #=> String, one of "size4096X2160", "size3840X2160", "size3440X1440", "size2560X1440", "size1920X1080", "size1280X720", "size1024X768", "size800X600"
+    #   resp.user_settings.branding_configuration.logo.mime_type #=> String, one of "image/png", "image/jpeg", "image/x-icon"
+    #   resp.user_settings.branding_configuration.logo.file_extension #=> String
+    #   resp.user_settings.branding_configuration.logo.last_upload_timestamp #=> Time
+    #   resp.user_settings.branding_configuration.wallpaper.mime_type #=> String, one of "image/png", "image/jpeg", "image/x-icon"
+    #   resp.user_settings.branding_configuration.wallpaper.file_extension #=> String
+    #   resp.user_settings.branding_configuration.wallpaper.last_upload_timestamp #=> Time
+    #   resp.user_settings.branding_configuration.favicon.mime_type #=> String, one of "image/png", "image/jpeg", "image/x-icon"
+    #   resp.user_settings.branding_configuration.favicon.file_extension #=> String
+    #   resp.user_settings.branding_configuration.favicon.last_upload_timestamp #=> Time
+    #   resp.user_settings.branding_configuration.localized_strings #=> Hash
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].browser_tab_title #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].welcome_text #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].login_title #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].login_description #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].login_button_text #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].contact_link #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].contact_button_text #=> String
+    #   resp.user_settings.branding_configuration.localized_strings["Locale"].loading_text #=> String
+    #   resp.user_settings.branding_configuration.color_theme #=> String, one of "Light", "Dark"
+    #   resp.user_settings.branding_configuration.terms_of_service #=> String
+    #   resp.user_settings.web_authn_allowed #=> String, one of "Disabled", "Enabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/UpdateUserSettings AWS API Documentation
     #
@@ -4337,7 +4512,7 @@ module Aws::WorkSpacesWeb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspacesweb'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

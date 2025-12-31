@@ -17,6 +17,9 @@ module AwsSdkCodeGenerator
       # @return [String]
       attr_reader :prefix
 
+      # @return [Service]
+      attr_reader :service
+
       # @return [String|nil]
       def generated_src_warning
         return if @service.protocol == 'api-gateway'
@@ -80,10 +83,10 @@ module AwsSdkCodeGenerator
           auto_load(p.path, p.class_name.split('::').last, true)
         end
 
-        paths << auto_load("#{@prefix}/client", :Client)
+        paths << auto_load("#{@prefix}/client", :Client) unless @service.h2_required_setting?
         paths << auto_load("#{@prefix}/errors", :Errors)
         paths << auto_load("#{@prefix}/waiters", :Waiters) if @service.waiters
-        paths << auto_load("#{@prefix}/resource", :Resource)
+        paths << auto_load("#{@prefix}/resource", :Resource) unless @service.h2_required_setting?
 
         unless @service.legacy_endpoints?
           paths << auto_load("#{@prefix}/endpoint_parameters", :EndpointParameters)
@@ -98,9 +101,7 @@ module AwsSdkCodeGenerator
           end
         end
 
-        if @service.api['metadata']['protocolSettings'] && @service.api['metadata']['protocolSettings']['h2']
-          paths << auto_load("#{@prefix}/async_client", :AsyncClient)
-        end
+        paths << auto_load("#{@prefix}/async_client", :AsyncClient) if @service.h2_setting?
         paths << auto_load("#{@prefix}/event_streams", :EventStreams) if eventstream_shape?
 
         paths

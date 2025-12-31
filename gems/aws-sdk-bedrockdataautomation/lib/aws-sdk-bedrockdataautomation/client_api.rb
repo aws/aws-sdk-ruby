@@ -19,6 +19,9 @@ module Aws::BedrockDataAutomation
     AudioExtractionCategoryType = Shapes::StringShape.new(name: 'AudioExtractionCategoryType')
     AudioExtractionCategoryTypeConfiguration = Shapes::StructureShape.new(name: 'AudioExtractionCategoryTypeConfiguration')
     AudioExtractionCategoryTypes = Shapes::ListShape.new(name: 'AudioExtractionCategoryTypes')
+    AudioGenerativeOutputLanguage = Shapes::StringShape.new(name: 'AudioGenerativeOutputLanguage')
+    AudioInputLanguages = Shapes::ListShape.new(name: 'AudioInputLanguages')
+    AudioLanguageConfiguration = Shapes::StructureShape.new(name: 'AudioLanguageConfiguration')
     AudioOverrideConfiguration = Shapes::StructureShape.new(name: 'AudioOverrideConfiguration')
     AudioStandardExtraction = Shapes::StructureShape.new(name: 'AudioStandardExtraction')
     AudioStandardGenerativeField = Shapes::StructureShape.new(name: 'AudioStandardGenerativeField')
@@ -31,15 +34,24 @@ module Aws::BedrockDataAutomation
     BlueprintItem = Shapes::StructureShape.new(name: 'BlueprintItem')
     BlueprintItems = Shapes::ListShape.new(name: 'BlueprintItems')
     BlueprintName = Shapes::StringShape.new(name: 'BlueprintName')
+    BlueprintOptimizationInvocationArn = Shapes::StringShape.new(name: 'BlueprintOptimizationInvocationArn')
+    BlueprintOptimizationJobStatus = Shapes::StringShape.new(name: 'BlueprintOptimizationJobStatus')
+    BlueprintOptimizationObject = Shapes::StructureShape.new(name: 'BlueprintOptimizationObject')
+    BlueprintOptimizationOutputConfiguration = Shapes::StructureShape.new(name: 'BlueprintOptimizationOutputConfiguration')
+    BlueprintOptimizationSample = Shapes::StructureShape.new(name: 'BlueprintOptimizationSample')
+    BlueprintOptimizationSamples = Shapes::ListShape.new(name: 'BlueprintOptimizationSamples')
     BlueprintSchema = Shapes::StringShape.new(name: 'BlueprintSchema')
     BlueprintStage = Shapes::StringShape.new(name: 'BlueprintStage')
     BlueprintStageFilter = Shapes::StringShape.new(name: 'BlueprintStageFilter')
     BlueprintSummary = Shapes::StructureShape.new(name: 'BlueprintSummary')
     BlueprintVersion = Shapes::StringShape.new(name: 'BlueprintVersion')
     Blueprints = Shapes::ListShape.new(name: 'Blueprints')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ChannelLabelingConfiguration = Shapes::StructureShape.new(name: 'ChannelLabelingConfiguration')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CopyBlueprintStageRequest = Shapes::StructureShape.new(name: 'CopyBlueprintStageRequest')
+    CopyBlueprintStageResponse = Shapes::StructureShape.new(name: 'CopyBlueprintStageResponse')
     CreateBlueprintRequest = Shapes::StructureShape.new(name: 'CreateBlueprintRequest')
     CreateBlueprintResponse = Shapes::StructureShape.new(name: 'CreateBlueprintResponse')
     CreateBlueprintVersionRequest = Shapes::StructureShape.new(name: 'CreateBlueprintVersionRequest')
@@ -47,6 +59,7 @@ module Aws::BedrockDataAutomation
     CreateDataAutomationProjectRequest = Shapes::StructureShape.new(name: 'CreateDataAutomationProjectRequest')
     CreateDataAutomationProjectResponse = Shapes::StructureShape.new(name: 'CreateDataAutomationProjectResponse')
     CustomOutputConfiguration = Shapes::StructureShape.new(name: 'CustomOutputConfiguration')
+    DataAutomationProfileArn = Shapes::StringShape.new(name: 'DataAutomationProfileArn')
     DataAutomationProject = Shapes::StructureShape.new(name: 'DataAutomationProject')
     DataAutomationProjectArn = Shapes::StringShape.new(name: 'DataAutomationProjectArn')
     DataAutomationProjectDescription = Shapes::StringShape.new(name: 'DataAutomationProjectDescription')
@@ -57,6 +70,7 @@ module Aws::BedrockDataAutomation
     DataAutomationProjectStatus = Shapes::StringShape.new(name: 'DataAutomationProjectStatus')
     DataAutomationProjectSummaries = Shapes::ListShape.new(name: 'DataAutomationProjectSummaries')
     DataAutomationProjectSummary = Shapes::StructureShape.new(name: 'DataAutomationProjectSummary')
+    DataAutomationProjectType = Shapes::StringShape.new(name: 'DataAutomationProjectType')
     DateTimestamp = Shapes::TimestampShape.new(name: 'DateTimestamp', timestampFormat: "iso8601")
     DeleteBlueprintRequest = Shapes::StructureShape.new(name: 'DeleteBlueprintRequest')
     DeleteBlueprintResponse = Shapes::StructureShape.new(name: 'DeleteBlueprintResponse')
@@ -79,6 +93,8 @@ module Aws::BedrockDataAutomation
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     EncryptionContextKey = Shapes::StringShape.new(name: 'EncryptionContextKey')
     EncryptionContextValue = Shapes::StringShape.new(name: 'EncryptionContextValue')
+    GetBlueprintOptimizationStatusRequest = Shapes::StructureShape.new(name: 'GetBlueprintOptimizationStatusRequest')
+    GetBlueprintOptimizationStatusResponse = Shapes::StructureShape.new(name: 'GetBlueprintOptimizationStatusResponse')
     GetBlueprintRequest = Shapes::StructureShape.new(name: 'GetBlueprintRequest')
     GetBlueprintResponse = Shapes::StructureShape.new(name: 'GetBlueprintResponse')
     GetDataAutomationProjectRequest = Shapes::StructureShape.new(name: 'GetDataAutomationProjectRequest')
@@ -94,8 +110,11 @@ module Aws::BedrockDataAutomation
     ImageStandardGenerativeFieldTypes = Shapes::ListShape.new(name: 'ImageStandardGenerativeFieldTypes')
     ImageStandardOutputConfiguration = Shapes::StructureShape.new(name: 'ImageStandardOutputConfiguration')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    InvokeBlueprintOptimizationAsyncRequest = Shapes::StructureShape.new(name: 'InvokeBlueprintOptimizationAsyncRequest')
+    InvokeBlueprintOptimizationAsyncResponse = Shapes::StructureShape.new(name: 'InvokeBlueprintOptimizationAsyncResponse')
     KmsEncryptionContext = Shapes::MapShape.new(name: 'KmsEncryptionContext')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
+    Language = Shapes::StringShape.new(name: 'Language')
     ListBlueprintsRequest = Shapes::StructureShape.new(name: 'ListBlueprintsRequest')
     ListBlueprintsResponse = Shapes::StructureShape.new(name: 'ListBlueprintsResponse')
     ListDataAutomationProjectsRequest = Shapes::StructureShape.new(name: 'ListDataAutomationProjectsRequest')
@@ -108,13 +127,25 @@ module Aws::BedrockDataAutomation
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
     OverrideConfiguration = Shapes::StructureShape.new(name: 'OverrideConfiguration')
+    PIIEntitiesConfiguration = Shapes::StructureShape.new(name: 'PIIEntitiesConfiguration')
+    PIIEntityType = Shapes::StringShape.new(name: 'PIIEntityType')
+    PIIEntityTypes = Shapes::ListShape.new(name: 'PIIEntityTypes')
+    PIIRedactionMaskMode = Shapes::StringShape.new(name: 'PIIRedactionMaskMode')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceOwner = Shapes::StringShape.new(name: 'ResourceOwner')
+    S3Object = Shapes::StructureShape.new(name: 'S3Object')
+    S3ObjectVersion = Shapes::StringShape.new(name: 'S3ObjectVersion')
+    S3Uri = Shapes::StringShape.new(name: 'S3Uri')
+    SensitiveDataConfiguration = Shapes::StructureShape.new(name: 'SensitiveDataConfiguration')
+    SensitiveDataDetectionMode = Shapes::StringShape.new(name: 'SensitiveDataDetectionMode')
+    SensitiveDataDetectionScope = Shapes::ListShape.new(name: 'SensitiveDataDetectionScope')
+    SensitiveDataDetectionScopeType = Shapes::StringShape.new(name: 'SensitiveDataDetectionScopeType')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SpeakerLabelingConfiguration = Shapes::StructureShape.new(name: 'SpeakerLabelingConfiguration')
     SplitterConfiguration = Shapes::StructureShape.new(name: 'SplitterConfiguration')
     StandardOutputConfiguration = Shapes::StructureShape.new(name: 'StandardOutputConfiguration')
     State = Shapes::StringShape.new(name: 'State')
+    String = Shapes::StringShape.new(name: 'String')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -159,7 +190,16 @@ module Aws::BedrockDataAutomation
 
     AudioExtractionCategoryTypes.member = Shapes::ShapeRef.new(shape: AudioExtractionCategoryType)
 
+    AudioInputLanguages.member = Shapes::ShapeRef.new(shape: Language)
+
+    AudioLanguageConfiguration.add_member(:input_languages, Shapes::ShapeRef.new(shape: AudioInputLanguages, location_name: "inputLanguages"))
+    AudioLanguageConfiguration.add_member(:generative_output_language, Shapes::ShapeRef.new(shape: AudioGenerativeOutputLanguage, location_name: "generativeOutputLanguage"))
+    AudioLanguageConfiguration.add_member(:identify_multiple_languages, Shapes::ShapeRef.new(shape: Boolean, location_name: "identifyMultipleLanguages"))
+    AudioLanguageConfiguration.struct_class = Types::AudioLanguageConfiguration
+
     AudioOverrideConfiguration.add_member(:modality_processing, Shapes::ShapeRef.new(shape: ModalityProcessingConfiguration, location_name: "modalityProcessing"))
+    AudioOverrideConfiguration.add_member(:language_configuration, Shapes::ShapeRef.new(shape: AudioLanguageConfiguration, location_name: "languageConfiguration"))
+    AudioOverrideConfiguration.add_member(:sensitive_data_configuration, Shapes::ShapeRef.new(shape: SensitiveDataConfiguration, location_name: "sensitiveDataConfiguration"))
     AudioOverrideConfiguration.struct_class = Types::AudioOverrideConfiguration
 
     AudioStandardExtraction.add_member(:category, Shapes::ShapeRef.new(shape: AudioExtractionCategory, required: true, location_name: "category"))
@@ -185,6 +225,8 @@ module Aws::BedrockDataAutomation
     Blueprint.add_member(:blueprint_stage, Shapes::ShapeRef.new(shape: BlueprintStage, location_name: "blueprintStage"))
     Blueprint.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     Blueprint.add_member(:kms_encryption_context, Shapes::ShapeRef.new(shape: KmsEncryptionContext, location_name: "kmsEncryptionContext"))
+    Blueprint.add_member(:optimization_samples, Shapes::ShapeRef.new(shape: BlueprintOptimizationSamples, location_name: "optimizationSamples"))
+    Blueprint.add_member(:optimization_time, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "optimizationTime"))
     Blueprint.struct_class = Types::Blueprint
 
     BlueprintFilter.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, required: true, location_name: "blueprintArn"))
@@ -198,6 +240,19 @@ module Aws::BedrockDataAutomation
     BlueprintItem.struct_class = Types::BlueprintItem
 
     BlueprintItems.member = Shapes::ShapeRef.new(shape: BlueprintItem)
+
+    BlueprintOptimizationObject.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, required: true, location_name: "blueprintArn"))
+    BlueprintOptimizationObject.add_member(:stage, Shapes::ShapeRef.new(shape: BlueprintStage, location_name: "stage"))
+    BlueprintOptimizationObject.struct_class = Types::BlueprintOptimizationObject
+
+    BlueprintOptimizationOutputConfiguration.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, required: true, location_name: "s3Object"))
+    BlueprintOptimizationOutputConfiguration.struct_class = Types::BlueprintOptimizationOutputConfiguration
+
+    BlueprintOptimizationSample.add_member(:asset_s3_object, Shapes::ShapeRef.new(shape: S3Object, required: true, location_name: "assetS3Object"))
+    BlueprintOptimizationSample.add_member(:ground_truth_s3_object, Shapes::ShapeRef.new(shape: S3Object, required: true, location_name: "groundTruthS3Object"))
+    BlueprintOptimizationSample.struct_class = Types::BlueprintOptimizationSample
+
+    BlueprintOptimizationSamples.member = Shapes::ShapeRef.new(shape: BlueprintOptimizationSample)
 
     BlueprintSummary.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, required: true, location_name: "blueprintArn"))
     BlueprintSummary.add_member(:blueprint_version, Shapes::ShapeRef.new(shape: BlueprintVersion, location_name: "blueprintVersion"))
@@ -214,6 +269,14 @@ module Aws::BedrockDataAutomation
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
+
+    CopyBlueprintStageRequest.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, required: true, location: "uri", location_name: "blueprintArn"))
+    CopyBlueprintStageRequest.add_member(:source_stage, Shapes::ShapeRef.new(shape: BlueprintStage, required: true, location_name: "sourceStage"))
+    CopyBlueprintStageRequest.add_member(:target_stage, Shapes::ShapeRef.new(shape: BlueprintStage, required: true, location_name: "targetStage"))
+    CopyBlueprintStageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CopyBlueprintStageRequest.struct_class = Types::CopyBlueprintStageRequest
+
+    CopyBlueprintStageResponse.struct_class = Types::CopyBlueprintStageResponse
 
     CreateBlueprintRequest.add_member(:blueprint_name, Shapes::ShapeRef.new(shape: BlueprintName, required: true, location_name: "blueprintName"))
     CreateBlueprintRequest.add_member(:type, Shapes::ShapeRef.new(shape: Type, required: true, location_name: "type"))
@@ -237,6 +300,7 @@ module Aws::BedrockDataAutomation
     CreateDataAutomationProjectRequest.add_member(:project_name, Shapes::ShapeRef.new(shape: DataAutomationProjectName, required: true, location_name: "projectName"))
     CreateDataAutomationProjectRequest.add_member(:project_description, Shapes::ShapeRef.new(shape: DataAutomationProjectDescription, location_name: "projectDescription"))
     CreateDataAutomationProjectRequest.add_member(:project_stage, Shapes::ShapeRef.new(shape: DataAutomationProjectStage, location_name: "projectStage"))
+    CreateDataAutomationProjectRequest.add_member(:project_type, Shapes::ShapeRef.new(shape: DataAutomationProjectType, location_name: "projectType"))
     CreateDataAutomationProjectRequest.add_member(:standard_output_configuration, Shapes::ShapeRef.new(shape: StandardOutputConfiguration, required: true, location_name: "standardOutputConfiguration"))
     CreateDataAutomationProjectRequest.add_member(:custom_output_configuration, Shapes::ShapeRef.new(shape: CustomOutputConfiguration, location_name: "customOutputConfiguration"))
     CreateDataAutomationProjectRequest.add_member(:override_configuration, Shapes::ShapeRef.new(shape: OverrideConfiguration, location_name: "overrideConfiguration"))
@@ -258,6 +322,7 @@ module Aws::BedrockDataAutomation
     DataAutomationProject.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastModifiedTime"))
     DataAutomationProject.add_member(:project_name, Shapes::ShapeRef.new(shape: DataAutomationProjectName, required: true, location_name: "projectName"))
     DataAutomationProject.add_member(:project_stage, Shapes::ShapeRef.new(shape: DataAutomationProjectStage, location_name: "projectStage"))
+    DataAutomationProject.add_member(:project_type, Shapes::ShapeRef.new(shape: DataAutomationProjectType, location_name: "projectType"))
     DataAutomationProject.add_member(:project_description, Shapes::ShapeRef.new(shape: DataAutomationProjectDescription, location_name: "projectDescription"))
     DataAutomationProject.add_member(:standard_output_configuration, Shapes::ShapeRef.new(shape: StandardOutputConfiguration, location_name: "standardOutputConfiguration"))
     DataAutomationProject.add_member(:custom_output_configuration, Shapes::ShapeRef.new(shape: CustomOutputConfiguration, location_name: "customOutputConfiguration"))
@@ -275,6 +340,7 @@ module Aws::BedrockDataAutomation
 
     DataAutomationProjectSummary.add_member(:project_arn, Shapes::ShapeRef.new(shape: DataAutomationProjectArn, required: true, location_name: "projectArn"))
     DataAutomationProjectSummary.add_member(:project_stage, Shapes::ShapeRef.new(shape: DataAutomationProjectStage, location_name: "projectStage"))
+    DataAutomationProjectSummary.add_member(:project_type, Shapes::ShapeRef.new(shape: DataAutomationProjectType, location_name: "projectType"))
     DataAutomationProjectSummary.add_member(:project_name, Shapes::ShapeRef.new(shape: DataAutomationProjectName, location_name: "projectName"))
     DataAutomationProjectSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "creationTime"))
     DataAutomationProjectSummary.struct_class = Types::DataAutomationProjectSummary
@@ -314,6 +380,7 @@ module Aws::BedrockDataAutomation
 
     DocumentOverrideConfiguration.add_member(:splitter, Shapes::ShapeRef.new(shape: SplitterConfiguration, location_name: "splitter"))
     DocumentOverrideConfiguration.add_member(:modality_processing, Shapes::ShapeRef.new(shape: ModalityProcessingConfiguration, location_name: "modalityProcessing"))
+    DocumentOverrideConfiguration.add_member(:sensitive_data_configuration, Shapes::ShapeRef.new(shape: SensitiveDataConfiguration, location_name: "sensitiveDataConfiguration"))
     DocumentOverrideConfiguration.struct_class = Types::DocumentOverrideConfiguration
 
     DocumentStandardExtraction.add_member(:granularity, Shapes::ShapeRef.new(shape: DocumentExtractionGranularity, required: true, location_name: "granularity"))
@@ -331,6 +398,15 @@ module Aws::BedrockDataAutomation
     EncryptionConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, required: true, location_name: "kmsKeyId"))
     EncryptionConfiguration.add_member(:kms_encryption_context, Shapes::ShapeRef.new(shape: KmsEncryptionContext, location_name: "kmsEncryptionContext"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
+
+    GetBlueprintOptimizationStatusRequest.add_member(:invocation_arn, Shapes::ShapeRef.new(shape: BlueprintOptimizationInvocationArn, required: true, location: "uri", location_name: "invocationArn"))
+    GetBlueprintOptimizationStatusRequest.struct_class = Types::GetBlueprintOptimizationStatusRequest
+
+    GetBlueprintOptimizationStatusResponse.add_member(:status, Shapes::ShapeRef.new(shape: BlueprintOptimizationJobStatus, location_name: "status"))
+    GetBlueprintOptimizationStatusResponse.add_member(:error_type, Shapes::ShapeRef.new(shape: String, location_name: "errorType"))
+    GetBlueprintOptimizationStatusResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    GetBlueprintOptimizationStatusResponse.add_member(:output_configuration, Shapes::ShapeRef.new(shape: BlueprintOptimizationOutputConfiguration, location_name: "outputConfiguration"))
+    GetBlueprintOptimizationStatusResponse.struct_class = Types::GetBlueprintOptimizationStatusResponse
 
     GetBlueprintRequest.add_member(:blueprint_arn, Shapes::ShapeRef.new(shape: BlueprintArn, required: true, location: "uri", location_name: "blueprintArn"))
     GetBlueprintRequest.add_member(:blueprint_version, Shapes::ShapeRef.new(shape: BlueprintVersion, location_name: "blueprintVersion"))
@@ -357,6 +433,7 @@ module Aws::BedrockDataAutomation
     ImageExtractionCategoryTypes.member = Shapes::ShapeRef.new(shape: ImageExtractionCategoryType)
 
     ImageOverrideConfiguration.add_member(:modality_processing, Shapes::ShapeRef.new(shape: ModalityProcessingConfiguration, location_name: "modalityProcessing"))
+    ImageOverrideConfiguration.add_member(:sensitive_data_configuration, Shapes::ShapeRef.new(shape: SensitiveDataConfiguration, location_name: "sensitiveDataConfiguration"))
     ImageOverrideConfiguration.struct_class = Types::ImageOverrideConfiguration
 
     ImageStandardExtraction.add_member(:category, Shapes::ShapeRef.new(shape: ImageExtractionCategory, required: true, location_name: "category"))
@@ -375,6 +452,17 @@ module Aws::BedrockDataAutomation
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    InvokeBlueprintOptimizationAsyncRequest.add_member(:blueprint, Shapes::ShapeRef.new(shape: BlueprintOptimizationObject, required: true, location_name: "blueprint"))
+    InvokeBlueprintOptimizationAsyncRequest.add_member(:samples, Shapes::ShapeRef.new(shape: BlueprintOptimizationSamples, required: true, location_name: "samples"))
+    InvokeBlueprintOptimizationAsyncRequest.add_member(:output_configuration, Shapes::ShapeRef.new(shape: BlueprintOptimizationOutputConfiguration, required: true, location_name: "outputConfiguration"))
+    InvokeBlueprintOptimizationAsyncRequest.add_member(:data_automation_profile_arn, Shapes::ShapeRef.new(shape: DataAutomationProfileArn, required: true, location_name: "dataAutomationProfileArn"))
+    InvokeBlueprintOptimizationAsyncRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
+    InvokeBlueprintOptimizationAsyncRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    InvokeBlueprintOptimizationAsyncRequest.struct_class = Types::InvokeBlueprintOptimizationAsyncRequest
+
+    InvokeBlueprintOptimizationAsyncResponse.add_member(:invocation_arn, Shapes::ShapeRef.new(shape: BlueprintOptimizationInvocationArn, required: true, location_name: "invocationArn"))
+    InvokeBlueprintOptimizationAsyncResponse.struct_class = Types::InvokeBlueprintOptimizationAsyncResponse
 
     KmsEncryptionContext.key = Shapes::ShapeRef.new(shape: EncryptionContextKey)
     KmsEncryptionContext.value = Shapes::ShapeRef.new(shape: EncryptionContextValue)
@@ -424,8 +512,25 @@ module Aws::BedrockDataAutomation
     OverrideConfiguration.add_member(:modality_routing, Shapes::ShapeRef.new(shape: ModalityRoutingConfiguration, location_name: "modalityRouting"))
     OverrideConfiguration.struct_class = Types::OverrideConfiguration
 
+    PIIEntitiesConfiguration.add_member(:pii_entity_types, Shapes::ShapeRef.new(shape: PIIEntityTypes, location_name: "piiEntityTypes"))
+    PIIEntitiesConfiguration.add_member(:redaction_mask_mode, Shapes::ShapeRef.new(shape: PIIRedactionMaskMode, location_name: "redactionMaskMode"))
+    PIIEntitiesConfiguration.struct_class = Types::PIIEntitiesConfiguration
+
+    PIIEntityTypes.member = Shapes::ShapeRef.new(shape: PIIEntityType)
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    S3Object.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "s3Uri"))
+    S3Object.add_member(:version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "version"))
+    S3Object.struct_class = Types::S3Object
+
+    SensitiveDataConfiguration.add_member(:detection_mode, Shapes::ShapeRef.new(shape: SensitiveDataDetectionMode, required: true, location_name: "detectionMode"))
+    SensitiveDataConfiguration.add_member(:detection_scope, Shapes::ShapeRef.new(shape: SensitiveDataDetectionScope, location_name: "detectionScope"))
+    SensitiveDataConfiguration.add_member(:pii_entities_configuration, Shapes::ShapeRef.new(shape: PIIEntitiesConfiguration, location_name: "piiEntitiesConfiguration"))
+    SensitiveDataConfiguration.struct_class = Types::SensitiveDataConfiguration
+
+    SensitiveDataDetectionScope.member = Shapes::ShapeRef.new(shape: SensitiveDataDetectionScopeType)
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
@@ -512,6 +617,7 @@ module Aws::BedrockDataAutomation
     VideoExtractionCategoryTypes.member = Shapes::ShapeRef.new(shape: VideoExtractionCategoryType)
 
     VideoOverrideConfiguration.add_member(:modality_processing, Shapes::ShapeRef.new(shape: ModalityProcessingConfiguration, location_name: "modalityProcessing"))
+    VideoOverrideConfiguration.add_member(:sensitive_data_configuration, Shapes::ShapeRef.new(shape: SensitiveDataConfiguration, location_name: "sensitiveDataConfiguration"))
     VideoOverrideConfiguration.struct_class = Types::VideoOverrideConfiguration
 
     VideoStandardExtraction.add_member(:category, Shapes::ShapeRef.new(shape: VideoExtractionCategory, required: true, location_name: "category"))
@@ -546,6 +652,19 @@ module Aws::BedrockDataAutomation
         "signingName" => "bedrock",
         "uid" => "bedrock-data-automation-2023-07-26",
       }
+
+      api.add_operation(:copy_blueprint_stage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CopyBlueprintStage"
+        o.http_method = "PUT"
+        o.http_request_uri = "/blueprints/{blueprintArn}/copy-stage"
+        o.input = Shapes::ShapeRef.new(shape: CopyBlueprintStageRequest)
+        o.output = Shapes::ShapeRef.new(shape: CopyBlueprintStageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
 
       api.add_operation(:create_blueprint, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateBlueprint"
@@ -628,12 +747,39 @@ module Aws::BedrockDataAutomation
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_blueprint_optimization_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBlueprintOptimizationStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/getBlueprintOptimizationStatus/{invocationArn}"
+        o.input = Shapes::ShapeRef.new(shape: GetBlueprintOptimizationStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBlueprintOptimizationStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:get_data_automation_project, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetDataAutomationProject"
         o.http_method = "POST"
         o.http_request_uri = "/data-automation-projects/{projectArn}/"
         o.input = Shapes::ShapeRef.new(shape: GetDataAutomationProjectRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDataAutomationProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:invoke_blueprint_optimization_async, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "InvokeBlueprintOptimizationAsync"
+        o.http_method = "POST"
+        o.http_request_uri = "/invokeBlueprintOptimizationAsync"
+        o.input = Shapes::ShapeRef.new(shape: InvokeBlueprintOptimizationAsyncRequest)
+        o.output = Shapes::ShapeRef.new(shape: InvokeBlueprintOptimizationAsyncResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

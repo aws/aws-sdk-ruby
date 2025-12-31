@@ -74,6 +74,7 @@ module Aws::ConnectCases
     class BatchGetCaseRuleResponse
       attr_accessor case_rules: ::Array[Types::GetCaseRuleResponse]
       attr_accessor errors: ::Array[Types::CaseRuleError]
+      attr_accessor unprocessed_case_rules: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -149,10 +150,16 @@ module Aws::ConnectCases
 
     class CaseRuleDetails
       attr_accessor required: Types::RequiredCaseRule
+      attr_accessor field_options: Types::FieldOptionsCaseRule
+      attr_accessor hidden: Types::HiddenCaseRule
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Required < CaseRuleDetails
+      end
+      class FieldOptions < CaseRuleDetails
+      end
+      class Hidden < CaseRuleDetails
       end
       class Unknown < CaseRuleDetails
       end
@@ -174,7 +181,7 @@ module Aws::ConnectCases
       attr_accessor case_rule_id: ::String
       attr_accessor name: ::String
       attr_accessor case_rule_arn: ::String
-      attr_accessor rule_type: ("Required")
+      attr_accessor rule_type: ("Required" | "Hidden" | "FieldOptions")
       attr_accessor description: ::String
       SENSITIVE: []
     end
@@ -518,6 +525,13 @@ module Aws::ConnectCases
       SENSITIVE: []
     end
 
+    class FieldOptionsCaseRule
+      attr_accessor parent_field_id: ::String
+      attr_accessor child_field_id: ::String
+      attr_accessor parent_child_field_options_mappings: ::Array[Types::ParentChildFieldOptionsMapping]
+      SENSITIVE: []
+    end
+
     class FieldSummary
       attr_accessor field_id: ::String
       attr_accessor field_arn: ::String
@@ -688,6 +702,12 @@ module Aws::ConnectCases
       SENSITIVE: []
     end
 
+    class HiddenCaseRule
+      attr_accessor default_value: bool
+      attr_accessor conditions: ::Array[Types::BooleanCondition]
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       attr_accessor retry_after_seconds: ::Integer
@@ -855,6 +875,12 @@ module Aws::ConnectCases
       end
       class Unknown < OperandTwo
       end
+    end
+
+    class ParentChildFieldOptionsMapping
+      attr_accessor parent_field_option_value: ::String
+      attr_accessor child_field_option_values: ::Array[::String]
+      SENSITIVE: []
     end
 
     class PutCaseEventConfigurationRequest

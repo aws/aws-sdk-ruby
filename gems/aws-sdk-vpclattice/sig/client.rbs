@@ -201,6 +201,10 @@ module Aws
         def allow_association_to_shareable_service_network: () -> bool
         def created_at: () -> ::Time
         def failure_reason: () -> ::String
+        def custom_domain_name: () -> ::String
+        def domain_verification_id: () -> ::String
+        def group_domain: () -> ::String
+        def domain_verification_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#create_resource_configuration-instance_method
       def create_resource_configuration: (
@@ -223,6 +227,9 @@ module Aws
                                              }?
                                            },
                                            ?allow_association_to_shareable_service_network: bool,
+                                           ?custom_domain_name: ::String,
+                                           ?group_domain: ::String,
+                                           ?domain_verification_identifier: ::String,
                                            ?client_token: ::String,
                                            ?tags: Hash[::String, ::String]
                                          ) -> _CreateResourceConfigurationResponseSuccess
@@ -357,12 +364,14 @@ module Aws
         def arn: () -> ::String
         def status: () -> ("CREATE_IN_PROGRESS" | "ACTIVE" | "PARTIAL" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
         def created_by: () -> ::String
+        def private_dns_enabled: () -> bool
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#create_service_network_resource_association-instance_method
       def create_service_network_resource_association: (
                                                          ?client_token: ::String,
                                                          resource_configuration_identifier: ::String,
                                                          service_network_identifier: ::String,
+                                                         ?private_dns_enabled: bool,
                                                          ?tags: Hash[::String, ::String]
                                                        ) -> _CreateServiceNetworkResourceAssociationResponseSuccess
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceNetworkResourceAssociationResponseSuccess
@@ -392,14 +401,21 @@ module Aws
         def arn: () -> ::String
         def created_by: () -> ::String
         def security_group_ids: () -> ::Array[::String]
+        def private_dns_enabled: () -> bool
+        def dns_options: () -> Types::DnsOptions
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#create_service_network_vpc_association-instance_method
       def create_service_network_vpc_association: (
                                                     ?client_token: ::String,
                                                     service_network_identifier: ::String,
                                                     vpc_identifier: ::String,
+                                                    ?private_dns_enabled: bool,
                                                     ?security_group_ids: Array[::String],
-                                                    ?tags: Hash[::String, ::String]
+                                                    ?tags: Hash[::String, ::String],
+                                                    ?dns_options: {
+                                                      private_dns_preference: ("VERIFIED_DOMAINS_ONLY" | "ALL_DOMAINS" | "VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS" | "SPECIFIED_DOMAINS_ONLY")?,
+                                                      private_dns_specified_domains: Array[::String]?
+                                                    }
                                                   ) -> _CreateServiceNetworkVpcAssociationResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceNetworkVpcAssociationResponseSuccess
 
@@ -460,6 +476,15 @@ module Aws
                                 resource_identifier: ::String
                               ) -> _DeleteAuthPolicyResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAuthPolicyResponseSuccess
+
+      interface _DeleteDomainVerificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainVerificationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#delete_domain_verification-instance_method
+      def delete_domain_verification: (
+                                        domain_verification_identifier: ::String
+                                      ) -> _DeleteDomainVerificationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainVerificationResponseSuccess
 
       interface _DeleteListenerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteListenerResponse]
@@ -644,6 +669,23 @@ module Aws
                            ) -> _GetAuthPolicyResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAuthPolicyResponseSuccess
 
+      interface _GetDomainVerificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainVerificationResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def domain_name: () -> ::String
+        def status: () -> ("VERIFIED" | "PENDING" | "VERIFICATION_TIMED_OUT")
+        def txt_method_config: () -> Types::TxtMethodConfig
+        def created_at: () -> ::Time
+        def last_verified_time: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#get_domain_verification-instance_method
+      def get_domain_verification: (
+                                     domain_verification_identifier: ::String
+                                   ) -> _GetDomainVerificationResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainVerificationResponseSuccess
+
       interface _GetListenerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetListenerResponse]
         def arn: () -> ::String
@@ -682,6 +724,10 @@ module Aws
         def amazon_managed: () -> bool
         def failure_reason: () -> ::String
         def last_updated_at: () -> ::Time
+        def domain_verification_id: () -> ::String
+        def domain_verification_arn: () -> ::String
+        def domain_verification_status: () -> ("VERIFIED" | "PENDING" | "VERIFICATION_TIMED_OUT")
+        def group_domain: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#get_resource_configuration-instance_method
       def get_resource_configuration: (
@@ -795,8 +841,10 @@ module Aws
         def failure_code: () -> ::String
         def last_updated_at: () -> ::Time
         def private_dns_entry: () -> Types::DnsEntry
+        def private_dns_enabled: () -> bool
         def dns_entry: () -> Types::DnsEntry
         def is_managed_association: () -> bool
+        def domain_verification_status: () -> ("VERIFIED" | "PENDING" | "VERIFICATION_TIMED_OUT")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#get_service_network_resource_association-instance_method
       def get_service_network_resource_association: (
@@ -840,9 +888,11 @@ module Aws
         def service_network_arn: () -> ::String
         def vpc_id: () -> ::String
         def security_group_ids: () -> ::Array[::String]
+        def private_dns_enabled: () -> bool
         def failure_message: () -> ::String
         def failure_code: () -> ::String
         def last_updated_at: () -> ::Time
+        def dns_options: () -> Types::DnsOptions
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#get_service_network_vpc_association-instance_method
       def get_service_network_vpc_association: (
@@ -883,6 +933,18 @@ module Aws
                                          ) -> _ListAccessLogSubscriptionsResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessLogSubscriptionsResponseSuccess
 
+      interface _ListDomainVerificationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainVerificationsResponse]
+        def items: () -> ::Array[Types::DomainVerificationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#list_domain_verifications-instance_method
+      def list_domain_verifications: (
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListDomainVerificationsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainVerificationsResponseSuccess
+
       interface _ListListenersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListListenersResponse]
         def items: () -> ::Array[Types::ListenerSummary]
@@ -905,6 +967,7 @@ module Aws
       def list_resource_configurations: (
                                           ?resource_gateway_identifier: ::String,
                                           ?resource_configuration_group_identifier: ::String,
+                                          ?domain_verification_identifier: ::String,
                                           ?max_results: ::Integer,
                                           ?next_token: ::String
                                         ) -> _ListResourceConfigurationsResponseSuccess
@@ -1113,6 +1176,22 @@ module Aws
                               ]
                             ) -> _RegisterTargetsResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterTargetsResponseSuccess
+
+      interface _StartDomainVerificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDomainVerificationResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def domain_name: () -> ::String
+        def status: () -> ("VERIFIED" | "PENDING" | "VERIFICATION_TIMED_OUT")
+        def txt_method_config: () -> Types::TxtMethodConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#start_domain_verification-instance_method
+      def start_domain_verification: (
+                                       ?client_token: ::String,
+                                       domain_name: ::String,
+                                       ?tags: Hash[::String, ::String]
+                                     ) -> _StartDomainVerificationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDomainVerificationResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]

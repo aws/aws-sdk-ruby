@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2025-12-18)
+------------------
+
+* Feature - Amazon OpenSearch Service adds support for warm nodes, enabling new multi-tier architecture.
+
+1.82.0 (2025-12-10)
+------------------
+
+* Feature - The CreateApplication API now supports an optional kms key arn parameter to allow customers to specify a CMK for application encryption.
+
+1.81.0 (2025-12-02)
+------------------
+
+* Feature - GPU-acceleration helps you build large-scale vector databases faster and more efficiently. You can enable this feature on new OpenSearch domains and OpenSearch Serverless collections. This feature uses GPU-acceleration to reduce the time needed to index data into vector indexes.
+
+1.80.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.79.0 (2025-11-17)
+------------------
+
+* Feature - This release adds index operation APIs to support Automatic Semantic Enrichment feature
+
+1.78.0 (2025-11-07)
+------------------
+
+* Feature - This release introduces the Default Application feature, allowing users to set, change, or unset a preferred OpenSearch UI application on a per-region basis for a streamlined and consistent user experience.
+
+1.77.0 (2025-10-28)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.76.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.75.0 (2025-08-28)
 ------------------
 

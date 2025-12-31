@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2025-12-01)
+------------------
+
+* Feature - This release introduces offer set entity in AWS Marketplace Catalog API to enable multi-product transaction. Offer set enables sellers to group multiple private offers into a single-click purchase experience, simplifying procurement for customers purchasing multi-product solutions.
+
+1.70.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2025-10-31)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.68.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2025-10-17)
+------------------
+
+* Feature - The ListEntities API now supports two new CAPI filters: DeliveryOptionTypes for SaaS products and CompatibleAWSServices for Container products.
+
 1.66.0 (2025-08-26)
 ------------------
 

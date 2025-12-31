@@ -476,6 +476,43 @@ module Aws::BedrockDataAutomation
 
     # @!group API Operations
 
+    # Copies a Blueprint from one stage to another
+    #
+    # @option params [required, String] :blueprint_arn
+    #   Blueprint to be copied
+    #
+    # @option params [required, String] :source_stage
+    #   Source stage to copy from
+    #
+    # @option params [required, String] :target_stage
+    #   Target stage to copy to
+    #
+    # @option params [String] :client_token
+    #   Client token for idempotency
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.copy_blueprint_stage({
+    #     blueprint_arn: "BlueprintArn", # required
+    #     source_stage: "DEVELOPMENT", # required, accepts DEVELOPMENT, LIVE
+    #     target_stage: "DEVELOPMENT", # required, accepts DEVELOPMENT, LIVE
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/CopyBlueprintStage AWS API Documentation
+    #
+    # @overload copy_blueprint_stage(params = {})
+    # @param [Hash] params ({})
+    def copy_blueprint_stage(params = {}, options = {})
+      req = build_request(:copy_blueprint_stage, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Bedrock Data Automation Blueprint
     #
     # @option params [required, String] :blueprint_name
@@ -541,6 +578,12 @@ module Aws::BedrockDataAutomation
     #   resp.blueprint.kms_key_id #=> String
     #   resp.blueprint.kms_encryption_context #=> Hash
     #   resp.blueprint.kms_encryption_context["EncryptionContextKey"] #=> String
+    #   resp.blueprint.optimization_samples #=> Array
+    #   resp.blueprint.optimization_samples[0].asset_s3_object.s3_uri #=> String
+    #   resp.blueprint.optimization_samples[0].asset_s3_object.version #=> String
+    #   resp.blueprint.optimization_samples[0].ground_truth_s3_object.s3_uri #=> String
+    #   resp.blueprint.optimization_samples[0].ground_truth_s3_object.version #=> String
+    #   resp.blueprint.optimization_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/CreateBlueprint AWS API Documentation
     #
@@ -587,6 +630,12 @@ module Aws::BedrockDataAutomation
     #   resp.blueprint.kms_key_id #=> String
     #   resp.blueprint.kms_encryption_context #=> Hash
     #   resp.blueprint.kms_encryption_context["EncryptionContextKey"] #=> String
+    #   resp.blueprint.optimization_samples #=> Array
+    #   resp.blueprint.optimization_samples[0].asset_s3_object.s3_uri #=> String
+    #   resp.blueprint.optimization_samples[0].asset_s3_object.version #=> String
+    #   resp.blueprint.optimization_samples[0].ground_truth_s3_object.s3_uri #=> String
+    #   resp.blueprint.optimization_samples[0].ground_truth_s3_object.version #=> String
+    #   resp.blueprint.optimization_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/CreateBlueprintVersion AWS API Documentation
     #
@@ -607,6 +656,9 @@ module Aws::BedrockDataAutomation
     #
     # @option params [String] :project_stage
     #   Stage of the Project
+    #
+    # @option params [String] :project_type
+    #   Type of the DataAutomationProject
     #
     # @option params [required, Types::StandardOutputConfiguration] :standard_output_configuration
     #   Standard output configuration
@@ -641,6 +693,7 @@ module Aws::BedrockDataAutomation
     #     project_name: "DataAutomationProjectName", # required
     #     project_description: "DataAutomationProjectDescription",
     #     project_stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
+    #     project_type: "ASYNC", # accepts ASYNC, SYNC
     #     standard_output_configuration: { # required
     #       document: {
     #         extraction: {
@@ -733,20 +786,57 @@ module Aws::BedrockDataAutomation
     #         modality_processing: {
     #           state: "ENABLED", # accepts ENABLED, DISABLED
     #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION", # required, accepts DETECTION, DETECTION_AND_REDACTION
+    #           detection_scope: ["STANDARD"], # accepts STANDARD, CUSTOM
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL"], # accepts ALL, ADDRESS, AGE, NAME, EMAIL, PHONE, USERNAME, PASSWORD, DRIVER_ID, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, PIN, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, IP_ADDRESS, MAC_ADDRESS, URL, AWS_ACCESS_KEY, AWS_SECRET_KEY, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+    #             redaction_mask_mode: "PII", # accepts PII, ENTITY_TYPE
+    #           },
+    #         },
     #       },
     #       image: {
     #         modality_processing: {
     #           state: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION", # required, accepts DETECTION, DETECTION_AND_REDACTION
+    #           detection_scope: ["STANDARD"], # accepts STANDARD, CUSTOM
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL"], # accepts ALL, ADDRESS, AGE, NAME, EMAIL, PHONE, USERNAME, PASSWORD, DRIVER_ID, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, PIN, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, IP_ADDRESS, MAC_ADDRESS, URL, AWS_ACCESS_KEY, AWS_SECRET_KEY, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+    #             redaction_mask_mode: "PII", # accepts PII, ENTITY_TYPE
+    #           },
     #         },
     #       },
     #       video: {
     #         modality_processing: {
     #           state: "ENABLED", # accepts ENABLED, DISABLED
     #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION", # required, accepts DETECTION, DETECTION_AND_REDACTION
+    #           detection_scope: ["STANDARD"], # accepts STANDARD, CUSTOM
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL"], # accepts ALL, ADDRESS, AGE, NAME, EMAIL, PHONE, USERNAME, PASSWORD, DRIVER_ID, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, PIN, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, IP_ADDRESS, MAC_ADDRESS, URL, AWS_ACCESS_KEY, AWS_SECRET_KEY, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+    #             redaction_mask_mode: "PII", # accepts PII, ENTITY_TYPE
+    #           },
+    #         },
     #       },
     #       audio: {
     #         modality_processing: {
     #           state: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         language_configuration: {
+    #           input_languages: ["EN"], # accepts EN, DE, ES, FR, IT, PT, JA, KO, CN, TW, HK
+    #           generative_output_language: "DEFAULT", # accepts DEFAULT, EN
+    #           identify_multiple_languages: false,
+    #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION", # required, accepts DETECTION, DETECTION_AND_REDACTION
+    #           detection_scope: ["STANDARD"], # accepts STANDARD, CUSTOM
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL"], # accepts ALL, ADDRESS, AGE, NAME, EMAIL, PHONE, USERNAME, PASSWORD, DRIVER_ID, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, PIN, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, IP_ADDRESS, MAC_ADDRESS, URL, AWS_ACCESS_KEY, AWS_SECRET_KEY, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+    #             redaction_mask_mode: "PII", # accepts PII, ENTITY_TYPE
+    #           },
     #         },
     #       },
     #       modality_routing: {
@@ -879,6 +969,12 @@ module Aws::BedrockDataAutomation
     #   resp.blueprint.kms_key_id #=> String
     #   resp.blueprint.kms_encryption_context #=> Hash
     #   resp.blueprint.kms_encryption_context["EncryptionContextKey"] #=> String
+    #   resp.blueprint.optimization_samples #=> Array
+    #   resp.blueprint.optimization_samples[0].asset_s3_object.s3_uri #=> String
+    #   resp.blueprint.optimization_samples[0].asset_s3_object.version #=> String
+    #   resp.blueprint.optimization_samples[0].ground_truth_s3_object.s3_uri #=> String
+    #   resp.blueprint.optimization_samples[0].ground_truth_s3_object.version #=> String
+    #   resp.blueprint.optimization_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/GetBlueprint AWS API Documentation
     #
@@ -886,6 +982,41 @@ module Aws::BedrockDataAutomation
     # @param [Hash] params ({})
     def get_blueprint(params = {}, options = {})
       req = build_request(:get_blueprint, params)
+      req.send_request(options)
+    end
+
+    # API used to get blueprint optimization status.
+    #
+    # @option params [required, String] :invocation_arn
+    #   Invocation arn.
+    #
+    # @return [Types::GetBlueprintOptimizationStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBlueprintOptimizationStatusResponse#status #status} => String
+    #   * {Types::GetBlueprintOptimizationStatusResponse#error_type #error_type} => String
+    #   * {Types::GetBlueprintOptimizationStatusResponse#error_message #error_message} => String
+    #   * {Types::GetBlueprintOptimizationStatusResponse#output_configuration #output_configuration} => Types::BlueprintOptimizationOutputConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_blueprint_optimization_status({
+    #     invocation_arn: "BlueprintOptimizationInvocationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "Created", "InProgress", "Success", "ServiceError", "ClientError"
+    #   resp.error_type #=> String
+    #   resp.error_message #=> String
+    #   resp.output_configuration.s3_object.s3_uri #=> String
+    #   resp.output_configuration.s3_object.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/GetBlueprintOptimizationStatus AWS API Documentation
+    #
+    # @overload get_blueprint_optimization_status(params = {})
+    # @param [Hash] params ({})
+    def get_blueprint_optimization_status(params = {}, options = {})
+      req = build_request(:get_blueprint_optimization_status, params)
       req.send_request(options)
     end
 
@@ -916,6 +1047,7 @@ module Aws::BedrockDataAutomation
     #   resp.project.last_modified_time #=> Time
     #   resp.project.project_name #=> String
     #   resp.project.project_stage #=> String, one of "DEVELOPMENT", "LIVE"
+    #   resp.project.project_type #=> String, one of "ASYNC", "SYNC"
     #   resp.project.project_description #=> String
     #   resp.project.standard_output_configuration.document.extraction.granularity.types #=> Array
     #   resp.project.standard_output_configuration.document.extraction.granularity.types[0] #=> String, one of "DOCUMENT", "PAGE", "ELEMENT", "WORD", "LINE"
@@ -952,9 +1084,37 @@ module Aws::BedrockDataAutomation
     #   resp.project.custom_output_configuration.blueprints[0].blueprint_stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.project.override_configuration.document.splitter.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.override_configuration.document.modality_processing.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.project.override_configuration.document.sensitive_data_configuration.detection_mode #=> String, one of "DETECTION", "DETECTION_AND_REDACTION"
+    #   resp.project.override_configuration.document.sensitive_data_configuration.detection_scope #=> Array
+    #   resp.project.override_configuration.document.sensitive_data_configuration.detection_scope[0] #=> String, one of "STANDARD", "CUSTOM"
+    #   resp.project.override_configuration.document.sensitive_data_configuration.pii_entities_configuration.pii_entity_types #=> Array
+    #   resp.project.override_configuration.document.sensitive_data_configuration.pii_entities_configuration.pii_entity_types[0] #=> String, one of "ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+    #   resp.project.override_configuration.document.sensitive_data_configuration.pii_entities_configuration.redaction_mask_mode #=> String, one of "PII", "ENTITY_TYPE"
     #   resp.project.override_configuration.image.modality_processing.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.project.override_configuration.image.sensitive_data_configuration.detection_mode #=> String, one of "DETECTION", "DETECTION_AND_REDACTION"
+    #   resp.project.override_configuration.image.sensitive_data_configuration.detection_scope #=> Array
+    #   resp.project.override_configuration.image.sensitive_data_configuration.detection_scope[0] #=> String, one of "STANDARD", "CUSTOM"
+    #   resp.project.override_configuration.image.sensitive_data_configuration.pii_entities_configuration.pii_entity_types #=> Array
+    #   resp.project.override_configuration.image.sensitive_data_configuration.pii_entities_configuration.pii_entity_types[0] #=> String, one of "ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+    #   resp.project.override_configuration.image.sensitive_data_configuration.pii_entities_configuration.redaction_mask_mode #=> String, one of "PII", "ENTITY_TYPE"
     #   resp.project.override_configuration.video.modality_processing.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.project.override_configuration.video.sensitive_data_configuration.detection_mode #=> String, one of "DETECTION", "DETECTION_AND_REDACTION"
+    #   resp.project.override_configuration.video.sensitive_data_configuration.detection_scope #=> Array
+    #   resp.project.override_configuration.video.sensitive_data_configuration.detection_scope[0] #=> String, one of "STANDARD", "CUSTOM"
+    #   resp.project.override_configuration.video.sensitive_data_configuration.pii_entities_configuration.pii_entity_types #=> Array
+    #   resp.project.override_configuration.video.sensitive_data_configuration.pii_entities_configuration.pii_entity_types[0] #=> String, one of "ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+    #   resp.project.override_configuration.video.sensitive_data_configuration.pii_entities_configuration.redaction_mask_mode #=> String, one of "PII", "ENTITY_TYPE"
     #   resp.project.override_configuration.audio.modality_processing.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.project.override_configuration.audio.language_configuration.input_languages #=> Array
+    #   resp.project.override_configuration.audio.language_configuration.input_languages[0] #=> String, one of "EN", "DE", "ES", "FR", "IT", "PT", "JA", "KO", "CN", "TW", "HK"
+    #   resp.project.override_configuration.audio.language_configuration.generative_output_language #=> String, one of "DEFAULT", "EN"
+    #   resp.project.override_configuration.audio.language_configuration.identify_multiple_languages #=> Boolean
+    #   resp.project.override_configuration.audio.sensitive_data_configuration.detection_mode #=> String, one of "DETECTION", "DETECTION_AND_REDACTION"
+    #   resp.project.override_configuration.audio.sensitive_data_configuration.detection_scope #=> Array
+    #   resp.project.override_configuration.audio.sensitive_data_configuration.detection_scope[0] #=> String, one of "STANDARD", "CUSTOM"
+    #   resp.project.override_configuration.audio.sensitive_data_configuration.pii_entities_configuration.pii_entity_types #=> Array
+    #   resp.project.override_configuration.audio.sensitive_data_configuration.pii_entities_configuration.pii_entity_types[0] #=> String, one of "ALL", "ADDRESS", "AGE", "NAME", "EMAIL", "PHONE", "USERNAME", "PASSWORD", "DRIVER_ID", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "PIN", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "IP_ADDRESS", "MAC_ADDRESS", "URL", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+    #   resp.project.override_configuration.audio.sensitive_data_configuration.pii_entities_configuration.redaction_mask_mode #=> String, one of "PII", "ENTITY_TYPE"
     #   resp.project.override_configuration.modality_routing.jpeg #=> String, one of "IMAGE", "DOCUMENT", "AUDIO", "VIDEO"
     #   resp.project.override_configuration.modality_routing.png #=> String, one of "IMAGE", "DOCUMENT", "AUDIO", "VIDEO"
     #   resp.project.override_configuration.modality_routing.mp4 #=> String, one of "IMAGE", "DOCUMENT", "AUDIO", "VIDEO"
@@ -970,6 +1130,83 @@ module Aws::BedrockDataAutomation
     # @param [Hash] params ({})
     def get_data_automation_project(params = {}, options = {})
       req = build_request(:get_data_automation_project, params)
+      req.send_request(options)
+    end
+
+    # Invoke an async job to perform Blueprint Optimization
+    #
+    # @option params [required, Types::BlueprintOptimizationObject] :blueprint
+    #   Blueprint to be optimized
+    #
+    # @option params [required, Array<Types::BlueprintOptimizationSample>] :samples
+    #   List of Blueprint Optimization Samples
+    #
+    # @option params [required, Types::BlueprintOptimizationOutputConfiguration] :output_configuration
+    #   Output configuration where the results should be placed
+    #
+    # @option params [required, String] :data_automation_profile_arn
+    #   Data automation profile ARN
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   Encryption configuration.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   List of tags.
+    #
+    # @return [Types::InvokeBlueprintOptimizationAsyncResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InvokeBlueprintOptimizationAsyncResponse#invocation_arn #invocation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.invoke_blueprint_optimization_async({
+    #     blueprint: { # required
+    #       blueprint_arn: "BlueprintArn", # required
+    #       stage: "DEVELOPMENT", # accepts DEVELOPMENT, LIVE
+    #     },
+    #     samples: [ # required
+    #       {
+    #         asset_s3_object: { # required
+    #           s3_uri: "S3Uri", # required
+    #           version: "S3ObjectVersion",
+    #         },
+    #         ground_truth_s3_object: { # required
+    #           s3_uri: "S3Uri", # required
+    #           version: "S3ObjectVersion",
+    #         },
+    #       },
+    #     ],
+    #     output_configuration: { # required
+    #       s3_object: { # required
+    #         s3_uri: "S3Uri", # required
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #     data_automation_profile_arn: "DataAutomationProfileArn", # required
+    #     encryption_configuration: {
+    #       kms_key_id: "KmsKeyId", # required
+    #       kms_encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue",
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.invocation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/InvokeBlueprintOptimizationAsync AWS API Documentation
+    #
+    # @overload invoke_blueprint_optimization_async(params = {})
+    # @param [Hash] params ({})
+    def invoke_blueprint_optimization_async(params = {}, options = {})
+      req = build_request(:invoke_blueprint_optimization_async, params)
       req.send_request(options)
     end
 
@@ -1077,6 +1314,7 @@ module Aws::BedrockDataAutomation
     #   resp.projects #=> Array
     #   resp.projects[0].project_arn #=> String
     #   resp.projects[0].project_stage #=> String, one of "DEVELOPMENT", "LIVE"
+    #   resp.projects[0].project_type #=> String, one of "ASYNC", "SYNC"
     #   resp.projects[0].project_name #=> String
     #   resp.projects[0].creation_time #=> Time
     #   resp.next_token #=> String
@@ -1222,6 +1460,12 @@ module Aws::BedrockDataAutomation
     #   resp.blueprint.kms_key_id #=> String
     #   resp.blueprint.kms_encryption_context #=> Hash
     #   resp.blueprint.kms_encryption_context["EncryptionContextKey"] #=> String
+    #   resp.blueprint.optimization_samples #=> Array
+    #   resp.blueprint.optimization_samples[0].asset_s3_object.s3_uri #=> String
+    #   resp.blueprint.optimization_samples[0].asset_s3_object.version #=> String
+    #   resp.blueprint.optimization_samples[0].ground_truth_s3_object.s3_uri #=> String
+    #   resp.blueprint.optimization_samples[0].ground_truth_s3_object.version #=> String
+    #   resp.blueprint.optimization_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-data-automation-2023-07-26/UpdateBlueprint AWS API Documentation
     #
@@ -1360,20 +1604,57 @@ module Aws::BedrockDataAutomation
     #         modality_processing: {
     #           state: "ENABLED", # accepts ENABLED, DISABLED
     #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION", # required, accepts DETECTION, DETECTION_AND_REDACTION
+    #           detection_scope: ["STANDARD"], # accepts STANDARD, CUSTOM
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL"], # accepts ALL, ADDRESS, AGE, NAME, EMAIL, PHONE, USERNAME, PASSWORD, DRIVER_ID, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, PIN, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, IP_ADDRESS, MAC_ADDRESS, URL, AWS_ACCESS_KEY, AWS_SECRET_KEY, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+    #             redaction_mask_mode: "PII", # accepts PII, ENTITY_TYPE
+    #           },
+    #         },
     #       },
     #       image: {
     #         modality_processing: {
     #           state: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION", # required, accepts DETECTION, DETECTION_AND_REDACTION
+    #           detection_scope: ["STANDARD"], # accepts STANDARD, CUSTOM
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL"], # accepts ALL, ADDRESS, AGE, NAME, EMAIL, PHONE, USERNAME, PASSWORD, DRIVER_ID, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, PIN, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, IP_ADDRESS, MAC_ADDRESS, URL, AWS_ACCESS_KEY, AWS_SECRET_KEY, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+    #             redaction_mask_mode: "PII", # accepts PII, ENTITY_TYPE
+    #           },
     #         },
     #       },
     #       video: {
     #         modality_processing: {
     #           state: "ENABLED", # accepts ENABLED, DISABLED
     #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION", # required, accepts DETECTION, DETECTION_AND_REDACTION
+    #           detection_scope: ["STANDARD"], # accepts STANDARD, CUSTOM
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL"], # accepts ALL, ADDRESS, AGE, NAME, EMAIL, PHONE, USERNAME, PASSWORD, DRIVER_ID, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, PIN, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, IP_ADDRESS, MAC_ADDRESS, URL, AWS_ACCESS_KEY, AWS_SECRET_KEY, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+    #             redaction_mask_mode: "PII", # accepts PII, ENTITY_TYPE
+    #           },
+    #         },
     #       },
     #       audio: {
     #         modality_processing: {
     #           state: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         language_configuration: {
+    #           input_languages: ["EN"], # accepts EN, DE, ES, FR, IT, PT, JA, KO, CN, TW, HK
+    #           generative_output_language: "DEFAULT", # accepts DEFAULT, EN
+    #           identify_multiple_languages: false,
+    #         },
+    #         sensitive_data_configuration: {
+    #           detection_mode: "DETECTION", # required, accepts DETECTION, DETECTION_AND_REDACTION
+    #           detection_scope: ["STANDARD"], # accepts STANDARD, CUSTOM
+    #           pii_entities_configuration: {
+    #             pii_entity_types: ["ALL"], # accepts ALL, ADDRESS, AGE, NAME, EMAIL, PHONE, USERNAME, PASSWORD, DRIVER_ID, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, PIN, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, IP_ADDRESS, MAC_ADDRESS, URL, AWS_ACCESS_KEY, AWS_SECRET_KEY, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER
+    #             redaction_mask_mode: "PII", # accepts PII, ENTITY_TYPE
+    #           },
     #         },
     #       },
     #       modality_routing: {
@@ -1424,7 +1705,7 @@ module Aws::BedrockDataAutomation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockdataautomation'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

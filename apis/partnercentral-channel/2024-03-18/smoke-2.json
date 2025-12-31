@@ -1,0 +1,124 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "TagResourceFailure",
+    "operationName" : "TagResource",
+    "input" : {
+      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/program-management-account/pma-1234567890123",
+      "tags" : [ {
+        "key" : "TestKey",
+        "value" : "TestValue"
+      } ]
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListTagsForResourceFailure",
+    "operationName" : "ListTagsForResource",
+    "input" : {
+      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/program-management-account/pma-1234567890123"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "UntagResourceFailure",
+    "operationName" : "UntagResource",
+    "input" : {
+      "resourceArn" : "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/program-management-account/pma-1234567890123",
+      "tagKeys" : [ "TestKey" ]
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "CreateRelationshipFailure",
+    "operationName" : "CreateRelationship",
+    "input" : {
+      "catalog" : "AWS",
+      "associationType" : "END_CUSTOMER",
+      "programManagementAccountIdentifier" : "pma-1234567890123",
+      "associatedAccountId" : "000000000000",
+      "displayName" : "TestRelationship",
+      "sector" : "COMMERCIAL"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListProgramManagementAccountsSuccess",
+    "operationName" : "ListProgramManagementAccounts",
+    "input" : {
+      "catalog" : "AWS",
+      "maxResults" : 1
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "CreateProgramManagementAccountFailure",
+    "operationName" : "CreateProgramManagementAccount",
+    "input" : {
+      "catalog" : "AWS",
+      "displayName" : "TestAccount",
+      "program" : "SOLUTION_PROVIDER",
+      "accountId" : "000000000000"
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListRelationshipsSuccess",
+    "operationName" : "ListRelationships",
+    "input" : {
+      "catalog" : "AWS",
+      "maxResults" : 1
+    },
+    "expectation" : {
+      "failure" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

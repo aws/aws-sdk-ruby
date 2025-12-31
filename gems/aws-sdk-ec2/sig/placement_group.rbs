@@ -39,6 +39,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#spread_level-instance_method
       def spread_level: () -> ("host" | "rack")
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#linked_group_id-instance_method
+      def linked_group_id: () -> ::String
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#load-instance_method

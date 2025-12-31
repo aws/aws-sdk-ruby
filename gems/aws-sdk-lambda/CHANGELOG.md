@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.171.0 (2025-12-11)
+------------------
+
+* Feature - Add Dotnet 10 (dotnet10) support to AWS Lambda.
+
+1.170.0 (2025-12-04)
+------------------
+
+* Feature - Add DisallowedByVpcEncryptionControl to the LastUpdateStatusReasonCode and StateReasonCode enums to represent failures caused by VPC Encryption Controls.
+
+1.169.0 (2025-12-02)
+------------------
+
+* Feature - Launching Lambda durable functions - a new feature to build reliable multi-step applications and AI workflows natively within the Lambda developer experience.
+
+1.168.0 (2025-12-01)
+------------------
+
+* Feature - Launching Lambda Managed Instances - a new feature to run Lambda on EC2.
+
+1.167.0 (2025-11-21)
+------------------
+
+* Feature - Launching Enhanced Error Handling and ESM Grouping capabilities for Kafka ESMs
+
+1.166.0 (2025-11-19)
+------------------
+
+* Feature - Added support for creating and invoking Tenant Isolated functions in AWS Lambda APIs.
+
+1.165.0 (2025-10-31)
+------------------
+
+* Feature - Add Python3.14 (python3.14) and Java 25 (java25) support to AWS Lambda
+
+1.164.0 (2025-10-28)
+------------------
+
+* Feature - Added SerializedRequestEntityTooLargeException to Lambda Invoke API
+
+1.163.0 (2025-10-23)
+------------------
+
+* Feature - Add NodeJs 24 (nodejs24.x) support to AWS Lambda.
+
+1.162.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.161.0 (2025-10-10)
 ------------------
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.47.0 (2025-11-20)
+------------------
+
+* Feature - Add support for EBS volume in Recycle Bin
+
+1.46.0 (2025-10-27)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.45.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.44.0 (2025-08-26)
 ------------------
 

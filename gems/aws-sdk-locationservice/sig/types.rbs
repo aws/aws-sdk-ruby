@@ -13,6 +13,12 @@ module Aws::LocationService
       SENSITIVE: []
     end
 
+    class AndroidApp
+      attr_accessor package: ::String
+      attr_accessor certificate_fingerprint: ::String
+      SENSITIVE: []
+    end
+
     class ApiKeyFilter
       attr_accessor key_status: ("Active" | "Expired")
       SENSITIVE: []
@@ -22,6 +28,13 @@ module Aws::LocationService
       attr_accessor allow_actions: ::Array[::String]
       attr_accessor allow_resources: ::Array[::String]
       attr_accessor allow_referers: ::Array[::String]
+      attr_accessor allow_android_apps: ::Array[Types::AndroidApp]
+      attr_accessor allow_apple_apps: ::Array[Types::AppleApp]
+      SENSITIVE: []
+    end
+
+    class AppleApp
+      attr_accessor bundle_id: ::String
       SENSITIVE: []
     end
 
@@ -163,7 +176,7 @@ module Aws::LocationService
     class CalculateRouteCarModeOptions
       attr_accessor avoid_ferries: bool
       attr_accessor avoid_tolls: bool
-      SENSITIVE: []
+      SENSITIVE: [:avoid_ferries, :avoid_tolls]
     end
 
     class CalculateRouteMatrixRequest
@@ -177,7 +190,7 @@ module Aws::LocationService
       attr_accessor car_mode_options: Types::CalculateRouteCarModeOptions
       attr_accessor truck_mode_options: Types::CalculateRouteTruckModeOptions
       attr_accessor key: ::String
-      SENSITIVE: [:departure_time, :key]
+      SENSITIVE: [:departure_time, :depart_now, :key]
     end
 
     class CalculateRouteMatrixResponse
@@ -211,7 +224,7 @@ module Aws::LocationService
       attr_accessor arrival_time: ::Time
       attr_accessor optimize_for: ("FastestRoute" | "ShortestRoute")
       attr_accessor key: ::String
-      SENSITIVE: [:departure_position, :destination_position, :departure_time, :arrival_time, :key]
+      SENSITIVE: [:departure_position, :destination_position, :departure_time, :depart_now, :include_leg_geometry, :arrival_time, :key]
     end
 
     class CalculateRouteResponse
@@ -226,7 +239,7 @@ module Aws::LocationService
       attr_accessor distance: ::Float
       attr_accessor duration_seconds: ::Float
       attr_accessor distance_unit: ("Kilometers" | "Miles")
-      SENSITIVE: [:route_b_box]
+      SENSITIVE: [:route_b_box, :distance, :duration_seconds]
     end
 
     class CalculateRouteTruckModeOptions
@@ -234,7 +247,7 @@ module Aws::LocationService
       attr_accessor avoid_tolls: bool
       attr_accessor dimensions: Types::TruckDimensions
       attr_accessor weight: Types::TruckWeight
-      SENSITIVE: []
+      SENSITIVE: [:avoid_ferries, :avoid_tolls]
     end
 
     class CellSignals
@@ -701,7 +714,7 @@ module Aws::LocationService
       attr_accessor x: ::String
       attr_accessor y: ::String
       attr_accessor key: ::String
-      SENSITIVE: [:key]
+      SENSITIVE: [:z, :x, :y, :key]
     end
 
     class GetMapTileResponse
@@ -716,7 +729,7 @@ module Aws::LocationService
       attr_accessor place_id: ::String
       attr_accessor language: ::String
       attr_accessor key: ::String
-      SENSITIVE: [:key]
+      SENSITIVE: [:place_id, :key]
     end
 
     class GetPlaceResponse
@@ -744,7 +757,7 @@ module Aws::LocationService
       attr_accessor duration_seconds: ::Float
       attr_accessor geometry: Types::LegGeometry
       attr_accessor steps: ::Array[Types::Step]
-      SENSITIVE: [:start_position, :end_position]
+      SENSITIVE: [:start_position, :end_position, :distance, :duration_seconds]
     end
 
     class LegGeometry
@@ -1014,7 +1027,7 @@ module Aws::LocationService
       attr_accessor categories: ::Array[::String]
       attr_accessor supplemental_categories: ::Array[::String]
       attr_accessor sub_municipality: ::String
-      SENSITIVE: []
+      SENSITIVE: [:label, :address_number, :street, :neighborhood, :municipality, :sub_region, :region, :country, :postal_code, :interpolated, :unit_type, :unit_number, :sub_municipality]
     end
 
     class PlaceGeometry
@@ -1051,7 +1064,7 @@ module Aws::LocationService
       attr_accessor distance: ::Float
       attr_accessor duration_seconds: ::Float
       attr_accessor error: Types::RouteMatrixEntryError
-      SENSITIVE: []
+      SENSITIVE: [:distance, :duration_seconds]
     end
 
     class RouteMatrixEntryError
@@ -1064,7 +1077,7 @@ module Aws::LocationService
       attr_accessor place: Types::Place
       attr_accessor distance: ::Float
       attr_accessor place_id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:distance, :place_id]
     end
 
     class SearchForSuggestionsResult
@@ -1072,7 +1085,7 @@ module Aws::LocationService
       attr_accessor place_id: ::String
       attr_accessor categories: ::Array[::String]
       attr_accessor supplemental_categories: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:text, :place_id]
     end
 
     class SearchForTextResult
@@ -1080,7 +1093,7 @@ module Aws::LocationService
       attr_accessor distance: ::Float
       attr_accessor relevance: ::Float
       attr_accessor place_id: ::String
-      SENSITIVE: []
+      SENSITIVE: [:distance, :relevance, :place_id]
     end
 
     class SearchPlaceIndexForPositionRequest
@@ -1180,7 +1193,7 @@ module Aws::LocationService
       attr_accessor distance: ::Float
       attr_accessor duration_seconds: ::Float
       attr_accessor geometry_offset: ::Integer
-      SENSITIVE: [:start_position, :end_position]
+      SENSITIVE: [:start_position, :end_position, :distance, :duration_seconds]
     end
 
     class TagResourceRequest
@@ -1200,7 +1213,7 @@ module Aws::LocationService
     class TimeZone
       attr_accessor name: ::String
       attr_accessor offset: ::Integer
-      SENSITIVE: []
+      SENSITIVE: [:name, :offset]
     end
 
     class TrackingFilterGeometry
@@ -1213,13 +1226,13 @@ module Aws::LocationService
       attr_accessor height: ::Float
       attr_accessor width: ::Float
       attr_accessor unit: ("Meters" | "Feet")
-      SENSITIVE: []
+      SENSITIVE: [:length, :height, :width]
     end
 
     class TruckWeight
       attr_accessor total: ::Float
       attr_accessor unit: ("Kilograms" | "Pounds")
-      SENSITIVE: []
+      SENSITIVE: [:total]
     end
 
     class UntagResourceRequest

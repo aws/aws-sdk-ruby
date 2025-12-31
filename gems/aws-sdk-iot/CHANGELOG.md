@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.160.0 (2025-12-19)
+------------------
+
+* Feature - This release adds event-based logging feature that enables granular event logging controls for AWS IoT logs.
+
+1.159.0 (2025-12-18)
+------------------
+
+* Feature - This release adds message batching for the IoT Rules Engine HTTP action.
+
+1.158.0 (2025-12-16)
+------------------
+
+* Feature - Add support for dynamic payloads in IoT Device Management Commands
+
+1.157.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.156.0 (2025-10-22)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.155.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.154.0 (2025-08-27)
 ------------------
 

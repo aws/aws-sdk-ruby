@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2025-12-18)
+------------------
+
+* Feature - Adds support for ECR Create On Push
+
+1.115.0 (2025-11-21)
+------------------
+
+* Feature - Add support for ECR managed signing
+
+1.114.0 (2025-11-19)
+------------------
+
+* Feature - Add support for ECR archival storage class and Inspector org policy for scanning
+
+1.113.0 (2025-11-13)
+------------------
+
+* Feature - Add Amazon ECR FIPS PrivateLink endpoint support
+
+1.112.0 (2025-10-23)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.111.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.110.0 (2025-08-28)
 ------------------
 

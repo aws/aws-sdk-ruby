@@ -93,6 +93,10 @@
             "uid": "rpcv2protocol-2020-07-14"
         },
         "shapes": {
+            "Double": {
+                "type": "double",
+                "box": true
+            },
             "Float16Output": {
                 "type": "structure",
                 "members": {
@@ -100,10 +104,6 @@
                         "shape": "Double"
                     }
                 }
-            },
-            "Double": {
-                "type": "double",
-                "box": true
             }
         },
         "cases": [
@@ -254,6 +254,10 @@
             "uid": "rpcv2protocol-2020-07-14"
         },
         "shapes": {
+            "DateTime": {
+                "type": "timestamp",
+                "timestampFormat": "iso8601"
+            },
             "FractionalSecondsOutput": {
                 "type": "structure",
                 "members": {
@@ -261,10 +265,6 @@
                         "shape": "DateTime"
                     }
                 }
-            },
-            "DateTime": {
-                "type": "timestamp",
-                "timestampFormat": "iso8601"
             }
         },
         "cases": [
@@ -396,9 +396,6 @@
                 "documentation": "<p>This error is thrown when a request is invalid.</p>",
                 "exception": true
             },
-            "String": {
-                "type": "string"
-            },
             "ComplexNestedErrorData": {
                 "type": "structure",
                 "members": {
@@ -406,6 +403,9 @@
                         "shape": "String"
                     }
                 }
+            },
+            "String": {
+                "type": "string"
             }
         },
         "cases": [
@@ -650,9 +650,6 @@
                     }
                 }
             },
-            "String": {
-                "type": "string"
-            },
             "RecursiveShapesInputOutputNested2": {
                 "type": "structure",
                 "members": {
@@ -663,6 +660,9 @@
                         "shape": "RecursiveShapesInputOutputNested1"
                     }
                 }
+            },
+            "String": {
+                "type": "string"
             }
         },
         "cases": [
@@ -760,6 +760,67 @@
             "uid": "rpcv2protocol-2020-07-14"
         },
         "shapes": {
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "DenseBooleanMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "Boolean"
+                }
+            },
+            "DenseNumberMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "Integer"
+                }
+            },
+            "DenseSetMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "StringSet"
+                }
+            },
+            "DenseStringMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
+                }
+            },
+            "DenseStructMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "GreetingStruct"
+                }
+            },
+            "GreetingStruct": {
+                "type": "structure",
+                "members": {
+                    "hi": {
+                        "shape": "String"
+                    }
+                }
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
             "RpcV2CborDenseMapsInputOutput": {
                 "type": "structure",
                 "members": {
@@ -780,74 +841,13 @@
                     }
                 }
             },
-            "DenseStructMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "GreetingStruct"
-                }
-            },
-            "DenseNumberMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "Integer"
-                }
-            },
-            "DenseBooleanMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "Boolean"
-                }
-            },
-            "DenseStringMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "String"
-                }
-            },
-            "DenseSetMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "StringSet"
-                }
+            "String": {
+                "type": "string"
             },
             "StringSet": {
                 "type": "list",
                 "member": {
                     "shape": "String"
-                }
-            },
-            "String": {
-                "type": "string"
-            },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
-            },
-            "Integer": {
-                "type": "integer",
-                "box": true
-            },
-            "GreetingStruct": {
-                "type": "structure",
-                "members": {
-                    "hi": {
-                        "shape": "String"
-                    }
                 }
             }
         },
@@ -1002,6 +1002,68 @@
             "uid": "rpcv2protocol-2020-07-14"
         },
         "shapes": {
+            "Blob": {
+                "type": "blob"
+            },
+            "BlobList": {
+                "type": "list",
+                "member": {
+                    "shape": "Blob"
+                }
+            },
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "BooleanList": {
+                "type": "list",
+                "member": {
+                    "shape": "Boolean"
+                }
+            },
+            "FooEnum": {
+                "type": "string",
+                "enum": [
+                    "Foo",
+                    "Baz",
+                    "Bar",
+                    "1",
+                    "0"
+                ]
+            },
+            "FooEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "FooEnum"
+                }
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "IntegerEnum": {
+                "type": "integer",
+                "box": true
+            },
+            "IntegerEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "IntegerEnum"
+                }
+            },
+            "IntegerList": {
+                "type": "list",
+                "member": {
+                    "shape": "Integer"
+                }
+            },
+            "NestedStringList": {
+                "type": "list",
+                "member": {
+                    "shape": "StringList"
+                },
+                "documentation": "<p>A list of lists of strings.</p>"
+            },
             "RpcV2CborListInputOutput": {
                 "type": "structure",
                 "members": {
@@ -1037,6 +1099,9 @@
                     }
                 }
             },
+            "String": {
+                "type": "string"
+            },
             "StringList": {
                 "type": "list",
                 "member": {
@@ -1049,57 +1114,11 @@
                     "shape": "String"
                 }
             },
-            "IntegerList": {
-                "type": "list",
-                "member": {
-                    "shape": "Integer"
-                }
-            },
-            "BooleanList": {
-                "type": "list",
-                "member": {
-                    "shape": "Boolean"
-                }
-            },
-            "TimestampList": {
-                "type": "list",
-                "member": {
-                    "shape": "Timestamp"
-                }
-            },
-            "FooEnumList": {
-                "type": "list",
-                "member": {
-                    "shape": "FooEnum"
-                }
-            },
-            "IntegerEnumList": {
-                "type": "list",
-                "member": {
-                    "shape": "IntegerEnum"
-                }
-            },
-            "NestedStringList": {
-                "type": "list",
-                "member": {
-                    "shape": "StringList"
-                },
-                "documentation": "<p>A list of lists of strings.</p>"
-            },
             "StructureList": {
                 "type": "list",
                 "member": {
                     "shape": "StructureListMember"
                 }
-            },
-            "BlobList": {
-                "type": "list",
-                "member": {
-                    "shape": "Blob"
-                }
-            },
-            "Blob": {
-                "type": "blob"
             },
             "StructureListMember": {
                 "type": "structure",
@@ -1112,33 +1131,14 @@
                     }
                 }
             },
-            "String": {
-                "type": "string"
-            },
-            "IntegerEnum": {
-                "type": "integer",
-                "box": true
-            },
-            "FooEnum": {
-                "type": "string",
-                "enum": [
-                    "Foo",
-                    "Baz",
-                    "Bar",
-                    "1",
-                    "0"
-                ]
-            },
             "Timestamp": {
                 "type": "timestamp"
             },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
-            },
-            "Integer": {
-                "type": "integer",
-                "box": true
+            "TimestampList": {
+                "type": "list",
+                "member": {
+                    "shape": "Timestamp"
+                }
             }
         },
         "cases": [
@@ -1331,6 +1331,29 @@
             "uid": "rpcv2protocol-2020-07-14"
         },
         "shapes": {
+            "Blob": {
+                "type": "blob"
+            },
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "Double": {
+                "type": "double",
+                "box": true
+            },
+            "Float": {
+                "type": "float",
+                "box": true
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "Long": {
+                "type": "long",
+                "box": true
+            },
             "SimpleScalarStructure": {
                 "type": "structure",
                 "members": {
@@ -1366,31 +1389,8 @@
                     }
                 }
             },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
-            },
-            "Integer": {
-                "type": "integer",
-                "box": true
-            },
-            "Double": {
-                "type": "double",
-                "box": true
-            },
-            "Float": {
-                "type": "float",
-                "box": true
-            },
-            "Long": {
-                "type": "long",
-                "box": true
-            },
             "String": {
                 "type": "string"
-            },
-            "Blob": {
-                "type": "blob"
             }
         },
         "cases": [

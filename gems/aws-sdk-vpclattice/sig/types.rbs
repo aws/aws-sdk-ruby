@@ -101,6 +101,9 @@ module Aws::VPCLattice
       attr_accessor resource_configuration_group_identifier: ::String
       attr_accessor resource_configuration_definition: Types::ResourceConfigurationDefinition
       attr_accessor allow_association_to_shareable_service_network: bool
+      attr_accessor custom_domain_name: ::String
+      attr_accessor group_domain: ::String
+      attr_accessor domain_verification_identifier: ::String
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -120,6 +123,10 @@ module Aws::VPCLattice
       attr_accessor allow_association_to_shareable_service_network: bool
       attr_accessor created_at: ::Time
       attr_accessor failure_reason: ::String
+      attr_accessor custom_domain_name: ::String
+      attr_accessor domain_verification_id: ::String
+      attr_accessor group_domain: ::String
+      attr_accessor domain_verification_arn: ::String
       SENSITIVE: []
     end
 
@@ -183,6 +190,7 @@ module Aws::VPCLattice
       attr_accessor client_token: ::String
       attr_accessor resource_configuration_identifier: ::String
       attr_accessor service_network_identifier: ::String
+      attr_accessor private_dns_enabled: bool
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -192,6 +200,7 @@ module Aws::VPCLattice
       attr_accessor arn: ::String
       attr_accessor status: ("CREATE_IN_PROGRESS" | "ACTIVE" | "PARTIAL" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
       attr_accessor created_by: ::String
+      attr_accessor private_dns_enabled: bool
       SENSITIVE: []
     end
 
@@ -226,8 +235,10 @@ module Aws::VPCLattice
       attr_accessor client_token: ::String
       attr_accessor service_network_identifier: ::String
       attr_accessor vpc_identifier: ::String
+      attr_accessor private_dns_enabled: bool
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor dns_options: Types::DnsOptions
       SENSITIVE: []
     end
 
@@ -237,6 +248,8 @@ module Aws::VPCLattice
       attr_accessor arn: ::String
       attr_accessor created_by: ::String
       attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor private_dns_enabled: bool
+      attr_accessor dns_options: Types::DnsOptions
       SENSITIVE: []
     end
 
@@ -295,6 +308,14 @@ module Aws::VPCLattice
     end
 
     class DeleteAuthPolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDomainVerificationRequest
+      attr_accessor domain_verification_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainVerificationResponse < Aws::EmptyStructure
     end
 
     class DeleteListenerRequest
@@ -446,9 +467,27 @@ module Aws::VPCLattice
       SENSITIVE: []
     end
 
+    class DnsOptions
+      attr_accessor private_dns_preference: ("VERIFIED_DOMAINS_ONLY" | "ALL_DOMAINS" | "VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS" | "SPECIFIED_DOMAINS_ONLY")
+      attr_accessor private_dns_specified_domains: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class DnsResource
       attr_accessor domain_name: ::String
       attr_accessor ip_address_type: ("IPV4" | "IPV6" | "DUALSTACK")
+      SENSITIVE: []
+    end
+
+    class DomainVerificationSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor status: ("VERIFIED" | "PENDING" | "VERIFICATION_TIMED_OUT")
+      attr_accessor txt_method_config: Types::TxtMethodConfig
+      attr_accessor created_at: ::Time
+      attr_accessor last_verified_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -489,6 +528,23 @@ module Aws::VPCLattice
       attr_accessor state: ("Active" | "Inactive")
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetDomainVerificationRequest
+      attr_accessor domain_verification_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainVerificationResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor status: ("VERIFIED" | "PENDING" | "VERIFICATION_TIMED_OUT")
+      attr_accessor txt_method_config: Types::TxtMethodConfig
+      attr_accessor created_at: ::Time
+      attr_accessor last_verified_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -534,6 +590,10 @@ module Aws::VPCLattice
       attr_accessor amazon_managed: bool
       attr_accessor failure_reason: ::String
       attr_accessor last_updated_at: ::Time
+      attr_accessor domain_verification_id: ::String
+      attr_accessor domain_verification_arn: ::String
+      attr_accessor domain_verification_status: ("VERIFIED" | "PENDING" | "VERIFICATION_TIMED_OUT")
+      attr_accessor group_domain: ::String
       SENSITIVE: []
     end
 
@@ -613,8 +673,10 @@ module Aws::VPCLattice
       attr_accessor failure_code: ::String
       attr_accessor last_updated_at: ::Time
       attr_accessor private_dns_entry: Types::DnsEntry
+      attr_accessor private_dns_enabled: bool
       attr_accessor dns_entry: Types::DnsEntry
       attr_accessor is_managed_association: bool
+      attr_accessor domain_verification_status: ("VERIFIED" | "PENDING" | "VERIFICATION_TIMED_OUT")
       SENSITIVE: []
     end
 
@@ -671,9 +733,11 @@ module Aws::VPCLattice
       attr_accessor service_network_arn: ::String
       attr_accessor vpc_id: ::String
       attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor private_dns_enabled: bool
       attr_accessor failure_message: ::String
       attr_accessor failure_code: ::String
       attr_accessor last_updated_at: ::Time
+      attr_accessor dns_options: Types::DnsOptions
       SENSITIVE: []
     end
 
@@ -787,6 +851,18 @@ module Aws::VPCLattice
       SENSITIVE: []
     end
 
+    class ListDomainVerificationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainVerificationsResponse
+      attr_accessor items: ::Array[Types::DomainVerificationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListListenersRequest
       attr_accessor service_identifier: ::String
       attr_accessor max_results: ::Integer
@@ -803,6 +879,7 @@ module Aws::VPCLattice
     class ListResourceConfigurationsRequest
       attr_accessor resource_gateway_identifier: ::String
       attr_accessor resource_configuration_group_identifier: ::String
+      attr_accessor domain_verification_identifier: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -1077,6 +1154,9 @@ module Aws::VPCLattice
       attr_accessor amazon_managed: bool
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
+      attr_accessor custom_domain_name: ::String
+      attr_accessor domain_verification_id: ::String
+      attr_accessor group_domain: ::String
       SENSITIVE: []
     end
 
@@ -1204,6 +1284,7 @@ module Aws::VPCLattice
       attr_accessor private_dns_entry: Types::DnsEntry
       attr_accessor is_managed_association: bool
       attr_accessor failure_code: ::String
+      attr_accessor private_dns_enabled: bool
       SENSITIVE: []
     end
 
@@ -1245,6 +1326,8 @@ module Aws::VPCLattice
       attr_accessor service_network_id: ::String
       attr_accessor service_network_name: ::String
       attr_accessor service_network_arn: ::String
+      attr_accessor private_dns_enabled: bool
+      attr_accessor dns_options: Types::DnsOptions
       attr_accessor vpc_id: ::String
       attr_accessor last_updated_at: ::Time
       SENSITIVE: []
@@ -1273,6 +1356,22 @@ module Aws::VPCLattice
 
     class SharingConfig
       attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class StartDomainVerificationRequest
+      attr_accessor client_token: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartDomainVerificationResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor status: ("VERIFIED" | "PENDING" | "VERIFICATION_TIMED_OUT")
+      attr_accessor txt_method_config: Types::TxtMethodConfig
       SENSITIVE: []
     end
 
@@ -1340,6 +1439,12 @@ module Aws::VPCLattice
       attr_accessor service_code: ::String
       attr_accessor quota_code: ::String
       attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class TxtMethodConfig
+      attr_accessor value: ::String
+      attr_accessor name: ::String
       SENSITIVE: []
     end
 

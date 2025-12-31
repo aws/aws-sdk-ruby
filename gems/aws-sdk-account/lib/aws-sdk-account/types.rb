@@ -240,7 +240,7 @@ module Aws::Account
     #   the same organization. The organization must have [all features
     #   enabled][2], and the organization must have [trusted access][3]
     #   enabled for the Account Management service, and optionally a
-    #   [delegated admin][4] account assigned.
+    #   [delegated administrator][4] account assigned.
     #
     #   <note markdown="1"> The management account can't specify its own `AccountId`; it must
     #   call the operation in standalone context by not including the
@@ -257,8 +257,8 @@ module Aws::Account
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
     #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
     #   @return [String]
     #
     # @!attribute [rw] alternate_contact_type
@@ -390,7 +390,7 @@ module Aws::Account
     #   the same organization. The organization must have [all features
     #   enabled][2], and the organization must have [trusted access][3]
     #   enabled for the Account Management service, and optionally a
-    #   [delegated admin][4] account assigned.
+    #   [delegated administrator][4] account assigned.
     #
     #   <note markdown="1"> The management account can't specify its own `AccountId`; it must
     #   call the operation in standalone context by not including the
@@ -407,8 +407,8 @@ module Aws::Account
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
     #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/GetAccountInformationRequest AWS API Documentation
@@ -477,7 +477,7 @@ module Aws::Account
     #   the same organization. The organization must have [all features
     #   enabled][2], and the organization must have [trusted access][3]
     #   enabled for the Account Management service, and optionally a
-    #   [delegated admin][4] account assigned.
+    #   [delegated administrator][4] account assigned.
     #
     #   <note markdown="1"> The management account can't specify its own `AccountId`; it must
     #   call the operation in standalone context by not including the
@@ -494,8 +494,8 @@ module Aws::Account
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
     #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
     #   @return [String]
     #
     # @!attribute [rw] alternate_contact_type
@@ -573,6 +573,65 @@ module Aws::Account
     #
     class GetContactInformationResponse < Struct.new(
       :contact_information)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] standard_account_id
+    #   Specifies the 12 digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation.
+    #
+    #   If you do not specify this parameter, it defaults to the Amazon Web
+    #   Services account of the identity used to call the operation.
+    #
+    #   To use this parameter, the caller must be an identity in the
+    #   [organization's management account][1] or a delegated administrator
+    #   account, and the specified account ID must be a member account in
+    #   the same organization. The organization must have [all features
+    #   enabled][2], and the organization must have [trusted access][3]
+    #   enabled for the Account Management service, and optionally a
+    #   [delegated administrator][4] account assigned.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`; it must
+    #   call the operation in standalone context by not including the
+    #   `AccountId` parameter.
+    #
+    #    </note>
+    #
+    #   To call this operation on an account that is not a member of an
+    #   organization, then don't specify this parameter, and call the
+    #   operation using an identity belonging to the account whose contacts
+    #   you wish to retrieve or modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/GetGovCloudAccountInformationRequest AWS API Documentation
+    #
+    class GetGovCloudAccountInformationRequest < Struct.new(
+      :standard_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_state
+    #   The account state of the linked GovCloud account.
+    #   @return [String]
+    #
+    # @!attribute [rw] gov_cloud_account_id
+    #   The 12-digit account ID number of the linked GovCloud account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/GetGovCloudAccountInformationResponse AWS API Documentation
+    #
+    class GetGovCloudAccountInformationResponse < Struct.new(
+      :account_state,
+      :gov_cloud_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -820,7 +879,7 @@ module Aws::Account
     #   the same organization. The organization must have [all features
     #   enabled][2], and the organization must have [trusted access][3]
     #   enabled for the Account Management service, and optionally a
-    #   [delegated admin][4] account assigned.
+    #   [delegated administrator][4] account assigned.
     #
     #   <note markdown="1"> The management account can't specify its own `AccountId`; it must
     #   call the operation in standalone context by not including the
@@ -837,8 +896,8 @@ module Aws::Account
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
     #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
     #   @return [String]
     #
     # @!attribute [rw] account_name
@@ -867,7 +926,7 @@ module Aws::Account
     #   the same organization. The organization must have [all features
     #   enabled][2], and the organization must have [trusted access][3]
     #   enabled for the Account Management service, and optionally a
-    #   [delegated admin][4] account assigned.
+    #   [delegated administrator][4] account assigned.
     #
     #   <note markdown="1"> The management account can't specify its own `AccountId`; it must
     #   call the operation in standalone context by not including the
@@ -884,8 +943,8 @@ module Aws::Account
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
     #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
-    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
     #   @return [String]
     #
     # @!attribute [rw] alternate_contact_type
@@ -932,7 +991,7 @@ module Aws::Account
     #   same organization. The organization must have [all features
     #   enabled][2], and the organization must have [trusted access][3]
     #   enabled for the Account Management service, and optionally a
-    #   [delegated admin][4] account assigned.
+    #   [delegated administrator][4] account assigned.
     #
     #   <note markdown="1"> The management account can't specify its own `AccountId`. It must
     #   call the operation in standalone context by not including the
@@ -949,7 +1008,7 @@ module Aws::Account
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
     #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
-    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/services-that-can-integrate-account.html
     #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin
     #   @return [String]
     #
@@ -1002,6 +1061,26 @@ module Aws::Account
     # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Struct.new(
+      :error_type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The operation failed because it specified a resource that is not
+    # currently available.
+    #
+    # @!attribute [rw] error_type
+    #   The value populated to the `x-amzn-ErrorType` response header by API
+    #   Gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/ResourceUnavailableException AWS API Documentation
+    #
+    class ResourceUnavailableException < Struct.new(
       :error_type,
       :message)
       SENSITIVE = []

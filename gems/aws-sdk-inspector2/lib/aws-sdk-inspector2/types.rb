@@ -7802,6 +7802,9 @@ module Aws::Inspector2
     #   Once the instance becomes managed by SSM, Inspector will
     #   automatically begin scanning this instance.
     #
+    #   `UNSUPPORTED_CODE_ARTIFACTS ` - The function was not scanned because
+    #   it has an unsupported code artifacts.
+    #
     #   `UNSUPPORTED_CONFIG_FILE` - Reserved for future use.
     #
     #   `UNSUPPORTED_LANGUAGE` - The scan was unsuccessful because the
@@ -7821,6 +7824,9 @@ module Aws::Inspector2
     #   see:
     #   [https://docs.aws.amazon.com/inspector/latest/user/supported.html](
     #   https://docs.aws.amazon.com/inspector/latest/user/supported.html).
+    #
+    #   `IMAGE_ARCHIVED` - This image has been archived in Amazon ECR and is
+    #   no longer available for scanning in Amazon Inspector.
     #
     #
     #

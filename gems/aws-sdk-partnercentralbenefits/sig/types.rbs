@@ -1,0 +1,488 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::PartnerCentralBenefits
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccessDetails
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class AmendBenefitApplicationInput
+      attr_accessor catalog: ::String
+      attr_accessor client_token: ::String
+      attr_accessor revision: ::String
+      attr_accessor identifier: ::String
+      attr_accessor amendment_reason: ::String
+      attr_accessor amendments: ::Array[Types::Amendment]
+      SENSITIVE: []
+    end
+
+    class AmendBenefitApplicationOutput < Aws::EmptyStructure
+    end
+
+    class Amendment
+      attr_accessor field_path: ::String
+      attr_accessor new_value: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateBenefitApplicationResourceInput
+      attr_accessor catalog: ::String
+      attr_accessor benefit_application_identifier: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateBenefitApplicationResourceOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatedResource
+      attr_accessor resource_type: ("OPPORTUNITY" | "BENEFIT_ALLOCATION")
+      attr_accessor resource_identifier: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BenefitAllocationSummary
+      attr_accessor id: ::String
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "FULFILLED")
+      attr_accessor status_reason: ::String
+      attr_accessor name: ::String
+      attr_accessor benefit_id: ::String
+      attr_accessor benefit_application_id: ::String
+      attr_accessor fulfillment_types: ::Array[("CREDITS" | "CASH" | "ACCESS")]
+      attr_accessor created_at: ::Time
+      attr_accessor expires_at: ::Time
+      attr_accessor applicable_benefit_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BenefitApplicationSummary
+      attr_accessor catalog: ::String
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor benefit_id: ::String
+      attr_accessor programs: ::Array[::String]
+      attr_accessor fulfillment_types: ::Array[("CREDITS" | "CASH" | "ACCESS")]
+      attr_accessor status: ("PENDING_SUBMISSION" | "IN_REVIEW" | "ACTION_REQUIRED" | "APPROVED" | "REJECTED" | "CANCELED")
+      attr_accessor stage: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor benefit_application_details: ::Hash[::String, ::String]
+      attr_accessor associated_resources: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BenefitSummary
+      attr_accessor id: ::String
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor programs: ::Array[::String]
+      attr_accessor fulfillment_types: ::Array[("CREDITS" | "CASH" | "ACCESS")]
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class CancelBenefitApplicationInput
+      attr_accessor catalog: ::String
+      attr_accessor client_token: ::String
+      attr_accessor identifier: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class CancelBenefitApplicationOutput < Aws::EmptyStructure
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConsumableDetails
+      attr_accessor allocated_amount: Types::MonetaryValue
+      attr_accessor remaining_amount: Types::MonetaryValue
+      attr_accessor utilized_amount: Types::MonetaryValue
+      attr_accessor issuance_details: Types::IssuanceDetail
+      SENSITIVE: []
+    end
+
+    class Contact
+      attr_accessor email: ::String
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor business_title: ::String
+      attr_accessor phone: ::String
+      SENSITIVE: [:email, :first_name, :last_name, :phone]
+    end
+
+    class CreateBenefitApplicationInput
+      attr_accessor catalog: ::String
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor benefit_identifier: ::String
+      attr_accessor fulfillment_types: ::Array[("CREDITS" | "CASH" | "ACCESS")]
+      attr_accessor benefit_application_details: untyped
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor associated_resources: ::Array[::String]
+      attr_accessor partner_contacts: ::Array[Types::Contact]
+      attr_accessor file_details: ::Array[Types::FileInput]
+      SENSITIVE: []
+    end
+
+    class CreateBenefitApplicationOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class CreditCode
+      attr_accessor aws_account_id: ::String
+      attr_accessor value: Types::MonetaryValue
+      attr_accessor aws_credit_code: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "FULFILLED")
+      attr_accessor issued_at: ::Time
+      attr_accessor expires_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreditDetails
+      attr_accessor allocated_amount: Types::MonetaryValue
+      attr_accessor issued_amount: Types::MonetaryValue
+      attr_accessor codes: ::Array[Types::CreditCode]
+      SENSITIVE: []
+    end
+
+    class DisassociateBenefitApplicationResourceInput
+      attr_accessor catalog: ::String
+      attr_accessor benefit_application_identifier: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateBenefitApplicationResourceOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class DisbursementDetails
+      attr_accessor disbursed_amount: Types::MonetaryValue
+      attr_accessor issuance_details: Types::IssuanceDetail
+      SENSITIVE: []
+    end
+
+    class FileDetail
+      attr_accessor file_uri: ::String
+      attr_accessor business_use_case: ::String
+      attr_accessor file_name: ::String
+      attr_accessor file_status: ::String
+      attr_accessor file_status_reason: ::String
+      attr_accessor file_type: ("application/msword" | "application/vnd.openxmlformats-officedocument.wordprocessingml.document" | "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" | "application/vnd.openxmlformats-officedocument.presentationml.presentation" | "application/pdf" | "image/png" | "image/jpeg" | "image/svg+xml" | "text/csv")
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class FileInput
+      attr_accessor file_uri: ::String
+      attr_accessor business_use_case: ::String
+      SENSITIVE: []
+    end
+
+    class FulfillmentDetails
+      attr_accessor disbursement_details: Types::DisbursementDetails
+      attr_accessor consumable_details: Types::ConsumableDetails
+      attr_accessor credit_details: Types::CreditDetails
+      attr_accessor access_details: Types::AccessDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DisbursementDetails < FulfillmentDetails
+      end
+      class ConsumableDetails < FulfillmentDetails
+      end
+      class CreditDetails < FulfillmentDetails
+      end
+      class AccessDetails < FulfillmentDetails
+      end
+      class Unknown < FulfillmentDetails
+      end
+    end
+
+    class GetBenefitAllocationInput
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetBenefitAllocationOutput
+      attr_accessor id: ::String
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "FULFILLED")
+      attr_accessor status_reason: ::String
+      attr_accessor benefit_application_id: ::String
+      attr_accessor benefit_id: ::String
+      attr_accessor fulfillment_type: ("CREDITS" | "CASH" | "ACCESS")
+      attr_accessor applicable_benefit_ids: ::Array[::String]
+      attr_accessor fulfillment_detail: Types::FulfillmentDetails
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor starts_at: ::Time
+      attr_accessor expires_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetBenefitApplicationInput
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetBenefitApplicationOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor catalog: ::String
+      attr_accessor benefit_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor fulfillment_types: ::Array[("CREDITS" | "CASH" | "ACCESS")]
+      attr_accessor benefit_application_details: untyped
+      attr_accessor programs: ::Array[::String]
+      attr_accessor status: ("PENDING_SUBMISSION" | "IN_REVIEW" | "ACTION_REQUIRED" | "APPROVED" | "REJECTED" | "CANCELED")
+      attr_accessor stage: ::String
+      attr_accessor status_reason: ::String
+      attr_accessor status_reason_code: ::String
+      attr_accessor status_reason_codes: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor revision: ::String
+      attr_accessor associated_resources: ::Array[::String]
+      attr_accessor partner_contacts: ::Array[Types::Contact]
+      attr_accessor file_details: ::Array[Types::FileDetail]
+      SENSITIVE: []
+    end
+
+    class GetBenefitInput
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetBenefitOutput
+      attr_accessor id: ::String
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor programs: ::Array[::String]
+      attr_accessor fulfillment_types: ::Array[("CREDITS" | "CASH" | "ACCESS")]
+      attr_accessor benefit_request_schema: untyped
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IssuanceDetail
+      attr_accessor issuance_id: ::String
+      attr_accessor issuance_amount: Types::MonetaryValue
+      attr_accessor issued_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ListBenefitAllocationsInput
+      attr_accessor catalog: ::String
+      attr_accessor fulfillment_types: ::Array[("CREDITS" | "CASH" | "ACCESS")]
+      attr_accessor benefit_identifiers: ::Array[::String]
+      attr_accessor benefit_application_identifiers: ::Array[::String]
+      attr_accessor status: ::Array[("ACTIVE" | "INACTIVE" | "FULFILLED")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBenefitAllocationsOutput
+      attr_accessor benefit_allocation_summaries: ::Array[Types::BenefitAllocationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBenefitApplicationsInput
+      attr_accessor catalog: ::String
+      attr_accessor programs: ::Array[::String]
+      attr_accessor fulfillment_types: ::Array[("CREDITS" | "CASH" | "ACCESS")]
+      attr_accessor benefit_identifiers: ::Array[::String]
+      attr_accessor status: ::Array[("PENDING_SUBMISSION" | "IN_REVIEW" | "ACTION_REQUIRED" | "APPROVED" | "REJECTED" | "CANCELED")]
+      attr_accessor stages: ::Array[::String]
+      attr_accessor associated_resources: ::Array[Types::AssociatedResource]
+      attr_accessor associated_resource_arns: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBenefitApplicationsOutput
+      attr_accessor benefit_application_summaries: ::Array[Types::BenefitApplicationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBenefitsInput
+      attr_accessor catalog: ::String
+      attr_accessor programs: ::Array[::String]
+      attr_accessor fulfillment_types: ::Array[("CREDITS" | "CASH" | "ACCESS")]
+      attr_accessor status: ::Array[("ACTIVE" | "INACTIVE")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBenefitsOutput
+      attr_accessor benefit_summaries: ::Array[Types::BenefitSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class MonetaryValue
+      attr_accessor amount: ::String
+      attr_accessor currency_code: ("AED" | "AMD" | "ARS" | "AUD" | "AWG" | "AZN" | "BBD" | "BDT" | "BGN" | "BMD" | "BND" | "BOB" | "BRL" | "BSD" | "BYR" | "BZD" | "CAD" | "CHF" | "CLP" | "CNY" | "COP" | "CRC" | "CZK" | "DKK" | "DOP" | "EEK" | "EGP" | "EUR" | "GBP" | "GEL" | "GHS" | "GTQ" | "GYD" | "HKD" | "HNL" | "HRK" | "HTG" | "HUF" | "IDR" | "ILS" | "INR" | "ISK" | "JMD" | "JPY" | "KES" | "KHR" | "KRW" | "KYD" | "KZT" | "LBP" | "LKR" | "LTL" | "LVL" | "MAD" | "MNT" | "MOP" | "MUR" | "MVR" | "MXN" | "MYR" | "NAD" | "NGN" | "NIO" | "NOK" | "NZD" | "PAB" | "PEN" | "PHP" | "PKR" | "PLN" | "PYG" | "QAR" | "RON" | "RUB" | "SAR" | "SEK" | "SGD" | "SIT" | "SKK" | "THB" | "TND" | "TRY" | "TTD" | "TWD" | "TZS" | "UAH" | "USD" | "UYU" | "UZS" | "VND" | "XAF" | "XCD" | "XOF" | "XPF" | "ZAR")
+      SENSITIVE: []
+    end
+
+    class RecallBenefitApplicationInput
+      attr_accessor catalog: ::String
+      attr_accessor client_token: ::String
+      attr_accessor identifier: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class RecallBenefitApplicationOutput < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class SubmitBenefitApplicationInput
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class SubmitBenefitApplicationOutput < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateBenefitApplicationInput
+      attr_accessor catalog: ::String
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor identifier: ::String
+      attr_accessor revision: ::String
+      attr_accessor benefit_application_details: untyped
+      attr_accessor partner_contacts: ::Array[Types::Contact]
+      attr_accessor file_details: ::Array[Types::FileInput]
+      SENSITIVE: []
+    end
+
+    class UpdateBenefitApplicationOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor revision: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other" | "BUSINESS_VALIDATION_FAILED")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      attr_accessor code: ("REQUIRED_FIELD_MISSING" | "INVALID_ENUM_VALUE" | "INVALID_STRING_FORMAT" | "INVALID_VALUE" | "NOT_ENOUGH_VALUES" | "TOO_MANY_VALUES" | "INVALID_RESOURCE_STATE" | "DUPLICATE_KEY_VALUE" | "VALUE_OUT_OF_RANGE" | "ACTION_NOT_PERMITTED")
+      SENSITIVE: []
+    end
+  end
+end

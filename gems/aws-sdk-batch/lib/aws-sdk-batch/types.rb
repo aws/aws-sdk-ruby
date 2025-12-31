@@ -631,7 +631,7 @@ module Aws::Batch
     #     `m6i`, `c6i`, `r6i`, and `c7i` instance families) that matches the
     #     resource demands of the job queue.
     #
-    #   * `default_arm64` to choose x86 based instance types (from the
+    #   * `default_arm64` to choose ARM based instance types (from the
     #     `m6g`, `c6g`, `r6g`, and `c7g` instance families) that matches the
     #     resource demands of the job queue.
     #
@@ -3612,17 +3612,13 @@ module Aws::Batch
     #   EKS
     #
     #   : If the `imageIdOverride` parameter isn't specified, then a recent
-    #     [Amazon EKS-optimized Amazon Linux AMI][5] (`EKS_AL2`) is used. If
-    #     a new image type is specified in an update, but neither an
-    #     `imageId` nor a `imageIdOverride` parameter is specified, then the
-    #     latest Amazon EKS optimized AMI for that image type that Batch
+    #     [Amazon EKS-optimized Amazon Linux 2023 AMI][5] (`EKS_AL2023`) is
+    #     used. If a new image type is specified in an update, but neither
+    #     an `imageId` nor a `imageIdOverride` parameter is specified, then
+    #     the latest Amazon EKS optimized AMI for that image type that Batch
     #     supports is used.
     #
-    #     Starting end of October 2025 Amazon EKS optimized Amazon Linux
-    #     2023 AMIs will be the default on Batch for EKS versions prior to
-    #     1.33. Starting from Kubernetes version 1.33, EKS optimized Amazon
-    #     Linux 2023 AMIs will be the default when it becomes supported on
-    #     Batch.
+    #     Amazon Linux 2023 AMIs are the default on Batch for Amazon EKS.
     #
     #      Amazon Web Services will end support for Amazon EKS AL2-optimized
     #     and AL2-accelerated AMIs, starting 11/26/25. You can continue
@@ -3636,17 +3632,17 @@ module Aws::Batch
     #
     #     EKS\_AL2
     #
-    #     : [Amazon Linux 2][5]: Default for all non-GPU instance families.
+    #     : [Amazon Linux 2][5]: Used for non-GPU instance families.
     #
     #     EKS\_AL2\_NVIDIA
     #
-    #     : [Amazon Linux 2 (accelerated)][5]: Default for all GPU instance
+    #     : [Amazon Linux 2 (accelerated)][5]: Used for GPU instance
     #       families (for example, `P4` and `G4`) and can be used for all
     #       non Amazon Web Services Graviton-based instance types.
     #
     #     EKS\_AL2023
     #
-    #     : [Amazon Linux 2023][5]: Batch supports Amazon Linux 2023.
+    #     : [Amazon Linux 2023][5]: Default for non-GPU instance families.
     #
     #       <note markdown="1"> Amazon Linux 2023 does not support `A1` instances.
     #
@@ -3654,9 +3650,9 @@ module Aws::Batch
     #
     #     EKS\_AL2023\_NVIDIA
     #
-    #     : [Amazon Linux 2023 (accelerated)][5]: GPU instance families and
-    #       can be used for all non Amazon Web Services Graviton-based
-    #       instance types.
+    #     : [Amazon Linux 2023 (accelerated)][5]: Default for GPU instance
+    #       families and can be used for all non Amazon Web Services
+    #       Graviton-based instance types.
     #
     #
     #

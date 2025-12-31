@@ -240,6 +240,12 @@ module Aws::EC2
       data[:associated_subnets]
     end
 
+    # The ID of the Availability Zone.
+    # @return [String]
+    def availability_zone_id
+      data[:availability_zone_id]
+    end
+
     # @!endgroup
 
     # @return [Client]

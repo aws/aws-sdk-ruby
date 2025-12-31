@@ -205,7 +205,8 @@ module Aws::APIGateway
       attr_accessor regional_certificate_arn: ::String
       attr_accessor endpoint_configuration: Types::EndpointConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor security_policy: ("TLS_1_0" | "TLS_1_2")
+      attr_accessor security_policy: ("TLS_1_0" | "TLS_1_2" | "SecurityPolicy_TLS13_1_3_2025_09" | "SecurityPolicy_TLS13_1_3_FIPS_2025_09" | "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_2021_06" | "SecurityPolicy_TLS13_2025_EDGE" | "SecurityPolicy_TLS12_PFS_2025_EDGE" | "SecurityPolicy_TLS12_2018_EDGE")
+      attr_accessor endpoint_access_mode: ("BASIC" | "STRICT")
       attr_accessor mutual_tls_authentication: Types::MutualTlsAuthenticationInput
       attr_accessor ownership_verification_certificate_arn: ::String
       attr_accessor policy: ::String
@@ -249,6 +250,8 @@ module Aws::APIGateway
       attr_accessor policy: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor disable_execute_api_endpoint: bool
+      attr_accessor security_policy: ("TLS_1_0" | "TLS_1_2" | "SecurityPolicy_TLS13_1_3_2025_09" | "SecurityPolicy_TLS13_1_3_FIPS_2025_09" | "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_2021_06" | "SecurityPolicy_TLS13_2025_EDGE" | "SecurityPolicy_TLS12_PFS_2025_EDGE" | "SecurityPolicy_TLS12_2018_EDGE")
+      attr_accessor endpoint_access_mode: ("BASIC" | "STRICT")
       SENSITIVE: []
     end
 
@@ -501,9 +504,10 @@ module Aws::APIGateway
       attr_accessor distribution_domain_name: ::String
       attr_accessor distribution_hosted_zone_id: ::String
       attr_accessor endpoint_configuration: Types::EndpointConfiguration
-      attr_accessor domain_name_status: ("AVAILABLE" | "UPDATING" | "PENDING" | "PENDING_CERTIFICATE_REIMPORT" | "PENDING_OWNERSHIP_VERIFICATION")
+      attr_accessor domain_name_status: ("AVAILABLE" | "UPDATING" | "PENDING" | "PENDING_CERTIFICATE_REIMPORT" | "PENDING_OWNERSHIP_VERIFICATION" | "FAILED")
       attr_accessor domain_name_status_message: ::String
-      attr_accessor security_policy: ("TLS_1_0" | "TLS_1_2")
+      attr_accessor security_policy: ("TLS_1_0" | "TLS_1_2" | "SecurityPolicy_TLS13_1_3_2025_09" | "SecurityPolicy_TLS13_1_3_FIPS_2025_09" | "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_2021_06" | "SecurityPolicy_TLS13_2025_EDGE" | "SecurityPolicy_TLS12_PFS_2025_EDGE" | "SecurityPolicy_TLS12_2018_EDGE")
+      attr_accessor endpoint_access_mode: ("BASIC" | "STRICT")
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor mutual_tls_authentication: Types::MutualTlsAuthentication
       attr_accessor ownership_verification_certificate_arn: ::String
@@ -936,6 +940,8 @@ module Aws::APIGateway
       attr_accessor cache_key_parameters: ::Array[::String]
       attr_accessor integration_responses: ::Hash[::String, Types::IntegrationResponse]
       attr_accessor tls_config: Types::TlsConfig
+      attr_accessor response_transfer_mode: ("BUFFERED" | "STREAM")
+      attr_accessor integration_target: ::String
       SENSITIVE: []
     end
 
@@ -1064,6 +1070,8 @@ module Aws::APIGateway
       attr_accessor content_handling: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
       attr_accessor timeout_in_millis: ::Integer
       attr_accessor tls_config: Types::TlsConfig
+      attr_accessor response_transfer_mode: ("BUFFERED" | "STREAM")
+      attr_accessor integration_target: ::String
       SENSITIVE: []
     end
 
@@ -1170,6 +1178,10 @@ module Aws::APIGateway
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor disable_execute_api_endpoint: bool
       attr_accessor root_resource_id: ::String
+      attr_accessor security_policy: ("TLS_1_0" | "TLS_1_2" | "SecurityPolicy_TLS13_1_3_2025_09" | "SecurityPolicy_TLS13_1_3_FIPS_2025_09" | "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_2021_06" | "SecurityPolicy_TLS13_2025_EDGE" | "SecurityPolicy_TLS12_PFS_2025_EDGE" | "SecurityPolicy_TLS12_2018_EDGE")
+      attr_accessor endpoint_access_mode: ("BASIC" | "STRICT")
+      attr_accessor api_status: ("UPDATING" | "AVAILABLE" | "PENDING" | "FAILED")
+      attr_accessor api_status_message: ::String
       SENSITIVE: []
     end
 

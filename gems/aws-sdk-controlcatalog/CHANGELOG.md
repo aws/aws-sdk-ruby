@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2025-11-13)
+------------------
+
+* Feature - Added support for related control mappings with new RELATED_CONTROL mapping type in ListControlMappings API.
+
+1.32.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2025-10-17)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.30.0 (2025-08-26)
 ------------------
 

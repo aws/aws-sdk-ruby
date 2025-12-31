@@ -830,8 +830,13 @@ module Aws::Transfer
     # [1]: https://docs.aws.amazon.com/transfer/latest/userguide/configure-as2-connector.html
     # [2]: https://docs.aws.amazon.com/transfer/latest/userguide/configure-sftp-connector.html
     #
-    # @option params [required, String] :url
+    # @option params [String] :url
     #   The URL of the partner's AS2 or SFTP endpoint.
+    #
+    #   When creating AS2 connectors or service-managed SFTP connectors
+    #   (connectors without egress configuration), you must provide a URL to
+    #   specify the remote server endpoint. For VPC Lattice type connectors,
+    #   the URL must be null.
     #
     # @option params [Types::As2ConnectorConfig] :as_2_config
     #   A structure that contains the parameters for an AS2 connector object.
@@ -886,6 +891,12 @@ module Aws::Transfer
     # @option params [String] :security_policy_name
     #   Specifies the name of the security policy for the connector.
     #
+    # @option params [Types::ConnectorEgressConfig] :egress_config
+    #   Specifies the egress configuration for the connector, which determines
+    #   how traffic is routed from the connector to the SFTP server. When set
+    #   to VPC, enables routing through customer VPCs using VPC\_LATTICE for
+    #   private connectivity.
+    #
     # @return [Types::CreateConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateConnectorResponse#connector_id #connector_id} => String
@@ -893,7 +904,7 @@ module Aws::Transfer
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_connector({
-    #     url: "Url", # required
+    #     url: "Url",
     #     as_2_config: {
     #       local_profile_id: "ProfileId",
     #       partner_profile_id: "ProfileId",
@@ -920,6 +931,12 @@ module Aws::Transfer
     #       max_concurrent_connections: 1,
     #     },
     #     security_policy_name: "ConnectorSecurityPolicyName",
+    #     egress_config: {
+    #       vpc_lattice: {
+    #         resource_configuration_arn: "VpcLatticeResourceConfigurationArn", # required
+    #         port_number: 1,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1220,6 +1237,14 @@ module Aws::Transfer
     # @option params [Types::ProtocolDetails] :protocol_details
     #   The protocol settings that are configured for your server.
     #
+    #   <note markdown="1"> Avoid placing Network Load Balancers (NLBs) or NAT gateways in front
+    #   of Transfer Family servers, as this increases costs and can cause
+    #   performance issues, including reduced connection limits for FTPS. For
+    #   more details, see [ Avoid placing NLBs and NATs in front of Transfer
+    #   Family][1].
+    #
+    #    </note>
+    #
     #   * To indicate passive mode (for FTP and FTPS protocols), use the
     #     `PassiveIp` parameter. Enter a single dotted-quad IPv4 address, such
     #     as the external IP address of a firewall, router, or load balancer.
@@ -1240,6 +1265,10 @@ module Aws::Transfer
     #
     #   * `As2Transports` indicates the transport method for the AS2 messages.
     #     Currently, only HTTP is supported.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations
     #
     # @option params [String] :security_policy_name
     #   Specifies the name of the security policy for the server.
@@ -1577,7 +1606,15 @@ module Aws::Transfer
     end
 
     # Creates a web app based on specified parameters, and returns the ID
-    # for the new web app.
+    # for the new web app. You can configure the web app to be publicly
+    # accessible or hosted within a VPC.
+    #
+    # For more information about using VPC endpoints with Transfer Family,
+    # see [Create a Transfer Family web app in a VPC][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html
     #
     # @option params [required, Types::WebAppIdentityProviderDetails] :identity_provider_details
     #   You can provide a structure that contains the details for the identity
@@ -1616,6 +1653,10 @@ module Aws::Transfer
     #   If you are creating the web app in an Amazon Web Services GovCloud
     #   (US) Region, you can set this parameter to `FIPS`.
     #
+    # @option params [Types::WebAppEndpointDetails] :endpoint_details
+    #   The endpoint configuration for the web app. You can specify whether
+    #   the web app endpoint is publicly accessible or hosted within a VPC.
+    #
     # @return [Types::CreateWebAppResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWebAppResponse#web_app_id #web_app_id} => String
@@ -1640,6 +1681,13 @@ module Aws::Transfer
     #       },
     #     ],
     #     web_app_endpoint_policy: "FIPS", # accepts FIPS, STANDARD
+    #     endpoint_details: {
+    #       vpc: {
+    #         subnet_ids: ["SubnetId"],
+    #         vpc_id: "VpcId",
+    #         security_group_ids: ["SecurityGroupId"],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2384,6 +2432,11 @@ module Aws::Transfer
     #   resp.connector.service_managed_egress_ip_addresses #=> Array
     #   resp.connector.service_managed_egress_ip_addresses[0] #=> String
     #   resp.connector.security_policy_name #=> String
+    #   resp.connector.egress_config.vpc_lattice.resource_configuration_arn #=> String
+    #   resp.connector.egress_config.vpc_lattice.port_number #=> Integer
+    #   resp.connector.egress_type #=> String, one of "SERVICE_MANAGED", "VPC_LATTICE"
+    #   resp.connector.error_message #=> String
+    #   resp.connector.status #=> String, one of "ACTIVE", "ERRORED", "PENDING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeConnector AWS API Documentation
     #
@@ -2742,7 +2795,16 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Describes the web app that's identified by `WebAppId`.
+    # Describes the web app that's identified by `WebAppId`. The response
+    # includes endpoint configuration details such as whether the web app is
+    # publicly accessible or VPC hosted.
+    #
+    # For more information about using VPC endpoints with Transfer Family,
+    # see [Create a Transfer Family web app in a VPC][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html
     #
     # @option params [required, String] :web_app_id
     #   Provide the unique identifier for the web app.
@@ -2771,6 +2833,11 @@ module Aws::Transfer
     #   resp.web_app.tags[0].key #=> String
     #   resp.web_app.tags[0].value #=> String
     #   resp.web_app.web_app_endpoint_policy #=> String, one of "FIPS", "STANDARD"
+    #   resp.web_app.endpoint_type #=> String, one of "PUBLIC", "VPC"
+    #   resp.web_app.described_endpoint_details.vpc.subnet_ids #=> Array
+    #   resp.web_app.described_endpoint_details.vpc.subnet_ids[0] #=> String
+    #   resp.web_app.described_endpoint_details.vpc.vpc_id #=> String
+    #   resp.web_app.described_endpoint_details.vpc.vpc_endpoint_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeWebApp AWS API Documentation
     #
@@ -3773,7 +3840,15 @@ module Aws::Transfer
     end
 
     # Lists all web apps associated with your Amazon Web Services account
-    # for your current region.
+    # for your current region. The response includes the endpoint type for
+    # each web app, showing whether it is publicly accessible or VPC hosted.
+    #
+    # For more information about using VPC endpoints with Transfer Family,
+    # see [Create a Transfer Family web app in a VPC][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return.
@@ -3805,6 +3880,7 @@ module Aws::Transfer
     #   resp.web_apps[0].web_app_id #=> String
     #   resp.web_apps[0].access_endpoint #=> String
     #   resp.web_apps[0].web_app_endpoint #=> String
+    #   resp.web_apps[0].endpoint_type #=> String, one of "PUBLIC", "VPC"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListWebApps AWS API Documentation
     #
@@ -4779,6 +4855,11 @@ module Aws::Transfer
     # @option params [String] :url
     #   The URL of the partner's AS2 or SFTP endpoint.
     #
+    #   When creating AS2 connectors or service-managed SFTP connectors
+    #   (connectors without egress configuration), you must provide a URL to
+    #   specify the remote server endpoint. For VPC Lattice type connectors,
+    #   the URL must be null.
+    #
     # @option params [Types::As2ConnectorConfig] :as_2_config
     #   A structure that contains the parameters for an AS2 connector object.
     #
@@ -4828,6 +4909,11 @@ module Aws::Transfer
     # @option params [String] :security_policy_name
     #   Specifies the name of the security policy for the connector.
     #
+    # @option params [Types::UpdateConnectorEgressConfig] :egress_config
+    #   Updates the egress configuration for the connector, allowing you to
+    #   modify how traffic is routed from the connector to the SFTP server.
+    #   Changes to VPC configuration may require connector restart.
+    #
     # @return [Types::UpdateConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateConnectorResponse#connector_id #connector_id} => String
@@ -4857,6 +4943,12 @@ module Aws::Transfer
     #       max_concurrent_connections: 1,
     #     },
     #     security_policy_name: "ConnectorSecurityPolicyName",
+    #     egress_config: {
+    #       vpc_lattice: {
+    #         resource_configuration_arn: "VpcLatticeResourceConfigurationArn",
+    #         port_number: 1,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -4996,6 +5088,14 @@ module Aws::Transfer
     # @option params [Types::ProtocolDetails] :protocol_details
     #   The protocol settings that are configured for your server.
     #
+    #   <note markdown="1"> Avoid placing Network Load Balancers (NLBs) or NAT gateways in front
+    #   of Transfer Family servers, as this increases costs and can cause
+    #   performance issues, including reduced connection limits for FTPS. For
+    #   more details, see [ Avoid placing NLBs and NATs in front of Transfer
+    #   Family][1].
+    #
+    #    </note>
+    #
     #   * To indicate passive mode (for FTP and FTPS protocols), use the
     #     `PassiveIp` parameter. Enter a single dotted-quad IPv4 address, such
     #     as the external IP address of a firewall, router, or load balancer.
@@ -5016,6 +5116,10 @@ module Aws::Transfer
     #
     #   * `As2Transports` indicates the transport method for the AS2 messages.
     #     Currently, only HTTP is supported.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations
     #
     # @option params [Types::EndpointDetails] :endpoint_details
     #   The virtual private cloud (VPC) endpoint settings that are configured
@@ -5502,7 +5606,15 @@ module Aws::Transfer
     end
 
     # Assigns new properties to a web app. You can modify the access point,
-    # identity provider details, and the web app units.
+    # identity provider details, endpoint configuration, and the web app
+    # units.
+    #
+    # For more information about using VPC endpoints with Transfer Family,
+    # see [Create a Transfer Family web app in a VPC][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transfer/latest/userguide/create-webapp-in-vpc.html
     #
     # @option params [required, String] :web_app_id
     #   Provide the identifier of the web app that you are updating.
@@ -5520,6 +5632,10 @@ module Aws::Transfer
     #   A union that contains the value for number of concurrent connections
     #   or the user sessions on your web app.
     #
+    # @option params [Types::UpdateWebAppEndpointDetails] :endpoint_details
+    #   The updated endpoint configuration for the web app. You can modify the
+    #   endpoint type and VPC configuration settings.
+    #
     # @return [Types::UpdateWebAppResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWebAppResponse#web_app_id #web_app_id} => String
@@ -5536,6 +5652,11 @@ module Aws::Transfer
     #     access_endpoint: "WebAppAccessEndpoint",
     #     web_app_units: {
     #       provisioned: 1,
+    #     },
+    #     endpoint_details: {
+    #       vpc: {
+    #         subnet_ids: ["SubnetId"],
+    #       },
     #     },
     #   })
     #
@@ -5611,7 +5732,7 @@ module Aws::Transfer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.125.0'
+      context[:gem_version] = '1.128.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

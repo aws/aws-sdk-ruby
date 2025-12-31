@@ -1,0 +1,87 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SageMakerRuntimeHTTP2
+    class AsyncClient < ::Seahorse::Client::AsyncBase
+      include ::Aws::AsyncClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerRuntimeHTTP2/AsyncClient.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?event_stream_handler: Proc,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?input_event_stream_handler: Proc,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?output_event_stream_handler: Proc,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?connection_read_timeout: (Float | Integer),
+                      ?connection_timeout: (Float | Integer),
+                      ?enable_alpn: bool,
+                      ?max_concurrent_streams: (Float | Integer),
+                      ?read_chunk_size: (Float | Integer),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _InvokeEndpointWithBidirectionalStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeEndpointWithBidirectionalStreamOutput]
+        def body: () -> Types::ResponseStreamEvent
+        def invoked_production_variant: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerRuntimeHTTP2/AsyncClient.html#invoke_endpoint_with_bidirectional_stream-instance_method
+      def invoke_endpoint_with_bidirectional_stream: (
+                                                       endpoint_name: ::String,
+                                                       input_event_stream_handler: untyped,
+                                                       output_event_stream_handler: untyped,
+                                                       ?target_variant: ::String,
+                                                       ?model_invocation_path: ::String,
+                                                       ?model_query_string: ::String
+                                                     ) ?{ (*untyped) -> void } -> _InvokeEndpointWithBidirectionalStreamResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeEndpointWithBidirectionalStreamResponseSuccess
+    end
+  end
+end

@@ -27,6 +27,13 @@ module Aws::GroundStation
     AnyArn = Shapes::StringShape.new(name: 'AnyArn')
     AuditResults = Shapes::StringShape.new(name: 'AuditResults')
     AwsGroundStationAgentEndpoint = Shapes::StructureShape.new(name: 'AwsGroundStationAgentEndpoint')
+    AzElEphemeris = Shapes::StructureShape.new(name: 'AzElEphemeris')
+    AzElEphemerisFilter = Shapes::StructureShape.new(name: 'AzElEphemerisFilter')
+    AzElProgramTrackSettings = Shapes::StructureShape.new(name: 'AzElProgramTrackSettings')
+    AzElSegment = Shapes::StructureShape.new(name: 'AzElSegment')
+    AzElSegmentList = Shapes::ListShape.new(name: 'AzElSegmentList')
+    AzElSegments = Shapes::StructureShape.new(name: 'AzElSegments')
+    AzElSegmentsData = Shapes::UnionShape.new(name: 'AzElSegmentsData')
     BandwidthUnits = Shapes::StringShape.new(name: 'BandwidthUnits')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BucketArn = Shapes::StringShape.new(name: 'BucketArn')
@@ -55,6 +62,10 @@ module Aws::GroundStation
     ContactStatus = Shapes::StringShape.new(name: 'ContactStatus')
     CreateConfigRequest = Shapes::StructureShape.new(name: 'CreateConfigRequest')
     CreateDataflowEndpointGroupRequest = Shapes::StructureShape.new(name: 'CreateDataflowEndpointGroupRequest')
+    CreateDataflowEndpointGroupV2Request = Shapes::StructureShape.new(name: 'CreateDataflowEndpointGroupV2Request')
+    CreateDataflowEndpointGroupV2Response = Shapes::StructureShape.new(name: 'CreateDataflowEndpointGroupV2Response')
+    CreateEndpointDetails = Shapes::UnionShape.new(name: 'CreateEndpointDetails')
+    CreateEndpointDetailsList = Shapes::ListShape.new(name: 'CreateEndpointDetailsList')
     CreateEphemerisRequest = Shapes::StructureShape.new(name: 'CreateEphemerisRequest')
     CreateMissionProfileRequest = Shapes::StructureShape.new(name: 'CreateMissionProfileRequest')
     Criticality = Shapes::StringShape.new(name: 'Criticality')
@@ -85,6 +96,10 @@ module Aws::GroundStation
     Destination = Shapes::StructureShape.new(name: 'Destination')
     DiscoveryData = Shapes::StructureShape.new(name: 'DiscoveryData')
     Double = Shapes::FloatShape.new(name: 'Double')
+    DownlinkAwsGroundStationAgentEndpoint = Shapes::StructureShape.new(name: 'DownlinkAwsGroundStationAgentEndpoint')
+    DownlinkAwsGroundStationAgentEndpointDetails = Shapes::StructureShape.new(name: 'DownlinkAwsGroundStationAgentEndpointDetails')
+    DownlinkConnectionDetails = Shapes::StructureShape.new(name: 'DownlinkConnectionDetails')
+    DownlinkDataflowDetails = Shapes::UnionShape.new(name: 'DownlinkDataflowDetails')
     DurationInSeconds = Shapes::IntegerShape.new(name: 'DurationInSeconds')
     Eirp = Shapes::StructureShape.new(name: 'Eirp')
     EirpUnits = Shapes::StringShape.new(name: 'EirpUnits')
@@ -95,20 +110,29 @@ module Aws::GroundStation
     EphemeridesList = Shapes::ListShape.new(name: 'EphemeridesList')
     EphemerisData = Shapes::UnionShape.new(name: 'EphemerisData')
     EphemerisDescription = Shapes::StructureShape.new(name: 'EphemerisDescription')
+    EphemerisErrorCode = Shapes::StringShape.new(name: 'EphemerisErrorCode')
+    EphemerisErrorReason = Shapes::StructureShape.new(name: 'EphemerisErrorReason')
+    EphemerisErrorReasonList = Shapes::ListShape.new(name: 'EphemerisErrorReasonList')
+    EphemerisFilter = Shapes::UnionShape.new(name: 'EphemerisFilter')
     EphemerisIdResponse = Shapes::StructureShape.new(name: 'EphemerisIdResponse')
     EphemerisInvalidReason = Shapes::StringShape.new(name: 'EphemerisInvalidReason')
     EphemerisItem = Shapes::StructureShape.new(name: 'EphemerisItem')
     EphemerisMetaData = Shapes::StructureShape.new(name: 'EphemerisMetaData')
     EphemerisPriority = Shapes::IntegerShape.new(name: 'EphemerisPriority')
+    EphemerisResponseData = Shapes::StructureShape.new(name: 'EphemerisResponseData')
     EphemerisSource = Shapes::StringShape.new(name: 'EphemerisSource')
     EphemerisStatus = Shapes::StringShape.new(name: 'EphemerisStatus')
     EphemerisStatusList = Shapes::ListShape.new(name: 'EphemerisStatusList')
+    EphemerisType = Shapes::StringShape.new(name: 'EphemerisType')
     EphemerisTypeDescription = Shapes::UnionShape.new(name: 'EphemerisTypeDescription')
+    ErrorString = Shapes::StringShape.new(name: 'ErrorString')
     Frequency = Shapes::StructureShape.new(name: 'Frequency')
     FrequencyBandwidth = Shapes::StructureShape.new(name: 'FrequencyBandwidth')
     FrequencyUnits = Shapes::StringShape.new(name: 'FrequencyUnits')
     GetAgentConfigurationRequest = Shapes::StructureShape.new(name: 'GetAgentConfigurationRequest')
     GetAgentConfigurationResponse = Shapes::StructureShape.new(name: 'GetAgentConfigurationResponse')
+    GetAgentTaskResponseUrlRequest = Shapes::StructureShape.new(name: 'GetAgentTaskResponseUrlRequest')
+    GetAgentTaskResponseUrlResponse = Shapes::StructureShape.new(name: 'GetAgentTaskResponseUrlResponse')
     GetConfigRequest = Shapes::StructureShape.new(name: 'GetConfigRequest')
     GetConfigResponse = Shapes::StructureShape.new(name: 'GetConfigResponse')
     GetDataflowEndpointGroupRequest = Shapes::StructureShape.new(name: 'GetDataflowEndpointGroupRequest')
@@ -123,6 +147,7 @@ module Aws::GroundStation
     GroundStationIdList = Shapes::ListShape.new(name: 'GroundStationIdList')
     GroundStationList = Shapes::ListShape.new(name: 'GroundStationList')
     GroundStationName = Shapes::StringShape.new(name: 'GroundStationName')
+    ISO8601TimeRange = Shapes::StructureShape.new(name: 'ISO8601TimeRange')
     InstanceId = Shapes::StringShape.new(name: 'InstanceId')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -162,12 +187,14 @@ module Aws::GroundStation
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Polarization = Shapes::StringShape.new(name: 'Polarization')
     PositiveDurationInSeconds = Shapes::IntegerShape.new(name: 'PositiveDurationInSeconds')
+    ProgramTrackSettings = Shapes::UnionShape.new(name: 'ProgramTrackSettings')
     RangedConnectionDetails = Shapes::StructureShape.new(name: 'RangedConnectionDetails')
     RangedConnectionDetailsMtuInteger = Shapes::IntegerShape.new(name: 'RangedConnectionDetailsMtuInteger')
     RangedSocketAddress = Shapes::StructureShape.new(name: 'RangedSocketAddress')
     RegisterAgentRequest = Shapes::StructureShape.new(name: 'RegisterAgentRequest')
     RegisterAgentResponse = Shapes::StructureShape.new(name: 'RegisterAgentResponse')
     ReserveContactRequest = Shapes::StructureShape.new(name: 'ReserveContactRequest')
+    ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
@@ -183,6 +210,7 @@ module Aws::GroundStation
     SatelliteListItem = Shapes::StructureShape.new(name: 'SatelliteListItem')
     SecurityDetails = Shapes::StructureShape.new(name: 'SecurityDetails')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SignatureMap = Shapes::MapShape.new(name: 'SignatureMap')
     SocketAddress = Shapes::StructureShape.new(name: 'SocketAddress')
     Source = Shapes::StructureShape.new(name: 'Source')
@@ -190,6 +218,7 @@ module Aws::GroundStation
     StatusList = Shapes::ListShape.new(name: 'StatusList')
     String = Shapes::StringShape.new(name: 'String')
     SubnetList = Shapes::ListShape.new(name: 'SubnetList')
+    SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     TLEData = Shapes::StructureShape.new(name: 'TLEData')
     TLEDataList = Shapes::ListShape.new(name: 'TLEDataList')
     TLEEphemeris = Shapes::StructureShape.new(name: 'TLEEphemeris')
@@ -197,11 +226,14 @@ module Aws::GroundStation
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagsMap = Shapes::MapShape.new(name: 'TagsMap')
+    TimeAzEl = Shapes::StructureShape.new(name: 'TimeAzEl')
+    TimeAzElList = Shapes::ListShape.new(name: 'TimeAzElList')
     TimeRange = Shapes::StructureShape.new(name: 'TimeRange')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TleLineOne = Shapes::StringShape.new(name: 'TleLineOne')
     TleLineTwo = Shapes::StringShape.new(name: 'TleLineTwo')
     TrackingConfig = Shapes::StructureShape.new(name: 'TrackingConfig')
+    TrackingOverrides = Shapes::StructureShape.new(name: 'TrackingOverrides')
     UnboundedString = Shapes::StringShape.new(name: 'UnboundedString')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -210,6 +242,10 @@ module Aws::GroundStation
     UpdateConfigRequest = Shapes::StructureShape.new(name: 'UpdateConfigRequest')
     UpdateEphemerisRequest = Shapes::StructureShape.new(name: 'UpdateEphemerisRequest')
     UpdateMissionProfileRequest = Shapes::StructureShape.new(name: 'UpdateMissionProfileRequest')
+    UplinkAwsGroundStationAgentEndpoint = Shapes::StructureShape.new(name: 'UplinkAwsGroundStationAgentEndpoint')
+    UplinkAwsGroundStationAgentEndpointDetails = Shapes::StructureShape.new(name: 'UplinkAwsGroundStationAgentEndpointDetails')
+    UplinkConnectionDetails = Shapes::StructureShape.new(name: 'UplinkConnectionDetails')
+    UplinkDataflowDetails = Shapes::UnionShape.new(name: 'UplinkDataflowDetails')
     UplinkEchoConfig = Shapes::StructureShape.new(name: 'UplinkEchoConfig')
     UplinkSpectrumConfig = Shapes::StructureShape.new(name: 'UplinkSpectrumConfig')
     Uuid = Shapes::StringShape.new(name: 'Uuid')
@@ -221,16 +257,16 @@ module Aws::GroundStation
 
     AgentCpuCoresList.member = Shapes::ShapeRef.new(shape: Integer)
 
-    AgentDetails.add_member(:agent_cpu_cores, Shapes::ShapeRef.new(shape: AgentCpuCoresList, location_name: "agentCpuCores"))
     AgentDetails.add_member(:agent_version, Shapes::ShapeRef.new(shape: VersionString, required: true, location_name: "agentVersion"))
-    AgentDetails.add_member(:component_versions, Shapes::ShapeRef.new(shape: ComponentVersionList, required: true, location_name: "componentVersions"))
     AgentDetails.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "instanceId"))
     AgentDetails.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, required: true, location_name: "instanceType"))
     AgentDetails.add_member(:reserved_cpu_cores, Shapes::ShapeRef.new(shape: AgentCpuCoresList, location_name: "reservedCpuCores"))
+    AgentDetails.add_member(:agent_cpu_cores, Shapes::ShapeRef.new(shape: AgentCpuCoresList, location_name: "agentCpuCores"))
+    AgentDetails.add_member(:component_versions, Shapes::ShapeRef.new(shape: ComponentVersionList, required: true, location_name: "componentVersions"))
     AgentDetails.struct_class = Types::AgentDetails
 
-    AggregateStatus.add_member(:signature_map, Shapes::ShapeRef.new(shape: SignatureMap, location_name: "signatureMap"))
     AggregateStatus.add_member(:status, Shapes::ShapeRef.new(shape: AgentStatus, required: true, location_name: "status"))
+    AggregateStatus.add_member(:signature_map, Shapes::ShapeRef.new(shape: SignatureMap, location_name: "signatureMap"))
     AggregateStatus.struct_class = Types::AggregateStatus
 
     AntennaDemodDecodeDetails.add_member(:output_node, Shapes::ShapeRef.new(shape: String, location_name: "outputNode"))
@@ -239,22 +275,51 @@ module Aws::GroundStation
     AntennaDownlinkConfig.add_member(:spectrum_config, Shapes::ShapeRef.new(shape: SpectrumConfig, required: true, location_name: "spectrumConfig"))
     AntennaDownlinkConfig.struct_class = Types::AntennaDownlinkConfig
 
-    AntennaDownlinkDemodDecodeConfig.add_member(:decode_config, Shapes::ShapeRef.new(shape: DecodeConfig, required: true, location_name: "decodeConfig"))
-    AntennaDownlinkDemodDecodeConfig.add_member(:demodulation_config, Shapes::ShapeRef.new(shape: DemodulationConfig, required: true, location_name: "demodulationConfig"))
     AntennaDownlinkDemodDecodeConfig.add_member(:spectrum_config, Shapes::ShapeRef.new(shape: SpectrumConfig, required: true, location_name: "spectrumConfig"))
+    AntennaDownlinkDemodDecodeConfig.add_member(:demodulation_config, Shapes::ShapeRef.new(shape: DemodulationConfig, required: true, location_name: "demodulationConfig"))
+    AntennaDownlinkDemodDecodeConfig.add_member(:decode_config, Shapes::ShapeRef.new(shape: DecodeConfig, required: true, location_name: "decodeConfig"))
     AntennaDownlinkDemodDecodeConfig.struct_class = Types::AntennaDownlinkDemodDecodeConfig
 
+    AntennaUplinkConfig.add_member(:transmit_disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "transmitDisabled"))
     AntennaUplinkConfig.add_member(:spectrum_config, Shapes::ShapeRef.new(shape: UplinkSpectrumConfig, required: true, location_name: "spectrumConfig"))
     AntennaUplinkConfig.add_member(:target_eirp, Shapes::ShapeRef.new(shape: Eirp, required: true, location_name: "targetEirp"))
-    AntennaUplinkConfig.add_member(:transmit_disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "transmitDisabled"))
     AntennaUplinkConfig.struct_class = Types::AntennaUplinkConfig
 
-    AwsGroundStationAgentEndpoint.add_member(:agent_status, Shapes::ShapeRef.new(shape: AgentStatus, location_name: "agentStatus"))
-    AwsGroundStationAgentEndpoint.add_member(:audit_results, Shapes::ShapeRef.new(shape: AuditResults, location_name: "auditResults"))
+    AwsGroundStationAgentEndpoint.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, required: true, location_name: "name"))
     AwsGroundStationAgentEndpoint.add_member(:egress_address, Shapes::ShapeRef.new(shape: ConnectionDetails, required: true, location_name: "egressAddress"))
     AwsGroundStationAgentEndpoint.add_member(:ingress_address, Shapes::ShapeRef.new(shape: RangedConnectionDetails, required: true, location_name: "ingressAddress"))
-    AwsGroundStationAgentEndpoint.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, required: true, location_name: "name"))
+    AwsGroundStationAgentEndpoint.add_member(:agent_status, Shapes::ShapeRef.new(shape: AgentStatus, location_name: "agentStatus"))
+    AwsGroundStationAgentEndpoint.add_member(:audit_results, Shapes::ShapeRef.new(shape: AuditResults, location_name: "auditResults"))
     AwsGroundStationAgentEndpoint.struct_class = Types::AwsGroundStationAgentEndpoint
+
+    AzElEphemeris.add_member(:ground_station, Shapes::ShapeRef.new(shape: GroundStationName, required: true, location_name: "groundStation"))
+    AzElEphemeris.add_member(:data, Shapes::ShapeRef.new(shape: AzElSegmentsData, required: true, location_name: "data"))
+    AzElEphemeris.struct_class = Types::AzElEphemeris
+
+    AzElEphemerisFilter.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "id"))
+    AzElEphemerisFilter.struct_class = Types::AzElEphemerisFilter
+
+    AzElProgramTrackSettings.add_member(:ephemeris_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "ephemerisId"))
+    AzElProgramTrackSettings.struct_class = Types::AzElProgramTrackSettings
+
+    AzElSegment.add_member(:reference_epoch, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "referenceEpoch"))
+    AzElSegment.add_member(:valid_time_range, Shapes::ShapeRef.new(shape: ISO8601TimeRange, required: true, location_name: "validTimeRange"))
+    AzElSegment.add_member(:az_el_list, Shapes::ShapeRef.new(shape: TimeAzElList, required: true, location_name: "azElList"))
+    AzElSegment.struct_class = Types::AzElSegment
+
+    AzElSegmentList.member = Shapes::ShapeRef.new(shape: AzElSegment)
+
+    AzElSegments.add_member(:angle_unit, Shapes::ShapeRef.new(shape: AngleUnits, required: true, location_name: "angleUnit"))
+    AzElSegments.add_member(:az_el_segment_list, Shapes::ShapeRef.new(shape: AzElSegmentList, required: true, location_name: "azElSegmentList"))
+    AzElSegments.struct_class = Types::AzElSegments
+
+    AzElSegmentsData.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "s3Object"))
+    AzElSegmentsData.add_member(:az_el_data, Shapes::ShapeRef.new(shape: AzElSegments, location_name: "azElData"))
+    AzElSegmentsData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AzElSegmentsData.add_member_subclass(:s3_object, Types::AzElSegmentsData::S3Object)
+    AzElSegmentsData.add_member_subclass(:az_el_data, Types::AzElSegmentsData::AzElData)
+    AzElSegmentsData.add_member_subclass(:unknown, Types::AzElSegmentsData::Unknown)
+    AzElSegmentsData.struct_class = Types::AzElSegmentsData
 
     CancelContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "contactId"))
     CancelContactRequest.struct_class = Types::CancelContactRequest
@@ -263,13 +328,13 @@ module Aws::GroundStation
 
     CapabilityHealthReasonList.member = Shapes::ShapeRef.new(shape: CapabilityHealthReason)
 
-    ComponentStatusData.add_member(:bytes_received, Shapes::ShapeRef.new(shape: Long, location_name: "bytesReceived"))
-    ComponentStatusData.add_member(:bytes_sent, Shapes::ShapeRef.new(shape: Long, location_name: "bytesSent"))
-    ComponentStatusData.add_member(:capability_arn, Shapes::ShapeRef.new(shape: CapabilityArn, required: true, location_name: "capabilityArn"))
     ComponentStatusData.add_member(:component_type, Shapes::ShapeRef.new(shape: ComponentTypeString, required: true, location_name: "componentType"))
-    ComponentStatusData.add_member(:dataflow_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "dataflowId"))
-    ComponentStatusData.add_member(:packets_dropped, Shapes::ShapeRef.new(shape: Long, location_name: "packetsDropped"))
+    ComponentStatusData.add_member(:capability_arn, Shapes::ShapeRef.new(shape: CapabilityArn, required: true, location_name: "capabilityArn"))
     ComponentStatusData.add_member(:status, Shapes::ShapeRef.new(shape: AgentStatus, required: true, location_name: "status"))
+    ComponentStatusData.add_member(:bytes_sent, Shapes::ShapeRef.new(shape: Long, location_name: "bytesSent"))
+    ComponentStatusData.add_member(:bytes_received, Shapes::ShapeRef.new(shape: Long, location_name: "bytesReceived"))
+    ComponentStatusData.add_member(:packets_dropped, Shapes::ShapeRef.new(shape: Long, location_name: "packetsDropped"))
+    ComponentStatusData.add_member(:dataflow_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "dataflowId"))
     ComponentStatusData.struct_class = Types::ComponentStatusData
 
     ComponentStatusList.member = Shapes::ShapeRef.new(shape: ComponentStatusData)
@@ -280,66 +345,67 @@ module Aws::GroundStation
 
     ComponentVersionList.member = Shapes::ShapeRef.new(shape: ComponentVersion)
 
-    ConfigDetails.add_member(:antenna_demod_decode_details, Shapes::ShapeRef.new(shape: AntennaDemodDecodeDetails, location_name: "antennaDemodDecodeDetails"))
     ConfigDetails.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: EndpointDetails, location_name: "endpointDetails"))
+    ConfigDetails.add_member(:antenna_demod_decode_details, Shapes::ShapeRef.new(shape: AntennaDemodDecodeDetails, location_name: "antennaDemodDecodeDetails"))
     ConfigDetails.add_member(:s3_recording_details, Shapes::ShapeRef.new(shape: S3RecordingDetails, location_name: "s3RecordingDetails"))
     ConfigDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    ConfigDetails.add_member_subclass(:antenna_demod_decode_details, Types::ConfigDetails::AntennaDemodDecodeDetails)
     ConfigDetails.add_member_subclass(:endpoint_details, Types::ConfigDetails::EndpointDetails)
+    ConfigDetails.add_member_subclass(:antenna_demod_decode_details, Types::ConfigDetails::AntennaDemodDecodeDetails)
     ConfigDetails.add_member_subclass(:s3_recording_details, Types::ConfigDetails::S3RecordingDetails)
     ConfigDetails.add_member_subclass(:unknown, Types::ConfigDetails::Unknown)
     ConfigDetails.struct_class = Types::ConfigDetails
 
-    ConfigIdResponse.add_member(:config_arn, Shapes::ShapeRef.new(shape: ConfigArn, location_name: "configArn"))
     ConfigIdResponse.add_member(:config_id, Shapes::ShapeRef.new(shape: String, location_name: "configId"))
     ConfigIdResponse.add_member(:config_type, Shapes::ShapeRef.new(shape: ConfigCapabilityType, location_name: "configType"))
+    ConfigIdResponse.add_member(:config_arn, Shapes::ShapeRef.new(shape: ConfigArn, location_name: "configArn"))
     ConfigIdResponse.struct_class = Types::ConfigIdResponse
 
     ConfigList.member = Shapes::ShapeRef.new(shape: ConfigListItem)
 
-    ConfigListItem.add_member(:config_arn, Shapes::ShapeRef.new(shape: ConfigArn, location_name: "configArn"))
     ConfigListItem.add_member(:config_id, Shapes::ShapeRef.new(shape: String, location_name: "configId"))
     ConfigListItem.add_member(:config_type, Shapes::ShapeRef.new(shape: ConfigCapabilityType, location_name: "configType"))
+    ConfigListItem.add_member(:config_arn, Shapes::ShapeRef.new(shape: ConfigArn, location_name: "configArn"))
     ConfigListItem.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     ConfigListItem.struct_class = Types::ConfigListItem
 
     ConfigTypeData.add_member(:antenna_downlink_config, Shapes::ShapeRef.new(shape: AntennaDownlinkConfig, location_name: "antennaDownlinkConfig"))
+    ConfigTypeData.add_member(:tracking_config, Shapes::ShapeRef.new(shape: TrackingConfig, location_name: "trackingConfig"))
+    ConfigTypeData.add_member(:dataflow_endpoint_config, Shapes::ShapeRef.new(shape: DataflowEndpointConfig, location_name: "dataflowEndpointConfig"))
     ConfigTypeData.add_member(:antenna_downlink_demod_decode_config, Shapes::ShapeRef.new(shape: AntennaDownlinkDemodDecodeConfig, location_name: "antennaDownlinkDemodDecodeConfig"))
     ConfigTypeData.add_member(:antenna_uplink_config, Shapes::ShapeRef.new(shape: AntennaUplinkConfig, location_name: "antennaUplinkConfig"))
-    ConfigTypeData.add_member(:dataflow_endpoint_config, Shapes::ShapeRef.new(shape: DataflowEndpointConfig, location_name: "dataflowEndpointConfig"))
-    ConfigTypeData.add_member(:s3_recording_config, Shapes::ShapeRef.new(shape: S3RecordingConfig, location_name: "s3RecordingConfig"))
-    ConfigTypeData.add_member(:tracking_config, Shapes::ShapeRef.new(shape: TrackingConfig, location_name: "trackingConfig"))
     ConfigTypeData.add_member(:uplink_echo_config, Shapes::ShapeRef.new(shape: UplinkEchoConfig, location_name: "uplinkEchoConfig"))
+    ConfigTypeData.add_member(:s3_recording_config, Shapes::ShapeRef.new(shape: S3RecordingConfig, location_name: "s3RecordingConfig"))
     ConfigTypeData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ConfigTypeData.add_member_subclass(:antenna_downlink_config, Types::ConfigTypeData::AntennaDownlinkConfig)
+    ConfigTypeData.add_member_subclass(:tracking_config, Types::ConfigTypeData::TrackingConfig)
+    ConfigTypeData.add_member_subclass(:dataflow_endpoint_config, Types::ConfigTypeData::DataflowEndpointConfig)
     ConfigTypeData.add_member_subclass(:antenna_downlink_demod_decode_config, Types::ConfigTypeData::AntennaDownlinkDemodDecodeConfig)
     ConfigTypeData.add_member_subclass(:antenna_uplink_config, Types::ConfigTypeData::AntennaUplinkConfig)
-    ConfigTypeData.add_member_subclass(:dataflow_endpoint_config, Types::ConfigTypeData::DataflowEndpointConfig)
-    ConfigTypeData.add_member_subclass(:s3_recording_config, Types::ConfigTypeData::S3RecordingConfig)
-    ConfigTypeData.add_member_subclass(:tracking_config, Types::ConfigTypeData::TrackingConfig)
     ConfigTypeData.add_member_subclass(:uplink_echo_config, Types::ConfigTypeData::UplinkEchoConfig)
+    ConfigTypeData.add_member_subclass(:s3_recording_config, Types::ConfigTypeData::S3RecordingConfig)
     ConfigTypeData.add_member_subclass(:unknown, Types::ConfigTypeData::Unknown)
     ConfigTypeData.struct_class = Types::ConfigTypeData
 
-    ConnectionDetails.add_member(:mtu, Shapes::ShapeRef.new(shape: Integer, location_name: "mtu"))
     ConnectionDetails.add_member(:socket_address, Shapes::ShapeRef.new(shape: SocketAddress, required: true, location_name: "socketAddress"))
+    ConnectionDetails.add_member(:mtu, Shapes::ShapeRef.new(shape: Integer, location_name: "mtu"))
     ConnectionDetails.struct_class = Types::ConnectionDetails
 
     ContactData.add_member(:contact_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "contactId"))
-    ContactData.add_member(:contact_status, Shapes::ShapeRef.new(shape: ContactStatus, location_name: "contactStatus"))
-    ContactData.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
-    ContactData.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
-    ContactData.add_member(:ground_station, Shapes::ShapeRef.new(shape: String, location_name: "groundStation"))
-    ContactData.add_member(:maximum_elevation, Shapes::ShapeRef.new(shape: Elevation, location_name: "maximumElevation"))
     ContactData.add_member(:mission_profile_arn, Shapes::ShapeRef.new(shape: MissionProfileArn, location_name: "missionProfileArn"))
-    ContactData.add_member(:post_pass_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "postPassEndTime"))
-    ContactData.add_member(:pre_pass_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "prePassStartTime"))
-    ContactData.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))
     ContactData.add_member(:satellite_arn, Shapes::ShapeRef.new(shape: satelliteArn, location_name: "satelliteArn"))
     ContactData.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
+    ContactData.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    ContactData.add_member(:pre_pass_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "prePassStartTime"))
+    ContactData.add_member(:post_pass_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "postPassEndTime"))
+    ContactData.add_member(:ground_station, Shapes::ShapeRef.new(shape: String, location_name: "groundStation"))
+    ContactData.add_member(:contact_status, Shapes::ShapeRef.new(shape: ContactStatus, location_name: "contactStatus"))
+    ContactData.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    ContactData.add_member(:maximum_elevation, Shapes::ShapeRef.new(shape: Elevation, location_name: "maximumElevation"))
+    ContactData.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))
     ContactData.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
-    ContactData.add_member(:visibility_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "visibilityEndTime"))
     ContactData.add_member(:visibility_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "visibilityStartTime"))
+    ContactData.add_member(:visibility_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "visibilityEndTime"))
+    ContactData.add_member(:ephemeris, Shapes::ShapeRef.new(shape: EphemerisResponseData, location_name: "ephemeris"))
     ContactData.struct_class = Types::ContactData
 
     ContactIdResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "contactId"))
@@ -347,51 +413,70 @@ module Aws::GroundStation
 
     ContactList.member = Shapes::ShapeRef.new(shape: ContactData)
 
-    CreateConfigRequest.add_member(:config_data, Shapes::ShapeRef.new(shape: ConfigTypeData, required: true, location_name: "configData"))
     CreateConfigRequest.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, required: true, location_name: "name"))
+    CreateConfigRequest.add_member(:config_data, Shapes::ShapeRef.new(shape: ConfigTypeData, required: true, location_name: "configData"))
     CreateConfigRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateConfigRequest.struct_class = Types::CreateConfigRequest
 
-    CreateDataflowEndpointGroupRequest.add_member(:contact_post_pass_duration_seconds, Shapes::ShapeRef.new(shape: DataflowEndpointGroupDurationInSeconds, location_name: "contactPostPassDurationSeconds"))
-    CreateDataflowEndpointGroupRequest.add_member(:contact_pre_pass_duration_seconds, Shapes::ShapeRef.new(shape: DataflowEndpointGroupDurationInSeconds, location_name: "contactPrePassDurationSeconds"))
     CreateDataflowEndpointGroupRequest.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: EndpointDetailsList, required: true, location_name: "endpointDetails"))
     CreateDataflowEndpointGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateDataflowEndpointGroupRequest.add_member(:contact_pre_pass_duration_seconds, Shapes::ShapeRef.new(shape: DataflowEndpointGroupDurationInSeconds, location_name: "contactPrePassDurationSeconds"))
+    CreateDataflowEndpointGroupRequest.add_member(:contact_post_pass_duration_seconds, Shapes::ShapeRef.new(shape: DataflowEndpointGroupDurationInSeconds, location_name: "contactPostPassDurationSeconds"))
     CreateDataflowEndpointGroupRequest.struct_class = Types::CreateDataflowEndpointGroupRequest
 
+    CreateDataflowEndpointGroupV2Request.add_member(:endpoints, Shapes::ShapeRef.new(shape: CreateEndpointDetailsList, required: true, location_name: "endpoints"))
+    CreateDataflowEndpointGroupV2Request.add_member(:contact_pre_pass_duration_seconds, Shapes::ShapeRef.new(shape: DataflowEndpointGroupDurationInSeconds, location_name: "contactPrePassDurationSeconds"))
+    CreateDataflowEndpointGroupV2Request.add_member(:contact_post_pass_duration_seconds, Shapes::ShapeRef.new(shape: DataflowEndpointGroupDurationInSeconds, location_name: "contactPostPassDurationSeconds"))
+    CreateDataflowEndpointGroupV2Request.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateDataflowEndpointGroupV2Request.struct_class = Types::CreateDataflowEndpointGroupV2Request
+
+    CreateDataflowEndpointGroupV2Response.add_member(:dataflow_endpoint_group_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "dataflowEndpointGroupId"))
+    CreateDataflowEndpointGroupV2Response.struct_class = Types::CreateDataflowEndpointGroupV2Response
+
+    CreateEndpointDetails.add_member(:uplink_aws_ground_station_agent_endpoint, Shapes::ShapeRef.new(shape: UplinkAwsGroundStationAgentEndpoint, location_name: "uplinkAwsGroundStationAgentEndpoint"))
+    CreateEndpointDetails.add_member(:downlink_aws_ground_station_agent_endpoint, Shapes::ShapeRef.new(shape: DownlinkAwsGroundStationAgentEndpoint, location_name: "downlinkAwsGroundStationAgentEndpoint"))
+    CreateEndpointDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CreateEndpointDetails.add_member_subclass(:uplink_aws_ground_station_agent_endpoint, Types::CreateEndpointDetails::UplinkAwsGroundStationAgentEndpoint)
+    CreateEndpointDetails.add_member_subclass(:downlink_aws_ground_station_agent_endpoint, Types::CreateEndpointDetails::DownlinkAwsGroundStationAgentEndpoint)
+    CreateEndpointDetails.add_member_subclass(:unknown, Types::CreateEndpointDetails::Unknown)
+    CreateEndpointDetails.struct_class = Types::CreateEndpointDetails
+
+    CreateEndpointDetailsList.member = Shapes::ShapeRef.new(shape: CreateEndpointDetails)
+
+    CreateEphemerisRequest.add_member(:satellite_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "satelliteId"))
     CreateEphemerisRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
-    CreateEphemerisRequest.add_member(:ephemeris, Shapes::ShapeRef.new(shape: EphemerisData, location_name: "ephemeris"))
-    CreateEphemerisRequest.add_member(:expiration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expirationTime"))
-    CreateEphemerisRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KeyArn, location_name: "kmsKeyArn"))
-    CreateEphemerisRequest.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, required: true, location_name: "name"))
     CreateEphemerisRequest.add_member(:priority, Shapes::ShapeRef.new(shape: CustomerEphemerisPriority, location_name: "priority"))
-    CreateEphemerisRequest.add_member(:satellite_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "satelliteId"))
+    CreateEphemerisRequest.add_member(:expiration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expirationTime"))
+    CreateEphemerisRequest.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, required: true, location_name: "name"))
+    CreateEphemerisRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KeyArn, location_name: "kmsKeyArn"))
+    CreateEphemerisRequest.add_member(:ephemeris, Shapes::ShapeRef.new(shape: EphemerisData, location_name: "ephemeris"))
     CreateEphemerisRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateEphemerisRequest.struct_class = Types::CreateEphemerisRequest
 
-    CreateMissionProfileRequest.add_member(:contact_post_pass_duration_seconds, Shapes::ShapeRef.new(shape: DurationInSeconds, location_name: "contactPostPassDurationSeconds"))
-    CreateMissionProfileRequest.add_member(:contact_pre_pass_duration_seconds, Shapes::ShapeRef.new(shape: DurationInSeconds, location_name: "contactPrePassDurationSeconds"))
-    CreateMissionProfileRequest.add_member(:dataflow_edges, Shapes::ShapeRef.new(shape: DataflowEdgeList, required: true, location_name: "dataflowEdges"))
-    CreateMissionProfileRequest.add_member(:minimum_viable_contact_duration_seconds, Shapes::ShapeRef.new(shape: PositiveDurationInSeconds, required: true, location_name: "minimumViableContactDurationSeconds"))
     CreateMissionProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, required: true, location_name: "name"))
+    CreateMissionProfileRequest.add_member(:contact_pre_pass_duration_seconds, Shapes::ShapeRef.new(shape: DurationInSeconds, location_name: "contactPrePassDurationSeconds"))
+    CreateMissionProfileRequest.add_member(:contact_post_pass_duration_seconds, Shapes::ShapeRef.new(shape: DurationInSeconds, location_name: "contactPostPassDurationSeconds"))
+    CreateMissionProfileRequest.add_member(:minimum_viable_contact_duration_seconds, Shapes::ShapeRef.new(shape: PositiveDurationInSeconds, required: true, location_name: "minimumViableContactDurationSeconds"))
+    CreateMissionProfileRequest.add_member(:dataflow_edges, Shapes::ShapeRef.new(shape: DataflowEdgeList, required: true, location_name: "dataflowEdges"))
+    CreateMissionProfileRequest.add_member(:tracking_config_arn, Shapes::ShapeRef.new(shape: ConfigArn, required: true, location_name: "trackingConfigArn"))
+    CreateMissionProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateMissionProfileRequest.add_member(:streams_kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "streamsKmsKey"))
     CreateMissionProfileRequest.add_member(:streams_kms_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "streamsKmsRole"))
-    CreateMissionProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
-    CreateMissionProfileRequest.add_member(:tracking_config_arn, Shapes::ShapeRef.new(shape: ConfigArn, required: true, location_name: "trackingConfigArn"))
     CreateMissionProfileRequest.struct_class = Types::CreateMissionProfileRequest
 
+    DataflowDetail.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     DataflowDetail.add_member(:destination, Shapes::ShapeRef.new(shape: Destination, location_name: "destination"))
     DataflowDetail.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
-    DataflowDetail.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     DataflowDetail.struct_class = Types::DataflowDetail
 
     DataflowEdge.member = Shapes::ShapeRef.new(shape: ConfigArn)
 
     DataflowEdgeList.member = Shapes::ShapeRef.new(shape: DataflowEdge)
 
-    DataflowEndpoint.add_member(:address, Shapes::ShapeRef.new(shape: SocketAddress, location_name: "address"))
-    DataflowEndpoint.add_member(:mtu, Shapes::ShapeRef.new(shape: DataflowEndpointMtuInteger, location_name: "mtu"))
     DataflowEndpoint.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, location_name: "name"))
+    DataflowEndpoint.add_member(:address, Shapes::ShapeRef.new(shape: SocketAddress, location_name: "address"))
     DataflowEndpoint.add_member(:status, Shapes::ShapeRef.new(shape: EndpointStatus, location_name: "status"))
+    DataflowEndpoint.add_member(:mtu, Shapes::ShapeRef.new(shape: DataflowEndpointMtuInteger, location_name: "mtu"))
     DataflowEndpoint.struct_class = Types::DataflowEndpoint
 
     DataflowEndpointConfig.add_member(:dataflow_endpoint_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "dataflowEndpointName"))
@@ -403,8 +488,8 @@ module Aws::GroundStation
 
     DataflowEndpointGroupList.member = Shapes::ShapeRef.new(shape: DataflowEndpointListItem)
 
-    DataflowEndpointListItem.add_member(:dataflow_endpoint_group_arn, Shapes::ShapeRef.new(shape: DataflowEndpointGroupArn, location_name: "dataflowEndpointGroupArn"))
     DataflowEndpointListItem.add_member(:dataflow_endpoint_group_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "dataflowEndpointGroupId"))
+    DataflowEndpointListItem.add_member(:dataflow_endpoint_group_arn, Shapes::ShapeRef.new(shape: DataflowEndpointGroupArn, location_name: "dataflowEndpointGroupArn"))
     DataflowEndpointListItem.struct_class = Types::DataflowEndpointListItem
 
     DataflowList.member = Shapes::ShapeRef.new(shape: DataflowDetail)
@@ -436,114 +521,160 @@ module Aws::GroundStation
     DescribeContactRequest.struct_class = Types::DescribeContactRequest
 
     DescribeContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "contactId"))
-    DescribeContactResponse.add_member(:contact_status, Shapes::ShapeRef.new(shape: ContactStatus, location_name: "contactStatus"))
-    DescribeContactResponse.add_member(:dataflow_list, Shapes::ShapeRef.new(shape: DataflowList, location_name: "dataflowList"))
-    DescribeContactResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
-    DescribeContactResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
-    DescribeContactResponse.add_member(:ground_station, Shapes::ShapeRef.new(shape: String, location_name: "groundStation"))
-    DescribeContactResponse.add_member(:maximum_elevation, Shapes::ShapeRef.new(shape: Elevation, location_name: "maximumElevation"))
     DescribeContactResponse.add_member(:mission_profile_arn, Shapes::ShapeRef.new(shape: MissionProfileArn, location_name: "missionProfileArn"))
-    DescribeContactResponse.add_member(:post_pass_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "postPassEndTime"))
-    DescribeContactResponse.add_member(:pre_pass_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "prePassStartTime"))
-    DescribeContactResponse.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))
     DescribeContactResponse.add_member(:satellite_arn, Shapes::ShapeRef.new(shape: satelliteArn, location_name: "satelliteArn"))
     DescribeContactResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
+    DescribeContactResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    DescribeContactResponse.add_member(:pre_pass_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "prePassStartTime"))
+    DescribeContactResponse.add_member(:post_pass_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "postPassEndTime"))
+    DescribeContactResponse.add_member(:ground_station, Shapes::ShapeRef.new(shape: String, location_name: "groundStation"))
+    DescribeContactResponse.add_member(:contact_status, Shapes::ShapeRef.new(shape: ContactStatus, location_name: "contactStatus"))
+    DescribeContactResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    DescribeContactResponse.add_member(:maximum_elevation, Shapes::ShapeRef.new(shape: Elevation, location_name: "maximumElevation"))
     DescribeContactResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
-    DescribeContactResponse.add_member(:visibility_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "visibilityEndTime"))
+    DescribeContactResponse.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))
+    DescribeContactResponse.add_member(:dataflow_list, Shapes::ShapeRef.new(shape: DataflowList, location_name: "dataflowList"))
     DescribeContactResponse.add_member(:visibility_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "visibilityStartTime"))
+    DescribeContactResponse.add_member(:visibility_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "visibilityEndTime"))
+    DescribeContactResponse.add_member(:tracking_overrides, Shapes::ShapeRef.new(shape: TrackingOverrides, location_name: "trackingOverrides"))
+    DescribeContactResponse.add_member(:ephemeris, Shapes::ShapeRef.new(shape: EphemerisResponseData, location_name: "ephemeris"))
     DescribeContactResponse.struct_class = Types::DescribeContactResponse
 
     DescribeEphemerisRequest.add_member(:ephemeris_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "ephemerisId"))
     DescribeEphemerisRequest.struct_class = Types::DescribeEphemerisRequest
 
-    DescribeEphemerisResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
-    DescribeEphemerisResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     DescribeEphemerisResponse.add_member(:ephemeris_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "ephemerisId"))
-    DescribeEphemerisResponse.add_member(:invalid_reason, Shapes::ShapeRef.new(shape: EphemerisInvalidReason, location_name: "invalidReason"))
-    DescribeEphemerisResponse.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, location_name: "name"))
-    DescribeEphemerisResponse.add_member(:priority, Shapes::ShapeRef.new(shape: EphemerisPriority, location_name: "priority"))
     DescribeEphemerisResponse.add_member(:satellite_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "satelliteId"))
     DescribeEphemerisResponse.add_member(:status, Shapes::ShapeRef.new(shape: EphemerisStatus, location_name: "status"))
-    DescribeEphemerisResponse.add_member(:supplied_data, Shapes::ShapeRef.new(shape: EphemerisTypeDescription, location_name: "suppliedData"))
+    DescribeEphemerisResponse.add_member(:priority, Shapes::ShapeRef.new(shape: EphemerisPriority, location_name: "priority"))
+    DescribeEphemerisResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
+    DescribeEphemerisResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    DescribeEphemerisResponse.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, location_name: "name"))
     DescribeEphemerisResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    DescribeEphemerisResponse.add_member(:supplied_data, Shapes::ShapeRef.new(shape: EphemerisTypeDescription, location_name: "suppliedData"))
+    DescribeEphemerisResponse.add_member(:invalid_reason, Shapes::ShapeRef.new(shape: EphemerisInvalidReason, location_name: "invalidReason"))
+    DescribeEphemerisResponse.add_member(:error_reasons, Shapes::ShapeRef.new(shape: EphemerisErrorReasonList, location_name: "errorReasons"))
     DescribeEphemerisResponse.struct_class = Types::DescribeEphemerisResponse
 
-    Destination.add_member(:config_details, Shapes::ShapeRef.new(shape: ConfigDetails, location_name: "configDetails"))
-    Destination.add_member(:config_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "configId"))
     Destination.add_member(:config_type, Shapes::ShapeRef.new(shape: ConfigCapabilityType, location_name: "configType"))
+    Destination.add_member(:config_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "configId"))
+    Destination.add_member(:config_details, Shapes::ShapeRef.new(shape: ConfigDetails, location_name: "configDetails"))
     Destination.add_member(:dataflow_destination_region, Shapes::ShapeRef.new(shape: String, location_name: "dataflowDestinationRegion"))
     Destination.struct_class = Types::Destination
 
-    DiscoveryData.add_member(:capability_arns, Shapes::ShapeRef.new(shape: CapabilityArnList, required: true, location_name: "capabilityArns"))
-    DiscoveryData.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: IpAddressList, required: true, location_name: "privateIpAddresses"))
     DiscoveryData.add_member(:public_ip_addresses, Shapes::ShapeRef.new(shape: IpAddressList, required: true, location_name: "publicIpAddresses"))
+    DiscoveryData.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: IpAddressList, required: true, location_name: "privateIpAddresses"))
+    DiscoveryData.add_member(:capability_arns, Shapes::ShapeRef.new(shape: CapabilityArnList, required: true, location_name: "capabilityArns"))
     DiscoveryData.struct_class = Types::DiscoveryData
 
-    Eirp.add_member(:units, Shapes::ShapeRef.new(shape: EirpUnits, required: true, location_name: "units"))
+    DownlinkAwsGroundStationAgentEndpoint.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, required: true, location_name: "name"))
+    DownlinkAwsGroundStationAgentEndpoint.add_member(:dataflow_details, Shapes::ShapeRef.new(shape: DownlinkDataflowDetails, required: true, location_name: "dataflowDetails"))
+    DownlinkAwsGroundStationAgentEndpoint.struct_class = Types::DownlinkAwsGroundStationAgentEndpoint
+
+    DownlinkAwsGroundStationAgentEndpointDetails.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, required: true, location_name: "name"))
+    DownlinkAwsGroundStationAgentEndpointDetails.add_member(:dataflow_details, Shapes::ShapeRef.new(shape: DownlinkDataflowDetails, required: true, location_name: "dataflowDetails"))
+    DownlinkAwsGroundStationAgentEndpointDetails.add_member(:agent_status, Shapes::ShapeRef.new(shape: AgentStatus, location_name: "agentStatus"))
+    DownlinkAwsGroundStationAgentEndpointDetails.add_member(:audit_results, Shapes::ShapeRef.new(shape: AuditResults, location_name: "auditResults"))
+    DownlinkAwsGroundStationAgentEndpointDetails.struct_class = Types::DownlinkAwsGroundStationAgentEndpointDetails
+
+    DownlinkConnectionDetails.add_member(:agent_ip_and_port_address, Shapes::ShapeRef.new(shape: RangedConnectionDetails, required: true, location_name: "agentIpAndPortAddress"))
+    DownlinkConnectionDetails.add_member(:egress_address_and_port, Shapes::ShapeRef.new(shape: ConnectionDetails, required: true, location_name: "egressAddressAndPort"))
+    DownlinkConnectionDetails.struct_class = Types::DownlinkConnectionDetails
+
+    DownlinkDataflowDetails.add_member(:agent_connection_details, Shapes::ShapeRef.new(shape: DownlinkConnectionDetails, location_name: "agentConnectionDetails"))
+    DownlinkDataflowDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DownlinkDataflowDetails.add_member_subclass(:agent_connection_details, Types::DownlinkDataflowDetails::AgentConnectionDetails)
+    DownlinkDataflowDetails.add_member_subclass(:unknown, Types::DownlinkDataflowDetails::Unknown)
+    DownlinkDataflowDetails.struct_class = Types::DownlinkDataflowDetails
+
     Eirp.add_member(:value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "value"))
+    Eirp.add_member(:units, Shapes::ShapeRef.new(shape: EirpUnits, required: true, location_name: "units"))
     Eirp.struct_class = Types::Eirp
 
-    Elevation.add_member(:unit, Shapes::ShapeRef.new(shape: AngleUnits, required: true, location_name: "unit"))
     Elevation.add_member(:value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "value"))
+    Elevation.add_member(:unit, Shapes::ShapeRef.new(shape: AngleUnits, required: true, location_name: "unit"))
     Elevation.struct_class = Types::Elevation
 
-    EndpointDetails.add_member(:aws_ground_station_agent_endpoint, Shapes::ShapeRef.new(shape: AwsGroundStationAgentEndpoint, location_name: "awsGroundStationAgentEndpoint"))
-    EndpointDetails.add_member(:endpoint, Shapes::ShapeRef.new(shape: DataflowEndpoint, location_name: "endpoint"))
-    EndpointDetails.add_member(:health_reasons, Shapes::ShapeRef.new(shape: CapabilityHealthReasonList, location_name: "healthReasons"))
-    EndpointDetails.add_member(:health_status, Shapes::ShapeRef.new(shape: CapabilityHealth, location_name: "healthStatus"))
     EndpointDetails.add_member(:security_details, Shapes::ShapeRef.new(shape: SecurityDetails, location_name: "securityDetails"))
+    EndpointDetails.add_member(:endpoint, Shapes::ShapeRef.new(shape: DataflowEndpoint, location_name: "endpoint"))
+    EndpointDetails.add_member(:aws_ground_station_agent_endpoint, Shapes::ShapeRef.new(shape: AwsGroundStationAgentEndpoint, location_name: "awsGroundStationAgentEndpoint"))
+    EndpointDetails.add_member(:uplink_aws_ground_station_agent_endpoint, Shapes::ShapeRef.new(shape: UplinkAwsGroundStationAgentEndpointDetails, location_name: "uplinkAwsGroundStationAgentEndpoint"))
+    EndpointDetails.add_member(:downlink_aws_ground_station_agent_endpoint, Shapes::ShapeRef.new(shape: DownlinkAwsGroundStationAgentEndpointDetails, location_name: "downlinkAwsGroundStationAgentEndpoint"))
+    EndpointDetails.add_member(:health_status, Shapes::ShapeRef.new(shape: CapabilityHealth, location_name: "healthStatus"))
+    EndpointDetails.add_member(:health_reasons, Shapes::ShapeRef.new(shape: CapabilityHealthReasonList, location_name: "healthReasons"))
     EndpointDetails.struct_class = Types::EndpointDetails
 
     EndpointDetailsList.member = Shapes::ShapeRef.new(shape: EndpointDetails)
 
     EphemeridesList.member = Shapes::ShapeRef.new(shape: EphemerisItem)
 
-    EphemerisData.add_member(:oem, Shapes::ShapeRef.new(shape: OEMEphemeris, location_name: "oem"))
     EphemerisData.add_member(:tle, Shapes::ShapeRef.new(shape: TLEEphemeris, location_name: "tle"))
+    EphemerisData.add_member(:oem, Shapes::ShapeRef.new(shape: OEMEphemeris, location_name: "oem"))
+    EphemerisData.add_member(:az_el, Shapes::ShapeRef.new(shape: AzElEphemeris, location_name: "azEl"))
     EphemerisData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    EphemerisData.add_member_subclass(:oem, Types::EphemerisData::Oem)
     EphemerisData.add_member_subclass(:tle, Types::EphemerisData::Tle)
+    EphemerisData.add_member_subclass(:oem, Types::EphemerisData::Oem)
+    EphemerisData.add_member_subclass(:az_el, Types::EphemerisData::AzEl)
     EphemerisData.add_member_subclass(:unknown, Types::EphemerisData::Unknown)
     EphemerisData.struct_class = Types::EphemerisData
 
-    EphemerisDescription.add_member(:ephemeris_data, Shapes::ShapeRef.new(shape: UnboundedString, location_name: "ephemerisData"))
     EphemerisDescription.add_member(:source_s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "sourceS3Object"))
+    EphemerisDescription.add_member(:ephemeris_data, Shapes::ShapeRef.new(shape: UnboundedString, location_name: "ephemerisData"))
     EphemerisDescription.struct_class = Types::EphemerisDescription
+
+    EphemerisErrorReason.add_member(:error_code, Shapes::ShapeRef.new(shape: EphemerisErrorCode, required: true, location_name: "errorCode"))
+    EphemerisErrorReason.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorString, required: true, location_name: "errorMessage"))
+    EphemerisErrorReason.struct_class = Types::EphemerisErrorReason
+
+    EphemerisErrorReasonList.member = Shapes::ShapeRef.new(shape: EphemerisErrorReason)
+
+    EphemerisFilter.add_member(:az_el, Shapes::ShapeRef.new(shape: AzElEphemerisFilter, location_name: "azEl"))
+    EphemerisFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    EphemerisFilter.add_member_subclass(:az_el, Types::EphemerisFilter::AzEl)
+    EphemerisFilter.add_member_subclass(:unknown, Types::EphemerisFilter::Unknown)
+    EphemerisFilter.struct_class = Types::EphemerisFilter
 
     EphemerisIdResponse.add_member(:ephemeris_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "ephemerisId"))
     EphemerisIdResponse.struct_class = Types::EphemerisIdResponse
 
-    EphemerisItem.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
-    EphemerisItem.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     EphemerisItem.add_member(:ephemeris_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "ephemerisId"))
-    EphemerisItem.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, location_name: "name"))
-    EphemerisItem.add_member(:priority, Shapes::ShapeRef.new(shape: EphemerisPriority, location_name: "priority"))
-    EphemerisItem.add_member(:source_s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "sourceS3Object"))
+    EphemerisItem.add_member(:ephemeris_type, Shapes::ShapeRef.new(shape: EphemerisType, location_name: "ephemerisType"))
     EphemerisItem.add_member(:status, Shapes::ShapeRef.new(shape: EphemerisStatus, location_name: "status"))
+    EphemerisItem.add_member(:priority, Shapes::ShapeRef.new(shape: EphemerisPriority, location_name: "priority"))
+    EphemerisItem.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    EphemerisItem.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
+    EphemerisItem.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, location_name: "name"))
+    EphemerisItem.add_member(:source_s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "sourceS3Object"))
     EphemerisItem.struct_class = Types::EphemerisItem
 
+    EphemerisMetaData.add_member(:source, Shapes::ShapeRef.new(shape: EphemerisSource, required: true, location_name: "source"))
     EphemerisMetaData.add_member(:ephemeris_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "ephemerisId"))
     EphemerisMetaData.add_member(:epoch, Shapes::ShapeRef.new(shape: Timestamp, location_name: "epoch"))
     EphemerisMetaData.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, location_name: "name"))
-    EphemerisMetaData.add_member(:source, Shapes::ShapeRef.new(shape: EphemerisSource, required: true, location_name: "source"))
     EphemerisMetaData.struct_class = Types::EphemerisMetaData
+
+    EphemerisResponseData.add_member(:ephemeris_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "ephemerisId"))
+    EphemerisResponseData.add_member(:ephemeris_type, Shapes::ShapeRef.new(shape: EphemerisType, required: true, location_name: "ephemerisType"))
+    EphemerisResponseData.struct_class = Types::EphemerisResponseData
 
     EphemerisStatusList.member = Shapes::ShapeRef.new(shape: EphemerisStatus)
 
-    EphemerisTypeDescription.add_member(:oem, Shapes::ShapeRef.new(shape: EphemerisDescription, location_name: "oem"))
     EphemerisTypeDescription.add_member(:tle, Shapes::ShapeRef.new(shape: EphemerisDescription, location_name: "tle"))
+    EphemerisTypeDescription.add_member(:oem, Shapes::ShapeRef.new(shape: EphemerisDescription, location_name: "oem"))
+    EphemerisTypeDescription.add_member(:az_el, Shapes::ShapeRef.new(shape: EphemerisDescription, location_name: "azEl"))
     EphemerisTypeDescription.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    EphemerisTypeDescription.add_member_subclass(:oem, Types::EphemerisTypeDescription::Oem)
     EphemerisTypeDescription.add_member_subclass(:tle, Types::EphemerisTypeDescription::Tle)
+    EphemerisTypeDescription.add_member_subclass(:oem, Types::EphemerisTypeDescription::Oem)
+    EphemerisTypeDescription.add_member_subclass(:az_el, Types::EphemerisTypeDescription::AzEl)
     EphemerisTypeDescription.add_member_subclass(:unknown, Types::EphemerisTypeDescription::Unknown)
     EphemerisTypeDescription.struct_class = Types::EphemerisTypeDescription
 
-    Frequency.add_member(:units, Shapes::ShapeRef.new(shape: FrequencyUnits, required: true, location_name: "units"))
     Frequency.add_member(:value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "value"))
+    Frequency.add_member(:units, Shapes::ShapeRef.new(shape: FrequencyUnits, required: true, location_name: "units"))
     Frequency.struct_class = Types::Frequency
 
-    FrequencyBandwidth.add_member(:units, Shapes::ShapeRef.new(shape: BandwidthUnits, required: true, location_name: "units"))
     FrequencyBandwidth.add_member(:value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "value"))
+    FrequencyBandwidth.add_member(:units, Shapes::ShapeRef.new(shape: BandwidthUnits, required: true, location_name: "units"))
     FrequencyBandwidth.struct_class = Types::FrequencyBandwidth
 
     GetAgentConfigurationRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "agentId"))
@@ -553,65 +684,74 @@ module Aws::GroundStation
     GetAgentConfigurationResponse.add_member(:tasking_document, Shapes::ShapeRef.new(shape: String, location_name: "taskingDocument"))
     GetAgentConfigurationResponse.struct_class = Types::GetAgentConfigurationResponse
 
+    GetAgentTaskResponseUrlRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "agentId"))
+    GetAgentTaskResponseUrlRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "taskId"))
+    GetAgentTaskResponseUrlRequest.struct_class = Types::GetAgentTaskResponseUrlRequest
+
+    GetAgentTaskResponseUrlResponse.add_member(:agent_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "agentId"))
+    GetAgentTaskResponseUrlResponse.add_member(:task_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "taskId"))
+    GetAgentTaskResponseUrlResponse.add_member(:presigned_log_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "presignedLogUrl"))
+    GetAgentTaskResponseUrlResponse.struct_class = Types::GetAgentTaskResponseUrlResponse
+
     GetConfigRequest.add_member(:config_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "configId"))
     GetConfigRequest.add_member(:config_type, Shapes::ShapeRef.new(shape: ConfigCapabilityType, required: true, location: "uri", location_name: "configType"))
     GetConfigRequest.struct_class = Types::GetConfigRequest
 
-    GetConfigResponse.add_member(:config_arn, Shapes::ShapeRef.new(shape: ConfigArn, required: true, location_name: "configArn"))
-    GetConfigResponse.add_member(:config_data, Shapes::ShapeRef.new(shape: ConfigTypeData, required: true, location_name: "configData"))
     GetConfigResponse.add_member(:config_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "configId"))
-    GetConfigResponse.add_member(:config_type, Shapes::ShapeRef.new(shape: ConfigCapabilityType, location_name: "configType"))
+    GetConfigResponse.add_member(:config_arn, Shapes::ShapeRef.new(shape: ConfigArn, required: true, location_name: "configArn"))
     GetConfigResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    GetConfigResponse.add_member(:config_type, Shapes::ShapeRef.new(shape: ConfigCapabilityType, location_name: "configType"))
+    GetConfigResponse.add_member(:config_data, Shapes::ShapeRef.new(shape: ConfigTypeData, required: true, location_name: "configData"))
     GetConfigResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     GetConfigResponse.struct_class = Types::GetConfigResponse
 
     GetDataflowEndpointGroupRequest.add_member(:dataflow_endpoint_group_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "dataflowEndpointGroupId"))
     GetDataflowEndpointGroupRequest.struct_class = Types::GetDataflowEndpointGroupRequest
 
-    GetDataflowEndpointGroupResponse.add_member(:contact_post_pass_duration_seconds, Shapes::ShapeRef.new(shape: DataflowEndpointGroupDurationInSeconds, location_name: "contactPostPassDurationSeconds"))
-    GetDataflowEndpointGroupResponse.add_member(:contact_pre_pass_duration_seconds, Shapes::ShapeRef.new(shape: DataflowEndpointGroupDurationInSeconds, location_name: "contactPrePassDurationSeconds"))
-    GetDataflowEndpointGroupResponse.add_member(:dataflow_endpoint_group_arn, Shapes::ShapeRef.new(shape: DataflowEndpointGroupArn, location_name: "dataflowEndpointGroupArn"))
     GetDataflowEndpointGroupResponse.add_member(:dataflow_endpoint_group_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "dataflowEndpointGroupId"))
+    GetDataflowEndpointGroupResponse.add_member(:dataflow_endpoint_group_arn, Shapes::ShapeRef.new(shape: DataflowEndpointGroupArn, location_name: "dataflowEndpointGroupArn"))
     GetDataflowEndpointGroupResponse.add_member(:endpoints_details, Shapes::ShapeRef.new(shape: EndpointDetailsList, location_name: "endpointsDetails"))
     GetDataflowEndpointGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    GetDataflowEndpointGroupResponse.add_member(:contact_pre_pass_duration_seconds, Shapes::ShapeRef.new(shape: DataflowEndpointGroupDurationInSeconds, location_name: "contactPrePassDurationSeconds"))
+    GetDataflowEndpointGroupResponse.add_member(:contact_post_pass_duration_seconds, Shapes::ShapeRef.new(shape: DataflowEndpointGroupDurationInSeconds, location_name: "contactPostPassDurationSeconds"))
     GetDataflowEndpointGroupResponse.struct_class = Types::GetDataflowEndpointGroupResponse
 
     GetMinuteUsageRequest.add_member(:month, Shapes::ShapeRef.new(shape: Month, required: true, location_name: "month"))
     GetMinuteUsageRequest.add_member(:year, Shapes::ShapeRef.new(shape: Year, required: true, location_name: "year"))
     GetMinuteUsageRequest.struct_class = Types::GetMinuteUsageRequest
 
-    GetMinuteUsageResponse.add_member(:estimated_minutes_remaining, Shapes::ShapeRef.new(shape: Integer, location_name: "estimatedMinutesRemaining"))
     GetMinuteUsageResponse.add_member(:is_reserved_minutes_customer, Shapes::ShapeRef.new(shape: Boolean, location_name: "isReservedMinutesCustomer"))
     GetMinuteUsageResponse.add_member(:total_reserved_minute_allocation, Shapes::ShapeRef.new(shape: Integer, location_name: "totalReservedMinuteAllocation"))
-    GetMinuteUsageResponse.add_member(:total_scheduled_minutes, Shapes::ShapeRef.new(shape: Integer, location_name: "totalScheduledMinutes"))
     GetMinuteUsageResponse.add_member(:upcoming_minutes_scheduled, Shapes::ShapeRef.new(shape: Integer, location_name: "upcomingMinutesScheduled"))
+    GetMinuteUsageResponse.add_member(:total_scheduled_minutes, Shapes::ShapeRef.new(shape: Integer, location_name: "totalScheduledMinutes"))
+    GetMinuteUsageResponse.add_member(:estimated_minutes_remaining, Shapes::ShapeRef.new(shape: Integer, location_name: "estimatedMinutesRemaining"))
     GetMinuteUsageResponse.struct_class = Types::GetMinuteUsageResponse
 
     GetMissionProfileRequest.add_member(:mission_profile_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "missionProfileId"))
     GetMissionProfileRequest.struct_class = Types::GetMissionProfileRequest
 
-    GetMissionProfileResponse.add_member(:contact_post_pass_duration_seconds, Shapes::ShapeRef.new(shape: DurationInSeconds, location_name: "contactPostPassDurationSeconds"))
-    GetMissionProfileResponse.add_member(:contact_pre_pass_duration_seconds, Shapes::ShapeRef.new(shape: DurationInSeconds, location_name: "contactPrePassDurationSeconds"))
-    GetMissionProfileResponse.add_member(:dataflow_edges, Shapes::ShapeRef.new(shape: DataflowEdgeList, location_name: "dataflowEdges"))
-    GetMissionProfileResponse.add_member(:minimum_viable_contact_duration_seconds, Shapes::ShapeRef.new(shape: PositiveDurationInSeconds, location_name: "minimumViableContactDurationSeconds"))
-    GetMissionProfileResponse.add_member(:mission_profile_arn, Shapes::ShapeRef.new(shape: MissionProfileArn, location_name: "missionProfileArn"))
     GetMissionProfileResponse.add_member(:mission_profile_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "missionProfileId"))
+    GetMissionProfileResponse.add_member(:mission_profile_arn, Shapes::ShapeRef.new(shape: MissionProfileArn, location_name: "missionProfileArn"))
     GetMissionProfileResponse.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, location_name: "name"))
     GetMissionProfileResponse.add_member(:region, Shapes::ShapeRef.new(shape: AWSRegion, location_name: "region"))
+    GetMissionProfileResponse.add_member(:contact_pre_pass_duration_seconds, Shapes::ShapeRef.new(shape: DurationInSeconds, location_name: "contactPrePassDurationSeconds"))
+    GetMissionProfileResponse.add_member(:contact_post_pass_duration_seconds, Shapes::ShapeRef.new(shape: DurationInSeconds, location_name: "contactPostPassDurationSeconds"))
+    GetMissionProfileResponse.add_member(:minimum_viable_contact_duration_seconds, Shapes::ShapeRef.new(shape: PositiveDurationInSeconds, location_name: "minimumViableContactDurationSeconds"))
+    GetMissionProfileResponse.add_member(:dataflow_edges, Shapes::ShapeRef.new(shape: DataflowEdgeList, location_name: "dataflowEdges"))
+    GetMissionProfileResponse.add_member(:tracking_config_arn, Shapes::ShapeRef.new(shape: ConfigArn, location_name: "trackingConfigArn"))
+    GetMissionProfileResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     GetMissionProfileResponse.add_member(:streams_kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "streamsKmsKey"))
     GetMissionProfileResponse.add_member(:streams_kms_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "streamsKmsRole"))
-    GetMissionProfileResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
-    GetMissionProfileResponse.add_member(:tracking_config_arn, Shapes::ShapeRef.new(shape: ConfigArn, location_name: "trackingConfigArn"))
     GetMissionProfileResponse.struct_class = Types::GetMissionProfileResponse
 
     GetSatelliteRequest.add_member(:satellite_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "satelliteId"))
     GetSatelliteRequest.struct_class = Types::GetSatelliteRequest
 
-    GetSatelliteResponse.add_member(:current_ephemeris, Shapes::ShapeRef.new(shape: EphemerisMetaData, location_name: "currentEphemeris"))
-    GetSatelliteResponse.add_member(:ground_stations, Shapes::ShapeRef.new(shape: GroundStationIdList, location_name: "groundStations"))
-    GetSatelliteResponse.add_member(:norad_satellite_id, Shapes::ShapeRef.new(shape: noradSatelliteID, location_name: "noradSatelliteID"))
-    GetSatelliteResponse.add_member(:satellite_arn, Shapes::ShapeRef.new(shape: satelliteArn, location_name: "satelliteArn"))
     GetSatelliteResponse.add_member(:satellite_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "satelliteId"))
+    GetSatelliteResponse.add_member(:satellite_arn, Shapes::ShapeRef.new(shape: satelliteArn, location_name: "satelliteArn"))
+    GetSatelliteResponse.add_member(:norad_satellite_id, Shapes::ShapeRef.new(shape: noradSatelliteID, location_name: "noradSatelliteID"))
+    GetSatelliteResponse.add_member(:ground_stations, Shapes::ShapeRef.new(shape: GroundStationIdList, location_name: "groundStations"))
+    GetSatelliteResponse.add_member(:current_ephemeris, Shapes::ShapeRef.new(shape: EphemerisMetaData, location_name: "currentEphemeris"))
     GetSatelliteResponse.struct_class = Types::GetSatelliteResponse
 
     GroundStationData.add_member(:ground_station_id, Shapes::ShapeRef.new(shape: GroundStationName, location_name: "groundStationId"))
@@ -623,8 +763,12 @@ module Aws::GroundStation
 
     GroundStationList.member = Shapes::ShapeRef.new(shape: GroundStationData)
 
-    IntegerRange.add_member(:maximum, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "maximum"))
+    ISO8601TimeRange.add_member(:start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "startTime"))
+    ISO8601TimeRange.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "endTime"))
+    ISO8601TimeRange.struct_class = Types::ISO8601TimeRange
+
     IntegerRange.add_member(:minimum, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "minimum"))
+    IntegerRange.add_member(:maximum, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "maximum"))
     IntegerRange.struct_class = Types::IntegerRange
 
     InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -633,13 +777,13 @@ module Aws::GroundStation
 
     IpAddressList.member = Shapes::ShapeRef.new(shape: IpV4Address)
 
+    KmsKey.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KeyArn, location_name: "kmsKeyArn"))
     KmsKey.add_member(:kms_alias_arn, Shapes::ShapeRef.new(shape: KeyAliasArn, location_name: "kmsAliasArn"))
     KmsKey.add_member(:kms_alias_name, Shapes::ShapeRef.new(shape: KeyAliasName, location_name: "kmsAliasName"))
-    KmsKey.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KeyArn, location_name: "kmsKeyArn"))
     KmsKey.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    KmsKey.add_member_subclass(:kms_key_arn, Types::KmsKey::KmsKeyArn)
     KmsKey.add_member_subclass(:kms_alias_arn, Types::KmsKey::KmsAliasArn)
     KmsKey.add_member_subclass(:kms_alias_name, Types::KmsKey::KmsAliasName)
-    KmsKey.add_member_subclass(:kms_key_arn, Types::KmsKey::KmsKeyArn)
     KmsKey.add_member_subclass(:unknown, Types::KmsKey::Unknown)
     KmsKey.struct_class = Types::KmsKey
 
@@ -647,59 +791,61 @@ module Aws::GroundStation
     ListConfigsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListConfigsRequest.struct_class = Types::ListConfigsRequest
 
-    ListConfigsResponse.add_member(:config_list, Shapes::ShapeRef.new(shape: ConfigList, location_name: "configList"))
     ListConfigsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListConfigsResponse.add_member(:config_list, Shapes::ShapeRef.new(shape: ConfigList, location_name: "configList"))
     ListConfigsResponse.struct_class = Types::ListConfigsResponse
 
+    ListContactsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "maxResults"))
+    ListContactsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListContactsRequest.add_member(:status_list, Shapes::ShapeRef.new(shape: StatusList, required: true, location_name: "statusList"))
+    ListContactsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
     ListContactsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTime"))
     ListContactsRequest.add_member(:ground_station, Shapes::ShapeRef.new(shape: GroundStationName, location_name: "groundStation"))
-    ListContactsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "maxResults"))
-    ListContactsRequest.add_member(:mission_profile_arn, Shapes::ShapeRef.new(shape: MissionProfileArn, location_name: "missionProfileArn"))
-    ListContactsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListContactsRequest.add_member(:satellite_arn, Shapes::ShapeRef.new(shape: satelliteArn, location_name: "satelliteArn"))
-    ListContactsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
-    ListContactsRequest.add_member(:status_list, Shapes::ShapeRef.new(shape: StatusList, required: true, location_name: "statusList"))
+    ListContactsRequest.add_member(:mission_profile_arn, Shapes::ShapeRef.new(shape: MissionProfileArn, location_name: "missionProfileArn"))
+    ListContactsRequest.add_member(:ephemeris, Shapes::ShapeRef.new(shape: EphemerisFilter, location_name: "ephemeris"))
     ListContactsRequest.struct_class = Types::ListContactsRequest
 
-    ListContactsResponse.add_member(:contact_list, Shapes::ShapeRef.new(shape: ContactList, location_name: "contactList"))
     ListContactsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListContactsResponse.add_member(:contact_list, Shapes::ShapeRef.new(shape: ContactList, location_name: "contactList"))
     ListContactsResponse.struct_class = Types::ListContactsResponse
 
     ListDataflowEndpointGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location: "querystring", location_name: "maxResults"))
     ListDataflowEndpointGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListDataflowEndpointGroupsRequest.struct_class = Types::ListDataflowEndpointGroupsRequest
 
-    ListDataflowEndpointGroupsResponse.add_member(:dataflow_endpoint_group_list, Shapes::ShapeRef.new(shape: DataflowEndpointGroupList, location_name: "dataflowEndpointGroupList"))
     ListDataflowEndpointGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListDataflowEndpointGroupsResponse.add_member(:dataflow_endpoint_group_list, Shapes::ShapeRef.new(shape: DataflowEndpointGroupList, location_name: "dataflowEndpointGroupList"))
     ListDataflowEndpointGroupsResponse.struct_class = Types::ListDataflowEndpointGroupsResponse
 
+    ListEphemeridesRequest.add_member(:satellite_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "satelliteId"))
+    ListEphemeridesRequest.add_member(:ephemeris_type, Shapes::ShapeRef.new(shape: EphemerisType, location_name: "ephemerisType"))
+    ListEphemeridesRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
     ListEphemeridesRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTime"))
+    ListEphemeridesRequest.add_member(:status_list, Shapes::ShapeRef.new(shape: EphemerisStatusList, location_name: "statusList"))
     ListEphemeridesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location: "querystring", location_name: "maxResults"))
     ListEphemeridesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
-    ListEphemeridesRequest.add_member(:satellite_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "satelliteId"))
-    ListEphemeridesRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
-    ListEphemeridesRequest.add_member(:status_list, Shapes::ShapeRef.new(shape: EphemerisStatusList, location_name: "statusList"))
     ListEphemeridesRequest.struct_class = Types::ListEphemeridesRequest
 
-    ListEphemeridesResponse.add_member(:ephemerides, Shapes::ShapeRef.new(shape: EphemeridesList, location_name: "ephemerides"))
     ListEphemeridesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListEphemeridesResponse.add_member(:ephemerides, Shapes::ShapeRef.new(shape: EphemeridesList, location_name: "ephemerides"))
     ListEphemeridesResponse.struct_class = Types::ListEphemeridesResponse
 
+    ListGroundStationsRequest.add_member(:satellite_id, Shapes::ShapeRef.new(shape: Uuid, location: "querystring", location_name: "satelliteId"))
     ListGroundStationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location: "querystring", location_name: "maxResults"))
     ListGroundStationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
-    ListGroundStationsRequest.add_member(:satellite_id, Shapes::ShapeRef.new(shape: Uuid, location: "querystring", location_name: "satelliteId"))
     ListGroundStationsRequest.struct_class = Types::ListGroundStationsRequest
 
-    ListGroundStationsResponse.add_member(:ground_station_list, Shapes::ShapeRef.new(shape: GroundStationList, location_name: "groundStationList"))
     ListGroundStationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListGroundStationsResponse.add_member(:ground_station_list, Shapes::ShapeRef.new(shape: GroundStationList, location_name: "groundStationList"))
     ListGroundStationsResponse.struct_class = Types::ListGroundStationsResponse
 
     ListMissionProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location: "querystring", location_name: "maxResults"))
     ListMissionProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListMissionProfilesRequest.struct_class = Types::ListMissionProfilesRequest
 
-    ListMissionProfilesResponse.add_member(:mission_profile_list, Shapes::ShapeRef.new(shape: MissionProfileList, location_name: "missionProfileList"))
     ListMissionProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListMissionProfilesResponse.add_member(:mission_profile_list, Shapes::ShapeRef.new(shape: MissionProfileList, location_name: "missionProfileList"))
     ListMissionProfilesResponse.struct_class = Types::ListMissionProfilesResponse
 
     ListSatellitesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location: "querystring", location_name: "maxResults"))
@@ -721,39 +867,49 @@ module Aws::GroundStation
 
     MissionProfileList.member = Shapes::ShapeRef.new(shape: MissionProfileListItem)
 
-    MissionProfileListItem.add_member(:mission_profile_arn, Shapes::ShapeRef.new(shape: MissionProfileArn, location_name: "missionProfileArn"))
     MissionProfileListItem.add_member(:mission_profile_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "missionProfileId"))
-    MissionProfileListItem.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, location_name: "name"))
+    MissionProfileListItem.add_member(:mission_profile_arn, Shapes::ShapeRef.new(shape: MissionProfileArn, location_name: "missionProfileArn"))
     MissionProfileListItem.add_member(:region, Shapes::ShapeRef.new(shape: AWSRegion, location_name: "region"))
+    MissionProfileListItem.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, location_name: "name"))
     MissionProfileListItem.struct_class = Types::MissionProfileListItem
 
-    OEMEphemeris.add_member(:oem_data, Shapes::ShapeRef.new(shape: UnboundedString, location_name: "oemData"))
     OEMEphemeris.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "s3Object"))
+    OEMEphemeris.add_member(:oem_data, Shapes::ShapeRef.new(shape: UnboundedString, location_name: "oemData"))
     OEMEphemeris.struct_class = Types::OEMEphemeris
 
-    RangedConnectionDetails.add_member(:mtu, Shapes::ShapeRef.new(shape: RangedConnectionDetailsMtuInteger, location_name: "mtu"))
+    ProgramTrackSettings.add_member(:az_el, Shapes::ShapeRef.new(shape: AzElProgramTrackSettings, location_name: "azEl"))
+    ProgramTrackSettings.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ProgramTrackSettings.add_member_subclass(:az_el, Types::ProgramTrackSettings::AzEl)
+    ProgramTrackSettings.add_member_subclass(:unknown, Types::ProgramTrackSettings::Unknown)
+    ProgramTrackSettings.struct_class = Types::ProgramTrackSettings
+
     RangedConnectionDetails.add_member(:socket_address, Shapes::ShapeRef.new(shape: RangedSocketAddress, required: true, location_name: "socketAddress"))
+    RangedConnectionDetails.add_member(:mtu, Shapes::ShapeRef.new(shape: RangedConnectionDetailsMtuInteger, location_name: "mtu"))
     RangedConnectionDetails.struct_class = Types::RangedConnectionDetails
 
     RangedSocketAddress.add_member(:name, Shapes::ShapeRef.new(shape: IpV4Address, required: true, location_name: "name"))
     RangedSocketAddress.add_member(:port_range, Shapes::ShapeRef.new(shape: IntegerRange, required: true, location_name: "portRange"))
     RangedSocketAddress.struct_class = Types::RangedSocketAddress
 
-    RegisterAgentRequest.add_member(:agent_details, Shapes::ShapeRef.new(shape: AgentDetails, required: true, location_name: "agentDetails"))
     RegisterAgentRequest.add_member(:discovery_data, Shapes::ShapeRef.new(shape: DiscoveryData, required: true, location_name: "discoveryData"))
+    RegisterAgentRequest.add_member(:agent_details, Shapes::ShapeRef.new(shape: AgentDetails, required: true, location_name: "agentDetails"))
     RegisterAgentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     RegisterAgentRequest.struct_class = Types::RegisterAgentRequest
 
     RegisterAgentResponse.add_member(:agent_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "agentId"))
     RegisterAgentResponse.struct_class = Types::RegisterAgentResponse
 
+    ReserveContactRequest.add_member(:mission_profile_arn, Shapes::ShapeRef.new(shape: MissionProfileArn, required: true, location_name: "missionProfileArn"))
+    ReserveContactRequest.add_member(:satellite_arn, Shapes::ShapeRef.new(shape: satelliteArn, location_name: "satelliteArn"))
+    ReserveContactRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
     ReserveContactRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTime"))
     ReserveContactRequest.add_member(:ground_station, Shapes::ShapeRef.new(shape: GroundStationName, required: true, location_name: "groundStation"))
-    ReserveContactRequest.add_member(:mission_profile_arn, Shapes::ShapeRef.new(shape: MissionProfileArn, required: true, location_name: "missionProfileArn"))
-    ReserveContactRequest.add_member(:satellite_arn, Shapes::ShapeRef.new(shape: satelliteArn, required: true, location_name: "satelliteArn"))
-    ReserveContactRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
     ReserveContactRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    ReserveContactRequest.add_member(:tracking_overrides, Shapes::ShapeRef.new(shape: TrackingOverrides, location_name: "trackingOverrides"))
     ReserveContactRequest.struct_class = Types::ReserveContactRequest
+
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
 
     ResourceLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceLimitExceededException.add_member(:parameter_name, Shapes::ShapeRef.new(shape: String, location_name: "parameterName"))
@@ -768,8 +924,8 @@ module Aws::GroundStation
     S3Object.struct_class = Types::S3Object
 
     S3RecordingConfig.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketArn, required: true, location_name: "bucketArn"))
-    S3RecordingConfig.add_member(:prefix, Shapes::ShapeRef.new(shape: S3KeyPrefix, location_name: "prefix"))
     S3RecordingConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    S3RecordingConfig.add_member(:prefix, Shapes::ShapeRef.new(shape: S3KeyPrefix, location_name: "prefix"))
     S3RecordingConfig.struct_class = Types::S3RecordingConfig
 
     S3RecordingDetails.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketArn, location_name: "bucketArn"))
@@ -778,19 +934,23 @@ module Aws::GroundStation
 
     SatelliteList.member = Shapes::ShapeRef.new(shape: SatelliteListItem)
 
-    SatelliteListItem.add_member(:current_ephemeris, Shapes::ShapeRef.new(shape: EphemerisMetaData, location_name: "currentEphemeris"))
-    SatelliteListItem.add_member(:ground_stations, Shapes::ShapeRef.new(shape: GroundStationIdList, location_name: "groundStations"))
-    SatelliteListItem.add_member(:norad_satellite_id, Shapes::ShapeRef.new(shape: noradSatelliteID, location_name: "noradSatelliteID"))
-    SatelliteListItem.add_member(:satellite_arn, Shapes::ShapeRef.new(shape: satelliteArn, location_name: "satelliteArn"))
     SatelliteListItem.add_member(:satellite_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "satelliteId"))
+    SatelliteListItem.add_member(:satellite_arn, Shapes::ShapeRef.new(shape: satelliteArn, location_name: "satelliteArn"))
+    SatelliteListItem.add_member(:norad_satellite_id, Shapes::ShapeRef.new(shape: noradSatelliteID, location_name: "noradSatelliteID"))
+    SatelliteListItem.add_member(:ground_stations, Shapes::ShapeRef.new(shape: GroundStationIdList, location_name: "groundStations"))
+    SatelliteListItem.add_member(:current_ephemeris, Shapes::ShapeRef.new(shape: EphemerisMetaData, location_name: "currentEphemeris"))
     SatelliteListItem.struct_class = Types::SatelliteListItem
 
-    SecurityDetails.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
-    SecurityDetails.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, required: true, location_name: "securityGroupIds"))
     SecurityDetails.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetList, required: true, location_name: "subnetIds"))
+    SecurityDetails.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, required: true, location_name: "securityGroupIds"))
+    SecurityDetails.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     SecurityDetails.struct_class = Types::SecurityDetails
 
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: String)
+
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ServiceQuotaExceededException.add_member(:parameter_name, Shapes::ShapeRef.new(shape: String, location_name: "parameterName"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     SignatureMap.key = Shapes::ShapeRef.new(shape: String)
     SignatureMap.value = Shapes::ShapeRef.new(shape: Boolean)
@@ -799,14 +959,14 @@ module Aws::GroundStation
     SocketAddress.add_member(:port, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "port"))
     SocketAddress.struct_class = Types::SocketAddress
 
-    Source.add_member(:config_details, Shapes::ShapeRef.new(shape: ConfigDetails, location_name: "configDetails"))
-    Source.add_member(:config_id, Shapes::ShapeRef.new(shape: String, location_name: "configId"))
     Source.add_member(:config_type, Shapes::ShapeRef.new(shape: ConfigCapabilityType, location_name: "configType"))
+    Source.add_member(:config_id, Shapes::ShapeRef.new(shape: String, location_name: "configId"))
+    Source.add_member(:config_details, Shapes::ShapeRef.new(shape: ConfigDetails, location_name: "configDetails"))
     Source.add_member(:dataflow_source_region, Shapes::ShapeRef.new(shape: String, location_name: "dataflowSourceRegion"))
     Source.struct_class = Types::Source
 
-    SpectrumConfig.add_member(:bandwidth, Shapes::ShapeRef.new(shape: FrequencyBandwidth, required: true, location_name: "bandwidth"))
     SpectrumConfig.add_member(:center_frequency, Shapes::ShapeRef.new(shape: Frequency, required: true, location_name: "centerFrequency"))
+    SpectrumConfig.add_member(:bandwidth, Shapes::ShapeRef.new(shape: FrequencyBandwidth, required: true, location_name: "bandwidth"))
     SpectrumConfig.add_member(:polarization, Shapes::ShapeRef.new(shape: Polarization, location_name: "polarization"))
     SpectrumConfig.struct_class = Types::SpectrumConfig
 
@@ -836,12 +996,22 @@ module Aws::GroundStation
     TagsMap.key = Shapes::ShapeRef.new(shape: String)
     TagsMap.value = Shapes::ShapeRef.new(shape: String)
 
-    TimeRange.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTime"))
+    TimeAzEl.add_member(:dt, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "dt"))
+    TimeAzEl.add_member(:az, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "az"))
+    TimeAzEl.add_member(:el, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "el"))
+    TimeAzEl.struct_class = Types::TimeAzEl
+
+    TimeAzElList.member = Shapes::ShapeRef.new(shape: TimeAzEl)
+
     TimeRange.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
+    TimeRange.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTime"))
     TimeRange.struct_class = Types::TimeRange
 
     TrackingConfig.add_member(:autotrack, Shapes::ShapeRef.new(shape: Criticality, required: true, location_name: "autotrack"))
     TrackingConfig.struct_class = Types::TrackingConfig
+
+    TrackingOverrides.add_member(:program_track_settings, Shapes::ShapeRef.new(shape: ProgramTrackSettings, required: true, location_name: "programTrackSettings"))
+    TrackingOverrides.struct_class = Types::TrackingOverrides
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AnyArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location: "querystring", location_name: "tagKeys"))
@@ -850,39 +1020,59 @@ module Aws::GroundStation
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateAgentStatusRequest.add_member(:agent_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "agentId"))
+    UpdateAgentStatusRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "taskId"))
     UpdateAgentStatusRequest.add_member(:aggregate_status, Shapes::ShapeRef.new(shape: AggregateStatus, required: true, location_name: "aggregateStatus"))
     UpdateAgentStatusRequest.add_member(:component_statuses, Shapes::ShapeRef.new(shape: ComponentStatusList, required: true, location_name: "componentStatuses"))
-    UpdateAgentStatusRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "taskId"))
     UpdateAgentStatusRequest.struct_class = Types::UpdateAgentStatusRequest
 
     UpdateAgentStatusResponse.add_member(:agent_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "agentId"))
     UpdateAgentStatusResponse.struct_class = Types::UpdateAgentStatusResponse
 
-    UpdateConfigRequest.add_member(:config_data, Shapes::ShapeRef.new(shape: ConfigTypeData, required: true, location_name: "configData"))
     UpdateConfigRequest.add_member(:config_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "configId"))
-    UpdateConfigRequest.add_member(:config_type, Shapes::ShapeRef.new(shape: ConfigCapabilityType, required: true, location: "uri", location_name: "configType"))
     UpdateConfigRequest.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, required: true, location_name: "name"))
+    UpdateConfigRequest.add_member(:config_type, Shapes::ShapeRef.new(shape: ConfigCapabilityType, required: true, location: "uri", location_name: "configType"))
+    UpdateConfigRequest.add_member(:config_data, Shapes::ShapeRef.new(shape: ConfigTypeData, required: true, location_name: "configData"))
     UpdateConfigRequest.struct_class = Types::UpdateConfigRequest
 
-    UpdateEphemerisRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     UpdateEphemerisRequest.add_member(:ephemeris_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "ephemerisId"))
+    UpdateEphemerisRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     UpdateEphemerisRequest.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, location_name: "name"))
     UpdateEphemerisRequest.add_member(:priority, Shapes::ShapeRef.new(shape: EphemerisPriority, location_name: "priority"))
     UpdateEphemerisRequest.struct_class = Types::UpdateEphemerisRequest
 
-    UpdateMissionProfileRequest.add_member(:contact_post_pass_duration_seconds, Shapes::ShapeRef.new(shape: DurationInSeconds, location_name: "contactPostPassDurationSeconds"))
-    UpdateMissionProfileRequest.add_member(:contact_pre_pass_duration_seconds, Shapes::ShapeRef.new(shape: DurationInSeconds, location_name: "contactPrePassDurationSeconds"))
-    UpdateMissionProfileRequest.add_member(:dataflow_edges, Shapes::ShapeRef.new(shape: DataflowEdgeList, location_name: "dataflowEdges"))
-    UpdateMissionProfileRequest.add_member(:minimum_viable_contact_duration_seconds, Shapes::ShapeRef.new(shape: PositiveDurationInSeconds, location_name: "minimumViableContactDurationSeconds"))
     UpdateMissionProfileRequest.add_member(:mission_profile_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "missionProfileId"))
     UpdateMissionProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, location_name: "name"))
+    UpdateMissionProfileRequest.add_member(:contact_pre_pass_duration_seconds, Shapes::ShapeRef.new(shape: DurationInSeconds, location_name: "contactPrePassDurationSeconds"))
+    UpdateMissionProfileRequest.add_member(:contact_post_pass_duration_seconds, Shapes::ShapeRef.new(shape: DurationInSeconds, location_name: "contactPostPassDurationSeconds"))
+    UpdateMissionProfileRequest.add_member(:minimum_viable_contact_duration_seconds, Shapes::ShapeRef.new(shape: PositiveDurationInSeconds, location_name: "minimumViableContactDurationSeconds"))
+    UpdateMissionProfileRequest.add_member(:dataflow_edges, Shapes::ShapeRef.new(shape: DataflowEdgeList, location_name: "dataflowEdges"))
+    UpdateMissionProfileRequest.add_member(:tracking_config_arn, Shapes::ShapeRef.new(shape: ConfigArn, location_name: "trackingConfigArn"))
     UpdateMissionProfileRequest.add_member(:streams_kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "streamsKmsKey"))
     UpdateMissionProfileRequest.add_member(:streams_kms_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "streamsKmsRole"))
-    UpdateMissionProfileRequest.add_member(:tracking_config_arn, Shapes::ShapeRef.new(shape: ConfigArn, location_name: "trackingConfigArn"))
     UpdateMissionProfileRequest.struct_class = Types::UpdateMissionProfileRequest
 
-    UplinkEchoConfig.add_member(:antenna_uplink_config_arn, Shapes::ShapeRef.new(shape: ConfigArn, required: true, location_name: "antennaUplinkConfigArn"))
+    UplinkAwsGroundStationAgentEndpoint.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, required: true, location_name: "name"))
+    UplinkAwsGroundStationAgentEndpoint.add_member(:dataflow_details, Shapes::ShapeRef.new(shape: UplinkDataflowDetails, required: true, location_name: "dataflowDetails"))
+    UplinkAwsGroundStationAgentEndpoint.struct_class = Types::UplinkAwsGroundStationAgentEndpoint
+
+    UplinkAwsGroundStationAgentEndpointDetails.add_member(:name, Shapes::ShapeRef.new(shape: SafeName, required: true, location_name: "name"))
+    UplinkAwsGroundStationAgentEndpointDetails.add_member(:dataflow_details, Shapes::ShapeRef.new(shape: UplinkDataflowDetails, required: true, location_name: "dataflowDetails"))
+    UplinkAwsGroundStationAgentEndpointDetails.add_member(:agent_status, Shapes::ShapeRef.new(shape: AgentStatus, location_name: "agentStatus"))
+    UplinkAwsGroundStationAgentEndpointDetails.add_member(:audit_results, Shapes::ShapeRef.new(shape: AuditResults, location_name: "auditResults"))
+    UplinkAwsGroundStationAgentEndpointDetails.struct_class = Types::UplinkAwsGroundStationAgentEndpointDetails
+
+    UplinkConnectionDetails.add_member(:ingress_address_and_port, Shapes::ShapeRef.new(shape: ConnectionDetails, required: true, location_name: "ingressAddressAndPort"))
+    UplinkConnectionDetails.add_member(:agent_ip_and_port_address, Shapes::ShapeRef.new(shape: RangedConnectionDetails, required: true, location_name: "agentIpAndPortAddress"))
+    UplinkConnectionDetails.struct_class = Types::UplinkConnectionDetails
+
+    UplinkDataflowDetails.add_member(:agent_connection_details, Shapes::ShapeRef.new(shape: UplinkConnectionDetails, location_name: "agentConnectionDetails"))
+    UplinkDataflowDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    UplinkDataflowDetails.add_member_subclass(:agent_connection_details, Types::UplinkDataflowDetails::AgentConnectionDetails)
+    UplinkDataflowDetails.add_member_subclass(:unknown, Types::UplinkDataflowDetails::Unknown)
+    UplinkDataflowDetails.struct_class = Types::UplinkDataflowDetails
+
     UplinkEchoConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
+    UplinkEchoConfig.add_member(:antenna_uplink_config_arn, Shapes::ShapeRef.new(shape: ConfigArn, required: true, location_name: "antennaUplinkConfigArn"))
     UplinkEchoConfig.struct_class = Types::UplinkEchoConfig
 
     UplinkSpectrumConfig.add_member(:center_frequency, Shapes::ShapeRef.new(shape: Frequency, required: true, location_name: "centerFrequency"))
@@ -901,7 +1091,6 @@ module Aws::GroundStation
         "apiVersion" => "2019-05-23",
         "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "groundstation",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Ground Station",
@@ -941,6 +1130,18 @@ module Aws::GroundStation
         o.input = Shapes::ShapeRef.new(shape: CreateDataflowEndpointGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: DataflowEndpointGroupIdResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:create_dataflow_endpoint_group_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDataflowEndpointGroupV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/dataflowEndpointGroupV2"
+        o.input = Shapes::ShapeRef.new(shape: CreateDataflowEndpointGroupV2Request)
+        o.output = Shapes::ShapeRef.new(shape: CreateDataflowEndpointGroupV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -998,6 +1199,7 @@ module Aws::GroundStation
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:delete_mission_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -1039,6 +1241,17 @@ module Aws::GroundStation
         o.http_request_uri = "/agent/{agentId}/configuration"
         o.input = Shapes::ShapeRef.new(shape: GetAgentConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAgentConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_agent_task_response_url, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAgentTaskResponseUrl"
+        o.http_method = "GET"
+        o.http_request_uri = "/agentResponseUrl/{agentId}/{taskId}"
+        o.input = Shapes::ShapeRef.new(shape: GetAgentTaskResponseUrlRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAgentTaskResponseUrlResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1248,6 +1461,7 @@ module Aws::GroundStation
         o.output = Shapes::ShapeRef.new(shape: ContactIdResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: DependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 

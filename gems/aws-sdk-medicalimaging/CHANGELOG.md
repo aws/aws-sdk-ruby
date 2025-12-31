@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2025-11-11)
+------------------
+
+* Feature - Added new fields in existing APIs.
+
+1.37.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2025-10-16)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.35.0 (2025-09-15)
 ------------------
 

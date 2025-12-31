@@ -184,13 +184,26 @@ module Aws::Kinesis
     #   consists of a required key and an optional value.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] warm_throughput_mi_bps
+    #   The target warm throughput in MB/s that the stream should be scaled
+    #   to handle. This represents the throughput capacity that will be
+    #   immediately available for write operations.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_record_size_in_ki_b
+    #   The maximum record size of a single record in kibibyte (KiB) that
+    #   you can write to, and read from a stream.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStreamInput AWS API Documentation
     #
     class CreateStreamInput < Struct.new(
       :stream_name,
       :shard_count,
       :stream_mode_details,
-      :tags)
+      :tags,
+      :warm_throughput_mi_bps,
+      :max_record_size_in_ki_b)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -287,6 +300,25 @@ module Aws::Kinesis
       :stream_arn,
       :consumer_name,
       :consumer_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeAccountSettingsInput AWS API Documentation
+    #
+    class DescribeAccountSettingsInput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] minimum_throughput_billing_commitment
+    #   The current configuration of the minimum throughput billing
+    #   commitment for your Amazon Web Services account.
+    #   @return [Types::MinimumThroughputBillingCommitmentOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeAccountSettingsOutput AWS API Documentation
+    #
+    class DescribeAccountSettingsOutput < Struct.new(
+      :minimum_throughput_billing_commitment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1432,6 +1464,67 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # Represents the request parameters for configuring minimum throughput
+    # billing commitment.
+    #
+    # <note markdown="1"> * Minimum throughput billing commitments provide cost savings on
+    #   on-demand data streams in exchange for committing to a minimum level
+    #   of throughput usage.
+    #
+    # * Commitments have a minimum duration of 24 hours that must be honored
+    #   before they can be disabled.
+    #
+    # * If you attempt to disable a commitment before the minimum commitment
+    #   period ends, the commitment will be scheduled for automatic disable
+    #   at the earliest allowed end time.
+    #
+    # * You can cancel a pending disable by enabling the commitment again
+    #   before the earliest allowed end time.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] status
+    #   The desired status of the minimum throughput billing commitment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/MinimumThroughputBillingCommitmentInput AWS API Documentation
+    #
+    class MinimumThroughputBillingCommitmentInput < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the current status of minimum throughput billing commitment
+    # for an account.
+    #
+    # @!attribute [rw] status
+    #   The current status of the minimum throughput billing commitment.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The timestamp when the commitment was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The timestamp when the commitment was ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] earliest_allowed_end_at
+    #   The earliest timestamp when the commitment can be ended.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/MinimumThroughputBillingCommitmentOutput AWS API Documentation
+    #
+    class MinimumThroughputBillingCommitmentOutput < Struct.new(
+      :status,
+      :started_at,
+      :ended_at,
+      :earliest_allowed_end_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request rate for the stream is too high, or the requested data is
     # too large for the available throughput. Reduce the frequency or size
     # of your requests. For more information, see [Streams Limits][1] in the
@@ -2329,6 +2422,17 @@ module Aws::Kinesis
     #   The number of enhanced fan-out consumers registered with the stream.
     #   @return [Integer]
     #
+    # @!attribute [rw] warm_throughput
+    #   The warm throughput in MB/s for the stream. This represents the
+    #   throughput capacity that will be immediately available for write
+    #   operations.
+    #   @return [Types::WarmThroughputObject]
+    #
+    # @!attribute [rw] max_record_size_in_ki_b
+    #   The maximum record size of a single record in kibibyte (KiB) that
+    #   you can write to, and read from a stream.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StreamDescriptionSummary AWS API Documentation
     #
     class StreamDescriptionSummary < Struct.new(
@@ -2342,7 +2446,9 @@ module Aws::Kinesis
       :encryption_type,
       :key_id,
       :open_shard_count,
-      :consumer_count)
+      :consumer_count,
+      :warm_throughput,
+      :max_record_size_in_ki_b)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2547,6 +2653,53 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # @!attribute [rw] minimum_throughput_billing_commitment
+    #   Specifies the minimum throughput billing commitment configuration
+    #   for your account.
+    #   @return [Types::MinimumThroughputBillingCommitmentInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateAccountSettingsInput AWS API Documentation
+    #
+    class UpdateAccountSettingsInput < Struct.new(
+      :minimum_throughput_billing_commitment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] minimum_throughput_billing_commitment
+    #   The updated configuration of the minimum throughput billing
+    #   commitment for your account.
+    #   @return [Types::MinimumThroughputBillingCommitmentOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateAccountSettingsOutput AWS API Documentation
+    #
+    class UpdateAccountSettingsOutput < Struct.new(
+      :minimum_throughput_billing_commitment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the stream for the `MaxRecordSize`
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_record_size_in_ki_b
+    #   The maximum record size of a single record in KiB that you can write
+    #   to, and read from a stream. Specify a value between 1024 and 10240
+    #   KiB (1 to 10 MiB). If you specify a value that is out of this range,
+    #   `UpdateMaxRecordSize` sends back an `ValidationException` message.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateMaxRecordSizeInput AWS API Documentation
+    #
+    class UpdateMaxRecordSizeInput < Struct.new(
+      :stream_arn,
+      :max_record_size_in_ki_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] stream_name
     #   The name of the stream.
     #   @return [String]
@@ -2626,11 +2779,66 @@ module Aws::Kinesis
     #   for your data streams.
     #   @return [Types::StreamModeDetails]
     #
+    # @!attribute [rw] warm_throughput_mi_bps
+    #   The target warm throughput in MB/s that the stream should be scaled
+    #   to handle. This represents the throughput capacity that will be
+    #   immediately available for write operations. This field is only valid
+    #   when the stream mode is being updated to on-demand.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateStreamModeInput AWS API Documentation
     #
     class UpdateStreamModeInput < Struct.new(
       :stream_arn,
-      :stream_mode_details)
+      :stream_mode_details,
+      :warm_throughput_mi_bps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stream_arn
+    #   The ARN of the stream to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the stream to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] warm_throughput_mi_bps
+    #   The target warm throughput in MB/s that the stream should be scaled
+    #   to handle. This represents the throughput capacity that will be
+    #   immediately available for write operations.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateStreamWarmThroughputInput AWS API Documentation
+    #
+    class UpdateStreamWarmThroughputInput < Struct.new(
+      :stream_arn,
+      :stream_name,
+      :warm_throughput_mi_bps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stream_arn
+    #   The ARN of the stream that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the stream that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] warm_throughput
+    #   Specifies the updated warm throughput configuration for your data
+    #   stream.
+    #   @return [Types::WarmThroughputObject]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateStreamWarmThroughputOutput AWS API Documentation
+    #
+    class UpdateStreamWarmThroughputOutput < Struct.new(
+      :stream_arn,
+      :stream_name,
+      :warm_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2646,6 +2854,29 @@ module Aws::Kinesis
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the warm throughput configuration on the stream. This is
+    # only present for On-Demand Kinesis Data Streams in accounts that have
+    # `MinimumThroughputBillingCommitment` enabled.
+    #
+    # @!attribute [rw] target_mi_bps
+    #   The target warm throughput value on the stream. This indicates that
+    #   the stream is currently scaling towards this target value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] current_mi_bps
+    #   The current warm throughput value on the stream. This is the write
+    #   throughput in MiBps that the stream is currently scaled to handle.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/WarmThroughputObject AWS API Documentation
+    #
+    class WarmThroughputObject < Struct.new(
+      :target_mi_bps,
+      :current_mi_bps)
       SENSITIVE = []
       include Aws::Structure
     end

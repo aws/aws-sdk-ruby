@@ -116,7 +116,8 @@ module Aws
                               client_token: ::String,
                               ?tags: Hash[::String, ::String],
                               ?kms_key_arn: ::String,
-                              ?lambda_authorizer_arn: ::String
+                              ?lambda_authorizer_arn: ::String,
+                              ?lossless_storage_format: ("HTJ2K" | "JPEG_2000_LOSSLESS")
                             ) -> _CreateDatastoreResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatastoreResponseSuccess
 
@@ -195,6 +196,8 @@ module Aws
         def image_set_arn: () -> ::String
         def overrides: () -> Types::Overrides
         def is_primary: () -> bool
+        def last_accessed_at: () -> ::Time
+        def storage_tier: () -> ("FREQUENT_ACCESS" | "ARCHIVE_INSTANT_ACCESS")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MedicalImaging/Client.html#get_image_set-instance_method
       def get_image_set: (

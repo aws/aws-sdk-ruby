@@ -131,7 +131,8 @@ module Aws
                                },
                              ]?
                            },
-                         ]
+                         ],
+                         ?client_token: ::String
                        ) -> _MeterUsageResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MeterUsageResponseSuccess
 

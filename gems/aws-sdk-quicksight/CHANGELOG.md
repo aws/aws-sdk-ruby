@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.167.0 (2025-12-29)
+------------------
+
+* Feature - This release adds support for quick users to be able to perform role upgrades on their own. Additionally it allows admins to make this feature admin or auto approval along with new self upgrade capability that can be restricted by Admins.
+
+1.166.0 (2025-12-11)
+------------------
+
+* Feature - This release adds new GetIdentityContext API, Dashboard customization options for tables and pivot tables, Visual styling options- borders and decals, map GeocodingPreferences, KeyPairCredentials for DataSourceCredentials. Snapshot APIs now support registered users. Parameters limit increased to 400
+
+1.165.0 (2025-11-21)
+------------------
+
+* Feature - Amazon Quick Suite now supports QuickChat as an embedding type when calling the GenerateEmbedUrlForRegisteredUser API, enabling developers to embed conversational AI agents directly into their applications.
+
+1.164.0 (2025-11-20)
+------------------
+
+* Feature - Introducing comprehensive theme styling controls. New features include border customization (radius, width, color), flexible padding controls, background styling for cards and sheets, centralized typography management, and visual-level override support across layouts.
+
+1.163.0 (2025-11-06)
+------------------
+
+* Feature - Support for New Data Prep Experience
+
+1.162.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.161.0 (2025-10-09)
 ------------------
 

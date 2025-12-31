@@ -51,6 +51,27 @@ module Aws::RDS
       SENSITIVE: []
     end
 
+    class AdditionalStorageVolume
+      attr_accessor volume_name: ::String
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor iops: ::Integer
+      attr_accessor max_allocated_storage: ::Integer
+      attr_accessor storage_throughput: ::Integer
+      attr_accessor storage_type: ::String
+      SENSITIVE: []
+    end
+
+    class AdditionalStorageVolumeOutput
+      attr_accessor volume_name: ::String
+      attr_accessor storage_volume_status: ::String
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor iops: ::Integer
+      attr_accessor max_allocated_storage: ::Integer
+      attr_accessor storage_throughput: ::Integer
+      attr_accessor storage_type: ::String
+      SENSITIVE: []
+    end
+
     class ApplyPendingMaintenanceActionMessage
       attr_accessor resource_identifier: ::String
       attr_accessor apply_action: ::String
@@ -88,6 +109,22 @@ module Aws::RDS
 
     class AvailabilityZone
       attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AvailableAdditionalStorageVolumesOption
+      attr_accessor supports_storage_autoscaling: bool
+      attr_accessor supports_storage_throughput: bool
+      attr_accessor supports_iops: bool
+      attr_accessor storage_type: ::String
+      attr_accessor min_storage_size: ::Integer
+      attr_accessor max_storage_size: ::Integer
+      attr_accessor min_iops: ::Integer
+      attr_accessor max_iops: ::Integer
+      attr_accessor min_iops_per_gib: ::Float
+      attr_accessor max_iops_per_gib: ::Float
+      attr_accessor min_storage_throughput: ::Integer
+      attr_accessor max_storage_throughput: ::Integer
       SENSITIVE: []
     end
 
@@ -332,6 +369,7 @@ module Aws::RDS
       attr_accessor description: ::String
       attr_accessor manifest: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor database_installation_files: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -395,13 +433,14 @@ module Aws::RDS
       attr_accessor performance_insights_kms_key_id: ::String
       attr_accessor performance_insights_retention_period: ::Integer
       attr_accessor enable_limitless_database: bool
-      attr_accessor cluster_scalability_type: ("standard" | "limitless" | "scaleout")
+      attr_accessor cluster_scalability_type: ("standard" | "limitless")
       attr_accessor db_system_id: ::String
       attr_accessor manage_master_user_password: bool
       attr_accessor enable_local_write_forwarding: bool
       attr_accessor master_user_secret_kms_key_id: ::String
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
       attr_accessor source_region: ::String
       SENSITIVE: [:master_user_password, :pre_signed_url]
@@ -502,7 +541,9 @@ module Aws::RDS
       attr_accessor multi_tenant: bool
       attr_accessor dedicated_log_volume: bool
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
+      attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       SENSITIVE: [:master_user_password, :tde_credential_password]
     end
 
@@ -554,6 +595,8 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool
       attr_accessor upgrade_storage_config: bool
       attr_accessor ca_certificate_identifier: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
+      attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       attr_accessor source_region: ::String
       SENSITIVE: [:pre_signed_url]
     end
@@ -787,6 +830,7 @@ module Aws::RDS
       attr_accessor db_cluster_option_group_memberships: ::Array[Types::DBClusterOptionGroupStatus]
       attr_accessor preferred_backup_window: ::String
       attr_accessor preferred_maintenance_window: ::String
+      attr_accessor upgrade_rollout_order: ("first" | "second" | "last")
       attr_accessor replication_source_identifier: ::String
       attr_accessor read_replica_identifiers: ::Array[::String]
       attr_accessor status_infos: ::Array[Types::DBClusterStatusInfo]
@@ -845,7 +889,7 @@ module Aws::RDS
       attr_accessor local_write_forwarding_status: ("enabled" | "disabled" | "enabling" | "disabling" | "requested")
       attr_accessor aws_backup_recovery_point_arn: ::String
       attr_accessor limitless_database: Types::LimitlessDatabase
-      attr_accessor cluster_scalability_type: ("standard" | "limitless" | "scaleout")
+      attr_accessor cluster_scalability_type: ("standard" | "limitless")
       attr_accessor certificate_details: Types::CertificateDetails
       attr_accessor engine_lifecycle_support: ::String
       SENSITIVE: []
@@ -880,6 +924,7 @@ module Aws::RDS
       attr_accessor iops: ::Integer
       attr_accessor storage_throughput: ::Integer
       attr_accessor aws_backup_recovery_point_arn: ::String
+      attr_accessor tag_list: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
@@ -1120,6 +1165,8 @@ module Aws::RDS
       attr_accessor supports_local_write_forwarding: bool
       attr_accessor supports_integrations: bool
       attr_accessor serverless_v2_features_support: Types::ServerlessV2FeaturesSupport
+      attr_accessor database_installation_files: ::Array[::String]
+      attr_accessor failure_reason: ::String
       SENSITIVE: []
     end
 
@@ -1147,6 +1194,7 @@ module Aws::RDS
       attr_accessor availability_zone: ::String
       attr_accessor db_subnet_group: Types::DBSubnetGroup
       attr_accessor preferred_maintenance_window: ::String
+      attr_accessor upgrade_rollout_order: ("first" | "second" | "last")
       attr_accessor pending_modified_values: Types::PendingModifiedValues
       attr_accessor latest_restorable_time: ::Time
       attr_accessor multi_az: bool
@@ -1217,6 +1265,8 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool
       attr_accessor is_storage_config_upgrade_available: bool
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolumeOutput]
+      attr_accessor storage_volume_status: ::String
       SENSITIVE: []
     end
 
@@ -1254,7 +1304,9 @@ module Aws::RDS
       attr_accessor backup_target: ::String
       attr_accessor multi_tenant: bool
       attr_accessor aws_backup_recovery_point_arn: ::String
+      attr_accessor tag_list: ::Array[Types::Tag]
       attr_accessor dedicated_log_volume: bool
+      attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       SENSITIVE: []
     end
 
@@ -1579,6 +1631,7 @@ module Aws::RDS
       attr_accessor multi_tenant: bool
       attr_accessor dedicated_log_volume: bool
       attr_accessor snapshot_availability_zone: ::String
+      attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       SENSITIVE: []
     end
 
@@ -2831,6 +2884,17 @@ module Aws::RDS
       SENSITIVE: []
     end
 
+    class ModifyAdditionalStorageVolume
+      attr_accessor volume_name: ::String
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor iops: ::Integer
+      attr_accessor max_allocated_storage: ::Integer
+      attr_accessor storage_throughput: ::Integer
+      attr_accessor storage_type: ::String
+      attr_accessor set_for_delete: bool
+      SENSITIVE: []
+    end
+
     class ModifyCertificatesMessage
       attr_accessor certificate_identifier: ::String
       attr_accessor remove_customer_override: bool
@@ -3003,7 +3067,9 @@ module Aws::RDS
       attr_accessor multi_tenant: bool
       attr_accessor dedicated_log_volume: bool
       attr_accessor engine: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
+      attr_accessor additional_storage_volumes: ::Array[Types::ModifyAdditionalStorageVolume]
       SENSITIVE: [:master_user_password, :tde_credential_password]
     end
 
@@ -3337,6 +3403,8 @@ module Aws::RDS
       attr_accessor supports_clusters: bool
       attr_accessor supports_dedicated_log_volume: bool
       attr_accessor supports_http_endpoint: bool
+      attr_accessor supports_additional_storage_volumes: bool
+      attr_accessor available_additional_storage_volumes_options: ::Array[Types::AvailableAdditionalStorageVolumesOption]
       SENSITIVE: []
     end
 
@@ -3411,6 +3479,7 @@ module Aws::RDS
       attr_accessor iam_database_authentication_enabled: bool
       attr_accessor dedicated_log_volume: bool
       attr_accessor engine: ::String
+      attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       SENSITIVE: [:master_user_password]
     end
 
@@ -3458,6 +3527,7 @@ module Aws::RDS
       attr_accessor db_instance_identifier: ::String
       attr_accessor backup_retention_period: ::Integer
       attr_accessor preferred_backup_window: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       SENSITIVE: []
     end
 
@@ -3732,6 +3802,7 @@ module Aws::RDS
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       SENSITIVE: [:master_user_password]
     end
 
@@ -3776,6 +3847,7 @@ module Aws::RDS
       attr_accessor performance_insights_kms_key_id: ::String
       attr_accessor performance_insights_retention_period: ::Integer
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       SENSITIVE: []
     end
 
@@ -3820,6 +3892,7 @@ module Aws::RDS
       attr_accessor performance_insights_kms_key_id: ::String
       attr_accessor performance_insights_retention_period: ::Integer
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       SENSITIVE: []
     end
 
@@ -3871,8 +3944,10 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
+      attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       SENSITIVE: [:tde_credential_password]
     end
 
@@ -3934,6 +4009,8 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
+      attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       SENSITIVE: [:master_user_password]
     end
 
@@ -3989,8 +4066,10 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
+      attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       SENSITIVE: [:tde_credential_password]
     end
 
@@ -4136,6 +4215,7 @@ module Aws::RDS
       attr_accessor backup_retention_period: ::Integer
       attr_accessor kms_key_id: ::String
       attr_accessor pre_signed_url: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       attr_accessor source_region: ::String
       SENSITIVE: [:pre_signed_url]
     end
@@ -4296,6 +4376,12 @@ module Aws::RDS
       SENSITIVE: []
     end
 
+    class TagSpecification
+      attr_accessor resource_type: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
     class TargetHealth
       attr_accessor state: ("REGISTERING" | "AVAILABLE" | "UNAVAILABLE" | "UNUSED")
       attr_accessor reason: ("UNREACHABLE" | "CONNECTION_FAILED" | "AUTH_FAILURE" | "PENDING_PROXY_CAPACITY" | "INVALID_REPLICATION_STATE" | "PROMOTED")
@@ -4386,10 +4472,17 @@ module Aws::RDS
       SENSITIVE: []
     end
 
+    class ValidAdditionalStorageOptions
+      attr_accessor supports_additional_storage_volumes: bool
+      attr_accessor volumes: ::Array[Types::ValidVolumeOptions]
+      SENSITIVE: []
+    end
+
     class ValidDBInstanceModificationsMessage
       attr_accessor storage: ::Array[Types::ValidStorageOptions]
       attr_accessor valid_processor_features: ::Array[Types::AvailableProcessorFeature]
       attr_accessor supports_dedicated_log_volume: bool
+      attr_accessor additional_storage: Types::ValidAdditionalStorageOptions
       SENSITIVE: []
     end
 
@@ -4402,6 +4495,15 @@ module Aws::RDS
       attr_accessor storage_throughput_to_iops_ratio: ::Array[Types::DoubleRange]
       attr_accessor supports_storage_autoscaling: bool
       SENSITIVE: []
+    end
+
+    class ValidVolumeOptions
+      attr_accessor volume_name: ::String
+      attr_accessor storage: ::Array[Types::ValidStorageOptions]
+      SENSITIVE: []
+    end
+
+    class VpcEncryptionControlViolationException < Aws::EmptyStructure
     end
 
     class VpcSecurityGroupMembership

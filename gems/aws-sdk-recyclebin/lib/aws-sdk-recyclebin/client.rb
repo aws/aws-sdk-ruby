@@ -513,9 +513,13 @@ module Aws::RecycleBin
     #
     # @option params [required, String] :resource_type
     #   The resource type to be retained by the retention rule. Currently,
-    #   only Amazon EBS snapshots and EBS-backed AMIs are supported. To retain
-    #   snapshots, specify `EBS_SNAPSHOT`. To retain EBS-backed AMIs, specify
-    #   `EC2_IMAGE`.
+    #   only EBS volumes, EBS snapshots, and EBS-backed AMIs are supported.
+    #
+    #   * To retain EBS volumes, specify `EBS_VOLUME`.
+    #
+    #   * To retain EBS snapshots, specify `EBS_SNAPSHOT`
+    #
+    #   * To retain EBS-backed AMIs, specify `EC2_IMAGE`.
     #
     # @option params [Array<Types::ResourceTag>] :resource_tags
     #   \[Tag-level retention rules only\] Specifies the resource tags to use
@@ -574,7 +578,7 @@ module Aws::RecycleBin
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     resource_type: "EBS_SNAPSHOT", # required, accepts EBS_SNAPSHOT, EC2_IMAGE
+    #     resource_type: "EBS_SNAPSHOT", # required, accepts EBS_SNAPSHOT, EC2_IMAGE, EBS_VOLUME
     #     resource_tags: [
     #       {
     #         resource_tag_key: "ResourceTagKey", # required
@@ -604,7 +608,7 @@ module Aws::RecycleBin
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
-    #   resp.resource_type #=> String, one of "EBS_SNAPSHOT", "EC2_IMAGE"
+    #   resp.resource_type #=> String, one of "EBS_SNAPSHOT", "EC2_IMAGE", "EBS_VOLUME"
     #   resp.resource_tags #=> Array
     #   resp.resource_tags[0].resource_tag_key #=> String
     #   resp.resource_tags[0].resource_tag_value #=> String
@@ -683,7 +687,7 @@ module Aws::RecycleBin
     #
     #   resp.identifier #=> String
     #   resp.description #=> String
-    #   resp.resource_type #=> String, one of "EBS_SNAPSHOT", "EC2_IMAGE"
+    #   resp.resource_type #=> String, one of "EBS_SNAPSHOT", "EC2_IMAGE", "EBS_VOLUME"
     #   resp.retention_period.retention_period_value #=> Integer
     #   resp.retention_period.retention_period_unit #=> String, one of "DAYS"
     #   resp.resource_tags #=> Array
@@ -721,9 +725,16 @@ module Aws::RecycleBin
     # @option params [required, String] :resource_type
     #   The resource type retained by the retention rule. Only retention rules
     #   that retain the specified resource type are listed. Currently, only
-    #   Amazon EBS snapshots and EBS-backed AMIs are supported. To list
-    #   retention rules that retain snapshots, specify `EBS_SNAPSHOT`. To list
-    #   retention rules that retain EBS-backed AMIs, specify `EC2_IMAGE`.
+    #   EBS volumes, EBS snapshots, and EBS-backed AMIs are supported.
+    #
+    #   * To list retention rules that retain EBS volumes, specify
+    #     `EBS_VOLUME`.
+    #
+    #   * To list retention rules that retain EBS snapshots, specify
+    #     `EBS_SNAPSHOT`.
+    #
+    #   * To list retention rules that retain EBS-backed AMIs, specify
+    #     `EC2_IMAGE`.
     #
     # @option params [Array<Types::ResourceTag>] :resource_tags
     #   \[Tag-level retention rules only\] Information about the resource tags
@@ -750,7 +761,7 @@ module Aws::RecycleBin
     #   resp = client.list_rules({
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     resource_type: "EBS_SNAPSHOT", # required, accepts EBS_SNAPSHOT, EC2_IMAGE
+    #     resource_type: "EBS_SNAPSHOT", # required, accepts EBS_SNAPSHOT, EC2_IMAGE, EBS_VOLUME
     #     resource_tags: [
     #       {
     #         resource_tag_key: "ResourceTagKey", # required
@@ -859,7 +870,7 @@ module Aws::RecycleBin
     #
     #   resp.identifier #=> String
     #   resp.description #=> String
-    #   resp.resource_type #=> String, one of "EBS_SNAPSHOT", "EC2_IMAGE"
+    #   resp.resource_type #=> String, one of "EBS_SNAPSHOT", "EC2_IMAGE", "EBS_VOLUME"
     #   resp.retention_period.retention_period_value #=> Integer
     #   resp.retention_period.retention_period_unit #=> String, one of "DAYS"
     #   resp.resource_tags #=> Array
@@ -944,7 +955,7 @@ module Aws::RecycleBin
     #
     #   resp.identifier #=> String
     #   resp.description #=> String
-    #   resp.resource_type #=> String, one of "EBS_SNAPSHOT", "EC2_IMAGE"
+    #   resp.resource_type #=> String, one of "EBS_SNAPSHOT", "EC2_IMAGE", "EBS_VOLUME"
     #   resp.retention_period.retention_period_value #=> Integer
     #   resp.retention_period.retention_period_unit #=> String, one of "DAYS"
     #   resp.resource_tags #=> Array
@@ -1071,7 +1082,7 @@ module Aws::RecycleBin
     #       retention_period_unit: "DAYS", # required, accepts DAYS
     #     },
     #     description: "Description",
-    #     resource_type: "EBS_SNAPSHOT", # accepts EBS_SNAPSHOT, EC2_IMAGE
+    #     resource_type: "EBS_SNAPSHOT", # accepts EBS_SNAPSHOT, EC2_IMAGE, EBS_VOLUME
     #     resource_tags: [
     #       {
     #         resource_tag_key: "ResourceTagKey", # required
@@ -1092,7 +1103,7 @@ module Aws::RecycleBin
     #   resp.retention_period.retention_period_value #=> Integer
     #   resp.retention_period.retention_period_unit #=> String, one of "DAYS"
     #   resp.description #=> String
-    #   resp.resource_type #=> String, one of "EBS_SNAPSHOT", "EC2_IMAGE"
+    #   resp.resource_type #=> String, one of "EBS_SNAPSHOT", "EC2_IMAGE", "EBS_VOLUME"
     #   resp.resource_tags #=> Array
     #   resp.resource_tags[0].resource_tag_key #=> String
     #   resp.resource_tags[0].resource_tag_value #=> String
@@ -1131,7 +1142,7 @@ module Aws::RecycleBin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-recyclebin'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

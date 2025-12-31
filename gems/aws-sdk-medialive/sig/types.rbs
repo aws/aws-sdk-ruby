@@ -493,6 +493,7 @@ module Aws::MediaLive
       attr_accessor vpc: Types::VpcOutputSettingsDescription
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -527,6 +528,7 @@ module Aws::MediaLive
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
       attr_accessor used_channel_engine_versions: ::Array[Types::ChannelEngineVersionResponse]
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -576,6 +578,7 @@ module Aws::MediaLive
       attr_accessor anywhere_settings: Types::AnywhereSettings
       attr_accessor channel_engine_version: Types::ChannelEngineVersionRequest
       attr_accessor dry_run: bool
+      attr_accessor linked_channel_settings: Types::LinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -597,6 +600,7 @@ module Aws::MediaLive
       attr_accessor anywhere_settings: Types::AnywhereSettings
       attr_accessor channel_engine_version: Types::ChannelEngineVersionRequest
       attr_accessor dry_run: bool
+      attr_accessor linked_channel_settings: Types::LinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -620,13 +624,14 @@ module Aws::MediaLive
       attr_accessor role_arn: ::String
       attr_accessor sources: ::Array[Types::InputSourceRequest]
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI")
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI" | "MEDIACONNECT_ROUTER")
       attr_accessor vpc: Types::InputVpcRequest
       attr_accessor srt_settings: Types::SrtSettingsRequest
       attr_accessor input_network_location: ("AWS" | "ON_PREMISES")
       attr_accessor multicast_settings: Types::MulticastSettingsCreateRequest
       attr_accessor smpte_2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings
       attr_accessor sdi_sources: ::Array[::String]
+      attr_accessor router_settings: Types::RouterSettings
       SENSITIVE: []
     end
 
@@ -640,13 +645,14 @@ module Aws::MediaLive
       attr_accessor role_arn: ::String
       attr_accessor sources: ::Array[Types::InputSourceRequest]
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI")
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI" | "MEDIACONNECT_ROUTER")
       attr_accessor vpc: Types::InputVpcRequest
       attr_accessor srt_settings: Types::SrtSettingsRequest
       attr_accessor input_network_location: ("AWS" | "ON_PREMISES")
       attr_accessor multicast_settings: Types::MulticastSettingsCreateRequest
       attr_accessor smpte_2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings
       attr_accessor sdi_sources: ::Array[::String]
+      attr_accessor router_settings: Types::RouterSettings
       SENSITIVE: []
     end
 
@@ -784,6 +790,7 @@ module Aws::MediaLive
       attr_accessor vpc: Types::VpcOutputSettingsDescription
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -918,6 +925,7 @@ module Aws::MediaLive
       attr_accessor vpc: Types::VpcOutputSettingsDescription
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -982,12 +990,13 @@ module Aws::MediaLive
       attr_accessor sources: ::Array[Types::InputSource]
       attr_accessor state: ("CREATING" | "DETACHED" | "ATTACHED" | "DELETING" | "DELETED")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI")
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI" | "MEDIACONNECT_ROUTER")
       attr_accessor srt_settings: Types::SrtSettings
       attr_accessor input_network_location: ("AWS" | "ON_PREMISES")
       attr_accessor multicast_settings: Types::MulticastSettings
       attr_accessor smpte_2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings
       attr_accessor sdi_sources: ::Array[::String]
+      attr_accessor router_settings: Types::RouterInputSettings
       SENSITIVE: []
     end
 
@@ -1427,6 +1436,7 @@ module Aws::MediaLive
       attr_accessor hdr_10_settings: Types::Hdr10Settings
       attr_accessor rec_601_settings: Types::Rec601Settings
       attr_accessor rec_709_settings: Types::Rec709Settings
+      attr_accessor hlg_2020_settings: Types::Hlg2020Settings
       SENSITIVE: []
     end
 
@@ -1644,12 +1654,13 @@ module Aws::MediaLive
       attr_accessor sources: ::Array[Types::InputSource]
       attr_accessor state: ("CREATING" | "DETACHED" | "ATTACHED" | "DELETING" | "DELETED")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI")
+      attr_accessor type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI" | "MEDIACONNECT_ROUTER")
       attr_accessor srt_settings: Types::SrtSettings
       attr_accessor input_network_location: ("AWS" | "ON_PREMISES")
       attr_accessor multicast_settings: Types::MulticastSettings
       attr_accessor smpte_2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings
       attr_accessor sdi_sources: ::Array[::String]
+      attr_accessor router_settings: Types::RouterInputSettings
       SENSITIVE: []
     end
 
@@ -2634,7 +2645,9 @@ module Aws::MediaLive
       SENSITIVE: []
     end
 
-    class PipelineLockingSettings < Aws::EmptyStructure
+    class PipelineLockingSettings
+      attr_accessor pipeline_locking_method: ("SOURCE_TIMECODE" | "VIDEO_ALIGNMENT")
+      SENSITIVE: []
     end
 
     class PipelinePauseStateSettings
@@ -2951,6 +2964,7 @@ module Aws::MediaLive
       attr_accessor vpc: Types::VpcOutputSettingsDescription
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -3068,6 +3082,7 @@ module Aws::MediaLive
       attr_accessor vpc: Types::VpcOutputSettingsDescription
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -3259,6 +3274,7 @@ module Aws::MediaLive
       attr_accessor channel_engine_version: Types::ChannelEngineVersionRequest
       attr_accessor dry_run: bool
       attr_accessor anywhere_settings: Types::AnywhereSettings
+      attr_accessor linked_channel_settings: Types::LinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -3294,6 +3310,7 @@ module Aws::MediaLive
       attr_accessor channel_engine_version: Types::ChannelEngineVersionRequest
       attr_accessor dry_run: bool
       attr_accessor anywhere_settings: Types::AnywhereSettings
+      attr_accessor linked_channel_settings: Types::LinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -3319,6 +3336,7 @@ module Aws::MediaLive
       attr_accessor multicast_settings: Types::MulticastSettingsUpdateRequest
       attr_accessor smpte_2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings
       attr_accessor sdi_sources: ::Array[::String]
+      attr_accessor special_router_settings: Types::SpecialRouterSettings
       SENSITIVE: []
     end
 
@@ -3372,6 +3390,7 @@ module Aws::MediaLive
       attr_accessor multicast_settings: Types::MulticastSettingsUpdateRequest
       attr_accessor smpte_2110_receiver_group_settings: Types::Smpte2110ReceiverGroupSettings
       attr_accessor sdi_sources: ::Array[::String]
+      attr_accessor special_router_settings: Types::SpecialRouterSettings
       SENSITIVE: []
     end
 
@@ -3600,6 +3619,7 @@ module Aws::MediaLive
       attr_accessor vpc: Types::VpcOutputSettingsDescription
       attr_accessor anywhere_settings: Types::DescribeAnywhereSettings
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
+      attr_accessor linked_channel_settings: Types::DescribeLinkedChannelSettings
       SENSITIVE: []
     end
 
@@ -4772,6 +4792,8 @@ module Aws::MediaLive
       attr_accessor bitrate: ::Integer
       attr_accessor rate_control_mode: ("CBR" | "QVBR")
       attr_accessor min_bitrate: ::Integer
+      attr_accessor spatial_aq: ("DISABLED" | "ENABLED")
+      attr_accessor temporal_aq: ("DISABLED" | "ENABLED")
       SENSITIVE: []
     end
 
@@ -5694,6 +5716,168 @@ module Aws::MediaLive
       attr_accessor timed_metadata_id_3_frame: ("NONE" | "PRIV" | "TDRL")
       attr_accessor timed_metadata_id_3_period: ::Integer
       attr_accessor timed_metadata_passthrough: ("DISABLED" | "ENABLED")
+      SENSITIVE: []
+    end
+
+    class ChannelAlert
+      attr_accessor alert_type: ::String
+      attr_accessor cleared_timestamp: ::Time
+      attr_accessor id: ::String
+      attr_accessor message: ::String
+      attr_accessor pipeline_id: ::String
+      attr_accessor set_timestamp: ::Time
+      attr_accessor state: ("SET" | "CLEARED")
+      SENSITIVE: []
+    end
+
+    class ClusterAlert
+      attr_accessor alert_type: ::String
+      attr_accessor channel_id: ::String
+      attr_accessor cleared_timestamp: ::Time
+      attr_accessor id: ::String
+      attr_accessor message: ::String
+      attr_accessor node_id: ::String
+      attr_accessor set_timestamp: ::Time
+      attr_accessor state: ("SET" | "CLEARED")
+      SENSITIVE: []
+    end
+
+    class ListAlertsRequest
+      attr_accessor channel_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor state_filter: ::String
+      SENSITIVE: []
+    end
+
+    class ListAlertsResponse
+      attr_accessor alerts: ::Array[Types::ChannelAlert]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAlertsResultModel
+      attr_accessor alerts: ::Array[Types::ChannelAlert]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClusterAlertsRequest
+      attr_accessor cluster_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor state_filter: ::String
+      SENSITIVE: []
+    end
+
+    class ListClusterAlertsResponse
+      attr_accessor alerts: ::Array[Types::ClusterAlert]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClusterAlertsResultModel
+      attr_accessor alerts: ::Array[Types::ClusterAlert]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMultiplexAlertsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor multiplex_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor state_filter: ::String
+      SENSITIVE: []
+    end
+
+    class ListMultiplexAlertsResponse
+      attr_accessor alerts: ::Array[Types::MultiplexAlert]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMultiplexAlertsResultModel
+      attr_accessor alerts: ::Array[Types::MultiplexAlert]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MultiplexAlert
+      attr_accessor alert_type: ::String
+      attr_accessor cleared_timestamp: ::Time
+      attr_accessor id: ::String
+      attr_accessor message: ::String
+      attr_accessor pipeline_id: ::String
+      attr_accessor set_timestamp: ::Time
+      attr_accessor state: ("SET" | "CLEARED")
+      SENSITIVE: []
+    end
+
+    class Hlg2020Settings < Aws::EmptyStructure
+    end
+
+    class RouterDestination
+      attr_accessor availability_zone_name: ::String
+      attr_accessor router_output_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RouterDestinationSettings
+      attr_accessor availability_zone_name: ::String
+      SENSITIVE: []
+    end
+
+    class RouterInputSettings
+      attr_accessor destinations: ::Array[Types::RouterDestination]
+      attr_accessor encryption_type: ("AUTOMATIC" | "SECRETS_MANAGER")
+      attr_accessor secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RouterSettings
+      attr_accessor destinations: ::Array[Types::RouterDestinationSettings]
+      attr_accessor encryption_type: ("AUTOMATIC" | "SECRETS_MANAGER")
+      attr_accessor secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SpecialRouterSettings
+      attr_accessor router_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFollowerChannelSettings
+      attr_accessor linked_channel_type: ("FOLLOWING_CHANNEL" | "PRIMARY_CHANNEL")
+      attr_accessor primary_channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLinkedChannelSettings
+      attr_accessor follower_channel_settings: Types::DescribeFollowerChannelSettings
+      attr_accessor primary_channel_settings: Types::DescribePrimaryChannelSettings
+      SENSITIVE: []
+    end
+
+    class DescribePrimaryChannelSettings
+      attr_accessor following_channel_arns: ::Array[::String]
+      attr_accessor linked_channel_type: ("FOLLOWING_CHANNEL" | "PRIMARY_CHANNEL")
+      SENSITIVE: []
+    end
+
+    class FollowerChannelSettings
+      attr_accessor linked_channel_type: ("FOLLOWING_CHANNEL" | "PRIMARY_CHANNEL")
+      attr_accessor primary_channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LinkedChannelSettings
+      attr_accessor follower_channel_settings: Types::FollowerChannelSettings
+      attr_accessor primary_channel_settings: Types::PrimaryChannelSettings
+      SENSITIVE: []
+    end
+
+    class PrimaryChannelSettings
+      attr_accessor linked_channel_type: ("FOLLOWING_CHANNEL" | "PRIMARY_CHANNEL")
       SENSITIVE: []
     end
   end

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.148.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.147.0 (2025-10-28)
+------------------
+
+* Feature - Added IPv6 address support for WorkSpaces using Dual-Stack subnets
+
+1.146.0 (2025-10-22)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.145.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.144.0 (2025-08-26)
 ------------------
 

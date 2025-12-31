@@ -53,11 +53,14 @@ module Aws::MarketplaceAgreement
     GetAgreementTermsOutput = Shapes::StructureShape.new(name: 'GetAgreementTermsOutput')
     GrantItem = Shapes::StructureShape.new(name: 'GrantItem')
     GrantList = Shapes::ListShape.new(name: 'GrantList')
+    ISO8601Duration = Shapes::StringShape.new(name: 'ISO8601Duration')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     LegalTerm = Shapes::StructureShape.new(name: 'LegalTerm')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OfferId = Shapes::StringShape.new(name: 'OfferId')
+    OfferSetId = Shapes::StringShape.new(name: 'OfferSetId')
+    PaymentRequestApprovalStrategy = Shapes::StringShape.new(name: 'PaymentRequestApprovalStrategy')
     PaymentScheduleTerm = Shapes::StructureShape.new(name: 'PaymentScheduleTerm')
     PositiveIntegerWithDefaultValueOne = Shapes::IntegerShape.new(name: 'PositiveIntegerWithDefaultValueOne')
     ProposalSummary = Shapes::StructureShape.new(name: 'ProposalSummary')
@@ -93,31 +96,35 @@ module Aws::MarketplaceAgreement
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     ValidityTerm = Shapes::StructureShape.new(name: 'ValidityTerm')
+    VariablePaymentTerm = Shapes::StructureShape.new(name: 'VariablePaymentTerm')
+    VariablePaymentTermConfiguration = Shapes::StructureShape.new(name: 'VariablePaymentTermConfiguration')
     ZeroValueInteger = Shapes::IntegerShape.new(name: 'ZeroValueInteger')
 
-    AcceptedTerm.add_member(:byol_pricing_term, Shapes::ShapeRef.new(shape: ByolPricingTerm, location_name: "byolPricingTerm"))
-    AcceptedTerm.add_member(:configurable_upfront_pricing_term, Shapes::ShapeRef.new(shape: ConfigurableUpfrontPricingTerm, location_name: "configurableUpfrontPricingTerm"))
-    AcceptedTerm.add_member(:fixed_upfront_pricing_term, Shapes::ShapeRef.new(shape: FixedUpfrontPricingTerm, location_name: "fixedUpfrontPricingTerm"))
-    AcceptedTerm.add_member(:free_trial_pricing_term, Shapes::ShapeRef.new(shape: FreeTrialPricingTerm, location_name: "freeTrialPricingTerm"))
     AcceptedTerm.add_member(:legal_term, Shapes::ShapeRef.new(shape: LegalTerm, location_name: "legalTerm"))
-    AcceptedTerm.add_member(:payment_schedule_term, Shapes::ShapeRef.new(shape: PaymentScheduleTerm, location_name: "paymentScheduleTerm"))
-    AcceptedTerm.add_member(:recurring_payment_term, Shapes::ShapeRef.new(shape: RecurringPaymentTerm, location_name: "recurringPaymentTerm"))
-    AcceptedTerm.add_member(:renewal_term, Shapes::ShapeRef.new(shape: RenewalTerm, location_name: "renewalTerm"))
     AcceptedTerm.add_member(:support_term, Shapes::ShapeRef.new(shape: SupportTerm, location_name: "supportTerm"))
+    AcceptedTerm.add_member(:renewal_term, Shapes::ShapeRef.new(shape: RenewalTerm, location_name: "renewalTerm"))
     AcceptedTerm.add_member(:usage_based_pricing_term, Shapes::ShapeRef.new(shape: UsageBasedPricingTerm, location_name: "usageBasedPricingTerm"))
+    AcceptedTerm.add_member(:configurable_upfront_pricing_term, Shapes::ShapeRef.new(shape: ConfigurableUpfrontPricingTerm, location_name: "configurableUpfrontPricingTerm"))
+    AcceptedTerm.add_member(:byol_pricing_term, Shapes::ShapeRef.new(shape: ByolPricingTerm, location_name: "byolPricingTerm"))
+    AcceptedTerm.add_member(:recurring_payment_term, Shapes::ShapeRef.new(shape: RecurringPaymentTerm, location_name: "recurringPaymentTerm"))
     AcceptedTerm.add_member(:validity_term, Shapes::ShapeRef.new(shape: ValidityTerm, location_name: "validityTerm"))
+    AcceptedTerm.add_member(:payment_schedule_term, Shapes::ShapeRef.new(shape: PaymentScheduleTerm, location_name: "paymentScheduleTerm"))
+    AcceptedTerm.add_member(:free_trial_pricing_term, Shapes::ShapeRef.new(shape: FreeTrialPricingTerm, location_name: "freeTrialPricingTerm"))
+    AcceptedTerm.add_member(:fixed_upfront_pricing_term, Shapes::ShapeRef.new(shape: FixedUpfrontPricingTerm, location_name: "fixedUpfrontPricingTerm"))
+    AcceptedTerm.add_member(:variable_payment_term, Shapes::ShapeRef.new(shape: VariablePaymentTerm, location_name: "variablePaymentTerm"))
     AcceptedTerm.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    AcceptedTerm.add_member_subclass(:byol_pricing_term, Types::AcceptedTerm::ByolPricingTerm)
-    AcceptedTerm.add_member_subclass(:configurable_upfront_pricing_term, Types::AcceptedTerm::ConfigurableUpfrontPricingTerm)
-    AcceptedTerm.add_member_subclass(:fixed_upfront_pricing_term, Types::AcceptedTerm::FixedUpfrontPricingTerm)
-    AcceptedTerm.add_member_subclass(:free_trial_pricing_term, Types::AcceptedTerm::FreeTrialPricingTerm)
     AcceptedTerm.add_member_subclass(:legal_term, Types::AcceptedTerm::LegalTerm)
-    AcceptedTerm.add_member_subclass(:payment_schedule_term, Types::AcceptedTerm::PaymentScheduleTerm)
-    AcceptedTerm.add_member_subclass(:recurring_payment_term, Types::AcceptedTerm::RecurringPaymentTerm)
-    AcceptedTerm.add_member_subclass(:renewal_term, Types::AcceptedTerm::RenewalTerm)
     AcceptedTerm.add_member_subclass(:support_term, Types::AcceptedTerm::SupportTerm)
+    AcceptedTerm.add_member_subclass(:renewal_term, Types::AcceptedTerm::RenewalTerm)
     AcceptedTerm.add_member_subclass(:usage_based_pricing_term, Types::AcceptedTerm::UsageBasedPricingTerm)
+    AcceptedTerm.add_member_subclass(:configurable_upfront_pricing_term, Types::AcceptedTerm::ConfigurableUpfrontPricingTerm)
+    AcceptedTerm.add_member_subclass(:byol_pricing_term, Types::AcceptedTerm::ByolPricingTerm)
+    AcceptedTerm.add_member_subclass(:recurring_payment_term, Types::AcceptedTerm::RecurringPaymentTerm)
     AcceptedTerm.add_member_subclass(:validity_term, Types::AcceptedTerm::ValidityTerm)
+    AcceptedTerm.add_member_subclass(:payment_schedule_term, Types::AcceptedTerm::PaymentScheduleTerm)
+    AcceptedTerm.add_member_subclass(:free_trial_pricing_term, Types::AcceptedTerm::FreeTrialPricingTerm)
+    AcceptedTerm.add_member_subclass(:fixed_upfront_pricing_term, Types::AcceptedTerm::FixedUpfrontPricingTerm)
+    AcceptedTerm.add_member_subclass(:variable_payment_term, Types::AcceptedTerm::VariablePaymentTerm)
     AcceptedTerm.add_member_subclass(:unknown, Types::AcceptedTerm::Unknown)
     AcceptedTerm.struct_class = Types::AcceptedTerm
 
@@ -126,18 +133,18 @@ module Aws::MarketplaceAgreement
     Acceptor.add_member(:account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "accountId"))
     Acceptor.struct_class = Types::Acceptor
 
-    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     AccessDeniedException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "requestId"))
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
-    AgreementViewSummary.add_member(:acceptance_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "acceptanceTime"))
-    AgreementViewSummary.add_member(:acceptor, Shapes::ShapeRef.new(shape: Acceptor, location_name: "acceptor"))
     AgreementViewSummary.add_member(:agreement_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "agreementId"))
-    AgreementViewSummary.add_member(:agreement_type, Shapes::ShapeRef.new(shape: AgreementType, location_name: "agreementType"))
-    AgreementViewSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
-    AgreementViewSummary.add_member(:proposal_summary, Shapes::ShapeRef.new(shape: ProposalSummary, location_name: "proposalSummary"))
-    AgreementViewSummary.add_member(:proposer, Shapes::ShapeRef.new(shape: Proposer, location_name: "proposer"))
+    AgreementViewSummary.add_member(:acceptance_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "acceptanceTime"))
     AgreementViewSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
+    AgreementViewSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    AgreementViewSummary.add_member(:agreement_type, Shapes::ShapeRef.new(shape: AgreementType, location_name: "agreementType"))
+    AgreementViewSummary.add_member(:acceptor, Shapes::ShapeRef.new(shape: Acceptor, location_name: "acceptor"))
+    AgreementViewSummary.add_member(:proposer, Shapes::ShapeRef.new(shape: Proposer, location_name: "proposer"))
+    AgreementViewSummary.add_member(:proposal_summary, Shapes::ShapeRef.new(shape: ProposalSummary, location_name: "proposalSummary"))
     AgreementViewSummary.add_member(:status, Shapes::ShapeRef.new(shape: AgreementStatus, location_name: "status"))
     AgreementViewSummary.struct_class = Types::AgreementViewSummary
 
@@ -146,19 +153,19 @@ module Aws::MarketplaceAgreement
     ByolPricingTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
     ByolPricingTerm.struct_class = Types::ByolPricingTerm
 
-    ConfigurableUpfrontPricingTerm.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurableUpfrontPricingTermConfiguration, location_name: "configuration"))
+    ConfigurableUpfrontPricingTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
     ConfigurableUpfrontPricingTerm.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currencyCode"))
     ConfigurableUpfrontPricingTerm.add_member(:rate_cards, Shapes::ShapeRef.new(shape: ConfigurableUpfrontRateCardList, location_name: "rateCards"))
-    ConfigurableUpfrontPricingTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
+    ConfigurableUpfrontPricingTerm.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurableUpfrontPricingTermConfiguration, location_name: "configuration"))
     ConfigurableUpfrontPricingTerm.struct_class = Types::ConfigurableUpfrontPricingTerm
 
-    ConfigurableUpfrontPricingTermConfiguration.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionList, required: true, location_name: "dimensions"))
     ConfigurableUpfrontPricingTermConfiguration.add_member(:selector_value, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "selectorValue"))
+    ConfigurableUpfrontPricingTermConfiguration.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionList, required: true, location_name: "dimensions"))
     ConfigurableUpfrontPricingTermConfiguration.struct_class = Types::ConfigurableUpfrontPricingTermConfiguration
 
+    ConfigurableUpfrontRateCardItem.add_member(:selector, Shapes::ShapeRef.new(shape: Selector, location_name: "selector"))
     ConfigurableUpfrontRateCardItem.add_member(:constraints, Shapes::ShapeRef.new(shape: Constraints, location_name: "constraints"))
     ConfigurableUpfrontRateCardItem.add_member(:rate_card, Shapes::ShapeRef.new(shape: RateCardList, location_name: "rateCard"))
-    ConfigurableUpfrontRateCardItem.add_member(:selector, Shapes::ShapeRef.new(shape: Selector, location_name: "selector"))
     ConfigurableUpfrontRateCardItem.struct_class = Types::ConfigurableUpfrontRateCardItem
 
     ConfigurableUpfrontRateCardList.member = Shapes::ShapeRef.new(shape: ConfigurableUpfrontRateCardItem)
@@ -170,15 +177,15 @@ module Aws::MarketplaceAgreement
     DescribeAgreementInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "agreementId"))
     DescribeAgreementInput.struct_class = Types::DescribeAgreementInput
 
-    DescribeAgreementOutput.add_member(:acceptance_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "acceptanceTime"))
-    DescribeAgreementOutput.add_member(:acceptor, Shapes::ShapeRef.new(shape: Acceptor, location_name: "acceptor"))
     DescribeAgreementOutput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "agreementId"))
-    DescribeAgreementOutput.add_member(:agreement_type, Shapes::ShapeRef.new(shape: AgreementType, location_name: "agreementType"))
-    DescribeAgreementOutput.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
-    DescribeAgreementOutput.add_member(:estimated_charges, Shapes::ShapeRef.new(shape: EstimatedCharges, location_name: "estimatedCharges"))
-    DescribeAgreementOutput.add_member(:proposal_summary, Shapes::ShapeRef.new(shape: ProposalSummary, location_name: "proposalSummary"))
+    DescribeAgreementOutput.add_member(:acceptor, Shapes::ShapeRef.new(shape: Acceptor, location_name: "acceptor"))
     DescribeAgreementOutput.add_member(:proposer, Shapes::ShapeRef.new(shape: Proposer, location_name: "proposer"))
     DescribeAgreementOutput.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
+    DescribeAgreementOutput.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    DescribeAgreementOutput.add_member(:acceptance_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "acceptanceTime"))
+    DescribeAgreementOutput.add_member(:agreement_type, Shapes::ShapeRef.new(shape: AgreementType, location_name: "agreementType"))
+    DescribeAgreementOutput.add_member(:estimated_charges, Shapes::ShapeRef.new(shape: EstimatedCharges, location_name: "estimatedCharges"))
+    DescribeAgreementOutput.add_member(:proposal_summary, Shapes::ShapeRef.new(shape: ProposalSummary, location_name: "proposalSummary"))
     DescribeAgreementOutput.add_member(:status, Shapes::ShapeRef.new(shape: AgreementStatus, location_name: "status"))
     DescribeAgreementOutput.struct_class = Types::DescribeAgreementOutput
 
@@ -195,8 +202,8 @@ module Aws::MarketplaceAgreement
 
     DocumentList.member = Shapes::ShapeRef.new(shape: DocumentItem)
 
-    EstimatedCharges.add_member(:agreement_value, Shapes::ShapeRef.new(shape: BoundedString, location_name: "agreementValue"))
     EstimatedCharges.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currencyCode"))
+    EstimatedCharges.add_member(:agreement_value, Shapes::ShapeRef.new(shape: BoundedString, location_name: "agreementValue"))
     EstimatedCharges.struct_class = Types::EstimatedCharges
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "name"))
@@ -207,16 +214,16 @@ module Aws::MarketplaceAgreement
 
     FilterValueList.member = Shapes::ShapeRef.new(shape: FilterValue)
 
+    FixedUpfrontPricingTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
     FixedUpfrontPricingTerm.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currencyCode"))
     FixedUpfrontPricingTerm.add_member(:duration, Shapes::ShapeRef.new(shape: BoundedString, location_name: "duration"))
-    FixedUpfrontPricingTerm.add_member(:grants, Shapes::ShapeRef.new(shape: GrantList, location_name: "grants"))
     FixedUpfrontPricingTerm.add_member(:price, Shapes::ShapeRef.new(shape: BoundedString, location_name: "price"))
-    FixedUpfrontPricingTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
+    FixedUpfrontPricingTerm.add_member(:grants, Shapes::ShapeRef.new(shape: GrantList, location_name: "grants"))
     FixedUpfrontPricingTerm.struct_class = Types::FixedUpfrontPricingTerm
 
+    FreeTrialPricingTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
     FreeTrialPricingTerm.add_member(:duration, Shapes::ShapeRef.new(shape: BoundedString, location_name: "duration"))
     FreeTrialPricingTerm.add_member(:grants, Shapes::ShapeRef.new(shape: GrantList, location_name: "grants"))
-    FreeTrialPricingTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
     FreeTrialPricingTerm.struct_class = Types::FreeTrialPricingTerm
 
     GetAgreementTermsInput.add_member(:agreement_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "agreementId"))
@@ -234,21 +241,22 @@ module Aws::MarketplaceAgreement
 
     GrantList.member = Shapes::ShapeRef.new(shape: GrantItem)
 
-    InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     InternalServerException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "requestId"))
+    InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
-    LegalTerm.add_member(:documents, Shapes::ShapeRef.new(shape: DocumentList, location_name: "documents"))
     LegalTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
+    LegalTerm.add_member(:documents, Shapes::ShapeRef.new(shape: DocumentList, location_name: "documents"))
     LegalTerm.struct_class = Types::LegalTerm
 
+    PaymentScheduleTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
     PaymentScheduleTerm.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currencyCode"))
     PaymentScheduleTerm.add_member(:schedule, Shapes::ShapeRef.new(shape: ScheduleList, location_name: "schedule"))
-    PaymentScheduleTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
     PaymentScheduleTerm.struct_class = Types::PaymentScheduleTerm
 
-    ProposalSummary.add_member(:offer_id, Shapes::ShapeRef.new(shape: OfferId, location_name: "offerId"))
     ProposalSummary.add_member(:resources, Shapes::ShapeRef.new(shape: Resources, location_name: "resources"))
+    ProposalSummary.add_member(:offer_id, Shapes::ShapeRef.new(shape: OfferId, location_name: "offerId"))
+    ProposalSummary.add_member(:offer_set_id, Shapes::ShapeRef.new(shape: OfferSetId, location_name: "offerSetId"))
     ProposalSummary.struct_class = Types::ProposalSummary
 
     Proposer.add_member(:account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "accountId"))
@@ -260,14 +268,14 @@ module Aws::MarketplaceAgreement
 
     RateCardList.member = Shapes::ShapeRef.new(shape: RateCardItem)
 
-    RecurringPaymentTerm.add_member(:billing_period, Shapes::ShapeRef.new(shape: BoundedString, location_name: "billingPeriod"))
-    RecurringPaymentTerm.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currencyCode"))
-    RecurringPaymentTerm.add_member(:price, Shapes::ShapeRef.new(shape: BoundedString, location_name: "price"))
     RecurringPaymentTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
+    RecurringPaymentTerm.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currencyCode"))
+    RecurringPaymentTerm.add_member(:billing_period, Shapes::ShapeRef.new(shape: BoundedString, location_name: "billingPeriod"))
+    RecurringPaymentTerm.add_member(:price, Shapes::ShapeRef.new(shape: BoundedString, location_name: "price"))
     RecurringPaymentTerm.struct_class = Types::RecurringPaymentTerm
 
-    RenewalTerm.add_member(:configuration, Shapes::ShapeRef.new(shape: RenewalTermConfiguration, location_name: "configuration"))
     RenewalTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
+    RenewalTerm.add_member(:configuration, Shapes::ShapeRef.new(shape: RenewalTermConfiguration, location_name: "configuration"))
     RenewalTerm.struct_class = Types::RenewalTerm
 
     RenewalTermConfiguration.add_member(:enable_auto_renew, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enableAutoRenew"))
@@ -277,25 +285,25 @@ module Aws::MarketplaceAgreement
     Resource.add_member(:type, Shapes::ShapeRef.new(shape: AgreementResourceType, location_name: "type"))
     Resource.struct_class = Types::Resource
 
-    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ResourceNotFoundException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "requestId"))
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "resourceId"))
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     Resources.member = Shapes::ShapeRef.new(shape: Resource)
 
-    ScheduleItem.add_member(:charge_amount, Shapes::ShapeRef.new(shape: BoundedString, location_name: "chargeAmount"))
     ScheduleItem.add_member(:charge_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "chargeDate"))
+    ScheduleItem.add_member(:charge_amount, Shapes::ShapeRef.new(shape: BoundedString, location_name: "chargeAmount"))
     ScheduleItem.struct_class = Types::ScheduleItem
 
     ScheduleList.member = Shapes::ShapeRef.new(shape: ScheduleItem)
 
     SearchAgreementsInput.add_member(:catalog, Shapes::ShapeRef.new(shape: Catalog, location_name: "catalog"))
     SearchAgreementsInput.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
+    SearchAgreementsInput.add_member(:sort, Shapes::ShapeRef.new(shape: Sort, location_name: "sort"))
     SearchAgreementsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     SearchAgreementsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    SearchAgreementsInput.add_member(:sort, Shapes::ShapeRef.new(shape: Sort, location_name: "sort"))
     SearchAgreementsInput.struct_class = Types::SearchAgreementsInput
 
     SearchAgreementsOutput.add_member(:agreement_view_summaries, Shapes::ShapeRef.new(shape: AgreementViewSummaryList, location_name: "agreementViewSummaries"))
@@ -310,17 +318,17 @@ module Aws::MarketplaceAgreement
     Sort.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "sortOrder"))
     Sort.struct_class = Types::Sort
 
-    SupportTerm.add_member(:refund_policy, Shapes::ShapeRef.new(shape: BoundedString, location_name: "refundPolicy"))
     SupportTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
+    SupportTerm.add_member(:refund_policy, Shapes::ShapeRef.new(shape: BoundedString, location_name: "refundPolicy"))
     SupportTerm.struct_class = Types::SupportTerm
 
-    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ThrottlingException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "requestId"))
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    UsageBasedPricingTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
     UsageBasedPricingTerm.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currencyCode"))
     UsageBasedPricingTerm.add_member(:rate_cards, Shapes::ShapeRef.new(shape: UsageBasedRateCardList, location_name: "rateCards"))
-    UsageBasedPricingTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
     UsageBasedPricingTerm.struct_class = Types::UsageBasedPricingTerm
 
     UsageBasedRateCardItem.add_member(:rate_card, Shapes::ShapeRef.new(shape: RateCardList, location_name: "rateCard"))
@@ -328,23 +336,33 @@ module Aws::MarketplaceAgreement
 
     UsageBasedRateCardList.member = Shapes::ShapeRef.new(shape: UsageBasedRateCardItem)
 
-    ValidationException.add_member(:fields, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fields"))
+    ValidationException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "requestId"))
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "reason"))
-    ValidationException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "requestId"))
+    ValidationException.add_member(:fields, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fields"))
     ValidationException.struct_class = Types::ValidationException
 
-    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "message"))
     ValidationExceptionField.add_member(:name, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "name"))
+    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "message"))
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
 
-    ValidityTerm.add_member(:agreement_duration, Shapes::ShapeRef.new(shape: BoundedString, location_name: "agreementDuration"))
-    ValidityTerm.add_member(:agreement_end_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "agreementEndDate"))
-    ValidityTerm.add_member(:agreement_start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "agreementStartDate"))
     ValidityTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
+    ValidityTerm.add_member(:agreement_duration, Shapes::ShapeRef.new(shape: BoundedString, location_name: "agreementDuration"))
+    ValidityTerm.add_member(:agreement_start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "agreementStartDate"))
+    ValidityTerm.add_member(:agreement_end_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "agreementEndDate"))
     ValidityTerm.struct_class = Types::ValidityTerm
+
+    VariablePaymentTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
+    VariablePaymentTerm.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currencyCode"))
+    VariablePaymentTerm.add_member(:max_total_charge_amount, Shapes::ShapeRef.new(shape: BoundedString, location_name: "maxTotalChargeAmount"))
+    VariablePaymentTerm.add_member(:configuration, Shapes::ShapeRef.new(shape: VariablePaymentTermConfiguration, location_name: "configuration"))
+    VariablePaymentTerm.struct_class = Types::VariablePaymentTerm
+
+    VariablePaymentTermConfiguration.add_member(:payment_request_approval_strategy, Shapes::ShapeRef.new(shape: PaymentRequestApprovalStrategy, required: true, location_name: "paymentRequestApprovalStrategy"))
+    VariablePaymentTermConfiguration.add_member(:expiration_duration, Shapes::ShapeRef.new(shape: ISO8601Duration, location_name: "expirationDuration"))
+    VariablePaymentTermConfiguration.struct_class = Types::VariablePaymentTermConfiguration
 
 
     # @api private
@@ -354,9 +372,11 @@ module Aws::MarketplaceAgreement
 
       api.metadata = {
         "apiVersion" => "2020-03-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "agreement-marketplace",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Agreement Service",
         "serviceFullName" => "AWS Marketplace Agreement Service",
         "serviceId" => "Marketplace Agreement",
@@ -374,8 +394,8 @@ module Aws::MarketplaceAgreement
         o.output = Shapes::ShapeRef.new(shape: DescribeAgreementOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -387,8 +407,8 @@ module Aws::MarketplaceAgreement
         o.output = Shapes::ShapeRef.new(shape: GetAgreementTermsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

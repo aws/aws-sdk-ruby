@@ -34,6 +34,9 @@ module Aws::EntityResolution
     CreateMatchingWorkflowOutput = Shapes::StructureShape.new(name: 'CreateMatchingWorkflowOutput')
     CreateSchemaMappingInput = Shapes::StructureShape.new(name: 'CreateSchemaMappingInput')
     CreateSchemaMappingOutput = Shapes::StructureShape.new(name: 'CreateSchemaMappingOutput')
+    CustomerProfilesDomainArn = Shapes::StringShape.new(name: 'CustomerProfilesDomainArn')
+    CustomerProfilesIntegrationConfig = Shapes::StructureShape.new(name: 'CustomerProfilesIntegrationConfig')
+    CustomerProfilesObjectTypeArn = Shapes::StringShape.new(name: 'CustomerProfilesObjectTypeArn')
     DeleteIdMappingWorkflowInput = Shapes::StructureShape.new(name: 'DeleteIdMappingWorkflowInput')
     DeleteIdMappingWorkflowOutput = Shapes::StructureShape.new(name: 'DeleteIdMappingWorkflowOutput')
     DeleteIdNamespaceInput = Shapes::StructureShape.new(name: 'DeleteIdNamespaceInput')
@@ -164,6 +167,7 @@ module Aws::EntityResolution
     NamespaceRuleBasedProperties = Shapes::StructureShape.new(name: 'NamespaceRuleBasedProperties')
     NamespaceRuleBasedPropertiesRulesList = Shapes::ListShape.new(name: 'NamespaceRuleBasedPropertiesRulesList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OptionalS3Path = Shapes::StringShape.new(name: 'OptionalS3Path')
     OutputAttribute = Shapes::StructureShape.new(name: 'OutputAttribute')
     OutputSource = Shapes::StructureShape.new(name: 'OutputSource')
     OutputSourceConfig = Shapes::ListShape.new(name: 'OutputSourceConfig')
@@ -358,6 +362,10 @@ module Aws::EntityResolution
     CreateSchemaMappingOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "description"))
     CreateSchemaMappingOutput.add_member(:mapped_input_fields, Shapes::ShapeRef.new(shape: SchemaInputAttributes, required: true, location_name: "mappedInputFields"))
     CreateSchemaMappingOutput.struct_class = Types::CreateSchemaMappingOutput
+
+    CustomerProfilesIntegrationConfig.add_member(:domain_arn, Shapes::ShapeRef.new(shape: CustomerProfilesDomainArn, required: true, location_name: "domainArn"))
+    CustomerProfilesIntegrationConfig.add_member(:object_type_arn, Shapes::ShapeRef.new(shape: CustomerProfilesObjectTypeArn, required: true, location_name: "objectTypeArn"))
+    CustomerProfilesIntegrationConfig.struct_class = Types::CustomerProfilesIntegrationConfig
 
     DeleteIdMappingWorkflowInput.add_member(:workflow_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location: "uri", location_name: "workflowName"))
     DeleteIdMappingWorkflowInput.struct_class = Types::DeleteIdMappingWorkflowInput
@@ -603,8 +611,8 @@ module Aws::EntityResolution
 
     IdMappingWorkflowList.member = Shapes::ShapeRef.new(shape: IdMappingWorkflowSummary)
 
-    IdMappingWorkflowOutputSource.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: S3Path, required: true, location_name: "outputS3Path"))
     IdMappingWorkflowOutputSource.add_member(:kms_arn, Shapes::ShapeRef.new(shape: KMSArn, location_name: "KMSArn"))
+    IdMappingWorkflowOutputSource.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: S3Path, required: true, location_name: "outputS3Path"))
     IdMappingWorkflowOutputSource.struct_class = Types::IdMappingWorkflowOutputSource
 
     IdMappingWorkflowOutputSourceConfig.member = Shapes::ShapeRef.new(shape: IdMappingWorkflowOutputSource)
@@ -787,10 +795,11 @@ module Aws::EntityResolution
     OutputAttribute.add_member(:hashed, Shapes::ShapeRef.new(shape: Boolean, location_name: "hashed"))
     OutputAttribute.struct_class = Types::OutputAttribute
 
-    OutputSource.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: S3Path, required: true, location_name: "outputS3Path"))
     OutputSource.add_member(:kms_arn, Shapes::ShapeRef.new(shape: KMSArn, location_name: "KMSArn"))
+    OutputSource.add_member(:output_s3_path, Shapes::ShapeRef.new(shape: OptionalS3Path, location_name: "outputS3Path"))
     OutputSource.add_member(:output, Shapes::ShapeRef.new(shape: OutputSourceOutputList, required: true, location_name: "output"))
     OutputSource.add_member(:apply_normalization, Shapes::ShapeRef.new(shape: Boolean, location_name: "applyNormalization"))
+    OutputSource.add_member(:customer_profiles_integration_config, Shapes::ShapeRef.new(shape: CustomerProfilesIntegrationConfig, location_name: "customerProfilesIntegrationConfig"))
     OutputSource.struct_class = Types::OutputSource
 
     OutputSourceConfig.member = Shapes::ShapeRef.new(shape: OutputSource)

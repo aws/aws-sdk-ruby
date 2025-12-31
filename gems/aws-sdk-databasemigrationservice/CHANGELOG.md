@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.135.0 (2025-11-20)
+------------------
+
+* Feature - Added support for customer-managed KMS key (CMK) for encryption for import private key certificate. Additionally added Amazon SageMaker Lakehouse endpoint used for zero-ETL integrations with data warehouses.
+
+1.134.0 (2025-11-17)
+------------------
+
+* Feature - This release introduces the SAP ASE(Sybase) Data Provider for AWS Data Migration Service (DMS). In addition, DMS Schema Conversion now supports this provider, enabling customers to migrate SAP ASE(Sybase) databases to Amazon RDS for PostgreSQL or Aurora PostgreSQL seamlessly.
+
+1.133.0 (2025-11-12)
+------------------
+
+* Feature - Added support of SQL statements creation, metadata model discovery and selection rules transformation.
+
+1.132.0 (2025-10-23)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.131.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.130.0 (2025-10-01)
 ------------------
 

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2025-12-01)
+------------------
+
+* Feature - Amazon Connect now supports message processing that intercepts and processes chat messages before they reach any participant.
+
+1.73.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.72.0 (2025-10-22)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.71.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.70.0 (2025-08-26)
 ------------------
 

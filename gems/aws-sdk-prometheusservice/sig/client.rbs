@@ -90,6 +90,43 @@ module Aws
                                            ) -> _CreateAlertManagerDefinitionResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAlertManagerDefinitionResponseSuccess
 
+      interface _CreateAnomalyDetectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAnomalyDetectorResponse]
+        def anomaly_detector_id: () -> ::String
+        def arn: () -> ::String
+        def status: () -> Types::AnomalyDetectorStatus
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#create_anomaly_detector-instance_method
+      def create_anomaly_detector: (
+                                     workspace_id: ::String,
+                                     alias: ::String,
+                                     ?evaluation_interval_in_seconds: ::Integer,
+                                     ?missing_data_action: {
+                                       mark_as_anomaly: bool?,
+                                       skip: bool?
+                                     },
+                                     configuration: {
+                                       random_cut_forest: {
+                                         query: ::String,
+                                         shingle_size: ::Integer?,
+                                         sample_size: ::Integer?,
+                                         ignore_near_expected_from_above: {
+                                           amount: ::Float?,
+                                           ratio: ::Float?
+                                         }?,
+                                         ignore_near_expected_from_below: {
+                                           amount: ::Float?,
+                                           ratio: ::Float?
+                                         }?
+                                       }?
+                                     },
+                                     ?labels: Hash[::String, ::String],
+                                     ?client_token: ::String,
+                                     ?tags: Hash[::String, ::String]
+                                   ) -> _CreateAnomalyDetectorResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAnomalyDetectorResponseSuccess
+
       interface _CreateLoggingConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateLoggingConfigurationResponse]
         def status: () -> Types::LoggingConfigurationStatus
@@ -158,6 +195,10 @@ module Aws
                                 cluster_arn: ::String,
                                 security_group_ids: Array[::String]?,
                                 subnet_ids: Array[::String]
+                              }?,
+                              vpc_configuration: {
+                                security_group_ids: Array[::String],
+                                subnet_ids: Array[::String]
                               }?
                             },
                             destination: {
@@ -197,6 +238,14 @@ module Aws
                                              ?client_token: ::String
                                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#delete_anomaly_detector-instance_method
+      def delete_anomaly_detector: (
+                                     workspace_id: ::String,
+                                     anomaly_detector_id: ::String,
+                                     ?client_token: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#delete_logging_configuration-instance_method
       def delete_logging_configuration: (
@@ -263,6 +312,17 @@ module Aws
                                                workspace_id: ::String
                                              ) -> _DescribeAlertManagerDefinitionResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAlertManagerDefinitionResponseSuccess
+
+      interface _DescribeAnomalyDetectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAnomalyDetectorResponse]
+        def anomaly_detector: () -> Types::AnomalyDetectorDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#describe_anomaly_detector-instance_method
+      def describe_anomaly_detector: (
+                                       workspace_id: ::String,
+                                       anomaly_detector_id: ::String
+                                     ) -> _DescribeAnomalyDetectorResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAnomalyDetectorResponseSuccess
 
       interface _DescribeLoggingConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLoggingConfigurationResponse]
@@ -360,6 +420,20 @@ module Aws
                                              ) -> _GetDefaultScraperConfigurationResponseSuccess
                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDefaultScraperConfigurationResponseSuccess
 
+      interface _ListAnomalyDetectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAnomalyDetectorsResponse]
+        def anomaly_detectors: () -> ::Array[Types::AnomalyDetectorSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#list_anomaly_detectors-instance_method
+      def list_anomaly_detectors: (
+                                    workspace_id: ::String,
+                                    ?alias: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListAnomalyDetectorsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAnomalyDetectorsResponseSuccess
+
       interface _ListRuleGroupsNamespacesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRuleGroupsNamespacesResponse]
         def rule_groups_namespaces: () -> ::Array[Types::RuleGroupsNamespaceSummary]
@@ -421,6 +495,42 @@ module Aws
                                           ?client_token: ::String
                                         ) -> _PutAlertManagerDefinitionResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAlertManagerDefinitionResponseSuccess
+
+      interface _PutAnomalyDetectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAnomalyDetectorResponse]
+        def anomaly_detector_id: () -> ::String
+        def arn: () -> ::String
+        def status: () -> Types::AnomalyDetectorStatus
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#put_anomaly_detector-instance_method
+      def put_anomaly_detector: (
+                                  workspace_id: ::String,
+                                  anomaly_detector_id: ::String,
+                                  ?evaluation_interval_in_seconds: ::Integer,
+                                  ?missing_data_action: {
+                                    mark_as_anomaly: bool?,
+                                    skip: bool?
+                                  },
+                                  configuration: {
+                                    random_cut_forest: {
+                                      query: ::String,
+                                      shingle_size: ::Integer?,
+                                      sample_size: ::Integer?,
+                                      ignore_near_expected_from_above: {
+                                        amount: ::Float?,
+                                        ratio: ::Float?
+                                      }?,
+                                      ignore_near_expected_from_below: {
+                                        amount: ::Float?,
+                                        ratio: ::Float?
+                                      }?
+                                    }?
+                                  },
+                                  ?labels: Hash[::String, ::String],
+                                  ?client_token: ::String
+                                ) -> _PutAnomalyDetectorResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAnomalyDetectorResponseSuccess
 
       interface _PutResourcePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
@@ -584,7 +694,17 @@ module Aws
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkspaceConfigurationResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PrometheusService/Client.html#wait_until-instance_method
-      def wait_until: (:scraper_active waiter_name, 
+      def wait_until: (:anomaly_detector_active waiter_name, 
+                    workspace_id: ::String,
+                    anomaly_detector_id: ::String
+                  ) -> Client::_DescribeAnomalyDetectorResponseSuccess
+                    | (:anomaly_detector_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAnomalyDetectorResponseSuccess
+                    | (:anomaly_detector_deleted waiter_name, 
+                    workspace_id: ::String,
+                    anomaly_detector_id: ::String
+                  ) -> Client::_DescribeAnomalyDetectorResponseSuccess
+                    | (:anomaly_detector_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAnomalyDetectorResponseSuccess
+                    | (:scraper_active waiter_name, 
                     scraper_id: ::String
                   ) -> Client::_DescribeScraperResponseSuccess
                     | (:scraper_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeScraperResponseSuccess

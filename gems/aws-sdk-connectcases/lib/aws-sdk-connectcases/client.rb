@@ -489,12 +489,13 @@ module Aws::ConnectCases
     #   Unique identifier of a Cases domain.
     #
     # @option params [required, Array<Types::CaseRuleIdentifier>] :case_rules
-    #   List of case rule identifiers.
+    #   A list of case rule identifiers.
     #
     # @return [Types::BatchGetCaseRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchGetCaseRuleResponse#case_rules #case_rules} => Array&lt;Types::GetCaseRuleResponse&gt;
     #   * {Types::BatchGetCaseRuleResponse#errors #errors} => Array&lt;Types::CaseRuleError&gt;
+    #   * {Types::BatchGetCaseRuleResponse#unprocessed_case_rules #unprocessed_case_rules} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -525,6 +526,24 @@ module Aws::ConnectCases
     #   resp.case_rules[0].rule.required.conditions[0].not_equal_to.operand_two.boolean_value #=> Boolean
     #   resp.case_rules[0].rule.required.conditions[0].not_equal_to.operand_two.double_value #=> Float
     #   resp.case_rules[0].rule.required.conditions[0].not_equal_to.result #=> Boolean
+    #   resp.case_rules[0].rule.field_options.parent_field_id #=> String
+    #   resp.case_rules[0].rule.field_options.child_field_id #=> String
+    #   resp.case_rules[0].rule.field_options.parent_child_field_options_mappings #=> Array
+    #   resp.case_rules[0].rule.field_options.parent_child_field_options_mappings[0].parent_field_option_value #=> String
+    #   resp.case_rules[0].rule.field_options.parent_child_field_options_mappings[0].child_field_option_values #=> Array
+    #   resp.case_rules[0].rule.field_options.parent_child_field_options_mappings[0].child_field_option_values[0] #=> String
+    #   resp.case_rules[0].rule.hidden.default_value #=> Boolean
+    #   resp.case_rules[0].rule.hidden.conditions #=> Array
+    #   resp.case_rules[0].rule.hidden.conditions[0].equal_to.operand_one.field_id #=> String
+    #   resp.case_rules[0].rule.hidden.conditions[0].equal_to.operand_two.string_value #=> String
+    #   resp.case_rules[0].rule.hidden.conditions[0].equal_to.operand_two.boolean_value #=> Boolean
+    #   resp.case_rules[0].rule.hidden.conditions[0].equal_to.operand_two.double_value #=> Float
+    #   resp.case_rules[0].rule.hidden.conditions[0].equal_to.result #=> Boolean
+    #   resp.case_rules[0].rule.hidden.conditions[0].not_equal_to.operand_one.field_id #=> String
+    #   resp.case_rules[0].rule.hidden.conditions[0].not_equal_to.operand_two.string_value #=> String
+    #   resp.case_rules[0].rule.hidden.conditions[0].not_equal_to.operand_two.boolean_value #=> Boolean
+    #   resp.case_rules[0].rule.hidden.conditions[0].not_equal_to.operand_two.double_value #=> Float
+    #   resp.case_rules[0].rule.hidden.conditions[0].not_equal_to.result #=> Boolean
     #   resp.case_rules[0].description #=> String
     #   resp.case_rules[0].deleted #=> Boolean
     #   resp.case_rules[0].created_time #=> Time
@@ -535,6 +554,8 @@ module Aws::ConnectCases
     #   resp.errors[0].id #=> String
     #   resp.errors[0].error_code #=> String
     #   resp.errors[0].message #=> String
+    #   resp.unprocessed_case_rules #=> Array
+    #   resp.unprocessed_case_rules[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BatchGetCaseRule AWS API Documentation
     #
@@ -803,6 +824,49 @@ module Aws::ConnectCases
     #           },
     #         ],
     #       },
+    #       field_options: {
+    #         parent_field_id: "FieldId",
+    #         child_field_id: "FieldId",
+    #         parent_child_field_options_mappings: [ # required
+    #           {
+    #             parent_field_option_value: "ParentChildFieldOptionValue", # required
+    #             child_field_option_values: ["ParentChildFieldOptionValue"], # required
+    #           },
+    #         ],
+    #       },
+    #       hidden: {
+    #         default_value: false, # required
+    #         conditions: [ # required
+    #           {
+    #             equal_to: {
+    #               operand_one: { # required
+    #                 field_id: "FieldId",
+    #               },
+    #               operand_two: { # required
+    #                 string_value: "OperandTwoStringValueString",
+    #                 boolean_value: false,
+    #                 double_value: 1.0,
+    #                 empty_value: {
+    #                 },
+    #               },
+    #               result: false, # required
+    #             },
+    #             not_equal_to: {
+    #               operand_one: { # required
+    #                 field_id: "FieldId",
+    #               },
+    #               operand_two: { # required
+    #                 string_value: "OperandTwoStringValueString",
+    #                 boolean_value: false,
+    #                 double_value: 1.0,
+    #                 empty_value: {
+    #                 },
+    #               },
+    #               result: false, # required
+    #             },
+    #           },
+    #         ],
+    #       },
     #     },
     #   })
     #
@@ -994,23 +1058,54 @@ module Aws::ConnectCases
     # Creates a related item (comments, tasks, and contacts) and associates
     # it with a case.
     #
-    # <note markdown="1"> * A Related Item is a resource that is associated with a case. It may
+    # There's a quota for the number of fields allowed in a Custom type
+    # related item. See [Amazon Connect Cases quotas][1].
+    #
+    # **Use cases**
+    #
+    # Following are examples of related items that you may want to associate
+    # with a case:
+    #
+    # * Related contacts, such as calls, chats, emails tasks
+    #
+    # * Comments, for agent notes
+    #
+    # * SLAs, to capture target resolution goals
+    #
+    # * Cases, to capture related Amazon Connect Cases
+    #
+    # * Files, such as policy documentation or customer-provided attachments
+    #
+    # * Custom related items, which provide flexibility for you to define
+    #   related items that such as bookings, orders, products, notices, and
+    #   more
+    #
+    # **Important things to know**
+    #
+    # * If you are associating a contact to a case by passing in `Contact`
+    #   for a `type`, you must have [DescribeContact][2] permission on the
+    #   ARN of the contact that you provide in `content.contact.contactArn`.
+    #
+    # * A Related Item is a resource that is associated with a case. It may
     #   or may not have an external identifier linking it to an external
     #   resource (for example, a `contactArn`). All Related Items have their
     #   own internal identifier, the `relatedItemArn`. Examples of related
     #   items include `comments` and `contacts`.
     #
     # * If you provide a value for `performedBy.userArn` you must also have
-    #   [DescribeUser][1] permission on the ARN of the user that you
+    #   [DescribeUser][3] permission on the ARN of the user that you
     #   provide.
     #
     # * The `type` field is reserved for internal use only.
     #
-    #  </note>
+    # **Endpoints**: See [Amazon Connect endpoints and quotas][4].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeContact.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
+    # [4]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
     #
     # @option params [required, String] :domain_id
     #   The unique identifier of the Cases domain.
@@ -1182,7 +1277,7 @@ module Aws::ConnectCases
     #     rules: [
     #       {
     #         case_rule_id: "CaseRuleId", # required
-    #         field_id: "FieldId", # required
+    #         field_id: "FieldId",
     #       },
     #     ],
     #   })
@@ -1317,11 +1412,11 @@ module Aws::ConnectCases
     # * Deleted fields are not included in the `ListFields` response.
     #
     # * Calling `CreateCase` with a deleted field throws a
-    #   `ValidationException` denoting which field IDs in the request have
-    #   been deleted.
+    #   `ValidationException` denoting which field identifiers in the
+    #   request have been deleted.
     #
-    # * Calling `GetCase` with a deleted field ID returns the deleted
-    #   field's value if one exists.
+    # * Calling `GetCase` with a deleted field identifier returns the
+    #   deleted field's value if one exists.
     #
     # * Calling `UpdateCase` with a deleted field ID throws a
     #   `ValidationException` if the case does not already contain a value
@@ -1844,7 +1939,7 @@ module Aws::ConnectCases
     #   resp.case_rules[0].case_rule_id #=> String
     #   resp.case_rules[0].name #=> String
     #   resp.case_rules[0].case_rule_arn #=> String
-    #   resp.case_rules[0].rule_type #=> String, one of "Required"
+    #   resp.case_rules[0].rule_type #=> String, one of "Required", "Hidden", "FieldOptions"
     #   resp.case_rules[0].description #=> String
     #   resp.next_token #=> String
     #
@@ -2258,8 +2353,8 @@ module Aws::ConnectCases
     #
     # **Important things to know**
     #
-    # * This API returns case IDs, not complete case objects. To retrieve
-    #   full case details, you must make additional calls to the
+    # * This API returns case identifiers, not complete case objects. To
+    #   retrieve full case details, you must make additional calls to the
     #   [GetCase][2] API for each returned case ID.
     #
     # * This API searches across related items content, not case fields. Use
@@ -3015,6 +3110,49 @@ module Aws::ConnectCases
     #           },
     #         ],
     #       },
+    #       field_options: {
+    #         parent_field_id: "FieldId",
+    #         child_field_id: "FieldId",
+    #         parent_child_field_options_mappings: [ # required
+    #           {
+    #             parent_field_option_value: "ParentChildFieldOptionValue", # required
+    #             child_field_option_values: ["ParentChildFieldOptionValue"], # required
+    #           },
+    #         ],
+    #       },
+    #       hidden: {
+    #         default_value: false, # required
+    #         conditions: [ # required
+    #           {
+    #             equal_to: {
+    #               operand_one: { # required
+    #                 field_id: "FieldId",
+    #               },
+    #               operand_two: { # required
+    #                 string_value: "OperandTwoStringValueString",
+    #                 boolean_value: false,
+    #                 double_value: 1.0,
+    #                 empty_value: {
+    #                 },
+    #               },
+    #               result: false, # required
+    #             },
+    #             not_equal_to: {
+    #               operand_one: { # required
+    #                 field_id: "FieldId",
+    #               },
+    #               operand_two: { # required
+    #                 string_value: "OperandTwoStringValueString",
+    #                 boolean_value: false,
+    #                 double_value: 1.0,
+    #                 empty_value: {
+    #                 },
+    #               },
+    #               result: false, # required
+    #             },
+    #           },
+    #         ],
+    #       },
     #     },
     #   })
     #
@@ -3213,7 +3351,7 @@ module Aws::ConnectCases
     #     rules: [
     #       {
     #         case_rule_id: "CaseRuleId", # required
-    #         field_id: "FieldId", # required
+    #         field_id: "FieldId",
     #       },
     #     ],
     #   })
@@ -3245,7 +3383,7 @@ module Aws::ConnectCases
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

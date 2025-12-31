@@ -120,6 +120,7 @@ module Aws::GeoPlaces
     GetPlaceResponse = Shapes::StructureShape.new(name: 'GetPlaceResponse')
     GetPlaceResponsePlaceIdString = Shapes::StringShape.new(name: 'GetPlaceResponsePlaceIdString')
     GetPlaceResponseTitleString = Shapes::StringShape.new(name: 'GetPlaceResponseTitleString')
+    Heading = Shapes::FloatShape.new(name: 'Heading')
     Highlight = Shapes::StructureShape.new(name: 'Highlight')
     HighlightEndIndexInteger = Shapes::IntegerShape.new(name: 'HighlightEndIndexInteger')
     HighlightList = Shapes::ListShape.new(name: 'HighlightList')
@@ -226,6 +227,7 @@ module Aws::GeoPlaces
     SearchTextResultItemPlaceIdString = Shapes::StringShape.new(name: 'SearchTextResultItemPlaceIdString')
     SearchTextResultItemTitleString = Shapes::StringShape.new(name: 'SearchTextResultItemTitleString')
     SecondaryAddressComponent = Shapes::StructureShape.new(name: 'SecondaryAddressComponent')
+    SecondaryAddressComponentDesignatorString = Shapes::StringShape.new(name: 'SecondaryAddressComponentDesignatorString')
     SecondaryAddressComponentList = Shapes::ListShape.new(name: 'SecondaryAddressComponentList')
     SecondaryAddressComponentMatchScore = Shapes::StructureShape.new(name: 'SecondaryAddressComponentMatchScore')
     SecondaryAddressComponentMatchScoreList = Shapes::ListShape.new(name: 'SecondaryAddressComponentMatchScoreList')
@@ -694,6 +696,7 @@ module Aws::GeoPlaces
     ReverseGeocodeRequest.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode, location_name: "PoliticalView"))
     ReverseGeocodeRequest.add_member(:intended_use, Shapes::ShapeRef.new(shape: ReverseGeocodeIntendedUse, location_name: "IntendedUse"))
     ReverseGeocodeRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
+    ReverseGeocodeRequest.add_member(:heading, Shapes::ShapeRef.new(shape: Heading, location_name: "Heading"))
     ReverseGeocodeRequest.struct_class = Types::ReverseGeocodeRequest
 
     ReverseGeocodeResponse.add_member(:pricing_bucket, Shapes::ShapeRef.new(shape: String, required: true, location: "header", location_name: "x-amz-geo-pricing-bucket"))
@@ -818,6 +821,7 @@ module Aws::GeoPlaces
     SearchTextResultItemList.member = Shapes::ShapeRef.new(shape: SearchTextResultItem)
 
     SecondaryAddressComponent.add_member(:number, Shapes::ShapeRef.new(shape: SecondaryAddressComponentNumberString, required: true, location_name: "Number"))
+    SecondaryAddressComponent.add_member(:designator, Shapes::ShapeRef.new(shape: SecondaryAddressComponentDesignatorString, location_name: "Designator"))
     SecondaryAddressComponent.struct_class = Types::SecondaryAddressComponent
 
     SecondaryAddressComponentList.member = Shapes::ShapeRef.new(shape: SecondaryAddressComponent)

@@ -142,6 +142,19 @@ module Aws
                                        ) -> _BatchUpdateMemoryRecordsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateMemoryRecordsResponseSuccess
 
+      interface _CompleteResourceTokenAuthResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CompleteResourceTokenAuthResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#complete_resource_token_auth-instance_method
+      def complete_resource_token_auth: (
+                                          user_identifier: {
+                                            user_token: ::String?,
+                                            user_id: ::String?
+                                          },
+                                          session_uri: ::String
+                                        ) -> _CompleteResourceTokenAuthResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CompleteResourceTokenAuthResponseSuccess
+
       interface _CreateEventResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventOutput]
         def event: () -> Types::Event
@@ -198,6 +211,26 @@ module Aws
                                   memory_record_id: ::String
                                 ) -> _DeleteMemoryRecordResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMemoryRecordResponseSuccess
+
+      interface _EvaluateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EvaluateResponse]
+        def evaluation_results: () -> ::Array[Types::EvaluationResultContent]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#evaluate-instance_method
+      def evaluate: (
+                      evaluator_id: ::String,
+                      evaluation_input: {
+                        session_spans: Array[
+                          {
+                          },
+                        ]?
+                      },
+                      ?evaluation_target: {
+                        span_ids: Array[::String]?,
+                        trace_ids: Array[::String]?
+                      }
+                    ) -> _EvaluateResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EvaluateResponseSuccess
 
       interface _GetAgentCardResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAgentCardResponse]
@@ -288,6 +321,8 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceOauth2TokenResponse]
         def authorization_url: () -> ::String
         def access_token: () -> ::String
+        def session_uri: () -> ::String
+        def session_status: () -> ("IN_PROGRESS" | "FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_resource_oauth_2_token-instance_method
       def get_resource_oauth_2_token: (
@@ -295,9 +330,11 @@ module Aws
                                         resource_credential_provider_name: ::String,
                                         scopes: Array[::String],
                                         oauth2_flow: ("USER_FEDERATION" | "M2M"),
+                                        ?session_uri: ::String,
                                         ?resource_oauth_2_return_url: ::String,
                                         ?force_authentication: bool,
-                                        ?custom_parameters: Hash[::String, ::String]
+                                        ?custom_parameters: Hash[::String, ::String],
+                                        ?custom_state: ::String
                                       ) -> _GetResourceOauth2TokenResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceOauth2TokenResponseSuccess
 
@@ -360,6 +397,7 @@ module Aws
                                   ?baggage: ::String,
                                   agent_runtime_arn: ::String,
                                   ?qualifier: ::String,
+                                  ?account_id: ::String,
                                   payload: ::String
                                 ) ?{ (*untyped) -> void } -> _InvokeAgentRuntimeResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeAgentRuntimeResponseSuccess
@@ -472,6 +510,25 @@ module Aws
                        ) -> _ListEventsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventsResponseSuccess
 
+      interface _ListMemoryExtractionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMemoryExtractionJobsOutput]
+        def jobs: () -> ::Array[Types::ExtractionJobMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#list_memory_extraction_jobs-instance_method
+      def list_memory_extraction_jobs: (
+                                         memory_id: ::String,
+                                         ?max_results: ::Integer,
+                                         ?filter: {
+                                           strategy_id: ::String?,
+                                           session_id: ::String?,
+                                           actor_id: ::String?,
+                                           status: ("FAILED")?
+                                         },
+                                         ?next_token: ::String
+                                       ) -> _ListMemoryExtractionJobsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMemoryExtractionJobsResponseSuccess
+
       interface _ListMemoryRecordsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListMemoryRecordsOutput]
         def memory_record_summaries: () -> ::Array[Types::MemoryRecordSummary]
@@ -513,7 +570,20 @@ module Aws
                                      search_criteria: {
                                        search_query: ::String,
                                        memory_strategy_id: ::String?,
-                                       top_k: ::Integer?
+                                       top_k: ::Integer?,
+                                       metadata_filters: Array[
+                                         {
+                                           left: {
+                                             metadata_key: ::String?
+                                           },
+                                           operator: ("EQUALS_TO" | "EXISTS" | "NOT_EXISTS"),
+                                           right: {
+                                             metadata_value: {
+                                               string_value: ::String?
+                                             }?
+                                           }?
+                                         },
+                                       ]?
                                      },
                                      ?next_token: ::String,
                                      ?max_results: ::Integer
@@ -558,6 +628,20 @@ module Aws
                                             ?client_token: ::String
                                           ) -> _StartCodeInterpreterSessionResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCodeInterpreterSessionResponseSuccess
+
+      interface _StartMemoryExtractionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMemoryExtractionJobOutput]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#start_memory_extraction_job-instance_method
+      def start_memory_extraction_job: (
+                                         memory_id: ::String,
+                                         extraction_job: {
+                                           job_id: ::String
+                                         },
+                                         ?client_token: ::String
+                                       ) -> _StartMemoryExtractionJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMemoryExtractionJobResponseSuccess
 
       interface _StopBrowserSessionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopBrowserSessionResponse]

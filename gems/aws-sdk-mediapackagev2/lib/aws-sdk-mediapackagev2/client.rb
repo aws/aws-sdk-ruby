@@ -1176,6 +1176,7 @@ module Aws::MediaPackageV2
     #         }, 
     #         key_rotation_interval_seconds: 300, 
     #         speke_key_provider: {
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e", 
     #           drm_systems: [
     #             "CLEAR_KEY_AES_128", 
     #           ], 
@@ -1278,6 +1279,7 @@ module Aws::MediaPackageV2
     #         }, 
     #         key_rotation_interval_seconds: 300, 
     #         speke_key_provider: {
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e", 
     #           drm_systems: [
     #             "CLEAR_KEY_AES_128", 
     #           ], 
@@ -1479,6 +1481,7 @@ module Aws::MediaPackageV2
     #         }, 
     #         key_rotation_interval_seconds: 300, 
     #         speke_key_provider: {
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e", 
     #           drm_systems: [
     #             "PLAYREADY", 
     #             "WIDEVINE", 
@@ -1688,6 +1691,7 @@ module Aws::MediaPackageV2
     #         }, 
     #         key_rotation_interval_seconds: 300, 
     #         speke_key_provider: {
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e", 
     #           drm_systems: [
     #             "PLAYREADY", 
     #             "WIDEVINE", 
@@ -1839,6 +1843,7 @@ module Aws::MediaPackageV2
     #       ts_include_dvb_subtitles: false,
     #       scte: {
     #         scte_filter: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY, PROGRAM
+    #         scte_in_segments: "NONE", # accepts NONE, ALL
     #       },
     #       encryption: {
     #         constant_initialization_vector: "EncryptionConstantInitializationVectorString",
@@ -1858,6 +1863,7 @@ module Aws::MediaPackageV2
     #           drm_systems: ["CLEAR_KEY_AES_128"], # required, accepts CLEAR_KEY_AES_128, FAIRPLAY, PLAYREADY, WIDEVINE, IRDETO
     #           role_arn: "SpekeKeyProviderRoleArnString", # required
     #           url: "SpekeKeyProviderUrlString", # required
+    #           certificate_arn: "SpekeKeyProviderCertificateArnString",
     #         },
     #       },
     #     },
@@ -1879,6 +1885,7 @@ module Aws::MediaPackageV2
     #         program_date_time_interval_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           drm_settings: "FilterConfigurationDrmSettingsString",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
@@ -1902,6 +1909,7 @@ module Aws::MediaPackageV2
     #         program_date_time_interval_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           drm_settings: "FilterConfigurationDrmSettingsString",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
@@ -1916,6 +1924,7 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           drm_settings: "FilterConfigurationDrmSettingsString",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
@@ -1977,6 +1986,7 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           drm_settings: "FilterConfigurationDrmSettingsString",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
@@ -2007,6 +2017,7 @@ module Aws::MediaPackageV2
     #   resp.segment.ts_include_dvb_subtitles #=> Boolean
     #   resp.segment.scte.scte_filter #=> Array
     #   resp.segment.scte.scte_filter[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY", "PROGRAM"
+    #   resp.segment.scte.scte_in_segments #=> String, one of "NONE", "ALL"
     #   resp.segment.encryption.constant_initialization_vector #=> String
     #   resp.segment.encryption.encryption_method.ts_encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.segment.encryption.encryption_method.cmaf_encryption_method #=> String, one of "CENC", "CBCS"
@@ -2020,6 +2031,7 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.speke_key_provider.drm_systems[0] #=> String, one of "CLEAR_KEY_AES_128", "FAIRPLAY", "PLAYREADY", "WIDEVINE", "IRDETO"
     #   resp.segment.encryption.speke_key_provider.role_arn #=> String
     #   resp.segment.encryption.speke_key_provider.url #=> String
+    #   resp.segment.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
     #   resp.description #=> String
@@ -2032,6 +2044,7 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.hls_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.hls_manifests[0].filter_configuration.start #=> Time
     #   resp.hls_manifests[0].filter_configuration.end #=> Time
     #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -2047,6 +2060,7 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.low_latency_hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.low_latency_hls_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -2059,6 +2073,7 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].url #=> String
     #   resp.dash_manifests[0].manifest_window_seconds #=> Integer
     #   resp.dash_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.dash_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.dash_manifests[0].filter_configuration.start #=> Time
     #   resp.dash_manifests[0].filter_configuration.end #=> Time
     #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -2097,6 +2112,7 @@ module Aws::MediaPackageV2
     #   resp.mss_manifests[0].manifest_name #=> String
     #   resp.mss_manifests[0].url #=> String
     #   resp.mss_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.mss_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.mss_manifests[0].filter_configuration.start #=> Time
     #   resp.mss_manifests[0].filter_configuration.end #=> Time
     #   resp.mss_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -2823,6 +2839,7 @@ module Aws::MediaPackageV2
     #         }, 
     #         key_rotation_interval_seconds: 300, 
     #         speke_key_provider: {
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e", 
     #           drm_systems: [
     #             "CLEAR_KEY_AES_128", 
     #           ], 
@@ -2945,6 +2962,7 @@ module Aws::MediaPackageV2
     #   resp.segment.ts_include_dvb_subtitles #=> Boolean
     #   resp.segment.scte.scte_filter #=> Array
     #   resp.segment.scte.scte_filter[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY", "PROGRAM"
+    #   resp.segment.scte.scte_in_segments #=> String, one of "NONE", "ALL"
     #   resp.segment.encryption.constant_initialization_vector #=> String
     #   resp.segment.encryption.encryption_method.ts_encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.segment.encryption.encryption_method.cmaf_encryption_method #=> String, one of "CENC", "CBCS"
@@ -2958,6 +2976,7 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.speke_key_provider.drm_systems[0] #=> String, one of "CLEAR_KEY_AES_128", "FAIRPLAY", "PLAYREADY", "WIDEVINE", "IRDETO"
     #   resp.segment.encryption.speke_key_provider.role_arn #=> String
     #   resp.segment.encryption.speke_key_provider.url #=> String
+    #   resp.segment.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
     #   resp.reset_at #=> Time
@@ -2971,6 +2990,7 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.hls_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.hls_manifests[0].filter_configuration.start #=> Time
     #   resp.hls_manifests[0].filter_configuration.end #=> Time
     #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -2986,6 +3006,7 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.low_latency_hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.low_latency_hls_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -2998,6 +3019,7 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].url #=> String
     #   resp.dash_manifests[0].manifest_window_seconds #=> Integer
     #   resp.dash_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.dash_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.dash_manifests[0].filter_configuration.start #=> Time
     #   resp.dash_manifests[0].filter_configuration.end #=> Time
     #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -3036,6 +3058,7 @@ module Aws::MediaPackageV2
     #   resp.mss_manifests[0].manifest_name #=> String
     #   resp.mss_manifests[0].url #=> String
     #   resp.mss_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.mss_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.mss_manifests[0].filter_configuration.start #=> Time
     #   resp.mss_manifests[0].filter_configuration.end #=> Time
     #   resp.mss_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -4624,6 +4647,7 @@ module Aws::MediaPackageV2
     #         }, 
     #         key_rotation_interval_seconds: 300, 
     #         speke_key_provider: {
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e", 
     #           drm_systems: [
     #             "CLEAR_KEY_AES_128", 
     #           ], 
@@ -4721,6 +4745,7 @@ module Aws::MediaPackageV2
     #         }, 
     #         key_rotation_interval_seconds: 300, 
     #         speke_key_provider: {
+    #           certificate_arn: "arn:aws:acm:us-west-2:123456789012:certificate/0c6a65f1-7bd3-48ac-be17-f38675def22e", 
     #           drm_systems: [
     #             "CLEAR_KEY_AES_128", 
     #           ], 
@@ -4879,6 +4904,7 @@ module Aws::MediaPackageV2
     #       ts_include_dvb_subtitles: false,
     #       scte: {
     #         scte_filter: ["SPLICE_INSERT"], # accepts SPLICE_INSERT, BREAK, PROVIDER_ADVERTISEMENT, DISTRIBUTOR_ADVERTISEMENT, PROVIDER_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_PLACEMENT_OPPORTUNITY, PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY, PROGRAM
+    #         scte_in_segments: "NONE", # accepts NONE, ALL
     #       },
     #       encryption: {
     #         constant_initialization_vector: "EncryptionConstantInitializationVectorString",
@@ -4898,6 +4924,7 @@ module Aws::MediaPackageV2
     #           drm_systems: ["CLEAR_KEY_AES_128"], # required, accepts CLEAR_KEY_AES_128, FAIRPLAY, PLAYREADY, WIDEVINE, IRDETO
     #           role_arn: "SpekeKeyProviderRoleArnString", # required
     #           url: "SpekeKeyProviderUrlString", # required
+    #           certificate_arn: "SpekeKeyProviderCertificateArnString",
     #         },
     #       },
     #     },
@@ -4918,6 +4945,7 @@ module Aws::MediaPackageV2
     #         program_date_time_interval_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           drm_settings: "FilterConfigurationDrmSettingsString",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
@@ -4941,6 +4969,7 @@ module Aws::MediaPackageV2
     #         program_date_time_interval_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           drm_settings: "FilterConfigurationDrmSettingsString",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
@@ -4955,6 +4984,7 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           drm_settings: "FilterConfigurationDrmSettingsString",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
@@ -5016,6 +5046,7 @@ module Aws::MediaPackageV2
     #         manifest_window_seconds: 1,
     #         filter_configuration: {
     #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           drm_settings: "FilterConfigurationDrmSettingsString",
     #           start: Time.now,
     #           end: Time.now,
     #           time_delay_seconds: 1,
@@ -5044,6 +5075,7 @@ module Aws::MediaPackageV2
     #   resp.segment.ts_include_dvb_subtitles #=> Boolean
     #   resp.segment.scte.scte_filter #=> Array
     #   resp.segment.scte.scte_filter[0] #=> String, one of "SPLICE_INSERT", "BREAK", "PROVIDER_ADVERTISEMENT", "DISTRIBUTOR_ADVERTISEMENT", "PROVIDER_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY", "PROGRAM"
+    #   resp.segment.scte.scte_in_segments #=> String, one of "NONE", "ALL"
     #   resp.segment.encryption.constant_initialization_vector #=> String
     #   resp.segment.encryption.encryption_method.ts_encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.segment.encryption.encryption_method.cmaf_encryption_method #=> String, one of "CENC", "CBCS"
@@ -5057,6 +5089,7 @@ module Aws::MediaPackageV2
     #   resp.segment.encryption.speke_key_provider.drm_systems[0] #=> String, one of "CLEAR_KEY_AES_128", "FAIRPLAY", "PLAYREADY", "WIDEVINE", "IRDETO"
     #   resp.segment.encryption.speke_key_provider.role_arn #=> String
     #   resp.segment.encryption.speke_key_provider.url #=> String
+    #   resp.segment.encryption.speke_key_provider.certificate_arn #=> String
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
     #   resp.description #=> String
@@ -5069,6 +5102,7 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.hls_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.hls_manifests[0].filter_configuration.start #=> Time
     #   resp.hls_manifests[0].filter_configuration.end #=> Time
     #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -5084,6 +5118,7 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE", "SCTE35_ENHANCED"
     #   resp.low_latency_hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.low_latency_hls_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -5095,6 +5130,7 @@ module Aws::MediaPackageV2
     #   resp.mss_manifests[0].manifest_name #=> String
     #   resp.mss_manifests[0].url #=> String
     #   resp.mss_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.mss_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.mss_manifests[0].filter_configuration.start #=> Time
     #   resp.mss_manifests[0].filter_configuration.end #=> Time
     #   resp.mss_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -5111,6 +5147,7 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].url #=> String
     #   resp.dash_manifests[0].manifest_window_seconds #=> Integer
     #   resp.dash_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.dash_manifests[0].filter_configuration.drm_settings #=> String
     #   resp.dash_manifests[0].filter_configuration.start #=> Time
     #   resp.dash_manifests[0].filter_configuration.end #=> Time
     #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
@@ -5173,7 +5210,7 @@ module Aws::MediaPackageV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

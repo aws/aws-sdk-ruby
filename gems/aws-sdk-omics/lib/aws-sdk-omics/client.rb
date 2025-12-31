@@ -575,7 +575,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Cancels an annotation import job.
+    # Amazon Web Services HealthOmics variant stores and annotation stores
+    # will no longer be open to new customers starting November 7, 2025. If
+    # you would like to use variant stores or annotation stores, sign up
+    # prior to that date. Existing customers can continue to use the service
+    # as normal. For more information, see [ Amazon Web Services HealthOmics
+    # variant store and annotation store availability change][1].
+    #
+    #  Cancels an annotation import job.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
     #
     # @option params [required, String] :job_id
     #   The job's ID.
@@ -621,7 +632,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Cancels a variant import job.
+    # Amazon Web Services HealthOmics variant stores and annotation stores
+    # will no longer be open to new customers starting November 7, 2025. If
+    # you would like to use variant stores or annotation stores, sign up
+    # prior to that date. Existing customers can continue to use the service
+    # as normal. For more information, see [ Amazon Web Services HealthOmics
+    # variant store and annotation store availability change][1].
+    #
+    #  Cancels a variant import job.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
     #
     # @option params [required, String] :job_id
     #   The job's ID.
@@ -697,7 +719,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Creates an annotation store.
+    # Amazon Web Services HealthOmics variant stores and annotation stores
+    # will no longer be open to new customers starting November 7, 2025. If
+    # you would like to use variant stores or annotation stores, sign up
+    # prior to that date. Existing customers can continue to use the service
+    # as normal. For more information, see [ Amazon Web Services HealthOmics
+    # variant store and annotation store availability change][1].
+    #
+    #  Creates an annotation store.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
     #
     # @option params [Types::ReferenceItem] :reference
     #   The genome reference for the store's annotations.
@@ -1421,7 +1454,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Creates a variant store.
+    # Amazon Web Services HealthOmics variant stores and annotation stores
+    # will no longer be open to new customers starting November 7, 2025. If
+    # you would like to use variant stores or annotation stores, sign up
+    # prior to that date. Existing customers can continue to use the service
+    # as normal. For more information, see [ Amazon Web Services HealthOmics
+    # variant store and annotation store availability change][1].
+    #
+    #  Creates a variant store.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
     #
     # @option params [required, Types::ReferenceItem] :reference
     #   The genome reference for the store's variants.
@@ -1483,31 +1527,44 @@ module Aws::Omics
     # Creates a private workflow. Before you create a private workflow, you
     # must create and configure these required resources:
     #
-    # * *Workflow definition files*: Define your workflow in one or more
-    #   workflow definition files, written in WDL, Nextflow, or CWL. The
-    #   workflow definition specifies the inputs and outputs for runs that
-    #   use the workflow. It also includes specifications for the runs and
-    #   run tasks for your workflow, including compute and memory
-    #   requirements. The workflow definition file must be in .zip format.
+    # * *Workflow definition file:* A workflow definition file written in
+    #   WDL, Nextflow, or CWL. The workflow definition specifies the inputs
+    #   and outputs for runs that use the workflow. It also includes
+    #   specifications for the runs and run tasks for your workflow,
+    #   including compute and memory requirements. The workflow definition
+    #   file must be in `.zip` format. For more information, see [Workflow
+    #   definition files][1] in Amazon Web Services HealthOmics.
     #
-    # * (Optional) *Parameter template*: You can create a parameter template
-    #   file that defines the run parameters, or Amazon Web Services
-    #   HealthOmics can generate the parameter template for you.
+    #   * You can use Amazon Q CLI to build and validate your workflow
+    #     definition files in WDL, Nextflow, and CWL. For more information,
+    #     see [Example prompts for Amazon Q CLI][2] and the [Amazon Web
+    #     Services HealthOmics Agentic generative AI tutorial][3] on GitHub.
     #
-    # * *ECR container images*: Create container images for the workflow in
+    #   ^
+    # * *(Optional) Parameter template file:* A parameter template file
+    #   written in JSON. Create the file to define the run parameters, or
+    #   Amazon Web Services HealthOmics generates the parameter template for
+    #   you. For more information, see [Parameter template files for
+    #   HealthOmics workflows][4].
+    #
+    # * *ECR container images:* Create container images for the workflow in
     #   a private ECR repository, or synchronize images from a supported
     #   upstream registry with your Amazon ECR private repository.
     #
-    # * (Optional) *Sentieon licenses*: Request a Sentieon license if using
-    #   the Sentieon software in a private workflow.
+    # * *(Optional) Sentieon licenses:* Request a Sentieon license to use
+    #   the Sentieon software in private workflows.
     #
     # For more information, see [Creating or updating a private workflow in
-    # Amazon Web Services HealthOmics][1] in the *Amazon Web Services
+    # Amazon Web Services HealthOmics][5] in the *Amazon Web Services
     # HealthOmics User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/omics/latest/dev/creating-private-workflows.html
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/workflow-definition-files.html
+    # [2]: https://docs.aws.amazon.com/omics/latest/dev/getting-started.html#omics-q-prompts
+    # [3]: https://github.com/aws-samples/aws-healthomics-tutorials/tree/main/generative-ai
+    # [4]: https://docs.aws.amazon.com/omics/latest/dev/parameter-templates.html
+    # [5]: https://docs.aws.amazon.com/omics/latest/dev/creating-private-workflows.html
     #
     # @option params [String] :name
     #   Name (optional but highly recommended) for the workflow to locate
@@ -1656,7 +1713,7 @@ module Aws::Omics
     #   resp = client.create_workflow({
     #     name: "WorkflowName",
     #     description: "WorkflowDescription",
-    #     engine: "WDL", # accepts WDL, NEXTFLOW, CWL
+    #     engine: "WDL", # accepts WDL, NEXTFLOW, CWL, WDL_LENIENT
     #     definition_zip: "data",
     #     definition_uri: "WorkflowDefinition",
     #     main: "WorkflowMain",
@@ -1907,7 +1964,7 @@ module Aws::Omics
     #     definition_uri: "WorkflowDefinition",
     #     accelerators: "GPU", # accepts GPU
     #     description: "WorkflowVersionDescription",
-    #     engine: "WDL", # accepts WDL, NEXTFLOW, CWL
+    #     engine: "WDL", # accepts WDL, NEXTFLOW, CWL, WDL_LENIENT
     #     main: "WorkflowMain",
     #     parameter_template: {
     #       "WorkflowParameterName" => {
@@ -1973,7 +2030,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Deletes an annotation store.
+    # Amazon Web Services HealthOmics variant stores and annotation stores
+    # will no longer be open to new customers starting November 7, 2025. If
+    # you would like to use variant stores or annotation stores, sign up
+    # prior to that date. Existing customers can continue to use the service
+    # as normal. For more information, see [ Amazon Web Services HealthOmics
+    # variant store and annotation store availability change][1].
+    #
+    #  Deletes an annotation store.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
     #
     # @option params [required, String] :name
     #   The store's name.
@@ -2300,7 +2368,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Deletes a variant store.
+    # Amazon Web Services HealthOmics variant stores and annotation stores
+    # will no longer be open to new customers starting November 7, 2025. If
+    # you would like to use variant stores or annotation stores, sign up
+    # prior to that date. Existing customers can continue to use the service
+    # as normal. For more information, see [ Amazon Web Services HealthOmics
+    # variant store and annotation store availability change][1].
+    #
+    #  Deletes a variant store.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
     #
     # @option params [required, String] :name
     #   The store's name.
@@ -2396,7 +2475,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Gets information about an annotation import job.
+    # Amazon Web Services HealthOmics variant stores and annotation stores
+    # will no longer be open to new customers starting November 7, 2025. If
+    # you would like to use variant stores or annotation stores, sign up
+    # prior to that date. Existing customers can continue to use the service
+    # as normal. For more information, see [ Amazon Web Services HealthOmics
+    # variant store and annotation store availability change][1].
+    #
+    #  Gets information about an annotation import job.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
     #
     # @option params [required, String] :job_id
     #   The job's ID.
@@ -2466,7 +2556,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Gets information about an annotation store.
+    # Amazon Web Services HealthOmics variant stores and annotation stores
+    # will no longer be open to new customers starting November 7, 2025. If
+    # you would like to use variant stores or annotation stores, sign up
+    # prior to that date. Existing customers can continue to use the service
+    # as normal. For more information, see [ Amazon Web Services HealthOmics
+    # variant store and annotation store availability change][1].
+    #
+    #  Gets information about an annotation store.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
     #
     # @option params [required, String] :name
     #   The store's name.
@@ -3542,7 +3643,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Gets information about a variant import job.
+    # Amazon Web Services HealthOmics variant stores and annotation stores
+    # will no longer be open to new customers starting November 7, 2025. If
+    # you would like to use variant stores or annotation stores, sign up
+    # prior to that date. Existing customers can continue to use the service
+    # as normal. For more information, see [ Amazon Web Services HealthOmics
+    # variant store and annotation store availability change][1].
+    #
+    #  Gets information about a variant import job.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
     #
     # @option params [required, String] :job_id
     #   The job's ID.
@@ -3599,7 +3711,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Gets information about a variant store.
+    # Amazon Web Services HealthOmics variant stores and annotation stores
+    # will no longer be open to new customers starting November 7, 2025. If
+    # you would like to use variant stores or annotation stores, sign up
+    # prior to that date. Existing customers can continue to use the service
+    # as normal. For more information, see [ Amazon Web Services HealthOmics
+    # variant store and annotation store availability change][1].
+    #
+    #  Gets information about a variant store.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
     #
     # @option params [required, String] :name
     #   The store's name.
@@ -3724,7 +3847,7 @@ module Aws::Omics
     #   resp.type #=> String, one of "PRIVATE", "READY2RUN"
     #   resp.name #=> String
     #   resp.description #=> String
-    #   resp.engine #=> String, one of "WDL", "NEXTFLOW", "CWL"
+    #   resp.engine #=> String, one of "WDL", "NEXTFLOW", "CWL", "WDL_LENIENT"
     #   resp.definition #=> String
     #   resp.main #=> String
     #   resp.digest #=> String
@@ -3844,7 +3967,7 @@ module Aws::Omics
     #   resp.description #=> String
     #   resp.definition #=> String
     #   resp.digest #=> String
-    #   resp.engine #=> String, one of "WDL", "NEXTFLOW", "CWL"
+    #   resp.engine #=> String, one of "WDL", "NEXTFLOW", "CWL", "WDL_LENIENT"
     #   resp.main #=> String
     #   resp.metadata #=> Hash
     #   resp.metadata["WorkflowMetadataKey"] #=> String
@@ -3891,7 +4014,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Retrieves a list of annotation import jobs.
+    # Amazon Web Services HealthOmics variant stores and annotation stores
+    # will no longer be open to new customers starting November 7, 2025. If
+    # you would like to use variant stores or annotation stores, sign up
+    # prior to that date. Existing customers can continue to use the service
+    # as normal. For more information, see [ Amazon Web Services HealthOmics
+    # variant store and annotation store availability change][1].
+    #
+    #  Retrieves a list of annotation import jobs.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of jobs to return in one page of results.
@@ -4009,7 +4143,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Retrieves a list of annotation stores.
+    # Amazon Web Services HealthOmics variant stores and annotation stores
+    # will no longer be open to new customers starting November 7, 2025. If
+    # you would like to use variant stores or annotation stores, sign up
+    # prior to that date. Existing customers can continue to use the service
+    # as normal. For more information, see [ Amazon Web Services HealthOmics
+    # variant store and annotation store availability change][1].
+    #
+    #  Retrieves a list of annotation stores.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
     #
     # @option params [Array<String>] :ids
     #   IDs of stores to list.
@@ -5004,7 +5149,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Retrieves a list of variant import jobs.
+    # Amazon Web Services HealthOmics variant stores and annotation stores
+    # will no longer be open to new customers starting November 7, 2025. If
+    # you would like to use variant stores or annotation stores, sign up
+    # prior to that date. Existing customers can continue to use the service
+    # as normal. For more information, see [ Amazon Web Services HealthOmics
+    # variant store and annotation store availability change][1].
+    #
+    #  Retrieves a list of variant import jobs.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of import jobs to return in one page of results.
@@ -5062,7 +5218,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Retrieves a list of variant stores.
+    # Amazon Web Services HealthOmics variant stores and annotation stores
+    # will no longer be open to new customers starting November 7, 2025. If
+    # you would like to use variant stores or annotation stores, sign up
+    # prior to that date. Existing customers can continue to use the service
+    # as normal. For more information, see [ Amazon Web Services HealthOmics
+    # variant store and annotation store availability change][1].
+    #
+    #  Retrieves a list of variant stores.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of stores to return in one page of results.
@@ -5287,7 +5454,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Starts an annotation import job.
+    # Amazon Web Services HealthOmics variant stores and annotation stores
+    # will no longer be open to new customers starting November 7, 2025. If
+    # you would like to use variant stores or annotation stores, sign up
+    # prior to that date. Existing customers can continue to use the service
+    # as normal. For more information, see [ Amazon Web Services HealthOmics
+    # variant store and annotation store availability change][1].
+    #
+    #  Starts an annotation import job.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
     #
     # @option params [required, String] :destination_name
     #   A destination annotation store for the job.
@@ -5669,10 +5847,15 @@ module Aws::Omics
     # To learn more about the retention modes, see [Run retention mode][2]
     # in the *Amazon Web Services HealthOmics User Guide*.
     #
+    # You can use Amazon Q CLI to analyze run logs and make performance
+    # optimization recommendations. To get started, see the [Amazon Web
+    # Services HealthOmics MCP server][3] on GitHub.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/omics/latest/dev/starting-a-run.html
     # [2]: https://docs.aws.amazon.com/omics/latest/dev/run-retention.html
+    # [3]: https://github.com/awslabs/mcp/tree/main/src/aws-healthomics-mcp-server
     #
     # @option params [String] :workflow_id
     #   The run's workflow ID. The `workflowId` is not the UUID.
@@ -5877,7 +6060,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Starts a variant import job.
+    # Amazon Web Services HealthOmics variant stores and annotation stores
+    # will no longer be open to new customers starting November 7, 2025. If
+    # you would like to use variant stores or annotation stores, sign up
+    # prior to that date. Existing customers can continue to use the service
+    # as normal. For more information, see [ Amazon Web Services HealthOmics
+    # variant store and annotation store availability change][1].
+    #
+    #  Starts a variant import job.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
     #
     # @option params [required, String] :destination_name
     #   The destination variant store for the job.
@@ -5981,7 +6175,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Updates an annotation store.
+    # Amazon Web Services HealthOmics variant stores and annotation stores
+    # will no longer be open to new customers starting November 7, 2025. If
+    # you would like to use variant stores or annotation stores, sign up
+    # prior to that date. Existing customers can continue to use the service
+    # as normal. For more information, see [ Amazon Web Services HealthOmics
+    # variant store and annotation store availability change][1].
+    #
+    #  Updates an annotation store.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
     #
     # @option params [required, String] :name
     #   A name for the store.
@@ -6277,7 +6482,18 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Updates a variant store.
+    # Amazon Web Services HealthOmics variant stores and annotation stores
+    # will no longer be open to new customers starting November 7, 2025. If
+    # you would like to use variant stores or annotation stores, sign up
+    # prior to that date. Existing customers can continue to use the service
+    # as normal. For more information, see [ Amazon Web Services HealthOmics
+    # variant store and annotation store availability change][1].
+    #
+    #  Updates a variant store.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html
     #
     # @option params [required, String] :name
     #   A name for the store.
@@ -6531,7 +6747,7 @@ module Aws::Omics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

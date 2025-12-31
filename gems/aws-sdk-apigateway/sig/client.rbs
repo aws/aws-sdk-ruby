@@ -228,9 +228,10 @@ module Aws
         def distribution_domain_name: () -> ::String
         def distribution_hosted_zone_id: () -> ::String
         def endpoint_configuration: () -> Types::EndpointConfiguration
-        def domain_name_status: () -> ("AVAILABLE" | "UPDATING" | "PENDING" | "PENDING_CERTIFICATE_REIMPORT" | "PENDING_OWNERSHIP_VERIFICATION")
+        def domain_name_status: () -> ("AVAILABLE" | "UPDATING" | "PENDING" | "PENDING_CERTIFICATE_REIMPORT" | "PENDING_OWNERSHIP_VERIFICATION" | "FAILED")
         def domain_name_status_message: () -> ::String
-        def security_policy: () -> ("TLS_1_0" | "TLS_1_2")
+        def security_policy: () -> ("TLS_1_0" | "TLS_1_2" | "SecurityPolicy_TLS13_1_3_2025_09" | "SecurityPolicy_TLS13_1_3_FIPS_2025_09" | "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_2021_06" | "SecurityPolicy_TLS13_2025_EDGE" | "SecurityPolicy_TLS12_PFS_2025_EDGE" | "SecurityPolicy_TLS12_2018_EDGE")
+        def endpoint_access_mode: () -> ("BASIC" | "STRICT")
         def tags: () -> ::Hash[::String, ::String]
         def mutual_tls_authentication: () -> Types::MutualTlsAuthentication
         def ownership_verification_certificate_arn: () -> ::String
@@ -254,7 +255,8 @@ module Aws
                                   vpc_endpoint_ids: Array[::String]?
                                 },
                                 ?tags: Hash[::String, ::String],
-                                ?security_policy: ("TLS_1_0" | "TLS_1_2"),
+                                ?security_policy: ("TLS_1_0" | "TLS_1_2" | "SecurityPolicy_TLS13_1_3_2025_09" | "SecurityPolicy_TLS13_1_3_FIPS_2025_09" | "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_2021_06" | "SecurityPolicy_TLS13_2025_EDGE" | "SecurityPolicy_TLS12_PFS_2025_EDGE" | "SecurityPolicy_TLS12_2018_EDGE"),
+                                ?endpoint_access_mode: ("BASIC" | "STRICT"),
                                 ?mutual_tls_authentication: {
                                   truststore_uri: ::String?,
                                   truststore_version: ::String?
@@ -348,6 +350,10 @@ module Aws
         def tags: () -> ::Hash[::String, ::String]
         def disable_execute_api_endpoint: () -> bool
         def root_resource_id: () -> ::String
+        def security_policy: () -> ("TLS_1_0" | "TLS_1_2" | "SecurityPolicy_TLS13_1_3_2025_09" | "SecurityPolicy_TLS13_1_3_FIPS_2025_09" | "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_2021_06" | "SecurityPolicy_TLS13_2025_EDGE" | "SecurityPolicy_TLS12_PFS_2025_EDGE" | "SecurityPolicy_TLS12_2018_EDGE")
+        def endpoint_access_mode: () -> ("BASIC" | "STRICT")
+        def api_status: () -> ("UPDATING" | "AVAILABLE" | "PENDING" | "FAILED")
+        def api_status_message: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#create_rest_api-instance_method
       def create_rest_api: (
@@ -365,7 +371,9 @@ module Aws
                              },
                              ?policy: ::String,
                              ?tags: Hash[::String, ::String],
-                             ?disable_execute_api_endpoint: bool
+                             ?disable_execute_api_endpoint: bool,
+                             ?security_policy: ("TLS_1_0" | "TLS_1_2" | "SecurityPolicy_TLS13_1_3_2025_09" | "SecurityPolicy_TLS13_1_3_FIPS_2025_09" | "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_2021_06" | "SecurityPolicy_TLS13_2025_EDGE" | "SecurityPolicy_TLS12_PFS_2025_EDGE" | "SecurityPolicy_TLS12_2018_EDGE"),
+                             ?endpoint_access_mode: ("BASIC" | "STRICT")
                            ) -> _CreateRestApiResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRestApiResponseSuccess
 
@@ -902,9 +910,10 @@ module Aws
         def distribution_domain_name: () -> ::String
         def distribution_hosted_zone_id: () -> ::String
         def endpoint_configuration: () -> Types::EndpointConfiguration
-        def domain_name_status: () -> ("AVAILABLE" | "UPDATING" | "PENDING" | "PENDING_CERTIFICATE_REIMPORT" | "PENDING_OWNERSHIP_VERIFICATION")
+        def domain_name_status: () -> ("AVAILABLE" | "UPDATING" | "PENDING" | "PENDING_CERTIFICATE_REIMPORT" | "PENDING_OWNERSHIP_VERIFICATION" | "FAILED")
         def domain_name_status_message: () -> ::String
-        def security_policy: () -> ("TLS_1_0" | "TLS_1_2")
+        def security_policy: () -> ("TLS_1_0" | "TLS_1_2" | "SecurityPolicy_TLS13_1_3_2025_09" | "SecurityPolicy_TLS13_1_3_FIPS_2025_09" | "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_2021_06" | "SecurityPolicy_TLS13_2025_EDGE" | "SecurityPolicy_TLS12_PFS_2025_EDGE" | "SecurityPolicy_TLS12_2018_EDGE")
+        def endpoint_access_mode: () -> ("BASIC" | "STRICT")
         def tags: () -> ::Hash[::String, ::String]
         def mutual_tls_authentication: () -> Types::MutualTlsAuthentication
         def ownership_verification_certificate_arn: () -> ::String
@@ -1006,6 +1015,8 @@ module Aws
         def cache_key_parameters: () -> ::Array[::String]
         def integration_responses: () -> ::Hash[::String, Types::IntegrationResponse]
         def tls_config: () -> Types::TlsConfig
+        def response_transfer_mode: () -> ("BUFFERED" | "STREAM")
+        def integration_target: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_integration-instance_method
       def get_integration: (
@@ -1182,6 +1193,10 @@ module Aws
         def tags: () -> ::Hash[::String, ::String]
         def disable_execute_api_endpoint: () -> bool
         def root_resource_id: () -> ::String
+        def security_policy: () -> ("TLS_1_0" | "TLS_1_2" | "SecurityPolicy_TLS13_1_3_2025_09" | "SecurityPolicy_TLS13_1_3_FIPS_2025_09" | "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_2021_06" | "SecurityPolicy_TLS13_2025_EDGE" | "SecurityPolicy_TLS12_PFS_2025_EDGE" | "SecurityPolicy_TLS12_2018_EDGE")
+        def endpoint_access_mode: () -> ("BASIC" | "STRICT")
+        def api_status: () -> ("UPDATING" | "AVAILABLE" | "PENDING" | "FAILED")
+        def api_status_message: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_rest_api-instance_method
       def get_rest_api: (
@@ -1439,6 +1454,10 @@ module Aws
         def tags: () -> ::Hash[::String, ::String]
         def disable_execute_api_endpoint: () -> bool
         def root_resource_id: () -> ::String
+        def security_policy: () -> ("TLS_1_0" | "TLS_1_2" | "SecurityPolicy_TLS13_1_3_2025_09" | "SecurityPolicy_TLS13_1_3_FIPS_2025_09" | "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_2021_06" | "SecurityPolicy_TLS13_2025_EDGE" | "SecurityPolicy_TLS12_PFS_2025_EDGE" | "SecurityPolicy_TLS12_2018_EDGE")
+        def endpoint_access_mode: () -> ("BASIC" | "STRICT")
+        def api_status: () -> ("UPDATING" | "AVAILABLE" | "PENDING" | "FAILED")
+        def api_status_message: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#import_rest_api-instance_method
       def import_rest_api: (
@@ -1483,6 +1502,8 @@ module Aws
         def cache_key_parameters: () -> ::Array[::String]
         def integration_responses: () -> ::Hash[::String, Types::IntegrationResponse]
         def tls_config: () -> Types::TlsConfig
+        def response_transfer_mode: () -> ("BUFFERED" | "STREAM")
+        def integration_target: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#put_integration-instance_method
       def put_integration: (
@@ -1504,7 +1525,9 @@ module Aws
                              ?timeout_in_millis: ::Integer,
                              ?tls_config: {
                                insecure_skip_verification: bool?
-                             }
+                             },
+                             ?response_transfer_mode: ("BUFFERED" | "STREAM"),
+                             ?integration_target: ::String
                            ) -> _PutIntegrationResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutIntegrationResponseSuccess
 
@@ -1592,6 +1615,10 @@ module Aws
         def tags: () -> ::Hash[::String, ::String]
         def disable_execute_api_endpoint: () -> bool
         def root_resource_id: () -> ::String
+        def security_policy: () -> ("TLS_1_0" | "TLS_1_2" | "SecurityPolicy_TLS13_1_3_2025_09" | "SecurityPolicy_TLS13_1_3_FIPS_2025_09" | "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_2021_06" | "SecurityPolicy_TLS13_2025_EDGE" | "SecurityPolicy_TLS12_PFS_2025_EDGE" | "SecurityPolicy_TLS12_2018_EDGE")
+        def endpoint_access_mode: () -> ("BASIC" | "STRICT")
+        def api_status: () -> ("UPDATING" | "AVAILABLE" | "PENDING" | "FAILED")
+        def api_status_message: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#put_rest_api-instance_method
       def put_rest_api: (
@@ -1869,9 +1896,10 @@ module Aws
         def distribution_domain_name: () -> ::String
         def distribution_hosted_zone_id: () -> ::String
         def endpoint_configuration: () -> Types::EndpointConfiguration
-        def domain_name_status: () -> ("AVAILABLE" | "UPDATING" | "PENDING" | "PENDING_CERTIFICATE_REIMPORT" | "PENDING_OWNERSHIP_VERIFICATION")
+        def domain_name_status: () -> ("AVAILABLE" | "UPDATING" | "PENDING" | "PENDING_CERTIFICATE_REIMPORT" | "PENDING_OWNERSHIP_VERIFICATION" | "FAILED")
         def domain_name_status_message: () -> ::String
-        def security_policy: () -> ("TLS_1_0" | "TLS_1_2")
+        def security_policy: () -> ("TLS_1_0" | "TLS_1_2" | "SecurityPolicy_TLS13_1_3_2025_09" | "SecurityPolicy_TLS13_1_3_FIPS_2025_09" | "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_2021_06" | "SecurityPolicy_TLS13_2025_EDGE" | "SecurityPolicy_TLS12_PFS_2025_EDGE" | "SecurityPolicy_TLS12_2018_EDGE")
+        def endpoint_access_mode: () -> ("BASIC" | "STRICT")
         def tags: () -> ::Hash[::String, ::String]
         def mutual_tls_authentication: () -> Types::MutualTlsAuthentication
         def ownership_verification_certificate_arn: () -> ::String
@@ -1934,6 +1962,8 @@ module Aws
         def cache_key_parameters: () -> ::Array[::String]
         def integration_responses: () -> ::Hash[::String, Types::IntegrationResponse]
         def tls_config: () -> Types::TlsConfig
+        def response_transfer_mode: () -> ("BUFFERED" | "STREAM")
+        def integration_target: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_integration-instance_method
       def update_integration: (
@@ -2113,6 +2143,10 @@ module Aws
         def tags: () -> ::Hash[::String, ::String]
         def disable_execute_api_endpoint: () -> bool
         def root_resource_id: () -> ::String
+        def security_policy: () -> ("TLS_1_0" | "TLS_1_2" | "SecurityPolicy_TLS13_1_3_2025_09" | "SecurityPolicy_TLS13_1_3_FIPS_2025_09" | "SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_PQ_2025_09" | "SecurityPolicy_TLS13_1_2_2021_06" | "SecurityPolicy_TLS13_2025_EDGE" | "SecurityPolicy_TLS12_PFS_2025_EDGE" | "SecurityPolicy_TLS12_2018_EDGE")
+        def endpoint_access_mode: () -> ("BASIC" | "STRICT")
+        def api_status: () -> ("UPDATING" | "AVAILABLE" | "PENDING" | "FAILED")
+        def api_status_message: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_rest_api-instance_method
       def update_rest_api: (

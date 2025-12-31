@@ -337,6 +337,9 @@ module Aws
         def cost_summary: () -> Types::BillEstimateCostSummary
         def created_at: () -> ::Time
         def expires_at: () -> ::Time
+        def group_sharing_preference: () -> ("OPEN" | "PRIORITIZED" | "RESTRICTED")
+        def cost_category_group_sharing_preference_arn: () -> ::String
+        def cost_category_group_sharing_preference_effective_date: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMPricingCalculator/Client.html#create_bill_estimate-instance_method
       def create_bill_estimate: (
@@ -356,12 +359,16 @@ module Aws
         def created_at: () -> ::Time
         def expires_at: () -> ::Time
         def failure_message: () -> ::String
+        def group_sharing_preference: () -> ("OPEN" | "PRIORITIZED" | "RESTRICTED")
+        def cost_category_group_sharing_preference_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMPricingCalculator/Client.html#create_bill_scenario-instance_method
       def create_bill_scenario: (
                                   name: ::String,
                                   ?client_token: ::String,
-                                  ?tags: Hash[::String, ::String]
+                                  ?tags: Hash[::String, ::String],
+                                  ?group_sharing_preference: ("OPEN" | "PRIORITIZED" | "RESTRICTED"),
+                                  ?cost_category_group_sharing_preference_arn: ::String
                                 ) -> _CreateBillScenarioResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBillScenarioResponseSuccess
 
@@ -424,6 +431,9 @@ module Aws
         def cost_summary: () -> Types::BillEstimateCostSummary
         def created_at: () -> ::Time
         def expires_at: () -> ::Time
+        def group_sharing_preference: () -> ("OPEN" | "PRIORITIZED" | "RESTRICTED")
+        def cost_category_group_sharing_preference_arn: () -> ::String
+        def cost_category_group_sharing_preference_effective_date: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMPricingCalculator/Client.html#get_bill_estimate-instance_method
       def get_bill_estimate: (
@@ -440,6 +450,8 @@ module Aws
         def created_at: () -> ::Time
         def expires_at: () -> ::Time
         def failure_message: () -> ::String
+        def group_sharing_preference: () -> ("OPEN" | "PRIORITIZED" | "RESTRICTED")
+        def cost_category_group_sharing_preference_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMPricingCalculator/Client.html#get_bill_scenario-instance_method
       def get_bill_scenario: (
@@ -612,7 +624,7 @@ module Aws
       def list_bill_scenarios: (
                                  ?filters: Array[
                                    {
-                                     name: ("STATUS" | "NAME"),
+                                     name: ("STATUS" | "NAME" | "GROUP_SHARING_PREFERENCE" | "COST_CATEGORY_ARN"),
                                      values: Array[::String],
                                      match_option: ("EQUALS" | "STARTS_WITH" | "CONTAINS")?
                                    },
@@ -717,6 +729,9 @@ module Aws
         def cost_summary: () -> Types::BillEstimateCostSummary
         def created_at: () -> ::Time
         def expires_at: () -> ::Time
+        def group_sharing_preference: () -> ("OPEN" | "PRIORITIZED" | "RESTRICTED")
+        def cost_category_group_sharing_preference_arn: () -> ::String
+        def cost_category_group_sharing_preference_effective_date: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMPricingCalculator/Client.html#update_bill_estimate-instance_method
       def update_bill_estimate: (
@@ -735,12 +750,16 @@ module Aws
         def created_at: () -> ::Time
         def expires_at: () -> ::Time
         def failure_message: () -> ::String
+        def group_sharing_preference: () -> ("OPEN" | "PRIORITIZED" | "RESTRICTED")
+        def cost_category_group_sharing_preference_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMPricingCalculator/Client.html#update_bill_scenario-instance_method
       def update_bill_scenario: (
                                   identifier: ::String,
                                   ?name: ::String,
-                                  ?expires_at: ::Time
+                                  ?expires_at: ::Time,
+                                  ?group_sharing_preference: ("OPEN" | "PRIORITIZED" | "RESTRICTED"),
+                                  ?cost_category_group_sharing_preference_arn: ::String
                                 ) -> _UpdateBillScenarioResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBillScenarioResponseSuccess
 

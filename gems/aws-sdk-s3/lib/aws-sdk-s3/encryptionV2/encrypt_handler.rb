@@ -28,6 +28,8 @@ module Aws
             context.client.put_object(
               bucket: context.params[:bucket],
               key: context.params[:key] + suffix,
+              ##= ../specification/s3-encryption/data-format/metadata-strategy.md#v1-v2-instruction-files
+              ##% In the V1/V2 message format, all of the content metadata MUST be stored in the Instruction File.
               body: Json.dump(envelope)
             )
           else # :metadata

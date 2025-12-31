@@ -646,7 +646,7 @@ module Aws::ControlCatalog
     #     filter: {
     #       control_arns: ["ControlArn"],
     #       common_control_arns: ["CommonControlArn"],
-    #       mapping_types: ["FRAMEWORK"], # accepts FRAMEWORK, COMMON_CONTROL
+    #       mapping_types: ["FRAMEWORK"], # accepts FRAMEWORK, COMMON_CONTROL, RELATED_CONTROL
     #     },
     #   })
     #
@@ -654,10 +654,12 @@ module Aws::ControlCatalog
     #
     #   resp.control_mappings #=> Array
     #   resp.control_mappings[0].control_arn #=> String
-    #   resp.control_mappings[0].mapping_type #=> String, one of "FRAMEWORK", "COMMON_CONTROL"
+    #   resp.control_mappings[0].mapping_type #=> String, one of "FRAMEWORK", "COMMON_CONTROL", "RELATED_CONTROL"
     #   resp.control_mappings[0].mapping.framework.name #=> String
     #   resp.control_mappings[0].mapping.framework.item #=> String
     #   resp.control_mappings[0].mapping.common_control.common_control_arn #=> String
+    #   resp.control_mappings[0].mapping.related_control.control_arn #=> String
+    #   resp.control_mappings[0].mapping.related_control.relation_type #=> String, one of "COMPLEMENTARY", "ALTERNATIVE", "MUTUALLY_EXCLUSIVE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/controlcatalog-2018-05-10/ListControlMappings AWS API Documentation
@@ -851,7 +853,7 @@ module Aws::ControlCatalog
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-controlcatalog'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

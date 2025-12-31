@@ -44,7 +44,8 @@
       "errors":[
         {"shape":"ResourceInUseException"},
         {"shape":"LimitExceededException"},
-        {"shape":"InvalidArgumentException"}
+        {"shape":"InvalidArgumentException"},
+        {"shape":"ValidationException"}
       ]
     },
     "DecreaseStreamRetentionPeriod":{
@@ -116,6 +117,18 @@
       "staticContextParams":{
         "OperationType":{"value":"control"}
       }
+    },
+    "DescribeAccountSettings":{
+      "name":"DescribeAccountSettings",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeAccountSettingsInput"},
+      "output":{"shape":"DescribeAccountSettingsOutput"},
+      "errors":[
+        {"shape":"LimitExceededException"}
+      ]
     },
     "DescribeLimits":{
       "name":"DescribeLimits",
@@ -631,6 +644,39 @@
         "OperationType":{"value":"control"}
       }
     },
+    "UpdateAccountSettings":{
+      "name":"UpdateAccountSettings",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateAccountSettingsInput"},
+      "output":{"shape":"UpdateAccountSettingsOutput"},
+      "errors":[
+        {"shape":"InvalidArgumentException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"}
+      ]
+    },
+    "UpdateMaxRecordSize":{
+      "name":"UpdateMaxRecordSize",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateMaxRecordSizeInput"},
+      "errors":[
+        {"shape":"ResourceInUseException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ValidationException"}
+      ],
+      "staticContextParams":{
+        "OperationType":{"value":"control"}
+      }
+    },
     "UpdateShardCount":{
       "name":"UpdateShardCount",
       "http":{
@@ -662,7 +708,28 @@
         {"shape":"InvalidArgumentException"},
         {"shape":"LimitExceededException"},
         {"shape":"ResourceInUseException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"}
+      ],
+      "staticContextParams":{
+        "OperationType":{"value":"control"}
+      }
+    },
+    "UpdateStreamWarmThroughput":{
+      "name":"UpdateStreamWarmThroughput",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateStreamWarmThroughputInput"},
+      "output":{"shape":"UpdateStreamWarmThroughputOutput"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidArgumentException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"ValidationException"}
       ],
       "staticContextParams":{
         "OperationType":{"value":"control"}
@@ -775,12 +842,14 @@
         "StreamName":{"shape":"StreamName"},
         "ShardCount":{"shape":"PositiveIntegerObject"},
         "StreamModeDetails":{"shape":"StreamModeDetails"},
-        "Tags":{"shape":"TagMap"}
+        "Tags":{"shape":"TagMap"},
+        "WarmThroughputMiBps":{"shape":"NaturalIntegerObject"},
+        "MaxRecordSizeInKiB":{"shape":"MaxRecordSizeInKiB"}
       }
     },
     "Data":{
       "type":"blob",
-      "max":1048576,
+      "max":10485760,
       "min":0
     },
     "DecreaseStreamRetentionPeriodInput":{
@@ -828,6 +897,16 @@
           "shape":"ConsumerARN",
           "contextParam":{"name":"ConsumerARN"}
         }
+      }
+    },
+    "DescribeAccountSettingsInput":{
+      "type":"structure",
+      "members":{}
+    },
+    "DescribeAccountSettingsOutput":{
+      "type":"structure",
+      "members":{
+        "MinimumThroughputBillingCommitment":{"shape":"MinimumThroughputBillingCommitmentOutput"}
       }
     },
     "DescribeLimitsInput":{
@@ -1263,6 +1342,11 @@
         "HasMoreTags":{"shape":"BooleanObject"}
       }
     },
+    "MaxRecordSizeInKiB":{
+      "type":"integer",
+      "max":10240,
+      "min":1024
+    },
     "MergeShardsInput":{
       "type":"structure",
       "required":[
@@ -1300,6 +1384,42 @@
     },
     "MillisBehindLatest":{
       "type":"long",
+      "min":0
+    },
+    "MinimumThroughputBillingCommitmentInput":{
+      "type":"structure",
+      "required":["Status"],
+      "members":{
+        "Status":{"shape":"MinimumThroughputBillingCommitmentInputStatus"}
+      }
+    },
+    "MinimumThroughputBillingCommitmentInputStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "MinimumThroughputBillingCommitmentOutput":{
+      "type":"structure",
+      "required":["Status"],
+      "members":{
+        "Status":{"shape":"MinimumThroughputBillingCommitmentOutputStatus"},
+        "StartedAt":{"shape":"Timestamp"},
+        "EndedAt":{"shape":"Timestamp"},
+        "EarliestAllowedEndAt":{"shape":"Timestamp"}
+      }
+    },
+    "MinimumThroughputBillingCommitmentOutputStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED",
+        "ENABLED_UNTIL_EARLIEST_ALLOWED_END"
+      ]
+    },
+    "NaturalIntegerObject":{
+      "type":"integer",
       "min":0
     },
     "NextToken":{
@@ -1702,7 +1822,9 @@
         "EncryptionType":{"shape":"EncryptionType"},
         "KeyId":{"shape":"KeyId"},
         "OpenShardCount":{"shape":"ShardCountObject"},
-        "ConsumerCount":{"shape":"ConsumerCountObject"}
+        "ConsumerCount":{"shape":"ConsumerCountObject"},
+        "WarmThroughput":{"shape":"WarmThroughputObject"},
+        "MaxRecordSizeInKiB":{"shape":"MaxRecordSizeInKiB"}
       }
     },
     "StreamMode":{
@@ -1878,6 +2000,30 @@
         }
       }
     },
+    "UpdateAccountSettingsInput":{
+      "type":"structure",
+      "required":["MinimumThroughputBillingCommitment"],
+      "members":{
+        "MinimumThroughputBillingCommitment":{"shape":"MinimumThroughputBillingCommitmentInput"}
+      }
+    },
+    "UpdateAccountSettingsOutput":{
+      "type":"structure",
+      "members":{
+        "MinimumThroughputBillingCommitment":{"shape":"MinimumThroughputBillingCommitmentOutput"}
+      }
+    },
+    "UpdateMaxRecordSizeInput":{
+      "type":"structure",
+      "required":["MaxRecordSizeInKiB"],
+      "members":{
+        "StreamARN":{
+          "shape":"StreamARN",
+          "contextParam":{"name":"StreamARN"}
+        },
+        "MaxRecordSizeInKiB":{"shape":"MaxRecordSizeInKiB"}
+      }
+    },
     "UpdateShardCountInput":{
       "type":"structure",
       "required":[
@@ -1914,7 +2060,28 @@
           "shape":"StreamARN",
           "contextParam":{"name":"StreamARN"}
         },
-        "StreamModeDetails":{"shape":"StreamModeDetails"}
+        "StreamModeDetails":{"shape":"StreamModeDetails"},
+        "WarmThroughputMiBps":{"shape":"NaturalIntegerObject"}
+      }
+    },
+    "UpdateStreamWarmThroughputInput":{
+      "type":"structure",
+      "required":["WarmThroughputMiBps"],
+      "members":{
+        "StreamARN":{
+          "shape":"StreamARN",
+          "contextParam":{"name":"StreamARN"}
+        },
+        "StreamName":{"shape":"StreamName"},
+        "WarmThroughputMiBps":{"shape":"NaturalIntegerObject"}
+      }
+    },
+    "UpdateStreamWarmThroughputOutput":{
+      "type":"structure",
+      "members":{
+        "StreamARN":{"shape":"StreamARN"},
+        "StreamName":{"shape":"StreamName"},
+        "WarmThroughput":{"shape":"WarmThroughputObject"}
       }
     },
     "ValidationException":{
@@ -1923,6 +2090,13 @@
         "message":{"shape":"ErrorMessage"}
       },
       "exception":true
+    },
+    "WarmThroughputObject":{
+      "type":"structure",
+      "members":{
+        "TargetMiBps":{"shape":"NaturalIntegerObject"},
+        "CurrentMiBps":{"shape":"NaturalIntegerObject"}
+      }
     }
   }
 }

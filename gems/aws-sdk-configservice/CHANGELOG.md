@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.142.0 (2025-12-22)
+------------------
+
+* Feature - Added supported resourceTypes for Config from July to November 2025
+
+1.141.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.140.0 (2025-10-23)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.139.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.138.0 (2025-09-19)
 ------------------
 

@@ -713,9 +713,12 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Create a product credential locker. This operation will trigger the
-    # creation of all the manufacturing resources including the Wi-Fi setup
-    # key pair and device certificate.
+    # Create a credential locker.
+    #
+    # <note markdown="1"> This operation will not trigger the creation of all the manufacturing
+    # resources.
+    #
+    #  </note>
     #
     # @option params [String] :name
     #   The name of the credential locker.
@@ -762,8 +765,10 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Create a destination. IoT managed integrations uses the destination to
-    # determine where to deliver notifications for a device.
+    # Create a notification destination such as Kinesis Data Streams that
+    # receive events and notifications from Managed integrations. Managed
+    # integrations uses the destination to determine where to deliver
+    # notifications.
     #
     # @option params [required, String] :delivery_destination_arn
     #   The Amazon Resource Name (ARN) of the customer-managed destination.
@@ -868,7 +873,7 @@ module Aws::IoTManagedIntegrations
 
     # Creates a managed thing. A managed thing contains the device
     # identifier, protocol supported, and capabilities of the device in a
-    # protocol-specific format.
+    # data model format defined by Managed integrations.
     #
     # @option params [required, String] :role
     #   The type of device used. This will be the hub controller, cloud
@@ -1060,7 +1065,7 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Create an over-the-air (OTA) task to update a device.
+    # Create an over-the-air (OTA) task to target a device.
     #
     # @option params [String] :description
     #   The description of the over-the-air (OTA) task.
@@ -1297,7 +1302,13 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Remove a third party account and related devices from an end user.
+    # Remove a third-party account association for an end user.
+    #
+    # <note markdown="1"> You must first call the `DeregisterAccountAssociation` to remove the
+    # connection between the managed thing and the third-party account
+    # before calling the `DeleteAccountAssociation` API.
+    #
+    #  </note>
     #
     # @option params [required, String] :account_association_id
     #   The unique identifier of the account association to be deleted.
@@ -1337,8 +1348,13 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Delete a connector destination for connecting a cloud-to-cloud (C2C)
-    # connector to the customer's Amazon Web Services account.
+    # Delete a connector destination linked to a cloud-to-cloud (C2C)
+    # connector.
+    #
+    # <note markdown="1"> Deletion can't be done if the account association has used this
+    # connector destination.
+    #
+    #  </note>
     #
     # @option params [required, String] :identifier
     #   The identifier of the connector destination.
@@ -1383,7 +1399,7 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Deletes a customer-managed destination specified by id.
+    # Deletes a notification destination specified by name.
     #
     # @option params [required, String] :name
     #   The id of the customer-managed destination.
@@ -1423,9 +1439,10 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Delete a managed thing. If a controller is deleted, all of the devices
-    # connected to it will have their status changed to `PENDING`. It is not
-    # possible to remove a cloud device.
+    # Delete a managed thing. For direct-connected and hub-connected devices
+    # connecting with Managed integrations via a controller, all of the
+    # devices connected to it will have their status changed to `PENDING`.
+    # It is not possible to remove a cloud-to-cloud device.
     #
     # @option params [required, String] :identifier
     #   The id of the managed thing.
@@ -1532,8 +1549,7 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Deregisters an account association, removing the connection between a
-    # managed thing and a third-party account.
+    # Deregister an account association from a managed thing.
     #
     # @option params [required, String] :managed_thing_id
     #   The identifier of the managed thing to be deregistered from the
@@ -1602,7 +1618,7 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Gets all the information about a connector for a connector developer.
+    # Get configuration details for a cloud connector.
     #
     # @option params [required, String] :identifier
     #   The identifier of the C2C connector.
@@ -1679,8 +1695,8 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Get a connector destination of a cloud-to-cloud (C2C) connector
-    # connecting to a customer's Amazon Web Services account.
+    # Get connector destination details linked to a cloud-to-cloud (C2C)
+    # connector.
     #
     # @option params [required, String] :identifier
     #   The identifier of the C2C connector destination.
@@ -1809,7 +1825,7 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Gets a destination by ID.
+    # Gets a destination by name.
     #
     # @option params [required, String] :name
     #   The name of the customer-managed destination.
@@ -1946,7 +1962,8 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Get the attributes and capabilities associated with a managed thing.
+    # Get details of a managed thing including its attributes and
+    # capabilities.
     #
     # @option params [required, String] :identifier
     #   The id of the managed thing.
@@ -2069,6 +2086,47 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
+    # Retrieves the certificate PEM for a managed IoT thing.
+    #
+    # @option params [required, String] :identifier
+    #   The identifier of the managed thing.
+    #
+    # @return [Types::GetManagedThingCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetManagedThingCertificateResponse#managed_thing_id #managed_thing_id} => String
+    #   * {Types::GetManagedThingCertificateResponse#certificate_pem #certificate_pem} => String
+    #
+    #
+    # @example Example: Get managed thing certificate
+    #
+    #   resp = client.get_managed_thing_certificate({
+    #     identifier: "example-managed-thing-id", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     certificate_pem: "-----BEGIN CERTIFICATE-----\nMIIBkTCB+wIJAKHHH...\n-----END CERTIFICATE-----", 
+    #     managed_thing_id: "example-managed-thing-id", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_managed_thing_certificate({
+    #     identifier: "ManagedThingId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.managed_thing_id #=> String
+    #   resp.certificate_pem #=> String
+    #
+    # @overload get_managed_thing_certificate(params = {})
+    # @param [Hash] params ({})
+    def get_managed_thing_certificate(params = {}, options = {})
+      req = build_request(:get_managed_thing_certificate, params)
+      req.send_request(options)
+    end
+
     # Get the connectivity status of a managed thing.
     #
     # @option params [required, String] :identifier
@@ -2169,7 +2227,7 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Get a notification configuration.
+    # Get a notification configuration for a specified event type.
     #
     # @option params [required, String] :event_type
     #   The type of event triggering a device notification to the
@@ -2205,7 +2263,7 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Get the over-the-air (OTA) task.
+    # Get details of the over-the-air (OTA) task by its task id.
     #
     # @option params [required, String] :identifier
     #   The over-the-air (OTA) task id.
@@ -2363,8 +2421,7 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Get the runtime log configuration for a specific managed thing or for
-    # all managed things as a group.
+    # Get the runtime log configuration for a specific managed thing.
     #
     # @option params [required, String] :managed_thing_id
     #   The id for a managed thing.
@@ -2493,7 +2550,8 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Returns a list of connectors based on permissions.
+    # Returns a list of connectors filtered by its Lambda Amazon Resource
+    # Name (ARN) and `type`.
     #
     # @option params [String] :type
     #   The type of cloud connectors to filter by when listing available
@@ -2665,7 +2723,7 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # List all destination names under one Amazon Web Services account.
+    # List all notification destinations.
     #
     # @option params [String] :next_token
     #   A token that can be used to retrieve the next set of results.
@@ -3525,8 +3583,7 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Reset a runtime log configuration for a specific managed thing or for
-    # all managed things as a group.
+    # Reset a runtime log configuration for a specific managed thing.
     #
     # @option params [required, String] :managed_thing_id
     #   The id of a managed thing.
@@ -3603,9 +3660,9 @@ module Aws::IoTManagedIntegrations
     #    </note>
     #
     # @option params [String] :trace_id
-    #   The trace request identifier used to correlate a command request and
-    #   response. This is specified by the device owner, but will be generated
-    #   by IoT managed integrations if not provided by the device owner.
+    #   The trace request identifier. This is generated by IoT managed
+    #   integrations and can be used to trace this command and its related
+    #   operations in CloudWatch.
     #
     # @option params [Array<Types::Device>] :devices
     #   The list of devices.
@@ -3802,8 +3859,8 @@ module Aws::IoTManagedIntegrations
 
     # This API is used to start device discovery for hub-connected and
     # third-party-connected devices. The authentication material (install
-    # code) is passed as a message to the controller telling it to start the
-    # discovery.
+    # code) is delivered as a message to the controller instructing it to
+    # start the discovery.
     #
     # @option params [required, String] :discovery_type
     #   The discovery type supporting the type of device to be discovered in
@@ -4054,7 +4111,7 @@ module Aws::IoTManagedIntegrations
       req.send_request(options)
     end
 
-    # Update a destination specified by id.
+    # Update a destination specified by name.
     #
     # @option params [required, String] :name
     #   The name of the customer-managed destination.
@@ -4287,7 +4344,7 @@ module Aws::IoTManagedIntegrations
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotmanagedintegrations'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

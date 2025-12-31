@@ -38,6 +38,8 @@ module Aws::Artifact
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ListCustomerAgreementsRequest = Shapes::StructureShape.new(name: 'ListCustomerAgreementsRequest')
     ListCustomerAgreementsResponse = Shapes::StructureShape.new(name: 'ListCustomerAgreementsResponse')
+    ListReportVersionsRequest = Shapes::StructureShape.new(name: 'ListReportVersionsRequest')
+    ListReportVersionsResponse = Shapes::StructureShape.new(name: 'ListReportVersionsResponse')
     ListReportsRequest = Shapes::StructureShape.new(name: 'ListReportsRequest')
     ListReportsResponse = Shapes::StructureShape.new(name: 'ListReportsResponse')
     LongStringAttribute = Shapes::StringShape.new(name: 'LongStringAttribute')
@@ -135,6 +137,15 @@ module Aws::Artifact
     ListCustomerAgreementsResponse.add_member(:customer_agreements, Shapes::ShapeRef.new(shape: CustomerAgreementList, required: true, location_name: "customerAgreements"))
     ListCustomerAgreementsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenAttribute, location_name: "nextToken"))
     ListCustomerAgreementsResponse.struct_class = Types::ListCustomerAgreementsResponse
+
+    ListReportVersionsRequest.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, required: true, location: "querystring", location_name: "reportId"))
+    ListReportVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsAttribute, location: "querystring", location_name: "maxResults"))
+    ListReportVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenAttribute, location: "querystring", location_name: "nextToken"))
+    ListReportVersionsRequest.struct_class = Types::ListReportVersionsRequest
+
+    ListReportVersionsResponse.add_member(:reports, Shapes::ShapeRef.new(shape: ReportsList, required: true, location_name: "reports"))
+    ListReportVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenAttribute, location_name: "nextToken"))
+    ListReportVersionsResponse.struct_class = Types::ListReportVersionsResponse
 
     ListReportsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsAttribute, location: "querystring", location_name: "maxResults"))
     ListReportsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenAttribute, location: "querystring", location_name: "nextToken"))
@@ -308,6 +319,26 @@ module Aws::Artifact
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_report_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReportVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/report/listVersions"
+        o.input = Shapes::ShapeRef.new(shape: ListReportVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListReportVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

@@ -23,11 +23,22 @@ module Aws::OpenSearchService
     #   features on the specified domain.
     #   @return [Types::S3VectorsEngine]
     #
+    # @!attribute [rw] serverless_vector_acceleration
+    #   Specifies whether to enable serverless vector acceleration for the
+    #   domain. When enabled, provides [GPU-accelerated][1] vector search
+    #   capabilities for improved performance on vector workloads.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gpu-acceleration-vector-index.html
+    #   @return [Types::ServerlessVectorAcceleration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AIMLOptionsInput AWS API Documentation
     #
     class AIMLOptionsInput < Struct.new(
       :natural_language_query_generation_options,
-      :s3_vectors_engine)
+      :s3_vectors_engine,
+      :serverless_vector_acceleration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -45,11 +56,17 @@ module Aws::OpenSearchService
     #   features on the specified domain.
     #   @return [Types::S3VectorsEngine]
     #
+    # @!attribute [rw] serverless_vector_acceleration
+    #   The current serverless vector acceleration configuration for the
+    #   domain.
+    #   @return [Types::ServerlessVectorAcceleration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AIMLOptionsOutput AWS API Documentation
     #
     class AIMLOptionsOutput < Struct.new(
       :natural_language_query_generation_options,
-      :s3_vectors_engine)
+      :s3_vectors_engine,
+      :serverless_vector_acceleration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -368,8 +385,8 @@ module Aws::OpenSearchService
     #   @return [Types::JWTOptionsOutput]
     #
     # @!attribute [rw] iam_federation_options
-    #   Container for information about the IAM federation configuration for
-    #   an OpenSearch UI application.
+    #   Configuration options for IAM identity federation in advanced
+    #   security settings.
     #   @return [Types::IAMFederationOptionsOutput]
     #
     # @!attribute [rw] anonymous_auth_disable_date
@@ -437,8 +454,8 @@ module Aws::OpenSearchService
     #   @return [Types::JWTOptionsInput]
     #
     # @!attribute [rw] iam_federation_options
-    #   Container for information about the IAM federation configuration for
-    #   an OpenSearch UI application.
+    #   Input configuration for IAM identity federation within advanced
+    #   security options.
     #   @return [Types::IAMFederationOptionsInput]
     #
     # @!attribute [rw] anonymous_auth_enabled
@@ -485,7 +502,7 @@ module Aws::OpenSearchService
     end
 
     # Configuration settings for an OpenSearch application. For more
-    # information, see see [Using the OpenSearch user interface in Amazon
+    # information, see [Using the OpenSearch user interface in Amazon
     # OpenSearch Service][1].
     #
     #
@@ -1558,6 +1575,14 @@ module Aws::OpenSearchService
     #   A list of tags attached to a domain.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   application's data at rest. If provided, the application uses your
+    #   customer-managed key for encryption. If omitted, the application
+    #   uses an AWS-managed key. The KMS key must be in the same region as
+    #   the application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -1566,7 +1591,8 @@ module Aws::OpenSearchService
       :data_sources,
       :iam_identity_center_options,
       :app_configs,
-      :tag_list)
+      :tag_list,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1612,6 +1638,11 @@ module Aws::OpenSearchService
     #   created.
     #   @return [Time]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   application's data at rest.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateApplicationResponse AWS API Documentation
     #
     class CreateApplicationResponse < Struct.new(
@@ -1622,7 +1653,8 @@ module Aws::OpenSearchService
       :iam_identity_center_options,
       :app_configs,
       :tag_list,
-      :created_at)
+      :created_at,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1816,6 +1848,46 @@ module Aws::OpenSearchService
     #
     class CreateDomainResponse < Struct.new(
       :domain_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index to create. Must be between 1 and 255
+    #   characters and follow OpenSearch naming conventions.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_schema
+    #   The JSON schema defining index mappings, settings, and semantic
+    #   enrichment configuration. The schema specifies which text fields
+    #   should be automatically enriched for semantic search capabilities
+    #   and includes OpenSearch index configuration parameters.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateIndexRequest AWS API Documentation
+    #
+    class CreateIndexRequest < Struct.new(
+      :domain_name,
+      :index_name,
+      :index_schema)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the index creation operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateIndexResponse AWS API Documentation
+    #
+    class CreateIndexResponse < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2215,6 +2287,37 @@ module Aws::OpenSearchService
     #
     class DeleteInboundConnectionResponse < Struct.new(
       :connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteIndexRequest AWS API Documentation
+    #
+    class DeleteIndexRequest < Struct.new(
+      :domain_name,
+      :index_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the index deletion operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteIndexResponse AWS API Documentation
+    #
+    class DeleteIndexResponse < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3611,8 +3714,8 @@ module Aws::OpenSearchService
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the domain. For more information,
-    #   see [IAM identifiers ][1] in the *AWS Identity and Access Management
-    #   User Guide*.
+    #   see [IAM identifiers ][1] in the *Amazon Web Services Identity and
+    #   Access Management User Guide*.
     #
     #
     #
@@ -4122,6 +4225,11 @@ module Aws::OpenSearchService
     #   The timestamp of the last update to the OpenSearch application.
     #   @return [Time]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   application's data at rest.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetApplicationResponse AWS API Documentation
     #
     class GetApplicationResponse < Struct.new(
@@ -4134,7 +4242,8 @@ module Aws::OpenSearchService
       :data_sources,
       :app_configs,
       :created_at,
-      :last_updated_at)
+      :last_updated_at,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4215,6 +4324,30 @@ module Aws::OpenSearchService
       :name,
       :description,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDefaultApplicationSettingRequest AWS API Documentation
+    #
+    class GetDefaultApplicationSettingRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the domain. See [Identifiers for
+    #   IAM Entities ][1] in *Using Amazon Web Services Identity and Access
+    #   Management* for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDefaultApplicationSettingResponse AWS API Documentation
+    #
+    class GetDefaultApplicationSettingResponse < Struct.new(
+      :application_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4325,6 +4458,38 @@ module Aws::OpenSearchService
       :action,
       :created_at,
       :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index to retrieve information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetIndexRequest AWS API Documentation
+    #
+    class GetIndexRequest < Struct.new(
+      :domain_name,
+      :index_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] index_schema
+    #   The JSON schema of the index including mappings, settings, and
+    #   semantic enrichment configuration.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetIndexResponse AWS API Documentation
+    #
+    class GetIndexResponse < Struct.new(
+      :index_schema)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4481,21 +4646,21 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # The IAM federation authentication configuration for an Amazon
-    # OpenSearch Service domain.
+    # Input parameters for configuring IAM identity federation settings.
     #
     # @!attribute [rw] enabled
-    #   True to enable IAM federation authentication for a domain.
+    #   Specifies whether IAM identity federation is enabled for the
+    #   OpenSearch domain.
     #   @return [Boolean]
     #
     # @!attribute [rw] subject_key
-    #   Element of the IAM federation assertion to use for the user name.
-    #   Default is `sub`.
+    #   The key in the SAML assertion that contains the user's subject
+    #   identifier.
     #   @return [String]
     #
     # @!attribute [rw] roles_key
-    #   Element of the IAM federation assertion to use for backend roles.
-    #   Default is `roles`.
+    #   The key in the SAML assertion that contains the user's role
+    #   information.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/IAMFederationOptionsInput AWS API Documentation
@@ -4508,18 +4673,22 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
-    # Describes the IAM federation options configured for the domain.
+    # Output parameters showing the current IAM identity federation
+    # configuration.
     #
     # @!attribute [rw] enabled
-    #   True if IAM federation is enabled.
+    #   Indicates whether IAM identity federation is currently enabled for
+    #   the domain.
     #   @return [Boolean]
     #
     # @!attribute [rw] subject_key
-    #   The key used for matching the IAM federation subject attribute.
+    #   The configured key in the SAML assertion for the user's subject
+    #   identifier.
     #   @return [String]
     #
     # @!attribute [rw] roles_key
-    #   The key used for matching the IAM federation roles attribute.
+    #   The configured key in the SAML assertion for the user's role
+    #   information.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/IAMFederationOptionsOutput AWS API Documentation
@@ -6435,6 +6604,48 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the domain. See [Identifiers for
+    #   IAM Entities ][1] in *Using Amazon Web Services Identity and Access
+    #   Management* for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+    #   @return [String]
+    #
+    # @!attribute [rw] set_as_default
+    #   Set to true to set the specified ARN as the default application. Set
+    #   to false to clear the default application.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/PutDefaultApplicationSettingRequest AWS API Documentation
+    #
+    class PutDefaultApplicationSettingRequest < Struct.new(
+      :application_arn,
+      :set_as_default)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the domain. See [Identifiers for
+    #   IAM Entities ][1] in *Using Amazon Web Services Identity and Access
+    #   Management* for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/PutDefaultApplicationSettingResponse AWS API Documentation
+    #
+    class PutDefaultApplicationSettingResponse < Struct.new(
+      :application_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the specific price and frequency of a recurring charges for
     # an OpenSearch Reserved Instance, or for a Reserved Instance offering.
     #
@@ -6929,6 +7140,27 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Configuration for serverless vector acceleration, which provides
+    # [GPU-accelerated][1] vector search capabilities for improved
+    # performance on vector workloads.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gpu-acceleration-vector-index.html
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether serverless vector acceleration is enabled for the
+    #   domain.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ServerlessVectorAcceleration AWS API Documentation
+    #
+    class ServerlessVectorAcceleration < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The current status of the service software for an Amazon OpenSearch
     # Service domain. For more information, see [Service software updates in
     # Amazon OpenSearch Service][1].
@@ -7264,6 +7496,13 @@ module Aws::OpenSearchService
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The request was denied due to request throttling. Reduce the frequency
+    # of your requests and try again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Aws::EmptyStructure; end
 
     # @!attribute [rw] id
     #   The unique identifier for the OpenSearch application to be updated.
@@ -7622,6 +7861,43 @@ module Aws::OpenSearchService
       :domain_config,
       :dry_run_results,
       :dry_run_progress_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_schema
+    #   The updated JSON schema for the index including any changes to
+    #   mappings, settings, and semantic enrichment configuration.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateIndexRequest AWS API Documentation
+    #
+    class UpdateIndexRequest < Struct.new(
+      :domain_name,
+      :index_name,
+      :index_schema)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the index update operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateIndexResponse AWS API Documentation
+    #
+    class UpdateIndexResponse < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

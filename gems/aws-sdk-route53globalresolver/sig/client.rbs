@@ -1,0 +1,977 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Route53GlobalResolver
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateHostedZoneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateHostedZoneOutput]
+        def id: () -> ::String
+        def resource_arn: () -> ::String
+        def hosted_zone_id: () -> ::String
+        def hosted_zone_name: () -> ::String
+        def name: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "OPERATIONAL" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#associate_hosted_zone-instance_method
+      def associate_hosted_zone: (
+                                   hosted_zone_id: ::String,
+                                   resource_arn: ::String,
+                                   name: ::String
+                                 ) -> _AssociateHostedZoneResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateHostedZoneResponseSuccess
+
+      interface _BatchCreateFirewallRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchCreateFirewallRuleOutput]
+        def failures: () -> ::Array[Types::BatchCreateFirewallRuleOutputItem]
+        def successes: () -> ::Array[Types::BatchCreateFirewallRuleOutputItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#batch_create_firewall_rule-instance_method
+      def batch_create_firewall_rule: (
+                                        firewall_rules: Array[
+                                          {
+                                            action: ("ALLOW" | "ALERT" | "BLOCK"),
+                                            block_override_dns_type: ("CNAME")?,
+                                            block_override_domain: ::String?,
+                                            block_override_ttl: ::Integer?,
+                                            block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")?,
+                                            client_token: ::String,
+                                            confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")?,
+                                            description: ::String?,
+                                            dns_advanced_protection: ("DGA" | "DNS_TUNNELING")?,
+                                            firewall_domain_list_id: ::String?,
+                                            name: ::String,
+                                            priority: ::Integer?,
+                                            dns_view_id: ::String,
+                                            q_type: ::String?
+                                          },
+                                        ]
+                                      ) -> _BatchCreateFirewallRuleResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateFirewallRuleResponseSuccess
+
+      interface _BatchDeleteFirewallRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteFirewallRuleOutput]
+        def failures: () -> ::Array[Types::BatchDeleteFirewallRuleOutputItem]
+        def successes: () -> ::Array[Types::BatchDeleteFirewallRuleOutputItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#batch_delete_firewall_rule-instance_method
+      def batch_delete_firewall_rule: (
+                                        firewall_rules: Array[
+                                          {
+                                            firewall_rule_id: ::String
+                                          },
+                                        ]
+                                      ) -> _BatchDeleteFirewallRuleResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteFirewallRuleResponseSuccess
+
+      interface _BatchUpdateFirewallRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUpdateFirewallRuleOutput]
+        def failures: () -> ::Array[Types::BatchUpdateFirewallRuleOutputItem]
+        def successes: () -> ::Array[Types::BatchUpdateFirewallRuleOutputItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#batch_update_firewall_rule-instance_method
+      def batch_update_firewall_rule: (
+                                        firewall_rules: Array[
+                                          {
+                                            action: ("ALLOW" | "ALERT" | "BLOCK")?,
+                                            block_override_dns_type: ("CNAME")?,
+                                            block_override_domain: ::String?,
+                                            block_override_ttl: ::Integer?,
+                                            block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE")?,
+                                            confidence_threshold: ("LOW" | "MEDIUM" | "HIGH")?,
+                                            description: ::String?,
+                                            dns_advanced_protection: ("DGA" | "DNS_TUNNELING")?,
+                                            firewall_rule_id: ::String,
+                                            name: ::String?,
+                                            priority: ::Integer?
+                                          },
+                                        ]
+                                      ) -> _BatchUpdateFirewallRuleResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateFirewallRuleResponseSuccess
+
+      interface _CreateAccessSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessSourceOutput]
+        def arn: () -> ::String
+        def cidr: () -> ::String
+        def created_at: () -> ::Time
+        def id: () -> ::String
+        def ip_address_type: () -> ("IPV4" | "IPV6")
+        def name: () -> ::String
+        def dns_view_id: () -> ::String
+        def protocol: () -> ("DO53" | "DOH" | "DOT")
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#create_access_source-instance_method
+      def create_access_source: (
+                                  cidr: ::String,
+                                  ?client_token: ::String,
+                                  ?ip_address_type: ("IPV4" | "IPV6"),
+                                  ?name: ::String,
+                                  dns_view_id: ::String,
+                                  protocol: ("DO53" | "DOH" | "DOT"),
+                                  ?tags: Hash[::String, ::String]
+                                ) -> _CreateAccessSourceResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessSourceResponseSuccess
+
+      interface _CreateAccessTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessTokenOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def client_token: () -> ::String
+        def created_at: () -> ::Time
+        def dns_view_id: () -> ::String
+        def expires_at: () -> ::Time
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "OPERATIONAL" | "DELETING")
+        def value: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#create_access_token-instance_method
+      def create_access_token: (
+                                 ?client_token: ::String,
+                                 dns_view_id: ::String,
+                                 ?expires_at: ::Time,
+                                 ?name: ::String,
+                                 ?tags: Hash[::String, ::String]
+                               ) -> _CreateAccessTokenResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessTokenResponseSuccess
+
+      interface _CreateDNSViewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDNSViewOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def client_token: () -> ::String
+        def dnssec_validation: () -> ("ENABLED" | "DISABLED")
+        def edns_client_subnet: () -> ("ENABLED" | "DISABLED")
+        def firewall_rules_fail_open: () -> ("ENABLED" | "DISABLED")
+        def name: () -> ::String
+        def description: () -> ::String
+        def global_resolver_id: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "ENABLING" | "DISABLING" | "DISABLED" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#create_dns_view-instance_method
+      def create_dns_view: (
+                             global_resolver_id: ::String,
+                             ?client_token: ::String,
+                             name: ::String,
+                             ?dnssec_validation: ("ENABLED" | "DISABLED"),
+                             ?edns_client_subnet: ("ENABLED" | "DISABLED"),
+                             ?firewall_rules_fail_open: ("ENABLED" | "DISABLED"),
+                             ?description: ::String,
+                             ?tags: Hash[::String, ::String]
+                           ) -> _CreateDNSViewResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDNSViewResponseSuccess
+
+      interface _CreateFirewallDomainListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFirewallDomainListOutput]
+        def arn: () -> ::String
+        def global_resolver_id: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def domain_count: () -> ::Integer
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#create_firewall_domain_list-instance_method
+      def create_firewall_domain_list: (
+                                         ?client_token: ::String,
+                                         global_resolver_id: ::String,
+                                         ?description: ::String,
+                                         name: ::String,
+                                         ?tags: Hash[::String, ::String]
+                                       ) -> _CreateFirewallDomainListResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFirewallDomainListResponseSuccess
+
+      interface _CreateFirewallRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFirewallRuleOutput]
+        def action: () -> ("ALLOW" | "ALERT" | "BLOCK")
+        def block_override_dns_type: () -> ("CNAME")
+        def block_override_domain: () -> ::String
+        def block_override_ttl: () -> ::Integer
+        def block_response: () -> ("NODATA" | "NXDOMAIN" | "OVERRIDE")
+        def confidence_threshold: () -> ("LOW" | "MEDIUM" | "HIGH")
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def dns_advanced_protection: () -> ("DGA" | "DNS_TUNNELING")
+        def firewall_domain_list_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def priority: () -> ::Integer
+        def dns_view_id: () -> ::String
+        def query_type: () -> ::String
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#create_firewall_rule-instance_method
+      def create_firewall_rule: (
+                                  action: ("ALLOW" | "ALERT" | "BLOCK"),
+                                  ?block_override_dns_type: ("CNAME"),
+                                  ?block_override_domain: ::String,
+                                  ?block_override_ttl: ::Integer,
+                                  ?block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE"),
+                                  ?client_token: ::String,
+                                  ?confidence_threshold: ("LOW" | "MEDIUM" | "HIGH"),
+                                  ?description: ::String,
+                                  ?dns_advanced_protection: ("DGA" | "DNS_TUNNELING"),
+                                  ?firewall_domain_list_id: ::String,
+                                  name: ::String,
+                                  ?priority: ::Integer,
+                                  dns_view_id: ::String,
+                                  ?q_type: ::String
+                                ) -> _CreateFirewallRuleResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFirewallRuleResponseSuccess
+
+      interface _CreateGlobalResolverResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGlobalResolverOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def client_token: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def dns_name: () -> ::String
+        def ipv4_addresses: () -> ::Array[::String]
+        def name: () -> ::String
+        def observability_region: () -> ::String
+        def regions: () -> ::Array[::String]
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#create_global_resolver-instance_method
+      def create_global_resolver: (
+                                    ?client_token: ::String,
+                                    ?description: ::String,
+                                    name: ::String,
+                                    ?observability_region: ::String,
+                                    regions: Array[::String],
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreateGlobalResolverResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGlobalResolverResponseSuccess
+
+      interface _DeleteAccessSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccessSourceOutput]
+        def arn: () -> ::String
+        def cidr: () -> ::String
+        def created_at: () -> ::Time
+        def id: () -> ::String
+        def ip_address_type: () -> ("IPV4" | "IPV6")
+        def name: () -> ::String
+        def dns_view_id: () -> ::String
+        def protocol: () -> ("DO53" | "DOH" | "DOT")
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#delete_access_source-instance_method
+      def delete_access_source: (
+                                  access_source_id: ::String
+                                ) -> _DeleteAccessSourceResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccessSourceResponseSuccess
+
+      interface _DeleteAccessTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccessTokenOutput]
+        def id: () -> ::String
+        def status: () -> ("CREATING" | "OPERATIONAL" | "DELETING")
+        def deleted_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#delete_access_token-instance_method
+      def delete_access_token: (
+                                 access_token_id: ::String
+                               ) -> _DeleteAccessTokenResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccessTokenResponseSuccess
+
+      interface _DeleteDNSViewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDNSViewOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def client_token: () -> ::String
+        def dnssec_validation: () -> ("ENABLED" | "DISABLED")
+        def edns_client_subnet: () -> ("ENABLED" | "DISABLED")
+        def firewall_rules_fail_open: () -> ("ENABLED" | "DISABLED")
+        def name: () -> ::String
+        def description: () -> ::String
+        def global_resolver_id: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "ENABLING" | "DISABLING" | "DISABLED" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#delete_dns_view-instance_method
+      def delete_dns_view: (
+                             dns_view_id: ::String
+                           ) -> _DeleteDNSViewResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDNSViewResponseSuccess
+
+      interface _DeleteFirewallDomainListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFirewallDomainListOutput]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#delete_firewall_domain_list-instance_method
+      def delete_firewall_domain_list: (
+                                         firewall_domain_list_id: ::String
+                                       ) -> _DeleteFirewallDomainListResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFirewallDomainListResponseSuccess
+
+      interface _DeleteFirewallRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFirewallRuleOutput]
+        def action: () -> ("ALLOW" | "ALERT" | "BLOCK")
+        def block_override_dns_type: () -> ("CNAME")
+        def block_override_domain: () -> ::String
+        def block_override_ttl: () -> ::Integer
+        def block_response: () -> ("NODATA" | "NXDOMAIN" | "OVERRIDE")
+        def confidence_threshold: () -> ("LOW" | "MEDIUM" | "HIGH")
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def dns_advanced_protection: () -> ("DGA" | "DNS_TUNNELING")
+        def firewall_domain_list_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def priority: () -> ::Integer
+        def dns_view_id: () -> ::String
+        def query_type: () -> ::String
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#delete_firewall_rule-instance_method
+      def delete_firewall_rule: (
+                                  firewall_rule_id: ::String
+                                ) -> _DeleteFirewallRuleResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFirewallRuleResponseSuccess
+
+      interface _DeleteGlobalResolverResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGlobalResolverOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def client_token: () -> ::String
+        def dns_name: () -> ::String
+        def observability_region: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def regions: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+        def ipv4_addresses: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#delete_global_resolver-instance_method
+      def delete_global_resolver: (
+                                    global_resolver_id: ::String
+                                  ) -> _DeleteGlobalResolverResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGlobalResolverResponseSuccess
+
+      interface _DisableDNSViewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableDNSViewOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def client_token: () -> ::String
+        def dnssec_validation: () -> ("ENABLED" | "DISABLED")
+        def edns_client_subnet: () -> ("ENABLED" | "DISABLED")
+        def firewall_rules_fail_open: () -> ("ENABLED" | "DISABLED")
+        def name: () -> ::String
+        def description: () -> ::String
+        def global_resolver_id: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "ENABLING" | "DISABLING" | "DISABLED" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#disable_dns_view-instance_method
+      def disable_dns_view: (
+                              dns_view_id: ::String
+                            ) -> _DisableDNSViewResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableDNSViewResponseSuccess
+
+      interface _DisassociateHostedZoneResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateHostedZoneOutput]
+        def id: () -> ::String
+        def resource_arn: () -> ::String
+        def hosted_zone_id: () -> ::String
+        def hosted_zone_name: () -> ::String
+        def name: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "OPERATIONAL" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#disassociate_hosted_zone-instance_method
+      def disassociate_hosted_zone: (
+                                      hosted_zone_id: ::String,
+                                      resource_arn: ::String
+                                    ) -> _DisassociateHostedZoneResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateHostedZoneResponseSuccess
+
+      interface _EnableDNSViewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableDNSViewOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def client_token: () -> ::String
+        def dnssec_validation: () -> ("ENABLED" | "DISABLED")
+        def edns_client_subnet: () -> ("ENABLED" | "DISABLED")
+        def firewall_rules_fail_open: () -> ("ENABLED" | "DISABLED")
+        def name: () -> ::String
+        def description: () -> ::String
+        def global_resolver_id: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "ENABLING" | "DISABLING" | "DISABLED" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#enable_dns_view-instance_method
+      def enable_dns_view: (
+                             dns_view_id: ::String
+                           ) -> _EnableDNSViewResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableDNSViewResponseSuccess
+
+      interface _GetAccessSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessSourceOutput]
+        def arn: () -> ::String
+        def cidr: () -> ::String
+        def created_at: () -> ::Time
+        def id: () -> ::String
+        def ip_address_type: () -> ("IPV4" | "IPV6")
+        def name: () -> ::String
+        def dns_view_id: () -> ::String
+        def protocol: () -> ("DO53" | "DOH" | "DOT")
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#get_access_source-instance_method
+      def get_access_source: (
+                               access_source_id: ::String
+                             ) -> _GetAccessSourceResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessSourceResponseSuccess
+
+      interface _GetAccessTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessTokenOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def client_token: () -> ::String
+        def created_at: () -> ::Time
+        def dns_view_id: () -> ::String
+        def expires_at: () -> ::Time
+        def global_resolver_id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "OPERATIONAL" | "DELETING")
+        def updated_at: () -> ::Time
+        def value: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#get_access_token-instance_method
+      def get_access_token: (
+                              access_token_id: ::String
+                            ) -> _GetAccessTokenResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessTokenResponseSuccess
+
+      interface _GetDNSViewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDNSViewOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def client_token: () -> ::String
+        def dnssec_validation: () -> ("ENABLED" | "DISABLED")
+        def edns_client_subnet: () -> ("ENABLED" | "DISABLED")
+        def firewall_rules_fail_open: () -> ("ENABLED" | "DISABLED")
+        def name: () -> ::String
+        def description: () -> ::String
+        def global_resolver_id: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "ENABLING" | "DISABLING" | "DISABLED" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#get_dns_view-instance_method
+      def get_dns_view: (
+                          dns_view_id: ::String
+                        ) -> _GetDNSViewResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDNSViewResponseSuccess
+
+      interface _GetFirewallDomainListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFirewallDomainListOutput]
+        def arn: () -> ::String
+        def global_resolver_id: () -> ::String
+        def client_token: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def domain_count: () -> ::Integer
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+        def status_message: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#get_firewall_domain_list-instance_method
+      def get_firewall_domain_list: (
+                                      firewall_domain_list_id: ::String
+                                    ) -> _GetFirewallDomainListResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFirewallDomainListResponseSuccess
+
+      interface _GetFirewallRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFirewallRuleOutput]
+        def action: () -> ("ALLOW" | "ALERT" | "BLOCK")
+        def block_override_dns_type: () -> ("CNAME")
+        def block_override_domain: () -> ::String
+        def block_override_ttl: () -> ::Integer
+        def block_response: () -> ("NODATA" | "NXDOMAIN" | "OVERRIDE")
+        def confidence_threshold: () -> ("LOW" | "MEDIUM" | "HIGH")
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def dns_advanced_protection: () -> ("DGA" | "DNS_TUNNELING")
+        def firewall_domain_list_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def priority: () -> ::Integer
+        def dns_view_id: () -> ::String
+        def query_type: () -> ::String
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#get_firewall_rule-instance_method
+      def get_firewall_rule: (
+                               firewall_rule_id: ::String
+                             ) -> _GetFirewallRuleResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFirewallRuleResponseSuccess
+
+      interface _GetGlobalResolverResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGlobalResolverOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def client_token: () -> ::String
+        def dns_name: () -> ::String
+        def observability_region: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def regions: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+        def ipv4_addresses: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#get_global_resolver-instance_method
+      def get_global_resolver: (
+                                 global_resolver_id: ::String
+                               ) -> _GetGlobalResolverResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGlobalResolverResponseSuccess
+
+      interface _GetHostedZoneAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetHostedZoneAssociationOutput]
+        def id: () -> ::String
+        def resource_arn: () -> ::String
+        def hosted_zone_id: () -> ::String
+        def hosted_zone_name: () -> ::String
+        def name: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "OPERATIONAL" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#get_hosted_zone_association-instance_method
+      def get_hosted_zone_association: (
+                                         hosted_zone_association_id: ::String
+                                       ) -> _GetHostedZoneAssociationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetHostedZoneAssociationResponseSuccess
+
+      interface _GetManagedFirewallDomainListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedFirewallDomainListOutput]
+        def description: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def managed_list_type: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#get_managed_firewall_domain_list-instance_method
+      def get_managed_firewall_domain_list: (
+                                              managed_firewall_domain_list_id: ::String
+                                            ) -> _GetManagedFirewallDomainListResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetManagedFirewallDomainListResponseSuccess
+
+      interface _ImportFirewallDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportFirewallDomainsOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#import_firewall_domains-instance_method
+      def import_firewall_domains: (
+                                     domain_file_url: ::String,
+                                     firewall_domain_list_id: ::String,
+                                     operation: ::String
+                                   ) -> _ImportFirewallDomainsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportFirewallDomainsResponseSuccess
+
+      interface _ListAccessSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessSourcesOutput]
+        def next_token: () -> ::String
+        def access_sources: () -> ::Array[Types::AccessSourcesItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#list_access_sources-instance_method
+      def list_access_sources: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 ?filters: Hash[::String, Array[::String]]
+                               ) -> _ListAccessSourcesResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessSourcesResponseSuccess
+
+      interface _ListAccessTokensResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessTokensOutput]
+        def next_token: () -> ::String
+        def access_tokens: () -> ::Array[Types::AccessTokenItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#list_access_tokens-instance_method
+      def list_access_tokens: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                dns_view_id: ::String,
+                                ?filters: Hash[::String, Array[::String]]
+                              ) -> _ListAccessTokensResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessTokensResponseSuccess
+
+      interface _ListDNSViewsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDNSViewsOutput]
+        def next_token: () -> ::String
+        def dns_views: () -> ::Array[Types::DNSViewSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#list_dns_views-instance_method
+      def list_dns_views: (
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            global_resolver_id: ::String
+                          ) -> _ListDNSViewsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDNSViewsResponseSuccess
+
+      interface _ListFirewallDomainListsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFirewallDomainListsOutput]
+        def next_token: () -> ::String
+        def firewall_domain_lists: () -> ::Array[Types::FirewallDomainListsItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#list_firewall_domain_lists-instance_method
+      def list_firewall_domain_lists: (
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        ?global_resolver_id: ::String
+                                      ) -> _ListFirewallDomainListsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFirewallDomainListsResponseSuccess
+
+      interface _ListFirewallDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFirewallDomainsOutput]
+        def next_token: () -> ::String
+        def domains: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#list_firewall_domains-instance_method
+      def list_firewall_domains: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   firewall_domain_list_id: ::String
+                                 ) -> _ListFirewallDomainsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFirewallDomainsResponseSuccess
+
+      interface _ListFirewallRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFirewallRulesOutput]
+        def next_token: () -> ::String
+        def firewall_rules: () -> ::Array[Types::FirewallRulesItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#list_firewall_rules-instance_method
+      def list_firewall_rules: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 dns_view_id: ::String,
+                                 ?filters: Hash[::String, Array[::String]]
+                               ) -> _ListFirewallRulesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFirewallRulesResponseSuccess
+
+      interface _ListGlobalResolversResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGlobalResolversOutput]
+        def next_token: () -> ::String
+        def global_resolvers: () -> ::Array[Types::GlobalResolversItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#list_global_resolvers-instance_method
+      def list_global_resolvers: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListGlobalResolversResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGlobalResolversResponseSuccess
+
+      interface _ListHostedZoneAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHostedZoneAssociationsOutput]
+        def next_token: () -> ::String
+        def hosted_zone_associations: () -> ::Array[Types::HostedZoneAssociationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#list_hosted_zone_associations-instance_method
+      def list_hosted_zone_associations: (
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String,
+                                           resource_arn: ::String
+                                         ) -> _ListHostedZoneAssociationsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHostedZoneAssociationsResponseSuccess
+
+      interface _ListManagedFirewallDomainListsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListManagedFirewallDomainListsOutput]
+        def next_token: () -> ::String
+        def managed_firewall_domain_lists: () -> ::Array[Types::ManagedFirewallDomainListsItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#list_managed_firewall_domain_lists-instance_method
+      def list_managed_firewall_domain_lists: (
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String,
+                                                managed_firewall_domain_list_type: ::String
+                                              ) -> _ListManagedFirewallDomainListsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedFirewallDomainListsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAccessSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccessSourceOutput]
+        def arn: () -> ::String
+        def cidr: () -> ::String
+        def created_at: () -> ::Time
+        def id: () -> ::String
+        def ip_address_type: () -> ("IPV4" | "IPV6")
+        def name: () -> ::String
+        def dns_view_id: () -> ::String
+        def protocol: () -> ("DO53" | "DOH" | "DOT")
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#update_access_source-instance_method
+      def update_access_source: (
+                                  access_source_id: ::String,
+                                  ?cidr: ::String,
+                                  ?ip_address_type: ("IPV4" | "IPV6"),
+                                  ?name: ::String,
+                                  ?protocol: ("DO53" | "DOH" | "DOT")
+                                ) -> _UpdateAccessSourceResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccessSourceResponseSuccess
+
+      interface _UpdateAccessTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccessTokenOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#update_access_token-instance_method
+      def update_access_token: (
+                                 access_token_id: ::String,
+                                 name: ::String
+                               ) -> _UpdateAccessTokenResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccessTokenResponseSuccess
+
+      interface _UpdateDNSViewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDNSViewOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def client_token: () -> ::String
+        def dnssec_validation: () -> ("ENABLED" | "DISABLED")
+        def edns_client_subnet: () -> ("ENABLED" | "DISABLED")
+        def firewall_rules_fail_open: () -> ("ENABLED" | "DISABLED")
+        def name: () -> ::String
+        def description: () -> ::String
+        def global_resolver_id: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "ENABLING" | "DISABLING" | "DISABLED" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#update_dns_view-instance_method
+      def update_dns_view: (
+                             dns_view_id: ::String,
+                             ?name: ::String,
+                             ?description: ::String,
+                             ?dnssec_validation: ("ENABLED" | "DISABLED"),
+                             ?edns_client_subnet: ("ENABLED" | "DISABLED"),
+                             ?firewall_rules_fail_open: ("ENABLED" | "DISABLED")
+                           ) -> _UpdateDNSViewResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDNSViewResponseSuccess
+
+      interface _UpdateFirewallDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFirewallDomainsOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#update_firewall_domains-instance_method
+      def update_firewall_domains: (
+                                     domains: Array[::String],
+                                     firewall_domain_list_id: ::String,
+                                     operation: ::String
+                                   ) -> _UpdateFirewallDomainsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallDomainsResponseSuccess
+
+      interface _UpdateFirewallRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFirewallRuleOutput]
+        def action: () -> ("ALLOW" | "ALERT" | "BLOCK")
+        def block_override_dns_type: () -> ("CNAME")
+        def block_override_domain: () -> ::String
+        def block_override_ttl: () -> ::Integer
+        def block_response: () -> ("NODATA" | "NXDOMAIN" | "OVERRIDE")
+        def confidence_threshold: () -> ("LOW" | "MEDIUM" | "HIGH")
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def dns_advanced_protection: () -> ("DGA" | "DNS_TUNNELING")
+        def firewall_domain_list_id: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def priority: () -> ::Integer
+        def dns_view_id: () -> ::String
+        def query_type: () -> ::String
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#update_firewall_rule-instance_method
+      def update_firewall_rule: (
+                                  ?action: ("ALLOW" | "ALERT" | "BLOCK"),
+                                  ?block_override_dns_type: ("CNAME"),
+                                  ?block_override_domain: ::String,
+                                  ?block_override_ttl: ::Integer,
+                                  ?block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE"),
+                                  client_token: ::String,
+                                  ?confidence_threshold: ("LOW" | "MEDIUM" | "HIGH"),
+                                  ?description: ::String,
+                                  ?dns_advanced_protection: ("DGA" | "DNS_TUNNELING"),
+                                  firewall_rule_id: ::String,
+                                  ?name: ::String,
+                                  ?priority: ::Integer
+                                ) -> _UpdateFirewallRuleResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallRuleResponseSuccess
+
+      interface _UpdateGlobalResolverResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGlobalResolverOutput]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def client_token: () -> ::String
+        def dns_name: () -> ::String
+        def observability_region: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def regions: () -> ::Array[::String]
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "OPERATIONAL" | "UPDATING" | "DELETING")
+        def ipv4_addresses: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#update_global_resolver-instance_method
+      def update_global_resolver: (
+                                    global_resolver_id: ::String,
+                                    ?name: ::String,
+                                    ?observability_region: ::String,
+                                    ?description: ::String
+                                  ) -> _UpdateGlobalResolverResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGlobalResolverResponseSuccess
+
+      interface _UpdateHostedZoneAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateHostedZoneAssociationOutput]
+        def id: () -> ::String
+        def resource_arn: () -> ::String
+        def hosted_zone_id: () -> ::String
+        def hosted_zone_name: () -> ::String
+        def name: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "OPERATIONAL" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53GlobalResolver/Client.html#update_hosted_zone_association-instance_method
+      def update_hosted_zone_association: (
+                                            hosted_zone_association_id: ::String,
+                                            ?name: ::String
+                                          ) -> _UpdateHostedZoneAssociationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHostedZoneAssociationResponseSuccess
+    end
+  end
+end
+

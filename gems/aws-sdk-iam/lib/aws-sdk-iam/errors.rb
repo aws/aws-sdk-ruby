@@ -47,6 +47,10 @@ module Aws::IAM
   #    * This error class is not used. `EntityAlreadyExists` is used during parsing instead.
   # * {EntityTemporarilyUnmodifiableException}
   #    * This error class is not used. `EntityTemporarilyUnmodifiable` is used during parsing instead.
+  # * {FeatureDisabledException}
+  #    * This error class is not used. `FeatureDisabled` is used during parsing instead.
+  # * {FeatureEnabledException}
+  #    * This error class is not used. `FeatureEnabled` is used during parsing instead.
   # * {InvalidAuthenticationCodeException}
   #    * This error class is not used. `InvalidAuthenticationCode` is used during parsing instead.
   # * {InvalidCertificateException}
@@ -258,6 +262,40 @@ module Aws::IAM
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::IAM::Types::EntityTemporarilyUnmodifiableException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    # @deprecated This error class is not used during parsing.
+    #   Please use `FeatureDisabled` instead.
+    class FeatureDisabledException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IAM::Types::FeatureDisabledException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    # @deprecated This error class is not used during parsing.
+    #   Please use `FeatureEnabled` instead.
+    class FeatureEnabledException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IAM::Types::FeatureEnabledException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

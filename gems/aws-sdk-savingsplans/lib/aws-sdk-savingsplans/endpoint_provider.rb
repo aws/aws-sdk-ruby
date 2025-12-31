@@ -10,6 +10,20 @@
 module Aws::SavingsPlans
   class EndpointProvider
     def resolve_endpoint(parameters)
+      if Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(parameters.endpoint)) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
+        if Aws::Endpoints::Matchers.set?(parameters.region) && (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region))
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws")
+            return Aws::Endpoints::Endpoint.new(url: "https://savingsplans.global.api.aws", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "savingsplans", "signingRegion" => "us-east-1"}]})
+          end
+          if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"), true)
+            return Aws::Endpoints::Endpoint.new(url: "https://savingsplans.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
+        end
+        if Aws::Endpoints::Matchers.not(Aws::Endpoints::Matchers.set?(parameters.region))
+          return Aws::Endpoints::Endpoint.new(url: "https://savingsplans.global.api.aws", headers: {}, properties: {"authSchemes" => [{"name" => "sigv4", "signingName" => "savingsplans", "signingRegion" => "us-east-1"}]})
+        end
+      end
       if Aws::Endpoints::Matchers.set?(parameters.endpoint)
         if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
           raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"

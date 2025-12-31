@@ -30,13 +30,58 @@ module Aws::BedrockRuntime
     end
 
     # The model must request at least one tool (no text is generated). For
-    # example, `{"any" : {}}`.
+    # example, `{"any" : {}}`. For more information, see [Call a tool with
+    # the Converse API][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
     #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/AnyToolChoice AWS API Documentation
     #
     class AnyToolChoice < Aws::EmptyStructure; end
+
+    # Details about the specific guardrail that was applied during this
+    # assessment, including its identifier, version, ARN, origin, and
+    # ownership information.
+    #
+    # @!attribute [rw] guardrail_id
+    #   The unique ID of the guardrail that was applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_version
+    #   The version of the guardrail that was applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_arn
+    #   The ARN of the guardrail that was applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] guardrail_origin
+    #   The origin of how the guardrail was applied. This can be either
+    #   requested at the API level or enforced at the account or
+    #   organization level as a default guardrail.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] guardrail_ownership
+    #   The ownership type of the guardrail, indicating whether it is owned
+    #   by the requesting account or is a cross-account guardrail shared
+    #   from another AWS account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/AppliedGuardrailDetails AWS API Documentation
+    #
+    class AppliedGuardrailDetails < Struct.new(
+      :guardrail_id,
+      :guardrail_version,
+      :guardrail_arn,
+      :guardrail_origin,
+      :guardrail_ownership)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] guardrail_identifier
     #   The guardrail identifier used in the request to apply the guardrail.
@@ -216,8 +261,78 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
+    # An audio content block that contains audio data in various supported
+    # formats.
+    #
+    # @!attribute [rw] format
+    #   The format of the audio data, such as MP3, WAV, FLAC, or other
+    #   supported audio formats.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source of the audio data, which can be provided as raw bytes or
+    #   an S3 location.
+    #   @return [Types::AudioSource]
+    #
+    # @!attribute [rw] error
+    #   Error information if the audio block could not be processed or
+    #   contains invalid data.
+    #   @return [Types::ErrorBlock]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/AudioBlock AWS API Documentation
+    #
+    class AudioBlock < Struct.new(
+      :format,
+      :source,
+      :error)
+      SENSITIVE = [:source, :error]
+      include Aws::Structure
+    end
+
+    # The source of audio data, which can be provided either as raw bytes or
+    # a reference to an S3 location.
+    #
+    # @note AudioSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AudioSource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AudioSource corresponding to the set member.
+    #
+    # @!attribute [rw] bytes
+    #   Audio data encoded in base64.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_location
+    #   A reference to audio data stored in an Amazon S3 bucket. To see
+    #   which models support S3 uploads, see [Supported models and features
+    #   for Converse][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference-supported-models-features.html
+    #   @return [Types::S3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/AudioSource AWS API Documentation
+    #
+    class AudioSource < Struct.new(
+      :bytes,
+      :s3_location,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Bytes < AudioSource; end
+      class S3Location < AudioSource; end
+      class Unknown < AudioSource; end
+    end
+
     # The Model automatically decides if a tool should be called or whether
-    # to generate text instead. For example, `{"auto" : {}}`.
+    # to generate text instead. For example, `{"auto" : {}}`. For more
+    # information, see [Call a tool with the Converse API][1] in the Amazon
+    # Bedrock User Guide
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
     #
     # @api private
     #
@@ -281,6 +396,11 @@ module Aws::BedrockRuntime
     #   The title or identifier of the source document being cited.
     #   @return [String]
     #
+    # @!attribute [rw] source
+    #   The source from the original search result that provided the cited
+    #   content.
+    #   @return [String]
+    #
     # @!attribute [rw] source_content
     #   The specific content from the source document that was referenced or
     #   cited in the generated response.
@@ -296,6 +416,7 @@ module Aws::BedrockRuntime
     #
     class Citation < Struct.new(
       :title,
+      :source,
       :source_content,
       :location)
       SENSITIVE = []
@@ -336,6 +457,10 @@ module Aws::BedrockRuntime
     #
     # @note CitationLocation is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CitationLocation corresponding to the set member.
     #
+    # @!attribute [rw] web
+    #   The web URL that was cited for this reference.
+    #   @return [Types::WebLocation]
+    #
     # @!attribute [rw] document_char
     #   The character-level location within the document where the cited
     #   content is found.
@@ -352,20 +477,30 @@ module Aws::BedrockRuntime
     #   logical chunks.
     #   @return [Types::DocumentChunkLocation]
     #
+    # @!attribute [rw] search_result_location
+    #   The search result location where the cited content is found,
+    #   including the search result index and block positions within the
+    #   content array.
+    #   @return [Types::SearchResultLocation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/CitationLocation AWS API Documentation
     #
     class CitationLocation < Struct.new(
+      :web,
       :document_char,
       :document_page,
       :document_chunk,
+      :search_result_location,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
+      class Web < CitationLocation; end
       class DocumentChar < CitationLocation; end
       class DocumentPage < CitationLocation; end
       class DocumentChunk < CitationLocation; end
+      class SearchResultLocation < CitationLocation; end
       class Unknown < CitationLocation; end
     end
 
@@ -416,10 +551,10 @@ module Aws::BedrockRuntime
     # source documents.
     #
     # @!attribute [rw] enabled
-    #   Specifies whether document citations should be included in the
-    #   model's response. When set to true, the model can generate
-    #   citations that reference the source documents used to inform the
-    #   response.
+    #   Specifies whether citations from the selected document should be
+    #   used in the model's response. When set to true, the model can
+    #   generate citations that reference the source documents used to
+    #   inform the response.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/CitationsConfig AWS API Documentation
@@ -461,6 +596,11 @@ module Aws::BedrockRuntime
     #   The title or identifier of the source document being cited.
     #   @return [String]
     #
+    # @!attribute [rw] source
+    #   The source from the original search result that provided the cited
+    #   content.
+    #   @return [String]
+    #
     # @!attribute [rw] source_content
     #   The specific content from the source document that was referenced or
     #   cited in the generated response.
@@ -477,6 +617,7 @@ module Aws::BedrockRuntime
     #
     class CitationsDelta < Struct.new(
       :title,
+      :source,
       :source_content,
       :location)
       SENSITIVE = []
@@ -528,6 +669,10 @@ module Aws::BedrockRuntime
     #   Video to include in the message.
     #   @return [Types::VideoBlock]
     #
+    # @!attribute [rw] audio
+    #   An audio content block containing audio data in the conversation.
+    #   @return [Types::AudioBlock]
+    #
     # @!attribute [rw] tool_use
     #   Information about a tool use request from a model.
     #   @return [Types::ToolUseBlock]
@@ -561,6 +706,10 @@ module Aws::BedrockRuntime
     #   and source documents.
     #   @return [Types::CitationsContentBlock]
     #
+    # @!attribute [rw] search_result
+    #   Search result to include in the message.
+    #   @return [Types::SearchResultBlock]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ContentBlock AWS API Documentation
     #
     class ContentBlock < Struct.new(
@@ -568,12 +717,14 @@ module Aws::BedrockRuntime
       :image,
       :document,
       :video,
+      :audio,
       :tool_use,
       :tool_result,
       :guard_content,
       :cache_point,
       :reasoning_content,
       :citations_content,
+      :search_result,
       :unknown)
       SENSITIVE = [:reasoning_content]
       include Aws::Structure
@@ -583,12 +734,14 @@ module Aws::BedrockRuntime
       class Image < ContentBlock; end
       class Document < ContentBlock; end
       class Video < ContentBlock; end
+      class Audio < ContentBlock; end
       class ToolUse < ContentBlock; end
       class ToolResult < ContentBlock; end
       class GuardContent < ContentBlock; end
       class CachePoint < ContentBlock; end
       class ReasoningContent < ContentBlock; end
       class CitationsContent < ContentBlock; end
+      class SearchResult < ContentBlock; end
       class Unknown < ContentBlock; end
     end
 
@@ -604,6 +757,10 @@ module Aws::BedrockRuntime
     #   Information about a tool that the model is requesting to use.
     #   @return [Types::ToolUseBlockDelta]
     #
+    # @!attribute [rw] tool_result
+    #   An incremental update that contains the results from a tool call.
+    #   @return [Array<Types::ToolResultBlockDelta>]
+    #
     # @!attribute [rw] reasoning_content
     #   Contains content regarding the reasoning that is carried out by the
     #   model. Reasoning refers to a Chain of Thought (CoT) that the model
@@ -615,13 +772,19 @@ module Aws::BedrockRuntime
     #   response generation process.
     #   @return [Types::CitationsDelta]
     #
+    # @!attribute [rw] image
+    #   A streaming delta event containing incremental image data.
+    #   @return [Types::ImageBlockDelta]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ContentBlockDelta AWS API Documentation
     #
     class ContentBlockDelta < Struct.new(
       :text,
       :tool_use,
+      :tool_result,
       :reasoning_content,
       :citation,
+      :image,
       :unknown)
       SENSITIVE = [:reasoning_content]
       include Aws::Structure
@@ -629,8 +792,10 @@ module Aws::BedrockRuntime
 
       class Text < ContentBlockDelta; end
       class ToolUse < ContentBlockDelta; end
+      class ToolResult < ContentBlockDelta; end
       class ReasoningContent < ContentBlockDelta; end
       class Citation < ContentBlockDelta; end
+      class Image < ContentBlockDelta; end
       class Unknown < ContentBlockDelta; end
     end
 
@@ -662,16 +827,28 @@ module Aws::BedrockRuntime
     #   Information about a tool that the model is requesting to use.
     #   @return [Types::ToolUseBlockStart]
     #
+    # @!attribute [rw] tool_result
+    #   The
+    #   @return [Types::ToolResultBlockStart]
+    #
+    # @!attribute [rw] image
+    #   The initial event indicating the start of a streaming image block.
+    #   @return [Types::ImageBlockStart]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ContentBlockStart AWS API Documentation
     #
     class ContentBlockStart < Struct.new(
       :tool_use,
+      :tool_result,
+      :image,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class ToolUse < ContentBlockStart; end
+      class ToolResult < ContentBlockStart; end
+      class Image < ContentBlockStart; end
       class Unknown < ContentBlockStart; end
     end
 
@@ -877,6 +1054,11 @@ module Aws::BedrockRuntime
     #   Model performance settings for the request.
     #   @return [Types::PerformanceConfiguration]
     #
+    # @!attribute [rw] service_tier
+    #   Specifies the processing tier configuration used for serving the
+    #   request.
+    #   @return [Types::ServiceTier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ConverseRequest AWS API Documentation
     #
     class ConverseRequest < Struct.new(
@@ -890,7 +1072,8 @@ module Aws::BedrockRuntime
       :prompt_variables,
       :additional_model_response_field_paths,
       :request_metadata,
-      :performance_config)
+      :performance_config,
+      :service_tier)
       SENSITIVE = [:prompt_variables, :request_metadata]
       include Aws::Structure
     end
@@ -926,6 +1109,11 @@ module Aws::BedrockRuntime
     #   Model performance settings for the request.
     #   @return [Types::PerformanceConfiguration]
     #
+    # @!attribute [rw] service_tier
+    #   Specifies the processing tier configuration used for serving the
+    #   request.
+    #   @return [Types::ServiceTier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ConverseResponse AWS API Documentation
     #
     class ConverseResponse < Struct.new(
@@ -935,7 +1123,8 @@ module Aws::BedrockRuntime
       :metrics,
       :additional_model_response_fields,
       :trace,
-      :performance_config)
+      :performance_config,
+      :service_tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -964,6 +1153,11 @@ module Aws::BedrockRuntime
     #   event.
     #   @return [Types::PerformanceConfiguration]
     #
+    # @!attribute [rw] service_tier
+    #   Specifies the processing tier configuration used for serving the
+    #   request.
+    #   @return [Types::ServiceTier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ConverseStreamMetadataEvent AWS API Documentation
     #
     class ConverseStreamMetadataEvent < Struct.new(
@@ -971,6 +1165,7 @@ module Aws::BedrockRuntime
       :metrics,
       :trace,
       :performance_config,
+      :service_tier,
       :event_type)
       SENSITIVE = []
       include Aws::Structure
@@ -1114,6 +1309,11 @@ module Aws::BedrockRuntime
     #   Model performance settings for the request.
     #   @return [Types::PerformanceConfiguration]
     #
+    # @!attribute [rw] service_tier
+    #   Specifies the processing tier configuration used for serving the
+    #   request.
+    #   @return [Types::ServiceTier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ConverseStreamRequest AWS API Documentation
     #
     class ConverseStreamRequest < Struct.new(
@@ -1127,7 +1327,8 @@ module Aws::BedrockRuntime
       :prompt_variables,
       :additional_model_response_field_paths,
       :request_metadata,
-      :performance_config)
+      :performance_config,
+      :service_tier)
       SENSITIVE = [:prompt_variables, :request_metadata]
       include Aws::Structure
     end
@@ -1144,8 +1345,7 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
-    # The trace object in a response from [ConverseStream][1]. Currently,
-    # you can only trace guardrails.
+    # The trace object in a response from [ConverseStream][1].
     #
     #
     #
@@ -1185,17 +1385,30 @@ module Aws::BedrockRuntime
     #   provided.
     #   @return [Array<Types::SystemContentBlock>]
     #
+    # @!attribute [rw] tool_config
+    #   The toolConfig of Converse input request to count tokens for.
+    #   Configuration information for the tools that the model can use when
+    #   generating a response.
+    #   @return [Types::ToolConfiguration]
+    #
+    # @!attribute [rw] additional_model_request_fields
+    #   The additionalModelRequestFields of Converse input request to count
+    #   tokens for. Use this field when you want to pass additional
+    #   parameters that the model supports.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ConverseTokensRequest AWS API Documentation
     #
     class ConverseTokensRequest < Struct.new(
       :messages,
-      :system)
+      :system,
+      :tool_config,
+      :additional_model_request_fields)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The trace object in a response from [Converse][1]. Currently, you can
-    # only trace guardrails.
+    # The trace object in a response from [Converse][1].
     #
     #
     #
@@ -1508,6 +1721,21 @@ module Aws::BedrockRuntime
       class Unknown < DocumentSource; end
     end
 
+    # A block containing error information when content processing fails.
+    #
+    # @!attribute [rw] message
+    #   A human-readable error message describing what went wrong during
+    #   content processing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ErrorBlock AWS API Documentation
+    #
+    class ErrorBlock < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] invocation_arn
     #   The invocation's ARN.
     #   @return [String]
@@ -1604,6 +1832,12 @@ module Aws::BedrockRuntime
     #   The invocation metrics for the guardrail assessment.
     #   @return [Types::GuardrailInvocationMetrics]
     #
+    # @!attribute [rw] applied_guardrail_details
+    #   Details about the specific guardrail that was applied during this
+    #   assessment, including its identifier, version, ARN, origin, and
+    #   ownership information.
+    #   @return [Types::AppliedGuardrailDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/GuardrailAssessment AWS API Documentation
     #
     class GuardrailAssessment < Struct.new(
@@ -1613,7 +1847,8 @@ module Aws::BedrockRuntime
       :sensitive_information_policy,
       :contextual_grounding_policy,
       :automated_reasoning_policy,
-      :invocation_metrics)
+      :invocation_metrics,
+      :applied_guardrail_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2263,7 +2498,12 @@ module Aws::BedrockRuntime
     end
 
     # A text block that contains text that you want to assess with a
-    # guardrail. For more information, see GuardrailConverseContentBlock.
+    # guardrail. For more information, see
+    # [GuardrailConverseContentBlock][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_GuardrailConverseContentBlock.html
     #
     # @!attribute [rw] text
     #   The text that you want to guard.
@@ -2527,7 +2767,7 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
-    # The assessment for aPersonally Identifiable Information (PII) policy.
+    # The assessment for a Personally Identifiable Information (PII) policy.
     #
     # @!attribute [rw] pii_entities
     #   The PII entities in the assessment.
@@ -2547,7 +2787,11 @@ module Aws::BedrockRuntime
     end
 
     # Configuration information for a guardrail that you use with the
-    # ConverseStream action.
+    # [ConverseStream][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
     #
     # @!attribute [rw] guardrail_identifier
     #   The identifier for the guardrail.
@@ -2663,7 +2907,11 @@ module Aws::BedrockRuntime
     end
 
     # A Top level guardrail trace object. For more information, see
-    # ConverseTrace.
+    # [ConverseTrace][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseTrace.html
     #
     # @!attribute [rw] model_output
     #   The output from the model.
@@ -2779,11 +3027,53 @@ module Aws::BedrockRuntime
     #   The source for the image.
     #   @return [Types::ImageSource]
     #
+    # @!attribute [rw] error
+    #   Error information if the image block could not be processed or
+    #   contains invalid data.
+    #   @return [Types::ErrorBlock]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ImageBlock AWS API Documentation
     #
     class ImageBlock < Struct.new(
       :format,
-      :source)
+      :source,
+      :error)
+      SENSITIVE = [:source, :error]
+      include Aws::Structure
+    end
+
+    # A streaming delta event that contains incremental image data during
+    # streaming responses.
+    #
+    # @!attribute [rw] source
+    #   The incremental image source data for this delta event.
+    #   @return [Types::ImageSource]
+    #
+    # @!attribute [rw] error
+    #   Error information if this image delta could not be processed.
+    #   @return [Types::ErrorBlock]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ImageBlockDelta AWS API Documentation
+    #
+    class ImageBlockDelta < Struct.new(
+      :source,
+      :error)
+      SENSITIVE = [:source, :error]
+      include Aws::Structure
+    end
+
+    # The initial event in a streaming image block that indicates the start
+    # of image content.
+    #
+    # @!attribute [rw] format
+    #   The format of the image data that will be streamed in subsequent
+    #   delta events.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ImageBlockStart AWS API Documentation
+    #
+    class ImageBlockStart < Struct.new(
+      :format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3007,6 +3297,10 @@ module Aws::BedrockRuntime
     #   Model performance settings for the request.
     #   @return [String]
     #
+    # @!attribute [rw] service_tier
+    #   Specifies the processing tier type used for serving the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModelRequest AWS API Documentation
     #
     class InvokeModelRequest < Struct.new(
@@ -3017,7 +3311,8 @@ module Aws::BedrockRuntime
       :trace,
       :guardrail_identifier,
       :guardrail_version,
-      :performance_config_latency)
+      :performance_config_latency,
+      :service_tier)
       SENSITIVE = [:body]
       include Aws::Structure
     end
@@ -3041,12 +3336,17 @@ module Aws::BedrockRuntime
     #   Model performance settings for the request.
     #   @return [String]
     #
+    # @!attribute [rw] service_tier
+    #   Specifies the processing tier type used for serving the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModelResponse AWS API Documentation
     #
     class InvokeModelResponse < Struct.new(
       :body,
       :content_type,
-      :performance_config_latency)
+      :performance_config_latency,
+      :service_tier)
       SENSITIVE = [:body]
       include Aws::Structure
     end
@@ -3206,6 +3506,10 @@ module Aws::BedrockRuntime
     #   Model performance settings for the request.
     #   @return [String]
     #
+    # @!attribute [rw] service_tier
+    #   Specifies the processing tier type used for serving the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModelWithResponseStreamRequest AWS API Documentation
     #
     class InvokeModelWithResponseStreamRequest < Struct.new(
@@ -3216,7 +3520,8 @@ module Aws::BedrockRuntime
       :trace,
       :guardrail_identifier,
       :guardrail_version,
-      :performance_config_latency)
+      :performance_config_latency,
+      :service_tier)
       SENSITIVE = [:body]
       include Aws::Structure
     end
@@ -3239,12 +3544,17 @@ module Aws::BedrockRuntime
     #   Model performance settings for the request.
     #   @return [String]
     #
+    # @!attribute [rw] service_tier
+    #   Specifies the processing tier type used for serving the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModelWithResponseStreamResponse AWS API Documentation
     #
     class InvokeModelWithResponseStreamResponse < Struct.new(
       :body,
       :content_type,
-      :performance_config_latency)
+      :performance_config_latency,
+      :service_tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3668,6 +3978,84 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
+    # A search result block that enables natural citations with proper
+    # source attribution for retrieved content.
+    #
+    # <note markdown="1"> This field is only supported by Anthropic Claude Opus 4.1, Opus 4,
+    # Sonnet 4.5, Sonnet 4, Sonnet 3.7, and 3.5 Haiku models.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] source
+    #   The source URL or identifier for the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A descriptive title for the search result.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   An array of search result content block.
+    #   @return [Array<Types::SearchResultContentBlock>]
+    #
+    # @!attribute [rw] citations
+    #   Configuration setting for citations
+    #   @return [Types::CitationsConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/SearchResultBlock AWS API Documentation
+    #
+    class SearchResultBlock < Struct.new(
+      :source,
+      :title,
+      :content,
+      :citations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A block within a search result that contains the content.
+    #
+    # @!attribute [rw] text
+    #   The actual text content
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/SearchResultContentBlock AWS API Documentation
+    #
+    class SearchResultContentBlock < Struct.new(
+      :text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a search result location within the content array, providing
+    # positioning information for cited content using search result index
+    # and block positions.
+    #
+    # @!attribute [rw] search_result_index
+    #   The index of the search result content block where the cited content
+    #   is found.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start
+    #   The starting position in the content array where the cited content
+    #   begins.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end
+    #   The ending position in the content array where the cited content
+    #   ends.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/SearchResultLocation AWS API Documentation
+    #
+    class SearchResultLocation < Struct.new(
+      :search_result_index,
+      :start,
+      :end)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Your request exceeds the service quota for your account. You can view
     # your quotas at [Viewing service quotas][1]. You can resubmit your
     # request later.
@@ -3683,6 +4071,21 @@ module Aws::BedrockRuntime
     #
     class ServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the processing tier configuration used for serving the
+    # request.
+    #
+    # @!attribute [rw] type
+    #   Specifies the processing tier type used for serving the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ServiceTier AWS API Documentation
+    #
+    class ServiceTier < Struct.new(
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3707,11 +4110,16 @@ module Aws::BedrockRuntime
     end
 
     # The model must request a specific tool. For example, `{"tool" :
-    # {"name" : "Your tool name"}}`.
+    # {"name" : "Your tool name"}}`. For more information, see [Call a tool
+    # with the Converse API][1] in the Amazon Bedrock User Guide
     #
     # <note markdown="1"> This field is only supported by Anthropic Claude 3 models.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
     #
     # @!attribute [rw] name
     #   The name of the tool that the model must request.
@@ -3773,7 +4181,12 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
-    # A system content block.
+    # Contains configurations for instructions to provide the model for how
+    # to handle input. To learn more, see [Using the Converse API][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference-call.html
     #
     # @note SystemContentBlock is a union - when making an API calls you must set exactly one of the members.
     #
@@ -3813,6 +4226,21 @@ module Aws::BedrockRuntime
       class GuardContent < SystemContentBlock; end
       class CachePoint < SystemContentBlock; end
       class Unknown < SystemContentBlock; end
+    end
+
+    # Specifies a system-defined tool for the model to use. *System-defined
+    # tools* are tools that are created and provided by the model provider.
+    #
+    # @!attribute [rw] name
+    #   The name of the system-defined tool that you want to call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/SystemTool AWS API Documentation
+    #
+    class SystemTool < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # A tag.
@@ -3889,8 +4317,8 @@ module Aws::BedrockRuntime
     end
 
     # Information about a tool that you can use with the Converse API. For
-    # more information, see [Tool use (function calling)][1] in the Amazon
-    # Bedrock User Guide.
+    # more information, see [Call a tool with the Converse API][1] in the
+    # Amazon Bedrock User Guide.
     #
     #
     #
@@ -3902,6 +4330,10 @@ module Aws::BedrockRuntime
     #   The specfication for the tool.
     #   @return [Types::ToolSpecification]
     #
+    # @!attribute [rw] system_tool
+    #   Specifies the system-defined tool that you want use.
+    #   @return [Types::SystemTool]
+    #
     # @!attribute [rw] cache_point
     #   CachePoint to include in the tool configuration.
     #   @return [Types::CachePointBlock]
@@ -3910,6 +4342,7 @@ module Aws::BedrockRuntime
     #
     class Tool < Struct.new(
       :tool_spec,
+      :system_tool,
       :cache_point,
       :unknown)
       SENSITIVE = []
@@ -3917,13 +4350,18 @@ module Aws::BedrockRuntime
       include Aws::Structure::Union
 
       class ToolSpec < Tool; end
+      class SystemTool < Tool; end
       class CachePoint < Tool; end
       class Unknown < Tool; end
     end
 
     # Determines which tools the model should request in a call to
-    # `Converse` or `ConverseStream`. `ToolChoice` is only supported by
-    # Anthropic Claude 3 models and by Mistral AI Mistral Large.
+    # `Converse` or `ConverseStream`. For more information, see [Call a tool
+    # with the Converse API][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
     #
     # @note ToolChoice is a union - when making an API calls you must set exactly one of the members.
     #
@@ -3938,7 +4376,7 @@ module Aws::BedrockRuntime
     #
     # @!attribute [rw] tool
     #   The Model must request the specified tool. Only supported by
-    #   Anthropic Claude 3 models.
+    #   Anthropic Claude 3 and Amazon Nova models.
     #   @return [Types::SpecificToolChoice]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ToolChoice AWS API Documentation
@@ -3984,6 +4422,12 @@ module Aws::BedrockRuntime
     end
 
     # The schema for the tool. The top level schema type must be `object`.
+    # For more information, see [Call a tool with the Converse API][1] in
+    # the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
     #
     # @note ToolInputSchema is a union - when making an API calls you must set exactly one of the members.
     #
@@ -4010,7 +4454,12 @@ module Aws::BedrockRuntime
     end
 
     # A tool result block that contains the results for a tool request that
-    # the model previously made.
+    # the model previously made. For more information, see [Call a tool with
+    # the Converse API][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
     #
     # @!attribute [rw] tool_use_id
     #   The ID of the tool request that this is the result for.
@@ -4023,9 +4472,14 @@ module Aws::BedrockRuntime
     # @!attribute [rw] status
     #   The status for the tool result content block.
     #
-    #   <note markdown="1"> This field is only supported Anthropic Claude 3 models.
+    #   <note markdown="1"> This field is only supported by Amazon Nova and Anthropic Claude 3
+    #   and 4 models.
     #
     #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type for the tool result content block.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ToolResultBlock AWS API Documentation
@@ -4033,12 +4487,82 @@ module Aws::BedrockRuntime
     class ToolResultBlock < Struct.new(
       :tool_use_id,
       :content,
+      :status,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains incremental updates to tool results information during
+    # streaming responses. This allows clients to build up tool results data
+    # progressively as the response is generated.
+    #
+    # @note ToolResultBlockDelta is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ToolResultBlockDelta corresponding to the set member.
+    #
+    # @!attribute [rw] text
+    #   The reasoning the model used to return the output.
+    #   @return [String]
+    #
+    # @!attribute [rw] json
+    #   The JSON schema for the tool result content block. see [JSON Schema
+    #   Reference][1].
+    #
+    #
+    #
+    #   [1]: https://json-schema.org/understanding-json-schema/reference
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ToolResultBlockDelta AWS API Documentation
+    #
+    class ToolResultBlockDelta < Struct.new(
+      :text,
+      :json,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Text < ToolResultBlockDelta; end
+      class Json < ToolResultBlockDelta; end
+      class Unknown < ToolResultBlockDelta; end
+    end
+
+    # The start of a tool result block. For more information, see [Call a
+    # tool with the Converse API][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
+    #
+    # @!attribute [rw] tool_use_id
+    #   The ID of the tool that was used to generate this tool result block.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type for the tool that was used to generate this tool result
+    #   block.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the tool result block.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ToolResultBlockStart AWS API Documentation
+    #
+    class ToolResultBlockStart < Struct.new(
+      :tool_use_id,
+      :type,
       :status)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The tool result content block.
+    # The tool result content block. For more information, see [Call a tool
+    # with the Converse API][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
     #
     # @note ToolResultContentBlock is a union - when making an API calls you must set exactly one of the members.
     #
@@ -4055,7 +4579,8 @@ module Aws::BedrockRuntime
     # @!attribute [rw] image
     #   A tool result that is an image.
     #
-    #   <note markdown="1"> This field is only supported by Anthropic Claude 3 models.
+    #   <note markdown="1"> This field is only supported by Amazon Nova and Anthropic Claude 3
+    #   and 4 models.
     #
     #    </note>
     #   @return [Types::ImageBlock]
@@ -4068,6 +4593,10 @@ module Aws::BedrockRuntime
     #   A tool result that is video.
     #   @return [Types::VideoBlock]
     #
+    # @!attribute [rw] search_result
+    #   A tool result that is a search result.
+    #   @return [Types::SearchResultBlock]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ToolResultContentBlock AWS API Documentation
     #
     class ToolResultContentBlock < Struct.new(
@@ -4076,6 +4605,7 @@ module Aws::BedrockRuntime
       :image,
       :document,
       :video,
+      :search_result,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -4086,10 +4616,16 @@ module Aws::BedrockRuntime
       class Image < ToolResultContentBlock; end
       class Document < ToolResultContentBlock; end
       class Video < ToolResultContentBlock; end
+      class SearchResult < ToolResultContentBlock; end
       class Unknown < ToolResultContentBlock; end
     end
 
-    # The specification for the tool.
+    # The specification for the tool. For more information, see [Call a tool
+    # with the Converse API][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
     #
     # @!attribute [rw] name
     #   The name for the tool.
@@ -4115,7 +4651,12 @@ module Aws::BedrockRuntime
 
     # A tool use content block. Contains information about a tool that the
     # model is requesting be run., The model uses the result from the tool
-    # to generate a response.
+    # to generate a response. For more information, see [Call a tool with
+    # the Converse API][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
     #
     # @!attribute [rw] tool_use_id
     #   The ID for the tool request.
@@ -4129,12 +4670,17 @@ module Aws::BedrockRuntime
     #   The input to pass to the tool.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
+    # @!attribute [rw] type
+    #   The type for the tool request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ToolUseBlock AWS API Documentation
     #
     class ToolUseBlock < Struct.new(
       :tool_use_id,
       :name,
-      :input)
+      :input,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4153,7 +4699,12 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
-    # The start of a tool use block.
+    # The start of a tool use block. For more information, see [Call a tool
+    # with the Converse API][1] in the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html
     #
     # @!attribute [rw] tool_use_id
     #   The ID for the tool request.
@@ -4163,11 +4714,16 @@ module Aws::BedrockRuntime
     #   The name of the tool that the model is requesting to use.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type for the tool request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ToolUseBlockStart AWS API Documentation
     #
     class ToolUseBlockStart < Struct.new(
       :tool_use_id,
-      :name)
+      :name,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4246,6 +4802,26 @@ module Aws::BedrockRuntime
       class Bytes < VideoSource; end
       class S3Location < VideoSource; end
       class Unknown < VideoSource; end
+    end
+
+    # Provides the URL and domain information for the website that was cited
+    # when performing a web search.
+    #
+    # @!attribute [rw] url
+    #   The URL that was cited when performing a web search.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The domain that was cited when performing a web search.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/WebLocation AWS API Documentation
+    #
+    class WebLocation < Struct.new(
+      :url,
+      :domain)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # The messages output stream

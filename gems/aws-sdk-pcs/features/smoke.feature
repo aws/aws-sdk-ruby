@@ -8,18 +8,6 @@
 Feature: Smoke tests for PCS
 
   @pcs @smoke
-  Scenario: ListClustersSuccess
-    Given I create a 'Aws::PCS' client with config:
-      """
-{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_clusters' with params:
-      """
-{}
-      """
-    Then I expect an error was not raised
-
-  @pcs @smoke
   Scenario: GetComputeNodeGroup_AccessDeniedException
     Given I create a 'Aws::PCS' client with config:
       """
@@ -32,12 +20,24 @@ Feature: Smoke tests for PCS
     Then I expect a 'Aws::PCS::Errors::AccessDeniedException' was raised
 
   @pcs @smoke
-  Scenario: GetCluster_AccessDeniedException
+  Scenario: UpdateCluster_AccessDeniedException
     Given I create a 'Aws::PCS' client with config:
       """
 {"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'get_cluster' with params:
+    When I call the operation 'update_cluster' with params:
+      """
+{"cluster_identifier":"pcs_donotexist"}
+      """
+    Then I expect a 'Aws::PCS::Errors::AccessDeniedException' was raised
+
+  @pcs @smoke
+  Scenario: ListQueueFailure_AccessDeniedException
+    Given I create a 'Aws::PCS' client with config:
+      """
+{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_queues' with params:
       """
 {"cluster_identifier":"pcs_donotexist"}
       """
@@ -56,28 +56,16 @@ Feature: Smoke tests for PCS
     Then I expect a 'Aws::PCS::Errors::AccessDeniedException' was raised
 
   @pcs @smoke
-  Scenario: ListQueueFailure_AccessDeniedException
+  Scenario: ListClustersSuccess
     Given I create a 'Aws::PCS' client with config:
       """
 {"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_queues' with params:
+    When I call the operation 'list_clusters' with params:
       """
-{"cluster_identifier":"pcs_donotexist"}
+{}
       """
-    Then I expect a 'Aws::PCS::Errors::AccessDeniedException' was raised
-
-  @pcs @smoke
-  Scenario: GetQueueFailure_AccessDeniedException
-    Given I create a 'Aws::PCS' client with config:
-      """
-{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_queue' with params:
-      """
-{"cluster_identifier":"pcs_donotexist","queue_identifier":"pcs_donotexist"}
-      """
-    Then I expect a 'Aws::PCS::Errors::AccessDeniedException' was raised
+    Then I expect an error was not raised
 
   @pcs @smoke
   Scenario: ListComputeNodeGroups_AccessDeniedException
@@ -92,13 +80,25 @@ Feature: Smoke tests for PCS
     Then I expect a 'Aws::PCS::Errors::AccessDeniedException' was raised
 
   @pcs @smoke
-  Scenario: UpdateCluster_AccessDeniedException
+  Scenario: GetCluster_AccessDeniedException
     Given I create a 'Aws::PCS' client with config:
       """
 {"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'update_cluster' with params:
+    When I call the operation 'get_cluster' with params:
       """
 {"cluster_identifier":"pcs_donotexist"}
+      """
+    Then I expect a 'Aws::PCS::Errors::AccessDeniedException' was raised
+
+  @pcs @smoke
+  Scenario: GetQueueFailure_AccessDeniedException
+    Given I create a 'Aws::PCS' client with config:
+      """
+{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'get_queue' with params:
+      """
+{"cluster_identifier":"pcs_donotexist","queue_identifier":"pcs_donotexist"}
       """
     Then I expect a 'Aws::PCS::Errors::AccessDeniedException' was raised

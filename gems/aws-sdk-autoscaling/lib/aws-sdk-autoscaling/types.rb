@@ -523,6 +523,13 @@ module Aws::AutoScaling
     #   The capacity reservation specification.
     #   @return [Types::CapacityReservationSpecification]
     #
+    # @!attribute [rw] instance_lifecycle_policy
+    #   The instance lifecycle policy applied to this Auto Scaling group.
+    #   This policy determines instance behavior when an instance
+    #   transitions through its lifecycle states. It provides additional
+    #   control over graceful instance management processes.
+    #   @return [Types::InstanceLifecyclePolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroup AWS API Documentation
     #
     class AutoScalingGroup < Struct.new(
@@ -563,7 +570,8 @@ module Aws::AutoScaling
       :instance_maintenance_policy,
       :availability_zone_distribution,
       :availability_zone_impairment_policy,
-      :capacity_reservation_specification)
+      :capacity_reservation_specification,
+      :instance_lifecycle_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -683,6 +691,27 @@ module Aws::AutoScaling
     #   The launch template for the instance.
     #   @return [Types::LaunchTemplateSpecification]
     #
+    # @!attribute [rw] image_id
+    #   The ID of the Amazon Machine Image (AMI) associated with the
+    #   instance. This field shows the current AMI ID of the instance's
+    #   root volume. It may differ from the original AMI used when the
+    #   instance was first launched.
+    #
+    #   This field appears for:
+    #
+    #   * Instances with root volume replacements through Instance Refresh
+    #
+    #   * Instances launched with AMI overrides
+    #
+    #   This field won't appear for:
+    #
+    #   * Existing instances launched from Launch Templates without
+    #     overrides
+    #
+    #   * Existing instances that didn’t have their root volume replaced
+    #     through Instance Refresh
+    #   @return [String]
+    #
     # @!attribute [rw] protected_from_scale_in
     #   Indicates whether the instance is protected from termination by
     #   Amazon EC2 Auto Scaling when scaling in.
@@ -706,6 +735,7 @@ module Aws::AutoScaling
       :health_status,
       :launch_configuration_name,
       :launch_template,
+      :image_id,
       :protected_from_scale_in,
       :weighted_capacity)
       SENSITIVE = []
@@ -1499,6 +1529,19 @@ module Aws::AutoScaling
     #   The capacity reservation specification for the Auto Scaling group.
     #   @return [Types::CapacityReservationSpecification]
     #
+    # @!attribute [rw] instance_lifecycle_policy
+    #   The instance lifecycle policy for the Auto Scaling group. This
+    #   policy controls instance behavior when an instance transitions
+    #   through its lifecycle states. Configure retention triggers to
+    #   specify when instances should move to a `Retained` state for manual
+    #   intervention instead of automatic termination.
+    #
+    #   <note markdown="1"> Instances in a Retained state will continue to incur standard EC2
+    #   charges until terminated.
+    #
+    #    </note>
+    #   @return [Types::InstanceLifecyclePolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroupType AWS API Documentation
     #
     class CreateAutoScalingGroupType < Struct.new(
@@ -1533,7 +1576,8 @@ module Aws::AutoScaling
       :availability_zone_distribution,
       :availability_zone_impairment_policy,
       :skip_zonal_shift_validation,
-      :capacity_reservation_specification)
+      :capacity_reservation_specification,
+      :instance_lifecycle_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3400,6 +3444,21 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # Indicates that the parameters in the current request do not match the
+    # parameters from a previous request with the same client token within
+    # the idempotency window.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/IdempotentParameterMismatchError AWS API Documentation
+    #
+    class IdempotentParameterMismatchError < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an EC2 instance.
     #
     # @!attribute [rw] instance_id
@@ -3440,6 +3499,27 @@ module Aws::AutoScaling
     #   The launch template for the instance.
     #   @return [Types::LaunchTemplateSpecification]
     #
+    # @!attribute [rw] image_id
+    #   The ID of the Amazon Machine Image (AMI) used for the instance's
+    #   current root volume. This value reflects the most recent AMI applied
+    #   to the instance, including updates made through root volume
+    #   replacement operations.
+    #
+    #   This field appears for:
+    #
+    #   * Instances with root volume replacements through Instance Refresh
+    #
+    #   * Instances launched with AMI overrides
+    #
+    #   This field won't appear for:
+    #
+    #   * Existing instances launched from Launch Templates without
+    #     overrides
+    #
+    #   * Existing instances that didn’t have their root volume replaced
+    #     through Instance Refresh
+    #   @return [String]
+    #
     # @!attribute [rw] protected_from_scale_in
     #   Indicates whether the instance is protected from termination by
     #   Amazon EC2 Auto Scaling when scaling in.
@@ -3462,8 +3542,71 @@ module Aws::AutoScaling
       :health_status,
       :launch_configuration_name,
       :launch_template,
+      :image_id,
       :protected_from_scale_in,
       :weighted_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a collection of instances launched in the Auto
+    # Scaling group.
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type of the launched instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] market_type
+    #   The market type for the instances (On-Demand or Spot).
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet where the instances were launched.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone where the instances were launched.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The Availability Zone ID where the instances in this collection were
+    #   launched.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_ids
+    #   A list of instance IDs for the successfully launched instances.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceCollection AWS API Documentation
+    #
+    class InstanceCollection < Struct.new(
+      :instance_type,
+      :market_type,
+      :subnet_id,
+      :availability_zone,
+      :availability_zone_id,
+      :instance_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the lifecycle policy for instances in an Auto Scaling group.
+    # This policy controls instance behavior when lifecycles transition and
+    # operations fail. Use lifecycle policies to ensure graceful shutdown
+    # for stateful workloads or applications requiring extended draining
+    # periods.
+    #
+    # @!attribute [rw] retention_triggers
+    #   Specifies the conditions that trigger instance retention behavior.
+    #   These triggers determine when instances should move to a Retained
+    #   state instead of being terminated. This allows you to maintain
+    #   control over instance management when lifecycle operations fail.
+    #   @return [Types::RetentionTriggers]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceLifecyclePolicy AWS API Documentation
+    #
+    class InstanceLifecyclePolicy < Struct.new(
+      :retention_triggers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3674,6 +3817,17 @@ module Aws::AutoScaling
     #   The rollback details.
     #   @return [Types::RollbackDetails]
     #
+    # @!attribute [rw] strategy
+    #   The strategy to use for the instance refresh. This determines how
+    #   instances in the Auto Scaling group are updated. Default is Rolling.
+    #
+    #   * `Rolling` – Terminates instances and launches replacements in
+    #     batches
+    #
+    #   * `ReplaceRootVolume` – Updates instances by replacing only the root
+    #     volume without terminating the instance
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceRefresh AWS API Documentation
     #
     class InstanceRefresh < Struct.new(
@@ -3688,7 +3842,8 @@ module Aws::AutoScaling
       :progress_details,
       :preferences,
       :desired_configuration,
-      :rollback_details)
+      :rollback_details,
+      :strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4646,6 +4801,146 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # Contains details about errors encountered during instance launch
+    # attempts.
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type that failed to launch.
+    #   @return [String]
+    #
+    # @!attribute [rw] market_type
+    #   The market type (On-Demand or Spot) that encountered the launch
+    #   error.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The subnet ID where the instance launch was attempted.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone where the instance launch was attempted.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The Availability Zone ID where the launch error occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   The error code representing the type of error encountered (e.g.,
+    #   InsufficientInstanceCapacity).
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A descriptive message providing details about the error encountered
+    #   during the launch attempt.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchInstancesError AWS API Documentation
+    #
+    class LaunchInstancesError < Struct.new(
+      :instance_type,
+      :market_type,
+      :subnet_id,
+      :availability_zone,
+      :availability_zone_id,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] auto_scaling_group_name
+    #   The name of the Auto Scaling group to launch instances into.
+    #   @return [String]
+    #
+    # @!attribute [rw] requested_capacity
+    #   The number of instances to launch. Although this value can exceed
+    #   100 for instance weights, the actual instance count is limited to
+    #   100 instances per launch.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zones
+    #   The Availability Zones for the instance launch. Must match or be
+    #   included in the Auto Scaling group's Availability Zone
+    #   configuration. Either `AvailabilityZones` or `SubnetIds` must be
+    #   specified for groups with multiple Availability Zone configurations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] availability_zone_ids
+    #   A list of Availability Zone IDs where instances should be launched.
+    #   Must match or be included in the group's AZ configuration. You
+    #   cannot specify both AvailabilityZones and AvailabilityZoneIds.
+    #   Required for multi-AZ groups, optional for single-AZ groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The subnet IDs for the instance launch. Either `AvailabilityZones`
+    #   or `SubnetIds` must be specified. If both are specified, the subnets
+    #   must reside in the specified Availability Zones.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] retry_strategy
+    #   Specifies whether to retry asynchronously if the synchronous launch
+    #   fails. Valid values are NONE (default, no async retry) and
+    #   RETRY\_WITH\_GROUP\_CONFIGURATION (increase desired capacity and
+    #   retry with group configuration).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchInstancesRequest AWS API Documentation
+    #
+    class LaunchInstancesRequest < Struct.new(
+      :auto_scaling_group_name,
+      :requested_capacity,
+      :client_token,
+      :availability_zones,
+      :availability_zone_ids,
+      :subnet_ids,
+      :retry_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] auto_scaling_group_name
+    #   The name of the Auto Scaling group where the instances were
+    #   launched.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token used for the request, either
+    #   customer-specified or auto-generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] instances
+    #   A list of successfully launched instances including details such as
+    #   instance type, Availability Zone, subnet, lifecycle state, and
+    #   instance IDs.
+    #   @return [Array<Types::InstanceCollection>]
+    #
+    # @!attribute [rw] errors
+    #   A list of errors encountered during the launch attempt including
+    #   details about failed instance launches with their corresponding
+    #   error codes and messages.
+    #   @return [Array<Types::LaunchInstancesError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchInstancesResult AWS API Documentation
+    #
+    class LaunchInstancesResult < Struct.new(
+      :auto_scaling_group_name,
+      :client_token,
+      :instances,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Use this structure to specify the launch templates and instance types
     # (overrides) for a mixed instances policy.
     #
@@ -4769,13 +5064,30 @@ module Aws::AutoScaling
     #    </note>
     #   @return [Types::InstanceRequirements]
     #
+    # @!attribute [rw] image_id
+    #   The ID of the Amazon Machine Image (AMI) to use for instances
+    #   launched with this override. When using Instance Refresh with
+    #   `ReplaceRootVolume` strategy, this specifies the AMI for root volume
+    #   replacement operations.
+    #
+    #   For `ReplaceRootVolume` operations:
+    #
+    #   * All overrides in the `MixedInstancesPolicy` must specify an
+    #     ImageId
+    #
+    #   * The AMI must contain only a single root volume
+    #
+    #   * Root volume replacement doesn't support multi-volume AMIs
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchTemplateOverrides AWS API Documentation
     #
     class LaunchTemplateOverrides < Struct.new(
       :instance_type,
       :weighted_capacity,
       :launch_template_specification,
-      :instance_requirements)
+      :instance_requirements,
+      :image_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6871,6 +7183,32 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # Defines the specific triggers that cause instances to be retained in a
+    # Retained state rather than terminated. Each trigger corresponds to a
+    # different failure scenario during the instance lifecycle. This allows
+    # fine-grained control over when to preserve instances for manual
+    # intervention.
+    #
+    # @!attribute [rw] terminate_hook_abandon
+    #   Specifies the action when a termination lifecycle hook is abandoned
+    #   due to failure, timeout, or explicit abandonment (calling
+    #   CompleteLifecycleAction).
+    #
+    #   Set to `Retain` to move instances to a `Retained` state. Set to
+    #   `Terminate` for default termination behavior.
+    #
+    #   Retained instances don't count toward desired capacity and remain
+    #   until you call `TerminateInstanceInAutoScalingGroup`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RetentionTriggers AWS API Documentation
+    #
+    class RetentionTriggers < Struct.new(
+      :terminate_hook_abandon)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about an instance refresh rollback.
     #
     # @!attribute [rw] rollback_reason
@@ -8276,6 +8614,14 @@ module Aws::AutoScaling
     #   The capacity reservation specification for the Auto Scaling group.
     #   @return [Types::CapacityReservationSpecification]
     #
+    # @!attribute [rw] instance_lifecycle_policy
+    #   The instance lifecycle policy for the Auto Scaling group. Use this
+    #   to add, modify, or remove lifecycle policies that control instance
+    #   behavior when an instance transitions through its lifecycle states.
+    #   Configure retention triggers to specify when to preserve instances
+    #   for manual intervention.
+    #   @return [Types::InstanceLifecyclePolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroupType AWS API Documentation
     #
     class UpdateAutoScalingGroupType < Struct.new(
@@ -8304,7 +8650,8 @@ module Aws::AutoScaling
       :availability_zone_distribution,
       :availability_zone_impairment_policy,
       :skip_zonal_shift_validation,
-      :capacity_reservation_specification)
+      :capacity_reservation_specification,
+      :instance_lifecycle_policy)
       SENSITIVE = []
       include Aws::Structure
     end

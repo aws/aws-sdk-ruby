@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.113.0 (2025-11-06)
+------------------
+
+* Feature - Amazon GameLift Servers now supports game builds that use the Windows 2022 operating system.
+
+1.112.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.111.0 (2025-10-16)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.110.0 (2025-08-26)
 ------------------
 

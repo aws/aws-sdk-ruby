@@ -61,6 +61,8 @@ module Aws::VPCLattice
     DeleteAccessLogSubscriptionResponse = Shapes::StructureShape.new(name: 'DeleteAccessLogSubscriptionResponse')
     DeleteAuthPolicyRequest = Shapes::StructureShape.new(name: 'DeleteAuthPolicyRequest')
     DeleteAuthPolicyResponse = Shapes::StructureShape.new(name: 'DeleteAuthPolicyResponse')
+    DeleteDomainVerificationRequest = Shapes::StructureShape.new(name: 'DeleteDomainVerificationRequest')
+    DeleteDomainVerificationResponse = Shapes::StructureShape.new(name: 'DeleteDomainVerificationResponse')
     DeleteListenerRequest = Shapes::StructureShape.new(name: 'DeleteListenerRequest')
     DeleteListenerResponse = Shapes::StructureShape.new(name: 'DeleteListenerResponse')
     DeleteResourceConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteResourceConfigurationRequest')
@@ -89,8 +91,14 @@ module Aws::VPCLattice
     DeregisterTargetsRequestTargetsList = Shapes::ListShape.new(name: 'DeregisterTargetsRequestTargetsList')
     DeregisterTargetsResponse = Shapes::StructureShape.new(name: 'DeregisterTargetsResponse')
     DnsEntry = Shapes::StructureShape.new(name: 'DnsEntry')
+    DnsOptions = Shapes::StructureShape.new(name: 'DnsOptions')
     DnsResource = Shapes::StructureShape.new(name: 'DnsResource')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
+    DomainVerificationArn = Shapes::StringShape.new(name: 'DomainVerificationArn')
+    DomainVerificationId = Shapes::StringShape.new(name: 'DomainVerificationId')
+    DomainVerificationIdentifier = Shapes::StringShape.new(name: 'DomainVerificationIdentifier')
+    DomainVerificationList = Shapes::ListShape.new(name: 'DomainVerificationList')
+    DomainVerificationSummary = Shapes::StructureShape.new(name: 'DomainVerificationSummary')
     FailureCode = Shapes::StringShape.new(name: 'FailureCode')
     FailureMessage = Shapes::StringShape.new(name: 'FailureMessage')
     FixedResponseAction = Shapes::StructureShape.new(name: 'FixedResponseAction')
@@ -99,6 +107,8 @@ module Aws::VPCLattice
     GetAccessLogSubscriptionResponse = Shapes::StructureShape.new(name: 'GetAccessLogSubscriptionResponse')
     GetAuthPolicyRequest = Shapes::StructureShape.new(name: 'GetAuthPolicyRequest')
     GetAuthPolicyResponse = Shapes::StructureShape.new(name: 'GetAuthPolicyResponse')
+    GetDomainVerificationRequest = Shapes::StructureShape.new(name: 'GetDomainVerificationRequest')
+    GetDomainVerificationResponse = Shapes::StructureShape.new(name: 'GetDomainVerificationResponse')
     GetListenerRequest = Shapes::StructureShape.new(name: 'GetListenerRequest')
     GetListenerResponse = Shapes::StructureShape.new(name: 'GetListenerResponse')
     GetResourceConfigurationRequest = Shapes::StructureShape.new(name: 'GetResourceConfigurationRequest')
@@ -148,6 +158,8 @@ module Aws::VPCLattice
     LambdaEventStructureVersion = Shapes::StringShape.new(name: 'LambdaEventStructureVersion')
     ListAccessLogSubscriptionsRequest = Shapes::StructureShape.new(name: 'ListAccessLogSubscriptionsRequest')
     ListAccessLogSubscriptionsResponse = Shapes::StructureShape.new(name: 'ListAccessLogSubscriptionsResponse')
+    ListDomainVerificationsRequest = Shapes::StructureShape.new(name: 'ListDomainVerificationsRequest')
+    ListDomainVerificationsResponse = Shapes::StructureShape.new(name: 'ListDomainVerificationsResponse')
     ListListenersRequest = Shapes::StructureShape.new(name: 'ListListenersRequest')
     ListListenersResponse = Shapes::StructureShape.new(name: 'ListListenersResponse')
     ListResourceConfigurationsRequest = Shapes::StructureShape.new(name: 'ListResourceConfigurationsRequest')
@@ -196,6 +208,9 @@ module Aws::VPCLattice
     Port = Shapes::IntegerShape.new(name: 'Port')
     PortRange = Shapes::StringShape.new(name: 'PortRange')
     PortRangeList = Shapes::ListShape.new(name: 'PortRangeList')
+    PrivateDnsPreference = Shapes::StringShape.new(name: 'PrivateDnsPreference')
+    PrivateDnsSpecifiedDomain = Shapes::StringShape.new(name: 'PrivateDnsSpecifiedDomain')
+    PrivateDnsSpecifiedDomainsList = Shapes::ListShape.new(name: 'PrivateDnsSpecifiedDomainsList')
     ProtocolType = Shapes::StringShape.new(name: 'ProtocolType')
     PutAuthPolicyRequest = Shapes::StructureShape.new(name: 'PutAuthPolicyRequest')
     PutAuthPolicyResponse = Shapes::StructureShape.new(name: 'PutAuthPolicyResponse')
@@ -288,6 +303,8 @@ module Aws::VPCLattice
     ServiceStatus = Shapes::StringShape.new(name: 'ServiceStatus')
     ServiceSummary = Shapes::StructureShape.new(name: 'ServiceSummary')
     SharingConfig = Shapes::StructureShape.new(name: 'SharingConfig')
+    StartDomainVerificationRequest = Shapes::StructureShape.new(name: 'StartDomainVerificationRequest')
+    StartDomainVerificationResponse = Shapes::StructureShape.new(name: 'StartDomainVerificationResponse')
     String = Shapes::StringShape.new(name: 'String')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetList = Shapes::ListShape.new(name: 'SubnetList')
@@ -319,6 +336,7 @@ module Aws::VPCLattice
     TargetSummaryList = Shapes::ListShape.new(name: 'TargetSummaryList')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
+    TxtMethodConfig = Shapes::StructureShape.new(name: 'TxtMethodConfig')
     UnhealthyThresholdCount = Shapes::IntegerShape.new(name: 'UnhealthyThresholdCount')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -346,6 +364,7 @@ module Aws::VPCLattice
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VerificationStatus = Shapes::StringShape.new(name: 'VerificationStatus')
     VpcEndpointId = Shapes::StringShape.new(name: 'VpcEndpointId')
     VpcEndpointOwner = Shapes::StringShape.new(name: 'VpcEndpointOwner')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
@@ -427,6 +446,9 @@ module Aws::VPCLattice
     CreateResourceConfigurationRequest.add_member(:resource_configuration_group_identifier, Shapes::ShapeRef.new(shape: ResourceConfigurationIdentifier, location_name: "resourceConfigurationGroupIdentifier"))
     CreateResourceConfigurationRequest.add_member(:resource_configuration_definition, Shapes::ShapeRef.new(shape: ResourceConfigurationDefinition, location_name: "resourceConfigurationDefinition"))
     CreateResourceConfigurationRequest.add_member(:allow_association_to_shareable_service_network, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowAssociationToShareableServiceNetwork"))
+    CreateResourceConfigurationRequest.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "customDomainName"))
+    CreateResourceConfigurationRequest.add_member(:group_domain, Shapes::ShapeRef.new(shape: DomainName, location_name: "groupDomain"))
+    CreateResourceConfigurationRequest.add_member(:domain_verification_identifier, Shapes::ShapeRef.new(shape: DomainVerificationIdentifier, location_name: "domainVerificationIdentifier"))
     CreateResourceConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateResourceConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateResourceConfigurationRequest.struct_class = Types::CreateResourceConfigurationRequest
@@ -444,6 +466,10 @@ module Aws::VPCLattice
     CreateResourceConfigurationResponse.add_member(:allow_association_to_shareable_service_network, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowAssociationToShareableServiceNetwork"))
     CreateResourceConfigurationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     CreateResourceConfigurationResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
+    CreateResourceConfigurationResponse.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "customDomainName"))
+    CreateResourceConfigurationResponse.add_member(:domain_verification_id, Shapes::ShapeRef.new(shape: DomainVerificationId, location_name: "domainVerificationId"))
+    CreateResourceConfigurationResponse.add_member(:group_domain, Shapes::ShapeRef.new(shape: DomainName, location_name: "groupDomain"))
+    CreateResourceConfigurationResponse.add_member(:domain_verification_arn, Shapes::ShapeRef.new(shape: DomainVerificationArn, location_name: "domainVerificationArn"))
     CreateResourceConfigurationResponse.struct_class = Types::CreateResourceConfigurationResponse
 
     CreateResourceGatewayRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -497,6 +523,7 @@ module Aws::VPCLattice
     CreateServiceNetworkResourceAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateServiceNetworkResourceAssociationRequest.add_member(:resource_configuration_identifier, Shapes::ShapeRef.new(shape: ResourceConfigurationIdentifier, required: true, location_name: "resourceConfigurationIdentifier"))
     CreateServiceNetworkResourceAssociationRequest.add_member(:service_network_identifier, Shapes::ShapeRef.new(shape: ServiceNetworkIdentifierWithoutRegex, required: true, location_name: "serviceNetworkIdentifier"))
+    CreateServiceNetworkResourceAssociationRequest.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "privateDnsEnabled"))
     CreateServiceNetworkResourceAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateServiceNetworkResourceAssociationRequest.struct_class = Types::CreateServiceNetworkResourceAssociationRequest
 
@@ -504,6 +531,7 @@ module Aws::VPCLattice
     CreateServiceNetworkResourceAssociationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ServiceNetworkResourceAssociationArn, location_name: "arn"))
     CreateServiceNetworkResourceAssociationResponse.add_member(:status, Shapes::ShapeRef.new(shape: ServiceNetworkResourceAssociationStatus, location_name: "status"))
     CreateServiceNetworkResourceAssociationResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: AccountId, location_name: "createdBy"))
+    CreateServiceNetworkResourceAssociationResponse.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "privateDnsEnabled"))
     CreateServiceNetworkResourceAssociationResponse.struct_class = Types::CreateServiceNetworkResourceAssociationResponse
 
     CreateServiceNetworkResponse.add_member(:id, Shapes::ShapeRef.new(shape: ServiceNetworkId, location_name: "id"))
@@ -530,8 +558,10 @@ module Aws::VPCLattice
     CreateServiceNetworkVpcAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateServiceNetworkVpcAssociationRequest.add_member(:service_network_identifier, Shapes::ShapeRef.new(shape: ServiceNetworkIdentifier, required: true, location_name: "serviceNetworkIdentifier"))
     CreateServiceNetworkVpcAssociationRequest.add_member(:vpc_identifier, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcIdentifier"))
+    CreateServiceNetworkVpcAssociationRequest.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "privateDnsEnabled"))
     CreateServiceNetworkVpcAssociationRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: CreateServiceNetworkVpcAssociationRequestSecurityGroupIdsList, location_name: "securityGroupIds"))
     CreateServiceNetworkVpcAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateServiceNetworkVpcAssociationRequest.add_member(:dns_options, Shapes::ShapeRef.new(shape: DnsOptions, location_name: "dnsOptions"))
     CreateServiceNetworkVpcAssociationRequest.struct_class = Types::CreateServiceNetworkVpcAssociationRequest
 
     CreateServiceNetworkVpcAssociationRequestSecurityGroupIdsList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
@@ -541,6 +571,8 @@ module Aws::VPCLattice
     CreateServiceNetworkVpcAssociationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ServiceNetworkVpcAssociationArn, location_name: "arn"))
     CreateServiceNetworkVpcAssociationResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: AccountId, location_name: "createdBy"))
     CreateServiceNetworkVpcAssociationResponse.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupList, location_name: "securityGroupIds"))
+    CreateServiceNetworkVpcAssociationResponse.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "privateDnsEnabled"))
+    CreateServiceNetworkVpcAssociationResponse.add_member(:dns_options, Shapes::ShapeRef.new(shape: DnsOptions, location_name: "dnsOptions"))
     CreateServiceNetworkVpcAssociationResponse.struct_class = Types::CreateServiceNetworkVpcAssociationResponse
 
     CreateServiceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -585,6 +617,11 @@ module Aws::VPCLattice
     DeleteAuthPolicyRequest.struct_class = Types::DeleteAuthPolicyRequest
 
     DeleteAuthPolicyResponse.struct_class = Types::DeleteAuthPolicyResponse
+
+    DeleteDomainVerificationRequest.add_member(:domain_verification_identifier, Shapes::ShapeRef.new(shape: DomainVerificationIdentifier, required: true, location: "uri", location_name: "domainVerificationIdentifier"))
+    DeleteDomainVerificationRequest.struct_class = Types::DeleteDomainVerificationRequest
+
+    DeleteDomainVerificationResponse.struct_class = Types::DeleteDomainVerificationResponse
 
     DeleteListenerRequest.add_member(:service_identifier, Shapes::ShapeRef.new(shape: ServiceIdentifier, required: true, location: "uri", location_name: "serviceIdentifier"))
     DeleteListenerRequest.add_member(:listener_identifier, Shapes::ShapeRef.new(shape: ListenerIdentifier, required: true, location: "uri", location_name: "listenerIdentifier"))
@@ -688,9 +725,25 @@ module Aws::VPCLattice
     DnsEntry.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "hostedZoneId"))
     DnsEntry.struct_class = Types::DnsEntry
 
+    DnsOptions.add_member(:private_dns_preference, Shapes::ShapeRef.new(shape: PrivateDnsPreference, location_name: "privateDnsPreference"))
+    DnsOptions.add_member(:private_dns_specified_domains, Shapes::ShapeRef.new(shape: PrivateDnsSpecifiedDomainsList, location_name: "privateDnsSpecifiedDomains"))
+    DnsOptions.struct_class = Types::DnsOptions
+
     DnsResource.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "domainName"))
     DnsResource.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: ResourceConfigurationIpAddressType, location_name: "ipAddressType"))
     DnsResource.struct_class = Types::DnsResource
+
+    DomainVerificationList.member = Shapes::ShapeRef.new(shape: DomainVerificationSummary)
+
+    DomainVerificationSummary.add_member(:id, Shapes::ShapeRef.new(shape: DomainVerificationId, required: true, location_name: "id"))
+    DomainVerificationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: DomainVerificationArn, required: true, location_name: "arn"))
+    DomainVerificationSummary.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domainName"))
+    DomainVerificationSummary.add_member(:status, Shapes::ShapeRef.new(shape: VerificationStatus, required: true, location_name: "status"))
+    DomainVerificationSummary.add_member(:txt_method_config, Shapes::ShapeRef.new(shape: TxtMethodConfig, location_name: "txtMethodConfig"))
+    DomainVerificationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    DomainVerificationSummary.add_member(:last_verified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastVerifiedTime"))
+    DomainVerificationSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    DomainVerificationSummary.struct_class = Types::DomainVerificationSummary
 
     FixedResponseAction.add_member(:status_code, Shapes::ShapeRef.new(shape: HttpStatusCode, required: true, location_name: "statusCode"))
     FixedResponseAction.struct_class = Types::FixedResponseAction
@@ -719,6 +772,19 @@ module Aws::VPCLattice
     GetAuthPolicyResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     GetAuthPolicyResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
     GetAuthPolicyResponse.struct_class = Types::GetAuthPolicyResponse
+
+    GetDomainVerificationRequest.add_member(:domain_verification_identifier, Shapes::ShapeRef.new(shape: DomainVerificationIdentifier, required: true, location: "uri", location_name: "domainVerificationIdentifier"))
+    GetDomainVerificationRequest.struct_class = Types::GetDomainVerificationRequest
+
+    GetDomainVerificationResponse.add_member(:id, Shapes::ShapeRef.new(shape: DomainVerificationId, required: true, location_name: "id"))
+    GetDomainVerificationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: DomainVerificationArn, required: true, location_name: "arn"))
+    GetDomainVerificationResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domainName"))
+    GetDomainVerificationResponse.add_member(:status, Shapes::ShapeRef.new(shape: VerificationStatus, required: true, location_name: "status"))
+    GetDomainVerificationResponse.add_member(:txt_method_config, Shapes::ShapeRef.new(shape: TxtMethodConfig, location_name: "txtMethodConfig"))
+    GetDomainVerificationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    GetDomainVerificationResponse.add_member(:last_verified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastVerifiedTime"))
+    GetDomainVerificationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetDomainVerificationResponse.struct_class = Types::GetDomainVerificationResponse
 
     GetListenerRequest.add_member(:service_identifier, Shapes::ShapeRef.new(shape: ServiceIdentifier, required: true, location: "uri", location_name: "serviceIdentifier"))
     GetListenerRequest.add_member(:listener_identifier, Shapes::ShapeRef.new(shape: ListenerIdentifier, required: true, location: "uri", location_name: "listenerIdentifier"))
@@ -755,6 +821,10 @@ module Aws::VPCLattice
     GetResourceConfigurationResponse.add_member(:amazon_managed, Shapes::ShapeRef.new(shape: Boolean, location_name: "amazonManaged"))
     GetResourceConfigurationResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
     GetResourceConfigurationResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
+    GetResourceConfigurationResponse.add_member(:domain_verification_id, Shapes::ShapeRef.new(shape: DomainVerificationId, location_name: "domainVerificationId"))
+    GetResourceConfigurationResponse.add_member(:domain_verification_arn, Shapes::ShapeRef.new(shape: DomainVerificationArn, location_name: "domainVerificationArn"))
+    GetResourceConfigurationResponse.add_member(:domain_verification_status, Shapes::ShapeRef.new(shape: VerificationStatus, location_name: "domainVerificationStatus"))
+    GetResourceConfigurationResponse.add_member(:group_domain, Shapes::ShapeRef.new(shape: DomainName, location_name: "groupDomain"))
     GetResourceConfigurationResponse.struct_class = Types::GetResourceConfigurationResponse
 
     GetResourceGatewayRequest.add_member(:resource_gateway_identifier, Shapes::ShapeRef.new(shape: ResourceGatewayIdentifier, required: true, location: "uri", location_name: "resourceGatewayIdentifier"))
@@ -816,8 +886,10 @@ module Aws::VPCLattice
     GetServiceNetworkResourceAssociationResponse.add_member(:failure_code, Shapes::ShapeRef.new(shape: String, location_name: "failureCode"))
     GetServiceNetworkResourceAssociationResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
     GetServiceNetworkResourceAssociationResponse.add_member(:private_dns_entry, Shapes::ShapeRef.new(shape: DnsEntry, location_name: "privateDnsEntry"))
+    GetServiceNetworkResourceAssociationResponse.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "privateDnsEnabled"))
     GetServiceNetworkResourceAssociationResponse.add_member(:dns_entry, Shapes::ShapeRef.new(shape: DnsEntry, location_name: "dnsEntry"))
     GetServiceNetworkResourceAssociationResponse.add_member(:is_managed_association, Shapes::ShapeRef.new(shape: Boolean, location_name: "isManagedAssociation"))
+    GetServiceNetworkResourceAssociationResponse.add_member(:domain_verification_status, Shapes::ShapeRef.new(shape: VerificationStatus, location_name: "domainVerificationStatus"))
     GetServiceNetworkResourceAssociationResponse.struct_class = Types::GetServiceNetworkResourceAssociationResponse
 
     GetServiceNetworkResponse.add_member(:id, Shapes::ShapeRef.new(shape: ServiceNetworkId, location_name: "id"))
@@ -864,9 +936,11 @@ module Aws::VPCLattice
     GetServiceNetworkVpcAssociationResponse.add_member(:service_network_arn, Shapes::ShapeRef.new(shape: ServiceNetworkArn, location_name: "serviceNetworkArn"))
     GetServiceNetworkVpcAssociationResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
     GetServiceNetworkVpcAssociationResponse.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupList, location_name: "securityGroupIds"))
+    GetServiceNetworkVpcAssociationResponse.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "privateDnsEnabled"))
     GetServiceNetworkVpcAssociationResponse.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "failureMessage"))
     GetServiceNetworkVpcAssociationResponse.add_member(:failure_code, Shapes::ShapeRef.new(shape: String, location_name: "failureCode"))
     GetServiceNetworkVpcAssociationResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
+    GetServiceNetworkVpcAssociationResponse.add_member(:dns_options, Shapes::ShapeRef.new(shape: DnsOptions, location_name: "dnsOptions"))
     GetServiceNetworkVpcAssociationResponse.struct_class = Types::GetServiceNetworkVpcAssociationResponse
 
     GetServiceRequest.add_member(:service_identifier, Shapes::ShapeRef.new(shape: ServiceIdentifier, required: true, location: "uri", location_name: "serviceIdentifier"))
@@ -952,6 +1026,14 @@ module Aws::VPCLattice
     ListAccessLogSubscriptionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAccessLogSubscriptionsResponse.struct_class = Types::ListAccessLogSubscriptionsResponse
 
+    ListDomainVerificationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListDomainVerificationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListDomainVerificationsRequest.struct_class = Types::ListDomainVerificationsRequest
+
+    ListDomainVerificationsResponse.add_member(:items, Shapes::ShapeRef.new(shape: DomainVerificationList, required: true, location_name: "items"))
+    ListDomainVerificationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDomainVerificationsResponse.struct_class = Types::ListDomainVerificationsResponse
+
     ListListenersRequest.add_member(:service_identifier, Shapes::ShapeRef.new(shape: ServiceIdentifier, required: true, location: "uri", location_name: "serviceIdentifier"))
     ListListenersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListListenersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -963,6 +1045,7 @@ module Aws::VPCLattice
 
     ListResourceConfigurationsRequest.add_member(:resource_gateway_identifier, Shapes::ShapeRef.new(shape: ResourceGatewayIdentifier, location: "querystring", location_name: "resourceGatewayIdentifier"))
     ListResourceConfigurationsRequest.add_member(:resource_configuration_group_identifier, Shapes::ShapeRef.new(shape: ResourceConfigurationIdentifier, location: "querystring", location_name: "resourceConfigurationGroupIdentifier"))
+    ListResourceConfigurationsRequest.add_member(:domain_verification_identifier, Shapes::ShapeRef.new(shape: DomainVerificationIdentifier, location: "querystring", location_name: "domainVerificationIdentifier"))
     ListResourceConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListResourceConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListResourceConfigurationsRequest.struct_class = Types::ListResourceConfigurationsRequest
@@ -1116,6 +1199,8 @@ module Aws::VPCLattice
 
     PortRangeList.member = Shapes::ShapeRef.new(shape: PortRange)
 
+    PrivateDnsSpecifiedDomainsList.member = Shapes::ShapeRef.new(shape: PrivateDnsSpecifiedDomain)
+
     PutAuthPolicyRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location: "uri", location_name: "resourceIdentifier"))
     PutAuthPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: AuthPolicyString, required: true, location_name: "policy"))
     PutAuthPolicyRequest.struct_class = Types::PutAuthPolicyRequest
@@ -1160,6 +1245,9 @@ module Aws::VPCLattice
     ResourceConfigurationSummary.add_member(:amazon_managed, Shapes::ShapeRef.new(shape: Boolean, location_name: "amazonManaged"))
     ResourceConfigurationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     ResourceConfigurationSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
+    ResourceConfigurationSummary.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "customDomainName"))
+    ResourceConfigurationSummary.add_member(:domain_verification_id, Shapes::ShapeRef.new(shape: DomainVerificationId, location_name: "domainVerificationId"))
+    ResourceConfigurationSummary.add_member(:group_domain, Shapes::ShapeRef.new(shape: DomainName, location_name: "groupDomain"))
     ResourceConfigurationSummary.struct_class = Types::ResourceConfigurationSummary
 
     ResourceConfigurationSummaryList.member = Shapes::ShapeRef.new(shape: ResourceConfigurationSummary)
@@ -1282,6 +1370,7 @@ module Aws::VPCLattice
     ServiceNetworkResourceAssociationSummary.add_member(:private_dns_entry, Shapes::ShapeRef.new(shape: DnsEntry, location_name: "privateDnsEntry"))
     ServiceNetworkResourceAssociationSummary.add_member(:is_managed_association, Shapes::ShapeRef.new(shape: Boolean, location_name: "isManagedAssociation"))
     ServiceNetworkResourceAssociationSummary.add_member(:failure_code, Shapes::ShapeRef.new(shape: String, location_name: "failureCode"))
+    ServiceNetworkResourceAssociationSummary.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "privateDnsEnabled"))
     ServiceNetworkResourceAssociationSummary.struct_class = Types::ServiceNetworkResourceAssociationSummary
 
     ServiceNetworkServiceAssociationList.member = Shapes::ShapeRef.new(shape: ServiceNetworkServiceAssociationSummary)
@@ -1321,6 +1410,8 @@ module Aws::VPCLattice
     ServiceNetworkVpcAssociationSummary.add_member(:service_network_id, Shapes::ShapeRef.new(shape: ServiceNetworkId, location_name: "serviceNetworkId"))
     ServiceNetworkVpcAssociationSummary.add_member(:service_network_name, Shapes::ShapeRef.new(shape: ServiceNetworkName, location_name: "serviceNetworkName"))
     ServiceNetworkVpcAssociationSummary.add_member(:service_network_arn, Shapes::ShapeRef.new(shape: ServiceNetworkArn, location_name: "serviceNetworkArn"))
+    ServiceNetworkVpcAssociationSummary.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "privateDnsEnabled"))
+    ServiceNetworkVpcAssociationSummary.add_member(:dns_options, Shapes::ShapeRef.new(shape: DnsOptions, location_name: "dnsOptions"))
     ServiceNetworkVpcAssociationSummary.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
     ServiceNetworkVpcAssociationSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
     ServiceNetworkVpcAssociationSummary.struct_class = Types::ServiceNetworkVpcAssociationSummary
@@ -1346,6 +1437,18 @@ module Aws::VPCLattice
 
     SharingConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     SharingConfig.struct_class = Types::SharingConfig
+
+    StartDomainVerificationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    StartDomainVerificationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domainName"))
+    StartDomainVerificationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    StartDomainVerificationRequest.struct_class = Types::StartDomainVerificationRequest
+
+    StartDomainVerificationResponse.add_member(:id, Shapes::ShapeRef.new(shape: DomainVerificationId, required: true, location_name: "id"))
+    StartDomainVerificationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: DomainVerificationArn, required: true, location_name: "arn"))
+    StartDomainVerificationResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domainName"))
+    StartDomainVerificationResponse.add_member(:status, Shapes::ShapeRef.new(shape: VerificationStatus, required: true, location_name: "status"))
+    StartDomainVerificationResponse.add_member(:txt_method_config, Shapes::ShapeRef.new(shape: TxtMethodConfig, location_name: "txtMethodConfig"))
+    StartDomainVerificationResponse.struct_class = Types::StartDomainVerificationResponse
 
     SubnetList.member = Shapes::ShapeRef.new(shape: SubnetId)
 
@@ -1413,6 +1516,10 @@ module Aws::VPCLattice
     ThrottlingException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TxtMethodConfig.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    TxtMethodConfig.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    TxtMethodConfig.struct_class = Types::TxtMethodConfig
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location: "querystring", location_name: "tagKeys"))
@@ -1786,6 +1893,19 @@ module Aws::VPCLattice
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_domain_verification, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDomainVerification"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/domainverifications/{domainVerificationIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDomainVerificationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDomainVerificationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_listener, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteListener"
         o.http_method = "DELETE"
@@ -1991,6 +2111,19 @@ module Aws::VPCLattice
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_domain_verification, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDomainVerification"
+        o.http_method = "GET"
+        o.http_request_uri = "/domainverifications/{domainVerificationIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetDomainVerificationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDomainVerificationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_listener, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetListener"
         o.http_method = "GET"
@@ -2142,6 +2275,25 @@ module Aws::VPCLattice
         o.output = Shapes::ShapeRef.new(shape: ListAccessLogSubscriptionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_domain_verifications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDomainVerifications"
+        o.http_method = "GET"
+        o.http_request_uri = "/domainverifications"
+        o.input = Shapes::ShapeRef.new(shape: ListDomainVerificationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDomainVerificationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
@@ -2437,6 +2589,20 @@ module Aws::VPCLattice
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:start_domain_verification, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDomainVerification"
+        o.http_method = "POST"
+        o.http_request_uri = "/domainverifications"
+        o.input = Shapes::ShapeRef.new(shape: StartDomainVerificationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartDomainVerificationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

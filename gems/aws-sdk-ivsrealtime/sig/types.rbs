@@ -249,7 +249,7 @@ module Aws::IVSRealTime
     end
 
     class Event
-      attr_accessor name: ("JOINED" | "LEFT" | "PUBLISH_STARTED" | "PUBLISH_STOPPED" | "SUBSCRIBE_STARTED" | "SUBSCRIBE_STOPPED" | "PUBLISH_ERROR" | "SUBSCRIBE_ERROR" | "JOIN_ERROR" | "REPLICATION_STARTED" | "REPLICATION_STOPPED")
+      attr_accessor name: ("JOINED" | "LEFT" | "PUBLISH_STARTED" | "PUBLISH_STOPPED" | "SUBSCRIBE_STARTED" | "SUBSCRIBE_STOPPED" | "PUBLISH_ERROR" | "SUBSCRIBE_ERROR" | "JOIN_ERROR" | "REPLICATION_STARTED" | "REPLICATION_STOPPED" | "TOKEN_EXCHANGED")
       attr_accessor participant_id: ::String
       attr_accessor event_time: ::Time
       attr_accessor remote_participant_id: ::String
@@ -257,6 +257,16 @@ module Aws::IVSRealTime
       attr_accessor destination_stage_arn: ::String
       attr_accessor destination_session_id: ::String
       attr_accessor replica: bool
+      attr_accessor previous_token: Types::ExchangedParticipantToken
+      attr_accessor new_token: Types::ExchangedParticipantToken
+      SENSITIVE: []
+    end
+
+    class ExchangedParticipantToken
+      attr_accessor capabilities: ::Array[("PUBLISH" | "SUBSCRIBE")]
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor user_id: ::String
+      attr_accessor expiration_time: ::Time
       SENSITIVE: []
     end
 

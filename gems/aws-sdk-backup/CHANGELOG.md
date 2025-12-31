@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.103.0 (2025-11-19)
+------------------
+
+* Feature - Amazon GuardDuty Malware Protection now supports AWS Backup, extending malware detection capabilities to EC2, EBS, and S3 backups.
+
+1.102.0 (2025-11-18)
+------------------
+
+* Feature - AWS Backup now supports a low-cost warm storage tier for Amazon S3 backup data.
+
+1.101.0 (2025-11-17)
+------------------
+
+* Feature - AWS Backup now supports specifying a logically air-gapped backup vault as a primary backup target in backup plans and on-demand backup jobs.
+
+1.100.0 (2025-11-10)
+------------------
+
+* Feature - AWS Backup supports backups of Amazon EKS clusters, including Kubernetes cluster state and persistent storage attached to the EKS cluster via a persistent volume claim (EBS volumes, EFS file systems, and S3 buckets).
+
+1.99.0 (2025-11-06)
+------------------
+
+* Feature - AWS Backup now supports customer-managed keys (CMK) for logically air-gapped vaults, enabling customers to maintain full control over their encryption key lifecycle. This feature helps organizations meet specific internal governance requirements or external regulatory compliance standards.
+
+1.98.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.97.0 (2025-10-14)
+------------------
+
+* Feature - The AWS Backup job attribute extension enhancement helps customers better understand the plan that initiated each job, and the properties of the resource each job creates.
+
 1.96.0 (2025-10-06)
 ------------------
 

@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.142.0 (2025-12-08)
+------------------
+
+* Feature - Add support for Cost Category resource associations including filtering by resource type on ListCostCategoryDefinitions and new ListCostCategoryResourceAssociations API.
+
+1.141.0 (2025-12-02)
+------------------
+
+* Feature - This release updates existing Savings Plans Purchase Analyzer and Recommendations APIs to support Database Savings Plans.
+
+1.140.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.139.0 (2025-11-19)
+------------------
+
+* Feature - Add support for COST_CATEGORY, TAG, and LINKED_ACCOUNT AWS managed cost anomaly detection monitors
+
+1.138.0 (2025-10-27)
+------------------
+
+* Feature - Updated endpoint for eusc-de-east-1 region.
+
+1.137.0 (2025-10-22)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.136.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.135.0 (2025-09-26)
 ------------------
 

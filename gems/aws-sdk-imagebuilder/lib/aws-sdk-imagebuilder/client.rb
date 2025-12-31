@@ -652,11 +652,18 @@ module Aws::Imagebuilder
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
+    # @option params [Boolean] :dry_run
+    #   Validates the required permissions for the operation and the request
+    #   parameters, without actually making the request, and provides an error
+    #   response. Upon a successful request, the error response is
+    #   `DryRunOperationException`.
+    #
     # @return [Types::CreateComponentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateComponentResponse#request_id #request_id} => String
     #   * {Types::CreateComponentResponse#client_token #client_token} => String
     #   * {Types::CreateComponentResponse#component_build_version_arn #component_build_version_arn} => String
+    #   * {Types::CreateComponentResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
     #
     # @example Request syntax with placeholder values
     #
@@ -674,6 +681,7 @@ module Aws::Imagebuilder
     #       "TagKey" => "TagValue",
     #     },
     #     client_token: "ClientToken", # required
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -681,6 +689,10 @@ module Aws::Imagebuilder
     #   resp.request_id #=> String
     #   resp.client_token #=> String
     #   resp.component_build_version_arn #=> String
+    #   resp.latest_version_references.latest_version_arn #=> String
+    #   resp.latest_version_references.latest_major_version_arn #=> String
+    #   resp.latest_version_references.latest_minor_version_arn #=> String
+    #   resp.latest_version_references.latest_patch_version_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateComponent AWS API Documentation
     #
@@ -723,10 +735,8 @@ module Aws::Imagebuilder
     #
     #    </note>
     #
-    # @option params [required, Array<Types::ComponentConfiguration>] :components
-    #   Components for build and test that are included in the container
-    #   recipe. Recipes require a minimum of one build component, and can have
-    #   a maximum of 20 build and test components in any combination.
+    # @option params [Array<Types::ComponentConfiguration>] :components
+    #   The components included in the container recipe.
     #
     # @option params [Types::InstanceConfiguration] :instance_configuration
     #   A group of options that can be used to configure an instance for
@@ -786,6 +796,7 @@ module Aws::Imagebuilder
     #   * {Types::CreateContainerRecipeResponse#request_id #request_id} => String
     #   * {Types::CreateContainerRecipeResponse#client_token #client_token} => String
     #   * {Types::CreateContainerRecipeResponse#container_recipe_arn #container_recipe_arn} => String
+    #   * {Types::CreateContainerRecipeResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
     #
     # @example Request syntax with placeholder values
     #
@@ -793,8 +804,8 @@ module Aws::Imagebuilder
     #     container_type: "DOCKER", # required, accepts DOCKER
     #     name: "ResourceName", # required
     #     description: "NonEmptyString",
-    #     semantic_version: "VersionNumber", # required
-    #     components: [ # required
+    #     semantic_version: "WildcardVersionNumber", # required
+    #     components: [
     #       {
     #         component_arn: "ComponentVersionArnOrBuildVersionArn", # required
     #         parameters: [
@@ -847,6 +858,10 @@ module Aws::Imagebuilder
     #   resp.request_id #=> String
     #   resp.client_token #=> String
     #   resp.container_recipe_arn #=> String
+    #   resp.latest_version_references.latest_version_arn #=> String
+    #   resp.latest_version_references.latest_major_version_arn #=> String
+    #   resp.latest_version_references.latest_minor_version_arn #=> String
+    #   resp.latest_version_references.latest_patch_version_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateContainerRecipe AWS API Documentation
     #
@@ -1044,6 +1059,7 @@ module Aws::Imagebuilder
     #   * {Types::CreateImageResponse#request_id #request_id} => String
     #   * {Types::CreateImageResponse#client_token #client_token} => String
     #   * {Types::CreateImageResponse#image_build_version_arn #image_build_version_arn} => String
+    #   * {Types::CreateImageResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
     #
     # @example Request syntax with placeholder values
     #
@@ -1092,6 +1108,10 @@ module Aws::Imagebuilder
     #   resp.request_id #=> String
     #   resp.client_token #=> String
     #   resp.image_build_version_arn #=> String
+    #   resp.latest_version_references.latest_version_arn #=> String
+    #   resp.latest_version_references.latest_major_version_arn #=> String
+    #   resp.latest_version_references.latest_minor_version_arn #=> String
+    #   resp.latest_version_references.latest_patch_version_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateImage AWS API Documentation
     #
@@ -1275,7 +1295,7 @@ module Aws::Imagebuilder
     #
     #    </note>
     #
-    # @option params [required, Array<Types::ComponentConfiguration>] :components
+    # @option params [Array<Types::ComponentConfiguration>] :components
     #   The components included in the image recipe.
     #
     # @option params [required, String] :parent_image
@@ -1329,14 +1349,15 @@ module Aws::Imagebuilder
     #   * {Types::CreateImageRecipeResponse#request_id #request_id} => String
     #   * {Types::CreateImageRecipeResponse#client_token #client_token} => String
     #   * {Types::CreateImageRecipeResponse#image_recipe_arn #image_recipe_arn} => String
+    #   * {Types::CreateImageRecipeResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_image_recipe({
     #     name: "ResourceName", # required
     #     description: "NonEmptyString",
-    #     semantic_version: "VersionNumber", # required
-    #     components: [ # required
+    #     semantic_version: "WildcardVersionNumber", # required
+    #     components: [
     #       {
     #         component_arn: "ComponentVersionArnOrBuildVersionArn", # required
     #         parameters: [
@@ -1386,6 +1407,10 @@ module Aws::Imagebuilder
     #   resp.request_id #=> String
     #   resp.client_token #=> String
     #   resp.image_recipe_arn #=> String
+    #   resp.latest_version_references.latest_version_arn #=> String
+    #   resp.latest_version_references.latest_major_version_arn #=> String
+    #   resp.latest_version_references.latest_minor_version_arn #=> String
+    #   resp.latest_version_references.latest_patch_version_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateImageRecipe AWS API Documentation
     #
@@ -1731,10 +1756,17 @@ module Aws::Imagebuilder
     #   The phase in the image build process for which the workflow resource
     #   is responsible.
     #
+    # @option params [Boolean] :dry_run
+    #   Validates the required permissions for the operation and the request
+    #   parameters, without actually making the request, and provides an error
+    #   response. Upon a successful request, the error response is
+    #   `DryRunOperationException`.
+    #
     # @return [Types::CreateWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkflowResponse#client_token #client_token} => String
     #   * {Types::CreateWorkflowResponse#workflow_build_version_arn #workflow_build_version_arn} => String
+    #   * {Types::CreateWorkflowResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
     #
     # @example Request syntax with placeholder values
     #
@@ -1751,12 +1783,17 @@ module Aws::Imagebuilder
     #     },
     #     client_token: "ClientToken", # required
     #     type: "BUILD", # required, accepts BUILD, TEST, DISTRIBUTION
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.client_token #=> String
     #   resp.workflow_build_version_arn #=> String
+    #   resp.latest_version_references.latest_version_arn #=> String
+    #   resp.latest_version_references.latest_major_version_arn #=> String
+    #   resp.latest_version_references.latest_minor_version_arn #=> String
+    #   resp.latest_version_references.latest_patch_version_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateWorkflow AWS API Documentation
     #
@@ -2056,6 +2093,71 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
+    # DistributeImage distributes existing AMIs to additional regions and
+    # accounts without rebuilding the image.
+    #
+    # @option params [required, String] :source_image
+    #   The source image Amazon Resource Name (ARN) to distribute.
+    #
+    # @option params [required, String] :distribution_configuration_arn
+    #   The Amazon Resource Name (ARN) of the distribution configuration to
+    #   use.
+    #
+    # @option params [required, String] :execution_role
+    #   The IAM role to use for the distribution.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to apply to the distributed image.
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [Types::ImageLoggingConfiguration] :logging_configuration
+    #   The logging configuration for the distribution.
+    #
+    # @return [Types::DistributeImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DistributeImageResponse#client_token #client_token} => String
+    #   * {Types::DistributeImageResponse#image_build_version_arn #image_build_version_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.distribute_image({
+    #     source_image: "NonEmptyString", # required
+    #     distribution_configuration_arn: "DistributionConfigurationArn", # required
+    #     execution_role: "RoleNameOrArn", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken", # required
+    #     logging_configuration: {
+    #       log_group_name: "LogGroupName",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_token #=> String
+    #   resp.image_build_version_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/DistributeImage AWS API Documentation
+    #
+    # @overload distribute_image(params = {})
+    # @param [Hash] params ({})
+    def distribute_image(params = {}, options = {})
+      req = build_request(:distribute_image, params)
+      req.send_request(options)
+    end
+
     # Gets a component object.
     #
     # @option params [required, String] :component_build_version_arn
@@ -2066,6 +2168,7 @@ module Aws::Imagebuilder
     #
     #   * {Types::GetComponentResponse#request_id #request_id} => String
     #   * {Types::GetComponentResponse#component #component} => Types::Component
+    #   * {Types::GetComponentResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
     #
     # @example Request syntax with placeholder values
     #
@@ -2105,6 +2208,10 @@ module Aws::Imagebuilder
     #   resp.component.product_codes #=> Array
     #   resp.component.product_codes[0].product_code_id #=> String
     #   resp.component.product_codes[0].product_code_type #=> String, one of "marketplace"
+    #   resp.latest_version_references.latest_version_arn #=> String
+    #   resp.latest_version_references.latest_major_version_arn #=> String
+    #   resp.latest_version_references.latest_minor_version_arn #=> String
+    #   resp.latest_version_references.latest_patch_version_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetComponent AWS API Documentation
     #
@@ -2155,6 +2262,7 @@ module Aws::Imagebuilder
     #
     #   * {Types::GetContainerRecipeResponse#request_id #request_id} => String
     #   * {Types::GetContainerRecipeResponse#container_recipe #container_recipe} => Types::ContainerRecipe
+    #   * {Types::GetContainerRecipeResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
     #
     # @example Request syntax with placeholder values
     #
@@ -2201,6 +2309,10 @@ module Aws::Imagebuilder
     #   resp.container_recipe.working_directory #=> String
     #   resp.container_recipe.target_repository.service #=> String, one of "ECR"
     #   resp.container_recipe.target_repository.repository_name #=> String
+    #   resp.latest_version_references.latest_version_arn #=> String
+    #   resp.latest_version_references.latest_major_version_arn #=> String
+    #   resp.latest_version_references.latest_minor_version_arn #=> String
+    #   resp.latest_version_references.latest_patch_version_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetContainerRecipe AWS API Documentation
     #
@@ -2333,6 +2445,7 @@ module Aws::Imagebuilder
     #
     #   * {Types::GetImageResponse#request_id #request_id} => String
     #   * {Types::GetImageResponse#image #image} => Types::Image
+    #   * {Types::GetImageResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
     #
     # @example Request syntax with placeholder values
     #
@@ -2539,6 +2652,10 @@ module Aws::Imagebuilder
     #   resp.image.workflows[0].parallel_group #=> String
     #   resp.image.workflows[0].on_failure #=> String, one of "CONTINUE", "ABORT"
     #   resp.image.logging_configuration.log_group_name #=> String
+    #   resp.latest_version_references.latest_version_arn #=> String
+    #   resp.latest_version_references.latest_major_version_arn #=> String
+    #   resp.latest_version_references.latest_minor_version_arn #=> String
+    #   resp.latest_version_references.latest_patch_version_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetImage AWS API Documentation
     #
@@ -2659,6 +2776,7 @@ module Aws::Imagebuilder
     #
     #   * {Types::GetImageRecipeResponse#request_id #request_id} => String
     #   * {Types::GetImageRecipeResponse#image_recipe #image_recipe} => Types::ImageRecipe
+    #   * {Types::GetImageRecipeResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
     #
     # @example Request syntax with placeholder values
     #
@@ -2703,6 +2821,10 @@ module Aws::Imagebuilder
     #   resp.image_recipe.additional_instance_configuration.user_data_override #=> String
     #   resp.image_recipe.ami_tags #=> Hash
     #   resp.image_recipe.ami_tags["TagKey"] #=> String
+    #   resp.latest_version_references.latest_version_arn #=> String
+    #   resp.latest_version_references.latest_major_version_arn #=> String
+    #   resp.latest_version_references.latest_minor_version_arn #=> String
+    #   resp.latest_version_references.latest_patch_version_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetImageRecipe AWS API Documentation
     #
@@ -2955,6 +3077,7 @@ module Aws::Imagebuilder
     # @return [Types::GetWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetWorkflowResponse#workflow #workflow} => Types::Workflow
+    #   * {Types::GetWorkflowResponse#latest_version_references #latest_version_references} => Types::LatestVersionReferences
     #
     # @example Request syntax with placeholder values
     #
@@ -2984,6 +3107,10 @@ module Aws::Imagebuilder
     #   resp.workflow.parameters[0].default_value #=> Array
     #   resp.workflow.parameters[0].default_value[0] #=> String
     #   resp.workflow.parameters[0].description #=> String
+    #   resp.latest_version_references.latest_version_arn #=> String
+    #   resp.latest_version_references.latest_major_version_arn #=> String
+    #   resp.latest_version_references.latest_minor_version_arn #=> String
+    #   resp.latest_version_references.latest_patch_version_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetWorkflow AWS API Documentation
     #
@@ -4819,6 +4946,7 @@ module Aws::Imagebuilder
     #   resp.workflow_executions[0].start_time #=> String
     #   resp.workflow_executions[0].end_time #=> String
     #   resp.workflow_executions[0].parallel_group #=> String
+    #   resp.workflow_executions[0].retried #=> Boolean
     #   resp.image_build_version_arn #=> String
     #   resp.message #=> String
     #   resp.next_token #=> String
@@ -5134,6 +5262,49 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
+    # RetryImage retries an image distribution without rebuilding the image.
+    #
+    # @option params [required, String] :image_build_version_arn
+    #   The source image Amazon Resource Name (ARN) to retry.
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::RetryImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RetryImageResponse#client_token #client_token} => String
+    #   * {Types::RetryImageResponse#image_build_version_arn #image_build_version_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.retry_image({
+    #     image_build_version_arn: "ImageBuildVersionArn", # required
+    #     client_token: "ClientToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_token #=> String
+    #   resp.image_build_version_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/RetryImage AWS API Documentation
+    #
+    # @overload retry_image(params = {})
+    # @param [Hash] params ({})
+    def retry_image(params = {}, options = {})
+      req = build_request(:retry_image, params)
+      req.send_request(options)
+    end
+
     # Pauses or resumes image creation when the associated workflow runs a
     # `WaitForAction` step.
     #
@@ -5251,8 +5422,8 @@ module Aws::Imagebuilder
     # specified image resources.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the Image Builder resource that is updated. The state
-    #   update might also impact associated resources.
+    #   The Amazon Resource Name (ARN) of the Image Builder resource that is
+    #   updated. The state update might also impact associated resources.
     #
     # @option params [required, Types::ResourceState] :state
     #   Indicates the lifecycle action to take for this request.
@@ -5925,7 +6096,7 @@ module Aws::Imagebuilder
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

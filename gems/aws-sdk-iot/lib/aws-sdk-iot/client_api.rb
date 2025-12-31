@@ -149,6 +149,8 @@ module Aws::IoT
     AwsJobRolloutRatePerMinute = Shapes::IntegerShape.new(name: 'AwsJobRolloutRatePerMinute')
     AwsJobTimeoutConfig = Shapes::StructureShape.new(name: 'AwsJobTimeoutConfig')
     AwsJobTimeoutInProgressTimeoutInMinutes = Shapes::IntegerShape.new(name: 'AwsJobTimeoutInProgressTimeoutInMinutes')
+    AwsJsonSubstitutionCommandPreprocessorConfig = Shapes::StructureShape.new(name: 'AwsJsonSubstitutionCommandPreprocessorConfig')
+    BatchConfig = Shapes::StructureShape.new(name: 'BatchConfig')
     BatchMode = Shapes::BooleanShape.new(name: 'BatchMode')
     BeforeSubstitutionFlag = Shapes::BooleanShape.new(name: 'BeforeSubstitutionFlag')
     Behavior = Shapes::StructureShape.new(name: 'Behavior')
@@ -258,9 +260,18 @@ module Aws::IoT
     CommandParameterDescription = Shapes::StringShape.new(name: 'CommandParameterDescription')
     CommandParameterList = Shapes::ListShape.new(name: 'CommandParameterList')
     CommandParameterName = Shapes::StringShape.new(name: 'CommandParameterName')
+    CommandParameterType = Shapes::StringShape.new(name: 'CommandParameterType')
     CommandParameterValue = Shapes::StructureShape.new(name: 'CommandParameterValue')
+    CommandParameterValueComparisonOperand = Shapes::StructureShape.new(name: 'CommandParameterValueComparisonOperand')
+    CommandParameterValueComparisonOperator = Shapes::StringShape.new(name: 'CommandParameterValueComparisonOperator')
+    CommandParameterValueCondition = Shapes::StructureShape.new(name: 'CommandParameterValueCondition')
+    CommandParameterValueConditionList = Shapes::ListShape.new(name: 'CommandParameterValueConditionList')
+    CommandParameterValueNumberRange = Shapes::StructureShape.new(name: 'CommandParameterValueNumberRange')
+    CommandParameterValueStringList = Shapes::ListShape.new(name: 'CommandParameterValueStringList')
     CommandPayload = Shapes::StructureShape.new(name: 'CommandPayload')
     CommandPayloadBlob = Shapes::BlobShape.new(name: 'CommandPayloadBlob')
+    CommandPayloadTemplateString = Shapes::StringShape.new(name: 'CommandPayloadTemplateString')
+    CommandPreprocessor = Shapes::StructureShape.new(name: 'CommandPreprocessor')
     CommandSummary = Shapes::StructureShape.new(name: 'CommandSummary')
     CommandSummaryList = Shapes::ListShape.new(name: 'CommandSummaryList')
     Comment = Shapes::StringShape.new(name: 'Comment')
@@ -570,6 +581,7 @@ module Aws::IoT
     ElasticsearchId = Shapes::StringShape.new(name: 'ElasticsearchId')
     ElasticsearchIndex = Shapes::StringShape.new(name: 'ElasticsearchIndex')
     ElasticsearchType = Shapes::StringShape.new(name: 'ElasticsearchType')
+    EnableBatching = Shapes::BooleanShape.new(name: 'EnableBatching')
     EnableCachingForHttp = Shapes::BooleanShape.new(name: 'EnableCachingForHttp')
     EnableIoTLoggingParams = Shapes::StructureShape.new(name: 'EnableIoTLoggingParams')
     EnableOCSPCheck = Shapes::BooleanShape.new(name: 'EnableOCSPCheck')
@@ -902,6 +914,10 @@ module Aws::IoT
     ListViolationEventsResponse = Shapes::StructureShape.new(name: 'ListViolationEventsResponse')
     LocationAction = Shapes::StructureShape.new(name: 'LocationAction')
     LocationTimestamp = Shapes::StructureShape.new(name: 'LocationTimestamp')
+    LogDestination = Shapes::StringShape.new(name: 'LogDestination')
+    LogEventConfiguration = Shapes::StructureShape.new(name: 'LogEventConfiguration')
+    LogEventConfigurations = Shapes::ListShape.new(name: 'LogEventConfigurations')
+    LogEventType = Shapes::StringShape.new(name: 'LogEventType')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
     LogLevel = Shapes::StringShape.new(name: 'LogLevel')
     LogTarget = Shapes::StructureShape.new(name: 'LogTarget')
@@ -920,6 +936,9 @@ module Aws::IoT
     ManagedJobTemplatesSummaryList = Shapes::ListShape.new(name: 'ManagedJobTemplatesSummaryList')
     ManagedTemplateVersion = Shapes::StringShape.new(name: 'ManagedTemplateVersion')
     Marker = Shapes::StringShape.new(name: 'Marker')
+    MaxBatchOpenMs = Shapes::IntegerShape.new(name: 'MaxBatchOpenMs')
+    MaxBatchSize = Shapes::IntegerShape.new(name: 'MaxBatchSize')
+    MaxBatchSizeBytes = Shapes::IntegerShape.new(name: 'MaxBatchSizeBytes')
     MaxBuckets = Shapes::IntegerShape.new(name: 'MaxBuckets')
     MaxJobExecutionsPerMin = Shapes::IntegerShape.new(name: 'MaxJobExecutionsPerMin')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -991,6 +1010,7 @@ module Aws::IoT
     OptionalVersion = Shapes::IntegerShape.new(name: 'OptionalVersion')
     OutgoingCertificate = Shapes::StructureShape.new(name: 'OutgoingCertificate')
     OutgoingCertificates = Shapes::ListShape.new(name: 'OutgoingCertificates')
+    OutputFormat = Shapes::StringShape.new(name: 'OutputFormat')
     OverrideDynamicGroups = Shapes::BooleanShape.new(name: 'OverrideDynamicGroups')
     PackageArn = Shapes::StringShape.new(name: 'PackageArn')
     PackageCatalogMaxResults = Shapes::IntegerShape.new(name: 'PackageCatalogMaxResults')
@@ -1464,6 +1484,7 @@ module Aws::IoT
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Value = Shapes::StringShape.new(name: 'Value')
     Variance = Shapes::FloatShape.new(name: 'Variance')
+    VerboseFlag = Shapes::BooleanShape.new(name: 'VerboseFlag')
     VerificationState = Shapes::StringShape.new(name: 'VerificationState')
     VerificationStateDescription = Shapes::StringShape.new(name: 'VerificationStateDescription')
     Version = Shapes::IntegerShape.new(name: 'Version')
@@ -1819,6 +1840,14 @@ module Aws::IoT
     AwsJobTimeoutConfig.add_member(:in_progress_timeout_in_minutes, Shapes::ShapeRef.new(shape: AwsJobTimeoutInProgressTimeoutInMinutes, location_name: "inProgressTimeoutInMinutes"))
     AwsJobTimeoutConfig.struct_class = Types::AwsJobTimeoutConfig
 
+    AwsJsonSubstitutionCommandPreprocessorConfig.add_member(:output_format, Shapes::ShapeRef.new(shape: OutputFormat, required: true, location_name: "outputFormat"))
+    AwsJsonSubstitutionCommandPreprocessorConfig.struct_class = Types::AwsJsonSubstitutionCommandPreprocessorConfig
+
+    BatchConfig.add_member(:max_batch_open_ms, Shapes::ShapeRef.new(shape: MaxBatchOpenMs, location_name: "maxBatchOpenMs"))
+    BatchConfig.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: MaxBatchSize, location_name: "maxBatchSize"))
+    BatchConfig.add_member(:max_batch_size_bytes, Shapes::ShapeRef.new(shape: MaxBatchSizeBytes, location_name: "maxBatchSizeBytes"))
+    BatchConfig.struct_class = Types::BatchConfig
+
     Behavior.add_member(:name, Shapes::ShapeRef.new(shape: BehaviorName, required: true, location_name: "name"))
     Behavior.add_member(:metric, Shapes::ShapeRef.new(shape: BehaviorMetric, location_name: "metric"))
     Behavior.add_member(:metric_dimension, Shapes::ShapeRef.new(shape: MetricDimension, location_name: "metricDimension"))
@@ -2038,8 +2067,10 @@ module Aws::IoT
     CommandExecutionSummaryList.member = Shapes::ShapeRef.new(shape: CommandExecutionSummary)
 
     CommandParameter.add_member(:name, Shapes::ShapeRef.new(shape: CommandParameterName, required: true, location_name: "name"))
+    CommandParameter.add_member(:type, Shapes::ShapeRef.new(shape: CommandParameterType, location_name: "type"))
     CommandParameter.add_member(:value, Shapes::ShapeRef.new(shape: CommandParameterValue, location_name: "value"))
     CommandParameter.add_member(:default_value, Shapes::ShapeRef.new(shape: CommandParameterValue, location_name: "defaultValue"))
+    CommandParameter.add_member(:value_conditions, Shapes::ShapeRef.new(shape: CommandParameterValueConditionList, location_name: "valueConditions"))
     CommandParameter.add_member(:description, Shapes::ShapeRef.new(shape: CommandParameterDescription, location_name: "description"))
     CommandParameter.struct_class = Types::CommandParameter
 
@@ -2054,9 +2085,31 @@ module Aws::IoT
     CommandParameterValue.add_member(:ul, Shapes::ShapeRef.new(shape: UnsignedLongParameterValue, location_name: "UL"))
     CommandParameterValue.struct_class = Types::CommandParameterValue
 
+    CommandParameterValueComparisonOperand.add_member(:number, Shapes::ShapeRef.new(shape: StringParameterValue, location_name: "number"))
+    CommandParameterValueComparisonOperand.add_member(:numbers, Shapes::ShapeRef.new(shape: CommandParameterValueStringList, location_name: "numbers"))
+    CommandParameterValueComparisonOperand.add_member(:string, Shapes::ShapeRef.new(shape: StringParameterValue, location_name: "string"))
+    CommandParameterValueComparisonOperand.add_member(:strings, Shapes::ShapeRef.new(shape: CommandParameterValueStringList, location_name: "strings"))
+    CommandParameterValueComparisonOperand.add_member(:number_range, Shapes::ShapeRef.new(shape: CommandParameterValueNumberRange, location_name: "numberRange"))
+    CommandParameterValueComparisonOperand.struct_class = Types::CommandParameterValueComparisonOperand
+
+    CommandParameterValueCondition.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: CommandParameterValueComparisonOperator, required: true, location_name: "comparisonOperator"))
+    CommandParameterValueCondition.add_member(:operand, Shapes::ShapeRef.new(shape: CommandParameterValueComparisonOperand, required: true, location_name: "operand"))
+    CommandParameterValueCondition.struct_class = Types::CommandParameterValueCondition
+
+    CommandParameterValueConditionList.member = Shapes::ShapeRef.new(shape: CommandParameterValueCondition)
+
+    CommandParameterValueNumberRange.add_member(:min, Shapes::ShapeRef.new(shape: StringParameterValue, required: true, location_name: "min"))
+    CommandParameterValueNumberRange.add_member(:max, Shapes::ShapeRef.new(shape: StringParameterValue, required: true, location_name: "max"))
+    CommandParameterValueNumberRange.struct_class = Types::CommandParameterValueNumberRange
+
+    CommandParameterValueStringList.member = Shapes::ShapeRef.new(shape: StringParameterValue)
+
     CommandPayload.add_member(:content, Shapes::ShapeRef.new(shape: CommandPayloadBlob, location_name: "content"))
     CommandPayload.add_member(:content_type, Shapes::ShapeRef.new(shape: MimeType, location_name: "contentType"))
     CommandPayload.struct_class = Types::CommandPayload
+
+    CommandPreprocessor.add_member(:aws_json_substitution, Shapes::ShapeRef.new(shape: AwsJsonSubstitutionCommandPreprocessorConfig, location_name: "awsJsonSubstitution"))
+    CommandPreprocessor.struct_class = Types::CommandPreprocessor
 
     CommandSummary.add_member(:command_arn, Shapes::ShapeRef.new(shape: CommandArn, location_name: "commandArn"))
     CommandSummary.add_member(:command_id, Shapes::ShapeRef.new(shape: CommandId, location_name: "commandId"))
@@ -2148,6 +2201,8 @@ module Aws::IoT
     CreateCommandRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "displayName"))
     CreateCommandRequest.add_member(:description, Shapes::ShapeRef.new(shape: CommandDescription, location_name: "description"))
     CreateCommandRequest.add_member(:payload, Shapes::ShapeRef.new(shape: CommandPayload, location_name: "payload"))
+    CreateCommandRequest.add_member(:payload_template, Shapes::ShapeRef.new(shape: CommandPayloadTemplateString, location_name: "payloadTemplate"))
+    CreateCommandRequest.add_member(:preprocessor, Shapes::ShapeRef.new(shape: CommandPreprocessor, location_name: "preprocessor"))
     CreateCommandRequest.add_member(:mandatory_parameters, Shapes::ShapeRef.new(shape: CommandParameterList, location_name: "mandatoryParameters"))
     CreateCommandRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     CreateCommandRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
@@ -3305,6 +3360,8 @@ module Aws::IoT
     GetCommandResponse.add_member(:description, Shapes::ShapeRef.new(shape: CommandDescription, location_name: "description"))
     GetCommandResponse.add_member(:mandatory_parameters, Shapes::ShapeRef.new(shape: CommandParameterList, location_name: "mandatoryParameters"))
     GetCommandResponse.add_member(:payload, Shapes::ShapeRef.new(shape: CommandPayload, location_name: "payload"))
+    GetCommandResponse.add_member(:payload_template, Shapes::ShapeRef.new(shape: CommandPayloadTemplateString, location_name: "payloadTemplate"))
+    GetCommandResponse.add_member(:preprocessor, Shapes::ShapeRef.new(shape: CommandPreprocessor, location_name: "preprocessor"))
     GetCommandResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     GetCommandResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateType, location_name: "createdAt"))
     GetCommandResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "lastUpdatedAt"))
@@ -3452,11 +3509,13 @@ module Aws::IoT
     GetTopicRuleResponse.add_member(:rule, Shapes::ShapeRef.new(shape: TopicRule, location_name: "rule"))
     GetTopicRuleResponse.struct_class = Types::GetTopicRuleResponse
 
+    GetV2LoggingOptionsRequest.add_member(:verbose, Shapes::ShapeRef.new(shape: VerboseFlag, location: "querystring", location_name: "verbose"))
     GetV2LoggingOptionsRequest.struct_class = Types::GetV2LoggingOptionsRequest
 
     GetV2LoggingOptionsResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "roleArn"))
     GetV2LoggingOptionsResponse.add_member(:default_log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "defaultLogLevel"))
     GetV2LoggingOptionsResponse.add_member(:disable_all_logs, Shapes::ShapeRef.new(shape: DisableAllLogs, location_name: "disableAllLogs"))
+    GetV2LoggingOptionsResponse.add_member(:event_configurations, Shapes::ShapeRef.new(shape: LogEventConfigurations, location_name: "eventConfigurations"))
     GetV2LoggingOptionsResponse.struct_class = Types::GetV2LoggingOptionsResponse
 
     GroupNameAndArn.add_member(:group_name, Shapes::ShapeRef.new(shape: ThingGroupName, location_name: "groupName"))
@@ -3469,6 +3528,8 @@ module Aws::IoT
     HttpAction.add_member(:confirmation_url, Shapes::ShapeRef.new(shape: Url, location_name: "confirmationUrl"))
     HttpAction.add_member(:headers, Shapes::ShapeRef.new(shape: HeaderList, location_name: "headers"))
     HttpAction.add_member(:auth, Shapes::ShapeRef.new(shape: HttpAuthorization, location_name: "auth"))
+    HttpAction.add_member(:enable_batching, Shapes::ShapeRef.new(shape: EnableBatching, location_name: "enableBatching"))
+    HttpAction.add_member(:batch_config, Shapes::ShapeRef.new(shape: BatchConfig, location_name: "batchConfig"))
     HttpAction.struct_class = Types::HttpAction
 
     HttpActionHeader.add_member(:key, Shapes::ShapeRef.new(shape: HeaderKey, required: true, location_name: "key"))
@@ -4341,6 +4402,13 @@ module Aws::IoT
     LocationTimestamp.add_member(:unit, Shapes::ShapeRef.new(shape: String, location_name: "unit"))
     LocationTimestamp.struct_class = Types::LocationTimestamp
 
+    LogEventConfiguration.add_member(:event_type, Shapes::ShapeRef.new(shape: LogEventType, required: true, location_name: "eventType"))
+    LogEventConfiguration.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
+    LogEventConfiguration.add_member(:log_destination, Shapes::ShapeRef.new(shape: LogDestination, location_name: "logDestination"))
+    LogEventConfiguration.struct_class = Types::LogEventConfiguration
+
+    LogEventConfigurations.member = Shapes::ShapeRef.new(shape: LogEventConfiguration)
+
     LogTarget.add_member(:target_type, Shapes::ShapeRef.new(shape: LogTargetType, required: true, location_name: "targetType"))
     LogTarget.add_member(:target_name, Shapes::ShapeRef.new(shape: LogTargetName, location_name: "targetName"))
     LogTarget.struct_class = Types::LogTarget
@@ -4912,6 +4980,7 @@ module Aws::IoT
     SetV2LoggingOptionsRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "roleArn"))
     SetV2LoggingOptionsRequest.add_member(:default_log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "defaultLogLevel"))
     SetV2LoggingOptionsRequest.add_member(:disable_all_logs, Shapes::ShapeRef.new(shape: DisableAllLogs, location_name: "disableAllLogs"))
+    SetV2LoggingOptionsRequest.add_member(:event_configurations, Shapes::ShapeRef.new(shape: LogEventConfigurations, location_name: "eventConfigurations"))
     SetV2LoggingOptionsRequest.struct_class = Types::SetV2LoggingOptionsRequest
 
     SigV4Authorization.add_member(:signing_region, Shapes::ShapeRef.new(shape: SigningRegion, required: true, location_name: "signingRegion"))

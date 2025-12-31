@@ -87,6 +87,12 @@ module Aws::ECS
     class BlockedException < Aws::EmptyStructure
     end
 
+    class CanaryConfiguration
+      attr_accessor canary_percent: ::Float
+      attr_accessor canary_bake_time_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
     class CapacityProvider
       attr_accessor capacity_provider_arn: ::String
       attr_accessor name: ::String
@@ -343,10 +349,32 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class CreateExpressGatewayServiceRequest
+      attr_accessor execution_role_arn: ::String
+      attr_accessor infrastructure_role_arn: ::String
+      attr_accessor service_name: ::String
+      attr_accessor cluster: ::String
+      attr_accessor health_check_path: ::String
+      attr_accessor primary_container: Types::ExpressGatewayContainer
+      attr_accessor task_role_arn: ::String
+      attr_accessor network_configuration: Types::ExpressGatewayServiceNetworkConfiguration
+      attr_accessor cpu: ::String
+      attr_accessor memory: ::String
+      attr_accessor scaling_target: Types::ExpressGatewayScalingTarget
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateExpressGatewayServiceResponse
+      attr_accessor service: Types::ECSExpressGatewayService
+      SENSITIVE: []
+    end
+
     class CreateManagedInstancesProviderConfiguration
       attr_accessor infrastructure_role_arn: ::String
       attr_accessor instance_launch_template: Types::InstanceLaunchTemplate
       attr_accessor propagate_tags: ("CAPACITY_PROVIDER" | "NONE")
+      attr_accessor infrastructure_optimization: Types::InfrastructureOptimization
       SENSITIVE: []
     end
 
@@ -414,7 +442,7 @@ module Aws::ECS
     end
 
     class DeleteAccountSettingRequest
-      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode")
+      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode" | "fargateEventWindows")
       attr_accessor principal_arn: ::String
       SENSITIVE: []
     end
@@ -453,6 +481,16 @@ module Aws::ECS
 
     class DeleteClusterResponse
       attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class DeleteExpressGatewayServiceRequest
+      attr_accessor service_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteExpressGatewayServiceResponse
+      attr_accessor service: Types::ECSExpressGatewayService
       SENSITIVE: []
     end
 
@@ -535,9 +573,11 @@ module Aws::ECS
       attr_accessor maximum_percent: ::Integer
       attr_accessor minimum_healthy_percent: ::Integer
       attr_accessor alarms: Types::DeploymentAlarms
-      attr_accessor strategy: ("ROLLING" | "BLUE_GREEN")
+      attr_accessor strategy: ("ROLLING" | "BLUE_GREEN" | "LINEAR" | "CANARY")
       attr_accessor bake_time_in_minutes: ::Integer
       attr_accessor lifecycle_hooks: ::Array[Types::DeploymentLifecycleHook]
+      attr_accessor linear_configuration: Types::LinearConfiguration
+      attr_accessor canary_configuration: Types::CanaryConfiguration
       SENSITIVE: []
     end
 
@@ -619,6 +659,17 @@ module Aws::ECS
     class DescribeContainerInstancesResponse
       attr_accessor container_instances: ::Array[Types::ContainerInstance]
       attr_accessor failures: ::Array[Types::Failure]
+      SENSITIVE: []
+    end
+
+    class DescribeExpressGatewayServiceRequest
+      attr_accessor service_arn: ::String
+      attr_accessor include: ::Array[("TAGS")]
+      SENSITIVE: []
+    end
+
+    class DescribeExpressGatewayServiceResponse
+      attr_accessor service: Types::ECSExpressGatewayService
       SENSITIVE: []
     end
 
@@ -732,6 +783,29 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class ECSExpressGatewayService
+      attr_accessor cluster: ::String
+      attr_accessor service_name: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor infrastructure_role_arn: ::String
+      attr_accessor status: Types::ExpressGatewayServiceStatus
+      attr_accessor current_deployment: ::String
+      attr_accessor active_configurations: ::Array[Types::ExpressGatewayServiceConfiguration]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ECSManagedResources
+      attr_accessor ingress_paths: ::Array[Types::ManagedIngressPath]
+      attr_accessor auto_scaling: Types::ManagedAutoScaling
+      attr_accessor metric_alarms: ::Array[Types::ManagedMetricAlarm]
+      attr_accessor service_security_groups: ::Array[Types::ManagedSecurityGroup]
+      attr_accessor log_groups: ::Array[Types::ManagedLogGroup]
+      SENSITIVE: []
+    end
+
     class EFSAuthorizationConfig
       attr_accessor access_point_id: ::String
       attr_accessor iam: ("ENABLED" | "DISABLED")
@@ -790,6 +864,63 @@ module Aws::ECS
       attr_accessor interactive: bool
       attr_accessor session: Types::Session
       attr_accessor task_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ExpressGatewayContainer
+      attr_accessor image: ::String
+      attr_accessor container_port: ::Integer
+      attr_accessor aws_logs_configuration: Types::ExpressGatewayServiceAwsLogsConfiguration
+      attr_accessor repository_credentials: Types::ExpressGatewayRepositoryCredentials
+      attr_accessor command: ::Array[::String]
+      attr_accessor environment: ::Array[Types::KeyValuePair]
+      attr_accessor secrets: ::Array[Types::Secret]
+      SENSITIVE: []
+    end
+
+    class ExpressGatewayRepositoryCredentials
+      attr_accessor credentials_parameter: ::String
+      SENSITIVE: []
+    end
+
+    class ExpressGatewayScalingTarget
+      attr_accessor min_task_count: ::Integer
+      attr_accessor max_task_count: ::Integer
+      attr_accessor auto_scaling_metric: ("AVERAGE_CPU" | "AVERAGE_MEMORY" | "REQUEST_COUNT_PER_TARGET")
+      attr_accessor auto_scaling_target_value: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExpressGatewayServiceAwsLogsConfiguration
+      attr_accessor log_group: ::String
+      attr_accessor log_stream_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ExpressGatewayServiceConfiguration
+      attr_accessor service_revision_arn: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor task_role_arn: ::String
+      attr_accessor cpu: ::String
+      attr_accessor memory: ::String
+      attr_accessor network_configuration: Types::ExpressGatewayServiceNetworkConfiguration
+      attr_accessor health_check_path: ::String
+      attr_accessor primary_container: Types::ExpressGatewayContainer
+      attr_accessor scaling_target: Types::ExpressGatewayScalingTarget
+      attr_accessor ingress_paths: ::Array[Types::IngressPathSummary]
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ExpressGatewayServiceNetworkConfiguration
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor subnets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ExpressGatewayServiceStatus
+      attr_accessor status_code: ("ACTIVE" | "DRAINING" | "INACTIVE")
+      attr_accessor status_reason: ::String
       SENSITIVE: []
     end
 
@@ -863,6 +994,17 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class InfrastructureOptimization
+      attr_accessor scale_in_after: ::Integer
+      SENSITIVE: []
+    end
+
+    class IngressPathSummary
+      attr_accessor access_type: ("PUBLIC" | "PRIVATE")
+      attr_accessor endpoint: ::String
+      SENSITIVE: []
+    end
+
     class InstanceHealthCheckResult
       attr_accessor type: ("CONTAINER_RUNTIME")
       attr_accessor status: ("OK" | "IMPAIRED" | "INSUFFICIENT_DATA" | "INITIALIZING")
@@ -876,6 +1018,7 @@ module Aws::ECS
       attr_accessor network_configuration: Types::ManagedInstancesNetworkConfiguration
       attr_accessor storage_configuration: Types::ManagedInstancesStorageConfiguration
       attr_accessor monitoring: ("BASIC" | "DETAILED")
+      attr_accessor capacity_option_type: ("ON_DEMAND" | "SPOT")
       attr_accessor instance_requirements: Types::InstanceRequirementsRequest
       SENSITIVE: []
     end
@@ -935,6 +1078,12 @@ module Aws::ECS
     class LimitExceededException < Aws::EmptyStructure
     end
 
+    class LinearConfiguration
+      attr_accessor step_percent: ::Float
+      attr_accessor step_bake_time_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
     class LinuxParameters
       attr_accessor capabilities: Types::KernelCapabilities
       attr_accessor devices: ::Array[Types::Device]
@@ -947,7 +1096,7 @@ module Aws::ECS
     end
 
     class ListAccountSettingsRequest
-      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode")
+      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode" | "fargateEventWindows")
       attr_accessor value: ::String
       attr_accessor principal_arn: ::String
       attr_accessor effective_settings: bool
@@ -1040,6 +1189,7 @@ module Aws::ECS
       attr_accessor max_results: ::Integer
       attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL" | "MANAGED_INSTANCES")
       attr_accessor scheduling_strategy: ("REPLICA" | "DAEMON")
+      attr_accessor resource_management_type: ("CUSTOMER" | "ECS")
       SENSITIVE: []
     end
 
@@ -1139,6 +1289,44 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class ManagedApplicationAutoScalingPolicy
+      attr_accessor arn: ::String
+      attr_accessor status: ("PROVISIONING" | "ACTIVE" | "DEPROVISIONING" | "DELETED" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor policy_type: ::String
+      attr_accessor target_value: ::Float
+      attr_accessor metric: ::String
+      SENSITIVE: []
+    end
+
+    class ManagedAutoScaling
+      attr_accessor scalable_target: Types::ManagedScalableTarget
+      attr_accessor application_auto_scaling_policies: ::Array[Types::ManagedApplicationAutoScalingPolicy]
+      SENSITIVE: []
+    end
+
+    class ManagedCertificate
+      attr_accessor arn: ::String
+      attr_accessor status: ("PROVISIONING" | "ACTIVE" | "DEPROVISIONING" | "DELETED" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class ManagedIngressPath
+      attr_accessor access_type: ("PUBLIC" | "PRIVATE")
+      attr_accessor endpoint: ::String
+      attr_accessor load_balancer: Types::ManagedLoadBalancer
+      attr_accessor load_balancer_security_groups: ::Array[Types::ManagedSecurityGroup]
+      attr_accessor certificate: Types::ManagedCertificate
+      attr_accessor listener: Types::ManagedListener
+      attr_accessor rule: Types::ManagedListenerRule
+      attr_accessor target_groups: ::Array[Types::ManagedTargetGroup]
+      SENSITIVE: []
+    end
+
     class ManagedInstancesNetworkConfiguration
       attr_accessor subnets: ::Array[::String]
       attr_accessor security_groups: ::Array[::String]
@@ -1149,11 +1337,66 @@ module Aws::ECS
       attr_accessor infrastructure_role_arn: ::String
       attr_accessor instance_launch_template: Types::InstanceLaunchTemplate
       attr_accessor propagate_tags: ("CAPACITY_PROVIDER" | "NONE")
+      attr_accessor infrastructure_optimization: Types::InfrastructureOptimization
       SENSITIVE: []
     end
 
     class ManagedInstancesStorageConfiguration
       attr_accessor storage_size_gi_b: ::Integer
+      SENSITIVE: []
+    end
+
+    class ManagedListener
+      attr_accessor arn: ::String
+      attr_accessor status: ("PROVISIONING" | "ACTIVE" | "DEPROVISIONING" | "DELETED" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ManagedListenerRule
+      attr_accessor arn: ::String
+      attr_accessor status: ("PROVISIONING" | "ACTIVE" | "DEPROVISIONING" | "DELETED" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ManagedLoadBalancer
+      attr_accessor arn: ::String
+      attr_accessor status: ("PROVISIONING" | "ACTIVE" | "DEPROVISIONING" | "DELETED" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor scheme: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ManagedLogGroup
+      attr_accessor arn: ::String
+      attr_accessor status: ("PROVISIONING" | "ACTIVE" | "DEPROVISIONING" | "DELETED" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor log_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class ManagedMetricAlarm
+      attr_accessor arn: ::String
+      attr_accessor status: ("PROVISIONING" | "ACTIVE" | "DEPROVISIONING" | "DELETED" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ManagedScalableTarget
+      attr_accessor arn: ::String
+      attr_accessor status: ("PROVISIONING" | "ACTIVE" | "DEPROVISIONING" | "DELETED" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor min_capacity: ::Integer
+      attr_accessor max_capacity: ::Integer
       SENSITIVE: []
     end
 
@@ -1166,9 +1409,28 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class ManagedSecurityGroup
+      attr_accessor arn: ::String
+      attr_accessor status: ("PROVISIONING" | "ACTIVE" | "DEPROVISIONING" | "DELETED" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class ManagedStorageConfiguration
       attr_accessor kms_key_id: ::String
       attr_accessor fargate_ephemeral_storage_kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class ManagedTargetGroup
+      attr_accessor arn: ::String
+      attr_accessor status: ("PROVISIONING" | "ACTIVE" | "DEPROVISIONING" | "DELETED" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor health_check_path: ::String
+      attr_accessor health_check_port: ::Integer
+      attr_accessor port: ::Integer
       SENSITIVE: []
     end
 
@@ -1283,7 +1545,7 @@ module Aws::ECS
     end
 
     class PutAccountSettingDefaultRequest
-      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode")
+      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode" | "fargateEventWindows")
       attr_accessor value: ::String
       SENSITIVE: []
     end
@@ -1294,7 +1556,7 @@ module Aws::ECS
     end
 
     class PutAccountSettingRequest
-      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode")
+      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode" | "fargateEventWindows")
       attr_accessor value: ::String
       attr_accessor principal_arn: ::String
       SENSITIVE: []
@@ -1486,6 +1748,8 @@ module Aws::ECS
       attr_accessor role_arn: ::String
       attr_accessor events: ::Array[Types::ServiceEvent]
       attr_accessor created_at: ::Time
+      attr_accessor current_service_deployment: ::String
+      attr_accessor current_service_revisions: ::Array[Types::ServiceCurrentRevisionSummary]
       attr_accessor placement_constraints: ::Array[Types::PlacementConstraint]
       attr_accessor placement_strategy: ::Array[Types::PlacementStrategy]
       attr_accessor network_configuration: Types::NetworkConfiguration
@@ -1498,6 +1762,13 @@ module Aws::ECS
       attr_accessor propagate_tags: ("TASK_DEFINITION" | "SERVICE" | "NONE")
       attr_accessor enable_execute_command: bool
       attr_accessor availability_zone_rebalancing: ("ENABLED" | "DISABLED")
+      attr_accessor resource_management_type: ("CUSTOMER" | "ECS")
+      SENSITIVE: []
+    end
+
+    class ServiceConnectAccessLogConfiguration
+      attr_accessor format: ("TEXT" | "JSON")
+      attr_accessor include_query_parameters: ("DISABLED" | "ENABLED")
       SENSITIVE: []
     end
 
@@ -1513,6 +1784,7 @@ module Aws::ECS
       attr_accessor namespace: ::String
       attr_accessor services: ::Array[Types::ServiceConnectService]
       attr_accessor log_configuration: Types::LogConfiguration
+      attr_accessor access_log_configuration: Types::ServiceConnectAccessLogConfiguration
       SENSITIVE: []
     end
 
@@ -1557,6 +1829,14 @@ module Aws::ECS
       attr_accessor issuer_certificate_authority: Types::ServiceConnectTlsCertificateAuthority
       attr_accessor kms_key: ::String
       attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceCurrentRevisionSummary
+      attr_accessor arn: ::String
+      attr_accessor requested_task_count: ::Integer
+      attr_accessor running_task_count: ::Integer
+      attr_accessor pending_task_count: ::Integer
       SENSITIVE: []
     end
 
@@ -1667,6 +1947,7 @@ module Aws::ECS
       attr_accessor created_at: ::Time
       attr_accessor vpc_lattice_configurations: ::Array[Types::VpcLatticeConfiguration]
       attr_accessor resolved_configuration: Types::ResolvedConfiguration
+      attr_accessor ecs_managed_resources: Types::ECSManagedResources
       SENSITIVE: []
     end
 
@@ -1681,6 +1962,8 @@ module Aws::ECS
       attr_accessor requested_task_count: ::Integer
       attr_accessor running_task_count: ::Integer
       attr_accessor pending_task_count: ::Integer
+      attr_accessor requested_test_traffic_weight: ::Float
+      attr_accessor requested_production_traffic_weight: ::Float
       SENSITIVE: []
     end
 
@@ -1698,7 +1981,7 @@ module Aws::ECS
     end
 
     class Setting
-      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode")
+      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate" | "defaultLogDriverMode" | "fargateEventWindows")
       attr_accessor value: ::String
       attr_accessor principal_arn: ::String
       attr_accessor type: ("user" | "aws_managed")
@@ -2076,6 +2359,24 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class UpdateExpressGatewayServiceRequest
+      attr_accessor service_arn: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor health_check_path: ::String
+      attr_accessor primary_container: Types::ExpressGatewayContainer
+      attr_accessor task_role_arn: ::String
+      attr_accessor network_configuration: Types::ExpressGatewayServiceNetworkConfiguration
+      attr_accessor cpu: ::String
+      attr_accessor memory: ::String
+      attr_accessor scaling_target: Types::ExpressGatewayScalingTarget
+      SENSITIVE: []
+    end
+
+    class UpdateExpressGatewayServiceResponse
+      attr_accessor service: Types::UpdatedExpressGatewayService
+      SENSITIVE: []
+    end
+
     class UpdateInProgressException < Aws::EmptyStructure
     end
 
@@ -2083,6 +2384,7 @@ module Aws::ECS
       attr_accessor infrastructure_role_arn: ::String
       attr_accessor instance_launch_template: Types::InstanceLaunchTemplateUpdate
       attr_accessor propagate_tags: ("CAPACITY_PROVIDER" | "NONE")
+      attr_accessor infrastructure_optimization: Types::InfrastructureOptimization
       SENSITIVE: []
     end
 
@@ -2153,6 +2455,17 @@ module Aws::ECS
 
     class UpdateTaskSetResponse
       attr_accessor task_set: Types::TaskSet
+      SENSITIVE: []
+    end
+
+    class UpdatedExpressGatewayService
+      attr_accessor service_arn: ::String
+      attr_accessor cluster: ::String
+      attr_accessor service_name: ::String
+      attr_accessor status: Types::ExpressGatewayServiceStatus
+      attr_accessor target_configuration: Types::ExpressGatewayServiceConfiguration
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 

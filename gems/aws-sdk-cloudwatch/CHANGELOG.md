@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.126.0 (2025-12-10)
+------------------
+
+* Feature - This release introduces two additional protocols AWS JSON 1.1 and Smithy RPC v2 CBOR, replacing the currently utilized one, AWSQuery. AWS SDKs will prioritize the protocol that is the most performant for each language.
+
+1.125.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.124.0 (2025-10-30)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.123.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.122.0 (2025-09-24)
 ------------------
 

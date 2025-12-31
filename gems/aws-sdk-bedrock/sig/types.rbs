@@ -13,6 +13,27 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class AccountEnforcedGuardrailInferenceInputConfiguration
+      attr_accessor guardrail_identifier: ::String
+      attr_accessor guardrail_version: ::String
+      attr_accessor input_tags: ("HONOR" | "IGNORE")
+      SENSITIVE: []
+    end
+
+    class AccountEnforcedGuardrailOutputConfiguration
+      attr_accessor config_id: ::String
+      attr_accessor guardrail_arn: ::String
+      attr_accessor guardrail_id: ::String
+      attr_accessor input_tags: ("HONOR" | "IGNORE")
+      attr_accessor guardrail_version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      attr_accessor owner: ("ACCOUNT")
+      SENSITIVE: []
+    end
+
     class AgreementAvailability
       attr_accessor status: ("AVAILABLE" | "PENDING" | "NOT_AVAILABLE" | "ERROR")
       attr_accessor error_message: ::String
@@ -265,6 +286,8 @@ module Aws::Bedrock
       attr_accessor policy_definition: Types::AutomatedReasoningPolicyDefinition
       attr_accessor quality_report: Types::AutomatedReasoningPolicyDefinitionQualityReport
       attr_accessor build_log: Types::AutomatedReasoningPolicyBuildLog
+      attr_accessor generated_test_cases: Types::AutomatedReasoningPolicyGeneratedTestCases
+      attr_accessor policy_scenarios: Types::AutomatedReasoningPolicyScenarios
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -273,6 +296,10 @@ module Aws::Bedrock
       class QualityReport < AutomatedReasoningPolicyBuildResultAssets
       end
       class BuildLog < AutomatedReasoningPolicyBuildResultAssets
+      end
+      class GeneratedTestCases < AutomatedReasoningPolicyBuildResultAssets
+      end
+      class PolicyScenarios < AutomatedReasoningPolicyBuildResultAssets
       end
       class Unknown < AutomatedReasoningPolicyBuildResultAssets
       end
@@ -445,6 +472,18 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class AutomatedReasoningPolicyGeneratedTestCase
+      attr_accessor query_content: ::String
+      attr_accessor guard_content: ::String
+      attr_accessor expected_aggregated_findings_result: ("VALID" | "INVALID" | "SATISFIABLE" | "IMPOSSIBLE" | "TRANSLATION_AMBIGUOUS" | "TOO_COMPLEX" | "NO_TRANSLATION")
+      SENSITIVE: [:query_content, :guard_content]
+    end
+
+    class AutomatedReasoningPolicyGeneratedTestCases
+      attr_accessor generated_test_cases: ::Array[Types::AutomatedReasoningPolicyGeneratedTestCase]
+      SENSITIVE: []
+    end
+
     class AutomatedReasoningPolicyIngestContentAnnotation
       attr_accessor content: ::String
       SENSITIVE: [:content]
@@ -491,9 +530,14 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyScenario
       attr_accessor expression: ::String
       attr_accessor alternate_expression: ::String
-      attr_accessor rule_ids: ::Array[::String]
       attr_accessor expected_result: ("VALID" | "INVALID" | "SATISFIABLE" | "IMPOSSIBLE" | "TRANSLATION_AMBIGUOUS" | "TOO_COMPLEX" | "NO_TRANSLATION")
+      attr_accessor rule_ids: ::Array[::String]
       SENSITIVE: [:expression, :alternate_expression]
+    end
+
+    class AutomatedReasoningPolicyScenarios
+      attr_accessor policy_scenarios: ::Array[Types::AutomatedReasoningPolicyScenario]
+      SENSITIVE: []
     end
 
     class AutomatedReasoningPolicySummary
@@ -678,6 +722,7 @@ module Aws::Bedrock
       attr_accessor description: ::String
       attr_accessor client_request_token: ::String
       attr_accessor policy_definition: Types::AutomatedReasoningPolicyDefinition
+      attr_accessor kms_key_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: [:name, :description]
     end
@@ -875,7 +920,7 @@ module Aws::Bedrock
       attr_accessor role_arn: ::String
       attr_accessor client_request_token: ::String
       attr_accessor base_model_identifier: ::String
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "REINFORCEMENT_FINE_TUNING" | "IMPORTED")
       attr_accessor custom_model_kms_key_id: ::String
       attr_accessor job_tags: ::Array[Types::Tag]
       attr_accessor custom_model_tags: ::Array[Types::Tag]
@@ -988,13 +1033,19 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class CustomModelDeploymentUpdateDetails
+      attr_accessor model_arn: ::String
+      attr_accessor update_status: ("Updating" | "UpdateCompleted" | "UpdateFailed")
+      SENSITIVE: []
+    end
+
     class CustomModelSummary
       attr_accessor model_arn: ::String
       attr_accessor model_name: ::String
       attr_accessor creation_time: ::Time
       attr_accessor base_model_arn: ::String
       attr_accessor base_model_name: ::String
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "REINFORCEMENT_FINE_TUNING" | "IMPORTED")
       attr_accessor owner_account_id: ::String
       attr_accessor model_status: ("Active" | "Creating" | "Failed")
       SENSITIVE: []
@@ -1008,10 +1059,13 @@ module Aws::Bedrock
 
     class CustomizationConfig
       attr_accessor distillation_config: Types::DistillationConfig
+      attr_accessor rft_config: Types::RFTConfig
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class DistillationConfig < CustomizationConfig
+      end
+      class RftConfig < CustomizationConfig
       end
       class Unknown < CustomizationConfig
       end
@@ -1036,6 +1090,7 @@ module Aws::Bedrock
 
     class DeleteAutomatedReasoningPolicyRequest
       attr_accessor policy_arn: ::String
+      attr_accessor force: bool
       SENSITIVE: []
     end
 
@@ -1066,6 +1121,14 @@ module Aws::Bedrock
     end
 
     class DeleteCustomModelResponse < Aws::EmptyStructure
+    end
+
+    class DeleteEnforcedGuardrailConfigurationRequest
+      attr_accessor config_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEnforcedGuardrailConfigurationResponse < Aws::EmptyStructure
     end
 
     class DeleteFoundationModelAgreementRequest
@@ -1437,7 +1500,7 @@ module Aws::Bedrock
     class GetAutomatedReasoningPolicyBuildWorkflowResultAssetsRequest
       attr_accessor policy_arn: ::String
       attr_accessor build_workflow_id: ::String
-      attr_accessor asset_type: ("BUILD_LOG" | "QUALITY_REPORT" | "POLICY_DEFINITION")
+      attr_accessor asset_type: ("BUILD_LOG" | "QUALITY_REPORT" | "POLICY_DEFINITION" | "GENERATED_TEST_CASES" | "POLICY_SCENARIOS")
       SENSITIVE: []
     end
 
@@ -1472,6 +1535,7 @@ module Aws::Bedrock
       attr_accessor policy_id: ::String
       attr_accessor description: ::String
       attr_accessor definition_hash: ::String
+      attr_accessor kms_key_arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:name, :description]
@@ -1513,6 +1577,7 @@ module Aws::Bedrock
       attr_accessor created_at: ::Time
       attr_accessor status: ("Creating" | "Active" | "Failed")
       attr_accessor description: ::String
+      attr_accessor update_details: Types::CustomModelDeploymentUpdateDetails
       attr_accessor failure_message: ::String
       attr_accessor last_updated_at: ::Time
       SENSITIVE: []
@@ -1529,7 +1594,7 @@ module Aws::Bedrock
       attr_accessor job_name: ::String
       attr_accessor job_arn: ::String
       attr_accessor base_model_arn: ::String
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "REINFORCEMENT_FINE_TUNING" | "IMPORTED")
       attr_accessor model_kms_key_arn: ::String
       attr_accessor hyper_parameters: ::Hash[::String, ::String]
       attr_accessor training_data_config: Types::TrainingDataConfig
@@ -1711,7 +1776,7 @@ module Aws::Bedrock
       attr_accessor training_data_config: Types::TrainingDataConfig
       attr_accessor validation_data_config: Types::ValidationDataConfig
       attr_accessor output_data_config: Types::OutputDataConfig
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "REINFORCEMENT_FINE_TUNING" | "IMPORTED")
       attr_accessor output_model_kms_key_arn: ::String
       attr_accessor training_metrics: Types::TrainingMetrics
       attr_accessor validation_metrics: ::Array[Types::ValidatorMetric]
@@ -1821,6 +1886,17 @@ module Aws::Bedrock
     class GetUseCaseForModelAccessResponse
       attr_accessor form_data: ::String
       SENSITIVE: []
+    end
+
+    class GraderConfig
+      attr_accessor lambda_grader: Types::LambdaGraderConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class LambdaGrader < GraderConfig
+      end
+      class Unknown < GraderConfig
+      end
     end
 
     class GuardrailAutomatedReasoningPolicy
@@ -2218,6 +2294,11 @@ module Aws::Bedrock
       SENSITIVE: [:filter]
     end
 
+    class LambdaGraderConfig
+      attr_accessor lambda_arn: ::String
+      SENSITIVE: []
+    end
+
     class LegalTerm
       attr_accessor url: ::String
       SENSITIVE: []
@@ -2313,6 +2394,17 @@ module Aws::Bedrock
     class ListCustomModelsResponse
       attr_accessor next_token: ::String
       attr_accessor model_summaries: ::Array[Types::CustomModelSummary]
+      SENSITIVE: []
+    end
+
+    class ListEnforcedGuardrailsConfigurationRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnforcedGuardrailsConfigurationResponse
+      attr_accessor guardrails_config: ::Array[Types::AccountEnforcedGuardrailOutputConfiguration]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -2539,6 +2631,7 @@ module Aws::Bedrock
       attr_accessor image_data_delivery_enabled: bool
       attr_accessor embedding_data_delivery_enabled: bool
       attr_accessor video_data_delivery_enabled: bool
+      attr_accessor audio_data_delivery_enabled: bool
       SENSITIVE: []
     end
 
@@ -2604,7 +2697,7 @@ module Aws::Bedrock
       attr_accessor end_time: ::Time
       attr_accessor custom_model_arn: ::String
       attr_accessor custom_model_name: ::String
-      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "IMPORTED")
+      attr_accessor customization_type: ("FINE_TUNING" | "CONTINUED_PRE_TRAINING" | "DISTILLATION" | "REINFORCEMENT_FINE_TUNING" | "IMPORTED")
       SENSITIVE: []
     end
 
@@ -2753,6 +2846,19 @@ module Aws::Bedrock
       SENSITIVE: []
     end
 
+    class PutEnforcedGuardrailConfigurationRequest
+      attr_accessor config_id: ::String
+      attr_accessor guardrail_inference_config: Types::AccountEnforcedGuardrailInferenceInputConfiguration
+      SENSITIVE: []
+    end
+
+    class PutEnforcedGuardrailConfigurationResponse
+      attr_accessor config_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: []
+    end
+
     class PutModelInvocationLoggingConfigurationRequest
       attr_accessor logging_config: Types::LoggingConfig
       SENSITIVE: []
@@ -2786,6 +2892,24 @@ module Aws::Bedrock
       end
       class Unknown < RAGConfig
       end
+    end
+
+    class RFTConfig
+      attr_accessor grader_config: Types::GraderConfig
+      attr_accessor hyper_parameters: Types::RFTHyperParameters
+      SENSITIVE: []
+    end
+
+    class RFTHyperParameters
+      attr_accessor epoch_count: ::Integer
+      attr_accessor batch_size: ::Integer
+      attr_accessor learning_rate: ::Float
+      attr_accessor max_prompt_length: ::Integer
+      attr_accessor training_sample_per_prompt: ::Integer
+      attr_accessor inference_max_tokens: ::Integer
+      attr_accessor reasoning_effort: ("low" | "medium" | "high")
+      attr_accessor eval_interval: ::Integer
+      SENSITIVE: []
     end
 
     class RatingScaleItem
@@ -3154,6 +3278,17 @@ module Aws::Bedrock
     class UpdateAutomatedReasoningPolicyTestCaseResponse
       attr_accessor policy_arn: ::String
       attr_accessor test_case_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCustomModelDeploymentRequest
+      attr_accessor model_arn: ::String
+      attr_accessor custom_model_deployment_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCustomModelDeploymentResponse
+      attr_accessor custom_model_deployment_arn: ::String
       SENSITIVE: []
     end
 

@@ -612,6 +612,7 @@ module Aws::ECS
     #           storage_size_gi_b: 1,
     #         },
     #         monitoring: "BASIC", # accepts BASIC, DETAILED
+    #         capacity_option_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
     #         instance_requirements: {
     #           v_cpu_count: { # required
     #             min: 1, # required
@@ -667,6 +668,9 @@ module Aws::ECS
     #         },
     #       },
     #       propagate_tags: "CAPACITY_PROVIDER", # accepts CAPACITY_PROVIDER, NONE
+    #       infrastructure_optimization: {
+    #         scale_in_after: 1,
+    #       },
     #     },
     #     tags: [
     #       {
@@ -698,6 +702,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT"
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
@@ -740,6 +745,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.capacity_provider.managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
+    #   resp.capacity_provider.managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_provider.update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_provider.update_status_reason #=> String
     #   resp.capacity_provider.tags #=> Array
@@ -1017,6 +1023,243 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Creates an Express service that simplifies deploying containerized web
+    # applications on Amazon ECS with managed Amazon Web Services
+    # infrastructure. This operation provisions and configures Application
+    # Load Balancers, target groups, security groups, and auto-scaling
+    # policies automatically.
+    #
+    # Specify a primary container configuration with your application image
+    # and basic settings. Amazon ECS creates the necessary Amazon Web
+    # Services resources for traffic distribution, health monitoring,
+    # network access control, and capacity management.
+    #
+    # Provide an execution role for task operations and an infrastructure
+    # role for managing Amazon Web Services resources on your behalf.
+    #
+    # @option params [required, String] :execution_role_arn
+    #   The Amazon Resource Name (ARN) of the task execution role that grants
+    #   the Amazon ECS container agent permission to make Amazon Web Services
+    #   API calls on your behalf. This role is required for Amazon ECS to pull
+    #   container images from Amazon ECR, send container logs to Amazon
+    #   CloudWatch Logs, and retrieve sensitive data from Amazon Web Services
+    #   Systems Manager Parameter Store or Amazon Web Services Secrets
+    #   Manager.
+    #
+    #   The execution role must include the `AmazonECSTaskExecutionRolePolicy`
+    #   managed policy or equivalent permissions. For Express services, this
+    #   role is used during task startup and runtime for container management
+    #   operations.
+    #
+    # @option params [required, String] :infrastructure_role_arn
+    #   The Amazon Resource Name (ARN) of the infrastructure role that grants
+    #   Amazon ECS permission to create and manage Amazon Web Services
+    #   resources on your behalf for the Express service. This role is used to
+    #   provision and manage Application Load Balancers, target groups,
+    #   security groups, auto-scaling policies, and other Amazon Web Services
+    #   infrastructure components.
+    #
+    #   The infrastructure role must include permissions for Elastic Load
+    #   Balancing, Application Auto Scaling, Amazon EC2 (for security groups),
+    #   and other services required for managed infrastructure. This role is
+    #   only used during Express service creation, updates, and deletion
+    #   operations.
+    #
+    # @option params [String] :service_name
+    #   The name of the Express service. This name must be unique within the
+    #   specified cluster and can contain up to 255 letters (uppercase and
+    #   lowercase), numbers, underscores, and hyphens. The name is used to
+    #   identify the service in the Amazon ECS console and API operations.
+    #
+    #   If you don't specify a service name, Amazon ECS generates a unique
+    #   name for the service. The service name becomes part of the service ARN
+    #   and cannot be changed after the service is created.
+    #
+    # @option params [String] :cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster on
+    #   which to create the Express service. If you do not specify a cluster,
+    #   the `default` cluster is assumed.
+    #
+    # @option params [String] :health_check_path
+    #   The path on the container that the Application Load Balancer uses for
+    #   health checks. This should be a valid HTTP endpoint that returns a
+    #   successful response (HTTP 200) when the application is healthy.
+    #
+    #   If not specified, the default health check path is `/ping`. The health
+    #   check path must start with a forward slash and can include query
+    #   parameters. Examples: `/health`, `/api/status`, `/ping?format=json`.
+    #
+    # @option params [required, Types::ExpressGatewayContainer] :primary_container
+    #   The primary container configuration for the Express service. This
+    #   defines the main application container that will receive traffic from
+    #   the Application Load Balancer.
+    #
+    #   The primary container must specify at minimum a container image. You
+    #   can also configure the container port (defaults to 80), logging
+    #   configuration, environment variables, secrets, and startup commands.
+    #   The container image can be from Amazon ECR, Docker Hub, or any other
+    #   container registry accessible to your execution role.
+    #
+    # @option params [String] :task_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that containers in this
+    #   task can assume. This role allows your application code to access
+    #   other Amazon Web Services services securely.
+    #
+    #   The task role is different from the execution role. While the
+    #   execution role is used by the Amazon ECS agent to set up the task, the
+    #   task role is used by your application code running inside the
+    #   container to make Amazon Web Services API calls. If your application
+    #   doesn't need to access Amazon Web Services services, you can omit
+    #   this parameter.
+    #
+    # @option params [Types::ExpressGatewayServiceNetworkConfiguration] :network_configuration
+    #   The network configuration for the Express service tasks. This
+    #   specifies the VPC subnets and security groups for the tasks.
+    #
+    #   For Express services, you can specify custom security groups and
+    #   subnets. If not provided, Amazon ECS will use the default VPC
+    #   configuration and create appropriate security groups automatically.
+    #   The network configuration determines how your service integrates with
+    #   your VPC and what network access it has.
+    #
+    # @option params [String] :cpu
+    #   The number of CPU units used by the task. This parameter determines
+    #   the CPU allocation for each task in the Express service. The default
+    #   value for an Express service is 256 (.25 vCPU).
+    #
+    # @option params [String] :memory
+    #   The amount of memory (in MiB) used by the task. This parameter
+    #   determines the memory allocation for each task in the Express service.
+    #   The default value for an express service is 512 MiB.
+    #
+    # @option params [Types::ExpressGatewayScalingTarget] :scaling_target
+    #   The auto-scaling configuration for the Express service. This defines
+    #   how the service automatically adjusts the number of running tasks
+    #   based on demand.
+    #
+    #   You can specify the minimum and maximum number of tasks, the scaling
+    #   metric (CPU utilization, memory utilization, or request count per
+    #   target), and the target value for the metric. If not specified, the
+    #   default target value for an Express service is 60.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to the Express service to help categorize
+    #   and organize it. Each tag consists of a key and an optional value. You
+    #   can apply up to 50 tags to a service.
+    #
+    # @return [Types::CreateExpressGatewayServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateExpressGatewayServiceResponse#service #service} => Types::ECSExpressGatewayService
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_express_gateway_service({
+    #     execution_role_arn: "String", # required
+    #     infrastructure_role_arn: "String", # required
+    #     service_name: "String",
+    #     cluster: "String",
+    #     health_check_path: "String",
+    #     primary_container: { # required
+    #       image: "String", # required
+    #       container_port: 1,
+    #       aws_logs_configuration: {
+    #         log_group: "String", # required
+    #         log_stream_prefix: "String", # required
+    #       },
+    #       repository_credentials: {
+    #         credentials_parameter: "String",
+    #       },
+    #       command: ["String"],
+    #       environment: [
+    #         {
+    #           name: "String",
+    #           value: "String",
+    #         },
+    #       ],
+    #       secrets: [
+    #         {
+    #           name: "String", # required
+    #           value_from: "String", # required
+    #         },
+    #       ],
+    #     },
+    #     task_role_arn: "String",
+    #     network_configuration: {
+    #       security_groups: ["String"],
+    #       subnets: ["String"],
+    #     },
+    #     cpu: "String",
+    #     memory: "String",
+    #     scaling_target: {
+    #       min_task_count: 1,
+    #       max_task_count: 1,
+    #       auto_scaling_metric: "AVERAGE_CPU", # accepts AVERAGE_CPU, AVERAGE_MEMORY, REQUEST_COUNT_PER_TARGET
+    #       auto_scaling_target_value: 1,
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service.cluster #=> String
+    #   resp.service.service_name #=> String
+    #   resp.service.service_arn #=> String
+    #   resp.service.infrastructure_role_arn #=> String
+    #   resp.service.status.status_code #=> String, one of "ACTIVE", "DRAINING", "INACTIVE"
+    #   resp.service.status.status_reason #=> String
+    #   resp.service.current_deployment #=> String
+    #   resp.service.active_configurations #=> Array
+    #   resp.service.active_configurations[0].service_revision_arn #=> String
+    #   resp.service.active_configurations[0].execution_role_arn #=> String
+    #   resp.service.active_configurations[0].task_role_arn #=> String
+    #   resp.service.active_configurations[0].cpu #=> String
+    #   resp.service.active_configurations[0].memory #=> String
+    #   resp.service.active_configurations[0].network_configuration.security_groups #=> Array
+    #   resp.service.active_configurations[0].network_configuration.security_groups[0] #=> String
+    #   resp.service.active_configurations[0].network_configuration.subnets #=> Array
+    #   resp.service.active_configurations[0].network_configuration.subnets[0] #=> String
+    #   resp.service.active_configurations[0].health_check_path #=> String
+    #   resp.service.active_configurations[0].primary_container.image #=> String
+    #   resp.service.active_configurations[0].primary_container.container_port #=> Integer
+    #   resp.service.active_configurations[0].primary_container.aws_logs_configuration.log_group #=> String
+    #   resp.service.active_configurations[0].primary_container.aws_logs_configuration.log_stream_prefix #=> String
+    #   resp.service.active_configurations[0].primary_container.repository_credentials.credentials_parameter #=> String
+    #   resp.service.active_configurations[0].primary_container.command #=> Array
+    #   resp.service.active_configurations[0].primary_container.command[0] #=> String
+    #   resp.service.active_configurations[0].primary_container.environment #=> Array
+    #   resp.service.active_configurations[0].primary_container.environment[0].name #=> String
+    #   resp.service.active_configurations[0].primary_container.environment[0].value #=> String
+    #   resp.service.active_configurations[0].primary_container.secrets #=> Array
+    #   resp.service.active_configurations[0].primary_container.secrets[0].name #=> String
+    #   resp.service.active_configurations[0].primary_container.secrets[0].value_from #=> String
+    #   resp.service.active_configurations[0].scaling_target.min_task_count #=> Integer
+    #   resp.service.active_configurations[0].scaling_target.max_task_count #=> Integer
+    #   resp.service.active_configurations[0].scaling_target.auto_scaling_metric #=> String, one of "AVERAGE_CPU", "AVERAGE_MEMORY", "REQUEST_COUNT_PER_TARGET"
+    #   resp.service.active_configurations[0].scaling_target.auto_scaling_target_value #=> Integer
+    #   resp.service.active_configurations[0].ingress_paths #=> Array
+    #   resp.service.active_configurations[0].ingress_paths[0].access_type #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.service.active_configurations[0].ingress_paths[0].endpoint #=> String
+    #   resp.service.active_configurations[0].created_at #=> Time
+    #   resp.service.tags #=> Array
+    #   resp.service.tags[0].key #=> String
+    #   resp.service.tags[0].value #=> String
+    #   resp.service.created_at #=> Time
+    #   resp.service.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateExpressGatewayService AWS API Documentation
+    #
+    # @overload create_express_gateway_service(params = {})
+    # @param [Hash] params ({})
+    def create_express_gateway_service(params = {}, options = {})
+      req = build_request(:create_express_gateway_service, params)
+      req.send_request(options)
+    end
+
     # Runs and maintains your desired number of tasks from a specified task
     # definition. If the number of tasks running in a service drops below
     # the `desiredCount`, Amazon ECS runs another copy of the task in the
@@ -1151,6 +1394,45 @@ module Aws::ECS
     #
     #     * Load balancer requirement: When your service uses Application
     #       Load Balancer, Network Load Balancer, or Service Connect
+    #   * `LINEAR`: A *linear* deployment strategy (`LINEAR`) gradually
+    #     shifts traffic from the current production environment to a new
+    #     environment in equal percentage increments. With Amazon ECS linear
+    #     deployments, you can control the pace of traffic shifting and
+    #     validate new service revisions with increasing amounts of
+    #     production traffic.
+    #
+    #     Linear deployments are best suited for the following scenarios:
+    #
+    #     * Gradual validation: When you want to gradually validate your new
+    #       service version with increasing traffic
+    #
+    #     * Performance monitoring: When you need time to monitor metrics
+    #       and performance during the deployment
+    #
+    #     * Risk minimization: When you want to minimize risk by exposing
+    #       the new version to production traffic incrementally
+    #
+    #     * Load balancer requirement: When your service uses Application
+    #       Load Balancer or Service Connect
+    #   * `CANARY`: A *canary* deployment strategy (`CANARY`) shifts a small
+    #     percentage of traffic to the new service revision first, then
+    #     shifts the remaining traffic all at once after a specified time
+    #     period. This allows you to test the new version with a subset of
+    #     users before full deployment.
+    #
+    #     Canary deployments are best suited for the following scenarios:
+    #
+    #     * Feature testing: When you want to test new features with a small
+    #       subset of users before full rollout
+    #
+    #     * Production validation: When you need to validate performance and
+    #       functionality with real production traffic
+    #
+    #     * Blast radius control: When you want to minimize blast radius if
+    #       issues are discovered in the new version
+    #
+    #     * Load balancer requirement: When your service uses Application
+    #       Load Balancer or Service Connect
     # * External
     #
     #   Use a third-party deployment controller.
@@ -1328,6 +1610,12 @@ module Aws::ECS
     #   see [Amazon ECS launch types][1] in the *Amazon Elastic Container
     #   Service Developer Guide*.
     #
+    #   <note markdown="1"> If you want to use Amazon ECS Managed Instances, you must use the
+    #   `capacityProviderStrategy` request parameter and omit the `launchType`
+    #   request parameter.
+    #
+    #    </note>
+    #
     #   The `FARGATE` launch type runs your tasks on Fargate On-Demand
     #   infrastructure.
     #
@@ -1354,6 +1642,12 @@ module Aws::ECS
     #
     # @option params [Array<Types::CapacityProviderStrategyItem>] :capacity_provider_strategy
     #   The capacity provider strategy to use for the service.
+    #
+    #   <note markdown="1"> If you want to use Amazon ECS Managed Instances, you must use the
+    #   `capacityProviderStrategy` request parameter and omit the `launchType`
+    #   request parameter.
+    #
+    #    </note>
     #
     #   If a `capacityProviderStrategy` is specified, the `launchType`
     #   parameter must be omitted. If no `capacityProviderStrategy` or
@@ -1742,7 +2036,7 @@ module Aws::ECS
     #         rollback: false, # required
     #         enable: false, # required
     #       },
-    #       strategy: "ROLLING", # accepts ROLLING, BLUE_GREEN
+    #       strategy: "ROLLING", # accepts ROLLING, BLUE_GREEN, LINEAR, CANARY
     #       bake_time_in_minutes: 1,
     #       lifecycle_hooks: [
     #         {
@@ -1753,6 +2047,14 @@ module Aws::ECS
     #           },
     #         },
     #       ],
+    #       linear_configuration: {
+    #         step_percent: 1.0,
+    #         step_bake_time_in_minutes: 1,
+    #       },
+    #       canary_configuration: {
+    #         canary_percent: 1.0,
+    #         canary_bake_time_in_minutes: 1,
+    #       },
     #     },
     #     placement_constraints: [
     #       {
@@ -1834,6 +2136,10 @@ module Aws::ECS
     #           },
     #         ],
     #       },
+    #       access_log_configuration: {
+    #         format: "TEXT", # required, accepts TEXT, JSON
+    #         include_query_parameters: "DISABLED", # accepts DISABLED, ENABLED
+    #       },
     #     },
     #     volume_configurations: [
     #       {
@@ -1912,13 +2218,17 @@ module Aws::ECS
     #   resp.service.deployment_configuration.alarms.alarm_names[0] #=> String
     #   resp.service.deployment_configuration.alarms.rollback #=> Boolean
     #   resp.service.deployment_configuration.alarms.enable #=> Boolean
-    #   resp.service.deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN"
+    #   resp.service.deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN", "LINEAR", "CANARY"
     #   resp.service.deployment_configuration.bake_time_in_minutes #=> Integer
     #   resp.service.deployment_configuration.lifecycle_hooks #=> Array
     #   resp.service.deployment_configuration.lifecycle_hooks[0].hook_target_arn #=> String
     #   resp.service.deployment_configuration.lifecycle_hooks[0].role_arn #=> String
     #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages #=> Array
     #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
+    #   resp.service.deployment_configuration.linear_configuration.step_percent #=> Float
+    #   resp.service.deployment_configuration.linear_configuration.step_bake_time_in_minutes #=> Integer
+    #   resp.service.deployment_configuration.canary_configuration.canary_percent #=> Float
+    #   resp.service.deployment_configuration.canary_configuration.canary_bake_time_in_minutes #=> Integer
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
@@ -2013,6 +2323,8 @@ module Aws::ECS
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options #=> Array
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options[0].name #=> String
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options[0].value_from #=> String
+    #   resp.service.deployments[0].service_connect_configuration.access_log_configuration.format #=> String, one of "TEXT", "JSON"
+    #   resp.service.deployments[0].service_connect_configuration.access_log_configuration.include_query_parameters #=> String, one of "DISABLED", "ENABLED"
     #   resp.service.deployments[0].service_connect_resources #=> Array
     #   resp.service.deployments[0].service_connect_resources[0].discovery_name #=> String
     #   resp.service.deployments[0].service_connect_resources[0].discovery_arn #=> String
@@ -2045,6 +2357,12 @@ module Aws::ECS
     #   resp.service.events[0].created_at #=> Time
     #   resp.service.events[0].message #=> String
     #   resp.service.created_at #=> Time
+    #   resp.service.current_service_deployment #=> String
+    #   resp.service.current_service_revisions #=> Array
+    #   resp.service.current_service_revisions[0].arn #=> String
+    #   resp.service.current_service_revisions[0].requested_task_count #=> Integer
+    #   resp.service.current_service_revisions[0].running_task_count #=> Integer
+    #   resp.service.current_service_revisions[0].pending_task_count #=> Integer
     #   resp.service.placement_constraints #=> Array
     #   resp.service.placement_constraints[0].type #=> String, one of "distinctInstance", "memberOf"
     #   resp.service.placement_constraints[0].expression #=> String
@@ -2067,6 +2385,7 @@ module Aws::ECS
     #   resp.service.propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.service.enable_execute_command #=> Boolean
     #   resp.service.availability_zone_rebalancing #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service.resource_management_type #=> String, one of "CUSTOMER", "ECS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateService AWS API Documentation
     #
@@ -2469,13 +2788,13 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_account_setting({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate, defaultLogDriverMode
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate, defaultLogDriverMode, fargateEventWindows
     #     principal_arn: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate", "defaultLogDriverMode"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate", "defaultLogDriverMode", "fargateEventWindows"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #   resp.setting.type #=> String, one of "user", "aws_managed"
@@ -2661,6 +2980,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT"
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
@@ -2703,6 +3023,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.capacity_provider.managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
+    #   resp.capacity_provider.managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_provider.update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_provider.update_status_reason #=> String
     #   resp.capacity_provider.tags #=> Array
@@ -2823,6 +3144,89 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Deletes an Express service and removes all associated Amazon Web
+    # Services resources. This operation stops service tasks, removes the
+    # Application Load Balancer, target groups, security groups,
+    # auto-scaling policies, and other managed infrastructure components.
+    #
+    # The service enters a `DRAINING` state where existing tasks complete
+    # current requests without starting new tasks. After all tasks stop, the
+    # service and infrastructure are permanently removed.
+    #
+    # This operation cannot be reversed. Back up important data and verify
+    # the service is no longer needed before deletion.
+    #
+    # @option params [required, String] :service_arn
+    #   The Amazon Resource Name (ARN) of the Express service to delete. The
+    #   ARN uniquely identifies the service within your Amazon Web Services
+    #   account and region.
+    #
+    # @return [Types::DeleteExpressGatewayServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteExpressGatewayServiceResponse#service #service} => Types::ECSExpressGatewayService
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_express_gateway_service({
+    #     service_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service.cluster #=> String
+    #   resp.service.service_name #=> String
+    #   resp.service.service_arn #=> String
+    #   resp.service.infrastructure_role_arn #=> String
+    #   resp.service.status.status_code #=> String, one of "ACTIVE", "DRAINING", "INACTIVE"
+    #   resp.service.status.status_reason #=> String
+    #   resp.service.current_deployment #=> String
+    #   resp.service.active_configurations #=> Array
+    #   resp.service.active_configurations[0].service_revision_arn #=> String
+    #   resp.service.active_configurations[0].execution_role_arn #=> String
+    #   resp.service.active_configurations[0].task_role_arn #=> String
+    #   resp.service.active_configurations[0].cpu #=> String
+    #   resp.service.active_configurations[0].memory #=> String
+    #   resp.service.active_configurations[0].network_configuration.security_groups #=> Array
+    #   resp.service.active_configurations[0].network_configuration.security_groups[0] #=> String
+    #   resp.service.active_configurations[0].network_configuration.subnets #=> Array
+    #   resp.service.active_configurations[0].network_configuration.subnets[0] #=> String
+    #   resp.service.active_configurations[0].health_check_path #=> String
+    #   resp.service.active_configurations[0].primary_container.image #=> String
+    #   resp.service.active_configurations[0].primary_container.container_port #=> Integer
+    #   resp.service.active_configurations[0].primary_container.aws_logs_configuration.log_group #=> String
+    #   resp.service.active_configurations[0].primary_container.aws_logs_configuration.log_stream_prefix #=> String
+    #   resp.service.active_configurations[0].primary_container.repository_credentials.credentials_parameter #=> String
+    #   resp.service.active_configurations[0].primary_container.command #=> Array
+    #   resp.service.active_configurations[0].primary_container.command[0] #=> String
+    #   resp.service.active_configurations[0].primary_container.environment #=> Array
+    #   resp.service.active_configurations[0].primary_container.environment[0].name #=> String
+    #   resp.service.active_configurations[0].primary_container.environment[0].value #=> String
+    #   resp.service.active_configurations[0].primary_container.secrets #=> Array
+    #   resp.service.active_configurations[0].primary_container.secrets[0].name #=> String
+    #   resp.service.active_configurations[0].primary_container.secrets[0].value_from #=> String
+    #   resp.service.active_configurations[0].scaling_target.min_task_count #=> Integer
+    #   resp.service.active_configurations[0].scaling_target.max_task_count #=> Integer
+    #   resp.service.active_configurations[0].scaling_target.auto_scaling_metric #=> String, one of "AVERAGE_CPU", "AVERAGE_MEMORY", "REQUEST_COUNT_PER_TARGET"
+    #   resp.service.active_configurations[0].scaling_target.auto_scaling_target_value #=> Integer
+    #   resp.service.active_configurations[0].ingress_paths #=> Array
+    #   resp.service.active_configurations[0].ingress_paths[0].access_type #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.service.active_configurations[0].ingress_paths[0].endpoint #=> String
+    #   resp.service.active_configurations[0].created_at #=> Time
+    #   resp.service.tags #=> Array
+    #   resp.service.tags[0].key #=> String
+    #   resp.service.tags[0].value #=> String
+    #   resp.service.created_at #=> Time
+    #   resp.service.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteExpressGatewayService AWS API Documentation
+    #
+    # @overload delete_express_gateway_service(params = {})
+    # @param [Hash] params ({})
+    def delete_express_gateway_service(params = {}, options = {})
+      req = build_request(:delete_express_gateway_service, params)
+      req.send_request(options)
+    end
+
     # Deletes a specified service within a cluster. You can delete a service
     # if you have no running tasks in it and the desired task count is zero.
     # If the service is actively maintaining tasks, you can't delete it,
@@ -2931,13 +3335,17 @@ module Aws::ECS
     #   resp.service.deployment_configuration.alarms.alarm_names[0] #=> String
     #   resp.service.deployment_configuration.alarms.rollback #=> Boolean
     #   resp.service.deployment_configuration.alarms.enable #=> Boolean
-    #   resp.service.deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN"
+    #   resp.service.deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN", "LINEAR", "CANARY"
     #   resp.service.deployment_configuration.bake_time_in_minutes #=> Integer
     #   resp.service.deployment_configuration.lifecycle_hooks #=> Array
     #   resp.service.deployment_configuration.lifecycle_hooks[0].hook_target_arn #=> String
     #   resp.service.deployment_configuration.lifecycle_hooks[0].role_arn #=> String
     #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages #=> Array
     #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
+    #   resp.service.deployment_configuration.linear_configuration.step_percent #=> Float
+    #   resp.service.deployment_configuration.linear_configuration.step_bake_time_in_minutes #=> Integer
+    #   resp.service.deployment_configuration.canary_configuration.canary_percent #=> Float
+    #   resp.service.deployment_configuration.canary_configuration.canary_bake_time_in_minutes #=> Integer
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
@@ -3032,6 +3440,8 @@ module Aws::ECS
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options #=> Array
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options[0].name #=> String
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options[0].value_from #=> String
+    #   resp.service.deployments[0].service_connect_configuration.access_log_configuration.format #=> String, one of "TEXT", "JSON"
+    #   resp.service.deployments[0].service_connect_configuration.access_log_configuration.include_query_parameters #=> String, one of "DISABLED", "ENABLED"
     #   resp.service.deployments[0].service_connect_resources #=> Array
     #   resp.service.deployments[0].service_connect_resources[0].discovery_name #=> String
     #   resp.service.deployments[0].service_connect_resources[0].discovery_arn #=> String
@@ -3064,6 +3474,12 @@ module Aws::ECS
     #   resp.service.events[0].created_at #=> Time
     #   resp.service.events[0].message #=> String
     #   resp.service.created_at #=> Time
+    #   resp.service.current_service_deployment #=> String
+    #   resp.service.current_service_revisions #=> Array
+    #   resp.service.current_service_revisions[0].arn #=> String
+    #   resp.service.current_service_revisions[0].requested_task_count #=> Integer
+    #   resp.service.current_service_revisions[0].running_task_count #=> Integer
+    #   resp.service.current_service_revisions[0].pending_task_count #=> Integer
     #   resp.service.placement_constraints #=> Array
     #   resp.service.placement_constraints[0].type #=> String, one of "distinctInstance", "memberOf"
     #   resp.service.placement_constraints[0].expression #=> String
@@ -3086,6 +3502,7 @@ module Aws::ECS
     #   resp.service.propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.service.enable_execute_command #=> Boolean
     #   resp.service.availability_zone_rebalancing #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service.resource_management_type #=> String, one of "CUSTOMER", "ECS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService AWS API Documentation
     #
@@ -4098,6 +4515,7 @@ module Aws::ECS
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT"
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
@@ -4140,6 +4558,7 @@ module Aws::ECS
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.capacity_providers[0].managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
+    #   resp.capacity_providers[0].managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_providers[0].update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_providers[0].update_status_reason #=> String
     #   resp.capacity_providers[0].tags #=> Array
@@ -4478,6 +4897,94 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Retrieves detailed information about an Express service, including
+    # current status, configuration, managed infrastructure, and service
+    # revisions.
+    #
+    # Returns comprehensive service details, active service revisions,
+    # ingress paths with endpoints, and managed Amazon Web Services resource
+    # status including load balancers and auto-scaling policies.
+    #
+    # Use the `include` parameter to retrieve additional information such as
+    # resource tags.
+    #
+    # @option params [required, String] :service_arn
+    #   The Amazon Resource Name (ARN) of the Express service to describe. The
+    #   ARN uniquely identifies the service within your Amazon Web Services
+    #   account and region.
+    #
+    # @option params [Array<String>] :include
+    #   Specifies additional information to include in the response. Valid
+    #   values are `TAGS` to include resource tags associated with the Express
+    #   service.
+    #
+    # @return [Types::DescribeExpressGatewayServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeExpressGatewayServiceResponse#service #service} => Types::ECSExpressGatewayService
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_express_gateway_service({
+    #     service_arn: "String", # required
+    #     include: ["TAGS"], # accepts TAGS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service.cluster #=> String
+    #   resp.service.service_name #=> String
+    #   resp.service.service_arn #=> String
+    #   resp.service.infrastructure_role_arn #=> String
+    #   resp.service.status.status_code #=> String, one of "ACTIVE", "DRAINING", "INACTIVE"
+    #   resp.service.status.status_reason #=> String
+    #   resp.service.current_deployment #=> String
+    #   resp.service.active_configurations #=> Array
+    #   resp.service.active_configurations[0].service_revision_arn #=> String
+    #   resp.service.active_configurations[0].execution_role_arn #=> String
+    #   resp.service.active_configurations[0].task_role_arn #=> String
+    #   resp.service.active_configurations[0].cpu #=> String
+    #   resp.service.active_configurations[0].memory #=> String
+    #   resp.service.active_configurations[0].network_configuration.security_groups #=> Array
+    #   resp.service.active_configurations[0].network_configuration.security_groups[0] #=> String
+    #   resp.service.active_configurations[0].network_configuration.subnets #=> Array
+    #   resp.service.active_configurations[0].network_configuration.subnets[0] #=> String
+    #   resp.service.active_configurations[0].health_check_path #=> String
+    #   resp.service.active_configurations[0].primary_container.image #=> String
+    #   resp.service.active_configurations[0].primary_container.container_port #=> Integer
+    #   resp.service.active_configurations[0].primary_container.aws_logs_configuration.log_group #=> String
+    #   resp.service.active_configurations[0].primary_container.aws_logs_configuration.log_stream_prefix #=> String
+    #   resp.service.active_configurations[0].primary_container.repository_credentials.credentials_parameter #=> String
+    #   resp.service.active_configurations[0].primary_container.command #=> Array
+    #   resp.service.active_configurations[0].primary_container.command[0] #=> String
+    #   resp.service.active_configurations[0].primary_container.environment #=> Array
+    #   resp.service.active_configurations[0].primary_container.environment[0].name #=> String
+    #   resp.service.active_configurations[0].primary_container.environment[0].value #=> String
+    #   resp.service.active_configurations[0].primary_container.secrets #=> Array
+    #   resp.service.active_configurations[0].primary_container.secrets[0].name #=> String
+    #   resp.service.active_configurations[0].primary_container.secrets[0].value_from #=> String
+    #   resp.service.active_configurations[0].scaling_target.min_task_count #=> Integer
+    #   resp.service.active_configurations[0].scaling_target.max_task_count #=> Integer
+    #   resp.service.active_configurations[0].scaling_target.auto_scaling_metric #=> String, one of "AVERAGE_CPU", "AVERAGE_MEMORY", "REQUEST_COUNT_PER_TARGET"
+    #   resp.service.active_configurations[0].scaling_target.auto_scaling_target_value #=> Integer
+    #   resp.service.active_configurations[0].ingress_paths #=> Array
+    #   resp.service.active_configurations[0].ingress_paths[0].access_type #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.service.active_configurations[0].ingress_paths[0].endpoint #=> String
+    #   resp.service.active_configurations[0].created_at #=> Time
+    #   resp.service.tags #=> Array
+    #   resp.service.tags[0].key #=> String
+    #   resp.service.tags[0].value #=> String
+    #   resp.service.created_at #=> Time
+    #   resp.service.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeExpressGatewayService AWS API Documentation
+    #
+    # @overload describe_express_gateway_service(params = {})
+    # @param [Hash] params ({})
+    def describe_express_gateway_service(params = {}, options = {})
+      req = build_request(:describe_express_gateway_service, params)
+      req.send_request(options)
+    end
+
     # Describes one or more of your service deployments.
     #
     # A service deployment happens when you release a software update for
@@ -4560,10 +5067,14 @@ module Aws::ECS
     #   resp.service_deployments[0].source_service_revisions[0].requested_task_count #=> Integer
     #   resp.service_deployments[0].source_service_revisions[0].running_task_count #=> Integer
     #   resp.service_deployments[0].source_service_revisions[0].pending_task_count #=> Integer
+    #   resp.service_deployments[0].source_service_revisions[0].requested_test_traffic_weight #=> Float
+    #   resp.service_deployments[0].source_service_revisions[0].requested_production_traffic_weight #=> Float
     #   resp.service_deployments[0].target_service_revision.arn #=> String
     #   resp.service_deployments[0].target_service_revision.requested_task_count #=> Integer
     #   resp.service_deployments[0].target_service_revision.running_task_count #=> Integer
     #   resp.service_deployments[0].target_service_revision.pending_task_count #=> Integer
+    #   resp.service_deployments[0].target_service_revision.requested_test_traffic_weight #=> Float
+    #   resp.service_deployments[0].target_service_revision.requested_production_traffic_weight #=> Float
     #   resp.service_deployments[0].status #=> String, one of "PENDING", "SUCCESSFUL", "STOPPED", "STOP_REQUESTED", "IN_PROGRESS", "ROLLBACK_REQUESTED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_SUCCESSFUL", "ROLLBACK_FAILED"
     #   resp.service_deployments[0].status_reason #=> String
     #   resp.service_deployments[0].lifecycle_stage #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT", "BAKE_TIME", "CLEAN_UP"
@@ -4575,13 +5086,17 @@ module Aws::ECS
     #   resp.service_deployments[0].deployment_configuration.alarms.alarm_names[0] #=> String
     #   resp.service_deployments[0].deployment_configuration.alarms.rollback #=> Boolean
     #   resp.service_deployments[0].deployment_configuration.alarms.enable #=> Boolean
-    #   resp.service_deployments[0].deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN"
+    #   resp.service_deployments[0].deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN", "LINEAR", "CANARY"
     #   resp.service_deployments[0].deployment_configuration.bake_time_in_minutes #=> Integer
     #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks #=> Array
     #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks[0].hook_target_arn #=> String
     #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks[0].role_arn #=> String
     #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks[0].lifecycle_stages #=> Array
     #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
+    #   resp.service_deployments[0].deployment_configuration.linear_configuration.step_percent #=> Float
+    #   resp.service_deployments[0].deployment_configuration.linear_configuration.step_bake_time_in_minutes #=> Integer
+    #   resp.service_deployments[0].deployment_configuration.canary_configuration.canary_percent #=> Float
+    #   resp.service_deployments[0].deployment_configuration.canary_configuration.canary_bake_time_in_minutes #=> Integer
     #   resp.service_deployments[0].rollback.reason #=> String
     #   resp.service_deployments[0].rollback.started_at #=> Time
     #   resp.service_deployments[0].rollback.service_revision_arn #=> String
@@ -4744,6 +5259,8 @@ module Aws::ECS
     #   resp.service_revisions[0].service_connect_configuration.log_configuration.secret_options #=> Array
     #   resp.service_revisions[0].service_connect_configuration.log_configuration.secret_options[0].name #=> String
     #   resp.service_revisions[0].service_connect_configuration.log_configuration.secret_options[0].value_from #=> String
+    #   resp.service_revisions[0].service_connect_configuration.access_log_configuration.format #=> String, one of "TEXT", "JSON"
+    #   resp.service_revisions[0].service_connect_configuration.access_log_configuration.include_query_parameters #=> String, one of "DISABLED", "ENABLED"
     #   resp.service_revisions[0].volume_configurations #=> Array
     #   resp.service_revisions[0].volume_configurations[0].name #=> String
     #   resp.service_revisions[0].volume_configurations[0].managed_ebs_volume.encrypted #=> Boolean
@@ -4771,6 +5288,74 @@ module Aws::ECS
     #   resp.service_revisions[0].resolved_configuration.load_balancers #=> Array
     #   resp.service_revisions[0].resolved_configuration.load_balancers[0].target_group_arn #=> String
     #   resp.service_revisions[0].resolved_configuration.load_balancers[0].production_listener_rule #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths #=> Array
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].access_type #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].endpoint #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].load_balancer.arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].load_balancer.status #=> String, one of "PROVISIONING", "ACTIVE", "DEPROVISIONING", "DELETED", "FAILED"
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].load_balancer.status_reason #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].load_balancer.updated_at #=> Time
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].load_balancer.scheme #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].load_balancer.subnet_ids #=> Array
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].load_balancer.subnet_ids[0] #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].load_balancer.security_group_ids #=> Array
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].load_balancer.security_group_ids[0] #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].load_balancer_security_groups #=> Array
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].load_balancer_security_groups[0].arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].load_balancer_security_groups[0].status #=> String, one of "PROVISIONING", "ACTIVE", "DEPROVISIONING", "DELETED", "FAILED"
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].load_balancer_security_groups[0].status_reason #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].load_balancer_security_groups[0].updated_at #=> Time
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].certificate.arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].certificate.status #=> String, one of "PROVISIONING", "ACTIVE", "DEPROVISIONING", "DELETED", "FAILED"
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].certificate.status_reason #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].certificate.updated_at #=> Time
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].certificate.domain_name #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].listener.arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].listener.status #=> String, one of "PROVISIONING", "ACTIVE", "DEPROVISIONING", "DELETED", "FAILED"
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].listener.status_reason #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].listener.updated_at #=> Time
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].rule.arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].rule.status #=> String, one of "PROVISIONING", "ACTIVE", "DEPROVISIONING", "DELETED", "FAILED"
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].rule.status_reason #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].rule.updated_at #=> Time
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].target_groups #=> Array
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].target_groups[0].arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].target_groups[0].status #=> String, one of "PROVISIONING", "ACTIVE", "DEPROVISIONING", "DELETED", "FAILED"
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].target_groups[0].status_reason #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].target_groups[0].updated_at #=> Time
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].target_groups[0].health_check_path #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].target_groups[0].health_check_port #=> Integer
+    #   resp.service_revisions[0].ecs_managed_resources.ingress_paths[0].target_groups[0].port #=> Integer
+    #   resp.service_revisions[0].ecs_managed_resources.auto_scaling.scalable_target.arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.auto_scaling.scalable_target.status #=> String, one of "PROVISIONING", "ACTIVE", "DEPROVISIONING", "DELETED", "FAILED"
+    #   resp.service_revisions[0].ecs_managed_resources.auto_scaling.scalable_target.status_reason #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.auto_scaling.scalable_target.updated_at #=> Time
+    #   resp.service_revisions[0].ecs_managed_resources.auto_scaling.scalable_target.min_capacity #=> Integer
+    #   resp.service_revisions[0].ecs_managed_resources.auto_scaling.scalable_target.max_capacity #=> Integer
+    #   resp.service_revisions[0].ecs_managed_resources.auto_scaling.application_auto_scaling_policies #=> Array
+    #   resp.service_revisions[0].ecs_managed_resources.auto_scaling.application_auto_scaling_policies[0].arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.auto_scaling.application_auto_scaling_policies[0].status #=> String, one of "PROVISIONING", "ACTIVE", "DEPROVISIONING", "DELETED", "FAILED"
+    #   resp.service_revisions[0].ecs_managed_resources.auto_scaling.application_auto_scaling_policies[0].status_reason #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.auto_scaling.application_auto_scaling_policies[0].updated_at #=> Time
+    #   resp.service_revisions[0].ecs_managed_resources.auto_scaling.application_auto_scaling_policies[0].policy_type #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.auto_scaling.application_auto_scaling_policies[0].target_value #=> Float
+    #   resp.service_revisions[0].ecs_managed_resources.auto_scaling.application_auto_scaling_policies[0].metric #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.metric_alarms #=> Array
+    #   resp.service_revisions[0].ecs_managed_resources.metric_alarms[0].arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.metric_alarms[0].status #=> String, one of "PROVISIONING", "ACTIVE", "DEPROVISIONING", "DELETED", "FAILED"
+    #   resp.service_revisions[0].ecs_managed_resources.metric_alarms[0].status_reason #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.metric_alarms[0].updated_at #=> Time
+    #   resp.service_revisions[0].ecs_managed_resources.service_security_groups #=> Array
+    #   resp.service_revisions[0].ecs_managed_resources.service_security_groups[0].arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.service_security_groups[0].status #=> String, one of "PROVISIONING", "ACTIVE", "DEPROVISIONING", "DELETED", "FAILED"
+    #   resp.service_revisions[0].ecs_managed_resources.service_security_groups[0].status_reason #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.service_security_groups[0].updated_at #=> Time
+    #   resp.service_revisions[0].ecs_managed_resources.log_groups #=> Array
+    #   resp.service_revisions[0].ecs_managed_resources.log_groups[0].arn #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.log_groups[0].status #=> String, one of "PROVISIONING", "ACTIVE", "DEPROVISIONING", "DELETED", "FAILED"
+    #   resp.service_revisions[0].ecs_managed_resources.log_groups[0].status_reason #=> String
+    #   resp.service_revisions[0].ecs_managed_resources.log_groups[0].updated_at #=> Time
+    #   resp.service_revisions[0].ecs_managed_resources.log_groups[0].log_group_name #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -4911,13 +5496,17 @@ module Aws::ECS
     #   resp.services[0].deployment_configuration.alarms.alarm_names[0] #=> String
     #   resp.services[0].deployment_configuration.alarms.rollback #=> Boolean
     #   resp.services[0].deployment_configuration.alarms.enable #=> Boolean
-    #   resp.services[0].deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN"
+    #   resp.services[0].deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN", "LINEAR", "CANARY"
     #   resp.services[0].deployment_configuration.bake_time_in_minutes #=> Integer
     #   resp.services[0].deployment_configuration.lifecycle_hooks #=> Array
     #   resp.services[0].deployment_configuration.lifecycle_hooks[0].hook_target_arn #=> String
     #   resp.services[0].deployment_configuration.lifecycle_hooks[0].role_arn #=> String
     #   resp.services[0].deployment_configuration.lifecycle_hooks[0].lifecycle_stages #=> Array
     #   resp.services[0].deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
+    #   resp.services[0].deployment_configuration.linear_configuration.step_percent #=> Float
+    #   resp.services[0].deployment_configuration.linear_configuration.step_bake_time_in_minutes #=> Integer
+    #   resp.services[0].deployment_configuration.canary_configuration.canary_percent #=> Float
+    #   resp.services[0].deployment_configuration.canary_configuration.canary_bake_time_in_minutes #=> Integer
     #   resp.services[0].task_sets #=> Array
     #   resp.services[0].task_sets[0].id #=> String
     #   resp.services[0].task_sets[0].task_set_arn #=> String
@@ -5012,6 +5601,8 @@ module Aws::ECS
     #   resp.services[0].deployments[0].service_connect_configuration.log_configuration.secret_options #=> Array
     #   resp.services[0].deployments[0].service_connect_configuration.log_configuration.secret_options[0].name #=> String
     #   resp.services[0].deployments[0].service_connect_configuration.log_configuration.secret_options[0].value_from #=> String
+    #   resp.services[0].deployments[0].service_connect_configuration.access_log_configuration.format #=> String, one of "TEXT", "JSON"
+    #   resp.services[0].deployments[0].service_connect_configuration.access_log_configuration.include_query_parameters #=> String, one of "DISABLED", "ENABLED"
     #   resp.services[0].deployments[0].service_connect_resources #=> Array
     #   resp.services[0].deployments[0].service_connect_resources[0].discovery_name #=> String
     #   resp.services[0].deployments[0].service_connect_resources[0].discovery_arn #=> String
@@ -5044,6 +5635,12 @@ module Aws::ECS
     #   resp.services[0].events[0].created_at #=> Time
     #   resp.services[0].events[0].message #=> String
     #   resp.services[0].created_at #=> Time
+    #   resp.services[0].current_service_deployment #=> String
+    #   resp.services[0].current_service_revisions #=> Array
+    #   resp.services[0].current_service_revisions[0].arn #=> String
+    #   resp.services[0].current_service_revisions[0].requested_task_count #=> Integer
+    #   resp.services[0].current_service_revisions[0].running_task_count #=> Integer
+    #   resp.services[0].current_service_revisions[0].pending_task_count #=> Integer
     #   resp.services[0].placement_constraints #=> Array
     #   resp.services[0].placement_constraints[0].type #=> String, one of "distinctInstance", "memberOf"
     #   resp.services[0].placement_constraints[0].expression #=> String
@@ -5066,6 +5663,7 @@ module Aws::ECS
     #   resp.services[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.services[0].enable_execute_command #=> Boolean
     #   resp.services[0].availability_zone_rebalancing #=> String, one of "ENABLED", "DISABLED"
+    #   resp.services[0].resource_management_type #=> String, one of "CUSTOMER", "ECS"
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -6075,7 +6673,7 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_account_settings({
-    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate, defaultLogDriverMode
+    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate, defaultLogDriverMode, fargateEventWindows
     #     value: "String",
     #     principal_arn: "String",
     #     effective_settings: false,
@@ -6086,7 +6684,7 @@ module Aws::ECS
     # @example Response structure
     #
     #   resp.settings #=> Array
-    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate", "defaultLogDriverMode"
+    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate", "defaultLogDriverMode", "fargateEventWindows"
     #   resp.settings[0].value #=> String
     #   resp.settings[0].principal_arn #=> String
     #   resp.settings[0].type #=> String, one of "user", "aws_managed"
@@ -6328,8 +6926,8 @@ module Aws::ECS
     #   the `DRAINING` status, the results include only container instances
     #   that have been set to `DRAINING` using
     #   [UpdateContainerInstancesState][1]. If you don't specify this
-    #   parameter, the default is to include container instances set to all
-    #   states other than `INACTIVE`.
+    #   parameter, the The default is to include container instances set to
+    #   all states other than `INACTIVE`.
     #
     #
     #
@@ -6541,6 +7139,10 @@ module Aws::ECS
     #   The scheduling strategy to use when filtering the `ListServices`
     #   results.
     #
+    # @option params [String] :resource_management_type
+    #   The resourceManagementType type to use when filtering the
+    #   `ListServices` results.
+    #
     # @return [Types::ListServicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListServicesResponse#service_arns #service_arns} => Array&lt;String&gt;
@@ -6571,6 +7173,7 @@ module Aws::ECS
     #     max_results: 1,
     #     launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL, MANAGED_INSTANCES
     #     scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
+    #     resource_management_type: "CUSTOMER", # accepts CUSTOMER, ECS
     #   })
     #
     # @example Response structure
@@ -7183,6 +7786,13 @@ module Aws::ECS
     #     maintenance, see [Amazon Web Services Fargate task maintenance][5]
     #     in the *Amazon ECS Developer Guide*.
     #
+    #   * `fargateEventWindows` - When Amazon Web Services determines that a
+    #     security or infrastructure update is needed for an Amazon ECS task
+    #     hosted on Fargate, the tasks need to be stopped and new tasks
+    #     launched to replace them. Use `fargateEventWindows` to use EC2 Event
+    #     Windows associated with Fargate tasks to configure time windows for
+    #     task retirement.
+    #
     #   * `tagResourceAuthorization` - Amazon ECS is introducing tagging
     #     authorization for resource creation. Users must have permissions for
     #     actions that create the resource, such as `ecsCreateCluster`. If
@@ -7317,14 +7927,14 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_setting({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate, defaultLogDriverMode
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate, defaultLogDriverMode, fargateEventWindows
     #     value: "String", # required
     #     principal_arn: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate", "defaultLogDriverMode"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate", "defaultLogDriverMode", "fargateEventWindows"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #   resp.setting.type #=> String, one of "user", "aws_managed"
@@ -7422,6 +8032,13 @@ module Aws::ECS
     #     maintenance, see [Amazon Web Services Fargate task maintenance][5]
     #     in the *Amazon ECS Developer Guide*.
     #
+    #   * `fargateEventWindows` - When Amazon Web Services determines that a
+    #     security or infrastructure update is needed for an Amazon ECS task
+    #     hosted on Fargate, the tasks need to be stopped and new tasks
+    #     launched to replace them. Use `fargateEventWindows` to use EC2 Event
+    #     Windows associated with Fargate tasks to configure time windows for
+    #     task retirement.
+    #
     #   * `tagResourceAuthorization` - Amazon ECS is introducing tagging
     #     authorization for resource creation. Users must have permissions for
     #     actions that create the resource, such as `ecsCreateCluster`. If
@@ -7517,13 +8134,13 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_setting_default({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate, defaultLogDriverMode
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate, defaultLogDriverMode, fargateEventWindows
     #     value: "String", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate", "defaultLogDriverMode"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate", "defaultLogDriverMode", "fargateEventWindows"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
     #   resp.setting.type #=> String, one of "user", "aws_managed"
@@ -8439,8 +9056,8 @@ module Aws::ECS
     #   If `task` is specified, all containers within the specified task share
     #   the same process namespace.
     #
-    #   If no value is specified, the default is a private namespace for each
-    #   container.
+    #   If no value is specified, the The default is a private namespace for
+    #   each container.
     #
     #   If the `host` PID mode is used, there's a heightened risk of
     #   undesired process namespace exposure.
@@ -8532,8 +9149,7 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html
     #
     # @option params [Types::RuntimePlatform] :runtime_platform
-    #   The operating system that your tasks definitions run on. A platform
-    #   family is specified only for tasks using the Fargate launch type.
+    #   The operating system that your tasks definitions run on.
     #
     # @option params [Boolean] :enable_fault_injection
     #   Enables fault injection when you register your task definition and
@@ -9111,6 +9727,12 @@ module Aws::ECS
     # @option params [Array<Types::CapacityProviderStrategyItem>] :capacity_provider_strategy
     #   The capacity provider strategy to use for the task.
     #
+    #   <note markdown="1"> If you want to use Amazon ECS Managed Instances, you must use the
+    #   `capacityProviderStrategy` request parameter and omit the `launchType`
+    #   request parameter.
+    #
+    #    </note>
+    #
     #   If a `capacityProviderStrategy` is specified, the `launchType`
     #   parameter must be omitted. If no `capacityProviderStrategy` or
     #   `launchType` is specified, the `defaultCapacityProviderStrategy` for
@@ -9160,6 +9782,12 @@ module Aws::ECS
     #   The infrastructure to run your standalone task on. For more
     #   information, see [Amazon ECS launch types][1] in the *Amazon Elastic
     #   Container Service Developer Guide*.
+    #
+    #   <note markdown="1"> If you want to use Amazon ECS Managed Instances, you must use the
+    #   `capacityProviderStrategy` request parameter and omit the `launchType`
+    #   request parameter.
+    #
+    #    </note>
     #
     #   The `FARGATE` launch type runs your tasks on Fargate On-Demand
     #   infrastructure.
@@ -10138,11 +10766,13 @@ module Aws::ECS
     # deleted.
     #
     # When you call `StopTask` on a task, the equivalent of `docker stop` is
-    # issued to the containers running in the task. This results in a
-    # `SIGTERM` value and a default 30-second timeout, after which the
-    # `SIGKILL` value is sent and the containers are forcibly stopped. If
-    # the container handles the `SIGTERM` value gracefully and exits within
-    # 30 seconds from receiving it, no `SIGKILL` value is sent.
+    # issued to the containers running in the task. This results in a stop
+    # signal value and a default 30-second timeout, after which the
+    # `SIGKILL` value is sent and the containers are forcibly stopped. This
+    # signal can be defined in your container image with the `STOPSIGNAL`
+    # instruction and will default to `SIGTERM`. If the container handles
+    # the `SIGTERM` value gracefully and exits within 30 seconds from
+    # receiving it, no `SIGKILL` value is sent.
     #
     # For Windows containers, POSIX signals do not work and runtime stops
     # the container by sending a `CTRL_SHUTDOWN_EVENT`. For more
@@ -10880,6 +11510,9 @@ module Aws::ECS
     #         },
     #       },
     #       propagate_tags: "CAPACITY_PROVIDER", # accepts CAPACITY_PROVIDER, NONE
+    #       infrastructure_optimization: {
+    #         scale_in_after: 1,
+    #       },
     #     },
     #   })
     #
@@ -10905,6 +11538,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.network_configuration.security_groups[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.storage_configuration.storage_size_gi_b #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.monitoring #=> String, one of "BASIC", "DETAILED"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_option_type #=> String, one of "ON_DEMAND", "SPOT"
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.min #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count.max #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b.min #=> Integer
@@ -10947,6 +11581,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.allowed_instance_types[0] #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.capacity_provider.managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
+    #   resp.capacity_provider.managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_provider.update_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_provider.update_status_reason #=> String
     #   resp.capacity_provider.tags #=> Array
@@ -11877,6 +12512,147 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Updates an existing Express service configuration. Modifies container
+    # settings, resource allocation, auto-scaling configuration, and other
+    # service parameters without recreating the service.
+    #
+    # Amazon ECS creates a new service revision with updated configuration
+    # and performs a rolling deployment to replace existing tasks. The
+    # service remains available during updates, ensuring zero-downtime
+    # deployments.
+    #
+    # Some parameters like the infrastructure role cannot be modified after
+    # service creation and require creating a new service.
+    #
+    # @option params [required, String] :service_arn
+    #   The Amazon Resource Name (ARN) of the Express service to update.
+    #
+    # @option params [String] :execution_role_arn
+    #   The Amazon Resource Name (ARN) of the task execution role for the
+    #   Express service.
+    #
+    # @option params [String] :health_check_path
+    #   The path on the container for Application Load Balancer health checks.
+    #
+    # @option params [Types::ExpressGatewayContainer] :primary_container
+    #   The primary container configuration for the Express service.
+    #
+    # @option params [String] :task_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role for containers in this
+    #   task.
+    #
+    # @option params [Types::ExpressGatewayServiceNetworkConfiguration] :network_configuration
+    #   The network configuration for the Express service tasks. By default,
+    #   the network configuration for an Express service uses the default VPC.
+    #
+    # @option params [String] :cpu
+    #   The number of CPU units used by the task.
+    #
+    # @option params [String] :memory
+    #   The amount of memory (in MiB) used by the task.
+    #
+    # @option params [Types::ExpressGatewayScalingTarget] :scaling_target
+    #   The auto-scaling configuration for the Express service.
+    #
+    # @return [Types::UpdateExpressGatewayServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateExpressGatewayServiceResponse#service #service} => Types::UpdatedExpressGatewayService
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_express_gateway_service({
+    #     service_arn: "String", # required
+    #     execution_role_arn: "String",
+    #     health_check_path: "String",
+    #     primary_container: {
+    #       image: "String", # required
+    #       container_port: 1,
+    #       aws_logs_configuration: {
+    #         log_group: "String", # required
+    #         log_stream_prefix: "String", # required
+    #       },
+    #       repository_credentials: {
+    #         credentials_parameter: "String",
+    #       },
+    #       command: ["String"],
+    #       environment: [
+    #         {
+    #           name: "String",
+    #           value: "String",
+    #         },
+    #       ],
+    #       secrets: [
+    #         {
+    #           name: "String", # required
+    #           value_from: "String", # required
+    #         },
+    #       ],
+    #     },
+    #     task_role_arn: "String",
+    #     network_configuration: {
+    #       security_groups: ["String"],
+    #       subnets: ["String"],
+    #     },
+    #     cpu: "String",
+    #     memory: "String",
+    #     scaling_target: {
+    #       min_task_count: 1,
+    #       max_task_count: 1,
+    #       auto_scaling_metric: "AVERAGE_CPU", # accepts AVERAGE_CPU, AVERAGE_MEMORY, REQUEST_COUNT_PER_TARGET
+    #       auto_scaling_target_value: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service.service_arn #=> String
+    #   resp.service.cluster #=> String
+    #   resp.service.service_name #=> String
+    #   resp.service.status.status_code #=> String, one of "ACTIVE", "DRAINING", "INACTIVE"
+    #   resp.service.status.status_reason #=> String
+    #   resp.service.target_configuration.service_revision_arn #=> String
+    #   resp.service.target_configuration.execution_role_arn #=> String
+    #   resp.service.target_configuration.task_role_arn #=> String
+    #   resp.service.target_configuration.cpu #=> String
+    #   resp.service.target_configuration.memory #=> String
+    #   resp.service.target_configuration.network_configuration.security_groups #=> Array
+    #   resp.service.target_configuration.network_configuration.security_groups[0] #=> String
+    #   resp.service.target_configuration.network_configuration.subnets #=> Array
+    #   resp.service.target_configuration.network_configuration.subnets[0] #=> String
+    #   resp.service.target_configuration.health_check_path #=> String
+    #   resp.service.target_configuration.primary_container.image #=> String
+    #   resp.service.target_configuration.primary_container.container_port #=> Integer
+    #   resp.service.target_configuration.primary_container.aws_logs_configuration.log_group #=> String
+    #   resp.service.target_configuration.primary_container.aws_logs_configuration.log_stream_prefix #=> String
+    #   resp.service.target_configuration.primary_container.repository_credentials.credentials_parameter #=> String
+    #   resp.service.target_configuration.primary_container.command #=> Array
+    #   resp.service.target_configuration.primary_container.command[0] #=> String
+    #   resp.service.target_configuration.primary_container.environment #=> Array
+    #   resp.service.target_configuration.primary_container.environment[0].name #=> String
+    #   resp.service.target_configuration.primary_container.environment[0].value #=> String
+    #   resp.service.target_configuration.primary_container.secrets #=> Array
+    #   resp.service.target_configuration.primary_container.secrets[0].name #=> String
+    #   resp.service.target_configuration.primary_container.secrets[0].value_from #=> String
+    #   resp.service.target_configuration.scaling_target.min_task_count #=> Integer
+    #   resp.service.target_configuration.scaling_target.max_task_count #=> Integer
+    #   resp.service.target_configuration.scaling_target.auto_scaling_metric #=> String, one of "AVERAGE_CPU", "AVERAGE_MEMORY", "REQUEST_COUNT_PER_TARGET"
+    #   resp.service.target_configuration.scaling_target.auto_scaling_target_value #=> Integer
+    #   resp.service.target_configuration.ingress_paths #=> Array
+    #   resp.service.target_configuration.ingress_paths[0].access_type #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.service.target_configuration.ingress_paths[0].endpoint #=> String
+    #   resp.service.target_configuration.created_at #=> Time
+    #   resp.service.created_at #=> Time
+    #   resp.service.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateExpressGatewayService AWS API Documentation
+    #
+    # @overload update_express_gateway_service(params = {})
+    # @param [Hash] params ({})
+    def update_express_gateway_service(params = {}, options = {})
+      req = build_request(:update_express_gateway_service, params)
+      req.send_request(options)
+    end
+
     # Modifies the parameters of a service.
     #
     # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
@@ -12047,6 +12823,11 @@ module Aws::ECS
     # @option params [Array<Types::CapacityProviderStrategyItem>] :capacity_provider_strategy
     #   The details of a capacity provider strategy. You can set a capacity
     #   provider when you create a cluster, run a task, or update a service.
+    #
+    #   <note markdown="1"> If you want to use Amazon ECS Managed Instances, you must use the
+    #   `capacityProviderStrategy` request parameter.
+    #
+    #    </note>
     #
     #   When you use Fargate, the capacity providers are `FARGATE` or
     #   `FARGATE_SPOT`.
@@ -12390,7 +13171,7 @@ module Aws::ECS
     #         rollback: false, # required
     #         enable: false, # required
     #       },
-    #       strategy: "ROLLING", # accepts ROLLING, BLUE_GREEN
+    #       strategy: "ROLLING", # accepts ROLLING, BLUE_GREEN, LINEAR, CANARY
     #       bake_time_in_minutes: 1,
     #       lifecycle_hooks: [
     #         {
@@ -12401,6 +13182,14 @@ module Aws::ECS
     #           },
     #         },
     #       ],
+    #       linear_configuration: {
+    #         step_percent: 1.0,
+    #         step_bake_time_in_minutes: 1,
+    #       },
+    #       canary_configuration: {
+    #         canary_percent: 1.0,
+    #         canary_bake_time_in_minutes: 1,
+    #       },
     #     },
     #     availability_zone_rebalancing: "ENABLED", # accepts ENABLED, DISABLED
     #     network_configuration: {
@@ -12500,6 +13289,10 @@ module Aws::ECS
     #           },
     #         ],
     #       },
+    #       access_log_configuration: {
+    #         format: "TEXT", # required, accepts TEXT, JSON
+    #         include_query_parameters: "DISABLED", # accepts DISABLED, ENABLED
+    #       },
     #     },
     #     volume_configurations: [
     #       {
@@ -12578,13 +13371,17 @@ module Aws::ECS
     #   resp.service.deployment_configuration.alarms.alarm_names[0] #=> String
     #   resp.service.deployment_configuration.alarms.rollback #=> Boolean
     #   resp.service.deployment_configuration.alarms.enable #=> Boolean
-    #   resp.service.deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN"
+    #   resp.service.deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN", "LINEAR", "CANARY"
     #   resp.service.deployment_configuration.bake_time_in_minutes #=> Integer
     #   resp.service.deployment_configuration.lifecycle_hooks #=> Array
     #   resp.service.deployment_configuration.lifecycle_hooks[0].hook_target_arn #=> String
     #   resp.service.deployment_configuration.lifecycle_hooks[0].role_arn #=> String
     #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages #=> Array
     #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
+    #   resp.service.deployment_configuration.linear_configuration.step_percent #=> Float
+    #   resp.service.deployment_configuration.linear_configuration.step_bake_time_in_minutes #=> Integer
+    #   resp.service.deployment_configuration.canary_configuration.canary_percent #=> Float
+    #   resp.service.deployment_configuration.canary_configuration.canary_bake_time_in_minutes #=> Integer
     #   resp.service.task_sets #=> Array
     #   resp.service.task_sets[0].id #=> String
     #   resp.service.task_sets[0].task_set_arn #=> String
@@ -12679,6 +13476,8 @@ module Aws::ECS
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options #=> Array
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options[0].name #=> String
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.secret_options[0].value_from #=> String
+    #   resp.service.deployments[0].service_connect_configuration.access_log_configuration.format #=> String, one of "TEXT", "JSON"
+    #   resp.service.deployments[0].service_connect_configuration.access_log_configuration.include_query_parameters #=> String, one of "DISABLED", "ENABLED"
     #   resp.service.deployments[0].service_connect_resources #=> Array
     #   resp.service.deployments[0].service_connect_resources[0].discovery_name #=> String
     #   resp.service.deployments[0].service_connect_resources[0].discovery_arn #=> String
@@ -12711,6 +13510,12 @@ module Aws::ECS
     #   resp.service.events[0].created_at #=> Time
     #   resp.service.events[0].message #=> String
     #   resp.service.created_at #=> Time
+    #   resp.service.current_service_deployment #=> String
+    #   resp.service.current_service_revisions #=> Array
+    #   resp.service.current_service_revisions[0].arn #=> String
+    #   resp.service.current_service_revisions[0].requested_task_count #=> Integer
+    #   resp.service.current_service_revisions[0].running_task_count #=> Integer
+    #   resp.service.current_service_revisions[0].pending_task_count #=> Integer
     #   resp.service.placement_constraints #=> Array
     #   resp.service.placement_constraints[0].type #=> String, one of "distinctInstance", "memberOf"
     #   resp.service.placement_constraints[0].expression #=> String
@@ -12733,6 +13538,7 @@ module Aws::ECS
     #   resp.service.propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.service.enable_execute_command #=> Boolean
     #   resp.service.availability_zone_rebalancing #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service.resource_management_type #=> String, one of "CUSTOMER", "ECS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateService AWS API Documentation
     #
@@ -13227,7 +14033,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.207.0'
+      context[:gem_version] = '1.216.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

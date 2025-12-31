@@ -1640,6 +1640,7 @@ module Aws::WorkSpaces
       attr_accessor directory_id: ::String
       attr_accessor user_name: ::String
       attr_accessor ip_address: ::String
+      attr_accessor ipv_6_address: ::String
       attr_accessor state: ("PENDING" | "AVAILABLE" | "IMPAIRED" | "UNHEALTHY" | "REBOOTING" | "STARTING" | "REBUILDING" | "RESTORING" | "MAINTENANCE" | "ADMIN_MAINTENANCE" | "TERMINATING" | "TERMINATED" | "SUSPENDED" | "UPDATING" | "STOPPING" | "STOPPED" | "ERROR")
       attr_accessor bundle_id: ::String
       attr_accessor subnet_id: ::String
@@ -1713,6 +1714,7 @@ module Aws::WorkSpaces
       attr_accessor registration_code: ::String
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor dns_ip_addresses: ::Array[::String]
+      attr_accessor dns_ipv_6_addresses: ::Array[::String]
       attr_accessor customer_user_name: ::String
       attr_accessor iam_role_id: ::String
       attr_accessor directory_type: ("SIMPLE_AD" | "AD_CONNECTOR" | "CUSTOMER_MANAGED" | "AWS_IAM_IDENTITY_CENTER")
@@ -1776,6 +1778,7 @@ module Aws::WorkSpaces
       attr_accessor workspace_properties: Types::WorkspaceProperties
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor workspace_name: ::String
+      attr_accessor ipv_6_address: ::String
       SENSITIVE: []
     end
 

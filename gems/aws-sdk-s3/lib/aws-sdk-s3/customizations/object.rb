@@ -358,8 +358,8 @@ module Aws
       #   {Client#complete_multipart_upload},
       #   and {Client#upload_part} can be provided.
       #
-      # @option options [Integer] :thread_count (10) The number of parallel
-      #   multipart uploads
+      # @option options [Integer] :thread_count (10) The number of parallel multipart uploads.
+      #   An additional thread is used internally for task coordination.
       #
       # @option options [Boolean] :tempfile (false) Normally read data is stored
       #   in memory when building the parts in order to complete the underlying
@@ -518,10 +518,9 @@ module Aws
       # @option options [Integer] :thread_count (10) Customize threads used in the multipart download.
       #
       # @option options [String] :checksum_mode ("ENABLED")
-      #   When `"ENABLED"` and the object has a stored checksum, it will be used to validate the download and will
-      #   raise an `Aws::Errors::ChecksumError` if checksum validation fails. You may provide a `on_checksum_validated`
-      #   callback if you need to verify that validation occurred and which algorithm was used.
-      #   To disable checksum validation, set `checksum_mode` to `"DISABLED"`.
+      #   This option is deprecated. Use `:response_checksum_validation` on your S3 client instead.
+      #   To disable checksum validation, set `response_checksum_validation: 'when_required'`
+      #   when creating your S3 client.
       #
       # @option options [Callable] :on_checksum_validated
       #   Called each time a request's checksum is validated with the checksum algorithm and the

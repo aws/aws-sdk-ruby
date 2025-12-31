@@ -35,6 +35,7 @@ module Aws::S3Vectors
   # * {KmsInvalidStateException}
   # * {KmsNotFoundException}
   # * {NotFoundException}
+  # * {RequestTimeoutException}
   # * {ServiceQuotaExceededException}
   # * {ServiceUnavailableException}
   # * {TooManyRequestsException}
@@ -167,6 +168,25 @@ module Aws::S3Vectors
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class RequestTimeoutException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::S3Vectors::Types::RequestTimeoutException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      def retryable?
+        true
       end
     end
 

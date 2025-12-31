@@ -43,9 +43,13 @@ module Aws::RecycleBin
     #
     # @!attribute [rw] resource_type
     #   The resource type to be retained by the retention rule. Currently,
-    #   only Amazon EBS snapshots and EBS-backed AMIs are supported. To
-    #   retain snapshots, specify `EBS_SNAPSHOT`. To retain EBS-backed AMIs,
-    #   specify `EC2_IMAGE`.
+    #   only EBS volumes, EBS snapshots, and EBS-backed AMIs are supported.
+    #
+    #   * To retain EBS volumes, specify `EBS_VOLUME`.
+    #
+    #   * To retain EBS snapshots, specify `EBS_SNAPSHOT`
+    #
+    #   * To retain EBS-backed AMIs, specify `EC2_IMAGE`.
     #   @return [String]
     #
     # @!attribute [rw] resource_tags
@@ -322,10 +326,16 @@ module Aws::RecycleBin
     # @!attribute [rw] resource_type
     #   The resource type retained by the retention rule. Only retention
     #   rules that retain the specified resource type are listed. Currently,
-    #   only Amazon EBS snapshots and EBS-backed AMIs are supported. To list
-    #   retention rules that retain snapshots, specify `EBS_SNAPSHOT`. To
-    #   list retention rules that retain EBS-backed AMIs, specify
-    #   `EC2_IMAGE`.
+    #   only EBS volumes, EBS snapshots, and EBS-backed AMIs are supported.
+    #
+    #   * To list retention rules that retain EBS volumes, specify
+    #     `EBS_VOLUME`.
+    #
+    #   * To list retention rules that retain EBS snapshots, specify
+    #     `EBS_SNAPSHOT`.
+    #
+    #   * To list retention rules that retain EBS-backed AMIs, specify
+    #     `EC2_IMAGE`.
     #   @return [String]
     #
     # @!attribute [rw] resource_tags
@@ -554,8 +564,11 @@ module Aws::RecycleBin
     #
     # @!attribute [rw] retention_period_value
     #   The period value for which the retention rule is to retain
-    #   resources. The period is measured using the unit specified for
-    #   **RetentionPeriodUnit**.
+    #   resources, measured in days. The supported retention periods are:
+    #
+    #   * EBS volumes: 1 - 7 days
+    #
+    #   * EBS snapshots and EBS-backed AMIs: 1 - 365 days
     #   @return [Integer]
     #
     # @!attribute [rw] retention_period_unit
@@ -696,7 +709,7 @@ module Aws::RecycleBin
     #
     # @!attribute [rw] unlock_delay_unit
     #   The unit of time in which to measure the unlock delay. Currently,
-    #   the unlock delay can be measure only in days.
+    #   the unlock delay can be measured only in days.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/UnlockDelay AWS API Documentation

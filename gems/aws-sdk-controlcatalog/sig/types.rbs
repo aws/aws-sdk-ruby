@@ -53,7 +53,7 @@ module Aws::ControlCatalog
 
     class ControlMapping
       attr_accessor control_arn: ::String
-      attr_accessor mapping_type: ("FRAMEWORK" | "COMMON_CONTROL")
+      attr_accessor mapping_type: ("FRAMEWORK" | "COMMON_CONTROL" | "RELATED_CONTROL")
       attr_accessor mapping: Types::Mapping
       SENSITIVE: []
     end
@@ -61,7 +61,7 @@ module Aws::ControlCatalog
     class ControlMappingFilter
       attr_accessor control_arns: ::Array[::String]
       attr_accessor common_control_arns: ::Array[::String]
-      attr_accessor mapping_types: ::Array[("FRAMEWORK" | "COMMON_CONTROL")]
+      attr_accessor mapping_types: ::Array[("FRAMEWORK" | "COMMON_CONTROL" | "RELATED_CONTROL")]
       SENSITIVE: []
     end
 
@@ -213,12 +213,15 @@ module Aws::ControlCatalog
     class Mapping
       attr_accessor framework: Types::FrameworkMappingDetails
       attr_accessor common_control: Types::CommonControlMappingDetails
+      attr_accessor related_control: Types::RelatedControlMappingDetails
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Framework < Mapping
       end
       class CommonControl < Mapping
+      end
+      class RelatedControl < Mapping
       end
       class Unknown < Mapping
       end
@@ -247,6 +250,12 @@ module Aws::ControlCatalog
     class RegionConfiguration
       attr_accessor scope: ("GLOBAL" | "REGIONAL")
       attr_accessor deployable_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RelatedControlMappingDetails
+      attr_accessor control_arn: ::String
+      attr_accessor relation_type: ("COMPLEMENTARY" | "ALTERNATIVE" | "MUTUALLY_EXCLUSIVE")
       SENSITIVE: []
     end
 

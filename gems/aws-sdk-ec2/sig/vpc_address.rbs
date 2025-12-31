@@ -54,7 +54,7 @@ module Aws
       def subnet_id: () -> ::String
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/VpcAddress.html#service_managed-instance_method
-      def service_managed: () -> ("alb" | "nlb" | "rnat")
+      def service_managed: () -> ("alb" | "nlb" | "rnat" | "rds")
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/VpcAddress.html#instance_id-instance_method
       def instance_id: () -> ::String

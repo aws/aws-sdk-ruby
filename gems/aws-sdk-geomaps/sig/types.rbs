@@ -80,6 +80,10 @@ module Aws::GeoMaps
       attr_accessor style: ("Standard" | "Monochrome" | "Hybrid" | "Satellite")
       attr_accessor color_scheme: ("Light" | "Dark")
       attr_accessor political_view: ::String
+      attr_accessor terrain: ("Hillshade")
+      attr_accessor contour_density: ("Medium")
+      attr_accessor traffic: ("All")
+      attr_accessor travel_modes: ::Array[("Transit" | "Truck")]
       attr_accessor key: ::String
       SENSITIVE: [:political_view, :key]
     end
@@ -93,6 +97,7 @@ module Aws::GeoMaps
     end
 
     class GetTileRequest
+      attr_accessor additional_features: ::Array[("ContourLines" | "Hillshade" | "Logistics" | "Transit")]
       attr_accessor tileset: ::String
       attr_accessor z: ::String
       attr_accessor x: ::String

@@ -1,0 +1,156 @@
+{
+  "version": "2.0",
+  "service": "<p> The Amazon SageMaker AI runtime HTTP/2 API. </p>",
+  "operations": {
+    "InvokeEndpointWithBidirectionalStream": "<p>Invokes a model endpoint with bidirectional streaming capabilities. This operation establishes a persistent connection that allows you to send multiple requests and receive streaming responses from the model in real-time.</p> <p>Bidirectional streaming is useful for interactive applications such as chatbots, real-time translation, or any scenario where you need to maintain a conversation-like interaction with the model. The connection remains open, allowing you to send additional input and receive responses without establishing a new connection for each request.</p> <p>For an overview of Amazon SageMaker AI, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html\">How It Works</a>.</p> <p>Amazon SageMaker AI strips all POST headers except those supported by the API. Amazon SageMaker AI might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax. </p> <p>Calls to <code>InvokeEndpointWithBidirectionalStream</code> are authenticated by using Amazon Web Services Signature Version 4. For information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html\">Authenticating Requests (Amazon Web Services Signature Version 4)</a> in the <i>Amazon S3 API Reference</i>.</p> <p>The bidirectional stream maintains the connection until either the client closes it or the model indicates completion. Each request and response in the stream is sent as an event with optional headers for data type and completion state.</p> <note> <p>Endpoints are scoped to an individual account, and are not public. The URL does not contain the account ID, but Amazon SageMaker AI determines the account ID from the authentication token that is supplied by the caller.</p> </note>"
+  },
+  "shapes": {
+    "InputValidationError": {
+      "base": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
+      "refs": {}
+    },
+    "Integer": {
+      "base": null,
+      "refs": {
+        "ModelError$OriginalStatusCode": "<p>HTTP status code returned by model.</p>"
+      }
+    },
+    "InternalServerError": {
+      "base": "<p>The request processing has failed because of an unknown error, exception or failure.</p>",
+      "refs": {}
+    },
+    "InternalStreamFailure": {
+      "base": "<p>Internal stream failure that occurs during streaming.</p>",
+      "refs": {
+        "ResponseStreamEvent$InternalStreamFailure": "<p>Internal stream failure event.</p>"
+      }
+    },
+    "InvokeEndpointWithBidirectionalStreamInput": {
+      "base": null,
+      "refs": {}
+    },
+    "InvokeEndpointWithBidirectionalStreamInputEndpointNameString": {
+      "base": null,
+      "refs": {
+        "InvokeEndpointWithBidirectionalStreamInput$EndpointName": "<p>The name of the endpoint to invoke.</p>"
+      }
+    },
+    "InvokeEndpointWithBidirectionalStreamInputModelInvocationPathString": {
+      "base": null,
+      "refs": {
+        "InvokeEndpointWithBidirectionalStreamInput$ModelInvocationPath": "<p>Model invocation path.</p>"
+      }
+    },
+    "InvokeEndpointWithBidirectionalStreamInputModelQueryStringString": {
+      "base": null,
+      "refs": {
+        "InvokeEndpointWithBidirectionalStreamInput$ModelQueryString": "<p>Model query string.</p>"
+      }
+    },
+    "InvokeEndpointWithBidirectionalStreamInputTargetVariantString": {
+      "base": null,
+      "refs": {
+        "InvokeEndpointWithBidirectionalStreamInput$TargetVariant": "<p>Target variant for the request.</p>"
+      }
+    },
+    "InvokeEndpointWithBidirectionalStreamOutput": {
+      "base": null,
+      "refs": {}
+    },
+    "InvokeEndpointWithBidirectionalStreamOutputInvokedProductionVariantString": {
+      "base": null,
+      "refs": {
+        "InvokeEndpointWithBidirectionalStreamOutput$InvokedProductionVariant": "<p>The invoked production variant.</p>"
+      }
+    },
+    "ModelError": {
+      "base": "<p>An error occurred while processing the model.</p>",
+      "refs": {}
+    },
+    "ModelStreamError": {
+      "base": "<p>Model stream error that occurs during streaming.</p>",
+      "refs": {
+        "ResponseStreamEvent$ModelStreamError": "<p>Model stream error event.</p>"
+      }
+    },
+    "RequestPayloadPart": {
+      "base": "<p>Request payload part structure.</p>",
+      "refs": {
+        "RequestStreamEvent$PayloadPart": "<p>Payload part event.</p>"
+      }
+    },
+    "RequestPayloadPartCompletionStateString": {
+      "base": null,
+      "refs": {
+        "RequestPayloadPart$CompletionState": "<p>Completion state header. Can be one of these possible values: \"PARTIAL\", \"COMPLETE\".</p>"
+      }
+    },
+    "RequestPayloadPartDataTypeString": {
+      "base": null,
+      "refs": {
+        "RequestPayloadPart$DataType": "<p>Data type header. Can be one of these possible values: \"UTF8\", \"BINARY\".</p>"
+      }
+    },
+    "RequestStreamEvent": {
+      "base": "<p>Request stream event union.</p>",
+      "refs": {
+        "InvokeEndpointWithBidirectionalStreamInput$Body": "<p>The request payload stream.</p>"
+      }
+    },
+    "ResponsePayloadPart": {
+      "base": "<p>Response payload part structure.</p>",
+      "refs": {
+        "ResponseStreamEvent$PayloadPart": "<p>Payload part event.</p>"
+      }
+    },
+    "ResponsePayloadPartCompletionStateString": {
+      "base": null,
+      "refs": {
+        "ResponsePayloadPart$CompletionState": "<p>Completion state header. Can be one of these possible values: \"PARTIAL\", \"COMPLETE\".</p>"
+      }
+    },
+    "ResponsePayloadPartDataTypeString": {
+      "base": null,
+      "refs": {
+        "ResponsePayloadPart$DataType": "<p>Data type header. Can be one of these possible values: \"UTF8\", \"BINARY\".</p>"
+      }
+    },
+    "ResponseStreamEvent": {
+      "base": "<p>Response stream event union.</p>",
+      "refs": {
+        "InvokeEndpointWithBidirectionalStreamOutput$Body": "<p>The response payload stream.</p>"
+      }
+    },
+    "SensitiveBlob": {
+      "base": null,
+      "refs": {
+        "RequestPayloadPart$Bytes": "<p>The payload bytes.</p>",
+        "ResponsePayloadPart$Bytes": "<p>The payload bytes.</p>"
+      }
+    },
+    "ServiceUnavailableError": {
+      "base": "<p>The request has failed due to a temporary failure of the server.</p>",
+      "refs": {}
+    },
+    "String": {
+      "base": null,
+      "refs": {
+        "InputValidationError$Message": "<p>Error message.</p>",
+        "InputValidationError$ErrorCode": "<p>Error code.</p>",
+        "InternalServerError$Message": "<p>Error message.</p>",
+        "InternalServerError$ErrorCode": "<p>Error code.</p>",
+        "InternalStreamFailure$Message": "<p>Error message.</p>",
+        "ModelError$Message": "<p>Error message.</p>",
+        "ModelError$OriginalMessage": "<p>Original error message from the model.</p>",
+        "ModelError$LogStreamArn": "<p>CloudWatch log stream ARN.</p>",
+        "ModelError$ErrorCode": "<p>Error code.</p>",
+        "ModelStreamError$Message": "<p>Error message.</p>",
+        "ModelStreamError$ErrorCode": "<p>Error code.</p>",
+        "RequestPayloadPart$P": "<p>Padding string for alignment.</p>",
+        "ResponsePayloadPart$P": "<p>Padding string for alignment.</p>",
+        "ServiceUnavailableError$Message": "<p>Error message.</p>",
+        "ServiceUnavailableError$ErrorCode": "<p>Error code.</p>"
+      }
+    }
+  }
+}

@@ -634,6 +634,7 @@ module Aws
                                     jam_sync_time: ::String?
                                   }?,
                                   pipeline_locking_settings: {
+                                    pipeline_locking_method: ("SOURCE_TIMECODE" | "VIDEO_ALIGNMENT")?
                                   }?
                                 }?
                               }?,
@@ -1291,6 +1292,8 @@ module Aws
                                         rec_601_settings: {
                                         }?,
                                         rec_709_settings: {
+                                        }?,
+                                        hlg_2020_settings: {
                                         }?
                                       }?,
                                       filter_settings: {
@@ -1405,7 +1408,9 @@ module Aws
                                       }?,
                                       bitrate: ::Integer?,
                                       rate_control_mode: ("CBR" | "QVBR")?,
-                                      min_bitrate: ::Integer?
+                                      min_bitrate: ::Integer?,
+                                      spatial_aq: ("DISABLED" | "ENABLED")?,
+                                      temporal_aq: ("DISABLED" | "ENABLED")?
                                     }?
                                   }?,
                                   height: ::Integer?,
@@ -1593,7 +1598,16 @@ module Aws
                             ?channel_engine_version: {
                               version: ::String?
                             },
-                            ?dry_run: bool
+                            ?dry_run: bool,
+                            ?linked_channel_settings: {
+                              follower_channel_settings: {
+                                linked_channel_type: ("FOLLOWING_CHANNEL" | "PRIMARY_CHANNEL")?,
+                                primary_channel_arn: ::String?
+                              }?,
+                              primary_channel_settings: {
+                                linked_channel_type: ("FOLLOWING_CHANNEL" | "PRIMARY_CHANNEL")?
+                              }?
+                            }
                           ) -> _CreateChannelResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
 
@@ -1638,7 +1652,7 @@ module Aws
                             },
                           ],
                           ?tags: Hash[::String, ::String],
-                          ?type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI"),
+                          ?type: ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI" | "MEDIACONNECT_ROUTER"),
                           ?vpc: {
                             security_group_ids: Array[::String]?,
                             subnet_ids: Array[::String]
@@ -1690,7 +1704,16 @@ module Aws
                               },
                             ]?
                           },
-                          ?sdi_sources: Array[::String]
+                          ?sdi_sources: Array[::String],
+                          ?router_settings: {
+                            destinations: Array[
+                              {
+                                availability_zone_name: ::String
+                              },
+                            ]?,
+                            encryption_type: ("AUTOMATIC" | "SECRETS_MANAGER")?,
+                            secret_arn: ::String?
+                          }
                         ) -> _CreateInputResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInputResponseSuccess
 
@@ -1797,6 +1820,7 @@ module Aws
         def vpc: () -> Types::VpcOutputSettingsDescription
         def anywhere_settings: () -> Types::DescribeAnywhereSettings
         def channel_engine_version: () -> Types::ChannelEngineVersionResponse
+        def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#delete_channel-instance_method
       def delete_channel: (
@@ -1931,6 +1955,7 @@ module Aws
         def vpc: () -> Types::VpcOutputSettingsDescription
         def anywhere_settings: () -> Types::DescribeAnywhereSettings
         def channel_engine_version: () -> Types::ChannelEngineVersionResponse
+        def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#describe_channel-instance_method
       def describe_channel: (
@@ -1955,12 +1980,13 @@ module Aws
         def sources: () -> ::Array[Types::InputSource]
         def state: () -> ("CREATING" | "DETACHED" | "ATTACHED" | "DELETING" | "DELETED")
         def tags: () -> ::Hash[::String, ::String]
-        def type: () -> ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI")
+        def type: () -> ("UDP_PUSH" | "RTP_PUSH" | "RTMP_PUSH" | "RTMP_PULL" | "URL_PULL" | "MP4_FILE" | "MEDIACONNECT" | "INPUT_DEVICE" | "AWS_CDI" | "TS_FILE" | "SRT_CALLER" | "MULTICAST" | "SMPTE_2110_RECEIVER_GROUP" | "SDI" | "MEDIACONNECT_ROUTER")
         def srt_settings: () -> Types::SrtSettings
         def input_network_location: () -> ("AWS" | "ON_PREMISES")
         def multicast_settings: () -> Types::MulticastSettings
         def smpte_2110_receiver_group_settings: () -> Types::Smpte2110ReceiverGroupSettings
         def sdi_sources: () -> ::Array[::String]
+        def router_settings: () -> Types::RouterInputSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#describe_input-instance_method
       def describe_input: (
@@ -2328,6 +2354,7 @@ module Aws
         def vpc: () -> Types::VpcOutputSettingsDescription
         def anywhere_settings: () -> Types::DescribeAnywhereSettings
         def channel_engine_version: () -> Types::ChannelEngineVersionResponse
+        def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#start_channel-instance_method
       def start_channel: (
@@ -2394,6 +2421,7 @@ module Aws
         def vpc: () -> Types::VpcOutputSettingsDescription
         def anywhere_settings: () -> Types::DescribeAnywhereSettings
         def channel_engine_version: () -> Types::ChannelEngineVersionResponse
+        def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#stop_channel-instance_method
       def stop_channel: (
@@ -2774,6 +2802,7 @@ module Aws
                                     jam_sync_time: ::String?
                                   }?,
                                   pipeline_locking_settings: {
+                                    pipeline_locking_method: ("SOURCE_TIMECODE" | "VIDEO_ALIGNMENT")?
                                   }?
                                 }?
                               }?,
@@ -3431,6 +3460,8 @@ module Aws
                                         rec_601_settings: {
                                         }?,
                                         rec_709_settings: {
+                                        }?,
+                                        hlg_2020_settings: {
                                         }?
                                       }?,
                                       filter_settings: {
@@ -3545,7 +3576,9 @@ module Aws
                                       }?,
                                       bitrate: ::Integer?,
                                       rate_control_mode: ("CBR" | "QVBR")?,
-                                      min_bitrate: ::Integer?
+                                      min_bitrate: ::Integer?,
+                                      spatial_aq: ("DISABLED" | "ENABLED")?,
+                                      temporal_aq: ("DISABLED" | "ENABLED")?
                                     }?
                                   }?,
                                   height: ::Integer?,
@@ -3726,6 +3759,15 @@ module Aws
                             ?anywhere_settings: {
                               channel_placement_group_id: ::String?,
                               cluster_id: ::String?
+                            },
+                            ?linked_channel_settings: {
+                              follower_channel_settings: {
+                                linked_channel_type: ("FOLLOWING_CHANNEL" | "PRIMARY_CHANNEL")?,
+                                primary_channel_arn: ::String?
+                              }?,
+                              primary_channel_settings: {
+                                linked_channel_type: ("FOLLOWING_CHANNEL" | "PRIMARY_CHANNEL")?
+                              }?
                             }
                           ) -> _UpdateChannelResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
@@ -3859,7 +3901,10 @@ module Aws
                               },
                             ]?
                           },
-                          ?sdi_sources: Array[::String]
+                          ?sdi_sources: Array[::String],
+                          ?special_router_settings: {
+                            router_arn: ::String?
+                          }
                         ) -> _UpdateInputResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInputResponseSuccess
 
@@ -4045,6 +4090,7 @@ module Aws
         def vpc: () -> Types::VpcOutputSettingsDescription
         def anywhere_settings: () -> Types::DescribeAnywhereSettings
         def channel_engine_version: () -> Types::ChannelEngineVersionResponse
+        def linked_channel_settings: () -> Types::DescribeLinkedChannelSettings
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#restart_channel_pipelines-instance_method
       def restart_channel_pipelines: (
@@ -5099,6 +5145,48 @@ module Aws
                                ?type: ("SINGLE" | "QUAD")
                              ) -> _UpdateSdiSourceResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSdiSourceResponseSuccess
+
+      interface _ListAlertsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAlertsResponse]
+        def alerts: () -> ::Array[Types::ChannelAlert]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#list_alerts-instance_method
+      def list_alerts: (
+                         channel_id: ::String,
+                         ?max_results: ::Integer,
+                         ?next_token: ::String,
+                         ?state_filter: ::String
+                       ) -> _ListAlertsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAlertsResponseSuccess
+
+      interface _ListClusterAlertsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterAlertsResponse]
+        def alerts: () -> ::Array[Types::ClusterAlert]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#list_cluster_alerts-instance_method
+      def list_cluster_alerts: (
+                                 cluster_id: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 ?state_filter: ::String
+                               ) -> _ListClusterAlertsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterAlertsResponseSuccess
+
+      interface _ListMultiplexAlertsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMultiplexAlertsResponse]
+        def alerts: () -> ::Array[Types::MultiplexAlert]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#list_multiplex_alerts-instance_method
+      def list_multiplex_alerts: (
+                                   ?max_results: ::Integer,
+                                   multiplex_id: ::String,
+                                   ?next_token: ::String,
+                                   ?state_filter: ::String
+                                 ) -> _ListMultiplexAlertsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMultiplexAlertsResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#wait_until-instance_method
       def wait_until: (:channel_created waiter_name, 

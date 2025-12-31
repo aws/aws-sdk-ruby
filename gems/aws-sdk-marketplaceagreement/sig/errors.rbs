@@ -12,28 +12,28 @@ module Aws
       end
 
       class AccessDeniedException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
         def request_id: () -> ::String
+        def message: () -> ::String
       end
       class InternalServerException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
         def request_id: () -> ::String
+        def message: () -> ::String
       end
       class ResourceNotFoundException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
         def request_id: () -> ::String
+        def message: () -> ::String
         def resource_id: () -> ::String
         def resource_type: () -> ::String
       end
       class ThrottlingException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
         def request_id: () -> ::String
+        def message: () -> ::String
       end
       class ValidationException < ::Aws::Errors::ServiceError
-        def fields: () -> ::String
+        def request_id: () -> ::String
         def message: () -> ::String
         def reason: () -> ::String
-        def request_id: () -> ::String
+        def fields: () -> ::String
       end
     end
   end

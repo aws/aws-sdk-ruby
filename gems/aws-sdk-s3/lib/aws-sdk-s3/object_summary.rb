@@ -354,13 +354,15 @@ module Aws::S3
     #     grant_read: "GrantRead",
     #     grant_read_acp: "GrantReadACP",
     #     grant_write_acp: "GrantWriteACP",
+    #     if_match: "IfMatch",
+    #     if_none_match: "IfNoneMatch",
     #     metadata: {
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     metadata_directive: "COPY", # accepts COPY, REPLACE
     #     tagging_directive: "COPY", # accepts COPY, REPLACE
     #     server_side_encryption: "AES256", # accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS, FSX_ONTAP
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -610,6 +612,35 @@ module Aws::S3
     #   * This functionality is not supported for Amazon S3 on Outposts.
     #
     #    </note>
+    # @option options [String] :if_match
+    #   Copies the object if the entity tag (ETag) of the destination object
+    #   matches the specified tag. If the ETag values do not match, the
+    #   operation returns a `412 Precondition Failed` error. If a concurrent
+    #   operation occurs during the upload S3 returns a `409
+    #   ConditionalRequestConflict` response. On a 409 failure you should
+    #   fetch the object's ETag and retry the upload.
+    #
+    #   Expects the ETag value as a string.
+    #
+    #   For more information about conditional requests, see [RFC 7232][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc7232
+    # @option options [String] :if_none_match
+    #   Copies the object only if the object key name at the destination does
+    #   not already exist in the bucket specified. Otherwise, Amazon S3
+    #   returns a `412 Precondition Failed` error. If a concurrent operation
+    #   occurs during the upload S3 returns a `409 ConditionalRequestConflict`
+    #   response. On a 409 failure you should retry the upload.
+    #
+    #   Expects the '*' (asterisk) character.
+    #
+    #   For more information about conditional requests, see [RFC 7232][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc7232
     # @option options [Hash<String,String>] :metadata
     #   A map of metadata to store with the object in S3.
     # @option options [String] :metadata_directive
@@ -1132,17 +1163,15 @@ module Aws::S3
     #   you provide does not match the actual owner of the bucket, the request
     #   fails with the HTTP status code `403 Forbidden` (access denied).
     # @option options [String] :if_match
-    #   The `If-Match` header field makes the request method conditional on
-    #   ETags. If the ETag value does not match, the operation returns a `412
-    #   Precondition Failed` error. If the ETag matches or if the object
-    #   doesn't exist, the operation will return a `204 Success (No Content)
-    #   response`.
+    #   Deletes the object if the ETag (entity tag) value provided during the
+    #   delete operation matches the ETag of the object in S3. If the ETag
+    #   values do not match, the operation returns a `412 Precondition Failed`
+    #   error.
+    #
+    #   Expects the ETag value as a string. `If-Match` does accept a string
+    #   value of an '*' (asterisk) character to denote a match of any ETag.
     #
     #   For more information about conditional requests, see [RFC 7232][1].
-    #
-    #   <note markdown="1"> This functionality is only supported for directory buckets.
-    #
-    #    </note>
     #
     #
     #
@@ -1457,7 +1486,7 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS, FSX_ONTAP
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -2058,7 +2087,7 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:fsx, aws:kms, aws:kms:dsse
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS, FSX_ONTAP
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -2733,7 +2762,7 @@ module Aws::S3
     #               value: "MetadataValue",
     #             },
     #           ],
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR, SNOW, EXPRESS_ONEZONE, FSX_OPENZFS, FSX_ONTAP
     #         },
     #       },
     #     },

@@ -271,6 +271,16 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class AudioConfiguration
+      attr_accessor segmentation_configuration: Types::AudioSegmentationConfiguration
+      SENSITIVE: []
+    end
+
+    class AudioSegmentationConfiguration
+      attr_accessor fixed_length_duration: ::Integer
+      SENSITIVE: []
+    end
+
     class AutoToolChoice < Aws::EmptyStructure
     end
 
@@ -282,6 +292,8 @@ module Aws::BedrockAgent
     class BedrockEmbeddingModelConfiguration
       attr_accessor dimensions: ::Integer
       attr_accessor embedding_data_type: ("FLOAT32" | "BINARY")
+      attr_accessor audio: ::Array[Types::AudioConfiguration]
+      attr_accessor video: ::Array[Types::VideoConfiguration]
       SENSITIVE: []
     end
 
@@ -2974,6 +2986,16 @@ module Aws::BedrockAgent
     class VectorSearchRerankingConfiguration
       attr_accessor type: ("BEDROCK_RERANKING_MODEL")
       attr_accessor bedrock_reranking_configuration: Types::VectorSearchBedrockRerankingConfiguration
+      SENSITIVE: []
+    end
+
+    class VideoConfiguration
+      attr_accessor segmentation_configuration: Types::VideoSegmentationConfiguration
+      SENSITIVE: []
+    end
+
+    class VideoSegmentationConfiguration
+      attr_accessor fixed_length_duration: ::Integer
       SENSITIVE: []
     end
 

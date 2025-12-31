@@ -230,7 +230,7 @@ module Aws::NetworkFlowMonitor
     end
 
     class MonitorLocalResource
-      attr_accessor type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::Region")
+      attr_accessor type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::Region" | "AWS::EKS::Cluster")
       attr_accessor identifier: ::String
       SENSITIVE: []
     end

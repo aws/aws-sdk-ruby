@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.55.0 (2025-10-31)
+------------------
+
+* Feature - Added two new case rule types: Parent Child Field Options (restricts child field options based on parent field value) and Hidden (controls child field visibility based on parent field value). Both enable dynamic field behavior within templates.
+
+1.54.0 (2025-10-30)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.53.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.52.0 (2025-10-02)
 ------------------
 

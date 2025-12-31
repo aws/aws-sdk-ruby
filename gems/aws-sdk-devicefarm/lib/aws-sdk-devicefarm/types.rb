@@ -464,12 +464,32 @@ module Aws::DeviceFarm
     #   The VPC security groups and subnets that are attached to a project.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] environment_variables
+    #   A set of environment variables which are used by default for all
+    #   runs in the project. These environment variables are applied to the
+    #   test run during the execution of a test spec file.
+    #
+    #   For more information about using test spec files, please see [Custom
+    #   test environments ][1] in *AWS Device Farm.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/custom-test-environments.html
+    #   @return [Array<Types::EnvironmentVariable>]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   An IAM role to be assumed by the test host for all runs in the
+    #   project.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateProjectRequest AWS API Documentation
     #
     class CreateProjectRequest < Struct.new(
       :name,
       :default_job_timeout_minutes,
-      :vpc_config)
+      :vpc_config,
+      :environment_variables,
+      :execution_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -491,6 +511,11 @@ module Aws::DeviceFarm
     # Configuration settings for a remote access session, including billing
     # method.
     #
+    # @!attribute [rw] auxiliary_apps
+    #   A list of upload ARNs for app packages to be installed onto your
+    #   device. (Maximum 3)
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] billing_method
     #   The billing method for the remote access session.
     #   @return [String]
@@ -507,6 +532,7 @@ module Aws::DeviceFarm
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSessionConfiguration AWS API Documentation
     #
     class CreateRemoteAccessSessionConfiguration < Struct.new(
+      :auxiliary_apps,
       :billing_method,
       :vpce_configuration_arns,
       :device_proxy)
@@ -526,59 +552,18 @@ module Aws::DeviceFarm
     #   session.
     #   @return [String]
     #
+    # @!attribute [rw] app_arn
+    #   The Amazon Resource Name (ARN) of the app to create the remote
+    #   access session.
+    #   @return [String]
+    #
     # @!attribute [rw] instance_arn
     #   The Amazon Resource Name (ARN) of the device instance for which you
     #   want to create a remote access session.
     #   @return [String]
     #
-    # @!attribute [rw] ssh_public_key
-    #   Ignored. The public key of the `ssh` key pair you want to use for
-    #   connecting to remote devices in your remote debugging session. This
-    #   key is required only if `remoteDebugEnabled` is set to `true`.
-    #
-    #   Remote debugging is [no longer supported][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
-    #   @return [String]
-    #
-    # @!attribute [rw] remote_debug_enabled
-    #   Set to `true` if you want to access devices remotely for debugging
-    #   in your remote access session.
-    #
-    #   Remote debugging is [no longer supported][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] remote_record_enabled
-    #   Set to `true` to enable remote recording for the remote access
-    #   session.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] remote_record_app_arn
-    #   The Amazon Resource Name (ARN) for the app to be recorded in the
-    #   remote access session.
-    #   @return [String]
-    #
     # @!attribute [rw] name
     #   The name of the remote access session to create.
-    #   @return [String]
-    #
-    # @!attribute [rw] client_id
-    #   Unique identifier for the client. If you want access to multiple
-    #   devices on the same client, you should pass the same `clientId`
-    #   value in each call to `CreateRemoteAccessSession`. This identifier
-    #   is required only if `remoteDebugEnabled` is set to `true`.
-    #
-    #   Remote debugging is [no longer supported][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #   @return [String]
     #
     # @!attribute [rw] configuration
@@ -586,20 +571,8 @@ module Aws::DeviceFarm
     #   @return [Types::CreateRemoteAccessSessionConfiguration]
     #
     # @!attribute [rw] interaction_mode
-    #   The interaction mode of the remote access session. Valid values are:
-    #
-    #   * INTERACTIVE: You can interact with the iOS device by viewing,
-    #     touching, and rotating the screen. You cannot run XCUITest
-    #     framework-based tests in this mode.
-    #
-    #   * NO\_VIDEO: You are connected to the device, but cannot interact
-    #     with it or view the screen. This mode has the fastest test
-    #     execution speed. You can run XCUITest framework-based tests in
-    #     this mode.
-    #
-    #   * VIDEO\_ONLY: You can view the screen, but cannot touch or rotate
-    #     it. You can run XCUITest framework-based tests and watch the
-    #     screen in this mode.
+    #   The interaction mode of the remote access session. Changing the
+    #   interactive mode of remote access sessions is no longer available.
     #   @return [String]
     #
     # @!attribute [rw] skip_app_resign
@@ -620,13 +593,9 @@ module Aws::DeviceFarm
     class CreateRemoteAccessSessionRequest < Struct.new(
       :project_arn,
       :device_arn,
+      :app_arn,
       :instance_arn,
-      :ssh_public_key,
-      :remote_debug_enabled,
-      :remote_record_enabled,
-      :remote_record_app_arn,
       :name,
-      :client_id,
       :configuration,
       :interaction_mode,
       :skip_app_resign)
@@ -1648,6 +1617,25 @@ module Aws::DeviceFarm
       :filters,
       :matched_devices_count,
       :max_devices)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an environment variable for a project or a run.
+    #
+    # @!attribute [rw] name
+    #   The name of the environment variable.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the environment variable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/EnvironmentVariable AWS API Documentation
+    #
+    class EnvironmentVariable < Struct.new(
+      :name,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3317,9 +3305,9 @@ module Aws::DeviceFarm
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource or resources for
     #   which to list tags. You can associate tags with the following Device
-    #   Farm resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`,
-    #   `INSTANCE_PROFILE`, `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`,
-    #   `DEVICE`, and `VPCE_CONFIGURATION`.
+    #   Farm resources: `PROJECT`, `TESTGRID_PROJECT`, `RUN`,
+    #   `NETWORK_PROFILE`, `INSTANCE_PROFILE`, `DEVICE_INSTANCE`, `SESSION`,
+    #   `DEVICE_POOL`, `DEVICE`, and `VPCE_CONFIGURATION`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTagsForResourceRequest AWS API Documentation
@@ -4148,6 +4136,14 @@ module Aws::DeviceFarm
     #   The VPC security groups and subnets that are attached to a project.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] environment_variables
+    #   Environment variables associated with the project.
+    #   @return [Array<Types::EnvironmentVariable>]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The IAM execution role associated with the project.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Project AWS API Documentation
     #
     class Project < Struct.new(
@@ -4155,7 +4151,9 @@ module Aws::DeviceFarm
       :name,
       :default_job_timeout_minutes,
       :created,
-      :vpc_config)
+      :vpc_config,
+      :environment_variables,
+      :execution_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4251,6 +4249,28 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # Represents the remote endpoints for viewing and controlling a device
+    # during a remote access session.
+    #
+    # @!attribute [rw] remote_driver_endpoint
+    #   URL for controlling the device using WebDriver-compliant clients,
+    #   like Appium, during the remote access session.
+    #   @return [String]
+    #
+    # @!attribute [rw] interactive_endpoint
+    #   URL for viewing and interacting with the device during the remote
+    #   access session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RemoteAccessEndpoints AWS API Documentation
+    #
+    class RemoteAccessEndpoints < Struct.new(
+      :remote_driver_endpoint,
+      :interactive_endpoint)
+      SENSITIVE = [:remote_driver_endpoint, :interactive_endpoint]
+      include Aws::Structure
+    end
+
     # Represents information about the remote access session.
     #
     # @!attribute [rw] arn
@@ -4327,50 +4347,6 @@ module Aws::DeviceFarm
     #   The ARN of the instance.
     #   @return [String]
     #
-    # @!attribute [rw] remote_debug_enabled
-    #   This flag is set to `true` if remote debugging is enabled for the
-    #   remote access session.
-    #
-    #   Remote debugging is [no longer supported][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] remote_record_enabled
-    #   This flag is set to `true` if remote recording is enabled for the
-    #   remote access session.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] remote_record_app_arn
-    #   The ARN for the app to be recorded in the remote access session.
-    #   @return [String]
-    #
-    # @!attribute [rw] host_address
-    #   IP address of the EC2 host where you need to connect to remotely
-    #   debug devices. Only returned if remote debugging is enabled for the
-    #   remote access session.
-    #
-    #   Remote debugging is [no longer supported][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
-    #   @return [String]
-    #
-    # @!attribute [rw] client_id
-    #   Unique identifier of your client for the remote access session. Only
-    #   returned if remote debugging is enabled for the remote access
-    #   session.
-    #
-    #   Remote debugging is [no longer supported][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
-    #   @return [String]
-    #
     # @!attribute [rw] billing_method
     #   The billing method of the remote access session. Possible values
     #   include `METERED` or `UNMETERED`. For more information about metered
@@ -4387,7 +4363,9 @@ module Aws::DeviceFarm
     #   @return [Types::DeviceMinutes]
     #
     # @!attribute [rw] endpoint
-    #   The endpoint for the remote access sesssion.
+    #   The endpoint for the remote access session. This field is
+    #   deprecated, and is replaced by the new
+    #   `endpoints.interactiveEndpoint` field.
     #   @return [String]
     #
     # @!attribute [rw] device_udid
@@ -4402,20 +4380,8 @@ module Aws::DeviceFarm
     #   @return [String]
     #
     # @!attribute [rw] interaction_mode
-    #   The interaction mode of the remote access session. Valid values are:
-    #
-    #   * INTERACTIVE: You can interact with the iOS device by viewing,
-    #     touching, and rotating the screen. You cannot run XCUITest
-    #     framework-based tests in this mode.
-    #
-    #   * NO\_VIDEO: You are connected to the device, but cannot interact
-    #     with it or view the screen. This mode has the fastest test
-    #     execution speed. You can run XCUITest framework-based tests in
-    #     this mode.
-    #
-    #   * VIDEO\_ONLY: You can view the screen, but cannot touch or rotate
-    #     it. You can run XCUITest framework-based tests and watch the
-    #     screen in this mode.
+    #   The interaction mode of the remote access session. Changing the
+    #   interactive mode of remote access sessions is no longer available.
     #   @return [String]
     #
     # @!attribute [rw] skip_app_resign
@@ -4439,6 +4405,15 @@ module Aws::DeviceFarm
     #   The device proxy configured for the remote access session.
     #   @return [Types::DeviceProxy]
     #
+    # @!attribute [rw] app_upload
+    #   The ARN for the app to be installed onto your device.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoints
+    #   Represents the remote endpoints for viewing and controlling a device
+    #   during a remote access session.
+    #   @return [Types::RemoteAccessEndpoints]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RemoteAccessSession AWS API Documentation
     #
     class RemoteAccessSession < Struct.new(
@@ -4452,11 +4427,6 @@ module Aws::DeviceFarm
       :stopped,
       :device,
       :instance_arn,
-      :remote_debug_enabled,
-      :remote_record_enabled,
-      :remote_record_app_arn,
-      :host_address,
-      :client_id,
       :billing_method,
       :device_minutes,
       :endpoint,
@@ -4464,7 +4434,9 @@ module Aws::DeviceFarm
       :interaction_mode,
       :skip_app_resign,
       :vpc_config,
-      :device_proxy)
+      :device_proxy,
+      :app_upload,
+      :endpoints)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4877,6 +4849,14 @@ module Aws::DeviceFarm
     #   The VPC security groups and subnets that are attached to a project.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] execution_role_arn
+    #   The IAM role associated with the run.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_variables
+    #   Environment variables associated with the run.
+    #   @return [Array<Types::EnvironmentVariable>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Run AWS API Documentation
     #
     class Run < Struct.new(
@@ -4912,7 +4892,9 @@ module Aws::DeviceFarm
       :skip_app_resign,
       :test_spec_arn,
       :device_selection_result,
-      :vpc_config)
+      :vpc_config,
+      :execution_role_arn,
+      :environment_variables)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5039,6 +5021,14 @@ module Aws::DeviceFarm
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] environment_variables
+    #   Environment variables associated with the run.
+    #   @return [Array<Types::EnvironmentVariable>]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   An IAM role to be assumed by the test host for the run.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRunConfiguration AWS API Documentation
     #
     class ScheduleRunConfiguration < Struct.new(
@@ -5051,7 +5041,9 @@ module Aws::DeviceFarm
       :customer_artifact_paths,
       :radios,
       :auxiliary_apps,
-      :billing_method)
+      :billing_method,
+      :environment_variables,
+      :execution_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5543,9 +5535,9 @@ module Aws::DeviceFarm
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource or resources to which
     #   to add tags. You can associate tags with the following Device Farm
-    #   resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
-    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
-    #   `VPCE_CONFIGURATION`.
+    #   resources: `PROJECT`, `TESTGRID_PROJECT`, `RUN`, `NETWORK_PROFILE`,
+    #   `INSTANCE_PROFILE`, `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`,
+    #   `DEVICE`, and `VPCE_CONFIGURATION`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -5924,9 +5916,9 @@ module Aws::DeviceFarm
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource or resources from
     #   which to delete tags. You can associate tags with the following
-    #   Device Farm resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`,
-    #   `INSTANCE_PROFILE`, `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`,
-    #   `DEVICE`, and `VPCE_CONFIGURATION`.
+    #   Device Farm resources: `PROJECT`, `TESTGRID_PROJECT`, `RUN`,
+    #   `NETWORK_PROFILE`, `INSTANCE_PROFILE`, `DEVICE_INSTANCE`, `SESSION`,
+    #   `DEVICE_POOL`, `DEVICE`, and `VPCE_CONFIGURATION`.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -6222,13 +6214,33 @@ module Aws::DeviceFarm
     #   The VPC security groups and subnets that are attached to a project.
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] environment_variables
+    #   A set of environment variables which are used by default for all
+    #   runs in the project. These environment variables are applied to the
+    #   test run during the execution of a test spec file.
+    #
+    #   For more information about using test spec files, please see [Custom
+    #   test environments ][1] in *AWS Device Farm.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/custom-test-environments.html
+    #   @return [Array<Types::EnvironmentVariable>]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   An IAM role to be assumed by the test host for all runs in the
+    #   project.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateProjectRequest AWS API Documentation
     #
     class UpdateProjectRequest < Struct.new(
       :arn,
       :name,
       :default_job_timeout_minutes,
-      :vpc_config)
+      :vpc_config,
+      :environment_variables,
+      :execution_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end

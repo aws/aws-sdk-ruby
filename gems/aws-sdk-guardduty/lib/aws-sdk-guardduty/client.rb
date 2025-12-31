@@ -1004,6 +1004,8 @@ module Aws::GuardDuty
     #           greater_than_or_equal: 1,
     #           less_than: 1,
     #           less_than_or_equal: 1,
+    #           matches: ["Match"],
+    #           not_matches: ["NotMatch"],
     #         },
     #       },
     #     },
@@ -1287,6 +1289,9 @@ module Aws::GuardDuty
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to be added to a new publishing destination resource.
+    #
     # @return [Types::CreatePublishingDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePublishingDestinationResponse#destination_id #destination_id} => String
@@ -1301,6 +1306,9 @@ module Aws::GuardDuty
     #       kms_key_arn: "String",
     #     },
     #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2073,6 +2081,7 @@ module Aws::GuardDuty
     #   resp.scans[0].scan_end_time #=> Time
     #   resp.scans[0].trigger_details.guard_duty_finding_id #=> String
     #   resp.scans[0].trigger_details.description #=> String
+    #   resp.scans[0].trigger_details.trigger_type #=> String, one of "BACKUP", "GUARDDUTY"
     #   resp.scans[0].resource_details.instance_arn #=> String
     #   resp.scans[0].scan_result_details.scan_result #=> String, one of "CLEAN", "INFECTED"
     #   resp.scans[0].account_id #=> String
@@ -2200,6 +2209,7 @@ module Aws::GuardDuty
     #   * {Types::DescribePublishingDestinationResponse#status #status} => String
     #   * {Types::DescribePublishingDestinationResponse#publishing_failure_start_timestamp #publishing_failure_start_timestamp} => Integer
     #   * {Types::DescribePublishingDestinationResponse#destination_properties #destination_properties} => Types::DestinationProperties
+    #   * {Types::DescribePublishingDestinationResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2216,6 +2226,8 @@ module Aws::GuardDuty
     #   resp.publishing_failure_start_timestamp #=> Integer
     #   resp.destination_properties.destination_arn #=> String
     #   resp.destination_properties.kms_key_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribePublishingDestination AWS API Documentation
     #
@@ -2658,6 +2670,10 @@ module Aws::GuardDuty
     #   resp.finding_criteria.criterion["String"].greater_than_or_equal #=> Integer
     #   resp.finding_criteria.criterion["String"].less_than #=> Integer
     #   resp.finding_criteria.criterion["String"].less_than_or_equal #=> Integer
+    #   resp.finding_criteria.criterion["String"].matches #=> Array
+    #   resp.finding_criteria.criterion["String"].matches[0] #=> String
+    #   resp.finding_criteria.criterion["String"].not_matches #=> Array
+    #   resp.finding_criteria.criterion["String"].not_matches[0] #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -2887,6 +2903,7 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.rds_db_instance_details.engine_version #=> String
     #   resp.findings[0].resource.rds_db_instance_details.db_cluster_identifier #=> String
     #   resp.findings[0].resource.rds_db_instance_details.db_instance_arn #=> String
+    #   resp.findings[0].resource.rds_db_instance_details.dbi_resource_id #=> String
     #   resp.findings[0].resource.rds_db_instance_details.tags #=> Array
     #   resp.findings[0].resource.rds_db_instance_details.tags[0].key #=> String
     #   resp.findings[0].resource.rds_db_instance_details.tags[0].value #=> String
@@ -2920,6 +2937,10 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.lambda_details.tags #=> Array
     #   resp.findings[0].resource.lambda_details.tags[0].key #=> String
     #   resp.findings[0].resource.lambda_details.tags[0].value #=> String
+    #   resp.findings[0].resource.ebs_snapshot_details.snapshot_arn #=> String
+    #   resp.findings[0].resource.ec2_image_details.image_arn #=> String
+    #   resp.findings[0].resource.recovery_point_details.recovery_point_arn #=> String
+    #   resp.findings[0].resource.recovery_point_details.backup_vault_name #=> String
     #   resp.findings[0].schema_version #=> String
     #   resp.findings[0].service.action.action_type #=> String
     #   resp.findings[0].service.action.aws_api_call_action.api #=> String
@@ -3203,7 +3224,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.detection.sequence.resources[0].uid #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].name #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].account_id #=> String
-    #   resp.findings[0].service.detection.sequence.resources[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_NETWORK_INTERFACE", "S3_BUCKET", "S3_OBJECT", "ACCESS_KEY", "EKS_CLUSTER", "KUBERNETES_WORKLOAD", "CONTAINER"
+    #   resp.findings[0].service.detection.sequence.resources[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_NETWORK_INTERFACE", "S3_BUCKET", "S3_OBJECT", "ACCESS_KEY", "EKS_CLUSTER", "KUBERNETES_WORKLOAD", "CONTAINER", "ECS_CLUSTER", "ECS_TASK", "AUTOSCALING_AUTO_SCALING_GROUP", "IAM_INSTANCE_PROFILE", "CLOUDFORMATION_STACK", "EC2_LAUNCH_TEMPLATE", "EC2_VPC", "EC2_IMAGE"
     #   resp.findings[0].service.detection.sequence.resources[0].region #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].service #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].cloud_partition #=> String
@@ -3269,6 +3290,27 @@ module Aws::GuardDuty
     #   resp.findings[0].service.detection.sequence.resources[0].data.kubernetes_workload.kubernetes_resources_types #=> String, one of "PODS", "JOBS", "CRONJOBS", "DEPLOYMENTS", "DAEMONSETS", "STATEFULSETS", "REPLICASETS", "REPLICATIONCONTROLLERS"
     #   resp.findings[0].service.detection.sequence.resources[0].data.container.image #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].data.container.image_uid #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ecs_cluster.status #=> String, one of "ACTIVE", "PROVISIONING", "DEPROVISIONING", "FAILED", "INACTIVE"
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ecs_cluster.ec2_instance_uids #=> Array
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ecs_cluster.ec2_instance_uids[0] #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ecs_task.created_at #=> Time
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ecs_task.task_definition_arn #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ecs_task.launch_type #=> String, one of "FARGATE", "EC2"
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ecs_task.container_uids #=> Array
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ecs_task.container_uids[0] #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.iam_instance_profile.ec2_instance_uids #=> Array
+    #   resp.findings[0].service.detection.sequence.resources[0].data.iam_instance_profile.ec2_instance_uids[0] #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.autoscaling_auto_scaling_group.ec2_instance_uids #=> Array
+    #   resp.findings[0].service.detection.sequence.resources[0].data.autoscaling_auto_scaling_group.ec2_instance_uids[0] #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ec2_launch_template.ec2_instance_uids #=> Array
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ec2_launch_template.ec2_instance_uids[0] #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ec2_launch_template.version #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ec2_vpc.ec2_instance_uids #=> Array
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ec2_vpc.ec2_instance_uids[0] #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ec2_image.ec2_instance_uids #=> Array
+    #   resp.findings[0].service.detection.sequence.resources[0].data.ec2_image.ec2_instance_uids[0] #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.cloudformation_stack.ec2_instance_uids #=> Array
+    #   resp.findings[0].service.detection.sequence.resources[0].data.cloudformation_stack.ec2_instance_uids[0] #=> String
     #   resp.findings[0].service.detection.sequence.endpoints #=> Array
     #   resp.findings[0].service.detection.sequence.endpoints[0].id #=> String
     #   resp.findings[0].service.detection.sequence.endpoints[0].ip #=> String
@@ -3316,6 +3358,20 @@ module Aws::GuardDuty
     #   resp.findings[0].service.malware_scan_details.threats[0].item_paths #=> Array
     #   resp.findings[0].service.malware_scan_details.threats[0].item_paths[0].nested_item_path #=> String
     #   resp.findings[0].service.malware_scan_details.threats[0].item_paths[0].hash #=> String
+    #   resp.findings[0].service.malware_scan_details.threats[0].count #=> Integer
+    #   resp.findings[0].service.malware_scan_details.threats[0].hash #=> String
+    #   resp.findings[0].service.malware_scan_details.threats[0].item_details #=> Array
+    #   resp.findings[0].service.malware_scan_details.threats[0].item_details[0].resource_arn #=> String
+    #   resp.findings[0].service.malware_scan_details.threats[0].item_details[0].item_path #=> String
+    #   resp.findings[0].service.malware_scan_details.threats[0].item_details[0].hash #=> String
+    #   resp.findings[0].service.malware_scan_details.threats[0].item_details[0].additional_info.version_id #=> String
+    #   resp.findings[0].service.malware_scan_details.threats[0].item_details[0].additional_info.device_name #=> String
+    #   resp.findings[0].service.malware_scan_details.scan_id #=> String
+    #   resp.findings[0].service.malware_scan_details.scan_type #=> String, one of "BACKUP_INITIATED", "ON_DEMAND", "GUARDDUTY_INITIATED"
+    #   resp.findings[0].service.malware_scan_details.scan_category #=> String, one of "FULL_SCAN", "INCREMENTAL_SCAN"
+    #   resp.findings[0].service.malware_scan_details.scan_configuration.trigger_type #=> String, one of "BACKUP", "GUARDDUTY"
+    #   resp.findings[0].service.malware_scan_details.scan_configuration.incremental_scan_details.baseline_resource_arn #=> String
+    #   resp.findings[0].service.malware_scan_details.unique_threat_count #=> Integer
     #   resp.findings[0].severity #=> Float
     #   resp.findings[0].title #=> String
     #   resp.findings[0].type #=> String
@@ -3402,6 +3458,8 @@ module Aws::GuardDuty
     #           greater_than_or_equal: 1,
     #           less_than: 1,
     #           less_than_or_equal: 1,
+    #           matches: ["Match"],
+    #           not_matches: ["NotMatch"],
     #         },
     #       },
     #     },
@@ -3564,6 +3622,114 @@ module Aws::GuardDuty
     # @param [Hash] params ({})
     def get_malware_protection_plan(params = {}, options = {})
       req = build_request(:get_malware_protection_plan, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the detailed information for a specific malware scan. Each
+    # member account can view the malware scan details for their own
+    # account. An administrator can view malware scan details for all
+    # accounts in the organization.
+    #
+    # There might be regional differences because some data sources might
+    # not be available in all the Amazon Web Services Regions where
+    # GuardDuty is presently supported. For more information, see [Regions
+    # and endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
+    #
+    # @option params [required, String] :scan_id
+    #   A unique identifier that gets generated when you invoke the API
+    #   without any error. Each malware scan has a corresponding scan ID.
+    #   Using this scan ID, you can monitor the status of your malware scan.
+    #
+    # @return [Types::GetMalwareScanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMalwareScanResponse#scan_id #scan_id} => String
+    #   * {Types::GetMalwareScanResponse#detector_id #detector_id} => String
+    #   * {Types::GetMalwareScanResponse#admin_detector_id #admin_detector_id} => String
+    #   * {Types::GetMalwareScanResponse#resource_arn #resource_arn} => String
+    #   * {Types::GetMalwareScanResponse#resource_type #resource_type} => String
+    #   * {Types::GetMalwareScanResponse#scanned_resources_count #scanned_resources_count} => Integer
+    #   * {Types::GetMalwareScanResponse#skipped_resources_count #skipped_resources_count} => Integer
+    #   * {Types::GetMalwareScanResponse#failed_resources_count #failed_resources_count} => Integer
+    #   * {Types::GetMalwareScanResponse#scanned_resources #scanned_resources} => Array&lt;Types::ScannedResource&gt;
+    #   * {Types::GetMalwareScanResponse#scan_configuration #scan_configuration} => Types::ScanConfiguration
+    #   * {Types::GetMalwareScanResponse#scan_category #scan_category} => String
+    #   * {Types::GetMalwareScanResponse#scan_status #scan_status} => String
+    #   * {Types::GetMalwareScanResponse#scan_status_reason #scan_status_reason} => String
+    #   * {Types::GetMalwareScanResponse#scan_type #scan_type} => String
+    #   * {Types::GetMalwareScanResponse#scan_started_at #scan_started_at} => Time
+    #   * {Types::GetMalwareScanResponse#scan_completed_at #scan_completed_at} => Time
+    #   * {Types::GetMalwareScanResponse#scan_result_details #scan_result_details} => Types::GetMalwareScanResultDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_malware_scan({
+    #     scan_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scan_id #=> String
+    #   resp.detector_id #=> String
+    #   resp.admin_detector_id #=> String
+    #   resp.resource_arn #=> String
+    #   resp.resource_type #=> String, one of "EBS_RECOVERY_POINT", "EBS_SNAPSHOT", "EBS_VOLUME", "EC2_AMI", "EC2_INSTANCE", "EC2_RECOVERY_POINT", "S3_RECOVERY_POINT", "S3_BUCKET"
+    #   resp.scanned_resources_count #=> Integer
+    #   resp.skipped_resources_count #=> Integer
+    #   resp.failed_resources_count #=> Integer
+    #   resp.scanned_resources #=> Array
+    #   resp.scanned_resources[0].scanned_resource_arn #=> String
+    #   resp.scanned_resources[0].scanned_resource_type #=> String, one of "EBS_RECOVERY_POINT", "EBS_SNAPSHOT", "EBS_VOLUME", "EC2_AMI", "EC2_INSTANCE", "EC2_RECOVERY_POINT", "S3_RECOVERY_POINT", "S3_BUCKET"
+    #   resp.scanned_resources[0].scanned_resource_status #=> String, one of "RUNNING", "COMPLETED", "COMPLETED_WITH_ISSUES", "FAILED", "SKIPPED"
+    #   resp.scanned_resources[0].scan_status_reason #=> String, one of "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "SNAPSHOT_SIZE_LIMIT_EXCEEDED", "RESOURCE_UNAVAILABLE", "INCONSISTENT_SOURCE", "INCREMENTAL_NO_DIFFERENCE", "NO_EBS_VOLUMES_FOUND", "UNSUPPORTED_PRODUCT_CODE_TYPE", "AMI_SNAPSHOT_LIMIT_EXCEEDED", "UNRELATED_RESOURCES", "BASE_RESOURCE_NOT_SCANNED", "BASE_CREATED_AFTER_TARGET", "UNSUPPORTED_FOR_INCREMENTAL", "UNSUPPORTED_AMI", "UNSUPPORTED_SNAPSHOT", "UNSUPPORTED_COMPOSITE_RECOVERY_POINT"
+    #   resp.scanned_resources[0].resource_details.ebs_volume.volume_arn #=> String
+    #   resp.scanned_resources[0].resource_details.ebs_volume.volume_type #=> String
+    #   resp.scanned_resources[0].resource_details.ebs_volume.device_name #=> String
+    #   resp.scanned_resources[0].resource_details.ebs_volume.volume_size_in_gb #=> Integer
+    #   resp.scanned_resources[0].resource_details.ebs_volume.encryption_type #=> String
+    #   resp.scanned_resources[0].resource_details.ebs_volume.snapshot_arn #=> String
+    #   resp.scanned_resources[0].resource_details.ebs_volume.kms_key_arn #=> String
+    #   resp.scanned_resources[0].resource_details.ebs_snapshot.device_name #=> String
+    #   resp.scan_configuration.role #=> String
+    #   resp.scan_configuration.trigger_details.guard_duty_finding_id #=> String
+    #   resp.scan_configuration.trigger_details.description #=> String
+    #   resp.scan_configuration.trigger_details.trigger_type #=> String, one of "BACKUP", "GUARDDUTY"
+    #   resp.scan_configuration.incremental_scan_details.baseline_resource_arn #=> String
+    #   resp.scan_configuration.recovery_point.backup_vault_name #=> String
+    #   resp.scan_category #=> String, one of "FULL_SCAN", "INCREMENTAL_SCAN"
+    #   resp.scan_status #=> String, one of "RUNNING", "COMPLETED", "COMPLETED_WITH_ISSUES", "FAILED", "SKIPPED"
+    #   resp.scan_status_reason #=> String, one of "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "SNAPSHOT_SIZE_LIMIT_EXCEEDED", "RESOURCE_UNAVAILABLE", "INCONSISTENT_SOURCE", "INCREMENTAL_NO_DIFFERENCE", "NO_EBS_VOLUMES_FOUND", "UNSUPPORTED_PRODUCT_CODE_TYPE", "AMI_SNAPSHOT_LIMIT_EXCEEDED", "UNRELATED_RESOURCES", "BASE_RESOURCE_NOT_SCANNED", "BASE_CREATED_AFTER_TARGET", "UNSUPPORTED_FOR_INCREMENTAL", "UNSUPPORTED_AMI", "UNSUPPORTED_SNAPSHOT", "UNSUPPORTED_COMPOSITE_RECOVERY_POINT"
+    #   resp.scan_type #=> String, one of "BACKUP_INITIATED", "ON_DEMAND", "GUARDDUTY_INITIATED"
+    #   resp.scan_started_at #=> Time
+    #   resp.scan_completed_at #=> Time
+    #   resp.scan_result_details.scan_result_status #=> String, one of "NO_THREATS_FOUND", "THREATS_FOUND"
+    #   resp.scan_result_details.skipped_file_count #=> Integer
+    #   resp.scan_result_details.failed_file_count #=> Integer
+    #   resp.scan_result_details.threat_found_file_count #=> Integer
+    #   resp.scan_result_details.total_file_count #=> Integer
+    #   resp.scan_result_details.total_bytes #=> Integer
+    #   resp.scan_result_details.unique_threat_count #=> Integer
+    #   resp.scan_result_details.threats #=> Array
+    #   resp.scan_result_details.threats[0].name #=> String
+    #   resp.scan_result_details.threats[0].source #=> String, one of "AMAZON", "BITDEFENDER"
+    #   resp.scan_result_details.threats[0].count #=> Integer
+    #   resp.scan_result_details.threats[0].hash #=> String
+    #   resp.scan_result_details.threats[0].item_details #=> Array
+    #   resp.scan_result_details.threats[0].item_details[0].resource_arn #=> String
+    #   resp.scan_result_details.threats[0].item_details[0].item_path #=> String
+    #   resp.scan_result_details.threats[0].item_details[0].hash #=> String
+    #   resp.scan_result_details.threats[0].item_details[0].additional_info.version_id #=> String
+    #   resp.scan_result_details.threats[0].item_details[0].additional_info.device_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMalwareScan AWS API Documentation
+    #
+    # @overload get_malware_scan(params = {})
+    # @param [Hash] params ({})
+    def get_malware_scan(params = {}, options = {})
+      req = build_request(:get_malware_scan, params)
       req.send_request(options)
     end
 
@@ -3830,7 +3996,7 @@ module Aws::GuardDuty
     #
     #   [1]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
     #
-    # @option params [Array<String>] :account_ids
+    # @option params [required, Array<String>] :account_ids
     #   A list of account identifiers of the GuardDuty member account.
     #
     # @return [Types::GetRemainingFreeTrialDaysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3842,7 +4008,7 @@ module Aws::GuardDuty
     #
     #   resp = client.get_remaining_free_trial_days({
     #     detector_id: "DetectorId", # required
-    #     account_ids: ["AccountId"],
+    #     account_ids: ["AccountId"], # required
     #   })
     #
     # @example Response structure
@@ -4607,6 +4773,8 @@ module Aws::GuardDuty
     #           greater_than_or_equal: 1,
     #           less_than: 1,
     #           less_than_or_equal: 1,
+    #           matches: ["Match"],
+    #           not_matches: ["NotMatch"],
     #         },
     #       },
     #     },
@@ -4744,7 +4912,7 @@ module Aws::GuardDuty
     #   this parameter to null on your first call to the list action. For
     #   subsequent calls to the action, fill nextToken in the request with the
     #   value of `NextToken` from the previous response to continue listing
-    #   data.
+    #   data. The default page size is 100 plans.
     #
     # @return [Types::ListMalwareProtectionPlansResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4769,6 +4937,80 @@ module Aws::GuardDuty
     # @param [Hash] params ({})
     def list_malware_protection_plans(params = {}, options = {})
       req = build_request(:list_malware_protection_plans, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of malware scans. Each member account can view the
+    # malware scans for their own accounts. An administrator can view the
+    # malware scans for all of its members' accounts.
+    #
+    # @option params [Integer] :max_results
+    #   You can use this parameter to indicate the maximum number of items
+    #   that you want in the response. The default value is 50. The maximum
+    #   value is 50.
+    #
+    # @option params [String] :next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action, fill nextToken in the request with the
+    #   value of NextToken from the previous response to continue listing
+    #   results.
+    #
+    # @option params [Types::ListMalwareScansFilterCriteria] :filter_criteria
+    #   Represents the criteria used to filter the malware scan entries.
+    #
+    # @option params [Types::SortCriteria] :sort_criteria
+    #   Represents the criteria used for sorting malware scan entries.
+    #
+    # @return [Types::ListMalwareScansResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMalwareScansResponse#scans #scans} => Array&lt;Types::MalwareScan&gt;
+    #   * {Types::ListMalwareScansResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_malware_scans({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     filter_criteria: {
+    #       list_malware_scans_filter_criterion: [
+    #         {
+    #           list_malware_scans_criterion_key: "RESOURCE_ARN", # accepts RESOURCE_ARN, SCAN_ID, ACCOUNT_ID, GUARDDUTY_FINDING_ID, RESOURCE_TYPE, SCAN_START_TIME, SCAN_STATUS, SCAN_TYPE
+    #           filter_condition: {
+    #             equals_value: "NonEmptyString",
+    #             greater_than: 1,
+    #             less_than: 1,
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     sort_criteria: {
+    #       attribute_name: "String",
+    #       order_by: "ASC", # accepts ASC, DESC
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scans #=> Array
+    #   resp.scans[0].resource_arn #=> String
+    #   resp.scans[0].resource_type #=> String, one of "EBS_RECOVERY_POINT", "EBS_SNAPSHOT", "EBS_VOLUME", "EC2_AMI", "EC2_INSTANCE", "EC2_RECOVERY_POINT", "S3_RECOVERY_POINT", "S3_BUCKET"
+    #   resp.scans[0].scan_id #=> String
+    #   resp.scans[0].scan_status #=> String, one of "RUNNING", "COMPLETED", "COMPLETED_WITH_ISSUES", "FAILED", "SKIPPED"
+    #   resp.scans[0].scan_result_status #=> String, one of "NO_THREATS_FOUND", "THREATS_FOUND"
+    #   resp.scans[0].scan_type #=> String, one of "BACKUP_INITIATED", "ON_DEMAND", "GUARDDUTY_INITIATED"
+    #   resp.scans[0].scan_started_at #=> Time
+    #   resp.scans[0].scan_completed_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMalwareScans AWS API Documentation
+    #
+    # @overload list_malware_scans(params = {})
+    # @param [Hash] params ({})
+    def list_malware_scans(params = {}, options = {})
+      req = build_request(:list_malware_scans, params)
       req.send_request(options)
     end
 
@@ -5150,21 +5392,75 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Initiates a malware scan for a specific S3 object. This API allows you
+    # to perform on-demand malware scanning of individual objects in S3
+    # buckets that have Malware Protection for S3 enabled.
+    #
+    # When you use this API, the Amazon Web Services service terms for
+    # GuardDuty Malware Protection apply. For more information, see [Amazon
+    # Web Services service terms for GuardDuty Malware Protection][1].
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/service-terms/#87._Amazon_GuardDuty
+    #
+    # @option params [Types::S3ObjectForSendObjectMalwareScan] :s3_object
+    #   The S3 object information for the object you want to scan. The bucket
+    #   must have a Malware Protection plan configured to use this API.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_object_malware_scan({
+    #     s3_object: {
+    #       bucket: "String",
+    #       key: "String",
+    #       version_id: "String",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SendObjectMalwareScan AWS API Documentation
+    #
+    # @overload send_object_malware_scan(params = {})
+    # @param [Hash] params ({})
+    def send_object_malware_scan(params = {}, options = {})
+      req = build_request(:send_object_malware_scan, params)
+      req.send_request(options)
+    end
+
     # Initiates the malware scan. Invoking this API will automatically
-    # create the [Service-linked role][1] in the corresponding account.
+    # create the [Service-linked role][1] in the corresponding account if
+    # the resourceArn belongs to an EC2 instance.
     #
     # When the malware scan starts, you can use the associated scan ID to
     # track the status of the scan. For more information, see
-    # [DescribeMalwareScans][2].
+    # [ListMalwareScans][2] and [GetMalwareScan][3].
+    #
+    # When you use this API, the Amazon Web Services service terms for
+    # GuardDuty Malware Protection apply. For more information, see [Amazon
+    # Web Services service terms for GuardDuty Malware Protection][4].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/slr-permissions-malware-protection.html
-    # [2]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DescribeMalwareScans.html
+    # [2]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListMalwareScans.html
+    # [3]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_GetMalwareScan.html
+    # [4]: http://aws.amazon.com/service-terms/#87._Amazon_GuardDuty
     #
     # @option params [required, String] :resource_arn
     #   Amazon Resource Name (ARN) of the resource for which you invoked the
     #   API.
+    #
+    # @option params [String] :client_token
+    #   The idempotency token for the create request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Types::StartMalwareScanConfiguration] :scan_configuration
+    #   Contains information about the configuration to be used for the
+    #   malware scan.
     #
     # @return [Types::StartMalwareScanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5174,6 +5470,16 @@ module Aws::GuardDuty
     #
     #   resp = client.start_malware_scan({
     #     resource_arn: "ResourceArn", # required
+    #     client_token: "ClientToken",
+    #     scan_configuration: {
+    #       role: "NonEmptyString", # required
+    #       incremental_scan_details: {
+    #         baseline_resource_arn: "NonEmptyString", # required
+    #       },
+    #       recovery_point: {
+    #         backup_vault_name: "String", # required
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -5533,6 +5839,8 @@ module Aws::GuardDuty
     #           greater_than_or_equal: 1,
     #           less_than: 1,
     #           less_than_or_equal: 1,
+    #           matches: ["Match"],
+    #           not_matches: ["NotMatch"],
     #         },
     #       },
     #     },
@@ -5581,7 +5889,7 @@ module Aws::GuardDuty
     #     detector_id: "DetectorId", # required
     #     finding_ids: ["FindingId"], # required
     #     feedback: "USEFUL", # required, accepts USEFUL, NOT_USEFUL
-    #     comments: "String",
+    #     comments: "SensitiveString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedback AWS API Documentation
@@ -6209,7 +6517,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.129.0'
+      context[:gem_version] = '1.139.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

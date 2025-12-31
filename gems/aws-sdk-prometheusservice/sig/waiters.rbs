@@ -9,6 +9,28 @@ module Aws
   module PrometheusService
     module Waiters
 
+      class AnomalyDetectorActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    workspace_id: ::String,
+                    anomaly_detector_id: ::String
+                  ) -> Client::_DescribeAnomalyDetectorResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeAnomalyDetectorResponseSuccess
+      end
+
+      class AnomalyDetectorDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    workspace_id: ::String,
+                    anomaly_detector_id: ::String
+                  ) -> Client::_DescribeAnomalyDetectorResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeAnomalyDetectorResponseSuccess
+      end
+
       class ScraperActive
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void

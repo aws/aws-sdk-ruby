@@ -153,6 +153,20 @@ module Aws::RDS
       data[:preferred_maintenance_window]
     end
 
+    # This data type represents the order in which the instances are
+    # upgraded.
+    #
+    # * \[first\] - Typically used for development or testing environments.
+    #
+    # * \[second\] - Default order for resources not specifically
+    #   configured.
+    #
+    # * \[last\] - Usually reserved for production environments.
+    # @return [String]
+    def upgrade_rollout_order
+      data[:upgrade_rollout_order]
+    end
+
     # Information about pending changes to the DB instance. This information
     # is returned only when there are pending changes. Specific changes are
     # identified by subelements.
@@ -816,6 +830,22 @@ module Aws::RDS
       data[:engine_lifecycle_support]
     end
 
+    # The additional storage volumes associated with the DB instance. RDS
+    # supports additional storage volumes for RDS for Oracle and RDS for SQL
+    # Server.
+    # @return [Array<Types::AdditionalStorageVolumeOutput>]
+    def additional_storage_volumes
+      data[:additional_storage_volumes]
+    end
+
+    # The detailed status information for storage volumes associated with
+    # the DB instance. This information helps identify which specific volume
+    # is causing the instance to be in a storage-full state.
+    # @return [String]
+    def storage_volume_status
+      data[:storage_volume_status]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -1030,7 +1060,28 @@ module Aws::RDS
     #     multi_tenant: false,
     #     dedicated_log_volume: false,
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -1337,6 +1388,8 @@ module Aws::RDS
     #   * `oracle-se2-cdb`
     #
     #   * `postgres`
+    #
+    #   * `sqlserver-dev-ee`
     #
     #   * `sqlserver-ee`
     #
@@ -1729,37 +1782,28 @@ module Aws::RDS
     #   Specifies whether the DB instance is publicly accessible.
     #
     #   When the DB instance is publicly accessible and you connect from
-    #   outside of the DB instance's virtual private cloud (VPC), its Domain
-    #   Name System (DNS) endpoint resolves to the public IP address. When you
+    #   outside of the DB instance's virtual private cloud (VPC), its domain
+    #   name system (DNS) endpoint resolves to the public IP address. When you
     #   connect from within the same VPC as the DB instance, the endpoint
     #   resolves to the private IP address. Access to the DB instance is
-    #   ultimately controlled by the security group it uses. That public
-    #   access is not permitted if the security group assigned to the DB
-    #   instance doesn't permit it.
+    #   controlled by its security group settings.
     #
     #   When the DB instance isn't publicly accessible, it is an internal DB
     #   instance with a DNS name that resolves to a private IP address.
     #
-    #   Default: The default behavior varies depending on whether
-    #   `DBSubnetGroupName` is specified.
+    #   The default behavior when `PubliclyAccessible` is not specified
+    #   depends on whether a `DBSubnetGroup` is specified.
     #
-    #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
-    #   isn't specified, the following applies:
+    #   If `DBSubnetGroup` isn't specified, `PubliclyAccessible` defaults to
+    #   `false` for Aurora instances and `true` for non-Aurora instances.
     #
-    #   * If the default VPC in the target Region doesn’t have an internet
-    #     gateway attached to it, the DB instance is private.
+    #   If `DBSubnetGroup` is specified, `PubliclyAccessible` defaults to
+    #   `false` unless the value of `DBSubnetGroup` is `default`, in which
+    #   case `PubliclyAccessible` defaults to `true`.
     #
-    #   * If the default VPC in the target Region has an internet gateway
-    #     attached to it, the DB instance is public.
-    #
-    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
-    #   specified, the following applies:
-    #
-    #   * If the subnets are part of a VPC that doesn’t have an internet
-    #     gateway attached to it, the DB instance is private.
-    #
-    #   * If the subnets are part of a VPC that has an internet gateway
-    #     attached to it, the DB instance is public.
+    #   If `PubliclyAccessible` is true and the VPC that the `DBSubnetGroup`
+    #   is in doesn't have an internet gateway attached to it, Amazon RDS
+    #   returns an error.
     # @option options [Array<Types::Tag>] :tags
     #   Tags to assign to the DB instance.
     # @option options [String] :db_cluster_identifier
@@ -2269,6 +2313,14 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
     # @option options [String] :master_user_authentication_type
     #   Specifies the authentication type for the master user. With IAM master
     #   user authentication, you can configure the master DB user with IAM
@@ -2282,6 +2334,12 @@ module Aws::RDS
     #
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
+    # @option options [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to create for the DB instance.
+    #   You can create up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -2354,6 +2412,27 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     upgrade_storage_config: false,
     #     ca_certificate_identifier: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -2989,6 +3068,20 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
+    # @option options [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to create for the DB instance.
+    #   You can create up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3193,7 +3286,29 @@ module Aws::RDS
     #     multi_tenant: false,
     #     dedicated_log_volume: false,
     #     engine: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #         set_for_delete: false,
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -3742,7 +3857,7 @@ module Aws::RDS
     #
     #   * Must be in the distinguished name format.
     #
-    #   * Can't be longer than 64 characters.
+    #   ^
     #
     #   Example:
     #   `OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain`
@@ -4280,6 +4395,14 @@ module Aws::RDS
     #     parameter group. To avoid reverting to the default, specify a new
     #     parameter group with `--db-parameter-group-name` and a new option
     #     group with `--option-group-name`.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
     # @option options [String] :master_user_authentication_type
     #   Specifies the authentication type for the master user. With IAM master
     #   user authentication, you can change the master DB user to use IAM
@@ -4293,6 +4416,11 @@ module Aws::RDS
     #
     #   This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL
     #   engines.
+    # @option options [Array<Types::ModifyAdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to modify or delete for the DB
+    #   instance. You can create up to 3 additional storage volumes.
+    #   Additional storage volumes are supported for RDS for Oracle and RDS
+    #   for SQL Server DB instances only.
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -4311,6 +4439,17 @@ module Aws::RDS
     #   dbinstance = db_instance.promote({
     #     backup_retention_period: 1,
     #     preferred_backup_window: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :backup_retention_period
@@ -4348,6 +4487,14 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
     # @return [DBInstance]
     def promote(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -4443,8 +4590,29 @@ module Aws::RDS
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     additional_storage_volumes: [
+    #       {
+    #         volume_name: "String", # required
+    #         allocated_storage: 1,
+    #         iops: 1,
+    #         max_allocated_storage: 1,
+    #         storage_throughput: 1,
+    #         storage_type: "String",
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_instance_identifier
@@ -5007,6 +5175,14 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB instance.
+    #
+    #   Valid Values:
+    #
+    #   * `auto-backup` - The DB instance's automated backup.
+    #
+    #   ^
     # @option options [Boolean] :manage_master_user_password
     #   Specifies whether to manage the master user password with Amazon Web
     #   Services Secrets Manager in the restored DB instance.
@@ -5045,6 +5221,12 @@ module Aws::RDS
     #   There is a default KMS key for your Amazon Web Services account. Your
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
+    # @option options [Array<Types::AdditionalStorageVolume>] :additional_storage_volumes
+    #   A list of additional storage volumes to restore to the DB instance.
+    #   You can restore up to three additional storage volumes using the names
+    #   `rdsdbdata2`, `rdsdbdata3`, and `rdsdbdata4`. Additional storage
+    #   volumes are supported for RDS for Oracle and RDS for SQL Server DB
+    #   instances only.
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)

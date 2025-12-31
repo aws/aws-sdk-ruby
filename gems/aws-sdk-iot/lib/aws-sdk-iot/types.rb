@@ -1357,6 +1357,48 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Configures the command to treat the `payloadTemplate` as a JSON
+    # document for preprocessing. This preprocessor substitutes placeholders
+    # with parameter values to generate the command execution request
+    # payload.
+    #
+    # @!attribute [rw] output_format
+    #   Converts the command preprocessor result to the format defined by
+    #   this parameter, before sending it to the device.
+    #   @return [String]
+    #
+    class AwsJsonSubstitutionCommandPreprocessorConfig < Struct.new(
+      :output_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for batching.
+    #
+    # @!attribute [rw] max_batch_open_ms
+    #   The maximum amount of time (in milliseconds) that an outgoing call
+    #   waits for other calls with which it batches messages of the same
+    #   type. The higher the setting, the longer the latency of the batched
+    #   HTTP Action will be.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_batch_size
+    #   The maximum number of messages that are batched together in a single
+    #   action execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_batch_size_bytes
+    #   Maximum size of a message batch, in bytes.
+    #   @return [Integer]
+    #
+    class BatchConfig < Struct.new(
+      :max_batch_open_ms,
+      :max_batch_size,
+      :max_batch_size_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A Device Defender security profile behavior.
     #
     # @!attribute [rw] name
@@ -2299,10 +2341,12 @@ module Aws::IoT
     #   execution.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the command parameter.
+    #   @return [String]
+    #
     # @!attribute [rw] value
-    #   The value used to describe the command. When you assign a value to a
-    #   parameter, it will override any default value that you had already
-    #   specified.
+    #   Parameter value that overrides the default value, if set.
     #   @return [Types::CommandParameterValue]
     #
     # @!attribute [rw] default_value
@@ -2310,21 +2354,27 @@ module Aws::IoT
     #   assumed by the parameter if no other value is assigned to it.
     #   @return [Types::CommandParameterValue]
     #
+    # @!attribute [rw] value_conditions
+    #   The list of conditions that a command parameter value must satisfy
+    #   to create a command execution.
+    #   @return [Array<Types::CommandParameterValueCondition>]
+    #
     # @!attribute [rw] description
     #   The description of the command parameter.
     #   @return [String]
     #
     class CommandParameter < Struct.new(
       :name,
+      :type,
       :value,
       :default_value,
+      :value_conditions,
       :description)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The range of possible values that's used to describe a specific
-    # command parameter.
+    # The value of a command parameter used to create a command execution.
     #
     # <note markdown="1"> The `commandParameterValue` can only have one of the below fields
     # listed.
@@ -2377,6 +2427,79 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The comparison operand used to compare the defined value against the
+    # value supplied in request.
+    #
+    # @!attribute [rw] number
+    #   An operand of number value type, defined as a string.
+    #   @return [String]
+    #
+    # @!attribute [rw] numbers
+    #   A List of operands of numerical value type, defined as strings.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] string
+    #   An operand of string value type.
+    #   @return [String]
+    #
+    # @!attribute [rw] strings
+    #   A List of operands of string value type.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] number_range
+    #   An operand of numerical range value type.
+    #   @return [Types::CommandParameterValueNumberRange]
+    #
+    class CommandParameterValueComparisonOperand < Struct.new(
+      :number,
+      :numbers,
+      :string,
+      :strings,
+      :number_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A condition for the command parameter that must be evaluated to true
+    # for successful creation of a command execution.
+    #
+    # @!attribute [rw] comparison_operator
+    #   The comparison operator for the command parameter.
+    #
+    #   <note markdown="1"> IN\_RANGE, and NOT\_IN\_RANGE operators include boundary values.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] operand
+    #   The comparison operand for the command parameter.
+    #   @return [Types::CommandParameterValueComparisonOperand]
+    #
+    class CommandParameterValueCondition < Struct.new(
+      :comparison_operator,
+      :operand)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The numerical range value type to compare a command parameter value
+    # against.
+    #
+    # @!attribute [rw] min
+    #   The minimum value of a numerical range of a command parameter value.
+    #   @return [String]
+    #
+    # @!attribute [rw] max
+    #   The maximum value of a numerical range of a command parameter value.
+    #   @return [String]
+    #
+    class CommandParameterValueNumberRange < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The command payload object that contains the instructions for the
     # device to process.
     #
@@ -2398,6 +2521,20 @@ module Aws::IoT
     class CommandPayload < Struct.new(
       :content,
       :content_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration that determines how the `payloadTemplate` is processed
+    # by the service to generate the final payload sent to devices at
+    # `StartCommandExecution` API invocation.
+    #
+    # @!attribute [rw] aws_json_substitution
+    #   Configuration for the JSON substitution preprocessor.
+    #   @return [Types::AwsJsonSubstitutionCommandPreprocessorConfig]
+    #
+    class CommandPreprocessor < Struct.new(
+      :aws_json_substitution)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2457,13 +2594,13 @@ module Aws::IoT
     end
 
     # The encryption configuration details that include the status
-    # information of the Amazon Web Services Key Management Service (KMS)
-    # key and the KMS access role.
+    # information of the Key Management Service (KMS) key and the KMS access
+    # role.
     #
     # @!attribute [rw] configuration_status
     #   The health status of KMS key and KMS access role. If either KMS key
     #   or KMS access role is `UNHEALTHY`, the return value will be
-    #   `UNHEALTHY`. To use a customer-managed KMS key, the value of
+    #   `UNHEALTHY`. To use a customer managed KMS key, the value of
     #   `configurationStatus` must be `HEALTHY`.
     #   @return [String]
     #
@@ -2811,8 +2948,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] payload
-    #   The payload object for the command. You must specify this
-    #   information when using the `AWS-IoT` namespace.
+    #   The payload object for the static command.
     #
     #   You can upload a static payload file from your local storage that
     #   contains the instructions for the device to process. The payload
@@ -2821,20 +2957,37 @@ module Aws::IoT
     #   content type.
     #   @return [Types::CommandPayload]
     #
+    # @!attribute [rw] payload_template
+    #   The payload template for the dynamic command.
+    #
+    #   <note markdown="1"> This parameter is required for dynamic commands where the command
+    #   execution placeholders are supplied either from
+    #   `mandatoryParameters` or when `StartCommandExecution` is invoked.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] preprocessor
+    #   Configuration that determines how `payloadTemplate` is processed to
+    #   generate command execution payload.
+    #
+    #   <note markdown="1"> This parameter is required for dynamic commands, along with
+    #   `payloadTemplate`, and `mandatoryParameters`.
+    #
+    #    </note>
+    #   @return [Types::CommandPreprocessor]
+    #
     # @!attribute [rw] mandatory_parameters
-    #   A list of parameters that are required by the
-    #   `StartCommandExecution` API. These parameters need to be specified
-    #   only when using the `AWS-IoT-FleetWise` namespace. You can either
-    #   specify them here or when running the command using the
-    #   `StartCommandExecution` API.
+    #   A list of parameters that are used by `StartCommandExecution` API
+    #   for execution payload generation.
     #   @return [Array<Types::CommandParameter>]
     #
     # @!attribute [rw] role_arn
     #   The IAM role that you must provide when using the
     #   `AWS-IoT-FleetWise` namespace. The role grants IoT Device Management
     #   the permission to access IoT FleetWise resources for generating the
-    #   payload for the command. This field is not required when you use the
-    #   `AWS-IoT` namespace.
+    #   payload for the command. This field is not supported when you use
+    #   the `AWS-IoT` namespace.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2847,6 +3000,8 @@ module Aws::IoT
       :display_name,
       :description,
       :payload,
+      :payload_template,
+      :preprocessor,
       :mandatory_parameters,
       :role_arn,
       :tags)
@@ -6123,17 +6278,16 @@ module Aws::IoT
     class DescribeEncryptionConfigurationRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] encryption_type
-    #   The type of the Amazon Web Services Key Management Service (KMS)
-    #   key.
+    #   The type of the KMS key.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of the IAM role assumed by Amazon Web
-    #   Services IoT Core to call KMS on behalf of the customer.
+    #   The ARN of the customer managed KMS key.
     #   @return [String]
     #
     # @!attribute [rw] kms_access_role_arn
-    #   The ARN of the customer-managed KMS key.
+    #   The Amazon Resource Name (ARN) of the IAM role assumed by Amazon Web
+    #   Services IoT Core to call KMS on behalf of the customer.
     #   @return [String]
     #
     # @!attribute [rw] configuration_details
@@ -8223,6 +8377,15 @@ module Aws::IoT
     #   The payload object that you provided for the command.
     #   @return [Types::CommandPayload]
     #
+    # @!attribute [rw] payload_template
+    #   The payload template for the dynamic command.
+    #   @return [String]
+    #
+    # @!attribute [rw] preprocessor
+    #   Configuration that determines how `payloadTemplate` is processed to
+    #   generate command execution payload.
+    #   @return [Types::CommandPreprocessor]
+    #
     # @!attribute [rw] role_arn
     #   The IAM role that you provided when creating the command with
     #   `AWS-IoT-FleetWise` as the namespace.
@@ -8252,6 +8415,8 @@ module Aws::IoT
       :description,
       :mandatory_parameters,
       :payload,
+      :payload_template,
+      :preprocessor,
       :role_arn,
       :created_at,
       :last_updated_at,
@@ -8834,9 +8999,16 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # @api private
+    # @!attribute [rw] verbose
+    #   The flag is used to get all the event types and their respective
+    #   configuration that event-based logging supports.
+    #   @return [Boolean]
     #
-    class GetV2LoggingOptionsRequest < Aws::EmptyStructure; end
+    class GetV2LoggingOptionsRequest < Struct.new(
+      :verbose)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] role_arn
     #   The IAM role ARN IoT uses to write to your CloudWatch logs.
@@ -8850,10 +9022,16 @@ module Aws::IoT
     #   Disables all logs.
     #   @return [Boolean]
     #
+    # @!attribute [rw] event_configurations
+    #   The list of event configurations that override account-level
+    #   logging.
+    #   @return [Array<Types::LogEventConfiguration>]
+    #
     class GetV2LoggingOptionsResponse < Struct.new(
       :role_arn,
       :default_log_level,
-      :disable_all_logs)
+      :disable_all_logs,
+      :event_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8902,11 +9080,27 @@ module Aws::IoT
     #   endpoint.
     #   @return [Types::HttpAuthorization]
     #
+    # @!attribute [rw] enable_batching
+    #   Whether to process the HTTP action messages into a single request.
+    #   Value can be true or false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] batch_config
+    #   The configuration settings for batching. For more information, see [
+    #   Batching HTTP action messages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/http_batching.html
+    #   @return [Types::BatchConfig]
+    #
     class HttpAction < Struct.new(
       :url,
       :confirmation_url,
       :headers,
-      :auth)
+      :auth,
+      :enable_batching,
+      :batch_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12973,6 +13167,35 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Configuration for event-based logging that specifies which event types
+    # to log and their logging settings. Used for account-level logging
+    # overrides.
+    #
+    # @!attribute [rw] event_type
+    #   The type of event to log. These include event types like Connect,
+    #   Publish, and Disconnect.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_level
+    #   The logging level for the specified event type. Determines the
+    #   verbosity of log messages generated for this event type.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_destination
+    #   CloudWatch Log Group for event-based logging. Specifies where log
+    #   events should be sent. The log destination for event-based logging
+    #   overrides default Log Group for the specified event type and applies
+    #   to all resources associated with that event.
+    #   @return [String]
+    #
+    class LogEventConfiguration < Struct.new(
+      :event_type,
+      :log_level,
+      :log_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A log target.
     #
     # @!attribute [rw] target_type
@@ -15278,10 +15501,16 @@ module Aws::IoT
     #   If true all logs are disabled. The default is false.
     #   @return [Boolean]
     #
+    # @!attribute [rw] event_configurations
+    #   The list of event configurations that override account-level
+    #   logging.
+    #   @return [Array<Types::LogEventConfiguration>]
+    #
     class SetV2LoggingOptionsRequest < Struct.new(
       :role_arn,
       :default_log_level,
-      :disable_all_logs)
+      :disable_all_logs,
+      :event_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15975,9 +16204,7 @@ module Aws::IoT
 
     # @!attribute [rw] principal
     #   The principal. Valid principals are CertificateArn
-    #   (arn:aws:iot:*region*:*accountId*:cert/*certificateId*),
-    #   thingGroupArn
-    #   (arn:aws:iot:*region*:*accountId*:thinggroup/*groupName*) and
+    #   (arn:aws:iot:*region*:*accountId*:cert/*certificateId*) and
     #   CognitoId (*region*:*id*).
     #   @return [String]
     #
@@ -17783,12 +18010,11 @@ module Aws::IoT
     end
 
     # @!attribute [rw] encryption_type
-    #   The type of the Amazon Web Services Key Management Service (KMS)
-    #   key.
+    #   The type of the KMS key.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The ARN of the customer-managed KMS key.
+    #   The ARN of the customer managedKMS key.
     #   @return [String]
     #
     # @!attribute [rw] kms_access_role_arn

@@ -18,7 +18,7 @@ module Aws::RecycleBin
       attr_accessor retention_period: Types::RetentionPeriod
       attr_accessor description: ::String
       attr_accessor tags: ::Array[Types::Tag]
-      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE")
+      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE" | "EBS_VOLUME")
       attr_accessor resource_tags: ::Array[Types::ResourceTag]
       attr_accessor lock_configuration: Types::LockConfiguration
       attr_accessor exclude_resource_tags: ::Array[Types::ResourceTag]
@@ -30,7 +30,7 @@ module Aws::RecycleBin
       attr_accessor retention_period: Types::RetentionPeriod
       attr_accessor description: ::String
       attr_accessor tags: ::Array[Types::Tag]
-      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE")
+      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE" | "EBS_VOLUME")
       attr_accessor resource_tags: ::Array[Types::ResourceTag]
       attr_accessor status: ("pending" | "available")
       attr_accessor lock_configuration: Types::LockConfiguration
@@ -56,7 +56,7 @@ module Aws::RecycleBin
     class GetRuleResponse
       attr_accessor identifier: ::String
       attr_accessor description: ::String
-      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE")
+      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE" | "EBS_VOLUME")
       attr_accessor retention_period: Types::RetentionPeriod
       attr_accessor resource_tags: ::Array[Types::ResourceTag]
       attr_accessor status: ("pending" | "available")
@@ -76,7 +76,7 @@ module Aws::RecycleBin
     class ListRulesRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE")
+      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE" | "EBS_VOLUME")
       attr_accessor resource_tags: ::Array[Types::ResourceTag]
       attr_accessor lock_state: ("locked" | "pending_unlock" | "unlocked")
       attr_accessor exclude_resource_tags: ::Array[Types::ResourceTag]
@@ -113,7 +113,7 @@ module Aws::RecycleBin
     class LockRuleResponse
       attr_accessor identifier: ::String
       attr_accessor description: ::String
-      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE")
+      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE" | "EBS_VOLUME")
       attr_accessor retention_period: Types::RetentionPeriod
       attr_accessor resource_tags: ::Array[Types::ResourceTag]
       attr_accessor status: ("pending" | "available")
@@ -186,7 +186,7 @@ module Aws::RecycleBin
     class UnlockRuleResponse
       attr_accessor identifier: ::String
       attr_accessor description: ::String
-      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE")
+      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE" | "EBS_VOLUME")
       attr_accessor retention_period: Types::RetentionPeriod
       attr_accessor resource_tags: ::Array[Types::ResourceTag]
       attr_accessor status: ("pending" | "available")
@@ -211,7 +211,7 @@ module Aws::RecycleBin
       attr_accessor identifier: ::String
       attr_accessor retention_period: Types::RetentionPeriod
       attr_accessor description: ::String
-      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE")
+      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE" | "EBS_VOLUME")
       attr_accessor resource_tags: ::Array[Types::ResourceTag]
       attr_accessor exclude_resource_tags: ::Array[Types::ResourceTag]
       SENSITIVE: []
@@ -221,7 +221,7 @@ module Aws::RecycleBin
       attr_accessor identifier: ::String
       attr_accessor retention_period: Types::RetentionPeriod
       attr_accessor description: ::String
-      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE")
+      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE" | "EBS_VOLUME")
       attr_accessor resource_tags: ::Array[Types::ResourceTag]
       attr_accessor status: ("pending" | "available")
       attr_accessor lock_state: ("locked" | "pending_unlock" | "unlocked")

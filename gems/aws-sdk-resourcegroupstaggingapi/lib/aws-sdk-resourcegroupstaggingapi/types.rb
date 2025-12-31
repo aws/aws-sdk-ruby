@@ -38,8 +38,8 @@ module Aws::ResourceGroupsTaggingAPI
       include Aws::Structure
     end
 
-    # The target of the operation is currently being modified by a different
-    # request. Try again later.
+    # The request failed because the target of the operation is currently
+    # being modified by a different request. Try again later.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -52,15 +52,15 @@ module Aws::ResourceGroupsTaggingAPI
       include Aws::Structure
     end
 
-    # The request was denied because performing this operation violates a
+    # The request failed because performing the operation would violate a
     # constraint.
     #
     # Some of the reasons in the following list might not apply to this
     # specific operation.
     #
     # * You must meet the prerequisites for using tag policies. For
-    #   information, see [Prerequisites and Permissions for Using Tag
-    #   Policies][1] in the *Organizations User Guide.*
+    #   information, see [Prerequisites and permissions][1] in the *Tagging
+    #   Amazon Web Services resources and Tag Editor* user guide.
     #
     # * You must enable the tag policies service principal
     #   (`tagpolicies.tag.amazonaws.com`) to integrate with Organizations
@@ -71,7 +71,7 @@ module Aws::ResourceGroupsTaggingAPI
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html
+    # [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tag-policies-orgs.html#tag-policies-prereqs
     # [2]: https://docs.aws.amazon.com/organizations/latest/APIReference/API_EnableAWSServiceAccess.html
     #
     # @!attribute [rw] message
@@ -219,6 +219,17 @@ module Aws::ResourceGroupsTaggingAPI
     #   * For more information about ARNs, see [Amazon Resource Names (ARNs)
     #     and Amazon Web Services Service Namespaces][3].
     #
+    #   <note markdown="1"> For the list of services whose resources you can tag using the
+    #   Resource Groups Tagging API, see [Services that support the Resource
+    #   Groups Tagging API][4]. If an Amazon Web Services service isn't
+    #   listed on that page, you might still be able to tag that service's
+    #   resources by using that service's native tagging operations instead
+    #   of using Resource Groups Tagging API operations. All tagged
+    #   resources, whether the tagging used the Resource Groups Tagging API
+    #   or not, are returned by the `Get*` operation.
+    #
+    #    </note>
+    #
     #   You can specify multiple resource types by using a comma separated
     #   array. The array can include up to 100 items. Note that the length
     #   constraint requirement applies to each resource type filter.
@@ -228,6 +239,7 @@ module Aws::ResourceGroupsTaggingAPI
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
     #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax
     #   [3]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [4]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] tag_key_filters
@@ -304,12 +316,16 @@ module Aws::ResourceGroupsTaggingAPI
     #   contain a key with values optional. A request can include up to 50
     #   keys, and each key can include up to 20 values.
     #
+    #   You can't specify both this parameter and the `ResourceArnList`
+    #   parameter in the same request. If you do, you get an `Invalid
+    #   Parameter` exception.
+    #
     #   Note the following when deciding how to use TagFilters:
     #
     #   * If you *don't* specify a `TagFilter`, the response includes all
     #     resources that are currently tagged or ever had a tag. Resources
-    #     that currently don't have tags are shown with an empty tag set,
-    #     like this: `"Tags": []`.
+    #     that were previously tagged, *but do not currently* have tags, are
+    #     shown with an empty tag set, like this: `"Tags": []`.
     #
     #   * If you specify more than one filter in a single request, the
     #     response returns only those resources that satisfy all filters.
@@ -322,8 +338,8 @@ module Aws::ResourceGroupsTaggingAPI
     #     resources that are tagged with that key, with any or no value.
     #
     #     For example, for the following filters: `filter1=
-    #     {keyA,{value1}}`, `filter2={keyB,{value2,value3,value4}}`,
-    #     `filter3= {keyC}`:
+    #     {key1,{value1}}`, `filter2={key2,{value2,value3,value4}}`,
+    #     `filter3= {key3}`:
     #
     #     * `GetResources({filter1})` returns resources tagged with
     #       `key1=value1`
@@ -374,14 +390,27 @@ module Aws::ResourceGroupsTaggingAPI
     # @!attribute [rw] resource_type_filters
     #   Specifies the resource types that you want included in the response.
     #   The format of each resource type is `service[:resourceType]`. For
-    #   example, specifying a resource type of `ec2` returns all Amazon EC2
+    #   example, specifying a service of `ec2` returns all Amazon EC2
     #   resources (which includes EC2 instances). Specifying a resource type
     #   of `ec2:instance` returns only EC2 instances.
     #
+    #   You can't specify both this parameter and the `ResourceArnList`
+    #   parameter in the same request. If you do, you get an `Invalid
+    #   Parameter` exception.
+    #
     #   The string for each service name and resource type is the same as
-    #   that embedded in a resource's Amazon Resource Name (ARN). For the
-    #   list of services whose resources you can use in this parameter, see
-    #   [Services that support the Resource Groups Tagging API][1].
+    #   that embedded in a resource's Amazon Resource Name (ARN).
+    #
+    #   <note markdown="1"> For the list of services whose resources you can tag using the
+    #   Resource Groups Tagging API, see [Services that support the Resource
+    #   Groups Tagging API][1]. If an Amazon Web Services service isn't
+    #   listed on that page, you might still be able to tag that service's
+    #   resources by using that service's native tagging operations instead
+    #   of using Resource Groups Tagging API operations. All tagged
+    #   resources, whether the tagging used the Resource Groups Tagging API
+    #   or not, are returned by the `Get*` operation.
+    #
+    #    </note>
     #
     #   You can specify multiple resource types by using an array. The array
     #   can include up to 100 items. Note that the length constraint
@@ -413,10 +442,20 @@ module Aws::ResourceGroupsTaggingAPI
     #
     # @!attribute [rw] resource_arn_list
     #   Specifies a list of ARNs of resources for which you want to retrieve
-    #   tag data. You can't specify both this parameter and any of the
-    #   pagination parameters (`ResourcesPerPage`, `TagsPerPage`,
-    #   `PaginationToken`) in the same request. If you specify both, you get
-    #   an `Invalid Parameter` exception.
+    #   tag data.
+    #
+    #   You can't specify both this parameter and the `ResourceTypeFilters`
+    #   parameter in the same request. If you do, you get an `Invalid
+    #   Parameter` exception.
+    #
+    #   You can't specify both this parameter and the `TagFilters`
+    #   parameter in the same request. If you do, you get an `Invalid
+    #   Parameter` exception.
+    #
+    #   You can't specify both this parameter and any of the pagination
+    #   parameters (`ResourcesPerPage`, `TagsPerPage`, `PaginationToken`) in
+    #   the same request. If you do, you get an `Invalid Parameter`
+    #   exception.
     #
     #   If a resource specified by this parameter doesn't exist, it
     #   doesn't generate an error; it simply isn't included in the
@@ -558,23 +597,28 @@ module Aws::ResourceGroupsTaggingAPI
       include Aws::Structure
     end
 
-    # This error indicates one of the following:
+    # The request failed because of one of the following reasons:
     #
-    # * A parameter is missing.
+    # * A required parameter is missing.
     #
-    # * A malformed string was supplied for the request parameter.
+    # * A provided string parameter is malformed.
     #
-    # * An out-of-range value was supplied for the request parameter.
+    # * An provided parameter value is out of range.
     #
     # * The target ID is invalid, unsupported, or doesn't exist.
     #
     # * You can't access the Amazon S3 bucket for report storage. For more
-    #   information, see [Additional Requirements for Organization-wide Tag
-    #   Compliance Reports][1] in the *Organizations User Guide.*
+    #   information, see [Amazon S3 bucket policy for report storage][1] in
+    #   the *Tagging Amazon Web Services resources and Tag Editor* user
+    #   guide.
+    #
+    # * The partition specified in an ARN parameter in the request doesn't
+    #   match the partition where you invoked the operation. The partition
+    #   is specified by the second field of the ARN.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html#bucket-policies-org-report
+    # [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tag-policies-orgs.html#bucket-policy
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -587,8 +631,50 @@ module Aws::ResourceGroupsTaggingAPI
       include Aws::Structure
     end
 
-    # A `PaginationToken` is valid for a maximum of 15 minutes. Your request
-    # was denied because the specified `PaginationToken` has expired.
+    # @!attribute [rw] next_token
+    #   A token for requesting another page of required tags if the
+    #   `NextToken` response element indicates that more required tags are
+    #   available. Use the value of the returned `NextToken` element in your
+    #   request until the token comes back as null. Pass null if this is the
+    #   first call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of required tags.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/ListRequiredTagsInput AWS API Documentation
+    #
+    class ListRequiredTagsInput < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] required_tags
+    #   The required tags.
+    #   @return [Array<Types::RequiredTag>]
+    #
+    # @!attribute [rw] next_token
+    #   A token for requesting another page of required tags if the
+    #   `NextToken` response element indicates that more required tags are
+    #   available. Use the value of the returned `NextToken` element in your
+    #   request until the token comes back as null. Pass null if this is the
+    #   first call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/ListRequiredTagsOutput AWS API Documentation
+    #
+    class ListRequiredTagsOutput < Struct.new(
+      :required_tags,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request failed because the specified `PaginationToken` has
+    # expired. A `PaginationToken` is valid for a maximum of 15 minutes.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -597,6 +683,33 @@ module Aws::ResourceGroupsTaggingAPI
     #
     class PaginationTokenExpiredException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information that describes the required tags for a given resource
+    # type.
+    #
+    # @!attribute [rw] resource_type
+    #   Describes the resource type for the required tag keys.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_formation_resource_types
+    #   Describes the CloudFormation resource type assigned the required tag
+    #   keys.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] reporting_tag_keys
+    #   These tag keys are marked as `required` in the
+    #   `report_required_tag_for` block of the effective tag policy.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/RequiredTag AWS API Documentation
+    #
+    class RequiredTag < Struct.new(
+      :resource_type,
+      :cloud_formation_resource_types,
+      :reporting_tag_keys)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -633,10 +746,10 @@ module Aws::ResourceGroupsTaggingAPI
     #   The name of the Amazon S3 bucket where the report will be stored;
     #   for example:
     #
-    #   `awsexamplebucket`
+    #   `amzn-s3-demo-bucket`
     #
     #   For more information on S3 bucket requirements, including an example
-    #   bucket policy, see the example S3 bucket policy on this page.
+    #   bucket policy, see the example Amazon S3 bucket policy on this page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/StartReportCreationInput AWS API Documentation
@@ -794,7 +907,8 @@ module Aws::ResourceGroupsTaggingAPI
       include Aws::Structure
     end
 
-    # The request was denied to limit the frequency of submitted requests.
+    # The request failed because it exceeded the allowed frequency of
+    # submitted requests.
     #
     # @!attribute [rw] message
     #   @return [String]

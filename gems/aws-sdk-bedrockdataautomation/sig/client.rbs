@@ -78,6 +78,18 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _CopyBlueprintStageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CopyBlueprintStageResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomation/Client.html#copy_blueprint_stage-instance_method
+      def copy_blueprint_stage: (
+                                  blueprint_arn: ::String,
+                                  source_stage: ("DEVELOPMENT" | "LIVE"),
+                                  target_stage: ("DEVELOPMENT" | "LIVE"),
+                                  ?client_token: ::String
+                                ) -> _CopyBlueprintStageResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyBlueprintStageResponseSuccess
+
       interface _CreateBlueprintResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateBlueprintResponse]
         def blueprint: () -> Types::Blueprint
@@ -124,6 +136,7 @@ module Aws
                                             project_name: ::String,
                                             ?project_description: ::String,
                                             ?project_stage: ("DEVELOPMENT" | "LIVE"),
+                                            ?project_type: ("ASYNC" | "SYNC"),
                                             standard_output_configuration: {
                                               document: {
                                                 extraction: {
@@ -215,21 +228,58 @@ module Aws
                                                 }?,
                                                 modality_processing: {
                                                   state: ("ENABLED" | "DISABLED")?
+                                                }?,
+                                                sensitive_data_configuration: {
+                                                  detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION"),
+                                                  detection_scope: Array[("STANDARD" | "CUSTOM")]?,
+                                                  pii_entities_configuration: {
+                                                    pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]?,
+                                                    redaction_mask_mode: ("PII" | "ENTITY_TYPE")?
+                                                  }?
                                                 }?
                                               }?,
                                               image: {
                                                 modality_processing: {
                                                   state: ("ENABLED" | "DISABLED")?
+                                                }?,
+                                                sensitive_data_configuration: {
+                                                  detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION"),
+                                                  detection_scope: Array[("STANDARD" | "CUSTOM")]?,
+                                                  pii_entities_configuration: {
+                                                    pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]?,
+                                                    redaction_mask_mode: ("PII" | "ENTITY_TYPE")?
+                                                  }?
                                                 }?
                                               }?,
                                               video: {
                                                 modality_processing: {
                                                   state: ("ENABLED" | "DISABLED")?
+                                                }?,
+                                                sensitive_data_configuration: {
+                                                  detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION"),
+                                                  detection_scope: Array[("STANDARD" | "CUSTOM")]?,
+                                                  pii_entities_configuration: {
+                                                    pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]?,
+                                                    redaction_mask_mode: ("PII" | "ENTITY_TYPE")?
+                                                  }?
                                                 }?
                                               }?,
                                               audio: {
                                                 modality_processing: {
                                                   state: ("ENABLED" | "DISABLED")?
+                                                }?,
+                                                language_configuration: {
+                                                  input_languages: Array[("EN" | "DE" | "ES" | "FR" | "IT" | "PT" | "JA" | "KO" | "CN" | "TW" | "HK")]?,
+                                                  generative_output_language: ("DEFAULT" | "EN")?,
+                                                  identify_multiple_languages: bool?
+                                                }?,
+                                                sensitive_data_configuration: {
+                                                  detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION"),
+                                                  detection_scope: Array[("STANDARD" | "CUSTOM")]?,
+                                                  pii_entities_configuration: {
+                                                    pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]?,
+                                                    redaction_mask_mode: ("PII" | "ENTITY_TYPE")?
+                                                  }?
                                                 }?
                                               }?,
                                               modality_routing: {
@@ -286,6 +336,19 @@ module Aws
                          ) -> _GetBlueprintResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBlueprintResponseSuccess
 
+      interface _GetBlueprintOptimizationStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBlueprintOptimizationStatusResponse]
+        def status: () -> ("Created" | "InProgress" | "Success" | "ServiceError" | "ClientError")
+        def error_type: () -> ::String
+        def error_message: () -> ::String
+        def output_configuration: () -> Types::BlueprintOptimizationOutputConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomation/Client.html#get_blueprint_optimization_status-instance_method
+      def get_blueprint_optimization_status: (
+                                               invocation_arn: ::String
+                                             ) -> _GetBlueprintOptimizationStatusResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBlueprintOptimizationStatusResponseSuccess
+
       interface _GetDataAutomationProjectResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataAutomationProjectResponse]
         def project: () -> Types::DataAutomationProject
@@ -296,6 +359,48 @@ module Aws
                                          ?project_stage: ("DEVELOPMENT" | "LIVE")
                                        ) -> _GetDataAutomationProjectResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataAutomationProjectResponseSuccess
+
+      interface _InvokeBlueprintOptimizationAsyncResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeBlueprintOptimizationAsyncResponse]
+        def invocation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockDataAutomation/Client.html#invoke_blueprint_optimization_async-instance_method
+      def invoke_blueprint_optimization_async: (
+                                                 blueprint: {
+                                                   blueprint_arn: ::String,
+                                                   stage: ("DEVELOPMENT" | "LIVE")?
+                                                 },
+                                                 samples: Array[
+                                                   {
+                                                     asset_s3_object: {
+                                                       s3_uri: ::String,
+                                                       version: ::String?
+                                                     },
+                                                     ground_truth_s3_object: {
+                                                       s3_uri: ::String,
+                                                       version: ::String?
+                                                     }
+                                                   },
+                                                 ],
+                                                 output_configuration: {
+                                                   s3_object: {
+                                                     s3_uri: ::String,
+                                                     version: ::String?
+                                                   }
+                                                 },
+                                                 data_automation_profile_arn: ::String,
+                                                 ?encryption_configuration: {
+                                                   kms_key_id: ::String,
+                                                   kms_encryption_context: Hash[::String, ::String]?
+                                                 },
+                                                 ?tags: Array[
+                                                   {
+                                                     key: ::String,
+                                                     value: ::String
+                                                   },
+                                                 ]
+                                               ) -> _InvokeBlueprintOptimizationAsyncResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeBlueprintOptimizationAsyncResponseSuccess
 
       interface _ListBlueprintsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListBlueprintsResponse]
@@ -488,21 +593,58 @@ module Aws
                                                 }?,
                                                 modality_processing: {
                                                   state: ("ENABLED" | "DISABLED")?
+                                                }?,
+                                                sensitive_data_configuration: {
+                                                  detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION"),
+                                                  detection_scope: Array[("STANDARD" | "CUSTOM")]?,
+                                                  pii_entities_configuration: {
+                                                    pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]?,
+                                                    redaction_mask_mode: ("PII" | "ENTITY_TYPE")?
+                                                  }?
                                                 }?
                                               }?,
                                               image: {
                                                 modality_processing: {
                                                   state: ("ENABLED" | "DISABLED")?
+                                                }?,
+                                                sensitive_data_configuration: {
+                                                  detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION"),
+                                                  detection_scope: Array[("STANDARD" | "CUSTOM")]?,
+                                                  pii_entities_configuration: {
+                                                    pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]?,
+                                                    redaction_mask_mode: ("PII" | "ENTITY_TYPE")?
+                                                  }?
                                                 }?
                                               }?,
                                               video: {
                                                 modality_processing: {
                                                   state: ("ENABLED" | "DISABLED")?
+                                                }?,
+                                                sensitive_data_configuration: {
+                                                  detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION"),
+                                                  detection_scope: Array[("STANDARD" | "CUSTOM")]?,
+                                                  pii_entities_configuration: {
+                                                    pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]?,
+                                                    redaction_mask_mode: ("PII" | "ENTITY_TYPE")?
+                                                  }?
                                                 }?
                                               }?,
                                               audio: {
                                                 modality_processing: {
                                                   state: ("ENABLED" | "DISABLED")?
+                                                }?,
+                                                language_configuration: {
+                                                  input_languages: Array[("EN" | "DE" | "ES" | "FR" | "IT" | "PT" | "JA" | "KO" | "CN" | "TW" | "HK")]?,
+                                                  generative_output_language: ("DEFAULT" | "EN")?,
+                                                  identify_multiple_languages: bool?
+                                                }?,
+                                                sensitive_data_configuration: {
+                                                  detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION"),
+                                                  detection_scope: Array[("STANDARD" | "CUSTOM")]?,
+                                                  pii_entities_configuration: {
+                                                    pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]?,
+                                                    redaction_mask_mode: ("PII" | "ENTITY_TYPE")?
+                                                  }?
                                                 }?
                                               }?,
                                               modality_routing: {

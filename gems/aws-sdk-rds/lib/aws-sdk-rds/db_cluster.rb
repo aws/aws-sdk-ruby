@@ -190,6 +190,20 @@ module Aws::RDS
       data[:preferred_maintenance_window]
     end
 
+    # This data type represents the order in which the clusters are
+    # upgraded.
+    #
+    # * \[first\] - Typically used for development or testing environments.
+    #
+    # * \[second\] - Default order for resources not specifically
+    #   configured.
+    #
+    # * \[last\] - Usually reserved for production environments.
+    # @return [String]
+    def upgrade_rollout_order
+      data[:upgrade_rollout_order]
+    end
+
     # The identifier of the source DB cluster if this DB cluster is a read
     # replica.
     # @return [String]
@@ -986,13 +1000,24 @@ module Aws::RDS
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
     #     enable_limitless_database: false,
-    #     cluster_scalability_type: "standard", # accepts standard, limitless, scaleout
+    #     cluster_scalability_type: "standard", # accepts standard, limitless
     #     db_system_id: "String",
     #     manage_master_user_password: false,
     #     enable_local_write_forwarding: false,
     #     master_user_secret_kms_key_id: "String",
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
     #     source_region: "String",
     #   })
@@ -1512,40 +1537,31 @@ module Aws::RDS
     # @option options [Boolean] :publicly_accessible
     #   Specifies whether the DB cluster is publicly accessible.
     #
+    #   Valid for Cluster Type: Multi-AZ DB clusters only
+    #
     #   When the DB cluster is publicly accessible and you connect from
-    #   outside of the DB cluster's virtual private cloud (VPC), its Domain
-    #   Name System (DNS) endpoint resolves to the public IP address. When you
+    #   outside of the DB cluster's virtual private cloud (VPC), its domain
+    #   name system (DNS) endpoint resolves to the public IP address. When you
     #   connect from within the same VPC as the DB cluster, the endpoint
     #   resolves to the private IP address. Access to the DB cluster is
-    #   ultimately controlled by the security group it uses. That public
-    #   access isn't permitted if the security group assigned to the DB
-    #   cluster doesn't permit it.
+    #   controlled by its security group settings.
     #
     #   When the DB cluster isn't publicly accessible, it is an internal DB
     #   cluster with a DNS name that resolves to a private IP address.
     #
-    #   Valid for Cluster Type: Multi-AZ DB clusters only
+    #   The default behavior when `PubliclyAccessible` is not specified
+    #   depends on whether a `DBSubnetGroup` is specified.
     #
-    #   Default: The default behavior varies depending on whether
-    #   `DBSubnetGroupName` is specified.
+    #   If `DBSubnetGroup` isn't specified, `PubliclyAccessible` defaults to
+    #   `true`.
     #
-    #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
-    #   isn't specified, the following applies:
+    #   If `DBSubnetGroup` is specified, `PubliclyAccessible` defaults to
+    #   `false` unless the value of `DBSubnetGroup` is `default`, in which
+    #   case `PubliclyAccessible` defaults to `true`.
     #
-    #   * If the default VPC in the target Region doesn’t have an internet
-    #     gateway attached to it, the DB cluster is private.
-    #
-    #   * If the default VPC in the target Region has an internet gateway
-    #     attached to it, the DB cluster is public.
-    #
-    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
-    #   specified, the following applies:
-    #
-    #   * If the subnets are part of a VPC that doesn’t have an internet
-    #     gateway attached to it, the DB cluster is private.
-    #
-    #   * If the subnets are part of a VPC that has an internet gateway
-    #     attached to it, the DB cluster is public.
+    #   If `PubliclyAccessible` is true and the VPC that the `DBSubnetGroup`
+    #   is in doesn't have an internet gateway attached to it, Amazon RDS
+    #   returns an error.
     # @option options [Boolean] :auto_minor_version_upgrade
     #   Specifies whether minor engine upgrades are applied automatically to
     #   the DB cluster during the maintenance window. By default, minor engine
@@ -1854,6 +1870,14 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   ^
     # @option options [String] :master_user_authentication_type
     #   Specifies the authentication type for the master user. With IAM master
     #   user authentication, you can configure the master DB user with IAM
@@ -2826,6 +2850,17 @@ module Aws::RDS
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
     #     engine_lifecycle_support: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_cluster_identifier
@@ -3278,6 +3313,14 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to resources associated with the DB cluster.
+    #
+    #   Valid Values:
+    #
+    #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   ^
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(source_db_cluster_identifier: @id)

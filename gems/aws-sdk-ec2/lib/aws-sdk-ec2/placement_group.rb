@@ -79,6 +79,12 @@ module Aws::EC2
       data[:spread_level]
     end
 
+    # Reserved for future use.
+    # @return [String]
+    def linked_group_id
+      data[:linked_group_id]
+    end
+
     # @!endgroup
 
     # @return [Client]

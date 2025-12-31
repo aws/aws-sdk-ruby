@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.129.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.128.0 (2025-11-11)
+------------------
+
+* Feature - Documentation-only update: update API and doc descriptions per EKS ImageType default value switch from AL2 to AL2023.
+
+1.127.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.126.0 (2025-10-16)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.125.0 (2025-09-22)
 ------------------
 

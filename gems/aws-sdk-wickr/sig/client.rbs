@@ -1,0 +1,822 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Wickr
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchCreateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchCreateUserResponse]
+        def message: () -> ::String
+        def successful: () -> ::Array[Types::User]
+        def failed: () -> ::Array[Types::BatchUserErrorResponseItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#batch_create_user-instance_method
+      def batch_create_user: (
+                               network_id: ::String,
+                               users: Array[
+                                 {
+                                   first_name: ::String?,
+                                   last_name: ::String?,
+                                   security_group_ids: Array[::String],
+                                   username: ::String,
+                                   invite_code: ::String?,
+                                   invite_code_ttl: ::Integer?,
+                                   code_validation: bool?
+                                 },
+                               ],
+                               ?client_token: ::String
+                             ) -> _BatchCreateUserResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateUserResponseSuccess
+
+      interface _BatchDeleteUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteUserResponse]
+        def message: () -> ::String
+        def successful: () -> ::Array[Types::BatchUserSuccessResponseItem]
+        def failed: () -> ::Array[Types::BatchUserErrorResponseItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#batch_delete_user-instance_method
+      def batch_delete_user: (
+                               network_id: ::String,
+                               user_ids: Array[::String],
+                               ?client_token: ::String
+                             ) -> _BatchDeleteUserResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteUserResponseSuccess
+
+      interface _BatchLookupUserUnameResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchLookupUserUnameResponse]
+        def message: () -> ::String
+        def successful: () -> ::Array[Types::BatchUnameSuccessResponseItem]
+        def failed: () -> ::Array[Types::BatchUnameErrorResponseItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#batch_lookup_user_uname-instance_method
+      def batch_lookup_user_uname: (
+                                     network_id: ::String,
+                                     unames: Array[::String],
+                                     ?client_token: ::String
+                                   ) -> _BatchLookupUserUnameResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchLookupUserUnameResponseSuccess
+
+      interface _BatchReinviteUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchReinviteUserResponse]
+        def message: () -> ::String
+        def successful: () -> ::Array[Types::BatchUserSuccessResponseItem]
+        def failed: () -> ::Array[Types::BatchUserErrorResponseItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#batch_reinvite_user-instance_method
+      def batch_reinvite_user: (
+                                 network_id: ::String,
+                                 user_ids: Array[::String],
+                                 ?client_token: ::String
+                               ) -> _BatchReinviteUserResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchReinviteUserResponseSuccess
+
+      interface _BatchResetDevicesForUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchResetDevicesForUserResponse]
+        def message: () -> ::String
+        def successful: () -> ::Array[Types::BatchDeviceSuccessResponseItem]
+        def failed: () -> ::Array[Types::BatchDeviceErrorResponseItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#batch_reset_devices_for_user-instance_method
+      def batch_reset_devices_for_user: (
+                                          network_id: ::String,
+                                          user_id: ::String,
+                                          app_ids: Array[::String],
+                                          ?client_token: ::String
+                                        ) -> _BatchResetDevicesForUserResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchResetDevicesForUserResponseSuccess
+
+      interface _BatchToggleUserSuspendStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchToggleUserSuspendStatusResponse]
+        def message: () -> ::String
+        def successful: () -> ::Array[Types::BatchUserSuccessResponseItem]
+        def failed: () -> ::Array[Types::BatchUserErrorResponseItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#batch_toggle_user_suspend_status-instance_method
+      def batch_toggle_user_suspend_status: (
+                                              network_id: ::String,
+                                              suspend: bool,
+                                              user_ids: Array[::String],
+                                              ?client_token: ::String
+                                            ) -> _BatchToggleUserSuspendStatusResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchToggleUserSuspendStatusResponseSuccess
+
+      interface _CreateBotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBotResponse]
+        def message: () -> ::String
+        def bot_id: () -> ::String
+        def network_id: () -> ::String
+        def username: () -> ::String
+        def display_name: () -> ::String
+        def group_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#create_bot-instance_method
+      def create_bot: (
+                        network_id: ::String,
+                        username: ::String,
+                        ?display_name: ::String,
+                        group_id: ::String,
+                        challenge: ::String
+                      ) -> _CreateBotResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBotResponseSuccess
+
+      interface _CreateDataRetentionBotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataRetentionBotResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#create_data_retention_bot-instance_method
+      def create_data_retention_bot: (
+                                       network_id: ::String
+                                     ) -> _CreateDataRetentionBotResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataRetentionBotResponseSuccess
+
+      interface _CreateDataRetentionBotChallengeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataRetentionBotChallengeResponse]
+        def challenge: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#create_data_retention_bot_challenge-instance_method
+      def create_data_retention_bot_challenge: (
+                                                 network_id: ::String
+                                               ) -> _CreateDataRetentionBotChallengeResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataRetentionBotChallengeResponseSuccess
+
+      interface _CreateNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNetworkResponse]
+        def network_id: () -> ::String
+        def network_name: () -> ::String
+        def encryption_key_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#create_network-instance_method
+      def create_network: (
+                            network_name: ::String,
+                            access_level: ("STANDARD" | "PREMIUM"),
+                            ?enable_premium_free_trial: bool,
+                            ?encryption_key_arn: ::String
+                          ) -> _CreateNetworkResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNetworkResponseSuccess
+
+      interface _CreateSecurityGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSecurityGroupResponse]
+        def security_group: () -> Types::SecurityGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#create_security_group-instance_method
+      def create_security_group: (
+                                   network_id: ::String,
+                                   name: ::String,
+                                   security_group_settings: {
+                                     lockout_threshold: ::Integer?,
+                                     permitted_networks: Array[::String]?,
+                                     enable_guest_federation: bool?,
+                                     global_federation: bool?,
+                                     federation_mode: ::Integer?,
+                                     enable_restricted_global_federation: bool?,
+                                     permitted_wickr_aws_networks: Array[
+                                       {
+                                         region: ::String,
+                                         network_id: ::String
+                                       },
+                                     ]?,
+                                     permitted_wickr_enterprise_networks: Array[
+                                       {
+                                         domain: ::String,
+                                         network_id: ::String
+                                       },
+                                     ]?
+                                   },
+                                   ?client_token: ::String
+                                 ) -> _CreateSecurityGroupResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSecurityGroupResponseSuccess
+
+      interface _DeleteBotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBotResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#delete_bot-instance_method
+      def delete_bot: (
+                        network_id: ::String,
+                        bot_id: ::String
+                      ) -> _DeleteBotResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBotResponseSuccess
+
+      interface _DeleteDataRetentionBotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataRetentionBotResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#delete_data_retention_bot-instance_method
+      def delete_data_retention_bot: (
+                                       network_id: ::String
+                                     ) -> _DeleteDataRetentionBotResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataRetentionBotResponseSuccess
+
+      interface _DeleteNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNetworkResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#delete_network-instance_method
+      def delete_network: (
+                            network_id: ::String,
+                            ?client_token: ::String
+                          ) -> _DeleteNetworkResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNetworkResponseSuccess
+
+      interface _DeleteSecurityGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSecurityGroupResponse]
+        def message: () -> ::String
+        def network_id: () -> ::String
+        def group_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#delete_security_group-instance_method
+      def delete_security_group: (
+                                   network_id: ::String,
+                                   group_id: ::String
+                                 ) -> _DeleteSecurityGroupResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSecurityGroupResponseSuccess
+
+      interface _GetBotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBotResponse]
+        def bot_id: () -> ::String
+        def display_name: () -> ::String
+        def username: () -> ::String
+        def uname: () -> ::String
+        def pubkey: () -> ::String
+        def status: () -> ::Integer
+        def group_id: () -> ::String
+        def has_challenge: () -> bool
+        def suspended: () -> bool
+        def last_login: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#get_bot-instance_method
+      def get_bot: (
+                     network_id: ::String,
+                     bot_id: ::String
+                   ) -> _GetBotResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBotResponseSuccess
+
+      interface _GetBotsCountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBotsCountResponse]
+        def pending: () -> ::Integer
+        def active: () -> ::Integer
+        def total: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#get_bots_count-instance_method
+      def get_bots_count: (
+                            network_id: ::String
+                          ) -> _GetBotsCountResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBotsCountResponseSuccess
+
+      interface _GetDataRetentionBotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataRetentionBotResponse]
+        def bot_name: () -> ::String
+        def bot_exists: () -> bool
+        def is_bot_active: () -> bool
+        def is_data_retention_bot_registered: () -> bool
+        def is_data_retention_service_enabled: () -> bool
+        def is_pubkey_msg_acked: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#get_data_retention_bot-instance_method
+      def get_data_retention_bot: (
+                                    network_id: ::String
+                                  ) -> _GetDataRetentionBotResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataRetentionBotResponseSuccess
+
+      interface _GetGuestUserHistoryCountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGuestUserHistoryCountResponse]
+        def history: () -> ::Array[Types::GuestUserHistoryCount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#get_guest_user_history_count-instance_method
+      def get_guest_user_history_count: (
+                                          network_id: ::String
+                                        ) -> _GetGuestUserHistoryCountResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGuestUserHistoryCountResponseSuccess
+
+      interface _GetNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNetworkResponse]
+        def network_id: () -> ::String
+        def network_name: () -> ::String
+        def access_level: () -> ("STANDARD" | "PREMIUM")
+        def aws_account_id: () -> ::String
+        def network_arn: () -> ::String
+        def standing: () -> ::Integer
+        def free_trial_expiration: () -> ::String
+        def migration_state: () -> ::Integer
+        def encryption_key_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#get_network-instance_method
+      def get_network: (
+                         network_id: ::String
+                       ) -> _GetNetworkResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNetworkResponseSuccess
+
+      interface _GetNetworkSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNetworkSettingsResponse]
+        def settings: () -> ::Array[Types::Setting]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#get_network_settings-instance_method
+      def get_network_settings: (
+                                  network_id: ::String
+                                ) -> _GetNetworkSettingsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNetworkSettingsResponseSuccess
+
+      interface _GetOidcInfoResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOidcInfoResponse]
+        def openid_connect_info: () -> Types::OidcConfigInfo
+        def token_info: () -> Types::OidcTokenInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#get_oidc_info-instance_method
+      def get_oidc_info: (
+                           network_id: ::String,
+                           ?client_id: ::String,
+                           ?code: ::String,
+                           ?grant_type: ::String,
+                           ?redirect_uri: ::String,
+                           ?url: ::String,
+                           ?client_secret: ::String,
+                           ?code_verifier: ::String,
+                           ?certificate: ::String
+                         ) -> _GetOidcInfoResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOidcInfoResponseSuccess
+
+      interface _GetSecurityGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSecurityGroupResponse]
+        def security_group: () -> Types::SecurityGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#get_security_group-instance_method
+      def get_security_group: (
+                                network_id: ::String,
+                                group_id: ::String
+                              ) -> _GetSecurityGroupResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSecurityGroupResponseSuccess
+
+      interface _GetUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUserResponse]
+        def user_id: () -> ::String
+        def first_name: () -> ::String
+        def last_name: () -> ::String
+        def username: () -> ::String
+        def is_admin: () -> bool
+        def suspended: () -> bool
+        def status: () -> ::Integer
+        def last_activity: () -> ::Integer
+        def last_login: () -> ::Integer
+        def security_group_ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#get_user-instance_method
+      def get_user: (
+                      network_id: ::String,
+                      user_id: ::String,
+                      ?start_time: ::Time,
+                      ?end_time: ::Time
+                    ) -> _GetUserResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUserResponseSuccess
+
+      interface _GetUsersCountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUsersCountResponse]
+        def pending: () -> ::Integer
+        def active: () -> ::Integer
+        def rejected: () -> ::Integer
+        def remaining: () -> ::Integer
+        def total: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#get_users_count-instance_method
+      def get_users_count: (
+                             network_id: ::String
+                           ) -> _GetUsersCountResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUsersCountResponseSuccess
+
+      interface _ListBlockedGuestUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBlockedGuestUsersResponse]
+        def next_token: () -> ::String
+        def blocklist: () -> ::Array[Types::BlockedGuestUser]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#list_blocked_guest_users-instance_method
+      def list_blocked_guest_users: (
+                                      network_id: ::String,
+                                      ?max_results: ::Integer,
+                                      ?sort_direction: ("ASC" | "DESC"),
+                                      ?sort_fields: ::String,
+                                      ?username: ::String,
+                                      ?admin: ::String,
+                                      ?next_token: ::String
+                                    ) -> _ListBlockedGuestUsersResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBlockedGuestUsersResponseSuccess
+
+      interface _ListBotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBotsResponse]
+        def bots: () -> ::Array[Types::Bot]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#list_bots-instance_method
+      def list_bots: (
+                       network_id: ::String,
+                       ?next_token: ::String,
+                       ?max_results: ::Integer,
+                       ?sort_fields: ::String,
+                       ?sort_direction: ("ASC" | "DESC"),
+                       ?display_name: ::String,
+                       ?username: ::String,
+                       ?status: ::Integer,
+                       ?group_id: ::String
+                     ) -> _ListBotsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBotsResponseSuccess
+
+      interface _ListDevicesForUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDevicesForUserResponse]
+        def next_token: () -> ::String
+        def devices: () -> ::Array[Types::BasicDeviceObject]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#list_devices_for_user-instance_method
+      def list_devices_for_user: (
+                                   network_id: ::String,
+                                   user_id: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer,
+                                   ?sort_fields: ::String,
+                                   ?sort_direction: ("ASC" | "DESC")
+                                 ) -> _ListDevicesForUserResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDevicesForUserResponseSuccess
+
+      interface _ListGuestUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGuestUsersResponse]
+        def next_token: () -> ::String
+        def guestlist: () -> ::Array[Types::GuestUser]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#list_guest_users-instance_method
+      def list_guest_users: (
+                              network_id: ::String,
+                              ?max_results: ::Integer,
+                              ?sort_direction: ("ASC" | "DESC"),
+                              ?sort_fields: ::String,
+                              ?username: ::String,
+                              ?billing_period: ::String,
+                              ?next_token: ::String
+                            ) -> _ListGuestUsersResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGuestUsersResponseSuccess
+
+      interface _ListNetworksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworksResponse]
+        def networks: () -> ::Array[Types::Network]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#list_networks-instance_method
+      def list_networks: (
+                           ?max_results: ::Integer,
+                           ?sort_fields: ::String,
+                           ?sort_direction: ("ASC" | "DESC"),
+                           ?next_token: ::String
+                         ) -> _ListNetworksResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworksResponseSuccess
+
+      interface _ListSecurityGroupUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSecurityGroupUsersResponse]
+        def users: () -> ::Array[Types::User]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#list_security_group_users-instance_method
+      def list_security_group_users: (
+                                       network_id: ::String,
+                                       group_id: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer,
+                                       ?sort_fields: ::String,
+                                       ?sort_direction: ("ASC" | "DESC")
+                                     ) -> _ListSecurityGroupUsersResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSecurityGroupUsersResponseSuccess
+
+      interface _ListSecurityGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSecurityGroupsResponse]
+        def security_groups: () -> ::Array[Types::SecurityGroup]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#list_security_groups-instance_method
+      def list_security_groups: (
+                                  network_id: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  ?sort_fields: ::String,
+                                  ?sort_direction: ("ASC" | "DESC")
+                                ) -> _ListSecurityGroupsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSecurityGroupsResponseSuccess
+
+      interface _ListUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUsersResponse]
+        def next_token: () -> ::String
+        def users: () -> ::Array[Types::User]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#list_users-instance_method
+      def list_users: (
+                        network_id: ::String,
+                        ?next_token: ::String,
+                        ?max_results: ::Integer,
+                        ?sort_fields: ::String,
+                        ?sort_direction: ("ASC" | "DESC"),
+                        ?first_name: ::String,
+                        ?last_name: ::String,
+                        ?username: ::String,
+                        ?status: ::Integer,
+                        ?group_id: ::String
+                      ) -> _ListUsersResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUsersResponseSuccess
+
+      interface _RegisterOidcConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterOidcConfigResponse]
+        def application_name: () -> ::String
+        def client_id: () -> ::String
+        def company_id: () -> ::String
+        def scopes: () -> ::String
+        def issuer: () -> ::String
+        def client_secret: () -> ::String
+        def secret: () -> ::String
+        def redirect_url: () -> ::String
+        def user_id: () -> ::String
+        def custom_username: () -> ::String
+        def ca_certificate: () -> ::String
+        def application_id: () -> ::Integer
+        def sso_token_buffer_minutes: () -> ::Integer
+        def extra_auth_params: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#register_oidc_config-instance_method
+      def register_oidc_config: (
+                                  network_id: ::String,
+                                  company_id: ::String,
+                                  ?custom_username: ::String,
+                                  ?extra_auth_params: ::String,
+                                  issuer: ::String,
+                                  scopes: ::String,
+                                  ?secret: ::String,
+                                  ?sso_token_buffer_minutes: ::Integer,
+                                  ?user_id: ::String
+                                ) -> _RegisterOidcConfigResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterOidcConfigResponseSuccess
+
+      interface _RegisterOidcConfigTestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterOidcConfigTestResponse]
+        def token_endpoint: () -> ::String
+        def userinfo_endpoint: () -> ::String
+        def response_types_supported: () -> ::Array[::String]
+        def scopes_supported: () -> ::Array[::String]
+        def issuer: () -> ::String
+        def authorization_endpoint: () -> ::String
+        def end_session_endpoint: () -> ::String
+        def logout_endpoint: () -> ::String
+        def grant_types_supported: () -> ::Array[::String]
+        def revocation_endpoint: () -> ::String
+        def token_endpoint_auth_methods_supported: () -> ::Array[::String]
+        def microsoft_multi_refresh_token: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#register_oidc_config_test-instance_method
+      def register_oidc_config_test: (
+                                       network_id: ::String,
+                                       ?extra_auth_params: ::String,
+                                       issuer: ::String,
+                                       scopes: ::String,
+                                       ?certificate: ::String
+                                     ) -> _RegisterOidcConfigTestResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterOidcConfigTestResponseSuccess
+
+      interface _UpdateBotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBotResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#update_bot-instance_method
+      def update_bot: (
+                        network_id: ::String,
+                        bot_id: ::String,
+                        ?display_name: ::String,
+                        ?group_id: ::String,
+                        ?challenge: ::String,
+                        ?suspend: bool
+                      ) -> _UpdateBotResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBotResponseSuccess
+
+      interface _UpdateDataRetentionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataRetentionResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#update_data_retention-instance_method
+      def update_data_retention: (
+                                   network_id: ::String,
+                                   action_type: ("ENABLE" | "DISABLE" | "PUBKEY_MSG_ACK")
+                                 ) -> _UpdateDataRetentionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataRetentionResponseSuccess
+
+      interface _UpdateGuestUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGuestUserResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#update_guest_user-instance_method
+      def update_guest_user: (
+                               network_id: ::String,
+                               username_hash: ::String,
+                               block: bool
+                             ) -> _UpdateGuestUserResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGuestUserResponseSuccess
+
+      interface _UpdateNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNetworkResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#update_network-instance_method
+      def update_network: (
+                            network_id: ::String,
+                            network_name: ::String,
+                            ?client_token: ::String,
+                            ?encryption_key_arn: ::String
+                          ) -> _UpdateNetworkResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNetworkResponseSuccess
+
+      interface _UpdateNetworkSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNetworkSettingsResponse]
+        def settings: () -> ::Array[Types::Setting]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#update_network_settings-instance_method
+      def update_network_settings: (
+                                     network_id: ::String,
+                                     settings: {
+                                       enable_client_metrics: bool?,
+                                       read_receipt_config: {
+                                         status: ("DISABLED" | "ENABLED" | "FORCE_ENABLED")?
+                                       }?,
+                                       data_retention: bool?
+                                     }
+                                   ) -> _UpdateNetworkSettingsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNetworkSettingsResponseSuccess
+
+      interface _UpdateSecurityGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSecurityGroupResponse]
+        def security_group: () -> Types::SecurityGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#update_security_group-instance_method
+      def update_security_group: (
+                                   network_id: ::String,
+                                   group_id: ::String,
+                                   ?name: ::String,
+                                   ?security_group_settings: {
+                                     always_reauthenticate: bool?,
+                                     atak_package_values: Array[::String]?,
+                                     calling: {
+                                       can_start_11_call: bool?,
+                                       can_video_call: bool?,
+                                       force_tcp_call: bool?
+                                     }?,
+                                     check_for_updates: bool?,
+                                     enable_atak: bool?,
+                                     enable_crash_reports: bool?,
+                                     enable_file_download: bool?,
+                                     enable_guest_federation: bool?,
+                                     enable_notification_preview: bool?,
+                                     enable_open_access_option: bool?,
+                                     enable_restricted_global_federation: bool?,
+                                     files_enabled: bool?,
+                                     force_device_lockout: ::Integer?,
+                                     force_open_access: bool?,
+                                     force_read_receipts: bool?,
+                                     global_federation: bool?,
+                                     is_ato_enabled: bool?,
+                                     is_link_preview_enabled: bool?,
+                                     location_allow_maps: bool?,
+                                     location_enabled: bool?,
+                                     max_auto_download_size: ::Integer?,
+                                     max_bor: ::Integer?,
+                                     max_ttl: ::Integer?,
+                                     message_forwarding_enabled: bool?,
+                                     password_requirements: {
+                                       lowercase: ::Integer?,
+                                       min_length: ::Integer?,
+                                       numbers: ::Integer?,
+                                       symbols: ::Integer?,
+                                       uppercase: ::Integer?
+                                     }?,
+                                     presence_enabled: bool?,
+                                     quick_responses: Array[::String]?,
+                                     show_master_recovery_key: bool?,
+                                     shredder: {
+                                       can_process_manually: bool?,
+                                       intensity: ::Integer?
+                                     }?,
+                                     sso_max_idle_minutes: ::Integer?,
+                                     federation_mode: ::Integer?,
+                                     lockout_threshold: ::Integer?,
+                                     permitted_networks: Array[::String]?,
+                                     permitted_wickr_aws_networks: Array[
+                                       {
+                                         region: ::String,
+                                         network_id: ::String
+                                       },
+                                     ]?,
+                                     permitted_wickr_enterprise_networks: Array[
+                                       {
+                                         domain: ::String,
+                                         network_id: ::String
+                                       },
+                                     ]?
+                                   }
+                                 ) -> _UpdateSecurityGroupResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSecurityGroupResponseSuccess
+
+      interface _UpdateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserResponse]
+        def user_id: () -> ::String
+        def network_id: () -> ::String
+        def security_group_ids: () -> ::Array[::String]
+        def first_name: () -> ::String
+        def last_name: () -> ::String
+        def middle_name: () -> ::String
+        def suspended: () -> bool
+        def modified: () -> ::Integer
+        def status: () -> ::Integer
+        def invite_code: () -> ::String
+        def invite_expiration: () -> ::Integer
+        def code_validation: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Wickr/Client.html#update_user-instance_method
+      def update_user: (
+                         network_id: ::String,
+                         user_id: ::String,
+                         ?user_details: {
+                           first_name: ::String?,
+                           last_name: ::String?,
+                           username: ::String?,
+                           security_group_ids: Array[::String]?,
+                           invite_code: ::String?,
+                           invite_code_ttl: ::Integer?,
+                           code_validation: bool?
+                         }
+                       ) -> _UpdateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserResponseSuccess
+    end
+  end
+end
+

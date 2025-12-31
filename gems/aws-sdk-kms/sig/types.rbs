@@ -85,6 +85,7 @@ module Aws::KMS
       attr_accessor xks_proxy_uri_endpoint: ::String
       attr_accessor xks_proxy_uri_path: ::String
       attr_accessor xks_proxy_vpc_endpoint_service_name: ::String
+      attr_accessor xks_proxy_vpc_endpoint_service_owner: ::String
       attr_accessor xks_proxy_authentication_credential: Types::XksProxyAuthenticationCredentialType
       attr_accessor xks_proxy_connectivity: ("PUBLIC_ENDPOINT" | "VPC_ENDPOINT_SERVICE")
       SENSITIVE: [:key_store_password]
@@ -118,7 +119,7 @@ module Aws::KMS
       attr_accessor description: ::String
       attr_accessor key_usage: ("SIGN_VERIFY" | "ENCRYPT_DECRYPT" | "GENERATE_VERIFY_MAC" | "KEY_AGREEMENT")
       attr_accessor customer_master_key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2")
-      attr_accessor key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2" | "ML_DSA_44" | "ML_DSA_65" | "ML_DSA_87")
+      attr_accessor key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2" | "ML_DSA_44" | "ML_DSA_65" | "ML_DSA_87" | "ECC_NIST_EDWARDS25519")
       attr_accessor origin: ("AWS_KMS" | "EXTERNAL" | "AWS_CLOUDHSM" | "EXTERNAL_KEY_STORE")
       attr_accessor custom_key_store_id: ::String
       attr_accessor bypass_policy_lockout_safety_check: bool
@@ -325,7 +326,7 @@ module Aws::KMS
     class GenerateDataKeyPairRequest
       attr_accessor encryption_context: ::Hash[::String, ::String]
       attr_accessor key_id: ::String
-      attr_accessor key_pair_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SM2")
+      attr_accessor key_pair_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SM2" | "ECC_NIST_EDWARDS25519")
       attr_accessor grant_tokens: ::Array[::String]
       attr_accessor recipient: Types::RecipientInfo
       attr_accessor dry_run: bool
@@ -337,7 +338,7 @@ module Aws::KMS
       attr_accessor private_key_plaintext: ::String
       attr_accessor public_key: ::String
       attr_accessor key_id: ::String
-      attr_accessor key_pair_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SM2")
+      attr_accessor key_pair_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SM2" | "ECC_NIST_EDWARDS25519")
       attr_accessor ciphertext_for_recipient: ::String
       attr_accessor key_material_id: ::String
       SENSITIVE: [:private_key_plaintext]
@@ -346,7 +347,7 @@ module Aws::KMS
     class GenerateDataKeyPairWithoutPlaintextRequest
       attr_accessor encryption_context: ::Hash[::String, ::String]
       attr_accessor key_id: ::String
-      attr_accessor key_pair_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SM2")
+      attr_accessor key_pair_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SM2" | "ECC_NIST_EDWARDS25519")
       attr_accessor grant_tokens: ::Array[::String]
       attr_accessor dry_run: bool
       SENSITIVE: []
@@ -356,7 +357,7 @@ module Aws::KMS
       attr_accessor private_key_ciphertext_blob: ::String
       attr_accessor public_key: ::String
       attr_accessor key_id: ::String
-      attr_accessor key_pair_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SM2")
+      attr_accessor key_pair_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SM2" | "ECC_NIST_EDWARDS25519")
       attr_accessor key_material_id: ::String
       SENSITIVE: []
     end
@@ -478,10 +479,10 @@ module Aws::KMS
       attr_accessor key_id: ::String
       attr_accessor public_key: ::String
       attr_accessor customer_master_key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2")
-      attr_accessor key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2" | "ML_DSA_44" | "ML_DSA_65" | "ML_DSA_87")
+      attr_accessor key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2" | "ML_DSA_44" | "ML_DSA_65" | "ML_DSA_87" | "ECC_NIST_EDWARDS25519")
       attr_accessor key_usage: ("SIGN_VERIFY" | "ENCRYPT_DECRYPT" | "GENERATE_VERIFY_MAC" | "KEY_AGREEMENT")
       attr_accessor encryption_algorithms: ::Array[("SYMMETRIC_DEFAULT" | "RSAES_OAEP_SHA_1" | "RSAES_OAEP_SHA_256" | "SM2PKE")]
-      attr_accessor signing_algorithms: ::Array[("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA" | "ML_DSA_SHAKE_256")]
+      attr_accessor signing_algorithms: ::Array[("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA" | "ML_DSA_SHAKE_256" | "ED25519_SHA_512" | "ED25519_PH_SHA_512")]
       attr_accessor key_agreement_algorithms: ::Array[("ECDH")]
       SENSITIVE: []
     end
@@ -621,9 +622,9 @@ module Aws::KMS
       attr_accessor expiration_model: ("KEY_MATERIAL_EXPIRES" | "KEY_MATERIAL_DOES_NOT_EXPIRE")
       attr_accessor key_manager: ("AWS" | "CUSTOMER")
       attr_accessor customer_master_key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2")
-      attr_accessor key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2" | "ML_DSA_44" | "ML_DSA_65" | "ML_DSA_87")
+      attr_accessor key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2" | "ML_DSA_44" | "ML_DSA_65" | "ML_DSA_87" | "ECC_NIST_EDWARDS25519")
       attr_accessor encryption_algorithms: ::Array[("SYMMETRIC_DEFAULT" | "RSAES_OAEP_SHA_1" | "RSAES_OAEP_SHA_256" | "SM2PKE")]
-      attr_accessor signing_algorithms: ::Array[("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA" | "ML_DSA_SHAKE_256")]
+      attr_accessor signing_algorithms: ::Array[("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA" | "ML_DSA_SHAKE_256" | "ED25519_SHA_512" | "ED25519_PH_SHA_512")]
       attr_accessor key_agreement_algorithms: ::Array[("ECDH")]
       attr_accessor multi_region: bool
       attr_accessor multi_region_configuration: Types::MultiRegionConfiguration
@@ -845,7 +846,7 @@ module Aws::KMS
       attr_accessor key_material_id: ::String
       attr_accessor key_material_description: ::String
       attr_accessor import_state: ("IMPORTED" | "PENDING_IMPORT")
-      attr_accessor key_material_state: ("NON_CURRENT" | "CURRENT" | "PENDING_ROTATION")
+      attr_accessor key_material_state: ("NON_CURRENT" | "CURRENT" | "PENDING_ROTATION" | "PENDING_MULTI_REGION_IMPORT_AND_ROTATION")
       attr_accessor expiration_model: ("KEY_MATERIAL_EXPIRES" | "KEY_MATERIAL_DOES_NOT_EXPIRE")
       attr_accessor valid_to: ::Time
       attr_accessor rotation_date: ::Time
@@ -872,7 +873,7 @@ module Aws::KMS
       attr_accessor message: ::String
       attr_accessor message_type: ("RAW" | "DIGEST" | "EXTERNAL_MU")
       attr_accessor grant_tokens: ::Array[::String]
-      attr_accessor signing_algorithm: ("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA" | "ML_DSA_SHAKE_256")
+      attr_accessor signing_algorithm: ("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA" | "ML_DSA_SHAKE_256" | "ED25519_SHA_512" | "ED25519_PH_SHA_512")
       attr_accessor dry_run: bool
       SENSITIVE: [:message]
     end
@@ -880,7 +881,7 @@ module Aws::KMS
     class SignResponse
       attr_accessor key_id: ::String
       attr_accessor signature: ::String
-      attr_accessor signing_algorithm: ("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA" | "ML_DSA_SHAKE_256")
+      attr_accessor signing_algorithm: ("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA" | "ML_DSA_SHAKE_256" | "ED25519_SHA_512" | "ED25519_PH_SHA_512")
       SENSITIVE: []
     end
 
@@ -926,6 +927,7 @@ module Aws::KMS
       attr_accessor xks_proxy_uri_endpoint: ::String
       attr_accessor xks_proxy_uri_path: ::String
       attr_accessor xks_proxy_vpc_endpoint_service_name: ::String
+      attr_accessor xks_proxy_vpc_endpoint_service_owner: ::String
       attr_accessor xks_proxy_authentication_credential: Types::XksProxyAuthenticationCredentialType
       attr_accessor xks_proxy_connectivity: ("PUBLIC_ENDPOINT" | "VPC_ENDPOINT_SERVICE")
       SENSITIVE: [:key_store_password]
@@ -968,7 +970,7 @@ module Aws::KMS
       attr_accessor message: ::String
       attr_accessor message_type: ("RAW" | "DIGEST" | "EXTERNAL_MU")
       attr_accessor signature: ::String
-      attr_accessor signing_algorithm: ("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA" | "ML_DSA_SHAKE_256")
+      attr_accessor signing_algorithm: ("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA" | "ML_DSA_SHAKE_256" | "ED25519_SHA_512" | "ED25519_PH_SHA_512")
       attr_accessor grant_tokens: ::Array[::String]
       attr_accessor dry_run: bool
       SENSITIVE: [:message]
@@ -977,7 +979,7 @@ module Aws::KMS
     class VerifyResponse
       attr_accessor key_id: ::String
       attr_accessor signature_valid: bool
-      attr_accessor signing_algorithm: ("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA" | "ML_DSA_SHAKE_256")
+      attr_accessor signing_algorithm: ("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA" | "ML_DSA_SHAKE_256" | "ED25519_SHA_512" | "ED25519_PH_SHA_512")
       SENSITIVE: []
     end
 
@@ -1013,6 +1015,7 @@ module Aws::KMS
       attr_accessor uri_endpoint: ::String
       attr_accessor uri_path: ::String
       attr_accessor vpc_endpoint_service_name: ::String
+      attr_accessor vpc_endpoint_service_owner: ::String
       SENSITIVE: [:access_key_id]
     end
 

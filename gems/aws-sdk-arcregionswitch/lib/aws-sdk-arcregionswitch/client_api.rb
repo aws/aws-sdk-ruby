@@ -45,6 +45,14 @@ module Aws::ARCRegionswitch
     CustomActionLambdaConfigurationTimeoutMinutesInteger = Shapes::IntegerShape.new(name: 'CustomActionLambdaConfigurationTimeoutMinutesInteger')
     DeletePlanRequest = Shapes::StructureShape.new(name: 'DeletePlanRequest')
     DeletePlanResponse = Shapes::StructureShape.new(name: 'DeletePlanResponse')
+    DocumentDbClusterArn = Shapes::StringShape.new(name: 'DocumentDbClusterArn')
+    DocumentDbClusterArns = Shapes::ListShape.new(name: 'DocumentDbClusterArns')
+    DocumentDbConfiguration = Shapes::StructureShape.new(name: 'DocumentDbConfiguration')
+    DocumentDbConfigurationTimeoutMinutesInteger = Shapes::IntegerShape.new(name: 'DocumentDbConfigurationTimeoutMinutesInteger')
+    DocumentDbDefaultBehavior = Shapes::StringShape.new(name: 'DocumentDbDefaultBehavior')
+    DocumentDbGlobalClusterIdentifier = Shapes::StringShape.new(name: 'DocumentDbGlobalClusterIdentifier')
+    DocumentDbUngraceful = Shapes::StructureShape.new(name: 'DocumentDbUngraceful')
+    DocumentDbUngracefulBehavior = Shapes::StringShape.new(name: 'DocumentDbUngracefulBehavior')
     Duration = Shapes::StringShape.new(name: 'Duration')
     Ec2AsgCapacityIncreaseConfiguration = Shapes::StructureShape.new(name: 'Ec2AsgCapacityIncreaseConfiguration')
     Ec2AsgCapacityIncreaseConfigurationTimeoutMinutesInteger = Shapes::IntegerShape.new(name: 'Ec2AsgCapacityIncreaseConfigurationTimeoutMinutesInteger')
@@ -80,7 +88,11 @@ module Aws::ARCRegionswitch
     ExecutionId = Shapes::StringShape.new(name: 'ExecutionId')
     ExecutionMode = Shapes::StringShape.new(name: 'ExecutionMode')
     ExecutionState = Shapes::StringShape.new(name: 'ExecutionState')
+    FailedReportErrorCode = Shapes::StringShape.new(name: 'FailedReportErrorCode')
+    FailedReportOutput = Shapes::StructureShape.new(name: 'FailedReportOutput')
     Float = Shapes::FloatShape.new(name: 'Float')
+    GeneratedReport = Shapes::StructureShape.new(name: 'GeneratedReport')
+    GeneratedReportDetails = Shapes::ListShape.new(name: 'GeneratedReportDetails')
     GetPlanEvaluationStatusRequest = Shapes::StructureShape.new(name: 'GetPlanEvaluationStatusRequest')
     GetPlanEvaluationStatusResponse = Shapes::StructureShape.new(name: 'GetPlanEvaluationStatusResponse')
     GetPlanExecutionRequest = Shapes::StructureShape.new(name: 'GetPlanExecutionRequest')
@@ -121,6 +133,9 @@ module Aws::ARCRegionswitch
     ListPlansInRegionResponse = Shapes::StructureShape.new(name: 'ListPlansInRegionResponse')
     ListPlansRequest = Shapes::StructureShape.new(name: 'ListPlansRequest')
     ListPlansResponse = Shapes::StructureShape.new(name: 'ListPlansResponse')
+    ListRoute53HealthChecksInRegionRequest = Shapes::StructureShape.new(name: 'ListRoute53HealthChecksInRegionRequest')
+    ListRoute53HealthChecksInRegionRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRoute53HealthChecksInRegionRequestMaxResultsInteger')
+    ListRoute53HealthChecksInRegionResponse = Shapes::StructureShape.new(name: 'ListRoute53HealthChecksInRegionResponse')
     ListRoute53HealthChecksRequest = Shapes::StructureShape.new(name: 'ListRoute53HealthChecksRequest')
     ListRoute53HealthChecksRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRoute53HealthChecksRequestMaxResultsInteger')
     ListRoute53HealthChecksResponse = Shapes::StructureShape.new(name: 'ListRoute53HealthChecksResponse')
@@ -143,6 +158,10 @@ module Aws::ARCRegionswitch
     RegionSwitchPlanConfiguration = Shapes::StructureShape.new(name: 'RegionSwitchPlanConfiguration')
     RegionToRunIn = Shapes::StringShape.new(name: 'RegionToRunIn')
     RegionalScalingResource = Shapes::MapShape.new(name: 'RegionalScalingResource')
+    ReportConfiguration = Shapes::StructureShape.new(name: 'ReportConfiguration')
+    ReportOutput = Shapes::UnionShape.new(name: 'ReportOutput')
+    ReportOutputConfiguration = Shapes::UnionShape.new(name: 'ReportOutputConfiguration')
+    ReportOutputList = Shapes::ListShape.new(name: 'ReportOutputList')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceWarning = Shapes::StructureShape.new(name: 'ResourceWarning')
@@ -154,6 +173,7 @@ module Aws::ARCRegionswitch
     Route53HealthCheckConfigurationTimeoutMinutesInteger = Shapes::IntegerShape.new(name: 'Route53HealthCheckConfigurationTimeoutMinutesInteger')
     Route53HealthCheckId = Shapes::StringShape.new(name: 'Route53HealthCheckId')
     Route53HealthCheckList = Shapes::ListShape.new(name: 'Route53HealthCheckList')
+    Route53HealthCheckStatus = Shapes::StringShape.new(name: 'Route53HealthCheckStatus')
     Route53HostedZoneId = Shapes::StringShape.new(name: 'Route53HostedZoneId')
     Route53RecordName = Shapes::StringShape.new(name: 'Route53RecordName')
     Route53ResourceRecordSet = Shapes::StructureShape.new(name: 'Route53ResourceRecordSet')
@@ -161,6 +181,9 @@ module Aws::ARCRegionswitch
     Route53ResourceRecordSetList = Shapes::ListShape.new(name: 'Route53ResourceRecordSetList')
     RoutingControlArn = Shapes::StringShape.new(name: 'RoutingControlArn')
     RoutingControlStateChange = Shapes::StringShape.new(name: 'RoutingControlStateChange')
+    S3ReportOutput = Shapes::StructureShape.new(name: 'S3ReportOutput')
+    S3ReportOutputConfiguration = Shapes::StructureShape.new(name: 'S3ReportOutputConfiguration')
+    S3ReportOutputConfigurationBucketPathString = Shapes::StringShape.new(name: 'S3ReportOutputConfigurationBucketPathString')
     Service = Shapes::StructureShape.new(name: 'Service')
     ServiceList = Shapes::ListShape.new(name: 'ServiceList')
     StartPlanExecutionRequest = Shapes::StructureShape.new(name: 'StartPlanExecutionRequest')
@@ -283,6 +306,7 @@ module Aws::ARCRegionswitch
     CreatePlanRequest.add_member(:recovery_time_objective_minutes, Shapes::ShapeRef.new(shape: CreatePlanRequestRecoveryTimeObjectiveMinutesInteger, location_name: "recoveryTimeObjectiveMinutes"))
     CreatePlanRequest.add_member(:associated_alarms, Shapes::ShapeRef.new(shape: AssociatedAlarmMap, location_name: "associatedAlarms"))
     CreatePlanRequest.add_member(:triggers, Shapes::ShapeRef.new(shape: TriggerList, location_name: "triggers"))
+    CreatePlanRequest.add_member(:report_configuration, Shapes::ShapeRef.new(shape: ReportConfiguration, location_name: "reportConfiguration"))
     CreatePlanRequest.add_member(:name, Shapes::ShapeRef.new(shape: PlanName, required: true, location_name: "name"))
     CreatePlanRequest.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, required: true, location_name: "regions"))
     CreatePlanRequest.add_member(:recovery_approach, Shapes::ShapeRef.new(shape: RecoveryApproach, required: true, location_name: "recoveryApproach"))
@@ -304,6 +328,20 @@ module Aws::ARCRegionswitch
     DeletePlanRequest.struct_class = Types::DeletePlanRequest
 
     DeletePlanResponse.struct_class = Types::DeletePlanResponse
+
+    DocumentDbClusterArns.member = Shapes::ShapeRef.new(shape: DocumentDbClusterArn)
+
+    DocumentDbConfiguration.add_member(:timeout_minutes, Shapes::ShapeRef.new(shape: DocumentDbConfigurationTimeoutMinutesInteger, location_name: "timeoutMinutes"))
+    DocumentDbConfiguration.add_member(:cross_account_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "crossAccountRole"))
+    DocumentDbConfiguration.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
+    DocumentDbConfiguration.add_member(:behavior, Shapes::ShapeRef.new(shape: DocumentDbDefaultBehavior, required: true, location_name: "behavior"))
+    DocumentDbConfiguration.add_member(:ungraceful, Shapes::ShapeRef.new(shape: DocumentDbUngraceful, location_name: "ungraceful"))
+    DocumentDbConfiguration.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: DocumentDbGlobalClusterIdentifier, required: true, location_name: "globalClusterIdentifier"))
+    DocumentDbConfiguration.add_member(:database_cluster_arns, Shapes::ShapeRef.new(shape: DocumentDbClusterArns, required: true, location_name: "databaseClusterArns"))
+    DocumentDbConfiguration.struct_class = Types::DocumentDbConfiguration
+
+    DocumentDbUngraceful.add_member(:ungraceful, Shapes::ShapeRef.new(shape: DocumentDbUngracefulBehavior, location_name: "ungraceful"))
+    DocumentDbUngraceful.struct_class = Types::DocumentDbUngraceful
 
     Ec2AsgCapacityIncreaseConfiguration.add_member(:timeout_minutes, Shapes::ShapeRef.new(shape: Ec2AsgCapacityIncreaseConfigurationTimeoutMinutesInteger, location_name: "timeoutMinutes"))
     Ec2AsgCapacityIncreaseConfiguration.add_member(:asgs, Shapes::ShapeRef.new(shape: AsgList, required: true, location_name: "asgs"))
@@ -358,6 +396,7 @@ module Aws::ARCRegionswitch
     ExecutionBlockConfiguration.add_member(:ecs_capacity_increase_config, Shapes::ShapeRef.new(shape: EcsCapacityIncreaseConfiguration, location_name: "ecsCapacityIncreaseConfig"))
     ExecutionBlockConfiguration.add_member(:eks_resource_scaling_config, Shapes::ShapeRef.new(shape: EksResourceScalingConfiguration, location_name: "eksResourceScalingConfig"))
     ExecutionBlockConfiguration.add_member(:route53_health_check_config, Shapes::ShapeRef.new(shape: Route53HealthCheckConfiguration, location_name: "route53HealthCheckConfig"))
+    ExecutionBlockConfiguration.add_member(:document_db_config, Shapes::ShapeRef.new(shape: DocumentDbConfiguration, location_name: "documentDbConfig"))
     ExecutionBlockConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ExecutionBlockConfiguration.add_member_subclass(:custom_action_lambda_config, Types::ExecutionBlockConfiguration::CustomActionLambdaConfig)
     ExecutionBlockConfiguration.add_member_subclass(:ec2_asg_capacity_increase_config, Types::ExecutionBlockConfiguration::Ec2AsgCapacityIncreaseConfig)
@@ -369,6 +408,7 @@ module Aws::ARCRegionswitch
     ExecutionBlockConfiguration.add_member_subclass(:ecs_capacity_increase_config, Types::ExecutionBlockConfiguration::EcsCapacityIncreaseConfig)
     ExecutionBlockConfiguration.add_member_subclass(:eks_resource_scaling_config, Types::ExecutionBlockConfiguration::EksResourceScalingConfig)
     ExecutionBlockConfiguration.add_member_subclass(:route53_health_check_config, Types::ExecutionBlockConfiguration::Route53HealthCheckConfig)
+    ExecutionBlockConfiguration.add_member_subclass(:document_db_config, Types::ExecutionBlockConfiguration::DocumentDbConfig)
     ExecutionBlockConfiguration.add_member_subclass(:unknown, Types::ExecutionBlockConfiguration::Unknown)
     ExecutionBlockConfiguration.struct_class = Types::ExecutionBlockConfiguration
 
@@ -384,6 +424,16 @@ module Aws::ARCRegionswitch
     ExecutionEvent.struct_class = Types::ExecutionEvent
 
     ExecutionEventList.member = Shapes::ShapeRef.new(shape: ExecutionEvent)
+
+    FailedReportOutput.add_member(:error_code, Shapes::ShapeRef.new(shape: FailedReportErrorCode, location_name: "errorCode"))
+    FailedReportOutput.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    FailedReportOutput.struct_class = Types::FailedReportOutput
+
+    GeneratedReport.add_member(:report_generation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "reportGenerationTime"))
+    GeneratedReport.add_member(:report_output, Shapes::ShapeRef.new(shape: ReportOutput, location_name: "reportOutput"))
+    GeneratedReport.struct_class = Types::GeneratedReport
+
+    GeneratedReportDetails.member = Shapes::ShapeRef.new(shape: GeneratedReport)
 
     GetPlanEvaluationStatusRequest.add_member(:plan_arn, Shapes::ShapeRef.new(shape: PlanArn, required: true, location_name: "planArn"))
     GetPlanEvaluationStatusRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
@@ -419,6 +469,7 @@ module Aws::ARCRegionswitch
     GetPlanExecutionResponse.add_member(:step_states, Shapes::ShapeRef.new(shape: StepStates, location_name: "stepStates"))
     GetPlanExecutionResponse.add_member(:plan, Shapes::ShapeRef.new(shape: Plan, location_name: "plan"))
     GetPlanExecutionResponse.add_member(:actual_recovery_time, Shapes::ShapeRef.new(shape: Duration, location_name: "actualRecoveryTime"))
+    GetPlanExecutionResponse.add_member(:generated_report_details, Shapes::ShapeRef.new(shape: GeneratedReportDetails, location_name: "generatedReportDetails"))
     GetPlanExecutionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetPlanExecutionResponse.struct_class = Types::GetPlanExecutionResponse
 
@@ -516,6 +567,17 @@ module Aws::ARCRegionswitch
     ListPlansResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListPlansResponse.struct_class = Types::ListPlansResponse
 
+    ListRoute53HealthChecksInRegionRequest.add_member(:arn, Shapes::ShapeRef.new(shape: PlanArn, required: true, location_name: "arn"))
+    ListRoute53HealthChecksInRegionRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: Route53HostedZoneId, location_name: "hostedZoneId"))
+    ListRoute53HealthChecksInRegionRequest.add_member(:record_name, Shapes::ShapeRef.new(shape: Route53RecordName, location_name: "recordName"))
+    ListRoute53HealthChecksInRegionRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRoute53HealthChecksInRegionRequestMaxResultsInteger, location_name: "maxResults"))
+    ListRoute53HealthChecksInRegionRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListRoute53HealthChecksInRegionRequest.struct_class = Types::ListRoute53HealthChecksInRegionRequest
+
+    ListRoute53HealthChecksInRegionResponse.add_member(:health_checks, Shapes::ShapeRef.new(shape: Route53HealthCheckList, location_name: "healthChecks"))
+    ListRoute53HealthChecksInRegionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListRoute53HealthChecksInRegionResponse.struct_class = Types::ListRoute53HealthChecksInRegionResponse
+
     ListRoute53HealthChecksRequest.add_member(:arn, Shapes::ShapeRef.new(shape: PlanArn, required: true, location_name: "arn"))
     ListRoute53HealthChecksRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: Route53HostedZoneId, location_name: "hostedZoneId"))
     ListRoute53HealthChecksRequest.add_member(:record_name, Shapes::ShapeRef.new(shape: Route53RecordName, location_name: "recordName"))
@@ -547,6 +609,7 @@ module Aws::ARCRegionswitch
     Plan.add_member(:recovery_time_objective_minutes, Shapes::ShapeRef.new(shape: PlanRecoveryTimeObjectiveMinutesInteger, location_name: "recoveryTimeObjectiveMinutes"))
     Plan.add_member(:associated_alarms, Shapes::ShapeRef.new(shape: AssociatedAlarmMap, location_name: "associatedAlarms"))
     Plan.add_member(:triggers, Shapes::ShapeRef.new(shape: TriggerList, location_name: "triggers"))
+    Plan.add_member(:report_configuration, Shapes::ShapeRef.new(shape: ReportConfiguration, location_name: "reportConfiguration"))
     Plan.add_member(:name, Shapes::ShapeRef.new(shape: PlanName, required: true, location_name: "name"))
     Plan.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, required: true, location_name: "regions"))
     Plan.add_member(:recovery_approach, Shapes::ShapeRef.new(shape: RecoveryApproach, required: true, location_name: "recoveryApproach"))
@@ -573,6 +636,25 @@ module Aws::ARCRegionswitch
     RegionalScalingResource.key = Shapes::ShapeRef.new(shape: Region)
     RegionalScalingResource.value = Shapes::ShapeRef.new(shape: KubernetesScalingResource)
 
+    ReportConfiguration.add_member(:report_output, Shapes::ShapeRef.new(shape: ReportOutputList, location_name: "reportOutput"))
+    ReportConfiguration.struct_class = Types::ReportConfiguration
+
+    ReportOutput.add_member(:s3_report_output, Shapes::ShapeRef.new(shape: S3ReportOutput, location_name: "s3ReportOutput"))
+    ReportOutput.add_member(:failed_report_output, Shapes::ShapeRef.new(shape: FailedReportOutput, location_name: "failedReportOutput"))
+    ReportOutput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ReportOutput.add_member_subclass(:s3_report_output, Types::ReportOutput::S3ReportOutput)
+    ReportOutput.add_member_subclass(:failed_report_output, Types::ReportOutput::FailedReportOutput)
+    ReportOutput.add_member_subclass(:unknown, Types::ReportOutput::Unknown)
+    ReportOutput.struct_class = Types::ReportOutput
+
+    ReportOutputConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3ReportOutputConfiguration, location_name: "s3Configuration"))
+    ReportOutputConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ReportOutputConfiguration.add_member_subclass(:s3_configuration, Types::ReportOutputConfiguration::S3Configuration)
+    ReportOutputConfiguration.add_member_subclass(:unknown, Types::ReportOutputConfiguration::Unknown)
+    ReportOutputConfiguration.struct_class = Types::ReportOutputConfiguration
+
+    ReportOutputList.member = Shapes::ShapeRef.new(shape: ReportOutputConfiguration)
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
@@ -590,6 +672,7 @@ module Aws::ARCRegionswitch
     Route53HealthCheck.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: Route53HostedZoneId, required: true, location_name: "hostedZoneId"))
     Route53HealthCheck.add_member(:record_name, Shapes::ShapeRef.new(shape: Route53RecordName, required: true, location_name: "recordName"))
     Route53HealthCheck.add_member(:health_check_id, Shapes::ShapeRef.new(shape: Route53HealthCheckId, location_name: "healthCheckId"))
+    Route53HealthCheck.add_member(:status, Shapes::ShapeRef.new(shape: Route53HealthCheckStatus, location_name: "status"))
     Route53HealthCheck.add_member(:region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "region"))
     Route53HealthCheck.struct_class = Types::Route53HealthCheck
 
@@ -608,6 +691,13 @@ module Aws::ARCRegionswitch
     Route53ResourceRecordSet.struct_class = Types::Route53ResourceRecordSet
 
     Route53ResourceRecordSetList.member = Shapes::ShapeRef.new(shape: Route53ResourceRecordSet)
+
+    S3ReportOutput.add_member(:s3_object_key, Shapes::ShapeRef.new(shape: String, location_name: "s3ObjectKey"))
+    S3ReportOutput.struct_class = Types::S3ReportOutput
+
+    S3ReportOutputConfiguration.add_member(:bucket_path, Shapes::ShapeRef.new(shape: S3ReportOutputConfigurationBucketPathString, location_name: "bucketPath"))
+    S3ReportOutputConfiguration.add_member(:bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "bucketOwner"))
+    S3ReportOutputConfiguration.struct_class = Types::S3ReportOutputConfiguration
 
     Service.add_member(:cross_account_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "crossAccountRole"))
     Service.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
@@ -705,6 +795,7 @@ module Aws::ARCRegionswitch
     UpdatePlanRequest.add_member(:recovery_time_objective_minutes, Shapes::ShapeRef.new(shape: UpdatePlanRequestRecoveryTimeObjectiveMinutesInteger, location_name: "recoveryTimeObjectiveMinutes"))
     UpdatePlanRequest.add_member(:associated_alarms, Shapes::ShapeRef.new(shape: AssociatedAlarmMap, location_name: "associatedAlarms"))
     UpdatePlanRequest.add_member(:triggers, Shapes::ShapeRef.new(shape: TriggerList, location_name: "triggers"))
+    UpdatePlanRequest.add_member(:report_configuration, Shapes::ShapeRef.new(shape: ReportConfiguration, location_name: "reportConfiguration"))
     UpdatePlanRequest.struct_class = Types::UpdatePlanRequest
 
     UpdatePlanResponse.add_member(:plan, Shapes::ShapeRef.new(shape: Plan, location_name: "plan"))
@@ -897,6 +988,24 @@ module Aws::ARCRegionswitch
         o.output = Shapes::ShapeRef.new(shape: ListRoute53HealthChecksResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_route_53_health_checks_in_region, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRoute53HealthChecksInRegion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRoute53HealthChecksInRegionRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRoute53HealthChecksInRegionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

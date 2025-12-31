@@ -20,6 +20,7 @@ module Aws::GeoMaps
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ColorScheme = Shapes::StringShape.new(name: 'ColorScheme')
     CompactOverlay = Shapes::StringShape.new(name: 'CompactOverlay')
+    ContourDensity = Shapes::StringShape.new(name: 'ContourDensity')
     CountryCode = Shapes::StringShape.new(name: 'CountryCode')
     DistanceMeters = Shapes::IntegerShape.new(name: 'DistanceMeters')
     GeoJsonOverlay = Shapes::StringShape.new(name: 'GeoJsonOverlay')
@@ -31,8 +32,11 @@ module Aws::GeoMaps
     GetSpritesRequestFileNameString = Shapes::StringShape.new(name: 'GetSpritesRequestFileNameString')
     GetSpritesResponse = Shapes::StructureShape.new(name: 'GetSpritesResponse')
     GetStaticMapRequest = Shapes::StructureShape.new(name: 'GetStaticMapRequest')
+    GetStaticMapRequestBoundedPositionsString = Shapes::StringShape.new(name: 'GetStaticMapRequestBoundedPositionsString')
+    GetStaticMapRequestBoundingBoxString = Shapes::StringShape.new(name: 'GetStaticMapRequestBoundingBoxString')
     GetStaticMapRequestFileNameString = Shapes::StringShape.new(name: 'GetStaticMapRequestFileNameString')
     GetStaticMapRequestHeightInteger = Shapes::IntegerShape.new(name: 'GetStaticMapRequestHeightInteger')
+    GetStaticMapRequestPaddingInteger = Shapes::IntegerShape.new(name: 'GetStaticMapRequestPaddingInteger')
     GetStaticMapRequestWidthInteger = Shapes::IntegerShape.new(name: 'GetStaticMapRequestWidthInteger')
     GetStaticMapRequestZoomFloat = Shapes::FloatShape.new(name: 'GetStaticMapRequestZoomFloat')
     GetStaticMapResponse = Shapes::StructureShape.new(name: 'GetStaticMapResponse')
@@ -48,15 +52,19 @@ module Aws::GeoMaps
     LanguageTag = Shapes::StringShape.new(name: 'LanguageTag')
     MapFeatureMode = Shapes::StringShape.new(name: 'MapFeatureMode')
     MapStyle = Shapes::StringShape.new(name: 'MapStyle')
-    PositionListString = Shapes::StringShape.new(name: 'PositionListString')
     PositionString = Shapes::StringShape.new(name: 'PositionString')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ScaleBarUnit = Shapes::StringShape.new(name: 'ScaleBarUnit')
-    SensitiveInteger = Shapes::IntegerShape.new(name: 'SensitiveInteger')
     StaticMapStyle = Shapes::StringShape.new(name: 'StaticMapStyle')
     String = Shapes::StringShape.new(name: 'String')
+    Terrain = Shapes::StringShape.new(name: 'Terrain')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TileAdditionalFeature = Shapes::StringShape.new(name: 'TileAdditionalFeature')
+    TileAdditionalFeatureList = Shapes::ListShape.new(name: 'TileAdditionalFeatureList')
     Tileset = Shapes::StringShape.new(name: 'Tileset')
+    Traffic = Shapes::StringShape.new(name: 'Traffic')
+    TravelMode = Shapes::StringShape.new(name: 'TravelMode')
+    TravelModeList = Shapes::ListShape.new(name: 'TravelModeList')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -92,8 +100,8 @@ module Aws::GeoMaps
     GetSpritesResponse[:payload] = :blob
     GetSpritesResponse[:payload_member] = GetSpritesResponse.member(:blob)
 
-    GetStaticMapRequest.add_member(:bounding_box, Shapes::ShapeRef.new(shape: PositionListString, location: "querystring", location_name: "bounding-box"))
-    GetStaticMapRequest.add_member(:bounded_positions, Shapes::ShapeRef.new(shape: PositionListString, location: "querystring", location_name: "bounded-positions"))
+    GetStaticMapRequest.add_member(:bounding_box, Shapes::ShapeRef.new(shape: GetStaticMapRequestBoundingBoxString, location: "querystring", location_name: "bounding-box"))
+    GetStaticMapRequest.add_member(:bounded_positions, Shapes::ShapeRef.new(shape: GetStaticMapRequestBoundedPositionsString, location: "querystring", location_name: "bounded-positions"))
     GetStaticMapRequest.add_member(:center, Shapes::ShapeRef.new(shape: PositionString, location: "querystring", location_name: "center"))
     GetStaticMapRequest.add_member(:color_scheme, Shapes::ShapeRef.new(shape: ColorScheme, location: "querystring", location_name: "color-scheme"))
     GetStaticMapRequest.add_member(:compact_overlay, Shapes::ShapeRef.new(shape: CompactOverlay, location: "querystring", location_name: "compact-overlay"))
@@ -103,7 +111,7 @@ module Aws::GeoMaps
     GetStaticMapRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     GetStaticMapRequest.add_member(:label_size, Shapes::ShapeRef.new(shape: LabelSize, location: "querystring", location_name: "label-size"))
     GetStaticMapRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location: "querystring", location_name: "lang"))
-    GetStaticMapRequest.add_member(:padding, Shapes::ShapeRef.new(shape: SensitiveInteger, location: "querystring", location_name: "padding"))
+    GetStaticMapRequest.add_member(:padding, Shapes::ShapeRef.new(shape: GetStaticMapRequestPaddingInteger, location: "querystring", location_name: "padding"))
     GetStaticMapRequest.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode, location: "querystring", location_name: "political-view"))
     GetStaticMapRequest.add_member(:points_of_interests, Shapes::ShapeRef.new(shape: MapFeatureMode, location: "querystring", location_name: "pois"))
     GetStaticMapRequest.add_member(:radius, Shapes::ShapeRef.new(shape: DistanceMeters, location: "querystring", location_name: "radius", metadata: {"box" => true}))
@@ -126,6 +134,10 @@ module Aws::GeoMaps
     GetStyleDescriptorRequest.add_member(:style, Shapes::ShapeRef.new(shape: MapStyle, required: true, location: "uri", location_name: "Style"))
     GetStyleDescriptorRequest.add_member(:color_scheme, Shapes::ShapeRef.new(shape: ColorScheme, location: "querystring", location_name: "color-scheme"))
     GetStyleDescriptorRequest.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode, location: "querystring", location_name: "political-view"))
+    GetStyleDescriptorRequest.add_member(:terrain, Shapes::ShapeRef.new(shape: Terrain, location: "querystring", location_name: "terrain"))
+    GetStyleDescriptorRequest.add_member(:contour_density, Shapes::ShapeRef.new(shape: ContourDensity, location: "querystring", location_name: "contour-density"))
+    GetStyleDescriptorRequest.add_member(:traffic, Shapes::ShapeRef.new(shape: Traffic, location: "querystring", location_name: "traffic"))
+    GetStyleDescriptorRequest.add_member(:travel_modes, Shapes::ShapeRef.new(shape: TravelModeList, location: "querystring", location_name: "travel-modes"))
     GetStyleDescriptorRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     GetStyleDescriptorRequest.struct_class = Types::GetStyleDescriptorRequest
 
@@ -137,6 +149,7 @@ module Aws::GeoMaps
     GetStyleDescriptorResponse[:payload] = :blob
     GetStyleDescriptorResponse[:payload_member] = GetStyleDescriptorResponse.member(:blob)
 
+    GetTileRequest.add_member(:additional_features, Shapes::ShapeRef.new(shape: TileAdditionalFeatureList, location: "querystring", location_name: "additional-features"))
     GetTileRequest.add_member(:tileset, Shapes::ShapeRef.new(shape: Tileset, required: true, location: "uri", location_name: "Tileset"))
     GetTileRequest.add_member(:z, Shapes::ShapeRef.new(shape: GetTileRequestZString, required: true, location: "uri", location_name: "Z"))
     GetTileRequest.add_member(:x, Shapes::ShapeRef.new(shape: GetTileRequestXString, required: true, location: "uri", location_name: "X"))
@@ -161,6 +174,10 @@ module Aws::GeoMaps
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TileAdditionalFeatureList.member = Shapes::ShapeRef.new(shape: TileAdditionalFeature)
+
+    TravelModeList.member = Shapes::ShapeRef.new(shape: TravelMode)
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, required: true, location_name: "reason"))

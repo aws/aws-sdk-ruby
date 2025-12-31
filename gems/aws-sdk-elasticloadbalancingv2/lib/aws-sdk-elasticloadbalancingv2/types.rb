@@ -18,9 +18,13 @@ module Aws::ElasticLoadBalancingV2
 
     # Information about an action.
     #
-    # Each rule must include exactly one of the following types of actions:
+    # Each rule must include exactly one of the following routing actions:
     # `forward`, `fixed-response`, or `redirect`, and it must be the last
     # action to be performed.
+    #
+    # Optionally, a rule for an HTTPS listener can also include one of the
+    # following user authentication actions: `authenticate-oidc`,
+    # `authenticate-cognito`, or `jwt-validation`.
     #
     # @!attribute [rw] type
     #   The type of action.
@@ -29,8 +33,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] target_group_arn
     #   The Amazon Resource Name (ARN) of the target group. Specify only
     #   when `Type` is `forward` and you want to route to a single target
-    #   group. To route to one or more target groups, use `ForwardConfig`
-    #   instead.
+    #   group. To route to multiple target groups, you must use
+    #   `ForwardConfig` instead.
     #   @return [String]
     #
     # @!attribute [rw] authenticate_oidc_config
@@ -64,12 +68,17 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] forward_config
     #   Information for creating an action that distributes requests among
-    #   one or more target groups. For Network Load Balancers, you can
-    #   specify a single target group. Specify only when `Type` is
-    #   `forward`. If you specify both `ForwardConfig` and `TargetGroupArn`,
-    #   you can specify only one target group using `ForwardConfig` and it
-    #   must be the same target group specified in `TargetGroupArn`.
+    #   multiple target groups. Specify only when `Type` is `forward`.
+    #
+    #   If you specify both `ForwardConfig` and `TargetGroupArn`, you can
+    #   specify only one target group using `ForwardConfig` and it must be
+    #   the same target group specified in `TargetGroupArn`.
     #   @return [Types::ForwardActionConfig]
+    #
+    # @!attribute [rw] jwt_validation_config
+    #   \[HTTPS listeners\] Information for validating JWT access tokens in
+    #   client requests. Specify only when `Type` is `jwt-validation`.
+    #   @return [Types::JwtValidationActionConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Action AWS API Documentation
     #
@@ -81,7 +90,8 @@ module Aws::ElasticLoadBalancingV2
       :order,
       :redirect_config,
       :fixed_response_config,
-      :forward_config)
+      :forward_config,
+      :jwt_validation_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -523,9 +533,9 @@ module Aws::ElasticLoadBalancingV2
     #   The protocol for connections from clients to the load balancer. For
     #   Application Load Balancers, the supported protocols are HTTP and
     #   HTTPS. For Network Load Balancers, the supported protocols are TCP,
-    #   TLS, UDP, and TCP\_UDP. You can’t specify the UDP or TCP\_UDP
-    #   protocol if dual-stack mode is enabled. You can't specify a
-    #   protocol for a Gateway Load Balancer.
+    #   TLS, UDP, TCP\_UDP, QUIC, and TCP\_QUIC. You can’t specify the UDP,
+    #   TCP\_UDP, QUIC, or TCP\_QUIC protocol if dual-stack mode is enabled.
+    #   You can't specify a protocol for a Gateway Load Balancer.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -585,7 +595,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] mutual_authentication
-    #   The mutual authentication configuration information.
+    #   \[HTTPS listeners\] The mutual authentication configuration
+    #   information.
     #   @return [Types::MutualAuthenticationAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListenerInput AWS API Documentation
@@ -783,6 +794,11 @@ module Aws::ElasticLoadBalancingV2
     #   The tags to assign to the rule.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] transforms
+    #   The transforms to apply to requests that match this rule. You can
+    #   add one host header rewrite transform and one URL rewrite transform.
+    #   @return [Array<Types::RuleTransform>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateRuleInput AWS API Documentation
     #
     class CreateRuleInput < Struct.new(
@@ -790,7 +806,8 @@ module Aws::ElasticLoadBalancingV2
       :conditions,
       :priority,
       :actions,
-      :tags)
+      :tags,
+      :transforms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -819,10 +836,11 @@ module Aws::ElasticLoadBalancingV2
     #   The protocol to use for routing traffic to the targets. For
     #   Application Load Balancers, the supported protocols are HTTP and
     #   HTTPS. For Network Load Balancers, the supported protocols are TCP,
-    #   TLS, UDP, or TCP\_UDP. For Gateway Load Balancers, the supported
-    #   protocol is GENEVE. A TCP\_UDP listener must be associated with a
-    #   TCP\_UDP target group. If the target is a Lambda function, this
-    #   parameter does not apply.
+    #   TLS, UDP, TCP\_UDP, QUIC, or TCP\_QUIC. For Gateway Load Balancers,
+    #   the supported protocol is GENEVE. A TCP\_UDP listener must be
+    #   associated with a TCP\_UDP target group. A TCP\_QUIC listener must
+    #   be associated with a TCP\_QUIC target group. If the target is a
+    #   Lambda function, this parameter does not apply.
     #   @return [String]
     #
     # @!attribute [rw] protocol_version
@@ -851,15 +869,16 @@ module Aws::ElasticLoadBalancingV2
     #   Network Load Balancers and Gateway Load Balancers, the default is
     #   TCP. The TCP protocol is not supported for health checks if the
     #   protocol of the target group is HTTP or HTTPS. The GENEVE, TLS, UDP,
-    #   and TCP\_UDP protocols are not supported for health checks.
+    #   TCP\_UDP, QUIC, and TCP\_QUIC protocols are not supported for health
+    #   checks.
     #   @return [String]
     #
     # @!attribute [rw] health_check_port
     #   The port the load balancer uses when performing health checks on
-    #   targets. If the protocol is HTTP, HTTPS, TCP, TLS, UDP, or TCP\_UDP,
-    #   the default is `traffic-port`, which is the port on which each
-    #   target receives traffic from the load balancer. If the protocol is
-    #   GENEVE, the default is port 80.
+    #   targets. If the protocol is HTTP, HTTPS, TCP, TLS, UDP, TCP\_UDP,
+    #   QUIC, or TCP\_QUIC the default is `traffic-port`, which is the port
+    #   on which each target receives traffic from the load balancer. If the
+    #   protocol is GENEVE, the default is port 80.
     #   @return [String]
     #
     # @!attribute [rw] health_check_enabled
@@ -883,10 +902,10 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] health_check_interval_seconds
     #   The approximate amount of time, in seconds, between health checks of
     #   an individual target. The range is 5-300. If the target group
-    #   protocol is TCP, TLS, UDP, TCP\_UDP, HTTP or HTTPS, the default is
-    #   30 seconds. If the target group protocol is GENEVE, the default is
-    #   10 seconds. If the target type is `lambda`, the default is 35
-    #   seconds.
+    #   protocol is TCP, TLS, UDP, TCP\_UDP, QUIC, TCP\_QUIC, HTTP or HTTPS,
+    #   the default is 30 seconds. If the target group protocol is GENEVE,
+    #   the default is 10 seconds. If the target type is `lambda`, the
+    #   default is 35 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] health_check_timeout_seconds
@@ -910,18 +929,19 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] unhealthy_threshold_count
     #   The number of consecutive health check failures required before
     #   considering a target unhealthy. The range is 2-10. If the target
-    #   group protocol is TCP, TCP\_UDP, UDP, TLS, HTTP or HTTPS, the
-    #   default is 2. For target groups with a protocol of GENEVE, the
-    #   default is 2. If the target type is `lambda`, the default is 5.
+    #   group protocol is TCP, TCP\_UDP, UDP, TLS, QUIC, TCP\_QUIC, HTTP or
+    #   HTTPS, the default is 2. For target groups with a protocol of
+    #   GENEVE, the default is 2. If the target type is `lambda`, the
+    #   default is 5.
     #   @return [Integer]
     #
     # @!attribute [rw] matcher
     #   \[HTTP/HTTPS health checks\] The HTTP or gRPC codes to use when
     #   checking for a successful response from a target. For target groups
-    #   with a protocol of TCP, TCP\_UDP, UDP or TLS the range is 200-599.
-    #   For target groups with a protocol of HTTP or HTTPS, the range is
-    #   200-499. For target groups with a protocol of GENEVE, the range is
-    #   200-399.
+    #   with a protocol of TCP, TCP\_UDP, UDP, QUIC, TCP\_QUIC, or TLS the
+    #   range is 200-599. For target groups with a protocol of HTTP or
+    #   HTTPS, the range is 200-499. For target groups with a protocol of
+    #   GENEVE, the range is 200-399.
     #   @return [Types::Matcher]
     #
     # @!attribute [rw] target_type
@@ -951,6 +971,12 @@ module Aws::ElasticLoadBalancingV2
     #   The IP address type. The default value is `ipv4`.
     #   @return [String]
     #
+    # @!attribute [rw] target_control_port
+    #   The port on which the target control agent and application load
+    #   balancer exchange management traffic for the target optimizer
+    #   feature.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTargetGroupInput AWS API Documentation
     #
     class CreateTargetGroupInput < Struct.new(
@@ -970,7 +996,8 @@ module Aws::ElasticLoadBalancingV2
       :matcher,
       :target_type,
       :tags,
-      :ip_address_type)
+      :ip_address_type,
+      :target_control_port)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1871,8 +1898,7 @@ module Aws::ElasticLoadBalancingV2
     # Information about a forward action.
     #
     # @!attribute [rw] target_groups
-    #   The target groups. For Network Load Balancers, you can specify a
-    #   single target group.
+    #   The target groups.
     #   @return [Array<Types::TargetGroupTuple>]
     #
     # @!attribute [rw] target_group_stickiness_config
@@ -1975,21 +2001,44 @@ module Aws::ElasticLoadBalancingV2
     # Information about a host header condition.
     #
     # @!attribute [rw] values
-    #   The host names. The maximum size of each name is 128 characters. The
-    #   comparison is case insensitive. The following wildcard characters
-    #   are supported: * (matches 0 or more characters) and ? (matches
-    #   exactly 1 character). You must include at least one "." character.
-    #   You can include only alphabetical characters after the final "."
-    #   character.
+    #   The host names. The maximum length of each string is 128 characters.
+    #   The comparison is case insensitive. The following wildcard
+    #   characters are supported: * (matches 0 or more characters) and ?
+    #   (matches exactly 1 character). You must include at least one "."
+    #   character. You can include only alphabetical characters after the
+    #   final "." character.
     #
     #   If you specify multiple strings, the condition is satisfied if one
     #   of the strings matches the host name.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] regex_values
+    #   The regular expressions to compare against the host header. The
+    #   maximum length of each string is 128 characters.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HostHeaderConditionConfig AWS API Documentation
     #
     class HostHeaderConditionConfig < Struct.new(
-      :values)
+      :values,
+      :regex_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a host header rewrite transform. This transform
+    # matches a pattern in the host header in an HTTP request and replaces
+    # it with the specified string.
+    #
+    # @!attribute [rw] rewrites
+    #   The host header rewrite transform. Each transform consists of a
+    #   regular expression to match and a replacement string.
+    #   @return [Array<Types::RewriteConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HostHeaderRewriteConfig AWS API Documentation
+    #
+    class HostHeaderRewriteConfig < Struct.new(
+      :rewrites)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2000,7 +2049,7 @@ module Aws::ElasticLoadBalancingV2
     # custom HTTP header fields.
     #
     # @!attribute [rw] http_header_name
-    #   The name of the HTTP header field. The maximum size is 40
+    #   The name of the HTTP header field. The maximum length is 40
     #   characters. The header name is case insensitive. The allowed
     #   characters are specified by RFC 7230. Wildcards are not supported.
     #
@@ -2014,7 +2063,7 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] values
     #   The strings to compare against the value of the HTTP header. The
-    #   maximum size of each string is 128 characters. The comparison
+    #   maximum length of each string is 128 characters. The comparison
     #   strings are case insensitive. The following wildcard characters are
     #   supported: * (matches 0 or more characters) and ? (matches exactly
     #   1 character).
@@ -2027,11 +2076,17 @@ module Aws::ElasticLoadBalancingV2
     #   all of the strings are a match, create one condition per string.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] regex_values
+    #   The regular expression to compare against the HTTP header. The
+    #   maximum length of each string is 128 characters.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HttpHeaderConditionConfig AWS API Documentation
     #
     class HttpHeaderConditionConfig < Struct.new(
       :http_header_name,
-      :values)
+      :values,
+      :regex_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2047,7 +2102,7 @@ module Aws::ElasticLoadBalancingV2
     # [1]: https://www.iana.org/assignments/http-methods/http-methods.xhtml
     #
     # @!attribute [rw] values
-    #   The name of the request method. The maximum size is 40 characters.
+    #   The name of the request method. The maximum length is 40 characters.
     #   The allowed characters are A-Z, hyphen (-), and underscore (\_). The
     #   comparison is case sensitive. Wildcards are not supported;
     #   therefore, the method name must be an exact match.
@@ -2145,6 +2200,63 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # Information about an additional claim to validate.
+    #
+    # @!attribute [rw] format
+    #   The format of the claim value.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the claim. You can't specify `exp`, `iss`, `nbf`, or
+    #   `iat` because we validate them by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The claim value. The maximum size of the list is 10. Each value can
+    #   be up to 256 characters in length. If the format is
+    #   `space-separated-values`, the values can't include spaces.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/JwtValidationActionAdditionalClaim AWS API Documentation
+    #
+    class JwtValidationActionAdditionalClaim < Struct.new(
+      :format,
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a JSON Web Token (JWT) validation action.
+    #
+    # @!attribute [rw] jwks_endpoint
+    #   The JSON Web Key Set (JWKS) endpoint. This endpoint contains JSON
+    #   Web Keys (JWK) that are used to validate signatures from the
+    #   provider.
+    #
+    #   This must be a full URL, including the HTTPS protocol, the domain,
+    #   and the path. The maximum length is 256 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer
+    #   The issuer of the JWT. The maximum length is 256 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_claims
+    #   Additional claims to validate. The maximum size of the list is 10.
+    #   We validate the `exp`, `iss`, `nbf`, and `iat` claims by default.
+    #   @return [Array<Types::JwtValidationActionAdditionalClaim>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/JwtValidationActionConfig AWS API Documentation
+    #
+    class JwtValidationActionConfig < Struct.new(
+      :jwks_endpoint,
+      :issuer,
+      :additional_claims)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an Elastic Load Balancing resource limit for your
     # Amazon Web Services account.
     #
@@ -2163,43 +2275,7 @@ module Aws::ElasticLoadBalancingV2
     # [3]: https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/quotas-limits.html
     #
     # @!attribute [rw] name
-    #   The name of the limit. The possible values are:
-    #
-    #   * application-load-balancers
-    #
-    #   * condition-values-per-alb-rule
-    #
-    #   * condition-wildcards-per-alb-rule
-    #
-    #   * gateway-load-balancers
-    #
-    #   * gateway-load-balancers-per-vpc
-    #
-    #   * geneve-target-groups
-    #
-    #   * listeners-per-application-load-balancer
-    #
-    #   * listeners-per-network-load-balancer
-    #
-    #   * network-load-balancers
-    #
-    #   * rules-per-application-load-balancer
-    #
-    #   * target-groups
-    #
-    #   * target-groups-per-action-on-application-load-balancer
-    #
-    #   * target-groups-per-action-on-network-load-balancer
-    #
-    #   * target-groups-per-application-load-balancer
-    #
-    #   * targets-per-application-load-balancer
-    #
-    #   * targets-per-availability-zone-per-gateway-load-balancer
-    #
-    #   * targets-per-availability-zone-per-network-load-balancer
-    #
-    #   * targets-per-network-load-balancer
+    #   The name of the limit.
     #   @return [String]
     #
     # @!attribute [rw] max
@@ -2595,6 +2671,19 @@ module Aws::ElasticLoadBalancingV2
     #   * `connection_logs.s3.prefix` - The prefix for the location in the
     #     S3 bucket for the connection logs.
     #
+    #   * `health_check_logs.s3.enabled` - Indicates whether health check
+    #     logs are enabled. The value is `true` or `false`. The default is
+    #     `false`.
+    #
+    #   * `health_check_logs.s3.bucket` - The name of the S3 bucket for the
+    #     health check logs. This attribute is required if health check logs
+    #     are enabled. The bucket must exist in the same region as the load
+    #     balancer and have a bucket policy that grants Elastic Load
+    #     Balancing permissions to write to the bucket.
+    #
+    #   * `health_check_logs.s3.prefix` - The prefix for the location in the
+    #     S3 bucket for the health check logs.
+    #
     #   * `routing.http.desync_mitigation_mode` - Determines how the load
     #     balancer handles requests that might pose a security risk to your
     #     application. The possible values are `monitor`, `defensive`, and
@@ -2643,10 +2732,13 @@ module Aws::ElasticLoadBalancingV2
     #     * If the value is `remove`, the Application Load Balancer removes
     #       the `X-Forwarded-For` header in the HTTP request before it sends
     #       it to targets.
-    #   * `routing.http2.enabled` - Indicates whether HTTP/2 is enabled. The
-    #     possible values are `true` and `false`. The default is `true`.
-    #     Elastic Load Balancing requires that message header names contain
-    #     only alphanumeric characters and hyphens.
+    #   * `routing.http2.enabled` - Indicates whether clients can connect to
+    #     the load balancer using HTTP/2. If `true`, clients can connect
+    #     using HTTP/2 or HTTP/1.1. However, all client requests are subject
+    #     to the stricter HTTP/2 header validation rules. For example,
+    #     message header names must contain only alphanumeric characters and
+    #     hyphens. If `false`, clients must connect using HTTP/1.1. The
+    #     default is `true`.
     #
     #   * `waf.fail_open.enabled` - Indicates whether to allow a WAF-enabled
     #     load balancer to route requests to targets if it is unable to
@@ -2887,10 +2979,10 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] protocol
     #   The protocol for connections from clients to the load balancer.
     #   Application Load Balancers support the HTTP and HTTPS protocols.
-    #   Network Load Balancers support the TCP, TLS, UDP, and TCP\_UDP
-    #   protocols. You can’t change the protocol to UDP or TCP\_UDP if
-    #   dual-stack mode is enabled. You can't specify a protocol for a
-    #   Gateway Load Balancer.
+    #   Network Load Balancers support the TCP, TLS, UDP, TCP\_UDP, QUIC,
+    #   and TCP\_QUIC protocols. You can’t change the protocol to UDP,
+    #   TCP\_UDP, QUIC, or TCP\_QUIC if dual-stack mode is enabled. You
+    #   can't specify a protocol for a Gateway Load Balancer.
     #   @return [String]
     #
     # @!attribute [rw] ssl_policy
@@ -2941,7 +3033,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<String>]
     #
     # @!attribute [rw] mutual_authentication
-    #   The mutual authentication configuration information.
+    #   \[HTTPS listeners\] The mutual authentication configuration
+    #   information.
     #   @return [Types::MutualAuthenticationAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListenerInput AWS API Documentation
@@ -3012,12 +3105,25 @@ module Aws::ElasticLoadBalancingV2
     #   The actions.
     #   @return [Array<Types::Action>]
     #
+    # @!attribute [rw] transforms
+    #   The transforms to apply to requests that match this rule. You can
+    #   add one host header rewrite transform and one URL rewrite transform.
+    #   If you specify `Transforms`, you can't specify `ResetTransforms`.
+    #   @return [Array<Types::RuleTransform>]
+    #
+    # @!attribute [rw] reset_transforms
+    #   Indicates whether to remove all transforms from the rule. If you
+    #   specify `ResetTransforms`, you can't specify `Transforms`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyRuleInput AWS API Documentation
     #
     class ModifyRuleInput < Struct.new(
       :rule_arn,
       :conditions,
-      :actions)
+      :actions,
+      :transforms,
+      :reset_transforms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3074,8 +3180,8 @@ module Aws::ElasticLoadBalancingV2
     #   TCP. The TCP protocol is not supported for health checks if the
     #   protocol of the target group is HTTP or HTTPS. It is supported for
     #   health checks only if the protocol of the target group is TCP, TLS,
-    #   UDP, or TCP\_UDP. The GENEVE, TLS, UDP, and TCP\_UDP protocols are
-    #   not supported for health checks.
+    #   UDP, or TCP\_UDP. The GENEVE, TLS, UDP, TCP\_UDP, QUIC, and
+    #   TCP\_QUIC protocols are not supported for health checks.
     #   @return [String]
     #
     # @!attribute [rw] health_check_port
@@ -3095,7 +3201,10 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] health_check_enabled
-    #   Indicates whether health checks are enabled.
+    #   Indicates whether health checks are enabled. If the target type is
+    #   `lambda`, health checks are disabled by default but can be enabled.
+    #   If the target type is `instance`, `ip`, or `alb`, health checks are
+    #   always enabled and can't be disabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] health_check_interval_seconds
@@ -3241,7 +3350,7 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] values
     #   The path patterns to compare against the request URL. The maximum
-    #   size of each string is 128 characters. The comparison is case
+    #   length of each string is 128 characters. The comparison is case
     #   sensitive. The following wildcard characters are supported: *
     #   (matches 0 or more characters) and ? (matches exactly 1 character).
     #
@@ -3255,10 +3364,16 @@ module Aws::ElasticLoadBalancingV2
     #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#query-string-conditions
     #   @return [Array<String>]
     #
+    # @!attribute [rw] regex_values
+    #   The regular expressions to compare against the request URL. The
+    #   maximum length of each string is 128 characters.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/PathPatternConditionConfig AWS API Documentation
     #
     class PathPatternConditionConfig < Struct.new(
-      :values)
+      :values,
+      :regex_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3286,7 +3401,7 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] values
     #   The key/value pairs or values to find in the query string. The
-    #   maximum size of each string is 128 characters. The comparison is
+    #   maximum length of each string is 128 characters. The comparison is
     #   case insensitive. The following wildcard characters are supported:
     #   * (matches 0 or more characters) and ? (matches exactly 1
     #   character). To search for a literal '*' or '?' character in a
@@ -3532,6 +3647,29 @@ module Aws::ElasticLoadBalancingV2
     #
     class RevocationIdNotFoundException < Aws::EmptyStructure; end
 
+    # Information about a rewrite transform. This transform matches a
+    # pattern and replaces it with the specified string.
+    #
+    # @!attribute [rw] regex
+    #   The regular expression to match in the input string. The maximum
+    #   length of the string is 1,024 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] replace
+    #   The replacement string to use when rewriting the matched input. The
+    #   maximum length of the string is 1,024 characters. You can specify
+    #   capture groups in the regular expression (for example, $1 and $2).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RewriteConfig AWS API Documentation
+    #
+    class RewriteConfig < Struct.new(
+      :regex,
+      :replace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a rule.
     #
     # @!attribute [rw] rule_arn
@@ -3559,6 +3697,10 @@ module Aws::ElasticLoadBalancingV2
     #   Indicates whether this is the default rule.
     #   @return [Boolean]
     #
+    # @!attribute [rw] transforms
+    #   The transforms for the rule.
+    #   @return [Array<Types::RuleTransform>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Rule AWS API Documentation
     #
     class Rule < Struct.new(
@@ -3566,7 +3708,8 @@ module Aws::ElasticLoadBalancingV2
       :priority,
       :conditions,
       :actions,
-      :is_default)
+      :is_default,
+      :transforms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3670,6 +3813,12 @@ module Aws::ElasticLoadBalancingV2
     #   `source-ip`.
     #   @return [Types::SourceIpConditionConfig]
     #
+    # @!attribute [rw] regex_values
+    #   The regular expressions to match against the condition field. The
+    #   maximum length of each string is 128 characters. Specify only when
+    #   `Field` is `http-header`, `host-header`, or `path-pattern`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RuleCondition AWS API Documentation
     #
     class RuleCondition < Struct.new(
@@ -3680,7 +3829,8 @@ module Aws::ElasticLoadBalancingV2
       :http_header_config,
       :query_string_config,
       :http_request_method_config,
-      :source_ip_config)
+      :source_ip_config,
+      :regex_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3706,6 +3856,38 @@ module Aws::ElasticLoadBalancingV2
     class RulePriorityPair < Struct.new(
       :rule_arn,
       :priority)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a transform to apply to requests that match a rule.
+    # Transforms are applied to requests before they are sent to targets.
+    #
+    # @!attribute [rw] type
+    #   The type of transform.
+    #
+    #   * `host-header-rewrite` - Rewrite the host header.
+    #
+    #   * `url-rewrite` - Rewrite the request URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_header_rewrite_config
+    #   Information about a host header rewrite transform. This transform
+    #   modifies the host header in an HTTP request. Specify only when
+    #   `Type` is `host-header-rewrite`.
+    #   @return [Types::HostHeaderRewriteConfig]
+    #
+    # @!attribute [rw] url_rewrite_config
+    #   Information about a URL rewrite transform. This transform modifies
+    #   the request URL. Specify only when `Type` is `url-rewrite`.
+    #   @return [Types::UrlRewriteConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RuleTransform AWS API Documentation
+    #
+    class RuleTransform < Struct.new(
+      :type,
+      :host_header_rewrite_config,
+      :url_rewrite_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3794,7 +3976,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] enforce_security_group_inbound_rules_on_private_link_traffic
     #   Indicates whether to evaluate inbound security group rules for
     #   traffic sent to a Network Load Balancer through Amazon Web Services
-    #   PrivateLink. The default is `on`.
+    #   PrivateLink. Applies only if the load balancer has an associated
+    #   security group. The default is `on`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSecurityGroupsInput AWS API Documentation
@@ -3844,8 +4027,13 @@ module Aws::ElasticLoadBalancingV2
     #   \[Application Load Balancers on Local Zones\] You can specify
     #   subnets from one or more Local Zones.
     #
-    #   \[Network Load Balancers and Gateway Load Balancers\] You can
-    #   specify subnets from one or more Availability Zones.
+    #   \[Network Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones.
+    #
+    #   \[Gateway Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones. You must include all subnets that were enabled
+    #   previously, with their existing configurations, plus any additional
+    #   subnets.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_mappings
@@ -4119,12 +4307,25 @@ module Aws::ElasticLoadBalancingV2
     #   only supported value is `all`.
     #   @return [String]
     #
+    # @!attribute [rw] quic_server_id
+    #   The server ID for the targets. This value is required if the
+    #   protocol is `QUIC` or `TCP_QUIC` and can't be used with other
+    #   protocols.
+    #
+    #   The ID consists of the `0x` prefix followed by 16 hexadecimal
+    #   characters. Any letters must be lowercase. The value must be unique
+    #   at the listener level. You can't modify the server ID for a
+    #   registered target. You must deregister the target and then provide a
+    #   new server ID when you register the target again.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetDescription AWS API Documentation
     #
     class TargetDescription < Struct.new(
       :id,
       :port,
-      :availability_zone)
+      :availability_zone,
+      :quic_server_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4217,6 +4418,12 @@ module Aws::ElasticLoadBalancingV2
     #   The IP address type. The default value is `ipv4`.
     #   @return [String]
     #
+    # @!attribute [rw] target_control_port
+    #   The port on which the target control agent and application load
+    #   balancer exchange management traffic for the target optimizer
+    #   feature.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetGroup AWS API Documentation
     #
     class TargetGroup < Struct.new(
@@ -4237,7 +4444,8 @@ module Aws::ElasticLoadBalancingV2
       :load_balancer_arns,
       :target_type,
       :protocol_version,
-      :ip_address_type)
+      :ip_address_type,
+      :target_control_port)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4444,10 +4652,10 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Boolean]
     #
     # @!attribute [rw] duration_seconds
-    #   The time period, in seconds, during which requests from a client
-    #   should be routed to the same target group. The range is 1-604800
-    #   seconds (7 days). You must specify this value when enabling target
-    #   group stickiness.
+    #   \[Application Load Balancers\] The time period, in seconds, during
+    #   which requests from a client should be routed to the same target
+    #   group. The range is 1-604800 seconds (7 days). You must specify this
+    #   value when enabling target group stickiness.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetGroupStickinessConfig AWS API Documentation
@@ -4504,18 +4712,16 @@ module Aws::ElasticLoadBalancingV2
     #   the following values:
     #
     #   * `Target.ResponseCodeMismatch` - The health checks did not return
-    #     an expected HTTP code. Applies only to Application Load Balancers
-    #     and Gateway Load Balancers.
+    #     an expected HTTP code.
     #
-    #   * `Target.Timeout` - The health check requests timed out. Applies
-    #     only to Application Load Balancers and Gateway Load Balancers.
+    #   * `Target.Timeout` - The health check requests timed out.
     #
     #   * `Target.FailedHealthChecks` - The load balancer received an error
     #     while establishing a connection to the target or the target
     #     response was malformed.
     #
     #   * `Elb.InternalError` - The health checks failed due to an internal
-    #     error. Applies only to Application Load Balancers.
+    #     error.
     #
     #   If the target state is `unused`, the reason code can be one of the
     #   following values:
@@ -4546,10 +4752,10 @@ module Aws::ElasticLoadBalancingV2
     #   following value:
     #
     #   * `Target.HealthCheckDisabled` - Health checks are disabled for the
-    #     target group. Applies only to Application Load Balancers.
+    #     target group.
     #
     #   * `Elb.InternalError` - Target health is unavailable due to an
-    #     internal error. Applies only to Network Load Balancers.
+    #     internal error.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4791,6 +4997,22 @@ module Aws::ElasticLoadBalancingV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/UnsupportedProtocolException AWS API Documentation
     #
     class UnsupportedProtocolException < Aws::EmptyStructure; end
+
+    # Information about a URL rewrite transform. This transform matches a
+    # pattern in the request URL and replaces it with the specified string.
+    #
+    # @!attribute [rw] rewrites
+    #   The URL rewrite transform to apply to the request. The transform
+    #   consists of a regular expression to match and a replacement string.
+    #   @return [Array<Types::RewriteConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/UrlRewriteConfig AWS API Documentation
+    #
+    class UrlRewriteConfig < Struct.new(
+      :rewrites)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The capacity reservation status for each Availability Zone.
     #

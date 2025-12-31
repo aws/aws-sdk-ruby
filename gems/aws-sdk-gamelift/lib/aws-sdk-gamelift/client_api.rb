@@ -4155,6 +4155,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGameSessionStatusException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotReadyException)
       end)
 
       api.add_operation(:update_game_session_queue, Seahorse::Model::Operation.new.tap do |o|

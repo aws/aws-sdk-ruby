@@ -93,7 +93,7 @@ module Aws::QuickSight
     # @!attribute [rw] account_name
     #   The account name that you provided for the Amazon Quick Sight
     #   subscription in your Amazon Web Services account. You create this
-    #   name when you sign up for QuickSight. It's unique over all of
+    #   name when you sign up for Quick Suite. It's unique over all of
     #   Amazon Web Services, and it appears only when users sign in.
     #   @return [String]
     #
@@ -158,7 +158,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] public_sharing_enabled
     #   A Boolean value that indicates whether public sharing is turned on
-    #   for an QuickSight account. For more information about turning on
+    #   for an Quick Suite account. For more information about turning on
     #   public sharing, see [UpdatePublicSharingSettings][1].
     #
     #
@@ -416,6 +416,67 @@ module Aws::QuickSight
       :aggregation_function_parameters,
       :period,
       :period_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A transform operation that groups rows by specified columns and
+    # applies aggregation functions to calculate summary values.
+    #
+    # @!attribute [rw] alias
+    #   Alias for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source transform operation that provides input data for the
+    #   aggregation.
+    #   @return [Types::TransformOperationSource]
+    #
+    # @!attribute [rw] group_by_column_names
+    #   The list of column names to group by when performing the
+    #   aggregation. Rows with the same values in these columns will be
+    #   grouped together.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] aggregations
+    #   The list of aggregation functions to apply to the grouped data, such
+    #   as `SUM`, `COUNT`, or `AVERAGE`.
+    #   @return [Array<Types::Aggregation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AggregateOperation AWS API Documentation
+    #
+    class AggregateOperation < Struct.new(
+      :alias,
+      :source,
+      :group_by_column_names,
+      :aggregations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines an aggregation function to be applied to grouped data,
+    # creating a new column with the calculated result.
+    #
+    # @!attribute [rw] aggregation_function
+    #   The aggregation function to apply, such as `SUM`, `COUNT`,
+    #   `AVERAGE`, `MIN`, `MAX`
+    #   @return [Types::DataPrepAggregationFunction]
+    #
+    # @!attribute [rw] new_column_name
+    #   The name for the new column that will contain the aggregated values.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_column_id
+    #   A unique identifier for the new column that will contain the
+    #   aggregated values.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Aggregation AWS API Documentation
+    #
+    class Aggregation < Struct.new(
+      :aggregation_function,
+      :new_column_name,
+      :new_column_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1052,7 +1113,7 @@ module Aws::QuickSight
     end
 
     # The type of experience you want to embed. For anonymous users, you can
-    # embed QuickSight dashboards.
+    # embed Quick Suite dashboards.
     #
     # @!attribute [rw] dashboard
     #   The type of embedding experience. In this case, Amazon Quick Sight
@@ -1145,6 +1206,57 @@ module Aws::QuickSight
     #
     class AnonymousUserSnapshotJobResult < Struct.new(
       :file_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A transform operation that combines rows from two data sources by
+    # stacking them vertically (union operation).
+    #
+    # @!attribute [rw] alias
+    #   Alias for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_source
+    #   The first data source to be included in the append operation.
+    #   @return [Types::TransformOperationSource]
+    #
+    # @!attribute [rw] second_source
+    #   The second data source to be appended to the first source.
+    #   @return [Types::TransformOperationSource]
+    #
+    # @!attribute [rw] appended_columns
+    #   The list of columns to include in the appended result, mapping
+    #   columns from both sources.
+    #   @return [Array<Types::AppendedColumn>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AppendOperation AWS API Documentation
+    #
+    class AppendOperation < Struct.new(
+      :alias,
+      :first_source,
+      :second_source,
+      :appended_columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a column that will be included in the result of an append
+    # operation, combining data from multiple sources.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column to include in the appended result.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_column_id
+    #   A unique identifier for the column in the appended result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AppendedColumn AWS API Documentation
+    #
+    class AppendedColumn < Struct.new(
+      :column_name,
+      :new_column_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3197,6 +3309,15 @@ module Aws::QuickSight
     #   visibility) for a color that is used in a bar chart.
     #   @return [Types::ChartAxisLabelOptions]
     #
+    # @!attribute [rw] default_series_settings
+    #   The options that determine the default presentation of all bar
+    #   series in `BarChartVisual`.
+    #   @return [Types::BarChartDefaultSeriesSettings]
+    #
+    # @!attribute [rw] series
+    #   The series item configuration of a `BarChartVisual`.
+    #   @return [Array<Types::BarSeriesItem>]
+    #
     # @!attribute [rw] legend
     #   The legend display setup of the visual.
     #   @return [Types::LegendOptions]
@@ -3236,12 +3357,34 @@ module Aws::QuickSight
       :value_axis,
       :value_label_options,
       :color_label_options,
+      :default_series_settings,
+      :series,
       :legend,
       :data_labels,
       :tooltip,
       :reference_lines,
       :contribution_analysis_defaults,
       :interactions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options that determine the default presentation of all bar series
+    # in `BarChartVisual`.
+    #
+    # @!attribute [rw] decal_settings
+    #   Decal settings for all bar series in the visual.
+    #   @return [Types::DecalSettings]
+    #
+    # @!attribute [rw] border_settings
+    #   Border settings for all bar series in the visual.
+    #   @return [Types::BorderSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BarChartDefaultSeriesSettings AWS API Documentation
+    #
+    class BarChartDefaultSeriesSettings < Struct.new(
+      :decal_settings,
+      :border_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3259,6 +3402,25 @@ module Aws::QuickSight
     #
     class BarChartFieldWells < Struct.new(
       :bar_chart_aggregated_field_wells)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Options that determine the presentation of a bar series in the visual.
+    #
+    # @!attribute [rw] decal_settings
+    #   Decal settings for the bar series.
+    #   @return [Types::DecalSettings]
+    #
+    # @!attribute [rw] border_settings
+    #   Border settings for the bar series.
+    #   @return [Types::BorderSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BarChartSeriesSettings AWS API Documentation
+    #
+    class BarChartSeriesSettings < Struct.new(
+      :decal_settings,
+      :border_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3369,6 +3531,28 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The series item configuration of a `BarChartVisual`.
+    #
+    # This is a union type structure. For this structure to be valid, only
+    # one of the attributes can be defined.
+    #
+    # @!attribute [rw] field_bar_series_item
+    #   The field series item configuration of a `BarChartVisual`.
+    #   @return [Types::FieldBarSeriesItem]
+    #
+    # @!attribute [rw] data_field_bar_series_item
+    #   The data field series item configuration of a `BarChartVisual`.
+    #   @return [Types::DataFieldBarSeriesItem]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BarSeriesItem AWS API Documentation
+    #
+    class BarSeriesItem < Struct.new(
+      :field_bar_series_item,
+      :data_field_bar_series_item)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3759,16 +3943,51 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Border settings configuration for visual elements, including
+    # visibility, width, and color properties.
+    #
+    # @!attribute [rw] border_visibility
+    #   Visibility setting for the border.
+    #   @return [String]
+    #
+    # @!attribute [rw] border_width
+    #   Width of the border. Valid range is from 1px to 8px.
+    #   @return [String]
+    #
+    # @!attribute [rw] border_color
+    #   Color of the border.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BorderSettings AWS API Documentation
+    #
+    class BorderSettings < Struct.new(
+      :border_visibility,
+      :border_width,
+      :border_color)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The display options for tile borders for visuals.
+    #
+    # @!attribute [rw] color
+    #   The option to add color for tile borders for visuals.
+    #   @return [String]
     #
     # @!attribute [rw] show
     #   The option to enable display of borders for visuals.
     #   @return [Boolean]
     #
+    # @!attribute [rw] width
+    #   The option to set the width of tile borders for visuals.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BorderStyle AWS API Documentation
     #
     class BorderStyle < Struct.new(
-      :show)
+      :color,
+      :show,
+      :width)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4081,7 +4300,7 @@ module Aws::QuickSight
     # The details of the brand.
     #
     # @!attribute [rw] brand_id
-    #   The ID of the QuickSight brand.
+    #   The ID of the Quick Suite brand.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -4154,7 +4373,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] brand_id
-    #   The ID of the QuickSight brand.
+    #   The ID of the Quick Suite brand.
     #   @return [String]
     #
     # @!attribute [rw] brand_name
@@ -4467,6 +4686,10 @@ module Aws::QuickSight
     #   The ability to perform research-related actions.
     #   @return [String]
     #
+    # @!attribute [rw] self_upgrade_user_role
+    #   The ability to enable users to upgrade their user role.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Capabilities AWS API Documentation
     #
     class Capabilities < Struct.new(
@@ -4506,7 +4729,8 @@ module Aws::QuickSight
       :space,
       :chat_agent,
       :create_chat_agents,
-      :research)
+      :research,
+      :self_upgrade_user_role)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4577,6 +4801,32 @@ module Aws::QuickSight
       :new_column_type,
       :sub_type,
       :format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A transform operation that changes the data types of one or more
+    # columns in the dataset.
+    #
+    # @!attribute [rw] alias
+    #   Alias for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source transform operation that provides input data for the type
+    #   casting.
+    #   @return [Types::TransformOperationSource]
+    #
+    # @!attribute [rw] cast_column_type_operations
+    #   The list of column type casting operations to perform.
+    #   @return [Array<Types::CastColumnTypeOperation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CastColumnTypesOperation AWS API Documentation
+    #
+    class CastColumnTypesOperation < Struct.new(
+      :alias,
+      :source,
+      :cast_column_type_operations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5000,13 +5250,18 @@ module Aws::QuickSight
     #   The color configurations of the column.
     #   @return [Types::ColorsConfiguration]
     #
+    # @!attribute [rw] decal_settings_configuration
+    #   Decal configuration of the column.
+    #   @return [Types::DecalSettingsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ColumnConfiguration AWS API Documentation
     #
     class ColumnConfiguration < Struct.new(
       :column,
       :format_configuration,
       :role,
-      :colors_configuration)
+      :colors_configuration,
+      :decal_settings_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5216,6 +5471,27 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Specifies a column to be unpivoted, transforming it from a column into
+    # rows with associated values.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the column to unpivot from the source data.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_value
+    #   The value to assign to this column in the unpivoted result,
+    #   typically the column name or a descriptive label.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ColumnToUnpivot AWS API Documentation
+    #
+    class ColumnToUnpivot < Struct.new(
+      :column_name,
+      :new_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The tooltip item for the columns that are not part of a field well.
     #
     # @!attribute [rw] column
@@ -5340,6 +5616,15 @@ module Aws::QuickSight
     #   visibility) of a combo chart's color field well.
     #   @return [Types::ChartAxisLabelOptions]
     #
+    # @!attribute [rw] default_series_settings
+    #   The options that determine the default presentation of all series in
+    #   `ComboChartVisual`.
+    #   @return [Types::ComboChartDefaultSeriesSettings]
+    #
+    # @!attribute [rw] series
+    #   The series item configuration of a `ComboChartVisual`.
+    #   @return [Array<Types::ComboSeriesItem>]
+    #
     # @!attribute [rw] legend
     #   The legend display setup of the visual.
     #   @return [Types::LegendOptions]
@@ -5386,6 +5671,8 @@ module Aws::QuickSight
       :secondary_y_axis_label_options,
       :single_axis_options,
       :color_label_options,
+      :default_series_settings,
+      :series,
       :legend,
       :bar_data_labels,
       :line_data_labels,
@@ -5393,6 +5680,36 @@ module Aws::QuickSight
       :reference_lines,
       :visual_palette,
       :interactions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options that determine the default presentation of all series in
+    # `ComboChartVisual`.
+    #
+    # @!attribute [rw] line_style_settings
+    #   Line styles options for all line series in the visual.
+    #   @return [Types::LineChartLineStyleSettings]
+    #
+    # @!attribute [rw] marker_style_settings
+    #   Marker styles options for all line series in the visual.
+    #   @return [Types::LineChartMarkerStyleSettings]
+    #
+    # @!attribute [rw] decal_settings
+    #   Decal settings for all series in the visual.
+    #   @return [Types::DecalSettings]
+    #
+    # @!attribute [rw] border_settings
+    #   Border settings for all bar series in the visual.
+    #   @return [Types::BorderSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ComboChartDefaultSeriesSettings AWS API Documentation
+    #
+    class ComboChartDefaultSeriesSettings < Struct.new(
+      :line_style_settings,
+      :marker_style_settings,
+      :decal_settings,
+      :border_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5412,6 +5729,35 @@ module Aws::QuickSight
     #
     class ComboChartFieldWells < Struct.new(
       :combo_chart_aggregated_field_wells)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Options that determine the presentation of a series in the visual.
+    #
+    # @!attribute [rw] line_style_settings
+    #   Line styles options for the line series in the visual.
+    #   @return [Types::LineChartLineStyleSettings]
+    #
+    # @!attribute [rw] marker_style_settings
+    #   Marker styles options for the line series in the visual.
+    #   @return [Types::LineChartMarkerStyleSettings]
+    #
+    # @!attribute [rw] decal_settings
+    #   Decal settings for the series in the visual.
+    #   @return [Types::DecalSettings]
+    #
+    # @!attribute [rw] border_settings
+    #   Border settings for the bar series in the visual.
+    #   @return [Types::BorderSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ComboChartSeriesSettings AWS API Documentation
+    #
+    class ComboChartSeriesSettings < Struct.new(
+      :line_style_settings,
+      :marker_style_settings,
+      :decal_settings,
+      :border_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5500,6 +5846,28 @@ module Aws::QuickSight
       :actions,
       :column_hierarchies,
       :visual_content_alt_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The series item configuration of a `ComboChartVisual`.
+    #
+    # This is a union type structure. For this structure to be valid, only
+    # one of the attributes can be defined.
+    #
+    # @!attribute [rw] field_combo_series_item
+    #   The field series item configuration of a `ComboChartVisual`.
+    #   @return [Types::FieldComboSeriesItem]
+    #
+    # @!attribute [rw] data_field_combo_series_item
+    #   The data field series item configuration of a `ComboChartVisual`.
+    #   @return [Types::DataFieldComboSeriesItem]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ComboSeriesItem AWS API Documentation
+    #
+    class ComboSeriesItem < Struct.new(
+      :field_combo_series_item,
+      :data_field_combo_series_item)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5945,6 +6313,25 @@ module Aws::QuickSight
     class ContributionAnalysisTimeRanges < Struct.new(
       :start_range,
       :end_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The preference coordinate for the geocode preference.
+    #
+    # @!attribute [rw] latitude
+    #   The latitude coordinate value for the geocode preference.
+    #   @return [Float]
+    #
+    # @!attribute [rw] longitude
+    #   The longitude coordinate value for the geocode preference.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Coordinate AWS API Documentation
+    #
+    class Coordinate < Struct.new(
+      :latitude,
+      :longitude)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6495,7 +6882,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] brand_id
-    #   The ID of the QuickSight brand.
+    #   The ID of the Quick Suite brand.
     #   @return [String]
     #
     # @!attribute [rw] brand_definition
@@ -6542,6 +6929,15 @@ module Aws::QuickSight
     # A transform operation that creates calculated columns. Columns created
     # in one such operation form a lexical closure.
     #
+    # @!attribute [rw] alias
+    #   Alias for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source transform operation that provides input data for creating
+    #   new calculated columns.
+    #   @return [Types::TransformOperationSource]
+    #
     # @!attribute [rw] columns
     #   Calculated columns to create.
     #   @return [Array<Types::CalculatedColumn>]
@@ -6549,6 +6945,8 @@ module Aws::QuickSight
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateColumnsOperation AWS API Documentation
     #
     class CreateColumnsOperation < Struct.new(
+      :alias,
+      :source,
       :columns)
       SENSITIVE = []
       include Aws::Structure
@@ -6811,7 +7209,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] logical_table_map
     #   Configures the combination and transformation of the data from the
-    #   physical tables.
+    #   physical tables. This parameter is used with the legacy data
+    #   preparation experience.
     #   @return [Hash<String,Types::LogicalTable>]
     #
     # @!attribute [rw] import_mode
@@ -6834,13 +7233,15 @@ module Aws::QuickSight
     #
     # @!attribute [rw] row_level_permission_data_set
     #   The row-level security configuration for the data that you want to
-    #   create.
+    #   create. This parameter is used with the legacy data preparation
+    #   experience.
     #   @return [Types::RowLevelPermissionDataSet]
     #
     # @!attribute [rw] row_level_permission_tag_configuration
     #   The configuration of tags on a dataset to set row-level security.
     #   Row-level security tags are currently supported for anonymous
-    #   embedding only.
+    #   embedding only. This parameter is used with the legacy data
+    #   preparation experience.
     #   @return [Types::RowLevelPermissionTagConfiguration]
     #
     # @!attribute [rw] column_level_permission_rules
@@ -6876,6 +7277,20 @@ module Aws::QuickSight
     #   permission datasets.
     #   @return [String]
     #
+    # @!attribute [rw] data_prep_configuration
+    #   The data preparation configuration for the dataset. This
+    #   configuration defines the source tables, transformation steps, and
+    #   destination tables used to prepare the data. Required when using the
+    #   new data preparation experience.
+    #   @return [Types::DataPrepConfiguration]
+    #
+    # @!attribute [rw] semantic_model_configuration
+    #   The semantic model configuration for the dataset. This configuration
+    #   defines how the prepared data is structured for an analysis,
+    #   including table mappings and row-level security configurations.
+    #   Required when using the new data preparation experience.
+    #   @return [Types::SemanticModelConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateDataSetRequest AWS API Documentation
     #
     class CreateDataSetRequest < Struct.new(
@@ -6896,7 +7311,9 @@ module Aws::QuickSight
       :dataset_parameters,
       :folder_arns,
       :performance_configuration,
-      :use_as)
+      :use_as,
+      :data_prep_configuration,
+      :semantic_model_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8708,7 +9125,7 @@ module Aws::QuickSight
       :name,
       :sql_query,
       :columns)
-      SENSITIVE = []
+      SENSITIVE = [:sql_query]
       include Aws::Structure
     end
 
@@ -8800,6 +9217,22 @@ module Aws::QuickSight
       :last_published_time,
       :last_updated_time,
       :link_entities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options that define customizations available to dashboard readers
+    # for a specific visual
+    #
+    # @!attribute [rw] fields_configuration
+    #   The configuration that controls field customization options
+    #   available to dashboard readers for a visual.
+    #   @return [Types::VisualCustomizationFieldsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DashboardCustomizationVisualOptions AWS API Documentation
+    #
+    class DashboardCustomizationVisualOptions < Struct.new(
+      :fields_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9259,15 +9692,15 @@ module Aws::QuickSight
     #   The ID of the dashboard that has the visual that you want to embed.
     #   The `DashboardId` can be found in the `IDs for developers` section
     #   of the `Embed visual` pane of the visual's on-visual menu of the
-    #   QuickSight console. You can also get the `DashboardId` with a
+    #   Quick Suite console. You can also get the `DashboardId` with a
     #   `ListDashboards` API operation.
     #   @return [String]
     #
     # @!attribute [rw] sheet_id
     #   The ID of the sheet that the has visual that you want to embed. The
     #   `SheetId` can be found in the `IDs for developers` section of the
-    #   `Embed visual` pane of the visual's on-visual menu of the
-    #   QuickSight console.
+    #   `Embed visual` pane of the visual's on-visual menu of the Quick
+    #   Suite console.
     #   @return [String]
     #
     # @!attribute [rw] visual_id
@@ -9437,6 +9870,60 @@ module Aws::QuickSight
       :min_max_gradient,
       :empty_fill_color)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data field series item configuration of a `BarChartVisual`.
+    #
+    # @!attribute [rw] field_id
+    #   Field ID of the field that you are setting the series configuration
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_value
+    #   Field value of the field that you are setting the series
+    #   configuration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   Options that determine the presentation of bar series associated to
+    #   the field.
+    #   @return [Types::BarChartSeriesSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataFieldBarSeriesItem AWS API Documentation
+    #
+    class DataFieldBarSeriesItem < Struct.new(
+      :field_id,
+      :field_value,
+      :settings)
+      SENSITIVE = [:field_value]
+      include Aws::Structure
+    end
+
+    # The data field series item configuration of a `ComboChartVisual`.
+    #
+    # @!attribute [rw] field_id
+    #   Field ID of the field that you are setting the series configuration
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_value
+    #   Field value of the field that you are setting the series
+    #   configuration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   Options that determine the presentation of series associated to the
+    #   field.
+    #   @return [Types::ComboChartSeriesSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataFieldComboSeriesItem AWS API Documentation
+    #
+    class DataFieldComboSeriesItem < Struct.new(
+      :field_id,
+      :field_value,
+      :settings)
+      SENSITIVE = [:field_value]
       include Aws::Structure
     end
 
@@ -9735,6 +10222,103 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Defines the type of aggregation function to apply to data during data
+    # preparation, supporting simple and list aggregations.
+    #
+    # @!attribute [rw] simple_aggregation
+    #   A simple aggregation function such as `SUM`, `COUNT`, `AVERAGE`,
+    #   `MIN`, `MAX`, `MEDIAN`, `VARIANCE`, or `STANDARD_DEVIATION`.
+    #   @return [Types::DataPrepSimpleAggregationFunction]
+    #
+    # @!attribute [rw] list_aggregation
+    #   A list aggregation function that concatenates values from multiple
+    #   rows into a single delimited string.
+    #   @return [Types::DataPrepListAggregationFunction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataPrepAggregationFunction AWS API Documentation
+    #
+    class DataPrepAggregationFunction < Struct.new(
+      :simple_aggregation,
+      :list_aggregation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for data preparation operations, defining the complete
+    # pipeline from source tables through transformations to destination
+    # tables.
+    #
+    # @!attribute [rw] source_table_map
+    #   A map of source tables that provide information about underlying
+    #   sources.
+    #   @return [Hash<String,Types::SourceTable>]
+    #
+    # @!attribute [rw] transform_step_map
+    #   A map of transformation steps that process the data.
+    #   @return [Hash<String,Types::TransformStep>]
+    #
+    # @!attribute [rw] destination_table_map
+    #   A map of destination tables that receive the final prepared data.
+    #   @return [Hash<String,Types::DestinationTable>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataPrepConfiguration AWS API Documentation
+    #
+    class DataPrepConfiguration < Struct.new(
+      :source_table_map,
+      :transform_step_map,
+      :destination_table_map)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An aggregation function that concatenates values from multiple rows
+    # into a single string with a specified separator.
+    #
+    # @!attribute [rw] input_column_name
+    #   The name of the column containing values to be concatenated.
+    #   @return [String]
+    #
+    # @!attribute [rw] separator
+    #   The string used to separate values in the concatenated result.
+    #   @return [String]
+    #
+    # @!attribute [rw] distinct
+    #   Whether to include only distinct values in the concatenated result,
+    #   removing duplicates.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataPrepListAggregationFunction AWS API Documentation
+    #
+    class DataPrepListAggregationFunction < Struct.new(
+      :input_column_name,
+      :separator,
+      :distinct)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A simple aggregation function that performs standard statistical
+    # operations on a column.
+    #
+    # @!attribute [rw] input_column_name
+    #   The name of the column on which to perform the aggregation function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_type
+    #   The type of aggregation function to perform, such as `COUNT`, `SUM`,
+    #   `AVERAGE`, `MIN`, `MAX`, `MEDIAN`, `VARIANCE`, or
+    #   `STANDARD_DEVIATION`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataPrepSimpleAggregationFunction AWS API Documentation
+    #
+    class DataPrepSimpleAggregationFunction < Struct.new(
+      :input_column_name,
+      :function_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Adds Q&amp;A capabilities to a dashboard. If no topic is linked,
     # Dashboard Q&amp;A uses the data values that are rendered on the
     # dashboard. End users can use Dashboard Q&amp;A to ask for different
@@ -9853,6 +10437,14 @@ module Aws::QuickSight
     #   The usage of the dataset.
     #   @return [String]
     #
+    # @!attribute [rw] data_prep_configuration
+    #   The data preparation configuration associated with this dataset.
+    #   @return [Types::DataPrepConfiguration]
+    #
+    # @!attribute [rw] semantic_model_configuration
+    #   The semantic model configuration associated with this dataset.
+    #   @return [Types::SemanticModelConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSet AWS API Documentation
     #
     class DataSet < Struct.new(
@@ -9874,7 +10466,29 @@ module Aws::QuickSight
       :data_set_usage_configuration,
       :dataset_parameters,
       :performance_configuration,
-      :use_as)
+      :use_as,
+      :data_prep_configuration,
+      :semantic_model_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Maps a source column identifier to a target column identifier during
+    # transform operations.
+    #
+    # @!attribute [rw] source_column_id
+    #   Source column ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_column_id
+    #   Target column ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetColumnIdMapping AWS API Documentation
+    #
+    class DataSetColumnIdMapping < Struct.new(
+      :source_column_id,
+      :target_column_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9903,6 +10517,96 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A filter condition that compares date values using operators like
+    # `BEFORE`, `AFTER`, or their inclusive variants.
+    #
+    # @!attribute [rw] operator
+    #   The comparison operator to use, such as `BEFORE`,
+    #   `BEFORE_OR_EQUALS_TO`, `AFTER`, or `AFTER_OR_EQUALS_TO`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The date value to compare against.
+    #   @return [Types::DataSetDateFilterValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetDateComparisonFilterCondition AWS API Documentation
+    #
+    class DataSetDateComparisonFilterCondition < Struct.new(
+      :operator,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter condition for date columns, supporting both comparison and
+    # range-based filtering.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the date column to filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison_filter_condition
+    #   A comparison-based filter condition for the date column.
+    #   @return [Types::DataSetDateComparisonFilterCondition]
+    #
+    # @!attribute [rw] range_filter_condition
+    #   A range-based filter condition for the date column, filtering values
+    #   between minimum and maximum dates.
+    #   @return [Types::DataSetDateRangeFilterCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetDateFilterCondition AWS API Documentation
+    #
+    class DataSetDateFilterCondition < Struct.new(
+      :column_name,
+      :comparison_filter_condition,
+      :range_filter_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a date value used in filter conditions.
+    #
+    # @!attribute [rw] static_value
+    #   A static date value used for filtering.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetDateFilterValue AWS API Documentation
+    #
+    class DataSetDateFilterValue < Struct.new(
+      :static_value)
+      SENSITIVE = [:static_value]
+      include Aws::Structure
+    end
+
+    # A filter condition that filters date values within a specified range.
+    #
+    # @!attribute [rw] range_minimum
+    #   The minimum date value for the range filter.
+    #   @return [Types::DataSetDateFilterValue]
+    #
+    # @!attribute [rw] range_maximum
+    #   The maximum date value for the range filter.
+    #   @return [Types::DataSetDateFilterValue]
+    #
+    # @!attribute [rw] include_minimum
+    #   Whether to include the minimum value in the filter range.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_maximum
+    #   Whether to include the maximum value in the filter range.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetDateRangeFilterCondition AWS API Documentation
+    #
+    class DataSetDateRangeFilterCondition < Struct.new(
+      :range_minimum,
+      :range_maximum,
+      :include_minimum,
+      :include_maximum)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A data set.
     #
     # @!attribute [rw] identifier
@@ -9918,6 +10622,97 @@ module Aws::QuickSight
     class DataSetIdentifierDeclaration < Struct.new(
       :identifier,
       :data_set_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter condition that compares numeric values using operators like
+    # `EQUALS`, `GREATER_THAN`, or `LESS_THAN`.
+    #
+    # @!attribute [rw] operator
+    #   The comparison operator to use, such as `EQUALS`, `GREATER_THAN`,
+    #   `LESS_THAN`, or their variants.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The numeric value to compare against.
+    #   @return [Types::DataSetNumericFilterValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetNumericComparisonFilterCondition AWS API Documentation
+    #
+    class DataSetNumericComparisonFilterCondition < Struct.new(
+      :operator,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter condition for numeric columns, supporting both comparison and
+    # range-based filtering.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the numeric column to filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison_filter_condition
+    #   A comparison-based filter condition for the numeric column.
+    #   @return [Types::DataSetNumericComparisonFilterCondition]
+    #
+    # @!attribute [rw] range_filter_condition
+    #   A range-based filter condition for the numeric column, filtering
+    #   values between minimum and maximum numbers.
+    #   @return [Types::DataSetNumericRangeFilterCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetNumericFilterCondition AWS API Documentation
+    #
+    class DataSetNumericFilterCondition < Struct.new(
+      :column_name,
+      :comparison_filter_condition,
+      :range_filter_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a numeric value used in filter conditions.
+    #
+    # @!attribute [rw] static_value
+    #   A static numeric value used for filtering.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetNumericFilterValue AWS API Documentation
+    #
+    class DataSetNumericFilterValue < Struct.new(
+      :static_value)
+      SENSITIVE = [:static_value]
+      include Aws::Structure
+    end
+
+    # A filter condition that filters numeric values within a specified
+    # range.
+    #
+    # @!attribute [rw] range_minimum
+    #   The minimum numeric value for the range filter.
+    #   @return [Types::DataSetNumericFilterValue]
+    #
+    # @!attribute [rw] range_maximum
+    #   The maximum numeric value for the range filter.
+    #   @return [Types::DataSetNumericFilterValue]
+    #
+    # @!attribute [rw] include_minimum
+    #   Whether to include the minimum value in the filter range.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_maximum
+    #   Whether to include the maximum value in the filter range.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetNumericRangeFilterCondition AWS API Documentation
+    #
+    class DataSetNumericRangeFilterCondition < Struct.new(
+      :range_minimum,
+      :range_maximum,
+      :include_minimum,
+      :include_maximum)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10046,6 +10841,102 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A filter condition that compares string values using operators like
+    # `EQUALS`, `CONTAINS`, or `STARTS_WITH`.
+    #
+    # @!attribute [rw] operator
+    #   The comparison operator to use, such as `EQUALS`, `CONTAINS`,
+    #   `STARTS_WITH`, `ENDS_WITH`, or their negations.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The string value to compare against.
+    #   @return [Types::DataSetStringFilterValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetStringComparisonFilterCondition AWS API Documentation
+    #
+    class DataSetStringComparisonFilterCondition < Struct.new(
+      :operator,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter condition for string columns, supporting both comparison and
+    # list-based filtering.
+    #
+    # @!attribute [rw] column_name
+    #   The name of the string column to filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison_filter_condition
+    #   A comparison-based filter condition for the string column.
+    #   @return [Types::DataSetStringComparisonFilterCondition]
+    #
+    # @!attribute [rw] list_filter_condition
+    #   A list-based filter condition that includes or excludes values from
+    #   a specified list.
+    #   @return [Types::DataSetStringListFilterCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetStringFilterCondition AWS API Documentation
+    #
+    class DataSetStringFilterCondition < Struct.new(
+      :column_name,
+      :comparison_filter_condition,
+      :list_filter_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a string value used in filter conditions.
+    #
+    # @!attribute [rw] static_value
+    #   A static string value used for filtering.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetStringFilterValue AWS API Documentation
+    #
+    class DataSetStringFilterValue < Struct.new(
+      :static_value)
+      SENSITIVE = [:static_value]
+      include Aws::Structure
+    end
+
+    # A filter condition that includes or excludes string values from a
+    # specified list.
+    #
+    # @!attribute [rw] operator
+    #   The list operator to use, either `INCLUDE` to match values in the
+    #   list or `EXCLUDE` to filter out values in the list.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The list of string values to include or exclude in the filter.
+    #   @return [Types::DataSetStringListFilterValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetStringListFilterCondition AWS API Documentation
+    #
+    class DataSetStringListFilterCondition < Struct.new(
+      :operator,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a list of string values used in filter conditions.
+    #
+    # @!attribute [rw] static_values
+    #   A list of static string values used for filtering.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetStringListFilterValue AWS API Documentation
+    #
+    class DataSetStringListFilterValue < Struct.new(
+      :static_values)
+      SENSITIVE = [:static_values]
+      include Aws::Structure
+    end
+
     # Dataset summary.
     #
     # @!attribute [rw] arn
@@ -10074,8 +10965,14 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] row_level_permission_data_set
-    #   The row-level security configuration for the dataset.
+    #   The row-level security configuration for the dataset in the legacy
+    #   data preparation experience.
     #   @return [Types::RowLevelPermissionDataSet]
+    #
+    # @!attribute [rw] row_level_permission_data_set_map
+    #   The row-level security configuration for the dataset in the new data
+    #   preparation experience.
+    #   @return [Hash<String,Types::RowLevelPermissionDataSet>]
     #
     # @!attribute [rw] row_level_permission_tag_configuration_applied
     #   Whether or not the row level permission tags are applied.
@@ -10100,6 +10997,7 @@ module Aws::QuickSight
       :last_updated_time,
       :import_mode,
       :row_level_permission_data_set,
+      :row_level_permission_data_set_map,
       :row_level_permission_tag_configuration_applied,
       :column_level_permission_rules_applied,
       :use_as)
@@ -10241,6 +11139,10 @@ module Aws::QuickSight
     #   data source in Amazon Secrets Manager.
     #   @return [String]
     #
+    # @!attribute [rw] key_pair_credentials
+    #   The credentials for connecting using key-pair.
+    #   @return [Types::KeyPairCredentials]
+    #
     # @!attribute [rw] web_proxy_credentials
     #   The credentials for connecting through a web proxy server.
     #   @return [Types::WebProxyCredentials]
@@ -10251,6 +11153,7 @@ module Aws::QuickSight
       :credential_pair,
       :copy_source_arn,
       :secret_arn,
+      :key_pair_credentials,
       :web_proxy_credentials)
       SENSITIVE = []
       include Aws::Structure
@@ -11017,6 +11920,108 @@ module Aws::QuickSight
       :value_when_unset_option,
       :custom_value)
       SENSITIVE = [:custom_value]
+      include Aws::Structure
+    end
+
+    # Decal settings for accessibility features that define visual patterns
+    # and styling for data elements.
+    #
+    # @!attribute [rw] element_value
+    #   Field value of the field that you are setting the decal pattern to.
+    #   Applicable only for field level settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] decal_visibility
+    #   Visibility setting for the decal pattern.
+    #   @return [String]
+    #
+    # @!attribute [rw] decal_color
+    #   Color configuration for the decal pattern.
+    #   @return [String]
+    #
+    # @!attribute [rw] decal_pattern_type
+    #   Type of pattern used for the decal, such as solid, diagonal, or
+    #   circular patterns in various sizes.
+    #
+    #   * `SOLID`: Solid fill pattern.
+    #
+    #   * `DIAGONAL_SMALL`: Small diagonal stripes pattern.
+    #
+    #   * `DIAGONAL_MEDIUM`: Medium diagonal stripes pattern.
+    #
+    #   * `DIAGONAL_LARGE`: Large diagonal stripes pattern.
+    #
+    #   * `DIAGONAL_OPPOSITE_SMALL`: Small cross-diagonal stripes pattern.
+    #
+    #   * `DIAGONAL_OPPOSITE_MEDIUM`: Medium cross-diagonal stripes pattern.
+    #
+    #   * `DIAGONAL_OPPOSITE_LARGE`: Large cross-diagonal stripes pattern.
+    #
+    #   * `CIRCLE_SMALL`: Small circle pattern.
+    #
+    #   * `CIRCLE_MEDIUM`: Medium circle pattern.
+    #
+    #   * `CIRCLE_LARGE`: Large circle pattern.
+    #
+    #   * `DIAMOND_SMALL`: Small diamonds pattern.
+    #
+    #   * `DIAMOND_MEDIUM`: Medium diamonds pattern.
+    #
+    #   * `DIAMOND_LARGE`: Large diamonds pattern.
+    #
+    #   * `DIAMOND_GRID_SMALL`: Small diamond grid pattern.
+    #
+    #   * `DIAMOND_GRID_MEDIUM`: Medium diamond grid pattern.
+    #
+    #   * `DIAMOND_GRID_LARGE`: Large diamond grid pattern.
+    #
+    #   * `CHECKERBOARD_SMALL`: Small checkerboard pattern.
+    #
+    #   * `CHECKERBOARD_MEDIUM`: Medium checkerboard pattern.
+    #
+    #   * `CHECKERBOARD_LARGE`: Large checkerboard pattern.
+    #
+    #   * `TRIANGLE_SMALL`: Small triangles pattern.
+    #
+    #   * `TRIANGLE_MEDIUM`: Medium triangles pattern.
+    #
+    #   * `TRIANGLE_LARGE`: Large triangles pattern.
+    #   @return [String]
+    #
+    # @!attribute [rw] decal_style_type
+    #   Style type for the decal, which can be either manual or automatic.
+    #   This field is only applicable for line series.
+    #
+    #   * `Manual`: Apply manual line and marker configuration for line
+    #     series.
+    #
+    #   * `Auto`: Apply automatic line and marker configuration for line
+    #     series.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DecalSettings AWS API Documentation
+    #
+    class DecalSettings < Struct.new(
+      :element_value,
+      :decal_visibility,
+      :decal_color,
+      :decal_pattern_type,
+      :decal_style_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Decal settings configuration for a column
+    #
+    # @!attribute [rw] custom_decal_settings
+    #   A list of up to 50 decal settings.
+    #   @return [Array<Types::DecalSettings>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DecalSettingsConfiguration AWS API Documentation
+    #
+    class DecalSettingsConfiguration < Struct.new(
+      :custom_decal_settings)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11817,7 +12822,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] brand_id
-    #   The ID of the QuickSight brand.
+    #   The ID of the Quick Suite brand.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteBrandRequest AWS API Documentation
@@ -11972,7 +12977,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
-    #   The ID for the dataset that you want to create. This ID is unique
+    #   The ID for the dataset that you want to delete. This ID is unique
     #   per Amazon Web Services Region for each Amazon Web Services account.
     #   @return [String]
     #
@@ -11990,7 +12995,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
-    #   The ID for the dataset that you want to create. This ID is unique
+    #   The ID for the dataset that you want to delete. This ID is unique
     #   per Amazon Web Services Region for each Amazon Web Services account.
     #   @return [String]
     #
@@ -13156,7 +14161,7 @@ module Aws::QuickSight
     #   sometimes referred to as a Quick Sight "account" even though it's
     #   technically not an account by itself. Instead, it's a subscription
     #   to the Amazon Quick Sight service for your Amazon Web Services
-    #   account. The edition that you subscribe to applies to QuickSight in
+    #   account. The edition that you subscribe to applies to Quick Suite in
     #   every Amazon Web Services Region where you use it.
     #   @return [Types::AccountSettings]
     #
@@ -13819,7 +14824,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] brand_id
-    #   The ID of the QuickSight brand.
+    #   The ID of the Quick Suite brand.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeBrandPublishedVersionRequest AWS API Documentation
@@ -13858,7 +14863,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] brand_id
-    #   The ID of the QuickSight brand.
+    #   The ID of the Quick Suite brand.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -14399,7 +15404,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
-    #   The ID for the dataset that you want to create. This ID is unique
+    #   The ID for the dataset that you want to describe. This ID is unique
     #   per Amazon Web Services Region for each Amazon Web Services account.
     #   @return [String]
     #
@@ -14417,7 +15422,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
-    #   The ID for the dataset that you want to create. This ID is unique
+    #   The ID for the dataset that you want to describe. This ID is unique
     #   per Amazon Web Services Region for each Amazon Web Services account.
     #   @return [String]
     #
@@ -14489,7 +15494,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
-    #   The ID for the dataset that you want to create. This ID is unique
+    #   The ID for the dataset that you want to describe. This ID is unique
     #   per Amazon Web Services Region for each Amazon Web Services account.
     #   @return [String]
     #
@@ -15345,6 +16350,47 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Suite self-upgrade configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The Quick Suite namespace that you want to describe the Quick Suite
+    #   self-upgrade configuration for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeSelfUpgradeConfigurationRequest AWS API Documentation
+    #
+    class DescribeSelfUpgradeConfigurationRequest < Struct.new(
+      :aws_account_id,
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] self_upgrade_configuration
+    #   The self-upgrade configuration for the Quick Suite account.
+    #   @return [Types::SelfUpgradeConfiguration]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeSelfUpgradeConfigurationResponse AWS API Documentation
+    #
+    class DescribeSelfUpgradeConfigurationResponse < Struct.new(
+      :self_upgrade_configuration,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account that contains the template
     #   alias that you're describing.
     #   @return [String]
@@ -16093,6 +17139,43 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Defines a destination table in data preparation that receives the
+    # final transformed data.
+    #
+    # @!attribute [rw] alias
+    #   Alias for the destination table.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source configuration that specifies which transform operation
+    #   provides data to this destination table.
+    #   @return [Types::DestinationTableSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DestinationTable AWS API Documentation
+    #
+    class DestinationTable < Struct.new(
+      :alias,
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the source of data for a destination table, including the
+    # transform operation and column mappings.
+    #
+    # @!attribute [rw] transform_operation_id
+    #   The identifier of the transform operation that provides data to the
+    #   destination table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DestinationTableSource AWS API Documentation
+    #
+    class DestinationTableSource < Struct.new(
+      :transform_operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The dimension type field.
     #
     # @!attribute [rw] numerical_dimension_field
@@ -16580,6 +17663,27 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The field series item configuration of a `BarChartVisual`.
+    #
+    # @!attribute [rw] field_id
+    #   Field ID of the field for which you are setting the series
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   Options that determine the presentation of bar series associated to
+    #   the field.
+    #   @return [Types::BarChartSeriesSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FieldBarSeriesItem AWS API Documentation
+    #
+    class FieldBarSeriesItem < Struct.new(
+      :field_id,
+      :settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The setup for the detailed tooltip.
     #
     # @!attribute [rw] aggregation_visibility
@@ -16605,6 +17709,27 @@ module Aws::QuickSight
       :aggregation_visibility,
       :tooltip_title_type,
       :tooltip_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The field series item configuration of a `ComboChartVisual`.
+    #
+    # @!attribute [rw] field_id
+    #   Field ID of the field for which you are setting the series
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   Options that determine the presentation of series associated to the
+    #   field.
+    #   @return [Types::ComboChartSeriesSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FieldComboSeriesItem AWS API Documentation
+    #
+    class FieldComboSeriesItem < Struct.new(
+      :field_id,
+      :settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16937,6 +18062,10 @@ module Aws::QuickSight
     #   The alt text for the visual.
     #   @return [String]
     #
+    # @!attribute [rw] geocoding_preferences
+    #   The geocoding prefences for filled map visual.
+    #   @return [Array<Types::GeocodePreference>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilledMapVisual AWS API Documentation
     #
     class FilledMapVisual < Struct.new(
@@ -16947,7 +18076,8 @@ module Aws::QuickSight
       :conditional_formatting,
       :column_hierarchies,
       :actions,
-      :visual_content_alt_text)
+      :visual_content_alt_text,
+      :geocoding_preferences)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17391,10 +18521,25 @@ module Aws::QuickSight
     #   the expression evaluates to true are kept in the dataset.
     #   @return [String]
     #
+    # @!attribute [rw] string_filter_condition
+    #   A string-based filter condition within a filter operation.
+    #   @return [Types::DataSetStringFilterCondition]
+    #
+    # @!attribute [rw] numeric_filter_condition
+    #   A numeric-based filter condition within a filter operation.
+    #   @return [Types::DataSetNumericFilterCondition]
+    #
+    # @!attribute [rw] date_filter_condition
+    #   A date-based filter condition within a filter operation.
+    #   @return [Types::DataSetDateFilterCondition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterOperation AWS API Documentation
     #
     class FilterOperation < Struct.new(
-      :condition_expression)
+      :condition_expression,
+      :string_filter_condition,
+      :numeric_filter_condition,
+      :date_filter_condition)
       SENSITIVE = [:condition_expression]
       include Aws::Structure
     end
@@ -17644,6 +18789,31 @@ module Aws::QuickSight
       :title,
       :source_filter_id,
       :display_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A transform operation that applies one or more filter conditions.
+    #
+    # @!attribute [rw] alias
+    #   Alias for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source transform operation that provides input data for
+    #   filtering.
+    #   @return [Types::TransformOperationSource]
+    #
+    # @!attribute [rw] filter_operations
+    #   The list of filter operations to apply.
+    #   @return [Array<Types::FilterOperation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FiltersOperation AWS API Documentation
+    #
+    class FiltersOperation < Struct.new(
+      :alias,
+      :source,
+      :filter_operations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18220,6 +19390,14 @@ module Aws::QuickSight
     #   The loading animation configuration of a free-form layout element.
     #   @return [Types::LoadingAnimation]
     #
+    # @!attribute [rw] border_radius
+    #   The border radius of a free-form layout element.
+    #   @return [String]
+    #
+    # @!attribute [rw] padding
+    #   The padding of a free-form layout element.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FreeFormLayoutElement AWS API Documentation
     #
     class FreeFormLayoutElement < Struct.new(
@@ -18234,7 +19412,9 @@ module Aws::QuickSight
       :border_style,
       :selected_border_style,
       :background_style,
-      :loading_animation)
+      :loading_animation,
+      :border_radius,
+      :padding)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18268,11 +19448,16 @@ module Aws::QuickSight
     #   The border color of a free-form layout element.
     #   @return [String]
     #
+    # @!attribute [rw] width
+    #   The border width of a free-form layout element.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FreeFormLayoutElementBorderStyle AWS API Documentation
     #
     class FreeFormLayoutElementBorderStyle < Struct.new(
       :visibility,
-      :color)
+      :color,
+      :width)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18770,7 +19955,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] namespace
     #   The Amazon Quick Sight namespace that the anonymous user virtually
-    #   belongs to. If you are not using an Amazon QuickSight custom
+    #   belongs to. If you are not using an Amazon Quick Suite custom
     #   namespace, set this to `default`.
     #   @return [String]
     #
@@ -18847,8 +20032,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] anonymous_user_arn
-    #   The Amazon Resource Name (ARN) to use for the anonymous Amazon
-    #   QuickSight user.
+    #   The Amazon Resource Name (ARN) to use for the anonymous Amazon Quick
+    #   Suite user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GenerateEmbedUrlForAnonymousUserResponse AWS API Documentation
@@ -18878,7 +20063,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] experience_configuration
     #   The experience that you want to embed. For registered users, you can
-    #   embed QuickSight dashboards, Amazon Quick Sight visuals, the Amazon
+    #   embed Quick Suite dashboards, Amazon Quick Sight visuals, the Amazon
     #   Quick Sight Q search bar, the Amazon Quick Sight Generative Q&amp;A
     #   experience, or the entire Amazon Quick Sight console.
     #   @return [Types::RegisteredUserEmbeddingExperienceConfiguration]
@@ -18941,7 +20126,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] experience_configuration
     #   The type of experience you want to embed. For registered users, you
-    #   can embed QuickSight dashboards or the Amazon Quick Sight console.
+    #   can embed Quick Suite dashboards or the Amazon Quick Sight console.
     #
     #   <note markdown="1"> Exactly one of the experience configurations is required. You can
     #   choose `Dashboard` or `QuickSightConsole`. You cannot choose more
@@ -19072,6 +20257,88 @@ module Aws::QuickSight
       :name,
       :country_code,
       :columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The geocode preference.
+    #
+    # @!attribute [rw] request_key
+    #   The unique request key for the geocode preference.
+    #   @return [Types::GeocoderHierarchy]
+    #
+    # @!attribute [rw] preference
+    #   The preference definition for the geocode preference.
+    #   @return [Types::GeocodePreferenceValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GeocodePreference AWS API Documentation
+    #
+    class GeocodePreference < Struct.new(
+      :request_key,
+      :preference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The preference value for the geocode preference.
+    #
+    # @note GeocodePreferenceValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note GeocodePreferenceValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of GeocodePreferenceValue corresponding to the set member.
+    #
+    # @!attribute [rw] geocoder_hierarchy
+    #   The preference hierarchy for the geocode preference.
+    #   @return [Types::GeocoderHierarchy]
+    #
+    # @!attribute [rw] coordinate
+    #   The preference coordinate for the geocode preference.
+    #   @return [Types::Coordinate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GeocodePreferenceValue AWS API Documentation
+    #
+    class GeocodePreferenceValue < Struct.new(
+      :geocoder_hierarchy,
+      :coordinate,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class GeocoderHierarchy < GeocodePreferenceValue; end
+      class Coordinate < GeocodePreferenceValue; end
+      class Unknown < GeocodePreferenceValue; end
+    end
+
+    # The preference hierarchy for the geocode preference.
+    #
+    # @!attribute [rw] country
+    #   The country value for the preference hierarchy.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state/region value for the preference hierarchy.
+    #   @return [String]
+    #
+    # @!attribute [rw] county
+    #   The county/district value for the preference hierarchy.
+    #   @return [String]
+    #
+    # @!attribute [rw] city
+    #   The city value for the preference hierarchy.
+    #   @return [String]
+    #
+    # @!attribute [rw] post_code
+    #   The postcode value for the preference hierarchy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GeocoderHierarchy AWS API Documentation
+    #
+    class GeocoderHierarchy < Struct.new(
+      :country,
+      :state,
+      :county,
+      :city,
+      :post_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19733,6 +21000,10 @@ module Aws::QuickSight
     #   The alt text for the visual.
     #   @return [String]
     #
+    # @!attribute [rw] geocoding_preferences
+    #   The geocoding prefences for geospatial map.
+    #   @return [Array<Types::GeocodePreference>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GeospatialMapVisual AWS API Documentation
     #
     class GeospatialMapVisual < Struct.new(
@@ -19742,7 +21013,8 @@ module Aws::QuickSight
       :chart_configuration,
       :column_hierarchies,
       :actions,
-      :visual_content_alt_text)
+      :visual_content_alt_text,
+      :geocoding_preferences)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19983,9 +21255,9 @@ module Aws::QuickSight
     #   @return [Boolean]
     #
     # @!attribute [rw] user_arn
-    #   The Amazon QuickSight user's Amazon Resource Name (ARN), for use
+    #   The Amazon Quick Suite user's Amazon Resource Name (ARN), for use
     #   with `QUICKSIGHT` identity type. You can use this for any Amazon
-    #   QuickSight users in your account (readers, authors, or admins)
+    #   Quick Suite users in your account (readers, authors, or admins)
     #   authenticated as one of the following:
     #
     #   * Active Directory (AD) users or group members
@@ -20010,7 +21282,7 @@ module Aws::QuickSight
     #   A list of one or more dashboard IDs that you want anonymous users to
     #   have tempporary access to. Currently, the `IdentityType` parameter
     #   must be set to `ANONYMOUS` because other identity types authenticate
-    #   as QuickSight or IAM users. For example, if you set
+    #   as Quick Suite or IAM users. For example, if you set
     #   "`--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3
     #   identity-type ANONYMOUS`", the session can access all three
     #   dashboards.
@@ -20193,6 +21465,70 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # ///////////////////////// /////////////////////////
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the Amazon Web Services account that the user whose
+    #   identity context you want to retrieve is in. Currently, you use the
+    #   ID for the Amazon Web Services account that contains your Quick
+    #   Sight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_identifier
+    #   The identifier for the user whose identity context you want to
+    #   retrieve.
+    #   @return [Types::UserIdentifier]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the user that you want to get identity context for.
+    #   This parameter is required when the UserIdentifier is specified
+    #   using Email or UserName.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_expires_at
+    #   The timestamp at which the session will expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetIdentityContextRequest AWS API Documentation
+    #
+    class GetIdentityContextRequest < Struct.new(
+      :aws_account_id,
+      :user_identifier,
+      :namespace,
+      :session_expires_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   The identity context information for the user. This is an identity
+    #   token that should be used as the ContextAssertion parameter in the
+    #   [STS AssumeRole API][1] call to obtain identity enhanced Amazon Web
+    #   Services credentials.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetIdentityContextResponse AWS API Documentation
+    #
+    class GetIdentityContextResponse < Struct.new(
+      :status,
+      :request_id,
+      :context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] aws_account_id
     #   The ID for the Amazon Web Services account associated with your
     #   Amazon Quick Sight subscription.
@@ -20223,9 +21559,9 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] user_arn
-    #   The Amazon QuickSight user's Amazon Resource Name (ARN), for use
+    #   The Amazon Quick Suite user's Amazon Resource Name (ARN), for use
     #   with `QUICKSIGHT` identity type. You can use this for any type of
-    #   Amazon QuickSight users in your account (readers, authors, or
+    #   Amazon Quick Suite users in your account (readers, authors, or
     #   admins). They need to be authenticated as one of the following:
     #
     #   1.  Active Directory (AD) users or group members
@@ -20253,7 +21589,7 @@ module Aws::QuickSight
 
     # @!attribute [rw] embed_url
     #   A single-use URL that you can put into your server-side web page to
-    #   embed your QuickSight session. This URL is valid for 5 minutes. The
+    #   embed your Quick Suite session. This URL is valid for 5 minutes. The
     #   API operation provides the URL with an `auth_code` value that
     #   enables one (and only one) sign-on to a user session that is valid
     #   for 10 hours.
@@ -20398,6 +21734,31 @@ module Aws::QuickSight
     #   The height of a grid element expressed as a number of grid rows.
     #   @return [Integer]
     #
+    # @!attribute [rw] border_style
+    #   The border style configuration of a grid layout element.
+    #   @return [Types::GridLayoutElementBorderStyle]
+    #
+    # @!attribute [rw] selected_border_style
+    #   The border style configuration of a grid layout element. This border
+    #   style is used when the element is selected.
+    #   @return [Types::GridLayoutElementBorderStyle]
+    #
+    # @!attribute [rw] background_style
+    #   The background style configuration of a grid layout element.
+    #   @return [Types::GridLayoutElementBackgroundStyle]
+    #
+    # @!attribute [rw] loading_animation
+    #   The configuration of loading animation in free-form layout.
+    #   @return [Types::LoadingAnimation]
+    #
+    # @!attribute [rw] border_radius
+    #   The border radius of a grid layout element.
+    #   @return [String]
+    #
+    # @!attribute [rw] padding
+    #   The padding of a grid layout element.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GridLayoutElement AWS API Documentation
     #
     class GridLayoutElement < Struct.new(
@@ -20406,7 +21767,56 @@ module Aws::QuickSight
       :column_index,
       :column_span,
       :row_index,
-      :row_span)
+      :row_span,
+      :border_style,
+      :selected_border_style,
+      :background_style,
+      :loading_animation,
+      :border_radius,
+      :padding)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The background style configuration of a grid layout element.
+    #
+    # @!attribute [rw] visibility
+    #   The background visibility of a grid layout element.
+    #   @return [String]
+    #
+    # @!attribute [rw] color
+    #   The background color of a grid layout element.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GridLayoutElementBackgroundStyle AWS API Documentation
+    #
+    class GridLayoutElementBackgroundStyle < Struct.new(
+      :visibility,
+      :color)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The border style configuration of a grid layout element.
+    #
+    # @!attribute [rw] visibility
+    #   The border visibility of a grid layout element.
+    #   @return [String]
+    #
+    # @!attribute [rw] color
+    #   The border color of a grid layout element.
+    #   @return [String]
+    #
+    # @!attribute [rw] width
+    #   The border width of a grid layout element.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GridLayoutElementBorderStyle AWS API Documentation
+    #
+    class GridLayoutElementBorderStyle < Struct.new(
+      :visibility,
+      :color,
+      :width)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21320,6 +22730,47 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A transform operation that imports data from a source table.
+    #
+    # @!attribute [rw] alias
+    #   Alias for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source configuration that specifies which source table to import
+    #   and any column mappings.
+    #   @return [Types::ImportTableOperationSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ImportTableOperation AWS API Documentation
+    #
+    class ImportTableOperation < Struct.new(
+      :alias,
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the source table and column mappings for an import table
+    # operation.
+    #
+    # @!attribute [rw] source_table_id
+    #   The identifier of the source table to import data from.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_id_mappings
+    #   The mappings between source column identifiers and target column
+    #   identifiers during the import.
+    #   @return [Array<Types::DataSetColumnIdMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ImportTableOperationSource AWS API Documentation
+    #
+    class ImportTableOperationSource < Struct.new(
+      :source_table_id,
+      :column_id_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The incremental refresh configuration for a dataset.
     #
     # @!attribute [rw] lookback_window
@@ -21420,6 +22871,10 @@ module Aws::QuickSight
     #   The name of this column in the underlying data source.
     #   @return [String]
     #
+    # @!attribute [rw] id
+    #   A unique identifier for the input column.
+    #   @return [String]
+    #
     # @!attribute [rw] type
     #   The data type of the column.
     #   @return [String]
@@ -21433,6 +22888,7 @@ module Aws::QuickSight
     #
     class InputColumn < Struct.new(
       :name,
+      :id,
       :type,
       :sub_type)
       SENSITIVE = []
@@ -21698,6 +23154,25 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # An exception thrown when an invalid parameter value is provided for
+    # dataset operations.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InvalidDataSetParameterValueException AWS API Documentation
+    #
+    class InvalidDataSetParameterValueException < Struct.new(
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The `NextToken` value isn't valid.
     #
     # @!attribute [rw] message
@@ -21710,6 +23185,24 @@ module Aws::QuickSight
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InvalidNextTokenException AWS API Documentation
     #
     class InvalidNextTokenException < Struct.new(
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One or more parameter has a value that isn't valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
       :message,
       :request_id)
       SENSITIVE = []
@@ -21863,6 +23356,71 @@ module Aws::QuickSight
     class JoinKeyProperties < Struct.new(
       :unique_key)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Properties that control how columns are handled for a join operand,
+    # including column name overrides.
+    #
+    # @!attribute [rw] output_column_name_overrides
+    #   A list of column name overrides to apply to the join operand's
+    #   output columns.
+    #   @return [Array<Types::OutputColumnNameOverride>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/JoinOperandProperties AWS API Documentation
+    #
+    class JoinOperandProperties < Struct.new(
+      :output_column_name_overrides)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A transform operation that combines data from two sources based on
+    # specified join conditions.
+    #
+    # @!attribute [rw] alias
+    #   Alias for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] left_operand
+    #   The left operand for the join operation.
+    #   @return [Types::TransformOperationSource]
+    #
+    # @!attribute [rw] right_operand
+    #   The right operand for the join operation.
+    #   @return [Types::TransformOperationSource]
+    #
+    # @!attribute [rw] type
+    #   The type of join to perform, such as `INNER`, `LEFT`, `RIGHT`, or
+    #   `OUTER`.
+    #   @return [String]
+    #
+    # @!attribute [rw] on_clause
+    #   The join condition that specifies how to match rows between the left
+    #   and right operands.
+    #   @return [String]
+    #
+    # @!attribute [rw] left_operand_properties
+    #   Properties that control how the left operand's columns are handled
+    #   in the join result.
+    #   @return [Types::JoinOperandProperties]
+    #
+    # @!attribute [rw] right_operand_properties
+    #   Properties that control how the right operand's columns are handled
+    #   in the join result.
+    #   @return [Types::JoinOperandProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/JoinOperation AWS API Documentation
+    #
+    class JoinOperation < Struct.new(
+      :alias,
+      :left_operand,
+      :right_operand,
+      :type,
+      :on_clause,
+      :left_operand_properties,
+      :right_operand_properties)
+      SENSITIVE = [:on_clause]
       include Aws::Structure
     end
 
@@ -22219,6 +23777,31 @@ module Aws::QuickSight
     class KPIVisualStandardLayout < Struct.new(
       :type)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The combination of username, private key and passphrase that are used
+    # as credentials.
+    #
+    # @!attribute [rw] key_pair_username
+    #   Username
+    #   @return [String]
+    #
+    # @!attribute [rw] private_key
+    #   PrivateKey
+    #   @return [String]
+    #
+    # @!attribute [rw] private_key_passphrase
+    #   PrivateKeyPassphrase
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KeyPairCredentials AWS API Documentation
+    #
+    class KeyPairCredentials < Struct.new(
+      :key_pair_username,
+      :private_key,
+      :private_key_passphrase)
+      SENSITIVE = [:private_key, :private_key_passphrase]
       include Aws::Structure
     end
 
@@ -22663,12 +24246,17 @@ module Aws::QuickSight
     #   Marker styles options for all line series in the visual.
     #   @return [Types::LineChartMarkerStyleSettings]
     #
+    # @!attribute [rw] decal_settings
+    #   Decal settings options for all line series in the visual.
+    #   @return [Types::DecalSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/LineChartDefaultSeriesSettings AWS API Documentation
     #
     class LineChartDefaultSeriesSettings < Struct.new(
       :axis_binding,
       :line_style_settings,
-      :marker_style_settings)
+      :marker_style_settings,
+      :decal_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22780,11 +24368,16 @@ module Aws::QuickSight
     #   Marker styles options for a line series in `LineChartVisual`.
     #   @return [Types::LineChartMarkerStyleSettings]
     #
+    # @!attribute [rw] decal_settings
+    #   Decal settings for a line series in `LineChartVisual`.
+    #   @return [Types::DecalSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/LineChartSeriesSettings AWS API Documentation
     #
     class LineChartSeriesSettings < Struct.new(
       :line_style_settings,
-      :marker_style_settings)
+      :marker_style_settings,
+      :decal_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24224,6 +25817,63 @@ module Aws::QuickSight
     #
     class ListRoleMembershipsResponse < Struct.new(
       :members_list,
+      :next_token,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   self-upgrade requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The Quick Suite namespace for the self-upgrade requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListSelfUpgradesRequest AWS API Documentation
+    #
+    class ListSelfUpgradesRequest < Struct.new(
+      :aws_account_id,
+      :namespace,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] self_upgrade_request_details
+    #   A list of self-upgrade request details.
+    #   @return [Array<Types::SelfUpgradeRequestDetail>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListSelfUpgradesResponse AWS API Documentation
+    #
+    class ListSelfUpgradesResponse < Struct.new(
+      :self_upgrade_request_details,
       :next_token,
       :request_id,
       :status)
@@ -26225,6 +27875,10 @@ module Aws::QuickSight
     #   The display name of the column..
     #   @return [String]
     #
+    # @!attribute [rw] id
+    #   A unique identifier for the output column.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   A description for a column.
     #   @return [String]
@@ -26241,10 +27895,31 @@ module Aws::QuickSight
     #
     class OutputColumn < Struct.new(
       :name,
+      :id,
       :description,
       :type,
       :sub_type)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # Specifies a mapping to override the name of an output column from a
+    # transform operation.
+    #
+    # @!attribute [rw] source_column_name
+    #   The original name of the column from the source transform operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_column_name
+    #   The new name to assign to the column in the output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/OutputColumnNameOverride AWS API Documentation
+    #
+    class OutputColumnNameOverride < Struct.new(
+      :source_column_name,
+      :output_column_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -26767,6 +28442,26 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # References a parent dataset that serves as a data source, including
+    # its columns and metadata.
+    #
+    # @!attribute [rw] data_set_arn
+    #   The Amazon Resource Name (ARN) of the parent dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_columns
+    #   The list of input columns available from the parent dataset.
+    #   @return [Array<Types::InputColumn>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ParentDataSet AWS API Documentation
+    #
+    class ParentDataSet < Struct.new(
+      :data_set_arn,
+      :input_columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The percent range in the visible range.
     #
     # @!attribute [rw] from
@@ -26980,8 +28675,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] principal
     #   The Amazon Resource Name (ARN) of the principal. This can be an
-    #   Amazon QuickSight user, group or namespace associated with the flow.
-    #   Namespace principal can only be set as a viewer and will grant
+    #   Amazon Quick Suite user, group or namespace associated with the
+    #   flow. Namespace principal can only be set as a viewer and will grant
     #   everyone in the same namespace viewer permissions.
     #   @return [String]
     #
@@ -27012,12 +28707,17 @@ module Aws::QuickSight
     #   A physical table type for as S3 data source.
     #   @return [Types::S3Source]
     #
+    # @!attribute [rw] saa_s_table
+    #   A physical table type for Software-as-a-Service (SaaS) sources.
+    #   @return [Types::SaaSTable]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PhysicalTable AWS API Documentation
     #
     class PhysicalTable < Struct.new(
       :relational_table,
       :custom_sql,
-      :s3_source)
+      :s3_source,
+      :saa_s_table)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27234,6 +28934,27 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Configuration for a pivot operation, specifying which column contains
+    # labels and how to pivot them.
+    #
+    # @!attribute [rw] label_column_name
+    #   The name of the column that contains the labels to be pivoted into
+    #   separate columns.
+    #   @return [String]
+    #
+    # @!attribute [rw] pivoted_labels
+    #   The list of specific label values to pivot into separate columns.
+    #   @return [Array<Types::PivotedLabel>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PivotConfiguration AWS API Documentation
+    #
+    class PivotConfiguration < Struct.new(
+      :label_column_name,
+      :pivoted_labels)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The field sort options for a pivot table sort configuration.
     #
     # @!attribute [rw] field_id
@@ -27249,6 +28970,45 @@ module Aws::QuickSight
     class PivotFieldSortOptions < Struct.new(
       :field_id,
       :sort_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A transform operation that pivots data by converting row values into
+    # columns.
+    #
+    # @!attribute [rw] alias
+    #   Alias for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source transform operation that provides input data for
+    #   pivoting.
+    #   @return [Types::TransformOperationSource]
+    #
+    # @!attribute [rw] group_by_column_names
+    #   The list of column names to group by when performing the pivot
+    #   operation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] value_column_configuration
+    #   Configuration for how to aggregate values when multiple rows map to
+    #   the same pivoted column.
+    #   @return [Types::ValueColumnConfiguration]
+    #
+    # @!attribute [rw] pivot_configuration
+    #   Configuration that specifies which labels to pivot and how to
+    #   structure the resulting columns.
+    #   @return [Types::PivotConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PivotOperation AWS API Documentation
+    #
+    class PivotOperation < Struct.new(
+      :alias,
+      :source,
+      :group_by_column_names,
+      :value_column_configuration,
+      :pivot_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27378,6 +29138,11 @@ module Aws::QuickSight
     #   The paginated report options for a pivot table visual.
     #   @return [Types::PivotTablePaginatedReportOptions]
     #
+    # @!attribute [rw] dashboard_customization_visual_options
+    #   The options that define customizations available to dashboard
+    #   readers for a specific visual
+    #   @return [Types::DashboardCustomizationVisualOptions]
+    #
     # @!attribute [rw] interactions
     #   The general visual interactions setup for a visual.
     #   @return [Types::VisualInteractionOptions]
@@ -27391,6 +29156,7 @@ module Aws::QuickSight
       :total_options,
       :field_options,
       :paginated_report_options,
+      :dashboard_customization_visual_options,
       :interactions)
       SENSITIVE = []
       include Aws::Structure
@@ -27839,6 +29605,32 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Specifies a label value to be pivoted into a separate column,
+    # including the new column name and identifier.
+    #
+    # @!attribute [rw] label_name
+    #   The label value from the source data to be pivoted.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_column_name
+    #   The name for the new column created from this pivoted label.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_column_id
+    #   A unique identifier for the new column created from this pivoted
+    #   label.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PivotedLabel AWS API Documentation
+    #
+    class PivotedLabel < Struct.new(
+      :label_name,
+      :new_column_name,
+      :new_column_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A flexible visualization type that allows engineers to create new
     # custom charts in Quick Sight.
     #
@@ -28190,6 +29982,15 @@ module Aws::QuickSight
     # A transform operation that projects columns. Operations that come
     # after a projection can only refer to projected columns.
     #
+    # @!attribute [rw] alias
+    #   Alias for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source transform operation that provides input data for column
+    #   projection.
+    #   @return [Types::TransformOperationSource]
+    #
     # @!attribute [rw] projected_columns
     #   Projected columns.
     #   @return [Array<String>]
@@ -28197,6 +29998,8 @@ module Aws::QuickSight
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ProjectOperation AWS API Documentation
     #
     class ProjectOperation < Struct.new(
+      :alias,
+      :source,
       :projected_columns)
       SENSITIVE = []
       include Aws::Structure
@@ -29810,7 +31613,7 @@ module Aws::QuickSight
     end
 
     # The type of experience you want to embed. For registered users, you
-    # can embed QuickSight dashboards or the Amazon Quick Sight console.
+    # can embed Quick Suite dashboards or the Amazon Quick Sight console.
     #
     # <note markdown="1"> Exactly one of the experience configurations is required. You can
     # choose `Dashboard` or `QuickSightConsole`. You cannot choose more than
@@ -29828,7 +31631,7 @@ module Aws::QuickSight
     #   console embedding experience. This can be used along with custom
     #   permissions to restrict access to certain features. For more
     #   information, see [Customizing Access to the Amazon Quick Sight
-    #   Console][1] in the *Amazon QuickSight User Guide*.
+    #   Console][1] in the *Amazon Quick Suite User Guide*.
     #
     #   Use ` GenerateEmbedUrlForRegisteredUser ` where you want to provide
     #   an authoring portal that allows users to create data sources,
@@ -29839,16 +31642,16 @@ module Aws::QuickSight
     #   the ` UpdateUser ` API operation. Use the ` RegisterUser ` API
     #   operation to add a new user with a custom permission profile
     #   attached. For more information, see the following sections in the
-    #   *Amazon QuickSight User Guide*:
+    #   *Amazon Quick Suite User Guide*:
     #
     #   * [Embedding the Full Functionality of the Amazon Quick Sight
     #     Console for Authenticated Users][2]
     #
-    #   * [Customizing Access to the Amazon QuickSight Console][1]
+    #   * [Customizing Access to the Amazon Quick Suite Console][1]
     #
     #   For more information about the high-level steps for embedding and
     #   for an interactive demo of the ways you can customize embedding,
-    #   visit the [Amazon QuickSight Developer Portal][3].
+    #   visit the [Amazon Quick Suite Developer Portal][3].
     #
     #
     #
@@ -29886,6 +31689,10 @@ module Aws::QuickSight
     #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html
     #   @return [Types::RegisteredUserGenerativeQnAEmbeddingConfiguration]
     #
+    # @!attribute [rw] quick_chat
+    #   The configuration details for embedding the Quick chat agent.
+    #   @return [Types::RegisteredUserQuickChatEmbeddingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserEmbeddingExperienceConfiguration AWS API Documentation
     #
     class RegisteredUserEmbeddingExperienceConfiguration < Struct.new(
@@ -29893,7 +31700,8 @@ module Aws::QuickSight
       :quick_sight_console,
       :q_search_bar,
       :dashboard_visual,
-      :generative_qn_a)
+      :generative_qn_a,
+      :quick_chat)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29904,7 +31712,7 @@ module Aws::QuickSight
     # @!attribute [rw] initial_topic_id
     #   The ID of the new Q reader experience topic that you want to make
     #   the starting topic in the Generative Q&amp;A experience. You can
-    #   find a topic ID by navigating to the Topics pane in the QuickSight
+    #   find a topic ID by navigating to the Topics pane in the Quick Suite
     #   application and opening a topic. The ID is in the URL for the topic
     #   that you open.
     #
@@ -29952,6 +31760,15 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # An object that provides information about the configuration of a chat
+    # agent.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserQuickChatEmbeddingConfiguration AWS API Documentation
+    #
+    class RegisteredUserQuickChatEmbeddingConfiguration < Aws::EmptyStructure; end
+
     # Information about the Amazon Quick Sight console that you want to
     # embed.
     #
@@ -29986,6 +31803,26 @@ module Aws::QuickSight
     class RegisteredUserQuickSightConsoleEmbeddingConfiguration < Struct.new(
       :initial_path,
       :feature_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains information about files that are requested
+    # for registered user during a `StartDashboardSnapshotJob` API call.
+    #
+    # @!attribute [rw] file_groups
+    #   A list of `SnapshotJobResultFileGroup` objects that contain
+    #   information on the files that are requested for registered user
+    #   during a `StartDashboardSnapshotJob` API call. If the job succeeds,
+    #   these objects contain the location where the snapshot artifacts are
+    #   stored. If the job fails, the objects contain information about the
+    #   error that caused the job to fail.
+    #   @return [Array<Types::SnapshotJobResultFileGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserSnapshotJobResult AWS API Documentation
+    #
+    class RegisteredUserSnapshotJobResult < Struct.new(
+      :file_groups)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30149,6 +31986,32 @@ module Aws::QuickSight
     class RenameColumnOperation < Struct.new(
       :column_name,
       :new_column_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A transform operation that renames one or more columns in the dataset.
+    #
+    # @!attribute [rw] alias
+    #   Alias for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source transform operation that provides input data for column
+    #   renaming.
+    #   @return [Types::TransformOperationSource]
+    #
+    # @!attribute [rw] rename_column_operations
+    #   The list of column rename operations to perform, specifying old and
+    #   new column names.
+    #   @return [Array<Types::RenameColumnOperation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RenameColumnsOperation AWS API Documentation
+    #
+    class RenameColumnsOperation < Struct.new(
+      :alias,
+      :source,
+      :rename_column_operations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30383,6 +32246,35 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Configuration for row level security.
+    #
+    # @!attribute [rw] tag_configuration
+    #   The configuration of tags on a dataset to set row-level security.
+    #   @return [Types::RowLevelPermissionTagConfiguration]
+    #
+    # @!attribute [rw] row_level_permission_data_set
+    #   Information about a dataset that contains permissions for row-level
+    #   security (RLS). The permissions dataset maps fields to users or
+    #   groups. For more information, see [Using Row-Level Security (RLS) to
+    #   Restrict Access to a Dataset][1] in the *Quick Sight User Guide*.
+    #
+    #   The option to deny permissions by setting `PermissionPolicy` to
+    #   `DENY_ACCESS` is not supported for new RLS datasets.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html
+    #   @return [Types::RowLevelPermissionDataSet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RowLevelPermissionConfiguration AWS API Documentation
+    #
+    class RowLevelPermissionConfiguration < Struct.new(
+      :tag_configuration,
+      :row_level_permission_data_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a dataset that contains permissions for row-level
     # security (RLS). The permissions dataset maps fields to users or
     # groups. For more information, see [Using Row-Level Security (RLS) to
@@ -30613,6 +32505,31 @@ module Aws::QuickSight
     class S3Source < Struct.new(
       :data_source_arn,
       :upload_settings,
+      :input_columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A table from a Software-as-a-Service (SaaS) data source, including
+    # connection details and column definitions.
+    #
+    # @!attribute [rw] data_source_arn
+    #   The Amazon Resource Name (ARN) of the SaaS data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_path
+    #   The hierarchical path to the table within the SaaS data source.
+    #   @return [Array<Types::TablePathElement>]
+    #
+    # @!attribute [rw] input_columns
+    #   The list of input columns available from the SaaS table.
+    #   @return [Array<Types::InputColumn>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SaaSTable AWS API Documentation
+    #
+    class SaaSTable < Struct.new(
+      :data_source_arn,
+      :table_path,
       :input_columns)
       SENSITIVE = []
       include Aws::Structure
@@ -31834,6 +33751,81 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The self-upgrade configuration for the Quick Suite account.
+    #
+    # @!attribute [rw] self_upgrade_status
+    #   Status set for the self-upgrade configuration for the Quick Suite
+    #   account. It can contain the following values:
+    #
+    #   * `AUTO_APPROVAL`: All the self-upgrade requests will be auto
+    #     approved.
+    #
+    #   * `ADMIN_APPROVAL`: All the self-upgrade requests will require admin
+    #     approval.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SelfUpgradeConfiguration AWS API Documentation
+    #
+    class SelfUpgradeConfiguration < Struct.new(
+      :self_upgrade_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of a self-upgrade request.
+    #
+    # @!attribute [rw] upgrade_request_id
+    #   The ID of the self-upgrade request.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The username of the user who initiated the self-upgrade request.
+    #   @return [String]
+    #
+    # @!attribute [rw] original_role
+    #   The original role of the user before the upgrade.
+    #   @return [String]
+    #
+    # @!attribute [rw] requested_role
+    #   The role that the user is requesting to upgrade to.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_note
+    #   An optional note explaining the reason for the self-upgrade request.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the self-upgrade request was created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_status
+    #   The status of the self-upgrade request.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_attempt_time
+    #   The time of the last update attempt for the self-upgrade request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_update_failure_reason
+    #   The reason for the last update failure, if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SelfUpgradeRequestDetail AWS API Documentation
+    #
+    class SelfUpgradeRequestDetail < Struct.new(
+      :upgrade_request_id,
+      :user_name,
+      :original_role,
+      :requested_role,
+      :request_note,
+      :creation_time,
+      :request_status,
+      :last_update_attempt_time,
+      :last_update_failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that represents a semantic entity type.
     #
     # @!attribute [rw] type_name
@@ -31854,6 +33846,48 @@ module Aws::QuickSight
       :type_name,
       :sub_type_name,
       :type_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for the semantic model that defines how prepared data is
+    # structured for analysis and reporting.
+    #
+    # @!attribute [rw] table_map
+    #   A map of semantic tables that define the analytical structure.
+    #   @return [Hash<String,Types::SemanticTable>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SemanticModelConfiguration AWS API Documentation
+    #
+    class SemanticModelConfiguration < Struct.new(
+      :table_map)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A semantic table that represents the final analytical structure of the
+    # data.
+    #
+    # @!attribute [rw] alias
+    #   Alias for the semantic table.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_table_id
+    #   The identifier of the destination table from data preparation that
+    #   provides data to this semantic table.
+    #   @return [String]
+    #
+    # @!attribute [rw] row_level_permission_configuration
+    #   Configuration for row level security that control data access for
+    #   this semantic table.
+    #   @return [Types::RowLevelPermissionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SemanticTable AWS API Documentation
+    #
+    class SemanticTable < Struct.new(
+      :alias,
+      :destination_table_id,
+      :row_level_permission_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32058,6 +34092,25 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The background configuration for sheets.
+    #
+    # @!attribute [rw] color
+    #   The solid color background option for sheets.
+    #   @return [String]
+    #
+    # @!attribute [rw] gradient
+    #   The gradient background option for sheets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SheetBackgroundStyle AWS API Documentation
+    #
+    class SheetBackgroundStyle < Struct.new(
+      :color,
+      :gradient)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A control to display info icons for filters and parameters.
     #
     # @!attribute [rw] visibility
@@ -32140,7 +34193,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] name
     #   The name of the sheet. This name is displayed on the sheet's tab in
-    #   the QuickSight console.
+    #   the Quick Suite console.
     #   @return [String]
     #
     # @!attribute [rw] parameter_controls
@@ -32422,11 +34475,16 @@ module Aws::QuickSight
     #   The layout options for tiles.
     #   @return [Types::TileLayoutStyle]
     #
+    # @!attribute [rw] background
+    #   The background for sheets.
+    #   @return [Types::SheetBackgroundStyle]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SheetStyle AWS API Documentation
     #
     class SheetStyle < Struct.new(
       :tile,
-      :tile_layout)
+      :tile_layout,
+      :background)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32687,7 +34745,7 @@ module Aws::QuickSight
     #   These are not the tags that are used for Amazon Web Services
     #   resource tagging. For more information on row level security in
     #   Amazon Quick Sight, see [Using Row-Level Security (RLS) with
-    #   Tags][1]in the *Amazon QuickSight User Guide*.
+    #   Tags][1]in the *Amazon Quick Suite User Guide*.
     #
     #
     #
@@ -32847,6 +34905,12 @@ module Aws::QuickSight
     # An object that contains information on the error that caused the
     # snapshot job to fail.
     #
+    # For more information, see [DescribeDashboardSnapshotJobResult API][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeDashboardSnapshotJobResult.html
+    #
     # @!attribute [rw] error_message
     #   The error message.
     #   @return [String]
@@ -32875,10 +34939,17 @@ module Aws::QuickSight
     #   call.
     #   @return [Array<Types::AnonymousUserSnapshotJobResult>]
     #
+    # @!attribute [rw] registered_users
+    #   A list of `RegisteredUserSnapshotJobResult` objects that contain
+    #   information about files that are requested for registered user
+    #   during a `StartDashboardSnapshotJob` API call.
+    #   @return [Array<Types::RegisteredUserSnapshotJobResult>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SnapshotJobResult AWS API Documentation
     #
     class SnapshotJobResult < Struct.new(
-      :anonymous_users)
+      :anonymous_users,
+      :registered_users)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32969,6 +35040,10 @@ module Aws::QuickSight
     # A structure that contains information about the users that the
     # dashboard snapshot is generated for.
     #
+    # When using identity-enhanced session credentials, set the
+    # UserConfiguration request attribute to null. Otherwise, the request
+    # will be invalid.
+    #
     # @!attribute [rw] anonymous_users
     #   An array of records that describe the anonymous users that the
     #   dashboard snapshot is generated for.
@@ -33036,6 +35111,27 @@ module Aws::QuickSight
       :authentication_type,
       :database_access_control_role,
       :o_auth_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A source table that provides initial data from either a physical table
+    # or parent dataset.
+    #
+    # @!attribute [rw] physical_table_id
+    #   The identifier of the physical table that serves as the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_set
+    #   A parent dataset that serves as the data source instead of a
+    #   physical table.
+    #   @return [Types::ParentDataSet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SourceTable AWS API Documentation
+    #
+    class SourceTable < Struct.new(
+      :physical_table_id,
+      :data_set)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33432,9 +35528,14 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] user_configuration
-    #   A structure that contains information about the anonymous users that
-    #   the generated snapshot is for. This API will not return information
-    #   about registered Amazon Quick Sight.
+    #   A structure that contains information about the users that the
+    #   dashboard snapshot is generated for. The users can be either
+    #   anonymous users or registered users. Anonymous users cannot be used
+    #   together with registered users.
+    #
+    #   When using identity-enhanced session credentials, set the
+    #   UserConfiguration request attribute to null. Otherwise, the request
+    #   will be invalid.
     #   @return [Types::SnapshotUserConfiguration]
     #
     # @!attribute [rw] snapshot_configuration
@@ -34066,6 +36167,11 @@ module Aws::QuickSight
     #   A collection of inline visualizations to display within a chart.
     #   @return [Array<Types::TableInlineVisualization>]
     #
+    # @!attribute [rw] dashboard_customization_visual_options
+    #   The options that define customizations available to dashboard
+    #   readers for a specific visual
+    #   @return [Types::DashboardCustomizationVisualOptions]
+    #
     # @!attribute [rw] interactions
     #   The general visual interactions setup for a visual.
     #   @return [Types::VisualInteractionOptions]
@@ -34080,6 +36186,7 @@ module Aws::QuickSight
       :field_options,
       :paginated_report_options,
       :table_inline_visualizations,
+      :dashboard_customization_visual_options,
       :interactions)
       SENSITIVE = []
       include Aws::Structure
@@ -34341,6 +36448,26 @@ module Aws::QuickSight
     class TablePaginatedReportOptions < Struct.new(
       :vertical_overflow_visibility,
       :overflow_column_header_visibility)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An element in the hierarchical path to a table within a data source,
+    # containing both name and identifier.
+    #
+    # @!attribute [rw] name
+    #   The name of the path element.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the path element.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TablePathElement AWS API Documentation
+    #
+    class TablePathElement < Struct.new(
+      :name,
+      :id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35447,14 +37574,29 @@ module Aws::QuickSight
 
     # Display options related to tiles on a sheet.
     #
+    # @!attribute [rw] background_color
+    #   The background color of a tile.
+    #   @return [String]
+    #
     # @!attribute [rw] border
     #   The border around a tile.
     #   @return [Types::BorderStyle]
     #
+    # @!attribute [rw] border_radius
+    #   The border radius of a tile.
+    #   @return [String]
+    #
+    # @!attribute [rw] padding
+    #   The padding of a tile.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TileStyle AWS API Documentation
     #
     class TileStyle < Struct.new(
-      :border)
+      :background_color,
+      :border,
+      :border_radius,
+      :padding)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37218,6 +39360,99 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Specifies the source of data for a transform operation, including the
+    # source operation and column mappings.
+    #
+    # @!attribute [rw] transform_operation_id
+    #   The identifier of the transform operation that provides input data.
+    #   @return [String]
+    #
+    # @!attribute [rw] column_id_mappings
+    #   The mappings between source column identifiers and target column
+    #   identifiers for this transformation.
+    #   @return [Array<Types::DataSetColumnIdMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TransformOperationSource AWS API Documentation
+    #
+    class TransformOperationSource < Struct.new(
+      :transform_operation_id,
+      :column_id_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A step in data preparation that performs a specific operation on the
+    # data.
+    #
+    # @!attribute [rw] import_table_step
+    #   A transform step that brings data from a source table.
+    #   @return [Types::ImportTableOperation]
+    #
+    # @!attribute [rw] project_step
+    #   A transform operation that projects columns. Operations that come
+    #   after a projection can only refer to projected columns.
+    #   @return [Types::ProjectOperation]
+    #
+    # @!attribute [rw] filters_step
+    #   A transform step that applies filter conditions.
+    #   @return [Types::FiltersOperation]
+    #
+    # @!attribute [rw] create_columns_step
+    #   A transform operation that creates calculated columns. Columns
+    #   created in one such operation form a lexical closure.
+    #   @return [Types::CreateColumnsOperation]
+    #
+    # @!attribute [rw] rename_columns_step
+    #   A transform step that changes the names of one or more columns.
+    #   @return [Types::RenameColumnsOperation]
+    #
+    # @!attribute [rw] cast_column_types_step
+    #   A transform step that changes the data types of one or more columns.
+    #   @return [Types::CastColumnTypesOperation]
+    #
+    # @!attribute [rw] join_step
+    #   A transform step that combines data from two sources based on
+    #   specified join conditions.
+    #   @return [Types::JoinOperation]
+    #
+    # @!attribute [rw] aggregate_step
+    #   A transform step that groups data and applies aggregation functions
+    #   to calculate summary values.
+    #   @return [Types::AggregateOperation]
+    #
+    # @!attribute [rw] pivot_step
+    #   A transform step that converts row values into columns to reshape
+    #   the data structure.
+    #   @return [Types::PivotOperation]
+    #
+    # @!attribute [rw] unpivot_step
+    #   A transform step that converts columns into rows to normalize the
+    #   data structure.
+    #   @return [Types::UnpivotOperation]
+    #
+    # @!attribute [rw] append_step
+    #   A transform step that combines rows from multiple sources by
+    #   stacking them vertically.
+    #   @return [Types::AppendOperation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TransformStep AWS API Documentation
+    #
+    class TransformStep < Struct.new(
+      :import_table_step,
+      :project_step,
+      :filters_step,
+      :create_columns_step,
+      :rename_columns_step,
+      :cast_column_types_step,
+      :join_step,
+      :aggregate_step,
+      :pivot_step,
+      :unpivot_step,
+      :append_step)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The column option of the transposed table.
     #
     # @!attribute [rw] column_index
@@ -37494,10 +39729,45 @@ module Aws::QuickSight
     #   Determines the list of font families.
     #   @return [Array<Types::Font>]
     #
+    # @!attribute [rw] axis_title_font_configuration
+    #   Configures the display properties of the given text.
+    #   @return [Types::FontConfiguration]
+    #
+    # @!attribute [rw] axis_label_font_configuration
+    #   Configures the display properties of the given text.
+    #   @return [Types::FontConfiguration]
+    #
+    # @!attribute [rw] legend_title_font_configuration
+    #   Configures the display properties of the given text.
+    #   @return [Types::FontConfiguration]
+    #
+    # @!attribute [rw] legend_value_font_configuration
+    #   Configures the display properties of the given text.
+    #   @return [Types::FontConfiguration]
+    #
+    # @!attribute [rw] data_label_font_configuration
+    #   Configures the display properties of the given text.
+    #   @return [Types::FontConfiguration]
+    #
+    # @!attribute [rw] visual_title_font_configuration
+    #   Configures the display properties of the visual title.
+    #   @return [Types::VisualTitleFontConfiguration]
+    #
+    # @!attribute [rw] visual_subtitle_font_configuration
+    #   Configures the display properties of the visual sub-title.
+    #   @return [Types::VisualSubtitleFontConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Typography AWS API Documentation
     #
     class Typography < Struct.new(
-      :font_families)
+      :font_families,
+      :axis_title_font_configuration,
+      :axis_label_font_configuration,
+      :legend_title_font_configuration,
+      :legend_value_font_configuration,
+      :data_label_font_configuration,
+      :visual_title_font_configuration,
+      :visual_subtitle_font_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37672,6 +39942,55 @@ module Aws::QuickSight
       :computation_id,
       :name,
       :category)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A transform operation that converts columns into rows, normalizing the
+    # data structure.
+    #
+    # @!attribute [rw] alias
+    #   Alias for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source transform operation that provides input data for
+    #   unpivoting.
+    #   @return [Types::TransformOperationSource]
+    #
+    # @!attribute [rw] columns_to_unpivot
+    #   The list of columns to unpivot from the source data.
+    #   @return [Array<Types::ColumnToUnpivot>]
+    #
+    # @!attribute [rw] unpivoted_label_column_name
+    #   The name for the new column that will contain the unpivoted column
+    #   names.
+    #   @return [String]
+    #
+    # @!attribute [rw] unpivoted_label_column_id
+    #   A unique identifier for the new column that will contain the
+    #   unpivoted column names.
+    #   @return [String]
+    #
+    # @!attribute [rw] unpivoted_value_column_name
+    #   The name for the new column that will contain the unpivoted values.
+    #   @return [String]
+    #
+    # @!attribute [rw] unpivoted_value_column_id
+    #   A unique identifier for the new column that will contain the
+    #   unpivoted values.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UnpivotOperation AWS API Documentation
+    #
+    class UnpivotOperation < Struct.new(
+      :alias,
+      :source,
+      :columns_to_unpivot,
+      :unpivoted_label_column_name,
+      :unpivoted_label_column_id,
+      :unpivoted_value_column_name,
+      :unpivoted_value_column_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38232,7 +40551,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace of the QuickSight application.
+    #   The namespace of the Quick Suite application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateApplicationWithTokenExchangeGrantRequest AWS API Documentation
@@ -38301,7 +40620,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] brand_id
-    #   The ID of the QuickSight brand.
+    #   The ID of the Quick Suite brand.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -38340,7 +40659,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] brand_id
-    #   The ID of the QuickSight brand.
+    #   The ID of the Quick Suite brand.
     #   @return [String]
     #
     # @!attribute [rw] brand_definition
@@ -38869,7 +41188,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] logical_table_map
     #   Configures the combination and transformation of the data from the
-    #   physical tables.
+    #   physical tables. This parameter is used with the legacy data
+    #   preparation experience.
     #   @return [Hash<String,Types::LogicalTable>]
     #
     # @!attribute [rw] import_mode
@@ -38888,13 +41208,15 @@ module Aws::QuickSight
     #
     # @!attribute [rw] row_level_permission_data_set
     #   The row-level security configuration for the data you want to
-    #   create.
+    #   create. This parameter is used with the legacy data preparation
+    #   experience.
     #   @return [Types::RowLevelPermissionDataSet]
     #
     # @!attribute [rw] row_level_permission_tag_configuration
     #   The configuration of tags on a dataset to set row-level security.
     #   Row-level security tags are currently supported for anonymous
-    #   embedding only.
+    #   embedding only. This parameter is used with the legacy data
+    #   preparation experience.
     #   @return [Types::RowLevelPermissionTagConfiguration]
     #
     # @!attribute [rw] column_level_permission_rules
@@ -38915,6 +41237,20 @@ module Aws::QuickSight
     #   that contains a `UniqueKey` configuration.
     #   @return [Types::PerformanceConfiguration]
     #
+    # @!attribute [rw] data_prep_configuration
+    #   The data preparation configuration for the dataset. This
+    #   configuration defines the source tables, transformation steps, and
+    #   destination tables used to prepare the data. Required when using the
+    #   new data preparation experience.
+    #   @return [Types::DataPrepConfiguration]
+    #
+    # @!attribute [rw] semantic_model_configuration
+    #   The semantic model configuration for the dataset. This configuration
+    #   defines how the prepared data is structured for an analysis,
+    #   including table mappings and row-level security configurations.
+    #   Required when using the new data preparation experience.
+    #   @return [Types::SemanticModelConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDataSetRequest AWS API Documentation
     #
     class UpdateDataSetRequest < Struct.new(
@@ -38931,7 +41267,9 @@ module Aws::QuickSight
       :column_level_permission_rules,
       :data_set_usage_configuration,
       :dataset_parameters,
-      :performance_configuration)
+      :performance_configuration,
+      :data_prep_configuration,
+      :semantic_model_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38941,7 +41279,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
-    #   The ID for the dataset that you want to create. This ID is unique
+    #   The ID for the dataset that you want to update. This ID is unique
     #   per Amazon Web Services Region for each Amazon Web Services account.
     #   @return [String]
     #
@@ -39637,7 +41975,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] public_sharing_enabled
     #   A Boolean value that indicates whether public sharing is turned on
-    #   for an QuickSight account.
+    #   for an Quick Suite account.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdatePublicSharingSettingsRequest AWS API Documentation
@@ -39883,6 +42221,99 @@ module Aws::QuickSight
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateSPICECapacityConfigurationResponse AWS API Documentation
     #
     class UpdateSPICECapacityConfigurationResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Suite self-upgrade configuration that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The Quick Suite namespace that you want to update the Quick Suite
+    #   self-upgrade configuration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] self_upgrade_status
+    #   The self-upgrade status that you want to set for the Quick Suite
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateSelfUpgradeConfigurationRequest AWS API Documentation
+    #
+    class UpdateSelfUpgradeConfigurationRequest < Struct.new(
+      :aws_account_id,
+      :namespace,
+      :self_upgrade_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateSelfUpgradeConfigurationResponse AWS API Documentation
+    #
+    class UpdateSelfUpgradeConfigurationResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   self-upgrade request.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The Quick Suite namespace for the self-upgrade request.
+    #   @return [String]
+    #
+    # @!attribute [rw] upgrade_request_id
+    #   The ID of the self-upgrade request to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action to perform on the self-upgrade request. Valid values are
+    #   `APPROVE`, `DENY`, or `VERIFY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateSelfUpgradeRequest AWS API Documentation
+    #
+    class UpdateSelfUpgradeRequest < Struct.new(
+      :aws_account_id,
+      :namespace,
+      :upgrade_request_id,
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] self_upgrade_request_detail
+    #   Details of the updated self-upgrade request.
+    #   @return [Types::SelfUpgradeRequestDetail]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateSelfUpgradeResponse AWS API Documentation
+    #
+    class UpdateSelfUpgradeResponse < Struct.new(
+      :self_upgrade_request_detail,
       :request_id,
       :status)
       SENSITIVE = []
@@ -40791,6 +43222,11 @@ module Aws::QuickSight
     #   The delimiter between values in the file.
     #   @return [String]
     #
+    # @!attribute [rw] custom_cell_address_range
+    #   A custom cell address range for Excel files, specifying which cells
+    #   to import from the spreadsheet.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UploadSettings AWS API Documentation
     #
     class UploadSettings < Struct.new(
@@ -40798,7 +43234,8 @@ module Aws::QuickSight
       :start_from_row,
       :contains_header,
       :text_qualifier,
-      :delimiter)
+      :delimiter,
+      :custom_cell_address_range)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40904,6 +43341,41 @@ module Aws::QuickSight
       :external_login_id)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A structure that contains information to identify a user.
+    #
+    # @note UserIdentifier is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] user_name
+    #   The name of the user that you want to get identity context for.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The email address of the user that you want to get identity context
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_arn
+    #   The Amazon Resource Name (ARN) of the user that you want to get
+    #   identity context for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UserIdentifier AWS API Documentation
+    #
+    class UserIdentifier < Struct.new(
+      :user_name,
+      :email,
+      :user_arn,
+      :unknown)
+      SENSITIVE = [:user_name, :email]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class UserName < UserIdentifier; end
+      class Email < UserIdentifier; end
+      class UserArn < UserIdentifier; end
+      class Unknown < UserIdentifier; end
     end
 
     # The structure of a VPC connection.
@@ -41068,6 +43540,22 @@ module Aws::QuickSight
     #
     class ValidationStrategy < Struct.new(
       :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for how to handle value columns in pivot operations,
+    # including aggregation settings.
+    #
+    # @!attribute [rw] aggregation_function
+    #   The aggregation function to apply when multiple values map to the
+    #   same pivoted cell.
+    #   @return [Types::DataPrepAggregationFunction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ValueColumnConfiguration AWS API Documentation
+    #
+    class ValueColumnConfiguration < Struct.new(
+      :aggregation_function)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41485,6 +43973,29 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The configuration that controls field customization options available
+    # to dashboard readers for a visual.
+    #
+    # @!attribute [rw] status
+    #   Specifies whether dashboard readers can customize fields for this
+    #   visual. This option is `ENABLED` by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_fields
+    #   The additional dataset fields available for dashboard readers to
+    #   customize the visual with, beyond the fields already configured on
+    #   the visual.
+    #   @return [Array<Types::ColumnIdentifier>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/VisualCustomizationFieldsConfiguration AWS API Documentation
+    #
+    class VisualCustomizationFieldsConfiguration < Struct.new(
+      :status,
+      :additional_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines what initiates a highlight operation on a visual, such as a
     # click or hover.
     #
@@ -41567,6 +44078,30 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Configures the display properties of the visual sub-title.
+    #
+    # @!attribute [rw] font_configuration
+    #   Configures the display properties of the given text.
+    #   @return [Types::FontConfiguration]
+    #
+    # @!attribute [rw] text_alignment
+    #   Determines the alignment of visual sub-title.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_transform
+    #   Determines the text transformation of visual sub-title.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/VisualSubtitleFontConfiguration AWS API Documentation
+    #
+    class VisualSubtitleFontConfiguration < Struct.new(
+      :font_configuration,
+      :text_alignment,
+      :text_transform)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The subtitle label options for a visual.
     #
     # @!attribute [rw] visibility
@@ -41583,6 +44118,30 @@ module Aws::QuickSight
     class VisualSubtitleLabelOptions < Struct.new(
       :visibility,
       :format_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures the display properties of the visual title.
+    #
+    # @!attribute [rw] font_configuration
+    #   Configures the display properties of the given text.
+    #   @return [Types::FontConfiguration]
+    #
+    # @!attribute [rw] text_alignment
+    #   Determines the alignment of visual title.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_transform
+    #   Determines the text transformation of visual title.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/VisualTitleFontConfiguration AWS API Documentation
+    #
+    class VisualTitleFontConfiguration < Struct.new(
+      :font_configuration,
+      :text_alignment,
+      :text_transform)
       SENSITIVE = []
       include Aws::Structure
     end

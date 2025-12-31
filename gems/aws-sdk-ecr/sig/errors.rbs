@@ -11,16 +11,31 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
+      class BlockedByOrganizationPolicyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class EmptyUploadException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class ExclusionAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ExclusionNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ImageAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ImageArchivedException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
       class ImageDigestDoesNotMatchException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
       class ImageNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ImageStorageClassUpdateNotSupportedException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
       class ImageTagAlreadyExistsException < ::Aws::Errors::ServiceError
@@ -101,6 +116,9 @@ module Aws
         def message: () -> ::String
       end
       class ServerException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SigningConfigurationNotFoundException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
       class TemplateAlreadyExistsException < ::Aws::Errors::ServiceError

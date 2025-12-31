@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.137.0 (2025-12-05)
+------------------
+
+* Feature - Adding the ExpirationTime attribute to the delegation request resource.
+
+1.136.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.135.0 (2025-11-19)
+------------------
+
+* Feature - Added the EnableOutboundWebIdentityFederation, DisableOutboundWebIdentityFederation and GetOutboundWebIdentityFederationInfo APIs for the IAM outbound federation feature.
+
+1.134.0 (2025-11-18)
+------------------
+
+* Feature - Added the AssociateDelegationRequest, GetDelegationRequest, AcceptDelegationRequest, RejectDelegatonRequest, ListDelegationRequests, UpdateDelegationRequest, SendDelegationToken and GetHumanReadableSummary APIs for the IAM temporary delegation feature.
+
+1.133.0 (2025-11-10)
+------------------
+
+* Feature - Added CreateDelegationRequest API, which is not available for general use at this time.
+
+1.132.0 (2025-10-27)
+------------------
+
+* Feature - Fixed missing SummaryMap keys in GetAccountSummary response that were being filtered out during deserialization in AWS Java SDK v2
+
+1.131.0 (2025-10-22)
+------------------
+
+* Feature - Updated OIDC and SAML apis to reject multiple simultaneous requests to change a unique object.
+
+1.130.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.129.0 (2025-08-26)
 ------------------
 

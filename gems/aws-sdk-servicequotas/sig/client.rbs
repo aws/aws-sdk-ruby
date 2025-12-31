@@ -148,6 +148,25 @@ module Aws
                                              ) -> _GetAutoManagementConfigurationResponseSuccess
                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAutoManagementConfigurationResponseSuccess
 
+      interface _GetQuotaUtilizationReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQuotaUtilizationReportResponse]
+        def report_id: () -> ::String
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+        def generated_at: () -> ::Time
+        def total_count: () -> ::Integer
+        def quotas: () -> ::Array[Types::QuotaUtilizationInfo]
+        def next_token: () -> ::String
+        def error_code: () -> ::String
+        def error_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#get_quota_utilization_report-instance_method
+      def get_quota_utilization_report: (
+                                          report_id: ::String,
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _GetQuotaUtilizationReportResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQuotaUtilizationReportResponseSuccess
+
       interface _GetRequestedServiceQuotaChangeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRequestedServiceQuotaChangeResponse]
         def requested_quota: () -> Types::RequestedServiceQuotaChange
@@ -315,6 +334,17 @@ module Aws
                                    ?exclusion_list: Hash[::String, Array[::String]]
                                  ) -> _StartAutoManagementResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAutoManagementResponseSuccess
+
+      interface _StartQuotaUtilizationReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartQuotaUtilizationReportResponse]
+        def report_id: () -> ::String
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#start_quota_utilization_report-instance_method
+      def start_quota_utilization_report: (
+                                          ) -> _StartQuotaUtilizationReportResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartQuotaUtilizationReportResponseSuccess
 
       interface _StopAutoManagementResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopAutoManagementResponse]

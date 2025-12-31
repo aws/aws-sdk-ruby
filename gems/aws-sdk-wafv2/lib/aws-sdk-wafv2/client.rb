@@ -4076,11 +4076,18 @@ module Aws::WAFV2
     #   Amazon Web Services services][1] in the *Amazon Security Lake user
     #   guide*.
     #
+    #   The log scope `CLOUDWATCH_TELEMETRY_RULE_MANAGED` indicates a
+    #   configuration that is managed through Amazon CloudWatch Logs for
+    #   telemetry data collection and analysis. For information, see [What is
+    #   Amazon CloudWatch Logs ?][2] in the *Amazon CloudWatch Logs user
+    #   guide*.
+    #
     #   Default: `CUSTOMER`
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4089,7 +4096,7 @@ module Aws::WAFV2
     #   resp = client.delete_logging_configuration({
     #     resource_arn: "ResourceArn", # required
     #     log_type: "WAF_LOGS", # accepts WAF_LOGS
-    #     log_scope: "CUSTOMER", # accepts CUSTOMER, SECURITY_LAKE
+    #     log_scope: "CUSTOMER", # accepts CUSTOMER, SECURITY_LAKE, CLOUDWATCH_TELEMETRY_RULE_MANAGED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeleteLoggingConfiguration AWS API Documentation
@@ -4748,11 +4755,18 @@ module Aws::WAFV2
     #   Amazon Web Services services][1] in the *Amazon Security Lake user
     #   guide*.
     #
+    #   The log scope `CLOUDWATCH_TELEMETRY_RULE_MANAGED` indicates a
+    #   configuration that is managed through Amazon CloudWatch Logs for
+    #   telemetry data collection and analysis. For information, see [What is
+    #   Amazon CloudWatch Logs ?][2] in the *Amazon CloudWatch Logs user
+    #   guide*.
+    #
     #   Default: `CUSTOMER`
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html
     #
     # @return [Types::GetLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4763,7 +4777,7 @@ module Aws::WAFV2
     #   resp = client.get_logging_configuration({
     #     resource_arn: "ResourceArn", # required
     #     log_type: "WAF_LOGS", # accepts WAF_LOGS
-    #     log_scope: "CUSTOMER", # accepts CUSTOMER, SECURITY_LAKE
+    #     log_scope: "CUSTOMER", # accepts CUSTOMER, SECURITY_LAKE, CLOUDWATCH_TELEMETRY_RULE_MANAGED
     #   })
     #
     # @example Response structure
@@ -4805,7 +4819,7 @@ module Aws::WAFV2
     #   resp.logging_configuration.logging_filter.filters[0].conditions[0].label_name_condition.label_name #=> String
     #   resp.logging_configuration.logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
     #   resp.logging_configuration.log_type #=> String, one of "WAF_LOGS"
-    #   resp.logging_configuration.log_scope #=> String, one of "CUSTOMER", "SECURITY_LAKE"
+    #   resp.logging_configuration.log_scope #=> String, one of "CUSTOMER", "SECURITY_LAKE", "CLOUDWATCH_TELEMETRY_RULE_MANAGED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetLoggingConfiguration AWS API Documentation
     #
@@ -6073,11 +6087,18 @@ module Aws::WAFV2
     #   Amazon Web Services services][1] in the *Amazon Security Lake user
     #   guide*.
     #
+    #   The log scope `CLOUDWATCH_TELEMETRY_RULE_MANAGED` indicates a
+    #   configuration that is managed through Amazon CloudWatch Logs for
+    #   telemetry data collection and analysis. For information, see [What is
+    #   Amazon CloudWatch Logs ?][2] in the *Amazon CloudWatch Logs user
+    #   guide*.
+    #
     #   Default: `CUSTOMER`
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html
     #
     # @return [Types::ListLoggingConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6090,7 +6111,7 @@ module Aws::WAFV2
     #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
     #     next_marker: "NextMarker",
     #     limit: 1,
-    #     log_scope: "CUSTOMER", # accepts CUSTOMER, SECURITY_LAKE
+    #     log_scope: "CUSTOMER", # accepts CUSTOMER, SECURITY_LAKE, CLOUDWATCH_TELEMETRY_RULE_MANAGED
     #   })
     #
     # @example Response structure
@@ -6133,7 +6154,7 @@ module Aws::WAFV2
     #   resp.logging_configurations[0].logging_filter.filters[0].conditions[0].label_name_condition.label_name #=> String
     #   resp.logging_configurations[0].logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
     #   resp.logging_configurations[0].log_type #=> String, one of "WAF_LOGS"
-    #   resp.logging_configurations[0].log_scope #=> String, one of "CUSTOMER", "SECURITY_LAKE"
+    #   resp.logging_configurations[0].log_scope #=> String, one of "CUSTOMER", "SECURITY_LAKE", "CLOUDWATCH_TELEMETRY_RULE_MANAGED"
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListLoggingConfigurations AWS API Documentation
@@ -6730,7 +6751,7 @@ module Aws::WAFV2
     #         default_behavior: "KEEP", # required, accepts KEEP, DROP
     #       },
     #       log_type: "WAF_LOGS", # accepts WAF_LOGS
-    #       log_scope: "CUSTOMER", # accepts CUSTOMER, SECURITY_LAKE
+    #       log_scope: "CUSTOMER", # accepts CUSTOMER, SECURITY_LAKE, CLOUDWATCH_TELEMETRY_RULE_MANAGED
     #     },
     #   })
     #
@@ -6773,7 +6794,7 @@ module Aws::WAFV2
     #   resp.logging_configuration.logging_filter.filters[0].conditions[0].label_name_condition.label_name #=> String
     #   resp.logging_configuration.logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
     #   resp.logging_configuration.log_type #=> String, one of "WAF_LOGS"
-    #   resp.logging_configuration.log_scope #=> String, one of "CUSTOMER", "SECURITY_LAKE"
+    #   resp.logging_configuration.log_scope #=> String, one of "CUSTOMER", "SECURITY_LAKE", "CLOUDWATCH_TELEMETRY_RULE_MANAGED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/PutLoggingConfiguration AWS API Documentation
     #
@@ -9621,7 +9642,7 @@ module Aws::WAFV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.118.0'
+      context[:gem_version] = '1.122.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

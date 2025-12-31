@@ -85,10 +85,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#create_landing_zone-instance_method
       def create_landing_zone: (
-                                 manifest: {
-                                 },
+                                 version: ::String,
+                                 ?remediation_types: Array[("INHERITANCE_DRIFT")],
                                  ?tags: Hash[::String, ::String],
-                                 version: ::String
+                                 ?manifest: {
+                                 }
                                ) -> _CreateLandingZoneResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLandingZoneResponseSuccess
 
@@ -118,19 +119,19 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#disable_control-instance_method
       def disable_control: (
-                             control_identifier: ::String,
-                             target_identifier: ::String
+                             ?control_identifier: ::String,
+                             ?target_identifier: ::String,
+                             ?enabled_control_identifier: ::String
                            ) -> _DisableControlResponseSuccess
-                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableControlResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableControlResponseSuccess
 
       interface _EnableBaselineResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::EnableBaselineOutput]
-        def arn: () -> ::String
         def operation_identifier: () -> ::String
+        def arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#enable_baseline-instance_method
       def enable_baseline: (
-                             baseline_identifier: ::String,
                              baseline_version: ::String,
                              ?parameters: Array[
                                {
@@ -139,36 +140,37 @@ module Aws
                                  }
                                },
                              ],
-                             ?tags: Hash[::String, ::String],
-                             target_identifier: ::String
+                             baseline_identifier: ::String,
+                             target_identifier: ::String,
+                             ?tags: Hash[::String, ::String]
                            ) -> _EnableBaselineResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableBaselineResponseSuccess
 
       interface _EnableControlResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::EnableControlOutput]
-        def arn: () -> ::String
         def operation_identifier: () -> ::String
+        def arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#enable_control-instance_method
       def enable_control: (
                             control_identifier: ::String,
+                            target_identifier: ::String,
+                            ?tags: Hash[::String, ::String],
                             ?parameters: Array[
                               {
                                 key: ::String,
                                 value: {
                                 }
                               },
-                            ],
-                            ?tags: Hash[::String, ::String],
-                            target_identifier: ::String
+                            ]
                           ) -> _EnableControlResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableControlResponseSuccess
 
       interface _GetBaselineResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetBaselineOutput]
         def arn: () -> ::String
-        def description: () -> ::String
         def name: () -> ::String
+        def description: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#get_baseline-instance_method
       def get_baseline: (
@@ -243,8 +245,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#list_baselines-instance_method
       def list_baselines: (
-                            ?max_results: ::Integer,
-                            ?next_token: ::String
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
                           ) -> _ListBaselinesResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBaselinesResponseSuccess
 
@@ -257,13 +259,13 @@ module Aws
       def list_control_operations: (
                                      ?filter: {
                                        control_identifiers: Array[::String]?,
-                                       control_operation_types: Array[("ENABLE_CONTROL" | "DISABLE_CONTROL" | "UPDATE_ENABLED_CONTROL" | "RESET_ENABLED_CONTROL")]?,
+                                       target_identifiers: Array[::String]?,
                                        enabled_control_identifiers: Array[::String]?,
                                        statuses: Array[("SUCCEEDED" | "FAILED" | "IN_PROGRESS")]?,
-                                       target_identifiers: Array[::String]?
+                                       control_operation_types: Array[("ENABLE_CONTROL" | "DISABLE_CONTROL" | "UPDATE_ENABLED_CONTROL" | "RESET_ENABLED_CONTROL")]?
                                      },
-                                     ?max_results: ::Integer,
-                                     ?next_token: ::String
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
                                    ) -> _ListControlOperationsResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListControlOperationsResponseSuccess
 
@@ -275,15 +277,15 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#list_enabled_baselines-instance_method
       def list_enabled_baselines: (
                                     ?filter: {
+                                      target_identifiers: Array[::String]?,
                                       baseline_identifiers: Array[::String]?,
-                                      inheritance_drift_statuses: Array[("IN_SYNC" | "DRIFTED")]?,
                                       parent_identifiers: Array[::String]?,
                                       statuses: Array[("SUCCEEDED" | "FAILED" | "UNDER_CHANGE")]?,
-                                      target_identifiers: Array[::String]?
+                                      inheritance_drift_statuses: Array[("IN_SYNC" | "DRIFTED")]?
                                     },
-                                    ?include_children: bool,
+                                    ?next_token: ::String,
                                     ?max_results: ::Integer,
-                                    ?next_token: ::String
+                                    ?include_children: bool
                                   ) -> _ListEnabledBaselinesResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnabledBaselinesResponseSuccess
 
@@ -294,14 +296,18 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#list_enabled_controls-instance_method
       def list_enabled_controls: (
+                                   ?target_identifier: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer,
                                    ?filter: {
                                      control_identifiers: Array[::String]?,
+                                     statuses: Array[("SUCCEEDED" | "FAILED" | "UNDER_CHANGE")]?,
                                      drift_statuses: Array[("DRIFTED" | "IN_SYNC" | "NOT_CHECKING" | "UNKNOWN")]?,
-                                     statuses: Array[("SUCCEEDED" | "FAILED" | "UNDER_CHANGE")]?
+                                     parent_identifiers: Array[::String]?,
+                                     inheritance_drift_statuses: Array[("DRIFTED" | "IN_SYNC" | "NOT_CHECKING" | "UNKNOWN")]?,
+                                     resource_drift_statuses: Array[("DRIFTED" | "IN_SYNC" | "NOT_CHECKING" | "UNKNOWN")]?
                                    },
-                                   ?max_results: ::Integer,
-                                   ?next_token: ::String,
-                                   ?target_identifier: ::String
+                                   ?include_children: bool
                                  ) -> _ListEnabledControlsResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnabledControlsResponseSuccess
 
@@ -313,11 +319,11 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#list_landing_zone_operations-instance_method
       def list_landing_zone_operations: (
                                           ?filter: {
-                                            statuses: Array[("SUCCEEDED" | "FAILED" | "IN_PROGRESS")]?,
-                                            types: Array[("DELETE" | "CREATE" | "UPDATE" | "RESET")]?
+                                            types: Array[("DELETE" | "CREATE" | "UPDATE" | "RESET")]?,
+                                            statuses: Array[("SUCCEEDED" | "FAILED" | "IN_PROGRESS")]?
                                           },
-                                          ?max_results: ::Integer,
-                                          ?next_token: ::String
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
                                         ) -> _ListLandingZoneOperationsResponseSuccess
                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLandingZoneOperationsResponseSuccess
 
@@ -328,8 +334,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#list_landing_zones-instance_method
       def list_landing_zones: (
-                                ?max_results: ::Integer,
-                                ?next_token: ::String
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
                               ) -> _ListLandingZonesResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLandingZonesResponseSuccess
 
@@ -400,14 +406,14 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#update_enabled_baseline-instance_method
       def update_enabled_baseline: (
                                      baseline_version: ::String,
-                                     enabled_baseline_identifier: ::String,
                                      ?parameters: Array[
                                        {
                                          key: ::String,
                                          value: {
                                          }
                                        },
-                                     ]
+                                     ],
+                                     enabled_baseline_identifier: ::String
                                    ) -> _UpdateEnabledBaselineResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnabledBaselineResponseSuccess
 
@@ -417,14 +423,14 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#update_enabled_control-instance_method
       def update_enabled_control: (
-                                    enabled_control_identifier: ::String,
                                     parameters: Array[
                                       {
                                         key: ::String,
                                         value: {
                                         }
                                       },
-                                    ]
+                                    ],
+                                    enabled_control_identifier: ::String
                                   ) -> _UpdateEnabledControlResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnabledControlResponseSuccess
 
@@ -434,10 +440,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ControlTower/Client.html#update_landing_zone-instance_method
       def update_landing_zone: (
+                                 version: ::String,
+                                 ?remediation_types: Array[("INHERITANCE_DRIFT")],
                                  landing_zone_identifier: ::String,
-                                 manifest: {
-                                 },
-                                 version: ::String
+                                 ?manifest: {
+                                 }
                                ) -> _UpdateLandingZoneResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLandingZoneResponseSuccess
     end

@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2025-12-18)
+------------------
+
+* Feature - Blueprint Optimization (BPO) is a new Amazon Bedrock Data Automation (BDA) capability that improves blueprint inference accuracy using example content assets and ground truth data. BPO works by generating better instructions for fields in the Blueprint using provided data.
+
+1.22.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2025-11-20)
+------------------
+
+* Feature - Added support for Synchronous project type and PII Detection and Redaction
+
+1.20.0 (2025-11-11)
+------------------
+
+* Feature - Added support for Language Expansion feature for BDA Audio modality.
+
+1.19.0 (2025-10-27)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.18.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.17.0 (2025-09-26)
 ------------------
 

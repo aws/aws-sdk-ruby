@@ -195,6 +195,7 @@ module Aws::CleanRooms
       attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
       attr_accessor validations: ::Array[Types::AnalysisTemplateValidationStatusDetail]
       attr_accessor error_message_configuration: Types::ErrorMessageConfiguration
+      attr_accessor synthetic_data_parameters: Types::SyntheticDataParameters
       SENSITIVE: []
     end
 
@@ -227,6 +228,7 @@ module Aws::CleanRooms
       attr_accessor collaboration_arn: ::String
       attr_accessor collaboration_id: ::String
       attr_accessor description: ::String
+      attr_accessor is_synthetic_data: bool
       SENSITIVE: []
     end
 
@@ -239,6 +241,11 @@ module Aws::CleanRooms
 
     class AnalysisTemplateValidationStatusReason
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ApprovalStatusDetails
+      attr_accessor status: ("APPROVED" | "DENIED" | "PENDING")
       SENSITIVE: []
     end
 
@@ -327,24 +334,27 @@ module Aws::CleanRooms
     end
 
     class Change
-      attr_accessor specification_type: ("MEMBER")
+      attr_accessor specification_type: ("MEMBER" | "COLLABORATION")
       attr_accessor specification: Types::ChangeSpecification
-      attr_accessor types: ::Array[("ADD_MEMBER")]
+      attr_accessor types: ::Array[("ADD_MEMBER" | "GRANT_RECEIVE_RESULTS_ABILITY" | "REVOKE_RECEIVE_RESULTS_ABILITY" | "EDIT_AUTO_APPROVED_CHANGE_TYPES")]
       SENSITIVE: []
     end
 
     class ChangeInput
-      attr_accessor specification_type: ("MEMBER")
+      attr_accessor specification_type: ("MEMBER" | "COLLABORATION")
       attr_accessor specification: Types::ChangeSpecification
       SENSITIVE: []
     end
 
     class ChangeSpecification
       attr_accessor member: Types::MemberChangeSpecification
+      attr_accessor collaboration: Types::CollaborationChangeSpecification
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Member < ChangeSpecification
+      end
+      class Collaboration < ChangeSpecification
       end
       class Unknown < ChangeSpecification
       end
@@ -366,7 +376,7 @@ module Aws::CleanRooms
       attr_accessor query_log_status: ("ENABLED" | "DISABLED")
       attr_accessor job_log_status: ("ENABLED" | "DISABLED")
       attr_accessor analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL")
-      attr_accessor auto_approved_change_types: ::Array[("ADD_MEMBER")]
+      attr_accessor auto_approved_change_types: ::Array[("ADD_MEMBER" | "GRANT_RECEIVE_RESULTS_ABILITY" | "REVOKE_RECEIVE_RESULTS_ABILITY")]
       attr_accessor allowed_result_regions: ::Array[("us-west-1" | "us-west-2" | "us-east-1" | "us-east-2" | "af-south-1" | "ap-east-1" | "ap-east-2" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-5" | "ap-southeast-4" | "ap-southeast-7" | "ap-south-1" | "ap-northeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ca-central-1" | "ca-west-1" | "eu-south-1" | "eu-west-3" | "eu-south-2" | "eu-central-2" | "eu-central-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "me-south-1" | "me-central-1" | "il-central-1" | "sa-east-1" | "mx-central-1")]
       SENSITIVE: []
     end
@@ -388,6 +398,7 @@ module Aws::CleanRooms
       attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
       attr_accessor validations: ::Array[Types::AnalysisTemplateValidationStatusDetail]
       attr_accessor error_message_configuration: Types::ErrorMessageConfiguration
+      attr_accessor synthetic_data_parameters: Types::SyntheticDataParameters
       SENSITIVE: []
     end
 
@@ -401,6 +412,7 @@ module Aws::CleanRooms
       attr_accessor collaboration_id: ::String
       attr_accessor creator_account_id: ::String
       attr_accessor description: ::String
+      attr_accessor is_synthetic_data: bool
       SENSITIVE: []
     end
 
@@ -412,6 +424,7 @@ module Aws::CleanRooms
       attr_accessor status: ("PENDING" | "APPROVED" | "CANCELLED" | "DENIED" | "COMMITTED")
       attr_accessor is_auto_approved: bool
       attr_accessor changes: ::Array[Types::Change]
+      attr_accessor approvals: ::Hash[::String, Types::ApprovalStatusDetails]
       SENSITIVE: []
     end
 
@@ -423,6 +436,12 @@ module Aws::CleanRooms
       attr_accessor status: ("PENDING" | "APPROVED" | "CANCELLED" | "DENIED" | "COMMITTED")
       attr_accessor is_auto_approved: bool
       attr_accessor changes: ::Array[Types::Change]
+      attr_accessor approvals: ::Hash[::String, Types::ApprovalStatusDetails]
+      SENSITIVE: []
+    end
+
+    class CollaborationChangeSpecification
+      attr_accessor auto_approved_change_types: ::Array[("ADD_MEMBER" | "GRANT_RECEIVE_RESULTS_ABILITY" | "REVOKE_RECEIVE_RESULTS_ABILITY")]
       SENSITIVE: []
     end
 
@@ -542,6 +561,11 @@ module Aws::CleanRooms
     class Column
       attr_accessor name: ::String
       attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ColumnClassificationDetails
+      attr_accessor column_mapping: ::Array[Types::SyntheticDataColumnProperties]
       SENSITIVE: []
     end
 
@@ -830,6 +854,7 @@ module Aws::CleanRooms
       attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
       attr_accessor schema: Types::AnalysisSchema
       attr_accessor error_message_configuration: Types::ErrorMessageConfiguration
+      attr_accessor synthetic_data_parameters: Types::SyntheticDataParameters
       SENSITIVE: []
     end
 
@@ -862,7 +887,7 @@ module Aws::CleanRooms
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor creator_payment_configuration: Types::PaymentConfiguration
       attr_accessor analytics_engine: ("SPARK" | "CLEAN_ROOMS_SQL")
-      attr_accessor auto_approved_change_request_types: ::Array[("ADD_MEMBER")]
+      attr_accessor auto_approved_change_request_types: ::Array[("ADD_MEMBER" | "GRANT_RECEIVE_RESULTS_ABILITY" | "REVOKE_RECEIVE_RESULTS_ABILITY")]
       attr_accessor allowed_result_regions: ::Array[("us-west-1" | "us-west-2" | "us-east-1" | "us-east-2" | "af-south-1" | "ap-east-1" | "ap-east-2" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-5" | "ap-southeast-4" | "ap-southeast-7" | "ap-south-1" | "ap-northeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ca-central-1" | "ca-west-1" | "eu-south-1" | "eu-west-3" | "eu-south-2" | "eu-central-2" | "eu-central-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "me-south-1" | "me-central-1" | "il-central-1" | "sa-east-1" | "mx-central-1")]
       SENSITIVE: []
     end
@@ -1834,6 +1859,14 @@ module Aws::CleanRooms
     class MLPaymentConfig
       attr_accessor model_training: Types::ModelTrainingPaymentConfig
       attr_accessor model_inference: Types::ModelInferencePaymentConfig
+      attr_accessor synthetic_data_generation: Types::SyntheticDataGenerationPaymentConfig
+      SENSITIVE: []
+    end
+
+    class MLSyntheticDataParameters
+      attr_accessor epsilon: ::Float
+      attr_accessor max_membership_inference_attack_score: ::Float
+      attr_accessor column_classification: Types::ColumnClassificationDetails
       SENSITIVE: []
     end
 
@@ -1896,6 +1929,7 @@ module Aws::CleanRooms
     class MembershipMLPaymentConfig
       attr_accessor model_training: Types::MembershipModelTrainingPaymentConfig
       attr_accessor model_inference: Types::MembershipModelInferencePaymentConfig
+      attr_accessor synthetic_data_generation: Types::MembershipSyntheticDataGenerationPaymentConfig
       SENSITIVE: []
     end
 
@@ -1969,6 +2003,11 @@ module Aws::CleanRooms
       attr_accessor member_abilities: ::Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS" | "CAN_RUN_JOB")]
       attr_accessor ml_member_abilities: Types::MLMemberAbilities
       attr_accessor payment_configuration: Types::MembershipPaymentConfiguration
+      SENSITIVE: []
+    end
+
+    class MembershipSyntheticDataGenerationPaymentConfig
+      attr_accessor is_responsible: bool
       SENSITIVE: []
     end
 
@@ -2606,6 +2645,29 @@ module Aws::CleanRooms
       SENSITIVE: []
     end
 
+    class SyntheticDataColumnProperties
+      attr_accessor column_name: ::String
+      attr_accessor column_type: ("CATEGORICAL" | "NUMERICAL")
+      attr_accessor is_predictive_value: bool
+      SENSITIVE: []
+    end
+
+    class SyntheticDataGenerationPaymentConfig
+      attr_accessor is_responsible: bool
+      SENSITIVE: []
+    end
+
+    class SyntheticDataParameters
+      attr_accessor ml_synthetic_data_parameters: Types::MLSyntheticDataParameters
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MlSyntheticDataParameters < SyntheticDataParameters
+      end
+      class Unknown < SyntheticDataParameters
+      end
+    end
+
     class TableReference
       attr_accessor glue: Types::GlueTableReference
       attr_accessor snowflake: Types::SnowflakeTableReference
@@ -2655,6 +2717,18 @@ module Aws::CleanRooms
 
     class UpdateAnalysisTemplateOutput
       attr_accessor analysis_template: Types::AnalysisTemplate
+      SENSITIVE: []
+    end
+
+    class UpdateCollaborationChangeRequestInput
+      attr_accessor collaboration_identifier: ::String
+      attr_accessor change_request_identifier: ::String
+      attr_accessor action: ("APPROVE" | "DENY" | "CANCEL" | "COMMIT")
+      SENSITIVE: []
+    end
+
+    class UpdateCollaborationChangeRequestOutput
+      attr_accessor collaboration_change_request: Types::CollaborationChangeRequest
       SENSITIVE: []
     end
 
@@ -2832,7 +2906,19 @@ module Aws::CleanRooms
     class WorkerComputeConfiguration
       attr_accessor type: ("CR.1X" | "CR.4X")
       attr_accessor number: ::Integer
+      attr_accessor properties: Types::WorkerComputeConfigurationProperties
       SENSITIVE: []
+    end
+
+    class WorkerComputeConfigurationProperties
+      attr_accessor spark: ::Hash[::String, ::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Spark < WorkerComputeConfigurationProperties
+      end
+      class Unknown < WorkerComputeConfigurationProperties
+      end
     end
   end
 end

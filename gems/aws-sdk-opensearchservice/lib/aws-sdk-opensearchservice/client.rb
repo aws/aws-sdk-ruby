@@ -958,6 +958,13 @@ module Aws::OpenSearchService
     # @option params [Array<Types::Tag>] :tag_list
     #   A list of tags attached to a domain.
     #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   application's data at rest. If provided, the application uses your
+    #   customer-managed key for encryption. If omitted, the application uses
+    #   an AWS-managed key. The KMS key must be in the same region as the
+    #   application.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#id #id} => String
@@ -968,6 +975,7 @@ module Aws::OpenSearchService
     #   * {Types::CreateApplicationResponse#app_configs #app_configs} => Array&lt;Types::AppConfig&gt;
     #   * {Types::CreateApplicationResponse#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #   * {Types::CreateApplicationResponse#created_at #created_at} => Time
+    #   * {Types::CreateApplicationResponse#kms_key_arn #kms_key_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -997,6 +1005,7 @@ module Aws::OpenSearchService
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     kms_key_arn: "KmsKeyArn",
     #   })
     #
     # @example Response structure
@@ -1018,6 +1027,7 @@ module Aws::OpenSearchService
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
     #   resp.created_at #=> Time
+    #   resp.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateApplication AWS API Documentation
     #
@@ -1323,6 +1333,9 @@ module Aws::OpenSearchService
     #       s3_vectors_engine: {
     #         enabled: false,
     #       },
+    #       serverless_vector_acceleration: {
+    #         enabled: false,
+    #       },
     #     },
     #   })
     #
@@ -1443,6 +1456,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.aiml_options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.domain_status.aiml_options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
     #   resp.domain_status.aiml_options.s3_vectors_engine.enabled #=> Boolean
+    #   resp.domain_status.aiml_options.serverless_vector_acceleration.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateDomain AWS API Documentation
     #
@@ -1450,6 +1464,66 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def create_domain(params = {}, options = {})
       req = build_request(:create_domain, params)
+      req.send_request(options)
+    end
+
+    # Creates an OpenSearch index with optional automatic semantic
+    # enrichment for specified text fields. Automatic semantic enrichment
+    # enables semantic search capabilities without requiring machine
+    # learning expertise, improving search relevance by up to 20% by
+    # understanding search intent and contextual meaning beyond keyword
+    # matching. The semantic enrichment process has zero impact on search
+    # latency as sparse encodings are stored directly within the index
+    # during indexing. For more information, see [Automatic semantic
+    # enrichment][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/opensearch-semantic-enrichment.html
+    #
+    # @option params [required, String] :domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #
+    # @option params [required, String] :index_name
+    #   The name of the index to create. Must be between 1 and 255 characters
+    #   and follow OpenSearch naming conventions.
+    #
+    # @option params [required, Hash,Array,String,Numeric,Boolean] :index_schema
+    #   The JSON schema defining index mappings, settings, and semantic
+    #   enrichment configuration. The schema specifies which text fields
+    #   should be automatically enriched for semantic search capabilities and
+    #   includes OpenSearch index configuration parameters.
+    #
+    #   Document type used to carry open content
+    #   (Hash,Array,String,Numeric,Boolean). A document type value is
+    #   serialized using the same format as its surroundings and requires no
+    #   additional encoding or escaping.
+    #
+    # @return [Types::CreateIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateIndexResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_index({
+    #     domain_name: "DomainName", # required
+    #     index_name: "IndexName", # required
+    #     index_schema: { # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "CREATED", "UPDATED", "DELETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateIndex AWS API Documentation
+    #
+    # @overload create_index(params = {})
+    # @param [Hash] params ({})
+    def create_index(params = {}, options = {})
+      req = build_request(:create_index, params)
       req.send_request(options)
     end
 
@@ -1910,6 +1984,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.aiml_options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.domain_status.aiml_options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
     #   resp.domain_status.aiml_options.s3_vectors_engine.enabled #=> Boolean
+    #   resp.domain_status.aiml_options.serverless_vector_acceleration.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteDomain AWS API Documentation
     #
@@ -1961,6 +2036,41 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def delete_inbound_connection(params = {}, options = {})
       req = build_request(:delete_inbound_connection, params)
+      req.send_request(options)
+    end
+
+    # Deletes an OpenSearch index. This operation permanently removes the
+    # index and cannot be undone.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #
+    # @option params [required, String] :index_name
+    #   The name of the index to delete.
+    #
+    # @return [Types::DeleteIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteIndexResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_index({
+    #     domain_name: "DomainName", # required
+    #     index_name: "IndexName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "CREATED", "UPDATED", "DELETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteIndex AWS API Documentation
+    #
+    # @overload delete_index(params = {})
+    # @param [Hash] params ({})
+    def delete_index(params = {}, options = {})
+      req = build_request(:delete_index, params)
       req.send_request(options)
     end
 
@@ -2235,6 +2345,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.aiml_options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.domain_status.aiml_options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
     #   resp.domain_status.aiml_options.s3_vectors_engine.enabled #=> Boolean
+    #   resp.domain_status.aiml_options.serverless_vector_acceleration.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomain AWS API Documentation
     #
@@ -2563,6 +2674,7 @@ module Aws::OpenSearchService
     #   resp.domain_config.aiml_options.options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.domain_config.aiml_options.options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
     #   resp.domain_config.aiml_options.options.s3_vectors_engine.enabled #=> Boolean
+    #   resp.domain_config.aiml_options.options.serverless_vector_acceleration.enabled #=> Boolean
     #   resp.domain_config.aiml_options.status.creation_date #=> Time
     #   resp.domain_config.aiml_options.status.update_date #=> Time
     #   resp.domain_config.aiml_options.status.update_version #=> Integer
@@ -2660,7 +2772,7 @@ module Aws::OpenSearchService
     #
     #   resp.domain_nodes_status_list #=> Array
     #   resp.domain_nodes_status_list[0].node_id #=> String
-    #   resp.domain_nodes_status_list[0].node_type #=> String, one of "Data", "Ultrawarm", "Master"
+    #   resp.domain_nodes_status_list[0].node_type #=> String, one of "Data", "Ultrawarm", "Master", "Warm"
     #   resp.domain_nodes_status_list[0].availability_zone #=> String
     #   resp.domain_nodes_status_list[0].instance_type #=> String, one of "m3.medium.search", "m3.large.search", "m3.xlarge.search", "m3.2xlarge.search", "m4.large.search", "m4.xlarge.search", "m4.2xlarge.search", "m4.4xlarge.search", "m4.10xlarge.search", "m5.large.search", "m5.xlarge.search", "m5.2xlarge.search", "m5.4xlarge.search", "m5.12xlarge.search", "m5.24xlarge.search", "r5.large.search", "r5.xlarge.search", "r5.2xlarge.search", "r5.4xlarge.search", "r5.12xlarge.search", "r5.24xlarge.search", "c5.large.search", "c5.xlarge.search", "c5.2xlarge.search", "c5.4xlarge.search", "c5.9xlarge.search", "c5.18xlarge.search", "t3.nano.search", "t3.micro.search", "t3.small.search", "t3.medium.search", "t3.large.search", "t3.xlarge.search", "t3.2xlarge.search", "or1.medium.search", "or1.large.search", "or1.xlarge.search", "or1.2xlarge.search", "or1.4xlarge.search", "or1.8xlarge.search", "or1.12xlarge.search", "or1.16xlarge.search", "ultrawarm1.medium.search", "ultrawarm1.large.search", "ultrawarm1.xlarge.search", "t2.micro.search", "t2.small.search", "t2.medium.search", "r3.large.search", "r3.xlarge.search", "r3.2xlarge.search", "r3.4xlarge.search", "r3.8xlarge.search", "i2.xlarge.search", "i2.2xlarge.search", "d2.xlarge.search", "d2.2xlarge.search", "d2.4xlarge.search", "d2.8xlarge.search", "c4.large.search", "c4.xlarge.search", "c4.2xlarge.search", "c4.4xlarge.search", "c4.8xlarge.search", "r4.large.search", "r4.xlarge.search", "r4.2xlarge.search", "r4.4xlarge.search", "r4.8xlarge.search", "r4.16xlarge.search", "i3.large.search", "i3.xlarge.search", "i3.2xlarge.search", "i3.4xlarge.search", "i3.8xlarge.search", "i3.16xlarge.search", "r6g.large.search", "r6g.xlarge.search", "r6g.2xlarge.search", "r6g.4xlarge.search", "r6g.8xlarge.search", "r6g.12xlarge.search", "m6g.large.search", "m6g.xlarge.search", "m6g.2xlarge.search", "m6g.4xlarge.search", "m6g.8xlarge.search", "m6g.12xlarge.search", "c6g.large.search", "c6g.xlarge.search", "c6g.2xlarge.search", "c6g.4xlarge.search", "c6g.8xlarge.search", "c6g.12xlarge.search", "r6gd.large.search", "r6gd.xlarge.search", "r6gd.2xlarge.search", "r6gd.4xlarge.search", "r6gd.8xlarge.search", "r6gd.12xlarge.search", "r6gd.16xlarge.search", "t4g.small.search", "t4g.medium.search"
     #   resp.domain_nodes_status_list[0].node_status #=> String, one of "Active", "StandBy", "NotAvailable"
@@ -2812,6 +2924,7 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].aiml_options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.domain_status_list[0].aiml_options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
     #   resp.domain_status_list[0].aiml_options.s3_vectors_engine.enabled #=> Boolean
+    #   resp.domain_status_list[0].aiml_options.serverless_vector_acceleration.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomains AWS API Documentation
     #
@@ -2979,6 +3092,7 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.aiml_options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.dry_run_config.aiml_options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
     #   resp.dry_run_config.aiml_options.s3_vectors_engine.enabled #=> Boolean
+    #   resp.dry_run_config.aiml_options.serverless_vector_acceleration.enabled #=> Boolean
     #   resp.dry_run_results.deployment_type #=> String
     #   resp.dry_run_results.message #=> String
     #
@@ -3490,7 +3604,7 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
-    # Dissociates multiple packages from a domain simulatneously.
+    # Dissociates multiple packages from a domain simultaneously.
     #
     # @option params [required, Array<String>] :package_list
     #   A list of package IDs to be dissociated from a domain.
@@ -3556,6 +3670,7 @@ module Aws::OpenSearchService
     #   * {Types::GetApplicationResponse#app_configs #app_configs} => Array&lt;Types::AppConfig&gt;
     #   * {Types::GetApplicationResponse#created_at #created_at} => Time
     #   * {Types::GetApplicationResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetApplicationResponse#kms_key_arn #kms_key_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3582,6 +3697,7 @@ module Aws::OpenSearchService
     #   resp.app_configs[0].value #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
+    #   resp.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetApplication AWS API Documentation
     #
@@ -3660,6 +3776,28 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def get_data_source(params = {}, options = {})
       req = build_request(:get_data_source, params)
+      req.send_request(options)
+    end
+
+    # Gets the ARN of the current default application.
+    #
+    # If the default application isn't set, the operation returns a
+    # resource not found error.
+    #
+    # @return [Types::GetDefaultApplicationSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDefaultApplicationSettingResponse#application_arn #application_arn} => String
+    #
+    # @example Response structure
+    #
+    #   resp.application_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDefaultApplicationSetting AWS API Documentation
+    #
+    # @overload get_default_application_setting(params = {})
+    # @param [Hash] params ({})
+    def get_default_application_setting(params = {}, options = {})
+      req = build_request(:get_default_application_setting, params)
       req.send_request(options)
     end
 
@@ -3742,6 +3880,42 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def get_domain_maintenance_status(params = {}, options = {})
       req = build_request(:get_domain_maintenance_status, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about an OpenSearch index including its schema
+    # and semantic enrichment configuration. Use this operation to view the
+    # current index structure and semantic search settings.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #
+    # @option params [required, String] :index_name
+    #   The name of the index to retrieve information about.
+    #
+    # @return [Types::GetIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIndexResponse#index_schema #index_schema} => Hash,Array,String,Numeric,Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_index({
+    #     domain_name: "DomainName", # required
+    #     index_name: "IndexName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetIndex AWS API Documentation
+    #
+    # @overload get_index(params = {})
+    # @param [Hash] params ({})
+    def get_index(params = {}, options = {})
+      req = build_request(:get_index, params)
       req.send_request(options)
     end
 
@@ -4618,6 +4792,51 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Sets the default application to the application with the specified
+    # ARN.
+    #
+    # To remove the default application, use the
+    # `GetDefaultApplicationSetting` operation to get the current default
+    # and then call the `PutDefaultApplicationSetting` with the current
+    # applications ARN and the `setAsDefault` parameter set to `false`.
+    #
+    # @option params [required, String] :application_arn
+    #   The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM
+    #   Entities ][1] in *Using Amazon Web Services Identity and Access
+    #   Management* for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+    #
+    # @option params [required, Boolean] :set_as_default
+    #   Set to true to set the specified ARN as the default application. Set
+    #   to false to clear the default application.
+    #
+    # @return [Types::PutDefaultApplicationSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutDefaultApplicationSettingResponse#application_arn #application_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_default_application_setting({
+    #     application_arn: "ARN", # required
+    #     set_as_default: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/PutDefaultApplicationSetting AWS API Documentation
+    #
+    # @overload put_default_application_setting(params = {})
+    # @param [Hash] params ({})
+    def put_default_application_setting(params = {}, options = {})
+      req = build_request(:put_default_application_setting, params)
+      req.send_request(options)
+    end
+
     # Allows the remote Amazon OpenSearch Service domain owner to reject an
     # inbound cross-cluster connection request.
     #
@@ -5276,6 +5495,9 @@ module Aws::OpenSearchService
     #       s3_vectors_engine: {
     #         enabled: false,
     #       },
+    #       serverless_vector_acceleration: {
+    #         enabled: false,
+    #       },
     #     },
     #   })
     #
@@ -5471,6 +5693,7 @@ module Aws::OpenSearchService
     #   resp.domain_config.aiml_options.options.natural_language_query_generation_options.desired_state #=> String, one of "ENABLED", "DISABLED"
     #   resp.domain_config.aiml_options.options.natural_language_query_generation_options.current_state #=> String, one of "NOT_ENABLED", "ENABLE_COMPLETE", "ENABLE_IN_PROGRESS", "ENABLE_FAILED", "DISABLE_COMPLETE", "DISABLE_IN_PROGRESS", "DISABLE_FAILED"
     #   resp.domain_config.aiml_options.options.s3_vectors_engine.enabled #=> Boolean
+    #   resp.domain_config.aiml_options.options.serverless_vector_acceleration.enabled #=> Boolean
     #   resp.domain_config.aiml_options.status.creation_date #=> Time
     #   resp.domain_config.aiml_options.status.update_date #=> Time
     #   resp.domain_config.aiml_options.status.update_version #=> Integer
@@ -5492,6 +5715,54 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def update_domain_config(params = {}, options = {})
       req = build_request(:update_domain_config, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing OpenSearch index schema and semantic enrichment
+    # configuration. This operation allows modification of field mappings
+    # and semantic search settings for text fields. Changes to semantic
+    # enrichment configuration will apply to newly ingested documents.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #
+    # @option params [required, String] :index_name
+    #   The name of the index to update.
+    #
+    # @option params [required, Hash,Array,String,Numeric,Boolean] :index_schema
+    #   The updated JSON schema for the index including any changes to
+    #   mappings, settings, and semantic enrichment configuration.
+    #
+    #   Document type used to carry open content
+    #   (Hash,Array,String,Numeric,Boolean). A document type value is
+    #   serialized using the same format as its surroundings and requires no
+    #   additional encoding or escaping.
+    #
+    # @return [Types::UpdateIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateIndexResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_index({
+    #     domain_name: "DomainName", # required
+    #     index_name: "IndexName", # required
+    #     index_schema: { # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "CREATED", "UPDATED", "DELETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateIndex AWS API Documentation
+    #
+    # @overload update_index(params = {})
+    # @param [Hash] params ({})
+    def update_index(params = {}, options = {})
+      req = build_request(:update_index, params)
       req.send_request(options)
     end
 
@@ -5843,7 +6114,7 @@ module Aws::OpenSearchService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

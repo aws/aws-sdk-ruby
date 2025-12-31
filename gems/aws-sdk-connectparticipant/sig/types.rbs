@@ -169,6 +169,12 @@ module Aws::ConnectParticipant
     class MessageMetadata
       attr_accessor message_id: ::String
       attr_accessor receipts: ::Array[Types::Receipt]
+      attr_accessor message_processing_status: ("PROCESSING" | "FAILED" | "REJECTED")
+      SENSITIVE: []
+    end
+
+    class MessageProcessingMetadata
+      attr_accessor message_processing_status: ("PROCESSING" | "FAILED" | "REJECTED")
       SENSITIVE: []
     end
 
@@ -211,6 +217,7 @@ module Aws::ConnectParticipant
     class SendMessageResponse
       attr_accessor id: ::String
       attr_accessor absolute_time: ::String
+      attr_accessor message_metadata: Types::MessageProcessingMetadata
       SENSITIVE: []
     end
 

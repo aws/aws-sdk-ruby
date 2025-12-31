@@ -230,6 +230,39 @@
             "uid": "json-rpc-10-2020-07-14"
         },
         "shapes": {
+            "Blob": {
+                "type": "blob"
+            },
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "FooEnum": {
+                "type": "string",
+                "enum": [
+                    "Foo",
+                    "Baz",
+                    "Bar",
+                    "1",
+                    "0"
+                ]
+            },
+            "GreetingStruct": {
+                "type": "structure",
+                "members": {
+                    "hi": {
+                        "shape": "String"
+                    }
+                }
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "IntegerEnum": {
+                "type": "integer",
+                "box": true
+            },
             "JsonUnionsInput": {
                 "type": "structure",
                 "members": {
@@ -278,34 +311,6 @@
             "String": {
                 "type": "string"
             },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
-            },
-            "Integer": {
-                "type": "integer",
-                "box": true
-            },
-            "Blob": {
-                "type": "blob"
-            },
-            "Timestamp": {
-                "type": "timestamp"
-            },
-            "FooEnum": {
-                "type": "string",
-                "enum": [
-                    "Foo",
-                    "Baz",
-                    "Bar",
-                    "1",
-                    "0"
-                ]
-            },
-            "IntegerEnum": {
-                "type": "integer",
-                "box": true
-            },
             "StringList": {
                 "type": "list",
                 "member": {
@@ -321,13 +326,8 @@
                     "shape": "String"
                 }
             },
-            "GreetingStruct": {
-                "type": "structure",
-                "members": {
-                    "hi": {
-                        "shape": "String"
-                    }
-                }
+            "Timestamp": {
+                "type": "timestamp"
             }
         },
         "cases": [
@@ -898,6 +898,14 @@
             "uid": "json-rpc-10-2020-07-14"
         },
         "shapes": {
+            "Double": {
+                "type": "double",
+                "box": true
+            },
+            "Float": {
+                "type": "float",
+                "box": true
+            },
             "SimpleScalarPropertiesInput": {
                 "type": "structure",
                 "members": {
@@ -908,14 +916,6 @@
                         "shape": "Double"
                     }
                 }
-            },
-            "Float": {
-                "type": "float",
-                "box": true
-            },
-            "Double": {
-                "type": "double",
-                "box": true
             }
         },
         "cases": [

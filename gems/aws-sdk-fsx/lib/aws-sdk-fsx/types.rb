@@ -1118,6 +1118,28 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Specifies the FSx for ONTAP volume that the S3 access point will be
+    # attached to, and the file system user identity.
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the FSx for ONTAP volume to which you want the S3 access
+    #   point attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_identity
+    #   Specifies the file system user identity to use for authorizing file
+    #   read and write requests that are made using this S3 access point.
+    #   @return [Types::OntapFileSystemIdentity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateAndAttachS3AccessPointOntapConfiguration AWS API Documentation
+    #
+    class CreateAndAttachS3AccessPointOntapConfiguration < Struct.new(
+      :volume_id,
+      :file_system_identity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the FSx for OpenZFS volume that the S3 access point will be
     # attached to, and the file system user identity.
     #
@@ -1164,6 +1186,11 @@ module Aws::FSx
     #   access point to an FSx for OpenZFS volume.
     #   @return [Types::CreateAndAttachS3AccessPointOpenZFSConfiguration]
     #
+    # @!attribute [rw] ontap_configuration
+    #   Specifies the FSx for ONTAP volume that the S3 access point will be
+    #   attached to, and the file system user identity.
+    #   @return [Types::CreateAndAttachS3AccessPointOntapConfiguration]
+    #
     # @!attribute [rw] s3_access_point
     #   Specifies the virtual private cloud (VPC) configuration if you're
     #   creating an access point that is restricted to a VPC. For more
@@ -1182,6 +1209,7 @@ module Aws::FSx
       :name,
       :type,
       :open_zfs_configuration,
+      :ontap_configuration,
       :s3_access_point)
       SENSITIVE = []
       include Aws::Structure
@@ -2974,6 +3002,12 @@ module Aws::FSx
     #   limit associated with your chosen throughput capacity.
     #   @return [Types::DiskIopsConfiguration]
     #
+    # @!attribute [rw] fsrm_configuration
+    #   The File Server Resource Manager (FSRM) configuration that Amazon
+    #   FSx for Windows File Server uses for the file system. FSRM is
+    #   disabled by default.
+    #   @return [Types::WindowsFsrmConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemWindowsConfiguration AWS API Documentation
     #
     class CreateFileSystemWindowsConfiguration < Struct.new(
@@ -2988,7 +3022,8 @@ module Aws::FSx
       :copy_tags_to_backups,
       :aliases,
       :audit_log_configuration,
-      :disk_iops_configuration)
+      :disk_iops_configuration,
+      :fsrm_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7440,6 +7475,49 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Specifies the file system user identity that will be used for
+    # authorizing all file access requests that are made using the S3 access
+    # point. The identity can be either a UNIX user or a Windows user.
+    #
+    # @!attribute [rw] type
+    #   Specifies the FSx for ONTAP user identity type. Valid values are
+    #   `UNIX` and `WINDOWS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] unix_user
+    #   Specifies the UNIX user identity for file system operations.
+    #   @return [Types::OntapUnixFileSystemUser]
+    #
+    # @!attribute [rw] windows_user
+    #   Specifies the Windows user identity for file system operations.
+    #   @return [Types::OntapWindowsFileSystemUser]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapFileSystemIdentity AWS API Documentation
+    #
+    class OntapFileSystemIdentity < Struct.new(
+      :type,
+      :unix_user,
+      :windows_user)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The FSx for ONTAP UNIX file system user that is used for authorizing
+    # all file access requests that are made using the S3 access point.
+    #
+    # @!attribute [rw] name
+    #   The name of the UNIX user. The name can be up to 256 characters
+    #   long.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapUnixFileSystemUser AWS API Documentation
+    #
+    class OntapUnixFileSystemUser < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration of an Amazon FSx for NetApp ONTAP volume.
     #
     # @!attribute [rw] flex_cache_endpoint_type
@@ -7599,6 +7677,23 @@ module Aws::FSx
       :volume_style,
       :aggregate_configuration,
       :size_in_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The FSx for ONTAP Windows file system user that is used for
+    # authorizing all file access requests that are made using the S3 access
+    # point.
+    #
+    # @!attribute [rw] name
+    #   The name of the Windows user. The name can be up to 256 characters
+    #   long and supports Active Directory users.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapWindowsFileSystemUser AWS API Documentation
+    #
+    class OntapWindowsFileSystemUser < Struct.new(
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8484,6 +8579,10 @@ module Aws::FSx
     #   The OpenZFSConfiguration of the S3 access point attachment.
     #   @return [Types::S3AccessPointOpenZFSConfiguration]
     #
+    # @!attribute [rw] ontap_configuration
+    #   The ONTAP configuration of the S3 access point attachment.
+    #   @return [Types::S3AccessPointOntapConfiguration]
+    #
     # @!attribute [rw] s3_access_point
     #   The S3 access point configuration of the S3 access point attachment.
     #   @return [Types::S3AccessPoint]
@@ -8497,6 +8596,7 @@ module Aws::FSx
       :name,
       :type,
       :open_zfs_configuration,
+      :ontap_configuration,
       :s3_access_point)
       SENSITIVE = []
       include Aws::Structure
@@ -8532,6 +8632,28 @@ module Aws::FSx
     class S3AccessPointAttachmentsFilter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the FSx for ONTAP attachment configuration of an S3 access
+    # point attachment.
+    #
+    # @!attribute [rw] volume_id
+    #   The ID of the FSx for ONTAP volume that the S3 access point is
+    #   attached to.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_identity
+    #   The file system identity used to authorize file access requests made
+    #   using the S3 access point.
+    #   @return [Types::OntapFileSystemIdentity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/S3AccessPointOntapConfiguration AWS API Documentation
+    #
+    class S3AccessPointOntapConfiguration < Struct.new(
+      :volume_id,
+      :file_system_identity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8639,6 +8761,12 @@ module Aws::FSx
     #   controllers in the self-managed AD directory.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] domain_join_service_account_secret
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret containing the service account credentials used to
+    #   join the file system to your self-managed Active Directory domain.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryAttributes AWS API Documentation
     #
     class SelfManagedActiveDirectoryAttributes < Struct.new(
@@ -8646,7 +8774,8 @@ module Aws::FSx
       :organizational_unit_distinguished_name,
       :file_system_administrators_group,
       :user_name,
-      :dns_ips)
+      :dns_ips,
+      :domain_join_service_account_secret)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8713,6 +8842,31 @@ module Aws::FSx
     #   controllers in the self-managed AD directory.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] domain_join_service_account_secret
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret containing the self-managed Active Directory domain
+    #   join service account credentials. When provided, Amazon FSx uses the
+    #   credentials stored in this secret to join the file system to your
+    #   self-managed Active Directory domain.
+    #
+    #   The secret must contain two key-value pairs:
+    #
+    #   * `CUSTOMER_MANAGED_ACTIVE_DIRECTORY_USERNAME` - The username for
+    #     the service account
+    #
+    #   * `CUSTOMER_MANAGED_ACTIVE_DIRECTORY_PASSWORD` - The password for
+    #     the service account
+    #
+    #   For more information, see [ Using Amazon FSx for Windows with your
+    #   self-managed Microsoft Active Directory][1] or [ Using Amazon FSx
+    #   for ONTAP with your self-managed Microsoft Active Directory][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-manage-prereqs.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/self-manage-prereqs.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryConfiguration AWS API Documentation
     #
     class SelfManagedActiveDirectoryConfiguration < Struct.new(
@@ -8721,7 +8875,8 @@ module Aws::FSx
       :file_system_administrators_group,
       :user_name,
       :password,
-      :dns_ips)
+      :dns_ips,
+      :domain_join_service_account_secret)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -8767,6 +8922,13 @@ module Aws::FSx
     #   granted administrative privileges for the Amazon FSx resource.
     #   @return [String]
     #
+    # @!attribute [rw] domain_join_service_account_secret
+    #   Specifies the updated Amazon Resource Name (ARN) of the Amazon Web
+    #   Services Secrets Manager secret containing the self-managed Active
+    #   Directory domain join service account credentials. Amazon FSx uses
+    #   this account to join to your self-managed Active Directory domain.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryConfigurationUpdates AWS API Documentation
     #
     class SelfManagedActiveDirectoryConfigurationUpdates < Struct.new(
@@ -8775,7 +8937,8 @@ module Aws::FSx
       :dns_ips,
       :domain_name,
       :organizational_unit_distinguished_name,
-      :file_system_administrators_group)
+      :file_system_administrators_group,
+      :domain_join_service_account_secret)
       SENSITIVE = [:password]
       include Aws::Structure
     end
@@ -10287,6 +10450,12 @@ module Aws::FSx
     #   limit associated with your chosen throughput capacity.
     #   @return [Types::DiskIopsConfiguration]
     #
+    # @!attribute [rw] fsrm_configuration
+    #   The File Server Resource Manager (FSRM) configuration that Amazon
+    #   FSx for Windows File Server uses for the file system. FSRM is
+    #   disabled by default.
+    #   @return [Types::WindowsFsrmConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemWindowsConfiguration AWS API Documentation
     #
     class UpdateFileSystemWindowsConfiguration < Struct.new(
@@ -10296,7 +10465,8 @@ module Aws::FSx
       :throughput_capacity,
       :self_managed_active_directory_configuration,
       :audit_log_configuration,
-      :disk_iops_configuration)
+      :disk_iops_configuration,
+      :fsrm_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11178,6 +11348,12 @@ module Aws::FSx
     #   Directory, use the file system's DNSName instead.
     #   @return [String]
     #
+    # @!attribute [rw] fsrm_configuration
+    #   The File Server Resource Manager (FSRM) configuration that Amazon
+    #   FSx for Windows File Server uses for the file system. FSRM is
+    #   disabled by default.
+    #   @return [Types::WindowsFsrmConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/WindowsFileSystemConfiguration AWS API Documentation
     #
     class WindowsFileSystemConfiguration < Struct.new(
@@ -11196,7 +11372,44 @@ module Aws::FSx
       :aliases,
       :audit_log_configuration,
       :disk_iops_configuration,
-      :preferred_file_server_ipv_6)
+      :preferred_file_server_ipv_6,
+      :fsrm_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The File Server Resource Manager (FSRM) configuration that Amazon FSx
+    # for Windows File Server uses for the file system. When FSRM is
+    # enabled, you can manage and monitor storage quotas, file screening,
+    # storage reports, and file classification.
+    #
+    # @!attribute [rw] fsrm_service_enabled
+    #   Specifies whether FSRM is enabled or disabled on the file system.
+    #   When `TRUE`, the FSRM service is enabled and monitor file operations
+    #   according to configured policies. When `FALSE` or omitted, FSRM is
+    #   disabled. The default value is `FALSE`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] event_log_destination
+    #   The Amazon Resource Name (ARN) for the destination of the FSRM event
+    #   logs. The destination can be any Amazon CloudWatch Logs log group
+    #   ARN or Amazon Kinesis Data Firehose delivery stream ARN.
+    #
+    #   The name of the Amazon CloudWatch Logs log group must begin with the
+    #   `/aws/fsx` prefix. The name of the Amazon Kinesis Data Firehose
+    #   delivery stream must begin with the `aws-fsx` prefix.
+    #
+    #   The destination ARN (either CloudWatch Logs log group or Kinesis
+    #   Data Firehose delivery stream) must be in the same Amazon Web
+    #   Services partition, Amazon Web Services Region, and Amazon Web
+    #   Services account as your Amazon FSx file system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/WindowsFsrmConfiguration AWS API Documentation
+    #
+    class WindowsFsrmConfiguration < Struct.new(
+      :fsrm_service_enabled,
+      :event_log_destination)
       SENSITIVE = []
       include Aws::Structure
     end

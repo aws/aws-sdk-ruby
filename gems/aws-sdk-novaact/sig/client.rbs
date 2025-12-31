@@ -1,0 +1,330 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module NovaAct
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NovaAct/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateActResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateActResponse]
+        def act_id: () -> ::String
+        def status: () -> ("RUNNING" | "PENDING_CLIENT_ACTION" | "PENDING_HUMAN_ACTION" | "SUCCEEDED" | "FAILED" | "TIMED_OUT")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NovaAct/Client.html#create_act-instance_method
+      def create_act: (
+                        workflow_definition_name: ::String,
+                        workflow_run_id: ::String,
+                        session_id: ::String,
+                        task: ::String,
+                        ?tool_specs: Array[
+                          {
+                            name: ::String,
+                            description: ::String,
+                            input_schema: {
+                              json: {
+                              }?
+                            }
+                          },
+                        ],
+                        ?client_token: ::String
+                      ) -> _CreateActResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateActResponseSuccess
+
+      interface _CreateSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSessionResponse]
+        def session_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NovaAct/Client.html#create_session-instance_method
+      def create_session: (
+                            workflow_definition_name: ::String,
+                            workflow_run_id: ::String,
+                            ?client_token: ::String
+                          ) -> _CreateSessionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSessionResponseSuccess
+
+      interface _CreateWorkflowDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkflowDefinitionResponse]
+        def status: () -> ("ACTIVE" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NovaAct/Client.html#create_workflow_definition-instance_method
+      def create_workflow_definition: (
+                                        name: ::String,
+                                        ?description: ::String,
+                                        ?export_config: {
+                                          s3_bucket_name: ::String,
+                                          s3_key_prefix: ::String?
+                                        },
+                                        ?client_token: ::String
+                                      ) -> _CreateWorkflowDefinitionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkflowDefinitionResponseSuccess
+
+      interface _CreateWorkflowRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkflowRunResponse]
+        def workflow_run_id: () -> ::String
+        def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NovaAct/Client.html#create_workflow_run-instance_method
+      def create_workflow_run: (
+                                 workflow_definition_name: ::String,
+                                 model_id: ::String,
+                                 ?client_token: ::String,
+                                 ?log_group_name: ::String,
+                                 client_info: {
+                                   compatibility_version: ::Integer,
+                                   sdk_version: ::String?
+                                 }
+                               ) -> _CreateWorkflowRunResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkflowRunResponseSuccess
+
+      interface _DeleteWorkflowDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkflowDefinitionResponse]
+        def status: () -> ("ACTIVE" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NovaAct/Client.html#delete_workflow_definition-instance_method
+      def delete_workflow_definition: (
+                                        workflow_definition_name: ::String
+                                      ) -> _DeleteWorkflowDefinitionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkflowDefinitionResponseSuccess
+
+      interface _DeleteWorkflowRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkflowRunResponse]
+        def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NovaAct/Client.html#delete_workflow_run-instance_method
+      def delete_workflow_run: (
+                                 workflow_definition_name: ::String,
+                                 workflow_run_id: ::String
+                               ) -> _DeleteWorkflowRunResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkflowRunResponseSuccess
+
+      interface _GetWorkflowDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkflowDefinitionResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def export_config: () -> Types::WorkflowExportConfig
+        def status: () -> ("ACTIVE" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NovaAct/Client.html#get_workflow_definition-instance_method
+      def get_workflow_definition: (
+                                     workflow_definition_name: ::String
+                                   ) -> _GetWorkflowDefinitionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowDefinitionResponseSuccess
+
+      interface _GetWorkflowRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkflowRunResponse]
+        def workflow_run_arn: () -> ::String
+        def workflow_run_id: () -> ::String
+        def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "DELETING")
+        def started_at: () -> ::Time
+        def ended_at: () -> ::Time
+        def model_id: () -> ::String
+        def log_group_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NovaAct/Client.html#get_workflow_run-instance_method
+      def get_workflow_run: (
+                              workflow_definition_name: ::String,
+                              workflow_run_id: ::String
+                            ) -> _GetWorkflowRunResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowRunResponseSuccess
+
+      interface _InvokeActStepResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeActStepResponse]
+        def calls: () -> ::Array[Types::Call]
+        def step_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NovaAct/Client.html#invoke_act_step-instance_method
+      def invoke_act_step: (
+                             workflow_definition_name: ::String,
+                             workflow_run_id: ::String,
+                             session_id: ::String,
+                             act_id: ::String,
+                             call_results: Array[
+                               {
+                                 call_id: ::String?,
+                                 content: Array[
+                                   {
+                                     text: ::String?
+                                   },
+                                 ]
+                               },
+                             ],
+                             ?previous_step_id: ::String
+                           ) -> _InvokeActStepResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeActStepResponseSuccess
+
+      interface _ListActsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListActsResponse]
+        def act_summaries: () -> ::Array[Types::ActSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NovaAct/Client.html#list_acts-instance_method
+      def list_acts: (
+                       workflow_definition_name: ::String,
+                       ?workflow_run_id: ::String,
+                       ?session_id: ::String,
+                       ?max_results: ::Integer,
+                       ?next_token: ::String,
+                       ?sort_order: ("Ascending" | "Descending")
+                     ) -> _ListActsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListActsResponseSuccess
+
+      interface _ListModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListModelsResponse]
+        def model_summaries: () -> ::Array[Types::ModelSummary]
+        def model_aliases: () -> ::Array[Types::ModelAlias]
+        def compatibility_information: () -> Types::CompatibilityInformation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NovaAct/Client.html#list_models-instance_method
+      def list_models: (
+                         client_compatibility_version: ::Integer
+                       ) -> _ListModelsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListModelsResponseSuccess
+
+      interface _ListSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSessionsResponse]
+        def session_summaries: () -> ::Array[Types::SessionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NovaAct/Client.html#list_sessions-instance_method
+      def list_sessions: (
+                           workflow_definition_name: ::String,
+                           workflow_run_id: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           ?sort_order: ("Ascending" | "Descending")
+                         ) -> _ListSessionsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSessionsResponseSuccess
+
+      interface _ListWorkflowDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkflowDefinitionsResponse]
+        def workflow_definition_summaries: () -> ::Array[Types::WorkflowDefinitionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NovaAct/Client.html#list_workflow_definitions-instance_method
+      def list_workflow_definitions: (
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String,
+                                       ?sort_order: ("Ascending" | "Descending")
+                                     ) -> _ListWorkflowDefinitionsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowDefinitionsResponseSuccess
+
+      interface _ListWorkflowRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkflowRunsResponse]
+        def workflow_run_summaries: () -> ::Array[Types::WorkflowRunSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NovaAct/Client.html#list_workflow_runs-instance_method
+      def list_workflow_runs: (
+                                workflow_definition_name: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                ?sort_order: ("Ascending" | "Descending")
+                              ) -> _ListWorkflowRunsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowRunsResponseSuccess
+
+      interface _UpdateActResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateActResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NovaAct/Client.html#update_act-instance_method
+      def update_act: (
+                        workflow_definition_name: ::String,
+                        workflow_run_id: ::String,
+                        session_id: ::String,
+                        act_id: ::String,
+                        status: ("RUNNING" | "PENDING_CLIENT_ACTION" | "PENDING_HUMAN_ACTION" | "SUCCEEDED" | "FAILED" | "TIMED_OUT"),
+                        ?error: {
+                          message: ::String,
+                          type: ::String?
+                        }
+                      ) -> _UpdateActResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateActResponseSuccess
+
+      interface _UpdateWorkflowRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkflowRunResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NovaAct/Client.html#update_workflow_run-instance_method
+      def update_workflow_run: (
+                                 workflow_definition_name: ::String,
+                                 workflow_run_id: ::String,
+                                 status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "DELETING")
+                               ) -> _UpdateWorkflowRunResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkflowRunResponseSuccess
+    end
+  end
+end
+

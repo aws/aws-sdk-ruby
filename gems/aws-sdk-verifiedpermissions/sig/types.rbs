@@ -150,6 +150,44 @@ module Aws::VerifiedPermissions
       SENSITIVE: []
     end
 
+    class CedarTagValue
+      attr_accessor boolean: bool
+      attr_accessor entity_identifier: Types::EntityIdentifier
+      attr_accessor long: ::Integer
+      attr_accessor string: ::String
+      attr_accessor set: ::Array[Types::CedarTagValue]
+      attr_accessor record: ::Hash[::String, Types::CedarTagValue]
+      attr_accessor ipaddr: ::String
+      attr_accessor decimal: ::String
+      attr_accessor datetime: ::String
+      attr_accessor duration: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: [:boolean, :long, :string, :ipaddr, :decimal, :datetime, :duration]
+
+      class Boolean < CedarTagValue
+      end
+      class EntityIdentifier < CedarTagValue
+      end
+      class Long < CedarTagValue
+      end
+      class String < CedarTagValue
+      end
+      class Set < CedarTagValue
+      end
+      class Record < CedarTagValue
+      end
+      class Ipaddr < CedarTagValue
+      end
+      class Decimal < CedarTagValue
+      end
+      class Datetime < CedarTagValue
+      end
+      class Duration < CedarTagValue
+      end
+      class Unknown < CedarTagValue
+      end
+    end
+
     class CognitoGroupConfiguration
       attr_accessor group_entity_type: ::String
       SENSITIVE: [:group_entity_type]
@@ -383,6 +421,7 @@ module Aws::VerifiedPermissions
       attr_accessor identifier: Types::EntityIdentifier
       attr_accessor attributes: ::Hash[::String, Types::AttributeValue]
       attr_accessor parents: ::Array[Types::EntityIdentifier]
+      attr_accessor tags: ::Hash[::String, Types::CedarTagValue]
       SENSITIVE: []
     end
 

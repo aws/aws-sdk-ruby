@@ -827,6 +827,20 @@ module Aws::VPCLattice
     #   (SINGLE, GROUP, ARN) Specifies whether the resource configuration can
     #   be associated with a sharable service network. The default is false.
     #
+    # @option params [String] :custom_domain_name
+    #   A custom domain name for your resource configuration. Additionally,
+    #   provide a DomainVerificationID to prove your ownership of a domain.
+    #
+    # @option params [String] :group_domain
+    #   (GROUP) The group domain for a group resource configuration. Any
+    #   domains that you create for the child resource are subdomains of the
+    #   group domain. Child resources inherit the verification status of the
+    #   domain.
+    #
+    # @option params [String] :domain_verification_identifier
+    #   The domain verification ID of your verified custom domain name. If you
+    #   don't provide an ID, you must configure the DNS settings yourself.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If you retry a request that completed
@@ -855,6 +869,10 @@ module Aws::VPCLattice
     #   * {Types::CreateResourceConfigurationResponse#allow_association_to_shareable_service_network #allow_association_to_shareable_service_network} => Boolean
     #   * {Types::CreateResourceConfigurationResponse#created_at #created_at} => Time
     #   * {Types::CreateResourceConfigurationResponse#failure_reason #failure_reason} => String
+    #   * {Types::CreateResourceConfigurationResponse#custom_domain_name #custom_domain_name} => String
+    #   * {Types::CreateResourceConfigurationResponse#domain_verification_id #domain_verification_id} => String
+    #   * {Types::CreateResourceConfigurationResponse#group_domain #group_domain} => String
+    #   * {Types::CreateResourceConfigurationResponse#domain_verification_arn #domain_verification_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -878,6 +896,9 @@ module Aws::VPCLattice
     #       },
     #     },
     #     allow_association_to_shareable_service_network: false,
+    #     custom_domain_name: "DomainName",
+    #     group_domain: "DomainName",
+    #     domain_verification_identifier: "DomainVerificationIdentifier",
     #     client_token: "ClientToken",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -903,6 +924,10 @@ module Aws::VPCLattice
     #   resp.allow_association_to_shareable_service_network #=> Boolean
     #   resp.created_at #=> Time
     #   resp.failure_reason #=> String
+    #   resp.custom_domain_name #=> String
+    #   resp.domain_verification_id #=> String
+    #   resp.group_domain #=> String
+    #   resp.domain_verification_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateResourceConfiguration AWS API Documentation
     #
@@ -1349,6 +1374,10 @@ module Aws::VPCLattice
     #   The ID of the service network to associate with the resource
     #   configuration.
     #
+    # @option params [Boolean] :private_dns_enabled
+    #   Indicates if private DNS is enabled for the service network resource
+    #   association.
+    #
     # @option params [Hash<String,String>] :tags
     #   A key-value pair to associate with a resource.
     #
@@ -1358,6 +1387,7 @@ module Aws::VPCLattice
     #   * {Types::CreateServiceNetworkResourceAssociationResponse#arn #arn} => String
     #   * {Types::CreateServiceNetworkResourceAssociationResponse#status #status} => String
     #   * {Types::CreateServiceNetworkResourceAssociationResponse#created_by #created_by} => String
+    #   * {Types::CreateServiceNetworkResourceAssociationResponse#private_dns_enabled #private_dns_enabled} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -1365,6 +1395,7 @@ module Aws::VPCLattice
     #     client_token: "ClientToken",
     #     resource_configuration_identifier: "ResourceConfigurationIdentifier", # required
     #     service_network_identifier: "ServiceNetworkIdentifierWithoutRegex", # required
+    #     private_dns_enabled: false,
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1376,6 +1407,7 @@ module Aws::VPCLattice
     #   resp.arn #=> String
     #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "PARTIAL", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.created_by #=> String
+    #   resp.private_dns_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateServiceNetworkResourceAssociation AWS API Documentation
     #
@@ -1505,6 +1537,9 @@ module Aws::VPCLattice
     # @option params [required, String] :vpc_identifier
     #   The ID of the VPC.
     #
+    # @option params [Boolean] :private_dns_enabled
+    #   Indicates if private DNS is enabled for the VPC association.
+    #
     # @option params [Array<String>] :security_group_ids
     #   The IDs of the security groups. Security groups aren't added by
     #   default. You can add a security group to apply network level controls
@@ -1519,6 +1554,9 @@ module Aws::VPCLattice
     # @option params [Hash<String,String>] :tags
     #   The tags for the association.
     #
+    # @option params [Types::DnsOptions] :dns_options
+    #   DNS options for the service network VPC association.
+    #
     # @return [Types::CreateServiceNetworkVpcAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServiceNetworkVpcAssociationResponse#id #id} => String
@@ -1526,6 +1564,8 @@ module Aws::VPCLattice
     #   * {Types::CreateServiceNetworkVpcAssociationResponse#arn #arn} => String
     #   * {Types::CreateServiceNetworkVpcAssociationResponse#created_by #created_by} => String
     #   * {Types::CreateServiceNetworkVpcAssociationResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
+    #   * {Types::CreateServiceNetworkVpcAssociationResponse#private_dns_enabled #private_dns_enabled} => Boolean
+    #   * {Types::CreateServiceNetworkVpcAssociationResponse#dns_options #dns_options} => Types::DnsOptions
     #
     # @example Request syntax with placeholder values
     #
@@ -1533,9 +1573,14 @@ module Aws::VPCLattice
     #     client_token: "ClientToken",
     #     service_network_identifier: "ServiceNetworkIdentifier", # required
     #     vpc_identifier: "VpcId", # required
+    #     private_dns_enabled: false,
     #     security_group_ids: ["SecurityGroupId"],
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     dns_options: {
+    #       private_dns_preference: "VERIFIED_DOMAINS_ONLY", # accepts VERIFIED_DOMAINS_ONLY, ALL_DOMAINS, VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS, SPECIFIED_DOMAINS_ONLY
+    #       private_dns_specified_domains: ["PrivateDnsSpecifiedDomain"],
     #     },
     #   })
     #
@@ -1547,6 +1592,10 @@ module Aws::VPCLattice
     #   resp.created_by #=> String
     #   resp.security_group_ids #=> Array
     #   resp.security_group_ids[0] #=> String
+    #   resp.private_dns_enabled #=> Boolean
+    #   resp.dns_options.private_dns_preference #=> String, one of "VERIFIED_DOMAINS_ONLY", "ALL_DOMAINS", "VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS", "SPECIFIED_DOMAINS_ONLY"
+    #   resp.dns_options.private_dns_specified_domains #=> Array
+    #   resp.dns_options.private_dns_specified_domains[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateServiceNetworkVpcAssociation AWS API Documentation
     #
@@ -1713,6 +1762,28 @@ module Aws::VPCLattice
     # @param [Hash] params ({})
     def delete_auth_policy(params = {}, options = {})
       req = build_request(:delete_auth_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified domain verification.
+    #
+    # @option params [required, String] :domain_verification_identifier
+    #   The ID of the domain verification to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_domain_verification({
+    #     domain_verification_identifier: "DomainVerificationIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/DeleteDomainVerification AWS API Documentation
+    #
+    # @overload delete_domain_verification(params = {})
+    # @param [Hash] params ({})
+    def delete_domain_verification(params = {}, options = {})
+      req = build_request(:delete_domain_verification, params)
       req.send_request(options)
     end
 
@@ -2227,6 +2298,50 @@ module Aws::VPCLattice
       req.send_request(options)
     end
 
+    # Retrieves information about a domain verification.ß
+    #
+    # @option params [required, String] :domain_verification_identifier
+    #   The ID or ARN of the domain verification to retrieve.
+    #
+    # @return [Types::GetDomainVerificationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDomainVerificationResponse#id #id} => String
+    #   * {Types::GetDomainVerificationResponse#arn #arn} => String
+    #   * {Types::GetDomainVerificationResponse#domain_name #domain_name} => String
+    #   * {Types::GetDomainVerificationResponse#status #status} => String
+    #   * {Types::GetDomainVerificationResponse#txt_method_config #txt_method_config} => Types::TxtMethodConfig
+    #   * {Types::GetDomainVerificationResponse#created_at #created_at} => Time
+    #   * {Types::GetDomainVerificationResponse#last_verified_time #last_verified_time} => Time
+    #   * {Types::GetDomainVerificationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_domain_verification({
+    #     domain_verification_identifier: "DomainVerificationIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.domain_name #=> String
+    #   resp.status #=> String, one of "VERIFIED", "PENDING", "VERIFICATION_TIMED_OUT"
+    #   resp.txt_method_config.value #=> String
+    #   resp.txt_method_config.name #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_verified_time #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetDomainVerification AWS API Documentation
+    #
+    # @overload get_domain_verification(params = {})
+    # @param [Hash] params ({})
+    def get_domain_verification(params = {}, options = {})
+      req = build_request(:get_domain_verification, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about the specified listener for the specified
     # service.
     #
@@ -2304,6 +2419,10 @@ module Aws::VPCLattice
     #   * {Types::GetResourceConfigurationResponse#amazon_managed #amazon_managed} => Boolean
     #   * {Types::GetResourceConfigurationResponse#failure_reason #failure_reason} => String
     #   * {Types::GetResourceConfigurationResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetResourceConfigurationResponse#domain_verification_id #domain_verification_id} => String
+    #   * {Types::GetResourceConfigurationResponse#domain_verification_arn #domain_verification_arn} => String
+    #   * {Types::GetResourceConfigurationResponse#domain_verification_status #domain_verification_status} => String
+    #   * {Types::GetResourceConfigurationResponse#group_domain #group_domain} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2333,6 +2452,10 @@ module Aws::VPCLattice
     #   resp.amazon_managed #=> Boolean
     #   resp.failure_reason #=> String
     #   resp.last_updated_at #=> Time
+    #   resp.domain_verification_id #=> String
+    #   resp.domain_verification_arn #=> String
+    #   resp.domain_verification_status #=> String, one of "VERIFIED", "PENDING", "VERIFICATION_TIMED_OUT"
+    #   resp.group_domain #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetResourceConfiguration AWS API Documentation
     #
@@ -2612,8 +2735,10 @@ module Aws::VPCLattice
     #   * {Types::GetServiceNetworkResourceAssociationResponse#failure_code #failure_code} => String
     #   * {Types::GetServiceNetworkResourceAssociationResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetServiceNetworkResourceAssociationResponse#private_dns_entry #private_dns_entry} => Types::DnsEntry
+    #   * {Types::GetServiceNetworkResourceAssociationResponse#private_dns_enabled #private_dns_enabled} => Boolean
     #   * {Types::GetServiceNetworkResourceAssociationResponse#dns_entry #dns_entry} => Types::DnsEntry
     #   * {Types::GetServiceNetworkResourceAssociationResponse#is_managed_association #is_managed_association} => Boolean
+    #   * {Types::GetServiceNetworkResourceAssociationResponse#domain_verification_status #domain_verification_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2639,9 +2764,11 @@ module Aws::VPCLattice
     #   resp.last_updated_at #=> Time
     #   resp.private_dns_entry.domain_name #=> String
     #   resp.private_dns_entry.hosted_zone_id #=> String
+    #   resp.private_dns_enabled #=> Boolean
     #   resp.dns_entry.domain_name #=> String
     #   resp.dns_entry.hosted_zone_id #=> String
     #   resp.is_managed_association #=> Boolean
+    #   resp.domain_verification_status #=> String, one of "VERIFIED", "PENDING", "VERIFICATION_TIMED_OUT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetServiceNetworkResourceAssociation AWS API Documentation
     #
@@ -2728,9 +2855,11 @@ module Aws::VPCLattice
     #   * {Types::GetServiceNetworkVpcAssociationResponse#service_network_arn #service_network_arn} => String
     #   * {Types::GetServiceNetworkVpcAssociationResponse#vpc_id #vpc_id} => String
     #   * {Types::GetServiceNetworkVpcAssociationResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
+    #   * {Types::GetServiceNetworkVpcAssociationResponse#private_dns_enabled #private_dns_enabled} => Boolean
     #   * {Types::GetServiceNetworkVpcAssociationResponse#failure_message #failure_message} => String
     #   * {Types::GetServiceNetworkVpcAssociationResponse#failure_code #failure_code} => String
     #   * {Types::GetServiceNetworkVpcAssociationResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetServiceNetworkVpcAssociationResponse#dns_options #dns_options} => Types::DnsOptions
     #
     # @example Request syntax with placeholder values
     #
@@ -2751,9 +2880,13 @@ module Aws::VPCLattice
     #   resp.vpc_id #=> String
     #   resp.security_group_ids #=> Array
     #   resp.security_group_ids[0] #=> String
+    #   resp.private_dns_enabled #=> Boolean
     #   resp.failure_message #=> String
     #   resp.failure_code #=> String
     #   resp.last_updated_at #=> Time
+    #   resp.dns_options.private_dns_preference #=> String, one of "VERIFIED_DOMAINS_ONLY", "ALL_DOMAINS", "VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS", "SPECIFIED_DOMAINS_ONLY"
+    #   resp.dns_options.private_dns_specified_domains #=> Array
+    #   resp.dns_options.private_dns_specified_domains[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/GetServiceNetworkVpcAssociation AWS API Documentation
     #
@@ -2877,6 +3010,52 @@ module Aws::VPCLattice
       req.send_request(options)
     end
 
+    # Lists the domain verifications.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   A pagination token for the next page of results.
+    #
+    # @return [Types::ListDomainVerificationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDomainVerificationsResponse#items #items} => Array&lt;Types::DomainVerificationSummary&gt;
+    #   * {Types::ListDomainVerificationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_domain_verifications({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].domain_name #=> String
+    #   resp.items[0].status #=> String, one of "VERIFIED", "PENDING", "VERIFICATION_TIMED_OUT"
+    #   resp.items[0].txt_method_config.value #=> String
+    #   resp.items[0].txt_method_config.name #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].last_verified_time #=> Time
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListDomainVerifications AWS API Documentation
+    #
+    # @overload list_domain_verifications(params = {})
+    # @param [Hash] params ({})
+    def list_domain_verifications(params = {}, options = {})
+      req = build_request(:list_domain_verifications, params)
+      req.send_request(options)
+    end
+
     # Lists the listeners for the specified service.
     #
     # @option params [required, String] :service_identifier
@@ -2933,6 +3112,9 @@ module Aws::VPCLattice
     # @option params [String] :resource_configuration_group_identifier
     #   The ID of the resource configuration of type `Group`.
     #
+    # @option params [String] :domain_verification_identifier
+    #   The domain verification ID.
+    #
     # @option params [Integer] :max_results
     #   The maximum page size.
     #
@@ -2951,6 +3133,7 @@ module Aws::VPCLattice
     #   resp = client.list_resource_configurations({
     #     resource_gateway_identifier: "ResourceGatewayIdentifier",
     #     resource_configuration_group_identifier: "ResourceConfigurationIdentifier",
+    #     domain_verification_identifier: "DomainVerificationIdentifier",
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -2968,6 +3151,9 @@ module Aws::VPCLattice
     #   resp.items[0].amazon_managed #=> Boolean
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].last_updated_at #=> Time
+    #   resp.items[0].custom_domain_name #=> String
+    #   resp.items[0].domain_verification_id #=> String
+    #   resp.items[0].group_domain #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListResourceConfigurations AWS API Documentation
@@ -3201,6 +3387,7 @@ module Aws::VPCLattice
     #   resp.items[0].private_dns_entry.hosted_zone_id #=> String
     #   resp.items[0].is_managed_association #=> Boolean
     #   resp.items[0].failure_code #=> String
+    #   resp.items[0].private_dns_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListServiceNetworkResourceAssociations AWS API Documentation
@@ -3322,6 +3509,10 @@ module Aws::VPCLattice
     #   resp.items[0].service_network_id #=> String
     #   resp.items[0].service_network_name #=> String
     #   resp.items[0].service_network_arn #=> String
+    #   resp.items[0].private_dns_enabled #=> Boolean
+    #   resp.items[0].dns_options.private_dns_preference #=> String, one of "VERIFIED_DOMAINS_ONLY", "ALL_DOMAINS", "VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS", "SPECIFIED_DOMAINS_ONLY"
+    #   resp.items[0].dns_options.private_dns_specified_domains #=> Array
+    #   resp.items[0].dns_options.private_dns_specified_domains[0] #=> String
     #   resp.items[0].vpc_id #=> String
     #   resp.items[0].last_updated_at #=> Time
     #   resp.next_token #=> String
@@ -3735,6 +3926,60 @@ module Aws::VPCLattice
     # @param [Hash] params ({})
     def register_targets(params = {}, options = {})
       req = build_request(:register_targets, params)
+      req.send_request(options)
+    end
+
+    # Starts the domain verification process for a custom domain name.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you retry a request that completed
+    #   successfully using the same client token and parameters, the retry
+    #   succeeds without performing any actions. If the parameters aren't
+    #   identical, the retry fails.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :domain_name
+    #   The domain name to verify ownership for.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags for the domain verification.
+    #
+    # @return [Types::StartDomainVerificationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDomainVerificationResponse#id #id} => String
+    #   * {Types::StartDomainVerificationResponse#arn #arn} => String
+    #   * {Types::StartDomainVerificationResponse#domain_name #domain_name} => String
+    #   * {Types::StartDomainVerificationResponse#status #status} => String
+    #   * {Types::StartDomainVerificationResponse#txt_method_config #txt_method_config} => Types::TxtMethodConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_domain_verification({
+    #     client_token: "ClientToken",
+    #     domain_name: "DomainName", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.domain_name #=> String
+    #   resp.status #=> String, one of "VERIFIED", "PENDING", "VERIFICATION_TIMED_OUT"
+    #   resp.txt_method_config.value #=> String
+    #   resp.txt_method_config.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/StartDomainVerification AWS API Documentation
+    #
+    # @overload start_domain_verification(params = {})
+    # @param [Hash] params ({})
+    def start_domain_verification(params = {}, options = {})
+      req = build_request(:start_domain_verification, params)
       req.send_request(options)
     end
 
@@ -4371,7 +4616,7 @@ module Aws::VPCLattice
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-vpclattice'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

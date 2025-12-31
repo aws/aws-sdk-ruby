@@ -87,6 +87,149 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class CallbackDetails
+      attr_accessor callback_id: ::String
+      attr_accessor result: ::String
+      attr_accessor error: Types::ErrorObject
+      SENSITIVE: [:result]
+    end
+
+    class CallbackFailedDetails
+      attr_accessor error: Types::EventError
+      SENSITIVE: []
+    end
+
+    class CallbackOptions
+      attr_accessor timeout_seconds: ::Integer
+      attr_accessor heartbeat_timeout_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class CallbackStartedDetails
+      attr_accessor callback_id: ::String
+      attr_accessor heartbeat_timeout: ::Integer
+      attr_accessor timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class CallbackSucceededDetails
+      attr_accessor result: Types::EventResult
+      SENSITIVE: []
+    end
+
+    class CallbackTimedOutDetails
+      attr_accessor error: Types::EventError
+      SENSITIVE: []
+    end
+
+    class CallbackTimeoutException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CapacityProvider
+      attr_accessor capacity_provider_arn: ::String
+      attr_accessor state: ("Pending" | "Active" | "Failed" | "Deleting")
+      attr_accessor vpc_config: Types::CapacityProviderVpcConfig
+      attr_accessor permissions_config: Types::CapacityProviderPermissionsConfig
+      attr_accessor instance_requirements: Types::InstanceRequirements
+      attr_accessor capacity_provider_scaling_config: Types::CapacityProviderScalingConfig
+      attr_accessor kms_key_arn: ::String
+      attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class CapacityProviderConfig
+      attr_accessor lambda_managed_instances_capacity_provider_config: Types::LambdaManagedInstancesCapacityProviderConfig
+      SENSITIVE: []
+    end
+
+    class CapacityProviderLimitExceededException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CapacityProviderPermissionsConfig
+      attr_accessor capacity_provider_operator_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CapacityProviderScalingConfig
+      attr_accessor max_v_cpu_count: ::Integer
+      attr_accessor scaling_mode: ("Auto" | "Manual")
+      attr_accessor scaling_policies: ::Array[Types::TargetTrackingScalingPolicy]
+      SENSITIVE: []
+    end
+
+    class CapacityProviderVpcConfig
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ChainedInvokeDetails
+      attr_accessor result: ::String
+      attr_accessor error: Types::ErrorObject
+      SENSITIVE: [:result]
+    end
+
+    class ChainedInvokeFailedDetails
+      attr_accessor error: Types::EventError
+      SENSITIVE: []
+    end
+
+    class ChainedInvokeOptions
+      attr_accessor function_name: ::String
+      attr_accessor tenant_id: ::String
+      SENSITIVE: []
+    end
+
+    class ChainedInvokeStartedDetails
+      attr_accessor function_name: ::String
+      attr_accessor tenant_id: ::String
+      attr_accessor input: Types::EventInput
+      attr_accessor executed_version: ::String
+      attr_accessor durable_execution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ChainedInvokeStoppedDetails
+      attr_accessor error: Types::EventError
+      SENSITIVE: []
+    end
+
+    class ChainedInvokeSucceededDetails
+      attr_accessor result: Types::EventResult
+      SENSITIVE: []
+    end
+
+    class ChainedInvokeTimedOutDetails
+      attr_accessor error: Types::EventError
+      SENSITIVE: []
+    end
+
+    class CheckpointDurableExecutionRequest
+      attr_accessor durable_execution_arn: ::String
+      attr_accessor checkpoint_token: ::String
+      attr_accessor updates: ::Array[Types::OperationUpdate]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CheckpointDurableExecutionResponse
+      attr_accessor checkpoint_token: ::String
+      attr_accessor new_execution_state: Types::CheckpointUpdatedExecutionState
+      SENSITIVE: []
+    end
+
+    class CheckpointUpdatedExecutionState
+      attr_accessor operations: ::Array[Types::Operation]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
     class CodeSigningConfig
       attr_accessor code_signing_config_id: ::String
       attr_accessor code_signing_config_arn: ::String
@@ -125,6 +268,31 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class ContextDetails
+      attr_accessor replay_children: bool
+      attr_accessor result: ::String
+      attr_accessor error: Types::ErrorObject
+      SENSITIVE: [:result]
+    end
+
+    class ContextFailedDetails
+      attr_accessor error: Types::EventError
+      SENSITIVE: []
+    end
+
+    class ContextOptions
+      attr_accessor replay_children: bool
+      SENSITIVE: []
+    end
+
+    class ContextStartedDetails < Aws::EmptyStructure
+    end
+
+    class ContextSucceededDetails
+      attr_accessor result: Types::EventResult
+      SENSITIVE: []
+    end
+
     class Cors
       attr_accessor allow_credentials: bool
       attr_accessor allow_headers: ::Array[::String]
@@ -141,6 +309,22 @@ module Aws::Lambda
       attr_accessor function_version: ::String
       attr_accessor description: ::String
       attr_accessor routing_config: Types::AliasRoutingConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateCapacityProviderRequest
+      attr_accessor capacity_provider_name: ::String
+      attr_accessor vpc_config: Types::CapacityProviderVpcConfig
+      attr_accessor permissions_config: Types::CapacityProviderPermissionsConfig
+      attr_accessor instance_requirements: Types::InstanceRequirements
+      attr_accessor capacity_provider_scaling_config: Types::CapacityProviderScalingConfig
+      attr_accessor kms_key_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateCapacityProviderResponse
+      attr_accessor capacity_provider: Types::CapacityProvider
       SENSITIVE: []
     end
 
@@ -190,7 +374,7 @@ module Aws::Lambda
 
     class CreateFunctionRequest
       attr_accessor function_name: ::String
-      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x")
+      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25" | "dotnet10")
       attr_accessor role: ::String
       attr_accessor handler: ::String
       attr_accessor code: Types::FunctionCode
@@ -213,6 +397,10 @@ module Aws::Lambda
       attr_accessor ephemeral_storage: Types::EphemeralStorage
       attr_accessor snap_start: Types::SnapStart
       attr_accessor logging_config: Types::LoggingConfig
+      attr_accessor capacity_provider_config: Types::CapacityProviderConfig
+      attr_accessor publish_to: ("LATEST_PUBLISHED")
+      attr_accessor durable_config: Types::DurableConfig
+      attr_accessor tenancy_config: Types::TenancyConfig
       SENSITIVE: []
     end
 
@@ -243,6 +431,16 @@ module Aws::Lambda
     class DeleteAliasRequest
       attr_accessor function_name: ::String
       attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCapacityProviderRequest
+      attr_accessor capacity_provider_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCapacityProviderResponse
+      attr_accessor capacity_provider: Types::CapacityProvider
       SENSITIVE: []
     end
 
@@ -281,6 +479,11 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class DeleteFunctionResponse
+      attr_accessor status_code: ::Integer
+      SENSITIVE: []
+    end
+
     class DeleteFunctionUrlConfigRequest
       attr_accessor function_name: ::String
       attr_accessor qualifier: ::String
@@ -309,6 +512,18 @@ module Aws::Lambda
       attr_accessor database_name: ::String
       attr_accessor collection_name: ::String
       attr_accessor full_document: ("UpdateLookup" | "Default")
+      SENSITIVE: []
+    end
+
+    class DurableConfig
+      attr_accessor retention_period_in_days: ::Integer
+      attr_accessor execution_timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class DurableExecutionAlreadyStartedException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -383,6 +598,67 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class ErrorObject
+      attr_accessor error_message: ::String
+      attr_accessor error_type: ::String
+      attr_accessor error_data: ::String
+      attr_accessor stack_trace: ::Array[::String]
+      SENSITIVE: [:error_message, :error_type, :error_data]
+    end
+
+    class Event
+      attr_accessor event_type: ("ExecutionStarted" | "ExecutionSucceeded" | "ExecutionFailed" | "ExecutionTimedOut" | "ExecutionStopped" | "ContextStarted" | "ContextSucceeded" | "ContextFailed" | "WaitStarted" | "WaitSucceeded" | "WaitCancelled" | "StepStarted" | "StepSucceeded" | "StepFailed" | "ChainedInvokeStarted" | "ChainedInvokeSucceeded" | "ChainedInvokeFailed" | "ChainedInvokeTimedOut" | "ChainedInvokeStopped" | "CallbackStarted" | "CallbackSucceeded" | "CallbackFailed" | "CallbackTimedOut" | "InvocationCompleted")
+      attr_accessor sub_type: ::String
+      attr_accessor event_id: ::Integer
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor event_timestamp: ::Time
+      attr_accessor parent_id: ::String
+      attr_accessor execution_started_details: Types::ExecutionStartedDetails
+      attr_accessor execution_succeeded_details: Types::ExecutionSucceededDetails
+      attr_accessor execution_failed_details: Types::ExecutionFailedDetails
+      attr_accessor execution_timed_out_details: Types::ExecutionTimedOutDetails
+      attr_accessor execution_stopped_details: Types::ExecutionStoppedDetails
+      attr_accessor context_started_details: Types::ContextStartedDetails
+      attr_accessor context_succeeded_details: Types::ContextSucceededDetails
+      attr_accessor context_failed_details: Types::ContextFailedDetails
+      attr_accessor wait_started_details: Types::WaitStartedDetails
+      attr_accessor wait_succeeded_details: Types::WaitSucceededDetails
+      attr_accessor wait_cancelled_details: Types::WaitCancelledDetails
+      attr_accessor step_started_details: Types::StepStartedDetails
+      attr_accessor step_succeeded_details: Types::StepSucceededDetails
+      attr_accessor step_failed_details: Types::StepFailedDetails
+      attr_accessor chained_invoke_started_details: Types::ChainedInvokeStartedDetails
+      attr_accessor chained_invoke_succeeded_details: Types::ChainedInvokeSucceededDetails
+      attr_accessor chained_invoke_failed_details: Types::ChainedInvokeFailedDetails
+      attr_accessor chained_invoke_timed_out_details: Types::ChainedInvokeTimedOutDetails
+      attr_accessor chained_invoke_stopped_details: Types::ChainedInvokeStoppedDetails
+      attr_accessor callback_started_details: Types::CallbackStartedDetails
+      attr_accessor callback_succeeded_details: Types::CallbackSucceededDetails
+      attr_accessor callback_failed_details: Types::CallbackFailedDetails
+      attr_accessor callback_timed_out_details: Types::CallbackTimedOutDetails
+      attr_accessor invocation_completed_details: Types::InvocationCompletedDetails
+      SENSITIVE: []
+    end
+
+    class EventError
+      attr_accessor payload: Types::ErrorObject
+      attr_accessor truncated: bool
+      SENSITIVE: []
+    end
+
+    class EventInput
+      attr_accessor payload: ::String
+      attr_accessor truncated: bool
+      SENSITIVE: [:payload]
+    end
+
+    class EventResult
+      attr_accessor payload: ::String
+      attr_accessor truncated: bool
+      SENSITIVE: [:payload]
+    end
+
     class EventSourceMappingConfiguration
       attr_accessor uuid: ::String
       attr_accessor starting_position: ("TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP")
@@ -421,6 +697,47 @@ module Aws::Lambda
 
     class EventSourceMappingMetricsConfig
       attr_accessor metrics: ::Array[("EventCount")]
+      SENSITIVE: []
+    end
+
+    class Execution
+      attr_accessor durable_execution_arn: ::String
+      attr_accessor durable_execution_name: ::String
+      attr_accessor function_arn: ::String
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "STOPPED")
+      attr_accessor start_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ExecutionDetails
+      attr_accessor input_payload: ::String
+      SENSITIVE: [:input_payload]
+    end
+
+    class ExecutionFailedDetails
+      attr_accessor error: Types::EventError
+      SENSITIVE: []
+    end
+
+    class ExecutionStartedDetails
+      attr_accessor input: Types::EventInput
+      attr_accessor execution_timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExecutionStoppedDetails
+      attr_accessor error: Types::EventError
+      SENSITIVE: []
+    end
+
+    class ExecutionSucceededDetails
+      attr_accessor result: Types::EventResult
+      SENSITIVE: []
+    end
+
+    class ExecutionTimedOutDetails
+      attr_accessor error: Types::EventError
       SENSITIVE: []
     end
 
@@ -468,7 +785,7 @@ module Aws::Lambda
     class FunctionConfiguration
       attr_accessor function_name: ::String
       attr_accessor function_arn: ::String
-      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x")
+      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25" | "dotnet10")
       attr_accessor role: ::String
       attr_accessor handler: ::String
       attr_accessor code_size: ::Integer
@@ -486,12 +803,12 @@ module Aws::Lambda
       attr_accessor master_arn: ::String
       attr_accessor revision_id: ::String
       attr_accessor layers: ::Array[Types::Layer]
-      attr_accessor state: ("Pending" | "Active" | "Inactive" | "Failed")
+      attr_accessor state: ("Pending" | "Active" | "Inactive" | "Failed" | "Deactivating" | "Deactivated" | "ActiveNonInvocable" | "Deleting")
       attr_accessor state_reason: ::String
-      attr_accessor state_reason_code: ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+      attr_accessor state_reason_code: ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "DrainingDurableExecutions" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl")
       attr_accessor last_update_status: ("Successful" | "Failed" | "InProgress")
       attr_accessor last_update_status_reason: ::String
-      attr_accessor last_update_status_reason_code: ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+      attr_accessor last_update_status_reason_code: ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError" | "VcpuLimitExceeded" | "CapacityProviderScalingLimitExceeded" | "InsufficientCapacity" | "EC2RequestLimitExceeded" | "FunctionError.InitTimeout" | "FunctionError.RuntimeInitError" | "FunctionError.ExtensionInitError" | "FunctionError.InvalidEntryPoint" | "FunctionError.InvalidWorkingDirectory" | "FunctionError.PermissionDenied" | "FunctionError.TooManyExtensions" | "FunctionError.InitResourceExhausted" | "DisallowedByVpcEncryptionControl")
       attr_accessor file_system_configs: ::Array[Types::FileSystemConfig]
       attr_accessor package_type: ("Zip" | "Image")
       attr_accessor image_config_response: Types::ImageConfigResponse
@@ -502,6 +819,10 @@ module Aws::Lambda
       attr_accessor snap_start: Types::SnapStartResponse
       attr_accessor runtime_version_config: Types::RuntimeVersionConfig
       attr_accessor logging_config: Types::LoggingConfig
+      attr_accessor capacity_provider_config: Types::CapacityProviderConfig
+      attr_accessor config_sha_256: ::String
+      attr_accessor durable_config: Types::DurableConfig
+      attr_accessor tenancy_config: Types::TenancyConfig
       SENSITIVE: []
     end
 
@@ -514,6 +835,12 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class FunctionScalingConfig
+      attr_accessor min_execution_environments: ::Integer
+      attr_accessor max_execution_environments: ::Integer
+      SENSITIVE: []
+    end
+
     class FunctionUrlConfig
       attr_accessor function_url: ::String
       attr_accessor function_arn: ::String
@@ -522,6 +849,18 @@ module Aws::Lambda
       attr_accessor cors: Types::Cors
       attr_accessor auth_type: ("NONE" | "AWS_IAM")
       attr_accessor invoke_mode: ("BUFFERED" | "RESPONSE_STREAM")
+      SENSITIVE: []
+    end
+
+    class FunctionVersionsByCapacityProviderListItem
+      attr_accessor function_arn: ::String
+      attr_accessor state: ("Pending" | "Active" | "Inactive" | "Failed" | "Deactivating" | "Deactivated" | "ActiveNonInvocable" | "Deleting")
+      SENSITIVE: []
+    end
+
+    class FunctionVersionsPerCapacityProviderLimitExceededException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -540,6 +879,16 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class GetCapacityProviderRequest
+      attr_accessor capacity_provider_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCapacityProviderResponse
+      attr_accessor capacity_provider: Types::CapacityProvider
+      SENSITIVE: []
+    end
+
     class GetCodeSigningConfigRequest
       attr_accessor code_signing_config_arn: ::String
       SENSITIVE: []
@@ -547,6 +896,55 @@ module Aws::Lambda
 
     class GetCodeSigningConfigResponse
       attr_accessor code_signing_config: Types::CodeSigningConfig
+      SENSITIVE: []
+    end
+
+    class GetDurableExecutionHistoryRequest
+      attr_accessor durable_execution_arn: ::String
+      attr_accessor include_execution_data: bool
+      attr_accessor max_items: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor reverse_order: bool
+      SENSITIVE: []
+    end
+
+    class GetDurableExecutionHistoryResponse
+      attr_accessor events: ::Array[Types::Event]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class GetDurableExecutionRequest
+      attr_accessor durable_execution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDurableExecutionResponse
+      attr_accessor durable_execution_arn: ::String
+      attr_accessor durable_execution_name: ::String
+      attr_accessor function_arn: ::String
+      attr_accessor input_payload: ::String
+      attr_accessor result: ::String
+      attr_accessor error: Types::ErrorObject
+      attr_accessor start_timestamp: ::Time
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "STOPPED")
+      attr_accessor end_timestamp: ::Time
+      attr_accessor version: ::String
+      attr_accessor trace_header: Types::TraceHeader
+      SENSITIVE: [:input_payload, :result]
+    end
+
+    class GetDurableExecutionStateRequest
+      attr_accessor durable_execution_arn: ::String
+      attr_accessor checkpoint_token: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetDurableExecutionStateResponse
+      attr_accessor operations: ::Array[Types::Operation]
+      attr_accessor next_marker: ::String
       SENSITIVE: []
     end
 
@@ -613,6 +1011,19 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class GetFunctionScalingConfigRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionScalingConfigResponse
+      attr_accessor function_arn: ::String
+      attr_accessor applied_function_scaling_config: Types::FunctionScalingConfig
+      attr_accessor requested_function_scaling_config: Types::FunctionScalingConfig
+      SENSITIVE: []
+    end
+
     class GetFunctionUrlConfigRequest
       attr_accessor function_name: ::String
       attr_accessor qualifier: ::String
@@ -660,7 +1071,7 @@ module Aws::Lambda
       attr_accessor description: ::String
       attr_accessor created_date: ::Time
       attr_accessor version: ::Integer
-      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x")]
+      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25" | "dotnet10")]
       attr_accessor license_info: ::String
       attr_accessor compatible_architectures: ::Array[("x86_64" | "arm64")]
       SENSITIVE: []
@@ -726,6 +1137,13 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class InstanceRequirements
+      attr_accessor architectures: ::Array[("x86_64" | "arm64")]
+      attr_accessor allowed_instance_types: ::Array[::String]
+      attr_accessor excluded_instance_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class InvalidCodeSignatureException
       attr_accessor type: ::String
       attr_accessor message: ::String
@@ -768,13 +1186,23 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class InvocationCompletedDetails
+      attr_accessor start_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      attr_accessor request_id: ::String
+      attr_accessor error: Types::EventError
+      SENSITIVE: []
+    end
+
     class InvocationRequest
       attr_accessor function_name: ::String
       attr_accessor invocation_type: ("Event" | "RequestResponse" | "DryRun")
       attr_accessor log_type: ("None" | "Tail")
       attr_accessor client_context: ::String
+      attr_accessor durable_execution_name: ::String
       attr_accessor payload: ::String
       attr_accessor qualifier: ::String
+      attr_accessor tenant_id: ::String
       SENSITIVE: [:payload]
     end
 
@@ -784,6 +1212,7 @@ module Aws::Lambda
       attr_accessor log_result: ::String
       attr_accessor payload: ::String
       attr_accessor executed_version: ::String
+      attr_accessor durable_execution_arn: ::String
       SENSITIVE: [:payload]
     end
 
@@ -819,6 +1248,7 @@ module Aws::Lambda
       attr_accessor client_context: ::String
       attr_accessor qualifier: ::String
       attr_accessor payload: ::String
+      attr_accessor tenant_id: ::String
       SENSITIVE: [:payload]
     end
 
@@ -873,6 +1303,13 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class LambdaManagedInstancesCapacityProviderConfig
+      attr_accessor capacity_provider_arn: ::String
+      attr_accessor per_execution_environment_max_concurrency: ::Integer
+      attr_accessor execution_environment_memory_gi_b_per_v_cpu: ::Float
+      SENSITIVE: []
+    end
+
     class Layer
       attr_accessor arn: ::String
       attr_accessor code_size: ::Integer
@@ -903,7 +1340,7 @@ module Aws::Lambda
       attr_accessor version: ::Integer
       attr_accessor description: ::String
       attr_accessor created_date: ::Time
-      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x")]
+      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25" | "dotnet10")]
       attr_accessor license_info: ::String
       attr_accessor compatible_architectures: ::Array[("x86_64" | "arm64")]
       SENSITIVE: []
@@ -930,6 +1367,19 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class ListCapacityProvidersRequest
+      attr_accessor state: ("Pending" | "Active" | "Failed" | "Deleting")
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCapacityProvidersResponse
+      attr_accessor capacity_providers: ::Array[Types::CapacityProvider]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
     class ListCodeSigningConfigsRequest
       attr_accessor marker: ::String
       attr_accessor max_items: ::Integer
@@ -939,6 +1389,25 @@ module Aws::Lambda
     class ListCodeSigningConfigsResponse
       attr_accessor next_marker: ::String
       attr_accessor code_signing_configs: ::Array[Types::CodeSigningConfig]
+      SENSITIVE: []
+    end
+
+    class ListDurableExecutionsByFunctionRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      attr_accessor durable_execution_name: ::String
+      attr_accessor statuses: ::Array[("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "STOPPED")]
+      attr_accessor started_after: ::Time
+      attr_accessor started_before: ::Time
+      attr_accessor reverse_order: bool
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDurableExecutionsByFunctionResponse
+      attr_accessor durable_executions: ::Array[Types::Execution]
+      attr_accessor next_marker: ::String
       SENSITIVE: []
     end
 
@@ -982,6 +1451,20 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class ListFunctionVersionsByCapacityProviderRequest
+      attr_accessor capacity_provider_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFunctionVersionsByCapacityProviderResponse
+      attr_accessor capacity_provider_arn: ::String
+      attr_accessor function_versions: ::Array[Types::FunctionVersionsByCapacityProviderListItem]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
     class ListFunctionsByCodeSigningConfigRequest
       attr_accessor code_signing_config_arn: ::String
       attr_accessor marker: ::String
@@ -1010,7 +1493,7 @@ module Aws::Lambda
     end
 
     class ListLayerVersionsRequest
-      attr_accessor compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x")
+      attr_accessor compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25" | "dotnet10")
       attr_accessor layer_name: ::String
       attr_accessor marker: ::String
       attr_accessor max_items: ::Integer
@@ -1025,7 +1508,7 @@ module Aws::Lambda
     end
 
     class ListLayersRequest
-      attr_accessor compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x")
+      attr_accessor compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25" | "dotnet10")
       attr_accessor marker: ::String
       attr_accessor max_items: ::Integer
       attr_accessor compatible_architecture: ("x86_64" | "arm64")
@@ -1082,6 +1565,12 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class NoPublishedVersionException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class OnFailure
       attr_accessor destination: ::String
       SENSITIVE: []
@@ -1090,6 +1579,41 @@ module Aws::Lambda
     class OnSuccess
       attr_accessor destination: ::String
       SENSITIVE: []
+    end
+
+    class Operation
+      attr_accessor id: ::String
+      attr_accessor parent_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("EXECUTION" | "CONTEXT" | "STEP" | "WAIT" | "CALLBACK" | "CHAINED_INVOKE")
+      attr_accessor sub_type: ::String
+      attr_accessor start_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      attr_accessor status: ("STARTED" | "PENDING" | "READY" | "SUCCEEDED" | "FAILED" | "CANCELLED" | "TIMED_OUT" | "STOPPED")
+      attr_accessor execution_details: Types::ExecutionDetails
+      attr_accessor context_details: Types::ContextDetails
+      attr_accessor step_details: Types::StepDetails
+      attr_accessor wait_details: Types::WaitDetails
+      attr_accessor callback_details: Types::CallbackDetails
+      attr_accessor chained_invoke_details: Types::ChainedInvokeDetails
+      SENSITIVE: []
+    end
+
+    class OperationUpdate
+      attr_accessor id: ::String
+      attr_accessor parent_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("EXECUTION" | "CONTEXT" | "STEP" | "WAIT" | "CALLBACK" | "CHAINED_INVOKE")
+      attr_accessor sub_type: ::String
+      attr_accessor action: ("START" | "SUCCEED" | "FAIL" | "RETRY" | "CANCEL")
+      attr_accessor payload: ::String
+      attr_accessor error: Types::ErrorObject
+      attr_accessor context_options: Types::ContextOptions
+      attr_accessor step_options: Types::StepOptions
+      attr_accessor wait_options: Types::WaitOptions
+      attr_accessor callback_options: Types::CallbackOptions
+      attr_accessor chained_invoke_options: Types::ChainedInvokeOptions
+      SENSITIVE: [:payload]
     end
 
     class PolicyLengthExceededException
@@ -1124,6 +1648,7 @@ module Aws::Lambda
     class ProvisionedPollerConfig
       attr_accessor minimum_pollers: ::Integer
       attr_accessor maximum_pollers: ::Integer
+      attr_accessor poller_group_name: ::String
       SENSITIVE: []
     end
 
@@ -1131,7 +1656,7 @@ module Aws::Lambda
       attr_accessor layer_name: ::String
       attr_accessor description: ::String
       attr_accessor content: Types::LayerVersionContentInput
-      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x")]
+      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25" | "dotnet10")]
       attr_accessor license_info: ::String
       attr_accessor compatible_architectures: ::Array[("x86_64" | "arm64")]
       SENSITIVE: []
@@ -1144,7 +1669,7 @@ module Aws::Lambda
       attr_accessor description: ::String
       attr_accessor created_date: ::Time
       attr_accessor version: ::Integer
-      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x")]
+      attr_accessor compatible_runtimes: ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25" | "dotnet10")]
       attr_accessor license_info: ::String
       attr_accessor compatible_architectures: ::Array[("x86_64" | "arm64")]
       SENSITIVE: []
@@ -1155,6 +1680,7 @@ module Aws::Lambda
       attr_accessor code_sha_256: ::String
       attr_accessor description: ::String
       attr_accessor revision_id: ::String
+      attr_accessor publish_to: ("LATEST_PUBLISHED")
       SENSITIVE: []
     end
 
@@ -1193,6 +1719,18 @@ module Aws::Lambda
 
     class PutFunctionRecursionConfigResponse
       attr_accessor recursive_loop: ("Allow" | "Terminate")
+      SENSITIVE: []
+    end
+
+    class PutFunctionScalingConfigRequest
+      attr_accessor function_name: ::String
+      attr_accessor qualifier: ::String
+      attr_accessor function_scaling_config: Types::FunctionScalingConfig
+      SENSITIVE: []
+    end
+
+    class PutFunctionScalingConfigResponse
+      attr_accessor function_state: ("Pending" | "Active" | "Inactive" | "Failed" | "Deactivating" | "Deactivated" | "ActiveNonInvocable" | "Deleting")
       SENSITIVE: []
     end
 
@@ -1280,6 +1818,12 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class RetryDetails
+      attr_accessor current_attempt: ::Integer
+      attr_accessor next_attempt_delay_seconds: ::Integer
+      SENSITIVE: []
+    end
+
     class RuntimeVersionConfig
       attr_accessor runtime_version_arn: ::String
       attr_accessor error: Types::RuntimeVersionError
@@ -1305,6 +1849,38 @@ module Aws::Lambda
     class SelfManagedKafkaEventSourceConfig
       attr_accessor consumer_group_id: ::String
       attr_accessor schema_registry_config: Types::KafkaSchemaRegistryConfig
+      SENSITIVE: []
+    end
+
+    class SendDurableExecutionCallbackFailureRequest
+      attr_accessor callback_id: ::String
+      attr_accessor error: Types::ErrorObject
+      SENSITIVE: []
+    end
+
+    class SendDurableExecutionCallbackFailureResponse < Aws::EmptyStructure
+    end
+
+    class SendDurableExecutionCallbackHeartbeatRequest
+      attr_accessor callback_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendDurableExecutionCallbackHeartbeatResponse < Aws::EmptyStructure
+    end
+
+    class SendDurableExecutionCallbackSuccessRequest
+      attr_accessor callback_id: ::String
+      attr_accessor result: ::String
+      SENSITIVE: [:result]
+    end
+
+    class SendDurableExecutionCallbackSuccessResponse < Aws::EmptyStructure
+    end
+
+    class SerializedRequestEntityTooLargeException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -1349,6 +1925,45 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class StepDetails
+      attr_accessor attempt: ::Integer
+      attr_accessor next_attempt_timestamp: ::Time
+      attr_accessor result: ::String
+      attr_accessor error: Types::ErrorObject
+      SENSITIVE: [:result]
+    end
+
+    class StepFailedDetails
+      attr_accessor error: Types::EventError
+      attr_accessor retry_details: Types::RetryDetails
+      SENSITIVE: []
+    end
+
+    class StepOptions
+      attr_accessor next_attempt_delay_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class StepStartedDetails < Aws::EmptyStructure
+    end
+
+    class StepSucceededDetails
+      attr_accessor result: Types::EventResult
+      attr_accessor retry_details: Types::RetryDetails
+      SENSITIVE: []
+    end
+
+    class StopDurableExecutionRequest
+      attr_accessor durable_execution_arn: ::String
+      attr_accessor error: Types::ErrorObject
+      SENSITIVE: []
+    end
+
+    class StopDurableExecutionResponse
+      attr_accessor stop_timestamp: ::Time
+      SENSITIVE: []
+    end
+
     class SubnetIPAddressLimitReachedException
       attr_accessor type: ::String
       attr_accessor message: ::String
@@ -1367,11 +1982,27 @@ module Aws::Lambda
       SENSITIVE: []
     end
 
+    class TargetTrackingScalingPolicy
+      attr_accessor predefined_metric_type: ("LambdaCapacityProviderAverageCPUUtilization")
+      attr_accessor target_value: ::Float
+      SENSITIVE: []
+    end
+
+    class TenancyConfig
+      attr_accessor tenant_isolation_mode: ("PER_TENANT")
+      SENSITIVE: []
+    end
+
     class TooManyRequestsException
       attr_accessor retry_after_seconds: ::String
       attr_accessor type: ::String
       attr_accessor message: ::String
       attr_accessor reason: ("ConcurrentInvocationLimitExceeded" | "FunctionInvocationRateLimitExceeded" | "ReservedFunctionConcurrentInvocationLimitExceeded" | "ReservedFunctionInvocationRateLimitExceeded" | "CallerRateLimitExceeded" | "ConcurrentSnapshotCreateLimitExceeded")
+      SENSITIVE: []
+    end
+
+    class TraceHeader
+      attr_accessor x_amzn_trace_id: ::String
       SENSITIVE: []
     end
 
@@ -1404,6 +2035,17 @@ module Aws::Lambda
       attr_accessor description: ::String
       attr_accessor routing_config: Types::AliasRoutingConfiguration
       attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCapacityProviderRequest
+      attr_accessor capacity_provider_name: ::String
+      attr_accessor capacity_provider_scaling_config: Types::CapacityProviderScalingConfig
+      SENSITIVE: []
+    end
+
+    class UpdateCapacityProviderResponse
+      attr_accessor capacity_provider: Types::CapacityProvider
       SENSITIVE: []
     end
 
@@ -1457,6 +2099,7 @@ module Aws::Lambda
       attr_accessor revision_id: ::String
       attr_accessor architectures: ::Array[("x86_64" | "arm64")]
       attr_accessor source_kms_key_arn: ::String
+      attr_accessor publish_to: ("LATEST_PUBLISHED")
       SENSITIVE: [:zip_file]
     end
 
@@ -1469,7 +2112,7 @@ module Aws::Lambda
       attr_accessor memory_size: ::Integer
       attr_accessor vpc_config: Types::VpcConfig
       attr_accessor environment: Types::Environment
-      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x")
+      attr_accessor runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "dotnet8" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "ruby3.3" | "ruby3.4" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21" | "python3.13" | "nodejs22.x" | "nodejs24.x" | "python3.14" | "java25" | "dotnet10")
       attr_accessor dead_letter_config: Types::DeadLetterConfig
       attr_accessor kms_key_arn: ::String
       attr_accessor tracing_config: Types::TracingConfig
@@ -1480,6 +2123,8 @@ module Aws::Lambda
       attr_accessor ephemeral_storage: Types::EphemeralStorage
       attr_accessor snap_start: Types::SnapStart
       attr_accessor logging_config: Types::LoggingConfig
+      attr_accessor capacity_provider_config: Types::CapacityProviderConfig
+      attr_accessor durable_config: Types::DurableConfig
       SENSITIVE: []
     end
 
@@ -1524,6 +2169,32 @@ module Aws::Lambda
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor vpc_id: ::String
       attr_accessor ipv_6_allowed_for_dual_stack: bool
+      SENSITIVE: []
+    end
+
+    class WaitCancelledDetails
+      attr_accessor error: Types::EventError
+      SENSITIVE: []
+    end
+
+    class WaitDetails
+      attr_accessor scheduled_end_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class WaitOptions
+      attr_accessor wait_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class WaitStartedDetails
+      attr_accessor duration: ::Integer
+      attr_accessor scheduled_end_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class WaitSucceededDetails
+      attr_accessor duration: ::Integer
       SENSITIVE: []
     end
 

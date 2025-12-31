@@ -729,6 +729,22 @@ module Aws::DeviceFarm
     # @option params [Types::VpcConfig] :vpc_config
     #   The VPC security groups and subnets that are attached to a project.
     #
+    # @option params [Array<Types::EnvironmentVariable>] :environment_variables
+    #   A set of environment variables which are used by default for all runs
+    #   in the project. These environment variables are applied to the test
+    #   run during the execution of a test spec file.
+    #
+    #   For more information about using test spec files, please see [Custom
+    #   test environments ][1] in *AWS Device Farm.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/custom-test-environments.html
+    #
+    # @option params [String] :execution_role_arn
+    #   An IAM role to be assumed by the test host for all runs in the
+    #   project.
+    #
     # @return [Types::CreateProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProjectResult#project #project} => Types::Project
@@ -761,6 +777,13 @@ module Aws::DeviceFarm
     #       subnet_ids: ["SubnetId"], # required
     #       vpc_id: "NonEmptyString", # required
     #     },
+    #     environment_variables: [
+    #       {
+    #         name: "EnvironmentVariableName", # required
+    #         value: "EnvironmentVariableValue", # required
+    #       },
+    #     ],
+    #     execution_role_arn: "AmazonRoleResourceName",
     #   })
     #
     # @example Response structure
@@ -774,6 +797,10 @@ module Aws::DeviceFarm
     #   resp.project.vpc_config.subnet_ids #=> Array
     #   resp.project.vpc_config.subnet_ids[0] #=> String
     #   resp.project.vpc_config.vpc_id #=> String
+    #   resp.project.environment_variables #=> Array
+    #   resp.project.environment_variables[0].name #=> String
+    #   resp.project.environment_variables[0].value #=> String
+    #   resp.project.execution_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateProject AWS API Documentation
     #
@@ -794,71 +821,23 @@ module Aws::DeviceFarm
     #   The ARN of the device for which you want to create a remote access
     #   session.
     #
+    # @option params [String] :app_arn
+    #   The Amazon Resource Name (ARN) of the app to create the remote access
+    #   session.
+    #
     # @option params [String] :instance_arn
     #   The Amazon Resource Name (ARN) of the device instance for which you
     #   want to create a remote access session.
     #
-    # @option params [String] :ssh_public_key
-    #   Ignored. The public key of the `ssh` key pair you want to use for
-    #   connecting to remote devices in your remote debugging session. This
-    #   key is required only if `remoteDebugEnabled` is set to `true`.
-    #
-    #   Remote debugging is [no longer supported][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
-    #
-    # @option params [Boolean] :remote_debug_enabled
-    #   Set to `true` if you want to access devices remotely for debugging in
-    #   your remote access session.
-    #
-    #   Remote debugging is [no longer supported][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
-    #
-    # @option params [Boolean] :remote_record_enabled
-    #   Set to `true` to enable remote recording for the remote access
-    #   session.
-    #
-    # @option params [String] :remote_record_app_arn
-    #   The Amazon Resource Name (ARN) for the app to be recorded in the
-    #   remote access session.
-    #
     # @option params [String] :name
     #   The name of the remote access session to create.
-    #
-    # @option params [String] :client_id
-    #   Unique identifier for the client. If you want access to multiple
-    #   devices on the same client, you should pass the same `clientId` value
-    #   in each call to `CreateRemoteAccessSession`. This identifier is
-    #   required only if `remoteDebugEnabled` is set to `true`.
-    #
-    #   Remote debugging is [no longer supported][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
     #
     # @option params [Types::CreateRemoteAccessSessionConfiguration] :configuration
     #   The configuration information for the remote access session request.
     #
     # @option params [String] :interaction_mode
-    #   The interaction mode of the remote access session. Valid values are:
-    #
-    #   * INTERACTIVE: You can interact with the iOS device by viewing,
-    #     touching, and rotating the screen. You cannot run XCUITest
-    #     framework-based tests in this mode.
-    #
-    #   * NO\_VIDEO: You are connected to the device, but cannot interact with
-    #     it or view the screen. This mode has the fastest test execution
-    #     speed. You can run XCUITest framework-based tests in this mode.
-    #
-    #   * VIDEO\_ONLY: You can view the screen, but cannot touch or rotate it.
-    #     You can run XCUITest framework-based tests and watch the screen in
-    #     this mode.
+    #   The interaction mode of the remote access session. Changing the
+    #   interactive mode of remote access sessions is no longer available.
     #
     # @option params [Boolean] :skip_app_resign
     #   When set to `true`, for private devices, Device Farm does not sign
@@ -901,14 +880,11 @@ module Aws::DeviceFarm
     #   resp = client.create_remote_access_session({
     #     project_arn: "AmazonResourceName", # required
     #     device_arn: "AmazonResourceName", # required
+    #     app_arn: "AmazonResourceName",
     #     instance_arn: "AmazonResourceName",
-    #     ssh_public_key: "SshPublicKey",
-    #     remote_debug_enabled: false,
-    #     remote_record_enabled: false,
-    #     remote_record_app_arn: "AmazonResourceName",
     #     name: "Name",
-    #     client_id: "ClientId",
     #     configuration: {
+    #       auxiliary_apps: ["AmazonResourceName"],
     #       billing_method: "METERED", # accepts METERED, UNMETERED
     #       vpce_configuration_arns: ["AmazonResourceName"],
     #       device_proxy: {
@@ -968,11 +944,6 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.instances[0].instance_profile.description #=> String
     #   resp.remote_access_session.device.availability #=> String, one of "TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"
     #   resp.remote_access_session.instance_arn #=> String
-    #   resp.remote_access_session.remote_debug_enabled #=> Boolean
-    #   resp.remote_access_session.remote_record_enabled #=> Boolean
-    #   resp.remote_access_session.remote_record_app_arn #=> String
-    #   resp.remote_access_session.host_address #=> String
-    #   resp.remote_access_session.client_id #=> String
     #   resp.remote_access_session.billing_method #=> String, one of "METERED", "UNMETERED"
     #   resp.remote_access_session.device_minutes.total #=> Float
     #   resp.remote_access_session.device_minutes.metered #=> Float
@@ -988,6 +959,9 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.vpc_config.vpc_id #=> String
     #   resp.remote_access_session.device_proxy.host #=> String
     #   resp.remote_access_session.device_proxy.port #=> Integer
+    #   resp.remote_access_session.app_upload #=> String
+    #   resp.remote_access_session.endpoints.remote_driver_endpoint #=> String
+    #   resp.remote_access_session.endpoints.interactive_endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSession AWS API Documentation
     #
@@ -1354,9 +1328,10 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
-    # Deletes an AWS Device Farm project, given the project ARN.
+    # Deletes an AWS Device Farm project, given the project ARN. You cannot
+    # delete a project if it has an active run or session.
     #
-    # Deleting this resource does not stop an in-progress run.
+    # You cannot undo this operation.
     #
     # @option params [required, String] :arn
     #   Represents the Amazon Resource Name (ARN) of the Device Farm project
@@ -1392,7 +1367,10 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
-    # Deletes a completed remote access session and its results.
+    # Deletes a completed remote access session and its results. You cannot
+    # delete a remote access session if it is still active.
+    #
+    # You cannot undo this operation.
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the session for which you want to
@@ -1428,9 +1406,10 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
-    # Deletes the run, given the run ARN.
+    # Deletes the run, given the run ARN. You cannot delete a run if it is
+    # still active.
     #
-    # Deleting this resource does not stop an in-progress run.
+    # You cannot undo this operation.
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) for the run to delete.
@@ -1466,12 +1445,9 @@ module Aws::DeviceFarm
     end
 
     # Deletes a Selenium testing project and all content generated under it.
+    # You cannot delete a project if it has active sessions.
     #
     # You cannot undo this operation.
-    #
-    # <note markdown="1"> You cannot delete a project if it has active sessions.
-    #
-    #  </note>
     #
     # @option params [required, String] :project_arn
     #   The ARN of the project to delete, from CreateTestGridProject or
@@ -1911,6 +1887,13 @@ module Aws::DeviceFarm
     #       },
     #       auxiliary_apps: ["AmazonResourceName"],
     #       billing_method: "METERED", # accepts METERED, UNMETERED
+    #       environment_variables: [
+    #         {
+    #           name: "EnvironmentVariableName", # required
+    #           value: "EnvironmentVariableValue", # required
+    #         },
+    #       ],
+    #       execution_role_arn: "AmazonRoleResourceName",
     #     },
     #     project_arn: "AmazonResourceName",
     #   })
@@ -2329,6 +2312,10 @@ module Aws::DeviceFarm
     #   resp.project.vpc_config.subnet_ids #=> Array
     #   resp.project.vpc_config.subnet_ids[0] #=> String
     #   resp.project.vpc_config.vpc_id #=> String
+    #   resp.project.environment_variables #=> Array
+    #   resp.project.environment_variables[0].name #=> String
+    #   resp.project.environment_variables[0].value #=> String
+    #   resp.project.execution_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetProject AWS API Documentation
     #
@@ -2418,11 +2405,6 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.instances[0].instance_profile.description #=> String
     #   resp.remote_access_session.device.availability #=> String, one of "TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"
     #   resp.remote_access_session.instance_arn #=> String
-    #   resp.remote_access_session.remote_debug_enabled #=> Boolean
-    #   resp.remote_access_session.remote_record_enabled #=> Boolean
-    #   resp.remote_access_session.remote_record_app_arn #=> String
-    #   resp.remote_access_session.host_address #=> String
-    #   resp.remote_access_session.client_id #=> String
     #   resp.remote_access_session.billing_method #=> String, one of "METERED", "UNMETERED"
     #   resp.remote_access_session.device_minutes.total #=> Float
     #   resp.remote_access_session.device_minutes.metered #=> Float
@@ -2438,6 +2420,9 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.vpc_config.vpc_id #=> String
     #   resp.remote_access_session.device_proxy.host #=> String
     #   resp.remote_access_session.device_proxy.port #=> Integer
+    #   resp.remote_access_session.app_upload #=> String
+    #   resp.remote_access_session.endpoints.remote_driver_endpoint #=> String
+    #   resp.remote_access_session.endpoints.interactive_endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRemoteAccessSession AWS API Documentation
     #
@@ -2575,6 +2560,10 @@ module Aws::DeviceFarm
     #   resp.run.vpc_config.subnet_ids #=> Array
     #   resp.run.vpc_config.subnet_ids[0] #=> String
     #   resp.run.vpc_config.vpc_id #=> String
+    #   resp.run.execution_role_arn #=> String
+    #   resp.run.environment_variables #=> Array
+    #   resp.run.environment_variables[0].name #=> String
+    #   resp.run.environment_variables[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRun AWS API Documentation
     #
@@ -3895,6 +3884,10 @@ module Aws::DeviceFarm
     #   resp.projects[0].vpc_config.subnet_ids #=> Array
     #   resp.projects[0].vpc_config.subnet_ids[0] #=> String
     #   resp.projects[0].vpc_config.vpc_id #=> String
+    #   resp.projects[0].environment_variables #=> Array
+    #   resp.projects[0].environment_variables[0].name #=> String
+    #   resp.projects[0].environment_variables[0].value #=> String
+    #   resp.projects[0].execution_role_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListProjects AWS API Documentation
@@ -3994,11 +3987,6 @@ module Aws::DeviceFarm
     #   resp.remote_access_sessions[0].device.instances[0].instance_profile.description #=> String
     #   resp.remote_access_sessions[0].device.availability #=> String, one of "TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"
     #   resp.remote_access_sessions[0].instance_arn #=> String
-    #   resp.remote_access_sessions[0].remote_debug_enabled #=> Boolean
-    #   resp.remote_access_sessions[0].remote_record_enabled #=> Boolean
-    #   resp.remote_access_sessions[0].remote_record_app_arn #=> String
-    #   resp.remote_access_sessions[0].host_address #=> String
-    #   resp.remote_access_sessions[0].client_id #=> String
     #   resp.remote_access_sessions[0].billing_method #=> String, one of "METERED", "UNMETERED"
     #   resp.remote_access_sessions[0].device_minutes.total #=> Float
     #   resp.remote_access_sessions[0].device_minutes.metered #=> Float
@@ -4014,6 +4002,9 @@ module Aws::DeviceFarm
     #   resp.remote_access_sessions[0].vpc_config.vpc_id #=> String
     #   resp.remote_access_sessions[0].device_proxy.host #=> String
     #   resp.remote_access_sessions[0].device_proxy.port #=> Integer
+    #   resp.remote_access_sessions[0].app_upload #=> String
+    #   resp.remote_access_sessions[0].endpoints.remote_driver_endpoint #=> String
+    #   resp.remote_access_sessions[0].endpoints.interactive_endpoint #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRemoteAccessSessions AWS API Documentation
@@ -4166,6 +4157,10 @@ module Aws::DeviceFarm
     #   resp.runs[0].vpc_config.subnet_ids #=> Array
     #   resp.runs[0].vpc_config.subnet_ids[0] #=> String
     #   resp.runs[0].vpc_config.vpc_id #=> String
+    #   resp.runs[0].execution_role_arn #=> String
+    #   resp.runs[0].environment_variables #=> Array
+    #   resp.runs[0].environment_variables[0].name #=> String
+    #   resp.runs[0].environment_variables[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRuns AWS API Documentation
@@ -4312,9 +4307,9 @@ module Aws::DeviceFarm
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource or resources for which
     #   to list tags. You can associate tags with the following Device Farm
-    #   resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
-    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
-    #   `VPCE_CONFIGURATION`.
+    #   resources: `PROJECT`, `TESTGRID_PROJECT`, `RUN`, `NETWORK_PROFILE`,
+    #   `INSTANCE_PROFILE`, `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`,
+    #   `DEVICE`, and `VPCE_CONFIGURATION`.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5182,6 +5177,13 @@ module Aws::DeviceFarm
     #       },
     #       auxiliary_apps: ["AmazonResourceName"],
     #       billing_method: "METERED", # accepts METERED, UNMETERED
+    #       environment_variables: [
+    #         {
+    #           name: "EnvironmentVariableName", # required
+    #           value: "EnvironmentVariableValue", # required
+    #         },
+    #       ],
+    #       execution_role_arn: "AmazonRoleResourceName",
     #     },
     #     execution_configuration: {
     #       job_timeout_minutes: 1,
@@ -5266,6 +5268,10 @@ module Aws::DeviceFarm
     #   resp.run.vpc_config.subnet_ids #=> Array
     #   resp.run.vpc_config.subnet_ids[0] #=> String
     #   resp.run.vpc_config.vpc_id #=> String
+    #   resp.run.execution_role_arn #=> String
+    #   resp.run.environment_variables #=> Array
+    #   resp.run.environment_variables[0].name #=> String
+    #   resp.run.environment_variables[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRun AWS API Documentation
     #
@@ -5431,11 +5437,6 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.instances[0].instance_profile.description #=> String
     #   resp.remote_access_session.device.availability #=> String, one of "TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"
     #   resp.remote_access_session.instance_arn #=> String
-    #   resp.remote_access_session.remote_debug_enabled #=> Boolean
-    #   resp.remote_access_session.remote_record_enabled #=> Boolean
-    #   resp.remote_access_session.remote_record_app_arn #=> String
-    #   resp.remote_access_session.host_address #=> String
-    #   resp.remote_access_session.client_id #=> String
     #   resp.remote_access_session.billing_method #=> String, one of "METERED", "UNMETERED"
     #   resp.remote_access_session.device_minutes.total #=> Float
     #   resp.remote_access_session.device_minutes.metered #=> Float
@@ -5451,6 +5452,9 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.vpc_config.vpc_id #=> String
     #   resp.remote_access_session.device_proxy.host #=> String
     #   resp.remote_access_session.device_proxy.port #=> Integer
+    #   resp.remote_access_session.app_upload #=> String
+    #   resp.remote_access_session.endpoints.remote_driver_endpoint #=> String
+    #   resp.remote_access_session.endpoints.interactive_endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRemoteAccessSession AWS API Documentation
     #
@@ -5571,6 +5575,10 @@ module Aws::DeviceFarm
     #   resp.run.vpc_config.subnet_ids #=> Array
     #   resp.run.vpc_config.subnet_ids[0] #=> String
     #   resp.run.vpc_config.vpc_id #=> String
+    #   resp.run.execution_role_arn #=> String
+    #   resp.run.environment_variables #=> Array
+    #   resp.run.environment_variables[0].name #=> String
+    #   resp.run.environment_variables[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRun AWS API Documentation
     #
@@ -5589,9 +5597,9 @@ module Aws::DeviceFarm
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource or resources to which
     #   to add tags. You can associate tags with the following Device Farm
-    #   resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
-    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
-    #   `VPCE_CONFIGURATION`.
+    #   resources: `PROJECT`, `TESTGRID_PROJECT`, `RUN`, `NETWORK_PROFILE`,
+    #   `INSTANCE_PROFILE`, `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`,
+    #   `DEVICE`, and `VPCE_CONFIGURATION`.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The tags to add to the resource. A tag is an array of key-value pairs.
@@ -5626,9 +5634,9 @@ module Aws::DeviceFarm
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource or resources from which
     #   to delete tags. You can associate tags with the following Device Farm
-    #   resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
-    #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
-    #   `VPCE_CONFIGURATION`.
+    #   resources: `PROJECT`, `TESTGRID_PROJECT`, `RUN`, `NETWORK_PROFILE`,
+    #   `INSTANCE_PROFILE`, `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`,
+    #   `DEVICE`, and `VPCE_CONFIGURATION`.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The keys of the tags to be removed.
@@ -5983,6 +5991,22 @@ module Aws::DeviceFarm
     # @option params [Types::VpcConfig] :vpc_config
     #   The VPC security groups and subnets that are attached to a project.
     #
+    # @option params [Array<Types::EnvironmentVariable>] :environment_variables
+    #   A set of environment variables which are used by default for all runs
+    #   in the project. These environment variables are applied to the test
+    #   run during the execution of a test spec file.
+    #
+    #   For more information about using test spec files, please see [Custom
+    #   test environments ][1] in *AWS Device Farm.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/custom-test-environments.html
+    #
+    # @option params [String] :execution_role_arn
+    #   An IAM role to be assumed by the test host for all runs in the
+    #   project.
+    #
     # @return [Types::UpdateProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateProjectResult#project #project} => Types::Project
@@ -6017,6 +6041,13 @@ module Aws::DeviceFarm
     #       subnet_ids: ["SubnetId"], # required
     #       vpc_id: "NonEmptyString", # required
     #     },
+    #     environment_variables: [
+    #       {
+    #         name: "EnvironmentVariableName", # required
+    #         value: "EnvironmentVariableValue", # required
+    #       },
+    #     ],
+    #     execution_role_arn: "AmazonRoleResourceName",
     #   })
     #
     # @example Response structure
@@ -6030,6 +6061,10 @@ module Aws::DeviceFarm
     #   resp.project.vpc_config.subnet_ids #=> Array
     #   resp.project.vpc_config.subnet_ids[0] #=> String
     #   resp.project.vpc_config.vpc_id #=> String
+    #   resp.project.environment_variables #=> Array
+    #   resp.project.environment_variables[0].name #=> String
+    #   resp.project.environment_variables[0].value #=> String
+    #   resp.project.execution_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateProject AWS API Documentation
     #
@@ -6216,7 +6251,7 @@ module Aws::DeviceFarm
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

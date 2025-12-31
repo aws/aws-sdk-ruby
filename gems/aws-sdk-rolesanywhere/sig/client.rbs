@@ -84,20 +84,20 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#create_profile-instance_method
       def create_profile: (
-                            ?accept_role_session_name: bool,
-                            ?duration_seconds: ::Integer,
-                            ?enabled: bool,
-                            ?managed_policy_arns: Array[::String],
                             name: ::String,
                             ?require_instance_properties: bool,
-                            role_arns: Array[::String],
                             ?session_policy: ::String,
+                            role_arns: Array[::String],
+                            ?managed_policy_arns: Array[::String],
+                            ?duration_seconds: ::Integer,
+                            ?enabled: bool,
                             ?tags: Array[
                               {
                                 key: ::String,
                                 value: ::String
                               },
-                            ]
+                            ],
+                            ?accept_role_session_name: bool
                           ) -> _CreateProfileResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfileResponseSuccess
 
@@ -107,27 +107,27 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#create_trust_anchor-instance_method
       def create_trust_anchor: (
-                                 ?enabled: bool,
                                  name: ::String,
-                                 ?notification_settings: Array[
-                                   {
-                                     channel: ("ALL")?,
-                                     enabled: bool,
-                                     event: ("CA_CERTIFICATE_EXPIRY" | "END_ENTITY_CERTIFICATE_EXPIRY"),
-                                     threshold: ::Integer?
-                                   },
-                                 ],
                                  source: {
+                                   source_type: ("AWS_ACM_PCA" | "CERTIFICATE_BUNDLE" | "SELF_SIGNED_REPOSITORY")?,
                                    source_data: {
-                                     acm_pca_arn: ::String?,
-                                     x509_certificate_data: ::String?
-                                   }?,
-                                   source_type: ("AWS_ACM_PCA" | "CERTIFICATE_BUNDLE" | "SELF_SIGNED_REPOSITORY")?
+                                     x509_certificate_data: ::String?,
+                                     acm_pca_arn: ::String?
+                                   }?
                                  },
+                                 ?enabled: bool,
                                  ?tags: Array[
                                    {
                                      key: ::String,
                                      value: ::String
+                                   },
+                                 ],
+                                 ?notification_settings: Array[
+                                   {
+                                     enabled: bool,
+                                     event: ("CA_CERTIFICATE_EXPIRY" | "END_ENTITY_CERTIFICATE_EXPIRY"),
+                                     threshold: ::Integer?,
+                                     channel: ("ALL")?
                                    },
                                  ]
                                ) -> _CreateTrustAnchorResponseSuccess
@@ -139,8 +139,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#delete_attribute_mapping-instance_method
       def delete_attribute_mapping: (
-                                      certificate_field: ("x509Subject" | "x509Issuer" | "x509SAN"),
                                       profile_id: ::String,
+                                      certificate_field: ("x509Subject" | "x509Issuer" | "x509SAN"),
                                       ?specifiers: Array[::String]
                                     ) -> _DeleteAttributeMappingResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAttributeMappingResponseSuccess
@@ -281,9 +281,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#import_crl-instance_method
       def import_crl: (
+                        name: ::String,
                         crl_data: ::String,
                         ?enabled: bool,
-                        name: ::String,
                         ?tags: Array[
                           {
                             key: ::String,
@@ -296,8 +296,8 @@ module Aws
 
       interface _ListCrlsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListCrlsResponse]
-        def crls: () -> ::Array[Types::CrlDetail]
         def next_token: () -> ::String
+        def crls: () -> ::Array[Types::CrlDetail]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#list_crls-instance_method
       def list_crls: (
@@ -320,8 +320,8 @@ module Aws
 
       interface _ListSubjectsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSubjectsResponse]
-        def next_token: () -> ::String
         def subjects: () -> ::Array[Types::SubjectSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#list_subjects-instance_method
       def list_subjects: (
@@ -358,13 +358,13 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#put_attribute_mapping-instance_method
       def put_attribute_mapping: (
+                                   profile_id: ::String,
                                    certificate_field: ("x509Subject" | "x509Issuer" | "x509SAN"),
                                    mapping_rules: Array[
                                      {
                                        specifier: ::String
                                      },
-                                   ],
-                                   profile_id: ::String
+                                   ]
                                  ) -> _PutAttributeMappingResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAttributeMappingResponseSuccess
 
@@ -374,15 +374,15 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#put_notification_settings-instance_method
       def put_notification_settings: (
+                                       trust_anchor_id: ::String,
                                        notification_settings: Array[
                                          {
-                                           channel: ("ALL")?,
                                            enabled: bool,
                                            event: ("CA_CERTIFICATE_EXPIRY" | "END_ENTITY_CERTIFICATE_EXPIRY"),
-                                           threshold: ::Integer?
+                                           threshold: ::Integer?,
+                                           channel: ("ALL")?
                                          },
-                                       ],
-                                       trust_anchor_id: ::String
+                                       ]
                                      ) -> _PutNotificationSettingsResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutNotificationSettingsResponseSuccess
 
@@ -392,13 +392,13 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#reset_notification_settings-instance_method
       def reset_notification_settings: (
+                                         trust_anchor_id: ::String,
                                          notification_setting_keys: Array[
                                            {
-                                             channel: ("ALL")?,
-                                             event: ("CA_CERTIFICATE_EXPIRY" | "END_ENTITY_CERTIFICATE_EXPIRY")
+                                             event: ("CA_CERTIFICATE_EXPIRY" | "END_ENTITY_CERTIFICATE_EXPIRY"),
+                                             channel: ("ALL")?
                                            },
-                                         ],
-                                         trust_anchor_id: ::String
+                                         ]
                                        ) -> _ResetNotificationSettingsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetNotificationSettingsResponseSuccess
 
@@ -433,9 +433,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#update_crl-instance_method
       def update_crl: (
-                        ?crl_data: ::String,
                         crl_id: ::String,
-                        ?name: ::String
+                        ?name: ::String,
+                        ?crl_data: ::String
                       ) -> _UpdateCrlResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCrlResponseSuccess
 
@@ -445,13 +445,13 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#update_profile-instance_method
       def update_profile: (
-                            ?accept_role_session_name: bool,
-                            ?duration_seconds: ::Integer,
-                            ?managed_policy_arns: Array[::String],
-                            ?name: ::String,
                             profile_id: ::String,
+                            ?name: ::String,
+                            ?session_policy: ::String,
                             ?role_arns: Array[::String],
-                            ?session_policy: ::String
+                            ?managed_policy_arns: Array[::String],
+                            ?duration_seconds: ::Integer,
+                            ?accept_role_session_name: bool
                           ) -> _UpdateProfileResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProfileResponseSuccess
 
@@ -461,15 +461,15 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RolesAnywhere/Client.html#update_trust_anchor-instance_method
       def update_trust_anchor: (
+                                 trust_anchor_id: ::String,
                                  ?name: ::String,
                                  ?source: {
+                                   source_type: ("AWS_ACM_PCA" | "CERTIFICATE_BUNDLE" | "SELF_SIGNED_REPOSITORY")?,
                                    source_data: {
-                                     acm_pca_arn: ::String?,
-                                     x509_certificate_data: ::String?
-                                   }?,
-                                   source_type: ("AWS_ACM_PCA" | "CERTIFICATE_BUNDLE" | "SELF_SIGNED_REPOSITORY")?
-                                 },
-                                 trust_anchor_id: ::String
+                                     x509_certificate_data: ::String?,
+                                     acm_pca_arn: ::String?
+                                   }?
+                                 }
                                ) -> _UpdateTrustAnchorResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTrustAnchorResponseSuccess
     end

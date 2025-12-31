@@ -28,9 +28,9 @@ module Aws
       end
       class ThrottlingException < ::Aws::Errors::ServiceError
         def message: () -> ::String
+        def service_code: () -> ::String
         def quota_code: () -> ::String
         def retry_after_seconds: () -> ::String
-        def service_code: () -> ::String
       end
       class ValidationException < ::Aws::Errors::ServiceError
         def message: () -> ::String

@@ -991,6 +991,20 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # This exception is thrown when the request was successful, but dry run
+    # was enabled so no action was taken.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/DryRunException AWS API Documentation
+    #
+    class DryRunException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The VPC endpoint object.
     #
     # @!attribute [rw] address
@@ -1223,6 +1237,53 @@ module Aws::RedshiftServerless
     #
     class GetEndpointAccessResponse < Struct.new(
       :endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workgroup_names
+    #   A list of workgroup names for which to generate the Identity Center
+    #   authentication token.
+    #
+    #   Constraints:
+    #
+    #   * Must contain between 1 and 20 workgroup names.
+    #
+    #   * Each workgroup name must be a valid Amazon Redshift Serverless
+    #     workgroup identifier.
+    #
+    #   * All specified workgroups must have Identity Center integration
+    #     enabled.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetIdentityCenterAuthTokenRequest AWS API Documentation
+    #
+    class GetIdentityCenterAuthTokenRequest < Struct.new(
+      :workgroup_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] expiration_time
+    #   The date and time when the Identity Center authentication token
+    #   expires.
+    #
+    #   After this time, a new token must be requested for continued access.
+    #   @return [Time]
+    #
+    # @!attribute [rw] token
+    #   The Identity Center authentication token that can be used to access
+    #   data in the specified workgroups.
+    #
+    #   This token contains the Identity Center identity information and is
+    #   encrypted for secure transmission.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetIdentityCenterAuthTokenResponse AWS API Documentation
+    #
+    class GetIdentityCenterAuthTokenResponse < Struct.new(
+      :expiration_time,
+      :token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1687,8 +1748,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     #
     # @!attribute [rw] source_arn
-    #   The Amazon Resource Name (ARN) for the managed workgroup in the AWS
-    #   Glue Data Catalog.
+    #   The Amazon Resource Name (ARN) for the managed workgroup in the Glue
+    #   Data Catalog.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/ListManagedWorkgroupsRequest AWS API Documentation
@@ -2282,7 +2343,7 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # A collection of Amazon Redshift compute resources managed by AWS Glue.
+    # A collection of Amazon Redshift compute resources managed by Glue.
     #
     # @!attribute [rw] creation_date
     #   The creation date of the managed workgroup.
@@ -2297,8 +2358,8 @@ module Aws::RedshiftServerless
     #   @return [String]
     #
     # @!attribute [rw] source_arn
-    #   The Amazon Resource Name (ARN) for the managed workgroup in the AWS
-    #   Glue Data Catalog.
+    #   The Amazon Resource Name (ARN) for the managed workgroup in the Glue
+    #   Data Catalog.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2334,6 +2395,12 @@ module Aws::RedshiftServerless
     #   the namespace.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_arn
+    #   The Amazon Resource Name (ARN) of the Glue Data Catalog associated
+    #   with the namespace enabled with Amazon Redshift federated
+    #   permissions.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_date
     #   The date of when the namespace was created.
     #   @return [Time]
@@ -2354,6 +2421,12 @@ module Aws::RedshiftServerless
     # @!attribute [rw] kms_key_id
     #   The ID of the Amazon Web Services Key Management Service key used to
     #   encrypt your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] lakehouse_registration_status
+    #   The status of the lakehouse registration for the namespace.
+    #   Indicates whether the namespace is successfully registered with
+    #   Amazon Redshift federated permissions.
     #   @return [String]
     #
     # @!attribute [rw] log_exports
@@ -2390,11 +2463,13 @@ module Aws::RedshiftServerless
       :admin_password_secret_arn,
       :admin_password_secret_kms_key_id,
       :admin_username,
+      :catalog_arn,
       :creation_date,
       :db_name,
       :default_iam_role_arn,
       :iam_roles,
       :kms_key_id,
+      :lakehouse_registration_status,
       :log_exports,
       :namespace_arn,
       :namespace_id,
@@ -2570,8 +2645,7 @@ module Aws::RedshiftServerless
     #
     # @!attribute [rw] start_date
     #   The start date for the serverless reservation. This is the date you
-    #   specified for the reservation to start when you created the
-    #   reservation.
+    #   created the reservation.
     #   @return [Time]
     #
     # @!attribute [rw] status
@@ -3620,6 +3694,89 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] catalog_name
+    #   The name of the Glue Data Catalog that will be associated with the
+    #   namespace enabled with Amazon Redshift federated permissions.
+    #
+    #   Pattern: `^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$`
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   A boolean value that, if `true`, validates the request without
+    #   actually updating the lakehouse configuration. Use this to check for
+    #   errors before making changes.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] lakehouse_idc_application_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center
+    #   application used for enabling Amazon Web Services IAM Identity
+    #   Center trusted identity propagation on a namespace enabled with
+    #   Amazon Redshift federated permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] lakehouse_idc_registration
+    #   Modifies the Amazon Web Services IAM Identity Center trusted
+    #   identity propagation on a namespace enabled with Amazon Redshift
+    #   federated permissions. Valid values are `Associate` or
+    #   `Disassociate`.
+    #   @return [String]
+    #
+    # @!attribute [rw] lakehouse_registration
+    #   Specifies whether to register or deregister the namespace with
+    #   Amazon Redshift federated permissions. Valid values are `Register`
+    #   or `Deregister`.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace_name
+    #   The name of the namespace whose lakehouse configuration you want to
+    #   modify.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateLakehouseConfigurationRequest AWS API Documentation
+    #
+    class UpdateLakehouseConfigurationRequest < Struct.new(
+      :catalog_name,
+      :dry_run,
+      :lakehouse_idc_application_arn,
+      :lakehouse_idc_registration,
+      :lakehouse_registration,
+      :namespace_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] catalog_arn
+    #   The Amazon Resource Name (ARN) of the Glue Data Catalog associated
+    #   with the lakehouse configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] lakehouse_idc_application_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center
+    #   application used for enabling Amazon Web Services IAM Identity
+    #   Center trusted identity propagation.
+    #   @return [String]
+    #
+    # @!attribute [rw] lakehouse_registration_status
+    #   The current status of the lakehouse registration. Indicates whether
+    #   the namespace is successfully registered with Amazon Redshift
+    #   federated permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace_name
+    #   The name of the namespace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateLakehouseConfigurationResponse AWS API Documentation
+    #
+    class UpdateLakehouseConfigurationResponse < Struct.new(
+      :catalog_arn,
+      :lakehouse_idc_application_arn,
+      :lakehouse_registration_status,
+      :namespace_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] admin_password_secret_kms_key_id
     #   The ID of the Key Management Service (KMS) key used to encrypt and
     #   store the namespace's admin credentials secret. You can only use
@@ -4059,8 +4216,8 @@ module Aws::RedshiftServerless
       include Aws::Structure
     end
 
-    # The input failed to satisfy the constraints specified by an AWS
-    # service.
+    # The input failed to satisfy the constraints specified by an Amazon Web
+    # Services service.
     #
     # @!attribute [rw] message
     #   @return [String]

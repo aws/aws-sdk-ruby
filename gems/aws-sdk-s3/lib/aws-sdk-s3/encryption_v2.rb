@@ -1,4 +1,5 @@
 require 'aws-sdk-s3/encryptionV2/client'
+require 'aws-sdk-s3/encryptionV2/decryption'
 require 'aws-sdk-s3/encryptionV2/decrypt_handler'
 require 'aws-sdk-s3/encryptionV2/default_cipher_provider'
 require 'aws-sdk-s3/encryptionV2/encrypt_handler'

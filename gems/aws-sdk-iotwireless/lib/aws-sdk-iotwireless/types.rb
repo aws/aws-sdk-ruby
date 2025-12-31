@@ -1011,8 +1011,8 @@ module Aws::IoTWireless
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] positioning
-    #   FPort values for the GNSS, stream, and ClockSync functions of the
-    #   positioning information.
+    #   The integration status of the Device Location feature for LoRaWAN
+    #   and Sidewalk devices.
     #   @return [String]
     #
     # @!attribute [rw] sidewalk
@@ -2648,6 +2648,11 @@ module Aws::IoTWireless
     #   in the import task.
     #   @return [String]
     #
+    # @!attribute [rw] positioning
+    #   The integration status of the Device Location feature for LoRaWAN
+    #   and Sidewalk devices.
+    #   @return [String]
+    #
     # @!attribute [rw] sidewalk
     #   The Sidewalk-related information about an import task.
     #   @return [Types::SidewalkGetStartImportInfo]
@@ -2689,6 +2694,7 @@ module Aws::IoTWireless
       :id,
       :arn,
       :destination_name,
+      :positioning,
       :sidewalk,
       :creation_time,
       :status,
@@ -2758,8 +2764,8 @@ module Aws::IoTWireless
     #   @return [Types::SidewalkDevice]
     #
     # @!attribute [rw] positioning
-    #   FPort values for the GNSS, stream, and ClockSync functions of the
-    #   positioning information.
+    #   The integration status of the Device Location feature for LoRaWAN
+    #   and Sidewalk devices.
     #   @return [String]
     #
     class GetWirelessDeviceResponse < Struct.new(
@@ -3406,6 +3412,15 @@ module Aws::IoTWireless
     #   onboarded to AWS IoT Wireless.
     #   @return [String]
     #
+    # @!attribute [rw] positioning
+    #   The integration status of the Device Location feature for Sidewalk
+    #   devices.
+    #   @return [String]
+    #
+    # @!attribute [rw] sidewalk
+    #   The Sidewalk object containing Sidewalk-related device information.
+    #   @return [Types::SidewalkListDevicesForImportInfo]
+    #
     # @!attribute [rw] imported_wireless_device_list
     #   List of wireless devices in an import task and their onboarding
     #   status.
@@ -3414,6 +3429,8 @@ module Aws::IoTWireless
     class ListDevicesForWirelessDeviceImportTaskResponse < Struct.new(
       :next_token,
       :destination_name,
+      :positioning,
+      :sidewalk,
       :imported_wireless_device_list)
       SENSITIVE = []
       include Aws::Structure
@@ -3813,7 +3830,7 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] destination_name
-    #   A filter to list only the wireless devices that use this
+    #   A filter to list only the wireless devices that use as uplink
     #   destination.
     #   @return [String]
     #
@@ -5584,8 +5601,18 @@ module Aws::IoTWireless
     #   The ID of the Sidewalk device profile.
     #   @return [String]
     #
+    # @!attribute [rw] positioning
+    #   The Positioning object of the Sidewalk device.
+    #   @return [Types::SidewalkPositioning]
+    #
+    # @!attribute [rw] sidewalk_manufacturing_sn
+    #   The Sidewalk manufacturing serial number.
+    #   @return [String]
+    #
     class SidewalkCreateWirelessDevice < Struct.new(
-      :device_profile_id)
+      :device_profile_id,
+      :positioning,
+      :sidewalk_manufacturing_sn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5625,6 +5652,10 @@ module Aws::IoTWireless
     #   The Sidewalk device status, such as provisioned or registered.
     #   @return [String]
     #
+    # @!attribute [rw] positioning
+    #   The Positioning object of the Sidewalk device.
+    #   @return [Types::SidewalkPositioning]
+    #
     class SidewalkDevice < Struct.new(
       :amazon_id,
       :sidewalk_id,
@@ -5633,7 +5664,8 @@ module Aws::IoTWireless
       :private_keys,
       :device_profile_id,
       :certificate_id,
-      :status)
+      :status,
+      :positioning)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5713,9 +5745,14 @@ module Aws::IoTWireless
     #   the S3 bucket.
     #   @return [String]
     #
+    # @!attribute [rw] positioning
+    #   The Positioning object of the Sidewalk device.
+    #   @return [Types::SidewalkPositioning]
+    #
     class SidewalkGetStartImportInfo < Struct.new(
       :device_creation_file_list,
-      :role)
+      :role,
+      :positioning)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5747,13 +5784,43 @@ module Aws::IoTWireless
     #   registered.
     #   @return [String]
     #
+    # @!attribute [rw] positioning
+    #   The Positioning object of the Sidewalk device.
+    #   @return [Types::SidewalkPositioning]
+    #
     class SidewalkListDevice < Struct.new(
       :amazon_id,
       :sidewalk_id,
       :sidewalk_manufacturing_sn,
       :device_certificates,
       :device_profile_id,
-      :status)
+      :status,
+      :positioning)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Sidewalk-related object containing positioning information used to
+    # configure Sidewalk devices during import.
+    #
+    # @!attribute [rw] positioning
+    #   The Positioning object of the Sidewalk device.
+    #   @return [Types::SidewalkPositioning]
+    #
+    class SidewalkListDevicesForImportInfo < Struct.new(
+      :positioning)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Positioning object of the Sidewalk device.
+    #
+    # @!attribute [rw] destination_name
+    #   The location destination name of the Sidewalk device.
+    #   @return [String]
+    #
+    class SidewalkPositioning < Struct.new(
+      :destination_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5803,8 +5870,13 @@ module Aws::IoTWireless
     #   to the import task.
     #   @return [String]
     #
+    # @!attribute [rw] positioning
+    #   The Positioning object of the Sidewalk device.
+    #   @return [Types::SidewalkPositioning]
+    #
     class SidewalkSingleStartImportInfo < Struct.new(
-      :sidewalk_manufacturing_sn)
+      :sidewalk_manufacturing_sn,
+      :positioning)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5821,9 +5893,14 @@ module Aws::IoTWireless
     #   the S3 bucket.
     #   @return [String]
     #
+    # @!attribute [rw] positioning
+    #   The Positioning object of the Sidewalk device.
+    #   @return [Types::SidewalkPositioning]
+    #
     class SidewalkStartImportInfo < Struct.new(
       :device_creation_file,
-      :role)
+      :role,
+      :positioning)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5849,6 +5926,18 @@ module Aws::IoTWireless
     #
     class SidewalkUpdateImportInfo < Struct.new(
       :device_creation_file)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Sidewalk object for updating a wireless device.
+    #
+    # @!attribute [rw] positioning
+    #   The Positioning object of the Sidewalk device.
+    #   @return [Types::SidewalkPositioning]
+    #
+    class SidewalkUpdateWirelessDevice < Struct.new(
+      :positioning)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5970,6 +6059,11 @@ module Aws::IoTWireless
     #   you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] positioning
+    #   The integration status of the Device Location feature for Sidewalk
+    #   devices.
+    #   @return [String]
+    #
     # @!attribute [rw] sidewalk
     #   The Sidewalk-related parameters for importing a single wireless
     #   device.
@@ -5980,6 +6074,7 @@ module Aws::IoTWireless
       :client_request_token,
       :device_name,
       :tags,
+      :positioning,
       :sidewalk)
       SENSITIVE = []
       include Aws::Structure
@@ -6030,6 +6125,11 @@ module Aws::IoTWireless
     #   you can use to manage a resource.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] positioning
+    #   The integration status of the Device Location feature for Sidewalk
+    #   devices.
+    #   @return [String]
+    #
     # @!attribute [rw] sidewalk
     #   The Sidewalk-related parameters for importing wireless devices that
     #   need to be provisioned in bulk.
@@ -6039,6 +6139,7 @@ module Aws::IoTWireless
       :destination_name,
       :client_request_token,
       :tags,
+      :positioning,
       :sidewalk)
       SENSITIVE = []
       include Aws::Structure
@@ -6893,9 +6994,13 @@ module Aws::IoTWireless
     #   @return [Types::LoRaWANUpdateDevice]
     #
     # @!attribute [rw] positioning
-    #   FPort values for the GNSS, stream, and ClockSync functions of the
-    #   positioning information.
+    #   The integration status of the Device Location feature for LoRaWAN
+    #   and Sidewalk devices.
     #   @return [String]
+    #
+    # @!attribute [rw] sidewalk
+    #   The updated sidewalk properties.
+    #   @return [Types::SidewalkUpdateWirelessDevice]
     #
     class UpdateWirelessDeviceRequest < Struct.new(
       :id,
@@ -6903,7 +7008,8 @@ module Aws::IoTWireless
       :name,
       :description,
       :lo_ra_wan,
-      :positioning)
+      :positioning,
+      :sidewalk)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7166,6 +7272,11 @@ module Aws::IoTWireless
     #   be onboarded to AWS IoT Wireless
     #   @return [String]
     #
+    # @!attribute [rw] positioning
+    #   The integration status of the Device Location feature for Sidewalk
+    #   devices.
+    #   @return [String]
+    #
     # @!attribute [rw] sidewalk
     #   The Sidewalk-related information of the wireless device import task.
     #   @return [Types::SidewalkGetStartImportInfo]
@@ -7207,6 +7318,7 @@ module Aws::IoTWireless
       :id,
       :arn,
       :destination_name,
+      :positioning,
       :sidewalk,
       :creation_time,
       :status,
@@ -7294,6 +7406,11 @@ module Aws::IoTWireless
     #   Id of the multicast group.
     #   @return [Integer]
     #
+    # @!attribute [rw] positioning
+    #   The integration status of the Device Location feature for LoRaWAN
+    #   and Amazon Sidewalk enabled devices.
+    #   @return [String]
+    #
     class WirelessDeviceStatistics < Struct.new(
       :arn,
       :id,
@@ -7305,7 +7422,8 @@ module Aws::IoTWireless
       :sidewalk,
       :fuota_device_status,
       :multicast_device_status,
-      :mc_group_id)
+      :mc_group_id,
+      :positioning)
       SENSITIVE = []
       include Aws::Structure
     end

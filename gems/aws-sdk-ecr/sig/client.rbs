@@ -238,7 +238,7 @@ module Aws
                                                  ],
                                                  ?repository_policy: ::String,
                                                  ?lifecycle_policy: ::String,
-                                                 applied_for: Array[("REPLICATION" | "PULL_THROUGH_CACHE")],
+                                                 applied_for: Array[("REPLICATION" | "PULL_THROUGH_CACHE" | "CREATE_ON_PUSH")],
                                                  ?custom_role_arn: ::String
                                                ) -> _CreateRepositoryCreationTemplateResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRepositoryCreationTemplateResponseSuccess
@@ -320,6 +320,26 @@ module Aws
                                     ) -> _DeleteRepositoryPolicyResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRepositoryPolicyResponseSuccess
 
+      interface _DeleteSigningConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSigningConfigurationResponse]
+        def registry_id: () -> ::String
+        def signing_configuration: () -> Types::SigningConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#delete_signing_configuration-instance_method
+      def delete_signing_configuration: (
+                                        ) -> _DeleteSigningConfigurationResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSigningConfigurationResponseSuccess
+
+      interface _DeregisterPullTimeUpdateExclusionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterPullTimeUpdateExclusionResponse]
+        def principal_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#deregister_pull_time_update_exclusion-instance_method
+      def deregister_pull_time_update_exclusion: (
+                                                   principal_arn: ::String
+                                                 ) -> _DeregisterPullTimeUpdateExclusionResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterPullTimeUpdateExclusionResponseSuccess
+
       interface _DescribeImageReplicationStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeImageReplicationStatusResponse]
         def repository_name: () -> ::String
@@ -359,6 +379,24 @@ module Aws
                                         ) -> _DescribeImageScanFindingsResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeImageScanFindingsResponseSuccess
 
+      interface _DescribeImageSigningStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeImageSigningStatusResponse]
+        def repository_name: () -> ::String
+        def image_id: () -> Types::ImageIdentifier
+        def registry_id: () -> ::String
+        def signing_statuses: () -> ::Array[Types::ImageSigningStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#describe_image_signing_status-instance_method
+      def describe_image_signing_status: (
+                                           repository_name: ::String,
+                                           image_id: {
+                                             image_digest: ::String?,
+                                             image_tag: ::String?
+                                           },
+                                           ?registry_id: ::String
+                                         ) -> _DescribeImageSigningStatusResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeImageSigningStatusResponseSuccess
+
       interface _DescribeImagesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeImagesResponse]
         def image_details: () -> ::Array[Types::ImageDetail]
@@ -377,7 +415,8 @@ module Aws
                              ?next_token: ::String,
                              ?max_results: ::Integer,
                              ?filter: {
-                               tag_status: ("TAGGED" | "UNTAGGED" | "ANY")?
+                               tag_status: ("TAGGED" | "UNTAGGED" | "ANY")?,
+                               image_status: ("ACTIVE" | "ARCHIVED" | "ACTIVATING" | "ANY")?
                              }
                            ) -> _DescribeImagesResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeImagesResponseSuccess
@@ -543,6 +582,16 @@ module Aws
                                  ) -> _GetRepositoryPolicyResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRepositoryPolicyResponseSuccess
 
+      interface _GetSigningConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSigningConfigurationResponse]
+        def registry_id: () -> ::String
+        def signing_configuration: () -> Types::SigningConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#get_signing_configuration-instance_method
+      def get_signing_configuration: (
+                                     ) -> _GetSigningConfigurationResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSigningConfigurationResponseSuccess
+
       interface _InitiateLayerUploadResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::InitiateLayerUploadResponse]
         def upload_id: () -> ::String
@@ -554,6 +603,27 @@ module Aws
                                    repository_name: ::String
                                  ) -> _InitiateLayerUploadResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InitiateLayerUploadResponseSuccess
+
+      interface _ListImageReferrersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImageReferrersResponse]
+        def referrers: () -> ::Array[Types::ImageReferrer]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#list_image_referrers-instance_method
+      def list_image_referrers: (
+                                  ?registry_id: ::String,
+                                  repository_name: ::String,
+                                  subject_id: {
+                                    image_digest: ::String
+                                  },
+                                  ?filter: {
+                                    artifact_types: Array[::String]?,
+                                    artifact_status: ("ACTIVE" | "ARCHIVED" | "ACTIVATING" | "ANY")?
+                                  },
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListImageReferrersResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImageReferrersResponseSuccess
 
       interface _ListImagesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListImagesResponse]
@@ -567,10 +637,23 @@ module Aws
                          ?next_token: ::String,
                          ?max_results: ::Integer,
                          ?filter: {
-                           tag_status: ("TAGGED" | "UNTAGGED" | "ANY")?
+                           tag_status: ("TAGGED" | "UNTAGGED" | "ANY")?,
+                           image_status: ("ACTIVE" | "ARCHIVED" | "ACTIVATING" | "ANY")?
                          }
                        ) -> _ListImagesResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImagesResponseSuccess
+
+      interface _ListPullTimeUpdateExclusionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPullTimeUpdateExclusionsResponse]
+        def pull_time_update_exclusions: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#list_pull_time_update_exclusions-instance_method
+      def list_pull_time_update_exclusions: (
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _ListPullTimeUpdateExclusionsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPullTimeUpdateExclusionsResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
@@ -719,6 +802,39 @@ module Aws
                                          ) -> _PutReplicationConfigurationResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutReplicationConfigurationResponseSuccess
 
+      interface _PutSigningConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutSigningConfigurationResponse]
+        def signing_configuration: () -> Types::SigningConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#put_signing_configuration-instance_method
+      def put_signing_configuration: (
+                                       signing_configuration: {
+                                         rules: Array[
+                                           {
+                                             signing_profile_arn: ::String,
+                                             repository_filters: Array[
+                                               {
+                                                 filter: ::String,
+                                                 filter_type: ("WILDCARD_MATCH")
+                                               },
+                                             ]?
+                                           },
+                                         ]
+                                       }
+                                     ) -> _PutSigningConfigurationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutSigningConfigurationResponseSuccess
+
+      interface _RegisterPullTimeUpdateExclusionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterPullTimeUpdateExclusionResponse]
+        def principal_arn: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#register_pull_time_update_exclusion-instance_method
+      def register_pull_time_update_exclusion: (
+                                                 principal_arn: ::String
+                                               ) -> _RegisterPullTimeUpdateExclusionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterPullTimeUpdateExclusionResponseSuccess
+
       interface _SetRepositoryPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SetRepositoryPolicyResponse]
         def registry_id: () -> ::String
@@ -792,6 +908,25 @@ module Aws
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
 
+      interface _UpdateImageStorageClassResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateImageStorageClassResponse]
+        def registry_id: () -> ::String
+        def repository_name: () -> ::String
+        def image_id: () -> Types::ImageIdentifier
+        def image_status: () -> ("ACTIVE" | "ARCHIVED" | "ACTIVATING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#update_image_storage_class-instance_method
+      def update_image_storage_class: (
+                                        ?registry_id: ::String,
+                                        repository_name: ::String,
+                                        image_id: {
+                                          image_digest: ::String?,
+                                          image_tag: ::String?
+                                        },
+                                        target_storage_class: ("STANDARD" | "ARCHIVE")
+                                      ) -> _UpdateImageStorageClassResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateImageStorageClassResponseSuccess
+
       interface _UpdatePullThroughCacheRuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePullThroughCacheRuleResponse]
         def ecr_repository_prefix: () -> ::String
@@ -838,7 +973,7 @@ module Aws
                                                  ],
                                                  ?repository_policy: ::String,
                                                  ?lifecycle_policy: ::String,
-                                                 ?applied_for: Array[("REPLICATION" | "PULL_THROUGH_CACHE")],
+                                                 ?applied_for: Array[("REPLICATION" | "PULL_THROUGH_CACHE" | "CREATE_ON_PUSH")],
                                                  ?custom_role_arn: ::String
                                                ) -> _UpdateRepositoryCreationTemplateResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRepositoryCreationTemplateResponseSuccess

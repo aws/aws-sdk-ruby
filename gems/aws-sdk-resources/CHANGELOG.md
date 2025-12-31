@@ -1,6 +1,78 @@
 Unreleased Changes
 ------------------
 
+3.251.0 (2025-12-23)
+------------------
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-elastictranscoder` gem.
+
+3.250.0 (2025-12-19)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-wickr` gem.
+
+3.249.0 (2025-12-02)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-novaact` gem.
+
+3.248.0 (2025-12-01)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-route53globalresolver` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-partnercentralbenefits` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-partnercentralaccount` gem.
+
+3.247.0 (2025-11-21)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-sagemakerruntimehttp2` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-computeoptimizerautomation` gem.
+
+3.246.0 (2025-11-20)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-core` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-signin` gem.
+
+3.245.0 (2025-11-19)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-signin` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-partnercentralchannel` gem.
+
+3.244.0 (2025-11-17)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mwaaserverless` gem.
+
+3.243.0 (2025-10-31)
+------------------
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-robomaker` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-qldbsession` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-qldb` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-lookoutforvision` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-lookoutmetrics` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-iotfleethub` gem.
+
+* Feature - Removed a dependency on the deprecated `aws-sdk-apptest` gem.
+
+3.242.0 (2025-10-22)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-rtbfabric` gem.
+
 3.241.0 (2025-09-12)
 ------------------
 

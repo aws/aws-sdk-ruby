@@ -1,6 +1,81 @@
 Unreleased Changes
 ------------------
 
+1.344.0 (2025-12-17)
+------------------
+
+* Feature - Adding the newly launched p6-b300.48xlarge ec2  instance support in Sagemaker(Hyperpod,Training and Sceptor)
+
+1.343.0 (2025-12-03)
+------------------
+
+* Feature - Introduces Serverless training: A fully managed compute infrastructure that abstracts away all infrastructure complexity, allowing you to focus purely on model development. Added AI model customization assets used to train, refine, and evaluate custom models during the model customization process.
+
+1.342.0 (2025-12-02)
+------------------
+
+* Feature - Added support for serverless MLflow Apps. Added support for new HubContentTypes (DataSet and JsonDoc) in Private Hub for AI model customization assets, enabling tracking and management of training datasets and evaluators (reward functions/prompts) throughout the ML lifecycle.
+
+1.341.0 (2025-11-21)
+------------------
+
+* Feature - Enhanced SageMaker HyperPod instance groups with support for MinInstanceCount, CapacityRequirements (Spot/On-Demand), and KubernetesConfig (labels and taints). Also Added speculative decoding and MaxInstanceCount for model optimization jobs.
+
+1.340.0 (2025-11-20)
+------------------
+
+* Feature - Added training plan support for inference endpoints. Added HyperPod task governance with accelerator partition-based quota allocation. Added BatchRebootClusterNodes and BatchReplaceClusterNodes APIs. Updated ListClusterNodes to include privateDnsHostName.
+
+1.339.0 (2025-11-19)
+------------------
+
+* Feature - Added support for enhanced metrics for SageMaker AI Endpoints. This features provides Utilization Metrics at instance and container granularity and also provides easy configuration of metric publish frequency from 10 sec -> 5 mins
+
+1.338.0 (2025-11-13)
+------------------
+
+* Feature - Added support for minor version upgrades and AWS Identity Center integration for SageMaker Hadron Partner Apps, enabling automated version management and IdC group-based access control.
+
+1.337.0 (2025-11-12)
+------------------
+
+* Feature - Add support for trn2.3xlarge instance type for SageMaker Hyperpod
+
+1.336.0 (2025-11-06)
+------------------
+
+* Feature - Added NodeProvisioningMode parameter to UpdateCluster API to determine how instance provisioning is handled during cluster operations; in Continuous mode. Added VpcId field in UpdateDomain request for SageMaker Unified Studio domains with no VPC to add a customer VPC.
+
+1.335.0 (2025-11-05)
+------------------
+
+* Feature - Add new fields in SageMaker Hyperpod DescribeCluster API response: TargetStateCount, SoftwareUpdateStatus and ActiveSoftwareDeploymentConfig to provide AMI update progress visibility .
+
+1.334.0 (2025-10-31)
+------------------
+
+* Feature - Allow update of platform identifier via UpdateNotebookInstance operation.
+
+1.333.0 (2025-10-28)
+------------------
+
+* Feature - Amazon SageMaker now supports deleting training and processing jobs in a terminal status.
+
+1.332.0 (2025-10-24)
+------------------
+
+* Feature - Added inference components model data caching feature
+
+1.331.0 (2025-10-23)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.330.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.329.0 (2025-09-09)
 ------------------
 

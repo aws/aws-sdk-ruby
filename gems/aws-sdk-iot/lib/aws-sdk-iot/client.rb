@@ -1589,25 +1589,40 @@ module Aws::IoT
     #   A short text decription of the command.
     #
     # @option params [Types::CommandPayload] :payload
-    #   The payload object for the command. You must specify this information
-    #   when using the `AWS-IoT` namespace.
+    #   The payload object for the static command.
     #
     #   You can upload a static payload file from your local storage that
     #   contains the instructions for the device to process. The payload file
     #   can use any format. To make sure that the device correctly interprets
     #   the payload, we recommend you to specify the payload content type.
     #
+    # @option params [String] :payload_template
+    #   The payload template for the dynamic command.
+    #
+    #   <note markdown="1"> This parameter is required for dynamic commands where the command
+    #   execution placeholders are supplied either from `mandatoryParameters`
+    #   or when `StartCommandExecution` is invoked.
+    #
+    #    </note>
+    #
+    # @option params [Types::CommandPreprocessor] :preprocessor
+    #   Configuration that determines how `payloadTemplate` is processed to
+    #   generate command execution payload.
+    #
+    #   <note markdown="1"> This parameter is required for dynamic commands, along with
+    #   `payloadTemplate`, and `mandatoryParameters`.
+    #
+    #    </note>
+    #
     # @option params [Array<Types::CommandParameter>] :mandatory_parameters
-    #   A list of parameters that are required by the `StartCommandExecution`
-    #   API. These parameters need to be specified only when using the
-    #   `AWS-IoT-FleetWise` namespace. You can either specify them here or
-    #   when running the command using the `StartCommandExecution` API.
+    #   A list of parameters that are used by `StartCommandExecution` API for
+    #   execution payload generation.
     #
     # @option params [String] :role_arn
     #   The IAM role that you must provide when using the `AWS-IoT-FleetWise`
     #   namespace. The role grants IoT Device Management the permission to
     #   access IoT FleetWise resources for generating the payload for the
-    #   command. This field is not required when you use the `AWS-IoT`
+    #   command. This field is not supported when you use the `AWS-IoT`
     #   namespace.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -1629,9 +1644,16 @@ module Aws::IoT
     #       content: "data",
     #       content_type: "MimeType",
     #     },
+    #     payload_template: "CommandPayloadTemplateString",
+    #     preprocessor: {
+    #       aws_json_substitution: {
+    #         output_format: "JSON", # required, accepts JSON, CBOR
+    #       },
+    #     },
     #     mandatory_parameters: [
     #       {
     #         name: "CommandParameterName", # required
+    #         type: "STRING", # accepts STRING, INTEGER, DOUBLE, LONG, UNSIGNEDLONG, BOOLEAN, BINARY
     #         value: {
     #           s: "StringParameterValue",
     #           b: false,
@@ -1650,6 +1672,21 @@ module Aws::IoT
     #           bin: "data",
     #           ul: "UnsignedLongParameterValue",
     #         },
+    #         value_conditions: [
+    #           {
+    #             comparison_operator: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, LESS_THAN, LESS_THAN_EQUALS, GREATER_THAN, GREATER_THAN_EQUALS, IN_SET, NOT_IN_SET, IN_RANGE, NOT_IN_RANGE
+    #             operand: { # required
+    #               number: "StringParameterValue",
+    #               numbers: ["StringParameterValue"],
+    #               string: "StringParameterValue",
+    #               strings: ["StringParameterValue"],
+    #               number_range: {
+    #                 min: "StringParameterValue", # required
+    #                 max: "StringParameterValue", # required
+    #               },
+    #             },
+    #           },
+    #         ],
     #         description: "CommandParameterDescription",
     #       },
     #     ],
@@ -4063,6 +4100,12 @@ module Aws::IoT
     #                 role_arn: "AwsArn", # required
     #               },
     #             },
+    #             enable_batching: false,
+    #             batch_config: {
+    #               max_batch_open_ms: 1,
+    #               max_batch_size: 1,
+    #               max_batch_size_bytes: 1,
+    #             },
     #           },
     #           kafka: {
     #             destination_arn: "AwsArn", # required
@@ -4271,6 +4314,12 @@ module Aws::IoT
     #               service_name: "ServiceName", # required
     #               role_arn: "AwsArn", # required
     #             },
+    #           },
+    #           enable_batching: false,
+    #           batch_config: {
+    #             max_batch_open_ms: 1,
+    #             max_batch_size: 1,
+    #             max_batch_size_bytes: 1,
     #           },
     #         },
     #         kafka: {
@@ -6377,12 +6426,12 @@ module Aws::IoT
 
     # Retrieves the encryption configuration for resources and data of your
     # Amazon Web Services account in Amazon Web Services IoT Core. For more
-    # information, see [Key management in IoT][1] from the *Amazon Web
+    # information, see [Data encryption at rest][1] in the *Amazon Web
     # Services IoT Core Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/key-management.html
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/encryption-at-rest.html
     #
     # @return [Types::DescribeEncryptionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7845,6 +7894,8 @@ module Aws::IoT
     #   * {Types::GetCommandResponse#description #description} => String
     #   * {Types::GetCommandResponse#mandatory_parameters #mandatory_parameters} => Array&lt;Types::CommandParameter&gt;
     #   * {Types::GetCommandResponse#payload #payload} => Types::CommandPayload
+    #   * {Types::GetCommandResponse#payload_template #payload_template} => String
+    #   * {Types::GetCommandResponse#preprocessor #preprocessor} => Types::CommandPreprocessor
     #   * {Types::GetCommandResponse#role_arn #role_arn} => String
     #   * {Types::GetCommandResponse#created_at #created_at} => Time
     #   * {Types::GetCommandResponse#last_updated_at #last_updated_at} => Time
@@ -7866,6 +7917,7 @@ module Aws::IoT
     #   resp.description #=> String
     #   resp.mandatory_parameters #=> Array
     #   resp.mandatory_parameters[0].name #=> String
+    #   resp.mandatory_parameters[0].type #=> String, one of "STRING", "INTEGER", "DOUBLE", "LONG", "UNSIGNEDLONG", "BOOLEAN", "BINARY"
     #   resp.mandatory_parameters[0].value.s #=> String
     #   resp.mandatory_parameters[0].value.b #=> Boolean
     #   resp.mandatory_parameters[0].value.i #=> Integer
@@ -7880,9 +7932,21 @@ module Aws::IoT
     #   resp.mandatory_parameters[0].default_value.d #=> Float
     #   resp.mandatory_parameters[0].default_value.bin #=> String
     #   resp.mandatory_parameters[0].default_value.ul #=> String
+    #   resp.mandatory_parameters[0].value_conditions #=> Array
+    #   resp.mandatory_parameters[0].value_conditions[0].comparison_operator #=> String, one of "EQUALS", "NOT_EQUALS", "LESS_THAN", "LESS_THAN_EQUALS", "GREATER_THAN", "GREATER_THAN_EQUALS", "IN_SET", "NOT_IN_SET", "IN_RANGE", "NOT_IN_RANGE"
+    #   resp.mandatory_parameters[0].value_conditions[0].operand.number #=> String
+    #   resp.mandatory_parameters[0].value_conditions[0].operand.numbers #=> Array
+    #   resp.mandatory_parameters[0].value_conditions[0].operand.numbers[0] #=> String
+    #   resp.mandatory_parameters[0].value_conditions[0].operand.string #=> String
+    #   resp.mandatory_parameters[0].value_conditions[0].operand.strings #=> Array
+    #   resp.mandatory_parameters[0].value_conditions[0].operand.strings[0] #=> String
+    #   resp.mandatory_parameters[0].value_conditions[0].operand.number_range.min #=> String
+    #   resp.mandatory_parameters[0].value_conditions[0].operand.number_range.max #=> String
     #   resp.mandatory_parameters[0].description #=> String
     #   resp.payload.content #=> String
     #   resp.payload.content_type #=> String
+    #   resp.payload_template #=> String
+    #   resp.preprocessor.aws_json_substitution.output_format #=> String, one of "JSON", "CBOR"
     #   resp.role_arn #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
@@ -8743,6 +8807,10 @@ module Aws::IoT
     #   resp.rule.actions[0].http.auth.sigv4.signing_region #=> String
     #   resp.rule.actions[0].http.auth.sigv4.service_name #=> String
     #   resp.rule.actions[0].http.auth.sigv4.role_arn #=> String
+    #   resp.rule.actions[0].http.enable_batching #=> Boolean
+    #   resp.rule.actions[0].http.batch_config.max_batch_open_ms #=> Integer
+    #   resp.rule.actions[0].http.batch_config.max_batch_size #=> Integer
+    #   resp.rule.actions[0].http.batch_config.max_batch_size_bytes #=> Integer
     #   resp.rule.actions[0].kafka.destination_arn #=> String
     #   resp.rule.actions[0].kafka.topic #=> String
     #   resp.rule.actions[0].kafka.key #=> String
@@ -8868,6 +8936,10 @@ module Aws::IoT
     #   resp.rule.error_action.http.auth.sigv4.signing_region #=> String
     #   resp.rule.error_action.http.auth.sigv4.service_name #=> String
     #   resp.rule.error_action.http.auth.sigv4.role_arn #=> String
+    #   resp.rule.error_action.http.enable_batching #=> Boolean
+    #   resp.rule.error_action.http.batch_config.max_batch_open_ms #=> Integer
+    #   resp.rule.error_action.http.batch_config.max_batch_size #=> Integer
+    #   resp.rule.error_action.http.batch_config.max_batch_size_bytes #=> Integer
     #   resp.rule.error_action.kafka.destination_arn #=> String
     #   resp.rule.error_action.kafka.topic #=> String
     #   resp.rule.error_action.kafka.key #=> String
@@ -8948,17 +9020,32 @@ module Aws::IoT
     #
     # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
+    # @option params [Boolean] :verbose
+    #   The flag is used to get all the event types and their respective
+    #   configuration that event-based logging supports.
+    #
     # @return [Types::GetV2LoggingOptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetV2LoggingOptionsResponse#role_arn #role_arn} => String
     #   * {Types::GetV2LoggingOptionsResponse#default_log_level #default_log_level} => String
     #   * {Types::GetV2LoggingOptionsResponse#disable_all_logs #disable_all_logs} => Boolean
+    #   * {Types::GetV2LoggingOptionsResponse#event_configurations #event_configurations} => Array&lt;Types::LogEventConfiguration&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_v2_logging_options({
+    #     verbose: false,
+    #   })
     #
     # @example Response structure
     #
     #   resp.role_arn #=> String
     #   resp.default_log_level #=> String, one of "DEBUG", "INFO", "ERROR", "WARN", "DISABLED"
     #   resp.disable_all_logs #=> Boolean
+    #   resp.event_configurations #=> Array
+    #   resp.event_configurations[0].event_type #=> String
+    #   resp.event_configurations[0].log_level #=> String, one of "DEBUG", "INFO", "ERROR", "WARN", "DISABLED"
+    #   resp.event_configurations[0].log_destination #=> String
     #
     # @overload get_v2_logging_options(params = {})
     # @param [Hash] params ({})
@@ -13435,6 +13522,12 @@ module Aws::IoT
     #                 role_arn: "AwsArn", # required
     #               },
     #             },
+    #             enable_batching: false,
+    #             batch_config: {
+    #               max_batch_open_ms: 1,
+    #               max_batch_size: 1,
+    #               max_batch_size_bytes: 1,
+    #             },
     #           },
     #           kafka: {
     #             destination_arn: "AwsArn", # required
@@ -13643,6 +13736,12 @@ module Aws::IoT
     #               service_name: "ServiceName", # required
     #               role_arn: "AwsArn", # required
     #             },
+    #           },
+    #           enable_batching: false,
+    #           batch_config: {
+    #             max_batch_open_ms: 1,
+    #             max_batch_size: 1,
+    #             max_batch_size_bytes: 1,
     #           },
     #         },
     #         kafka: {
@@ -13923,6 +14022,9 @@ module Aws::IoT
     # @option params [Boolean] :disable_all_logs
     #   If true all logs are disabled. The default is false.
     #
+    # @option params [Array<Types::LogEventConfiguration>] :event_configurations
+    #   The list of event configurations that override account-level logging.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -13931,6 +14033,13 @@ module Aws::IoT
     #     role_arn: "AwsArn",
     #     default_log_level: "DEBUG", # accepts DEBUG, INFO, ERROR, WARN, DISABLED
     #     disable_all_logs: false,
+    #     event_configurations: [
+    #       {
+    #         event_type: "LogEventType", # required
+    #         log_level: "DEBUG", # accepts DEBUG, INFO, ERROR, WARN, DISABLED
+    #         log_destination: "LogDestination",
+    #       },
+    #     ],
     #   })
     #
     # @overload set_v2_logging_options(params = {})
@@ -14233,9 +14342,8 @@ module Aws::IoT
     #
     # @option params [String] :principal
     #   The principal. Valid principals are CertificateArn
-    #   (arn:aws:iot:*region*:*accountId*:cert/*certificateId*), thingGroupArn
-    #   (arn:aws:iot:*region*:*accountId*:thinggroup/*groupName*) and
-    #   CognitoId (*region*:*id*).
+    #   (arn:aws:iot:*region*:*accountId*:cert/*certificateId*) and CognitoId
+    #   (*region*:*id*).
     #
     # @option params [String] :cognito_identity_pool_id
     #   The Cognito identity pool ID.
@@ -14381,10 +14489,10 @@ module Aws::IoT
     #
     # Requires permission to access the [TransferCertificate][1] action.
     #
-    # You can cancel the transfer until it is acknowledged by the recipient.
+    # You can cancel the transfer until it is accepted by the recipient.
     #
-    # No notification is sent to the transfer destination's account. It's
-    # up to the caller to notify the transfer target.
+    # No notification is sent to the transfer destination's account. The
+    # caller is responsible for notifying the transfer target.
     #
     # The certificate being transferred must not be in the `ACTIVE` state.
     # You can use the UpdateCertificate action to deactivate it.
@@ -14393,15 +14501,16 @@ module Aws::IoT
     # the DetachPolicy action to detach them.
     #
     # **Customer managed key behavior:** When you use a customer managed key
-    # to secure your data and then transfer the key to a customer in a
-    # different account using the TransferCertificate operation, the
-    # certificates will no longer be protected by their customer managed key
+    # to encrypt your data and then transfer the certificate to a customer
+    # in a different account using the `TransferCertificate` operation, the
+    # certificates will no longer be encrypted by their customer managed key
     # configuration. During the transfer process, certificates are encrypted
-    # using IoT owned keys.
+    # using Amazon Web Services IoT Core owned keys.
     #
     # While a certificate is in the **PENDING\_TRANSFER** state, it's
-    # always protected by IoT owned keys, regardless of the customer managed
-    # key configuration of either the source or destination account.
+    # always protected by Amazon Web Services IoT Core owned keys,
+    # regardless of the customer managed key configuration of either the
+    # source or destination account.
     #
     # Once the transfer is completed through AcceptCertificateTransfer,
     # RejectCertificateTransfer, or CancelCertificateTransfer, the
@@ -14409,8 +14518,8 @@ module Aws::IoT
     # configuration of the account that owns the certificate after the
     # transfer operation:
     #
-    # * If the transfer is accepted: The certificate is protected by the
-    #   destination account's customer managed key configuration.
+    # * If the transfer is accepted: The certificate is encrypted by the
+    #   target account's customer managed key configuration.
     #
     # * If the transfer is rejected or cancelled: The certificate is
     #   protected by the source account's customer managed key
@@ -15208,24 +15317,27 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Updates the encryption configuration. By default, all Amazon Web
-    # Services IoT Core data at rest is encrypted using Amazon Web Services
-    # owned keys. Amazon Web Services IoT Core also supports symmetric
-    # customer managed keys from Amazon Web Services Key Management Service
-    # (KMS). With customer managed keys, you create, own, and manage the KMS
-    # keys in your Amazon Web Services account. For more information, see
-    # [Data encryption][1] in the *Amazon Web Services IoT Core Developer
+    # Updates the encryption configuration. By default, Amazon Web Services
+    # IoT Core encrypts your data at rest using Amazon Web Services owned
+    # keys. Amazon Web Services IoT Core also supports symmetric customer
+    # managed keys from Key Management Service (KMS). With customer managed
+    # keys, you create, own, and manage the KMS keys in your Amazon Web
+    # Services account.
+    #
+    # Before using this API, you must set up permissions for Amazon Web
+    # Services IoT Core to access KMS. For more information, see [Data
+    # encryption at rest][1] in the *Amazon Web Services IoT Core Developer
     # Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/data-encryption.html
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/encryption-at-rest.html
     #
     # @option params [required, String] :encryption_type
-    #   The type of the Amazon Web Services Key Management Service (KMS) key.
+    #   The type of the KMS key.
     #
     # @option params [String] :kms_key_arn
-    #   The ARN of the customer-managed KMS key.
+    #   The ARN of the customer managedKMS key.
     #
     # @option params [String] :kms_access_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role assumed by Amazon Web
@@ -16546,7 +16658,7 @@ module Aws::IoT
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.154.0'
+      context[:gem_version] = '1.160.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -302,6 +302,45 @@ module Aws::Artifact
       include Aws::Structure
     end
 
+    # @!attribute [rw] report_id
+    #   Unique resource ID for the report resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of resources to return in the paginated response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token to request the next page of resources.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ListReportVersionsRequest AWS API Documentation
+    #
+    class ListReportVersionsRequest < Struct.new(
+      :report_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] reports
+    #   List of report resources.
+    #   @return [Array<Types::ReportSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token to request the next page of resources.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/ListReportVersionsResponse AWS API Documentation
+    #
+    class ListReportVersionsResponse < Struct.new(
+      :reports,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   Maximum number of resources to return in the paginated response.
     #   @return [Integer]

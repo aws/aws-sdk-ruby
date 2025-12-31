@@ -55,7 +55,7 @@ module Aws::CostExplorer
       attr_accessor last_updated_date: ::String
       attr_accessor last_evaluated_date: ::String
       attr_accessor monitor_type: ("DIMENSIONAL" | "CUSTOM")
-      attr_accessor monitor_dimension: ("SERVICE")
+      attr_accessor monitor_dimension: ("SERVICE" | "LINKED_ACCOUNT" | "TAG" | "COST_CATEGORY")
       attr_accessor monitor_specification: Types::Expression
       attr_accessor dimensional_value_count: ::Integer
       SENSITIVE: []
@@ -171,6 +171,14 @@ module Aws::CostExplorer
       attr_accessor processing_status: ::Array[Types::CostCategoryProcessingStatus]
       attr_accessor values: ::Array[::String]
       attr_accessor default_value: ::String
+      attr_accessor supported_resource_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CostCategoryResourceAssociation
+      attr_accessor resource_arn: ::String
+      attr_accessor cost_category_name: ::String
+      attr_accessor cost_category_arn: ::String
       SENSITIVE: []
     end
 
@@ -794,7 +802,7 @@ module Aws::CostExplorer
     end
 
     class GetSavingsPlansPurchaseRecommendationRequest
-      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP")
+      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP" | "DATABASE_SP")
       attr_accessor term_in_years: ("ONE_YEAR" | "THREE_YEARS")
       attr_accessor payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION")
       attr_accessor account_scope: ("PAYER" | "LINKED")
@@ -966,11 +974,25 @@ module Aws::CostExplorer
       attr_accessor effective_on: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor supported_resource_types: ::Array[::String]
       SENSITIVE: []
     end
 
     class ListCostCategoryDefinitionsResponse
       attr_accessor cost_category_references: ::Array[Types::CostCategoryReference]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCostCategoryResourceAssociationsRequest
+      attr_accessor cost_category_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCostCategoryResourceAssociationsResponse
+      attr_accessor cost_category_resource_associations: ::Array[Types::CostCategoryResourceAssociation]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1054,7 +1076,7 @@ module Aws::CostExplorer
     class RecommendationDetailData
       attr_accessor account_scope: ("PAYER" | "LINKED")
       attr_accessor lookback_period_in_days: ("SEVEN_DAYS" | "THIRTY_DAYS" | "SIXTY_DAYS")
-      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP")
+      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP" | "DATABASE_SP")
       attr_accessor term_in_years: ("ONE_YEAR" | "THREE_YEARS")
       attr_accessor payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION")
       attr_accessor account_id: ::String
@@ -1279,7 +1301,7 @@ module Aws::CostExplorer
 
     class SavingsPlans
       attr_accessor payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION")
-      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP")
+      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP" | "DATABASE_SP")
       attr_accessor region: ::String
       attr_accessor instance_family: ::String
       attr_accessor term_in_years: ("ONE_YEAR" | "THREE_YEARS")
@@ -1355,7 +1377,7 @@ module Aws::CostExplorer
 
     class SavingsPlansPurchaseRecommendation
       attr_accessor account_scope: ("PAYER" | "LINKED")
-      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP")
+      attr_accessor savings_plans_type: ("COMPUTE_SP" | "EC2_INSTANCE_SP" | "SAGEMAKER_SP" | "DATABASE_SP")
       attr_accessor term_in_years: ("ONE_YEAR" | "THREE_YEARS")
       attr_accessor payment_option: ("NO_UPFRONT" | "PARTIAL_UPFRONT" | "ALL_UPFRONT" | "LIGHT_UTILIZATION" | "MEDIUM_UTILIZATION" | "HEAVY_UTILIZATION")
       attr_accessor lookback_period_in_days: ("SEVEN_DAYS" | "THIRTY_DAYS" | "SIXTY_DAYS")

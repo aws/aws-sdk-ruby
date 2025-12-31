@@ -166,7 +166,8 @@ module Aws
                                         ]?
                                       }?
                                     }?
-                                  }?
+                                  }?,
+                                  image_id: ::String?
                                 },
                               ]?
                             }?,
@@ -242,6 +243,11 @@ module Aws
                             capacity_reservation_target: {
                               capacity_reservation_ids: Array[::String]?,
                               capacity_reservation_resource_group_arns: Array[::String]?
+                            }?
+                          },
+                          ?instance_lifecycle_policy: {
+                            retention_triggers: {
+                              terminate_hook_abandon: ("retain" | "terminate")?
                             }?
                           }
                         ) -> AutoScalingGroup

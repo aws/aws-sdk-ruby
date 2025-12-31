@@ -18,12 +18,14 @@ module Aws::MarketplaceMetering
     BatchMeterUsageRequest = Shapes::StructureShape.new(name: 'BatchMeterUsageRequest')
     BatchMeterUsageResult = Shapes::StructureShape.new(name: 'BatchMeterUsageResult')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CustomerAWSAccountId = Shapes::StringShape.new(name: 'CustomerAWSAccountId')
     CustomerIdentifier = Shapes::StringShape.new(name: 'CustomerIdentifier')
     CustomerNotEntitledException = Shapes::StructureShape.new(name: 'CustomerNotEntitledException')
     DisabledApiException = Shapes::StructureShape.new(name: 'DisabledApiException')
     DuplicateRequestException = Shapes::StructureShape.new(name: 'DuplicateRequestException')
     ExpiredTokenException = Shapes::StructureShape.new(name: 'ExpiredTokenException')
+    IdempotencyConflictException = Shapes::StructureShape.new(name: 'IdempotencyConflictException')
     InternalServiceErrorException = Shapes::StructureShape.new(name: 'InternalServiceErrorException')
     InvalidCustomerIdentifierException = Shapes::StructureShape.new(name: 'InvalidCustomerIdentifierException')
     InvalidEndpointRegionException = Shapes::StructureShape.new(name: 'InvalidEndpointRegionException')
@@ -84,6 +86,9 @@ module Aws::MarketplaceMetering
     ExpiredTokenException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ExpiredTokenException.struct_class = Types::ExpiredTokenException
 
+    IdempotencyConflictException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    IdempotencyConflictException.struct_class = Types::IdempotencyConflictException
+
     InternalServiceErrorException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     InternalServiceErrorException.struct_class = Types::InternalServiceErrorException
 
@@ -120,6 +125,7 @@ module Aws::MarketplaceMetering
     MeterUsageRequest.add_member(:usage_quantity, Shapes::ShapeRef.new(shape: UsageQuantity, location_name: "UsageQuantity"))
     MeterUsageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     MeterUsageRequest.add_member(:usage_allocations, Shapes::ShapeRef.new(shape: UsageAllocations, location_name: "UsageAllocations"))
+    MeterUsageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     MeterUsageRequest.struct_class = Types::MeterUsageRequest
 
     MeterUsageResult.add_member(:metering_record_id, Shapes::ShapeRef.new(shape: String, location_name: "MeteringRecordId"))
@@ -232,6 +238,7 @@ module Aws::MarketplaceMetering
         o.errors << Shapes::ShapeRef.new(shape: InvalidEndpointRegionException)
         o.errors << Shapes::ShapeRef.new(shape: TimestampOutOfBoundsException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotencyConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: CustomerNotEntitledException)
       end)

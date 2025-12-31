@@ -188,10 +188,15 @@ module Aws
                                      ],
                                      ?customer_managed_key: ::String,
                                      ?additional_encryption_context: Hash[::String, ::String],
-                                     browser_policy: ::String,
-                                     ?client_token: ::String
+                                     ?browser_policy: ::String,
+                                     ?client_token: ::String,
+                                     ?web_content_filtering_policy: {
+                                       blocked_categories: Array[("Cults" | "Gambling" | "Nudity" | "Pornography" | "SexEducation" | "Tasteless" | "Violence" | "DownloadSites" | "ImageSharing" | "PeerToPeer" | "StreamingMediaAndDownloads" | "GenerativeAI" | "CriminalActivity" | "Hacking" | "HateAndIntolerance" | "IllegalDrug" | "IllegalSoftware" | "SchoolCheating" | "SelfHarm" | "Weapons" | "Chat" | "Games" | "InstantMessaging" | "ProfessionalNetwork" | "SocialNetworking" | "WebBasedEmail" | "ParkedDomains")]?,
+                                       allowed_urls: Array[::String]?,
+                                       blocked_urls: Array[::String]?
+                                     }
                                    ) -> _CreateBrowserSettingsResponseSuccess
-                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBrowserSettingsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBrowserSettingsResponseSuccess
 
       interface _CreateDataProtectionSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataProtectionSettingsResponse]
@@ -333,7 +338,7 @@ module Aws
                                    event_filter: {
                                      all: {
                                      }?,
-                                     include: Array[("WebsiteInteract" | "FileDownloadFromSecureBrowserToRemoteDisk" | "FileTransferFromRemoteToLocalDisk" | "FileTransferFromLocalToRemoteDisk" | "FileUploadFromRemoteDiskToSecureBrowser" | "ContentPasteToWebsite" | "ContentTransferFromLocalToRemoteClipboard" | "ContentCopyFromWebsite" | "UrlLoad" | "TabOpen" | "TabClose" | "PrintJobSubmit" | "SessionConnect" | "SessionStart" | "SessionDisconnect" | "SessionEnd")]?
+                                     include: Array[("WebsiteInteract" | "FileDownloadFromSecureBrowserToRemoteDisk" | "FileTransferFromRemoteToLocalDisk" | "FileTransferFromLocalToRemoteDisk" | "FileUploadFromRemoteDiskToSecureBrowser" | "ContentPasteToWebsite" | "ContentTransferFromLocalToRemoteClipboard" | "ContentCopyFromWebsite" | "UrlLoad" | "TabOpen" | "TabClose" | "PrintJobSubmit" | "SessionConnect" | "SessionStart" | "SessionDisconnect" | "SessionEnd" | "UrlBlockByContentFilter")]?
                                    },
                                    log_configuration: {
                                      s3: {
@@ -435,7 +440,34 @@ module Aws
                                     visual_mode: ("Dark" | "Light")?,
                                     hidden_toolbar_items: Array[("Windows" | "DualMonitor" | "FullScreen" | "Webcam" | "Microphone")]?,
                                     max_display_resolution: ("size4096X2160" | "size3840X2160" | "size3440X1440" | "size2560X1440" | "size1920X1080" | "size1280X720" | "size1024X768" | "size800X600")?
-                                  }
+                                  },
+                                  ?branding_configuration_input: {
+                                    logo: {
+                                      blob: ::String?,
+                                      s3_uri: ::String?
+                                    },
+                                    wallpaper: {
+                                      blob: ::String?,
+                                      s3_uri: ::String?
+                                    },
+                                    favicon: {
+                                      blob: ::String?,
+                                      s3_uri: ::String?
+                                    },
+                                    localized_strings: Hash[("de-DE" | "en-US" | "es-ES" | "fr-FR" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "zh-CN" | "zh-TW"), {
+                                        browser_tab_title: ::String,
+                                        welcome_text: ::String,
+                                        login_title: ::String?,
+                                        login_description: ::String?,
+                                        login_button_text: ::String?,
+                                        contact_link: ::String?,
+                                        contact_button_text: ::String?,
+                                        loading_text: ::String?
+                                      }],
+                                    color_theme: ("Light" | "Dark"),
+                                    terms_of_service: ::String?
+                                  },
+                                  ?web_authn_allowed: ("Disabled" | "Enabled")
                                 ) -> _CreateUserSettingsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserSettingsResponseSuccess
 
@@ -941,7 +973,12 @@ module Aws
       def update_browser_settings: (
                                      browser_settings_arn: ::String,
                                      ?browser_policy: ::String,
-                                     ?client_token: ::String
+                                     ?client_token: ::String,
+                                     ?web_content_filtering_policy: {
+                                       blocked_categories: Array[("Cults" | "Gambling" | "Nudity" | "Pornography" | "SexEducation" | "Tasteless" | "Violence" | "DownloadSites" | "ImageSharing" | "PeerToPeer" | "StreamingMediaAndDownloads" | "GenerativeAI" | "CriminalActivity" | "Hacking" | "HateAndIntolerance" | "IllegalDrug" | "IllegalSoftware" | "SchoolCheating" | "SelfHarm" | "Weapons" | "Chat" | "Games" | "InstantMessaging" | "ProfessionalNetwork" | "SocialNetworking" | "WebBasedEmail" | "ParkedDomains")]?,
+                                       allowed_urls: Array[::String]?,
+                                       blocked_urls: Array[::String]?
+                                     }
                                    ) -> _UpdateBrowserSettingsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBrowserSettingsResponseSuccess
 
@@ -1052,7 +1089,7 @@ module Aws
                                    ?event_filter: {
                                      all: {
                                      }?,
-                                     include: Array[("WebsiteInteract" | "FileDownloadFromSecureBrowserToRemoteDisk" | "FileTransferFromRemoteToLocalDisk" | "FileTransferFromLocalToRemoteDisk" | "FileUploadFromRemoteDiskToSecureBrowser" | "ContentPasteToWebsite" | "ContentTransferFromLocalToRemoteClipboard" | "ContentCopyFromWebsite" | "UrlLoad" | "TabOpen" | "TabClose" | "PrintJobSubmit" | "SessionConnect" | "SessionStart" | "SessionDisconnect" | "SessionEnd")]?
+                                     include: Array[("WebsiteInteract" | "FileDownloadFromSecureBrowserToRemoteDisk" | "FileTransferFromRemoteToLocalDisk" | "FileTransferFromLocalToRemoteDisk" | "FileUploadFromRemoteDiskToSecureBrowser" | "ContentPasteToWebsite" | "ContentTransferFromLocalToRemoteClipboard" | "ContentCopyFromWebsite" | "UrlLoad" | "TabOpen" | "TabClose" | "PrintJobSubmit" | "SessionConnect" | "SessionStart" | "SessionDisconnect" | "SessionEnd" | "UrlBlockByContentFilter")]?
                                    },
                                    ?log_configuration: {
                                      s3: {
@@ -1129,7 +1166,34 @@ module Aws
                                     visual_mode: ("Dark" | "Light")?,
                                     hidden_toolbar_items: Array[("Windows" | "DualMonitor" | "FullScreen" | "Webcam" | "Microphone")]?,
                                     max_display_resolution: ("size4096X2160" | "size3840X2160" | "size3440X1440" | "size2560X1440" | "size1920X1080" | "size1280X720" | "size1024X768" | "size800X600")?
-                                  }
+                                  },
+                                  ?branding_configuration_input: {
+                                    logo: {
+                                      blob: ::String?,
+                                      s3_uri: ::String?
+                                    }?,
+                                    wallpaper: {
+                                      blob: ::String?,
+                                      s3_uri: ::String?
+                                    }?,
+                                    favicon: {
+                                      blob: ::String?,
+                                      s3_uri: ::String?
+                                    }?,
+                                    localized_strings: Hash[("de-DE" | "en-US" | "es-ES" | "fr-FR" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "pt-BR" | "zh-CN" | "zh-TW"), {
+                                        browser_tab_title: ::String,
+                                        welcome_text: ::String,
+                                        login_title: ::String?,
+                                        login_description: ::String?,
+                                        login_button_text: ::String?,
+                                        contact_link: ::String?,
+                                        contact_button_text: ::String?,
+                                        loading_text: ::String?
+                                      }]?,
+                                    color_theme: ("Light" | "Dark")?,
+                                    terms_of_service: ::String?
+                                  },
+                                  ?web_authn_allowed: ("Disabled" | "Enabled")
                                 ) -> _UpdateUserSettingsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserSettingsResponseSuccess
     end

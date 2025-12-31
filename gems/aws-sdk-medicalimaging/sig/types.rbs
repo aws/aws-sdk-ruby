@@ -80,6 +80,7 @@ module Aws::MedicalImaging
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor kms_key_arn: ::String
       attr_accessor lambda_authorizer_arn: ::String
+      attr_accessor lossless_storage_format: ("HTJ2K" | "JPEG_2000_LOSSLESS")
       SENSITIVE: []
     end
 
@@ -153,6 +154,7 @@ module Aws::MedicalImaging
       attr_accessor datastore_status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "DELETING" | "DELETED")
       attr_accessor kms_key_arn: ::String
       attr_accessor lambda_authorizer_arn: ::String
+      attr_accessor lossless_storage_format: ("HTJ2K" | "JPEG_2000_LOSSLESS")
       attr_accessor datastore_arn: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
@@ -262,6 +264,8 @@ module Aws::MedicalImaging
       attr_accessor image_set_arn: ::String
       attr_accessor overrides: Types::Overrides
       attr_accessor is_primary: bool
+      attr_accessor last_accessed_at: ::Time
+      attr_accessor storage_tier: ("FREQUENT_ACCESS" | "ARCHIVE_INSTANT_ACCESS")
       SENSITIVE: []
     end
 
@@ -289,6 +293,8 @@ module Aws::MedicalImaging
       attr_accessor version: ::Integer
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor last_accessed_at: ::Time
+      attr_accessor storage_tier: ("FREQUENT_ACCESS" | "ARCHIVE_INSTANT_ACCESS")
       attr_accessor dicom_tags: Types::DICOMTags
       attr_accessor is_primary: bool
       SENSITIVE: []

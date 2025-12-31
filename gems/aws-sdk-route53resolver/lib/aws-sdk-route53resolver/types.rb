@@ -186,6 +186,10 @@ module Aws::Route53Resolver
     # @!attribute [rw] name
     #   A name for the association that you're creating between a Resolver
     #   rule and a VPC.
+    #
+    #   The name can be up to 64 characters long and can contain letters
+    #   (a-z, A-Z), numbers (0-9), hyphens (-), underscores (\_), and
+    #   spaces. The name cannot consist of only numbers.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -685,6 +689,42 @@ module Aws::Route53Resolver
     #   * None, which is treated as Do53.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] rni_enhanced_metrics_enabled
+    #   Specifies whether RNI enhanced metrics are enabled for the Resolver
+    #   endpoints. When set to true, one-minute granular metrics are
+    #   published in CloudWatch for each RNI associated with this endpoint.
+    #   When set to false, metrics are not published. Default is false.
+    #
+    #   <note markdown="1"> Standard CloudWatch pricing and charges are applied for using the
+    #   Route 53 Resolver endpoint RNI enhanced metrics. For more
+    #   information, see [Detailed metrics][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] target_name_server_metrics_enabled
+    #   Specifies whether target name server metrics are enabled for the
+    #   outbound Resolver endpoints. When set to true, one-minute granular
+    #   metrics are published in CloudWatch for each target name server
+    #   associated with this endpoint. When set to false, metrics are not
+    #   published. Default is false. This is not supported for inbound
+    #   Resolver endpoints.
+    #
+    #   <note markdown="1"> Standard CloudWatch pricing and charges are applied for using the
+    #   Route 53 Resolver endpoint target name server metrics. For more
+    #   information, see [Detailed metrics][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateResolverEndpointRequest AWS API Documentation
     #
     class CreateResolverEndpointRequest < Struct.new(
@@ -697,7 +737,9 @@ module Aws::Route53Resolver
       :preferred_instance_type,
       :tags,
       :resolver_endpoint_type,
-      :protocols)
+      :protocols,
+      :rni_enhanced_metrics_enabled,
+      :target_name_server_metrics_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -791,6 +833,10 @@ module Aws::Route53Resolver
     # @!attribute [rw] name
     #   A friendly name that lets you easily find a rule in the Resolver
     #   dashboard in the Route 53 console.
+    #
+    #   The name can be up to 64 characters long and can contain letters
+    #   (a-z, A-Z), numbers (0-9), hyphens (-), underscores (\_), and
+    #   spaces. The name cannot consist of only numbers.
     #   @return [String]
     #
     # @!attribute [rw] rule_type
@@ -825,7 +871,16 @@ module Aws::Route53Resolver
     #   Separate IP addresses with a space.
     #
     #   `TargetIps` is available only when the value of `Rule type` is
-    #   `FORWARD`.
+    #   `FORWARD`. You should not provide TargetIps when the Rule type is
+    #   `DELEGATE`.
+    #
+    #   <note markdown="1"> when creating a DELEGATE rule, you must not provide the `TargetIps`
+    #   parameter. If you provide the `TargetIps`, you may receive an ERROR
+    #   message similar to "Delegate resolver rules need to specify a
+    #   nameserver name". This error means you should not provide
+    #   `TargetIps`.
+    #
+    #    </note>
     #   @return [Array<Types::TargetAddress>]
     #
     # @!attribute [rw] resolver_endpoint_id
@@ -4287,6 +4342,22 @@ module Aws::Route53Resolver
     #   * None, which is treated as Do53.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] rni_enhanced_metrics_enabled
+    #   Indicates whether RNI enhanced metrics are enabled for the Resolver
+    #   endpoint. When enabled, one-minute granular metrics are published in
+    #   CloudWatch for each RNI associated with this endpoint. When
+    #   disabled, these metrics are not published.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] target_name_server_metrics_enabled
+    #   Indicates whether target name server metrics are enabled for the
+    #   outbound Resolver endpoint. When enabled, one-minute granular
+    #   metrics are published in CloudWatch for each target name server
+    #   associated with this endpoint. When disabled, these metrics are not
+    #   published. This feature is not supported for inbound Resolver
+    #   endpoint.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ResolverEndpoint AWS API Documentation
     #
     class ResolverEndpoint < Struct.new(
@@ -4305,7 +4376,9 @@ module Aws::Route53Resolver
       :outpost_arn,
       :preferred_instance_type,
       :resolver_endpoint_type,
-      :protocols)
+      :protocols,
+      :rni_enhanced_metrics_enabled,
+      :target_name_server_metrics_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4563,6 +4636,10 @@ module Aws::Route53Resolver
     # @!attribute [rw] name
     #   The name for the Resolver rule, which you specified when you created
     #   the Resolver rule.
+    #
+    #   The name can be up to 64 characters long and can contain letters
+    #   (a-z, A-Z), numbers (0-9), hyphens (-), underscores (\_), and
+    #   spaces. The name cannot consist of only numbers.
     #   @return [String]
     #
     # @!attribute [rw] target_ips
@@ -4652,6 +4729,10 @@ module Aws::Route53Resolver
     #
     # @!attribute [rw] name
     #   The name of an association between a Resolver rule and a VPC.
+    #
+    #   The name can be up to 64 characters long and can contain letters
+    #   (a-z, A-Z), numbers (0-9), hyphens (-), underscores (\_), and
+    #   spaces. The name cannot consist of only numbers.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -4691,6 +4772,10 @@ module Aws::Route53Resolver
     # @!attribute [rw] name
     #   The new name for the Resolver rule. The name that you specify
     #   appears in the Resolver dashboard in the Route 53 console.
+    #
+    #   The name can be up to 64 characters long and can contain letters
+    #   (a-z, A-Z), numbers (0-9), hyphens (-), underscores (\_), and
+    #   spaces. The name cannot consist of only numbers.
     #   @return [String]
     #
     # @!attribute [rw] target_ips
@@ -5553,6 +5638,42 @@ module Aws::Route53Resolver
     #   then remove the Do53.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] rni_enhanced_metrics_enabled
+    #   Updates whether RNI enhanced metrics are enabled for the Resolver
+    #   endpoints. When set to true, one-minute granular metrics are
+    #   published in CloudWatch for each RNI associated with this endpoint.
+    #   When set to false, metrics are not published.
+    #
+    #   <note markdown="1"> Standard CloudWatch pricing and charges are applied for using the
+    #   Route 53 Resolver endpoint RNI enhanced metrics. For more
+    #   information, see [Detailed metrics][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] target_name_server_metrics_enabled
+    #   Updates whether target name server metrics are enabled for the
+    #   outbound Resolver endpoints. When set to true, one-minute granular
+    #   metrics are published in CloudWatch for each target name server
+    #   associated with this endpoint. When set to false, metrics are not
+    #   published. This setting is not supported for inbound Resolver
+    #   endpoints.
+    #
+    #   <note markdown="1"> Standard CloudWatch pricing and charges are applied for using the
+    #   Route 53 Resolver endpoint target name server metrics. For more
+    #   information, see [Detailed metrics][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverEndpointRequest AWS API Documentation
     #
     class UpdateResolverEndpointRequest < Struct.new(
@@ -5560,7 +5681,9 @@ module Aws::Route53Resolver
       :name,
       :resolver_endpoint_type,
       :update_ip_addresses,
-      :protocols)
+      :protocols,
+      :rni_enhanced_metrics_enabled,
+      :target_name_server_metrics_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

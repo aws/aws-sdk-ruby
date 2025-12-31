@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2025-12-02)
+------------------
+
+* Feature - Amazon S3 Vectors provides cost-effective, elastic, and durable vector storage for queries based on semantic meaning and similarity.
+
+1.9.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.8.0 (2025-11-06)
+------------------
+
+* Feature - Amazon S3 Vectors provides cost-effective, elastic, and durable vector storage for queries based on semantic meaning and similarity.
+
+1.7.0 (2025-10-27)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.6.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.5.0 (2025-08-26)
 ------------------
 

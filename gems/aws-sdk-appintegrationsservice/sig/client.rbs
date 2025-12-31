@@ -120,7 +120,8 @@ module Aws
                                 ?iframe_config: {
                                   allow: Array[::String]?,
                                   sandbox: Array[::String]?
-                                }
+                                },
+                                ?application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER")
                               ) -> _CreateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
 
@@ -249,6 +250,7 @@ module Aws
         def initialization_timeout: () -> ::Integer
         def application_config: () -> Types::ApplicationConfig
         def iframe_config: () -> Types::IframeConfig
+        def application_type: () -> ("STANDARD" | "SERVICE" | "MCP_SERVER")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#get_application-instance_method
       def get_application: (
@@ -311,7 +313,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#list_applications-instance_method
       def list_applications: (
                                ?next_token: ::String,
-                               ?max_results: ::Integer
+                               ?max_results: ::Integer,
+                               ?application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER")
                              ) -> _ListApplicationsResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
 
@@ -433,7 +436,8 @@ module Aws
                                 ?iframe_config: {
                                   allow: Array[::String]?,
                                   sandbox: Array[::String]?
-                                }
+                                },
+                                ?application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER")
                               ) -> _UpdateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
 

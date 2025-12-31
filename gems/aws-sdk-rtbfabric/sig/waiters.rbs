@@ -1,0 +1,97 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RTBFabric
+    module Waiters
+
+      class InboundExternalLinkActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    gateway_id: ::String,
+                    link_id: ::String
+                  ) -> Client::_GetInboundExternalLinkResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetInboundExternalLinkResponseSuccess
+      end
+
+      class LinkAccepted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    gateway_id: ::String,
+                    link_id: ::String
+                  ) -> Client::_GetLinkResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetLinkResponseSuccess
+      end
+
+      class LinkActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    gateway_id: ::String,
+                    link_id: ::String
+                  ) -> Client::_GetLinkResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetLinkResponseSuccess
+      end
+
+      class OutboundExternalLinkActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    gateway_id: ::String,
+                    link_id: ::String
+                  ) -> Client::_GetOutboundExternalLinkResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetOutboundExternalLinkResponseSuccess
+      end
+
+      class RequesterGatewayActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    gateway_id: ::String
+                  ) -> Client::_GetRequesterGatewayResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetRequesterGatewayResponseSuccess
+      end
+
+      class RequesterGatewayDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    gateway_id: ::String
+                  ) -> Client::_GetRequesterGatewayResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetRequesterGatewayResponseSuccess
+      end
+
+      class ResponderGatewayActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    gateway_id: ::String
+                  ) -> Client::_GetResponderGatewayResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetResponderGatewayResponseSuccess
+      end
+
+      class ResponderGatewayDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    gateway_id: ::String
+                  ) -> Client::_GetResponderGatewayResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetResponderGatewayResponseSuccess
+      end
+    end
+  end
+end

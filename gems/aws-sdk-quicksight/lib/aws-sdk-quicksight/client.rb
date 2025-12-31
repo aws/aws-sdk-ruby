@@ -1972,7 +1972,7 @@ module Aws::QuickSight
     #   The ID of the Amazon Web Services account that owns the brand.
     #
     # @option params [required, String] :brand_id
-    #   The ID of the QuickSight brand.
+    #   The ID of the Quick Suite brand.
     #
     # @option params [Types::BrandDefinition] :brand_definition
     #   The definition of the brand.
@@ -2236,6 +2236,7 @@ module Aws::QuickSight
     #       chat_agent: "DENY", # accepts DENY
     #       create_chat_agents: "DENY", # accepts DENY
     #       research: "DENY", # accepts DENY
+    #       self_upgrade_user_role: "DENY", # accepts DENY
     #     },
     #     tags: [
     #       {
@@ -2429,7 +2430,8 @@ module Aws::QuickSight
     #
     # @option params [Hash<String,Types::LogicalTable>] :logical_table_map
     #   Configures the combination and transformation of the data from the
-    #   physical tables.
+    #   physical tables. This parameter is used with the legacy data
+    #   preparation experience.
     #
     # @option params [required, String] :import_mode
     #   Indicates whether you want to import the data into SPICE.
@@ -2447,12 +2449,14 @@ module Aws::QuickSight
     #
     # @option params [Types::RowLevelPermissionDataSet] :row_level_permission_data_set
     #   The row-level security configuration for the data that you want to
-    #   create.
+    #   create. This parameter is used with the legacy data preparation
+    #   experience.
     #
     # @option params [Types::RowLevelPermissionTagConfiguration] :row_level_permission_tag_configuration
     #   The configuration of tags on a dataset to set row-level security.
     #   Row-level security tags are currently supported for anonymous
-    #   embedding only.
+    #   embedding only. This parameter is used with the legacy data
+    #   preparation experience.
     #
     # @option params [Array<Types::ColumnLevelPermissionRule>] :column_level_permission_rules
     #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
@@ -2480,6 +2484,18 @@ module Aws::QuickSight
     #   The usage of the dataset. `RLS_RULES` must be specified for RLS
     #   permission datasets.
     #
+    # @option params [Types::DataPrepConfiguration] :data_prep_configuration
+    #   The data preparation configuration for the dataset. This configuration
+    #   defines the source tables, transformation steps, and destination
+    #   tables used to prepare the data. Required when using the new data
+    #   preparation experience.
+    #
+    # @option params [Types::SemanticModelConfiguration] :semantic_model_configuration
+    #   The semantic model configuration for the dataset. This configuration
+    #   defines how the prepared data is structured for an analysis, including
+    #   table mappings and row-level security configurations. Required when
+    #   using the new data preparation experience.
+    #
     # @return [Types::CreateDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDataSetResponse#arn #arn} => String
@@ -2505,6 +2521,7 @@ module Aws::QuickSight
     #           input_columns: [ # required
     #             {
     #               name: "ColumnName", # required
+    #               id: "ColumnId",
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
     #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
@@ -2517,6 +2534,7 @@ module Aws::QuickSight
     #           columns: [
     #             {
     #               name: "ColumnName", # required
+    #               id: "ColumnId",
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
     #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
@@ -2530,10 +2548,29 @@ module Aws::QuickSight
     #             contains_header: false,
     #             text_qualifier: "DOUBLE_QUOTE", # accepts DOUBLE_QUOTE, SINGLE_QUOTE
     #             delimiter: "Delimiter",
+    #             custom_cell_address_range: "String",
     #           },
     #           input_columns: [ # required
     #             {
     #               name: "ColumnName", # required
+    #               id: "ColumnId",
+    #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
+    #             },
+    #           ],
+    #         },
+    #         saa_s_table: {
+    #           data_source_arn: "Arn", # required
+    #           table_path: [ # required
+    #             {
+    #               name: "TablePathElementName",
+    #               id: "TablePathElementId",
+    #             },
+    #           ],
+    #           input_columns: [ # required
+    #             {
+    #               name: "ColumnName", # required
+    #               id: "ColumnId",
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
     #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
@@ -2547,12 +2584,85 @@ module Aws::QuickSight
     #         data_transforms: [
     #           {
     #             project_operation: {
+    #               alias: "TransformOperationAlias",
+    #               source: {
+    #                 transform_operation_id: "DataSetEntityResourceId", # required
+    #                 column_id_mappings: [
+    #                   {
+    #                     source_column_id: "ColumnId", # required
+    #                     target_column_id: "ColumnId", # required
+    #                   },
+    #                 ],
+    #               },
     #               projected_columns: ["String"], # required
     #             },
     #             filter_operation: {
-    #               condition_expression: "Expression", # required
+    #               condition_expression: "Expression",
+    #               string_filter_condition: {
+    #                 column_name: "ColumnName",
+    #                 comparison_filter_condition: {
+    #                   operator: "EQUALS", # required, accepts EQUALS, DOES_NOT_EQUAL, CONTAINS, DOES_NOT_CONTAIN, STARTS_WITH, ENDS_WITH
+    #                   value: {
+    #                     static_value: "DataSetStringFilterStaticValue",
+    #                   },
+    #                 },
+    #                 list_filter_condition: {
+    #                   operator: "INCLUDE", # required, accepts INCLUDE, EXCLUDE
+    #                   values: {
+    #                     static_values: ["DataSetStringFilterStaticValue"],
+    #                   },
+    #                 },
+    #               },
+    #               numeric_filter_condition: {
+    #                 column_name: "ColumnName",
+    #                 comparison_filter_condition: {
+    #                   operator: "EQUALS", # required, accepts EQUALS, DOES_NOT_EQUAL, GREATER_THAN, GREATER_THAN_OR_EQUALS_TO, LESS_THAN, LESS_THAN_OR_EQUALS_TO
+    #                   value: {
+    #                     static_value: 1.0,
+    #                   },
+    #                 },
+    #                 range_filter_condition: {
+    #                   range_minimum: {
+    #                     static_value: 1.0,
+    #                   },
+    #                   range_maximum: {
+    #                     static_value: 1.0,
+    #                   },
+    #                   include_minimum: false,
+    #                   include_maximum: false,
+    #                 },
+    #               },
+    #               date_filter_condition: {
+    #                 column_name: "ColumnName",
+    #                 comparison_filter_condition: {
+    #                   operator: "BEFORE", # required, accepts BEFORE, BEFORE_OR_EQUALS_TO, AFTER, AFTER_OR_EQUALS_TO
+    #                   value: {
+    #                     static_value: Time.now,
+    #                   },
+    #                 },
+    #                 range_filter_condition: {
+    #                   range_minimum: {
+    #                     static_value: Time.now,
+    #                   },
+    #                   range_maximum: {
+    #                     static_value: Time.now,
+    #                   },
+    #                   include_minimum: false,
+    #                   include_maximum: false,
+    #                 },
+    #               },
     #             },
     #             create_columns_operation: {
+    #               alias: "TransformOperationAlias",
+    #               source: {
+    #                 transform_operation_id: "DataSetEntityResourceId", # required
+    #                 column_id_mappings: [
+    #                   {
+    #                     source_column_id: "ColumnId", # required
+    #                     target_column_id: "ColumnId", # required
+    #                   },
+    #                 ],
+    #               },
     #               columns: [ # required
     #                 {
     #                   column_name: "ColumnName", # required
@@ -2721,6 +2831,373 @@ module Aws::QuickSight
     #       ],
     #     },
     #     use_as: "RLS_RULES", # accepts RLS_RULES
+    #     data_prep_configuration: {
+    #       source_table_map: { # required
+    #         "DataSetEntityResourceId" => {
+    #           physical_table_id: "DataSetEntityResourceId",
+    #           data_set: {
+    #             data_set_arn: "Arn", # required
+    #             input_columns: [ # required
+    #               {
+    #                 name: "ColumnName", # required
+    #                 id: "ColumnId",
+    #                 type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #                 sub_type: "FLOAT", # accepts FLOAT, FIXED
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       },
+    #       transform_step_map: { # required
+    #         "DataSetEntityResourceId" => {
+    #           import_table_step: {
+    #             alias: "TransformOperationAlias", # required
+    #             source: { # required
+    #               source_table_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           project_step: {
+    #             alias: "TransformOperationAlias",
+    #             source: {
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             projected_columns: ["String"], # required
+    #           },
+    #           filters_step: {
+    #             alias: "TransformOperationAlias", # required
+    #             source: { # required
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             filter_operations: [ # required
+    #               {
+    #                 condition_expression: "Expression",
+    #                 string_filter_condition: {
+    #                   column_name: "ColumnName",
+    #                   comparison_filter_condition: {
+    #                     operator: "EQUALS", # required, accepts EQUALS, DOES_NOT_EQUAL, CONTAINS, DOES_NOT_CONTAIN, STARTS_WITH, ENDS_WITH
+    #                     value: {
+    #                       static_value: "DataSetStringFilterStaticValue",
+    #                     },
+    #                   },
+    #                   list_filter_condition: {
+    #                     operator: "INCLUDE", # required, accepts INCLUDE, EXCLUDE
+    #                     values: {
+    #                       static_values: ["DataSetStringFilterStaticValue"],
+    #                     },
+    #                   },
+    #                 },
+    #                 numeric_filter_condition: {
+    #                   column_name: "ColumnName",
+    #                   comparison_filter_condition: {
+    #                     operator: "EQUALS", # required, accepts EQUALS, DOES_NOT_EQUAL, GREATER_THAN, GREATER_THAN_OR_EQUALS_TO, LESS_THAN, LESS_THAN_OR_EQUALS_TO
+    #                     value: {
+    #                       static_value: 1.0,
+    #                     },
+    #                   },
+    #                   range_filter_condition: {
+    #                     range_minimum: {
+    #                       static_value: 1.0,
+    #                     },
+    #                     range_maximum: {
+    #                       static_value: 1.0,
+    #                     },
+    #                     include_minimum: false,
+    #                     include_maximum: false,
+    #                   },
+    #                 },
+    #                 date_filter_condition: {
+    #                   column_name: "ColumnName",
+    #                   comparison_filter_condition: {
+    #                     operator: "BEFORE", # required, accepts BEFORE, BEFORE_OR_EQUALS_TO, AFTER, AFTER_OR_EQUALS_TO
+    #                     value: {
+    #                       static_value: Time.now,
+    #                     },
+    #                   },
+    #                   range_filter_condition: {
+    #                     range_minimum: {
+    #                       static_value: Time.now,
+    #                     },
+    #                     range_maximum: {
+    #                       static_value: Time.now,
+    #                     },
+    #                     include_minimum: false,
+    #                     include_maximum: false,
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           create_columns_step: {
+    #             alias: "TransformOperationAlias",
+    #             source: {
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             columns: [ # required
+    #               {
+    #                 column_name: "ColumnName", # required
+    #                 column_id: "ColumnId", # required
+    #                 expression: "DataSetCalculatedFieldExpression", # required
+    #               },
+    #             ],
+    #           },
+    #           rename_columns_step: {
+    #             alias: "TransformOperationAlias", # required
+    #             source: { # required
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             rename_column_operations: [ # required
+    #               {
+    #                 column_name: "ColumnName", # required
+    #                 new_column_name: "ColumnName", # required
+    #               },
+    #             ],
+    #           },
+    #           cast_column_types_step: {
+    #             alias: "TransformOperationAlias", # required
+    #             source: { # required
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             cast_column_type_operations: [ # required
+    #               {
+    #                 column_name: "ColumnName", # required
+    #                 new_column_type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME
+    #                 sub_type: "FLOAT", # accepts FLOAT, FIXED
+    #                 format: "TypeCastFormat",
+    #               },
+    #             ],
+    #           },
+    #           join_step: {
+    #             alias: "TransformOperationAlias", # required
+    #             left_operand: { # required
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             right_operand: { # required
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             type: "INNER", # required, accepts INNER, OUTER, LEFT, RIGHT
+    #             on_clause: "JoinOperationOnClause", # required
+    #             left_operand_properties: {
+    #               output_column_name_overrides: [ # required
+    #                 {
+    #                   source_column_name: "ColumnName",
+    #                   output_column_name: "ColumnName", # required
+    #                 },
+    #               ],
+    #             },
+    #             right_operand_properties: {
+    #               output_column_name_overrides: [ # required
+    #                 {
+    #                   source_column_name: "ColumnName",
+    #                   output_column_name: "ColumnName", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           aggregate_step: {
+    #             alias: "TransformOperationAlias", # required
+    #             source: { # required
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             group_by_column_names: ["ColumnName"],
+    #             aggregations: [ # required
+    #               {
+    #                 aggregation_function: { # required
+    #                   simple_aggregation: {
+    #                     input_column_name: "ColumnName",
+    #                     function_type: "COUNT", # required, accepts COUNT, DISTINCT_COUNT, SUM, AVERAGE, MAX, MIN
+    #                   },
+    #                   list_aggregation: {
+    #                     input_column_name: "ColumnName",
+    #                     separator: "Separator", # required
+    #                     distinct: false, # required
+    #                   },
+    #                 },
+    #                 new_column_name: "ColumnName", # required
+    #                 new_column_id: "ColumnId", # required
+    #               },
+    #             ],
+    #           },
+    #           pivot_step: {
+    #             alias: "TransformOperationAlias", # required
+    #             source: { # required
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             group_by_column_names: ["ColumnName"],
+    #             value_column_configuration: { # required
+    #               aggregation_function: {
+    #                 simple_aggregation: {
+    #                   input_column_name: "ColumnName",
+    #                   function_type: "COUNT", # required, accepts COUNT, DISTINCT_COUNT, SUM, AVERAGE, MAX, MIN
+    #                 },
+    #                 list_aggregation: {
+    #                   input_column_name: "ColumnName",
+    #                   separator: "Separator", # required
+    #                   distinct: false, # required
+    #                 },
+    #               },
+    #             },
+    #             pivot_configuration: { # required
+    #               label_column_name: "ColumnName",
+    #               pivoted_labels: [ # required
+    #                 {
+    #                   label_name: "CellValue", # required
+    #                   new_column_name: "ColumnName", # required
+    #                   new_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           unpivot_step: {
+    #             alias: "TransformOperationAlias", # required
+    #             source: { # required
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             columns_to_unpivot: [ # required
+    #               {
+    #                 column_name: "ColumnName",
+    #                 new_value: "CellValue",
+    #               },
+    #             ],
+    #             unpivoted_label_column_name: "ColumnName", # required
+    #             unpivoted_label_column_id: "ColumnId", # required
+    #             unpivoted_value_column_name: "ColumnName", # required
+    #             unpivoted_value_column_id: "ColumnId", # required
+    #           },
+    #           append_step: {
+    #             alias: "TransformOperationAlias", # required
+    #             first_source: {
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             second_source: {
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             appended_columns: [ # required
+    #               {
+    #                 column_name: "ColumnName", # required
+    #                 new_column_id: "ColumnId", # required
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       },
+    #       destination_table_map: { # required
+    #         "DataSetEntityResourceId" => {
+    #           alias: "DestinationTableAlias", # required
+    #           source: { # required
+    #             transform_operation_id: "DataSetEntityResourceId", # required
+    #           },
+    #         },
+    #       },
+    #     },
+    #     semantic_model_configuration: {
+    #       table_map: {
+    #         "DataSetEntityResourceId" => {
+    #           alias: "SemanticTableAlias", # required
+    #           destination_table_id: "DataSetEntityResourceId", # required
+    #           row_level_permission_configuration: {
+    #             tag_configuration: {
+    #               status: "ENABLED", # accepts ENABLED, DISABLED
+    #               tag_rules: [ # required
+    #                 {
+    #                   tag_key: "SessionTagKey", # required
+    #                   column_name: "String", # required
+    #                   tag_multi_value_delimiter: "RowLevelPermissionTagDelimiter",
+    #                   match_all_value: "SessionTagValue",
+    #                 },
+    #               ],
+    #               tag_rule_configurations: [
+    #                 ["SessionTagKey"],
+    #               ],
+    #             },
+    #             row_level_permission_data_set: {
+    #               namespace: "Namespace",
+    #               arn: "Arn", # required
+    #               permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
+    #               format_version: "VERSION_1", # accepts VERSION_1, VERSION_2
+    #               status: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #           },
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -3177,6 +3654,11 @@ module Aws::QuickSight
     #       },
     #       copy_source_arn: "CopySourceArn",
     #       secret_arn: "SecretArn",
+    #       key_pair_credentials: {
+    #         key_pair_username: "DbUsername", # required
+    #         private_key: "PrivateKey", # required
+    #         private_key_passphrase: "PrivateKeyPassphrase",
+    #       },
     #       web_proxy_credentials: {
     #         web_proxy_username: "DbUsername", # required
     #         web_proxy_password: "Password", # required
@@ -4002,9 +4484,14 @@ module Aws::QuickSight
     #       },
     #       sheet: {
     #         tile: {
+    #           background_color: "Color",
     #           border: {
+    #             color: "Color",
     #             show: false,
+    #             width: "Width",
     #           },
+    #           border_radius: "BorderRadius",
+    #           padding: "Padding",
     #         },
     #         tile_layout: {
     #           gutter: {
@@ -4014,6 +4501,10 @@ module Aws::QuickSight
     #             show: false,
     #           },
     #         },
+    #         background: {
+    #           color: "Color",
+    #           gradient: "String",
+    #         },
     #       },
     #       typography: {
     #         font_families: [
@@ -4021,6 +4512,105 @@ module Aws::QuickSight
     #             font_family: "String",
     #           },
     #         ],
+    #         axis_title_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         axis_label_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         legend_title_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         legend_value_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         data_label_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         visual_title_font_configuration: {
+    #           font_configuration: {
+    #             font_size: {
+    #               relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #               absolute: "PixelLength",
+    #             },
+    #             font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #             font_color: "HexColor",
+    #             font_weight: {
+    #               name: "NORMAL", # accepts NORMAL, BOLD
+    #             },
+    #             font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #             font_family: "String",
+    #           },
+    #           text_alignment: "LEFT", # accepts LEFT, CENTER, RIGHT, AUTO
+    #           text_transform: "CAPITALIZE", # accepts CAPITALIZE
+    #         },
+    #         visual_subtitle_font_configuration: {
+    #           font_configuration: {
+    #             font_size: {
+    #               relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #               absolute: "PixelLength",
+    #             },
+    #             font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #             font_color: "HexColor",
+    #             font_weight: {
+    #               name: "NORMAL", # accepts NORMAL, BOLD
+    #             },
+    #             font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #             font_family: "String",
+    #           },
+    #           text_alignment: "LEFT", # accepts LEFT, CENTER, RIGHT, AUTO
+    #           text_transform: "CAPITALIZE", # accepts CAPITALIZE
+    #         },
     #       },
     #     },
     #     permissions: [
@@ -4822,7 +5412,7 @@ module Aws::QuickSight
     #   The ID of the Amazon Web Services account that owns the brand.
     #
     # @option params [required, String] :brand_id
-    #   The ID of the QuickSight brand.
+    #   The ID of the Quick Suite brand.
     #
     # @return [Types::DeleteBrandResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4964,7 +5554,7 @@ module Aws::QuickSight
     #   The Amazon Web Services account ID.
     #
     # @option params [required, String] :data_set_id
-    #   The ID for the dataset that you want to create. This ID is unique per
+    #   The ID for the dataset that you want to delete. This ID is unique per
     #   Amazon Web Services Region for each Amazon Web Services account.
     #
     # @return [Types::DeleteDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -6909,7 +7499,7 @@ module Aws::QuickSight
     #   The ID of the Amazon Web Services account that owns the brand.
     #
     # @option params [required, String] :brand_id
-    #   The ID of the QuickSight brand.
+    #   The ID of the Quick Suite brand.
     #
     # @option params [String] :version_id
     #   The ID of the specific version. The default value is the latest
@@ -7044,7 +7634,7 @@ module Aws::QuickSight
     #   The ID of the Amazon Web Services account that owns the brand.
     #
     # @option params [required, String] :brand_id
-    #   The ID of the QuickSight brand.
+    #   The ID of the Quick Suite brand.
     #
     # @return [Types::DescribeBrandPublishedVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7201,6 +7791,7 @@ module Aws::QuickSight
     #   resp.custom_permissions.capabilities.chat_agent #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.create_chat_agents #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.research #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.self_upgrade_user_role #=> String, one of "DENY"
     #   resp.request_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeCustomPermissions AWS API Documentation
@@ -7426,6 +8017,23 @@ module Aws::QuickSight
     # Poll job descriptions after a job starts to know the status of the
     # job. For information on available status codes, see `JobStatus`.
     #
+    # **Registered user support**
+    #
+    # This API can be called as before to get status of a job started by the
+    # same Quick Sight user.
+    #
+    # **Possible error scenarios**
+    #
+    # Request will fail with an Access Denied error in the following
+    # scenarios:
+    #
+    # * The credentials have expired.
+    #
+    # * Job has been started by a different user.
+    #
+    # * Impersonated Quick Sight user doesn't have access to the specified
+    #   dashboard in the job.
+    #
     # @option params [required, String] :aws_account_id
     #   The ID of the Amazon Web Services account that the dashboard snapshot
     #   job is executed in.
@@ -7521,6 +8129,47 @@ module Aws::QuickSight
     # that says `Dashboard Snapshot Job with id <SnapshotjobId> has not
     # reached a terminal state.`.
     #
+    # **Registered user support**
+    #
+    # This API can be called as before to get the result of a job started by
+    # the same Quick Sight user. The result for the user will be returned in
+    # `RegisteredUsers` response attribute. The attribute will contain a
+    # list with at most one object in it.
+    #
+    # **Possible error scenarios**
+    #
+    # The request fails with an Access Denied error in the following
+    # scenarios:
+    #
+    # * The credentials have expired.
+    #
+    # * The job was started by a different user.
+    #
+    # * The registered user doesn't have access to the specified dashboard.
+    #
+    # The request succeeds but the job fails in the following scenarios:
+    #
+    # * `DASHBOARD_ACCESS_DENIED` - The registered user lost access to the
+    #   dashboard.
+    #
+    # * `CAPABILITY_RESTRICTED` - The registered user is restricted from
+    #   exporting data in **all** selected formats.
+    #
+    # The request succeeds but the response contains an error code in the
+    # following scenarios:
+    #
+    # * `CAPABILITY_RESTRICTED` - The registered user is restricted from
+    #   exporting data in **some** selected formats.
+    #
+    # * `RLS_CHANGED` - Row-level security settings have changed. Re-run the
+    #   job with current settings.
+    #
+    # * `CLS_CHANGED` - Column-level security settings have changed. Re-run
+    #   the job with current settings.
+    #
+    # * `DATASET_DELETED` - The dataset has been deleted. Verify the dataset
+    #   exists before re-running the job.
+    #
     # @option params [required, String] :aws_account_id
     #   The ID of the Amazon Web Services account that the dashboard snapshot
     #   job is executed in.
@@ -7574,6 +8223,23 @@ module Aws::QuickSight
     #   resp.result.anonymous_users[0].file_groups[0].s3_results[0].error_info #=> Array
     #   resp.result.anonymous_users[0].file_groups[0].s3_results[0].error_info[0].error_message #=> String
     #   resp.result.anonymous_users[0].file_groups[0].s3_results[0].error_info[0].error_type #=> String
+    #   resp.result.registered_users #=> Array
+    #   resp.result.registered_users[0].file_groups #=> Array
+    #   resp.result.registered_users[0].file_groups[0].files #=> Array
+    #   resp.result.registered_users[0].file_groups[0].files[0].sheet_selections #=> Array
+    #   resp.result.registered_users[0].file_groups[0].files[0].sheet_selections[0].sheet_id #=> String
+    #   resp.result.registered_users[0].file_groups[0].files[0].sheet_selections[0].selection_scope #=> String, one of "ALL_VISUALS", "SELECTED_VISUALS"
+    #   resp.result.registered_users[0].file_groups[0].files[0].sheet_selections[0].visual_ids #=> Array
+    #   resp.result.registered_users[0].file_groups[0].files[0].sheet_selections[0].visual_ids[0] #=> String
+    #   resp.result.registered_users[0].file_groups[0].files[0].format_type #=> String, one of "CSV", "PDF", "EXCEL"
+    #   resp.result.registered_users[0].file_groups[0].s3_results #=> Array
+    #   resp.result.registered_users[0].file_groups[0].s3_results[0].s3_destination_configuration.bucket_configuration.bucket_name #=> String
+    #   resp.result.registered_users[0].file_groups[0].s3_results[0].s3_destination_configuration.bucket_configuration.bucket_prefix #=> String
+    #   resp.result.registered_users[0].file_groups[0].s3_results[0].s3_destination_configuration.bucket_configuration.bucket_region #=> String
+    #   resp.result.registered_users[0].file_groups[0].s3_results[0].s3_uri #=> String
+    #   resp.result.registered_users[0].file_groups[0].s3_results[0].error_info #=> Array
+    #   resp.result.registered_users[0].file_groups[0].s3_results[0].error_info[0].error_message #=> String
+    #   resp.result.registered_users[0].file_groups[0].s3_results[0].error_info[0].error_type #=> String
     #   resp.error_info.error_message #=> String
     #   resp.error_info.error_type #=> String
     #   resp.request_id #=> String
@@ -7628,8 +8294,8 @@ module Aws::QuickSight
     #   The Amazon Web Services account ID.
     #
     # @option params [required, String] :data_set_id
-    #   The ID for the dataset that you want to create. This ID is unique per
-    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   The ID for the dataset that you want to describe. This ID is unique
+    #   per Amazon Web Services Region for each Amazon Web Services account.
     #
     # @return [Types::DescribeDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7658,6 +8324,7 @@ module Aws::QuickSight
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.name #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns #=> Array
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns[0].name #=> String
+    #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns[0].id #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
     #   resp.data_set.physical_table_map["PhysicalTableId"].relational_table.input_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.data_source_arn #=> String
@@ -7665,6 +8332,7 @@ module Aws::QuickSight
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.sql_query #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns #=> Array
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns[0].name #=> String
+    #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns[0].id #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
     #   resp.data_set.physical_table_map["PhysicalTableId"].custom_sql.columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.data_source_arn #=> String
@@ -7673,16 +8341,57 @@ module Aws::QuickSight
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.upload_settings.contains_header #=> Boolean
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.upload_settings.text_qualifier #=> String, one of "DOUBLE_QUOTE", "SINGLE_QUOTE"
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.upload_settings.delimiter #=> String
+    #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.upload_settings.custom_cell_address_range #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns #=> Array
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns[0].name #=> String
+    #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns[0].id #=> String
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
     #   resp.data_set.physical_table_map["PhysicalTableId"].s3_source.input_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
+    #   resp.data_set.physical_table_map["PhysicalTableId"].saa_s_table.data_source_arn #=> String
+    #   resp.data_set.physical_table_map["PhysicalTableId"].saa_s_table.table_path #=> Array
+    #   resp.data_set.physical_table_map["PhysicalTableId"].saa_s_table.table_path[0].name #=> String
+    #   resp.data_set.physical_table_map["PhysicalTableId"].saa_s_table.table_path[0].id #=> String
+    #   resp.data_set.physical_table_map["PhysicalTableId"].saa_s_table.input_columns #=> Array
+    #   resp.data_set.physical_table_map["PhysicalTableId"].saa_s_table.input_columns[0].name #=> String
+    #   resp.data_set.physical_table_map["PhysicalTableId"].saa_s_table.input_columns[0].id #=> String
+    #   resp.data_set.physical_table_map["PhysicalTableId"].saa_s_table.input_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
+    #   resp.data_set.physical_table_map["PhysicalTableId"].saa_s_table.input_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
     #   resp.data_set.logical_table_map #=> Hash
     #   resp.data_set.logical_table_map["LogicalTableId"].alias #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms #=> Array
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].project_operation.alias #=> String
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].project_operation.source.transform_operation_id #=> String
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].project_operation.source.column_id_mappings #=> Array
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].project_operation.source.column_id_mappings[0].source_column_id #=> String
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].project_operation.source.column_id_mappings[0].target_column_id #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].project_operation.projected_columns #=> Array
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].project_operation.projected_columns[0] #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.condition_expression #=> String
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.string_filter_condition.column_name #=> String
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.string_filter_condition.comparison_filter_condition.operator #=> String, one of "EQUALS", "DOES_NOT_EQUAL", "CONTAINS", "DOES_NOT_CONTAIN", "STARTS_WITH", "ENDS_WITH"
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.string_filter_condition.comparison_filter_condition.value.static_value #=> String
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.string_filter_condition.list_filter_condition.operator #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.string_filter_condition.list_filter_condition.values.static_values #=> Array
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.string_filter_condition.list_filter_condition.values.static_values[0] #=> String
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.numeric_filter_condition.column_name #=> String
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.numeric_filter_condition.comparison_filter_condition.operator #=> String, one of "EQUALS", "DOES_NOT_EQUAL", "GREATER_THAN", "GREATER_THAN_OR_EQUALS_TO", "LESS_THAN", "LESS_THAN_OR_EQUALS_TO"
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.numeric_filter_condition.comparison_filter_condition.value.static_value #=> Float
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.numeric_filter_condition.range_filter_condition.range_minimum.static_value #=> Float
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.numeric_filter_condition.range_filter_condition.range_maximum.static_value #=> Float
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.numeric_filter_condition.range_filter_condition.include_minimum #=> Boolean
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.numeric_filter_condition.range_filter_condition.include_maximum #=> Boolean
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.date_filter_condition.column_name #=> String
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.date_filter_condition.comparison_filter_condition.operator #=> String, one of "BEFORE", "BEFORE_OR_EQUALS_TO", "AFTER", "AFTER_OR_EQUALS_TO"
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.date_filter_condition.comparison_filter_condition.value.static_value #=> Time
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.date_filter_condition.range_filter_condition.range_minimum.static_value #=> Time
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.date_filter_condition.range_filter_condition.range_maximum.static_value #=> Time
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.date_filter_condition.range_filter_condition.include_minimum #=> Boolean
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].filter_operation.date_filter_condition.range_filter_condition.include_maximum #=> Boolean
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].create_columns_operation.alias #=> String
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].create_columns_operation.source.transform_operation_id #=> String
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].create_columns_operation.source.column_id_mappings #=> Array
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].create_columns_operation.source.column_id_mappings[0].source_column_id #=> String
+    #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].create_columns_operation.source.column_id_mappings[0].target_column_id #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].create_columns_operation.columns #=> Array
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].create_columns_operation.columns[0].column_name #=> String
     #   resp.data_set.logical_table_map["LogicalTableId"].data_transforms[0].create_columns_operation.columns[0].column_id #=> String
@@ -7720,6 +8429,7 @@ module Aws::QuickSight
     #   resp.data_set.logical_table_map["LogicalTableId"].source.data_set_arn #=> String
     #   resp.data_set.output_columns #=> Array
     #   resp.data_set.output_columns[0].name #=> String
+    #   resp.data_set.output_columns[0].id #=> String
     #   resp.data_set.output_columns[0].description #=> String
     #   resp.data_set.output_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME"
     #   resp.data_set.output_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
@@ -7781,6 +8491,174 @@ module Aws::QuickSight
     #   resp.data_set.performance_configuration.unique_keys[0].column_names #=> Array
     #   resp.data_set.performance_configuration.unique_keys[0].column_names[0] #=> String
     #   resp.data_set.use_as #=> String, one of "RLS_RULES"
+    #   resp.data_set.data_prep_configuration.source_table_map #=> Hash
+    #   resp.data_set.data_prep_configuration.source_table_map["DataSetEntityResourceId"].physical_table_id #=> String
+    #   resp.data_set.data_prep_configuration.source_table_map["DataSetEntityResourceId"].data_set.data_set_arn #=> String
+    #   resp.data_set.data_prep_configuration.source_table_map["DataSetEntityResourceId"].data_set.input_columns #=> Array
+    #   resp.data_set.data_prep_configuration.source_table_map["DataSetEntityResourceId"].data_set.input_columns[0].name #=> String
+    #   resp.data_set.data_prep_configuration.source_table_map["DataSetEntityResourceId"].data_set.input_columns[0].id #=> String
+    #   resp.data_set.data_prep_configuration.source_table_map["DataSetEntityResourceId"].data_set.input_columns[0].type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME", "BIT", "BOOLEAN", "JSON"
+    #   resp.data_set.data_prep_configuration.source_table_map["DataSetEntityResourceId"].data_set.input_columns[0].sub_type #=> String, one of "FLOAT", "FIXED"
+    #   resp.data_set.data_prep_configuration.transform_step_map #=> Hash
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].import_table_step.alias #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].import_table_step.source.source_table_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].import_table_step.source.column_id_mappings #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].import_table_step.source.column_id_mappings[0].source_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].import_table_step.source.column_id_mappings[0].target_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].project_step.alias #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].project_step.source.transform_operation_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].project_step.source.column_id_mappings #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].project_step.source.column_id_mappings[0].source_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].project_step.source.column_id_mappings[0].target_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].project_step.projected_columns #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].project_step.projected_columns[0] #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.alias #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.source.transform_operation_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.source.column_id_mappings #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.source.column_id_mappings[0].source_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.source.column_id_mappings[0].target_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].condition_expression #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].string_filter_condition.column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].string_filter_condition.comparison_filter_condition.operator #=> String, one of "EQUALS", "DOES_NOT_EQUAL", "CONTAINS", "DOES_NOT_CONTAIN", "STARTS_WITH", "ENDS_WITH"
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].string_filter_condition.comparison_filter_condition.value.static_value #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].string_filter_condition.list_filter_condition.operator #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].string_filter_condition.list_filter_condition.values.static_values #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].string_filter_condition.list_filter_condition.values.static_values[0] #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].numeric_filter_condition.column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].numeric_filter_condition.comparison_filter_condition.operator #=> String, one of "EQUALS", "DOES_NOT_EQUAL", "GREATER_THAN", "GREATER_THAN_OR_EQUALS_TO", "LESS_THAN", "LESS_THAN_OR_EQUALS_TO"
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].numeric_filter_condition.comparison_filter_condition.value.static_value #=> Float
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].numeric_filter_condition.range_filter_condition.range_minimum.static_value #=> Float
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].numeric_filter_condition.range_filter_condition.range_maximum.static_value #=> Float
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].numeric_filter_condition.range_filter_condition.include_minimum #=> Boolean
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].numeric_filter_condition.range_filter_condition.include_maximum #=> Boolean
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].date_filter_condition.column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].date_filter_condition.comparison_filter_condition.operator #=> String, one of "BEFORE", "BEFORE_OR_EQUALS_TO", "AFTER", "AFTER_OR_EQUALS_TO"
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].date_filter_condition.comparison_filter_condition.value.static_value #=> Time
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].date_filter_condition.range_filter_condition.range_minimum.static_value #=> Time
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].date_filter_condition.range_filter_condition.range_maximum.static_value #=> Time
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].date_filter_condition.range_filter_condition.include_minimum #=> Boolean
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].filters_step.filter_operations[0].date_filter_condition.range_filter_condition.include_maximum #=> Boolean
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].create_columns_step.alias #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].create_columns_step.source.transform_operation_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].create_columns_step.source.column_id_mappings #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].create_columns_step.source.column_id_mappings[0].source_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].create_columns_step.source.column_id_mappings[0].target_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].create_columns_step.columns #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].create_columns_step.columns[0].column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].create_columns_step.columns[0].column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].create_columns_step.columns[0].expression #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].rename_columns_step.alias #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].rename_columns_step.source.transform_operation_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].rename_columns_step.source.column_id_mappings #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].rename_columns_step.source.column_id_mappings[0].source_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].rename_columns_step.source.column_id_mappings[0].target_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].rename_columns_step.rename_column_operations #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].rename_columns_step.rename_column_operations[0].column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].rename_columns_step.rename_column_operations[0].new_column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].cast_column_types_step.alias #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].cast_column_types_step.source.transform_operation_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].cast_column_types_step.source.column_id_mappings #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].cast_column_types_step.source.column_id_mappings[0].source_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].cast_column_types_step.source.column_id_mappings[0].target_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].cast_column_types_step.cast_column_type_operations #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].cast_column_types_step.cast_column_type_operations[0].column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].cast_column_types_step.cast_column_type_operations[0].new_column_type #=> String, one of "STRING", "INTEGER", "DECIMAL", "DATETIME"
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].cast_column_types_step.cast_column_type_operations[0].sub_type #=> String, one of "FLOAT", "FIXED"
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].cast_column_types_step.cast_column_type_operations[0].format #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].join_step.alias #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].join_step.left_operand.transform_operation_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].join_step.left_operand.column_id_mappings #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].join_step.left_operand.column_id_mappings[0].source_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].join_step.left_operand.column_id_mappings[0].target_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].join_step.right_operand.transform_operation_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].join_step.right_operand.column_id_mappings #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].join_step.right_operand.column_id_mappings[0].source_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].join_step.right_operand.column_id_mappings[0].target_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].join_step.type #=> String, one of "INNER", "OUTER", "LEFT", "RIGHT"
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].join_step.on_clause #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].join_step.left_operand_properties.output_column_name_overrides #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].join_step.left_operand_properties.output_column_name_overrides[0].source_column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].join_step.left_operand_properties.output_column_name_overrides[0].output_column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].join_step.right_operand_properties.output_column_name_overrides #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].join_step.right_operand_properties.output_column_name_overrides[0].source_column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].join_step.right_operand_properties.output_column_name_overrides[0].output_column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].aggregate_step.alias #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].aggregate_step.source.transform_operation_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].aggregate_step.source.column_id_mappings #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].aggregate_step.source.column_id_mappings[0].source_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].aggregate_step.source.column_id_mappings[0].target_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].aggregate_step.group_by_column_names #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].aggregate_step.group_by_column_names[0] #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].aggregate_step.aggregations #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].aggregate_step.aggregations[0].aggregation_function.simple_aggregation.input_column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].aggregate_step.aggregations[0].aggregation_function.simple_aggregation.function_type #=> String, one of "COUNT", "DISTINCT_COUNT", "SUM", "AVERAGE", "MAX", "MIN"
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].aggregate_step.aggregations[0].aggregation_function.list_aggregation.input_column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].aggregate_step.aggregations[0].aggregation_function.list_aggregation.separator #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].aggregate_step.aggregations[0].aggregation_function.list_aggregation.distinct #=> Boolean
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].aggregate_step.aggregations[0].new_column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].aggregate_step.aggregations[0].new_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].pivot_step.alias #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].pivot_step.source.transform_operation_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].pivot_step.source.column_id_mappings #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].pivot_step.source.column_id_mappings[0].source_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].pivot_step.source.column_id_mappings[0].target_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].pivot_step.group_by_column_names #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].pivot_step.group_by_column_names[0] #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].pivot_step.value_column_configuration.aggregation_function.simple_aggregation.input_column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].pivot_step.value_column_configuration.aggregation_function.simple_aggregation.function_type #=> String, one of "COUNT", "DISTINCT_COUNT", "SUM", "AVERAGE", "MAX", "MIN"
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].pivot_step.value_column_configuration.aggregation_function.list_aggregation.input_column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].pivot_step.value_column_configuration.aggregation_function.list_aggregation.separator #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].pivot_step.value_column_configuration.aggregation_function.list_aggregation.distinct #=> Boolean
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].pivot_step.pivot_configuration.label_column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].pivot_step.pivot_configuration.pivoted_labels #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].pivot_step.pivot_configuration.pivoted_labels[0].label_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].pivot_step.pivot_configuration.pivoted_labels[0].new_column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].pivot_step.pivot_configuration.pivoted_labels[0].new_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].unpivot_step.alias #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].unpivot_step.source.transform_operation_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].unpivot_step.source.column_id_mappings #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].unpivot_step.source.column_id_mappings[0].source_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].unpivot_step.source.column_id_mappings[0].target_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].unpivot_step.columns_to_unpivot #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].unpivot_step.columns_to_unpivot[0].column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].unpivot_step.columns_to_unpivot[0].new_value #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].unpivot_step.unpivoted_label_column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].unpivot_step.unpivoted_label_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].unpivot_step.unpivoted_value_column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].unpivot_step.unpivoted_value_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].append_step.alias #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].append_step.first_source.transform_operation_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].append_step.first_source.column_id_mappings #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].append_step.first_source.column_id_mappings[0].source_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].append_step.first_source.column_id_mappings[0].target_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].append_step.second_source.transform_operation_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].append_step.second_source.column_id_mappings #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].append_step.second_source.column_id_mappings[0].source_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].append_step.second_source.column_id_mappings[0].target_column_id #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].append_step.appended_columns #=> Array
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].append_step.appended_columns[0].column_name #=> String
+    #   resp.data_set.data_prep_configuration.transform_step_map["DataSetEntityResourceId"].append_step.appended_columns[0].new_column_id #=> String
+    #   resp.data_set.data_prep_configuration.destination_table_map #=> Hash
+    #   resp.data_set.data_prep_configuration.destination_table_map["DataSetEntityResourceId"].alias #=> String
+    #   resp.data_set.data_prep_configuration.destination_table_map["DataSetEntityResourceId"].source.transform_operation_id #=> String
+    #   resp.data_set.semantic_model_configuration.table_map #=> Hash
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].alias #=> String
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].destination_table_id #=> String
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.tag_configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.tag_configuration.tag_rules #=> Array
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.tag_configuration.tag_rules[0].tag_key #=> String
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.tag_configuration.tag_rules[0].column_name #=> String
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.tag_configuration.tag_rules[0].tag_multi_value_delimiter #=> String
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.tag_configuration.tag_rules[0].match_all_value #=> String
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.tag_configuration.tag_rule_configurations #=> Array
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.tag_configuration.tag_rule_configurations[0] #=> Array
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.tag_configuration.tag_rule_configurations[0][0] #=> String
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.row_level_permission_data_set.namespace #=> String
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.row_level_permission_data_set.arn #=> String
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.row_level_permission_data_set.permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.row_level_permission_data_set.format_version #=> String, one of "VERSION_1", "VERSION_2"
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.row_level_permission_data_set.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -7802,8 +8680,8 @@ module Aws::QuickSight
     #   The Amazon Web Services account ID.
     #
     # @option params [required, String] :data_set_id
-    #   The ID for the dataset that you want to create. This ID is unique per
-    #   Amazon Web Services Region for each Amazon Web Services account.
+    #   The ID for the dataset that you want to describe. This ID is unique
+    #   per Amazon Web Services Region for each Amazon Web Services account.
     #
     # @return [Types::DescribeDataSetPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8871,6 +9749,44 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Describes the self-upgrade configuration for a Quick Suite account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Suite self-upgrade configuration.
+    #
+    # @option params [required, String] :namespace
+    #   The Quick Suite namespace that you want to describe the Quick Suite
+    #   self-upgrade configuration for.
+    #
+    # @return [Types::DescribeSelfUpgradeConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSelfUpgradeConfigurationResponse#self_upgrade_configuration #self_upgrade_configuration} => Types::SelfUpgradeConfiguration
+    #   * {Types::DescribeSelfUpgradeConfigurationResponse#request_id #request_id} => String
+    #   * {Types::DescribeSelfUpgradeConfigurationResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_self_upgrade_configuration({
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.self_upgrade_configuration.self_upgrade_status #=> String, one of "AUTO_APPROVAL", "ADMIN_APPROVAL"
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeSelfUpgradeConfiguration AWS API Documentation
+    #
+    # @overload describe_self_upgrade_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_self_upgrade_configuration(params = {}, options = {})
+      req = build_request(:describe_self_upgrade_configuration, params)
+      req.send_request(options)
+    end
+
     # Describes a template's metadata.
     #
     # @option params [required, String] :aws_account_id
@@ -9201,11 +10117,71 @@ module Aws::QuickSight
     #   resp.theme.version.configuration.ui_color_palette.dimension_foreground #=> String
     #   resp.theme.version.configuration.ui_color_palette.measure #=> String
     #   resp.theme.version.configuration.ui_color_palette.measure_foreground #=> String
+    #   resp.theme.version.configuration.sheet.tile.background_color #=> String
+    #   resp.theme.version.configuration.sheet.tile.border.color #=> String
     #   resp.theme.version.configuration.sheet.tile.border.show #=> Boolean
+    #   resp.theme.version.configuration.sheet.tile.border.width #=> String
+    #   resp.theme.version.configuration.sheet.tile.border_radius #=> String
+    #   resp.theme.version.configuration.sheet.tile.padding #=> String
     #   resp.theme.version.configuration.sheet.tile_layout.gutter.show #=> Boolean
     #   resp.theme.version.configuration.sheet.tile_layout.margin.show #=> Boolean
+    #   resp.theme.version.configuration.sheet.background.color #=> String
+    #   resp.theme.version.configuration.sheet.background.gradient #=> String
     #   resp.theme.version.configuration.typography.font_families #=> Array
     #   resp.theme.version.configuration.typography.font_families[0].font_family #=> String
+    #   resp.theme.version.configuration.typography.axis_title_font_configuration.font_size.relative #=> String, one of "EXTRA_SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA_LARGE"
+    #   resp.theme.version.configuration.typography.axis_title_font_configuration.font_size.absolute #=> String
+    #   resp.theme.version.configuration.typography.axis_title_font_configuration.font_decoration #=> String, one of "UNDERLINE", "NONE"
+    #   resp.theme.version.configuration.typography.axis_title_font_configuration.font_color #=> String
+    #   resp.theme.version.configuration.typography.axis_title_font_configuration.font_weight.name #=> String, one of "NORMAL", "BOLD"
+    #   resp.theme.version.configuration.typography.axis_title_font_configuration.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.theme.version.configuration.typography.axis_title_font_configuration.font_family #=> String
+    #   resp.theme.version.configuration.typography.axis_label_font_configuration.font_size.relative #=> String, one of "EXTRA_SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA_LARGE"
+    #   resp.theme.version.configuration.typography.axis_label_font_configuration.font_size.absolute #=> String
+    #   resp.theme.version.configuration.typography.axis_label_font_configuration.font_decoration #=> String, one of "UNDERLINE", "NONE"
+    #   resp.theme.version.configuration.typography.axis_label_font_configuration.font_color #=> String
+    #   resp.theme.version.configuration.typography.axis_label_font_configuration.font_weight.name #=> String, one of "NORMAL", "BOLD"
+    #   resp.theme.version.configuration.typography.axis_label_font_configuration.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.theme.version.configuration.typography.axis_label_font_configuration.font_family #=> String
+    #   resp.theme.version.configuration.typography.legend_title_font_configuration.font_size.relative #=> String, one of "EXTRA_SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA_LARGE"
+    #   resp.theme.version.configuration.typography.legend_title_font_configuration.font_size.absolute #=> String
+    #   resp.theme.version.configuration.typography.legend_title_font_configuration.font_decoration #=> String, one of "UNDERLINE", "NONE"
+    #   resp.theme.version.configuration.typography.legend_title_font_configuration.font_color #=> String
+    #   resp.theme.version.configuration.typography.legend_title_font_configuration.font_weight.name #=> String, one of "NORMAL", "BOLD"
+    #   resp.theme.version.configuration.typography.legend_title_font_configuration.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.theme.version.configuration.typography.legend_title_font_configuration.font_family #=> String
+    #   resp.theme.version.configuration.typography.legend_value_font_configuration.font_size.relative #=> String, one of "EXTRA_SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA_LARGE"
+    #   resp.theme.version.configuration.typography.legend_value_font_configuration.font_size.absolute #=> String
+    #   resp.theme.version.configuration.typography.legend_value_font_configuration.font_decoration #=> String, one of "UNDERLINE", "NONE"
+    #   resp.theme.version.configuration.typography.legend_value_font_configuration.font_color #=> String
+    #   resp.theme.version.configuration.typography.legend_value_font_configuration.font_weight.name #=> String, one of "NORMAL", "BOLD"
+    #   resp.theme.version.configuration.typography.legend_value_font_configuration.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.theme.version.configuration.typography.legend_value_font_configuration.font_family #=> String
+    #   resp.theme.version.configuration.typography.data_label_font_configuration.font_size.relative #=> String, one of "EXTRA_SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA_LARGE"
+    #   resp.theme.version.configuration.typography.data_label_font_configuration.font_size.absolute #=> String
+    #   resp.theme.version.configuration.typography.data_label_font_configuration.font_decoration #=> String, one of "UNDERLINE", "NONE"
+    #   resp.theme.version.configuration.typography.data_label_font_configuration.font_color #=> String
+    #   resp.theme.version.configuration.typography.data_label_font_configuration.font_weight.name #=> String, one of "NORMAL", "BOLD"
+    #   resp.theme.version.configuration.typography.data_label_font_configuration.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.theme.version.configuration.typography.data_label_font_configuration.font_family #=> String
+    #   resp.theme.version.configuration.typography.visual_title_font_configuration.font_configuration.font_size.relative #=> String, one of "EXTRA_SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA_LARGE"
+    #   resp.theme.version.configuration.typography.visual_title_font_configuration.font_configuration.font_size.absolute #=> String
+    #   resp.theme.version.configuration.typography.visual_title_font_configuration.font_configuration.font_decoration #=> String, one of "UNDERLINE", "NONE"
+    #   resp.theme.version.configuration.typography.visual_title_font_configuration.font_configuration.font_color #=> String
+    #   resp.theme.version.configuration.typography.visual_title_font_configuration.font_configuration.font_weight.name #=> String, one of "NORMAL", "BOLD"
+    #   resp.theme.version.configuration.typography.visual_title_font_configuration.font_configuration.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.theme.version.configuration.typography.visual_title_font_configuration.font_configuration.font_family #=> String
+    #   resp.theme.version.configuration.typography.visual_title_font_configuration.text_alignment #=> String, one of "LEFT", "CENTER", "RIGHT", "AUTO"
+    #   resp.theme.version.configuration.typography.visual_title_font_configuration.text_transform #=> String, one of "CAPITALIZE"
+    #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.font_configuration.font_size.relative #=> String, one of "EXTRA_SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA_LARGE"
+    #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.font_configuration.font_size.absolute #=> String
+    #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.font_configuration.font_decoration #=> String, one of "UNDERLINE", "NONE"
+    #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.font_configuration.font_color #=> String
+    #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.font_configuration.font_weight.name #=> String, one of "NORMAL", "BOLD"
+    #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.font_configuration.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.font_configuration.font_family #=> String
+    #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.text_alignment #=> String, one of "LEFT", "CENTER", "RIGHT", "AUTO"
+    #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.text_transform #=> String, one of "CAPITALIZE"
     #   resp.theme.version.errors #=> Array
     #   resp.theme.version.errors[0].type #=> String, one of "INTERNAL_FAILURE"
     #   resp.theme.version.errors[0].message #=> String
@@ -9766,7 +10742,7 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Generates an embed URL that you can use to embed an Amazon QuickSight
+    # Generates an embed URL that you can use to embed an Amazon Quick Suite
     # dashboard or visual in your website, without having to register any
     # reader users. Before you use this action, make sure that you have
     # configured the dashboards and permissions.
@@ -9784,14 +10760,14 @@ module Aws::QuickSight
     #   session duration is 10 hours.
     #
     # * You are charged only when the URL is used or there is interaction
-    #   with Amazon QuickSight.
+    #   with Amazon Quick Suite.
     #
-    # For more information, see [Embedded Analytics][1] in the *Amazon
-    # QuickSight User Guide*.
+    # For more information, see [Embedded Analytics][1] in the *Amazon Quick
+    # Suite User Guide*.
     #
     # For more information about the high-level steps for embedding and for
     # an interactive demo of the ways you can customize embedding, visit the
-    # [Amazon QuickSight Developer Portal][2].
+    # [Amazon Quick Suite Developer Portal][2].
     #
     #
     #
@@ -9808,7 +10784,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :namespace
     #   The Amazon Quick Sight namespace that the anonymous user virtually
-    #   belongs to. If you are not using an Amazon QuickSight custom
+    #   belongs to. If you are not using an Amazon Quick Suite custom
     #   namespace, set this to `default`.
     #
     # @option params [Array<Types::SessionTag>] :session_tags
@@ -9917,11 +10893,11 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Generates an embed URL that you can use to embed an Amazon QuickSight
+    # Generates an embed URL that you can use to embed an Amazon Quick Suite
     # experience in your website. This action can be used for any type of
-    # user registered in an Amazon QuickSight account. Before you use this
-    # action, make sure that you have configured the relevant Amazon
-    # QuickSight resource and permissions.
+    # user registered in an Amazon Quick Suite account. Before you use this
+    # action, make sure that you have configured the relevant Amazon Quick
+    # Suite resource and permissions.
     #
     # The following rules apply to the generated URL:
     #
@@ -9937,14 +10913,14 @@ module Aws::QuickSight
     #   hours (maximum). The default session duration is 10 hours.
     #
     # * You are charged only when the URL is used or there is interaction
-    #   with Amazon QuickSight.
+    #   with Amazon Quick Suite.
     #
-    # For more information, see [Embedded Analytics][1] in the *Amazon
-    # QuickSight User Guide*.
+    # For more information, see [Embedded Analytics][1] in the *Amazon Quick
+    # Suite User Guide*.
     #
     # For more information about the high-level steps for embedding and for
     # an interactive demo of the ways you can customize embedding, visit the
-    # [Amazon QuickSight Developer Portal][2].
+    # [Amazon Quick Suite Developer Portal][2].
     #
     #
     #
@@ -9964,7 +10940,7 @@ module Aws::QuickSight
     #
     # @option params [required, Types::RegisteredUserEmbeddingExperienceConfiguration] :experience_configuration
     #   The experience that you want to embed. For registered users, you can
-    #   embed QuickSight dashboards, Amazon Quick Sight visuals, the Amazon
+    #   embed Quick Suite dashboards, Amazon Quick Sight visuals, the Amazon
     #   Quick Sight Q search bar, the Amazon Quick Sight Generative Q&amp;A
     #   experience, or the entire Amazon Quick Sight console.
     #
@@ -10068,6 +11044,8 @@ module Aws::QuickSight
     #       generative_qn_a: {
     #         initial_topic_id: "RestrictiveResourceId",
     #       },
+    #       quick_chat: {
+    #       },
     #     },
     #     allowed_domains: ["String"],
     #   })
@@ -10116,7 +11094,7 @@ module Aws::QuickSight
     #
     # @option params [required, Types::RegisteredUserEmbeddingExperienceConfiguration] :experience_configuration
     #   The type of experience you want to embed. For registered users, you
-    #   can embed QuickSight dashboards or the Amazon Quick Sight console.
+    #   can embed Quick Suite dashboards or the Amazon Quick Sight console.
     #
     #   <note markdown="1"> Exactly one of the experience configurations is required. You can
     #   choose `Dashboard` or `QuickSightConsole`. You cannot choose more than
@@ -10214,6 +11192,8 @@ module Aws::QuickSight
     #       generative_qn_a: {
     #         initial_topic_id: "RestrictiveResourceId",
     #       },
+    #       quick_chat: {
+    #       },
     #     },
     #     allowed_domains: ["String"],
     #   })
@@ -10249,18 +11229,18 @@ module Aws::QuickSight
     # * They are valid for 5 minutes after you run this command.
     #
     # * You are charged only when the URL is used or there is interaction
-    #   with QuickSight.
+    #   with Quick Suite.
     #
     # * The resulting user session is valid for 15 minutes (default) up to
     #   10 hours (maximum). You can use the optional
     #   `SessionLifetimeInMinutes` parameter to customize session duration.
     #
     # For more information, see [Embedding Analytics Using
-    # GetDashboardEmbedUrl][1] in the *Amazon QuickSight User Guide*.
+    # GetDashboardEmbedUrl][1] in the *Amazon Quick Suite User Guide*.
     #
     # For more information about the high-level steps for embedding and for
     # an interactive demo of the ways you can customize embedding, visit the
-    # [Amazon QuickSight Developer Portal][2].
+    # [Amazon Quick Suite Developer Portal][2].
     #
     #
     #
@@ -10301,10 +11281,10 @@ module Aws::QuickSight
     #   the user session is not persisted. The default is `FALSE`.
     #
     # @option params [String] :user_arn
-    #   The Amazon QuickSight user's Amazon Resource Name (ARN), for use with
-    #   `QUICKSIGHT` identity type. You can use this for any Amazon QuickSight
-    #   users in your account (readers, authors, or admins) authenticated as
-    #   one of the following:
+    #   The Amazon Quick Suite user's Amazon Resource Name (ARN), for use
+    #   with `QUICKSIGHT` identity type. You can use this for any Amazon Quick
+    #   Suite users in your account (readers, authors, or admins)
+    #   authenticated as one of the following:
     #
     #   * Active Directory (AD) users or group members
     #
@@ -10326,7 +11306,7 @@ module Aws::QuickSight
     #   A list of one or more dashboard IDs that you want anonymous users to
     #   have tempporary access to. Currently, the `IdentityType` parameter
     #   must be set to `ANONYMOUS` because other identity types authenticate
-    #   as QuickSight or IAM users. For example, if you set "`--dashboard-id
+    #   as Quick Suite or IAM users. For example, if you set "`--dashboard-id
     #   dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS`",
     #   the session can access all three dashboards.
     #
@@ -10464,6 +11444,110 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Retrieves the identity context for a Quick Sight user in a specified
+    # namespace, allowing you to obtain identity tokens that can be used
+    # with identity-enhanced IAM role sessions to call identity-aware APIs.
+    #
+    # Currently, you can call the following APIs with identity-enhanced
+    # Credentials
+    #
+    # * [StartDashboardSnapshotJob][1]
+    #
+    # * [DescribeDashboardSnapshotJob][2]
+    #
+    # * [DescribeDashboardSnapshotJobResult][3]
+    #
+    # **Supported Authentication Methods**
+    #
+    # This API supports Quick Sight native users, IAM federated users, and
+    # Active Directory users. For Quick Sight users authenticated by Amazon
+    # Web Services Identity Center, see [Identity Center documentation on
+    # identity-enhanced IAM role sessions][4].
+    #
+    # **Getting Identity-Enhanced Credentials**
+    #
+    # To obtain identity-enhanced credentials, follow these steps:
+    #
+    # * Call the GetIdentityContext API to retrieve an identity token for
+    #   the specified user.
+    #
+    # * Use the identity token with the [STS AssumeRole API][5] to obtain
+    #   identity-enhanced IAM role session credentials.
+    #
+    # **Usage with STS AssumeRole**
+    #
+    # The identity token returned by this API should be used with the STS
+    # AssumeRole API to obtain credentials for an identity-enhanced IAM role
+    # session. When calling AssumeRole, include the identity token in the
+    # `ProvidedContexts` parameter with `ProviderArn` set to
+    # `arn:aws:iam::aws:contextProvider/QuickSight` and `ContextAssertion`
+    # set to the identity token received from this API.
+    #
+    # The assumed role must allow the `sts:SetContext` action in addition to
+    # `sts:AssumeRole` in its trust relationship policy. The trust policy
+    # should include both actions for the principal that will be assuming
+    # the role.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_StartDashboardSnapshotJob.html
+    # [2]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeDashboardSnapshotJob.html
+    # [3]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeDashboardSnapshotJobResult.html
+    # [4]: https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-identity-enhanced-iam-role-sessions.html
+    # [5]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the Amazon Web Services account that the user whose
+    #   identity context you want to retrieve is in. Currently, you use the ID
+    #   for the Amazon Web Services account that contains your Quick Sight
+    #   account.
+    #
+    # @option params [required, Types::UserIdentifier] :user_identifier
+    #   The identifier for the user whose identity context you want to
+    #   retrieve.
+    #
+    # @option params [String] :namespace
+    #   The namespace of the user that you want to get identity context for.
+    #   This parameter is required when the UserIdentifier is specified using
+    #   Email or UserName.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :session_expires_at
+    #   The timestamp at which the session will expire.
+    #
+    # @return [Types::GetIdentityContextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIdentityContextResponse#status #status} => Integer
+    #   * {Types::GetIdentityContextResponse#request_id #request_id} => String
+    #   * {Types::GetIdentityContextResponse#context #context} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_identity_context({
+    #     aws_account_id: "AwsAccountId", # required
+    #     user_identifier: { # required
+    #       user_name: "SensitiveString",
+    #       email: "SensitiveString",
+    #       user_arn: "Arn",
+    #     },
+    #     namespace: "Namespace",
+    #     session_expires_at: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #   resp.context #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetIdentityContext AWS API Documentation
+    #
+    # @overload get_identity_context(params = {})
+    # @param [Hash] params ({})
+    def get_identity_context(params = {}, options = {})
+      req = build_request(:get_identity_context, params)
+      req.send_request(options)
+    end
+
     # Generates a session URL and authorization code that you can use to
     # embed the Amazon Amazon Quick Sight console in your web server code.
     # Use `GetSessionEmbedUrl` where you want to provide an authoring portal
@@ -10474,11 +11558,11 @@ module Aws::QuickSight
     # permissions profile to the user with the ` UpdateUser ` API operation.
     # Use ` RegisterUser ` API operation to add a new user with a custom
     # permission profile attached. For more information, see the following
-    # sections in the *Amazon QuickSight User Guide*:
+    # sections in the *Amazon Quick Suite User Guide*:
     #
     # * [Embedding Analytics][1]
     #
-    # * [Customizing Access to the Amazon QuickSight Console][2]
+    # * [Customizing Access to the Amazon Quick Suite Console][2]
     #
     #
     #
@@ -10512,10 +11596,10 @@ module Aws::QuickSight
     #   15-600 minutes.
     #
     # @option params [String] :user_arn
-    #   The Amazon QuickSight user's Amazon Resource Name (ARN), for use with
-    #   `QUICKSIGHT` identity type. You can use this for any type of Amazon
-    #   QuickSight users in your account (readers, authors, or admins). They
-    #   need to be authenticated as one of the following:
+    #   The Amazon Quick Suite user's Amazon Resource Name (ARN), for use
+    #   with `QUICKSIGHT` identity type. You can use this for any type of
+    #   Amazon Quick Suite users in your account (readers, authors, or
+    #   admins). They need to be authenticated as one of the following:
     #
     #   1.  Active Directory (AD) users or group members
     #
@@ -10902,6 +11986,7 @@ module Aws::QuickSight
     #   resp.custom_permissions_list[0].capabilities.chat_agent #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.create_chat_agents #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.research #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.self_upgrade_user_role #=> String, one of "DENY"
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #
@@ -11071,6 +12156,12 @@ module Aws::QuickSight
     #   resp.data_set_summaries[0].row_level_permission_data_set.permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
     #   resp.data_set_summaries[0].row_level_permission_data_set.format_version #=> String, one of "VERSION_1", "VERSION_2"
     #   resp.data_set_summaries[0].row_level_permission_data_set.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.data_set_summaries[0].row_level_permission_data_set_map #=> Hash
+    #   resp.data_set_summaries[0].row_level_permission_data_set_map["DataSetEntityResourceId"].namespace #=> String
+    #   resp.data_set_summaries[0].row_level_permission_data_set_map["DataSetEntityResourceId"].arn #=> String
+    #   resp.data_set_summaries[0].row_level_permission_data_set_map["DataSetEntityResourceId"].permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
+    #   resp.data_set_summaries[0].row_level_permission_data_set_map["DataSetEntityResourceId"].format_version #=> String, one of "VERSION_1", "VERSION_2"
+    #   resp.data_set_summaries[0].row_level_permission_data_set_map["DataSetEntityResourceId"].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.data_set_summaries[0].row_level_permission_tag_configuration_applied #=> Boolean
     #   resp.data_set_summaries[0].column_level_permission_rules_applied #=> Boolean
     #   resp.data_set_summaries[0].use_as #=> String, one of "RLS_RULES"
@@ -12065,6 +13156,63 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def list_role_memberships(params = {}, options = {})
       req = build_request(:list_role_memberships, params)
+      req.send_request(options)
+    end
+
+    # Lists all self-upgrade requests for a Quick Suite account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   self-upgrade requests.
+    #
+    # @option params [required, String] :namespace
+    #   The Quick Suite namespace for the self-upgrade requests.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @return [Types::ListSelfUpgradesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSelfUpgradesResponse#self_upgrade_request_details #self_upgrade_request_details} => Array&lt;Types::SelfUpgradeRequestDetail&gt;
+    #   * {Types::ListSelfUpgradesResponse#next_token #next_token} => String
+    #   * {Types::ListSelfUpgradesResponse#request_id #request_id} => String
+    #   * {Types::ListSelfUpgradesResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_self_upgrades({
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.self_upgrade_request_details #=> Array
+    #   resp.self_upgrade_request_details[0].upgrade_request_id #=> String
+    #   resp.self_upgrade_request_details[0].user_name #=> String
+    #   resp.self_upgrade_request_details[0].original_role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER", "ADMIN_PRO", "AUTHOR_PRO", "READER_PRO"
+    #   resp.self_upgrade_request_details[0].requested_role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER", "ADMIN_PRO", "AUTHOR_PRO", "READER_PRO"
+    #   resp.self_upgrade_request_details[0].request_note #=> String
+    #   resp.self_upgrade_request_details[0].creation_time #=> Integer
+    #   resp.self_upgrade_request_details[0].request_status #=> String, one of "PENDING", "APPROVED", "DENIED", "UPDATE_FAILED", "VERIFY_FAILED"
+    #   resp.self_upgrade_request_details[0].last_update_attempt_time #=> Integer
+    #   resp.self_upgrade_request_details[0].last_update_failure_reason #=> String
+    #   resp.next_token #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListSelfUpgrades AWS API Documentation
+    #
+    # @overload list_self_upgrades(params = {})
+    # @param [Hash] params ({})
+    def list_self_upgrades(params = {}, options = {})
+      req = build_request(:list_self_upgrades, params)
       req.send_request(options)
     end
 
@@ -13205,9 +14353,9 @@ module Aws::QuickSight
     # user is authenticated and receives the embed URL that is specific to
     # that user. The IAM Identity Center application that the user has
     # logged into needs to have [trusted Identity Propagation enabled for
-    # QuickSight][2] with the scope value set to `quicksight:read`. Before
+    # Quick Suite][2] with the scope value set to `quicksight:read`. Before
     # you use this action, make sure that you have configured the relevant
-    # QuickSight resource and permissions.
+    # Quick Suite resource and permissions.
     #
     # We recommend enabling the `QSearchStatus` API to unlock the full
     # potential of `PredictQnA`. When `QSearchStatus` is enabled, it first
@@ -13864,6 +15012,12 @@ module Aws::QuickSight
     #   resp.data_set_summaries[0].row_level_permission_data_set.permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
     #   resp.data_set_summaries[0].row_level_permission_data_set.format_version #=> String, one of "VERSION_1", "VERSION_2"
     #   resp.data_set_summaries[0].row_level_permission_data_set.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.data_set_summaries[0].row_level_permission_data_set_map #=> Hash
+    #   resp.data_set_summaries[0].row_level_permission_data_set_map["DataSetEntityResourceId"].namespace #=> String
+    #   resp.data_set_summaries[0].row_level_permission_data_set_map["DataSetEntityResourceId"].arn #=> String
+    #   resp.data_set_summaries[0].row_level_permission_data_set_map["DataSetEntityResourceId"].permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
+    #   resp.data_set_summaries[0].row_level_permission_data_set_map["DataSetEntityResourceId"].format_version #=> String, one of "VERSION_1", "VERSION_2"
+    #   resp.data_set_summaries[0].row_level_permission_data_set_map["DataSetEntityResourceId"].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.data_set_summaries[0].row_level_permission_tag_configuration_applied #=> Boolean
     #   resp.data_set_summaries[0].column_level_permission_rules_applied #=> Boolean
     #   resp.data_set_summaries[0].use_as #=> String, one of "RLS_RULES"
@@ -14142,7 +15296,7 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Searches for any Q topic that exists in an QuickSight account.
+    # Searches for any Q topic that exists in an Quick Suite account.
     #
     # @option params [required, String] :aws_account_id
     #   The ID of the Amazon Web Services account that contains the topic that
@@ -14970,9 +16124,95 @@ module Aws::QuickSight
     #
     # * The size of the generated snapshots.
     #
+    # **Registered user support**
+    #
+    # You can generate snapshots for registered Quick Sight users by using
+    # the Snapshot Job APIs with [identity-enhanced IAM role session
+    # credentials][2]. This approach allows you to create snapshots on
+    # behalf of specific Quick Sight users while respecting their row-level
+    # security (RLS), column-level security (CLS), dynamic default
+    # parameters and dashboard parameter/filter settings.
+    #
+    # To generate snapshots for registered Quick Sight users, you need to:
+    #
+    # * Obtain identity-enhanced IAM role session credentials from Amazon
+    #   Web Services Security Token Service (STS).
+    #
+    # * Use these credentials to call the Snapshot Job APIs.
+    #
+    # Identity-enhanced credentials are credentials that contain information
+    # about the end user (e.g., registered Quick Sight user).
+    #
+    # If your Quick Sight users are backed by [Amazon Web Services Identity
+    # Center][3], then you need to set up a [trusted token issuer][4]. Then,
+    # getting identity-enhanced IAM credentials for a Quick Sight user will
+    # look like the following:
+    #
+    # * Authenticate user with your OIDC compliant Identity Provider. You
+    #   should get auth tokens back.
+    #
+    # * Use the OIDC API, [CreateTokenWithIAM][5], to exchange auth tokens
+    #   to IAM tokens. One of the resulted tokens will be identity token.
+    #
+    # * Call STS AssumeRole API as you normally would, but provide an extra
+    #   `ProvidedContexts` parameter in the API request. The list of
+    #   contexts must have a single trusted context assertion. The
+    #   `ProviderArn` should be
+    #   `arn:aws:iam::aws:contextProvider/IdentityCenter` while
+    #   `ContextAssertion` will be the identity token you received in
+    #   response from CreateTokenWithIAM
+    #
+    # For more details, see [IdC documentation on Identity-enhanced IAM role
+    # sessions][2].
+    #
+    # To obtain Identity-enhanced credentials for Quick Sight native users,
+    # IAM federated users, or Active Directory users, follow the steps
+    # below:
+    #
+    # * Call Quick Sight [GetIdentityContext API][6] to get identity token.
+    #
+    # * Call STS AssumeRole API as you normally would, but provide extra
+    #   `ProvidedContexts` parameter in the API request. The list of
+    #   contexts must have a single trusted context assertion. The
+    #   `ProviderArn` should be
+    #   `arn:aws:iam::aws:contextProvider/QuickSight` while
+    #   `ContextAssertion` will be the identity token you received in
+    #   response from GetIdentityContext
+    #
+    # After obtaining the identity-enhanced IAM role session credentials,
+    # you can use them to start a job, describe the job and describe job
+    # result. You can use the same credentials as long as they haven't
+    # expired. All API requests made with these credentials are considered
+    # to be made by the impersonated Quick Sight user.
+    #
+    # When using identity-enhanced session credentials, set the
+    # UserConfiguration request attribute to null. Otherwise, the request
+    # will be invalid.
+    #
+    # **Possible error scenarios**
+    #
+    # The request fails with an Access Denied error in the following
+    # scenarios:
+    #
+    # * The credentials have expired.
+    #
+    # * The impersonated Quick Sight user doesn't have access to the
+    #   specified dashboard.
+    #
+    # * The impersonated Quick Sight user is restricted from exporting data
+    #   in the selected formats. For more information about export
+    #   restrictions, see [Customizing access to Amazon Quick Sight
+    #   capabilities][7].
+    #
     #
     #
     # [1]: http://aws.amazon.com/contact-us/
+    # [2]: https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-identity-enhanced-iam-role-sessions.html
+    # [3]: https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html
+    # [4]: https://docs.aws.amazon.com/singlesignon/latest/userguide/setuptrustedtokenissuer.html
+    # [5]: https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateTokenWithIAM.html
+    # [6]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GetIdentityContext.html
+    # [7]: https://docs.aws.amazon.com/quicksuite/latest/userguide/create-custom-permisions-profile.html
     #
     # @option params [required, String] :aws_account_id
     #   The ID of the Amazon Web Services account that the dashboard snapshot
@@ -14988,10 +16228,15 @@ module Aws::QuickSight
     #   runs. You can reuse this ID for another job 24 hours after the current
     #   job is completed.
     #
-    # @option params [required, Types::SnapshotUserConfiguration] :user_configuration
-    #   A structure that contains information about the anonymous users that
-    #   the generated snapshot is for. This API will not return information
-    #   about registered Amazon Quick Sight.
+    # @option params [Types::SnapshotUserConfiguration] :user_configuration
+    #   A structure that contains information about the users that the
+    #   dashboard snapshot is generated for. The users can be either anonymous
+    #   users or registered users. Anonymous users cannot be used together
+    #   with registered users.
+    #
+    #   When using identity-enhanced session credentials, set the
+    #   UserConfiguration request attribute to null. Otherwise, the request
+    #   will be invalid.
     #
     # @option params [required, Types::SnapshotConfiguration] :snapshot_configuration
     #   A structure that describes the configuration of the dashboard
@@ -15010,7 +16255,7 @@ module Aws::QuickSight
     #     aws_account_id: "AwsAccountId", # required
     #     dashboard_id: "ShortRestrictiveResourceId", # required
     #     snapshot_job_id: "ShortRestrictiveResourceId", # required
-    #     user_configuration: { # required
+    #     user_configuration: {
     #       anonymous_users: [
     #         {
     #           row_level_permission_tags: [
@@ -15707,8 +16952,8 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Updates an QuickSight application with a token exchange grant. This
-    # operation only supports QuickSight applications that are registered
+    # Updates an Quick Suite application with a token exchange grant. This
+    # operation only supports Quick Suite applications that are registered
     # with IAM Identity Center.
     #
     # @option params [required, String] :aws_account_id
@@ -15716,7 +16961,7 @@ module Aws::QuickSight
     #   exchange grant.
     #
     # @option params [required, String] :namespace
-    #   The namespace of the QuickSight application.
+    #   The namespace of the Quick Suite application.
     #
     # @return [Types::UpdateApplicationWithTokenExchangeGrantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -15750,7 +16995,7 @@ module Aws::QuickSight
     #   The ID of the Amazon Web Services account that owns the brand.
     #
     # @option params [required, String] :brand_id
-    #   The ID of the QuickSight brand.
+    #   The ID of the Quick Suite brand.
     #
     # @option params [Types::BrandDefinition] :brand_definition
     #   The definition of the brand.
@@ -15982,7 +17227,7 @@ module Aws::QuickSight
     #   The ID of the Amazon Web Services account that owns the brand.
     #
     # @option params [required, String] :brand_id
-    #   The ID of the QuickSight brand.
+    #   The ID of the Quick Suite brand.
     #
     # @option params [required, String] :version_id
     #   The ID of the published version.
@@ -16075,6 +17320,7 @@ module Aws::QuickSight
     #       chat_agent: "DENY", # accepts DENY
     #       create_chat_agents: "DENY", # accepts DENY
     #       research: "DENY", # accepts DENY
+    #       self_upgrade_user_role: "DENY", # accepts DENY
     #     },
     #   })
     #
@@ -16443,7 +17689,8 @@ module Aws::QuickSight
     #
     # @option params [Hash<String,Types::LogicalTable>] :logical_table_map
     #   Configures the combination and transformation of the data from the
-    #   physical tables.
+    #   physical tables. This parameter is used with the legacy data
+    #   preparation experience.
     #
     # @option params [required, String] :import_mode
     #   Indicates whether you want to import the data into SPICE.
@@ -16458,11 +17705,13 @@ module Aws::QuickSight
     #
     # @option params [Types::RowLevelPermissionDataSet] :row_level_permission_data_set
     #   The row-level security configuration for the data you want to create.
+    #   This parameter is used with the legacy data preparation experience.
     #
     # @option params [Types::RowLevelPermissionTagConfiguration] :row_level_permission_tag_configuration
     #   The configuration of tags on a dataset to set row-level security.
     #   Row-level security tags are currently supported for anonymous
-    #   embedding only.
+    #   embedding only. This parameter is used with the legacy data
+    #   preparation experience.
     #
     # @option params [Array<Types::ColumnLevelPermissionRule>] :column_level_permission_rules
     #   A set of one or more definitions of a ` ColumnLevelPermissionRule `.
@@ -16477,6 +17726,18 @@ module Aws::QuickSight
     # @option params [Types::PerformanceConfiguration] :performance_configuration
     #   The configuration for the performance optimization of the dataset that
     #   contains a `UniqueKey` configuration.
+    #
+    # @option params [Types::DataPrepConfiguration] :data_prep_configuration
+    #   The data preparation configuration for the dataset. This configuration
+    #   defines the source tables, transformation steps, and destination
+    #   tables used to prepare the data. Required when using the new data
+    #   preparation experience.
+    #
+    # @option params [Types::SemanticModelConfiguration] :semantic_model_configuration
+    #   The semantic model configuration for the dataset. This configuration
+    #   defines how the prepared data is structured for an analysis, including
+    #   table mappings and row-level security configurations. Required when
+    #   using the new data preparation experience.
     #
     # @return [Types::UpdateDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -16503,6 +17764,7 @@ module Aws::QuickSight
     #           input_columns: [ # required
     #             {
     #               name: "ColumnName", # required
+    #               id: "ColumnId",
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
     #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
@@ -16515,6 +17777,7 @@ module Aws::QuickSight
     #           columns: [
     #             {
     #               name: "ColumnName", # required
+    #               id: "ColumnId",
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
     #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
@@ -16528,10 +17791,29 @@ module Aws::QuickSight
     #             contains_header: false,
     #             text_qualifier: "DOUBLE_QUOTE", # accepts DOUBLE_QUOTE, SINGLE_QUOTE
     #             delimiter: "Delimiter",
+    #             custom_cell_address_range: "String",
     #           },
     #           input_columns: [ # required
     #             {
     #               name: "ColumnName", # required
+    #               id: "ColumnId",
+    #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #               sub_type: "FLOAT", # accepts FLOAT, FIXED
+    #             },
+    #           ],
+    #         },
+    #         saa_s_table: {
+    #           data_source_arn: "Arn", # required
+    #           table_path: [ # required
+    #             {
+    #               name: "TablePathElementName",
+    #               id: "TablePathElementId",
+    #             },
+    #           ],
+    #           input_columns: [ # required
+    #             {
+    #               name: "ColumnName", # required
+    #               id: "ColumnId",
     #               type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
     #               sub_type: "FLOAT", # accepts FLOAT, FIXED
     #             },
@@ -16545,12 +17827,85 @@ module Aws::QuickSight
     #         data_transforms: [
     #           {
     #             project_operation: {
+    #               alias: "TransformOperationAlias",
+    #               source: {
+    #                 transform_operation_id: "DataSetEntityResourceId", # required
+    #                 column_id_mappings: [
+    #                   {
+    #                     source_column_id: "ColumnId", # required
+    #                     target_column_id: "ColumnId", # required
+    #                   },
+    #                 ],
+    #               },
     #               projected_columns: ["String"], # required
     #             },
     #             filter_operation: {
-    #               condition_expression: "Expression", # required
+    #               condition_expression: "Expression",
+    #               string_filter_condition: {
+    #                 column_name: "ColumnName",
+    #                 comparison_filter_condition: {
+    #                   operator: "EQUALS", # required, accepts EQUALS, DOES_NOT_EQUAL, CONTAINS, DOES_NOT_CONTAIN, STARTS_WITH, ENDS_WITH
+    #                   value: {
+    #                     static_value: "DataSetStringFilterStaticValue",
+    #                   },
+    #                 },
+    #                 list_filter_condition: {
+    #                   operator: "INCLUDE", # required, accepts INCLUDE, EXCLUDE
+    #                   values: {
+    #                     static_values: ["DataSetStringFilterStaticValue"],
+    #                   },
+    #                 },
+    #               },
+    #               numeric_filter_condition: {
+    #                 column_name: "ColumnName",
+    #                 comparison_filter_condition: {
+    #                   operator: "EQUALS", # required, accepts EQUALS, DOES_NOT_EQUAL, GREATER_THAN, GREATER_THAN_OR_EQUALS_TO, LESS_THAN, LESS_THAN_OR_EQUALS_TO
+    #                   value: {
+    #                     static_value: 1.0,
+    #                   },
+    #                 },
+    #                 range_filter_condition: {
+    #                   range_minimum: {
+    #                     static_value: 1.0,
+    #                   },
+    #                   range_maximum: {
+    #                     static_value: 1.0,
+    #                   },
+    #                   include_minimum: false,
+    #                   include_maximum: false,
+    #                 },
+    #               },
+    #               date_filter_condition: {
+    #                 column_name: "ColumnName",
+    #                 comparison_filter_condition: {
+    #                   operator: "BEFORE", # required, accepts BEFORE, BEFORE_OR_EQUALS_TO, AFTER, AFTER_OR_EQUALS_TO
+    #                   value: {
+    #                     static_value: Time.now,
+    #                   },
+    #                 },
+    #                 range_filter_condition: {
+    #                   range_minimum: {
+    #                     static_value: Time.now,
+    #                   },
+    #                   range_maximum: {
+    #                     static_value: Time.now,
+    #                   },
+    #                   include_minimum: false,
+    #                   include_maximum: false,
+    #                 },
+    #               },
     #             },
     #             create_columns_operation: {
+    #               alias: "TransformOperationAlias",
+    #               source: {
+    #                 transform_operation_id: "DataSetEntityResourceId", # required
+    #                 column_id_mappings: [
+    #                   {
+    #                     source_column_id: "ColumnId", # required
+    #                     target_column_id: "ColumnId", # required
+    #                   },
+    #                 ],
+    #               },
     #               columns: [ # required
     #                 {
     #                   column_name: "ColumnName", # required
@@ -16704,6 +18059,373 @@ module Aws::QuickSight
     #           column_names: ["ColumnName"], # required
     #         },
     #       ],
+    #     },
+    #     data_prep_configuration: {
+    #       source_table_map: { # required
+    #         "DataSetEntityResourceId" => {
+    #           physical_table_id: "DataSetEntityResourceId",
+    #           data_set: {
+    #             data_set_arn: "Arn", # required
+    #             input_columns: [ # required
+    #               {
+    #                 name: "ColumnName", # required
+    #                 id: "ColumnId",
+    #                 type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME, BIT, BOOLEAN, JSON
+    #                 sub_type: "FLOAT", # accepts FLOAT, FIXED
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       },
+    #       transform_step_map: { # required
+    #         "DataSetEntityResourceId" => {
+    #           import_table_step: {
+    #             alias: "TransformOperationAlias", # required
+    #             source: { # required
+    #               source_table_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           project_step: {
+    #             alias: "TransformOperationAlias",
+    #             source: {
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             projected_columns: ["String"], # required
+    #           },
+    #           filters_step: {
+    #             alias: "TransformOperationAlias", # required
+    #             source: { # required
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             filter_operations: [ # required
+    #               {
+    #                 condition_expression: "Expression",
+    #                 string_filter_condition: {
+    #                   column_name: "ColumnName",
+    #                   comparison_filter_condition: {
+    #                     operator: "EQUALS", # required, accepts EQUALS, DOES_NOT_EQUAL, CONTAINS, DOES_NOT_CONTAIN, STARTS_WITH, ENDS_WITH
+    #                     value: {
+    #                       static_value: "DataSetStringFilterStaticValue",
+    #                     },
+    #                   },
+    #                   list_filter_condition: {
+    #                     operator: "INCLUDE", # required, accepts INCLUDE, EXCLUDE
+    #                     values: {
+    #                       static_values: ["DataSetStringFilterStaticValue"],
+    #                     },
+    #                   },
+    #                 },
+    #                 numeric_filter_condition: {
+    #                   column_name: "ColumnName",
+    #                   comparison_filter_condition: {
+    #                     operator: "EQUALS", # required, accepts EQUALS, DOES_NOT_EQUAL, GREATER_THAN, GREATER_THAN_OR_EQUALS_TO, LESS_THAN, LESS_THAN_OR_EQUALS_TO
+    #                     value: {
+    #                       static_value: 1.0,
+    #                     },
+    #                   },
+    #                   range_filter_condition: {
+    #                     range_minimum: {
+    #                       static_value: 1.0,
+    #                     },
+    #                     range_maximum: {
+    #                       static_value: 1.0,
+    #                     },
+    #                     include_minimum: false,
+    #                     include_maximum: false,
+    #                   },
+    #                 },
+    #                 date_filter_condition: {
+    #                   column_name: "ColumnName",
+    #                   comparison_filter_condition: {
+    #                     operator: "BEFORE", # required, accepts BEFORE, BEFORE_OR_EQUALS_TO, AFTER, AFTER_OR_EQUALS_TO
+    #                     value: {
+    #                       static_value: Time.now,
+    #                     },
+    #                   },
+    #                   range_filter_condition: {
+    #                     range_minimum: {
+    #                       static_value: Time.now,
+    #                     },
+    #                     range_maximum: {
+    #                       static_value: Time.now,
+    #                     },
+    #                     include_minimum: false,
+    #                     include_maximum: false,
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           create_columns_step: {
+    #             alias: "TransformOperationAlias",
+    #             source: {
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             columns: [ # required
+    #               {
+    #                 column_name: "ColumnName", # required
+    #                 column_id: "ColumnId", # required
+    #                 expression: "DataSetCalculatedFieldExpression", # required
+    #               },
+    #             ],
+    #           },
+    #           rename_columns_step: {
+    #             alias: "TransformOperationAlias", # required
+    #             source: { # required
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             rename_column_operations: [ # required
+    #               {
+    #                 column_name: "ColumnName", # required
+    #                 new_column_name: "ColumnName", # required
+    #               },
+    #             ],
+    #           },
+    #           cast_column_types_step: {
+    #             alias: "TransformOperationAlias", # required
+    #             source: { # required
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             cast_column_type_operations: [ # required
+    #               {
+    #                 column_name: "ColumnName", # required
+    #                 new_column_type: "STRING", # required, accepts STRING, INTEGER, DECIMAL, DATETIME
+    #                 sub_type: "FLOAT", # accepts FLOAT, FIXED
+    #                 format: "TypeCastFormat",
+    #               },
+    #             ],
+    #           },
+    #           join_step: {
+    #             alias: "TransformOperationAlias", # required
+    #             left_operand: { # required
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             right_operand: { # required
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             type: "INNER", # required, accepts INNER, OUTER, LEFT, RIGHT
+    #             on_clause: "JoinOperationOnClause", # required
+    #             left_operand_properties: {
+    #               output_column_name_overrides: [ # required
+    #                 {
+    #                   source_column_name: "ColumnName",
+    #                   output_column_name: "ColumnName", # required
+    #                 },
+    #               ],
+    #             },
+    #             right_operand_properties: {
+    #               output_column_name_overrides: [ # required
+    #                 {
+    #                   source_column_name: "ColumnName",
+    #                   output_column_name: "ColumnName", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           aggregate_step: {
+    #             alias: "TransformOperationAlias", # required
+    #             source: { # required
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             group_by_column_names: ["ColumnName"],
+    #             aggregations: [ # required
+    #               {
+    #                 aggregation_function: { # required
+    #                   simple_aggregation: {
+    #                     input_column_name: "ColumnName",
+    #                     function_type: "COUNT", # required, accepts COUNT, DISTINCT_COUNT, SUM, AVERAGE, MAX, MIN
+    #                   },
+    #                   list_aggregation: {
+    #                     input_column_name: "ColumnName",
+    #                     separator: "Separator", # required
+    #                     distinct: false, # required
+    #                   },
+    #                 },
+    #                 new_column_name: "ColumnName", # required
+    #                 new_column_id: "ColumnId", # required
+    #               },
+    #             ],
+    #           },
+    #           pivot_step: {
+    #             alias: "TransformOperationAlias", # required
+    #             source: { # required
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             group_by_column_names: ["ColumnName"],
+    #             value_column_configuration: { # required
+    #               aggregation_function: {
+    #                 simple_aggregation: {
+    #                   input_column_name: "ColumnName",
+    #                   function_type: "COUNT", # required, accepts COUNT, DISTINCT_COUNT, SUM, AVERAGE, MAX, MIN
+    #                 },
+    #                 list_aggregation: {
+    #                   input_column_name: "ColumnName",
+    #                   separator: "Separator", # required
+    #                   distinct: false, # required
+    #                 },
+    #               },
+    #             },
+    #             pivot_configuration: { # required
+    #               label_column_name: "ColumnName",
+    #               pivoted_labels: [ # required
+    #                 {
+    #                   label_name: "CellValue", # required
+    #                   new_column_name: "ColumnName", # required
+    #                   new_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           unpivot_step: {
+    #             alias: "TransformOperationAlias", # required
+    #             source: { # required
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             columns_to_unpivot: [ # required
+    #               {
+    #                 column_name: "ColumnName",
+    #                 new_value: "CellValue",
+    #               },
+    #             ],
+    #             unpivoted_label_column_name: "ColumnName", # required
+    #             unpivoted_label_column_id: "ColumnId", # required
+    #             unpivoted_value_column_name: "ColumnName", # required
+    #             unpivoted_value_column_id: "ColumnId", # required
+    #           },
+    #           append_step: {
+    #             alias: "TransformOperationAlias", # required
+    #             first_source: {
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             second_source: {
+    #               transform_operation_id: "DataSetEntityResourceId", # required
+    #               column_id_mappings: [
+    #                 {
+    #                   source_column_id: "ColumnId", # required
+    #                   target_column_id: "ColumnId", # required
+    #                 },
+    #               ],
+    #             },
+    #             appended_columns: [ # required
+    #               {
+    #                 column_name: "ColumnName", # required
+    #                 new_column_id: "ColumnId", # required
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       },
+    #       destination_table_map: { # required
+    #         "DataSetEntityResourceId" => {
+    #           alias: "DestinationTableAlias", # required
+    #           source: { # required
+    #             transform_operation_id: "DataSetEntityResourceId", # required
+    #           },
+    #         },
+    #       },
+    #     },
+    #     semantic_model_configuration: {
+    #       table_map: {
+    #         "DataSetEntityResourceId" => {
+    #           alias: "SemanticTableAlias", # required
+    #           destination_table_id: "DataSetEntityResourceId", # required
+    #           row_level_permission_configuration: {
+    #             tag_configuration: {
+    #               status: "ENABLED", # accepts ENABLED, DISABLED
+    #               tag_rules: [ # required
+    #                 {
+    #                   tag_key: "SessionTagKey", # required
+    #                   column_name: "String", # required
+    #                   tag_multi_value_delimiter: "RowLevelPermissionTagDelimiter",
+    #                   match_all_value: "SessionTagValue",
+    #                 },
+    #               ],
+    #               tag_rule_configurations: [
+    #                 ["SessionTagKey"],
+    #               ],
+    #             },
+    #             row_level_permission_data_set: {
+    #               namespace: "Namespace",
+    #               arn: "Arn", # required
+    #               permission_policy: "GRANT_ACCESS", # required, accepts GRANT_ACCESS, DENY_ACCESS
+    #               format_version: "VERSION_1", # accepts VERSION_1, VERSION_2
+    #               status: "ENABLED", # accepts ENABLED, DISABLED
+    #             },
+    #           },
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -17204,6 +18926,11 @@ module Aws::QuickSight
     #       },
     #       copy_source_arn: "CopySourceArn",
     #       secret_arn: "SecretArn",
+    #       key_pair_credentials: {
+    #         key_pair_username: "DbUsername", # required
+    #         private_key: "PrivateKey", # required
+    #         private_key_passphrase: "PrivateKeyPassphrase",
+    #       },
     #       web_proxy_credentials: {
     #         web_proxy_username: "DbUsername", # required
     #         web_proxy_password: "Password", # required
@@ -17811,7 +19538,7 @@ module Aws::QuickSight
     # Before you can turn on public sharing on your account, make sure to
     # give public sharing permissions to an administrative user in the
     # Identity and Access Management (IAM) console. For more information on
-    # using IAM with Amazon Quick Sight, see [Using QuickSight with IAM][1]
+    # using IAM with Amazon Quick Sight, see [Using Quick Suite with IAM][1]
     # in the *Amazon Quick Sight User Guide*.
     #
     #
@@ -17824,7 +19551,7 @@ module Aws::QuickSight
     #
     # @option params [Boolean] :public_sharing_enabled
     #   A Boolean value that indicates whether public sharing is turned on for
-    #   an QuickSight account.
+    #   an Quick Suite account.
     #
     # @return [Types::UpdatePublicSharingSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -18070,6 +19797,102 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def update_spice_capacity_configuration(params = {}, options = {})
       req = build_request(:update_spice_capacity_configuration, params)
+      req.send_request(options)
+    end
+
+    # Updates a self-upgrade request for a Quick Suite user by approving,
+    # denying, or verifying the request.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
+    #   self-upgrade request.
+    #
+    # @option params [required, String] :namespace
+    #   The Quick Suite namespace for the self-upgrade request.
+    #
+    # @option params [required, String] :upgrade_request_id
+    #   The ID of the self-upgrade request to update.
+    #
+    # @option params [required, String] :action
+    #   The action to perform on the self-upgrade request. Valid values are
+    #   `APPROVE`, `DENY`, or `VERIFY`.
+    #
+    # @return [Types::UpdateSelfUpgradeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSelfUpgradeResponse#self_upgrade_request_detail #self_upgrade_request_detail} => Types::SelfUpgradeRequestDetail
+    #   * {Types::UpdateSelfUpgradeResponse#request_id #request_id} => String
+    #   * {Types::UpdateSelfUpgradeResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_self_upgrade({
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #     upgrade_request_id: "String", # required
+    #     action: "APPROVE", # required, accepts APPROVE, DENY, VERIFY
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.self_upgrade_request_detail.upgrade_request_id #=> String
+    #   resp.self_upgrade_request_detail.user_name #=> String
+    #   resp.self_upgrade_request_detail.original_role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER", "ADMIN_PRO", "AUTHOR_PRO", "READER_PRO"
+    #   resp.self_upgrade_request_detail.requested_role #=> String, one of "ADMIN", "AUTHOR", "READER", "RESTRICTED_AUTHOR", "RESTRICTED_READER", "ADMIN_PRO", "AUTHOR_PRO", "READER_PRO"
+    #   resp.self_upgrade_request_detail.request_note #=> String
+    #   resp.self_upgrade_request_detail.creation_time #=> Integer
+    #   resp.self_upgrade_request_detail.request_status #=> String, one of "PENDING", "APPROVED", "DENIED", "UPDATE_FAILED", "VERIFY_FAILED"
+    #   resp.self_upgrade_request_detail.last_update_attempt_time #=> Integer
+    #   resp.self_upgrade_request_detail.last_update_failure_reason #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateSelfUpgrade AWS API Documentation
+    #
+    # @overload update_self_upgrade(params = {})
+    # @param [Hash] params ({})
+    def update_self_upgrade(params = {}, options = {})
+      req = build_request(:update_self_upgrade, params)
+      req.send_request(options)
+    end
+
+    # Updates the self-upgrade configuration for a Quick Suite account.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account that contains the Quick
+    #   Suite self-upgrade configuration that you want to update.
+    #
+    # @option params [required, String] :namespace
+    #   The Quick Suite namespace that you want to update the Quick Suite
+    #   self-upgrade configuration for.
+    #
+    # @option params [required, String] :self_upgrade_status
+    #   The self-upgrade status that you want to set for the Quick Suite
+    #   account.
+    #
+    # @return [Types::UpdateSelfUpgradeConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSelfUpgradeConfigurationResponse#request_id #request_id} => String
+    #   * {Types::UpdateSelfUpgradeConfigurationResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_self_upgrade_configuration({
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #     self_upgrade_status: "AUTO_APPROVAL", # required, accepts AUTO_APPROVAL, ADMIN_APPROVAL
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateSelfUpgradeConfiguration AWS API Documentation
+    #
+    # @overload update_self_upgrade_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_self_upgrade_configuration(params = {}, options = {})
+      req = build_request(:update_self_upgrade_configuration, params)
       req.send_request(options)
     end
 
@@ -18326,9 +20149,14 @@ module Aws::QuickSight
     #       },
     #       sheet: {
     #         tile: {
+    #           background_color: "Color",
     #           border: {
+    #             color: "Color",
     #             show: false,
+    #             width: "Width",
     #           },
+    #           border_radius: "BorderRadius",
+    #           padding: "Padding",
     #         },
     #         tile_layout: {
     #           gutter: {
@@ -18338,6 +20166,10 @@ module Aws::QuickSight
     #             show: false,
     #           },
     #         },
+    #         background: {
+    #           color: "Color",
+    #           gradient: "String",
+    #         },
     #       },
     #       typography: {
     #         font_families: [
@@ -18345,6 +20177,105 @@ module Aws::QuickSight
     #             font_family: "String",
     #           },
     #         ],
+    #         axis_title_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         axis_label_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         legend_title_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         legend_value_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         data_label_font_configuration: {
+    #           font_size: {
+    #             relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #             absolute: "PixelLength",
+    #           },
+    #           font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #           font_color: "HexColor",
+    #           font_weight: {
+    #             name: "NORMAL", # accepts NORMAL, BOLD
+    #           },
+    #           font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #           font_family: "String",
+    #         },
+    #         visual_title_font_configuration: {
+    #           font_configuration: {
+    #             font_size: {
+    #               relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #               absolute: "PixelLength",
+    #             },
+    #             font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #             font_color: "HexColor",
+    #             font_weight: {
+    #               name: "NORMAL", # accepts NORMAL, BOLD
+    #             },
+    #             font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #             font_family: "String",
+    #           },
+    #           text_alignment: "LEFT", # accepts LEFT, CENTER, RIGHT, AUTO
+    #           text_transform: "CAPITALIZE", # accepts CAPITALIZE
+    #         },
+    #         visual_subtitle_font_configuration: {
+    #           font_configuration: {
+    #             font_size: {
+    #               relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #               absolute: "PixelLength",
+    #             },
+    #             font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #             font_color: "HexColor",
+    #             font_weight: {
+    #               name: "NORMAL", # accepts NORMAL, BOLD
+    #             },
+    #             font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #             font_family: "String",
+    #           },
+    #           text_alignment: "LEFT", # accepts LEFT, CENTER, RIGHT, AUTO
+    #           text_transform: "CAPITALIZE", # accepts CAPITALIZE
+    #         },
     #       },
     #     },
     #   })
@@ -19200,7 +21131,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.161.0'
+      context[:gem_version] = '1.167.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

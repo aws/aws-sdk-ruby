@@ -4204,53 +4204,6 @@ module Aws::Glue
     #     connector to read from and write to data stores that are not
     #     natively supported by Glue.
     #
-    #   Additionally, a `ConnectionType` for the following SaaS connectors
-    #   is supported:
-    #
-    #   * `FACEBOOKADS` - Designates a connection to Facebook Ads.
-    #
-    #   * `GOOGLEADS` - Designates a connection to Google Ads.
-    #
-    #   * `GOOGLESHEETS` - Designates a connection to Google Sheets.
-    #
-    #   * `GOOGLEANALYTICS4` - Designates a connection to Google Analytics
-    #     4.
-    #
-    #   * `HUBSPOT` - Designates a connection to HubSpot.
-    #
-    #   * `INSTAGRAMADS` - Designates a connection to Instagram Ads.
-    #
-    #   * `INTERCOM` - Designates a connection to Intercom.
-    #
-    #   * `JIRACLOUD` - Designates a connection to Jira Cloud.
-    #
-    #   * `MARKETO` - Designates a connection to Adobe Marketo Engage.
-    #
-    #   * `NETSUITEERP` - Designates a connection to Oracle NetSuite.
-    #
-    #   * `SALESFORCE` - Designates a connection to Salesforce using OAuth
-    #     authentication.
-    #
-    #   * `SALESFORCEMARKETINGCLOUD` - Designates a connection to Salesforce
-    #     Marketing Cloud.
-    #
-    #   * `SALESFORCEPARDOT` - Designates a connection to Salesforce
-    #     Marketing Cloud Account Engagement (MCAE).
-    #
-    #   * `SAPODATA` - Designates a connection to SAP OData.
-    #
-    #   * `SERVICENOW` - Designates a connection to ServiceNow.
-    #
-    #   * `SLACK` - Designates a connection to Slack.
-    #
-    #   * `SNAPCHATADS` - Designates a connection to Snapchat Ads.
-    #
-    #   * `STRIPE` - Designates a connection to Stripe.
-    #
-    #   * `ZENDESK` - Designates a connection to Zendesk.
-    #
-    #   * `ZOHOCRM` - Designates a connection to Zoho CRM.
-    #
     #   For more information on the connection parameters needed for a
     #   particular connector, see the documentation for the connector in
     #   [Adding an Glue connection][1]in the Glue User Guide.
@@ -5815,11 +5768,17 @@ module Aws::Glue
     #   access levels for the Glue configuration.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] user_background_sessions_enabled
+    #   Specifies whether users can run background sessions when using
+    #   Identity Center authentication with Glue services.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateGlueIdentityCenterConfigurationRequest AWS API Documentation
     #
     class CreateGlueIdentityCenterConfigurationRequest < Struct.new(
       :instance_arn,
-      :scopes)
+      :scopes,
+      :user_background_sessions_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5978,18 +5937,30 @@ module Aws::Glue
     #   The resource properties associated with the integration target.
     #   @return [Types::TargetProcessingProperties]
     #
+    # @!attribute [rw] tags
+    #   Metadata assigned to the resource consisting of a list of key-value
+    #   pairs.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateIntegrationResourcePropertyRequest AWS API Documentation
     #
     class CreateIntegrationResourcePropertyRequest < Struct.new(
       :resource_arn,
       :source_processing_properties,
-      :target_processing_properties)
+      :target_processing_properties,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] resource_arn
     #   The connection ARN of the source, or the database ARN of the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_property_arn
+    #   The resource ARN created through this create API. The format is
+    #   something like
+    #   arn:aws:glue:&lt;region&gt;:&lt;account\_id&gt;:integrationresourceproperty/*
     #   @return [String]
     #
     # @!attribute [rw] source_processing_properties
@@ -6004,6 +5975,7 @@ module Aws::Glue
     #
     class CreateIntegrationResourcePropertyResponse < Struct.new(
       :resource_arn,
+      :resource_property_arn,
       :source_processing_properties,
       :target_processing_properties)
       SENSITIVE = []
@@ -9169,6 +9141,22 @@ module Aws::Glue
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] resource_arn
+    #   The connection ARN of the source, or the database ARN of the target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteIntegrationResourcePropertyRequest AWS API Documentation
+    #
+    class DeleteIntegrationResourcePropertyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteIntegrationResourcePropertyResponse AWS API Documentation
+    #
+    class DeleteIntegrationResourcePropertyResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] source_arn
     #   The ARN of the source for the integration.
@@ -13087,12 +13075,18 @@ module Aws::Glue
     #   access levels for the Glue configuration.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] user_background_sessions_enabled
+    #   Indicates whether users can run background sessions when using
+    #   Identity Center authentication with Glue services.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetGlueIdentityCenterConfigurationResponse AWS API Documentation
     #
     class GetGlueIdentityCenterConfigurationResponse < Struct.new(
       :application_arn,
       :instance_arn,
-      :scopes)
+      :scopes,
+      :user_background_sessions_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13113,6 +13107,12 @@ module Aws::Glue
     #   The connection ARN of the source, or the database ARN of the target.
     #   @return [String]
     #
+    # @!attribute [rw] resource_property_arn
+    #   The resource ARN created through this create API. The format is
+    #   something like
+    #   arn:aws:glue:&lt;region&gt;:&lt;account\_id&gt;:integrationresourceproperty/*
+    #   @return [String]
+    #
     # @!attribute [rw] source_processing_properties
     #   The resource properties associated with the integration source.
     #   @return [Types::SourceProcessingProperties]
@@ -13125,6 +13125,7 @@ module Aws::Glue
     #
     class GetIntegrationResourcePropertyResponse < Struct.new(
       :resource_arn,
+      :resource_property_arn,
       :source_processing_properties,
       :target_processing_properties)
       SENSITIVE = []
@@ -15344,6 +15345,10 @@ module Aws::Glue
     #   different query engines and can therefore be read by those engines.
     #   @return [Boolean]
     #
+    # @!attribute [rw] is_materialized_view
+    #   Indicates if a table is a materialized view.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] resource_arn
     #   The resource ARN of the parent resource extracted from the request.
     #   @return [String]
@@ -15377,6 +15382,7 @@ module Aws::Glue
       :cell_filters,
       :query_authorization_id,
       :is_multi_dialect_view,
+      :is_materialized_view,
       :resource_arn,
       :is_protected,
       :permissions,
@@ -15483,6 +15489,16 @@ module Aws::Glue
     #   definitions returned.
     #   @return [String]
     #
+    # @!attribute [rw] function_type
+    #   An optional function-type pattern string that filters the function
+    #   definitions returned from Amazon Redshift Federated Permissions
+    #   Catalog.
+    #
+    #   Specify a value of `REGULAR_FUNCTION` or `STORED_PROCEDURE`. The
+    #   `STORED_PROCEDURE` function type is only compatible with Amazon
+    #   Redshift Federated Permissions Catalog.
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   A continuation token, if this is a continuation call.
     #   @return [String]
@@ -15497,6 +15513,7 @@ module Aws::Glue
       :catalog_id,
       :database_name,
       :pattern,
+      :function_type,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -16078,6 +16095,46 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Encryption key structure used for Iceberg table encryption. Contains
+    # the key ID, encrypted key metadata, optional reference to the
+    # encrypting key, and additional properties for the table's encryption
+    # scheme.
+    #
+    # @!attribute [rw] key_id
+    #   Unique identifier of the encryption key used for Iceberg table
+    #   encryption. This ID is used to reference the key in table metadata
+    #   and track which key was used to encrypt specific data.
+    #   @return [String]
+    #
+    # @!attribute [rw] encrypted_key_metadata
+    #   Encrypted key and metadata, base64 encoded. The format of encrypted
+    #   key metadata is determined by the table's encryption scheme and can
+    #   be a wrapped format specific to the table's KMS provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] encrypted_by_id
+    #   Optional ID of the key used to encrypt or wrap the key metadata in
+    #   Iceberg table encryption. This field references another encryption
+    #   key that was used to encrypt the current key's metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   A string to string map of additional metadata used by the table's
+    #   encryption scheme. These properties provide additional context and
+    #   configuration for the encryption key implementation.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergEncryptedKey AWS API Documentation
+    #
+    class IcebergEncryptedKey < Struct.new(
+      :key_id,
+      :encrypted_key_metadata,
+      :encrypted_by_id,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that defines an Apache Iceberg metadata table to create in
     # the catalog.
     #
@@ -16507,6 +16564,20 @@ module Aws::Glue
     #   context about the purpose and usage of this field.
     #   @return [String]
     #
+    # @!attribute [rw] initial_default
+    #   Default value used to populate the field's value for all records
+    #   that were written before the field was added to the schema. This
+    #   enables backward compatibility when adding new fields to existing
+    #   Iceberg tables.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @!attribute [rw] write_default
+    #   Default value used to populate the field's value for any records
+    #   written after the field was added to the schema, if the writer does
+    #   not supply the field's value. This can be changed through schema
+    #   evolution.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergStructField AWS API Documentation
     #
     class IcebergStructField < Struct.new(
@@ -16514,7 +16585,9 @@ module Aws::Glue
       :name,
       :type,
       :required,
-      :doc)
+      :doc,
+      :initial_default,
+      :write_default)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16547,6 +16620,24 @@ module Aws::Glue
     #   settings for the Iceberg table.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] action
+    #   The type of update action to be performed on the Iceberg table.
+    #   Defines the specific operation such as adding schema, setting
+    #   current schema, adding partition spec, or managing encryption keys.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_key
+    #   Encryption key information associated with an Iceberg table update
+    #   operation. Used when adding or removing encryption keys from the
+    #   table metadata during table evolution.
+    #   @return [Types::IcebergEncryptedKey]
+    #
+    # @!attribute [rw] key_id
+    #   Identifier of the encryption key involved in an Iceberg table update
+    #   operation. References the specific key being added to or removed
+    #   from the table's encryption configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IcebergTableUpdate AWS API Documentation
     #
     class IcebergTableUpdate < Struct.new(
@@ -16554,7 +16645,10 @@ module Aws::Glue
       :partition_spec,
       :sort_order,
       :location,
-      :properties)
+      :properties,
+      :action,
+      :encryption_key,
+      :key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16850,7 +16944,6 @@ module Aws::Glue
     #   to align the refresh rate with your specific data update patterns,
     #   system load considerations, and performance optimization goals. Time
     #   increment can be set from 15 minutes to 8640 minutes (six days).
-    #   Currently supports creation of `RefreshInterval` only.
     #   @return [String]
     #
     # @!attribute [rw] source_properties
@@ -17020,6 +17113,57 @@ module Aws::Glue
     #
     class IntegrationQuotaExceededFault < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure representing an integration resource property.
+    #
+    # @!attribute [rw] resource_arn
+    #   The connection ARN of the source, or the database ARN of the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_property_arn
+    #   The resource ARN created through this create API. The format is
+    #   something like
+    #   arn:aws:glue:&lt;region&gt;:&lt;account\_id&gt;:integrationresourceproperty/*
+    #   @return [String]
+    #
+    # @!attribute [rw] source_processing_properties
+    #   The resource properties associated with the integration source.
+    #   @return [Types::SourceProcessingProperties]
+    #
+    # @!attribute [rw] target_processing_properties
+    #   The resource properties associated with the integration target.
+    #   @return [Types::TargetProcessingProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IntegrationResourceProperty AWS API Documentation
+    #
+    class IntegrationResourceProperty < Struct.new(
+      :resource_arn,
+      :resource_property_arn,
+      :source_processing_properties,
+      :target_processing_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter for integration resource properties.
+    #
+    # @!attribute [rw] name
+    #   The name of the filter. Supported filter keys are `SourceArn` and
+    #   `TargetArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   A list of filter values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IntegrationResourcePropertyFilter AWS API Documentation
+    #
+    class IntegrationResourcePropertyFilter < Struct.new(
+      :name,
+      :values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19560,6 +19704,46 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] marker
+    #   This is the pagination token for next page, initial value is `null`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A list of filters, supported filter Key is `SourceArn` and
+    #   `TargetArn`.
+    #   @return [Array<Types::IntegrationResourcePropertyFilter>]
+    #
+    # @!attribute [rw] max_records
+    #   This is total number of items to be evaluated.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListIntegrationResourcePropertiesRequest AWS API Documentation
+    #
+    class ListIntegrationResourcePropertiesRequest < Struct.new(
+      :marker,
+      :filters,
+      :max_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_resource_property_list
+    #   A list of integration resource property meeting the filter criteria.
+    #   @return [Array<Types::IntegrationResourceProperty>]
+    #
+    # @!attribute [rw] marker
+    #   This is the pagination token for the next page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListIntegrationResourcePropertiesResponse AWS API Documentation
+    #
+    class ListIntegrationResourcePropertiesResponse < Struct.new(
+      :integration_resource_property_list,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   A continuation token, if this is a continuation request.
     #   @return [String]
@@ -20623,7 +20807,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] integration_config
-    #   Properties associated with the integration.
+    #   The configuration settings for the integration. Currently, only the
+    #   RefreshInterval can be modified.
     #   @return [Types::IntegrationConfig]
     #
     # @!attribute [rw] integration_name
@@ -20711,7 +20896,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] integration_config
-    #   Properties associated with the integration.
+    #   The updated configuration settings for the integration.
     #   @return [Types::IntegrationConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ModifyIntegrationResponse AWS API Documentation
@@ -26690,9 +26875,12 @@ module Aws::Glue
     #   different query engines and can therefore be read by those engines.
     #   @return [Boolean]
     #
+    # @!attribute [rw] is_materialized_view
+    #   Indicates a table is a `MaterializedView`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] status
-    #   A structure containing information about the state of an
-    #   asynchronous change to a table.
+    #   Indicates the the state of an asynchronous change to a table.
     #   @return [Types::TableStatus]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Table AWS API Documentation
@@ -26721,6 +26909,7 @@ module Aws::Glue
       :federated_table,
       :view_definition,
       :is_multi_dialect_view,
+      :is_materialized_view,
       :status)
       SENSITIVE = []
       include Aws::Structure
@@ -28599,10 +28788,16 @@ module Aws::Glue
     #   and access levels for the Glue configuration.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] user_background_sessions_enabled
+    #   Specifies whether users can run background sessions when using
+    #   Identity Center authentication with Glue services.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateGlueIdentityCenterConfigurationRequest AWS API Documentation
     #
     class UpdateGlueIdentityCenterConfigurationRequest < Struct.new(
-      :scopes)
+      :scopes,
+      :user_background_sessions_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28706,6 +28901,12 @@ module Aws::Glue
     #   The connection ARN of the source, or the database ARN of the target.
     #   @return [String]
     #
+    # @!attribute [rw] resource_property_arn
+    #   The resource ARN created through this create API. The format is
+    #   something like
+    #   arn:aws:glue:&lt;region&gt;:&lt;account\_id&gt;:integrationresourceproperty/*
+    #   @return [String]
+    #
     # @!attribute [rw] source_processing_properties
     #   The resource properties associated with the integration source.
     #   @return [Types::SourceProcessingProperties]
@@ -28718,6 +28919,7 @@ module Aws::Glue
     #
     class UpdateIntegrationResourcePropertyResponse < Struct.new(
       :resource_arn,
+      :resource_property_arn,
       :source_processing_properties,
       :target_processing_properties)
       SENSITIVE = []
@@ -29573,6 +29775,10 @@ module Aws::Glue
     #   The owner of the function.
     #   @return [String]
     #
+    # @!attribute [rw] function_type
+    #   The type of the function.
+    #   @return [String]
+    #
     # @!attribute [rw] owner_type
     #   The owner type.
     #   @return [String]
@@ -29596,6 +29802,7 @@ module Aws::Glue
       :database_name,
       :class_name,
       :owner_name,
+      :function_type,
       :owner_type,
       :create_time,
       :resource_uris,
@@ -29618,6 +29825,10 @@ module Aws::Glue
     #   The owner of the function.
     #   @return [String]
     #
+    # @!attribute [rw] function_type
+    #   The type of the function.
+    #   @return [String]
+    #
     # @!attribute [rw] owner_type
     #   The owner type.
     #   @return [String]
@@ -29632,6 +29843,7 @@ module Aws::Glue
       :function_name,
       :class_name,
       :owner_name,
+      :function_type,
       :owner_type,
       :resource_uris)
       SENSITIVE = []
@@ -29680,9 +29892,32 @@ module Aws::Glue
     #   The definer of a view in SQL.
     #   @return [String]
     #
+    # @!attribute [rw] view_version_id
+    #   The ID value that identifies this view's version. For materialized
+    #   views, the version ID is the Apache Iceberg table's snapshot ID.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] view_version_token
+    #   The version ID of the Apache Iceberg table.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_seconds
+    #   Auto refresh interval in seconds for the materialized view. If not
+    #   specified, the view will not automatically refresh.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_refresh_type
+    #   Sets the method used for the most recent refresh.
+    #   @return [String]
+    #
     # @!attribute [rw] sub_objects
     #   A list of table Amazon Resource Names (ARNs).
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] sub_object_version_ids
+    #   List of the Apache Iceberg table versions referenced by the
+    #   materialized view.
+    #   @return [Array<Integer>]
     #
     # @!attribute [rw] representations
     #   A list of representations.
@@ -29693,7 +29928,12 @@ module Aws::Glue
     class ViewDefinition < Struct.new(
       :is_protected,
       :definer,
+      :view_version_id,
+      :view_version_token,
+      :refresh_seconds,
+      :last_refresh_type,
       :sub_objects,
+      :sub_object_version_ids,
       :representations)
       SENSITIVE = []
       include Aws::Structure
@@ -29718,9 +29958,33 @@ module Aws::Glue
     #   query that defines the view.
     #   @return [Array<Types::ViewRepresentationInput>]
     #
+    # @!attribute [rw] view_version_id
+    #   The ID value that identifies this view's version. For materialized
+    #   views, the version ID is the Apache Iceberg table's snapshot ID.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] view_version_token
+    #   The version ID of the Apache Iceberg table.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_seconds
+    #   Auto refresh interval in seconds for the materialized view. If not
+    #   specified, the view will not automatically refresh.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_refresh_type
+    #   The type of the materialized view's last refresh. Valid values:
+    #   `Full`, `Incremental`.
+    #   @return [String]
+    #
     # @!attribute [rw] sub_objects
     #   A list of base table ARNs that make up the view.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] sub_object_version_ids
+    #   List of the Apache Iceberg table versions referenced by the
+    #   materialized view.
+    #   @return [Array<Integer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ViewDefinitionInput AWS API Documentation
     #
@@ -29728,7 +29992,12 @@ module Aws::Glue
       :is_protected,
       :definer,
       :representations,
-      :sub_objects)
+      :view_version_id,
+      :view_version_token,
+      :refresh_seconds,
+      :last_refresh_type,
+      :sub_objects,
+      :sub_object_version_ids)
       SENSITIVE = []
       include Aws::Structure
     end

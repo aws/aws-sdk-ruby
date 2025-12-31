@@ -756,12 +756,14 @@ module Aws::RedshiftServerless
     #   resp.namespace.admin_password_secret_arn #=> String
     #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
+    #   resp.namespace.catalog_arn #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
     #   resp.namespace.default_iam_role_arn #=> String
     #   resp.namespace.iam_roles #=> Array
     #   resp.namespace.iam_roles[0] #=> String
     #   resp.namespace.kms_key_id #=> String
+    #   resp.namespace.lakehouse_registration_status #=> String
     #   resp.namespace.log_exports #=> Array
     #   resp.namespace.log_exports[0] #=> String, one of "useractivitylog", "userlog", "connectionlog"
     #   resp.namespace.namespace_arn #=> String
@@ -1434,12 +1436,14 @@ module Aws::RedshiftServerless
     #   resp.namespace.admin_password_secret_arn #=> String
     #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
+    #   resp.namespace.catalog_arn #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
     #   resp.namespace.default_iam_role_arn #=> String
     #   resp.namespace.iam_roles #=> Array
     #   resp.namespace.iam_roles[0] #=> String
     #   resp.namespace.kms_key_id #=> String
+    #   resp.namespace.lakehouse_registration_status #=> String
     #   resp.namespace.log_exports #=> Array
     #   resp.namespace.log_exports[0] #=> String, one of "useractivitylog", "userlog", "connectionlog"
     #   resp.namespace.namespace_arn #=> String
@@ -1872,6 +1876,58 @@ module Aws::RedshiftServerless
       req.send_request(options)
     end
 
+    # Returns an Identity Center authentication token for accessing Amazon
+    # Redshift Serverless workgroups.
+    #
+    # The token provides secure access to data within the specified
+    # workgroups using Identity Center identity propagation. The token
+    # expires after a specified duration and must be refreshed for continued
+    # access.
+    #
+    # The Identity and Access Management (IAM) user or role that runs
+    # GetIdentityCenterAuthToken must have appropriate permissions to access
+    # the specified workgroups and Identity Center integration must be
+    # configured for the workgroups.
+    #
+    # @option params [required, Array<String>] :workgroup_names
+    #   A list of workgroup names for which to generate the Identity Center
+    #   authentication token.
+    #
+    #   Constraints:
+    #
+    #   * Must contain between 1 and 20 workgroup names.
+    #
+    #   * Each workgroup name must be a valid Amazon Redshift Serverless
+    #     workgroup identifier.
+    #
+    #   * All specified workgroups must have Identity Center integration
+    #     enabled.
+    #
+    # @return [Types::GetIdentityCenterAuthTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIdentityCenterAuthTokenResponse#expiration_time #expiration_time} => Time
+    #   * {Types::GetIdentityCenterAuthTokenResponse#token #token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_identity_center_auth_token({
+    #     workgroup_names: ["WorkgroupName"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.expiration_time #=> Time
+    #   resp.token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/GetIdentityCenterAuthToken AWS API Documentation
+    #
+    # @overload get_identity_center_auth_token(params = {})
+    # @param [Hash] params ({})
+    def get_identity_center_auth_token(params = {}, options = {})
+      req = build_request(:get_identity_center_auth_token, params)
+      req.send_request(options)
+    end
+
     # Returns information about a namespace in Amazon Redshift Serverless.
     #
     # @option params [required, String] :namespace_name
@@ -1892,12 +1948,14 @@ module Aws::RedshiftServerless
     #   resp.namespace.admin_password_secret_arn #=> String
     #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
+    #   resp.namespace.catalog_arn #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
     #   resp.namespace.default_iam_role_arn #=> String
     #   resp.namespace.iam_roles #=> Array
     #   resp.namespace.iam_roles[0] #=> String
     #   resp.namespace.kms_key_id #=> String
+    #   resp.namespace.lakehouse_registration_status #=> String
     #   resp.namespace.log_exports #=> Array
     #   resp.namespace.log_exports[0] #=> String, one of "useractivitylog", "userlog", "connectionlog"
     #   resp.namespace.namespace_arn #=> String
@@ -2473,8 +2531,8 @@ module Aws::RedshiftServerless
     #   page.
     #
     # @option params [String] :source_arn
-    #   The Amazon Resource Name (ARN) for the managed workgroup in the AWS
-    #   Glue Data Catalog.
+    #   The Amazon Resource Name (ARN) for the managed workgroup in the Glue
+    #   Data Catalog.
     #
     # @return [Types::ListManagedWorkgroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2541,12 +2599,14 @@ module Aws::RedshiftServerless
     #   resp.namespaces[0].admin_password_secret_arn #=> String
     #   resp.namespaces[0].admin_password_secret_kms_key_id #=> String
     #   resp.namespaces[0].admin_username #=> String
+    #   resp.namespaces[0].catalog_arn #=> String
     #   resp.namespaces[0].creation_date #=> Time
     #   resp.namespaces[0].db_name #=> String
     #   resp.namespaces[0].default_iam_role_arn #=> String
     #   resp.namespaces[0].iam_roles #=> Array
     #   resp.namespaces[0].iam_roles[0] #=> String
     #   resp.namespaces[0].kms_key_id #=> String
+    #   resp.namespaces[0].lakehouse_registration_status #=> String
     #   resp.namespaces[0].log_exports #=> Array
     #   resp.namespaces[0].log_exports[0] #=> String, one of "useractivitylog", "userlog", "connectionlog"
     #   resp.namespaces[0].namespace_arn #=> String
@@ -3259,12 +3319,14 @@ module Aws::RedshiftServerless
     #   resp.namespace.admin_password_secret_arn #=> String
     #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
+    #   resp.namespace.catalog_arn #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
     #   resp.namespace.default_iam_role_arn #=> String
     #   resp.namespace.iam_roles #=> Array
     #   resp.namespace.iam_roles[0] #=> String
     #   resp.namespace.kms_key_id #=> String
+    #   resp.namespace.lakehouse_registration_status #=> String
     #   resp.namespace.log_exports #=> Array
     #   resp.namespace.log_exports[0] #=> String, one of "useractivitylog", "userlog", "connectionlog"
     #   resp.namespace.namespace_arn #=> String
@@ -3338,12 +3400,14 @@ module Aws::RedshiftServerless
     #   resp.namespace.admin_password_secret_arn #=> String
     #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
+    #   resp.namespace.catalog_arn #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
     #   resp.namespace.default_iam_role_arn #=> String
     #   resp.namespace.iam_roles #=> Array
     #   resp.namespace.iam_roles[0] #=> String
     #   resp.namespace.kms_key_id #=> String
+    #   resp.namespace.lakehouse_registration_status #=> String
     #   resp.namespace.log_exports #=> Array
     #   resp.namespace.log_exports[0] #=> String, one of "useractivitylog", "userlog", "connectionlog"
     #   resp.namespace.namespace_arn #=> String
@@ -3687,6 +3751,75 @@ module Aws::RedshiftServerless
       req.send_request(options)
     end
 
+    # Modifies the lakehouse configuration for a namespace. This operation
+    # allows you to manage Amazon Redshift federated permissions and Amazon
+    # Web Services IAM Identity Center trusted identity propagation.
+    #
+    # @option params [String] :catalog_name
+    #   The name of the Glue Data Catalog that will be associated with the
+    #   namespace enabled with Amazon Redshift federated permissions.
+    #
+    #   Pattern: `^[a-z0-9_-]*[a-z]+[a-z0-9_-]*$`
+    #
+    # @option params [Boolean] :dry_run
+    #   A boolean value that, if `true`, validates the request without
+    #   actually updating the lakehouse configuration. Use this to check for
+    #   errors before making changes.
+    #
+    # @option params [String] :lakehouse_idc_application_arn
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center application
+    #   used for enabling Amazon Web Services IAM Identity Center trusted
+    #   identity propagation on a namespace enabled with Amazon Redshift
+    #   federated permissions.
+    #
+    # @option params [String] :lakehouse_idc_registration
+    #   Modifies the Amazon Web Services IAM Identity Center trusted identity
+    #   propagation on a namespace enabled with Amazon Redshift federated
+    #   permissions. Valid values are `Associate` or `Disassociate`.
+    #
+    # @option params [String] :lakehouse_registration
+    #   Specifies whether to register or deregister the namespace with Amazon
+    #   Redshift federated permissions. Valid values are `Register` or
+    #   `Deregister`.
+    #
+    # @option params [required, String] :namespace_name
+    #   The name of the namespace whose lakehouse configuration you want to
+    #   modify.
+    #
+    # @return [Types::UpdateLakehouseConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateLakehouseConfigurationResponse#catalog_arn #catalog_arn} => String
+    #   * {Types::UpdateLakehouseConfigurationResponse#lakehouse_idc_application_arn #lakehouse_idc_application_arn} => String
+    #   * {Types::UpdateLakehouseConfigurationResponse#lakehouse_registration_status #lakehouse_registration_status} => String
+    #   * {Types::UpdateLakehouseConfigurationResponse#namespace_name #namespace_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_lakehouse_configuration({
+    #     catalog_name: "CatalogNameString",
+    #     dry_run: false,
+    #     lakehouse_idc_application_arn: "String",
+    #     lakehouse_idc_registration: "Associate", # accepts Associate, Disassociate
+    #     lakehouse_registration: "Register", # accepts Register, Deregister
+    #     namespace_name: "NamespaceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.catalog_arn #=> String
+    #   resp.lakehouse_idc_application_arn #=> String
+    #   resp.lakehouse_registration_status #=> String
+    #   resp.namespace_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-serverless-2021-04-21/UpdateLakehouseConfiguration AWS API Documentation
+    #
+    # @overload update_lakehouse_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_lakehouse_configuration(params = {}, options = {})
+      req = build_request(:update_lakehouse_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates a namespace with the specified settings. Unless required, you
     # can't update multiple parameters in one request. For example, you
     # must specify both `adminUsername` and `adminUserPassword` to update
@@ -3761,12 +3894,14 @@ module Aws::RedshiftServerless
     #   resp.namespace.admin_password_secret_arn #=> String
     #   resp.namespace.admin_password_secret_kms_key_id #=> String
     #   resp.namespace.admin_username #=> String
+    #   resp.namespace.catalog_arn #=> String
     #   resp.namespace.creation_date #=> Time
     #   resp.namespace.db_name #=> String
     #   resp.namespace.default_iam_role_arn #=> String
     #   resp.namespace.iam_roles #=> Array
     #   resp.namespace.iam_roles[0] #=> String
     #   resp.namespace.kms_key_id #=> String
+    #   resp.namespace.lakehouse_registration_status #=> String
     #   resp.namespace.log_exports #=> Array
     #   resp.namespace.log_exports[0] #=> String, one of "useractivitylog", "userlog", "connectionlog"
     #   resp.namespace.namespace_arn #=> String
@@ -4223,7 +4358,7 @@ module Aws::RedshiftServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-redshiftserverless'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

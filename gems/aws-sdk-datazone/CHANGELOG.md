@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2025-12-02)
+------------------
+
+* Feature - Amazon DataZone now supports exporting Catalog datasets as Amazon S3 tables, and provides automatic business glossary term suggestions for data assets.
+
+1.61.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.60.0 (2025-11-19)
+------------------
+
+* Feature - Amazon DataZone now supports business metadata (readme and metadata forms) at the individual attribute (column) level, a new rule type for glossary terms, and the ability to update the owner of the root domain unit.
+
+1.59.0 (2025-11-14)
+------------------
+
+* Feature - Adds support for granting read and write access to Amazon S3 general purpose buckets using CreateSubscriptionRequest and AcceptSubscriptionRequest APIs. Also adds search filters for SSOUser and SSOGroup to ListSubscriptions APIs and deprecates "sortBy" parameter for ListSubscriptions APIs.
+
+1.58.0 (2025-11-10)
+------------------
+
+* Feature - Remove trackingServerName from DataZone Connection MLflowProperties
+
+1.57.0 (2025-11-05)
+------------------
+
+* Feature - Added support for Project Resource Tags
+
+1.56.0 (2025-10-24)
+------------------
+
+* Feature - This release adds support for MLflow connections Creation in DataZone
+
+1.55.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2025-10-14)
+------------------
+
+* Feature - Support creating scoped and trustedIdentityPropagation enabled connections.
+
 1.53.0 (2025-09-30)
 ------------------
 

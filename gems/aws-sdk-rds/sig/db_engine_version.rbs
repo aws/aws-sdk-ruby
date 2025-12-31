@@ -120,6 +120,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#serverless_v2_features_support-instance_method
       def serverless_v2_features_support: () -> Types::ServerlessV2FeaturesSupport
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#database_installation_files-instance_method
+      def database_installation_files: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#failure_reason-instance_method
+      def failure_reason: () -> ::String
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBEngineVersion.html#load-instance_method

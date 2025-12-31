@@ -20,13 +20,28 @@ module Aws::PrometheusService
     AlertManagerDefinitionStatus = Shapes::StructureShape.new(name: 'AlertManagerDefinitionStatus')
     AlertManagerDefinitionStatusCode = Shapes::StringShape.new(name: 'AlertManagerDefinitionStatusCode')
     AmpConfiguration = Shapes::StructureShape.new(name: 'AmpConfiguration')
+    AnomalyDetectorAlias = Shapes::StringShape.new(name: 'AnomalyDetectorAlias')
+    AnomalyDetectorArn = Shapes::StringShape.new(name: 'AnomalyDetectorArn')
+    AnomalyDetectorConfiguration = Shapes::UnionShape.new(name: 'AnomalyDetectorConfiguration')
+    AnomalyDetectorDescription = Shapes::StructureShape.new(name: 'AnomalyDetectorDescription')
+    AnomalyDetectorEvaluationInterval = Shapes::IntegerShape.new(name: 'AnomalyDetectorEvaluationInterval')
+    AnomalyDetectorId = Shapes::StringShape.new(name: 'AnomalyDetectorId')
+    AnomalyDetectorMissingDataAction = Shapes::UnionShape.new(name: 'AnomalyDetectorMissingDataAction')
+    AnomalyDetectorStatus = Shapes::StructureShape.new(name: 'AnomalyDetectorStatus')
+    AnomalyDetectorStatusCode = Shapes::StringShape.new(name: 'AnomalyDetectorStatusCode')
+    AnomalyDetectorSummary = Shapes::StructureShape.new(name: 'AnomalyDetectorSummary')
+    AnomalyDetectorSummaryList = Shapes::ListShape.new(name: 'AnomalyDetectorSummaryList')
     Blob = Shapes::BlobShape.new(name: 'Blob')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CloudWatchLogDestination = Shapes::StructureShape.new(name: 'CloudWatchLogDestination')
     ClusterArn = Shapes::StringShape.new(name: 'ClusterArn')
     ComponentConfig = Shapes::StructureShape.new(name: 'ComponentConfig')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateAlertManagerDefinitionRequest = Shapes::StructureShape.new(name: 'CreateAlertManagerDefinitionRequest')
     CreateAlertManagerDefinitionResponse = Shapes::StructureShape.new(name: 'CreateAlertManagerDefinitionResponse')
+    CreateAnomalyDetectorRequest = Shapes::StructureShape.new(name: 'CreateAnomalyDetectorRequest')
+    CreateAnomalyDetectorRequestLabelsMap = Shapes::MapShape.new(name: 'CreateAnomalyDetectorRequestLabelsMap')
+    CreateAnomalyDetectorResponse = Shapes::StructureShape.new(name: 'CreateAnomalyDetectorResponse')
     CreateLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'CreateLoggingConfigurationRequest')
     CreateLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'CreateLoggingConfigurationResponse')
     CreateQueryLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'CreateQueryLoggingConfigurationRequest')
@@ -38,6 +53,7 @@ module Aws::PrometheusService
     CreateWorkspaceRequest = Shapes::StructureShape.new(name: 'CreateWorkspaceRequest')
     CreateWorkspaceResponse = Shapes::StructureShape.new(name: 'CreateWorkspaceResponse')
     DeleteAlertManagerDefinitionRequest = Shapes::StructureShape.new(name: 'DeleteAlertManagerDefinitionRequest')
+    DeleteAnomalyDetectorRequest = Shapes::StructureShape.new(name: 'DeleteAnomalyDetectorRequest')
     DeleteLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteLoggingConfigurationRequest')
     DeleteQueryLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteQueryLoggingConfigurationRequest')
     DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
@@ -48,6 +64,8 @@ module Aws::PrometheusService
     DeleteWorkspaceRequest = Shapes::StructureShape.new(name: 'DeleteWorkspaceRequest')
     DescribeAlertManagerDefinitionRequest = Shapes::StructureShape.new(name: 'DescribeAlertManagerDefinitionRequest')
     DescribeAlertManagerDefinitionResponse = Shapes::StructureShape.new(name: 'DescribeAlertManagerDefinitionResponse')
+    DescribeAnomalyDetectorRequest = Shapes::StructureShape.new(name: 'DescribeAnomalyDetectorRequest')
+    DescribeAnomalyDetectorResponse = Shapes::StructureShape.new(name: 'DescribeAnomalyDetectorResponse')
     DescribeLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeLoggingConfigurationRequest')
     DescribeLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeLoggingConfigurationResponse')
     DescribeQueryLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeQueryLoggingConfigurationRequest')
@@ -73,6 +91,9 @@ module Aws::PrometheusService
     GetDefaultScraperConfigurationResponse = Shapes::StructureShape.new(name: 'GetDefaultScraperConfigurationResponse')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
+    IgnoreNearExpected = Shapes::UnionShape.new(name: 'IgnoreNearExpected')
+    IgnoreNearExpectedAmountDouble = Shapes::FloatShape.new(name: 'IgnoreNearExpectedAmountDouble')
+    IgnoreNearExpectedRatioDouble = Shapes::FloatShape.new(name: 'IgnoreNearExpectedRatioDouble')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
@@ -83,6 +104,9 @@ module Aws::PrometheusService
     LimitsPerLabelSetEntry = Shapes::StructureShape.new(name: 'LimitsPerLabelSetEntry')
     LimitsPerLabelSetEntryMaxSeriesLong = Shapes::IntegerShape.new(name: 'LimitsPerLabelSetEntryMaxSeriesLong')
     LimitsPerLabelSetList = Shapes::ListShape.new(name: 'LimitsPerLabelSetList')
+    ListAnomalyDetectorsRequest = Shapes::StructureShape.new(name: 'ListAnomalyDetectorsRequest')
+    ListAnomalyDetectorsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAnomalyDetectorsRequestMaxResultsInteger')
+    ListAnomalyDetectorsResponse = Shapes::StructureShape.new(name: 'ListAnomalyDetectorsResponse')
     ListRuleGroupsNamespacesRequest = Shapes::StructureShape.new(name: 'ListRuleGroupsNamespacesRequest')
     ListRuleGroupsNamespacesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRuleGroupsNamespacesRequestMaxResultsInteger')
     ListRuleGroupsNamespacesResponse = Shapes::StructureShape.new(name: 'ListRuleGroupsNamespacesResponse')
@@ -103,8 +127,13 @@ module Aws::PrometheusService
     LoggingFilter = Shapes::StructureShape.new(name: 'LoggingFilter')
     LoggingFilterQspThresholdLong = Shapes::IntegerShape.new(name: 'LoggingFilterQspThresholdLong')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    PrometheusMetricLabelKey = Shapes::StringShape.new(name: 'PrometheusMetricLabelKey')
+    PrometheusMetricLabelMap = Shapes::MapShape.new(name: 'PrometheusMetricLabelMap')
+    PrometheusMetricLabelValue = Shapes::StringShape.new(name: 'PrometheusMetricLabelValue')
     PutAlertManagerDefinitionRequest = Shapes::StructureShape.new(name: 'PutAlertManagerDefinitionRequest')
     PutAlertManagerDefinitionResponse = Shapes::StructureShape.new(name: 'PutAlertManagerDefinitionResponse')
+    PutAnomalyDetectorRequest = Shapes::StructureShape.new(name: 'PutAnomalyDetectorRequest')
+    PutAnomalyDetectorResponse = Shapes::StructureShape.new(name: 'PutAnomalyDetectorResponse')
     PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     PutRuleGroupsNamespaceRequest = Shapes::StructureShape.new(name: 'PutRuleGroupsNamespaceRequest')
@@ -112,6 +141,10 @@ module Aws::PrometheusService
     QueryLoggingConfigurationMetadata = Shapes::StructureShape.new(name: 'QueryLoggingConfigurationMetadata')
     QueryLoggingConfigurationStatus = Shapes::StructureShape.new(name: 'QueryLoggingConfigurationStatus')
     QueryLoggingConfigurationStatusCode = Shapes::StringShape.new(name: 'QueryLoggingConfigurationStatusCode')
+    RandomCutForestConfiguration = Shapes::StructureShape.new(name: 'RandomCutForestConfiguration')
+    RandomCutForestConfigurationSampleSizeInteger = Shapes::IntegerShape.new(name: 'RandomCutForestConfigurationSampleSizeInteger')
+    RandomCutForestConfigurationShingleSizeInteger = Shapes::IntegerShape.new(name: 'RandomCutForestConfigurationShingleSizeInteger')
+    RandomCutForestQuery = Shapes::StringShape.new(name: 'RandomCutForestQuery')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleConfiguration = Shapes::StructureShape.new(name: 'RoleConfiguration')
     RuleGroupsNamespaceArn = Shapes::StringShape.new(name: 'RuleGroupsNamespaceArn')
@@ -174,6 +207,7 @@ module Aws::PrometheusService
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VpcConfiguration = Shapes::StructureShape.new(name: 'VpcConfiguration')
     WorkspaceAlias = Shapes::StringShape.new(name: 'WorkspaceAlias')
     WorkspaceArn = Shapes::StringShape.new(name: 'WorkspaceArn')
     WorkspaceConfigurationDescription = Shapes::StructureShape.new(name: 'WorkspaceConfigurationDescription')
@@ -204,6 +238,48 @@ module Aws::PrometheusService
     AmpConfiguration.add_member(:workspace_arn, Shapes::ShapeRef.new(shape: WorkspaceArn, required: true, location_name: "workspaceArn"))
     AmpConfiguration.struct_class = Types::AmpConfiguration
 
+    AnomalyDetectorConfiguration.add_member(:random_cut_forest, Shapes::ShapeRef.new(shape: RandomCutForestConfiguration, location_name: "randomCutForest"))
+    AnomalyDetectorConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AnomalyDetectorConfiguration.add_member_subclass(:random_cut_forest, Types::AnomalyDetectorConfiguration::RandomCutForest)
+    AnomalyDetectorConfiguration.add_member_subclass(:unknown, Types::AnomalyDetectorConfiguration::Unknown)
+    AnomalyDetectorConfiguration.struct_class = Types::AnomalyDetectorConfiguration
+
+    AnomalyDetectorDescription.add_member(:arn, Shapes::ShapeRef.new(shape: AnomalyDetectorArn, required: true, location_name: "arn"))
+    AnomalyDetectorDescription.add_member(:anomaly_detector_id, Shapes::ShapeRef.new(shape: AnomalyDetectorId, required: true, location_name: "anomalyDetectorId"))
+    AnomalyDetectorDescription.add_member(:alias, Shapes::ShapeRef.new(shape: AnomalyDetectorAlias, required: true, location_name: "alias"))
+    AnomalyDetectorDescription.add_member(:evaluation_interval_in_seconds, Shapes::ShapeRef.new(shape: AnomalyDetectorEvaluationInterval, location_name: "evaluationIntervalInSeconds"))
+    AnomalyDetectorDescription.add_member(:missing_data_action, Shapes::ShapeRef.new(shape: AnomalyDetectorMissingDataAction, location_name: "missingDataAction"))
+    AnomalyDetectorDescription.add_member(:configuration, Shapes::ShapeRef.new(shape: AnomalyDetectorConfiguration, location_name: "configuration"))
+    AnomalyDetectorDescription.add_member(:labels, Shapes::ShapeRef.new(shape: PrometheusMetricLabelMap, location_name: "labels"))
+    AnomalyDetectorDescription.add_member(:status, Shapes::ShapeRef.new(shape: AnomalyDetectorStatus, required: true, location_name: "status"))
+    AnomalyDetectorDescription.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    AnomalyDetectorDescription.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "modifiedAt"))
+    AnomalyDetectorDescription.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    AnomalyDetectorDescription.struct_class = Types::AnomalyDetectorDescription
+
+    AnomalyDetectorMissingDataAction.add_member(:mark_as_anomaly, Shapes::ShapeRef.new(shape: Boolean, location_name: "markAsAnomaly"))
+    AnomalyDetectorMissingDataAction.add_member(:skip, Shapes::ShapeRef.new(shape: Boolean, location_name: "skip"))
+    AnomalyDetectorMissingDataAction.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AnomalyDetectorMissingDataAction.add_member_subclass(:mark_as_anomaly, Types::AnomalyDetectorMissingDataAction::MarkAsAnomaly)
+    AnomalyDetectorMissingDataAction.add_member_subclass(:skip, Types::AnomalyDetectorMissingDataAction::Skip)
+    AnomalyDetectorMissingDataAction.add_member_subclass(:unknown, Types::AnomalyDetectorMissingDataAction::Unknown)
+    AnomalyDetectorMissingDataAction.struct_class = Types::AnomalyDetectorMissingDataAction
+
+    AnomalyDetectorStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: AnomalyDetectorStatusCode, required: true, location_name: "statusCode"))
+    AnomalyDetectorStatus.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    AnomalyDetectorStatus.struct_class = Types::AnomalyDetectorStatus
+
+    AnomalyDetectorSummary.add_member(:arn, Shapes::ShapeRef.new(shape: AnomalyDetectorArn, required: true, location_name: "arn"))
+    AnomalyDetectorSummary.add_member(:anomaly_detector_id, Shapes::ShapeRef.new(shape: AnomalyDetectorId, required: true, location_name: "anomalyDetectorId"))
+    AnomalyDetectorSummary.add_member(:alias, Shapes::ShapeRef.new(shape: AnomalyDetectorAlias, required: true, location_name: "alias"))
+    AnomalyDetectorSummary.add_member(:status, Shapes::ShapeRef.new(shape: AnomalyDetectorStatus, required: true, location_name: "status"))
+    AnomalyDetectorSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    AnomalyDetectorSummary.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "modifiedAt"))
+    AnomalyDetectorSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    AnomalyDetectorSummary.struct_class = Types::AnomalyDetectorSummary
+
+    AnomalyDetectorSummaryList.member = Shapes::ShapeRef.new(shape: AnomalyDetectorSummary)
+
     CloudWatchLogDestination.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, required: true, location_name: "logGroupArn"))
     CloudWatchLogDestination.struct_class = Types::CloudWatchLogDestination
 
@@ -222,6 +298,25 @@ module Aws::PrometheusService
 
     CreateAlertManagerDefinitionResponse.add_member(:status, Shapes::ShapeRef.new(shape: AlertManagerDefinitionStatus, required: true, location_name: "status"))
     CreateAlertManagerDefinitionResponse.struct_class = Types::CreateAlertManagerDefinitionResponse
+
+    CreateAnomalyDetectorRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    CreateAnomalyDetectorRequest.add_member(:alias, Shapes::ShapeRef.new(shape: AnomalyDetectorAlias, required: true, location_name: "alias"))
+    CreateAnomalyDetectorRequest.add_member(:evaluation_interval_in_seconds, Shapes::ShapeRef.new(shape: AnomalyDetectorEvaluationInterval, location_name: "evaluationIntervalInSeconds"))
+    CreateAnomalyDetectorRequest.add_member(:missing_data_action, Shapes::ShapeRef.new(shape: AnomalyDetectorMissingDataAction, location_name: "missingDataAction"))
+    CreateAnomalyDetectorRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: AnomalyDetectorConfiguration, required: true, location_name: "configuration"))
+    CreateAnomalyDetectorRequest.add_member(:labels, Shapes::ShapeRef.new(shape: CreateAnomalyDetectorRequestLabelsMap, location_name: "labels"))
+    CreateAnomalyDetectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateAnomalyDetectorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateAnomalyDetectorRequest.struct_class = Types::CreateAnomalyDetectorRequest
+
+    CreateAnomalyDetectorRequestLabelsMap.key = Shapes::ShapeRef.new(shape: PrometheusMetricLabelKey)
+    CreateAnomalyDetectorRequestLabelsMap.value = Shapes::ShapeRef.new(shape: PrometheusMetricLabelValue)
+
+    CreateAnomalyDetectorResponse.add_member(:anomaly_detector_id, Shapes::ShapeRef.new(shape: AnomalyDetectorId, required: true, location_name: "anomalyDetectorId"))
+    CreateAnomalyDetectorResponse.add_member(:arn, Shapes::ShapeRef.new(shape: AnomalyDetectorArn, required: true, location_name: "arn"))
+    CreateAnomalyDetectorResponse.add_member(:status, Shapes::ShapeRef.new(shape: AnomalyDetectorStatus, required: true, location_name: "status"))
+    CreateAnomalyDetectorResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateAnomalyDetectorResponse.struct_class = Types::CreateAnomalyDetectorResponse
 
     CreateLoggingConfigurationRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
     CreateLoggingConfigurationRequest.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, required: true, location_name: "logGroupArn"))
@@ -284,6 +379,11 @@ module Aws::PrometheusService
     DeleteAlertManagerDefinitionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteAlertManagerDefinitionRequest.struct_class = Types::DeleteAlertManagerDefinitionRequest
 
+    DeleteAnomalyDetectorRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    DeleteAnomalyDetectorRequest.add_member(:anomaly_detector_id, Shapes::ShapeRef.new(shape: AnomalyDetectorId, required: true, location: "uri", location_name: "anomalyDetectorId"))
+    DeleteAnomalyDetectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    DeleteAnomalyDetectorRequest.struct_class = Types::DeleteAnomalyDetectorRequest
+
     DeleteLoggingConfigurationRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
     DeleteLoggingConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteLoggingConfigurationRequest.struct_class = Types::DeleteLoggingConfigurationRequest
@@ -323,6 +423,13 @@ module Aws::PrometheusService
 
     DescribeAlertManagerDefinitionResponse.add_member(:alert_manager_definition, Shapes::ShapeRef.new(shape: AlertManagerDefinitionDescription, required: true, location_name: "alertManagerDefinition"))
     DescribeAlertManagerDefinitionResponse.struct_class = Types::DescribeAlertManagerDefinitionResponse
+
+    DescribeAnomalyDetectorRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    DescribeAnomalyDetectorRequest.add_member(:anomaly_detector_id, Shapes::ShapeRef.new(shape: AnomalyDetectorId, required: true, location: "uri", location_name: "anomalyDetectorId"))
+    DescribeAnomalyDetectorRequest.struct_class = Types::DescribeAnomalyDetectorRequest
+
+    DescribeAnomalyDetectorResponse.add_member(:anomaly_detector, Shapes::ShapeRef.new(shape: AnomalyDetectorDescription, required: true, location_name: "anomalyDetector"))
+    DescribeAnomalyDetectorResponse.struct_class = Types::DescribeAnomalyDetectorResponse
 
     DescribeLoggingConfigurationRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
     DescribeLoggingConfigurationRequest.struct_class = Types::DescribeLoggingConfigurationRequest
@@ -397,6 +504,14 @@ module Aws::PrometheusService
     GetDefaultScraperConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "configuration"))
     GetDefaultScraperConfigurationResponse.struct_class = Types::GetDefaultScraperConfigurationResponse
 
+    IgnoreNearExpected.add_member(:amount, Shapes::ShapeRef.new(shape: IgnoreNearExpectedAmountDouble, location_name: "amount"))
+    IgnoreNearExpected.add_member(:ratio, Shapes::ShapeRef.new(shape: IgnoreNearExpectedRatioDouble, location_name: "ratio"))
+    IgnoreNearExpected.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    IgnoreNearExpected.add_member_subclass(:amount, Types::IgnoreNearExpected::Amount)
+    IgnoreNearExpected.add_member_subclass(:ratio, Types::IgnoreNearExpected::Ratio)
+    IgnoreNearExpected.add_member_subclass(:unknown, Types::IgnoreNearExpected::Unknown)
+    IgnoreNearExpected.struct_class = Types::IgnoreNearExpected
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -412,6 +527,16 @@ module Aws::PrometheusService
     LimitsPerLabelSetEntry.struct_class = Types::LimitsPerLabelSetEntry
 
     LimitsPerLabelSetList.member = Shapes::ShapeRef.new(shape: LimitsPerLabelSet)
+
+    ListAnomalyDetectorsRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    ListAnomalyDetectorsRequest.add_member(:alias, Shapes::ShapeRef.new(shape: AnomalyDetectorAlias, location: "querystring", location_name: "alias"))
+    ListAnomalyDetectorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAnomalyDetectorsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListAnomalyDetectorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListAnomalyDetectorsRequest.struct_class = Types::ListAnomalyDetectorsRequest
+
+    ListAnomalyDetectorsResponse.add_member(:anomaly_detectors, Shapes::ShapeRef.new(shape: AnomalyDetectorSummaryList, required: true, location_name: "anomalyDetectors"))
+    ListAnomalyDetectorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListAnomalyDetectorsResponse.struct_class = Types::ListAnomalyDetectorsResponse
 
     ListRuleGroupsNamespacesRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
     ListRuleGroupsNamespacesRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleGroupsNamespaceName, location: "querystring", location_name: "name"))
@@ -467,6 +592,9 @@ module Aws::PrometheusService
     LoggingFilter.add_member(:qsp_threshold, Shapes::ShapeRef.new(shape: LoggingFilterQspThresholdLong, required: true, location_name: "qspThreshold"))
     LoggingFilter.struct_class = Types::LoggingFilter
 
+    PrometheusMetricLabelMap.key = Shapes::ShapeRef.new(shape: PrometheusMetricLabelKey)
+    PrometheusMetricLabelMap.value = Shapes::ShapeRef.new(shape: PrometheusMetricLabelValue)
+
     PutAlertManagerDefinitionRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
     PutAlertManagerDefinitionRequest.add_member(:data, Shapes::ShapeRef.new(shape: AlertManagerDefinitionData, required: true, location_name: "data"))
     PutAlertManagerDefinitionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -474,6 +602,21 @@ module Aws::PrometheusService
 
     PutAlertManagerDefinitionResponse.add_member(:status, Shapes::ShapeRef.new(shape: AlertManagerDefinitionStatus, required: true, location_name: "status"))
     PutAlertManagerDefinitionResponse.struct_class = Types::PutAlertManagerDefinitionResponse
+
+    PutAnomalyDetectorRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    PutAnomalyDetectorRequest.add_member(:anomaly_detector_id, Shapes::ShapeRef.new(shape: AnomalyDetectorId, required: true, location: "uri", location_name: "anomalyDetectorId"))
+    PutAnomalyDetectorRequest.add_member(:evaluation_interval_in_seconds, Shapes::ShapeRef.new(shape: AnomalyDetectorEvaluationInterval, location_name: "evaluationIntervalInSeconds"))
+    PutAnomalyDetectorRequest.add_member(:missing_data_action, Shapes::ShapeRef.new(shape: AnomalyDetectorMissingDataAction, location_name: "missingDataAction"))
+    PutAnomalyDetectorRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: AnomalyDetectorConfiguration, required: true, location_name: "configuration"))
+    PutAnomalyDetectorRequest.add_member(:labels, Shapes::ShapeRef.new(shape: PrometheusMetricLabelMap, location_name: "labels"))
+    PutAnomalyDetectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    PutAnomalyDetectorRequest.struct_class = Types::PutAnomalyDetectorRequest
+
+    PutAnomalyDetectorResponse.add_member(:anomaly_detector_id, Shapes::ShapeRef.new(shape: AnomalyDetectorId, required: true, location_name: "anomalyDetectorId"))
+    PutAnomalyDetectorResponse.add_member(:arn, Shapes::ShapeRef.new(shape: AnomalyDetectorArn, required: true, location_name: "arn"))
+    PutAnomalyDetectorResponse.add_member(:status, Shapes::ShapeRef.new(shape: AnomalyDetectorStatus, required: true, location_name: "status"))
+    PutAnomalyDetectorResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    PutAnomalyDetectorResponse.struct_class = Types::PutAnomalyDetectorResponse
 
     PutResourcePolicyRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
     PutResourcePolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: String, required: true, location_name: "policyDocument"))
@@ -507,6 +650,13 @@ module Aws::PrometheusService
     QueryLoggingConfigurationStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: QueryLoggingConfigurationStatusCode, required: true, location_name: "statusCode"))
     QueryLoggingConfigurationStatus.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     QueryLoggingConfigurationStatus.struct_class = Types::QueryLoggingConfigurationStatus
+
+    RandomCutForestConfiguration.add_member(:query, Shapes::ShapeRef.new(shape: RandomCutForestQuery, required: true, location_name: "query"))
+    RandomCutForestConfiguration.add_member(:shingle_size, Shapes::ShapeRef.new(shape: RandomCutForestConfigurationShingleSizeInteger, location_name: "shingleSize"))
+    RandomCutForestConfiguration.add_member(:sample_size, Shapes::ShapeRef.new(shape: RandomCutForestConfigurationSampleSizeInteger, location_name: "sampleSize"))
+    RandomCutForestConfiguration.add_member(:ignore_near_expected_from_above, Shapes::ShapeRef.new(shape: IgnoreNearExpected, location_name: "ignoreNearExpectedFromAbove"))
+    RandomCutForestConfiguration.add_member(:ignore_near_expected_from_below, Shapes::ShapeRef.new(shape: IgnoreNearExpected, location_name: "ignoreNearExpectedFromBelow"))
+    RandomCutForestConfiguration.struct_class = Types::RandomCutForestConfiguration
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
@@ -609,8 +759,10 @@ module Aws::PrometheusService
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     Source.add_member(:eks_configuration, Shapes::ShapeRef.new(shape: EksConfiguration, location_name: "eksConfiguration"))
+    Source.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "vpcConfiguration"))
     Source.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Source.add_member_subclass(:eks_configuration, Types::Source::EksConfiguration)
+    Source.add_member_subclass(:vpc_configuration, Types::Source::VpcConfiguration)
     Source.add_member_subclass(:unknown, Types::Source::Unknown)
     Source.struct_class = Types::Source
 
@@ -705,6 +857,10 @@ module Aws::PrometheusService
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
 
+    VpcConfiguration.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, required: true, location_name: "securityGroupIds"))
+    VpcConfiguration.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "subnetIds"))
+    VpcConfiguration.struct_class = Types::VpcConfiguration
+
     WorkspaceConfigurationDescription.add_member(:status, Shapes::ShapeRef.new(shape: WorkspaceConfigurationStatus, required: true, location_name: "status"))
     WorkspaceConfigurationDescription.add_member(:limits_per_label_set, Shapes::ShapeRef.new(shape: LimitsPerLabelSetList, location_name: "limitsPerLabelSet"))
     WorkspaceConfigurationDescription.add_member(:retention_period_in_days, Shapes::ShapeRef.new(shape: WorkspaceConfigurationDescriptionRetentionPeriodInDaysInteger, location_name: "retentionPeriodInDays"))
@@ -767,6 +923,20 @@ module Aws::PrometheusService
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:create_anomaly_detector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAnomalyDetector"
+        o.http_method = "POST"
+        o.http_request_uri = "/workspaces/{workspaceId}/anomalydetectors"
+        o.input = Shapes::ShapeRef.new(shape: CreateAnomalyDetectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAnomalyDetectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
@@ -845,6 +1015,20 @@ module Aws::PrometheusService
         o.http_method = "DELETE"
         o.http_request_uri = "/workspaces/{workspaceId}/alertmanager/definition"
         o.input = Shapes::ShapeRef.new(shape: DeleteAlertManagerDefinitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_anomaly_detector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAnomalyDetector"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/workspaces/{workspaceId}/anomalydetectors/{anomalyDetectorId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAnomalyDetectorRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -955,6 +1139,19 @@ module Aws::PrometheusService
         o.http_request_uri = "/workspaces/{workspaceId}/alertmanager/definition"
         o.input = Shapes::ShapeRef.new(shape: DescribeAlertManagerDefinitionRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAlertManagerDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_anomaly_detector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAnomalyDetector"
+        o.http_method = "GET"
+        o.http_request_uri = "/workspaces/{workspaceId}/anomalydetectors/{anomalyDetectorId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAnomalyDetectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAnomalyDetectorResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1074,6 +1271,25 @@ module Aws::PrometheusService
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:list_anomaly_detectors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAnomalyDetectors"
+        o.http_method = "GET"
+        o.http_request_uri = "/workspaces/{workspaceId}/anomalydetectors"
+        o.input = Shapes::ShapeRef.new(shape: ListAnomalyDetectorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAnomalyDetectorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_rule_groups_namespaces, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListRuleGroupsNamespaces"
         o.http_method = "GET"
@@ -1152,6 +1368,20 @@ module Aws::PrometheusService
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:put_anomaly_detector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAnomalyDetector"
+        o.http_method = "PUT"
+        o.http_request_uri = "/workspaces/{workspaceId}/anomalydetectors/{anomalyDetectorId}"
+        o.input = Shapes::ShapeRef.new(shape: PutAnomalyDetectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAnomalyDetectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)

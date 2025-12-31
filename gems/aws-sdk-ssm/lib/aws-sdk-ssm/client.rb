@@ -1871,15 +1871,26 @@ module Aws::SSM
     #     This type of OpsItem is used for default OpsItems created by
     #     OpsCenter.
     #
+    #   * `/aws/insight`
+    #
+    #     This type of OpsItem is used by OpsCenter for aggregating and
+    #     reporting on duplicate OpsItems.
+    #
     #   * `/aws/changerequest`
     #
     #     This type of OpsItem is used by Change Manager for reviewing and
     #     approving or rejecting change requests.
     #
-    #   * `/aws/insight`
+    #     Amazon Web Services Systems Manager Change Manager will no longer be
+    #     open to new customers starting November 7, 2025. If you would like
+    #     to use Change Manager, sign up prior to that date. Existing
+    #     customers can continue to use the service as normal. For more
+    #     information, see [Amazon Web Services Systems Manager Change Manager
+    #     availability change][1].
     #
-    #     This type of OpsItem is used by OpsCenter for aggregating and
-    #     reporting on duplicate OpsItems.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html
     #
     # @option params [Hash<String,Types::OpsItemDataValue>] :operational_data
     #   Operational data is custom data that provides useful reference details
@@ -8363,8 +8374,19 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Amazon Web Services Systems Manager Change Manager will no longer be
+    # open to new customers starting November 7, 2025. If you would like to
+    # use Change Manager, sign up prior to that date. Existing customers can
+    # continue to use the service as normal. For more information, see
+    # [Amazon Web Services Systems Manager Change Manager availability
+    # change][1].
+    #
     # Information about approval reviews for a version of a change template
     # in Change Manager.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html
     #
     # @option params [required, String] :name
     #   The name of the change template.
@@ -11100,9 +11122,20 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Amazon Web Services Systems Manager Change Manager will no longer be
+    # open to new customers starting November 7, 2025. If you would like to
+    # use Change Manager, sign up prior to that date. Existing customers can
+    # continue to use the service as normal. For more information, see
+    # [Amazon Web Services Systems Manager Change Manager availability
+    # change][1].
+    #
     # Creates a change request for Change Manager. The Automation runbooks
     # specified in the change request run only after all required approvals
     # for the change request have been received.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html
     #
     # @option params [Time,DateTime,Date,Integer,String] :scheduled_time
     #   The date and time specified in the change request to run the
@@ -12254,8 +12287,19 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Amazon Web Services Systems Manager Change Manager will no longer be
+    # open to new customers starting November 7, 2025. If you would like to
+    # use Change Manager, sign up prior to that date. Existing customers can
+    # continue to use the service as normal. For more information, see
+    # [Amazon Web Services Systems Manager Change Manager availability
+    # change][1].
+    #
     # Updates information related to approval reviews for a specific version
     # of a change template in Change Manager.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/change-manager-availability-change.html
     #
     # @option params [required, String] :name
     #   The name of the change template for which a version's metadata is to
@@ -13548,7 +13592,7 @@ module Aws::SSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.203.0'
+      context[:gem_version] = '1.207.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

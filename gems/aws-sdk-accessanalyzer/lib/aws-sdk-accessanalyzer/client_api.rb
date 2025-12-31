@@ -1118,6 +1118,7 @@ module Aws::AccessAnalyzer
 
     ResourceTypeDetails.add_member(:total_active_public, Shapes::ShapeRef.new(shape: Integer, location_name: "totalActivePublic"))
     ResourceTypeDetails.add_member(:total_active_cross_account, Shapes::ShapeRef.new(shape: Integer, location_name: "totalActiveCrossAccount"))
+    ResourceTypeDetails.add_member(:total_active_errors, Shapes::ShapeRef.new(shape: Integer, location_name: "totalActiveErrors"))
     ResourceTypeDetails.struct_class = Types::ResourceTypeDetails
 
     ResourceTypeList.member = Shapes::ShapeRef.new(shape: ResourceType)

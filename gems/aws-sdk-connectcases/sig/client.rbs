@@ -82,6 +82,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetCaseRuleResponse]
         def case_rules: () -> ::Array[Types::GetCaseRuleResponse]
         def errors: () -> ::Array[Types::CaseRuleError]
+        def unprocessed_case_rules: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#batch_get_case_rule-instance_method
       def batch_get_case_rule: (
@@ -170,6 +171,49 @@ module Aws
                               ?description: ::String,
                               rule: {
                                 required: {
+                                  default_value: bool,
+                                  conditions: Array[
+                                    {
+                                      equal_to: {
+                                        operand_one: {
+                                          field_id: ::String?
+                                        },
+                                        operand_two: {
+                                          string_value: ::String?,
+                                          boolean_value: bool?,
+                                          double_value: ::Float?,
+                                          empty_value: {
+                                          }?
+                                        },
+                                        result: bool
+                                      }?,
+                                      not_equal_to: {
+                                        operand_one: {
+                                          field_id: ::String?
+                                        },
+                                        operand_two: {
+                                          string_value: ::String?,
+                                          boolean_value: bool?,
+                                          double_value: ::Float?,
+                                          empty_value: {
+                                          }?
+                                        },
+                                        result: bool
+                                      }?
+                                    },
+                                  ]
+                                }?,
+                                field_options: {
+                                  parent_field_id: ::String?,
+                                  child_field_id: ::String?,
+                                  parent_child_field_options_mappings: Array[
+                                    {
+                                      parent_field_option_value: ::String,
+                                      child_field_option_values: Array[::String]
+                                    },
+                                  ]
+                                }?,
+                                hidden: {
                                   default_value: bool,
                                   conditions: Array[
                                     {
@@ -363,7 +407,7 @@ module Aws
                              ?rules: Array[
                                {
                                  case_rule_id: ::String,
-                                 field_id: ::String
+                                 field_id: ::String?
                                },
                              ]
                            ) -> _CreateTemplateResponseSuccess
@@ -1082,6 +1126,49 @@ module Aws
                                       }?
                                     },
                                   ]
+                                }?,
+                                field_options: {
+                                  parent_field_id: ::String?,
+                                  child_field_id: ::String?,
+                                  parent_child_field_options_mappings: Array[
+                                    {
+                                      parent_field_option_value: ::String,
+                                      child_field_option_values: Array[::String]
+                                    },
+                                  ]
+                                }?,
+                                hidden: {
+                                  default_value: bool,
+                                  conditions: Array[
+                                    {
+                                      equal_to: {
+                                        operand_one: {
+                                          field_id: ::String?
+                                        },
+                                        operand_two: {
+                                          string_value: ::String?,
+                                          boolean_value: bool?,
+                                          double_value: ::Float?,
+                                          empty_value: {
+                                          }?
+                                        },
+                                        result: bool
+                                      }?,
+                                      not_equal_to: {
+                                        operand_one: {
+                                          field_id: ::String?
+                                        },
+                                        operand_two: {
+                                          string_value: ::String?,
+                                          boolean_value: bool?,
+                                          double_value: ::Float?,
+                                          empty_value: {
+                                          }?
+                                        },
+                                        result: bool
+                                      }?
+                                    },
+                                  ]
                                 }?
                               }
                             ) -> _UpdateCaseRuleResponseSuccess
@@ -1163,7 +1250,7 @@ module Aws
                              ?rules: Array[
                                {
                                  case_rule_id: ::String,
-                                 field_id: ::String
+                                 field_id: ::String?
                                },
                              ]
                            ) -> _UpdateTemplateResponseSuccess

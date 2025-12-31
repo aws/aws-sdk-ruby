@@ -49,7 +49,8 @@ module Aws::InspectorScan
 
     # @!attribute [rw] sbom
     #   The JSON file for the SBOM you want to scan. The SBOM must be in
-    #   CycloneDX 1.5 format.
+    #   CycloneDX 1.5 format. This format limits you to passing 2000
+    #   components before throwing a `ValidException` error.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] output_format

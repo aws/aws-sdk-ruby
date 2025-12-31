@@ -28,37 +28,9 @@ module Aws::CloudWatchRUM
     # information such as page load time, client-side errors, and user
     # behavior.
     #
-    # @!attribute [rw] app_monitor_configuration
-    #   A structure that contains much of the configuration data for the app
-    #   monitor.
-    #   @return [Types::AppMonitorConfiguration]
-    #
-    # @!attribute [rw] created
-    #   The date and time that this app monitor was created.
+    # @!attribute [rw] name
+    #   The name of the app monitor.
     #   @return [String]
-    #
-    # @!attribute [rw] custom_events
-    #   Specifies whether this app monitor allows the web client to define
-    #   and send custom events.
-    #
-    #   For more information about custom events, see [Send custom
-    #   events][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html
-    #   @return [Types::CustomEvents]
-    #
-    # @!attribute [rw] data_storage
-    #   A structure that contains information about whether this app monitor
-    #   stores a copy of the telemetry data that RUM collects using
-    #   CloudWatch Logs.
-    #   @return [Types::DataStorage]
-    #
-    # @!attribute [rw] deobfuscation_configuration
-    #   A structure that contains the configuration for how an app monitor
-    #   can deobfuscate stack traces.
-    #   @return [Types::DeobfuscationConfiguration]
     #
     # @!attribute [rw] domain
     #   The top-level internet domain name for which your application has
@@ -74,38 +46,73 @@ module Aws::CloudWatchRUM
     #   The unique ID of this app monitor.
     #   @return [String]
     #
+    # @!attribute [rw] created
+    #   The date and time that this app monitor was created.
+    #   @return [String]
+    #
     # @!attribute [rw] last_modified
     #   The date and time of the most recent changes to this app monitor's
     #   configuration.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the app monitor.
-    #   @return [String]
-    #
-    # @!attribute [rw] state
-    #   The current state of the app monitor.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   The list of tag keys and values associated with this app monitor.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] state
+    #   The current state of the app monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_monitor_configuration
+    #   A structure that contains much of the configuration data for the app
+    #   monitor.
+    #   @return [Types::AppMonitorConfiguration]
+    #
+    # @!attribute [rw] data_storage
+    #   A structure that contains information about whether this app monitor
+    #   stores a copy of the telemetry data that RUM collects using
+    #   CloudWatch Logs.
+    #   @return [Types::DataStorage]
+    #
+    # @!attribute [rw] custom_events
+    #   Specifies whether this app monitor allows the web client to define
+    #   and send custom events.
+    #
+    #   For more information about custom events, see [Send custom
+    #   events][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html
+    #   @return [Types::CustomEvents]
+    #
+    # @!attribute [rw] deobfuscation_configuration
+    #   A structure that contains the configuration for how an app monitor
+    #   can deobfuscate stack traces.
+    #   @return [Types::DeobfuscationConfiguration]
+    #
+    # @!attribute [rw] platform
+    #   The platform type for this app monitor. Valid values are `Web` for
+    #   web applications , `Android` for Android applications, and `iOS` for
+    #   IOS applications.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/AppMonitor AWS API Documentation
     #
     class AppMonitor < Struct.new(
-      :app_monitor_configuration,
-      :created,
-      :custom_events,
-      :data_storage,
-      :deobfuscation_configuration,
+      :name,
       :domain,
       :domain_list,
       :id,
+      :created,
       :last_modified,
-      :name,
+      :tags,
       :state,
-      :tags)
+      :app_monitor_configuration,
+      :data_storage,
+      :custom_events,
+      :deobfuscation_configuration,
+      :platform)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -113,27 +120,10 @@ module Aws::CloudWatchRUM
     # This structure contains much of the configuration data for the app
     # monitor.
     #
-    # @!attribute [rw] allow_cookies
-    #   If you set this to `true`, the RUM web client sets two cookies, a
-    #   session cookie and a user cookie. The cookies allow the RUM web
-    #   client to collect data relating to the number of users an
-    #   application has and the behavior of the application across a
-    #   sequence of events. Cookies are stored in the top-level domain of
-    #   the current page.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] enable_x_ray
-    #   If you set this to `true`, RUM enables X-Ray tracing for the user
-    #   sessions that RUM samples. RUM adds an X-Ray trace header to allowed
-    #   HTTP requests. It also records an X-Ray segment for allowed HTTP
-    #   requests. You can see traces and segments from these user sessions
-    #   in the X-Ray console and the CloudWatch ServiceLens console. For
-    #   more information, see [What is X-Ray?][1]
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html
-    #   @return [Boolean]
+    # @!attribute [rw] identity_pool_id
+    #   The ID of the Amazon Cognito identity pool that is used to authorize
+    #   the sending of data to RUM.
+    #   @return [String]
     #
     # @!attribute [rw] excluded_pages
     #   A list of URLs in your website or application to exclude from RUM
@@ -143,10 +133,31 @@ module Aws::CloudWatchRUM
     #   same operation.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] included_pages
+    #   If this app monitor is to collect data from only certain pages in
+    #   your application, this structure lists those pages.
+    #
+    #   You can't include both `ExcludedPages` and `IncludedPages` in the
+    #   same operation.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] favorite_pages
     #   A list of pages in your application that are to be displayed with a
     #   "favorite" icon in the CloudWatch RUM console.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] session_sample_rate
+    #   Specifies the portion of user sessions to use for RUM data
+    #   collection. Choosing a higher portion gives you more data but also
+    #   incurs more costs.
+    #
+    #   The range for this value is 0 to 1 inclusive. Setting this to 1
+    #   means that 100% of user sessions are sampled, and setting it to 0.1
+    #   means that 10% of user sessions are sampled.
+    #
+    #   If you omit this parameter, the default of 0.1 is used, and 10% of
+    #   sessions will be sampled.
+    #   @return [Float]
     #
     # @!attribute [rw] guest_role_arn
     #   The ARN of the guest IAM role that is attached to the Amazon Cognito
@@ -175,31 +186,14 @@ module Aws::CloudWatchRUM
     #   [2]: https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetIdentityPoolRoles.html
     #   @return [String]
     #
-    # @!attribute [rw] identity_pool_id
-    #   The ID of the Amazon Cognito identity pool that is used to authorize
-    #   the sending of data to RUM.
-    #   @return [String]
-    #
-    # @!attribute [rw] included_pages
-    #   If this app monitor is to collect data from only certain pages in
-    #   your application, this structure lists those pages.
-    #
-    #   You can't include both `ExcludedPages` and `IncludedPages` in the
-    #   same operation.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] session_sample_rate
-    #   Specifies the portion of user sessions to use for RUM data
-    #   collection. Choosing a higher portion gives you more data but also
-    #   incurs more costs.
-    #
-    #   The range for this value is 0 to 1 inclusive. Setting this to 1
-    #   means that 100% of user sessions are sampled, and setting it to 0.1
-    #   means that 10% of user sessions are sampled.
-    #
-    #   If you omit this parameter, the default of 0.1 is used, and 10% of
-    #   sessions will be sampled.
-    #   @return [Float]
+    # @!attribute [rw] allow_cookies
+    #   If you set this to `true`, the RUM web client sets two cookies, a
+    #   session cookie and a user cookie. The cookies allow the RUM web
+    #   client to collect data relating to the number of users an
+    #   application has and the behavior of the application across a
+    #   sequence of events. Cookies are stored in the top-level domain of
+    #   the current page.
+    #   @return [Boolean]
     #
     # @!attribute [rw] telemetries
     #   An array that lists the types of telemetry data that this app
@@ -216,30 +210,43 @@ module Aws::CloudWatchRUM
     #     by your application.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] enable_x_ray
+    #   If you set this to `true`, RUM enables X-Ray tracing for the user
+    #   sessions that RUM samples. RUM adds an X-Ray trace header to allowed
+    #   HTTP requests. It also records an X-Ray segment for allowed HTTP
+    #   requests. You can see traces and segments from these user sessions
+    #   in the X-Ray console and the CloudWatch ServiceLens console. For
+    #   more information, see [What is X-Ray?][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/AppMonitorConfiguration AWS API Documentation
     #
     class AppMonitorConfiguration < Struct.new(
-      :allow_cookies,
-      :enable_x_ray,
-      :excluded_pages,
-      :favorite_pages,
-      :guest_role_arn,
       :identity_pool_id,
+      :excluded_pages,
       :included_pages,
+      :favorite_pages,
       :session_sample_rate,
-      :telemetries)
+      :guest_role_arn,
+      :allow_cookies,
+      :telemetries,
+      :enable_x_ray)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # A structure that contains information about the RUM app monitor.
     #
-    # @!attribute [rw] id
-    #   The unique ID of the app monitor.
-    #   @return [String]
-    #
     # @!attribute [rw] name
     #   The name of the app monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the app monitor.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -249,8 +256,8 @@ module Aws::CloudWatchRUM
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/AppMonitorDetails AWS API Documentation
     #
     class AppMonitorDetails < Struct.new(
-      :id,
       :name,
+      :id,
       :version)
       SENSITIVE = []
       include Aws::Structure
@@ -259,12 +266,16 @@ module Aws::CloudWatchRUM
     # A structure that includes some data about app monitors and their
     # settings.
     #
-    # @!attribute [rw] created
-    #   The date and time that the app monitor was created.
+    # @!attribute [rw] name
+    #   The name of this app monitor.
     #   @return [String]
     #
     # @!attribute [rw] id
     #   The unique ID of this app monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] created
+    #   The date and time that the app monitor was created.
     #   @return [String]
     #
     # @!attribute [rw] last_modified
@@ -272,22 +283,25 @@ module Aws::CloudWatchRUM
     #   configuration.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The name of this app monitor.
-    #   @return [String]
-    #
     # @!attribute [rw] state
     #   The current state of this app monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The platform type for this app monitor. Valid values are `Web` for
+    #   web applications, `Android` for Android applications, and `iOS` for
+    #   IOS applications.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/AppMonitorSummary AWS API Documentation
     #
     class AppMonitorSummary < Struct.new(
-      :created,
-      :id,
-      :last_modified,
       :name,
-      :state)
+      :id,
+      :created,
+      :last_modified,
+      :state,
+      :platform)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -299,6 +313,10 @@ module Aws::CloudWatchRUM
     #
     # [1]: https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricsDefinitions.html
     #
+    # @!attribute [rw] metric_definition
+    #   The metric definition that caused this error.
+    #   @return [Types::MetricDefinitionRequest]
+    #
     # @!attribute [rw] error_code
     #   The error code.
     #   @return [String]
@@ -307,16 +325,12 @@ module Aws::CloudWatchRUM
     #   The error message for this metric definition.
     #   @return [String]
     #
-    # @!attribute [rw] metric_definition
-    #   The metric definition that caused this error.
-    #   @return [Types::MetricDefinitionRequest]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/BatchCreateRumMetricDefinitionsError AWS API Documentation
     #
     class BatchCreateRumMetricDefinitionsError < Struct.new(
+      :metric_definition,
       :error_code,
-      :error_message,
-      :metric_definition)
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -388,6 +402,10 @@ module Aws::CloudWatchRUM
     #
     # [1]: https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchDeleteRumMetricsDefinitions.html
     #
+    # @!attribute [rw] metric_definition_id
+    #   The ID of the metric definition that caused this error.
+    #   @return [String]
+    #
     # @!attribute [rw] error_code
     #   The error code.
     #   @return [String]
@@ -396,16 +414,12 @@ module Aws::CloudWatchRUM
     #   The error message for this metric definition.
     #   @return [String]
     #
-    # @!attribute [rw] metric_definition_id
-    #   The ID of the metric definition that caused this error.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/BatchDeleteRumMetricDefinitionsError AWS API Documentation
     #
     class BatchDeleteRumMetricDefinitionsError < Struct.new(
+      :metric_definition_id,
       :error_code,
-      :error_message,
-      :metric_definition_id)
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -550,50 +564,9 @@ module Aws::CloudWatchRUM
       include Aws::Structure
     end
 
-    # @!attribute [rw] app_monitor_configuration
-    #   A structure that contains much of the configuration data for the app
-    #   monitor. If you are using Amazon Cognito for authorization, you must
-    #   include this structure in your request, and it must include the ID
-    #   of the Amazon Cognito identity pool to use for authorization. If you
-    #   don't include `AppMonitorConfiguration`, you must set up your own
-    #   authorization method. For more information, see [Authorize your
-    #   application to send data to Amazon Web Services][1].
-    #
-    #   If you omit this argument, the sample rate used for RUM is set to
-    #   10% of the user sessions.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html
-    #   @return [Types::AppMonitorConfiguration]
-    #
-    # @!attribute [rw] custom_events
-    #   Specifies whether this app monitor allows the web client to define
-    #   and send custom events. If you omit this parameter, custom events
-    #   are `DISABLED`.
-    #
-    #   For more information about custom events, see [Send custom
-    #   events][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html
-    #   @return [Types::CustomEvents]
-    #
-    # @!attribute [rw] cw_log_enabled
-    #   Data collected by RUM is kept by RUM for 30 days and then deleted.
-    #   This parameter specifies whether RUM sends a copy of this telemetry
-    #   data to Amazon CloudWatch Logs in your account. This enables you to
-    #   keep the telemetry data for more than 30 days, but it does incur
-    #   Amazon CloudWatch Logs charges.
-    #
-    #   If you omit this parameter, the default is `false`.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] deobfuscation_configuration
-    #   A structure that contains the configuration for how an app monitor
-    #   can deobfuscate stack traces.
-    #   @return [Types::DeobfuscationConfiguration]
+    # @!attribute [rw] name
+    #   A name for the app monitor.
+    #   @return [String]
     #
     # @!attribute [rw] domain
     #   The top-level internet domain name for which your application has
@@ -605,10 +578,6 @@ module Aws::CloudWatchRUM
     #   authority. The `CreateAppMonitor` requires either the domain or the
     #   domain list.
     #   @return [Array<String>]
-    #
-    # @!attribute [rw] name
-    #   A name for the app monitor.
-    #   @return [String]
     #
     # @!attribute [rw] tags
     #   Assigns one or more tags (key-value pairs) to the app monitor.
@@ -631,17 +600,69 @@ module Aws::CloudWatchRUM
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] app_monitor_configuration
+    #   A structure that contains much of the configuration data for the app
+    #   monitor. If you are using Amazon Cognito for authorization, you must
+    #   include this structure in your request, and it must include the ID
+    #   of the Amazon Cognito identity pool to use for authorization. If you
+    #   don't include `AppMonitorConfiguration`, you must set up your own
+    #   authorization method. For more information, see [Authorize your
+    #   application to send data to Amazon Web Services][1].
+    #
+    #   If you omit this argument, the sample rate used for RUM is set to
+    #   10% of the user sessions.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html
+    #   @return [Types::AppMonitorConfiguration]
+    #
+    # @!attribute [rw] cw_log_enabled
+    #   Data collected by RUM is kept by RUM for 30 days and then deleted.
+    #   This parameter specifies whether RUM sends a copy of this telemetry
+    #   data to Amazon CloudWatch Logs in your account. This enables you to
+    #   keep the telemetry data for more than 30 days, but it does incur
+    #   Amazon CloudWatch Logs charges.
+    #
+    #   If you omit this parameter, the default is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] custom_events
+    #   Specifies whether this app monitor allows the web client to define
+    #   and send custom events. If you omit this parameter, custom events
+    #   are `DISABLED`.
+    #
+    #   For more information about custom events, see [Send custom
+    #   events][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html
+    #   @return [Types::CustomEvents]
+    #
+    # @!attribute [rw] deobfuscation_configuration
+    #   A structure that contains the configuration for how an app monitor
+    #   can deobfuscate stack traces.
+    #   @return [Types::DeobfuscationConfiguration]
+    #
+    # @!attribute [rw] platform
+    #   The platform type for the app monitor. Valid values are `Web` for
+    #   web applications, `Android` for Android applications, and `iOS` for
+    #   IOS applications. If you omit this parameter, the default is `Web`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/CreateAppMonitorRequest AWS API Documentation
     #
     class CreateAppMonitorRequest < Struct.new(
-      :app_monitor_configuration,
-      :custom_events,
-      :cw_log_enabled,
-      :deobfuscation_configuration,
+      :name,
       :domain,
       :domain_list,
-      :name,
-      :tags)
+      :tags,
+      :app_monitor_configuration,
+      :cw_log_enabled,
+      :custom_events,
+      :deobfuscation_configuration,
+      :platform)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -813,6 +834,16 @@ module Aws::CloudWatchRUM
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the app monitor that collected the data that you want to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_range
+    #   A structure that defines the time range that you want to retrieve
+    #   results from.
+    #   @return [Types::TimeRange]
+    #
     # @!attribute [rw] filters
     #   An array of structures that you can use to filter the results to
     #   those that match one or more sets of key-value pairs that you
@@ -823,29 +854,19 @@ module Aws::CloudWatchRUM
     #   The maximum number of results to return in one operation.
     #   @return [Integer]
     #
-    # @!attribute [rw] name
-    #   The name of the app monitor that collected the data that you want to
-    #   retrieve.
-    #   @return [String]
-    #
     # @!attribute [rw] next_token
     #   Use the token returned by the previous operation to request the next
     #   page of results.
     #   @return [String]
     #
-    # @!attribute [rw] time_range
-    #   A structure that defines the time range that you want to retrieve
-    #   results from.
-    #   @return [Types::TimeRange]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/GetAppMonitorDataRequest AWS API Documentation
     #
     class GetAppMonitorDataRequest < Struct.new(
+      :name,
+      :time_range,
       :filters,
       :max_results,
-      :name,
-      :next_token,
-      :time_range)
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -959,22 +980,22 @@ module Aws::CloudWatchRUM
     # A structure that contains the configuration for how an app monitor can
     # unminify JavaScript error stack traces using source maps.
     #
-    # @!attribute [rw] s3_uri
-    #   The S3Uri of the bucket or folder that stores the source map files.
-    #   It is required if status is ENABLED.
-    #   @return [String]
-    #
     # @!attribute [rw] status
     #   Specifies whether JavaScript error stack traces should be unminified
     #   for this app monitor. The default is for JavaScript error stack
     #   trace unminification to be `DISABLED`.
     #   @return [String]
     #
+    # @!attribute [rw] s3_uri
+    #   The S3Uri of the bucket or folder that stores the source map files.
+    #   It is required if status is ENABLED.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/JavaScriptSourceMaps AWS API Documentation
     #
     class JavaScriptSourceMaps < Struct.new(
-      :s3_uri,
-      :status)
+      :status,
+      :s3_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -998,21 +1019,21 @@ module Aws::CloudWatchRUM
       include Aws::Structure
     end
 
-    # @!attribute [rw] app_monitor_summaries
-    #   An array of structures that contain information about the returned
-    #   app monitors.
-    #   @return [Array<Types::AppMonitorSummary>]
-    #
     # @!attribute [rw] next_token
     #   A token that you can use in a subsequent operation to retrieve the
     #   next set of results.
     #   @return [String]
     #
+    # @!attribute [rw] app_monitor_summaries
+    #   An array of structures that contain information about the returned
+    #   app monitors.
+    #   @return [Array<Types::AppMonitorSummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/ListAppMonitorsResponse AWS API Documentation
     #
     class ListAppMonitorsResponse < Struct.new(
-      :app_monitor_summaries,
-      :next_token)
+      :next_token,
+      :app_monitor_summaries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1116,6 +1137,24 @@ module Aws::CloudWatchRUM
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html
     #
+    # @!attribute [rw] metric_definition_id
+    #   The ID of this metric definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the metric that is defined in this structure.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_key
+    #   The field within the event object that the metric value is sourced
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit_label
+    #   Use this field only if you are sending this metric to CloudWatch. It
+    #   defines the CloudWatch metric unit that this metric is measured in.
+    #   @return [String]
+    #
     # @!attribute [rw] dimension_keys
     #   This field is a map of field paths to dimension names. It defines
     #   the dimensions to associate with this metric in CloudWatch The value
@@ -1134,40 +1173,22 @@ module Aws::CloudWatchRUM
     #   with the specified dimensions.
     #   @return [String]
     #
-    # @!attribute [rw] metric_definition_id
-    #   The ID of this metric definition.
-    #   @return [String]
-    #
-    # @!attribute [rw] name
-    #   The name of the metric that is defined in this structure.
-    #   @return [String]
-    #
     # @!attribute [rw] namespace
     #   If this metric definition is for a custom metric instead of an
     #   extended metric, this field displays the metric namespace that the
     #   custom metric is published to.
     #   @return [String]
     #
-    # @!attribute [rw] unit_label
-    #   Use this field only if you are sending this metric to CloudWatch. It
-    #   defines the CloudWatch metric unit that this metric is measured in.
-    #   @return [String]
-    #
-    # @!attribute [rw] value_key
-    #   The field within the event object that the metric value is sourced
-    #   from.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/MetricDefinition AWS API Documentation
     #
     class MetricDefinition < Struct.new(
-      :dimension_keys,
-      :event_pattern,
       :metric_definition_id,
       :name,
-      :namespace,
+      :value_key,
       :unit_label,
-      :value_key)
+      :dimension_keys,
+      :event_pattern,
+      :namespace)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1316,6 +1337,52 @@ module Aws::CloudWatchRUM
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-and-extended-metrics.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-datacollected.html#CloudWatch-RUM-datacollected-eventDetails
     #
+    # @!attribute [rw] name
+    #   The name for the metric that is defined in this structure. For
+    #   custom metrics, you can specify any name that you like. For extended
+    #   metrics, valid values are the following:
+    #
+    #   * `PerformanceNavigationDuration`
+    #
+    #   * `PerformanceResourceDuration `
+    #
+    #   * `NavigationSatisfiedTransaction`
+    #
+    #   * `NavigationToleratedTransaction`
+    #
+    #   * `NavigationFrustratedTransaction`
+    #
+    #   * `WebVitalsCumulativeLayoutShift`
+    #
+    #   * `WebVitalsFirstInputDelay`
+    #
+    #   * `WebVitalsLargestContentfulPaint`
+    #
+    #   * `JsErrorCount`
+    #
+    #   * `HttpErrorCount`
+    #
+    #   * `SessionCount`
+    #   @return [String]
+    #
+    # @!attribute [rw] value_key
+    #   The field within the event object that the metric value is sourced
+    #   from.
+    #
+    #   If you omit this field, a hardcoded value of 1 is pushed as the
+    #   metric value. This is useful if you want to count the number of
+    #   events that the filter catches.
+    #
+    #   If this metric is sent to CloudWatch Evidently, this field will be
+    #   passed to Evidently raw. Evidently will handle data extraction from
+    #   the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit_label
+    #   The CloudWatch metric unit to use for this metric. If you omit this
+    #   field, the metric is recorded with no unit.
+    #   @return [String]
+    #
     # @!attribute [rw] dimension_keys
     #   Use this field only if you are sending the metric to CloudWatch.
     #
@@ -1369,34 +1436,6 @@ module Aws::CloudWatchRUM
     #   with the specified dimensions.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   The name for the metric that is defined in this structure. For
-    #   custom metrics, you can specify any name that you like. For extended
-    #   metrics, valid values are the following:
-    #
-    #   * `PerformanceNavigationDuration`
-    #
-    #   * `PerformanceResourceDuration `
-    #
-    #   * `NavigationSatisfiedTransaction`
-    #
-    #   * `NavigationToleratedTransaction`
-    #
-    #   * `NavigationFrustratedTransaction`
-    #
-    #   * `WebVitalsCumulativeLayoutShift`
-    #
-    #   * `WebVitalsFirstInputDelay`
-    #
-    #   * `WebVitalsLargestContentfulPaint`
-    #
-    #   * `JsErrorCount`
-    #
-    #   * `HttpErrorCount`
-    #
-    #   * `SessionCount`
-    #   @return [String]
-    #
     # @!attribute [rw] namespace
     #   If this structure is for a custom metric instead of an extended
     #   metrics, use this parameter to define the metric namespace for that
@@ -1407,33 +1446,15 @@ module Aws::CloudWatchRUM
     #   namespace.
     #   @return [String]
     #
-    # @!attribute [rw] unit_label
-    #   The CloudWatch metric unit to use for this metric. If you omit this
-    #   field, the metric is recorded with no unit.
-    #   @return [String]
-    #
-    # @!attribute [rw] value_key
-    #   The field within the event object that the metric value is sourced
-    #   from.
-    #
-    #   If you omit this field, a hardcoded value of 1 is pushed as the
-    #   metric value. This is useful if you want to count the number of
-    #   events that the filter catches.
-    #
-    #   If this metric is sent to CloudWatch Evidently, this field will be
-    #   passed to Evidently raw. Evidently will handle data extraction from
-    #   the event.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/MetricDefinitionRequest AWS API Documentation
     #
     class MetricDefinitionRequest < Struct.new(
+      :name,
+      :value_key,
+      :unit_label,
       :dimension_keys,
       :event_pattern,
-      :name,
-      :namespace,
-      :unit_label,
-      :value_key)
+      :namespace)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1550,6 +1571,28 @@ module Aws::CloudWatchRUM
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   The ID of the app monitor that is sending this data.
+    #   @return [String]
+    #
+    # @!attribute [rw] batch_id
+    #   A unique identifier for this batch of RUM event data.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_monitor_details
+    #   A structure that contains information about the app monitor that
+    #   collected this telemetry information.
+    #   @return [Types::AppMonitorDetails]
+    #
+    # @!attribute [rw] user_details
+    #   A structure that contains information about the user session that
+    #   this batch of events was collected from.
+    #   @return [Types::UserDetails]
+    #
+    # @!attribute [rw] rum_events
+    #   An array of structures that contain the telemetry event data.
+    #   @return [Array<Types::RumEvent>]
+    #
     # @!attribute [rw] alias
     #   If the app monitor uses a resource-based policy that requires
     #   `PutRumEvents` requests to specify a certain alias, specify that
@@ -1562,37 +1605,15 @@ module Aws::CloudWatchRUM
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-resource-policies.html
     #   @return [String]
     #
-    # @!attribute [rw] app_monitor_details
-    #   A structure that contains information about the app monitor that
-    #   collected this telemetry information.
-    #   @return [Types::AppMonitorDetails]
-    #
-    # @!attribute [rw] batch_id
-    #   A unique identifier for this batch of RUM event data.
-    #   @return [String]
-    #
-    # @!attribute [rw] id
-    #   The ID of the app monitor that is sending this data.
-    #   @return [String]
-    #
-    # @!attribute [rw] rum_events
-    #   An array of structures that contain the telemetry event data.
-    #   @return [Array<Types::RumEvent>]
-    #
-    # @!attribute [rw] user_details
-    #   A structure that contains information about the user session that
-    #   this batch of events was collected from.
-    #   @return [Types::UserDetails]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/PutRumEventsRequest AWS API Documentation
     #
     class PutRumEventsRequest < Struct.new(
-      :alias,
-      :app_monitor_details,
-      :batch_id,
       :id,
+      :batch_id,
+      :app_monitor_details,
+      :user_details,
       :rum_events,
-      :user_details)
+      :alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1716,19 +1737,8 @@ module Aws::CloudWatchRUM
     # A structure that contains the information for one performance event
     # that RUM collects from a user session with your application.
     #
-    # @!attribute [rw] details
-    #   A string containing details about the event.
-    #   @return [String]
-    #
     # @!attribute [rw] id
     #   A unique ID for this event.
-    #   @return [String]
-    #
-    # @!attribute [rw] metadata
-    #   Metadata about this event, which contains a JSON serialization of
-    #   the identity of the user for this session. The user information
-    #   comes from information such as the HTTP user-agent request header
-    #   and document interface.
     #   @return [String]
     #
     # @!attribute [rw] timestamp
@@ -1740,14 +1750,25 @@ module Aws::CloudWatchRUM
     #   page load or a new session.
     #   @return [String]
     #
+    # @!attribute [rw] metadata
+    #   Metadata about this event, which contains a JSON serialization of
+    #   the identity of the user for this session. The user information
+    #   comes from information such as the HTTP user-agent request header
+    #   and document interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   A string containing details about the event.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/RumEvent AWS API Documentation
     #
     class RumEvent < Struct.new(
-      :details,
       :id,
-      :metadata,
       :timestamp,
-      :type)
+      :type,
+      :metadata,
+      :details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1791,6 +1812,10 @@ module Aws::CloudWatchRUM
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] service_code
+    #   The ID of the service that is associated with the error.
+    #   @return [String]
+    #
     # @!attribute [rw] quota_code
     #   The ID of the service quota that was exceeded.
     #   @return [String]
@@ -1799,17 +1824,13 @@ module Aws::CloudWatchRUM
     #   The value of a parameter in the request caused an error.
     #   @return [Integer]
     #
-    # @!attribute [rw] service_code
-    #   The ID of the service that is associated with the error.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
       :message,
+      :service_code,
       :quota_code,
-      :retry_after_seconds,
-      :service_code)
+      :retry_after_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1858,6 +1879,21 @@ module Aws::CloudWatchRUM
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] name
+    #   The name of the app monitor to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The top-level internet domain name for which your application has
+    #   administrative authority.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_list
+    #   List the domain names for which your application has administrative
+    #   authority. The `UpdateAppMonitor` allows either the domain or the
+    #   domain list.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] app_monitor_configuration
     #   A structure that contains much of the configuration data for the app
     #   monitor. If you are using Amazon Cognito for authorization, you must
@@ -1872,6 +1908,14 @@ module Aws::CloudWatchRUM
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html
     #   @return [Types::AppMonitorConfiguration]
     #
+    # @!attribute [rw] cw_log_enabled
+    #   Data collected by RUM is kept by RUM for 30 days and then deleted.
+    #   This parameter specifies whether RUM sends a copy of this telemetry
+    #   data to Amazon CloudWatch Logs in your account. This enables you to
+    #   keep the telemetry data for more than 30 days, but it does incur
+    #   Amazon CloudWatch Logs charges.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] custom_events
     #   Specifies whether this app monitor allows the web client to define
     #   and send custom events. The default is for custom events to be
@@ -1885,44 +1929,21 @@ module Aws::CloudWatchRUM
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html
     #   @return [Types::CustomEvents]
     #
-    # @!attribute [rw] cw_log_enabled
-    #   Data collected by RUM is kept by RUM for 30 days and then deleted.
-    #   This parameter specifies whether RUM sends a copy of this telemetry
-    #   data to Amazon CloudWatch Logs in your account. This enables you to
-    #   keep the telemetry data for more than 30 days, but it does incur
-    #   Amazon CloudWatch Logs charges.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] deobfuscation_configuration
     #   A structure that contains the configuration for how an app monitor
     #   can deobfuscate stack traces.
     #   @return [Types::DeobfuscationConfiguration]
     #
-    # @!attribute [rw] domain
-    #   The top-level internet domain name for which your application has
-    #   administrative authority.
-    #   @return [String]
-    #
-    # @!attribute [rw] domain_list
-    #   List the domain names for which your application has administrative
-    #   authority. The `UpdateAppMonitor` allows either the domain or the
-    #   domain list.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] name
-    #   The name of the app monitor to update.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/UpdateAppMonitorRequest AWS API Documentation
     #
     class UpdateAppMonitorRequest < Struct.new(
-      :app_monitor_configuration,
-      :custom_events,
-      :cw_log_enabled,
-      :deobfuscation_configuration,
+      :name,
       :domain,
       :domain_list,
-      :name)
+      :app_monitor_configuration,
+      :cw_log_enabled,
+      :custom_events,
+      :deobfuscation_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1985,21 +2006,21 @@ module Aws::CloudWatchRUM
     # A structure that contains information about the user session that this
     # batch of events was collected from.
     #
-    # @!attribute [rw] session_id
-    #   The session ID that the performance events are from.
-    #   @return [String]
-    #
     # @!attribute [rw] user_id
     #   The ID of the user for this user session. This ID is generated by
     #   RUM and does not include any personally identifiable information
     #   about the user.
     #   @return [String]
     #
+    # @!attribute [rw] session_id
+    #   The session ID that the performance events are from.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/UserDetails AWS API Documentation
     #
     class UserDetails < Struct.new(
-      :session_id,
-      :user_id)
+      :user_id,
+      :session_id)
       SENSITIVE = []
       include Aws::Structure
     end

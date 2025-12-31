@@ -108,6 +108,17 @@ module Aws::Account
       SENSITIVE: []
     end
 
+    class GetGovCloudAccountInformationRequest
+      attr_accessor standard_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGovCloudAccountInformationResponse
+      attr_accessor account_state: ("PENDING_ACTIVATION" | "ACTIVE" | "SUSPENDED" | "CLOSED")
+      attr_accessor gov_cloud_account_id: ::String
+      SENSITIVE: []
+    end
+
     class GetPrimaryEmailRequest
       attr_accessor account_id: ::String
       SENSITIVE: []
@@ -179,6 +190,12 @@ module Aws::Account
     end
 
     class ResourceNotFoundException
+      attr_accessor error_type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceUnavailableException
       attr_accessor error_type: ::String
       attr_accessor message: ::String
       SENSITIVE: []

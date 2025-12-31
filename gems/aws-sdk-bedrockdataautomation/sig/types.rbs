@@ -25,8 +25,17 @@ module Aws::BedrockDataAutomation
       SENSITIVE: []
     end
 
+    class AudioLanguageConfiguration
+      attr_accessor input_languages: ::Array[("EN" | "DE" | "ES" | "FR" | "IT" | "PT" | "JA" | "KO" | "CN" | "TW" | "HK")]
+      attr_accessor generative_output_language: ("DEFAULT" | "EN")
+      attr_accessor identify_multiple_languages: bool
+      SENSITIVE: []
+    end
+
     class AudioOverrideConfiguration
       attr_accessor modality_processing: Types::ModalityProcessingConfiguration
+      attr_accessor language_configuration: Types::AudioLanguageConfiguration
+      attr_accessor sensitive_data_configuration: Types::SensitiveDataConfiguration
       SENSITIVE: []
     end
 
@@ -58,6 +67,8 @@ module Aws::BedrockDataAutomation
       attr_accessor blueprint_stage: ("DEVELOPMENT" | "LIVE")
       attr_accessor kms_key_id: ::String
       attr_accessor kms_encryption_context: ::Hash[::String, ::String]
+      attr_accessor optimization_samples: ::Array[Types::BlueprintOptimizationSample]
+      attr_accessor optimization_time: ::Time
       SENSITIVE: [:schema, :blueprint_name]
     end
 
@@ -72,6 +83,23 @@ module Aws::BedrockDataAutomation
       attr_accessor blueprint_arn: ::String
       attr_accessor blueprint_version: ::String
       attr_accessor blueprint_stage: ("DEVELOPMENT" | "LIVE")
+      SENSITIVE: []
+    end
+
+    class BlueprintOptimizationObject
+      attr_accessor blueprint_arn: ::String
+      attr_accessor stage: ("DEVELOPMENT" | "LIVE")
+      SENSITIVE: []
+    end
+
+    class BlueprintOptimizationOutputConfiguration
+      attr_accessor s3_object: Types::S3Object
+      SENSITIVE: []
+    end
+
+    class BlueprintOptimizationSample
+      attr_accessor asset_s3_object: Types::S3Object
+      attr_accessor ground_truth_s3_object: Types::S3Object
       SENSITIVE: []
     end
 
@@ -93,6 +121,17 @@ module Aws::BedrockDataAutomation
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class CopyBlueprintStageRequest
+      attr_accessor blueprint_arn: ::String
+      attr_accessor source_stage: ("DEVELOPMENT" | "LIVE")
+      attr_accessor target_stage: ("DEVELOPMENT" | "LIVE")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CopyBlueprintStageResponse < Aws::EmptyStructure
     end
 
     class CreateBlueprintRequest
@@ -126,6 +165,7 @@ module Aws::BedrockDataAutomation
       attr_accessor project_name: ::String
       attr_accessor project_description: ::String
       attr_accessor project_stage: ("DEVELOPMENT" | "LIVE")
+      attr_accessor project_type: ("ASYNC" | "SYNC")
       attr_accessor standard_output_configuration: Types::StandardOutputConfiguration
       attr_accessor custom_output_configuration: Types::CustomOutputConfiguration
       attr_accessor override_configuration: Types::OverrideConfiguration
@@ -153,6 +193,7 @@ module Aws::BedrockDataAutomation
       attr_accessor last_modified_time: ::Time
       attr_accessor project_name: ::String
       attr_accessor project_stage: ("DEVELOPMENT" | "LIVE")
+      attr_accessor project_type: ("ASYNC" | "SYNC")
       attr_accessor project_description: ::String
       attr_accessor standard_output_configuration: Types::StandardOutputConfiguration
       attr_accessor custom_output_configuration: Types::CustomOutputConfiguration
@@ -172,6 +213,7 @@ module Aws::BedrockDataAutomation
     class DataAutomationProjectSummary
       attr_accessor project_arn: ::String
       attr_accessor project_stage: ("DEVELOPMENT" | "LIVE")
+      attr_accessor project_type: ("ASYNC" | "SYNC")
       attr_accessor project_name: ::String
       attr_accessor creation_time: ::Time
       SENSITIVE: [:project_name]
@@ -226,6 +268,7 @@ module Aws::BedrockDataAutomation
     class DocumentOverrideConfiguration
       attr_accessor splitter: Types::SplitterConfiguration
       attr_accessor modality_processing: Types::ModalityProcessingConfiguration
+      attr_accessor sensitive_data_configuration: Types::SensitiveDataConfiguration
       SENSITIVE: []
     end
 
@@ -250,6 +293,19 @@ module Aws::BedrockDataAutomation
     class EncryptionConfiguration
       attr_accessor kms_key_id: ::String
       attr_accessor kms_encryption_context: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetBlueprintOptimizationStatusRequest
+      attr_accessor invocation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetBlueprintOptimizationStatusResponse
+      attr_accessor status: ("Created" | "InProgress" | "Success" | "ServiceError" | "ClientError")
+      attr_accessor error_type: ::String
+      attr_accessor error_message: ::String
+      attr_accessor output_configuration: Types::BlueprintOptimizationOutputConfiguration
       SENSITIVE: []
     end
 
@@ -289,6 +345,7 @@ module Aws::BedrockDataAutomation
 
     class ImageOverrideConfiguration
       attr_accessor modality_processing: Types::ModalityProcessingConfiguration
+      attr_accessor sensitive_data_configuration: Types::SensitiveDataConfiguration
       SENSITIVE: []
     end
 
@@ -312,6 +369,21 @@ module Aws::BedrockDataAutomation
 
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvokeBlueprintOptimizationAsyncRequest
+      attr_accessor blueprint: Types::BlueprintOptimizationObject
+      attr_accessor samples: ::Array[Types::BlueprintOptimizationSample]
+      attr_accessor output_configuration: Types::BlueprintOptimizationOutputConfiguration
+      attr_accessor data_automation_profile_arn: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class InvokeBlueprintOptimizationAsyncResponse
+      attr_accessor invocation_arn: ::String
       SENSITIVE: []
     end
 
@@ -378,8 +450,27 @@ module Aws::BedrockDataAutomation
       SENSITIVE: []
     end
 
+    class PIIEntitiesConfiguration
+      attr_accessor pii_entity_types: ::Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]
+      attr_accessor redaction_mask_mode: ("PII" | "ENTITY_TYPE")
+      SENSITIVE: []
+    end
+
     class ResourceNotFoundException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3Object
+      attr_accessor s3_uri: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class SensitiveDataConfiguration
+      attr_accessor detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION")
+      attr_accessor detection_scope: ::Array[("STANDARD" | "CUSTOM")]
+      attr_accessor pii_entities_configuration: Types::PIIEntitiesConfiguration
       SENSITIVE: []
     end
 
@@ -497,6 +588,7 @@ module Aws::BedrockDataAutomation
 
     class VideoOverrideConfiguration
       attr_accessor modality_processing: Types::ModalityProcessingConfiguration
+      attr_accessor sensitive_data_configuration: Types::SensitiveDataConfiguration
       SENSITIVE: []
     end
 

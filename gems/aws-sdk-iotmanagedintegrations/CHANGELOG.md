@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.12.0 (2025-10-30)
+------------------
+
+* Feature - Add a new GetManagedThingCertificate API to expose Iot ManagedIntegrations (MI) device certificate, and add  "-"  support for name, properties, actions and events in the CapabilityReportCapability object.
+
+1.11.0 (2025-10-24)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.10.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.9.0 (2025-08-26)
 ------------------
 

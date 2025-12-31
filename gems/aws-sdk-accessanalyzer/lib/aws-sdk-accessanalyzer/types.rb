@@ -506,8 +506,7 @@ module Aws::AccessAnalyzer
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of analyzer, which corresponds to the zone of trust chosen
-    #   for the analyzer.
+    #   The type represents the zone of trust or scope for the analyzer.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -523,7 +522,14 @@ module Aws::AccessAnalyzer
     #   @return [Time]
     #
     # @!attribute [rw] tags
-    #   The tags added to the analyzer.
+    #   An array of key-value pairs applied to the analyzer. The key-value
+    #   pairs consist of the set of Unicode letters, digits, whitespace,
+    #   `_`, `.`, `/`, `=`, `+`, and `-`.
+    #
+    #   The tag key is a value that is 1 to 128 characters in length and
+    #   cannot be prefixed with `aws:`.
+    #
+    #   The tag value is a value that is 0 to 256 characters in length.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] status
@@ -547,7 +553,14 @@ module Aws::AccessAnalyzer
     #
     # @!attribute [rw] configuration
     #   Specifies if the analyzer is an external access, unused access, or
-    #   internal access analyzer.
+    #   internal access analyzer. The [GetAnalyzer][1] action includes this
+    #   property in its response if a configuration is specified, while the
+    #   [ListAnalyzers][2] action omits it.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_GetAnalyzer.html
+    #   [2]: https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_ListAnalyzers.html
     #   @return [Types::AnalyzerConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/AnalyzerSummary AWS API Documentation
@@ -3922,11 +3935,16 @@ module Aws::AccessAnalyzer
     #   type.
     #   @return [Integer]
     #
+    # @!attribute [rw] total_active_errors
+    #   The total number of active errors for the resource type.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ResourceTypeDetails AWS API Documentation
     #
     class ResourceTypeDetails < Struct.new(
       :total_active_public,
-      :total_active_cross_account)
+      :total_active_cross_account,
+      :total_active_errors)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1565,6 +1565,9 @@ module Aws
                                                   }?,
                                                   detailed_status_codes_metrics: {
                                                     is_enabled: bool?
+                                                  }?,
+                                                  advanced_performance_metrics: {
+                                                    is_enabled: bool?
                                                   }?
                                                 },
                                                 advanced_cost_optimization_metrics: {
@@ -1574,6 +1577,9 @@ module Aws
                                                   is_enabled: bool?
                                                 }?,
                                                 detailed_status_codes_metrics: {
+                                                  is_enabled: bool?
+                                                }?,
+                                                advanced_performance_metrics: {
                                                   is_enabled: bool?
                                                 }?,
                                                 storage_lens_group_level: {
@@ -1608,13 +1614,50 @@ module Aws
                                                 }?,
                                                 cloud_watch_metrics: {
                                                   is_enabled: bool
+                                                }?,
+                                                storage_lens_table_destination: {
+                                                  is_enabled: bool,
+                                                  encryption: {
+                                                    sses3: {
+                                                    }?,
+                                                    ssekms: {
+                                                      key_id: ::String
+                                                    }?
+                                                  }?
+                                                }?
+                                              }?,
+                                              expanded_prefixes_data_export: {
+                                                s3_bucket_destination: {
+                                                  format: ("CSV" | "Parquet"),
+                                                  output_schema_version: ("V_1"),
+                                                  account_id: ::String,
+                                                  arn: ::String,
+                                                  prefix: ::String?,
+                                                  encryption: {
+                                                    sses3: {
+                                                    }?,
+                                                    ssekms: {
+                                                      key_id: ::String
+                                                    }?
+                                                  }?
+                                                }?,
+                                                storage_lens_table_destination: {
+                                                  is_enabled: bool,
+                                                  encryption: {
+                                                    sses3: {
+                                                    }?,
+                                                    ssekms: {
+                                                      key_id: ::String
+                                                    }?
+                                                  }?
                                                 }?
                                               }?,
                                               is_enabled: bool,
                                               aws_org: {
                                                 arn: ::String
                                               }?,
-                                              storage_lens_arn: ::String?
+                                              storage_lens_arn: ::String?,
+                                              prefix_delimiter: ::String?
                                             },
                                             ?tags: Array[
                                               {

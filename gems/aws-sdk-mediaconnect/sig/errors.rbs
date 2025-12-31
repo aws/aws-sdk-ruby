@@ -41,6 +41,15 @@ module Aws
       class NotFoundException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class RouterInputServiceQuotaExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RouterNetworkInterfaceServiceQuotaExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RouterOutputServiceQuotaExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ServiceUnavailableException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

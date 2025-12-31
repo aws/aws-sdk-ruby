@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.92.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2025-11-19)
+------------------
+
+* Feature - This release adds support for global routing in AWS Elemental MediaConnect. You can now use router inputs and router outputs to manage global video and audio routing workflows both within the AWS-Cloud and over the public internet.
+
+1.90.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.89.0 (2025-10-17)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.88.0 (2025-10-06)
 ------------------
 

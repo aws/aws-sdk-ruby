@@ -13,22 +13,22 @@ module Aws::ARCRegionswitch
   # @!attribute use_fips
   #   When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute endpoint
   #   Override the endpoint used to send this request
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute region
   #   The AWS region used to dispatch the request.
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute use_control_plane_endpoint
   #   Whether the operation is a control plane operation. Control plane operations are routed to a centralized endpoint in the partition leader.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   EndpointParameters = Struct.new(
     :use_fips,

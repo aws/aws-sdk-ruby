@@ -203,6 +203,67 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] request_identifier
+    #   The identifier for the metadata model conversion operation to
+    #   cancel. This operation was initiated by
+    #   StartMetadataModelConversion.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CancelMetadataModelConversionMessage AWS API Documentation
+    #
+    class CancelMetadataModelConversionMessage < Struct.new(
+      :migration_project_identifier,
+      :request_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request
+    #   Provides information about a schema conversion action.
+    #   @return [Types::SchemaConversionRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CancelMetadataModelConversionResponse AWS API Documentation
+    #
+    class CancelMetadataModelConversionResponse < Struct.new(
+      :request)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] request_identifier
+    #   The identifier for the metadata model creation operation to cancel.
+    #   This operation was initiated by `StartMetadataModelCreation`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CancelMetadataModelCreationMessage AWS API Documentation
+    #
+    class CancelMetadataModelCreationMessage < Struct.new(
+      :migration_project_identifier,
+      :request_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request
+    #   Provides information about a schema conversion action.
+    #   @return [Types::SchemaConversionRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CancelMetadataModelCreationResponse AWS API Documentation
+    #
+    class CancelMetadataModelCreationResponse < Struct.new(
+      :request)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] replication_task_assessment_run_arn
     #   Amazon Resource Name (ARN) of the premigration assessment run to be
     #   canceled.
@@ -276,6 +337,17 @@ module Aws::DatabaseMigrationService
     #   The key length of the cryptographic algorithm being used.
     #   @return [Integer]
     #
+    # @!attribute [rw] kms_key_id
+    #   An KMS key identifier that is used to encrypt the certificate.
+    #
+    #   If you don't specify a value for the `KmsKeyId` parameter, then DMS
+    #   uses your default encryption key.
+    #
+    #   KMS creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Certificate AWS API Documentation
     #
     class Certificate < Struct.new(
@@ -288,7 +360,8 @@ module Aws::DatabaseMigrationService
       :valid_from_date,
       :valid_to_date,
       :signing_algorithm,
-      :key_length)
+      :key_length,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -683,8 +756,8 @@ module Aws::DatabaseMigrationService
     #   The type of database engine for the data provider. Valid values
     #   include `"aurora"`, `"aurora-postgresql"`, `"mysql"`, `"oracle"`,
     #   `"postgres"`, `"sqlserver"`, `redshift`, `mariadb`, `mongodb`,
-    #   `db2`, `db2-zos` and `docdb`. A value of `"aurora"` represents
-    #   Amazon Aurora MySQL-Compatible Edition.
+    #   `db2`, `db2-zos`, `docdb`, and `sybase`. A value of `"aurora"`
+    #   represents Amazon Aurora MySQL-Compatible Edition.
     #   @return [String]
     #
     # @!attribute [rw] virtual
@@ -2096,8 +2169,8 @@ module Aws::DatabaseMigrationService
     #   The type of database engine for the data provider. Valid values
     #   include `"aurora"`, `"aurora-postgresql"`, `"mysql"`, `"oracle"`,
     #   `"postgres"`, `"sqlserver"`, `redshift`, `mariadb`, `mongodb`,
-    #   `db2`, `db2-zos` and `docdb`. A value of `"aurora"` represents
-    #   Amazon Aurora MySQL-Compatible Edition.
+    #   `db2`, `db2-zos`, `docdb`, and `sybase`. A value of `"aurora"`
+    #   represents Amazon Aurora MySQL-Compatible Edition.
     #   @return [String]
     #
     # @!attribute [rw] virtual
@@ -2201,6 +2274,10 @@ module Aws::DatabaseMigrationService
     #   Provides information that defines an Oracle data provider.
     #   @return [Types::OracleDataProviderSettings]
     #
+    # @!attribute [rw] sybase_ase_settings
+    #   Provides information that defines an SAP ASE data provider.
+    #   @return [Types::SybaseAseDataProviderSettings]
+    #
     # @!attribute [rw] microsoft_sql_server_settings
     #   Provides information that defines a Microsoft SQL Server data
     #   provider.
@@ -2233,6 +2310,7 @@ module Aws::DatabaseMigrationService
       :postgre_sql_settings,
       :my_sql_settings,
       :oracle_settings,
+      :sybase_ase_settings,
       :microsoft_sql_server_settings,
       :doc_db_settings,
       :maria_db_settings,
@@ -2248,6 +2326,7 @@ module Aws::DatabaseMigrationService
       class PostgreSqlSettings < DataProviderSettings; end
       class MySqlSettings < DataProviderSettings; end
       class OracleSettings < DataProviderSettings; end
+      class SybaseAseSettings < DataProviderSettings; end
       class MicrosoftSqlServerSettings < DataProviderSettings; end
       class DocDbSettings < DataProviderSettings; end
       class MariaDbSettings < DataProviderSettings; end
@@ -3979,6 +4058,71 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] selection_rules
+    #   The JSON string that specifies which metadata model's children to
+    #   retrieve. Only one selection rule with "rule-action": "explicit"
+    #   can be provided. For more information, see [Selection Rules][1] in
+    #   the DMS User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.SelectionTransformation.Selections.html
+    #   @return [String]
+    #
+    # @!attribute [rw] migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] origin
+    #   Specifies whether to retrieve metadata from the source or target
+    #   tree. Valid values: SOURCE \| TARGET
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Specifies the unique pagination token that indicates where the next
+    #   page should start. If this parameter is specified, the response
+    #   includes only records beyond the marker, up to the value specified
+    #   by MaxRecords.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of metadata model children to include in the
+    #   response. If more items exist than the specified MaxRecords value, a
+    #   marker is included in the response so that the remaining results can
+    #   be retrieved.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelChildrenMessage AWS API Documentation
+    #
+    class DescribeMetadataModelChildrenMessage < Struct.new(
+      :selection_rules,
+      :migration_project_identifier,
+      :origin,
+      :marker,
+      :max_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   Specifies the unique pagination token that makes it possible to
+    #   display the next page of metadata model children. If a marker is
+    #   returned, there are more metadata model children available.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_model_children
+    #   A list of child metadata models.
+    #   @return [Array<Types::MetadataModelReference>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelChildrenResponse AWS API Documentation
+    #
+    class DescribeMetadataModelChildrenResponse < Struct.new(
+      :marker,
+      :metadata_model_children)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] migration_project_identifier
     #   The migration project name or Amazon Resource Name (ARN).
     #   @return [String]
@@ -4037,6 +4181,63 @@ module Aws::DatabaseMigrationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelConversionsResponse AWS API Documentation
     #
     class DescribeMetadataModelConversionsResponse < Struct.new(
+      :marker,
+      :requests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   Filters applied to the metadata model creation requests described in
+    #   the form of key-value pairs. The supported filters are request-id
+    #   and status.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] marker
+    #   Specifies the unique pagination token that makes it possible to
+    #   display the next page of metadata model creation requests. If Marker
+    #   is returned by a previous response, there are more metadata model
+    #   creation requests available.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of metadata model creation requests to include in
+    #   the response. If more requests exist than the specified MaxRecords
+    #   value, a pagination token is provided in the response so that you
+    #   can retrieve the remaining results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelCreationsMessage AWS API Documentation
+    #
+    class DescribeMetadataModelCreationsMessage < Struct.new(
+      :filters,
+      :marker,
+      :max_records,
+      :migration_project_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   Specifies the unique pagination token that makes it possible to
+    #   display the next page of metadata model creation requests. If Marker
+    #   is returned, there are more metadata model creation requests
+    #   available.
+    #   @return [String]
+    #
+    # @!attribute [rw] requests
+    #   A list of metadata model creation requests. The ExportSqlDetails
+    #   field will never be populated for the DescribeMetadataModelCreations
+    #   operation.
+    #   @return [Array<Types::SchemaConversionRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelCreationsResponse AWS API Documentation
+    #
+    class DescribeMetadataModelCreationsResponse < Struct.new(
       :marker,
       :requests)
       SENSITIVE = []
@@ -4228,6 +4429,66 @@ module Aws::DatabaseMigrationService
     class DescribeMetadataModelImportsResponse < Struct.new(
       :marker,
       :requests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] selection_rules
+    #   The JSON string that specifies which metadata model to retrieve.
+    #   Only one selection rule with "rule-action": "explicit" can be
+    #   provided. For more information, see [Selection Rules][1] in the DMS
+    #   User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.SelectionTransformation.Selections.html
+    #   @return [String]
+    #
+    # @!attribute [rw] migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] origin
+    #   Specifies whether to retrieve metadata from the source or target
+    #   tree. Valid values: SOURCE \| TARGET
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelMessage AWS API Documentation
+    #
+    class DescribeMetadataModelMessage < Struct.new(
+      :selection_rules,
+      :migration_project_identifier,
+      :origin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metadata_model_name
+    #   The name of the metadata model.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_model_type
+    #   The type of the metadata model.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_metadata_models
+    #   A list of counterpart metadata models in the target. This field is
+    #   populated only when Origin is SOURCE and after the object has been
+    #   converted by DMS Schema Conversion.
+    #   @return [Array<Types::MetadataModelReference>]
+    #
+    # @!attribute [rw] definition
+    #   The SQL text of the metadata model. This field might not be
+    #   populated for some metadata models.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelResponse AWS API Documentation
+    #
+    class DescribeMetadataModelResponse < Struct.new(
+      :metadata_model_name,
+      :metadata_model_type,
+      :target_metadata_models,
+      :definition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5536,6 +5797,14 @@ module Aws::DatabaseMigrationService
     #   CreateEndpoint to create the endpoint with a cross-account.
     #   @return [String]
     #
+    # @!attribute [rw] is_read_only
+    #   Indicates whether the endpoint is read-only. When set to `true`,
+    #   this endpoint is managed by DMS as part of a zero-ETL integration
+    #   and cannot be modified or deleted directly. You can only modify or
+    #   delete read-only endpoints through their associated zero-ETL
+    #   integration.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] dynamo_db_settings
     #   The settings for the DynamoDB target endpoint. For more information,
     #   see the `DynamoDBSettings` structure.
@@ -5629,6 +5898,12 @@ module Aws::DatabaseMigrationService
     #   information, see the `TimestreamSettings` structure.
     #   @return [Types::TimestreamSettings]
     #
+    # @!attribute [rw] lakehouse_settings
+    #   Settings in JSON format for the target Lakehouse endpoint. This
+    #   parameter applies to endpoints that are automatically created by DMS
+    #   for a Lakehouse data warehouse as part of a zero-ETL integration.
+    #   @return [Types::LakehouseSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Endpoint AWS API Documentation
     #
     class Endpoint < Struct.new(
@@ -5649,6 +5924,7 @@ module Aws::DatabaseMigrationService
       :service_access_role_arn,
       :external_table_definition,
       :external_id,
+      :is_read_only,
       :dynamo_db_settings,
       :s3_settings,
       :dms_transfer_settings,
@@ -5667,7 +5943,8 @@ module Aws::DatabaseMigrationService
       :doc_db_settings,
       :redis_settings,
       :gcp_my_sql_settings,
-      :timestream_settings)
+      :timestream_settings,
+      :lakehouse_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6271,6 +6548,39 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] selection_rules
+    #   The JSON string representing the source selection rules for
+    #   conversion. Selection rules must contain only supported metadata
+    #   model types. For more information, see Selection Rules in the DMS
+    #   User Guide.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/GetTargetSelectionRulesMessage AWS API Documentation
+    #
+    class GetTargetSelectionRulesMessage < Struct.new(
+      :migration_project_identifier,
+      :selection_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_selection_rules
+    #   The JSON string representing the counterpart selection rules in the
+    #   target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/GetTargetSelectionRulesResponse AWS API Documentation
+    #
+    class GetTargetSelectionRulesResponse < Struct.new(
+      :target_selection_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information that defines an IBM Db2 LUW endpoint.
     #
     # @!attribute [rw] database_name
@@ -6504,13 +6814,25 @@ module Aws::DatabaseMigrationService
     #   The tags associated with the certificate.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] kms_key_id
+    #   An KMS key identifier that is used to encrypt the certificate.
+    #
+    #   If you don't specify a value for the `KmsKeyId` parameter, then DMS
+    #   uses your default encryption key.
+    #
+    #   KMS creates the default encryption key for your Amazon Web Services
+    #   account. Your Amazon Web Services account has a different default
+    #   encryption key for each Amazon Web Services Region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ImportCertificateMessage AWS API Documentation
     #
     class ImportCertificateMessage < Struct.new(
       :certificate_identifier,
       :certificate_pem,
       :certificate_wallet,
-      :tags)
+      :tags,
+      :kms_key_id)
       SENSITIVE = [:certificate_pem]
       include Aws::Structure
     end
@@ -7075,6 +7397,22 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that defines a Lakehouse endpoint. This endpoint
+    # type is used for zero-ETL integrations with Lakehouse data warehouses.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Lakehouse resource that serves
+    #   as the target for this endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/LakehouseSettings AWS API Documentation
+    #
+    class LakehouseSettings < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about the limitations of target Amazon Web
     # Services engines.
     #
@@ -7204,6 +7542,48 @@ module Aws::DatabaseMigrationService
       :certificate_arn,
       :s3_path,
       :s3_access_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties of metadata model in JSON format. This object is a
+    # Union. Only one member of this object can be specified or returned.
+    #
+    # @note MetadataModelProperties is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] statement_properties
+    #   The properties of the statement.
+    #   @return [Types::StatementProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MetadataModelProperties AWS API Documentation
+    #
+    class MetadataModelProperties < Struct.new(
+      :statement_properties,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class StatementProperties < MetadataModelProperties; end
+      class Unknown < MetadataModelProperties; end
+    end
+
+    # A reference to a metadata model, including its name and selection
+    # rules for location identification.
+    #
+    # @!attribute [rw] metadata_model_name
+    #   The name of the metadata model.
+    #   @return [String]
+    #
+    # @!attribute [rw] selection_rules
+    #   The JSON string representing metadata model location.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MetadataModelReference AWS API Documentation
+    #
+    class MetadataModelReference < Struct.new(
+      :metadata_model_name,
+      :selection_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7606,8 +7986,8 @@ module Aws::DatabaseMigrationService
     #   The type of database engine for the data provider. Valid values
     #   include `"aurora"`, `"aurora-postgresql"`, `"mysql"`, `"oracle"`,
     #   `"postgres"`, `"sqlserver"`, `redshift`, `mariadb`, `mongodb`,
-    #   `db2`, `db2-zos` and `docdb`. A value of `"aurora"` represents
-    #   Amazon Aurora MySQL-Compatible Edition.
+    #   `db2`, `db2-zos`, `docdb`, and `sybase`. A value of `"aurora"`
+    #   represents Amazon Aurora MySQL-Compatible Edition.
     #   @return [String]
     #
     # @!attribute [rw] virtual
@@ -10219,6 +10599,82 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # The database object that the schema conversion operation currently
+    # uses.
+    #
+    # @!attribute [rw] name
+    #   The name of the database object.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the database object. For example, a table, view,
+    #   procedure, and so on.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of the data provider. This parameter can store one of the
+    #   following values: `"SOURCE"` or `"TARGET"`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ProcessedObject AWS API Documentation
+    #
+    class ProcessedObject < Struct.new(
+      :name,
+      :type,
+      :endpoint_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the progress of the schema conversion
+    # operation.
+    #
+    # @!attribute [rw] progress_percent
+    #   The percent complete for the current step of the schema conversion
+    #   operation.
+    #   @return [Float]
+    #
+    # @!attribute [rw] total_objects
+    #   The number of objects in this schema conversion operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] progress_step
+    #   The step of the schema conversion operation. This parameter can
+    #   store one of the following values:
+    #
+    #   * `IN_PROGRESS` – The operation is running.
+    #
+    #   * `LOADING_METADATA` – Loads metadata from the source database.
+    #
+    #   * `COUNTING_OBJECTS` – Determines the number of objects involved in
+    #     the operation.
+    #
+    #   * `ANALYZING` – Analyzes the source database objects.
+    #
+    #   * `CONVERTING` – Converts the source database objects to a format
+    #     compatible with the target database.
+    #
+    #   * `APPLYING` – Applies the converted code to the target database.
+    #
+    #   * `FINISHED` – The operation completed successfully.
+    #   @return [String]
+    #
+    # @!attribute [rw] processed_object
+    #   The name of the database object that the schema conversion operation
+    #   currently uses.
+    #   @return [Types::ProcessedObject]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Progress AWS API Documentation
+    #
+    class Progress < Struct.new(
+      :progress_percent,
+      :total_objects,
+      :progress_step,
+      :processed_object)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about provisioning resources for an DMS serverless
     # replication.
     #
@@ -11237,6 +11693,14 @@ module Aws::DatabaseMigrationService
     #   The timestamp when DMS will deprovision the replication.
     #   @return [Time]
     #
+    # @!attribute [rw] is_read_only
+    #   Indicates whether the serverless replication is read-only. When set
+    #   to `true`, this replication is managed by DMS as part of a zero-ETL
+    #   integration and cannot be modified or deleted directly. You can only
+    #   modify or delete read-only replications through their associated
+    #   zero-ETL integration.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Replication AWS API Documentation
     #
     class Replication < Struct.new(
@@ -11259,7 +11723,8 @@ module Aws::DatabaseMigrationService
       :replication_create_time,
       :replication_update_time,
       :replication_last_stop_time,
-      :replication_deprovision_time)
+      :replication_deprovision_time,
+      :is_read_only)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11316,6 +11781,14 @@ module Aws::DatabaseMigrationService
     #   The time the serverless replication config was updated.
     #   @return [Time]
     #
+    # @!attribute [rw] is_read_only
+    #   Indicates whether the replication configuration is read-only. When
+    #   set to `true`, this replication configuration is managed by DMS as
+    #   part of a zero-ETL integration and cannot be modified or deleted
+    #   directly. You can only modify or delete read-only replication
+    #   configurations through their associated zero-ETL integration.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationConfig AWS API Documentation
     #
     class ReplicationConfig < Struct.new(
@@ -11329,7 +11802,8 @@ module Aws::DatabaseMigrationService
       :supplemental_settings,
       :table_mappings,
       :replication_config_create_time,
-      :replication_config_update_time)
+      :replication_config_update_time,
+      :is_read_only)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11726,6 +12200,14 @@ module Aws::DatabaseMigrationService
     #   not yet supported.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] is_read_only
+    #   Indicates whether the replication subnet group is read-only. When
+    #   set to `true`, this subnet group is managed by DMS as part of a
+    #   zero-ETL integration and cannot be modified or deleted directly. You
+    #   can only modify or delete read-only subnet groups through their
+    #   associated zero-ETL integration.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationSubnetGroup AWS API Documentation
     #
     class ReplicationSubnetGroup < Struct.new(
@@ -11734,7 +12216,8 @@ module Aws::DatabaseMigrationService
       :vpc_id,
       :subnet_group_status,
       :subnets,
-      :supported_network_types)
+      :supported_network_types,
+      :is_read_only)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13192,6 +13675,11 @@ module Aws::DatabaseMigrationService
     #   SQL.
     #   @return [Types::ExportSqlDetails]
     #
+    # @!attribute [rw] progress
+    #   Provides information about the progress of the schema conversion
+    #   operation.
+    #   @return [Types::Progress]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/SchemaConversionRequest AWS API Documentation
     #
     class SchemaConversionRequest < Struct.new(
@@ -13199,7 +13687,8 @@ module Aws::DatabaseMigrationService
       :request_identifier,
       :migration_project_arn,
       :error,
-      :export_sql_details)
+      :export_sql_details,
+      :progress)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13464,6 +13953,48 @@ module Aws::DatabaseMigrationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartMetadataModelConversionResponse AWS API Documentation
     #
     class StartMetadataModelConversionResponse < Struct.new(
+      :request_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] migration_project_identifier
+    #   The migration project name or Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] selection_rules
+    #   The JSON string that specifies the location where the metadata model
+    #   will be created. Selection rules must specify a single schema. For
+    #   more information, see Selection Rules in the DMS User Guide.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_model_name
+    #   The name of the metadata model.
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   The properties of metadata model in JSON format. This object is a
+    #   Union. Only one member of this object can be specified or returned.
+    #   @return [Types::MetadataModelProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartMetadataModelCreationMessage AWS API Documentation
+    #
+    class StartMetadataModelCreationMessage < Struct.new(
+      :migration_project_identifier,
+      :selection_rules,
+      :metadata_model_name,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_identifier
+    #   The identifier for the metadata model creation operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartMetadataModelCreationResponse AWS API Documentation
+    #
+    class StartMetadataModelCreationResponse < Struct.new(
       :request_identifier)
       SENSITIVE = []
       include Aws::Structure
@@ -13983,6 +14514,20 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # The properties of the statement for metadata model creation.
+    #
+    # @!attribute [rw] definition
+    #   The SQL text of the statement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StatementProperties AWS API Documentation
+    #
+    class StatementProperties < Struct.new(
+      :definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] data_migration_identifier
     #   The identifier (name or ARN) of the data migration to stop.
     #   @return [String]
@@ -14149,6 +14694,49 @@ module Aws::DatabaseMigrationService
       :endpoint_type,
       :replication_instance_engine_minimum_version,
       :engine_display_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information that defines an SAP ASE data provider.
+    #
+    # @!attribute [rw] server_name
+    #   The name of the SAP ASE server.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port value for the SAP ASE data provider.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] database_name
+    #   The database name on the SAP ASE data provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_mode
+    #   The SSL mode used to connect to the SAP ASE data provider. The
+    #   default value is `none`.
+    #   @return [String]
+    #
+    # @!attribute [rw] encrypt_password
+    #   Specifies whether to encrypt the password when connecting to the
+    #   Sybase ASE database. When set to true, the connection password is
+    #   encrypted during transmission. Default is true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the certificate used for SSL
+    #   connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/SybaseAseDataProviderSettings AWS API Documentation
+    #
+    class SybaseAseDataProviderSettings < Struct.new(
+      :server_name,
+      :port,
+      :database_name,
+      :ssl_mode,
+      :encrypt_password,
+      :certificate_arn)
       SENSITIVE = []
       include Aws::Structure
     end

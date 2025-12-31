@@ -590,6 +590,12 @@ module Aws::ARCRegionswitch
     # @option params [Array<Types::Trigger>] :triggers
     #   The triggers associated with a Region switch plan.
     #
+    # @option params [Types::ReportConfiguration] :report_configuration
+    #   Configuration for automatic report generation for plan executions.
+    #   When configured, Region switch automatically generates a report after
+    #   each plan execution that includes execution events, plan
+    #   configuration, and CloudWatch alarm states.
+    #
     # @option params [required, String] :name
     #   The name of a Region switch plan.
     #
@@ -751,8 +757,19 @@ module Aws::ARCRegionswitch
     #                   },
     #                 ],
     #               },
+    #               document_db_config: {
+    #                 timeout_minutes: 1,
+    #                 cross_account_role: "IamRoleArn",
+    #                 external_id: "String",
+    #                 behavior: "switchoverOnly", # required, accepts switchoverOnly, failover
+    #                 ungraceful: {
+    #                   ungraceful: "failover", # accepts failover
+    #                 },
+    #                 global_cluster_identifier: "DocumentDbGlobalClusterIdentifier", # required
+    #                 database_cluster_arns: ["DocumentDbClusterArn"], # required
+    #               },
     #             },
-    #             execution_block_type: "CustomActionLambda", # required, accepts CustomActionLambda, ManualApproval, AuroraGlobalDatabase, EC2AutoScaling, ARCRoutingControl, ARCRegionSwitchPlan, Parallel, ECSServiceScaling, EKSResourceScaling, Route53HealthCheck
+    #             execution_block_type: "CustomActionLambda", # required, accepts CustomActionLambda, ManualApproval, AuroraGlobalDatabase, EC2AutoScaling, ARCRoutingControl, ARCRegionSwitchPlan, Parallel, ECSServiceScaling, EKSResourceScaling, Route53HealthCheck, DocumentDb
     #           },
     #         ],
     #         workflow_target_action: "activate", # required, accepts activate, deactivate
@@ -784,6 +801,16 @@ module Aws::ARCRegionswitch
     #         min_delay_minutes_between_executions: 1, # required
     #       },
     #     ],
+    #     report_configuration: {
+    #       report_output: [
+    #         {
+    #           s3_configuration: {
+    #             bucket_path: "S3ReportOutputConfigurationBucketPathString",
+    #             bucket_owner: "AccountId",
+    #           },
+    #         },
+    #       ],
+    #     },
     #     name: "PlanName", # required
     #     regions: ["Region"], # required
     #     recovery_approach: "activeActive", # required, accepts activeActive, activePassive
@@ -871,7 +898,15 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.route53_health_check_config.record_sets #=> Array
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.route53_health_check_config.record_sets[0].record_set_identifier #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.route53_health_check_config.record_sets[0].region #=> String
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.behavior #=> String, one of "switchoverOnly", "failover"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.ungraceful.ungraceful #=> String, one of "failover"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.global_cluster_identifier #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.database_cluster_arns #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.database_cluster_arns[0] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -890,6 +925,9 @@ module Aws::ARCRegionswitch
     #   resp.plan.triggers[0].conditions[0].associated_alarm_name #=> String
     #   resp.plan.triggers[0].conditions[0].condition #=> String, one of "red", "green"
     #   resp.plan.triggers[0].min_delay_minutes_between_executions #=> Integer
+    #   resp.plan.report_configuration.report_output #=> Array
+    #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_path #=> String
+    #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_owner #=> String
     #   resp.plan.name #=> String
     #   resp.plan.regions #=> Array
     #   resp.plan.regions[0] #=> String
@@ -1027,7 +1065,15 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.route53_health_check_config.record_sets #=> Array
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.route53_health_check_config.record_sets[0].record_set_identifier #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.route53_health_check_config.record_sets[0].region #=> String
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.behavior #=> String, one of "switchoverOnly", "failover"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.ungraceful.ungraceful #=> String, one of "failover"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.global_cluster_identifier #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.database_cluster_arns #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.database_cluster_arns[0] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -1046,6 +1092,9 @@ module Aws::ARCRegionswitch
     #   resp.plan.triggers[0].conditions[0].associated_alarm_name #=> String
     #   resp.plan.triggers[0].conditions[0].condition #=> String, one of "red", "green"
     #   resp.plan.triggers[0].min_delay_minutes_between_executions #=> Integer
+    #   resp.plan.report_configuration.report_output #=> Array
+    #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_path #=> String
+    #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_owner #=> String
     #   resp.plan.name #=> String
     #   resp.plan.regions #=> Array
     #   resp.plan.regions[0] #=> String
@@ -1170,6 +1219,7 @@ module Aws::ARCRegionswitch
     #   * {Types::GetPlanExecutionResponse#step_states #step_states} => Array&lt;Types::StepState&gt;
     #   * {Types::GetPlanExecutionResponse#plan #plan} => Types::Plan
     #   * {Types::GetPlanExecutionResponse#actual_recovery_time #actual_recovery_time} => String
+    #   * {Types::GetPlanExecutionResponse#generated_report_details #generated_report_details} => Array&lt;Types::GeneratedReport&gt;
     #   * {Types::GetPlanExecutionResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -1278,7 +1328,15 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.route53_health_check_config.record_sets #=> Array
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.route53_health_check_config.record_sets[0].record_set_identifier #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.route53_health_check_config.record_sets[0].region #=> String
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.behavior #=> String, one of "switchoverOnly", "failover"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.ungraceful.ungraceful #=> String, one of "failover"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.global_cluster_identifier #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.database_cluster_arns #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.database_cluster_arns[0] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -1297,6 +1355,9 @@ module Aws::ARCRegionswitch
     #   resp.plan.triggers[0].conditions[0].associated_alarm_name #=> String
     #   resp.plan.triggers[0].conditions[0].condition #=> String, one of "red", "green"
     #   resp.plan.triggers[0].min_delay_minutes_between_executions #=> Integer
+    #   resp.plan.report_configuration.report_output #=> Array
+    #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_path #=> String
+    #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_owner #=> String
     #   resp.plan.name #=> String
     #   resp.plan.regions #=> Array
     #   resp.plan.regions[0] #=> String
@@ -1306,6 +1367,11 @@ module Aws::ARCRegionswitch
     #   resp.plan.version #=> String
     #   resp.plan.updated_at #=> Time
     #   resp.actual_recovery_time #=> String
+    #   resp.generated_report_details #=> Array
+    #   resp.generated_report_details[0].report_generation_time #=> Time
+    #   resp.generated_report_details[0].report_output.s3_report_output.s3_object_key #=> String
+    #   resp.generated_report_details[0].report_output.failed_report_output.error_code #=> String, one of "insufficientPermissions", "invalidResource", "configurationError"
+    #   resp.generated_report_details[0].report_output.failed_report_output.error_message #=> String
     #   resp.next_token #=> String
     #
     #
@@ -1417,7 +1483,15 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.route53_health_check_config.record_sets #=> Array
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.route53_health_check_config.record_sets[0].record_set_identifier #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.route53_health_check_config.record_sets[0].region #=> String
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.behavior #=> String, one of "switchoverOnly", "failover"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.ungraceful.ungraceful #=> String, one of "failover"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.global_cluster_identifier #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.database_cluster_arns #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.database_cluster_arns[0] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -1436,6 +1510,9 @@ module Aws::ARCRegionswitch
     #   resp.plan.triggers[0].conditions[0].associated_alarm_name #=> String
     #   resp.plan.triggers[0].conditions[0].condition #=> String, one of "red", "green"
     #   resp.plan.triggers[0].min_delay_minutes_between_executions #=> Integer
+    #   resp.plan.report_configuration.report_output #=> Array
+    #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_path #=> String
+    #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_owner #=> String
     #   resp.plan.name #=> String
     #   resp.plan.regions #=> Array
     #   resp.plan.regions[0] #=> String
@@ -1497,9 +1574,9 @@ module Aws::ARCRegionswitch
     #
     #   resp.items #=> Array
     #   resp.items[0].timestamp #=> Time
-    #   resp.items[0].type #=> String, one of "unknown", "executionPending", "executionStarted", "executionSucceeded", "executionFailed", "executionPausing", "executionPaused", "executionCanceling", "executionCanceled", "executionPendingApproval", "executionBehaviorChangedToUngraceful", "executionBehaviorChangedToGraceful", "executionPendingChildPlanManualApproval", "executionSuccessMonitoringApplicationHealth", "stepStarted", "stepUpdate", "stepSucceeded", "stepFailed", "stepSkipped", "stepPausedByError", "stepPausedByOperator", "stepCanceled", "stepPendingApproval", "stepExecutionBehaviorChangedToUngraceful", "stepPendingApplicationHealthMonitor"
+    #   resp.items[0].type #=> String, one of "unknown", "executionPending", "executionStarted", "executionSucceeded", "executionFailed", "executionPausing", "executionPaused", "executionCanceling", "executionCanceled", "executionPendingApproval", "executionBehaviorChangedToUngraceful", "executionBehaviorChangedToGraceful", "executionPendingChildPlanManualApproval", "executionSuccessMonitoringApplicationHealth", "stepStarted", "stepUpdate", "stepSucceeded", "stepFailed", "stepSkipped", "stepPausedByError", "stepPausedByOperator", "stepCanceled", "stepPendingApproval", "stepExecutionBehaviorChangedToUngraceful", "stepPendingApplicationHealthMonitor", "planEvaluationWarning"
     #   resp.items[0].step_name #=> String
-    #   resp.items[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck"
+    #   resp.items[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb"
     #   resp.items[0].resources #=> Array
     #   resp.items[0].resources[0] #=> String
     #   resp.items[0].error #=> String
@@ -1731,6 +1808,7 @@ module Aws::ARCRegionswitch
     #   resp.health_checks[0].hosted_zone_id #=> String
     #   resp.health_checks[0].record_name #=> String
     #   resp.health_checks[0].health_check_id #=> String
+    #   resp.health_checks[0].status #=> String, one of "healthy", "unhealthy", "unknown"
     #   resp.health_checks[0].region #=> String
     #   resp.next_token #=> String
     #
@@ -1740,6 +1818,95 @@ module Aws::ARCRegionswitch
     # @param [Hash] params ({})
     def list_route_53_health_checks(params = {}, options = {})
       req = build_request(:list_route_53_health_checks, params)
+      req.send_request(options)
+    end
+
+    # List the Amazon Route 53 health checks in a specific Amazon Web
+    # Services Region.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the Arc Region Switch Plan.
+    #
+    # @option params [String] :hosted_zone_id
+    #   The hosted zone ID for the health checks.
+    #
+    # @option params [String] :record_name
+    #   The record name for the health checks.
+    #
+    # @option params [Integer] :max_results
+    #   The number of objects that you want to return with this call.
+    #
+    # @option params [String] :next_token
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `nextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `nextToken`
+    #   response to request the next page of results.
+    #
+    # @return [Types::ListRoute53HealthChecksInRegionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRoute53HealthChecksInRegionResponse#health_checks #health_checks} => Array&lt;Types::Route53HealthCheck&gt;
+    #   * {Types::ListRoute53HealthChecksInRegionResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Example ListRoute53HealthChecksInRegion
+    #
+    #   resp = client.list_route_53_health_checks_in_region({
+    #     arn: "arn:aws:arc-region-switch::123456789012:plan/example:000000", 
+    #     hosted_zone_id: "Z0123456789ABCDEFGHI", 
+    #     max_results: 10, 
+    #     next_token: "eyJNYXJrZXIiOiBudWxsLCAiYm90b190cnVuY2F0ZV9hbW91bnQiOiAxfQ", 
+    #     record_name: "my.record.name", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     health_checks: [
+    #       {
+    #         health_check_id: "01234567-8901-abcd-efgh-ijklmnop0123", 
+    #         hosted_zone_id: "Z0123456789ABCDEFGHI", 
+    #         record_name: "my.record.name", 
+    #         region: "us-west-2", 
+    #         status: "healthy", 
+    #       }, 
+    #       {
+    #         health_check_id: "zyxwvuts-rqpo-9876-5432-10nmlkji0123", 
+    #         hosted_zone_id: "Z0123456789ABCDEFGHI", 
+    #         record_name: "my.record.name", 
+    #         region: "us-east-1", 
+    #         status: "healthy", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_route_53_health_checks_in_region({
+    #     arn: "PlanArn", # required
+    #     hosted_zone_id: "Route53HostedZoneId",
+    #     record_name: "Route53RecordName",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.health_checks #=> Array
+    #   resp.health_checks[0].hosted_zone_id #=> String
+    #   resp.health_checks[0].record_name #=> String
+    #   resp.health_checks[0].health_check_id #=> String
+    #   resp.health_checks[0].status #=> String, one of "healthy", "unhealthy", "unknown"
+    #   resp.health_checks[0].region #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/ListRoute53HealthChecksInRegion AWS API Documentation
+    #
+    # @overload list_route_53_health_checks_in_region(params = {})
+    # @param [Hash] params ({})
+    def list_route_53_health_checks_in_region(params = {}, options = {})
+      req = build_request(:list_route_53_health_checks_in_region, params)
       req.send_request(options)
     end
 
@@ -1927,6 +2094,9 @@ module Aws::ARCRegionswitch
     #   The updated conditions that can automatically trigger the execution of
     #   the plan.
     #
+    # @option params [Types::ReportConfiguration] :report_configuration
+    #   The updated report configuration for the plan.
+    #
     # @return [Types::UpdatePlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePlanResponse#plan #plan} => Types::Plan
@@ -2070,8 +2240,19 @@ module Aws::ARCRegionswitch
     #                   },
     #                 ],
     #               },
+    #               document_db_config: {
+    #                 timeout_minutes: 1,
+    #                 cross_account_role: "IamRoleArn",
+    #                 external_id: "String",
+    #                 behavior: "switchoverOnly", # required, accepts switchoverOnly, failover
+    #                 ungraceful: {
+    #                   ungraceful: "failover", # accepts failover
+    #                 },
+    #                 global_cluster_identifier: "DocumentDbGlobalClusterIdentifier", # required
+    #                 database_cluster_arns: ["DocumentDbClusterArn"], # required
+    #               },
     #             },
-    #             execution_block_type: "CustomActionLambda", # required, accepts CustomActionLambda, ManualApproval, AuroraGlobalDatabase, EC2AutoScaling, ARCRoutingControl, ARCRegionSwitchPlan, Parallel, ECSServiceScaling, EKSResourceScaling, Route53HealthCheck
+    #             execution_block_type: "CustomActionLambda", # required, accepts CustomActionLambda, ManualApproval, AuroraGlobalDatabase, EC2AutoScaling, ARCRoutingControl, ARCRegionSwitchPlan, Parallel, ECSServiceScaling, EKSResourceScaling, Route53HealthCheck, DocumentDb
     #           },
     #         ],
     #         workflow_target_action: "activate", # required, accepts activate, deactivate
@@ -2103,6 +2284,16 @@ module Aws::ARCRegionswitch
     #         min_delay_minutes_between_executions: 1, # required
     #       },
     #     ],
+    #     report_configuration: {
+    #       report_output: [
+    #         {
+    #           s3_configuration: {
+    #             bucket_path: "S3ReportOutputConfigurationBucketPathString",
+    #             bucket_owner: "AccountId",
+    #           },
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -2183,7 +2374,15 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.route53_health_check_config.record_sets #=> Array
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.route53_health_check_config.record_sets[0].record_set_identifier #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.route53_health_check_config.record_sets[0].region #=> String
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.behavior #=> String, one of "switchoverOnly", "failover"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.ungraceful.ungraceful #=> String, one of "failover"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.global_cluster_identifier #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.database_cluster_arns #=> Array
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.document_db_config.database_cluster_arns[0] #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -2202,6 +2401,9 @@ module Aws::ARCRegionswitch
     #   resp.plan.triggers[0].conditions[0].associated_alarm_name #=> String
     #   resp.plan.triggers[0].conditions[0].condition #=> String, one of "red", "green"
     #   resp.plan.triggers[0].min_delay_minutes_between_executions #=> Integer
+    #   resp.plan.report_configuration.report_output #=> Array
+    #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_path #=> String
+    #   resp.plan.report_configuration.report_output[0].s3_configuration.bucket_owner #=> String
     #   resp.plan.name #=> String
     #   resp.plan.regions #=> Array
     #   resp.plan.regions[0] #=> String
@@ -2318,7 +2520,7 @@ module Aws::ARCRegionswitch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-arcregionswitch'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

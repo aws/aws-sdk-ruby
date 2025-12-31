@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2025-11-21)
+------------------
+
+* Feature - Adding new fields to GetDataAutomationStatus: jobSubmissionTime, jobCompletionTime, and jobDurationInSeconds
+
+1.17.0 (2025-11-20)
+------------------
+
+* Feature - Bedrock Data Automation Runtime Sync API
+
+1.16.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2025-10-17)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.14.0 (2025-08-26)
 ------------------
 

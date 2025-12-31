@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.88.0 (2025-11-18)
+------------------
+
+* Feature - Add support for new ListRequiredTags API used to retrieve the required tags specified in a customer's effective tag policy.
+
+1.87.0 (2025-10-31)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.86.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.85.0 (2025-08-26)
 ------------------
 

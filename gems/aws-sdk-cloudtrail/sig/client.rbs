@@ -422,12 +422,15 @@ module Aws
 
       interface _GetEventConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetEventConfigurationResponse]
+        def trail_arn: () -> ::String
         def event_data_store_arn: () -> ::String
         def max_event_size: () -> ("Standard" | "Large")
         def context_key_selectors: () -> ::Array[Types::ContextKeySelector]
+        def aggregation_configurations: () -> ::Array[Types::AggregationConfiguration]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#get_event_configuration-instance_method
       def get_event_configuration: (
+                                     ?trail_name: ::String,
                                      ?event_data_store: ::String
                                    ) -> _GetEventConfigurationResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventConfigurationResponseSuccess
@@ -631,8 +634,26 @@ module Aws
                         ) -> _ListImportsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImportsResponseSuccess
 
+      interface _ListInsightsDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInsightsDataResponse]
+        def events: () -> ::Array[Types::Event]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#list_insights_data-instance_method
+      def list_insights_data: (
+                                insight_source: ::String,
+                                data_type: ("InsightsEvents"),
+                                ?dimensions: Hash[("EventId" | "EventName" | "EventSource"), ::String],
+                                ?start_time: ::Time,
+                                ?end_time: ::Time,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListInsightsDataResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInsightsDataResponseSuccess
+
       interface _ListInsightsMetricDataResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListInsightsMetricDataResponse]
+        def trail_arn: () -> ::String
         def event_source: () -> ::String
         def event_name: () -> ::String
         def insight_type: () -> ("ApiCallRateInsight" | "ApiErrorRateInsight")
@@ -643,6 +664,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#list_insights_metric_data-instance_method
       def list_insights_metric_data: (
+                                       ?trail_name: ::String,
                                        event_source: ::String,
                                        event_name: ::String,
                                        insight_type: ("ApiCallRateInsight" | "ApiErrorRateInsight"),
@@ -731,22 +753,31 @@ module Aws
 
       interface _PutEventConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutEventConfigurationResponse]
+        def trail_arn: () -> ::String
         def event_data_store_arn: () -> ::String
         def max_event_size: () -> ("Standard" | "Large")
         def context_key_selectors: () -> ::Array[Types::ContextKeySelector]
+        def aggregation_configurations: () -> ::Array[Types::AggregationConfiguration]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudTrail/Client.html#put_event_configuration-instance_method
       def put_event_configuration: (
+                                     ?trail_name: ::String,
                                      ?event_data_store: ::String,
-                                     max_event_size: ("Standard" | "Large"),
-                                     context_key_selectors: Array[
+                                     ?max_event_size: ("Standard" | "Large"),
+                                     ?context_key_selectors: Array[
                                        {
                                          type: ("TagContext" | "RequestContext"),
                                          equals: Array[::String]
                                        },
+                                     ],
+                                     ?aggregation_configurations: Array[
+                                       {
+                                         templates: Array[("API_ACTIVITY" | "RESOURCE_ACCESS" | "USER_ACTIONS")],
+                                         event_category: ("Data")
+                                       },
                                      ]
                                    ) -> _PutEventConfigurationResponseSuccess
-                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEventConfigurationResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEventConfigurationResponseSuccess
 
       interface _PutEventSelectorsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutEventSelectorsResponse]
@@ -801,7 +832,8 @@ module Aws
                                    ?trail_name: ::String,
                                    insight_selectors: Array[
                                      {
-                                       insight_type: ("ApiCallRateInsight" | "ApiErrorRateInsight")?
+                                       insight_type: ("ApiCallRateInsight" | "ApiErrorRateInsight")?,
+                                       event_categories: Array[("Management" | "Data")]?
                                      },
                                    ],
                                    ?event_data_store: ::String,

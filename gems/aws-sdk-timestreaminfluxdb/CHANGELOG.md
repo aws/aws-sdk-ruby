@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2025-12-16)
+------------------
+
+* Feature - This release adds support for rebooting InfluxDB DbInstances and DbClusters
+
+1.34.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2025-10-15)
+------------------
+
+* Feature - This release adds support for creating and managing InfluxDB 3 Core and Enterprise DbClusters.
+
 1.31.0 (2025-08-26)
 ------------------
 

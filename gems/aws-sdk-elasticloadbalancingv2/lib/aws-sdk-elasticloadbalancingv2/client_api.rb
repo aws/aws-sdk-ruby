@@ -173,6 +173,7 @@ module Aws::ElasticLoadBalancingV2
     HealthCheckTimeoutSeconds = Shapes::IntegerShape.new(name: 'HealthCheckTimeoutSeconds')
     HealthUnavailableException = Shapes::StructureShape.new(name: 'HealthUnavailableException', error: {"code" => "HealthUnavailable", "httpStatusCode" => 500})
     HostHeaderConditionConfig = Shapes::StructureShape.new(name: 'HostHeaderConditionConfig')
+    HostHeaderRewriteConfig = Shapes::StructureShape.new(name: 'HostHeaderRewriteConfig')
     HttpCode = Shapes::StringShape.new(name: 'HttpCode')
     HttpHeaderConditionConfig = Shapes::StructureShape.new(name: 'HttpHeaderConditionConfig')
     HttpHeaderConditionName = Shapes::StringShape.new(name: 'HttpHeaderConditionName')
@@ -194,6 +195,15 @@ module Aws::ElasticLoadBalancingV2
     IpamPoolId = Shapes::StringShape.new(name: 'IpamPoolId')
     IpamPools = Shapes::StructureShape.new(name: 'IpamPools')
     IsDefault = Shapes::BooleanShape.new(name: 'IsDefault')
+    JwtValidationActionAdditionalClaim = Shapes::StructureShape.new(name: 'JwtValidationActionAdditionalClaim')
+    JwtValidationActionAdditionalClaimFormatEnum = Shapes::StringShape.new(name: 'JwtValidationActionAdditionalClaimFormatEnum')
+    JwtValidationActionAdditionalClaimName = Shapes::StringShape.new(name: 'JwtValidationActionAdditionalClaimName')
+    JwtValidationActionAdditionalClaimValue = Shapes::StringShape.new(name: 'JwtValidationActionAdditionalClaimValue')
+    JwtValidationActionAdditionalClaimValues = Shapes::ListShape.new(name: 'JwtValidationActionAdditionalClaimValues')
+    JwtValidationActionAdditionalClaims = Shapes::ListShape.new(name: 'JwtValidationActionAdditionalClaims')
+    JwtValidationActionConfig = Shapes::StructureShape.new(name: 'JwtValidationActionConfig')
+    JwtValidationActionIssuer = Shapes::StringShape.new(name: 'JwtValidationActionIssuer')
+    JwtValidationActionJwksEndpoint = Shapes::StringShape.new(name: 'JwtValidationActionJwksEndpoint')
     LastModifiedTime = Shapes::TimestampShape.new(name: 'LastModifiedTime')
     Limit = Shapes::StructureShape.new(name: 'Limit')
     Limits = Shapes::ListShape.new(name: 'Limits')
@@ -269,6 +279,7 @@ module Aws::ElasticLoadBalancingV2
     QueryStringConditionConfig = Shapes::StructureShape.new(name: 'QueryStringConditionConfig')
     QueryStringKeyValuePair = Shapes::StructureShape.new(name: 'QueryStringKeyValuePair')
     QueryStringKeyValuePairList = Shapes::ListShape.new(name: 'QueryStringKeyValuePairList')
+    QuicServerId = Shapes::StringShape.new(name: 'QuicServerId')
     RedirectActionConfig = Shapes::StructureShape.new(name: 'RedirectActionConfig')
     RedirectActionHost = Shapes::StringShape.new(name: 'RedirectActionHost')
     RedirectActionPath = Shapes::StringShape.new(name: 'RedirectActionPath')
@@ -287,6 +298,7 @@ module Aws::ElasticLoadBalancingV2
     RemoveTrustStoreRevocationsInput = Shapes::StructureShape.new(name: 'RemoveTrustStoreRevocationsInput')
     RemoveTrustStoreRevocationsOutput = Shapes::StructureShape.new(name: 'RemoveTrustStoreRevocationsOutput')
     ResetCapacityReservation = Shapes::BooleanShape.new(name: 'ResetCapacityReservation')
+    ResetTransforms = Shapes::BooleanShape.new(name: 'ResetTransforms')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException', error: {"code" => "ResourceInUse", "httpStatusCode" => 400, "senderFault" => true})
@@ -298,6 +310,8 @@ module Aws::ElasticLoadBalancingV2
     RevocationIdNotFoundException = Shapes::StructureShape.new(name: 'RevocationIdNotFoundException', error: {"code" => "RevocationIdNotFound", "httpStatusCode" => 400, "senderFault" => true})
     RevocationIds = Shapes::ListShape.new(name: 'RevocationIds')
     RevocationType = Shapes::StringShape.new(name: 'RevocationType')
+    RewriteConfig = Shapes::StructureShape.new(name: 'RewriteConfig')
+    RewriteConfigList = Shapes::ListShape.new(name: 'RewriteConfigList')
     Rule = Shapes::StructureShape.new(name: 'Rule')
     RuleArn = Shapes::StringShape.new(name: 'RuleArn')
     RuleArns = Shapes::ListShape.new(name: 'RuleArns')
@@ -307,6 +321,8 @@ module Aws::ElasticLoadBalancingV2
     RulePriority = Shapes::IntegerShape.new(name: 'RulePriority')
     RulePriorityList = Shapes::ListShape.new(name: 'RulePriorityList')
     RulePriorityPair = Shapes::StructureShape.new(name: 'RulePriorityPair')
+    RuleTransform = Shapes::StructureShape.new(name: 'RuleTransform')
+    RuleTransformList = Shapes::ListShape.new(name: 'RuleTransformList')
     Rules = Shapes::ListShape.new(name: 'Rules')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
@@ -348,6 +364,7 @@ module Aws::ElasticLoadBalancingV2
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TargetAdministrativeOverrideReasonEnum = Shapes::StringShape.new(name: 'TargetAdministrativeOverrideReasonEnum')
     TargetAdministrativeOverrideStateEnum = Shapes::StringShape.new(name: 'TargetAdministrativeOverrideStateEnum')
+    TargetControlPort = Shapes::IntegerShape.new(name: 'TargetControlPort')
     TargetDescription = Shapes::StructureShape.new(name: 'TargetDescription')
     TargetDescriptions = Shapes::ListShape.new(name: 'TargetDescriptions')
     TargetGroup = Shapes::StructureShape.new(name: 'TargetGroup')
@@ -389,6 +406,7 @@ module Aws::ElasticLoadBalancingV2
     TooManyTrustStoresException = Shapes::StructureShape.new(name: 'TooManyTrustStoresException', error: {"code" => "TooManyTrustStores", "httpStatusCode" => 400, "senderFault" => true})
     TooManyUniqueTargetGroupsPerLoadBalancerException = Shapes::StructureShape.new(name: 'TooManyUniqueTargetGroupsPerLoadBalancerException', error: {"code" => "TooManyUniqueTargetGroupsPerLoadBalancer", "httpStatusCode" => 400, "senderFault" => true})
     TotalRevokedEntries = Shapes::IntegerShape.new(name: 'TotalRevokedEntries')
+    TransformTypeEnum = Shapes::StringShape.new(name: 'TransformTypeEnum')
     TrustStore = Shapes::StructureShape.new(name: 'TrustStore')
     TrustStoreArn = Shapes::StringShape.new(name: 'TrustStoreArn')
     TrustStoreArns = Shapes::ListShape.new(name: 'TrustStoreArns')
@@ -407,6 +425,7 @@ module Aws::ElasticLoadBalancingV2
     TrustStoreStatus = Shapes::StringShape.new(name: 'TrustStoreStatus')
     TrustStores = Shapes::ListShape.new(name: 'TrustStores')
     UnsupportedProtocolException = Shapes::StructureShape.new(name: 'UnsupportedProtocolException', error: {"code" => "UnsupportedProtocol", "httpStatusCode" => 400, "senderFault" => true})
+    UrlRewriteConfig = Shapes::StructureShape.new(name: 'UrlRewriteConfig')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
     ZonalCapacityReservationState = Shapes::StructureShape.new(name: 'ZonalCapacityReservationState')
     ZonalCapacityReservationStates = Shapes::ListShape.new(name: 'ZonalCapacityReservationStates')
@@ -422,6 +441,7 @@ module Aws::ElasticLoadBalancingV2
     Action.add_member(:redirect_config, Shapes::ShapeRef.new(shape: RedirectActionConfig, location_name: "RedirectConfig"))
     Action.add_member(:fixed_response_config, Shapes::ShapeRef.new(shape: FixedResponseActionConfig, location_name: "FixedResponseConfig"))
     Action.add_member(:forward_config, Shapes::ShapeRef.new(shape: ForwardActionConfig, location_name: "ForwardConfig"))
+    Action.add_member(:jwt_validation_config, Shapes::ShapeRef.new(shape: JwtValidationActionConfig, location_name: "JwtValidationConfig"))
     Action.struct_class = Types::Action
 
     Actions.member = Shapes::ShapeRef.new(shape: Action)
@@ -561,6 +581,7 @@ module Aws::ElasticLoadBalancingV2
     CreateRuleInput.add_member(:priority, Shapes::ShapeRef.new(shape: RulePriority, required: true, location_name: "Priority"))
     CreateRuleInput.add_member(:actions, Shapes::ShapeRef.new(shape: Actions, required: true, location_name: "Actions"))
     CreateRuleInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateRuleInput.add_member(:transforms, Shapes::ShapeRef.new(shape: RuleTransformList, location_name: "Transforms"))
     CreateRuleInput.struct_class = Types::CreateRuleInput
 
     CreateRuleOutput.add_member(:rules, Shapes::ShapeRef.new(shape: Rules, location_name: "Rules"))
@@ -583,6 +604,7 @@ module Aws::ElasticLoadBalancingV2
     CreateTargetGroupInput.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetTypeEnum, location_name: "TargetType"))
     CreateTargetGroupInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateTargetGroupInput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: TargetGroupIpAddressTypeEnum, location_name: "IpAddressType"))
+    CreateTargetGroupInput.add_member(:target_control_port, Shapes::ShapeRef.new(shape: TargetControlPort, location_name: "TargetControlPort"))
     CreateTargetGroupInput.struct_class = Types::CreateTargetGroupInput
 
     CreateTargetGroupOutput.add_member(:target_groups, Shapes::ShapeRef.new(shape: TargetGroups, location_name: "TargetGroups"))
@@ -824,10 +846,15 @@ module Aws::ElasticLoadBalancingV2
     HealthUnavailableException.struct_class = Types::HealthUnavailableException
 
     HostHeaderConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
+    HostHeaderConditionConfig.add_member(:regex_values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "RegexValues"))
     HostHeaderConditionConfig.struct_class = Types::HostHeaderConditionConfig
+
+    HostHeaderRewriteConfig.add_member(:rewrites, Shapes::ShapeRef.new(shape: RewriteConfigList, location_name: "Rewrites"))
+    HostHeaderRewriteConfig.struct_class = Types::HostHeaderRewriteConfig
 
     HttpHeaderConditionConfig.add_member(:http_header_name, Shapes::ShapeRef.new(shape: HttpHeaderConditionName, location_name: "HttpHeaderName"))
     HttpHeaderConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
+    HttpHeaderConditionConfig.add_member(:regex_values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "RegexValues"))
     HttpHeaderConditionConfig.struct_class = Types::HttpHeaderConditionConfig
 
     HttpRequestMethodConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
@@ -855,6 +882,20 @@ module Aws::ElasticLoadBalancingV2
 
     IpamPools.add_member(:ipv_4_ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, location_name: "Ipv4IpamPoolId"))
     IpamPools.struct_class = Types::IpamPools
+
+    JwtValidationActionAdditionalClaim.add_member(:format, Shapes::ShapeRef.new(shape: JwtValidationActionAdditionalClaimFormatEnum, required: true, location_name: "Format"))
+    JwtValidationActionAdditionalClaim.add_member(:name, Shapes::ShapeRef.new(shape: JwtValidationActionAdditionalClaimName, required: true, location_name: "Name"))
+    JwtValidationActionAdditionalClaim.add_member(:values, Shapes::ShapeRef.new(shape: JwtValidationActionAdditionalClaimValues, required: true, location_name: "Values"))
+    JwtValidationActionAdditionalClaim.struct_class = Types::JwtValidationActionAdditionalClaim
+
+    JwtValidationActionAdditionalClaimValues.member = Shapes::ShapeRef.new(shape: JwtValidationActionAdditionalClaimValue)
+
+    JwtValidationActionAdditionalClaims.member = Shapes::ShapeRef.new(shape: JwtValidationActionAdditionalClaim)
+
+    JwtValidationActionConfig.add_member(:jwks_endpoint, Shapes::ShapeRef.new(shape: JwtValidationActionJwksEndpoint, required: true, location_name: "JwksEndpoint"))
+    JwtValidationActionConfig.add_member(:issuer, Shapes::ShapeRef.new(shape: JwtValidationActionIssuer, required: true, location_name: "Issuer"))
+    JwtValidationActionConfig.add_member(:additional_claims, Shapes::ShapeRef.new(shape: JwtValidationActionAdditionalClaims, location_name: "AdditionalClaims"))
+    JwtValidationActionConfig.struct_class = Types::JwtValidationActionConfig
 
     Limit.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     Limit.add_member(:max, Shapes::ShapeRef.new(shape: Max, location_name: "Max"))
@@ -989,6 +1030,8 @@ module Aws::ElasticLoadBalancingV2
     ModifyRuleInput.add_member(:rule_arn, Shapes::ShapeRef.new(shape: RuleArn, required: true, location_name: "RuleArn"))
     ModifyRuleInput.add_member(:conditions, Shapes::ShapeRef.new(shape: RuleConditionList, location_name: "Conditions"))
     ModifyRuleInput.add_member(:actions, Shapes::ShapeRef.new(shape: Actions, location_name: "Actions"))
+    ModifyRuleInput.add_member(:transforms, Shapes::ShapeRef.new(shape: RuleTransformList, location_name: "Transforms"))
+    ModifyRuleInput.add_member(:reset_transforms, Shapes::ShapeRef.new(shape: ResetTransforms, location_name: "ResetTransforms"))
     ModifyRuleInput.struct_class = Types::ModifyRuleInput
 
     ModifyRuleOutput.add_member(:rules, Shapes::ShapeRef.new(shape: Rules, location_name: "Rules"))
@@ -1035,6 +1078,7 @@ module Aws::ElasticLoadBalancingV2
     OperationNotPermittedException.struct_class = Types::OperationNotPermittedException
 
     PathPatternConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
+    PathPatternConditionConfig.add_member(:regex_values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "RegexValues"))
     PathPatternConditionConfig.struct_class = Types::PathPatternConditionConfig
 
     PriorRequestNotCompleteException.struct_class = Types::PriorRequestNotCompleteException
@@ -1104,11 +1148,18 @@ module Aws::ElasticLoadBalancingV2
 
     RevocationIds.member = Shapes::ShapeRef.new(shape: RevocationId)
 
+    RewriteConfig.add_member(:regex, Shapes::ShapeRef.new(shape: StringValue, required: true, location_name: "Regex"))
+    RewriteConfig.add_member(:replace, Shapes::ShapeRef.new(shape: StringValue, required: true, location_name: "Replace"))
+    RewriteConfig.struct_class = Types::RewriteConfig
+
+    RewriteConfigList.member = Shapes::ShapeRef.new(shape: RewriteConfig)
+
     Rule.add_member(:rule_arn, Shapes::ShapeRef.new(shape: RuleArn, location_name: "RuleArn"))
     Rule.add_member(:priority, Shapes::ShapeRef.new(shape: String, location_name: "Priority"))
     Rule.add_member(:conditions, Shapes::ShapeRef.new(shape: RuleConditionList, location_name: "Conditions"))
     Rule.add_member(:actions, Shapes::ShapeRef.new(shape: Actions, location_name: "Actions"))
     Rule.add_member(:is_default, Shapes::ShapeRef.new(shape: IsDefault, location_name: "IsDefault"))
+    Rule.add_member(:transforms, Shapes::ShapeRef.new(shape: RuleTransformList, location_name: "Transforms"))
     Rule.struct_class = Types::Rule
 
     RuleArns.member = Shapes::ShapeRef.new(shape: RuleArn)
@@ -1121,6 +1172,7 @@ module Aws::ElasticLoadBalancingV2
     RuleCondition.add_member(:query_string_config, Shapes::ShapeRef.new(shape: QueryStringConditionConfig, location_name: "QueryStringConfig"))
     RuleCondition.add_member(:http_request_method_config, Shapes::ShapeRef.new(shape: HttpRequestMethodConditionConfig, location_name: "HttpRequestMethodConfig"))
     RuleCondition.add_member(:source_ip_config, Shapes::ShapeRef.new(shape: SourceIpConditionConfig, location_name: "SourceIpConfig"))
+    RuleCondition.add_member(:regex_values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "RegexValues"))
     RuleCondition.struct_class = Types::RuleCondition
 
     RuleConditionList.member = Shapes::ShapeRef.new(shape: RuleCondition)
@@ -1132,6 +1184,13 @@ module Aws::ElasticLoadBalancingV2
     RulePriorityPair.add_member(:rule_arn, Shapes::ShapeRef.new(shape: RuleArn, location_name: "RuleArn"))
     RulePriorityPair.add_member(:priority, Shapes::ShapeRef.new(shape: RulePriority, location_name: "Priority"))
     RulePriorityPair.struct_class = Types::RulePriorityPair
+
+    RuleTransform.add_member(:type, Shapes::ShapeRef.new(shape: TransformTypeEnum, required: true, location_name: "Type"))
+    RuleTransform.add_member(:host_header_rewrite_config, Shapes::ShapeRef.new(shape: HostHeaderRewriteConfig, location_name: "HostHeaderRewriteConfig"))
+    RuleTransform.add_member(:url_rewrite_config, Shapes::ShapeRef.new(shape: UrlRewriteConfig, location_name: "UrlRewriteConfig"))
+    RuleTransform.struct_class = Types::RuleTransform
+
+    RuleTransformList.member = Shapes::ShapeRef.new(shape: RuleTransform)
 
     Rules.member = Shapes::ShapeRef.new(shape: Rule)
 
@@ -1220,6 +1279,7 @@ module Aws::ElasticLoadBalancingV2
     TargetDescription.add_member(:id, Shapes::ShapeRef.new(shape: TargetId, required: true, location_name: "Id"))
     TargetDescription.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "Port"))
     TargetDescription.add_member(:availability_zone, Shapes::ShapeRef.new(shape: ZoneName, location_name: "AvailabilityZone"))
+    TargetDescription.add_member(:quic_server_id, Shapes::ShapeRef.new(shape: QuicServerId, location_name: "QuicServerId"))
     TargetDescription.struct_class = Types::TargetDescription
 
     TargetDescriptions.member = Shapes::ShapeRef.new(shape: TargetDescription)
@@ -1242,6 +1302,7 @@ module Aws::ElasticLoadBalancingV2
     TargetGroup.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetTypeEnum, location_name: "TargetType"))
     TargetGroup.add_member(:protocol_version, Shapes::ShapeRef.new(shape: ProtocolVersion, location_name: "ProtocolVersion"))
     TargetGroup.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: TargetGroupIpAddressTypeEnum, location_name: "IpAddressType"))
+    TargetGroup.add_member(:target_control_port, Shapes::ShapeRef.new(shape: TargetControlPort, location_name: "TargetControlPort"))
     TargetGroup.struct_class = Types::TargetGroup
 
     TargetGroupArns.member = Shapes::ShapeRef.new(shape: TargetGroupArn)
@@ -1343,6 +1404,9 @@ module Aws::ElasticLoadBalancingV2
     TrustStores.member = Shapes::ShapeRef.new(shape: TrustStore)
 
     UnsupportedProtocolException.struct_class = Types::UnsupportedProtocolException
+
+    UrlRewriteConfig.add_member(:rewrites, Shapes::ShapeRef.new(shape: RewriteConfigList, location_name: "Rewrites"))
+    UrlRewriteConfig.struct_class = Types::UrlRewriteConfig
 
     ZonalCapacityReservationState.add_member(:state, Shapes::ShapeRef.new(shape: CapacityReservationStatus, location_name: "State"))
     ZonalCapacityReservationState.add_member(:availability_zone, Shapes::ShapeRef.new(shape: ZoneName, location_name: "AvailabilityZone"))

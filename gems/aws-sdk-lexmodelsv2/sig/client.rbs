@@ -277,9 +277,12 @@ module Aws
         def description: () -> ::String
         def nlu_intent_confidence_threshold: () -> ::Float
         def voice_settings: () -> Types::VoiceSettings
+        def unified_speech_settings: () -> Types::UnifiedSpeechSettings
+        def speech_recognition_settings: () -> Types::SpeechRecognitionSettings
         def bot_locale_status: () -> ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
         def creation_date_time: () -> ::Time
         def generative_ai_settings: () -> Types::GenerativeAISettings
+        def speech_detection_sensitivity: () -> ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#create_bot_locale-instance_method
       def create_bot_locale: (
@@ -289,8 +292,23 @@ module Aws
                                ?description: ::String,
                                nlu_intent_confidence_threshold: ::Float,
                                ?voice_settings: {
-                                 voice_id: ::String,
-                                 engine: ("standard" | "neural" | "long-form" | "generative")?
+                                 engine: ("standard" | "neural" | "long-form" | "generative")?,
+                                 voice_id: ::String
+                               },
+                               ?unified_speech_settings: {
+                                 speech_foundation_model: {
+                                   model_arn: ::String,
+                                   voice_id: ::String?
+                                 }
+                               },
+                               ?speech_recognition_settings: {
+                                 speech_model_preference: ("Standard" | "Neural" | "Deepgram")?,
+                                 speech_model_config: {
+                                   deepgram_config: {
+                                     api_token_secret_arn: ::String,
+                                     model_id: ::String?
+                                   }?
+                                 }?
                                },
                                ?generative_ai_settings: {
                                  runtime_settings: {
@@ -307,7 +325,13 @@ module Aws
                                      }?
                                    }?,
                                    nlu_improvement: {
-                                     enabled: bool
+                                     enabled: bool,
+                                     assisted_nlu_mode: ("Primary" | "Fallback")?,
+                                     intent_disambiguation_settings: {
+                                       enabled: bool,
+                                       max_disambiguation_intents: ::Integer?,
+                                       custom_disambiguation_message: ::String?
+                                     }?
                                    }?
                                  }?,
                                  buildtime_settings: {
@@ -336,7 +360,8 @@ module Aws
                                      }?
                                    }?
                                  }?
-                               }
+                               },
+                               ?speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
                              ) -> _CreateBotLocaleResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBotLocaleResponseSuccess
 
@@ -412,6 +437,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateIntentResponse]
         def intent_id: () -> ::String
         def intent_name: () -> ::String
+        def intent_display_name: () -> ::String
         def description: () -> ::String
         def parent_intent_signature: () -> ::String
         def sample_utterances: () -> ::Array[Types::SampleUtterance]
@@ -433,6 +459,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#create_intent-instance_method
       def create_intent: (
                            intent_name: ::String,
+                           ?intent_display_name: ::String,
                            ?description: ::String,
                            ?parent_intent_signature: ::String,
                            ?sample_utterances: Array[
@@ -6064,6 +6091,8 @@ module Aws
         def description: () -> ::String
         def nlu_intent_confidence_threshold: () -> ::Float
         def voice_settings: () -> Types::VoiceSettings
+        def unified_speech_settings: () -> Types::UnifiedSpeechSettings
+        def speech_recognition_settings: () -> Types::SpeechRecognitionSettings
         def intents_count: () -> ::Integer
         def slot_types_count: () -> ::Integer
         def bot_locale_status: () -> ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
@@ -6074,6 +6103,7 @@ module Aws
         def bot_locale_history_events: () -> ::Array[Types::BotLocaleHistoryEvent]
         def recommended_actions: () -> ::Array[::String]
         def generative_ai_settings: () -> Types::GenerativeAISettings
+        def speech_detection_sensitivity: () -> ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#describe_bot_locale-instance_method
       def describe_bot_locale: (
@@ -6224,6 +6254,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeIntentResponse]
         def intent_id: () -> ::String
         def intent_name: () -> ::String
+        def intent_display_name: () -> ::String
         def description: () -> ::String
         def parent_intent_signature: () -> ::String
         def sample_utterances: () -> ::Array[Types::SampleUtterance]
@@ -7296,8 +7327,24 @@ module Aws
                               locale_id: ::String,
                               nlu_intent_confidence_threshold: ::Float?,
                               voice_settings: {
-                                voice_id: ::String,
-                                engine: ("standard" | "neural" | "long-form" | "generative")?
+                                engine: ("standard" | "neural" | "long-form" | "generative")?,
+                                voice_id: ::String
+                              }?,
+                              speech_recognition_settings: {
+                                speech_model_preference: ("Standard" | "Neural" | "Deepgram")?,
+                                speech_model_config: {
+                                  deepgram_config: {
+                                    api_token_secret_arn: ::String,
+                                    model_id: ::String?
+                                  }?
+                                }?
+                              }?,
+                              speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")?,
+                              unified_speech_settings: {
+                                speech_foundation_model: {
+                                  model_arn: ::String,
+                                  voice_id: ::String?
+                                }
                               }?
                             }?,
                             custom_vocabulary_import_specification: {
@@ -7539,12 +7586,15 @@ module Aws
         def description: () -> ::String
         def nlu_intent_confidence_threshold: () -> ::Float
         def voice_settings: () -> Types::VoiceSettings
+        def unified_speech_settings: () -> Types::UnifiedSpeechSettings
+        def speech_recognition_settings: () -> Types::SpeechRecognitionSettings
         def bot_locale_status: () -> ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
         def failure_reasons: () -> ::Array[::String]
         def creation_date_time: () -> ::Time
         def last_updated_date_time: () -> ::Time
         def recommended_actions: () -> ::Array[::String]
         def generative_ai_settings: () -> Types::GenerativeAISettings
+        def speech_detection_sensitivity: () -> ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexModelsV2/Client.html#update_bot_locale-instance_method
       def update_bot_locale: (
@@ -7554,8 +7604,23 @@ module Aws
                                ?description: ::String,
                                nlu_intent_confidence_threshold: ::Float,
                                ?voice_settings: {
-                                 voice_id: ::String,
-                                 engine: ("standard" | "neural" | "long-form" | "generative")?
+                                 engine: ("standard" | "neural" | "long-form" | "generative")?,
+                                 voice_id: ::String
+                               },
+                               ?unified_speech_settings: {
+                                 speech_foundation_model: {
+                                   model_arn: ::String,
+                                   voice_id: ::String?
+                                 }
+                               },
+                               ?speech_recognition_settings: {
+                                 speech_model_preference: ("Standard" | "Neural" | "Deepgram")?,
+                                 speech_model_config: {
+                                   deepgram_config: {
+                                     api_token_secret_arn: ::String,
+                                     model_id: ::String?
+                                   }?
+                                 }?
                                },
                                ?generative_ai_settings: {
                                  runtime_settings: {
@@ -7572,7 +7637,13 @@ module Aws
                                      }?
                                    }?,
                                    nlu_improvement: {
-                                     enabled: bool
+                                     enabled: bool,
+                                     assisted_nlu_mode: ("Primary" | "Fallback")?,
+                                     intent_disambiguation_settings: {
+                                       enabled: bool,
+                                       max_disambiguation_intents: ::Integer?,
+                                       custom_disambiguation_message: ::String?
+                                     }?
                                    }?
                                  }?,
                                  buildtime_settings: {
@@ -7601,7 +7672,8 @@ module Aws
                                      }?
                                    }?
                                  }?
-                               }
+                               },
+                               ?speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
                              ) -> _UpdateBotLocaleResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBotLocaleResponseSuccess
 
@@ -7651,6 +7723,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIntentResponse]
         def intent_id: () -> ::String
         def intent_name: () -> ::String
+        def intent_display_name: () -> ::String
         def description: () -> ::String
         def parent_intent_signature: () -> ::String
         def sample_utterances: () -> ::Array[Types::SampleUtterance]
@@ -7675,6 +7748,7 @@ module Aws
       def update_intent: (
                            intent_id: ::String,
                            intent_name: ::String,
+                           ?intent_display_name: ::String,
                            ?description: ::String,
                            ?parent_intent_signature: ::String,
                            ?sample_utterances: Array[

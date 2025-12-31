@@ -35,6 +35,10 @@ module Aws::DatabaseMigrationService
     BatchStartRecommendationsResponse = Shapes::StructureShape.new(name: 'BatchStartRecommendationsResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanOptional = Shapes::BooleanShape.new(name: 'BooleanOptional')
+    CancelMetadataModelConversionMessage = Shapes::StructureShape.new(name: 'CancelMetadataModelConversionMessage')
+    CancelMetadataModelConversionResponse = Shapes::StructureShape.new(name: 'CancelMetadataModelConversionResponse')
+    CancelMetadataModelCreationMessage = Shapes::StructureShape.new(name: 'CancelMetadataModelCreationMessage')
+    CancelMetadataModelCreationResponse = Shapes::StructureShape.new(name: 'CancelMetadataModelCreationResponse')
     CancelReplicationTaskAssessmentRunMessage = Shapes::StructureShape.new(name: 'CancelReplicationTaskAssessmentRunMessage')
     CancelReplicationTaskAssessmentRunResponse = Shapes::StructureShape.new(name: 'CancelReplicationTaskAssessmentRunResponse')
     CannedAclForObjectsValue = Shapes::StringShape.new(name: 'CannedAclForObjectsValue')
@@ -169,14 +173,20 @@ module Aws::DatabaseMigrationService
     DescribeInstanceProfilesResponse = Shapes::StructureShape.new(name: 'DescribeInstanceProfilesResponse')
     DescribeMetadataModelAssessmentsMessage = Shapes::StructureShape.new(name: 'DescribeMetadataModelAssessmentsMessage')
     DescribeMetadataModelAssessmentsResponse = Shapes::StructureShape.new(name: 'DescribeMetadataModelAssessmentsResponse')
+    DescribeMetadataModelChildrenMessage = Shapes::StructureShape.new(name: 'DescribeMetadataModelChildrenMessage')
+    DescribeMetadataModelChildrenResponse = Shapes::StructureShape.new(name: 'DescribeMetadataModelChildrenResponse')
     DescribeMetadataModelConversionsMessage = Shapes::StructureShape.new(name: 'DescribeMetadataModelConversionsMessage')
     DescribeMetadataModelConversionsResponse = Shapes::StructureShape.new(name: 'DescribeMetadataModelConversionsResponse')
+    DescribeMetadataModelCreationsMessage = Shapes::StructureShape.new(name: 'DescribeMetadataModelCreationsMessage')
+    DescribeMetadataModelCreationsResponse = Shapes::StructureShape.new(name: 'DescribeMetadataModelCreationsResponse')
     DescribeMetadataModelExportsAsScriptMessage = Shapes::StructureShape.new(name: 'DescribeMetadataModelExportsAsScriptMessage')
     DescribeMetadataModelExportsAsScriptResponse = Shapes::StructureShape.new(name: 'DescribeMetadataModelExportsAsScriptResponse')
     DescribeMetadataModelExportsToTargetMessage = Shapes::StructureShape.new(name: 'DescribeMetadataModelExportsToTargetMessage')
     DescribeMetadataModelExportsToTargetResponse = Shapes::StructureShape.new(name: 'DescribeMetadataModelExportsToTargetResponse')
     DescribeMetadataModelImportsMessage = Shapes::StructureShape.new(name: 'DescribeMetadataModelImportsMessage')
     DescribeMetadataModelImportsResponse = Shapes::StructureShape.new(name: 'DescribeMetadataModelImportsResponse')
+    DescribeMetadataModelMessage = Shapes::StructureShape.new(name: 'DescribeMetadataModelMessage')
+    DescribeMetadataModelResponse = Shapes::StructureShape.new(name: 'DescribeMetadataModelResponse')
     DescribeMigrationProjectsMessage = Shapes::StructureShape.new(name: 'DescribeMigrationProjectsMessage')
     DescribeMigrationProjectsResponse = Shapes::StructureShape.new(name: 'DescribeMigrationProjectsResponse')
     DescribeOrderableReplicationInstancesMessage = Shapes::StructureShape.new(name: 'DescribeOrderableReplicationInstancesMessage')
@@ -254,6 +264,8 @@ module Aws::DatabaseMigrationService
     FleetAdvisorSchemaObjectList = Shapes::ListShape.new(name: 'FleetAdvisorSchemaObjectList')
     FleetAdvisorSchemaObjectResponse = Shapes::StructureShape.new(name: 'FleetAdvisorSchemaObjectResponse')
     GcpMySQLSettings = Shapes::StructureShape.new(name: 'GcpMySQLSettings')
+    GetTargetSelectionRulesMessage = Shapes::StructureShape.new(name: 'GetTargetSelectionRulesMessage')
+    GetTargetSelectionRulesResponse = Shapes::StructureShape.new(name: 'GetTargetSelectionRulesResponse')
     IBMDb2Settings = Shapes::StructureShape.new(name: 'IBMDb2Settings')
     IbmDb2LuwDataProviderSettings = Shapes::StructureShape.new(name: 'IbmDb2LuwDataProviderSettings')
     IbmDb2zOsDataProviderSettings = Shapes::StructureShape.new(name: 'IbmDb2zOsDataProviderSettings')
@@ -287,6 +299,7 @@ module Aws::DatabaseMigrationService
     KerberosAuthenticationSettings = Shapes::StructureShape.new(name: 'KerberosAuthenticationSettings')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
     KinesisSettings = Shapes::StructureShape.new(name: 'KinesisSettings')
+    LakehouseSettings = Shapes::StructureShape.new(name: 'LakehouseSettings')
     Limitation = Shapes::StructureShape.new(name: 'Limitation')
     LimitationList = Shapes::ListShape.new(name: 'LimitationList')
     ListTagsForResourceMessage = Shapes::StructureShape.new(name: 'ListTagsForResourceMessage')
@@ -297,6 +310,9 @@ module Aws::DatabaseMigrationService
     MariaDbDataProviderSettings = Shapes::StructureShape.new(name: 'MariaDbDataProviderSettings')
     Marker = Shapes::StringShape.new(name: 'Marker')
     MessageFormatValue = Shapes::StringShape.new(name: 'MessageFormatValue')
+    MetadataModelProperties = Shapes::UnionShape.new(name: 'MetadataModelProperties')
+    MetadataModelReference = Shapes::StructureShape.new(name: 'MetadataModelReference')
+    MetadataModelReferenceList = Shapes::ListShape.new(name: 'MetadataModelReferenceList')
     MicrosoftSQLServerSettings = Shapes::StructureShape.new(name: 'MicrosoftSQLServerSettings')
     MicrosoftSqlServerDataProviderSettings = Shapes::StructureShape.new(name: 'MicrosoftSqlServerDataProviderSettings')
     MigrationProject = Shapes::StructureShape.new(name: 'MigrationProject')
@@ -350,6 +366,8 @@ module Aws::DatabaseMigrationService
     PostgreSqlDataProviderSettings = Shapes::StructureShape.new(name: 'PostgreSqlDataProviderSettings')
     PremigrationAssessmentStatus = Shapes::StructureShape.new(name: 'PremigrationAssessmentStatus')
     PremigrationAssessmentStatusList = Shapes::ListShape.new(name: 'PremigrationAssessmentStatusList')
+    ProcessedObject = Shapes::StructureShape.new(name: 'ProcessedObject')
+    Progress = Shapes::StructureShape.new(name: 'Progress')
     ProvisionData = Shapes::StructureShape.new(name: 'ProvisionData')
     PublicIpAddressList = Shapes::ListShape.new(name: 'PublicIpAddressList')
     RdsConfiguration = Shapes::StructureShape.new(name: 'RdsConfiguration')
@@ -441,6 +459,8 @@ module Aws::DatabaseMigrationService
     StartMetadataModelAssessmentResponse = Shapes::StructureShape.new(name: 'StartMetadataModelAssessmentResponse')
     StartMetadataModelConversionMessage = Shapes::StructureShape.new(name: 'StartMetadataModelConversionMessage')
     StartMetadataModelConversionResponse = Shapes::StructureShape.new(name: 'StartMetadataModelConversionResponse')
+    StartMetadataModelCreationMessage = Shapes::StructureShape.new(name: 'StartMetadataModelCreationMessage')
+    StartMetadataModelCreationResponse = Shapes::StructureShape.new(name: 'StartMetadataModelCreationResponse')
     StartMetadataModelExportAsScriptMessage = Shapes::StructureShape.new(name: 'StartMetadataModelExportAsScriptMessage')
     StartMetadataModelExportAsScriptResponse = Shapes::StructureShape.new(name: 'StartMetadataModelExportAsScriptResponse')
     StartMetadataModelExportToTargetMessage = Shapes::StructureShape.new(name: 'StartMetadataModelExportToTargetMessage')
@@ -460,6 +480,7 @@ module Aws::DatabaseMigrationService
     StartReplicationTaskMessage = Shapes::StructureShape.new(name: 'StartReplicationTaskMessage')
     StartReplicationTaskResponse = Shapes::StructureShape.new(name: 'StartReplicationTaskResponse')
     StartReplicationTaskTypeValue = Shapes::StringShape.new(name: 'StartReplicationTaskTypeValue')
+    StatementProperties = Shapes::StructureShape.new(name: 'StatementProperties')
     StopDataMigrationMessage = Shapes::StructureShape.new(name: 'StopDataMigrationMessage')
     StopDataMigrationResponse = Shapes::StructureShape.new(name: 'StopDataMigrationResponse')
     StopReplicationMessage = Shapes::StructureShape.new(name: 'StopReplicationMessage')
@@ -475,6 +496,7 @@ module Aws::DatabaseMigrationService
     SubnetList = Shapes::ListShape.new(name: 'SubnetList')
     SupportedEndpointType = Shapes::StructureShape.new(name: 'SupportedEndpointType')
     SupportedEndpointTypeList = Shapes::ListShape.new(name: 'SupportedEndpointTypeList')
+    SybaseAseDataProviderSettings = Shapes::StructureShape.new(name: 'SybaseAseDataProviderSettings')
     SybaseSettings = Shapes::StructureShape.new(name: 'SybaseSettings')
     TStamp = Shapes::TimestampShape.new(name: 'TStamp')
     TableListToReload = Shapes::ListShape.new(name: 'TableListToReload')
@@ -547,6 +569,20 @@ module Aws::DatabaseMigrationService
     BatchStartRecommendationsResponse.add_member(:error_entries, Shapes::ShapeRef.new(shape: BatchStartRecommendationsErrorEntryList, location_name: "ErrorEntries"))
     BatchStartRecommendationsResponse.struct_class = Types::BatchStartRecommendationsResponse
 
+    CancelMetadataModelConversionMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: MigrationProjectIdentifier, required: true, location_name: "MigrationProjectIdentifier"))
+    CancelMetadataModelConversionMessage.add_member(:request_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestIdentifier"))
+    CancelMetadataModelConversionMessage.struct_class = Types::CancelMetadataModelConversionMessage
+
+    CancelMetadataModelConversionResponse.add_member(:request, Shapes::ShapeRef.new(shape: SchemaConversionRequest, location_name: "Request"))
+    CancelMetadataModelConversionResponse.struct_class = Types::CancelMetadataModelConversionResponse
+
+    CancelMetadataModelCreationMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: MigrationProjectIdentifier, required: true, location_name: "MigrationProjectIdentifier"))
+    CancelMetadataModelCreationMessage.add_member(:request_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RequestIdentifier"))
+    CancelMetadataModelCreationMessage.struct_class = Types::CancelMetadataModelCreationMessage
+
+    CancelMetadataModelCreationResponse.add_member(:request, Shapes::ShapeRef.new(shape: SchemaConversionRequest, location_name: "Request"))
+    CancelMetadataModelCreationResponse.struct_class = Types::CancelMetadataModelCreationResponse
+
     CancelReplicationTaskAssessmentRunMessage.add_member(:replication_task_assessment_run_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationTaskAssessmentRunArn"))
     CancelReplicationTaskAssessmentRunMessage.struct_class = Types::CancelReplicationTaskAssessmentRunMessage
 
@@ -563,6 +599,7 @@ module Aws::DatabaseMigrationService
     Certificate.add_member(:valid_to_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "ValidToDate"))
     Certificate.add_member(:signing_algorithm, Shapes::ShapeRef.new(shape: String, location_name: "SigningAlgorithm"))
     Certificate.add_member(:key_length, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "KeyLength"))
+    Certificate.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     Certificate.struct_class = Types::Certificate
 
     CertificateList.member = Shapes::ShapeRef.new(shape: Certificate)
@@ -871,6 +908,7 @@ module Aws::DatabaseMigrationService
     DataProviderSettings.add_member(:postgre_sql_settings, Shapes::ShapeRef.new(shape: PostgreSqlDataProviderSettings, location_name: "PostgreSqlSettings"))
     DataProviderSettings.add_member(:my_sql_settings, Shapes::ShapeRef.new(shape: MySqlDataProviderSettings, location_name: "MySqlSettings"))
     DataProviderSettings.add_member(:oracle_settings, Shapes::ShapeRef.new(shape: OracleDataProviderSettings, location_name: "OracleSettings"))
+    DataProviderSettings.add_member(:sybase_ase_settings, Shapes::ShapeRef.new(shape: SybaseAseDataProviderSettings, location_name: "SybaseAseSettings"))
     DataProviderSettings.add_member(:microsoft_sql_server_settings, Shapes::ShapeRef.new(shape: MicrosoftSqlServerDataProviderSettings, location_name: "MicrosoftSqlServerSettings"))
     DataProviderSettings.add_member(:doc_db_settings, Shapes::ShapeRef.new(shape: DocDbDataProviderSettings, location_name: "DocDbSettings"))
     DataProviderSettings.add_member(:maria_db_settings, Shapes::ShapeRef.new(shape: MariaDbDataProviderSettings, location_name: "MariaDbSettings"))
@@ -882,6 +920,7 @@ module Aws::DatabaseMigrationService
     DataProviderSettings.add_member_subclass(:postgre_sql_settings, Types::DataProviderSettings::PostgreSqlSettings)
     DataProviderSettings.add_member_subclass(:my_sql_settings, Types::DataProviderSettings::MySqlSettings)
     DataProviderSettings.add_member_subclass(:oracle_settings, Types::DataProviderSettings::OracleSettings)
+    DataProviderSettings.add_member_subclass(:sybase_ase_settings, Types::DataProviderSettings::SybaseAseSettings)
     DataProviderSettings.add_member_subclass(:microsoft_sql_server_settings, Types::DataProviderSettings::MicrosoftSqlServerSettings)
     DataProviderSettings.add_member_subclass(:doc_db_settings, Types::DataProviderSettings::DocDbSettings)
     DataProviderSettings.add_member_subclass(:maria_db_settings, Types::DataProviderSettings::MariaDbSettings)
@@ -1212,6 +1251,17 @@ module Aws::DatabaseMigrationService
     DescribeMetadataModelAssessmentsResponse.add_member(:requests, Shapes::ShapeRef.new(shape: SchemaConversionRequestList, location_name: "Requests"))
     DescribeMetadataModelAssessmentsResponse.struct_class = Types::DescribeMetadataModelAssessmentsResponse
 
+    DescribeMetadataModelChildrenMessage.add_member(:selection_rules, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SelectionRules"))
+    DescribeMetadataModelChildrenMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: MigrationProjectIdentifier, required: true, location_name: "MigrationProjectIdentifier"))
+    DescribeMetadataModelChildrenMessage.add_member(:origin, Shapes::ShapeRef.new(shape: OriginTypeValue, required: true, location_name: "Origin"))
+    DescribeMetadataModelChildrenMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeMetadataModelChildrenMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeMetadataModelChildrenMessage.struct_class = Types::DescribeMetadataModelChildrenMessage
+
+    DescribeMetadataModelChildrenResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeMetadataModelChildrenResponse.add_member(:metadata_model_children, Shapes::ShapeRef.new(shape: MetadataModelReferenceList, location_name: "MetadataModelChildren"))
+    DescribeMetadataModelChildrenResponse.struct_class = Types::DescribeMetadataModelChildrenResponse
+
     DescribeMetadataModelConversionsMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: MigrationProjectIdentifier, required: true, location_name: "MigrationProjectIdentifier"))
     DescribeMetadataModelConversionsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeMetadataModelConversionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -1221,6 +1271,16 @@ module Aws::DatabaseMigrationService
     DescribeMetadataModelConversionsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeMetadataModelConversionsResponse.add_member(:requests, Shapes::ShapeRef.new(shape: SchemaConversionRequestList, location_name: "Requests"))
     DescribeMetadataModelConversionsResponse.struct_class = Types::DescribeMetadataModelConversionsResponse
+
+    DescribeMetadataModelCreationsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeMetadataModelCreationsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeMetadataModelCreationsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeMetadataModelCreationsMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: MigrationProjectIdentifier, required: true, location_name: "MigrationProjectIdentifier"))
+    DescribeMetadataModelCreationsMessage.struct_class = Types::DescribeMetadataModelCreationsMessage
+
+    DescribeMetadataModelCreationsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeMetadataModelCreationsResponse.add_member(:requests, Shapes::ShapeRef.new(shape: SchemaConversionRequestList, location_name: "Requests"))
+    DescribeMetadataModelCreationsResponse.struct_class = Types::DescribeMetadataModelCreationsResponse
 
     DescribeMetadataModelExportsAsScriptMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: MigrationProjectIdentifier, required: true, location_name: "MigrationProjectIdentifier"))
     DescribeMetadataModelExportsAsScriptMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
@@ -1251,6 +1311,17 @@ module Aws::DatabaseMigrationService
     DescribeMetadataModelImportsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeMetadataModelImportsResponse.add_member(:requests, Shapes::ShapeRef.new(shape: SchemaConversionRequestList, location_name: "Requests"))
     DescribeMetadataModelImportsResponse.struct_class = Types::DescribeMetadataModelImportsResponse
+
+    DescribeMetadataModelMessage.add_member(:selection_rules, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SelectionRules"))
+    DescribeMetadataModelMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: MigrationProjectIdentifier, required: true, location_name: "MigrationProjectIdentifier"))
+    DescribeMetadataModelMessage.add_member(:origin, Shapes::ShapeRef.new(shape: OriginTypeValue, required: true, location_name: "Origin"))
+    DescribeMetadataModelMessage.struct_class = Types::DescribeMetadataModelMessage
+
+    DescribeMetadataModelResponse.add_member(:metadata_model_name, Shapes::ShapeRef.new(shape: String, location_name: "MetadataModelName"))
+    DescribeMetadataModelResponse.add_member(:metadata_model_type, Shapes::ShapeRef.new(shape: String, location_name: "MetadataModelType"))
+    DescribeMetadataModelResponse.add_member(:target_metadata_models, Shapes::ShapeRef.new(shape: MetadataModelReferenceList, location_name: "TargetMetadataModels"))
+    DescribeMetadataModelResponse.add_member(:definition, Shapes::ShapeRef.new(shape: String, location_name: "Definition"))
+    DescribeMetadataModelResponse.struct_class = Types::DescribeMetadataModelResponse
 
     DescribeMigrationProjectsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeMigrationProjectsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
@@ -1471,6 +1542,7 @@ module Aws::DatabaseMigrationService
     Endpoint.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ServiceAccessRoleArn"))
     Endpoint.add_member(:external_table_definition, Shapes::ShapeRef.new(shape: String, location_name: "ExternalTableDefinition"))
     Endpoint.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "ExternalId"))
+    Endpoint.add_member(:is_read_only, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IsReadOnly"))
     Endpoint.add_member(:dynamo_db_settings, Shapes::ShapeRef.new(shape: DynamoDbSettings, location_name: "DynamoDbSettings"))
     Endpoint.add_member(:s3_settings, Shapes::ShapeRef.new(shape: S3Settings, location_name: "S3Settings"))
     Endpoint.add_member(:dms_transfer_settings, Shapes::ShapeRef.new(shape: DmsTransferSettings, location_name: "DmsTransferSettings"))
@@ -1490,6 +1562,7 @@ module Aws::DatabaseMigrationService
     Endpoint.add_member(:redis_settings, Shapes::ShapeRef.new(shape: RedisSettings, location_name: "RedisSettings"))
     Endpoint.add_member(:gcp_my_sql_settings, Shapes::ShapeRef.new(shape: GcpMySQLSettings, location_name: "GcpMySQLSettings"))
     Endpoint.add_member(:timestream_settings, Shapes::ShapeRef.new(shape: TimestreamSettings, location_name: "TimestreamSettings"))
+    Endpoint.add_member(:lakehouse_settings, Shapes::ShapeRef.new(shape: LakehouseSettings, location_name: "LakehouseSettings"))
     Endpoint.struct_class = Types::Endpoint
 
     EndpointList.member = Shapes::ShapeRef.new(shape: Endpoint)
@@ -1621,6 +1694,13 @@ module Aws::DatabaseMigrationService
     GcpMySQLSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
     GcpMySQLSettings.struct_class = Types::GcpMySQLSettings
 
+    GetTargetSelectionRulesMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: MigrationProjectIdentifier, required: true, location_name: "MigrationProjectIdentifier"))
+    GetTargetSelectionRulesMessage.add_member(:selection_rules, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SelectionRules"))
+    GetTargetSelectionRulesMessage.struct_class = Types::GetTargetSelectionRulesMessage
+
+    GetTargetSelectionRulesResponse.add_member(:target_selection_rules, Shapes::ShapeRef.new(shape: String, location_name: "TargetSelectionRules"))
+    GetTargetSelectionRulesResponse.struct_class = Types::GetTargetSelectionRulesResponse
+
     IBMDb2Settings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
     IBMDb2Settings.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))
     IBMDb2Settings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
@@ -1659,6 +1739,7 @@ module Aws::DatabaseMigrationService
     ImportCertificateMessage.add_member(:certificate_pem, Shapes::ShapeRef.new(shape: SecretString, location_name: "CertificatePem"))
     ImportCertificateMessage.add_member(:certificate_wallet, Shapes::ShapeRef.new(shape: CertificateWallet, location_name: "CertificateWallet"))
     ImportCertificateMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ImportCertificateMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     ImportCertificateMessage.struct_class = Types::ImportCertificateMessage
 
     ImportCertificateResponse.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
@@ -1767,6 +1848,9 @@ module Aws::DatabaseMigrationService
     KinesisSettings.add_member(:use_large_integer_value, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseLargeIntegerValue"))
     KinesisSettings.struct_class = Types::KinesisSettings
 
+    LakehouseSettings.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
+    LakehouseSettings.struct_class = Types::LakehouseSettings
+
     Limitation.add_member(:database_id, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseId"))
     Limitation.add_member(:engine_name, Shapes::ShapeRef.new(shape: String, location_name: "EngineName"))
     Limitation.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -1791,6 +1875,18 @@ module Aws::DatabaseMigrationService
     MariaDbDataProviderSettings.add_member(:s3_path, Shapes::ShapeRef.new(shape: String, location_name: "S3Path"))
     MariaDbDataProviderSettings.add_member(:s3_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "S3AccessRoleArn"))
     MariaDbDataProviderSettings.struct_class = Types::MariaDbDataProviderSettings
+
+    MetadataModelProperties.add_member(:statement_properties, Shapes::ShapeRef.new(shape: StatementProperties, location_name: "StatementProperties"))
+    MetadataModelProperties.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    MetadataModelProperties.add_member_subclass(:statement_properties, Types::MetadataModelProperties::StatementProperties)
+    MetadataModelProperties.add_member_subclass(:unknown, Types::MetadataModelProperties::Unknown)
+    MetadataModelProperties.struct_class = Types::MetadataModelProperties
+
+    MetadataModelReference.add_member(:metadata_model_name, Shapes::ShapeRef.new(shape: String, location_name: "MetadataModelName"))
+    MetadataModelReference.add_member(:selection_rules, Shapes::ShapeRef.new(shape: String, location_name: "SelectionRules"))
+    MetadataModelReference.struct_class = Types::MetadataModelReference
+
+    MetadataModelReferenceList.member = Shapes::ShapeRef.new(shape: MetadataModelReference)
 
     MicrosoftSQLServerSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
     MicrosoftSQLServerSettings.add_member(:bcp_packet_size, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "BcpPacketSize"))
@@ -2207,6 +2303,17 @@ module Aws::DatabaseMigrationService
 
     PremigrationAssessmentStatusList.member = Shapes::ShapeRef.new(shape: PremigrationAssessmentStatus)
 
+    ProcessedObject.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    ProcessedObject.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    ProcessedObject.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: String, location_name: "EndpointType"))
+    ProcessedObject.struct_class = Types::ProcessedObject
+
+    Progress.add_member(:progress_percent, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "ProgressPercent"))
+    Progress.add_member(:total_objects, Shapes::ShapeRef.new(shape: Long, location_name: "TotalObjects"))
+    Progress.add_member(:progress_step, Shapes::ShapeRef.new(shape: String, location_name: "ProgressStep"))
+    Progress.add_member(:processed_object, Shapes::ShapeRef.new(shape: ProcessedObject, location_name: "ProcessedObject"))
+    Progress.struct_class = Types::Progress
+
     ProvisionData.add_member(:provision_state, Shapes::ShapeRef.new(shape: String, location_name: "ProvisionState"))
     ProvisionData.add_member(:provisioned_capacity_units, Shapes::ShapeRef.new(shape: Integer, location_name: "ProvisionedCapacityUnits"))
     ProvisionData.add_member(:date_provisioned, Shapes::ShapeRef.new(shape: TStamp, location_name: "DateProvisioned"))
@@ -2372,6 +2479,7 @@ module Aws::DatabaseMigrationService
     Replication.add_member(:replication_update_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationUpdateTime"))
     Replication.add_member(:replication_last_stop_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationLastStopTime"))
     Replication.add_member(:replication_deprovision_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationDeprovisionTime"))
+    Replication.add_member(:is_read_only, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IsReadOnly"))
     Replication.struct_class = Types::Replication
 
     ReplicationConfig.add_member(:replication_config_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationConfigIdentifier"))
@@ -2385,6 +2493,7 @@ module Aws::DatabaseMigrationService
     ReplicationConfig.add_member(:table_mappings, Shapes::ShapeRef.new(shape: String, location_name: "TableMappings"))
     ReplicationConfig.add_member(:replication_config_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationConfigCreateTime"))
     ReplicationConfig.add_member(:replication_config_update_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationConfigUpdateTime"))
+    ReplicationConfig.add_member(:is_read_only, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IsReadOnly"))
     ReplicationConfig.struct_class = Types::ReplicationConfig
 
     ReplicationConfigList.member = Shapes::ShapeRef.new(shape: ReplicationConfig)
@@ -2460,6 +2569,7 @@ module Aws::DatabaseMigrationService
     ReplicationSubnetGroup.add_member(:subnet_group_status, Shapes::ShapeRef.new(shape: String, location_name: "SubnetGroupStatus"))
     ReplicationSubnetGroup.add_member(:subnets, Shapes::ShapeRef.new(shape: SubnetList, location_name: "Subnets"))
     ReplicationSubnetGroup.add_member(:supported_network_types, Shapes::ShapeRef.new(shape: StringList, location_name: "SupportedNetworkTypes"))
+    ReplicationSubnetGroup.add_member(:is_read_only, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IsReadOnly"))
     ReplicationSubnetGroup.struct_class = Types::ReplicationSubnetGroup
 
     ReplicationSubnetGroupDoesNotCoverEnoughAZs.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
@@ -2637,6 +2747,7 @@ module Aws::DatabaseMigrationService
     SchemaConversionRequest.add_member(:migration_project_arn, Shapes::ShapeRef.new(shape: String, location_name: "MigrationProjectArn"))
     SchemaConversionRequest.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "Error"))
     SchemaConversionRequest.add_member(:export_sql_details, Shapes::ShapeRef.new(shape: ExportSqlDetails, location_name: "ExportSqlDetails"))
+    SchemaConversionRequest.add_member(:progress, Shapes::ShapeRef.new(shape: Progress, location_name: "Progress"))
     SchemaConversionRequest.struct_class = Types::SchemaConversionRequest
 
     SchemaConversionRequestList.member = Shapes::ShapeRef.new(shape: SchemaConversionRequest)
@@ -2702,6 +2813,15 @@ module Aws::DatabaseMigrationService
 
     StartMetadataModelConversionResponse.add_member(:request_identifier, Shapes::ShapeRef.new(shape: String, location_name: "RequestIdentifier"))
     StartMetadataModelConversionResponse.struct_class = Types::StartMetadataModelConversionResponse
+
+    StartMetadataModelCreationMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: MigrationProjectIdentifier, required: true, location_name: "MigrationProjectIdentifier"))
+    StartMetadataModelCreationMessage.add_member(:selection_rules, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SelectionRules"))
+    StartMetadataModelCreationMessage.add_member(:metadata_model_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MetadataModelName"))
+    StartMetadataModelCreationMessage.add_member(:properties, Shapes::ShapeRef.new(shape: MetadataModelProperties, required: true, location_name: "Properties"))
+    StartMetadataModelCreationMessage.struct_class = Types::StartMetadataModelCreationMessage
+
+    StartMetadataModelCreationResponse.add_member(:request_identifier, Shapes::ShapeRef.new(shape: String, location_name: "RequestIdentifier"))
+    StartMetadataModelCreationResponse.struct_class = Types::StartMetadataModelCreationResponse
 
     StartMetadataModelExportAsScriptMessage.add_member(:migration_project_identifier, Shapes::ShapeRef.new(shape: MigrationProjectIdentifier, required: true, location_name: "MigrationProjectIdentifier"))
     StartMetadataModelExportAsScriptMessage.add_member(:selection_rules, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SelectionRules"))
@@ -2781,6 +2901,9 @@ module Aws::DatabaseMigrationService
     StartReplicationTaskResponse.add_member(:replication_task, Shapes::ShapeRef.new(shape: ReplicationTask, location_name: "ReplicationTask"))
     StartReplicationTaskResponse.struct_class = Types::StartReplicationTaskResponse
 
+    StatementProperties.add_member(:definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Definition"))
+    StatementProperties.struct_class = Types::StatementProperties
+
     StopDataMigrationMessage.add_member(:data_migration_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataMigrationIdentifier"))
     StopDataMigrationMessage.struct_class = Types::StopDataMigrationMessage
 
@@ -2824,6 +2947,14 @@ module Aws::DatabaseMigrationService
     SupportedEndpointType.struct_class = Types::SupportedEndpointType
 
     SupportedEndpointTypeList.member = Shapes::ShapeRef.new(shape: SupportedEndpointType)
+
+    SybaseAseDataProviderSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    SybaseAseDataProviderSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    SybaseAseDataProviderSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    SybaseAseDataProviderSettings.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
+    SybaseAseDataProviderSettings.add_member(:encrypt_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EncryptPassword"))
+    SybaseAseDataProviderSettings.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+    SybaseAseDataProviderSettings.struct_class = Types::SybaseAseDataProviderSettings
 
     SybaseSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
     SybaseSettings.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))
@@ -2963,6 +3094,28 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+      end)
+
+      api.add_operation(:cancel_metadata_model_conversion, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelMetadataModelConversion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelMetadataModelConversionMessage)
+        o.output = Shapes::ShapeRef.new(shape: CancelMetadataModelConversionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+      end)
+
+      api.add_operation(:cancel_metadata_model_creation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelMetadataModelCreation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelMetadataModelCreationMessage)
+        o.output = Shapes::ShapeRef.new(shape: CancelMetadataModelCreationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
       end)
 
       api.add_operation(:cancel_replication_task_assessment_run, Seahorse::Model::Operation.new.tap do |o|
@@ -3604,6 +3757,16 @@ module Aws::DatabaseMigrationService
         )
       end)
 
+      api.add_operation(:describe_metadata_model, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMetadataModel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMetadataModelMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMetadataModelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+      end)
+
       api.add_operation(:describe_metadata_model_assessments, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeMetadataModelAssessments"
         o.http_method = "POST"
@@ -3619,6 +3782,22 @@ module Aws::DatabaseMigrationService
         )
       end)
 
+      api.add_operation(:describe_metadata_model_children, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMetadataModelChildren"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMetadataModelChildrenMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMetadataModelChildrenResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:describe_metadata_model_conversions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeMetadataModelConversions"
         o.http_method = "POST"
@@ -3626,6 +3805,22 @@ module Aws::DatabaseMigrationService
         o.input = Shapes::ShapeRef.new(shape: DescribeMetadataModelConversionsMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeMetadataModelConversionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_metadata_model_creations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMetadataModelCreations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMetadataModelCreationsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMetadataModelCreationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {
@@ -3961,6 +4156,17 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
       end)
 
+      api.add_operation(:get_target_selection_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTargetSelectionRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTargetSelectionRulesMessage)
+        o.output = Shapes::ShapeRef.new(shape: GetTargetSelectionRulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
+      end)
+
       api.add_operation(:import_certificate, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ImportCertificate"
         o.http_method = "POST"
@@ -3970,6 +4176,7 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCertificateFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -4264,6 +4471,18 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: S3ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: S3AccessDeniedFault)
+      end)
+
+      api.add_operation(:start_metadata_model_creation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMetadataModelCreation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartMetadataModelCreationMessage)
+        o.output = Shapes::ShapeRef.new(shape: StartMetadataModelCreationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
       end)
 
       api.add_operation(:start_metadata_model_export_as_script, Seahorse::Model::Operation.new.tap do |o|

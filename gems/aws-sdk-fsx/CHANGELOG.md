@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.129.0 (2025-12-02)
+------------------
+
+* Feature - S3 Access Points support for FSx for NetApp ONTAP
+
+1.128.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.127.0 (2025-11-19)
+------------------
+
+* Feature - Adding File Server Resource Manager configuration to FSx Windows
+
+1.126.0 (2025-11-05)
+------------------
+
+* Feature - Amazon FSx now enables secure management of Active Directory credentials through AWS Secrets Manager integration. Customers can use Secret ARNs instead of direct credentials when joining resources to Active Directory domains.
+
+1.125.0 (2025-10-31)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.124.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.123.0 (2025-09-30)
 ------------------
 

@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.216.0 (2025-12-18)
+------------------
+
+* Feature - Adding support for Event Windows via a new ECS account setting "fargateEventWindows". When enabled, ECS Fargate will use the configured event window for patching tasks. Introducing "CapacityOptionType" for CreateCapacityProvider API, allowing support for Spot capacity for ECS Managed Instances.
+
+1.215.0 (2025-12-05)
+------------------
+
+* Feature - Updating stop-task API to encapsulate containers with custom stop signal
+
+1.214.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.213.0 (2025-11-20)
+------------------
+
+* Feature - Launching Amazon ECS Express Mode - a new feature that enables developers to quickly launch highly available, scalable containerized applications with a single command.
+
+1.212.0 (2025-11-19)
+------------------
+
+* Feature - Added support for Amazon ECS Managed Instances infrastructure optimization configuration.
+
+1.211.0 (2025-11-03)
+------------------
+
+* Feature - Documentation-only update for LINEAR and CANARY deployment strategies.
+
+1.210.0 (2025-10-30)
+------------------
+
+* Feature - Amazon ECS Service Connect now supports Envoy access logs, providing deeper observability into request-level traffic patterns and service interactions.
+
+1.209.0 (2025-10-28)
+------------------
+
+* Feature - Amazon ECS supports native linear and canary service deployments, allowing you to shift traffic in increments for more control.
+
+1.208.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.207.0 (2025-10-01)
 ------------------
 

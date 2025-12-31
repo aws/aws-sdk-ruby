@@ -18,6 +18,10 @@
             "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
+            "DateTime": {
+                "type": "timestamp",
+                "timestampFormat": "iso8601"
+            },
             "DatetimeOffsetsOutput": {
                 "type": "structure",
                 "members": {
@@ -25,10 +29,6 @@
                         "shape": "DateTime"
                     }
                 }
-            },
-            "DateTime": {
-                "type": "timestamp",
-                "timestampFormat": "iso8601"
             }
         },
         "cases": [
@@ -97,6 +97,11 @@
             "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
+            "Document": {
+                "type": "structure",
+                "members": {},
+                "document": true
+            },
             "DocumentTypeInputOutput": {
                 "type": "structure",
                 "members": {
@@ -110,11 +115,6 @@
             },
             "String": {
                 "type": "string"
-            },
-            "Document": {
-                "type": "structure",
-                "members": {},
-                "document": true
             }
         },
         "cases": [
@@ -284,6 +284,11 @@
             "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
+            "Document": {
+                "type": "structure",
+                "members": {},
+                "document": true
+            },
             "DocumentTypeAsMapValueInputOutput": {
                 "type": "structure",
                 "members": {
@@ -300,11 +305,6 @@
                 "value": {
                     "shape": "Document"
                 }
-            },
-            "Document": {
-                "type": "structure",
-                "members": {},
-                "document": true
             },
             "String": {
                 "type": "string"
@@ -370,6 +370,11 @@
             "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
+            "Document": {
+                "type": "structure",
+                "members": {},
+                "document": true
+            },
             "DocumentTypeAsPayloadInputOutput": {
                 "type": "structure",
                 "members": {
@@ -378,11 +383,6 @@
                     }
                 },
                 "payload": "documentValue"
-            },
-            "Document": {
-                "type": "structure",
-                "members": {},
-                "document": true
             }
         },
         "cases": [
@@ -535,6 +535,10 @@
             "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
+            "DateTime": {
+                "type": "timestamp",
+                "timestampFormat": "iso8601"
+            },
             "FractionalSecondsOutput": {
                 "type": "structure",
                 "members": {
@@ -542,10 +546,6 @@
                         "shape": "DateTime"
                     }
                 }
-            },
-            "DateTime": {
-                "type": "timestamp",
-                "timestampFormat": "iso8601"
             }
         },
         "cases": [
@@ -776,9 +776,6 @@
                 },
                 "exception": true
             },
-            "String": {
-                "type": "string"
-            },
             "ComplexNestedErrorData": {
                 "type": "structure",
                 "members": {
@@ -787,6 +784,9 @@
                         "locationName": "Fooooo"
                     }
                 }
+            },
+            "String": {
+                "type": "string"
             }
         },
         "cases": [
@@ -1200,6 +1200,9 @@
                     }
                 }
             },
+            "String": {
+                "type": "string"
+            },
             "StringMap": {
                 "type": "map",
                 "key": {
@@ -1208,9 +1211,6 @@
                 "value": {
                     "shape": "String"
                 }
-            },
-            "String": {
-                "type": "string"
             }
         },
         "cases": [
@@ -1328,6 +1328,9 @@
             "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
+            "Blob": {
+                "type": "blob"
+            },
             "HttpPayloadTraitsInputOutput": {
                 "type": "structure",
                 "members": {
@@ -1344,9 +1347,6 @@
             },
             "String": {
                 "type": "string"
-            },
-            "Blob": {
-                "type": "blob"
             }
         },
         "cases": [
@@ -1533,6 +1533,9 @@
                 },
                 "payload": "nested"
             },
+            "String": {
+                "type": "string"
+            },
             "UnionPayload": {
                 "type": "structure",
                 "members": {
@@ -1541,9 +1544,6 @@
                     }
                 },
                 "union": true
-            },
-            "String": {
-                "type": "string"
             }
         },
         "cases": [
@@ -1714,6 +1714,9 @@
                     }
                 }
             },
+            "String": {
+                "type": "string"
+            },
             "StringMap": {
                 "type": "map",
                 "key": {
@@ -1722,9 +1725,6 @@
                 "value": {
                     "shape": "String"
                 }
-            },
-            "String": {
-                "type": "string"
             }
         },
         "cases": [
@@ -1864,6 +1864,9 @@
             "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
+            "String": {
+                "type": "string"
+            },
             "StringPayloadInput": {
                 "type": "structure",
                 "members": {
@@ -1872,9 +1875,6 @@
                     }
                 },
                 "payload": "payload"
-            },
-            "String": {
-                "type": "string"
             }
         },
         "cases": [
@@ -1986,6 +1986,40 @@
             "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "BooleanList": {
+                "type": "list",
+                "member": {
+                    "shape": "Boolean"
+                }
+            },
+            "Double": {
+                "type": "double",
+                "box": true
+            },
+            "Float": {
+                "type": "float",
+                "box": true
+            },
+            "FooEnum": {
+                "type": "string",
+                "enum": [
+                    "Foo",
+                    "Baz",
+                    "Bar",
+                    "1",
+                    "0"
+                ]
+            },
+            "FooEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "FooEnum"
+                }
+            },
             "InputAndOutputWithHeadersIO": {
                 "type": "structure",
                 "members": {
@@ -2081,28 +2115,32 @@
                     }
                 }
             },
-            "String": {
-                "type": "string"
-            },
             "Integer": {
                 "type": "integer",
                 "box": true
+            },
+            "IntegerEnum": {
+                "type": "integer",
+                "box": true
+            },
+            "IntegerEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "IntegerEnum"
+                }
+            },
+            "IntegerList": {
+                "type": "list",
+                "member": {
+                    "shape": "Integer"
+                }
             },
             "Long": {
                 "type": "long",
                 "box": true
             },
-            "Float": {
-                "type": "float",
-                "box": true
-            },
-            "Double": {
-                "type": "double",
-                "box": true
-            },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
+            "String": {
+                "type": "string"
             },
             "StringList": {
                 "type": "list",
@@ -2116,52 +2154,14 @@
                     "shape": "String"
                 }
             },
-            "IntegerList": {
-                "type": "list",
-                "member": {
-                    "shape": "Integer"
-                }
-            },
-            "BooleanList": {
-                "type": "list",
-                "member": {
-                    "shape": "Boolean"
-                }
+            "Timestamp": {
+                "type": "timestamp"
             },
             "TimestampList": {
                 "type": "list",
                 "member": {
                     "shape": "Timestamp"
                 }
-            },
-            "FooEnum": {
-                "type": "string",
-                "enum": [
-                    "Foo",
-                    "Baz",
-                    "Bar",
-                    "1",
-                    "0"
-                ]
-            },
-            "FooEnumList": {
-                "type": "list",
-                "member": {
-                    "shape": "FooEnum"
-                }
-            },
-            "IntegerEnum": {
-                "type": "integer",
-                "box": true
-            },
-            "IntegerEnumList": {
-                "type": "list",
-                "member": {
-                    "shape": "IntegerEnum"
-                }
-            },
-            "Timestamp": {
-                "type": "timestamp"
             }
         },
         "cases": [
@@ -2497,6 +2497,9 @@
             "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
+            "Blob": {
+                "type": "blob"
+            },
             "JsonBlobsInputOutput": {
                 "type": "structure",
                 "members": {
@@ -2504,9 +2507,6 @@
                         "shape": "Blob"
                     }
                 }
-            },
-            "Blob": {
-                "type": "blob"
             }
         },
         "cases": [
@@ -2557,6 +2557,37 @@
             "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
+            "FooEnum": {
+                "type": "string",
+                "enum": [
+                    "Foo",
+                    "Baz",
+                    "Bar",
+                    "1",
+                    "0"
+                ]
+            },
+            "FooEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "FooEnum"
+                }
+            },
+            "FooEnumMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "FooEnum"
+                }
+            },
+            "FooEnumSet": {
+                "type": "list",
+                "member": {
+                    "shape": "FooEnum"
+                }
+            },
             "JsonEnumsInputOutput": {
                 "type": "structure",
                 "members": {
@@ -2578,37 +2609,6 @@
                     "fooEnumMap": {
                         "shape": "FooEnumMap"
                     }
-                }
-            },
-            "FooEnum": {
-                "type": "string",
-                "enum": [
-                    "Foo",
-                    "Baz",
-                    "Bar",
-                    "1",
-                    "0"
-                ]
-            },
-            "FooEnumList": {
-                "type": "list",
-                "member": {
-                    "shape": "FooEnum"
-                }
-            },
-            "FooEnumSet": {
-                "type": "list",
-                "member": {
-                    "shape": "FooEnum"
-                }
-            },
-            "FooEnumMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "FooEnum"
                 }
             },
             "String": {
@@ -2678,6 +2678,31 @@
             "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
+            "IntegerEnum": {
+                "type": "integer",
+                "box": true
+            },
+            "IntegerEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "IntegerEnum"
+                }
+            },
+            "IntegerEnumMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "IntegerEnum"
+                }
+            },
+            "IntegerEnumSet": {
+                "type": "list",
+                "member": {
+                    "shape": "IntegerEnum"
+                }
+            },
             "JsonIntEnumsInputOutput": {
                 "type": "structure",
                 "members": {
@@ -2699,31 +2724,6 @@
                     "integerEnumMap": {
                         "shape": "IntegerEnumMap"
                     }
-                }
-            },
-            "IntegerEnum": {
-                "type": "integer",
-                "box": true
-            },
-            "IntegerEnumList": {
-                "type": "list",
-                "member": {
-                    "shape": "IntegerEnum"
-                }
-            },
-            "IntegerEnumSet": {
-                "type": "list",
-                "member": {
-                    "shape": "IntegerEnum"
-                }
-            },
-            "IntegerEnumMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "IntegerEnum"
                 }
             },
             "String": {
@@ -2794,6 +2794,52 @@
             "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "BooleanList": {
+                "type": "list",
+                "member": {
+                    "shape": "Boolean"
+                }
+            },
+            "FooEnum": {
+                "type": "string",
+                "enum": [
+                    "Foo",
+                    "Baz",
+                    "Bar",
+                    "1",
+                    "0"
+                ]
+            },
+            "FooEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "FooEnum"
+                }
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "IntegerEnum": {
+                "type": "integer",
+                "box": true
+            },
+            "IntegerEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "IntegerEnum"
+                }
+            },
+            "IntegerList": {
+                "type": "list",
+                "member": {
+                    "shape": "Integer"
+                }
+            },
             "JsonListsInputOutput": {
                 "type": "structure",
                 "members": {
@@ -2827,6 +2873,16 @@
                     }
                 }
             },
+            "NestedStringList": {
+                "type": "list",
+                "member": {
+                    "shape": "StringList"
+                },
+                "documentation": "<p>A list of lists of strings.</p>"
+            },
+            "String": {
+                "type": "string"
+            },
             "StringList": {
                 "type": "list",
                 "member": {
@@ -2838,43 +2894,6 @@
                 "member": {
                     "shape": "String"
                 }
-            },
-            "IntegerList": {
-                "type": "list",
-                "member": {
-                    "shape": "Integer"
-                }
-            },
-            "BooleanList": {
-                "type": "list",
-                "member": {
-                    "shape": "Boolean"
-                }
-            },
-            "TimestampList": {
-                "type": "list",
-                "member": {
-                    "shape": "Timestamp"
-                }
-            },
-            "FooEnumList": {
-                "type": "list",
-                "member": {
-                    "shape": "FooEnum"
-                }
-            },
-            "IntegerEnumList": {
-                "type": "list",
-                "member": {
-                    "shape": "IntegerEnum"
-                }
-            },
-            "NestedStringList": {
-                "type": "list",
-                "member": {
-                    "shape": "StringList"
-                },
-                "documentation": "<p>A list of lists of strings.</p>"
             },
             "StructureList": {
                 "type": "list",
@@ -2895,33 +2914,14 @@
                     }
                 }
             },
-            "String": {
-                "type": "string"
-            },
-            "IntegerEnum": {
-                "type": "integer",
-                "box": true
-            },
-            "FooEnum": {
-                "type": "string",
-                "enum": [
-                    "Foo",
-                    "Baz",
-                    "Bar",
-                    "1",
-                    "0"
-                ]
-            },
             "Timestamp": {
                 "type": "timestamp"
             },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
-            },
-            "Integer": {
-                "type": "integer",
-                "box": true
+            "TimestampList": {
+                "type": "list",
+                "member": {
+                    "shape": "Timestamp"
+                }
             }
         },
         "cases": [
@@ -3047,6 +3047,67 @@
             "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "DenseBooleanMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "Boolean"
+                }
+            },
+            "DenseNumberMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "Integer"
+                }
+            },
+            "DenseSetMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "StringSet"
+                }
+            },
+            "DenseStringMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
+                }
+            },
+            "DenseStructMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "GreetingStruct"
+                }
+            },
+            "GreetingStruct": {
+                "type": "structure",
+                "members": {
+                    "hi": {
+                        "shape": "String"
+                    }
+                }
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
             "JsonMapsInputOutput": {
                 "type": "structure",
                 "members": {
@@ -3067,74 +3128,13 @@
                     }
                 }
             },
-            "DenseStructMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "GreetingStruct"
-                }
-            },
-            "DenseNumberMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "Integer"
-                }
-            },
-            "DenseBooleanMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "Boolean"
-                }
-            },
-            "DenseStringMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "String"
-                }
-            },
-            "DenseSetMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "StringSet"
-                }
+            "String": {
+                "type": "string"
             },
             "StringSet": {
                 "type": "list",
                 "member": {
                     "shape": "String"
-                }
-            },
-            "String": {
-                "type": "string"
-            },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
-            },
-            "Integer": {
-                "type": "integer",
-                "box": true
-            },
-            "GreetingStruct": {
-                "type": "structure",
-                "members": {
-                    "hi": {
-                        "shape": "String"
-                    }
                 }
             }
         },
@@ -3288,6 +3288,18 @@
             "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
+            "DateTime": {
+                "type": "timestamp",
+                "timestampFormat": "iso8601"
+            },
+            "EpochSeconds": {
+                "type": "timestamp",
+                "timestampFormat": "unixTimestamp"
+            },
+            "HttpDate": {
+                "type": "timestamp",
+                "timestampFormat": "rfc822"
+            },
             "JsonTimestampsInputOutput": {
                 "type": "structure",
                 "members": {
@@ -3314,14 +3326,7 @@
                     }
                 }
             },
-            "Timestamp": {
-                "type": "timestamp"
-            },
             "SyntheticTimestamp_date_time": {
-                "type": "timestamp",
-                "timestampFormat": "iso8601"
-            },
-            "DateTime": {
                 "type": "timestamp",
                 "timestampFormat": "iso8601"
             },
@@ -3329,17 +3334,12 @@
                 "type": "timestamp",
                 "timestampFormat": "unixTimestamp"
             },
-            "EpochSeconds": {
-                "type": "timestamp",
-                "timestampFormat": "unixTimestamp"
-            },
             "SyntheticTimestamp_http_date": {
                 "type": "timestamp",
                 "timestampFormat": "rfc822"
             },
-            "HttpDate": {
-                "type": "timestamp",
-                "timestampFormat": "rfc822"
+            "Timestamp": {
+                "type": "timestamp"
             }
         },
         "cases": [
@@ -3546,14 +3546,34 @@
             "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
-            "UnionInputOutput": {
+            "Blob": {
+                "type": "blob"
+            },
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "FooEnum": {
+                "type": "string",
+                "enum": [
+                    "Foo",
+                    "Baz",
+                    "Bar",
+                    "1",
+                    "0"
+                ]
+            },
+            "GreetingStruct": {
                 "type": "structure",
                 "members": {
-                    "contents": {
-                        "shape": "MyUnion"
+                    "hi": {
+                        "shape": "String"
                     }
-                },
-                "documentation": "<p>A shared structure that contains a single union member.</p>"
+                }
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
             },
             "MyUnion": {
                 "type": "structure",
@@ -3592,32 +3612,16 @@
                 "documentation": "<p>A union with a representative set of types for members.</p>",
                 "union": true
             },
+            "RenamedGreeting": {
+                "type": "structure",
+                "members": {
+                    "salutation": {
+                        "shape": "String"
+                    }
+                }
+            },
             "String": {
                 "type": "string"
-            },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
-            },
-            "Integer": {
-                "type": "integer",
-                "box": true
-            },
-            "Blob": {
-                "type": "blob"
-            },
-            "Timestamp": {
-                "type": "timestamp"
-            },
-            "FooEnum": {
-                "type": "string",
-                "enum": [
-                    "Foo",
-                    "Baz",
-                    "Bar",
-                    "1",
-                    "0"
-                ]
             },
             "StringList": {
                 "type": "list",
@@ -3634,21 +3638,17 @@
                     "shape": "String"
                 }
             },
-            "GreetingStruct": {
-                "type": "structure",
-                "members": {
-                    "hi": {
-                        "shape": "String"
-                    }
-                }
+            "Timestamp": {
+                "type": "timestamp"
             },
-            "RenamedGreeting": {
+            "UnionInputOutput": {
                 "type": "structure",
                 "members": {
-                    "salutation": {
-                        "shape": "String"
+                    "contents": {
+                        "shape": "MyUnion"
                     }
-                }
+                },
+                "documentation": "<p>A shared structure that contains a single union member.</p>"
             }
         },
         "cases": [
@@ -3973,6 +3973,9 @@
             "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
+            "JsonValue": {
+                "type": "string"
+            },
             "MediaTypeHeaderOutput": {
                 "type": "structure",
                 "members": {
@@ -3983,9 +3986,6 @@
                         "locationName": "X-Json"
                     }
                 }
-            },
-            "JsonValue": {
-                "type": "string"
             }
         },
         "cases": [
@@ -4159,6 +4159,9 @@
                     }
                 }
             },
+            "String": {
+                "type": "string"
+            },
             "UnionWithJsonName": {
                 "type": "structure",
                 "members": {
@@ -4175,9 +4178,6 @@
                     }
                 },
                 "union": true
-            },
-            "String": {
-                "type": "string"
             }
         },
         "cases": [
@@ -4305,9 +4305,6 @@
                     }
                 }
             },
-            "String": {
-                "type": "string"
-            },
             "RecursiveShapesInputOutputNested2": {
                 "type": "structure",
                 "members": {
@@ -4318,6 +4315,9 @@
                         "shape": "RecursiveShapesInputOutputNested1"
                     }
                 }
+            },
+            "String": {
+                "type": "string"
             }
         },
         "cases": [
@@ -4380,6 +4380,26 @@
             "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "Double": {
+                "type": "double",
+                "box": true
+            },
+            "Float": {
+                "type": "float",
+                "box": true
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "Long": {
+                "type": "long",
+                "box": true
+            },
             "SimpleScalarPropertiesInputOutput": {
                 "type": "structure",
                 "members": {
@@ -4420,26 +4440,6 @@
             },
             "String": {
                 "type": "string"
-            },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
-            },
-            "Integer": {
-                "type": "integer",
-                "box": true
-            },
-            "Long": {
-                "type": "long",
-                "box": true
-            },
-            "Float": {
-                "type": "float",
-                "box": true
-            },
-            "Double": {
-                "type": "double",
-                "box": true
             }
         },
         "cases": [
@@ -4605,6 +4605,33 @@
             "uid": "rest-json-protocol-2019-12-16"
         },
         "shapes": {
+            "DateTime": {
+                "type": "timestamp",
+                "timestampFormat": "iso8601"
+            },
+            "EpochSeconds": {
+                "type": "timestamp",
+                "timestampFormat": "unixTimestamp"
+            },
+            "HttpDate": {
+                "type": "timestamp",
+                "timestampFormat": "rfc822"
+            },
+            "SyntheticTimestamp_date_time": {
+                "type": "timestamp",
+                "timestampFormat": "iso8601"
+            },
+            "SyntheticTimestamp_epoch_seconds": {
+                "type": "timestamp",
+                "timestampFormat": "unixTimestamp"
+            },
+            "SyntheticTimestamp_http_date": {
+                "type": "timestamp",
+                "timestampFormat": "rfc822"
+            },
+            "Timestamp": {
+                "type": "timestamp"
+            },
             "TimestampFormatHeadersIO": {
                 "type": "structure",
                 "members": {
@@ -4644,33 +4671,6 @@
                         "locationName": "X-targetDateTime"
                     }
                 }
-            },
-            "SyntheticTimestamp_epoch_seconds": {
-                "type": "timestamp",
-                "timestampFormat": "unixTimestamp"
-            },
-            "SyntheticTimestamp_http_date": {
-                "type": "timestamp",
-                "timestampFormat": "rfc822"
-            },
-            "SyntheticTimestamp_date_time": {
-                "type": "timestamp",
-                "timestampFormat": "iso8601"
-            },
-            "Timestamp": {
-                "type": "timestamp"
-            },
-            "EpochSeconds": {
-                "type": "timestamp",
-                "timestampFormat": "unixTimestamp"
-            },
-            "HttpDate": {
-                "type": "timestamp",
-                "timestampFormat": "rfc822"
-            },
-            "DateTime": {
-                "type": "timestamp",
-                "timestampFormat": "iso8601"
             }
         },
         "cases": [

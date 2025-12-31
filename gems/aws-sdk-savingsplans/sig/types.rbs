@@ -49,9 +49,9 @@ module Aws::SavingsPlans
     class DescribeSavingsPlansOfferingRatesRequest
       attr_accessor savings_plan_offering_ids: ::Array[::String]
       attr_accessor savings_plan_payment_options: ::Array[("All Upfront" | "Partial Upfront" | "No Upfront")]
-      attr_accessor savings_plan_types: ::Array[("Compute" | "EC2Instance" | "SageMaker")]
-      attr_accessor products: ::Array[("EC2" | "Fargate" | "Lambda" | "SageMaker")]
-      attr_accessor service_codes: ::Array[("AmazonEC2" | "AmazonECS" | "AmazonEKS" | "AWSLambda" | "AmazonSageMaker")]
+      attr_accessor savings_plan_types: ::Array[("Compute" | "EC2Instance" | "SageMaker" | "Database")]
+      attr_accessor products: ::Array[("EC2" | "Fargate" | "Lambda" | "SageMaker" | "RDS" | "DSQL" | "DynamoDB" | "ElastiCache" | "DocDB" | "Neptune" | "Timestream" | "Keyspaces" | "DMS")]
+      attr_accessor service_codes: ::Array[("AmazonEC2" | "AmazonECS" | "AmazonEKS" | "AWSLambda" | "AmazonSageMaker" | "AmazonRDS" | "AuroraDSQL" | "AmazonDynamoDB" | "AmazonElastiCache" | "AmazonDocDB" | "AmazonNeptune" | "AmazonTimestream" | "AmazonMCS" | "AWSDatabaseMigrationSvc")]
       attr_accessor usage_types: ::Array[::String]
       attr_accessor operations: ::Array[::String]
       attr_accessor filters: ::Array[Types::SavingsPlanOfferingRateFilterElement]
@@ -69,10 +69,10 @@ module Aws::SavingsPlans
     class DescribeSavingsPlansOfferingsRequest
       attr_accessor offering_ids: ::Array[::String]
       attr_accessor payment_options: ::Array[("All Upfront" | "Partial Upfront" | "No Upfront")]
-      attr_accessor product_type: ("EC2" | "Fargate" | "Lambda" | "SageMaker")
-      attr_accessor plan_types: ::Array[("Compute" | "EC2Instance" | "SageMaker")]
+      attr_accessor product_type: ("EC2" | "Fargate" | "Lambda" | "SageMaker" | "RDS" | "DSQL" | "DynamoDB" | "ElastiCache" | "DocDB" | "Neptune" | "Timestream" | "Keyspaces" | "DMS")
+      attr_accessor plan_types: ::Array[("Compute" | "EC2Instance" | "SageMaker" | "Database")]
       attr_accessor durations: ::Array[::Integer]
-      attr_accessor currencies: ::Array[("CNY" | "USD")]
+      attr_accessor currencies: ::Array[("CNY" | "USD" | "EUR")]
       attr_accessor descriptions: ::Array[::String]
       attr_accessor service_codes: ::Array[::String]
       attr_accessor usage_types: ::Array[::String]
@@ -123,9 +123,9 @@ module Aws::SavingsPlans
     class ParentSavingsPlanOffering
       attr_accessor offering_id: ::String
       attr_accessor payment_option: ("All Upfront" | "Partial Upfront" | "No Upfront")
-      attr_accessor plan_type: ("Compute" | "EC2Instance" | "SageMaker")
+      attr_accessor plan_type: ("Compute" | "EC2Instance" | "SageMaker" | "Database")
       attr_accessor duration_seconds: ::Integer
-      attr_accessor currency: ("CNY" | "USD")
+      attr_accessor currency: ("CNY" | "USD" | "EUR")
       attr_accessor plan_description: ::String
       SENSITIVE: []
     end
@@ -156,10 +156,10 @@ module Aws::SavingsPlans
       attr_accessor state: ("payment-pending" | "payment-failed" | "active" | "retired" | "queued" | "queued-deleted" | "pending-return" | "returned")
       attr_accessor region: ::String
       attr_accessor ec2_instance_family: ::String
-      attr_accessor savings_plan_type: ("Compute" | "EC2Instance" | "SageMaker")
+      attr_accessor savings_plan_type: ("Compute" | "EC2Instance" | "SageMaker" | "Database")
       attr_accessor payment_option: ("All Upfront" | "Partial Upfront" | "No Upfront")
-      attr_accessor product_types: ::Array[("EC2" | "Fargate" | "Lambda" | "SageMaker")]
-      attr_accessor currency: ("CNY" | "USD")
+      attr_accessor product_types: ::Array[("EC2" | "Fargate" | "Lambda" | "SageMaker" | "RDS" | "DSQL" | "DynamoDB" | "ElastiCache" | "DocDB" | "Neptune" | "Timestream" | "Keyspaces" | "DMS")]
+      attr_accessor currency: ("CNY" | "USD" | "EUR")
       attr_accessor commitment: ::String
       attr_accessor upfront_payment_amount: ::String
       attr_accessor recurring_payment_amount: ::String
@@ -170,19 +170,19 @@ module Aws::SavingsPlans
     end
 
     class SavingsPlanFilter
-      attr_accessor name: ("region" | "ec2-instance-family" | "commitment" | "upfront" | "term" | "savings-plan-type" | "payment-option" | "start" | "end")
+      attr_accessor name: ("region" | "ec2-instance-family" | "commitment" | "upfront" | "term" | "savings-plan-type" | "payment-option" | "start" | "end" | "instance-family")
       attr_accessor values: ::Array[::String]
       SENSITIVE: []
     end
 
     class SavingsPlanOffering
       attr_accessor offering_id: ::String
-      attr_accessor product_types: ::Array[("EC2" | "Fargate" | "Lambda" | "SageMaker")]
-      attr_accessor plan_type: ("Compute" | "EC2Instance" | "SageMaker")
+      attr_accessor product_types: ::Array[("EC2" | "Fargate" | "Lambda" | "SageMaker" | "RDS" | "DSQL" | "DynamoDB" | "ElastiCache" | "DocDB" | "Neptune" | "Timestream" | "Keyspaces" | "DMS")]
+      attr_accessor plan_type: ("Compute" | "EC2Instance" | "SageMaker" | "Database")
       attr_accessor description: ::String
       attr_accessor payment_option: ("All Upfront" | "Partial Upfront" | "No Upfront")
       attr_accessor duration_seconds: ::Integer
-      attr_accessor currency: ("CNY" | "USD")
+      attr_accessor currency: ("CNY" | "USD" | "EUR")
       attr_accessor service_code: ::String
       attr_accessor usage_type: ::String
       attr_accessor operation: ::String
@@ -205,9 +205,9 @@ module Aws::SavingsPlans
     class SavingsPlanOfferingRate
       attr_accessor savings_plan_offering: Types::ParentSavingsPlanOffering
       attr_accessor rate: ::String
-      attr_accessor unit: ("Hrs" | "Lambda-GB-Second" | "Request")
-      attr_accessor product_type: ("EC2" | "Fargate" | "Lambda" | "SageMaker")
-      attr_accessor service_code: ("AmazonEC2" | "AmazonECS" | "AmazonEKS" | "AWSLambda" | "AmazonSageMaker")
+      attr_accessor unit: ("Hrs" | "Lambda-GB-Second" | "Request" | "ACU-Hr" | "ReadRequestUnits" | "WriteRequestUnits" | "ReadCapacityUnit-Hrs" | "WriteCapacityUnit-Hrs" | "ReplicatedWriteRequestUnits" | "ReplicatedWriteCapacityUnit-Hrs" | "GB-Hours" | "DPU" | "ElastiCacheProcessingUnit" | "DCU-Hr" | "NCU-hr")
+      attr_accessor product_type: ("EC2" | "Fargate" | "Lambda" | "SageMaker" | "RDS" | "DSQL" | "DynamoDB" | "ElastiCache" | "DocDB" | "Neptune" | "Timestream" | "Keyspaces" | "DMS")
+      attr_accessor service_code: ("AmazonEC2" | "AmazonECS" | "AmazonEKS" | "AWSLambda" | "AmazonSageMaker" | "AmazonRDS" | "AuroraDSQL" | "AmazonDynamoDB" | "AmazonElastiCache" | "AmazonDocDB" | "AmazonNeptune" | "AmazonTimestream" | "AmazonMCS" | "AWSDatabaseMigrationSvc")
       attr_accessor usage_type: ::String
       attr_accessor operation: ::String
       attr_accessor properties: ::Array[Types::SavingsPlanOfferingRateProperty]
@@ -228,10 +228,10 @@ module Aws::SavingsPlans
 
     class SavingsPlanRate
       attr_accessor rate: ::String
-      attr_accessor currency: ("CNY" | "USD")
-      attr_accessor unit: ("Hrs" | "Lambda-GB-Second" | "Request")
-      attr_accessor product_type: ("EC2" | "Fargate" | "Lambda" | "SageMaker")
-      attr_accessor service_code: ("AmazonEC2" | "AmazonECS" | "AmazonEKS" | "AWSLambda" | "AmazonSageMaker")
+      attr_accessor currency: ("CNY" | "USD" | "EUR")
+      attr_accessor unit: ("Hrs" | "Lambda-GB-Second" | "Request" | "ACU-Hr" | "ReadRequestUnits" | "WriteRequestUnits" | "ReadCapacityUnit-Hrs" | "WriteCapacityUnit-Hrs" | "ReplicatedWriteRequestUnits" | "ReplicatedWriteCapacityUnit-Hrs" | "GB-Hours" | "DPU" | "ElastiCacheProcessingUnit" | "DCU-Hr" | "NCU-hr")
+      attr_accessor product_type: ("EC2" | "Fargate" | "Lambda" | "SageMaker" | "RDS" | "DSQL" | "DynamoDB" | "ElastiCache" | "DocDB" | "Neptune" | "Timestream" | "Keyspaces" | "DMS")
+      attr_accessor service_code: ("AmazonEC2" | "AmazonECS" | "AmazonEKS" | "AWSLambda" | "AmazonSageMaker" | "AmazonRDS" | "AuroraDSQL" | "AmazonDynamoDB" | "AmazonElastiCache" | "AmazonDocDB" | "AmazonNeptune" | "AmazonTimestream" | "AmazonMCS" | "AWSDatabaseMigrationSvc")
       attr_accessor usage_type: ::String
       attr_accessor operation: ::String
       attr_accessor properties: ::Array[Types::SavingsPlanRateProperty]

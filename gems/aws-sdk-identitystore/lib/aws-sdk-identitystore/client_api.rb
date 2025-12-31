@@ -15,6 +15,7 @@ module Aws::IdentityStore
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccessDeniedExceptionReason = Shapes::StringShape.new(name: 'AccessDeniedExceptionReason')
     Address = Shapes::StructureShape.new(name: 'Address')
     Addresses = Shapes::ListShape.new(name: 'Addresses')
     AlternateIdentifier = Shapes::UnionShape.new(name: 'AlternateIdentifier')
@@ -30,6 +31,7 @@ module Aws::IdentityStore
     CreateGroupResponse = Shapes::StructureShape.new(name: 'CreateGroupResponse')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
     CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
+    DateType = Shapes::TimestampShape.new(name: 'DateType')
     DeleteGroupMembershipRequest = Shapes::StructureShape.new(name: 'DeleteGroupMembershipRequest')
     DeleteGroupMembershipResponse = Shapes::StructureShape.new(name: 'DeleteGroupMembershipResponse')
     DeleteGroupRequest = Shapes::StructureShape.new(name: 'DeleteGroupRequest')
@@ -45,6 +47,9 @@ module Aws::IdentityStore
     Email = Shapes::StructureShape.new(name: 'Email')
     Emails = Shapes::ListShape.new(name: 'Emails')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
+    ExtensionName = Shapes::StringShape.new(name: 'ExtensionName')
+    ExtensionNames = Shapes::ListShape.new(name: 'ExtensionNames')
+    Extensions = Shapes::MapShape.new(name: 'Extensions')
     ExternalId = Shapes::StructureShape.new(name: 'ExternalId')
     ExternalIdIdentifier = Shapes::StringShape.new(name: 'ExternalIdIdentifier')
     ExternalIdIssuer = Shapes::StringShape.new(name: 'ExternalIdIssuer')
@@ -83,15 +88,20 @@ module Aws::IdentityStore
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     PhoneNumber = Shapes::StructureShape.new(name: 'PhoneNumber')
     PhoneNumbers = Shapes::ListShape.new(name: 'PhoneNumbers')
+    Photo = Shapes::StructureShape.new(name: 'Photo')
+    Photos = Shapes::ListShape.new(name: 'Photos')
     RequestId = Shapes::StringShape.new(name: 'RequestId')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceNotFoundExceptionReason = Shapes::StringShape.new(name: 'ResourceNotFoundExceptionReason')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     RetryAfterSeconds = Shapes::IntegerShape.new(name: 'RetryAfterSeconds')
     SensitiveBooleanType = Shapes::BooleanShape.new(name: 'SensitiveBooleanType')
     SensitiveStringType = Shapes::StringShape.new(name: 'SensitiveStringType')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    StringType = Shapes::StringShape.new(name: 'StringType')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    ThrottlingExceptionReason = Shapes::StringShape.new(name: 'ThrottlingExceptionReason')
     UniqueAttribute = Shapes::StructureShape.new(name: 'UniqueAttribute')
     UpdateGroupRequest = Shapes::StructureShape.new(name: 'UpdateGroupRequest')
     UpdateGroupResponse = Shapes::StructureShape.new(name: 'UpdateGroupResponse')
@@ -99,11 +109,14 @@ module Aws::IdentityStore
     UpdateUserResponse = Shapes::StructureShape.new(name: 'UpdateUserResponse')
     User = Shapes::StructureShape.new(name: 'User')
     UserName = Shapes::StringShape.new(name: 'UserName')
+    UserStatus = Shapes::StringShape.new(name: 'UserStatus')
     Users = Shapes::ListShape.new(name: 'Users')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     AccessDeniedException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    AccessDeniedException.add_member(:reason, Shapes::ShapeRef.new(shape: AccessDeniedExceptionReason, location_name: "Reason"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     Address.add_member(:street_address, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "StreetAddress"))
@@ -169,10 +182,14 @@ module Aws::IdentityStore
     CreateUserRequest.add_member(:preferred_language, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "PreferredLanguage"))
     CreateUserRequest.add_member(:locale, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Locale"))
     CreateUserRequest.add_member(:timezone, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Timezone"))
+    CreateUserRequest.add_member(:photos, Shapes::ShapeRef.new(shape: Photos, location_name: "Photos"))
+    CreateUserRequest.add_member(:website, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Website"))
+    CreateUserRequest.add_member(:birthdate, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Birthdate"))
+    CreateUserRequest.add_member(:extensions, Shapes::ShapeRef.new(shape: Extensions, location_name: "Extensions"))
     CreateUserRequest.struct_class = Types::CreateUserRequest
 
-    CreateUserResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "UserId"))
     CreateUserResponse.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
+    CreateUserResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "UserId"))
     CreateUserResponse.struct_class = Types::CreateUserResponse
 
     DeleteGroupMembershipRequest.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
@@ -201,6 +218,10 @@ module Aws::IdentityStore
     DescribeGroupMembershipResponse.add_member(:membership_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "MembershipId"))
     DescribeGroupMembershipResponse.add_member(:group_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "GroupId"))
     DescribeGroupMembershipResponse.add_member(:member_id, Shapes::ShapeRef.new(shape: MemberId, required: true, location_name: "MemberId"))
+    DescribeGroupMembershipResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateType, location_name: "CreatedAt"))
+    DescribeGroupMembershipResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "UpdatedAt"))
+    DescribeGroupMembershipResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: StringType, location_name: "CreatedBy"))
+    DescribeGroupMembershipResponse.add_member(:updated_by, Shapes::ShapeRef.new(shape: StringType, location_name: "UpdatedBy"))
     DescribeGroupMembershipResponse.struct_class = Types::DescribeGroupMembershipResponse
 
     DescribeGroupRequest.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
@@ -211,15 +232,21 @@ module Aws::IdentityStore
     DescribeGroupResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: GroupDisplayName, location_name: "DisplayName"))
     DescribeGroupResponse.add_member(:external_ids, Shapes::ShapeRef.new(shape: ExternalIds, location_name: "ExternalIds"))
     DescribeGroupResponse.add_member(:description, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Description"))
+    DescribeGroupResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateType, location_name: "CreatedAt"))
+    DescribeGroupResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "UpdatedAt"))
+    DescribeGroupResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: StringType, location_name: "CreatedBy"))
+    DescribeGroupResponse.add_member(:updated_by, Shapes::ShapeRef.new(shape: StringType, location_name: "UpdatedBy"))
     DescribeGroupResponse.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
     DescribeGroupResponse.struct_class = Types::DescribeGroupResponse
 
     DescribeUserRequest.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
     DescribeUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "UserId"))
+    DescribeUserRequest.add_member(:extensions, Shapes::ShapeRef.new(shape: ExtensionNames, location_name: "Extensions"))
     DescribeUserRequest.struct_class = Types::DescribeUserRequest
 
-    DescribeUserResponse.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, location_name: "UserName"))
+    DescribeUserResponse.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
     DescribeUserResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "UserId"))
+    DescribeUserResponse.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, location_name: "UserName"))
     DescribeUserResponse.add_member(:external_ids, Shapes::ShapeRef.new(shape: ExternalIds, location_name: "ExternalIds"))
     DescribeUserResponse.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     DescribeUserResponse.add_member(:display_name, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "DisplayName"))
@@ -233,7 +260,15 @@ module Aws::IdentityStore
     DescribeUserResponse.add_member(:preferred_language, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "PreferredLanguage"))
     DescribeUserResponse.add_member(:locale, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Locale"))
     DescribeUserResponse.add_member(:timezone, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Timezone"))
-    DescribeUserResponse.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
+    DescribeUserResponse.add_member(:user_status, Shapes::ShapeRef.new(shape: UserStatus, location_name: "UserStatus"))
+    DescribeUserResponse.add_member(:photos, Shapes::ShapeRef.new(shape: Photos, location_name: "Photos"))
+    DescribeUserResponse.add_member(:website, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Website"))
+    DescribeUserResponse.add_member(:birthdate, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Birthdate"))
+    DescribeUserResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateType, location_name: "CreatedAt"))
+    DescribeUserResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: StringType, location_name: "CreatedBy"))
+    DescribeUserResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "UpdatedAt"))
+    DescribeUserResponse.add_member(:updated_by, Shapes::ShapeRef.new(shape: StringType, location_name: "UpdatedBy"))
+    DescribeUserResponse.add_member(:extensions, Shapes::ShapeRef.new(shape: Extensions, location_name: "Extensions"))
     DescribeUserResponse.struct_class = Types::DescribeUserResponse
 
     Email.add_member(:value, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Value"))
@@ -242,6 +277,11 @@ module Aws::IdentityStore
     Email.struct_class = Types::Email
 
     Emails.member = Shapes::ShapeRef.new(shape: Email)
+
+    ExtensionNames.member = Shapes::ShapeRef.new(shape: ExtensionName)
+
+    Extensions.key = Shapes::ShapeRef.new(shape: ExtensionName)
+    Extensions.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
     ExternalId.add_member(:issuer, Shapes::ShapeRef.new(shape: ExternalIdIssuer, required: true, location_name: "Issuer"))
     ExternalId.add_member(:id, Shapes::ShapeRef.new(shape: ExternalIdIdentifier, required: true, location_name: "Id"))
@@ -276,14 +316,18 @@ module Aws::IdentityStore
     GetUserIdRequest.add_member(:alternate_identifier, Shapes::ShapeRef.new(shape: AlternateIdentifier, required: true, location_name: "AlternateIdentifier"))
     GetUserIdRequest.struct_class = Types::GetUserIdRequest
 
-    GetUserIdResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "UserId"))
     GetUserIdResponse.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
+    GetUserIdResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "UserId"))
     GetUserIdResponse.struct_class = Types::GetUserIdResponse
 
     Group.add_member(:group_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "GroupId"))
     Group.add_member(:display_name, Shapes::ShapeRef.new(shape: GroupDisplayName, location_name: "DisplayName"))
     Group.add_member(:external_ids, Shapes::ShapeRef.new(shape: ExternalIds, location_name: "ExternalIds"))
     Group.add_member(:description, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Description"))
+    Group.add_member(:created_at, Shapes::ShapeRef.new(shape: DateType, location_name: "CreatedAt"))
+    Group.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "UpdatedAt"))
+    Group.add_member(:created_by, Shapes::ShapeRef.new(shape: StringType, location_name: "CreatedBy"))
+    Group.add_member(:updated_by, Shapes::ShapeRef.new(shape: StringType, location_name: "UpdatedBy"))
     Group.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
     Group.struct_class = Types::Group
 
@@ -293,6 +337,10 @@ module Aws::IdentityStore
     GroupMembership.add_member(:membership_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "MembershipId"))
     GroupMembership.add_member(:group_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "GroupId"))
     GroupMembership.add_member(:member_id, Shapes::ShapeRef.new(shape: MemberId, location_name: "MemberId"))
+    GroupMembership.add_member(:created_at, Shapes::ShapeRef.new(shape: DateType, location_name: "CreatedAt"))
+    GroupMembership.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "UpdatedAt"))
+    GroupMembership.add_member(:created_by, Shapes::ShapeRef.new(shape: StringType, location_name: "CreatedBy"))
+    GroupMembership.add_member(:updated_by, Shapes::ShapeRef.new(shape: StringType, location_name: "UpdatedBy"))
     GroupMembership.struct_class = Types::GroupMembership
 
     GroupMembershipExistenceResult.add_member(:group_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "GroupId"))
@@ -321,7 +369,7 @@ module Aws::IdentityStore
 
     ListGroupMembershipsForMemberRequest.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
     ListGroupMembershipsForMemberRequest.add_member(:member_id, Shapes::ShapeRef.new(shape: MemberId, required: true, location_name: "MemberId"))
-    ListGroupMembershipsForMemberRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListGroupMembershipsForMemberRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListGroupMembershipsForMemberRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListGroupMembershipsForMemberRequest.struct_class = Types::ListGroupMembershipsForMemberRequest
 
@@ -331,7 +379,7 @@ module Aws::IdentityStore
 
     ListGroupMembershipsRequest.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
     ListGroupMembershipsRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "GroupId"))
-    ListGroupMembershipsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListGroupMembershipsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListGroupMembershipsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListGroupMembershipsRequest.struct_class = Types::ListGroupMembershipsRequest
 
@@ -340,7 +388,7 @@ module Aws::IdentityStore
     ListGroupMembershipsResponse.struct_class = Types::ListGroupMembershipsResponse
 
     ListGroupsRequest.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
-    ListGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListGroupsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, deprecated: true, location_name: "Filters", metadata: {"deprecatedMessage" => "Using filters with ListGroups API is deprecated, please use GetGroupId API instead."}))
     ListGroupsRequest.struct_class = Types::ListGroupsRequest
@@ -350,7 +398,8 @@ module Aws::IdentityStore
     ListGroupsResponse.struct_class = Types::ListGroupsResponse
 
     ListUsersRequest.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
-    ListUsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListUsersRequest.add_member(:extensions, Shapes::ShapeRef.new(shape: ExtensionNames, location_name: "Extensions"))
+    ListUsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box" => true}))
     ListUsersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListUsersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, deprecated: true, location_name: "Filters", metadata: {"deprecatedMessage" => "Using filters with ListUsers API is deprecated, please use GetGroupId API instead."}))
     ListUsersRequest.struct_class = Types::ListUsersRequest
@@ -380,8 +429,17 @@ module Aws::IdentityStore
 
     PhoneNumbers.member = Shapes::ShapeRef.new(shape: PhoneNumber)
 
+    Photo.add_member(:value, Shapes::ShapeRef.new(shape: SensitiveStringType, required: true, location_name: "Value"))
+    Photo.add_member(:type, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Type"))
+    Photo.add_member(:display, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Display"))
+    Photo.add_member(:primary, Shapes::ShapeRef.new(shape: SensitiveBooleanType, location_name: "Primary"))
+    Photo.struct_class = Types::Photo
+
+    Photos.member = Shapes::ShapeRef.new(shape: Photo)
+
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
+    ResourceNotFoundException.add_member(:reason, Shapes::ShapeRef.new(shape: ResourceNotFoundExceptionReason, location_name: "Reason"))
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     ResourceNotFoundException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -393,6 +451,7 @@ module Aws::IdentityStore
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     ThrottlingException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location_name: "RetryAfterSeconds"))
+    ThrottlingException.add_member(:reason, Shapes::ShapeRef.new(shape: ThrottlingExceptionReason, location_name: "Reason"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
     UniqueAttribute.add_member(:attribute_path, Shapes::ShapeRef.new(shape: AttributePath, required: true, location_name: "AttributePath"))
@@ -413,8 +472,9 @@ module Aws::IdentityStore
 
     UpdateUserResponse.struct_class = Types::UpdateUserResponse
 
-    User.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, location_name: "UserName"))
+    User.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
     User.add_member(:user_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "UserId"))
+    User.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, location_name: "UserName"))
     User.add_member(:external_ids, Shapes::ShapeRef.new(shape: ExternalIds, location_name: "ExternalIds"))
     User.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     User.add_member(:display_name, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "DisplayName"))
@@ -428,13 +488,22 @@ module Aws::IdentityStore
     User.add_member(:preferred_language, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "PreferredLanguage"))
     User.add_member(:locale, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Locale"))
     User.add_member(:timezone, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Timezone"))
-    User.add_member(:identity_store_id, Shapes::ShapeRef.new(shape: IdentityStoreId, required: true, location_name: "IdentityStoreId"))
+    User.add_member(:user_status, Shapes::ShapeRef.new(shape: UserStatus, location_name: "UserStatus"))
+    User.add_member(:photos, Shapes::ShapeRef.new(shape: Photos, location_name: "Photos"))
+    User.add_member(:website, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Website"))
+    User.add_member(:birthdate, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Birthdate"))
+    User.add_member(:created_at, Shapes::ShapeRef.new(shape: DateType, location_name: "CreatedAt"))
+    User.add_member(:created_by, Shapes::ShapeRef.new(shape: StringType, location_name: "CreatedBy"))
+    User.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "UpdatedAt"))
+    User.add_member(:updated_by, Shapes::ShapeRef.new(shape: StringType, location_name: "UpdatedBy"))
+    User.add_member(:extensions, Shapes::ShapeRef.new(shape: Extensions, location_name: "Extensions"))
     User.struct_class = Types::User
 
     Users.member = Shapes::ShapeRef.new(shape: User)
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     ValidationException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "Reason"))
     ValidationException.struct_class = Types::ValidationException
 
 
@@ -445,9 +514,11 @@ module Aws::IdentityStore
 
       api.metadata = {
         "apiVersion" => "2020-06-15",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "identitystore",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "IdentityStore",
         "serviceFullName" => "AWS SSO Identity Store",
         "serviceId" => "identitystore",

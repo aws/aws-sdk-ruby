@@ -280,6 +280,12 @@ module Aws
     end
 
     def protocol_helper
+      # Prioritize JSON over CBOR when CBOR is the configured protocol but both are supported. This is to match similar
+      # prioritization in service.rb code generation.
+      if @config.api.metadata['protocol'] == 'smithy-rpc-v2-cbor' && @config.api.metadata['protocols']&.include?('json')
+        return Stubbing::Protocols::Json.new
+      end
+
       case @config.api.metadata['protocol']
       when 'json'               then Stubbing::Protocols::Json
       when 'rest-json'          then Stubbing::Protocols::RestJson

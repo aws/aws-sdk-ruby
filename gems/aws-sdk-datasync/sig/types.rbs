@@ -220,6 +220,8 @@ module Aws::DataSync
       attr_accessor user: ::String
       attr_accessor domain: ::String
       attr_accessor password: ::String
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig
+      attr_accessor custom_secret_config: Types::CustomSecretConfig
       attr_accessor agent_arns: ::Array[::String]
       attr_accessor mount_options: Types::SmbMountOptions
       attr_accessor tags: ::Array[Types::TagListEntry]
@@ -483,6 +485,9 @@ module Aws::DataSync
       attr_accessor dns_ip_addresses: ::Array[::String]
       attr_accessor kerberos_principal: ::String
       attr_accessor authentication_type: ("NTLM" | "KERBEROS")
+      attr_accessor managed_secret_config: Types::ManagedSecretConfig
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig
+      attr_accessor custom_secret_config: Types::CustomSecretConfig
       SENSITIVE: []
     end
 
@@ -516,6 +521,15 @@ module Aws::DataSync
       attr_accessor files_prepared: ::Integer
       attr_accessor files_listed: Types::TaskExecutionFilesListedDetail
       attr_accessor files_failed: Types::TaskExecutionFilesFailedDetail
+      attr_accessor estimated_folders_to_delete: ::Integer
+      attr_accessor estimated_folders_to_transfer: ::Integer
+      attr_accessor folders_skipped: ::Integer
+      attr_accessor folders_prepared: ::Integer
+      attr_accessor folders_transferred: ::Integer
+      attr_accessor folders_verified: ::Integer
+      attr_accessor folders_deleted: ::Integer
+      attr_accessor folders_listed: Types::TaskExecutionFoldersListedDetail
+      attr_accessor folders_failed: Types::TaskExecutionFoldersFailedDetail
       attr_accessor launch_time: ::Time
       attr_accessor end_time: ::Time
       SENSITIVE: []
@@ -851,6 +865,21 @@ module Aws::DataSync
       SENSITIVE: []
     end
 
+    class TaskExecutionFoldersFailedDetail
+      attr_accessor list: ::Integer
+      attr_accessor prepare: ::Integer
+      attr_accessor transfer: ::Integer
+      attr_accessor verify: ::Integer
+      attr_accessor delete: ::Integer
+      SENSITIVE: []
+    end
+
+    class TaskExecutionFoldersListedDetail
+      attr_accessor at_source: ::Integer
+      attr_accessor at_destination_for_delete: ::Integer
+      SENSITIVE: []
+    end
+
     class TaskExecutionListEntry
       attr_accessor task_execution_arn: ::String
       attr_accessor status: ("QUEUED" | "CANCELLING" | "LAUNCHING" | "PREPARING" | "TRANSFERRING" | "VERIFYING" | "SUCCESS" | "ERROR")
@@ -1063,6 +1092,8 @@ module Aws::DataSync
       attr_accessor user: ::String
       attr_accessor domain: ::String
       attr_accessor password: ::String
+      attr_accessor cmk_secret_config: Types::CmkSecretConfig
+      attr_accessor custom_secret_config: Types::CustomSecretConfig
       attr_accessor agent_arns: ::Array[::String]
       attr_accessor mount_options: Types::SmbMountOptions
       attr_accessor authentication_type: ("NTLM" | "KERBEROS")

@@ -81,15 +81,15 @@ module Aws
 
       interface _DescribeAgreementResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAgreementOutput]
-        def acceptance_time: () -> ::Time
-        def acceptor: () -> Types::Acceptor
         def agreement_id: () -> ::String
-        def agreement_type: () -> ::String
-        def end_time: () -> ::Time
-        def estimated_charges: () -> Types::EstimatedCharges
-        def proposal_summary: () -> Types::ProposalSummary
+        def acceptor: () -> Types::Acceptor
         def proposer: () -> Types::Proposer
         def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def acceptance_time: () -> ::Time
+        def agreement_type: () -> ::String
+        def estimated_charges: () -> Types::EstimatedCharges
+        def proposal_summary: () -> Types::ProposalSummary
         def status: () -> ("ACTIVE" | "ARCHIVED" | "CANCELLED" | "EXPIRED" | "RENEWED" | "REPLACED" | "ROLLED_BACK" | "SUPERSEDED" | "TERMINATED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#describe_agreement-instance_method
@@ -125,12 +125,12 @@ module Aws
                                    values: Array[::String]?
                                  },
                                ],
-                               ?max_results: ::Integer,
-                               ?next_token: ::String,
                                ?sort: {
                                  sort_by: ::String?,
                                  sort_order: ("ASCENDING" | "DESCENDING")?
-                               }
+                               },
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
                              ) -> _SearchAgreementsResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchAgreementsResponseSuccess
     end

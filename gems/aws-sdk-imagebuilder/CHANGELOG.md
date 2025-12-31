@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.93.0 (2025-11-20)
+------------------
+
+* Feature - EC2 Image Builder now enables the distribution of existing AMIs, retry distribution, and define distribution workflows. It also supports automatic versioning for recipes and components, allowing automatic version increments and dynamic referencing in pipelines.
+
+1.92.0 (2025-11-14)
+------------------
+
+* Feature - EC2 Image Builder now supports invoking Lambda functions and executing Step Functions state machine through image workflows.
+
+1.91.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.90.0 (2025-10-17)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.89.0 (2025-09-29)
 ------------------
 

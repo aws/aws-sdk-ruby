@@ -49,6 +49,8 @@ module Aws::Kinesis
       attr_accessor shard_count: ::Integer
       attr_accessor stream_mode_details: Types::StreamModeDetails
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor warm_throughput_mi_bps: ::Integer
+      attr_accessor max_record_size_in_ki_b: ::Integer
       SENSITIVE: []
     end
 
@@ -75,6 +77,14 @@ module Aws::Kinesis
       attr_accessor stream_arn: ::String
       attr_accessor consumer_name: ::String
       attr_accessor consumer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccountSettingsInput < Aws::EmptyStructure
+    end
+
+    class DescribeAccountSettingsOutput
+      attr_accessor minimum_throughput_billing_commitment: Types::MinimumThroughputBillingCommitmentOutput
       SENSITIVE: []
     end
 
@@ -345,6 +355,19 @@ module Aws::Kinesis
       SENSITIVE: []
     end
 
+    class MinimumThroughputBillingCommitmentInput
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class MinimumThroughputBillingCommitmentOutput
+      attr_accessor status: ("ENABLED" | "DISABLED" | "ENABLED_UNTIL_EARLIEST_ALLOWED_END")
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor earliest_allowed_end_at: ::Time
+      SENSITIVE: []
+    end
+
     class ProvisionedThroughputExceededException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -522,6 +545,8 @@ module Aws::Kinesis
       attr_accessor key_id: ::String
       attr_accessor open_shard_count: ::Integer
       attr_accessor consumer_count: ::Integer
+      attr_accessor warm_throughput: Types::WarmThroughputObject
+      attr_accessor max_record_size_in_ki_b: ::Integer
       SENSITIVE: []
     end
 
@@ -578,6 +603,22 @@ module Aws::Kinesis
       SENSITIVE: []
     end
 
+    class UpdateAccountSettingsInput
+      attr_accessor minimum_throughput_billing_commitment: Types::MinimumThroughputBillingCommitmentInput
+      SENSITIVE: []
+    end
+
+    class UpdateAccountSettingsOutput
+      attr_accessor minimum_throughput_billing_commitment: Types::MinimumThroughputBillingCommitmentOutput
+      SENSITIVE: []
+    end
+
+    class UpdateMaxRecordSizeInput
+      attr_accessor stream_arn: ::String
+      attr_accessor max_record_size_in_ki_b: ::Integer
+      SENSITIVE: []
+    end
+
     class UpdateShardCountInput
       attr_accessor stream_name: ::String
       attr_accessor target_shard_count: ::Integer
@@ -597,11 +638,32 @@ module Aws::Kinesis
     class UpdateStreamModeInput
       attr_accessor stream_arn: ::String
       attr_accessor stream_mode_details: Types::StreamModeDetails
+      attr_accessor warm_throughput_mi_bps: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateStreamWarmThroughputInput
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_name: ::String
+      attr_accessor warm_throughput_mi_bps: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateStreamWarmThroughputOutput
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_name: ::String
+      attr_accessor warm_throughput: Types::WarmThroughputObject
       SENSITIVE: []
     end
 
     class ValidationException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WarmThroughputObject
+      attr_accessor target_mi_bps: ::Integer
+      attr_accessor current_mi_bps: ::Integer
       SENSITIVE: []
     end
 

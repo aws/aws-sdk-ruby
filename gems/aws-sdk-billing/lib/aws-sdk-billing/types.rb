@@ -532,6 +532,12 @@ module Aws::Billing
     #   The type of billing view.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] names
+    #   Filters the list of billing views by name. You can specify search
+    #   criteria to match billing view names based on the search option
+    #   provided.
+    #   @return [Array<Types::StringSearch>]
+    #
     # @!attribute [rw] owner_account_id
     #   The list of owners of the billing view.
     #   @return [String]
@@ -556,6 +562,7 @@ module Aws::Billing
       :active_time_range,
       :arns,
       :billing_view_types,
+      :names,
       :owner_account_id,
       :source_account_id,
       :max_results,
@@ -721,6 +728,28 @@ module Aws::Billing
       :resource_type,
       :service_code,
       :quota_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that defines how to search for string values. You can
+    # specify a search option and the value to search for.
+    #
+    # @!attribute [rw] search_option
+    #   The type of search operation to perform on the string value.
+    #   Determines how the search value is matched against the target field.
+    #   @return [String]
+    #
+    # @!attribute [rw] search_value
+    #   The string value to use in the search operation. This value is
+    #   compared against the target field using the specified search option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/StringSearch AWS API Documentation
+    #
+    class StringSearch < Struct.new(
+      :search_option,
+      :search_value)
       SENSITIVE = []
       include Aws::Structure
     end

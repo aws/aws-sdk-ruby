@@ -616,6 +616,17 @@ module Aws
                                           ) -> _GetManagedThingCapabilitiesResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetManagedThingCapabilitiesResponseSuccess
 
+      interface _GetManagedThingCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedThingCertificateResponse]
+        def managed_thing_id: () -> ::String
+        def certificate_pem: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTManagedIntegrations/Client.html#get_managed_thing_certificate-instance_method
+      def get_managed_thing_certificate: (
+                                           identifier: ::String
+                                         ) -> _GetManagedThingCertificateResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetManagedThingCertificateResponseSuccess
+
       interface _GetManagedThingConnectivityDataResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetManagedThingConnectivityDataResponse]
         def managed_thing_id: () -> ::String

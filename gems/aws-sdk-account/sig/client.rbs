@@ -144,6 +144,17 @@ module Aws
                                    ) -> _GetContactInformationResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContactInformationResponseSuccess
 
+      interface _GetGovCloudAccountInformationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGovCloudAccountInformationResponse]
+        def account_state: () -> ("PENDING_ACTIVATION" | "ACTIVE" | "SUSPENDED" | "CLOSED")
+        def gov_cloud_account_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Account/Client.html#get_gov_cloud_account_information-instance_method
+      def get_gov_cloud_account_information: (
+                                               ?standard_account_id: ::String
+                                             ) -> _GetGovCloudAccountInformationResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGovCloudAccountInformationResponseSuccess
+
       interface _GetPrimaryEmailResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPrimaryEmailResponse]
         def primary_email: () -> ::String

@@ -268,6 +268,15 @@ module Aws::AutoScaling
       data[:capacity_reservation_specification]
     end
 
+    # The instance lifecycle policy applied to this Auto Scaling group. This
+    # policy determines instance behavior when an instance transitions
+    # through its lifecycle states. It provides additional control over
+    # graceful instance management processes.
+    # @return [Types::InstanceLifecyclePolicy]
+    def instance_lifecycle_policy
+      data[:instance_lifecycle_policy]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -1277,6 +1286,7 @@ module Aws::AutoScaling
     #                 },
     #               },
     #             },
+    #             image_id: "ImageId",
     #           },
     #         ],
     #       },
@@ -1323,6 +1333,11 @@ module Aws::AutoScaling
     #       capacity_reservation_target: {
     #         capacity_reservation_ids: ["AsciiStringMaxLen255"],
     #         capacity_reservation_resource_group_arns: ["ResourceName"],
+    #       },
+    #     },
+    #     instance_lifecycle_policy: {
+    #       retention_triggers: {
+    #         terminate_hook_abandon: "retain", # accepts retain, terminate
     #       },
     #     },
     #   })
@@ -1545,6 +1560,12 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html
     # @option options [Types::CapacityReservationSpecification] :capacity_reservation_specification
     #   The capacity reservation specification for the Auto Scaling group.
+    # @option options [Types::InstanceLifecyclePolicy] :instance_lifecycle_policy
+    #   The instance lifecycle policy for the Auto Scaling group. Use this to
+    #   add, modify, or remove lifecycle policies that control instance
+    #   behavior when an instance transitions through its lifecycle states.
+    #   Configure retention triggers to specify when to preserve instances for
+    #   manual intervention.
     # @return [AutoScalingGroup]
     def update(options = {})
       options = options.merge(auto_scaling_group_name: @name)

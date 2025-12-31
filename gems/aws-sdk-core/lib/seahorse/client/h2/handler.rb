@@ -130,7 +130,12 @@ module Seahorse
         # https://http2.github.io/http2-spec/#rfc.section.8.1.2.3
         def _h2_headers(req)
           headers = {}
-          headers[':authority'] = req.endpoint.host
+          headers[':authority'] =
+            if req.endpoint.port != 443
+              "#{req.endpoint.host}:#{req.endpoint.port}"
+            else
+              req.endpoint.host
+            end
           headers[':method'] = req.http_method.upcase
           headers[':scheme'] = req.endpoint.scheme
           headers[':path'] = req.endpoint.path.empty? ? '/' : req.endpoint.path

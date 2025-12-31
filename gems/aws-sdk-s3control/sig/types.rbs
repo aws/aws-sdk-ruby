@@ -42,6 +42,7 @@ module Aws::S3Control
       attr_accessor advanced_cost_optimization_metrics: Types::AdvancedCostOptimizationMetrics
       attr_accessor advanced_data_protection_metrics: Types::AdvancedDataProtectionMetrics
       attr_accessor detailed_status_codes_metrics: Types::DetailedStatusCodesMetrics
+      attr_accessor advanced_performance_metrics: Types::AdvancedPerformanceMetrics
       attr_accessor storage_lens_group_level: Types::StorageLensGroupLevel
       SENSITIVE: []
     end
@@ -57,6 +58,11 @@ module Aws::S3Control
     end
 
     class AdvancedDataProtectionMetrics
+      attr_accessor is_enabled: bool
+      SENSITIVE: []
+    end
+
+    class AdvancedPerformanceMetrics
       attr_accessor is_enabled: bool
       SENSITIVE: []
     end
@@ -121,6 +127,7 @@ module Aws::S3Control
       attr_accessor advanced_cost_optimization_metrics: Types::AdvancedCostOptimizationMetrics
       attr_accessor advanced_data_protection_metrics: Types::AdvancedDataProtectionMetrics
       attr_accessor detailed_status_codes_metrics: Types::DetailedStatusCodesMetrics
+      attr_accessor advanced_performance_metrics: Types::AdvancedPerformanceMetrics
       SENSITIVE: []
     end
 
@@ -1908,21 +1915,30 @@ module Aws::S3Control
       attr_accessor include: Types::Include
       attr_accessor exclude: Types::Exclude
       attr_accessor data_export: Types::StorageLensDataExport
+      attr_accessor expanded_prefixes_data_export: Types::StorageLensExpandedPrefixesDataExport
       attr_accessor is_enabled: bool
       attr_accessor aws_org: Types::StorageLensAwsOrg
       attr_accessor storage_lens_arn: ::String
+      attr_accessor prefix_delimiter: ::String
       SENSITIVE: []
     end
 
     class StorageLensDataExport
       attr_accessor s3_bucket_destination: Types::S3BucketDestination
       attr_accessor cloud_watch_metrics: Types::CloudWatchMetrics
+      attr_accessor storage_lens_table_destination: Types::StorageLensTableDestination
       SENSITIVE: []
     end
 
     class StorageLensDataExportEncryption
       attr_accessor sses3: Types::SSES3
       attr_accessor ssekms: Types::SSEKMS
+      SENSITIVE: []
+    end
+
+    class StorageLensExpandedPrefixesDataExport
+      attr_accessor s3_bucket_destination: Types::S3BucketDestination
+      attr_accessor storage_lens_table_destination: Types::StorageLensTableDestination
       SENSITIVE: []
     end
 
@@ -1970,6 +1986,12 @@ module Aws::S3Control
       attr_accessor match_any_tag: ::Array[Types::S3Tag]
       attr_accessor match_object_age: Types::MatchObjectAge
       attr_accessor match_object_size: Types::MatchObjectSize
+      SENSITIVE: []
+    end
+
+    class StorageLensTableDestination
+      attr_accessor is_enabled: bool
+      attr_accessor encryption: Types::StorageLensDataExportEncryption
       SENSITIVE: []
     end
 

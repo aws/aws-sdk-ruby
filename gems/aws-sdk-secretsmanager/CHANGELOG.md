@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2025-12-11)
+------------------
+
+* Feature - Add SortBy parameter to ListSecrets
+
+1.124.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.123.0 (2025-11-19)
+------------------
+
+* Feature - Adds support to create, update, retrieve, rotate, and delete managed external secrets.
+
+1.122.0 (2025-10-27)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.121.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.120.0 (2025-08-26)
 ------------------
 

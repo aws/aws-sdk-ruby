@@ -34,6 +34,26 @@ module Aws::PaymentCryptographyData
       SENSITIVE: [:card_expiry_date, :service_code]
     end
 
+    class As2805KekValidationType
+      attr_accessor kek_validation_request: Types::KekValidationRequest
+      attr_accessor kek_validation_response: Types::KekValidationResponse
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class KekValidationRequest < As2805KekValidationType
+      end
+      class KekValidationResponse < As2805KekValidationType
+      end
+      class Unknown < As2805KekValidationType
+      end
+    end
+
+    class As2805PekDerivationAttributes
+      attr_accessor system_trace_audit_number: ::String
+      attr_accessor transaction_amount: ::String
+      SENSITIVE: []
+    end
+
     class AsymmetricEncryptionAttributes
       attr_accessor padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")
       SENSITIVE: []
@@ -317,6 +337,21 @@ module Aws::PaymentCryptographyData
       end
     end
 
+    class GenerateAs2805KekValidationInput
+      attr_accessor key_identifier: ::String
+      attr_accessor kek_validation_type: Types::As2805KekValidationType
+      attr_accessor random_key_send_variant_mask: ("VARIANT_MASK_82C0" | "VARIANT_MASK_82")
+      SENSITIVE: []
+    end
+
+    class GenerateAs2805KekValidationOutput
+      attr_accessor key_arn: ::String
+      attr_accessor key_check_value: ::String
+      attr_accessor random_key_send: ::String
+      attr_accessor random_key_receive: ::String
+      SENSITIVE: [:random_key_send, :random_key_receive]
+    end
+
     class GenerateCardValidationDataInput
       attr_accessor key_identifier: ::String
       attr_accessor primary_account_number: ::String
@@ -458,6 +493,16 @@ module Aws::PaymentCryptographyData
       SENSITIVE: []
     end
 
+    class KekValidationRequest
+      attr_accessor derive_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224")
+      SENSITIVE: []
+    end
+
+    class KekValidationResponse
+      attr_accessor random_key_send: ::String
+      SENSITIVE: [:random_key_send]
+    end
+
     class MacAlgorithmDukpt
       attr_accessor key_serial_number: ::String
       attr_accessor dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE")
@@ -475,7 +520,7 @@ module Aws::PaymentCryptographyData
     end
 
     class MacAttributes
-      attr_accessor algorithm: ("ISO9797_ALGORITHM1" | "ISO9797_ALGORITHM3" | "CMAC" | "HMAC" | "HMAC_SHA224" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512")
+      attr_accessor algorithm: ("ISO9797_ALGORITHM1" | "ISO9797_ALGORITHM3" | "CMAC" | "HMAC" | "HMAC_SHA224" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "AS2805_4_1")
       attr_accessor emv_mac: Types::MacAlgorithmEmv
       attr_accessor dukpt_iso_9797_algorithm_1: Types::MacAlgorithmDukpt
       attr_accessor dukpt_iso_9797_algorithm_3: Types::MacAlgorithmDukpt
@@ -717,6 +762,7 @@ module Aws::PaymentCryptographyData
       attr_accessor outgoing_dukpt_attributes: Types::DukptDerivationAttributes
       attr_accessor incoming_wrapped_key: Types::WrappedKey
       attr_accessor outgoing_wrapped_key: Types::WrappedKey
+      attr_accessor incoming_as_2805_attributes: Types::As2805PekDerivationAttributes
       SENSITIVE: [:encrypted_pin_block]
     end
 
@@ -732,6 +778,7 @@ module Aws::PaymentCryptographyData
       attr_accessor iso_format_1: Types::TranslationPinDataIsoFormat1
       attr_accessor iso_format_3: Types::TranslationPinDataIsoFormat034
       attr_accessor iso_format_4: Types::TranslationPinDataIsoFormat034
+      attr_accessor as_2805_format_0: Types::TranslationPinDataAs2805Format0
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -743,8 +790,15 @@ module Aws::PaymentCryptographyData
       end
       class IsoFormat4 < TranslationIsoFormats
       end
+      class As2805Format0 < TranslationIsoFormats
+      end
       class Unknown < TranslationIsoFormats
       end
+    end
+
+    class TranslationPinDataAs2805Format0
+      attr_accessor primary_account_number: ::String
+      SENSITIVE: [:primary_account_number]
     end
 
     class TranslationPinDataIsoFormat034

@@ -94,7 +94,7 @@ module Aws
         end
 
         @client = options[:client] || CognitoIdentity::Client.new(
-          client_opts.merge(credentials: false)
+          client_opts.merge(credentials: nil)
         )
         super
       end

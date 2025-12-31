@@ -45,7 +45,9 @@ module Aws::PCS
       attr_accessor scale_down_idle_time_in_seconds: ::Integer
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
       attr_accessor auth_key: Types::SlurmAuthKey
+      attr_accessor jwt_auth: Types::JwtAuth
       attr_accessor accounting: Types::Accounting
+      attr_accessor slurm_rest: Types::SlurmRest
       SENSITIVE: []
     end
 
@@ -53,6 +55,7 @@ module Aws::PCS
       attr_accessor scale_down_idle_time_in_seconds: ::Integer
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
       attr_accessor accounting: Types::AccountingRequest
+      attr_accessor slurm_rest: Types::SlurmRestRequest
       SENSITIVE: []
     end
 
@@ -209,7 +212,7 @@ module Aws::PCS
     end
 
     class Endpoint
-      attr_accessor type: ("SLURMCTLD" | "SLURMDBD")
+      attr_accessor type: ("SLURMCTLD" | "SLURMDBD" | "SLURMRESTD")
       attr_accessor private_ip_address: ::String
       attr_accessor public_ip_address: ::String
       attr_accessor ipv6_address: ::String
@@ -262,6 +265,17 @@ module Aws::PCS
 
     class InternalServerException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JwtAuth
+      attr_accessor jwt_key: Types::JwtKey
+      SENSITIVE: []
+    end
+
+    class JwtKey
+      attr_accessor secret_arn: ::String
+      attr_accessor secret_version: ::String
       SENSITIVE: []
     end
 
@@ -427,6 +441,16 @@ module Aws::PCS
       SENSITIVE: []
     end
 
+    class SlurmRest
+      attr_accessor mode: ("STANDARD" | "NONE")
+      SENSITIVE: []
+    end
+
+    class SlurmRestRequest
+      attr_accessor mode: ("STANDARD" | "NONE")
+      SENSITIVE: []
+    end
+
     class SpotOptions
       attr_accessor allocation_strategy: ("lowest-price" | "capacity-optimized" | "price-capacity-optimized")
       SENSITIVE: []
@@ -436,6 +460,9 @@ module Aws::PCS
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
     end
 
     class ThrottlingException
@@ -448,6 +475,9 @@ module Aws::PCS
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
       SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
     end
 
     class UpdateAccountingRequest
@@ -472,6 +502,7 @@ module Aws::PCS
       attr_accessor scale_down_idle_time_in_seconds: ::Integer
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
       attr_accessor accounting: Types::UpdateAccountingRequest
+      attr_accessor slurm_rest: Types::UpdateSlurmRestRequest
       SENSITIVE: []
     end
 
@@ -516,6 +547,11 @@ module Aws::PCS
 
     class UpdateQueueSlurmConfigurationRequest
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      SENSITIVE: []
+    end
+
+    class UpdateSlurmRestRequest
+      attr_accessor mode: ("STANDARD" | "NONE")
       SENSITIVE: []
     end
 

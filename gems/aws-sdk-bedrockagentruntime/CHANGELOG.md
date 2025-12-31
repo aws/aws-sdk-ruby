@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2025-12-01)
+------------------
+
+* Feature - Support audio and video content retrieval on Bedrock Knowledge Bases.
+
+1.67.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.66.0 (2025-10-28)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.65.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.64.0 (2025-09-26)
 ------------------
 

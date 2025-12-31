@@ -32,6 +32,8 @@ module Aws::DSQL
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
       attr_accessor multi_region_properties: Types::MultiRegionProperties
+      attr_accessor policy: ::String
+      attr_accessor bypass_policy_lockout_safety_check: bool
       SENSITIVE: []
     end
 
@@ -43,6 +45,7 @@ module Aws::DSQL
       attr_accessor multi_region_properties: Types::MultiRegionProperties
       attr_accessor encryption_details: Types::EncryptionDetails
       attr_accessor deletion_protection_enabled: bool
+      attr_accessor endpoint: ::String
       SENSITIVE: []
     end
 
@@ -57,6 +60,18 @@ module Aws::DSQL
       attr_accessor arn: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "IDLE" | "INACTIVE" | "UPDATING" | "DELETING" | "DELETED" | "FAILED" | "PENDING_SETUP" | "PENDING_DELETE")
       attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteClusterPolicyInput
+      attr_accessor identifier: ::String
+      attr_accessor expected_policy_version: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterPolicyOutput
+      attr_accessor policy_version: ::String
       SENSITIVE: []
     end
 
@@ -81,6 +96,18 @@ module Aws::DSQL
       attr_accessor multi_region_properties: Types::MultiRegionProperties
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor encryption_details: Types::EncryptionDetails
+      attr_accessor endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class GetClusterPolicyInput
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetClusterPolicyOutput
+      attr_accessor policy: ::String
+      attr_accessor policy_version: ::String
       SENSITIVE: []
     end
 
@@ -91,6 +118,7 @@ module Aws::DSQL
 
     class GetVpcEndpointServiceNameOutput
       attr_accessor service_name: ::String
+      attr_accessor cluster_vpc_endpoint: ::String
       SENSITIVE: []
     end
 
@@ -125,6 +153,20 @@ module Aws::DSQL
     class MultiRegionProperties
       attr_accessor witness_region: ::String
       attr_accessor clusters: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PutClusterPolicyInput
+      attr_accessor identifier: ::String
+      attr_accessor policy: ::String
+      attr_accessor bypass_policy_lockout_safety_check: bool
+      attr_accessor expected_policy_version: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class PutClusterPolicyOutput
+      attr_accessor policy_version: ::String
       SENSITIVE: []
     end
 

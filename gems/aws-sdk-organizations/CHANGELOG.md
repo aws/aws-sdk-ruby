@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.131.0 (2025-12-11)
+------------------
+
+* Feature - Add support for policy operations on the NETWORK SECURITY DIRECTOR POLICY policy type.
+
+1.130.0 (2025-11-25)
+------------------
+
+* Feature - Add support for policy operations on the S3_POLICY and BEDROCK_POLICY policy type.
+
+1.129.0 (2025-11-21)
+------------------
+
+* Feature - Add support for policy operations on the UPGRADE_ROLLOUT_POLICY policy type.
+
+1.128.0 (2025-11-20)
+------------------
+
+* Feature - Added new APIs for Billing Transfer, new policy type INSPECTOR_POLICY, and allow an account to transfer between organizations
+
+1.127.0 (2025-10-28)
+------------------
+
+* Feature - Added Account State field to the ListDelegatedAdministrators API response.
+
+1.126.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.125.0 (2025-10-17)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.124.0 (2025-09-09)
 ------------------
 

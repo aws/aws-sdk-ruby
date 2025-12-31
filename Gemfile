@@ -15,7 +15,9 @@ gem 'jruby-openssl' if defined?(JRUBY_VERSION)
 gem 'rdoc'
 
 # protocol parsers
-gem 'json', '>= 2.4.0' # due to load_file support, see: https://github.com/ruby/json/issues/696
+
+# Pinning to 2.7.6 to avoid Encoding::InvalidByteSequenceError in recent gem versions
+gem 'json', '2.7.6' # due to load_file support, see: https://github.com/ruby/json/issues/696
 gem 'nokogiri'
 gem 'oga'
 gem 'rexml'

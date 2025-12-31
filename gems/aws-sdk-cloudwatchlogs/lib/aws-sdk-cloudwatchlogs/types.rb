@@ -116,6 +116,31 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # Contains an aggregate summary of log groups grouped by data source
+    # characteristics, including the count of log groups and their grouping
+    # identifiers.
+    #
+    # @!attribute [rw] log_group_count
+    #   The number of log groups in this aggregate summary group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] grouping_identifiers
+    #   An array of key-value pairs that identify the data source
+    #   characteristics used to group the log groups.
+    #
+    #   The size and content of this array depends on the `groupBy`
+    #   parameter specified in the request.
+    #   @return [Array<Types::GroupingIdentifier>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AggregateLogGroupSummary AWS API Documentation
+    #
+    class AggregateLogGroupSummary < Struct.new(
+      :log_group_count,
+      :grouping_identifiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This structure represents one anomaly that has been found by a logs
     # anomaly detector.
     #
@@ -390,6 +415,38 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of the S3 Table Integration to
+    #   associate the data source with.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The data source to associate with the S3 Table Integration. Contains
+    #   the name and type of the data source.
+    #   @return [Types::DataSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateSourceToS3TableIntegrationRequest AWS API Documentation
+    #
+    class AssociateSourceToS3TableIntegrationRequest < Struct.new(
+      :integration_arn,
+      :data_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The unique identifier for the association between the data source
+    #   and S3 Table Integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateSourceToS3TableIntegrationResponse AWS API Documentation
+    #
+    class AssociateSourceToS3TableIntegrationResponse < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The `CSV` processor parses comma-separated values (CSV) from the log
     # events into columns.
     #
@@ -445,6 +502,52 @@ module Aws::CloudWatchLogs
     #
     class CancelExportTaskRequest < Struct.new(
       :task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_id
+    #   The ID of the import task to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CancelImportTaskRequest AWS API Documentation
+    #
+    class CancelImportTaskRequest < Struct.new(
+      :import_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_id
+    #   The ID of the cancelled import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_statistics
+    #   Statistics about the import progress at the time of cancellation.
+    #   @return [Types::ImportStatistics]
+    #
+    # @!attribute [rw] import_status
+    #   The final status of the import task. This will be set to CANCELLED.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the import task was created, expressed as the
+    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp when the import task was cancelled, expressed as the
+    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CancelImportTaskResponse AWS API Documentation
+    #
+    class CancelImportTaskResponse < Struct.new(
+      :import_id,
+      :import_statistics,
+      :import_status,
+      :creation_time,
+      :last_updated_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -780,6 +883,56 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @!attribute [rw] import_source_arn
+    #   The ARN of the source to import from.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_role_arn
+    #   The ARN of the IAM role that grants CloudWatch Logs permission to
+    #   import from the CloudTrail Lake Event Data Store.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_filter
+    #   Optional filters to constrain the import by CloudTrail event time.
+    #   Times are specified in Unix timestamp milliseconds. The range of
+    #   data being imported must be within the specified source's retention
+    #   period.
+    #   @return [Types::ImportFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateImportTaskRequest AWS API Documentation
+    #
+    class CreateImportTaskRequest < Struct.new(
+      :import_source_arn,
+      :import_role_arn,
+      :import_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_id
+    #   A unique identifier for the import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_destination_arn
+    #   The ARN of the CloudWatch Logs log group created as the destination
+    #   for the imported events.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the import task was created, expressed as the
+    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateImportTaskResponse AWS API Documentation
+    #
+    class CreateImportTaskResponse < Struct.new(
+      :import_id,
+      :import_destination_arn,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] log_group_arn_list
     #   An array containing the ARN of the log group that this anomaly
     #   detector will watch. You can specify only one log group ARN.
@@ -930,13 +1083,21 @@ module Aws::CloudWatchLogs
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html
     #   @return [String]
     #
+    # @!attribute [rw] deletion_protection_enabled
+    #   Use this parameter to enable deletion protection for the new log
+    #   group. When enabled on a log group, deletion protection blocks all
+    #   deletion operations until it is explicitly disabled. By default log
+    #   groups are created without deletion protection enabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogGroupRequest AWS API Documentation
     #
     class CreateLogGroupRequest < Struct.new(
       :log_group_name,
       :kms_key_id,
       :tags,
-      :log_group_class)
+      :log_group_class,
+      :deletion_protection_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -958,6 +1119,122 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the scheduled query. The name must be unique within your
+    #   account and region. Valid characters are alphanumeric characters,
+    #   hyphens, underscores, and periods. Length must be between 1 and 255
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional description for the scheduled query to help identify its
+    #   purpose and functionality.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_language
+    #   The query language to use for the scheduled query. Valid values are
+    #   `LogsQL`, `PPL`, and `SQL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The query string to execute. This is the same query syntax used in
+    #   CloudWatch Logs Insights. Maximum length is 10,000 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_identifiers
+    #   An array of log group names or ARNs to query. You can specify
+    #   between 1 and 50 log groups. Log groups can be identified by name or
+    #   full ARN.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] schedule_expression
+    #   A cron expression that defines when the scheduled query runs. The
+    #   expression uses standard cron syntax and supports minute-level
+    #   precision. Maximum length is 256 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] timezone
+    #   The timezone for evaluating the schedule expression. This determines
+    #   when the scheduled query executes relative to the specified
+    #   timezone.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time_offset
+    #   The time offset in seconds that defines the lookback period for the
+    #   query. This determines how far back in time the query searches from
+    #   the execution time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination_configuration
+    #   Configuration for where to deliver query results. Currently supports
+    #   Amazon S3 destinations for storing query output.
+    #   @return [Types::DestinationConfiguration]
+    #
+    # @!attribute [rw] schedule_start_time
+    #   The start time for the scheduled query in Unix epoch format. The
+    #   query will not execute before this time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] schedule_end_time
+    #   The end time for the scheduled query in Unix epoch format. The query
+    #   will stop executing after this time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The ARN of the IAM role that grants permissions to execute the query
+    #   and deliver results to the specified destination. The role must have
+    #   permissions to read from the specified log groups and write to the
+    #   destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The initial state of the scheduled query. Valid values are `ENABLED`
+    #   and `DISABLED`. Default is `ENABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Key-value pairs to associate with the scheduled query for resource
+    #   management and cost allocation.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateScheduledQueryRequest AWS API Documentation
+    #
+    class CreateScheduledQueryRequest < Struct.new(
+      :name,
+      :description,
+      :query_language,
+      :query_string,
+      :log_group_identifiers,
+      :schedule_expression,
+      :timezone,
+      :start_time_offset,
+      :destination_configuration,
+      :schedule_start_time,
+      :schedule_end_time,
+      :execution_role_arn,
+      :state,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduled_query_arn
+    #   The ARN of the created scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the scheduled query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateScheduledQueryResponse AWS API Documentation
+    #
+    class CreateScheduledQueryResponse < Struct.new(
+      :scheduled_query_arn,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The event was already logged.
     #
     # `PutLogEvents` actions are now always accepted and never return
@@ -971,6 +1248,47 @@ module Aws::CloudWatchLogs
     #
     class DataAlreadyAcceptedException < Struct.new(
       :expected_sequence_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a data source that categorizes logs by originating service
+    # and log type, providing service-based organization complementing
+    # traditional log groups.
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DataSource AWS API Documentation
+    #
+    class DataSource < Struct.new(
+      :name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filter criteria for data sources, used to specify which data sources
+    # to include in operations based on name and type.
+    #
+    # @!attribute [rw] name
+    #   The name pattern to filter data sources by.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type pattern to filter data sources by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DataSourceFilter AWS API Documentation
+    #
+    class DataSourceFilter < Struct.new(
+      :name,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1335,6 +1653,22 @@ module Aws::CloudWatchLogs
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] identifier
+    #   The ARN or name of the scheduled query to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteScheduledQueryRequest AWS API Documentation
+    #
+    class DeleteScheduledQueryRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteScheduledQueryResponse AWS API Documentation
+    #
+    class DeleteScheduledQueryResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] log_group_name
     #   The name of the log group.
@@ -1983,6 +2317,116 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @!attribute [rw] import_id
+    #   The ID of the import task to get batch information for.
+    #   @return [String]
+    #
+    # @!attribute [rw] batch_import_status
+    #   Optional filter to list import batches by their status. Accepts
+    #   multiple status values: IN\_PROGRESS, CANCELLED, COMPLETED and
+    #   FAILED.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of import batches to return in the response.
+    #   Default: 10
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeImportTaskBatchesRequest AWS API Documentation
+    #
+    class DescribeImportTaskBatchesRequest < Struct.new(
+      :import_id,
+      :batch_import_status,
+      :limit,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_source_arn
+    #   The ARN of the source being imported from.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_id
+    #   The ID of the import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_batches
+    #   The list of import batches that match the request filters.
+    #   @return [Array<Types::ImportBatch>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of results. Not
+    #   present if there are no additional results to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeImportTaskBatchesResponse AWS API Documentation
+    #
+    class DescribeImportTaskBatchesResponse < Struct.new(
+      :import_source_arn,
+      :import_id,
+      :import_batches,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] import_id
+    #   Optional filter to describe a specific import task by its ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_status
+    #   Optional filter to list imports by their status. Valid values are
+    #   IN\_PROGRESS, CANCELLED, COMPLETED and FAILED.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_source_arn
+    #   Optional filter to list imports from a specific source
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of import tasks to return in the response.
+    #   Default: 50
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeImportTasksRequest AWS API Documentation
+    #
+    class DescribeImportTasksRequest < Struct.new(
+      :import_id,
+      :import_status,
+      :import_source_arn,
+      :limit,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] imports
+    #   The list of import tasks that match the request filters.
+    #   @return [Array<Types::Import>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of results. Not
+    #   present if there are no additional results to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeImportTasksResponse AWS API Documentation
+    #
+    class DescribeImportTasksResponse < Struct.new(
+      :imports,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] log_group_identifiers
     #   An array containing the name or ARN of the log group that you want
     #   to retrieve field index policies for.
@@ -2552,6 +2996,21 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # Configuration for where to deliver scheduled query results. Specifies
+    # the destination type and associated settings for result delivery.
+    #
+    # @!attribute [rw] s3_configuration
+    #   Configuration for delivering query results to Amazon S3.
+    #   @return [Types::S3Configuration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DestinationConfiguration AWS API Documentation
+    #
+    class DestinationConfiguration < Struct.new(
+      :s3_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #
@@ -2594,6 +3053,31 @@ module Aws::CloudWatchLogs
     class DisassociateKmsKeyRequest < Struct.new(
       :log_group_name,
       :resource_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The unique identifier of the association to remove between the data
+    #   source and S3 Table Integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DisassociateSourceFromS3TableIntegrationRequest AWS API Documentation
+    #
+    class DisassociateSourceFromS3TableIntegrationRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The unique identifier of the association that was removed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DisassociateSourceFromS3TableIntegrationResponse AWS API Documentation
+    #
+    class DisassociateSourceFromS3TableIntegrationResponse < Struct.new(
+      :identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2764,6 +3248,12 @@ module Aws::CloudWatchLogs
     #   field index.
     #   @return [Integer]
     #
+    # @!attribute [rw] type
+    #   The type of index. Specify `FACET` for facet-based indexing or
+    #   `FIELD_INDEX` for field-based indexing. This determines how the
+    #   field is indexed and can be queried.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/FieldIndex AWS API Documentation
     #
     class FieldIndex < Struct.new(
@@ -2771,7 +3261,8 @@ module Aws::CloudWatchLogs
       :field_index_name,
       :last_scan_time,
       :first_event_time,
-      :last_event_time)
+      :last_event_time,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3345,6 +3836,36 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @!attribute [rw] data_source_name
+    #   The name of the data source to retrieve log fields for.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_type
+    #   The type of the data source to retrieve log fields for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogFieldsRequest AWS API Documentation
+    #
+    class GetLogFieldsRequest < Struct.new(
+      :data_source_name,
+      :data_source_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] log_fields
+    #   The list of log fields for the specified data source, including
+    #   field names and their data types.
+    #   @return [Array<Types::LogFieldsListItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogFieldsResponse AWS API Documentation
+    #
+    class GetLogFieldsResponse < Struct.new(
+      :log_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] log_group_name
     #   The name of the log group to search.
     #
@@ -3547,6 +4068,185 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @!attribute [rw] identifier
+    #   The ARN or name of the scheduled query to retrieve history for.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time for the history query in Unix epoch format.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_time
+    #   The end time for the history query in Unix epoch format.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] execution_statuses
+    #   An array of execution statuses to filter the history results. Only
+    #   executions with the specified statuses are returned.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of history records to return. Valid range is 1 to
+    #   1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetScheduledQueryHistoryRequest AWS API Documentation
+    #
+    class GetScheduledQueryHistoryRequest < Struct.new(
+      :identifier,
+      :start_time,
+      :end_time,
+      :execution_statuses,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_query_arn
+    #   The ARN of the scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger_history
+    #   An array of execution history records for the scheduled query.
+    #   @return [Array<Types::TriggerHistoryRecord>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetScheduledQueryHistoryResponse AWS API Documentation
+    #
+    class GetScheduledQueryHistoryResponse < Struct.new(
+      :name,
+      :scheduled_query_arn,
+      :trigger_history,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The ARN or name of the scheduled query to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetScheduledQueryRequest AWS API Documentation
+    #
+    class GetScheduledQueryRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduled_query_arn
+    #   The ARN of the scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_language
+    #   The query language used by the scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The query string executed by the scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_identifiers
+    #   The log groups queried by the scheduled query.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] schedule_expression
+    #   The cron expression that defines when the scheduled query runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] timezone
+    #   The timezone used for evaluating the schedule expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time_offset
+    #   The time offset in seconds that defines the lookback period for the
+    #   query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination_configuration
+    #   Configuration for where query results are delivered.
+    #   @return [Types::DestinationConfiguration]
+    #
+    # @!attribute [rw] state
+    #   The current state of the scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_triggered_time
+    #   The timestamp when the scheduled query was last executed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_execution_status
+    #   The status of the most recent execution of the scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_start_time
+    #   The start time for the scheduled query in Unix epoch format.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] schedule_end_time
+    #   The end time for the scheduled query in Unix epoch format.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The ARN of the IAM role used to execute the query and deliver
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the scheduled query was created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp when the scheduled query was last updated.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetScheduledQueryResponse AWS API Documentation
+    #
+    class GetScheduledQueryResponse < Struct.new(
+      :scheduled_query_arn,
+      :name,
+      :description,
+      :query_language,
+      :query_string,
+      :log_group_identifiers,
+      :schedule_expression,
+      :timezone,
+      :start_time_offset,
+      :destination_configuration,
+      :state,
+      :last_triggered_time,
+      :last_execution_status,
+      :schedule_start_time,
+      :schedule_end_time,
+      :execution_role_arn,
+      :creation_time,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] log_group_identifier
     #   Specify either the name or ARN of the log group to return
     #   transformer information for. If the log group is in a source account
@@ -3623,6 +4323,150 @@ module Aws::CloudWatchLogs
     class Grok < Struct.new(
       :source,
       :match)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key-value pair that identifies how log groups are grouped in
+    # aggregate summaries.
+    #
+    # @!attribute [rw] key
+    #   The key that identifies the grouping characteristic. The format of
+    #   the key uses dot notation. Examples are, `dataSource.Name`,
+    #   `dataSource.Type`, and `dataSource.Format`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value associated with the grouping characteristic. Examples are
+    #   `amazon_vpc`, `flow`, and `OCSF`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GroupingIdentifier AWS API Documentation
+    #
+    class GroupingIdentifier < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An import job to move data from CloudTrail Event Data Store to
+    # CloudWatch.
+    #
+    # @!attribute [rw] import_id
+    #   The unique identifier of the import task.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_source_arn
+    #   The ARN of the CloudTrail Lake Event Data Store being imported from.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_status
+    #   The current status of the import task. Valid values are
+    #   IN\_PROGRESS, CANCELLED, COMPLETED and FAILED.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_destination_arn
+    #   The ARN of the managed CloudWatch Logs log group where the events
+    #   are being imported to.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_statistics
+    #   Statistics about the import progress
+    #   @return [Types::ImportStatistics]
+    #
+    # @!attribute [rw] import_filter
+    #   The filter criteria used for this import task.
+    #   @return [Types::ImportFilter]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the import task was created, expressed as the
+    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp when the import task was last updated, expressed as
+    #   the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_message
+    #   Error message related to any failed imports
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/Import AWS API Documentation
+    #
+    class Import < Struct.new(
+      :import_id,
+      :import_source_arn,
+      :import_status,
+      :import_destination_arn,
+      :import_statistics,
+      :import_filter,
+      :creation_time,
+      :last_updated_time,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of events being imported to CloudWatch
+    #
+    # @!attribute [rw] batch_id
+    #   The unique identifier of the import batch.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the import batch. Valid values are
+    #   IN\_PROGRESS, CANCELLED, COMPLETED and FAILED.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message if the batch failed to import. Only present when
+    #   status is FAILED.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ImportBatch AWS API Documentation
+    #
+    class ImportBatch < Struct.new(
+      :batch_id,
+      :status,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter criteria used for import tasks
+    #
+    # @!attribute [rw] start_event_time
+    #   The start of the time range for events to import, expressed as the
+    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_event_time
+    #   The end of the time range for events to import, expressed as the
+    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ImportFilter AWS API Documentation
+    #
+    class ImportFilter < Struct.new(
+      :start_event_time,
+      :end_event_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Statistics about the import progress
+    #
+    # @!attribute [rw] bytes_imported
+    #   The total number of bytes that have been imported to the managed log
+    #   group.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ImportStatistics AWS API Documentation
+    #
+    class ImportStatistics < Struct.new(
+      :bytes_imported)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3748,6 +4592,14 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # An internal server error occurred while processing the request. This
+    # exception is returned when the service encounters an unexpected
+    # condition that prevents it from fulfilling the request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Aws::EmptyStructure; end
+
     # An internal error occurred during the streaming of log data. This
     # exception is thrown when there's an issue with the internal streaming
     # mechanism used by the GetLogObject operation.
@@ -3800,6 +4652,104 @@ module Aws::CloudWatchLogs
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LimitExceededException AWS API Documentation
     #
     class LimitExceededException < Aws::EmptyStructure; end
+
+    # @!attribute [rw] account_identifiers
+    #   When `includeLinkedAccounts` is set to `true`, use this parameter to
+    #   specify the list of accounts to search. You can specify as many as
+    #   20 account IDs in the array.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] include_linked_accounts
+    #   If you are using a monitoring account, set this to `true` to have
+    #   the operation return log groups in the accounts listed in
+    #   `accountIdentifiers`.
+    #
+    #   If this parameter is set to `true` and `accountIdentifiers` contains
+    #   a null value, the operation returns all log groups in the monitoring
+    #   account and all log groups in all source accounts that are linked to
+    #   the monitoring account.
+    #
+    #   The default for this parameter is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] log_group_class
+    #   Filters the results by log group class to include only log groups of
+    #   the specified class.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_name_pattern
+    #   Use this parameter to limit the returned log groups to only those
+    #   with names that match the pattern that you specify. This parameter
+    #   is a regular expression that can match prefixes and substrings, and
+    #   supports wildcard matching and matching multiple patterns, as in the
+    #   following examples.
+    #
+    #   * Use `^` to match log group names by prefix.
+    #
+    #   * For a substring match, specify the string to match. All matches
+    #     are case sensitive
+    #
+    #   * To match multiple patterns, separate them with a `|` as in the
+    #     example `^/aws/lambda|discovery`
+    #
+    #   You can specify as many as five different regular expression
+    #   patterns in this field, each of which must be between 3 and 24
+    #   characters. You can include the `^` symbol as many as five times,
+    #   and include the `|` symbol as many as four times.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_sources
+    #   Filters the results by data source characteristics to include only
+    #   log groups associated with the specified data sources.
+    #   @return [Array<Types::DataSourceFilter>]
+    #
+    # @!attribute [rw] group_by
+    #   Specifies how to group the log groups in the summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of aggregated summaries to return. If you omit
+    #   this parameter, the default is up to 50 aggregated summaries.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListAggregateLogGroupSummariesRequest AWS API Documentation
+    #
+    class ListAggregateLogGroupSummariesRequest < Struct.new(
+      :account_identifiers,
+      :include_linked_accounts,
+      :log_group_class,
+      :log_group_name_pattern,
+      :data_sources,
+      :group_by,
+      :next_token,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aggregate_log_group_summaries
+    #   The list of aggregate log group summaries grouped by the specified
+    #   data source characteristics.
+    #   @return [Array<Types::AggregateLogGroupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListAggregateLogGroupSummariesResponse AWS API Documentation
+    #
+    class ListAggregateLogGroupSummariesResponse < Struct.new(
+      :aggregate_log_group_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] anomaly_detector_arn
     #   Use this to optionally limit the results to only the anomalies found
@@ -4037,6 +4987,21 @@ module Aws::CloudWatchLogs
     #   parameter, the default is up to 50 log groups.
     #   @return [Integer]
     #
+    # @!attribute [rw] data_sources
+    #   An array of data source filters to filter log groups by their
+    #   associated data sources. You can filter by data source name, type,
+    #   or both. Multiple filters within the same dimension are combined
+    #   with OR logic, while filters across different dimensions are
+    #   combined with AND logic.
+    #   @return [Array<Types::DataSourceFilter>]
+    #
+    # @!attribute [rw] field_index_names
+    #   An array of field index names to filter log groups that have
+    #   specific field indexes. Only log groups containing all specified
+    #   field indexes are returned. You can specify 1 to 20 field index
+    #   names, each with 1 to 512 characters.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListLogGroupsRequest AWS API Documentation
     #
     class ListLogGroupsRequest < Struct.new(
@@ -4045,7 +5010,9 @@ module Aws::CloudWatchLogs
       :include_linked_accounts,
       :account_identifiers,
       :next_token,
-      :limit)
+      :limit,
+      :data_sources,
+      :field_index_names)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4064,6 +5031,93 @@ module Aws::CloudWatchLogs
     #
     class ListLogGroupsResponse < Struct.new(
       :log_groups,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of scheduled queries to return. Valid range is 1
+    #   to 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Filter scheduled queries by state. Valid values are `ENABLED` and
+    #   `DISABLED`. If not specified, all scheduled queries are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListScheduledQueriesRequest AWS API Documentation
+    #
+    class ListScheduledQueriesRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_queries
+    #   An array of scheduled query summary information.
+    #   @return [Array<Types::ScheduledQuerySummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListScheduledQueriesResponse AWS API Documentation
+    #
+    class ListScheduledQueriesResponse < Struct.new(
+      :next_token,
+      :scheduled_queries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_arn
+    #   The Amazon Resource Name (ARN) of the S3 Table Integration to list
+    #   associations for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of associations to return in a single call. Valid
+    #   range is 1 to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListSourcesForS3TableIntegrationRequest AWS API Documentation
+    #
+    class ListSourcesForS3TableIntegrationRequest < Struct.new(
+      :integration_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sources
+    #   The list of data source associations for the specified S3 Table
+    #   Integration.
+    #   @return [Array<Types::S3TableIntegrationSource>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListSourcesForS3TableIntegrationResponse AWS API Documentation
+    #
+    class ListSourcesForS3TableIntegrationResponse < Struct.new(
+      :sources,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4352,6 +5406,52 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # Defines the data type structure for a log field, including the type,
+    # element information, and nested fields for complex types.
+    #
+    # @!attribute [rw] type
+    #   The data type of the log field.
+    #   @return [String]
+    #
+    # @!attribute [rw] element
+    #   For array or collection types, specifies the element type
+    #   information.
+    #   @return [Types::LogFieldType]
+    #
+    # @!attribute [rw] fields
+    #   For complex types, contains the nested field definitions.
+    #   @return [Array<Types::LogFieldsListItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogFieldType AWS API Documentation
+    #
+    class LogFieldType < Struct.new(
+      :type,
+      :element,
+      :fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a log field with its name and data type information for a
+    # specific data source.
+    #
+    # @!attribute [rw] log_field_name
+    #   The name of the log field.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_field_type
+    #   The data type information for the log field.
+    #   @return [Types::LogFieldType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogFieldsListItem AWS API Documentation
+    #
+    class LogFieldsListItem < Struct.new(
+      :log_field_name,
+      :log_field_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a log group.
     #
     # @!attribute [rw] log_group_name
@@ -4466,6 +5566,12 @@ module Aws::CloudWatchLogs
     #   [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html
     #   @return [String]
     #
+    # @!attribute [rw] deletion_protection_enabled
+    #   Indicates whether deletion protection is enabled for this log group.
+    #   When enabled, deletion protection blocks all deletion operations
+    #   until it is explicitly disabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogGroup AWS API Documentation
     #
     class LogGroup < Struct.new(
@@ -4479,7 +5585,8 @@ module Aws::CloudWatchLogs
       :data_protection_status,
       :inherited_properties,
       :log_group_class,
-      :log_group_arn)
+      :log_group_arn,
+      :deletion_protection_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5538,8 +6645,8 @@ module Aws::CloudWatchLogs
     # This processor converts logs into [Open Cybersecurity Schema Framework
     # (OCSF)][1] events.
     #
-    # For more information about this processor including examples, see [
-    # parseToOSCF][2] in the *CloudWatch Logs User Guide*.
+    # For more information about this processor including examples, see
+    # [parseToOCSF][2] in the *CloudWatch Logs User Guide*.
     #
     #
     #
@@ -5561,12 +6668,17 @@ module Aws::CloudWatchLogs
     #   log events.
     #   @return [String]
     #
+    # @!attribute [rw] mapping_version
+    #   The version of the OCSF mapping to use for parsing log data.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ParseToOCSF AWS API Documentation
     #
     class ParseToOCSF < Struct.new(
       :source,
       :event_source,
-      :ocsf_version)
+      :ocsf_version,
+      :mapping_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5956,7 +7068,8 @@ module Aws::CloudWatchLogs
     end
 
     # @!attribute [rw] policy_name
-    #   A name for the policy. This must be unique within the account.
+    #   A name for the policy. This must be unique within the account and
+    #   cannot start with `aws/`.
     #   @return [String]
     #
     # @!attribute [rw] policy_document
@@ -6049,15 +7162,22 @@ module Aws::CloudWatchLogs
     #
     #   * **Fields** The array of field indexes to create.
     #
-    #   ^
+    #   * **FieldsV2** The object of field indexes to create along with
+    #     it's type.
     #
     #   It must contain at least one field index.
     #
     #   The following is an example of an index policy document that creates
-    #   two indexes, `RequestId` and `TransactionId`.
+    #   indexes with different types.
     #
-    #   `"policyDocument": "{ "Fields": [ "RequestId", "TransactionId"
-    #   ] }"`
+    #   `"policyDocument": "{ "Fields": [ "TransactionId" ],
+    #   "FieldsV2": {"RequestId": {"type": "FIELD_INDEX"},
+    #   "APIName": {"type": "FACET"}, "StatusCode": {"type":
+    #   "FACET"}}}"`
+    #
+    #   You can use `FieldsV2` to specify the type for each field. Supported
+    #   types are `FIELD_INDEX` and `FACET`. Field names within `Fields` and
+    #   `FieldsV2` must be mutually exclusive.
     #
     #
     #
@@ -6079,17 +7199,27 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] selection_criteria
     #   Use this parameter to apply the new policy to a subset of log groups
-    #   in the account.
+    #   in the account or a data source name and type combination.
     #
     #   Specifying `selectionCriteria` is valid only when you specify
     #   `SUBSCRIPTION_FILTER_POLICY`, `FIELD_INDEX_POLICY` or
     #   `TRANSFORMER_POLICY`for `policyType`.
     #
-    #   If `policyType` is `SUBSCRIPTION_FILTER_POLICY`, the only supported
-    #   `selectionCriteria` filter is `LogGroupName NOT IN []`
+    #   * If `policyType` is `SUBSCRIPTION_FILTER_POLICY`, the only
+    #     supported `selectionCriteria` filter is `LogGroupName NOT IN []`
     #
-    #   If `policyType` is `FIELD_INDEX_POLICY` or `TRANSFORMER_POLICY`, the
-    #   only supported `selectionCriteria` filter is `LogGroupNamePrefix`
+    #   * If `policyType` is `TRANSFORMER_POLICY`, the only supported
+    #     `selectionCriteria` filter is `LogGroupNamePrefix`
+    #
+    #   * If `policyType` is `FIELD_INDEX_POLICY`, the supported
+    #     `selectionCriteria` filters are:
+    #
+    #     * `LogGroupNamePrefix`
+    #
+    #     * `DataSourceName` AND `DataSourceType`
+    #     When you specify `selectionCriteria` for a field index policy you
+    #     can use either `LogGroupNamePrefix` by itself or `DataSourceName`
+    #     and `DataSourceType` together.
     #
     #   The `selectionCriteria` string can be up to 25KB in length. The
     #   length is determined by using its UTF-8 bytes.
@@ -6326,8 +7456,23 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_type
     #   Defines the type of log that the source is sending.
     #
-    #   * For Amazon Bedrock, the valid value is `APPLICATION_LOGS` and
-    #     `TRACES`.
+    #   * For Amazon Bedrock Agents, the valid values are `APPLICATION_LOGS`
+    #     and `EVENT_LOGS`.
+    #
+    #   * For Amazon Bedrock Knowledge Bases, the valid value is
+    #     `APPLICATION_LOGS`.
+    #
+    #   * For Amazon Bedrock AgentCore Runtime, the valid values are
+    #     `APPLICATION_LOGS`, `USAGE_LOGS` and `TRACES`.
+    #
+    #   * For Amazon Bedrock AgentCore Tools, the valid values are
+    #     `APPLICATION_LOGS`, `USAGE_LOGS` and `TRACES`.
+    #
+    #   * For Amazon Bedrock AgentCore Identity, the valid values are
+    #     `APPLICATION_LOGS` and `TRACES`.
+    #
+    #   * For Amazon Bedrock AgentCore Gateway, the valid values are
+    #     `APPLICATION_LOGS` and `TRACES`.
     #
     #   * For CloudFront, the valid value is `ACCESS_LOGS`.
     #
@@ -6344,13 +7489,25 @@ module Aws::CloudWatchLogs
     #
     #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
     #
+    #   * For Network Firewall Proxy, the valid values are `ALERT_LOGS`,
+    #     `ALLOW_LOGS`, and `DENY_LOGS`.
+    #
+    #   * For Network Load Balancer, the valid value is `NLB_ACCESS_LOGS`.
+    #
     #   * For PCS, the valid values are `PCS_SCHEDULER_LOGS` and
     #     `PCS_JOBCOMP_LOGS`.
     #
-    #   * For Amazon Q, the valid value is `EVENT_LOGS`.
+    #   * For Quick Suite, the valid values are `CHAT_LOGS` and
+    #     `FEEDBACK_LOGS`.
+    #
+    #   * For Amazon Web Services RTB Fabric, the valid values is
+    #     `APPLICATION_LOGS`.
+    #
+    #   * For Amazon Q, the valid values are `EVENT_LOGS` and
+    #     `SYNC_JOB_LOGS`.
     #
     #   * For Amazon SES mail manager, the valid values are
-    #     `APPLICATION_LOG` and `TRAFFIC_POLICY_DEBUG_LOGS`.
+    #     `APPLICATION_LOGS` and `TRAFFIC_POLICY_DEBUG_LOGS`.
     #
     #   * For Amazon WorkMail, the valid values are `ACCESS_CONTROL_LOGS`,
     #     `AUTHENTICATION_LOGS`, `WORKMAIL_AVAILABILITY_PROVIDER_LOGS`,
@@ -6492,10 +7649,16 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] policy_document
     #   The index policy document, in JSON format. The following is an
-    #   example of an index policy document that creates two indexes,
-    #   `RequestId` and `TransactionId`.
+    #   example of an index policy document that creates indexes with
+    #   different types.
     #
-    #   `"policyDocument": "{ "Fields": [ "RequestId", "TransactionId" ] }"`
+    #   `"policyDocument": "{"Fields": [ "TransactionId" ], "FieldsV2":
+    #   {"RequestId": {"type": "FIELD_INDEX"}, "APIName": {"type": "FACET"},
+    #   "StatusCode": {"type": "FACET"}}}"`
+    #
+    #   You can use `FieldsV2` to specify the type for each field. Supported
+    #   types are `FIELD_INDEX` and `FACET`. Field names within `Fields` and
+    #   `FieldsV2` must be mutually exclusive.
     #
     #   The policy document must include at least one field index. For more
     #   information about the fields that can be included and other
@@ -6641,6 +7804,35 @@ module Aws::CloudWatchLogs
       :next_sequence_token,
       :rejected_log_events_info,
       :rejected_entity_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] log_group_identifier
+    #   The name or ARN of the log group.
+    #
+    #   Type: String
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 512.
+    #
+    #   Pattern: `[\.\-_/#A-Za-z0-9]+`
+    #
+    #   Required: Yes
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection_enabled
+    #   Whether to enable deletion protection.
+    #
+    #   Type: Boolean
+    #
+    #   Required: Yes
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogGroupDeletionProtectionRequest AWS API Documentation
+    #
+    class PutLogGroupDeletionProtectionRequest < Struct.new(
+      :log_group_identifier,
+      :deletion_protection_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7471,6 +8663,28 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # Configuration for Amazon S3 destination where scheduled query results
+    # are delivered.
+    #
+    # @!attribute [rw] destination_identifier
+    #   The Amazon S3 URI where query results are delivered. Must be a valid
+    #   S3 URI format.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role that grants permissions to write query
+    #   results to the specified Amazon S3 destination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/S3Configuration AWS API Documentation
+    #
+    class S3Configuration < Struct.new(
+      :destination_identifier,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This structure contains delivery configurations that apply only when
     # the delivery destination resource is an S3 bucket.
     #
@@ -7497,6 +8711,137 @@ module Aws::CloudWatchLogs
     class S3DeliveryConfiguration < Struct.new(
       :suffix_path,
       :enable_hive_compatible_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a data source association with an S3 Table Integration,
+    # including its status and metadata.
+    #
+    # @!attribute [rw] identifier
+    #   The unique identifier for this data source association.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The data source associated with the S3 Table Integration.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] status
+    #   The current status of the data source association.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the status of the data source
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time_stamp
+    #   The timestamp when the data source association was created.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/S3TableIntegrationSource AWS API Documentation
+    #
+    class S3TableIntegrationSource < Struct.new(
+      :identifier,
+      :data_source,
+      :status,
+      :status_reason,
+      :created_time_stamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a destination where scheduled query results are
+    # processed, including processing status and any error messages.
+    #
+    # @!attribute [rw] destination_type
+    #   The type of destination for query results.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_identifier
+    #   The identifier for the destination where results are delivered.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The processing status of the destination delivery.
+    #   @return [String]
+    #
+    # @!attribute [rw] processed_identifier
+    #   The identifier of the processed result at the destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Error message if destination processing failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ScheduledQueryDestination AWS API Documentation
+    #
+    class ScheduledQueryDestination < Struct.new(
+      :destination_type,
+      :destination_identifier,
+      :status,
+      :processed_identifier,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a scheduled query, including basic
+    # configuration and execution status.
+    #
+    # @!attribute [rw] scheduled_query_arn
+    #   The ARN of the scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_triggered_time
+    #   The timestamp when the scheduled query was last executed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_execution_status
+    #   The status of the most recent execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_expression
+    #   The cron expression that defines when the scheduled query runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] timezone
+    #   The timezone used for evaluating the schedule expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_configuration
+    #   Configuration for where query results are delivered.
+    #   @return [Types::DestinationConfiguration]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the scheduled query was created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp when the scheduled query was last updated.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ScheduledQuerySummary AWS API Documentation
+    #
+    class ScheduledQuerySummary < Struct.new(
+      :scheduled_query_arn,
+      :name,
+      :state,
+      :last_triggered_time,
+      :last_execution_status,
+      :schedule_expression,
+      :timezone,
+      :destination_configuration,
+      :creation_time,
+      :last_updated_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8147,6 +9492,41 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # A record of a scheduled query execution, including execution status,
+    # timestamp, and destination processing results.
+    #
+    # @!attribute [rw] query_id
+    #   The unique identifier for this query execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_status
+    #   The execution status of the scheduled query run.
+    #   @return [String]
+    #
+    # @!attribute [rw] triggered_timestamp
+    #   The timestamp when the scheduled query execution was triggered.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_message
+    #   Error message if the query execution failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   Information about destination processing for this query execution.
+    #   @return [Array<Types::ScheduledQueryDestination>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TriggerHistoryRecord AWS API Documentation
+    #
+    class TriggerHistoryRecord < Struct.new(
+      :query_id,
+      :execution_status,
+      :triggered_timestamp,
+      :error_message,
+      :destinations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Use this processor to remove leading and trailing whitespace.
     #
     # For more information about this processor including examples, see [
@@ -8408,6 +9788,179 @@ module Aws::CloudWatchLogs
       :filter_pattern,
       :anomaly_visibility_time,
       :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The ARN or name of the scheduled query to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An updated description for the scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_language
+    #   The updated query language for the scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The updated query string to execute.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_identifiers
+    #   The updated array of log group names or ARNs to query.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] schedule_expression
+    #   The updated cron expression that defines when the scheduled query
+    #   runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] timezone
+    #   The updated timezone for evaluating the schedule expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time_offset
+    #   The updated time offset in seconds that defines the lookback period
+    #   for the query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination_configuration
+    #   The updated configuration for where to deliver query results.
+    #   @return [Types::DestinationConfiguration]
+    #
+    # @!attribute [rw] schedule_start_time
+    #   The updated start time for the scheduled query in Unix epoch format.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] schedule_end_time
+    #   The updated end time for the scheduled query in Unix epoch format.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The updated ARN of the IAM role that grants permissions to execute
+    #   the query and deliver results.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The updated state of the scheduled query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UpdateScheduledQueryRequest AWS API Documentation
+    #
+    class UpdateScheduledQueryRequest < Struct.new(
+      :identifier,
+      :description,
+      :query_language,
+      :query_string,
+      :log_group_identifiers,
+      :schedule_expression,
+      :timezone,
+      :start_time_offset,
+      :destination_configuration,
+      :schedule_start_time,
+      :schedule_end_time,
+      :execution_role_arn,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduled_query_arn
+    #   The ARN of the updated scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the updated scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the updated scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_language
+    #   The query language of the updated scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The query string of the updated scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_identifiers
+    #   The log groups queried by the updated scheduled query.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] schedule_expression
+    #   The cron expression of the updated scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] timezone
+    #   The timezone of the updated scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time_offset
+    #   The time offset of the updated scheduled query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination_configuration
+    #   The destination configuration of the updated scheduled query.
+    #   @return [Types::DestinationConfiguration]
+    #
+    # @!attribute [rw] state
+    #   The state of the updated scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_triggered_time
+    #   The timestamp when the updated scheduled query was last executed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_execution_status
+    #   The status of the most recent execution of the updated scheduled
+    #   query.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_start_time
+    #   The start time of the updated scheduled query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] schedule_end_time
+    #   The end time of the updated scheduled query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] execution_role_arn
+    #   The execution role ARN of the updated scheduled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the scheduled query was originally created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp when the scheduled query was last updated.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UpdateScheduledQueryResponse AWS API Documentation
+    #
+    class UpdateScheduledQueryResponse < Struct.new(
+      :scheduled_query_arn,
+      :name,
+      :description,
+      :query_language,
+      :query_string,
+      :log_group_identifiers,
+      :schedule_expression,
+      :timezone,
+      :start_time_offset,
+      :destination_configuration,
+      :state,
+      :last_triggered_time,
+      :last_execution_status,
+      :schedule_start_time,
+      :schedule_end_time,
+      :execution_role_arn,
+      :creation_time,
+      :last_updated_time)
       SENSITIVE = []
       include Aws::Structure
     end

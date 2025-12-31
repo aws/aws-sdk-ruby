@@ -17,6 +17,8 @@ module Aws::Route53
     ARN = Shapes::StringShape.new(name: 'ARN')
     AWSAccountID = Shapes::StringShape.new(name: 'AWSAccountID')
     AWSRegion = Shapes::StringShape.new(name: 'AWSRegion')
+    AcceleratedRecoveryEnabled = Shapes::BooleanShape.new(name: 'AcceleratedRecoveryEnabled')
+    AcceleratedRecoveryStatus = Shapes::StringShape.new(name: 'AcceleratedRecoveryStatus')
     AccountLimit = Shapes::StructureShape.new(name: 'AccountLimit')
     AccountLimitType = Shapes::StringShape.new(name: 'AccountLimitType')
     ActivateKeySigningKeyRequest = Shapes::StructureShape.new(name: 'ActivateKeySigningKeyRequest')
@@ -139,6 +141,7 @@ module Aws::Route53
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorMessages = Shapes::ListShape.new(name: 'ErrorMessages')
     EvaluationPeriods = Shapes::IntegerShape.new(name: 'EvaluationPeriods')
+    FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FailureThreshold = Shapes::IntegerShape.new(name: 'FailureThreshold')
     FullyQualifiedDomainName = Shapes::StringShape.new(name: 'FullyQualifiedDomainName')
     GeoLocation = Shapes::StructureShape.new(name: 'GeoLocation')
@@ -207,6 +210,8 @@ module Aws::Route53
     HostedZoneAlreadyExists = Shapes::StructureShape.new(name: 'HostedZoneAlreadyExists')
     HostedZoneConfig = Shapes::StructureShape.new(name: 'HostedZoneConfig')
     HostedZoneCount = Shapes::IntegerShape.new(name: 'HostedZoneCount')
+    HostedZoneFailureReasons = Shapes::StructureShape.new(name: 'HostedZoneFailureReasons')
+    HostedZoneFeatures = Shapes::StructureShape.new(name: 'HostedZoneFeatures')
     HostedZoneLimit = Shapes::StructureShape.new(name: 'HostedZoneLimit')
     HostedZoneLimitType = Shapes::StringShape.new(name: 'HostedZoneLimitType')
     HostedZoneNotEmpty = Shapes::StructureShape.new(name: 'HostedZoneNotEmpty')
@@ -406,6 +411,8 @@ module Aws::Route53
     UpdateHealthCheckResponse = Shapes::StructureShape.new(name: 'UpdateHealthCheckResponse')
     UpdateHostedZoneCommentRequest = Shapes::StructureShape.new(name: 'UpdateHostedZoneCommentRequest')
     UpdateHostedZoneCommentResponse = Shapes::StructureShape.new(name: 'UpdateHostedZoneCommentResponse')
+    UpdateHostedZoneFeaturesRequest = Shapes::StructureShape.new(name: 'UpdateHostedZoneFeaturesRequest')
+    UpdateHostedZoneFeaturesResponse = Shapes::StructureShape.new(name: 'UpdateHostedZoneFeaturesResponse')
     UpdateTrafficPolicyCommentRequest = Shapes::StructureShape.new(name: 'UpdateTrafficPolicyCommentRequest')
     UpdateTrafficPolicyCommentResponse = Shapes::StructureShape.new(name: 'UpdateTrafficPolicyCommentResponse')
     UpdateTrafficPolicyInstanceRequest = Shapes::StructureShape.new(name: 'UpdateTrafficPolicyInstanceRequest')
@@ -958,6 +965,7 @@ module Aws::Route53
     HostedZone.add_member(:config, Shapes::ShapeRef.new(shape: HostedZoneConfig, location_name: "Config"))
     HostedZone.add_member(:resource_record_set_count, Shapes::ShapeRef.new(shape: HostedZoneRRSetCount, location_name: "ResourceRecordSetCount"))
     HostedZone.add_member(:linked_service, Shapes::ShapeRef.new(shape: LinkedService, location_name: "LinkedService"))
+    HostedZone.add_member(:features, Shapes::ShapeRef.new(shape: HostedZoneFeatures, location_name: "Features"))
     HostedZone.struct_class = Types::HostedZone
 
     HostedZoneAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -966,6 +974,13 @@ module Aws::Route53
     HostedZoneConfig.add_member(:comment, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Comment"))
     HostedZoneConfig.add_member(:private_zone, Shapes::ShapeRef.new(shape: IsPrivateZone, location_name: "PrivateZone"))
     HostedZoneConfig.struct_class = Types::HostedZoneConfig
+
+    HostedZoneFailureReasons.add_member(:accelerated_recovery, Shapes::ShapeRef.new(shape: FailureReason, location_name: "AcceleratedRecovery"))
+    HostedZoneFailureReasons.struct_class = Types::HostedZoneFailureReasons
+
+    HostedZoneFeatures.add_member(:accelerated_recovery_status, Shapes::ShapeRef.new(shape: AcceleratedRecoveryStatus, location_name: "AcceleratedRecoveryStatus"))
+    HostedZoneFeatures.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: HostedZoneFailureReasons, location_name: "FailureReasons"))
+    HostedZoneFeatures.struct_class = Types::HostedZoneFeatures
 
     HostedZoneLimit.add_member(:type, Shapes::ShapeRef.new(shape: HostedZoneLimitType, required: true, location_name: "Type"))
     HostedZoneLimit.add_member(:value, Shapes::ShapeRef.new(shape: LimitValue, required: true, location_name: "Value"))
@@ -1513,6 +1528,12 @@ module Aws::Route53
 
     UpdateHostedZoneCommentResponse.add_member(:hosted_zone, Shapes::ShapeRef.new(shape: HostedZone, required: true, location_name: "HostedZone"))
     UpdateHostedZoneCommentResponse.struct_class = Types::UpdateHostedZoneCommentResponse
+
+    UpdateHostedZoneFeaturesRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
+    UpdateHostedZoneFeaturesRequest.add_member(:enable_accelerated_recovery, Shapes::ShapeRef.new(shape: AcceleratedRecoveryEnabled, location_name: "EnableAcceleratedRecovery"))
+    UpdateHostedZoneFeaturesRequest.struct_class = Types::UpdateHostedZoneFeaturesRequest
+
+    UpdateHostedZoneFeaturesResponse.struct_class = Types::UpdateHostedZoneFeaturesResponse
 
     UpdateTrafficPolicyCommentRequest.add_member(:id, Shapes::ShapeRef.new(shape: TrafficPolicyId, required: true, location: "uri", location_name: "Id"))
     UpdateTrafficPolicyCommentRequest.add_member(:version, Shapes::ShapeRef.new(shape: TrafficPolicyVersion, required: true, location: "uri", location_name: "Version"))
@@ -2487,6 +2508,23 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
+      end)
+
+      api.add_operation(:update_hosted_zone_features, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateHostedZoneFeatures"
+        o.http_method = "POST"
+        o.http_request_uri = "/2013-04-01/hostedzone/{Id}/features"
+        o.input = Shapes::ShapeRef.new(shape: UpdateHostedZoneFeaturesRequest,
+          location_name: "UpdateHostedZoneFeaturesRequest",
+          metadata: {
+            "xmlNamespace" => {"uri" => "https://route53.amazonaws.com/doc/2013-04-01/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: UpdateHostedZoneFeaturesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
+        o.errors << Shapes::ShapeRef.new(shape: LimitsExceeded)
       end)
 
       api.add_operation(:update_traffic_policy_comment, Seahorse::Model::Operation.new.tap do |o|

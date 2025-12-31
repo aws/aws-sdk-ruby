@@ -127,7 +127,7 @@ module Aws::SsmSap
       attr_accessor database_name: ::String
       attr_accessor database_type: ("SYSTEM" | "TENANT")
       attr_accessor arn: ::String
-      attr_accessor status: ("RUNNING" | "STARTING" | "STOPPED" | "WARNING" | "UNKNOWN" | "ERROR")
+      attr_accessor status: ("RUNNING" | "STARTING" | "STOPPED" | "WARNING" | "UNKNOWN" | "ERROR" | "STOPPING")
       attr_accessor primary_host: ::String
       attr_accessor sql_port: ::Integer
       attr_accessor last_updated: ::Time

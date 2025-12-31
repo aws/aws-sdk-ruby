@@ -49,7 +49,7 @@ module Aws::CloudWatch
     CompositeAlarm = Shapes::StructureShape.new(name: 'CompositeAlarm')
     CompositeAlarms = Shapes::ListShape.new(name: 'CompositeAlarms')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException', error: {"code" => "ConcurrentModificationException", "httpStatusCode" => 429, "senderFault" => true})
-    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException', error: {"httpStatusCode" => 409})
     ContributorAttributes = Shapes::MapShape.new(name: 'ContributorAttributes')
     ContributorId = Shapes::StringShape.new(name: 'ContributorId')
     Counts = Shapes::ListShape.new(name: 'Counts')
@@ -1084,13 +1084,16 @@ module Aws::CloudWatch
       api.metadata = {
         "apiVersion" => "2010-08-01",
         "auth" => ["aws.auth#sigv4"],
+        "awsQueryCompatible" => {},
         "endpointPrefix" => "monitoring",
-        "protocol" => "query",
-        "protocols" => ["query"],
+        "jsonVersion" => "1.0",
+        "protocol" => "smithy-rpc-v2-cbor",
+        "protocols" => ["smithy-rpc-v2-cbor", "json", "query"],
         "serviceAbbreviation" => "CloudWatch",
         "serviceFullName" => "Amazon CloudWatch",
         "serviceId" => "CloudWatch",
         "signatureVersion" => "v4",
+        "targetPrefix" => "GraniteServiceVersion20100801",
         "uid" => "monitoring-2010-08-01",
         "xmlNamespace" => "http://monitoring.amazonaws.com/doc/2010-08-01/",
       }

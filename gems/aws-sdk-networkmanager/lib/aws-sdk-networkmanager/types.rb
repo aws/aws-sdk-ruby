@@ -372,6 +372,38 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Summary information about routing policy associations for an
+    # attachment.
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment associated with the routing policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_routing_policies
+    #   The list of routing policies that are pending association with the
+    #   attachment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] associated_routing_policies
+    #   The list of routing policies currently associated with the
+    #   attachment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] routing_policy_label
+    #   The routing policy label associated with the attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AttachmentRoutingPolicyAssociationSummary AWS API Documentation
+    #
+    class AttachmentRoutingPolicyAssociationSummary < Struct.new(
+      :attachment_id,
+      :pending_routing_policies,
+      :associated_routing_policies,
+      :routing_policy_label)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes bandwidth information.
     #
     # @!attribute [rw] upload_speed
@@ -938,6 +970,15 @@ module Aws::NetworkManager
     #   The edge location for the core network change event.
     #   @return [String]
     #
+    # @!attribute [rw] peer_edge_location
+    #   The edge location of the peer in a core network change event.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_policy_direction
+    #   The routing policy direction (inbound/outbound) in a core network
+    #   change event.
+    #   @return [String]
+    #
     # @!attribute [rw] segment_name
     #   The segment name if the change event is associated with a segment.
     #   @return [String]
@@ -955,14 +996,22 @@ module Aws::NetworkManager
     #   For a `STATIC_ROUTE` event, this is the IP address.
     #   @return [String]
     #
+    # @!attribute [rw] routing_policy_association_details
+    #   The names of the routing policies and other association details in
+    #   the core network change values.
+    #   @return [Array<Types::RoutingPolicyAssociationDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkChangeEventValues AWS API Documentation
     #
     class CoreNetworkChangeEventValues < Struct.new(
       :edge_location,
+      :peer_edge_location,
+      :routing_policy_direction,
       :segment_name,
       :network_function_group_name,
       :attachment_id,
-      :cidr)
+      :cidr,
+      :routing_policy_association_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1021,6 +1070,28 @@ module Aws::NetworkManager
     #   network.
     #   @return [Boolean]
     #
+    # @!attribute [rw] routing_policy_direction
+    #   The routing policy direction (inbound/outbound) in a core network
+    #   change event.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_policy
+    #   The routing policy configuration in the core network change values.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_edge_locations
+    #   The edge locations of peers in the core network change values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] attachment_id
+    #   The attachment identifier in the core network change values.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_policy_association_details
+    #   The names of the routing policies and other association details in
+    #   the core network change values.
+    #   @return [Array<Types::RoutingPolicyAssociationDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkChangeValues AWS API Documentation
     #
     class CoreNetworkChangeValues < Struct.new(
@@ -1035,7 +1106,12 @@ module Aws::NetworkManager
       :service_insertion_actions,
       :vpn_ecmp_support,
       :dns_support,
-      :security_group_referencing_support)
+      :security_group_referencing_support,
+      :routing_policy_direction,
+      :routing_policy,
+      :peer_edge_locations,
+      :attachment_id,
+      :routing_policy_association_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1245,6 +1321,46 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Routing information for a core network, including route details and
+    # BGP attributes.
+    #
+    # @!attribute [rw] prefix
+    #   The IP prefix for the route.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_hop
+    #   The next hop information for the route.
+    #   @return [Types::RoutingInformationNextHop]
+    #
+    # @!attribute [rw] local_preference
+    #   The BGP local preference value for the route.
+    #   @return [String]
+    #
+    # @!attribute [rw] med
+    #   The BGP Multi-Exit Discriminator (MED) value for the route.
+    #   @return [String]
+    #
+    # @!attribute [rw] as_path
+    #   The BGP AS path for the route.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] communities
+    #   The BGP community values for the route.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkRoutingInformation AWS API Documentation
+    #
+    class CoreNetworkRoutingInformation < Struct.new(
+      :prefix,
+      :next_hop,
+      :local_preference,
+      :med,
+      :as_path,
+      :communities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a core network segment, which are dedicated routes. Only
     # attachments within this segment can communicate with each other.
     #
@@ -1350,6 +1466,11 @@ module Aws::NetworkManager
     #   The ID of the attachment between the two connections.
     #   @return [String]
     #
+    # @!attribute [rw] routing_policy_label
+    #   The routing policy label to apply to the Connect attachment for
+    #   traffic routing decisions.
+    #   @return [String]
+    #
     # @!attribute [rw] options
     #   Options for creating an attachment.
     #   @return [Types::ConnectAttachmentOptions]
@@ -1371,6 +1492,7 @@ module Aws::NetworkManager
       :core_network_id,
       :edge_location,
       :transport_attachment_id,
+      :routing_policy_label,
       :options,
       :tags,
       :client_token)
@@ -1511,6 +1633,60 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @!attribute [rw] core_network_id
+    #   The ID of the core network to associate with the prefix list.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_arn
+    #   The ARN of the prefix list to associate with the core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_alias
+    #   An optional alias for the prefix list association.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateCoreNetworkPrefixListAssociationRequest AWS API Documentation
+    #
+    class CreateCoreNetworkPrefixListAssociationRequest < Struct.new(
+      :core_network_id,
+      :prefix_list_arn,
+      :prefix_list_alias,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_id
+    #   The ID of the core network associated with the prefix list.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_arn
+    #   The ARN of the prefix list that was associated with the core
+    #   network.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_alias
+    #   The alias of the prefix list association, if provided.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateCoreNetworkPrefixListAssociationResponse AWS API Documentation
+    #
+    class CreateCoreNetworkPrefixListAssociationResponse < Struct.new(
+      :core_network_id,
+      :prefix_list_arn,
+      :prefix_list_alias)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] global_network_id
     #   The ID of the global network that a core network will be a part of.
     #   @return [String]
@@ -1645,6 +1821,11 @@ module Aws::NetworkManager
     #   The ARN of the Direct Connect gateway attachment.
     #   @return [String]
     #
+    # @!attribute [rw] routing_policy_label
+    #   The routing policy label to apply to the Direct Connect Gateway
+    #   attachment for traffic routing decisions.
+    #   @return [String]
+    #
     # @!attribute [rw] edge_locations
     #   One or more core network edge locations that the Direct Connect
     #   gateway attachment is associated with.
@@ -1667,6 +1848,7 @@ module Aws::NetworkManager
     class CreateDirectConnectGatewayAttachmentRequest < Struct.new(
       :core_network_id,
       :direct_connect_gateway_arn,
+      :routing_policy_label,
       :edge_locations,
       :tags,
       :client_token)
@@ -1838,6 +2020,11 @@ module Aws::NetworkManager
     #   The ARN identifying the VPN attachment.
     #   @return [String]
     #
+    # @!attribute [rw] routing_policy_label
+    #   The routing policy label to apply to the Site-to-Site VPN attachment
+    #   for traffic routing decisions.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags associated with the request.
     #   @return [Array<Types::Tag>]
@@ -1854,6 +2041,7 @@ module Aws::NetworkManager
     class CreateSiteToSiteVpnAttachmentRequest < Struct.new(
       :core_network_id,
       :vpn_connection_arn,
+      :routing_policy_label,
       :tags,
       :client_token)
       SENSITIVE = []
@@ -1925,6 +2113,11 @@ module Aws::NetworkManager
     #   "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456"`.
     #   @return [String]
     #
+    # @!attribute [rw] routing_policy_label
+    #   The routing policy label to apply to the Transit Gateway route table
+    #   attachment for traffic routing decisions.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The list of key-value tags associated with the request.
     #   @return [Array<Types::Tag>]
@@ -1941,6 +2134,7 @@ module Aws::NetworkManager
     class CreateTransitGatewayRouteTableAttachmentRequest < Struct.new(
       :peering_id,
       :transit_gateway_route_table_arn,
+      :routing_policy_label,
       :tags,
       :client_token)
       SENSITIVE = []
@@ -1976,6 +2170,11 @@ module Aws::NetworkManager
     #   Options for the VPC attachment.
     #   @return [Types::VpcOptions]
     #
+    # @!attribute [rw] routing_policy_label
+    #   The routing policy label to apply to the VPC attachment for traffic
+    #   routing decisions.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The key-value tags associated with the request.
     #   @return [Array<Types::Tag>]
@@ -1994,6 +2193,7 @@ module Aws::NetworkManager
       :vpc_arn,
       :subnet_arns,
       :options,
+      :routing_policy_label,
       :tags,
       :client_token)
       SENSITIVE = []
@@ -2149,6 +2349,43 @@ module Aws::NetworkManager
     #
     class DeleteCoreNetworkPolicyVersionResponse < Struct.new(
       :core_network_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_id
+    #   The ID of the core network from which to delete the prefix list
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_arn
+    #   The ARN of the prefix list to disassociate from the core network.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteCoreNetworkPrefixListAssociationRequest AWS API Documentation
+    #
+    class DeleteCoreNetworkPrefixListAssociationRequest < Struct.new(
+      :core_network_id,
+      :prefix_list_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_id
+    #   The ID of the core network from which the prefix list association
+    #   was deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_arn
+    #   The ARN of the prefix list that was disassociated from the core
+    #   network.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteCoreNetworkPrefixListAssociationResponse AWS API Documentation
+    #
+    class DeleteCoreNetworkPrefixListAssociationResponse < Struct.new(
+      :core_network_id,
+      :prefix_list_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4075,6 +4312,52 @@ module Aws::NetworkManager
     end
 
     # @!attribute [rw] core_network_id
+    #   The ID of the core network to list attachment routing policy
+    #   associations for.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of a specific attachment to filter the routing policy
+    #   associations.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListAttachmentRoutingPolicyAssociationsRequest AWS API Documentation
+    #
+    class ListAttachmentRoutingPolicyAssociationsRequest < Struct.new(
+      :core_network_id,
+      :attachment_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attachment_routing_policy_associations
+    #   The list of attachment routing policy associations.
+    #   @return [Array<Types::AttachmentRoutingPolicyAssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListAttachmentRoutingPolicyAssociationsResponse AWS API Documentation
+    #
+    class ListAttachmentRoutingPolicyAssociationsResponse < Struct.new(
+      :attachment_routing_policy_associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_id
     #   The ID of a core network.
     #   @return [String]
     #
@@ -4206,6 +4489,126 @@ module Aws::NetworkManager
     #
     class ListCoreNetworkPolicyVersionsResponse < Struct.new(
       :core_network_policy_versions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_id
+    #   The ID of the core network to list prefix list associations for.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_arn
+    #   The ARN of a specific prefix list to filter the associations.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListCoreNetworkPrefixListAssociationsRequest AWS API Documentation
+    #
+    class ListCoreNetworkPrefixListAssociationsRequest < Struct.new(
+      :core_network_id,
+      :prefix_list_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] prefix_list_associations
+    #   The list of prefix list associations for the core network.
+    #   @return [Array<Types::PrefixListAssociation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListCoreNetworkPrefixListAssociationsResponse AWS API Documentation
+    #
+    class ListCoreNetworkPrefixListAssociationsResponse < Struct.new(
+      :prefix_list_associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_id
+    #   The ID of the core network to retrieve routing information for.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_name
+    #   The name of the segment to filter routing information by.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_location
+    #   The edge location to filter routing information by.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_hop_filters
+    #   Filters to apply based on next hop information.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] local_preference_matches
+    #   Local preference values to match when filtering routing information.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exact_as_path_matches
+    #   Exact AS path values to match when filtering routing information.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] med_matches
+    #   Multi-Exit Discriminator (MED) values to match when filtering
+    #   routing information.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] community_matches
+    #   BGP community values to match when filtering routing information.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of routing information entries to return in a
+    #   single page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListCoreNetworkRoutingInformationRequest AWS API Documentation
+    #
+    class ListCoreNetworkRoutingInformationRequest < Struct.new(
+      :core_network_id,
+      :segment_name,
+      :edge_location,
+      :next_hop_filters,
+      :local_preference_matches,
+      :exact_as_path_matches,
+      :med_matches,
+      :community_matches,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_routing_information
+    #   The list of routing information for the core network.
+    #   @return [Array<Types::CoreNetworkRoutingInformation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListCoreNetworkRoutingInformationResponse AWS API Documentation
+    #
+    class ListCoreNetworkRoutingInformationResponse < Struct.new(
+      :core_network_routing_information,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4864,6 +5267,30 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Information about a prefix list association with a core network.
+    #
+    # @!attribute [rw] core_network_id
+    #   The core network id in the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_arn
+    #   The ARN of the prefix list in the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_alias
+    #   The alias of the prefix list in the association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/PrefixListAssociation AWS API Documentation
+    #
+    class PrefixListAssociation < Struct.new(
+      :core_network_id,
+      :prefix_list_arn,
+      :prefix_list_alias)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes proposed changes to a network function group.
     #
     # @!attribute [rw] tags
@@ -4911,6 +5338,59 @@ module Aws::NetworkManager
       :tags,
       :attachment_policy_rule_number,
       :segment_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_id
+    #   The ID of the core network containing the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment to apply the routing policy label to.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_policy_label
+    #   The routing policy label to apply to the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/PutAttachmentRoutingPolicyLabelRequest AWS API Documentation
+    #
+    class PutAttachmentRoutingPolicyLabelRequest < Struct.new(
+      :core_network_id,
+      :attachment_id,
+      :routing_policy_label,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_id
+    #   The ID of the core network containing the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment that received the routing policy label.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_policy_label
+    #   The routing policy label that was applied to the attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/PutAttachmentRoutingPolicyLabelResponse AWS API Documentation
+    #
+    class PutAttachmentRoutingPolicyLabelResponse < Struct.new(
+      :core_network_id,
+      :attachment_id,
+      :routing_policy_label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5051,6 +5531,46 @@ module Aws::NetworkManager
     class Relationship < Struct.new(
       :from,
       :to)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_id
+    #   The ID of the core network containing the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment to remove the routing policy label from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RemoveAttachmentRoutingPolicyLabelRequest AWS API Documentation
+    #
+    class RemoveAttachmentRoutingPolicyLabelRequest < Struct.new(
+      :core_network_id,
+      :attachment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_id
+    #   The ID of the core network containing the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment from which the routing policy label was
+    #   removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_policy_label
+    #   The routing policy label that was removed from the attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RemoveAttachmentRoutingPolicyLabelResponse AWS API Documentation
+    #
+    class RemoveAttachmentRoutingPolicyLabelResponse < Struct.new(
+      :core_network_id,
+      :attachment_id,
+      :routing_policy_label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5315,6 +5835,65 @@ module Aws::NetworkManager
       :transit_gateway_route_table_arn,
       :core_network_segment_edge,
       :core_network_network_function_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the next hop for a route in the core network.
+    #
+    # @!attribute [rw] ip_address
+    #   The IP address of the next hop.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_attachment_id
+    #   The ID of the core network attachment for the next hop.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource for the next hop.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource for the next hop.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_name
+    #   The name of the segment for the next hop.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_location
+    #   The edge location for the next hop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RoutingInformationNextHop AWS API Documentation
+    #
+    class RoutingInformationNextHop < Struct.new(
+      :ip_address,
+      :core_network_attachment_id,
+      :resource_id,
+      :resource_type,
+      :segment_name,
+      :edge_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a routing policy association.
+    #
+    # @!attribute [rw] routing_policy_names
+    #   The names of the routing policies in the association.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] shared_segments
+    #   The names of the segments that are shared with each other in the
+    #   association.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RoutingPolicyAssociationDetail AWS API Documentation
+    #
+    class RoutingPolicyAssociationDetail < Struct.new(
+      :routing_policy_names,
+      :shared_segments)
       SENSITIVE = []
       include Aws::Structure
     end

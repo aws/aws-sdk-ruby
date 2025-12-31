@@ -786,7 +786,7 @@ module Aws::Billing
     #   resp.billing_view.arn #=> String
     #   resp.billing_view.name #=> String
     #   resp.billing_view.description #=> String
-    #   resp.billing_view.billing_view_type #=> String, one of "PRIMARY", "BILLING_GROUP", "CUSTOM"
+    #   resp.billing_view.billing_view_type #=> String, one of "PRIMARY", "BILLING_GROUP", "CUSTOM", "BILLING_TRANSFER", "BILLING_TRANSFER_SHOWBACK"
     #   resp.billing_view.owner_account_id #=> String
     #   resp.billing_view.source_account_id #=> String
     #   resp.billing_view.data_filter_expression.dimensions.key #=> String, one of "LINKED_ACCOUNT"
@@ -881,6 +881,11 @@ module Aws::Billing
     # @option params [Array<String>] :billing_view_types
     #   The type of billing view.
     #
+    # @option params [Array<Types::StringSearch>] :names
+    #   Filters the list of billing views by name. You can specify search
+    #   criteria to match billing view names based on the search option
+    #   provided.
+    #
     # @option params [String] :owner_account_id
     #   The list of owners of the billing view.
     #
@@ -941,7 +946,13 @@ module Aws::Billing
     #       active_before_inclusive: Time.now, # required
     #     },
     #     arns: ["BillingViewArn"],
-    #     billing_view_types: ["PRIMARY"], # accepts PRIMARY, BILLING_GROUP, CUSTOM
+    #     billing_view_types: ["PRIMARY"], # accepts PRIMARY, BILLING_GROUP, CUSTOM, BILLING_TRANSFER, BILLING_TRANSFER_SHOWBACK
+    #     names: [
+    #       {
+    #         search_option: "STARTS_WITH", # required, accepts STARTS_WITH
+    #         search_value: "SearchValue", # required
+    #       },
+    #     ],
     #     owner_account_id: "AccountId",
     #     source_account_id: "AccountId",
     #     max_results: 1,
@@ -956,7 +967,7 @@ module Aws::Billing
     #   resp.billing_views[0].description #=> String
     #   resp.billing_views[0].owner_account_id #=> String
     #   resp.billing_views[0].source_account_id #=> String
-    #   resp.billing_views[0].billing_view_type #=> String, one of "PRIMARY", "BILLING_GROUP", "CUSTOM"
+    #   resp.billing_views[0].billing_view_type #=> String, one of "PRIMARY", "BILLING_GROUP", "CUSTOM", "BILLING_TRANSFER", "BILLING_TRANSFER_SHOWBACK"
     #   resp.billing_views[0].health_status.status_code #=> String, one of "HEALTHY", "UNHEALTHY", "CREATING", "UPDATING"
     #   resp.billing_views[0].health_status.status_reasons #=> Array
     #   resp.billing_views[0].health_status.status_reasons[0] #=> String, one of "SOURCE_VIEW_UNHEALTHY", "SOURCE_VIEW_UPDATING", "SOURCE_VIEW_ACCESS_DENIED", "SOURCE_VIEW_NOT_FOUND", "CYCLIC_DEPENDENCY", "SOURCE_VIEW_DEPTH_EXCEEDED", "AGGREGATE_SOURCE", "VIEW_OWNER_NOT_MANAGEMENT_ACCOUNT"
@@ -1268,7 +1279,7 @@ module Aws::Billing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-billing'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

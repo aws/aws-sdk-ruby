@@ -404,6 +404,12 @@ module Aws::Kafka
     #   This controls storage mode for supported storage tiers.
     #   @return [String]
     #
+    # @!attribute [rw] rebalancing
+    #   Contains information about intelligent rebalancing for new MSK
+    #   Provisioned clusters with Express brokers. By default, intelligent
+    #   rebalancing status is ACTIVE.
+    #   @return [Types::Rebalancing]
+    #
     # @!attribute [rw] customer_action_status
     #   Determines if there is an action required from the customer.
     #   @return [String]
@@ -430,6 +436,7 @@ module Aws::Kafka
       :zookeeper_connect_string,
       :zookeeper_connect_string_tls,
       :storage_mode,
+      :rebalancing,
       :customer_action_status)
       SENSITIVE = []
       include Aws::Structure
@@ -1022,6 +1029,12 @@ module Aws::Kafka
     #   Create tags when creating the cluster.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] rebalancing
+    #   Specifies if intelligent rebalancing should be turned on for the new
+    #   MSK Provisioned cluster with Express brokers. By default,
+    #   intelligent rebalancing status is ACTIVE for all new clusters.
+    #   @return [Types::Rebalancing]
+    #
     # @!attribute [rw] storage_mode
     #   This controls storage mode for supported storage tiers.
     #   @return [String]
@@ -1040,6 +1053,7 @@ module Aws::Kafka
       :number_of_broker_nodes,
       :open_monitoring,
       :tags,
+      :rebalancing,
       :storage_mode)
       SENSITIVE = []
       include Aws::Structure
@@ -1605,6 +1619,123 @@ module Aws::Kafka
       :description,
       :revision,
       :server_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request body for DescribeTopic.
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeTopicRequest AWS API Documentation
+    #
+    class DescribeTopicRequest < Struct.new(
+      :cluster_arn,
+      :topic_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request body for DescribeTopicPartitions.
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeTopicPartitionsRequest AWS API Documentation
+    #
+    class DescribeTopicPartitionsRequest < Struct.new(
+      :cluster_arn,
+      :topic_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response containing details for a topic.
+    #
+    # @!attribute [rw] topic_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_factor
+    #   @return [Integer]
+    #
+    # @!attribute [rw] partition_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] configs
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeTopicResponse AWS API Documentation
+    #
+    class DescribeTopicResponse < Struct.new(
+      :topic_arn,
+      :topic_name,
+      :replication_factor,
+      :partition_count,
+      :configs,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response containing partitions details for a topic.
+    #
+    # @!attribute [rw] partitions
+    #   @return [Array<Types::TopicPartitionInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeTopicPartitionsResponse AWS API Documentation
+    #
+    class DescribeTopicPartitionsResponse < Struct.new(
+      :partitions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a topic partition.
+    #
+    # @!attribute [rw] partition
+    #   @return [Integer]
+    #
+    # @!attribute [rw] leader
+    #   @return [Integer]
+    #
+    # @!attribute [rw] replicas
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] isr
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/TopicPartitionInfo AWS API Documentation
+    #
+    class TopicPartitionInfo < Struct.new(
+      :partition,
+      :leader,
+      :replicas,
+      :isr)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2586,6 +2717,21 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Includes all rebalancing-related information for the cluster.
+    #
+    # @!attribute [rw] status
+    #   Intelligent rebalancing status. The default intelligent rebalancing
+    #   status is ACTIVE for all new Express-based clusters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Rebalancing AWS API Documentation
+    #
+    class Rebalancing < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Creates a provisioned cluster.
     #
     # @!attribute [rw] broker_node_group_info
@@ -2631,6 +2777,13 @@ module Aws::Kafka
     #   This controls storage mode for supported storage tiers.
     #   @return [String]
     #
+    # @!attribute [rw] rebalancing
+    #   Specifies if intelligent rebalancing is turned on for your MSK
+    #   Provisioned cluster with Express brokers. For all new Express-based
+    #   clusters that you create, intelligent rebalancing is turned on by
+    #   default.
+    #   @return [Types::Rebalancing]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ProvisionedRequest AWS API Documentation
     #
     class ProvisionedRequest < Struct.new(
@@ -2643,7 +2796,8 @@ module Aws::Kafka
       :kafka_version,
       :logging_info,
       :number_of_broker_nodes,
-      :storage_mode)
+      :storage_mode,
+      :rebalancing)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2707,6 +2861,15 @@ module Aws::Kafka
     #   This controls storage mode for supported storage tiers.
     #   @return [String]
     #
+    # @!attribute [rw] rebalancing
+    #   Specifies whether or not intelligent rebalancing is turned on for a
+    #   newly created MSK Provisioned cluster with Express brokers.
+    #   Intelligent rebalancing performs automatic partition balancing
+    #   operations when you scale your clusters up or down. By default,
+    #   intelligent rebalancing is ACTIVE for all new Express-based
+    #   clusters.
+    #   @return [Types::Rebalancing]
+    #
     # @!attribute [rw] customer_action_status
     #   Determines if there is an action required from the customer.
     #   @return [String]
@@ -2725,6 +2888,7 @@ module Aws::Kafka
       :zookeeper_connect_string,
       :zookeeper_connect_string_tls,
       :storage_mode,
+      :rebalancing,
       :customer_action_status)
       SENSITIVE = []
       include Aws::Structure
@@ -3132,6 +3296,48 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Request body for ListTopics.
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name_filter
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListTopicsRequest AWS API Documentation
+    #
+    class ListTopicsRequest < Struct.new(
+      :cluster_arn,
+      :max_results,
+      :next_token,
+      :topic_name_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response contains an array of topics on a MSK Cluster.
+    #
+    # @!attribute [rw] topics
+    #   @return [Array<Types::TopicInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListTopicsResponse AWS API Documentation
+    #
+    class ListTopicsResponse < Struct.new(
+      :topics,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   @return [Integer]
     #
@@ -3294,6 +3500,11 @@ module Aws::Kafka
     #   Describes brokers being changed during a broker count update.
     #   @return [Types::BrokerCountUpdateInfo]
     #
+    # @!attribute [rw] rebalancing
+    #   Describes the intelligent rebalancing configuration of an MSK
+    #   Provisioned cluster with Express brokers.
+    #   @return [Types::Rebalancing]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/MutableClusterInfo AWS API Documentation
     #
     class MutableClusterInfo < Struct.new(
@@ -3309,7 +3520,8 @@ module Aws::Kafka
       :encryption_info,
       :connectivity_info,
       :storage_mode,
-      :broker_count_update_info)
+      :broker_count_update_info,
+      :rebalancing)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3827,6 +4039,35 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Includes identification info about the topic.
+    #
+    # @!attribute [rw] topic_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_factor
+    #   @return [Integer]
+    #
+    # @!attribute [rw] partition_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] out_of_sync_replica_count
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/TopicInfo AWS API Documentation
+    #
+    class TopicInfo < Struct.new(
+      :topic_arn,
+      :topic_name,
+      :replication_factor,
+      :partition_count,
+      :out_of_sync_replica_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] enabled
     #   TLS authentication for VPC connectivity is on or off.
     #   @return [Boolean]
@@ -4002,6 +4243,50 @@ module Aws::Kafka
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateBrokerCountResponse AWS API Documentation
     #
     class UpdateBrokerCountResponse < Struct.new(
+      :cluster_arn,
+      :cluster_operation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request body for UpdateRebalancing.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_version
+    #   The current version of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] rebalancing
+    #   Includes all rebalancing-related information for the cluster.
+    #   @return [Types::Rebalancing]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateRebalancingRequest AWS API Documentation
+    #
+    class UpdateRebalancingRequest < Struct.new(
+      :cluster_arn,
+      :current_version,
+      :rebalancing)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for UpdateRebalancing.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster whose intelligent
+    #   rebalancing status you've updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_operation_arn
+    #   The Amazon Resource Name (ARN) of the cluster operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateRebalancingResponse AWS API Documentation
+    #
+    class UpdateRebalancingResponse < Struct.new(
       :cluster_arn,
       :cluster_operation_arn)
       SENSITIVE = []

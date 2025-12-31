@@ -476,9 +476,10 @@ module Aws::GameLiftStreams
 
     # @!group API Operations
 
-    # Add locations that can host stream sessions. You configure locations
-    # and their corresponding capacity for each stream group. Creating a
-    # stream group in a location that's nearest to your end users can help
+    # Add locations that can host stream sessions. To add a location, the
+    # stream group must be in `ACTIVE` status. You configure locations and
+    # their corresponding capacity for each stream group. Creating a stream
+    # group in a location that's nearest to your end users can help
     # minimize latency and improve quality.
     #
     # This operation provisions stream capacity at the specified locations.
@@ -519,6 +520,8 @@ module Aws::GameLiftStreams
     #         location_name: "LocationName", # required
     #         always_on_capacity: 1,
     #         on_demand_capacity: 1,
+    #         target_idle_capacity: 1,
+    #         maximum_capacity: 1,
     #       },
     #     ],
     #   })
@@ -531,6 +534,8 @@ module Aws::GameLiftStreams
     #   resp.locations[0].status #=> String, one of "ACTIVATING", "ACTIVE", "ERROR", "REMOVING"
     #   resp.locations[0].always_on_capacity #=> Integer
     #   resp.locations[0].on_demand_capacity #=> Integer
+    #   resp.locations[0].target_idle_capacity #=> Integer
+    #   resp.locations[0].maximum_capacity #=> Integer
     #   resp.locations[0].requested_capacity #=> Integer
     #   resp.locations[0].allocated_capacity #=> Integer
     #   resp.locations[0].idle_capacity #=> Integer
@@ -659,9 +664,14 @@ module Aws::GameLiftStreams
     #     * Proton 8.0-2c (`Type=PROTON, Version=20230704`)
     #
     # @option params [required, String] :executable_path
-    #   The path and file name of the executable file that launches the
-    #   content for streaming. Enter a path value that is relative to the
-    #   location set in `ApplicationSourceUri`.
+    #   The relative path and file name of the executable file that Amazon
+    #   GameLift Streams will stream. Specify a path relative to the location
+    #   set in `ApplicationSourceUri`. The file must be contained within the
+    #   application's root folder. For Windows applications, the file must be
+    #   a valid Windows executable or batch file with a filename ending in
+    #   .exe, .cmd, or .bat. For Linux applications, the file must be a valid
+    #   Linux binary executable or a script that contains an initial
+    #   interpreter line starting with a shebang ('`#!`').
     #
     # @option params [required, String] :application_source_uri
     #   The location of the content that you want to stream. Enter an Amazon
@@ -798,43 +808,57 @@ module Aws::GameLiftStreams
       req.send_request(options)
     end
 
-    # Manage how Amazon GameLift Streams streams your applications by using
-    # a stream group. A stream group is a collection of resources that
-    # Amazon GameLift Streams uses to stream your application to end-users.
-    # When you create a stream group, you specify an application to stream
-    # by default and the type of hardware to use, such as the graphical
-    # processing unit (GPU). You can also link additional applications,
-    # which allows you to stream those applications using this stream group.
-    # Depending on your expected users, you also scale the number of
-    # concurrent streams you want to support at one time, and in what
-    # locations.
+    # Stream groups manage how Amazon GameLift Streams allocates resources
+    # and handles concurrent streams, allowing you to effectively manage
+    # capacity and costs. Within a stream group, you specify an application
+    # to stream, streaming locations and their capacity, and the stream
+    # class you want to use when streaming applications to your end-users. A
+    # stream class defines the hardware configuration of the compute
+    # resources that Amazon GameLift Streams will use when streaming, such
+    # as the CPU, GPU, and memory.
     #
     # Stream capacity represents the number of concurrent streams that can
     # be active at a time. You set stream capacity per location, per stream
-    # group. There are two types of capacity, always-on and on-demand:
+    # group. The following capacity settings are available:
     #
-    # * **Always-on**: The streaming capacity that is allocated and ready to
-    #   handle stream requests without delay. You pay for this capacity
-    #   whether it's in use or not. Best for quickest time from streaming
-    #   request to streaming session. Default is 1 when creating a stream
-    #   group or adding a location.
+    # * **Always-on capacity**: This setting, if non-zero, indicates minimum
+    #   streaming capacity which is allocated to you and is never released
+    #   back to the service. You pay for this base level of capacity at all
+    #   times, whether used or idle.
     #
-    # * **On-demand**: The streaming capacity that Amazon GameLift Streams
-    #   can allocate in response to stream requests, and then de-allocate
-    #   when the session has terminated. This offers a cost control measure
-    #   at the expense of a greater startup time (typically under 5
-    #   minutes). Default is 0 when creating a stream group or adding a
-    #   location.
+    # * **Maximum capacity**: This indicates the maximum capacity that the
+    #   service can allocate for you. Newly created streams may take a few
+    #   minutes to start. Capacity is released back to the service when
+    #   idle. You pay for capacity that is allocated to you until it is
+    #   released.
+    #
+    # * **Target-idle capacity**: This indicates idle capacity which the
+    #   service pre-allocates and holds for you in anticipation of future
+    #   activity. This helps to insulate your users from capacity-allocation
+    #   delays. You pay for capacity which is held in this intentional idle
+    #   state.
+    #
+    # Values for capacity must be whole number multiples of the tenancy
+    # value of the stream group's stream class.
     #
     # To adjust the capacity of any `ACTIVE` stream group, call
     # [UpdateStreamGroup][1].
     #
-    # If the request is successful, Amazon GameLift Streams begins creating
-    # the stream group. Amazon GameLift Streams assigns a unique ID to the
-    # stream group resource and sets the status to `ACTIVATING`. When the
-    # stream group reaches `ACTIVE` status, you can start stream sessions by
-    # using [StartStreamSession][2]. To check the stream group's status,
+    # If the `CreateStreamGroup` request is successful, Amazon GameLift
+    # Streams assigns a unique ID to the stream group resource and sets the
+    # status to `ACTIVATING`. It can take a few minutes for Amazon GameLift
+    # Streams to finish creating the stream group while it searches for
+    # unallocated compute resources and provisions them. When complete, the
+    # stream group status will be `ACTIVE` and you can start stream sessions
+    # by using [StartStreamSession][2]. To check the stream group's status,
     # call [GetStreamGroup][3].
+    #
+    # Stream groups should be recreated every 3-4 weeks to pick up important
+    # service updates and fixes. Stream groups that are older than 180 days
+    # can no longer be updated with new application associations. Stream
+    # groups expire when they are 365 days old, at which point they can no
+    # longer stream sessions. The exact expiration date is indicated by the
+    # date value in the `ExpiresAt` field.
     #
     #
     #
@@ -854,12 +878,95 @@ module Aws::GameLiftStreams
     #
     #   A stream class can be one of the following:
     #
+    #   * <b> <code>gen6n_pro_win2022</code> (NVIDIA, pro)</b> Supports
+    #     applications with extremely high 3D scene complexity which require
+    #     maximum resources. Runs applications on Microsoft Windows Server
+    #     2022 Base and supports DirectX 12. Compatible with Unreal Engine
+    #     versions up through 5.6, 32 and 64-bit applications, and anti-cheat
+    #     technology. Uses NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 16 vCPUs, 64 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_pro</code> (NVIDIA, pro)</b> Supports applications
+    #     with extremely high 3D scene complexity which require maximum
+    #     resources. Uses dedicated NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 16 vCPUs, 64 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_ultra_win2022</code> (NVIDIA, ultra)</b> Supports
+    #     applications with high 3D scene complexity. Runs applications on
+    #     Microsoft Windows Server 2022 Base and supports DirectX 12.
+    #     Compatible with Unreal Engine versions up through 5.6, 32 and 64-bit
+    #     applications, and anti-cheat technology. Uses NVIDIA L4 Tensor Core
+    #     GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 8 vCPUs, 32 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_ultra</code> (NVIDIA, ultra)</b> Supports
+    #     applications with high 3D scene complexity. Uses dedicated NVIDIA L4
+    #     Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 8 vCPUs, 32 GB RAM, 24 GB VRAM
+    #
+    #     * Tenancy: Supports 1 concurrent stream session
+    #   * <b> <code>gen6n_high</code> (NVIDIA, high)</b> Supports applications
+    #     with moderate to high 3D scene complexity. Uses NVIDIA L4 Tensor
+    #     Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 4 vCPUs, 16 GB RAM, 12 GB VRAM
+    #
+    #     * Tenancy: Supports up to 2 concurrent stream sessions
+    #   * <b> <code>gen6n_medium</code> (NVIDIA, medium)</b> Supports
+    #     applications with moderate 3D scene complexity. Uses NVIDIA L4
+    #     Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 2 vCPUs, 8 GB RAM, 6 GB VRAM
+    #
+    #     * Tenancy: Supports up to 4 concurrent stream sessions
+    #   * <b> <code>gen6n_small</code> (NVIDIA, small)</b> Supports
+    #     applications with lightweight 3D scene complexity and low CPU usage.
+    #     Uses NVIDIA L4 Tensor Core GPU.
+    #
+    #     * Reference resolution: 1080p
+    #
+    #     * Reference frame rate: 60 fps
+    #
+    #     * Workload specifications: 1 vCPUs, 4 GB RAM, 2 GB VRAM
+    #
+    #     * Tenancy: Supports up to 12 concurrent stream sessions
     #   * <b> <code>gen5n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.6,
     #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
-    #     A10G Tensor GPU.
+    #     A10G Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -870,7 +977,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports 1 concurrent stream session
     #   * <b> <code>gen5n_high</code> (NVIDIA, high)</b> Supports applications
     #     with moderate to high 3D scene complexity. Uses NVIDIA A10G Tensor
-    #     GPU.
+    #     Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -881,7 +988,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports up to 2 concurrent stream sessions
     #   * <b> <code>gen5n_ultra</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Uses dedicated
-    #     NVIDIA A10G Tensor GPU.
+    #     NVIDIA A10G Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -893,9 +1000,9 @@ module Aws::GameLiftStreams
     #   * <b> <code>gen4n_win2022</code> (NVIDIA, ultra)</b> Supports
     #     applications with extremely high 3D scene complexity. Runs
     #     applications on Microsoft Windows Server 2022 Base and supports
-    #     DirectX 12. Compatible with Unreal Engine versions up through 5.4,
+    #     DirectX 12. Compatible with Unreal Engine versions up through 5.6,
     #     32 and 64-bit applications, and anti-cheat technology. Uses NVIDIA
-    #     T4 Tensor GPU.
+    #     T4 Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -906,7 +1013,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports 1 concurrent stream session
     #   * <b> <code>gen4n_high</code> (NVIDIA, high)</b> Supports applications
     #     with moderate to high 3D scene complexity. Uses NVIDIA T4 Tensor
-    #     GPU.
+    #     Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -917,7 +1024,7 @@ module Aws::GameLiftStreams
     #     * Tenancy: Supports up to 2 concurrent stream sessions
     #   * <b> <code>gen4n_ultra</code> (NVIDIA, ultra)</b> Supports
     #     applications with high 3D scene complexity. Uses dedicated NVIDIA T4
-    #     Tensor GPU.
+    #     Tensor Core GPU.
     #
     #     * Reference resolution: 1080p
     #
@@ -990,19 +1097,22 @@ module Aws::GameLiftStreams
     #   * {Types::CreateStreamGroupOutput#status_reason #status_reason} => String
     #   * {Types::CreateStreamGroupOutput#last_updated_at #last_updated_at} => Time
     #   * {Types::CreateStreamGroupOutput#created_at #created_at} => Time
+    #   * {Types::CreateStreamGroupOutput#expires_at #expires_at} => Time
     #   * {Types::CreateStreamGroupOutput#associated_applications #associated_applications} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_stream_group({
     #     description: "Description", # required
-    #     stream_class: "gen4n_high", # required, accepts gen4n_high, gen4n_ultra, gen4n_win2022, gen5n_high, gen5n_ultra, gen5n_win2022
+    #     stream_class: "gen4n_high", # required, accepts gen4n_high, gen4n_ultra, gen4n_win2022, gen5n_high, gen5n_ultra, gen5n_win2022, gen6n_small, gen6n_medium, gen6n_high, gen6n_ultra, gen6n_ultra_win2022, gen6n_pro, gen6n_pro_win2022
     #     default_application_identifier: "Identifier",
     #     location_configurations: [
     #       {
     #         location_name: "LocationName", # required
     #         always_on_capacity: 1,
     #         on_demand_capacity: 1,
+    #         target_idle_capacity: 1,
+    #         maximum_capacity: 1,
     #       },
     #     ],
     #     tags: {
@@ -1022,15 +1132,18 @@ module Aws::GameLiftStreams
     #   resp.location_states[0].status #=> String, one of "ACTIVATING", "ACTIVE", "ERROR", "REMOVING"
     #   resp.location_states[0].always_on_capacity #=> Integer
     #   resp.location_states[0].on_demand_capacity #=> Integer
+    #   resp.location_states[0].target_idle_capacity #=> Integer
+    #   resp.location_states[0].maximum_capacity #=> Integer
     #   resp.location_states[0].requested_capacity #=> Integer
     #   resp.location_states[0].allocated_capacity #=> Integer
     #   resp.location_states[0].idle_capacity #=> Integer
-    #   resp.stream_class #=> String, one of "gen4n_high", "gen4n_ultra", "gen4n_win2022", "gen5n_high", "gen5n_ultra", "gen5n_win2022"
+    #   resp.stream_class #=> String, one of "gen4n_high", "gen4n_ultra", "gen4n_win2022", "gen5n_high", "gen5n_ultra", "gen5n_win2022", "gen6n_small", "gen6n_medium", "gen6n_high", "gen6n_ultra", "gen6n_ultra_win2022", "gen6n_pro", "gen6n_pro_win2022"
     #   resp.id #=> String
-    #   resp.status #=> String, one of "ACTIVATING", "UPDATING_LOCATIONS", "ACTIVE", "ACTIVE_WITH_ERRORS", "ERROR", "DELETING"
+    #   resp.status #=> String, one of "ACTIVATING", "UPDATING_LOCATIONS", "ACTIVE", "ACTIVE_WITH_ERRORS", "ERROR", "DELETING", "EXPIRED"
     #   resp.status_reason #=> String, one of "internalError", "noAvailableInstances"
     #   resp.last_updated_at #=> Time
     #   resp.created_at #=> Time
+    #   resp.expires_at #=> Time
     #   resp.associated_applications #=> Array
     #   resp.associated_applications[0] #=> String
     #
@@ -1265,7 +1378,8 @@ module Aws::GameLiftStreams
     # end-user's stream. Amazon GameLift Streams will not initiate new
     # streams in the stream group using the disassociated application. The
     # disassociate action does not affect the stream capacity of a stream
-    # group.
+    # group. To disassociate an application, the stream group must be in
+    # `ACTIVE` status.
     #
     # If you disassociate the default application, Amazon GameLift Streams
     # will automatically choose a new default application from the remaining
@@ -1523,6 +1637,7 @@ module Aws::GameLiftStreams
     #   * {Types::GetStreamGroupOutput#status_reason #status_reason} => String
     #   * {Types::GetStreamGroupOutput#last_updated_at #last_updated_at} => Time
     #   * {Types::GetStreamGroupOutput#created_at #created_at} => Time
+    #   * {Types::GetStreamGroupOutput#expires_at #expires_at} => Time
     #   * {Types::GetStreamGroupOutput#associated_applications #associated_applications} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1542,15 +1657,18 @@ module Aws::GameLiftStreams
     #   resp.location_states[0].status #=> String, one of "ACTIVATING", "ACTIVE", "ERROR", "REMOVING"
     #   resp.location_states[0].always_on_capacity #=> Integer
     #   resp.location_states[0].on_demand_capacity #=> Integer
+    #   resp.location_states[0].target_idle_capacity #=> Integer
+    #   resp.location_states[0].maximum_capacity #=> Integer
     #   resp.location_states[0].requested_capacity #=> Integer
     #   resp.location_states[0].allocated_capacity #=> Integer
     #   resp.location_states[0].idle_capacity #=> Integer
-    #   resp.stream_class #=> String, one of "gen4n_high", "gen4n_ultra", "gen4n_win2022", "gen5n_high", "gen5n_ultra", "gen5n_win2022"
+    #   resp.stream_class #=> String, one of "gen4n_high", "gen4n_ultra", "gen4n_win2022", "gen5n_high", "gen5n_ultra", "gen5n_win2022", "gen6n_small", "gen6n_medium", "gen6n_high", "gen6n_ultra", "gen6n_ultra_win2022", "gen6n_pro", "gen6n_pro_win2022"
     #   resp.id #=> String
-    #   resp.status #=> String, one of "ACTIVATING", "UPDATING_LOCATIONS", "ACTIVE", "ACTIVE_WITH_ERRORS", "ERROR", "DELETING"
+    #   resp.status #=> String, one of "ACTIVATING", "UPDATING_LOCATIONS", "ACTIVE", "ACTIVE_WITH_ERRORS", "ERROR", "DELETING", "EXPIRED"
     #   resp.status_reason #=> String, one of "internalError", "noAvailableInstances"
     #   resp.last_updated_at #=> Time
     #   resp.created_at #=> Time
+    #   resp.expires_at #=> Time
     #   resp.associated_applications #=> Array
     #   resp.associated_applications[0] #=> String
     #
@@ -1612,6 +1730,7 @@ module Aws::GameLiftStreams
     #   * {Types::GetStreamSessionOutput#session_length_seconds #session_length_seconds} => Integer
     #   * {Types::GetStreamSessionOutput#additional_launch_args #additional_launch_args} => Array&lt;String&gt;
     #   * {Types::GetStreamSessionOutput#additional_environment_variables #additional_environment_variables} => Hash&lt;String,String&gt;
+    #   * {Types::GetStreamSessionOutput#performance_stats_configuration #performance_stats_configuration} => Types::PerformanceStatsConfiguration
     #   * {Types::GetStreamSessionOutput#log_file_location_uri #log_file_location_uri} => String
     #   * {Types::GetStreamSessionOutput#web_sdk_protocol_url #web_sdk_protocol_url} => String
     #   * {Types::GetStreamSessionOutput#last_updated_at #last_updated_at} => Time
@@ -1633,7 +1752,7 @@ module Aws::GameLiftStreams
     #   resp.stream_group_id #=> String
     #   resp.user_id #=> String
     #   resp.status #=> String, one of "ACTIVATING", "ACTIVE", "CONNECTED", "PENDING_CLIENT_RECONNECTION", "RECONNECTING", "TERMINATING", "TERMINATED", "ERROR"
-    #   resp.status_reason #=> String, one of "internalError", "invalidSignalRequest", "placementTimeout", "applicationLogS3DestinationError"
+    #   resp.status_reason #=> String, one of "internalError", "invalidSignalRequest", "placementTimeout", "applicationLogS3DestinationError", "applicationExit", "connectionTimeout", "reconnectionTimeout", "maxSessionLengthTimeout", "idleTimeout", "apiTerminated"
     #   resp.protocol #=> String, one of "WebRTC"
     #   resp.location #=> String
     #   resp.signal_request #=> String
@@ -1644,6 +1763,7 @@ module Aws::GameLiftStreams
     #   resp.additional_launch_args[0] #=> String
     #   resp.additional_environment_variables #=> Hash
     #   resp.additional_environment_variables["EnvironmentVariablesKeyString"] #=> String
+    #   resp.performance_stats_configuration.shared_with_client #=> Boolean
     #   resp.log_file_location_uri #=> String
     #   resp.web_sdk_protocol_url #=> String
     #   resp.last_updated_at #=> Time
@@ -1755,10 +1875,11 @@ module Aws::GameLiftStreams
     #   resp.items[0].description #=> String
     #   resp.items[0].default_application.id #=> String
     #   resp.items[0].default_application.arn #=> String
-    #   resp.items[0].stream_class #=> String, one of "gen4n_high", "gen4n_ultra", "gen4n_win2022", "gen5n_high", "gen5n_ultra", "gen5n_win2022"
-    #   resp.items[0].status #=> String, one of "ACTIVATING", "UPDATING_LOCATIONS", "ACTIVE", "ACTIVE_WITH_ERRORS", "ERROR", "DELETING"
+    #   resp.items[0].stream_class #=> String, one of "gen4n_high", "gen4n_ultra", "gen4n_win2022", "gen5n_high", "gen5n_ultra", "gen5n_win2022", "gen6n_small", "gen6n_medium", "gen6n_high", "gen6n_ultra", "gen6n_ultra_win2022", "gen6n_pro", "gen6n_pro_win2022"
+    #   resp.items[0].status #=> String, one of "ACTIVATING", "UPDATING_LOCATIONS", "ACTIVE", "ACTIVE_WITH_ERRORS", "ERROR", "DELETING", "EXPIRED"
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].last_updated_at #=> Time
+    #   resp.items[0].expires_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gameliftstreams-2018-05-10/ListStreamGroups AWS API Documentation
@@ -1843,6 +1964,7 @@ module Aws::GameLiftStreams
     #   resp.items[0].arn #=> String
     #   resp.items[0].user_id #=> String
     #   resp.items[0].status #=> String, one of "ACTIVATING", "ACTIVE", "CONNECTED", "PENDING_CLIENT_RECONNECTION", "RECONNECTING", "TERMINATING", "TERMINATED", "ERROR"
+    #   resp.items[0].status_reason #=> String, one of "internalError", "invalidSignalRequest", "placementTimeout", "applicationLogS3DestinationError", "applicationExit", "connectionTimeout", "reconnectionTimeout", "maxSessionLengthTimeout", "idleTimeout", "apiTerminated"
     #   resp.items[0].protocol #=> String, one of "WebRTC"
     #   resp.items[0].last_updated_at #=> Time
     #   resp.items[0].created_at #=> Time
@@ -1919,6 +2041,7 @@ module Aws::GameLiftStreams
     #   resp.items[0].arn #=> String
     #   resp.items[0].user_id #=> String
     #   resp.items[0].status #=> String, one of "ACTIVATING", "ACTIVE", "CONNECTED", "PENDING_CLIENT_RECONNECTION", "RECONNECTING", "TERMINATING", "TERMINATED", "ERROR"
+    #   resp.items[0].status_reason #=> String, one of "internalError", "invalidSignalRequest", "placementTimeout", "applicationLogS3DestinationError", "applicationExit", "connectionTimeout", "reconnectionTimeout", "maxSessionLengthTimeout", "idleTimeout", "apiTerminated"
     #   resp.items[0].protocol #=> String, one of "WebRTC"
     #   resp.items[0].last_updated_at #=> Time
     #   resp.items[0].created_at #=> Time
@@ -1986,16 +2109,18 @@ module Aws::GameLiftStreams
       req.send_request(options)
     end
 
-    # Removes a set of remote locations from this stream group. Amazon
-    # GameLift Streams works to release allocated compute resources in these
-    # location. Thus, stream sessions can no longer start from these
-    # locations by using this stream group. Amazon GameLift Streams also
+    # Removes a set of remote locations from this stream group. To remove a
+    # location, the stream group must be in `ACTIVE` status. When you remove
+    # a location, Amazon GameLift Streams releases allocated compute
+    # resources in that location. Stream sessions can no longer start from
+    # removed locations in a stream group. Amazon GameLift Streams also
     # deletes the content files of all associated applications that were in
-    # Amazon GameLift Streams's internal S3 bucket at this location.
+    # Amazon GameLift Streams's internal Amazon S3 bucket at this location.
     #
-    # You cannot remove the region where you initially created this stream
-    # group, known as the primary location. However, you can set the stream
-    # capacity to zero.
+    # You cannot remove the Amazon Web Services Region location where you
+    # initially created this stream group, known as the primary location.
+    # However, you can set the stream capacity to zero to avoid incurring
+    # costs for allocated compute resources in that location.
     #
     # @option params [required, String] :identifier
     #   A stream group to remove the specified locations from.
@@ -2048,7 +2173,7 @@ module Aws::GameLiftStreams
     #
     # 1.  Prerequisites:
     #
-    #     * You must have a stream group in `ACTIVE` state
+    #     * You must have a stream group in `ACTIVE` status
     #
     #     * You must have idle or on-demand capacity in a stream group in
     #       the location you want to stream from
@@ -2257,6 +2382,10 @@ module Aws::GameLiftStreams
     #   environment variables; while `AdditionalLaunchArgs` passes data using
     #   command-line arguments.
     #
+    # @option params [Types::PerformanceStatsConfiguration] :performance_stats_configuration
+    #   Configuration settings for sharing the stream session's performance
+    #   stats with the client
+    #
     # @return [Types::StartStreamSessionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartStreamSessionOutput#arn #arn} => String
@@ -2273,6 +2402,7 @@ module Aws::GameLiftStreams
     #   * {Types::StartStreamSessionOutput#session_length_seconds #session_length_seconds} => Integer
     #   * {Types::StartStreamSessionOutput#additional_launch_args #additional_launch_args} => Array&lt;String&gt;
     #   * {Types::StartStreamSessionOutput#additional_environment_variables #additional_environment_variables} => Hash&lt;String,String&gt;
+    #   * {Types::StartStreamSessionOutput#performance_stats_configuration #performance_stats_configuration} => Types::PerformanceStatsConfiguration
     #   * {Types::StartStreamSessionOutput#log_file_location_uri #log_file_location_uri} => String
     #   * {Types::StartStreamSessionOutput#web_sdk_protocol_url #web_sdk_protocol_url} => String
     #   * {Types::StartStreamSessionOutput#last_updated_at #last_updated_at} => Time
@@ -2297,6 +2427,9 @@ module Aws::GameLiftStreams
     #     additional_environment_variables: {
     #       "EnvironmentVariablesKeyString" => "EnvironmentVariablesValueString",
     #     },
+    #     performance_stats_configuration: {
+    #       shared_with_client: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -2306,7 +2439,7 @@ module Aws::GameLiftStreams
     #   resp.stream_group_id #=> String
     #   resp.user_id #=> String
     #   resp.status #=> String, one of "ACTIVATING", "ACTIVE", "CONNECTED", "PENDING_CLIENT_RECONNECTION", "RECONNECTING", "TERMINATING", "TERMINATED", "ERROR"
-    #   resp.status_reason #=> String, one of "internalError", "invalidSignalRequest", "placementTimeout", "applicationLogS3DestinationError"
+    #   resp.status_reason #=> String, one of "internalError", "invalidSignalRequest", "placementTimeout", "applicationLogS3DestinationError", "applicationExit", "connectionTimeout", "reconnectionTimeout", "maxSessionLengthTimeout", "idleTimeout", "apiTerminated"
     #   resp.protocol #=> String, one of "WebRTC"
     #   resp.location #=> String
     #   resp.signal_request #=> String
@@ -2317,6 +2450,7 @@ module Aws::GameLiftStreams
     #   resp.additional_launch_args[0] #=> String
     #   resp.additional_environment_variables #=> Hash
     #   resp.additional_environment_variables["EnvironmentVariablesKeyString"] #=> String
+    #   resp.performance_stats_configuration.shared_with_client #=> Boolean
     #   resp.log_file_location_uri #=> String
     #   resp.web_sdk_protocol_url #=> String
     #   resp.last_updated_at #=> Time
@@ -2575,31 +2709,39 @@ module Aws::GameLiftStreams
     end
 
     # Updates the configuration settings for an Amazon GameLift Streams
-    # stream group resource. You can change the description, the set of
-    # locations, and the requested capacity of a stream group per location.
-    # If you want to change the stream class, create a new stream group.
+    # stream group resource. To update a stream group, it must be in
+    # `ACTIVE` status. You can change the description, the set of locations,
+    # and the requested capacity of a stream group per location. If you want
+    # to change the stream class, create a new stream group.
     #
     # Stream capacity represents the number of concurrent streams that can
     # be active at a time. You set stream capacity per location, per stream
-    # group. There are two types of capacity, always-on and on-demand:
+    # group. The following capacity settings are available:
     #
-    # * **Always-on**: The streaming capacity that is allocated and ready to
-    #   handle stream requests without delay. You pay for this capacity
-    #   whether it's in use or not. Best for quickest time from streaming
-    #   request to streaming session. Default is 1 when creating a stream
-    #   group or adding a location.
+    # * **Always-on capacity**: This setting, if non-zero, indicates minimum
+    #   streaming capacity which is allocated to you and is never released
+    #   back to the service. You pay for this base level of capacity at all
+    #   times, whether used or idle.
     #
-    # * **On-demand**: The streaming capacity that Amazon GameLift Streams
-    #   can allocate in response to stream requests, and then de-allocate
-    #   when the session has terminated. This offers a cost control measure
-    #   at the expense of a greater startup time (typically under 5
-    #   minutes). Default is 0 when creating a stream group or adding a
-    #   location.
+    # * **Maximum capacity**: This indicates the maximum capacity that the
+    #   service can allocate for you. Newly created streams may take a few
+    #   minutes to start. Capacity is released back to the service when
+    #   idle. You pay for capacity that is allocated to you until it is
+    #   released.
+    #
+    # * **Target-idle capacity**: This indicates idle capacity which the
+    #   service pre-allocates and holds for you in anticipation of future
+    #   activity. This helps to insulate your users from capacity-allocation
+    #   delays. You pay for capacity which is held in this intentional idle
+    #   state.
+    #
+    # Values for capacity must be whole number multiples of the tenancy
+    # value of the stream group's stream class.
     #
     # To update a stream group, specify the stream group's Amazon Resource
     # Name (ARN) and provide the new values. If the request is successful,
     # Amazon GameLift Streams returns the complete updated metadata for the
-    # stream group.
+    # stream group. Expired stream groups cannot be updated.
     #
     # @option params [required, String] :identifier
     #   An [Amazon Resource Name (ARN)][1] or ID that uniquely identifies the
@@ -2655,6 +2797,7 @@ module Aws::GameLiftStreams
     #   * {Types::UpdateStreamGroupOutput#status_reason #status_reason} => String
     #   * {Types::UpdateStreamGroupOutput#last_updated_at #last_updated_at} => Time
     #   * {Types::UpdateStreamGroupOutput#created_at #created_at} => Time
+    #   * {Types::UpdateStreamGroupOutput#expires_at #expires_at} => Time
     #   * {Types::UpdateStreamGroupOutput#associated_applications #associated_applications} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
@@ -2666,6 +2809,8 @@ module Aws::GameLiftStreams
     #         location_name: "LocationName", # required
     #         always_on_capacity: 1,
     #         on_demand_capacity: 1,
+    #         target_idle_capacity: 1,
+    #         maximum_capacity: 1,
     #       },
     #     ],
     #     description: "Description",
@@ -2683,15 +2828,18 @@ module Aws::GameLiftStreams
     #   resp.location_states[0].status #=> String, one of "ACTIVATING", "ACTIVE", "ERROR", "REMOVING"
     #   resp.location_states[0].always_on_capacity #=> Integer
     #   resp.location_states[0].on_demand_capacity #=> Integer
+    #   resp.location_states[0].target_idle_capacity #=> Integer
+    #   resp.location_states[0].maximum_capacity #=> Integer
     #   resp.location_states[0].requested_capacity #=> Integer
     #   resp.location_states[0].allocated_capacity #=> Integer
     #   resp.location_states[0].idle_capacity #=> Integer
-    #   resp.stream_class #=> String, one of "gen4n_high", "gen4n_ultra", "gen4n_win2022", "gen5n_high", "gen5n_ultra", "gen5n_win2022"
+    #   resp.stream_class #=> String, one of "gen4n_high", "gen4n_ultra", "gen4n_win2022", "gen5n_high", "gen5n_ultra", "gen5n_win2022", "gen6n_small", "gen6n_medium", "gen6n_high", "gen6n_ultra", "gen6n_ultra_win2022", "gen6n_pro", "gen6n_pro_win2022"
     #   resp.id #=> String
-    #   resp.status #=> String, one of "ACTIVATING", "UPDATING_LOCATIONS", "ACTIVE", "ACTIVE_WITH_ERRORS", "ERROR", "DELETING"
+    #   resp.status #=> String, one of "ACTIVATING", "UPDATING_LOCATIONS", "ACTIVE", "ACTIVE_WITH_ERRORS", "ERROR", "DELETING", "EXPIRED"
     #   resp.status_reason #=> String, one of "internalError", "noAvailableInstances"
     #   resp.last_updated_at #=> Time
     #   resp.created_at #=> Time
+    #   resp.expires_at #=> Time
     #   resp.associated_applications #=> Array
     #   resp.associated_applications[0] #=> String
     #
@@ -2722,7 +2870,7 @@ module Aws::GameLiftStreams
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-gameliftstreams'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

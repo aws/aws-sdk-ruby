@@ -13,42 +13,42 @@ module Aws::Kinesis
   # @!attribute region
   #   The AWS region used to dispatch the request.
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute use_dual_stack
   #   When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute use_fips
   #   When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.
   #
-  #   @return [Boolean]
+  #   @return [boolean]
   #
   # @!attribute endpoint
   #   Override the endpoint used to send this request
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute stream_arn
   #   The ARN of the Kinesis stream
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute operation_type
   #   Internal parameter to distinguish between Control/Data plane API and accordingly generate control/data plane endpoint
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute consumer_arn
   #   The ARN of the Kinesis consumer
   #
-  #   @return [String]
+  #   @return [string]
   #
   # @!attribute resource_arn
   #   The ARN of the Kinesis resource
   #
-  #   @return [String]
+  #   @return [string]
   #
   EndpointParameters = Struct.new(
     :region,

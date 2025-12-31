@@ -145,7 +145,16 @@ module Aws
                                           value: ::String?
                                         },
                                       ]?
-                                    }
+                                    },
+                                    ?ip_address_type: ("ipv4" | "ipv6" | "dualstack"),
+                                    ?ipam_cidr_configs: Array[
+                                      {
+                                        cidr: ::String,
+                                        ipam_pool_arn: ::String,
+                                        anycast_ip: ::String?,
+                                        status: ("provisioned" | "failed-provision" | "provisioning" | "deprovisioned" | "failed-deprovision" | "deprovisioning" | "advertised" | "failed-advertise" | "advertising" | "withdrawn" | "failed-withdraw" | "withdrawing")?
+                                      },
+                                    ]
                                   ) -> _CreateAnycastIpListResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAnycastIpListResponseSuccess
 
@@ -206,6 +215,39 @@ module Aws
                                                        }
                                                      ) -> _CreateCloudFrontOriginAccessIdentityResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCloudFrontOriginAccessIdentityResponseSuccess
+
+      interface _CreateConnectionFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectionFunctionResult]
+        def connection_function_summary: () -> Types::ConnectionFunctionSummary
+        def location: () -> ::String
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_connection_function-instance_method
+      def create_connection_function: (
+                                        name: ::String,
+                                        connection_function_config: {
+                                          comment: ::String,
+                                          runtime: ("cloudfront-js-1.0" | "cloudfront-js-2.0"),
+                                          key_value_store_associations: {
+                                            quantity: ::Integer,
+                                            items: Array[
+                                              {
+                                                key_value_store_arn: ::String
+                                              },
+                                            ]?
+                                          }?
+                                        },
+                                        connection_function_code: ::String,
+                                        ?tags: {
+                                          items: Array[
+                                            {
+                                              key: ::String,
+                                              value: ::String?
+                                            },
+                                          ]?
+                                        }
+                                      ) -> _CreateConnectionFunctionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectionFunctionResponseSuccess
 
       interface _CreateConnectionGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectionGroupResult]
@@ -310,6 +352,7 @@ module Aws
                                          }?,
                                          vpc_origin_config: {
                                            vpc_origin_id: ::String,
+                                           owner_account_id: ::String?,
                                            origin_read_timeout: ::Integer?,
                                            origin_keepalive_timeout: ::Integer?
                                          }?,
@@ -553,7 +596,18 @@ module Aws
                                        },
                                      ]?
                                    }?,
-                                   connection_mode: ("direct" | "tenant-only")?
+                                   connection_mode: ("direct" | "tenant-only")?,
+                                   viewer_mtls_config: {
+                                     mode: ("required" | "optional")?,
+                                     trust_store_config: {
+                                       trust_store_id: ::String,
+                                       advertise_trust_store_ca_names: bool?,
+                                       ignore_certificate_expiry: bool?
+                                     }?
+                                   }?,
+                                   connection_function_association: {
+                                     id: ::String
+                                   }?
                                  }
                                ) -> _CreateDistributionResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDistributionResponseSuccess
@@ -659,6 +713,7 @@ module Aws
                                                      }?,
                                                      vpc_origin_config: {
                                                        vpc_origin_id: ::String,
+                                                       owner_account_id: ::String?,
                                                        origin_read_timeout: ::Integer?,
                                                        origin_keepalive_timeout: ::Integer?
                                                      }?,
@@ -902,7 +957,18 @@ module Aws
                                                    },
                                                  ]?
                                                }?,
-                                               connection_mode: ("direct" | "tenant-only")?
+                                               connection_mode: ("direct" | "tenant-only")?,
+                                               viewer_mtls_config: {
+                                                 mode: ("required" | "optional")?,
+                                                 trust_store_config: {
+                                                   trust_store_id: ::String,
+                                                   advertise_trust_store_ca_names: bool?,
+                                                   ignore_certificate_expiry: bool?
+                                                 }?
+                                               }?,
+                                               connection_function_association: {
+                                                 id: ::String
+                                               }?
                                              },
                                              tags: {
                                                items: Array[
@@ -1353,6 +1419,33 @@ module Aws
                                                    ) -> _CreateStreamingDistributionWithTagsResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamingDistributionWithTagsResponseSuccess
 
+      interface _CreateTrustStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTrustStoreResult]
+        def trust_store: () -> Types::TrustStore
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#create_trust_store-instance_method
+      def create_trust_store: (
+                                name: ::String,
+                                ca_certificates_bundle_source: {
+                                  ca_certificates_bundle_s3_location: {
+                                    bucket: ::String,
+                                    key: ::String,
+                                    region: ::String,
+                                    version: ::String?
+                                  }?
+                                },
+                                ?tags: {
+                                  items: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String?
+                                    },
+                                  ]?
+                                }
+                              ) -> _CreateTrustStoreResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrustStoreResponseSuccess
+
       interface _CreateVpcOriginResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateVpcOriginResult]
         def vpc_origin: () -> Types::VpcOrigin
@@ -1403,6 +1496,13 @@ module Aws
                                                        ?if_match: ::String
                                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_connection_function-instance_method
+      def delete_connection_function: (
+                                        id: ::String,
+                                        if_match: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_connection_group-instance_method
       def delete_connection_group: (
@@ -1504,6 +1604,12 @@ module Aws
                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    resource_arn: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_response_headers_policy-instance_method
       def delete_response_headers_policy: (
                                             id: ::String,
@@ -1518,6 +1624,13 @@ module Aws
                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#delete_trust_store-instance_method
+      def delete_trust_store: (
+                                id: ::String,
+                                if_match: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _DeleteVpcOriginResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVpcOriginResult]
         def vpc_origin: () -> Types::VpcOrigin
@@ -1529,6 +1642,18 @@ module Aws
                                if_match: ::String
                              ) -> _DeleteVpcOriginResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVpcOriginResponseSuccess
+
+      interface _DescribeConnectionFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConnectionFunctionResult]
+        def connection_function_summary: () -> Types::ConnectionFunctionSummary
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#describe_connection_function-instance_method
+      def describe_connection_function: (
+                                          identifier: ::String,
+                                          ?stage: ("DEVELOPMENT" | "LIVE")
+                                        ) -> _DescribeConnectionFunctionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConnectionFunctionResponseSuccess
 
       interface _DescribeFunctionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFunctionResult]
@@ -1631,6 +1756,19 @@ module Aws
                                                            id: ::String
                                                          ) -> _GetCloudFrontOriginAccessIdentityConfigResponseSuccess
                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCloudFrontOriginAccessIdentityConfigResponseSuccess
+
+      interface _GetConnectionFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectionFunctionResult]
+        def connection_function_code: () -> ::String
+        def etag: () -> ::String
+        def content_type: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_connection_function-instance_method
+      def get_connection_function: (
+                                     identifier: ::String,
+                                     ?stage: ("DEVELOPMENT" | "LIVE")
+                                   ) -> _GetConnectionFunctionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectionFunctionResponseSuccess
 
       interface _GetConnectionGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectionGroupResult]
@@ -1918,6 +2056,17 @@ module Aws
                                    ) -> _GetRealtimeLogConfigResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRealtimeLogConfigResponseSuccess
 
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyResult]
+        def resource_arn: () -> ::String
+        def policy_document: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 resource_arn: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
       interface _GetResponseHeadersPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetResponseHeadersPolicyResult]
         def response_headers_policy: () -> Types::ResponseHeadersPolicy
@@ -1961,6 +2110,17 @@ module Aws
                                                id: ::String
                                              ) -> _GetStreamingDistributionConfigResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStreamingDistributionConfigResponseSuccess
+
+      interface _GetTrustStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTrustStoreResult]
+        def trust_store: () -> Types::TrustStore
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#get_trust_store-instance_method
+      def get_trust_store: (
+                             identifier: ::String
+                           ) -> _GetTrustStoreResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrustStoreResponseSuccess
 
       interface _GetVpcOriginResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetVpcOriginResult]
@@ -2019,6 +2179,19 @@ module Aws
                                       ?max_items: ::Integer
                                     ) -> _ListConflictingAliasesResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConflictingAliasesResponseSuccess
+
+      interface _ListConnectionFunctionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectionFunctionsResult]
+        def next_marker: () -> ::String
+        def connection_functions: () -> ::Array[Types::ConnectionFunctionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_connection_functions-instance_method
+      def list_connection_functions: (
+                                       ?marker: ::String,
+                                       ?max_items: ::Integer,
+                                       ?stage: ("DEVELOPMENT" | "LIVE")
+                                     ) -> _ListConnectionFunctionsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectionFunctionsResponseSuccess
 
       interface _ListConnectionGroupsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectionGroupsResult]
@@ -2111,6 +2284,18 @@ module Aws
                                                  ) -> _ListDistributionsByCachePolicyIdResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionsByCachePolicyIdResponseSuccess
 
+      interface _ListDistributionsByConnectionFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionsByConnectionFunctionResult]
+        def distribution_list: () -> Types::DistributionList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_distributions_by_connection_function-instance_method
+      def list_distributions_by_connection_function: (
+                                                       ?marker: ::String,
+                                                       ?max_items: ::Integer,
+                                                       connection_function_identifier: ::String
+                                                     ) -> _ListDistributionsByConnectionFunctionResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionsByConnectionFunctionResponseSuccess
+
       interface _ListDistributionsByConnectionModeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionsByConnectionModeResult]
         def distribution_list: () -> Types::DistributionList
@@ -2147,6 +2332,18 @@ module Aws
                                                           ) -> _ListDistributionsByOriginRequestPolicyIdResponseSuccess
                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionsByOriginRequestPolicyIdResponseSuccess
 
+      interface _ListDistributionsByOwnedResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionsByOwnedResourceResult]
+        def distribution_list: () -> Types::DistributionIdOwnerList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_distributions_by_owned_resource-instance_method
+      def list_distributions_by_owned_resource: (
+                                                  resource_arn: ::String,
+                                                  ?marker: ::String,
+                                                  ?max_items: ::Integer
+                                                ) -> _ListDistributionsByOwnedResourceResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionsByOwnedResourceResponseSuccess
+
       interface _ListDistributionsByRealtimeLogConfigResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionsByRealtimeLogConfigResult]
         def distribution_list: () -> Types::DistributionList
@@ -2171,6 +2368,18 @@ module Aws
                                                               response_headers_policy_id: ::String
                                                             ) -> _ListDistributionsByResponseHeadersPolicyIdResponseSuccess
                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionsByResponseHeadersPolicyIdResponseSuccess
+
+      interface _ListDistributionsByTrustStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionsByTrustStoreResult]
+        def distribution_list: () -> Types::DistributionList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_distributions_by_trust_store-instance_method
+      def list_distributions_by_trust_store: (
+                                               trust_store_identifier: ::String,
+                                               ?marker: ::String,
+                                               ?max_items: ::Integer
+                                             ) -> _ListDistributionsByTrustStoreResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributionsByTrustStoreResponseSuccess
 
       interface _ListDistributionsByVpcOriginIdResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributionsByVpcOriginIdResult]
@@ -2372,6 +2581,18 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _ListTrustStoresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTrustStoresResult]
+        def next_marker: () -> ::String
+        def trust_store_list: () -> ::Array[Types::TrustStoreSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#list_trust_stores-instance_method
+      def list_trust_stores: (
+                               ?marker: ::String,
+                               ?max_items: ::Integer
+                             ) -> _ListTrustStoresResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTrustStoresResponseSuccess
+
       interface _ListVpcOriginsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListVpcOriginsResult]
         def vpc_origin_list: () -> Types::VpcOriginList
@@ -2383,6 +2604,17 @@ module Aws
                             ) -> _ListVpcOriginsResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVpcOriginsResponseSuccess
 
+      interface _PublishConnectionFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PublishConnectionFunctionResult]
+        def connection_function_summary: () -> Types::ConnectionFunctionSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#publish_connection_function-instance_method
+      def publish_connection_function: (
+                                         id: ::String,
+                                         if_match: ::String
+                                       ) -> _PublishConnectionFunctionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishConnectionFunctionResponseSuccess
+
       interface _PublishFunctionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PublishFunctionResult]
         def function_summary: () -> Types::FunctionSummary
@@ -2393,6 +2625,17 @@ module Aws
                               if_match: ::String
                             ) -> _PublishFunctionResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishFunctionResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResult]
+        def resource_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 resource_arn: ::String,
+                                 policy_document: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#tag_resource-instance_method
       def tag_resource: (
@@ -2407,6 +2650,19 @@ module Aws
                           }
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TestConnectionFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestConnectionFunctionResult]
+        def connection_function_test_result: () -> Types::ConnectionFunctionTestResult
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#test_connection_function-instance_method
+      def test_connection_function: (
+                                      id: ::String,
+                                      if_match: ::String,
+                                      ?stage: ("DEVELOPMENT" | "LIVE"),
+                                      connection_object: ::String
+                                    ) -> _TestConnectionFunctionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestConnectionFunctionResponseSuccess
 
       interface _TestFunctionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TestFunctionResult]
@@ -2429,6 +2685,19 @@ module Aws
                             }
                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateAnycastIpListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAnycastIpListResult]
+        def anycast_ip_list: () -> Types::AnycastIpList
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_anycast_ip_list-instance_method
+      def update_anycast_ip_list: (
+                                    id: ::String,
+                                    ?ip_address_type: ("ipv4" | "ipv6" | "dualstack"),
+                                    if_match: ::String
+                                  ) -> _UpdateAnycastIpListResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAnycastIpListResponseSuccess
 
       interface _UpdateCachePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCachePolicyResult]
@@ -2489,6 +2758,31 @@ module Aws
                                                        ?if_match: ::String
                                                      ) -> _UpdateCloudFrontOriginAccessIdentityResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCloudFrontOriginAccessIdentityResponseSuccess
+
+      interface _UpdateConnectionFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectionFunctionResult]
+        def connection_function_summary: () -> Types::ConnectionFunctionSummary
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_connection_function-instance_method
+      def update_connection_function: (
+                                        id: ::String,
+                                        if_match: ::String,
+                                        connection_function_config: {
+                                          comment: ::String,
+                                          runtime: ("cloudfront-js-1.0" | "cloudfront-js-2.0"),
+                                          key_value_store_associations: {
+                                            quantity: ::Integer,
+                                            items: Array[
+                                              {
+                                                key_value_store_arn: ::String
+                                              },
+                                            ]?
+                                          }?
+                                        },
+                                        connection_function_code: ::String
+                                      ) -> _UpdateConnectionFunctionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectionFunctionResponseSuccess
 
       interface _UpdateConnectionGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectionGroupResult]
@@ -2586,6 +2880,7 @@ module Aws
                                          }?,
                                          vpc_origin_config: {
                                            vpc_origin_id: ::String,
+                                           owner_account_id: ::String?,
                                            origin_read_timeout: ::Integer?,
                                            origin_keepalive_timeout: ::Integer?
                                          }?,
@@ -2829,7 +3124,18 @@ module Aws
                                        },
                                      ]?
                                    }?,
-                                   connection_mode: ("direct" | "tenant-only")?
+                                   connection_mode: ("direct" | "tenant-only")?,
+                                   viewer_mtls_config: {
+                                     mode: ("required" | "optional")?,
+                                     trust_store_config: {
+                                       trust_store_id: ::String,
+                                       advertise_trust_store_ca_names: bool?,
+                                       ignore_certificate_expiry: bool?
+                                     }?
+                                   }?,
+                                   connection_function_association: {
+                                     id: ::String
+                                   }?
                                  },
                                  id: ::String,
                                  ?if_match: ::String
@@ -3255,6 +3561,26 @@ module Aws
                                            ?if_match: ::String
                                          ) -> _UpdateStreamingDistributionResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStreamingDistributionResponseSuccess
+
+      interface _UpdateTrustStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTrustStoreResult]
+        def trust_store: () -> Types::TrustStore
+        def etag: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_trust_store-instance_method
+      def update_trust_store: (
+                                id: ::String,
+                                ca_certificates_bundle_source: {
+                                  ca_certificates_bundle_s3_location: {
+                                    bucket: ::String,
+                                    key: ::String,
+                                    region: ::String,
+                                    version: ::String?
+                                  }?
+                                },
+                                if_match: ::String
+                              ) -> _UpdateTrustStoreResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTrustStoreResponseSuccess
 
       interface _UpdateVpcOriginResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVpcOriginResult]

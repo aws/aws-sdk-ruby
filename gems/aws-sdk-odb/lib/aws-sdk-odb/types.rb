@@ -41,6 +41,38 @@ module Aws::Odb
       include Aws::Structure
     end
 
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
+    #   and Access Management (IAM) service role to associate with the
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_integration
+    #   The Amazon Web Services integration configuration settings for the
+    #   Amazon Web Services Identity and Access Management (IAM) service
+    #   role association.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the target resource to associate
+    #   with the Amazon Web Services Identity and Access Management (IAM)
+    #   service role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/AssociateIamRoleToResourceInput AWS API Documentation
+    #
+    class AssociateIamRoleToResourceInput < Struct.new(
+      :iam_role_arn,
+      :aws_integration,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/AssociateIamRoleToResourceOutput AWS API Documentation
+    #
+    class AssociateIamRoleToResourceOutput < Aws::EmptyStructure; end
+
     # A summary of an Autonomous Virtual Machine (VM) within an Autonomous
     # VM cluster.
     #
@@ -137,6 +169,11 @@ module Aws::Odb
     #   Autonomous VM cluster.
     #   @return [String]
     #
+    # @!attribute [rw] odb_network_arn
+    #   The Amazon Resource Name (ARN) of the ODB network associated with
+    #   this Autonomous VM cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] oci_resource_anchor_name
     #   The name of the OCI resource anchor associated with this Autonomous
     #   VM cluster.
@@ -165,6 +202,11 @@ module Aws::Odb
     # @!attribute [rw] cloud_exadata_infrastructure_id
     #   The unique identifier of the Cloud Exadata Infrastructure containing
     #   this Autonomous VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_exadata_infrastructure_arn
+    #   The Amazon Resource Name (ARN) of the Cloud Exadata Infrastructure
+    #   containing this Autonomous VM cluster.
     #   @return [String]
     #
     # @!attribute [rw] autonomous_data_storage_percentage
@@ -263,7 +305,6 @@ module Aws::Odb
     #
     # @!attribute [rw] license_model
     #   The Oracle license model that applies to the Autonomous VM cluster.
-    #   Valid values are `LICENSE_INCLUDED` or `BRING_YOUR_OWN_LICENSE`.
     #   @return [String]
     #
     # @!attribute [rw] maintenance_window
@@ -361,12 +402,14 @@ module Aws::Odb
       :cloud_autonomous_vm_cluster_id,
       :cloud_autonomous_vm_cluster_arn,
       :odb_network_id,
+      :odb_network_arn,
       :oci_resource_anchor_name,
       :percent_progress,
       :display_name,
       :status,
       :status_reason,
       :cloud_exadata_infrastructure_id,
+      :cloud_exadata_infrastructure_arn,
       :autonomous_data_storage_percentage,
       :autonomous_data_storage_size_in_t_bs,
       :available_autonomous_data_storage_size_in_t_bs,
@@ -446,6 +489,11 @@ module Aws::Odb
     #   Autonomous VM cluster.
     #   @return [String]
     #
+    # @!attribute [rw] odb_network_arn
+    #   The Amazon Resource Name (ARN) of the ODB network associated with
+    #   this Autonomous VM cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] oci_resource_anchor_name
     #   The name of the OCI resource anchor associated with this Autonomous
     #   VM cluster.
@@ -472,6 +520,11 @@ module Aws::Odb
     # @!attribute [rw] cloud_exadata_infrastructure_id
     #   The unique identifier of the Exadata infrastructure containing this
     #   Autonomous VM cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_exadata_infrastructure_arn
+    #   The Amazon Resource Name (ARN) of the Exadata infrastructure
+    #   containing this Autonomous VM cluster.
     #   @return [String]
     #
     # @!attribute [rw] autonomous_data_storage_percentage
@@ -663,12 +716,14 @@ module Aws::Odb
       :cloud_autonomous_vm_cluster_id,
       :cloud_autonomous_vm_cluster_arn,
       :odb_network_id,
+      :odb_network_arn,
       :oci_resource_anchor_name,
       :percent_progress,
       :display_name,
       :status,
       :status_reason,
       :cloud_exadata_infrastructure_id,
+      :cloud_exadata_infrastructure_arn,
       :autonomous_data_storage_percentage,
       :autonomous_data_storage_size_in_t_bs,
       :available_autonomous_data_storage_size_in_t_bs,
@@ -1248,6 +1303,11 @@ module Aws::Odb
     #   cluster belongs to.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_exadata_infrastructure_arn
+    #   The Amazon Resource Name (ARN) of the Exadata infrastructure that
+    #   this VM cluster belongs to.
+    #   @return [String]
+    #
     # @!attribute [rw] cluster_name
     #   The name of the Grid Infrastructure (GI) cluster.
     #   @return [String]
@@ -1394,6 +1454,11 @@ module Aws::Odb
     #   The unique identifier of the ODB network for the VM cluster.
     #   @return [String]
     #
+    # @!attribute [rw] odb_network_arn
+    #   The Amazon Resource Name (ARN) of the ODB network associated with
+    #   this VM cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] percent_progress
     #   The amount of progress made on the current operation on the VM
     #   cluster, expressed as a percentage.
@@ -1408,6 +1473,11 @@ module Aws::Odb
     #   physical core of a processor with hyper-threading enabled.
     #   @return [String]
     #
+    # @!attribute [rw] iam_roles
+    #   The Amazon Web Services Identity and Access Management (IAM) service
+    #   roles associated with the VM cluster.
+    #   @return [Array<Types::IamRole>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/CloudVmCluster AWS API Documentation
     #
     class CloudVmCluster < Struct.new(
@@ -1417,6 +1487,7 @@ module Aws::Odb
       :status_reason,
       :cloud_vm_cluster_arn,
       :cloud_exadata_infrastructure_id,
+      :cloud_exadata_infrastructure_arn,
       :cluster_name,
       :cpu_core_count,
       :data_collection_options,
@@ -1449,8 +1520,10 @@ module Aws::Odb
       :time_zone,
       :vip_ids,
       :odb_network_id,
+      :odb_network_arn,
       :percent_progress,
-      :compute_model)
+      :compute_model,
+      :iam_roles)
       SENSITIVE = [:ssh_public_keys]
       include Aws::Structure
     end
@@ -1480,6 +1553,11 @@ module Aws::Odb
     # @!attribute [rw] cloud_exadata_infrastructure_id
     #   The unique identifier of the Exadata infrastructure that this VM
     #   cluster belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_exadata_infrastructure_arn
+    #   The Amazon Resource Name (ARN) of the Exadata infrastructure that
+    #   this VM cluster belongs to.
     #   @return [String]
     #
     # @!attribute [rw] cluster_name
@@ -1629,6 +1707,11 @@ module Aws::Odb
     #   The unique identifier of the ODB network for the VM cluster.
     #   @return [String]
     #
+    # @!attribute [rw] odb_network_arn
+    #   The Amazon Resource Name (ARN) of the ODB network associated with
+    #   this VM cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] percent_progress
     #   The amount of progress made on the current operation on the VM
     #   cluster, expressed as a percentage.
@@ -1643,6 +1726,11 @@ module Aws::Odb
     #   physical core of a processor with hyper-threading enabled.
     #   @return [String]
     #
+    # @!attribute [rw] iam_roles
+    #   The Amazon Web Services Identity and Access Management (IAM) service
+    #   roles associated with the VM cluster in the summary information.
+    #   @return [Array<Types::IamRole>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/CloudVmClusterSummary AWS API Documentation
     #
     class CloudVmClusterSummary < Struct.new(
@@ -1652,6 +1740,7 @@ module Aws::Odb
       :status_reason,
       :cloud_vm_cluster_arn,
       :cloud_exadata_infrastructure_id,
+      :cloud_exadata_infrastructure_arn,
       :cluster_name,
       :cpu_core_count,
       :data_collection_options,
@@ -1684,8 +1773,10 @@ module Aws::Odb
       :time_zone,
       :vip_ids,
       :odb_network_id,
+      :odb_network_arn,
       :percent_progress,
-      :compute_model)
+      :compute_model,
+      :iam_roles)
       SENSITIVE = [:ssh_public_keys]
       include Aws::Structure
     end
@@ -2245,10 +2336,36 @@ module Aws::Odb
     #   network.
     #   @return [String]
     #
+    # @!attribute [rw] sts_access
+    #   The Amazon Web Services Security Token Service (STS) access
+    #   configuration for the ODB network.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_access
+    #   The Amazon Web Services Key Management Service (KMS) access
+    #   configuration for the ODB network.
+    #   @return [String]
+    #
     # @!attribute [rw] s3_policy_document
     #   Specifies the endpoint policy for Amazon S3 access from the ODB
     #   network.
     #   @return [String]
+    #
+    # @!attribute [rw] sts_policy_document
+    #   The Amazon Web Services Security Token Service (STS) policy document
+    #   that defines permissions for token service usage within the ODB
+    #   network.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_policy_document
+    #   The Amazon Web Services Key Management Service (KMS) policy document
+    #   that defines permissions for key usage within the ODB network.
+    #   @return [String]
+    #
+    # @!attribute [rw] cross_region_s3_restore_sources_to_enable
+    #   The cross-Region Amazon S3 restore sources to enable for the ODB
+    #   network.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] tags
     #   The list of resource tags to apply to the ODB network.
@@ -2267,7 +2384,12 @@ module Aws::Odb
       :client_token,
       :s3_access,
       :zero_etl_access,
+      :sts_access,
+      :kms_access,
       :s3_policy_document,
+      :sts_policy_document,
+      :kms_policy_document,
+      :cross_region_s3_restore_sources_to_enable,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2356,9 +2478,6 @@ module Aws::Odb
     #
     # @!attribute [rw] status
     #   The status of the ODB peering connection.
-    #
-    #   Valid Values: `provisioning | active | terminating | terminated |
-    #   failed`
     #   @return [String]
     #
     # @!attribute [rw] status_reason
@@ -2376,6 +2495,34 @@ module Aws::Odb
       :status,
       :status_reason,
       :odb_peering_connection_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration access for the cross-Region Amazon S3 database
+    # restore source for the ODB network.
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region for cross-Region Amazon S3 restore
+    #   access.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv4_addresses
+    #   The IPv4 addresses allowed for cross-Region Amazon S3 restore
+    #   access.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The current status of the cross-Region Amazon S3 restore access
+    #   configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/CrossRegionS3RestoreSourcesAccess AWS API Documentation
+    #
+    class CrossRegionS3RestoreSourcesAccess < Struct.new(
+      :region,
+      :ipv4_addresses,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3274,6 +3421,38 @@ module Aws::Odb
     #
     class DeleteOdbPeeringConnectionOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
+    #   and Access Management (IAM) service role to disassociate from the
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_integration
+    #   The Amazon Web Services integration configuration settings for the
+    #   Amazon Web Services Identity and Access Management (IAM) service
+    #   role disassociation.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the target resource to
+    #   disassociate from the Amazon Web Services Identity and Access
+    #   Management (IAM) service role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/DisassociateIamRoleFromResourceInput AWS API Documentation
+    #
+    class DisassociateIamRoleFromResourceInput < Struct.new(
+      :iam_role_arn,
+      :aws_integration,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/DisassociateIamRoleFromResourceOutput AWS API Documentation
+    #
+    class DisassociateIamRoleFromResourceOutput < Aws::EmptyStructure; end
+
     # The IORM settings of the Exadata DB system.
     #
     # @!attribute [rw] db_plans
@@ -3487,12 +3666,18 @@ module Aws::Odb
     #   account.
     #   @return [String]
     #
+    # @!attribute [rw] oci_identity_domain
+    #   The Oracle Cloud Infrastructure (OCI) identity domain information in
+    #   the onboarding status response.
+    #   @return [Types::OciIdentityDomain]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/GetOciOnboardingStatusOutput AWS API Documentation
     #
     class GetOciOnboardingStatusOutput < Struct.new(
       :status,
       :existing_tenancy_activation_link,
-      :new_tenancy_activation_link)
+      :new_tenancy_activation_link,
+      :oci_identity_domain)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3562,11 +3747,54 @@ module Aws::Odb
       include Aws::Structure
     end
 
-    # @api private
+    # Information about an Amazon Web Services Identity and Access
+    # Management (IAM) service role associated with a resource.
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
+    #   and Access Management (IAM) service role.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Amazon Web Services Identity and Access
+    #   Management (IAM) service role.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the current status of the Amazon Web
+    #   Services Identity and Access Management (IAM) service role, if
+    #   applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_integration
+    #   The Amazon Web Services integration configuration settings for the
+    #   Amazon Web Services Identity and Access Management (IAM) service
+    #   role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/IamRole AWS API Documentation
+    #
+    class IamRole < Struct.new(
+      :iam_role_arn,
+      :status,
+      :status_reason,
+      :aws_integration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] oci_identity_domain
+    #   The Oracle Cloud Infrastructure (OCI) identity domain configuration
+    #   for service initialization.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/InitializeServiceInput AWS API Documentation
     #
-    class InitializeServiceInput < Aws::EmptyStructure; end
+    class InitializeServiceInput < Struct.new(
+      :oci_identity_domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/InitializeServiceOutput AWS API Documentation
     #
@@ -3588,6 +3816,40 @@ module Aws::Odb
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for Amazon Web Services Key Management Service (KMS)
+    # access from the ODB network.
+    #
+    # @!attribute [rw] status
+    #   The current status of the Amazon Web Services Key Management Service
+    #   (KMS) access configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv4_addresses
+    #   The IPv4 addresses allowed for Amazon Web Services Key Management
+    #   Service (KMS) access.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name for Amazon Web Services Key Management Service (KMS)
+    #   access configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_policy_document
+    #   The Amazon Web Services Key Management Service (KMS) policy document
+    #   that defines permissions for key usage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/KmsAccess AWS API Documentation
+    #
+    class KmsAccess < Struct.new(
+      :status,
+      :ipv4_addresses,
+      :domain_name,
+      :kms_policy_document)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4184,8 +4446,6 @@ module Aws::Odb
     #
     # @!attribute [rw] status
     #   The status of the managed Amazon S3 backup access.
-    #
-    #   Valid Values: `enabled | disabled`
     #   @return [String]
     #
     # @!attribute [rw] ipv4_addresses
@@ -4231,6 +4491,21 @@ module Aws::Odb
     #   The Amazon S3 access configuration.
     #   @return [Types::S3Access]
     #
+    # @!attribute [rw] sts_access
+    #   The Amazon Web Services Security Token Service (STS) access
+    #   configuration.
+    #   @return [Types::StsAccess]
+    #
+    # @!attribute [rw] kms_access
+    #   The Amazon Web Services Key Management Service (KMS) access
+    #   configuration.
+    #   @return [Types::KmsAccess]
+    #
+    # @!attribute [rw] cross_region_s3_restore_sources_access
+    #   The access configuration for the cross-Region Amazon S3 database
+    #   restore source.
+    #   @return [Array<Types::CrossRegionS3RestoreSourcesAccess>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ManagedServices AWS API Documentation
     #
     class ManagedServices < Struct.new(
@@ -4240,7 +4515,10 @@ module Aws::Odb
       :service_network_endpoint,
       :managed_s3_backup_access,
       :zero_etl_access,
-      :s3_access)
+      :s3_access,
+      :sts_access,
+      :kms_access,
+      :cross_region_s3_restore_sources_access)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4275,6 +4553,48 @@ module Aws::Odb
     class OciDnsForwardingConfig < Struct.new(
       :domain_name,
       :oci_dns_listener_ip)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an Oracle Cloud Infrastructure (OCI) identity domain
+    # configuration.
+    #
+    # @!attribute [rw] oci_identity_domain_id
+    #   The unique identifier of the OCI identity domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] oci_identity_domain_resource_url
+    #   The resource URL for accessing the OCI identity domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] oci_identity_domain_url
+    #   The URL of the OCI identity domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the OCI identity domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the current status of the OCI identity
+    #   domain, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_setup_cloud_formation_url
+    #   The Amazon Web Services CloudFormation URL for setting up the
+    #   account integration with the OCI identity domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/OciIdentityDomain AWS API Documentation
+    #
+    class OciIdentityDomain < Struct.new(
+      :oci_identity_domain_id,
+      :oci_identity_domain_resource_url,
+      :oci_identity_domain_url,
+      :status,
+      :status_reason,
+      :account_setup_cloud_formation_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4534,9 +4854,6 @@ module Aws::Odb
     #
     # @!attribute [rw] status
     #   The status of the ODB peering connection.
-    #
-    #   Valid Values: `provisioning | active | terminating | terminated |
-    #   failed`
     #   @return [String]
     #
     # @!attribute [rw] status_reason
@@ -4611,9 +4928,6 @@ module Aws::Odb
     #
     # @!attribute [rw] status
     #   The status of the ODB peering connection.
-    #
-    #   Valid Values: `provisioning | active | terminating | terminated |
-    #   failed`
     #   @return [String]
     #
     # @!attribute [rw] status_reason
@@ -4741,8 +5055,6 @@ module Aws::Odb
     #
     # @!attribute [rw] status
     #   The status of the Amazon S3 access.
-    #
-    #   Valid Values: `enabled | disabled`
     #   @return [String]
     #
     # @!attribute [rw] ipv4_addresses
@@ -4776,8 +5088,6 @@ module Aws::Odb
     #
     # @!attribute [rw] vpc_endpoint_type
     #   The type of the VPC endpoint.
-    #
-    #   Valid Values: `Interface | Gateway`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ServiceNetworkEndpoint AWS API Documentation
@@ -4895,6 +5205,40 @@ module Aws::Odb
       :db_node_id,
       :status,
       :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for Amazon Web Services Security Token Service (STS)
+    # access from the ODB network.
+    #
+    # @!attribute [rw] status
+    #   The current status of the Amazon Web Services Security Token Service
+    #   (STS) access configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv4_addresses
+    #   The IPv4 addresses allowed for Amazon Web Services Security Token
+    #   Service (STS) access.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name for Amazon Web Services Security Token Service (STS)
+    #   access configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] sts_policy_document
+    #   The Amazon Web Services Security Token Service (STS) policy document
+    #   that defines permissions for token service usage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/StsAccess AWS API Documentation
+    #
+    class StsAccess < Struct.new(
+      :status,
+      :ipv4_addresses,
+      :domain_name,
+      :sts_policy_document)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5061,10 +5405,41 @@ module Aws::Odb
     #   network.
     #   @return [String]
     #
+    # @!attribute [rw] sts_access
+    #   The Amazon Web Services Security Token Service (STS) access
+    #   configuration for the ODB network.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_access
+    #   The Amazon Web Services Key Management Service (KMS) access
+    #   configuration for the ODB network.
+    #   @return [String]
+    #
     # @!attribute [rw] s3_policy_document
     #   Specifies the updated endpoint policy for Amazon S3 access from the
     #   ODB network.
     #   @return [String]
+    #
+    # @!attribute [rw] sts_policy_document
+    #   The Amazon Web Services Security Token Service (STS) policy document
+    #   that defines permissions for token service usage within the ODB
+    #   network.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_policy_document
+    #   The Amazon Web Services Key Management Service (KMS) policy document
+    #   that defines permissions for key usage within the ODB network.
+    #   @return [String]
+    #
+    # @!attribute [rw] cross_region_s3_restore_sources_to_enable
+    #   The cross-Region Amazon S3 restore sources to enable for the ODB
+    #   network.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cross_region_s3_restore_sources_to_disable
+    #   The cross-Region Amazon S3 restore sources to disable for the ODB
+    #   network.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateOdbNetworkInput AWS API Documentation
     #
@@ -5075,7 +5450,13 @@ module Aws::Odb
       :peered_cidrs_to_be_removed,
       :s3_access,
       :zero_etl_access,
-      :s3_policy_document)
+      :sts_access,
+      :kms_access,
+      :s3_policy_document,
+      :sts_policy_document,
+      :kms_policy_document,
+      :cross_region_s3_restore_sources_to_enable,
+      :cross_region_s3_restore_sources_to_disable)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5217,8 +5598,6 @@ module Aws::Odb
     #
     # @!attribute [rw] status
     #   The status of the Zero-ETL access.
-    #
-    #   Valid Values: `enabled | disabled`
     #   @return [String]
     #
     # @!attribute [rw] cidr

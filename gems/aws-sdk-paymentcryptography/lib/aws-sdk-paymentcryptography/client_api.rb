@@ -20,6 +20,7 @@ module Aws::PaymentCryptography
     Alias = Shapes::StructureShape.new(name: 'Alias')
     AliasName = Shapes::StringShape.new(name: 'AliasName')
     Aliases = Shapes::ListShape.new(name: 'Aliases')
+    As2805KeyVariant = Shapes::StringShape.new(name: 'As2805KeyVariant')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CertificateSigningRequestType = Shapes::StringShape.new(name: 'CertificateSigningRequestType')
     CertificateSubjectType = Shapes::StructureShape.new(name: 'CertificateSubjectType')
@@ -48,6 +49,7 @@ module Aws::PaymentCryptography
     EnableDefaultKeyReplicationRegionsInput = Shapes::StructureShape.new(name: 'EnableDefaultKeyReplicationRegionsInput')
     EnableDefaultKeyReplicationRegionsOutput = Shapes::StructureShape.new(name: 'EnableDefaultKeyReplicationRegionsOutput')
     EvenHexLengthBetween16And32 = Shapes::StringShape.new(name: 'EvenHexLengthBetween16And32')
+    ExportAs2805KeyCryptogram = Shapes::StructureShape.new(name: 'ExportAs2805KeyCryptogram')
     ExportAttributes = Shapes::StructureShape.new(name: 'ExportAttributes')
     ExportDiffieHellmanTr31KeyBlock = Shapes::StructureShape.new(name: 'ExportDiffieHellmanTr31KeyBlock')
     ExportDukptInitialKey = Shapes::StructureShape.new(name: 'ExportDukptInitialKey')
@@ -73,6 +75,7 @@ module Aws::PaymentCryptography
     GetPublicKeyCertificateInput = Shapes::StructureShape.new(name: 'GetPublicKeyCertificateInput')
     GetPublicKeyCertificateOutput = Shapes::StructureShape.new(name: 'GetPublicKeyCertificateOutput')
     HexLength20Or24 = Shapes::StringShape.new(name: 'HexLength20Or24')
+    ImportAs2805KeyCryptogram = Shapes::StructureShape.new(name: 'ImportAs2805KeyCryptogram')
     ImportDiffieHellmanTr31KeyBlock = Shapes::StructureShape.new(name: 'ImportDiffieHellmanTr31KeyBlock')
     ImportKeyCryptogram = Shapes::StructureShape.new(name: 'ImportKeyCryptogram')
     ImportKeyInput = Shapes::StructureShape.new(name: 'ImportKeyInput')
@@ -238,6 +241,10 @@ module Aws::PaymentCryptography
     EnableDefaultKeyReplicationRegionsOutput.add_member(:enabled_replication_regions, Shapes::ShapeRef.new(shape: Regions, required: true, location_name: "EnabledReplicationRegions"))
     EnableDefaultKeyReplicationRegionsOutput.struct_class = Types::EnableDefaultKeyReplicationRegionsOutput
 
+    ExportAs2805KeyCryptogram.add_member(:wrapping_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "WrappingKeyIdentifier"))
+    ExportAs2805KeyCryptogram.add_member(:as_2805_key_variant, Shapes::ShapeRef.new(shape: As2805KeyVariant, required: true, location_name: "As2805KeyVariant"))
+    ExportAs2805KeyCryptogram.struct_class = Types::ExportAs2805KeyCryptogram
+
     ExportAttributes.add_member(:export_dukpt_initial_key, Shapes::ShapeRef.new(shape: ExportDukptInitialKey, location_name: "ExportDukptInitialKey"))
     ExportAttributes.add_member(:key_check_value_algorithm, Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
     ExportAttributes.struct_class = Types::ExportAttributes
@@ -269,11 +276,13 @@ module Aws::PaymentCryptography
     ExportKeyMaterial.add_member(:tr_34_key_block, Shapes::ShapeRef.new(shape: ExportTr34KeyBlock, location_name: "Tr34KeyBlock"))
     ExportKeyMaterial.add_member(:key_cryptogram, Shapes::ShapeRef.new(shape: ExportKeyCryptogram, location_name: "KeyCryptogram"))
     ExportKeyMaterial.add_member(:diffie_hellman_tr_31_key_block, Shapes::ShapeRef.new(shape: ExportDiffieHellmanTr31KeyBlock, location_name: "DiffieHellmanTr31KeyBlock"))
+    ExportKeyMaterial.add_member(:as_2805_key_cryptogram, Shapes::ShapeRef.new(shape: ExportAs2805KeyCryptogram, location_name: "As2805KeyCryptogram"))
     ExportKeyMaterial.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ExportKeyMaterial.add_member_subclass(:tr_31_key_block, Types::ExportKeyMaterial::Tr31KeyBlock)
     ExportKeyMaterial.add_member_subclass(:tr_34_key_block, Types::ExportKeyMaterial::Tr34KeyBlock)
     ExportKeyMaterial.add_member_subclass(:key_cryptogram, Types::ExportKeyMaterial::KeyCryptogram)
     ExportKeyMaterial.add_member_subclass(:diffie_hellman_tr_31_key_block, Types::ExportKeyMaterial::DiffieHellmanTr31KeyBlock)
+    ExportKeyMaterial.add_member_subclass(:as_2805_key_cryptogram, Types::ExportKeyMaterial::As2805KeyCryptogram)
     ExportKeyMaterial.add_member_subclass(:unknown, Types::ExportKeyMaterial::Unknown)
     ExportKeyMaterial.struct_class = Types::ExportKeyMaterial
 
@@ -348,6 +357,14 @@ module Aws::PaymentCryptography
     GetPublicKeyCertificateOutput.add_member(:key_certificate_chain, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "KeyCertificateChain"))
     GetPublicKeyCertificateOutput.struct_class = Types::GetPublicKeyCertificateOutput
 
+    ImportAs2805KeyCryptogram.add_member(:as_2805_key_variant, Shapes::ShapeRef.new(shape: As2805KeyVariant, required: true, location_name: "As2805KeyVariant"))
+    ImportAs2805KeyCryptogram.add_member(:key_modes_of_use, Shapes::ShapeRef.new(shape: KeyModesOfUse, required: true, location_name: "KeyModesOfUse"))
+    ImportAs2805KeyCryptogram.add_member(:key_algorithm, Shapes::ShapeRef.new(shape: KeyAlgorithm, required: true, location_name: "KeyAlgorithm"))
+    ImportAs2805KeyCryptogram.add_member(:exportable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Exportable"))
+    ImportAs2805KeyCryptogram.add_member(:wrapping_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "WrappingKeyIdentifier"))
+    ImportAs2805KeyCryptogram.add_member(:wrapped_key_cryptogram, Shapes::ShapeRef.new(shape: WrappedKeyCryptogram, required: true, location_name: "WrappedKeyCryptogram"))
+    ImportAs2805KeyCryptogram.struct_class = Types::ImportAs2805KeyCryptogram
+
     ImportDiffieHellmanTr31KeyBlock.add_member(:private_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "PrivateKeyIdentifier"))
     ImportDiffieHellmanTr31KeyBlock.add_member(:certificate_authority_public_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "CertificateAuthorityPublicKeyIdentifier"))
     ImportDiffieHellmanTr31KeyBlock.add_member(:public_key_certificate, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "PublicKeyCertificate"))
@@ -378,6 +395,7 @@ module Aws::PaymentCryptography
     ImportKeyMaterial.add_member(:tr_34_key_block, Shapes::ShapeRef.new(shape: ImportTr34KeyBlock, location_name: "Tr34KeyBlock"))
     ImportKeyMaterial.add_member(:key_cryptogram, Shapes::ShapeRef.new(shape: ImportKeyCryptogram, location_name: "KeyCryptogram"))
     ImportKeyMaterial.add_member(:diffie_hellman_tr_31_key_block, Shapes::ShapeRef.new(shape: ImportDiffieHellmanTr31KeyBlock, location_name: "DiffieHellmanTr31KeyBlock"))
+    ImportKeyMaterial.add_member(:as_2805_key_cryptogram, Shapes::ShapeRef.new(shape: ImportAs2805KeyCryptogram, location_name: "As2805KeyCryptogram"))
     ImportKeyMaterial.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ImportKeyMaterial.add_member_subclass(:root_certificate_public_key, Types::ImportKeyMaterial::RootCertificatePublicKey)
     ImportKeyMaterial.add_member_subclass(:trusted_certificate_public_key, Types::ImportKeyMaterial::TrustedCertificatePublicKey)
@@ -385,6 +403,7 @@ module Aws::PaymentCryptography
     ImportKeyMaterial.add_member_subclass(:tr_34_key_block, Types::ImportKeyMaterial::Tr34KeyBlock)
     ImportKeyMaterial.add_member_subclass(:key_cryptogram, Types::ImportKeyMaterial::KeyCryptogram)
     ImportKeyMaterial.add_member_subclass(:diffie_hellman_tr_31_key_block, Types::ImportKeyMaterial::DiffieHellmanTr31KeyBlock)
+    ImportKeyMaterial.add_member_subclass(:as_2805_key_cryptogram, Types::ImportKeyMaterial::As2805KeyCryptogram)
     ImportKeyMaterial.add_member_subclass(:unknown, Types::ImportKeyMaterial::Unknown)
     ImportKeyMaterial.struct_class = Types::ImportKeyMaterial
 

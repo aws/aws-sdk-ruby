@@ -991,6 +991,7 @@ module Aws::AccessAnalyzer
     class ResourceTypeDetails
       attr_accessor total_active_public: ::Integer
       attr_accessor total_active_cross_account: ::Integer
+      attr_accessor total_active_errors: ::Integer
       SENSITIVE: []
     end
 

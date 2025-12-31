@@ -26,6 +26,9 @@ module Aws
       class InternalServerErrorException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class MethodNotAllowedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class NotFoundException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

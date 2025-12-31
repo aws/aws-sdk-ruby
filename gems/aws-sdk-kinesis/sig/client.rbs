@@ -97,7 +97,9 @@ module Aws
                            ?stream_mode_details: {
                              stream_mode: ("PROVISIONED" | "ON_DEMAND")
                            },
-                           ?tags: Hash[::String, ::String]
+                           ?tags: Hash[::String, ::String],
+                           ?warm_throughput_mi_bps: ::Integer,
+                           ?max_record_size_in_ki_b: ::Integer
                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -130,6 +132,15 @@ module Aws
                                         ?consumer_arn: ::String
                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountSettingsOutput]
+        def minimum_throughput_billing_commitment: () -> Types::MinimumThroughputBillingCommitmentOutput
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#describe_account_settings-instance_method
+      def describe_account_settings: (
+                                     ) -> _DescribeAccountSettingsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountSettingsResponseSuccess
 
       interface _DescribeLimitsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLimitsOutput]
@@ -445,6 +456,25 @@ module Aws
                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _UpdateAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccountSettingsOutput]
+        def minimum_throughput_billing_commitment: () -> Types::MinimumThroughputBillingCommitmentOutput
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#update_account_settings-instance_method
+      def update_account_settings: (
+                                     minimum_throughput_billing_commitment: {
+                                       status: ("ENABLED" | "DISABLED")
+                                     }
+                                   ) -> _UpdateAccountSettingsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccountSettingsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#update_max_record_size-instance_method
+      def update_max_record_size: (
+                                    ?stream_arn: ::String,
+                                    max_record_size_in_ki_b: ::Integer
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _UpdateShardCountResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateShardCountOutput]
         def stream_name: () -> ::String
@@ -466,9 +496,24 @@ module Aws
                                 stream_arn: ::String,
                                 stream_mode_details: {
                                   stream_mode: ("PROVISIONED" | "ON_DEMAND")
-                                }
+                                },
+                                ?warm_throughput_mi_bps: ::Integer
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateStreamWarmThroughputResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStreamWarmThroughputOutput]
+        def stream_arn: () -> ::String
+        def stream_name: () -> ::String
+        def warm_throughput: () -> Types::WarmThroughputObject
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#update_stream_warm_throughput-instance_method
+      def update_stream_warm_throughput: (
+                                           ?stream_arn: ::String,
+                                           ?stream_name: ::String,
+                                           warm_throughput_mi_bps: ::Integer
+                                         ) -> _UpdateStreamWarmThroughputResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStreamWarmThroughputResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kinesis/Client.html#wait_until-instance_method
       def wait_until: (:stream_exists waiter_name, 

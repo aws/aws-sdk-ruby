@@ -414,7 +414,11 @@ module Aws
                                     ],
                                     ?positioning: ("Enabled" | "Disabled"),
                                     ?sidewalk: {
-                                      device_profile_id: ::String?
+                                      device_profile_id: ::String?,
+                                      positioning: {
+                                        destination_name: ::String?
+                                      }?,
+                                      sidewalk_manufacturing_sn: ::String?
                                     }
                                   ) -> _CreateWirelessDeviceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWirelessDeviceResponseSuccess
@@ -1117,6 +1121,7 @@ module Aws
         def id: () -> ::String
         def arn: () -> ::String
         def destination_name: () -> ::String
+        def positioning: () -> ("Enabled" | "Disabled")
         def sidewalk: () -> Types::SidewalkGetStartImportInfo
         def creation_time: () -> ::Time
         def status: () -> ("INITIALIZING" | "INITIALIZED" | "PENDING" | "COMPLETE" | "FAILED" | "DELETING")
@@ -1251,6 +1256,8 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDevicesForWirelessDeviceImportTaskResponse]
         def next_token: () -> ::String
         def destination_name: () -> ::String
+        def positioning: () -> ("Enabled" | "Disabled")
+        def sidewalk: () -> Types::SidewalkListDevicesForImportInfo
         def imported_wireless_device_list: () -> ::Array[Types::ImportedWirelessDevice]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTWireless/Client.html#list_devices_for_wireless_device_import_task-instance_method
@@ -1610,8 +1617,12 @@ module Aws
                                                           value: ::String
                                                         },
                                                       ],
+                                                      ?positioning: ("Enabled" | "Disabled"),
                                                       sidewalk: {
-                                                        sidewalk_manufacturing_sn: ::String?
+                                                        sidewalk_manufacturing_sn: ::String?,
+                                                        positioning: {
+                                                          destination_name: ::String?
+                                                        }?
                                                       }
                                                     ) -> _StartSingleWirelessDeviceImportTaskResponseSuccess
                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSingleWirelessDeviceImportTaskResponseSuccess
@@ -1631,9 +1642,13 @@ module Aws
                                                    value: ::String
                                                  },
                                                ],
+                                               ?positioning: ("Enabled" | "Disabled"),
                                                sidewalk: {
                                                  device_creation_file: ::String?,
-                                                 role: ::String?
+                                                 role: ::String?,
+                                                 positioning: {
+                                                   destination_name: ::String?
+                                                 }?
                                                }
                                              ) -> _StartWirelessDeviceImportTaskResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartWirelessDeviceImportTaskResponseSuccess
@@ -1944,7 +1959,12 @@ module Aws
                                         ]?
                                       }?
                                     },
-                                    ?positioning: ("Enabled" | "Disabled")
+                                    ?positioning: ("Enabled" | "Disabled"),
+                                    ?sidewalk: {
+                                      positioning: {
+                                        destination_name: ::String?
+                                      }?
+                                    }
                                   ) -> _UpdateWirelessDeviceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWirelessDeviceResponseSuccess
 

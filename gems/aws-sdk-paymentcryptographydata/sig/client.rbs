@@ -182,6 +182,28 @@ module Aws
                         ) -> _EncryptDataResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EncryptDataResponseSuccess
 
+      interface _GenerateAs2805KekValidationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GenerateAs2805KekValidationOutput]
+        def key_arn: () -> ::String
+        def key_check_value: () -> ::String
+        def random_key_send: () -> ::String
+        def random_key_receive: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptographyData/Client.html#generate_as_2805_kek_validation-instance_method
+      def generate_as_2805_kek_validation: (
+                                             key_identifier: ::String,
+                                             kek_validation_type: {
+                                               kek_validation_request: {
+                                                 derive_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224")
+                                               }?,
+                                               kek_validation_response: {
+                                                 random_key_send: ::String
+                                               }?
+                                             },
+                                             random_key_send_variant_mask: ("VARIANT_MASK_82C0" | "VARIANT_MASK_82")
+                                           ) -> _GenerateAs2805KekValidationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateAs2805KekValidationResponseSuccess
+
       interface _GenerateCardValidationDataResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GenerateCardValidationDataOutput]
         def key_arn: () -> ::String
@@ -240,7 +262,7 @@ module Aws
                           key_identifier: ::String,
                           message_data: ::String,
                           generation_attributes: {
-                            algorithm: ("ISO9797_ALGORITHM1" | "ISO9797_ALGORITHM3" | "CMAC" | "HMAC" | "HMAC_SHA224" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512")?,
+                            algorithm: ("ISO9797_ALGORITHM1" | "ISO9797_ALGORITHM3" | "CMAC" | "HMAC" | "HMAC_SHA224" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "AS2805_4_1")?,
                             emv_mac: {
                               major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
                               primary_account_number: ::String,
@@ -523,6 +545,9 @@ module Aws
                                   }?,
                                   iso_format_4: {
                                     primary_account_number: ::String
+                                  }?,
+                                  as_2805_format_0: {
+                                    primary_account_number: ::String
                                   }?
                                 },
                                 outgoing_translation_attributes: {
@@ -535,6 +560,9 @@ module Aws
                                     primary_account_number: ::String
                                   }?,
                                   iso_format_4: {
+                                    primary_account_number: ::String
+                                  }?,
+                                  as_2805_format_0: {
                                     primary_account_number: ::String
                                   }?
                                 },
@@ -576,6 +604,10 @@ module Aws
                                     }?
                                   },
                                   key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
+                                },
+                                ?incoming_as_2805_attributes: {
+                                  system_trace_audit_number: ::String,
+                                  transaction_amount: ::String
                                 }
                               ) -> _TranslatePinDataResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TranslatePinDataResponseSuccess
@@ -692,7 +724,7 @@ module Aws
                         message_data: ::String,
                         mac: ::String,
                         verification_attributes: {
-                          algorithm: ("ISO9797_ALGORITHM1" | "ISO9797_ALGORITHM3" | "CMAC" | "HMAC" | "HMAC_SHA224" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512")?,
+                          algorithm: ("ISO9797_ALGORITHM1" | "ISO9797_ALGORITHM3" | "CMAC" | "HMAC" | "HMAC_SHA224" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "AS2805_4_1")?,
                           emv_mac: {
                             major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
                             primary_account_number: ::String,

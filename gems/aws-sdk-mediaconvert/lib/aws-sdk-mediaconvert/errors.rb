@@ -32,6 +32,7 @@ module Aws::MediaConvert
   # * {ForbiddenException}
   # * {InternalServerErrorException}
   # * {NotFoundException}
+  # * {ServiceQuotaExceededException}
   # * {TooManyRequestsException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -105,6 +106,21 @@ module Aws::MediaConvert
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::MediaConvert::Types::NotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MediaConvert::Types::ServiceQuotaExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -2991,9 +2991,9 @@ module Aws::States
     # of a state exceeds this duration, it fails with the `States.Timeout`
     # error.
     #
-    # `TestState` doesn't support [Activity tasks][5], `.sync` or
-    # `.waitForTaskToken` [service integration patterns][12],
-    # [Parallel][13], or [Map][14] states.
+    # `TestState` only supports the following when a mock is specified:
+    # [Activity tasks][5], `.sync` or `.waitForTaskToken` [service
+    # integration patterns][12], [Parallel][13], or [Map][14] states.
     #
     #
     #
@@ -3013,7 +3013,8 @@ module Aws::States
     # [14]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-map-state.html
     #
     # @option params [required, String] :definition
-    #   The [Amazon States Language][1] (ASL) definition of the state.
+    #   The [Amazon States Language][1] (ASL) definition of the state or state
+    #   machine.
     #
     #
     #
@@ -3067,6 +3068,25 @@ module Aws::States
     #   JSON object literal that sets variables used in the state under test.
     #   Object keys are the variable names and values are the variable values.
     #
+    # @option params [String] :state_name
+    #   Denotes the particular state within a state machine definition to be
+    #   tested. If this field is specified, the `definition` must contain a
+    #   fully-formed state machine definition.
+    #
+    # @option params [Types::MockInput] :mock
+    #   Defines a mocked result or error for the state under test.
+    #
+    #   A mock can only be specified for Task, Map, or Parallel states. If it
+    #   is specified for another state type, an exception will be thrown.
+    #
+    # @option params [String] :context
+    #   A JSON string representing a valid Context object for the state under
+    #   test. This field may only be specified if a mock is specified in the
+    #   same request.
+    #
+    # @option params [Types::TestStateConfiguration] :state_configuration
+    #   Contains configurations for the state under test.
+    #
     # @return [Types::TestStateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::TestStateOutput#output #output} => String
@@ -3085,6 +3105,22 @@ module Aws::States
     #     inspection_level: "INFO", # accepts INFO, DEBUG, TRACE
     #     reveal_secrets: false,
     #     variables: "SensitiveData",
+    #     state_name: "TestStateStateName",
+    #     mock: {
+    #       result: "SensitiveData",
+    #       error_output: {
+    #         error: "SensitiveError",
+    #         cause: "SensitiveCause",
+    #       },
+    #       field_validation_mode: "STRICT", # accepts STRICT, PRESENT, NONE
+    #     },
+    #     context: "SensitiveData",
+    #     state_configuration: {
+    #       retrier_retry_count: 1,
+    #       error_caused_by_state: "TestStateStateName",
+    #       map_iteration_failure_count: 1,
+    #       map_item_reader_data: "SensitiveData",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3110,6 +3146,16 @@ module Aws::States
     #   resp.inspection_data.response.headers #=> String
     #   resp.inspection_data.response.body #=> String
     #   resp.inspection_data.variables #=> String
+    #   resp.inspection_data.error_details.catch_index #=> Integer
+    #   resp.inspection_data.error_details.retry_index #=> Integer
+    #   resp.inspection_data.error_details.retry_backoff_interval_seconds #=> Integer
+    #   resp.inspection_data.after_items_path #=> String
+    #   resp.inspection_data.after_item_selector #=> String
+    #   resp.inspection_data.after_item_batcher #=> String
+    #   resp.inspection_data.after_items_pointer #=> String
+    #   resp.inspection_data.tolerated_failure_count #=> Integer
+    #   resp.inspection_data.tolerated_failure_percentage #=> Float
+    #   resp.inspection_data.max_concurrency #=> Integer
     #   resp.next_state #=> String
     #   resp.status #=> String, one of "SUCCEEDED", "FAILED", "RETRIABLE", "CAUGHT_ERROR"
     #
@@ -3532,7 +3578,7 @@ module Aws::States
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -3,7 +3,64 @@ Unreleased Changes
 
 * Feature - TODO
 
+1.209.0 (2025-12-23)
+------------------
+
+* Feature - Add additional validation to Outpost bucket names.
+
+1.208.0 (2025-12-16)
+------------------
+
+* Feature - Updates to the S3 Encryption Client. The V3 S3 Encryption Client now requires key committing algorithm suites by default.
+
+1.207.0 (2025-12-15)
+------------------
+
+* Feature - This release adds support for the new optional field 'LifecycleExpirationDate' in S3 Inventory configurations.
+
+1.206.0 (2025-12-02)
+------------------
+
+* Feature - New S3 Storage Class FSX_ONTAP
+
+1.205.0 (2025-11-20)
+------------------
+
+* Feature - Enable / Disable ABAC on a general purpose bucket.
+
+1.204.0 (2025-11-19)
+------------------
+
+* Feature - Adds support for blocking SSE-C writes to general purpose buckets.
+
+1.203.1 (2025-11-10)
+------------------
+
+* Issue - Deprecated `:checksum_mode` parameter in `FileDownloader#download`. When set to "DISABLED", a deprecation warning is issued and the parameter is ignored. Use `:response_checksum_validation` on the S3 client instead to control checksum validation behavior.
+
+1.203.0 (2025-11-05)
+------------------
+
+* Feature - Launch IPv6 dual-stack support for S3 Express
+
+1.202.0 (2025-10-28)
+------------------
+
+* Feature - Amazon Simple Storage Service / Features: Add conditional writes in CopyObject on destination key to prevent unintended object modifications.
+
+1.201.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Issue - Fix multipart upload to respect `request_checksum_calculation` `when_required` mode.
+
+1.200.0 (2025-10-15)
+------------------
+
 * Feature - Add lightweight thread pool executor for multipart `download_file`, `upload_file` and `upload_stream`.
+
+* Feature - Add custom executor support for `Aws::S3::TransferManager`.
 
 1.199.1 (2025-09-25)
 ------------------

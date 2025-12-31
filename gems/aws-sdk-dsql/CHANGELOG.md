@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2025-11-20)
+------------------
+
+* Feature - Added clusterVpcEndpoint field to GetVpcEndpointServiceName API response, returning the VPC connection endpoint for the cluster
+
+1.20.0 (2025-11-10)
+------------------
+
+* Feature - Cluster endpoint added to CreateCluster and GetCluster API responses
+
+1.19.0 (2025-10-23)
+------------------
+
+* Feature - Add support for resource-based policies for Aurora DSQL clusters. This will enable you to implement Block Public Access (BPA) which will help restrict access to your Aurora DSQL public or VPC endpoints.
+
+1.18.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2025-10-17)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.16.0 (2025-08-26)
 ------------------
 

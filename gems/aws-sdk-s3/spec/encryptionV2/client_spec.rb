@@ -131,6 +131,9 @@ module Aws
             expect(DefaultCipherProvider).to receive(:new).with(
               hash_including(key_provider: key_provider)
             )
+            expect(Aws::S3::EncryptionV3::DefaultCipherProvider).to receive(:new).with(
+              hash_including(key_provider: key_provider)
+            )
             Client.new(options.merge(key_provider: key_provider))
           end
 
@@ -140,6 +143,9 @@ module Aws
             expect(KmsCipherProvider).to receive(:new).with(
               hash_including(kms_key_id: kms_key_id, kms_client: kms_client)
             )
+            expect(Aws::S3::EncryptionV3::KmsCipherProvider).to receive(:new).with(
+              hash_including(kms_key_id: kms_key_id, kms_client: kms_client)
+            )
             Client.new(options.merge(kms_key_id: kms_key_id))
           end
 
@@ -147,6 +153,9 @@ module Aws
             kms_client = double('kms_client')
             expect(KMS::Client).not_to receive(:new)
             expect(KmsCipherProvider).to receive(:new).with(
+              hash_including(kms_key_id: kms_key_id, kms_client: kms_client)
+            )
+            expect(Aws::S3::EncryptionV3::KmsCipherProvider).to receive(:new).with(
               hash_including(kms_key_id: kms_key_id, kms_client: kms_client)
             )
             Client.new(options.merge(kms_key_id: kms_key_id, kms_client: kms_client))
@@ -255,7 +264,8 @@ module Aws
               instruction_file_suffix: '.instruction',
               kms_encryption_context: nil,
               kms_allow_decrypt_with_any_cmk: false,
-              security_profile: :v2
+              security_profile: :v2,
+              v3_cipher_provider: kind_of(Aws::S3::EncryptionV3::DefaultCipherProvider)
             })
           end
 

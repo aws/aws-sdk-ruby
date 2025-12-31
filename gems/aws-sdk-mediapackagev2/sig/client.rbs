@@ -234,7 +234,8 @@ module Aws
                                       include_iframe_only_streams: bool?,
                                       ts_include_dvb_subtitles: bool?,
                                       scte: {
-                                        scte_filter: Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY" | "PROGRAM")]?
+                                        scte_filter: Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY" | "PROGRAM")]?,
+                                        scte_in_segments: ("NONE" | "ALL")?
                                       }?,
                                       encryption: {
                                         constant_initialization_vector: ::String?,
@@ -253,7 +254,8 @@ module Aws
                                           resource_id: ::String,
                                           drm_systems: Array[("CLEAR_KEY_AES_128" | "FAIRPLAY" | "PLAYREADY" | "WIDEVINE" | "IRDETO")],
                                           role_arn: ::String,
-                                          url: ::String
+                                          url: ::String,
+                                          certificate_arn: ::String?
                                         }
                                       }?
                                     },
@@ -275,6 +277,7 @@ module Aws
                                         program_date_time_interval_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
+                                          drm_settings: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
                                           time_delay_seconds: ::Integer?,
@@ -298,6 +301,7 @@ module Aws
                                         program_date_time_interval_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
+                                          drm_settings: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
                                           time_delay_seconds: ::Integer?,
@@ -312,6 +316,7 @@ module Aws
                                         manifest_window_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
+                                          drm_settings: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
                                           time_delay_seconds: ::Integer?,
@@ -373,6 +378,7 @@ module Aws
                                         manifest_window_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
+                                          drm_settings: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
                                           time_delay_seconds: ::Integer?,
@@ -783,7 +789,8 @@ module Aws
                                       include_iframe_only_streams: bool?,
                                       ts_include_dvb_subtitles: bool?,
                                       scte: {
-                                        scte_filter: Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY" | "PROGRAM")]?
+                                        scte_filter: Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY" | "PROGRAM")]?,
+                                        scte_in_segments: ("NONE" | "ALL")?
                                       }?,
                                       encryption: {
                                         constant_initialization_vector: ::String?,
@@ -802,7 +809,8 @@ module Aws
                                           resource_id: ::String,
                                           drm_systems: Array[("CLEAR_KEY_AES_128" | "FAIRPLAY" | "PLAYREADY" | "WIDEVINE" | "IRDETO")],
                                           role_arn: ::String,
-                                          url: ::String
+                                          url: ::String,
+                                          certificate_arn: ::String?
                                         }
                                       }?
                                     },
@@ -823,6 +831,7 @@ module Aws
                                         program_date_time_interval_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
+                                          drm_settings: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
                                           time_delay_seconds: ::Integer?,
@@ -846,6 +855,7 @@ module Aws
                                         program_date_time_interval_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
+                                          drm_settings: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
                                           time_delay_seconds: ::Integer?,
@@ -860,6 +870,7 @@ module Aws
                                         manifest_window_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
+                                          drm_settings: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
                                           time_delay_seconds: ::Integer?,
@@ -921,6 +932,7 @@ module Aws
                                         manifest_window_seconds: ::Integer?,
                                         filter_configuration: {
                                           manifest_filter: ::String?,
+                                          drm_settings: ::String?,
                                           start: ::Time?,
                                           end: ::Time?,
                                           time_delay_seconds: ::Integer?,

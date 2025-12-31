@@ -15,6 +15,8 @@ module Aws::ResourceGroupsTaggingAPI
     include Seahorse::Model
 
     AmazonResourceType = Shapes::StringShape.new(name: 'AmazonResourceType')
+    CloudFormationResourceType = Shapes::StringShape.new(name: 'CloudFormationResourceType')
+    CloudFormationResourceTypes = Shapes::ListShape.new(name: 'CloudFormationResourceTypes')
     ComplianceDetails = Shapes::StructureShape.new(name: 'ComplianceDetails')
     ComplianceStatus = Shapes::BooleanShape.new(name: 'ComplianceStatus')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
@@ -41,17 +43,24 @@ module Aws::ResourceGroupsTaggingAPI
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     LastUpdated = Shapes::StringShape.new(name: 'LastUpdated')
+    ListRequiredTagsInput = Shapes::StructureShape.new(name: 'ListRequiredTagsInput')
+    ListRequiredTagsOutput = Shapes::StructureShape.new(name: 'ListRequiredTagsOutput')
+    MaxResultsForListRequiredTags = Shapes::IntegerShape.new(name: 'MaxResultsForListRequiredTags')
     MaxResultsGetComplianceSummary = Shapes::IntegerShape.new(name: 'MaxResultsGetComplianceSummary')
     NonCompliantResources = Shapes::IntegerShape.new(name: 'NonCompliantResources')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PaginationTokenExpiredException = Shapes::StructureShape.new(name: 'PaginationTokenExpiredException')
     Region = Shapes::StringShape.new(name: 'Region')
     RegionFilterList = Shapes::ListShape.new(name: 'RegionFilterList')
+    ReportingTagKeys = Shapes::ListShape.new(name: 'ReportingTagKeys')
+    RequiredTag = Shapes::StructureShape.new(name: 'RequiredTag')
+    RequiredTagsForListRequiredTags = Shapes::ListShape.new(name: 'RequiredTagsForListRequiredTags')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceARNListForGet = Shapes::ListShape.new(name: 'ResourceARNListForGet')
     ResourceARNListForTagUntag = Shapes::ListShape.new(name: 'ResourceARNListForTagUntag')
     ResourceTagMapping = Shapes::StructureShape.new(name: 'ResourceTagMapping')
     ResourceTagMappingList = Shapes::ListShape.new(name: 'ResourceTagMappingList')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceTypeFilterList = Shapes::ListShape.new(name: 'ResourceTypeFilterList')
     ResourcesPerPage = Shapes::IntegerShape.new(name: 'ResourcesPerPage')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
@@ -83,6 +92,8 @@ module Aws::ResourceGroupsTaggingAPI
     ThrottledException = Shapes::StructureShape.new(name: 'ThrottledException')
     UntagResourcesInput = Shapes::StructureShape.new(name: 'UntagResourcesInput')
     UntagResourcesOutput = Shapes::StructureShape.new(name: 'UntagResourcesOutput')
+
+    CloudFormationResourceTypes.member = Shapes::ShapeRef.new(shape: CloudFormationResourceType)
 
     ComplianceDetails.add_member(:noncompliant_keys, Shapes::ShapeRef.new(shape: TagKeyList, location_name: "NoncompliantKeys"))
     ComplianceDetails.add_member(:keys_with_noncompliant_values, Shapes::ShapeRef.new(shape: TagKeyList, location_name: "KeysWithNoncompliantValues"))
@@ -160,10 +171,27 @@ module Aws::ResourceGroupsTaggingAPI
     InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
+    ListRequiredTagsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListRequiredTagsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsForListRequiredTags, location_name: "MaxResults"))
+    ListRequiredTagsInput.struct_class = Types::ListRequiredTagsInput
+
+    ListRequiredTagsOutput.add_member(:required_tags, Shapes::ShapeRef.new(shape: RequiredTagsForListRequiredTags, location_name: "RequiredTags"))
+    ListRequiredTagsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListRequiredTagsOutput.struct_class = Types::ListRequiredTagsOutput
+
     PaginationTokenExpiredException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     PaginationTokenExpiredException.struct_class = Types::PaginationTokenExpiredException
 
     RegionFilterList.member = Shapes::ShapeRef.new(shape: Region)
+
+    ReportingTagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    RequiredTag.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    RequiredTag.add_member(:cloud_formation_resource_types, Shapes::ShapeRef.new(shape: CloudFormationResourceTypes, location_name: "CloudFormationResourceTypes"))
+    RequiredTag.add_member(:reporting_tag_keys, Shapes::ShapeRef.new(shape: ReportingTagKeys, location_name: "ReportingTagKeys"))
+    RequiredTag.struct_class = Types::RequiredTag
+
+    RequiredTagsForListRequiredTags.member = Shapes::ShapeRef.new(shape: RequiredTag)
 
     ResourceARNListForGet.member = Shapes::ShapeRef.new(shape: ResourceARN)
 
@@ -335,6 +363,24 @@ module Aws::ResourceGroupsTaggingAPI
         o[:pager] = Aws::Pager.new(
           tokens: {
             "pagination_token" => "pagination_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_required_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRequiredTags"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRequiredTagsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListRequiredTagsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: PaginationTokenExpiredException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
           }
         )
       end)

@@ -312,17 +312,15 @@ module Aws::S3
     #   you provide does not match the actual owner of the bucket, the request
     #   fails with the HTTP status code `403 Forbidden` (access denied).
     # @option options [String] :if_match
-    #   The `If-Match` header field makes the request method conditional on
-    #   ETags. If the ETag value does not match, the operation returns a `412
-    #   Precondition Failed` error. If the ETag matches or if the object
-    #   doesn't exist, the operation will return a `204 Success (No Content)
-    #   response`.
+    #   Deletes the object if the ETag (entity tag) value provided during the
+    #   delete operation matches the ETag of the object in S3. If the ETag
+    #   values do not match, the operation returns a `412 Precondition Failed`
+    #   error.
+    #
+    #   Expects the ETag value as a string. `If-Match` does accept a string
+    #   value of an '*' (asterisk) character to denote a match of any ETag.
     #
     #   For more information about conditional requests, see [RFC 7232][1].
-    #
-    #   <note markdown="1"> This functionality is only supported for directory buckets.
-    #
-    #    </note>
     #
     #
     #

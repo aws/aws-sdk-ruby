@@ -209,6 +209,8 @@ module Aws
       end
       class RedshiftIdcApplicationQuotaExceededFault < ::Aws::Errors::ServiceError
       end
+      class RedshiftInvalidParameterFault < ::Aws::Errors::ServiceError
+      end
       class ReservedNodeAlreadyExistsFault < ::Aws::Errors::ServiceError
       end
       class ReservedNodeAlreadyMigratedFault < ::Aws::Errors::ServiceError

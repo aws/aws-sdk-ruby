@@ -19,6 +19,9 @@ module Aws::PaymentCryptographyData
     AmexCardSecurityCodeVersion1 = Shapes::StructureShape.new(name: 'AmexCardSecurityCodeVersion1')
     AmexCardSecurityCodeVersion2 = Shapes::StructureShape.new(name: 'AmexCardSecurityCodeVersion2')
     ApplicationCryptogramType = Shapes::StringShape.new(name: 'ApplicationCryptogramType')
+    As2805KekValidationType = Shapes::UnionShape.new(name: 'As2805KekValidationType')
+    As2805PekDerivationAttributes = Shapes::StructureShape.new(name: 'As2805PekDerivationAttributes')
+    As2805RandomKeyMaterial = Shapes::StringShape.new(name: 'As2805RandomKeyMaterial')
     AsymmetricEncryptionAttributes = Shapes::StructureShape.new(name: 'AsymmetricEncryptionAttributes')
     AuthRequestCryptogramType = Shapes::StringShape.new(name: 'AuthRequestCryptogramType')
     AuthResponseValueType = Shapes::StringShape.new(name: 'AuthResponseValueType')
@@ -60,6 +63,8 @@ module Aws::PaymentCryptographyData
     EncryptedPinBlockType = Shapes::StringShape.new(name: 'EncryptedPinBlockType')
     EncryptionDecryptionAttributes = Shapes::UnionShape.new(name: 'EncryptionDecryptionAttributes')
     EncryptionMode = Shapes::StringShape.new(name: 'EncryptionMode')
+    GenerateAs2805KekValidationInput = Shapes::StructureShape.new(name: 'GenerateAs2805KekValidationInput')
+    GenerateAs2805KekValidationOutput = Shapes::StructureShape.new(name: 'GenerateAs2805KekValidationOutput')
     GenerateCardValidationDataInput = Shapes::StructureShape.new(name: 'GenerateCardValidationDataInput')
     GenerateCardValidationDataOutput = Shapes::StructureShape.new(name: 'GenerateCardValidationDataOutput')
     GenerateMacEmvPinChangeInput = Shapes::StructureShape.new(name: 'GenerateMacEmvPinChangeInput')
@@ -88,6 +93,8 @@ module Aws::PaymentCryptographyData
     IntegerRangeBetween4And12 = Shapes::IntegerShape.new(name: 'IntegerRangeBetween4And12')
     IntegerRangeBetween4And16 = Shapes::IntegerShape.new(name: 'IntegerRangeBetween4And16')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    KekValidationRequest = Shapes::StructureShape.new(name: 'KekValidationRequest')
+    KekValidationResponse = Shapes::StructureShape.new(name: 'KekValidationResponse')
     KeyArn = Shapes::StringShape.new(name: 'KeyArn')
     KeyArnOrKeyAliasType = Shapes::StringShape.new(name: 'KeyArnOrKeyAliasType')
     KeyCheckValue = Shapes::StringShape.new(name: 'KeyCheckValue')
@@ -123,6 +130,7 @@ module Aws::PaymentCryptographyData
     PlainTextType = Shapes::StringShape.new(name: 'PlainTextType')
     PrimaryAccountNumberType = Shapes::StringShape.new(name: 'PrimaryAccountNumberType')
     ProprietaryAuthenticationDataType = Shapes::StringShape.new(name: 'ProprietaryAuthenticationDataType')
+    RandomKeySendVariantMask = Shapes::StringShape.new(name: 'RandomKeySendVariantMask')
     ReEncryptDataInput = Shapes::StructureShape.new(name: 'ReEncryptDataInput')
     ReEncryptDataOutput = Shapes::StructureShape.new(name: 'ReEncryptDataOutput')
     ReEncryptionAttributes = Shapes::UnionShape.new(name: 'ReEncryptionAttributes')
@@ -141,15 +149,18 @@ module Aws::PaymentCryptographyData
     String = Shapes::StringShape.new(name: 'String')
     SymmetricEncryptionAttributes = Shapes::StructureShape.new(name: 'SymmetricEncryptionAttributes')
     SymmetricKeyAlgorithm = Shapes::StringShape.new(name: 'SymmetricKeyAlgorithm')
+    SystemTraceAuditNumberType = Shapes::StringShape.new(name: 'SystemTraceAuditNumberType')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Tr31WrappedKeyBlock = Shapes::StringShape.new(name: 'Tr31WrappedKeyBlock')
     TrackDataType = Shapes::StringShape.new(name: 'TrackDataType')
+    TransactionAmountType = Shapes::StringShape.new(name: 'TransactionAmountType')
     TransactionDataType = Shapes::StringShape.new(name: 'TransactionDataType')
     TranslateKeyMaterialInput = Shapes::StructureShape.new(name: 'TranslateKeyMaterialInput')
     TranslateKeyMaterialOutput = Shapes::StructureShape.new(name: 'TranslateKeyMaterialOutput')
     TranslatePinDataInput = Shapes::StructureShape.new(name: 'TranslatePinDataInput')
     TranslatePinDataOutput = Shapes::StructureShape.new(name: 'TranslatePinDataOutput')
     TranslationIsoFormats = Shapes::UnionShape.new(name: 'TranslationIsoFormats')
+    TranslationPinDataAs2805Format0 = Shapes::StructureShape.new(name: 'TranslationPinDataAs2805Format0')
     TranslationPinDataIsoFormat034 = Shapes::StructureShape.new(name: 'TranslationPinDataIsoFormat034')
     TranslationPinDataIsoFormat1 = Shapes::StructureShape.new(name: 'TranslationPinDataIsoFormat1')
     ValidationDataType = Shapes::StringShape.new(name: 'ValidationDataType')
@@ -194,6 +205,18 @@ module Aws::PaymentCryptographyData
     AmexCardSecurityCodeVersion2.add_member(:card_expiry_date, Shapes::ShapeRef.new(shape: CardExpiryDateType, required: true, location_name: "CardExpiryDate"))
     AmexCardSecurityCodeVersion2.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCodeType, required: true, location_name: "ServiceCode"))
     AmexCardSecurityCodeVersion2.struct_class = Types::AmexCardSecurityCodeVersion2
+
+    As2805KekValidationType.add_member(:kek_validation_request, Shapes::ShapeRef.new(shape: KekValidationRequest, location_name: "KekValidationRequest"))
+    As2805KekValidationType.add_member(:kek_validation_response, Shapes::ShapeRef.new(shape: KekValidationResponse, location_name: "KekValidationResponse"))
+    As2805KekValidationType.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    As2805KekValidationType.add_member_subclass(:kek_validation_request, Types::As2805KekValidationType::KekValidationRequest)
+    As2805KekValidationType.add_member_subclass(:kek_validation_response, Types::As2805KekValidationType::KekValidationResponse)
+    As2805KekValidationType.add_member_subclass(:unknown, Types::As2805KekValidationType::Unknown)
+    As2805KekValidationType.struct_class = Types::As2805KekValidationType
+
+    As2805PekDerivationAttributes.add_member(:system_trace_audit_number, Shapes::ShapeRef.new(shape: SystemTraceAuditNumberType, required: true, location_name: "SystemTraceAuditNumber"))
+    As2805PekDerivationAttributes.add_member(:transaction_amount, Shapes::ShapeRef.new(shape: TransactionAmountType, required: true, location_name: "TransactionAmount"))
+    As2805PekDerivationAttributes.struct_class = Types::As2805PekDerivationAttributes
 
     AsymmetricEncryptionAttributes.add_member(:padding_type, Shapes::ShapeRef.new(shape: PaddingType, location_name: "PaddingType"))
     AsymmetricEncryptionAttributes.struct_class = Types::AsymmetricEncryptionAttributes
@@ -385,6 +408,17 @@ module Aws::PaymentCryptographyData
     EncryptionDecryptionAttributes.add_member_subclass(:unknown, Types::EncryptionDecryptionAttributes::Unknown)
     EncryptionDecryptionAttributes.struct_class = Types::EncryptionDecryptionAttributes
 
+    GenerateAs2805KekValidationInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "KeyIdentifier"))
+    GenerateAs2805KekValidationInput.add_member(:kek_validation_type, Shapes::ShapeRef.new(shape: As2805KekValidationType, required: true, location_name: "KekValidationType"))
+    GenerateAs2805KekValidationInput.add_member(:random_key_send_variant_mask, Shapes::ShapeRef.new(shape: RandomKeySendVariantMask, required: true, location_name: "RandomKeySendVariantMask"))
+    GenerateAs2805KekValidationInput.struct_class = Types::GenerateAs2805KekValidationInput
+
+    GenerateAs2805KekValidationOutput.add_member(:key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "KeyArn"))
+    GenerateAs2805KekValidationOutput.add_member(:key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, required: true, location_name: "KeyCheckValue"))
+    GenerateAs2805KekValidationOutput.add_member(:random_key_send, Shapes::ShapeRef.new(shape: As2805RandomKeyMaterial, required: true, location_name: "RandomKeySend"))
+    GenerateAs2805KekValidationOutput.add_member(:random_key_receive, Shapes::ShapeRef.new(shape: As2805RandomKeyMaterial, required: true, location_name: "RandomKeyReceive"))
+    GenerateAs2805KekValidationOutput.struct_class = Types::GenerateAs2805KekValidationOutput
+
     GenerateCardValidationDataInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "KeyIdentifier"))
     GenerateCardValidationDataInput.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, required: true, location_name: "PrimaryAccountNumber"))
     GenerateCardValidationDataInput.add_member(:generation_attributes, Shapes::ShapeRef.new(shape: CardGenerationAttributes, required: true, location_name: "GenerationAttributes"))
@@ -490,6 +524,12 @@ module Aws::PaymentCryptographyData
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    KekValidationRequest.add_member(:derive_key_algorithm, Shapes::ShapeRef.new(shape: SymmetricKeyAlgorithm, required: true, location_name: "DeriveKeyAlgorithm"))
+    KekValidationRequest.struct_class = Types::KekValidationRequest
+
+    KekValidationResponse.add_member(:random_key_send, Shapes::ShapeRef.new(shape: As2805RandomKeyMaterial, required: true, location_name: "RandomKeySend"))
+    KekValidationResponse.struct_class = Types::KekValidationResponse
 
     MacAlgorithmDukpt.add_member(:key_serial_number, Shapes::ShapeRef.new(shape: HexLength16Or20Or24, required: true, location_name: "KeySerialNumber"))
     MacAlgorithmDukpt.add_member(:dukpt_key_variant, Shapes::ShapeRef.new(shape: DukptKeyVariant, required: true, location_name: "DukptKeyVariant"))
@@ -660,6 +700,7 @@ module Aws::PaymentCryptographyData
     TranslatePinDataInput.add_member(:outgoing_dukpt_attributes, Shapes::ShapeRef.new(shape: DukptDerivationAttributes, location_name: "OutgoingDukptAttributes"))
     TranslatePinDataInput.add_member(:incoming_wrapped_key, Shapes::ShapeRef.new(shape: WrappedKey, location_name: "IncomingWrappedKey"))
     TranslatePinDataInput.add_member(:outgoing_wrapped_key, Shapes::ShapeRef.new(shape: WrappedKey, location_name: "OutgoingWrappedKey"))
+    TranslatePinDataInput.add_member(:incoming_as_2805_attributes, Shapes::ShapeRef.new(shape: As2805PekDerivationAttributes, location_name: "IncomingAs2805Attributes"))
     TranslatePinDataInput.struct_class = Types::TranslatePinDataInput
 
     TranslatePinDataOutput.add_member(:pin_block, Shapes::ShapeRef.new(shape: EncryptedPinBlockType, required: true, location_name: "PinBlock"))
@@ -671,13 +712,18 @@ module Aws::PaymentCryptographyData
     TranslationIsoFormats.add_member(:iso_format_1, Shapes::ShapeRef.new(shape: TranslationPinDataIsoFormat1, location_name: "IsoFormat1"))
     TranslationIsoFormats.add_member(:iso_format_3, Shapes::ShapeRef.new(shape: TranslationPinDataIsoFormat034, location_name: "IsoFormat3"))
     TranslationIsoFormats.add_member(:iso_format_4, Shapes::ShapeRef.new(shape: TranslationPinDataIsoFormat034, location_name: "IsoFormat4"))
+    TranslationIsoFormats.add_member(:as_2805_format_0, Shapes::ShapeRef.new(shape: TranslationPinDataAs2805Format0, location_name: "As2805Format0"))
     TranslationIsoFormats.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     TranslationIsoFormats.add_member_subclass(:iso_format_0, Types::TranslationIsoFormats::IsoFormat0)
     TranslationIsoFormats.add_member_subclass(:iso_format_1, Types::TranslationIsoFormats::IsoFormat1)
     TranslationIsoFormats.add_member_subclass(:iso_format_3, Types::TranslationIsoFormats::IsoFormat3)
     TranslationIsoFormats.add_member_subclass(:iso_format_4, Types::TranslationIsoFormats::IsoFormat4)
+    TranslationIsoFormats.add_member_subclass(:as_2805_format_0, Types::TranslationIsoFormats::As2805Format0)
     TranslationIsoFormats.add_member_subclass(:unknown, Types::TranslationIsoFormats::Unknown)
     TranslationIsoFormats.struct_class = Types::TranslationIsoFormats
+
+    TranslationPinDataAs2805Format0.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, required: true, location_name: "PrimaryAccountNumber"))
+    TranslationPinDataAs2805Format0.struct_class = Types::TranslationPinDataAs2805Format0
 
     TranslationPinDataIsoFormat034.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, required: true, location_name: "PrimaryAccountNumber"))
     TranslationPinDataIsoFormat034.struct_class = Types::TranslationPinDataIsoFormat034
@@ -829,6 +875,19 @@ module Aws::PaymentCryptographyData
         o.http_request_uri = "/keys/{KeyIdentifier}/encrypt"
         o.input = Shapes::ShapeRef.new(shape: EncryptDataInput)
         o.output = Shapes::ShapeRef.new(shape: EncryptDataOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:generate_as_2805_kek_validation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GenerateAs2805KekValidation"
+        o.http_method = "POST"
+        o.http_request_uri = "/as2805kekvalidation/generate"
+        o.input = Shapes::ShapeRef.new(shape: GenerateAs2805KekValidationInput)
+        o.output = Shapes::ShapeRef.new(shape: GenerateAs2805KekValidationOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

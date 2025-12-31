@@ -98,6 +98,188 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # The configuration for the anomaly detection algorithm.
+    #
+    # @note AnomalyDetectorConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AnomalyDetectorConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AnomalyDetectorConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] random_cut_forest
+    #   The Random Cut Forest algorithm configuration for anomaly detection.
+    #   @return [Types::RandomCutForestConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/AnomalyDetectorConfiguration AWS API Documentation
+    #
+    class AnomalyDetectorConfiguration < Struct.new(
+      :random_cut_forest,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class RandomCutForest < AnomalyDetectorConfiguration; end
+      class Unknown < AnomalyDetectorConfiguration; end
+    end
+
+    # Detailed information about an anomaly detector.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the anomaly detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] anomaly_detector_id
+    #   The unique identifier of the anomaly detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   The user-friendly name of the anomaly detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_interval_in_seconds
+    #   The frequency, in seconds, at which the anomaly detector evaluates
+    #   metrics.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] missing_data_action
+    #   The action taken when data is missing during evaluation.
+    #   @return [Types::AnomalyDetectorMissingDataAction]
+    #
+    # @!attribute [rw] configuration
+    #   The algorithm configuration of the anomaly detector.
+    #   @return [Types::AnomalyDetectorConfiguration]
+    #
+    # @!attribute [rw] labels
+    #   The Amazon Managed Service for Prometheus metric labels associated
+    #   with the anomaly detector.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] status
+    #   The current status of the anomaly detector.
+    #   @return [Types::AnomalyDetectorStatus]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the anomaly detector was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The timestamp when the anomaly detector was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags applied to the anomaly detector.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/AnomalyDetectorDescription AWS API Documentation
+    #
+    class AnomalyDetectorDescription < Struct.new(
+      :arn,
+      :anomaly_detector_id,
+      :alias,
+      :evaluation_interval_in_seconds,
+      :missing_data_action,
+      :configuration,
+      :labels,
+      :status,
+      :created_at,
+      :modified_at,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the action to take when data is missing during anomaly
+    # detection evaluation.
+    #
+    # @note AnomalyDetectorMissingDataAction is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AnomalyDetectorMissingDataAction is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AnomalyDetectorMissingDataAction corresponding to the set member.
+    #
+    # @!attribute [rw] mark_as_anomaly
+    #   Marks missing data points as anomalies.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] skip
+    #   Skips evaluation when data is missing.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/AnomalyDetectorMissingDataAction AWS API Documentation
+    #
+    class AnomalyDetectorMissingDataAction < Struct.new(
+      :mark_as_anomaly,
+      :skip,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class MarkAsAnomaly < AnomalyDetectorMissingDataAction; end
+      class Skip < AnomalyDetectorMissingDataAction; end
+      class Unknown < AnomalyDetectorMissingDataAction; end
+    end
+
+    # The status information of an anomaly detector.
+    #
+    # @!attribute [rw] status_code
+    #   The status code of the anomaly detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   A description of the current status of the anomaly detector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/AnomalyDetectorStatus AWS API Documentation
+    #
+    class AnomalyDetectorStatus < Struct.new(
+      :status_code,
+      :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about an anomaly detector for list operations.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the anomaly detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] anomaly_detector_id
+    #   The unique identifier of the anomaly detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   The user-friendly name of the anomaly detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the anomaly detector.
+    #   @return [Types::AnomalyDetectorStatus]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the anomaly detector was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The timestamp when the anomaly detector was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags applied to the anomaly detector.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/AnomalyDetectorSummary AWS API Documentation
+    #
+    class AnomalyDetectorSummary < Struct.new(
+      :arn,
+      :anomaly_detector_id,
+      :alias,
+      :status,
+      :created_at,
+      :modified_at,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration details for logging to CloudWatch Logs.
     #
     # @!attribute [rw] log_group_arn
@@ -199,6 +381,88 @@ module Aws::PrometheusService
     #
     class CreateAlertManagerDefinitionResponse < Struct.new(
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workspace_id
+    #   The identifier of the workspace where the anomaly detector will be
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   A user-friendly name for the anomaly detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_interval_in_seconds
+    #   The frequency, in seconds, at which the anomaly detector evaluates
+    #   metrics. The default value is 60 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] missing_data_action
+    #   Specifies the action to take when data is missing during evaluation.
+    #   @return [Types::AnomalyDetectorMissingDataAction]
+    #
+    # @!attribute [rw] configuration
+    #   The algorithm configuration for the anomaly detector.
+    #   @return [Types::AnomalyDetectorConfiguration]
+    #
+    # @!attribute [rw] labels
+    #   The Amazon Managed Service for Prometheus metric labels to associate
+    #   with the anomaly detector.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The metadata to apply to the anomaly detector to assist with
+    #   categorization and organization.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateAnomalyDetectorRequest AWS API Documentation
+    #
+    class CreateAnomalyDetectorRequest < Struct.new(
+      :workspace_id,
+      :alias,
+      :evaluation_interval_in_seconds,
+      :missing_data_action,
+      :configuration,
+      :labels,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] anomaly_detector_id
+    #   The unique identifier of the created anomaly detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the created anomaly detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status information of the created anomaly detector.
+    #   @return [Types::AnomalyDetectorStatus]
+    #
+    # @!attribute [rw] tags
+    #   The tags applied to the created anomaly detector.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateAnomalyDetectorResponse AWS API Documentation
+    #
+    class CreateAnomalyDetectorResponse < Struct.new(
+      :anomaly_detector_id,
+      :arn,
+      :status,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -385,7 +649,8 @@ module Aws::PrometheusService
     #   @return [Types::ScrapeConfiguration]
     #
     # @!attribute [rw] source
-    #   The Amazon EKS cluster from which the scraper will collect metrics.
+    #   The Amazon EKS or Amazon Web Services cluster from which the scraper
+    #   will collect metrics.
     #   @return [Types::Source]
     #
     # @!attribute [rw] destination
@@ -555,6 +820,33 @@ module Aws::PrometheusService
     #
     class DeleteAlertManagerDefinitionRequest < Struct.new(
       :workspace_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workspace_id
+    #   The identifier of the workspace containing the anomaly detector to
+    #   delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] anomaly_detector_id
+    #   The identifier of the anomaly detector to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteAnomalyDetectorRequest AWS API Documentation
+    #
+    class DeleteAnomalyDetectorRequest < Struct.new(
+      :workspace_id,
+      :anomaly_detector_id,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -774,6 +1066,35 @@ module Aws::PrometheusService
     #
     class DescribeAlertManagerDefinitionResponse < Struct.new(
       :alert_manager_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workspace_id
+    #   The identifier of the workspace containing the anomaly detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] anomaly_detector_id
+    #   The identifier of the anomaly detector to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeAnomalyDetectorRequest AWS API Documentation
+    #
+    class DescribeAnomalyDetectorRequest < Struct.new(
+      :workspace_id,
+      :anomaly_detector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] anomaly_detector
+    #   The detailed information about the anomaly detector.
+    #   @return [Types::AnomalyDetectorDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeAnomalyDetectorResponse AWS API Documentation
+    #
+    class DescribeAnomalyDetectorResponse < Struct.new(
+      :anomaly_detector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1110,6 +1431,38 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # Configuration for threshold settings that determine when values near
+    # expected values should be ignored during anomaly detection.
+    #
+    # @note IgnoreNearExpected is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note IgnoreNearExpected is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of IgnoreNearExpected corresponding to the set member.
+    #
+    # @!attribute [rw] amount
+    #   The absolute amount by which values can differ from expected values
+    #   before being considered anomalous.
+    #   @return [Float]
+    #
+    # @!attribute [rw] ratio
+    #   The ratio by which values can differ from expected values before
+    #   being considered anomalous.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/IgnoreNearExpected AWS API Documentation
+    #
+    class IgnoreNearExpected < Struct.new(
+      :amount,
+      :ratio,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Amount < IgnoreNearExpected; end
+      class Ratio < IgnoreNearExpected; end
+      class Unknown < IgnoreNearExpected; end
+    end
+
     # An unexpected error occurred during the processing of the request.
     #
     # @!attribute [rw] message
@@ -1178,6 +1531,52 @@ module Aws::PrometheusService
     #
     class LimitsPerLabelSetEntry < Struct.new(
       :max_series)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workspace_id
+    #   The identifier of the workspace containing the anomaly detectors to
+    #   list.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   Filters the results to anomaly detectors with the specified alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Valid
+    #   range is 1 to 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to continue retrieving results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListAnomalyDetectorsRequest AWS API Documentation
+    #
+    class ListAnomalyDetectorsRequest < Struct.new(
+      :workspace_id,
+      :alias,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] anomaly_detectors
+    #   The list of anomaly detectors in the workspace.
+    #   @return [Array<Types::AnomalyDetectorSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListAnomalyDetectorsResponse AWS API Documentation
+    #
+    class ListAnomalyDetectorsResponse < Struct.new(
+      :anomaly_detectors,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1545,6 +1944,82 @@ module Aws::PrometheusService
     end
 
     # @!attribute [rw] workspace_id
+    #   The identifier of the workspace containing the anomaly detector to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] anomaly_detector_id
+    #   The identifier of the anomaly detector to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_interval_in_seconds
+    #   The frequency, in seconds, at which the anomaly detector evaluates
+    #   metrics.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] missing_data_action
+    #   Specifies the action to take when data is missing during evaluation.
+    #   @return [Types::AnomalyDetectorMissingDataAction]
+    #
+    # @!attribute [rw] configuration
+    #   The algorithm configuration for the anomaly detector.
+    #   @return [Types::AnomalyDetectorConfiguration]
+    #
+    # @!attribute [rw] labels
+    #   The Amazon Managed Service for Prometheus metric labels to associate
+    #   with the anomaly detector.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/PutAnomalyDetectorRequest AWS API Documentation
+    #
+    class PutAnomalyDetectorRequest < Struct.new(
+      :workspace_id,
+      :anomaly_detector_id,
+      :evaluation_interval_in_seconds,
+      :missing_data_action,
+      :configuration,
+      :labels,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] anomaly_detector_id
+    #   The unique identifier of the updated anomaly detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the updated anomaly detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status information of the updated anomaly detector.
+    #   @return [Types::AnomalyDetectorStatus]
+    #
+    # @!attribute [rw] tags
+    #   The tags applied to the updated anomaly detector.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/PutAnomalyDetectorResponse AWS API Documentation
+    #
+    class PutAnomalyDetectorResponse < Struct.new(
+      :anomaly_detector_id,
+      :arn,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workspace_id
     #   The ID of the workspace to attach the resource-based policy to.
     #   @return [String]
     #
@@ -1726,6 +2201,60 @@ module Aws::PrometheusService
     class QueryLoggingConfigurationStatus < Struct.new(
       :status_code,
       :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for the Random Cut Forest algorithm used for anomaly
+    # detection in time-series data.
+    #
+    # @!attribute [rw] query
+    #   The Prometheus query used to retrieve the time-series data for
+    #   anomaly detection.
+    #
+    #   Random Cut Forest queries must be wrapped by a supported PromQL
+    #   aggregation operator. For more information, see [Aggregation
+    #   operators][1] on the *Prometheus docs* website.
+    #
+    #    **Supported PromQL aggregation operators**: `avg`, `count`,
+    #   `group`,
+    #   `max`, `min`, `quantile`, `stddev`, `stdvar`, and `sum`.
+    #
+    #
+    #
+    #   [1]: https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators
+    #   @return [String]
+    #
+    # @!attribute [rw] shingle_size
+    #   The number of consecutive data points used to create a shingle for
+    #   the Random Cut Forest algorithm. The default number is 8 consecutive
+    #   data points.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sample_size
+    #   The number of data points sampled from the input stream for the
+    #   Random Cut Forest algorithm. The default number is 256 consecutive
+    #   data points.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ignore_near_expected_from_above
+    #   Configuration for ignoring values that are near expected values from
+    #   above during anomaly detection.
+    #   @return [Types::IgnoreNearExpected]
+    #
+    # @!attribute [rw] ignore_near_expected_from_below
+    #   Configuration for ignoring values that are near expected values from
+    #   below during anomaly detection.
+    #   @return [Types::IgnoreNearExpected]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/RandomCutForestConfiguration AWS API Documentation
+    #
+    class RandomCutForestConfiguration < Struct.new(
+      :query,
+      :shingle_size,
+      :sample_size,
+      :ignore_near_expected_from_above,
+      :ignore_near_expected_from_below)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2214,16 +2743,25 @@ module Aws::PrometheusService
     #   The Amazon EKS cluster from which a scraper collects metrics.
     #   @return [Types::EksConfiguration]
     #
+    # @!attribute [rw] vpc_configuration
+    #   The Amazon VPC configuration for the Prometheus collector when
+    #   connecting to Amazon MSK clusters. This configuration enables
+    #   secure, private network connectivity between the collector and your
+    #   Amazon MSK cluster within your Amazon VPC.
+    #   @return [Types::VpcConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/Source AWS API Documentation
     #
     class Source < Struct.new(
       :eks_configuration,
+      :vpc_configuration,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class EksConfiguration < Source; end
+      class VpcConfiguration < Source; end
       class Unknown < Source; end
     end
 
@@ -2625,6 +3163,32 @@ module Aws::PrometheusService
     class ValidationExceptionField < Struct.new(
       :name,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon VPC configuration that specifies the network settings for a
+    # Prometheus collector to securely connect to Amazon MSK clusters. This
+    # configuration includes the security groups and subnets that control
+    # network access and placement for the collector.
+    #
+    # @!attribute [rw] security_group_ids
+    #   The security group IDs that control network access for the
+    #   Prometheus collector. These security groups must allow the collector
+    #   to communicate with your Amazon MSK cluster on the required ports.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The subnet IDs where the Prometheus collector will be deployed. The
+    #   subnets must be in the same Amazon VPC as your Amazon MSK cluster
+    #   and have network connectivity to the cluster.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/VpcConfiguration AWS API Documentation
+    #
+    class VpcConfiguration < Struct.new(
+      :security_group_ids,
+      :subnet_ids)
       SENSITIVE = []
       include Aws::Structure
     end

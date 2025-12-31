@@ -1845,8 +1845,7 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # You've reached the limit on the number of tags you can associate with
-    # a resource.
+    # You've reached a Service Quota limit on this resource.
     #
     # @!attribute [rw] message
     #   The error message the exception carries.

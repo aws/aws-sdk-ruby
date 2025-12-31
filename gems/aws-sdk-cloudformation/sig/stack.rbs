@@ -90,6 +90,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#detailed_status-instance_method
       def detailed_status: () -> ("CONFIGURATION_COMPLETE" | "VALIDATION_FAILED")
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#last_operations-instance_method
+      def last_operations: () -> ::Array[Types::OperationEntry]
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#load-instance_method

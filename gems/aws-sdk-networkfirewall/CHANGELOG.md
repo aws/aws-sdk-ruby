@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2025-11-25)
+------------------
+
+* Feature - Network Firewall release of the Proxy feature.
+
+1.81.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.80.0 (2025-11-19)
+------------------
+
+* Feature - Partner Managed Rulegroup feature support
+
+1.79.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.78.0 (2025-10-17)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.77.0 (2025-09-25)
 ------------------
 

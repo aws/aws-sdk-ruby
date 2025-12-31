@@ -47,6 +47,8 @@ module Aws::CostOptimizationHub
     Ec2ReservedInstancesConfiguration = Shapes::StructureShape.new(name: 'Ec2ReservedInstancesConfiguration')
     EcsService = Shapes::StructureShape.new(name: 'EcsService')
     EcsServiceConfiguration = Shapes::StructureShape.new(name: 'EcsServiceConfiguration')
+    EfficiencyMetricsByGroup = Shapes::StructureShape.new(name: 'EfficiencyMetricsByGroup')
+    EfficiencyMetricsByGroupList = Shapes::ListShape.new(name: 'EfficiencyMetricsByGroupList')
     ElastiCacheReservedInstances = Shapes::StructureShape.new(name: 'ElastiCacheReservedInstances')
     ElastiCacheReservedInstancesConfiguration = Shapes::StructureShape.new(name: 'ElastiCacheReservedInstancesConfiguration')
     EnrollmentStatus = Shapes::StringShape.new(name: 'EnrollmentStatus')
@@ -56,6 +58,7 @@ module Aws::CostOptimizationHub
     GetPreferencesResponse = Shapes::StructureShape.new(name: 'GetPreferencesResponse')
     GetRecommendationRequest = Shapes::StructureShape.new(name: 'GetRecommendationRequest')
     GetRecommendationResponse = Shapes::StructureShape.new(name: 'GetRecommendationResponse')
+    GranularityType = Shapes::StringShape.new(name: 'GranularityType')
     ImplementationEffort = Shapes::StringShape.new(name: 'ImplementationEffort')
     ImplementationEffortList = Shapes::ListShape.new(name: 'ImplementationEffortList')
     InstanceConfiguration = Shapes::StructureShape.new(name: 'InstanceConfiguration')
@@ -63,6 +66,9 @@ module Aws::CostOptimizationHub
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     LambdaFunction = Shapes::StructureShape.new(name: 'LambdaFunction')
     LambdaFunctionConfiguration = Shapes::StructureShape.new(name: 'LambdaFunctionConfiguration')
+    ListEfficiencyMetricsRequest = Shapes::StructureShape.new(name: 'ListEfficiencyMetricsRequest')
+    ListEfficiencyMetricsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListEfficiencyMetricsRequestMaxResultsInteger')
+    ListEfficiencyMetricsResponse = Shapes::StructureShape.new(name: 'ListEfficiencyMetricsResponse')
     ListEnrollmentStatusesRequest = Shapes::StructureShape.new(name: 'ListEnrollmentStatusesRequest')
     ListEnrollmentStatusesResponse = Shapes::StructureShape.new(name: 'ListEnrollmentStatusesResponse')
     ListRecommendationSummariesRequest = Shapes::StructureShape.new(name: 'ListRecommendationSummariesRequest')
@@ -71,12 +77,17 @@ module Aws::CostOptimizationHub
     ListRecommendationsRequest = Shapes::StructureShape.new(name: 'ListRecommendationsRequest')
     ListRecommendationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRecommendationsRequestMaxResultsInteger')
     ListRecommendationsResponse = Shapes::StructureShape.new(name: 'ListRecommendationsResponse')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MemberAccountDiscountVisibility = Shapes::StringShape.new(name: 'MemberAccountDiscountVisibility')
     MemoryDbReservedInstances = Shapes::StructureShape.new(name: 'MemoryDbReservedInstances')
     MemoryDbReservedInstancesConfiguration = Shapes::StructureShape.new(name: 'MemoryDbReservedInstancesConfiguration')
+    MetricsByTime = Shapes::StructureShape.new(name: 'MetricsByTime')
+    MetricsByTimeList = Shapes::ListShape.new(name: 'MetricsByTimeList')
     MixedInstanceConfiguration = Shapes::StructureShape.new(name: 'MixedInstanceConfiguration')
     MixedInstanceConfigurationList = Shapes::ListShape.new(name: 'MixedInstanceConfigurationList')
+    NatGateway = Shapes::StructureShape.new(name: 'NatGateway')
+    NatGatewayConfiguration = Shapes::StructureShape.new(name: 'NatGatewayConfiguration')
     OpenSearchReservedInstances = Shapes::StructureShape.new(name: 'OpenSearchReservedInstances')
     OpenSearchReservedInstancesConfiguration = Shapes::StructureShape.new(name: 'OpenSearchReservedInstancesConfiguration')
     Order = Shapes::StringShape.new(name: 'Order')
@@ -123,6 +134,7 @@ module Aws::CostOptimizationHub
     TagList = Shapes::ListShape.new(name: 'TagList')
     Term = Shapes::StringShape.new(name: 'Term')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TimePeriod = Shapes::StructureShape.new(name: 'TimePeriod')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UpdateEnrollmentStatusRequest = Shapes::StructureShape.new(name: 'UpdateEnrollmentStatusRequest')
     UpdateEnrollmentStatusResponse = Shapes::StructureShape.new(name: 'UpdateEnrollmentStatusResponse')
@@ -262,6 +274,13 @@ module Aws::CostOptimizationHub
     EcsServiceConfiguration.add_member(:compute, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "compute"))
     EcsServiceConfiguration.struct_class = Types::EcsServiceConfiguration
 
+    EfficiencyMetricsByGroup.add_member(:metrics_by_time, Shapes::ShapeRef.new(shape: MetricsByTimeList, location_name: "metricsByTime"))
+    EfficiencyMetricsByGroup.add_member(:group, Shapes::ShapeRef.new(shape: String, location_name: "group"))
+    EfficiencyMetricsByGroup.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    EfficiencyMetricsByGroup.struct_class = Types::EfficiencyMetricsByGroup
+
+    EfficiencyMetricsByGroupList.member = Shapes::ShapeRef.new(shape: EfficiencyMetricsByGroup)
+
     ElastiCacheReservedInstances.add_member(:configuration, Shapes::ShapeRef.new(shape: ElastiCacheReservedInstancesConfiguration, location_name: "configuration"))
     ElastiCacheReservedInstances.add_member(:cost_calculation, Shapes::ShapeRef.new(shape: ReservedInstancesCostCalculation, location_name: "costCalculation"))
     ElastiCacheReservedInstances.struct_class = Types::ElastiCacheReservedInstances
@@ -349,6 +368,18 @@ module Aws::CostOptimizationHub
     LambdaFunctionConfiguration.add_member(:compute, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "compute"))
     LambdaFunctionConfiguration.struct_class = Types::LambdaFunctionConfiguration
 
+    ListEfficiencyMetricsRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: String, location_name: "groupBy"))
+    ListEfficiencyMetricsRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: GranularityType, required: true, location_name: "granularity"))
+    ListEfficiencyMetricsRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: TimePeriod, required: true, location_name: "timePeriod"))
+    ListEfficiencyMetricsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEfficiencyMetricsRequestMaxResultsInteger, location_name: "maxResults"))
+    ListEfficiencyMetricsRequest.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
+    ListEfficiencyMetricsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListEfficiencyMetricsRequest.struct_class = Types::ListEfficiencyMetricsRequest
+
+    ListEfficiencyMetricsResponse.add_member(:efficiency_metrics_by_group, Shapes::ShapeRef.new(shape: EfficiencyMetricsByGroupList, location_name: "efficiencyMetricsByGroup"))
+    ListEfficiencyMetricsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListEfficiencyMetricsResponse.struct_class = Types::ListEfficiencyMetricsResponse
+
     ListEnrollmentStatusesRequest.add_member(:include_organization_info, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "includeOrganizationInfo"))
     ListEnrollmentStatusesRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
     ListEnrollmentStatusesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -405,10 +436,27 @@ module Aws::CostOptimizationHub
     MemoryDbReservedInstancesConfiguration.add_member(:current_generation, Shapes::ShapeRef.new(shape: String, location_name: "currentGeneration"))
     MemoryDbReservedInstancesConfiguration.struct_class = Types::MemoryDbReservedInstancesConfiguration
 
+    MetricsByTime.add_member(:score, Shapes::ShapeRef.new(shape: Double, location_name: "score"))
+    MetricsByTime.add_member(:savings, Shapes::ShapeRef.new(shape: Double, location_name: "savings"))
+    MetricsByTime.add_member(:spend, Shapes::ShapeRef.new(shape: Double, location_name: "spend"))
+    MetricsByTime.add_member(:timestamp, Shapes::ShapeRef.new(shape: String, location_name: "timestamp"))
+    MetricsByTime.struct_class = Types::MetricsByTime
+
+    MetricsByTimeList.member = Shapes::ShapeRef.new(shape: MetricsByTime)
+
     MixedInstanceConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
     MixedInstanceConfiguration.struct_class = Types::MixedInstanceConfiguration
 
     MixedInstanceConfigurationList.member = Shapes::ShapeRef.new(shape: MixedInstanceConfiguration)
+
+    NatGateway.add_member(:configuration, Shapes::ShapeRef.new(shape: NatGatewayConfiguration, location_name: "configuration"))
+    NatGateway.add_member(:cost_calculation, Shapes::ShapeRef.new(shape: ResourceCostCalculation, location_name: "costCalculation"))
+    NatGateway.struct_class = Types::NatGateway
+
+    NatGatewayConfiguration.add_member(:active_connection_count, Shapes::ShapeRef.new(shape: Long, location_name: "activeConnectionCount"))
+    NatGatewayConfiguration.add_member(:packets_in_from_source, Shapes::ShapeRef.new(shape: Long, location_name: "packetsInFromSource"))
+    NatGatewayConfiguration.add_member(:packets_in_from_destination, Shapes::ShapeRef.new(shape: Long, location_name: "packetsInFromDestination"))
+    NatGatewayConfiguration.struct_class = Types::NatGatewayConfiguration
 
     OpenSearchReservedInstances.add_member(:configuration, Shapes::ShapeRef.new(shape: OpenSearchReservedInstancesConfiguration, location_name: "configuration"))
     OpenSearchReservedInstances.add_member(:cost_calculation, Shapes::ShapeRef.new(shape: ReservedInstancesCostCalculation, location_name: "costCalculation"))
@@ -564,6 +612,7 @@ module Aws::CostOptimizationHub
     ResourceDetails.add_member(:aurora_db_cluster_storage, Shapes::ShapeRef.new(shape: AuroraDbClusterStorage, location_name: "auroraDbClusterStorage"))
     ResourceDetails.add_member(:dynamo_db_reserved_capacity, Shapes::ShapeRef.new(shape: DynamoDbReservedCapacity, location_name: "dynamoDbReservedCapacity"))
     ResourceDetails.add_member(:memory_db_reserved_instances, Shapes::ShapeRef.new(shape: MemoryDbReservedInstances, location_name: "memoryDbReservedInstances"))
+    ResourceDetails.add_member(:nat_gateway, Shapes::ShapeRef.new(shape: NatGateway, location_name: "natGateway"))
     ResourceDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ResourceDetails.add_member_subclass(:lambda_function, Types::ResourceDetails::LambdaFunction)
     ResourceDetails.add_member_subclass(:ecs_service, Types::ResourceDetails::EcsService)
@@ -583,6 +632,7 @@ module Aws::CostOptimizationHub
     ResourceDetails.add_member_subclass(:aurora_db_cluster_storage, Types::ResourceDetails::AuroraDbClusterStorage)
     ResourceDetails.add_member_subclass(:dynamo_db_reserved_capacity, Types::ResourceDetails::DynamoDbReservedCapacity)
     ResourceDetails.add_member_subclass(:memory_db_reserved_instances, Types::ResourceDetails::MemoryDbReservedInstances)
+    ResourceDetails.add_member_subclass(:nat_gateway, Types::ResourceDetails::NatGateway)
     ResourceDetails.add_member_subclass(:unknown, Types::ResourceDetails::Unknown)
     ResourceDetails.struct_class = Types::ResourceDetails
 
@@ -636,6 +686,10 @@ module Aws::CostOptimizationHub
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TimePeriod.add_member(:start, Shapes::ShapeRef.new(shape: String, required: true, location_name: "start"))
+    TimePeriod.add_member(:end, Shapes::ShapeRef.new(shape: String, required: true, location_name: "end"))
+    TimePeriod.struct_class = Types::TimePeriod
 
     UpdateEnrollmentStatusRequest.add_member(:status, Shapes::ShapeRef.new(shape: EnrollmentStatus, required: true, location_name: "status"))
     UpdateEnrollmentStatusRequest.add_member(:include_member_accounts, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeMemberAccounts"))
@@ -718,6 +772,24 @@ module Aws::CostOptimizationHub
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:list_efficiency_metrics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEfficiencyMetrics"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListEfficiencyMetricsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEfficiencyMetricsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_enrollment_statuses, Seahorse::Model::Operation.new.tap do |o|

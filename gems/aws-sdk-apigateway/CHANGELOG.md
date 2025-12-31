@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2025-11-21)
+------------------
+
+* Feature - API Gateway supports VPC link V2 for REST APIs.
+
+1.127.0 (2025-11-19)
+------------------
+
+* Feature - API Gateway now supports response streaming and new security policies for REST APIs and custom domain names.
+
+1.126.0 (2025-10-30)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.125.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.124.0 (2025-08-26)
 ------------------
 

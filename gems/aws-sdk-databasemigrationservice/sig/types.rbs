@@ -63,6 +63,28 @@ module Aws::DatabaseMigrationService
       SENSITIVE: []
     end
 
+    class CancelMetadataModelConversionMessage
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor request_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CancelMetadataModelConversionResponse
+      attr_accessor request: Types::SchemaConversionRequest
+      SENSITIVE: []
+    end
+
+    class CancelMetadataModelCreationMessage
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor request_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CancelMetadataModelCreationResponse
+      attr_accessor request: Types::SchemaConversionRequest
+      SENSITIVE: []
+    end
+
     class CancelReplicationTaskAssessmentRunMessage
       attr_accessor replication_task_assessment_run_arn: ::String
       SENSITIVE: []
@@ -84,6 +106,7 @@ module Aws::DatabaseMigrationService
       attr_accessor valid_to_date: ::Time
       attr_accessor signing_algorithm: ::String
       attr_accessor key_length: ::Integer
+      attr_accessor kms_key_id: ::String
       SENSITIVE: []
     end
 
@@ -444,6 +467,7 @@ module Aws::DatabaseMigrationService
       attr_accessor postgre_sql_settings: Types::PostgreSqlDataProviderSettings
       attr_accessor my_sql_settings: Types::MySqlDataProviderSettings
       attr_accessor oracle_settings: Types::OracleDataProviderSettings
+      attr_accessor sybase_ase_settings: Types::SybaseAseDataProviderSettings
       attr_accessor microsoft_sql_server_settings: Types::MicrosoftSqlServerDataProviderSettings
       attr_accessor doc_db_settings: Types::DocDbDataProviderSettings
       attr_accessor maria_db_settings: Types::MariaDbDataProviderSettings
@@ -460,6 +484,8 @@ module Aws::DatabaseMigrationService
       class MySqlSettings < DataProviderSettings
       end
       class OracleSettings < DataProviderSettings
+      end
+      class SybaseAseSettings < DataProviderSettings
       end
       class MicrosoftSqlServerSettings < DataProviderSettings
       end
@@ -948,6 +974,21 @@ module Aws::DatabaseMigrationService
       SENSITIVE: []
     end
 
+    class DescribeMetadataModelChildrenMessage
+      attr_accessor selection_rules: ::String
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor origin: ("SOURCE" | "TARGET")
+      attr_accessor marker: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeMetadataModelChildrenResponse
+      attr_accessor marker: ::String
+      attr_accessor metadata_model_children: ::Array[Types::MetadataModelReference]
+      SENSITIVE: []
+    end
+
     class DescribeMetadataModelConversionsMessage
       attr_accessor migration_project_identifier: ::String
       attr_accessor filters: ::Array[Types::Filter]
@@ -957,6 +998,20 @@ module Aws::DatabaseMigrationService
     end
 
     class DescribeMetadataModelConversionsResponse
+      attr_accessor marker: ::String
+      attr_accessor requests: ::Array[Types::SchemaConversionRequest]
+      SENSITIVE: []
+    end
+
+    class DescribeMetadataModelCreationsMessage
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor marker: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor migration_project_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMetadataModelCreationsResponse
       attr_accessor marker: ::String
       attr_accessor requests: ::Array[Types::SchemaConversionRequest]
       SENSITIVE: []
@@ -1001,6 +1056,21 @@ module Aws::DatabaseMigrationService
     class DescribeMetadataModelImportsResponse
       attr_accessor marker: ::String
       attr_accessor requests: ::Array[Types::SchemaConversionRequest]
+      SENSITIVE: []
+    end
+
+    class DescribeMetadataModelMessage
+      attr_accessor selection_rules: ::String
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor origin: ("SOURCE" | "TARGET")
+      SENSITIVE: []
+    end
+
+    class DescribeMetadataModelResponse
+      attr_accessor metadata_model_name: ::String
+      attr_accessor metadata_model_type: ::String
+      attr_accessor target_metadata_models: ::Array[Types::MetadataModelReference]
+      attr_accessor definition: ::String
       SENSITIVE: []
     end
 
@@ -1306,6 +1376,7 @@ module Aws::DatabaseMigrationService
       attr_accessor service_access_role_arn: ::String
       attr_accessor external_table_definition: ::String
       attr_accessor external_id: ::String
+      attr_accessor is_read_only: bool
       attr_accessor dynamo_db_settings: Types::DynamoDbSettings
       attr_accessor s3_settings: Types::S3Settings
       attr_accessor dms_transfer_settings: Types::DmsTransferSettings
@@ -1325,6 +1396,7 @@ module Aws::DatabaseMigrationService
       attr_accessor redis_settings: Types::RedisSettings
       attr_accessor gcp_my_sql_settings: Types::GcpMySQLSettings
       attr_accessor timestream_settings: Types::TimestreamSettings
+      attr_accessor lakehouse_settings: Types::LakehouseSettings
       SENSITIVE: []
     end
 
@@ -1462,6 +1534,17 @@ module Aws::DatabaseMigrationService
       SENSITIVE: [:password]
     end
 
+    class GetTargetSelectionRulesMessage
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor selection_rules: ::String
+      SENSITIVE: []
+    end
+
+    class GetTargetSelectionRulesResponse
+      attr_accessor target_selection_rules: ::String
+      SENSITIVE: []
+    end
+
     class IBMDb2Settings
       attr_accessor database_name: ::String
       attr_accessor password: ::String
@@ -1507,6 +1590,7 @@ module Aws::DatabaseMigrationService
       attr_accessor certificate_pem: ::String
       attr_accessor certificate_wallet: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor kms_key_id: ::String
       SENSITIVE: [:certificate_pem]
     end
 
@@ -1642,6 +1726,11 @@ module Aws::DatabaseMigrationService
       SENSITIVE: []
     end
 
+    class LakehouseSettings
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
     class Limitation
       attr_accessor database_id: ::String
       attr_accessor engine_name: ::String
@@ -1670,6 +1759,23 @@ module Aws::DatabaseMigrationService
       attr_accessor certificate_arn: ::String
       attr_accessor s3_path: ::String
       attr_accessor s3_access_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MetadataModelProperties
+      attr_accessor statement_properties: Types::StatementProperties
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class StatementProperties < MetadataModelProperties
+      end
+      class Unknown < MetadataModelProperties
+      end
+    end
+
+    class MetadataModelReference
+      attr_accessor metadata_model_name: ::String
+      attr_accessor selection_rules: ::String
       SENSITIVE: []
     end
 
@@ -2156,6 +2262,21 @@ module Aws::DatabaseMigrationService
       SENSITIVE: []
     end
 
+    class ProcessedObject
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor endpoint_type: ::String
+      SENSITIVE: []
+    end
+
+    class Progress
+      attr_accessor progress_percent: ::Float
+      attr_accessor total_objects: ::Integer
+      attr_accessor progress_step: ::String
+      attr_accessor processed_object: Types::ProcessedObject
+      SENSITIVE: []
+    end
+
     class ProvisionData
       attr_accessor provision_state: ::String
       attr_accessor provisioned_capacity_units: ::Integer
@@ -2359,6 +2480,7 @@ module Aws::DatabaseMigrationService
       attr_accessor replication_update_time: ::Time
       attr_accessor replication_last_stop_time: ::Time
       attr_accessor replication_deprovision_time: ::Time
+      attr_accessor is_read_only: bool
       SENSITIVE: []
     end
 
@@ -2374,6 +2496,7 @@ module Aws::DatabaseMigrationService
       attr_accessor table_mappings: ::String
       attr_accessor replication_config_create_time: ::Time
       attr_accessor replication_config_update_time: ::Time
+      attr_accessor is_read_only: bool
       SENSITIVE: []
     end
 
@@ -2445,6 +2568,7 @@ module Aws::DatabaseMigrationService
       attr_accessor subnet_group_status: ::String
       attr_accessor subnets: ::Array[Types::Subnet]
       attr_accessor supported_network_types: ::Array[::String]
+      attr_accessor is_read_only: bool
       SENSITIVE: []
     end
 
@@ -2650,6 +2774,7 @@ module Aws::DatabaseMigrationService
       attr_accessor migration_project_arn: ::String
       attr_accessor error: Types::ErrorDetails
       attr_accessor export_sql_details: Types::ExportSqlDetails
+      attr_accessor progress: Types::Progress
       SENSITIVE: []
     end
 
@@ -2729,6 +2854,19 @@ module Aws::DatabaseMigrationService
     end
 
     class StartMetadataModelConversionResponse
+      attr_accessor request_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartMetadataModelCreationMessage
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor selection_rules: ::String
+      attr_accessor metadata_model_name: ::String
+      attr_accessor properties: Types::MetadataModelProperties
+      SENSITIVE: []
+    end
+
+    class StartMetadataModelCreationResponse
       attr_accessor request_identifier: ::String
       SENSITIVE: []
     end
@@ -2841,6 +2979,11 @@ module Aws::DatabaseMigrationService
       SENSITIVE: []
     end
 
+    class StatementProperties
+      attr_accessor definition: ::String
+      SENSITIVE: []
+    end
+
     class StopDataMigrationMessage
       attr_accessor data_migration_identifier: ::String
       SENSITIVE: []
@@ -2894,6 +3037,16 @@ module Aws::DatabaseMigrationService
       attr_accessor endpoint_type: ("source" | "target")
       attr_accessor replication_instance_engine_minimum_version: ::String
       attr_accessor engine_display_name: ::String
+      SENSITIVE: []
+    end
+
+    class SybaseAseDataProviderSettings
+      attr_accessor server_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor database_name: ::String
+      attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
+      attr_accessor encrypt_password: bool
+      attr_accessor certificate_arn: ::String
       SENSITIVE: []
     end
 
@@ -2954,7 +3107,7 @@ module Aws::DatabaseMigrationService
     end
 
     class TargetDataSetting
-      attr_accessor table_preparation_mode: ("do-nothing" | "truncate" | "drop-tables-on-target")
+      attr_accessor table_preparation_mode: ("drop-tables-on-target" | "truncate" | "do-nothing")
       SENSITIVE: []
     end
 

@@ -125,6 +125,52 @@ module Aws::EKS
       SENSITIVE: []
     end
 
+    class ArgoCdAwsIdcConfigRequest
+      attr_accessor idc_instance_arn: ::String
+      attr_accessor idc_region: ::String
+      SENSITIVE: []
+    end
+
+    class ArgoCdAwsIdcConfigResponse
+      attr_accessor idc_instance_arn: ::String
+      attr_accessor idc_region: ::String
+      attr_accessor idc_managed_application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ArgoCdConfigRequest
+      attr_accessor namespace: ::String
+      attr_accessor aws_idc: Types::ArgoCdAwsIdcConfigRequest
+      attr_accessor rbac_role_mappings: ::Array[Types::ArgoCdRoleMapping]
+      attr_accessor network_access: Types::ArgoCdNetworkAccessConfigRequest
+      SENSITIVE: []
+    end
+
+    class ArgoCdConfigResponse
+      attr_accessor namespace: ::String
+      attr_accessor aws_idc: Types::ArgoCdAwsIdcConfigResponse
+      attr_accessor rbac_role_mappings: ::Array[Types::ArgoCdRoleMapping]
+      attr_accessor network_access: Types::ArgoCdNetworkAccessConfigResponse
+      attr_accessor server_url: ::String
+      SENSITIVE: []
+    end
+
+    class ArgoCdNetworkAccessConfigRequest
+      attr_accessor vpce_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ArgoCdNetworkAccessConfigResponse
+      attr_accessor vpce_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ArgoCdRoleMapping
+      attr_accessor role: ("ADMIN" | "EDITOR" | "VIEWER")
+      attr_accessor identities: ::Array[Types::SsoIdentity]
+      SENSITIVE: []
+    end
+
     class AssociateAccessPolicyRequest
       attr_accessor cluster_name: ::String
       attr_accessor principal_arn: ::String
@@ -189,6 +235,55 @@ module Aws::EKS
       SENSITIVE: []
     end
 
+    class Capability
+      attr_accessor capability_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor type: ("ACK" | "KRO" | "ARGOCD")
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "DELETING" | "DELETE_FAILED" | "ACTIVE" | "DEGRADED")
+      attr_accessor version: ::String
+      attr_accessor configuration: Types::CapabilityConfigurationResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor health: Types::CapabilityHealth
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor delete_propagation_policy: ("RETAIN")
+      SENSITIVE: []
+    end
+
+    class CapabilityConfigurationRequest
+      attr_accessor argo_cd: Types::ArgoCdConfigRequest
+      SENSITIVE: []
+    end
+
+    class CapabilityConfigurationResponse
+      attr_accessor argo_cd: Types::ArgoCdConfigResponse
+      SENSITIVE: []
+    end
+
+    class CapabilityHealth
+      attr_accessor issues: ::Array[Types::CapabilityIssue]
+      SENSITIVE: []
+    end
+
+    class CapabilityIssue
+      attr_accessor code: ("AccessDenied" | "ClusterUnreachable")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CapabilitySummary
+      attr_accessor capability_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor type: ("ACK" | "KRO" | "ARGOCD")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "DELETING" | "DELETE_FAILED" | "ACTIVE" | "DEGRADED")
+      attr_accessor version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      SENSITIVE: []
+    end
+
     class Certificate
       attr_accessor data: ::String
       SENSITIVE: []
@@ -238,6 +333,7 @@ module Aws::EKS
       attr_accessor compute_config: Types::ComputeConfigResponse
       attr_accessor storage_config: Types::StorageConfigResponse
       attr_accessor deletion_protection: bool
+      attr_accessor control_plane_scaling_config: Types::ControlPlaneScalingConfig
       SENSITIVE: []
     end
 
@@ -313,6 +409,11 @@ module Aws::EKS
       SENSITIVE: []
     end
 
+    class ControlPlaneScalingConfig
+      attr_accessor tier: ("standard" | "tier-xl" | "tier-2xl" | "tier-4xl")
+      SENSITIVE: []
+    end
+
     class CreateAccessConfigRequest
       attr_accessor bootstrap_cluster_creator_admin_permissions: bool
       attr_accessor authentication_mode: ("API" | "API_AND_CONFIG_MAP" | "CONFIG_MAP")
@@ -354,6 +455,23 @@ module Aws::EKS
       SENSITIVE: []
     end
 
+    class CreateCapabilityRequest
+      attr_accessor capability_name: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor type: ("ACK" | "KRO" | "ARGOCD")
+      attr_accessor role_arn: ::String
+      attr_accessor configuration: Types::CapabilityConfigurationRequest
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor delete_propagation_policy: ("RETAIN")
+      SENSITIVE: []
+    end
+
+    class CreateCapabilityResponse
+      attr_accessor capability: Types::Capability
+      SENSITIVE: []
+    end
+
     class CreateClusterRequest
       attr_accessor name: ::String
       attr_accessor version: ::String
@@ -373,6 +491,7 @@ module Aws::EKS
       attr_accessor compute_config: Types::ComputeConfigRequest
       attr_accessor storage_config: Types::StorageConfigRequest
       attr_accessor deletion_protection: bool
+      attr_accessor control_plane_scaling_config: Types::ControlPlaneScalingConfig
       SENSITIVE: []
     end
 
@@ -476,6 +595,17 @@ module Aws::EKS
 
     class DeleteAddonResponse
       attr_accessor addon: Types::Addon
+      SENSITIVE: []
+    end
+
+    class DeleteCapabilityRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor capability_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCapabilityResponse
+      attr_accessor capability: Types::Capability
       SENSITIVE: []
     end
 
@@ -604,6 +734,17 @@ module Aws::EKS
       SENSITIVE: []
     end
 
+    class DescribeCapabilityRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor capability_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCapabilityResponse
+      attr_accessor capability: Types::Capability
+      SENSITIVE: []
+    end
+
     class DescribeClusterRequest
       attr_accessor name: ::String
       SENSITIVE: []
@@ -715,6 +856,7 @@ module Aws::EKS
       attr_accessor update_id: ::String
       attr_accessor nodegroup_name: ::String
       attr_accessor addon_name: ::String
+      attr_accessor capability_name: ::String
       SENSITIVE: []
     end
 
@@ -1003,6 +1145,19 @@ module Aws::EKS
       SENSITIVE: []
     end
 
+    class ListCapabilitiesRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCapabilitiesResponse
+      attr_accessor capabilities: ::Array[Types::CapabilitySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListClustersRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -1111,6 +1266,7 @@ module Aws::EKS
       attr_accessor name: ::String
       attr_accessor nodegroup_name: ::String
       attr_accessor addon_name: ::String
+      attr_accessor capability_name: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -1380,6 +1536,12 @@ module Aws::EKS
       SENSITIVE: []
     end
 
+    class SsoIdentity
+      attr_accessor id: ::String
+      attr_accessor type: ("SSO_USER" | "SSO_GROUP")
+      SENSITIVE: []
+    end
+
     class StartInsightsRefreshRequest
       attr_accessor cluster_name: ::String
       SENSITIVE: []
@@ -1443,7 +1605,7 @@ module Aws::EKS
     class Update
       attr_accessor id: ::String
       attr_accessor status: ("InProgress" | "Failed" | "Cancelled" | "Successful")
-      attr_accessor type: ("VersionUpdate" | "EndpointAccessUpdate" | "LoggingUpdate" | "ConfigUpdate" | "AssociateIdentityProviderConfig" | "DisassociateIdentityProviderConfig" | "AssociateEncryptionConfig" | "AddonUpdate" | "VpcConfigUpdate" | "AccessConfigUpdate" | "UpgradePolicyUpdate" | "ZonalShiftConfigUpdate" | "AutoModeUpdate" | "RemoteNetworkConfigUpdate" | "DeletionProtectionUpdate")
+      attr_accessor type: ("VersionUpdate" | "EndpointAccessUpdate" | "LoggingUpdate" | "ConfigUpdate" | "AssociateIdentityProviderConfig" | "DisassociateIdentityProviderConfig" | "AssociateEncryptionConfig" | "AddonUpdate" | "VpcConfigUpdate" | "AccessConfigUpdate" | "UpgradePolicyUpdate" | "ZonalShiftConfigUpdate" | "AutoModeUpdate" | "RemoteNetworkConfigUpdate" | "DeletionProtectionUpdate" | "ControlPlaneScalingConfigUpdate")
       attr_accessor params: ::Array[Types::UpdateParam]
       attr_accessor created_at: ::Time
       attr_accessor errors: ::Array[Types::ErrorDetail]
@@ -1486,6 +1648,32 @@ module Aws::EKS
       SENSITIVE: []
     end
 
+    class UpdateArgoCdConfig
+      attr_accessor rbac_role_mappings: Types::UpdateRoleMappings
+      attr_accessor network_access: Types::ArgoCdNetworkAccessConfigRequest
+      SENSITIVE: []
+    end
+
+    class UpdateCapabilityConfiguration
+      attr_accessor argo_cd: Types::UpdateArgoCdConfig
+      SENSITIVE: []
+    end
+
+    class UpdateCapabilityRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor capability_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor configuration: Types::UpdateCapabilityConfiguration
+      attr_accessor client_request_token: ::String
+      attr_accessor delete_propagation_policy: ("RETAIN")
+      SENSITIVE: []
+    end
+
+    class UpdateCapabilityResponse
+      attr_accessor update: Types::Update
+      SENSITIVE: []
+    end
+
     class UpdateClusterConfigRequest
       attr_accessor name: ::String
       attr_accessor resources_vpc_config: Types::VpcConfigRequest
@@ -1499,6 +1687,7 @@ module Aws::EKS
       attr_accessor storage_config: Types::StorageConfigRequest
       attr_accessor remote_network_config: Types::RemoteNetworkConfigRequest
       attr_accessor deletion_protection: bool
+      attr_accessor control_plane_scaling_config: Types::ControlPlaneScalingConfig
       SENSITIVE: []
     end
 
@@ -1572,7 +1761,7 @@ module Aws::EKS
     end
 
     class UpdateParam
-      attr_accessor type: ("Version" | "PlatformVersion" | "EndpointPrivateAccess" | "EndpointPublicAccess" | "ClusterLogging" | "DesiredSize" | "LabelsToAdd" | "LabelsToRemove" | "TaintsToAdd" | "TaintsToRemove" | "MaxSize" | "MinSize" | "ReleaseVersion" | "PublicAccessCidrs" | "LaunchTemplateName" | "LaunchTemplateVersion" | "IdentityProviderConfig" | "EncryptionConfig" | "AddonVersion" | "ServiceAccountRoleArn" | "ResolveConflicts" | "MaxUnavailable" | "MaxUnavailablePercentage" | "NodeRepairEnabled" | "UpdateStrategy" | "ConfigurationValues" | "SecurityGroups" | "Subnets" | "AuthenticationMode" | "PodIdentityAssociations" | "UpgradePolicy" | "ZonalShiftConfig" | "ComputeConfig" | "StorageConfig" | "KubernetesNetworkConfig" | "RemoteNetworkConfig" | "DeletionProtection" | "NodeRepairConfig")
+      attr_accessor type: ("Version" | "PlatformVersion" | "EndpointPrivateAccess" | "EndpointPublicAccess" | "ClusterLogging" | "DesiredSize" | "LabelsToAdd" | "LabelsToRemove" | "TaintsToAdd" | "TaintsToRemove" | "MaxSize" | "MinSize" | "ReleaseVersion" | "PublicAccessCidrs" | "LaunchTemplateName" | "LaunchTemplateVersion" | "IdentityProviderConfig" | "EncryptionConfig" | "AddonVersion" | "ServiceAccountRoleArn" | "ResolveConflicts" | "MaxUnavailable" | "MaxUnavailablePercentage" | "NodeRepairEnabled" | "UpdateStrategy" | "ConfigurationValues" | "SecurityGroups" | "Subnets" | "AuthenticationMode" | "PodIdentityAssociations" | "UpgradePolicy" | "ZonalShiftConfig" | "ComputeConfig" | "StorageConfig" | "KubernetesNetworkConfig" | "RemoteNetworkConfig" | "DeletionProtection" | "NodeRepairConfig" | "UpdatedTier" | "PreviousTier")
       attr_accessor value: ::String
       SENSITIVE: []
     end
@@ -1589,6 +1778,12 @@ module Aws::EKS
 
     class UpdatePodIdentityAssociationResponse
       attr_accessor association: Types::PodIdentityAssociation
+      SENSITIVE: []
+    end
+
+    class UpdateRoleMappings
+      attr_accessor add_or_update_role_mappings: ::Array[Types::ArgoCdRoleMapping]
+      attr_accessor remove_role_mappings: ::Array[Types::ArgoCdRoleMapping]
       SENSITIVE: []
     end
 

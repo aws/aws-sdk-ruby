@@ -31,6 +31,7 @@ module Aws::WAFV2
   # * {WAFConfigurationWarningException}
   # * {WAFDuplicateItemException}
   # * {WAFExpiredManagedRuleGroupVersionException}
+  # * {WAFFeatureNotIncludedInPricingPlanException}
   # * {WAFInternalErrorException}
   # * {WAFInvalidOperationException}
   # * {WAFInvalidParameterException}
@@ -110,6 +111,26 @@ module Aws::WAFV2
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class WAFFeatureNotIncludedInPricingPlanException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WAFV2::Types::WAFFeatureNotIncludedInPricingPlanException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def disallowed_features
+        @data[:disallowed_features]
       end
     end
 

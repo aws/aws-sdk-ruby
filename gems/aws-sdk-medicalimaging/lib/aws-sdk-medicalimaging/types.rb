@@ -271,6 +271,10 @@ module Aws::MedicalImaging
     #   The ARN of the authorizer's Lambda function.
     #   @return [String]
     #
+    # @!attribute [rw] lossless_storage_format
+    #   The lossless storage format for the datastore.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/CreateDatastoreRequest AWS API Documentation
     #
     class CreateDatastoreRequest < Struct.new(
@@ -278,7 +282,8 @@ module Aws::MedicalImaging
       :client_token,
       :tags,
       :kms_key_arn,
-      :lambda_authorizer_arn)
+      :lambda_authorizer_arn,
+      :lossless_storage_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -564,6 +569,10 @@ module Aws::MedicalImaging
     #   The ARN of the authorizer's Lambda function.
     #   @return [String]
     #
+    # @!attribute [rw] lossless_storage_format
+    #   The datastore's lossless storage format.
+    #   @return [String]
+    #
     # @!attribute [rw] datastore_arn
     #   The Amazon Resource Name (ARN) for the data store.
     #   @return [String]
@@ -584,6 +593,7 @@ module Aws::MedicalImaging
       :datastore_status,
       :kms_key_arn,
       :lambda_authorizer_arn,
+      :lossless_storage_format,
       :datastore_arn,
       :created_at,
       :updated_at)
@@ -967,6 +977,14 @@ module Aws::MedicalImaging
     #   The flag to determine whether the image set is primary or not.
     #   @return [Boolean]
     #
+    # @!attribute [rw] last_accessed_at
+    #   When the image set was last accessed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] storage_tier
+    #   The storage tier of the image set.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/GetImageSetResponse AWS API Documentation
     #
     class GetImageSetResponse < Struct.new(
@@ -981,7 +999,9 @@ module Aws::MedicalImaging
       :message,
       :image_set_arn,
       :overrides,
-      :is_primary)
+      :is_primary,
+      :last_accessed_at,
+      :storage_tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1080,6 +1100,14 @@ module Aws::MedicalImaging
     #   The time an image set was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] last_accessed_at
+    #   When the image set was last accessed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] storage_tier
+    #   The image set's storage tier.
+    #   @return [String]
+    #
     # @!attribute [rw] dicom_tags
     #   The DICOM tags associated with the image set.
     #   @return [Types::DICOMTags]
@@ -1095,6 +1123,8 @@ module Aws::MedicalImaging
       :version,
       :created_at,
       :updated_at,
+      :last_accessed_at,
+      :storage_tier,
       :dicom_tags,
       :is_primary)
       SENSITIVE = []

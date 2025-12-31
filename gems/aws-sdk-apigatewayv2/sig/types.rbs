@@ -8,7 +8,18 @@
 module Aws::ApiGatewayV2
   module Types
 
+    class ACMManaged
+      attr_accessor certificate_arn: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
     class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccessDeniedExceptionResponseContent
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -60,6 +71,12 @@ module Aws::ApiGatewayV2
       SENSITIVE: []
     end
 
+    class Authorization
+      attr_accessor cognito_config: Types::CognitoConfig
+      attr_accessor none: Types::None
+      SENSITIVE: []
+    end
+
     class Authorizer
       attr_accessor authorizer_credentials_arn: ::String
       attr_accessor authorizer_id: ::String
@@ -86,7 +103,24 @@ module Aws::ApiGatewayV2
       SENSITIVE: []
     end
 
+    class BadRequestExceptionResponseContent
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CognitoConfig
+      attr_accessor app_client_id: ::String
+      attr_accessor user_pool_arn: ::String
+      attr_accessor user_pool_domain: ::String
+      SENSITIVE: []
+    end
+
     class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictExceptionResponseContent
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -399,6 +433,164 @@ module Aws::ApiGatewayV2
       SENSITIVE: []
     end
 
+    class CreatePortalProductRequest
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePortalProductRequestContent
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePortalProductResponse
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor display_order: Types::DisplayOrder
+      attr_accessor last_modified: ::Time
+      attr_accessor portal_product_arn: ::String
+      attr_accessor portal_product_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePortalProductResponseContent
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor display_order: Types::DisplayOrder
+      attr_accessor last_modified: ::Time
+      attr_accessor portal_product_arn: ::String
+      attr_accessor portal_product_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePortalRequest
+      attr_accessor authorization: Types::Authorization
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationRequest
+      attr_accessor included_portal_product_arns: ::Array[::String]
+      attr_accessor logo_uri: ::String
+      attr_accessor portal_content: Types::PortalContent
+      attr_accessor rum_app_monitor_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePortalRequestContent
+      attr_accessor authorization: Types::Authorization
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationRequest
+      attr_accessor included_portal_product_arns: ::Array[::String]
+      attr_accessor logo_uri: ::String
+      attr_accessor portal_content: Types::PortalContent
+      attr_accessor rum_app_monitor_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePortalResponse
+      attr_accessor authorization: Types::Authorization
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationResponse
+      attr_accessor included_portal_product_arns: ::Array[::String]
+      attr_accessor last_modified: ::Time
+      attr_accessor last_published: ::Time
+      attr_accessor last_published_description: ::String
+      attr_accessor portal_arn: ::String
+      attr_accessor portal_content: Types::PortalContent
+      attr_accessor portal_id: ::String
+      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+      attr_accessor rum_app_monitor_name: ::String
+      attr_accessor status_exception: Types::StatusException
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePortalResponseContent
+      attr_accessor authorization: Types::Authorization
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationResponse
+      attr_accessor included_portal_product_arns: ::Array[::String]
+      attr_accessor last_modified: ::Time
+      attr_accessor last_published: ::Time
+      attr_accessor last_published_description: ::String
+      attr_accessor portal_arn: ::String
+      attr_accessor portal_content: Types::PortalContent
+      attr_accessor portal_id: ::String
+      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+      attr_accessor rum_app_monitor_name: ::String
+      attr_accessor status_exception: Types::StatusException
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateProductPageRequest
+      attr_accessor display_content: Types::DisplayContent
+      attr_accessor portal_product_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProductPageRequestContent
+      attr_accessor display_content: Types::DisplayContent
+      SENSITIVE: []
+    end
+
+    class CreateProductPageResponse
+      attr_accessor display_content: Types::DisplayContent
+      attr_accessor last_modified: ::Time
+      attr_accessor product_page_arn: ::String
+      attr_accessor product_page_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProductPageResponseContent
+      attr_accessor display_content: Types::DisplayContent
+      attr_accessor last_modified: ::Time
+      attr_accessor product_page_arn: ::String
+      attr_accessor product_page_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProductRestEndpointPageRequest
+      attr_accessor display_content: Types::EndpointDisplayContent
+      attr_accessor portal_product_id: ::String
+      attr_accessor rest_endpoint_identifier: Types::RestEndpointIdentifier
+      attr_accessor try_it_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class CreateProductRestEndpointPageRequestContent
+      attr_accessor display_content: Types::EndpointDisplayContent
+      attr_accessor rest_endpoint_identifier: Types::RestEndpointIdentifier
+      attr_accessor try_it_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class CreateProductRestEndpointPageResponse
+      attr_accessor display_content: Types::EndpointDisplayContentResponse
+      attr_accessor last_modified: ::Time
+      attr_accessor product_rest_endpoint_page_arn: ::String
+      attr_accessor product_rest_endpoint_page_id: ::String
+      attr_accessor rest_endpoint_identifier: Types::RestEndpointIdentifier
+      attr_accessor status: ("AVAILABLE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor status_exception: Types::StatusException
+      attr_accessor try_it_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class CreateProductRestEndpointPageResponseContent
+      attr_accessor display_content: Types::EndpointDisplayContentResponse
+      attr_accessor last_modified: ::Time
+      attr_accessor product_rest_endpoint_page_arn: ::String
+      attr_accessor product_rest_endpoint_page_id: ::String
+      attr_accessor rest_endpoint_identifier: Types::RestEndpointIdentifier
+      attr_accessor status: ("AVAILABLE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor status_exception: Types::StatusException
+      attr_accessor try_it_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class CreateRouteInput
       attr_accessor api_key_required: bool
       attr_accessor authorization_scopes: ::Array[::String]
@@ -568,6 +760,16 @@ module Aws::ApiGatewayV2
       SENSITIVE: []
     end
 
+    class CustomColors
+      attr_accessor accent_color: ::String
+      attr_accessor background_color: ::String
+      attr_accessor error_validation_color: ::String
+      attr_accessor header_color: ::String
+      attr_accessor navigation_color: ::String
+      attr_accessor text_color: ::String
+      SENSITIVE: []
+    end
+
     class DeleteAccessLogSettingsRequest
       attr_accessor api_id: ::String
       attr_accessor stage_name: ::String
@@ -623,6 +825,33 @@ module Aws::ApiGatewayV2
     class DeleteModelRequest
       attr_accessor api_id: ::String
       attr_accessor model_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePortalProductRequest
+      attr_accessor portal_product_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePortalProductSharingPolicyRequest
+      attr_accessor portal_product_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePortalRequest
+      attr_accessor portal_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProductPageRequest
+      attr_accessor portal_product_id: ::String
+      attr_accessor product_page_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProductRestEndpointPageRequest
+      attr_accessor portal_product_id: ::String
+      attr_accessor product_rest_endpoint_page_id: ::String
       SENSITIVE: []
     end
 
@@ -690,6 +919,31 @@ module Aws::ApiGatewayV2
       SENSITIVE: []
     end
 
+    class DisablePortalRequest
+      attr_accessor portal_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisplayContent
+      attr_accessor body: ::String
+      attr_accessor title: ::String
+      SENSITIVE: []
+    end
+
+    class DisplayContentOverrides
+      attr_accessor body: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor operation_name: ::String
+      SENSITIVE: []
+    end
+
+    class DisplayOrder
+      attr_accessor contents: ::Array[Types::Section]
+      attr_accessor overview_page_arn: ::String
+      attr_accessor product_page_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class DomainName
       attr_accessor api_mapping_selection_expression: ::String
       attr_accessor domain_name: ::String
@@ -719,6 +973,33 @@ module Aws::ApiGatewayV2
     class DomainNames
       attr_accessor items: ::Array[Types::DomainName]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class EndpointConfigurationRequest
+      attr_accessor acm_managed: Types::ACMManaged
+      attr_accessor none: Types::None
+      SENSITIVE: []
+    end
+
+    class EndpointConfigurationResponse
+      attr_accessor certificate_arn: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor portal_default_domain_name: ::String
+      attr_accessor portal_domain_hosted_zone_id: ::String
+      SENSITIVE: []
+    end
+
+    class EndpointDisplayContent
+      attr_accessor none: Types::None
+      attr_accessor overrides: Types::DisplayContentOverrides
+      SENSITIVE: []
+    end
+
+    class EndpointDisplayContentResponse
+      attr_accessor body: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor operation_name: ::String
       SENSITIVE: []
     end
 
@@ -1012,6 +1293,149 @@ module Aws::ApiGatewayV2
       SENSITIVE: []
     end
 
+    class GetPortalProductRequest
+      attr_accessor portal_product_id: ::String
+      attr_accessor resource_owner_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPortalProductResponse
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor display_order: Types::DisplayOrder
+      attr_accessor last_modified: ::Time
+      attr_accessor portal_product_arn: ::String
+      attr_accessor portal_product_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetPortalProductResponseContent
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor display_order: Types::DisplayOrder
+      attr_accessor last_modified: ::Time
+      attr_accessor portal_product_arn: ::String
+      attr_accessor portal_product_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetPortalProductSharingPolicyRequest
+      attr_accessor portal_product_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPortalProductSharingPolicyResponse
+      attr_accessor policy_document: ::String
+      attr_accessor portal_product_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPortalProductSharingPolicyResponseContent
+      attr_accessor policy_document: ::String
+      attr_accessor portal_product_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPortalRequest
+      attr_accessor portal_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPortalResponse
+      attr_accessor authorization: Types::Authorization
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationResponse
+      attr_accessor included_portal_product_arns: ::Array[::String]
+      attr_accessor last_modified: ::Time
+      attr_accessor last_published: ::Time
+      attr_accessor last_published_description: ::String
+      attr_accessor portal_arn: ::String
+      attr_accessor portal_content: Types::PortalContent
+      attr_accessor portal_id: ::String
+      attr_accessor preview: Types::Preview
+      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+      attr_accessor rum_app_monitor_name: ::String
+      attr_accessor status_exception: Types::StatusException
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetPortalResponseContent
+      attr_accessor authorization: Types::Authorization
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationResponse
+      attr_accessor included_portal_product_arns: ::Array[::String]
+      attr_accessor last_modified: ::Time
+      attr_accessor last_published: ::Time
+      attr_accessor last_published_description: ::String
+      attr_accessor portal_arn: ::String
+      attr_accessor portal_content: Types::PortalContent
+      attr_accessor portal_id: ::String
+      attr_accessor preview: Types::Preview
+      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+      attr_accessor rum_app_monitor_name: ::String
+      attr_accessor status_exception: Types::StatusException
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetProductPageRequest
+      attr_accessor portal_product_id: ::String
+      attr_accessor product_page_id: ::String
+      attr_accessor resource_owner_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProductPageResponse
+      attr_accessor display_content: Types::DisplayContent
+      attr_accessor last_modified: ::Time
+      attr_accessor product_page_arn: ::String
+      attr_accessor product_page_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProductPageResponseContent
+      attr_accessor display_content: Types::DisplayContent
+      attr_accessor last_modified: ::Time
+      attr_accessor product_page_arn: ::String
+      attr_accessor product_page_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProductRestEndpointPageRequest
+      attr_accessor include_raw_display_content: ::String
+      attr_accessor portal_product_id: ::String
+      attr_accessor product_rest_endpoint_page_id: ::String
+      attr_accessor resource_owner_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProductRestEndpointPageResponse
+      attr_accessor display_content: Types::EndpointDisplayContentResponse
+      attr_accessor last_modified: ::Time
+      attr_accessor product_rest_endpoint_page_arn: ::String
+      attr_accessor product_rest_endpoint_page_id: ::String
+      attr_accessor raw_display_content: ::String
+      attr_accessor rest_endpoint_identifier: Types::RestEndpointIdentifier
+      attr_accessor status: ("AVAILABLE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor status_exception: Types::StatusException
+      attr_accessor try_it_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class GetProductRestEndpointPageResponseContent
+      attr_accessor display_content: Types::EndpointDisplayContentResponse
+      attr_accessor last_modified: ::Time
+      attr_accessor product_rest_endpoint_page_arn: ::String
+      attr_accessor product_rest_endpoint_page_id: ::String
+      attr_accessor raw_display_content: ::String
+      attr_accessor rest_endpoint_identifier: Types::RestEndpointIdentifier
+      attr_accessor status: ("AVAILABLE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor status_exception: Types::StatusException
+      attr_accessor try_it_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class GetRouteRequest
       attr_accessor api_id: ::String
       attr_accessor route_id: ::String
@@ -1185,6 +1609,14 @@ module Aws::ApiGatewayV2
       SENSITIVE: []
     end
 
+    class IdentifierParts
+      attr_accessor method: ::String
+      attr_accessor path: ::String
+      attr_accessor rest_api_id: ::String
+      attr_accessor stage: ::String
+      SENSITIVE: []
+    end
+
     class ImportApiInput
       attr_accessor body: ::String
       SENSITIVE: []
@@ -1276,6 +1708,89 @@ module Aws::ApiGatewayV2
       SENSITIVE: []
     end
 
+    class LimitExceededExceptionResponseContent
+      attr_accessor limit_type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListPortalProductsRequest
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      attr_accessor resource_owner: ::String
+      SENSITIVE: []
+    end
+
+    class ListPortalProductsResponse
+      attr_accessor items: ::Array[Types::PortalProductSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPortalProductsResponseContent
+      attr_accessor items: ::Array[Types::PortalProductSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPortalsRequest
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPortalsResponse
+      attr_accessor items: ::Array[Types::PortalSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPortalsResponseContent
+      attr_accessor items: ::Array[Types::PortalSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProductPagesRequest
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      attr_accessor portal_product_id: ::String
+      attr_accessor resource_owner_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListProductPagesResponse
+      attr_accessor items: ::Array[Types::ProductPageSummaryNoBody]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProductPagesResponseContent
+      attr_accessor items: ::Array[Types::ProductPageSummaryNoBody]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProductRestEndpointPagesRequest
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      attr_accessor portal_product_id: ::String
+      attr_accessor resource_owner_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListProductRestEndpointPagesResponse
+      attr_accessor items: ::Array[Types::ProductRestEndpointPageSummaryNoBody]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProductRestEndpointPagesResponseContent
+      attr_accessor items: ::Array[Types::ProductRestEndpointPageSummaryNoBody]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class Model
       attr_accessor content_type: ::String
       attr_accessor description: ::String
@@ -1304,7 +1819,16 @@ module Aws::ApiGatewayV2
       SENSITIVE: []
     end
 
+    class None < Aws::EmptyStructure
+    end
+
     class NotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundExceptionResponseContent
       attr_accessor message: ::String
       attr_accessor resource_type: ::String
       SENSITIVE: []
@@ -1313,6 +1837,111 @@ module Aws::ApiGatewayV2
     class ParameterConstraints
       attr_accessor required: bool
       SENSITIVE: []
+    end
+
+    class PortalContent
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor theme: Types::PortalTheme
+      SENSITIVE: []
+    end
+
+    class PortalProductSummary
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor last_modified: ::Time
+      attr_accessor portal_product_arn: ::String
+      attr_accessor portal_product_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PortalSummary
+      attr_accessor authorization: Types::Authorization
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationResponse
+      attr_accessor included_portal_product_arns: ::Array[::String]
+      attr_accessor last_modified: ::Time
+      attr_accessor last_published: ::Time
+      attr_accessor last_published_description: ::String
+      attr_accessor portal_arn: ::String
+      attr_accessor portal_content: Types::PortalContent
+      attr_accessor portal_id: ::String
+      attr_accessor preview: Types::Preview
+      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+      attr_accessor rum_app_monitor_name: ::String
+      attr_accessor status_exception: Types::StatusException
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PortalTheme
+      attr_accessor custom_colors: Types::CustomColors
+      attr_accessor logo_last_uploaded: ::Time
+      SENSITIVE: []
+    end
+
+    class Preview
+      attr_accessor preview_status: ("PREVIEW_IN_PROGRESS" | "PREVIEW_FAILED" | "PREVIEW_READY")
+      attr_accessor preview_url: ::String
+      attr_accessor status_exception: Types::StatusException
+      SENSITIVE: []
+    end
+
+    class PreviewPortalRequest
+      attr_accessor portal_id: ::String
+      SENSITIVE: []
+    end
+
+    class PreviewPortalResponse < Aws::EmptyStructure
+    end
+
+    class ProductPageSummaryNoBody
+      attr_accessor last_modified: ::Time
+      attr_accessor page_title: ::String
+      attr_accessor product_page_arn: ::String
+      attr_accessor product_page_id: ::String
+      SENSITIVE: []
+    end
+
+    class ProductRestEndpointPageSummaryNoBody
+      attr_accessor endpoint: ::String
+      attr_accessor last_modified: ::Time
+      attr_accessor operation_name: ::String
+      attr_accessor product_rest_endpoint_page_arn: ::String
+      attr_accessor product_rest_endpoint_page_id: ::String
+      attr_accessor rest_endpoint_identifier: Types::RestEndpointIdentifier
+      attr_accessor status: ("AVAILABLE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor status_exception: Types::StatusException
+      attr_accessor try_it_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class PublishPortalRequest
+      attr_accessor description: ::String
+      attr_accessor portal_id: ::String
+      SENSITIVE: []
+    end
+
+    class PublishPortalRequestContent
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class PublishPortalResponse < Aws::EmptyStructure
+    end
+
+    class PutPortalProductSharingPolicyRequest
+      attr_accessor policy_document: ::String
+      attr_accessor portal_product_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutPortalProductSharingPolicyRequestContent
+      attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class PutPortalProductSharingPolicyResponse < Aws::EmptyStructure
     end
 
     class PutRoutingRuleRequest
@@ -1365,6 +1994,11 @@ module Aws::ApiGatewayV2
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor version: ::String
       attr_accessor warnings: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RestEndpointIdentifier
+      attr_accessor identifier_parts: Types::IdentifierParts
       SENSITIVE: []
     end
 
@@ -1471,6 +2105,12 @@ module Aws::ApiGatewayV2
       SENSITIVE: []
     end
 
+    class Section
+      attr_accessor product_rest_endpoint_page_arns: ::Array[::String]
+      attr_accessor section_name: ::String
+      SENSITIVE: []
+    end
+
     class Stage
       attr_accessor access_log_settings: Types::AccessLogSettings
       attr_accessor api_gateway_managed: bool
@@ -1492,6 +2132,12 @@ module Aws::ApiGatewayV2
     class Stages
       attr_accessor items: ::Array[Types::Stage]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class StatusException
+      attr_accessor exception: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -1830,6 +2476,166 @@ module Aws::ApiGatewayV2
       attr_accessor model_id: ::String
       attr_accessor name: ::String
       attr_accessor schema: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePortalProductRequest
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor display_order: Types::DisplayOrder
+      attr_accessor portal_product_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePortalProductRequestContent
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor display_order: Types::DisplayOrder
+      SENSITIVE: []
+    end
+
+    class UpdatePortalProductResponse
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor display_order: Types::DisplayOrder
+      attr_accessor last_modified: ::Time
+      attr_accessor portal_product_arn: ::String
+      attr_accessor portal_product_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdatePortalProductResponseContent
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor display_order: Types::DisplayOrder
+      attr_accessor last_modified: ::Time
+      attr_accessor portal_product_arn: ::String
+      attr_accessor portal_product_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdatePortalRequest
+      attr_accessor authorization: Types::Authorization
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationRequest
+      attr_accessor included_portal_product_arns: ::Array[::String]
+      attr_accessor logo_uri: ::String
+      attr_accessor portal_content: Types::PortalContent
+      attr_accessor portal_id: ::String
+      attr_accessor rum_app_monitor_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePortalRequestContent
+      attr_accessor authorization: Types::Authorization
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationRequest
+      attr_accessor included_portal_product_arns: ::Array[::String]
+      attr_accessor logo_uri: ::String
+      attr_accessor portal_content: Types::PortalContent
+      attr_accessor rum_app_monitor_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePortalResponse
+      attr_accessor authorization: Types::Authorization
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationResponse
+      attr_accessor included_portal_product_arns: ::Array[::String]
+      attr_accessor last_modified: ::Time
+      attr_accessor last_published: ::Time
+      attr_accessor last_published_description: ::String
+      attr_accessor portal_arn: ::String
+      attr_accessor portal_content: Types::PortalContent
+      attr_accessor portal_id: ::String
+      attr_accessor preview: Types::Preview
+      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+      attr_accessor rum_app_monitor_name: ::String
+      attr_accessor status_exception: Types::StatusException
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdatePortalResponseContent
+      attr_accessor authorization: Types::Authorization
+      attr_accessor endpoint_configuration: Types::EndpointConfigurationResponse
+      attr_accessor included_portal_product_arns: ::Array[::String]
+      attr_accessor last_modified: ::Time
+      attr_accessor last_published: ::Time
+      attr_accessor last_published_description: ::String
+      attr_accessor portal_arn: ::String
+      attr_accessor portal_content: Types::PortalContent
+      attr_accessor portal_id: ::String
+      attr_accessor preview: Types::Preview
+      attr_accessor publish_status: ("PUBLISHED" | "PUBLISH_IN_PROGRESS" | "PUBLISH_FAILED" | "DISABLED")
+      attr_accessor rum_app_monitor_name: ::String
+      attr_accessor status_exception: Types::StatusException
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateProductPageRequest
+      attr_accessor display_content: Types::DisplayContent
+      attr_accessor portal_product_id: ::String
+      attr_accessor product_page_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProductPageRequestContent
+      attr_accessor display_content: Types::DisplayContent
+      SENSITIVE: []
+    end
+
+    class UpdateProductPageResponse
+      attr_accessor display_content: Types::DisplayContent
+      attr_accessor last_modified: ::Time
+      attr_accessor product_page_arn: ::String
+      attr_accessor product_page_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProductPageResponseContent
+      attr_accessor display_content: Types::DisplayContent
+      attr_accessor last_modified: ::Time
+      attr_accessor product_page_arn: ::String
+      attr_accessor product_page_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProductRestEndpointPageRequest
+      attr_accessor display_content: Types::EndpointDisplayContent
+      attr_accessor portal_product_id: ::String
+      attr_accessor product_rest_endpoint_page_id: ::String
+      attr_accessor try_it_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateProductRestEndpointPageRequestContent
+      attr_accessor display_content: Types::EndpointDisplayContent
+      attr_accessor try_it_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateProductRestEndpointPageResponse
+      attr_accessor display_content: Types::EndpointDisplayContentResponse
+      attr_accessor last_modified: ::Time
+      attr_accessor product_rest_endpoint_page_arn: ::String
+      attr_accessor product_rest_endpoint_page_id: ::String
+      attr_accessor rest_endpoint_identifier: Types::RestEndpointIdentifier
+      attr_accessor status: ("AVAILABLE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor status_exception: Types::StatusException
+      attr_accessor try_it_state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateProductRestEndpointPageResponseContent
+      attr_accessor display_content: Types::EndpointDisplayContentResponse
+      attr_accessor last_modified: ::Time
+      attr_accessor product_rest_endpoint_page_arn: ::String
+      attr_accessor product_rest_endpoint_page_id: ::String
+      attr_accessor rest_endpoint_identifier: Types::RestEndpointIdentifier
+      attr_accessor status: ("AVAILABLE" | "IN_PROGRESS" | "FAILED")
+      attr_accessor status_exception: Types::StatusException
+      attr_accessor try_it_state: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 

@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2025-12-19)
+------------------
+
+* Feature - Add support for WebAuthn under user settings.
+
+1.53.0 (2025-12-12)
+------------------
+
+* Feature - Adds support for portal branding customization, enabling administrators to personalize end-user portals with custom assets.
+
+1.52.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2025-11-13)
+------------------
+
+* Feature - Support for managing web content filtering for defining, tracking and regulating type of content accessed with WorkSpaces Secure Browser as part of browser settings.
+
+1.50.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2025-10-16)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.48.0 (2025-08-26)
 ------------------
 

@@ -36,6 +36,7 @@ module Aws::S3Control
     ActivityMetrics = Shapes::StructureShape.new(name: 'ActivityMetrics')
     AdvancedCostOptimizationMetrics = Shapes::StructureShape.new(name: 'AdvancedCostOptimizationMetrics')
     AdvancedDataProtectionMetrics = Shapes::StructureShape.new(name: 'AdvancedDataProtectionMetrics')
+    AdvancedPerformanceMetrics = Shapes::StructureShape.new(name: 'AdvancedPerformanceMetrics')
     Alias = Shapes::StringShape.new(name: 'Alias')
     AssociateAccessGrantsIdentityCenterRequest = Shapes::StructureShape.new(name: 'AssociateAccessGrantsIdentityCenterRequest')
     AsyncCreationTimestamp = Shapes::TimestampShape.new(name: 'AsyncCreationTimestamp')
@@ -501,6 +502,7 @@ module Aws::S3Control
     StorageLensConfigurationList = Shapes::ListShape.new(name: 'StorageLensConfigurationList', flattened: true)
     StorageLensDataExport = Shapes::StructureShape.new(name: 'StorageLensDataExport')
     StorageLensDataExportEncryption = Shapes::StructureShape.new(name: 'StorageLensDataExportEncryption')
+    StorageLensExpandedPrefixesDataExport = Shapes::StructureShape.new(name: 'StorageLensExpandedPrefixesDataExport')
     StorageLensGroup = Shapes::StructureShape.new(name: 'StorageLensGroup')
     StorageLensGroupAndOperator = Shapes::StructureShape.new(name: 'StorageLensGroupAndOperator')
     StorageLensGroupArn = Shapes::StringShape.new(name: 'StorageLensGroupArn')
@@ -514,6 +516,7 @@ module Aws::S3Control
     StorageLensGroupOrOperator = Shapes::StructureShape.new(name: 'StorageLensGroupOrOperator')
     StorageLensPrefixLevelDelimiter = Shapes::StringShape.new(name: 'StorageLensPrefixLevelDelimiter')
     StorageLensPrefixLevelMaxDepth = Shapes::IntegerShape.new(name: 'StorageLensPrefixLevelMaxDepth')
+    StorageLensTableDestination = Shapes::StructureShape.new(name: 'StorageLensTableDestination')
     StorageLensTag = Shapes::StructureShape.new(name: 'StorageLensTag')
     StorageLensTags = Shapes::ListShape.new(name: 'StorageLensTags')
     StringForNextToken = Shapes::StringShape.new(name: 'StringForNextToken')
@@ -584,6 +587,7 @@ module Aws::S3Control
     AccountLevel.add_member(:advanced_cost_optimization_metrics, Shapes::ShapeRef.new(shape: AdvancedCostOptimizationMetrics, location_name: "AdvancedCostOptimizationMetrics"))
     AccountLevel.add_member(:advanced_data_protection_metrics, Shapes::ShapeRef.new(shape: AdvancedDataProtectionMetrics, location_name: "AdvancedDataProtectionMetrics"))
     AccountLevel.add_member(:detailed_status_codes_metrics, Shapes::ShapeRef.new(shape: DetailedStatusCodesMetrics, location_name: "DetailedStatusCodesMetrics"))
+    AccountLevel.add_member(:advanced_performance_metrics, Shapes::ShapeRef.new(shape: AdvancedPerformanceMetrics, location_name: "AdvancedPerformanceMetrics"))
     AccountLevel.add_member(:storage_lens_group_level, Shapes::ShapeRef.new(shape: StorageLensGroupLevel, location_name: "StorageLensGroupLevel"))
     AccountLevel.struct_class = Types::AccountLevel
 
@@ -595,6 +599,9 @@ module Aws::S3Control
 
     AdvancedDataProtectionMetrics.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, location_name: "IsEnabled"))
     AdvancedDataProtectionMetrics.struct_class = Types::AdvancedDataProtectionMetrics
+
+    AdvancedPerformanceMetrics.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, location_name: "IsEnabled"))
+    AdvancedPerformanceMetrics.struct_class = Types::AdvancedPerformanceMetrics
 
     AssociateAccessGrantsIdentityCenterRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam" => {"name" => "AccountId"}}))
     AssociateAccessGrantsIdentityCenterRequest.add_member(:identity_center_arn, Shapes::ShapeRef.new(shape: IdentityCenterArn, required: true, location_name: "IdentityCenterArn"))
@@ -639,6 +646,7 @@ module Aws::S3Control
     BucketLevel.add_member(:advanced_cost_optimization_metrics, Shapes::ShapeRef.new(shape: AdvancedCostOptimizationMetrics, location_name: "AdvancedCostOptimizationMetrics"))
     BucketLevel.add_member(:advanced_data_protection_metrics, Shapes::ShapeRef.new(shape: AdvancedDataProtectionMetrics, location_name: "AdvancedDataProtectionMetrics"))
     BucketLevel.add_member(:detailed_status_codes_metrics, Shapes::ShapeRef.new(shape: DetailedStatusCodesMetrics, location_name: "DetailedStatusCodesMetrics"))
+    BucketLevel.add_member(:advanced_performance_metrics, Shapes::ShapeRef.new(shape: AdvancedPerformanceMetrics, location_name: "AdvancedPerformanceMetrics"))
     BucketLevel.struct_class = Types::BucketLevel
 
     Buckets.member = Shapes::ShapeRef.new(shape: S3BucketArnString, location_name: "Arn")
@@ -1982,20 +1990,27 @@ module Aws::S3Control
     StorageLensConfiguration.add_member(:include, Shapes::ShapeRef.new(shape: Include, location_name: "Include"))
     StorageLensConfiguration.add_member(:exclude, Shapes::ShapeRef.new(shape: Exclude, location_name: "Exclude"))
     StorageLensConfiguration.add_member(:data_export, Shapes::ShapeRef.new(shape: StorageLensDataExport, location_name: "DataExport"))
+    StorageLensConfiguration.add_member(:expanded_prefixes_data_export, Shapes::ShapeRef.new(shape: StorageLensExpandedPrefixesDataExport, location_name: "ExpandedPrefixesDataExport"))
     StorageLensConfiguration.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, required: true, location_name: "IsEnabled"))
     StorageLensConfiguration.add_member(:aws_org, Shapes::ShapeRef.new(shape: StorageLensAwsOrg, location_name: "AwsOrg"))
     StorageLensConfiguration.add_member(:storage_lens_arn, Shapes::ShapeRef.new(shape: StorageLensArn, location_name: "StorageLensArn"))
+    StorageLensConfiguration.add_member(:prefix_delimiter, Shapes::ShapeRef.new(shape: StorageLensPrefixLevelDelimiter, location_name: "PrefixDelimiter"))
     StorageLensConfiguration.struct_class = Types::StorageLensConfiguration
 
     StorageLensConfigurationList.member = Shapes::ShapeRef.new(shape: ListStorageLensConfigurationEntry, location_name: "StorageLensConfiguration")
 
     StorageLensDataExport.add_member(:s3_bucket_destination, Shapes::ShapeRef.new(shape: S3BucketDestination, location_name: "S3BucketDestination"))
     StorageLensDataExport.add_member(:cloud_watch_metrics, Shapes::ShapeRef.new(shape: CloudWatchMetrics, location_name: "CloudWatchMetrics"))
+    StorageLensDataExport.add_member(:storage_lens_table_destination, Shapes::ShapeRef.new(shape: StorageLensTableDestination, location_name: "StorageLensTableDestination"))
     StorageLensDataExport.struct_class = Types::StorageLensDataExport
 
     StorageLensDataExportEncryption.add_member(:sses3, Shapes::ShapeRef.new(shape: SSES3, location_name: "SSE-S3"))
     StorageLensDataExportEncryption.add_member(:ssekms, Shapes::ShapeRef.new(shape: SSEKMS, location_name: "SSE-KMS"))
     StorageLensDataExportEncryption.struct_class = Types::StorageLensDataExportEncryption
+
+    StorageLensExpandedPrefixesDataExport.add_member(:s3_bucket_destination, Shapes::ShapeRef.new(shape: S3BucketDestination, location_name: "S3BucketDestination"))
+    StorageLensExpandedPrefixesDataExport.add_member(:storage_lens_table_destination, Shapes::ShapeRef.new(shape: StorageLensTableDestination, location_name: "StorageLensTableDestination"))
+    StorageLensExpandedPrefixesDataExport.struct_class = Types::StorageLensExpandedPrefixesDataExport
 
     StorageLensGroup.add_member(:name, Shapes::ShapeRef.new(shape: StorageLensGroupName, required: true, location_name: "Name"))
     StorageLensGroup.add_member(:filter, Shapes::ShapeRef.new(shape: StorageLensGroupFilter, required: true, location_name: "Filter"))
@@ -2037,6 +2052,10 @@ module Aws::S3Control
     StorageLensGroupOrOperator.add_member(:match_object_age, Shapes::ShapeRef.new(shape: MatchObjectAge, location_name: "MatchObjectAge"))
     StorageLensGroupOrOperator.add_member(:match_object_size, Shapes::ShapeRef.new(shape: MatchObjectSize, location_name: "MatchObjectSize"))
     StorageLensGroupOrOperator.struct_class = Types::StorageLensGroupOrOperator
+
+    StorageLensTableDestination.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, required: true, location_name: "IsEnabled"))
+    StorageLensTableDestination.add_member(:encryption, Shapes::ShapeRef.new(shape: StorageLensDataExportEncryption, location_name: "Encryption"))
+    StorageLensTableDestination.struct_class = Types::StorageLensTableDestination
 
     StorageLensTag.add_member(:key, Shapes::ShapeRef.new(shape: TagKeyString, required: true, location_name: "Key"))
     StorageLensTag.add_member(:value, Shapes::ShapeRef.new(shape: TagValueString, required: true, location_name: "Value"))

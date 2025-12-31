@@ -15,6 +15,7 @@ module Aws::KMS
     include Seahorse::Model
 
     AWSAccountIdType = Shapes::StringShape.new(name: 'AWSAccountIdType')
+    AccountIdType = Shapes::StringShape.new(name: 'AccountIdType')
     AlgorithmSpec = Shapes::StringShape.new(name: 'AlgorithmSpec')
     AliasList = Shapes::ListShape.new(name: 'AliasList')
     AliasListEntry = Shapes::StructureShape.new(name: 'AliasListEntry')
@@ -308,6 +309,7 @@ module Aws::KMS
     CreateCustomKeyStoreRequest.add_member(:xks_proxy_uri_endpoint, Shapes::ShapeRef.new(shape: XksProxyUriEndpointType, location_name: "XksProxyUriEndpoint"))
     CreateCustomKeyStoreRequest.add_member(:xks_proxy_uri_path, Shapes::ShapeRef.new(shape: XksProxyUriPathType, location_name: "XksProxyUriPath"))
     CreateCustomKeyStoreRequest.add_member(:xks_proxy_vpc_endpoint_service_name, Shapes::ShapeRef.new(shape: XksProxyVpcEndpointServiceNameType, location_name: "XksProxyVpcEndpointServiceName"))
+    CreateCustomKeyStoreRequest.add_member(:xks_proxy_vpc_endpoint_service_owner, Shapes::ShapeRef.new(shape: AccountIdType, location_name: "XksProxyVpcEndpointServiceOwner"))
     CreateCustomKeyStoreRequest.add_member(:xks_proxy_authentication_credential, Shapes::ShapeRef.new(shape: XksProxyAuthenticationCredentialType, location_name: "XksProxyAuthenticationCredential"))
     CreateCustomKeyStoreRequest.add_member(:xks_proxy_connectivity, Shapes::ShapeRef.new(shape: XksProxyConnectivityType, location_name: "XksProxyConnectivity"))
     CreateCustomKeyStoreRequest.struct_class = Types::CreateCustomKeyStoreRequest
@@ -948,6 +950,7 @@ module Aws::KMS
     UpdateCustomKeyStoreRequest.add_member(:xks_proxy_uri_endpoint, Shapes::ShapeRef.new(shape: XksProxyUriEndpointType, location_name: "XksProxyUriEndpoint"))
     UpdateCustomKeyStoreRequest.add_member(:xks_proxy_uri_path, Shapes::ShapeRef.new(shape: XksProxyUriPathType, location_name: "XksProxyUriPath"))
     UpdateCustomKeyStoreRequest.add_member(:xks_proxy_vpc_endpoint_service_name, Shapes::ShapeRef.new(shape: XksProxyVpcEndpointServiceNameType, location_name: "XksProxyVpcEndpointServiceName"))
+    UpdateCustomKeyStoreRequest.add_member(:xks_proxy_vpc_endpoint_service_owner, Shapes::ShapeRef.new(shape: AccountIdType, location_name: "XksProxyVpcEndpointServiceOwner"))
     UpdateCustomKeyStoreRequest.add_member(:xks_proxy_authentication_credential, Shapes::ShapeRef.new(shape: XksProxyAuthenticationCredentialType, location_name: "XksProxyAuthenticationCredential"))
     UpdateCustomKeyStoreRequest.add_member(:xks_proxy_connectivity, Shapes::ShapeRef.new(shape: XksProxyConnectivityType, location_name: "XksProxyConnectivity"))
     UpdateCustomKeyStoreRequest.struct_class = Types::UpdateCustomKeyStoreRequest
@@ -1010,6 +1013,7 @@ module Aws::KMS
     XksProxyConfigurationType.add_member(:uri_endpoint, Shapes::ShapeRef.new(shape: XksProxyUriEndpointType, location_name: "UriEndpoint"))
     XksProxyConfigurationType.add_member(:uri_path, Shapes::ShapeRef.new(shape: XksProxyUriPathType, location_name: "UriPath"))
     XksProxyConfigurationType.add_member(:vpc_endpoint_service_name, Shapes::ShapeRef.new(shape: XksProxyVpcEndpointServiceNameType, location_name: "VpcEndpointServiceName"))
+    XksProxyConfigurationType.add_member(:vpc_endpoint_service_owner, Shapes::ShapeRef.new(shape: AccountIdType, location_name: "VpcEndpointServiceOwner"))
     XksProxyConfigurationType.struct_class = Types::XksProxyConfigurationType
 
     XksProxyIncorrectAuthenticationCredentialException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))

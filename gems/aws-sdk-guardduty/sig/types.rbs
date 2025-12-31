@@ -115,6 +115,12 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class AdditionalInfo
+      attr_accessor version_id: ::String
+      attr_accessor device_name: ::String
+      SENSITIVE: []
+    end
+
     class AddonDetails
       attr_accessor addon_version: ::String
       attr_accessor addon_status: ::String
@@ -173,6 +179,11 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class AutoscalingAutoScalingGroup
+      attr_accessor ec2_instance_uids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class AwsApiCallAction
       attr_accessor api: ::String
       attr_accessor caller_type: ::String
@@ -223,6 +234,11 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class CloudformationStack
+      attr_accessor ec2_instance_uids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class Condition
       attr_accessor eq: ::Array[::String]
       attr_accessor neq: ::Array[::String]
@@ -236,6 +252,8 @@ module Aws::GuardDuty
       attr_accessor greater_than_or_equal: ::Integer
       attr_accessor less_than: ::Integer
       attr_accessor less_than_or_equal: ::Integer
+      attr_accessor matches: ::Array[::String]
+      attr_accessor not_matches: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -432,6 +450,7 @@ module Aws::GuardDuty
       attr_accessor destination_type: ("S3")
       attr_accessor destination_properties: Types::DestinationProperties
       attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -699,6 +718,7 @@ module Aws::GuardDuty
       attr_accessor status: ("PENDING_VERIFICATION" | "PUBLISHING" | "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY" | "STOPPED")
       attr_accessor publishing_failure_start_timestamp: ::Integer
       attr_accessor destination_properties: Types::DestinationProperties
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -798,6 +818,16 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class EbsSnapshot
+      attr_accessor device_name: ::String
+      SENSITIVE: []
+    end
+
+    class EbsSnapshotDetails
+      attr_accessor snapshot_arn: ::String
+      SENSITIVE: []
+    end
+
     class EbsVolumeDetails
       attr_accessor scanned_volume_details: ::Array[Types::VolumeDetail]
       attr_accessor skipped_volume_details: ::Array[Types::VolumeDetail]
@@ -821,6 +851,16 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class Ec2Image
+      attr_accessor ec2_instance_uids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Ec2ImageDetails
+      attr_accessor image_arn: ::String
+      SENSITIVE: []
+    end
+
     class Ec2Instance
       attr_accessor availability_zone: ::String
       attr_accessor image_description: ::String
@@ -834,6 +874,12 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class Ec2LaunchTemplate
+      attr_accessor ec2_instance_uids: ::Array[::String]
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
     class Ec2NetworkInterface
       attr_accessor ipv_6_addresses: ::Array[::String]
       attr_accessor private_ip_addresses: ::Array[Types::PrivateIpAddressDetails]
@@ -841,6 +887,17 @@ module Aws::GuardDuty
       attr_accessor security_groups: ::Array[Types::SecurityGroup]
       attr_accessor sub_net_id: ::String
       attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class Ec2Vpc
+      attr_accessor ec2_instance_uids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EcsCluster
+      attr_accessor status: ("ACTIVE" | "PROVISIONING" | "DEPROVISIONING" | "FAILED" | "INACTIVE")
+      attr_accessor ec2_instance_uids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -853,6 +910,14 @@ module Aws::GuardDuty
       attr_accessor running_tasks_count: ::Integer
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor task_details: Types::EcsTaskDetails
+      SENSITIVE: []
+    end
+
+    class EcsTask
+      attr_accessor created_at: ::Time
+      attr_accessor task_definition_arn: ::String
+      attr_accessor launch_type: ("FARGATE" | "EC2")
+      attr_accessor container_uids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1110,6 +1175,44 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class GetMalwareScanRequest
+      attr_accessor scan_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMalwareScanResponse
+      attr_accessor scan_id: ::String
+      attr_accessor detector_id: ::String
+      attr_accessor admin_detector_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_type: ("EBS_RECOVERY_POINT" | "EBS_SNAPSHOT" | "EBS_VOLUME" | "EC2_AMI" | "EC2_INSTANCE" | "EC2_RECOVERY_POINT" | "S3_RECOVERY_POINT" | "S3_BUCKET")
+      attr_accessor scanned_resources_count: ::Integer
+      attr_accessor skipped_resources_count: ::Integer
+      attr_accessor failed_resources_count: ::Integer
+      attr_accessor scanned_resources: ::Array[Types::ScannedResource]
+      attr_accessor scan_configuration: Types::ScanConfiguration
+      attr_accessor scan_category: ("FULL_SCAN" | "INCREMENTAL_SCAN")
+      attr_accessor scan_status: ("RUNNING" | "COMPLETED" | "COMPLETED_WITH_ISSUES" | "FAILED" | "SKIPPED")
+      attr_accessor scan_status_reason: ("ACCESS_DENIED" | "RESOURCE_NOT_FOUND" | "SNAPSHOT_SIZE_LIMIT_EXCEEDED" | "RESOURCE_UNAVAILABLE" | "INCONSISTENT_SOURCE" | "INCREMENTAL_NO_DIFFERENCE" | "NO_EBS_VOLUMES_FOUND" | "UNSUPPORTED_PRODUCT_CODE_TYPE" | "AMI_SNAPSHOT_LIMIT_EXCEEDED" | "UNRELATED_RESOURCES" | "BASE_RESOURCE_NOT_SCANNED" | "BASE_CREATED_AFTER_TARGET" | "UNSUPPORTED_FOR_INCREMENTAL" | "UNSUPPORTED_AMI" | "UNSUPPORTED_SNAPSHOT" | "UNSUPPORTED_COMPOSITE_RECOVERY_POINT")
+      attr_accessor scan_type: ("BACKUP_INITIATED" | "ON_DEMAND" | "GUARDDUTY_INITIATED")
+      attr_accessor scan_started_at: ::Time
+      attr_accessor scan_completed_at: ::Time
+      attr_accessor scan_result_details: Types::GetMalwareScanResultDetails
+      SENSITIVE: []
+    end
+
+    class GetMalwareScanResultDetails
+      attr_accessor scan_result_status: ("NO_THREATS_FOUND" | "THREATS_FOUND")
+      attr_accessor skipped_file_count: ::Integer
+      attr_accessor failed_file_count: ::Integer
+      attr_accessor threat_found_file_count: ::Integer
+      attr_accessor total_file_count: ::Integer
+      attr_accessor total_bytes: ::Integer
+      attr_accessor unique_threat_count: ::Integer
+      attr_accessor threats: ::Array[Types::ScanResultThreat]
+      SENSITIVE: []
+    end
+
     class GetMalwareScanSettingsRequest
       attr_accessor detector_id: ::String
       SENSITIVE: []
@@ -1260,9 +1363,19 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class IamInstanceProfileV2
+      attr_accessor ec2_instance_uids: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class ImpersonatedUser
       attr_accessor username: ::String
       attr_accessor groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IncrementalScanDetails
+      attr_accessor baseline_resource_arn: ::String
       SENSITIVE: []
     end
 
@@ -1314,6 +1427,14 @@ module Aws::GuardDuty
 
     class InviteMembersResponse
       attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class ItemDetails
+      attr_accessor resource_arn: ::String
+      attr_accessor item_path: ::String
+      attr_accessor hash: ::String
+      attr_accessor additional_info: Types::AdditionalInfo
       SENSITIVE: []
     end
 
@@ -1540,6 +1661,31 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class ListMalwareScansFilterCriteria
+      attr_accessor list_malware_scans_filter_criterion: ::Array[Types::ListMalwareScansFilterCriterion]
+      SENSITIVE: []
+    end
+
+    class ListMalwareScansFilterCriterion
+      attr_accessor list_malware_scans_criterion_key: ("RESOURCE_ARN" | "SCAN_ID" | "ACCOUNT_ID" | "GUARDDUTY_FINDING_ID" | "RESOURCE_TYPE" | "SCAN_START_TIME" | "SCAN_STATUS" | "SCAN_TYPE")
+      attr_accessor filter_condition: Types::FilterCondition
+      SENSITIVE: []
+    end
+
+    class ListMalwareScansRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filter_criteria: Types::ListMalwareScansFilterCriteria
+      attr_accessor sort_criteria: Types::SortCriteria
+      SENSITIVE: []
+    end
+
+    class ListMalwareScansResponse
+      attr_accessor scans: ::Array[Types::MalwareScan]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListMembersRequest
       attr_accessor detector_id: ::String
       attr_accessor max_results: ::Integer
@@ -1664,6 +1810,12 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class MalwareProtectionFindingsScanConfiguration
+      attr_accessor trigger_type: ("BACKUP" | "GUARDDUTY")
+      attr_accessor incremental_scan_details: Types::IncrementalScanDetails
+      SENSITIVE: []
+    end
+
     class MalwareProtectionPlanActions
       attr_accessor tagging: Types::MalwareProtectionPlanTaggingAction
       SENSITIVE: []
@@ -1685,8 +1837,25 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class MalwareScan
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_type: ("EBS_RECOVERY_POINT" | "EBS_SNAPSHOT" | "EBS_VOLUME" | "EC2_AMI" | "EC2_INSTANCE" | "EC2_RECOVERY_POINT" | "S3_RECOVERY_POINT" | "S3_BUCKET")
+      attr_accessor scan_id: ::String
+      attr_accessor scan_status: ("RUNNING" | "COMPLETED" | "COMPLETED_WITH_ISSUES" | "FAILED" | "SKIPPED")
+      attr_accessor scan_result_status: ("NO_THREATS_FOUND" | "THREATS_FOUND")
+      attr_accessor scan_type: ("BACKUP_INITIATED" | "ON_DEMAND" | "GUARDDUTY_INITIATED")
+      attr_accessor scan_started_at: ::Time
+      attr_accessor scan_completed_at: ::Time
+      SENSITIVE: []
+    end
+
     class MalwareScanDetails
       attr_accessor threats: ::Array[Types::Threat]
+      attr_accessor scan_id: ::String
+      attr_accessor scan_type: ("BACKUP_INITIATED" | "ON_DEMAND" | "GUARDDUTY_INITIATED")
+      attr_accessor scan_category: ("FULL_SCAN" | "INCREMENTAL_SCAN")
+      attr_accessor scan_configuration: Types::MalwareProtectionFindingsScanConfiguration
+      attr_accessor unique_threat_count: ::Integer
       SENSITIVE: []
     end
 
@@ -2009,6 +2178,7 @@ module Aws::GuardDuty
       attr_accessor engine_version: ::String
       attr_accessor db_cluster_identifier: ::String
       attr_accessor db_instance_arn: ::String
+      attr_accessor dbi_resource_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -2036,6 +2206,17 @@ module Aws::GuardDuty
     class RdsLoginAttemptAction
       attr_accessor remote_ip_details: Types::RemoteIpDetails
       attr_accessor login_attributes: ::Array[Types::LoginAttribute]
+      SENSITIVE: []
+    end
+
+    class RecoveryPoint
+      attr_accessor backup_vault_name: ::String
+      SENSITIVE: []
+    end
+
+    class RecoveryPointDetails
+      attr_accessor recovery_point_arn: ::String
+      attr_accessor backup_vault_name: ::String
       SENSITIVE: []
     end
 
@@ -2075,6 +2256,9 @@ module Aws::GuardDuty
       attr_accessor rds_limitless_db_details: Types::RdsLimitlessDbDetails
       attr_accessor rds_db_user_details: Types::RdsDbUserDetails
       attr_accessor lambda_details: Types::LambdaDetails
+      attr_accessor ebs_snapshot_details: Types::EbsSnapshotDetails
+      attr_accessor ec2_image_details: Types::Ec2ImageDetails
+      attr_accessor recovery_point_details: Types::RecoveryPointDetails
       SENSITIVE: []
     end
 
@@ -2087,6 +2271,14 @@ module Aws::GuardDuty
       attr_accessor eks_cluster: Types::EksCluster
       attr_accessor kubernetes_workload: Types::KubernetesWorkload
       attr_accessor container: Types::ContainerFindingResource
+      attr_accessor ecs_cluster: Types::EcsCluster
+      attr_accessor ecs_task: Types::EcsTask
+      attr_accessor iam_instance_profile: Types::IamInstanceProfileV2
+      attr_accessor autoscaling_auto_scaling_group: Types::AutoscalingAutoScalingGroup
+      attr_accessor ec2_launch_template: Types::Ec2LaunchTemplate
+      attr_accessor ec2_vpc: Types::Ec2Vpc
+      attr_accessor ec2_image: Types::Ec2Image
+      attr_accessor cloudformation_stack: Types::CloudformationStack
       SENSITIVE: []
     end
 
@@ -2114,7 +2306,7 @@ module Aws::GuardDuty
       attr_accessor uid: ::String
       attr_accessor name: ::String
       attr_accessor account_id: ::String
-      attr_accessor resource_type: ("EC2_INSTANCE" | "EC2_NETWORK_INTERFACE" | "S3_BUCKET" | "S3_OBJECT" | "ACCESS_KEY" | "EKS_CLUSTER" | "KUBERNETES_WORKLOAD" | "CONTAINER")
+      attr_accessor resource_type: ("EC2_INSTANCE" | "EC2_NETWORK_INTERFACE" | "S3_BUCKET" | "S3_OBJECT" | "ACCESS_KEY" | "EKS_CLUSTER" | "KUBERNETES_WORKLOAD" | "CONTAINER" | "ECS_CLUSTER" | "ECS_TASK" | "AUTOSCALING_AUTO_SCALING_GROUP" | "IAM_INSTANCE_PROFILE" | "CLOUDFORMATION_STACK" | "EC2_LAUNCH_TEMPLATE" | "EC2_VPC" | "EC2_IMAGE")
       attr_accessor region: ::String
       attr_accessor service: ::String
       attr_accessor cloud_partition: ::String
@@ -2211,6 +2403,13 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class S3ObjectForSendObjectMalwareScan
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
     class Scan
       attr_accessor detector_id: ::String
       attr_accessor admin_detector_id: ::String
@@ -2238,6 +2437,19 @@ module Aws::GuardDuty
     class ScanConditionPair
       attr_accessor key: ::String
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ScanConfiguration
+      attr_accessor role: ::String
+      attr_accessor trigger_details: Types::TriggerDetails
+      attr_accessor incremental_scan_details: Types::IncrementalScanDetails
+      attr_accessor recovery_point: Types::ScanConfigurationRecoveryPoint
+      SENSITIVE: []
+    end
+
+    class ScanConfigurationRecoveryPoint
+      attr_accessor backup_vault_name: ::String
       SENSITIVE: []
     end
 
@@ -2278,6 +2490,15 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class ScanResultThreat
+      attr_accessor name: ::String
+      attr_accessor source: ("AMAZON" | "BITDEFENDER")
+      attr_accessor count: ::Integer
+      attr_accessor hash: ::String
+      attr_accessor item_details: ::Array[Types::ItemDetails]
+      SENSITIVE: []
+    end
+
     class ScanThreatName
       attr_accessor name: ::String
       attr_accessor severity: ::String
@@ -2293,6 +2514,21 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class ScannedResource
+      attr_accessor scanned_resource_arn: ::String
+      attr_accessor scanned_resource_type: ("EBS_RECOVERY_POINT" | "EBS_SNAPSHOT" | "EBS_VOLUME" | "EC2_AMI" | "EC2_INSTANCE" | "EC2_RECOVERY_POINT" | "S3_RECOVERY_POINT" | "S3_BUCKET")
+      attr_accessor scanned_resource_status: ("RUNNING" | "COMPLETED" | "COMPLETED_WITH_ISSUES" | "FAILED" | "SKIPPED")
+      attr_accessor scan_status_reason: ("ACCESS_DENIED" | "RESOURCE_NOT_FOUND" | "SNAPSHOT_SIZE_LIMIT_EXCEEDED" | "RESOURCE_UNAVAILABLE" | "INCONSISTENT_SOURCE" | "INCREMENTAL_NO_DIFFERENCE" | "NO_EBS_VOLUMES_FOUND" | "UNSUPPORTED_PRODUCT_CODE_TYPE" | "AMI_SNAPSHOT_LIMIT_EXCEEDED" | "UNRELATED_RESOURCES" | "BASE_RESOURCE_NOT_SCANNED" | "BASE_CREATED_AFTER_TARGET" | "UNSUPPORTED_FOR_INCREMENTAL" | "UNSUPPORTED_AMI" | "UNSUPPORTED_SNAPSHOT" | "UNSUPPORTED_COMPOSITE_RECOVERY_POINT")
+      attr_accessor resource_details: Types::ScannedResourceDetails
+      SENSITIVE: []
+    end
+
+    class ScannedResourceDetails
+      attr_accessor ebs_volume: Types::VolumeDetail
+      attr_accessor ebs_snapshot: Types::EbsSnapshot
+      SENSITIVE: []
+    end
+
     class SecurityContext
       attr_accessor privileged: bool
       attr_accessor allow_privilege_escalation: bool
@@ -2303,6 +2539,14 @@ module Aws::GuardDuty
       attr_accessor group_id: ::String
       attr_accessor group_name: ::String
       SENSITIVE: []
+    end
+
+    class SendObjectMalwareScanRequest
+      attr_accessor s3_object: Types::S3ObjectForSendObjectMalwareScan
+      SENSITIVE: []
+    end
+
+    class SendObjectMalwareScanResponse < Aws::EmptyStructure
     end
 
     class Sequence
@@ -2382,8 +2626,17 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class StartMalwareScanConfiguration
+      attr_accessor role: ::String
+      attr_accessor incremental_scan_details: Types::IncrementalScanDetails
+      attr_accessor recovery_point: Types::RecoveryPoint
+      SENSITIVE: []
+    end
+
     class StartMalwareScanRequest
       attr_accessor resource_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor scan_configuration: Types::StartMalwareScanConfiguration
       SENSITIVE: []
     end
 
@@ -2433,6 +2686,9 @@ module Aws::GuardDuty
       attr_accessor name: ::String
       attr_accessor source: ::String
       attr_accessor item_paths: ::Array[Types::ItemPath]
+      attr_accessor count: ::Integer
+      attr_accessor hash: ::String
+      attr_accessor item_details: ::Array[Types::ItemDetails]
       SENSITIVE: []
     end
 
@@ -2465,6 +2721,7 @@ module Aws::GuardDuty
     class TriggerDetails
       attr_accessor guard_duty_finding_id: ::String
       attr_accessor description: ::String
+      attr_accessor trigger_type: ("BACKUP" | "GUARDDUTY")
       SENSITIVE: []
     end
 
@@ -2529,7 +2786,7 @@ module Aws::GuardDuty
       attr_accessor finding_ids: ::Array[::String]
       attr_accessor feedback: ("USEFUL" | "NOT_USEFUL")
       attr_accessor comments: ::String
-      SENSITIVE: []
+      SENSITIVE: [:comments]
     end
 
     class UpdateFindingsFeedbackResponse < Aws::EmptyStructure

@@ -88,6 +88,17 @@ module Aws
                                            ) -> _AcceptMarketplaceRegistrationResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptMarketplaceRegistrationResponseSuccess
 
+      interface _AssociateIamRoleToResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateIamRoleToResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#associate_iam_role_to_resource-instance_method
+      def associate_iam_role_to_resource: (
+                                            iam_role_arn: ::String,
+                                            aws_integration: ("KmsTde"),
+                                            resource_arn: ::String
+                                          ) -> _AssociateIamRoleToResourceResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateIamRoleToResourceResponseSuccess
+
       interface _CreateCloudAutonomousVmClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateCloudAutonomousVmClusterOutput]
         def display_name: () -> ::String
@@ -239,7 +250,12 @@ module Aws
                                 ?client_token: ::String,
                                 ?s3_access: ("ENABLED" | "DISABLED"),
                                 ?zero_etl_access: ("ENABLED" | "DISABLED"),
+                                ?sts_access: ("ENABLED" | "DISABLED"),
+                                ?kms_access: ("ENABLED" | "DISABLED"),
                                 ?s3_policy_document: ::String,
+                                ?sts_policy_document: ::String,
+                                ?kms_policy_document: ::String,
+                                ?cross_region_s3_restore_sources_to_enable: Array[::String],
                                 ?tags: Hash[::String, ::String]
                               ) -> _CreateOdbNetworkResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOdbNetworkResponseSuccess
@@ -307,6 +323,17 @@ module Aws
                                            odb_peering_connection_id: ::String
                                          ) -> _DeleteOdbPeeringConnectionResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOdbPeeringConnectionResponseSuccess
+
+      interface _DisassociateIamRoleFromResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateIamRoleFromResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#disassociate_iam_role_from_resource-instance_method
+      def disassociate_iam_role_from_resource: (
+                                                 iam_role_arn: ::String,
+                                                 aws_integration: ("KmsTde"),
+                                                 resource_arn: ::String
+                                               ) -> _DisassociateIamRoleFromResourceResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateIamRoleFromResourceResponseSuccess
 
       interface _GetCloudAutonomousVmClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCloudAutonomousVmClusterOutput]
@@ -376,6 +403,7 @@ module Aws
         def status: () -> ("NOT_STARTED" | "PENDING_LINK_GENERATION" | "PENDING_CUSTOMER_ACTION" | "PENDING_INITIALIZATION" | "ACTIVATING" | "ACTIVE_IN_HOME_REGION" | "ACTIVE" | "ACTIVE_LIMITED" | "FAILED" | "PUBLIC_OFFER_UNSUPPORTED" | "SUSPENDED" | "CANCELED")
         def existing_tenancy_activation_link: () -> ::String
         def new_tenancy_activation_link: () -> ::String
+        def oci_identity_domain: () -> Types::OciIdentityDomain
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#get_oci_onboarding_status-instance_method
       def get_oci_onboarding_status: (
@@ -407,6 +435,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#initialize_service-instance_method
       def initialize_service: (
+                                ?oci_identity_domain: bool
                               ) -> _InitializeServiceResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InitializeServiceResponseSuccess
 
@@ -670,7 +699,13 @@ module Aws
                                 ?peered_cidrs_to_be_removed: Array[::String],
                                 ?s3_access: ("ENABLED" | "DISABLED"),
                                 ?zero_etl_access: ("ENABLED" | "DISABLED"),
-                                ?s3_policy_document: ::String
+                                ?sts_access: ("ENABLED" | "DISABLED"),
+                                ?kms_access: ("ENABLED" | "DISABLED"),
+                                ?s3_policy_document: ::String,
+                                ?sts_policy_document: ::String,
+                                ?kms_policy_document: ::String,
+                                ?cross_region_s3_restore_sources_to_enable: Array[::String],
+                                ?cross_region_s3_restore_sources_to_disable: Array[::String]
                               ) -> _UpdateOdbNetworkResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOdbNetworkResponseSuccess
 

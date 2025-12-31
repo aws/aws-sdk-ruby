@@ -29,8 +29,10 @@ module Aws::GroundStation
   # ## Error Classes
   # * {DependencyException}
   # * {InvalidParameterException}
+  # * {ResourceInUseException}
   # * {ResourceLimitExceededException}
   # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -78,6 +80,21 @@ module Aws::GroundStation
       end
     end
 
+    class ResourceInUseException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::GroundStation::Types::ResourceInUseException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class ResourceLimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -110,6 +127,26 @@ module Aws::GroundStation
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::GroundStation::Types::ServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def parameter_name
+        @data[:parameter_name]
       end
     end
 

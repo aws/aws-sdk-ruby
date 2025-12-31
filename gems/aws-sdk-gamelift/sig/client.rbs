@@ -143,7 +143,7 @@ module Aws
                             role_arn: ::String?,
                             object_version: ::String?
                           },
-                          ?operating_system: ("WINDOWS_2012" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "WINDOWS_2016" | "AMAZON_LINUX_2023"),
+                          ?operating_system: ("WINDOWS_2012" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "WINDOWS_2016" | "AMAZON_LINUX_2023" | "WINDOWS_2022"),
                           ?tags: Array[
                             {
                               key: ::String,

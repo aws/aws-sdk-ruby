@@ -392,6 +392,12 @@ module Aws::KafkaConnect
     #   Logs.
     #   @return [Types::LogDeliveryDescription]
     #
+    # @!attribute [rw] network_type
+    #   The network type of the connector. It gives connectors connectivity
+    #   to either IPv4 (IPV4) or IPv4 and IPv6 (DUAL) destinations. Defaults
+    #   to IPV4.
+    #   @return [String]
+    #
     # @!attribute [rw] plugins
     #   Specifies which plugins were used for this connector.
     #   @return [Array<Types::PluginDescription>]
@@ -420,6 +426,7 @@ module Aws::KafkaConnect
       :kafka_cluster_encryption_in_transit,
       :kafka_connect_version,
       :log_delivery,
+      :network_type,
       :plugins,
       :service_execution_role_arn,
       :worker_configuration)
@@ -467,13 +474,19 @@ module Aws::KafkaConnect
     #   Details about log delivery.
     #   @return [Types::LogDelivery]
     #
+    # @!attribute [rw] network_type
+    #   The network type of the connector. It gives connectors connectivity
+    #   to either IPv4 (IPV4) or IPv4 and IPv6 (DUAL) destinations. Defaults
+    #   to IPV4.
+    #   @return [String]
+    #
     # @!attribute [rw] plugins
     #   Amazon MSK Connect does not currently support specifying multiple
     #   plugins as a list. To use more than one plugin for your connector,
     #   you can create a single custom plugin using a ZIP file that bundles
     #   multiple plugins together.
     #
-    #   Specifies which plugin to use for the connector. You must specify a
+    #    Specifies which plugin to use for the connector. You must specify a
     #   single-element list containing one `customPlugin` object.
     #   @return [Array<Types::Plugin>]
     #
@@ -505,6 +518,7 @@ module Aws::KafkaConnect
       :kafka_cluster_encryption_in_transit,
       :kafka_connect_version,
       :log_delivery,
+      :network_type,
       :plugins,
       :service_execution_role_arn,
       :worker_configuration,
@@ -1071,6 +1085,12 @@ module Aws::KafkaConnect
     #   Details about delivering logs to Amazon CloudWatch Logs.
     #   @return [Types::LogDeliveryDescription]
     #
+    # @!attribute [rw] network_type
+    #   The network type of the connector. It gives connectors connectivity
+    #   to either IPv4 (IPV4) or IPv4 and IPv6 (DUAL) destinations. Defaults
+    #   to IPV4.
+    #   @return [String]
+    #
     # @!attribute [rw] plugins
     #   Specifies which plugins were used for this connector.
     #   @return [Array<Types::PluginDescription>]
@@ -1104,6 +1124,7 @@ module Aws::KafkaConnect
       :kafka_cluster_encryption_in_transit,
       :kafka_connect_version,
       :log_delivery,
+      :network_type,
       :plugins,
       :service_execution_role_arn,
       :worker_configuration,

@@ -6,13 +6,15 @@ module Aws
     autoload :BucketRegionCache, 'aws-sdk-s3/bucket_region_cache'
     autoload :Encryption, 'aws-sdk-s3/encryption'
     autoload :EncryptionV2, 'aws-sdk-s3/encryption_v2'
+    autoload :EncryptionV3, 'aws-sdk-s3/encryption_v3'
     autoload :LegacySigner, 'aws-sdk-s3/legacy_signer'
 
     # transfer manager + multipart upload/download utilities
     autoload :DefaultExecutor, 'aws-sdk-s3/default_executor'
     autoload :FilePart, 'aws-sdk-s3/file_part'
-    autoload :FileDownloader, 'aws-sdk-s3/file_downloader'
+    autoload :DefaultExecutor, 'aws-sdk-s3/default_executor'
     autoload :FileUploader, 'aws-sdk-s3/file_uploader'
+    autoload :FileDownloader, 'aws-sdk-s3/file_downloader'
     autoload :MultipartDownloadError, 'aws-sdk-s3/multipart_download_error'
     autoload :MultipartFileUploader, 'aws-sdk-s3/multipart_file_uploader'
     autoload :MultipartStreamUploader, 'aws-sdk-s3/multipart_stream_uploader'

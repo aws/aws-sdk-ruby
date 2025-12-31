@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2025-12-12)
+------------------
+
+* Feature - Adds Enhanced mode support for NFS and SMB locations. SMB credentials are now managed via Secrets Manager, and may be encrypted with service or customer managed keys. Increases AgentArns maximum count to 8 (max 4 per TaskMode). Adds folder counters to DescribeTaskExecution for Enhanced mode tasks.
+
+1.115.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.114.0 (2025-11-20)
+------------------
+
+* Feature - The partition value "aws-eusc" is now permitted for ARN (Amazon Resource Name) fields.
+
+1.113.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.112.0 (2025-10-17)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
 1.111.0 (2025-09-30)
 ------------------
 

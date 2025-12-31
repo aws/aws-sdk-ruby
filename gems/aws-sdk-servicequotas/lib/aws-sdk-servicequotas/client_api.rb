@@ -18,6 +18,7 @@ module Aws::ServiceQuotas
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AppliedLevelEnum = Shapes::StringShape.new(name: 'AppliedLevelEnum')
+    AppliedValue = Shapes::FloatShape.new(name: 'AppliedValue')
     AssociateServiceQuotaTemplateRequest = Shapes::StructureShape.new(name: 'AssociateServiceQuotaTemplateRequest')
     AssociateServiceQuotaTemplateResponse = Shapes::StructureShape.new(name: 'AssociateServiceQuotaTemplateResponse')
     AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
@@ -25,6 +26,7 @@ module Aws::ServiceQuotas
     CreateSupportCaseResponse = Shapes::StructureShape.new(name: 'CreateSupportCaseResponse')
     CustomerServiceEngagementId = Shapes::StringShape.new(name: 'CustomerServiceEngagementId')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
+    DefaultValue = Shapes::FloatShape.new(name: 'DefaultValue')
     DeleteServiceQuotaIncreaseRequestFromTemplateRequest = Shapes::StructureShape.new(name: 'DeleteServiceQuotaIncreaseRequestFromTemplateRequest')
     DeleteServiceQuotaIncreaseRequestFromTemplateResponse = Shapes::StructureShape.new(name: 'DeleteServiceQuotaIncreaseRequestFromTemplateResponse')
     DependencyAccessDeniedException = Shapes::StructureShape.new(name: 'DependencyAccessDeniedException')
@@ -45,6 +47,8 @@ module Aws::ServiceQuotas
     GetAssociationForServiceQuotaTemplateResponse = Shapes::StructureShape.new(name: 'GetAssociationForServiceQuotaTemplateResponse')
     GetAutoManagementConfigurationRequest = Shapes::StructureShape.new(name: 'GetAutoManagementConfigurationRequest')
     GetAutoManagementConfigurationResponse = Shapes::StructureShape.new(name: 'GetAutoManagementConfigurationResponse')
+    GetQuotaUtilizationReportRequest = Shapes::StructureShape.new(name: 'GetQuotaUtilizationReportRequest')
+    GetQuotaUtilizationReportResponse = Shapes::StructureShape.new(name: 'GetQuotaUtilizationReportResponse')
     GetRequestedServiceQuotaChangeRequest = Shapes::StructureShape.new(name: 'GetRequestedServiceQuotaChangeRequest')
     GetRequestedServiceQuotaChangeResponse = Shapes::StructureShape.new(name: 'GetRequestedServiceQuotaChangeResponse')
     GetServiceQuotaIncreaseRequestFromTemplateRequest = Shapes::StructureShape.new(name: 'GetServiceQuotaIncreaseRequestFromTemplateRequest')
@@ -72,6 +76,7 @@ module Aws::ServiceQuotas
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MaxResultsUtilization = Shapes::IntegerShape.new(name: 'MaxResultsUtilization')
     MetricDimensionName = Shapes::StringShape.new(name: 'MetricDimensionName')
     MetricDimensionValue = Shapes::StringShape.new(name: 'MetricDimensionValue')
     MetricDimensionsMapDefinition = Shapes::MapShape.new(name: 'MetricDimensionsMapDefinition')
@@ -104,11 +109,19 @@ module Aws::ServiceQuotas
     QuotaName = Shapes::StringShape.new(name: 'QuotaName')
     QuotaPeriod = Shapes::StructureShape.new(name: 'QuotaPeriod')
     QuotaUnit = Shapes::StringShape.new(name: 'QuotaUnit')
+    QuotaUtilizationInfo = Shapes::StructureShape.new(name: 'QuotaUtilizationInfo')
+    QuotaUtilizationInfoList = Shapes::ListShape.new(name: 'QuotaUtilizationInfoList')
     QuotaValue = Shapes::FloatShape.new(name: 'QuotaValue')
+    ReportErrorCode = Shapes::StringShape.new(name: 'ReportErrorCode')
+    ReportErrorMessage = Shapes::StringShape.new(name: 'ReportErrorMessage')
+    ReportId = Shapes::StringShape.new(name: 'ReportId')
+    ReportMessage = Shapes::StringShape.new(name: 'ReportMessage')
+    ReportStatus = Shapes::StringShape.new(name: 'ReportStatus')
     RequestId = Shapes::StringShape.new(name: 'RequestId')
     RequestServiceQuotaIncreaseRequest = Shapes::StructureShape.new(name: 'RequestServiceQuotaIncreaseRequest')
     RequestServiceQuotaIncreaseResponse = Shapes::StructureShape.new(name: 'RequestServiceQuotaIncreaseResponse')
     RequestStatus = Shapes::StringShape.new(name: 'RequestStatus')
+    RequestType = Shapes::StringShape.new(name: 'RequestType')
     RequestedServiceQuotaChange = Shapes::StructureShape.new(name: 'RequestedServiceQuotaChange')
     RequestedServiceQuotaChangeHistoryListDefinition = Shapes::ListShape.new(name: 'RequestedServiceQuotaChangeHistoryListDefinition')
     Requester = Shapes::StringShape.new(name: 'Requester')
@@ -126,6 +139,8 @@ module Aws::ServiceQuotas
     ServiceQuotaTemplateNotInUseException = Shapes::StructureShape.new(name: 'ServiceQuotaTemplateNotInUseException')
     StartAutoManagementRequest = Shapes::StructureShape.new(name: 'StartAutoManagementRequest')
     StartAutoManagementResponse = Shapes::StructureShape.new(name: 'StartAutoManagementResponse')
+    StartQuotaUtilizationReportRequest = Shapes::StructureShape.new(name: 'StartQuotaUtilizationReportRequest')
+    StartQuotaUtilizationReportResponse = Shapes::StructureShape.new(name: 'StartQuotaUtilizationReportResponse')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
     StopAutoManagementRequest = Shapes::StructureShape.new(name: 'StopAutoManagementRequest')
     StopAutoManagementResponse = Shapes::StructureShape.new(name: 'StopAutoManagementResponse')
@@ -139,10 +154,12 @@ module Aws::ServiceQuotas
     TemplatesNotAvailableInRegionException = Shapes::StructureShape.new(name: 'TemplatesNotAvailableInRegionException')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+    TotalCount = Shapes::IntegerShape.new(name: 'TotalCount')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAutoManagementRequest = Shapes::StructureShape.new(name: 'UpdateAutoManagementRequest')
     UpdateAutoManagementResponse = Shapes::StructureShape.new(name: 'UpdateAutoManagementResponse')
+    UtilizationPct = Shapes::FloatShape.new(name: 'UtilizationPct')
 
     AWSServiceAccessNotEnabledException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     AWSServiceAccessNotEnabledException.struct_class = Types::AWSServiceAccessNotEnabledException
@@ -205,6 +222,21 @@ module Aws::ServiceQuotas
     GetAutoManagementConfigurationResponse.add_member(:opt_in_status, Shapes::ShapeRef.new(shape: OptInStatus, location_name: "OptInStatus"))
     GetAutoManagementConfigurationResponse.add_member(:exclusion_list, Shapes::ShapeRef.new(shape: ExclusionQuotaList, location_name: "ExclusionList"))
     GetAutoManagementConfigurationResponse.struct_class = Types::GetAutoManagementConfigurationResponse
+
+    GetQuotaUtilizationReportRequest.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, required: true, location_name: "ReportId"))
+    GetQuotaUtilizationReportRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetQuotaUtilizationReportRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsUtilization, location_name: "MaxResults"))
+    GetQuotaUtilizationReportRequest.struct_class = Types::GetQuotaUtilizationReportRequest
+
+    GetQuotaUtilizationReportResponse.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, location_name: "ReportId"))
+    GetQuotaUtilizationReportResponse.add_member(:status, Shapes::ShapeRef.new(shape: ReportStatus, location_name: "Status"))
+    GetQuotaUtilizationReportResponse.add_member(:generated_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "GeneratedAt"))
+    GetQuotaUtilizationReportResponse.add_member(:total_count, Shapes::ShapeRef.new(shape: TotalCount, location_name: "TotalCount"))
+    GetQuotaUtilizationReportResponse.add_member(:quotas, Shapes::ShapeRef.new(shape: QuotaUtilizationInfoList, location_name: "Quotas"))
+    GetQuotaUtilizationReportResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetQuotaUtilizationReportResponse.add_member(:error_code, Shapes::ShapeRef.new(shape: ReportErrorCode, location_name: "ErrorCode"))
+    GetQuotaUtilizationReportResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ReportErrorMessage, location_name: "ErrorMessage"))
+    GetQuotaUtilizationReportResponse.struct_class = Types::GetQuotaUtilizationReportResponse
 
     GetRequestedServiceQuotaChangeRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, required: true, location_name: "RequestId"))
     GetRequestedServiceQuotaChangeRequest.struct_class = Types::GetRequestedServiceQuotaChangeRequest
@@ -355,6 +387,19 @@ module Aws::ServiceQuotas
     QuotaPeriod.add_member(:period_unit, Shapes::ShapeRef.new(shape: PeriodUnit, location_name: "PeriodUnit"))
     QuotaPeriod.struct_class = Types::QuotaPeriod
 
+    QuotaUtilizationInfo.add_member(:quota_code, Shapes::ShapeRef.new(shape: QuotaCode, location_name: "QuotaCode"))
+    QuotaUtilizationInfo.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode"))
+    QuotaUtilizationInfo.add_member(:quota_name, Shapes::ShapeRef.new(shape: QuotaName, location_name: "QuotaName"))
+    QuotaUtilizationInfo.add_member(:namespace, Shapes::ShapeRef.new(shape: QuotaMetricNamespace, location_name: "Namespace"))
+    QuotaUtilizationInfo.add_member(:utilization, Shapes::ShapeRef.new(shape: UtilizationPct, location_name: "Utilization"))
+    QuotaUtilizationInfo.add_member(:default_value, Shapes::ShapeRef.new(shape: DefaultValue, location_name: "DefaultValue"))
+    QuotaUtilizationInfo.add_member(:applied_value, Shapes::ShapeRef.new(shape: AppliedValue, location_name: "AppliedValue"))
+    QuotaUtilizationInfo.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, location_name: "ServiceName"))
+    QuotaUtilizationInfo.add_member(:adjustable, Shapes::ShapeRef.new(shape: QuotaAdjustable, location_name: "Adjustable"))
+    QuotaUtilizationInfo.struct_class = Types::QuotaUtilizationInfo
+
+    QuotaUtilizationInfoList.member = Shapes::ShapeRef.new(shape: QuotaUtilizationInfo)
+
     RequestServiceQuotaIncreaseRequest.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, required: true, location_name: "ServiceCode"))
     RequestServiceQuotaIncreaseRequest.add_member(:quota_code, Shapes::ShapeRef.new(shape: QuotaCode, required: true, location_name: "QuotaCode"))
     RequestServiceQuotaIncreaseRequest.add_member(:desired_value, Shapes::ShapeRef.new(shape: QuotaValue, required: true, location_name: "DesiredValue"))
@@ -366,6 +411,7 @@ module Aws::ServiceQuotas
     RequestServiceQuotaIncreaseResponse.struct_class = Types::RequestServiceQuotaIncreaseResponse
 
     RequestedServiceQuotaChange.add_member(:id, Shapes::ShapeRef.new(shape: RequestId, location_name: "Id"))
+    RequestedServiceQuotaChange.add_member(:request_type, Shapes::ShapeRef.new(shape: RequestType, location_name: "RequestType"))
     RequestedServiceQuotaChange.add_member(:case_id, Shapes::ShapeRef.new(shape: CustomerServiceEngagementId, location_name: "CaseId"))
     RequestedServiceQuotaChange.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode"))
     RequestedServiceQuotaChange.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, location_name: "ServiceName"))
@@ -438,6 +484,13 @@ module Aws::ServiceQuotas
     StartAutoManagementRequest.struct_class = Types::StartAutoManagementRequest
 
     StartAutoManagementResponse.struct_class = Types::StartAutoManagementResponse
+
+    StartQuotaUtilizationReportRequest.struct_class = Types::StartQuotaUtilizationReportRequest
+
+    StartQuotaUtilizationReportResponse.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, location_name: "ReportId"))
+    StartQuotaUtilizationReportResponse.add_member(:status, Shapes::ShapeRef.new(shape: ReportStatus, location_name: "Status"))
+    StartQuotaUtilizationReportResponse.add_member(:message, Shapes::ShapeRef.new(shape: ReportMessage, location_name: "Message"))
+    StartQuotaUtilizationReportResponse.struct_class = Types::StartQuotaUtilizationReportResponse
 
     StopAutoManagementRequest.struct_class = Types::StopAutoManagementRequest
 
@@ -602,6 +655,19 @@ module Aws::ServiceQuotas
         o.errors << Shapes::ShapeRef.new(shape: NoSuchResourceException)
         o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:get_quota_utilization_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetQuotaUtilizationReport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetQuotaUtilizationReportRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetQuotaUtilizationReportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
@@ -828,6 +894,20 @@ module Aws::ServiceQuotas
         o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:start_quota_utilization_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartQuotaUtilizationReport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartQuotaUtilizationReportRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartQuotaUtilizationReportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
       end)
 
       api.add_operation(:stop_auto_management, Seahorse::Model::Operation.new.tap do |o|

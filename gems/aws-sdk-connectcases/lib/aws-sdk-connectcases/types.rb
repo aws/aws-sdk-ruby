@@ -183,7 +183,7 @@ module Aws::ConnectCases
     #   @return [String]
     #
     # @!attribute [rw] case_rules
-    #   List of case rule identifiers.
+    #   A list of case rule identifiers.
     #   @return [Array<Types::CaseRuleIdentifier>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BatchGetCaseRuleRequest AWS API Documentation
@@ -196,18 +196,23 @@ module Aws::ConnectCases
     end
 
     # @!attribute [rw] case_rules
-    #   List of detailed case rule information.
+    #   A list of detailed case rule information.
     #   @return [Array<Types::GetCaseRuleResponse>]
     #
     # @!attribute [rw] errors
-    #   List of case rule errors.
+    #   A list of case rule errors.
     #   @return [Array<Types::CaseRuleError>]
+    #
+    # @!attribute [rw] unprocessed_case_rules
+    #   A list of unprocessed case rule identifiers.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BatchGetCaseRuleResponse AWS API Documentation
     #
     class BatchGetCaseRuleResponse < Struct.new(
       :case_rules,
-      :errors)
+      :errors,
+      :unprocessed_case_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -417,16 +422,29 @@ module Aws::ConnectCases
     #   Required rule type, used to indicate whether a field is required.
     #   @return [Types::RequiredCaseRule]
     #
+    # @!attribute [rw] field_options
+    #   Which options are available in a child field based on the selected
+    #   value in a parent field.
+    #   @return [Types::FieldOptionsCaseRule]
+    #
+    # @!attribute [rw] hidden
+    #   Whether a field is visible, based on values in other fields.
+    #   @return [Types::HiddenCaseRule]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/CaseRuleDetails AWS API Documentation
     #
     class CaseRuleDetails < Struct.new(
       :required,
+      :field_options,
+      :hidden,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class Required < CaseRuleDetails; end
+      class FieldOptions < CaseRuleDetails; end
+      class Hidden < CaseRuleDetails; end
       class Unknown < CaseRuleDetails; end
     end
 
@@ -1512,6 +1530,32 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
+    # Rules that control which options are available in a child field based
+    # on the selected value in a parent field.
+    #
+    # @!attribute [rw] parent_field_id
+    #   The identifier of the parent field that controls options.
+    #   @return [String]
+    #
+    # @!attribute [rw] child_field_id
+    #   The identifier of the child field whose options are controlled.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_child_field_options_mappings
+    #   A mapping between a parent field option value and child field option
+    #   values.
+    #   @return [Array<Types::ParentChildFieldOptionsMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/FieldOptionsCaseRule AWS API Documentation
+    #
+    class FieldOptionsCaseRule < Struct.new(
+      :parent_field_id,
+      :child_field_id,
+      :parent_child_field_options_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Object for the summarized details of the field.
     #
     # @!attribute [rw] field_id
@@ -2108,6 +2152,26 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
+    # A rule that controls field visibility based on conditions. Fields can
+    # be shown or hidden dynamically based on values in other fields.
+    #
+    # @!attribute [rw] default_value
+    #   Whether the field is hidden when no conditions match.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] conditions
+    #   A list of conditions that determine field visibility.
+    #   @return [Array<Types::BooleanCondition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/HiddenCaseRule AWS API Documentation
+    #
+    class HiddenCaseRule < Struct.new(
+      :default_value,
+      :conditions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # We couldn't process your request because of an issue with the server.
     # Try again later.
     #
@@ -2615,6 +2679,26 @@ module Aws::ConnectCases
       class DoubleValue < OperandTwo; end
       class EmptyValue < OperandTwo; end
       class Unknown < OperandTwo; end
+    end
+
+    # A mapping between a parent field option value and child field option
+    # values.
+    #
+    # @!attribute [rw] parent_field_option_value
+    #   The value in the parent field.
+    #   @return [String]
+    #
+    # @!attribute [rw] child_field_option_values
+    #   A list of allowed values in the child field.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/ParentChildFieldOptionsMapping AWS API Documentation
+    #
+    class ParentChildFieldOptionsMapping < Struct.new(
+      :parent_field_option_value,
+      :child_field_option_values)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # @!attribute [rw] domain_id

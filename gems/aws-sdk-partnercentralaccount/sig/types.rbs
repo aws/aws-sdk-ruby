@@ -1,0 +1,769 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::PartnerCentralAccount
+  module Types
+
+    class AcceptConnectionInvitationRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptConnectionInvitationResponse
+      attr_accessor connection: Types::Connection
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor reason: ("ACCESS_DENIED" | "INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE")
+      SENSITIVE: []
+    end
+
+    class AccountSummary
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AllianceLeadContact
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor email: ::String
+      attr_accessor business_title: ::String
+      SENSITIVE: [:first_name, :last_name, :business_title]
+    end
+
+    class AssociateAwsTrainingCertificationEmailDomainRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor email: ::String
+      attr_accessor email_verification_code: ::String
+      SENSITIVE: [:email_verification_code]
+    end
+
+    class AssociateAwsTrainingCertificationEmailDomainResponse < Aws::EmptyStructure
+    end
+
+    class BusinessValidationError
+      attr_accessor message: ::String
+      attr_accessor code: ("INCOMPATIBLE_CONNECTION_INVITATION_REQUEST" | "INCOMPATIBLE_LEGAL_NAME" | "INCOMPATIBLE_KNOW_YOUR_BUSINESS_STATUS" | "INCOMPATIBLE_IDENTITY_VERIFICATION_STATUS" | "INVALID_ACCOUNT_LINKING_STATUS" | "INVALID_ACCOUNT_STATE" | "INCOMPATIBLE_DOMAIN")
+      SENSITIVE: []
+    end
+
+    class BusinessVerificationDetails
+      attr_accessor legal_name: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor country_code: ::String
+      attr_accessor jurisdiction_of_incorporation: ::String
+      SENSITIVE: [:legal_name, :registration_id]
+    end
+
+    class BusinessVerificationResponse
+      attr_accessor business_verification_details: Types::BusinessVerificationDetails
+      SENSITIVE: []
+    end
+
+    class CancelConnectionInvitationRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CancelConnectionInvitationResponse
+      attr_accessor catalog: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor connection_id: ::String
+      attr_accessor connection_type: ("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor expires_at: ::Time
+      attr_accessor other_participant_identifier: ::String
+      attr_accessor participant_type: ("SENDER" | "RECEIVER")
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED" | "CANCELED" | "EXPIRED")
+      attr_accessor invitation_message: ::String
+      attr_accessor inviter_email: ::String
+      attr_accessor inviter_name: ::String
+      SENSITIVE: [:inviter_name]
+    end
+
+    class CancelConnectionRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor connection_type: ("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY")
+      attr_accessor reason: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CancelConnectionResponse
+      attr_accessor catalog: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor other_participant_account_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor connection_types: ::Hash[("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY"), Types::ConnectionTypeDetail]
+      SENSITIVE: []
+    end
+
+    class CancelProfileUpdateTaskRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelProfileUpdateTaskResponse
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor task_details: Types::TaskDetails
+      attr_accessor started_at: ::Time
+      attr_accessor status: ("IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED")
+      attr_accessor ended_at: ::Time
+      attr_accessor error_detail_list: ::Array[Types::ErrorDetail]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor reason: ("CONFLICT_CLIENT_TOKEN" | "DUPLICATE_PARTNER" | "INCOMPATIBLE_PROFILE_STATE" | "INCOMPATIBLE_PARTNER_PROFILE_TASK_STATE" | "DUPLICATE_CONNECTION_INVITATION" | "INCOMPATIBLE_CONNECTION_INVITATION_STATE" | "INCOMPATIBLE_CONNECTION_INVITATION_RECEIVER" | "DUPLICATE_CONNECTION" | "INCOMPATIBLE_CONNECTION_STATE" | "INCOMPATIBLE_CONNECTION_PREFERENCES_REVISION" | "ACCOUNT_ALREADY_VERIFIED" | "VERIFICATION_ALREADY_IN_PROGRESS")
+      SENSITIVE: []
+    end
+
+    class Connection
+      attr_accessor catalog: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor other_participant_account_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor connection_types: ::Hash[("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY"), Types::ConnectionTypeDetail]
+      SENSITIVE: []
+    end
+
+    class ConnectionInvitationSummary
+      attr_accessor catalog: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor connection_id: ::String
+      attr_accessor connection_type: ("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor expires_at: ::Time
+      attr_accessor other_participant_identifier: ::String
+      attr_accessor participant_type: ("SENDER" | "RECEIVER")
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED" | "CANCELED" | "EXPIRED")
+      SENSITIVE: []
+    end
+
+    class ConnectionSummary
+      attr_accessor catalog: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor other_participant_account_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor connection_types: ::Hash[("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY"), Types::ConnectionTypeSummary]
+      SENSITIVE: []
+    end
+
+    class ConnectionTypeDetail
+      attr_accessor created_at: ::Time
+      attr_accessor inviter_email: ::String
+      attr_accessor inviter_name: ::String
+      attr_accessor status: ("ACTIVE" | "CANCELED")
+      attr_accessor canceled_at: ::Time
+      attr_accessor canceled_by: ::String
+      attr_accessor other_participant: Types::Participant
+      SENSITIVE: [:inviter_name]
+    end
+
+    class ConnectionTypeSummary
+      attr_accessor status: ("ACTIVE" | "CANCELED")
+      attr_accessor other_participant: Types::Participant
+      SENSITIVE: []
+    end
+
+    class CreateConnectionInvitationRequest
+      attr_accessor catalog: ::String
+      attr_accessor client_token: ::String
+      attr_accessor connection_type: ("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY")
+      attr_accessor email: ::String
+      attr_accessor message: ::String
+      attr_accessor name: ::String
+      attr_accessor receiver_identifier: ::String
+      SENSITIVE: [:name]
+    end
+
+    class CreateConnectionInvitationResponse
+      attr_accessor catalog: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor connection_id: ::String
+      attr_accessor connection_type: ("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor expires_at: ::Time
+      attr_accessor other_participant_identifier: ::String
+      attr_accessor participant_type: ("SENDER" | "RECEIVER")
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED" | "CANCELED" | "EXPIRED")
+      attr_accessor invitation_message: ::String
+      attr_accessor inviter_email: ::String
+      attr_accessor inviter_name: ::String
+      SENSITIVE: [:inviter_name]
+    end
+
+    class CreatePartnerRequest
+      attr_accessor catalog: ::String
+      attr_accessor client_token: ::String
+      attr_accessor legal_name: ::String
+      attr_accessor primary_solution_type: ("SOFTWARE_PRODUCTS" | "CONSULTING_SERVICES" | "PROFESSIONAL_SERVICES" | "MANAGED_SERVICES" | "HARDWARE_PRODUCTS" | "COMMUNICATION_SERVICES" | "VALUE_ADDED_RESALE_AWS_SERVICES" | "TRAINING_SERVICES")
+      attr_accessor alliance_lead_contact: Types::AllianceLeadContact
+      attr_accessor email_verification_code: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:legal_name, :email_verification_code]
+    end
+
+    class CreatePartnerResponse
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor legal_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor profile: Types::PartnerProfile
+      attr_accessor aws_training_certification_email_domains: ::Array[Types::PartnerDomain]
+      attr_accessor alliance_lead_contact: Types::AllianceLeadContact
+      SENSITIVE: [:legal_name]
+    end
+
+    class DisassociateAwsTrainingCertificationEmailDomainRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateAwsTrainingCertificationEmailDomainResponse < Aws::EmptyStructure
+    end
+
+    class ErrorDetail
+      attr_accessor locale: ::String
+      attr_accessor message: ::String
+      attr_accessor reason: ("INVALID_CONTENT" | "DUPLICATE_PROFILE" | "INVALID_LOGO" | "INVALID_LOGO_URL" | "INVALID_LOGO_FILE" | "INVALID_LOGO_SIZE" | "INVALID_WEBSITE_URL")
+      SENSITIVE: []
+    end
+
+    class FieldValidationError
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      attr_accessor code: ("REQUIRED_FIELD_MISSING" | "DUPLICATE_VALUE" | "INVALID_VALUE" | "INVALID_STRING_FORMAT" | "TOO_MANY_VALUES" | "ACTION_NOT_PERMITTED" | "INVALID_ENUM_VALUE")
+      SENSITIVE: []
+    end
+
+    class GetAllianceLeadContactRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetAllianceLeadContactResponse
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor alliance_lead_contact: Types::AllianceLeadContact
+      SENSITIVE: []
+    end
+
+    class GetConnectionInvitationRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectionInvitationResponse
+      attr_accessor catalog: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor connection_id: ::String
+      attr_accessor connection_type: ("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor expires_at: ::Time
+      attr_accessor other_participant_identifier: ::String
+      attr_accessor participant_type: ("SENDER" | "RECEIVER")
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED" | "CANCELED" | "EXPIRED")
+      attr_accessor invitation_message: ::String
+      attr_accessor inviter_email: ::String
+      attr_accessor inviter_name: ::String
+      SENSITIVE: [:inviter_name]
+    end
+
+    class GetConnectionPreferencesRequest
+      attr_accessor catalog: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectionPreferencesResponse
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor access_type: ("ALLOW_ALL" | "DENY_ALL" | "ALLOW_BY_DEFAULT_DENY_SOME")
+      attr_accessor excluded_participant_ids: ::Array[::String]
+      attr_accessor updated_at: ::Time
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetConnectionRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectionResponse
+      attr_accessor catalog: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor other_participant_account_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor connection_types: ::Hash[("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY"), Types::ConnectionTypeDetail]
+      SENSITIVE: []
+    end
+
+    class GetPartnerRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetPartnerResponse
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor legal_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor profile: Types::PartnerProfile
+      attr_accessor aws_training_certification_email_domains: ::Array[Types::PartnerDomain]
+      SENSITIVE: [:legal_name]
+    end
+
+    class GetProfileUpdateTaskRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetProfileUpdateTaskResponse
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor task_details: Types::TaskDetails
+      attr_accessor started_at: ::Time
+      attr_accessor status: ("IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED")
+      attr_accessor ended_at: ::Time
+      attr_accessor error_detail_list: ::Array[Types::ErrorDetail]
+      SENSITIVE: []
+    end
+
+    class GetProfileVisibilityRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetProfileVisibilityResponse
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor visibility: ("PRIVATE" | "PUBLIC")
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVerificationRequest
+      attr_accessor verification_type: ("BUSINESS_VERIFICATION" | "REGISTRANT_VERIFICATION")
+      SENSITIVE: []
+    end
+
+    class GetVerificationResponse
+      attr_accessor verification_type: ("BUSINESS_VERIFICATION" | "REGISTRANT_VERIFICATION")
+      attr_accessor verification_status: ("PENDING_CUSTOMER_ACTION" | "IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "REJECTED")
+      attr_accessor verification_status_reason: ::String
+      attr_accessor verification_response_details: Types::VerificationResponseDetails
+      attr_accessor started_at: ::Time
+      attr_accessor completed_at: ::Time
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectionInvitationsRequest
+      attr_accessor catalog: ::String
+      attr_accessor next_token: ::String
+      attr_accessor connection_type: ("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY")
+      attr_accessor max_results: ::Integer
+      attr_accessor other_participant_identifiers: ::Array[::String]
+      attr_accessor participant_type: ("SENDER" | "RECEIVER")
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED" | "CANCELED" | "EXPIRED")
+      SENSITIVE: []
+    end
+
+    class ListConnectionInvitationsResponse
+      attr_accessor connection_invitation_summaries: ::Array[Types::ConnectionInvitationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectionsRequest
+      attr_accessor catalog: ::String
+      attr_accessor next_token: ::String
+      attr_accessor connection_type: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor other_participant_identifiers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListConnectionsResponse
+      attr_accessor connection_summaries: ::Array[Types::ConnectionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPartnersRequest
+      attr_accessor catalog: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPartnersResponse
+      attr_accessor partner_summary_list: ::Array[Types::PartnerSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class LocalizedContent
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor website_url: ::String
+      attr_accessor logo_url: ::String
+      attr_accessor locale: ::String
+      SENSITIVE: []
+    end
+
+    class Participant
+      attr_accessor partner_profile: Types::PartnerProfileSummary
+      attr_accessor seller_profile: Types::SellerProfileSummary
+      attr_accessor account: Types::AccountSummary
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PartnerProfile < Participant
+      end
+      class SellerProfile < Participant
+      end
+      class Account < Participant
+      end
+      class Unknown < Participant
+      end
+    end
+
+    class PartnerDomain
+      attr_accessor domain_name: ::String
+      attr_accessor registered_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PartnerProfile
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor website_url: ::String
+      attr_accessor logo_url: ::String
+      attr_accessor primary_solution_type: ("SOFTWARE_PRODUCTS" | "CONSULTING_SERVICES" | "PROFESSIONAL_SERVICES" | "MANAGED_SERVICES" | "HARDWARE_PRODUCTS" | "COMMUNICATION_SERVICES" | "VALUE_ADDED_RESALE_AWS_SERVICES" | "TRAINING_SERVICES")
+      attr_accessor industry_segments: ::Array[("AGRICULTURE_MINING" | "BIOTECHNOLOGY" | "BUSINESS_CONSUMER_SERVICES" | "BUSINESS_SERV" | "COMMUNICATIONS" | "COMPUTER_HARDWARE" | "COMPUTERS_ELECTRONICS" | "COMPUTER_SOFTWARE" | "CONSUMER_GOODS" | "CONSUMER_RELATED" | "EDUCATION" | "ENERGY_UTILITIES" | "FINANCIAL_SERVICES" | "GAMING" | "GOVERNMENT" | "GOVERNMENT_EDUCATION_PUBLIC_SERVICES" | "HEALTHCARE" | "HEALTHCARE_PHARMACEUTICALS_BIOTECH" | "INDUSTRIAL_ENERGY" | "INTERNET_SPECIFIC" | "LIFE_SCIENCES" | "MANUFACTURING" | "MEDIA_ENTERTAINMENT_LEISURE" | "MEDIA_ENTERTAINMENT" | "MEDICAL_HEALTH" | "NON_PROFIT_ORGANIZATION" | "OTHER" | "PROFESSIONAL_SERVICES" | "REAL_ESTATE_CONSTRUCTION" | "RETAIL" | "RETAIL_WHOLESALE_DISTRIBUTION" | "SEMICONDUCTOR_ELECTR" | "SOFTWARE_INTERNET" | "TELECOMMUNICATIONS" | "TRANSPORTATION_LOGISTICS" | "TRAVEL_HOSPITALITY" | "WHOLESALE_DISTRIBUTION")]
+      attr_accessor translation_source_locale: ::String
+      attr_accessor localized_contents: ::Array[Types::LocalizedContent]
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class PartnerProfileSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class PartnerSummary
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor legal_name: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: [:legal_name]
+    end
+
+    class PutAllianceLeadContactRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor alliance_lead_contact: Types::AllianceLeadContact
+      attr_accessor email_verification_code: ::String
+      SENSITIVE: [:email_verification_code]
+    end
+
+    class PutAllianceLeadContactResponse
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor alliance_lead_contact: Types::AllianceLeadContact
+      SENSITIVE: []
+    end
+
+    class PutProfileVisibilityRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor visibility: ("PRIVATE" | "PUBLIC")
+      SENSITIVE: []
+    end
+
+    class PutProfileVisibilityResponse
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor visibility: ("PRIVATE" | "PUBLIC")
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegistrantVerificationDetails < Aws::EmptyStructure
+    end
+
+    class RegistrantVerificationResponse
+      attr_accessor completion_url: ::String
+      attr_accessor completion_url_expires_at: ::Time
+      SENSITIVE: []
+    end
+
+    class RejectConnectionInvitationRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class RejectConnectionInvitationResponse
+      attr_accessor catalog: ::String
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor connection_id: ::String
+      attr_accessor connection_type: ("OPPORTUNITY_COLLABORATION" | "SUBSIDIARY")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor expires_at: ::Time
+      attr_accessor other_participant_identifier: ::String
+      attr_accessor participant_type: ("SENDER" | "RECEIVER")
+      attr_accessor status: ("PENDING" | "ACCEPTED" | "REJECTED" | "CANCELED" | "EXPIRED")
+      attr_accessor invitation_message: ::String
+      attr_accessor inviter_email: ::String
+      attr_accessor inviter_name: ::String
+      SENSITIVE: [:inviter_name]
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor reason: ("PARTNER_NOT_FOUND" | "PARTNER_PROFILE_NOT_FOUND" | "PARTNER_PROFILE_TASK_NOT_FOUND" | "PARTNER_DOMAIN_NOT_FOUND" | "SENDER_PROFILE_NOT_FOUND" | "RECEIVER_PROFILE_NOT_FOUND" | "CONNECTION_INVITATION_NOT_FOUND" | "CONNECTION_NOT_FOUND" | "VERIFICATION_NOT_FOUND")
+      SENSITIVE: []
+    end
+
+    class SellerProfileSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class SendEmailVerificationCodeRequest
+      attr_accessor catalog: ::String
+      attr_accessor email: ::String
+      SENSITIVE: []
+    end
+
+    class SendEmailVerificationCodeResponse < Aws::EmptyStructure
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor reason: ("LIMIT_EXCEEDED_NUMBER_OF_EMAIL" | "LIMIT_EXCEEDED_NUMBER_OF_DOMAIN")
+      SENSITIVE: []
+    end
+
+    class StartProfileUpdateTaskRequest
+      attr_accessor catalog: ::String
+      attr_accessor identifier: ::String
+      attr_accessor client_token: ::String
+      attr_accessor task_details: Types::TaskDetails
+      SENSITIVE: []
+    end
+
+    class StartProfileUpdateTaskResponse
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor task_id: ::String
+      attr_accessor task_details: Types::TaskDetails
+      attr_accessor started_at: ::Time
+      attr_accessor status: ("IN_PROGRESS" | "CANCELED" | "SUCCEEDED" | "FAILED")
+      attr_accessor ended_at: ::Time
+      attr_accessor error_detail_list: ::Array[Types::ErrorDetail]
+      SENSITIVE: []
+    end
+
+    class StartVerificationRequest
+      attr_accessor client_token: ::String
+      attr_accessor verification_details: Types::VerificationDetails
+      SENSITIVE: []
+    end
+
+    class StartVerificationResponse
+      attr_accessor verification_type: ("BUSINESS_VERIFICATION" | "REGISTRANT_VERIFICATION")
+      attr_accessor verification_status: ("PENDING_CUSTOMER_ACTION" | "IN_PROGRESS" | "FAILED" | "SUCCEEDED" | "REJECTED")
+      attr_accessor verification_status_reason: ::String
+      attr_accessor verification_response_details: Types::VerificationResponseDetails
+      attr_accessor started_at: ::Time
+      attr_accessor completed_at: ::Time
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TaskDetails
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor website_url: ::String
+      attr_accessor logo_url: ::String
+      attr_accessor primary_solution_type: ("SOFTWARE_PRODUCTS" | "CONSULTING_SERVICES" | "PROFESSIONAL_SERVICES" | "MANAGED_SERVICES" | "HARDWARE_PRODUCTS" | "COMMUNICATION_SERVICES" | "VALUE_ADDED_RESALE_AWS_SERVICES" | "TRAINING_SERVICES")
+      attr_accessor industry_segments: ::Array[("AGRICULTURE_MINING" | "BIOTECHNOLOGY" | "BUSINESS_CONSUMER_SERVICES" | "BUSINESS_SERV" | "COMMUNICATIONS" | "COMPUTER_HARDWARE" | "COMPUTERS_ELECTRONICS" | "COMPUTER_SOFTWARE" | "CONSUMER_GOODS" | "CONSUMER_RELATED" | "EDUCATION" | "ENERGY_UTILITIES" | "FINANCIAL_SERVICES" | "GAMING" | "GOVERNMENT" | "GOVERNMENT_EDUCATION_PUBLIC_SERVICES" | "HEALTHCARE" | "HEALTHCARE_PHARMACEUTICALS_BIOTECH" | "INDUSTRIAL_ENERGY" | "INTERNET_SPECIFIC" | "LIFE_SCIENCES" | "MANUFACTURING" | "MEDIA_ENTERTAINMENT_LEISURE" | "MEDIA_ENTERTAINMENT" | "MEDICAL_HEALTH" | "NON_PROFIT_ORGANIZATION" | "OTHER" | "PROFESSIONAL_SERVICES" | "REAL_ESTATE_CONSTRUCTION" | "RETAIL" | "RETAIL_WHOLESALE_DISTRIBUTION" | "SEMICONDUCTOR_ELECTR" | "SOFTWARE_INTERNET" | "TELECOMMUNICATIONS" | "TRANSPORTATION_LOGISTICS" | "TRAVEL_HOSPITALITY" | "WHOLESALE_DISTRIBUTION")]
+      attr_accessor translation_source_locale: ::String
+      attr_accessor localized_contents: ::Array[Types::LocalizedContent]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateConnectionPreferencesRequest
+      attr_accessor catalog: ::String
+      attr_accessor revision: ::Integer
+      attr_accessor access_type: ("ALLOW_ALL" | "DENY_ALL" | "ALLOW_BY_DEFAULT_DENY_SOME")
+      attr_accessor excluded_participant_identifiers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateConnectionPreferencesResponse
+      attr_accessor catalog: ::String
+      attr_accessor arn: ::String
+      attr_accessor access_type: ("ALLOW_ALL" | "DENY_ALL" | "ALLOW_BY_DEFAULT_DENY_SOME")
+      attr_accessor excluded_participant_ids: ::Array[::String]
+      attr_accessor updated_at: ::Time
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class ValidationError
+      attr_accessor field_validation_error: Types::FieldValidationError
+      attr_accessor business_validation_error: Types::BusinessValidationError
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class FieldValidationError < ValidationError
+      end
+      class BusinessValidationError < ValidationError
+      end
+      class Unknown < ValidationError
+      end
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("REQUEST_VALIDATION_FAILED" | "BUSINESS_VALIDATION_FAILED")
+      attr_accessor error_details: ::Array[Types::ValidationError]
+      SENSITIVE: []
+    end
+
+    class VerificationDetails
+      attr_accessor business_verification_details: Types::BusinessVerificationDetails
+      attr_accessor registrant_verification_details: Types::RegistrantVerificationDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class BusinessVerificationDetails < VerificationDetails
+      end
+      class RegistrantVerificationDetails < VerificationDetails
+      end
+      class Unknown < VerificationDetails
+      end
+    end
+
+    class VerificationResponseDetails
+      attr_accessor business_verification_response: Types::BusinessVerificationResponse
+      attr_accessor registrant_verification_response: Types::RegistrantVerificationResponse
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class BusinessVerificationResponse < VerificationResponseDetails
+      end
+      class RegistrantVerificationResponse < VerificationResponseDetails
+      end
+      class Unknown < VerificationResponseDetails
+      end
+    end
+  end
+end

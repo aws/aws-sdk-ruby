@@ -766,6 +766,83 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Represents an item in the catalog with its complete set of attributes
+    # and metadata.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the catalog item.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The display name of the catalog item.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The product code or SKU of the catalog item.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type classification of the catalog item.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   The category to which the catalog item belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A detailed description of the catalog item.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_information
+    #   Supplementary information about the catalog item beyond the basic
+    #   description.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_link
+    #   The URL link to the item's image.
+    #   @return [String]
+    #
+    # @!attribute [rw] link
+    #   The URL link to the item's detailed page or external resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the catalog item was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the catalog item was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] price
+    #   The price of the catalog item.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   Additional attributes or properties associated with the catalog item
+    #   stored as key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CatalogItem AWS API Documentation
+    #
+    class CatalogItem < Struct.new(
+      :id,
+      :name,
+      :code,
+      :type,
+      :category,
+      :description,
+      :additional_information,
+      :image_link,
+      :link,
+      :created_at,
+      :updated_at,
+      :price,
+      :attributes)
+      SENSITIVE = [:id, :name, :code, :type, :category, :description, :additional_information, :image_link, :link, :price, :attributes]
+      include Aws::Structure
+    end
+
     # An object to override the original condition block of a calculated
     # attribute.
     #
@@ -1227,6 +1304,10 @@ module Aws::CustomerProfiles
     #   download the results from S3.
     #   @return [Types::RuleBasedMatchingRequest]
     #
+    # @!attribute [rw] data_store
+    #   Set to true to enabled data store for this domain.
+    #   @return [Types::DataStoreRequest]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource.
@@ -1241,6 +1322,7 @@ module Aws::CustomerProfiles
       :dead_letter_queue_url,
       :matching,
       :rule_based_matching,
+      :data_store,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1294,6 +1376,10 @@ module Aws::CustomerProfiles
     #   download the results from S3.
     #   @return [Types::RuleBasedMatchingResponse]
     #
+    # @!attribute [rw] data_store
+    #   The data store.
+    #   @return [Types::DataStoreResponse]
+    #
     # @!attribute [rw] created_at
     #   The timestamp of when the domain was created.
     #   @return [Time]
@@ -1316,6 +1402,7 @@ module Aws::CustomerProfiles
       :dead_letter_queue_url,
       :matching,
       :rule_based_matching,
+      :data_store,
       :created_at,
       :last_updated_at,
       :tags)
@@ -1692,6 +1779,62 @@ module Aws::CustomerProfiles
     #   The unique name of the domain.
     #   @return [String]
     #
+    # @!attribute [rw] recommender_name
+    #   The name of the recommender.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommender_recipe_name
+    #   The name of the recommeder recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommender_config
+    #   The recommender configuration.
+    #   @return [Types::RecommenderConfig]
+    #
+    # @!attribute [rw] description
+    #   The description of the domain object type.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateRecommenderRequest AWS API Documentation
+    #
+    class CreateRecommenderRequest < Struct.new(
+      :domain_name,
+      :recommender_name,
+      :recommender_recipe_name,
+      :recommender_config,
+      :description,
+      :tags)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommender_arn
+    #   The ARN of the recommender
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateRecommenderResponse AWS API Documentation
+    #
+    class CreateRecommenderResponse < Struct.new(
+      :recommender_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
     # @!attribute [rw] segment_definition_name
     #   The unique name of the segment definition.
     #   @return [String]
@@ -1709,6 +1852,10 @@ module Aws::CustomerProfiles
     #   along with their respective relationship.
     #   @return [Types::SegmentGroup]
     #
+    # @!attribute [rw] segment_sql_query
+    #   The segment SQL query.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource.
@@ -1722,8 +1869,9 @@ module Aws::CustomerProfiles
       :display_name,
       :description,
       :segment_groups,
+      :segment_sql_query,
       :tags)
-      SENSITIVE = [:description, :segment_groups]
+      SENSITIVE = [:description, :segment_groups, :segment_sql_query]
       include Aws::Structure
     end
 
@@ -1773,12 +1921,17 @@ module Aws::CustomerProfiles
     #   The segment query for calculating a segment estimate.
     #   @return [Types::SegmentGroupStructure]
     #
+    # @!attribute [rw] segment_sql_query
+    #   The segment SQL query.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateSegmentEstimateRequest AWS API Documentation
     #
     class CreateSegmentEstimateRequest < Struct.new(
       :domain_name,
-      :segment_query)
-      SENSITIVE = []
+      :segment_query,
+      :segment_sql_query)
+      SENSITIVE = [:segment_sql_query]
       include Aws::Structure
     end
 
@@ -1909,6 +2062,40 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # The data store request.
+    #
+    # @!attribute [rw] enabled
+    #   Enabled: Set to true to enabled data store for this domain.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DataStoreRequest AWS API Documentation
+    #
+    class DataStoreRequest < Struct.new(
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data store response.
+    #
+    # @!attribute [rw] enabled
+    #   True if data store is enabled for this domain
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] readiness
+    #   Information indicating if the Calculated Attribute is ready for use
+    #   by confirming all historical data has been processed and reflected.
+    #   @return [Types::Readiness]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DataStoreResponse AWS API Documentation
+    #
+    class DataStoreResponse < Struct.new(
+      :enabled,
+      :readiness)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Object that segments on various Customer Profile's date fields.
     #
     # @!attribute [rw] dimension_type
@@ -1977,6 +2164,27 @@ module Aws::CustomerProfiles
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_type_name
+    #   The unique name of the domain object type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteDomainObjectTypeRequest AWS API Documentation
+    #
+    class DeleteDomainObjectTypeRequest < Struct.new(
+      :domain_name,
+      :object_type_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteDomainObjectTypeResponse AWS API Documentation
+    #
+    class DeleteDomainObjectTypeResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] domain_name
     #   The unique name of the domain.
@@ -2222,6 +2430,27 @@ module Aws::CustomerProfiles
     #   The unique name of the domain.
     #   @return [String]
     #
+    # @!attribute [rw] recommender_name
+    #   The recommender name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteRecommenderRequest AWS API Documentation
+    #
+    class DeleteRecommenderRequest < Struct.new(
+      :domain_name,
+      :recommender_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteRecommenderResponse AWS API Documentation
+    #
+    class DeleteRecommenderResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
     # @!attribute [rw] segment_definition_name
     #   The unique name of the segment definition.
     #   @return [String]
@@ -2379,6 +2608,75 @@ module Aws::CustomerProfiles
       class Unknown < Dimension; end
     end
 
+    # The standard domain object type.
+    #
+    # @!attribute [rw] source
+    #   The expression that defines how to extract the field value from the
+    #   source object.&gt;
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The expression that defines where the field value should be placed
+    #   in the standard domain object.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   The content type of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_type
+    #   The semantic meaning of the field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DomainObjectTypeField AWS API Documentation
+    #
+    class DomainObjectTypeField < Struct.new(
+      :source,
+      :target,
+      :content_type,
+      :feature_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents an item in the list of domain object types, containing
+    # basic information about a specific object type within a domain.
+    #
+    # @!attribute [rw] object_type_name
+    #   The name that identifies the object type within the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description explaining the purpose and characteristics of this
+    #   object type.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the domain object type was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp of when the domain object type was most recently
+    #   edited.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DomainObjectTypesListItem AWS API Documentation
+    #
+    class DomainObjectTypesListItem < Struct.new(
+      :object_type_name,
+      :description,
+      :created_at,
+      :last_updated_at,
+      :tags)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
     # Usage-specific statistics about the domain.
     #
     # @!attribute [rw] profile_count
@@ -2426,6 +2724,27 @@ module Aws::CustomerProfiles
     class EngagementPreferences < Struct.new(
       :phone,
       :email)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration parameters for events in the personalization system.
+    #
+    # @!attribute [rw] event_type
+    #   The type of event being tracked (e.g., 'click', 'purchase',
+    #   'view').
+    #   @return [String]
+    #
+    # @!attribute [rw] event_value_threshold
+    #   The minimum value threshold that an event must meet to be considered
+    #   valid.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/EventParameters AWS API Documentation
+    #
+    class EventParameters < Struct.new(
+      :event_type,
+      :event_value_threshold)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2598,6 +2917,22 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings that define how events are processed and
+    # tracked.
+    #
+    # @!attribute [rw] event_parameters_list
+    #   A list of event parameters configurations that specify how different
+    #   event types should be handled.
+    #   @return [Array<Types::EventParameters>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/EventsConfig AWS API Documentation
+    #
+    class EventsConfig < Struct.new(
+      :event_parameters_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3230,6 +3565,69 @@ module Aws::CustomerProfiles
     #   The unique name of the domain.
     #   @return [String]
     #
+    # @!attribute [rw] object_type_name
+    #   The unique name of the domain object type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetDomainObjectTypeRequest AWS API Documentation
+    #
+    class GetDomainObjectTypeRequest < Struct.new(
+      :domain_name,
+      :object_type_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] object_type_name
+    #   The unique name of the domain object type.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the domain object type.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_key
+    #   The customer provided KMS key used to encrypt this type of domain
+    #   object.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   A map of field names to their corresponding domain object type field
+    #   definitions.
+    #   @return [Hash<String,Types::DomainObjectTypeField>]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the domain object type was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp of when the domain object type was most recently
+    #   edited.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetDomainObjectTypeResponse AWS API Documentation
+    #
+    class GetDomainObjectTypeResponse < Struct.new(
+      :object_type_name,
+      :description,
+      :encryption_key,
+      :fields,
+      :created_at,
+      :last_updated_at,
+      :tags)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetDomainRequest AWS API Documentation
     #
     class GetDomainRequest < Struct.new(
@@ -3290,6 +3688,10 @@ module Aws::CustomerProfiles
     #   download the results from S3.
     #   @return [Types::RuleBasedMatchingResponse]
     #
+    # @!attribute [rw] data_store
+    #   True if data store is enabled for this domain.
+    #   @return [Types::DataStoreResponse]
+    #
     # @!attribute [rw] created_at
     #   The timestamp of when the domain was created.
     #   @return [Time]
@@ -3313,6 +3715,7 @@ module Aws::CustomerProfiles
       :stats,
       :matching,
       :rule_based_matching,
+      :data_store,
       :created_at,
       :last_updated_at,
       :tags)
@@ -3632,6 +4035,12 @@ module Aws::CustomerProfiles
     #   associated with the integration.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] scope
+    #   Specifies whether the integration applies to profile level data
+    #   (associated with profiles) or domain level data (not associated with
+    #   any specific profile). The default value is PROFILE.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetIntegrationResponse AWS API Documentation
     #
     class GetIntegrationResponse < Struct.new(
@@ -3645,7 +4054,8 @@ module Aws::CustomerProfiles
       :workflow_id,
       :is_unstructured,
       :role_arn,
-      :event_trigger_names)
+      :event_trigger_names,
+      :scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3698,6 +4108,115 @@ module Aws::CustomerProfiles
       :match_generation_date,
       :potential_matches,
       :matches)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains percentile statistics for object type attributes.
+    #
+    # @!attribute [rw] p5
+    #   The 5th percentile value of the attribute.
+    #   @return [Float]
+    #
+    # @!attribute [rw] p25
+    #   The 25th percentile value of the attribute.
+    #   @return [Float]
+    #
+    # @!attribute [rw] p50
+    #   The 50th percentile (median) value of the attribute.
+    #   @return [Float]
+    #
+    # @!attribute [rw] p75
+    #   The 75th percentile value of the attribute.
+    #   @return [Float]
+    #
+    # @!attribute [rw] p95
+    #   The 95th percentile value of the attribute.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetObjectTypeAttributeStatisticsPercentiles AWS API Documentation
+    #
+    class GetObjectTypeAttributeStatisticsPercentiles < Struct.new(
+      :p5,
+      :p25,
+      :p50,
+      :p75,
+      :p95)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_type_name
+    #   The unique name of the domain object type.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_name
+    #   The attribute name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetObjectTypeAttributeStatisticsRequest AWS API Documentation
+    #
+    class GetObjectTypeAttributeStatisticsRequest < Struct.new(
+      :domain_name,
+      :object_type_name,
+      :attribute_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] statistics
+    #   The statistics.
+    #   @return [Types::GetObjectTypeAttributeStatisticsStats]
+    #
+    # @!attribute [rw] calculated_at
+    #   Time when this statistics was calculated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetObjectTypeAttributeStatisticsResponse AWS API Documentation
+    #
+    class GetObjectTypeAttributeStatisticsResponse < Struct.new(
+      :statistics,
+      :calculated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Statistical measurements for object type attributes including basic
+    # statistics and percentiles.
+    #
+    # @!attribute [rw] maximum
+    #   The maximum value found in the attribute dataset.
+    #   @return [Float]
+    #
+    # @!attribute [rw] minimum
+    #   The minimum value found in the attribute dataset.
+    #   @return [Float]
+    #
+    # @!attribute [rw] average
+    #   The arithmetic mean of the attribute values.
+    #   @return [Float]
+    #
+    # @!attribute [rw] standard_deviation
+    #   The standard deviation of the attribute values, measuring their
+    #   spread around the mean.
+    #   @return [Float]
+    #
+    # @!attribute [rw] percentiles
+    #   Percentile distribution statistics for the attribute values.
+    #   @return [Types::GetObjectTypeAttributeStatisticsPercentiles]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetObjectTypeAttributeStatisticsStats AWS API Documentation
+    #
+    class GetObjectTypeAttributeStatisticsStats < Struct.new(
+      :maximum,
+      :minimum,
+      :average,
+      :standard_deviation,
+      :percentiles)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3942,6 +4461,144 @@ module Aws::CustomerProfiles
     #   The unique name of the domain.
     #   @return [String]
     #
+    # @!attribute [rw] profile_id
+    #   The unique identifier of the profile for which to retrieve
+    #   recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommender_name
+    #   The unique name of the recommender.
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   The contextual metadata used to provide dynamic runtime information
+    #   to tailor recommendations.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of recommendations to return. The default value
+    #   is 10.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetProfileRecommendationsRequest AWS API Documentation
+    #
+    class GetProfileRecommendationsRequest < Struct.new(
+      :domain_name,
+      :profile_id,
+      :recommender_name,
+      :context,
+      :max_results)
+      SENSITIVE = [:context]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommendations
+    #   List of recommendations generated by the recommender.
+    #   @return [Array<Types::Recommendation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetProfileRecommendationsResponse AWS API Documentation
+    #
+    class GetProfileRecommendationsResponse < Struct.new(
+      :recommendations)
+      SENSITIVE = [:recommendations]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommender_name
+    #   The name of the recommender.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_metrics_count
+    #   The number of training metrics to retrieve for the recommender.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetRecommenderRequest AWS API Documentation
+    #
+    class GetRecommenderRequest < Struct.new(
+      :domain_name,
+      :recommender_name,
+      :training_metrics_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommender_name
+    #   The name of the recommender.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommender_recipe_name
+    #   The name of the recipe used by the recommender to generate
+    #   recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommender_config
+    #   The configuration settings for the recommender, including parameters
+    #   and settings that define its behavior.
+    #   @return [Types::RecommenderConfig]
+    #
+    # @!attribute [rw] description
+    #   A detailed description of the recommender providing information
+    #   about its purpose and functionality.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the recommender, indicating whether it is
+    #   active, creating, updating, or in another state.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp of when the recommender was edited.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the recommender was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the recommender fails, provides the reason for the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_recommender_update
+    #   Information about the most recent update performed on the
+    #   recommender, including status and timestamp.
+    #   @return [Types::RecommenderUpdate]
+    #
+    # @!attribute [rw] training_metrics
+    #   A set of metrics that provide information about the recommender's
+    #   training performance and accuracy.
+    #   @return [Array<Types::TrainingMetrics>]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetRecommenderResponse AWS API Documentation
+    #
+    class GetRecommenderResponse < Struct.new(
+      :recommender_name,
+      :recommender_recipe_name,
+      :recommender_config,
+      :description,
+      :status,
+      :last_updated_at,
+      :created_at,
+      :failure_reason,
+      :latest_recommender_update,
+      :training_metrics,
+      :tags)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
     # @!attribute [rw] segment_definition_name
     #   The unique name of the segment definition.
     #   @return [String]
@@ -3984,6 +4641,18 @@ module Aws::CustomerProfiles
     #   resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] segment_sql_query
+    #   The segment SQL query.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_type
+    #   The segment type.
+    #
+    #   Classic : Segments created using traditional SegmentGroup structure
+    #
+    #   Enhanced : Segments created using SQL queries
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSegmentDefinitionResponse AWS API Documentation
     #
     class GetSegmentDefinitionResponse < Struct.new(
@@ -3993,8 +4662,10 @@ module Aws::CustomerProfiles
       :segment_groups,
       :segment_definition_arn,
       :created_at,
-      :tags)
-      SENSITIVE = [:description, :segment_groups]
+      :tags,
+      :segment_sql_query,
+      :segment_type)
+      SENSITIVE = [:description, :segment_groups, :segment_sql_query]
       include Aws::Structure
     end
 
@@ -4089,12 +4760,18 @@ module Aws::CustomerProfiles
     #   for the request.
     #   @return [Array<Types::ProfileQueryFailures>]
     #
+    # @!attribute [rw] last_computed_at
+    #   The timestamp indicating when the segment membership was last
+    #   computed or updated.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSegmentMembershipResponse AWS API Documentation
     #
     class GetSegmentMembershipResponse < Struct.new(
       :segment_definition_name,
       :profiles,
-      :failures)
+      :failures,
+      :last_computed_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5068,6 +5745,47 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of domain object types returned per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from the previous call to
+    #   ListDomainObjectTypes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListDomainObjectTypesRequest AWS API Documentation
+    #
+    class ListDomainObjectTypesRequest < Struct.new(
+      :domain_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The list of domain object types.
+    #   @return [Array<Types::DomainObjectTypesListItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from the previous call to
+    #   ListDomainObjectTypes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListDomainObjectTypesResponse AWS API Documentation
+    #
+    class ListDomainObjectTypesResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = [:items]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   The pagination token from the previous ListDomain API call.
     #   @return [String]
@@ -5241,7 +5959,7 @@ module Aws::CustomerProfiles
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   The timestamp of when the domain was most recently edited.
+    #   The timestamp of when the integration was most recently edited.
     #   @return [Time]
     #
     # @!attribute [rw] tags
@@ -5279,6 +5997,10 @@ module Aws::CustomerProfiles
     #   integration.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] scope
+    #   The scope or boundary of the integration item's applicability.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListIntegrationItem AWS API Documentation
     #
     class ListIntegrationItem < Struct.new(
@@ -5292,7 +6014,8 @@ module Aws::CustomerProfiles
       :workflow_id,
       :is_unstructured,
       :role_arn,
-      :event_trigger_names)
+      :event_trigger_names,
+      :scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5357,6 +6080,80 @@ module Aws::CustomerProfiles
     class ListObjectTypeAttributeItem < Struct.new(
       :attribute_name,
       :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents an item in the list of object type attribute values with
+    # its associated metadata.
+    #
+    # @!attribute [rw] value
+    #   The actual value of the object type attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp of when the object type attribute value was most
+    #   recently updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListObjectTypeAttributeValuesItem AWS API Documentation
+    #
+    class ListObjectTypeAttributeValuesItem < Struct.new(
+      :value,
+      :last_updated_at)
+      SENSITIVE = [:value]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token from the previous call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects returned per page. Valid Range:
+    #   Minimum value of 1. Maximum value of 100. If not provided default as
+    #   100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_type_name
+    #   The unique name of the domain object type.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_name
+    #   The attribute name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListObjectTypeAttributeValuesRequest AWS API Documentation
+    #
+    class ListObjectTypeAttributeValuesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :domain_name,
+      :object_type_name,
+      :attribute_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of unique attribute values sorted on the basis of
+    #   LastUpdatedAt.
+    #   @return [Array<Types::ListObjectTypeAttributeValuesItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from the previous call to call
+    #   ListObjectTypeAttributeValues.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListObjectTypeAttributeValuesResponse AWS API Documentation
+    #
+    class ListObjectTypeAttributeValuesResponse < Struct.new(
+      :items,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5488,7 +6285,8 @@ module Aws::CustomerProfiles
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_at
-    #   The timestamp of when the domain was most recently edited.
+    #   The timestamp of when the profile object type was most recently
+    #   edited.
     #   @return [Time]
     #
     # @!attribute [rw] max_profile_object_count
@@ -5693,6 +6491,85 @@ module Aws::CustomerProfiles
     class ListProfileObjectsResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of recommender recipes to return in the response.
+    #   The default value is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token received from a previous ListRecommenderRecipes call to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListRecommenderRecipesRequest AWS API Documentation
+    #
+    class ListRecommenderRecipesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to retrieve the next page of results. Null if there are no
+    #   more results to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommender_recipes
+    #   A list of available recommender recipes and their properties.
+    #   @return [Array<Types::RecommenderRecipe>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListRecommenderRecipesResponse AWS API Documentation
+    #
+    class ListRecommenderRecipesResponse < Struct.new(
+      :next_token,
+      :recommender_recipes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of recommenders to return in the response. The
+    #   default value is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token received from a previous ListRecommenders call to retrieve
+    #   the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListRecommendersRequest AWS API Documentation
+    #
+    class ListRecommendersRequest < Struct.new(
+      :domain_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to retrieve the next page of results. Null if there are no
+    #   more results to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommenders
+    #   A list of recommenders and their properties in the specified domain.
+    #   @return [Array<Types::RecommenderSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListRecommendersResponse AWS API Documentation
+    #
+    class ListRecommendersResponse < Struct.new(
+      :next_token,
+      :recommenders)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6763,6 +7640,92 @@ module Aws::CustomerProfiles
     #   The unique name of the domain.
     #   @return [String]
     #
+    # @!attribute [rw] object_type_name
+    #   The unique name of the domain object type.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the domain object type.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_key
+    #   The customer provided KMS key used to encrypt this type of domain
+    #   object.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   A map of field names to their corresponding domain object type field
+    #   definitions.
+    #   @return [Hash<String,Types::DomainObjectTypeField>]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutDomainObjectTypeRequest AWS API Documentation
+    #
+    class PutDomainObjectTypeRequest < Struct.new(
+      :domain_name,
+      :object_type_name,
+      :description,
+      :encryption_key,
+      :fields,
+      :tags)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] object_type_name
+    #   The unique name of the domain object type.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the domain object type.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_key
+    #   The customer provided KMS key used to encrypt this type of domain
+    #   object.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   A map of field names to their corresponding domain object type field
+    #   definitions.
+    #   @return [Hash<String,Types::DomainObjectTypeField>]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the domain object type was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp of when the domain object type was most recently
+    #   edited.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutDomainObjectTypeResponse AWS API Documentation
+    #
+    class PutDomainObjectTypeResponse < Struct.new(
+      :object_type_name,
+      :description,
+      :encryption_key,
+      :fields,
+      :created_at,
+      :last_updated_at,
+      :tags)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
     # @!attribute [rw] uri
     #   The URI of the S3 bucket or any other type of data source.
     #   @return [String]
@@ -6770,16 +7733,6 @@ module Aws::CustomerProfiles
     # @!attribute [rw] object_type_name
     #   The name of the profile object type.
     #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   The tags used to organize, track, or control access for this
-    #   resource.
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] flow_definition
-    #   The configuration that controls how Customer Profiles retrieves data
-    #   from the source.
-    #   @return [Types::FlowDefinition]
     #
     # @!attribute [rw] object_type_names
     #   A map in which each key is an event type from an external
@@ -6791,6 +7744,16 @@ module Aws::CustomerProfiles
     #   `ShopifyCreateOrders`, and `ShopifyUpdatedOrders`.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] flow_definition
+    #   The configuration that controls how Customer Profiles retrieves data
+    #   from the source.
+    #   @return [Types::FlowDefinition]
+    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role. The Integration uses
     #   this role to make Customer Profiles requests on your behalf.
@@ -6801,17 +7764,24 @@ module Aws::CustomerProfiles
     #   integration.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] scope
+    #   Specifies whether the integration applies to profile level data
+    #   (associated with profiles) or domain level data (not associated with
+    #   any specific profile). The default value is PROFILE.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutIntegrationRequest AWS API Documentation
     #
     class PutIntegrationRequest < Struct.new(
       :domain_name,
       :uri,
       :object_type_name,
+      :object_type_names,
       :tags,
       :flow_definition,
-      :object_type_names,
       :role_arn,
-      :event_trigger_names)
+      :event_trigger_names,
+      :scope)
       SENSITIVE = [:flow_definition]
       include Aws::Structure
     end
@@ -6872,6 +7842,12 @@ module Aws::CustomerProfiles
     #   associated with the integration.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] scope
+    #   Specifies whether the integration applies to profile level data
+    #   (associated with profiles) or domain level data (not associated with
+    #   any specific profile). The default value is PROFILE.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutIntegrationResponse AWS API Documentation
     #
     class PutIntegrationResponse < Struct.new(
@@ -6885,7 +7861,8 @@ module Aws::CustomerProfiles
       :workflow_id,
       :is_unstructured,
       :role_arn,
-      :event_trigger_names)
+      :event_trigger_names,
+      :scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7191,6 +8168,167 @@ module Aws::CustomerProfiles
     class Readiness < Struct.new(
       :progress_percentage,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a single recommendation generated by the recommender
+    # system.
+    #
+    # @!attribute [rw] catalog_item
+    #   The catalog item being recommended, including its complete details
+    #   and attributes.
+    #   @return [Types::CatalogItem]
+    #
+    # @!attribute [rw] score
+    #   Recommendation Score between 0 and 1.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/Recommendation AWS API Documentation
+    #
+    class Recommendation < Struct.new(
+      :catalog_item,
+      :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings that define the behavior and parameters of a
+    # recommender.
+    #
+    # @!attribute [rw] events_config
+    #   Configuration settings for how the recommender processes and uses
+    #   events.
+    #   @return [Types::EventsConfig]
+    #
+    # @!attribute [rw] training_frequency
+    #   How often the recommender should retrain its model with new data.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/RecommenderConfig AWS API Documentation
+    #
+    class RecommenderConfig < Struct.new(
+      :events_config,
+      :training_frequency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the algorithm and approach used to generate recommendations.
+    #
+    # @!attribute [rw] name
+    #   The name of the recommender recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the recommender recipe's purpose and
+    #   functionality.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/RecommenderRecipe AWS API Documentation
+    #
+    class RecommenderRecipe < Struct.new(
+      :name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of a recommender's configuration and current
+    # state.
+    #
+    # @!attribute [rw] recommender_name
+    #   The name of the recommender.
+    #   @return [String]
+    #
+    # @!attribute [rw] recipe_name
+    #   The name of the recipe used by this recommender.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommender_config
+    #   The configuration settings applied to this recommender.
+    #   @return [Types::RecommenderConfig]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the recommender was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A description of the recommender's purpose and characteristics.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current operational status of the recommender.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp of when the recommender was edited.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the recommender is in a failed state, provides the reason for the
+    #   failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_recommender_update
+    #   Information about the most recent update performed on the
+    #   recommender, including its status and timing.
+    #   @return [Types::RecommenderUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/RecommenderSummary AWS API Documentation
+    #
+    class RecommenderSummary < Struct.new(
+      :recommender_name,
+      :recipe_name,
+      :recommender_config,
+      :created_at,
+      :description,
+      :status,
+      :last_updated_at,
+      :tags,
+      :failure_reason,
+      :latest_recommender_update)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # Contains information about an update operation performed on a
+    # recommender.
+    #
+    # @!attribute [rw] recommender_config
+    #   The updated configuration settings applied to the recommender during
+    #   this update.
+    #   @return [Types::RecommenderConfig]
+    #
+    # @!attribute [rw] status
+    #   The current status of the recommender update operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when this recommender update was initiated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp of when the recommender was edited.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the update operation failed, provides the reason for the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/RecommenderUpdate AWS API Documentation
+    #
+    class RecommenderUpdate < Struct.new(
+      :recommender_config,
+      :status,
+      :created_at,
+      :last_updated_at,
+      :failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7647,6 +8785,14 @@ module Aws::CustomerProfiles
     #   The tags belonging to the segment definition.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] segment_type
+    #   The segment type.
+    #
+    #   Classic : Segments created using traditional SegmentGroup structure
+    #
+    #   Enhanced : Segments created using SQL queries
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SegmentDefinitionItem AWS API Documentation
     #
     class SegmentDefinitionItem < Struct.new(
@@ -7655,7 +8801,8 @@ module Aws::CustomerProfiles
       :description,
       :segment_definition_arn,
       :created_at,
-      :tags)
+      :tags,
+      :segment_type)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -7804,6 +8951,27 @@ module Aws::CustomerProfiles
     end
 
     # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommender_name
+    #   The name of the recommender to start.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/StartRecommenderRequest AWS API Documentation
+    #
+    class StartRecommenderRequest < Struct.new(
+      :domain_name,
+      :recommender_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/StartRecommenderResponse AWS API Documentation
+    #
+    class StartRecommenderResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_name
     #   The unique name of the domain containing the upload job to start.
     #   @return [String]
     #
@@ -7823,6 +8991,27 @@ module Aws::CustomerProfiles
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/StartUploadJobResponse AWS API Documentation
     #
     class StartUploadJobResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommender_name
+    #   The name of the recommender to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/StopRecommenderRequest AWS API Documentation
+    #
+    class StopRecommenderRequest < Struct.new(
+      :domain_name,
+      :recommender_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/StopRecommenderResponse AWS API Documentation
+    #
+    class StopRecommenderResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] domain_name
     #   The unique name of the domain containing the upload job to stop.
@@ -7933,6 +9122,27 @@ module Aws::CustomerProfiles
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metrics and performance indicators from the training of a
+    # recommender model.
+    #
+    # @!attribute [rw] time
+    #   The timestamp when these training metrics were recorded.
+    #   @return [Time]
+    #
+    # @!attribute [rw] metrics
+    #   A collection of performance metrics and statistics from the training
+    #   process.
+    #   @return [Hash<String,Float>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/TrainingMetrics AWS API Documentation
+    #
+    class TrainingMetrics < Struct.new(
+      :time,
+      :metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8328,6 +9538,10 @@ module Aws::CustomerProfiles
     #   download the results from S3.
     #   @return [Types::RuleBasedMatchingRequest]
     #
+    # @!attribute [rw] data_store
+    #   Set to true to enabled data store for this domain.
+    #   @return [Types::DataStoreRequest]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource.
@@ -8342,6 +9556,7 @@ module Aws::CustomerProfiles
       :dead_letter_queue_url,
       :matching,
       :rule_based_matching,
+      :data_store,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -8395,6 +9610,10 @@ module Aws::CustomerProfiles
     #   download the results from S3.
     #   @return [Types::RuleBasedMatchingResponse]
     #
+    # @!attribute [rw] data_store
+    #   The data store.
+    #   @return [Types::DataStoreResponse]
+    #
     # @!attribute [rw] created_at
     #   The timestamp of when the domain was created.
     #   @return [Time]
@@ -8417,6 +9636,7 @@ module Aws::CustomerProfiles
       :dead_letter_queue_url,
       :matching,
       :rule_based_matching,
+      :data_store,
       :created_at,
       :last_updated_at,
       :tags)
@@ -8679,6 +9899,46 @@ module Aws::CustomerProfiles
     #
     class UpdateProfileResponse < Struct.new(
       :profile_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommender_name
+    #   The name of the recommender to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new description to assign to the recommender.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommender_config
+    #   The new configuration settings to apply to the recommender,
+    #   including updated parameters and settings that define its behavior.
+    #   @return [Types::RecommenderConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/UpdateRecommenderRequest AWS API Documentation
+    #
+    class UpdateRecommenderRequest < Struct.new(
+      :domain_name,
+      :recommender_name,
+      :description,
+      :recommender_config)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommender_name
+    #   The name of the recommender that was updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/UpdateRecommenderResponse AWS API Documentation
+    #
+    class UpdateRecommenderResponse < Struct.new(
+      :recommender_name)
       SENSITIVE = []
       include Aws::Structure
     end

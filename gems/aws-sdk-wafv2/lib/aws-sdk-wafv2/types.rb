@@ -2257,11 +2257,18 @@ module Aws::WAFV2
     #   Amazon Web Services services][1] in the *Amazon Security Lake user
     #   guide*.
     #
+    #   The log scope `CLOUDWATCH_TELEMETRY_RULE_MANAGED` indicates a
+    #   configuration that is managed through Amazon CloudWatch Logs for
+    #   telemetry data collection and analysis. For information, see [What
+    #   is Amazon CloudWatch Logs ?][2] in the *Amazon CloudWatch Logs user
+    #   guide*.
+    #
     #   Default: `CUSTOMER`
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeleteLoggingConfigurationRequest AWS API Documentation
@@ -2649,6 +2656,27 @@ module Aws::WAFV2
       :label_namespace,
       :available_labels,
       :consumed_labels)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A WAF feature that is not supported by the CloudFront pricing plan
+    # associated with the web ACL.
+    #
+    # @!attribute [rw] feature
+    #   The name of the disallowed WAF feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] required_pricing_plan
+    #   The name of the CloudFront pricing plan required to use the WAF
+    #   feature.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DisallowedFeature AWS API Documentation
+    #
+    class DisallowedFeature < Struct.new(
+      :feature,
+      :required_pricing_plan)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3424,11 +3452,18 @@ module Aws::WAFV2
     #   Amazon Web Services services][1] in the *Amazon Security Lake user
     #   guide*.
     #
+    #   The log scope `CLOUDWATCH_TELEMETRY_RULE_MANAGED` indicates a
+    #   configuration that is managed through Amazon CloudWatch Logs for
+    #   telemetry data collection and analysis. For information, see [What
+    #   is Amazon CloudWatch Logs ?][2] in the *Amazon CloudWatch Logs user
+    #   guide*.
+    #
     #   Default: `CUSTOMER`
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetLoggingConfigurationRequest AWS API Documentation
@@ -5128,11 +5163,18 @@ module Aws::WAFV2
     #   Amazon Web Services services][1] in the *Amazon Security Lake user
     #   guide*.
     #
+    #   The log scope `CLOUDWATCH_TELEMETRY_RULE_MANAGED` indicates a
+    #   configuration that is managed through Amazon CloudWatch Logs for
+    #   telemetry data collection and analysis. For information, see [What
+    #   is Amazon CloudWatch Logs ?][2] in the *Amazon CloudWatch Logs user
+    #   guide*.
+    #
     #   Default: `CUSTOMER`
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListLoggingConfigurationsRequest AWS API Documentation
@@ -5689,11 +5731,18 @@ module Aws::WAFV2
     #   Amazon Web Services services][1] in the *Amazon Security Lake user
     #   guide*.
     #
+    #   The log scope `CLOUDWATCH_TELEMETRY_RULE_MANAGED` indicates a
+    #   configuration that is managed through Amazon CloudWatch Logs for
+    #   telemetry data collection and analysis. For information, see [What
+    #   is Amazon CloudWatch Logs ?][2] in the *Amazon CloudWatch Logs user
+    #   guide*.
+    #
     #   Default: `CUSTOMER`
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/LoggingConfiguration AWS API Documentation
@@ -10237,6 +10286,25 @@ module Aws::WAFV2
     #
     class WAFExpiredManagedRuleGroupVersionException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The operation failed because the specified WAF feature isn't
+    # supported by the CloudFront pricing plan associated with the web ACL.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] disallowed_features
+    #   The names of the disallowed WAF features.
+    #   @return [Array<Types::DisallowedFeature>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WAFFeatureNotIncludedInPricingPlanException AWS API Documentation
+    #
+    class WAFFeatureNotIncludedInPricingPlanException < Struct.new(
+      :message,
+      :disallowed_features)
       SENSITIVE = []
       include Aws::Structure
     end

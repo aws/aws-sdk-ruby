@@ -134,8 +134,8 @@ module Aws
                                         ],
                                         ?output_source_config: Array[
                                           {
-                                            output_s3_path: ::String,
-                                            kms_arn: ::String?
+                                            kms_arn: ::String?,
+                                            output_s3_path: ::String
                                           },
                                         ],
                                         id_mapping_techniques: {
@@ -242,15 +242,19 @@ module Aws
                                       ],
                                       output_source_config: Array[
                                         {
-                                          output_s3_path: ::String,
                                           kms_arn: ::String?,
+                                          output_s3_path: ::String?,
                                           output: Array[
                                             {
                                               name: ::String,
                                               hashed: bool?
                                             },
                                           ],
-                                          apply_normalization: bool?
+                                          apply_normalization: bool?,
+                                          customer_profiles_integration_config: {
+                                            domain_arn: ::String,
+                                            object_type_arn: ::String
+                                          }?
                                         },
                                       ],
                                       resolution_techniques: {
@@ -731,8 +735,8 @@ module Aws
                                         ],
                                         ?output_source_config: Array[
                                           {
-                                            output_s3_path: ::String,
-                                            kms_arn: ::String?
+                                            kms_arn: ::String?,
+                                            output_s3_path: ::String
                                           },
                                         ],
                                         id_mapping_techniques: {
@@ -834,15 +838,19 @@ module Aws
                                       ],
                                       output_source_config: Array[
                                         {
-                                          output_s3_path: ::String,
                                           kms_arn: ::String?,
+                                          output_s3_path: ::String?,
                                           output: Array[
                                             {
                                               name: ::String,
                                               hashed: bool?
                                             },
                                           ],
-                                          apply_normalization: bool?
+                                          apply_normalization: bool?,
+                                          customer_profiles_integration_config: {
+                                            domain_arn: ::String,
+                                            object_type_arn: ::String
+                                          }?
                                         },
                                       ],
                                       resolution_techniques: {

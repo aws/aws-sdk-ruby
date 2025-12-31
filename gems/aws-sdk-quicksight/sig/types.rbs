@@ -107,6 +107,21 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class AggregateOperation
+      attr_accessor alias: ::String
+      attr_accessor source: Types::TransformOperationSource
+      attr_accessor group_by_column_names: ::Array[::String]
+      attr_accessor aggregations: ::Array[Types::Aggregation]
+      SENSITIVE: []
+    end
+
+    class Aggregation
+      attr_accessor aggregation_function: Types::DataPrepAggregationFunction
+      attr_accessor new_column_name: ::String
+      attr_accessor new_column_id: ::String
+      SENSITIVE: []
+    end
+
     class AggregationFunction
       attr_accessor numerical_aggregation_function: Types::NumericalAggregationFunction
       attr_accessor categorical_aggregation_function: ("COUNT" | "DISTINCT_COUNT")
@@ -273,6 +288,20 @@ module Aws::QuickSight
 
     class AnonymousUserSnapshotJobResult
       attr_accessor file_groups: ::Array[Types::SnapshotJobResultFileGroup]
+      SENSITIVE: []
+    end
+
+    class AppendOperation
+      attr_accessor alias: ::String
+      attr_accessor first_source: Types::TransformOperationSource
+      attr_accessor second_source: Types::TransformOperationSource
+      attr_accessor appended_columns: ::Array[Types::AppendedColumn]
+      SENSITIVE: []
+    end
+
+    class AppendedColumn
+      attr_accessor column_name: ::String
+      attr_accessor new_column_id: ::String
       SENSITIVE: []
     end
 
@@ -834,6 +863,8 @@ module Aws::QuickSight
       attr_accessor value_axis: Types::AxisDisplayOptions
       attr_accessor value_label_options: Types::ChartAxisLabelOptions
       attr_accessor color_label_options: Types::ChartAxisLabelOptions
+      attr_accessor default_series_settings: Types::BarChartDefaultSeriesSettings
+      attr_accessor series: ::Array[Types::BarSeriesItem]
       attr_accessor legend: Types::LegendOptions
       attr_accessor data_labels: Types::DataLabelOptions
       attr_accessor tooltip: Types::TooltipOptions
@@ -843,8 +874,20 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class BarChartDefaultSeriesSettings
+      attr_accessor decal_settings: Types::DecalSettings
+      attr_accessor border_settings: Types::BorderSettings
+      SENSITIVE: []
+    end
+
     class BarChartFieldWells
       attr_accessor bar_chart_aggregated_field_wells: Types::BarChartAggregatedFieldWells
+      SENSITIVE: []
+    end
+
+    class BarChartSeriesSettings
+      attr_accessor decal_settings: Types::DecalSettings
+      attr_accessor border_settings: Types::BorderSettings
       SENSITIVE: []
     end
 
@@ -866,6 +909,12 @@ module Aws::QuickSight
       attr_accessor actions: ::Array[Types::VisualCustomAction]
       attr_accessor column_hierarchies: ::Array[Types::ColumnHierarchy]
       attr_accessor visual_content_alt_text: ::String
+      SENSITIVE: []
+    end
+
+    class BarSeriesItem
+      attr_accessor field_bar_series_item: Types::FieldBarSeriesItem
+      attr_accessor data_field_bar_series_item: Types::DataFieldBarSeriesItem
       SENSITIVE: []
     end
 
@@ -978,8 +1027,17 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class BorderSettings
+      attr_accessor border_visibility: ("HIDDEN" | "VISIBLE")
+      attr_accessor border_width: ::String
+      attr_accessor border_color: ::String
+      SENSITIVE: []
+    end
+
     class BorderStyle
+      attr_accessor color: ::String
       attr_accessor show: bool
+      attr_accessor width: ::String
       SENSITIVE: []
     end
 
@@ -1162,6 +1220,7 @@ module Aws::QuickSight
       attr_accessor chat_agent: ("DENY")
       attr_accessor create_chat_agents: ("DENY")
       attr_accessor research: ("DENY")
+      attr_accessor self_upgrade_user_role: ("DENY")
       SENSITIVE: []
     end
 
@@ -1181,6 +1240,13 @@ module Aws::QuickSight
       attr_accessor new_column_type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME")
       attr_accessor sub_type: ("FLOAT" | "FIXED")
       attr_accessor format: ::String
+      SENSITIVE: []
+    end
+
+    class CastColumnTypesOperation
+      attr_accessor alias: ::String
+      attr_accessor source: Types::TransformOperationSource
+      attr_accessor cast_column_type_operations: ::Array[Types::CastColumnTypeOperation]
       SENSITIVE: []
     end
 
@@ -1304,6 +1370,7 @@ module Aws::QuickSight
       attr_accessor format_configuration: Types::FormatConfiguration
       attr_accessor role: ("DIMENSION" | "MEASURE")
       attr_accessor colors_configuration: Types::ColorsConfiguration
+      attr_accessor decal_settings_configuration: Types::DecalSettingsConfiguration
       SENSITIVE: []
     end
 
@@ -1367,6 +1434,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ColumnToUnpivot
+      attr_accessor column_name: ::String
+      attr_accessor new_value: ::String
+      SENSITIVE: []
+    end
+
     class ColumnTooltipItem
       attr_accessor column: Types::ColumnIdentifier
       attr_accessor label: ::String
@@ -1396,6 +1469,8 @@ module Aws::QuickSight
       attr_accessor secondary_y_axis_label_options: Types::ChartAxisLabelOptions
       attr_accessor single_axis_options: Types::SingleAxisOptions
       attr_accessor color_label_options: Types::ChartAxisLabelOptions
+      attr_accessor default_series_settings: Types::ComboChartDefaultSeriesSettings
+      attr_accessor series: ::Array[Types::ComboSeriesItem]
       attr_accessor legend: Types::LegendOptions
       attr_accessor bar_data_labels: Types::DataLabelOptions
       attr_accessor line_data_labels: Types::DataLabelOptions
@@ -1406,8 +1481,24 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ComboChartDefaultSeriesSettings
+      attr_accessor line_style_settings: Types::LineChartLineStyleSettings
+      attr_accessor marker_style_settings: Types::LineChartMarkerStyleSettings
+      attr_accessor decal_settings: Types::DecalSettings
+      attr_accessor border_settings: Types::BorderSettings
+      SENSITIVE: []
+    end
+
     class ComboChartFieldWells
       attr_accessor combo_chart_aggregated_field_wells: Types::ComboChartAggregatedFieldWells
+      SENSITIVE: []
+    end
+
+    class ComboChartSeriesSettings
+      attr_accessor line_style_settings: Types::LineChartLineStyleSettings
+      attr_accessor marker_style_settings: Types::LineChartMarkerStyleSettings
+      attr_accessor decal_settings: Types::DecalSettings
+      attr_accessor border_settings: Types::BorderSettings
       SENSITIVE: []
     end
 
@@ -1427,6 +1518,12 @@ module Aws::QuickSight
       attr_accessor actions: ::Array[Types::VisualCustomAction]
       attr_accessor column_hierarchies: ::Array[Types::ColumnHierarchy]
       attr_accessor visual_content_alt_text: ::String
+      SENSITIVE: []
+    end
+
+    class ComboSeriesItem
+      attr_accessor field_combo_series_item: Types::FieldComboSeriesItem
+      attr_accessor data_field_combo_series_item: Types::DataFieldComboSeriesItem
       SENSITIVE: []
     end
 
@@ -1559,6 +1656,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class Coordinate
+      attr_accessor latitude: ::Float
+      attr_accessor longitude: ::Float
+      SENSITIVE: []
+    end
+
     class CreateAccountCustomizationRequest
       attr_accessor aws_account_id: ::String
       attr_accessor namespace: ::String
@@ -1669,6 +1772,8 @@ module Aws::QuickSight
     end
 
     class CreateColumnsOperation
+      attr_accessor alias: ::String
+      attr_accessor source: Types::TransformOperationSource
       attr_accessor columns: ::Array[Types::CalculatedColumn]
       SENSITIVE: []
     end
@@ -1736,6 +1841,8 @@ module Aws::QuickSight
       attr_accessor folder_arns: ::Array[::String]
       attr_accessor performance_configuration: Types::PerformanceConfiguration
       attr_accessor use_as: ("RLS_RULES")
+      attr_accessor data_prep_configuration: Types::DataPrepConfiguration
+      attr_accessor semantic_model_configuration: Types::SemanticModelConfiguration
       SENSITIVE: []
     end
 
@@ -2187,7 +2294,7 @@ module Aws::QuickSight
       attr_accessor name: ::String
       attr_accessor sql_query: ::String
       attr_accessor columns: ::Array[Types::InputColumn]
-      SENSITIVE: []
+      SENSITIVE: [:sql_query]
     end
 
     class CustomValuesConfiguration
@@ -2211,6 +2318,11 @@ module Aws::QuickSight
       attr_accessor last_published_time: ::Time
       attr_accessor last_updated_time: ::Time
       attr_accessor link_entities: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DashboardCustomizationVisualOptions
+      attr_accessor fields_configuration: Types::VisualCustomizationFieldsConfiguration
       SENSITIVE: []
     end
 
@@ -2356,6 +2468,20 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DataFieldBarSeriesItem
+      attr_accessor field_id: ::String
+      attr_accessor field_value: ::String
+      attr_accessor settings: Types::BarChartSeriesSettings
+      SENSITIVE: [:field_value]
+    end
+
+    class DataFieldComboSeriesItem
+      attr_accessor field_id: ::String
+      attr_accessor field_value: ::String
+      attr_accessor settings: Types::ComboChartSeriesSettings
+      SENSITIVE: [:field_value]
+    end
+
     class DataFieldSeriesItem
       attr_accessor field_id: ::String
       attr_accessor field_value: ::String
@@ -2434,6 +2560,32 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DataPrepAggregationFunction
+      attr_accessor simple_aggregation: Types::DataPrepSimpleAggregationFunction
+      attr_accessor list_aggregation: Types::DataPrepListAggregationFunction
+      SENSITIVE: []
+    end
+
+    class DataPrepConfiguration
+      attr_accessor source_table_map: ::Hash[::String, Types::SourceTable]
+      attr_accessor transform_step_map: ::Hash[::String, Types::TransformStep]
+      attr_accessor destination_table_map: ::Hash[::String, Types::DestinationTable]
+      SENSITIVE: []
+    end
+
+    class DataPrepListAggregationFunction
+      attr_accessor input_column_name: ::String
+      attr_accessor separator: ::String
+      attr_accessor distinct: bool
+      SENSITIVE: []
+    end
+
+    class DataPrepSimpleAggregationFunction
+      attr_accessor input_column_name: ::String
+      attr_accessor function_type: ("COUNT" | "DISTINCT_COUNT" | "SUM" | "AVERAGE" | "MAX" | "MIN")
+      SENSITIVE: []
+    end
+
     class DataQAEnabledOption
       attr_accessor availability_status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
@@ -2464,6 +2616,14 @@ module Aws::QuickSight
       attr_accessor dataset_parameters: ::Array[Types::DatasetParameter]
       attr_accessor performance_configuration: Types::PerformanceConfiguration
       attr_accessor use_as: ("RLS_RULES")
+      attr_accessor data_prep_configuration: Types::DataPrepConfiguration
+      attr_accessor semantic_model_configuration: Types::SemanticModelConfiguration
+      SENSITIVE: []
+    end
+
+    class DataSetColumnIdMapping
+      attr_accessor source_column_id: ::String
+      attr_accessor target_column_id: ::String
       SENSITIVE: []
     end
 
@@ -2474,9 +2634,61 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DataSetDateComparisonFilterCondition
+      attr_accessor operator: ("BEFORE" | "BEFORE_OR_EQUALS_TO" | "AFTER" | "AFTER_OR_EQUALS_TO")
+      attr_accessor value: Types::DataSetDateFilterValue
+      SENSITIVE: []
+    end
+
+    class DataSetDateFilterCondition
+      attr_accessor column_name: ::String
+      attr_accessor comparison_filter_condition: Types::DataSetDateComparisonFilterCondition
+      attr_accessor range_filter_condition: Types::DataSetDateRangeFilterCondition
+      SENSITIVE: []
+    end
+
+    class DataSetDateFilterValue
+      attr_accessor static_value: ::Time
+      SENSITIVE: [:static_value]
+    end
+
+    class DataSetDateRangeFilterCondition
+      attr_accessor range_minimum: Types::DataSetDateFilterValue
+      attr_accessor range_maximum: Types::DataSetDateFilterValue
+      attr_accessor include_minimum: bool
+      attr_accessor include_maximum: bool
+      SENSITIVE: []
+    end
+
     class DataSetIdentifierDeclaration
       attr_accessor identifier: ::String
       attr_accessor data_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DataSetNumericComparisonFilterCondition
+      attr_accessor operator: ("EQUALS" | "DOES_NOT_EQUAL" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS_TO" | "LESS_THAN" | "LESS_THAN_OR_EQUALS_TO")
+      attr_accessor value: Types::DataSetNumericFilterValue
+      SENSITIVE: []
+    end
+
+    class DataSetNumericFilterCondition
+      attr_accessor column_name: ::String
+      attr_accessor comparison_filter_condition: Types::DataSetNumericComparisonFilterCondition
+      attr_accessor range_filter_condition: Types::DataSetNumericRangeFilterCondition
+      SENSITIVE: []
+    end
+
+    class DataSetNumericFilterValue
+      attr_accessor static_value: ::Float
+      SENSITIVE: [:static_value]
+    end
+
+    class DataSetNumericRangeFilterCondition
+      attr_accessor range_minimum: Types::DataSetNumericFilterValue
+      attr_accessor range_maximum: Types::DataSetNumericFilterValue
+      attr_accessor include_minimum: bool
+      attr_accessor include_maximum: bool
       SENSITIVE: []
     end
 
@@ -2504,6 +2716,35 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DataSetStringComparisonFilterCondition
+      attr_accessor operator: ("EQUALS" | "DOES_NOT_EQUAL" | "CONTAINS" | "DOES_NOT_CONTAIN" | "STARTS_WITH" | "ENDS_WITH")
+      attr_accessor value: Types::DataSetStringFilterValue
+      SENSITIVE: []
+    end
+
+    class DataSetStringFilterCondition
+      attr_accessor column_name: ::String
+      attr_accessor comparison_filter_condition: Types::DataSetStringComparisonFilterCondition
+      attr_accessor list_filter_condition: Types::DataSetStringListFilterCondition
+      SENSITIVE: []
+    end
+
+    class DataSetStringFilterValue
+      attr_accessor static_value: ::String
+      SENSITIVE: [:static_value]
+    end
+
+    class DataSetStringListFilterCondition
+      attr_accessor operator: ("INCLUDE" | "EXCLUDE")
+      attr_accessor values: Types::DataSetStringListFilterValue
+      SENSITIVE: []
+    end
+
+    class DataSetStringListFilterValue
+      attr_accessor static_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class DataSetSummary
       attr_accessor arn: ::String
       attr_accessor data_set_id: ::String
@@ -2512,6 +2753,7 @@ module Aws::QuickSight
       attr_accessor last_updated_time: ::Time
       attr_accessor import_mode: ("SPICE" | "DIRECT_QUERY")
       attr_accessor row_level_permission_data_set: Types::RowLevelPermissionDataSet
+      attr_accessor row_level_permission_data_set_map: ::Hash[::String, Types::RowLevelPermissionDataSet]
       attr_accessor row_level_permission_tag_configuration_applied: bool
       attr_accessor column_level_permission_rules_applied: bool
       attr_accessor use_as: ("RLS_RULES")
@@ -2545,6 +2787,7 @@ module Aws::QuickSight
       attr_accessor credential_pair: Types::CredentialPair
       attr_accessor copy_source_arn: ::String
       attr_accessor secret_arn: ::String
+      attr_accessor key_pair_credentials: Types::KeyPairCredentials
       attr_accessor web_proxy_credentials: Types::WebProxyCredentials
       SENSITIVE: []
     end
@@ -2729,6 +2972,20 @@ module Aws::QuickSight
       attr_accessor value_when_unset_option: ("RECOMMENDED_VALUE" | "NULL")
       attr_accessor custom_value: ::Time
       SENSITIVE: [:custom_value]
+    end
+
+    class DecalSettings
+      attr_accessor element_value: ::String
+      attr_accessor decal_visibility: ("HIDDEN" | "VISIBLE")
+      attr_accessor decal_color: ::String
+      attr_accessor decal_pattern_type: ("SOLID" | "DIAGONAL_MEDIUM" | "CIRCLE_MEDIUM" | "DIAMOND_GRID_MEDIUM" | "CHECKERBOARD_MEDIUM" | "TRIANGLE_MEDIUM" | "DIAGONAL_OPPOSITE_MEDIUM" | "DIAMOND_MEDIUM" | "DIAGONAL_LARGE" | "CIRCLE_LARGE" | "DIAMOND_GRID_LARGE" | "CHECKERBOARD_LARGE" | "TRIANGLE_LARGE" | "DIAGONAL_OPPOSITE_LARGE" | "DIAMOND_LARGE" | "DIAGONAL_SMALL" | "CIRCLE_SMALL" | "DIAMOND_GRID_SMALL" | "CHECKERBOARD_SMALL" | "TRIANGLE_SMALL" | "DIAGONAL_OPPOSITE_SMALL" | "DIAMOND_SMALL")
+      attr_accessor decal_style_type: ("Manual" | "Auto")
+      SENSITIVE: []
+    end
+
+    class DecalSettingsConfiguration
+      attr_accessor custom_decal_settings: ::Array[Types::DecalSettings]
+      SENSITIVE: []
     end
 
     class DecimalDatasetParameter
@@ -3953,6 +4210,19 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DescribeSelfUpgradeConfigurationRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor namespace: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSelfUpgradeConfigurationResponse
+      attr_accessor self_upgrade_configuration: Types::SelfUpgradeConfiguration
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
     class DescribeTemplateAliasRequest
       attr_accessor aws_account_id: ::String
       attr_accessor template_id: ::String
@@ -4159,6 +4429,17 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DestinationTable
+      attr_accessor alias: ::String
+      attr_accessor source: Types::DestinationTableSource
+      SENSITIVE: []
+    end
+
+    class DestinationTableSource
+      attr_accessor transform_operation_id: ::String
+      SENSITIVE: []
+    end
+
     class DimensionField
       attr_accessor numerical_dimension_field: Types::NumericalDimensionField
       attr_accessor categorical_dimension_field: Types::CategoricalDimensionField
@@ -4291,10 +4572,22 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class FieldBarSeriesItem
+      attr_accessor field_id: ::String
+      attr_accessor settings: Types::BarChartSeriesSettings
+      SENSITIVE: []
+    end
+
     class FieldBasedTooltip
       attr_accessor aggregation_visibility: ("HIDDEN" | "VISIBLE")
       attr_accessor tooltip_title_type: ("NONE" | "PRIMARY_VALUE")
       attr_accessor tooltip_fields: ::Array[Types::TooltipItem]
+      SENSITIVE: []
+    end
+
+    class FieldComboSeriesItem
+      attr_accessor field_id: ::String
+      attr_accessor settings: Types::ComboChartSeriesSettings
       SENSITIVE: []
     end
 
@@ -4389,6 +4682,7 @@ module Aws::QuickSight
       attr_accessor column_hierarchies: ::Array[Types::ColumnHierarchy]
       attr_accessor actions: ::Array[Types::VisualCustomAction]
       attr_accessor visual_content_alt_text: ::String
+      attr_accessor geocoding_preferences: ::Array[Types::GeocodePreference]
       SENSITIVE: []
     end
 
@@ -4482,6 +4776,9 @@ module Aws::QuickSight
 
     class FilterOperation
       attr_accessor condition_expression: ::String
+      attr_accessor string_filter_condition: Types::DataSetStringFilterCondition
+      attr_accessor numeric_filter_condition: Types::DataSetNumericFilterCondition
+      attr_accessor date_filter_condition: Types::DataSetDateFilterCondition
       SENSITIVE: [:condition_expression]
     end
 
@@ -4543,6 +4840,13 @@ module Aws::QuickSight
       attr_accessor title: ::String
       attr_accessor source_filter_id: ::String
       attr_accessor display_options: Types::TextFieldControlDisplayOptions
+      SENSITIVE: []
+    end
+
+    class FiltersOperation
+      attr_accessor alias: ::String
+      attr_accessor source: Types::TransformOperationSource
+      attr_accessor filter_operations: ::Array[Types::FilterOperation]
       SENSITIVE: []
     end
 
@@ -4683,6 +4987,8 @@ module Aws::QuickSight
       attr_accessor selected_border_style: Types::FreeFormLayoutElementBorderStyle
       attr_accessor background_style: Types::FreeFormLayoutElementBackgroundStyle
       attr_accessor loading_animation: Types::LoadingAnimation
+      attr_accessor border_radius: ::String
+      attr_accessor padding: ::String
       SENSITIVE: []
     end
 
@@ -4695,6 +5001,7 @@ module Aws::QuickSight
     class FreeFormLayoutElementBorderStyle
       attr_accessor visibility: ("HIDDEN" | "VISIBLE")
       attr_accessor color: ::String
+      attr_accessor width: ::String
       SENSITIVE: []
     end
 
@@ -4898,6 +5205,35 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class GeocodePreference
+      attr_accessor request_key: Types::GeocoderHierarchy
+      attr_accessor preference: Types::GeocodePreferenceValue
+      SENSITIVE: []
+    end
+
+    class GeocodePreferenceValue
+      attr_accessor geocoder_hierarchy: Types::GeocoderHierarchy
+      attr_accessor coordinate: Types::Coordinate
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class GeocoderHierarchy < GeocodePreferenceValue
+      end
+      class Coordinate < GeocodePreferenceValue
+      end
+      class Unknown < GeocodePreferenceValue
+      end
+    end
+
+    class GeocoderHierarchy
+      attr_accessor country: ::String
+      attr_accessor state: ::String
+      attr_accessor county: ::String
+      attr_accessor city: ::String
+      attr_accessor post_code: ::String
+      SENSITIVE: []
+    end
+
     class GeospatialCategoricalColor
       attr_accessor category_data_colors: ::Array[Types::GeospatialCategoricalDataColor]
       attr_accessor null_data_visibility: ("HIDDEN" | "VISIBLE")
@@ -5087,6 +5423,7 @@ module Aws::QuickSight
       attr_accessor column_hierarchies: ::Array[Types::ColumnHierarchy]
       attr_accessor actions: ::Array[Types::VisualCustomAction]
       attr_accessor visual_content_alt_text: ::String
+      attr_accessor geocoding_preferences: ::Array[Types::GeocodePreference]
       SENSITIVE: []
     end
 
@@ -5210,6 +5547,21 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class GetIdentityContextRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor user_identifier: Types::UserIdentifier
+      attr_accessor namespace: ::String
+      attr_accessor session_expires_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetIdentityContextResponse
+      attr_accessor status: ::Integer
+      attr_accessor request_id: ::String
+      attr_accessor context: ::String
+      SENSITIVE: []
+    end
+
     class GetSessionEmbedUrlRequest
       attr_accessor aws_account_id: ::String
       attr_accessor entry_point: ::String
@@ -5261,6 +5613,25 @@ module Aws::QuickSight
       attr_accessor column_span: ::Integer
       attr_accessor row_index: ::Integer
       attr_accessor row_span: ::Integer
+      attr_accessor border_style: Types::GridLayoutElementBorderStyle
+      attr_accessor selected_border_style: Types::GridLayoutElementBorderStyle
+      attr_accessor background_style: Types::GridLayoutElementBackgroundStyle
+      attr_accessor loading_animation: Types::LoadingAnimation
+      attr_accessor border_radius: ::String
+      attr_accessor padding: ::String
+      SENSITIVE: []
+    end
+
+    class GridLayoutElementBackgroundStyle
+      attr_accessor visibility: ("HIDDEN" | "VISIBLE")
+      attr_accessor color: ::String
+      SENSITIVE: []
+    end
+
+    class GridLayoutElementBorderStyle
+      attr_accessor visibility: ("HIDDEN" | "VISIBLE")
+      attr_accessor color: ::String
+      attr_accessor width: ::String
       SENSITIVE: []
     end
 
@@ -5513,6 +5884,18 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ImportTableOperation
+      attr_accessor alias: ::String
+      attr_accessor source: Types::ImportTableOperationSource
+      SENSITIVE: []
+    end
+
+    class ImportTableOperationSource
+      attr_accessor source_table_id: ::String
+      attr_accessor column_id_mappings: ::Array[Types::DataSetColumnIdMapping]
+      SENSITIVE: []
+    end
+
     class IncrementalRefresh
       attr_accessor lookback_window: Types::LookbackWindow
       SENSITIVE: []
@@ -5540,6 +5923,7 @@ module Aws::QuickSight
 
     class InputColumn
       attr_accessor name: ::String
+      attr_accessor id: ::String
       attr_accessor type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME" | "BIT" | "BOOLEAN" | "JSON")
       attr_accessor sub_type: ("FLOAT" | "FIXED")
       SENSITIVE: []
@@ -5614,7 +5998,19 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class InvalidDataSetParameterValueException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
     class InvalidNextTokenException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
       attr_accessor message: ::String
       attr_accessor request_id: ::String
       SENSITIVE: []
@@ -5662,6 +6058,22 @@ module Aws::QuickSight
     class JoinKeyProperties
       attr_accessor unique_key: bool
       SENSITIVE: []
+    end
+
+    class JoinOperandProperties
+      attr_accessor output_column_name_overrides: ::Array[Types::OutputColumnNameOverride]
+      SENSITIVE: []
+    end
+
+    class JoinOperation
+      attr_accessor alias: ::String
+      attr_accessor left_operand: Types::TransformOperationSource
+      attr_accessor right_operand: Types::TransformOperationSource
+      attr_accessor type: ("INNER" | "OUTER" | "LEFT" | "RIGHT")
+      attr_accessor on_clause: ::String
+      attr_accessor left_operand_properties: Types::JoinOperandProperties
+      attr_accessor right_operand_properties: Types::JoinOperandProperties
+      SENSITIVE: [:on_clause]
     end
 
     class KPIActualValueConditionalFormatting
@@ -5761,6 +6173,13 @@ module Aws::QuickSight
     class KPIVisualStandardLayout
       attr_accessor type: ("CLASSIC" | "VERTICAL")
       SENSITIVE: []
+    end
+
+    class KeyPairCredentials
+      attr_accessor key_pair_username: ::String
+      attr_accessor private_key: ::String
+      attr_accessor private_key_passphrase: ::String
+      SENSITIVE: [:private_key, :private_key_passphrase]
     end
 
     class LabelOptions
@@ -5863,6 +6282,7 @@ module Aws::QuickSight
       attr_accessor axis_binding: ("PRIMARY_YAXIS" | "SECONDARY_YAXIS")
       attr_accessor line_style_settings: Types::LineChartLineStyleSettings
       attr_accessor marker_style_settings: Types::LineChartMarkerStyleSettings
+      attr_accessor decal_settings: Types::DecalSettings
       SENSITIVE: []
     end
 
@@ -5890,6 +6310,7 @@ module Aws::QuickSight
     class LineChartSeriesSettings
       attr_accessor line_style_settings: Types::LineChartLineStyleSettings
       attr_accessor marker_style_settings: Types::LineChartMarkerStyleSettings
+      attr_accessor decal_settings: Types::DecalSettings
       SENSITIVE: []
     end
 
@@ -6290,6 +6711,22 @@ module Aws::QuickSight
 
     class ListRoleMembershipsResponse
       attr_accessor members_list: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSelfUpgradesRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor namespace: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSelfUpgradesResponse
+      attr_accessor self_upgrade_request_details: ::Array[Types::SelfUpgradeRequestDetail]
       attr_accessor next_token: ::String
       attr_accessor request_id: ::String
       attr_accessor status: ::Integer
@@ -6839,10 +7276,17 @@ module Aws::QuickSight
 
     class OutputColumn
       attr_accessor name: ::String
+      attr_accessor id: ::String
       attr_accessor description: ::String
       attr_accessor type: ("STRING" | "INTEGER" | "DECIMAL" | "DATETIME")
       attr_accessor sub_type: ("FLOAT" | "FIXED")
       SENSITIVE: [:description]
+    end
+
+    class OutputColumnNameOverride
+      attr_accessor source_column_name: ::String
+      attr_accessor output_column_name: ::String
+      SENSITIVE: []
     end
 
     class OverrideDatasetParameterOperation
@@ -6975,6 +7419,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ParentDataSet
+      attr_accessor data_set_arn: ::String
+      attr_accessor input_columns: ::Array[Types::InputColumn]
+      SENSITIVE: []
+    end
+
     class PercentVisibleRange
       attr_accessor from: ::Float
       attr_accessor to: ::Float
@@ -7028,6 +7478,7 @@ module Aws::QuickSight
       attr_accessor relational_table: Types::RelationalTable
       attr_accessor custom_sql: Types::CustomSql
       attr_accessor s3_source: Types::S3Source
+      attr_accessor saa_s_table: Types::SaaSTable
       SENSITIVE: []
     end
 
@@ -7078,9 +7529,24 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class PivotConfiguration
+      attr_accessor label_column_name: ::String
+      attr_accessor pivoted_labels: ::Array[Types::PivotedLabel]
+      SENSITIVE: []
+    end
+
     class PivotFieldSortOptions
       attr_accessor field_id: ::String
       attr_accessor sort_by: Types::PivotTableSortBy
+      SENSITIVE: []
+    end
+
+    class PivotOperation
+      attr_accessor alias: ::String
+      attr_accessor source: Types::TransformOperationSource
+      attr_accessor group_by_column_names: ::Array[::String]
+      attr_accessor value_column_configuration: Types::ValueColumnConfiguration
+      attr_accessor pivot_configuration: Types::PivotConfiguration
       SENSITIVE: []
     end
 
@@ -7121,6 +7587,7 @@ module Aws::QuickSight
       attr_accessor total_options: Types::PivotTableTotalOptions
       attr_accessor field_options: Types::PivotTableFieldOptions
       attr_accessor paginated_report_options: Types::PivotTablePaginatedReportOptions
+      attr_accessor dashboard_customization_visual_options: Types::DashboardCustomizationVisualOptions
       attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
@@ -7239,6 +7706,13 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class PivotedLabel
+      attr_accessor label_name: ::String
+      attr_accessor new_column_name: ::String
+      attr_accessor new_column_id: ::String
+      SENSITIVE: []
+    end
+
     class PluginVisual
       attr_accessor visual_id: ::String
       attr_accessor plugin_arn: ::String
@@ -7342,6 +7816,8 @@ module Aws::QuickSight
     end
 
     class ProjectOperation
+      attr_accessor alias: ::String
+      attr_accessor source: Types::TransformOperationSource
       attr_accessor projected_columns: ::Array[::String]
       SENSITIVE: []
     end
@@ -7761,6 +8237,7 @@ module Aws::QuickSight
       attr_accessor q_search_bar: Types::RegisteredUserQSearchBarEmbeddingConfiguration
       attr_accessor dashboard_visual: Types::RegisteredUserDashboardVisualEmbeddingConfiguration
       attr_accessor generative_qn_a: Types::RegisteredUserGenerativeQnAEmbeddingConfiguration
+      attr_accessor quick_chat: Types::RegisteredUserQuickChatEmbeddingConfiguration
       SENSITIVE: []
     end
 
@@ -7774,9 +8251,17 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class RegisteredUserQuickChatEmbeddingConfiguration < Aws::EmptyStructure
+    end
+
     class RegisteredUserQuickSightConsoleEmbeddingConfiguration
       attr_accessor initial_path: ::String
       attr_accessor feature_configurations: Types::RegisteredUserConsoleFeatureConfigurations
+      SENSITIVE: []
+    end
+
+    class RegisteredUserSnapshotJobResult
+      attr_accessor file_groups: ::Array[Types::SnapshotJobResultFileGroup]
       SENSITIVE: []
     end
 
@@ -7814,6 +8299,13 @@ module Aws::QuickSight
     class RenameColumnOperation
       attr_accessor column_name: ::String
       attr_accessor new_column_name: ::String
+      SENSITIVE: []
+    end
+
+    class RenameColumnsOperation
+      attr_accessor alias: ::String
+      attr_accessor source: Types::TransformOperationSource
+      attr_accessor rename_column_operations: ::Array[Types::RenameColumnOperation]
       SENSITIVE: []
     end
 
@@ -7880,6 +8372,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class RowLevelPermissionConfiguration
+      attr_accessor tag_configuration: Types::RowLevelPermissionTagConfiguration
+      attr_accessor row_level_permission_data_set: Types::RowLevelPermissionDataSet
+      SENSITIVE: []
+    end
+
     class RowLevelPermissionDataSet
       attr_accessor namespace: ::String
       attr_accessor arn: ::String
@@ -7927,6 +8425,13 @@ module Aws::QuickSight
     class S3Source
       attr_accessor data_source_arn: ::String
       attr_accessor upload_settings: Types::UploadSettings
+      attr_accessor input_columns: ::Array[Types::InputColumn]
+      SENSITIVE: []
+    end
+
+    class SaaSTable
+      attr_accessor data_source_arn: ::String
+      attr_accessor table_path: ::Array[Types::TablePathElement]
       attr_accessor input_columns: ::Array[Types::InputColumn]
       SENSITIVE: []
     end
@@ -8249,10 +8754,40 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class SelfUpgradeConfiguration
+      attr_accessor self_upgrade_status: ("AUTO_APPROVAL" | "ADMIN_APPROVAL")
+      SENSITIVE: []
+    end
+
+    class SelfUpgradeRequestDetail
+      attr_accessor upgrade_request_id: ::String
+      attr_accessor user_name: ::String
+      attr_accessor original_role: ("ADMIN" | "AUTHOR" | "READER" | "RESTRICTED_AUTHOR" | "RESTRICTED_READER" | "ADMIN_PRO" | "AUTHOR_PRO" | "READER_PRO")
+      attr_accessor requested_role: ("ADMIN" | "AUTHOR" | "READER" | "RESTRICTED_AUTHOR" | "RESTRICTED_READER" | "ADMIN_PRO" | "AUTHOR_PRO" | "READER_PRO")
+      attr_accessor request_note: ::String
+      attr_accessor creation_time: ::Integer
+      attr_accessor request_status: ("PENDING" | "APPROVED" | "DENIED" | "UPDATE_FAILED" | "VERIFY_FAILED")
+      attr_accessor last_update_attempt_time: ::Integer
+      attr_accessor last_update_failure_reason: ::String
+      SENSITIVE: []
+    end
+
     class SemanticEntityType
       attr_accessor type_name: ::String
       attr_accessor sub_type_name: ::String
       attr_accessor type_parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SemanticModelConfiguration
+      attr_accessor table_map: ::Hash[::String, Types::SemanticTable]
+      SENSITIVE: []
+    end
+
+    class SemanticTable
+      attr_accessor alias: ::String
+      attr_accessor destination_table_id: ::String
+      attr_accessor row_level_permission_configuration: Types::RowLevelPermissionConfiguration
       SENSITIVE: []
     end
 
@@ -8310,6 +8845,12 @@ module Aws::QuickSight
       attr_accessor sheet_id: ::String
       attr_accessor name: ::String
       attr_accessor images: ::Array[Types::SheetImage]
+      SENSITIVE: []
+    end
+
+    class SheetBackgroundStyle
+      attr_accessor color: ::String
+      attr_accessor gradient: ::String
       SENSITIVE: []
     end
 
@@ -8407,6 +8948,7 @@ module Aws::QuickSight
     class SheetStyle
       attr_accessor tile: Types::TileStyle
       attr_accessor tile_layout: Types::TileLayoutStyle
+      attr_accessor background: Types::SheetBackgroundStyle
       SENSITIVE: []
     end
 
@@ -8523,6 +9065,7 @@ module Aws::QuickSight
 
     class SnapshotJobResult
       attr_accessor anonymous_users: ::Array[Types::AnonymousUserSnapshotJobResult]
+      attr_accessor registered_users: ::Array[Types::RegisteredUserSnapshotJobResult]
       SENSITIVE: []
     end
 
@@ -8567,6 +9110,12 @@ module Aws::QuickSight
       attr_accessor authentication_type: ("PASSWORD" | "TOKEN" | "X509")
       attr_accessor database_access_control_role: ::String
       attr_accessor o_auth_parameters: Types::OAuthParameters
+      SENSITIVE: []
+    end
+
+    class SourceTable
+      attr_accessor physical_table_id: ::String
+      attr_accessor data_set: Types::ParentDataSet
       SENSITIVE: []
     end
 
@@ -8839,6 +9388,7 @@ module Aws::QuickSight
       attr_accessor field_options: Types::TableFieldOptions
       attr_accessor paginated_report_options: Types::TablePaginatedReportOptions
       attr_accessor table_inline_visualizations: ::Array[Types::TableInlineVisualization]
+      attr_accessor dashboard_customization_visual_options: Types::DashboardCustomizationVisualOptions
       attr_accessor interactions: Types::VisualInteractionOptions
       SENSITIVE: []
     end
@@ -8916,6 +9466,12 @@ module Aws::QuickSight
     class TablePaginatedReportOptions
       attr_accessor vertical_overflow_visibility: ("HIDDEN" | "VISIBLE")
       attr_accessor overflow_column_header_visibility: ("HIDDEN" | "VISIBLE")
+      SENSITIVE: []
+    end
+
+    class TablePathElement
+      attr_accessor name: ::String
+      attr_accessor id: ::String
       SENSITIVE: []
     end
 
@@ -9209,7 +9765,10 @@ module Aws::QuickSight
     end
 
     class TileStyle
+      attr_accessor background_color: ::String
       attr_accessor border: Types::BorderStyle
+      attr_accessor border_radius: ::String
+      attr_accessor padding: ::String
       SENSITIVE: []
     end
 
@@ -9640,6 +10199,27 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class TransformOperationSource
+      attr_accessor transform_operation_id: ::String
+      attr_accessor column_id_mappings: ::Array[Types::DataSetColumnIdMapping]
+      SENSITIVE: []
+    end
+
+    class TransformStep
+      attr_accessor import_table_step: Types::ImportTableOperation
+      attr_accessor project_step: Types::ProjectOperation
+      attr_accessor filters_step: Types::FiltersOperation
+      attr_accessor create_columns_step: Types::CreateColumnsOperation
+      attr_accessor rename_columns_step: Types::RenameColumnsOperation
+      attr_accessor cast_column_types_step: Types::CastColumnTypesOperation
+      attr_accessor join_step: Types::JoinOperation
+      attr_accessor aggregate_step: Types::AggregateOperation
+      attr_accessor pivot_step: Types::PivotOperation
+      attr_accessor unpivot_step: Types::UnpivotOperation
+      attr_accessor append_step: Types::AppendOperation
+      SENSITIVE: []
+    end
+
     class TransposedTableOption
       attr_accessor column_index: ::Integer
       attr_accessor column_width: ::String
@@ -9710,6 +10290,13 @@ module Aws::QuickSight
 
     class Typography
       attr_accessor font_families: ::Array[Types::Font]
+      attr_accessor axis_title_font_configuration: Types::FontConfiguration
+      attr_accessor axis_label_font_configuration: Types::FontConfiguration
+      attr_accessor legend_title_font_configuration: Types::FontConfiguration
+      attr_accessor legend_value_font_configuration: Types::FontConfiguration
+      attr_accessor data_label_font_configuration: Types::FontConfiguration
+      attr_accessor visual_title_font_configuration: Types::VisualTitleFontConfiguration
+      attr_accessor visual_subtitle_font_configuration: Types::VisualSubtitleFontConfiguration
       SENSITIVE: []
     end
 
@@ -9749,6 +10336,17 @@ module Aws::QuickSight
       attr_accessor computation_id: ::String
       attr_accessor name: ::String
       attr_accessor category: Types::DimensionField
+      SENSITIVE: []
+    end
+
+    class UnpivotOperation
+      attr_accessor alias: ::String
+      attr_accessor source: Types::TransformOperationSource
+      attr_accessor columns_to_unpivot: ::Array[Types::ColumnToUnpivot]
+      attr_accessor unpivoted_label_column_name: ::String
+      attr_accessor unpivoted_label_column_id: ::String
+      attr_accessor unpivoted_value_column_name: ::String
+      attr_accessor unpivoted_value_column_id: ::String
       SENSITIVE: []
     end
 
@@ -10082,6 +10680,8 @@ module Aws::QuickSight
       attr_accessor data_set_usage_configuration: Types::DataSetUsageConfiguration
       attr_accessor dataset_parameters: ::Array[Types::DatasetParameter]
       attr_accessor performance_configuration: Types::PerformanceConfiguration
+      attr_accessor data_prep_configuration: Types::DataPrepConfiguration
+      attr_accessor semantic_model_configuration: Types::SemanticModelConfiguration
       SENSITIVE: []
     end
 
@@ -10350,6 +10950,34 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class UpdateSelfUpgradeConfigurationRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor namespace: ::String
+      attr_accessor self_upgrade_status: ("AUTO_APPROVAL" | "ADMIN_APPROVAL")
+      SENSITIVE: []
+    end
+
+    class UpdateSelfUpgradeConfigurationResponse
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateSelfUpgradeRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor namespace: ::String
+      attr_accessor upgrade_request_id: ::String
+      attr_accessor action: ("APPROVE" | "DENY" | "VERIFY")
+      SENSITIVE: []
+    end
+
+    class UpdateSelfUpgradeResponse
+      attr_accessor self_upgrade_request_detail: Types::SelfUpgradeRequestDetail
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
     class UpdateTemplateAliasRequest
       attr_accessor aws_account_id: ::String
       attr_accessor template_id: ::String
@@ -10568,6 +11196,7 @@ module Aws::QuickSight
       attr_accessor contains_header: bool
       attr_accessor text_qualifier: ("DOUBLE_QUOTE" | "SINGLE_QUOTE")
       attr_accessor delimiter: ::String
+      attr_accessor custom_cell_address_range: ::String
       SENSITIVE: []
     end
 
@@ -10584,6 +11213,23 @@ module Aws::QuickSight
       attr_accessor external_login_federation_provider_url: ::String
       attr_accessor external_login_id: ::String
       SENSITIVE: []
+    end
+
+    class UserIdentifier
+      attr_accessor user_name: ::String
+      attr_accessor email: ::String
+      attr_accessor user_arn: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: [:user_name, :email]
+
+      class UserName < UserIdentifier
+      end
+      class Email < UserIdentifier
+      end
+      class UserArn < UserIdentifier
+      end
+      class Unknown < UserIdentifier
+      end
     end
 
     class VPCConnection
@@ -10620,6 +11266,11 @@ module Aws::QuickSight
 
     class ValidationStrategy
       attr_accessor mode: ("STRICT" | "LENIENT")
+      SENSITIVE: []
+    end
+
+    class ValueColumnConfiguration
+      attr_accessor aggregation_function: Types::DataPrepAggregationFunction
       SENSITIVE: []
     end
 
@@ -10684,6 +11335,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class VisualCustomizationFieldsConfiguration
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor additional_fields: ::Array[Types::ColumnIdentifier]
+      SENSITIVE: []
+    end
+
     class VisualHighlightOperation
       attr_accessor trigger: ("DATA_POINT_CLICK" | "DATA_POINT_HOVER" | "NONE")
       SENSITIVE: []
@@ -10711,9 +11368,23 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class VisualSubtitleFontConfiguration
+      attr_accessor font_configuration: Types::FontConfiguration
+      attr_accessor text_alignment: ("LEFT" | "CENTER" | "RIGHT" | "AUTO")
+      attr_accessor text_transform: ("CAPITALIZE")
+      SENSITIVE: []
+    end
+
     class VisualSubtitleLabelOptions
       attr_accessor visibility: ("HIDDEN" | "VISIBLE")
       attr_accessor format_text: Types::LongFormatText
+      SENSITIVE: []
+    end
+
+    class VisualTitleFontConfiguration
+      attr_accessor font_configuration: Types::FontConfiguration
+      attr_accessor text_alignment: ("LEFT" | "CENTER" | "RIGHT" | "AUTO")
+      attr_accessor text_transform: ("CAPITALIZE")
       SENSITIVE: []
     end
 

@@ -18,6 +18,10 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
+            "DateTime": {
+                "type": "timestamp",
+                "timestampFormat": "iso8601"
+            },
             "DatetimeOffsetsOutput": {
                 "type": "structure",
                 "members": {
@@ -25,10 +29,6 @@
                         "shape": "DateTime"
                     }
                 }
-            },
-            "DateTime": {
-                "type": "timestamp",
-                "timestampFormat": "iso8601"
             }
         },
         "cases": [
@@ -159,15 +159,6 @@
                     }
                 }
             },
-            "FooEnumMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "FooEnum"
-                }
-            },
             "FooEnum": {
                 "type": "string",
                 "enum": [
@@ -177,6 +168,15 @@
                     "1",
                     "0"
                 ]
+            },
+            "FooEnumMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "FooEnum"
+                }
             },
             "String": {
                 "type": "string"
@@ -388,6 +388,10 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
+            "DateTime": {
+                "type": "timestamp",
+                "timestampFormat": "iso8601"
+            },
             "FractionalSecondsOutput": {
                 "type": "structure",
                 "members": {
@@ -395,10 +399,6 @@
                         "shape": "DateTime"
                     }
                 }
-            },
-            "DateTime": {
-                "type": "timestamp",
-                "timestampFormat": "iso8601"
             }
         },
         "cases": [
@@ -586,9 +586,6 @@
                 "documentation": "<p>This error is thrown when a request is invalid.</p>",
                 "exception": true
             },
-            "String": {
-                "type": "string"
-            },
             "ComplexNestedErrorData": {
                 "type": "structure",
                 "members": {
@@ -596,6 +593,9 @@
                         "shape": "String"
                     }
                 }
+            },
+            "String": {
+                "type": "string"
             }
         },
         "cases": [
@@ -884,9 +884,6 @@
                     }
                 }
             },
-            "String": {
-                "type": "string"
-            },
             "RecursiveXmlShapesOutputNested2": {
                 "type": "structure",
                 "members": {
@@ -897,6 +894,9 @@
                         "shape": "RecursiveXmlShapesOutputNested1"
                     }
                 }
+            },
+            "String": {
+                "type": "string"
             }
         },
         "cases": [
@@ -958,6 +958,26 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "Double": {
+                "type": "double",
+                "box": true
+            },
+            "Float": {
+                "type": "float",
+                "box": true
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "Long": {
+                "type": "long",
+                "box": true
+            },
             "SimpleScalarXmlPropertiesOutput": {
                 "type": "structure",
                 "members": {
@@ -996,26 +1016,6 @@
             },
             "String": {
                 "type": "string"
-            },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
-            },
-            "Integer": {
-                "type": "integer",
-                "box": true
-            },
-            "Long": {
-                "type": "long",
-                "box": true
-            },
-            "Float": {
-                "type": "float",
-                "box": true
-            },
-            "Double": {
-                "type": "double",
-                "box": true
             }
         },
         "cases": [
@@ -1152,6 +1152,9 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
+            "Blob": {
+                "type": "blob"
+            },
             "XmlBlobsOutput": {
                 "type": "structure",
                 "members": {
@@ -1159,9 +1162,6 @@
                         "shape": "Blob"
                     }
                 }
-            },
-            "Blob": {
-                "type": "blob"
             }
         },
         "cases": [
@@ -1212,6 +1212,9 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
+            "Blob": {
+                "type": "blob"
+            },
             "XmlBlobsOutput": {
                 "type": "structure",
                 "members": {
@@ -1219,9 +1222,6 @@
                         "shape": "Blob"
                     }
                 }
-            },
-            "Blob": {
-                "type": "blob"
             }
         },
         "cases": [
@@ -1296,6 +1296,125 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "BooleanList": {
+                "type": "list",
+                "member": {
+                    "shape": "Boolean"
+                }
+            },
+            "FooEnum": {
+                "type": "string",
+                "enum": [
+                    "Foo",
+                    "Baz",
+                    "Bar",
+                    "1",
+                    "0"
+                ]
+            },
+            "FooEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "FooEnum"
+                }
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "IntegerEnum": {
+                "type": "integer",
+                "box": true
+            },
+            "IntegerEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "IntegerEnum"
+                }
+            },
+            "IntegerList": {
+                "type": "list",
+                "member": {
+                    "shape": "Integer"
+                }
+            },
+            "ListWithMemberNamespace": {
+                "type": "list",
+                "member": {
+                    "shape": "String",
+                    "xmlNamespace": "https://xml-member.example.com"
+                },
+                "xmlNamespace": "https://xml-list.example.com"
+            },
+            "ListWithNamespace": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                },
+                "xmlNamespace": "https://xml-list.example.com"
+            },
+            "NestedStringList": {
+                "type": "list",
+                "member": {
+                    "shape": "StringList"
+                },
+                "documentation": "<p>A list of lists of strings.</p>"
+            },
+            "RenamedListMembers": {
+                "type": "list",
+                "member": {
+                    "shape": "String",
+                    "locationName": "item"
+                }
+            },
+            "String": {
+                "type": "string"
+            },
+            "StringList": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                }
+            },
+            "StringSet": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                }
+            },
+            "StructureList": {
+                "type": "list",
+                "member": {
+                    "shape": "StructureListMember",
+                    "locationName": "item"
+                }
+            },
+            "StructureListMember": {
+                "type": "structure",
+                "members": {
+                    "a": {
+                        "shape": "String",
+                        "locationName": "value"
+                    },
+                    "b": {
+                        "shape": "String",
+                        "locationName": "other"
+                    }
+                }
+            },
+            "Timestamp": {
+                "type": "timestamp"
+            },
+            "TimestampList": {
+                "type": "list",
+                "member": {
+                    "shape": "Timestamp"
+                }
+            },
             "XmlListsOutput": {
                 "type": "structure",
                 "members": {
@@ -1349,125 +1468,6 @@
                         "locationName": "myStructureList"
                     }
                 }
-            },
-            "StringList": {
-                "type": "list",
-                "member": {
-                    "shape": "String"
-                }
-            },
-            "StringSet": {
-                "type": "list",
-                "member": {
-                    "shape": "String"
-                }
-            },
-            "IntegerList": {
-                "type": "list",
-                "member": {
-                    "shape": "Integer"
-                }
-            },
-            "BooleanList": {
-                "type": "list",
-                "member": {
-                    "shape": "Boolean"
-                }
-            },
-            "TimestampList": {
-                "type": "list",
-                "member": {
-                    "shape": "Timestamp"
-                }
-            },
-            "FooEnumList": {
-                "type": "list",
-                "member": {
-                    "shape": "FooEnum"
-                }
-            },
-            "IntegerEnumList": {
-                "type": "list",
-                "member": {
-                    "shape": "IntegerEnum"
-                }
-            },
-            "NestedStringList": {
-                "type": "list",
-                "member": {
-                    "shape": "StringList"
-                },
-                "documentation": "<p>A list of lists of strings.</p>"
-            },
-            "RenamedListMembers": {
-                "type": "list",
-                "member": {
-                    "shape": "String",
-                    "locationName": "item"
-                }
-            },
-            "ListWithMemberNamespace": {
-                "type": "list",
-                "member": {
-                    "shape": "String",
-                    "xmlNamespace": "https://xml-member.example.com"
-                },
-                "xmlNamespace": "https://xml-list.example.com"
-            },
-            "ListWithNamespace": {
-                "type": "list",
-                "member": {
-                    "shape": "String"
-                },
-                "xmlNamespace": "https://xml-list.example.com"
-            },
-            "StructureList": {
-                "type": "list",
-                "member": {
-                    "shape": "StructureListMember",
-                    "locationName": "item"
-                }
-            },
-            "StructureListMember": {
-                "type": "structure",
-                "members": {
-                    "a": {
-                        "shape": "String",
-                        "locationName": "value"
-                    },
-                    "b": {
-                        "shape": "String",
-                        "locationName": "other"
-                    }
-                }
-            },
-            "String": {
-                "type": "string"
-            },
-            "IntegerEnum": {
-                "type": "integer",
-                "box": true
-            },
-            "FooEnum": {
-                "type": "string",
-                "enum": [
-                    "Foo",
-                    "Baz",
-                    "Bar",
-                    "1",
-                    "0"
-                ]
-            },
-            "Timestamp": {
-                "type": "timestamp"
-            },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
-            },
-            "Integer": {
-                "type": "integer",
-                "box": true
             }
         },
         "cases": [
@@ -1518,6 +1518,17 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
+            "GreetingStruct": {
+                "type": "structure",
+                "members": {
+                    "hi": {
+                        "shape": "String"
+                    }
+                }
+            },
+            "String": {
+                "type": "string"
+            },
             "XmlMapsOutput": {
                 "type": "structure",
                 "members": {
@@ -1534,17 +1545,6 @@
                 "value": {
                     "shape": "GreetingStruct"
                 }
-            },
-            "GreetingStruct": {
-                "type": "structure",
-                "members": {
-                    "hi": {
-                        "shape": "String"
-                    }
-                }
-            },
-            "String": {
-                "type": "string"
             }
         },
         "cases": [
@@ -1619,6 +1619,40 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
+            "FooEnum": {
+                "type": "string",
+                "enum": [
+                    "Foo",
+                    "Baz",
+                    "Bar",
+                    "1",
+                    "0"
+                ]
+            },
+            "FooEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "FooEnum"
+                }
+            },
+            "FooEnumMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "FooEnum"
+                }
+            },
+            "FooEnumSet": {
+                "type": "list",
+                "member": {
+                    "shape": "FooEnum"
+                }
+            },
+            "String": {
+                "type": "string"
+            },
             "XmlEnumsOutput": {
                 "type": "structure",
                 "members": {
@@ -1641,40 +1675,6 @@
                         "shape": "FooEnumMap"
                     }
                 }
-            },
-            "FooEnum": {
-                "type": "string",
-                "enum": [
-                    "Foo",
-                    "Baz",
-                    "Bar",
-                    "1",
-                    "0"
-                ]
-            },
-            "FooEnumList": {
-                "type": "list",
-                "member": {
-                    "shape": "FooEnum"
-                }
-            },
-            "FooEnumSet": {
-                "type": "list",
-                "member": {
-                    "shape": "FooEnum"
-                }
-            },
-            "FooEnumMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "FooEnum"
-                }
-            },
-            "String": {
-                "type": "string"
             }
         },
         "cases": [
@@ -1739,6 +1739,34 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
+            "IntegerEnum": {
+                "type": "integer",
+                "box": true
+            },
+            "IntegerEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "IntegerEnum"
+                }
+            },
+            "IntegerEnumMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "IntegerEnum"
+                }
+            },
+            "IntegerEnumSet": {
+                "type": "list",
+                "member": {
+                    "shape": "IntegerEnum"
+                }
+            },
+            "String": {
+                "type": "string"
+            },
             "XmlIntEnumsOutput": {
                 "type": "structure",
                 "members": {
@@ -1761,34 +1789,6 @@
                         "shape": "IntegerEnumMap"
                     }
                 }
-            },
-            "IntegerEnum": {
-                "type": "integer",
-                "box": true
-            },
-            "IntegerEnumList": {
-                "type": "list",
-                "member": {
-                    "shape": "IntegerEnum"
-                }
-            },
-            "IntegerEnumSet": {
-                "type": "list",
-                "member": {
-                    "shape": "IntegerEnum"
-                }
-            },
-            "IntegerEnumMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "IntegerEnum"
-                }
-            },
-            "String": {
-                "type": "string"
             }
         },
         "cases": [
@@ -1853,6 +1853,125 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "BooleanList": {
+                "type": "list",
+                "member": {
+                    "shape": "Boolean"
+                }
+            },
+            "FooEnum": {
+                "type": "string",
+                "enum": [
+                    "Foo",
+                    "Baz",
+                    "Bar",
+                    "1",
+                    "0"
+                ]
+            },
+            "FooEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "FooEnum"
+                }
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "IntegerEnum": {
+                "type": "integer",
+                "box": true
+            },
+            "IntegerEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "IntegerEnum"
+                }
+            },
+            "IntegerList": {
+                "type": "list",
+                "member": {
+                    "shape": "Integer"
+                }
+            },
+            "ListWithMemberNamespace": {
+                "type": "list",
+                "member": {
+                    "shape": "String",
+                    "xmlNamespace": "https://xml-member.example.com"
+                },
+                "xmlNamespace": "https://xml-list.example.com"
+            },
+            "ListWithNamespace": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                },
+                "xmlNamespace": "https://xml-list.example.com"
+            },
+            "NestedStringList": {
+                "type": "list",
+                "member": {
+                    "shape": "StringList"
+                },
+                "documentation": "<p>A list of lists of strings.</p>"
+            },
+            "RenamedListMembers": {
+                "type": "list",
+                "member": {
+                    "shape": "String",
+                    "locationName": "item"
+                }
+            },
+            "String": {
+                "type": "string"
+            },
+            "StringList": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                }
+            },
+            "StringSet": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                }
+            },
+            "StructureList": {
+                "type": "list",
+                "member": {
+                    "shape": "StructureListMember",
+                    "locationName": "item"
+                }
+            },
+            "StructureListMember": {
+                "type": "structure",
+                "members": {
+                    "a": {
+                        "shape": "String",
+                        "locationName": "value"
+                    },
+                    "b": {
+                        "shape": "String",
+                        "locationName": "other"
+                    }
+                }
+            },
+            "Timestamp": {
+                "type": "timestamp"
+            },
+            "TimestampList": {
+                "type": "list",
+                "member": {
+                    "shape": "Timestamp"
+                }
+            },
             "XmlListsOutput": {
                 "type": "structure",
                 "members": {
@@ -1906,125 +2025,6 @@
                         "locationName": "myStructureList"
                     }
                 }
-            },
-            "StringList": {
-                "type": "list",
-                "member": {
-                    "shape": "String"
-                }
-            },
-            "StringSet": {
-                "type": "list",
-                "member": {
-                    "shape": "String"
-                }
-            },
-            "IntegerList": {
-                "type": "list",
-                "member": {
-                    "shape": "Integer"
-                }
-            },
-            "BooleanList": {
-                "type": "list",
-                "member": {
-                    "shape": "Boolean"
-                }
-            },
-            "TimestampList": {
-                "type": "list",
-                "member": {
-                    "shape": "Timestamp"
-                }
-            },
-            "FooEnumList": {
-                "type": "list",
-                "member": {
-                    "shape": "FooEnum"
-                }
-            },
-            "IntegerEnumList": {
-                "type": "list",
-                "member": {
-                    "shape": "IntegerEnum"
-                }
-            },
-            "NestedStringList": {
-                "type": "list",
-                "member": {
-                    "shape": "StringList"
-                },
-                "documentation": "<p>A list of lists of strings.</p>"
-            },
-            "RenamedListMembers": {
-                "type": "list",
-                "member": {
-                    "shape": "String",
-                    "locationName": "item"
-                }
-            },
-            "ListWithMemberNamespace": {
-                "type": "list",
-                "member": {
-                    "shape": "String",
-                    "xmlNamespace": "https://xml-member.example.com"
-                },
-                "xmlNamespace": "https://xml-list.example.com"
-            },
-            "ListWithNamespace": {
-                "type": "list",
-                "member": {
-                    "shape": "String"
-                },
-                "xmlNamespace": "https://xml-list.example.com"
-            },
-            "StructureList": {
-                "type": "list",
-                "member": {
-                    "shape": "StructureListMember",
-                    "locationName": "item"
-                }
-            },
-            "StructureListMember": {
-                "type": "structure",
-                "members": {
-                    "a": {
-                        "shape": "String",
-                        "locationName": "value"
-                    },
-                    "b": {
-                        "shape": "String",
-                        "locationName": "other"
-                    }
-                }
-            },
-            "String": {
-                "type": "string"
-            },
-            "IntegerEnum": {
-                "type": "integer",
-                "box": true
-            },
-            "FooEnum": {
-                "type": "string",
-                "enum": [
-                    "Foo",
-                    "Baz",
-                    "Bar",
-                    "1",
-                    "0"
-                ]
-            },
-            "Timestamp": {
-                "type": "timestamp"
-            },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
-            },
-            "Integer": {
-                "type": "integer",
-                "box": true
             }
         },
         "cases": [
@@ -2142,6 +2142,17 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
+            "GreetingStruct": {
+                "type": "structure",
+                "members": {
+                    "hi": {
+                        "shape": "String"
+                    }
+                }
+            },
+            "String": {
+                "type": "string"
+            },
             "XmlMapsOutput": {
                 "type": "structure",
                 "members": {
@@ -2158,17 +2169,6 @@
                 "value": {
                     "shape": "GreetingStruct"
                 }
-            },
-            "GreetingStruct": {
-                "type": "structure",
-                "members": {
-                    "hi": {
-                        "shape": "String"
-                    }
-                }
-            },
-            "String": {
-                "type": "string"
             }
         },
         "cases": [
@@ -2226,6 +2226,17 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
+            "GreetingStruct": {
+                "type": "structure",
+                "members": {
+                    "hi": {
+                        "shape": "String"
+                    }
+                }
+            },
+            "String": {
+                "type": "string"
+            },
             "XmlMapsXmlNameOutput": {
                 "type": "structure",
                 "members": {
@@ -2244,17 +2255,6 @@
                     "shape": "GreetingStruct",
                     "locationName": "Setting"
                 }
-            },
-            "GreetingStruct": {
-                "type": "structure",
-                "members": {
-                    "hi": {
-                        "shape": "String"
-                    }
-                }
-            },
-            "String": {
-                "type": "string"
             }
         },
         "cases": [
@@ -2311,14 +2311,8 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
-            "XmlNamespacesOutput": {
-                "type": "structure",
-                "members": {
-                    "nested": {
-                        "shape": "XmlNamespaceNested"
-                    }
-                },
-                "xmlNamespace": "http://foo.com"
+            "String": {
+                "type": "string"
             },
             "XmlNamespaceNested": {
                 "type": "structure",
@@ -2337,15 +2331,21 @@
                 },
                 "xmlNamespace": "http://boo.com"
             },
-            "String": {
-                "type": "string"
-            },
             "XmlNamespacedList": {
                 "type": "list",
                 "member": {
                     "shape": "String",
                     "xmlNamespace": "http://bux.com"
                 }
+            },
+            "XmlNamespacesOutput": {
+                "type": "structure",
+                "members": {
+                    "nested": {
+                        "shape": "XmlNamespaceNested"
+                    }
+                },
+                "xmlNamespace": "http://foo.com"
             }
         },
         "cases": [
@@ -2401,6 +2401,33 @@
             "uid": "query-protocol-2020-01-08"
         },
         "shapes": {
+            "DateTime": {
+                "type": "timestamp",
+                "timestampFormat": "iso8601"
+            },
+            "EpochSeconds": {
+                "type": "timestamp",
+                "timestampFormat": "unixTimestamp"
+            },
+            "HttpDate": {
+                "type": "timestamp",
+                "timestampFormat": "rfc822"
+            },
+            "SyntheticTimestamp_date_time": {
+                "type": "timestamp",
+                "timestampFormat": "iso8601"
+            },
+            "SyntheticTimestamp_epoch_seconds": {
+                "type": "timestamp",
+                "timestampFormat": "unixTimestamp"
+            },
+            "SyntheticTimestamp_http_date": {
+                "type": "timestamp",
+                "timestampFormat": "rfc822"
+            },
+            "Timestamp": {
+                "type": "timestamp"
+            },
             "XmlTimestampsOutput": {
                 "type": "structure",
                 "members": {
@@ -2426,33 +2453,6 @@
                         "shape": "HttpDate"
                     }
                 }
-            },
-            "Timestamp": {
-                "type": "timestamp"
-            },
-            "SyntheticTimestamp_date_time": {
-                "type": "timestamp",
-                "timestampFormat": "iso8601"
-            },
-            "DateTime": {
-                "type": "timestamp",
-                "timestampFormat": "iso8601"
-            },
-            "SyntheticTimestamp_epoch_seconds": {
-                "type": "timestamp",
-                "timestampFormat": "unixTimestamp"
-            },
-            "EpochSeconds": {
-                "type": "timestamp",
-                "timestampFormat": "unixTimestamp"
-            },
-            "SyntheticTimestamp_http_date": {
-                "type": "timestamp",
-                "timestampFormat": "rfc822"
-            },
-            "HttpDate": {
-                "type": "timestamp",
-                "timestampFormat": "rfc822"
             }
         },
         "cases": [

@@ -113,6 +113,7 @@ module Aws::MediaPackageV2
     EndpointErrorConditions = Shapes::ListShape.new(name: 'EndpointErrorConditions')
     EntityTag = Shapes::StringShape.new(name: 'EntityTag')
     FilterConfiguration = Shapes::StructureShape.new(name: 'FilterConfiguration')
+    FilterConfigurationDrmSettingsString = Shapes::StringShape.new(name: 'FilterConfigurationDrmSettingsString')
     FilterConfigurationManifestFilterString = Shapes::StringShape.new(name: 'FilterConfigurationManifestFilterString')
     FilterConfigurationTimeDelaySecondsInteger = Shapes::IntegerShape.new(name: 'FilterConfigurationTimeDelaySecondsInteger')
     Float = Shapes::FloatShape.new(name: 'Float')
@@ -207,11 +208,13 @@ module Aws::MediaPackageV2
     ScteFilter = Shapes::StringShape.new(name: 'ScteFilter')
     ScteFilterList = Shapes::ListShape.new(name: 'ScteFilterList')
     ScteHls = Shapes::StructureShape.new(name: 'ScteHls')
+    ScteInSegments = Shapes::StringShape.new(name: 'ScteInSegments')
     Segment = Shapes::StructureShape.new(name: 'Segment')
     SegmentSegmentDurationSecondsInteger = Shapes::IntegerShape.new(name: 'SegmentSegmentDurationSecondsInteger')
     SegmentSegmentNameString = Shapes::StringShape.new(name: 'SegmentSegmentNameString')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SpekeKeyProvider = Shapes::StructureShape.new(name: 'SpekeKeyProvider')
+    SpekeKeyProviderCertificateArnString = Shapes::StringShape.new(name: 'SpekeKeyProviderCertificateArnString')
     SpekeKeyProviderDrmSystemsList = Shapes::ListShape.new(name: 'SpekeKeyProviderDrmSystemsList')
     SpekeKeyProviderResourceIdString = Shapes::StringShape.new(name: 'SpekeKeyProviderResourceIdString')
     SpekeKeyProviderRoleArnString = Shapes::StringShape.new(name: 'SpekeKeyProviderRoleArnString')
@@ -534,6 +537,7 @@ module Aws::MediaPackageV2
     EndpointErrorConditions.member = Shapes::ShapeRef.new(shape: EndpointErrorCondition)
 
     FilterConfiguration.add_member(:manifest_filter, Shapes::ShapeRef.new(shape: FilterConfigurationManifestFilterString, location_name: "ManifestFilter"))
+    FilterConfiguration.add_member(:drm_settings, Shapes::ShapeRef.new(shape: FilterConfigurationDrmSettingsString, location_name: "DrmSettings"))
     FilterConfiguration.add_member(:start, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Start"))
     FilterConfiguration.add_member(:end, Shapes::ShapeRef.new(shape: Timestamp, location_name: "End"))
     FilterConfiguration.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: FilterConfigurationTimeDelaySecondsInteger, location_name: "TimeDelaySeconds"))
@@ -894,6 +898,7 @@ module Aws::MediaPackageV2
     S3DestinationConfig.struct_class = Types::S3DestinationConfig
 
     Scte.add_member(:scte_filter, Shapes::ShapeRef.new(shape: ScteFilterList, location_name: "ScteFilter"))
+    Scte.add_member(:scte_in_segments, Shapes::ShapeRef.new(shape: ScteInSegments, location_name: "ScteInSegments"))
     Scte.struct_class = Types::Scte
 
     ScteDash.add_member(:ad_marker_dash, Shapes::ShapeRef.new(shape: AdMarkerDash, location_name: "AdMarkerDash"))
@@ -921,6 +926,7 @@ module Aws::MediaPackageV2
     SpekeKeyProvider.add_member(:drm_systems, Shapes::ShapeRef.new(shape: SpekeKeyProviderDrmSystemsList, required: true, location_name: "DrmSystems"))
     SpekeKeyProvider.add_member(:role_arn, Shapes::ShapeRef.new(shape: SpekeKeyProviderRoleArnString, required: true, location_name: "RoleArn"))
     SpekeKeyProvider.add_member(:url, Shapes::ShapeRef.new(shape: SpekeKeyProviderUrlString, required: true, location_name: "Url"))
+    SpekeKeyProvider.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: SpekeKeyProviderCertificateArnString, location_name: "CertificateArn"))
     SpekeKeyProvider.struct_class = Types::SpekeKeyProvider
 
     SpekeKeyProviderDrmSystemsList.member = Shapes::ShapeRef.new(shape: DrmSystem)

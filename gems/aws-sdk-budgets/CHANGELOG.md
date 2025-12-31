@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.99.0 (2025-11-20)
+------------------
+
+* Feature - Add BillingViewHealthStatusException to DescribeBudgetPerformanceHistory and ServiceQuotaExceededException to UpdateBudget for improved error handling with Billing Views.
+
+1.98.0 (2025-11-03)
+------------------
+
+* Feature - Fix the AWS Budgets endpoint for the aws-eusc partition.
+
+1.97.0 (2025-10-24)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.96.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.95.0 (2025-09-18)
 ------------------
 

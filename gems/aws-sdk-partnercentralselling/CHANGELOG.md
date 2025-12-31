@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2025-12-10)
+------------------
+
+* Feature - Adds support for the new Project.AwsPartition field on Opportunity and AWS Opportunity Summary. Use this field to specify the AWS partition where the opportunity will be deployed.
+
+1.21.0 (2025-12-08)
+------------------
+
+* Feature - Deal Sizing Service for AI-based deal size estimation with AWS service-level breakdown, supporting Expansion and Migration deals across Technology, and Reseller partner cohorts, including Pricing Calculator AddOn for MAP deals and funding incentives.
+
+1.20.0 (2025-12-01)
+------------------
+
+* Feature - Add Lead Management APIs for capturing and nurturing leads, Lead invitation support for partner collaborationLead-to-opportunity conversion operations and AWS Marketplace OfferSets support for opportunities.
+
+1.19.0 (2025-11-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.18.0 (2025-10-28)
+------------------
+
+* Feature - Update endpoint ruleset parameters casing
+
+1.17.0 (2025-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.16.0 (2025-08-26)
 ------------------
 

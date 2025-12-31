@@ -120,7 +120,7 @@ module Aws::Organizations
 
     class ConstraintViolationException
       attr_accessor message: ::String
-      attr_accessor reason: ("ACCOUNT_NUMBER_LIMIT_EXCEEDED" | "HANDSHAKE_RATE_LIMIT_EXCEEDED" | "OU_NUMBER_LIMIT_EXCEEDED" | "OU_DEPTH_LIMIT_EXCEEDED" | "POLICY_NUMBER_LIMIT_EXCEEDED" | "POLICY_CONTENT_LIMIT_EXCEEDED" | "MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED" | "MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED" | "ACCOUNT_CANNOT_LEAVE_ORGANIZATION" | "ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA" | "ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION" | "MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED" | "MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED" | "ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED" | "MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE" | "MASTER_ACCOUNT_MISSING_CONTACT_INFO" | "MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED" | "ORGANIZATION_NOT_IN_ALL_FEATURES_MODE" | "CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION" | "EMAIL_VERIFICATION_CODE_EXPIRED" | "WAIT_PERIOD_ACTIVE" | "MAX_TAG_LIMIT_EXCEEDED" | "TAG_POLICY_VIOLATION" | "MAX_DELEGATED_ADMINISTRATORS_FOR_SERVICE_LIMIT_EXCEEDED" | "CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR" | "CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG" | "DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE" | "POLICY_TYPE_ENABLED_FOR_THIS_SERVICE" | "MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE" | "CANNOT_CLOSE_MANAGEMENT_ACCOUNT" | "CLOSE_ACCOUNT_QUOTA_EXCEEDED" | "CLOSE_ACCOUNT_REQUESTS_LIMIT_EXCEEDED" | "SERVICE_ACCESS_NOT_ENABLED" | "INVALID_PAYMENT_INSTRUMENT" | "ACCOUNT_CREATION_NOT_COMPLETE" | "CANNOT_REGISTER_SUSPENDED_ACCOUNT_AS_DELEGATED_ADMINISTRATOR" | "ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED")
+      attr_accessor reason: ("ACCOUNT_NUMBER_LIMIT_EXCEEDED" | "HANDSHAKE_RATE_LIMIT_EXCEEDED" | "OU_NUMBER_LIMIT_EXCEEDED" | "OU_DEPTH_LIMIT_EXCEEDED" | "POLICY_NUMBER_LIMIT_EXCEEDED" | "POLICY_CONTENT_LIMIT_EXCEEDED" | "MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED" | "MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED" | "ACCOUNT_CANNOT_LEAVE_ORGANIZATION" | "ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA" | "ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION" | "MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED" | "MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED" | "ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED" | "MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE" | "MASTER_ACCOUNT_MISSING_CONTACT_INFO" | "MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED" | "ORGANIZATION_NOT_IN_ALL_FEATURES_MODE" | "CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION" | "EMAIL_VERIFICATION_CODE_EXPIRED" | "WAIT_PERIOD_ACTIVE" | "MAX_TAG_LIMIT_EXCEEDED" | "TAG_POLICY_VIOLATION" | "MAX_DELEGATED_ADMINISTRATORS_FOR_SERVICE_LIMIT_EXCEEDED" | "CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR" | "CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG" | "DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE" | "POLICY_TYPE_ENABLED_FOR_THIS_SERVICE" | "MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE" | "CANNOT_CLOSE_MANAGEMENT_ACCOUNT" | "CLOSE_ACCOUNT_QUOTA_EXCEEDED" | "CLOSE_ACCOUNT_REQUESTS_LIMIT_EXCEEDED" | "SERVICE_ACCESS_NOT_ENABLED" | "INVALID_PAYMENT_INSTRUMENT" | "ACCOUNT_CREATION_NOT_COMPLETE" | "CANNOT_REGISTER_SUSPENDED_ACCOUNT_AS_DELEGATED_ADMINISTRATOR" | "ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED" | "RESPONSIBILITY_TRANSFER_MAX_LEVEL_VIOLATION" | "RESPONSIBILITY_TRANSFER_MAX_INBOUND_QUOTA_VIOLATION" | "RESPONSIBILITY_TRANSFER_MAX_OUTBOUND_QUOTA_VIOLATION" | "RESPONSIBILITY_TRANSFER_MAX_TRANSFERS_QUOTA_VIOLATION" | "ACTIVE_RESPONSIBILITY_TRANSFER_PROCESS" | "TRANSFER_RESPONSIBILITY_TARGET_DELETION_IN_PROGRESS" | "TRANSFER_RESPONSIBILITY_SOURCE_DELETION_IN_PROGRESS" | "UNSUPPORTED_PRICING")
       SENSITIVE: []
     end
 
@@ -195,7 +195,7 @@ module Aws::Organizations
       attr_accessor content: ::String
       attr_accessor description: ::String
       attr_accessor name: ::String
-      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY" | "NETWORK_SECURITY_DIRECTOR_POLICY")
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -221,6 +221,7 @@ module Aws::Organizations
       attr_accessor email: ::String
       attr_accessor name: ::String
       attr_accessor status: ("ACTIVE" | "SUSPENDED" | "PENDING_CLOSURE")
+      attr_accessor state: ("PENDING_ACTIVATION" | "ACTIVE" | "SUSPENDED" | "PENDING_CLOSURE" | "CLOSED")
       attr_accessor joined_method: ("INVITED" | "CREATED")
       attr_accessor joined_timestamp: ::Time
       attr_accessor delegation_enabled_date: ::Time
@@ -270,7 +271,7 @@ module Aws::Organizations
     end
 
     class DescribeEffectivePolicyRequest
-      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY" | "NETWORK_SECURITY_DIRECTOR_POLICY")
       attr_accessor target_id: ::String
       SENSITIVE: []
     end
@@ -320,6 +321,16 @@ module Aws::Organizations
       SENSITIVE: []
     end
 
+    class DescribeResponsibilityTransferRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResponsibilityTransferResponse
+      attr_accessor responsibility_transfer: Types::ResponsibilityTransfer
+      SENSITIVE: []
+    end
+
     class DestinationParentNotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -338,7 +349,7 @@ module Aws::Organizations
 
     class DisablePolicyTypeRequest
       attr_accessor root_id: ::String
-      attr_accessor policy_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+      attr_accessor policy_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY" | "NETWORK_SECURITY_DIRECTOR_POLICY")
       SENSITIVE: []
     end
 
@@ -376,7 +387,7 @@ module Aws::Organizations
       attr_accessor policy_content: ::String
       attr_accessor last_updated_timestamp: ::Time
       attr_accessor target_id: ::String
-      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY" | "NETWORK_SECURITY_DIRECTOR_POLICY")
       SENSITIVE: []
     end
 
@@ -408,7 +419,7 @@ module Aws::Organizations
 
     class EnablePolicyTypeRequest
       attr_accessor root_id: ::String
-      attr_accessor policy_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+      attr_accessor policy_type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY" | "NETWORK_SECURITY_DIRECTOR_POLICY")
       SENSITIVE: []
     end
 
@@ -435,7 +446,7 @@ module Aws::Organizations
       attr_accessor state: ("REQUESTED" | "OPEN" | "CANCELED" | "ACCEPTED" | "DECLINED" | "EXPIRED")
       attr_accessor requested_timestamp: ::Time
       attr_accessor expiration_timestamp: ::Time
-      attr_accessor action: ("INVITE" | "ENABLE_ALL_FEATURES" | "APPROVE_ALL_FEATURES" | "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE")
+      attr_accessor action: ("INVITE" | "ENABLE_ALL_FEATURES" | "APPROVE_ALL_FEATURES" | "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE" | "TRANSFER_RESPONSIBILITY")
       attr_accessor resources: ::Array[Types::HandshakeResource]
       SENSITIVE: []
     end
@@ -447,12 +458,12 @@ module Aws::Organizations
 
     class HandshakeConstraintViolationException
       attr_accessor message: ::String
-      attr_accessor reason: ("ACCOUNT_NUMBER_LIMIT_EXCEEDED" | "HANDSHAKE_RATE_LIMIT_EXCEEDED" | "ALREADY_IN_AN_ORGANIZATION" | "ORGANIZATION_ALREADY_HAS_ALL_FEATURES" | "ORGANIZATION_IS_ALREADY_PENDING_ALL_FEATURES_MIGRATION" | "INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES" | "PAYMENT_INSTRUMENT_REQUIRED" | "ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD" | "ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED" | "MANAGEMENT_ACCOUNT_EMAIL_NOT_VERIFIED")
+      attr_accessor reason: ("ACCOUNT_NUMBER_LIMIT_EXCEEDED" | "HANDSHAKE_RATE_LIMIT_EXCEEDED" | "ALREADY_IN_AN_ORGANIZATION" | "ORGANIZATION_ALREADY_HAS_ALL_FEATURES" | "ORGANIZATION_IS_ALREADY_PENDING_ALL_FEATURES_MIGRATION" | "INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES" | "PAYMENT_INSTRUMENT_REQUIRED" | "ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD" | "ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED" | "MANAGEMENT_ACCOUNT_EMAIL_NOT_VERIFIED" | "RESPONSIBILITY_TRANSFER_ALREADY_EXISTS" | "SOURCE_AND_TARGET_CANNOT_MATCH" | "UNUSED_PREPAYMENT_BALANCE" | "LEGACY_PERMISSIONS_STILL_IN_USE")
       SENSITIVE: []
     end
 
     class HandshakeFilter
-      attr_accessor action_type: ("INVITE" | "ENABLE_ALL_FEATURES" | "APPROVE_ALL_FEATURES" | "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE")
+      attr_accessor action_type: ("INVITE" | "ENABLE_ALL_FEATURES" | "APPROVE_ALL_FEATURES" | "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE" | "TRANSFER_RESPONSIBILITY")
       attr_accessor parent_handshake_id: ::String
       SENSITIVE: []
     end
@@ -470,7 +481,7 @@ module Aws::Organizations
 
     class HandshakeResource
       attr_accessor value: ::String
-      attr_accessor type: ("ACCOUNT" | "ORGANIZATION" | "ORGANIZATION_FEATURE_SET" | "EMAIL" | "MASTER_EMAIL" | "MASTER_NAME" | "NOTES" | "PARENT_HANDSHAKE")
+      attr_accessor type: ("ACCOUNT" | "ORGANIZATION" | "ORGANIZATION_FEATURE_SET" | "EMAIL" | "MASTER_EMAIL" | "MASTER_NAME" | "NOTES" | "PARENT_HANDSHAKE" | "RESPONSIBILITY_TRANSFER" | "TRANSFER_START_TIMESTAMP" | "TRANSFER_TYPE" | "MANAGEMENT_ACCOUNT" | "MANAGEMENT_EMAIL" | "MANAGEMENT_NAME")
       attr_accessor resources: ::Array[Types::HandshakeResource]
       SENSITIVE: [:value]
     end
@@ -482,7 +493,12 @@ module Aws::Organizations
 
     class InvalidInputException
       attr_accessor message: ::String
-      attr_accessor reason: ("INVALID_PARTY_TYPE_TARGET" | "INVALID_SYNTAX_ORGANIZATION_ARN" | "INVALID_SYNTAX_POLICY_ID" | "INVALID_ENUM" | "INVALID_ENUM_POLICY_TYPE" | "INVALID_LIST_MEMBER" | "MAX_LENGTH_EXCEEDED" | "MAX_VALUE_EXCEEDED" | "MIN_LENGTH_EXCEEDED" | "MIN_VALUE_EXCEEDED" | "IMMUTABLE_POLICY" | "INVALID_PATTERN" | "INVALID_PATTERN_TARGET_ID" | "INPUT_REQUIRED" | "INVALID_NEXT_TOKEN" | "MAX_LIMIT_EXCEEDED_FILTER" | "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS" | "INVALID_FULL_NAME_TARGET" | "UNRECOGNIZED_SERVICE_PRINCIPAL" | "INVALID_ROLE_NAME" | "INVALID_SYSTEM_TAGS_PARAMETER" | "DUPLICATE_TAG_KEY" | "TARGET_NOT_SUPPORTED" | "INVALID_EMAIL_ADDRESS_TARGET" | "INVALID_RESOURCE_POLICY_JSON" | "INVALID_PRINCIPAL" | "UNSUPPORTED_ACTION_IN_RESOURCE_POLICY" | "UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY" | "UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY" | "NON_DETACHABLE_POLICY")
+      attr_accessor reason: ("INVALID_PARTY_TYPE_TARGET" | "INVALID_SYNTAX_ORGANIZATION_ARN" | "INVALID_SYNTAX_POLICY_ID" | "INVALID_ENUM" | "INVALID_ENUM_POLICY_TYPE" | "INVALID_LIST_MEMBER" | "MAX_LENGTH_EXCEEDED" | "MAX_VALUE_EXCEEDED" | "MIN_LENGTH_EXCEEDED" | "MIN_VALUE_EXCEEDED" | "IMMUTABLE_POLICY" | "INVALID_PATTERN" | "INVALID_PATTERN_TARGET_ID" | "INPUT_REQUIRED" | "INVALID_NEXT_TOKEN" | "MAX_LIMIT_EXCEEDED_FILTER" | "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS" | "INVALID_FULL_NAME_TARGET" | "UNRECOGNIZED_SERVICE_PRINCIPAL" | "INVALID_ROLE_NAME" | "INVALID_SYSTEM_TAGS_PARAMETER" | "DUPLICATE_TAG_KEY" | "TARGET_NOT_SUPPORTED" | "INVALID_EMAIL_ADDRESS_TARGET" | "INVALID_RESOURCE_POLICY_JSON" | "INVALID_PRINCIPAL" | "UNSUPPORTED_ACTION_IN_RESOURCE_POLICY" | "UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY" | "UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY" | "NON_DETACHABLE_POLICY" | "CALLER_REQUIRED_FIELD_MISSING" | "UNSUPPORTED_ACTION_IN_RESPONSIBILITY_TRANSFER" | "START_DATE_NOT_BEGINNING_OF_MONTH" | "START_DATE_NOT_BEGINNING_OF_DAY" | "START_DATE_TOO_EARLY" | "START_DATE_TOO_LATE" | "INVALID_START_DATE" | "END_DATE_NOT_END_OF_MONTH" | "END_DATE_TOO_EARLY" | "INVALID_END_DATE")
+      SENSITIVE: []
+    end
+
+    class InvalidResponsibilityTransferTransitionException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -494,6 +510,21 @@ module Aws::Organizations
     end
 
     class InviteAccountToOrganizationResponse
+      attr_accessor handshake: Types::Handshake
+      SENSITIVE: []
+    end
+
+    class InviteOrganizationToTransferResponsibilityRequest
+      attr_accessor type: ("BILLING")
+      attr_accessor target: Types::HandshakeParty
+      attr_accessor notes: ::String
+      attr_accessor start_timestamp: ::Time
+      attr_accessor source_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:notes, :source_name]
+    end
+
+    class InviteOrganizationToTransferResponsibilityResponse
       attr_accessor handshake: Types::Handshake
       SENSITIVE: []
     end
@@ -536,7 +567,7 @@ module Aws::Organizations
     end
 
     class ListAccountsWithInvalidEffectivePolicyRequest
-      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY" | "NETWORK_SECURITY_DIRECTOR_POLICY")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -544,7 +575,7 @@ module Aws::Organizations
 
     class ListAccountsWithInvalidEffectivePolicyResponse
       attr_accessor accounts: ::Array[Types::Account]
-      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY" | "NETWORK_SECURITY_DIRECTOR_POLICY")
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -604,7 +635,7 @@ module Aws::Organizations
 
     class ListEffectivePolicyValidationErrorsRequest
       attr_accessor account_id: ::String
-      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY" | "NETWORK_SECURITY_DIRECTOR_POLICY")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -612,7 +643,7 @@ module Aws::Organizations
 
     class ListEffectivePolicyValidationErrorsResponse
       attr_accessor account_id: ::String
-      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY" | "NETWORK_SECURITY_DIRECTOR_POLICY")
       attr_accessor path: ::String
       attr_accessor evaluation_timestamp: ::Time
       attr_accessor next_token: ::String
@@ -646,6 +677,20 @@ module Aws::Organizations
       SENSITIVE: []
     end
 
+    class ListInboundResponsibilityTransfersRequest
+      attr_accessor type: ("BILLING")
+      attr_accessor id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListInboundResponsibilityTransfersResponse
+      attr_accessor responsibility_transfers: ::Array[Types::ResponsibilityTransfer]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListOrganizationalUnitsForParentRequest
       attr_accessor parent_id: ::String
       attr_accessor next_token: ::String
@@ -655,6 +700,19 @@ module Aws::Organizations
 
     class ListOrganizationalUnitsForParentResponse
       attr_accessor organizational_units: ::Array[Types::OrganizationalUnit]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOutboundResponsibilityTransfersRequest
+      attr_accessor type: ("BILLING")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListOutboundResponsibilityTransfersResponse
+      attr_accessor responsibility_transfers: ::Array[Types::ResponsibilityTransfer]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -674,7 +732,7 @@ module Aws::Organizations
 
     class ListPoliciesForTargetRequest
       attr_accessor target_id: ::String
-      attr_accessor filter: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+      attr_accessor filter: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY" | "NETWORK_SECURITY_DIRECTOR_POLICY")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -687,7 +745,7 @@ module Aws::Organizations
     end
 
     class ListPoliciesRequest
-      attr_accessor filter: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+      attr_accessor filter: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY" | "NETWORK_SECURITY_DIRECTOR_POLICY")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -828,7 +886,7 @@ module Aws::Organizations
       attr_accessor arn: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY" | "NETWORK_SECURITY_DIRECTOR_POLICY")
       attr_accessor aws_managed: bool
       SENSITIVE: []
     end
@@ -857,7 +915,7 @@ module Aws::Organizations
     end
 
     class PolicyTypeSummary
-      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY")
+      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "RESOURCE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY" | "CHATBOT_POLICY" | "DECLARATIVE_POLICY_EC2" | "SECURITYHUB_POLICY" | "INSPECTOR_POLICY" | "UPGRADE_ROLLOUT_POLICY" | "BEDROCK_POLICY" | "S3_POLICY" | "NETWORK_SECURITY_DIRECTOR_POLICY")
       attr_accessor status: ("ENABLED" | "PENDING_ENABLE" | "PENDING_DISABLE")
       SENSITIVE: []
     end
@@ -901,6 +959,30 @@ module Aws::Organizations
       SENSITIVE: []
     end
 
+    class ResponsibilityTransfer
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor type: ("BILLING")
+      attr_accessor status: ("REQUESTED" | "DECLINED" | "CANCELED" | "EXPIRED" | "ACCEPTED" | "WITHDRAWN")
+      attr_accessor source: Types::TransferParticipant
+      attr_accessor target: Types::TransferParticipant
+      attr_accessor start_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      attr_accessor active_handshake_id: ::String
+      SENSITIVE: [:name]
+    end
+
+    class ResponsibilityTransferAlreadyInStatusException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResponsibilityTransferNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class Root
       attr_accessor id: ::String
       attr_accessor arn: ::String
@@ -941,10 +1023,27 @@ module Aws::Organizations
       SENSITIVE: []
     end
 
+    class TerminateResponsibilityTransferRequest
+      attr_accessor id: ::String
+      attr_accessor end_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class TerminateResponsibilityTransferResponse
+      attr_accessor responsibility_transfer: Types::ResponsibilityTransfer
+      SENSITIVE: []
+    end
+
     class TooManyRequestsException
       attr_accessor type: ::String
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class TransferParticipant
+      attr_accessor management_account_id: ::String
+      attr_accessor management_account_email: ::String
+      SENSITIVE: [:management_account_email]
     end
 
     class UnsupportedAPIEndpointException
@@ -979,6 +1078,17 @@ module Aws::Organizations
 
     class UpdatePolicyResponse
       attr_accessor policy: Types::Policy
+      SENSITIVE: []
+    end
+
+    class UpdateResponsibilityTransferRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:name]
+    end
+
+    class UpdateResponsibilityTransferResponse
+      attr_accessor responsibility_transfer: Types::ResponsibilityTransfer
       SENSITIVE: []
     end
   end

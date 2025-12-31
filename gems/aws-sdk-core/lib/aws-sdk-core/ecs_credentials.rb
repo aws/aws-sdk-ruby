@@ -42,26 +42,26 @@ module Aws
     # @option options [Integer] :retries (5) Number of times to retry
     #   when retrieving credentials.
     # @option options [String] :ip_address ('169.254.170.2') This value is
-    #   ignored if `endpoint` is set and `credential_path` is not set.
-    # @option options [Integer] :port (80) This value is ignored if `endpoint`
-    #   is set and `credential_path` is not set.
+    #   ignored if `:endpoint` is set and `:credential_path` is not set.
+    # @option options [Integer] :port (80) This value is ignored if `:endpoint`
+    #   is set and `:credential_path` is not set.
     # @option options [String] :credential_path By default, the value of the
-    #   AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variable.
+    #   `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` environment variable.
     # @option options [String] :endpoint The container credential endpoint.
-    #   By default, this is the value of the AWS_CONTAINER_CREDENTIALS_FULL_URI
-    #   environment variable. This value is ignored if `credential_path` or
-    #   ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] is set.
+    #   By default, this is the value of the `AWS_CONTAINER_CREDENTIALS_FULL_URI`
+    #   environment variable. This value is ignored if `:credential_path` or
+    #   `ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI']` is set.
     # @option options [Float] :http_open_timeout (5)
     # @option options [Float] :http_read_timeout (5)
-    # @option options [Numeric, Proc] :delay By default, failures are retried
+    # @option options [IO] :http_debug_output (nil) HTTP wire
+    #   traces are sent to this object.  You can specify something
+    #   like `$stdout`.
+    # @option options [Numeric, Proc] :backoff By default, failures are retried
     #   with exponential back-off, i.e. `sleep(1.2 ** num_failures)`. You can
     #   pass a number of seconds to sleep between failed attempts, or
     #   a Proc that accepts the number of failures.
-    # @option options [IO] :http_debug_output (nil) HTTP wire
-    #   traces are sent to this object.  You can specify something
-    #   like $stdout.
-    # @option options [Callable] before_refresh Proc called before
-    #   credentials are refreshed. `before_refresh` is called
+    # @option options [Proc] :before_refresh A Proc called before
+    #   credentials are refreshed. `:before_refresh` is called
     #   with an instance of this object when
     #   AWS credentials are required and need to be refreshed.
     def initialize(options = {})

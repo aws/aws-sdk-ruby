@@ -362,7 +362,8 @@ module Aws
                                        value: ::String?
                                      },
                                    ]?,
-                                   workspace_name: ::String?
+                                   workspace_name: ::String?,
+                                   ipv_6_address: ::String?
                                  },
                                ]
                              ) -> _CreateWorkspacesResponseSuccess

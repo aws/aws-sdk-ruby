@@ -35,6 +35,9 @@ module Aws
       class NotFoundException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class RequestTimeoutException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

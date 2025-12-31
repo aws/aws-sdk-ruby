@@ -31,6 +31,11 @@ module Aws
         def code: () -> ::String
         def message: () -> ::String
       end
+      class NoLongerSupportedException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def code: () -> ::String
+        def message: () -> ::String
+      end
       class PolicyEnforcedException < ::Aws::Errors::ServiceError
         def type: () -> ::String
         def code: () -> ::String

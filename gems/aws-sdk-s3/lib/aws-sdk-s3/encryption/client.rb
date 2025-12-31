@@ -6,9 +6,9 @@ module Aws
   module S3
 
     # [MAINTENANCE MODE] There is a new version of the Encryption Client.
-    # AWS strongly recommends upgrading to the {Aws::S3::EncryptionV2::Client},
+    # AWS strongly recommends upgrading to the {Aws::S3::EncryptionV3::Client},
     # which provides updated data security best practices.
-    # See documentation for {Aws::S3::EncryptionV2::Client}.
+    # See documentation for {Aws::S3::EncryptionV3::Client}.
     # Provides an encryption client that encrypts and decrypts data client-side,
     # storing the encrypted data in Amazon S3.
     #

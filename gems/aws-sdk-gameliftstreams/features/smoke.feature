@@ -8,28 +8,16 @@
 Feature: Smoke tests for GameLiftStreams
 
   @gameliftstreams @smoke
-  Scenario: GetStreamSession
+  Scenario: GetStreamGroup
     Given I create a 'Aws::GameLiftStreams' client with config:
       """
 {"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'get_stream_session' with params:
+    When I call the operation 'get_stream_group' with params:
       """
-{"identifier":"abcdefghi","stream_session_identifier":"jklmnopqr"}
+{"identifier":"12ab34cd5"}
       """
     Then I expect a 'Aws::GameLiftStreams::Errors::ResourceNotFoundException' was raised
-
-  @gameliftstreams @smoke
-  Scenario: ListTagsForResource
-    Given I create a 'Aws::GameLiftStreams' client with config:
-      """
-{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_tags_for_resource' with params:
-      """
-{"resource_arn":"arn:aws:gameliftstreams:us-west-2:012345678901:abcdefghi"}
-      """
-    Then I expect a 'Aws::GameLiftStreams::Errors::ValidationException' was raised
 
   @gameliftstreams @smoke
   Scenario: ListStreamSessions
@@ -40,18 +28,6 @@ Feature: Smoke tests for GameLiftStreams
     When I call the operation 'list_stream_sessions' with params:
       """
 {"identifier":"abcdefghi"}
-      """
-    Then I expect a 'Aws::GameLiftStreams::Errors::ResourceNotFoundException' was raised
-
-  @gameliftstreams @smoke
-  Scenario: GetStreamGroup
-    Given I create a 'Aws::GameLiftStreams' client with config:
-      """
-{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'get_stream_group' with params:
-      """
-{"identifier":"12ab34cd5"}
       """
     Then I expect a 'Aws::GameLiftStreams::Errors::ResourceNotFoundException' was raised
 
@@ -68,16 +44,16 @@ Feature: Smoke tests for GameLiftStreams
     Then I expect an error was not raised
 
   @gameliftstreams @smoke
-  Scenario: ListStreamSessionsByAccount
+  Scenario: GetStreamSession
     Given I create a 'Aws::GameLiftStreams' client with config:
       """
 {"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_stream_sessions_by_account' with params:
+    When I call the operation 'get_stream_session' with params:
       """
-{}
+{"identifier":"abcdefghi","stream_session_identifier":"jklmnopqr"}
       """
-    Then I expect an error was not raised
+    Then I expect a 'Aws::GameLiftStreams::Errors::ResourceNotFoundException' was raised
 
   @gameliftstreams @smoke
   Scenario: ListApplications
@@ -92,6 +68,18 @@ Feature: Smoke tests for GameLiftStreams
     Then I expect an error was not raised
 
   @gameliftstreams @smoke
+  Scenario: ListTagsForResource
+    Given I create a 'Aws::GameLiftStreams' client with config:
+      """
+{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_tags_for_resource' with params:
+      """
+{"resource_arn":"arn:aws:gameliftstreams:us-west-2:012345678901:abcdefghi"}
+      """
+    Then I expect a 'Aws::GameLiftStreams::Errors::ValidationException' was raised
+
+  @gameliftstreams @smoke
   Scenario: GetApplication
     Given I create a 'Aws::GameLiftStreams' client with config:
       """
@@ -102,3 +90,15 @@ Feature: Smoke tests for GameLiftStreams
 {"identifier":"aBcDeFgHi"}
       """
     Then I expect a 'Aws::GameLiftStreams::Errors::ResourceNotFoundException' was raised
+
+  @gameliftstreams @smoke
+  Scenario: ListStreamSessionsByAccount
+    Given I create a 'Aws::GameLiftStreams' client with config:
+      """
+{"region":"us-west-2","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_stream_sessions_by_account' with params:
+      """
+{}
+      """
+    Then I expect an error was not raised

@@ -43,6 +43,9 @@ module Aws
       class UnauthorizedException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class UnprocessableContentException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ValidationException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

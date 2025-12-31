@@ -51,11 +51,10 @@ module Aws
 
       def complete_upload(upload_id, parts, file_size, options)
         @client.complete_multipart_upload(
-          **complete_opts(options).merge(
-            upload_id: upload_id,
-            multipart_upload: { parts: parts },
-            mpu_object_size: file_size
-          )
+          **complete_opts(options),
+          upload_id: upload_id,
+          multipart_upload: { parts: parts },
+          mpu_object_size: file_size
         )
       rescue StandardError => e
         abort_upload(upload_id, options, [e])
@@ -79,8 +78,8 @@ module Aws
       rescue MultipartUploadError => e
         raise e
       rescue StandardError => e
-        msg = "failed to abort multipart upload: #{e.message}. "\
-          "Multipart upload failed: #{errors.map(&:message).join('; ')}"
+        msg = "failed to abort multipart upload: #{e.message}. " \
+              "Multipart upload failed: #{errors.map(&:message).join('; ')}"
         raise MultipartUploadError.new(msg, errors + [e])
       end
 
@@ -113,8 +112,15 @@ module Aws
         keys.any? { |key| checksum_key?(key) }
       end
 
+      def checksum_not_required?(options)
+        @client.config.request_checksum_calculation == 'when_required' && !options[:checksum_algorithm]
+      end
+
       def create_opts(options)
-        opts = { checksum_algorithm: Aws::Plugins::ChecksumAlgorithm::DEFAULT_CHECKSUM }
+        opts = {}
+        unless checksum_not_required?(options)
+          opts[:checksum_algorithm] = Aws::Plugins::ChecksumAlgorithm::DEFAULT_CHECKSUM
+        end
         opts[:checksum_type] = 'FULL_OBJECT' if has_checksum_key?(options.keys)
         CREATE_OPTIONS.each_with_object(opts) { |k, h| h[k] = options[k] if options.key?(k) }
       end
@@ -148,9 +154,7 @@ module Aws
             resp = @client.upload_part(p)
             p[:body].close
             completed_part = { etag: resp.etag, part_number: p[:part_number] }
-            algorithm = resp.context.params[:checksum_algorithm].downcase
-            k = "checksum_#{algorithm}".to_sym
-            completed_part[k] = resp.send(k)
+            apply_part_checksum(resp, completed_part)
             completed.push(completed_part)
           rescue StandardError => e
             abort_upload = true
@@ -162,6 +166,13 @@ module Aws
 
         upload_attempts.times { completion_queue.pop }
         errors
+      end
+
+      def apply_part_checksum(resp, part)
+        return unless (checksum = resp.context.params[:checksum_algorithm])
+
+        k = :"checksum_#{checksum.downcase}"
+        part[k] = resp.send(k)
       end
 
       def compute_default_part_size(file_size)

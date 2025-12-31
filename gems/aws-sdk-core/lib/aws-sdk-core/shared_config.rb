@@ -171,6 +171,16 @@ module Aws
       token
     end
 
+    # Attempts to load from shared config or shared credentials file.
+    # Will always attempt first to load from the shared credentials
+    # file, if present.
+    def login_credentials_from_config(opts = {})
+      p = opts[:profile] || @profile_name
+      credentials = login_credentials_from_profile(@parsed_credentials, p, opts[:region])
+      credentials ||= login_credentials_from_profile(@parsed_config, p, opts[:region]) if @parsed_config
+      credentials
+    end
+
     # Source a custom configured endpoint from the shared configuration file
     #
     # @param [Hash] opts
@@ -467,6 +477,16 @@ module Aws
           sso_region: sso_session['sso_region']
         )
       end
+    end
+
+    def login_credentials_from_profile(cfg, profile, region)
+      return unless @parsed_config && (prof_config = cfg[profile]) && prof_config['login_session']
+
+      cfg = { login_session: prof_config['login_session'] }
+      cfg[:region] = region if region
+      creds = LoginCredentials.new(cfg)
+      creds.metrics << 'CREDENTIALS_PROFILE_LOGIN'
+      creds
     end
 
     def credentials_from_profile(prof_config)

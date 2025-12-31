@@ -100,7 +100,8 @@ module Aws
                                  ?description: ::String,
                                  ?tax_inheritance_disabled: bool,
                                  rule: {
-                                   linked_accounts: Array[::String]?
+                                   linked_accounts: Array[::String]?,
+                                   bill_source_accounts: Array[::String]?
                                  },
                                  ?resource_tags: Array[
                                    {
@@ -111,6 +112,62 @@ module Aws
                                ) -> _CreateInvoiceUnitResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInvoiceUnitResponseSuccess
 
+      interface _CreateProcurementPortalPreferenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProcurementPortalPreferenceResponse]
+        def procurement_portal_preference_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Invoicing/Client.html#create_procurement_portal_preference-instance_method
+      def create_procurement_portal_preference: (
+                                                  procurement_portal_name: ("SAP_BUSINESS_NETWORK" | "COUPA"),
+                                                  buyer_domain: ("NetworkID"),
+                                                  buyer_identifier: ::String,
+                                                  supplier_domain: ("NetworkID"),
+                                                  supplier_identifier: ::String,
+                                                  ?selector: {
+                                                    invoice_unit_arns: Array[::String]?,
+                                                    seller_of_records: Array[::String]?
+                                                  },
+                                                  ?procurement_portal_shared_secret: ::String,
+                                                  ?procurement_portal_instance_endpoint: ::String,
+                                                  ?test_env_preference: {
+                                                    buyer_domain: ("NetworkID"),
+                                                    buyer_identifier: ::String,
+                                                    supplier_domain: ("NetworkID"),
+                                                    supplier_identifier: ::String,
+                                                    procurement_portal_shared_secret: ::String?,
+                                                    procurement_portal_instance_endpoint: ::String?
+                                                  },
+                                                  einvoice_delivery_enabled: bool,
+                                                  ?einvoice_delivery_preference: {
+                                                    einvoice_delivery_document_types: Array[("AWS_CLOUD_INVOICE" | "AWS_CLOUD_CREDIT_MEMO" | "AWS_MARKETPLACE_INVOICE" | "AWS_MARKETPLACE_CREDIT_MEMO" | "AWS_REQUEST_FOR_PAYMENT")],
+                                                    einvoice_delivery_attachment_types: Array[("INVOICE_PDF" | "RFP_PDF")]?,
+                                                    protocol: ("CXML"),
+                                                    purchase_order_data_sources: Array[
+                                                      {
+                                                        einvoice_delivery_document_type: ("AWS_CLOUD_INVOICE" | "AWS_CLOUD_CREDIT_MEMO" | "AWS_MARKETPLACE_INVOICE" | "AWS_MARKETPLACE_CREDIT_MEMO" | "AWS_REQUEST_FOR_PAYMENT")?,
+                                                        purchase_order_data_source_type: ("ASSOCIATED_PURCHASE_ORDER_REQUIRED" | "PURCHASE_ORDER_NOT_REQUIRED")?
+                                                      },
+                                                    ],
+                                                    connection_testing_method: ("PROD_ENV_DOLLAR_TEST" | "TEST_ENV_REPLAY_TEST"),
+                                                    einvoice_delivery_activation_date: ::Time
+                                                  },
+                                                  purchase_order_retrieval_enabled: bool,
+                                                  contacts: Array[
+                                                    {
+                                                      name: ::String?,
+                                                      email: ::String?
+                                                    },
+                                                  ],
+                                                  ?resource_tags: Array[
+                                                    {
+                                                      key: ::String,
+                                                      value: ::String
+                                                    },
+                                                  ],
+                                                  ?client_token: ::String
+                                                ) -> _CreateProcurementPortalPreferenceResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProcurementPortalPreferenceResponseSuccess
+
       interface _DeleteInvoiceUnitResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInvoiceUnitResponse]
         def invoice_unit_arn: () -> ::String
@@ -120,6 +177,26 @@ module Aws
                                  invoice_unit_arn: ::String
                                ) -> _DeleteInvoiceUnitResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInvoiceUnitResponseSuccess
+
+      interface _DeleteProcurementPortalPreferenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProcurementPortalPreferenceResponse]
+        def procurement_portal_preference_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Invoicing/Client.html#delete_procurement_portal_preference-instance_method
+      def delete_procurement_portal_preference: (
+                                                  procurement_portal_preference_arn: ::String
+                                                ) -> _DeleteProcurementPortalPreferenceResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProcurementPortalPreferenceResponseSuccess
+
+      interface _GetInvoicePDFResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInvoicePDFResponse]
+        def invoice_pdf: () -> Types::InvoicePDF
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Invoicing/Client.html#get_invoice_pdf-instance_method
+      def get_invoice_pdf: (
+                             invoice_id: ::String
+                           ) -> _GetInvoicePDFResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInvoicePDFResponseSuccess
 
       interface _GetInvoiceUnitResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetInvoiceUnitResponse]
@@ -137,6 +214,16 @@ module Aws
                               ?as_of: ::Time
                             ) -> _GetInvoiceUnitResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInvoiceUnitResponseSuccess
+
+      interface _GetProcurementPortalPreferenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProcurementPortalPreferenceResponse]
+        def procurement_portal_preference: () -> Types::ProcurementPortalPreference
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Invoicing/Client.html#get_procurement_portal_preference-instance_method
+      def get_procurement_portal_preference: (
+                                               procurement_portal_preference_arn: ::String
+                                             ) -> _GetProcurementPortalPreferenceResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProcurementPortalPreferenceResponseSuccess
 
       interface _ListInvoiceSummariesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListInvoiceSummariesResponse]
@@ -175,13 +262,26 @@ module Aws
                                 ?filters: {
                                   names: Array[::String]?,
                                   invoice_receivers: Array[::String]?,
-                                  accounts: Array[::String]?
+                                  accounts: Array[::String]?,
+                                  bill_source_accounts: Array[::String]?
                                 },
                                 ?next_token: ::String,
                                 ?max_results: ::Integer,
                                 ?as_of: ::Time
                               ) -> _ListInvoiceUnitsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInvoiceUnitsResponseSuccess
+
+      interface _ListProcurementPortalPreferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProcurementPortalPreferencesResponse]
+        def procurement_portal_preferences: () -> ::Array[Types::ProcurementPortalPreferenceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Invoicing/Client.html#list_procurement_portal_preferences-instance_method
+      def list_procurement_portal_preferences: (
+                                                 ?next_token: ::String,
+                                                 ?max_results: ::Integer
+                                               ) -> _ListProcurementPortalPreferencesResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProcurementPortalPreferencesResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
@@ -192,6 +292,51 @@ module Aws
                                     resource_arn: ::String
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutProcurementPortalPreferenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutProcurementPortalPreferenceResponse]
+        def procurement_portal_preference_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Invoicing/Client.html#put_procurement_portal_preference-instance_method
+      def put_procurement_portal_preference: (
+                                               procurement_portal_preference_arn: ::String,
+                                               ?selector: {
+                                                 invoice_unit_arns: Array[::String]?,
+                                                 seller_of_records: Array[::String]?
+                                               },
+                                               ?procurement_portal_shared_secret: ::String,
+                                               ?procurement_portal_instance_endpoint: ::String,
+                                               ?test_env_preference: {
+                                                 buyer_domain: ("NetworkID"),
+                                                 buyer_identifier: ::String,
+                                                 supplier_domain: ("NetworkID"),
+                                                 supplier_identifier: ::String,
+                                                 procurement_portal_shared_secret: ::String?,
+                                                 procurement_portal_instance_endpoint: ::String?
+                                               },
+                                               einvoice_delivery_enabled: bool,
+                                               ?einvoice_delivery_preference: {
+                                                 einvoice_delivery_document_types: Array[("AWS_CLOUD_INVOICE" | "AWS_CLOUD_CREDIT_MEMO" | "AWS_MARKETPLACE_INVOICE" | "AWS_MARKETPLACE_CREDIT_MEMO" | "AWS_REQUEST_FOR_PAYMENT")],
+                                                 einvoice_delivery_attachment_types: Array[("INVOICE_PDF" | "RFP_PDF")]?,
+                                                 protocol: ("CXML"),
+                                                 purchase_order_data_sources: Array[
+                                                   {
+                                                     einvoice_delivery_document_type: ("AWS_CLOUD_INVOICE" | "AWS_CLOUD_CREDIT_MEMO" | "AWS_MARKETPLACE_INVOICE" | "AWS_MARKETPLACE_CREDIT_MEMO" | "AWS_REQUEST_FOR_PAYMENT")?,
+                                                     purchase_order_data_source_type: ("ASSOCIATED_PURCHASE_ORDER_REQUIRED" | "PURCHASE_ORDER_NOT_REQUIRED")?
+                                                   },
+                                                 ],
+                                                 connection_testing_method: ("PROD_ENV_DOLLAR_TEST" | "TEST_ENV_REPLAY_TEST"),
+                                                 einvoice_delivery_activation_date: ::Time
+                                               },
+                                               purchase_order_retrieval_enabled: bool,
+                                               contacts: Array[
+                                                 {
+                                                   name: ::String?,
+                                                   email: ::String?
+                                                 },
+                                               ]
+                                             ) -> _PutProcurementPortalPreferenceResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutProcurementPortalPreferenceResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
@@ -228,10 +373,25 @@ module Aws
                                  ?description: ::String,
                                  ?tax_inheritance_disabled: bool,
                                  ?rule: {
-                                   linked_accounts: Array[::String]?
+                                   linked_accounts: Array[::String]?,
+                                   bill_source_accounts: Array[::String]?
                                  }
                                ) -> _UpdateInvoiceUnitResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInvoiceUnitResponseSuccess
+
+      interface _UpdateProcurementPortalPreferenceStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProcurementPortalPreferenceStatusResponse]
+        def procurement_portal_preference_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Invoicing/Client.html#update_procurement_portal_preference_status-instance_method
+      def update_procurement_portal_preference_status: (
+                                                         procurement_portal_preference_arn: ::String,
+                                                         ?einvoice_delivery_preference_status: ("PENDING_VERIFICATION" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED"),
+                                                         ?einvoice_delivery_preference_status_reason: ::String,
+                                                         ?purchase_order_retrieval_preference_status: ("PENDING_VERIFICATION" | "TEST_INITIALIZED" | "TEST_INITIALIZATION_FAILED" | "TEST_FAILED" | "ACTIVE" | "SUSPENDED"),
+                                                         ?purchase_order_retrieval_preference_status_reason: ::String
+                                                       ) -> _UpdateProcurementPortalPreferenceStatusResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProcurementPortalPreferenceStatusResponseSuccess
     end
   end
 end
