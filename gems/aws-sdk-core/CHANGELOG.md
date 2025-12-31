@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix flaky login credentials spec test.
+
 3.240.0 (2025-12-16)
 ------------------
 
