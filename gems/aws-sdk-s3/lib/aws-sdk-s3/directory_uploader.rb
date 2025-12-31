@@ -6,23 +6,23 @@ module Aws
   module S3
     # @api private
     class DirectoryUploader
-      def initialize(options = {})
-        @client = options[:client]
-        @executor = options[:executor]
+      def initialize(opts = {})
+        @client = opts[:client]
+        @executor = opts[:executor]
         @queue_executor = DefaultExecutor.new
         @abort_requested = false
         @mutex = Mutex.new
       end
 
-      def upload(source_directory, bucket, **options)
+      def upload(source_directory, bucket, **opts)
         raise ArgumentError, 'Invalid directory' unless Dir.exist?(source_directory)
 
         uploader = FileUploader.new(
-          multipart_threshold: options.delete(:multipart_threshold),
+          multipart_threshold: opts.delete(:multipart_threshold),
           client: @client,
           executor: @executor
         )
-        upload_opts, producer_opts = build_opts(source_directory, bucket, options)
+        upload_opts, producer_opts = build_opts(source_directory, bucket, opts)
         producer = FileProducer.new(producer_opts)
         uploads, errors = process_upload_queue(producer, uploader, upload_opts)
         build_result(uploads, errors)
@@ -79,7 +79,7 @@ module Aws
       end
 
       def process_upload_queue(producer, uploader, opts)
-        progress = DirectoryProgress.new(opts.delete(:progress_callback)) if opts[:progress_callback]
+        progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
         upload_attempts = 0
         errors = []
         begin
@@ -96,7 +96,7 @@ module Aws
               uploader.upload(f.path, f.params)
               progress&.call(File.size(f.path))
             rescue StandardError => e
-              errors << StandardError.new("Failed to upload: #{f.path} : #{e.message}")
+              errors << StandardError.new("Upload failed for: #{File.basename(f.path)} : #{e.message}")
               handle_error(opts)
             end
           end
@@ -108,22 +108,22 @@ module Aws
       end
 
       # @api private
-      class FileProducer
+      class FileProducer # r
         include Enumerable
 
         DEFAULT_QUEUE_SIZE = 100
         DONE_MARKER = :done
 
-        def initialize(options = {})
-          @directory_uploader = options[:directory_uploader]
-          @source_dir = options[:source_dir]
-          @bucket = options[:bucket]
-          @s3_prefix = options[:s3_prefix]
-          @recursive = options[:recursive]
-          @follow_symlinks = options[:follow_symlinks]
-          @filter_callback = options[:filter_callback]
-          @request_callback = options[:request_callback]
-          @ignore_failure = options[:ignore_failure]
+        def initialize(opts = {})
+          @directory_uploader = opts[:directory_uploader]
+          @source_dir = opts[:source_dir]
+          @bucket = opts[:bucket]
+          @s3_prefix = opts[:s3_prefix]
+          @recursive = opts[:recursive]
+          @follow_symlinks = opts[:follow_symlinks]
+          @filter_callback = opts[:filter_callback]
+          @request_callback = opts[:request_callback]
+          @ignore_failure = opts[:ignore_failure]
           @file_queue = SizedQueue.new(DEFAULT_QUEUE_SIZE)
         end
 
@@ -239,7 +239,7 @@ module Aws
             stat = File.stat(dir_path)
             return if visited.include?(stat.ino)
 
-            visited << stat.ino  # Track inode to prevent symlink cycles
+            visited << stat.ino # Track inode to prevent symlink cycles
           end
           new_prefix = key_prefix.empty? ? dir_name : File.join(key_prefix, dir_name)
           scan_directory(dir_path, key_prefix: new_prefix, visited: visited)
@@ -247,9 +247,9 @@ module Aws
 
         # @api private
         class UploadEntry
-          def initialize(options = {})
-            @path = options[:path]
-            @params = options[:params]
+          def initialize(opts = {})
+            @path = opts[:path]
+            @params = opts[:params]
           end
 
           attr_reader :path, :params
