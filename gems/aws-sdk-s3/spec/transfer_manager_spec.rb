@@ -50,6 +50,17 @@ module Aws
         end
       end
 
+      describe '#upload_directory' do
+        it 'returns upload results when upload succeeds' do
+        end
+
+        it 'raises when upload errors' do
+        end
+
+        it 'calls progress callback when given' do
+        end
+      end
+
       describe '#upload_file' do
         let(:file) do
           Tempfile.new('ten-meg-file').tap do |f|

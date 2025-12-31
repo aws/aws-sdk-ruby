@@ -27,8 +27,8 @@ module Aws
         uploads, errors = process_upload_queue(producer, uploader, upload_opts)
         build_result(uploads, errors)
       ensure
-        @queue_executor.shutdown
         @abort_requested = false
+        @queue_executor.shutdown
       end
 
       def abort_requested
