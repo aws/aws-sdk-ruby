@@ -126,7 +126,7 @@ module Aws
         end
 
         it 'reports when it is unable to abort a failed multipart upload' do
-          allow(client).to receive(:upload_part).and_raise(RuntimeError.new('part failed'))
+          client.stub_responses(:upload_part, RuntimeError.new('part failed'))
           client.stub_responses(:abort_multipart_upload, RuntimeError.new('network-error'))
           expect do
             subject.upload(large_file, params)
