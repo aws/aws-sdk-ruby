@@ -506,7 +506,7 @@ module Aws
 
         def read(length = nil, buf = nil)
           return '' if length&.zero?
-          return if @eof && @encoded_buffer.empty?
+          return if eof?
 
           buf&.clear
           output_buffer = buf || +''
