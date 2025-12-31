@@ -230,7 +230,7 @@ module Aws
         executor = @executor || DefaultExecutor.new
         uploader = DirectoryUploader.new(client: @client, executor: executor)
         result = uploader.upload(source, bucket, **options)
-        executor.shutdown unless @options[:executor]
+        executor.shutdown unless @executor
         result
       end
 

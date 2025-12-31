@@ -9,26 +9,30 @@ module Aws
       def initialize(options = {})
         @client = options[:client]
         @executor = options[:executor]
+        @queue_executor = DefaultExecutor.new
         @abort_requested = false
         @mutex = Mutex.new
       end
 
-      attr_reader :abort_requested
-
       def upload(source_directory, bucket, **options)
         raise ArgumentError, 'Invalid directory' unless Dir.exist?(source_directory)
 
-        upload_opts, producer_opts = build_opts(source_directory, bucket, options.dup)
         uploader = FileUploader.new(
-          multipart_threshold: options[:multipart_threshold],
+          multipart_threshold: options.delete(:multipart_threshold),
           client: @client,
           executor: @executor
         )
+        upload_opts, producer_opts = build_opts(source_directory, bucket, options)
         producer = FileProducer.new(producer_opts)
         uploads, errors = process_upload_queue(producer, uploader, upload_opts)
         build_result(uploads, errors)
       ensure
+        @queue_executor.shutdown
         @abort_requested = false
+      end
+
+      def abort_requested
+        @mutex.synchronize { @abort_requested }
       end
 
       private
@@ -63,11 +67,11 @@ module Aws
         end
       end
 
-      def handle_error(executor, opts)
+      def handle_error(opts)
         return if opts[:ignore_failure]
 
         request_abort
-        executor.kill
+        @queue_executor.kill
       end
 
       def request_abort
@@ -75,14 +79,12 @@ module Aws
       end
 
       def process_upload_queue(producer, uploader, opts)
-        # Separate executor for lightweight queuing tasks, avoiding interference with main @executor lifecycle
-        queue_executor = DefaultExecutor.new
-        progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
+        progress = DirectoryProgress.new(opts.delete(:progress_callback)) if opts[:progress_callback]
         upload_attempts = 0
         errors = []
         begin
           producer.each do |file|
-            break if @abort_requested
+            break if abort_requested
 
             upload_attempts += 1
             if file.is_a?(StandardError)
@@ -90,19 +92,18 @@ module Aws
               next
             end
 
-            queue_executor.post(file) do |f|
+            @queue_executor.post(file) do |f|
               uploader.upload(f.path, f.params)
               progress&.call(File.size(f.path))
             rescue StandardError => e
-              errors << e
-              handle_error(queue_executor, opts)
+              errors << StandardError.new("Failed to upload: #{f.path} : #{e.message}")
+              handle_error(opts)
             end
           end
         rescue StandardError => e
           errors << e
-          handle_error(queue_executor, opts)
+          handle_error(opts)
         end
-        queue_executor.shutdown
         [upload_attempts, errors]
       end
 
@@ -148,7 +149,7 @@ module Aws
 
         private
 
-        def apply_request_callback(params)
+        def apply_request_callback(file_path, params)
           callback_params = @request_callback.call(file_path, params.dup)
           return params unless callback_params.is_a?(Hash) && callback_params.any?
 
@@ -156,12 +157,8 @@ module Aws
         end
 
         def build_upload_entry(file_path, key)
-          params = {
-            bucket: @bucket,
-            key: @s3_prefix ? File.join(@s3_prefix, key) : key
-          }
-          params = apply_request_callback(params.dup) if @request_callback
-
+          params = { bucket: @bucket, key: @s3_prefix ? File.join(@s3_prefix, key) : key }
+          params = apply_request_callback(file_path, params.dup) if @request_callback
           UploadEntry.new(path: file_path, params: params)
         end
 
@@ -212,15 +209,8 @@ module Aws
             full_path = File.join(dir_path, entry)
             next unless include_file?(full_path, entry)
 
-            stat =
-              if @follow_symlinks
-                File.stat(full_path)
-              else
-                lstat = File.lstat(full_path)
-                next if lstat.symlink?
-
-                lstat
-              end
+            stat = get_file_stat(full_path)
+            next unless stat
 
             if stat.directory?
               handle_directory(full_path, entry, key_prefix, visited)
@@ -235,12 +225,21 @@ module Aws
           end
         end
 
+        def get_file_stat(full_path)
+          return File.stat(full_path) if @follow_symlinks
+
+          lstat = File.lstat(full_path)
+          return if lstat.symlink?
+
+          lstat
+        end
+
         def handle_directory(dir_path, dir_name, key_prefix, visited)
           if @follow_symlinks && visited
             stat = File.stat(dir_path)
             return if visited.include?(stat.ino)
 
-            visited << stat.ino
+            visited << stat.ino  # Track inode to prevent symlink cycles
           end
           new_prefix = key_prefix.empty? ? dir_name : File.join(key_prefix, dir_name)
           scan_directory(dir_path, key_prefix: new_prefix, visited: visited)
