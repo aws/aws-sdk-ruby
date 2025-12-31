@@ -1097,6 +1097,7 @@ module Aws::Connect
       attr_accessor segment_attributes: ::Hash[::String, Types::ContactSearchSummarySegmentAttributeValue]
       attr_accessor name: ::String
       attr_accessor routing_criteria: Types::RoutingCriteria
+      attr_accessor global_resiliency_metadata: Types::GlobalResiliencyMetadata
       SENSITIVE: [:segment_attributes, :name]
     end
 
@@ -6260,6 +6261,7 @@ module Aws::Connect
       attr_accessor additional_time_range: Types::SearchContactsAdditionalTimeRange
       attr_accessor searchable_contact_attributes: Types::SearchableContactAttributes
       attr_accessor searchable_segment_attributes: Types::SearchableSegmentAttributes
+      attr_accessor active_regions: ::Array[::String]
       SENSITIVE: []
     end
 

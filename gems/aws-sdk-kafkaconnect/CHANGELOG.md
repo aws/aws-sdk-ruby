@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2025-12-30)
+------------------
+
+* Feature - This change sets the KafkaConnect GovCloud FIPS and FIPS DualStack endpoints to use kafkaconnect instead of kafkaconnect-fips as the service name. This is done to match the Kafka endpoints.
+
 1.49.0 (2025-12-17)
 ------------------
 

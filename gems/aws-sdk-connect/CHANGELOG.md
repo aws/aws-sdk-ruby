@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.232.0 (2025-12-30)
+------------------
+
+* Feature - Adds support for searching global contacts using the ActiveRegions filter, and pagination support for ListSecurityProfileFlowModules and ListEntitySecurityProfiles.
+
 1.231.0 (2025-12-29)
 ------------------
 

@@ -4517,6 +4517,11 @@ module Aws::Connect
     #   Latest routing criteria on the contact.
     #   @return [Types::RoutingCriteria]
     #
+    # @!attribute [rw] global_resiliency_metadata
+    #   Additional routing information for contacts created in ACGR
+    #   instances.
+    #   @return [Types::GlobalResiliencyMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactSearchSummary AWS API Documentation
     #
     class ContactSearchSummary < Struct.new(
@@ -4533,7 +4538,8 @@ module Aws::Connect
       :scheduled_timestamp,
       :segment_attributes,
       :name,
-      :routing_criteria)
+      :routing_criteria,
+      :global_resiliency_metadata)
       SENSITIVE = [:segment_attributes, :name]
       include Aws::Structure
     end
@@ -26936,6 +26942,10 @@ module Aws::Connect
     #   contact.
     #   @return [Types::SearchableSegmentAttributes]
     #
+    # @!attribute [rw] active_regions
+    #   The list of active regions for contacts in ACGR instances.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchCriteria AWS API Documentation
     #
     class SearchCriteria < Struct.new(
@@ -26949,7 +26959,8 @@ module Aws::Connect
       :routing_criteria,
       :additional_time_range,
       :searchable_contact_attributes,
-      :searchable_segment_attributes)
+      :searchable_segment_attributes,
+      :active_regions)
       SENSITIVE = []
       include Aws::Structure
     end

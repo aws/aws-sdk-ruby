@@ -4174,7 +4174,8 @@ module Aws
                                    },
                                  ],
                                  match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")?
-                               }?
+                               }?,
+                               active_regions: Array[::String]?
                              },
                              ?max_results: ::Integer,
                              ?next_token: ::String,

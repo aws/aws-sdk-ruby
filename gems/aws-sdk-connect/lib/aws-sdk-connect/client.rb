@@ -14788,6 +14788,8 @@ module Aws::Connect
     #   * {Types::ListEntitySecurityProfilesResponse#security_profiles #security_profiles} => Array&lt;Types::SecurityProfileItem&gt;
     #   * {Types::ListEntitySecurityProfilesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_entity_security_profiles({
@@ -16501,6 +16503,8 @@ module Aws::Connect
     #   * {Types::ListSecurityProfileFlowModulesResponse#next_token #next_token} => String
     #   * {Types::ListSecurityProfileFlowModulesResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::ListSecurityProfileFlowModulesResponse#last_modified_region #last_modified_region} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -18433,6 +18437,7 @@ module Aws::Connect
     #         ],
     #         match_type: "MATCH_ALL", # accepts MATCH_ALL, MATCH_ANY, MATCH_EXACT, MATCH_NONE
     #       },
+    #       active_regions: ["RegionName"],
     #     },
     #     max_results: 1,
     #     next_token: "LargeNextToken",
@@ -18494,6 +18499,9 @@ module Aws::Connect
     #   resp.contacts[0].routing_criteria.steps[0].status #=> String, one of "ACTIVE", "INACTIVE", "JOINED", "EXPIRED"
     #   resp.contacts[0].routing_criteria.activation_timestamp #=> Time
     #   resp.contacts[0].routing_criteria.index #=> Integer
+    #   resp.contacts[0].global_resiliency_metadata.active_region #=> String
+    #   resp.contacts[0].global_resiliency_metadata.origin_region #=> String
+    #   resp.contacts[0].global_resiliency_metadata.traffic_distribution_group_id #=> String
     #   resp.next_token #=> String
     #   resp.total_count #=> Integer
     #
@@ -26851,7 +26859,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.231.0'
+      context[:gem_version] = '1.232.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

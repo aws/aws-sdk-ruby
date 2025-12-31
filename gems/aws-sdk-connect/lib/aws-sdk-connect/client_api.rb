@@ -25,6 +25,7 @@ module Aws::Connect
     ActivateEvaluationFormRequest = Shapes::StructureShape.new(name: 'ActivateEvaluationFormRequest')
     ActivateEvaluationFormResponse = Shapes::StructureShape.new(name: 'ActivateEvaluationFormResponse')
     ActiveRegion = Shapes::StringShape.new(name: 'ActiveRegion')
+    ActiveRegionList = Shapes::ListShape.new(name: 'ActiveRegionList')
     AdditionalEmailRecipients = Shapes::StructureShape.new(name: 'AdditionalEmailRecipients')
     AfterContactWorkTimeLimit = Shapes::IntegerShape.new(name: 'AfterContactWorkTimeLimit')
     AgentAvailabilityTimer = Shapes::StringShape.new(name: 'AgentAvailabilityTimer')
@@ -2000,6 +2001,8 @@ module Aws::Connect
     ActivateEvaluationFormResponse.add_member(:evaluation_form_version, Shapes::ShapeRef.new(shape: VersionNumber, required: true, location_name: "EvaluationFormVersion"))
     ActivateEvaluationFormResponse.struct_class = Types::ActivateEvaluationFormResponse
 
+    ActiveRegionList.member = Shapes::ShapeRef.new(shape: RegionName)
+
     AdditionalEmailRecipients.add_member(:to_list, Shapes::ShapeRef.new(shape: EmailRecipientsList, location_name: "ToList"))
     AdditionalEmailRecipients.add_member(:cc_list, Shapes::ShapeRef.new(shape: EmailRecipientsList, location_name: "CcList"))
     AdditionalEmailRecipients.struct_class = Types::AdditionalEmailRecipients
@@ -2915,6 +2918,7 @@ module Aws::Connect
     ContactSearchSummary.add_member(:segment_attributes, Shapes::ShapeRef.new(shape: ContactSearchSummarySegmentAttributes, location_name: "SegmentAttributes"))
     ContactSearchSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     ContactSearchSummary.add_member(:routing_criteria, Shapes::ShapeRef.new(shape: RoutingCriteria, location_name: "RoutingCriteria"))
+    ContactSearchSummary.add_member(:global_resiliency_metadata, Shapes::ShapeRef.new(shape: GlobalResiliencyMetadata, location_name: "GlobalResiliencyMetadata"))
     ContactSearchSummary.struct_class = Types::ContactSearchSummary
 
     ContactSearchSummaryAgentInfo.add_member(:id, Shapes::ShapeRef.new(shape: AgentResourceId, location_name: "Id"))
@@ -6947,6 +6951,7 @@ module Aws::Connect
     SearchCriteria.add_member(:additional_time_range, Shapes::ShapeRef.new(shape: SearchContactsAdditionalTimeRange, location_name: "AdditionalTimeRange"))
     SearchCriteria.add_member(:searchable_contact_attributes, Shapes::ShapeRef.new(shape: SearchableContactAttributes, location_name: "SearchableContactAttributes"))
     SearchCriteria.add_member(:searchable_segment_attributes, Shapes::ShapeRef.new(shape: SearchableSegmentAttributes, location_name: "SearchableSegmentAttributes"))
+    SearchCriteria.add_member(:active_regions, Shapes::ShapeRef.new(shape: ActiveRegionList, location_name: "ActiveRegions"))
     SearchCriteria.struct_class = Types::SearchCriteria
 
     SearchDataTablesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
@@ -11333,6 +11338,12 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_evaluation_form_versions, Seahorse::Model::Operation.new.tap do |o|
@@ -11817,6 +11828,12 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_security_profile_permissions, Seahorse::Model::Operation.new.tap do |o|
