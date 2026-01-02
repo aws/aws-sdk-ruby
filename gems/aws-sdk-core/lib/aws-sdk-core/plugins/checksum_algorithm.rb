@@ -546,7 +546,6 @@ module Aws
             else
               @encoded_buffer << "0\r\n#{trailer_string}\r\n\r\n"
               @eof = true
-              break
             end
           end
         end
