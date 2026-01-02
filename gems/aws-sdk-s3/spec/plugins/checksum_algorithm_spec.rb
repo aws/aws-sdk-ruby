@@ -177,7 +177,8 @@ module Aws
           end
 
           it 'returns true after reading all data' do
-            expect(subject.read.eof?).to be true
+            subject.read
+            expect(subject.eof?).to be true
           end
         end
       end
