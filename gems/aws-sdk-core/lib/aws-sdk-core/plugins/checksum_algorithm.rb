@@ -4,8 +4,8 @@ module Aws
   module Plugins
     # @api private
     class ChecksumAlgorithm < Seahorse::Client::Plugin
-      CHUNK_SIZE = 1 * 1024 * 1024 # one MB
-      MIN_CHUNK_SIZE = 16_384 # 16 KB
+      CHECKSUM_CHUNK_SIZE = 1 * 1024 * 1024 # one MB
+      DEFAULT_TRAILER_CHUNK_SIZE = 16_384 # 16 KB
 
       # determine the set of supported client side checksum algorithms
       # CRC32c requires aws-crt (optional sdk dependency) for support
@@ -492,7 +492,9 @@ module Aws
 
           full_chunk_overhead = @base_chunk_size.to_s(HEX_BASE).size + CHUNK_OVERHEAD
           chunked_body_size = n_full_chunks * (@base_chunk_size + full_chunk_overhead)
-          chunked_body_size += partial_bytes.to_s(HEX_BASE).size + partial_bytes + 4 unless partial_bytes.zero?
+          unless partial_bytes.zero?
+            chunked_body_size += partial_bytes.to_s(HEX_BASE).size + partial_bytes + CHUNK_OVERHEAD
+          end
           trailer_size = ChecksumAlgorithm.trailer_length(@algorithm, @location_name)
           chunked_body_size + trailer_size
         end
