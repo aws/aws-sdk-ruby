@@ -231,7 +231,7 @@ module Aws
             nil
           else
             chunk = upload_opts.delete(:http_chunk_size)
-            if chunk && chunk < Aws::Plugins::ChecksumAlgorithm::MIN_CHUNK_SIZE
+            if chunk && chunk < Aws::Plugins::ChecksumAlgorithm::DEFAULT_TRAILER_CHUNK_SIZE
               raise ArgumentError, ':http_chunk_size must be at least 16384 bytes (16KB)'
             end
 

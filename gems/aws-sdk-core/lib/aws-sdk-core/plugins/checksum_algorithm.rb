@@ -22,6 +22,7 @@ module Aws
       end.freeze
 
       CRT_ALGORITHMS = %w[CRC32C CRC64NVME].freeze
+      DEFAULT_CHECKSUM = 'CRC32'
 
       # Priority order of checksum algorithms to validate responses against.
       # Remove any algorithms not supported by client (ie, depending on CRT availability).
@@ -37,8 +38,6 @@ module Aws
         'SHA1' => 28 + 1,
         'SHA256' => 44 + 1
       }.freeze
-
-      DEFAULT_CHECKSUM = 'CRC32'
 
       option(:request_checksum_calculation,
              doc_default: 'when_supported',
@@ -370,7 +369,7 @@ module Aws
 
         def update_in_chunks(digest, io)
           loop do
-            chunk = io.read(CHUNK_SIZE)
+            chunk = io.read(CHECKSUM_CHUNK_SIZE)
             break unless chunk
 
             digest.update(chunk)
@@ -477,7 +476,7 @@ module Aws
           @location_name = options.delete(:location_name)
           @algorithm = options.delete(:algorithm)
           @digest = ChecksumAlgorithm.digest_for_algorithm(@algorithm)
-          @chunk_size = Thread.current[:net_http_override_body_stream_chunk] || MIN_CHUNK_SIZE
+          @chunk_size = Thread.current[:net_http_override_body_stream_chunk] || DEFAULT_TRAILER_CHUNK_SIZE
           @overhead_bytes = calculate_overhead(@chunk_size)
           @base_chunk_size = @chunk_size - @overhead_bytes
           @encoded_buffer = +''
