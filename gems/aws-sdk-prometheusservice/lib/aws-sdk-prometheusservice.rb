@@ -55,7 +55,7 @@ module Aws::PrometheusService
   autoload :EndpointProvider, 'aws-sdk-prometheusservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-prometheusservice/endpoints'
 
-  GEM_VERSION = '1.65.0'
+  GEM_VERSION = '1.66.0'
 
 end
 

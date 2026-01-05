@@ -17659,7 +17659,7 @@ module Aws::S3
     #   [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html
     #   [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
     #
-    # @option params [String, StringIO, File] :body
+    # @option params [String, IO] :body
     #   Object data.
     #
     # @option params [required, String] :bucket
@@ -20968,7 +20968,7 @@ module Aws::S3
     # [16]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html
     # [17]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html
     #
-    # @option params [String, StringIO, File] :body
+    # @option params [String, IO] :body
     #   Object data.
     #
     # @option params [required, String] :bucket
@@ -22283,7 +22283,7 @@ module Aws::S3
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.209.0'
+      context[:gem_version] = '1.210.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

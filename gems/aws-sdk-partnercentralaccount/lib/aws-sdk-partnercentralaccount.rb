@@ -55,7 +55,7 @@ module Aws::PartnerCentralAccount
   autoload :EndpointProvider, 'aws-sdk-partnercentralaccount/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-partnercentralaccount/endpoints'
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.2.0'
 
 end
 

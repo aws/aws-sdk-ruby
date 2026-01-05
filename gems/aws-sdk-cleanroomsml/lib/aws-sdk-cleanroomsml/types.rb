@@ -5050,7 +5050,13 @@ module Aws::CleanRoomsML
     #   @return [String]
     #
     # @!attribute [rw] volume_size_in_gb
-    #   The maximum size of the instance that is used to train the model.
+    #   The volume size of the instance that is used to train the model.
+    #   Please see [EC2 volume limit][1] for volume size limitations on
+    #   different instance types.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-store-volumes.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/ResourceConfig AWS API Documentation
@@ -6038,13 +6044,50 @@ module Aws::CleanRoomsML
     #   The number of compute workers that are used.
     #   @return [Integer]
     #
+    # @!attribute [rw] properties
+    #   The configuration properties for the worker compute environment.
+    #   These properties allow you to customize the compute settings for
+    #   your Clean Rooms workloads.
+    #   @return [Types::WorkerComputeConfigurationProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/WorkerComputeConfiguration AWS API Documentation
     #
     class WorkerComputeConfiguration < Struct.new(
       :type,
-      :number)
+      :number,
+      :properties)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The configuration properties for the worker compute environment. These
+    # properties allow you to customize the compute settings for your Clean
+    # Rooms workloads.
+    #
+    # @note WorkerComputeConfigurationProperties is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note WorkerComputeConfigurationProperties is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of WorkerComputeConfigurationProperties corresponding to the set member.
+    #
+    # @!attribute [rw] spark
+    #   The Spark configuration properties for SQL workloads. This map
+    #   contains key-value pairs that configure Apache Spark settings to
+    #   optimize performance for your data processing jobs. You can specify
+    #   up to 50 Spark properties, with each key being 1-200 characters and
+    #   each value being 0-500 characters. These properties allow you to
+    #   adjust compute capacity for large datasets and complex workloads.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanroomsml-2023-09-06/WorkerComputeConfigurationProperties AWS API Documentation
+    #
+    class WorkerComputeConfigurationProperties < Struct.new(
+      :spark,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Spark < WorkerComputeConfigurationProperties; end
+      class Unknown < WorkerComputeConfigurationProperties; end
     end
 
   end

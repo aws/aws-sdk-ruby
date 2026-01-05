@@ -84,7 +84,7 @@ module Aws::IdentityStore
       :formatted,
       :type,
       :primary)
-      SENSITIVE = [:street_address, :locality, :region, :postal_code, :country, :formatted, :type, :primary]
+      SENSITIVE = [:street_address, :locality, :region, :postal_code, :country, :formatted, :type]
       include Aws::Structure
     end
 
@@ -348,6 +348,10 @@ module Aws::IdentityStore
     #   standard date format for storing personal information.
     #   @return [String]
     #
+    # @!attribute [rw] roles
+    #   A list of `Role` objects containing roles associated with the user.
+    #   @return [Array<Types::Role>]
+    #
     # @!attribute [rw] extensions
     #   A map with additional attribute extensions for the user. Each map
     #   key corresponds to an extension name, while map values represent
@@ -376,6 +380,7 @@ module Aws::IdentityStore
       :photos,
       :website,
       :birthdate,
+      :roles,
       :extensions)
       SENSITIVE = [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone, :website, :birthdate]
       include Aws::Structure
@@ -723,6 +728,10 @@ module Aws::IdentityStore
     #   stored birthdate information for the user.
     #   @return [String]
     #
+    # @!attribute [rw] roles
+    #   The roles of the user.
+    #   @return [Array<Types::Role>]
+    #
     # @!attribute [rw] created_at
     #   The date and time the user was created.
     #   @return [Time]
@@ -767,6 +776,7 @@ module Aws::IdentityStore
       :photos,
       :website,
       :birthdate,
+      :roles,
       :created_at,
       :created_by,
       :updated_at,
@@ -798,7 +808,7 @@ module Aws::IdentityStore
       :value,
       :type,
       :primary)
-      SENSITIVE = [:value, :type, :primary]
+      SENSITIVE = [:value, :type]
       include Aws::Structure
     end
 
@@ -1105,7 +1115,7 @@ module Aws::IdentityStore
       :group_id,
       :member_id,
       :membership_exists)
-      SENSITIVE = [:membership_exists]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1499,7 +1509,7 @@ module Aws::IdentityStore
       :value,
       :type,
       :primary)
-      SENSITIVE = [:value, :type, :primary]
+      SENSITIVE = [:value, :type]
       include Aws::Structure
     end
 
@@ -1534,7 +1544,7 @@ module Aws::IdentityStore
       :type,
       :display,
       :primary)
-      SENSITIVE = [:value, :type, :display, :primary]
+      SENSITIVE = [:value, :type, :display]
       include Aws::Structure
     end
 
@@ -1581,6 +1591,31 @@ module Aws::IdentityStore
       :message,
       :request_id)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The role associated with the user.
+    #
+    # @!attribute [rw] value
+    #   A string containing a role name. For example, "Researcher."
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   A string representing the type of role. For example, "Work."
+    #   @return [String]
+    #
+    # @!attribute [rw] primary
+    #   A Boolean value representing whether this is the primary role for
+    #   the associated resource.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/Role AWS API Documentation
+    #
+    class Role < Struct.new(
+      :value,
+      :type,
+      :primary)
+      SENSITIVE = [:value, :type]
       include Aws::Structure
     end
 
@@ -1828,6 +1863,10 @@ module Aws::IdentityStore
     #   personal birthdate information for the user.
     #   @return [String]
     #
+    # @!attribute [rw] roles
+    #   A list of `Role` objects containing roles associated with the user.
+    #   @return [Array<Types::Role>]
+    #
     # @!attribute [rw] created_at
     #   The date and time the user was created.
     #   @return [Time]
@@ -1872,6 +1911,7 @@ module Aws::IdentityStore
       :photos,
       :website,
       :birthdate,
+      :roles,
       :created_at,
       :created_by,
       :updated_at,

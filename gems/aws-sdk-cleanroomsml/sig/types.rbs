@@ -1469,7 +1469,19 @@ module Aws::CleanRoomsML
     class WorkerComputeConfiguration
       attr_accessor type: ("CR.1X" | "CR.4X")
       attr_accessor number: ::Integer
+      attr_accessor properties: Types::WorkerComputeConfigurationProperties
       SENSITIVE: []
+    end
+
+    class WorkerComputeConfigurationProperties
+      attr_accessor spark: ::Hash[::String, ::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Spark < WorkerComputeConfigurationProperties
+      end
+      class Unknown < WorkerComputeConfigurationProperties
+      end
     end
   end
 end

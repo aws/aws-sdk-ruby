@@ -1066,13 +1066,18 @@ module Aws::CleanRoomsML
     #             query_string: "ProtectedQuerySQLParametersQueryStringString",
     #             analysis_template_arn: "AnalysisTemplateArn",
     #             parameters: {
-    #               "ParameterKey" => "ParameterValue",
+    #               "ParameterName" => "ParameterValue",
     #             },
     #           },
     #           compute_configuration: {
     #             worker: {
     #               type: "CR.1X", # accepts CR.1X, CR.4X
     #               number: 1,
+    #               properties: {
+    #                 spark: {
+    #                   "SparkPropertyKey" => "SparkPropertyValue",
+    #                 },
+    #               },
     #             },
     #           },
     #           result_format: "CSV", # accepts CSV, PARQUET
@@ -1674,9 +1679,11 @@ module Aws::CleanRoomsML
     #   resp.seed_audience.sql_parameters.query_string #=> String
     #   resp.seed_audience.sql_parameters.analysis_template_arn #=> String
     #   resp.seed_audience.sql_parameters.parameters #=> Hash
-    #   resp.seed_audience.sql_parameters.parameters["ParameterKey"] #=> String
+    #   resp.seed_audience.sql_parameters.parameters["ParameterName"] #=> String
     #   resp.seed_audience.sql_compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
     #   resp.seed_audience.sql_compute_configuration.worker.number #=> Integer
+    #   resp.seed_audience.sql_compute_configuration.worker.properties.spark #=> Hash
+    #   resp.seed_audience.sql_compute_configuration.worker.properties.spark["SparkPropertyKey"] #=> String
     #   resp.include_seed_in_output #=> Boolean
     #   resp.collaboration_id #=> String
     #   resp.metrics.relevance_metrics #=> Array
@@ -2338,9 +2345,11 @@ module Aws::CleanRoomsML
     #   resp.input_channel.data_source.protected_query_input_parameters.sql_parameters.query_string #=> String
     #   resp.input_channel.data_source.protected_query_input_parameters.sql_parameters.analysis_template_arn #=> String
     #   resp.input_channel.data_source.protected_query_input_parameters.sql_parameters.parameters #=> Hash
-    #   resp.input_channel.data_source.protected_query_input_parameters.sql_parameters.parameters["ParameterKey"] #=> String
+    #   resp.input_channel.data_source.protected_query_input_parameters.sql_parameters.parameters["ParameterName"] #=> String
     #   resp.input_channel.data_source.protected_query_input_parameters.compute_configuration.worker.type #=> String, one of "CR.1X", "CR.4X"
     #   resp.input_channel.data_source.protected_query_input_parameters.compute_configuration.worker.number #=> Integer
+    #   resp.input_channel.data_source.protected_query_input_parameters.compute_configuration.worker.properties.spark #=> Hash
+    #   resp.input_channel.data_source.protected_query_input_parameters.compute_configuration.worker.properties.spark["SparkPropertyKey"] #=> String
     #   resp.input_channel.data_source.protected_query_input_parameters.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.input_channel.role_arn #=> String
     #   resp.protected_query_identifier #=> String
@@ -3707,13 +3716,18 @@ module Aws::CleanRoomsML
     #         query_string: "ProtectedQuerySQLParametersQueryStringString",
     #         analysis_template_arn: "AnalysisTemplateArn",
     #         parameters: {
-    #           "ParameterKey" => "ParameterValue",
+    #           "ParameterName" => "ParameterValue",
     #         },
     #       },
     #       sql_compute_configuration: {
     #         worker: {
     #           type: "CR.1X", # accepts CR.1X, CR.4X
     #           number: 1,
+    #           properties: {
+    #             spark: {
+    #               "SparkPropertyKey" => "SparkPropertyValue",
+    #             },
+    #           },
     #         },
     #       },
     #     },
@@ -4095,7 +4109,7 @@ module Aws::CleanRoomsML
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanroomsml'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

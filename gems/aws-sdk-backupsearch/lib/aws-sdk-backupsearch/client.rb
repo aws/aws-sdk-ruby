@@ -1191,7 +1191,7 @@ module Aws::BackupSearch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-backupsearch'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

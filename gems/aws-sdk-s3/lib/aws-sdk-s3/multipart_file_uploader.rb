@@ -22,6 +22,7 @@ module Aws
       def initialize(options = {})
         @client = options[:client] || Client.new
         @executor = options[:executor]
+        @http_chunk_size = options[:http_chunk_size]
       end
 
       # @return [Client]
@@ -78,7 +79,7 @@ module Aws
       rescue MultipartUploadError => e
         raise e
       rescue StandardError => e
-        msg = "failed to abort multipart upload: #{e.message}. " \
+        msg = "failed to abort multipart upload: #{e&.message}. " \
               "Multipart upload failed: #{errors.map(&:message).join('; ')}"
         raise MultipartUploadError.new(msg, errors + [e])
       end
@@ -150,6 +151,7 @@ module Aws
 
           upload_attempts += 1
           @executor.post(part) do |p|
+            Thread.current[:net_http_override_body_stream_chunk] = @http_chunk_size if @http_chunk_size
             update_progress(progress, p)
             resp = @client.upload_part(p)
             p[:body].close
@@ -160,6 +162,7 @@ module Aws
             abort_upload = true
             errors << e
           ensure
+            Thread.current[:net_http_override_body_stream_chunk] = nil if @http_chunk_size
             completion_queue << :done
           end
         end

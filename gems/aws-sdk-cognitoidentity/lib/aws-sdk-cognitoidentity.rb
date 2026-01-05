@@ -54,7 +54,7 @@ module Aws::CognitoIdentity
   autoload :EndpointProvider, 'aws-sdk-cognitoidentity/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cognitoidentity/endpoints'
 
-  GEM_VERSION = '1.82.1'
+  GEM_VERSION = '1.83.0'
 
 end
 
