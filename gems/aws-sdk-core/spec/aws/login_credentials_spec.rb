@@ -133,7 +133,7 @@ module Aws
       end
 
       context 'expired token with refresh token' do
-        let(:time) { Time.now.utc.round }
+        let(:time) { Time.parse('2026-01-01 00:00:00 UTC') }
         let(:old_expiration) { (time + 60).to_datetime.rfc3339 }
         let(:new_expiration) { (time + 900).to_datetime.rfc3339 }
 
@@ -179,9 +179,9 @@ module Aws
                 secret_access_key: 'new_secret',
                 session_token: 'new_token'
               },
-              token_type: "aws_sigv4",
+              token_type: 'aws_sigv4',
               expires_in: 900,
-              refresh_token: "new_refresh_token",
+              refresh_token: 'new_refresh_token',
               id_token: 'identity_token'
             }
           }
@@ -189,10 +189,10 @@ module Aws
 
         before do
           allow_any_instance_of(LoginCredentials).to receive(:warn).with(/WARNING: OpenSSL 3.6.x/)
+          allow(Time).to receive(:now).and_return(time)
         end
 
         it 'refreshes the token' do
-          allow(Time).to receive(:now).and_return(time)
           mock_token_file(login_session, cached_token)
           client.stub_responses(:create_o_auth_2_token, signin_resp)
           creds = LoginCredentials.new(login_session: login_session, client: client)
