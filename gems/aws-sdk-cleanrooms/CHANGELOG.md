@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2026-01-02)
+------------------
+
+* Feature - Added support for publishing detailed metrics to CloudWatch for operational monitoring of collaborations, including query performance and resource utilization.
+
 1.62.0 (2025-12-18)
 ------------------
 

@@ -1364,6 +1364,14 @@ module Aws::CleanRooms
     #   enforce regional storage policies and compliance requirements.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] is_metrics_enabled
+    #   An indicator as to whether metrics are enabled for the
+    #   collaboration.
+    #
+    #   When `true`, collaboration members can opt in to Amazon CloudWatch
+    #   metrics for their membership queries.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/Collaboration AWS API Documentation
     #
     class Collaboration < Struct.new(
@@ -1383,7 +1391,8 @@ module Aws::CleanRooms
       :job_log_status,
       :analytics_engine,
       :auto_approved_change_types,
-      :allowed_result_regions)
+      :allowed_result_regions,
+      :is_metrics_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3437,6 +3446,14 @@ module Aws::CleanRooms
     #   policies.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] is_metrics_enabled
+    #   An indicator as to whether metrics have been enabled or disabled for
+    #   the collaboration.
+    #
+    #   When `true`, collaboration members can opt in to Amazon CloudWatch
+    #   metrics for their membership queries. The default value is `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaborationInput AWS API Documentation
     #
     class CreateCollaborationInput < Struct.new(
@@ -3453,7 +3470,8 @@ module Aws::CleanRooms
       :creator_payment_configuration,
       :analytics_engine,
       :auto_approved_change_request_types,
-      :allowed_result_regions)
+      :allowed_result_regions,
+      :is_metrics_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3899,6 +3917,19 @@ module Aws::CleanRooms
     #   collaboration creator.
     #   @return [Types::MembershipPaymentConfiguration]
     #
+    # @!attribute [rw] is_metrics_enabled
+    #   An indicator as to whether Amazon CloudWatch metrics have been
+    #   enabled or disabled for the membership.
+    #
+    #   Amazon CloudWatch metrics are only available when the collaboration
+    #   has metrics enabled. This option can be set by collaboration members
+    #   who have the ability to run queries (analysis runners) or by members
+    #   who are configured as payers.
+    #
+    #   When `true`, metrics about query execution are collected in Amazon
+    #   CloudWatch. The default value is `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateMembershipInput AWS API Documentation
     #
     class CreateMembershipInput < Struct.new(
@@ -3908,7 +3939,8 @@ module Aws::CleanRooms
       :tags,
       :default_result_configuration,
       :default_job_result_configuration,
-      :payment_configuration)
+      :payment_configuration,
+      :is_metrics_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6925,6 +6957,14 @@ module Aws::CleanRooms
     #   The payment responsibilities accepted by the collaboration member.
     #   @return [Types::MembershipPaymentConfiguration]
     #
+    # @!attribute [rw] is_metrics_enabled
+    #   An indicator as to whether Amazon CloudWatch metrics are enabled for
+    #   the membership.
+    #
+    #   When `true`, metrics about query execution are collected in Amazon
+    #   CloudWatch.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/Membership AWS API Documentation
     #
     class Membership < Struct.new(
@@ -6944,7 +6984,8 @@ module Aws::CleanRooms
       :job_log_status,
       :default_result_configuration,
       :default_job_result_configuration,
-      :payment_configuration)
+      :payment_configuration,
+      :is_metrics_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

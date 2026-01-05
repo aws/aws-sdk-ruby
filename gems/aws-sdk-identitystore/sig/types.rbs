@@ -24,7 +24,7 @@ module Aws::IdentityStore
       attr_accessor formatted: ::String
       attr_accessor type: ::String
       attr_accessor primary: bool
-      SENSITIVE: [:street_address, :locality, :region, :postal_code, :country, :formatted, :type, :primary]
+      SENSITIVE: [:street_address, :locality, :region, :postal_code, :country, :formatted, :type]
     end
 
     class AlternateIdentifier
@@ -98,6 +98,7 @@ module Aws::IdentityStore
       attr_accessor photos: ::Array[Types::Photo]
       attr_accessor website: ::String
       attr_accessor birthdate: ::String
+      attr_accessor roles: ::Array[Types::Role]
       attr_accessor extensions: ::Hash[::String, untyped]
       SENSITIVE: [:user_name, :display_name, :nick_name, :profile_url, :user_type, :title, :preferred_language, :locale, :timezone, :website, :birthdate]
     end
@@ -200,6 +201,7 @@ module Aws::IdentityStore
       attr_accessor photos: ::Array[Types::Photo]
       attr_accessor website: ::String
       attr_accessor birthdate: ::String
+      attr_accessor roles: ::Array[Types::Role]
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
       attr_accessor updated_at: ::Time
@@ -212,7 +214,7 @@ module Aws::IdentityStore
       attr_accessor value: ::String
       attr_accessor type: ::String
       attr_accessor primary: bool
-      SENSITIVE: [:value, :type, :primary]
+      SENSITIVE: [:value, :type]
     end
 
     class ExternalId
@@ -293,7 +295,7 @@ module Aws::IdentityStore
       attr_accessor group_id: ::String
       attr_accessor member_id: Types::MemberId
       attr_accessor membership_exists: bool
-      SENSITIVE: [:membership_exists]
+      SENSITIVE: []
     end
 
     class InternalServerException
@@ -397,7 +399,7 @@ module Aws::IdentityStore
       attr_accessor value: ::String
       attr_accessor type: ::String
       attr_accessor primary: bool
-      SENSITIVE: [:value, :type, :primary]
+      SENSITIVE: [:value, :type]
     end
 
     class Photo
@@ -405,7 +407,7 @@ module Aws::IdentityStore
       attr_accessor type: ::String
       attr_accessor display: ::String
       attr_accessor primary: bool
-      SENSITIVE: [:value, :type, :display, :primary]
+      SENSITIVE: [:value, :type, :display]
     end
 
     class ResourceNotFoundException
@@ -415,6 +417,13 @@ module Aws::IdentityStore
       attr_accessor message: ::String
       attr_accessor request_id: ::String
       SENSITIVE: []
+    end
+
+    class Role
+      attr_accessor value: ::String
+      attr_accessor type: ::String
+      attr_accessor primary: bool
+      SENSITIVE: [:value, :type]
     end
 
     class ServiceQuotaExceededException
@@ -478,6 +487,7 @@ module Aws::IdentityStore
       attr_accessor photos: ::Array[Types::Photo]
       attr_accessor website: ::String
       attr_accessor birthdate: ::String
+      attr_accessor roles: ::Array[Types::Role]
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
       attr_accessor updated_at: ::Time
