@@ -106,7 +106,7 @@ module Aws
           end
 
           def start_mirror_server(chunk_size)
-            server = TCPServer.new('localhost', 0)
+            server = TCPServer.new('127.0.0.1', 0)
             port = server.addr[1]
             chunks = []
 
