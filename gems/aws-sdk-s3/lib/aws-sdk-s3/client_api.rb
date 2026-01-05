@@ -4121,6 +4121,7 @@ module Aws::S3
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => false,
         }
+        o['unsignedPayload'] = true
         o.input = Shapes::ShapeRef.new(shape: PutObjectRequest)
         o.output = Shapes::ShapeRef.new(shape: PutObjectOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequest)
@@ -4309,6 +4310,7 @@ module Aws::S3
           "requestAlgorithmMember" => "checksum_algorithm",
           "requestChecksumRequired" => false,
         }
+        o['unsignedPayload'] = true
         o.input = Shapes::ShapeRef.new(shape: UploadPartRequest)
         o.output = Shapes::ShapeRef.new(shape: UploadPartOutput)
       end)

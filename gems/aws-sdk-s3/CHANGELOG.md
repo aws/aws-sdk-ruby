@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Added `:http_chunk_size` parameter to `TransferManager#upload_file` to control the buffer size when streaming request bodies over HTTP. Larger chunk sizes may improve network throughput at the cost of higher memory usage (Ruby MRI only).
+
+* Feature - Improved memory efficiency when calculating request checksums for large file uploads (Ruby MRI only).
+
 1.209.0 (2025-12-23)
 ------------------
 

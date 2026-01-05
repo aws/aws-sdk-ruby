@@ -33,7 +33,7 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
 

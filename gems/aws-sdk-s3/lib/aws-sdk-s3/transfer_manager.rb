@@ -205,6 +205,11 @@ module Aws
       # @option options [Integer] :thread_count (10) Customize threads used in the multipart upload.
       #   Only used when no custom executor is provided (creates {DefaultExecutor} with the given thread count).
       #
+      # @option option [Integer] :http_chunk_size (16384) Size in bytes for each chunk when streaming request bodies
+      #   over HTTP. Controls the buffer size used when sending data to S3. Larger values may improve throughput by
+      #   reducing the number of network writes, but use more memory. Custom values must be at least 16KB.
+      #   Only Ruby MRI is supported.
+      #
       # @option options [Proc] :progress_callback (nil)
       #   A Proc that will be called when each chunk of the upload is sent.
       #   It will be invoked with `[bytes_read]` and  `[total_sizes]`.
@@ -221,9 +226,22 @@ module Aws
       # @see Client#upload_part
       def upload_file(source, bucket:, key:, **options)
         upload_opts = options.merge(bucket: bucket, key: key)
+        http_chunk_size =
+          if defined?(JRUBY_VERSION)
+            nil
+          else
+            chunk = upload_opts.delete(:http_chunk_size)
+            if chunk && chunk < Aws::Plugins::ChecksumAlgorithm::DEFAULT_TRAILER_CHUNK_SIZE
+              raise ArgumentError, ':http_chunk_size must be at least 16384 bytes (16KB)'
+            end
+
+            chunk
+          end
+
         executor = @executor || DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
         uploader = FileUploader.new(
           multipart_threshold: upload_opts.delete(:multipart_threshold),
+          http_chunk_size: http_chunk_size,
           client: @client,
           executor: executor
         )

@@ -168,6 +168,13 @@ module Aws
                          ],
                          ?website: ::String,
                          ?birthdate: ::String,
+                         ?roles: Array[
+                           {
+                             value: ::String?,
+                             type: ::String?,
+                             primary: bool?
+                           },
+                         ],
                          ?extensions: Hash[::String, untyped]
                        ) -> _CreateUserResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
@@ -261,6 +268,7 @@ module Aws
         def photos: () -> ::Array[Types::Photo]
         def website: () -> ::String
         def birthdate: () -> ::String
+        def roles: () -> ::Array[Types::Role]
         def created_at: () -> ::Time
         def created_by: () -> ::String
         def updated_at: () -> ::Time
