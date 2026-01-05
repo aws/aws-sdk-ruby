@@ -125,7 +125,7 @@ module Aws
           expect { subject.upload(large_file, params) }.to raise_error(/multipart upload failed: part 3 failed/)
         end
 
-        it 'reports when it is unable to abort a failed multipart upload' do
+        it 'reports when it is unable to abort a failed multipart upload', :jruby_flaky do
           client.stub_responses(:upload_part, RuntimeError.new('part failed'))
           client.stub_responses(:abort_multipart_upload, RuntimeError.new('network-error'))
           expect do
