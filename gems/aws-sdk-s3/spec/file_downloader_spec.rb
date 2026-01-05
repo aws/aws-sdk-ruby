@@ -49,9 +49,10 @@ module Aws
         end
 
         it 'downloads a large object in parts' do
+          parts_mutex = Mutex.new
           parts = 0
           client.stub_responses(:get_object, lambda do |_ctx|
-            parts += 1
+            parts_mutex.synchronize { parts += 1 }
             { body: 'body', content_range: 'bytes 0-3/4' }
           end)
           subject.download(path, parts_params)

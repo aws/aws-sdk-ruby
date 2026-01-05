@@ -23,6 +23,7 @@ module Aws::IdentityStore
     AttributeOperations = Shapes::ListShape.new(name: 'AttributeOperations')
     AttributePath = Shapes::StringShape.new(name: 'AttributePath')
     AttributeValue = Shapes::DocumentShape.new(name: 'AttributeValue', document: true)
+    BooleanType = Shapes::BooleanShape.new(name: 'BooleanType')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConflictExceptionReason = Shapes::StringShape.new(name: 'ConflictExceptionReason')
     CreateGroupMembershipRequest = Shapes::StructureShape.new(name: 'CreateGroupMembershipRequest')
@@ -96,7 +97,8 @@ module Aws::IdentityStore
     ResourceNotFoundExceptionReason = Shapes::StringShape.new(name: 'ResourceNotFoundExceptionReason')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     RetryAfterSeconds = Shapes::IntegerShape.new(name: 'RetryAfterSeconds')
-    SensitiveBooleanType = Shapes::BooleanShape.new(name: 'SensitiveBooleanType')
+    Role = Shapes::StructureShape.new(name: 'Role')
+    Roles = Shapes::ListShape.new(name: 'Roles')
     SensitiveStringType = Shapes::StringShape.new(name: 'SensitiveStringType')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StringType = Shapes::StringShape.new(name: 'StringType')
@@ -126,7 +128,7 @@ module Aws::IdentityStore
     Address.add_member(:country, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Country"))
     Address.add_member(:formatted, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Formatted"))
     Address.add_member(:type, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Type"))
-    Address.add_member(:primary, Shapes::ShapeRef.new(shape: SensitiveBooleanType, location_name: "Primary"))
+    Address.add_member(:primary, Shapes::ShapeRef.new(shape: BooleanType, location_name: "Primary"))
     Address.struct_class = Types::Address
 
     Addresses.member = Shapes::ShapeRef.new(shape: Address)
@@ -185,6 +187,7 @@ module Aws::IdentityStore
     CreateUserRequest.add_member(:photos, Shapes::ShapeRef.new(shape: Photos, location_name: "Photos"))
     CreateUserRequest.add_member(:website, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Website"))
     CreateUserRequest.add_member(:birthdate, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Birthdate"))
+    CreateUserRequest.add_member(:roles, Shapes::ShapeRef.new(shape: Roles, location_name: "Roles"))
     CreateUserRequest.add_member(:extensions, Shapes::ShapeRef.new(shape: Extensions, location_name: "Extensions"))
     CreateUserRequest.struct_class = Types::CreateUserRequest
 
@@ -264,6 +267,7 @@ module Aws::IdentityStore
     DescribeUserResponse.add_member(:photos, Shapes::ShapeRef.new(shape: Photos, location_name: "Photos"))
     DescribeUserResponse.add_member(:website, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Website"))
     DescribeUserResponse.add_member(:birthdate, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Birthdate"))
+    DescribeUserResponse.add_member(:roles, Shapes::ShapeRef.new(shape: Roles, location_name: "Roles"))
     DescribeUserResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateType, location_name: "CreatedAt"))
     DescribeUserResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: StringType, location_name: "CreatedBy"))
     DescribeUserResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "UpdatedAt"))
@@ -273,7 +277,7 @@ module Aws::IdentityStore
 
     Email.add_member(:value, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Value"))
     Email.add_member(:type, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Type"))
-    Email.add_member(:primary, Shapes::ShapeRef.new(shape: SensitiveBooleanType, location_name: "Primary"))
+    Email.add_member(:primary, Shapes::ShapeRef.new(shape: BooleanType, location_name: "Primary"))
     Email.struct_class = Types::Email
 
     Emails.member = Shapes::ShapeRef.new(shape: Email)
@@ -345,7 +349,7 @@ module Aws::IdentityStore
 
     GroupMembershipExistenceResult.add_member(:group_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "GroupId"))
     GroupMembershipExistenceResult.add_member(:member_id, Shapes::ShapeRef.new(shape: MemberId, location_name: "MemberId"))
-    GroupMembershipExistenceResult.add_member(:membership_exists, Shapes::ShapeRef.new(shape: SensitiveBooleanType, location_name: "MembershipExists"))
+    GroupMembershipExistenceResult.add_member(:membership_exists, Shapes::ShapeRef.new(shape: BooleanType, location_name: "MembershipExists"))
     GroupMembershipExistenceResult.struct_class = Types::GroupMembershipExistenceResult
 
     GroupMembershipExistenceResults.member = Shapes::ShapeRef.new(shape: GroupMembershipExistenceResult)
@@ -424,7 +428,7 @@ module Aws::IdentityStore
 
     PhoneNumber.add_member(:value, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Value"))
     PhoneNumber.add_member(:type, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Type"))
-    PhoneNumber.add_member(:primary, Shapes::ShapeRef.new(shape: SensitiveBooleanType, location_name: "Primary"))
+    PhoneNumber.add_member(:primary, Shapes::ShapeRef.new(shape: BooleanType, location_name: "Primary"))
     PhoneNumber.struct_class = Types::PhoneNumber
 
     PhoneNumbers.member = Shapes::ShapeRef.new(shape: PhoneNumber)
@@ -432,7 +436,7 @@ module Aws::IdentityStore
     Photo.add_member(:value, Shapes::ShapeRef.new(shape: SensitiveStringType, required: true, location_name: "Value"))
     Photo.add_member(:type, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Type"))
     Photo.add_member(:display, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Display"))
-    Photo.add_member(:primary, Shapes::ShapeRef.new(shape: SensitiveBooleanType, location_name: "Primary"))
+    Photo.add_member(:primary, Shapes::ShapeRef.new(shape: BooleanType, location_name: "Primary"))
     Photo.struct_class = Types::Photo
 
     Photos.member = Shapes::ShapeRef.new(shape: Photo)
@@ -443,6 +447,13 @@ module Aws::IdentityStore
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     ResourceNotFoundException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    Role.add_member(:value, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Value"))
+    Role.add_member(:type, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Type"))
+    Role.add_member(:primary, Shapes::ShapeRef.new(shape: BooleanType, location_name: "Primary"))
+    Role.struct_class = Types::Role
+
+    Roles.member = Shapes::ShapeRef.new(shape: Role)
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     ServiceQuotaExceededException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
@@ -492,6 +503,7 @@ module Aws::IdentityStore
     User.add_member(:photos, Shapes::ShapeRef.new(shape: Photos, location_name: "Photos"))
     User.add_member(:website, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Website"))
     User.add_member(:birthdate, Shapes::ShapeRef.new(shape: SensitiveStringType, location_name: "Birthdate"))
+    User.add_member(:roles, Shapes::ShapeRef.new(shape: Roles, location_name: "Roles"))
     User.add_member(:created_at, Shapes::ShapeRef.new(shape: DateType, location_name: "CreatedAt"))
     User.add_member(:created_by, Shapes::ShapeRef.new(shape: StringType, location_name: "CreatedBy"))
     User.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "UpdatedAt"))

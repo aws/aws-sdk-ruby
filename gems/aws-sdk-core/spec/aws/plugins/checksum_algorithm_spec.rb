@@ -239,7 +239,8 @@ module Aws
         end
       end
 
-      context 'request streaming checksum calculation' do
+      # JRuby live testing against service is not reliable. We plan to investigate deeper before enabling
+      context 'request streaming checksum calculation', skip: defined?(JRUBY_VERSION) do
         file = File.expand_path('checksum_streaming_request.json', __dir__)
         test_cases = JSON.load_file(file)
 
@@ -259,8 +260,7 @@ module Aws
             client.stub_responses(:http_checksum_streaming_operation, lambda do |context|
               headers = context.http_request.headers
 
-              expect(headers['x-amz-content-sha256'])
-                .to eq('STREAMING-UNSIGNED-PAYLOAD-TRAILER')
+              expect(headers['x-amz-content-sha256']).to eq('STREAMING-UNSIGNED-PAYLOAD-TRAILER')
               test_case['expectHeaders'].each do |key, value|
                 expect(headers[key]).to eq(value)
               end

@@ -153,13 +153,18 @@ module BuildTools
       api['metadata'].delete('signatureVersion')
 
       # handled by endpoints 2.0
-      api['operations'].each do |_key, operation|
+      api['operations'].each do |key, operation|
         # requestUri should always exist. Remove bucket from path
         # and preserve request uri as /
         if operation['http'] && operation['http']['requestUri']
           operation['http']['requestUri'].gsub!('/{Bucket}', '/')
           operation['http']['requestUri'].gsub!('//', '/')
         end
+
+        next unless %w[PutObject UploadPart].include?(key)
+
+        operation['authType'] = 'v4-unsigned-body'
+        operation['unsignedPayload'] = true
       end
 
       # Ensure Expires is a timestamp regardless of model to be backwards

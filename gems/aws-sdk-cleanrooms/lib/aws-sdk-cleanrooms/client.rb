@@ -1002,6 +1002,13 @@ module Aws::CleanRooms
     #   governance requirements, and implement regional data governance
     #   policies.
     #
+    # @option params [Boolean] :is_metrics_enabled
+    #   An indicator as to whether metrics have been enabled or disabled for
+    #   the collaboration.
+    #
+    #   When `true`, collaboration members can opt in to Amazon CloudWatch
+    #   metrics for their membership queries. The default value is `false`.
+    #
     # @return [Types::CreateCollaborationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCollaborationOutput#collaboration #collaboration} => Types::Collaboration
@@ -1078,6 +1085,7 @@ module Aws::CleanRooms
     #     analytics_engine: "SPARK", # accepts SPARK, CLEAN_ROOMS_SQL
     #     auto_approved_change_request_types: ["ADD_MEMBER"], # accepts ADD_MEMBER, GRANT_RECEIVE_RESULTS_ABILITY, REVOKE_RECEIVE_RESULTS_ABILITY
     #     allowed_result_regions: ["us-west-1"], # accepts us-west-1, us-west-2, us-east-1, us-east-2, af-south-1, ap-east-1, ap-east-2, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-southeast-5, ap-southeast-4, ap-southeast-7, ap-south-1, ap-northeast-3, ap-northeast-1, ap-northeast-2, ca-central-1, ca-west-1, eu-south-1, eu-west-3, eu-south-2, eu-central-2, eu-central-1, eu-north-1, eu-west-1, eu-west-2, me-south-1, me-central-1, il-central-1, sa-east-1, mx-central-1
+    #     is_metrics_enabled: false,
     #   })
     #
     # @example Response structure
@@ -1104,6 +1112,7 @@ module Aws::CleanRooms
     #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY"
     #   resp.collaboration.allowed_result_regions #=> Array
     #   resp.collaboration.allowed_result_regions[0] #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"
+    #   resp.collaboration.is_metrics_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaboration AWS API Documentation
     #
@@ -1844,6 +1853,18 @@ module Aws::CleanRooms
     #   to run queries but is configured as a payer by the collaboration
     #   creator.
     #
+    # @option params [Boolean] :is_metrics_enabled
+    #   An indicator as to whether Amazon CloudWatch metrics have been enabled
+    #   or disabled for the membership.
+    #
+    #   Amazon CloudWatch metrics are only available when the collaboration
+    #   has metrics enabled. This option can be set by collaboration members
+    #   who have the ability to run queries (analysis runners) or by members
+    #   who are configured as payers.
+    #
+    #   When `true`, metrics about query execution are collected in Amazon
+    #   CloudWatch. The default value is `false`.
+    #
     # @return [Types::CreateMembershipOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMembershipOutput#membership #membership} => Types::Membership
@@ -1896,6 +1917,7 @@ module Aws::CleanRooms
     #         is_responsible: false, # required
     #       },
     #     },
+    #     is_metrics_enabled: false,
     #   })
     #
     # @example Response structure
@@ -1929,6 +1951,7 @@ module Aws::CleanRooms
     #   resp.membership.payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.machine_learning.synthetic_data_generation.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.job_compute.is_responsible #=> Boolean
+    #   resp.membership.is_metrics_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateMembership AWS API Documentation
     #
@@ -2464,6 +2487,7 @@ module Aws::CleanRooms
     #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY"
     #   resp.collaboration.allowed_result_regions #=> Array
     #   resp.collaboration.allowed_result_regions[0] #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"
+    #   resp.collaboration.is_metrics_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaboration AWS API Documentation
     #
@@ -3152,6 +3176,7 @@ module Aws::CleanRooms
     #   resp.membership.payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.machine_learning.synthetic_data_generation.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.job_compute.is_responsible #=> Boolean
+    #   resp.membership.is_metrics_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetMembership AWS API Documentation
     #
@@ -5220,6 +5245,7 @@ module Aws::CleanRooms
     #   resp.collaboration.auto_approved_change_types[0] #=> String, one of "ADD_MEMBER", "GRANT_RECEIVE_RESULTS_ABILITY", "REVOKE_RECEIVE_RESULTS_ABILITY"
     #   resp.collaboration.allowed_result_regions #=> Array
     #   resp.collaboration.allowed_result_regions[0] #=> String, one of "us-west-1", "us-west-2", "us-east-1", "us-east-2", "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-southeast-5", "ap-southeast-4", "ap-southeast-7", "ap-south-1", "ap-northeast-3", "ap-northeast-1", "ap-northeast-2", "ca-central-1", "ca-west-1", "eu-south-1", "eu-west-3", "eu-south-2", "eu-central-2", "eu-central-1", "eu-north-1", "eu-west-1", "eu-west-2", "me-south-1", "me-central-1", "il-central-1", "sa-east-1", "mx-central-1"
+    #   resp.collaboration.is_metrics_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateCollaboration AWS API Documentation
     #
@@ -5926,6 +5952,7 @@ module Aws::CleanRooms
     #   resp.membership.payment_configuration.machine_learning.model_inference.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.machine_learning.synthetic_data_generation.is_responsible #=> Boolean
     #   resp.membership.payment_configuration.job_compute.is_responsible #=> Boolean
+    #   resp.membership.is_metrics_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateMembership AWS API Documentation
     #
@@ -6158,7 +6185,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

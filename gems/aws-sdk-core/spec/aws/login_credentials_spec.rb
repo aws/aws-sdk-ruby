@@ -128,13 +128,14 @@ module Aws
           expect(creds.credentials.secret_access_key).to eq('new_secret')
           expect(creds.credentials.session_token).to eq('new_token')
           expect(creds.credentials.account_id).to eq('0123456789012')
-          expect(creds.expiration).to eq(Time.parse(new_expiration))
+          expect(creds.expiration).to eq(Time.parse(expiration) + 60 + 900)
         end
       end
 
       context 'expired token with refresh token' do
-        let(:old_expiration) { (Time.now.utc + 60).to_datetime.rfc3339 }
-        let(:new_expiration) { (Time.now.utc + 900).to_datetime.rfc3339 }
+        let(:time) { Time.parse('2026-01-01 00:00:00 UTC') }
+        let(:old_expiration) { (time + 60).to_datetime.rfc3339 }
+        let(:new_expiration) { (time + 900).to_datetime.rfc3339 }
 
         let(:cached_token) do
           {
@@ -178,9 +179,9 @@ module Aws
                 secret_access_key: 'new_secret',
                 session_token: 'new_token'
               },
-              token_type: "aws_sigv4",
+              token_type: 'aws_sigv4',
               expires_in: 900,
-              refresh_token: "new_refresh_token",
+              refresh_token: 'new_refresh_token',
               id_token: 'identity_token'
             }
           }
@@ -188,6 +189,7 @@ module Aws
 
         before do
           allow_any_instance_of(LoginCredentials).to receive(:warn).with(/WARNING: OpenSSL 3.6.x/)
+          allow(Time).to receive(:now).and_return(time)
         end
 
         it 'refreshes the token' do

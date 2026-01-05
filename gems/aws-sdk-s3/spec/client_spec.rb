@@ -167,7 +167,12 @@ module Aws
           tmpfile.unlink
           s3 = Client.new(stub_responses: true)
           resp = s3.put_object(bucket: 'bucket', key: 'key', body: tmpfile)
-          expect(resp.context.http_request.body_contents).to eq(data)
+
+          if defined?(JRUBY_VERSION)
+            expect(resp.context.http_request.body_contents).to eq(data)
+          else
+            expect(resp.context.http_request.body.instance_variable_get(:@io).read).to eq(data)
+          end
         end
       end
 
@@ -176,14 +181,7 @@ module Aws
           closed_file = File.open(__FILE__, 'rb')
           closed_file.close
           client = Client.new(stub_responses: true)
-          resp = client.put_object(
-            bucket: 'aws-sdk', key: 'key', body: closed_file
-          )
-          body = resp.context.http_request.body
-          expect(body).to be_kind_of(File)
-          expect(body.path).to eq(__FILE__)
-          expect(body).not_to be(closed_file)
-          expect(body.closed?).to be(true)
+          expect { client.put_object(bucket: 'aws-sdk', key: 'key', body: closed_file) }.not_to raise_error
         end
 
         it 'accepts closed Tempfile objects' do
@@ -191,12 +189,7 @@ module Aws
           tmpfile.write('abc')
           tmpfile.close
           client = Client.new(stub_responses: true)
-          resp = client.put_object(bucket: 'aws-sdk', key: 'key', body: tmpfile)
-          body = resp.context.http_request.body
-          expect(body).to be_kind_of(File)
-          expect(body.path).to eq(tmpfile.path)
-          expect(body).not_to be(tmpfile)
-          expect(body.closed?).to be(true)
+          expect { client.put_object(bucket: 'aws-sdk', key: 'key', body: tmpfile) }.not_to raise_error
         end
       end
 

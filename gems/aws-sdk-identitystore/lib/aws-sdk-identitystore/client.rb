@@ -639,6 +639,9 @@ module Aws::IdentityStore
     #   The user's birthdate in YYYY-MM-DD format. This field supports
     #   standard date format for storing personal information.
     #
+    # @option params [Array<Types::Role>] :roles
+    #   A list of `Role` objects containing roles associated with the user.
+    #
     # @option params [Hash<String,Hash,Array,String,Numeric,Boolean>] :extensions
     #   A map with additional attribute extensions for the user. Each map key
     #   corresponds to an extension name, while map values represent extension
@@ -708,6 +711,13 @@ module Aws::IdentityStore
     #     ],
     #     website: "SensitiveStringType",
     #     birthdate: "SensitiveStringType",
+    #     roles: [
+    #       {
+    #         value: "SensitiveStringType",
+    #         type: "SensitiveStringType",
+    #         primary: false,
+    #       },
+    #     ],
     #     extensions: {
     #       "ExtensionName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     },
@@ -980,6 +990,7 @@ module Aws::IdentityStore
     #   * {Types::DescribeUserResponse#photos #photos} => Array&lt;Types::Photo&gt;
     #   * {Types::DescribeUserResponse#website #website} => String
     #   * {Types::DescribeUserResponse#birthdate #birthdate} => String
+    #   * {Types::DescribeUserResponse#roles #roles} => Array&lt;Types::Role&gt;
     #   * {Types::DescribeUserResponse#created_at #created_at} => Time
     #   * {Types::DescribeUserResponse#created_by #created_by} => String
     #   * {Types::DescribeUserResponse#updated_at #updated_at} => Time
@@ -1041,6 +1052,10 @@ module Aws::IdentityStore
     #   resp.photos[0].primary #=> Boolean
     #   resp.website #=> String
     #   resp.birthdate #=> String
+    #   resp.roles #=> Array
+    #   resp.roles[0].value #=> String
+    #   resp.roles[0].type #=> String
+    #   resp.roles[0].primary #=> Boolean
     #   resp.created_at #=> Time
     #   resp.created_by #=> String
     #   resp.updated_at #=> Time
@@ -1627,6 +1642,10 @@ module Aws::IdentityStore
     #   resp.users[0].photos[0].primary #=> Boolean
     #   resp.users[0].website #=> String
     #   resp.users[0].birthdate #=> String
+    #   resp.users[0].roles #=> Array
+    #   resp.users[0].roles[0].value #=> String
+    #   resp.users[0].roles[0].type #=> String
+    #   resp.users[0].roles[0].primary #=> Boolean
     #   resp.users[0].created_at #=> Time
     #   resp.users[0].created_by #=> String
     #   resp.users[0].updated_at #=> Time
@@ -1748,7 +1767,7 @@ module Aws::IdentityStore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-identitystore'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

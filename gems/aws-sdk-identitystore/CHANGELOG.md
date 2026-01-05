@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2026-01-02)
+------------------
+
+* Feature - This change introduces "Roles" attribute for User entities supported by AWS Identity Store SDK.
+
 1.62.0 (2025-12-08)
 ------------------
 

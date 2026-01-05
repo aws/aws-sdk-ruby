@@ -960,6 +960,7 @@ module Aws::CleanRooms
     Collaboration.add_member(:analytics_engine, Shapes::ShapeRef.new(shape: AnalyticsEngine, location_name: "analyticsEngine"))
     Collaboration.add_member(:auto_approved_change_types, Shapes::ShapeRef.new(shape: AutoApprovedChangeTypeList, location_name: "autoApprovedChangeTypes"))
     Collaboration.add_member(:allowed_result_regions, Shapes::ShapeRef.new(shape: AllowedResultRegions, location_name: "allowedResultRegions"))
+    Collaboration.add_member(:is_metrics_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "isMetricsEnabled"))
     Collaboration.struct_class = Types::Collaboration
 
     CollaborationAnalysisTemplate.add_member(:id, Shapes::ShapeRef.new(shape: AnalysisTemplateIdentifier, required: true, location_name: "id"))
@@ -1393,6 +1394,7 @@ module Aws::CleanRooms
     CreateCollaborationInput.add_member(:analytics_engine, Shapes::ShapeRef.new(shape: AnalyticsEngine, location_name: "analyticsEngine"))
     CreateCollaborationInput.add_member(:auto_approved_change_request_types, Shapes::ShapeRef.new(shape: AutoApprovedChangeTypeList, location_name: "autoApprovedChangeRequestTypes"))
     CreateCollaborationInput.add_member(:allowed_result_regions, Shapes::ShapeRef.new(shape: AllowedResultRegions, location_name: "allowedResultRegions"))
+    CreateCollaborationInput.add_member(:is_metrics_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "isMetricsEnabled"))
     CreateCollaborationInput.struct_class = Types::CreateCollaborationInput
 
     CreateCollaborationOutput.add_member(:collaboration, Shapes::ShapeRef.new(shape: Collaboration, required: true, location_name: "collaboration"))
@@ -1478,6 +1480,7 @@ module Aws::CleanRooms
     CreateMembershipInput.add_member(:default_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedQueryResultConfiguration, location_name: "defaultResultConfiguration"))
     CreateMembershipInput.add_member(:default_job_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedJobResultConfiguration, location_name: "defaultJobResultConfiguration"))
     CreateMembershipInput.add_member(:payment_configuration, Shapes::ShapeRef.new(shape: MembershipPaymentConfiguration, location_name: "paymentConfiguration"))
+    CreateMembershipInput.add_member(:is_metrics_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "isMetricsEnabled"))
     CreateMembershipInput.struct_class = Types::CreateMembershipInput
 
     CreateMembershipOutput.add_member(:membership, Shapes::ShapeRef.new(shape: Membership, required: true, location_name: "membership"))
@@ -2136,6 +2139,7 @@ module Aws::CleanRooms
     Membership.add_member(:default_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedQueryResultConfiguration, location_name: "defaultResultConfiguration"))
     Membership.add_member(:default_job_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedJobResultConfiguration, location_name: "defaultJobResultConfiguration"))
     Membership.add_member(:payment_configuration, Shapes::ShapeRef.new(shape: MembershipPaymentConfiguration, required: true, location_name: "paymentConfiguration"))
+    Membership.add_member(:is_metrics_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "isMetricsEnabled"))
     Membership.struct_class = Types::Membership
 
     MembershipJobComputePaymentConfig.add_member(:is_responsible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isResponsible"))

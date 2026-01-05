@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'spec_helper'
+require 'socket'
 require 'tempfile'
 
 module Aws
@@ -105,6 +106,109 @@ module Aws
         it 'accepts an alternative multipart file threshold' do
           expect(client).to receive(:put_object).with({ bucket: 'bucket', key: 'key', body: large_file })
           subject.upload_file(large_file, bucket: 'bucket', key: 'key', multipart_threshold: 200 * one_mb_size)
+        end
+
+        context ':http_check_size', skip: defined?(JRUBY_VERSION) do
+          let(:test_file) do
+            Tempfile.new('test_upload_file').tap do |f|
+              f.write('x' * 65_536)
+              f.rewind
+            end
+          end
+
+          def start_mirror_server(chunk_size)
+            server = TCPServer.new('127.0.0.1', 0)
+            port = server.addr[1]
+            chunks = []
+
+            server_thread = Thread.new do
+              Timeout.timeout(10) do
+                client = server.accept
+                headers = ''
+                while (line = client.gets)
+                  headers += line
+                  break if line.strip.empty?
+                end
+
+                if headers.include?('Expect: 100-continue')
+                  client.write("HTTP/1.1 100 Continue\r\n\r\n")
+
+                  loop do
+                    sleep(0.01) # needs wait between reads
+                    data = client.read_nonblock(chunk_size, exception: false)
+                    break if data == :wait_readable || data.nil?
+
+                    chunks << data.size
+                  end
+                end
+                client.write("HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n")
+              ensure
+                client.close
+              end
+            end
+            [server, server_thread, port]
+          end
+
+          it 'uses the given chunk size when uploading' do
+            WebMock.disable!
+            chunk_size = 32_768
+            server, server_thread, port = start_mirror_server(chunk_size)
+            client = Aws::S3::Client.new(
+              endpoint: "http://127.0.0.1:#{port}",
+              region: 'us-east-1',
+              access_key_id: 't',
+              secret_access_key: 't'
+            )
+            tm = Aws::S3::TransferManager.new(client: client)
+            read_sizes = []
+
+            expect(Seahorse::Client::NetHttp::Patches::RequestPatches::RequestIO)
+              .to receive(:custom_stream).and_call_original
+            allow_any_instance_of(Aws::Plugins::ChecksumAlgorithm::AwsChunkedTrailerDigestIO)
+              .to receive(:read).and_wrap_original do |method, size|
+              read_sizes << size
+              method.call(size)
+            end
+
+            tm.upload_file(test_file, bucket: 'test-bucket', key: 'test-key', http_chunk_size: chunk_size)
+            server_thread.join
+            expect(read_sizes).to all(eq(chunk_size))
+          ensure
+            server&.close
+            WebMock.enable!
+          end
+
+          it 'uses default chunk size' do
+            WebMock.disable!
+            chunk_size = 16_384
+            server, server_thread, port = start_mirror_server(chunk_size)
+            client = Aws::S3::Client.new(
+              endpoint: "http://127.0.0.1:#{port}",
+              region: 'us-east-1',
+              access_key_id: 't',
+              secret_access_key: 't'
+            )
+            tm = Aws::S3::TransferManager.new(client: client)
+            read_sizes = []
+
+            allow_any_instance_of(Aws::Plugins::ChecksumAlgorithm::AwsChunkedTrailerDigestIO)
+              .to receive(:read).and_wrap_original do |method, size|
+              read_sizes << size
+              method.call(size)
+            end
+            tm.upload_file(test_file, bucket: 'test-bucket', key: 'test-key')
+            server_thread.join
+            expect(read_sizes).to all(eq(chunk_size))
+          ensure
+            server.close
+            WebMock.enable!
+          end
+
+          it 'raises error when less than 16KB' do
+            expect do
+              subject.upload_file(large_file, bucket: 'bucket', key: 'key', http_chunk_size: 100)
+            end.to raise_error(ArgumentError, /:http_chunk_size must be at least 16384 bytes/)
+          end
         end
       end
 
