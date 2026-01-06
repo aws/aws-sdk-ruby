@@ -381,7 +381,12 @@ module Aws
           location_name = checksum_properties[:name]
 
           # set required headers
-          headers['Content-Encoding'] = 'aws-chunked'
+          headers['Content-Encoding'] =
+            if headers['Content-Encoding']
+              headers['Content-Encoding'] += ', aws-chunked'
+            else
+              'aws-chunked'
+            end
           headers['X-Amz-Content-Sha256'] = 'STREAMING-UNSIGNED-PAYLOAD-TRAILER'
           headers['X-Amz-Trailer'] = location_name
 
