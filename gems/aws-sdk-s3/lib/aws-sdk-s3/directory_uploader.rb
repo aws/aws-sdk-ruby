@@ -14,6 +14,12 @@ module Aws
         @mutex = Mutex.new
       end
 
+      attr_reader :client, :executor
+
+      def abort_requested
+        @mutex.synchronize { @abort_requested }
+      end
+
       def upload(source_directory, bucket, **opts)
         raise ArgumentError, 'Invalid directory' unless Dir.exist?(source_directory)
 
@@ -29,10 +35,6 @@ module Aws
       ensure
         @abort_requested = false
         @queue_executor.shutdown
-      end
-
-      def abort_requested
-        @mutex.synchronize { @abort_requested }
       end
 
       private
