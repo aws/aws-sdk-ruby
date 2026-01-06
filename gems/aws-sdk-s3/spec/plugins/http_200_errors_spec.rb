@@ -33,7 +33,7 @@ module Aws
             .to raise_error(Seahorse::Client::NetworkingError, /Empty or incomplete response body/)
         end
 
-        it 'gracefully handle non-UTF encoding' do
+        it 'gracefully checks body when given ASCII encoding' do
           response = <<~XML
             <?xml version="1.0" encoding="UTF-8"?>
             <DeleteResult>
@@ -44,14 +44,16 @@ module Aws
             </DeleteResult>
           XML
 
+          allow_any_instance_of(Seahorse::Client::Http::Response)
+            .to receive(:body_contents)
+            .and_return(response.dup.force_encoding('US-ASCII'))
+
           # No headers to replicate omitted Content-Type header
-          stub_request(:post, 'https://test-bucket.s3.amazonaws.com/?delete')
-            .to_return(status: 200, body: response, headers: {})
+          stub_request(:post, 'https://test-bucket.s3.amazonaws.com/?delete').to_return(status: 200, headers: {})
 
           expect { client.delete_objects(bucket: 'test-bucket', delete: { objects: [{ key: 'test' }] }) }
             .not_to raise_error
         end
-
       end
     end
   end
