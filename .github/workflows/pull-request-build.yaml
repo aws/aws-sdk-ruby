@@ -30,7 +30,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@main
         with:
-          role-to-assume: '$IAM_ROLE_ARN'
+          role-to-assume: ${{ env.IAM_ROLE_ARN }}
           role-session-name: PullRequestBuildGitHubAction
           role-duration-seconds: '$ROLE_SESSION_DURATION_SECONDS'
           aws-region: us-west-2
