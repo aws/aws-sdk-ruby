@@ -3,10 +3,8 @@
 module Aws
   module Plugins
     module Retries
-
       # @api private
       class ClockSkew
-
         CLOCK_SKEW_THRESHOLD = 5 * 60 # five minutes
 
         def initialize
@@ -22,9 +20,9 @@ module Aws
         end
 
         # Gets the clock_correction in seconds to apply to a given endpoint
-        # @param endpoint [URI / String]
+        # @param endpoint [URI, String]
         def clock_correction(endpoint)
-          @mutex.synchronize { @endpoint_clock_corrections[endpoint.to_s] }
+          @mutex.synchronize { @endpoint_clock_corrections[normalized_endpoint(endpoint)] }
         end
 
         # The estimated skew factors in any clock skew from
@@ -35,7 +33,7 @@ module Aws
         # Estimated Skew should not be used to correct clock skew errors
         # it should only be used to estimate TTL for a request
         def estimated_skew(endpoint)
-          @mutex.synchronize { @endpoint_estimated_skews[endpoint.to_s] }
+          @mutex.synchronize { @endpoint_estimated_skews[normalized_endpoint(endpoint)] }
         end
 
         # Determines whether a request has clock skew by comparing
@@ -55,9 +53,9 @@ module Aws
           endpoint = context.http_request.endpoint
           now_utc = Time.now.utc
           server_time = server_time(context.http_response)
-          if server_time && (now_utc - server_time).abs > CLOCK_SKEW_THRESHOLD
-            set_clock_correction(endpoint, server_time - now_utc)
-          end
+          return unless server_time && (now_utc - server_time).abs > CLOCK_SKEW_THRESHOLD
+
+          set_clock_correction(normalized_endpoint(endpoint), server_time - now_utc)
         end
 
         # Called for every request
@@ -69,20 +67,35 @@ module Aws
           now_utc = Time.now.utc
           server_time = server_time(context.http_response)
           return unless server_time
+
           @mutex.synchronize do
-            @endpoint_estimated_skews[endpoint.to_s] = server_time - now_utc
+            @endpoint_estimated_skews[normalized_endpoint(endpoint)] = server_time - now_utc
           end
         end
 
         private
 
+        ##
+        # @param endpoint [URI, String]
+        #     the endpoint to normalize
+        #
+        # @return [String]
+        #     the endpoint's schema, host, and port - without any path or query arguments
+        def normalized_endpoint(endpoint)
+          uri = endpoint.is_a?(URI::Generic) ? endpoint : URI(endpoint.to_s)
+
+          return endpoint.to_s unless uri.scheme && uri.host
+
+          "#{uri.scheme}://#{uri.host}:#{uri.port}"
+        rescue URI::InvalidURIError
+          endpoint.to_s
+        end
+
         # @param response [Seahorse::Client::Http::Response:]
         def server_time(response)
-          begin
-            Time.parse(response.headers['date']).utc
-          rescue
-            nil
-          end
+          Time.parse(response.headers['date']).utc
+        rescue StandardError
+          nil
         end
 
         # Sets the clock correction for an endpoint
@@ -90,11 +103,10 @@ module Aws
         # @param correction [Number]
         def set_clock_correction(endpoint, correction)
           @mutex.synchronize do
-            @endpoint_clock_corrections[endpoint.to_s] = correction
+            @endpoint_clock_corrections[normalized_endpoint(endpoint)] = correction
           end
         end
       end
     end
   end
 end
-

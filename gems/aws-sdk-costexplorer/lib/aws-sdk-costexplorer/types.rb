@@ -6170,6 +6170,11 @@ module Aws::CostExplorer
     #   Determines whether the recommended reservation is size flexible.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deployment_model
+    #   Determines whether the recommendation is for a reservation for RDS
+    #   Custom.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RDSInstanceDetails AWS API Documentation
     #
     class RDSInstanceDetails < Struct.new(
@@ -6181,7 +6186,8 @@ module Aws::CostExplorer
       :deployment_option,
       :license_model,
       :current_generation,
-      :size_flex_eligible)
+      :size_flex_eligible,
+      :deployment_model)
       SENSITIVE = []
       include Aws::Structure
     end

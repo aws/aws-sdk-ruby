@@ -108,6 +108,10 @@ module Aws::EMRServerless
     #   The configuration setting for monitoring.
     #   @return [Types::MonitoringConfiguration]
     #
+    # @!attribute [rw] disk_encryption_configuration
+    #   The configuration object that allows encrypting local disks.
+    #   @return [Types::DiskEncryptionConfiguration]
+    #
     # @!attribute [rw] interactive_configuration
     #   The interactive configuration object that enables the interactive
     #   use cases for an application.
@@ -150,6 +154,7 @@ module Aws::EMRServerless
       :worker_type_specifications,
       :runtime_configuration,
       :monitoring_configuration,
+      :disk_encryption_configuration,
       :interactive_configuration,
       :scheduler_configuration,
       :identity_center_configuration,
@@ -387,11 +392,16 @@ module Aws::EMRServerless
     #   The override configurations for monitoring.
     #   @return [Types::MonitoringConfiguration]
     #
+    # @!attribute [rw] disk_encryption_configuration
+    #   The override configuration to encrypt local disks.
+    #   @return [Types::DiskEncryptionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/ConfigurationOverrides AWS API Documentation
     #
     class ConfigurationOverrides < Struct.new(
       :application_configuration,
-      :monitoring_configuration)
+      :monitoring_configuration,
+      :disk_encryption_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -494,6 +504,10 @@ module Aws::EMRServerless
     #   The configuration setting for monitoring.
     #   @return [Types::MonitoringConfiguration]
     #
+    # @!attribute [rw] disk_encryption_configuration
+    #   The configuration object that allows encrypting local disks.
+    #   @return [Types::DiskEncryptionConfiguration]
+    #
     # @!attribute [rw] interactive_configuration
     #   The interactive configuration object that enables the interactive
     #   use cases to use when running an application.
@@ -533,6 +547,7 @@ module Aws::EMRServerless
       :worker_type_specifications,
       :runtime_configuration,
       :monitoring_configuration,
+      :disk_encryption_configuration,
       :interactive_configuration,
       :scheduler_configuration,
       :identity_center_configuration,
@@ -578,6 +593,28 @@ module Aws::EMRServerless
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/DeleteApplicationResponse AWS API Documentation
     #
     class DeleteApplicationResponse < Aws::EmptyStructure; end
+
+    # The configuration object that allows encrypting local disks.
+    #
+    # @!attribute [rw] encryption_context
+    #   Specifies the optional encryption context that will be used when
+    #   encrypting the data. An encryption context is a collection of
+    #   non-secret key-value pairs that represent additional authenticated
+    #   data.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] encryption_key_arn
+    #   The KMS key ARN to encrypt local disks.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/DiskEncryptionConfiguration AWS API Documentation
+    #
+    class DiskEncryptionConfiguration < Struct.new(
+      :encryption_context,
+      :encryption_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] application_id
     #   The ID of the application that will be described.
@@ -1971,6 +2008,10 @@ module Aws::EMRServerless
     #   The configuration setting for monitoring.
     #   @return [Types::MonitoringConfiguration]
     #
+    # @!attribute [rw] disk_encryption_configuration
+    #   The configuration object that allows encrypting local disks.
+    #   @return [Types::DiskEncryptionConfiguration]
+    #
     # @!attribute [rw] scheduler_configuration
     #   The scheduler configuration for batch and streaming jobs running on
     #   this application. Supported with release labels emr-7.0.0 and above.
@@ -2004,6 +2045,7 @@ module Aws::EMRServerless
       :release_label,
       :runtime_configuration,
       :monitoring_configuration,
+      :disk_encryption_configuration,
       :scheduler_configuration,
       :identity_center_configuration,
       :job_level_cost_allocation_configuration)

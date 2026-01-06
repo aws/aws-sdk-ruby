@@ -29,6 +29,7 @@ module Aws::EMRServerless
       attr_accessor worker_type_specifications: ::Hash[::String, Types::WorkerTypeSpecification]
       attr_accessor runtime_configuration: ::Array[Types::Configuration]
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration
+      attr_accessor disk_encryption_configuration: Types::DiskEncryptionConfiguration
       attr_accessor interactive_configuration: Types::InteractiveConfiguration
       attr_accessor scheduler_configuration: Types::SchedulerConfiguration
       attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration
@@ -93,6 +94,7 @@ module Aws::EMRServerless
     class ConfigurationOverrides
       attr_accessor application_configuration: ::Array[Types::Configuration]
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration
+      attr_accessor disk_encryption_configuration: Types::DiskEncryptionConfiguration
       SENSITIVE: []
     end
 
@@ -117,6 +119,7 @@ module Aws::EMRServerless
       attr_accessor worker_type_specifications: ::Hash[::String, Types::WorkerTypeSpecificationInput]
       attr_accessor runtime_configuration: ::Array[Types::Configuration]
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration
+      attr_accessor disk_encryption_configuration: Types::DiskEncryptionConfiguration
       attr_accessor interactive_configuration: Types::InteractiveConfiguration
       attr_accessor scheduler_configuration: Types::SchedulerConfiguration
       attr_accessor identity_center_configuration: Types::IdentityCenterConfigurationInput
@@ -137,6 +140,12 @@ module Aws::EMRServerless
     end
 
     class DeleteApplicationResponse < Aws::EmptyStructure
+    end
+
+    class DiskEncryptionConfiguration
+      attr_accessor encryption_context: ::Hash[::String, ::String]
+      attr_accessor encryption_key_arn: ::String
+      SENSITIVE: []
     end
 
     class GetApplicationRequest
@@ -524,6 +533,7 @@ module Aws::EMRServerless
       attr_accessor release_label: ::String
       attr_accessor runtime_configuration: ::Array[Types::Configuration]
       attr_accessor monitoring_configuration: Types::MonitoringConfiguration
+      attr_accessor disk_encryption_configuration: Types::DiskEncryptionConfiguration
       attr_accessor scheduler_configuration: Types::SchedulerConfiguration
       attr_accessor identity_center_configuration: Types::IdentityCenterConfigurationInput
       attr_accessor job_level_cost_allocation_configuration: Types::JobLevelCostAllocationConfiguration

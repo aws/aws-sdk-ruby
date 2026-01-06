@@ -55,7 +55,7 @@ module Aws::MailManager
   autoload :EndpointProvider, 'aws-sdk-mailmanager/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mailmanager/endpoints'
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.37.0'
 
 end
 

@@ -45,10 +45,14 @@ module Aws::EMRServerless
     Date = Shapes::TimestampShape.new(name: 'Date')
     DeleteApplicationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationRequest')
     DeleteApplicationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationResponse')
+    DiskEncryptionConfiguration = Shapes::StructureShape.new(name: 'DiskEncryptionConfiguration')
     DiskSize = Shapes::StringShape.new(name: 'DiskSize')
     DiskType = Shapes::StringShape.new(name: 'DiskType')
     Double = Shapes::FloatShape.new(name: 'Double')
     Duration = Shapes::IntegerShape.new(name: 'Duration')
+    EncryptionContext = Shapes::MapShape.new(name: 'EncryptionContext')
+    EncryptionContextKey = Shapes::StringShape.new(name: 'EncryptionContextKey')
+    EncryptionContextValue = Shapes::StringShape.new(name: 'EncryptionContextValue')
     EncryptionKeyArn = Shapes::StringShape.new(name: 'EncryptionKeyArn')
     EngineType = Shapes::StringShape.new(name: 'EngineType')
     EntryPointArgument = Shapes::StringShape.new(name: 'EntryPointArgument')
@@ -187,6 +191,7 @@ module Aws::EMRServerless
     Application.add_member(:worker_type_specifications, Shapes::ShapeRef.new(shape: WorkerTypeSpecificationMap, location_name: "workerTypeSpecifications"))
     Application.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "runtimeConfiguration"))
     Application.add_member(:monitoring_configuration, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
+    Application.add_member(:disk_encryption_configuration, Shapes::ShapeRef.new(shape: DiskEncryptionConfiguration, location_name: "diskEncryptionConfiguration"))
     Application.add_member(:interactive_configuration, Shapes::ShapeRef.new(shape: InteractiveConfiguration, location_name: "interactiveConfiguration"))
     Application.add_member(:scheduler_configuration, Shapes::ShapeRef.new(shape: SchedulerConfiguration, location_name: "schedulerConfiguration"))
     Application.add_member(:identity_center_configuration, Shapes::ShapeRef.new(shape: IdentityCenterConfiguration, location_name: "identityCenterConfiguration"))
@@ -241,6 +246,7 @@ module Aws::EMRServerless
 
     ConfigurationOverrides.add_member(:application_configuration, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "applicationConfiguration"))
     ConfigurationOverrides.add_member(:monitoring_configuration, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
+    ConfigurationOverrides.add_member(:disk_encryption_configuration, Shapes::ShapeRef.new(shape: DiskEncryptionConfiguration, location_name: "diskEncryptionConfiguration"))
     ConfigurationOverrides.struct_class = Types::ConfigurationOverrides
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String1024, required: true, location_name: "message"))
@@ -261,6 +267,7 @@ module Aws::EMRServerless
     CreateApplicationRequest.add_member(:worker_type_specifications, Shapes::ShapeRef.new(shape: WorkerTypeSpecificationInputMap, location_name: "workerTypeSpecifications"))
     CreateApplicationRequest.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "runtimeConfiguration"))
     CreateApplicationRequest.add_member(:monitoring_configuration, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
+    CreateApplicationRequest.add_member(:disk_encryption_configuration, Shapes::ShapeRef.new(shape: DiskEncryptionConfiguration, location_name: "diskEncryptionConfiguration"))
     CreateApplicationRequest.add_member(:interactive_configuration, Shapes::ShapeRef.new(shape: InteractiveConfiguration, location_name: "interactiveConfiguration"))
     CreateApplicationRequest.add_member(:scheduler_configuration, Shapes::ShapeRef.new(shape: SchedulerConfiguration, location_name: "schedulerConfiguration"))
     CreateApplicationRequest.add_member(:identity_center_configuration, Shapes::ShapeRef.new(shape: IdentityCenterConfigurationInput, location_name: "identityCenterConfiguration"))
@@ -276,6 +283,13 @@ module Aws::EMRServerless
     DeleteApplicationRequest.struct_class = Types::DeleteApplicationRequest
 
     DeleteApplicationResponse.struct_class = Types::DeleteApplicationResponse
+
+    DiskEncryptionConfiguration.add_member(:encryption_context, Shapes::ShapeRef.new(shape: EncryptionContext, location_name: "encryptionContext"))
+    DiskEncryptionConfiguration.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: EncryptionKeyArn, location_name: "encryptionKeyArn"))
+    DiskEncryptionConfiguration.struct_class = Types::DiskEncryptionConfiguration
+
+    EncryptionContext.key = Shapes::ShapeRef.new(shape: EncryptionContextKey)
+    EncryptionContext.value = Shapes::ShapeRef.new(shape: EncryptionContextValue)
 
     EntryPointArguments.member = Shapes::ShapeRef.new(shape: EntryPointArgument)
 
@@ -589,6 +603,7 @@ module Aws::EMRServerless
     UpdateApplicationRequest.add_member(:release_label, Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel"))
     UpdateApplicationRequest.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "runtimeConfiguration"))
     UpdateApplicationRequest.add_member(:monitoring_configuration, Shapes::ShapeRef.new(shape: MonitoringConfiguration, location_name: "monitoringConfiguration"))
+    UpdateApplicationRequest.add_member(:disk_encryption_configuration, Shapes::ShapeRef.new(shape: DiskEncryptionConfiguration, location_name: "diskEncryptionConfiguration"))
     UpdateApplicationRequest.add_member(:scheduler_configuration, Shapes::ShapeRef.new(shape: SchedulerConfiguration, location_name: "schedulerConfiguration"))
     UpdateApplicationRequest.add_member(:identity_center_configuration, Shapes::ShapeRef.new(shape: IdentityCenterConfigurationInput, location_name: "identityCenterConfiguration"))
     UpdateApplicationRequest.add_member(:job_level_cost_allocation_configuration, Shapes::ShapeRef.new(shape: JobLevelCostAllocationConfiguration, location_name: "jobLevelCostAllocationConfiguration"))

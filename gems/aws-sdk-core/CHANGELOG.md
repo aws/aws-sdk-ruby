@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+3.241.1 (2026-01-06)
+------------------
+
+* Issue - Fix memory leak in ClockSkew retry plugin by normalizing endpoints to prevent unlimited hash growth.
+
+3.241.0 (2026-01-05)
+------------------
+
 * Feature - Improved memory efficiency when calculating request checksums.
 
 3.240.0 (2025-12-16)

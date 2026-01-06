@@ -263,8 +263,8 @@ module Aws::CleanRoomsML
     NameString = Shapes::StringShape.new(name: 'NameString')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NoiseLevelType = Shapes::StringShape.new(name: 'NoiseLevelType')
-    ParameterKey = Shapes::StringShape.new(name: 'ParameterKey')
     ParameterMap = Shapes::MapShape.new(name: 'ParameterMap')
+    ParameterName = Shapes::StringShape.new(name: 'ParameterName')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     PolicyExistenceCondition = Shapes::StringShape.new(name: 'PolicyExistenceCondition')
     PrivacyBudgets = Shapes::UnionShape.new(name: 'PrivacyBudgets')
@@ -292,6 +292,9 @@ module Aws::CleanRoomsML
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceQuotaExceededExceptionQuotaValueDouble = Shapes::FloatShape.new(name: 'ServiceQuotaExceededExceptionQuotaValueDouble')
     SharedAudienceMetrics = Shapes::StringShape.new(name: 'SharedAudienceMetrics')
+    SparkProperties = Shapes::MapShape.new(name: 'SparkProperties')
+    SparkPropertyKey = Shapes::StringShape.new(name: 'SparkPropertyKey')
+    SparkPropertyValue = Shapes::StringShape.new(name: 'SparkPropertyValue')
     StartAudienceExportJobRequest = Shapes::StructureShape.new(name: 'StartAudienceExportJobRequest')
     StartAudienceGenerationJobRequest = Shapes::StructureShape.new(name: 'StartAudienceGenerationJobRequest')
     StartAudienceGenerationJobResponse = Shapes::StructureShape.new(name: 'StartAudienceGenerationJobResponse')
@@ -356,6 +359,7 @@ module Aws::CleanRoomsML
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     WorkerComputeConfiguration = Shapes::StructureShape.new(name: 'WorkerComputeConfiguration')
     WorkerComputeConfigurationNumberInteger = Shapes::IntegerShape.new(name: 'WorkerComputeConfigurationNumberInteger')
+    WorkerComputeConfigurationProperties = Shapes::UnionShape.new(name: 'WorkerComputeConfigurationProperties')
     WorkerComputeType = Shapes::StringShape.new(name: 'WorkerComputeType')
 
     AccessBudget.add_member(:resource_arn, Shapes::ShapeRef.new(shape: BudgetedResourceArn, required: true, location_name: "resourceArn"))
@@ -1277,7 +1281,7 @@ module Aws::CleanRoomsML
 
     MLSyntheticDataParameters.add_member(:epsilon, Shapes::ShapeRef.new(shape: MLSyntheticDataParametersEpsilonDouble, required: true, location_name: "epsilon"))
     MLSyntheticDataParameters.add_member(:max_membership_inference_attack_score, Shapes::ShapeRef.new(shape: MLSyntheticDataParametersMaxMembershipInferenceAttackScoreDouble, required: true, location_name: "maxMembershipInferenceAttackScore"))
-    MLSyntheticDataParameters.add_member(:column_classification, Shapes::ShapeRef.new(shape: ColumnClassificationDetails, required: true, location_name: "columnClassification"))
+    MLSyntheticDataParameters.add_member(:column_classification, Shapes::ShapeRef.new(shape: ColumnClassificationDetails, location_name: "columnClassification"))
     MLSyntheticDataParameters.struct_class = Types::MLSyntheticDataParameters
 
     MembershipInferenceAttackScore.add_member(:attack_version, Shapes::ShapeRef.new(shape: MembershipInferenceAttackVersion, required: true, location_name: "attackVersion"))
@@ -1307,7 +1311,7 @@ module Aws::CleanRoomsML
 
     ModelTrainingDataChannels.member = Shapes::ShapeRef.new(shape: ModelTrainingDataChannel)
 
-    ParameterMap.key = Shapes::ShapeRef.new(shape: ParameterKey)
+    ParameterMap.key = Shapes::ShapeRef.new(shape: ParameterName)
     ParameterMap.value = Shapes::ShapeRef.new(shape: ParameterValue)
 
     PrivacyBudgets.add_member(:access_budgets, Shapes::ShapeRef.new(shape: AccessBudgets, location_name: "accessBudgets"))
@@ -1369,6 +1373,9 @@ module Aws::CleanRoomsML
     ServiceQuotaExceededException.add_member(:quota_name, Shapes::ShapeRef.new(shape: String, location_name: "quotaName"))
     ServiceQuotaExceededException.add_member(:quota_value, Shapes::ShapeRef.new(shape: ServiceQuotaExceededExceptionQuotaValueDouble, location_name: "quotaValue"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    SparkProperties.key = Shapes::ShapeRef.new(shape: SparkPropertyKey)
+    SparkProperties.value = Shapes::ShapeRef.new(shape: SparkPropertyValue)
 
     StartAudienceExportJobRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "name"))
     StartAudienceExportJobRequest.add_member(:audience_generation_job_arn, Shapes::ShapeRef.new(shape: AudienceGenerationJobArn, required: true, location_name: "audienceGenerationJobArn"))
@@ -1550,7 +1557,14 @@ module Aws::CleanRoomsML
 
     WorkerComputeConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: WorkerComputeType, location_name: "type"))
     WorkerComputeConfiguration.add_member(:number, Shapes::ShapeRef.new(shape: WorkerComputeConfigurationNumberInteger, location_name: "number"))
+    WorkerComputeConfiguration.add_member(:properties, Shapes::ShapeRef.new(shape: WorkerComputeConfigurationProperties, location_name: "properties"))
     WorkerComputeConfiguration.struct_class = Types::WorkerComputeConfiguration
+
+    WorkerComputeConfigurationProperties.add_member(:spark, Shapes::ShapeRef.new(shape: SparkProperties, location_name: "spark"))
+    WorkerComputeConfigurationProperties.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    WorkerComputeConfigurationProperties.add_member_subclass(:spark, Types::WorkerComputeConfigurationProperties::Spark)
+    WorkerComputeConfigurationProperties.add_member_subclass(:unknown, Types::WorkerComputeConfigurationProperties::Unknown)
+    WorkerComputeConfigurationProperties.struct_class = Types::WorkerComputeConfigurationProperties
 
 
     # @api private

@@ -1070,6 +1070,7 @@ module Aws::CostExplorer
       attr_accessor license_model: ::String
       attr_accessor current_generation: bool
       attr_accessor size_flex_eligible: bool
+      attr_accessor deployment_model: ::String
       SENSITIVE: []
     end
 

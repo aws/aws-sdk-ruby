@@ -3442,6 +3442,8 @@ module Aws::CostExplorer
     #   * {Types::GetReservationPurchaseRecommendationResponse#recommendations #recommendations} => Array&lt;Types::ReservationPurchaseRecommendation&gt;
     #   * {Types::GetReservationPurchaseRecommendationResponse#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_reservation_purchase_recommendation({
@@ -3520,6 +3522,7 @@ module Aws::CostExplorer
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.license_model #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.current_generation #=> Boolean
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.size_flex_eligible #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.deployment_model #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.redshift_instance_details.family #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.redshift_instance_details.node_type #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.redshift_instance_details.region #=> String
@@ -3958,6 +3961,8 @@ module Aws::CostExplorer
     #   * {Types::GetRightsizingRecommendationResponse#rightsizing_recommendations #rightsizing_recommendations} => Array&lt;Types::RightsizingRecommendation&gt;
     #   * {Types::GetRightsizingRecommendationResponse#next_page_token #next_page_token} => String
     #   * {Types::GetRightsizingRecommendationResponse#configuration #configuration} => Types::RightsizingRecommendationConfiguration
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5208,6 +5213,8 @@ module Aws::CostExplorer
     #   * {Types::ListCommitmentPurchaseAnalysesResponse#analysis_summary_list #analysis_summary_list} => Array&lt;Types::AnalysisSummary&gt;
     #   * {Types::ListCommitmentPurchaseAnalysesResponse#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_commitment_purchase_analyses({
@@ -5500,6 +5507,8 @@ module Aws::CostExplorer
     #
     #   * {Types::ListSavingsPlansPurchaseRecommendationGenerationResponse#generation_summary_list #generation_summary_list} => Array&lt;Types::GenerationSummary&gt;
     #   * {Types::ListSavingsPlansPurchaseRecommendationGenerationResponse#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6176,7 +6185,7 @@ module Aws::CostExplorer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.144.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

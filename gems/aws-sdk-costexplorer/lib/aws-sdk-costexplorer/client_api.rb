@@ -18,6 +18,7 @@ module Aws::CostExplorer
     AccountScope = Shapes::StringShape.new(name: 'AccountScope')
     AmortizedRecurringFee = Shapes::StringShape.new(name: 'AmortizedRecurringFee')
     AmortizedUpfrontFee = Shapes::StringShape.new(name: 'AmortizedUpfrontFee')
+    AnalysesPageSize = Shapes::IntegerShape.new(name: 'AnalysesPageSize')
     AnalysisDetails = Shapes::StructureShape.new(name: 'AnalysisDetails')
     AnalysisId = Shapes::StringShape.new(name: 'AnalysisId')
     AnalysisIds = Shapes::ListShape.new(name: 'AnalysisIds')
@@ -274,6 +275,7 @@ module Aws::CostExplorer
     RecommendationId = Shapes::StringShape.new(name: 'RecommendationId')
     RecommendationIdList = Shapes::ListShape.new(name: 'RecommendationIdList')
     RecommendationTarget = Shapes::StringShape.new(name: 'RecommendationTarget')
+    RecommendationsPageSize = Shapes::IntegerShape.new(name: 'RecommendationsPageSize')
     RedshiftInstanceDetails = Shapes::StructureShape.new(name: 'RedshiftInstanceDetails')
     RequestChangedException = Shapes::StructureShape.new(name: 'RequestChangedException')
     ReservationAggregates = Shapes::StructureShape.new(name: 'ReservationAggregates')
@@ -1006,7 +1008,7 @@ module Aws::CostExplorer
     GetReservationPurchaseRecommendationRequest.add_member(:term_in_years, Shapes::ShapeRef.new(shape: TermInYears, location_name: "TermInYears"))
     GetReservationPurchaseRecommendationRequest.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, location_name: "PaymentOption"))
     GetReservationPurchaseRecommendationRequest.add_member(:service_specification, Shapes::ShapeRef.new(shape: ServiceSpecification, location_name: "ServiceSpecification"))
-    GetReservationPurchaseRecommendationRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "PageSize"))
+    GetReservationPurchaseRecommendationRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: RecommendationsPageSize, location_name: "PageSize"))
     GetReservationPurchaseRecommendationRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
     GetReservationPurchaseRecommendationRequest.struct_class = Types::GetReservationPurchaseRecommendationRequest
 
@@ -1032,7 +1034,7 @@ module Aws::CostExplorer
     GetRightsizingRecommendationRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
     GetRightsizingRecommendationRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: RightsizingRecommendationConfiguration, location_name: "Configuration"))
     GetRightsizingRecommendationRequest.add_member(:service, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "Service"))
-    GetRightsizingRecommendationRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "PageSize"))
+    GetRightsizingRecommendationRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: RecommendationsPageSize, location_name: "PageSize"))
     GetRightsizingRecommendationRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
     GetRightsizingRecommendationRequest.struct_class = Types::GetRightsizingRecommendationRequest
 
@@ -1069,7 +1071,7 @@ module Aws::CostExplorer
     GetSavingsPlansPurchaseRecommendationRequest.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, required: true, location_name: "PaymentOption"))
     GetSavingsPlansPurchaseRecommendationRequest.add_member(:account_scope, Shapes::ShapeRef.new(shape: AccountScope, location_name: "AccountScope"))
     GetSavingsPlansPurchaseRecommendationRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
-    GetSavingsPlansPurchaseRecommendationRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "PageSize"))
+    GetSavingsPlansPurchaseRecommendationRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: RecommendationsPageSize, location_name: "PageSize"))
     GetSavingsPlansPurchaseRecommendationRequest.add_member(:lookback_period_in_days, Shapes::ShapeRef.new(shape: LookbackPeriodInDays, required: true, location_name: "LookbackPeriodInDays"))
     GetSavingsPlansPurchaseRecommendationRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
     GetSavingsPlansPurchaseRecommendationRequest.struct_class = Types::GetSavingsPlansPurchaseRecommendationRequest
@@ -1168,7 +1170,7 @@ module Aws::CostExplorer
 
     ListCommitmentPurchaseAnalysesRequest.add_member(:analysis_status, Shapes::ShapeRef.new(shape: AnalysisStatus, location_name: "AnalysisStatus"))
     ListCommitmentPurchaseAnalysesRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
-    ListCommitmentPurchaseAnalysesRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "PageSize"))
+    ListCommitmentPurchaseAnalysesRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: AnalysesPageSize, location_name: "PageSize"))
     ListCommitmentPurchaseAnalysesRequest.add_member(:analysis_ids, Shapes::ShapeRef.new(shape: AnalysisIds, location_name: "AnalysisIds"))
     ListCommitmentPurchaseAnalysesRequest.struct_class = Types::ListCommitmentPurchaseAnalysesRequest
 
@@ -1216,7 +1218,7 @@ module Aws::CostExplorer
 
     ListSavingsPlansPurchaseRecommendationGenerationRequest.add_member(:generation_status, Shapes::ShapeRef.new(shape: GenerationStatus, location_name: "GenerationStatus"))
     ListSavingsPlansPurchaseRecommendationGenerationRequest.add_member(:recommendation_ids, Shapes::ShapeRef.new(shape: RecommendationIdList, location_name: "RecommendationIds"))
-    ListSavingsPlansPurchaseRecommendationGenerationRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "PageSize"))
+    ListSavingsPlansPurchaseRecommendationGenerationRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: RecommendationsPageSize, location_name: "PageSize"))
     ListSavingsPlansPurchaseRecommendationGenerationRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
     ListSavingsPlansPurchaseRecommendationGenerationRequest.struct_class = Types::ListSavingsPlansPurchaseRecommendationGenerationRequest
 
@@ -1279,6 +1281,7 @@ module Aws::CostExplorer
     RDSInstanceDetails.add_member(:license_model, Shapes::ShapeRef.new(shape: GenericString, location_name: "LicenseModel"))
     RDSInstanceDetails.add_member(:current_generation, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "CurrentGeneration"))
     RDSInstanceDetails.add_member(:size_flex_eligible, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "SizeFlexEligible"))
+    RDSInstanceDetails.add_member(:deployment_model, Shapes::ShapeRef.new(shape: GenericString, location_name: "DeploymentModel"))
     RDSInstanceDetails.struct_class = Types::RDSInstanceDetails
 
     RecommendationDetailData.add_member(:account_scope, Shapes::ShapeRef.new(shape: AccountScope, location_name: "AccountScope"))
@@ -2076,6 +2079,12 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "next_page_token"
+          }
+        )
       end)
 
       api.add_operation(:get_reservation_utilization, Seahorse::Model::Operation.new.tap do |o|
@@ -2097,6 +2106,12 @@ module Aws::CostExplorer
         o.output = Shapes::ShapeRef.new(shape: GetRightsizingRecommendationResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "next_page_token"
+          }
+        )
       end)
 
       api.add_operation(:get_savings_plan_purchase_recommendation_details, Seahorse::Model::Operation.new.tap do |o|
@@ -2200,6 +2215,12 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "next_page_token"
+          }
+        )
       end)
 
       api.add_operation(:list_cost_allocation_tag_backfill_history, Seahorse::Model::Operation.new.tap do |o|
@@ -2274,6 +2295,12 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "next_page_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|

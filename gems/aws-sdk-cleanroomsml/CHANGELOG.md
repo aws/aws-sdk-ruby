@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2026-01-05)
+------------------
+
+* Feature - AWS Clean Rooms ML now supports advanced Spark configurations to optimize SQL performance when creating an MLInputChannel or an audience generation job.
+
 1.39.0 (2025-12-01)
 ------------------
 

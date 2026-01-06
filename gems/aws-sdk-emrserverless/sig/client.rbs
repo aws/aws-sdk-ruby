@@ -165,6 +165,10 @@ module Aws
                                     remote_write_url: ::String?
                                   }?
                                 },
+                                ?disk_encryption_configuration: {
+                                  encryption_context: Hash[::String, ::String]?,
+                                  encryption_key_arn: ::String?
+                                },
                                 ?interactive_configuration: {
                                   studio_enabled: bool?,
                                   livy_endpoint_enabled: bool?
@@ -344,6 +348,10 @@ module Aws
                                prometheus_monitoring_configuration: {
                                  remote_write_url: ::String?
                                }?
+                             }?,
+                             disk_encryption_configuration: {
+                               encryption_context: Hash[::String, ::String]?,
+                               encryption_key_arn: ::String?
                              }?
                            },
                            ?tags: Hash[::String, ::String],
@@ -459,6 +467,10 @@ module Aws
                                   prometheus_monitoring_configuration: {
                                     remote_write_url: ::String?
                                   }?
+                                },
+                                ?disk_encryption_configuration: {
+                                  encryption_context: Hash[::String, ::String]?,
+                                  encryption_key_arn: ::String?
                                 },
                                 ?scheduler_configuration: {
                                   queue_timeout_minutes: ::Integer?,

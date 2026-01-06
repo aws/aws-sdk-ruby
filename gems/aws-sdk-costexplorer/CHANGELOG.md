@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.144.0 (2026-01-06)
+------------------
+
+* Feature - This release updates existing reservation recommendations API to support deployment model.
+
+1.143.0 (2026-01-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.142.0 (2025-12-08)
 ------------------
 

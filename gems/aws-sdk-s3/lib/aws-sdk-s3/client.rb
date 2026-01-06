@@ -22283,7 +22283,7 @@ module Aws::S3
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.209.0'
+      context[:gem_version] = '1.210.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

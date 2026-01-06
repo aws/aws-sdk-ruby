@@ -13592,7 +13592,7 @@ module Aws::SSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.207.0'
+      context[:gem_version] = '1.208.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

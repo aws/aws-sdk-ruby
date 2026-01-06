@@ -586,6 +586,9 @@ module Aws::EMRServerless
     # @option params [Types::MonitoringConfiguration] :monitoring_configuration
     #   The configuration setting for monitoring.
     #
+    # @option params [Types::DiskEncryptionConfiguration] :disk_encryption_configuration
+    #   The configuration object that allows encrypting local disks.
+    #
     # @option params [Types::InteractiveConfiguration] :interactive_configuration
     #   The interactive configuration object that enables the interactive use
     #   cases to use when running an application.
@@ -689,6 +692,12 @@ module Aws::EMRServerless
     #       prometheus_monitoring_configuration: {
     #         remote_write_url: "PrometheusUrlString",
     #       },
+    #     },
+    #     disk_encryption_configuration: {
+    #       encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue",
+    #       },
+    #       encryption_key_arn: "EncryptionKeyArn",
     #     },
     #     interactive_configuration: {
     #       studio_enabled: false,
@@ -812,6 +821,9 @@ module Aws::EMRServerless
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"] #=> Array
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"][0] #=> String
     #   resp.application.monitoring_configuration.prometheus_monitoring_configuration.remote_write_url #=> String
+    #   resp.application.disk_encryption_configuration.encryption_context #=> Hash
+    #   resp.application.disk_encryption_configuration.encryption_context["EncryptionContextKey"] #=> String
+    #   resp.application.disk_encryption_configuration.encryption_key_arn #=> String
     #   resp.application.interactive_configuration.studio_enabled #=> Boolean
     #   resp.application.interactive_configuration.livy_endpoint_enabled #=> Boolean
     #   resp.application.scheduler_configuration.queue_timeout_minutes #=> Integer
@@ -943,6 +955,9 @@ module Aws::EMRServerless
     #   resp.job_run.configuration_overrides.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"] #=> Array
     #   resp.job_run.configuration_overrides.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"][0] #=> String
     #   resp.job_run.configuration_overrides.monitoring_configuration.prometheus_monitoring_configuration.remote_write_url #=> String
+    #   resp.job_run.configuration_overrides.disk_encryption_configuration.encryption_context #=> Hash
+    #   resp.job_run.configuration_overrides.disk_encryption_configuration.encryption_context["EncryptionContextKey"] #=> String
+    #   resp.job_run.configuration_overrides.disk_encryption_configuration.encryption_key_arn #=> String
     #   resp.job_run.job_driver.spark_submit.entry_point #=> String
     #   resp.job_run.job_driver.spark_submit.entry_point_arguments #=> Array
     #   resp.job_run.job_driver.spark_submit.entry_point_arguments[0] #=> String
@@ -1326,6 +1341,12 @@ module Aws::EMRServerless
     #           remote_write_url: "PrometheusUrlString",
     #         },
     #       },
+    #       disk_encryption_configuration: {
+    #         encryption_context: {
+    #           "EncryptionContextKey" => "EncryptionContextValue",
+    #         },
+    #         encryption_key_arn: "EncryptionKeyArn",
+    #       },
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1513,6 +1534,9 @@ module Aws::EMRServerless
     # @option params [Types::MonitoringConfiguration] :monitoring_configuration
     #   The configuration setting for monitoring.
     #
+    # @option params [Types::DiskEncryptionConfiguration] :disk_encryption_configuration
+    #   The configuration object that allows encrypting local disks.
+    #
     # @option params [Types::SchedulerConfiguration] :scheduler_configuration
     #   The scheduler configuration for batch and streaming jobs running on
     #   this application. Supported with release labels emr-7.0.0 and above.
@@ -1611,6 +1635,12 @@ module Aws::EMRServerless
     #         remote_write_url: "PrometheusUrlString",
     #       },
     #     },
+    #     disk_encryption_configuration: {
+    #       encryption_context: {
+    #         "EncryptionContextKey" => "EncryptionContextValue",
+    #       },
+    #       encryption_key_arn: "EncryptionKeyArn",
+    #     },
     #     scheduler_configuration: {
     #       queue_timeout_minutes: 1,
     #       max_concurrent_runs: 1,
@@ -1676,6 +1706,9 @@ module Aws::EMRServerless
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"] #=> Array
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"][0] #=> String
     #   resp.application.monitoring_configuration.prometheus_monitoring_configuration.remote_write_url #=> String
+    #   resp.application.disk_encryption_configuration.encryption_context #=> Hash
+    #   resp.application.disk_encryption_configuration.encryption_context["EncryptionContextKey"] #=> String
+    #   resp.application.disk_encryption_configuration.encryption_key_arn #=> String
     #   resp.application.interactive_configuration.studio_enabled #=> Boolean
     #   resp.application.interactive_configuration.livy_endpoint_enabled #=> Boolean
     #   resp.application.scheduler_configuration.queue_timeout_minutes #=> Integer
@@ -1712,7 +1745,7 @@ module Aws::EMRServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
