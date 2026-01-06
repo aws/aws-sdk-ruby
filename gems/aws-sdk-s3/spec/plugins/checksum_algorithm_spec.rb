@@ -111,6 +111,18 @@ module Aws
         end
       end
 
+      context 'trailer checksum' do
+        it 'sets aws-chunked when no existing Content-Encoding header' do
+          resp = client.put_object(bucket: bucket, key: key, body: body)
+          expect(resp.context.http_request.headers['Content-Encoding']).to eq('aws-chunked')
+        end
+
+        it 'appends aws-chunked to existing Content-Encoding header' do
+          resp = client.put_object(bucket: bucket, key: key, body: body, content_encoding: 'gzip')
+          expect(resp.context.http_request.headers['Content-Encoding']).to eq('gzip, aws-chunked')
+        end
+      end
+
       context 'AwsChunkedTrailerDigestIO' do
         let(:subject) do
           ChecksumAlgorithm::AwsChunkedTrailerDigestIO.new(
