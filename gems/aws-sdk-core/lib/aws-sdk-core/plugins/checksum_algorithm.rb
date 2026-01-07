@@ -356,7 +356,6 @@ module Aws
           context[:skip_trailer_checksums]
         end
 
-
         def apply_request_checksum(context, headers, checksum_properties)
           header_name = checksum_properties[:name]
           headers[header_name] = calculate_checksum(

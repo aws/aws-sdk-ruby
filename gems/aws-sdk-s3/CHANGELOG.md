@@ -3,7 +3,7 @@ Unreleased Changes
 
 * Issue - Falls back to header request checksums when using custom endpoints or endpoint providers for PutObject and UploadPart operations.
 
-* 1.210.1 (2026-01-06)
+1.210.1 (2026-01-06)
 ------------------
 
 * Issue - Normalize response encoding to UTF-8 for proper XML error parsing in HTTP 200 responses.

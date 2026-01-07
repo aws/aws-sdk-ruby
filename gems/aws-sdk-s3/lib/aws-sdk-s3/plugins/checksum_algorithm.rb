@@ -34,7 +34,6 @@ module Aws
           end
         end
 
-
         def add_handlers(handlers, _config)
           handlers.add(SkipWholeMultipartGetChecksumsHandler, step: :initialize, operations: [:get_object])
           handlers.add(SkipTrailerChecksumsHandler, step: :build, priority: 16, operations: %i[put_object upload_part])
