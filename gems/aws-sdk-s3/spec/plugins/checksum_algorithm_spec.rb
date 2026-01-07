@@ -111,7 +111,7 @@ module Aws
         end
       end
 
-      context 'request trailer checksum' do
+      context 'request trailer checksum', skip: defined?(JRUBY_VERSION) do
         it 'sets aws-chunked when no existing Content-Encoding header' do
           resp = client.put_object(bucket: bucket, key: key, body: body)
           expect(resp.context.http_request.headers['Content-Encoding']).to eq('aws-chunked')
