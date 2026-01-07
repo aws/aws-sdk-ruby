@@ -348,7 +348,8 @@ module Aws
           # * https://github.com/jruby/jruby-openssl/issues/317
           return true if defined?(JRUBY_VERSION)
 
-          # AWS chunked streaming with SigV4 signing requires HTTPS
+          # Chunked signing is currently not supported
+          # Https is required for unsigned payload for security
           return true if context.http_request.endpoint.scheme == 'http'
 
           context[:skip_trailer_checksums]
