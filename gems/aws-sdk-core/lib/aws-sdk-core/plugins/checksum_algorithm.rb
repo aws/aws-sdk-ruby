@@ -353,6 +353,8 @@ module Aws
           # trailer implementation only applies to https
           return true if context.http_request.endpoint.scheme == 'http'
 
+          return true if context[:skip_trailer_checksums]
+
           false
         end
 
@@ -432,8 +434,7 @@ module Aws
         end
 
         def add_verify_response_headers_handler(context, checksum_context)
-          validation_list = CHECKSUM_ALGORITHM_PRIORITIES &
-                            operation_response_algorithms(context)
+          validation_list = CHECKSUM_ALGORITHM_PRIORITIES & operation_response_algorithms(context)
           context[:http_checksum][:validation_list] = validation_list
 
           context.http_response.on_headers do |_status, headers|
