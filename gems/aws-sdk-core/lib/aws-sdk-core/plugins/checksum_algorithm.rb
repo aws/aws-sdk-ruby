@@ -331,21 +331,31 @@ module Aws
             headers[algorithm_header] = checksum_properties[:algorithm]
           end
 
-          # Trailer implementation within Mac/JRUBY environment is facing some
-          # network issues that will need further investigation:
-          # * https://github.com/jruby/jruby-openssl/issues/271
-          # * https://github.com/jruby/jruby-openssl/issues/317
-          return apply_request_checksum(context, headers, checksum_properties) if defined?(JRUBY_VERSION)
-
           case checksum_properties[:in]
           when 'header'
             apply_request_checksum(context, headers, checksum_properties)
           when 'trailer'
+            return apply_request_checksum(context, headers, checksum_properties) if fallback_to_header?(context)
+
             apply_request_trailer_checksum(context, headers, checksum_properties)
           else
             # nothing
           end
         end
+
+        def fallback_to_header?(context)
+          # Trailer implementation within Mac/JRUBY environment is facing some
+          # network issues that will need further investigation:
+          # * https://github.com/jruby/jruby-openssl/issues/271
+          # * https://github.com/jruby/jruby-openssl/issues/317
+          return true if defined?(JRUBY_VERSION)
+
+          # trailer implementation only applies to https
+          return true if context.http_request.endpoint.scheme == 'http'
+
+          false
+        end
+
 
         def apply_request_checksum(context, headers, checksum_properties)
           header_name = checksum_properties[:name]
