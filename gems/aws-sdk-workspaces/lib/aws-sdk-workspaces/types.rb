@@ -2159,6 +2159,15 @@ module Aws::WorkSpaces
     #   The state of the WorkSpace image.
     #   @return [String]
     #
+    # @!attribute [rw] state_message
+    #   The state message of the WorkSpace image import workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] progress_percentage
+    #   The estimated progress percentage of the WorkSpace image import
+    #   workflow.
+    #   @return [Integer]
+    #
     # @!attribute [rw] created
     #   The timestamp when the WorkSpace image import was created.
     #   @return [Time]
@@ -2186,6 +2195,8 @@ module Aws::WorkSpaces
       :image_id,
       :infrastructure_configuration_arn,
       :state,
+      :state_message,
+      :progress_percentage,
       :created,
       :last_updated_time,
       :image_source,
