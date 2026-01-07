@@ -112,6 +112,16 @@ module Aws
       end
 
       context 'request trailer checksum', skip: defined?(JRUBY_VERSION) do
+        it 'falls back to header checksums when endpoint scheme is http' do
+          client = Aws::S3::Client.new(stub_responses: true, endpoint: 'http://example.com')
+
+          resp = client.put_object(bucket: bucket, key: key, body: body, content_encoding: 'gzip')
+          expect(resp.context.http_request.headers['X-Amz-Content-Sha256'])
+            .not_to eq('STREAMING-UNSIGNED-PAYLOAD-TRAILER')
+          expect(resp.context.http_request.headers['Content-Encoding'])
+            .not_to eq('aws-chunked')
+        end
+
         it 'sets aws-chunked when no existing Content-Encoding header' do
           resp = client.put_object(bucket: bucket, key: key, body: body)
           expect(resp.context.http_request.headers['Content-Encoding']).to eq('aws-chunked')
