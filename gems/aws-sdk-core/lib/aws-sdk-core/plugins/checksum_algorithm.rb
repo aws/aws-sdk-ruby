@@ -322,7 +322,7 @@ module Aws
         end
 
         def supports_trailer_checksums?(operation)
-          operation['unsignedPayload'] || context.operation['authtype'] == 'v4-unsigned-body'
+          operation['unsignedPayload'] || operation['authtype'] == 'v4-unsigned-body'
         end
 
         def calculate_request_checksum(context, checksum_properties)
