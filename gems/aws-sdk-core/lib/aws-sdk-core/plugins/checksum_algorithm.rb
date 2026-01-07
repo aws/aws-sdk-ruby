@@ -275,8 +275,7 @@ module Aws
         # 1. **No existing checksum in header**: Skips if checksum header already present
         # 2. **Operation support**: Considers model, client configuration and user input.
         def should_calculate_request_checksum?(context)
-          !checksum_provided_as_header?(context.http_request.headers) &&
-            checksum_applicable?(context)
+          !checksum_provided_as_header?(context.http_request.headers) && checksum_applicable?(context)
         end
 
         # Checks if checksum calculation should proceed based on operation requirements and client settings.
@@ -317,12 +316,13 @@ module Aws
         end
 
         def checksum_request_in(context)
-          if context.operation['unsignedPayload'] ||
-             context.operation['authtype'] == 'v4-unsigned-body'
-            'trailer'
-          else
-            'header'
-          end
+          return 'header' unless supports_trailer_checksums?(context.operation)
+
+          should_fallback_to_header?(context) ? 'header' : 'trailer'
+        end
+
+        def supports_trailer_checksums?(operation)
+          operation['unsignedPayload'] || context.operation['authtype'] == 'v4-unsigned-body'
         end
 
         def calculate_request_checksum(context, checksum_properties)
@@ -335,22 +335,20 @@ module Aws
           when 'header'
             apply_request_checksum(context, headers, checksum_properties)
           when 'trailer'
-            return apply_request_checksum(context, headers, checksum_properties) if fallback_to_header?(context)
-
             apply_request_trailer_checksum(context, headers, checksum_properties)
           else
             # nothing
           end
         end
 
-        def fallback_to_header?(context)
+        def should_fallback_to_header?(context)
           # Trailer implementation within Mac/JRUBY environment is facing some
           # network issues that will need further investigation:
           # * https://github.com/jruby/jruby-openssl/issues/271
           # * https://github.com/jruby/jruby-openssl/issues/317
           return true if defined?(JRUBY_VERSION)
 
-          # trailer implementation only applies to https
+          # AWS chunked streaming with SigV4 signing requires HTTPS
           return true if context.http_request.endpoint.scheme == 'http'
 
           context[:skip_trailer_checksums]
