@@ -13,7 +13,7 @@ module Aws
       let(:body) { 'hello world' }
       let(:digest) { 'DUoRhQ==' }
 
-      let(:body_part_1) { 'hello '}
+      let(:body_part_1) { 'hello ' }
       let(:digest_part_1) { '7YH59g==' }
 
       it 'validates the checksum on an Object GET' do
@@ -116,10 +116,25 @@ module Aws
           client = Aws::S3::Client.new(stub_responses: true, endpoint: 'http://example.com')
 
           resp = client.put_object(bucket: bucket, key: key, body: body, content_encoding: 'gzip')
-          expect(resp.context.http_request.headers['X-Amz-Content-Sha256'])
-            .not_to eq('STREAMING-UNSIGNED-PAYLOAD-TRAILER')
-          expect(resp.context.http_request.headers['Content-Encoding'])
-            .not_to eq('aws-chunked')
+          expect(resp.context.http_request.headers['X-Amz-Content-Sha256']).not_to eq('STREAMING-UNSIGNED-PAYLOAD-TRAILER')
+          expect(resp.context.http_request.headers['Content-Encoding']).not_to include('aws-chunked')
+        end
+
+        it 'falls back to header checksums for custom endpoint URLs' do
+          client = Aws::S3::Client.new(stub_responses: true, endpoint: 'https://example.com')
+
+          resp = client.put_object(bucket: bucket, key: key, body: body, content_encoding: 'gzip')
+          expect(resp.context.http_request.headers['X-Amz-Content-Sha256']).not_to eq('STREAMING-UNSIGNED-PAYLOAD-TRAILER')
+          expect(resp.context.http_request.headers['Content-Encoding']).not_to include('aws-chunked')
+        end
+
+        it 'falls back to header checksums for custom endpoint providers' do
+          custom_endpoint_provider = Class.new(Aws::S3::EndpointProvider).new
+          client = Aws::S3::Client.new(stub_responses: true, endpoint_provider: custom_endpoint_provider)
+
+          resp = client.put_object(bucket: bucket, key: key, body: body, content_encoding: 'gzip')
+          expect(resp.context.http_request.headers['X-Amz-Content-Sha256']).not_to eq('STREAMING-UNSIGNED-PAYLOAD-TRAILER')
+          expect(resp.context.http_request.headers['Content-Encoding']).not_to include('aws-chunked')
         end
 
         it 'sets aws-chunked when no existing Content-Encoding header' do

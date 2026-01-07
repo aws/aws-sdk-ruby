@@ -20,6 +20,7 @@ module Aws
 
         # Handler to disable trailer checksums for S3-compatible services
         # that don't support STREAMING-UNSIGNED-PAYLOAD-TRAILER
+        # See: https://github.com/aws/aws-sdk-ruby/issues/3338
         class SkipTrailerChecksumsHandler < Seahorse::Client::Handler
           def call(context)
             context[:skip_trailer_checksums] = true if custom_endpoint?(context.config)

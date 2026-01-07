@@ -353,9 +353,7 @@ module Aws
           # trailer implementation only applies to https
           return true if context.http_request.endpoint.scheme == 'http'
 
-          return true if context[:skip_trailer_checksums]
-
-          false
+          context[:skip_trailer_checksums]
         end
 
 
