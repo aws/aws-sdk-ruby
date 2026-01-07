@@ -3,6 +3,7 @@ on:
   pull_request_review:
     types: [ submitted ]
     branches: [ version-3 ]
+  workflow_dispatch:
 
 concurrency:
   group: start-pull-request-build-${{ github.ref }}
