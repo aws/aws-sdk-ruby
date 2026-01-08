@@ -167,21 +167,6 @@ module Aws
       #     end
       #     tm.upload_directory('/path/to/directory', bucket: 'bucket', filter_callback: filter)
       #
-      # @example Add metadata to all uploads by using request callback
-      #
-      #
-      #
-      #
-      # You can provide a callback to monitor progress of the upload:
-      #
-      #     # bytes and totals are each an array with 1 entry per part
-      #     progress = proc do |bytes, totals|
-      #       bytes.map.with_index do |b, i|
-      #           puts "Part #{i + 1}: #{b} / #{totals[i]} " + "Total: #{100.0 * bytes.sum / totals.sum}%"
-      #       end
-      #     end
-      #     tm.upload_file('/path/to/file', bucket: 'bucket', key: 'key', progress_callback: progress)
-      #
       # @param [String, Pathname, File, Tempfile] source
       #  The source directory to upload.
       #
@@ -228,6 +213,7 @@ module Aws
       #   * `:errors` - Array of error objects for failed uploads (only present when failures occur)
       def upload_directory(source, bucket:, **options)
         executor = @executor || DefaultExecutor.new
+        # TODO: need to consider whether we want to allow http chunk size
         uploader = DirectoryUploader.new(client: @client, executor: executor)
         result = uploader.upload(source, bucket, **options)
         executor.shutdown unless @executor
