@@ -55,7 +55,7 @@ module Aws::CostOptimizationHub
   autoload :EndpointProvider, 'aws-sdk-costoptimizationhub/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-costoptimizationhub/endpoints'
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.39.0'
 
 end
 

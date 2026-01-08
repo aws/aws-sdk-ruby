@@ -55,7 +55,7 @@ module Aws::MPA
   autoload :EndpointProvider, 'aws-sdk-mpa/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mpa/endpoints'
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.10.0'
 
 end
 

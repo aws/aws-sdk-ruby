@@ -55,7 +55,7 @@ module Aws::Rekognition
   autoload :EndpointProvider, 'aws-sdk-rekognition/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-rekognition/endpoints'
 
-  GEM_VERSION = '1.126.0'
+  GEM_VERSION = '1.127.0'
 
 end
 

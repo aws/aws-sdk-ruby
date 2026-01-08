@@ -18138,7 +18138,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.245.0'
+      context[:gem_version] = '1.246.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

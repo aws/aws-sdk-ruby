@@ -14033,7 +14033,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.217.0'
+      context[:gem_version] = '1.218.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

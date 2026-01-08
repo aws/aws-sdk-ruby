@@ -55,7 +55,7 @@ module Aws::Pricing
   autoload :EndpointProvider, 'aws-sdk-pricing/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-pricing/endpoints'
 
-  GEM_VERSION = '1.87.0'
+  GEM_VERSION = '1.88.0'
 
 end
 

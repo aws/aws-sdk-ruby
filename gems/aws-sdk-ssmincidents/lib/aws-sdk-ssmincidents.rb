@@ -55,7 +55,7 @@ module Aws::SSMIncidents
   autoload :EndpointProvider, 'aws-sdk-ssmincidents/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ssmincidents/endpoints'
 
-  GEM_VERSION = '1.61.0'
+  GEM_VERSION = '1.62.0'
 
 end
 

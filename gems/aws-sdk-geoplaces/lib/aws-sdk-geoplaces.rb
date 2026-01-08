@@ -54,7 +54,7 @@ module Aws::GeoPlaces
   autoload :EndpointProvider, 'aws-sdk-geoplaces/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-geoplaces/endpoints'
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.19.0'
 
 end
 

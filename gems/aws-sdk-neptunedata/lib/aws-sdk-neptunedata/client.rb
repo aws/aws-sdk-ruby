@@ -3427,7 +3427,7 @@ module Aws::Neptunedata
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-neptunedata'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

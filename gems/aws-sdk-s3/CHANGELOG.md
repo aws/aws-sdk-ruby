@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - TODO
 
+1.211.0 (2026-01-08)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Issue - Falls back to header request checksums when using custom endpoints or endpoint providers for PutObject and UploadPart operations.
 
 1.210.1 (2026-01-06)

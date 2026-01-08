@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.241.3 (2026-01-08)
+------------------
+
 * Issue - Disable request trailer checksums when using non-HTTPs endpoints.
 
 3.241.2 (2026-01-07)

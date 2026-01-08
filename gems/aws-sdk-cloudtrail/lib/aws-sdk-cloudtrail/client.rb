@@ -4884,7 +4884,7 @@ module Aws::CloudTrail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.117.0'
+      context[:gem_version] = '1.118.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
