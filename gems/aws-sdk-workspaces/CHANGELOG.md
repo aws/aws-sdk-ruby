@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.150.0 (2026-01-07)
+------------------
+
+* Feature - Add StateMessage and ProgressPercentage fields to DescribeCustomWorkspaceImageImport API response.
+
 1.149.0 (2026-01-05)
 ------------------
 

@@ -633,7 +633,9 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCustomWorkspaceImageImportResult]
         def image_id: () -> ::String
         def infrastructure_configuration_arn: () -> ::String
-        def state: () -> ("PENDING" | "IN_PROGRESS" | "COMPLETED" | "ERROR")
+        def state: () -> ("PENDING" | "IN_PROGRESS" | "PROCESSING_SOURCE_IMAGE" | "IMAGE_TESTING_START" | "UPDATING_OPERATING_SYSTEM" | "IMAGE_COMPATIBILITY_CHECKING" | "IMAGE_TESTING_GENERALIZATION" | "CREATING_TEST_INSTANCE" | "INSTALLING_COMPONENTS" | "GENERALIZING" | "VALIDATING" | "PUBLISHING" | "COMPLETED" | "ERROR")
+        def state_message: () -> ::String
+        def progress_percentage: () -> ::Integer
         def created: () -> ::Time
         def last_updated_time: () -> ::Time
         def image_source: () -> Types::ImageSourceIdentifier
@@ -929,7 +931,7 @@ module Aws
       interface _ImportCustomWorkspaceImageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ImportCustomWorkspaceImageResult]
         def image_id: () -> ::String
-        def state: () -> ("PENDING" | "IN_PROGRESS" | "COMPLETED" | "ERROR")
+        def state: () -> ("PENDING" | "IN_PROGRESS" | "PROCESSING_SOURCE_IMAGE" | "IMAGE_TESTING_START" | "UPDATING_OPERATING_SYSTEM" | "IMAGE_COMPATIBILITY_CHECKING" | "IMAGE_TESTING_GENERALIZATION" | "CREATING_TEST_INSTANCE" | "INSTALLING_COMPONENTS" | "GENERALIZING" | "VALIDATING" | "PUBLISHING" | "COMPLETED" | "ERROR")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#import_custom_workspace_image-instance_method
       def import_custom_workspace_image: (

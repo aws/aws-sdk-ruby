@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+* Issue - Disable request trailer checksums when using non-HTTPs endpoints.
+
+3.241.2 (2026-01-07)
+------------------
+
+* Issue - Preserve existing Content-Encoding when applying request trailer checksum.
+
 3.241.1 (2026-01-06)
 ------------------
 

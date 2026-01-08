@@ -13,7 +13,7 @@ module Aws
       let(:body) { 'hello world' }
       let(:digest) { 'DUoRhQ==' }
 
-      let(:body_part_1) { 'hello '}
+      let(:body_part_1) { 'hello ' }
       let(:digest_part_1) { '7YH59g==' }
 
       it 'validates the checksum on an Object GET' do
@@ -108,6 +108,43 @@ module Aws
             resp = client.get_object(bucket: bucket, key: key, checksum_mode: 'ENABLED')
             expect(resp.context[:http_checksum][:validated]).to be_nil
           end
+        end
+      end
+
+      context 'request trailer checksum', skip: defined?(JRUBY_VERSION) do
+        it 'falls back to header checksums when endpoint scheme is http' do
+          client = Aws::S3::Client.new(stub_responses: true, endpoint: 'http://example.com')
+
+          resp = client.put_object(bucket: bucket, key: key, body: body, content_encoding: 'gzip')
+          expect(resp.context.http_request.headers['X-Amz-Content-Sha256']).not_to eq('STREAMING-UNSIGNED-PAYLOAD-TRAILER')
+          expect(resp.context.http_request.headers['Content-Encoding']).not_to include('aws-chunked')
+        end
+
+        it 'falls back to header checksums for custom endpoint URLs' do
+          client = Aws::S3::Client.new(stub_responses: true, endpoint: 'https://example.com')
+
+          resp = client.put_object(bucket: bucket, key: key, body: body, content_encoding: 'gzip')
+          expect(resp.context.http_request.headers['X-Amz-Content-Sha256']).not_to eq('STREAMING-UNSIGNED-PAYLOAD-TRAILER')
+          expect(resp.context.http_request.headers['Content-Encoding']).not_to include('aws-chunked')
+        end
+
+        it 'falls back to header checksums for custom endpoint providers' do
+          custom_endpoint_provider = Class.new(Aws::S3::EndpointProvider).new
+          client = Aws::S3::Client.new(stub_responses: true, endpoint_provider: custom_endpoint_provider)
+
+          resp = client.put_object(bucket: bucket, key: key, body: body, content_encoding: 'gzip')
+          expect(resp.context.http_request.headers['X-Amz-Content-Sha256']).not_to eq('STREAMING-UNSIGNED-PAYLOAD-TRAILER')
+          expect(resp.context.http_request.headers['Content-Encoding']).not_to include('aws-chunked')
+        end
+
+        it 'sets aws-chunked when no existing Content-Encoding header' do
+          resp = client.put_object(bucket: bucket, key: key, body: body)
+          expect(resp.context.http_request.headers['Content-Encoding']).to eq('aws-chunked')
+        end
+
+        it 'appends aws-chunked to existing Content-Encoding header' do
+          resp = client.put_object(bucket: bucket, key: key, body: body, content_encoding: 'gzip')
+          expect(resp.context.http_request.headers['Content-Encoding']).to eq('gzip, aws-chunked')
         end
       end
 

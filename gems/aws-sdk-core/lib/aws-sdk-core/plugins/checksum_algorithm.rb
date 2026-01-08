@@ -275,8 +275,7 @@ module Aws
         # 1. **No existing checksum in header**: Skips if checksum header already present
         # 2. **Operation support**: Considers model, client configuration and user input.
         def should_calculate_request_checksum?(context)
-          !checksum_provided_as_header?(context.http_request.headers) &&
-            checksum_applicable?(context)
+          !checksum_provided_as_header?(context.http_request.headers) && checksum_applicable?(context)
         end
 
         # Checks if checksum calculation should proceed based on operation requirements and client settings.
@@ -317,12 +316,13 @@ module Aws
         end
 
         def checksum_request_in(context)
-          if context.operation['unsignedPayload'] ||
-             context.operation['authtype'] == 'v4-unsigned-body'
-            'trailer'
-          else
-            'header'
-          end
+          return 'header' unless supports_trailer_checksums?(context.operation)
+
+          should_fallback_to_header?(context) ? 'header' : 'trailer'
+        end
+
+        def supports_trailer_checksums?(operation)
+          operation['unsignedPayload'] || operation['authtype'] == 'v4-unsigned-body'
         end
 
         def calculate_request_checksum(context, checksum_properties)
@@ -330,12 +330,6 @@ module Aws
           if (algorithm_header = checksum_properties[:request_algorithm_header])
             headers[algorithm_header] = checksum_properties[:algorithm]
           end
-
-          # Trailer implementation within Mac/JRUBY environment is facing some
-          # network issues that will need further investigation:
-          # * https://github.com/jruby/jruby-openssl/issues/271
-          # * https://github.com/jruby/jruby-openssl/issues/317
-          return apply_request_checksum(context, headers, checksum_properties) if defined?(JRUBY_VERSION)
 
           case checksum_properties[:in]
           when 'header'
@@ -345,6 +339,20 @@ module Aws
           else
             # nothing
           end
+        end
+
+        def should_fallback_to_header?(context)
+          # Trailer implementation within Mac/JRUBY environment is facing some
+          # network issues that will need further investigation:
+          # * https://github.com/jruby/jruby-openssl/issues/271
+          # * https://github.com/jruby/jruby-openssl/issues/317
+          return true if defined?(JRUBY_VERSION)
+
+          # Chunked signing is currently not supported
+          # Https is required for unsigned payload for security
+          return true if context.http_request.endpoint.scheme == 'http'
+
+          context[:skip_trailer_checksums]
         end
 
         def apply_request_checksum(context, headers, checksum_properties)
@@ -381,7 +389,12 @@ module Aws
           location_name = checksum_properties[:name]
 
           # set required headers
-          headers['Content-Encoding'] = 'aws-chunked'
+          headers['Content-Encoding'] =
+            if headers['Content-Encoding']
+              headers['Content-Encoding'] += ', aws-chunked'
+            else
+              'aws-chunked'
+            end
           headers['X-Amz-Content-Sha256'] = 'STREAMING-UNSIGNED-PAYLOAD-TRAILER'
           headers['X-Amz-Trailer'] = location_name
 
@@ -417,8 +430,7 @@ module Aws
         end
 
         def add_verify_response_headers_handler(context, checksum_context)
-          validation_list = CHECKSUM_ALGORITHM_PRIORITIES &
-                            operation_response_algorithms(context)
+          validation_list = CHECKSUM_ALGORITHM_PRIORITIES & operation_response_algorithms(context)
           context[:http_checksum][:validation_list] = validation_list
 
           context.http_response.on_headers do |_status, headers|

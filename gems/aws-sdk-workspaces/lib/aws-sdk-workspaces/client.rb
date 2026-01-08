@@ -621,7 +621,7 @@ module Aws::WorkSpaces
     #   resp.association.created #=> Time
     #   resp.association.last_updated_time #=> Time
     #   resp.association.state #=> String, one of "PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"
-    #   resp.association.state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"
+    #   resp.association.state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable", "ValidationError.ApplicationOldVersionExists"
     #   resp.association.state_reason.error_message #=> String
     #   resp.association.workspace_id #=> String
     #
@@ -676,7 +676,7 @@ module Aws::WorkSpaces
     # same Region.
     #
     # In Amazon Web Services GovCloud (US), to copy images to and from other
-    # Regions, contact Amazon Web ServicesSupport.
+    # Regions, contact Amazon Web Services Support.
     #
     # Before copying a shared image, be sure to verify that it has been
     # shared from the correct Amazon Web Services account. To determine if
@@ -1756,7 +1756,7 @@ module Aws::WorkSpaces
     #   resp.deployment.associations[0].created #=> Time
     #   resp.deployment.associations[0].last_updated_time #=> Time
     #   resp.deployment.associations[0].state #=> String, one of "PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"
-    #   resp.deployment.associations[0].state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"
+    #   resp.deployment.associations[0].state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable", "ValidationError.ApplicationOldVersionExists"
     #   resp.deployment.associations[0].state_reason.error_message #=> String
     #   resp.deployment.associations[0].workspace_id #=> String
     #
@@ -1921,7 +1921,7 @@ module Aws::WorkSpaces
     #   resp.associations[0].created #=> Time
     #   resp.associations[0].last_updated_time #=> Time
     #   resp.associations[0].state #=> String, one of "PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"
-    #   resp.associations[0].state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"
+    #   resp.associations[0].state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable", "ValidationError.ApplicationOldVersionExists"
     #   resp.associations[0].state_reason.error_message #=> String
     #   resp.next_token #=> String
     #
@@ -2032,7 +2032,7 @@ module Aws::WorkSpaces
     #   resp.associations[0].created #=> Time
     #   resp.associations[0].last_updated_time #=> Time
     #   resp.associations[0].state #=> String, one of "PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"
-    #   resp.associations[0].state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"
+    #   resp.associations[0].state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable", "ValidationError.ApplicationOldVersionExists"
     #   resp.associations[0].state_reason.error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeBundleAssociations AWS API Documentation
@@ -2319,6 +2319,8 @@ module Aws::WorkSpaces
     #   * {Types::DescribeCustomWorkspaceImageImportResult#image_id #image_id} => String
     #   * {Types::DescribeCustomWorkspaceImageImportResult#infrastructure_configuration_arn #infrastructure_configuration_arn} => String
     #   * {Types::DescribeCustomWorkspaceImageImportResult#state #state} => String
+    #   * {Types::DescribeCustomWorkspaceImageImportResult#state_message #state_message} => String
+    #   * {Types::DescribeCustomWorkspaceImageImportResult#progress_percentage #progress_percentage} => Integer
     #   * {Types::DescribeCustomWorkspaceImageImportResult#created #created} => Time
     #   * {Types::DescribeCustomWorkspaceImageImportResult#last_updated_time #last_updated_time} => Time
     #   * {Types::DescribeCustomWorkspaceImageImportResult#image_source #image_source} => Types::ImageSourceIdentifier
@@ -2335,7 +2337,9 @@ module Aws::WorkSpaces
     #
     #   resp.image_id #=> String
     #   resp.infrastructure_configuration_arn #=> String
-    #   resp.state #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "ERROR"
+    #   resp.state #=> String, one of "PENDING", "IN_PROGRESS", "PROCESSING_SOURCE_IMAGE", "IMAGE_TESTING_START", "UPDATING_OPERATING_SYSTEM", "IMAGE_COMPATIBILITY_CHECKING", "IMAGE_TESTING_GENERALIZATION", "CREATING_TEST_INSTANCE", "INSTALLING_COMPONENTS", "GENERALIZING", "VALIDATING", "PUBLISHING", "COMPLETED", "ERROR"
+    #   resp.state_message #=> String
+    #   resp.progress_percentage #=> Integer
     #   resp.created #=> Time
     #   resp.last_updated_time #=> Time
     #   resp.image_source.ec2_import_task_id #=> String
@@ -2384,7 +2388,7 @@ module Aws::WorkSpaces
     #   resp.associations[0].last_updated_time #=> Time
     #   resp.associations[0].image_id #=> String
     #   resp.associations[0].state #=> String, one of "PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"
-    #   resp.associations[0].state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"
+    #   resp.associations[0].state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable", "ValidationError.ApplicationOldVersionExists"
     #   resp.associations[0].state_reason.error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeImageAssociations AWS API Documentation
@@ -2501,7 +2505,7 @@ module Aws::WorkSpaces
     #   resp.associations[0].created #=> Time
     #   resp.associations[0].last_updated_time #=> Time
     #   resp.associations[0].state #=> String, one of "PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"
-    #   resp.associations[0].state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"
+    #   resp.associations[0].state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable", "ValidationError.ApplicationOldVersionExists"
     #   resp.associations[0].state_reason.error_message #=> String
     #   resp.associations[0].workspace_id #=> String
     #
@@ -3201,7 +3205,7 @@ module Aws::WorkSpaces
     #   resp.association.created #=> Time
     #   resp.association.last_updated_time #=> Time
     #   resp.association.state #=> String, one of "PENDING_INSTALL", "PENDING_INSTALL_DEPLOYMENT", "PENDING_UNINSTALL", "PENDING_UNINSTALL_DEPLOYMENT", "INSTALLING", "UNINSTALLING", "ERROR", "COMPLETED", "REMOVED"
-    #   resp.association.state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable"
+    #   resp.association.state_reason.error_code #=> String, one of "ValidationError.InsufficientDiskSpace", "ValidationError.InsufficientMemory", "ValidationError.UnsupportedOperatingSystem", "DeploymentError.InternalServerError", "DeploymentError.WorkspaceUnreachable", "ValidationError.ApplicationOldVersionExists"
     #   resp.association.state_reason.error_message #=> String
     #   resp.association.workspace_id #=> String
     #
@@ -3488,7 +3492,7 @@ module Aws::WorkSpaces
     # @example Response structure
     #
     #   resp.image_id #=> String
-    #   resp.state #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "ERROR"
+    #   resp.state #=> String, one of "PENDING", "IN_PROGRESS", "PROCESSING_SOURCE_IMAGE", "IMAGE_TESTING_START", "UPDATING_OPERATING_SYSTEM", "IMAGE_COMPATIBILITY_CHECKING", "IMAGE_TESTING_GENERALIZATION", "CREATING_TEST_INSTANCE", "INSTALLING_COMPONENTS", "GENERALIZING", "VALIDATING", "PUBLISHING", "COMPLETED", "ERROR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportCustomWorkspaceImage AWS API Documentation
     #
@@ -4611,7 +4615,7 @@ module Aws::WorkSpaces
     #
     # Terminating a WorkSpace is a permanent action and cannot be undone.
     # The user's data is destroyed. If you need to archive any user data,
-    # contact Amazon Web ServicesSupport before terminating the WorkSpace.
+    # contact Amazon Web Services Support before terminating the WorkSpace.
     #
     # You can terminate a WorkSpace that is in any state except `SUSPENDED`.
     #
@@ -4892,7 +4896,7 @@ module Aws::WorkSpaces
     # same Region.
     #
     # In Amazon Web Services GovCloud (US), to copy images to and from other
-    # Regions, contact Amazon Web ServicesSupport.
+    # Regions, contact Amazon Web Services Support.
     #
     # For more information about sharing images, see [ Share or Unshare a
     # Custom WorkSpaces Image][1].
@@ -4903,8 +4907,8 @@ module Aws::WorkSpaces
     # * Sharing Bring Your Own License (BYOL) images across Amazon Web
     #   Services accounts isn't supported at this time in Amazon Web
     #   Services GovCloud (US). To share BYOL images across accounts in
-    #   Amazon Web Services GovCloud (US), contact Amazon Web
-    #   ServicesSupport.
+    #   Amazon Web Services GovCloud (US), contact Amazon Web Services
+    #   Support.
     #
     #  </note>
     #
@@ -5050,7 +5054,7 @@ module Aws::WorkSpaces
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.149.0'
+      context[:gem_version] = '1.150.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

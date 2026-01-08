@@ -119,7 +119,7 @@ module Aws::WorkSpaces
     end
 
     class AssociationStateReason
-      attr_accessor error_code: ("ValidationError.InsufficientDiskSpace" | "ValidationError.InsufficientMemory" | "ValidationError.UnsupportedOperatingSystem" | "DeploymentError.InternalServerError" | "DeploymentError.WorkspaceUnreachable")
+      attr_accessor error_code: ("ValidationError.InsufficientDiskSpace" | "ValidationError.InsufficientMemory" | "ValidationError.UnsupportedOperatingSystem" | "DeploymentError.InternalServerError" | "DeploymentError.WorkspaceUnreachable" | "ValidationError.ApplicationOldVersionExists")
       attr_accessor error_message: ::String
       SENSITIVE: []
     end
@@ -646,7 +646,9 @@ module Aws::WorkSpaces
     class DescribeCustomWorkspaceImageImportResult
       attr_accessor image_id: ::String
       attr_accessor infrastructure_configuration_arn: ::String
-      attr_accessor state: ("PENDING" | "IN_PROGRESS" | "COMPLETED" | "ERROR")
+      attr_accessor state: ("PENDING" | "IN_PROGRESS" | "PROCESSING_SOURCE_IMAGE" | "IMAGE_TESTING_START" | "UPDATING_OPERATING_SYSTEM" | "IMAGE_COMPATIBILITY_CHECKING" | "IMAGE_TESTING_GENERALIZATION" | "CREATING_TEST_INSTANCE" | "INSTALLING_COMPONENTS" | "GENERALIZING" | "VALIDATING" | "PUBLISHING" | "COMPLETED" | "ERROR")
+      attr_accessor state_message: ::String
+      attr_accessor progress_percentage: ::Integer
       attr_accessor created: ::Time
       attr_accessor last_updated_time: ::Time
       attr_accessor image_source: Types::ImageSourceIdentifier
@@ -990,7 +992,7 @@ module Aws::WorkSpaces
 
     class ImportCustomWorkspaceImageResult
       attr_accessor image_id: ::String
-      attr_accessor state: ("PENDING" | "IN_PROGRESS" | "COMPLETED" | "ERROR")
+      attr_accessor state: ("PENDING" | "IN_PROGRESS" | "PROCESSING_SOURCE_IMAGE" | "IMAGE_TESTING_START" | "UPDATING_OPERATING_SYSTEM" | "IMAGE_COMPATIBILITY_CHECKING" | "IMAGE_TESTING_GENERALIZATION" | "CREATING_TEST_INSTANCE" | "INSTALLING_COMPONENTS" | "GENERALIZING" | "VALIDATING" | "PUBLISHING" | "COMPLETED" | "ERROR")
       SENSITIVE: []
     end
 
