@@ -82,35 +82,29 @@ module Aws
 
       def process_upload_queue(producer, uploader, opts)
         progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
+        completion_queue = Queue.new
         upload_attempts = 0
         errors = []
-        begin
-          producer.each do |file|
-            break if abort_requested
+        producer.each do |file|
+          break if abort_requested
 
-            upload_attempts += 1
-            if file.is_a?(StandardError)
-              errors << file
-              next
-            end
-
-            @queue_executor.post(file) do |f|
-              uploader.upload(f.path, f.params)
-              progress&.call(File.size(f.path))
-            rescue StandardError => e
-              errors << StandardError.new("Upload failed for: #{File.basename(f.path)} : #{e.message}")
-              handle_error(opts)
-            end
+          upload_attempts += 1
+          @queue_executor.post(file) do |f|
+            uploader.upload(f.path, f.params)
+            progress&.call(File.size(f.path))
+          rescue StandardError => e
+            errors << StandardError.new("Upload failed for #{File.basename(f.path)}: #{e.message}")
+            handle_error(opts)
+          ensure
+            completion_queue << :done
           end
-        rescue StandardError => e
-          errors << e
-          handle_error(opts)
         end
+        upload_attempts.times { completion_queue.pop }
         [upload_attempts, errors]
       end
 
       # @api private
-      class FileProducer # r
+      class FileProducer
         include Enumerable
 
         DEFAULT_QUEUE_SIZE = 100
@@ -136,6 +130,9 @@ module Aws
             else
               find_directly
             end
+          rescue StandardError => e
+            @directory_uploader.request_abort
+            raise DirectoryUploadError.new("Directory traversal failed: #{e.message}")
           ensure
             @file_queue << DONE_MARKER
           end
@@ -146,7 +143,7 @@ module Aws
             yield file
           end
         ensure
-          producer_thread.join
+          producer_thread.value
         end
 
         private
@@ -179,10 +176,6 @@ module Aws
             next unless include_file?(entry_path, entry)
 
             @file_queue << build_upload_entry(entry_path, entry)
-          rescue StandardError => e
-            raise unless @ignore_failure
-
-            @file_queue << e
           end
         end
 
@@ -220,10 +213,6 @@ module Aws
               key = key_prefix.empty? ? entry : File.join(key_prefix, entry)
               @file_queue << build_upload_entry(full_path, key)
             end
-          rescue StandardError => e
-            raise unless @ignore_failure
-
-            @file_queue << e
           end
         end
 
@@ -239,9 +228,11 @@ module Aws
         def handle_directory(dir_path, dir_name, key_prefix, visited)
           if @follow_symlinks && visited
             stat = File.stat(dir_path)
-            return if visited.include?(stat.ino)
+            if File.lstat(dir_path).symlink? && visited.include?(stat.ino)
+              return # Skip only symlinked directories that create cycles
+            end
 
-            visited << stat.ino # Track inode to prevent symlink cycles
+            visited << stat.ino
           end
           new_prefix = key_prefix.empty? ? dir_name : File.join(key_prefix, dir_name)
           scan_directory(dir_path, key_prefix: new_prefix, visited: visited)
