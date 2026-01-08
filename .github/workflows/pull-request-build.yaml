@@ -1,7 +1,10 @@
 name: Build SDK
 on:
-  pull_request_review:
-    types: [ submitted ]
+#  pull_request_review:
+#    types: [ submitted ]
+#    branches: [ version-3 ]
+  pull_request:
+    types: [ opened, synchronize, ready_for_review ]
     branches: [ version-3 ]
   workflow_dispatch:
 
@@ -20,7 +23,8 @@ env:
 
 jobs:
   aws-sdk-pr-build:
-    if: github.event.review.state == 'approved'
+#    if: github.event.review.state == 'approved'
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     permissions:
       id-token: write
