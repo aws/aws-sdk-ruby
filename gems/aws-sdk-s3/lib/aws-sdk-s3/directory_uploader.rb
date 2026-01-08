@@ -20,6 +20,10 @@ module Aws
         @mutex.synchronize { @abort_requested }
       end
 
+      def request_abort
+        @mutex.synchronize { @abort_requested = true }
+      end
+
       def upload(source_directory, bucket, **opts)
         raise ArgumentError, 'Invalid directory' unless Dir.exist?(source_directory)
 
@@ -40,8 +44,10 @@ module Aws
       private
 
       def build_opts(source_directory, bucket, opts)
-        ignore_failure = opts[:ignore_failure] || false
-        uploader_opts = { progress_callback: opts[:progress_callback], ignore_failure: ignore_failure }
+        uploader_opts = {
+          progress_callback: opts[:progress_callback],
+          ignore_failure:  opts[:ignore_failure] || false
+        }
         producer_opts = {
           directory_uploader: self,
           source_dir: source_directory,
@@ -51,7 +57,6 @@ module Aws
           follow_symlinks: opts[:follow_symlinks] || false,
           filter_callback: opts[:filter_callback],
           request_callback: opts[:request_callback],
-          ignore_failure: ignore_failure
         }
         [uploader_opts, producer_opts]
       end
@@ -76,10 +81,6 @@ module Aws
         @queue_executor.kill
       end
 
-      def request_abort
-        @mutex.synchronize { @abort_requested = true }
-      end
-
       def process_upload_queue(producer, uploader, opts)
         progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
         completion_queue = Queue.new
@@ -93,7 +94,9 @@ module Aws
             uploader.upload(f.path, f.params)
             progress&.call(File.size(f.path))
           rescue StandardError => e
-            errors << StandardError.new("Upload failed for #{File.basename(f.path)}: #{e.message}")
+            @mutex.synchronize do
+              errors << StandardError.new("Upload failed for #{File.basename(f.path)}: #{e.message}")
+            end
             handle_error(opts)
           ensure
             completion_queue << :done
@@ -119,7 +122,6 @@ module Aws
           @follow_symlinks = opts[:follow_symlinks]
           @filter_callback = opts[:filter_callback]
           @request_callback = opts[:request_callback]
-          @ignore_failure = opts[:ignore_failure]
           @file_queue = SizedQueue.new(DEFAULT_QUEUE_SIZE)
         end
 
@@ -132,7 +134,7 @@ module Aws
             end
           rescue StandardError => e
             @directory_uploader.request_abort
-            raise DirectoryUploadError.new("Directory traversal failed: #{e.message}")
+            raise DirectoryUploadError.new("Directory traversal failed for '#{@source_dir}': #{e.message}")
           ensure
             @file_queue << DONE_MARKER
           end
