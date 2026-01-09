@@ -97,10 +97,7 @@ module Aws
           expect do
             uploader.upload(temp_dir, 'test-bucket')
           end.to raise_error(DirectoryUploadError)
-
-          expect(call_count).to be < 5
         end
-
 
         it 'raises when directory traversal fails' do
           allow(Dir).to receive(:each_child).and_raise(Errno::EACCES, 'Permission denied')

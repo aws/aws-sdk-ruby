@@ -183,9 +183,9 @@ module Aws
 
         def find_recursively
           if @follow_symlinks
-            visited = Set.new
-            visited << File.stat(@source_dir).ino
-            scan_directory(@source_dir, visited: visited)
+            ancestors = Set.new
+            ancestors << File.stat(@source_dir).ino
+            scan_directory(@source_dir, ancestors: ancestors)
           else
             scan_directory(@source_dir)
           end
@@ -197,7 +197,7 @@ module Aws
           @filter_callback.call(file_path, file_name)
         end
 
-        def scan_directory(dir_path, key_prefix: '', visited: nil)
+        def scan_directory(dir_path, key_prefix: '', ancestors: nil)
           return if @directory_uploader.abort_requested
 
           Dir.each_child(dir_path) do |entry|
@@ -210,7 +210,7 @@ module Aws
             next unless stat
 
             if stat.directory?
-              handle_directory(full_path, entry, key_prefix, visited)
+              handle_directory(full_path, entry, key_prefix, ancestors)
             else
               key = key_prefix.empty? ? entry : File.join(key_prefix, entry)
               @file_queue << build_upload_entry(full_path, key)
@@ -227,17 +227,17 @@ module Aws
           lstat
         end
 
-        def handle_directory(dir_path, dir_name, key_prefix, visited)
-          if @follow_symlinks && visited
+        def handle_directory(dir_path, dir_name, key_prefix, ancestors)
+          if @follow_symlinks && ancestors
             stat = File.stat(dir_path)
-            if File.lstat(dir_path).symlink? && visited.include?(stat.ino)
-              return # Skip only symlinked directories that create cycles
-            end
+            ino = stat.ino
+            return if ancestors.include?(ino) # cycle detected - skip
 
-            visited << stat.ino
+            ancestors.add(ino)
           end
           new_prefix = key_prefix.empty? ? dir_name : File.join(key_prefix, dir_name)
-          scan_directory(dir_path, key_prefix: new_prefix, visited: visited)
+          scan_directory(dir_path, key_prefix: new_prefix, ancestors: ancestors)
+          ancestors.delete(ino) if @follow_symlinks && ancestors
         end
 
         # @api private
