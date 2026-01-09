@@ -18,7 +18,7 @@ env:
   SCRIPT_LOCATION: 'workflows/start-pull-request-build/pull-request-build-v1.sh'
 
   # custom variables
-  IAM_ROLE_ARN: 'arn:aws:iam::664418967014:role/AwsSdkRubyGitHubRole' # dev account role for testing
+  IAM_ROLE_ARN: 'arn:aws:iam::525369684841:role/AwsSdkRubyGitHubRole'
   ROLE_SESSION_DURATION_SECONDS: 7200
 
 jobs:
