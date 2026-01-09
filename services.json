@@ -1,4 +1,7 @@
 {
+  "ACM": {
+    "models": "acm/2015-12-08"
+  },
   "ACMPCA": {
     "models": "acm-pca/2017-08-22"
   },
