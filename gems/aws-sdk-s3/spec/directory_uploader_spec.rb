@@ -187,9 +187,7 @@ module Aws
             end
 
             uploader.upload(temp_dir, 'test-bucket', request_callback: request_callback)
-            uploaded_params.each do |param|
-              expect(param[:storage_class]).to eq('GLACIER')
-            end
+            expect(uploaded_params).to all(include(storage_class: 'GLACIER'))
           end
         end
 

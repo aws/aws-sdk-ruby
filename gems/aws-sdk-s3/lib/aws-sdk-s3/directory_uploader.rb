@@ -102,7 +102,11 @@ module Aws
             completion_queue << :done
           end
         end
-        upload_attempts.times { completion_queue.pop }
+        upload_attempts.times do
+          break if abort_requested
+
+          completion_queue.pop
+        end
         [upload_attempts, errors]
       end
 
