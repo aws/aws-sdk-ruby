@@ -149,6 +149,7 @@ module Aws::Glue
     BoxedNonNegativeInt = Shapes::IntegerShape.new(name: 'BoxedNonNegativeInt')
     BoxedNonNegativeLong = Shapes::IntegerShape.new(name: 'BoxedNonNegativeLong')
     BoxedPositiveInt = Shapes::IntegerShape.new(name: 'BoxedPositiveInt')
+    ByteCount = Shapes::IntegerShape.new(name: 'ByteCount')
     CancelDataQualityRuleRecommendationRunRequest = Shapes::StructureShape.new(name: 'CancelDataQualityRuleRecommendationRunRequest')
     CancelDataQualityRuleRecommendationRunResponse = Shapes::StructureShape.new(name: 'CancelDataQualityRuleRecommendationRunResponse')
     CancelDataQualityRulesetEvaluationRunRequest = Shapes::StructureShape.new(name: 'CancelDataQualityRulesetEvaluationRunRequest')
@@ -728,6 +729,8 @@ module Aws::Glue
     GetMLTransformsResponse = Shapes::StructureShape.new(name: 'GetMLTransformsResponse')
     GetMappingRequest = Shapes::StructureShape.new(name: 'GetMappingRequest')
     GetMappingResponse = Shapes::StructureShape.new(name: 'GetMappingResponse')
+    GetMaterializedViewRefreshTaskRunRequest = Shapes::StructureShape.new(name: 'GetMaterializedViewRefreshTaskRunRequest')
+    GetMaterializedViewRefreshTaskRunResponse = Shapes::StructureShape.new(name: 'GetMaterializedViewRefreshTaskRunResponse')
     GetPartitionIndexesRequest = Shapes::StructureShape.new(name: 'GetPartitionIndexesRequest')
     GetPartitionIndexesResponse = Shapes::StructureShape.new(name: 'GetPartitionIndexesResponse')
     GetPartitionRequest = Shapes::StructureShape.new(name: 'GetPartitionRequest')
@@ -994,6 +997,8 @@ module Aws::Glue
     ListJobsResponse = Shapes::StructureShape.new(name: 'ListJobsResponse')
     ListMLTransformsRequest = Shapes::StructureShape.new(name: 'ListMLTransformsRequest')
     ListMLTransformsResponse = Shapes::StructureShape.new(name: 'ListMLTransformsResponse')
+    ListMaterializedViewRefreshTaskRunsRequest = Shapes::StructureShape.new(name: 'ListMaterializedViewRefreshTaskRunsRequest')
+    ListMaterializedViewRefreshTaskRunsResponse = Shapes::StructureShape.new(name: 'ListMaterializedViewRefreshTaskRunsResponse')
     ListOfString = Shapes::ListShape.new(name: 'ListOfString')
     ListRegistriesInput = Shapes::StructureShape.new(name: 'ListRegistriesInput')
     ListRegistriesResponse = Shapes::StructureShape.new(name: 'ListRegistriesResponse')
@@ -1039,6 +1044,13 @@ module Aws::Glue
     Mappings = Shapes::ListShape.new(name: 'Mappings')
     MaskValue = Shapes::StringShape.new(name: 'MaskValue')
     MatchCriteria = Shapes::ListShape.new(name: 'MatchCriteria')
+    MaterializedViewRefreshState = Shapes::StringShape.new(name: 'MaterializedViewRefreshState')
+    MaterializedViewRefreshTaskNotRunningException = Shapes::StructureShape.new(name: 'MaterializedViewRefreshTaskNotRunningException')
+    MaterializedViewRefreshTaskRun = Shapes::StructureShape.new(name: 'MaterializedViewRefreshTaskRun')
+    MaterializedViewRefreshTaskRunningException = Shapes::StructureShape.new(name: 'MaterializedViewRefreshTaskRunningException')
+    MaterializedViewRefreshTaskRunsList = Shapes::ListShape.new(name: 'MaterializedViewRefreshTaskRunsList')
+    MaterializedViewRefreshTaskStoppingException = Shapes::StructureShape.new(name: 'MaterializedViewRefreshTaskStoppingException')
+    MaterializedViewRefreshType = Shapes::StringShape.new(name: 'MaterializedViewRefreshType')
     MaxConcurrentRuns = Shapes::IntegerShape.new(name: 'MaxConcurrentRuns')
     MaxListTableOptimizerRunsTokenResults = Shapes::IntegerShape.new(name: 'MaxListTableOptimizerRunsTokenResults')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -1382,6 +1394,8 @@ module Aws::Glue
     StartMLEvaluationTaskRunResponse = Shapes::StructureShape.new(name: 'StartMLEvaluationTaskRunResponse')
     StartMLLabelingSetGenerationTaskRunRequest = Shapes::StructureShape.new(name: 'StartMLLabelingSetGenerationTaskRunRequest')
     StartMLLabelingSetGenerationTaskRunResponse = Shapes::StructureShape.new(name: 'StartMLLabelingSetGenerationTaskRunResponse')
+    StartMaterializedViewRefreshTaskRunRequest = Shapes::StructureShape.new(name: 'StartMaterializedViewRefreshTaskRunRequest')
+    StartMaterializedViewRefreshTaskRunResponse = Shapes::StructureShape.new(name: 'StartMaterializedViewRefreshTaskRunResponse')
     StartTriggerRequest = Shapes::StructureShape.new(name: 'StartTriggerRequest')
     StartTriggerResponse = Shapes::StructureShape.new(name: 'StartTriggerResponse')
     StartWorkflowRunRequest = Shapes::StructureShape.new(name: 'StartWorkflowRunRequest')
@@ -1410,6 +1424,8 @@ module Aws::Glue
     StopCrawlerResponse = Shapes::StructureShape.new(name: 'StopCrawlerResponse')
     StopCrawlerScheduleRequest = Shapes::StructureShape.new(name: 'StopCrawlerScheduleRequest')
     StopCrawlerScheduleResponse = Shapes::StructureShape.new(name: 'StopCrawlerScheduleResponse')
+    StopMaterializedViewRefreshTaskRunRequest = Shapes::StructureShape.new(name: 'StopMaterializedViewRefreshTaskRunRequest')
+    StopMaterializedViewRefreshTaskRunResponse = Shapes::StructureShape.new(name: 'StopMaterializedViewRefreshTaskRunResponse')
     StopSessionRequest = Shapes::StructureShape.new(name: 'StopSessionRequest')
     StopSessionResponse = Shapes::StructureShape.new(name: 'StopSessionResponse')
     StopTriggerRequest = Shapes::StructureShape.new(name: 'StopTriggerRequest')
@@ -1511,6 +1527,7 @@ module Aws::Glue
     TwoInputs = Shapes::ListShape.new(name: 'TwoInputs')
     TypeString = Shapes::StringShape.new(name: 'TypeString')
     URI = Shapes::StringShape.new(name: 'URI')
+    UUIDv4 = Shapes::StringShape.new(name: 'UUIDv4')
     UnfilteredPartition = Shapes::StructureShape.new(name: 'UnfilteredPartition')
     UnfilteredPartitionList = Shapes::ListShape.new(name: 'UnfilteredPartitionList')
     Union = Shapes::StructureShape.new(name: 'Union')
@@ -4422,6 +4439,13 @@ module Aws::Glue
     GetMappingResponse.add_member(:mapping, Shapes::ShapeRef.new(shape: MappingList, required: true, location_name: "Mapping"))
     GetMappingResponse.struct_class = Types::GetMappingResponse
 
+    GetMaterializedViewRefreshTaskRunRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "CatalogId"))
+    GetMaterializedViewRefreshTaskRunRequest.add_member(:materialized_view_refresh_task_run_id, Shapes::ShapeRef.new(shape: UUIDv4, required: true, location_name: "MaterializedViewRefreshTaskRunId"))
+    GetMaterializedViewRefreshTaskRunRequest.struct_class = Types::GetMaterializedViewRefreshTaskRunRequest
+
+    GetMaterializedViewRefreshTaskRunResponse.add_member(:materialized_view_refresh_task_run, Shapes::ShapeRef.new(shape: MaterializedViewRefreshTaskRun, location_name: "MaterializedViewRefreshTaskRun"))
+    GetMaterializedViewRefreshTaskRunResponse.struct_class = Types::GetMaterializedViewRefreshTaskRunResponse
+
     GetPartitionIndexesRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetPartitionIndexesRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     GetPartitionIndexesRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
@@ -5532,6 +5556,17 @@ module Aws::Glue
     ListMLTransformsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListMLTransformsResponse.struct_class = Types::ListMLTransformsResponse
 
+    ListMaterializedViewRefreshTaskRunsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "CatalogId"))
+    ListMaterializedViewRefreshTaskRunsRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DatabaseName"))
+    ListMaterializedViewRefreshTaskRunsRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, location_name: "TableName"))
+    ListMaterializedViewRefreshTaskRunsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListMaterializedViewRefreshTaskRunsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListMaterializedViewRefreshTaskRunsRequest.struct_class = Types::ListMaterializedViewRefreshTaskRunsRequest
+
+    ListMaterializedViewRefreshTaskRunsResponse.add_member(:materialized_view_refresh_task_runs, Shapes::ShapeRef.new(shape: MaterializedViewRefreshTaskRunsList, location_name: "MaterializedViewRefreshTaskRuns"))
+    ListMaterializedViewRefreshTaskRunsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListMaterializedViewRefreshTaskRunsResponse.struct_class = Types::ListMaterializedViewRefreshTaskRunsResponse
+
     ListOfString.member = Shapes::ShapeRef.new(shape: String)
 
     ListRegistriesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsNumber, location_name: "MaxResults"))
@@ -5691,6 +5726,34 @@ module Aws::Glue
     Mappings.member = Shapes::ShapeRef.new(shape: Mapping)
 
     MatchCriteria.member = Shapes::ShapeRef.new(shape: NameString)
+
+    MaterializedViewRefreshTaskNotRunningException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    MaterializedViewRefreshTaskNotRunningException.struct_class = Types::MaterializedViewRefreshTaskNotRunningException
+
+    MaterializedViewRefreshTaskRun.add_member(:customer_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "CustomerId"))
+    MaterializedViewRefreshTaskRun.add_member(:materialized_view_refresh_task_run_id, Shapes::ShapeRef.new(shape: UUIDv4, location_name: "MaterializedViewRefreshTaskRunId"))
+    MaterializedViewRefreshTaskRun.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, location_name: "DatabaseName"))
+    MaterializedViewRefreshTaskRun.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
+    MaterializedViewRefreshTaskRun.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    MaterializedViewRefreshTaskRun.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
+    MaterializedViewRefreshTaskRun.add_member(:status, Shapes::ShapeRef.new(shape: MaterializedViewRefreshState, location_name: "Status"))
+    MaterializedViewRefreshTaskRun.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    MaterializedViewRefreshTaskRun.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdated"))
+    MaterializedViewRefreshTaskRun.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    MaterializedViewRefreshTaskRun.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    MaterializedViewRefreshTaskRun.add_member(:error_message, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "ErrorMessage"))
+    MaterializedViewRefreshTaskRun.add_member(:dpu_seconds, Shapes::ShapeRef.new(shape: NonNegativeDouble, location_name: "DPUSeconds"))
+    MaterializedViewRefreshTaskRun.add_member(:refresh_type, Shapes::ShapeRef.new(shape: MaterializedViewRefreshType, location_name: "RefreshType"))
+    MaterializedViewRefreshTaskRun.add_member(:processed_bytes, Shapes::ShapeRef.new(shape: ByteCount, location_name: "ProcessedBytes"))
+    MaterializedViewRefreshTaskRun.struct_class = Types::MaterializedViewRefreshTaskRun
+
+    MaterializedViewRefreshTaskRunningException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    MaterializedViewRefreshTaskRunningException.struct_class = Types::MaterializedViewRefreshTaskRunningException
+
+    MaterializedViewRefreshTaskRunsList.member = Shapes::ShapeRef.new(shape: MaterializedViewRefreshTaskRun)
+
+    MaterializedViewRefreshTaskStoppingException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    MaterializedViewRefreshTaskStoppingException.struct_class = Types::MaterializedViewRefreshTaskStoppingException
 
     Merge.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     Merge.add_member(:inputs, Shapes::ShapeRef.new(shape: TwoInputs, required: true, location_name: "Inputs"))
@@ -6837,6 +6900,15 @@ module Aws::Glue
     StartMLLabelingSetGenerationTaskRunResponse.add_member(:task_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TaskRunId"))
     StartMLLabelingSetGenerationTaskRunResponse.struct_class = Types::StartMLLabelingSetGenerationTaskRunResponse
 
+    StartMaterializedViewRefreshTaskRunRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "CatalogId"))
+    StartMaterializedViewRefreshTaskRunRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    StartMaterializedViewRefreshTaskRunRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    StartMaterializedViewRefreshTaskRunRequest.add_member(:full_refresh, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "FullRefresh"))
+    StartMaterializedViewRefreshTaskRunRequest.struct_class = Types::StartMaterializedViewRefreshTaskRunRequest
+
+    StartMaterializedViewRefreshTaskRunResponse.add_member(:materialized_view_refresh_task_run_id, Shapes::ShapeRef.new(shape: UUIDv4, location_name: "MaterializedViewRefreshTaskRunId"))
+    StartMaterializedViewRefreshTaskRunResponse.struct_class = Types::StartMaterializedViewRefreshTaskRunResponse
+
     StartTriggerRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     StartTriggerRequest.struct_class = Types::StartTriggerRequest
 
@@ -6935,6 +7007,13 @@ module Aws::Glue
     StopCrawlerScheduleRequest.struct_class = Types::StopCrawlerScheduleRequest
 
     StopCrawlerScheduleResponse.struct_class = Types::StopCrawlerScheduleResponse
+
+    StopMaterializedViewRefreshTaskRunRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "CatalogId"))
+    StopMaterializedViewRefreshTaskRunRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    StopMaterializedViewRefreshTaskRunRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    StopMaterializedViewRefreshTaskRunRequest.struct_class = Types::StopMaterializedViewRefreshTaskRunRequest
+
+    StopMaterializedViewRefreshTaskRunResponse.struct_class = Types::StopMaterializedViewRefreshTaskRunResponse
 
     StopSessionRequest.add_member(:id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Id"))
     StopSessionRequest.add_member(:request_origin, Shapes::ShapeRef.new(shape: OrchestrationNameString, location_name: "RequestOrigin"))
@@ -9577,6 +9656,18 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
       end)
 
+      api.add_operation(:get_materialized_view_refresh_task_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMaterializedViewRefreshTaskRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMaterializedViewRefreshTaskRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMaterializedViewRefreshTaskRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
       api.add_operation(:get_partition, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPartition"
         o.http_method = "POST"
@@ -10348,6 +10439,23 @@ module Aws::Glue
         )
       end)
 
+      api.add_operation(:list_materialized_view_refresh_task_runs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMaterializedViewRefreshTaskRuns"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListMaterializedViewRefreshTaskRunsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMaterializedViewRefreshTaskRunsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_registries, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListRegistries"
         o.http_method = "POST"
@@ -10838,6 +10946,20 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentRunsExceededException)
       end)
 
+      api.add_operation(:start_materialized_view_refresh_task_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMaterializedViewRefreshTaskRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartMaterializedViewRefreshTaskRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartMaterializedViewRefreshTaskRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MaterializedViewRefreshTaskRunningException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
       api.add_operation(:start_trigger, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartTrigger"
         o.http_method = "POST"
@@ -10910,6 +11032,19 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: SchedulerNotRunningException)
         o.errors << Shapes::ShapeRef.new(shape: SchedulerTransitioningException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:stop_materialized_view_refresh_task_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopMaterializedViewRefreshTaskRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopMaterializedViewRefreshTaskRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopMaterializedViewRefreshTaskRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: MaterializedViewRefreshTaskNotRunningException)
+        o.errors << Shapes::ShapeRef.new(shape: MaterializedViewRefreshTaskStoppingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 

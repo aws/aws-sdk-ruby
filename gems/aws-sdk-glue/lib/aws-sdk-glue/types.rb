@@ -13711,6 +13711,38 @@ module Aws::Glue
     end
 
     # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] materialized_view_refresh_task_run_id
+    #   The identifier for the particular materialized view refresh task
+    #   run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMaterializedViewRefreshTaskRunRequest AWS API Documentation
+    #
+    class GetMaterializedViewRefreshTaskRunRequest < Struct.new(
+      :catalog_id,
+      :materialized_view_refresh_task_run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] materialized_view_refresh_task_run
+    #   A MaterializedViewRefreshTaskRun object representing the details of
+    #   the task run.
+    #   @return [Types::MaterializedViewRefreshTaskRun]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMaterializedViewRefreshTaskRunResponse AWS API Documentation
+    #
+    class GetMaterializedViewRefreshTaskRunResponse < Struct.new(
+      :materialized_view_refresh_task_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] catalog_id
     #   The catalog ID where the table resides.
     #   @return [String]
     #
@@ -19838,6 +19870,57 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table for which statistics is generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListMaterializedViewRefreshTaskRunsRequest AWS API Documentation
+    #
+    class ListMaterializedViewRefreshTaskRunsRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] materialized_view_refresh_task_runs
+    #   The results of the ListMaterializedViewRefreshTaskRuns action.
+    #   @return [Array<Types::MaterializedViewRefreshTaskRun>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if not all task run IDs have yet been
+    #   returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListMaterializedViewRefreshTaskRunsResponse AWS API Documentation
+    #
+    class ListMaterializedViewRefreshTaskRunsResponse < Struct.new(
+      :materialized_view_refresh_task_runs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   Maximum number of results required per page. If the value is not
     #   supplied, this will be defaulted to 25 per page.
@@ -20626,6 +20709,132 @@ module Aws::Glue
       :target_table,
       :target_path,
       :target_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Exception thrown when stopping a task that is not in running state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MaterializedViewRefreshTaskNotRunningException AWS API Documentation
+    #
+    class MaterializedViewRefreshTaskNotRunningException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The object that shows the details of the materialized view refresh
+    # task run.
+    #
+    # @!attribute [rw] customer_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] materialized_view_refresh_task_run_id
+    #   The identifier of the materialized view refresh task run.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table for which statistics is generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The IAM role that the service assumes to generate statistics.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the task run.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that this task was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated
+    #   The last point in time when this task was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the task.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the task.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error_message
+    #   The error message for the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] dpu_seconds
+    #   The calculated DPU usage in seconds for all autoscaled workers.
+    #   @return [Float]
+    #
+    # @!attribute [rw] refresh_type
+    #   The type of the refresh task run. Either FULL or INCREMENTAL.
+    #   @return [String]
+    #
+    # @!attribute [rw] processed_bytes
+    #   The number of bytes the refresh task run has scanned to refresh the
+    #   materialized view.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MaterializedViewRefreshTaskRun AWS API Documentation
+    #
+    class MaterializedViewRefreshTaskRun < Struct.new(
+      :customer_id,
+      :materialized_view_refresh_task_run_id,
+      :database_name,
+      :table_name,
+      :catalog_id,
+      :role,
+      :status,
+      :creation_time,
+      :last_updated,
+      :start_time,
+      :end_time,
+      :error_message,
+      :dpu_seconds,
+      :refresh_type,
+      :processed_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Exception thrown when a task is already in running state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MaterializedViewRefreshTaskRunningException AWS API Documentation
+    #
+    class MaterializedViewRefreshTaskRunningException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Exception thrown when a task is already in stopping state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MaterializedViewRefreshTaskStoppingException AWS API Documentation
+    #
+    class MaterializedViewRefreshTaskStoppingException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26107,6 +26316,47 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table reside. If none is
+    #   supplied, the account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table to generate run the materialized view refresh
+    #   task.
+    #   @return [String]
+    #
+    # @!attribute [rw] full_refresh
+    #   Specifies whether this is a full refresh of the task run.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartMaterializedViewRefreshTaskRunRequest AWS API Documentation
+    #
+    class StartMaterializedViewRefreshTaskRunRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :full_refresh)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] materialized_view_refresh_task_run_id
+    #   The identifier for the materialized view refresh task run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartMaterializedViewRefreshTaskRunResponse AWS API Documentation
+    #
+    class StartMaterializedViewRefreshTaskRunResponse < Struct.new(
+      :materialized_view_refresh_task_run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the trigger to start.
     #   @return [String]
@@ -26514,6 +26764,33 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopCrawlerScheduleResponse AWS API Documentation
     #
     class StopCrawlerScheduleResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table reside. If none is
+    #   supplied, the account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database where the table resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table to generate statistics.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopMaterializedViewRefreshTaskRunRequest AWS API Documentation
+    #
+    class StopMaterializedViewRefreshTaskRunRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopMaterializedViewRefreshTaskRunResponse AWS API Documentation
+    #
+    class StopMaterializedViewRefreshTaskRunResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] id
     #   The ID of the session to be stopped.

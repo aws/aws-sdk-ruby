@@ -9165,6 +9165,54 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Get the associated metadata/information for a task run, given a task
+    # run ID.
+    #
+    # @option params [required, String] :catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the account ID is used by default.
+    #
+    # @option params [required, String] :materialized_view_refresh_task_run_id
+    #   The identifier for the particular materialized view refresh task run.
+    #
+    # @return [Types::GetMaterializedViewRefreshTaskRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMaterializedViewRefreshTaskRunResponse#materialized_view_refresh_task_run #materialized_view_refresh_task_run} => Types::MaterializedViewRefreshTaskRun
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_materialized_view_refresh_task_run({
+    #     catalog_id: "NameString", # required
+    #     materialized_view_refresh_task_run_id: "UUIDv4", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.materialized_view_refresh_task_run.customer_id #=> String
+    #   resp.materialized_view_refresh_task_run.materialized_view_refresh_task_run_id #=> String
+    #   resp.materialized_view_refresh_task_run.database_name #=> String
+    #   resp.materialized_view_refresh_task_run.table_name #=> String
+    #   resp.materialized_view_refresh_task_run.catalog_id #=> String
+    #   resp.materialized_view_refresh_task_run.role #=> String
+    #   resp.materialized_view_refresh_task_run.status #=> String, one of "STARTING", "RUNNING", "SUCCEEDED", "FAILED", "STOPPED"
+    #   resp.materialized_view_refresh_task_run.creation_time #=> Time
+    #   resp.materialized_view_refresh_task_run.last_updated #=> Time
+    #   resp.materialized_view_refresh_task_run.start_time #=> Time
+    #   resp.materialized_view_refresh_task_run.end_time #=> Time
+    #   resp.materialized_view_refresh_task_run.error_message #=> String
+    #   resp.materialized_view_refresh_task_run.dpu_seconds #=> Float
+    #   resp.materialized_view_refresh_task_run.refresh_type #=> String, one of "FULL", "INCREMENTAL"
+    #   resp.materialized_view_refresh_task_run.processed_bytes #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMaterializedViewRefreshTaskRun AWS API Documentation
+    #
+    # @overload get_materialized_view_refresh_task_run(params = {})
+    # @param [Hash] params ({})
+    def get_materialized_view_refresh_task_run(params = {}, options = {})
+      req = build_request(:get_materialized_view_refresh_task_run, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about a specified partition.
     #
     # @option params [String] :catalog_id
@@ -13422,6 +13470,70 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # List all task runs for a particular account.
+    #
+    # @option params [required, String] :catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the account ID is used by default.
+    #
+    # @option params [String] :database_name
+    #   The database where the table resides.
+    #
+    # @option params [String] :table_name
+    #   The name of the table for which statistics is generated.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the response.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::ListMaterializedViewRefreshTaskRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMaterializedViewRefreshTaskRunsResponse#materialized_view_refresh_task_runs #materialized_view_refresh_task_runs} => Array&lt;Types::MaterializedViewRefreshTaskRun&gt;
+    #   * {Types::ListMaterializedViewRefreshTaskRunsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_materialized_view_refresh_task_runs({
+    #     catalog_id: "NameString", # required
+    #     database_name: "NameString",
+    #     table_name: "NameString",
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.materialized_view_refresh_task_runs #=> Array
+    #   resp.materialized_view_refresh_task_runs[0].customer_id #=> String
+    #   resp.materialized_view_refresh_task_runs[0].materialized_view_refresh_task_run_id #=> String
+    #   resp.materialized_view_refresh_task_runs[0].database_name #=> String
+    #   resp.materialized_view_refresh_task_runs[0].table_name #=> String
+    #   resp.materialized_view_refresh_task_runs[0].catalog_id #=> String
+    #   resp.materialized_view_refresh_task_runs[0].role #=> String
+    #   resp.materialized_view_refresh_task_runs[0].status #=> String, one of "STARTING", "RUNNING", "SUCCEEDED", "FAILED", "STOPPED"
+    #   resp.materialized_view_refresh_task_runs[0].creation_time #=> Time
+    #   resp.materialized_view_refresh_task_runs[0].last_updated #=> Time
+    #   resp.materialized_view_refresh_task_runs[0].start_time #=> Time
+    #   resp.materialized_view_refresh_task_runs[0].end_time #=> Time
+    #   resp.materialized_view_refresh_task_runs[0].error_message #=> String
+    #   resp.materialized_view_refresh_task_runs[0].dpu_seconds #=> Float
+    #   resp.materialized_view_refresh_task_runs[0].refresh_type #=> String, one of "FULL", "INCREMENTAL"
+    #   resp.materialized_view_refresh_task_runs[0].processed_bytes #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListMaterializedViewRefreshTaskRuns AWS API Documentation
+    #
+    # @overload list_materialized_view_refresh_task_runs(params = {})
+    # @param [Hash] params ({})
+    def list_materialized_view_refresh_task_runs(params = {}, options = {})
+      req = build_request(:list_materialized_view_refresh_task_runs, params)
+      req.send_request(options)
+    end
+
     # Returns a list of registries that you have created, with minimal
     # registry information. Registries in the `Deleting` status will not be
     # included in the results. Empty results will be returned if there are
@@ -15563,6 +15675,49 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Starts a materialized view refresh task run, for a specified table and
+    # columns.
+    #
+    # @option params [required, String] :catalog_id
+    #   The ID of the Data Catalog where the table reside. If none is
+    #   supplied, the account ID is used by default.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database where the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table to generate run the materialized view refresh
+    #   task.
+    #
+    # @option params [Boolean] :full_refresh
+    #   Specifies whether this is a full refresh of the task run.
+    #
+    # @return [Types::StartMaterializedViewRefreshTaskRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMaterializedViewRefreshTaskRunResponse#materialized_view_refresh_task_run_id #materialized_view_refresh_task_run_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_materialized_view_refresh_task_run({
+    #     catalog_id: "NameString", # required
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     full_refresh: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.materialized_view_refresh_task_run_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartMaterializedViewRefreshTaskRun AWS API Documentation
+    #
+    # @overload start_materialized_view_refresh_task_run(params = {})
+    # @param [Hash] params ({})
+    def start_materialized_view_refresh_task_run(params = {}, options = {})
+      req = build_request(:start_materialized_view_refresh_task_run, params)
+      req.send_request(options)
+    end
+
     # Starts an existing trigger. See [Triggering Jobs][1] for information
     # about how different types of trigger are started.
     #
@@ -15730,6 +15885,38 @@ module Aws::Glue
     # @param [Hash] params ({})
     def stop_crawler_schedule(params = {}, options = {})
       req = build_request(:stop_crawler_schedule, params)
+      req.send_request(options)
+    end
+
+    # Stops a materialized view refresh task run, for a specified table and
+    # columns.
+    #
+    # @option params [required, String] :catalog_id
+    #   The ID of the Data Catalog where the table reside. If none is
+    #   supplied, the account ID is used by default.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database where the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table to generate statistics.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_materialized_view_refresh_task_run({
+    #     catalog_id: "NameString", # required
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopMaterializedViewRefreshTaskRun AWS API Documentation
+    #
+    # @overload stop_materialized_view_refresh_task_run(params = {})
+    # @param [Hash] params ({})
+    def stop_materialized_view_refresh_task_run(params = {}, options = {})
+      req = build_request(:stop_materialized_view_refresh_task_run, params)
       req.send_request(options)
     end
 
@@ -18138,7 +18325,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.246.0'
+      context[:gem_version] = '1.247.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

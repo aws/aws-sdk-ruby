@@ -919,6 +919,36 @@ module Aws
                                       ?data_access_role_arn: ::String
                                     ) -> _UpdateVocabularyFilterResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVocabularyFilterResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#wait_until-instance_method
+      def wait_until: (:call_analytics_job_completed waiter_name, 
+                    call_analytics_job_name: ::String
+                  ) -> Client::_GetCallAnalyticsJobResponseSuccess
+                    | (:call_analytics_job_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetCallAnalyticsJobResponseSuccess
+                    | (:language_model_completed waiter_name, 
+                    model_name: ::String
+                  ) -> Client::_DescribeLanguageModelResponseSuccess
+                    | (:language_model_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeLanguageModelResponseSuccess
+                    | (:medical_scribe_job_completed waiter_name, 
+                    medical_scribe_job_name: ::String
+                  ) -> Client::_GetMedicalScribeJobResponseSuccess
+                    | (:medical_scribe_job_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetMedicalScribeJobResponseSuccess
+                    | (:medical_transcription_job_completed waiter_name, 
+                    medical_transcription_job_name: ::String
+                  ) -> Client::_GetMedicalTranscriptionJobResponseSuccess
+                    | (:medical_transcription_job_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetMedicalTranscriptionJobResponseSuccess
+                    | (:medical_vocabulary_ready waiter_name, 
+                    vocabulary_name: ::String
+                  ) -> Client::_GetMedicalVocabularyResponseSuccess
+                    | (:medical_vocabulary_ready waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetMedicalVocabularyResponseSuccess
+                    | (:transcription_job_completed waiter_name, 
+                    transcription_job_name: ::String
+                  ) -> Client::_GetTranscriptionJobResponseSuccess
+                    | (:transcription_job_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetTranscriptionJobResponseSuccess
+                    | (:vocabulary_ready waiter_name, 
+                    vocabulary_name: ::String
+                  ) -> Client::_GetVocabularyResponseSuccess
+                    | (:vocabulary_ready waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetVocabularyResponseSuccess
     end
   end
 end

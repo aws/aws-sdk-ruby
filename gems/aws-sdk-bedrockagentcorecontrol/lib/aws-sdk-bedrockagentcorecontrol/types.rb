@@ -4758,10 +4758,15 @@ module Aws::BedrockAgentCoreControl
     #   The unique identifier of the memory to retrieve.
     #   @return [String]
     #
+    # @!attribute [rw] view
+    #   The level of detail to return for the memory.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetMemoryInput AWS API Documentation
     #
     class GetMemoryInput < Struct.new(
-      :memory_id)
+      :memory_id,
+      :view)
       SENSITIVE = []
       include Aws::Structure
     end

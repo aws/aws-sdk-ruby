@@ -3413,6 +3413,17 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class GetMaterializedViewRefreshTaskRunRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor materialized_view_refresh_task_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMaterializedViewRefreshTaskRunResponse
+      attr_accessor materialized_view_refresh_task_run: Types::MaterializedViewRefreshTaskRun
+      SENSITIVE: []
+    end
+
     class GetPartitionIndexesRequest
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
@@ -4785,6 +4796,21 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class ListMaterializedViewRefreshTaskRunsRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMaterializedViewRefreshTaskRunsResponse
+      attr_accessor materialized_view_refresh_task_runs: ::Array[Types::MaterializedViewRefreshTaskRun]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListRegistriesInput
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -4974,6 +5000,40 @@ module Aws::Glue
       attr_accessor target_table: ::String
       attr_accessor target_path: ::String
       attr_accessor target_type: ::String
+      SENSITIVE: []
+    end
+
+    class MaterializedViewRefreshTaskNotRunningException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MaterializedViewRefreshTaskRun
+      attr_accessor customer_id: ::String
+      attr_accessor materialized_view_refresh_task_run_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor catalog_id: ::String
+      attr_accessor role: ::String
+      attr_accessor status: ("STARTING" | "RUNNING" | "SUCCEEDED" | "FAILED" | "STOPPED")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_updated: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor error_message: ::String
+      attr_accessor dpu_seconds: ::Float
+      attr_accessor refresh_type: ("FULL" | "INCREMENTAL")
+      attr_accessor processed_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class MaterializedViewRefreshTaskRunningException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MaterializedViewRefreshTaskStoppingException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -6348,6 +6408,19 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class StartMaterializedViewRefreshTaskRunRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor full_refresh: bool
+      SENSITIVE: []
+    end
+
+    class StartMaterializedViewRefreshTaskRunResponse
+      attr_accessor materialized_view_refresh_task_run_id: ::String
+      SENSITIVE: []
+    end
+
     class StartTriggerRequest
       attr_accessor name: ::String
       SENSITIVE: []
@@ -6472,6 +6545,16 @@ module Aws::Glue
     end
 
     class StopCrawlerScheduleResponse < Aws::EmptyStructure
+    end
+
+    class StopMaterializedViewRefreshTaskRunRequest
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopMaterializedViewRefreshTaskRunResponse < Aws::EmptyStructure
     end
 
     class StopSessionRequest

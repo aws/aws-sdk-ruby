@@ -2268,6 +2268,8 @@ module Aws::MediaLive
       attr_accessor channel_id: ::String
       attr_accessor channel_group: ::String
       attr_accessor channel_name: ::String
+      attr_accessor channel_endpoint_id: ::String
+      attr_accessor media_package_region_name: ::String
       SENSITIVE: []
     end
 
@@ -5716,6 +5718,7 @@ module Aws::MediaLive
       attr_accessor timed_metadata_id_3_frame: ("NONE" | "PRIV" | "TDRL")
       attr_accessor timed_metadata_id_3_period: ::Integer
       attr_accessor timed_metadata_passthrough: ("DISABLED" | "ENABLED")
+      attr_accessor additional_destinations: ::Array[Types::MediaPackageAdditionalDestinations]
       SENSITIVE: []
     end
 
@@ -5878,6 +5881,11 @@ module Aws::MediaLive
 
     class PrimaryChannelSettings
       attr_accessor linked_channel_type: ("FOLLOWING_CHANNEL" | "PRIMARY_CHANNEL")
+      SENSITIVE: []
+    end
+
+    class MediaPackageAdditionalDestinations
+      attr_accessor destination: Types::OutputLocationRef
       SENSITIVE: []
     end
   end

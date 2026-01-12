@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.139.0 (2026-01-09)
+------------------
+
+* Feature - Added EntityLimitExceeded exception handling to the following API operations AssociateDistributionWebACL, AssociateDistributionTenantWebACL, UpdateDistributionWithStagingConfig
+
 1.138.0 (2026-01-08)
 ------------------
 

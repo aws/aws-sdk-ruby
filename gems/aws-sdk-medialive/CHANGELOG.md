@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.174.0 (2026-01-09)
+------------------
+
+* Feature - MediaPackage v2 output groups in MediaLive can now accept one additional destination for single pipeline channels and up to two additional destinations for standard channels. MediaPackage v2 destinations now support sending to cross region MediaPackage channels.
+
 1.173.0 (2026-01-08)
 ------------------
 

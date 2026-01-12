@@ -556,8 +556,8 @@ module Aws::MediaLive
     # @!attribute [rw] target_lkfs
     #   Target LKFS(loudness) to adjust volume to. If no value is entered, a
     #   default value will be used according to the chosen algorithm. The
-    #   CALM Act (1770-1) recommends a target of -24 LKFS. The EBU R-128
-    #   specification (1770-2) recommends a target of -23 LKFS.
+    #   CALM Act recommends a target of -24 LKFS. The EBU R-128
+    #   specification recommends a target of -23 LKFS.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioNormalizationSettings AWS API Documentation
@@ -9121,12 +9121,27 @@ module Aws::MediaLive
     #   channel that uses MediaPackage v2.
     #   @return [String]
     #
+    # @!attribute [rw] channel_endpoint_id
+    #   Endpoint 1 or 2 of the channel in MediaPackageV2. Only use if you
+    #   are sending CMAF Ingest output to a CMAF ingest endpoint on a
+    #   MediaPackage channel that uses MediaPackage v2.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_package_region_name
+    #   Region the channel group and channel are located in for
+    #   MediaPackageV2. Only use if you are sending CMAF Ingest output to a
+    #   CMAF ingest endpoint on a MediaPackage channel that uses
+    #   MediaPackage v2.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageOutputDestinationSettings AWS API Documentation
     #
     class MediaPackageOutputDestinationSettings < Struct.new(
       :channel_id,
       :channel_group,
-      :channel_name)
+      :channel_name,
+      :channel_endpoint_id,
+      :media_package_region_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22049,6 +22064,11 @@ module Aws::MediaLive
     #   Set to enabled to pass through ID3 metadata from the input sources.
     #   @return [String]
     #
+    # @!attribute [rw] additional_destinations
+    #   Optional an array of additional destinational HTTP destinations for
+    #   the OutputGroup outputs
+    #   @return [Array<Types::MediaPackageAdditionalDestinations>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageV2GroupSettings AWS API Documentation
     #
     class MediaPackageV2GroupSettings < Struct.new(
@@ -22061,7 +22081,8 @@ module Aws::MediaLive
       :segment_length_units,
       :timed_metadata_id_3_frame,
       :timed_metadata_id_3_period,
-      :timed_metadata_passthrough)
+      :timed_metadata_passthrough,
+      :additional_destinations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22588,6 +22609,20 @@ module Aws::MediaLive
     #
     class PrimaryChannelSettings < Struct.new(
       :linked_channel_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Additional output destinations for a CMAF Ingest output group
+    #
+    # @!attribute [rw] destination
+    #   The destination location
+    #   @return [Types::OutputLocationRef]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageAdditionalDestinations AWS API Documentation
+    #
+    class MediaPackageAdditionalDestinations < Struct.new(
+      :destination)
       SENSITIVE = []
       include Aws::Structure
     end

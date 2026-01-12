@@ -700,6 +700,7 @@ module Aws::MediaLive
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MediaConnectFlow = Shapes::StructureShape.new(name: 'MediaConnectFlow')
     MediaConnectFlowRequest = Shapes::StructureShape.new(name: 'MediaConnectFlowRequest')
+    MediaPackageAdditionalDestinations = Shapes::StructureShape.new(name: 'MediaPackageAdditionalDestinations')
     MediaPackageGroupSettings = Shapes::StructureShape.new(name: 'MediaPackageGroupSettings')
     MediaPackageOutputDestinationSettings = Shapes::StructureShape.new(name: 'MediaPackageOutputDestinationSettings')
     MediaPackageOutputSettings = Shapes::StructureShape.new(name: 'MediaPackageOutputSettings')
@@ -1201,6 +1202,7 @@ module Aws::MediaLive
     __listOfIpPoolUpdateRequest = Shapes::ListShape.new(name: '__listOfIpPoolUpdateRequest')
     __listOfMediaConnectFlow = Shapes::ListShape.new(name: '__listOfMediaConnectFlow')
     __listOfMediaConnectFlowRequest = Shapes::ListShape.new(name: '__listOfMediaConnectFlowRequest')
+    __listOfMediaPackageAdditionalDestinations = Shapes::ListShape.new(name: '__listOfMediaPackageAdditionalDestinations')
     __listOfMediaPackageOutputDestinationSettings = Shapes::ListShape.new(name: '__listOfMediaPackageOutputDestinationSettings')
     __listOfMediaResourceNeighbor = Shapes::ListShape.new(name: '__listOfMediaResourceNeighbor')
     __listOfMulticastSource = Shapes::ListShape.new(name: '__listOfMulticastSource')
@@ -4137,6 +4139,9 @@ module Aws::MediaLive
     MediaConnectFlowRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
     MediaConnectFlowRequest.struct_class = Types::MediaConnectFlowRequest
 
+    MediaPackageAdditionalDestinations.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
+    MediaPackageAdditionalDestinations.struct_class = Types::MediaPackageAdditionalDestinations
+
     MediaPackageGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
     MediaPackageGroupSettings.add_member(:mediapackage_v2_group_settings, Shapes::ShapeRef.new(shape: MediaPackageV2GroupSettings, location_name: "mediapackageV2GroupSettings"))
     MediaPackageGroupSettings.struct_class = Types::MediaPackageGroupSettings
@@ -4144,6 +4149,8 @@ module Aws::MediaLive
     MediaPackageOutputDestinationSettings.add_member(:channel_id, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "channelId"))
     MediaPackageOutputDestinationSettings.add_member(:channel_group, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "channelGroup"))
     MediaPackageOutputDestinationSettings.add_member(:channel_name, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "channelName"))
+    MediaPackageOutputDestinationSettings.add_member(:channel_endpoint_id, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "channelEndpointId"))
+    MediaPackageOutputDestinationSettings.add_member(:media_package_region_name, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "mediaPackageRegionName"))
     MediaPackageOutputDestinationSettings.struct_class = Types::MediaPackageOutputDestinationSettings
 
     MediaPackageOutputSettings.add_member(:media_package_v2_destination_settings, Shapes::ShapeRef.new(shape: MediaPackageV2DestinationSettings, location_name: "mediaPackageV2DestinationSettings"))
@@ -4165,6 +4172,7 @@ module Aws::MediaLive
     MediaPackageV2GroupSettings.add_member(:timed_metadata_id_3_frame, Shapes::ShapeRef.new(shape: CmafTimedMetadataId3Frame, location_name: "timedMetadataId3Frame"))
     MediaPackageV2GroupSettings.add_member(:timed_metadata_id_3_period, Shapes::ShapeRef.new(shape: __integerMin0Max10000, location_name: "timedMetadataId3Period"))
     MediaPackageV2GroupSettings.add_member(:timed_metadata_passthrough, Shapes::ShapeRef.new(shape: CmafTimedMetadataPassthrough, location_name: "timedMetadataPassthrough"))
+    MediaPackageV2GroupSettings.add_member(:additional_destinations, Shapes::ShapeRef.new(shape: __listOfMediaPackageAdditionalDestinations, location_name: "additionalDestinations"))
     MediaPackageV2GroupSettings.struct_class = Types::MediaPackageV2GroupSettings
 
     MediaResource.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfMediaResourceNeighbor, location_name: "destinations"))
@@ -5925,6 +5933,8 @@ module Aws::MediaLive
     __listOfMediaConnectFlow.member = Shapes::ShapeRef.new(shape: MediaConnectFlow)
 
     __listOfMediaConnectFlowRequest.member = Shapes::ShapeRef.new(shape: MediaConnectFlowRequest)
+
+    __listOfMediaPackageAdditionalDestinations.member = Shapes::ShapeRef.new(shape: MediaPackageAdditionalDestinations)
 
     __listOfMediaPackageOutputDestinationSettings.member = Shapes::ShapeRef.new(shape: MediaPackageOutputDestinationSettings)
 

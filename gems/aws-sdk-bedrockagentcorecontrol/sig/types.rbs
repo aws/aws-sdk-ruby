@@ -1339,6 +1339,7 @@ module Aws::BedrockAgentCoreControl
 
     class GetMemoryInput
       attr_accessor memory_id: ::String
+      attr_accessor view: ("full" | "without_decryption")
       SENSITIVE: []
     end
 

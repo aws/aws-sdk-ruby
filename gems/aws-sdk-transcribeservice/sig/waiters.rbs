@@ -8,6 +8,76 @@
 module Aws
   module TranscribeService
     module Waiters
+
+      class CallAnalyticsJobCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    call_analytics_job_name: ::String
+                  ) -> Client::_GetCallAnalyticsJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetCallAnalyticsJobResponseSuccess
+      end
+
+      class LanguageModelCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    model_name: ::String
+                  ) -> Client::_DescribeLanguageModelResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeLanguageModelResponseSuccess
+      end
+
+      class MedicalScribeJobCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    medical_scribe_job_name: ::String
+                  ) -> Client::_GetMedicalScribeJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetMedicalScribeJobResponseSuccess
+      end
+
+      class MedicalTranscriptionJobCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    medical_transcription_job_name: ::String
+                  ) -> Client::_GetMedicalTranscriptionJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetMedicalTranscriptionJobResponseSuccess
+      end
+
+      class MedicalVocabularyReady
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    vocabulary_name: ::String
+                  ) -> Client::_GetMedicalVocabularyResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetMedicalVocabularyResponseSuccess
+      end
+
+      class TranscriptionJobCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    transcription_job_name: ::String
+                  ) -> Client::_GetTranscriptionJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetTranscriptionJobResponseSuccess
+      end
+
+      class VocabularyReady
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    vocabulary_name: ::String
+                  ) -> Client::_GetVocabularyResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetVocabularyResponseSuccess
+      end
     end
   end
 end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2026-01-09)
+------------------
+
+* Feature - Adds waiters to Amazon Transcribe.
+
 1.134.0 (2026-01-08)
 ------------------
 

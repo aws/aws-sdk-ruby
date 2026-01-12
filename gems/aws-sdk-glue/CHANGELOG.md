@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.247.0 (2026-01-09)
+------------------
+
+* Feature - Adding MaterializedViews task run APIs
+
 1.246.0 (2026-01-08)
 ------------------
 

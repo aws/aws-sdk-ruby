@@ -58,6 +58,9 @@ module Aws::Glue
   # * {InvalidStateException}
   # * {KMSKeyNotAccessibleFault}
   # * {MLTransformNotReadyException}
+  # * {MaterializedViewRefreshTaskNotRunningException}
+  # * {MaterializedViewRefreshTaskRunningException}
+  # * {MaterializedViewRefreshTaskStoppingException}
   # * {NoScheduleException}
   # * {OperationNotSupportedException}
   # * {OperationTimeoutException}
@@ -554,6 +557,51 @@ module Aws::Glue
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Glue::Types::MLTransformNotReadyException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class MaterializedViewRefreshTaskNotRunningException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::MaterializedViewRefreshTaskNotRunningException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class MaterializedViewRefreshTaskRunningException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::MaterializedViewRefreshTaskRunningException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class MaterializedViewRefreshTaskStoppingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::MaterializedViewRefreshTaskStoppingException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

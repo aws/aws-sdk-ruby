@@ -397,6 +397,7 @@ module Aws::BedrockAgentCoreControl
     MemoryStrategyType = Shapes::StringShape.new(name: 'MemoryStrategyType')
     MemorySummary = Shapes::StructureShape.new(name: 'MemorySummary')
     MemorySummaryList = Shapes::ListShape.new(name: 'MemorySummaryList')
+    MemoryView = Shapes::StringShape.new(name: 'MemoryView')
     MessageBasedTrigger = Shapes::StructureShape.new(name: 'MessageBasedTrigger')
     MessageBasedTriggerInput = Shapes::StructureShape.new(name: 'MessageBasedTriggerInput')
     MessageBasedTriggerInputMessageCountInteger = Shapes::IntegerShape.new(name: 'MessageBasedTriggerInputMessageCountInteger')
@@ -1644,6 +1645,7 @@ module Aws::BedrockAgentCoreControl
     GetGatewayTargetResponse.struct_class = Types::GetGatewayTargetResponse
 
     GetMemoryInput.add_member(:memory_id, Shapes::ShapeRef.new(shape: MemoryId, required: true, location: "uri", location_name: "memoryId"))
+    GetMemoryInput.add_member(:view, Shapes::ShapeRef.new(shape: MemoryView, location: "querystring", location_name: "view"))
     GetMemoryInput.struct_class = Types::GetMemoryInput
 
     GetMemoryOutput.add_member(:memory, Shapes::ShapeRef.new(shape: Memory, required: true, location_name: "memory"))

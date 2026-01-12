@@ -49,12 +49,13 @@ module Aws::TranscribeService
   end
   autoload :Client, 'aws-sdk-transcribeservice/client'
   autoload :Errors, 'aws-sdk-transcribeservice/errors'
+  autoload :Waiters, 'aws-sdk-transcribeservice/waiters'
   autoload :Resource, 'aws-sdk-transcribeservice/resource'
   autoload :EndpointParameters, 'aws-sdk-transcribeservice/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-transcribeservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-transcribeservice/endpoints'
 
-  GEM_VERSION = '1.134.0'
+  GEM_VERSION = '1.135.0'
 
 end
 

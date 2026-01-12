@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2026-01-09)
+------------------
+
+* Feature - Adds optional field "view" to GetMemory API input to give customers control over whether CMK encrypted data such as strategy decryption or override prompts is returned or not.
+
 1.20.0 (2026-01-08)
 ------------------
 

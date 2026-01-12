@@ -4269,6 +4269,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: EntityLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
@@ -4287,6 +4288,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: EntityLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
       end)
 
@@ -6638,6 +6640,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: InvalidFunctionAssociation)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsWithLambdaAssociations)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToKeyGroup)
+        o.errors << Shapes::ShapeRef.new(shape: EntityLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchOrigin)
         o.errors << Shapes::ShapeRef.new(shape: TooManyCacheBehaviors)
       end)

@@ -3316,6 +3316,9 @@ module Aws::BedrockAgentCoreControl
     # @option params [required, String] :memory_id
     #   The unique identifier of the memory to retrieve.
     #
+    # @option params [String] :view
+    #   The level of detail to return for the memory.
+    #
     # @return [Types::GetMemoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMemoryOutput#memory #memory} => Types::Memory
@@ -3324,6 +3327,7 @@ module Aws::BedrockAgentCoreControl
     #
     #   resp = client.get_memory({
     #     memory_id: "MemoryId", # required
+    #     view: "full", # accepts full, without_decryption
     #   })
     #
     # @example Response structure
@@ -6628,7 +6632,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

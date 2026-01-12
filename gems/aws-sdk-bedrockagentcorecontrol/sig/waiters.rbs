@@ -14,7 +14,8 @@ module Aws
                       | (?Hash[Symbol, untyped]) -> void
 
         def wait: (
-                    memory_id: ::String
+                    memory_id: ::String,
+                    ?view: ("full" | "without_decryption")
                   ) -> Client::_GetMemoryResponseSuccess
                 | (Hash[Symbol, untyped]) -> Client::_GetMemoryResponseSuccess
       end

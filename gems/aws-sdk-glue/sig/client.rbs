@@ -4208,6 +4208,17 @@ module Aws
                        ) -> _GetMappingResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMappingResponseSuccess
 
+      interface _GetMaterializedViewRefreshTaskRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMaterializedViewRefreshTaskRunResponse]
+        def materialized_view_refresh_task_run: () -> Types::MaterializedViewRefreshTaskRun
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_materialized_view_refresh_task_run-instance_method
+      def get_materialized_view_refresh_task_run: (
+                                                    catalog_id: ::String,
+                                                    materialized_view_refresh_task_run_id: ::String
+                                                  ) -> _GetMaterializedViewRefreshTaskRunResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMaterializedViewRefreshTaskRunResponseSuccess
+
       interface _GetPartitionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPartitionResponse]
         def partition: () -> Types::Partition
@@ -5158,6 +5169,21 @@ module Aws
                               ) -> _ListMLTransformsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMLTransformsResponseSuccess
 
+      interface _ListMaterializedViewRefreshTaskRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMaterializedViewRefreshTaskRunsResponse]
+        def materialized_view_refresh_task_runs: () -> ::Array[Types::MaterializedViewRefreshTaskRun]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#list_materialized_view_refresh_task_runs-instance_method
+      def list_materialized_view_refresh_task_runs: (
+                                                      catalog_id: ::String,
+                                                      ?database_name: ::String,
+                                                      ?table_name: ::String,
+                                                      ?max_results: ::Integer,
+                                                      ?next_token: ::String
+                                                    ) -> _ListMaterializedViewRefreshTaskRunsResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMaterializedViewRefreshTaskRunsResponseSuccess
+
       interface _ListRegistriesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRegistriesResponse]
         def registries: () -> ::Array[Types::RegistryListItem]
@@ -5753,6 +5779,19 @@ module Aws
                                                      ) -> _StartMLLabelingSetGenerationTaskRunResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMLLabelingSetGenerationTaskRunResponseSuccess
 
+      interface _StartMaterializedViewRefreshTaskRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMaterializedViewRefreshTaskRunResponse]
+        def materialized_view_refresh_task_run_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#start_materialized_view_refresh_task_run-instance_method
+      def start_materialized_view_refresh_task_run: (
+                                                      catalog_id: ::String,
+                                                      database_name: ::String,
+                                                      table_name: ::String,
+                                                      ?full_refresh: bool
+                                                    ) -> _StartMaterializedViewRefreshTaskRunResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMaterializedViewRefreshTaskRunResponseSuccess
+
       interface _StartTriggerResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartTriggerResponse]
         def name: () -> ::String
@@ -5811,6 +5850,17 @@ module Aws
                                    crawler_name: ::String
                                  ) -> _StopCrawlerScheduleResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopCrawlerScheduleResponseSuccess
+
+      interface _StopMaterializedViewRefreshTaskRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopMaterializedViewRefreshTaskRunResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#stop_materialized_view_refresh_task_run-instance_method
+      def stop_materialized_view_refresh_task_run: (
+                                                     catalog_id: ::String,
+                                                     database_name: ::String,
+                                                     table_name: ::String
+                                                   ) -> _StopMaterializedViewRefreshTaskRunResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopMaterializedViewRefreshTaskRunResponseSuccess
 
       interface _StopSessionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopSessionResponse]
