@@ -44,10 +44,7 @@ module Aws
       private
 
       def build_opts(source_directory, bucket, opts)
-        uploader_opts = {
-          progress_callback: opts[:progress_callback],
-          ignore_failure:  opts[:ignore_failure] || false
-        }
+        uploader_opts = { progress_callback: opts[:progress_callback], ignore_failure:  opts[:ignore_failure] || false }
         producer_opts = {
           directory_uploader: self,
           source_dir: source_directory,
@@ -163,7 +160,7 @@ module Aws
 
         def build_upload_entry(file_path, key)
           params = { bucket: @bucket, key: @s3_prefix ? File.join(@s3_prefix, key) : key }
-          params = apply_request_callback(file_path, params.dup) if @request_callback
+          params = apply_request_callback(file_path, params) if @request_callback
           UploadEntry.new(path: file_path, params: params)
         end
 
@@ -175,9 +172,13 @@ module Aws
             if @follow_symlinks
               stat = File.stat(entry_path)
               next if stat.directory?
+
+              next unless stat.file?
             else
               stat = File.lstat(entry_path)
               next if stat.symlink? || stat.directory?
+
+              next unless stat.file?
             end
             next unless include_file?(entry_path, entry)
 
@@ -215,7 +216,7 @@ module Aws
 
             if stat.directory?
               handle_directory(full_path, entry, key_prefix, ancestors)
-            else
+            elsif stat.file?  # skip non-file types
               key = key_prefix.empty? ? entry : File.join(key_prefix, entry)
               @file_queue << build_upload_entry(full_path, key)
             end
@@ -232,9 +233,9 @@ module Aws
         end
 
         def handle_directory(dir_path, dir_name, key_prefix, ancestors)
+          ino = nil
           if @follow_symlinks && ancestors
-            stat = File.stat(dir_path)
-            ino = stat.ino
+            ino = File.stat(dir_path).ino
             return if ancestors.include?(ino) # cycle detected - skip
 
             ancestors.add(ino)

@@ -100,7 +100,8 @@ module Aws
         end
 
         it 'raises when directory traversal fails' do
-          allow(Dir).to receive(:each_child).and_raise(Errno::EACCES, 'Permission denied')
+          allow(File).to receive(:lstat).and_call_original
+          allow(File).to receive(:lstat).with(/small\.txt/).and_raise(Errno::EACCES, 'Permission denied')
           expect do
             uploader.upload(temp_dir, 'test-bucket', recursive: true, ignore_failure: true)
           end.to raise_error(DirectoryUploadError, /Directory traversal failed/)
