@@ -205,6 +205,11 @@ module Aws
       #   A Proc that will be called as files are uploaded.
       #   It will be invoked with `transferred_bytes` and `transferred_files`.
       #
+      # @option option [Integer] :http_chunk_size (16384) Size in bytes for each chunk when streaming request bodies
+      #   over HTTP. Controls the buffer size used when sending data to S3. Larger values may improve throughput by
+      #   reducing the number of network writes, but use more memory. Custom values must be at least 16KB.
+      #   Only Ruby MRI is supported.
+      #
       # @raise [DirectoryUploadError] TBD
       #
       # @return [Hash] Returns a hash with upload statistics:
@@ -213,9 +218,8 @@ module Aws
       #   * `:errors` - Array of error objects for failed uploads (only present when failures occur)
       def upload_directory(source, bucket:, **options)
         executor = @executor || DefaultExecutor.new
-        # TODO: need to consider whether we want to allow http chunk size
         uploader = DirectoryUploader.new(client: @client, executor: executor)
-        result = uploader.upload(source, bucket, **options)
+        result = uploader.upload(source, bucket, **options.merge(http_chunk_size: resolve_http_chunk_size(options)))
         executor.shutdown unless @executor
         result
       end
@@ -293,17 +297,7 @@ module Aws
       # @see Client#upload_part
       def upload_file(source, bucket:, key:, **options)
         upload_opts = options.merge(bucket: bucket, key: key)
-        http_chunk_size =
-          if defined?(JRUBY_VERSION)
-            nil
-          else
-            chunk = upload_opts.delete(:http_chunk_size)
-            if chunk && chunk < Aws::Plugins::ChecksumAlgorithm::DEFAULT_TRAILER_CHUNK_SIZE
-              raise ArgumentError, ':http_chunk_size must be at least 16384 bytes (16KB)'
-            end
-
-            chunk
-          end
+        http_chunk_size = resolve_http_chunk_size(upload_opts)
 
         executor = @executor || DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
         uploader = FileUploader.new(
@@ -382,6 +376,19 @@ module Aws
         uploader.upload(upload_opts, &block)
         executor.shutdown unless @executor
         true
+      end
+
+      private
+
+      def resolve_http_chunk_size(opts)
+        return if defined?(JRUBY_VERSION)
+
+        chunk = opts.delete(:http_chunk_size)
+        if chunk && chunk < Aws::Plugins::ChecksumAlgorithm::DEFAULT_TRAILER_CHUNK_SIZE
+          raise ArgumentError, ':http_chunk_size must be at least 16384 bytes (16KB)'
+        end
+
+        chunk
       end
     end
   end

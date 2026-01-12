@@ -29,6 +29,7 @@ module Aws
 
         uploader = FileUploader.new(
           multipart_threshold: opts.delete(:multipart_threshold),
+          http_chunk_size: opts.delete(:http_chunk_size),
           client: @client,
           executor: @executor
         )
