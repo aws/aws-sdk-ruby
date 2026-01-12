@@ -119,6 +119,7 @@ module Aws
               if %w[small.txt medium.log].include?(params[:key])
                 raise Aws::S3::Errors::AccessDenied.new(nil, 'Access Denied')
               end
+
               uploaded_keys << params[:key]
             end
 
