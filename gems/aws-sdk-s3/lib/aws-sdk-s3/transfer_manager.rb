@@ -210,7 +210,9 @@ module Aws
       #   reducing the number of network writes, but use more memory. Custom values must be at least 16KB.
       #   Only Ruby MRI is supported.
       #
-      # @raise [DirectoryUploadError] TBD
+      # @raise [DirectoryUploadError] Raised when the upload fails
+      #   * Directory traversal failure (permission denied, broken symlink, etc.)
+      #   * Upload failure with `ignore_failure: false` (default)
       #
       # @return [Hash] Returns a hash with upload statistics:
       #   * `:completed_uploads` - Number of files successfully uploaded

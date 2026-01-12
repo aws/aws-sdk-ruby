@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'spec_helper'
+require_relative 'directory_helper'
 require 'socket'
 require 'tempfile'
 
@@ -52,13 +53,35 @@ module Aws
       end
 
       describe '#upload_directory' do
+        let(:temp_dir) { Dir.mktmpdir }
+
+        before do
+          DirectoryHelper.create_test_directory_structure(temp_dir)
+        end
+
+        after do
+          FileUtils.rm_rf(temp_dir)
+        end
+
         it 'returns upload results when upload succeeds' do
+          result = subject.upload_directory(temp_dir, bucket: 'bucket')
+          expect(result[:completed_uploads]).to eq(5)
+          expect(result[:failed_uploads]).to eq(0)
         end
 
         it 'raises when upload errors' do
+          client.stub_responses(:put_object, 'AccessDenied')
+          expect do
+            subject.upload_directory(temp_dir, bucket: 'bucket', ignore_failure: false)
+          end.to raise_error(DirectoryUploadError)
         end
 
         it 'calls progress callback when given' do
+          progress_calls = []
+          callback = proc { |bytes, files| progress_calls << { bytes: bytes, files: files } }
+
+          subject.upload_directory(temp_dir, bucket: 'bucket', progress_callback: callback)
+          expect(progress_calls.length).to eq(5)
         end
       end
 
