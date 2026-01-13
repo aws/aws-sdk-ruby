@@ -104,7 +104,6 @@ module Aws
         errors << e
         unless opts[:ignore_failure]
           request_abort
-          @queue_executor&.kill
         end
       end
 
