@@ -28,6 +28,17 @@ module Aws
         let(:temp_dir) { Dir.mktmpdir }
 
         before do
+          client.stub_responses(
+            :list_objects_v2,
+            {
+              contents: [
+                { key: 'file1.txt', size: 100 },
+                { key: 'file2.json', size: 100 },
+                { key: 'file3.txt', size: 100 }
+              ],
+              is_truncated: false
+            }
+          )
           client.stub_responses(:get_object, { body: 'content' })
         end
 
@@ -61,7 +72,6 @@ module Aws
               ],
               is_truncated: false
             })
-
             result = downloader.download(temp_dir, bucket: 'test-bucket', s3_prefix: 'prefix')
 
             expect(result[:completed_downloads]).to eq(2)
@@ -72,10 +82,6 @@ module Aws
 
         context 'ignore_failure option' do
           it 'stops downloading after failure by default' do
-            client.stub_responses(:list_objects_v2, {
-              contents: [{ key: 'file1.txt', size: 100 }],
-              is_truncated: false
-            })
             client.stub_responses(:get_object, 'AccessDenied')
 
             expect do
@@ -84,22 +90,13 @@ module Aws
           end
 
           it 'continues downloading after failure when true' do
-            client.stub_responses(:list_objects_v2, {
-              contents: [
-                { key: 'file1.txt', size: 100 },
-                { key: 'file2.txt', size: 100 },
-                { key: 'file3.txt', size: 100 }
-              ],
-              is_truncated: false
-            })
             client.stub_responses(:get_object, ->(context) {
-              if context.params[:key] == 'file2.txt'
+              if context.params[:key] == 'file2.json'
                 'AccessDenied'
               else
                 { body: 'content' }
               end
             })
-
             result = downloader.download(temp_dir, bucket: 'test-bucket', ignore_failure: true)
 
             expect(result[:completed_downloads]).to eq(2)
@@ -110,14 +107,6 @@ module Aws
 
         context 'filter callbacks' do
           it 'excludes objects' do
-            client.stub_responses(:list_objects_v2, {
-              contents: [
-                { key: 'file1.txt', size: 100 },
-                { key: 'file2.json', size: 100 },
-                { key: 'file3.txt', size: 100 }
-              ],
-              is_truncated: false
-            })
             filter = ->(key) { key.end_with?('.txt') }
             result = downloader.download(temp_dir, bucket: 'test-bucket', filter_callback: filter)
 
@@ -131,13 +120,11 @@ module Aws
               contents: [{ key: 'file.txt', size: 100 }],
               is_truncated: false
             })
-
             client.stub_responses(:get_object, ->(context) {
               received_params = context.params
               expect(received_params[:version_id]).to eq('v1')
               { body: 'content' }
             })
-
             callback = ->(_key, params) {
               params[:version_id] = 'v1'
               params
@@ -156,10 +143,8 @@ module Aws
               is_truncated: false
             })
             client.stub_responses(:get_object, { body: 'x' * 100 })
-
             progress_calls = []
             callback = ->(bytes, _files) { progress_calls << bytes }
-
             downloader.download(temp_dir, bucket: 'test-bucket', progress_callback: callback)
 
             expect(progress_calls.length).to eq(2)
