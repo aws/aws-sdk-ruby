@@ -40,7 +40,11 @@ module Aws
       private
 
       def build_opts(destination, bucket, opts)
-        download_opts = { progress_callback: opts[:progress_callback], ignore_failure: opts[:ignore_failure] || false }
+        download_opts = {
+          progress_callback: opts[:progress_callback],
+          destination: opts[:destination],
+          ignore_failure: opts[:ignore_failure] || false
+        }
         producer_opts = {
           client: @client,
           directory_downloader: self,
@@ -83,6 +87,7 @@ module Aws
 
           download_attempts += 1
           @queue_executor.post(object) do |o|
+
             raise o.error if o.error
 
             dir_path = File.dirname(o.path)
@@ -100,8 +105,6 @@ module Aws
           end
         end
         download_attempts.times do
-          break if abort_requested
-
           completion_queue.pop
         end
         [download_attempts, errors]
@@ -121,6 +124,7 @@ module Aws
           @client = opts[:client]
           @s3_prefix = opts[:s3_prefix]
           @filter_callback = opts[:filter_callback]
+          @request_callback = opts[:request_callback]
           @object_queue = SizedQueue.new(DEFAULT_QUEUE_SIZE)
         end
 
@@ -138,7 +142,7 @@ module Aws
             yield object
           end
         ensure
-          producer_thread.value
+          producer_thread.join
         end
 
         private
@@ -147,6 +151,10 @@ module Aws
           @request_callback&.call(key, params.dup)
         end
 
+        # TODO: need to normalize full path to match Java behavior
+        #  for example:
+        #    ruby current behavior: "some/path/../data.dat" -> "some/data.dat"
+        #    java behavior: should be "some/path/data.dat"
         def build_object_entry(key)
           params = { bucket: @bucket, key: key }
           params = apply_request_callback(key, params) if @request_callback
@@ -184,7 +192,10 @@ module Aws
         end
 
         def normalize_key(key)
-          key = key.delete_prefix(@s3_prefix) if @s3_prefix
+          if @s3_prefix
+            prefix = @s3_prefix.end_with?('/') ? @s3_prefix : "#{@s3_prefix}/"
+            key = key.delete_prefix(prefix)
+          end
           File::SEPARATOR == '/' ? key : key.tr('/', File::SEPARATOR)
         end
 
@@ -193,7 +204,7 @@ module Aws
           def initialize(opts = {})
             @path = opts[:path]
             @params = opts[:params]
-            @error = opts[:error] || false
+            @error = opts[:error]
           end
 
           attr_reader :path, :params, :error
