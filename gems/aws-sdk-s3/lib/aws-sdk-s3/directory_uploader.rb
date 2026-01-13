@@ -72,13 +72,6 @@ module Aws
         end
       end
 
-      def handle_error(opts)
-        return if opts[:ignore_failure]
-
-        request_abort
-        @queue_executor.kill
-      end
-
       def process_upload_queue(producer, uploader, opts)
         progress = DirectoryProgress.new(opts[:progress_callback]) if opts[:progress_callback]
         completion_queue = Queue.new
@@ -93,18 +86,19 @@ module Aws
               uploader.upload(f.path, f.params)
               progress&.call(File.size(f.path))
             rescue StandardError => e
-              @mutex.synchronize do
-                errors << StandardError.new("Upload failed for #{File.basename(f.path)}: #{e.message}")
+              errors << StandardError.new("Upload failed for #{File.basename(f.path)}: #{e.message}")
+              unless opts[:ignore_failure]
+                request_abort
+                @queue_executor&.kill
               end
-              handle_error(opts)
             ensure
               completion_queue << :done
             end
           end
         rescue StandardError => e
+          errors << e
           request_abort
-          @queue_executor.kill
-          raise e
+          @queue_executor&.kill
         end
         upload_attempts.times { completion_queue.pop }
         [upload_attempts, errors]
@@ -137,7 +131,6 @@ module Aws
               find_directly
             end
           rescue StandardError => e
-            @directory_uploader.request_abort
             raise DirectoryUploadError.new("Directory traversal failed for '#{@source_dir}': #{e.message}")
           ensure
             @file_queue << DONE_MARKER

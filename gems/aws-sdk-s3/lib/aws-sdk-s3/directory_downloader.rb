@@ -79,15 +79,11 @@ module Aws
         downloader.download(entry.path, entry.params)
         progress&.call(File.size(entry.path))
       rescue StandardError => e
-        @mutex.synchronize { errors << e }
-        handle_error(opts)
-      end
-
-      def handle_error(opts)
-        return if opts[:ignore_failure]
-
-        request_abort
-        @queue_executor.kill
+        errors << e
+        unless opts[:ignore_failure]
+          request_abort
+          @queue_executor&.kill
+        end
       end
 
       def process_download_queue(producer, downloader, opts)
@@ -107,10 +103,9 @@ module Aws
             end
           end
         rescue StandardError => e
-          request_abort # Producer failed (e.g., list_objects error) - abort immediately
-          @queue_executor.kill
-
-          raise e
+          errors << e
+          request_abort
+          @queue_executor&.kill
         end
         download_attempts.times { completion_queue.pop }
         [download_attempts, errors]
