@@ -129,6 +129,7 @@ module Aws
         end
 
         def each
+          err = nil
           producer_thread = Thread.new do
             if @recursive
               find_recursively
@@ -136,7 +137,10 @@ module Aws
               find_directly
             end
           rescue StandardError => e
-            raise DirectoryUploadError.new("Directory traversal failed for '#{@source_dir}': #{e.message}")
+            @directory_uploader.request_abort
+            @file_queue.clear
+
+            err = DirectoryUploadError.new("Directory traversal failed for '#{@source_dir}': #{e.message}")
           ensure
             @file_queue << DONE_MARKER
           end
@@ -148,6 +152,7 @@ module Aws
           end
         ensure
           producer_thread.value
+          raise err if err
         end
 
         private
