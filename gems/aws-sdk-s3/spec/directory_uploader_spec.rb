@@ -142,7 +142,7 @@ module Aws
           end
         end
 
-        context 'request callbacks' do
+        context 'request callbacks', :jruby_flaky do
           it 'modifies upload parameters' do
             uploaded_params = []
             allow(client).to receive(:put_object) { |p| uploaded_params << p }

@@ -12,6 +12,8 @@ module Aws
         @mutex = Mutex.new
       end
 
+      attr_reader :client, :executor
+
       def abort_requested
         @mutex.synchronize { @abort_requested }
       end
