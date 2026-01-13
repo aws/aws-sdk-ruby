@@ -143,7 +143,7 @@ module Aws
             yield object
           end
         ensure
-          producer_thread.value
+          producer_thread.join
         end
 
         private
@@ -159,17 +159,9 @@ module Aws
         def build_object_entry(key)
           params = { bucket: @bucket, key: key }
           params = apply_request_callback(key, params) if @request_callback
-
           normalized_key = normalize_key(key)
           full_path = File.join(@destination_dir, normalized_key)
-          error = nil
-
-          expanded = File.expand_path(full_path)
-          expanded_dest = File.expand_path(@destination_dir) + File::SEPARATOR
-          unless expanded.start_with?(expanded_dest)
-            error = DirectoryDownloadError.new("Path traversal detected for key: #{key}")
-          end
-
+          error = validate_path(full_path, key)
           DownloadEntry.new(path: full_path, params: params, error: error)
         end
 
@@ -177,6 +169,10 @@ module Aws
           return true unless @filter_callback
 
           @filter_callback.call(key)
+        end
+
+        def directory_marker?(obj)
+          obj.key.end_with?('/') && obj.size.zero?
         end
 
         def normalize_key(key)
@@ -192,13 +188,22 @@ module Aws
           resp.contents&.each do |o|
             break if @directory_downloader.abort_requested
 
-            next if o.key.end_with?('/') && o.size.zero?
+            next if directory_marker?(o)
             next unless include_object?(o.key)
 
             @object_queue << build_object_entry(o.key)
           end
           stream_objects(continuation_token: resp.next_continuation_token) if resp.next_continuation_token
         end
+
+        def validate_path(full_path, key)
+          expanded = File.expand_path(full_path)
+          expanded_dest = File.expand_path(@destination_dir) + File::SEPARATOR
+          return if expanded.start_with?(expanded_dest)
+
+          DirectoryDownloadError.new("Path traversal detected for key: #{key}")
+        end
+
 
         # @api private
         class DownloadEntry

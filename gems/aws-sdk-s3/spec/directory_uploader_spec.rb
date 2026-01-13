@@ -107,21 +107,16 @@ module Aws
 
         context 'ignore_failure option' do
           it 'stops uploading after failure by default' do
-            allow(client).to receive(:put_object).and_raise(Aws::S3::Errors::AccessDenied.new(nil, 'Access Denied'))
+            client.stub_responses(:put_object, 'AccessDenied')
             expect do
               uploader.upload(temp_dir, 'test-bucket', ignore_failure: false)
             end.to raise_error(DirectoryUploadError)
           end
 
           it 'continues uploading after failure when true' do
-            uploaded_keys = []
-            allow(client).to receive(:put_object) do |params|
-              if %w[small.txt medium.log].include?(params[:key])
-                raise Aws::S3::Errors::AccessDenied.new(nil, 'Access Denied')
-              end
-
-              uploaded_keys << params[:key]
-            end
+            client.stub_responses(:put_object, ->(context) {
+              %w[small.txt medium.log].include?(context.params[:key]) ? 'AccessDenied' : {}
+            })
 
             result = uploader.upload(temp_dir, 'test-bucket', ignore_failure: true)
             expect(result[:completed_uploads]).to eq(3)

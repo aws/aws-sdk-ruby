@@ -83,14 +83,7 @@ module Aws
 
             upload_attempts += 1
             @queue_executor.post(file) do |f|
-              uploader.upload(f.path, f.params)
-              progress&.call(File.size(f.path))
-            rescue StandardError => e
-              errors << StandardError.new("Upload failed for #{File.basename(f.path)}: #{e.message}")
-              unless opts[:ignore_failure]
-                request_abort
-                @queue_executor&.kill
-              end
+              upload_file(f, uploader, opts, progress, errors)
             ensure
               completion_queue << :done
             end
@@ -103,6 +96,18 @@ module Aws
         upload_attempts.times { completion_queue.pop }
         [upload_attempts, errors]
       end
+
+      def upload_file(entry, uploader, opts, progress, errors)
+        uploader.upload(entry.path, entry.params)
+        progress&.call(File.size(entry.path))
+      rescue StandardError => e
+        errors << e
+        unless opts[:ignore_failure]
+          request_abort
+          @queue_executor&.kill
+        end
+      end
+
 
       # @api private
       class FileProducer
@@ -166,6 +171,7 @@ module Aws
 
             entry_path = File.join(@source_dir, entry)
             stat = nil
+
             if @follow_symlinks
               stat = File.stat(entry_path)
               next if stat.directory?
